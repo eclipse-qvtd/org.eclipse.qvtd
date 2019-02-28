@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -29,6 +29,7 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 
 import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -251,9 +252,9 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 		if (newDomapHelper_Attribute != domapHelper_Attribute) {
 			NotificationChain msgs = null;
 			if (domapHelper_Attribute != null)
-				msgs = ((InternalEObject)domapHelper_Attribute).eInverseRemove(this, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, TmapHelper_Attribute.class, msgs);
+				msgs = ((InternalEObject)domapHelper_Attribute).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapHelper_Attribute.class, msgs);
 			if (newDomapHelper_Attribute != null)
-				msgs = ((InternalEObject)newDomapHelper_Attribute).eInverseAdd(this, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, TmapHelper_Attribute.class, msgs);
+				msgs = ((InternalEObject)newDomapHelper_Attribute).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapHelper_Attribute.class, msgs);
 			msgs = basicSetDomapHelper_Attribute(newDomapHelper_Attribute, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -296,9 +297,9 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 		if (newDomapHelper_Operation != domapHelper_Operation) {
 			NotificationChain msgs = null;
 			if (domapHelper_Operation != null)
-				msgs = ((InternalEObject)domapHelper_Operation).eInverseRemove(this, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, TmapHelper_Operation.class, msgs);
+				msgs = ((InternalEObject)domapHelper_Operation).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapHelper_Operation.class, msgs);
 			if (newDomapHelper_Operation != null)
-				msgs = ((InternalEObject)newDomapHelper_Operation).eInverseAdd(this, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, TmapHelper_Operation.class, msgs);
+				msgs = ((InternalEObject)newDomapHelper_Operation).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapHelper_Operation.class, msgs);
 			msgs = basicSetDomapHelper_Operation(newDomapHelper_Operation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}

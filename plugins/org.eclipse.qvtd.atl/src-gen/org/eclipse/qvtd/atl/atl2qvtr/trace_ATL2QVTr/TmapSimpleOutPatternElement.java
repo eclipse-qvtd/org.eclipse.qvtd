@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -13,6 +13,11 @@ package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 import org.eclipse.m2m.atl.common.ATL.MatchedRule;
 import org.eclipse.m2m.atl.common.ATL.OutPattern;
 import org.eclipse.m2m.atl.common.ATL.SimpleOutPatternElement;
+
+import org.eclipse.m2m.atl.common.OCL.OclModel;
+import org.eclipse.m2m.atl.common.OCL.OclModelElement;
+
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -35,15 +40,18 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getSuccess <em>Success</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT0elementName <em>T0element Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlElement <em>T1atl Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlMetamodel <em>T1atl Metamodel</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlPattern <em>T1atl Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlRule <em>T1atl Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlType <em>T1atl Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrDomain <em>T2qvtr Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrPattern <em>T2qvtr Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrRelation <em>T2qvtr Relation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrTemplate <em>T2qvtr Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrVariable <em>T2qvtr Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapMatchedRule <em>Wmap Matched Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapOutPattern <em>Wmap Out Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapOclMetamodel <em>Wmap Ocl Metamodel</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapVariable <em>Wmap Variable</em>}</li>
  * </ul>
  *
@@ -134,6 +142,33 @@ public interface TmapSimpleOutPatternElement extends Execution {
 	void setT1atlElement(SimpleOutPatternElement value);
 
 	/**
+	 * Returns the value of the '<em><b>T1atl Metamodel</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T1atl Metamodel</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T1atl Metamodel</em>' reference.
+	 * @see #setT1atlMetamodel(OclModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T1atlMetamodel()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @generated
+	 */
+	OclModel getT1atlMetamodel();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlMetamodel <em>T1atl Metamodel</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T1atl Metamodel</em>' reference.
+	 * @see #getT1atlMetamodel()
+	 * @generated
+	 */
+	void setT1atlMetamodel(OclModel value);
+
+	/**
 	 * Returns the value of the '<em><b>T1atl Pattern</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -186,6 +221,33 @@ public interface TmapSimpleOutPatternElement extends Execution {
 	 * @generated
 	 */
 	void setT1atlRule(MatchedRule value);
+
+	/**
+	 * Returns the value of the '<em><b>T1atl Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T1atl Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T1atl Type</em>' reference.
+	 * @see #setT1atlType(OclModelElement)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T1atlType()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @generated
+	 */
+	OclModelElement getT1atlType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlType <em>T1atl Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T1atl Type</em>' reference.
+	 * @see #getT1atlType()
+	 * @generated
+	 */
+	void setT1atlType(OclModelElement value);
 
 	/**
 	 * Returns the value of the '<em><b>T2qvtr Domain</b></em>' reference.
@@ -297,6 +359,33 @@ public interface TmapSimpleOutPatternElement extends Execution {
 	void setT2qvtrTemplate(ObjectTemplateExp value);
 
 	/**
+	 * Returns the value of the '<em><b>T2qvtr Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T2qvtr Typed Model</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T2qvtr Typed Model</em>' reference.
+	 * @see #setT2qvtrTypedModel(TypedModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T2qvtrTypedModel()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	TypedModel getT2qvtrTypedModel();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T2qvtr Typed Model</em>' reference.
+	 * @see #getT2qvtrTypedModel()
+	 * @generated
+	 */
+	void setT2qvtrTypedModel(TypedModel value);
+
+	/**
 	 * Returns the value of the '<em><b>T2qvtr Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -350,30 +439,30 @@ public interface TmapSimpleOutPatternElement extends Execution {
 	void setWmapMatchedRule(TmapMatchedRule value);
 
 	/**
-	 * Returns the value of the '<em><b>Wmap Out Pattern</b></em>' reference.
+	 * Returns the value of the '<em><b>Wmap Ocl Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Wmap Out Pattern</em>' reference isn't clear,
+	 * If the meaning of the '<em>Wmap Ocl Metamodel</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Wmap Out Pattern</em>' reference.
-	 * @see #setWmapOutPattern(TmapOutPattern)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_WmapOutPattern()
+	 * @return the value of the '<em>Wmap Ocl Metamodel</em>' reference.
+	 * @see #setWmapOclMetamodel(TmapOclMetamodel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_WmapOclMetamodel()
 	 * @model
 	 * @generated
 	 */
-	TmapOutPattern getWmapOutPattern();
+	TmapOclMetamodel getWmapOclMetamodel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapOutPattern <em>Wmap Out Pattern</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapOclMetamodel <em>Wmap Ocl Metamodel</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Wmap Out Pattern</em>' reference.
-	 * @see #getWmapOutPattern()
+	 * @param value the new value of the '<em>Wmap Ocl Metamodel</em>' reference.
+	 * @see #getWmapOclMetamodel()
 	 * @generated
 	 */
-	void setWmapOutPattern(TmapOutPattern value);
+	void setWmapOclMetamodel(TmapOclMetamodel value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Variable</b></em>' reference.

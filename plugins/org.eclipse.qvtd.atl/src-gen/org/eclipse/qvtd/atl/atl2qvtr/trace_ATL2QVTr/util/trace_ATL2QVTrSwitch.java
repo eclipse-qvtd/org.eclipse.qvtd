@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -316,6 +316,16 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 25: {
+				TmapOclType tmapOclType = (TmapOclType)theEObject;
+				T result = caseTmapOclType(tmapOclType);
+				if (result == null) result = caseImapOclExpression(tmapOclType);
+				if (result == null) result = caseExecution(tmapOclType);
+				if (result == null) result = caseTraceInstance(tmapOclType);
+				if (result == null) result = caseTraceElement(tmapOclType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 26: {
 				TmapOperationCallExp_Helper tmapOperationCallExp_Helper = (TmapOperationCallExp_Helper)theEObject;
 				T result = caseTmapOperationCallExp_Helper(tmapOperationCallExp_Helper);
 				if (result == null) result = caseImapOclExpression(tmapOperationCallExp_Helper);
@@ -325,7 +335,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 26: {
+			case 27: {
 				TmapOperationCallExp_Operation tmapOperationCallExp_Operation = (TmapOperationCallExp_Operation)theEObject;
 				T result = caseTmapOperationCallExp_Operation(tmapOperationCallExp_Operation);
 				if (result == null) result = caseImapOclExpression(tmapOperationCallExp_Operation);
@@ -335,7 +345,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 27: {
+			case 28: {
 				TmapOperationCallExp_argument tmapOperationCallExp_argument = (TmapOperationCallExp_argument)theEObject;
 				T result = caseTmapOperationCallExp_argument(tmapOperationCallExp_argument);
 				if (result == null) result = caseExecution(tmapOperationCallExp_argument);
@@ -344,22 +354,13 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 28: {
+			case 29: {
 				TmapOperatorCallExp tmapOperatorCallExp = (TmapOperatorCallExp)theEObject;
 				T result = caseTmapOperatorCallExp(tmapOperatorCallExp);
 				if (result == null) result = caseImapOclExpression(tmapOperatorCallExp);
 				if (result == null) result = caseExecution(tmapOperatorCallExp);
 				if (result == null) result = caseTraceInstance(tmapOperatorCallExp);
 				if (result == null) result = caseTraceElement(tmapOperatorCallExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case 29: {
-				TmapOutPattern tmapOutPattern = (TmapOutPattern)theEObject;
-				T result = caseTmapOutPattern(tmapOutPattern);
-				if (result == null) result = caseExecution(tmapOutPattern);
-				if (result == null) result = caseTraceInstance(tmapOutPattern);
-				if (result == null) result = caseTraceElement(tmapOutPattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -810,6 +811,21 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Ocl Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Ocl Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTmapOclType(TmapOclType object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Tmap Operation Call Exp Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -866,21 +882,6 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTmapOperatorCallExp(TmapOperatorCallExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Tmap Out Pattern</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tmap Out Pattern</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTmapOutPattern(TmapOutPattern object) {
 		return null;
 	}
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -27,7 +27,6 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT0tmName <em>T0tm Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1atlModule <em>T1atl Module</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1oclMetamodel <em>T1ocl Metamodel</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1oclModel <em>T1ocl Model</em>}</li>
@@ -42,33 +41,6 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * @generated
  */
 public interface TmapOclModel_IN extends Execution {
-	/**
-	 * Returns the value of the '<em><b>T0tm Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T0tm Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T0tm Name</em>' attribute.
-	 * @see #setT0tmName(String)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T0tmName()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='$primitive$'"
-	 * @generated
-	 */
-	String getT0tmName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT0tmName <em>T0tm Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T0tm Name</em>' attribute.
-	 * @see #getT0tmName()
-	 * @generated
-	 */
-	void setT0tmName(String value);
-
 	/**
 	 * Returns the value of the '<em><b>T1atl Module</b></em>' reference.
 	 * <!-- begin-user-doc -->

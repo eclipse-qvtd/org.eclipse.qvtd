@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -183,6 +183,10 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 				return createTmapOclModel_OUTAdapter();
 			}
 			@Override
+			public Adapter caseTmapOclType(TmapOclType object) {
+				return createTmapOclTypeAdapter();
+			}
+			@Override
 			public Adapter caseTmapOperationCallExp_Helper(TmapOperationCallExp_Helper object) {
 				return createTmapOperationCallExp_HelperAdapter();
 			}
@@ -197,10 +201,6 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTmapOperatorCallExp(TmapOperatorCallExp object) {
 				return createTmapOperatorCallExpAdapter();
-			}
-			@Override
-			public Adapter caseTmapOutPattern(TmapOutPattern object) {
-				return createTmapOutPatternAdapter();
 			}
 			@Override
 			public Adapter caseTmapSimpleInPatternElement(TmapSimpleInPatternElement object) {
@@ -617,6 +617,20 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclType <em>Tmap Ocl Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclType
+	 * @generated
+	 */
+	public Adapter createTmapOclTypeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Helper <em>Tmap Operation Call Exp Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -669,20 +683,6 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTmapOperatorCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern <em>Tmap Out Pattern</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern
-	 * @generated
-	 */
-	public Adapter createTmapOutPatternAdapter() {
 		return null;
 	}
 

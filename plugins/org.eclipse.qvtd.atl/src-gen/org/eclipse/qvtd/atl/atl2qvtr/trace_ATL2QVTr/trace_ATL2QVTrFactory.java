@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -228,6 +228,15 @@ public interface trace_ATL2QVTrFactory extends EFactory {
 	TmapOclModel_OUT createTmapOclModel_OUT();
 
 	/**
+	 * Returns a new object of class '<em>Tmap Ocl Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tmap Ocl Type</em>'.
+	 * @generated
+	 */
+	TmapOclType createTmapOclType();
+
+	/**
 	 * Returns a new object of class '<em>Tmap Operation Call Exp Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -262,15 +271,6 @@ public interface trace_ATL2QVTrFactory extends EFactory {
 	 * @generated
 	 */
 	TmapOperatorCallExp createTmapOperatorCallExp();
-
-	/**
-	 * Returns a new object of class '<em>Tmap Out Pattern</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Tmap Out Pattern</em>'.
-	 * @generated
-	 */
-	TmapOutPattern createTmapOutPattern();
 
 	/**
 	 * Returns a new object of class '<em>Tmap Simple In Pattern Element</em>'.

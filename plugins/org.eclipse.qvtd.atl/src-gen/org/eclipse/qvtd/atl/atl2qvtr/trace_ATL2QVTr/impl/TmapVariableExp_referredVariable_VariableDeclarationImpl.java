@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -29,6 +29,7 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVari
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
 import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -111,7 +112,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 */
 	@Override
 	public DmapVariableExp_referredVariable getDispatcher() {
-		if (eContainerFeatureID() != (ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (ExecutionImpl.EXECUTION_FEATURE_COUNT + 1)) return null;
 		return (DmapVariableExp_referredVariable)eInternalContainer();
 	}
 
@@ -121,7 +122,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * @generated
 	 */
 	public NotificationChain basicSetDispatcher(DmapVariableExp_referredVariable newDispatcher, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -132,7 +133,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 */
 	@Override
 	public void setDispatcher(DmapVariableExp_referredVariable newDispatcher) {
-		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0) && newDispatcher != null)) {
+		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ExecutionImpl.EXECUTION_FEATURE_COUNT + 1) && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -144,7 +145,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, newDispatcher, newDispatcher));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, newDispatcher, newDispatcher));
 	}
 
 	/**
@@ -159,7 +160,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 			t1atlVariable = (PatternElement)eResolveProxy(oldT1atlVariable);
 			if (t1atlVariable != oldT1atlVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1, oldT1atlVariable, t1atlVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
 			}
 		}
 		return t1atlVariable;
@@ -184,7 +185,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 		PatternElement oldT1atlVariable = t1atlVariable;
 		t1atlVariable = newT1atlVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1, oldT1atlVariable, t1atlVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
 	}
 
 	/**
@@ -199,7 +200,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 			t2qvtrVariable = (VariableDeclaration)eResolveProxy(oldT2qvtrVariable);
 			if (t2qvtrVariable != oldT2qvtrVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2, oldT2qvtrVariable, t2qvtrVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrVariable, t2qvtrVariable));
 			}
 		}
 		return t2qvtrVariable;
@@ -224,7 +225,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 		VariableDeclaration oldT2qvtrVariable = t2qvtrVariable;
 		t2qvtrVariable = newT2qvtrVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2, oldT2qvtrVariable, t2qvtrVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrVariable, t2qvtrVariable));
 	}
 
 	/**
@@ -235,7 +236,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetDispatcher((DmapVariableExp_referredVariable)otherEnd, msgs);
@@ -251,7 +252,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return basicSetDispatcher(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -265,7 +266,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 3, DmapVariableExp_referredVariable.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -279,12 +280,12 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT1atlVariable();
 				return basicGetT1atlVariable();
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT2qvtrVariable();
 				return basicGetT2qvtrVariable();
 		}
@@ -299,13 +300,13 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapVariableExp_referredVariable)newValue);
 				return;
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlVariable((PatternElement)newValue);
 				return;
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT2qvtrVariable((VariableDeclaration)newValue);
 				return;
 		}
@@ -320,13 +321,13 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapVariableExp_referredVariable)null);
 				return;
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlVariable((PatternElement)null);
 				return;
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT2qvtrVariable((VariableDeclaration)null);
 				return;
 		}
@@ -341,11 +342,11 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t1atlVariable != null;
-			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t2qvtrVariable != null;
 		}
 		return super.eIsSet(featureID);

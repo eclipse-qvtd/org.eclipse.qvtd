@@ -10,7 +10,7 @@
  *******************************************************************************/
 import atlMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/0'; 
 import atloclMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/1'; 
-import atlprimsMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/2'; 
+import atlprimsMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/2';
 --import atlMM : 'http://www.eclipse.org/gmt/2005/ATL'; 
 --import atloclMM : 'http://www.eclipse.org/gmt/2005/OCL'; 
 --import atlprimsMM : 'http://www.eclipse.org/gmt/2005/ATL-PrimitiveTypes'; 
@@ -31,9 +31,13 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 
 --		query getContextVariable(_transformation : qvtrMM::RelationalTransformation) : pivotMM::VariableDeclaration[1] implementedby 'org.eclipse.qvtd.atl.atl2qvtr.Helper4getContextVariable';
 
-		query getHelper(element : atlMM::LocatedElement[1]) : atlMM::Helper[1] {
-			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
+		query getHelper(element : atlMM::LocatedElement[1]) : atlMM::Helper[?] {
+			let helpers = element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)
+			in if helpers->notEmpty() then helpers->any(true) else null endif
 		}
+--		query getHelper(element : atlMM::LocatedElement[1]) : atlMM::Helper[1] {
+--			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
+--		}
 
 		query getModule(element : atlMM::LocatedElement) : atlMM::Module[1] implementedby 'org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getModule';
 
@@ -68,7 +72,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			atlOutPatternElement : atlMM::SimpleOutPatternElement;
 			qvtrExpression : pivotMM::OCLExpression;
 			qvtrTemplate : qvttMM::ObjectTemplateExp;
-			/*enforce*/ domain atl atlBinding : Binding {
+			enforce domain atl atlBinding : Binding {
 				outPatternElement = atlOutPatternElement,
 				propertyName = propertyName,
 				value = atlExpression
@@ -88,7 +92,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::Helper <=> qvtr::Function
 		 */
 		top abstract relation mapHelper {
-			/*enforce*/ domain atl atlHelper : Helper {};
+			enforce domain atl atlHelper : Helper {};
 			enforce domain qvtr qvtrFunction : Function {};
 		}
 
@@ -102,7 +106,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			atlType : atloclMM::OclType;
 			qvtrTransformation : qvtrMM::RelationalTransformation;
 			qvtrExpression : pivotMM::OCLExpression;
-			/*enforce*/ domain atl atlHelper : Helper {
+			enforce domain atl atlHelper : Helper {
 				module = atlModule,
 				definition = atlDefinition : OclFeatureDefinition {
 					feature = atlFeature : Attribute {
@@ -129,7 +133,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		}
 		
 		relation mapHelper_Context {
-			/*enforce*/ domain atl atlHelper : Helper {
+			enforce domain atl atlHelper : Helper {
 				definition = atlDefinition: OclFeatureDefinition {
 					context_ = atlContext : OclContextDefinition {
 						context_ = atlReturnType : OclType{}
@@ -159,7 +163,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			atlType : atloclMM::OclType;
 			qvtrTransformation : qvtrMM::RelationalTransformation;
 			qvtrExpression : pivotMM::OCLExpression;
-			/*enforce*/ domain atl atlHelper : Helper {
+			enforce domain atl atlHelper : Helper {
 				module = atlModule,
 				definition = atlDefinition : OclFeatureDefinition {
 					feature = atlFeature : Operation {
@@ -192,11 +196,11 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			atlModule : atlMM::Module;
 			qvtrTypedModel : qvtbMM::TypedModel;
 			atlModel : atloclMM::OclModel = atlPattern.elements.type->selectByKind(atloclMM::OclModelElement)->any(true).model;
-			/*enforce*/ domain atl atlPattern : InPattern {
+			enforce domain atl atlPattern : InPattern {
 				rule = atlRule : MatchedRule{
 --					module = atlModule
 				}
-			};
+			} { atlModel.metamodel = null };
 			enforce domain qvtr qvtrDomain : RelationDomain {
 				rule = qvtrRelation : Relation {
 --					transformation = qvtrTransformation : RelationalTransformation{}
@@ -220,7 +224,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		top relation mapInPattern_filter {
 			atlExpression : atloclMM::OclExpression;
 			qvtrExpression : pivotMM::OCLExpression;
-			/*enforce*/ domain atl atlPattern : InPattern {
+			enforce domain atl atlPattern : InPattern {
 				rule = atlRule : MatchedRule{},
 				filter = atlExpression
 			};
@@ -247,9 +251,10 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			ruleName : String;
 			atlModule : atlMM::Module;
 			qvtrTransformation : qvtrMM::RelationalTransformation;
-			/*enforce*/ domain atl matchedRule : MatchedRule {
+			enforce domain atl matchedRule : MatchedRule {
 				module = atlModule,
-				name = ruleName
+				name = ruleName,
+				outPattern = atlOutPattern : OutPattern {}
 			};
 			enforce domain qvtr qvtrRelation : Relation {
 				name = ruleName,
@@ -271,7 +276,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::MatchedRule super <=> qvtr::Relation overridden
 		 */
 		top relation mapMatchedRule_super {
-			/*enforce*/ domain atl atlChildRule : MatchedRule {
+			enforce domain atl atlChildRule : MatchedRule {
 				superRule = atlSuperRule : MatchedRule{}
 			};
 			enforce domain qvtr qvtrOverridesRelation : Relation {
@@ -288,7 +293,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 */
 		top relation mapModule {
 			txName : String;
-			/*enforce*/ domain atl atlModule : Module {
+			enforce domain atl atlModule : Module {
 				name = txName
 			};
 			enforce domain qvtr qvtrTransformation : RelationalTransformation {
@@ -316,10 +321,10 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 */
 		top relation mapOclMetamodel {
 			tmName : String;
-			/*enforce*/ domain atl oclMetamodel : OclModel {
-				-- Bug 525691 metamodel = null,
+			enforce domain atl oclMetamodel : OclModel {
+				metamodel = null,
 				name = tmName
-			} { oclMetamodel.model->notEmpty() };
+			};
 			enforce domain qvtr qvtrTypedModel : TypedModel {
 				name = tmName
 			};
@@ -329,17 +334,20 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::Module/atl::OclModel <=> qvtr::TypedModel (create)
 		 */
 		top relation mapOclModel_IN {
-			tmName : String;
 			qvtrTransformation : qvtrMM::RelationalTransformation;
-			/*enforce*/ domain atl oclModel : OclModel {
+			qvtrPackages : Set(pivotMM::Package);
+			enforce domain atl oclModel : OclModel {
 				metamodel = oclMetamodel : OclModel {
-					name = tmName
+					metamodel = null
 				},
 				opposite(Module::inModels) = atlModule : Module {}
 			};
 			enforce domain qvtr qvtrTypedModel : TypedModel {
 				transformation = qvtrTransformation,
-				usedPackage = getPackage(atlModule, tmName).oclAsSet()
+				usedPackage = qvtrPackages
+			}
+			default_values {
+				qvtrPackages = getPackage(atlModule, oclMetamodel.name).oclAsSet();
 			};
 			when {
 				mapModule(atlModule, qvtrTransformation);
@@ -351,17 +359,20 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::Module/atl::OclModel <=> qvtr::TypedModel (create)
 		 */
 		top relation mapOclModel_OUT {
-			tmName : String;
 			qvtrTransformation : qvtrMM::RelationalTransformation;
-			/*enforce*/ domain atl oclModel : OclModel {
+			qvtrPackages : Set(pivotMM::Package);
+			enforce domain atl oclModel : OclModel {
 				metamodel = oclMetamodel : OclModel {
-					name = tmName
+					metamodel = null
 				},
 				opposite(Module::outModels) = atlModule : Module {}
 			};
 			enforce domain qvtr qvtrTypedModel : TypedModel {
 				transformation = qvtrTransformation,
-				usedPackage = getPackage(atlModule, tmName).oclAsSet()
+				usedPackage = qvtrPackages
+			}
+			default_values {
+				qvtrPackages = getPackage(atlModule, oclMetamodel.name).oclAsSet();
 			};
 			when {
 				mapModule(atlModule, qvtrTransformation);
@@ -370,32 +381,11 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		}
 		
 		/**
-		 *  atl::OutPattern <=> qvtr::RelationDomain (enforce)
+		 *  atl::StringExp <=> ocl::StringLiteralExp
 		 */
-		top relation mapOutPattern {
---			atlModule : atlMM::Module;
-			qvtrTypedModel : qvtbMM::TypedModel;
-			/*enforce*/ domain atl atlPattern : OutPattern {
-				rule = atlRule : MatchedRule{
---					module = atlModule
-				}
-			};
-			enforce domain qvtr qvtrDomain : RelationDomain {
-				rule = qvtrRelation : Relation {
---					transformation = qvtrTransformation : RelationalTransformation{}
-				},
-				isCheckable = false,
-				isEnforceable = true,
-				typedModel = qvtrTypedModel
---				typedModel = getTypedModel(atlPattern.elements->collect(e | e.type)->selectByKind(atloclMM::OclModelElement)->any(y | true).model, qvtrTransformation)
-			};
-			when {
-				mapOclMetamodel(atlPattern.elements.type->selectByKind(atloclMM::OclModelElement)->any(true).model, qvtrTypedModel);
-				mapMatchedRule(atlRule, qvtrRelation);
-			}
-			where {
---				mapOutPattern2Relation(atlPattern, qvtrRelation);
-			}
+		top relation mapOclType overrides mapOclExpression {
+			enforce domain atl atlExpression : OclType {};
+			enforce domain qvtr;		-- FIXME don't really want anything
 		}
 		
 		/**
@@ -406,7 +396,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			atlRule : atlMM::MatchedRule;
 --			qvtrDomain : qvtrMM::RelationDomain;
 			qvtrRelation : qvtrMM::Relation;
-			/*enforce*/ domain atl atlElement : atlMM::SimpleInPatternElement {
+			enforce domain atl atlElement : atlMM::SimpleInPatternElement {
 				varName = elementName,
 				inPattern = atlPattern : InPattern{
 					rule = atlRule	
@@ -438,38 +428,44 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		}
 		
 		/**
-		 *  atl::SimpleOutPatternElement <=> qvtr::DomainPattern,ObjectTemplateExp,TemplateVariable
+		 *  atl::SimpleOutPatternElement <=> qvtr::RelationDomain,DomainPattern,ObjectTemplateExp,TemplateVariable
 		 */
 		top relation mapSimpleOutPatternElement {
 			elementName : String;
-			atlRule : atlMM::MatchedRule;
---			qvtrDomain : qvtrMM::RelationDomain;
-			qvtrRelation : qvtrMM::Relation;
-			/*enforce*/ domain atl atlElement : atlMM::SimpleOutPatternElement {
+			qvtrType : pivotMM::Type;
+			enforce domain atl atlElement : atlMM::SimpleOutPatternElement {
 				varName = elementName,
+				type = atlType : OclModelElement{
+					model = atlMetamodel : OclModel{
+						metamodel = null
+					}
+				},
 				outPattern = atlPattern : OutPattern{
-					rule = atlRule	
+					rule = atlRule : MatchedRule{}
 				}
 			};
 			enforce domain qvtr qvtrTemplate : ObjectTemplateExp{
+				DomainPattern = qvtrPattern : DomainPattern{
+					relationDomain = qvtrDomain : RelationDomain{
+						isCheckable = false,
+						isEnforceable = true,
+						typedModel = qvtrTypedModel : TypedModel{},
+						rule = qvtrRelation : Relation{}
+					}
+				}, 
 				bindsTo = qvtrVariable : TemplateVariable{
 					name = elementName,
-					type = getType(atlElement.type),
-					Relation = qvtrRelation,
-					RelationDomain = qvtrDomain : RelationDomain{
---FIXME					rule = qvtrRelation,
-						pattern = qvtrPattern : DomainPattern{
-							templateExpression = qvtrTemplate
-						}
-					}
+					type = qvtrType,
+					RelationDomain = qvtrDomain,
+					Relation = qvtrRelation
 				},
-				referredClass = getType(atlElement.type),
-				type = getType(atlElement.type)
-			};
+				referredClass = qvtrType,
+				type = qvtrType
+			}
+			default_values { qvtrType = getType(atlType);};
 			when {
+				mapOclMetamodel(atlMetamodel, qvtrTypedModel);
 				mapMatchedRule(atlRule, qvtrRelation);
-				mapOutPattern(atlPattern, qvtrDomain);
---				mapOclExpression(atlExpression, qvtrExpression);
 			}
 			where {
 				mapVariable(atlElement, qvtrVariable);
@@ -493,7 +489,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 */
 		top relation mapBooleanExp overrides mapOclExpression {
 			symbol : Boolean;
-			/*enforce*/ domain atl atlExpression : BooleanExp {
+			enforce domain atl atlExpression : BooleanExp {
 				booleanSymbol = symbol
 			};	   
 			enforce domain qvtr qvtrExpression : BooleanLiteralExp {
@@ -506,7 +502,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::IfExp <=> ocl::IfExp
 		 */
 		top relation mapIfExp overrides mapOclExpression {
-			/*enforce*/ domain atl atlExpression : IfExp {
+			enforce domain atl atlExpression : IfExp {
 				condition = atlCondition : OclExpression{},
 				thenExpression = atlThen : OclExpression{},
 				elseExpression = atlElse : OclExpression{}
@@ -529,7 +525,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 */
 		top relation mapIntegerExp overrides mapOclExpression {
 			symbol : Integer;
-			/*enforce*/ domain atl atlExpression : IntegerExp {
+			enforce domain atl atlExpression : IntegerExp {
 				integerSymbol = symbol
 			};	   
 			enforce domain qvtr qvtrExpression : IntegerLiteralExp {
@@ -542,17 +538,17 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::NavigationOrAttributeCallExp <=> ocl::PropertyCallExp
 		 */
 		top abstract relation mapNavigationOrAttributeCallExp overrides mapOclExpression {
-			/*enforce*/ domain atl atlExpression : NavigationOrAttributeCallExp {};	   
+			enforce domain atl atlExpression : NavigationOrAttributeCallExp {};	   
 			enforce domain qvtr qvtrExpression : PropertyCallExp {};
 		}
 		top relation mapNavigationOrAttributeCallExp_Helper overrides mapNavigationOrAttributeCallExp {
 			propertyName : String;
-			atlModule : atlMM::Module = getModule(atlExpression);
-			atlAttributes : Sequence(atloclMM::Attribute) = atlModule.elements->selectByKind(atlMM::Helper)._definition.feature->selectByKind(atloclMM::Attribute)->select(name=propertyName);
+			atlModule = getModule(atlExpression);
+			atlAttributes = atlModule.elements->selectByKind(atlMM::Helper)._definition.feature->selectByKind(atloclMM::Attribute)->select(name=propertyName);
 			qvtrTransformation : qvtrMM::RelationalTransformation;
 			qvtrOperation : pivotMM::Operation;
-			qvtrThisVariable : pivotMM::VariableDeclaration = qvtrTransformation.ownedContext;
-			/*enforce*/ domain atl atlExpression : NavigationOrAttributeCallExp {
+			qvtrThisVariable = qvtrTransformation.ownedContext.oclAsType(pivotMM::VariableDeclaration[1]);
+			enforce domain atl atlExpression : NavigationOrAttributeCallExp {
 				source = atlSource : OclExpression{},
 				name = propertyName
 			};	   
@@ -570,24 +566,30 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			when {
 				mapModule(atlModule, qvtrTransformation);
 				atlAttributes->notEmpty();
-				mapHelper_Attribute(atlAttributes->any(true)._definition.Helper, qvtrOperation);
+				mapHelper_Attribute(atlAttributes->any(true)._definition?.Helper, qvtrOperation);
 				mapOclExpression(atlSource, qvtrSourceArgument);
 			}
 		}
 		top relation mapNavigationOrAttributeCallExp_Property overrides mapNavigationOrAttributeCallExp {
 			propertyName : String;
 			atlModule : atlMM::Module = getModule(atlExpression);
-			atlAttributes : Sequence(atloclMM::Attribute) = atlModule.elements->selectByKind(atlMM::Helper)._definition.feature->selectByKind(atloclMM::Attribute)->select(name=propertyName);
+			atlAttributes : Sequence(atloclMM::Attribute);
 			qvtrProperty : pivotMM::Property[1] = getProperty(qvtrSource.type, propertyName);
-			/*enforce*/ domain atl atlExpression : NavigationOrAttributeCallExp {
+			enforce domain atl atlExpression : NavigationOrAttributeCallExp {
 				source = atlSource : OclExpression{},
 				name = propertyName
-			};	   
+			}
+			default_values {
+				atlAttributes = Sequence{};
+			};
 			enforce domain qvtr qvtrExpression : PropertyCallExp {
 				ownedSource = qvtrSource : OCLExpression{},
 				referredProperty = qvtrProperty,
 				type = qvtrProperty.type,
 				name = propertyName			-- debug/readability aid
+			}
+			default_values {
+				atlAttributes = atlModule.elements->selectByKind(atlMM::Helper)._definition.feature->selectByKind(atloclMM::Attribute)->select(name=propertyName);
 			};
 			when {
 				atlAttributes->isEmpty();
@@ -599,7 +601,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::OclExpression <=> ocl::OCLExpression
 		 */
 		top abstract relation mapOclExpression {
-			/*enforce*/ domain atl atlExpression : OclExpression {};
+			enforce domain atl atlExpression : OclExpression {};
 			enforce domain qvtr qvtrExpression : OCLExpression {};
 		}
 		
@@ -607,20 +609,20 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::OperationCallExp <=> ocl::OperationCallExp
 		 */
 		top abstract relation mapOperationCallExp overrides mapOclExpression {
-			/*enforce*/ domain atl atlExpression : OperationCallExp {};
+			enforce domain atl atlExpression : OperationCallExp {};
 			enforce domain qvtr qvtrExpression : OperationCallExp {};
 		}
 		top relation mapOperationCallExp_Helper overrides mapOperationCallExp {
 			operationName : String;
-			atlModule : atlMM::Module = getModule(atlExpression);
-			atlOperations : Sequence(atloclMM::Operation) = atlModule.elements->selectByKind(atlMM::Helper)._definition.feature->selectByKind(atloclMM::Operation)->select(name=operationName);
+			atlModule = getModule(atlExpression);
+			atlOperations = atlModule.elements->selectByKind(atlMM::Helper)._definition.feature->selectByKind(atloclMM::Operation)->select(name=operationName);
 			qvtrTransformation : qvtrMM::RelationalTransformation;
 			qvtrOperation : pivotMM::Operation;
-			qvtrThisVariable : pivotMM::VariableDeclaration = qvtrTransformation.ownedContext;
-			/*enforce*/ domain atl atlExpression : OperationCallExp {
+			qvtrThisVariable = qvtrTransformation.ownedContext.oclAsType(pivotMM::VariableDeclaration[1]);
+			enforce domain atl atlExpression : OperationCallExp {
 				source = atlSource : OclExpression{},
 				operationName = operationName
-			} {not atlExpression.oclIsKindOf(OperatorCallExp)};
+			}; -- {not atlExpression.oclIsKindOf(OperatorCallExp)};
 			enforce domain qvtr qvtrExpression : OperationCallExp {
 				ownedSource = qvtrSource : VariableExp{
 					referredVariable = qvtrThisVariable,
@@ -635,24 +637,32 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			when {
 				mapModule(atlModule, qvtrTransformation);
 				atlOperations->notEmpty();
-				mapHelper_Operation(atlOperations->any(true)._definition.Helper, qvtrOperation);
+				mapHelper_Operation(atlOperations->any(true)._definition?.Helper, qvtrOperation);
 				mapOclExpression(atlSource, qvtrSourceArgument);
 			}
 		}
 		top relation mapOperationCallExp_Operation overrides mapOperationCallExp {
 			operationName : String;
-			atlModule : atlMM::Module = getModule(atlExpression);
-			atlOperations : Sequence(atloclMM::Operation) = atlModule.elements->selectByKind(atlMM::Helper)._definition.feature->selectByKind(atloclMM::Operation)->select(name=operationName);
-			qvtrOperation : pivotMM::Operation = getOperation(qvtrSource.type, operationName);
-			/*enforce*/ domain atl atlExpression : OperationCallExp {
+			atlModule : atlMM::Module;
+			atlOperations : Sequence(atloclMM::Operation);
+			qvtrOperation : pivotMM::Operation;
+			enforce domain atl atlExpression : OperationCallExp {
 				source = atlSource : OclExpression{},
 				operationName = operationName
-			} {not atlExpression.oclIsKindOf(OperatorCallExp)};
+			} --{not atlExpression.oclIsKindOf(OperatorCallExp)}
+			default_values {
+				atlOperations = Sequence{};
+			};
 			enforce domain qvtr qvtrExpression : OperationCallExp {
 				ownedSource = qvtrSource : OCLExpression{},
 				referredOperation = qvtrOperation,
 				type = qvtrOperation.type,
 				name = operationName			-- debug/readability aid
+			}
+			default_values {
+				atlModule = getModule(atlExpression);
+				atlOperations = atlModule.elements->selectByKind(atlMM::Helper)._definition.feature->selectByKind(atloclMM::Operation)->select(name=operationName);
+				qvtrOperation = getOperation(qvtrSource.type, operationName);
 			};
 			when {
 				atlOperations->isEmpty();
@@ -664,7 +674,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::OperationCallExp argument <=> ocl::OperationCallExp argument
 		 */
 		top relation mapOperationCallExp_argument {
-			/*enforce*/ domain atl atlArgument : OclExpression {
+			enforce domain atl atlArgument : OclExpression {
 				parentOperation = atlParent : OperationCallExp{}
 			};	   
 			enforce domain qvtr qvtrArgument : OCLExpression {
@@ -679,12 +689,12 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		/**
 		 *  atl::OperatorCallExp <=> ocl::OperationCallExp
 		 */
-		top relation mapOperatorCallExp overrides mapOperationCallExp {
+		top relation mapOperatorCallExp overrides mapOperationCallExp_Operation {
 			operationName : String;
-			atlModule : atlMM::Module = getModule(atlExpression);
-			qvtrTransformation : qvtrMM::RelationalTransformation;
+		--	atlModule : atlMM::Module = getModule(atlExpression);
+		--	qvtrTransformation : qvtrMM::RelationalTransformation;
 			qvtrOperation : pivotMM::Operation = getOperation(qvtrSource.type, operationName);
-			/*enforce*/ domain atl atlExpression : OperatorCallExp {
+			enforce domain atl atlExpression : OperatorCallExp {
 				source = atlSource : OclExpression{},
 				operationName = operationName
 			};
@@ -695,7 +705,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 				name = operationName			-- debug/readability aid
 			};
 			when {
-				mapModule(atlModule, qvtrTransformation);
+		--		mapModule(atlModule, qvtrTransformation);
 				mapOclExpression(atlSource, qvtrSource);
 			}
 		}
@@ -719,7 +729,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 */
 		top relation mapStringExp overrides mapOclExpression {
 			symbol : String;
-			/*enforce*/ domain atl atlExpression : StringExp {
+			enforce domain atl atlExpression : StringExp {
 				stringSymbol = symbol
 			};	   
 			enforce domain qvtr qvtrExpression : StringLiteralExp {
@@ -732,7 +742,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::VariableDeclaration <=> ocl::VariableDeclaration
 		 */
 		relation mapVariable {
-			/*enforce*/ domain atl atlVariable : LocatedElement {};
+			enforce domain atl atlVariable : LocatedElement {};
 			enforce domain qvtr qvtrVariable : VariableDeclaration {};
 		}
 		
@@ -741,7 +751,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 */
 		top relation mapVariableExp overrides mapOclExpression {
 			varName : String;
-			/*enforce*/ domain atl atlExpression : VariableExp {
+			enforce domain atl atlExpression : VariableExp {
 				referredVariable = atlVariable : VariableDeclaration{
 					varName = varName
 				}
@@ -759,12 +769,12 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::VariableExp referredVariable <=> ocl::VariableExp referredVariable
 		 */
 		abstract relation mapVariableExp_referredVariable {
-			/*enforce*/ domain atl atlExpression : VariableExp {};	   
+			enforce domain atl atlExpression : VariableExp {};	   
 			enforce domain qvtr qvtrExpression : VariableExp {};
 		}
 		relation mapVariableExp_referredVariable_Helper overrides mapVariableExp_referredVariable {
 			atlHelper : atlMM::Helper;
-			/*enforce*/ domain atl atlExpression : VariableExp {
+			enforce domain atl atlExpression : VariableExp {
 				referredVariable = atlVariable : VariableDeclaration{
 					varName = 'self'
 				}
@@ -779,7 +789,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			}
 		}
 		relation mapVariableExp_referredVariable_VariableDeclaration overrides mapVariableExp_referredVariable {
-			/*enforce*/ domain atl atlExpression : VariableExp {
+			enforce domain atl atlExpression : VariableExp {
 				referredVariable = atlVariable : PatternElement{}
 			};
 			enforce domain qvtr qvtrExpression : VariableExp {

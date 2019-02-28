@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -14,8 +14,6 @@ import org.eclipse.m2m.atl.common.OCL.OclExpression;
 
 import org.eclipse.ocl.pivot.OCLExpression;
 
-import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Tmap Operator Call Exp</b></em>'.
@@ -29,8 +27,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT0operationName <em>T0operation Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT1atlSource <em>T1atl Source</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT2qvtrSource <em>T2qvtr Source</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT2qvtrTransformation <em>T2qvtr Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getWmapModule <em>Wmap Module</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getWmapOclExpression <em>Wmap Ocl Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getLocalSuccess <em>Local Success</em>}</li>
  * </ul>
@@ -148,59 +144,6 @@ public interface TmapOperatorCallExp extends ImapOclExpression {
 	 * @generated
 	 */
 	void setT2qvtrSource(OCLExpression value);
-
-	/**
-	 * Returns the value of the '<em><b>T2qvtr Transformation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Transformation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Transformation</em>' reference.
-	 * @see #setT2qvtrTransformation(RelationalTransformation)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_T2qvtrTransformation()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	RelationalTransformation getT2qvtrTransformation();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT2qvtrTransformation <em>T2qvtr Transformation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Transformation</em>' reference.
-	 * @see #getT2qvtrTransformation()
-	 * @generated
-	 */
-	void setT2qvtrTransformation(RelationalTransformation value);
-
-	/**
-	 * Returns the value of the '<em><b>Wmap Module</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Module</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Wmap Module</em>' reference.
-	 * @see #setWmapModule(TmapModule)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_WmapModule()
-	 * @model
-	 * @generated
-	 */
-	TmapModule getWmapModule();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getWmapModule <em>Wmap Module</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Wmap Module</em>' reference.
-	 * @see #getWmapModule()
-	 * @generated
-	 */
-	void setWmapModule(TmapModule value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Ocl Expression</b></em>' reference.

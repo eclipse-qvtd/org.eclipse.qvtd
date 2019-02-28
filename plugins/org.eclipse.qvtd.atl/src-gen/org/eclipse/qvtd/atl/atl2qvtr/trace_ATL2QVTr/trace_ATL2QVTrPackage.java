@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -237,6 +237,17 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapOclType <em>Domap Ocl Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Domap Ocl Type</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapOclType()
+	 * @see #getDmapOclExpression()
+	 * @generated
+	 */
+	EReference getDmapOclExpression_DomapOclType();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapOperationCallExp_Helper <em>Domap Operation Call Exp Helper</em>}'.
@@ -1413,6 +1424,17 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTmapMatchedRule_T1atlModule();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1atlOutPattern <em>T1atl Out Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>T1atl Out Pattern</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1atlOutPattern()
+	 * @see #getTmapMatchedRule()
+	 * @generated
+	 */
+	EReference getTmapMatchedRule_T1atlOutPattern();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1matchedRule <em>T1matched Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1424,15 +1446,15 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTmapMatchedRule_T1matchedRule();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_5 <em>T2 5</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_6 <em>T2 6</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>T2 5</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_5()
+	 * @return the meta object for the reference '<em>T2 6</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_6()
 	 * @see #getTmapMatchedRule()
 	 * @generated
 	 */
-	EReference getTmapMatchedRule_T2_5();
+	EReference getTmapMatchedRule_T2_6();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2qvtrRelation <em>T2qvtr Relation</em>}'.
@@ -1891,17 +1913,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EClass getTmapOclModel_IN();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT0tmName <em>T0tm Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>T0tm Name</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT0tmName()
-	 * @see #getTmapOclModel_IN()
-	 * @generated
-	 */
-	EAttribute getTmapOclModel_IN_T0tmName();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1atlModule <em>T1atl Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1989,17 +2000,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EClass getTmapOclModel_OUT();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_OUT#getT0tmName <em>T0tm Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>T0tm Name</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_OUT#getT0tmName()
-	 * @see #getTmapOclModel_OUT()
-	 * @generated
-	 */
-	EAttribute getTmapOclModel_OUT_T0tmName();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_OUT#getT1atlModule <em>T1atl Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2075,6 +2075,27 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTmapOclModel_OUT_WmapOclMetamodel();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclType <em>Tmap Ocl Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tmap Ocl Type</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclType
+	 * @generated
+	 */
+	EClass getTmapOclType();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclType#getDispatcher <em>Dispatcher</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Dispatcher</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclType#getDispatcher()
+	 * @see #getTmapOclType()
+	 * @generated
+	 */
+	EReference getTmapOclType_Dispatcher();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Helper <em>Tmap Operation Call Exp Helper</em>}'.
@@ -2414,28 +2435,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTmapOperatorCallExp_T2qvtrSource();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT2qvtrTransformation <em>T2qvtr Transformation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>T2qvtr Transformation</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT2qvtrTransformation()
-	 * @see #getTmapOperatorCallExp()
-	 * @generated
-	 */
-	EReference getTmapOperatorCallExp_T2qvtrTransformation();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getWmapModule <em>Wmap Module</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Wmap Module</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getWmapModule()
-	 * @see #getTmapOperatorCallExp()
-	 * @generated
-	 */
-	EReference getTmapOperatorCallExp_WmapModule();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getWmapOclExpression <em>Wmap Ocl Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2456,104 +2455,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTmapOperatorCallExp_LocalSuccess();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern <em>Tmap Out Pattern</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Tmap Out Pattern</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern
-	 * @generated
-	 */
-	EClass getTmapOutPattern();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getSuccess <em>Success</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Success</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getSuccess()
-	 * @see #getTmapOutPattern()
-	 * @generated
-	 */
-	EAttribute getTmapOutPattern_Success();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT1atlPattern <em>T1atl Pattern</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>T1atl Pattern</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT1atlPattern()
-	 * @see #getTmapOutPattern()
-	 * @generated
-	 */
-	EReference getTmapOutPattern_T1atlPattern();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT1atlRule <em>T1atl Rule</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>T1atl Rule</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT1atlRule()
-	 * @see #getTmapOutPattern()
-	 * @generated
-	 */
-	EReference getTmapOutPattern_T1atlRule();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT2qvtrDomain <em>T2qvtr Domain</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>T2qvtr Domain</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT2qvtrDomain()
-	 * @see #getTmapOutPattern()
-	 * @generated
-	 */
-	EReference getTmapOutPattern_T2qvtrDomain();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT2qvtrRelation <em>T2qvtr Relation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>T2qvtr Relation</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT2qvtrRelation()
-	 * @see #getTmapOutPattern()
-	 * @generated
-	 */
-	EReference getTmapOutPattern_T2qvtrRelation();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>T2qvtr Typed Model</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getT2qvtrTypedModel()
-	 * @see #getTmapOutPattern()
-	 * @generated
-	 */
-	EReference getTmapOutPattern_T2qvtrTypedModel();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getWmapMatchedRule <em>Wmap Matched Rule</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Wmap Matched Rule</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getWmapMatchedRule()
-	 * @see #getTmapOutPattern()
-	 * @generated
-	 */
-	EReference getTmapOutPattern_WmapMatchedRule();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getWmapOclMetamodel <em>Wmap Ocl Metamodel</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Wmap Ocl Metamodel</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern#getWmapOclMetamodel()
-	 * @see #getTmapOutPattern()
-	 * @generated
-	 */
-	EReference getTmapOutPattern_WmapOclMetamodel();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleInPatternElement <em>Tmap Simple In Pattern Element</em>}'.
@@ -2741,6 +2642,17 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTmapSimpleOutPatternElement_T1atlElement();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlMetamodel <em>T1atl Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>T1atl Metamodel</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlMetamodel()
+	 * @see #getTmapSimpleOutPatternElement()
+	 * @generated
+	 */
+	EReference getTmapSimpleOutPatternElement_T1atlMetamodel();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlPattern <em>T1atl Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2761,6 +2673,17 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTmapSimpleOutPatternElement_T1atlRule();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlType <em>T1atl Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>T1atl Type</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlType()
+	 * @see #getTmapSimpleOutPatternElement()
+	 * @generated
+	 */
+	EReference getTmapSimpleOutPatternElement_T1atlType();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrDomain <em>T2qvtr Domain</em>}'.
@@ -2807,6 +2730,17 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTmapSimpleOutPatternElement_T2qvtrTemplate();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>T2qvtr Typed Model</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrTypedModel()
+	 * @see #getTmapSimpleOutPatternElement()
+	 * @generated
+	 */
+	EReference getTmapSimpleOutPatternElement_T2qvtrTypedModel();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrVariable <em>T2qvtr Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2829,15 +2763,15 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTmapSimpleOutPatternElement_WmapMatchedRule();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapOutPattern <em>Wmap Out Pattern</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapOclMetamodel <em>Wmap Ocl Metamodel</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Wmap Out Pattern</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapOutPattern()
+	 * @return the meta object for the reference '<em>Wmap Ocl Metamodel</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapOclMetamodel()
 	 * @see #getTmapSimpleOutPatternElement()
 	 * @generated
 	 */
-	EReference getTmapSimpleOutPatternElement_WmapOutPattern();
+	EReference getTmapSimpleOutPatternElement_WmapOclMetamodel();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapVariable <em>Wmap Variable</em>}'.
@@ -3223,6 +3157,14 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DMAP_OCL_EXPRESSION__DOMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY = eINSTANCE.getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property();
+
+		/**
+		 * The meta object literal for the '<em><b>Domap Ocl Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DMAP_OCL_EXPRESSION__DOMAP_OCL_TYPE = eINSTANCE.getDmapOclExpression_DomapOclType();
 
 		/**
 		 * The meta object literal for the '<em><b>Domap Operation Call Exp Helper</b></em>' containment reference feature.
@@ -4117,6 +4059,14 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TMAP_MATCHED_RULE__T1ATL_MODULE = eINSTANCE.getTmapMatchedRule_T1atlModule();
 
 		/**
+		 * The meta object literal for the '<em><b>T1atl Out Pattern</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMAP_MATCHED_RULE__T1ATL_OUT_PATTERN = eINSTANCE.getTmapMatchedRule_T1atlOutPattern();
+
+		/**
 		 * The meta object literal for the '<em><b>T1matched Rule</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4125,12 +4075,12 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TMAP_MATCHED_RULE__T1MATCHED_RULE = eINSTANCE.getTmapMatchedRule_T1matchedRule();
 
 		/**
-		 * The meta object literal for the '<em><b>T2 5</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>T2 6</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TMAP_MATCHED_RULE__T2_5 = eINSTANCE.getTmapMatchedRule_T2_5();
+		EReference TMAP_MATCHED_RULE__T2_6 = eINSTANCE.getTmapMatchedRule_T2_6();
 
 		/**
 		 * The meta object literal for the '<em><b>T2qvtr Relation</b></em>' reference feature.
@@ -4481,14 +4431,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EClass TMAP_OCL_MODEL_IN = eINSTANCE.getTmapOclModel_IN();
 
 		/**
-		 * The meta object literal for the '<em><b>T0tm Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TMAP_OCL_MODEL_IN__T0TM_NAME = eINSTANCE.getTmapOclModel_IN_T0tmName();
-
-		/**
 		 * The meta object literal for the '<em><b>T1atl Module</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4555,14 +4497,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EClass TMAP_OCL_MODEL_OUT = eINSTANCE.getTmapOclModel_OUT();
 
 		/**
-		 * The meta object literal for the '<em><b>T0tm Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TMAP_OCL_MODEL_OUT__T0TM_NAME = eINSTANCE.getTmapOclModel_OUT_T0tmName();
-
-		/**
 		 * The meta object literal for the '<em><b>T1atl Module</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4617,6 +4551,24 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TMAP_OCL_MODEL_OUT__WMAP_OCL_METAMODEL = eINSTANCE.getTmapOclModel_OUT_WmapOclMetamodel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclTypeImpl <em>Tmap Ocl Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclTypeImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTmapOclType()
+		 * @generated
+		 */
+		EClass TMAP_OCL_TYPE = eINSTANCE.getTmapOclType();
+
+		/**
+		 * The meta object literal for the '<em><b>Dispatcher</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMAP_OCL_TYPE__DISPATCHER = eINSTANCE.getTmapOclType_Dispatcher();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_HelperImpl <em>Tmap Operation Call Exp Helper</em>}' class.
@@ -4875,22 +4827,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TMAP_OPERATOR_CALL_EXP__T2QVTR_SOURCE = eINSTANCE.getTmapOperatorCallExp_T2qvtrSource();
 
 		/**
-		 * The meta object literal for the '<em><b>T2qvtr Transformation</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_OPERATOR_CALL_EXP__T2QVTR_TRANSFORMATION = eINSTANCE.getTmapOperatorCallExp_T2qvtrTransformation();
-
-		/**
-		 * The meta object literal for the '<em><b>Wmap Module</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_OPERATOR_CALL_EXP__WMAP_MODULE = eINSTANCE.getTmapOperatorCallExp_WmapModule();
-
-		/**
 		 * The meta object literal for the '<em><b>Wmap Ocl Expression</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4905,80 +4841,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TMAP_OPERATOR_CALL_EXP__LOCAL_SUCCESS = eINSTANCE.getTmapOperatorCallExp_LocalSuccess();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOutPatternImpl <em>Tmap Out Pattern</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOutPatternImpl
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTmapOutPattern()
-		 * @generated
-		 */
-		EClass TMAP_OUT_PATTERN = eINSTANCE.getTmapOutPattern();
-
-		/**
-		 * The meta object literal for the '<em><b>Success</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TMAP_OUT_PATTERN__SUCCESS = eINSTANCE.getTmapOutPattern_Success();
-
-		/**
-		 * The meta object literal for the '<em><b>T1atl Pattern</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_OUT_PATTERN__T1ATL_PATTERN = eINSTANCE.getTmapOutPattern_T1atlPattern();
-
-		/**
-		 * The meta object literal for the '<em><b>T1atl Rule</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_OUT_PATTERN__T1ATL_RULE = eINSTANCE.getTmapOutPattern_T1atlRule();
-
-		/**
-		 * The meta object literal for the '<em><b>T2qvtr Domain</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_OUT_PATTERN__T2QVTR_DOMAIN = eINSTANCE.getTmapOutPattern_T2qvtrDomain();
-
-		/**
-		 * The meta object literal for the '<em><b>T2qvtr Relation</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_OUT_PATTERN__T2QVTR_RELATION = eINSTANCE.getTmapOutPattern_T2qvtrRelation();
-
-		/**
-		 * The meta object literal for the '<em><b>T2qvtr Typed Model</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_OUT_PATTERN__T2QVTR_TYPED_MODEL = eINSTANCE.getTmapOutPattern_T2qvtrTypedModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Wmap Matched Rule</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_OUT_PATTERN__WMAP_MATCHED_RULE = eINSTANCE.getTmapOutPattern_WmapMatchedRule();
-
-		/**
-		 * The meta object literal for the '<em><b>Wmap Ocl Metamodel</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_OUT_PATTERN__WMAP_OCL_METAMODEL = eINSTANCE.getTmapOutPattern_WmapOclMetamodel();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl <em>Tmap Simple In Pattern Element</em>}' class.
@@ -5121,6 +4983,14 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_ELEMENT = eINSTANCE.getTmapSimpleOutPatternElement_T1atlElement();
 
 		/**
+		 * The meta object literal for the '<em><b>T1atl Metamodel</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_METAMODEL = eINSTANCE.getTmapSimpleOutPatternElement_T1atlMetamodel();
+
+		/**
 		 * The meta object literal for the '<em><b>T1atl Pattern</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5135,6 +5005,14 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_RULE = eINSTANCE.getTmapSimpleOutPatternElement_T1atlRule();
+
+		/**
+		 * The meta object literal for the '<em><b>T1atl Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_TYPE = eINSTANCE.getTmapSimpleOutPatternElement_T1atlType();
 
 		/**
 		 * The meta object literal for the '<em><b>T2qvtr Domain</b></em>' reference feature.
@@ -5169,6 +5047,14 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_TEMPLATE = eINSTANCE.getTmapSimpleOutPatternElement_T2qvtrTemplate();
 
 		/**
+		 * The meta object literal for the '<em><b>T2qvtr Typed Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_TYPED_MODEL = eINSTANCE.getTmapSimpleOutPatternElement_T2qvtrTypedModel();
+
+		/**
 		 * The meta object literal for the '<em><b>T2qvtr Variable</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5185,12 +5071,12 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_MATCHED_RULE = eINSTANCE.getTmapSimpleOutPatternElement_WmapMatchedRule();
 
 		/**
-		 * The meta object literal for the '<em><b>Wmap Out Pattern</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Wmap Ocl Metamodel</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_OUT_PATTERN = eINSTANCE.getTmapSimpleOutPatternElement_WmapOutPattern();
+		EReference TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_OCL_METAMODEL = eINSTANCE.getTmapSimpleOutPatternElement_WmapOclMetamodel();
 
 		/**
 		 * The meta object literal for the '<em><b>Wmap Variable</b></em>' reference feature.

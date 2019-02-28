@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -29,6 +29,7 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
 import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -209,7 +210,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 */
 	@Override
 	public DmapOclExpression getDispatcher() {
-		if (eContainerFeatureID() != (ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (ExecutionImpl.EXECUTION_FEATURE_COUNT + 1)) return null;
 		return (DmapOclExpression)eInternalContainer();
 	}
 
@@ -219,7 +220,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * @generated
 	 */
 	public NotificationChain basicSetDispatcher(DmapOclExpression newDispatcher, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -230,7 +231,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 */
 	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
-		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0) && newDispatcher != null)) {
+		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ExecutionImpl.EXECUTION_FEATURE_COUNT + 1) && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -242,7 +243,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, newDispatcher, newDispatcher));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, newDispatcher, newDispatcher));
 	}
 
 	/**
@@ -257,7 +258,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			t1atlCondition = (OclExpression)eResolveProxy(oldT1atlCondition);
 			if (t1atlCondition != oldT1atlCondition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1, oldT1atlCondition, t1atlCondition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlCondition, t1atlCondition));
 			}
 		}
 		return t1atlCondition;
@@ -282,7 +283,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		OclExpression oldT1atlCondition = t1atlCondition;
 		t1atlCondition = newT1atlCondition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1, oldT1atlCondition, t1atlCondition));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlCondition, t1atlCondition));
 	}
 
 	/**
@@ -297,7 +298,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			t1atlElse = (OclExpression)eResolveProxy(oldT1atlElse);
 			if (t1atlElse != oldT1atlElse) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2, oldT1atlElse, t1atlElse));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlElse, t1atlElse));
 			}
 		}
 		return t1atlElse;
@@ -322,7 +323,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		OclExpression oldT1atlElse = t1atlElse;
 		t1atlElse = newT1atlElse;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2, oldT1atlElse, t1atlElse));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlElse, t1atlElse));
 	}
 
 	/**
@@ -337,7 +338,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			t1atlThen = (OclExpression)eResolveProxy(oldT1atlThen);
 			if (t1atlThen != oldT1atlThen) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3, oldT1atlThen, t1atlThen));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1atlThen, t1atlThen));
 			}
 		}
 		return t1atlThen;
@@ -362,7 +363,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		OclExpression oldT1atlThen = t1atlThen;
 		t1atlThen = newT1atlThen;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3, oldT1atlThen, t1atlThen));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1atlThen, t1atlThen));
 	}
 
 	/**
@@ -377,7 +378,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			t2qvtrCondition = (OCLExpression)eResolveProxy(oldT2qvtrCondition);
 			if (t2qvtrCondition != oldT2qvtrCondition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4, oldT2qvtrCondition, t2qvtrCondition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrCondition, t2qvtrCondition));
 			}
 		}
 		return t2qvtrCondition;
@@ -402,7 +403,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		OCLExpression oldT2qvtrCondition = t2qvtrCondition;
 		t2qvtrCondition = newT2qvtrCondition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4, oldT2qvtrCondition, t2qvtrCondition));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrCondition, t2qvtrCondition));
 	}
 
 	/**
@@ -417,7 +418,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			t2qvtrElse = (OCLExpression)eResolveProxy(oldT2qvtrElse);
 			if (t2qvtrElse != oldT2qvtrElse) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5, oldT2qvtrElse, t2qvtrElse));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrElse, t2qvtrElse));
 			}
 		}
 		return t2qvtrElse;
@@ -442,7 +443,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		OCLExpression oldT2qvtrElse = t2qvtrElse;
 		t2qvtrElse = newT2qvtrElse;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5, oldT2qvtrElse, t2qvtrElse));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrElse, t2qvtrElse));
 	}
 
 	/**
@@ -457,7 +458,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			t2qvtrThen = (OCLExpression)eResolveProxy(oldT2qvtrThen);
 			if (t2qvtrThen != oldT2qvtrThen) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6, oldT2qvtrThen, t2qvtrThen));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrThen, t2qvtrThen));
 			}
 		}
 		return t2qvtrThen;
@@ -482,7 +483,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		OCLExpression oldT2qvtrThen = t2qvtrThen;
 		t2qvtrThen = newT2qvtrThen;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6, oldT2qvtrThen, t2qvtrThen));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrThen, t2qvtrThen));
 	}
 
 	/**
@@ -497,7 +498,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			wmapOclExpression = (DmapOclExpression)eResolveProxy(oldWmapOclExpression);
 			if (wmapOclExpression != oldWmapOclExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7, oldWmapOclExpression, wmapOclExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapOclExpression, wmapOclExpression));
 			}
 		}
 		return wmapOclExpression;
@@ -522,7 +523,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7, oldWmapOclExpression, wmapOclExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapOclExpression, wmapOclExpression));
 	}
 
 	/**
@@ -537,7 +538,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			wmapOclExpression1 = (DmapOclExpression)eResolveProxy(oldWmapOclExpression1);
 			if (wmapOclExpression1 != oldWmapOclExpression1) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8, oldWmapOclExpression1, wmapOclExpression1));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldWmapOclExpression1, wmapOclExpression1));
 			}
 		}
 		return wmapOclExpression1;
@@ -562,7 +563,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		DmapOclExpression oldWmapOclExpression1 = wmapOclExpression1;
 		wmapOclExpression1 = newWmapOclExpression1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8, oldWmapOclExpression1, wmapOclExpression1));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldWmapOclExpression1, wmapOclExpression1));
 	}
 
 	/**
@@ -577,7 +578,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 			wmapOclExpression2 = (DmapOclExpression)eResolveProxy(oldWmapOclExpression2);
 			if (wmapOclExpression2 != oldWmapOclExpression2) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9, oldWmapOclExpression2, wmapOclExpression2));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapOclExpression2, wmapOclExpression2));
 			}
 		}
 		return wmapOclExpression2;
@@ -602,7 +603,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		DmapOclExpression oldWmapOclExpression2 = wmapOclExpression2;
 		wmapOclExpression2 = newWmapOclExpression2;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9, oldWmapOclExpression2, wmapOclExpression2));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapOclExpression2, wmapOclExpression2));
 	}
 
 	/**
@@ -625,7 +626,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 		Boolean oldLocalSuccess = localSuccess;
 		localSuccess = newLocalSuccess;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10, oldLocalSuccess, localSuccess));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11, oldLocalSuccess, localSuccess));
 	}
 
 	/**
@@ -636,7 +637,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetDispatcher((DmapOclExpression)otherEnd, msgs);
@@ -652,7 +653,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return basicSetDispatcher(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -666,7 +667,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 3, DmapOclExpression.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -680,36 +681,36 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT1atlCondition();
 				return basicGetT1atlCondition();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT1atlElse();
 				return basicGetT1atlElse();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getT1atlThen();
 				return basicGetT1atlThen();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				if (resolve) return getT2qvtrCondition();
 				return basicGetT2qvtrCondition();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				if (resolve) return getT2qvtrElse();
 				return basicGetT2qvtrElse();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				if (resolve) return getT2qvtrThen();
 				return basicGetT2qvtrThen();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				if (resolve) return getWmapOclExpression();
 				return basicGetWmapOclExpression();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				if (resolve) return getWmapOclExpression1();
 				return basicGetWmapOclExpression1();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				if (resolve) return getWmapOclExpression2();
 				return basicGetWmapOclExpression2();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				return getLocalSuccess();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -723,37 +724,37 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapOclExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlCondition((OclExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlElse((OclExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT1atlThen((OclExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2qvtrCondition((OCLExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setT2qvtrElse((OCLExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setT2qvtrThen((OCLExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setWmapOclExpression((DmapOclExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				setWmapOclExpression1((DmapOclExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				setWmapOclExpression2((DmapOclExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				setLocalSuccess((Boolean)newValue);
 				return;
 		}
@@ -768,37 +769,37 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapOclExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlCondition((OclExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlElse((OclExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT1atlThen((OclExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2qvtrCondition((OCLExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setT2qvtrElse((OCLExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setT2qvtrThen((OCLExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setWmapOclExpression((DmapOclExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				setWmapOclExpression1((DmapOclExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				setWmapOclExpression2((DmapOclExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				setLocalSuccess(LOCAL_SUCCESS_EDEFAULT);
 				return;
 		}
@@ -813,27 +814,27 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t1atlCondition != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t1atlElse != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return t1atlThen != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				return t2qvtrCondition != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				return t2qvtrElse != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				return t2qvtrThen != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				return wmapOclExpression != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				return wmapOclExpression1 != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				return wmapOclExpression2 != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				return LOCAL_SUCCESS_EDEFAULT == null ? localSuccess != null : !LOCAL_SUCCESS_EDEFAULT.equals(localSuccess);
 		}
 		return super.eIsSet(featureID);

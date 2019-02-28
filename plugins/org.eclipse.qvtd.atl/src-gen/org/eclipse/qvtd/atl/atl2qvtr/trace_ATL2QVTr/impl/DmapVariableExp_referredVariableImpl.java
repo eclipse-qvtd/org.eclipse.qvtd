@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -27,6 +27,7 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVari
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
 import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -249,9 +250,9 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 		if (newDomapVariableExp_referredVariable_Helper != domapVariableExp_referredVariable_Helper) {
 			NotificationChain msgs = null;
 			if (domapVariableExp_referredVariable_Helper != null)
-				msgs = ((InternalEObject)domapVariableExp_referredVariable_Helper).eInverseRemove(this, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, TmapVariableExp_referredVariable_Helper.class, msgs);
+				msgs = ((InternalEObject)domapVariableExp_referredVariable_Helper).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapVariableExp_referredVariable_Helper.class, msgs);
 			if (newDomapVariableExp_referredVariable_Helper != null)
-				msgs = ((InternalEObject)newDomapVariableExp_referredVariable_Helper).eInverseAdd(this, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, TmapVariableExp_referredVariable_Helper.class, msgs);
+				msgs = ((InternalEObject)newDomapVariableExp_referredVariable_Helper).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapVariableExp_referredVariable_Helper.class, msgs);
 			msgs = basicSetDomapVariableExp_referredVariable_Helper(newDomapVariableExp_referredVariable_Helper, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -294,9 +295,9 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 		if (newDomapVariableExp_referredVariable_VariableDeclaration != domapVariableExp_referredVariable_VariableDeclaration) {
 			NotificationChain msgs = null;
 			if (domapVariableExp_referredVariable_VariableDeclaration != null)
-				msgs = ((InternalEObject)domapVariableExp_referredVariable_VariableDeclaration).eInverseRemove(this, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, TmapVariableExp_referredVariable_VariableDeclaration.class, msgs);
+				msgs = ((InternalEObject)domapVariableExp_referredVariable_VariableDeclaration).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapVariableExp_referredVariable_VariableDeclaration.class, msgs);
 			if (newDomapVariableExp_referredVariable_VariableDeclaration != null)
-				msgs = ((InternalEObject)newDomapVariableExp_referredVariable_VariableDeclaration).eInverseAdd(this, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, TmapVariableExp_referredVariable_VariableDeclaration.class, msgs);
+				msgs = ((InternalEObject)newDomapVariableExp_referredVariable_VariableDeclaration).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapVariableExp_referredVariable_VariableDeclaration.class, msgs);
 			msgs = basicSetDomapVariableExp_referredVariable_VariableDeclaration(newDomapVariableExp_referredVariable_VariableDeclaration, msgs);
 			if (msgs != null) msgs.dispatch();
 		}

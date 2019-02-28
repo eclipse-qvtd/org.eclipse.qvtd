@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.m2m.atl.common.ATL.MatchedRule;
+import org.eclipse.m2m.atl.common.ATL.OutPattern;
 
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule;
@@ -40,8 +41,9 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getSuccess <em>Success</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT0ruleName <em>T0rule Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT1atlModule <em>T1atl Module</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT1atlOutPattern <em>T1atl Out Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT1matchedRule <em>T1matched Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT2_5 <em>T2 5</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT2_6 <em>T2 6</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT2qvtrRelation <em>T2qvtr Relation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT2qvtrTransformation <em>T2qvtr Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getWmapModule <em>Wmap Module</em>}</li>
@@ -57,7 +59,7 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_MATCHED_RULE_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 8;
+	public static final int TMAP_MATCHED_RULE_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Tmap Matched Rule</em>' class.
@@ -120,6 +122,16 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	protected org.eclipse.m2m.atl.common.ATL.Module t1atlModule;
 
 	/**
+	 * The cached value of the '{@link #getT1atlOutPattern() <em>T1atl Out Pattern</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT1atlOutPattern()
+	 * @generated
+	 * @ordered
+	 */
+	protected OutPattern t1atlOutPattern;
+
+	/**
 	 * The cached value of the '{@link #getT1matchedRule() <em>T1matched Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,14 +142,14 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	protected MatchedRule t1matchedRule;
 
 	/**
-	 * The cached value of the '{@link #getT2_5() <em>T2 5</em>}' reference.
+	 * The cached value of the '{@link #getT2_6() <em>T2 6</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2_5()
+	 * @see #getT2_6()
 	 * @generated
 	 * @ordered
 	 */
-	protected SharedVariable t2_5;
+	protected SharedVariable t2_6;
 
 	/**
 	 * The cached value of the '{@link #getT2qvtrRelation() <em>T2qvtr Relation</em>}' reference.
@@ -280,13 +292,53 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
+	public OutPattern getT1atlOutPattern() {
+		if (t1atlOutPattern != null && t1atlOutPattern.eIsProxy()) {
+			InternalEObject oldT1atlOutPattern = t1atlOutPattern;
+			t1atlOutPattern = (OutPattern)eResolveProxy(oldT1atlOutPattern);
+			if (t1atlOutPattern != oldT1atlOutPattern) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlOutPattern, t1atlOutPattern));
+			}
+		}
+		return t1atlOutPattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OutPattern basicGetT1atlOutPattern() {
+		return t1atlOutPattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setT1atlOutPattern(OutPattern newT1atlOutPattern) {
+		OutPattern oldT1atlOutPattern = t1atlOutPattern;
+		t1atlOutPattern = newT1atlOutPattern;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlOutPattern, t1atlOutPattern));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public MatchedRule getT1matchedRule() {
 		if (t1matchedRule != null && t1matchedRule.eIsProxy()) {
 			InternalEObject oldT1matchedRule = t1matchedRule;
 			t1matchedRule = (MatchedRule)eResolveProxy(oldT1matchedRule);
 			if (t1matchedRule != oldT1matchedRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1matchedRule, t1matchedRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1matchedRule, t1matchedRule));
 			}
 		}
 		return t1matchedRule;
@@ -311,7 +363,7 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 		MatchedRule oldT1matchedRule = t1matchedRule;
 		t1matchedRule = newT1matchedRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1matchedRule, t1matchedRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1matchedRule, t1matchedRule));
 	}
 
 	/**
@@ -320,16 +372,16 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public SharedVariable getT2_5() {
-		if (t2_5 != null && t2_5.eIsProxy()) {
-			InternalEObject oldT2_5 = (InternalEObject)t2_5;
-			t2_5 = (SharedVariable)eResolveProxy(oldT2_5);
-			if (t2_5 != oldT2_5) {
+	public SharedVariable getT2_6() {
+		if (t2_6 != null && t2_6.eIsProxy()) {
+			InternalEObject oldT2_6 = (InternalEObject)t2_6;
+			t2_6 = (SharedVariable)eResolveProxy(oldT2_6);
+			if (t2_6 != oldT2_6) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2_5, t2_5));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2_6, t2_6));
 			}
 		}
-		return t2_5;
+		return t2_6;
 	}
 
 	/**
@@ -337,8 +389,8 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SharedVariable basicGetT2_5() {
-		return t2_5;
+	public SharedVariable basicGetT2_6() {
+		return t2_6;
 	}
 
 	/**
@@ -347,11 +399,11 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public void setT2_5(SharedVariable newT2_5) {
-		SharedVariable oldT2_5 = t2_5;
-		t2_5 = newT2_5;
+	public void setT2_6(SharedVariable newT2_6) {
+		SharedVariable oldT2_6 = t2_6;
+		t2_6 = newT2_6;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2_5, t2_5));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2_6, t2_6));
 	}
 
 	/**
@@ -366,7 +418,7 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 			t2qvtrRelation = (Relation)eResolveProxy(oldT2qvtrRelation);
 			if (t2qvtrRelation != oldT2qvtrRelation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrRelation, t2qvtrRelation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrRelation, t2qvtrRelation));
 			}
 		}
 		return t2qvtrRelation;
@@ -391,7 +443,7 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 		Relation oldT2qvtrRelation = t2qvtrRelation;
 		t2qvtrRelation = newT2qvtrRelation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrRelation, t2qvtrRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrRelation, t2qvtrRelation));
 	}
 
 	/**
@@ -406,7 +458,7 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 			t2qvtrTransformation = (RelationalTransformation)eResolveProxy(oldT2qvtrTransformation);
 			if (t2qvtrTransformation != oldT2qvtrTransformation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrTransformation, t2qvtrTransformation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrTransformation, t2qvtrTransformation));
 			}
 		}
 		return t2qvtrTransformation;
@@ -431,7 +483,7 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 		RelationalTransformation oldT2qvtrTransformation = t2qvtrTransformation;
 		t2qvtrTransformation = newT2qvtrTransformation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrTransformation, t2qvtrTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrTransformation, t2qvtrTransformation));
 	}
 
 	/**
@@ -446,7 +498,7 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 			wmapModule = (TmapModule)eResolveProxy(oldWmapModule);
 			if (wmapModule != oldWmapModule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapModule, wmapModule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapModule, wmapModule));
 			}
 		}
 		return wmapModule;
@@ -471,7 +523,7 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 		TmapModule oldWmapModule = wmapModule;
 		wmapModule = newWmapModule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapModule, wmapModule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapModule, wmapModule));
 	}
 
 	/**
@@ -490,18 +542,21 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 				if (resolve) return getT1atlModule();
 				return basicGetT1atlModule();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+				if (resolve) return getT1atlOutPattern();
+				return basicGetT1atlOutPattern();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getT1matchedRule();
 				return basicGetT1matchedRule();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				if (resolve) return getT2_5();
-				return basicGetT2_5();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+				if (resolve) return getT2_6();
+				return basicGetT2_6();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				if (resolve) return getT2qvtrRelation();
 				return basicGetT2qvtrRelation();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				if (resolve) return getT2qvtrTransformation();
 				return basicGetT2qvtrTransformation();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				if (resolve) return getWmapModule();
 				return basicGetWmapModule();
 		}
@@ -526,18 +581,21 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 				setT1atlModule((org.eclipse.m2m.atl.common.ATL.Module)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1matchedRule((MatchedRule)newValue);
+				setT1atlOutPattern((OutPattern)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2_5((SharedVariable)newValue);
+				setT1matchedRule((MatchedRule)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2qvtrRelation((Relation)newValue);
+				setT2_6((SharedVariable)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setT2qvtrTransformation((RelationalTransformation)newValue);
+				setT2qvtrRelation((Relation)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+				setT2qvtrTransformation((RelationalTransformation)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setWmapModule((TmapModule)newValue);
 				return;
 		}
@@ -562,18 +620,21 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 				setT1atlModule((org.eclipse.m2m.atl.common.ATL.Module)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1matchedRule((MatchedRule)null);
+				setT1atlOutPattern((OutPattern)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2_5((SharedVariable)null);
+				setT1matchedRule((MatchedRule)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2qvtrRelation((Relation)null);
+				setT2_6((SharedVariable)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setT2qvtrTransformation((RelationalTransformation)null);
+				setT2qvtrRelation((Relation)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+				setT2qvtrTransformation((RelationalTransformation)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setWmapModule((TmapModule)null);
 				return;
 		}
@@ -595,14 +656,16 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t1atlModule != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t1matchedRule != null;
+				return t1atlOutPattern != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				return t2_5 != null;
+				return t1matchedRule != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				return t2qvtrRelation != null;
+				return t2_6 != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				return t2qvtrTransformation != null;
+				return t2qvtrRelation != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+				return t2qvtrTransformation != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				return wmapModule != null;
 		}
 		return super.eIsSet(featureID);

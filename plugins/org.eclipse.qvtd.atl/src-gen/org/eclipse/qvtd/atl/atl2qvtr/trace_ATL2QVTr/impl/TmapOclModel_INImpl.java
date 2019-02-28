@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -38,7 +38,6 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclModel_INImpl#getT0tmName <em>T0tm Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclModel_INImpl#getT1atlModule <em>T1atl Module</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclModel_INImpl#getT1oclMetamodel <em>T1ocl Metamodel</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclModel_INImpl#getT1oclModel <em>T1ocl Model</em>}</li>
@@ -58,7 +57,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_OCL_MODEL_IN_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 8;
+	public static final int TMAP_OCL_MODEL_IN_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Tmap Ocl Model IN</em>' class.
@@ -69,26 +68,6 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 */
 	public static final int TMAP_OCL_MODEL_IN_OPERATION_COUNT = ExecutionImpl.EXECUTION_OPERATION_COUNT + 0;
 
-
-	/**
-	 * The default value of the '{@link #getT0tmName() <em>T0tm Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getT0tmName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String T0TM_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getT0tmName() <em>T0tm Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getT0tmName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String t0tmName = T0TM_NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getT1atlModule() <em>T1atl Module</em>}' reference.
@@ -185,36 +164,13 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * @generated
 	 */
 	@Override
-	public String getT0tmName() {
-		return t0tmName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setT0tmName(String newT0tmName) {
-		String oldT0tmName = t0tmName;
-		t0tmName = newT0tmName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT0tmName, t0tmName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getT1atlModule() {
 		if (t1atlModule != null && t1atlModule.eIsProxy()) {
 			InternalEObject oldT1atlModule = t1atlModule;
 			t1atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldT1atlModule);
 			if (t1atlModule != oldT1atlModule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlModule, t1atlModule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlModule, t1atlModule));
 			}
 		}
 		return t1atlModule;
@@ -239,7 +195,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 		org.eclipse.m2m.atl.common.ATL.Module oldT1atlModule = t1atlModule;
 		t1atlModule = newT1atlModule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlModule, t1atlModule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlModule, t1atlModule));
 	}
 
 	/**
@@ -254,7 +210,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 			t1oclMetamodel = (OclModel)eResolveProxy(oldT1oclMetamodel);
 			if (t1oclMetamodel != oldT1oclMetamodel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1oclMetamodel, t1oclMetamodel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1oclMetamodel, t1oclMetamodel));
 			}
 		}
 		return t1oclMetamodel;
@@ -279,7 +235,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 		OclModel oldT1oclMetamodel = t1oclMetamodel;
 		t1oclMetamodel = newT1oclMetamodel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1oclMetamodel, t1oclMetamodel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1oclMetamodel, t1oclMetamodel));
 	}
 
 	/**
@@ -294,7 +250,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 			t1oclModel = (OclModel)eResolveProxy(oldT1oclModel);
 			if (t1oclModel != oldT1oclModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1oclModel, t1oclModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1oclModel, t1oclModel));
 			}
 		}
 		return t1oclModel;
@@ -319,7 +275,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 		OclModel oldT1oclModel = t1oclModel;
 		t1oclModel = newT1oclModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1oclModel, t1oclModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1oclModel, t1oclModel));
 	}
 
 	/**
@@ -334,7 +290,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 			t2qvtrTransformation = (RelationalTransformation)eResolveProxy(oldT2qvtrTransformation);
 			if (t2qvtrTransformation != oldT2qvtrTransformation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrTransformation, t2qvtrTransformation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrTransformation, t2qvtrTransformation));
 			}
 		}
 		return t2qvtrTransformation;
@@ -359,7 +315,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 		RelationalTransformation oldT2qvtrTransformation = t2qvtrTransformation;
 		t2qvtrTransformation = newT2qvtrTransformation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrTransformation, t2qvtrTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrTransformation, t2qvtrTransformation));
 	}
 
 	/**
@@ -374,7 +330,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 			t2qvtrTypedModel = (TypedModel)eResolveProxy(oldT2qvtrTypedModel);
 			if (t2qvtrTypedModel != oldT2qvtrTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrTypedModel, t2qvtrTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrTypedModel, t2qvtrTypedModel));
 			}
 		}
 		return t2qvtrTypedModel;
@@ -399,7 +355,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 		TypedModel oldT2qvtrTypedModel = t2qvtrTypedModel;
 		t2qvtrTypedModel = newT2qvtrTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrTypedModel, t2qvtrTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrTypedModel, t2qvtrTypedModel));
 	}
 
 	/**
@@ -414,7 +370,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 			wmapModule = (TmapModule)eResolveProxy(oldWmapModule);
 			if (wmapModule != oldWmapModule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapModule, wmapModule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapModule, wmapModule));
 			}
 		}
 		return wmapModule;
@@ -439,7 +395,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 		TmapModule oldWmapModule = wmapModule;
 		wmapModule = newWmapModule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapModule, wmapModule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapModule, wmapModule));
 	}
 
 	/**
@@ -454,7 +410,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 			wmapOclMetamodel = (TmapOclMetamodel)eResolveProxy(oldWmapOclMetamodel);
 			if (wmapOclMetamodel != oldWmapOclMetamodel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapOclMetamodel, wmapOclMetamodel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapOclMetamodel, wmapOclMetamodel));
 			}
 		}
 		return wmapOclMetamodel;
@@ -479,7 +435,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 		TmapOclMetamodel oldWmapOclMetamodel = wmapOclMetamodel;
 		wmapOclMetamodel = newWmapOclMetamodel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapOclMetamodel, wmapOclMetamodel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapOclMetamodel, wmapOclMetamodel));
 	}
 
 	/**
@@ -491,26 +447,24 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return getT0tmName();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (resolve) return getT1atlModule();
 				return basicGetT1atlModule();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (resolve) return getT1oclMetamodel();
 				return basicGetT1oclMetamodel();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT1oclModel();
 				return basicGetT1oclModel();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT2qvtrTransformation();
 				return basicGetT2qvtrTransformation();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getT2qvtrTypedModel();
 				return basicGetT2qvtrTypedModel();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				if (resolve) return getWmapModule();
 				return basicGetWmapModule();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				if (resolve) return getWmapOclMetamodel();
 				return basicGetWmapOclMetamodel();
 		}
@@ -526,27 +480,24 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT0tmName((String)newValue);
-				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlModule((org.eclipse.m2m.atl.common.ATL.Module)newValue);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1oclMetamodel((OclModel)newValue);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1oclModel((OclModel)newValue);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT2qvtrTransformation((RelationalTransformation)newValue);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT2qvtrTypedModel((TypedModel)newValue);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setWmapModule((TmapModule)newValue);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setWmapOclMetamodel((TmapOclMetamodel)newValue);
 				return;
 		}
@@ -562,27 +513,24 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT0tmName(T0TM_NAME_EDEFAULT);
-				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlModule((org.eclipse.m2m.atl.common.ATL.Module)null);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1oclMetamodel((OclModel)null);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1oclModel((OclModel)null);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT2qvtrTransformation((RelationalTransformation)null);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT2qvtrTypedModel((TypedModel)null);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setWmapModule((TmapModule)null);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setWmapOclMetamodel((TmapOclMetamodel)null);
 				return;
 		}
@@ -598,39 +546,21 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return T0TM_NAME_EDEFAULT == null ? t0tmName != null : !T0TM_NAME_EDEFAULT.equals(t0tmName);
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return t1atlModule != null;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return t1oclMetamodel != null;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t1oclModel != null;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t2qvtrTransformation != null;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return t2qvtrTypedModel != null;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				return wmapModule != null;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				return wmapOclMetamodel != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (t0tmName: ");
-		result.append(t0tmName);
-		result.append(')');
-		return result.toString();
 	}
 
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -86,11 +86,11 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 			case 22: return createTmapOclMetamodel();
 			case 23: return createTmapOclModel_IN();
 			case 24: return createTmapOclModel_OUT();
-			case 25: return createTmapOperationCallExp_Helper();
-			case 26: return createTmapOperationCallExp_Operation();
-			case 27: return createTmapOperationCallExp_argument();
-			case 28: return createTmapOperatorCallExp();
-			case 29: return createTmapOutPattern();
+			case 25: return createTmapOclType();
+			case 26: return createTmapOperationCallExp_Helper();
+			case 27: return createTmapOperationCallExp_Operation();
+			case 28: return createTmapOperationCallExp_argument();
+			case 29: return createTmapOperatorCallExp();
 			case 30: return createTmapSimpleInPatternElement();
 			case 31: return createTmapSimpleOutPatternElement();
 			case 32: return createTmapStringExp();
@@ -351,6 +351,17 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
+	public TmapOclType createTmapOclType() {
+		TmapOclTypeImpl tmapOclType = new TmapOclTypeImpl();
+		return tmapOclType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public TmapOperationCallExp_Helper createTmapOperationCallExp_Helper() {
 		TmapOperationCallExp_HelperImpl tmapOperationCallExp_Helper = new TmapOperationCallExp_HelperImpl();
 		return tmapOperationCallExp_Helper;
@@ -387,17 +398,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	public TmapOperatorCallExp createTmapOperatorCallExp() {
 		TmapOperatorCallExpImpl tmapOperatorCallExp = new TmapOperatorCallExpImpl();
 		return tmapOperatorCallExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public TmapOutPattern createTmapOutPattern() {
-		TmapOutPatternImpl tmapOutPattern = new TmapOutPatternImpl();
-		return tmapOutPattern;
 	}
 
 	/**

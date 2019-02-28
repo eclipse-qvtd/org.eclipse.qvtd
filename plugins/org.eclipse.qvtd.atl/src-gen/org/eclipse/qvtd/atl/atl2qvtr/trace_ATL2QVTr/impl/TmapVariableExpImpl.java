@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -28,6 +28,7 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
 import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -131,7 +132,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 */
 	@Override
 	public DmapOclExpression getDispatcher() {
-		if (eContainerFeatureID() != (ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (ExecutionImpl.EXECUTION_FEATURE_COUNT + 1)) return null;
 		return (DmapOclExpression)eInternalContainer();
 	}
 
@@ -141,7 +142,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * @generated
 	 */
 	public NotificationChain basicSetDispatcher(DmapOclExpression newDispatcher, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -152,19 +153,19 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 */
 	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
-		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0) && newDispatcher != null)) {
+		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ExecutionImpl.EXECUTION_FEATURE_COUNT + 1) && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDispatcher != null)
-				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 11, DmapOclExpression.class, msgs);
+				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 12, DmapOclExpression.class, msgs);
 			msgs = basicSetDispatcher(newDispatcher, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, newDispatcher, newDispatcher));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, newDispatcher, newDispatcher));
 	}
 
 	/**
@@ -187,7 +188,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 		String oldT0varName = t0varName;
 		t0varName = newT0varName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1, oldT0varName, t0varName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT0varName, t0varName));
 	}
 
 	/**
@@ -202,7 +203,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 			t1atlVariable = (VariableDeclaration)eResolveProxy(oldT1atlVariable);
 			if (t1atlVariable != oldT1atlVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlVariable, t1atlVariable));
 			}
 		}
 		return t1atlVariable;
@@ -227,7 +228,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 		VariableDeclaration oldT1atlVariable = t1atlVariable;
 		t1atlVariable = newT1atlVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlVariable, t1atlVariable));
 	}
 
 	/**
@@ -242,7 +243,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 			wmapVariableExp_referredVariable = (DmapVariableExp_referredVariable)eResolveProxy(oldWmapVariableExp_referredVariable);
 			if (wmapVariableExp_referredVariable != oldWmapVariableExp_referredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3, oldWmapVariableExp_referredVariable, wmapVariableExp_referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldWmapVariableExp_referredVariable, wmapVariableExp_referredVariable));
 			}
 		}
 		return wmapVariableExp_referredVariable;
@@ -267,7 +268,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 		DmapVariableExp_referredVariable oldWmapVariableExp_referredVariable = wmapVariableExp_referredVariable;
 		wmapVariableExp_referredVariable = newWmapVariableExp_referredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3, oldWmapVariableExp_referredVariable, wmapVariableExp_referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldWmapVariableExp_referredVariable, wmapVariableExp_referredVariable));
 	}
 
 	/**
@@ -278,7 +279,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetDispatcher((DmapOclExpression)otherEnd, msgs);
@@ -294,7 +295,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return basicSetDispatcher(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -308,8 +309,8 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 11, DmapOclExpression.class, msgs);
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 12, DmapOclExpression.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -322,14 +323,14 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return getT0varName();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT1atlVariable();
 				return basicGetT1atlVariable();
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getWmapVariableExp_referredVariable();
 				return basicGetWmapVariableExp_referredVariable();
 		}
@@ -344,16 +345,16 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapOclExpression)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT0varName((String)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlVariable((VariableDeclaration)newValue);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setWmapVariableExp_referredVariable((DmapVariableExp_referredVariable)newValue);
 				return;
 		}
@@ -368,16 +369,16 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapOclExpression)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT0varName(T0VAR_NAME_EDEFAULT);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlVariable((VariableDeclaration)null);
 				return;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setWmapVariableExp_referredVariable((DmapVariableExp_referredVariable)null);
 				return;
 		}
@@ -392,13 +393,13 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return T0VAR_NAME_EDEFAULT == null ? t0varName != null : !T0VAR_NAME_EDEFAULT.equals(t0varName);
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t1atlVariable != null;
-			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return wmapVariableExp_referredVariable != null;
 		}
 		return super.eIsSet(featureID);

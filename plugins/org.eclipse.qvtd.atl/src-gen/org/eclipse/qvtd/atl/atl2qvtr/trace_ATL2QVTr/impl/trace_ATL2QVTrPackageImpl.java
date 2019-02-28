@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -50,11 +50,11 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNavigationOrAttributeCal
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_OUT;
+import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclType;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Helper;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Operation;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_argument;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp;
-import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleInPatternElement;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapStringExp;
@@ -263,6 +263,13 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass tmapOclTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass tmapOperationCallExp_HelperEClass = null;
 
 	/**
@@ -285,13 +292,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	private EClass tmapOperatorCallExpEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass tmapOutPatternEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -579,7 +579,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getDmapOclExpression_DomapOperationCallExp_Helper() {
+	public EReference getDmapOclExpression_DomapOclType() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -589,7 +589,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getDmapOclExpression_DomapOperationCallExp_Operation() {
+	public EReference getDmapOclExpression_DomapOperationCallExp_Helper() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -599,7 +599,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getDmapOclExpression_DomapOperatorCallExp() {
+	public EReference getDmapOclExpression_DomapOperationCallExp_Operation() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -609,7 +609,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getDmapOclExpression_DomapStringExp() {
+	public EReference getDmapOclExpression_DomapOperatorCallExp() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -619,7 +619,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getDmapOclExpression_DomapVariableExp() {
+	public EReference getDmapOclExpression_DomapStringExp() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -629,8 +629,18 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getDmapOclExpression_Result() {
+	public EReference getDmapOclExpression_DomapVariableExp() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDmapOclExpression_Result() {
+		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1659,7 +1669,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapMatchedRule_T1matchedRule() {
+	public EReference getTmapMatchedRule_T1atlOutPattern() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1669,7 +1679,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapMatchedRule_T2_5() {
+	public EReference getTmapMatchedRule_T1matchedRule() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1679,7 +1689,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapMatchedRule_T2qvtrRelation() {
+	public EReference getTmapMatchedRule_T2_6() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1689,7 +1699,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapMatchedRule_T2qvtrTransformation() {
+	public EReference getTmapMatchedRule_T2qvtrRelation() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -1699,8 +1709,18 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapMatchedRule_WmapModule() {
+	public EReference getTmapMatchedRule_T2qvtrTransformation() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTmapMatchedRule_WmapModule() {
+		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -2099,18 +2119,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EAttribute getTmapOclModel_IN_T0tmName() {
-		return (EAttribute)tmapOclModel_INEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getTmapOclModel_IN_T1atlModule() {
-		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(1);
+		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2120,7 +2130,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_IN_T1oclMetamodel() {
-		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(2);
+		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2130,7 +2140,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_IN_T1oclModel() {
-		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(3);
+		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2140,7 +2150,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_IN_T2qvtrTransformation() {
-		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(4);
+		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2150,7 +2160,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_IN_T2qvtrTypedModel() {
-		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(5);
+		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -2160,7 +2170,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_IN_WmapModule() {
-		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(6);
+		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2170,7 +2180,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_IN_WmapOclMetamodel() {
-		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(7);
+		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -2189,18 +2199,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EAttribute getTmapOclModel_OUT_T0tmName() {
-		return (EAttribute)tmapOclModel_OUTEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getTmapOclModel_OUT_T1atlModule() {
-		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(1);
+		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2210,7 +2210,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_OUT_T1oclMetamodel() {
-		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(2);
+		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2220,7 +2220,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_OUT_T1oclModel() {
-		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(3);
+		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2230,7 +2230,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_OUT_T2qvtrTransformation() {
-		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(4);
+		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2240,7 +2240,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_OUT_T2qvtrTypedModel() {
-		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(5);
+		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -2250,7 +2250,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_OUT_WmapModule() {
-		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(6);
+		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2260,7 +2260,27 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 */
 	@Override
 	public EReference getTmapOclModel_OUT_WmapOclMetamodel() {
-		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(7);
+		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTmapOclType() {
+		return tmapOclTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTmapOclType_Dispatcher() {
+		return (EReference)tmapOclTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2579,7 +2599,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapOperatorCallExp_T2qvtrTransformation() {
+	public EReference getTmapOperatorCallExp_WmapOclExpression() {
 		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -2589,118 +2609,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapOperatorCallExp_WmapModule() {
-		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTmapOperatorCallExp_WmapOclExpression() {
-		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getTmapOperatorCallExp_LocalSuccess() {
-		return (EAttribute)tmapOperatorCallExpEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getTmapOutPattern() {
-		return tmapOutPatternEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getTmapOutPattern_Success() {
-		return (EAttribute)tmapOutPatternEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTmapOutPattern_T1atlPattern() {
-		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTmapOutPattern_T1atlRule() {
-		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTmapOutPattern_T2qvtrDomain() {
-		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTmapOutPattern_T2qvtrRelation() {
-		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTmapOutPattern_T2qvtrTypedModel() {
-		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTmapOutPattern_WmapMatchedRule() {
-		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTmapOutPattern_WmapOclMetamodel() {
-		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)tmapOperatorCallExpEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2879,7 +2789,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_T1atlPattern() {
+	public EReference getTmapSimpleOutPatternElement_T1atlMetamodel() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -2889,7 +2799,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_T1atlRule() {
+	public EReference getTmapSimpleOutPatternElement_T1atlPattern() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -2899,7 +2809,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_T2qvtrDomain() {
+	public EReference getTmapSimpleOutPatternElement_T1atlRule() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -2909,7 +2819,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_T2qvtrPattern() {
+	public EReference getTmapSimpleOutPatternElement_T1atlType() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -2919,7 +2829,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_T2qvtrRelation() {
+	public EReference getTmapSimpleOutPatternElement_T2qvtrDomain() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -2929,7 +2839,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_T2qvtrTemplate() {
+	public EReference getTmapSimpleOutPatternElement_T2qvtrPattern() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -2939,7 +2849,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_T2qvtrVariable() {
+	public EReference getTmapSimpleOutPatternElement_T2qvtrRelation() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -2949,7 +2859,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_WmapMatchedRule() {
+	public EReference getTmapSimpleOutPatternElement_T2qvtrTemplate() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -2959,7 +2869,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_WmapOutPattern() {
+	public EReference getTmapSimpleOutPatternElement_T2qvtrTypedModel() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -2969,8 +2879,38 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapSimpleOutPatternElement_WmapVariable() {
+	public EReference getTmapSimpleOutPatternElement_T2qvtrVariable() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTmapSimpleOutPatternElement_WmapMatchedRule() {
+		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTmapSimpleOutPatternElement_WmapOclMetamodel() {
+		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTmapSimpleOutPatternElement_WmapVariable() {
+		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -3227,6 +3167,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 10);
 		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 11);
 		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 12);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 13);
 
 		dmapVariableExp_referredVariableEClass = createEClass(4);
 		createEReference(dmapVariableExp_referredVariableEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 0);
@@ -3256,23 +3197,23 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
 
 		tmapBooleanExpEClass = createEClass(9);
-		createEReference(tmapBooleanExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEAttribute(tmapBooleanExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapBooleanExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapBooleanExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
 
 		tmapHelper_AttributeEClass = createEClass(10);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0);
-		createEAttribute(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 1);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10);
-		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11);
-		createEAttribute(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 12);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11);
+		createEReference(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12);
+		createEAttribute(tmapHelper_AttributeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 13);
 
 		tmapHelper_ContextEClass = createEClass(11);
 		createEReference(tmapHelper_ContextEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
@@ -3284,32 +3225,32 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapHelper_ContextEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
 
 		tmapHelper_OperationEClass = createEClass(12);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0);
-		createEAttribute(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 1);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10);
-		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11);
-		createEAttribute(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 12);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11);
+		createEReference(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12);
+		createEAttribute(tmapHelper_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 13);
 
 		tmapIfExpEClass = createEClass(13);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8);
-		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9);
-		createEAttribute(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9);
+		createEReference(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
+		createEAttribute(tmapIfExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11);
 
 		tmapInPatternEClass = createEClass(14);
 		createEAttribute(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
@@ -3336,8 +3277,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
 
 		tmapIntegerExpEClass = createEClass(16);
-		createEReference(tmapIntegerExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEAttribute(tmapIntegerExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapIntegerExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapIntegerExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
 
 		tmapMatchedRuleEClass = createEClass(17);
 		createEAttribute(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
@@ -3348,6 +3289,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
 		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
 		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
 
 		tmapMatchedRule_superEClass = createEClass(18);
 		createEReference(tmapMatchedRule_superEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
@@ -3367,25 +3309,25 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapModuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
 
 		tmapNavigationOrAttributeCallExp_HelperEClass = createEClass(20);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEAttribute(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9);
-		createEAttribute(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
+		createEAttribute(tmapNavigationOrAttributeCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11);
 
 		tmapNavigationOrAttributeCallExp_PropertyEClass = createEClass(21);
-		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEAttribute(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
-		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
-		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
-		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
-		createEAttribute(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
+		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapNavigationOrAttributeCallExp_PropertyEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEAttribute(tmapNavigationOrAttributeCallExp_PropertyEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
 
 		tmapOclMetamodelEClass = createEClass(22);
 		createEAttribute(tmapOclMetamodelEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
@@ -3393,47 +3335,48 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapOclMetamodelEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
 
 		tmapOclModel_INEClass = createEClass(23);
-		createEAttribute(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
 		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
 		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
 		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
 		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
 		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
 		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
-		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
 
 		tmapOclModel_OUTEClass = createEClass(24);
-		createEAttribute(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
 		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
 		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
 		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
 		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
 		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
 		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
-		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
 
-		tmapOperationCallExp_HelperEClass = createEClass(25);
-		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEAttribute(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
-		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
-		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
-		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
-		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
-		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6);
-		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7);
-		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8);
-		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9);
-		createEAttribute(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10);
+		tmapOclTypeEClass = createEClass(25);
+		createEReference(tmapOclTypeEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
 
-		tmapOperationCallExp_OperationEClass = createEClass(26);
-		createEReference(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEAttribute(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
-		createEReference(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
-		createEReference(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
-		createEReference(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
-		createEAttribute(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
+		tmapOperationCallExp_HelperEClass = createEClass(26);
+		createEReference(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
+		createEReference(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9);
+		createEReference(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
+		createEAttribute(tmapOperationCallExp_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11);
 
-		tmapOperationCallExp_argumentEClass = createEClass(27);
+		tmapOperationCallExp_OperationEClass = createEClass(27);
+		createEReference(tmapOperationCallExp_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapOperationCallExp_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapOperationCallExp_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapOperationCallExp_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapOperationCallExp_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEAttribute(tmapOperationCallExp_OperationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+
+		tmapOperationCallExp_argumentEClass = createEClass(28);
 		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
 		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
 		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
@@ -3441,25 +3384,13 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
 		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
 
-		tmapOperatorCallExpEClass = createEClass(28);
-		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEAttribute(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
-		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
-		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
-		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
-		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
-		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6);
-		createEAttribute(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7);
-
-		tmapOutPatternEClass = createEClass(29);
-		createEAttribute(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
-		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
-		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
-		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
-		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
-		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
-		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
-		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		tmapOperatorCallExpEClass = createEClass(29);
+		createEReference(tmapOperatorCallExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapOperatorCallExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapOperatorCallExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapOperatorCallExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapOperatorCallExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEAttribute(tmapOperatorCallExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
 
 		tmapSimpleInPatternElementEClass = createEClass(30);
 		createEAttribute(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
@@ -3489,10 +3420,13 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
 		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11);
 		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 13);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 14);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 15);
 
 		tmapStringExpEClass = createEClass(32);
-		createEReference(tmapStringExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEAttribute(tmapStringExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapStringExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapStringExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
 
 		tmapVariableEClass = createEClass(33);
 		createEAttribute(tmapVariableEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
@@ -3500,20 +3434,20 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapVariableEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
 
 		tmapVariableExpEClass = createEClass(34);
-		createEReference(tmapVariableExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
-		createEAttribute(tmapVariableExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
-		createEReference(tmapVariableExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
-		createEReference(tmapVariableExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
+		createEReference(tmapVariableExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEAttribute(tmapVariableExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapVariableExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapVariableExpEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
 
 		tmapVariableExp_referredVariable_HelperEClass = createEClass(35);
-		createEReference(tmapVariableExp_referredVariable_HelperEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0);
-		createEReference(tmapVariableExp_referredVariable_HelperEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1);
-		createEReference(tmapVariableExp_referredVariable_HelperEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2);
+		createEReference(tmapVariableExp_referredVariable_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapVariableExp_referredVariable_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapVariableExp_referredVariable_HelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
 
 		tmapVariableExp_referredVariable_VariableDeclarationEClass = createEClass(36);
-		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0);
-		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1);
-		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2);
+		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
 	}
 
 	/**
@@ -3578,11 +3512,11 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		tmapOclMetamodelEClass.getESuperTypes().add(theQVTtracePackage.getExecution());
 		tmapOclModel_INEClass.getESuperTypes().add(theQVTtracePackage.getExecution());
 		tmapOclModel_OUTEClass.getESuperTypes().add(theQVTtracePackage.getExecution());
+		tmapOclTypeEClass.getESuperTypes().add(this.getImapOclExpression());
 		tmapOperationCallExp_HelperEClass.getESuperTypes().add(this.getImapOclExpression());
 		tmapOperationCallExp_OperationEClass.getESuperTypes().add(this.getImapOclExpression());
 		tmapOperationCallExp_argumentEClass.getESuperTypes().add(theQVTtracePackage.getExecution());
 		tmapOperatorCallExpEClass.getESuperTypes().add(this.getImapOclExpression());
-		tmapOutPatternEClass.getESuperTypes().add(theQVTtracePackage.getExecution());
 		tmapSimpleInPatternElementEClass.getESuperTypes().add(theQVTtracePackage.getExecution());
 		tmapSimpleOutPatternElementEClass.getESuperTypes().add(theQVTtracePackage.getExecution());
 		tmapStringExpEClass.getESuperTypes().add(this.getImapOclExpression());
@@ -3611,6 +3545,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getDmapOclExpression_DomapIntegerExp(), this.getTmapIntegerExp(), this.getTmapIntegerExp_Dispatcher(), "domapIntegerExp", null, 0, 1, DmapOclExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDmapOclExpression_DomapNavigationOrAttributeCallExp_Helper(), this.getTmapNavigationOrAttributeCallExp_Helper(), this.getTmapNavigationOrAttributeCallExp_Helper_Dispatcher(), "domapNavigationOrAttributeCallExp_Helper", null, 0, 1, DmapOclExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property(), this.getTmapNavigationOrAttributeCallExp_Property(), this.getTmapNavigationOrAttributeCallExp_Property_Dispatcher(), "domapNavigationOrAttributeCallExp_Property", null, 0, 1, DmapOclExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDmapOclExpression_DomapOclType(), this.getTmapOclType(), this.getTmapOclType_Dispatcher(), "domapOclType", null, 0, 1, DmapOclExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDmapOclExpression_DomapOperationCallExp_Helper(), this.getTmapOperationCallExp_Helper(), this.getTmapOperationCallExp_Helper_Dispatcher(), "domapOperationCallExp_Helper", null, 0, 1, DmapOclExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDmapOclExpression_DomapOperationCallExp_Operation(), this.getTmapOperationCallExp_Operation(), this.getTmapOperationCallExp_Operation_Dispatcher(), "domapOperationCallExp_Operation", null, 0, 1, DmapOclExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDmapOclExpression_DomapOperatorCallExp(), this.getTmapOperatorCallExp(), this.getTmapOperatorCallExp_Dispatcher(), "domapOperatorCallExp", null, 0, 1, DmapOclExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3733,8 +3668,9 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEAttribute(getTmapMatchedRule_Success(), ecorePackage.getEBooleanObject(), "success", null, 0, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTmapMatchedRule_T0ruleName(), ecorePackage.getEString(), "t0ruleName", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T1atlModule(), theATLPackage.getModule(), null, "t1atlModule", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapMatchedRule_T1atlOutPattern(), theATLPackage.getOutPattern(), null, "t1atlOutPattern", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T1matchedRule(), theATLPackage.getMatchedRule(), null, "t1matchedRule", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapMatchedRule_T2_5(), theQVTrelationPackage.getSharedVariable(), null, "t2_5", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapMatchedRule_T2_6(), theQVTrelationPackage.getSharedVariable(), null, "t2_6", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T2qvtrRelation(), theQVTrelationPackage.getRelation(), null, "t2qvtrRelation", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T2qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "t2qvtrTransformation", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3783,7 +3719,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapOclMetamodel_T2qvtrTypedModel(), theQVTbasePackage.getTypedModel(), null, "t2qvtrTypedModel", null, 1, 1, TmapOclMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapOclModel_INEClass, TmapOclModel_IN.class, "TmapOclModel_IN", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTmapOclModel_IN_T0tmName(), ecorePackage.getEString(), "t0tmName", null, 1, 1, TmapOclModel_IN.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOclModel_IN_T1atlModule(), theATLPackage.getModule(), null, "t1atlModule", null, 1, 1, TmapOclModel_IN.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOclModel_IN_T1oclMetamodel(), theOCLPackage.getOclModel(), null, "t1oclMetamodel", null, 1, 1, TmapOclModel_IN.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOclModel_IN_T1oclModel(), theOCLPackage.getOclModel(), null, "t1oclModel", null, 1, 1, TmapOclModel_IN.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3793,7 +3728,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapOclModel_IN_WmapOclMetamodel(), this.getTmapOclMetamodel(), null, "wmapOclMetamodel", null, 0, 1, TmapOclModel_IN.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapOclModel_OUTEClass, TmapOclModel_OUT.class, "TmapOclModel_OUT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTmapOclModel_OUT_T0tmName(), ecorePackage.getEString(), "t0tmName", null, 1, 1, TmapOclModel_OUT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOclModel_OUT_T1atlModule(), theATLPackage.getModule(), null, "t1atlModule", null, 1, 1, TmapOclModel_OUT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOclModel_OUT_T1oclMetamodel(), theOCLPackage.getOclModel(), null, "t1oclMetamodel", null, 1, 1, TmapOclModel_OUT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOclModel_OUT_T1oclModel(), theOCLPackage.getOclModel(), null, "t1oclModel", null, 1, 1, TmapOclModel_OUT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3801,6 +3735,9 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapOclModel_OUT_T2qvtrTypedModel(), theQVTbasePackage.getTypedModel(), null, "t2qvtrTypedModel", null, 1, 1, TmapOclModel_OUT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOclModel_OUT_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapOclModel_OUT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOclModel_OUT_WmapOclMetamodel(), this.getTmapOclMetamodel(), null, "wmapOclMetamodel", null, 0, 1, TmapOclModel_OUT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tmapOclTypeEClass, TmapOclType.class, "TmapOclType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTmapOclType_Dispatcher(), this.getDmapOclExpression(), this.getDmapOclExpression_DomapOclType(), "dispatcher", null, 1, 1, TmapOclType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapOperationCallExp_HelperEClass, TmapOperationCallExp_Helper.class, "TmapOperationCallExp_Helper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTmapOperationCallExp_Helper_Dispatcher(), this.getDmapOclExpression(), this.getDmapOclExpression_DomapOperationCallExp_Helper(), "dispatcher", null, 1, 1, TmapOperationCallExp_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3836,20 +3773,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEAttribute(getTmapOperatorCallExp_T0operationName(), ecorePackage.getEString(), "t0operationName", null, 1, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOperatorCallExp_T1atlSource(), theOCLPackage.getOclExpression(), null, "t1atlSource", null, 1, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOperatorCallExp_T2qvtrSource(), thePivotPackage.getOCLExpression(), null, "t2qvtrSource", null, 1, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapOperatorCallExp_T2qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "t2qvtrTransformation", null, 1, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapOperatorCallExp_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOperatorCallExp_WmapOclExpression(), this.getDmapOclExpression(), null, "wmapOclExpression", null, 0, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTmapOperatorCallExp_LocalSuccess(), ecorePackage.getEBooleanObject(), "localSuccess", null, 0, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(tmapOutPatternEClass, TmapOutPattern.class, "TmapOutPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTmapOutPattern_Success(), ecorePackage.getEBooleanObject(), "success", null, 0, 1, TmapOutPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapOutPattern_T1atlPattern(), theATLPackage.getOutPattern(), null, "t1atlPattern", null, 1, 1, TmapOutPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapOutPattern_T1atlRule(), theATLPackage.getMatchedRule(), null, "t1atlRule", null, 1, 1, TmapOutPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapOutPattern_T2qvtrDomain(), theQVTrelationPackage.getRelationDomain(), null, "t2qvtrDomain", null, 1, 1, TmapOutPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapOutPattern_T2qvtrRelation(), theQVTrelationPackage.getRelation(), null, "t2qvtrRelation", null, 1, 1, TmapOutPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapOutPattern_T2qvtrTypedModel(), theQVTbasePackage.getTypedModel(), null, "t2qvtrTypedModel", null, 1, 1, TmapOutPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapOutPattern_WmapMatchedRule(), this.getTmapMatchedRule(), null, "wmapMatchedRule", null, 0, 1, TmapOutPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapOutPattern_WmapOclMetamodel(), this.getTmapOclMetamodel(), null, "wmapOclMetamodel", null, 0, 1, TmapOutPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapSimpleInPatternElementEClass, TmapSimpleInPatternElement.class, "TmapSimpleInPatternElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTmapSimpleInPatternElement_T0elementName(), ecorePackage.getEString(), "t0elementName", null, 1, 1, TmapSimpleInPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3869,15 +3794,18 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEAttribute(getTmapSimpleOutPatternElement_Success(), ecorePackage.getEBooleanObject(), "success", null, 0, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTmapSimpleOutPatternElement_T0elementName(), ecorePackage.getEString(), "t0elementName", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_T1atlElement(), theATLPackage.getSimpleOutPatternElement(), null, "t1atlElement", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapSimpleOutPatternElement_T1atlMetamodel(), theOCLPackage.getOclModel(), null, "t1atlMetamodel", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_T1atlPattern(), theATLPackage.getOutPattern(), null, "t1atlPattern", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_T1atlRule(), theATLPackage.getMatchedRule(), null, "t1atlRule", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapSimpleOutPatternElement_T1atlType(), theOCLPackage.getOclModelElement(), null, "t1atlType", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_T2qvtrDomain(), theQVTrelationPackage.getRelationDomain(), null, "t2qvtrDomain", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_T2qvtrPattern(), theQVTrelationPackage.getDomainPattern(), null, "t2qvtrPattern", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_T2qvtrRelation(), theQVTrelationPackage.getRelation(), null, "t2qvtrRelation", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_T2qvtrTemplate(), theQVTtemplatePackage.getObjectTemplateExp(), null, "t2qvtrTemplate", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapSimpleOutPatternElement_T2qvtrTypedModel(), theQVTbasePackage.getTypedModel(), null, "t2qvtrTypedModel", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_T2qvtrVariable(), theQVTrelationPackage.getTemplateVariable(), null, "t2qvtrVariable", null, 1, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_WmapMatchedRule(), this.getTmapMatchedRule(), null, "wmapMatchedRule", null, 0, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapSimpleOutPatternElement_WmapOutPattern(), this.getTmapOutPattern(), null, "wmapOutPattern", null, 0, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapSimpleOutPatternElement_WmapOclMetamodel(), this.getTmapOclMetamodel(), null, "wmapOclMetamodel", null, 0, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapSimpleOutPatternElement_WmapVariable(), this.getTmapVariable(), null, "wmapVariable", null, 0, 1, TmapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapStringExpEClass, TmapStringExp.class, "TmapStringExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4092,18 +4020,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 			   "body", "TmapOperationCallExp_argument"
 		   });
 		addAnnotation
-		  (getTmapOutPattern_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "body", "TmapOutPattern"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "body", "TmapOutPattern"
-		   });
-		addAnnotation
 		  (getTmapSimpleInPatternElement_T1atlElement(),
 		   source,
 		   new String[] {
@@ -4211,6 +4127,12 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		   });
 		addAnnotation
 		  (getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapOclType(),
 		   source,
 		   new String[] {
 			   "referredDomain", "middle"
@@ -4588,13 +4510,19 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 			   "referredDomain", "atl"
 		   });
 		addAnnotation
+		  (getTmapMatchedRule_T1atlOutPattern(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
 		  (getTmapMatchedRule_T1matchedRule(),
 		   source,
 		   new String[] {
 			   "referredDomain", "atl"
 		   });
 		addAnnotation
-		  (getTmapMatchedRule_T2_5(),
+		  (getTmapMatchedRule_T2_6(),
 		   source,
 		   new String[] {
 			   "referredDomain", "qvtr"
@@ -4750,12 +4678,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 			   "referredDomain", "qvtr"
 		   });
 		addAnnotation
-		  (getTmapOclModel_IN_T0tmName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
 		  (getTmapOclModel_IN_T1atlModule(),
 		   source,
 		   new String[] {
@@ -4784,12 +4706,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		   source,
 		   new String[] {
 			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOclModel_OUT_T0tmName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
 		   });
 		addAnnotation
 		  (getTmapOclModel_OUT_T1atlModule(),
@@ -4918,42 +4834,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 			   "referredDomain", "qvtr"
 		   });
 		addAnnotation
-		  (getTmapOperatorCallExp_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T1atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T2qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T2qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
 		  (getTmapSimpleInPatternElement_T0elementName(),
 		   source,
 		   new String[] {
@@ -5020,6 +4900,12 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 			   "referredDomain", "atl"
 		   });
 		addAnnotation
+		  (getTmapSimpleOutPatternElement_T1atlMetamodel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
 		  (getTmapSimpleOutPatternElement_T1atlPattern(),
 		   source,
 		   new String[] {
@@ -5027,6 +4913,12 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		   });
 		addAnnotation
 		  (getTmapSimpleOutPatternElement_T1atlRule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T1atlType(),
 		   source,
 		   new String[] {
 			   "referredDomain", "atl"
@@ -5051,6 +4943,12 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		   });
 		addAnnotation
 		  (getTmapSimpleOutPatternElement_T2qvtrTemplate(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T2qvtrTypedModel(),
 		   source,
 		   new String[] {
 			   "referredDomain", "qvtr"

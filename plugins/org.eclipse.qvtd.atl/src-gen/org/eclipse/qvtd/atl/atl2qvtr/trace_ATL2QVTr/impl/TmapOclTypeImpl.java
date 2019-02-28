@@ -10,8 +10,6 @@
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl;
 
-import java.math.BigInteger;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -23,7 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression;
-import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIntegerExp;
+import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclType;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
 import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
@@ -31,64 +29,43 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tmap Integer Exp</b></em>'.
+ * An implementation of the model object '<em><b>Tmap Ocl Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapIntegerExpImpl#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapIntegerExpImpl#getT0symbol <em>T0symbol</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclTypeImpl#getDispatcher <em>Dispatcher</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapIntegerExp {
+public class TmapOclTypeImpl extends ImapOclExpressionImpl implements TmapOclType {
 	/**
-	 * The number of structural features of the '<em>Tmap Integer Exp</em>' class.
+	 * The number of structural features of the '<em>Tmap Ocl Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_INTEGER_EXP_FEATURE_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2;
+	public static final int TMAP_OCL_TYPE_FEATURE_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Tmap Integer Exp</em>' class.
+	 * The number of operations of the '<em>Tmap Ocl Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_INTEGER_EXP_OPERATION_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+	public static final int TMAP_OCL_TYPE_OPERATION_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
 
-
-	/**
-	 * The default value of the '{@link #getT0symbol() <em>T0symbol</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getT0symbol()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final BigInteger T0SYMBOL_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getT0symbol() <em>T0symbol</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getT0symbol()
-	 * @generated
-	 * @ordered
-	 */
-	protected BigInteger t0symbol = T0SYMBOL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TmapIntegerExpImpl() {
+	protected TmapOclTypeImpl() {
 		super();
 	}
 
@@ -99,7 +76,7 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return trace_ATL2QVTrPackage.Literals.TMAP_INTEGER_EXP;
+		return trace_ATL2QVTrPackage.Literals.TMAP_OCL_TYPE;
 	}
 
 	/**
@@ -137,35 +114,12 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDispatcher != null)
-				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 4, DmapOclExpression.class, msgs);
+				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, DmapOclExpression.class, msgs);
 			msgs = basicSetDispatcher(newDispatcher, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, newDispatcher, newDispatcher));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public BigInteger getT0symbol() {
-		return t0symbol;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setT0symbol(BigInteger newT0symbol) {
-		BigInteger oldT0symbol = t0symbol;
-		t0symbol = newT0symbol;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT0symbol, t0symbol));
 	}
 
 	/**
@@ -207,7 +161,7 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 4, DmapOclExpression.class, msgs);
+				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, DmapOclExpression.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -222,8 +176,6 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return getT0symbol();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -238,9 +190,6 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapOclExpression)newValue);
-				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT0symbol((BigInteger)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -257,9 +206,6 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapOclExpression)null);
 				return;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT0symbol(T0SYMBOL_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -274,27 +220,9 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return T0SYMBOL_EDEFAULT == null ? t0symbol != null : !T0SYMBOL_EDEFAULT.equals(t0symbol);
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (t0symbol: ");
-		result.append(t0symbol);
-		result.append(')');
-		return result.toString();
-	}
-
-
-} //TmapIntegerExpImpl
+} //TmapOclTypeImpl

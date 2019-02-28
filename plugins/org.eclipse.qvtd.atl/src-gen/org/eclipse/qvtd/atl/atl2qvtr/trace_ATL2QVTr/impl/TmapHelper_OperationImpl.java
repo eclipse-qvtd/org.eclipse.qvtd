@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -37,6 +37,7 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -249,7 +250,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	 */
 	@Override
 	public DmapHelper getDispatcher() {
-		if (eContainerFeatureID() != (ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (ExecutionImpl.EXECUTION_FEATURE_COUNT + 1)) return null;
 		return (DmapHelper)eInternalContainer();
 	}
 
@@ -259,7 +260,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	 * @generated
 	 */
 	public NotificationChain basicSetDispatcher(DmapHelper newDispatcher, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -270,7 +271,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	 */
 	@Override
 	public void setDispatcher(DmapHelper newDispatcher) {
-		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0) && newDispatcher != null)) {
+		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ExecutionImpl.EXECUTION_FEATURE_COUNT + 1) && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -282,7 +283,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, newDispatcher, newDispatcher));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, newDispatcher, newDispatcher));
 	}
 
 	/**
@@ -305,7 +306,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		String oldT0operationName = t0operationName;
 		t0operationName = newT0operationName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 1, oldT0operationName, t0operationName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT0operationName, t0operationName));
 	}
 
 	/**
@@ -320,7 +321,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			t1atlDefinition = (OclFeatureDefinition)eResolveProxy(oldT1atlDefinition);
 			if (t1atlDefinition != oldT1atlDefinition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2, oldT1atlDefinition, t1atlDefinition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlDefinition, t1atlDefinition));
 			}
 		}
 		return t1atlDefinition;
@@ -345,7 +346,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		OclFeatureDefinition oldT1atlDefinition = t1atlDefinition;
 		t1atlDefinition = newT1atlDefinition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2, oldT1atlDefinition, t1atlDefinition));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlDefinition, t1atlDefinition));
 	}
 
 	/**
@@ -360,7 +361,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			t1atlExpression = (OclExpression)eResolveProxy(oldT1atlExpression);
 			if (t1atlExpression != oldT1atlExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3, oldT1atlExpression, t1atlExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1atlExpression, t1atlExpression));
 			}
 		}
 		return t1atlExpression;
@@ -385,7 +386,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		OclExpression oldT1atlExpression = t1atlExpression;
 		t1atlExpression = newT1atlExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3, oldT1atlExpression, t1atlExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1atlExpression, t1atlExpression));
 	}
 
 	/**
@@ -400,7 +401,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			t1atlFeature = (Operation)eResolveProxy(oldT1atlFeature);
 			if (t1atlFeature != oldT1atlFeature) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4, oldT1atlFeature, t1atlFeature));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT1atlFeature, t1atlFeature));
 			}
 		}
 		return t1atlFeature;
@@ -425,7 +426,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		Operation oldT1atlFeature = t1atlFeature;
 		t1atlFeature = newT1atlFeature;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4, oldT1atlFeature, t1atlFeature));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT1atlFeature, t1atlFeature));
 	}
 
 	/**
@@ -440,7 +441,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			t1atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldT1atlModule);
 			if (t1atlModule != oldT1atlModule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5, oldT1atlModule, t1atlModule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT1atlModule, t1atlModule));
 			}
 		}
 		return t1atlModule;
@@ -465,7 +466,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		org.eclipse.m2m.atl.common.ATL.Module oldT1atlModule = t1atlModule;
 		t1atlModule = newT1atlModule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5, oldT1atlModule, t1atlModule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT1atlModule, t1atlModule));
 	}
 
 	/**
@@ -480,7 +481,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			t1atlType = (OclType)eResolveProxy(oldT1atlType);
 			if (t1atlType != oldT1atlType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6, oldT1atlType, t1atlType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT1atlType, t1atlType));
 			}
 		}
 		return t1atlType;
@@ -505,7 +506,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		OclType oldT1atlType = t1atlType;
 		t1atlType = newT1atlType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6, oldT1atlType, t1atlType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT1atlType, t1atlType));
 	}
 
 	/**
@@ -520,7 +521,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			t2qvtrExpression = (OCLExpression)eResolveProxy(oldT2qvtrExpression);
 			if (t2qvtrExpression != oldT2qvtrExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7, oldT2qvtrExpression, t2qvtrExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldT2qvtrExpression, t2qvtrExpression));
 			}
 		}
 		return t2qvtrExpression;
@@ -545,7 +546,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		OCLExpression oldT2qvtrExpression = t2qvtrExpression;
 		t2qvtrExpression = newT2qvtrExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7, oldT2qvtrExpression, t2qvtrExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldT2qvtrExpression, t2qvtrExpression));
 	}
 
 	/**
@@ -560,7 +561,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			t2qvtrTransformation = (RelationalTransformation)eResolveProxy(oldT2qvtrTransformation);
 			if (t2qvtrTransformation != oldT2qvtrTransformation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8, oldT2qvtrTransformation, t2qvtrTransformation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldT2qvtrTransformation, t2qvtrTransformation));
 			}
 		}
 		return t2qvtrTransformation;
@@ -585,7 +586,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		RelationalTransformation oldT2qvtrTransformation = t2qvtrTransformation;
 		t2qvtrTransformation = newT2qvtrTransformation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8, oldT2qvtrTransformation, t2qvtrTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldT2qvtrTransformation, t2qvtrTransformation));
 	}
 
 	/**
@@ -600,7 +601,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			wmapHelper_Context = (TmapHelper_Context)eResolveProxy(oldWmapHelper_Context);
 			if (wmapHelper_Context != oldWmapHelper_Context) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9, oldWmapHelper_Context, wmapHelper_Context));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapHelper_Context, wmapHelper_Context));
 			}
 		}
 		return wmapHelper_Context;
@@ -625,7 +626,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		TmapHelper_Context oldWmapHelper_Context = wmapHelper_Context;
 		wmapHelper_Context = newWmapHelper_Context;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9, oldWmapHelper_Context, wmapHelper_Context));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapHelper_Context, wmapHelper_Context));
 	}
 
 	/**
@@ -640,7 +641,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			wmapModule = (TmapModule)eResolveProxy(oldWmapModule);
 			if (wmapModule != oldWmapModule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10, oldWmapModule, wmapModule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11, oldWmapModule, wmapModule));
 			}
 		}
 		return wmapModule;
@@ -665,7 +666,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		TmapModule oldWmapModule = wmapModule;
 		wmapModule = newWmapModule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10, oldWmapModule, wmapModule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11, oldWmapModule, wmapModule));
 	}
 
 	/**
@@ -680,7 +681,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 			wmapOclExpression = (DmapOclExpression)eResolveProxy(oldWmapOclExpression);
 			if (wmapOclExpression != oldWmapOclExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11, oldWmapOclExpression, wmapOclExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12, oldWmapOclExpression, wmapOclExpression));
 			}
 		}
 		return wmapOclExpression;
@@ -705,7 +706,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11, oldWmapOclExpression, wmapOclExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12, oldWmapOclExpression, wmapOclExpression));
 	}
 
 	/**
@@ -728,7 +729,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 		Boolean oldLocalSuccess = localSuccess;
 		localSuccess = newLocalSuccess;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 12, oldLocalSuccess, localSuccess));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 13, oldLocalSuccess, localSuccess));
 	}
 
 	/**
@@ -739,7 +740,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetDispatcher((DmapHelper)otherEnd, msgs);
@@ -755,7 +756,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return basicSetDispatcher(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -769,7 +770,7 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 3, DmapHelper.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -783,41 +784,41 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return getT0operationName();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT1atlDefinition();
 				return basicGetT1atlDefinition();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getT1atlExpression();
 				return basicGetT1atlExpression();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				if (resolve) return getT1atlFeature();
 				return basicGetT1atlFeature();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				if (resolve) return getT1atlModule();
 				return basicGetT1atlModule();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				if (resolve) return getT1atlType();
 				return basicGetT1atlType();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				if (resolve) return getT2qvtrExpression();
 				return basicGetT2qvtrExpression();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				if (resolve) return getT2qvtrTransformation();
 				return basicGetT2qvtrTransformation();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				if (resolve) return getWmapHelper_Context();
 				return basicGetWmapHelper_Context();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				if (resolve) return getWmapModule();
 				return basicGetWmapModule();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				if (resolve) return getWmapOclExpression();
 				return basicGetWmapOclExpression();
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 12:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 13:
 				return getLocalSuccess();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -831,43 +832,43 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapHelper)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT0operationName((String)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlDefinition((OclFeatureDefinition)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT1atlExpression((OclExpression)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT1atlFeature((Operation)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setT1atlModule((org.eclipse.m2m.atl.common.ATL.Module)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setT1atlType((OclType)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setT2qvtrExpression((OCLExpression)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				setT2qvtrTransformation((RelationalTransformation)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				setWmapHelper_Context((TmapHelper_Context)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				setWmapModule((TmapModule)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				setWmapOclExpression((DmapOclExpression)newValue);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 12:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 13:
 				setLocalSuccess((Boolean)newValue);
 				return;
 		}
@@ -882,43 +883,43 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setDispatcher((DmapHelper)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT0operationName(T0OPERATION_NAME_EDEFAULT);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlDefinition((OclFeatureDefinition)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT1atlExpression((OclExpression)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT1atlFeature((Operation)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setT1atlModule((org.eclipse.m2m.atl.common.ATL.Module)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setT1atlType((OclType)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setT2qvtrExpression((OCLExpression)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				setT2qvtrTransformation((RelationalTransformation)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				setWmapHelper_Context((TmapHelper_Context)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				setWmapModule((TmapModule)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				setWmapOclExpression((DmapOclExpression)null);
 				return;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 12:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 13:
 				setLocalSuccess(LOCAL_SUCCESS_EDEFAULT);
 				return;
 		}
@@ -933,31 +934,31 @@ public class TmapHelper_OperationImpl extends ImapHelperImpl implements TmapHelp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return T0OPERATION_NAME_EDEFAULT == null ? t0operationName != null : !T0OPERATION_NAME_EDEFAULT.equals(t0operationName);
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t1atlDefinition != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return t1atlExpression != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				return t1atlFeature != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				return t1atlModule != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				return t1atlType != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				return t2qvtrExpression != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				return t2qvtrTransformation != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				return wmapHelper_Context != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				return wmapModule != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				return wmapOclExpression != null;
-			case ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 12:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 13:
 				return LOCAL_SUCCESS_EDEFAULT == null ? localSuccess != null : !LOCAL_SUCCESS_EDEFAULT.equals(localSuccess);
 		}
 		return super.eIsSet(featureID);

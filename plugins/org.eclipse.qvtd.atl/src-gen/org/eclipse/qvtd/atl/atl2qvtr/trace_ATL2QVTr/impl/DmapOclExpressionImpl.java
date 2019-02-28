@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -29,6 +29,7 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIntegerExp;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNavigationOrAttributeCallExp_Helper;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNavigationOrAttributeCallExp_Property;
+import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclType;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Helper;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Operation;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp;
@@ -37,6 +38,7 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
 import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,6 +55,7 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapIntegerExp <em>Domap Integer Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapNavigationOrAttributeCallExp_Helper <em>Domap Navigation Or Attribute Call Exp Helper</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapNavigationOrAttributeCallExp_Property <em>Domap Navigation Or Attribute Call Exp Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapOclType <em>Domap Ocl Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapOperationCallExp_Helper <em>Domap Operation Call Exp Helper</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapOperationCallExp_Operation <em>Domap Operation Call Exp Operation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapOperatorCallExp <em>Domap Operator Call Exp</em>}</li>
@@ -71,7 +74,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DMAP_OCL_EXPRESSION_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 13;
+	public static final int DMAP_OCL_EXPRESSION_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of operations of the '<em>Dmap Ocl Expression</em>' class.
@@ -152,6 +155,16 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * @ordered
 	 */
 	protected TmapNavigationOrAttributeCallExp_Property domapNavigationOrAttributeCallExp_Property;
+
+	/**
+	 * The cached value of the '{@link #getDomapOclType() <em>Domap Ocl Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomapOclType()
+	 * @generated
+	 * @ordered
+	 */
+	protected TmapOclType domapOclType;
 
 	/**
 	 * The cached value of the '{@link #getDomapOperationCallExp_Helper() <em>Domap Operation Call Exp Helper</em>}' containment reference.
@@ -347,9 +360,9 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapBooleanExp != domapBooleanExp) {
 			NotificationChain msgs = null;
 			if (domapBooleanExp != null)
-				msgs = ((InternalEObject)domapBooleanExp).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapBooleanExp.class, msgs);
+				msgs = ((InternalEObject)domapBooleanExp).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapBooleanExp.class, msgs);
 			if (newDomapBooleanExp != null)
-				msgs = ((InternalEObject)newDomapBooleanExp).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapBooleanExp.class, msgs);
+				msgs = ((InternalEObject)newDomapBooleanExp).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapBooleanExp.class, msgs);
 			msgs = basicSetDomapBooleanExp(newDomapBooleanExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -392,9 +405,9 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapIfExp != domapIfExp) {
 			NotificationChain msgs = null;
 			if (domapIfExp != null)
-				msgs = ((InternalEObject)domapIfExp).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapIfExp.class, msgs);
+				msgs = ((InternalEObject)domapIfExp).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapIfExp.class, msgs);
 			if (newDomapIfExp != null)
-				msgs = ((InternalEObject)newDomapIfExp).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapIfExp.class, msgs);
+				msgs = ((InternalEObject)newDomapIfExp).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapIfExp.class, msgs);
 			msgs = basicSetDomapIfExp(newDomapIfExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -437,9 +450,9 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapIntegerExp != domapIntegerExp) {
 			NotificationChain msgs = null;
 			if (domapIntegerExp != null)
-				msgs = ((InternalEObject)domapIntegerExp).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapIntegerExp.class, msgs);
+				msgs = ((InternalEObject)domapIntegerExp).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapIntegerExp.class, msgs);
 			if (newDomapIntegerExp != null)
-				msgs = ((InternalEObject)newDomapIntegerExp).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapIntegerExp.class, msgs);
+				msgs = ((InternalEObject)newDomapIntegerExp).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapIntegerExp.class, msgs);
 			msgs = basicSetDomapIntegerExp(newDomapIntegerExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -482,9 +495,9 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapNavigationOrAttributeCallExp_Helper != domapNavigationOrAttributeCallExp_Helper) {
 			NotificationChain msgs = null;
 			if (domapNavigationOrAttributeCallExp_Helper != null)
-				msgs = ((InternalEObject)domapNavigationOrAttributeCallExp_Helper).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapNavigationOrAttributeCallExp_Helper.class, msgs);
+				msgs = ((InternalEObject)domapNavigationOrAttributeCallExp_Helper).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapNavigationOrAttributeCallExp_Helper.class, msgs);
 			if (newDomapNavigationOrAttributeCallExp_Helper != null)
-				msgs = ((InternalEObject)newDomapNavigationOrAttributeCallExp_Helper).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapNavigationOrAttributeCallExp_Helper.class, msgs);
+				msgs = ((InternalEObject)newDomapNavigationOrAttributeCallExp_Helper).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapNavigationOrAttributeCallExp_Helper.class, msgs);
 			msgs = basicSetDomapNavigationOrAttributeCallExp_Helper(newDomapNavigationOrAttributeCallExp_Helper, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -527,14 +540,59 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapNavigationOrAttributeCallExp_Property != domapNavigationOrAttributeCallExp_Property) {
 			NotificationChain msgs = null;
 			if (domapNavigationOrAttributeCallExp_Property != null)
-				msgs = ((InternalEObject)domapNavigationOrAttributeCallExp_Property).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapNavigationOrAttributeCallExp_Property.class, msgs);
+				msgs = ((InternalEObject)domapNavigationOrAttributeCallExp_Property).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapNavigationOrAttributeCallExp_Property.class, msgs);
 			if (newDomapNavigationOrAttributeCallExp_Property != null)
-				msgs = ((InternalEObject)newDomapNavigationOrAttributeCallExp_Property).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapNavigationOrAttributeCallExp_Property.class, msgs);
+				msgs = ((InternalEObject)newDomapNavigationOrAttributeCallExp_Property).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapNavigationOrAttributeCallExp_Property.class, msgs);
 			msgs = basicSetDomapNavigationOrAttributeCallExp_Property(newDomapNavigationOrAttributeCallExp_Property, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 6, newDomapNavigationOrAttributeCallExp_Property, newDomapNavigationOrAttributeCallExp_Property));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TmapOclType getDomapOclType() {
+		return domapOclType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDomapOclType(TmapOclType newDomapOclType, NotificationChain msgs) {
+		TmapOclType oldDomapOclType = domapOclType;
+		domapOclType = newDomapOclType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, oldDomapOclType, newDomapOclType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDomapOclType(TmapOclType newDomapOclType) {
+		if (newDomapOclType != domapOclType) {
+			NotificationChain msgs = null;
+			if (domapOclType != null)
+				msgs = ((InternalEObject)domapOclType).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapOclType.class, msgs);
+			if (newDomapOclType != null)
+				msgs = ((InternalEObject)newDomapOclType).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapOclType.class, msgs);
+			msgs = basicSetDomapOclType(newDomapOclType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, newDomapOclType, newDomapOclType));
 	}
 
 	/**
@@ -556,7 +614,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		TmapOperationCallExp_Helper oldDomapOperationCallExp_Helper = domapOperationCallExp_Helper;
 		domapOperationCallExp_Helper = newDomapOperationCallExp_Helper;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, oldDomapOperationCallExp_Helper, newDomapOperationCallExp_Helper);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 8, oldDomapOperationCallExp_Helper, newDomapOperationCallExp_Helper);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -572,14 +630,14 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapOperationCallExp_Helper != domapOperationCallExp_Helper) {
 			NotificationChain msgs = null;
 			if (domapOperationCallExp_Helper != null)
-				msgs = ((InternalEObject)domapOperationCallExp_Helper).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapOperationCallExp_Helper.class, msgs);
+				msgs = ((InternalEObject)domapOperationCallExp_Helper).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapOperationCallExp_Helper.class, msgs);
 			if (newDomapOperationCallExp_Helper != null)
-				msgs = ((InternalEObject)newDomapOperationCallExp_Helper).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapOperationCallExp_Helper.class, msgs);
+				msgs = ((InternalEObject)newDomapOperationCallExp_Helper).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapOperationCallExp_Helper.class, msgs);
 			msgs = basicSetDomapOperationCallExp_Helper(newDomapOperationCallExp_Helper, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, newDomapOperationCallExp_Helper, newDomapOperationCallExp_Helper));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 8, newDomapOperationCallExp_Helper, newDomapOperationCallExp_Helper));
 	}
 
 	/**
@@ -601,7 +659,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		TmapOperationCallExp_Operation oldDomapOperationCallExp_Operation = domapOperationCallExp_Operation;
 		domapOperationCallExp_Operation = newDomapOperationCallExp_Operation;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 8, oldDomapOperationCallExp_Operation, newDomapOperationCallExp_Operation);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 9, oldDomapOperationCallExp_Operation, newDomapOperationCallExp_Operation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -617,14 +675,14 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapOperationCallExp_Operation != domapOperationCallExp_Operation) {
 			NotificationChain msgs = null;
 			if (domapOperationCallExp_Operation != null)
-				msgs = ((InternalEObject)domapOperationCallExp_Operation).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapOperationCallExp_Operation.class, msgs);
+				msgs = ((InternalEObject)domapOperationCallExp_Operation).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapOperationCallExp_Operation.class, msgs);
 			if (newDomapOperationCallExp_Operation != null)
-				msgs = ((InternalEObject)newDomapOperationCallExp_Operation).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapOperationCallExp_Operation.class, msgs);
+				msgs = ((InternalEObject)newDomapOperationCallExp_Operation).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapOperationCallExp_Operation.class, msgs);
 			msgs = basicSetDomapOperationCallExp_Operation(newDomapOperationCallExp_Operation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 8, newDomapOperationCallExp_Operation, newDomapOperationCallExp_Operation));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 9, newDomapOperationCallExp_Operation, newDomapOperationCallExp_Operation));
 	}
 
 	/**
@@ -646,7 +704,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		TmapOperatorCallExp oldDomapOperatorCallExp = domapOperatorCallExp;
 		domapOperatorCallExp = newDomapOperatorCallExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 9, oldDomapOperatorCallExp, newDomapOperatorCallExp);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 10, oldDomapOperatorCallExp, newDomapOperatorCallExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -662,14 +720,14 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapOperatorCallExp != domapOperatorCallExp) {
 			NotificationChain msgs = null;
 			if (domapOperatorCallExp != null)
-				msgs = ((InternalEObject)domapOperatorCallExp).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapOperatorCallExp.class, msgs);
+				msgs = ((InternalEObject)domapOperatorCallExp).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapOperatorCallExp.class, msgs);
 			if (newDomapOperatorCallExp != null)
-				msgs = ((InternalEObject)newDomapOperatorCallExp).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapOperatorCallExp.class, msgs);
+				msgs = ((InternalEObject)newDomapOperatorCallExp).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapOperatorCallExp.class, msgs);
 			msgs = basicSetDomapOperatorCallExp(newDomapOperatorCallExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 9, newDomapOperatorCallExp, newDomapOperatorCallExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 10, newDomapOperatorCallExp, newDomapOperatorCallExp));
 	}
 
 	/**
@@ -691,7 +749,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		TmapStringExp oldDomapStringExp = domapStringExp;
 		domapStringExp = newDomapStringExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 10, oldDomapStringExp, newDomapStringExp);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 11, oldDomapStringExp, newDomapStringExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -707,14 +765,14 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapStringExp != domapStringExp) {
 			NotificationChain msgs = null;
 			if (domapStringExp != null)
-				msgs = ((InternalEObject)domapStringExp).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapStringExp.class, msgs);
+				msgs = ((InternalEObject)domapStringExp).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapStringExp.class, msgs);
 			if (newDomapStringExp != null)
-				msgs = ((InternalEObject)newDomapStringExp).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapStringExp.class, msgs);
+				msgs = ((InternalEObject)newDomapStringExp).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapStringExp.class, msgs);
 			msgs = basicSetDomapStringExp(newDomapStringExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 10, newDomapStringExp, newDomapStringExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 11, newDomapStringExp, newDomapStringExp));
 	}
 
 	/**
@@ -736,7 +794,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		TmapVariableExp oldDomapVariableExp = domapVariableExp;
 		domapVariableExp = newDomapVariableExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 11, oldDomapVariableExp, newDomapVariableExp);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 12, oldDomapVariableExp, newDomapVariableExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -752,14 +810,14 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		if (newDomapVariableExp != domapVariableExp) {
 			NotificationChain msgs = null;
 			if (domapVariableExp != null)
-				msgs = ((InternalEObject)domapVariableExp).eInverseRemove(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapVariableExp.class, msgs);
+				msgs = ((InternalEObject)domapVariableExp).eInverseRemove(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapVariableExp.class, msgs);
 			if (newDomapVariableExp != null)
-				msgs = ((InternalEObject)newDomapVariableExp).eInverseAdd(this, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, TmapVariableExp.class, msgs);
+				msgs = ((InternalEObject)newDomapVariableExp).eInverseAdd(this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, TmapVariableExp.class, msgs);
 			msgs = basicSetDomapVariableExp(newDomapVariableExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 11, newDomapVariableExp, newDomapVariableExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 12, newDomapVariableExp, newDomapVariableExp));
 	}
 
 	/**
@@ -774,7 +832,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 			result = (ImapOclExpression)eResolveProxy(oldResult);
 			if (result != oldResult) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 12, oldResult, result));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 13, oldResult, result));
 			}
 		}
 		return result;
@@ -799,7 +857,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 		ImapOclExpression oldResult = result;
 		result = newResult;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 12, oldResult, result));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 13, oldResult, result));
 	}
 
 	/**
@@ -831,24 +889,28 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 					msgs = ((InternalEObject)domapNavigationOrAttributeCallExp_Property).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 6), null, msgs);
 				return basicSetDomapNavigationOrAttributeCallExp_Property((TmapNavigationOrAttributeCallExp_Property)otherEnd, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 7:
-				if (domapOperationCallExp_Helper != null)
-					msgs = ((InternalEObject)domapOperationCallExp_Helper).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 7), null, msgs);
-				return basicSetDomapOperationCallExp_Helper((TmapOperationCallExp_Helper)otherEnd, msgs);
+				if (domapOclType != null)
+					msgs = ((InternalEObject)domapOclType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 7), null, msgs);
+				return basicSetDomapOclType((TmapOclType)otherEnd, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 8:
-				if (domapOperationCallExp_Operation != null)
-					msgs = ((InternalEObject)domapOperationCallExp_Operation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 8), null, msgs);
-				return basicSetDomapOperationCallExp_Operation((TmapOperationCallExp_Operation)otherEnd, msgs);
+				if (domapOperationCallExp_Helper != null)
+					msgs = ((InternalEObject)domapOperationCallExp_Helper).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 8), null, msgs);
+				return basicSetDomapOperationCallExp_Helper((TmapOperationCallExp_Helper)otherEnd, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 9:
-				if (domapOperatorCallExp != null)
-					msgs = ((InternalEObject)domapOperatorCallExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 9), null, msgs);
-				return basicSetDomapOperatorCallExp((TmapOperatorCallExp)otherEnd, msgs);
+				if (domapOperationCallExp_Operation != null)
+					msgs = ((InternalEObject)domapOperationCallExp_Operation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 9), null, msgs);
+				return basicSetDomapOperationCallExp_Operation((TmapOperationCallExp_Operation)otherEnd, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 10:
-				if (domapStringExp != null)
-					msgs = ((InternalEObject)domapStringExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 10), null, msgs);
-				return basicSetDomapStringExp((TmapStringExp)otherEnd, msgs);
+				if (domapOperatorCallExp != null)
+					msgs = ((InternalEObject)domapOperatorCallExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 10), null, msgs);
+				return basicSetDomapOperatorCallExp((TmapOperatorCallExp)otherEnd, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 11:
+				if (domapStringExp != null)
+					msgs = ((InternalEObject)domapStringExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 11), null, msgs);
+				return basicSetDomapStringExp((TmapStringExp)otherEnd, msgs);
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 12:
 				if (domapVariableExp != null)
-					msgs = ((InternalEObject)domapVariableExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 11), null, msgs);
+					msgs = ((InternalEObject)domapVariableExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 12), null, msgs);
 				return basicSetDomapVariableExp((TmapVariableExp)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -873,14 +935,16 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 6:
 				return basicSetDomapNavigationOrAttributeCallExp_Property(null, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 7:
-				return basicSetDomapOperationCallExp_Helper(null, msgs);
+				return basicSetDomapOclType(null, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 8:
-				return basicSetDomapOperationCallExp_Operation(null, msgs);
+				return basicSetDomapOperationCallExp_Helper(null, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 9:
-				return basicSetDomapOperatorCallExp(null, msgs);
+				return basicSetDomapOperationCallExp_Operation(null, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 10:
-				return basicSetDomapStringExp(null, msgs);
+				return basicSetDomapOperatorCallExp(null, msgs);
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 11:
+				return basicSetDomapStringExp(null, msgs);
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 12:
 				return basicSetDomapVariableExp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -911,16 +975,18 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 6:
 				return getDomapNavigationOrAttributeCallExp_Property();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 7:
-				return getDomapOperationCallExp_Helper();
+				return getDomapOclType();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 8:
-				return getDomapOperationCallExp_Operation();
+				return getDomapOperationCallExp_Helper();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 9:
-				return getDomapOperatorCallExp();
+				return getDomapOperationCallExp_Operation();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 10:
-				return getDomapStringExp();
+				return getDomapOperatorCallExp();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 11:
-				return getDomapVariableExp();
+				return getDomapStringExp();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 12:
+				return getDomapVariableExp();
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 13:
 				if (resolve) return getResult();
 				return basicGetResult();
 		}
@@ -957,21 +1023,24 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 				setDomapNavigationOrAttributeCallExp_Property((TmapNavigationOrAttributeCallExp_Property)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 7:
-				setDomapOperationCallExp_Helper((TmapOperationCallExp_Helper)newValue);
+				setDomapOclType((TmapOclType)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 8:
-				setDomapOperationCallExp_Operation((TmapOperationCallExp_Operation)newValue);
+				setDomapOperationCallExp_Helper((TmapOperationCallExp_Helper)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 9:
-				setDomapOperatorCallExp((TmapOperatorCallExp)newValue);
+				setDomapOperationCallExp_Operation((TmapOperationCallExp_Operation)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 10:
-				setDomapStringExp((TmapStringExp)newValue);
+				setDomapOperatorCallExp((TmapOperatorCallExp)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 11:
-				setDomapVariableExp((TmapVariableExp)newValue);
+				setDomapStringExp((TmapStringExp)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 12:
+				setDomapVariableExp((TmapVariableExp)newValue);
+				return;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 13:
 				setResult((ImapOclExpression)newValue);
 				return;
 		}
@@ -1008,21 +1077,24 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 				setDomapNavigationOrAttributeCallExp_Property((TmapNavigationOrAttributeCallExp_Property)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 7:
-				setDomapOperationCallExp_Helper((TmapOperationCallExp_Helper)null);
+				setDomapOclType((TmapOclType)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 8:
-				setDomapOperationCallExp_Operation((TmapOperationCallExp_Operation)null);
+				setDomapOperationCallExp_Helper((TmapOperationCallExp_Helper)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 9:
-				setDomapOperatorCallExp((TmapOperatorCallExp)null);
+				setDomapOperationCallExp_Operation((TmapOperationCallExp_Operation)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 10:
-				setDomapStringExp((TmapStringExp)null);
+				setDomapOperatorCallExp((TmapOperatorCallExp)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 11:
-				setDomapVariableExp((TmapVariableExp)null);
+				setDomapStringExp((TmapStringExp)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 12:
+				setDomapVariableExp((TmapVariableExp)null);
+				return;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 13:
 				setResult((ImapOclExpression)null);
 				return;
 		}
@@ -1052,16 +1124,18 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 6:
 				return domapNavigationOrAttributeCallExp_Property != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 7:
-				return domapOperationCallExp_Helper != null;
+				return domapOclType != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 8:
-				return domapOperationCallExp_Operation != null;
+				return domapOperationCallExp_Helper != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 9:
-				return domapOperatorCallExp != null;
+				return domapOperationCallExp_Operation != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 10:
-				return domapStringExp != null;
+				return domapOperatorCallExp != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 11:
-				return domapVariableExp != null;
+				return domapStringExp != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 12:
+				return domapVariableExp != null;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 13:
 				return result != null;
 		}
 		return super.eIsSet(featureID);
