@@ -68,7 +68,7 @@ public interface ScheduleManager
 	@NonNull AbstractTransformationAnalysis addTransformation(@NonNull Transformation asTransformation);
 	void analyzeCompletePackage(@NonNull TypedModel typedModel, @NonNull CompletePackage completePackage);
 	@NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp);
-	@NonNull LegacyContentsAnalysis analyzeOriginalContents();
+	@NonNull OriginalContentsAnalysis analyzeOriginalContents();
 
 	/**
 	 * Perform the pre-analysis that relies solely on traversal of the QVTr source model.
@@ -117,7 +117,7 @@ public interface ScheduleManager
 	/**
 	 * Return the analysis of the pre-partitioned regions consumptions and productions.
 	 */
-	@NonNull LegacyContentsAnalysis getOriginalContentsAnalysis();
+	@NonNull OriginalContentsAnalysis getOriginalContentsAnalysis();
 
 	@NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property);
 	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge edge);

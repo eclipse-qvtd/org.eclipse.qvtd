@@ -210,7 +210,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	/**
 	 * The producing/consuming characteristics of each original (unpartitioned) region.
 	 */
-	private @Nullable LegacyContentsAnalysis originalContentsAnalysis = null;
+	private @Nullable OriginalContentsAnalysis originalContentsAnalysis = null;
 
 	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
@@ -289,7 +289,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	private void analyzeCallTree() {
-		LegacyContentsAnalysis originalContentsAnalysis = getOriginalContentsAnalysis();
+		OriginalContentsAnalysis originalContentsAnalysis = getOriginalContentsAnalysis();
 		Map<@NonNull Rule, @NonNull List<@NonNull Rule>> consumer2producers = new HashMap<>();
 		List<@NonNull ClassDatum> middleClassDatums = new ArrayList<>();
 		StringBuilder s = QVTm2QVTs.CALL_TREE.isActive() ? new StringBuilder() : null;
@@ -355,8 +355,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull LegacyContentsAnalysis analyzeOriginalContents() {
-		LegacyContentsAnalysis contentsAnalysis = new LegacyContentsAnalysis(this);
+	public @NonNull OriginalContentsAnalysis analyzeOriginalContents() {
+		OriginalContentsAnalysis contentsAnalysis = new OriginalContentsAnalysis(this);
 		List<@NonNull MappingRegion> mappingRegions = Lists.newArrayList(QVTscheduleUtil.getOwnedMappingRegions(getScheduleModel()));
 		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
 		for (@NonNull MappingRegion mappingRegion : mappingRegions) {		// FIXME Should treat LoadingRegion uniformly
@@ -804,7 +804,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull LegacyContentsAnalysis getOriginalContentsAnalysis() {
+	public @NonNull OriginalContentsAnalysis getOriginalContentsAnalysis() {
 		return ClassUtil.nonNullState(originalContentsAnalysis);
 	}
 

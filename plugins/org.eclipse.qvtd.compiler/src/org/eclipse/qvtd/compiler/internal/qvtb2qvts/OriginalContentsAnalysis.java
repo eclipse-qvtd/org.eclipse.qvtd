@@ -18,36 +18,39 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
+import com.google.common.collect.Iterables;
+
 /**
- * A ContentsAnalysis provides an analysis of many (all) regions to facilitate lookup of all producers consumers of particular types and properties.
+ * An OriginalContentsAnalysis provides an original, prior to partitioning, analysis of many (all) regions to facilitate lookup of all producers consumers of particular types and properties.
+ *
+ * The analysis is not updated by subsequent partitioning.
  */
-public class ContentsAnalysis<R extends Region>
+public class OriginalContentsAnalysis
 {
 	protected final @NonNull ScheduleManager scheduleManager;
+	private final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
 	/**
 	 * The Speculation or Realized Nodes that produce each ClassDatum.
 	 */
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Node>> classDatum2newNodes = new HashMap<>();
-
-	/**
-	 * The Regions that produce each ClassDatum.
-	 */
-	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull R>> classDatum2producingRegions = new HashMap<>();
 
 	/**
 	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
@@ -56,24 +59,32 @@ public class ContentsAnalysis<R extends Region>
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Node>> classDatum2oldNodes = new HashMap<>();
 
 	/**
-	 * The Regions that consume each ClassDatum.
-	 */
-	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull R>> classDatum2consumingRegions = new HashMap<>();
-
-	/**
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
 	 */
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> propertyDatum2newEdges = new HashMap<>();
 
-	public ContentsAnalysis(@NonNull ScheduleManager scheduleManager) {
+	/**
+	 * The regions that consume each ClassDatum.
+	 */
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull RuleRegion>> classDatum2consumingRegions = new HashMap<>();
+
+	/**
+	 * The regions that produce each ClassDatum.
+	 */
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull RuleRegion>> classDatum2producingRegions = new HashMap<>();
+
+	public OriginalContentsAnalysis(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
+		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager.getTransformationAnalyses();
+		assert Iterables.size(transformationAnalyses) == 1;
+		this.transformationAnalysis = transformationAnalyses.iterator().next();
 	}
 
-	private void addNewEdge(@NonNull R region, @NonNull NavigableEdge newEdge) {
+	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge) {
 		PropertyDatum propertyDatum = getPropertyDatum(newEdge);
 		addNewEdge(region,newEdge, propertyDatum);
 	}
-	private void addNewEdge(@NonNull R region, @NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {
+	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {
 		List<@NonNull NavigableEdge> edges = propertyDatum2newEdges.get(propertyDatum);
 		if (edges == null) {
 			edges = new ArrayList<>();
@@ -87,7 +98,7 @@ public class ContentsAnalysis<R extends Region>
 		}
 	}
 
-	private void addNewNode(@NonNull R region, @NonNull Node newNode) {
+	private void addNewNode(@NonNull RuleRegion region, @NonNull Node newNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(newNode);
 		ClassDatum elementalClassDatum = scheduleManager.getElementalClassDatum(classDatum);
 		for (@NonNull ClassDatum superClassDatum : scheduleManager.getSuperClassDatums(elementalClassDatum)) {
@@ -96,19 +107,11 @@ public class ContentsAnalysis<R extends Region>
 				nodes = new ArrayList<>();
 				classDatum2newNodes.put(superClassDatum, nodes);
 			}
-			List<@NonNull R> regions = classDatum2producingRegions.get(superClassDatum);
-			if (regions == null) {
-				regions = new ArrayList<>();
-				classDatum2producingRegions.put(superClassDatum, regions);
-			}
 			nodes.add(newNode);
-			if (!regions.contains(region)) {
-				regions.add(region);
-			}
 		}
 	}
 
-	private void addOldNode(@NonNull R region, @NonNull Node oldNode) {
+	private void addOldNode(@NonNull RuleRegion region, @NonNull Node oldNode) {
 		//		assert !"EObject".equals(headNode.getCompleteClass().getName());
 		//		Region region = oldNode.getRegion();
 		//		Region invokingRegion = region.getInvokingRegion();
@@ -120,20 +123,13 @@ public class ContentsAnalysis<R extends Region>
 			nodes = new ArrayList<>();
 			classDatum2oldNodes.put(classDatum, nodes);
 		}
-		List<@NonNull R> regions = classDatum2consumingRegions.get(classDatum);
-		if (regions == null) {
-			regions = new ArrayList<>();
-			classDatum2consumingRegions.put(classDatum, regions);
-		}
 		if (!nodes.contains(oldNode)) {
 			nodes.add(oldNode);
 		}
-		if (!regions.contains(region)) {
-			regions.add(region);
-		}
 	}
 
-	public void addRegion(@NonNull R region) {
+	public void addRegion(@NonNull RuleRegion region) {
+		// FIXME Eliminate duplication wrt the use of TraceClassAnalysis to determine regions.
 		for (@NonNull Node oldNode : region.getOldNodes()) {
 			if (!oldNode.isDependency() && !oldNode.isConstant()) {
 				if (oldNode.isHead()) {
@@ -235,9 +231,35 @@ public class ContentsAnalysis<R extends Region>
 		return realizedEdges;
 	}
 
-	public @NonNull Iterable<@NonNull R> getConsumingRegions(@NonNull ClassDatum classDatum) {
-		List<@NonNull R> consumingRegions = classDatum2consumingRegions.get(classDatum);
-		return consumingRegions != null ? consumingRegions : Collections.emptyList();
+	public @NonNull Iterable<@NonNull RuleRegion> getConsumingRegions(@NonNull ClassDatum classDatum) {
+		Set<@NonNull RuleRegion> consumingRegions = classDatum2consumingRegions.get(classDatum);
+		if (consumingRegions == null) {
+			TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+			consumingRegions = new HashSet<>();
+			if (traceClassAnalysis != null) {
+				for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+					for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getConsumers()) {
+						consumingRegions.add((RuleRegion) regionAnalysis.getRegion());
+					}
+				}
+			}
+			classDatum2consumingRegions.put(classDatum, consumingRegions);
+		}
+		return consumingRegions;
+	}
+
+	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatum classDatum) {
+		Iterable<@NonNull Node> newNodes = classDatum2newNodes.get(classDatum);
+		/*	TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+		Set<@NonNull RuleRegion> producingRegions = new HashSet<>();
+		if (traceClassAnalysis != null) {
+			for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+				for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getProducers()) {
+					producingRegions.add((RuleRegion) regionAnalysis.getRegion());
+				}
+			}
+		} */
+		return newNodes;
 	}
 
 	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
@@ -274,17 +296,25 @@ public class ContentsAnalysis<R extends Region>
 		return conformantRealizedEdges;
 	}
 
-	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatum classDatum) {
-		return classDatum2newNodes.get(classDatum);
-	}
-
 	public @Nullable Iterable<@NonNull Node> getOldNodes(@NonNull ClassDatum classDatum) {
 		return classDatum2oldNodes.get(classDatum);
 	}
 
-	public @NonNull Iterable<@NonNull R> getProducingRegions(@NonNull ClassDatum classDatum) {
-		List<@NonNull R> producingRegions = classDatum2producingRegions.get(classDatum);
-		return producingRegions != null ? producingRegions : Collections.emptyList();
+	public @NonNull Iterable<@NonNull RuleRegion> getProducingRegions(@NonNull ClassDatum classDatum) {
+		Set<@NonNull RuleRegion> producingRegions = classDatum2producingRegions.get(classDatum);
+		if (producingRegions == null) {
+			TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+			producingRegions = new HashSet<>();
+			if (traceClassAnalysis != null) {
+				for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+					for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getProducers()) {
+						producingRegions.add((RuleRegion) regionAnalysis.getRegion());
+					}
+				}
+			}
+			classDatum2producingRegions.put(classDatum, producingRegions);
+		}
+		return producingRegions;
 	}
 
 	private @NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge producedEdge) {
@@ -310,7 +340,7 @@ public class ContentsAnalysis<R extends Region>
 		return isCast;
 	}
 
-	private void removeNewEdge(@NonNull NavigableEdge newEdge) {
+	/*	private void removeNewEdge(@NonNull NavigableEdge newEdge) {
 		PropertyDatum propertyDatum = getPropertyDatum(newEdge);
 		removeNewEdge(newEdge, propertyDatum);
 	}
@@ -323,23 +353,23 @@ public class ContentsAnalysis<R extends Region>
 				}
 			}
 		}
-	}
+	} */
 
-	private void removeNewNode(@NonNull Node newNode) {
+	/*	private void removeNewNode(@NonNull Node newNode) {
 		List<@NonNull Node> nodes = classDatum2newNodes.get(newNode.getClassDatum());
 		if (nodes != null) {
 			nodes.remove(newNode);
 		}
-	}
+	} */
 
-	private void removeOldNode(@NonNull Node oldNode) {
+	/*	private void removeOldNode(@NonNull Node oldNode) {
 		List<@NonNull Node> nodes = classDatum2oldNodes.get(oldNode.getClassDatum());
 		if (nodes != null) {
 			nodes.remove(oldNode);
 		}
-	}
+	} */
 
-	public void removeRegion(@NonNull R region) {
+	/*	public void removeRegion(@NonNull RuleRegion region) {
 		for (@NonNull Node oldNode : region.getOldNodes()) {
 			removeOldNode(oldNode);
 		}
@@ -349,5 +379,5 @@ public class ContentsAnalysis<R extends Region>
 		for (@NonNull NavigableEdge newEdge : region.getRealizedNavigationEdges()) {
 			removeNewEdge(newEdge);
 		}
-	}
+	} */
 }

@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LegacyContentsAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OriginalContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
@@ -81,7 +81,7 @@ public class ConnectionManager
 	/**
 	 * Analysis of the contents of the partitioned mappings, null prior to partitioning.
 	 */
-	private final @NonNull LegacyContentsAnalysis originalContentsAnalysis;
+	private final @NonNull OriginalContentsAnalysis originalContentsAnalysis;
 
 	/**
 	 * Ordered list of regions that call this region
