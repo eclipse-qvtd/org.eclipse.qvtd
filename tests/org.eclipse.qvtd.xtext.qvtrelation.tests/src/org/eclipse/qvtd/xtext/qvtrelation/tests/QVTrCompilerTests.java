@@ -51,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -66,6 +67,8 @@ import com.google.common.collect.Lists;
  */
 public class QVTrCompilerTests extends LoadTestCase
 {
+	public static final boolean ENABLE_ATL2QVTr_CG_exec = false;	// Set true to debug; may fail if _QVTd_QVTrCompilerTests__testQVTrCompiler_ATL2QVTr_CG isn't a good polugin project.
+	public static final boolean ENABLE_ATL2QVTr_reverse_CG = false;	// Set true to debug; test does not pass yet - wip
 	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
 
 	protected class MyQVT extends AbstractTestQVT
@@ -280,15 +283,15 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
 			myQVT2.createGeneratedExecutor(txClass1);
-			//	if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			EMFTCSInjector.class.getName();				// Hidden ATL dependency
-			AtlParser.class.getName();					// Hidden ATL dependency
-			myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-			myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl"));
-			//	}
-			//	else {
-			//		myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
-			//	}
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				EMFTCSInjector.class.getName();				// Hidden ATL dependency
+				AtlParser.class.getName();					// Hidden ATL dependency
+				myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl"));
+			}
+			else {
+				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
+			}
 			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("qvtr", txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), QVTrNormalizer.INSTANCE);	// FIXME normalization unnecessary once Relation domains ordered by tx
@@ -336,8 +339,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	/*	@Test
+	@Test
 	public void testQVTrCompiler_ATL2QVTr_reverse_CG() throws Exception {
+		if (!ENABLE_ATL2QVTr_reverse_CG) {
+			return;
+		}
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
@@ -456,11 +462,14 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT4.dispose();
-		} * /
-} */
+		} */
+	}
 
-	/*	@Test
+	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG_exec() throws Exception {
+		if (!ENABLE_ATL2QVTr_CG_exec) {
+			return;
+		}
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
@@ -484,7 +493,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
-		Class<? extends Transformer> txClass1 = org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr.class;
+		//		Class<? extends Transformer> txClass1 = org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr.class;
+		Class<? extends Transformer> txClass1 = (Class<? extends Transformer>) Class.forName("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr");
 		//		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 
 		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
@@ -492,15 +502,15 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
 			myQVT2.createGeneratedExecutor(txClass1);
-			//			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			EMFTCSInjector.class.getName();				// Hidden ATL dependency
-			AtlParser.class.getName();					// Hidden ATL dependency
-			myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-			myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl"));
-			//			}
-			//			else {
-			//				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
-			//			}
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				EMFTCSInjector.class.getName();				// Hidden ATL dependency
+				AtlParser.class.getName();					// Hidden ATL dependency
+				myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl"));
+			}
+			else {
+				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
+			}
 			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("qvtr", txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), null);
@@ -517,9 +527,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			txClass3 = myQVT3.buildTransformation("Persons", false);//,
 			myQVT3.assertRegionCount(RuleRegionImpl.class, 2);
-			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			//	myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//	myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//	myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		}
 		finally {
 			myQVT3.dispose();
@@ -538,7 +548,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT4.dispose();
 		}
-	} */
+	}
 
 	@Test
 	public void testQVTrCompiler_Ecore2Pivot_CG() throws Exception {
