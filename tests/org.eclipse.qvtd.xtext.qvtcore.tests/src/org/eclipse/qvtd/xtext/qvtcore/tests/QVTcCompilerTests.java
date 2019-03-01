@@ -139,8 +139,8 @@ public class QVTcCompilerTests extends LoadTestCase
 	@Before
 	public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
-		QVTm2QVTs.DEBUG_GRAPHS.setState(true);
 		super.setUp();
+		QVTm2QVTs.DEBUG_GRAPHS.setState(true);
 		OCLstdlib.install();
 		XtextCompilerUtil.doQVTcoreSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();
