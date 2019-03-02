@@ -74,6 +74,7 @@ public abstract class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 		s.append("    <nature>org.eclipse.pde.PluginNature</nature>\n");
 		s.append("  </natures>\n");
 	}
+
 	@Override
 	public @Nullable File createBuildDotProperties(@NonNull File projectFolder, @NonNull String projectName) {
 		File file = new File(projectFolder, "build.properties");
