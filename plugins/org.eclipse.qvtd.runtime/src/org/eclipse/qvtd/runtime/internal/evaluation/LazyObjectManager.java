@@ -575,7 +575,7 @@ public class LazyObjectManager extends AbstractObjectManager
 				elementObjectState.put(eOppositeReference, this);
 			}
 			//			super.assigned(objectManager, eObject, eFeature, ecoreValue);
-			assignedElement(eObject, (EReference)eFeature, (EObject)ecoreValue);
+			assignedElement(eObject, (EReference)eFeature, ecoreValue);
 		}
 
 		public void assignedElement(@NonNull Object eContainer, @NonNull EReference eReference, Object eObject) {
