@@ -12,6 +12,7 @@ package org.eclipse.qvtd.cs2as.compiler.tests;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
@@ -67,6 +69,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseTestFileSystemHelper;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -306,6 +309,18 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	private @NonNull MyQVT createQVT(@NonNull String modelTestName, @NonNull String modelSamples) throws Exception {
 		return new MyQVT(getTestProjectManager(), modelTestName, modelSamples);
+	}
+
+	@Override
+	protected @NonNull TestFileSystemHelper getTestFileSystemHelper() {
+		return new QVTbaseTestFileSystemHelper() {
+			@Override
+			protected @NonNull List<@NonNull String> getRequiredBundles() {
+				List<@NonNull String> requiredBundles = super.getRequiredBundles();
+				requiredBundles.add("org.eclipse.qvtd.cs2as.compiler.tests");
+				return requiredBundles;
+			}
+		};
 	}
 
 	@Override

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import java.io.IOException;
+
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -130,6 +132,11 @@ public class QVTcCompilerTests extends LoadTestCase
 		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
 		return new MyQVT(testProjectManager, getTestProject(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+	}
+
+	@Override
+	protected @NonNull TestFileSystemHelper getTestFileSystemHelper() {
+		return new QVTcoreTestFileSystemHelper();
 	}
 
 	/* (non-Javadoc)
@@ -429,7 +436,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("rdbms", false, "SimpleUML2RDBMS.genmodel");
-			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 10 : 11);
+			//	Class<? extends Transformer> txClass = (Class<? extends Transformer>) Class.forName("_uml2rdbms.uml2rdbms");
+			//	myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 10 : 11);
 			//			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			//			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			//			myQVT.assertRegionCount(MicroMappingRegionImpl.class, NO_MERGES ? 9 : 3);

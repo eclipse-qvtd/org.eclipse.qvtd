@@ -48,6 +48,7 @@ import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase.GlobalStateMemento;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
+import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
@@ -435,6 +436,11 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	protected @NonNull MyQVT createQVT() throws Exception {
 		return new MyQVT(getTestProject(), new MyQVTiEnvironmentFactory(getTestProjectManager(), null));
+	}
+
+	@Override
+	protected @NonNull TestFileSystemHelper getTestFileSystemHelper() {
+		return new QVTimperativeTestFileSystemHelper();
 	}
 
 	@Override
