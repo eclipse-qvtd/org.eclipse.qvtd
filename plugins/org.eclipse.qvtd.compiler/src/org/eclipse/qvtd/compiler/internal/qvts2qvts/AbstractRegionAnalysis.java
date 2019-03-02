@@ -403,71 +403,65 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 		traceNode2localSuccessEdge.put(traceNode, localSuccessEdge);
 	}
 
+	// FIXME This code should in principle be the same as OriginalContentsAnalysis.addNewNode/addOldNode.
+	//  -- the complexity is perhaps historical mis-fixes
 	private void analyzeNodes() {
 		for (@NonNull Node node : getPartialNodes()) {
-			if (node.isNullLiteral()) {
-				addConstantNode(node);
+			if (node.isDependency()) {
+				addConsumptionOfOutputNode(node);
+				continue;
 			}
-			else if (node.isOperation()) {
-				if (isConstant(node)) {
+			boolean isOperation = node.isOperation();
+			boolean isPattern = node.isPattern();
+			boolean isIterator = node.isIterator();
+			if (!isOperation && !isPattern && !isIterator) {
+				throw new IllegalStateException("unsupported analyzeNode : " + node);
+			}
+			boolean isMiddle = scheduleManager.isMiddle(node);
+			if (isMiddle && !isOperation) {
+				if (node.isDispatch()) {
+					if (dispatchNode != null) {
+						throw new IllegalStateException();		// Dual dispatcher
+					}
+					dispatchNode = node;
+				}
+				else if (node.isTrace()) {
+					traceNodes.add(node);
+				}
+			}
+			if (isConstant(node)) {
+				if (isOperation) {
 					addConstantNode(node);
 				}
-				else if (isRealized(node)) {
-					// FIXME addProductionOfOutputNode(node);
-					//	realizedOutputNodes.add(node);
+			}
+			else if (isLoaded(node)) {
+				addConsumptionOfInputNode(node);
+			}
+			else if (isPredicated(node)) {
+				if (isMiddle) {
+					addConsumptionOfMiddleNode(node);
+				}
+				else {
+					addConsumptionOfOutputNode(node);
 				}
 			}
-			else if (node.isPattern()) {
-				if (isConstant(node)) {}
-				else if (isLoaded(node)) {
-					addConsumptionOfInputNode(node);
+			else if (isSpeculated(node) && isMiddle && !isOperation) {	// middle/operation drop through to throw
+				if (!node.isHead()) {		// Don't create a self-consumption cycle
+					addConsumptionOfMiddleNode(node);
 				}
-				else if (scheduleManager.isMiddle(node)) {
-					if (node.isDispatch()) {
-						if (dispatchNode != null) {
-							throw new IllegalStateException();		// Dual dispatcher
-						}
-						dispatchNode = node;
-					}
-					else if (node.isTrace()) {
-						traceNodes.add(node);
-					}
-					if (isPredicated(node)) {
-						addConsumptionOfMiddleNode(node);
-					}
-					else if (isSpeculated(node)) {
-						if (!node.isHead()) {		// Don't create a self-consumption cycle
-							addConsumptionOfMiddleNode(node);
-						}
-					}
-					else if (isSpeculation(node)) {
-						addProductionOfMiddleNode(node);
-					}
-					else if (isRealized(node)) {
+			}
+			else if (isSpeculation(node) || isRealized(node)) {
+				if (!isOperation) {
+					if (isMiddle) {
 						addProductionOfMiddleNode(node);
 					}
 					else {
-						throw new IllegalStateException("middle node must be predicated or realized : " + node);
-					}
-				}
-				else { // scheduleManager.isOutput(node)
-					if (isPredicated(node)) {
-						addConsumptionOfOutputNode(node);
-					}
-					else if (isRealized(node)) {
 						addProductionOfOutputNode(node);
 					}
-					else {
-						throw new IllegalStateException("other node must be predicated or realized : " + node);
-					}
 				}
 			}
-			else if (node.isDependency()) {
-				addConsumptionOfOutputNode(node);
-			}
-			else if (node.isIterator()) {}
 			else {
-				throw new IllegalStateException("unsupported analyzeNode : " + node);
+				throw new IllegalStateException((isMiddle ? "middle" : "other") + " node must be predicated or realized : " + node);
 			}
 		}
 	}

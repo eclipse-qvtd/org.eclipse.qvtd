@@ -298,19 +298,19 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			DomainUsage usage = domainUsageAnalysis.getUsage(typedModel);
 			if (usage.isMiddle()) {
 				middleClassDatums.add(classDatum);
+				Iterable<@NonNull RuleRegion> consumingRegions = originalContentsAnalysis.getDirectlyConsumingRegions(classDatum);
+				Iterable<@NonNull RuleRegion> producingRegions = originalContentsAnalysis.getIndirectlyProducingRegions(classDatum);
 				if (s != null) {
-					s.append("middle: " + originalContentsAnalysis.getProducingRegions(classDatum) + "\n");
+					s.append("middle: " + producingRegions + "\n");
 				}
-				Iterable<@NonNull RuleRegion> contentsGetConsumingRegions = originalContentsAnalysis.getConsumingRegions(classDatum);
-				for (@NonNull RuleRegion consumingRegion : contentsGetConsumingRegions) {
+				for (@NonNull RuleRegion consumingRegion : consumingRegions) {
 					Rule consumer = QVTscheduleUtil.getReferredRule(consumingRegion);
 					List<@NonNull Rule> producers = consumer2producers.get(consumer);
 					if (producers == null) {
 						producers = new ArrayList<>();
 						consumer2producers.put(consumer, producers);
 					}
-					Iterable<@NonNull RuleRegion> contentsGetProducingRegions = originalContentsAnalysis.getProducingRegions(classDatum);
-					for (@NonNull RuleRegion producingRegion : contentsGetProducingRegions) {
+					for (@NonNull RuleRegion producingRegion : producingRegions) {
 						Rule producer = QVTscheduleUtil.getReferredRule(producingRegion);
 						if (!producers.contains(producer)) {
 							producers.add(producer);

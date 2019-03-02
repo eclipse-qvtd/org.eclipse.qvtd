@@ -64,14 +64,30 @@ public class OriginalContentsAnalysis
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> propertyDatum2newEdges = new HashMap<>();
 
 	/**
-	 * The regions that consume each ClassDatum.
+	 * The regions that consume each ClassDatum, eagerly computed by addRegion().
+	 * (Uses only the super-ClassDatum hierarchy; no sub-ClassDatums.)
 	 */
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull RuleRegion>> classDatum2consumingRegions = new HashMap<>();
 
 	/**
-	 * The regions that produce each ClassDatum.
+	 * The regions that consume each ClassDatum, lazily computed from the TraceClassAnalysis.
+	 * Should be identical to classDatum2consumingRegions, but historical accident leave two 'identical'
+	 * algorithms with differences to smooth out.
+	 */
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull RuleRegion>> classDatum2consumingRegions2 = new HashMap<>();
+
+	/**
+	 * The regions that produce each ClassDatum, eagerly computed by addRegion().
+	 * (Uses only the super-ClassDatum hierarchy; no sub-ClassDatums.)
 	 */
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull RuleRegion>> classDatum2producingRegions = new HashMap<>();
+
+	/**
+	 * The regions that produce each ClassDatum, lazily computed from the TraceClassAnalysis.
+	 * Should be identical to classDatum2producingRegions, but historical accident leave two 'identical'
+	 * algorithms with differences to smooth out.
+	 */
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull RuleRegion>> classDatum2producingRegions2 = new HashMap<>();
 
 	public OriginalContentsAnalysis(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
@@ -108,6 +124,12 @@ public class OriginalContentsAnalysis
 				classDatum2newNodes.put(superClassDatum, nodes);
 			}
 			nodes.add(newNode);
+			Set<@NonNull RuleRegion> regions = classDatum2producingRegions2.get(superClassDatum);
+			if (regions == null) {
+				regions = new HashSet<>();
+				classDatum2producingRegions2.put(superClassDatum, regions);
+			}
+			regions.add(region);
 		}
 	}
 
@@ -118,13 +140,22 @@ public class OriginalContentsAnalysis
 		//		assert (invokingRegion == this) || (invokingRegion == null);
 		//		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(oldNode);
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(oldNode);
-		List<@NonNull Node> nodes = classDatum2oldNodes.get(classDatum);
-		if (nodes == null) {
-			nodes = new ArrayList<>();
-			classDatum2oldNodes.put(classDatum, nodes);
-		}
-		if (!nodes.contains(oldNode)) {
-			nodes.add(oldNode);
+		//	classDatum = scheduleManager.getElementalClassDatum(classDatum);
+		for (@NonNull ClassDatum superClassDatum : scheduleManager.getSuperClassDatums(classDatum)) {
+			List<@NonNull Node> nodes = classDatum2oldNodes.get(superClassDatum);
+			if (nodes == null) {
+				nodes = new ArrayList<>();
+				classDatum2oldNodes.put(superClassDatum, nodes);
+			}
+			if (!nodes.contains(oldNode)) {
+				nodes.add(oldNode);
+			}
+			Set<@NonNull RuleRegion> regions = classDatum2consumingRegions2.get(superClassDatum);
+			if (regions == null) {
+				regions = new HashSet<>();
+				classDatum2consumingRegions2.put(superClassDatum, regions);
+			}
+			regions.add(region);
 		}
 	}
 
@@ -231,7 +262,10 @@ public class OriginalContentsAnalysis
 		return realizedEdges;
 	}
 
-	public @NonNull Iterable<@NonNull RuleRegion> getConsumingRegions(@NonNull ClassDatum classDatum) {
+	/**
+	 * Return the regions that consume precisely classDatum.
+	 */
+	public @NonNull Iterable<@NonNull RuleRegion> getDirectlyConsumingRegions(@NonNull ClassDatum classDatum) {
 		Set<@NonNull RuleRegion> consumingRegions = classDatum2consumingRegions.get(classDatum);
 		if (consumingRegions == null) {
 			TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
@@ -245,7 +279,49 @@ public class OriginalContentsAnalysis
 			}
 			classDatum2consumingRegions.put(classDatum, consumingRegions);
 		}
+		Set<@NonNull RuleRegion> consumingRegions2 = classDatum2consumingRegions2.get(classDatum);
+		if (consumingRegions2 == null) {
+			consumingRegions2 = new HashSet<>();
+		}
+		/*	if (!consumingRegions.equals(consumingRegions2)) {
+			TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+			consumingRegions = new HashSet<>();
+			if (traceClassAnalysis != null) {
+				for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+					for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getConsumers()) {
+						consumingRegions.add((RuleRegion) regionAnalysis.getRegion());
+					}
+				}
+			}
+			classDatum2consumingRegions.put(classDatum, consumingRegions);
+		} */
+		assert consumingRegions.equals(consumingRegions2);
 		return consumingRegions;
+	}
+
+	/**
+	 * Return the regions that produce classDatum or one of its subClassDatums.
+	 */
+	public @NonNull Iterable<@NonNull RuleRegion> getIndirectlyProducingRegions(@NonNull ClassDatum classDatum) {
+		Set<@NonNull RuleRegion> producingRegions = classDatum2producingRegions.get(classDatum);
+		if (producingRegions == null) {
+			TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+			producingRegions = new HashSet<>();
+			if (traceClassAnalysis != null) {
+				for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+					for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getProducers()) {
+						producingRegions.add((RuleRegion) regionAnalysis.getRegion());
+					}
+				}
+			}
+			classDatum2producingRegions.put(classDatum, producingRegions);
+		}
+		Set<@NonNull RuleRegion> producingRegions2 = classDatum2producingRegions2.get(classDatum);
+		if (producingRegions2 == null) {
+			producingRegions2 = new HashSet<>();
+		}
+		assert producingRegions.equals(producingRegions2);
+		return producingRegions;
 	}
 
 	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatum classDatum) {
@@ -298,23 +374,6 @@ public class OriginalContentsAnalysis
 
 	public @Nullable Iterable<@NonNull Node> getOldNodes(@NonNull ClassDatum classDatum) {
 		return classDatum2oldNodes.get(classDatum);
-	}
-
-	public @NonNull Iterable<@NonNull RuleRegion> getProducingRegions(@NonNull ClassDatum classDatum) {
-		Set<@NonNull RuleRegion> producingRegions = classDatum2producingRegions.get(classDatum);
-		if (producingRegions == null) {
-			TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
-			producingRegions = new HashSet<>();
-			if (traceClassAnalysis != null) {
-				for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
-					for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getProducers()) {
-						producingRegions.add((RuleRegion) regionAnalysis.getRegion());
-					}
-				}
-			}
-			classDatum2producingRegions.put(classDatum, producingRegions);
-		}
-		return producingRegions;
 	}
 
 	private @NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge producedEdge) {
