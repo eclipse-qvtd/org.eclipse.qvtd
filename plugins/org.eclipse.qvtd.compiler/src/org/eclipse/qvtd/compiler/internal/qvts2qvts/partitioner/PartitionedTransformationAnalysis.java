@@ -116,9 +116,14 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 	}
 
 	public @NonNull TracePropertyPartitionAnalysis addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartitionAnalysis producer) {
-		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-		tracePropertyAnalysis.addProducer(producer);
-		return tracePropertyAnalysis;
+		for (@NonNull PropertyDatum superPropertyDatum : QVTscheduleUtil.getSuperPropertyDatums(tracePropertyDatum)) {
+			TracePropertyPartitionAnalysis superTracePropertyAnalysis = lazyCreateTracePropertyAnalysis(superPropertyDatum);
+			superTracePropertyAnalysis.addProducer(producer);
+		}
+		return getTracePropertyAnalysis(tracePropertyDatum);
+//		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
+//		tracePropertyAnalysis.addProducer(producer);
+//		return tracePropertyAnalysis;
 	}
 
 	public void addRealizedEdge(@NonNull TypedModel typedModel, @NonNull NavigationEdge realizedEdge) {
@@ -294,6 +299,10 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
+	}
+
+	private @NonNull TracePropertyPartitionAnalysis getTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
+		return ClassUtil.nonNullState(propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum));
 	}
 
 	private @NonNull TraceClassPartitionAnalysis lazyCreateTraceClassAnalysis(@NonNull ClassDatum classDatum) {

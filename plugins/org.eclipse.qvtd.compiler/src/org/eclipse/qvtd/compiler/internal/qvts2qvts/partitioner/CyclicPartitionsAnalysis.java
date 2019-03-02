@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +22,6 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -64,8 +64,10 @@ public class CyclicPartitionsAnalysis
 		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> leafPartitionAnalysis2successors = CompilerUtil.computeTransitiveSuccessors(leafPartitionAnalysis2predecessors);
 		Set<@NonNull Set<@NonNull PartitionAnalysis>> intersections = new HashSet<>();
 		for (@NonNull PartitionAnalysis leafPartitionAnalysis : leafPartitionAnalyses) {
-			Set<@NonNull PartitionAnalysis> intersection = new HashSet<>(leafPartitionAnalysis2predecessors.get(leafPartitionAnalysis));
-			intersection.retainAll(leafPartitionAnalysis2successors.get(leafPartitionAnalysis));
+			Set<@NonNull PartitionAnalysis> predecessors = leafPartitionAnalysis2predecessors.get(leafPartitionAnalysis);
+			Set<@NonNull PartitionAnalysis> successors = leafPartitionAnalysis2successors.get(leafPartitionAnalysis);
+			Set<@NonNull PartitionAnalysis> intersection = new HashSet<>(predecessors);
+			intersection.retainAll(successors);
 			if (!intersection.isEmpty()) {
 				intersections.add(intersection);
 			}
@@ -126,11 +128,36 @@ public class CyclicPartitionsAnalysis
 	 */
 	private @NonNull RootPartitionAnalysis createAcyclicPartitionHierarchy(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Iterable<@NonNull Set<@NonNull PartitionAnalysis>> partitionings,
 			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2predecessors) {
-		List<@NonNull Set<@NonNull PartitionAnalysis>> sortedPartitionings = Lists.newArrayList(partitionings);
-		Collections.sort(sortedPartitionings, QVTbaseUtil.CollectionSizeComparator.INSTANCE);	// Smallest first
+		List<@NonNull Set<@NonNull PartitionAnalysis>> sortedPartitionings = new ArrayList<>();
+		Map<@NonNull Set<@NonNull PartitionAnalysis>, @NonNull Set<@NonNull PartitionAnalysis>> partitioning2predecessors = new HashMap<>();
+		for (@NonNull Set<@NonNull PartitionAnalysis> partitioning : partitionings) {
+			sortedPartitionings.add(partitioning);
+			Set<@NonNull PartitionAnalysis> predecessors = new HashSet<>();
+			for (@NonNull PartitionAnalysis partitionAnalysis : partitioning) {
+				predecessors.addAll(partition2predecessors.get(partitionAnalysis));
+			}
+			partitioning2predecessors.put(partitioning, predecessors);
+		}
+		//	Collections.sort(sortedPartitionings, QVTbaseUtil.CollectionSizeComparator.INSTANCE);	// Smallest first
+		Collections.sort(sortedPartitionings, new Comparator<@NonNull Set<@NonNull PartitionAnalysis>>() {
+
+			@Override
+			public int compare(@NonNull Set<@NonNull PartitionAnalysis> o1, @NonNull Set<@NonNull PartitionAnalysis> o2) {
+				Set<@NonNull PartitionAnalysis> predecessors1 = partitioning2predecessors.get(o1);
+				Set<@NonNull PartitionAnalysis> predecessors2 = partitioning2predecessors.get(o2);
+				assert predecessors1 != null;
+				assert predecessors2 != null;
+				int s1 = predecessors1.size();
+				int s2 = predecessors2.size();
+				if (s1 == s2) {
+					s1 = o1.size();
+					s2 = o2.size();
+				}
+				return s1 - s2;
+			}});
 		//
 		//	A nested cycle is necessarily fully contained by a nesting cycle. We can therefore steadily replace
-		//	each set of nested elements by a cyclic element in the nesting context. The smallest first lordering
+		//	each set of nested elements by a cyclic element in the nesting context. The smallest first ordering
 		//	does not need to be recomputed after each nesting simplification since nested candidates continue to
 		//	precede their potential nestings.
 		//

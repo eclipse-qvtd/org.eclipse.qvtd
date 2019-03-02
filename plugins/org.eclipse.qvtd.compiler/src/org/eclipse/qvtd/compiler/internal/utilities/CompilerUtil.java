@@ -265,19 +265,19 @@ public class CompilerUtil extends QVTscheduleUtil
 
 
 	/**
-	 * Return a map of the RAs that may execute immediately before each PR.
+	 * Return a map of the PartialRegions that may execute immediately before each PartialRegion.
 	 *
 	 * This is a simple type-conformance exercise. Find the sources that are supertypes of the target.
 	 */
-	public static <@NonNull PR extends PartialRegion<PR, TC, TP>, @NonNull TC extends TraceClass<PR, TC, TP>, @NonNull TP extends TraceProperty<PR, TC, TP>> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeImmediatePredecessors(@NonNull Iterable<@NonNull PR> regionAnalyses) {
+	public static <@NonNull PR extends PartialRegion<PR, TC, TP>, @NonNull TC extends TraceClass<PR, TC, TP>, @NonNull TP extends TraceProperty<PR, TC, TP>> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeImmediatePredecessors(@NonNull Iterable<@NonNull PR> partialRegionAnalyses) {
 		Map<@NonNull PR, @NonNull Set<@NonNull PR>> consumer2producers = new HashMap<>();
 		Map<@NonNull PR, @NonNull Map<@NonNull Object, @NonNull Set<@NonNull PR>>> consumer2consumedElement2producers = new HashMap<>();
-		for (@NonNull PR regionAnalysis : regionAnalyses) {
-			consumer2producers.put(regionAnalysis, new HashSet<>());
+		for (@NonNull PR partialRegionAnalysis : partialRegionAnalyses) {
+			consumer2producers.put(partialRegionAnalysis, new HashSet<>());
 		}
-		for (@NonNull PR consumer : regionAnalyses) {
+		for (@NonNull PR consumer : partialRegionAnalyses) {
 			Map<@NonNull Object, @NonNull Set<@NonNull PR>> consumedElement2producers = null;
-			if (Iterables.contains(regionAnalyses, consumer)) {
+			if (Iterables.contains(partialRegionAnalyses, consumer)) {
 				consumedElement2producers = new HashMap<>();
 				consumer2consumedElement2producers.put(consumer, consumedElement2producers);
 			}
@@ -297,7 +297,7 @@ public class CompilerUtil extends QVTscheduleUtil
 							Set<@NonNull PR> producers = consumer2producers.get(consumer);
 							assert producers != null;
 							producers.add(producer);
-							if ((consumedElement2producers != null) && Iterables.contains(regionAnalyses, producer)) {
+							if ((consumedElement2producers != null) && Iterables.contains(partialRegionAnalyses, producer)) {
 								Set<@NonNull PR> producers2 = consumedElement2producers.get(subConsumedTraceClass);
 								if (producers2 == null) {
 									producers2 = new HashSet<>();
@@ -316,7 +316,7 @@ public class CompilerUtil extends QVTscheduleUtil
 						Set<@NonNull PR> producers = consumer2producers.get(consumer);
 						assert producers != null;
 						producers.add(producer);
-						if ((consumedElement2producers != null) && Iterables.contains(regionAnalyses, producer)) {
+						if ((consumedElement2producers != null) && Iterables.contains(partialRegionAnalyses, producer)) {
 							Set<@NonNull PR> producers2 = consumedElement2producers.get(consumedTracePropertyAnalysis);
 							if (producers2 == null) {
 								producers2 = new HashSet<>();
@@ -375,7 +375,7 @@ public class CompilerUtil extends QVTscheduleUtil
 				Set<@NonNull PartitionAnalysis> predecessors = partitionAnalysis2predecessors.get(partitionAnalysis);
 				assert predecessors != null;
 				Set<@NonNull PartitionAnalysis> unscheduledPredecessors = new HashSet<>(predecessors);
-				assert unscheduledPredecessors != null;
+				//	assert unscheduledPredecessors != null;
 				unscheduledPredecessors.remove(partitionAnalysis);
 				unscheduledPredecessors.removeAll(scheduledPartitionAnalyses);
 				if (unscheduledPredecessors.isEmpty()) {
@@ -386,10 +386,33 @@ public class CompilerUtil extends QVTscheduleUtil
 				}
 			}
 			assert nextConcurrency.size() > 0;
-			parallelSchedule.add(nextConcurrency);
+			Concurrency nextNonCompositeConcurrency = null;
+			List<@NonNull CompositePartitionAnalysis> nextCompositePartitionAnalyses = null;
 			for (@NonNull PartitionAnalysis partitionAnalysis : nextConcurrency) {
 				nextScheduleCandidates.remove(partitionAnalysis);
 				scheduledPartitionAnalyses.add(partitionAnalysis);
+				if (partitionAnalysis instanceof CompositePartitionAnalysis) {
+					if (nextCompositePartitionAnalyses == null) {
+						nextCompositePartitionAnalyses = new ArrayList<>();
+					}
+					nextCompositePartitionAnalyses.add((CompositePartitionAnalysis) partitionAnalysis);
+				}
+				else {
+					if (nextNonCompositeConcurrency == null) {
+						nextNonCompositeConcurrency = new Concurrency();
+					}
+					nextNonCompositeConcurrency.add(partitionAnalysis);
+				}
+			}
+			if (nextNonCompositeConcurrency != null) {
+				parallelSchedule.add(nextNonCompositeConcurrency);
+			}
+			if (nextCompositePartitionAnalyses != null) {
+				for (CompositePartitionAnalysis compositePartitionAnalysis : nextCompositePartitionAnalyses) {
+					Concurrency nextCompositeConcurrency = new Concurrency();
+					nextCompositeConcurrency.add(compositePartitionAnalysis);
+					parallelSchedule.add(nextCompositeConcurrency);
+				}
 			}
 			scheduleCandidates = nextScheduleCandidates;
 		}
@@ -401,9 +424,9 @@ public class CompilerUtil extends QVTscheduleUtil
 	 *
 	 * This is a simple type-conformance exercise. Find the sources that are supertypes of the target.
 	 */
-	public static <@NonNull PR extends PartialRegion<PR, TC, TP>, @NonNull TC extends TraceClass<PR, TC, TP>, @NonNull TP extends TraceProperty<PR, TC, TP>> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeTransitivePredecessors(@NonNull Iterable<@NonNull PR> regionAnalyses) {
-		Map<@NonNull PR, @NonNull Set<@NonNull PR>> consumer2producers = computeImmediatePredecessors(regionAnalyses);
-		List<@NonNull PR> successors = Lists.newArrayList(regionAnalyses);
+	public static <@NonNull PR extends PartialRegion<PR, TC, TP>, @NonNull TC extends TraceClass<PR, TC, TP>, @NonNull TP extends TraceProperty<PR, TC, TP>> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeTransitivePredecessors(@NonNull Iterable<@NonNull PR> partialRegionAnalyses) {
+		Map<@NonNull PR, @NonNull Set<@NonNull PR>> consumer2producers = computeImmediatePredecessors(partialRegionAnalyses);
+		List<@NonNull PR> successors = Lists.newArrayList(partialRegionAnalyses);
 		Collections.sort(successors, NameUtil.NAMEABLE_COMPARATOR);
 		if (TransformationPartitioner.PREDECESSORS.isActive()) {
 			for (@NonNull PR successor : successors) {
@@ -439,14 +462,14 @@ public class CompilerUtil extends QVTscheduleUtil
 	 * This is an inconvenient type-conformance exercise. Find the sources that are subtypes of the target. We therefore
 	 * require the inverse computeTransitivePredecessors's result to be provided for inversion.
 	 */
-	public static <@NonNull PR extends Nameable/*PartialRegionAnalysis<@NonNull PR>*/> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeTransitiveSuccessors(@NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> partition2predecessors) {
+	public static <@NonNull PR extends Nameable/*PartialRegionAnalysis<@NonNull PR>*/> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeTransitiveSuccessors(@NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> partialRegion2predecessors) {
 		Map<@NonNull PR, @NonNull Set<@NonNull PR>> producer2consumersClosure = new HashMap<>();
-		Iterable<@NonNull PR> partitions = partition2predecessors.keySet();
-		for (@NonNull PR predecessor : partitions) {
+		Iterable<@NonNull PR> partialRegions = partialRegion2predecessors.keySet();
+		for (@NonNull PR predecessor : partialRegions) {
 			producer2consumersClosure.put(predecessor, new HashSet<>());
 		}
-		for (@NonNull PR successor : partitions) {
-			Iterable<@NonNull PR> predecessors = partition2predecessors.get(successor);
+		for (@NonNull PR successor : partialRegions) {
+			Iterable<@NonNull PR> predecessors = partialRegion2predecessors.get(successor);
 			assert predecessors != null;
 			for (@NonNull PR predecessor : predecessors) {
 				Set<@NonNull PR> successors = producer2consumersClosure.get(predecessor);
@@ -503,7 +526,7 @@ public class CompilerUtil extends QVTscheduleUtil
 		}
 		Map<@NonNull PR, @NonNull Set<@NonNull PR>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers); */
 		if (TransformationPartitioner.SUCCESSORS.isActive()) {
-			List<@NonNull PR> predecessors = Lists.newArrayList(partitions);
+			List<@NonNull PR> predecessors = Lists.newArrayList(partialRegions);
 			Collections.sort(predecessors, NameUtil.NAMEABLE_COMPARATOR);
 			for (@NonNull PR predecessor : predecessors) {
 				StringBuilder s = new StringBuilder();

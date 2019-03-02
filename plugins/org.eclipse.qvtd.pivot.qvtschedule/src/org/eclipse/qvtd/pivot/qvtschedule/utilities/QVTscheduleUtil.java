@@ -851,6 +851,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(classDatum.getSuperClassDatums());
 	}
 
+	public static @NonNull Iterable<@NonNull PropertyDatum> getSuperPropertyDatums(@NonNull PropertyDatum propertyDatum) {
+		return ClassUtil.nullFree(propertyDatum.getSuperPropertyDatums());
+	}
+
 	public static @NonNull Node getTargetNode(@NonNull Edge edge) {
 		return ClassUtil.nonNullState(edge.getTargetNode());
 	}
