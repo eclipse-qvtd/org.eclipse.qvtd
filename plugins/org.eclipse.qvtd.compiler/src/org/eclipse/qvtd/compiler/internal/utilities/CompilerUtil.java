@@ -385,6 +385,24 @@ public class CompilerUtil extends QVTscheduleUtil
 					nextScheduleCandidates.addAll(unscheduledSuccessors);
 				}
 			}
+			if (nextConcurrency.size() <= 0) {		// If scheduling a hopeless recursion - everything uses everything
+				Set<@NonNull PartitionAnalysis> minUnscheduledPredecessors = null;
+				for (@NonNull PartitionAnalysis partitionAnalysis : scheduleCandidates) {
+					Set<@NonNull PartitionAnalysis> predecessors = partitionAnalysis2predecessors.get(partitionAnalysis);
+					assert predecessors != null;
+					Set<@NonNull PartitionAnalysis> unscheduledPredecessors = new HashSet<>(predecessors);
+					//	assert unscheduledPredecessors != null;
+					//	unscheduledPredecessors.remove(partitionAnalysis);
+					unscheduledPredecessors.removeAll(scheduledPartitionAnalyses);
+					if ((minUnscheduledPredecessors == null) || (unscheduledPredecessors.size() < minUnscheduledPredecessors.size())) {
+						minUnscheduledPredecessors = unscheduledPredecessors;
+					}
+				}
+				assert minUnscheduledPredecessors != null;
+				for (@NonNull PartitionAnalysis partitionAnalysis : minUnscheduledPredecessors) {
+					nextConcurrency.add(partitionAnalysis);
+				}
+			}
 			assert nextConcurrency.size() > 0;
 			Concurrency nextNonCompositeConcurrency = null;
 			List<@NonNull CompositePartitionAnalysis> nextCompositePartitionAnalyses = null;
