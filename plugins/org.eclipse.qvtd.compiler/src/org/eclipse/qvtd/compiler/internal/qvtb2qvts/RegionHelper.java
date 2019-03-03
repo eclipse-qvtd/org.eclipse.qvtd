@@ -174,7 +174,8 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		Role edgeRole = getNodeRole(sourceNode);
 		CollectionPartEdge edge = QVTscheduleFactory.eINSTANCE.createCollectionPartEdge();
 		edge.setReferredPart(collectionPart);
-		String label = "«" + collectionPart.getName() + "»";
+		String partName = collectionPart.getName();			// Always null
+		String label = partName != null ? "«" + partName + "»" : "«part»";
 		edge.initialize(edgeRole, sourceNode, label, targetNode);
 		return edge;
 	}
