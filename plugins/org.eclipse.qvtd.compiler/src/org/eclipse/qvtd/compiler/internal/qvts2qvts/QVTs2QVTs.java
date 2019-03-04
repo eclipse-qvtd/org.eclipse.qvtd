@@ -491,6 +491,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		partitionedTransformationAnalysis.analyzePartitionEdges(partitionSchedule);
 		List<Region> activeRegions = rootRegion.getActiveRegions();
 		activeRegions.clear();
+		partitionedTransformationAnalysis.computeCheckedOrEnforcedEdges(rootPartitionAnalysis.getPartitionSchedule());
 		List<@NonNull Concurrency> partitionSchedule1 = ConcurrentPartitionMerger.merge(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
 		List<@NonNull Concurrency> partitionSchedule2 = SequentialPartitionMerger.merge(partitionedTransformationAnalysis, partitionSchedule1);
 		List<@NonNull Concurrency> mergedPartitionSchedule = partitionSchedule2;
@@ -522,7 +523,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			lateMerge(rootPartition, regionSchedule, typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		} */
 
-		partitionedTransformationAnalysis.computeCheckedOrEnforcedEdges(mergedPartitionSchedule);
+		//		partitionedTransformationAnalysis.computeCheckedOrEnforcedEdges(mergedPartitionSchedule);
 
 		/*	suspended - just an optimization - needs more hierarchical consideration
 			//

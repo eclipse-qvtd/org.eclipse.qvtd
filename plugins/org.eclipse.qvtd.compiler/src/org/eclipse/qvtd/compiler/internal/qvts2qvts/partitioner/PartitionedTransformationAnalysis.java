@@ -89,7 +89,9 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 			predicatedEdges = new ArrayList<>();
 			property2predicatedEdges.put(property, predicatedEdges);
 		}
-		predicatedEdges.add(predicatedEdge);
+		if (!predicatedEdges.contains(predicatedEdge)) {		// Same edge can come from multiple partitions
+			predicatedEdges.add(predicatedEdge);
+		}
 		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " predicated for " + property);
 	}
 
@@ -121,9 +123,9 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 			superTracePropertyAnalysis.addProducer(producer);
 		}
 		return getTracePropertyAnalysis(tracePropertyDatum);
-//		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-//		tracePropertyAnalysis.addProducer(producer);
-//		return tracePropertyAnalysis;
+		//		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
+		//		tracePropertyAnalysis.addProducer(producer);
+		//		return tracePropertyAnalysis;
 	}
 
 	public void addRealizedEdge(@NonNull TypedModel typedModel, @NonNull NavigationEdge realizedEdge) {
@@ -140,6 +142,7 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 			realizedEdges = new ArrayList<>();
 			property2realizedEdges.put(property, realizedEdges);
 		}
+		assert !realizedEdges.contains(realizedEdge);		// Can only be realized in one partition.
 		realizedEdges.add(realizedEdge);
 		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " realized for " + property);
 	}
@@ -199,6 +202,9 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
+				if ("mapOperationCallExp_Operation_qvtr«edge6-type»".equals(partition.getName())) {
+					getClass();
+				}
 				QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + partition + " " + partition.getPassRangeText());
 				partitionAnalysis.analyzePartitionEdges();
 			}

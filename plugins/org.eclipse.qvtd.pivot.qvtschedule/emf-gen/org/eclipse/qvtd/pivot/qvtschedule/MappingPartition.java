@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
