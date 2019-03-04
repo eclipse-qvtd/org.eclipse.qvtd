@@ -74,8 +74,7 @@ public abstract class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 		s.append("    <nature>org.eclipse.pde.PluginNature</nature>\n");
 		s.append("  </natures>\n");
 	}
-
-	// @Override			// FIXME waiting for OCL support
+	@Override
 	public @Nullable File createBuildDotProperties(@NonNull File projectFolder, @NonNull String projectName) {
 		File file = new File(projectFolder, "build.properties");
 		Writer s;
@@ -138,7 +137,6 @@ public abstract class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
-		createBuildDotProperties(projectFolder, projectName);			// FIXME waiting for OCL support
 		return file;
 	}
 
