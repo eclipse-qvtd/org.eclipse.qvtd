@@ -73,10 +73,6 @@ public class CheckedConditionAnalysis
 		}
 
 		public void analyze() {
-			String name = partition.getName();
-			//	if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
-			//		getClass();
-			//	}
 			for (@NonNull Edge edge : oldUnconditionalEdges) {
 				//				assert edge.isOld() && edge.isUnconditional();
 				edge.accept(this);
@@ -339,10 +335,6 @@ public class CheckedConditionAnalysis
 	 * Return all conditions that need checking for mapping success.
 	 */
 	public @NonNull Set<@NonNull CheckedCondition> computeCheckedConditions() {
-		String name = partition.getName();
-		//	if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
-		//		getClass();
-		//	}
 		Set<@NonNull CheckedCondition> checkedConditions = new HashSet<>();
 		Visitor visitor = new Visitor(checkedConditions);
 		visitor.analyze();
@@ -354,9 +346,6 @@ public class CheckedConditionAnalysis
 	 */
 	protected @Nullable Set<@NonNull Property> computeCheckedProperties() {
 		@SuppressWarnings("unused") String name = partition.getName();
-		if ("mapOperationCallExp_Operation_qvtr«edge6-type»".equals(name)) {
-			getClass();
-		}
 		//
 		// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous
 		// mappings, but that incurs many typedModel accuracy issues.

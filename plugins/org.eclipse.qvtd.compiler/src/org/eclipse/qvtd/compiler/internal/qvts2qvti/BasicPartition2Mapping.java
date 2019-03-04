@@ -212,9 +212,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 
 		public @NonNull Iterable<@NonNull CheckedCondition> analyze() {
 			String name = partition.getName();
-			if (name.contains("list2list«edge-headElement»")) {
-				getClass();
-			}
 			//
 			//	A dispatch input node must be checked to confirm the correct derivation.
 			//
@@ -1274,10 +1271,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	public BasicPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull MappingPartitionAnalysis<?> partitionAnalysis) {
 		super(visitor, partitionAnalysis.getPartition());
 		this.regionAnalysis = scheduleManager.getRegionAnalysis(QVTscheduleUtil.getRegion(partition));
-		//	String name = partition.getName();
-		//	if (name.contains("list2list«edge-headElement»")) {
-		//		getClass();
-		//	}
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
 		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partitionAnalysis, scheduleManager);
 		this.resultNode2subexpression = computeSubexpressions();
@@ -2002,9 +1995,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	@Override
 	public void synthesizeLocalStatements() {
 		String name = partition.getName();
-		if (name.contains("mapNavigationOrAttributeCallExp_Helper")) {
-			getClass();
-		}
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
 		createPatternMatch();						// BLUE/CYAN nodes and edges
 		createRealizedVariables();					// GREEN nodes

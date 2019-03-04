@@ -546,10 +546,6 @@ public class MappingPartitioner implements Nameable
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
 			return Collections.singletonList(new NonPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
 		}
-		String name = region.getName();
-		if ("mapOclModel_IN_atl".equals(name)) {
-			getClass();
-		}
 		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
 		//	boolean isInfallible = false;
 		//	if (cycleAnalysis != null) {

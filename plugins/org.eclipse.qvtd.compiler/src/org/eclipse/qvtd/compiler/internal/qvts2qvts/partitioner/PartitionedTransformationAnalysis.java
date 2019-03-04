@@ -202,9 +202,6 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
-				if ("mapOperationCallExp_Operation_qvtr«edge6-type»".equals(partition.getName())) {
-					getClass();
-				}
 				QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + partition + " " + partition.getPassRangeText());
 				partitionAnalysis.analyzePartitionEdges();
 			}

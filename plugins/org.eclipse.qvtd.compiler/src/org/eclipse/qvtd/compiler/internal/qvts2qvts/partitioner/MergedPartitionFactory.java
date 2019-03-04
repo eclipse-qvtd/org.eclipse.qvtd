@@ -26,6 +26,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
 import com.google.common.collect.Iterables;
 
 /**
@@ -71,7 +73,8 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 
 	@Override
 	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		Iterable<@NonNull Node> headNodes = subPartitionAnalyses.iterator().next().getPartition().getHeadNodes();
+		BasicPartition partition = subPartitionAnalyses.iterator().next().getPartition();
+		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(partition);
 		MergedPartition mergedPartition = createMergedPartition(computeName(), headNodes);
 		for (@NonNull BasicPartitionAnalysis subPartitionAnalysis : subPartitionAnalyses) {
 			BasicPartition subPartition = subPartitionAnalysis.getPartition();
@@ -137,10 +140,6 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis) {
 		BasicPartition partition = partitionAnalysis.getPartition();
 		//	this.traceNode = mappingPartitioner.getTraceNode();
-		String regionName = region.getName();
-		if ("mapNavigationOrAttributeCallExp_Property_qvtr".equals(regionName)) {
-			getClass();
-		}
 		//
 		//	Add all the nodes merging the roles.
 		//

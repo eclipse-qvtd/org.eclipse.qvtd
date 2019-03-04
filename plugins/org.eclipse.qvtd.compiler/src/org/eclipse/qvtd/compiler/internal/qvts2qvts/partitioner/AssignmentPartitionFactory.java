@@ -53,10 +53,6 @@ public class AssignmentPartitionFactory extends AbstractSimplePartitionFactory
 	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis) {
 		BasicPartition partition = partitionAnalysis.getPartition();
 		//	this.traceNode = mappingPartitioner.getTraceNode();
-		String regionName = region.getName();
-		if ("mapNavigationOrAttributeCallExp_Property_qvtr".equals(regionName)) {
-			getClass();
-		}
 		//
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//

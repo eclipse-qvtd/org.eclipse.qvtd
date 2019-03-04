@@ -70,10 +70,6 @@ public class CheckedConditionPartitionAnalysis
 		}
 
 		public void analyze() {
-			String name = partition.getName();
-			if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
-				getClass();
-			}
 			for (@NonNull Edge edge : oldUnconditionalEdges) {
 				//				assert edge.isOld() && edge.isUnconditional();
 				Role edgeRole = partition.getRole(edge);
@@ -342,10 +338,6 @@ public class CheckedConditionPartitionAnalysis
 	 * Return all conditions that need checking for mapping success.
 	 */
 	public @NonNull Set<@NonNull CheckedCondition> computeCheckedConditions() {
-		String name = partition.getName();
-		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
-			getClass();
-		}
 		Set<@NonNull CheckedCondition> checkedConditions = new HashSet<>();
 		Visitor visitor = new Visitor(checkedConditions);
 		visitor.analyze();

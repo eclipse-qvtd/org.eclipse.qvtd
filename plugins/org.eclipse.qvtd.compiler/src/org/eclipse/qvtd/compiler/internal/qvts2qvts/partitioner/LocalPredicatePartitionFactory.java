@@ -172,10 +172,6 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
 		//		resolveTrueNodes();
-		String name = region.getName();
-		if ("mapOclModel_IN_atl".equals(name)) {
-			getClass();
-		}
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//

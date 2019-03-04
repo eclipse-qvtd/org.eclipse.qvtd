@@ -409,10 +409,6 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 	} */
 
 	private void analyzeNodes(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		String name = getName();
-		if ("mapBooleanExp_qvtr".equals(name)) {
-			getClass();
-		}
 		for (@NonNull Node node : partition.getPartialNodes()) {
 			if (node.isNullLiteral()) {
 				addConstantNode(node);
