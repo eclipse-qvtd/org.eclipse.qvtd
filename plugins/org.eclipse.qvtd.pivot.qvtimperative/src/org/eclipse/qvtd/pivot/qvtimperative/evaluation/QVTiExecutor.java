@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -28,6 +29,7 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 
 public interface QVTiExecutor extends ExecutorInternal
 {
+	void checkModels() throws CoreException;
 	@Nullable Resource createModel(@NonNull String outName, @NonNull URI outURI, @Nullable String contentType);
 	Boolean execute();
 	@Override

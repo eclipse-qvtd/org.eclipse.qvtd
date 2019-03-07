@@ -102,7 +102,7 @@ public abstract class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 			s.append("	<classpathentry kind=\"con\" path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8\"/>\n");
 			s.append("	<classpathentry kind=\"con\" path=\"org.eclipse.pde.core.requiredPlugins\"/>\n");
 			s.append("	<classpathentry kind=\"src\" path=\"test-src\"/>\n");
-			s.append("	<classpathentry kind=\"output\" path=\"test-bin\"/>\n");
+			s.append("	<classpathentry kind=\"output\" path=\"bin\"/>\n");
 			s.append("</classpath>\n");
 			s.append("");
 			s.close();

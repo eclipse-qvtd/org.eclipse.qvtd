@@ -96,7 +96,7 @@ public class QVTrLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 				compilerChain.compile(outputName);
 			}
 			else {
-				compilerChain.build(outputName);
+				txClass = compilerChain.build(outputName);
 			}
 		} catch (Exception e) {
 			QVTiDebugPlugin.throwCoreExceptionError("Failed to compile transformation '" + txURI + "'", e);

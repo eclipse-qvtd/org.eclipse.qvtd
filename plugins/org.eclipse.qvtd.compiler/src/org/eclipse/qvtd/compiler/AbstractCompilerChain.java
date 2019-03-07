@@ -34,7 +34,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.ExplicitClassLoader;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
-import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaSourceFileObject;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -110,7 +110,9 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull Class<? extends Transformer> execute(@NonNull URI txURI, @NonNull JavaResult javaResult) throws Exception {
 			JavaClasspath classpath = basicGetOption(CLASSPATH_KEY);
 			assert classpath != null;
-			JavaFileObject compilationUnit = new OCL2JavaFileObject(javaResult.qualifiedClassName, javaResult.code);
+			//	JavaFileObject compilationUnit = new OCL2JavaFileObject(javaResult.qualifiedClassName, javaResult.code);
+			java.net.URI uri = new File(javaResult.file, javaResult.qualifiedClassName.replace(".", "/") + ".java").getCanonicalFile().toURI();
+			JavaFileObject compilationUnit = new JavaSourceFileObject(uri);
 			List<@NonNull JavaFileObject> compilationUnits = Collections.singletonList(compilationUnit);
 			String problemMessage = JavaFileUtil.compileClasses(compilationUnits, javaResult.qualifiedClassName, javaResult.classPath, classpath);
 			if (problemMessage != null) {

@@ -372,7 +372,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
-		Class<? extends Transformer> txClass1 = null;
+		//	Class<? extends Transformer> txClass1 = null;
 		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
 		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
@@ -394,7 +394,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
 			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
-			txClass1 = myQVT1.buildTransformation("atl", false);
+			/*txClass1 =*/ myQVT1.buildTransformation("atl", false);
 			//			Class<? extends Transformer> txClass = ATL2QVTr.class;
 			//
 			//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
@@ -494,6 +494,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		//		Class<? extends Transformer> txClass1 = org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr.class;
+		@SuppressWarnings("unchecked")
 		Class<? extends Transformer> txClass1 = (Class<? extends Transformer>) Class.forName("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr");
 		//		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 

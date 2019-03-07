@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
@@ -60,7 +60,7 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 	private static File getProjectFolder(@NonNull String projectName) throws IOException {
 		assert EMFPlugin.IS_ECLIPSE_RUNNING;		// used by launch
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IResource project = workspaceRoot.findMember(projectName);
+		IProject project = workspaceRoot.getProject(projectName);
 		if (project != null) {
 			String location = String.valueOf(project.getLocation());
 			File projectFile = new File(location);

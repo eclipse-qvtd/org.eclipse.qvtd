@@ -1,4 +1,7 @@
 class java/lang/Class
+forName
+ (Ljava/lang/String;)Ljava/lang/Class<*>;
+ (Ljava/lang/String;)L1java/lang/Class<*>;
 getAnnotation
  <A::Ljava/lang/annotation/Annotation;>(Ljava/lang/Class<TA;>;)TA;
  <A::Ljava/lang/annotation/Annotation;>(Ljava/lang/Class<TA;>;)T0A;

@@ -409,7 +409,7 @@ public class QVTiModelsManager
 		}
 
 		@Override
-		public @NonNull List<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
+		public @NonNull Iterable<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
 			if (kind2instances == null) {
 				kind2instances = new HashMap<>();
 			}

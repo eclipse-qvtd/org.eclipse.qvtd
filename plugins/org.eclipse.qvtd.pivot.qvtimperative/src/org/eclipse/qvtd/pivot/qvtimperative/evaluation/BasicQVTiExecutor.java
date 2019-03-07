@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -47,6 +50,7 @@ import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.NullValue;
@@ -111,6 +115,24 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	 */
 	public void addModel(@NonNull ImperativeTypedModel typedModel, @NonNull Resource resource) {
 		modelsManager.addModel(typedModel, resource);
+	}
+
+	@Override
+	public void checkModels() throws CoreException {
+		StringBuilder s = null;
+		for (@NonNull Resource resource : environmentFactory.getResourceSet().getResources()) {
+			String messages = PivotUtil.formatResourceDiagnostics(resource.getErrors(), "Errors in " + resource.getURI().toString(), "\n");
+			if (messages != null) {
+				if (s == null) {
+					s = new StringBuilder();
+				}
+				s.append(messages);
+			}
+		}
+		if (s != null) {
+			IStatus status = new Status(IStatus.ERROR, "getPluginId()", s.toString());
+			throw new CoreException(status);
+		}
 	}
 
 	@Override
