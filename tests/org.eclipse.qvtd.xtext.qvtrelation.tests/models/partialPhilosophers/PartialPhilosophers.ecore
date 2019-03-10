@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="partialPhilosophers" nsURI="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/partialPhilosophers"
+    nsPrefix="partialPhilosophers">
+  <eClassifiers xsi:type="ecore:EClass" name="Philosopher">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasLeft" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasRight" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasEaten" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftFork" lowerBound="1"
+        eType="#//Fork"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightFork" lowerBound="1"
+        eType="#//Fork"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fork">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="holder" eType="#//Philosopher"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Table">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forks" upperBound="-1"
+        eType="#//Fork" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="philosophers" upperBound="-1"
+        eType="#//Philosopher" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

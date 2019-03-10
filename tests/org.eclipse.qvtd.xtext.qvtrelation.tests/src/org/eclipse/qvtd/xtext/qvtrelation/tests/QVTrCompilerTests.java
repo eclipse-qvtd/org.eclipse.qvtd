@@ -1077,6 +1077,44 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
+	/*	@Test
+	public void testQVTrCompiler_PartialPhilosophers_CG() throws Exception {	// For Bug 515490 discussion - doesn't work
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		Class<? extends Transformer> txClass;
+		MyQVT myQVT1 = createQVT("PartialPhilosophers", getModelsURI("partialPhilosophers/PartialPhilosophers.qvtr"));
+		try {
+			txClass = myQVT1.buildTransformation("to", false);//,
+			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
+			//
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 10);
+		}
+		finally {
+			myQVT1.dispose();
+		}
+		MyQVT myQVT2 = createQVT("SeqToStm", getModelsURI("partialPhilosophers/PartialPhilosophers.qvtr"));
+		try {
+			//	myQVT2.loadEPackage(txClass, "SeqMM.SeqMMPackage");
+			//	myQVT2.loadEPackage(txClass, "StmcMM.StmcMMPackage");
+			//	myQVT2.loadEPackage(txClass, "trace_SeqToStm.trace_SeqToStmPackage");
+			//
+			myQVT2.createGeneratedExecutor(txClass);
+			myQVT2.loadInput("from", getModelsURI("partialPhilosophers/samples/Table3.xmi"));
+			myQVT2.executeTransformation();
+			myQVT2.saveOutput("to", getTestURI("Table3_CG.xmi"), getModelsURI("partialPhilosophers/samples/Table3_expected.xmi"), null);
+		}
+		finally {
+			myQVT2.dispose();
+		}
+	} */
+
 	@Test
 	public void testQVTrCompiler_SeqToStm() throws Exception {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);

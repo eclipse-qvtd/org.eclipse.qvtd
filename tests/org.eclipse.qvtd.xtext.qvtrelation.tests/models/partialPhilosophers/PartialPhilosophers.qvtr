@@ -1,0 +1,57 @@
+/*******************************************************************************
+ * Copyright (c) 2017 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial implementation for ModelMorf
+ *******************************************************************************/
+import ppMM : 'PartialPhilosophers.ecore'::partialPhilosophers; 
+
+package org::eclipse::qvtd::xtext::qvtrelation::tests::iterated2iterated {
+/**
+ * Transform a Parent with an old count to another Parent with a new count by repeated counting until
+ * the terminating condition is met.
+ */
+	transformation PartialPhilosophers(from:ppMM, to:ppMM)
+	{
+		top relation Table2Table {
+			domain from fromTable : Table{};
+			enforce domain to toTable : Table{};
+		}
+		
+		top relation Fork2Fork {
+			name : String;
+			domain from fromFork : Fork{ Table = fromTable : Table{}, name = name};
+			enforce domain to toFork : Fork{ Table = toTable : Table{}, name = name };
+			when {Table2Table(fromTable, toTable);}
+		}
+		
+		top relation Philosopher2Philosopher {
+			name : String;
+			domain from fromPhilosopher : Philosopher{ Table = fromTable : Table{}, name = name, leftFork = fromLeft : Fork{}, rightFork = fromRight : Fork{}};
+			enforce domain to toPhilosopher : Philosopher{ Table = toTable : Table{}, name = name, leftFork = toLeft : Fork{}, rightFork = toRight : Fork{}};
+			when {Table2Table(fromTable, toTable); Fork2Fork(fromLeft, toLeft); Fork2Fork(fromRight, toRight);}
+		}
+		
+		top relation PickUpLeft {
+			domain from fromPhilosopher : Philosopher{leftFork = fromLeft : Fork{}};
+			enforce domain to toPhilosopher : Philosopher{ hasLeft = true, leftFork = toLeft : Fork{ holder = toPhilosopher } };
+			when {Philosopher2Philosopher(fromPhilosopher, toPhilosopher); Fork2Fork(fromLeft, toLeft);}
+		}
+		
+		top relation PickUpRight {
+			domain from fromPhilosopher : Philosopher{rightFork = fromRight : Fork{}};
+			enforce domain to toPhilosopher : Philosopher{ hasLeft = true, rightFork = toRight : Fork{ holder = toPhilosopher } };
+			when {Philosopher2Philosopher(fromPhilosopher, toPhilosopher); Fork2Fork(fromRight, toRight);}
+		}
+		
+		top relation Eat {
+			domain from fromPhilosopher : Philosopher{};--asLeft = true, hasRight = true};
+			enforce domain to toPhilosopher : Philosopher{ hasEaten = true };
+			when {PickUpLeft(fromPhilosopher, toPhilosopher); PickUpRight(fromPhilosopher, toPhilosopher);}
+		}
+	}
+}

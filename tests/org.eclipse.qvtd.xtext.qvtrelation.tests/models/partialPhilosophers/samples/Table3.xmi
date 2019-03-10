@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<partialPhilosophers:Table
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:partialPhilosophers="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/partialPhilosophers"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/partialPhilosophers PartialPhilosophers.ecore">
+  <forks name="f1"/>
+  <forks name="f2"/>
+  <forks name="f3"/>
+  <philosophers
+      leftFork="//@forks.2"
+      rightFork="//@forks.0"
+      name="p1"/>
+  <philosophers
+      leftFork="//@forks.0"
+      rightFork="//@forks.1"
+      name="p2"/>
+  <philosophers
+      leftFork="//@forks.1"
+      rightFork="//@forks.2"
+      name="p3"/>
+</partialPhilosophers:Table>
