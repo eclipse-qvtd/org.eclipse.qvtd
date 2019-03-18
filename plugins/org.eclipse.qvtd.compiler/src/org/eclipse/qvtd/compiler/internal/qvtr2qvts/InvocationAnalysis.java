@@ -81,7 +81,17 @@ public class InvocationAnalysis
 			RelationAnalysis2MiddleType invokedRelationAnalysis2InvocationInterface = invokedBaseRelationAnalysis2TraceGroup.getRuleAnalysis2InvocationInterface();
 			org.eclipse.ocl.pivot.Class invokedInvocationInterface = invokedRelationAnalysis2InvocationInterface.getMiddleClass();
 			ClassDatum classDatum = scheduleManager.getClassDatum(traceTypedModel, invokedInvocationInterface);
-			invokedNode = invokingRelationAnalysis.createPredicatedNode(name, classDatum, true);
+			boolean isMatched = true;
+			//	if (!invokedRelation.isIsTopLevel()) {
+			for (@NonNull VariableDeclaration rootVariable : rootVariable2argumentNode.keySet()) {
+				Node argumentNode = rootVariable2argumentNode.get(rootVariable);
+				assert argumentNode != null;
+				if (!argumentNode.isMatched()) {
+					isMatched = false;
+				}
+			}
+			//	}
+			invokedNode = invokingRelationAnalysis.createPredicatedNode(name, classDatum, isMatched);
 			if (invokingRelation.isIsTopLevel()) {
 				Invocation2TraceProperty invokingInvocation2TraceProperty = invokingRuleAnalysis2TraceClass.getInvocation2TraceProperty(this);
 				invokingRelationAnalysis.createRealizedNavigationEdge(invokingTraceNode, invokingInvocation2TraceProperty.getTraceProperty(), invokedNode, false);

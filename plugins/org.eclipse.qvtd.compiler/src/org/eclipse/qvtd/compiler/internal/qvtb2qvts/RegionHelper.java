@@ -487,7 +487,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(nodeRole, region, getName(variable), scheduleManager.getClassDatum(variable));
 		node.initializeVariable(region, variable);
-		node.setMatched(true);
+		node.setMatched(variable.isIsRequired());
 		return node;
 	}
 

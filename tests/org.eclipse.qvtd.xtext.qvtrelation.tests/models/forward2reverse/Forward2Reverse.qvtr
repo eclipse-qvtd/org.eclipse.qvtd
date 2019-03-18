@@ -25,21 +25,12 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse {
 		top relation list2list {
 			listName : String;
 			domain forward forwardList : DoublyLinkedList {
-				name = listName
+				name = listName,
+				headElement = forwardHead : Element[?]{}
 			};	   
 			enforce domain reverse reverseList : DoublyLinkedList {
-				name = listName
-			};
-			where {
-				listHead2listHead(forwardList, reverseList);
-			}
-		}
-		relation listHead2listHead {
-			domain forward forwardList : DoublyLinkedList {
-				headElement = forwardHead : Element{}
-			};	   
-			enforce domain reverse reverseList : DoublyLinkedList {
-				headElement = reverseHead : Element{}
+				name = listName,
+				headElement = reverseHead : Element[?]{}
 			};
 			when {
 				element2element(forwardHead, reverseHead);
