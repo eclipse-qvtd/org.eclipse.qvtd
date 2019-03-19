@@ -4,11 +4,11 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.qvtd.doc.miniocl.build
-Bundle-Version: 0.18.0.qualifier
+Bundle-Version: 0.19.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.emf.mwe2.launch;bundle-version="[2.9.0,3.0.0)",
  org.eclipse.ocl.examples.build;bundle-version="[2.8.0,2.9.0)",
- org.eclipse.qvtd.cs2as.build;bundle-version="[0.18.0,1.0.0)",
- org.eclipse.qvtd.doc.minioclcs.xtext;bundle-version="[0.18.0,1.0.0)",
- org.eclipse.qvtd.doc.miniocl;bundle-version="[0.18.0,1.0.0)"
+ org.eclipse.qvtd.cs2as.build;bundle-version="[0.19.0,1.0.0)",
+ org.eclipse.qvtd.doc.minioclcs.xtext;bundle-version="[0.19.0,1.0.0)",
+ org.eclipse.qvtd.doc.miniocl;bundle-version="[0.19.0,1.0.0)"
 Automatic-Module-Name: org.eclipse.qvtd.doc.miniocl.build

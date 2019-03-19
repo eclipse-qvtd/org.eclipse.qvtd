@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.all.tests
-Bundle-Version: 0.18.0.qualifier
+Bundle-Version: 0.19.0.qualifier
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Comment: javax.annotation is a workaround to Bug 539038
@@ -12,12 +12,12 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.ocl.xtext.oclinecore;bundle-version="[1.8.0,1.9.0)",
  org.eclipse.ocl.xtext.oclstdlib;bundle-version="[1.8.0,1.9.0)",
  org.eclipse.ocl.xtext.completeocl;bundle-version="[1.8.0,1.9.0)",
- org.eclipse.qvtd.atl;bundle-version="[0.18.0,1.0.0)",
- org.eclipse.qvtd.compiler.tests;bundle-version="[0.18.0,1.0.0)",
- org.eclipse.qvtd.xtext.qvtcore.tests;bundle-version="[0.18.0,1.0.0)",
- org.eclipse.qvtd.xtext.qvtimperative.tests;bundle-version="[0.18.0,1.0.0)",
- org.eclipse.qvtd.xtext.qvtrelation.tests;bundle-version="[0.18.0,1.0.0)",
- org.eclipse.qvtd.umlx.tests;bundle-version="[0.18.0,1.0.0)",
+ org.eclipse.qvtd.atl;bundle-version="[0.19.0,1.0.0)",
+ org.eclipse.qvtd.compiler.tests;bundle-version="[0.19.0,1.0.0)",
+ org.eclipse.qvtd.xtext.qvtcore.tests;bundle-version="[0.19.0,1.0.0)",
+ org.eclipse.qvtd.xtext.qvtimperative.tests;bundle-version="[0.19.0,1.0.0)",
+ org.eclipse.qvtd.xtext.qvtrelation.tests;bundle-version="[0.19.0,1.0.0)",
+ org.eclipse.qvtd.umlx.tests;bundle-version="[0.19.0,1.0.0)",
  org.eclipse.qvtd.doc.bigmde2016.tests,
  org.eclipse.qvtd.doc.exe2016.tests,
  org.eclipse.qvtd.doc.minioclcs.xtext.tests,
