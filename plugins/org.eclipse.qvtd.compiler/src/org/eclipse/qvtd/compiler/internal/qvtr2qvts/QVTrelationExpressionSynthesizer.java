@@ -113,7 +113,7 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 			OCLExpression ownedArgument = ownedArguments.get(i);
 			Node argumentNode = ownedArgument.accept(this);
 			assert argumentNode != null;
-			invocationAnalysis.add(rootVariable, argumentNode);
+			invocationAnalysis.addBinding(rootVariable, argumentNode);
 		}
 		//		for ()
 		//		if (referredRuleAnalysis2TraceClass.getStatusInterfaceProperty())

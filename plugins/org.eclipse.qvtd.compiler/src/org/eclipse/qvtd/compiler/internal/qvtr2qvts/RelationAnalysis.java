@@ -749,10 +749,26 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	public @NonNull InvocationAnalysis createInvocationAnalysis(@NonNull RelationAnalysis invokedRelationAnalysis, @NonNull RelationCallExp relationCallExp, boolean isWhen) {
-		InvocationAnalysis invocationAnalysis = new InvocationAnalysis(this, invokedRelationAnalysis, relationCallExp, isWhen);
+		RelationAnalysis invokedBaseRelationAnalysis = invokedRelationAnalysis.getBaseRelationAnalysis();
+		InvocationAnalysis invocationAnalysis;
+		if (invokedBaseRelationAnalysis.getRule().isIsTopLevel()) {
+			if (isWhen) {
+				invocationAnalysis = new TopWhenInvocationAnalysis(this, invokedRelationAnalysis);
+			}
+			else {
+				invocationAnalysis = new TopWhereInvocationAnalysis(this, invokedRelationAnalysis);
+			}
+		}
+		else {
+			if (isWhen) {
+				invocationAnalysis = new NonTopWhenInvocationAnalysis(this, invokedRelationAnalysis);
+			}
+			else {
+				invocationAnalysis = new NonTopWhereInvocationAnalysis(this, invokedRelationAnalysis);
+			}
+		}
 		addOutgoingInvocationAnalysis(invocationAnalysis);
 		invokedRelationAnalysis.addIncomingInvocationAnalysis(invocationAnalysis);
-		RelationAnalysis invokedBaseRelationAnalysis = invokedRelationAnalysis.getBaseRelationAnalysis();
 		invokedBaseRelationAnalysis.addIncomingInvocationAnalysis(invocationAnalysis);
 		return invocationAnalysis;
 	}
