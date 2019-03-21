@@ -366,11 +366,18 @@ public class RelationAnalysis extends RuleAnalysis
 	private @Nullable Map<@NonNull TemplateVariable, @NonNull TemplateExp> variable2templateExp = null;
 
 	/**
-	 * The output variables that are assigned by a when invocation.
+	 * The output variables that are assigned by a top when invocation.
 	 *
 	 * Populated by analyzeSourceModel.
 	 */
-	private @Nullable Set<@NonNull VariableDeclaration> whenedOutputVariables = null;
+	private @Nullable Set<@NonNull VariableDeclaration> topWhenedOutputVariables = null;
+
+	/**
+	 * The output variables that are assigned by a non-top when invocation.
+	 *
+	 * Populated by analyzeSourceModel.
+	 */
+	private @Nullable Set<@NonNull VariableDeclaration> nonTopWhenedOutputVariables = null;
 
 	public RelationAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull QVTuConfiguration qvtuConfiguration, @NonNull RuleRegion ruleRegion) {
 		super(transformationAnalysis, ruleRegion);
@@ -444,7 +451,7 @@ public class RelationAnalysis extends RuleAnalysis
 
 	protected void analyzeKeyedOutputVariables(@NonNull RelationDomain relationDomain, @NonNull Set<@NonNull VariableDeclaration> keyedOutputVariables) {
 		RelationalTransformationAnalysis transformationAnalysis2 = getTransformationAnalysis();
-		Set<@NonNull VariableDeclaration> whenedOutputVariables = getWhenedOutputVariables();
+		Set<@NonNull VariableDeclaration> whenedOutputVariables = getTopWhenedOutputVariables();
 		for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(relationDomain)) {
 			TemplateExp templateExpression = QVTrelationUtil.getOwnedTemplateExpression(domainPattern);
 			for (@NonNull EObject eObject : new TreeIterable(templateExpression, true)) {
@@ -617,7 +624,9 @@ public class RelationAnalysis extends RuleAnalysis
 		Relation relation = getRule();
 		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
 		variable2templateExp = analyzeVariable2TemplateExp();
-		whenedOutputVariables = analyzeWhenedOutputVariables();
+		Set<@NonNull VariableDeclaration> topWhenedOutputVariables2 = topWhenedOutputVariables = new HashSet<>();
+		Set<@NonNull VariableDeclaration> nonTopWhenedOutputVariables2 = nonTopWhenedOutputVariables = new HashSet<>();
+		analyzeWhenedOutputVariables(topWhenedOutputVariables2, nonTopWhenedOutputVariables2);
 		Set<@NonNull VariableDeclaration> keyedOutputVariables = this.keyedOutputVariables = new HashSet<>();
 		Set<@NonNull VariableDeclaration> realizedOutputVariables = this.realizedOutputVariables = new HashSet<>();
 		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
@@ -685,9 +694,8 @@ public class RelationAnalysis extends RuleAnalysis
 		return variable2templateExp;
 	}
 
-	protected @NonNull Set<@NonNull VariableDeclaration> analyzeWhenedOutputVariables() {
+	protected void analyzeWhenedOutputVariables(@NonNull Set<@NonNull VariableDeclaration> topWhenedOutputVariables, @NonNull Set<@NonNull VariableDeclaration> nonTopWhenedOutputVariables) {
 		Relation relation = getRule();
-		Set<@NonNull VariableDeclaration> whenedOutputVariables = new HashSet<>();
 		Pattern whenPattern = relation.getWhen();
 		if (whenPattern != null) {
 			for (@NonNull Predicate whenPredicate : QVTrelationUtil.getOwnedPredicates(whenPattern)) {
@@ -702,14 +710,18 @@ public class RelationAnalysis extends RuleAnalysis
 							RelationDomain domain = QVTrelationUtil.getRelationCallExpArgumentDomain(invocation, argumentIndex);
 							DomainUsage domainUsage = scheduleManager.getDomainUsage(domain);
 							if (domainUsage.isOutput()) {
-								whenedOutputVariables.add(QVTrelationUtil.getReferredVariable(variableExp));
+								if (invocation.getReferredRelation().isIsTopLevel()) {
+									topWhenedOutputVariables.add(QVTrelationUtil.getReferredVariable(variableExp));
+								}
+								else {
+									nonTopWhenedOutputVariables.add(QVTrelationUtil.getReferredVariable(variableExp));
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-		return whenedOutputVariables;
 	}
 
 	public @Nullable Iterable<@NonNull InvocationAnalysis> basicGetIncomingWhenInvocationAnalyses() {
@@ -991,8 +1003,12 @@ public class RelationAnalysis extends RuleAnalysis
 		//		}
 	} */
 
-	protected @NonNull Set<@NonNull VariableDeclaration> getWhenedOutputVariables() {
-		return ClassUtil.nonNullState(whenedOutputVariables);
+	protected @NonNull Set<@NonNull VariableDeclaration> getNonTopWhenedOutputVariables() {
+		return ClassUtil.nonNullState(nonTopWhenedOutputVariables);
+	}
+
+	protected @NonNull Set<@NonNull VariableDeclaration> getTopWhenedOutputVariables() {
+		return ClassUtil.nonNullState(topWhenedOutputVariables);
 	}
 
 	public boolean hasIncomingWhenInvocationAnalyses() {
@@ -1861,8 +1877,12 @@ public class RelationAnalysis extends RuleAnalysis
 			createKeyedNode(isUnconditional, QVTrelationUtil.getName(variableDeclaration), variableDeclaration);
 			return; // keyed object created by synthesizeKeyedObject
 		}
-		else if (getWhenedOutputVariables().contains(variableDeclaration)) {
+		else if (getTopWhenedOutputVariables().contains(variableDeclaration)) {
 			createOldNode(variableDeclaration);		// when output is created by the invoked when
+		}
+		else if (getNonTopWhenedOutputVariables().contains(variableDeclaration)) {
+			createOldNode(variableDeclaration);		// when output is created by the invoked when
+			//			createRealizedStepNode(variableDeclaration);		// when output is created by the invoker
 		}
 		else if (hasIncomingWhereInvocationAnalyses() && Iterables.contains(QVTrelationUtil.getRootVariables(getRule()), variableDeclaration)) {
 			createOldNode(variableDeclaration);		// where 'output' is created by invoker

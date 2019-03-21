@@ -569,6 +569,14 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
+	public @NonNull NavigableEdge createPredicatedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+		Role edgeRole = Role.PREDICATED;
+		NavigationEdge forwardEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
+		forwardEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
+		forwardEdge.initializeProperty(source2targetProperty, isPartial);
+		return forwardEdge;
+	}
+
 	public @NonNull Node createPredicatedNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched) {
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(Role.PREDICATED, region, name, classDatum);
