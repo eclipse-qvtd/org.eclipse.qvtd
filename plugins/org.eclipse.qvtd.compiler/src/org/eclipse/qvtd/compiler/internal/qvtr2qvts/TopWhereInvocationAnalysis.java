@@ -45,6 +45,6 @@ public class TopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 
 	@Override
 	public @NonNull String toString() {
-		return invokingRelationAnalysis.getRule().getName() + "== top-where ==>" + invokedRelationAnalysis.getRule().getName();
+		return invokingRelationAnalysis.getRule().getName() + "==where==top==>" + invokedRelationAnalysis.getRule().getName();
 	}
 }

@@ -43,12 +43,14 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 {
 	protected final boolean useActivators;
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
+	private final @NonNull Iterable<@NonNull Node> realizedWhenNodes;
 	private final @Nullable Node dispatchNode;
 
 	public LocalPredicatePartitionFactory(@NonNull MappingPartitioner mappingPartitioner, boolean useActivators) {
 		super(mappingPartitioner);
 		this.executionNodes = mappingPartitioner.getExecutionNodes();
 		this.useActivators = useActivators;
+		this.realizedWhenNodes = mappingPartitioner.getRealizedWhenNodes();
 		this.dispatchNode = mappingPartitioner.basicGetDispatchNode();
 	}
 
@@ -137,6 +139,18 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 		if (dispatchNode2 != null) {
 			assert dispatchNode2.isPredicated();
 			addNode(partition, dispatchNode2); //, Role.SPECULATED);
+		}
+		//
+		//	Predicate top-when calls output edges.
+		//
+		for (@NonNull Node realizedWhenNode : realizedWhenNodes) {
+			addNode(partition, realizedWhenNode, Role.PREDICATED);
+			for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(realizedWhenNode)) {
+				Node argumentNode = QVTscheduleUtil.getSourceNode(incomingEdge);
+				if (scheduleManager.isOutput(argumentNode)) {
+					addNode(partition, argumentNode); //, Role.SPECULATED);
+				}
+			}
 		}
 		//
 		//	All old nodes reachable from heads that are not part of cycles are copied to the speculation guard.

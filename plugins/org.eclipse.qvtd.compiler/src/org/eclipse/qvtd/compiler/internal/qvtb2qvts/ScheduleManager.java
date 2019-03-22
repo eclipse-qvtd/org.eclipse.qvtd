@@ -151,6 +151,8 @@ public interface ScheduleManager
 	 */
 	boolean isInput(@NonNull Domain domain);
 
+	boolean isInput(@NonNull Node node);
+
 	boolean isInput(@NonNull TypedModel typedModel);
 	/**
 	 * Return true if node is part of the middle (traced) domain.
@@ -164,6 +166,8 @@ public interface ScheduleManager
 	 * Return true if domain is an output domain.
 	 */
 	boolean isOutput(@NonNull Domain domain);
+
+	boolean isOutput(@NonNull Node node);
 
 	/**
 	 * Return true if multiple trace class prodicers should be discrimated to enabale manually designed trace classes to

@@ -11,6 +11,10 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 /**
  * A NonTopWhenInvocationAnalysis identifies the invocation of a non-top Relation by a when clause in another.
@@ -21,6 +25,16 @@ public class NonTopWhenInvocationAnalysis extends AbstractWhenInvocationAnalysis
 		super(invokingRelationAnalysis, invokedRelationAnalysis);
 	}
 
+	//	@Override
+	protected @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched) {
+		return invokingRelationAnalysis.createRealizedNode(name, classDatum, isMatched);
+	}
+
+	@Override
+	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
+		return invokingRelationAnalysis.createPredicatedNavigationEdge(invokedNode, invocationProperty, argumentNode, null);
+	}
+
 	@Override
 	public boolean isTop() {
 		return false;
@@ -28,6 +42,6 @@ public class NonTopWhenInvocationAnalysis extends AbstractWhenInvocationAnalysis
 
 	@Override
 	public @NonNull String toString() {
-		return invokingRelationAnalysis.getRule().getName() + "== non-top-when ==>" + invokedRelationAnalysis.getRule().getName();
+		return invokingRelationAnalysis.getRule().getName() + "==when==non-top==>" + invokedRelationAnalysis.getRule().getName();
 	}
 }

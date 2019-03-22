@@ -410,6 +410,16 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getRealizedOutputNodes();
 	}
 
+	public @NonNull List<@NonNull Node> getRealizedWhenNodes() {
+		List<@NonNull Node> realizedWhenNodes = new ArrayList<>();
+		for (@NonNull Node node : getRealizedMiddleNodes()) {
+			if (node.getName().startsWith("when_")) {
+				realizedWhenNodes.add(node);
+			}
+		}
+		return realizedWhenNodes;
+	}
+
 	public @NonNull List<@NonNull Node> getRealizedWhereNodes() {
 		List<@NonNull Node> realizedWhereNodes = new ArrayList<>();
 		for (@NonNull Node node : getRealizedMiddleNodes()) {
@@ -536,10 +546,11 @@ public class MappingPartitioner implements Nameable
 		//	}
 		boolean hasPredication = false;
 		boolean needsActivator = false;
+		List<@NonNull Node> realizedWhenNodes = getRealizedWhenNodes();
 		boolean useActivators = scheduleManager.useActivators();
 		if (useActivators) {		// QVTr
 			List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
-			hasPredication = predicatedWhenNodes.size() > 0;
+			hasPredication = (predicatedWhenNodes.size() > 0) || (realizedWhenNodes.size() > 0);
 			List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
 			if (realizedExecutionNodes.size() > 0)	{			// A 'single' realized "trace" node is a boring no-override top activation.
 				needsActivator = true;
@@ -562,6 +573,9 @@ public class MappingPartitioner implements Nameable
 			//	Create an activator to make a QVTr top relation behave as a non-top relation.
 			//
 			newPartitionAnalyses.add(new ActivatorPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
+		}
+		if (realizedWhenNodes.size() > 0) {
+			newPartitionAnalyses.add(new WhenPartitionFactory(this, useActivators).createPartitionAnalysis(partitionedTransformationAnalysis));
 		}
 		if (!needsSpeculation) {
 			//

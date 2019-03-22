@@ -965,8 +965,17 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public boolean isInput(@NonNull Node node) {
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+		DomainUsage domainUsage = getDomainUsage(classDatum);
+		return domainUsage.isInput();
+	}
+
+	@Override
 	public boolean isMiddle(@NonNull Node node) {
-		return getDomainUsage(QVTscheduleUtil.getClassDatum(node)).isMiddle();
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+		DomainUsage domainUsage = getDomainUsage(classDatum);
+		return domainUsage.isMiddle();
 	}
 
 	@Override
@@ -994,6 +1003,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		DomainUsage usage = getDomainUsage(sourceVariable);
 		assert usage != null;
 		return !usage.isOutput();
+	}
+
+	@Override
+	public boolean isOutput(@NonNull Node node) {
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+		DomainUsage domainUsage = getDomainUsage(classDatum);
+		return domainUsage.isOutput();
 	}
 
 	@Override

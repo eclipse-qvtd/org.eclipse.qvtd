@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 /**
  * A TopWhenInvocationAnalysis identifies the invocation of a top Relation by a when clause in another.
@@ -21,6 +23,11 @@ public class TopWhenInvocationAnalysis extends AbstractWhenInvocationAnalysis
 		super(invokingRelationAnalysis, invokedRelationAnalysis);
 	}
 
+	//	@Override
+	protected @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched) {
+		return invokingRelationAnalysis.createPredicatedNode(name, classDatum, isMatched);
+	}
+
 	@Override
 	public boolean isTop() {
 		return true;
@@ -28,6 +35,6 @@ public class TopWhenInvocationAnalysis extends AbstractWhenInvocationAnalysis
 
 	@Override
 	public @NonNull String toString() {
-		return invokingRelationAnalysis.getRule().getName() + "== top-when ==>" + invokedRelationAnalysis.getRule().getName();
+		return invokingRelationAnalysis.getRule().getName() + "==when==top==>" + invokedRelationAnalysis.getRule().getName();
 	}
 }
