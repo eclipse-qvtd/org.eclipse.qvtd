@@ -30,3 +30,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Automatic-Module-Name: org.eclipse.qvtd.all.tests
+Export-Package: org.eclipse.qvtd.all.tests
