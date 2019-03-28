@@ -43,7 +43,7 @@ public interface SElement extends EObject {
 	 * @return the value of the '<em>Ast</em>' reference.
 	 * @see #setAst(Element)
 	 * @see example5.sbase.SbasePackage#getSElement_Ast()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	Element getAst();

@@ -43,7 +43,7 @@ public interface SElement extends EObject {
 	 * @return the value of the '<em>Ast</em>' reference.
 	 * @see #setAst(Visitable)
 	 * @see example1.source.SourcePackage#getSElement_Ast()
-	 * @model type="example1.target.Visitable"
+	 * @model type="example1.target.Visitable" transient="true"
 	 * @generated
 	 */
 	Visitable getAst();

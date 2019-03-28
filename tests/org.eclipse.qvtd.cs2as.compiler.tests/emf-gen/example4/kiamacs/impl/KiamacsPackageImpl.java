@@ -304,7 +304,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 		initEClass(leafCSEClass, LeafCS.class, "LeafCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(baseCSEClass, BaseCS.class, "BaseCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBaseCS_Ast(), theKiamaasPackage.getElement(), null, "ast", null, 0, 1, BaseCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBaseCS_Ast(), theKiamaasPackage.getElement(), null, "ast", null, 0, 1, BaseCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

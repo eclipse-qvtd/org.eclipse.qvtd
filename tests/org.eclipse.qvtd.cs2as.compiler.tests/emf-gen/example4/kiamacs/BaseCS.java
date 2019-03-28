@@ -43,7 +43,7 @@ public interface BaseCS extends EObject {
 	 * @return the value of the '<em>Ast</em>' reference.
 	 * @see #setAst(Element)
 	 * @see example4.kiamacs.KiamacsPackage#getBaseCS_Ast()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	Element getAst();

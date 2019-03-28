@@ -43,7 +43,7 @@ public interface ElementCS extends EObject {
 	 * @return the value of the '<em>Ast</em>' reference.
 	 * @see #setAst(Visitable)
 	 * @see example2.classescs.ClassescsPackage#getElementCS_Ast()
-	 * @model type="example2.classes.Visitable"
+	 * @model type="example2.classes.Visitable" transient="true"
 	 * @generated
 	 */
 	Visitable getAst();
