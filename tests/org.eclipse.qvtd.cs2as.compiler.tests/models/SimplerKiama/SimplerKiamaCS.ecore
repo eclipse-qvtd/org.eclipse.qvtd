@@ -13,6 +13,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LeafCS" eSuperTypes="#//NodeCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="BaseCS" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" eType="ecore:EClass SimplerKiamaAS.ecore#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" eType="ecore:EClass SimplerKiamaAS.ecore#//Element"
+        transient="true"/>
   </eClassifiers>
 </ecore:EPackage>
