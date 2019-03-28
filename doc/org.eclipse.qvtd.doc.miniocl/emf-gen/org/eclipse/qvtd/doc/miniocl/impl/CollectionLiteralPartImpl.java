@@ -26,6 +26,23 @@ import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
  */
 public abstract class CollectionLiteralPartImpl extends TypedElementImpl implements CollectionLiteralPart {
 	/**
+	 * The number of structural features of the '<em>Collection Literal Part</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_LITERAL_PART_FEATURE_COUNT = TypedElementImpl.TYPED_ELEMENT_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Collection Literal Part</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_LITERAL_PART_OPERATION_COUNT = TypedElementImpl.TYPED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

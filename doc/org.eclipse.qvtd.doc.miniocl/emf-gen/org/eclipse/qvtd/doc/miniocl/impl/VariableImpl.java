@@ -40,6 +40,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class VariableImpl extends NamedElementImpl implements Variable {
 	/**
+	 * The number of structural features of the '<em>Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VARIABLE_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VARIABLE_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,13 +101,14 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.doc.miniocl.Class getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
 			type = (org.eclipse.qvtd.doc.miniocl.Class)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MiniOCLPackage.VARIABLE__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldType, type));
 			}
 		}
 		return type;
@@ -109,11 +128,12 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(org.eclipse.qvtd.doc.miniocl.Class newType) {
 		org.eclipse.qvtd.doc.miniocl.Class oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.VARIABLE__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldType, type));
 	}
 
 	/**
@@ -121,6 +141,7 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getOwnedInitExp() {
 		return ownedInitExp;
 	}
@@ -134,7 +155,7 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 		OCLExpression oldOwnedInitExp = ownedInitExp;
 		ownedInitExp = newOwnedInitExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.VARIABLE__OWNED_INIT_EXP, oldOwnedInitExp, newOwnedInitExp);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldOwnedInitExp, newOwnedInitExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -145,18 +166,19 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedInitExp(OCLExpression newOwnedInitExp) {
 		if (newOwnedInitExp != ownedInitExp) {
 			NotificationChain msgs = null;
 			if (ownedInitExp != null)
-				msgs = ((InternalEObject)ownedInitExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.VARIABLE__OWNED_INIT_EXP, null, msgs);
+				msgs = ((InternalEObject)ownedInitExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newOwnedInitExp != null)
-				msgs = ((InternalEObject)newOwnedInitExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.VARIABLE__OWNED_INIT_EXP, null, msgs);
+				msgs = ((InternalEObject)newOwnedInitExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetOwnedInitExp(newOwnedInitExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.VARIABLE__OWNED_INIT_EXP, newOwnedInitExp, newOwnedInitExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwnedInitExp, newOwnedInitExp));
 	}
 
 	/**
@@ -167,7 +189,7 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.VARIABLE__OWNED_INIT_EXP:
+			case 2:
 				return basicSetOwnedInitExp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -181,10 +203,10 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.VARIABLE__TYPE:
+			case 1:
 				if (resolve) return getType();
 				return basicGetType();
-			case MiniOCLPackage.VARIABLE__OWNED_INIT_EXP:
+			case 2:
 				return getOwnedInitExp();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -198,10 +220,10 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.VARIABLE__TYPE:
+			case 1:
 				setType((org.eclipse.qvtd.doc.miniocl.Class)newValue);
 				return;
-			case MiniOCLPackage.VARIABLE__OWNED_INIT_EXP:
+			case 2:
 				setOwnedInitExp((OCLExpression)newValue);
 				return;
 		}
@@ -216,10 +238,10 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.VARIABLE__TYPE:
+			case 1:
 				setType((org.eclipse.qvtd.doc.miniocl.Class)null);
 				return;
-			case MiniOCLPackage.VARIABLE__OWNED_INIT_EXP:
+			case 2:
 				setOwnedInitExp((OCLExpression)null);
 				return;
 		}
@@ -234,9 +256,9 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.VARIABLE__TYPE:
+			case 1:
 				return type != null;
-			case MiniOCLPackage.VARIABLE__OWNED_INIT_EXP:
+			case 2:
 				return ownedInitExp != null;
 		}
 		return super.eIsSet(featureID);
@@ -251,7 +273,7 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == TypedElement.class) {
 			switch (derivedFeatureID) {
-				case MiniOCLPackage.VARIABLE__TYPE: return MiniOCLPackage.TYPED_ELEMENT__TYPE;
+				case 1: return 0;
 				default: return -1;
 			}
 		}
@@ -267,7 +289,7 @@ public class VariableImpl extends NamedElementImpl implements Variable {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == TypedElement.class) {
 			switch (baseFeatureID) {
-				case MiniOCLPackage.TYPED_ELEMENT__TYPE: return MiniOCLPackage.VARIABLE__TYPE;
+				case 0: return 1;
 				default: return -1;
 			}
 		}

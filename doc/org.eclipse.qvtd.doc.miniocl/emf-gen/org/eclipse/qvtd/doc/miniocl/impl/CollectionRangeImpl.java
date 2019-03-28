@@ -44,6 +44,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class CollectionRangeImpl extends CollectionLiteralPartImpl implements CollectionRange {
 	/**
+	 * The number of structural features of the '<em>Collection Range</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_RANGE_FEATURE_COUNT = CollectionLiteralPartImpl.COLLECTION_LITERAL_PART_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Collection Range</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_RANGE_OPERATION_COUNT = CollectionLiteralPartImpl.COLLECTION_LITERAL_PART_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedFirst() <em>Owned First</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,6 +105,7 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getOwnedFirst() {
 		return ownedFirst;
 	}
@@ -100,7 +119,7 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 		OCLExpression oldOwnedFirst = ownedFirst;
 		ownedFirst = newOwnedFirst;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.COLLECTION_RANGE__OWNED_FIRST, oldOwnedFirst, newOwnedFirst);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldOwnedFirst, newOwnedFirst);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -111,18 +130,19 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedFirst(OCLExpression newOwnedFirst) {
 		if (newOwnedFirst != ownedFirst) {
 			NotificationChain msgs = null;
 			if (ownedFirst != null)
-				msgs = ((InternalEObject)ownedFirst).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.COLLECTION_RANGE__OWNED_FIRST, null, msgs);
+				msgs = ((InternalEObject)ownedFirst).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			if (newOwnedFirst != null)
-				msgs = ((InternalEObject)newOwnedFirst).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.COLLECTION_RANGE__OWNED_FIRST, null, msgs);
+				msgs = ((InternalEObject)newOwnedFirst).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			msgs = basicSetOwnedFirst(newOwnedFirst, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.COLLECTION_RANGE__OWNED_FIRST, newOwnedFirst, newOwnedFirst));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newOwnedFirst, newOwnedFirst));
 	}
 
 	/**
@@ -130,6 +150,7 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getOwnedLast() {
 		return ownedLast;
 	}
@@ -143,7 +164,7 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 		OCLExpression oldOwnedLast = ownedLast;
 		ownedLast = newOwnedLast;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.COLLECTION_RANGE__OWNED_LAST, oldOwnedLast, newOwnedLast);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldOwnedLast, newOwnedLast);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -154,18 +175,19 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedLast(OCLExpression newOwnedLast) {
 		if (newOwnedLast != ownedLast) {
 			NotificationChain msgs = null;
 			if (ownedLast != null)
-				msgs = ((InternalEObject)ownedLast).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.COLLECTION_RANGE__OWNED_LAST, null, msgs);
+				msgs = ((InternalEObject)ownedLast).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newOwnedLast != null)
-				msgs = ((InternalEObject)newOwnedLast).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.COLLECTION_RANGE__OWNED_LAST, null, msgs);
+				msgs = ((InternalEObject)newOwnedLast).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetOwnedLast(newOwnedLast, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.COLLECTION_RANGE__OWNED_LAST, newOwnedLast, newOwnedLast));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwnedLast, newOwnedLast));
 	}
 
 	/**
@@ -176,9 +198,9 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_FIRST:
+			case 1:
 				return basicSetOwnedFirst(null, msgs);
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_LAST:
+			case 2:
 				return basicSetOwnedLast(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -192,9 +214,9 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_FIRST:
+			case 1:
 				return getOwnedFirst();
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_LAST:
+			case 2:
 				return getOwnedLast();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -208,10 +230,10 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_FIRST:
+			case 1:
 				setOwnedFirst((OCLExpression)newValue);
 				return;
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_LAST:
+			case 2:
 				setOwnedLast((OCLExpression)newValue);
 				return;
 		}
@@ -226,10 +248,10 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_FIRST:
+			case 1:
 				setOwnedFirst((OCLExpression)null);
 				return;
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_LAST:
+			case 2:
 				setOwnedLast((OCLExpression)null);
 				return;
 		}
@@ -244,9 +266,9 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_FIRST:
+			case 1:
 				return ownedFirst != null;
-			case MiniOCLPackage.COLLECTION_RANGE__OWNED_LAST:
+			case 2:
 				return ownedLast != null;
 		}
 		return super.eIsSet(featureID);

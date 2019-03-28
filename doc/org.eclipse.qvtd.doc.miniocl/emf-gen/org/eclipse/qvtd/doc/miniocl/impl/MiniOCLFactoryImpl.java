@@ -88,30 +88,30 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case MiniOCLPackage.BOOLEAN_LITERAL_EXP: return createBooleanLiteralExp();
-			case MiniOCLPackage.CLASS: return createClass();
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP: return createCollectionLiteralExp();
-			case MiniOCLPackage.COLLECTION_ITEM: return createCollectionItem();
-			case MiniOCLPackage.COLLECTION_RANGE: return createCollectionRange();
-			case MiniOCLPackage.CONSTRAINT: return createConstraint();
-			case MiniOCLPackage.EXPRESSION_IN_OCL: return createExpressionInOCL();
-			case MiniOCLPackage.FEATURE: return createFeature();
-			case MiniOCLPackage.IMPORT: return createImport();
-			case MiniOCLPackage.INTEGER_LITERAL_EXP: return createIntegerLiteralExp();
-			case MiniOCLPackage.ITERATOR_EXP: return createIteratorExp();
-			case MiniOCLPackage.ITERATE_EXP: return createIterateExp();
-			case MiniOCLPackage.LET_EXP: return createLetExp();
-			case MiniOCLPackage.NULL_LITERAL_EXP: return createNullLiteralExp();
-			case MiniOCLPackage.OPAQUE_EXPRESSION: return createOpaqueExpression();
-			case MiniOCLPackage.OPERATION_CALL_EXP: return createOperationCallExp();
-			case MiniOCLPackage.OPERATION: return createOperation();
-			case MiniOCLPackage.PACKAGE: return createPackage();
-			case MiniOCLPackage.PARAMETER: return createParameter();
-			case MiniOCLPackage.PROPERTY: return createProperty();
-			case MiniOCLPackage.PROPERTY_CALL_EXP: return createPropertyCallExp();
-			case MiniOCLPackage.ROOT: return createRoot();
-			case MiniOCLPackage.VARIABLE: return createVariable();
-			case MiniOCLPackage.VARIABLE_EXP: return createVariableExp();
+			case 0: return createBooleanLiteralExp();
+			case 2: return createClass();
+			case 3: return createCollectionLiteralExp();
+			case 4: return createCollectionItem();
+			case 6: return createCollectionRange();
+			case 7: return createConstraint();
+			case 9: return createExpressionInOCL();
+			case 10: return createFeature();
+			case 11: return createImport();
+			case 12: return createIntegerLiteralExp();
+			case 13: return createIteratorExp();
+			case 14: return createIterateExp();
+			case 15: return createLetExp();
+			case 20: return createNullLiteralExp();
+			case 22: return createOpaqueExpression();
+			case 23: return createOperationCallExp();
+			case 24: return createOperation();
+			case 25: return createPackage();
+			case 26: return createParameter();
+			case 28: return createProperty();
+			case 29: return createPropertyCallExp();
+			case 30: return createRoot();
+			case 31: return createVariable();
+			case 32: return createVariableExp();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -125,7 +125,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case MiniOCLPackage.COLLECTION_KIND:
+			case 35:
 				return createCollectionKindFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -140,7 +140,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case MiniOCLPackage.COLLECTION_KIND:
+			case 35:
 				return convertCollectionKindToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -152,6 +152,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BooleanLiteralExp createBooleanLiteralExp() {
 		BooleanLiteralExpImpl booleanLiteralExp = new BooleanLiteralExpImpl();
 		return booleanLiteralExp;
@@ -162,6 +163,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
@@ -172,6 +174,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.doc.miniocl.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
@@ -182,6 +185,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.doc.miniocl.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
@@ -192,6 +196,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CollectionLiteralExp createCollectionLiteralExp() {
 		CollectionLiteralExpImpl collectionLiteralExp = new CollectionLiteralExpImpl();
 		return collectionLiteralExp;
@@ -202,6 +207,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CollectionItem createCollectionItem() {
 		CollectionItemImpl collectionItem = new CollectionItemImpl();
 		return collectionItem;
@@ -212,6 +218,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CollectionRange createCollectionRange() {
 		CollectionRangeImpl collectionRange = new CollectionRangeImpl();
 		return collectionRange;
@@ -222,6 +229,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Feature createFeature() {
 		FeatureImpl feature = new FeatureImpl();
 		return feature;
@@ -232,6 +240,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Import createImport() {
 		ImportImpl import_ = new ImportImpl();
 		return import_;
@@ -242,6 +251,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IntegerLiteralExp createIntegerLiteralExp() {
 		IntegerLiteralExpImpl integerLiteralExp = new IntegerLiteralExpImpl();
 		return integerLiteralExp;
@@ -252,6 +262,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IteratorExp createIteratorExp() {
 		IteratorExpImpl iteratorExp = new IteratorExpImpl();
 		return iteratorExp;
@@ -262,6 +273,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IterateExp createIterateExp() {
 		IterateExpImpl iterateExp = new IterateExpImpl();
 		return iterateExp;
@@ -272,6 +284,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LetExp createLetExp() {
 		LetExpImpl letExp = new LetExpImpl();
 		return letExp;
@@ -282,6 +295,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NullLiteralExp createNullLiteralExp() {
 		NullLiteralExpImpl nullLiteralExp = new NullLiteralExpImpl();
 		return nullLiteralExp;
@@ -292,6 +306,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OpaqueExpression createOpaqueExpression() {
 		OpaqueExpressionImpl opaqueExpression = new OpaqueExpressionImpl();
 		return opaqueExpression;
@@ -302,6 +317,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property createProperty() {
 		PropertyImpl property = new PropertyImpl();
 		return property;
@@ -312,6 +328,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Operation createOperation() {
 		OperationImpl operation = new OperationImpl();
 		return operation;
@@ -322,6 +339,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
@@ -332,6 +350,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PropertyCallExp createPropertyCallExp() {
 		PropertyCallExpImpl propertyCallExp = new PropertyCallExpImpl();
 		return propertyCallExp;
@@ -342,6 +361,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OperationCallExp createOperationCallExp() {
 		OperationCallExpImpl operationCallExp = new OperationCallExpImpl();
 		return operationCallExp;
@@ -352,6 +372,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable createVariable() {
 		VariableImpl variable = new VariableImpl();
 		return variable;
@@ -362,6 +383,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableExp createVariableExp() {
 		VariableExpImpl variableExp = new VariableExpImpl();
 		return variableExp;
@@ -392,6 +414,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExpressionInOCL createExpressionInOCL() {
 		ExpressionInOCLImpl expressionInOCL = new ExpressionInOCLImpl();
 		return expressionInOCL;
@@ -402,6 +425,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Constraint createConstraint() {
 		ConstraintImpl constraint = new ConstraintImpl();
 		return constraint;
@@ -412,6 +436,7 @@ public class MiniOCLFactoryImpl extends EFactoryImpl implements MiniOCLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MiniOCLPackage getMiniOCLPackage() {
 		return (MiniOCLPackage)getEPackage();
 	}

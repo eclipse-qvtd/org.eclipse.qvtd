@@ -40,6 +40,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class PackageImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.miniocl.Package {
 	/**
+	 * The number of structural features of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_FEATURE_COUNT = NamespaceImpl.NAMESPACE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_OPERATION_COUNT = NamespaceImpl.NAMESPACE_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedClasses() <em>Owned Classes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,9 +101,10 @@ public class PackageImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.m
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<org.eclipse.qvtd.doc.miniocl.Class> getOwnedClasses() {
 		if (ownedClasses == null) {
-			ownedClasses = new EObjectContainmentEList<org.eclipse.qvtd.doc.miniocl.Class>(org.eclipse.qvtd.doc.miniocl.Class.class, this, MiniOCLPackage.PACKAGE__OWNED_CLASSES);
+			ownedClasses = new EObjectContainmentEList<org.eclipse.qvtd.doc.miniocl.Class>(org.eclipse.qvtd.doc.miniocl.Class.class, this, 1);
 		}
 		return ownedClasses;
 	}
@@ -95,9 +114,10 @@ public class PackageImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.m
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<org.eclipse.qvtd.doc.miniocl.Package> getOwnedPackages() {
 		if (ownedPackages == null) {
-			ownedPackages = new EObjectContainmentEList<org.eclipse.qvtd.doc.miniocl.Package>(org.eclipse.qvtd.doc.miniocl.Package.class, this, MiniOCLPackage.PACKAGE__OWNED_PACKAGES);
+			ownedPackages = new EObjectContainmentEList<org.eclipse.qvtd.doc.miniocl.Package>(org.eclipse.qvtd.doc.miniocl.Package.class, this, 2);
 		}
 		return ownedPackages;
 	}
@@ -110,9 +130,9 @@ public class PackageImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.m
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				return ((InternalEList<?>)getOwnedClasses()).basicRemove(otherEnd, msgs);
-			case MiniOCLPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				return ((InternalEList<?>)getOwnedPackages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -126,9 +146,9 @@ public class PackageImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.m
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				return getOwnedClasses();
-			case MiniOCLPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				return getOwnedPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -143,11 +163,11 @@ public class PackageImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.m
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				getOwnedClasses().clear();
 				getOwnedClasses().addAll((Collection<? extends org.eclipse.qvtd.doc.miniocl.Class>)newValue);
 				return;
-			case MiniOCLPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				getOwnedPackages().clear();
 				getOwnedPackages().addAll((Collection<? extends org.eclipse.qvtd.doc.miniocl.Package>)newValue);
 				return;
@@ -163,10 +183,10 @@ public class PackageImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.m
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				getOwnedClasses().clear();
 				return;
-			case MiniOCLPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				getOwnedPackages().clear();
 				return;
 		}
@@ -181,9 +201,9 @@ public class PackageImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.m
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				return ownedClasses != null && !ownedClasses.isEmpty();
-			case MiniOCLPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				return ownedPackages != null && !ownedPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);

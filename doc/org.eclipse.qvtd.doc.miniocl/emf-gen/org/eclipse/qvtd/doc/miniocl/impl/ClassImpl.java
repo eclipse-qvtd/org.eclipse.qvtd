@@ -44,6 +44,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.miniocl.Class {
 	/**
+	 * The number of structural features of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_FEATURE_COUNT = NamespaceImpl.NAMESPACE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_OPERATION_COUNT = NamespaceImpl.NAMESPACE_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getSuperClasses() <em>Super Classes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,9 +115,10 @@ public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.min
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<org.eclipse.qvtd.doc.miniocl.Class> getSuperClasses() {
 		if (superClasses == null) {
-			superClasses = new EObjectResolvingEList<org.eclipse.qvtd.doc.miniocl.Class>(org.eclipse.qvtd.doc.miniocl.Class.class, this, MiniOCLPackage.CLASS__SUPER_CLASSES);
+			superClasses = new EObjectResolvingEList<org.eclipse.qvtd.doc.miniocl.Class>(org.eclipse.qvtd.doc.miniocl.Class.class, this, 1);
 		}
 		return superClasses;
 	}
@@ -109,9 +128,10 @@ public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.min
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Operation> getOwnedOperations() {
 		if (ownedOperations == null) {
-			ownedOperations = new EObjectContainmentWithInverseEList<Operation>(Operation.class, this, MiniOCLPackage.CLASS__OWNED_OPERATIONS, MiniOCLPackage.OPERATION__OWNING_CLASS);
+			ownedOperations = new EObjectContainmentWithInverseEList<Operation>(Operation.class, this, 2, 4);
 		}
 		return ownedOperations;
 	}
@@ -121,9 +141,10 @@ public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.min
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Property> getOwnedProperties() {
 		if (ownedProperties == null) {
-			ownedProperties = new EObjectContainmentWithInverseEList<Property>(Property.class, this, MiniOCLPackage.CLASS__OWNED_PROPERTIES, MiniOCLPackage.PROPERTY__OWNING_CLASS);
+			ownedProperties = new EObjectContainmentWithInverseEList<Property>(Property.class, this, 3, 2);
 		}
 		return ownedProperties;
 	}
@@ -137,9 +158,9 @@ public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.min
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedOperations()).basicAdd(otherEnd, msgs);
-			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedProperties()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -153,9 +174,9 @@ public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.min
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				return ((InternalEList<?>)getOwnedOperations()).basicRemove(otherEnd, msgs);
-			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				return ((InternalEList<?>)getOwnedProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -169,11 +190,11 @@ public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.min
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__SUPER_CLASSES:
+			case 1:
 				return getSuperClasses();
-			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				return getOwnedOperations();
-			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				return getOwnedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -188,15 +209,15 @@ public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.min
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__SUPER_CLASSES:
+			case 1:
 				getSuperClasses().clear();
 				getSuperClasses().addAll((Collection<? extends org.eclipse.qvtd.doc.miniocl.Class>)newValue);
 				return;
-			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				getOwnedOperations().clear();
 				getOwnedOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
-			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				getOwnedProperties().clear();
 				getOwnedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
@@ -212,13 +233,13 @@ public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.min
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__SUPER_CLASSES:
+			case 1:
 				getSuperClasses().clear();
 				return;
-			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				getOwnedOperations().clear();
 				return;
-			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				getOwnedProperties().clear();
 				return;
 		}
@@ -233,11 +254,11 @@ public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.min
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__SUPER_CLASSES:
+			case 1:
 				return superClasses != null && !superClasses.isEmpty();
-			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				return ownedOperations != null && !ownedOperations.isEmpty();
-			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				return ownedProperties != null && !ownedProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);

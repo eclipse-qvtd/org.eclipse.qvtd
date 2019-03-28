@@ -29,7 +29,6 @@ import org.eclipse.jdt.annotation.Nullable;
  *
  * assigned should be invoked to invocation that a property whose access is guarded is now assigned.
  *
- * at-since 1.1
  * @noimplement clients should derive from AbstractObjectManager
  */
 public interface ObjectManager extends ExecutionVisitable
@@ -37,17 +36,23 @@ public interface ObjectManager extends ExecutionVisitable
 	/**
 	 * Mark the eFeature of eObject as assigned with an ecoreValue. Ordered child assignments may be ordered by the childKey.
 	 */
+	void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
+	@Deprecated /* @deprecated childKey not used */
 	void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey);
 
 	/**
 	 * Mark the eFeature of eObject as assigned with an ecoreValue by an invocation. Ordered child assignments may be ordered by the childKey.
 	 */
+	void assigned(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
+	@Deprecated /* @deprecated childKey not used */
 	void assigned(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey);
 
 	/**
 	 * Identify the creation of eObject by the current mapping invocation.
 	 */
 	void created(Invocation.@NonNull Incremental invocation, @NonNull Object eObject);
+
+	void destroyed(@NonNull Object eObject);
 
 	@NonNull Iterable<@NonNull ? extends Object> getObjects();
 	@NonNull Iterable<@NonNull ? extends SlotState> getSlotStates(@NonNull Object object);
@@ -59,9 +64,7 @@ public interface ObjectManager extends ExecutionVisitable
 	void getting(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, boolean isOpposite) throws InvocationFailedException;
 
 	/**
-	 * Identify that the read of eFeature of eObject return ecoreValue.
+	 * Identify that the read of eFeature of eObject returns ecoreValue.
 	 */
-	void got(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
-
-	void unblock(@NonNull Invocation anInvocation);
+	void got(Execution.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
 }

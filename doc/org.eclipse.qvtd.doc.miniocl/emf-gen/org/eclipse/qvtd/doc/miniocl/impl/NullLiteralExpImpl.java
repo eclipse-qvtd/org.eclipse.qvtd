@@ -30,6 +30,23 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class NullLiteralExpImpl extends LiteralExpImpl implements NullLiteralExp {
 	/**
+	 * The number of structural features of the '<em>Null Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NULL_LITERAL_EXP_FEATURE_COUNT = LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Null Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NULL_LITERAL_EXP_OPERATION_COUNT = LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

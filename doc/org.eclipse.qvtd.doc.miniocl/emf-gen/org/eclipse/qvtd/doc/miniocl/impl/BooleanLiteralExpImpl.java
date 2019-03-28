@@ -40,6 +40,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements BooleanLiteralExp {
 	/**
+	 * The number of structural features of the '<em>Boolean Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BOOLEAN_LITERAL_EXP_FEATURE_COUNT = PrimitiveLiteralExpImpl.PRIMITIVE_LITERAL_EXP_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Boolean Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BOOLEAN_LITERAL_EXP_OPERATION_COUNT = PrimitiveLiteralExpImpl.PRIMITIVE_LITERAL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +101,7 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isBooleanSymbol() {
 		return booleanSymbol;
 	}
@@ -92,11 +111,12 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBooleanSymbol(boolean newBooleanSymbol) {
 		boolean oldBooleanSymbol = booleanSymbol;
 		booleanSymbol = newBooleanSymbol;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL, oldBooleanSymbol, booleanSymbol));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldBooleanSymbol, booleanSymbol));
 	}
 
 	/**
@@ -107,7 +127,7 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			case 1:
 				return isBooleanSymbol();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,7 +141,7 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			case 1:
 				setBooleanSymbol((Boolean)newValue);
 				return;
 		}
@@ -136,7 +156,7 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			case 1:
 				setBooleanSymbol(BOOLEAN_SYMBOL_EDEFAULT);
 				return;
 		}
@@ -151,7 +171,7 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			case 1:
 				return booleanSymbol != BOOLEAN_SYMBOL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -166,7 +186,7 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (booleanSymbol: ");
 		result.append(booleanSymbol);
 		result.append(')');

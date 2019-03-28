@@ -40,6 +40,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class IntegerLiteralExpImpl extends PrimitiveLiteralExpImpl implements IntegerLiteralExp {
 	/**
+	 * The number of structural features of the '<em>Integer Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_LITERAL_EXP_FEATURE_COUNT = PrimitiveLiteralExpImpl.PRIMITIVE_LITERAL_EXP_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Integer Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_LITERAL_EXP_OPERATION_COUNT = PrimitiveLiteralExpImpl.PRIMITIVE_LITERAL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +101,7 @@ public class IntegerLiteralExpImpl extends PrimitiveLiteralExpImpl implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getIntegerSymbol() {
 		return integerSymbol;
 	}
@@ -92,11 +111,12 @@ public class IntegerLiteralExpImpl extends PrimitiveLiteralExpImpl implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIntegerSymbol(int newIntegerSymbol) {
 		int oldIntegerSymbol = integerSymbol;
 		integerSymbol = newIntegerSymbol;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL, oldIntegerSymbol, integerSymbol));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldIntegerSymbol, integerSymbol));
 	}
 
 	/**
@@ -107,7 +127,7 @@ public class IntegerLiteralExpImpl extends PrimitiveLiteralExpImpl implements In
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			case 1:
 				return getIntegerSymbol();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,7 +141,7 @@ public class IntegerLiteralExpImpl extends PrimitiveLiteralExpImpl implements In
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			case 1:
 				setIntegerSymbol((Integer)newValue);
 				return;
 		}
@@ -136,7 +156,7 @@ public class IntegerLiteralExpImpl extends PrimitiveLiteralExpImpl implements In
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			case 1:
 				setIntegerSymbol(INTEGER_SYMBOL_EDEFAULT);
 				return;
 		}
@@ -151,7 +171,7 @@ public class IntegerLiteralExpImpl extends PrimitiveLiteralExpImpl implements In
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			case 1:
 				return integerSymbol != INTEGER_SYMBOL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -166,7 +186,7 @@ public class IntegerLiteralExpImpl extends PrimitiveLiteralExpImpl implements In
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (integerSymbol: ");
 		result.append(integerSymbol);
 		result.append(')');

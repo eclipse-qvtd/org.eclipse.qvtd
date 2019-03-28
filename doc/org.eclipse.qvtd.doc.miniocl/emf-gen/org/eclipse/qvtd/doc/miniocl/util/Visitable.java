@@ -31,6 +31,6 @@ public interface Visitable
 	 * @return the result of the visit.
 	 */
 	<R> R accept(org.eclipse.qvtd.doc.miniocl.util.@NonNull Visitor<R> visitor);
-	
+
 	EClass eClass();
 }

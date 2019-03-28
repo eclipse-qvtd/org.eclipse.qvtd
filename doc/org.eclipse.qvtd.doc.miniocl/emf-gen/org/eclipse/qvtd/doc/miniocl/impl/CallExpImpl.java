@@ -36,6 +36,22 @@ import org.eclipse.qvtd.doc.miniocl.OCLExpression;
  */
 public abstract class CallExpImpl extends OCLExpressionImpl implements CallExp {
 	/**
+	 * The number of structural features of the '<em>Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CALL_EXP_FEATURE_COUNT = OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CALL_EXP_OPERATION_COUNT = OCLExpressionImpl.OCL_EXPRESSION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnedSource() <em>Owned Source</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,6 +85,7 @@ public abstract class CallExpImpl extends OCLExpressionImpl implements CallExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getOwnedSource() {
 		return ownedSource;
 	}
@@ -82,7 +99,7 @@ public abstract class CallExpImpl extends OCLExpressionImpl implements CallExp {
 		OCLExpression oldOwnedSource = ownedSource;
 		ownedSource = newOwnedSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.CALL_EXP__OWNED_SOURCE, oldOwnedSource, newOwnedSource);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldOwnedSource, newOwnedSource);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -93,18 +110,19 @@ public abstract class CallExpImpl extends OCLExpressionImpl implements CallExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedSource(OCLExpression newOwnedSource) {
 		if (newOwnedSource != ownedSource) {
 			NotificationChain msgs = null;
 			if (ownedSource != null)
-				msgs = ((InternalEObject)ownedSource).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.CALL_EXP__OWNED_SOURCE, null, msgs);
+				msgs = ((InternalEObject)ownedSource).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			if (newOwnedSource != null)
-				msgs = ((InternalEObject)newOwnedSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.CALL_EXP__OWNED_SOURCE, null, msgs);
+				msgs = ((InternalEObject)newOwnedSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			msgs = basicSetOwnedSource(newOwnedSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.CALL_EXP__OWNED_SOURCE, newOwnedSource, newOwnedSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newOwnedSource, newOwnedSource));
 	}
 
 	/**
@@ -115,7 +133,7 @@ public abstract class CallExpImpl extends OCLExpressionImpl implements CallExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.CALL_EXP__OWNED_SOURCE:
+			case 1:
 				return basicSetOwnedSource(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -129,7 +147,7 @@ public abstract class CallExpImpl extends OCLExpressionImpl implements CallExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.CALL_EXP__OWNED_SOURCE:
+			case 1:
 				return getOwnedSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -143,7 +161,7 @@ public abstract class CallExpImpl extends OCLExpressionImpl implements CallExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.CALL_EXP__OWNED_SOURCE:
+			case 1:
 				setOwnedSource((OCLExpression)newValue);
 				return;
 		}
@@ -158,7 +176,7 @@ public abstract class CallExpImpl extends OCLExpressionImpl implements CallExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.CALL_EXP__OWNED_SOURCE:
+			case 1:
 				setOwnedSource((OCLExpression)null);
 				return;
 		}
@@ -173,7 +191,7 @@ public abstract class CallExpImpl extends OCLExpressionImpl implements CallExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.CALL_EXP__OWNED_SOURCE:
+			case 1:
 				return ownedSource != null;
 		}
 		return super.eIsSet(featureID);

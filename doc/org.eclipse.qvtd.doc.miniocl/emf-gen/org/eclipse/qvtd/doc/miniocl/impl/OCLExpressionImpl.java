@@ -25,6 +25,23 @@ import org.eclipse.qvtd.doc.miniocl.OCLExpression;
  */
 public abstract class OCLExpressionImpl extends TypedElementImpl implements OCLExpression {
 	/**
+	 * The number of structural features of the '<em>OCL Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OCL_EXPRESSION_FEATURE_COUNT = TypedElementImpl.TYPED_ELEMENT_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>OCL Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OCL_EXPRESSION_OPERATION_COUNT = TypedElementImpl.TYPED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

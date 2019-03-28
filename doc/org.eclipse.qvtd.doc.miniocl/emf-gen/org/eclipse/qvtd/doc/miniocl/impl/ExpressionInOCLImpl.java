@@ -40,6 +40,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements ExpressionInOCL {
 	/**
+	 * The number of structural features of the '<em>Expression In OCL</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EXPRESSION_IN_OCL_FEATURE_COUNT = OpaqueExpressionImpl.OPAQUE_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Expression In OCL</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EXPRESSION_IN_OCL_OPERATION_COUNT = OpaqueExpressionImpl.OPAQUE_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedSelfVar() <em>Owned Self Var</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +101,7 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getOwnedSelfVar() {
 		return ownedSelfVar;
 	}
@@ -96,7 +115,7 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 		Variable oldOwnedSelfVar = ownedSelfVar;
 		ownedSelfVar = newOwnedSelfVar;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_SELF_VAR, oldOwnedSelfVar, newOwnedSelfVar);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldOwnedSelfVar, newOwnedSelfVar);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -107,18 +126,19 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedSelfVar(Variable newOwnedSelfVar) {
 		if (newOwnedSelfVar != ownedSelfVar) {
 			NotificationChain msgs = null;
 			if (ownedSelfVar != null)
-				msgs = ((InternalEObject)ownedSelfVar).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_SELF_VAR, null, msgs);
+				msgs = ((InternalEObject)ownedSelfVar).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newOwnedSelfVar != null)
-				msgs = ((InternalEObject)newOwnedSelfVar).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_SELF_VAR, null, msgs);
+				msgs = ((InternalEObject)newOwnedSelfVar).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetOwnedSelfVar(newOwnedSelfVar, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_SELF_VAR, newOwnedSelfVar, newOwnedSelfVar));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwnedSelfVar, newOwnedSelfVar));
 	}
 
 	/**
@@ -126,6 +146,7 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getOwnedBody() {
 		return ownedBody;
 	}
@@ -139,7 +160,7 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 		OCLExpression oldOwnedBody = ownedBody;
 		ownedBody = newOwnedBody;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_BODY, oldOwnedBody, newOwnedBody);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 3, oldOwnedBody, newOwnedBody);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -150,18 +171,19 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedBody(OCLExpression newOwnedBody) {
 		if (newOwnedBody != ownedBody) {
 			NotificationChain msgs = null;
 			if (ownedBody != null)
-				msgs = ((InternalEObject)ownedBody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_BODY, null, msgs);
+				msgs = ((InternalEObject)ownedBody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (3), null, msgs);
 			if (newOwnedBody != null)
-				msgs = ((InternalEObject)newOwnedBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_BODY, null, msgs);
+				msgs = ((InternalEObject)newOwnedBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (3), null, msgs);
 			msgs = basicSetOwnedBody(newOwnedBody, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_BODY, newOwnedBody, newOwnedBody));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newOwnedBody, newOwnedBody));
 	}
 
 	/**
@@ -172,9 +194,9 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_SELF_VAR:
+			case 2:
 				return basicSetOwnedSelfVar(null, msgs);
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_BODY:
+			case 3:
 				return basicSetOwnedBody(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -188,9 +210,9 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_SELF_VAR:
+			case 2:
 				return getOwnedSelfVar();
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_BODY:
+			case 3:
 				return getOwnedBody();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -204,10 +226,10 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_SELF_VAR:
+			case 2:
 				setOwnedSelfVar((Variable)newValue);
 				return;
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_BODY:
+			case 3:
 				setOwnedBody((OCLExpression)newValue);
 				return;
 		}
@@ -222,10 +244,10 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_SELF_VAR:
+			case 2:
 				setOwnedSelfVar((Variable)null);
 				return;
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_BODY:
+			case 3:
 				setOwnedBody((OCLExpression)null);
 				return;
 		}
@@ -240,9 +262,9 @@ public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements Express
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_SELF_VAR:
+			case 2:
 				return ownedSelfVar != null;
-			case MiniOCLPackage.EXPRESSION_IN_OCL__OWNED_BODY:
+			case 3:
 				return ownedBody != null;
 		}
 		return super.eIsSet(featureID);

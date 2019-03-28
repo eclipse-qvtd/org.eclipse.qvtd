@@ -43,6 +43,22 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	/**
+	 * The number of structural features of the '<em>Iterate Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ITERATE_EXP_FEATURE_COUNT = LoopExpImpl.LOOP_EXP_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Iterate Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ITERATE_EXP_OPERATION_COUNT = LoopExpImpl.LOOP_EXP_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnedResult() <em>Owned Result</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,6 +92,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getOwnedResult() {
 		return ownedResult;
 	}
@@ -89,7 +106,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 		Variable oldOwnedResult = ownedResult;
 		ownedResult = newOwnedResult;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.ITERATE_EXP__OWNED_RESULT, oldOwnedResult, newOwnedResult);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 4, oldOwnedResult, newOwnedResult);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -100,18 +117,19 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedResult(Variable newOwnedResult) {
 		if (newOwnedResult != ownedResult) {
 			NotificationChain msgs = null;
 			if (ownedResult != null)
-				msgs = ((InternalEObject)ownedResult).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.ITERATE_EXP__OWNED_RESULT, null, msgs);
+				msgs = ((InternalEObject)ownedResult).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (4), null, msgs);
 			if (newOwnedResult != null)
-				msgs = ((InternalEObject)newOwnedResult).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.ITERATE_EXP__OWNED_RESULT, null, msgs);
+				msgs = ((InternalEObject)newOwnedResult).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (4), null, msgs);
 			msgs = basicSetOwnedResult(newOwnedResult, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.ITERATE_EXP__OWNED_RESULT, newOwnedResult, newOwnedResult));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, newOwnedResult, newOwnedResult));
 	}
 
 	/**
@@ -122,7 +140,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.ITERATE_EXP__OWNED_RESULT:
+			case 4:
 				return basicSetOwnedResult(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -136,7 +154,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.ITERATE_EXP__OWNED_RESULT:
+			case 4:
 				return getOwnedResult();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -150,7 +168,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.ITERATE_EXP__OWNED_RESULT:
+			case 4:
 				setOwnedResult((Variable)newValue);
 				return;
 		}
@@ -165,7 +183,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.ITERATE_EXP__OWNED_RESULT:
+			case 4:
 				setOwnedResult((Variable)null);
 				return;
 		}
@@ -180,7 +198,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.ITERATE_EXP__OWNED_RESULT:
+			case 4:
 				return ownedResult != null;
 		}
 		return super.eIsSet(featureID);

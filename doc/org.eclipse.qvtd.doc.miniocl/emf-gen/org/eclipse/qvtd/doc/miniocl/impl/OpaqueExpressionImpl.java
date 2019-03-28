@@ -40,6 +40,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class OpaqueExpressionImpl extends TypedElementImpl implements OpaqueExpression {
 	/**
+	 * The number of structural features of the '<em>Opaque Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPAQUE_EXPRESSION_FEATURE_COUNT = TypedElementImpl.TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Opaque Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPAQUE_EXPRESSION_OPERATION_COUNT = TypedElementImpl.TYPED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +101,7 @@ public class OpaqueExpressionImpl extends TypedElementImpl implements OpaqueExpr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLanguage() {
 		return language;
 	}
@@ -92,11 +111,12 @@ public class OpaqueExpressionImpl extends TypedElementImpl implements OpaqueExpr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLanguage(String newLanguage) {
 		String oldLanguage = language;
 		language = newLanguage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.OPAQUE_EXPRESSION__LANGUAGE, oldLanguage, language));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldLanguage, language));
 	}
 
 	/**
@@ -107,7 +127,7 @@ public class OpaqueExpressionImpl extends TypedElementImpl implements OpaqueExpr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.OPAQUE_EXPRESSION__LANGUAGE:
+			case 1:
 				return getLanguage();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,7 +141,7 @@ public class OpaqueExpressionImpl extends TypedElementImpl implements OpaqueExpr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.OPAQUE_EXPRESSION__LANGUAGE:
+			case 1:
 				setLanguage((String)newValue);
 				return;
 		}
@@ -136,7 +156,7 @@ public class OpaqueExpressionImpl extends TypedElementImpl implements OpaqueExpr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.OPAQUE_EXPRESSION__LANGUAGE:
+			case 1:
 				setLanguage(LANGUAGE_EDEFAULT);
 				return;
 		}
@@ -151,7 +171,7 @@ public class OpaqueExpressionImpl extends TypedElementImpl implements OpaqueExpr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.OPAQUE_EXPRESSION__LANGUAGE:
+			case 1:
 				return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT.equals(language);
 		}
 		return super.eIsSet(featureID);
@@ -166,7 +186,7 @@ public class OpaqueExpressionImpl extends TypedElementImpl implements OpaqueExpr
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (language: ");
 		result.append(language);
 		result.append(')');

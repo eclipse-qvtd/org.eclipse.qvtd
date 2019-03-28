@@ -83,7 +83,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link EnvironmentPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -97,8 +97,8 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		if (isInited) return (EnvironmentPackage)EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(ePackage instanceof EnvironmentPackageImpl ? ePackage : new EnvironmentPackageImpl());
+		Object registeredEnvironmentPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		EnvironmentPackageImpl theEnvironmentPackage = registeredEnvironmentPackage instanceof EnvironmentPackageImpl ? (EnvironmentPackageImpl)registeredEnvironmentPackage : new EnvironmentPackageImpl();
 
 		isInited = true;
 
@@ -115,7 +115,6 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		// Mark meta-data to indicate it can't be changed
 		theEnvironmentPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(EnvironmentPackage.eNS_URI, theEnvironmentPackage);
 		return theEnvironmentPackage;
@@ -126,6 +125,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLookupEnvironment() {
 		return lookupEnvironmentEClass;
 	}
@@ -135,6 +135,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLookupEnvironment_NamedElements() {
 		return (EReference)lookupEnvironmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -144,6 +145,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLookupEnvironment_ParentEnv() {
 		return (EReference)lookupEnvironmentEClass.getEStructuralFeatures().get(1);
 	}
@@ -153,6 +155,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getLookupEnvironment__AddElements__Collection() {
 		return lookupEnvironmentEClass.getEOperations().get(0);
 	}
@@ -162,6 +165,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getLookupEnvironment__AddElements__NamedElement() {
 		return lookupEnvironmentEClass.getEOperations().get(1);
 	}
@@ -171,6 +175,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnv4CG() {
 		return env4CGEClass;
 	}
@@ -180,6 +185,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEnv4CG__HasFinalResult() {
 		return env4CGEClass.getEOperations().get(0);
 	}
@@ -189,6 +195,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEnv4CG__GetExecutor() {
 		return env4CGEClass.getEOperations().get(1);
 	}
@@ -198,6 +205,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutor() {
 		return executorEClass;
 	}
@@ -207,6 +215,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnvironmentFactory getEnvironmentFactory() {
 		return (EnvironmentFactory)getEFactoryInstance();
 	}
@@ -230,17 +239,17 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		isCreated = true;
 
 		// Create classes and their features
-		lookupEnvironmentEClass = createEClass(LOOKUP_ENVIRONMENT);
-		createEReference(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT__NAMED_ELEMENTS);
-		createEReference(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT__PARENT_ENV);
-		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION);
-		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENTS__NAMEDELEMENT);
+		lookupEnvironmentEClass = createEClass(0);
+		createEReference(lookupEnvironmentEClass, 0);
+		createEReference(lookupEnvironmentEClass, 1);
+		createEOperation(lookupEnvironmentEClass, 2);
+		createEOperation(lookupEnvironmentEClass, 3);
 
-		env4CGEClass = createEClass(ENV4_CG);
-		createEOperation(env4CGEClass, ENV4_CG___HAS_FINAL_RESULT);
-		createEOperation(env4CGEClass, ENV4_CG___GET_EXECUTOR);
+		env4CGEClass = createEClass(1);
+		createEOperation(env4CGEClass, 0);
+		createEOperation(env4CGEClass, 1);
 
-		executorEClass = createEClass(EXECUTOR);
+		executorEClass = createEClass(2);
 	}
 
 	/**
@@ -308,6 +317,8 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
 	}
 
 	/**
@@ -317,11 +328,33 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
+		addAnnotation
+		  (getLookupEnvironment__AddElements__Collection(),
+		   source,
+		   new String[] {
+			   "body", "LookupEnvironment{\n\t\t\t\t\t\tnamedElements = namedElements->includingAll(elements),\n\t\t\t\t\t\tparentEnv = parentEnv\t\n\t\t\t\t}"
+		   });
+		addAnnotation
+		  (getLookupEnvironment__AddElements__NamedElement(),
+		   source,
+		   new String[] {
+			   "body", "LookupEnvironment{\n\t\t\t\t\t\tnamedElements = namedElements->including(elements),\n\t\t\t\t\t\tparentEnv = parentEnv\n\t\t\t\t\t}"
 		   });
 	}
 

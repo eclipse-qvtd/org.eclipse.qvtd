@@ -27,6 +27,23 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class ParameterImpl extends VariableImpl implements Parameter {
 	/**
+	 * The number of structural features of the '<em>Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PARAMETER_FEATURE_COUNT = VariableImpl.VARIABLE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PARAMETER_OPERATION_COUNT = VariableImpl.VARIABLE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

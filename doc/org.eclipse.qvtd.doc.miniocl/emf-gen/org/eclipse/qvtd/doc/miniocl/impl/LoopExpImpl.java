@@ -41,6 +41,24 @@ import org.eclipse.qvtd.doc.miniocl.Variable;
  */
 public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	/**
+	 * The number of structural features of the '<em>Loop Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOOP_EXP_FEATURE_COUNT = CallExpImpl.CALL_EXP_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Loop Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOOP_EXP_OPERATION_COUNT = CallExpImpl.CALL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedIterator() <em>Owned Iterator</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,6 +102,7 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getOwnedIterator() {
 		return ownedIterator;
 	}
@@ -97,7 +116,7 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 		Variable oldOwnedIterator = ownedIterator;
 		ownedIterator = newOwnedIterator;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.LOOP_EXP__OWNED_ITERATOR, oldOwnedIterator, newOwnedIterator);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldOwnedIterator, newOwnedIterator);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -108,18 +127,19 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedIterator(Variable newOwnedIterator) {
 		if (newOwnedIterator != ownedIterator) {
 			NotificationChain msgs = null;
 			if (ownedIterator != null)
-				msgs = ((InternalEObject)ownedIterator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.LOOP_EXP__OWNED_ITERATOR, null, msgs);
+				msgs = ((InternalEObject)ownedIterator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newOwnedIterator != null)
-				msgs = ((InternalEObject)newOwnedIterator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.LOOP_EXP__OWNED_ITERATOR, null, msgs);
+				msgs = ((InternalEObject)newOwnedIterator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetOwnedIterator(newOwnedIterator, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.LOOP_EXP__OWNED_ITERATOR, newOwnedIterator, newOwnedIterator));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwnedIterator, newOwnedIterator));
 	}
 
 	/**
@@ -127,13 +147,14 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getOwnedBody() {
 		if (ownedBody != null && ownedBody.eIsProxy()) {
 			InternalEObject oldOwnedBody = (InternalEObject)ownedBody;
 			ownedBody = (OCLExpression)eResolveProxy(oldOwnedBody);
 			if (ownedBody != oldOwnedBody) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MiniOCLPackage.LOOP_EXP__OWNED_BODY, oldOwnedBody, ownedBody));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldOwnedBody, ownedBody));
 			}
 		}
 		return ownedBody;
@@ -153,11 +174,12 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedBody(OCLExpression newOwnedBody) {
 		OCLExpression oldOwnedBody = ownedBody;
 		ownedBody = newOwnedBody;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.LOOP_EXP__OWNED_BODY, oldOwnedBody, ownedBody));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldOwnedBody, ownedBody));
 	}
 
 	/**
@@ -168,7 +190,7 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.LOOP_EXP__OWNED_ITERATOR:
+			case 2:
 				return basicSetOwnedIterator(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -182,9 +204,9 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.LOOP_EXP__OWNED_ITERATOR:
+			case 2:
 				return getOwnedIterator();
-			case MiniOCLPackage.LOOP_EXP__OWNED_BODY:
+			case 3:
 				if (resolve) return getOwnedBody();
 				return basicGetOwnedBody();
 		}
@@ -199,10 +221,10 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.LOOP_EXP__OWNED_ITERATOR:
+			case 2:
 				setOwnedIterator((Variable)newValue);
 				return;
-			case MiniOCLPackage.LOOP_EXP__OWNED_BODY:
+			case 3:
 				setOwnedBody((OCLExpression)newValue);
 				return;
 		}
@@ -217,10 +239,10 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.LOOP_EXP__OWNED_ITERATOR:
+			case 2:
 				setOwnedIterator((Variable)null);
 				return;
-			case MiniOCLPackage.LOOP_EXP__OWNED_BODY:
+			case 3:
 				setOwnedBody((OCLExpression)null);
 				return;
 		}
@@ -235,9 +257,9 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.LOOP_EXP__OWNED_ITERATOR:
+			case 2:
 				return ownedIterator != null;
-			case MiniOCLPackage.LOOP_EXP__OWNED_BODY:
+			case 3:
 				return ownedBody != null;
 		}
 		return super.eIsSet(featureID);

@@ -38,6 +38,22 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	/**
+	 * The number of structural features of the '<em>Iterator Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ITERATOR_EXP_FEATURE_COUNT = LoopExpImpl.LOOP_EXP_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Iterator Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ITERATOR_EXP_OPERATION_COUNT = LoopExpImpl.LOOP_EXP_OPERATION_COUNT + 0;
+	/**
 	 * The default value of the '{@link #getIterator() <em>Iterator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,6 +96,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIterator() {
 		return iterator;
 	}
@@ -89,11 +106,12 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIterator(String newIterator) {
 		String oldIterator = iterator;
 		iterator = newIterator;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.ITERATOR_EXP__ITERATOR, oldIterator, iterator));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldIterator, iterator));
 	}
 
 	/**
@@ -104,7 +122,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.ITERATOR_EXP__ITERATOR:
+			case 4:
 				return getIterator();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -118,7 +136,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.ITERATOR_EXP__ITERATOR:
+			case 4:
 				setIterator((String)newValue);
 				return;
 		}
@@ -133,7 +151,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.ITERATOR_EXP__ITERATOR:
+			case 4:
 				setIterator(ITERATOR_EDEFAULT);
 				return;
 		}
@@ -148,7 +166,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.ITERATOR_EXP__ITERATOR:
+			case 4:
 				return ITERATOR_EDEFAULT == null ? iterator != null : !ITERATOR_EDEFAULT.equals(iterator);
 		}
 		return super.eIsSet(featureID);
@@ -163,7 +181,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (iterator: ");
 		result.append(iterator);
 		result.append(')');

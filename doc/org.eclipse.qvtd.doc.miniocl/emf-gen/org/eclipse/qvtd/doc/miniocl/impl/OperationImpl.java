@@ -47,6 +47,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class OperationImpl extends FeatureImpl implements Operation {
 	/**
+	 * The number of structural features of the '<em>Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_FEATURE_COUNT = FeatureImpl.FEATURE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_OPERATION_COUNT = FeatureImpl.FEATURE_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,9 +108,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Parameter> getOwnedParameters() {
 		if (ownedParameters == null) {
-			ownedParameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, MiniOCLPackage.OPERATION__OWNED_PARAMETERS);
+			ownedParameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, 2);
 		}
 		return ownedParameters;
 	}
@@ -102,8 +121,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.doc.miniocl.Class getOwningClass() {
-		if (eContainerFeatureID() != MiniOCLPackage.OPERATION__OWNING_CLASS) return null;
+		if (eContainerFeatureID() != (4)) return null;
 		return (org.eclipse.qvtd.doc.miniocl.Class)eInternalContainer();
 	}
 
@@ -113,7 +133,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningClass(org.eclipse.qvtd.doc.miniocl.Class newOwningClass, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningClass, MiniOCLPackage.OPERATION__OWNING_CLASS, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningClass, 4, msgs);
 		return msgs;
 	}
 
@@ -122,20 +142,21 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwningClass(org.eclipse.qvtd.doc.miniocl.Class newOwningClass) {
-		if (newOwningClass != eInternalContainer() || (eContainerFeatureID() != MiniOCLPackage.OPERATION__OWNING_CLASS && newOwningClass != null)) {
+		if (newOwningClass != eInternalContainer() || (eContainerFeatureID() != (4) && newOwningClass != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningClass))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningClass != null)
-				msgs = ((InternalEObject)newOwningClass).eInverseAdd(this, MiniOCLPackage.CLASS__OWNED_OPERATIONS, org.eclipse.qvtd.doc.miniocl.Class.class, msgs);
+				msgs = ((InternalEObject)newOwningClass).eInverseAdd(this, 2, org.eclipse.qvtd.doc.miniocl.Class.class, msgs);
 			msgs = basicSetOwningClass(newOwningClass, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.OPERATION__OWNING_CLASS, newOwningClass, newOwningClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, newOwningClass, newOwningClass));
 	}
 
 	/**
@@ -143,6 +164,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExpressionInOCL getOwnedBodyExpression() {
 		return ownedBodyExpression;
 	}
@@ -156,7 +178,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		ExpressionInOCL oldOwnedBodyExpression = ownedBodyExpression;
 		ownedBodyExpression = newOwnedBodyExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION, oldOwnedBodyExpression, newOwnedBodyExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 3, oldOwnedBodyExpression, newOwnedBodyExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -167,18 +189,19 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedBodyExpression(ExpressionInOCL newOwnedBodyExpression) {
 		if (newOwnedBodyExpression != ownedBodyExpression) {
 			NotificationChain msgs = null;
 			if (ownedBodyExpression != null)
-				msgs = ((InternalEObject)ownedBodyExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedBodyExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (3), null, msgs);
 			if (newOwnedBodyExpression != null)
-				msgs = ((InternalEObject)newOwnedBodyExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedBodyExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (3), null, msgs);
 			msgs = basicSetOwnedBodyExpression(newOwnedBodyExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION, newOwnedBodyExpression, newOwnedBodyExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newOwnedBodyExpression, newOwnedBodyExpression));
 	}
 
 	/**
@@ -189,7 +212,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+			case 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningClass((org.eclipse.qvtd.doc.miniocl.Class)otherEnd, msgs);
@@ -205,11 +228,11 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
-			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
+			case 3:
 				return basicSetOwnedBodyExpression(null, msgs);
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+			case 4:
 				return basicSetOwningClass(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -223,8 +246,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
-				return eInternalContainer().eInverseRemove(this, MiniOCLPackage.CLASS__OWNED_OPERATIONS, org.eclipse.qvtd.doc.miniocl.Class.class, msgs);
+			case 4:
+				return eInternalContainer().eInverseRemove(this, 2, org.eclipse.qvtd.doc.miniocl.Class.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -237,11 +260,11 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				return getOwnedParameters();
-			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
+			case 3:
 				return getOwnedBodyExpression();
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+			case 4:
 				return getOwningClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -256,14 +279,14 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				getOwnedParameters().clear();
 				getOwnedParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
-			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
+			case 3:
 				setOwnedBodyExpression((ExpressionInOCL)newValue);
 				return;
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+			case 4:
 				setOwningClass((org.eclipse.qvtd.doc.miniocl.Class)newValue);
 				return;
 		}
@@ -278,13 +301,13 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				getOwnedParameters().clear();
 				return;
-			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
+			case 3:
 				setOwnedBodyExpression((ExpressionInOCL)null);
 				return;
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+			case 4:
 				setOwningClass((org.eclipse.qvtd.doc.miniocl.Class)null);
 				return;
 		}
@@ -299,11 +322,11 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				return ownedParameters != null && !ownedParameters.isEmpty();
-			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
+			case 3:
 				return ownedBodyExpression != null;
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+			case 4:
 				return getOwningClass() != null;
 		}
 		return super.eIsSet(featureID);

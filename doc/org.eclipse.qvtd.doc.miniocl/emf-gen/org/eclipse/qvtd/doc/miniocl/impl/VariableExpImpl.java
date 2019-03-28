@@ -37,6 +37,22 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class VariableExpImpl extends OCLExpressionImpl implements VariableExp {
 	/**
+	 * The number of structural features of the '<em>Variable Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VARIABLE_EXP_FEATURE_COUNT = OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Variable Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VARIABLE_EXP_OPERATION_COUNT = OCLExpressionImpl.OCL_EXPRESSION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,13 +86,14 @@ public class VariableExpImpl extends OCLExpressionImpl implements VariableExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getReferredVariable() {
 		if (referredVariable != null && referredVariable.eIsProxy()) {
 			InternalEObject oldReferredVariable = (InternalEObject)referredVariable;
 			referredVariable = (Variable)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MiniOCLPackage.VARIABLE_EXP__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -96,11 +113,12 @@ public class VariableExpImpl extends OCLExpressionImpl implements VariableExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredVariable(Variable newReferredVariable) {
 		Variable oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.VARIABLE_EXP__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -111,7 +129,7 @@ public class VariableExpImpl extends OCLExpressionImpl implements VariableExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.VARIABLE_EXP__REFERRED_VARIABLE:
+			case 1:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
 		}
@@ -126,7 +144,7 @@ public class VariableExpImpl extends OCLExpressionImpl implements VariableExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.VARIABLE_EXP__REFERRED_VARIABLE:
+			case 1:
 				setReferredVariable((Variable)newValue);
 				return;
 		}
@@ -141,7 +159,7 @@ public class VariableExpImpl extends OCLExpressionImpl implements VariableExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.VARIABLE_EXP__REFERRED_VARIABLE:
+			case 1:
 				setReferredVariable((Variable)null);
 				return;
 		}
@@ -156,7 +174,7 @@ public class VariableExpImpl extends OCLExpressionImpl implements VariableExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.VARIABLE_EXP__REFERRED_VARIABLE:
+			case 1:
 				return referredVariable != null;
 		}
 		return super.eIsSet(featureID);

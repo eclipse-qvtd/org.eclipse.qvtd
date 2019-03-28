@@ -43,6 +43,22 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class CollectionItemImpl extends CollectionLiteralPartImpl implements CollectionItem {
 	/**
+	 * The number of structural features of the '<em>Collection Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_ITEM_FEATURE_COUNT = CollectionLiteralPartImpl.COLLECTION_LITERAL_PART_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Collection Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_ITEM_OPERATION_COUNT = CollectionLiteralPartImpl.COLLECTION_LITERAL_PART_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnedItem() <em>Owned Item</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,6 +92,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getOwnedItem() {
 		return ownedItem;
 	}
@@ -89,7 +106,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
 		OCLExpression oldOwnedItem = ownedItem;
 		ownedItem = newOwnedItem;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.COLLECTION_ITEM__OWNED_ITEM, oldOwnedItem, newOwnedItem);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldOwnedItem, newOwnedItem);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -100,18 +117,19 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedItem(OCLExpression newOwnedItem) {
 		if (newOwnedItem != ownedItem) {
 			NotificationChain msgs = null;
 			if (ownedItem != null)
-				msgs = ((InternalEObject)ownedItem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.COLLECTION_ITEM__OWNED_ITEM, null, msgs);
+				msgs = ((InternalEObject)ownedItem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			if (newOwnedItem != null)
-				msgs = ((InternalEObject)newOwnedItem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.COLLECTION_ITEM__OWNED_ITEM, null, msgs);
+				msgs = ((InternalEObject)newOwnedItem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			msgs = basicSetOwnedItem(newOwnedItem, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.COLLECTION_ITEM__OWNED_ITEM, newOwnedItem, newOwnedItem));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newOwnedItem, newOwnedItem));
 	}
 
 	/**
@@ -122,7 +140,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_ITEM__OWNED_ITEM:
+			case 1:
 				return basicSetOwnedItem(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -136,7 +154,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_ITEM__OWNED_ITEM:
+			case 1:
 				return getOwnedItem();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -150,7 +168,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_ITEM__OWNED_ITEM:
+			case 1:
 				setOwnedItem((OCLExpression)newValue);
 				return;
 		}
@@ -165,7 +183,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_ITEM__OWNED_ITEM:
+			case 1:
 				setOwnedItem((OCLExpression)null);
 				return;
 		}
@@ -180,7 +198,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_ITEM__OWNED_ITEM:
+			case 1:
 				return ownedItem != null;
 		}
 		return super.eIsSet(featureID);

@@ -22,15 +22,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.AbstractLabelGenerator;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.TransformationInstance;
 
-/**
- * at-since 1.1
- */
 public final class TransformationInstanceLabelGenerator extends AbstractLabelGenerator<TransformationInstance>
 {
 	public static void initialize(Registry registry) {
-		registry.install(TransformationInstance.class, new TransformationInstanceLabelGenerator());		
+		registry.install(TransformationInstance.class, new TransformationInstanceLabelGenerator());
 	}
-	
+
 	public TransformationInstanceLabelGenerator() {
 		super(TransformationInstance.class);
 	}

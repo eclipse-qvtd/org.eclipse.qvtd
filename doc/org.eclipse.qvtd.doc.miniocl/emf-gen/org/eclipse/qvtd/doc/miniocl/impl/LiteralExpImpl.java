@@ -26,6 +26,23 @@ import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
  */
 public abstract class LiteralExpImpl extends OCLExpressionImpl implements LiteralExp {
 	/**
+	 * The number of structural features of the '<em>Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LITERAL_EXP_FEATURE_COUNT = OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LITERAL_EXP_OPERATION_COUNT = OCLExpressionImpl.OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

@@ -107,7 +107,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case MiniOCLPackage.BOOLEAN_LITERAL_EXP: {
+			case 0: {
 				BooleanLiteralExp booleanLiteralExp = (BooleanLiteralExp)theEObject;
 				T result = caseBooleanLiteralExp(booleanLiteralExp);
 				if (result == null) result = casePrimitiveLiteralExp(booleanLiteralExp);
@@ -119,7 +119,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.CALL_EXP: {
+			case 1: {
 				CallExp callExp = (CallExp)theEObject;
 				T result = caseCallExp(callExp);
 				if (result == null) result = caseOCLExpression(callExp);
@@ -129,7 +129,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.CLASS: {
+			case 2: {
 				org.eclipse.qvtd.doc.miniocl.Class class_ = (org.eclipse.qvtd.doc.miniocl.Class)theEObject;
 				T result = caseClass(class_);
 				if (result == null) result = caseNamespace(class_);
@@ -139,7 +139,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP: {
+			case 3: {
 				CollectionLiteralExp collectionLiteralExp = (CollectionLiteralExp)theEObject;
 				T result = caseCollectionLiteralExp(collectionLiteralExp);
 				if (result == null) result = caseLiteralExp(collectionLiteralExp);
@@ -150,7 +150,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.COLLECTION_ITEM: {
+			case 4: {
 				CollectionItem collectionItem = (CollectionItem)theEObject;
 				T result = caseCollectionItem(collectionItem);
 				if (result == null) result = caseCollectionLiteralPart(collectionItem);
@@ -160,7 +160,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.COLLECTION_LITERAL_PART: {
+			case 5: {
 				CollectionLiteralPart collectionLiteralPart = (CollectionLiteralPart)theEObject;
 				T result = caseCollectionLiteralPart(collectionLiteralPart);
 				if (result == null) result = caseTypedElement(collectionLiteralPart);
@@ -169,7 +169,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.COLLECTION_RANGE: {
+			case 6: {
 				CollectionRange collectionRange = (CollectionRange)theEObject;
 				T result = caseCollectionRange(collectionRange);
 				if (result == null) result = caseCollectionLiteralPart(collectionRange);
@@ -179,7 +179,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.CONSTRAINT: {
+			case 7: {
 				Constraint constraint = (Constraint)theEObject;
 				T result = caseConstraint(constraint);
 				if (result == null) result = caseNamedElement(constraint);
@@ -188,14 +188,14 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.ELEMENT: {
+			case 8: {
 				Element element = (Element)theEObject;
 				T result = caseElement(element);
 				if (result == null) result = caseVisitable(element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.EXPRESSION_IN_OCL: {
+			case 9: {
 				ExpressionInOCL expressionInOCL = (ExpressionInOCL)theEObject;
 				T result = caseExpressionInOCL(expressionInOCL);
 				if (result == null) result = caseOpaqueExpression(expressionInOCL);
@@ -205,7 +205,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.FEATURE: {
+			case 10: {
 				Feature feature = (Feature)theEObject;
 				T result = caseFeature(feature);
 				if (result == null) result = caseNamedElement(feature);
@@ -215,7 +215,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.IMPORT: {
+			case 11: {
 				Import import_ = (Import)theEObject;
 				T result = caseImport(import_);
 				if (result == null) result = caseElement(import_);
@@ -223,7 +223,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.INTEGER_LITERAL_EXP: {
+			case 12: {
 				IntegerLiteralExp integerLiteralExp = (IntegerLiteralExp)theEObject;
 				T result = caseIntegerLiteralExp(integerLiteralExp);
 				if (result == null) result = casePrimitiveLiteralExp(integerLiteralExp);
@@ -235,7 +235,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.ITERATOR_EXP: {
+			case 13: {
 				IteratorExp iteratorExp = (IteratorExp)theEObject;
 				T result = caseIteratorExp(iteratorExp);
 				if (result == null) result = caseLoopExp(iteratorExp);
@@ -247,7 +247,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.ITERATE_EXP: {
+			case 14: {
 				IterateExp iterateExp = (IterateExp)theEObject;
 				T result = caseIterateExp(iterateExp);
 				if (result == null) result = caseLoopExp(iterateExp);
@@ -259,7 +259,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.LET_EXP: {
+			case 15: {
 				LetExp letExp = (LetExp)theEObject;
 				T result = caseLetExp(letExp);
 				if (result == null) result = caseOCLExpression(letExp);
@@ -269,7 +269,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.LITERAL_EXP: {
+			case 16: {
 				LiteralExp literalExp = (LiteralExp)theEObject;
 				T result = caseLiteralExp(literalExp);
 				if (result == null) result = caseOCLExpression(literalExp);
@@ -279,7 +279,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.LOOP_EXP: {
+			case 17: {
 				LoopExp loopExp = (LoopExp)theEObject;
 				T result = caseLoopExp(loopExp);
 				if (result == null) result = caseCallExp(loopExp);
@@ -290,7 +290,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.NAMED_ELEMENT: {
+			case 18: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
 				if (result == null) result = caseElement(namedElement);
@@ -298,7 +298,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.NAMESPACE: {
+			case 19: {
 				Namespace namespace = (Namespace)theEObject;
 				T result = caseNamespace(namespace);
 				if (result == null) result = caseNamedElement(namespace);
@@ -307,7 +307,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.NULL_LITERAL_EXP: {
+			case 20: {
 				NullLiteralExp nullLiteralExp = (NullLiteralExp)theEObject;
 				T result = caseNullLiteralExp(nullLiteralExp);
 				if (result == null) result = caseLiteralExp(nullLiteralExp);
@@ -318,7 +318,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.OCL_EXPRESSION: {
+			case 21: {
 				OCLExpression oclExpression = (OCLExpression)theEObject;
 				T result = caseOCLExpression(oclExpression);
 				if (result == null) result = caseTypedElement(oclExpression);
@@ -327,7 +327,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.OPAQUE_EXPRESSION: {
+			case 22: {
 				OpaqueExpression opaqueExpression = (OpaqueExpression)theEObject;
 				T result = caseOpaqueExpression(opaqueExpression);
 				if (result == null) result = caseTypedElement(opaqueExpression);
@@ -336,7 +336,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.OPERATION_CALL_EXP: {
+			case 23: {
 				OperationCallExp operationCallExp = (OperationCallExp)theEObject;
 				T result = caseOperationCallExp(operationCallExp);
 				if (result == null) result = caseCallExp(operationCallExp);
@@ -347,7 +347,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.OPERATION: {
+			case 24: {
 				Operation operation = (Operation)theEObject;
 				T result = caseOperation(operation);
 				if (result == null) result = caseFeature(operation);
@@ -358,7 +358,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.PACKAGE: {
+			case 25: {
 				org.eclipse.qvtd.doc.miniocl.Package package_ = (org.eclipse.qvtd.doc.miniocl.Package)theEObject;
 				T result = casePackage(package_);
 				if (result == null) result = caseNamespace(package_);
@@ -368,7 +368,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.PARAMETER: {
+			case 26: {
 				Parameter parameter = (Parameter)theEObject;
 				T result = caseParameter(parameter);
 				if (result == null) result = caseVariable(parameter);
@@ -379,7 +379,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.PRIMITIVE_LITERAL_EXP: {
+			case 27: {
 				PrimitiveLiteralExp primitiveLiteralExp = (PrimitiveLiteralExp)theEObject;
 				T result = casePrimitiveLiteralExp(primitiveLiteralExp);
 				if (result == null) result = caseLiteralExp(primitiveLiteralExp);
@@ -390,7 +390,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.PROPERTY: {
+			case 28: {
 				Property property = (Property)theEObject;
 				T result = caseProperty(property);
 				if (result == null) result = caseFeature(property);
@@ -401,7 +401,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.PROPERTY_CALL_EXP: {
+			case 29: {
 				PropertyCallExp propertyCallExp = (PropertyCallExp)theEObject;
 				T result = casePropertyCallExp(propertyCallExp);
 				if (result == null) result = caseCallExp(propertyCallExp);
@@ -412,7 +412,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.ROOT: {
+			case 30: {
 				Root root = (Root)theEObject;
 				T result = caseRoot(root);
 				if (result == null) result = caseElement(root);
@@ -420,7 +420,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.VARIABLE: {
+			case 31: {
 				Variable variable = (Variable)theEObject;
 				T result = caseVariable(variable);
 				if (result == null) result = caseNamedElement(variable);
@@ -430,7 +430,7 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.VARIABLE_EXP: {
+			case 32: {
 				VariableExp variableExp = (VariableExp)theEObject;
 				T result = caseVariableExp(variableExp);
 				if (result == null) result = caseOCLExpression(variableExp);
@@ -440,13 +440,13 @@ public class MiniOCLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.VISITABLE: {
+			case 33: {
 				Visitable visitable = (Visitable)theEObject;
 				T result = caseVisitable(visitable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MiniOCLPackage.TYPED_ELEMENT: {
+			case 34: {
 				TypedElement typedElement = (TypedElement)theEObject;
 				T result = caseTypedElement(typedElement);
 				if (result == null) result = caseElement(typedElement);

@@ -37,6 +37,22 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp {
 	/**
+	 * The number of structural features of the '<em>Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_CALL_EXP_FEATURE_COUNT = CallExpImpl.CALL_EXP_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_CALL_EXP_OPERATION_COUNT = CallExpImpl.CALL_EXP_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,13 +86,14 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property getReferredProperty() {
 		if (referredProperty != null && referredProperty.eIsProxy()) {
 			InternalEObject oldReferredProperty = (InternalEObject)referredProperty;
 			referredProperty = (Property)eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MiniOCLPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldReferredProperty, referredProperty));
 			}
 		}
 		return referredProperty;
@@ -96,11 +113,12 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredProperty(Property newReferredProperty) {
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -111,7 +129,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
+			case 2:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
 		}
@@ -126,7 +144,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
+			case 2:
 				setReferredProperty((Property)newValue);
 				return;
 		}
@@ -141,7 +159,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
+			case 2:
 				setReferredProperty((Property)null);
 				return;
 		}
@@ -156,7 +174,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
+			case 2:
 				return referredProperty != null;
 		}
 		return super.eIsSet(featureID);

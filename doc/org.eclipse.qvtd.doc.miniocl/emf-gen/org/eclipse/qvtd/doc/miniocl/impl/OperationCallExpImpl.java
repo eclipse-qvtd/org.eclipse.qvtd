@@ -45,6 +45,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class OperationCallExpImpl extends CallExpImpl implements OperationCallExp {
 	/**
+	 * The number of structural features of the '<em>Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_CALL_EXP_FEATURE_COUNT = CallExpImpl.CALL_EXP_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_CALL_EXP_OPERATION_COUNT = CallExpImpl.CALL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedArguments() <em>Owned Arguments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,9 +106,10 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OCLExpression> getOwnedArguments() {
 		if (ownedArguments == null) {
-			ownedArguments = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, MiniOCLPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS);
+			ownedArguments = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, 2);
 		}
 		return ownedArguments;
 	}
@@ -100,13 +119,14 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Operation getReferredOperation() {
 		if (referredOperation != null && referredOperation.eIsProxy()) {
 			InternalEObject oldReferredOperation = (InternalEObject)referredOperation;
 			referredOperation = (Operation)eResolveProxy(oldReferredOperation);
 			if (referredOperation != oldReferredOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MiniOCLPackage.OPERATION_CALL_EXP__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldReferredOperation, referredOperation));
 			}
 		}
 		return referredOperation;
@@ -126,11 +146,12 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredOperation(Operation newReferredOperation) {
 		Operation oldReferredOperation = referredOperation;
 		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.OPERATION_CALL_EXP__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldReferredOperation, referredOperation));
 	}
 
 	/**
@@ -141,7 +162,7 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 2:
 				return ((InternalEList<?>)getOwnedArguments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -155,9 +176,9 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 2:
 				return getOwnedArguments();
-			case MiniOCLPackage.OPERATION_CALL_EXP__REFERRED_OPERATION:
+			case 3:
 				if (resolve) return getReferredOperation();
 				return basicGetReferredOperation();
 		}
@@ -173,11 +194,11 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 2:
 				getOwnedArguments().clear();
 				getOwnedArguments().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
-			case MiniOCLPackage.OPERATION_CALL_EXP__REFERRED_OPERATION:
+			case 3:
 				setReferredOperation((Operation)newValue);
 				return;
 		}
@@ -192,10 +213,10 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 2:
 				getOwnedArguments().clear();
 				return;
-			case MiniOCLPackage.OPERATION_CALL_EXP__REFERRED_OPERATION:
+			case 3:
 				setReferredOperation((Operation)null);
 				return;
 		}
@@ -210,9 +231,9 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 2:
 				return ownedArguments != null && !ownedArguments.isEmpty();
-			case MiniOCLPackage.OPERATION_CALL_EXP__REFERRED_OPERATION:
+			case 3:
 				return referredOperation != null;
 		}
 		return super.eIsSet(featureID);

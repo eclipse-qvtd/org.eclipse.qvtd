@@ -18,8 +18,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.doc.minioclcs.xtext.library.model;
 
-import java.util.Collection;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -33,8 +31,9 @@ import org.eclipse.qvtd.doc.minioclcs.xtext.tx.TypedModelInstance;
 
 /**
  * AllObjectsOperation realises the Model::allObjects() library operation.
- * at-since 1.1
+ * @deprecated This is not needed by synthesized QVTr
  */
+@Deprecated
 public class AllObjectsOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull AllObjectsOperation INSTANCE = new AllObjectsOperation();
@@ -45,7 +44,7 @@ public class AllObjectsOperation extends AbstractUnaryOperation
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		Collection<@NonNull ? extends Object> results = typedModelInstance.getAllObjects();
-		return createSetValue((CollectionTypeId)returnTypeId, results);
+		Iterable<@NonNull ? extends Object> results = typedModelInstance.getAllObjects();
+		return new IterableAsSetValue<Object>((CollectionTypeId)returnTypeId, results);
 	}
 }

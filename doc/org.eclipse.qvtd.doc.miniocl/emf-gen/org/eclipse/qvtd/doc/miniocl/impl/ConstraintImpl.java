@@ -39,6 +39,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	/**
+	 * The number of structural features of the '<em>Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONSTRAINT_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONSTRAINT_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedSpecification() <em>Owned Specification</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,6 +100,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExpressionInOCL getOwnedSpecification() {
 		return ownedSpecification;
 	}
@@ -95,7 +114,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		ExpressionInOCL oldOwnedSpecification = ownedSpecification;
 		ownedSpecification = newOwnedSpecification;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MiniOCLPackage.CONSTRAINT__OWNED_SPECIFICATION, oldOwnedSpecification, newOwnedSpecification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldOwnedSpecification, newOwnedSpecification);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -106,18 +125,19 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedSpecification(ExpressionInOCL newOwnedSpecification) {
 		if (newOwnedSpecification != ownedSpecification) {
 			NotificationChain msgs = null;
 			if (ownedSpecification != null)
-				msgs = ((InternalEObject)ownedSpecification).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.CONSTRAINT__OWNED_SPECIFICATION, null, msgs);
+				msgs = ((InternalEObject)ownedSpecification).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			if (newOwnedSpecification != null)
-				msgs = ((InternalEObject)newOwnedSpecification).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MiniOCLPackage.CONSTRAINT__OWNED_SPECIFICATION, null, msgs);
+				msgs = ((InternalEObject)newOwnedSpecification).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			msgs = basicSetOwnedSpecification(newOwnedSpecification, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.CONSTRAINT__OWNED_SPECIFICATION, newOwnedSpecification, newOwnedSpecification));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newOwnedSpecification, newOwnedSpecification));
 	}
 
 	/**
@@ -125,13 +145,14 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.doc.miniocl.Class getConstrainedElement() {
 		if (constrainedElement != null && constrainedElement.eIsProxy()) {
 			InternalEObject oldConstrainedElement = (InternalEObject)constrainedElement;
 			constrainedElement = (org.eclipse.qvtd.doc.miniocl.Class)eResolveProxy(oldConstrainedElement);
 			if (constrainedElement != oldConstrainedElement) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MiniOCLPackage.CONSTRAINT__CONSTRAINED_ELEMENT, oldConstrainedElement, constrainedElement));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldConstrainedElement, constrainedElement));
 			}
 		}
 		return constrainedElement;
@@ -151,11 +172,12 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConstrainedElement(org.eclipse.qvtd.doc.miniocl.Class newConstrainedElement) {
 		org.eclipse.qvtd.doc.miniocl.Class oldConstrainedElement = constrainedElement;
 		constrainedElement = newConstrainedElement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.CONSTRAINT__CONSTRAINED_ELEMENT, oldConstrainedElement, constrainedElement));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldConstrainedElement, constrainedElement));
 	}
 
 	/**
@@ -166,7 +188,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.CONSTRAINT__OWNED_SPECIFICATION:
+			case 1:
 				return basicSetOwnedSpecification(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -180,9 +202,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.CONSTRAINT__OWNED_SPECIFICATION:
+			case 1:
 				return getOwnedSpecification();
-			case MiniOCLPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
+			case 2:
 				if (resolve) return getConstrainedElement();
 				return basicGetConstrainedElement();
 		}
@@ -197,10 +219,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.CONSTRAINT__OWNED_SPECIFICATION:
+			case 1:
 				setOwnedSpecification((ExpressionInOCL)newValue);
 				return;
-			case MiniOCLPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
+			case 2:
 				setConstrainedElement((org.eclipse.qvtd.doc.miniocl.Class)newValue);
 				return;
 		}
@@ -215,10 +237,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.CONSTRAINT__OWNED_SPECIFICATION:
+			case 1:
 				setOwnedSpecification((ExpressionInOCL)null);
 				return;
-			case MiniOCLPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
+			case 2:
 				setConstrainedElement((org.eclipse.qvtd.doc.miniocl.Class)null);
 				return;
 		}
@@ -233,9 +255,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.CONSTRAINT__OWNED_SPECIFICATION:
+			case 1:
 				return ownedSpecification != null;
-			case MiniOCLPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
+			case 2:
 				return constrainedElement != null;
 		}
 		return super.eIsSet(featureID);

@@ -30,3 +30,4 @@ Export-Package: org.eclipse.qvtd.build.modelspecs,
  org.eclipse.qvtd.build.textile;x-internal:=true,
  org.eclipse.qvtd.build.utilities,
  org.eclipse.qvtd.build.xtend;x-internal:=true
+Automatic-Module-Name: org.eclipse.qvtd.build

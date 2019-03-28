@@ -52,6 +52,24 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class CollectionLiteralExpImpl extends LiteralExpImpl implements CollectionLiteralExp {
 	/**
+	 * The number of structural features of the '<em>Collection Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_LITERAL_EXP_FEATURE_COUNT = LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Collection Literal Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_LITERAL_EXP_OPERATION_COUNT = LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedParts() <em>Owned Parts</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -105,9 +123,10 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<CollectionLiteralPart> getOwnedParts() {
 		if (ownedParts == null) {
-			ownedParts = new EObjectContainmentEList<CollectionLiteralPart>(CollectionLiteralPart.class, this, MiniOCLPackage.COLLECTION_LITERAL_EXP__OWNED_PARTS);
+			ownedParts = new EObjectContainmentEList<CollectionLiteralPart>(CollectionLiteralPart.class, this, 1);
 		}
 		return ownedParts;
 	}
@@ -117,6 +136,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CollectionKind getKind() {
 		return kind;
 	}
@@ -126,11 +146,12 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKind(CollectionKind newKind) {
 		CollectionKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.COLLECTION_LITERAL_EXP__KIND, oldKind, kind));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldKind, kind));
 	}
 
 	/**
@@ -141,7 +162,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP__OWNED_PARTS:
+			case 1:
 				return ((InternalEList<?>)getOwnedParts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -155,9 +176,9 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP__OWNED_PARTS:
+			case 1:
 				return getOwnedParts();
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP__KIND:
+			case 2:
 				return getKind();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -172,11 +193,11 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP__OWNED_PARTS:
+			case 1:
 				getOwnedParts().clear();
 				getOwnedParts().addAll((Collection<? extends CollectionLiteralPart>)newValue);
 				return;
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP__KIND:
+			case 2:
 				setKind((CollectionKind)newValue);
 				return;
 		}
@@ -191,10 +212,10 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP__OWNED_PARTS:
+			case 1:
 				getOwnedParts().clear();
 				return;
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP__KIND:
+			case 2:
 				setKind(KIND_EDEFAULT);
 				return;
 		}
@@ -209,9 +230,9 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP__OWNED_PARTS:
+			case 1:
 				return ownedParts != null && !ownedParts.isEmpty();
-			case MiniOCLPackage.COLLECTION_LITERAL_EXP__KIND:
+			case 2:
 				return kind != KIND_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -226,7 +247,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (kind: ");
 		result.append(kind);
 		result.append(')');

@@ -65,7 +65,7 @@ public class EnvironmentFactoryImpl extends EFactoryImpl implements EnvironmentF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT: return createLookupEnvironment();
+			case 0: return createLookupEnvironment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -76,6 +76,7 @@ public class EnvironmentFactoryImpl extends EFactoryImpl implements EnvironmentF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LookupEnvironment createLookupEnvironment() {
 		LookupEnvironmentImpl lookupEnvironment = new LookupEnvironmentImpl();
 		return lookupEnvironment;
@@ -86,6 +87,7 @@ public class EnvironmentFactoryImpl extends EFactoryImpl implements EnvironmentF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnvironmentPackage getEnvironmentPackage() {
 		return (EnvironmentPackage)getEPackage();
 	}

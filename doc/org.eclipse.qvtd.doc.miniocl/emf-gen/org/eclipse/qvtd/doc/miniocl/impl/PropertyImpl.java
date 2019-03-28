@@ -40,6 +40,22 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  */
 public class PropertyImpl extends FeatureImpl implements Property {
 	/**
+	 * The number of structural features of the '<em>Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_FEATURE_COUNT = FeatureImpl.FEATURE_FEATURE_COUNT + 3;
+	/**
+	 * The number of operations of the '<em>Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_OPERATION_COUNT = FeatureImpl.FEATURE_OPERATION_COUNT + 0;
+	/**
 	 * The default value of the '{@link #getLowerBound() <em>Lower Bound</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,8 +116,9 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.doc.miniocl.Class getOwningClass() {
-		if (eContainerFeatureID() != MiniOCLPackage.PROPERTY__OWNING_CLASS) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (org.eclipse.qvtd.doc.miniocl.Class)eInternalContainer();
 	}
 
@@ -111,7 +128,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningClass(org.eclipse.qvtd.doc.miniocl.Class newOwningClass, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningClass, MiniOCLPackage.PROPERTY__OWNING_CLASS, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningClass, 2, msgs);
 		return msgs;
 	}
 
@@ -120,20 +137,21 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwningClass(org.eclipse.qvtd.doc.miniocl.Class newOwningClass) {
-		if (newOwningClass != eInternalContainer() || (eContainerFeatureID() != MiniOCLPackage.PROPERTY__OWNING_CLASS && newOwningClass != null)) {
+		if (newOwningClass != eInternalContainer() || (eContainerFeatureID() != (2) && newOwningClass != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningClass))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningClass != null)
-				msgs = ((InternalEObject)newOwningClass).eInverseAdd(this, MiniOCLPackage.CLASS__OWNED_PROPERTIES, org.eclipse.qvtd.doc.miniocl.Class.class, msgs);
+				msgs = ((InternalEObject)newOwningClass).eInverseAdd(this, 3, org.eclipse.qvtd.doc.miniocl.Class.class, msgs);
 			msgs = basicSetOwningClass(newOwningClass, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.PROPERTY__OWNING_CLASS, newOwningClass, newOwningClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwningClass, newOwningClass));
 	}
 
 	/**
@@ -141,6 +159,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getLowerBound() {
 		return lowerBound;
 	}
@@ -150,11 +169,12 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLowerBound(int newLowerBound) {
 		int oldLowerBound = lowerBound;
 		lowerBound = newLowerBound;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.PROPERTY__LOWER_BOUND, oldLowerBound, lowerBound));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldLowerBound, lowerBound));
 	}
 
 	/**
@@ -162,6 +182,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getUpperBound() {
 		return upperBound;
 	}
@@ -171,11 +192,12 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUpperBound(int newUpperBound) {
 		int oldUpperBound = upperBound;
 		upperBound = newUpperBound;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.PROPERTY__UPPER_BOUND, oldUpperBound, upperBound));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldUpperBound, upperBound));
 	}
 
 	/**
@@ -186,7 +208,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY__OWNING_CLASS:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningClass((org.eclipse.qvtd.doc.miniocl.Class)otherEnd, msgs);
@@ -202,7 +224,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY__OWNING_CLASS:
+			case 2:
 				return basicSetOwningClass(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -216,8 +238,8 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case MiniOCLPackage.PROPERTY__OWNING_CLASS:
-				return eInternalContainer().eInverseRemove(this, MiniOCLPackage.CLASS__OWNED_PROPERTIES, org.eclipse.qvtd.doc.miniocl.Class.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 3, org.eclipse.qvtd.doc.miniocl.Class.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -230,11 +252,11 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY__OWNING_CLASS:
+			case 2:
 				return getOwningClass();
-			case MiniOCLPackage.PROPERTY__LOWER_BOUND:
+			case 3:
 				return getLowerBound();
-			case MiniOCLPackage.PROPERTY__UPPER_BOUND:
+			case 4:
 				return getUpperBound();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -248,13 +270,13 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY__OWNING_CLASS:
+			case 2:
 				setOwningClass((org.eclipse.qvtd.doc.miniocl.Class)newValue);
 				return;
-			case MiniOCLPackage.PROPERTY__LOWER_BOUND:
+			case 3:
 				setLowerBound((Integer)newValue);
 				return;
-			case MiniOCLPackage.PROPERTY__UPPER_BOUND:
+			case 4:
 				setUpperBound((Integer)newValue);
 				return;
 		}
@@ -269,13 +291,13 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY__OWNING_CLASS:
+			case 2:
 				setOwningClass((org.eclipse.qvtd.doc.miniocl.Class)null);
 				return;
-			case MiniOCLPackage.PROPERTY__LOWER_BOUND:
+			case 3:
 				setLowerBound(LOWER_BOUND_EDEFAULT);
 				return;
-			case MiniOCLPackage.PROPERTY__UPPER_BOUND:
+			case 4:
 				setUpperBound(UPPER_BOUND_EDEFAULT);
 				return;
 		}
@@ -290,11 +312,11 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.PROPERTY__OWNING_CLASS:
+			case 2:
 				return getOwningClass() != null;
-			case MiniOCLPackage.PROPERTY__LOWER_BOUND:
+			case 3:
 				return lowerBound != LOWER_BOUND_EDEFAULT;
-			case MiniOCLPackage.PROPERTY__UPPER_BOUND:
+			case 4:
 				return upperBound != UPPER_BOUND_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -309,7 +331,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (lowerBound: ");
 		result.append(lowerBound);
 		result.append(", upperBound: ");
