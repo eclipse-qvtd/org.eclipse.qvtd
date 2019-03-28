@@ -25,11 +25,13 @@ Workflow {
 	// We regenerate the CS model
 	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
 		genModel = "/org.eclipse.qvtd.doc.minioclcs.xtext/model/generated/MiniOCLCS.genmodel"
+		clearResourceSet = false
 	}
 	
 	// We regenerate the AS model
 	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
 		genModel = "/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.genmodel"
+		clearResourceSet = false
 	}
 
 	component = org.eclipse.ocl.examples.build.xtend.GenerateASVisitors { resourceSet = rSet
@@ -40,6 +42,7 @@ Workflow {
 	// We regenerate the AS Lookup model
 	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
 		genModel = "/org.eclipse.qvtd.doc.miniocl/model/Lookup.genmodel"
+		clearResourceSet = false
 	}
 	
 	// We generate the AS Lookup infrastructure
@@ -119,7 +122,7 @@ Workflow {
 	bean = org.eclipse.ocl.examples.build.utilities.ProjectMapSetup { resourceSet = rSet2 }
 	bean = org.eclipse.ocl.examples.build.utilities.EcoreGenModelSetup { resourceSet = rSet2 }
   
-	component = org.eclipse.ocl.examples.build.utilities.GenerateCGedQVTiTransformation {
+	component = org.eclipse.qvtd.cs2as.build.utilities.GenerateCGedQVTiTransformation {
 		debug = true 
 		resourceSet = rSet2
 		oclDocURI = "platform:/resource/org.eclipse.qvtd.doc.minioclcs.xtext/model/MiniOCLCS2AS.ocl"

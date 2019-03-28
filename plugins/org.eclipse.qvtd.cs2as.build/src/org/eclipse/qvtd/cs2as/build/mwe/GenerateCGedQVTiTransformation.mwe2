@@ -12,7 +12,6 @@ module org.eclipse.qvtd.cs2as.build.mwe.GenerateCGedQVTiTransformation
 
 import org.eclipse.emf.ecore.resource.*
 
-
 /**
  * The OCL document URI corresponding to the CS2AS description 
  */
@@ -24,9 +23,9 @@ var String oclFileURI
 var ResourceSet resourceSet
 
 /**
- * Mandatory fully qualified name for the lookup resolver class 
+ * Mandatory fully qualified name for the lookup solver class 
  */
-var String lookupResolverClassName
+var String lookupSolverClassName
 
 /**
  * Mandatory fully qualified name for the lookup result interface 
@@ -42,17 +41,17 @@ var javaPackage = ""
 
 var tracePropertyName = "ast"
 
-var boolean debug = false
+var boolean debug = true
 
 
-Workflow {
+Workflow {		// FIXME This is not used
 
-	component = GenerateCGedQVTiTransformation {
+	component = org.eclipse.qvtd.cs2as.build.utilities.GenerateCGedQVTiTransformation auto-inject {
 		resourceSet = resourceSet
 		oclDocURI = oclFileURI
 		javaFolder = javaFolder
 		javaPackage = javaPackage
-		lookupResolverClassName = lookupResolverClassName
+		lookupSolverClassName = lookupSolverClassName
 		lookupResultItfName = lookupResultItfName 
 		tracePropertyName = tracePropertyName
 		debug = debug

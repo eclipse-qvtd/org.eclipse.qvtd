@@ -71,6 +71,9 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		CompilerOptions options = new AbstractCompilerOptions() {};
 		// OCL2QVTm options
 		options.setOption(OCL2QVTiCompilerChain.QVTM_STEP, OCL2QVTiCompilerChain.TRACE_PROPERTY_NAME_KEY, tracePropName);
+		// QVTs options
+		options.setOption(OCL2QVTiCompilerChain.QVTS_STEP, OCL2QVTiCompilerChain.SCHEDULER_DOT_GRAPHS, debug);
+		options.setOption(OCL2QVTiCompilerChain.QVTS_STEP, OCL2QVTiCompilerChain.SCHEDULER_YED_GRAPHS, debug);
 		// Default options
 		options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions()); // FIXME parametrize save options ?
 		options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, debug);
