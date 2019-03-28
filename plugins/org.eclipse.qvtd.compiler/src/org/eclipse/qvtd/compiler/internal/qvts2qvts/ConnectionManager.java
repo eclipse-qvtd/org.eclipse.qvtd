@@ -660,8 +660,8 @@ public class ConnectionManager
 			//			}
 		}
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
-			if (partitionAnalysis.isChecked(edge) && edge.isNavigation()) {
-				NavigationEdge navigationEdge = (NavigationEdge) edge;
+			if (partitionAnalysis.isChecked(edge) && (edge.isNavigation() || edge.isCast())) {
+				NavigableEdge navigationEdge = (NavigableEdge) edge;
 				EdgeConnection connection = navigationEdge.getIncomingConnection();
 				if ((connection != null) && !connections.contains(connection)) {
 					connections.add(connection);

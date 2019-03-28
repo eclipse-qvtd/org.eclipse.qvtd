@@ -31,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -55,17 +56,12 @@ public class ScheduleAnalysis
 	private final @NonNull LoadingPartition loadingPartition;
 
 	/**
-	 * Cached list of all incoming connections per-region; excludes recursions.
+	 * Cached list of all incoming connections per-region.
 	 */
 	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Connection>> partition2incomingConnections = new HashMap<>();
 
 	/**
-	 * Cached list of all recursive/looping connections per-region.
-	 */
-	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Connection>> partition2loopingConnections = new HashMap<>();
-
-	/**
-	 * Cached list of all outgoing connections per-region; excludes recursions.
+	 * Cached list of all outgoing connections per-region.
 	 */
 	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Connection>> partition2outgoingConnections = new HashMap<>();
 
@@ -171,38 +167,21 @@ public class ScheduleAnalysis
 	private void analyzeConnections(@NonNull PartitionAnalysis partitionAnalysis) {
 		Partition partition = partitionAnalysis.getPartition();
 		List<@NonNull Connection> incomingConnections = new ArrayList<>();
-		List<@NonNull Connection> loopingConnections = new ArrayList<>();
-		List<@NonNull Connection> outgoingConnections = new ArrayList<>();
 		for (@NonNull Connection connection : connectionManager.getIncomingConnections(partitionAnalysis)) {
-			for (@NonNull Partition sourcePartition : connection.getSourcePartitions()) {
-				if (partition == sourcePartition) {
-					if (!loopingConnections.contains(connection)) {
-						loopingConnections.add(connection);
-					}
-				}
-				else {
-					if (!incomingConnections.contains(connection)) {
-						incomingConnections.add(connection);
-					}
-				}
+			if (!incomingConnections.contains(connection)) {
+				incomingConnections.add(connection);
 			}
 		}
+		List<@NonNull Connection> outgoingConnections = new ArrayList<>();
 		for (@NonNull Connection connection : connectionManager.getNextConnections(partition)) {
-			for (@NonNull Partition targetPartition : connection.getTargetPartitions()) {
-				if (partition == targetPartition) {
-					assert loopingConnections.contains(connection);
-					loopingConnections.add(connection);
-				}
-				else if (!outgoingConnections.contains(connection)) {
-					outgoingConnections.add(connection);
-				}
+			if (!outgoingConnections.contains(connection)) {
+				outgoingConnections.add(connection);
 			}
 		}
 		if (outgoingConnections.size() > 1) {			// Ensure that connection ordering is deterministic
 			Collections.sort(outgoingConnections, NameUtil.NAMEABLE_COMPARATOR);
 		}
 		partition2incomingConnections.put(partition, incomingConnections);
-		partition2loopingConnections.put(partition, loopingConnections);
 		partition2outgoingConnections.put(partition, outgoingConnections);
 	}
 
@@ -384,31 +363,6 @@ public class ScheduleAnalysis
 		}
 	}
 
-	//
-	//	Identify all the source regions for each target region.
-	/*
-	private @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> analyzeSources() {
-		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> target2sources = new HashMap<>();
-		for (@NonNull PartitionAnalysis partitionAnalysis : allPartitionAnalyses) {
-			target2sources.put(partitionAnalysis.getPartition(), new HashSet<>());
-		}
-		for (@NonNull PartitionAnalysis partitionAnalysis : allPartitionAnalyses) {
-			Partition partition = partitionAnalysis.getPartition();
-			Set<@NonNull Partition> sources = new HashSet<>();
-			target2sources.put(partition, sources);
-			List<@NonNull Connection> incomingConnections = partition2incomingConnections.get(partition);
-			//			List<@NonNull Connection> loopingConnections = region2loopingConnections.get(region);
-			//			List<@NonNull Connection> outgoingConnections = region2outgoingConnections.get(region);
-			assert incomingConnections != null;
-			for (@NonNull Connection incomingConnection : incomingConnections) {
-				List<@NonNull Partition> sourcePartitions = connection2sourcePartitions.get(incomingConnection);
-				assert sourcePartitions != null;
-				sources.addAll(sourcePartitions);
-			}
-		}
-		return target2sources;
-	} */
-
 	protected void buildCallTree(@NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		CallTreeBuilder callTreeBuilder = new CallTreeBuilder(this, rootPartitionAnalysis.getPartition(), loadingPartition);
 		callTreeBuilder.buildTree(partitionSchedule);
@@ -456,12 +410,6 @@ public class ScheduleAnalysis
 
 	public @NonNull Partition getLoadingPartition() {
 		return loadingPartition;
-	}
-
-	protected @NonNull Iterable<@NonNull Connection> getLoopingConnections(@NonNull Partition partition) {
-		List<@NonNull Connection> loopingConnections = partition2loopingConnections.get(partition);
-		assert loopingConnections != null;
-		return loopingConnections;
 	}
 
 	protected @NonNull Iterable<@NonNull Connection> getOutgoingConnections(@NonNull Partition partition) {
@@ -534,20 +482,26 @@ public class ScheduleAnalysis
 					cycleStart = passNumber;
 				}
 			}
+			Set<@NonNull Connection> incomingConnections = new HashSet<>();
+			Set<@NonNull Connection> outgoingConnections = new HashSet<>();
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
 				changedPartitions.add(partition);
-				Iterable<@NonNull Connection> loopingConnections = getLoopingConnections(partition);
-				assert loopingConnections != null;
-				for (@NonNull Connection loopingConnection : loopingConnections) {
-					loopingConnection.addPass(passNumber);
-				}
+				Iterables.addAll(incomingConnections, getIncomingConnections(partition));
+				Iterables.addAll(outgoingConnections, getOutgoingConnections(partition));
+			}
+			Set<@NonNull Connection> loopedConnections = new HashSet<>(incomingConnections);
+			loopedConnections.retainAll(outgoingConnections);
+			for (@NonNull Connection loopingConnection : loopedConnections) {
+				loopingConnection.addPass(passNumber);
 			}
 			if (concurrency.isCycleEnd()) {
 				cycleDepth--;
 				if (cycleDepth == 0) {
 					for (int cyclePass = cycleStart; cyclePass < passNumber; cyclePass++) {
-						partitionSchedule.get(cyclePass).addPass(passNumber);
+						Concurrency concurrency2 = partitionSchedule.get(cyclePass);
+						assert concurrency2 != null;
+						concurrency2.addPass(passNumber);
 					}
 				}
 			}

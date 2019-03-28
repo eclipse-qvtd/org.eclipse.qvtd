@@ -662,48 +662,51 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 								}
 								else {
 									for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-										//	Region earlierRegion = QVTscheduleUtil.getOwningRegion(realizedEdge);
-										String checkIsHazardFreeBecause;
-										String enforceIsHazardFreeBecause;
-										Node realizedSourceNode = realizedEdge.getEdgeSource();
-										Node realizedTargetNode = realizedEdge.getEdgeTarget();
-										CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
-										CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
-										if (!realizedSourceType.conformsTo(predicatedSourceType)) {
-											checkIsHazardFreeBecause = "incompatible-source";
-											enforceIsHazardFreeBecause = "incompatible-source";
-										}
-										else if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedTargetType, predicatedTargetType)) {
-											checkIsHazardFreeBecause = "incompatible-target";
-											enforceIsHazardFreeBecause = "incompatible-target";
-										}
-										//	else if (region == earlierRegion) {	// FIXME old commented out code for partitions
-										//		checkIsHazardFreeBecause = null; 		// Same region requires inter-recursion check
-										//		enforceIsHazardFreeBecause = null; 		// Same region requires inter-recursion enforce to be available for check
-										//	}
-										else if (usedPartition.getLastPass() < partition.getFirstPass()) {
-											checkIsHazardFreeBecause = "later";
-											enforceIsHazardFreeBecause = null; 		// Enforce required for later check
-										}
-										else {
-											// The QVTi AS has insufficient precision to identify which of multiple references is hazardous
-											checkIsHazardFreeBecause = null;
-											enforceIsHazardFreeBecause = null;
-										}
-										if (checkIsHazardFreeBecause == null) {
-											addCheckedEdge(checkedEdge);
-										}
-										else if (doDebug) {
-											QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored check for " + this + "::" + laterNode.getName() + "(" + partition.getPassRangeText() + ")" +
-													" " + checkIsHazardFreeBecause + " (" + usedPartition.getPassRangeText() + ")" + usedPartition + "::" + realizedEdge.getEdgeSource().getName());
-										}
-										if (enforceIsHazardFreeBecause == null) {
-											AbstractPartitionAnalysis<?> usedPartitionAnalysis = partitionedTransformationAnalysis.getPartitionAnalysis(usedPartition);
-											usedPartitionAnalysis.addEnforcedEdge(realizedEdge);
-										}
-										else if (doDebug) {
-											QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored enforce " + this + "::" + laterNode.getName() + "(" + partition.getPassRangeText() + ")" +
-													" " + enforceIsHazardFreeBecause + " (" + usedPartition.getPassRangeText() + ")" + usedPartition + "::" + realizedEdge.getEdgeSource().getName());
+										Role role = usedPartition.getRole(realizedEdge);
+										if (role != null)  {
+											//	Region earlierRegion = QVTscheduleUtil.getOwningRegion(realizedEdge);
+											String checkIsHazardFreeBecause;
+											String enforceIsHazardFreeBecause;
+											Node realizedSourceNode = realizedEdge.getEdgeSource();
+											Node realizedTargetNode = realizedEdge.getEdgeTarget();
+											CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
+											CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
+											if (!realizedSourceType.conformsTo(predicatedSourceType)) {
+												checkIsHazardFreeBecause = "incompatible-source";
+												enforceIsHazardFreeBecause = "incompatible-source";
+											}
+											else if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedTargetType, predicatedTargetType)) {
+												checkIsHazardFreeBecause = "incompatible-target";
+												enforceIsHazardFreeBecause = "incompatible-target";
+											}
+											//	else if (region == earlierRegion) {	// FIXME old commented out code for partitions
+											//		checkIsHazardFreeBecause = null; 		// Same region requires inter-recursion check
+											//		enforceIsHazardFreeBecause = null; 		// Same region requires inter-recursion enforce to be available for check
+											//	}
+											else if (usedPartition.getLastPass() < partition.getFirstPass()) {
+												checkIsHazardFreeBecause = "later";
+												enforceIsHazardFreeBecause = null; 		// Enforce required for later check
+											}
+											else {
+												// The QVTi AS has insufficient precision to identify which of multiple references is hazardous
+												checkIsHazardFreeBecause = null;
+												enforceIsHazardFreeBecause = null;
+											}
+											if (checkIsHazardFreeBecause == null) {
+												addCheckedEdge(checkedEdge);
+											}
+											else if (doDebug) {
+												QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored check for " + this + "::" + laterNode.getName() + "(" + partition.getPassRangeText() + ")" +
+														" " + checkIsHazardFreeBecause + " (" + usedPartition.getPassRangeText() + ")" + usedPartition + "::" + realizedEdge.getEdgeSource().getName());
+											}
+											if (enforceIsHazardFreeBecause == null) {
+												AbstractPartitionAnalysis<?> usedPartitionAnalysis = partitionedTransformationAnalysis.getPartitionAnalysis(usedPartition);
+												usedPartitionAnalysis.addEnforcedEdge(realizedEdge);
+											}
+											else if (doDebug) {
+												QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored enforce " + this + "::" + laterNode.getName() + "(" + partition.getPassRangeText() + ")" +
+														" " + enforceIsHazardFreeBecause + " (" + usedPartition.getPassRangeText() + ")" + usedPartition + "::" + realizedEdge.getEdgeSource().getName());
+											}
 										}
 									}
 								}
