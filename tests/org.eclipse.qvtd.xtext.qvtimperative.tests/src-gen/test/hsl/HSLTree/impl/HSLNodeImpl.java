@@ -50,6 +50,24 @@ import test.hsl.HSLTree.HSLTreePackage;
  */
 public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode {
 	/**
+	 * The number of structural features of the '<em>HSL Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int HSL_NODE_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>HSL Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int HSL_NODE_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -125,7 +143,7 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	 */
 	@Override
 	public HSLNode getParent() {
-		if (eContainerFeatureID() != HSLTreePackage.HSL_NODE__PARENT) return null;
+		if (eContainerFeatureID() != (0)) return null;
 		return (HSLNode)eInternalContainer();
 	}
 
@@ -135,7 +153,7 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(HSLNode newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParent, HSLTreePackage.HSL_NODE__PARENT, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newParent, 0, msgs);
 		return msgs;
 	}
 
@@ -146,19 +164,19 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	 */
 	@Override
 	public void setParent(HSLNode newParent) {
-		if (newParent != eInternalContainer() || (eContainerFeatureID() != HSLTreePackage.HSL_NODE__PARENT && newParent != null)) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != (0) && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, HSLTreePackage.HSL_NODE__CHILDREN, HSLNode.class, msgs);
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, 1, HSLNode.class, msgs);
 			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HSLTreePackage.HSL_NODE__PARENT, newParent, newParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, newParent, newParent));
 	}
 
 	/**
@@ -169,7 +187,7 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	@Override
 	public EList<HSLNode> getChildren() {
 		if (children == null) {
-			children = new EObjectContainmentWithInverseEList<HSLNode>(HSLNode.class, this, HSLTreePackage.HSL_NODE__CHILDREN, HSLTreePackage.HSL_NODE__PARENT);
+			children = new EObjectContainmentWithInverseEList<HSLNode>(HSLNode.class, this, 1, 0);
 		}
 		return children;
 	}
@@ -194,7 +212,7 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 		String oldHsl = hsl;
 		hsl = newHsl;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HSLTreePackage.HSL_NODE__HSL, oldHsl, hsl));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldHsl, hsl));
 	}
 
 	/**
@@ -217,7 +235,7 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HSLTreePackage.HSL_NODE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldName, name));
 	}
 
 	/**
@@ -229,11 +247,11 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case HSLTreePackage.HSL_NODE__PARENT:
+			case 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParent((HSLNode)otherEnd, msgs);
-			case HSLTreePackage.HSL_NODE__CHILDREN:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChildren()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -247,9 +265,9 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case HSLTreePackage.HSL_NODE__PARENT:
+			case 0:
 				return basicSetParent(null, msgs);
-			case HSLTreePackage.HSL_NODE__CHILDREN:
+			case 1:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -263,8 +281,8 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case HSLTreePackage.HSL_NODE__PARENT:
-				return eInternalContainer().eInverseRemove(this, HSLTreePackage.HSL_NODE__CHILDREN, HSLNode.class, msgs);
+			case 0:
+				return eInternalContainer().eInverseRemove(this, 1, HSLNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -277,13 +295,13 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case HSLTreePackage.HSL_NODE__PARENT:
+			case 0:
 				return getParent();
-			case HSLTreePackage.HSL_NODE__CHILDREN:
+			case 1:
 				return getChildren();
-			case HSLTreePackage.HSL_NODE__HSL:
+			case 2:
 				return getHsl();
-			case HSLTreePackage.HSL_NODE__NAME:
+			case 3:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -298,17 +316,17 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case HSLTreePackage.HSL_NODE__PARENT:
+			case 0:
 				setParent((HSLNode)newValue);
 				return;
-			case HSLTreePackage.HSL_NODE__CHILDREN:
+			case 1:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends HSLNode>)newValue);
 				return;
-			case HSLTreePackage.HSL_NODE__HSL:
+			case 2:
 				setHsl((String)newValue);
 				return;
-			case HSLTreePackage.HSL_NODE__NAME:
+			case 3:
 				setName((String)newValue);
 				return;
 		}
@@ -323,16 +341,16 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case HSLTreePackage.HSL_NODE__PARENT:
+			case 0:
 				setParent((HSLNode)null);
 				return;
-			case HSLTreePackage.HSL_NODE__CHILDREN:
+			case 1:
 				getChildren().clear();
 				return;
-			case HSLTreePackage.HSL_NODE__HSL:
+			case 2:
 				setHsl(HSL_EDEFAULT);
 				return;
-			case HSLTreePackage.HSL_NODE__NAME:
+			case 3:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -347,13 +365,13 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case HSLTreePackage.HSL_NODE__PARENT:
+			case 0:
 				return getParent() != null;
-			case HSLTreePackage.HSL_NODE__CHILDREN:
+			case 1:
 				return children != null && !children.isEmpty();
-			case HSLTreePackage.HSL_NODE__HSL:
+			case 2:
 				return HSL_EDEFAULT == null ? hsl != null : !HSL_EDEFAULT.equals(hsl);
-			case HSLTreePackage.HSL_NODE__NAME:
+			case 3:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

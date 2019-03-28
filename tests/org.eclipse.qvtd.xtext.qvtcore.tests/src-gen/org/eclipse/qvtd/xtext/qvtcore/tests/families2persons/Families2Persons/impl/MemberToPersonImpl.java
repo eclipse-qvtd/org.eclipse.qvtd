@@ -43,6 +43,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.Person;
  */
 public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container implements MemberToPerson {
 	/**
+	 * The number of structural features of the '<em>Member To Person</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MEMBER_TO_PERSON_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Member To Person</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MEMBER_TO_PERSON_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getMember() <em>Member</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -133,7 +151,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 			member = (Member)eResolveProxy(oldMember);
 			if (member != oldMember) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Families2PersonsPackage.MEMBER_TO_PERSON__MEMBER, oldMember, member));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldMember, member));
 			}
 		}
 		return member;
@@ -158,7 +176,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 		Member oldMember = member;
 		member = newMember;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Families2PersonsPackage.MEMBER_TO_PERSON__MEMBER, oldMember, member));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldMember, member));
 	}
 
 	/**
@@ -173,7 +191,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 			person = (Person)eResolveProxy(oldPerson);
 			if (person != oldPerson) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Families2PersonsPackage.MEMBER_TO_PERSON__PERSON, oldPerson, person));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldPerson, person));
 			}
 		}
 		return person;
@@ -198,7 +216,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 		Person oldPerson = person;
 		person = newPerson;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Families2PersonsPackage.MEMBER_TO_PERSON__PERSON, oldPerson, person));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldPerson, person));
 	}
 
 	/**
@@ -221,7 +239,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 		String oldFirstName = firstName;
 		firstName = newFirstName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Families2PersonsPackage.MEMBER_TO_PERSON__FIRST_NAME, oldFirstName, firstName));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldFirstName, firstName));
 	}
 
 	/**
@@ -244,7 +262,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 		String oldFamilyName = familyName;
 		familyName = newFamilyName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Families2PersonsPackage.MEMBER_TO_PERSON__FAMILY_NAME, oldFamilyName, familyName));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldFamilyName, familyName));
 	}
 
 	/**
@@ -255,15 +273,15 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Families2PersonsPackage.MEMBER_TO_PERSON__MEMBER:
+			case 0:
 				if (resolve) return getMember();
 				return basicGetMember();
-			case Families2PersonsPackage.MEMBER_TO_PERSON__PERSON:
+			case 1:
 				if (resolve) return getPerson();
 				return basicGetPerson();
-			case Families2PersonsPackage.MEMBER_TO_PERSON__FIRST_NAME:
+			case 2:
 				return getFirstName();
-			case Families2PersonsPackage.MEMBER_TO_PERSON__FAMILY_NAME:
+			case 3:
 				return getFamilyName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -277,16 +295,16 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Families2PersonsPackage.MEMBER_TO_PERSON__MEMBER:
+			case 0:
 				setMember((Member)newValue);
 				return;
-			case Families2PersonsPackage.MEMBER_TO_PERSON__PERSON:
+			case 1:
 				setPerson((Person)newValue);
 				return;
-			case Families2PersonsPackage.MEMBER_TO_PERSON__FIRST_NAME:
+			case 2:
 				setFirstName((String)newValue);
 				return;
-			case Families2PersonsPackage.MEMBER_TO_PERSON__FAMILY_NAME:
+			case 3:
 				setFamilyName((String)newValue);
 				return;
 		}
@@ -301,16 +319,16 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Families2PersonsPackage.MEMBER_TO_PERSON__MEMBER:
+			case 0:
 				setMember((Member)null);
 				return;
-			case Families2PersonsPackage.MEMBER_TO_PERSON__PERSON:
+			case 1:
 				setPerson((Person)null);
 				return;
-			case Families2PersonsPackage.MEMBER_TO_PERSON__FIRST_NAME:
+			case 2:
 				setFirstName(FIRST_NAME_EDEFAULT);
 				return;
-			case Families2PersonsPackage.MEMBER_TO_PERSON__FAMILY_NAME:
+			case 3:
 				setFamilyName(FAMILY_NAME_EDEFAULT);
 				return;
 		}
@@ -325,13 +343,13 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Families2PersonsPackage.MEMBER_TO_PERSON__MEMBER:
+			case 0:
 				return member != null;
-			case Families2PersonsPackage.MEMBER_TO_PERSON__PERSON:
+			case 1:
 				return person != null;
-			case Families2PersonsPackage.MEMBER_TO_PERSON__FIRST_NAME:
+			case 2:
 				return FIRST_NAME_EDEFAULT == null ? firstName != null : !FIRST_NAME_EDEFAULT.equals(firstName);
-			case Families2PersonsPackage.MEMBER_TO_PERSON__FAMILY_NAME:
+			case 3:
 				return FAMILY_NAME_EDEFAULT == null ? familyName != null : !FAMILY_NAME_EDEFAULT.equals(familyName);
 		}
 		return super.eIsSet(featureID);

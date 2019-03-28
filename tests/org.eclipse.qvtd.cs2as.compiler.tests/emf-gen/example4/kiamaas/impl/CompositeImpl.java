@@ -39,6 +39,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class CompositeImpl extends NodeImpl implements Composite {
 	/**
+	 * The number of structural features of the '<em>Composite</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COMPOSITE_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Composite</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COMPOSITE_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getChild() <em>Child</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +102,7 @@ public class CompositeImpl extends NodeImpl implements Composite {
 		Node oldChild = child;
 		child = newChild;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KiamaasPackage.COMPOSITE__CHILD, oldChild, newChild);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldChild, newChild);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -102,14 +118,14 @@ public class CompositeImpl extends NodeImpl implements Composite {
 		if (newChild != child) {
 			NotificationChain msgs = null;
 			if (child != null)
-				msgs = ((InternalEObject)child).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KiamaasPackage.COMPOSITE__CHILD, null, msgs);
+				msgs = ((InternalEObject)child).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newChild != null)
-				msgs = ((InternalEObject)newChild).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KiamaasPackage.COMPOSITE__CHILD, null, msgs);
+				msgs = ((InternalEObject)newChild).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetChild(newChild, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.COMPOSITE__CHILD, newChild, newChild));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newChild, newChild));
 	}
 
 	/**
@@ -120,7 +136,7 @@ public class CompositeImpl extends NodeImpl implements Composite {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KiamaasPackage.COMPOSITE__CHILD:
+			case 2:
 				return basicSetChild(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -134,7 +150,7 @@ public class CompositeImpl extends NodeImpl implements Composite {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KiamaasPackage.COMPOSITE__CHILD:
+			case 2:
 				return getChild();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -148,7 +164,7 @@ public class CompositeImpl extends NodeImpl implements Composite {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KiamaasPackage.COMPOSITE__CHILD:
+			case 2:
 				setChild((Node)newValue);
 				return;
 		}
@@ -163,7 +179,7 @@ public class CompositeImpl extends NodeImpl implements Composite {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.COMPOSITE__CHILD:
+			case 2:
 				setChild((Node)null);
 				return;
 		}
@@ -178,7 +194,7 @@ public class CompositeImpl extends NodeImpl implements Composite {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.COMPOSITE__CHILD:
+			case 2:
 				return child != null;
 		}
 		return super.eIsSet(featureID);

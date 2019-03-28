@@ -75,7 +75,7 @@ public class TalltreeSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TalltreePackage.TALL_NODE: {
+			case 0: {
 				TallNode tallNode = (TallNode)theEObject;
 				T result = caseTallNode(tallNode);
 				if (result == null) result = defaultCase(theEObject);

@@ -38,6 +38,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class Y2Impl extends YImpl implements Y2 {
 	/**
+	 * The number of structural features of the '<em>Y2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int Y2_FEATURE_COUNT = YImpl.Y_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Y2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int Y2_OPERATION_COUNT = YImpl.Y_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName2() <em>Name2</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,7 +114,7 @@ public class Y2Impl extends YImpl implements Y2 {
 		String oldName2 = name2;
 		name2 = newName2;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SderivedPackage.Y2__NAME2, oldName2, name2));
+			eNotify(new ENotificationImpl(this, Notification.SET, YImpl.Y_FEATURE_COUNT + 0, oldName2, name2));
 	}
 
 	/**
@@ -107,7 +125,7 @@ public class Y2Impl extends YImpl implements Y2 {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SderivedPackage.Y2__NAME2:
+			case YImpl.Y_FEATURE_COUNT + 0:
 				return getName2();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,7 +139,7 @@ public class Y2Impl extends YImpl implements Y2 {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SderivedPackage.Y2__NAME2:
+			case YImpl.Y_FEATURE_COUNT + 0:
 				setName2((String)newValue);
 				return;
 		}
@@ -136,7 +154,7 @@ public class Y2Impl extends YImpl implements Y2 {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SderivedPackage.Y2__NAME2:
+			case YImpl.Y_FEATURE_COUNT + 0:
 				setName2(NAME2_EDEFAULT);
 				return;
 		}
@@ -151,7 +169,7 @@ public class Y2Impl extends YImpl implements Y2 {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SderivedPackage.Y2__NAME2:
+			case YImpl.Y_FEATURE_COUNT + 0:
 				return NAME2_EDEFAULT == null ? name2 != null : !NAME2_EDEFAULT.equals(name2);
 		}
 		return super.eIsSet(featureID);

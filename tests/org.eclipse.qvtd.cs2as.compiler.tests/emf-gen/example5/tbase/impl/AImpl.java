@@ -43,6 +43,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class AImpl extends NamedElementImpl implements A {
 	/**
+	 * The number of structural features of the '<em>A</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>A</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnsB() <em>Owns B</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,7 +95,7 @@ public class AImpl extends NamedElementImpl implements A {
 	@Override
 	public EList<B> getOwnsB() {
 		if (ownsB == null) {
-			ownsB = new EObjectContainmentEList<B>(B.class, this, TbasePackage.A__OWNS_B);
+			ownsB = new EObjectContainmentEList<B>(B.class, this, 1);
 		}
 		return ownsB;
 	}
@@ -92,7 +108,7 @@ public class AImpl extends NamedElementImpl implements A {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TbasePackage.A__OWNS_B:
+			case 1:
 				return ((InternalEList<?>)getOwnsB()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -106,7 +122,7 @@ public class AImpl extends NamedElementImpl implements A {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TbasePackage.A__OWNS_B:
+			case 1:
 				return getOwnsB();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,7 +137,7 @@ public class AImpl extends NamedElementImpl implements A {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TbasePackage.A__OWNS_B:
+			case 1:
 				getOwnsB().clear();
 				getOwnsB().addAll((Collection<? extends B>)newValue);
 				return;
@@ -137,7 +153,7 @@ public class AImpl extends NamedElementImpl implements A {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TbasePackage.A__OWNS_B:
+			case 1:
 				getOwnsB().clear();
 				return;
 		}
@@ -152,7 +168,7 @@ public class AImpl extends NamedElementImpl implements A {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TbasePackage.A__OWNS_B:
+			case 1:
 				return ownsB != null && !ownsB.isEmpty();
 		}
 		return super.eIsSet(featureID);

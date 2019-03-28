@@ -48,6 +48,24 @@ import tree2talltree.talltree.TalltreePackage;
  */
 public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNode {
 	/**
+	 * The number of structural features of the '<em>Tall Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TALL_NODE_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Tall Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TALL_NODE_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -124,7 +142,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	@Override
 	public EList<TallNode> getChildren() {
 		if (children == null) {
-			children = new EObjectContainmentWithInverseEList<TallNode>(TallNode.class, this, TalltreePackage.TALL_NODE__CHILDREN, TalltreePackage.TALL_NODE__PARENT);
+			children = new EObjectContainmentWithInverseEList<TallNode>(TallNode.class, this, 0, 3);
 		}
 		return children;
 	}
@@ -149,7 +167,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 		int oldHeight = height;
 		height = newHeight;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TalltreePackage.TALL_NODE__HEIGHT, oldHeight, height));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldHeight, height));
 	}
 
 	/**
@@ -172,7 +190,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TalltreePackage.TALL_NODE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldName, name));
 	}
 
 	/**
@@ -182,7 +200,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 */
 	@Override
 	public TallNode getParent() {
-		if (eContainerFeatureID() != TalltreePackage.TALL_NODE__PARENT) return null;
+		if (eContainerFeatureID() != (3)) return null;
 		return (TallNode)eInternalContainer();
 	}
 
@@ -192,7 +210,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(TallNode newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParent, TalltreePackage.TALL_NODE__PARENT, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newParent, 3, msgs);
 		return msgs;
 	}
 
@@ -203,19 +221,19 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 */
 	@Override
 	public void setParent(TallNode newParent) {
-		if (newParent != eInternalContainer() || (eContainerFeatureID() != TalltreePackage.TALL_NODE__PARENT && newParent != null)) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != (3) && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, TalltreePackage.TALL_NODE__CHILDREN, TallNode.class, msgs);
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, 0, TallNode.class, msgs);
 			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TalltreePackage.TALL_NODE__PARENT, newParent, newParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newParent, newParent));
 	}
 
 	/**
@@ -227,9 +245,9 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TalltreePackage.TALL_NODE__CHILDREN:
+			case 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChildren()).basicAdd(otherEnd, msgs);
-			case TalltreePackage.TALL_NODE__PARENT:
+			case 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParent((TallNode)otherEnd, msgs);
@@ -245,9 +263,9 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TalltreePackage.TALL_NODE__CHILDREN:
+			case 0:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
-			case TalltreePackage.TALL_NODE__PARENT:
+			case 3:
 				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -261,8 +279,8 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TalltreePackage.TALL_NODE__PARENT:
-				return eInternalContainer().eInverseRemove(this, TalltreePackage.TALL_NODE__CHILDREN, TallNode.class, msgs);
+			case 3:
+				return eInternalContainer().eInverseRemove(this, 0, TallNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -275,13 +293,13 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TalltreePackage.TALL_NODE__CHILDREN:
+			case 0:
 				return getChildren();
-			case TalltreePackage.TALL_NODE__HEIGHT:
+			case 1:
 				return getHeight();
-			case TalltreePackage.TALL_NODE__NAME:
+			case 2:
 				return getName();
-			case TalltreePackage.TALL_NODE__PARENT:
+			case 3:
 				return getParent();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -296,17 +314,17 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TalltreePackage.TALL_NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends TallNode>)newValue);
 				return;
-			case TalltreePackage.TALL_NODE__HEIGHT:
+			case 1:
 				setHeight((Integer)newValue);
 				return;
-			case TalltreePackage.TALL_NODE__NAME:
+			case 2:
 				setName((String)newValue);
 				return;
-			case TalltreePackage.TALL_NODE__PARENT:
+			case 3:
 				setParent((TallNode)newValue);
 				return;
 		}
@@ -321,16 +339,16 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TalltreePackage.TALL_NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				return;
-			case TalltreePackage.TALL_NODE__HEIGHT:
+			case 1:
 				setHeight(HEIGHT_EDEFAULT);
 				return;
-			case TalltreePackage.TALL_NODE__NAME:
+			case 2:
 				setName(NAME_EDEFAULT);
 				return;
-			case TalltreePackage.TALL_NODE__PARENT:
+			case 3:
 				setParent((TallNode)null);
 				return;
 		}
@@ -345,13 +363,13 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TalltreePackage.TALL_NODE__CHILDREN:
+			case 0:
 				return children != null && !children.isEmpty();
-			case TalltreePackage.TALL_NODE__HEIGHT:
+			case 1:
 				return height != HEIGHT_EDEFAULT;
-			case TalltreePackage.TALL_NODE__NAME:
+			case 2:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TalltreePackage.TALL_NODE__PARENT:
+			case 3:
 				return getParent() != null;
 		}
 		return super.eIsSet(featureID);

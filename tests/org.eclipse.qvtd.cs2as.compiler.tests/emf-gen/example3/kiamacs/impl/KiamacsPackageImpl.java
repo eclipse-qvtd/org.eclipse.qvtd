@@ -263,20 +263,20 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		topCSEClass = createEClass(TOP_CS);
-		createEReference(topCSEClass, TOP_CS__NODE);
+		topCSEClass = createEClass(0);
+		createEReference(topCSEClass, 1);
 
-		nodeCSEClass = createEClass(NODE_CS);
+		nodeCSEClass = createEClass(1);
 
-		plusCSEClass = createEClass(PLUS_CS);
-		createEReference(plusCSEClass, PLUS_CS__LEFT);
-		createEReference(plusCSEClass, PLUS_CS__RIGHT);
+		plusCSEClass = createEClass(2);
+		createEReference(plusCSEClass, 1);
+		createEReference(plusCSEClass, 2);
 
-		numCSEClass = createEClass(NUM_CS);
-		createEAttribute(numCSEClass, NUM_CS__VALUE);
+		numCSEClass = createEClass(3);
+		createEAttribute(numCSEClass, 1);
 
-		baseCSEClass = createEClass(BASE_CS);
-		createEReference(baseCSEClass, BASE_CS__AST);
+		baseCSEClass = createEClass(4);
+		createEReference(baseCSEClass, 0);
 	}
 
 	/**

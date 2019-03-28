@@ -40,6 +40,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	/**
+	 * The number of structural features of the '<em>Plus CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PLUS_CS_FEATURE_COUNT = NodeCSImpl.NODE_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Plus CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PLUS_CS_OPERATION_COUNT = NodeCSImpl.NODE_CS_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,7 +115,7 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 		NodeCS oldLeft = left;
 		left = newLeft;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KiamacsPackage.PLUS_CS__LEFT, oldLeft, newLeft);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldLeft, newLeft);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -113,14 +131,14 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 		if (newLeft != left) {
 			NotificationChain msgs = null;
 			if (left != null)
-				msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KiamacsPackage.PLUS_CS__LEFT, null, msgs);
+				msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			if (newLeft != null)
-				msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KiamacsPackage.PLUS_CS__LEFT, null, msgs);
+				msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			msgs = basicSetLeft(newLeft, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamacsPackage.PLUS_CS__LEFT, newLeft, newLeft));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newLeft, newLeft));
 	}
 
 	/**
@@ -142,7 +160,7 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 		NodeCS oldRight = right;
 		right = newRight;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KiamacsPackage.PLUS_CS__RIGHT, oldRight, newRight);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldRight, newRight);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -158,14 +176,14 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 		if (newRight != right) {
 			NotificationChain msgs = null;
 			if (right != null)
-				msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KiamacsPackage.PLUS_CS__RIGHT, null, msgs);
+				msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newRight != null)
-				msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KiamacsPackage.PLUS_CS__RIGHT, null, msgs);
+				msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetRight(newRight, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamacsPackage.PLUS_CS__RIGHT, newRight, newRight));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newRight, newRight));
 	}
 
 	/**
@@ -176,9 +194,9 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KiamacsPackage.PLUS_CS__LEFT:
+			case 1:
 				return basicSetLeft(null, msgs);
-			case KiamacsPackage.PLUS_CS__RIGHT:
+			case 2:
 				return basicSetRight(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -192,9 +210,9 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KiamacsPackage.PLUS_CS__LEFT:
+			case 1:
 				return getLeft();
-			case KiamacsPackage.PLUS_CS__RIGHT:
+			case 2:
 				return getRight();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -208,10 +226,10 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KiamacsPackage.PLUS_CS__LEFT:
+			case 1:
 				setLeft((NodeCS)newValue);
 				return;
-			case KiamacsPackage.PLUS_CS__RIGHT:
+			case 2:
 				setRight((NodeCS)newValue);
 				return;
 		}
@@ -226,10 +244,10 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KiamacsPackage.PLUS_CS__LEFT:
+			case 1:
 				setLeft((NodeCS)null);
 				return;
-			case KiamacsPackage.PLUS_CS__RIGHT:
+			case 2:
 				setRight((NodeCS)null);
 				return;
 		}
@@ -244,9 +262,9 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KiamacsPackage.PLUS_CS__LEFT:
+			case 1:
 				return left != null;
-			case KiamacsPackage.PLUS_CS__RIGHT:
+			case 2:
 				return right != null;
 		}
 		return super.eIsSet(featureID);

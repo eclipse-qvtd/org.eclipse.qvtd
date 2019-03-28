@@ -24,6 +24,23 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPack
  */
 public class MaleImpl extends PersonImpl implements Male {
 	/**
+	 * The number of structural features of the '<em>Male</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MALE_FEATURE_COUNT = PersonImpl.PERSON_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Male</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MALE_OPERATION_COUNT = PersonImpl.PERSON_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

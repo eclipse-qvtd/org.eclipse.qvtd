@@ -66,9 +66,9 @@ public class KiamaasFactoryImpl extends EFactoryImpl implements KiamaasFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case KiamaasPackage.TOP: return createTop();
-			case KiamaasPackage.PLUS: return createPlus();
-			case KiamaasPackage.NUM: return createNum();
+			case 0: return createTop();
+			case 2: return createPlus();
+			case 3: return createNum();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

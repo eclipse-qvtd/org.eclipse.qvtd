@@ -75,7 +75,7 @@ public class Tree2talltreeSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case Tree2talltreePackage.NODE2_TALL_NODE: {
+			case 0: {
 				Node2TallNode node2TallNode = (Node2TallNode)theEObject;
 				T result = caseNode2TallNode(node2TallNode);
 				if (result == null) result = defaultCase(theEObject);

@@ -198,12 +198,12 @@ public class PersonsPackageImpl extends EPackageImpl implements PersonsPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		personEClass = createEClass(PERSON);
-		createEAttribute(personEClass, PERSON__FULL_NAME);
+		personEClass = createEClass(0);
+		createEAttribute(personEClass, 0);
 
-		maleEClass = createEClass(MALE);
+		maleEClass = createEClass(1);
 
-		femaleEClass = createEClass(FEMALE);
+		femaleEClass = createEClass(2);
 	}
 
 	/**

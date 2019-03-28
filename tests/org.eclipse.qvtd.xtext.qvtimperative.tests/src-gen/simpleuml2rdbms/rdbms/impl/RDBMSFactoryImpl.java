@@ -67,11 +67,11 @@ public class RDBMSFactoryImpl extends EFactoryImpl implements RDBMSFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case RDBMSPackage.COLUMN: return createColumn();
-			case RDBMSPackage.FOREIGN_KEY: return createForeignKey();
-			case RDBMSPackage.KEY: return createKey();
-			case RDBMSPackage.SCHEMA: return createSchema();
-			case RDBMSPackage.TABLE: return createTable();
+			case 0: return createColumn();
+			case 1: return createForeignKey();
+			case 2: return createKey();
+			case 4: return createSchema();
+			case 5: return createTable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -85,7 +85,7 @@ public class RDBMSFactoryImpl extends EFactoryImpl implements RDBMSFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case RDBMSPackage.STRING:
+			case 6:
 				return createStringFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -100,7 +100,7 @@ public class RDBMSFactoryImpl extends EFactoryImpl implements RDBMSFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case RDBMSPackage.STRING:
+			case 6:
 				return convertStringToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");

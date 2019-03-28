@@ -75,7 +75,7 @@ public class HSVTreeSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case HSVTreePackage.HSV_NODE: {
+			case 0: {
 				HSVNode hsvNode = (HSVNode)theEObject;
 				T result = caseHSVNode(hsvNode);
 				if (result == null) result = defaultCase(theEObject);

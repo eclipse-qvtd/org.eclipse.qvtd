@@ -38,6 +38,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public abstract class UMLModelElementImpl extends MinimalEObjectImpl.Container implements UMLModelElement {
 	/**
+	 * The number of structural features of the '<em>Model Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UML_MODEL_ELEMENT_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Model Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UML_MODEL_ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,7 +134,7 @@ public abstract class UMLModelElementImpl extends MinimalEObjectImpl.Container i
 		String oldKind = kind;
 		kind = newKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLPackage.UML_MODEL_ELEMENT__KIND, oldKind, kind));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldKind, kind));
 	}
 
 	/**
@@ -139,7 +157,7 @@ public abstract class UMLModelElementImpl extends MinimalEObjectImpl.Container i
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLPackage.UML_MODEL_ELEMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -150,9 +168,9 @@ public abstract class UMLModelElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLPackage.UML_MODEL_ELEMENT__KIND:
+			case 0:
 				return getKind();
-			case UMLPackage.UML_MODEL_ELEMENT__NAME:
+			case 1:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -166,10 +184,10 @@ public abstract class UMLModelElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLPackage.UML_MODEL_ELEMENT__KIND:
+			case 0:
 				setKind((String)newValue);
 				return;
-			case UMLPackage.UML_MODEL_ELEMENT__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
 		}
@@ -184,10 +202,10 @@ public abstract class UMLModelElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLPackage.UML_MODEL_ELEMENT__KIND:
+			case 0:
 				setKind(KIND_EDEFAULT);
 				return;
-			case UMLPackage.UML_MODEL_ELEMENT__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -202,9 +220,9 @@ public abstract class UMLModelElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLPackage.UML_MODEL_ELEMENT__KIND:
+			case 0:
 				return KIND_EDEFAULT == null ? kind != null : !KIND_EDEFAULT.equals(kind);
-			case UMLPackage.UML_MODEL_ELEMENT__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

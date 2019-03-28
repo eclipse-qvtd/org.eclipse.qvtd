@@ -50,6 +50,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.Simpleuml2
  */
 public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements PackageToSchema {
 	/**
+	 * The number of structural features of the '<em>Package To Schema</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_TO_SCHEMA_FEATURE_COUNT = UmlToRdbmsModelElementImpl.UML_TO_RDBMS_MODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Package To Schema</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_TO_SCHEMA_OPERATION_COUNT = UmlToRdbmsModelElementImpl.UML_TO_RDBMS_MODEL_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getClassesToTables() <em>Classes To Tables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,7 +134,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	@Override
 	public EList<ClassToTable> getClassesToTables() {
 		if (classesToTables == null) {
-			classesToTables = new EObjectContainmentWithInverseEList<ClassToTable>(ClassToTable.class, this, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER);
+			classesToTables = new EObjectContainmentWithInverseEList<ClassToTable>(ClassToTable.class, this, 1, 4);
 		}
 		return classesToTables;
 	}
@@ -129,7 +147,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	@Override
 	public EList<PrimitiveToName> getPrimitivesToNames() {
 		if (primitivesToNames == null) {
-			primitivesToNames = new EObjectContainmentWithInverseEList<PrimitiveToName>(PrimitiveToName.class, this, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES, Simpleuml2rdbmsPackage.PRIMITIVE_TO_NAME__OWNER);
+			primitivesToNames = new EObjectContainmentWithInverseEList<PrimitiveToName>(PrimitiveToName.class, this, 2, 2);
 		}
 		return primitivesToNames;
 	}
@@ -146,7 +164,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 			schema = (Schema)eResolveProxy(oldSchema);
 			if (schema != oldSchema) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__SCHEMA, oldSchema, schema));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldSchema, schema));
 			}
 		}
 		return schema;
@@ -171,7 +189,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 		Schema oldSchema = schema;
 		schema = newSchema;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__SCHEMA, oldSchema, schema));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldSchema, schema));
 	}
 
 	/**
@@ -186,7 +204,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 			umlPackage = (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)eResolveProxy(oldUmlPackage);
 			if (umlPackage != oldUmlPackage) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__UML_PACKAGE, oldUmlPackage, umlPackage));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldUmlPackage, umlPackage));
 			}
 		}
 		return umlPackage;
@@ -211,7 +229,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 		org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package oldUmlPackage = umlPackage;
 		umlPackage = newUmlPackage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__UML_PACKAGE, oldUmlPackage, umlPackage));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldUmlPackage, umlPackage));
 	}
 
 	/**
@@ -223,9 +241,9 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getClassesToTables()).basicAdd(otherEnd, msgs);
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPrimitivesToNames()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -239,9 +257,9 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES:
+			case 1:
 				return ((InternalEList<?>)getClassesToTables()).basicRemove(otherEnd, msgs);
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES:
+			case 2:
 				return ((InternalEList<?>)getPrimitivesToNames()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -255,14 +273,14 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES:
+			case 1:
 				return getClassesToTables();
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES:
+			case 2:
 				return getPrimitivesToNames();
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__SCHEMA:
+			case 3:
 				if (resolve) return getSchema();
 				return basicGetSchema();
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__UML_PACKAGE:
+			case 4:
 				if (resolve) return getUmlPackage();
 				return basicGetUmlPackage();
 		}
@@ -278,18 +296,18 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES:
+			case 1:
 				getClassesToTables().clear();
 				getClassesToTables().addAll((Collection<? extends ClassToTable>)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES:
+			case 2:
 				getPrimitivesToNames().clear();
 				getPrimitivesToNames().addAll((Collection<? extends PrimitiveToName>)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__SCHEMA:
+			case 3:
 				setSchema((Schema)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__UML_PACKAGE:
+			case 4:
 				setUmlPackage((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)newValue);
 				return;
 		}
@@ -304,16 +322,16 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES:
+			case 1:
 				getClassesToTables().clear();
 				return;
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES:
+			case 2:
 				getPrimitivesToNames().clear();
 				return;
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__SCHEMA:
+			case 3:
 				setSchema((Schema)null);
 				return;
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__UML_PACKAGE:
+			case 4:
 				setUmlPackage((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)null);
 				return;
 		}
@@ -328,13 +346,13 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES:
+			case 1:
 				return classesToTables != null && !classesToTables.isEmpty();
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES:
+			case 2:
 				return primitivesToNames != null && !primitivesToNames.isEmpty();
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__SCHEMA:
+			case 3:
 				return schema != null;
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__UML_PACKAGE:
+			case 4:
 				return umlPackage != null;
 		}
 		return super.eIsSet(featureID);

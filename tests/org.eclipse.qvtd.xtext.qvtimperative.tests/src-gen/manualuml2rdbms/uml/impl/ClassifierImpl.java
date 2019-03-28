@@ -43,6 +43,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class ClassifierImpl extends PackageElementImpl implements Classifier {
 	/**
+	 * The number of structural features of the '<em>Classifier</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASSIFIER_FEATURE_COUNT = PackageElementImpl.PACKAGE_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Classifier</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASSIFIER_OPERATION_COUNT = PackageElementImpl.PACKAGE_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getTypeOpposite() <em>Type Opposite</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,7 +95,7 @@ public abstract class ClassifierImpl extends PackageElementImpl implements Class
 	@Override
 	public EList<Attribute> getTypeOpposite() {
 		if (typeOpposite == null) {
-			typeOpposite = new EObjectWithInverseResolvingEList<Attribute>(Attribute.class, this, UMLPackage.CLASSIFIER__TYPE_OPPOSITE, UMLPackage.ATTRIBUTE__TYPE);
+			typeOpposite = new EObjectWithInverseResolvingEList<Attribute>(Attribute.class, this, 3, 2);
 		}
 		return typeOpposite;
 	}
@@ -93,7 +109,7 @@ public abstract class ClassifierImpl extends PackageElementImpl implements Class
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.CLASSIFIER__TYPE_OPPOSITE:
+			case 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeOpposite()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -107,7 +123,7 @@ public abstract class ClassifierImpl extends PackageElementImpl implements Class
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.CLASSIFIER__TYPE_OPPOSITE:
+			case 3:
 				return ((InternalEList<?>)getTypeOpposite()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -121,7 +137,7 @@ public abstract class ClassifierImpl extends PackageElementImpl implements Class
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLPackage.CLASSIFIER__TYPE_OPPOSITE:
+			case 3:
 				return getTypeOpposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -136,7 +152,7 @@ public abstract class ClassifierImpl extends PackageElementImpl implements Class
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLPackage.CLASSIFIER__TYPE_OPPOSITE:
+			case 3:
 				getTypeOpposite().clear();
 				getTypeOpposite().addAll((Collection<? extends Attribute>)newValue);
 				return;
@@ -152,7 +168,7 @@ public abstract class ClassifierImpl extends PackageElementImpl implements Class
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLPackage.CLASSIFIER__TYPE_OPPOSITE:
+			case 3:
 				getTypeOpposite().clear();
 				return;
 		}
@@ -167,7 +183,7 @@ public abstract class ClassifierImpl extends PackageElementImpl implements Class
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLPackage.CLASSIFIER__TYPE_OPPOSITE:
+			case 3:
 				return typeOpposite != null && !typeOpposite.isEmpty();
 		}
 		return super.eIsSet(featureID);

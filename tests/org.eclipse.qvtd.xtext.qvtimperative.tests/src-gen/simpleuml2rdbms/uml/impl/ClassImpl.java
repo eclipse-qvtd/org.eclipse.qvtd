@@ -48,6 +48,24 @@ import simpleuml2rdbms.uml.UMLPackage;
  */
 public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Class {
 	/**
+	 * The number of structural features of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_FEATURE_COUNT = ClassifierImpl.CLASSIFIER_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_OPERATION_COUNT = ClassifierImpl.CLASSIFIER_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -124,7 +142,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
-			attributes = new EObjectContainmentWithInverseEList<Attribute>(Attribute.class, this, UMLPackage.CLASS__ATTRIBUTES, UMLPackage.ATTRIBUTE__OWNER);
+			attributes = new EObjectContainmentWithInverseEList<Attribute>(Attribute.class, this, 4, 2);
 		}
 		return attributes;
 	}
@@ -137,7 +155,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public EList<Association> getForward() {
 		if (forward == null) {
-			forward = new EObjectWithInverseResolvingEList<Association>(Association.class, this, UMLPackage.CLASS__FORWARD, UMLPackage.ASSOCIATION__SOURCE);
+			forward = new EObjectWithInverseResolvingEList<Association>(Association.class, this, 5, 4);
 		}
 		return forward;
 	}
@@ -150,7 +168,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public EList<simpleuml2rdbms.uml.Class> getGeneral() {
 		if (general == null) {
-			general = new EObjectWithInverseResolvingEList.ManyInverse<simpleuml2rdbms.uml.Class>(simpleuml2rdbms.uml.Class.class, this, UMLPackage.CLASS__GENERAL, UMLPackage.CLASS__GENERAL_OPPOSITE);
+			general = new EObjectWithInverseResolvingEList.ManyInverse<simpleuml2rdbms.uml.Class>(simpleuml2rdbms.uml.Class.class, this, 6, 7);
 		}
 		return general;
 	}
@@ -163,7 +181,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public EList<simpleuml2rdbms.uml.Class> getGeneralOpposite() {
 		if (generalOpposite == null) {
-			generalOpposite = new EObjectWithInverseResolvingEList.ManyInverse<simpleuml2rdbms.uml.Class>(simpleuml2rdbms.uml.Class.class, this, UMLPackage.CLASS__GENERAL_OPPOSITE, UMLPackage.CLASS__GENERAL);
+			generalOpposite = new EObjectWithInverseResolvingEList.ManyInverse<simpleuml2rdbms.uml.Class>(simpleuml2rdbms.uml.Class.class, this, 7, 6);
 		}
 		return generalOpposite;
 	}
@@ -176,7 +194,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public EList<Association> getReverse() {
 		if (reverse == null) {
-			reverse = new EObjectWithInverseResolvingEList<Association>(Association.class, this, UMLPackage.CLASS__REVERSE, UMLPackage.ASSOCIATION__DESTINATION);
+			reverse = new EObjectWithInverseResolvingEList<Association>(Association.class, this, 8, 3);
 		}
 		return reverse;
 	}
@@ -190,15 +208,15 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.CLASS__ATTRIBUTES:
+			case 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAttributes()).basicAdd(otherEnd, msgs);
-			case UMLPackage.CLASS__FORWARD:
+			case 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getForward()).basicAdd(otherEnd, msgs);
-			case UMLPackage.CLASS__GENERAL:
+			case 6:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneral()).basicAdd(otherEnd, msgs);
-			case UMLPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneralOpposite()).basicAdd(otherEnd, msgs);
-			case UMLPackage.CLASS__REVERSE:
+			case 8:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getReverse()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -212,15 +230,15 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.CLASS__ATTRIBUTES:
+			case 4:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
-			case UMLPackage.CLASS__FORWARD:
+			case 5:
 				return ((InternalEList<?>)getForward()).basicRemove(otherEnd, msgs);
-			case UMLPackage.CLASS__GENERAL:
+			case 6:
 				return ((InternalEList<?>)getGeneral()).basicRemove(otherEnd, msgs);
-			case UMLPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				return ((InternalEList<?>)getGeneralOpposite()).basicRemove(otherEnd, msgs);
-			case UMLPackage.CLASS__REVERSE:
+			case 8:
 				return ((InternalEList<?>)getReverse()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -234,15 +252,15 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLPackage.CLASS__ATTRIBUTES:
+			case 4:
 				return getAttributes();
-			case UMLPackage.CLASS__FORWARD:
+			case 5:
 				return getForward();
-			case UMLPackage.CLASS__GENERAL:
+			case 6:
 				return getGeneral();
-			case UMLPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				return getGeneralOpposite();
-			case UMLPackage.CLASS__REVERSE:
+			case 8:
 				return getReverse();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -257,23 +275,23 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLPackage.CLASS__ATTRIBUTES:
+			case 4:
 				getAttributes().clear();
 				getAttributes().addAll((Collection<? extends Attribute>)newValue);
 				return;
-			case UMLPackage.CLASS__FORWARD:
+			case 5:
 				getForward().clear();
 				getForward().addAll((Collection<? extends Association>)newValue);
 				return;
-			case UMLPackage.CLASS__GENERAL:
+			case 6:
 				getGeneral().clear();
 				getGeneral().addAll((Collection<? extends simpleuml2rdbms.uml.Class>)newValue);
 				return;
-			case UMLPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				getGeneralOpposite().clear();
 				getGeneralOpposite().addAll((Collection<? extends simpleuml2rdbms.uml.Class>)newValue);
 				return;
-			case UMLPackage.CLASS__REVERSE:
+			case 8:
 				getReverse().clear();
 				getReverse().addAll((Collection<? extends Association>)newValue);
 				return;
@@ -289,19 +307,19 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLPackage.CLASS__ATTRIBUTES:
+			case 4:
 				getAttributes().clear();
 				return;
-			case UMLPackage.CLASS__FORWARD:
+			case 5:
 				getForward().clear();
 				return;
-			case UMLPackage.CLASS__GENERAL:
+			case 6:
 				getGeneral().clear();
 				return;
-			case UMLPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				getGeneralOpposite().clear();
 				return;
-			case UMLPackage.CLASS__REVERSE:
+			case 8:
 				getReverse().clear();
 				return;
 		}
@@ -316,15 +334,15 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLPackage.CLASS__ATTRIBUTES:
+			case 4:
 				return attributes != null && !attributes.isEmpty();
-			case UMLPackage.CLASS__FORWARD:
+			case 5:
 				return forward != null && !forward.isEmpty();
-			case UMLPackage.CLASS__GENERAL:
+			case 6:
 				return general != null && !general.isEmpty();
-			case UMLPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				return generalOpposite != null && !generalOpposite.isEmpty();
-			case UMLPackage.CLASS__REVERSE:
+			case 8:
 				return reverse != null && !reverse.isEmpty();
 		}
 		return super.eIsSet(featureID);

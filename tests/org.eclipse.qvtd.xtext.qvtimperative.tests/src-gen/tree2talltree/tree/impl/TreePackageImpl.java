@@ -183,10 +183,10 @@ public class TreePackageImpl extends EPackageImpl implements TreePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		nodeEClass = createEClass(NODE);
-		createEReference(nodeEClass, NODE__CHILDREN);
-		createEAttribute(nodeEClass, NODE__NAME);
-		createEReference(nodeEClass, NODE__PARENT);
+		nodeEClass = createEClass(0);
+		createEReference(nodeEClass, 0);
+		createEAttribute(nodeEClass, 1);
+		createEReference(nodeEClass, 2);
 	}
 
 	/**

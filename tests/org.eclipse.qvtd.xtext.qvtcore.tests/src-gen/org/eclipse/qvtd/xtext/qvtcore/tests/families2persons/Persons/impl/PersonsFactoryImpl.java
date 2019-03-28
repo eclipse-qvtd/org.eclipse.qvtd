@@ -64,8 +64,8 @@ public class PersonsFactoryImpl extends EFactoryImpl implements PersonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case PersonsPackage.MALE: return createMale();
-			case PersonsPackage.FEMALE: return createFemale();
+			case 1: return createMale();
+			case 2: return createFemale();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

@@ -26,6 +26,23 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class LeafImpl extends NodeImpl implements Leaf {
 	/**
+	 * The number of structural features of the '<em>Leaf</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LEAF_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Leaf</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LEAF_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

@@ -290,23 +290,23 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		xEClass = createEClass(X);
-		createEReference(xEClass, X__OWNS_Y);
-		createEAttribute(xEClass, X__NAME);
+		xEClass = createEClass(0);
+		createEReference(xEClass, 1);
+		createEAttribute(xEClass, 2);
 
-		yEClass = createEClass(Y);
-		createEReference(yEClass, Y__OWNS_Z);
-		createEAttribute(yEClass, Y__NAME);
-		createEReference(yEClass, Y__TO_X);
+		yEClass = createEClass(1);
+		createEReference(yEClass, 1);
+		createEAttribute(yEClass, 2);
+		createEReference(yEClass, 3);
 
-		zEClass = createEClass(Z);
-		createEReference(zEClass, Z__TO_Y);
+		zEClass = createEClass(2);
+		createEReference(zEClass, 1);
 
-		sRootEClass = createEClass(SROOT);
-		createEReference(sRootEClass, SROOT__OWNED_X);
+		sRootEClass = createEClass(3);
+		createEReference(sRootEClass, 1);
 
-		sElementEClass = createEClass(SELEMENT);
-		createEReference(sElementEClass, SELEMENT__AST);
+		sElementEClass = createEClass(4);
+		createEReference(sElementEClass, 0);
 	}
 
 	/**

@@ -43,6 +43,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class PathNameCSImpl extends ElementCSImpl implements PathNameCS {
 	/**
+	 * The number of structural features of the '<em>Path Name CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PATH_NAME_CS_FEATURE_COUNT = ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Path Name CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PATH_NAME_CS_OPERATION_COUNT = ElementCSImpl.ELEMENT_CS_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getPath() <em>Path</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,7 +95,7 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS {
 	@Override
 	public EList<PathElementCS> getPath() {
 		if (path == null) {
-			path = new EObjectContainmentEList<PathElementCS>(PathElementCS.class, this, ClassescsPackage.PATH_NAME_CS__PATH);
+			path = new EObjectContainmentEList<PathElementCS>(PathElementCS.class, this, 1);
 		}
 		return path;
 	}
@@ -92,7 +108,7 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassescsPackage.PATH_NAME_CS__PATH:
+			case 1:
 				return ((InternalEList<?>)getPath()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -106,7 +122,7 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.PATH_NAME_CS__PATH:
+			case 1:
 				return getPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,7 +137,7 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.PATH_NAME_CS__PATH:
+			case 1:
 				getPath().clear();
 				getPath().addAll((Collection<? extends PathElementCS>)newValue);
 				return;
@@ -137,7 +153,7 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.PATH_NAME_CS__PATH:
+			case 1:
 				getPath().clear();
 				return;
 		}
@@ -152,7 +168,7 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.PATH_NAME_CS__PATH:
+			case 1:
 				return path != null && !path.isEmpty();
 		}
 		return super.eIsSet(featureID);

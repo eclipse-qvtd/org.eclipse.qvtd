@@ -45,6 +45,24 @@ import simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage;
  */
 public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl implements PrimitiveToName {
 	/**
+	 * The number of structural features of the '<em>Primitive To Name</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRIMITIVE_TO_NAME_FEATURE_COUNT = UmlToRdbmsModelElementImpl.UML_TO_RDBMS_MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Primitive To Name</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRIMITIVE_TO_NAME_OPERATION_COUNT = UmlToRdbmsModelElementImpl.UML_TO_RDBMS_MODEL_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getTypeName() <em>Type Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -113,7 +131,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 		String oldTypeName = typeName;
 		typeName = newTypeName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME, oldTypeName, typeName));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldTypeName, typeName));
 	}
 
 	/**
@@ -123,7 +141,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	 */
 	@Override
 	public PackageToSchema getOwner() {
-		if (eContainerFeatureID() != UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (PackageToSchema)eInternalContainer();
 	}
 
@@ -133,7 +151,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(PackageToSchema newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 2, msgs);
 		return msgs;
 	}
 
@@ -144,19 +162,19 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	 */
 	@Override
 	public void setOwner(PackageToSchema newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (2) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, UML2RDBMSPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES, PackageToSchema.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 2, PackageToSchema.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwner, newOwner));
 	}
 
 	/**
@@ -171,7 +189,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 			primitive = (PrimitiveDataType)eResolveProxy(oldPrimitive);
 			if (primitive != oldPrimitive) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE, oldPrimitive, primitive));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldPrimitive, primitive));
 			}
 		}
 		return primitive;
@@ -196,7 +214,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 		PrimitiveDataType oldPrimitive = primitive;
 		primitive = newPrimitive;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE, oldPrimitive, primitive));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldPrimitive, primitive));
 	}
 
 	/**
@@ -207,7 +225,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((PackageToSchema)otherEnd, msgs);
@@ -223,7 +241,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 2:
 				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -237,8 +255,8 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
-				return eInternalContainer().eInverseRemove(this, UML2RDBMSPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES, PackageToSchema.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 2, PackageToSchema.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -251,11 +269,11 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME:
+			case 1:
 				return getTypeName();
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 2:
 				return getOwner();
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE:
+			case 3:
 				if (resolve) return getPrimitive();
 				return basicGetPrimitive();
 		}
@@ -270,13 +288,13 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME:
+			case 1:
 				setTypeName((String)newValue);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 2:
 				setOwner((PackageToSchema)newValue);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE:
+			case 3:
 				setPrimitive((PrimitiveDataType)newValue);
 				return;
 		}
@@ -291,13 +309,13 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME:
+			case 1:
 				setTypeName(TYPE_NAME_EDEFAULT);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 2:
 				setOwner((PackageToSchema)null);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE:
+			case 3:
 				setPrimitive((PrimitiveDataType)null);
 				return;
 		}
@@ -312,11 +330,11 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME:
+			case 1:
 				return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 2:
 				return getOwner() != null;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE:
+			case 3:
 				return primitive != null;
 		}
 		return super.eIsSet(featureID);

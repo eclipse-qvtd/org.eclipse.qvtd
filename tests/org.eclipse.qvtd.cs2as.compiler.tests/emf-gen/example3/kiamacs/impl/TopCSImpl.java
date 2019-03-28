@@ -39,6 +39,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class TopCSImpl extends BaseCSImpl implements TopCS {
 	/**
+	 * The number of structural features of the '<em>Top CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TOP_CS_FEATURE_COUNT = BaseCSImpl.BASE_CS_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Top CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TOP_CS_OPERATION_COUNT = BaseCSImpl.BASE_CS_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getNode() <em>Node</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +102,7 @@ public class TopCSImpl extends BaseCSImpl implements TopCS {
 		NodeCS oldNode = node;
 		node = newNode;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KiamacsPackage.TOP_CS__NODE, oldNode, newNode);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldNode, newNode);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -102,14 +118,14 @@ public class TopCSImpl extends BaseCSImpl implements TopCS {
 		if (newNode != node) {
 			NotificationChain msgs = null;
 			if (node != null)
-				msgs = ((InternalEObject)node).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KiamacsPackage.TOP_CS__NODE, null, msgs);
+				msgs = ((InternalEObject)node).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			if (newNode != null)
-				msgs = ((InternalEObject)newNode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KiamacsPackage.TOP_CS__NODE, null, msgs);
+				msgs = ((InternalEObject)newNode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			msgs = basicSetNode(newNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamacsPackage.TOP_CS__NODE, newNode, newNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newNode, newNode));
 	}
 
 	/**
@@ -120,7 +136,7 @@ public class TopCSImpl extends BaseCSImpl implements TopCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KiamacsPackage.TOP_CS__NODE:
+			case 1:
 				return basicSetNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -134,7 +150,7 @@ public class TopCSImpl extends BaseCSImpl implements TopCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KiamacsPackage.TOP_CS__NODE:
+			case 1:
 				return getNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -148,7 +164,7 @@ public class TopCSImpl extends BaseCSImpl implements TopCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KiamacsPackage.TOP_CS__NODE:
+			case 1:
 				setNode((NodeCS)newValue);
 				return;
 		}
@@ -163,7 +179,7 @@ public class TopCSImpl extends BaseCSImpl implements TopCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KiamacsPackage.TOP_CS__NODE:
+			case 1:
 				setNode((NodeCS)null);
 				return;
 		}
@@ -178,7 +194,7 @@ public class TopCSImpl extends BaseCSImpl implements TopCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KiamacsPackage.TOP_CS__NODE:
+			case 1:
 				return node != null;
 		}
 		return super.eIsSet(featureID);

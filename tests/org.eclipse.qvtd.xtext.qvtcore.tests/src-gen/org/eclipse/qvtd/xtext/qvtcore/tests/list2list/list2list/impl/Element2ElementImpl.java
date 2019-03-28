@@ -45,6 +45,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage
  */
 public class Element2ElementImpl extends MinimalEObjectImpl.Container implements Element2Element {
 	/**
+	 * The number of structural features of the '<em>Element2 Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT2_ELEMENT_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Element2 Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT2_ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getElement1() <em>Element1</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,7 +133,7 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 			element1 = (Element)eResolveProxy(oldElement1);
 			if (element1 != oldElement1) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, List2listPackage.ELEMENT2_ELEMENT__ELEMENT1, oldElement1, element1));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldElement1, element1));
 			}
 		}
 		return element1;
@@ -140,7 +158,7 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 		Element oldElement1 = element1;
 		element1 = newElement1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, List2listPackage.ELEMENT2_ELEMENT__ELEMENT1, oldElement1, element1));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldElement1, element1));
 	}
 
 	/**
@@ -155,7 +173,7 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 			element2 = (Element)eResolveProxy(oldElement2);
 			if (element2 != oldElement2) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, List2listPackage.ELEMENT2_ELEMENT__ELEMENT2, oldElement2, element2));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldElement2, element2));
 			}
 		}
 		return element2;
@@ -180,7 +198,7 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 		Element oldElement2 = element2;
 		element2 = newElement2;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, List2listPackage.ELEMENT2_ELEMENT__ELEMENT2, oldElement2, element2));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldElement2, element2));
 	}
 
 	/**
@@ -190,7 +208,7 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public List2List getList2list() {
-		if (eContainerFeatureID() != List2listPackage.ELEMENT2_ELEMENT__LIST2LIST) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (List2List)eInternalContainer();
 	}
 
@@ -200,7 +218,7 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	public NotificationChain basicSetList2list(List2List newList2list, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newList2list, List2listPackage.ELEMENT2_ELEMENT__LIST2LIST, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newList2list, 2, msgs);
 		return msgs;
 	}
 
@@ -211,19 +229,19 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public void setList2list(List2List newList2list) {
-		if (newList2list != eInternalContainer() || (eContainerFeatureID() != List2listPackage.ELEMENT2_ELEMENT__LIST2LIST && newList2list != null)) {
+		if (newList2list != eInternalContainer() || (eContainerFeatureID() != (2) && newList2list != null)) {
 			if (EcoreUtil.isAncestor(this, newList2list))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newList2list != null)
-				msgs = ((InternalEObject)newList2list).eInverseAdd(this, List2listPackage.LIST2_LIST__ELEMENT2_ELEMENT, List2List.class, msgs);
+				msgs = ((InternalEObject)newList2list).eInverseAdd(this, 2, List2List.class, msgs);
 			msgs = basicSetList2list(newList2list, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, List2listPackage.ELEMENT2_ELEMENT__LIST2LIST, newList2list, newList2list));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newList2list, newList2list));
 	}
 
 	/**
@@ -246,7 +264,7 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, List2listPackage.ELEMENT2_ELEMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldName, name));
 	}
 
 	/**
@@ -257,7 +275,7 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case List2listPackage.ELEMENT2_ELEMENT__LIST2LIST:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetList2list((List2List)otherEnd, msgs);
@@ -273,7 +291,7 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case List2listPackage.ELEMENT2_ELEMENT__LIST2LIST:
+			case 2:
 				return basicSetList2list(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -287,8 +305,8 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case List2listPackage.ELEMENT2_ELEMENT__LIST2LIST:
-				return eInternalContainer().eInverseRemove(this, List2listPackage.LIST2_LIST__ELEMENT2_ELEMENT, List2List.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 2, List2List.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -301,15 +319,15 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case List2listPackage.ELEMENT2_ELEMENT__ELEMENT1:
+			case 0:
 				if (resolve) return getElement1();
 				return basicGetElement1();
-			case List2listPackage.ELEMENT2_ELEMENT__ELEMENT2:
+			case 1:
 				if (resolve) return getElement2();
 				return basicGetElement2();
-			case List2listPackage.ELEMENT2_ELEMENT__LIST2LIST:
+			case 2:
 				return getList2list();
-			case List2listPackage.ELEMENT2_ELEMENT__NAME:
+			case 3:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -323,16 +341,16 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case List2listPackage.ELEMENT2_ELEMENT__ELEMENT1:
+			case 0:
 				setElement1((Element)newValue);
 				return;
-			case List2listPackage.ELEMENT2_ELEMENT__ELEMENT2:
+			case 1:
 				setElement2((Element)newValue);
 				return;
-			case List2listPackage.ELEMENT2_ELEMENT__LIST2LIST:
+			case 2:
 				setList2list((List2List)newValue);
 				return;
-			case List2listPackage.ELEMENT2_ELEMENT__NAME:
+			case 3:
 				setName((String)newValue);
 				return;
 		}
@@ -347,16 +365,16 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case List2listPackage.ELEMENT2_ELEMENT__ELEMENT1:
+			case 0:
 				setElement1((Element)null);
 				return;
-			case List2listPackage.ELEMENT2_ELEMENT__ELEMENT2:
+			case 1:
 				setElement2((Element)null);
 				return;
-			case List2listPackage.ELEMENT2_ELEMENT__LIST2LIST:
+			case 2:
 				setList2list((List2List)null);
 				return;
-			case List2listPackage.ELEMENT2_ELEMENT__NAME:
+			case 3:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -371,13 +389,13 @@ public class Element2ElementImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case List2listPackage.ELEMENT2_ELEMENT__ELEMENT1:
+			case 0:
 				return element1 != null;
-			case List2listPackage.ELEMENT2_ELEMENT__ELEMENT2:
+			case 1:
 				return element2 != null;
-			case List2listPackage.ELEMENT2_ELEMENT__LIST2LIST:
+			case 2:
 				return getList2list() != null;
-			case List2listPackage.ELEMENT2_ELEMENT__NAME:
+			case 3:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

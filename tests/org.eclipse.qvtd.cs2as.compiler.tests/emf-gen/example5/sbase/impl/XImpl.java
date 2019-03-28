@@ -47,6 +47,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class XImpl extends SElementImpl implements X {
 	/**
+	 * The number of structural features of the '<em>X</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int X_FEATURE_COUNT = SElementImpl.SELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>X</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int X_OPERATION_COUNT = SElementImpl.SELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnsY() <em>Owns Y</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -103,7 +121,7 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public EList<Y> getOwnsY() {
 		if (ownsY == null) {
-			ownsY = new EObjectContainmentWithInverseEList<Y>(Y.class, this, SbasePackage.X__OWNS_Y, SbasePackage.Y__TO_X);
+			ownsY = new EObjectContainmentWithInverseEList<Y>(Y.class, this, 1, 3);
 		}
 		return ownsY;
 	}
@@ -128,7 +146,7 @@ public class XImpl extends SElementImpl implements X {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SbasePackage.X__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldName, name));
 	}
 
 	/**
@@ -140,7 +158,7 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SbasePackage.X__OWNS_Y:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnsY()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -154,7 +172,7 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SbasePackage.X__OWNS_Y:
+			case 1:
 				return ((InternalEList<?>)getOwnsY()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -168,9 +186,9 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SbasePackage.X__OWNS_Y:
+			case 1:
 				return getOwnsY();
-			case SbasePackage.X__NAME:
+			case 2:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -185,11 +203,11 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SbasePackage.X__OWNS_Y:
+			case 1:
 				getOwnsY().clear();
 				getOwnsY().addAll((Collection<? extends Y>)newValue);
 				return;
-			case SbasePackage.X__NAME:
+			case 2:
 				setName((String)newValue);
 				return;
 		}
@@ -204,10 +222,10 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SbasePackage.X__OWNS_Y:
+			case 1:
 				getOwnsY().clear();
 				return;
-			case SbasePackage.X__NAME:
+			case 2:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -222,9 +240,9 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SbasePackage.X__OWNS_Y:
+			case 1:
 				return ownsY != null && !ownsY.isEmpty();
-			case SbasePackage.X__NAME:
+			case 2:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

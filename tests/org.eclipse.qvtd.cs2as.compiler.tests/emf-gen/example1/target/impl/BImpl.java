@@ -41,6 +41,22 @@ import example1.target.util.Visitor;
  */
 public class BImpl extends NamespaceImpl implements B {
 	/**
+	 * The number of structural features of the '<em>B</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int B_FEATURE_COUNT = NamespaceImpl.NAMESPACE_FEATURE_COUNT + 2;
+	/**
+	 * The number of operations of the '<em>B</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int B_OPERATION_COUNT = NamespaceImpl.NAMESPACE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnsD() <em>Owns D</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,7 +92,7 @@ public class BImpl extends NamespaceImpl implements B {
 	 */
 	@Override
 	public A1 getToA1() {
-		if (eContainerFeatureID() != TargetPackage.B__TO_A1) return null;
+		if (eContainerFeatureID() != (1)) return null;
 		return (A1)eInternalContainer();
 	}
 
@@ -86,7 +102,7 @@ public class BImpl extends NamespaceImpl implements B {
 	 * @generated
 	 */
 	public NotificationChain basicSetToA1(A1 newToA1, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newToA1, TargetPackage.B__TO_A1, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newToA1, 1, msgs);
 		return msgs;
 	}
 
@@ -97,19 +113,19 @@ public class BImpl extends NamespaceImpl implements B {
 	 */
 	@Override
 	public void setToA1(A1 newToA1) {
-		if (newToA1 != eInternalContainer() || (eContainerFeatureID() != TargetPackage.B__TO_A1 && newToA1 != null)) {
+		if (newToA1 != eInternalContainer() || (eContainerFeatureID() != (1) && newToA1 != null)) {
 			if (EcoreUtil.isAncestor(this, newToA1))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newToA1 != null)
-				msgs = ((InternalEObject)newToA1).eInverseAdd(this, TargetPackage.A1__OWNS_B, A1.class, msgs);
+				msgs = ((InternalEObject)newToA1).eInverseAdd(this, 1, A1.class, msgs);
 			msgs = basicSetToA1(newToA1, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TargetPackage.B__TO_A1, newToA1, newToA1));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newToA1, newToA1));
 	}
 
 	/**
@@ -131,7 +147,7 @@ public class BImpl extends NamespaceImpl implements B {
 		D oldOwnsD = ownsD;
 		ownsD = newOwnsD;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TargetPackage.B__OWNS_D, oldOwnsD, newOwnsD);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldOwnsD, newOwnsD);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -147,14 +163,14 @@ public class BImpl extends NamespaceImpl implements B {
 		if (newOwnsD != ownsD) {
 			NotificationChain msgs = null;
 			if (ownsD != null)
-				msgs = ((InternalEObject)ownsD).eInverseRemove(this, TargetPackage.D__TO_B, D.class, msgs);
+				msgs = ((InternalEObject)ownsD).eInverseRemove(this, 2, D.class, msgs);
 			if (newOwnsD != null)
-				msgs = ((InternalEObject)newOwnsD).eInverseAdd(this, TargetPackage.D__TO_B, D.class, msgs);
+				msgs = ((InternalEObject)newOwnsD).eInverseAdd(this, 2, D.class, msgs);
 			msgs = basicSetOwnsD(newOwnsD, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TargetPackage.B__OWNS_D, newOwnsD, newOwnsD));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwnsD, newOwnsD));
 	}
 
 	/**
@@ -165,13 +181,13 @@ public class BImpl extends NamespaceImpl implements B {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TargetPackage.B__TO_A1:
+			case 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetToA1((A1)otherEnd, msgs);
-			case TargetPackage.B__OWNS_D:
+			case 2:
 				if (ownsD != null)
-					msgs = ((InternalEObject)ownsD).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TargetPackage.B__OWNS_D, null, msgs);
+					msgs = ((InternalEObject)ownsD).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 				return basicSetOwnsD((D)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -185,9 +201,9 @@ public class BImpl extends NamespaceImpl implements B {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TargetPackage.B__TO_A1:
+			case 1:
 				return basicSetToA1(null, msgs);
-			case TargetPackage.B__OWNS_D:
+			case 2:
 				return basicSetOwnsD(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -201,8 +217,8 @@ public class BImpl extends NamespaceImpl implements B {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TargetPackage.B__TO_A1:
-				return eInternalContainer().eInverseRemove(this, TargetPackage.A1__OWNS_B, A1.class, msgs);
+			case 1:
+				return eInternalContainer().eInverseRemove(this, 1, A1.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -215,9 +231,9 @@ public class BImpl extends NamespaceImpl implements B {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TargetPackage.B__TO_A1:
+			case 1:
 				return getToA1();
-			case TargetPackage.B__OWNS_D:
+			case 2:
 				return getOwnsD();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -231,10 +247,10 @@ public class BImpl extends NamespaceImpl implements B {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TargetPackage.B__TO_A1:
+			case 1:
 				setToA1((A1)newValue);
 				return;
-			case TargetPackage.B__OWNS_D:
+			case 2:
 				setOwnsD((D)newValue);
 				return;
 		}
@@ -249,10 +265,10 @@ public class BImpl extends NamespaceImpl implements B {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TargetPackage.B__TO_A1:
+			case 1:
 				setToA1((A1)null);
 				return;
-			case TargetPackage.B__OWNS_D:
+			case 2:
 				setOwnsD((D)null);
 				return;
 		}
@@ -267,9 +283,9 @@ public class BImpl extends NamespaceImpl implements B {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TargetPackage.B__TO_A1:
+			case 1:
 				return getToA1() != null;
-			case TargetPackage.B__OWNS_D:
+			case 2:
 				return ownsD != null;
 		}
 		return super.eIsSet(featureID);

@@ -64,8 +64,8 @@ public class Families2PersonsFactoryImpl extends EFactoryImpl implements Familie
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case Families2PersonsPackage.MEMBER2_MALE: return createMember2Male();
-			case Families2PersonsPackage.MEMBER2_FEMALE: return createMember2Female();
+			case 1: return createMember2Male();
+			case 2: return createMember2Female();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

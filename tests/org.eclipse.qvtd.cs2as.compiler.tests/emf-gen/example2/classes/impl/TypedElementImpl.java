@@ -37,6 +37,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public abstract class TypedElementImpl extends ElementImpl implements TypedElement {
 	/**
+	 * The number of structural features of the '<em>Typed Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TYPED_ELEMENT_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Typed Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TYPED_ELEMENT_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +93,7 @@ public abstract class TypedElementImpl extends ElementImpl implements TypedEleme
 			type = (example2.classes.Class)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassesPackage.TYPED_ELEMENT__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldType, type));
 			}
 		}
 		return type;
@@ -102,7 +118,7 @@ public abstract class TypedElementImpl extends ElementImpl implements TypedEleme
 		example2.classes.Class oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassesPackage.TYPED_ELEMENT__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldType, type));
 	}
 
 	/**
@@ -113,7 +129,7 @@ public abstract class TypedElementImpl extends ElementImpl implements TypedEleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.TYPED_ELEMENT__TYPE:
+			case 0:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -128,7 +144,7 @@ public abstract class TypedElementImpl extends ElementImpl implements TypedEleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.TYPED_ELEMENT__TYPE:
+			case 0:
 				setType((example2.classes.Class)newValue);
 				return;
 		}
@@ -143,7 +159,7 @@ public abstract class TypedElementImpl extends ElementImpl implements TypedEleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.TYPED_ELEMENT__TYPE:
+			case 0:
 				setType((example2.classes.Class)null);
 				return;
 		}
@@ -158,7 +174,7 @@ public abstract class TypedElementImpl extends ElementImpl implements TypedEleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.TYPED_ELEMENT__TYPE:
+			case 0:
 				return type != null;
 		}
 		return super.eIsSet(featureID);

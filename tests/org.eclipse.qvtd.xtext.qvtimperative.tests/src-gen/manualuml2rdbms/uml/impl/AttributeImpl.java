@@ -42,6 +42,22 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	/**
+	 * The number of structural features of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ATTRIBUTE_FEATURE_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	/**
+	 * The number of operations of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ATTRIBUTE_OPERATION_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,7 +98,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 			type = (Classifier)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLPackage.ATTRIBUTE__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldType, type));
 			}
 		}
 		return type;
@@ -106,7 +122,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 		Classifier oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UMLPackage.ATTRIBUTE__TYPE, oldType, newType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldType, newType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -122,14 +138,14 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, UMLPackage.CLASSIFIER__TYPE_OPPOSITE, Classifier.class, msgs);
+				msgs = ((InternalEObject)type).eInverseRemove(this, 3, Classifier.class, msgs);
 			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, UMLPackage.CLASSIFIER__TYPE_OPPOSITE, Classifier.class, msgs);
+				msgs = ((InternalEObject)newType).eInverseAdd(this, 3, Classifier.class, msgs);
 			msgs = basicSetType(newType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLPackage.ATTRIBUTE__TYPE, newType, newType));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newType, newType));
 	}
 
 	/**
@@ -139,7 +155,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 */
 	@Override
 	public manualuml2rdbms.uml.Class getOwner() {
-		if (eContainerFeatureID() != UMLPackage.ATTRIBUTE__OWNER) return null;
+		if (eContainerFeatureID() != (3)) return null;
 		return (manualuml2rdbms.uml.Class)eInternalContainer();
 	}
 
@@ -149,7 +165,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(manualuml2rdbms.uml.Class newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, UMLPackage.ATTRIBUTE__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 3, msgs);
 		return msgs;
 	}
 
@@ -160,19 +176,19 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 */
 	@Override
 	public void setOwner(manualuml2rdbms.uml.Class newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UMLPackage.ATTRIBUTE__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (3) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, UMLPackage.CLASS__ATTRIBUTES, manualuml2rdbms.uml.Class.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 6, manualuml2rdbms.uml.Class.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLPackage.ATTRIBUTE__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newOwner, newOwner));
 	}
 
 	/**
@@ -183,11 +199,11 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.ATTRIBUTE__TYPE:
+			case 2:
 				if (type != null)
-					msgs = ((InternalEObject)type).eInverseRemove(this, UMLPackage.CLASSIFIER__TYPE_OPPOSITE, Classifier.class, msgs);
+					msgs = ((InternalEObject)type).eInverseRemove(this, 3, Classifier.class, msgs);
 				return basicSetType((Classifier)otherEnd, msgs);
-			case UMLPackage.ATTRIBUTE__OWNER:
+			case 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((manualuml2rdbms.uml.Class)otherEnd, msgs);
@@ -203,9 +219,9 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.ATTRIBUTE__TYPE:
+			case 2:
 				return basicSetType(null, msgs);
-			case UMLPackage.ATTRIBUTE__OWNER:
+			case 3:
 				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -219,8 +235,8 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLPackage.ATTRIBUTE__OWNER:
-				return eInternalContainer().eInverseRemove(this, UMLPackage.CLASS__ATTRIBUTES, manualuml2rdbms.uml.Class.class, msgs);
+			case 3:
+				return eInternalContainer().eInverseRemove(this, 6, manualuml2rdbms.uml.Class.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -233,10 +249,10 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLPackage.ATTRIBUTE__TYPE:
+			case 2:
 				if (resolve) return getType();
 				return basicGetType();
-			case UMLPackage.ATTRIBUTE__OWNER:
+			case 3:
 				return getOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -250,10 +266,10 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLPackage.ATTRIBUTE__TYPE:
+			case 2:
 				setType((Classifier)newValue);
 				return;
-			case UMLPackage.ATTRIBUTE__OWNER:
+			case 3:
 				setOwner((manualuml2rdbms.uml.Class)newValue);
 				return;
 		}
@@ -268,10 +284,10 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLPackage.ATTRIBUTE__TYPE:
+			case 2:
 				setType((Classifier)null);
 				return;
-			case UMLPackage.ATTRIBUTE__OWNER:
+			case 3:
 				setOwner((manualuml2rdbms.uml.Class)null);
 				return;
 		}
@@ -286,9 +302,9 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLPackage.ATTRIBUTE__TYPE:
+			case 2:
 				return type != null;
-			case UMLPackage.ATTRIBUTE__OWNER:
+			case 3:
 				return getOwner() != null;
 		}
 		return super.eIsSet(featureID);

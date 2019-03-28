@@ -36,6 +36,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class NumCSImpl extends NodeCSImpl implements NumCS {
 	/**
+	 * The number of structural features of the '<em>Num CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NUM_CS_FEATURE_COUNT = NodeCSImpl.NODE_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Num CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NUM_CS_OPERATION_COUNT = NodeCSImpl.NODE_CS_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,7 +112,7 @@ public class NumCSImpl extends NodeCSImpl implements NumCS {
 		int oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamacsPackage.NUM_CS__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldValue, value));
 	}
 
 	/**
@@ -105,7 +123,7 @@ public class NumCSImpl extends NodeCSImpl implements NumCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KiamacsPackage.NUM_CS__VALUE:
+			case 1:
 				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,7 +137,7 @@ public class NumCSImpl extends NodeCSImpl implements NumCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KiamacsPackage.NUM_CS__VALUE:
+			case 1:
 				setValue((Integer)newValue);
 				return;
 		}
@@ -134,7 +152,7 @@ public class NumCSImpl extends NodeCSImpl implements NumCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KiamacsPackage.NUM_CS__VALUE:
+			case 1:
 				setValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -149,7 +167,7 @@ public class NumCSImpl extends NodeCSImpl implements NumCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KiamacsPackage.NUM_CS__VALUE:
+			case 1:
 				return value != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

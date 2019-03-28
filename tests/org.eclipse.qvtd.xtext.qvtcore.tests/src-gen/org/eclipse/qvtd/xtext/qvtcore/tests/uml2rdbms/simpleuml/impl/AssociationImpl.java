@@ -37,6 +37,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage
  */
 public class AssociationImpl extends PackageElementImpl implements Association {
 	/**
+	 * The number of structural features of the '<em>Association</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASSOCIATION_FEATURE_COUNT = PackageElementImpl.PACKAGE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Association</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASSOCIATION_OPERATION_COUNT = PackageElementImpl.PACKAGE_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,7 +105,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 			destination = (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)eResolveProxy(oldDestination);
 			if (destination != oldDestination) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimpleumlPackage.ASSOCIATION__DESTINATION, oldDestination, destination));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldDestination, destination));
 			}
 		}
 		return destination;
@@ -111,7 +129,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 		org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class oldDestination = destination;
 		destination = newDestination;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimpleumlPackage.ASSOCIATION__DESTINATION, oldDestination, newDestination);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 3, oldDestination, newDestination);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -127,14 +145,14 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 		if (newDestination != destination) {
 			NotificationChain msgs = null;
 			if (destination != null)
-				msgs = ((InternalEObject)destination).eInverseRemove(this, SimpleumlPackage.CLASS__REVERSE, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
+				msgs = ((InternalEObject)destination).eInverseRemove(this, 8, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
 			if (newDestination != null)
-				msgs = ((InternalEObject)newDestination).eInverseAdd(this, SimpleumlPackage.CLASS__REVERSE, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
+				msgs = ((InternalEObject)newDestination).eInverseAdd(this, 8, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
 			msgs = basicSetDestination(newDestination, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimpleumlPackage.ASSOCIATION__DESTINATION, newDestination, newDestination));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newDestination, newDestination));
 	}
 
 	/**
@@ -149,7 +167,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 			source = (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimpleumlPackage.ASSOCIATION__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldSource, source));
 			}
 		}
 		return source;
@@ -173,7 +191,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 		org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimpleumlPackage.ASSOCIATION__SOURCE, oldSource, newSource);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 4, oldSource, newSource);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -189,14 +207,14 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, SimpleumlPackage.CLASS__FORWARD, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
+				msgs = ((InternalEObject)source).eInverseRemove(this, 5, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, SimpleumlPackage.CLASS__FORWARD, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, 5, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimpleumlPackage.ASSOCIATION__SOURCE, newSource, newSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, newSource, newSource));
 	}
 
 	/**
@@ -207,13 +225,13 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.ASSOCIATION__DESTINATION:
+			case 3:
 				if (destination != null)
-					msgs = ((InternalEObject)destination).eInverseRemove(this, SimpleumlPackage.CLASS__REVERSE, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
+					msgs = ((InternalEObject)destination).eInverseRemove(this, 8, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
 				return basicSetDestination((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)otherEnd, msgs);
-			case SimpleumlPackage.ASSOCIATION__SOURCE:
+			case 4:
 				if (source != null)
-					msgs = ((InternalEObject)source).eInverseRemove(this, SimpleumlPackage.CLASS__FORWARD, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
+					msgs = ((InternalEObject)source).eInverseRemove(this, 5, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
 				return basicSetSource((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -227,9 +245,9 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.ASSOCIATION__DESTINATION:
+			case 3:
 				return basicSetDestination(null, msgs);
-			case SimpleumlPackage.ASSOCIATION__SOURCE:
+			case 4:
 				return basicSetSource(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -243,10 +261,10 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SimpleumlPackage.ASSOCIATION__DESTINATION:
+			case 3:
 				if (resolve) return getDestination();
 				return basicGetDestination();
-			case SimpleumlPackage.ASSOCIATION__SOURCE:
+			case 4:
 				if (resolve) return getSource();
 				return basicGetSource();
 		}
@@ -261,10 +279,10 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SimpleumlPackage.ASSOCIATION__DESTINATION:
+			case 3:
 				setDestination((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)newValue);
 				return;
-			case SimpleumlPackage.ASSOCIATION__SOURCE:
+			case 4:
 				setSource((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)newValue);
 				return;
 		}
@@ -279,10 +297,10 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.ASSOCIATION__DESTINATION:
+			case 3:
 				setDestination((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)null);
 				return;
-			case SimpleumlPackage.ASSOCIATION__SOURCE:
+			case 4:
 				setSource((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)null);
 				return;
 		}
@@ -297,9 +315,9 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.ASSOCIATION__DESTINATION:
+			case 3:
 				return destination != null;
-			case SimpleumlPackage.ASSOCIATION__SOURCE:
+			case 4:
 				return source != null;
 		}
 		return super.eIsSet(featureID);

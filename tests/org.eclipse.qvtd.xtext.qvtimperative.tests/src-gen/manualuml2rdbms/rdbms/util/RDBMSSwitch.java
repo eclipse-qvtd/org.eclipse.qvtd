@@ -77,41 +77,41 @@ public class RDBMSSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case RDBMSPackage.COLUMN: {
+			case 0: {
 				Column column = (Column)theEObject;
 				T result = caseColumn(column);
 				if (result == null) result = caseRModelElement(column);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case RDBMSPackage.FOREIGN_KEY: {
+			case 1: {
 				ForeignKey foreignKey = (ForeignKey)theEObject;
 				T result = caseForeignKey(foreignKey);
 				if (result == null) result = caseRModelElement(foreignKey);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case RDBMSPackage.KEY: {
+			case 2: {
 				Key key = (Key)theEObject;
 				T result = caseKey(key);
 				if (result == null) result = caseRModelElement(key);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case RDBMSPackage.RMODEL_ELEMENT: {
+			case 3: {
 				RModelElement rModelElement = (RModelElement)theEObject;
 				T result = caseRModelElement(rModelElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case RDBMSPackage.SCHEMA: {
+			case 4: {
 				Schema schema = (Schema)theEObject;
 				T result = caseSchema(schema);
 				if (result == null) result = caseRModelElement(schema);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case RDBMSPackage.TABLE: {
+			case 5: {
 				Table table = (Table)theEObject;
 				T result = caseTable(table);
 				if (result == null) result = caseRModelElement(table);

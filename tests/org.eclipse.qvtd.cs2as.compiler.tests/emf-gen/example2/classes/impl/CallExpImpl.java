@@ -40,6 +40,22 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	/**
+	 * The number of structural features of the '<em>Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CALL_EXP_FEATURE_COUNT = TypedElementImpl.TYPED_ELEMENT_FEATURE_COUNT + 2;
+	/**
+	 * The number of operations of the '<em>Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CALL_EXP_OPERATION_COUNT = TypedElementImpl.TYPED_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnedCallExp() <em>Owned Call Exp</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +102,7 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 		CallExp oldOwnedCallExp = ownedCallExp;
 		ownedCallExp = newOwnedCallExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassesPackage.CALL_EXP__OWNED_CALL_EXP, oldOwnedCallExp, newOwnedCallExp);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldOwnedCallExp, newOwnedCallExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -102,14 +118,14 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 		if (newOwnedCallExp != ownedCallExp) {
 			NotificationChain msgs = null;
 			if (ownedCallExp != null)
-				msgs = ((InternalEObject)ownedCallExp).eInverseRemove(this, ClassesPackage.CALL_EXP__OWNING_SOURCE, CallExp.class, msgs);
+				msgs = ((InternalEObject)ownedCallExp).eInverseRemove(this, 2, CallExp.class, msgs);
 			if (newOwnedCallExp != null)
-				msgs = ((InternalEObject)newOwnedCallExp).eInverseAdd(this, ClassesPackage.CALL_EXP__OWNING_SOURCE, CallExp.class, msgs);
+				msgs = ((InternalEObject)newOwnedCallExp).eInverseAdd(this, 2, CallExp.class, msgs);
 			msgs = basicSetOwnedCallExp(newOwnedCallExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassesPackage.CALL_EXP__OWNED_CALL_EXP, newOwnedCallExp, newOwnedCallExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newOwnedCallExp, newOwnedCallExp));
 	}
 
 	/**
@@ -119,7 +135,7 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	 */
 	@Override
 	public CallExp getOwningSource() {
-		if (eContainerFeatureID() != ClassesPackage.CALL_EXP__OWNING_SOURCE) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (CallExp)eInternalContainer();
 	}
 
@@ -129,7 +145,7 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningSource(CallExp newOwningSource, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningSource, ClassesPackage.CALL_EXP__OWNING_SOURCE, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningSource, 2, msgs);
 		return msgs;
 	}
 
@@ -140,19 +156,19 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	 */
 	@Override
 	public void setOwningSource(CallExp newOwningSource) {
-		if (newOwningSource != eInternalContainer() || (eContainerFeatureID() != ClassesPackage.CALL_EXP__OWNING_SOURCE && newOwningSource != null)) {
+		if (newOwningSource != eInternalContainer() || (eContainerFeatureID() != (2) && newOwningSource != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningSource))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningSource != null)
-				msgs = ((InternalEObject)newOwningSource).eInverseAdd(this, ClassesPackage.CALL_EXP__OWNED_CALL_EXP, CallExp.class, msgs);
+				msgs = ((InternalEObject)newOwningSource).eInverseAdd(this, 1, CallExp.class, msgs);
 			msgs = basicSetOwningSource(newOwningSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassesPackage.CALL_EXP__OWNING_SOURCE, newOwningSource, newOwningSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwningSource, newOwningSource));
 	}
 
 	/**
@@ -163,11 +179,11 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassesPackage.CALL_EXP__OWNED_CALL_EXP:
+			case 1:
 				if (ownedCallExp != null)
-					msgs = ((InternalEObject)ownedCallExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassesPackage.CALL_EXP__OWNED_CALL_EXP, null, msgs);
+					msgs = ((InternalEObject)ownedCallExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 				return basicSetOwnedCallExp((CallExp)otherEnd, msgs);
-			case ClassesPackage.CALL_EXP__OWNING_SOURCE:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningSource((CallExp)otherEnd, msgs);
@@ -183,9 +199,9 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassesPackage.CALL_EXP__OWNED_CALL_EXP:
+			case 1:
 				return basicSetOwnedCallExp(null, msgs);
-			case ClassesPackage.CALL_EXP__OWNING_SOURCE:
+			case 2:
 				return basicSetOwningSource(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -199,8 +215,8 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case ClassesPackage.CALL_EXP__OWNING_SOURCE:
-				return eInternalContainer().eInverseRemove(this, ClassesPackage.CALL_EXP__OWNED_CALL_EXP, CallExp.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 1, CallExp.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -213,9 +229,9 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.CALL_EXP__OWNED_CALL_EXP:
+			case 1:
 				return getOwnedCallExp();
-			case ClassesPackage.CALL_EXP__OWNING_SOURCE:
+			case 2:
 				return getOwningSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -229,10 +245,10 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.CALL_EXP__OWNED_CALL_EXP:
+			case 1:
 				setOwnedCallExp((CallExp)newValue);
 				return;
-			case ClassesPackage.CALL_EXP__OWNING_SOURCE:
+			case 2:
 				setOwningSource((CallExp)newValue);
 				return;
 		}
@@ -247,10 +263,10 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.CALL_EXP__OWNED_CALL_EXP:
+			case 1:
 				setOwnedCallExp((CallExp)null);
 				return;
-			case ClassesPackage.CALL_EXP__OWNING_SOURCE:
+			case 2:
 				setOwningSource((CallExp)null);
 				return;
 		}
@@ -265,9 +281,9 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.CALL_EXP__OWNED_CALL_EXP:
+			case 1:
 				return ownedCallExp != null;
-			case ClassesPackage.CALL_EXP__OWNING_SOURCE:
+			case 2:
 				return getOwningSource() != null;
 		}
 		return super.eIsSet(featureID);

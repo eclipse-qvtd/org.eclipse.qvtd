@@ -50,6 +50,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.UmlToRdbms
  */
 public class AssociationToForeignKeyImpl extends ToColumnImpl implements AssociationToForeignKey {
 	/**
+	 * The number of structural features of the '<em>Association To Foreign Key</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASSOCIATION_TO_FOREIGN_KEY_FEATURE_COUNT = ToColumnImpl.TO_COLUMN_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of operations of the '<em>Association To Foreign Key</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASSOCIATION_TO_FOREIGN_KEY_OPERATION_COUNT = ToColumnImpl.TO_COLUMN_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,7 +166,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -163,7 +181,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 			association = (Association)eResolveProxy(oldAssociation);
 			if (association != oldAssociation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__ASSOCIATION, oldAssociation, association));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldAssociation, association));
 			}
 		}
 		return association;
@@ -188,7 +206,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 		Association oldAssociation = association;
 		association = newAssociation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__ASSOCIATION, oldAssociation, association));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldAssociation, association));
 	}
 
 	/**
@@ -203,7 +221,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 			foreignKey = (ForeignKey)eResolveProxy(oldForeignKey);
 			if (foreignKey != oldForeignKey) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY, oldForeignKey, foreignKey));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldForeignKey, foreignKey));
 			}
 		}
 		return foreignKey;
@@ -228,7 +246,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 		ForeignKey oldForeignKey = foreignKey;
 		foreignKey = newForeignKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY, oldForeignKey, foreignKey));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldForeignKey, foreignKey));
 	}
 
 	/**
@@ -243,7 +261,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 			key = (Key)eResolveProxy(oldKey);
 			if (key != oldKey) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY, oldKey, key));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldKey, key));
 			}
 		}
 		return key;
@@ -268,7 +286,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 		Key oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY, oldKey, key));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldKey, key));
 	}
 
 	/**
@@ -278,7 +296,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 */
 	@Override
 	public ClassToTable getOwner() {
-		if (eContainerFeatureID() != Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER) return null;
+		if (eContainerFeatureID() != (5)) return null;
 		return (ClassToTable)eInternalContainer();
 	}
 
@@ -288,7 +306,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(ClassToTable newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 5, msgs);
 		return msgs;
 	}
 
@@ -299,19 +317,19 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 */
 	@Override
 	public void setOwner(ClassToTable newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (5) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS, ClassToTable.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 3, ClassToTable.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, newOwner, newOwner));
 	}
 
 	/**
@@ -326,7 +344,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 			referenced = (ClassToTable)eResolveProxy(oldReferenced);
 			if (referenced != oldReferenced) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__REFERENCED, oldReferenced, referenced));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 6, oldReferenced, referenced));
 			}
 		}
 		return referenced;
@@ -351,7 +369,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 		ClassToTable oldReferenced = referenced;
 		referenced = newReferenced;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__REFERENCED, oldReferenced, referenced));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, oldReferenced, referenced));
 	}
 
 	/**
@@ -362,7 +380,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
+			case 5:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((ClassToTable)otherEnd, msgs);
@@ -378,7 +396,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
+			case 5:
 				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -392,8 +410,8 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
-				return eInternalContainer().eInverseRemove(this, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS, ClassToTable.class, msgs);
+			case 5:
+				return eInternalContainer().eInverseRemove(this, 3, ClassToTable.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -406,20 +424,20 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__NAME:
+			case 1:
 				return getName();
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__ASSOCIATION:
+			case 2:
 				if (resolve) return getAssociation();
 				return basicGetAssociation();
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY:
+			case 3:
 				if (resolve) return getForeignKey();
 				return basicGetForeignKey();
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY:
+			case 4:
 				if (resolve) return getKey();
 				return basicGetKey();
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
+			case 5:
 				return getOwner();
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__REFERENCED:
+			case 6:
 				if (resolve) return getReferenced();
 				return basicGetReferenced();
 		}
@@ -434,22 +452,22 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__ASSOCIATION:
+			case 2:
 				setAssociation((Association)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY:
+			case 3:
 				setForeignKey((ForeignKey)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY:
+			case 4:
 				setKey((Key)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
+			case 5:
 				setOwner((ClassToTable)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__REFERENCED:
+			case 6:
 				setReferenced((ClassToTable)newValue);
 				return;
 		}
@@ -464,22 +482,22 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__ASSOCIATION:
+			case 2:
 				setAssociation((Association)null);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY:
+			case 3:
 				setForeignKey((ForeignKey)null);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY:
+			case 4:
 				setKey((Key)null);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
+			case 5:
 				setOwner((ClassToTable)null);
 				return;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__REFERENCED:
+			case 6:
 				setReferenced((ClassToTable)null);
 				return;
 		}
@@ -494,17 +512,17 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__ASSOCIATION:
+			case 2:
 				return association != null;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY:
+			case 3:
 				return foreignKey != null;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY:
+			case 4:
 				return key != null;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
+			case 5:
 				return getOwner() != null;
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__REFERENCED:
+			case 6:
 				return referenced != null;
 		}
 		return super.eIsSet(featureID);
@@ -519,7 +537,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == UmlToRdbmsModelElement.class) {
 			switch (derivedFeatureID) {
-				case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__NAME: return Simpleuml2rdbmsPackage.UML_TO_RDBMS_MODEL_ELEMENT__NAME;
+				case 1: return 0;
 				default: return -1;
 			}
 		}
@@ -535,7 +553,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == UmlToRdbmsModelElement.class) {
 			switch (baseFeatureID) {
-				case Simpleuml2rdbmsPackage.UML_TO_RDBMS_MODEL_ELEMENT__NAME: return Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__NAME;
+				case 0: return 1;
 				default: return -1;
 			}
 		}

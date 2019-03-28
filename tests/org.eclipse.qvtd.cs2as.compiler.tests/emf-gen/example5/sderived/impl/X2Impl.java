@@ -45,6 +45,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class X2Impl extends XImpl implements X2 {
 	/**
+	 * The number of structural features of the '<em>X2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int X2_FEATURE_COUNT = XImpl.X_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>X2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int X2_OPERATION_COUNT = XImpl.X_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnsW() <em>Owns W</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -81,7 +97,7 @@ public class X2Impl extends XImpl implements X2 {
 	@Override
 	public EList<W> getOwnsW() {
 		if (ownsW == null) {
-			ownsW = new EObjectContainmentEList<W>(W.class, this, SderivedPackage.X2__OWNS_W);
+			ownsW = new EObjectContainmentEList<W>(W.class, this, XImpl.X_FEATURE_COUNT + 0);
 		}
 		return ownsW;
 	}
@@ -94,7 +110,7 @@ public class X2Impl extends XImpl implements X2 {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SderivedPackage.X2__OWNS_W:
+			case XImpl.X_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnsW()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -108,7 +124,7 @@ public class X2Impl extends XImpl implements X2 {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SderivedPackage.X2__OWNS_W:
+			case XImpl.X_FEATURE_COUNT + 0:
 				return getOwnsW();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -123,7 +139,7 @@ public class X2Impl extends XImpl implements X2 {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SderivedPackage.X2__OWNS_W:
+			case XImpl.X_FEATURE_COUNT + 0:
 				getOwnsW().clear();
 				getOwnsW().addAll((Collection<? extends W>)newValue);
 				return;
@@ -139,7 +155,7 @@ public class X2Impl extends XImpl implements X2 {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SderivedPackage.X2__OWNS_W:
+			case XImpl.X_FEATURE_COUNT + 0:
 				getOwnsW().clear();
 				return;
 		}
@@ -154,7 +170,7 @@ public class X2Impl extends XImpl implements X2 {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SderivedPackage.X2__OWNS_W:
+			case XImpl.X_FEATURE_COUNT + 0:
 				return ownsW != null && !ownsW.isEmpty();
 		}
 		return super.eIsSet(featureID);

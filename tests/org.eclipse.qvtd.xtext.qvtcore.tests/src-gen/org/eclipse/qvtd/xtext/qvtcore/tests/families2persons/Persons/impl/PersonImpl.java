@@ -35,6 +35,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPack
  */
 public abstract class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
+	 * The number of structural features of the '<em>Person</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PERSON_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Person</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PERSON_OPERATION_COUNT = 0;
+
+	/**
 	 * The default value of the '{@link #getFullName() <em>Full Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,7 +111,7 @@ public abstract class PersonImpl extends MinimalEObjectImpl.Container implements
 		String oldFullName = fullName;
 		fullName = newFullName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PersonsPackage.PERSON__FULL_NAME, oldFullName, fullName));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldFullName, fullName));
 	}
 
 	/**
@@ -104,7 +122,7 @@ public abstract class PersonImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case PersonsPackage.PERSON__FULL_NAME:
+			case 0:
 				return getFullName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -118,7 +136,7 @@ public abstract class PersonImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case PersonsPackage.PERSON__FULL_NAME:
+			case 0:
 				setFullName((String)newValue);
 				return;
 		}
@@ -133,7 +151,7 @@ public abstract class PersonImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case PersonsPackage.PERSON__FULL_NAME:
+			case 0:
 				setFullName(FULL_NAME_EDEFAULT);
 				return;
 		}
@@ -148,7 +166,7 @@ public abstract class PersonImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case PersonsPackage.PERSON__FULL_NAME:
+			case 0:
 				return FULL_NAME_EDEFAULT == null ? fullName != null : !FULL_NAME_EDEFAULT.equals(fullName);
 		}
 		return super.eIsSet(featureID);

@@ -206,14 +206,14 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		hsvNodeEClass = createEClass(HSV_NODE);
-		createEReference(hsvNodeEClass, HSV_NODE__PARENT);
-		createEReference(hsvNodeEClass, HSV_NODE__CHILDREN);
-		createEAttribute(hsvNodeEClass, HSV_NODE__HSV);
-		createEAttribute(hsvNodeEClass, HSV_NODE__NAME);
+		hsvNodeEClass = createEClass(0);
+		createEReference(hsvNodeEClass, 0);
+		createEReference(hsvNodeEClass, 1);
+		createEAttribute(hsvNodeEClass, 2);
+		createEAttribute(hsvNodeEClass, 3);
 
 		// Create data types
-		hsvEDataType = createEDataType(HSV);
+		hsvEDataType = createEDataType(1);
 	}
 
 	/**

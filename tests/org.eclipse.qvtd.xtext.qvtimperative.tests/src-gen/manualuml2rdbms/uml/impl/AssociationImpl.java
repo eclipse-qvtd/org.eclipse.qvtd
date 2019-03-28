@@ -39,6 +39,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class AssociationImpl extends PackageElementImpl implements Association {
 	/**
+	 * The number of structural features of the '<em>Association</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASSOCIATION_FEATURE_COUNT = PackageElementImpl.PACKAGE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Association</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASSOCIATION_OPERATION_COUNT = PackageElementImpl.PACKAGE_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,7 +107,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 			source = (manualuml2rdbms.uml.Class)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLPackage.ASSOCIATION__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldSource, source));
 			}
 		}
 		return source;
@@ -113,7 +131,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 		manualuml2rdbms.uml.Class oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UMLPackage.ASSOCIATION__SOURCE, oldSource, newSource);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 3, oldSource, newSource);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -129,14 +147,14 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, UMLPackage.CLASS__FORWARD, manualuml2rdbms.uml.Class.class, msgs);
+				msgs = ((InternalEObject)source).eInverseRemove(this, 5, manualuml2rdbms.uml.Class.class, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, UMLPackage.CLASS__FORWARD, manualuml2rdbms.uml.Class.class, msgs);
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, 5, manualuml2rdbms.uml.Class.class, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLPackage.ASSOCIATION__SOURCE, newSource, newSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newSource, newSource));
 	}
 
 	/**
@@ -151,7 +169,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 			destination = (manualuml2rdbms.uml.Class)eResolveProxy(oldDestination);
 			if (destination != oldDestination) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLPackage.ASSOCIATION__DESTINATION, oldDestination, destination));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldDestination, destination));
 			}
 		}
 		return destination;
@@ -176,7 +194,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 		manualuml2rdbms.uml.Class oldDestination = destination;
 		destination = newDestination;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLPackage.ASSOCIATION__DESTINATION, oldDestination, destination));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldDestination, destination));
 	}
 
 	/**
@@ -187,9 +205,9 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.ASSOCIATION__SOURCE:
+			case 3:
 				if (source != null)
-					msgs = ((InternalEObject)source).eInverseRemove(this, UMLPackage.CLASS__FORWARD, manualuml2rdbms.uml.Class.class, msgs);
+					msgs = ((InternalEObject)source).eInverseRemove(this, 5, manualuml2rdbms.uml.Class.class, msgs);
 				return basicSetSource((manualuml2rdbms.uml.Class)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -203,7 +221,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.ASSOCIATION__SOURCE:
+			case 3:
 				return basicSetSource(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -217,10 +235,10 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLPackage.ASSOCIATION__SOURCE:
+			case 3:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case UMLPackage.ASSOCIATION__DESTINATION:
+			case 4:
 				if (resolve) return getDestination();
 				return basicGetDestination();
 		}
@@ -235,10 +253,10 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLPackage.ASSOCIATION__SOURCE:
+			case 3:
 				setSource((manualuml2rdbms.uml.Class)newValue);
 				return;
-			case UMLPackage.ASSOCIATION__DESTINATION:
+			case 4:
 				setDestination((manualuml2rdbms.uml.Class)newValue);
 				return;
 		}
@@ -253,10 +271,10 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLPackage.ASSOCIATION__SOURCE:
+			case 3:
 				setSource((manualuml2rdbms.uml.Class)null);
 				return;
-			case UMLPackage.ASSOCIATION__DESTINATION:
+			case 4:
 				setDestination((manualuml2rdbms.uml.Class)null);
 				return;
 		}
@@ -271,9 +289,9 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLPackage.ASSOCIATION__SOURCE:
+			case 3:
 				return source != null;
-			case UMLPackage.ASSOCIATION__DESTINATION:
+			case 4:
 				return destination != null;
 		}
 		return super.eIsSet(featureID);

@@ -39,6 +39,24 @@ import example2.classescstraces.RootCS2Root;
  */
 public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements RootCS2Root {
 	/**
+	 * The number of structural features of the '<em>Root CS2 Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROOT_CS2_ROOT_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Root CS2 Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROOT_CS2_ROOT_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getRootCS() <em>Root CS</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,7 +107,7 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 			rootCS = (RootCS)eResolveProxy(oldRootCS);
 			if (rootCS != oldRootCS) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescstracesPackage.ROOT_CS2_ROOT__ROOT_CS, oldRootCS, rootCS));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldRootCS, rootCS));
 			}
 		}
 		return rootCS;
@@ -114,7 +132,7 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 		RootCS oldRootCS = rootCS;
 		rootCS = newRootCS;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescstracesPackage.ROOT_CS2_ROOT__ROOT_CS, oldRootCS, rootCS));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldRootCS, rootCS));
 	}
 
 	/**
@@ -129,7 +147,7 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 			root = (Root)eResolveProxy(oldRoot);
 			if (root != oldRoot) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescstracesPackage.ROOT_CS2_ROOT__ROOT, oldRoot, root));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldRoot, root));
 			}
 		}
 		return root;
@@ -154,7 +172,7 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 		Root oldRoot = root;
 		root = newRoot;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescstracesPackage.ROOT_CS2_ROOT__ROOT, oldRoot, root));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldRoot, root));
 	}
 
 	/**
@@ -165,10 +183,10 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescstracesPackage.ROOT_CS2_ROOT__ROOT_CS:
+			case 0:
 				if (resolve) return getRootCS();
 				return basicGetRootCS();
-			case ClassescstracesPackage.ROOT_CS2_ROOT__ROOT:
+			case 1:
 				if (resolve) return getRoot();
 				return basicGetRoot();
 		}
@@ -183,10 +201,10 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescstracesPackage.ROOT_CS2_ROOT__ROOT_CS:
+			case 0:
 				setRootCS((RootCS)newValue);
 				return;
-			case ClassescstracesPackage.ROOT_CS2_ROOT__ROOT:
+			case 1:
 				setRoot((Root)newValue);
 				return;
 		}
@@ -201,10 +219,10 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescstracesPackage.ROOT_CS2_ROOT__ROOT_CS:
+			case 0:
 				setRootCS((RootCS)null);
 				return;
-			case ClassescstracesPackage.ROOT_CS2_ROOT__ROOT:
+			case 1:
 				setRoot((Root)null);
 				return;
 		}
@@ -219,9 +237,9 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescstracesPackage.ROOT_CS2_ROOT__ROOT_CS:
+			case 0:
 				return rootCS != null;
-			case ClassescstracesPackage.ROOT_CS2_ROOT__ROOT:
+			case 1:
 				return root != null;
 		}
 		return super.eIsSet(featureID);

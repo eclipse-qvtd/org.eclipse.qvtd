@@ -27,6 +27,23 @@ import example1.target.util.Visitor;
  */
 public class A3Impl extends A2Impl implements A3 {
 	/**
+	 * The number of structural features of the '<em>A3</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A3_FEATURE_COUNT = A2Impl.A2_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>A3</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A3_OPERATION_COUNT = A2Impl.A2_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

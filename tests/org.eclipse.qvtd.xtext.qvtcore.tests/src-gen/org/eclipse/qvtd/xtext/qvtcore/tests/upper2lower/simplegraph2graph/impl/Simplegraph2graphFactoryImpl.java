@@ -64,9 +64,9 @@ public class Simplegraph2graphFactoryImpl extends EFactoryImpl implements Simple
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case Simplegraph2graphPackage.GRAPH2_GRAPH: return createGraph2Graph();
-			case Simplegraph2graphPackage.EDGE2_EDGE: return createEdge2Edge();
-			case Simplegraph2graphPackage.NODE2_NODE: return createNode2Node();
+			case 0: return createGraph2Graph();
+			case 2: return createEdge2Edge();
+			case 3: return createNode2Node();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

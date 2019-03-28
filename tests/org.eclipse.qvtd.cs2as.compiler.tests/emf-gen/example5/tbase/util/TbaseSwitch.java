@@ -77,7 +77,7 @@ public class TbaseSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TbasePackage.A: {
+			case 0: {
 				A a = (A)theEObject;
 				T result = caseA(a);
 				if (result == null) result = caseNamedElement(a);
@@ -85,7 +85,7 @@ public class TbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TbasePackage.B: {
+			case 1: {
 				B b = (B)theEObject;
 				T result = caseB(b);
 				if (result == null) result = caseNamedElement(b);
@@ -93,28 +93,28 @@ public class TbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TbasePackage.C: {
+			case 2: {
 				C c = (C)theEObject;
 				T result = caseC(c);
 				if (result == null) result = caseElement(c);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TbasePackage.TROOT: {
+			case 3: {
 				TRoot tRoot = (TRoot)theEObject;
 				T result = caseTRoot(tRoot);
 				if (result == null) result = caseElement(tRoot);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TbasePackage.NAMED_ELEMENT: {
+			case 4: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
 				if (result == null) result = caseElement(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TbasePackage.ELEMENT: {
+			case 5: {
 				Element element = (Element)theEObject;
 				T result = caseElement(element);
 				if (result == null) result = defaultCase(theEObject);

@@ -75,7 +75,7 @@ public class TreeSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TreePackage.NODE: {
+			case 0: {
 				Node node = (Node)theEObject;
 				T result = caseNode(node);
 				if (result == null) result = defaultCase(theEObject);

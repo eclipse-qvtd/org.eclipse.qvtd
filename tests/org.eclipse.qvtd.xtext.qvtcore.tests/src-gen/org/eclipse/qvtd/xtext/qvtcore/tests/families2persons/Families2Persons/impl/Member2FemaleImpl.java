@@ -24,6 +24,23 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2Persons.Me
  */
 public class Member2FemaleImpl extends MemberToPersonImpl implements Member2Female {
 	/**
+	 * The number of structural features of the '<em>Member2 Female</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MEMBER2_FEMALE_FEATURE_COUNT = MemberToPersonImpl.MEMBER_TO_PERSON_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Member2 Female</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MEMBER2_FEMALE_OPERATION_COUNT = MemberToPersonImpl.MEMBER_TO_PERSON_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

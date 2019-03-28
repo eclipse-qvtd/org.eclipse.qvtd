@@ -40,6 +40,22 @@ import simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage;
  */
 public abstract class ToColumnImpl extends MinimalEObjectImpl.Container implements ToColumn {
 	/**
+	 * The number of structural features of the '<em>To Column</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TO_COLUMN_FEATURE_COUNT = 1;
+	/**
+	 * The number of operations of the '<em>To Column</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TO_COLUMN_OPERATION_COUNT = 0;
+	/**
 	 * The cached value of the '{@link #getColumn() <em>Column</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,7 +96,7 @@ public abstract class ToColumnImpl extends MinimalEObjectImpl.Container implemen
 			column = (Column)eResolveProxy(oldColumn);
 			if (column != oldColumn) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UML2RDBMSPackage.TO_COLUMN__COLUMN, oldColumn, column));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldColumn, column));
 			}
 		}
 		return column;
@@ -105,7 +121,7 @@ public abstract class ToColumnImpl extends MinimalEObjectImpl.Container implemen
 		Column oldColumn = column;
 		column = newColumn;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.TO_COLUMN__COLUMN, oldColumn, column));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldColumn, column));
 	}
 
 	/**
@@ -116,7 +132,7 @@ public abstract class ToColumnImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UML2RDBMSPackage.TO_COLUMN__COLUMN:
+			case 0:
 				if (resolve) return getColumn();
 				return basicGetColumn();
 		}
@@ -131,7 +147,7 @@ public abstract class ToColumnImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UML2RDBMSPackage.TO_COLUMN__COLUMN:
+			case 0:
 				setColumn((Column)newValue);
 				return;
 		}
@@ -146,7 +162,7 @@ public abstract class ToColumnImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.TO_COLUMN__COLUMN:
+			case 0:
 				setColumn((Column)null);
 				return;
 		}
@@ -161,7 +177,7 @@ public abstract class ToColumnImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.TO_COLUMN__COLUMN:
+			case 0:
 				return column != null;
 		}
 		return super.eIsSet(featureID);

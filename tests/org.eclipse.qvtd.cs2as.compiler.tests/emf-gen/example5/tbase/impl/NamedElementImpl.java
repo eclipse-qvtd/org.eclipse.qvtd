@@ -36,6 +36,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class NamedElementImpl extends ElementImpl implements NamedElement {
 	/**
+	 * The number of structural features of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAMED_ELEMENT_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAMED_ELEMENT_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,7 +112,7 @@ public class NamedElementImpl extends ElementImpl implements NamedElement {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TbasePackage.NAMED_ELEMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldName, name));
 	}
 
 	/**
@@ -105,7 +123,7 @@ public class NamedElementImpl extends ElementImpl implements NamedElement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TbasePackage.NAMED_ELEMENT__NAME:
+			case 0:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,7 +137,7 @@ public class NamedElementImpl extends ElementImpl implements NamedElement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TbasePackage.NAMED_ELEMENT__NAME:
+			case 0:
 				setName((String)newValue);
 				return;
 		}
@@ -134,7 +152,7 @@ public class NamedElementImpl extends ElementImpl implements NamedElement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TbasePackage.NAMED_ELEMENT__NAME:
+			case 0:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -149,7 +167,7 @@ public class NamedElementImpl extends ElementImpl implements NamedElement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TbasePackage.NAMED_ELEMENT__NAME:
+			case 0:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

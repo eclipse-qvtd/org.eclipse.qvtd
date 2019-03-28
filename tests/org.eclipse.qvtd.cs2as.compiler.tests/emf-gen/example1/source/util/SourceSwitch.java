@@ -85,21 +85,21 @@ public class SourceSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case SourcePackage.X: {
+			case 0: {
 				X x = (X)theEObject;
 				T result = caseX(x);
 				if (result == null) result = caseSElement(x);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SourcePackage.Y: {
+			case 1: {
 				Y y = (Y)theEObject;
 				T result = caseY(y);
 				if (result == null) result = caseSElement(y);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SourcePackage.Y1: {
+			case 2: {
 				Y1 y1 = (Y1)theEObject;
 				T result = caseY1(y1);
 				if (result == null) result = caseY(y1);
@@ -107,7 +107,7 @@ public class SourceSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SourcePackage.Y2: {
+			case 3: {
 				Y2 y2 = (Y2)theEObject;
 				T result = caseY2(y2);
 				if (result == null) result = caseY(y2);
@@ -115,34 +115,34 @@ public class SourceSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SourcePackage.Z: {
+			case 4: {
 				Z z = (Z)theEObject;
 				T result = caseZ(z);
 				if (result == null) result = caseSElement(z);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SourcePackage.SROOT: {
+			case 5: {
 				SRoot sRoot = (SRoot)theEObject;
 				T result = caseSRoot(sRoot);
 				if (result == null) result = caseSElement(sRoot);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SourcePackage.SELEMENT: {
+			case 6: {
 				SElement sElement = (SElement)theEObject;
 				T result = caseSElement(sElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SourcePackage.PATH_NAME_CS: {
+			case 7: {
 				PathNameCS pathNameCS = (PathNameCS)theEObject;
 				T result = casePathNameCS(pathNameCS);
 				if (result == null) result = caseSElement(pathNameCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SourcePackage.PATH_ELEMENT_CS: {
+			case 8: {
 				PathElementCS pathElementCS = (PathElementCS)theEObject;
 				T result = casePathElementCS(pathElementCS);
 				if (result == null) result = caseSElement(pathElementCS);

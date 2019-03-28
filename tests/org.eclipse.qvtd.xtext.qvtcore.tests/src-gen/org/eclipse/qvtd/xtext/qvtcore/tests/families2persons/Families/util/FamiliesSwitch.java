@@ -76,13 +76,13 @@ public class FamiliesSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case FamiliesPackage.FAMILY: {
+			case 0: {
 				Family family = (Family)theEObject;
 				T result = caseFamily(family);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FamiliesPackage.MEMBER: {
+			case 1: {
 				Member member = (Member)theEObject;
 				T result = caseMember(member);
 				if (result == null) result = defaultCase(theEObject);

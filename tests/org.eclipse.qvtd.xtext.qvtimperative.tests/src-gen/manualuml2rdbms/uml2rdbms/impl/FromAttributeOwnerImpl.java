@@ -45,6 +45,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class FromAttributeOwnerImpl extends MinimalEObjectImpl.Container implements FromAttributeOwner {
 	/**
+	 * The number of structural features of the '<em>From Attribute Owner</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FROM_ATTRIBUTE_OWNER_FEATURE_COUNT = 1;
+	/**
+	 * The number of operations of the '<em>From Attribute Owner</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FROM_ATTRIBUTE_OWNER_OPERATION_COUNT = 0;
+	/**
 	 * The cached value of the '{@link #getFromAttributes() <em>From Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -81,7 +97,7 @@ public abstract class FromAttributeOwnerImpl extends MinimalEObjectImpl.Containe
 	@Override
 	public EList<FromAttribute> getFromAttributes() {
 		if (fromAttributes == null) {
-			fromAttributes = new EObjectContainmentWithInverseEList<FromAttribute>(FromAttribute.class, this, UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES, UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER);
+			fromAttributes = new EObjectContainmentWithInverseEList<FromAttribute>(FromAttribute.class, this, 0, 2);
 		}
 		return fromAttributes;
 	}
@@ -95,7 +111,7 @@ public abstract class FromAttributeOwnerImpl extends MinimalEObjectImpl.Containe
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES:
+			case 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFromAttributes()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -109,7 +125,7 @@ public abstract class FromAttributeOwnerImpl extends MinimalEObjectImpl.Containe
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES:
+			case 0:
 				return ((InternalEList<?>)getFromAttributes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -123,7 +139,7 @@ public abstract class FromAttributeOwnerImpl extends MinimalEObjectImpl.Containe
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES:
+			case 0:
 				return getFromAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -138,7 +154,7 @@ public abstract class FromAttributeOwnerImpl extends MinimalEObjectImpl.Containe
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES:
+			case 0:
 				getFromAttributes().clear();
 				getFromAttributes().addAll((Collection<? extends FromAttribute>)newValue);
 				return;
@@ -154,7 +170,7 @@ public abstract class FromAttributeOwnerImpl extends MinimalEObjectImpl.Containe
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES:
+			case 0:
 				getFromAttributes().clear();
 				return;
 		}
@@ -169,7 +185,7 @@ public abstract class FromAttributeOwnerImpl extends MinimalEObjectImpl.Containe
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES:
+			case 0:
 				return fromAttributes != null && !fromAttributes.isEmpty();
 		}
 		return super.eIsSet(featureID);

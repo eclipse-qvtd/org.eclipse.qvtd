@@ -70,11 +70,11 @@ public class UMLFactoryImpl extends EFactoryImpl implements UMLFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case UMLPackage.ATTRIBUTE: return createAttribute();
-			case UMLPackage.ASSOCIATION: return createAssociation();
-			case UMLPackage.CLASS: return createClass();
-			case UMLPackage.PACKAGE: return createPackage();
-			case UMLPackage.PRIMITIVE_DATA_TYPE: return createPrimitiveDataType();
+			case 0: return createAttribute();
+			case 1: return createAssociation();
+			case 2: return createClass();
+			case 4: return createPackage();
+			case 6: return createPrimitiveDataType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

@@ -45,6 +45,24 @@ import example1.source.Y;
  */
 public class XImpl extends SElementImpl implements X {
 	/**
+	 * The number of structural features of the '<em>X</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int X_FEATURE_COUNT = SElementImpl.SELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>X</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int X_OPERATION_COUNT = SElementImpl.SELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnsY() <em>Owns Y</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -141,7 +159,7 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public EList<Y> getOwnsY() {
 		if (ownsY == null) {
-			ownsY = new EObjectContainmentWithInverseEList<Y>(Y.class, this, SourcePackage.X__OWNS_Y, SourcePackage.Y__TO_X);
+			ownsY = new EObjectContainmentWithInverseEList<Y>(Y.class, this, 1, 3);
 		}
 		return ownsY;
 	}
@@ -166,7 +184,7 @@ public class XImpl extends SElementImpl implements X {
 		boolean oldIsA1 = isA1;
 		isA1 = newIsA1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.X__IS_A1, oldIsA1, isA1));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldIsA1, isA1));
 	}
 
 	/**
@@ -189,7 +207,7 @@ public class XImpl extends SElementImpl implements X {
 		boolean oldIsA2 = isA2;
 		isA2 = newIsA2;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.X__IS_A2, oldIsA2, isA2));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldIsA2, isA2));
 	}
 
 	/**
@@ -212,7 +230,7 @@ public class XImpl extends SElementImpl implements X {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.X__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldName, name));
 	}
 
 	/**
@@ -224,7 +242,7 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SourcePackage.X__OWNS_Y:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnsY()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -238,7 +256,7 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SourcePackage.X__OWNS_Y:
+			case 1:
 				return ((InternalEList<?>)getOwnsY()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -252,13 +270,13 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SourcePackage.X__OWNS_Y:
+			case 1:
 				return getOwnsY();
-			case SourcePackage.X__IS_A1:
+			case 2:
 				return isIsA1();
-			case SourcePackage.X__IS_A2:
+			case 3:
 				return isIsA2();
-			case SourcePackage.X__NAME:
+			case 4:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -273,17 +291,17 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SourcePackage.X__OWNS_Y:
+			case 1:
 				getOwnsY().clear();
 				getOwnsY().addAll((Collection<? extends Y>)newValue);
 				return;
-			case SourcePackage.X__IS_A1:
+			case 2:
 				setIsA1((Boolean)newValue);
 				return;
-			case SourcePackage.X__IS_A2:
+			case 3:
 				setIsA2((Boolean)newValue);
 				return;
-			case SourcePackage.X__NAME:
+			case 4:
 				setName((String)newValue);
 				return;
 		}
@@ -298,16 +316,16 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SourcePackage.X__OWNS_Y:
+			case 1:
 				getOwnsY().clear();
 				return;
-			case SourcePackage.X__IS_A1:
+			case 2:
 				setIsA1(IS_A1_EDEFAULT);
 				return;
-			case SourcePackage.X__IS_A2:
+			case 3:
 				setIsA2(IS_A2_EDEFAULT);
 				return;
-			case SourcePackage.X__NAME:
+			case 4:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -322,13 +340,13 @@ public class XImpl extends SElementImpl implements X {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SourcePackage.X__OWNS_Y:
+			case 1:
 				return ownsY != null && !ownsY.isEmpty();
-			case SourcePackage.X__IS_A1:
+			case 2:
 				return isA1 != IS_A1_EDEFAULT;
-			case SourcePackage.X__IS_A2:
+			case 3:
 				return isA2 != IS_A2_EDEFAULT;
-			case SourcePackage.X__NAME:
+			case 4:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

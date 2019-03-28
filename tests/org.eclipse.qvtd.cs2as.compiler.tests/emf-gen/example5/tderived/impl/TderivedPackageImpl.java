@@ -14,6 +14,8 @@ package example5.tderived.impl;
 
 import example5.tbase.TbasePackage;
 
+import example5.tbase.impl.AImpl;
+import example5.tbase.impl.BImpl;
 import example5.tderived.TderivedFactory;
 import example5.tderived.TderivedPackage;
 
@@ -195,13 +197,13 @@ public class TderivedPackageImpl extends EPackageImpl implements TderivedPackage
 		isCreated = true;
 
 		// Create classes and their features
-		a2EClass = createEClass(A2);
-		createEReference(a2EClass, A2__OWNS_D);
+		a2EClass = createEClass(0);
+		createEReference(a2EClass, AImpl.A_FEATURE_COUNT + 0);
 
-		b2EClass = createEClass(B2);
-		createEAttribute(b2EClass, B2__ANOTHER_NAME);
+		b2EClass = createEClass(1);
+		createEAttribute(b2EClass, BImpl.B_FEATURE_COUNT + 0);
 
-		dEClass = createEClass(D);
+		dEClass = createEClass(2);
 	}
 
 	/**

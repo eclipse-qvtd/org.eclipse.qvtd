@@ -49,6 +49,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.Member;
  */
 public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 	/**
+	 * The number of structural features of the '<em>Family</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FAMILY_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Family</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FAMILY_OPERATION_COUNT = 0;
+
+	/**
 	 * The default value of the '{@link #getLastName() <em>Last Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -147,7 +165,7 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 		String oldLastName = lastName;
 		lastName = newLastName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FamiliesPackage.FAMILY__LAST_NAME, oldLastName, lastName));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldLastName, lastName));
 	}
 
 	/**
@@ -169,7 +187,7 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 		Member oldFather = father;
 		father = newFather;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FamiliesPackage.FAMILY__FATHER, oldFather, newFather);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldFather, newFather);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -185,14 +203,14 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 		if (newFather != father) {
 			NotificationChain msgs = null;
 			if (father != null)
-				msgs = ((InternalEObject)father).eInverseRemove(this, FamiliesPackage.MEMBER__FAMILY_FATHER, Member.class, msgs);
+				msgs = ((InternalEObject)father).eInverseRemove(this, 1, Member.class, msgs);
 			if (newFather != null)
-				msgs = ((InternalEObject)newFather).eInverseAdd(this, FamiliesPackage.MEMBER__FAMILY_FATHER, Member.class, msgs);
+				msgs = ((InternalEObject)newFather).eInverseAdd(this, 1, Member.class, msgs);
 			msgs = basicSetFather(newFather, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FamiliesPackage.FAMILY__FATHER, newFather, newFather));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newFather, newFather));
 	}
 
 	/**
@@ -214,7 +232,7 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 		Member oldMother = mother;
 		mother = newMother;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FamiliesPackage.FAMILY__MOTHER, oldMother, newMother);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldMother, newMother);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -230,14 +248,14 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 		if (newMother != mother) {
 			NotificationChain msgs = null;
 			if (mother != null)
-				msgs = ((InternalEObject)mother).eInverseRemove(this, FamiliesPackage.MEMBER__FAMILY_MOTHER, Member.class, msgs);
+				msgs = ((InternalEObject)mother).eInverseRemove(this, 2, Member.class, msgs);
 			if (newMother != null)
-				msgs = ((InternalEObject)newMother).eInverseAdd(this, FamiliesPackage.MEMBER__FAMILY_MOTHER, Member.class, msgs);
+				msgs = ((InternalEObject)newMother).eInverseAdd(this, 2, Member.class, msgs);
 			msgs = basicSetMother(newMother, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FamiliesPackage.FAMILY__MOTHER, newMother, newMother));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newMother, newMother));
 	}
 
 	/**
@@ -248,7 +266,7 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 	@Override
 	public EList<Member> getSons() {
 		if (sons == null) {
-			sons = new EObjectContainmentWithInverseEList<Member>(Member.class, this, FamiliesPackage.FAMILY__SONS, FamiliesPackage.MEMBER__FAMILY_SON);
+			sons = new EObjectContainmentWithInverseEList<Member>(Member.class, this, 3, 3);
 		}
 		return sons;
 	}
@@ -261,7 +279,7 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 	@Override
 	public EList<Member> getDaughters() {
 		if (daughters == null) {
-			daughters = new EObjectContainmentWithInverseEList<Member>(Member.class, this, FamiliesPackage.FAMILY__DAUGHTERS, FamiliesPackage.MEMBER__FAMILY_DAUGHTER);
+			daughters = new EObjectContainmentWithInverseEList<Member>(Member.class, this, 4, 4);
 		}
 		return daughters;
 	}
@@ -275,17 +293,17 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FamiliesPackage.FAMILY__FATHER:
+			case 1:
 				if (father != null)
-					msgs = ((InternalEObject)father).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FamiliesPackage.FAMILY__FATHER, null, msgs);
+					msgs = ((InternalEObject)father).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 				return basicSetFather((Member)otherEnd, msgs);
-			case FamiliesPackage.FAMILY__MOTHER:
+			case 2:
 				if (mother != null)
-					msgs = ((InternalEObject)mother).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FamiliesPackage.FAMILY__MOTHER, null, msgs);
+					msgs = ((InternalEObject)mother).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 				return basicSetMother((Member)otherEnd, msgs);
-			case FamiliesPackage.FAMILY__SONS:
+			case 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSons()).basicAdd(otherEnd, msgs);
-			case FamiliesPackage.FAMILY__DAUGHTERS:
+			case 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDaughters()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -299,13 +317,13 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FamiliesPackage.FAMILY__FATHER:
+			case 1:
 				return basicSetFather(null, msgs);
-			case FamiliesPackage.FAMILY__MOTHER:
+			case 2:
 				return basicSetMother(null, msgs);
-			case FamiliesPackage.FAMILY__SONS:
+			case 3:
 				return ((InternalEList<?>)getSons()).basicRemove(otherEnd, msgs);
-			case FamiliesPackage.FAMILY__DAUGHTERS:
+			case 4:
 				return ((InternalEList<?>)getDaughters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -319,15 +337,15 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FamiliesPackage.FAMILY__LAST_NAME:
+			case 0:
 				return getLastName();
-			case FamiliesPackage.FAMILY__FATHER:
+			case 1:
 				return getFather();
-			case FamiliesPackage.FAMILY__MOTHER:
+			case 2:
 				return getMother();
-			case FamiliesPackage.FAMILY__SONS:
+			case 3:
 				return getSons();
-			case FamiliesPackage.FAMILY__DAUGHTERS:
+			case 4:
 				return getDaughters();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -342,20 +360,20 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FamiliesPackage.FAMILY__LAST_NAME:
+			case 0:
 				setLastName((String)newValue);
 				return;
-			case FamiliesPackage.FAMILY__FATHER:
+			case 1:
 				setFather((Member)newValue);
 				return;
-			case FamiliesPackage.FAMILY__MOTHER:
+			case 2:
 				setMother((Member)newValue);
 				return;
-			case FamiliesPackage.FAMILY__SONS:
+			case 3:
 				getSons().clear();
 				getSons().addAll((Collection<? extends Member>)newValue);
 				return;
-			case FamiliesPackage.FAMILY__DAUGHTERS:
+			case 4:
 				getDaughters().clear();
 				getDaughters().addAll((Collection<? extends Member>)newValue);
 				return;
@@ -371,19 +389,19 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FamiliesPackage.FAMILY__LAST_NAME:
+			case 0:
 				setLastName(LAST_NAME_EDEFAULT);
 				return;
-			case FamiliesPackage.FAMILY__FATHER:
+			case 1:
 				setFather((Member)null);
 				return;
-			case FamiliesPackage.FAMILY__MOTHER:
+			case 2:
 				setMother((Member)null);
 				return;
-			case FamiliesPackage.FAMILY__SONS:
+			case 3:
 				getSons().clear();
 				return;
-			case FamiliesPackage.FAMILY__DAUGHTERS:
+			case 4:
 				getDaughters().clear();
 				return;
 		}
@@ -398,15 +416,15 @@ public class FamilyImpl extends MinimalEObjectImpl.Container implements Family {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FamiliesPackage.FAMILY__LAST_NAME:
+			case 0:
 				return LAST_NAME_EDEFAULT == null ? lastName != null : !LAST_NAME_EDEFAULT.equals(lastName);
-			case FamiliesPackage.FAMILY__FATHER:
+			case 1:
 				return father != null;
-			case FamiliesPackage.FAMILY__MOTHER:
+			case 2:
 				return mother != null;
-			case FamiliesPackage.FAMILY__SONS:
+			case 3:
 				return sons != null && !sons.isEmpty();
-			case FamiliesPackage.FAMILY__DAUGHTERS:
+			case 4:
 				return daughters != null && !daughters.isEmpty();
 		}
 		return super.eIsSet(featureID);

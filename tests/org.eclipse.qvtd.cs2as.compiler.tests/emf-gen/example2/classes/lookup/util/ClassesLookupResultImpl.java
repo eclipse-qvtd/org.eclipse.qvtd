@@ -10,7 +10,7 @@
  *
  * This code is auto-generated
  * from: org.eclipse.qvtd.cs2as.compiler.tests/models/SimpleClasses/Classes.genmodel
- * template: org.eclipse.ocl.examples.build.xtend.GenerateAutoLookupInfrastructureXtend
+ * template: org.eclipse.ocl.examples.autogen.xtend.GenerateAutoLookupInfrastructureXtend
  *
  * Only the copyright statement is editable.
  *******************************************************************************/

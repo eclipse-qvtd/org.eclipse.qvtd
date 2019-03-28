@@ -64,7 +64,7 @@ public class HSV2HSLFactoryImpl extends EFactoryImpl implements HSV2HSLFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE: return createHSVNode2HSLNode();
+			case 0: return createHSVNode2HSLNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -78,7 +78,7 @@ public class HSV2HSLFactoryImpl extends EFactoryImpl implements HSV2HSLFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case HSV2HSLPackage.RGB:
+			case 1:
 				return createRGBFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -93,7 +93,7 @@ public class HSV2HSLFactoryImpl extends EFactoryImpl implements HSV2HSLFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case HSV2HSLPackage.RGB:
+			case 1:
 				return convertRGBToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");

@@ -66,9 +66,9 @@ public class KiamacsFactoryImpl extends EFactoryImpl implements KiamacsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case KiamacsPackage.TOP_CS: return createTopCS();
-			case KiamacsPackage.COMPOSITE_CS: return createCompositeCS();
-			case KiamacsPackage.LEAF_CS: return createLeafCS();
+			case 0: return createTopCS();
+			case 2: return createCompositeCS();
+			case 3: return createLeafCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

@@ -40,6 +40,22 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage
  */
 public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package {
 	/**
+	 * The number of structural features of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_FEATURE_COUNT = PackageElementImpl.PACKAGE_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_OPERATION_COUNT = PackageElementImpl.PACKAGE_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,7 +92,7 @@ public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.
 	@Override
 	public EList<PackageElement> getElements() {
 		if (elements == null) {
-			elements = new EObjectContainmentWithInverseEList<PackageElement>(PackageElement.class, this, SimpleumlPackage.PACKAGE__ELEMENTS, SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE);
+			elements = new EObjectContainmentWithInverseEList<PackageElement>(PackageElement.class, this, 3, 2);
 		}
 		return elements;
 	}
@@ -90,7 +106,7 @@ public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE__ELEMENTS:
+			case 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getElements()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -104,7 +120,7 @@ public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE__ELEMENTS:
+			case 3:
 				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -118,7 +134,7 @@ public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE__ELEMENTS:
+			case 3:
 				return getElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -133,7 +149,7 @@ public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE__ELEMENTS:
+			case 3:
 				getElements().clear();
 				getElements().addAll((Collection<? extends PackageElement>)newValue);
 				return;
@@ -149,7 +165,7 @@ public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE__ELEMENTS:
+			case 3:
 				getElements().clear();
 				return;
 		}
@@ -164,7 +180,7 @@ public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE__ELEMENTS:
+			case 3:
 				return elements != null && !elements.isEmpty();
 		}
 		return super.eIsSet(featureID);

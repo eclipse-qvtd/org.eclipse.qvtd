@@ -319,25 +319,25 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 		isCreated = true;
 
 		// Create classes and their features
-		graph2GraphEClass = createEClass(GRAPH2_GRAPH);
-		createEReference(graph2GraphEClass, GRAPH2_GRAPH__GRAPH1);
-		createEReference(graph2GraphEClass, GRAPH2_GRAPH__GRAPH2);
-		createEReference(graph2GraphEClass, GRAPH2_GRAPH__ELEMENT2_ELEMENT);
-		createEAttribute(graph2GraphEClass, GRAPH2_GRAPH__NAME);
+		graph2GraphEClass = createEClass(0);
+		createEReference(graph2GraphEClass, 0);
+		createEReference(graph2GraphEClass, 1);
+		createEReference(graph2GraphEClass, 2);
+		createEAttribute(graph2GraphEClass, 3);
 
-		element2ElementEClass = createEClass(ELEMENT2_ELEMENT);
-		createEReference(element2ElementEClass, ELEMENT2_ELEMENT__OWNER);
+		element2ElementEClass = createEClass(1);
+		createEReference(element2ElementEClass, 0);
 
-		edge2EdgeEClass = createEClass(EDGE2_EDGE);
-		createEReference(edge2EdgeEClass, EDGE2_EDGE__EDGE1);
-		createEReference(edge2EdgeEClass, EDGE2_EDGE__EDGE2);
-		createEReference(edge2EdgeEClass, EDGE2_EDGE__TARGET);
-		createEReference(edge2EdgeEClass, EDGE2_EDGE__SOURCE);
+		edge2EdgeEClass = createEClass(2);
+		createEReference(edge2EdgeEClass, 1);
+		createEReference(edge2EdgeEClass, 2);
+		createEReference(edge2EdgeEClass, 3);
+		createEReference(edge2EdgeEClass, 4);
 
-		node2NodeEClass = createEClass(NODE2_NODE);
-		createEReference(node2NodeEClass, NODE2_NODE__NODE1);
-		createEReference(node2NodeEClass, NODE2_NODE__NODE2);
-		createEAttribute(node2NodeEClass, NODE2_NODE__LABEL);
+		node2NodeEClass = createEClass(3);
+		createEReference(node2NodeEClass, 1);
+		createEReference(node2NodeEClass, 2);
+		createEAttribute(node2NodeEClass, 3);
 	}
 
 	/**

@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.jdt.annotation.Nullable;
-
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.*;
 
 /**
@@ -76,26 +75,26 @@ public class Simplegraph2graphSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case Simplegraph2graphPackage.GRAPH2_GRAPH: {
+			case 0: {
 				Graph2Graph graph2Graph = (Graph2Graph)theEObject;
 				T result = caseGraph2Graph(graph2Graph);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Simplegraph2graphPackage.ELEMENT2_ELEMENT: {
+			case 1: {
 				Element2Element element2Element = (Element2Element)theEObject;
 				T result = caseElement2Element(element2Element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Simplegraph2graphPackage.EDGE2_EDGE: {
+			case 2: {
 				Edge2Edge edge2Edge = (Edge2Edge)theEObject;
 				T result = caseEdge2Edge(edge2Edge);
 				if (result == null) result = caseElement2Element(edge2Edge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Simplegraph2graphPackage.NODE2_NODE: {
+			case 3: {
 				Node2Node node2Node = (Node2Node)theEObject;
 				T result = caseNode2Node(node2Node);
 				if (result == null) result = caseElement2Element(node2Node);

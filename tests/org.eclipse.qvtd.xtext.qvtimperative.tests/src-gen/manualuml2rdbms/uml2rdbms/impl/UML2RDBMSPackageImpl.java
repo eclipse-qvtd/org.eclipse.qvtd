@@ -579,51 +579,51 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 		isCreated = true;
 
 		// Create classes and their features
-		attributeToColumnEClass = createEClass(ATTRIBUTE_TO_COLUMN);
-		createEReference(attributeToColumnEClass, ATTRIBUTE_TO_COLUMN__TYPE);
+		attributeToColumnEClass = createEClass(0);
+		createEReference(attributeToColumnEClass, 6);
 
-		associationToForeignKeyEClass = createEClass(ASSOCIATION_TO_FOREIGN_KEY);
-		createEReference(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__REFERENCED);
-		createEReference(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__OWNER);
-		createEAttribute(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__NAME);
-		createEReference(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__ASSOCIATION);
-		createEReference(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY);
+		associationToForeignKeyEClass = createEClass(1);
+		createEReference(associationToForeignKeyEClass, 1);
+		createEReference(associationToForeignKeyEClass, 2);
+		createEAttribute(associationToForeignKeyEClass, 3);
+		createEReference(associationToForeignKeyEClass, 4);
+		createEReference(associationToForeignKeyEClass, 5);
 
-		classToTableEClass = createEClass(CLASS_TO_TABLE);
-		createEReference(classToTableEClass, CLASS_TO_TABLE__OWNER);
-		createEReference(classToTableEClass, CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS);
-		createEAttribute(classToTableEClass, CLASS_TO_TABLE__NAME);
-		createEReference(classToTableEClass, CLASS_TO_TABLE__UML_CLASS);
-		createEReference(classToTableEClass, CLASS_TO_TABLE__TABLE);
-		createEReference(classToTableEClass, CLASS_TO_TABLE__PRIMARY_KEY);
+		classToTableEClass = createEClass(2);
+		createEReference(classToTableEClass, 2);
+		createEReference(classToTableEClass, 3);
+		createEAttribute(classToTableEClass, 4);
+		createEReference(classToTableEClass, 5);
+		createEReference(classToTableEClass, 6);
+		createEReference(classToTableEClass, 7);
 
-		fromAttributeEClass = createEClass(FROM_ATTRIBUTE);
-		createEAttribute(fromAttributeEClass, FROM_ATTRIBUTE__NAME);
-		createEAttribute(fromAttributeEClass, FROM_ATTRIBUTE__KIND);
-		createEReference(fromAttributeEClass, FROM_ATTRIBUTE__OWNER);
-		createEReference(fromAttributeEClass, FROM_ATTRIBUTE__LEAFS);
-		createEReference(fromAttributeEClass, FROM_ATTRIBUTE__ATTRIBUTE);
+		fromAttributeEClass = createEClass(3);
+		createEAttribute(fromAttributeEClass, 0);
+		createEAttribute(fromAttributeEClass, 1);
+		createEReference(fromAttributeEClass, 2);
+		createEReference(fromAttributeEClass, 3);
+		createEReference(fromAttributeEClass, 4);
 
-		fromAttributeOwnerEClass = createEClass(FROM_ATTRIBUTE_OWNER);
-		createEReference(fromAttributeOwnerEClass, FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES);
+		fromAttributeOwnerEClass = createEClass(4);
+		createEReference(fromAttributeOwnerEClass, 0);
 
-		nonLeafAttributeEClass = createEClass(NON_LEAF_ATTRIBUTE);
+		nonLeafAttributeEClass = createEClass(5);
 
-		packageToSchemaEClass = createEClass(PACKAGE_TO_SCHEMA);
-		createEReference(packageToSchemaEClass, PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES);
-		createEReference(packageToSchemaEClass, PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES);
-		createEAttribute(packageToSchemaEClass, PACKAGE_TO_SCHEMA__NAME);
-		createEReference(packageToSchemaEClass, PACKAGE_TO_SCHEMA__UML_PACKAGE);
-		createEReference(packageToSchemaEClass, PACKAGE_TO_SCHEMA__SCHEMA);
+		packageToSchemaEClass = createEClass(6);
+		createEReference(packageToSchemaEClass, 0);
+		createEReference(packageToSchemaEClass, 1);
+		createEAttribute(packageToSchemaEClass, 2);
+		createEReference(packageToSchemaEClass, 3);
+		createEReference(packageToSchemaEClass, 4);
 
-		primitiveToNameEClass = createEClass(PRIMITIVE_TO_NAME);
-		createEReference(primitiveToNameEClass, PRIMITIVE_TO_NAME__OWNER);
-		createEAttribute(primitiveToNameEClass, PRIMITIVE_TO_NAME__NAME);
-		createEReference(primitiveToNameEClass, PRIMITIVE_TO_NAME__PRIMITIVE);
-		createEAttribute(primitiveToNameEClass, PRIMITIVE_TO_NAME__TYPE_NAME);
+		primitiveToNameEClass = createEClass(7);
+		createEReference(primitiveToNameEClass, 0);
+		createEAttribute(primitiveToNameEClass, 1);
+		createEReference(primitiveToNameEClass, 2);
+		createEAttribute(primitiveToNameEClass, 3);
 
-		toColumnEClass = createEClass(TO_COLUMN);
-		createEReference(toColumnEClass, TO_COLUMN__COLUMN);
+		toColumnEClass = createEClass(8);
+		createEReference(toColumnEClass, 0);
 	}
 
 	/**

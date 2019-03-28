@@ -38,6 +38,22 @@ import example1.target.util.Visitable;
  */
 public class SElementImpl extends MinimalEObjectImpl.Container implements SElement {
 	/**
+	 * The number of structural features of the '<em>SElement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SELEMENT_FEATURE_COUNT = 1;
+	/**
+	 * The number of operations of the '<em>SElement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SELEMENT_OPERATION_COUNT = 0;
+	/**
 	 * The cached value of the '{@link #getAst() <em>Ast</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,7 +94,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 			ast = (Visitable)eResolveProxy(oldAst);
 			if (ast != oldAst) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SourcePackage.SELEMENT__AST, oldAst, ast));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldAst, ast));
 			}
 		}
 		return ast;
@@ -103,7 +119,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 		Visitable oldAst = ast;
 		ast = newAst;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.SELEMENT__AST, oldAst, ast));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldAst, ast));
 	}
 
 	/**
@@ -114,7 +130,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SourcePackage.SELEMENT__AST:
+			case 0:
 				if (resolve) return getAst();
 				return basicGetAst();
 		}
@@ -129,7 +145,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SourcePackage.SELEMENT__AST:
+			case 0:
 				setAst((Visitable)newValue);
 				return;
 		}
@@ -144,7 +160,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SourcePackage.SELEMENT__AST:
+			case 0:
 				setAst((Visitable)null);
 				return;
 		}
@@ -159,7 +175,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SourcePackage.SELEMENT__AST:
+			case 0:
 				return ast != null;
 		}
 		return super.eIsSet(featureID);

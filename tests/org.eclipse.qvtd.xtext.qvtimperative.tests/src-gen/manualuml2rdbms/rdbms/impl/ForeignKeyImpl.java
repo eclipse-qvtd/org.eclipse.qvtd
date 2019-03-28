@@ -51,6 +51,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	/**
+	 * The number of structural features of the '<em>Foreign Key</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FOREIGN_KEY_FEATURE_COUNT = RModelElementImpl.RMODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Foreign Key</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FOREIGN_KEY_OPERATION_COUNT = RModelElementImpl.RMODEL_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getRefersTo() <em>Refers To</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,7 +119,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 			refersTo = (Key)eResolveProxy(oldRefersTo);
 			if (refersTo != oldRefersTo) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RDBMSPackage.FOREIGN_KEY__REFERS_TO, oldRefersTo, refersTo));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldRefersTo, refersTo));
 			}
 		}
 		return refersTo;
@@ -126,7 +144,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 		Key oldRefersTo = refersTo;
 		refersTo = newRefersTo;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RDBMSPackage.FOREIGN_KEY__REFERS_TO, oldRefersTo, refersTo));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldRefersTo, refersTo));
 	}
 
 	/**
@@ -137,7 +155,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	@Override
 	public EList<Column> getColumn() {
 		if (column == null) {
-			column = new EObjectWithInverseResolvingEList.ManyInverse<Column>(Column.class, this, RDBMSPackage.FOREIGN_KEY__COLUMN, RDBMSPackage.COLUMN__FOREIGN_KEYS);
+			column = new EObjectWithInverseResolvingEList.ManyInverse<Column>(Column.class, this, 3, 4);
 		}
 		return column;
 	}
@@ -149,7 +167,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 */
 	@Override
 	public Table getOwner() {
-		if (eContainerFeatureID() != RDBMSPackage.FOREIGN_KEY__OWNER) return null;
+		if (eContainerFeatureID() != (4)) return null;
 		return (Table)eInternalContainer();
 	}
 
@@ -159,7 +177,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(Table newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, RDBMSPackage.FOREIGN_KEY__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 4, msgs);
 		return msgs;
 	}
 
@@ -170,19 +188,19 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 */
 	@Override
 	public void setOwner(Table newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != RDBMSPackage.FOREIGN_KEY__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (4) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, RDBMSPackage.TABLE__FOREIGN_KEY, Table.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 6, Table.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RDBMSPackage.FOREIGN_KEY__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, newOwner, newOwner));
 	}
 
 	/**
@@ -194,9 +212,9 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RDBMSPackage.FOREIGN_KEY__COLUMN:
+			case 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getColumn()).basicAdd(otherEnd, msgs);
-			case RDBMSPackage.FOREIGN_KEY__OWNER:
+			case 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((Table)otherEnd, msgs);
@@ -212,9 +230,9 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RDBMSPackage.FOREIGN_KEY__COLUMN:
+			case 3:
 				return ((InternalEList<?>)getColumn()).basicRemove(otherEnd, msgs);
-			case RDBMSPackage.FOREIGN_KEY__OWNER:
+			case 4:
 				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -228,8 +246,8 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RDBMSPackage.FOREIGN_KEY__OWNER:
-				return eInternalContainer().eInverseRemove(this, RDBMSPackage.TABLE__FOREIGN_KEY, Table.class, msgs);
+			case 4:
+				return eInternalContainer().eInverseRemove(this, 6, Table.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -242,12 +260,12 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RDBMSPackage.FOREIGN_KEY__REFERS_TO:
+			case 2:
 				if (resolve) return getRefersTo();
 				return basicGetRefersTo();
-			case RDBMSPackage.FOREIGN_KEY__COLUMN:
+			case 3:
 				return getColumn();
-			case RDBMSPackage.FOREIGN_KEY__OWNER:
+			case 4:
 				return getOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -262,14 +280,14 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RDBMSPackage.FOREIGN_KEY__REFERS_TO:
+			case 2:
 				setRefersTo((Key)newValue);
 				return;
-			case RDBMSPackage.FOREIGN_KEY__COLUMN:
+			case 3:
 				getColumn().clear();
 				getColumn().addAll((Collection<? extends Column>)newValue);
 				return;
-			case RDBMSPackage.FOREIGN_KEY__OWNER:
+			case 4:
 				setOwner((Table)newValue);
 				return;
 		}
@@ -284,13 +302,13 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.FOREIGN_KEY__REFERS_TO:
+			case 2:
 				setRefersTo((Key)null);
 				return;
-			case RDBMSPackage.FOREIGN_KEY__COLUMN:
+			case 3:
 				getColumn().clear();
 				return;
-			case RDBMSPackage.FOREIGN_KEY__OWNER:
+			case 4:
 				setOwner((Table)null);
 				return;
 		}
@@ -305,11 +323,11 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.FOREIGN_KEY__REFERS_TO:
+			case 2:
 				return refersTo != null;
-			case RDBMSPackage.FOREIGN_KEY__COLUMN:
+			case 3:
 				return column != null && !column.isEmpty();
-			case RDBMSPackage.FOREIGN_KEY__OWNER:
+			case 4:
 				return getOwner() != null;
 		}
 		return super.eIsSet(featureID);

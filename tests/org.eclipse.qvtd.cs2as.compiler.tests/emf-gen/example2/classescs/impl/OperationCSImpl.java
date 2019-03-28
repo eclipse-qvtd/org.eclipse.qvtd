@@ -49,6 +49,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	/**
+	 * The number of structural features of the '<em>Operation CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	/**
+	 * The number of operations of the '<em>Operation CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_CS_OPERATION_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getParams() <em>Params</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,7 +118,7 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	@Override
 	public EList<String> getParams() {
 		if (params == null) {
-			params = new EDataTypeUniqueEList<String>(String.class, this, ClassescsPackage.OPERATION_CS__PARAMS);
+			params = new EDataTypeUniqueEList<String>(String.class, this, 2);
 		}
 		return params;
 	}
@@ -115,7 +131,7 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	@Override
 	public EList<NameExpCS> getBodyExps() {
 		if (bodyExps == null) {
-			bodyExps = new EObjectContainmentEList<NameExpCS>(NameExpCS.class, this, ClassescsPackage.OPERATION_CS__BODY_EXPS);
+			bodyExps = new EObjectContainmentEList<NameExpCS>(NameExpCS.class, this, 3);
 		}
 		return bodyExps;
 	}
@@ -139,7 +155,7 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 		PathNameCS oldResultRef = resultRef;
 		resultRef = newResultRef;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassescsPackage.OPERATION_CS__RESULT_REF, oldResultRef, newResultRef);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 4, oldResultRef, newResultRef);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -155,14 +171,14 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 		if (newResultRef != resultRef) {
 			NotificationChain msgs = null;
 			if (resultRef != null)
-				msgs = ((InternalEObject)resultRef).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.OPERATION_CS__RESULT_REF, null, msgs);
+				msgs = ((InternalEObject)resultRef).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (4), null, msgs);
 			if (newResultRef != null)
-				msgs = ((InternalEObject)newResultRef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.OPERATION_CS__RESULT_REF, null, msgs);
+				msgs = ((InternalEObject)newResultRef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (4), null, msgs);
 			msgs = basicSetResultRef(newResultRef, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescsPackage.OPERATION_CS__RESULT_REF, newResultRef, newResultRef));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, newResultRef, newResultRef));
 	}
 
 	/**
@@ -173,9 +189,9 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassescsPackage.OPERATION_CS__BODY_EXPS:
+			case 3:
 				return ((InternalEList<?>)getBodyExps()).basicRemove(otherEnd, msgs);
-			case ClassescsPackage.OPERATION_CS__RESULT_REF:
+			case 4:
 				return basicSetResultRef(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -189,11 +205,11 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.OPERATION_CS__PARAMS:
+			case 2:
 				return getParams();
-			case ClassescsPackage.OPERATION_CS__BODY_EXPS:
+			case 3:
 				return getBodyExps();
-			case ClassescsPackage.OPERATION_CS__RESULT_REF:
+			case 4:
 				return getResultRef();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -208,15 +224,15 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.OPERATION_CS__PARAMS:
+			case 2:
 				getParams().clear();
 				getParams().addAll((Collection<? extends String>)newValue);
 				return;
-			case ClassescsPackage.OPERATION_CS__BODY_EXPS:
+			case 3:
 				getBodyExps().clear();
 				getBodyExps().addAll((Collection<? extends NameExpCS>)newValue);
 				return;
-			case ClassescsPackage.OPERATION_CS__RESULT_REF:
+			case 4:
 				setResultRef((PathNameCS)newValue);
 				return;
 		}
@@ -231,13 +247,13 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.OPERATION_CS__PARAMS:
+			case 2:
 				getParams().clear();
 				return;
-			case ClassescsPackage.OPERATION_CS__BODY_EXPS:
+			case 3:
 				getBodyExps().clear();
 				return;
-			case ClassescsPackage.OPERATION_CS__RESULT_REF:
+			case 4:
 				setResultRef((PathNameCS)null);
 				return;
 		}
@@ -252,11 +268,11 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.OPERATION_CS__PARAMS:
+			case 2:
 				return params != null && !params.isEmpty();
-			case ClassescsPackage.OPERATION_CS__BODY_EXPS:
+			case 3:
 				return bodyExps != null && !bodyExps.isEmpty();
-			case ClassescsPackage.OPERATION_CS__RESULT_REF:
+			case 4:
 				return resultRef != null;
 		}
 		return super.eIsSet(featureID);

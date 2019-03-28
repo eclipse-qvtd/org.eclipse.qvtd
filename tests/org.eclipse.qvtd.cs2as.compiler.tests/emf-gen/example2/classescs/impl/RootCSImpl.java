@@ -40,6 +40,22 @@ import example2.classescs.RootCS;
  */
 public class RootCSImpl extends ElementCSImpl implements RootCS {
 	/**
+	 * The number of structural features of the '<em>Root CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROOT_CS_FEATURE_COUNT = ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Root CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROOT_CS_OPERATION_COUNT = ElementCSImpl.ELEMENT_CS_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnedPackages() <em>Owned Packages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,7 +92,7 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public EList<PackageCS> getOwnedPackages() {
 		if (ownedPackages == null) {
-			ownedPackages = new EObjectContainmentEList<PackageCS>(PackageCS.class, this, ClassescsPackage.ROOT_CS__OWNED_PACKAGES);
+			ownedPackages = new EObjectContainmentEList<PackageCS>(PackageCS.class, this, 1);
 		}
 		return ownedPackages;
 	}
@@ -89,7 +105,7 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+			case 1:
 				return ((InternalEList<?>)getOwnedPackages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -103,7 +119,7 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+			case 1:
 				return getOwnedPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -118,7 +134,7 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+			case 1:
 				getOwnedPackages().clear();
 				getOwnedPackages().addAll((Collection<? extends PackageCS>)newValue);
 				return;
@@ -134,7 +150,7 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+			case 1:
 				getOwnedPackages().clear();
 				return;
 		}
@@ -149,7 +165,7 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+			case 1:
 				return ownedPackages != null && !ownedPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);

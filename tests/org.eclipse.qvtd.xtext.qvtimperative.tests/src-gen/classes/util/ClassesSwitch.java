@@ -81,27 +81,27 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ClassesPackage.ELEMENT: {
+			case 0: {
 				Element element = (Element)theEObject;
 				T result = caseElement(element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.NAMED_ELEMENT: {
+			case 1: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
 				if (result == null) result = caseElement(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.NAMESPACE: {
+			case 2: {
 				Namespace namespace = (Namespace)theEObject;
 				T result = caseNamespace(namespace);
 				if (result == null) result = caseElement(namespace);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.PACKAGE: {
+			case 3: {
 				classes.Package package_ = (classes.Package)theEObject;
 				T result = casePackage(package_);
 				if (result == null) result = caseNamedElement(package_);
@@ -110,7 +110,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.CLASS: {
+			case 4: {
 				classes.Class class_ = (classes.Class)theEObject;
 				T result = caseClass(class_);
 				if (result == null) result = caseNamedElement(class_);
@@ -118,7 +118,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.ROOT: {
+			case 5: {
 				Root root = (Root)theEObject;
 				T result = caseRoot(root);
 				if (result == null) result = caseElement(root);

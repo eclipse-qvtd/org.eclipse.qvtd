@@ -40,6 +40,22 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public abstract class ElementCSImpl extends MinimalEObjectImpl.Container implements ElementCS {
 	/**
+	 * The number of structural features of the '<em>Element CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_CS_FEATURE_COUNT = 1;
+	/**
+	 * The number of operations of the '<em>Element CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_CS_OPERATION_COUNT = 0;
+	/**
 	 * The cached value of the '{@link #getAst() <em>Ast</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,7 +96,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 			ast = (Element)eResolveProxy(oldAst);
 			if (ast != oldAst) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescsPackage.ELEMENT_CS__AST, oldAst, ast));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldAst, ast));
 			}
 		}
 		return ast;
@@ -105,7 +121,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 		Element oldAst = ast;
 		ast = newAst;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescsPackage.ELEMENT_CS__AST, oldAst, ast));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldAst, ast));
 	}
 
 	/**
@@ -116,7 +132,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.ELEMENT_CS__AST:
+			case 0:
 				if (resolve) return getAst();
 				return basicGetAst();
 		}
@@ -131,7 +147,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.ELEMENT_CS__AST:
+			case 0:
 				setAst((Element)newValue);
 				return;
 		}
@@ -146,7 +162,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.ELEMENT_CS__AST:
+			case 0:
 				setAst((Element)null);
 				return;
 		}
@@ -161,7 +177,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.ELEMENT_CS__AST:
+			case 0:
 				return ast != null;
 		}
 		return super.eIsSet(featureID);

@@ -46,6 +46,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphP
  */
 public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	/**
+	 * The number of structural features of the '<em>Graph</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GRAPH_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Graph</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GRAPH_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getElement() <em>Element</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,7 +120,7 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	@Override
 	public EList<Element> getElement() {
 		if (element == null) {
-			element = new EObjectContainmentWithInverseEList<Element>(Element.class, this, SimplegraphPackage.GRAPH__ELEMENT, SimplegraphPackage.ELEMENT__GRAPH);
+			element = new EObjectContainmentWithInverseEList<Element>(Element.class, this, 0, 0);
 		}
 		return element;
 	}
@@ -127,7 +145,7 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimplegraphPackage.GRAPH__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -139,7 +157,7 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimplegraphPackage.GRAPH__ELEMENT:
+			case 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getElement()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -153,7 +171,7 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimplegraphPackage.GRAPH__ELEMENT:
+			case 0:
 				return ((InternalEList<?>)getElement()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -167,9 +185,9 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SimplegraphPackage.GRAPH__ELEMENT:
+			case 0:
 				return getElement();
-			case SimplegraphPackage.GRAPH__NAME:
+			case 1:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -184,11 +202,11 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SimplegraphPackage.GRAPH__ELEMENT:
+			case 0:
 				getElement().clear();
 				getElement().addAll((Collection<? extends Element>)newValue);
 				return;
-			case SimplegraphPackage.GRAPH__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
 		}
@@ -203,10 +221,10 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SimplegraphPackage.GRAPH__ELEMENT:
+			case 0:
 				getElement().clear();
 				return;
-			case SimplegraphPackage.GRAPH__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -221,9 +239,9 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SimplegraphPackage.GRAPH__ELEMENT:
+			case 0:
 				return element != null && !element.isEmpty();
-			case SimplegraphPackage.GRAPH__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

@@ -80,14 +80,14 @@ public class SimpleumlSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case SimpleumlPackage.ATTRIBUTE: {
+			case 0: {
 				Attribute attribute = (Attribute)theEObject;
 				T result = caseAttribute(attribute);
 				if (result == null) result = caseUMLModelElement(attribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimpleumlPackage.ASSOCIATION: {
+			case 1: {
 				Association association = (Association)theEObject;
 				T result = caseAssociation(association);
 				if (result == null) result = casePackageElement(association);
@@ -95,7 +95,7 @@ public class SimpleumlSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimpleumlPackage.CLASS: {
+			case 2: {
 				org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class class_ = (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)theEObject;
 				T result = caseClass(class_);
 				if (result == null) result = caseClassifier(class_);
@@ -104,7 +104,7 @@ public class SimpleumlSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimpleumlPackage.CLASSIFIER: {
+			case 3: {
 				Classifier classifier = (Classifier)theEObject;
 				T result = caseClassifier(classifier);
 				if (result == null) result = casePackageElement(classifier);
@@ -112,7 +112,7 @@ public class SimpleumlSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimpleumlPackage.PACKAGE: {
+			case 4: {
 				org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package package_ = (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)theEObject;
 				T result = casePackage(package_);
 				if (result == null) result = casePackageElement(package_);
@@ -120,14 +120,14 @@ public class SimpleumlSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimpleumlPackage.PACKAGE_ELEMENT: {
+			case 5: {
 				PackageElement packageElement = (PackageElement)theEObject;
 				T result = casePackageElement(packageElement);
 				if (result == null) result = caseUMLModelElement(packageElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimpleumlPackage.PRIMITIVE_DATA_TYPE: {
+			case 6: {
 				PrimitiveDataType primitiveDataType = (PrimitiveDataType)theEObject;
 				T result = casePrimitiveDataType(primitiveDataType);
 				if (result == null) result = caseClassifier(primitiveDataType);
@@ -136,7 +136,7 @@ public class SimpleumlSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimpleumlPackage.UML_MODEL_ELEMENT: {
+			case 7: {
 				UMLModelElement umlModelElement = (UMLModelElement)theEObject;
 				T result = caseUMLModelElement(umlModelElement);
 				if (result == null) result = defaultCase(theEObject);

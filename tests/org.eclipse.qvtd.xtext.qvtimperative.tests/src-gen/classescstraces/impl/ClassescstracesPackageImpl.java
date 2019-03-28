@@ -250,17 +250,17 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 		isCreated = true;
 
 		// Create classes and their features
-		packageCS2PackageEClass = createEClass(PACKAGE_CS2_PACKAGE);
-		createEReference(packageCS2PackageEClass, PACKAGE_CS2_PACKAGE__PACKAGE_CS);
-		createEReference(packageCS2PackageEClass, PACKAGE_CS2_PACKAGE__PACKAGE);
+		packageCS2PackageEClass = createEClass(0);
+		createEReference(packageCS2PackageEClass, 0);
+		createEReference(packageCS2PackageEClass, 1);
 
-		classCS2ClassEClass = createEClass(CLASS_CS2_CLASS);
-		createEReference(classCS2ClassEClass, CLASS_CS2_CLASS__CLASS_CS);
-		createEReference(classCS2ClassEClass, CLASS_CS2_CLASS__CLASS);
+		classCS2ClassEClass = createEClass(1);
+		createEReference(classCS2ClassEClass, 0);
+		createEReference(classCS2ClassEClass, 1);
 
-		rootCS2RootEClass = createEClass(ROOT_CS2_ROOT);
-		createEReference(rootCS2RootEClass, ROOT_CS2_ROOT__ROOT_CS);
-		createEReference(rootCS2RootEClass, ROOT_CS2_ROOT__ROOT);
+		rootCS2RootEClass = createEClass(2);
+		createEReference(rootCS2RootEClass, 0);
+		createEReference(rootCS2RootEClass, 1);
 	}
 
 	/**

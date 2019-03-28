@@ -42,6 +42,22 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class PropertyImpl extends NamedElementImpl implements Property {
 	/**
+	 * The number of structural features of the '<em>Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,7 +98,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 			type = (example2.classes.Class)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassesPackage.PROPERTY__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldType, type));
 			}
 		}
 		return type;
@@ -107,7 +123,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 		example2.classes.Class oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassesPackage.PROPERTY__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldType, type));
 	}
 
 	/**
@@ -118,7 +134,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.PROPERTY__TYPE:
+			case 1:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -133,7 +149,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.PROPERTY__TYPE:
+			case 1:
 				setType((example2.classes.Class)newValue);
 				return;
 		}
@@ -148,7 +164,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.PROPERTY__TYPE:
+			case 1:
 				setType((example2.classes.Class)null);
 				return;
 		}
@@ -163,7 +179,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.PROPERTY__TYPE:
+			case 1:
 				return type != null;
 		}
 		return super.eIsSet(featureID);
@@ -178,7 +194,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == TypedElement.class) {
 			switch (derivedFeatureID) {
-				case ClassesPackage.PROPERTY__TYPE: return ClassesPackage.TYPED_ELEMENT__TYPE;
+				case 1: return 0;
 				default: return -1;
 			}
 		}
@@ -194,7 +210,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == TypedElement.class) {
 			switch (baseFeatureID) {
-				case ClassesPackage.TYPED_ELEMENT__TYPE: return ClassesPackage.PROPERTY__TYPE;
+				case 0: return 1;
 				default: return -1;
 			}
 		}

@@ -36,6 +36,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class NumImpl extends NodeImpl implements Num {
 	/**
+	 * The number of structural features of the '<em>Num</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NUM_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Num</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NUM_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,7 +112,7 @@ public class NumImpl extends NodeImpl implements Num {
 		int oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.NUM__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldValue, value));
 	}
 
 	/**
@@ -105,7 +123,7 @@ public class NumImpl extends NodeImpl implements Num {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KiamaasPackage.NUM__VALUE:
+			case 2:
 				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,7 +137,7 @@ public class NumImpl extends NodeImpl implements Num {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KiamaasPackage.NUM__VALUE:
+			case 2:
 				setValue((Integer)newValue);
 				return;
 		}
@@ -134,7 +152,7 @@ public class NumImpl extends NodeImpl implements Num {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.NUM__VALUE:
+			case 2:
 				setValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -149,7 +167,7 @@ public class NumImpl extends NodeImpl implements Num {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.NUM__VALUE:
+			case 2:
 				return value != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

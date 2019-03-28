@@ -40,6 +40,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class PlusImpl extends NodeImpl implements Plus {
 	/**
+	 * The number of structural features of the '<em>Plus</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PLUS_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Plus</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PLUS_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,7 +115,7 @@ public class PlusImpl extends NodeImpl implements Plus {
 		Node oldLeft = left;
 		left = newLeft;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KiamaasPackage.PLUS__LEFT, oldLeft, newLeft);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldLeft, newLeft);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -113,14 +131,14 @@ public class PlusImpl extends NodeImpl implements Plus {
 		if (newLeft != left) {
 			NotificationChain msgs = null;
 			if (left != null)
-				msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KiamaasPackage.PLUS__LEFT, null, msgs);
+				msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newLeft != null)
-				msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KiamaasPackage.PLUS__LEFT, null, msgs);
+				msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetLeft(newLeft, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.PLUS__LEFT, newLeft, newLeft));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newLeft, newLeft));
 	}
 
 	/**
@@ -142,7 +160,7 @@ public class PlusImpl extends NodeImpl implements Plus {
 		Node oldRight = right;
 		right = newRight;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KiamaasPackage.PLUS__RIGHT, oldRight, newRight);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 3, oldRight, newRight);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -158,14 +176,14 @@ public class PlusImpl extends NodeImpl implements Plus {
 		if (newRight != right) {
 			NotificationChain msgs = null;
 			if (right != null)
-				msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KiamaasPackage.PLUS__RIGHT, null, msgs);
+				msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (3), null, msgs);
 			if (newRight != null)
-				msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KiamaasPackage.PLUS__RIGHT, null, msgs);
+				msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (3), null, msgs);
 			msgs = basicSetRight(newRight, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.PLUS__RIGHT, newRight, newRight));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newRight, newRight));
 	}
 
 	/**
@@ -176,9 +194,9 @@ public class PlusImpl extends NodeImpl implements Plus {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KiamaasPackage.PLUS__LEFT:
+			case 2:
 				return basicSetLeft(null, msgs);
-			case KiamaasPackage.PLUS__RIGHT:
+			case 3:
 				return basicSetRight(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -192,9 +210,9 @@ public class PlusImpl extends NodeImpl implements Plus {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KiamaasPackage.PLUS__LEFT:
+			case 2:
 				return getLeft();
-			case KiamaasPackage.PLUS__RIGHT:
+			case 3:
 				return getRight();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -208,10 +226,10 @@ public class PlusImpl extends NodeImpl implements Plus {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KiamaasPackage.PLUS__LEFT:
+			case 2:
 				setLeft((Node)newValue);
 				return;
-			case KiamaasPackage.PLUS__RIGHT:
+			case 3:
 				setRight((Node)newValue);
 				return;
 		}
@@ -226,10 +244,10 @@ public class PlusImpl extends NodeImpl implements Plus {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.PLUS__LEFT:
+			case 2:
 				setLeft((Node)null);
 				return;
-			case KiamaasPackage.PLUS__RIGHT:
+			case 3:
 				setRight((Node)null);
 				return;
 		}
@@ -244,9 +262,9 @@ public class PlusImpl extends NodeImpl implements Plus {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.PLUS__LEFT:
+			case 2:
 				return left != null;
-			case KiamaasPackage.PLUS__RIGHT:
+			case 3:
 				return right != null;
 		}
 		return super.eIsSet(featureID);

@@ -203,12 +203,12 @@ public class Tree2talltreePackageImpl extends EPackageImpl implements Tree2tallt
 		isCreated = true;
 
 		// Create classes and their features
-		node2TallNodeEClass = createEClass(NODE2_TALL_NODE);
-		createEReference(node2TallNodeEClass, NODE2_TALL_NODE__CHILDREN);
-		createEAttribute(node2TallNodeEClass, NODE2_TALL_NODE__NAME);
-		createEReference(node2TallNodeEClass, NODE2_TALL_NODE__PARENT);
-		createEReference(node2TallNodeEClass, NODE2_TALL_NODE__NODE);
-		createEReference(node2TallNodeEClass, NODE2_TALL_NODE__TALL_NODE);
+		node2TallNodeEClass = createEClass(0);
+		createEReference(node2TallNodeEClass, 0);
+		createEAttribute(node2TallNodeEClass, 1);
+		createEReference(node2TallNodeEClass, 2);
+		createEReference(node2TallNodeEClass, 3);
+		createEReference(node2TallNodeEClass, 4);
 	}
 
 	/**

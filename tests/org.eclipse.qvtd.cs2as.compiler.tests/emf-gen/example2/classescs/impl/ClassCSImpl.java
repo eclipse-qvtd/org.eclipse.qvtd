@@ -45,6 +45,24 @@ import java.util.Collection;
  */
 public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	/**
+	 * The number of structural features of the '<em>Class CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Class CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_CS_OPERATION_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,7 +129,7 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 		PathNameCS oldExtends = extends_;
 		extends_ = newExtends;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassescsPackage.CLASS_CS__EXTENDS, oldExtends, newExtends);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldExtends, newExtends);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -127,14 +145,14 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 		if (newExtends != extends_) {
 			NotificationChain msgs = null;
 			if (extends_ != null)
-				msgs = ((InternalEObject)extends_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.CLASS_CS__EXTENDS, null, msgs);
+				msgs = ((InternalEObject)extends_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newExtends != null)
-				msgs = ((InternalEObject)newExtends).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.CLASS_CS__EXTENDS, null, msgs);
+				msgs = ((InternalEObject)newExtends).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetExtends(newExtends, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescsPackage.CLASS_CS__EXTENDS, newExtends, newExtends));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newExtends, newExtends));
 	}
 
 	/**
@@ -145,7 +163,7 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	@Override
 	public EList<PropertyCS> getProperties() {
 		if (properties == null) {
-			properties = new EObjectContainmentEList<PropertyCS>(PropertyCS.class, this, ClassescsPackage.CLASS_CS__PROPERTIES);
+			properties = new EObjectContainmentEList<PropertyCS>(PropertyCS.class, this, 3);
 		}
 		return properties;
 	}
@@ -158,7 +176,7 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	@Override
 	public EList<OperationCS> getOperations() {
 		if (operations == null) {
-			operations = new EObjectContainmentEList<OperationCS>(OperationCS.class, this, ClassescsPackage.CLASS_CS__OPERATIONS);
+			operations = new EObjectContainmentEList<OperationCS>(OperationCS.class, this, 4);
 		}
 		return operations;
 	}
@@ -171,11 +189,11 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassescsPackage.CLASS_CS__EXTENDS:
+			case 2:
 				return basicSetExtends(null, msgs);
-			case ClassescsPackage.CLASS_CS__PROPERTIES:
+			case 3:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
-			case ClassescsPackage.CLASS_CS__OPERATIONS:
+			case 4:
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -189,11 +207,11 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.CLASS_CS__EXTENDS:
+			case 2:
 				return getExtends();
-			case ClassescsPackage.CLASS_CS__PROPERTIES:
+			case 3:
 				return getProperties();
-			case ClassescsPackage.CLASS_CS__OPERATIONS:
+			case 4:
 				return getOperations();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -208,14 +226,14 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.CLASS_CS__EXTENDS:
+			case 2:
 				setExtends((PathNameCS)newValue);
 				return;
-			case ClassescsPackage.CLASS_CS__PROPERTIES:
+			case 3:
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends PropertyCS>)newValue);
 				return;
-			case ClassescsPackage.CLASS_CS__OPERATIONS:
+			case 4:
 				getOperations().clear();
 				getOperations().addAll((Collection<? extends OperationCS>)newValue);
 				return;
@@ -231,13 +249,13 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.CLASS_CS__EXTENDS:
+			case 2:
 				setExtends((PathNameCS)null);
 				return;
-			case ClassescsPackage.CLASS_CS__PROPERTIES:
+			case 3:
 				getProperties().clear();
 				return;
-			case ClassescsPackage.CLASS_CS__OPERATIONS:
+			case 4:
 				getOperations().clear();
 				return;
 		}
@@ -252,11 +270,11 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.CLASS_CS__EXTENDS:
+			case 2:
 				return extends_ != null;
-			case ClassescsPackage.CLASS_CS__PROPERTIES:
+			case 3:
 				return properties != null && !properties.isEmpty();
-			case ClassescsPackage.CLASS_CS__OPERATIONS:
+			case 4:
 				return operations != null && !operations.isEmpty();
 		}
 		return super.eIsSet(featureID);

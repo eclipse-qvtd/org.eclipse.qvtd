@@ -41,6 +41,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements ClassCS2Class {
 	/**
+	 * The number of structural features of the '<em>Class CS2 Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_CS2_CLASS_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Class CS2 Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_CS2_CLASS_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getClassCS() <em>Class CS</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -91,7 +109,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 			classCS = (ClassCS)eResolveProxy(oldClassCS);
 			if (classCS != oldClassCS) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescstracesPackage.CLASS_CS2_CLASS__CLASS_CS, oldClassCS, classCS));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldClassCS, classCS));
 			}
 		}
 		return classCS;
@@ -116,7 +134,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 		ClassCS oldClassCS = classCS;
 		classCS = newClassCS;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescstracesPackage.CLASS_CS2_CLASS__CLASS_CS, oldClassCS, classCS));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldClassCS, classCS));
 	}
 
 	/**
@@ -131,7 +149,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 			class_ = (classes.Class)eResolveProxy(oldClass);
 			if (class_ != oldClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescstracesPackage.CLASS_CS2_CLASS__CLASS, oldClass, class_));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldClass, class_));
 			}
 		}
 		return class_;
@@ -156,7 +174,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 		classes.Class oldClass = class_;
 		class_ = newClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescstracesPackage.CLASS_CS2_CLASS__CLASS, oldClass, class_));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldClass, class_));
 	}
 
 	/**
@@ -167,10 +185,10 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS_CS:
+			case 0:
 				if (resolve) return getClassCS();
 				return basicGetClassCS();
-			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS:
+			case 1:
 				if (resolve) return getClass_();
 				return basicGetClass();
 		}
@@ -185,10 +203,10 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS_CS:
+			case 0:
 				setClassCS((ClassCS)newValue);
 				return;
-			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS:
+			case 1:
 				setClass((classes.Class)newValue);
 				return;
 		}
@@ -203,10 +221,10 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS_CS:
+			case 0:
 				setClassCS((ClassCS)null);
 				return;
-			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS:
+			case 1:
 				setClass((classes.Class)null);
 				return;
 		}
@@ -221,9 +239,9 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS_CS:
+			case 0:
 				return classCS != null;
-			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS:
+			case 1:
 				return class_ != null;
 		}
 		return super.eIsSet(featureID);

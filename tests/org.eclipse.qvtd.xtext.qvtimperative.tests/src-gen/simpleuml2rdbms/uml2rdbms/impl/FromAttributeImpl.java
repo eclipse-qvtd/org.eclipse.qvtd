@@ -52,6 +52,24 @@ import simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage;
  */
 public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl implements FromAttribute {
 	/**
+	 * The number of structural features of the '<em>From Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FROM_ATTRIBUTE_FEATURE_COUNT = UmlToRdbmsModelElementImpl.UML_TO_RDBMS_MODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>From Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FROM_ATTRIBUTE_OPERATION_COUNT = UmlToRdbmsModelElementImpl.UML_TO_RDBMS_MODEL_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,7 +148,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 		String oldKind = kind;
 		kind = newKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.FROM_ATTRIBUTE__KIND, oldKind, kind));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldKind, kind));
 	}
 
 	/**
@@ -145,7 +163,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 			attribute = (Attribute)eResolveProxy(oldAttribute);
 			if (attribute != oldAttribute) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UML2RDBMSPackage.FROM_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldAttribute, attribute));
 			}
 		}
 		return attribute;
@@ -170,7 +188,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 		Attribute oldAttribute = attribute;
 		attribute = newAttribute;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.FROM_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldAttribute, attribute));
 	}
 
 	/**
@@ -181,7 +199,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	@Override
 	public EList<AttributeToColumn> getLeafs() {
 		if (leafs == null) {
-			leafs = new EObjectResolvingEList<AttributeToColumn>(AttributeToColumn.class, this, UML2RDBMSPackage.FROM_ATTRIBUTE__LEAFS);
+			leafs = new EObjectResolvingEList<AttributeToColumn>(AttributeToColumn.class, this, 3);
 		}
 		return leafs;
 	}
@@ -193,7 +211,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 */
 	@Override
 	public FromAttributeOwner getOwner() {
-		if (eContainerFeatureID() != UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER) return null;
+		if (eContainerFeatureID() != (4)) return null;
 		return (FromAttributeOwner)eInternalContainer();
 	}
 
@@ -203,7 +221,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(FromAttributeOwner newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 4, msgs);
 		return msgs;
 	}
 
@@ -214,19 +232,19 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 */
 	@Override
 	public void setOwner(FromAttributeOwner newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (4) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES, FromAttributeOwner.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 0, FromAttributeOwner.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, newOwner, newOwner));
 	}
 
 	/**
@@ -237,7 +255,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER:
+			case 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((FromAttributeOwner)otherEnd, msgs);
@@ -253,7 +271,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER:
+			case 4:
 				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -267,8 +285,8 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER:
-				return eInternalContainer().eInverseRemove(this, UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES, FromAttributeOwner.class, msgs);
+			case 4:
+				return eInternalContainer().eInverseRemove(this, 0, FromAttributeOwner.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -281,14 +299,14 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__KIND:
+			case 1:
 				return getKind();
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__ATTRIBUTE:
+			case 2:
 				if (resolve) return getAttribute();
 				return basicGetAttribute();
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__LEAFS:
+			case 3:
 				return getLeafs();
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER:
+			case 4:
 				return getOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -303,17 +321,17 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__KIND:
+			case 1:
 				setKind((String)newValue);
 				return;
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__ATTRIBUTE:
+			case 2:
 				setAttribute((Attribute)newValue);
 				return;
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__LEAFS:
+			case 3:
 				getLeafs().clear();
 				getLeafs().addAll((Collection<? extends AttributeToColumn>)newValue);
 				return;
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER:
+			case 4:
 				setOwner((FromAttributeOwner)newValue);
 				return;
 		}
@@ -328,16 +346,16 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__KIND:
+			case 1:
 				setKind(KIND_EDEFAULT);
 				return;
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__ATTRIBUTE:
+			case 2:
 				setAttribute((Attribute)null);
 				return;
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__LEAFS:
+			case 3:
 				getLeafs().clear();
 				return;
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER:
+			case 4:
 				setOwner((FromAttributeOwner)null);
 				return;
 		}
@@ -352,13 +370,13 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__KIND:
+			case 1:
 				return KIND_EDEFAULT == null ? kind != null : !KIND_EDEFAULT.equals(kind);
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__ATTRIBUTE:
+			case 2:
 				return attribute != null;
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__LEAFS:
+			case 3:
 				return leafs != null && !leafs.isEmpty();
-			case UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER:
+			case 4:
 				return getOwner() != null;
 		}
 		return super.eIsSet(featureID);

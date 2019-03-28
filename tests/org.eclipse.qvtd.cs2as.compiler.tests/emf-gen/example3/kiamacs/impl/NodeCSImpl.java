@@ -26,6 +26,23 @@ import org.eclipse.emf.ecore.EClass;
  */
 public abstract class NodeCSImpl extends BaseCSImpl implements NodeCS {
 	/**
+	 * The number of structural features of the '<em>Node CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_CS_FEATURE_COUNT = BaseCSImpl.BASE_CS_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Node CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_CS_OPERATION_COUNT = BaseCSImpl.BASE_CS_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

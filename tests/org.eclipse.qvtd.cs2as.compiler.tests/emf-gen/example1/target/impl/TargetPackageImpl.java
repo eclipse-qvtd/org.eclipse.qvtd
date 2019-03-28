@@ -451,40 +451,40 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		aEClass = createEClass(A);
+		aEClass = createEClass(0);
 
-		a1EClass = createEClass(A1);
-		createEReference(a1EClass, A1__OWNS_B);
+		a1EClass = createEClass(1);
+		createEReference(a1EClass, 1);
 
-		a2EClass = createEClass(A2);
-		createEReference(a2EClass, A2__OWNS_C);
+		a2EClass = createEClass(2);
+		createEReference(a2EClass, 1);
 
-		a3EClass = createEClass(A3);
+		a3EClass = createEClass(3);
 
-		bEClass = createEClass(B);
-		createEReference(bEClass, B__TO_A1);
-		createEReference(bEClass, B__OWNS_D);
+		bEClass = createEClass(4);
+		createEReference(bEClass, 1);
+		createEReference(bEClass, 2);
 
-		cEClass = createEClass(C);
-		createEReference(cEClass, C__TO_A2);
-		createEReference(cEClass, C__OWNS_D);
+		cEClass = createEClass(5);
+		createEReference(cEClass, 1);
+		createEReference(cEClass, 2);
 
-		dEClass = createEClass(D);
-		createEReference(dEClass, D__TO_C);
-		createEReference(dEClass, D__TO_B);
-		createEReference(dEClass, D__TO_A);
-		createEReference(dEClass, D__REFS_B);
-		createEReference(dEClass, D__REFS_C);
+		dEClass = createEClass(6);
+		createEReference(dEClass, 1);
+		createEReference(dEClass, 2);
+		createEReference(dEClass, 3);
+		createEReference(dEClass, 4);
+		createEReference(dEClass, 5);
 
-		tRootEClass = createEClass(TROOT);
-		createEReference(tRootEClass, TROOT__OWNED_A);
+		tRootEClass = createEClass(7);
+		createEReference(tRootEClass, 0);
 
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+		namedElementEClass = createEClass(8);
+		createEAttribute(namedElementEClass, 0);
 
-		namespaceEClass = createEClass(NAMESPACE);
+		namespaceEClass = createEClass(9);
 
-		visitableEClass = createEClass(VISITABLE);
+		visitableEClass = createEClass(10);
 	}
 
 	/**

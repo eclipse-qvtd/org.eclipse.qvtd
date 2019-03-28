@@ -46,6 +46,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage
  */
 public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class {
 	/**
+	 * The number of structural features of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_FEATURE_COUNT = ClassifierImpl.CLASSIFIER_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_OPERATION_COUNT = ClassifierImpl.CLASSIFIER_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -122,7 +140,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
-			attributes = new EObjectContainmentWithInverseEList<Attribute>(Attribute.class, this, SimpleumlPackage.CLASS__ATTRIBUTES, SimpleumlPackage.ATTRIBUTE__OWNER);
+			attributes = new EObjectContainmentWithInverseEList<Attribute>(Attribute.class, this, 4, 2);
 		}
 		return attributes;
 	}
@@ -135,7 +153,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public EList<Association> getForward() {
 		if (forward == null) {
-			forward = new EObjectWithInverseResolvingEList<Association>(Association.class, this, SimpleumlPackage.CLASS__FORWARD, SimpleumlPackage.ASSOCIATION__SOURCE);
+			forward = new EObjectWithInverseResolvingEList<Association>(Association.class, this, 5, 4);
 		}
 		return forward;
 	}
@@ -148,7 +166,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public EList<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class> getGeneral() {
 		if (general == null) {
-			general = new EObjectWithInverseResolvingEList.ManyInverse<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class>(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, this, SimpleumlPackage.CLASS__GENERAL, SimpleumlPackage.CLASS__GENERAL_OPPOSITE);
+			general = new EObjectWithInverseResolvingEList.ManyInverse<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class>(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, this, 6, 7);
 		}
 		return general;
 	}
@@ -161,7 +179,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public EList<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class> getGeneralOpposite() {
 		if (generalOpposite == null) {
-			generalOpposite = new EObjectWithInverseResolvingEList.ManyInverse<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class>(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, this, SimpleumlPackage.CLASS__GENERAL_OPPOSITE, SimpleumlPackage.CLASS__GENERAL);
+			generalOpposite = new EObjectWithInverseResolvingEList.ManyInverse<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class>(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, this, 7, 6);
 		}
 		return generalOpposite;
 	}
@@ -174,7 +192,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public EList<Association> getReverse() {
 		if (reverse == null) {
-			reverse = new EObjectWithInverseResolvingEList<Association>(Association.class, this, SimpleumlPackage.CLASS__REVERSE, SimpleumlPackage.ASSOCIATION__DESTINATION);
+			reverse = new EObjectWithInverseResolvingEList<Association>(Association.class, this, 8, 3);
 		}
 		return reverse;
 	}
@@ -188,15 +206,15 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.CLASS__ATTRIBUTES:
+			case 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAttributes()).basicAdd(otherEnd, msgs);
-			case SimpleumlPackage.CLASS__FORWARD:
+			case 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getForward()).basicAdd(otherEnd, msgs);
-			case SimpleumlPackage.CLASS__GENERAL:
+			case 6:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneral()).basicAdd(otherEnd, msgs);
-			case SimpleumlPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneralOpposite()).basicAdd(otherEnd, msgs);
-			case SimpleumlPackage.CLASS__REVERSE:
+			case 8:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getReverse()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -210,15 +228,15 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.CLASS__ATTRIBUTES:
+			case 4:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
-			case SimpleumlPackage.CLASS__FORWARD:
+			case 5:
 				return ((InternalEList<?>)getForward()).basicRemove(otherEnd, msgs);
-			case SimpleumlPackage.CLASS__GENERAL:
+			case 6:
 				return ((InternalEList<?>)getGeneral()).basicRemove(otherEnd, msgs);
-			case SimpleumlPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				return ((InternalEList<?>)getGeneralOpposite()).basicRemove(otherEnd, msgs);
-			case SimpleumlPackage.CLASS__REVERSE:
+			case 8:
 				return ((InternalEList<?>)getReverse()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -232,15 +250,15 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SimpleumlPackage.CLASS__ATTRIBUTES:
+			case 4:
 				return getAttributes();
-			case SimpleumlPackage.CLASS__FORWARD:
+			case 5:
 				return getForward();
-			case SimpleumlPackage.CLASS__GENERAL:
+			case 6:
 				return getGeneral();
-			case SimpleumlPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				return getGeneralOpposite();
-			case SimpleumlPackage.CLASS__REVERSE:
+			case 8:
 				return getReverse();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -255,23 +273,23 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SimpleumlPackage.CLASS__ATTRIBUTES:
+			case 4:
 				getAttributes().clear();
 				getAttributes().addAll((Collection<? extends Attribute>)newValue);
 				return;
-			case SimpleumlPackage.CLASS__FORWARD:
+			case 5:
 				getForward().clear();
 				getForward().addAll((Collection<? extends Association>)newValue);
 				return;
-			case SimpleumlPackage.CLASS__GENERAL:
+			case 6:
 				getGeneral().clear();
 				getGeneral().addAll((Collection<? extends org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class>)newValue);
 				return;
-			case SimpleumlPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				getGeneralOpposite().clear();
 				getGeneralOpposite().addAll((Collection<? extends org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class>)newValue);
 				return;
-			case SimpleumlPackage.CLASS__REVERSE:
+			case 8:
 				getReverse().clear();
 				getReverse().addAll((Collection<? extends Association>)newValue);
 				return;
@@ -287,19 +305,19 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.CLASS__ATTRIBUTES:
+			case 4:
 				getAttributes().clear();
 				return;
-			case SimpleumlPackage.CLASS__FORWARD:
+			case 5:
 				getForward().clear();
 				return;
-			case SimpleumlPackage.CLASS__GENERAL:
+			case 6:
 				getGeneral().clear();
 				return;
-			case SimpleumlPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				getGeneralOpposite().clear();
 				return;
-			case SimpleumlPackage.CLASS__REVERSE:
+			case 8:
 				getReverse().clear();
 				return;
 		}
@@ -314,15 +332,15 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.CLASS__ATTRIBUTES:
+			case 4:
 				return attributes != null && !attributes.isEmpty();
-			case SimpleumlPackage.CLASS__FORWARD:
+			case 5:
 				return forward != null && !forward.isEmpty();
-			case SimpleumlPackage.CLASS__GENERAL:
+			case 6:
 				return general != null && !general.isEmpty();
-			case SimpleumlPackage.CLASS__GENERAL_OPPOSITE:
+			case 7:
 				return generalOpposite != null && !generalOpposite.isEmpty();
-			case SimpleumlPackage.CLASS__REVERSE:
+			case 8:
 				return reverse != null && !reverse.isEmpty();
 		}
 		return super.eIsSet(featureID);

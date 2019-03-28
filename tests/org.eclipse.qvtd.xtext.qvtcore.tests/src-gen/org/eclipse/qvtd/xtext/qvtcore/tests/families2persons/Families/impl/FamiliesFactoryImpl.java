@@ -64,8 +64,8 @@ public class FamiliesFactoryImpl extends EFactoryImpl implements FamiliesFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case FamiliesPackage.FAMILY: return createFamily();
-			case FamiliesPackage.MEMBER: return createMember();
+			case 0: return createFamily();
+			case 1: return createMember();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

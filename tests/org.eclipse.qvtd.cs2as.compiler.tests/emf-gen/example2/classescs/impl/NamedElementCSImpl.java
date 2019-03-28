@@ -34,6 +34,24 @@ import example2.classescs.NamedElementCS;
  */
 public abstract class NamedElementCSImpl extends ElementCSImpl implements NamedElementCS {
 	/**
+	 * The number of structural features of the '<em>Named Element CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAMED_ELEMENT_CS_FEATURE_COUNT = ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Named Element CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAMED_ELEMENT_CS_OPERATION_COUNT = ElementCSImpl.ELEMENT_CS_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,7 +110,7 @@ public abstract class NamedElementCSImpl extends ElementCSImpl implements NamedE
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescsPackage.NAMED_ELEMENT_CS__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -103,7 +121,7 @@ public abstract class NamedElementCSImpl extends ElementCSImpl implements NamedE
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.NAMED_ELEMENT_CS__NAME:
+			case 1:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -117,7 +135,7 @@ public abstract class NamedElementCSImpl extends ElementCSImpl implements NamedE
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.NAMED_ELEMENT_CS__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
 		}
@@ -132,7 +150,7 @@ public abstract class NamedElementCSImpl extends ElementCSImpl implements NamedE
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.NAMED_ELEMENT_CS__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -147,7 +165,7 @@ public abstract class NamedElementCSImpl extends ElementCSImpl implements NamedE
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.NAMED_ELEMENT_CS__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

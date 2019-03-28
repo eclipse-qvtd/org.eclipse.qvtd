@@ -64,8 +64,8 @@ public class List2listFactoryImpl extends EFactoryImpl implements List2listFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case List2listPackage.LIST2_LIST: return createList2List();
-			case List2listPackage.ELEMENT2_ELEMENT: return createElement2Element();
+			case 0: return createList2List();
+			case 1: return createElement2Element();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

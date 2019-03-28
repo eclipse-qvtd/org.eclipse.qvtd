@@ -79,20 +79,20 @@ public class EnvironmentSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT: {
+			case 0: {
 				LookupEnvironment lookupEnvironment = (LookupEnvironment)theEObject;
 				T result = caseLookupEnvironment(lookupEnvironment);
 				if (result == null) result = caseEnv4CG(lookupEnvironment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EnvironmentPackage.ENV4_CG: {
+			case 1: {
 				Env4CG env4CG = (Env4CG)theEObject;
 				T result = caseEnv4CG(env4CG);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EnvironmentPackage.EXECUTOR: {
+			case 2: {
 				Executor executor = (Executor)theEObject;
 				T result = caseExecutor(executor);
 				if (result == null) result = defaultCase(theEObject);

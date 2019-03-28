@@ -423,36 +423,36 @@ public class RDBMSPackageImpl extends EPackageImpl implements RDBMSPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		columnEClass = createEClass(COLUMN);
-		createEAttribute(columnEClass, COLUMN__TYPE);
-		createEReference(columnEClass, COLUMN__OWNER);
-		createEReference(columnEClass, COLUMN__FOREIGN_KEYS);
-		createEReference(columnEClass, COLUMN__KEYS);
+		columnEClass = createEClass(0);
+		createEAttribute(columnEClass, 2);
+		createEReference(columnEClass, 3);
+		createEReference(columnEClass, 4);
+		createEReference(columnEClass, 5);
 
-		foreignKeyEClass = createEClass(FOREIGN_KEY);
-		createEReference(foreignKeyEClass, FOREIGN_KEY__REFERS_TO);
-		createEReference(foreignKeyEClass, FOREIGN_KEY__COLUMNS);
-		createEReference(foreignKeyEClass, FOREIGN_KEY__OWNER);
+		foreignKeyEClass = createEClass(1);
+		createEReference(foreignKeyEClass, 2);
+		createEReference(foreignKeyEClass, 3);
+		createEReference(foreignKeyEClass, 4);
 
-		keyEClass = createEClass(KEY);
-		createEReference(keyEClass, KEY__OWNER);
-		createEReference(keyEClass, KEY__COLUMN);
+		keyEClass = createEClass(2);
+		createEReference(keyEClass, 2);
+		createEReference(keyEClass, 3);
 
-		rModelElementEClass = createEClass(RMODEL_ELEMENT);
-		createEAttribute(rModelElementEClass, RMODEL_ELEMENT__NAME);
-		createEAttribute(rModelElementEClass, RMODEL_ELEMENT__KIND);
+		rModelElementEClass = createEClass(3);
+		createEAttribute(rModelElementEClass, 0);
+		createEAttribute(rModelElementEClass, 1);
 
-		schemaEClass = createEClass(SCHEMA);
-		createEReference(schemaEClass, SCHEMA__TABLES);
+		schemaEClass = createEClass(4);
+		createEReference(schemaEClass, 2);
 
-		tableEClass = createEClass(TABLE);
-		createEReference(tableEClass, TABLE__COLUMNS);
-		createEReference(tableEClass, TABLE__SCHEMA);
-		createEReference(tableEClass, TABLE__KEYS);
-		createEReference(tableEClass, TABLE__FOREIGN_KEYS);
+		tableEClass = createEClass(5);
+		createEReference(tableEClass, 2);
+		createEReference(tableEClass, 3);
+		createEReference(tableEClass, 4);
+		createEReference(tableEClass, 5);
 
 		// Create data types
-		stringEDataType = createEDataType(STRING);
+		stringEDataType = createEDataType(6);
 	}
 
 	/**

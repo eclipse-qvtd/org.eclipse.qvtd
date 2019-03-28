@@ -76,20 +76,20 @@ public class Families2PersonsSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case Families2PersonsPackage.MEMBER_TO_PERSON: {
+			case 0: {
 				MemberToPerson memberToPerson = (MemberToPerson)theEObject;
 				T result = caseMemberToPerson(memberToPerson);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Families2PersonsPackage.MEMBER2_MALE: {
+			case 1: {
 				Member2Male member2Male = (Member2Male)theEObject;
 				T result = caseMember2Male(member2Male);
 				if (result == null) result = caseMemberToPerson(member2Male);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Families2PersonsPackage.MEMBER2_FEMALE: {
+			case 2: {
 				Member2Female member2Female = (Member2Female)theEObject;
 				T result = caseMember2Female(member2Female);
 				if (result == null) result = caseMemberToPerson(member2Female);

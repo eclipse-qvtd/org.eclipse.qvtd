@@ -68,9 +68,9 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ClassesPackage.PACKAGE: return createPackage();
-			case ClassesPackage.CLASS: return createClass();
-			case ClassesPackage.ROOT: return createRoot();
+			case 3: return createPackage();
+			case 4: return createClass();
+			case 5: return createRoot();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

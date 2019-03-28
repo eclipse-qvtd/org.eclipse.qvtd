@@ -43,6 +43,22 @@ import simpleuml2rdbms.rdbms.Table;
  */
 public class SchemaImpl extends RModelElementImpl implements Schema {
 	/**
+	 * The number of structural features of the '<em>Schema</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SCHEMA_FEATURE_COUNT = RModelElementImpl.RMODEL_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Schema</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SCHEMA_OPERATION_COUNT = RModelElementImpl.RMODEL_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getTables() <em>Tables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,7 +95,7 @@ public class SchemaImpl extends RModelElementImpl implements Schema {
 	@Override
 	public EList<Table> getTables() {
 		if (tables == null) {
-			tables = new EObjectContainmentWithInverseEList<Table>(Table.class, this, RDBMSPackage.SCHEMA__TABLES, RDBMSPackage.TABLE__SCHEMA);
+			tables = new EObjectContainmentWithInverseEList<Table>(Table.class, this, 2, 3);
 		}
 		return tables;
 	}
@@ -93,7 +109,7 @@ public class SchemaImpl extends RModelElementImpl implements Schema {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RDBMSPackage.SCHEMA__TABLES:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTables()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -107,7 +123,7 @@ public class SchemaImpl extends RModelElementImpl implements Schema {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RDBMSPackage.SCHEMA__TABLES:
+			case 2:
 				return ((InternalEList<?>)getTables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -121,7 +137,7 @@ public class SchemaImpl extends RModelElementImpl implements Schema {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RDBMSPackage.SCHEMA__TABLES:
+			case 2:
 				return getTables();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -136,7 +152,7 @@ public class SchemaImpl extends RModelElementImpl implements Schema {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RDBMSPackage.SCHEMA__TABLES:
+			case 2:
 				getTables().clear();
 				getTables().addAll((Collection<? extends Table>)newValue);
 				return;
@@ -152,7 +168,7 @@ public class SchemaImpl extends RModelElementImpl implements Schema {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.SCHEMA__TABLES:
+			case 2:
 				getTables().clear();
 				return;
 		}
@@ -167,7 +183,7 @@ public class SchemaImpl extends RModelElementImpl implements Schema {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.SCHEMA__TABLES:
+			case 2:
 				return tables != null && !tables.isEmpty();
 		}
 		return super.eIsSet(featureID);

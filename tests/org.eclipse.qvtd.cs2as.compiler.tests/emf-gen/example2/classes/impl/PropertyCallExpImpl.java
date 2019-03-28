@@ -40,6 +40,22 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp {
 	/**
+	 * The number of structural features of the '<em>Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_CALL_EXP_FEATURE_COUNT = CallExpImpl.CALL_EXP_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_CALL_EXP_OPERATION_COUNT = CallExpImpl.CALL_EXP_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,7 +96,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 			referredProperty = (Property)eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassesPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldReferredProperty, referredProperty));
 			}
 		}
 		return referredProperty;
@@ -105,7 +121,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassesPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -116,7 +132,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
+			case 3:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
 		}
@@ -131,7 +147,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
+			case 3:
 				setReferredProperty((Property)newValue);
 				return;
 		}
@@ -146,7 +162,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
+			case 3:
 				setReferredProperty((Property)null);
 				return;
 		}
@@ -161,7 +177,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
+			case 3:
 				return referredProperty != null;
 		}
 		return super.eIsSet(featureID);

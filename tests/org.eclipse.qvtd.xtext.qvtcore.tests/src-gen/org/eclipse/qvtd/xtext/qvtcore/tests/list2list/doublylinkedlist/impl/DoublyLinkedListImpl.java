@@ -47,6 +47,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.Element;
  */
 public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implements DoublyLinkedList {
 	/**
+	 * The number of structural features of the '<em>Doubly Linked List</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOUBLY_LINKED_LIST_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Doubly Linked List</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOUBLY_LINKED_LIST_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getHeadElement() <em>Head Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,7 +135,7 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 			headElement = (Element)eResolveProxy(oldHeadElement);
 			if (headElement != oldHeadElement) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DoublylinkedlistPackage.DOUBLY_LINKED_LIST__HEAD_ELEMENT, oldHeadElement, headElement));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldHeadElement, headElement));
 			}
 		}
 		return headElement;
@@ -142,7 +160,7 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 		Element oldHeadElement = headElement;
 		headElement = newHeadElement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DoublylinkedlistPackage.DOUBLY_LINKED_LIST__HEAD_ELEMENT, oldHeadElement, headElement));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldHeadElement, headElement));
 	}
 
 	/**
@@ -165,7 +183,7 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DoublylinkedlistPackage.DOUBLY_LINKED_LIST__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -176,7 +194,7 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public EList<Element> getOwnedElements() {
 		if (ownedElements == null) {
-			ownedElements = new EObjectContainmentWithInverseEList<Element>(Element.class, this, DoublylinkedlistPackage.DOUBLY_LINKED_LIST__OWNED_ELEMENTS, DoublylinkedlistPackage.ELEMENT__LIST);
+			ownedElements = new EObjectContainmentWithInverseEList<Element>(Element.class, this, 2, 0);
 		}
 		return ownedElements;
 	}
@@ -190,7 +208,7 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__OWNED_ELEMENTS:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedElements()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -204,7 +222,7 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__OWNED_ELEMENTS:
+			case 2:
 				return ((InternalEList<?>)getOwnedElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -218,12 +236,12 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__HEAD_ELEMENT:
+			case 0:
 				if (resolve) return getHeadElement();
 				return basicGetHeadElement();
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__NAME:
+			case 1:
 				return getName();
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__OWNED_ELEMENTS:
+			case 2:
 				return getOwnedElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -238,13 +256,13 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__HEAD_ELEMENT:
+			case 0:
 				setHeadElement((Element)newValue);
 				return;
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__OWNED_ELEMENTS:
+			case 2:
 				getOwnedElements().clear();
 				getOwnedElements().addAll((Collection<? extends Element>)newValue);
 				return;
@@ -260,13 +278,13 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__HEAD_ELEMENT:
+			case 0:
 				setHeadElement((Element)null);
 				return;
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__OWNED_ELEMENTS:
+			case 2:
 				getOwnedElements().clear();
 				return;
 		}
@@ -281,11 +299,11 @@ public class DoublyLinkedListImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__HEAD_ELEMENT:
+			case 0:
 				return headElement != null;
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST__OWNED_ELEMENTS:
+			case 2:
 				return ownedElements != null && !ownedElements.isEmpty();
 		}
 		return super.eIsSet(featureID);

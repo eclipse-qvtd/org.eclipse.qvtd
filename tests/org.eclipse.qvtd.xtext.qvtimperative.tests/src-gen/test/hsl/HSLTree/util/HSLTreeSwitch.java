@@ -78,7 +78,7 @@ public class HSLTreeSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case HSLTreePackage.HSL_NODE: {
+			case 0: {
 				HSLNode hslNode = (HSLNode)theEObject;
 				T result = caseHSLNode(hslNode);
 				if (result == null) result = defaultCase(theEObject);

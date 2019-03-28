@@ -10,7 +10,7 @@
  *
  * This code is auto-generated
  * from: org.eclipse.qvtd.cs2as.compiler.tests/models/Source2Target/TargetMM1.genmodel
- * template: org.eclipse.ocl.examples.build.xtend.GenerateAutoLookupInfrastructureXtend
+ * template: org.eclipse.ocl.examples.autogen.xtend.GenerateAutoLookupInfrastructureXtend
  *
  * Only the copyright statement is editable.
  *******************************************************************************/
@@ -36,15 +36,17 @@ public class TargetSingleResultLookupEnvironment extends LookupEnvironmentImpl  
 	private @NonNull EClass typeFilter;
 	private @Nullable TargetLookupFilter expFilter;
 	
-	public TargetSingleResultLookupEnvironment(@NonNull Executor executor, @NonNull EClass typeFilter, @NonNull String name,  @Nullable TargetLookupFilter expFilter) {
+	public TargetSingleResultLookupEnvironment(@NonNull Executor executor, /*@NonNull*/ EClass typeFilter, /*@NonNull*/ String name,  @Nullable TargetLookupFilter expFilter) {
+		assert typeFilter != null;
+		assert name != null;
 		this.executor = executor;
 		this.name = name;
 		this.typeFilter = typeFilter;
 		this.expFilter = expFilter;
 	}
 
-	public TargetSingleResultLookupEnvironment(@NonNull Executor executor, @NonNull EClass typeFilter, @NonNull String name) {
-		this(executor,typeFilter, name, null);
+	public TargetSingleResultLookupEnvironment(@NonNull Executor executor, /*@NonNull*/ EClass typeFilter, /*@NonNull*/ String name) {
+		this(executor, typeFilter, name, null);
 	}
 	
 	@Override

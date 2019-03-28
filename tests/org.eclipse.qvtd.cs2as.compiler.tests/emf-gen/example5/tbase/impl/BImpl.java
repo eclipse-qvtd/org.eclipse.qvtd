@@ -39,6 +39,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class BImpl extends NamedElementImpl implements B {
 	/**
+	 * The number of structural features of the '<em>B</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int B_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>B</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int B_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnsC() <em>Owns C</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +102,7 @@ public class BImpl extends NamedElementImpl implements B {
 		C oldOwnsC = ownsC;
 		ownsC = newOwnsC;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TbasePackage.B__OWNS_C, oldOwnsC, newOwnsC);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldOwnsC, newOwnsC);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -102,14 +118,14 @@ public class BImpl extends NamedElementImpl implements B {
 		if (newOwnsC != ownsC) {
 			NotificationChain msgs = null;
 			if (ownsC != null)
-				msgs = ((InternalEObject)ownsC).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TbasePackage.B__OWNS_C, null, msgs);
+				msgs = ((InternalEObject)ownsC).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			if (newOwnsC != null)
-				msgs = ((InternalEObject)newOwnsC).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TbasePackage.B__OWNS_C, null, msgs);
+				msgs = ((InternalEObject)newOwnsC).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			msgs = basicSetOwnsC(newOwnsC, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TbasePackage.B__OWNS_C, newOwnsC, newOwnsC));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newOwnsC, newOwnsC));
 	}
 
 	/**
@@ -120,7 +136,7 @@ public class BImpl extends NamedElementImpl implements B {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TbasePackage.B__OWNS_C:
+			case 1:
 				return basicSetOwnsC(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -134,7 +150,7 @@ public class BImpl extends NamedElementImpl implements B {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TbasePackage.B__OWNS_C:
+			case 1:
 				return getOwnsC();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -148,7 +164,7 @@ public class BImpl extends NamedElementImpl implements B {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TbasePackage.B__OWNS_C:
+			case 1:
 				setOwnsC((C)newValue);
 				return;
 		}
@@ -163,7 +179,7 @@ public class BImpl extends NamedElementImpl implements B {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TbasePackage.B__OWNS_C:
+			case 1:
 				setOwnsC((C)null);
 				return;
 		}
@@ -178,7 +194,7 @@ public class BImpl extends NamedElementImpl implements B {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TbasePackage.B__OWNS_C:
+			case 1:
 				return ownsC != null;
 		}
 		return super.eIsSet(featureID);

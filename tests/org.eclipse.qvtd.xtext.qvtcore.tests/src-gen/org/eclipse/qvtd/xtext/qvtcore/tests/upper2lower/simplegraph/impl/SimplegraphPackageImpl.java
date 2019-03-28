@@ -279,21 +279,21 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 		isCreated = true;
 
 		// Create classes and their features
-		nodeEClass = createEClass(NODE);
-		createEReference(nodeEClass, NODE__INCOMING);
-		createEReference(nodeEClass, NODE__OUTGOING);
-		createEAttribute(nodeEClass, NODE__LABEL);
+		nodeEClass = createEClass(0);
+		createEReference(nodeEClass, 1);
+		createEReference(nodeEClass, 2);
+		createEAttribute(nodeEClass, 3);
 
-		edgeEClass = createEClass(EDGE);
-		createEReference(edgeEClass, EDGE__TARGET);
-		createEReference(edgeEClass, EDGE__SOURCE);
+		edgeEClass = createEClass(1);
+		createEReference(edgeEClass, 1);
+		createEReference(edgeEClass, 2);
 
-		elementEClass = createEClass(ELEMENT);
-		createEReference(elementEClass, ELEMENT__GRAPH);
+		elementEClass = createEClass(2);
+		createEReference(elementEClass, 0);
 
-		graphEClass = createEClass(GRAPH);
-		createEReference(graphEClass, GRAPH__ELEMENT);
-		createEAttribute(graphEClass, GRAPH__NAME);
+		graphEClass = createEClass(3);
+		createEReference(graphEClass, 0);
+		createEAttribute(graphEClass, 1);
 	}
 
 	/**

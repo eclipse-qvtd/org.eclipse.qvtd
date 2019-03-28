@@ -14,6 +14,8 @@ package example5.sderived.impl;
 
 import example5.sbase.SbasePackage;
 
+import example5.sbase.impl.XImpl;
+import example5.sbase.impl.YImpl;
 import example5.sderived.SderivedFactory;
 import example5.sderived.SderivedPackage;
 
@@ -197,13 +199,13 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 		isCreated = true;
 
 		// Create classes and their features
-		x2EClass = createEClass(X2);
-		createEReference(x2EClass, X2__OWNS_W);
+		x2EClass = createEClass(0);
+		createEReference(x2EClass, XImpl.X_FEATURE_COUNT + 0);
 
-		y2EClass = createEClass(Y2);
-		createEAttribute(y2EClass, Y2__NAME2);
+		y2EClass = createEClass(1);
+		createEAttribute(y2EClass, YImpl.Y_FEATURE_COUNT + 0);
 
-		wEClass = createEClass(W);
+		wEClass = createEClass(2);
 	}
 
 	/**

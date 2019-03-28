@@ -52,6 +52,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ColumnImpl extends RModelElementImpl implements Column {
 	/**
+	 * The number of structural features of the '<em>Column</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLUMN_FEATURE_COUNT = RModelElementImpl.RMODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Column</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLUMN_OPERATION_COUNT = RModelElementImpl.RMODEL_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,7 +135,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 */
 	@Override
 	public Table getOwner() {
-		if (eContainerFeatureID() != RDBMSPackage.COLUMN__OWNER) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (Table)eInternalContainer();
 	}
 
@@ -127,7 +145,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(Table newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, RDBMSPackage.COLUMN__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 2, msgs);
 		return msgs;
 	}
 
@@ -138,19 +156,19 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 */
 	@Override
 	public void setOwner(Table newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != RDBMSPackage.COLUMN__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (2) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, RDBMSPackage.TABLE__COLUMN, Table.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 2, Table.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RDBMSPackage.COLUMN__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwner, newOwner));
 	}
 
 	/**
@@ -173,7 +191,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 		String oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RDBMSPackage.COLUMN__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldType, type));
 	}
 
 	/**
@@ -184,7 +202,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public EList<ForeignKey> getForeignKeys() {
 		if (foreignKeys == null) {
-			foreignKeys = new EObjectWithInverseResolvingEList.ManyInverse<ForeignKey>(ForeignKey.class, this, RDBMSPackage.COLUMN__FOREIGN_KEYS, RDBMSPackage.FOREIGN_KEY__COLUMN);
+			foreignKeys = new EObjectWithInverseResolvingEList.ManyInverse<ForeignKey>(ForeignKey.class, this, 4, 3);
 		}
 		return foreignKeys;
 	}
@@ -197,7 +215,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public EList<Key> getKey() {
 		if (key == null) {
-			key = new EObjectWithInverseResolvingEList.ManyInverse<Key>(Key.class, this, RDBMSPackage.COLUMN__KEY, RDBMSPackage.KEY__COLUMN);
+			key = new EObjectWithInverseResolvingEList.ManyInverse<Key>(Key.class, this, 5, 3);
 		}
 		return key;
 	}
@@ -211,13 +229,13 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RDBMSPackage.COLUMN__OWNER:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((Table)otherEnd, msgs);
-			case RDBMSPackage.COLUMN__FOREIGN_KEYS:
+			case 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getForeignKeys()).basicAdd(otherEnd, msgs);
-			case RDBMSPackage.COLUMN__KEY:
+			case 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getKey()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -231,11 +249,11 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RDBMSPackage.COLUMN__OWNER:
+			case 2:
 				return basicSetOwner(null, msgs);
-			case RDBMSPackage.COLUMN__FOREIGN_KEYS:
+			case 4:
 				return ((InternalEList<?>)getForeignKeys()).basicRemove(otherEnd, msgs);
-			case RDBMSPackage.COLUMN__KEY:
+			case 5:
 				return ((InternalEList<?>)getKey()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -249,8 +267,8 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RDBMSPackage.COLUMN__OWNER:
-				return eInternalContainer().eInverseRemove(this, RDBMSPackage.TABLE__COLUMN, Table.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 2, Table.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -263,13 +281,13 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RDBMSPackage.COLUMN__OWNER:
+			case 2:
 				return getOwner();
-			case RDBMSPackage.COLUMN__TYPE:
+			case 3:
 				return getType();
-			case RDBMSPackage.COLUMN__FOREIGN_KEYS:
+			case 4:
 				return getForeignKeys();
-			case RDBMSPackage.COLUMN__KEY:
+			case 5:
 				return getKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -284,17 +302,17 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RDBMSPackage.COLUMN__OWNER:
+			case 2:
 				setOwner((Table)newValue);
 				return;
-			case RDBMSPackage.COLUMN__TYPE:
+			case 3:
 				setType((String)newValue);
 				return;
-			case RDBMSPackage.COLUMN__FOREIGN_KEYS:
+			case 4:
 				getForeignKeys().clear();
 				getForeignKeys().addAll((Collection<? extends ForeignKey>)newValue);
 				return;
-			case RDBMSPackage.COLUMN__KEY:
+			case 5:
 				getKey().clear();
 				getKey().addAll((Collection<? extends Key>)newValue);
 				return;
@@ -310,16 +328,16 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.COLUMN__OWNER:
+			case 2:
 				setOwner((Table)null);
 				return;
-			case RDBMSPackage.COLUMN__TYPE:
+			case 3:
 				setType(TYPE_EDEFAULT);
 				return;
-			case RDBMSPackage.COLUMN__FOREIGN_KEYS:
+			case 4:
 				getForeignKeys().clear();
 				return;
-			case RDBMSPackage.COLUMN__KEY:
+			case 5:
 				getKey().clear();
 				return;
 		}
@@ -334,13 +352,13 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.COLUMN__OWNER:
+			case 2:
 				return getOwner() != null;
-			case RDBMSPackage.COLUMN__TYPE:
+			case 3:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-			case RDBMSPackage.COLUMN__FOREIGN_KEYS:
+			case 4:
 				return foreignKeys != null && !foreignKeys.isEmpty();
-			case RDBMSPackage.COLUMN__KEY:
+			case 5:
 				return key != null && !key.isEmpty();
 		}
 		return super.eIsSet(featureID);

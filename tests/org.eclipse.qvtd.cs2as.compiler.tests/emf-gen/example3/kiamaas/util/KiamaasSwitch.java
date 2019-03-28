@@ -77,27 +77,27 @@ public class KiamaasSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case KiamaasPackage.TOP: {
+			case 0: {
 				Top top = (Top)theEObject;
 				T result = caseTop(top);
 				if (result == null) result = caseNode(top);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KiamaasPackage.NODE: {
+			case 1: {
 				Node node = (Node)theEObject;
 				T result = caseNode(node);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KiamaasPackage.PLUS: {
+			case 2: {
 				Plus plus = (Plus)theEObject;
 				T result = casePlus(plus);
 				if (result == null) result = caseNode(plus);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KiamaasPackage.NUM: {
+			case 3: {
 				Num num = (Num)theEObject;
 				T result = caseNum(num);
 				if (result == null) result = caseNode(num);

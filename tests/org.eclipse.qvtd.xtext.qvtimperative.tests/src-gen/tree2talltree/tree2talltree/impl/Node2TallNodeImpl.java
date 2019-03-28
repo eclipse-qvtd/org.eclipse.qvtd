@@ -53,6 +53,24 @@ import tree2talltree.tree2talltree.Tree2talltreePackage;
  */
 public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements Node2TallNode {
 	/**
+	 * The number of structural features of the '<em>Node2 Tall Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE2_TALL_NODE_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Node2 Tall Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE2_TALL_NODE_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -129,7 +147,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public EList<Node2TallNode> getChildren() {
 		if (children == null) {
-			children = new EObjectContainmentWithInverseEList<Node2TallNode>(Node2TallNode.class, this, Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN, Tree2talltreePackage.NODE2_TALL_NODE__PARENT);
+			children = new EObjectContainmentWithInverseEList<Node2TallNode>(Node2TallNode.class, this, 0, 2);
 		}
 		return children;
 	}
@@ -154,7 +172,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Tree2talltreePackage.NODE2_TALL_NODE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -164,7 +182,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 */
 	@Override
 	public Node2TallNode getParent() {
-		if (eContainerFeatureID() != Tree2talltreePackage.NODE2_TALL_NODE__PARENT) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (Node2TallNode)eInternalContainer();
 	}
 
@@ -174,7 +192,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(Node2TallNode newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParent, Tree2talltreePackage.NODE2_TALL_NODE__PARENT, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newParent, 2, msgs);
 		return msgs;
 	}
 
@@ -185,19 +203,19 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 */
 	@Override
 	public void setParent(Node2TallNode newParent) {
-		if (newParent != eInternalContainer() || (eContainerFeatureID() != Tree2talltreePackage.NODE2_TALL_NODE__PARENT && newParent != null)) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != (2) && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN, Node2TallNode.class, msgs);
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, 0, Node2TallNode.class, msgs);
 			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Tree2talltreePackage.NODE2_TALL_NODE__PARENT, newParent, newParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newParent, newParent));
 	}
 
 	/**
@@ -212,7 +230,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 			node = (Node)eResolveProxy(oldNode);
 			if (node != oldNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Tree2talltreePackage.NODE2_TALL_NODE__NODE, oldNode, node));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldNode, node));
 			}
 		}
 		return node;
@@ -237,7 +255,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 		Node oldNode = node;
 		node = newNode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Tree2talltreePackage.NODE2_TALL_NODE__NODE, oldNode, node));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldNode, node));
 	}
 
 	/**
@@ -252,7 +270,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 			tallNode = (TallNode)eResolveProxy(oldTallNode);
 			if (tallNode != oldTallNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Tree2talltreePackage.NODE2_TALL_NODE__TALL_NODE, oldTallNode, tallNode));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldTallNode, tallNode));
 			}
 		}
 		return tallNode;
@@ -277,7 +295,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 		TallNode oldTallNode = tallNode;
 		tallNode = newTallNode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Tree2talltreePackage.NODE2_TALL_NODE__TALL_NODE, oldTallNode, tallNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldTallNode, tallNode));
 	}
 
 	/**
@@ -289,9 +307,9 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN:
+			case 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChildren()).basicAdd(otherEnd, msgs);
-			case Tree2talltreePackage.NODE2_TALL_NODE__PARENT:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParent((Node2TallNode)otherEnd, msgs);
@@ -307,9 +325,9 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN:
+			case 0:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
-			case Tree2talltreePackage.NODE2_TALL_NODE__PARENT:
+			case 2:
 				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -323,8 +341,8 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case Tree2talltreePackage.NODE2_TALL_NODE__PARENT:
-				return eInternalContainer().eInverseRemove(this, Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN, Node2TallNode.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 0, Node2TallNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -337,16 +355,16 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN:
+			case 0:
 				return getChildren();
-			case Tree2talltreePackage.NODE2_TALL_NODE__NAME:
+			case 1:
 				return getName();
-			case Tree2talltreePackage.NODE2_TALL_NODE__PARENT:
+			case 2:
 				return getParent();
-			case Tree2talltreePackage.NODE2_TALL_NODE__NODE:
+			case 3:
 				if (resolve) return getNode();
 				return basicGetNode();
-			case Tree2talltreePackage.NODE2_TALL_NODE__TALL_NODE:
+			case 4:
 				if (resolve) return getTallNode();
 				return basicGetTallNode();
 		}
@@ -362,20 +380,20 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends Node2TallNode>)newValue);
 				return;
-			case Tree2talltreePackage.NODE2_TALL_NODE__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
-			case Tree2talltreePackage.NODE2_TALL_NODE__PARENT:
+			case 2:
 				setParent((Node2TallNode)newValue);
 				return;
-			case Tree2talltreePackage.NODE2_TALL_NODE__NODE:
+			case 3:
 				setNode((Node)newValue);
 				return;
-			case Tree2talltreePackage.NODE2_TALL_NODE__TALL_NODE:
+			case 4:
 				setTallNode((TallNode)newValue);
 				return;
 		}
@@ -390,19 +408,19 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				return;
-			case Tree2talltreePackage.NODE2_TALL_NODE__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case Tree2talltreePackage.NODE2_TALL_NODE__PARENT:
+			case 2:
 				setParent((Node2TallNode)null);
 				return;
-			case Tree2talltreePackage.NODE2_TALL_NODE__NODE:
+			case 3:
 				setNode((Node)null);
 				return;
-			case Tree2talltreePackage.NODE2_TALL_NODE__TALL_NODE:
+			case 4:
 				setTallNode((TallNode)null);
 				return;
 		}
@@ -417,15 +435,15 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN:
+			case 0:
 				return children != null && !children.isEmpty();
-			case Tree2talltreePackage.NODE2_TALL_NODE__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case Tree2talltreePackage.NODE2_TALL_NODE__PARENT:
+			case 2:
 				return getParent() != null;
-			case Tree2talltreePackage.NODE2_TALL_NODE__NODE:
+			case 3:
 				return node != null;
-			case Tree2talltreePackage.NODE2_TALL_NODE__TALL_NODE:
+			case 4:
 				return tallNode != null;
 		}
 		return super.eIsSet(featureID);

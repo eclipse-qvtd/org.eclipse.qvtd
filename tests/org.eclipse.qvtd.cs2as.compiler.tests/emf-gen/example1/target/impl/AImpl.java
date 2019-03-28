@@ -26,6 +26,23 @@ import example1.target.TargetPackage;
  */
 public abstract class AImpl extends NamespaceImpl implements A {
 	/**
+	 * The number of structural features of the '<em>A</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A_FEATURE_COUNT = NamespaceImpl.NAMESPACE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>A</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A_OPERATION_COUNT = NamespaceImpl.NAMESPACE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

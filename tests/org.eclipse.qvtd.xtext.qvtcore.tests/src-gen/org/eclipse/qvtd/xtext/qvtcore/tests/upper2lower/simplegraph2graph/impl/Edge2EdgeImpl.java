@@ -41,6 +41,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simple
  */
 public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	/**
+	 * The number of structural features of the '<em>Edge2 Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EDGE2_EDGE_FEATURE_COUNT = Element2ElementImpl.ELEMENT2_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Edge2 Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EDGE2_EDGE_OPERATION_COUNT = Element2ElementImpl.ELEMENT2_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getEdge1() <em>Edge1</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,7 +129,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 			edge1 = (Edge)eResolveProxy(oldEdge1);
 			if (edge1 != oldEdge1) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simplegraph2graphPackage.EDGE2_EDGE__EDGE1, oldEdge1, edge1));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldEdge1, edge1));
 			}
 		}
 		return edge1;
@@ -136,7 +154,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 		Edge oldEdge1 = edge1;
 		edge1 = newEdge1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.EDGE2_EDGE__EDGE1, oldEdge1, edge1));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldEdge1, edge1));
 	}
 
 	/**
@@ -151,7 +169,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 			edge2 = (Edge)eResolveProxy(oldEdge2);
 			if (edge2 != oldEdge2) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simplegraph2graphPackage.EDGE2_EDGE__EDGE2, oldEdge2, edge2));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldEdge2, edge2));
 			}
 		}
 		return edge2;
@@ -176,7 +194,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 		Edge oldEdge2 = edge2;
 		edge2 = newEdge2;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.EDGE2_EDGE__EDGE2, oldEdge2, edge2));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldEdge2, edge2));
 	}
 
 	/**
@@ -191,7 +209,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 			target = (Node2Node)eResolveProxy(oldTarget);
 			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simplegraph2graphPackage.EDGE2_EDGE__TARGET, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldTarget, target));
 			}
 		}
 		return target;
@@ -216,7 +234,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 		Node2Node oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.EDGE2_EDGE__TARGET, oldTarget, target));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldTarget, target));
 	}
 
 	/**
@@ -231,7 +249,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 			source = (Node2Node)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simplegraph2graphPackage.EDGE2_EDGE__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldSource, source));
 			}
 		}
 		return source;
@@ -256,7 +274,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 		Node2Node oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.EDGE2_EDGE__SOURCE, oldSource, source));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldSource, source));
 	}
 
 	/**
@@ -267,16 +285,16 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.EDGE2_EDGE__EDGE1:
+			case 1:
 				if (resolve) return getEdge1();
 				return basicGetEdge1();
-			case Simplegraph2graphPackage.EDGE2_EDGE__EDGE2:
+			case 2:
 				if (resolve) return getEdge2();
 				return basicGetEdge2();
-			case Simplegraph2graphPackage.EDGE2_EDGE__TARGET:
+			case 3:
 				if (resolve) return getTarget();
 				return basicGetTarget();
-			case Simplegraph2graphPackage.EDGE2_EDGE__SOURCE:
+			case 4:
 				if (resolve) return getSource();
 				return basicGetSource();
 		}
@@ -291,16 +309,16 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.EDGE2_EDGE__EDGE1:
+			case 1:
 				setEdge1((Edge)newValue);
 				return;
-			case Simplegraph2graphPackage.EDGE2_EDGE__EDGE2:
+			case 2:
 				setEdge2((Edge)newValue);
 				return;
-			case Simplegraph2graphPackage.EDGE2_EDGE__TARGET:
+			case 3:
 				setTarget((Node2Node)newValue);
 				return;
-			case Simplegraph2graphPackage.EDGE2_EDGE__SOURCE:
+			case 4:
 				setSource((Node2Node)newValue);
 				return;
 		}
@@ -315,16 +333,16 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.EDGE2_EDGE__EDGE1:
+			case 1:
 				setEdge1((Edge)null);
 				return;
-			case Simplegraph2graphPackage.EDGE2_EDGE__EDGE2:
+			case 2:
 				setEdge2((Edge)null);
 				return;
-			case Simplegraph2graphPackage.EDGE2_EDGE__TARGET:
+			case 3:
 				setTarget((Node2Node)null);
 				return;
-			case Simplegraph2graphPackage.EDGE2_EDGE__SOURCE:
+			case 4:
 				setSource((Node2Node)null);
 				return;
 		}
@@ -339,13 +357,13 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.EDGE2_EDGE__EDGE1:
+			case 1:
 				return edge1 != null;
-			case Simplegraph2graphPackage.EDGE2_EDGE__EDGE2:
+			case 2:
 				return edge2 != null;
-			case Simplegraph2graphPackage.EDGE2_EDGE__TARGET:
+			case 3:
 				return target != null;
-			case Simplegraph2graphPackage.EDGE2_EDGE__SOURCE:
+			case 4:
 				return source != null;
 		}
 		return super.eIsSet(featureID);

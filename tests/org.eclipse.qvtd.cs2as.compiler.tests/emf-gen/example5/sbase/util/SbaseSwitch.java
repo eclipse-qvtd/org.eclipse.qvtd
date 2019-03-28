@@ -77,35 +77,35 @@ public class SbaseSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case SbasePackage.X: {
+			case 0: {
 				X x = (X)theEObject;
 				T result = caseX(x);
 				if (result == null) result = caseSElement(x);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SbasePackage.Y: {
+			case 1: {
 				Y y = (Y)theEObject;
 				T result = caseY(y);
 				if (result == null) result = caseSElement(y);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SbasePackage.Z: {
+			case 2: {
 				Z z = (Z)theEObject;
 				T result = caseZ(z);
 				if (result == null) result = caseSElement(z);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SbasePackage.SROOT: {
+			case 3: {
 				SRoot sRoot = (SRoot)theEObject;
 				T result = caseSRoot(sRoot);
 				if (result == null) result = caseSElement(sRoot);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SbasePackage.SELEMENT: {
+			case 4: {
 				SElement sElement = (SElement)theEObject;
 				T result = caseSElement(sElement);
 				if (result == null) result = defaultCase(theEObject);

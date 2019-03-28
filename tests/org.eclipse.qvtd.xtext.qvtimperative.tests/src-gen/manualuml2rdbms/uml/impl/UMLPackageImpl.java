@@ -419,35 +419,35 @@ public class UMLPackageImpl extends EPackageImpl implements UMLPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		attributeEClass = createEClass(ATTRIBUTE);
-		createEReference(attributeEClass, ATTRIBUTE__TYPE);
-		createEReference(attributeEClass, ATTRIBUTE__OWNER);
+		attributeEClass = createEClass(0);
+		createEReference(attributeEClass, 2);
+		createEReference(attributeEClass, 3);
 
-		associationEClass = createEClass(ASSOCIATION);
-		createEReference(associationEClass, ASSOCIATION__SOURCE);
-		createEReference(associationEClass, ASSOCIATION__DESTINATION);
+		associationEClass = createEClass(1);
+		createEReference(associationEClass, 3);
+		createEReference(associationEClass, 4);
 
-		classEClass = createEClass(CLASS);
-		createEReference(classEClass, CLASS__GENERAL);
-		createEReference(classEClass, CLASS__FORWARD);
-		createEReference(classEClass, CLASS__ATTRIBUTES);
-		createEReference(classEClass, CLASS__REVERSE);
-		createEReference(classEClass, CLASS__GENERAL_OPPOSITE);
+		classEClass = createEClass(2);
+		createEReference(classEClass, 4);
+		createEReference(classEClass, 5);
+		createEReference(classEClass, 6);
+		createEReference(classEClass, 7);
+		createEReference(classEClass, 8);
 
-		classifierEClass = createEClass(CLASSIFIER);
-		createEReference(classifierEClass, CLASSIFIER__TYPE_OPPOSITE);
+		classifierEClass = createEClass(3);
+		createEReference(classifierEClass, 3);
 
-		packageEClass = createEClass(PACKAGE);
-		createEReference(packageEClass, PACKAGE__ELEMENTS);
+		packageEClass = createEClass(4);
+		createEReference(packageEClass, 2);
 
-		packageElementEClass = createEClass(PACKAGE_ELEMENT);
-		createEReference(packageElementEClass, PACKAGE_ELEMENT__NAMESPACE);
+		packageElementEClass = createEClass(5);
+		createEReference(packageElementEClass, 2);
 
-		primitiveDataTypeEClass = createEClass(PRIMITIVE_DATA_TYPE);
+		primitiveDataTypeEClass = createEClass(6);
 
-		umlModelElementEClass = createEClass(UML_MODEL_ELEMENT);
-		createEAttribute(umlModelElementEClass, UML_MODEL_ELEMENT__KIND);
-		createEAttribute(umlModelElementEClass, UML_MODEL_ELEMENT__NAME);
+		umlModelElementEClass = createEClass(7);
+		createEAttribute(umlModelElementEClass, 0);
+		createEAttribute(umlModelElementEClass, 1);
 	}
 
 	/**

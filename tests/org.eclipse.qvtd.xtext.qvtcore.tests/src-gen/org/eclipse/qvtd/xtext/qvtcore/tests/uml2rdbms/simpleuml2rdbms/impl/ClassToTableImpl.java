@@ -58,6 +58,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.UmlToRdbms
  */
 public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToTable {
 	/**
+	 * The number of structural features of the '<em>Class To Table</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_TO_TABLE_FEATURE_COUNT = FromAttributeOwnerImpl.FROM_ATTRIBUTE_OWNER_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of operations of the '<em>Class To Table</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_TO_TABLE_OPERATION_COUNT = FromAttributeOwnerImpl.FROM_ATTRIBUTE_OWNER_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getColumn() <em>Column</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -158,7 +176,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 			column = (Column)eResolveProxy(oldColumn);
 			if (column != oldColumn) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__COLUMN, oldColumn, column));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldColumn, column));
 			}
 		}
 		return column;
@@ -183,7 +201,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 		Column oldColumn = column;
 		column = newColumn;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__COLUMN, oldColumn, column));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldColumn, column));
 	}
 
 	/**
@@ -206,7 +224,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldName, name));
 	}
 
 	/**
@@ -217,7 +235,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	@Override
 	public EList<AssociationToForeignKey> getAssociationsToForeignKeys() {
 		if (associationsToForeignKeys == null) {
-			associationsToForeignKeys = new EObjectContainmentWithInverseEList<AssociationToForeignKey>(AssociationToForeignKey.class, this, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER);
+			associationsToForeignKeys = new EObjectContainmentWithInverseEList<AssociationToForeignKey>(AssociationToForeignKey.class, this, 3, 5);
 		}
 		return associationsToForeignKeys;
 	}
@@ -229,7 +247,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 */
 	@Override
 	public PackageToSchema getOwner() {
-		if (eContainerFeatureID() != Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER) return null;
+		if (eContainerFeatureID() != (4)) return null;
 		return (PackageToSchema)eInternalContainer();
 	}
 
@@ -239,7 +257,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(PackageToSchema newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 4, msgs);
 		return msgs;
 	}
 
@@ -250,19 +268,19 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 */
 	@Override
 	public void setOwner(PackageToSchema newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (4) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES, PackageToSchema.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 1, PackageToSchema.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, newOwner, newOwner));
 	}
 
 	/**
@@ -277,7 +295,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 			primaryKey = (Key)eResolveProxy(oldPrimaryKey);
 			if (primaryKey != oldPrimaryKey) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__PRIMARY_KEY, oldPrimaryKey, primaryKey));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 5, oldPrimaryKey, primaryKey));
 			}
 		}
 		return primaryKey;
@@ -302,7 +320,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 		Key oldPrimaryKey = primaryKey;
 		primaryKey = newPrimaryKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__PRIMARY_KEY, oldPrimaryKey, primaryKey));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldPrimaryKey, primaryKey));
 	}
 
 	/**
@@ -317,7 +335,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 			table = (Table)eResolveProxy(oldTable);
 			if (table != oldTable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__TABLE, oldTable, table));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 6, oldTable, table));
 			}
 		}
 		return table;
@@ -342,7 +360,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 		Table oldTable = table;
 		table = newTable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__TABLE, oldTable, table));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, oldTable, table));
 	}
 
 	/**
@@ -357,7 +375,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 			umlClass = (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)eResolveProxy(oldUmlClass);
 			if (umlClass != oldUmlClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__UML_CLASS, oldUmlClass, umlClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 7, oldUmlClass, umlClass));
 			}
 		}
 		return umlClass;
@@ -382,7 +400,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 		org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class oldUmlClass = umlClass;
 		umlClass = newUmlClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__UML_CLASS, oldUmlClass, umlClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, 7, oldUmlClass, umlClass));
 	}
 
 	/**
@@ -394,9 +412,9 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS:
+			case 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAssociationsToForeignKeys()).basicAdd(otherEnd, msgs);
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER:
+			case 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((PackageToSchema)otherEnd, msgs);
@@ -412,9 +430,9 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS:
+			case 3:
 				return ((InternalEList<?>)getAssociationsToForeignKeys()).basicRemove(otherEnd, msgs);
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER:
+			case 4:
 				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -428,8 +446,8 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER:
-				return eInternalContainer().eInverseRemove(this, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES, PackageToSchema.class, msgs);
+			case 4:
+				return eInternalContainer().eInverseRemove(this, 1, PackageToSchema.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -442,22 +460,22 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__COLUMN:
+			case 1:
 				if (resolve) return getColumn();
 				return basicGetColumn();
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__NAME:
+			case 2:
 				return getName();
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS:
+			case 3:
 				return getAssociationsToForeignKeys();
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER:
+			case 4:
 				return getOwner();
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__PRIMARY_KEY:
+			case 5:
 				if (resolve) return getPrimaryKey();
 				return basicGetPrimaryKey();
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__TABLE:
+			case 6:
 				if (resolve) return getTable();
 				return basicGetTable();
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__UML_CLASS:
+			case 7:
 				if (resolve) return getUmlClass();
 				return basicGetUmlClass();
 		}
@@ -473,26 +491,26 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__COLUMN:
+			case 1:
 				setColumn((Column)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__NAME:
+			case 2:
 				setName((String)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS:
+			case 3:
 				getAssociationsToForeignKeys().clear();
 				getAssociationsToForeignKeys().addAll((Collection<? extends AssociationToForeignKey>)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER:
+			case 4:
 				setOwner((PackageToSchema)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__PRIMARY_KEY:
+			case 5:
 				setPrimaryKey((Key)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__TABLE:
+			case 6:
 				setTable((Table)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__UML_CLASS:
+			case 7:
 				setUmlClass((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)newValue);
 				return;
 		}
@@ -507,25 +525,25 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__COLUMN:
+			case 1:
 				setColumn((Column)null);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__NAME:
+			case 2:
 				setName(NAME_EDEFAULT);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS:
+			case 3:
 				getAssociationsToForeignKeys().clear();
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER:
+			case 4:
 				setOwner((PackageToSchema)null);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__PRIMARY_KEY:
+			case 5:
 				setPrimaryKey((Key)null);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__TABLE:
+			case 6:
 				setTable((Table)null);
 				return;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__UML_CLASS:
+			case 7:
 				setUmlClass((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)null);
 				return;
 		}
@@ -540,19 +558,19 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__COLUMN:
+			case 1:
 				return column != null;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__NAME:
+			case 2:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS:
+			case 3:
 				return associationsToForeignKeys != null && !associationsToForeignKeys.isEmpty();
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER:
+			case 4:
 				return getOwner() != null;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__PRIMARY_KEY:
+			case 5:
 				return primaryKey != null;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__TABLE:
+			case 6:
 				return table != null;
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__UML_CLASS:
+			case 7:
 				return umlClass != null;
 		}
 		return super.eIsSet(featureID);
@@ -567,13 +585,13 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ToColumn.class) {
 			switch (derivedFeatureID) {
-				case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__COLUMN: return Simpleuml2rdbmsPackage.TO_COLUMN__COLUMN;
+				case 1: return 0;
 				default: return -1;
 			}
 		}
 		if (baseClass == UmlToRdbmsModelElement.class) {
 			switch (derivedFeatureID) {
-				case Simpleuml2rdbmsPackage.CLASS_TO_TABLE__NAME: return Simpleuml2rdbmsPackage.UML_TO_RDBMS_MODEL_ELEMENT__NAME;
+				case 2: return 0;
 				default: return -1;
 			}
 		}
@@ -589,13 +607,13 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ToColumn.class) {
 			switch (baseFeatureID) {
-				case Simpleuml2rdbmsPackage.TO_COLUMN__COLUMN: return Simpleuml2rdbmsPackage.CLASS_TO_TABLE__COLUMN;
+				case 0: return 1;
 				default: return -1;
 			}
 		}
 		if (baseClass == UmlToRdbmsModelElement.class) {
 			switch (baseFeatureID) {
-				case Simpleuml2rdbmsPackage.UML_TO_RDBMS_MODEL_ELEMENT__NAME: return Simpleuml2rdbmsPackage.CLASS_TO_TABLE__NAME;
+				case 0: return 2;
 				default: return -1;
 			}
 		}

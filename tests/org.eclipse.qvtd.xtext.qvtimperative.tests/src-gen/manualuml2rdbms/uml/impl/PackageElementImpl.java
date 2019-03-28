@@ -40,6 +40,23 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public abstract class PackageElementImpl extends UMLModelElementImpl implements PackageElement {
 	/**
+	 * The number of structural features of the '<em>Package Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_ELEMENT_FEATURE_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Package Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_ELEMENT_OPERATION_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -65,7 +82,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 */
 	@Override
 	public manualuml2rdbms.uml.Package getNamespace() {
-		if (eContainerFeatureID() != UMLPackage.PACKAGE_ELEMENT__NAMESPACE) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (manualuml2rdbms.uml.Package)eInternalContainer();
 	}
 
@@ -75,7 +92,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 * @generated
 	 */
 	public NotificationChain basicSetNamespace(manualuml2rdbms.uml.Package newNamespace, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newNamespace, UMLPackage.PACKAGE_ELEMENT__NAMESPACE, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newNamespace, 2, msgs);
 		return msgs;
 	}
 
@@ -86,19 +103,19 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 */
 	@Override
 	public void setNamespace(manualuml2rdbms.uml.Package newNamespace) {
-		if (newNamespace != eInternalContainer() || (eContainerFeatureID() != UMLPackage.PACKAGE_ELEMENT__NAMESPACE && newNamespace != null)) {
+		if (newNamespace != eInternalContainer() || (eContainerFeatureID() != (2) && newNamespace != null)) {
 			if (EcoreUtil.isAncestor(this, newNamespace))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newNamespace != null)
-				msgs = ((InternalEObject)newNamespace).eInverseAdd(this, UMLPackage.PACKAGE__ELEMENTS, manualuml2rdbms.uml.Package.class, msgs);
+				msgs = ((InternalEObject)newNamespace).eInverseAdd(this, 2, manualuml2rdbms.uml.Package.class, msgs);
 			msgs = basicSetNamespace(newNamespace, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLPackage.PACKAGE_ELEMENT__NAMESPACE, newNamespace, newNamespace));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newNamespace, newNamespace));
 	}
 
 	/**
@@ -109,7 +126,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetNamespace((manualuml2rdbms.uml.Package)otherEnd, msgs);
@@ -125,7 +142,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				return basicSetNamespace(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -139,8 +156,8 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLPackage.PACKAGE_ELEMENT__NAMESPACE:
-				return eInternalContainer().eInverseRemove(this, UMLPackage.PACKAGE__ELEMENTS, manualuml2rdbms.uml.Package.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 2, manualuml2rdbms.uml.Package.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -153,7 +170,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				return getNamespace();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -167,7 +184,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				setNamespace((manualuml2rdbms.uml.Package)newValue);
 				return;
 		}
@@ -182,7 +199,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				setNamespace((manualuml2rdbms.uml.Package)null);
 				return;
 		}
@@ -197,7 +214,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				return getNamespace() != null;
 		}
 		return super.eIsSet(featureID);

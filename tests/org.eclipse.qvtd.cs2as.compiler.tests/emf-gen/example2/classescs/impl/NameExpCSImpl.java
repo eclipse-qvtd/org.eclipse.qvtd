@@ -42,6 +42,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	/**
+	 * The number of structural features of the '<em>Name Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAME_EXP_CS_FEATURE_COUNT = ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Name Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAME_EXP_CS_OPERATION_COUNT = ElementCSImpl.ELEMENT_CS_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,7 +127,7 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 		PathNameCS oldName = name;
 		name = newName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassescsPackage.NAME_EXP_CS__NAME, oldName, newName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldName, newName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -125,14 +143,14 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 		if (newName != name) {
 			NotificationChain msgs = null;
 			if (name != null)
-				msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.NAME_EXP_CS__NAME, null, msgs);
+				msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			if (newName != null)
-				msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.NAME_EXP_CS__NAME, null, msgs);
+				msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 			msgs = basicSetName(newName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescsPackage.NAME_EXP_CS__NAME, newName, newName));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newName, newName));
 	}
 
 	/**
@@ -154,7 +172,7 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 		RoundedBracketClause oldRoundedBrackets = roundedBrackets;
 		roundedBrackets = newRoundedBrackets;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassescsPackage.NAME_EXP_CS__ROUNDED_BRACKETS, oldRoundedBrackets, newRoundedBrackets);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldRoundedBrackets, newRoundedBrackets);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -170,14 +188,14 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 		if (newRoundedBrackets != roundedBrackets) {
 			NotificationChain msgs = null;
 			if (roundedBrackets != null)
-				msgs = ((InternalEObject)roundedBrackets).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.NAME_EXP_CS__ROUNDED_BRACKETS, null, msgs);
+				msgs = ((InternalEObject)roundedBrackets).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newRoundedBrackets != null)
-				msgs = ((InternalEObject)newRoundedBrackets).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.NAME_EXP_CS__ROUNDED_BRACKETS, null, msgs);
+				msgs = ((InternalEObject)newRoundedBrackets).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetRoundedBrackets(newRoundedBrackets, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescsPackage.NAME_EXP_CS__ROUNDED_BRACKETS, newRoundedBrackets, newRoundedBrackets));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newRoundedBrackets, newRoundedBrackets));
 	}
 
 	/**
@@ -199,7 +217,7 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 		NameExpCS oldOwnedNameExp = ownedNameExp;
 		ownedNameExp = newOwnedNameExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassescsPackage.NAME_EXP_CS__OWNED_NAME_EXP, oldOwnedNameExp, newOwnedNameExp);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 3, oldOwnedNameExp, newOwnedNameExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -215,14 +233,14 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 		if (newOwnedNameExp != ownedNameExp) {
 			NotificationChain msgs = null;
 			if (ownedNameExp != null)
-				msgs = ((InternalEObject)ownedNameExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.NAME_EXP_CS__OWNED_NAME_EXP, null, msgs);
+				msgs = ((InternalEObject)ownedNameExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (3), null, msgs);
 			if (newOwnedNameExp != null)
-				msgs = ((InternalEObject)newOwnedNameExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.NAME_EXP_CS__OWNED_NAME_EXP, null, msgs);
+				msgs = ((InternalEObject)newOwnedNameExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (3), null, msgs);
 			msgs = basicSetOwnedNameExp(newOwnedNameExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescsPackage.NAME_EXP_CS__OWNED_NAME_EXP, newOwnedNameExp, newOwnedNameExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newOwnedNameExp, newOwnedNameExp));
 	}
 
 	/**
@@ -233,11 +251,11 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassescsPackage.NAME_EXP_CS__NAME:
+			case 1:
 				return basicSetName(null, msgs);
-			case ClassescsPackage.NAME_EXP_CS__ROUNDED_BRACKETS:
+			case 2:
 				return basicSetRoundedBrackets(null, msgs);
-			case ClassescsPackage.NAME_EXP_CS__OWNED_NAME_EXP:
+			case 3:
 				return basicSetOwnedNameExp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -251,11 +269,11 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.NAME_EXP_CS__NAME:
+			case 1:
 				return getName();
-			case ClassescsPackage.NAME_EXP_CS__ROUNDED_BRACKETS:
+			case 2:
 				return getRoundedBrackets();
-			case ClassescsPackage.NAME_EXP_CS__OWNED_NAME_EXP:
+			case 3:
 				return getOwnedNameExp();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -269,13 +287,13 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.NAME_EXP_CS__NAME:
+			case 1:
 				setName((PathNameCS)newValue);
 				return;
-			case ClassescsPackage.NAME_EXP_CS__ROUNDED_BRACKETS:
+			case 2:
 				setRoundedBrackets((RoundedBracketClause)newValue);
 				return;
-			case ClassescsPackage.NAME_EXP_CS__OWNED_NAME_EXP:
+			case 3:
 				setOwnedNameExp((NameExpCS)newValue);
 				return;
 		}
@@ -290,13 +308,13 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.NAME_EXP_CS__NAME:
+			case 1:
 				setName((PathNameCS)null);
 				return;
-			case ClassescsPackage.NAME_EXP_CS__ROUNDED_BRACKETS:
+			case 2:
 				setRoundedBrackets((RoundedBracketClause)null);
 				return;
-			case ClassescsPackage.NAME_EXP_CS__OWNED_NAME_EXP:
+			case 3:
 				setOwnedNameExp((NameExpCS)null);
 				return;
 		}
@@ -311,11 +329,11 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.NAME_EXP_CS__NAME:
+			case 1:
 				return name != null;
-			case ClassescsPackage.NAME_EXP_CS__ROUNDED_BRACKETS:
+			case 2:
 				return roundedBrackets != null;
-			case ClassescsPackage.NAME_EXP_CS__OWNED_NAME_EXP:
+			case 3:
 				return ownedNameExp != null;
 		}
 		return super.eIsSet(featureID);

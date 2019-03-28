@@ -40,6 +40,23 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simple
  */
 public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container implements Element2Element {
 	/**
+	 * The number of structural features of the '<em>Element2 Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT2_ELEMENT_FEATURE_COUNT = 1;
+	/**
+	 * The number of operations of the '<em>Element2 Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT2_ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -65,7 +82,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	 */
 	@Override
 	public Graph2Graph getOwner() {
-		if (eContainerFeatureID() != Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER) return null;
+		if (eContainerFeatureID() != (0)) return null;
 		return (Graph2Graph)eInternalContainer();
 	}
 
@@ -75,7 +92,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(Graph2Graph newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 0, msgs);
 		return msgs;
 	}
 
@@ -86,19 +103,19 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	 */
 	@Override
 	public void setOwner(Graph2Graph newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (0) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT, Graph2Graph.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 2, Graph2Graph.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, newOwner, newOwner));
 	}
 
 	/**
@@ -109,7 +126,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER:
+			case 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((Graph2Graph)otherEnd, msgs);
@@ -125,7 +142,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER:
+			case 0:
 				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -139,8 +156,8 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER:
-				return eInternalContainer().eInverseRemove(this, Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT, Graph2Graph.class, msgs);
+			case 0:
+				return eInternalContainer().eInverseRemove(this, 2, Graph2Graph.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -153,7 +170,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER:
+			case 0:
 				return getOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -167,7 +184,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER:
+			case 0:
 				setOwner((Graph2Graph)newValue);
 				return;
 		}
@@ -182,7 +199,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER:
+			case 0:
 				setOwner((Graph2Graph)null);
 				return;
 		}
@@ -197,7 +214,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER:
+			case 0:
 				return getOwner() != null;
 		}
 		return super.eIsSet(featureID);

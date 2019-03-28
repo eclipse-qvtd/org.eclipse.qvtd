@@ -68,11 +68,11 @@ public class SimpleumlFactoryImpl extends EFactoryImpl implements SimpleumlFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case SimpleumlPackage.ATTRIBUTE: return createAttribute();
-			case SimpleumlPackage.ASSOCIATION: return createAssociation();
-			case SimpleumlPackage.CLASS: return createClass();
-			case SimpleumlPackage.PACKAGE: return createPackage();
-			case SimpleumlPackage.PRIMITIVE_DATA_TYPE: return createPrimitiveDataType();
+			case 0: return createAttribute();
+			case 1: return createAssociation();
+			case 2: return createClass();
+			case 4: return createPackage();
+			case 6: return createPrimitiveDataType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

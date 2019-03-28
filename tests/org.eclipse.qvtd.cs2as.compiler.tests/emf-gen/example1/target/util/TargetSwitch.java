@@ -86,7 +86,7 @@ public class TargetSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TargetPackage.A: {
+			case 0: {
 				A a = (A)theEObject;
 				T result = caseA(a);
 				if (result == null) result = caseNamespace(a);
@@ -95,7 +95,7 @@ public class TargetSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.A1: {
+			case 1: {
 				A1 a1 = (A1)theEObject;
 				T result = caseA1(a1);
 				if (result == null) result = caseA(a1);
@@ -105,7 +105,7 @@ public class TargetSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.A2: {
+			case 2: {
 				A2 a2 = (A2)theEObject;
 				T result = caseA2(a2);
 				if (result == null) result = caseA(a2);
@@ -115,7 +115,7 @@ public class TargetSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.A3: {
+			case 3: {
 				A3 a3 = (A3)theEObject;
 				T result = caseA3(a3);
 				if (result == null) result = caseA2(a3);
@@ -126,7 +126,7 @@ public class TargetSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.B: {
+			case 4: {
 				B b = (B)theEObject;
 				T result = caseB(b);
 				if (result == null) result = caseNamespace(b);
@@ -135,7 +135,7 @@ public class TargetSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.C: {
+			case 5: {
 				C c = (C)theEObject;
 				T result = caseC(c);
 				if (result == null) result = caseNamespace(c);
@@ -144,7 +144,7 @@ public class TargetSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.D: {
+			case 6: {
 				D d = (D)theEObject;
 				T result = caseD(d);
 				if (result == null) result = caseNamedElement(d);
@@ -152,21 +152,21 @@ public class TargetSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.TROOT: {
+			case 7: {
 				TRoot tRoot = (TRoot)theEObject;
 				T result = caseTRoot(tRoot);
 				if (result == null) result = caseVisitable(tRoot);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.NAMED_ELEMENT: {
+			case 8: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
 				if (result == null) result = caseVisitable(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.NAMESPACE: {
+			case 9: {
 				Namespace namespace = (Namespace)theEObject;
 				T result = caseNamespace(namespace);
 				if (result == null) result = caseNamedElement(namespace);
@@ -174,7 +174,7 @@ public class TargetSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TargetPackage.VISITABLE: {
+			case 10: {
 				Visitable visitable = (Visitable)theEObject;
 				T result = caseVisitable(visitable);
 				if (result == null) result = defaultCase(theEObject);

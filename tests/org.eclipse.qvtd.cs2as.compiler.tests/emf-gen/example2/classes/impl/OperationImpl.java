@@ -54,6 +54,24 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class OperationImpl extends NamedElementImpl implements Operation {
 	/**
+	 * The number of structural features of the '<em>Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -114,7 +132,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 			type = (example2.classes.Class)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassesPackage.OPERATION__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldType, type));
 			}
 		}
 		return type;
@@ -139,7 +157,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 		example2.classes.Class oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassesPackage.OPERATION__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldType, type));
 	}
 
 	/**
@@ -150,7 +168,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	@Override
 	public EList<Parameter> getOwnedParameters() {
 		if (ownedParameters == null) {
-			ownedParameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, ClassesPackage.OPERATION__OWNED_PARAMETERS);
+			ownedParameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, 2);
 		}
 		return ownedParameters;
 	}
@@ -163,7 +181,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	@Override
 	public EList<CallExp> getOwnedExpressions() {
 		if (ownedExpressions == null) {
-			ownedExpressions = new EObjectContainmentEList<CallExp>(CallExp.class, this, ClassesPackage.OPERATION__OWNED_EXPRESSIONS);
+			ownedExpressions = new EObjectContainmentEList<CallExp>(CallExp.class, this, 3);
 		}
 		return ownedExpressions;
 	}
@@ -176,9 +194,9 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
-			case ClassesPackage.OPERATION__OWNED_EXPRESSIONS:
+			case 3:
 				return ((InternalEList<?>)getOwnedExpressions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -192,12 +210,12 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION__TYPE:
+			case 1:
 				if (resolve) return getType();
 				return basicGetType();
-			case ClassesPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				return getOwnedParameters();
-			case ClassesPackage.OPERATION__OWNED_EXPRESSIONS:
+			case 3:
 				return getOwnedExpressions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -212,14 +230,14 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION__TYPE:
+			case 1:
 				setType((example2.classes.Class)newValue);
 				return;
-			case ClassesPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				getOwnedParameters().clear();
 				getOwnedParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
-			case ClassesPackage.OPERATION__OWNED_EXPRESSIONS:
+			case 3:
 				getOwnedExpressions().clear();
 				getOwnedExpressions().addAll((Collection<? extends CallExp>)newValue);
 				return;
@@ -235,13 +253,13 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION__TYPE:
+			case 1:
 				setType((example2.classes.Class)null);
 				return;
-			case ClassesPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				getOwnedParameters().clear();
 				return;
-			case ClassesPackage.OPERATION__OWNED_EXPRESSIONS:
+			case 3:
 				getOwnedExpressions().clear();
 				return;
 		}
@@ -256,11 +274,11 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION__TYPE:
+			case 1:
 				return type != null;
-			case ClassesPackage.OPERATION__OWNED_PARAMETERS:
+			case 2:
 				return ownedParameters != null && !ownedParameters.isEmpty();
-			case ClassesPackage.OPERATION__OWNED_EXPRESSIONS:
+			case 3:
 				return ownedExpressions != null && !ownedExpressions.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -275,7 +293,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == TypedElement.class) {
 			switch (derivedFeatureID) {
-				case ClassesPackage.OPERATION__TYPE: return ClassesPackage.TYPED_ELEMENT__TYPE;
+				case 1: return 0;
 				default: return -1;
 			}
 		}
@@ -291,7 +309,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == TypedElement.class) {
 			switch (baseFeatureID) {
-				case ClassesPackage.TYPED_ELEMENT__TYPE: return ClassesPackage.OPERATION__TYPE;
+				case 0: return 1;
 				default: return -1;
 			}
 		}

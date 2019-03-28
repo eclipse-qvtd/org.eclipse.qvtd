@@ -38,6 +38,23 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage
  */
 public abstract class PackageElementImpl extends UMLModelElementImpl implements PackageElement {
 	/**
+	 * The number of structural features of the '<em>Package Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_ELEMENT_FEATURE_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Package Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_ELEMENT_OPERATION_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -63,7 +80,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 */
 	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package getNamespace() {
-		if (eContainerFeatureID() != SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)eInternalContainer();
 	}
 
@@ -73,7 +90,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 * @generated
 	 */
 	public NotificationChain basicSetNamespace(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package newNamespace, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newNamespace, SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newNamespace, 2, msgs);
 		return msgs;
 	}
 
@@ -84,19 +101,19 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 */
 	@Override
 	public void setNamespace(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package newNamespace) {
-		if (newNamespace != eInternalContainer() || (eContainerFeatureID() != SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE && newNamespace != null)) {
+		if (newNamespace != eInternalContainer() || (eContainerFeatureID() != (2) && newNamespace != null)) {
 			if (EcoreUtil.isAncestor(this, newNamespace))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newNamespace != null)
-				msgs = ((InternalEObject)newNamespace).eInverseAdd(this, SimpleumlPackage.PACKAGE__ELEMENTS, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package.class, msgs);
+				msgs = ((InternalEObject)newNamespace).eInverseAdd(this, 3, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package.class, msgs);
 			msgs = basicSetNamespace(newNamespace, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE, newNamespace, newNamespace));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newNamespace, newNamespace));
 	}
 
 	/**
@@ -107,7 +124,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetNamespace((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)otherEnd, msgs);
@@ -123,7 +140,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				return basicSetNamespace(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -137,8 +154,8 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE:
-				return eInternalContainer().eInverseRemove(this, SimpleumlPackage.PACKAGE__ELEMENTS, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 3, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -151,7 +168,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				return getNamespace();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -165,7 +182,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				setNamespace((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)newValue);
 				return;
 		}
@@ -180,7 +197,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				setNamespace((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)null);
 				return;
 		}
@@ -195,7 +212,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE:
+			case 2:
 				return getNamespace() != null;
 		}
 		return super.eIsSet(featureID);

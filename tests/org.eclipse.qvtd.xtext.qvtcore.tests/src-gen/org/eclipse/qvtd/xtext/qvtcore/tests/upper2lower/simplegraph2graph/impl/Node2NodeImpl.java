@@ -39,6 +39,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simple
  */
 public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	/**
+	 * The number of structural features of the '<em>Node2 Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE2_NODE_FEATURE_COUNT = Element2ElementImpl.ELEMENT2_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Node2 Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE2_NODE_OPERATION_COUNT = Element2ElementImpl.ELEMENT2_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getNode1() <em>Node1</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,7 +127,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 			node1 = (Node)eResolveProxy(oldNode1);
 			if (node1 != oldNode1) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simplegraph2graphPackage.NODE2_NODE__NODE1, oldNode1, node1));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldNode1, node1));
 			}
 		}
 		return node1;
@@ -134,7 +152,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 		Node oldNode1 = node1;
 		node1 = newNode1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.NODE2_NODE__NODE1, oldNode1, node1));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldNode1, node1));
 	}
 
 	/**
@@ -149,7 +167,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 			node2 = (Node)eResolveProxy(oldNode2);
 			if (node2 != oldNode2) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simplegraph2graphPackage.NODE2_NODE__NODE2, oldNode2, node2));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldNode2, node2));
 			}
 		}
 		return node2;
@@ -174,7 +192,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 		Node oldNode2 = node2;
 		node2 = newNode2;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.NODE2_NODE__NODE2, oldNode2, node2));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldNode2, node2));
 	}
 
 	/**
@@ -197,7 +215,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 		String oldLabel = label;
 		label = newLabel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.NODE2_NODE__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldLabel, label));
 	}
 
 	/**
@@ -208,13 +226,13 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.NODE2_NODE__NODE1:
+			case 1:
 				if (resolve) return getNode1();
 				return basicGetNode1();
-			case Simplegraph2graphPackage.NODE2_NODE__NODE2:
+			case 2:
 				if (resolve) return getNode2();
 				return basicGetNode2();
-			case Simplegraph2graphPackage.NODE2_NODE__LABEL:
+			case 3:
 				return getLabel();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -228,13 +246,13 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.NODE2_NODE__NODE1:
+			case 1:
 				setNode1((Node)newValue);
 				return;
-			case Simplegraph2graphPackage.NODE2_NODE__NODE2:
+			case 2:
 				setNode2((Node)newValue);
 				return;
-			case Simplegraph2graphPackage.NODE2_NODE__LABEL:
+			case 3:
 				setLabel((String)newValue);
 				return;
 		}
@@ -249,13 +267,13 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.NODE2_NODE__NODE1:
+			case 1:
 				setNode1((Node)null);
 				return;
-			case Simplegraph2graphPackage.NODE2_NODE__NODE2:
+			case 2:
 				setNode2((Node)null);
 				return;
-			case Simplegraph2graphPackage.NODE2_NODE__LABEL:
+			case 3:
 				setLabel(LABEL_EDEFAULT);
 				return;
 		}
@@ -270,11 +288,11 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.NODE2_NODE__NODE1:
+			case 1:
 				return node1 != null;
-			case Simplegraph2graphPackage.NODE2_NODE__NODE2:
+			case 2:
 				return node2 != null;
-			case Simplegraph2graphPackage.NODE2_NODE__LABEL:
+			case 3:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 		}
 		return super.eIsSet(featureID);

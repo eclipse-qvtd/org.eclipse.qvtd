@@ -26,6 +26,23 @@ import simpleuml2rdbms.uml.UMLPackage;
  */
 public class PrimitiveDataTypeImpl extends ClassifierImpl implements PrimitiveDataType {
 	/**
+	 * The number of structural features of the '<em>Primitive Data Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRIMITIVE_DATA_TYPE_FEATURE_COUNT = ClassifierImpl.CLASSIFIER_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Primitive Data Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRIMITIVE_DATA_TYPE_OPERATION_COUNT = ClassifierImpl.CLASSIFIER_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

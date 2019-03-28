@@ -242,17 +242,17 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 		isCreated = true;
 
 		// Create classes and their features
-		list2ListEClass = createEClass(LIST2_LIST);
-		createEReference(list2ListEClass, LIST2_LIST__LIST1);
-		createEReference(list2ListEClass, LIST2_LIST__LIST2);
-		createEReference(list2ListEClass, LIST2_LIST__ELEMENT2_ELEMENT);
-		createEAttribute(list2ListEClass, LIST2_LIST__NAME);
+		list2ListEClass = createEClass(0);
+		createEReference(list2ListEClass, 0);
+		createEReference(list2ListEClass, 1);
+		createEReference(list2ListEClass, 2);
+		createEAttribute(list2ListEClass, 3);
 
-		element2ElementEClass = createEClass(ELEMENT2_ELEMENT);
-		createEReference(element2ElementEClass, ELEMENT2_ELEMENT__ELEMENT1);
-		createEReference(element2ElementEClass, ELEMENT2_ELEMENT__ELEMENT2);
-		createEReference(element2ElementEClass, ELEMENT2_ELEMENT__LIST2LIST);
-		createEAttribute(element2ElementEClass, ELEMENT2_ELEMENT__NAME);
+		element2ElementEClass = createEClass(1);
+		createEReference(element2ElementEClass, 0);
+		createEReference(element2ElementEClass, 1);
+		createEReference(element2ElementEClass, 2);
+		createEAttribute(element2ElementEClass, 3);
 	}
 
 	/**

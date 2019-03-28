@@ -264,21 +264,21 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		aEClass = createEClass(A);
-		createEReference(aEClass, A__OWNS_B);
+		aEClass = createEClass(0);
+		createEReference(aEClass, 1);
 
-		bEClass = createEClass(B);
-		createEReference(bEClass, B__OWNS_C);
+		bEClass = createEClass(1);
+		createEReference(bEClass, 1);
 
-		cEClass = createEClass(C);
+		cEClass = createEClass(2);
 
-		tRootEClass = createEClass(TROOT);
-		createEReference(tRootEClass, TROOT__OWNED_A);
+		tRootEClass = createEClass(3);
+		createEReference(tRootEClass, 0);
 
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+		namedElementEClass = createEClass(4);
+		createEAttribute(namedElementEClass, 0);
 
-		elementEClass = createEClass(ELEMENT);
+		elementEClass = createEClass(5);
 	}
 
 	/**

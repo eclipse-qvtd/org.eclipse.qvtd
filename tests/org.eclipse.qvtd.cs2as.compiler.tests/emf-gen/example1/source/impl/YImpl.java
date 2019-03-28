@@ -41,6 +41,24 @@ import example1.source.Z;
  */
 public abstract class YImpl extends SElementImpl implements Y {
 	/**
+	 * The number of structural features of the '<em>Y</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int Y_FEATURE_COUNT = SElementImpl.SELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Y</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int Y_OPERATION_COUNT = SElementImpl.SELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnsZ() <em>Owns Z</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,7 +126,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 		Z oldOwnsZ = ownsZ;
 		ownsZ = newOwnsZ;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SourcePackage.Y__OWNS_Z, oldOwnsZ, newOwnsZ);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldOwnsZ, newOwnsZ);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -124,14 +142,14 @@ public abstract class YImpl extends SElementImpl implements Y {
 		if (newOwnsZ != ownsZ) {
 			NotificationChain msgs = null;
 			if (ownsZ != null)
-				msgs = ((InternalEObject)ownsZ).eInverseRemove(this, SourcePackage.Z__TO_Y, Z.class, msgs);
+				msgs = ((InternalEObject)ownsZ).eInverseRemove(this, 1, Z.class, msgs);
 			if (newOwnsZ != null)
-				msgs = ((InternalEObject)newOwnsZ).eInverseAdd(this, SourcePackage.Z__TO_Y, Z.class, msgs);
+				msgs = ((InternalEObject)newOwnsZ).eInverseAdd(this, 1, Z.class, msgs);
 			msgs = basicSetOwnsZ(newOwnsZ, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.Y__OWNS_Z, newOwnsZ, newOwnsZ));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newOwnsZ, newOwnsZ));
 	}
 
 	/**
@@ -154,7 +172,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.Y__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldName, name));
 	}
 
 	/**
@@ -164,7 +182,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 	 */
 	@Override
 	public X getToX() {
-		if (eContainerFeatureID() != SourcePackage.Y__TO_X) return null;
+		if (eContainerFeatureID() != (3)) return null;
 		return (X)eInternalContainer();
 	}
 
@@ -174,7 +192,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 	 * @generated
 	 */
 	public NotificationChain basicSetToX(X newToX, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newToX, SourcePackage.Y__TO_X, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newToX, 3, msgs);
 		return msgs;
 	}
 
@@ -185,19 +203,19 @@ public abstract class YImpl extends SElementImpl implements Y {
 	 */
 	@Override
 	public void setToX(X newToX) {
-		if (newToX != eInternalContainer() || (eContainerFeatureID() != SourcePackage.Y__TO_X && newToX != null)) {
+		if (newToX != eInternalContainer() || (eContainerFeatureID() != (3) && newToX != null)) {
 			if (EcoreUtil.isAncestor(this, newToX))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newToX != null)
-				msgs = ((InternalEObject)newToX).eInverseAdd(this, SourcePackage.X__OWNS_Y, X.class, msgs);
+				msgs = ((InternalEObject)newToX).eInverseAdd(this, 1, X.class, msgs);
 			msgs = basicSetToX(newToX, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.Y__TO_X, newToX, newToX));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newToX, newToX));
 	}
 
 	/**
@@ -208,11 +226,11 @@ public abstract class YImpl extends SElementImpl implements Y {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SourcePackage.Y__OWNS_Z:
+			case 1:
 				if (ownsZ != null)
-					msgs = ((InternalEObject)ownsZ).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SourcePackage.Y__OWNS_Z, null, msgs);
+					msgs = ((InternalEObject)ownsZ).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (1), null, msgs);
 				return basicSetOwnsZ((Z)otherEnd, msgs);
-			case SourcePackage.Y__TO_X:
+			case 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetToX((X)otherEnd, msgs);
@@ -228,9 +246,9 @@ public abstract class YImpl extends SElementImpl implements Y {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SourcePackage.Y__OWNS_Z:
+			case 1:
 				return basicSetOwnsZ(null, msgs);
-			case SourcePackage.Y__TO_X:
+			case 3:
 				return basicSetToX(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -244,8 +262,8 @@ public abstract class YImpl extends SElementImpl implements Y {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case SourcePackage.Y__TO_X:
-				return eInternalContainer().eInverseRemove(this, SourcePackage.X__OWNS_Y, X.class, msgs);
+			case 3:
+				return eInternalContainer().eInverseRemove(this, 1, X.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -258,11 +276,11 @@ public abstract class YImpl extends SElementImpl implements Y {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SourcePackage.Y__OWNS_Z:
+			case 1:
 				return getOwnsZ();
-			case SourcePackage.Y__NAME:
+			case 2:
 				return getName();
-			case SourcePackage.Y__TO_X:
+			case 3:
 				return getToX();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -276,13 +294,13 @@ public abstract class YImpl extends SElementImpl implements Y {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SourcePackage.Y__OWNS_Z:
+			case 1:
 				setOwnsZ((Z)newValue);
 				return;
-			case SourcePackage.Y__NAME:
+			case 2:
 				setName((String)newValue);
 				return;
-			case SourcePackage.Y__TO_X:
+			case 3:
 				setToX((X)newValue);
 				return;
 		}
@@ -297,13 +315,13 @@ public abstract class YImpl extends SElementImpl implements Y {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SourcePackage.Y__OWNS_Z:
+			case 1:
 				setOwnsZ((Z)null);
 				return;
-			case SourcePackage.Y__NAME:
+			case 2:
 				setName(NAME_EDEFAULT);
 				return;
-			case SourcePackage.Y__TO_X:
+			case 3:
 				setToX((X)null);
 				return;
 		}
@@ -318,11 +336,11 @@ public abstract class YImpl extends SElementImpl implements Y {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SourcePackage.Y__OWNS_Z:
+			case 1:
 				return ownsZ != null;
-			case SourcePackage.Y__NAME:
+			case 2:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case SourcePackage.Y__TO_X:
+			case 3:
 				return getToX() != null;
 		}
 		return super.eIsSet(featureID);

@@ -44,6 +44,24 @@ import java.util.Collection;
  */
 public class ClassImpl extends NamedElementImpl implements example2.classes.Class {
 	/**
+	 * The number of structural features of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getSuperClass() <em>Super Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -103,7 +121,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 			superClass = (example2.classes.Class)eResolveProxy(oldSuperClass);
 			if (superClass != oldSuperClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassesPackage.CLASS__SUPER_CLASS, oldSuperClass, superClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldSuperClass, superClass));
 			}
 		}
 		return superClass;
@@ -128,7 +146,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 		example2.classes.Class oldSuperClass = superClass;
 		superClass = newSuperClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassesPackage.CLASS__SUPER_CLASS, oldSuperClass, superClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldSuperClass, superClass));
 	}
 
 	/**
@@ -139,7 +157,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	@Override
 	public EList<Operation> getOwnedOperations() {
 		if (ownedOperations == null) {
-			ownedOperations = new EObjectContainmentEList<Operation>(Operation.class, this, ClassesPackage.CLASS__OWNED_OPERATIONS);
+			ownedOperations = new EObjectContainmentEList<Operation>(Operation.class, this, 2);
 		}
 		return ownedOperations;
 	}
@@ -152,7 +170,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	@Override
 	public EList<Property> getOwnedProperties() {
 		if (ownedProperties == null) {
-			ownedProperties = new EObjectContainmentEList<Property>(Property.class, this, ClassesPackage.CLASS__OWNED_PROPERTIES);
+			ownedProperties = new EObjectContainmentEList<Property>(Property.class, this, 3);
 		}
 		return ownedProperties;
 	}
@@ -165,9 +183,9 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassesPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				return ((InternalEList<?>)getOwnedOperations()).basicRemove(otherEnd, msgs);
-			case ClassesPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				return ((InternalEList<?>)getOwnedProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -181,12 +199,12 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.CLASS__SUPER_CLASS:
+			case 1:
 				if (resolve) return getSuperClass();
 				return basicGetSuperClass();
-			case ClassesPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				return getOwnedOperations();
-			case ClassesPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				return getOwnedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -201,14 +219,14 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.CLASS__SUPER_CLASS:
+			case 1:
 				setSuperClass((example2.classes.Class)newValue);
 				return;
-			case ClassesPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				getOwnedOperations().clear();
 				getOwnedOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
-			case ClassesPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				getOwnedProperties().clear();
 				getOwnedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
@@ -224,13 +242,13 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.CLASS__SUPER_CLASS:
+			case 1:
 				setSuperClass((example2.classes.Class)null);
 				return;
-			case ClassesPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				getOwnedOperations().clear();
 				return;
-			case ClassesPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				getOwnedProperties().clear();
 				return;
 		}
@@ -245,11 +263,11 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.CLASS__SUPER_CLASS:
+			case 1:
 				return superClass != null;
-			case ClassesPackage.CLASS__OWNED_OPERATIONS:
+			case 2:
 				return ownedOperations != null && !ownedOperations.isEmpty();
-			case ClassesPackage.CLASS__OWNED_PROPERTIES:
+			case 3:
 				return ownedProperties != null && !ownedProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);

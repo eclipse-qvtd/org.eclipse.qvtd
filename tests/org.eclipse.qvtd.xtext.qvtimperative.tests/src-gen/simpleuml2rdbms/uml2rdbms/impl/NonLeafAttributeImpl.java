@@ -55,6 +55,24 @@ import simpleuml2rdbms.uml2rdbms.UmlToRdbmsModelElement;
  */
 public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonLeafAttribute {
 	/**
+	 * The number of structural features of the '<em>Non Leaf Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NON_LEAF_ATTRIBUTE_FEATURE_COUNT = FromAttributeOwnerImpl.FROM_ATTRIBUTE_OWNER_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Non Leaf Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NON_LEAF_ATTRIBUTE_OPERATION_COUNT = FromAttributeOwnerImpl.FROM_ATTRIBUTE_OWNER_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -153,7 +171,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -176,7 +194,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 		String oldKind = kind;
 		kind = newKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__KIND, oldKind, kind));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldKind, kind));
 	}
 
 	/**
@@ -191,7 +209,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 			attribute = (Attribute)eResolveProxy(oldAttribute);
 			if (attribute != oldAttribute) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldAttribute, attribute));
 			}
 		}
 		return attribute;
@@ -216,7 +234,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 		Attribute oldAttribute = attribute;
 		attribute = newAttribute;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldAttribute, attribute));
 	}
 
 	/**
@@ -227,7 +245,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	@Override
 	public EList<AttributeToColumn> getLeafs() {
 		if (leafs == null) {
-			leafs = new EObjectResolvingEList<AttributeToColumn>(AttributeToColumn.class, this, UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__LEAFS);
+			leafs = new EObjectResolvingEList<AttributeToColumn>(AttributeToColumn.class, this, 4);
 		}
 		return leafs;
 	}
@@ -239,7 +257,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 */
 	@Override
 	public FromAttributeOwner getOwner() {
-		if (eContainerFeatureID() != UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER) return null;
+		if (eContainerFeatureID() != (5)) return null;
 		return (FromAttributeOwner)eInternalContainer();
 	}
 
@@ -249,7 +267,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(FromAttributeOwner newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 5, msgs);
 		return msgs;
 	}
 
@@ -260,19 +278,19 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 */
 	@Override
 	public void setOwner(FromAttributeOwner newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (5) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES, FromAttributeOwner.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 0, FromAttributeOwner.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, newOwner, newOwner));
 	}
 
 	/**
@@ -283,7 +301,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER:
+			case 5:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((FromAttributeOwner)otherEnd, msgs);
@@ -299,7 +317,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER:
+			case 5:
 				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -313,8 +331,8 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER:
-				return eInternalContainer().eInverseRemove(this, UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES, FromAttributeOwner.class, msgs);
+			case 5:
+				return eInternalContainer().eInverseRemove(this, 0, FromAttributeOwner.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -327,16 +345,16 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__NAME:
+			case 1:
 				return getName();
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__KIND:
+			case 2:
 				return getKind();
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__ATTRIBUTE:
+			case 3:
 				if (resolve) return getAttribute();
 				return basicGetAttribute();
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__LEAFS:
+			case 4:
 				return getLeafs();
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER:
+			case 5:
 				return getOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -351,20 +369,20 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__KIND:
+			case 2:
 				setKind((String)newValue);
 				return;
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__ATTRIBUTE:
+			case 3:
 				setAttribute((Attribute)newValue);
 				return;
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__LEAFS:
+			case 4:
 				getLeafs().clear();
 				getLeafs().addAll((Collection<? extends AttributeToColumn>)newValue);
 				return;
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER:
+			case 5:
 				setOwner((FromAttributeOwner)newValue);
 				return;
 		}
@@ -379,19 +397,19 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__KIND:
+			case 2:
 				setKind(KIND_EDEFAULT);
 				return;
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__ATTRIBUTE:
+			case 3:
 				setAttribute((Attribute)null);
 				return;
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__LEAFS:
+			case 4:
 				getLeafs().clear();
 				return;
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER:
+			case 5:
 				setOwner((FromAttributeOwner)null);
 				return;
 		}
@@ -406,15 +424,15 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__KIND:
+			case 2:
 				return KIND_EDEFAULT == null ? kind != null : !KIND_EDEFAULT.equals(kind);
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__ATTRIBUTE:
+			case 3:
 				return attribute != null;
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__LEAFS:
+			case 4:
 				return leafs != null && !leafs.isEmpty();
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER:
+			case 5:
 				return getOwner() != null;
 		}
 		return super.eIsSet(featureID);
@@ -429,16 +447,16 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == UmlToRdbmsModelElement.class) {
 			switch (derivedFeatureID) {
-				case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__NAME: return UML2RDBMSPackage.UML_TO_RDBMS_MODEL_ELEMENT__NAME;
+				case 1: return 0;
 				default: return -1;
 			}
 		}
 		if (baseClass == FromAttribute.class) {
 			switch (derivedFeatureID) {
-				case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__KIND: return UML2RDBMSPackage.FROM_ATTRIBUTE__KIND;
-				case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__ATTRIBUTE: return UML2RDBMSPackage.FROM_ATTRIBUTE__ATTRIBUTE;
-				case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__LEAFS: return UML2RDBMSPackage.FROM_ATTRIBUTE__LEAFS;
-				case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER: return UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER;
+				case 2: return 1;
+				case 3: return 2;
+				case 4: return 3;
+				case 5: return 4;
 				default: return -1;
 			}
 		}
@@ -454,16 +472,16 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == UmlToRdbmsModelElement.class) {
 			switch (baseFeatureID) {
-				case UML2RDBMSPackage.UML_TO_RDBMS_MODEL_ELEMENT__NAME: return UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__NAME;
+				case 0: return 1;
 				default: return -1;
 			}
 		}
 		if (baseClass == FromAttribute.class) {
 			switch (baseFeatureID) {
-				case UML2RDBMSPackage.FROM_ATTRIBUTE__KIND: return UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__KIND;
-				case UML2RDBMSPackage.FROM_ATTRIBUTE__ATTRIBUTE: return UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__ATTRIBUTE;
-				case UML2RDBMSPackage.FROM_ATTRIBUTE__LEAFS: return UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__LEAFS;
-				case UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER: return UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER;
+				case 1: return 2;
+				case 2: return 3;
+				case 3: return 4;
+				case 4: return 5;
 				default: return -1;
 			}
 		}

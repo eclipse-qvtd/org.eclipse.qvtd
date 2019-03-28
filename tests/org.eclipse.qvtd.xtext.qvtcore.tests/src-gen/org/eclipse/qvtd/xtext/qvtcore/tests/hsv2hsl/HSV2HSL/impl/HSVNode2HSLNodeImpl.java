@@ -51,6 +51,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSVTree.HSVNode;
  */
 public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements HSVNode2HSLNode {
 	/**
+	 * The number of structural features of the '<em>HSV Node2 HSL Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int HSV_NODE2_HSL_NODE_FEATURE_COUNT = 6;
+
+	/**
+	 * The number of operations of the '<em>HSV Node2 HSL Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int HSV_NODE2_HSL_NODE_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,7 +164,7 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public HSVNode2HSLNode getParent() {
-		if (eContainerFeatureID() != HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT) return null;
+		if (eContainerFeatureID() != (0)) return null;
 		return (HSVNode2HSLNode)eInternalContainer();
 	}
 
@@ -156,7 +174,7 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(HSVNode2HSLNode newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParent, HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newParent, 0, msgs);
 		return msgs;
 	}
 
@@ -167,19 +185,19 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public void setParent(HSVNode2HSLNode newParent) {
-		if (newParent != eInternalContainer() || (eContainerFeatureID() != HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT && newParent != null)) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != (0) && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, HSV2HSLPackage.HSV_NODE2_HSL_NODE__CHILDREN, HSVNode2HSLNode.class, msgs);
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, 1, HSVNode2HSLNode.class, msgs);
 			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT, newParent, newParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, newParent, newParent));
 	}
 
 	/**
@@ -190,7 +208,7 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public EList<HSVNode2HSLNode> getChildren() {
 		if (children == null) {
-			children = new EObjectContainmentWithInverseEList<HSVNode2HSLNode>(HSVNode2HSLNode.class, this, HSV2HSLPackage.HSV_NODE2_HSL_NODE__CHILDREN, HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT);
+			children = new EObjectContainmentWithInverseEList<HSVNode2HSLNode>(HSVNode2HSLNode.class, this, 1, 0);
 		}
 		return children;
 	}
@@ -207,7 +225,7 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 			hsv = (HSVNode)eResolveProxy(oldHsv);
 			if (hsv != oldHsv) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSV, oldHsv, hsv));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldHsv, hsv));
 			}
 		}
 		return hsv;
@@ -232,7 +250,7 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 		HSVNode oldHsv = hsv;
 		hsv = newHsv;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSV, oldHsv, hsv));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldHsv, hsv));
 	}
 
 	/**
@@ -247,7 +265,7 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 			hsl = (HSLNode)eResolveProxy(oldHsl);
 			if (hsl != oldHsl) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSL, oldHsl, hsl));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldHsl, hsl));
 			}
 		}
 		return hsl;
@@ -272,7 +290,7 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 		HSLNode oldHsl = hsl;
 		hsl = newHsl;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSL, oldHsl, hsl));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldHsl, hsl));
 	}
 
 	/**
@@ -295,7 +313,7 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 		String oldRgb = rgb;
 		rgb = newRgb;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HSV2HSLPackage.HSV_NODE2_HSL_NODE__RGB, oldRgb, rgb));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldRgb, rgb));
 	}
 
 	/**
@@ -318,7 +336,7 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HSV2HSLPackage.HSV_NODE2_HSL_NODE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldName, name));
 	}
 
 	/**
@@ -330,11 +348,11 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT:
+			case 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParent((HSVNode2HSLNode)otherEnd, msgs);
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__CHILDREN:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChildren()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -348,9 +366,9 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT:
+			case 0:
 				return basicSetParent(null, msgs);
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__CHILDREN:
+			case 1:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -364,8 +382,8 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT:
-				return eInternalContainer().eInverseRemove(this, HSV2HSLPackage.HSV_NODE2_HSL_NODE__CHILDREN, HSVNode2HSLNode.class, msgs);
+			case 0:
+				return eInternalContainer().eInverseRemove(this, 1, HSVNode2HSLNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -378,19 +396,19 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT:
+			case 0:
 				return getParent();
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__CHILDREN:
+			case 1:
 				return getChildren();
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSV:
+			case 2:
 				if (resolve) return getHsv();
 				return basicGetHsv();
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSL:
+			case 3:
 				if (resolve) return getHsl();
 				return basicGetHsl();
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__RGB:
+			case 4:
 				return getRgb();
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__NAME:
+			case 5:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -405,23 +423,23 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT:
+			case 0:
 				setParent((HSVNode2HSLNode)newValue);
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__CHILDREN:
+			case 1:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends HSVNode2HSLNode>)newValue);
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSV:
+			case 2:
 				setHsv((HSVNode)newValue);
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSL:
+			case 3:
 				setHsl((HSLNode)newValue);
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__RGB:
+			case 4:
 				setRgb((String)newValue);
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__NAME:
+			case 5:
 				setName((String)newValue);
 				return;
 		}
@@ -436,22 +454,22 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT:
+			case 0:
 				setParent((HSVNode2HSLNode)null);
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__CHILDREN:
+			case 1:
 				getChildren().clear();
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSV:
+			case 2:
 				setHsv((HSVNode)null);
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSL:
+			case 3:
 				setHsl((HSLNode)null);
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__RGB:
+			case 4:
 				setRgb(RGB_EDEFAULT);
 				return;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__NAME:
+			case 5:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -466,17 +484,17 @@ public class HSVNode2HSLNodeImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__PARENT:
+			case 0:
 				return getParent() != null;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__CHILDREN:
+			case 1:
 				return children != null && !children.isEmpty();
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSV:
+			case 2:
 				return hsv != null;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__HSL:
+			case 3:
 				return hsl != null;
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__RGB:
+			case 4:
 				return RGB_EDEFAULT == null ? rgb != null : !RGB_EDEFAULT.equals(rgb);
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE__NAME:
+			case 5:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

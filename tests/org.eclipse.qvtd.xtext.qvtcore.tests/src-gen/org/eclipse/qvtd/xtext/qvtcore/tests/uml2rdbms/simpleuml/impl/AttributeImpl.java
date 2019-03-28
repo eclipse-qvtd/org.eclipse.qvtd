@@ -40,6 +40,22 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage
  */
 public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	/**
+	 * The number of structural features of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ATTRIBUTE_FEATURE_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	/**
+	 * The number of operations of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ATTRIBUTE_OPERATION_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,7 +91,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 */
 	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class getOwner() {
-		if (eContainerFeatureID() != SimpleumlPackage.ATTRIBUTE__OWNER) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)eInternalContainer();
 	}
 
@@ -85,7 +101,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, SimpleumlPackage.ATTRIBUTE__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 2, msgs);
 		return msgs;
 	}
 
@@ -96,19 +112,19 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 */
 	@Override
 	public void setOwner(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != SimpleumlPackage.ATTRIBUTE__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (2) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, SimpleumlPackage.CLASS__ATTRIBUTES, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 4, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimpleumlPackage.ATTRIBUTE__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwner, newOwner));
 	}
 
 	/**
@@ -123,7 +139,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 			type = (Classifier)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimpleumlPackage.ATTRIBUTE__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldType, type));
 			}
 		}
 		return type;
@@ -147,7 +163,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 		Classifier oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimpleumlPackage.ATTRIBUTE__TYPE, oldType, newType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 3, oldType, newType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -163,14 +179,14 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, SimpleumlPackage.CLASSIFIER__TYPE_OPPOSITE, Classifier.class, msgs);
+				msgs = ((InternalEObject)type).eInverseRemove(this, 3, Classifier.class, msgs);
 			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, SimpleumlPackage.CLASSIFIER__TYPE_OPPOSITE, Classifier.class, msgs);
+				msgs = ((InternalEObject)newType).eInverseAdd(this, 3, Classifier.class, msgs);
 			msgs = basicSetType(newType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimpleumlPackage.ATTRIBUTE__TYPE, newType, newType));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newType, newType));
 	}
 
 	/**
@@ -181,13 +197,13 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.ATTRIBUTE__OWNER:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)otherEnd, msgs);
-			case SimpleumlPackage.ATTRIBUTE__TYPE:
+			case 3:
 				if (type != null)
-					msgs = ((InternalEObject)type).eInverseRemove(this, SimpleumlPackage.CLASSIFIER__TYPE_OPPOSITE, Classifier.class, msgs);
+					msgs = ((InternalEObject)type).eInverseRemove(this, 3, Classifier.class, msgs);
 				return basicSetType((Classifier)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -201,9 +217,9 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimpleumlPackage.ATTRIBUTE__OWNER:
+			case 2:
 				return basicSetOwner(null, msgs);
-			case SimpleumlPackage.ATTRIBUTE__TYPE:
+			case 3:
 				return basicSetType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -217,8 +233,8 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case SimpleumlPackage.ATTRIBUTE__OWNER:
-				return eInternalContainer().eInverseRemove(this, SimpleumlPackage.CLASS__ATTRIBUTES, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 4, org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -231,9 +247,9 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SimpleumlPackage.ATTRIBUTE__OWNER:
+			case 2:
 				return getOwner();
-			case SimpleumlPackage.ATTRIBUTE__TYPE:
+			case 3:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -248,10 +264,10 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SimpleumlPackage.ATTRIBUTE__OWNER:
+			case 2:
 				setOwner((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)newValue);
 				return;
-			case SimpleumlPackage.ATTRIBUTE__TYPE:
+			case 3:
 				setType((Classifier)newValue);
 				return;
 		}
@@ -266,10 +282,10 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.ATTRIBUTE__OWNER:
+			case 2:
 				setOwner((org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)null);
 				return;
-			case SimpleumlPackage.ATTRIBUTE__TYPE:
+			case 3:
 				setType((Classifier)null);
 				return;
 		}
@@ -284,9 +300,9 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SimpleumlPackage.ATTRIBUTE__OWNER:
+			case 2:
 				return getOwner() != null;
-			case SimpleumlPackage.ATTRIBUTE__TYPE:
+			case 3:
 				return type != null;
 		}
 		return super.eIsSet(featureID);

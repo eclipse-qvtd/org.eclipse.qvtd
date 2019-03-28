@@ -64,7 +64,7 @@ public class Tree2talltreeFactoryImpl extends EFactoryImpl implements Tree2tallt
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case Tree2talltreePackage.NODE2_TALL_NODE: return createNode2TallNode();
+			case 0: return createNode2TallNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

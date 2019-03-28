@@ -38,6 +38,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class B2Impl extends BImpl implements B2 {
 	/**
+	 * The number of structural features of the '<em>B2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int B2_FEATURE_COUNT = BImpl.B_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>B2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int B2_OPERATION_COUNT = BImpl.B_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getAnotherName() <em>Another Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,7 +114,7 @@ public class B2Impl extends BImpl implements B2 {
 		String oldAnotherName = anotherName;
 		anotherName = newAnotherName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TderivedPackage.B2__ANOTHER_NAME, oldAnotherName, anotherName));
+			eNotify(new ENotificationImpl(this, Notification.SET, BImpl.B_FEATURE_COUNT + 0, oldAnotherName, anotherName));
 	}
 
 	/**
@@ -107,7 +125,7 @@ public class B2Impl extends BImpl implements B2 {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TderivedPackage.B2__ANOTHER_NAME:
+			case BImpl.B_FEATURE_COUNT + 0:
 				return getAnotherName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,7 +139,7 @@ public class B2Impl extends BImpl implements B2 {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TderivedPackage.B2__ANOTHER_NAME:
+			case BImpl.B_FEATURE_COUNT + 0:
 				setAnotherName((String)newValue);
 				return;
 		}
@@ -136,7 +154,7 @@ public class B2Impl extends BImpl implements B2 {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TderivedPackage.B2__ANOTHER_NAME:
+			case BImpl.B_FEATURE_COUNT + 0:
 				setAnotherName(ANOTHER_NAME_EDEFAULT);
 				return;
 		}
@@ -151,7 +169,7 @@ public class B2Impl extends BImpl implements B2 {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TderivedPackage.B2__ANOTHER_NAME:
+			case BImpl.B_FEATURE_COUNT + 0:
 				return ANOTHER_NAME_EDEFAULT == null ? anotherName != null : !ANOTHER_NAME_EDEFAULT.equals(anotherName);
 		}
 		return super.eIsSet(featureID);

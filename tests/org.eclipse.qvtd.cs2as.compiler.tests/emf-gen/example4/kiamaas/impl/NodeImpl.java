@@ -37,6 +37,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public abstract class NodeImpl extends ElementImpl implements Node {
 	/**
+	 * The number of structural features of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getHeight() <em>Height</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,7 +133,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		Integer oldHeight = height;
 		height = newHeight;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.NODE__HEIGHT, oldHeight, height));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldHeight, height));
 	}
 
 	/**
@@ -138,7 +156,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		Integer oldDepth = depth;
 		depth = newDepth;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.NODE__DEPTH, oldDepth, depth));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldDepth, depth));
 	}
 
 	/**
@@ -149,9 +167,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KiamaasPackage.NODE__HEIGHT:
+			case 0:
 				return getHeight();
-			case KiamaasPackage.NODE__DEPTH:
+			case 1:
 				return getDepth();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -165,10 +183,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KiamaasPackage.NODE__HEIGHT:
+			case 0:
 				setHeight((Integer)newValue);
 				return;
-			case KiamaasPackage.NODE__DEPTH:
+			case 1:
 				setDepth((Integer)newValue);
 				return;
 		}
@@ -183,10 +201,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.NODE__HEIGHT:
+			case 0:
 				setHeight(HEIGHT_EDEFAULT);
 				return;
-			case KiamaasPackage.NODE__DEPTH:
+			case 1:
 				setDepth(DEPTH_EDEFAULT);
 				return;
 		}
@@ -201,9 +219,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.NODE__HEIGHT:
+			case 0:
 				return HEIGHT_EDEFAULT == null ? height != null : !HEIGHT_EDEFAULT.equals(height);
-			case KiamaasPackage.NODE__DEPTH:
+			case 1:
 				return DEPTH_EDEFAULT == null ? depth != null : !DEPTH_EDEFAULT.equals(depth);
 		}
 		return super.eIsSet(featureID);

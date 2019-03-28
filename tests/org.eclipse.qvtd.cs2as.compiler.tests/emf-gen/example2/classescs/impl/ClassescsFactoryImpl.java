@@ -71,16 +71,16 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ClassescsPackage.PACKAGE_CS: return createPackageCS();
-			case ClassescsPackage.CLASS_CS: return createClassCS();
-			case ClassescsPackage.PATH_NAME_CS: return createPathNameCS();
-			case ClassescsPackage.PATH_ELEMENT_CS: return createPathElementCS();
-			case ClassescsPackage.ROOT_CS: return createRootCS();
-			case ClassescsPackage.PROPERTY_CS: return createPropertyCS();
-			case ClassescsPackage.OPERATION_CS: return createOperationCS();
-			case ClassescsPackage.NAME_EXP_CS: return createNameExpCS();
-			case ClassescsPackage.ROUNDED_BRACKET_CLAUSE: return createRoundedBracketClause();
-			case ClassescsPackage.ARGUMENT_CS: return createArgumentCS();
+			case 2: return createPackageCS();
+			case 3: return createClassCS();
+			case 4: return createPathNameCS();
+			case 5: return createPathElementCS();
+			case 6: return createRootCS();
+			case 7: return createPropertyCS();
+			case 8: return createOperationCS();
+			case 9: return createNameExpCS();
+			case 10: return createRoundedBracketClause();
+			case 11: return createArgumentCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

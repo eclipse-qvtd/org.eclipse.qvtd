@@ -82,7 +82,7 @@ public class TderivedSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TderivedPackage.A2: {
+			case 0: {
 				A2 a2 = (A2)theEObject;
 				T result = caseA2(a2);
 				if (result == null) result = caseA(a2);
@@ -91,7 +91,7 @@ public class TderivedSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TderivedPackage.B2: {
+			case 1: {
 				B2 b2 = (B2)theEObject;
 				T result = caseB2(b2);
 				if (result == null) result = caseB(b2);
@@ -100,7 +100,7 @@ public class TderivedSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TderivedPackage.D: {
+			case 2: {
 				D d = (D)theEObject;
 				T result = caseD(d);
 				if (result == null) result = caseElement(d);

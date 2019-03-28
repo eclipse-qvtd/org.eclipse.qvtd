@@ -40,6 +40,23 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphP
  */
 public abstract class ElementImpl extends MinimalEObjectImpl.Container implements Element {
 	/**
+	 * The number of structural features of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_FEATURE_COUNT = 1;
+	/**
+	 * The number of operations of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -65,7 +82,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 */
 	@Override
 	public Graph getGraph() {
-		if (eContainerFeatureID() != SimplegraphPackage.ELEMENT__GRAPH) return null;
+		if (eContainerFeatureID() != (0)) return null;
 		return (Graph)eInternalContainer();
 	}
 
@@ -75,7 +92,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 */
 	public NotificationChain basicSetGraph(Graph newGraph, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newGraph, SimplegraphPackage.ELEMENT__GRAPH, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newGraph, 0, msgs);
 		return msgs;
 	}
 
@@ -86,19 +103,19 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 */
 	@Override
 	public void setGraph(Graph newGraph) {
-		if (newGraph != eInternalContainer() || (eContainerFeatureID() != SimplegraphPackage.ELEMENT__GRAPH && newGraph != null)) {
+		if (newGraph != eInternalContainer() || (eContainerFeatureID() != (0) && newGraph != null)) {
 			if (EcoreUtil.isAncestor(this, newGraph))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newGraph != null)
-				msgs = ((InternalEObject)newGraph).eInverseAdd(this, SimplegraphPackage.GRAPH__ELEMENT, Graph.class, msgs);
+				msgs = ((InternalEObject)newGraph).eInverseAdd(this, 0, Graph.class, msgs);
 			msgs = basicSetGraph(newGraph, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimplegraphPackage.ELEMENT__GRAPH, newGraph, newGraph));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, newGraph, newGraph));
 	}
 
 	/**
@@ -109,7 +126,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimplegraphPackage.ELEMENT__GRAPH:
+			case 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetGraph((Graph)otherEnd, msgs);
@@ -125,7 +142,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimplegraphPackage.ELEMENT__GRAPH:
+			case 0:
 				return basicSetGraph(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -139,8 +156,8 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case SimplegraphPackage.ELEMENT__GRAPH:
-				return eInternalContainer().eInverseRemove(this, SimplegraphPackage.GRAPH__ELEMENT, Graph.class, msgs);
+			case 0:
+				return eInternalContainer().eInverseRemove(this, 0, Graph.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -153,7 +170,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SimplegraphPackage.ELEMENT__GRAPH:
+			case 0:
 				return getGraph();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -167,7 +184,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SimplegraphPackage.ELEMENT__GRAPH:
+			case 0:
 				setGraph((Graph)newValue);
 				return;
 		}
@@ -182,7 +199,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SimplegraphPackage.ELEMENT__GRAPH:
+			case 0:
 				setGraph((Graph)null);
 				return;
 		}
@@ -197,7 +214,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SimplegraphPackage.ELEMENT__GRAPH:
+			case 0:
 				return getGraph() != null;
 		}
 		return super.eIsSet(featureID);

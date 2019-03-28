@@ -47,6 +47,24 @@ import tree2talltree.tree.TreePackage;
  */
 public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	/**
+	 * The number of structural features of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -103,7 +121,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	@Override
 	public EList<Node> getChildren() {
 		if (children == null) {
-			children = new EObjectContainmentWithInverseEList<Node>(Node.class, this, TreePackage.NODE__CHILDREN, TreePackage.NODE__PARENT);
+			children = new EObjectContainmentWithInverseEList<Node>(Node.class, this, 0, 2);
 		}
 		return children;
 	}
@@ -128,7 +146,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TreePackage.NODE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -138,7 +156,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 */
 	@Override
 	public Node getParent() {
-		if (eContainerFeatureID() != TreePackage.NODE__PARENT) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (Node)eInternalContainer();
 	}
 
@@ -148,7 +166,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(Node newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParent, TreePackage.NODE__PARENT, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newParent, 2, msgs);
 		return msgs;
 	}
 
@@ -159,19 +177,19 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 */
 	@Override
 	public void setParent(Node newParent) {
-		if (newParent != eInternalContainer() || (eContainerFeatureID() != TreePackage.NODE__PARENT && newParent != null)) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != (2) && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, TreePackage.NODE__CHILDREN, Node.class, msgs);
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, 0, Node.class, msgs);
 			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TreePackage.NODE__PARENT, newParent, newParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newParent, newParent));
 	}
 
 	/**
@@ -183,9 +201,9 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TreePackage.NODE__CHILDREN:
+			case 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChildren()).basicAdd(otherEnd, msgs);
-			case TreePackage.NODE__PARENT:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParent((Node)otherEnd, msgs);
@@ -201,9 +219,9 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TreePackage.NODE__CHILDREN:
+			case 0:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
-			case TreePackage.NODE__PARENT:
+			case 2:
 				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -217,8 +235,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TreePackage.NODE__PARENT:
-				return eInternalContainer().eInverseRemove(this, TreePackage.NODE__CHILDREN, Node.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 0, Node.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -231,11 +249,11 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TreePackage.NODE__CHILDREN:
+			case 0:
 				return getChildren();
-			case TreePackage.NODE__NAME:
+			case 1:
 				return getName();
-			case TreePackage.NODE__PARENT:
+			case 2:
 				return getParent();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -250,14 +268,14 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TreePackage.NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends Node>)newValue);
 				return;
-			case TreePackage.NODE__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
-			case TreePackage.NODE__PARENT:
+			case 2:
 				setParent((Node)newValue);
 				return;
 		}
@@ -272,13 +290,13 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TreePackage.NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				return;
-			case TreePackage.NODE__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case TreePackage.NODE__PARENT:
+			case 2:
 				setParent((Node)null);
 				return;
 		}
@@ -293,11 +311,11 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TreePackage.NODE__CHILDREN:
+			case 0:
 				return children != null && !children.isEmpty();
-			case TreePackage.NODE__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TreePackage.NODE__PARENT:
+			case 2:
 				return getParent() != null;
 		}
 		return super.eIsSet(featureID);

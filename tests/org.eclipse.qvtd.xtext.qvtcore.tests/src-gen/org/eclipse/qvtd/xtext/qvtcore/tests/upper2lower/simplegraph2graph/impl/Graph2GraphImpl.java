@@ -50,6 +50,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simple
  */
 public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Graph2Graph {
 	/**
+	 * The number of structural features of the '<em>Graph2 Graph</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GRAPH2_GRAPH_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Graph2 Graph</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GRAPH2_GRAPH_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getGraph1() <em>Graph1</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,7 +148,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 			graph1 = (Graph)eResolveProxy(oldGraph1);
 			if (graph1 != oldGraph1) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH1, oldGraph1, graph1));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldGraph1, graph1));
 			}
 		}
 		return graph1;
@@ -155,7 +173,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 		Graph oldGraph1 = graph1;
 		graph1 = newGraph1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH1, oldGraph1, graph1));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldGraph1, graph1));
 	}
 
 	/**
@@ -170,7 +188,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 			graph2 = (Graph)eResolveProxy(oldGraph2);
 			if (graph2 != oldGraph2) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH2, oldGraph2, graph2));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldGraph2, graph2));
 			}
 		}
 		return graph2;
@@ -195,7 +213,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 		Graph oldGraph2 = graph2;
 		graph2 = newGraph2;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH2, oldGraph2, graph2));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldGraph2, graph2));
 	}
 
 	/**
@@ -206,7 +224,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public EList<Element2Element> getElement2Element() {
 		if (element2Element == null) {
-			element2Element = new EObjectContainmentWithInverseEList<Element2Element>(Element2Element.class, this, Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT, Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER);
+			element2Element = new EObjectContainmentWithInverseEList<Element2Element>(Element2Element.class, this, 2, 0);
 		}
 		return element2Element;
 	}
@@ -231,7 +249,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simplegraph2graphPackage.GRAPH2_GRAPH__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldName, name));
 	}
 
 	/**
@@ -243,7 +261,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getElement2Element()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -257,7 +275,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT:
+			case 2:
 				return ((InternalEList<?>)getElement2Element()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -271,15 +289,15 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH1:
+			case 0:
 				if (resolve) return getGraph1();
 				return basicGetGraph1();
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH2:
+			case 1:
 				if (resolve) return getGraph2();
 				return basicGetGraph2();
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT:
+			case 2:
 				return getElement2Element();
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__NAME:
+			case 3:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -294,17 +312,17 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH1:
+			case 0:
 				setGraph1((Graph)newValue);
 				return;
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH2:
+			case 1:
 				setGraph2((Graph)newValue);
 				return;
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT:
+			case 2:
 				getElement2Element().clear();
 				getElement2Element().addAll((Collection<? extends Element2Element>)newValue);
 				return;
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__NAME:
+			case 3:
 				setName((String)newValue);
 				return;
 		}
@@ -319,16 +337,16 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH1:
+			case 0:
 				setGraph1((Graph)null);
 				return;
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH2:
+			case 1:
 				setGraph2((Graph)null);
 				return;
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT:
+			case 2:
 				getElement2Element().clear();
 				return;
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__NAME:
+			case 3:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -343,13 +361,13 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH1:
+			case 0:
 				return graph1 != null;
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__GRAPH2:
+			case 1:
 				return graph2 != null;
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT:
+			case 2:
 				return element2Element != null && !element2Element.isEmpty();
-			case Simplegraph2graphPackage.GRAPH2_GRAPH__NAME:
+			case 3:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

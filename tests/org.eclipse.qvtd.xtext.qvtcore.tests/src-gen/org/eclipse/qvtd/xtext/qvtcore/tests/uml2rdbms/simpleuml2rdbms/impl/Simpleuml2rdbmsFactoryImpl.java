@@ -64,14 +64,14 @@ public class Simpleuml2rdbmsFactoryImpl extends EFactoryImpl implements Simpleum
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN: return createAttributeToColumn();
-			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY: return createAssociationToForeignKey();
-			case Simpleuml2rdbmsPackage.BOOLEAN_TO_BOOLEAN: return createBooleanToBoolean();
-			case Simpleuml2rdbmsPackage.CLASS_TO_TABLE: return createClassToTable();
-			case Simpleuml2rdbmsPackage.INTEGER_TO_NUMBER: return createIntegerToNumber();
-			case Simpleuml2rdbmsPackage.NON_LEAF_ATTRIBUTE: return createNonLeafAttribute();
-			case Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA: return createPackageToSchema();
-			case Simpleuml2rdbmsPackage.STRING_TO_VARCHAR: return createStringToVarchar();
+			case 0: return createAttributeToColumn();
+			case 1: return createAssociationToForeignKey();
+			case 2: return createBooleanToBoolean();
+			case 3: return createClassToTable();
+			case 6: return createIntegerToNumber();
+			case 7: return createNonLeafAttribute();
+			case 8: return createPackageToSchema();
+			case 10: return createStringToVarchar();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

@@ -45,6 +45,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class A2Impl extends AImpl implements A2 {
 	/**
+	 * The number of structural features of the '<em>A2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A2_FEATURE_COUNT = AImpl.A_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>A2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A2_OPERATION_COUNT = AImpl.A_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnsD() <em>Owns D</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -81,7 +97,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public EList<D> getOwnsD() {
 		if (ownsD == null) {
-			ownsD = new EObjectContainmentEList<D>(D.class, this, TderivedPackage.A2__OWNS_D);
+			ownsD = new EObjectContainmentEList<D>(D.class, this, AImpl.A_FEATURE_COUNT + 0);
 		}
 		return ownsD;
 	}
@@ -94,7 +110,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TderivedPackage.A2__OWNS_D:
+			case AImpl.A_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnsD()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -108,7 +124,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TderivedPackage.A2__OWNS_D:
+			case AImpl.A_FEATURE_COUNT + 0:
 				return getOwnsD();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -123,7 +139,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TderivedPackage.A2__OWNS_D:
+			case AImpl.A_FEATURE_COUNT + 0:
 				getOwnsD().clear();
 				getOwnsD().addAll((Collection<? extends D>)newValue);
 				return;
@@ -139,7 +155,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TderivedPackage.A2__OWNS_D:
+			case AImpl.A_FEATURE_COUNT + 0:
 				getOwnsD().clear();
 				return;
 		}
@@ -154,7 +170,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TderivedPackage.A2__OWNS_D:
+			case AImpl.A_FEATURE_COUNT + 0:
 				return ownsD != null && !ownsD.isEmpty();
 		}
 		return super.eIsSet(featureID);

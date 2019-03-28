@@ -27,6 +27,23 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class DImpl extends ElementImpl implements D {
 	/**
+	 * The number of structural features of the '<em>D</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int D_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>D</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int D_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

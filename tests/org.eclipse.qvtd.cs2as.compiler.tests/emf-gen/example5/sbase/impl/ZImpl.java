@@ -41,6 +41,23 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class ZImpl extends SElementImpl implements Z {
 	/**
+	 * The number of structural features of the '<em>Z</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int Z_FEATURE_COUNT = SElementImpl.SELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Z</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int Z_OPERATION_COUNT = SElementImpl.SELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -66,7 +83,7 @@ public class ZImpl extends SElementImpl implements Z {
 	 */
 	@Override
 	public Y getToY() {
-		if (eContainerFeatureID() != SbasePackage.Z__TO_Y) return null;
+		if (eContainerFeatureID() != (1)) return null;
 		return (Y)eInternalContainer();
 	}
 
@@ -76,7 +93,7 @@ public class ZImpl extends SElementImpl implements Z {
 	 * @generated
 	 */
 	public NotificationChain basicSetToY(Y newToY, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newToY, SbasePackage.Z__TO_Y, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newToY, 1, msgs);
 		return msgs;
 	}
 
@@ -87,19 +104,19 @@ public class ZImpl extends SElementImpl implements Z {
 	 */
 	@Override
 	public void setToY(Y newToY) {
-		if (newToY != eInternalContainer() || (eContainerFeatureID() != SbasePackage.Z__TO_Y && newToY != null)) {
+		if (newToY != eInternalContainer() || (eContainerFeatureID() != (1) && newToY != null)) {
 			if (EcoreUtil.isAncestor(this, newToY))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newToY != null)
-				msgs = ((InternalEObject)newToY).eInverseAdd(this, SbasePackage.Y__OWNS_Z, Y.class, msgs);
+				msgs = ((InternalEObject)newToY).eInverseAdd(this, 1, Y.class, msgs);
 			msgs = basicSetToY(newToY, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SbasePackage.Z__TO_Y, newToY, newToY));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newToY, newToY));
 	}
 
 	/**
@@ -110,7 +127,7 @@ public class ZImpl extends SElementImpl implements Z {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SbasePackage.Z__TO_Y:
+			case 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetToY((Y)otherEnd, msgs);
@@ -126,7 +143,7 @@ public class ZImpl extends SElementImpl implements Z {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SbasePackage.Z__TO_Y:
+			case 1:
 				return basicSetToY(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -140,8 +157,8 @@ public class ZImpl extends SElementImpl implements Z {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case SbasePackage.Z__TO_Y:
-				return eInternalContainer().eInverseRemove(this, SbasePackage.Y__OWNS_Z, Y.class, msgs);
+			case 1:
+				return eInternalContainer().eInverseRemove(this, 1, Y.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -154,7 +171,7 @@ public class ZImpl extends SElementImpl implements Z {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SbasePackage.Z__TO_Y:
+			case 1:
 				return getToY();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -168,7 +185,7 @@ public class ZImpl extends SElementImpl implements Z {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SbasePackage.Z__TO_Y:
+			case 1:
 				setToY((Y)newValue);
 				return;
 		}
@@ -183,7 +200,7 @@ public class ZImpl extends SElementImpl implements Z {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SbasePackage.Z__TO_Y:
+			case 1:
 				setToY((Y)null);
 				return;
 		}
@@ -198,7 +215,7 @@ public class ZImpl extends SElementImpl implements Z {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SbasePackage.Z__TO_Y:
+			case 1:
 				return getToY() != null;
 		}
 		return super.eIsSet(featureID);

@@ -43,6 +43,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class RoundedBracketClauseImpl extends ElementCSImpl implements RoundedBracketClause {
 	/**
+	 * The number of structural features of the '<em>Rounded Bracket Clause</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROUNDED_BRACKET_CLAUSE_FEATURE_COUNT = ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Rounded Bracket Clause</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROUNDED_BRACKET_CLAUSE_OPERATION_COUNT = ElementCSImpl.ELEMENT_CS_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getArgs() <em>Args</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,7 +94,7 @@ public class RoundedBracketClauseImpl extends ElementCSImpl implements RoundedBr
 	@Override
 	public EList<ArgumentCS> getArgs() {
 		if (args == null) {
-			args = new EObjectContainmentEList<ArgumentCS>(ArgumentCS.class, this, ClassescsPackage.ROUNDED_BRACKET_CLAUSE__ARGS);
+			args = new EObjectContainmentEList<ArgumentCS>(ArgumentCS.class, this, 1);
 		}
 		return args;
 	}
@@ -91,7 +107,7 @@ public class RoundedBracketClauseImpl extends ElementCSImpl implements RoundedBr
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassescsPackage.ROUNDED_BRACKET_CLAUSE__ARGS:
+			case 1:
 				return ((InternalEList<?>)getArgs()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -105,7 +121,7 @@ public class RoundedBracketClauseImpl extends ElementCSImpl implements RoundedBr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.ROUNDED_BRACKET_CLAUSE__ARGS:
+			case 1:
 				return getArgs();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -120,7 +136,7 @@ public class RoundedBracketClauseImpl extends ElementCSImpl implements RoundedBr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.ROUNDED_BRACKET_CLAUSE__ARGS:
+			case 1:
 				getArgs().clear();
 				getArgs().addAll((Collection<? extends ArgumentCS>)newValue);
 				return;
@@ -136,7 +152,7 @@ public class RoundedBracketClauseImpl extends ElementCSImpl implements RoundedBr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.ROUNDED_BRACKET_CLAUSE__ARGS:
+			case 1:
 				getArgs().clear();
 				return;
 		}
@@ -151,7 +167,7 @@ public class RoundedBracketClauseImpl extends ElementCSImpl implements RoundedBr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.ROUNDED_BRACKET_CLAUSE__ARGS:
+			case 1:
 				return args != null && !args.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -47,6 +47,24 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements PrimitiveToName {
 	/**
+	 * The number of structural features of the '<em>Primitive To Name</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRIMITIVE_TO_NAME_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Primitive To Name</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRIMITIVE_TO_NAME_OPERATION_COUNT = 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -122,7 +140,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public PackageToSchema getOwner() {
-		if (eContainerFeatureID() != UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER) return null;
+		if (eContainerFeatureID() != (0)) return null;
 		return (PackageToSchema)eInternalContainer();
 	}
 
@@ -132,7 +150,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(PackageToSchema newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, 0, msgs);
 		return msgs;
 	}
 
@@ -143,19 +161,19 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public void setOwner(PackageToSchema newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (0) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, UML2RDBMSPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES, PackageToSchema.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, 1, PackageToSchema.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, newOwner, newOwner));
 	}
 
 	/**
@@ -178,7 +196,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.PRIMITIVE_TO_NAME__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -193,7 +211,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 			primitive = (PrimitiveDataType)eResolveProxy(oldPrimitive);
 			if (primitive != oldPrimitive) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE, oldPrimitive, primitive));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldPrimitive, primitive));
 			}
 		}
 		return primitive;
@@ -218,7 +236,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 		PrimitiveDataType oldPrimitive = primitive;
 		primitive = newPrimitive;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE, oldPrimitive, primitive));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldPrimitive, primitive));
 	}
 
 	/**
@@ -241,7 +259,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 		String oldTypeName = typeName;
 		typeName = newTypeName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME, oldTypeName, typeName));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldTypeName, typeName));
 	}
 
 	/**
@@ -252,7 +270,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((PackageToSchema)otherEnd, msgs);
@@ -268,7 +286,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 0:
 				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -282,8 +300,8 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
-				return eInternalContainer().eInverseRemove(this, UML2RDBMSPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES, PackageToSchema.class, msgs);
+			case 0:
+				return eInternalContainer().eInverseRemove(this, 1, PackageToSchema.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -296,14 +314,14 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 0:
 				return getOwner();
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__NAME:
+			case 1:
 				return getName();
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE:
+			case 2:
 				if (resolve) return getPrimitive();
 				return basicGetPrimitive();
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME:
+			case 3:
 				return getTypeName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -317,16 +335,16 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 0:
 				setOwner((PackageToSchema)newValue);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE:
+			case 2:
 				setPrimitive((PrimitiveDataType)newValue);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME:
+			case 3:
 				setTypeName((String)newValue);
 				return;
 		}
@@ -341,16 +359,16 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 0:
 				setOwner((PackageToSchema)null);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE:
+			case 2:
 				setPrimitive((PrimitiveDataType)null);
 				return;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME:
+			case 3:
 				setTypeName(TYPE_NAME_EDEFAULT);
 				return;
 		}
@@ -365,13 +383,13 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER:
+			case 0:
 				return getOwner() != null;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__PRIMITIVE:
+			case 2:
 				return primitive != null;
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME__TYPE_NAME:
+			case 3:
 				return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
 		}
 		return super.eIsSet(featureID);

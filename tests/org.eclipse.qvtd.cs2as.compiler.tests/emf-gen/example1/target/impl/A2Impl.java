@@ -41,6 +41,22 @@ import example1.target.util.Visitor;
  */
 public class A2Impl extends AImpl implements A2 {
 	/**
+	 * The number of structural features of the '<em>A2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A2_FEATURE_COUNT = AImpl.A_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>A2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int A2_OPERATION_COUNT = AImpl.A_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnsC() <em>Owns C</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +93,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public EList<C> getOwnsC() {
 		if (ownsC == null) {
-			ownsC = new EObjectContainmentWithInverseEList<C>(C.class, this, TargetPackage.A2__OWNS_C, TargetPackage.C__TO_A2);
+			ownsC = new EObjectContainmentWithInverseEList<C>(C.class, this, 1, 1);
 		}
 		return ownsC;
 	}
@@ -91,7 +107,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TargetPackage.A2__OWNS_C:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnsC()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -105,7 +121,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TargetPackage.A2__OWNS_C:
+			case 1:
 				return ((InternalEList<?>)getOwnsC()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -119,7 +135,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TargetPackage.A2__OWNS_C:
+			case 1:
 				return getOwnsC();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -134,7 +150,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TargetPackage.A2__OWNS_C:
+			case 1:
 				getOwnsC().clear();
 				getOwnsC().addAll((Collection<? extends C>)newValue);
 				return;
@@ -150,7 +166,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TargetPackage.A2__OWNS_C:
+			case 1:
 				getOwnsC().clear();
 				return;
 		}
@@ -165,7 +181,7 @@ public class A2Impl extends AImpl implements A2 {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TargetPackage.A2__OWNS_C:
+			case 1:
 				return ownsC != null && !ownsC.isEmpty();
 		}
 		return super.eIsSet(featureID);

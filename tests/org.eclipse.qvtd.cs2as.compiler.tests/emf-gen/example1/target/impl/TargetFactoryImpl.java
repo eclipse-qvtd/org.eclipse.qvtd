@@ -74,15 +74,15 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TargetPackage.A1: return createA1();
-			case TargetPackage.A2: return createA2();
-			case TargetPackage.A3: return createA3();
-			case TargetPackage.B: return createB();
-			case TargetPackage.C: return createC();
-			case TargetPackage.D: return createD();
-			case TargetPackage.TROOT: return createTRoot();
-			case TargetPackage.NAMED_ELEMENT: return createNamedElement();
-			case TargetPackage.NAMESPACE: return createNamespace();
+			case 1: return createA1();
+			case 2: return createA2();
+			case 3: return createA3();
+			case 4: return createB();
+			case 5: return createC();
+			case 6: return createD();
+			case 7: return createTRoot();
+			case 8: return createNamedElement();
+			case 9: return createNamespace();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

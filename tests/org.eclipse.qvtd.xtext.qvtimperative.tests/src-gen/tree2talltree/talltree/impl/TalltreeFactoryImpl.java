@@ -64,7 +64,7 @@ public class TalltreeFactoryImpl extends EFactoryImpl implements TalltreeFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TalltreePackage.TALL_NODE: return createTallNode();
+			case 0: return createTallNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

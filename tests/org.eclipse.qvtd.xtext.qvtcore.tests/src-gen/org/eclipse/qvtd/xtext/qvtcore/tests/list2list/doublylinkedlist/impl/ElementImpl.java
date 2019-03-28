@@ -43,6 +43,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.Element;
  */
 public class ElementImpl extends MinimalEObjectImpl.Container implements Element {
 	/**
+	 * The number of structural features of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,7 +126,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 */
 	@Override
 	public DoublyLinkedList getList() {
-		if (eContainerFeatureID() != DoublylinkedlistPackage.ELEMENT__LIST) return null;
+		if (eContainerFeatureID() != (0)) return null;
 		return (DoublyLinkedList)eInternalContainer();
 	}
 
@@ -118,7 +136,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 * @generated
 	 */
 	public NotificationChain basicSetList(DoublyLinkedList newList, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newList, DoublylinkedlistPackage.ELEMENT__LIST, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newList, 0, msgs);
 		return msgs;
 	}
 
@@ -129,19 +147,19 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 */
 	@Override
 	public void setList(DoublyLinkedList newList) {
-		if (newList != eInternalContainer() || (eContainerFeatureID() != DoublylinkedlistPackage.ELEMENT__LIST && newList != null)) {
+		if (newList != eInternalContainer() || (eContainerFeatureID() != (0) && newList != null)) {
 			if (EcoreUtil.isAncestor(this, newList))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newList != null)
-				msgs = ((InternalEObject)newList).eInverseAdd(this, DoublylinkedlistPackage.DOUBLY_LINKED_LIST__OWNED_ELEMENTS, DoublyLinkedList.class, msgs);
+				msgs = ((InternalEObject)newList).eInverseAdd(this, 2, DoublyLinkedList.class, msgs);
 			msgs = basicSetList(newList, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DoublylinkedlistPackage.ELEMENT__LIST, newList, newList));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, newList, newList));
 	}
 
 	/**
@@ -164,7 +182,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DoublylinkedlistPackage.ELEMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -179,7 +197,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 			source = (Element)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DoublylinkedlistPackage.ELEMENT__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldSource, source));
 			}
 		}
 		return source;
@@ -203,7 +221,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 		Element oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DoublylinkedlistPackage.ELEMENT__SOURCE, oldSource, newSource);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldSource, newSource);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -219,14 +237,14 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, DoublylinkedlistPackage.ELEMENT__TARGET, Element.class, msgs);
+				msgs = ((InternalEObject)source).eInverseRemove(this, 3, Element.class, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, DoublylinkedlistPackage.ELEMENT__TARGET, Element.class, msgs);
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, 3, Element.class, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DoublylinkedlistPackage.ELEMENT__SOURCE, newSource, newSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newSource, newSource));
 	}
 
 	/**
@@ -241,7 +259,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 			target = (Element)eResolveProxy(oldTarget);
 			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DoublylinkedlistPackage.ELEMENT__TARGET, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldTarget, target));
 			}
 		}
 		return target;
@@ -265,7 +283,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 		Element oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DoublylinkedlistPackage.ELEMENT__TARGET, oldTarget, newTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 3, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -281,14 +299,14 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, DoublylinkedlistPackage.ELEMENT__SOURCE, Element.class, msgs);
+				msgs = ((InternalEObject)target).eInverseRemove(this, 2, Element.class, msgs);
 			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, DoublylinkedlistPackage.ELEMENT__SOURCE, Element.class, msgs);
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, 2, Element.class, msgs);
 			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DoublylinkedlistPackage.ELEMENT__TARGET, newTarget, newTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newTarget, newTarget));
 	}
 
 	/**
@@ -299,17 +317,17 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.ELEMENT__LIST:
+			case 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetList((DoublyLinkedList)otherEnd, msgs);
-			case DoublylinkedlistPackage.ELEMENT__SOURCE:
+			case 2:
 				if (source != null)
-					msgs = ((InternalEObject)source).eInverseRemove(this, DoublylinkedlistPackage.ELEMENT__TARGET, Element.class, msgs);
+					msgs = ((InternalEObject)source).eInverseRemove(this, 3, Element.class, msgs);
 				return basicSetSource((Element)otherEnd, msgs);
-			case DoublylinkedlistPackage.ELEMENT__TARGET:
+			case 3:
 				if (target != null)
-					msgs = ((InternalEObject)target).eInverseRemove(this, DoublylinkedlistPackage.ELEMENT__SOURCE, Element.class, msgs);
+					msgs = ((InternalEObject)target).eInverseRemove(this, 2, Element.class, msgs);
 				return basicSetTarget((Element)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -323,11 +341,11 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.ELEMENT__LIST:
+			case 0:
 				return basicSetList(null, msgs);
-			case DoublylinkedlistPackage.ELEMENT__SOURCE:
+			case 2:
 				return basicSetSource(null, msgs);
-			case DoublylinkedlistPackage.ELEMENT__TARGET:
+			case 3:
 				return basicSetTarget(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -341,8 +359,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case DoublylinkedlistPackage.ELEMENT__LIST:
-				return eInternalContainer().eInverseRemove(this, DoublylinkedlistPackage.DOUBLY_LINKED_LIST__OWNED_ELEMENTS, DoublyLinkedList.class, msgs);
+			case 0:
+				return eInternalContainer().eInverseRemove(this, 2, DoublyLinkedList.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -355,14 +373,14 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.ELEMENT__LIST:
+			case 0:
 				return getList();
-			case DoublylinkedlistPackage.ELEMENT__NAME:
+			case 1:
 				return getName();
-			case DoublylinkedlistPackage.ELEMENT__SOURCE:
+			case 2:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case DoublylinkedlistPackage.ELEMENT__TARGET:
+			case 3:
 				if (resolve) return getTarget();
 				return basicGetTarget();
 		}
@@ -377,16 +395,16 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.ELEMENT__LIST:
+			case 0:
 				setList((DoublyLinkedList)newValue);
 				return;
-			case DoublylinkedlistPackage.ELEMENT__NAME:
+			case 1:
 				setName((String)newValue);
 				return;
-			case DoublylinkedlistPackage.ELEMENT__SOURCE:
+			case 2:
 				setSource((Element)newValue);
 				return;
-			case DoublylinkedlistPackage.ELEMENT__TARGET:
+			case 3:
 				setTarget((Element)newValue);
 				return;
 		}
@@ -401,16 +419,16 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.ELEMENT__LIST:
+			case 0:
 				setList((DoublyLinkedList)null);
 				return;
-			case DoublylinkedlistPackage.ELEMENT__NAME:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case DoublylinkedlistPackage.ELEMENT__SOURCE:
+			case 2:
 				setSource((Element)null);
 				return;
-			case DoublylinkedlistPackage.ELEMENT__TARGET:
+			case 3:
 				setTarget((Element)null);
 				return;
 		}
@@ -425,13 +443,13 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DoublylinkedlistPackage.ELEMENT__LIST:
+			case 0:
 				return getList() != null;
-			case DoublylinkedlistPackage.ELEMENT__NAME:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case DoublylinkedlistPackage.ELEMENT__SOURCE:
+			case 2:
 				return source != null;
-			case DoublylinkedlistPackage.ELEMENT__TARGET:
+			case 3:
 				return target != null;
 		}
 		return super.eIsSet(featureID);

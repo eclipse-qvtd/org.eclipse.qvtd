@@ -229,15 +229,15 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 		isCreated = true;
 
 		// Create classes and their features
-		memberToPersonEClass = createEClass(MEMBER_TO_PERSON);
-		createEReference(memberToPersonEClass, MEMBER_TO_PERSON__MEMBER);
-		createEReference(memberToPersonEClass, MEMBER_TO_PERSON__PERSON);
-		createEAttribute(memberToPersonEClass, MEMBER_TO_PERSON__FIRST_NAME);
-		createEAttribute(memberToPersonEClass, MEMBER_TO_PERSON__FAMILY_NAME);
+		memberToPersonEClass = createEClass(0);
+		createEReference(memberToPersonEClass, 0);
+		createEReference(memberToPersonEClass, 1);
+		createEAttribute(memberToPersonEClass, 2);
+		createEAttribute(memberToPersonEClass, 3);
 
-		member2MaleEClass = createEClass(MEMBER2_MALE);
+		member2MaleEClass = createEClass(1);
 
-		member2FemaleEClass = createEClass(MEMBER2_FEMALE);
+		member2FemaleEClass = createEClass(2);
 	}
 
 	/**

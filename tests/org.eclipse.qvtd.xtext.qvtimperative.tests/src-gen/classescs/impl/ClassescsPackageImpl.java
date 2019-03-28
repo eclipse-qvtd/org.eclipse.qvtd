@@ -323,25 +323,25 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		isCreated = true;
 
 		// Create classes and their features
-		elementCSEClass = createEClass(ELEMENT_CS);
-		createEReference(elementCSEClass, ELEMENT_CS__AST);
+		elementCSEClass = createEClass(0);
+		createEReference(elementCSEClass, 0);
 
-		namedElementCSEClass = createEClass(NAMED_ELEMENT_CS);
-		createEAttribute(namedElementCSEClass, NAMED_ELEMENT_CS__NAME);
+		namedElementCSEClass = createEClass(1);
+		createEAttribute(namedElementCSEClass, 1);
 
-		packageCSEClass = createEClass(PACKAGE_CS);
-		createEReference(packageCSEClass, PACKAGE_CS__OWNED_CLASSES);
+		packageCSEClass = createEClass(2);
+		createEReference(packageCSEClass, 2);
 
-		classCSEClass = createEClass(CLASS_CS);
-		createEReference(classCSEClass, CLASS_CS__EXTENDS);
+		classCSEClass = createEClass(3);
+		createEReference(classCSEClass, 2);
 
-		pathNameCSEClass = createEClass(PATH_NAME_CS);
-		createEReference(pathNameCSEClass, PATH_NAME_CS__PATH);
+		pathNameCSEClass = createEClass(4);
+		createEReference(pathNameCSEClass, 1);
 
-		pathElementCSEClass = createEClass(PATH_ELEMENT_CS);
+		pathElementCSEClass = createEClass(5);
 
-		rootCSEClass = createEClass(ROOT_CS);
-		createEReference(rootCSEClass, ROOT_CS__OWNED_PACKAGES);
+		rootCSEClass = createEClass(6);
+		createEReference(rootCSEClass, 1);
 	}
 
 	/**

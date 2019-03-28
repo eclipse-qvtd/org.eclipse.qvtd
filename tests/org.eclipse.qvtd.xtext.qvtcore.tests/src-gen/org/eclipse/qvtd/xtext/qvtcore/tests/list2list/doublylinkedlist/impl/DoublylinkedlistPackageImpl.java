@@ -232,16 +232,16 @@ public class DoublylinkedlistPackageImpl extends EPackageImpl implements Doublyl
 		isCreated = true;
 
 		// Create classes and their features
-		elementEClass = createEClass(ELEMENT);
-		createEReference(elementEClass, ELEMENT__LIST);
-		createEAttribute(elementEClass, ELEMENT__NAME);
-		createEReference(elementEClass, ELEMENT__SOURCE);
-		createEReference(elementEClass, ELEMENT__TARGET);
+		elementEClass = createEClass(0);
+		createEReference(elementEClass, 0);
+		createEAttribute(elementEClass, 1);
+		createEReference(elementEClass, 2);
+		createEReference(elementEClass, 3);
 
-		doublyLinkedListEClass = createEClass(DOUBLY_LINKED_LIST);
-		createEReference(doublyLinkedListEClass, DOUBLY_LINKED_LIST__HEAD_ELEMENT);
-		createEAttribute(doublyLinkedListEClass, DOUBLY_LINKED_LIST__NAME);
-		createEReference(doublyLinkedListEClass, DOUBLY_LINKED_LIST__OWNED_ELEMENTS);
+		doublyLinkedListEClass = createEClass(1);
+		createEReference(doublyLinkedListEClass, 0);
+		createEAttribute(doublyLinkedListEClass, 1);
+		createEReference(doublyLinkedListEClass, 2);
 	}
 
 	/**

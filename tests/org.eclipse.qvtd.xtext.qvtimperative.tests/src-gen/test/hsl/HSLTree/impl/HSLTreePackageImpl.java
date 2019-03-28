@@ -210,14 +210,14 @@ public class HSLTreePackageImpl extends EPackageImpl implements HSLTreePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		hslNodeEClass = createEClass(HSL_NODE);
-		createEReference(hslNodeEClass, HSL_NODE__PARENT);
-		createEReference(hslNodeEClass, HSL_NODE__CHILDREN);
-		createEAttribute(hslNodeEClass, HSL_NODE__HSL);
-		createEAttribute(hslNodeEClass, HSL_NODE__NAME);
+		hslNodeEClass = createEClass(0);
+		createEReference(hslNodeEClass, 0);
+		createEReference(hslNodeEClass, 1);
+		createEAttribute(hslNodeEClass, 2);
+		createEAttribute(hslNodeEClass, 3);
 
 		// Create data types
-		hslEDataType = createEDataType(HSL);
+		hslEDataType = createEDataType(1);
 	}
 
 	/**

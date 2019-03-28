@@ -76,20 +76,20 @@ public class PersonsSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case PersonsPackage.PERSON: {
+			case 0: {
 				Person person = (Person)theEObject;
 				T result = casePerson(person);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PersonsPackage.MALE: {
+			case 1: {
 				Male male = (Male)theEObject;
 				T result = caseMale(male);
 				if (result == null) result = casePerson(male);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PersonsPackage.FEMALE: {
+			case 2: {
 				Female female = (Female)theEObject;
 				T result = caseFemale(female);
 				if (result == null) result = casePerson(female);

@@ -64,8 +64,8 @@ public class DoublylinkedlistFactoryImpl extends EFactoryImpl implements Doublyl
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DoublylinkedlistPackage.ELEMENT: return createElement();
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST: return createDoublyLinkedList();
+			case 0: return createElement();
+			case 1: return createDoublyLinkedList();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

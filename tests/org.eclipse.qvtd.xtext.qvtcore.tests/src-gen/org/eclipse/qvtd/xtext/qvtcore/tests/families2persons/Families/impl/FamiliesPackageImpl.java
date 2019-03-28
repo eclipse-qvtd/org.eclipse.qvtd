@@ -271,19 +271,19 @@ public class FamiliesPackageImpl extends EPackageImpl implements FamiliesPackage
 		isCreated = true;
 
 		// Create classes and their features
-		familyEClass = createEClass(FAMILY);
-		createEAttribute(familyEClass, FAMILY__LAST_NAME);
-		createEReference(familyEClass, FAMILY__FATHER);
-		createEReference(familyEClass, FAMILY__MOTHER);
-		createEReference(familyEClass, FAMILY__SONS);
-		createEReference(familyEClass, FAMILY__DAUGHTERS);
+		familyEClass = createEClass(0);
+		createEAttribute(familyEClass, 0);
+		createEReference(familyEClass, 1);
+		createEReference(familyEClass, 2);
+		createEReference(familyEClass, 3);
+		createEReference(familyEClass, 4);
 
-		memberEClass = createEClass(MEMBER);
-		createEAttribute(memberEClass, MEMBER__FIRST_NAME);
-		createEReference(memberEClass, MEMBER__FAMILY_FATHER);
-		createEReference(memberEClass, MEMBER__FAMILY_MOTHER);
-		createEReference(memberEClass, MEMBER__FAMILY_SON);
-		createEReference(memberEClass, MEMBER__FAMILY_DAUGHTER);
+		memberEClass = createEClass(1);
+		createEAttribute(memberEClass, 0);
+		createEReference(memberEClass, 1);
+		createEReference(memberEClass, 2);
+		createEReference(memberEClass, 3);
+		createEReference(memberEClass, 4);
 	}
 
 	/**

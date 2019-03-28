@@ -40,6 +40,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.ToColumn;
  */
 public class AttributeToColumnImpl extends FromAttributeImpl implements AttributeToColumn {
 	/**
+	 * The number of structural features of the '<em>Attribute To Column</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ATTRIBUTE_TO_COLUMN_FEATURE_COUNT = FromAttributeImpl.FROM_ATTRIBUTE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Attribute To Column</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ATTRIBUTE_TO_COLUMN_OPERATION_COUNT = FromAttributeImpl.FROM_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getColumn() <em>Column</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,7 +108,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 			column = (Column)eResolveProxy(oldColumn);
 			if (column != oldColumn) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__COLUMN, oldColumn, column));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 5, oldColumn, column));
 			}
 		}
 		return column;
@@ -115,7 +133,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 		Column oldColumn = column;
 		column = newColumn;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__COLUMN, oldColumn, column));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldColumn, column));
 	}
 
 	/**
@@ -130,7 +148,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 			type = (PrimitiveToName)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 6, oldType, type));
 			}
 		}
 		return type;
@@ -155,7 +173,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 		PrimitiveToName oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, oldType, type));
 	}
 
 	/**
@@ -166,10 +184,10 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__COLUMN:
+			case 5:
 				if (resolve) return getColumn();
 				return basicGetColumn();
-			case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__TYPE:
+			case 6:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -184,10 +202,10 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__COLUMN:
+			case 5:
 				setColumn((Column)newValue);
 				return;
-			case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__TYPE:
+			case 6:
 				setType((PrimitiveToName)newValue);
 				return;
 		}
@@ -202,10 +220,10 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__COLUMN:
+			case 5:
 				setColumn((Column)null);
 				return;
-			case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__TYPE:
+			case 6:
 				setType((PrimitiveToName)null);
 				return;
 		}
@@ -220,9 +238,9 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__COLUMN:
+			case 5:
 				return column != null;
-			case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__TYPE:
+			case 6:
 				return type != null;
 		}
 		return super.eIsSet(featureID);
@@ -237,7 +255,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ToColumn.class) {
 			switch (derivedFeatureID) {
-				case Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__COLUMN: return Simpleuml2rdbmsPackage.TO_COLUMN__COLUMN;
+				case 5: return 0;
 				default: return -1;
 			}
 		}
@@ -253,7 +271,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ToColumn.class) {
 			switch (baseFeatureID) {
-				case Simpleuml2rdbmsPackage.TO_COLUMN__COLUMN: return Simpleuml2rdbmsPackage.ATTRIBUTE_TO_COLUMN__COLUMN;
+				case 0: return 5;
 				default: return -1;
 			}
 		}

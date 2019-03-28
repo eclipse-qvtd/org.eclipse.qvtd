@@ -26,6 +26,23 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class ArgumentCSImpl extends NamedElementCSImpl implements ArgumentCS {
 	/**
+	 * The number of structural features of the '<em>Argument CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ARGUMENT_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Argument CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ARGUMENT_CS_OPERATION_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

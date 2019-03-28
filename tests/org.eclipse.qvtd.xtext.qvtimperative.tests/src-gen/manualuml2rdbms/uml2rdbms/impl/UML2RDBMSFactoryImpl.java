@@ -66,13 +66,13 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case UML2RDBMSPackage.ATTRIBUTE_TO_COLUMN: return createAttributeToColumn();
-			case UML2RDBMSPackage.ASSOCIATION_TO_FOREIGN_KEY: return createAssociationToForeignKey();
-			case UML2RDBMSPackage.CLASS_TO_TABLE: return createClassToTable();
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE: return createNonLeafAttribute();
-			case UML2RDBMSPackage.PACKAGE_TO_SCHEMA: return createPackageToSchema();
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME: return createPrimitiveToName();
-			case UML2RDBMSPackage.TO_COLUMN: return createToColumn();
+			case 0: return createAttributeToColumn();
+			case 1: return createAssociationToForeignKey();
+			case 2: return createClassToTable();
+			case 5: return createNonLeafAttribute();
+			case 6: return createPackageToSchema();
+			case 7: return createPrimitiveToName();
+			case 8: return createToColumn();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

@@ -193,11 +193,11 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 		isCreated = true;
 
 		// Create classes and their features
-		tallNodeEClass = createEClass(TALL_NODE);
-		createEReference(tallNodeEClass, TALL_NODE__CHILDREN);
-		createEAttribute(tallNodeEClass, TALL_NODE__HEIGHT);
-		createEAttribute(tallNodeEClass, TALL_NODE__NAME);
-		createEReference(tallNodeEClass, TALL_NODE__PARENT);
+		tallNodeEClass = createEClass(0);
+		createEReference(tallNodeEClass, 0);
+		createEAttribute(tallNodeEClass, 1);
+		createEAttribute(tallNodeEClass, 2);
+		createEReference(tallNodeEClass, 3);
 	}
 
 	/**

@@ -66,11 +66,11 @@ public class SbaseFactoryImpl extends EFactoryImpl implements SbaseFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case SbasePackage.X: return createX();
-			case SbasePackage.Y: return createY();
-			case SbasePackage.Z: return createZ();
-			case SbasePackage.SROOT: return createSRoot();
-			case SbasePackage.SELEMENT: return createSElement();
+			case 0: return createX();
+			case 1: return createY();
+			case 2: return createZ();
+			case 3: return createSRoot();
+			case 4: return createSElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

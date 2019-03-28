@@ -88,14 +88,14 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ClassesPackage.ELEMENT: {
+			case 0: {
 				Element element = (Element)theEObject;
 				T result = caseElement(element);
 				if (result == null) result = caseVisitable(element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.NAMED_ELEMENT: {
+			case 1: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
 				if (result == null) result = caseElement(namedElement);
@@ -103,7 +103,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.NAMESPACE: {
+			case 2: {
 				Namespace namespace = (Namespace)theEObject;
 				T result = caseNamespace(namespace);
 				if (result == null) result = caseElement(namespace);
@@ -111,7 +111,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.TYPED_ELEMENT: {
+			case 3: {
 				TypedElement typedElement = (TypedElement)theEObject;
 				T result = caseTypedElement(typedElement);
 				if (result == null) result = caseElement(typedElement);
@@ -119,7 +119,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.CALL_EXP: {
+			case 4: {
 				CallExp callExp = (CallExp)theEObject;
 				T result = caseCallExp(callExp);
 				if (result == null) result = caseTypedElement(callExp);
@@ -128,7 +128,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.ROOT: {
+			case 5: {
 				Root root = (Root)theEObject;
 				T result = caseRoot(root);
 				if (result == null) result = caseElement(root);
@@ -136,7 +136,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.PACKAGE: {
+			case 6: {
 				example2.classes.Package package_ = (example2.classes.Package)theEObject;
 				T result = casePackage(package_);
 				if (result == null) result = caseNamedElement(package_);
@@ -146,7 +146,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.CLASS: {
+			case 7: {
 				example2.classes.Class class_ = (example2.classes.Class)theEObject;
 				T result = caseClass(class_);
 				if (result == null) result = caseNamedElement(class_);
@@ -155,7 +155,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.PROPERTY: {
+			case 8: {
 				Property property = (Property)theEObject;
 				T result = caseProperty(property);
 				if (result == null) result = caseNamedElement(property);
@@ -165,7 +165,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.OPERATION: {
+			case 9: {
 				Operation operation = (Operation)theEObject;
 				T result = caseOperation(operation);
 				if (result == null) result = caseNamedElement(operation);
@@ -175,7 +175,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.PARAMETER: {
+			case 10: {
 				Parameter parameter = (Parameter)theEObject;
 				T result = caseParameter(parameter);
 				if (result == null) result = caseNamedElement(parameter);
@@ -184,7 +184,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.PROPERTY_CALL_EXP: {
+			case 11: {
 				PropertyCallExp propertyCallExp = (PropertyCallExp)theEObject;
 				T result = casePropertyCallExp(propertyCallExp);
 				if (result == null) result = caseCallExp(propertyCallExp);
@@ -194,7 +194,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.OPERATION_CALL_EXP: {
+			case 12: {
 				OperationCallExp operationCallExp = (OperationCallExp)theEObject;
 				T result = caseOperationCallExp(operationCallExp);
 				if (result == null) result = caseCallExp(operationCallExp);
@@ -204,7 +204,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.ARGUMENT: {
+			case 13: {
 				Argument argument = (Argument)theEObject;
 				T result = caseArgument(argument);
 				if (result == null) result = caseNamedElement(argument);
@@ -213,7 +213,7 @@ public class ClassesSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassesPackage.VISITABLE: {
+			case 14: {
 				Visitable visitable = (Visitable)theEObject;
 				T result = caseVisitable(visitable);
 				if (result == null) result = defaultCase(theEObject);

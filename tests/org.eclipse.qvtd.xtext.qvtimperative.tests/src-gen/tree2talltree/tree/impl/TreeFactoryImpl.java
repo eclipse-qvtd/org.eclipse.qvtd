@@ -64,7 +64,7 @@ public class TreeFactoryImpl extends EFactoryImpl implements TreeFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TreePackage.NODE: return createNode();
+			case 0: return createNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

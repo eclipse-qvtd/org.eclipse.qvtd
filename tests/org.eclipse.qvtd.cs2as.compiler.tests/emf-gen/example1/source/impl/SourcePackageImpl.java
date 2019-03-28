@@ -409,36 +409,36 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		xEClass = createEClass(X);
-		createEReference(xEClass, X__OWNS_Y);
-		createEAttribute(xEClass, X__IS_A1);
-		createEAttribute(xEClass, X__IS_A2);
-		createEAttribute(xEClass, X__NAME);
+		xEClass = createEClass(0);
+		createEReference(xEClass, 1);
+		createEAttribute(xEClass, 2);
+		createEAttribute(xEClass, 3);
+		createEAttribute(xEClass, 4);
 
-		yEClass = createEClass(Y);
-		createEReference(yEClass, Y__OWNS_Z);
-		createEAttribute(yEClass, Y__NAME);
-		createEReference(yEClass, Y__TO_X);
+		yEClass = createEClass(1);
+		createEReference(yEClass, 1);
+		createEAttribute(yEClass, 2);
+		createEReference(yEClass, 3);
 
-		y1EClass = createEClass(Y1);
+		y1EClass = createEClass(2);
 
-		y2EClass = createEClass(Y2);
+		y2EClass = createEClass(3);
 
-		zEClass = createEClass(Z);
-		createEReference(zEClass, Z__TO_Y);
-		createEReference(zEClass, Z__REFERS);
+		zEClass = createEClass(4);
+		createEReference(zEClass, 1);
+		createEReference(zEClass, 2);
 
-		sRootEClass = createEClass(SROOT);
-		createEReference(sRootEClass, SROOT__OWNED_X);
+		sRootEClass = createEClass(5);
+		createEReference(sRootEClass, 1);
 
-		sElementEClass = createEClass(SELEMENT);
-		createEReference(sElementEClass, SELEMENT__AST);
+		sElementEClass = createEClass(6);
+		createEReference(sElementEClass, 0);
 
-		pathNameCSEClass = createEClass(PATH_NAME_CS);
-		createEReference(pathNameCSEClass, PATH_NAME_CS__PATH);
+		pathNameCSEClass = createEClass(7);
+		createEReference(pathNameCSEClass, 1);
 
-		pathElementCSEClass = createEClass(PATH_ELEMENT_CS);
-		createEAttribute(pathElementCSEClass, PATH_ELEMENT_CS__NAME);
+		pathElementCSEClass = createEClass(8);
+		createEAttribute(pathElementCSEClass, 1);
 	}
 
 	/**

@@ -51,6 +51,24 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class OperationCallExpImpl extends CallExpImpl implements OperationCallExp {
 	/**
+	 * The number of structural features of the '<em>Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_CALL_EXP_FEATURE_COUNT = CallExpImpl.CALL_EXP_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_CALL_EXP_OPERATION_COUNT = CallExpImpl.CALL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedArguments() <em>Owned Arguments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,7 +115,7 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public EList<Argument> getOwnedArguments() {
 		if (ownedArguments == null) {
-			ownedArguments = new EObjectContainmentEList<Argument>(Argument.class, this, ClassesPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS);
+			ownedArguments = new EObjectContainmentEList<Argument>(Argument.class, this, 3);
 		}
 		return ownedArguments;
 	}
@@ -114,7 +132,7 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 			referredOperation = (Operation)eResolveProxy(oldReferredOperation);
 			if (referredOperation != oldReferredOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassesPackage.OPERATION_CALL_EXP__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldReferredOperation, referredOperation));
 			}
 		}
 		return referredOperation;
@@ -139,7 +157,7 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 		Operation oldReferredOperation = referredOperation;
 		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassesPackage.OPERATION_CALL_EXP__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldReferredOperation, referredOperation));
 	}
 
 	/**
@@ -150,7 +168,7 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 3:
 				return ((InternalEList<?>)getOwnedArguments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -164,9 +182,9 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 3:
 				return getOwnedArguments();
-			case ClassesPackage.OPERATION_CALL_EXP__REFERRED_OPERATION:
+			case 4:
 				if (resolve) return getReferredOperation();
 				return basicGetReferredOperation();
 		}
@@ -182,11 +200,11 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 3:
 				getOwnedArguments().clear();
 				getOwnedArguments().addAll((Collection<? extends Argument>)newValue);
 				return;
-			case ClassesPackage.OPERATION_CALL_EXP__REFERRED_OPERATION:
+			case 4:
 				setReferredOperation((Operation)newValue);
 				return;
 		}
@@ -201,10 +219,10 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 3:
 				getOwnedArguments().clear();
 				return;
-			case ClassesPackage.OPERATION_CALL_EXP__REFERRED_OPERATION:
+			case 4:
 				setReferredOperation((Operation)null);
 				return;
 		}
@@ -219,9 +237,9 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS:
+			case 3:
 				return ownedArguments != null && !ownedArguments.isEmpty();
-			case ClassesPackage.OPERATION_CALL_EXP__REFERRED_OPERATION:
+			case 4:
 				return referredOperation != null;
 		}
 		return super.eIsSet(featureID);

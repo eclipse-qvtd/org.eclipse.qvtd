@@ -66,9 +66,9 @@ public class TderivedFactoryImpl extends EFactoryImpl implements TderivedFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TderivedPackage.A2: return createA2();
-			case TderivedPackage.B2: return createB2();
-			case TderivedPackage.D: return createD();
+			case 0: return createA2();
+			case 1: return createB2();
+			case 2: return createD();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

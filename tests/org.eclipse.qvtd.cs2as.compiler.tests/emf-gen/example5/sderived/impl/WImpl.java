@@ -28,6 +28,23 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class WImpl extends SElementImpl implements W {
 	/**
+	 * The number of structural features of the '<em>W</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int W_FEATURE_COUNT = SElementImpl.SELEMENT_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>W</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int W_OPERATION_COUNT = SElementImpl.SELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

@@ -75,13 +75,13 @@ public class List2listSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case List2listPackage.LIST2_LIST: {
+			case 0: {
 				List2List list2List = (List2List)theEObject;
 				T result = caseList2List(list2List);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case List2listPackage.ELEMENT2_ELEMENT: {
+			case 1: {
 				Element2Element element2Element = (Element2Element)theEObject;
 				T result = caseElement2Element(element2Element);
 				if (result == null) result = defaultCase(theEObject);

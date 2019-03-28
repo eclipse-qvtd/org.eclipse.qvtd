@@ -83,14 +83,14 @@ public class UMLSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case UMLPackage.ATTRIBUTE: {
+			case 0: {
 				Attribute attribute = (Attribute)theEObject;
 				T result = caseAttribute(attribute);
 				if (result == null) result = caseUMLModelElement(attribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLPackage.ASSOCIATION: {
+			case 1: {
 				Association association = (Association)theEObject;
 				T result = caseAssociation(association);
 				if (result == null) result = casePackageElement(association);
@@ -98,7 +98,7 @@ public class UMLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLPackage.CLASS: {
+			case 2: {
 				manualuml2rdbms.uml.Class class_ = (manualuml2rdbms.uml.Class)theEObject;
 				T result = caseClass(class_);
 				if (result == null) result = caseClassifier(class_);
@@ -107,7 +107,7 @@ public class UMLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLPackage.CLASSIFIER: {
+			case 3: {
 				Classifier classifier = (Classifier)theEObject;
 				T result = caseClassifier(classifier);
 				if (result == null) result = casePackageElement(classifier);
@@ -115,21 +115,21 @@ public class UMLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLPackage.PACKAGE: {
+			case 4: {
 				manualuml2rdbms.uml.Package package_ = (manualuml2rdbms.uml.Package)theEObject;
 				T result = casePackage(package_);
 				if (result == null) result = caseUMLModelElement(package_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLPackage.PACKAGE_ELEMENT: {
+			case 5: {
 				PackageElement packageElement = (PackageElement)theEObject;
 				T result = casePackageElement(packageElement);
 				if (result == null) result = caseUMLModelElement(packageElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLPackage.PRIMITIVE_DATA_TYPE: {
+			case 6: {
 				PrimitiveDataType primitiveDataType = (PrimitiveDataType)theEObject;
 				T result = casePrimitiveDataType(primitiveDataType);
 				if (result == null) result = caseClassifier(primitiveDataType);
@@ -138,7 +138,7 @@ public class UMLSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLPackage.UML_MODEL_ELEMENT: {
+			case 7: {
 				UMLModelElement umlModelElement = (UMLModelElement)theEObject;
 				T result = caseUMLModelElement(umlModelElement);
 				if (result == null) result = defaultCase(theEObject);

@@ -226,16 +226,16 @@ public class HSV2HSLPackageImpl extends EPackageImpl implements HSV2HSLPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		hsvNode2HSLNodeEClass = createEClass(HSV_NODE2_HSL_NODE);
-		createEReference(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__PARENT);
-		createEReference(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__CHILDREN);
-		createEReference(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__HSV);
-		createEReference(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__HSL);
-		createEAttribute(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__RGB);
-		createEAttribute(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__NAME);
+		hsvNode2HSLNodeEClass = createEClass(0);
+		createEReference(hsvNode2HSLNodeEClass, 0);
+		createEReference(hsvNode2HSLNodeEClass, 1);
+		createEReference(hsvNode2HSLNodeEClass, 2);
+		createEReference(hsvNode2HSLNodeEClass, 3);
+		createEAttribute(hsvNode2HSLNodeEClass, 4);
+		createEAttribute(hsvNode2HSLNodeEClass, 5);
 
 		// Create data types
-		rgbEDataType = createEDataType(RGB);
+		rgbEDataType = createEDataType(1);
 	}
 
 	/**

@@ -38,6 +38,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public abstract class RModelElementImpl extends MinimalEObjectImpl.Container implements RModelElement {
 	/**
+	 * The number of structural features of the '<em>RModel Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RMODEL_ELEMENT_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>RModel Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RMODEL_ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,7 +134,7 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RDBMSPackage.RMODEL_ELEMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldName, name));
 	}
 
 	/**
@@ -139,7 +157,7 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 		String oldKind = kind;
 		kind = newKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RDBMSPackage.RMODEL_ELEMENT__KIND, oldKind, kind));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldKind, kind));
 	}
 
 	/**
@@ -150,9 +168,9 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RDBMSPackage.RMODEL_ELEMENT__NAME:
+			case 0:
 				return getName();
-			case RDBMSPackage.RMODEL_ELEMENT__KIND:
+			case 1:
 				return getKind();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -166,10 +184,10 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RDBMSPackage.RMODEL_ELEMENT__NAME:
+			case 0:
 				setName((String)newValue);
 				return;
-			case RDBMSPackage.RMODEL_ELEMENT__KIND:
+			case 1:
 				setKind((String)newValue);
 				return;
 		}
@@ -184,10 +202,10 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.RMODEL_ELEMENT__NAME:
+			case 0:
 				setName(NAME_EDEFAULT);
 				return;
-			case RDBMSPackage.RMODEL_ELEMENT__KIND:
+			case 1:
 				setKind(KIND_EDEFAULT);
 				return;
 		}
@@ -202,9 +220,9 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.RMODEL_ELEMENT__NAME:
+			case 0:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case RDBMSPackage.RMODEL_ELEMENT__KIND:
+			case 1:
 				return KIND_EDEFAULT == null ? kind != null : !KIND_EDEFAULT.equals(kind);
 		}
 		return super.eIsSet(featureID);

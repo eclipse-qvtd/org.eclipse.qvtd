@@ -45,6 +45,24 @@ import example1.target.util.Visitor;
  */
 public class DImpl extends NamedElementImpl implements D {
 	/**
+	 * The number of structural features of the '<em>D</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int D_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>D</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int D_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getToA() <em>To A</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,7 +118,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 */
 	@Override
 	public C getToC() {
-		if (eContainerFeatureID() != TargetPackage.D__TO_C) return null;
+		if (eContainerFeatureID() != (1)) return null;
 		return (C)eInternalContainer();
 	}
 
@@ -110,7 +128,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * @generated
 	 */
 	public NotificationChain basicSetToC(C newToC, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newToC, TargetPackage.D__TO_C, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newToC, 1, msgs);
 		return msgs;
 	}
 
@@ -121,19 +139,19 @@ public class DImpl extends NamedElementImpl implements D {
 	 */
 	@Override
 	public void setToC(C newToC) {
-		if (newToC != eInternalContainer() || (eContainerFeatureID() != TargetPackage.D__TO_C && newToC != null)) {
+		if (newToC != eInternalContainer() || (eContainerFeatureID() != (1) && newToC != null)) {
 			if (EcoreUtil.isAncestor(this, newToC))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newToC != null)
-				msgs = ((InternalEObject)newToC).eInverseAdd(this, TargetPackage.C__OWNS_D, C.class, msgs);
+				msgs = ((InternalEObject)newToC).eInverseAdd(this, 2, C.class, msgs);
 			msgs = basicSetToC(newToC, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TargetPackage.D__TO_C, newToC, newToC));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newToC, newToC));
 	}
 
 	/**
@@ -143,7 +161,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 */
 	@Override
 	public B getToB() {
-		if (eContainerFeatureID() != TargetPackage.D__TO_B) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (B)eInternalContainer();
 	}
 
@@ -153,7 +171,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * @generated
 	 */
 	public NotificationChain basicSetToB(B newToB, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newToB, TargetPackage.D__TO_B, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newToB, 2, msgs);
 		return msgs;
 	}
 
@@ -164,19 +182,19 @@ public class DImpl extends NamedElementImpl implements D {
 	 */
 	@Override
 	public void setToB(B newToB) {
-		if (newToB != eInternalContainer() || (eContainerFeatureID() != TargetPackage.D__TO_B && newToB != null)) {
+		if (newToB != eInternalContainer() || (eContainerFeatureID() != (2) && newToB != null)) {
 			if (EcoreUtil.isAncestor(this, newToB))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newToB != null)
-				msgs = ((InternalEObject)newToB).eInverseAdd(this, TargetPackage.B__OWNS_D, B.class, msgs);
+				msgs = ((InternalEObject)newToB).eInverseAdd(this, 2, B.class, msgs);
 			msgs = basicSetToB(newToB, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TargetPackage.D__TO_B, newToB, newToB));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newToB, newToB));
 	}
 
 	/**
@@ -191,7 +209,7 @@ public class DImpl extends NamedElementImpl implements D {
 			toA = (A)eResolveProxy(oldToA);
 			if (toA != oldToA) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TargetPackage.D__TO_A, oldToA, toA));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldToA, toA));
 			}
 		}
 		return toA;
@@ -216,7 +234,7 @@ public class DImpl extends NamedElementImpl implements D {
 		A oldToA = toA;
 		toA = newToA;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TargetPackage.D__TO_A, oldToA, toA));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldToA, toA));
 	}
 
 	/**
@@ -231,7 +249,7 @@ public class DImpl extends NamedElementImpl implements D {
 			refsB = (B)eResolveProxy(oldRefsB);
 			if (refsB != oldRefsB) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TargetPackage.D__REFS_B, oldRefsB, refsB));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldRefsB, refsB));
 			}
 		}
 		return refsB;
@@ -256,7 +274,7 @@ public class DImpl extends NamedElementImpl implements D {
 		B oldRefsB = refsB;
 		refsB = newRefsB;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TargetPackage.D__REFS_B, oldRefsB, refsB));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldRefsB, refsB));
 	}
 
 	/**
@@ -271,7 +289,7 @@ public class DImpl extends NamedElementImpl implements D {
 			refsC = (C)eResolveProxy(oldRefsC);
 			if (refsC != oldRefsC) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TargetPackage.D__REFS_C, oldRefsC, refsC));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 5, oldRefsC, refsC));
 			}
 		}
 		return refsC;
@@ -296,7 +314,7 @@ public class DImpl extends NamedElementImpl implements D {
 		C oldRefsC = refsC;
 		refsC = newRefsC;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TargetPackage.D__REFS_C, oldRefsC, refsC));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldRefsC, refsC));
 	}
 
 	/**
@@ -307,11 +325,11 @@ public class DImpl extends NamedElementImpl implements D {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TargetPackage.D__TO_C:
+			case 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetToC((C)otherEnd, msgs);
-			case TargetPackage.D__TO_B:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetToB((B)otherEnd, msgs);
@@ -327,9 +345,9 @@ public class DImpl extends NamedElementImpl implements D {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TargetPackage.D__TO_C:
+			case 1:
 				return basicSetToC(null, msgs);
-			case TargetPackage.D__TO_B:
+			case 2:
 				return basicSetToB(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -343,10 +361,10 @@ public class DImpl extends NamedElementImpl implements D {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TargetPackage.D__TO_C:
-				return eInternalContainer().eInverseRemove(this, TargetPackage.C__OWNS_D, C.class, msgs);
-			case TargetPackage.D__TO_B:
-				return eInternalContainer().eInverseRemove(this, TargetPackage.B__OWNS_D, B.class, msgs);
+			case 1:
+				return eInternalContainer().eInverseRemove(this, 2, C.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 2, B.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -359,17 +377,17 @@ public class DImpl extends NamedElementImpl implements D {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TargetPackage.D__TO_C:
+			case 1:
 				return getToC();
-			case TargetPackage.D__TO_B:
+			case 2:
 				return getToB();
-			case TargetPackage.D__TO_A:
+			case 3:
 				if (resolve) return getToA();
 				return basicGetToA();
-			case TargetPackage.D__REFS_B:
+			case 4:
 				if (resolve) return getRefsB();
 				return basicGetRefsB();
-			case TargetPackage.D__REFS_C:
+			case 5:
 				if (resolve) return getRefsC();
 				return basicGetRefsC();
 		}
@@ -384,19 +402,19 @@ public class DImpl extends NamedElementImpl implements D {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TargetPackage.D__TO_C:
+			case 1:
 				setToC((C)newValue);
 				return;
-			case TargetPackage.D__TO_B:
+			case 2:
 				setToB((B)newValue);
 				return;
-			case TargetPackage.D__TO_A:
+			case 3:
 				setToA((A)newValue);
 				return;
-			case TargetPackage.D__REFS_B:
+			case 4:
 				setRefsB((B)newValue);
 				return;
-			case TargetPackage.D__REFS_C:
+			case 5:
 				setRefsC((C)newValue);
 				return;
 		}
@@ -411,19 +429,19 @@ public class DImpl extends NamedElementImpl implements D {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TargetPackage.D__TO_C:
+			case 1:
 				setToC((C)null);
 				return;
-			case TargetPackage.D__TO_B:
+			case 2:
 				setToB((B)null);
 				return;
-			case TargetPackage.D__TO_A:
+			case 3:
 				setToA((A)null);
 				return;
-			case TargetPackage.D__REFS_B:
+			case 4:
 				setRefsB((B)null);
 				return;
-			case TargetPackage.D__REFS_C:
+			case 5:
 				setRefsC((C)null);
 				return;
 		}
@@ -438,15 +456,15 @@ public class DImpl extends NamedElementImpl implements D {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TargetPackage.D__TO_C:
+			case 1:
 				return getToC() != null;
-			case TargetPackage.D__TO_B:
+			case 2:
 				return getToB() != null;
-			case TargetPackage.D__TO_A:
+			case 3:
 				return toA != null;
-			case TargetPackage.D__REFS_B:
+			case 4:
 				return refsB != null;
-			case TargetPackage.D__REFS_C:
+			case 5:
 				return refsC != null;
 		}
 		return super.eIsSet(featureID);

@@ -40,6 +40,24 @@ import example2.classes.util.Visitor;
  */
 public class PackageImpl extends NamedElementImpl implements example2.classes.Package {
 	/**
+	 * The number of structural features of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedClasses() <em>Owned Classes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +104,7 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	@Override
 	public EList<example2.classes.Class> getOwnedClasses() {
 		if (ownedClasses == null) {
-			ownedClasses = new EObjectContainmentEList<example2.classes.Class>(example2.classes.Class.class, this, ClassesPackage.PACKAGE__OWNED_CLASSES);
+			ownedClasses = new EObjectContainmentEList<example2.classes.Class>(example2.classes.Class.class, this, 1);
 		}
 		return ownedClasses;
 	}
@@ -99,7 +117,7 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	@Override
 	public EList<example2.classes.Package> getOwnedPackages() {
 		if (ownedPackages == null) {
-			ownedPackages = new EObjectContainmentEList<example2.classes.Package>(example2.classes.Package.class, this, ClassesPackage.PACKAGE__OWNED_PACKAGES);
+			ownedPackages = new EObjectContainmentEList<example2.classes.Package>(example2.classes.Package.class, this, 2);
 		}
 		return ownedPackages;
 	}
@@ -112,9 +130,9 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassesPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				return ((InternalEList<?>)getOwnedClasses()).basicRemove(otherEnd, msgs);
-			case ClassesPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				return ((InternalEList<?>)getOwnedPackages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -128,9 +146,9 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				return getOwnedClasses();
-			case ClassesPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				return getOwnedPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -145,11 +163,11 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				getOwnedClasses().clear();
 				getOwnedClasses().addAll((Collection<? extends example2.classes.Class>)newValue);
 				return;
-			case ClassesPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				getOwnedPackages().clear();
 				getOwnedPackages().addAll((Collection<? extends example2.classes.Package>)newValue);
 				return;
@@ -165,10 +183,10 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				getOwnedClasses().clear();
 				return;
-			case ClassesPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				getOwnedPackages().clear();
 				return;
 		}
@@ -183,9 +201,9 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.PACKAGE__OWNED_CLASSES:
+			case 1:
 				return ownedClasses != null && !ownedClasses.isEmpty();
-			case ClassesPackage.PACKAGE__OWNED_PACKAGES:
+			case 2:
 				return ownedPackages != null && !ownedPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);

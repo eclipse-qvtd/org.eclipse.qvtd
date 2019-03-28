@@ -79,19 +79,19 @@ public class ClassescstracesSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE: {
+			case 0: {
 				PackageCS2Package packageCS2Package = (PackageCS2Package)theEObject;
 				T result = casePackageCS2Package(packageCS2Package);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescstracesPackage.CLASS_CS2_CLASS: {
+			case 1: {
 				ClassCS2Class classCS2Class = (ClassCS2Class)theEObject;
 				T result = caseClassCS2Class(classCS2Class);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescstracesPackage.ROOT_CS2_ROOT: {
+			case 2: {
 				RootCS2Root rootCS2Root = (RootCS2Root)theEObject;
 				T result = caseRootCS2Root(rootCS2Root);
 				if (result == null) result = defaultCase(theEObject);

@@ -66,9 +66,9 @@ public class ClassescstracesFactoryImpl extends EFactoryImpl implements Classesc
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE: return createPackageCS2Package();
-			case ClassescstracesPackage.CLASS_CS2_CLASS: return createClassCS2Class();
-			case ClassescstracesPackage.ROOT_CS2_ROOT: return createRootCS2Root();
+			case 0: return createPackageCS2Package();
+			case 1: return createClassCS2Class();
+			case 2: return createRootCS2Root();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

@@ -249,19 +249,19 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		topEClass = createEClass(TOP);
-		createEReference(topEClass, TOP__NODE);
+		topEClass = createEClass(0);
+		createEReference(topEClass, 0);
 
-		nodeEClass = createEClass(NODE);
-		createEAttribute(nodeEClass, NODE__HEIGHT);
-		createEAttribute(nodeEClass, NODE__DEPTH);
+		nodeEClass = createEClass(1);
+		createEAttribute(nodeEClass, 0);
+		createEAttribute(nodeEClass, 1);
 
-		compositeEClass = createEClass(COMPOSITE);
-		createEReference(compositeEClass, COMPOSITE__CHILD);
+		compositeEClass = createEClass(2);
+		createEReference(compositeEClass, 2);
 
-		leafEClass = createEClass(LEAF);
+		leafEClass = createEClass(3);
 
-		elementEClass = createEClass(ELEMENT);
+		elementEClass = createEClass(4);
 	}
 
 	/**

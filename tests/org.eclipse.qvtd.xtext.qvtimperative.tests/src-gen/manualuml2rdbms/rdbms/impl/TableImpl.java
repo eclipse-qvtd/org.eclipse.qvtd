@@ -54,6 +54,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class TableImpl extends RModelElementImpl implements Table {
 	/**
+	 * The number of structural features of the '<em>Table</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TABLE_FEATURE_COUNT = RModelElementImpl.RMODEL_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Table</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TABLE_OPERATION_COUNT = RModelElementImpl.RMODEL_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getColumn() <em>Column</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -120,7 +138,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public EList<Column> getColumn() {
 		if (column == null) {
-			column = new EObjectContainmentWithInverseEList<Column>(Column.class, this, RDBMSPackage.TABLE__COLUMN, RDBMSPackage.COLUMN__OWNER);
+			column = new EObjectContainmentWithInverseEList<Column>(Column.class, this, 2, 2);
 		}
 		return column;
 	}
@@ -132,7 +150,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 */
 	@Override
 	public Schema getSchema() {
-		if (eContainerFeatureID() != RDBMSPackage.TABLE__SCHEMA) return null;
+		if (eContainerFeatureID() != (3)) return null;
 		return (Schema)eInternalContainer();
 	}
 
@@ -142,7 +160,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * @generated
 	 */
 	public NotificationChain basicSetSchema(Schema newSchema, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newSchema, RDBMSPackage.TABLE__SCHEMA, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newSchema, 3, msgs);
 		return msgs;
 	}
 
@@ -153,19 +171,19 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 */
 	@Override
 	public void setSchema(Schema newSchema) {
-		if (newSchema != eInternalContainer() || (eContainerFeatureID() != RDBMSPackage.TABLE__SCHEMA && newSchema != null)) {
+		if (newSchema != eInternalContainer() || (eContainerFeatureID() != (3) && newSchema != null)) {
 			if (EcoreUtil.isAncestor(this, newSchema))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newSchema != null)
-				msgs = ((InternalEObject)newSchema).eInverseAdd(this, RDBMSPackage.SCHEMA__TABLES, Schema.class, msgs);
+				msgs = ((InternalEObject)newSchema).eInverseAdd(this, 2, Schema.class, msgs);
 			msgs = basicSetSchema(newSchema, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RDBMSPackage.TABLE__SCHEMA, newSchema, newSchema));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newSchema, newSchema));
 	}
 
 	/**
@@ -180,7 +198,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 			theKey = (Key)eResolveProxy(oldTheKey);
 			if (theKey != oldTheKey) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RDBMSPackage.TABLE__THE_KEY, oldTheKey, theKey));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldTheKey, theKey));
 			}
 		}
 		return theKey;
@@ -205,7 +223,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 		Key oldTheKey = theKey;
 		theKey = newTheKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RDBMSPackage.TABLE__THE_KEY, oldTheKey, theKey));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldTheKey, theKey));
 	}
 
 	/**
@@ -216,7 +234,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public EList<Key> getKey() {
 		if (key == null) {
-			key = new EObjectContainmentWithInverseEList<Key>(Key.class, this, RDBMSPackage.TABLE__KEY, RDBMSPackage.KEY__OWNER);
+			key = new EObjectContainmentWithInverseEList<Key>(Key.class, this, 5, 2);
 		}
 		return key;
 	}
@@ -229,7 +247,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public EList<ForeignKey> getForeignKey() {
 		if (foreignKey == null) {
-			foreignKey = new EObjectContainmentWithInverseEList<ForeignKey>(ForeignKey.class, this, RDBMSPackage.TABLE__FOREIGN_KEY, RDBMSPackage.FOREIGN_KEY__OWNER);
+			foreignKey = new EObjectContainmentWithInverseEList<ForeignKey>(ForeignKey.class, this, 6, 4);
 		}
 		return foreignKey;
 	}
@@ -243,15 +261,15 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RDBMSPackage.TABLE__COLUMN:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getColumn()).basicAdd(otherEnd, msgs);
-			case RDBMSPackage.TABLE__SCHEMA:
+			case 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetSchema((Schema)otherEnd, msgs);
-			case RDBMSPackage.TABLE__KEY:
+			case 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getKey()).basicAdd(otherEnd, msgs);
-			case RDBMSPackage.TABLE__FOREIGN_KEY:
+			case 6:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getForeignKey()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -265,13 +283,13 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RDBMSPackage.TABLE__COLUMN:
+			case 2:
 				return ((InternalEList<?>)getColumn()).basicRemove(otherEnd, msgs);
-			case RDBMSPackage.TABLE__SCHEMA:
+			case 3:
 				return basicSetSchema(null, msgs);
-			case RDBMSPackage.TABLE__KEY:
+			case 5:
 				return ((InternalEList<?>)getKey()).basicRemove(otherEnd, msgs);
-			case RDBMSPackage.TABLE__FOREIGN_KEY:
+			case 6:
 				return ((InternalEList<?>)getForeignKey()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -285,8 +303,8 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RDBMSPackage.TABLE__SCHEMA:
-				return eInternalContainer().eInverseRemove(this, RDBMSPackage.SCHEMA__TABLES, Schema.class, msgs);
+			case 3:
+				return eInternalContainer().eInverseRemove(this, 2, Schema.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -299,16 +317,16 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RDBMSPackage.TABLE__COLUMN:
+			case 2:
 				return getColumn();
-			case RDBMSPackage.TABLE__SCHEMA:
+			case 3:
 				return getSchema();
-			case RDBMSPackage.TABLE__THE_KEY:
+			case 4:
 				if (resolve) return getTheKey();
 				return basicGetTheKey();
-			case RDBMSPackage.TABLE__KEY:
+			case 5:
 				return getKey();
-			case RDBMSPackage.TABLE__FOREIGN_KEY:
+			case 6:
 				return getForeignKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -323,21 +341,21 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RDBMSPackage.TABLE__COLUMN:
+			case 2:
 				getColumn().clear();
 				getColumn().addAll((Collection<? extends Column>)newValue);
 				return;
-			case RDBMSPackage.TABLE__SCHEMA:
+			case 3:
 				setSchema((Schema)newValue);
 				return;
-			case RDBMSPackage.TABLE__THE_KEY:
+			case 4:
 				setTheKey((Key)newValue);
 				return;
-			case RDBMSPackage.TABLE__KEY:
+			case 5:
 				getKey().clear();
 				getKey().addAll((Collection<? extends Key>)newValue);
 				return;
-			case RDBMSPackage.TABLE__FOREIGN_KEY:
+			case 6:
 				getForeignKey().clear();
 				getForeignKey().addAll((Collection<? extends ForeignKey>)newValue);
 				return;
@@ -353,19 +371,19 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.TABLE__COLUMN:
+			case 2:
 				getColumn().clear();
 				return;
-			case RDBMSPackage.TABLE__SCHEMA:
+			case 3:
 				setSchema((Schema)null);
 				return;
-			case RDBMSPackage.TABLE__THE_KEY:
+			case 4:
 				setTheKey((Key)null);
 				return;
-			case RDBMSPackage.TABLE__KEY:
+			case 5:
 				getKey().clear();
 				return;
-			case RDBMSPackage.TABLE__FOREIGN_KEY:
+			case 6:
 				getForeignKey().clear();
 				return;
 		}
@@ -380,15 +398,15 @@ public class TableImpl extends RModelElementImpl implements Table {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RDBMSPackage.TABLE__COLUMN:
+			case 2:
 				return column != null && !column.isEmpty();
-			case RDBMSPackage.TABLE__SCHEMA:
+			case 3:
 				return getSchema() != null;
-			case RDBMSPackage.TABLE__THE_KEY:
+			case 4:
 				return theKey != null;
-			case RDBMSPackage.TABLE__KEY:
+			case 5:
 				return key != null && !key.isEmpty();
-			case RDBMSPackage.TABLE__FOREIGN_KEY:
+			case 6:
 				return foreignKey != null && !foreignKey.isEmpty();
 		}
 		return super.eIsSet(featureID);

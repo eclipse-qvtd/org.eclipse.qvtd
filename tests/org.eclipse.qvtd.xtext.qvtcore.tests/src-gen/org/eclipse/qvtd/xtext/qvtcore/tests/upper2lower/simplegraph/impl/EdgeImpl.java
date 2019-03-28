@@ -38,6 +38,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphP
  */
 public class EdgeImpl extends ElementImpl implements Edge {
 	/**
+	 * The number of structural features of the '<em>Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EDGE_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EDGE_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,7 +106,7 @@ public class EdgeImpl extends ElementImpl implements Edge {
 			target = (Node)eResolveProxy(oldTarget);
 			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimplegraphPackage.EDGE__TARGET, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldTarget, target));
 			}
 		}
 		return target;
@@ -112,7 +130,7 @@ public class EdgeImpl extends ElementImpl implements Edge {
 		Node oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimplegraphPackage.EDGE__TARGET, oldTarget, newTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 1, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -128,14 +146,14 @@ public class EdgeImpl extends ElementImpl implements Edge {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, SimplegraphPackage.NODE__INCOMING, Node.class, msgs);
+				msgs = ((InternalEObject)target).eInverseRemove(this, 1, Node.class, msgs);
 			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, SimplegraphPackage.NODE__INCOMING, Node.class, msgs);
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, 1, Node.class, msgs);
 			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimplegraphPackage.EDGE__TARGET, newTarget, newTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newTarget, newTarget));
 	}
 
 	/**
@@ -150,7 +168,7 @@ public class EdgeImpl extends ElementImpl implements Edge {
 			source = (Node)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimplegraphPackage.EDGE__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldSource, source));
 			}
 		}
 		return source;
@@ -174,7 +192,7 @@ public class EdgeImpl extends ElementImpl implements Edge {
 		Node oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimplegraphPackage.EDGE__SOURCE, oldSource, newSource);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldSource, newSource);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -190,14 +208,14 @@ public class EdgeImpl extends ElementImpl implements Edge {
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, SimplegraphPackage.NODE__OUTGOING, Node.class, msgs);
+				msgs = ((InternalEObject)source).eInverseRemove(this, 2, Node.class, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, SimplegraphPackage.NODE__OUTGOING, Node.class, msgs);
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, 2, Node.class, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimplegraphPackage.EDGE__SOURCE, newSource, newSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newSource, newSource));
 	}
 
 	/**
@@ -208,13 +226,13 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimplegraphPackage.EDGE__TARGET:
+			case 1:
 				if (target != null)
-					msgs = ((InternalEObject)target).eInverseRemove(this, SimplegraphPackage.NODE__INCOMING, Node.class, msgs);
+					msgs = ((InternalEObject)target).eInverseRemove(this, 1, Node.class, msgs);
 				return basicSetTarget((Node)otherEnd, msgs);
-			case SimplegraphPackage.EDGE__SOURCE:
+			case 2:
 				if (source != null)
-					msgs = ((InternalEObject)source).eInverseRemove(this, SimplegraphPackage.NODE__OUTGOING, Node.class, msgs);
+					msgs = ((InternalEObject)source).eInverseRemove(this, 2, Node.class, msgs);
 				return basicSetSource((Node)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -228,9 +246,9 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimplegraphPackage.EDGE__TARGET:
+			case 1:
 				return basicSetTarget(null, msgs);
-			case SimplegraphPackage.EDGE__SOURCE:
+			case 2:
 				return basicSetSource(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -244,10 +262,10 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SimplegraphPackage.EDGE__TARGET:
+			case 1:
 				if (resolve) return getTarget();
 				return basicGetTarget();
-			case SimplegraphPackage.EDGE__SOURCE:
+			case 2:
 				if (resolve) return getSource();
 				return basicGetSource();
 		}
@@ -262,10 +280,10 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SimplegraphPackage.EDGE__TARGET:
+			case 1:
 				setTarget((Node)newValue);
 				return;
-			case SimplegraphPackage.EDGE__SOURCE:
+			case 2:
 				setSource((Node)newValue);
 				return;
 		}
@@ -280,10 +298,10 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SimplegraphPackage.EDGE__TARGET:
+			case 1:
 				setTarget((Node)null);
 				return;
-			case SimplegraphPackage.EDGE__SOURCE:
+			case 2:
 				setSource((Node)null);
 				return;
 		}
@@ -298,9 +316,9 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SimplegraphPackage.EDGE__TARGET:
+			case 1:
 				return target != null;
-			case SimplegraphPackage.EDGE__SOURCE:
+			case 2:
 				return source != null;
 		}
 		return super.eIsSet(featureID);

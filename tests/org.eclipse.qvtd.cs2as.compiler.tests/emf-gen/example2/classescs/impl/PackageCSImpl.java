@@ -41,6 +41,24 @@ import example2.classescs.PackageCS;
  */
 public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	/**
+	 * The number of structural features of the '<em>Package CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Package CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_CS_OPERATION_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedClasses() <em>Owned Classes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,7 +105,7 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	@Override
 	public EList<ClassCS> getOwnedClasses() {
 		if (ownedClasses == null) {
-			ownedClasses = new EObjectContainmentEList<ClassCS>(ClassCS.class, this, ClassescsPackage.PACKAGE_CS__OWNED_CLASSES);
+			ownedClasses = new EObjectContainmentEList<ClassCS>(ClassCS.class, this, 2);
 		}
 		return ownedClasses;
 	}
@@ -100,7 +118,7 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	@Override
 	public EList<PackageCS> getOwnedPackages() {
 		if (ownedPackages == null) {
-			ownedPackages = new EObjectContainmentEList<PackageCS>(PackageCS.class, this, ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES);
+			ownedPackages = new EObjectContainmentEList<PackageCS>(PackageCS.class, this, 3);
 		}
 		return ownedPackages;
 	}
@@ -113,9 +131,9 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassescsPackage.PACKAGE_CS__OWNED_CLASSES:
+			case 2:
 				return ((InternalEList<?>)getOwnedClasses()).basicRemove(otherEnd, msgs);
-			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+			case 3:
 				return ((InternalEList<?>)getOwnedPackages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -129,9 +147,9 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.PACKAGE_CS__OWNED_CLASSES:
+			case 2:
 				return getOwnedClasses();
-			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+			case 3:
 				return getOwnedPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -146,11 +164,11 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.PACKAGE_CS__OWNED_CLASSES:
+			case 2:
 				getOwnedClasses().clear();
 				getOwnedClasses().addAll((Collection<? extends ClassCS>)newValue);
 				return;
-			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+			case 3:
 				getOwnedPackages().clear();
 				getOwnedPackages().addAll((Collection<? extends PackageCS>)newValue);
 				return;
@@ -166,10 +184,10 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.PACKAGE_CS__OWNED_CLASSES:
+			case 2:
 				getOwnedClasses().clear();
 				return;
-			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+			case 3:
 				getOwnedPackages().clear();
 				return;
 		}
@@ -184,9 +202,9 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.PACKAGE_CS__OWNED_CLASSES:
+			case 2:
 				return ownedClasses != null && !ownedClasses.isEmpty();
-			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+			case 3:
 				return ownedPackages != null && !ownedPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);

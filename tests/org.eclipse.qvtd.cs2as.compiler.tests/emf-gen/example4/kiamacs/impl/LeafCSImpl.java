@@ -26,6 +26,23 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class LeafCSImpl extends NodeCSImpl implements LeafCS {
 	/**
+	 * The number of structural features of the '<em>Leaf CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LEAF_CS_FEATURE_COUNT = NodeCSImpl.NODE_CS_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Leaf CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LEAF_CS_OPERATION_COUNT = NodeCSImpl.NODE_CS_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

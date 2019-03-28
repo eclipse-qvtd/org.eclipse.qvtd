@@ -39,6 +39,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class TopImpl extends ElementImpl implements Top {
 	/**
+	 * The number of structural features of the '<em>Top</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TOP_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Top</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TOP_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getNode() <em>Node</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +102,7 @@ public class TopImpl extends ElementImpl implements Top {
 		Node oldNode = node;
 		node = newNode;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KiamaasPackage.TOP__NODE, oldNode, newNode);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 0, oldNode, newNode);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -102,14 +118,14 @@ public class TopImpl extends ElementImpl implements Top {
 		if (newNode != node) {
 			NotificationChain msgs = null;
 			if (node != null)
-				msgs = ((InternalEObject)node).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KiamaasPackage.TOP__NODE, null, msgs);
+				msgs = ((InternalEObject)node).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (0), null, msgs);
 			if (newNode != null)
-				msgs = ((InternalEObject)newNode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KiamaasPackage.TOP__NODE, null, msgs);
+				msgs = ((InternalEObject)newNode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (0), null, msgs);
 			msgs = basicSetNode(newNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.TOP__NODE, newNode, newNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, newNode, newNode));
 	}
 
 	/**
@@ -120,7 +136,7 @@ public class TopImpl extends ElementImpl implements Top {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KiamaasPackage.TOP__NODE:
+			case 0:
 				return basicSetNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -134,7 +150,7 @@ public class TopImpl extends ElementImpl implements Top {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KiamaasPackage.TOP__NODE:
+			case 0:
 				return getNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -148,7 +164,7 @@ public class TopImpl extends ElementImpl implements Top {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KiamaasPackage.TOP__NODE:
+			case 0:
 				setNode((Node)newValue);
 				return;
 		}
@@ -163,7 +179,7 @@ public class TopImpl extends ElementImpl implements Top {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.TOP__NODE:
+			case 0:
 				setNode((Node)null);
 				return;
 		}
@@ -178,7 +194,7 @@ public class TopImpl extends ElementImpl implements Top {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KiamaasPackage.TOP__NODE:
+			case 0:
 				return node != null;
 		}
 		return super.eIsSet(featureID);

@@ -76,7 +76,7 @@ public class HSV2HSLSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case HSV2HSLPackage.HSV_NODE2_HSL_NODE: {
+			case 0: {
 				HSVNode2HSLNode hsvNode2HSLNode = (HSVNode2HSLNode)theEObject;
 				T result = caseHSVNode2HSLNode(hsvNode2HSLNode);
 				if (result == null) result = defaultCase(theEObject);

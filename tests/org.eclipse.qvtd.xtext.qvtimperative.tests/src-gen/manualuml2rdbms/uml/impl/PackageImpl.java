@@ -42,6 +42,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class PackageImpl extends UMLModelElementImpl implements manualuml2rdbms.uml.Package {
 	/**
+	 * The number of structural features of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_FEATURE_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_OPERATION_COUNT = UMLModelElementImpl.UML_MODEL_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,7 +94,7 @@ public class PackageImpl extends UMLModelElementImpl implements manualuml2rdbms.
 	@Override
 	public EList<PackageElement> getElements() {
 		if (elements == null) {
-			elements = new EObjectContainmentWithInverseEList<PackageElement>(PackageElement.class, this, UMLPackage.PACKAGE__ELEMENTS, UMLPackage.PACKAGE_ELEMENT__NAMESPACE);
+			elements = new EObjectContainmentWithInverseEList<PackageElement>(PackageElement.class, this, 2, 2);
 		}
 		return elements;
 	}
@@ -92,7 +108,7 @@ public class PackageImpl extends UMLModelElementImpl implements manualuml2rdbms.
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE__ELEMENTS:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getElements()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -106,7 +122,7 @@ public class PackageImpl extends UMLModelElementImpl implements manualuml2rdbms.
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE__ELEMENTS:
+			case 2:
 				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -120,7 +136,7 @@ public class PackageImpl extends UMLModelElementImpl implements manualuml2rdbms.
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE__ELEMENTS:
+			case 2:
 				return getElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -135,7 +151,7 @@ public class PackageImpl extends UMLModelElementImpl implements manualuml2rdbms.
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE__ELEMENTS:
+			case 2:
 				getElements().clear();
 				getElements().addAll((Collection<? extends PackageElement>)newValue);
 				return;
@@ -151,7 +167,7 @@ public class PackageImpl extends UMLModelElementImpl implements manualuml2rdbms.
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE__ELEMENTS:
+			case 2:
 				getElements().clear();
 				return;
 		}
@@ -166,7 +182,7 @@ public class PackageImpl extends UMLModelElementImpl implements manualuml2rdbms.
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLPackage.PACKAGE__ELEMENTS:
+			case 2:
 				return elements != null && !elements.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -77,21 +77,21 @@ public class KiamacsSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case KiamacsPackage.TOP_CS: {
+			case 0: {
 				TopCS topCS = (TopCS)theEObject;
 				T result = caseTopCS(topCS);
 				if (result == null) result = caseBaseCS(topCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KiamacsPackage.NODE_CS: {
+			case 1: {
 				NodeCS nodeCS = (NodeCS)theEObject;
 				T result = caseNodeCS(nodeCS);
 				if (result == null) result = caseBaseCS(nodeCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KiamacsPackage.COMPOSITE_CS: {
+			case 2: {
 				CompositeCS compositeCS = (CompositeCS)theEObject;
 				T result = caseCompositeCS(compositeCS);
 				if (result == null) result = caseNodeCS(compositeCS);
@@ -99,7 +99,7 @@ public class KiamacsSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KiamacsPackage.LEAF_CS: {
+			case 3: {
 				LeafCS leafCS = (LeafCS)theEObject;
 				T result = caseLeafCS(leafCS);
 				if (result == null) result = caseNodeCS(leafCS);
@@ -107,7 +107,7 @@ public class KiamacsSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KiamacsPackage.BASE_CS: {
+			case 4: {
 				BaseCS baseCS = (BaseCS)theEObject;
 				T result = caseBaseCS(baseCS);
 				if (result == null) result = defaultCase(theEObject);

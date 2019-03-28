@@ -66,11 +66,11 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ClassescsPackage.PACKAGE_CS: return createPackageCS();
-			case ClassescsPackage.CLASS_CS: return createClassCS();
-			case ClassescsPackage.PATH_NAME_CS: return createPathNameCS();
-			case ClassescsPackage.PATH_ELEMENT_CS: return createPathElementCS();
-			case ClassescsPackage.ROOT_CS: return createRootCS();
+			case 2: return createPackageCS();
+			case 3: return createClassCS();
+			case 4: return createPathNameCS();
+			case 5: return createPathElementCS();
+			case 6: return createRootCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

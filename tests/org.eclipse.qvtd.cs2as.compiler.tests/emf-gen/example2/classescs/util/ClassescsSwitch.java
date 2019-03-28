@@ -84,20 +84,20 @@ public class ClassescsSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ClassescsPackage.ELEMENT_CS: {
+			case 0: {
 				ElementCS elementCS = (ElementCS)theEObject;
 				T result = caseElementCS(elementCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.NAMED_ELEMENT_CS: {
+			case 1: {
 				NamedElementCS namedElementCS = (NamedElementCS)theEObject;
 				T result = caseNamedElementCS(namedElementCS);
 				if (result == null) result = caseElementCS(namedElementCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.PACKAGE_CS: {
+			case 2: {
 				PackageCS packageCS = (PackageCS)theEObject;
 				T result = casePackageCS(packageCS);
 				if (result == null) result = caseNamedElementCS(packageCS);
@@ -105,7 +105,7 @@ public class ClassescsSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.CLASS_CS: {
+			case 3: {
 				ClassCS classCS = (ClassCS)theEObject;
 				T result = caseClassCS(classCS);
 				if (result == null) result = caseNamedElementCS(classCS);
@@ -113,14 +113,14 @@ public class ClassescsSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.PATH_NAME_CS: {
+			case 4: {
 				PathNameCS pathNameCS = (PathNameCS)theEObject;
 				T result = casePathNameCS(pathNameCS);
 				if (result == null) result = caseElementCS(pathNameCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.PATH_ELEMENT_CS: {
+			case 5: {
 				PathElementCS pathElementCS = (PathElementCS)theEObject;
 				T result = casePathElementCS(pathElementCS);
 				if (result == null) result = caseNamedElementCS(pathElementCS);
@@ -128,14 +128,14 @@ public class ClassescsSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.ROOT_CS: {
+			case 6: {
 				RootCS rootCS = (RootCS)theEObject;
 				T result = caseRootCS(rootCS);
 				if (result == null) result = caseElementCS(rootCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.PROPERTY_CS: {
+			case 7: {
 				PropertyCS propertyCS = (PropertyCS)theEObject;
 				T result = casePropertyCS(propertyCS);
 				if (result == null) result = caseNamedElementCS(propertyCS);
@@ -143,7 +143,7 @@ public class ClassescsSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.OPERATION_CS: {
+			case 8: {
 				OperationCS operationCS = (OperationCS)theEObject;
 				T result = caseOperationCS(operationCS);
 				if (result == null) result = caseNamedElementCS(operationCS);
@@ -151,21 +151,21 @@ public class ClassescsSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.NAME_EXP_CS: {
+			case 9: {
 				NameExpCS nameExpCS = (NameExpCS)theEObject;
 				T result = caseNameExpCS(nameExpCS);
 				if (result == null) result = caseElementCS(nameExpCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.ROUNDED_BRACKET_CLAUSE: {
+			case 10: {
 				RoundedBracketClause roundedBracketClause = (RoundedBracketClause)theEObject;
 				T result = caseRoundedBracketClause(roundedBracketClause);
 				if (result == null) result = caseElementCS(roundedBracketClause);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassescsPackage.ARGUMENT_CS: {
+			case 11: {
 				ArgumentCS argumentCS = (ArgumentCS)theEObject;
 				T result = caseArgumentCS(argumentCS);
 				if (result == null) result = caseNamedElementCS(argumentCS);

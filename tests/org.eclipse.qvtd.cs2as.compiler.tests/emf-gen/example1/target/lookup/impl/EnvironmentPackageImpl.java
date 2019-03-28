@@ -246,17 +246,17 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		isCreated = true;
 
 		// Create classes and their features
-		lookupEnvironmentEClass = createEClass(LOOKUP_ENVIRONMENT);
-		createEReference(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT__NAMED_ELEMENTS);
-		createEReference(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT__PARENT_ENV);
-		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION);
-		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT);
+		lookupEnvironmentEClass = createEClass(0);
+		createEReference(lookupEnvironmentEClass, 0);
+		createEReference(lookupEnvironmentEClass, 1);
+		createEOperation(lookupEnvironmentEClass, 2);
+		createEOperation(lookupEnvironmentEClass, 3);
 
-		env4CGEClass = createEClass(ENV4_CG);
-		createEOperation(env4CGEClass, ENV4_CG___HAS_FINAL_RESULT);
-		createEOperation(env4CGEClass, ENV4_CG___GET_EXECUTOR);
+		env4CGEClass = createEClass(1);
+		createEOperation(env4CGEClass, 0);
+		createEOperation(env4CGEClass, 1);
 
-		executorEClass = createEClass(EXECUTOR);
+		executorEClass = createEClass(2);
 	}
 
 	/**

@@ -77,7 +77,7 @@ public class UML2RDBMSSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case UML2RDBMSPackage.ATTRIBUTE_TO_COLUMN: {
+			case 0: {
 				AttributeToColumn attributeToColumn = (AttributeToColumn)theEObject;
 				T result = caseAttributeToColumn(attributeToColumn);
 				if (result == null) result = caseFromAttribute(attributeToColumn);
@@ -86,7 +86,7 @@ public class UML2RDBMSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.ASSOCIATION_TO_FOREIGN_KEY: {
+			case 1: {
 				AssociationToForeignKey associationToForeignKey = (AssociationToForeignKey)theEObject;
 				T result = caseAssociationToForeignKey(associationToForeignKey);
 				if (result == null) result = caseToColumn(associationToForeignKey);
@@ -94,7 +94,7 @@ public class UML2RDBMSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.BOOLEAN_TO_BOOLEAN: {
+			case 2: {
 				BooleanToBoolean booleanToBoolean = (BooleanToBoolean)theEObject;
 				T result = caseBooleanToBoolean(booleanToBoolean);
 				if (result == null) result = casePrimitiveToName(booleanToBoolean);
@@ -102,7 +102,7 @@ public class UML2RDBMSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.CLASS_TO_TABLE: {
+			case 3: {
 				ClassToTable classToTable = (ClassToTable)theEObject;
 				T result = caseClassToTable(classToTable);
 				if (result == null) result = caseFromAttributeOwner(classToTable);
@@ -111,20 +111,20 @@ public class UML2RDBMSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.FROM_ATTRIBUTE: {
+			case 4: {
 				FromAttribute fromAttribute = (FromAttribute)theEObject;
 				T result = caseFromAttribute(fromAttribute);
 				if (result == null) result = caseUmlToRdbmsModelElement(fromAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER: {
+			case 5: {
 				FromAttributeOwner fromAttributeOwner = (FromAttributeOwner)theEObject;
 				T result = caseFromAttributeOwner(fromAttributeOwner);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.INTEGER_TO_NUMBER: {
+			case 6: {
 				IntegerToNumber integerToNumber = (IntegerToNumber)theEObject;
 				T result = caseIntegerToNumber(integerToNumber);
 				if (result == null) result = casePrimitiveToName(integerToNumber);
@@ -132,7 +132,7 @@ public class UML2RDBMSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.NON_LEAF_ATTRIBUTE: {
+			case 7: {
 				NonLeafAttribute nonLeafAttribute = (NonLeafAttribute)theEObject;
 				T result = caseNonLeafAttribute(nonLeafAttribute);
 				if (result == null) result = caseFromAttributeOwner(nonLeafAttribute);
@@ -141,21 +141,21 @@ public class UML2RDBMSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.PACKAGE_TO_SCHEMA: {
+			case 8: {
 				PackageToSchema packageToSchema = (PackageToSchema)theEObject;
 				T result = casePackageToSchema(packageToSchema);
 				if (result == null) result = caseUmlToRdbmsModelElement(packageToSchema);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.PRIMITIVE_TO_NAME: {
+			case 9: {
 				PrimitiveToName primitiveToName = (PrimitiveToName)theEObject;
 				T result = casePrimitiveToName(primitiveToName);
 				if (result == null) result = caseUmlToRdbmsModelElement(primitiveToName);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.STRING_TO_VARCHAR: {
+			case 10: {
 				StringToVarchar stringToVarchar = (StringToVarchar)theEObject;
 				T result = caseStringToVarchar(stringToVarchar);
 				if (result == null) result = casePrimitiveToName(stringToVarchar);
@@ -163,13 +163,13 @@ public class UML2RDBMSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.TO_COLUMN: {
+			case 11: {
 				ToColumn toColumn = (ToColumn)theEObject;
 				T result = caseToColumn(toColumn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UML2RDBMSPackage.UML_TO_RDBMS_MODEL_ELEMENT: {
+			case 12: {
 				UmlToRdbmsModelElement umlToRdbmsModelElement = (UmlToRdbmsModelElement)theEObject;
 				T result = caseUmlToRdbmsModelElement(umlToRdbmsModelElement);
 				if (result == null) result = defaultCase(theEObject);

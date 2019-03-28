@@ -42,6 +42,22 @@ import example1.target.util.Visitor;
  */
 public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 	/**
+	 * The number of structural features of the '<em>TRoot</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TROOT_FEATURE_COUNT = 1;
+	/**
+	 * The number of operations of the '<em>TRoot</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TROOT_OPERATION_COUNT = 0;
+	/**
 	 * The cached value of the '{@link #getOwnedA() <em>Owned A</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,7 +94,7 @@ public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 	@Override
 	public EList<A> getOwnedA() {
 		if (ownedA == null) {
-			ownedA = new EObjectContainmentEList<A>(A.class, this, TargetPackage.TROOT__OWNED_A);
+			ownedA = new EObjectContainmentEList<A>(A.class, this, 0);
 		}
 		return ownedA;
 	}
@@ -91,7 +107,7 @@ public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TargetPackage.TROOT__OWNED_A:
+			case 0:
 				return ((InternalEList<?>)getOwnedA()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -105,7 +121,7 @@ public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TargetPackage.TROOT__OWNED_A:
+			case 0:
 				return getOwnedA();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -120,7 +136,7 @@ public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TargetPackage.TROOT__OWNED_A:
+			case 0:
 				getOwnedA().clear();
 				getOwnedA().addAll((Collection<? extends A>)newValue);
 				return;
@@ -136,7 +152,7 @@ public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TargetPackage.TROOT__OWNED_A:
+			case 0:
 				getOwnedA().clear();
 				return;
 		}
@@ -151,7 +167,7 @@ public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TargetPackage.TROOT__OWNED_A:
+			case 0:
 				return ownedA != null && !ownedA.isEmpty();
 		}
 		return super.eIsSet(featureID);

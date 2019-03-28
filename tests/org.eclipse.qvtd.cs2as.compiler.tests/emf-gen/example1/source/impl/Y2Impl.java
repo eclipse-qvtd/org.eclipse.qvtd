@@ -26,6 +26,23 @@ import example1.source.Y2;
  */
 public class Y2Impl extends YImpl implements Y2 {
 	/**
+	 * The number of structural features of the '<em>Y2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int Y2_FEATURE_COUNT = YImpl.Y_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Y2</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int Y2_OPERATION_COUNT = YImpl.Y_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

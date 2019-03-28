@@ -40,6 +40,22 @@ import example2.classes.util.Visitor;
  */
 public class RootImpl extends ElementImpl implements Root {
 	/**
+	 * The number of structural features of the '<em>Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROOT_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROOT_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnedPackages() <em>Owned Packages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,7 +92,7 @@ public class RootImpl extends ElementImpl implements Root {
 	@Override
 	public EList<example2.classes.Package> getOwnedPackages() {
 		if (ownedPackages == null) {
-			ownedPackages = new EObjectContainmentEList<example2.classes.Package>(example2.classes.Package.class, this, ClassesPackage.ROOT__OWNED_PACKAGES);
+			ownedPackages = new EObjectContainmentEList<example2.classes.Package>(example2.classes.Package.class, this, 0);
 		}
 		return ownedPackages;
 	}
@@ -89,7 +105,7 @@ public class RootImpl extends ElementImpl implements Root {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassesPackage.ROOT__OWNED_PACKAGES:
+			case 0:
 				return ((InternalEList<?>)getOwnedPackages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -103,7 +119,7 @@ public class RootImpl extends ElementImpl implements Root {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.ROOT__OWNED_PACKAGES:
+			case 0:
 				return getOwnedPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -118,7 +134,7 @@ public class RootImpl extends ElementImpl implements Root {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.ROOT__OWNED_PACKAGES:
+			case 0:
 				getOwnedPackages().clear();
 				getOwnedPackages().addAll((Collection<? extends example2.classes.Package>)newValue);
 				return;
@@ -134,7 +150,7 @@ public class RootImpl extends ElementImpl implements Root {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.ROOT__OWNED_PACKAGES:
+			case 0:
 				getOwnedPackages().clear();
 				return;
 		}
@@ -149,7 +165,7 @@ public class RootImpl extends ElementImpl implements Root {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.ROOT__OWNED_PACKAGES:
+			case 0:
 				return ownedPackages != null && !ownedPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);

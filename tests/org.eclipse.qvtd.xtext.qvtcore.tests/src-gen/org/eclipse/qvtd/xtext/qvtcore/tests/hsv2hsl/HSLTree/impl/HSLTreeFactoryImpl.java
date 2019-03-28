@@ -64,7 +64,7 @@ public class HSLTreeFactoryImpl extends EFactoryImpl implements HSLTreeFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case HSLTreePackage.HSL_NODE: return createHSLNode();
+			case 0: return createHSLNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -78,7 +78,7 @@ public class HSLTreeFactoryImpl extends EFactoryImpl implements HSLTreeFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case HSLTreePackage.HSL:
+			case 1:
 				return createHSLFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -93,7 +93,7 @@ public class HSLTreeFactoryImpl extends EFactoryImpl implements HSLTreeFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case HSLTreePackage.HSL:
+			case 1:
 				return convertHSLToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");

@@ -46,6 +46,24 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphP
  */
 public class NodeImpl extends ElementImpl implements Node {
 	/**
+	 * The number of structural features of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getIncoming() <em>Incoming</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -112,7 +130,7 @@ public class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public EList<Edge> getIncoming() {
 		if (incoming == null) {
-			incoming = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, SimplegraphPackage.NODE__INCOMING, SimplegraphPackage.EDGE__TARGET);
+			incoming = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, 1, 1);
 		}
 		return incoming;
 	}
@@ -125,7 +143,7 @@ public class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public EList<Edge> getOutgoing() {
 		if (outgoing == null) {
-			outgoing = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, SimplegraphPackage.NODE__OUTGOING, SimplegraphPackage.EDGE__SOURCE);
+			outgoing = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, 2, 2);
 		}
 		return outgoing;
 	}
@@ -150,7 +168,7 @@ public class NodeImpl extends ElementImpl implements Node {
 		String oldLabel = label;
 		label = newLabel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimplegraphPackage.NODE__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldLabel, label));
 	}
 
 	/**
@@ -162,9 +180,9 @@ public class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimplegraphPackage.NODE__INCOMING:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncoming()).basicAdd(otherEnd, msgs);
-			case SimplegraphPackage.NODE__OUTGOING:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -178,9 +196,9 @@ public class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimplegraphPackage.NODE__INCOMING:
+			case 1:
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
-			case SimplegraphPackage.NODE__OUTGOING:
+			case 2:
 				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -194,11 +212,11 @@ public class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SimplegraphPackage.NODE__INCOMING:
+			case 1:
 				return getIncoming();
-			case SimplegraphPackage.NODE__OUTGOING:
+			case 2:
 				return getOutgoing();
-			case SimplegraphPackage.NODE__LABEL:
+			case 3:
 				return getLabel();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -213,15 +231,15 @@ public class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SimplegraphPackage.NODE__INCOMING:
+			case 1:
 				getIncoming().clear();
 				getIncoming().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case SimplegraphPackage.NODE__OUTGOING:
+			case 2:
 				getOutgoing().clear();
 				getOutgoing().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case SimplegraphPackage.NODE__LABEL:
+			case 3:
 				setLabel((String)newValue);
 				return;
 		}
@@ -236,13 +254,13 @@ public class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SimplegraphPackage.NODE__INCOMING:
+			case 1:
 				getIncoming().clear();
 				return;
-			case SimplegraphPackage.NODE__OUTGOING:
+			case 2:
 				getOutgoing().clear();
 				return;
-			case SimplegraphPackage.NODE__LABEL:
+			case 3:
 				setLabel(LABEL_EDEFAULT);
 				return;
 		}
@@ -257,11 +275,11 @@ public class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SimplegraphPackage.NODE__INCOMING:
+			case 1:
 				return incoming != null && !incoming.isEmpty();
-			case SimplegraphPackage.NODE__OUTGOING:
+			case 2:
 				return outgoing != null && !outgoing.isEmpty();
-			case SimplegraphPackage.NODE__LABEL:
+			case 3:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 		}
 		return super.eIsSet(featureID);

@@ -37,6 +37,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 	/**
+	 * The number of structural features of the '<em>Property CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Property CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_CS_OPERATION_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getTypeRef() <em>Type Ref</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,7 +100,7 @@ public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 		PathNameCS oldTypeRef = typeRef;
 		typeRef = newTypeRef;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassescsPackage.PROPERTY_CS__TYPE_REF, oldTypeRef, newTypeRef);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 2, oldTypeRef, newTypeRef);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -100,14 +116,14 @@ public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 		if (newTypeRef != typeRef) {
 			NotificationChain msgs = null;
 			if (typeRef != null)
-				msgs = ((InternalEObject)typeRef).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.PROPERTY_CS__TYPE_REF, null, msgs);
+				msgs = ((InternalEObject)typeRef).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			if (newTypeRef != null)
-				msgs = ((InternalEObject)newTypeRef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassescsPackage.PROPERTY_CS__TYPE_REF, null, msgs);
+				msgs = ((InternalEObject)newTypeRef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (2), null, msgs);
 			msgs = basicSetTypeRef(newTypeRef, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescsPackage.PROPERTY_CS__TYPE_REF, newTypeRef, newTypeRef));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newTypeRef, newTypeRef));
 	}
 
 	/**
@@ -118,7 +134,7 @@ public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassescsPackage.PROPERTY_CS__TYPE_REF:
+			case 2:
 				return basicSetTypeRef(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -132,7 +148,7 @@ public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.PROPERTY_CS__TYPE_REF:
+			case 2:
 				return getTypeRef();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -146,7 +162,7 @@ public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.PROPERTY_CS__TYPE_REF:
+			case 2:
 				setTypeRef((PathNameCS)newValue);
 				return;
 		}
@@ -161,7 +177,7 @@ public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.PROPERTY_CS__TYPE_REF:
+			case 2:
 				setTypeRef((PathNameCS)null);
 				return;
 		}
@@ -176,7 +192,7 @@ public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.PROPERTY_CS__TYPE_REF:
+			case 2:
 				return typeRef != null;
 		}
 		return super.eIsSet(featureID);

@@ -508,46 +508,46 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		isCreated = true;
 
 		// Create classes and their features
-		elementCSEClass = createEClass(ELEMENT_CS);
-		createEReference(elementCSEClass, ELEMENT_CS__AST);
+		elementCSEClass = createEClass(0);
+		createEReference(elementCSEClass, 0);
 
-		namedElementCSEClass = createEClass(NAMED_ELEMENT_CS);
-		createEAttribute(namedElementCSEClass, NAMED_ELEMENT_CS__NAME);
+		namedElementCSEClass = createEClass(1);
+		createEAttribute(namedElementCSEClass, 1);
 
-		packageCSEClass = createEClass(PACKAGE_CS);
-		createEReference(packageCSEClass, PACKAGE_CS__OWNED_CLASSES);
-		createEReference(packageCSEClass, PACKAGE_CS__OWNED_PACKAGES);
+		packageCSEClass = createEClass(2);
+		createEReference(packageCSEClass, 2);
+		createEReference(packageCSEClass, 3);
 
-		classCSEClass = createEClass(CLASS_CS);
-		createEReference(classCSEClass, CLASS_CS__EXTENDS);
-		createEReference(classCSEClass, CLASS_CS__PROPERTIES);
-		createEReference(classCSEClass, CLASS_CS__OPERATIONS);
+		classCSEClass = createEClass(3);
+		createEReference(classCSEClass, 2);
+		createEReference(classCSEClass, 3);
+		createEReference(classCSEClass, 4);
 
-		pathNameCSEClass = createEClass(PATH_NAME_CS);
-		createEReference(pathNameCSEClass, PATH_NAME_CS__PATH);
+		pathNameCSEClass = createEClass(4);
+		createEReference(pathNameCSEClass, 1);
 
-		pathElementCSEClass = createEClass(PATH_ELEMENT_CS);
+		pathElementCSEClass = createEClass(5);
 
-		rootCSEClass = createEClass(ROOT_CS);
-		createEReference(rootCSEClass, ROOT_CS__OWNED_PACKAGES);
+		rootCSEClass = createEClass(6);
+		createEReference(rootCSEClass, 1);
 
-		propertyCSEClass = createEClass(PROPERTY_CS);
-		createEReference(propertyCSEClass, PROPERTY_CS__TYPE_REF);
+		propertyCSEClass = createEClass(7);
+		createEReference(propertyCSEClass, 2);
 
-		operationCSEClass = createEClass(OPERATION_CS);
-		createEAttribute(operationCSEClass, OPERATION_CS__PARAMS);
-		createEReference(operationCSEClass, OPERATION_CS__BODY_EXPS);
-		createEReference(operationCSEClass, OPERATION_CS__RESULT_REF);
+		operationCSEClass = createEClass(8);
+		createEAttribute(operationCSEClass, 2);
+		createEReference(operationCSEClass, 3);
+		createEReference(operationCSEClass, 4);
 
-		nameExpCSEClass = createEClass(NAME_EXP_CS);
-		createEReference(nameExpCSEClass, NAME_EXP_CS__NAME);
-		createEReference(nameExpCSEClass, NAME_EXP_CS__ROUNDED_BRACKETS);
-		createEReference(nameExpCSEClass, NAME_EXP_CS__OWNED_NAME_EXP);
+		nameExpCSEClass = createEClass(9);
+		createEReference(nameExpCSEClass, 1);
+		createEReference(nameExpCSEClass, 2);
+		createEReference(nameExpCSEClass, 3);
 
-		roundedBracketClauseEClass = createEClass(ROUNDED_BRACKET_CLAUSE);
-		createEReference(roundedBracketClauseEClass, ROUNDED_BRACKET_CLAUSE__ARGS);
+		roundedBracketClauseEClass = createEClass(10);
+		createEReference(roundedBracketClauseEClass, 1);
 
-		argumentCSEClass = createEClass(ARGUMENT_CS);
+		argumentCSEClass = createEClass(11);
 	}
 
 	/**

@@ -34,6 +34,24 @@ import example2.classes.NamedElement;
  */
 public abstract class NamedElementImpl extends ElementImpl implements NamedElement {
 	/**
+	 * The number of structural features of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAMED_ELEMENT_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAMED_ELEMENT_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,7 +110,7 @@ public abstract class NamedElementImpl extends ElementImpl implements NamedEleme
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassesPackage.NAMED_ELEMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldName, name));
 	}
 
 	/**
@@ -103,7 +121,7 @@ public abstract class NamedElementImpl extends ElementImpl implements NamedEleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassesPackage.NAMED_ELEMENT__NAME:
+			case 0:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -117,7 +135,7 @@ public abstract class NamedElementImpl extends ElementImpl implements NamedEleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassesPackage.NAMED_ELEMENT__NAME:
+			case 0:
 				setName((String)newValue);
 				return;
 		}
@@ -132,7 +150,7 @@ public abstract class NamedElementImpl extends ElementImpl implements NamedEleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.NAMED_ELEMENT__NAME:
+			case 0:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -147,7 +165,7 @@ public abstract class NamedElementImpl extends ElementImpl implements NamedEleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassesPackage.NAMED_ELEMENT__NAME:
+			case 0:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

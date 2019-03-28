@@ -548,50 +548,50 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		elementEClass = createEClass(ELEMENT);
+		elementEClass = createEClass(0);
 
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+		namedElementEClass = createEClass(1);
+		createEAttribute(namedElementEClass, 0);
 
-		namespaceEClass = createEClass(NAMESPACE);
+		namespaceEClass = createEClass(2);
 
-		typedElementEClass = createEClass(TYPED_ELEMENT);
-		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
+		typedElementEClass = createEClass(3);
+		createEReference(typedElementEClass, 0);
 
-		callExpEClass = createEClass(CALL_EXP);
-		createEReference(callExpEClass, CALL_EXP__OWNED_CALL_EXP);
-		createEReference(callExpEClass, CALL_EXP__OWNING_SOURCE);
+		callExpEClass = createEClass(4);
+		createEReference(callExpEClass, 1);
+		createEReference(callExpEClass, 2);
 
-		rootEClass = createEClass(ROOT);
-		createEReference(rootEClass, ROOT__OWNED_PACKAGES);
+		rootEClass = createEClass(5);
+		createEReference(rootEClass, 0);
 
-		packageEClass = createEClass(PACKAGE);
-		createEReference(packageEClass, PACKAGE__OWNED_CLASSES);
-		createEReference(packageEClass, PACKAGE__OWNED_PACKAGES);
+		packageEClass = createEClass(6);
+		createEReference(packageEClass, 1);
+		createEReference(packageEClass, 2);
 
-		classEClass = createEClass(CLASS);
-		createEReference(classEClass, CLASS__SUPER_CLASS);
-		createEReference(classEClass, CLASS__OWNED_OPERATIONS);
-		createEReference(classEClass, CLASS__OWNED_PROPERTIES);
+		classEClass = createEClass(7);
+		createEReference(classEClass, 1);
+		createEReference(classEClass, 2);
+		createEReference(classEClass, 3);
 
-		propertyEClass = createEClass(PROPERTY);
+		propertyEClass = createEClass(8);
 
-		operationEClass = createEClass(OPERATION);
-		createEReference(operationEClass, OPERATION__OWNED_PARAMETERS);
-		createEReference(operationEClass, OPERATION__OWNED_EXPRESSIONS);
+		operationEClass = createEClass(9);
+		createEReference(operationEClass, 2);
+		createEReference(operationEClass, 3);
 
-		parameterEClass = createEClass(PARAMETER);
+		parameterEClass = createEClass(10);
 
-		propertyCallExpEClass = createEClass(PROPERTY_CALL_EXP);
-		createEReference(propertyCallExpEClass, PROPERTY_CALL_EXP__REFERRED_PROPERTY);
+		propertyCallExpEClass = createEClass(11);
+		createEReference(propertyCallExpEClass, 3);
 
-		operationCallExpEClass = createEClass(OPERATION_CALL_EXP);
-		createEReference(operationCallExpEClass, OPERATION_CALL_EXP__OWNED_ARGUMENTS);
-		createEReference(operationCallExpEClass, OPERATION_CALL_EXP__REFERRED_OPERATION);
+		operationCallExpEClass = createEClass(12);
+		createEReference(operationCallExpEClass, 3);
+		createEReference(operationCallExpEClass, 4);
 
-		argumentEClass = createEClass(ARGUMENT);
+		argumentEClass = createEClass(13);
 
-		visitableEClass = createEClass(VISITABLE);
+		visitableEClass = createEClass(14);
 	}
 
 	/**

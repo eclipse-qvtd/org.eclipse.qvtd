@@ -74,13 +74,13 @@ public class DoublylinkedlistSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case DoublylinkedlistPackage.ELEMENT: {
+			case 0: {
 				Element element = (Element)theEObject;
 				T result = caseElement(element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DoublylinkedlistPackage.DOUBLY_LINKED_LIST: {
+			case 1: {
 				DoublyLinkedList doublyLinkedList = (DoublyLinkedList)theEObject;
 				T result = caseDoublyLinkedList(doublyLinkedList);
 				if (result == null) result = defaultCase(theEObject);

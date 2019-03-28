@@ -38,6 +38,24 @@ import example2.classescstraces.PackageCS2Package;
  */
 public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implements PackageCS2Package {
 	/**
+	 * The number of structural features of the '<em>Package CS2 Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_CS2_PACKAGE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Package CS2 Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_CS2_PACKAGE_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getPackageCS() <em>Package CS</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,7 +106,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 			packageCS = (PackageCS)eResolveProxy(oldPackageCS);
 			if (packageCS != oldPackageCS) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE_CS, oldPackageCS, packageCS));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldPackageCS, packageCS));
 			}
 		}
 		return packageCS;
@@ -113,7 +131,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 		PackageCS oldPackageCS = packageCS;
 		packageCS = newPackageCS;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE_CS, oldPackageCS, packageCS));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldPackageCS, packageCS));
 	}
 
 	/**
@@ -128,7 +146,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 			package_ = (example2.classes.Package)eResolveProxy(oldPackage);
 			if (package_ != oldPackage) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE, oldPackage, package_));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 1, oldPackage, package_));
 			}
 		}
 		return package_;
@@ -153,7 +171,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 		example2.classes.Package oldPackage = package_;
 		package_ = newPackage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE, oldPackage, package_));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldPackage, package_));
 	}
 
 	/**
@@ -164,10 +182,10 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE_CS:
+			case 0:
 				if (resolve) return getPackageCS();
 				return basicGetPackageCS();
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE:
+			case 1:
 				if (resolve) return getPackage();
 				return basicGetPackage();
 		}
@@ -182,10 +200,10 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE_CS:
+			case 0:
 				setPackageCS((PackageCS)newValue);
 				return;
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE:
+			case 1:
 				setPackage((example2.classes.Package)newValue);
 				return;
 		}
@@ -200,10 +218,10 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE_CS:
+			case 0:
 				setPackageCS((PackageCS)null);
 				return;
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE:
+			case 1:
 				setPackage((example2.classes.Package)null);
 				return;
 		}
@@ -218,9 +236,9 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE_CS:
+			case 0:
 				return packageCS != null;
-			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE:
+			case 1:
 				return package_ != null;
 		}
 		return super.eIsSet(featureID);

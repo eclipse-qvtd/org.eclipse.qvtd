@@ -73,14 +73,14 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case SourcePackage.X: return createX();
-			case SourcePackage.Y1: return createY1();
-			case SourcePackage.Y2: return createY2();
-			case SourcePackage.Z: return createZ();
-			case SourcePackage.SROOT: return createSRoot();
-			case SourcePackage.SELEMENT: return createSElement();
-			case SourcePackage.PATH_NAME_CS: return createPathNameCS();
-			case SourcePackage.PATH_ELEMENT_CS: return createPathElementCS();
+			case 0: return createX();
+			case 2: return createY1();
+			case 3: return createY2();
+			case 4: return createZ();
+			case 5: return createSRoot();
+			case 6: return createSElement();
+			case 7: return createPathNameCS();
+			case 8: return createPathElementCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

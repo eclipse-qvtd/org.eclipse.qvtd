@@ -293,22 +293,22 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		elementEClass = createEClass(ELEMENT);
+		elementEClass = createEClass(0);
 
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+		namedElementEClass = createEClass(1);
+		createEAttribute(namedElementEClass, 0);
 
-		namespaceEClass = createEClass(NAMESPACE);
+		namespaceEClass = createEClass(2);
 
-		packageEClass = createEClass(PACKAGE);
-		createEReference(packageEClass, PACKAGE__OWNED_CLASSES);
-		createEReference(packageEClass, PACKAGE__OWNED_PACKAGES);
+		packageEClass = createEClass(3);
+		createEReference(packageEClass, 1);
+		createEReference(packageEClass, 2);
 
-		classEClass = createEClass(CLASS);
-		createEReference(classEClass, CLASS__SUPER_CLASS);
+		classEClass = createEClass(4);
+		createEReference(classEClass, 1);
 
-		rootEClass = createEClass(ROOT);
-		createEReference(rootEClass, ROOT__OWNED_PACKAGES);
+		rootEClass = createEClass(5);
+		createEReference(rootEClass, 0);
 	}
 
 	/**

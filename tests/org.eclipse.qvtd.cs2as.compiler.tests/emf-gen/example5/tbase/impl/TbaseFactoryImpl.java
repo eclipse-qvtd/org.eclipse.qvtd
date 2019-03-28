@@ -66,11 +66,11 @@ public class TbaseFactoryImpl extends EFactoryImpl implements TbaseFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TbasePackage.A: return createA();
-			case TbasePackage.B: return createB();
-			case TbasePackage.C: return createC();
-			case TbasePackage.TROOT: return createTRoot();
-			case TbasePackage.NAMED_ELEMENT: return createNamedElement();
+			case 0: return createA();
+			case 1: return createB();
+			case 2: return createC();
+			case 3: return createTRoot();
+			case 4: return createNamedElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

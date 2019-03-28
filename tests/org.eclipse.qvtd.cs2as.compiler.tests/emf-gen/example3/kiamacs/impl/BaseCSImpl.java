@@ -39,6 +39,22 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements BaseCS {
 	/**
+	 * The number of structural features of the '<em>Base CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BASE_CS_FEATURE_COUNT = 1;
+	/**
+	 * The number of operations of the '<em>Base CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BASE_CS_OPERATION_COUNT = 0;
+	/**
 	 * The cached value of the '{@link #getAst() <em>Ast</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,7 +95,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 			ast = (Node)eResolveProxy(oldAst);
 			if (ast != oldAst) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KiamacsPackage.BASE_CS__AST, oldAst, ast));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 0, oldAst, ast));
 			}
 		}
 		return ast;
@@ -104,7 +120,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 		Node oldAst = ast;
 		ast = newAst;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamacsPackage.BASE_CS__AST, oldAst, ast));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldAst, ast));
 	}
 
 	/**
@@ -115,7 +131,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KiamacsPackage.BASE_CS__AST:
+			case 0:
 				if (resolve) return getAst();
 				return basicGetAst();
 		}
@@ -130,7 +146,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KiamacsPackage.BASE_CS__AST:
+			case 0:
 				setAst((Node)newValue);
 				return;
 		}
@@ -145,7 +161,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KiamacsPackage.BASE_CS__AST:
+			case 0:
 				setAst((Node)null);
 				return;
 		}
@@ -160,7 +176,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KiamacsPackage.BASE_CS__AST:
+			case 0:
 				return ast != null;
 		}
 		return super.eIsSet(featureID);
