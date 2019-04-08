@@ -23,7 +23,9 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
@@ -37,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
-public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegion<@NonNull RegionAnalysis, @NonNull TraceClassRegionAnalysis, @NonNull TracePropertyRegionAnalysis>
+public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull RegionAnalysis> //implements CompilerUtil.PartialRegion<@NonNull RegionAnalysis, @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>, @NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>>
 {
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
@@ -111,27 +113,27 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 	/**
 	 * The TraceClassAnalysis instances that are consumed by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull TraceClassRegionAnalysis> consumedTraceClassAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> consumedTraceClassAnalyses = null;
 
 	/**
 	 * The TracePropertyAnalysis instances that are consumed by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull TracePropertyRegionAnalysis> consumedTracePropertyAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>> consumedTracePropertyAnalyses = null;
 
 	/**
 	 * The TraceClassAnalysis instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull TraceClassRegionAnalysis> producedTraceClassAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses = null;
 
 	/**
 	 * The TracePropertyAnalysis instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull TracePropertyRegionAnalysis> producedTracePropertyAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses = null;
 
 	/**
 	 * The TraceClassAnalysis instances and super instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable Set<@NonNull TraceClassRegionAnalysis> superProducedTraceClassAnalyses = null;
+	private @Nullable Set<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> superProducedTraceClassAnalyses = null;
 
 	protected AbstractRegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis) {
 		this.scheduleManager = transformationAnalysis.getScheduleManager();
@@ -188,8 +190,8 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 
 	private void addConsumptionOfNode(@NonNull Node node) {
 		Node castNode = QVTscheduleUtil.getCastTarget(node);
-		TraceClassRegionAnalysis consumedTraceAnalysis = transformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), getRegionAnalysis());
-		List<@NonNull TraceClassRegionAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
+		PartialRegionClassAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), getRegionAnalysis());
+		List<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
 		if (consumedTraceClassAnalyses2 == null) {
 			consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
 		}
@@ -213,8 +215,8 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 	}
 
 	private void addConsumptionOfPropertyDatum(@NonNull PropertyDatum propertyDatum) {
-		TracePropertyRegionAnalysis consumedTraceAnalysis = transformationAnalysis.addConsumer(propertyDatum, getRegionAnalysis());
-		List<@NonNull TracePropertyRegionAnalysis> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
+		PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addConsumer(propertyDatum, getRegionAnalysis());
+		List<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
 		if (consumedTracePropertyAnalyses2 == null) {
 			consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
 		}
@@ -231,8 +233,8 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 			property.toString();
 		}
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-		TracePropertyRegionAnalysis producedTraceAnalysis = transformationAnalysis.addProducer(propertyDatum, getRegionAnalysis());
-		List<@NonNull TracePropertyRegionAnalysis> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
+		PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> producedTraceAnalysis = transformationAnalysis.addProducer(propertyDatum, getRegionAnalysis());
+		List<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
 		if (producedTracePropertyAnalyses2 == null) {
 			producedTracePropertyAnalyses = producedTracePropertyAnalyses2 = new ArrayList<>();
 		}
@@ -241,7 +243,7 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 		}
 		PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
 		if (oppositePropertyDatum != null) {
-			TracePropertyRegionAnalysis oppositeProducedTraceAnalysis = transformationAnalysis.addProducer(oppositePropertyDatum, getRegionAnalysis());
+			PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> oppositeProducedTraceAnalysis = transformationAnalysis.addProducer(oppositePropertyDatum, getRegionAnalysis());
 			if (!producedTracePropertyAnalyses2.contains(oppositeProducedTraceAnalysis)) {
 				producedTracePropertyAnalyses2.add(oppositeProducedTraceAnalysis);
 			}
@@ -264,8 +266,8 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 
 	private void addProductionOfNode(@NonNull Node node) {
 		assert node.isNew();
-		TraceClassRegionAnalysis consumedTraceAnalysis = transformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), getRegionAnalysis());
-		List<@NonNull TraceClassRegionAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
+		PartialRegionClassAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), getRegionAnalysis());
+		List<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 == null) {
 			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();
 		}
@@ -523,12 +525,12 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TraceClassRegionAnalysis> getConsumedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> getConsumedTraceClassAnalyses() {
 		return consumedTraceClassAnalyses;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TracePropertyRegionAnalysis> getConsumedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>> getConsumedTracePropertyAnalyses() {
 		return consumedTracePropertyAnalyses;
 	}
 
@@ -570,11 +572,11 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 		return predicatedOutputNodes;
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassRegionAnalysis> getProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> getProducedTraceClassAnalyses() {
 		return producedTraceClassAnalyses;
 	}
 
-	public @Nullable Iterable<@NonNull TracePropertyRegionAnalysis> getProducedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>> getProducedTracePropertyAnalyses() {
 		return producedTracePropertyAnalyses;
 	}
 
@@ -619,25 +621,25 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 		return successEdges;
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassRegionAnalysis> getSuperProducedTraceClassAnalyses() {
-		List<@NonNull TraceClassRegionAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> getSuperProducedTraceClassAnalyses() {
+		List<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 != null) {
-			Set<@NonNull TraceClassRegionAnalysis> superProducedTraceClassAnalyses2 = superProducedTraceClassAnalyses;
+			Set<@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> superProducedTraceClassAnalyses2 = superProducedTraceClassAnalyses;
 			if (superProducedTraceClassAnalyses2 == null) {
 				superProducedTraceClassAnalyses = superProducedTraceClassAnalyses2 = new HashSet<>();
 			}
-			for (@NonNull TraceClassRegionAnalysis producedTraceClassAnalysis : producedTraceClassAnalyses2) {
+			for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> producedTraceClassAnalysis : producedTraceClassAnalyses2) {
 				Iterables.addAll(superProducedTraceClassAnalyses2, producedTraceClassAnalysis.getSuperTraceClassAnalyses());
 			}
 		}
 		return superProducedTraceClassAnalyses;
 	}
 
-	public @NonNull TraceClassRegionAnalysis getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
+	public @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
 		return transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
 	}
 
-	public @NonNull TracePropertyRegionAnalysis getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		return transformationAnalysis.getTracePropertyAnalysis(propertyDatum);
 	}
 
@@ -645,6 +647,7 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 		return node2traceEdge.get(node);
 	}
 
+	@Override
 	public @NonNull List<@NonNull Node> getTraceNodes() {
 		return traceNodes;
 	}

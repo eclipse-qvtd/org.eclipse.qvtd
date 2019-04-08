@@ -8,46 +8,49 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public abstract class TraceElementPartitionAnalysis implements Nameable
+public abstract class AbstractPartialRegionElementAnalysis<PRA extends PartialRegionAnalysis<@NonNull PRA>> implements PartialRegionElementAnalysis<@NonNull PRA>
 {
 	/**
 	 * The partitioners that consume (predicate) the trace class.
 	 */
-	protected final @NonNull List<@NonNull PartitionAnalysis> consumers = new ArrayList<>();
+	protected final @NonNull List<@NonNull PRA> consumers = new ArrayList<>();
 
 	/**
 	 * The partitioners that produce (realize) the trace class.
 	 */
-	protected final @NonNull List<@NonNull PartitionAnalysis> producers = new ArrayList<>();
+	protected final @NonNull List<@NonNull PRA> producers = new ArrayList<>();
 
-	public void addConsumer(@NonNull PartitionAnalysis consumer) {
+	@Override
+	public void addConsumer(@NonNull PRA consumer) {
 		if (!consumers.contains(consumer)) {		// multi-consumption is possible
 			consumers.add(consumer);
 		}
 	}
 
-	public void addProducer(@NonNull PartitionAnalysis producer) {
+	@Override
+	public void addProducer(@NonNull PRA producer) {
 		if (!producers.contains(producer)) {		// multi-production of e.g. OclAny is possible
 			producers.add(producer);
 		}
 	}
 
-	public @NonNull Iterable<@NonNull PartitionAnalysis> getConsumers() {
+	@Override
+	public @NonNull Iterable<@NonNull PRA> getConsumers() {
 		return consumers;
 	}
 
-	public @NonNull Iterable<@NonNull PartitionAnalysis> getProducers() {
+	@Override
+	public @NonNull Iterable<@NonNull PRA> getProducers() {
 		return producers;
 	}
 }

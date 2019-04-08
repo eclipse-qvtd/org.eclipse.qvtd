@@ -23,6 +23,9 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionElementAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -73,12 +76,12 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 
 		// FIXME WIP
 		Set<@NonNull PartitionAnalysis> cyclicPartitionAnalyses = partitionAnalysis2predecessors.keySet();
-		Set<@NonNull TracePropertyPartitionAnalysis> containmentTracePropertyPartitionAnalyses = new HashSet<>();
-		Set<@NonNull TracePropertyPartitionAnalysis> containerTracePropertyPartitionAnalyses = new HashSet<>();
+		Set<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> containmentTracePropertyPartitionAnalyses = new HashSet<>();
+		Set<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> containerTracePropertyPartitionAnalyses = new HashSet<>();
 		for (@NonNull PartitionAnalysis consumer : cyclicPartitionAnalyses) {
-			Iterable<@NonNull TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
+			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses != null) {
-				for (@NonNull TracePropertyPartitionAnalysis consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
+				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
 					PropertyDatum propertyDatum = consumedTracePropertyAnalysis.getPropertyDatum();
 					Property consumedProperty = propertyDatum.getReferredProperty();
 					boolean isContainment = consumedProperty.isIsComposite();
@@ -160,14 +163,14 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		//
 		// The cyclic schedule is therefore {base-cases}, {recursing-steps}... {recursive-cases}
 		//
-		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2acyclicTraceElementPartitionAnalyses = new HashMap<>();
-		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2cyclicTraceElementPartitionAnalyses = new HashMap<>();
-		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2mixedTraceElementPartitionAnalyses = new HashMap<>();
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>>> partitionAnalysis2acyclicTraceElementPartitionAnalyses = new HashMap<>();
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>>> partitionAnalysis2cyclicTraceElementPartitionAnalyses = new HashMap<>();
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>>> partitionAnalysis2mixedTraceElementPartitionAnalyses = new HashMap<>();
 		for (@NonNull PartitionAnalysis consumingPartitionAnalysis : partitionAnalyses) {
 			assert !externalPredecessors.contains(consumingPartitionAnalysis);
-			Iterable<@NonNull TraceClassPartitionAnalysis> consumedTraceClassAnalyses = consumingPartitionAnalysis.getConsumedTraceClassAnalyses();
+			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> consumedTraceClassAnalyses = consumingPartitionAnalysis.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses != null) {
-				for (@NonNull TraceClassPartitionAnalysis consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
+				for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
 					Iterable<@NonNull PartitionAnalysis> producingPartitionAnalyses = consumedTraceClassAnalysis.getProducers();
 					boolean isExternal = false;
 					boolean isInternal = false;
@@ -179,7 +182,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 							isExternal = true;
 						}
 					}
-					Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2traceElementPartitionAnalyses;
+					Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>>> partitionAnalysis2traceElementPartitionAnalyses;
 					if (!isInternal) {
 						partitionAnalysis2traceElementPartitionAnalyses = partitionAnalysis2acyclicTraceElementPartitionAnalyses;
 					}
@@ -189,7 +192,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 					else {
 						partitionAnalysis2traceElementPartitionAnalyses = partitionAnalysis2mixedTraceElementPartitionAnalyses;
 					}
-					Set<@NonNull TraceElementPartitionAnalysis> traceElementPartitionAnalyses = partitionAnalysis2traceElementPartitionAnalyses.get(consumingPartitionAnalysis);
+					Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>> traceElementPartitionAnalyses = partitionAnalysis2traceElementPartitionAnalyses.get(consumingPartitionAnalysis);
 					if (traceElementPartitionAnalyses == null) {
 						traceElementPartitionAnalyses = new HashSet<>();
 						partitionAnalysis2traceElementPartitionAnalyses.put(consumingPartitionAnalysis, traceElementPartitionAnalyses);
@@ -197,9 +200,9 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 					traceElementPartitionAnalyses.add(consumedTraceClassAnalysis);
 				}
 			}
-			Iterable<@NonNull TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses = consumingPartitionAnalysis.getConsumedTracePropertyAnalyses();
+			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> consumedTracePropertyAnalyses = consumingPartitionAnalysis.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses != null) {
-				for (@NonNull TracePropertyPartitionAnalysis consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
+				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
 					Iterable<@NonNull PartitionAnalysis> producingPartitionAnalyses = consumedTracePropertyAnalysis.getProducers();
 					boolean isExternal = false;
 					boolean isInternal = false;
@@ -215,7 +218,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 							isExternal = true;
 						}
 					}
-					Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2traceElementPartitionAnalyses;
+					Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>>> partitionAnalysis2traceElementPartitionAnalyses;
 					if (!isInternal) {
 						partitionAnalysis2traceElementPartitionAnalyses = partitionAnalysis2acyclicTraceElementPartitionAnalyses;
 					}
@@ -225,7 +228,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 					else {
 						partitionAnalysis2traceElementPartitionAnalyses = partitionAnalysis2mixedTraceElementPartitionAnalyses;
 					}
-					Set<@NonNull TraceElementPartitionAnalysis> traceElementPartitionAnalyses = partitionAnalysis2traceElementPartitionAnalyses.get(consumingPartitionAnalysis);
+					Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>> traceElementPartitionAnalyses = partitionAnalysis2traceElementPartitionAnalyses.get(consumingPartitionAnalysis);
 					if (traceElementPartitionAnalyses == null) {
 						traceElementPartitionAnalyses = new HashSet<>();
 						partitionAnalysis2traceElementPartitionAnalyses.put(consumingPartitionAnalysis, traceElementPartitionAnalyses);
@@ -238,9 +241,9 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		Set<@NonNull PartitionAnalysis> recursiveCases = new HashSet<>();
 		Set<@NonNull PartitionAnalysis> recursingSteps = new HashSet<>();
 		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
-			Set<@NonNull TraceElementPartitionAnalysis> acyclicTraceElementPartitionAnalyses = partitionAnalysis2acyclicTraceElementPartitionAnalyses.get(partitionAnalysis);
-			Set<@NonNull TraceElementPartitionAnalysis> cyclicTraceElementPartitionAnalyses = partitionAnalysis2cyclicTraceElementPartitionAnalyses.get(partitionAnalysis);
-			Set<@NonNull TraceElementPartitionAnalysis> mixedTraceElementPartitionAnalyses = partitionAnalysis2mixedTraceElementPartitionAnalyses.get(partitionAnalysis);
+			Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>> acyclicTraceElementPartitionAnalyses = partitionAnalysis2acyclicTraceElementPartitionAnalyses.get(partitionAnalysis);
+			Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>> cyclicTraceElementPartitionAnalyses = partitionAnalysis2cyclicTraceElementPartitionAnalyses.get(partitionAnalysis);
+			Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionAnalysis>> mixedTraceElementPartitionAnalyses = partitionAnalysis2mixedTraceElementPartitionAnalyses.get(partitionAnalysis);
 			Iterable<@NonNull PartitionAnalysis> rawExplicitPredecessors = partitionAnalysis.getExplicitPredecessors();
 			Set<@NonNull PartitionAnalysis> explicitPredecessors = null;
 			if (rawExplicitPredecessors != null) {
@@ -311,12 +314,12 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getConsumedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getConsumedTraceClassAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getConsumedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getConsumedTracePropertyAnalyses() {
 		return null;
 	}
 
@@ -326,17 +329,17 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getProducedTraceClassAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getProducedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getProducedTracePropertyAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getSuperProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getSuperProducedTraceClassAnalyses() {
 		return null;
 	}
 }

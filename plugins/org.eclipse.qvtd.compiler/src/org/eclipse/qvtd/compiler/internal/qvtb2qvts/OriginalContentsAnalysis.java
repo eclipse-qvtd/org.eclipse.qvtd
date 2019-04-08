@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -268,10 +268,10 @@ public class OriginalContentsAnalysis
 	public @NonNull Iterable<@NonNull RuleRegion> getDirectlyConsumingRegions(@NonNull ClassDatum classDatum) {
 		Set<@NonNull RuleRegion> consumingRegions = classDatum2consumingRegions.get(classDatum);
 		if (consumingRegions == null) {
-			TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+			PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
 			consumingRegions = new HashSet<>();
 			if (traceClassAnalysis != null) {
-				for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+				for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
 					for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getConsumers()) {
 						consumingRegions.add((RuleRegion) regionAnalysis.getRegion());
 					}
@@ -284,10 +284,10 @@ public class OriginalContentsAnalysis
 			consumingRegions2 = new HashSet<>();
 		}
 		/*	if (!consumingRegions.equals(consumingRegions2)) {
-			TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+			PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
 			consumingRegions = new HashSet<>();
 			if (traceClassAnalysis != null) {
-				for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+				for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
 					for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getConsumers()) {
 						consumingRegions.add((RuleRegion) regionAnalysis.getRegion());
 					}
@@ -305,10 +305,10 @@ public class OriginalContentsAnalysis
 	public @NonNull Iterable<@NonNull RuleRegion> getIndirectlyProducingRegions(@NonNull ClassDatum classDatum) {
 		Set<@NonNull RuleRegion> producingRegions = classDatum2producingRegions.get(classDatum);
 		if (producingRegions == null) {
-			TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+			PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
 			producingRegions = new HashSet<>();
 			if (traceClassAnalysis != null) {
-				for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+				for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
 					for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getProducers()) {
 						producingRegions.add((RuleRegion) regionAnalysis.getRegion());
 					}
@@ -326,10 +326,10 @@ public class OriginalContentsAnalysis
 
 	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatum classDatum) {
 		Iterable<@NonNull Node> newNodes = classDatum2newNodes.get(classDatum);
-		/*	TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+		/*	PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
 		Set<@NonNull RuleRegion> producingRegions = new HashSet<>();
 		if (traceClassAnalysis != null) {
-			for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+			for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
 				for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getProducers()) {
 					producingRegions.add((RuleRegion) regionAnalysis.getRegion());
 				}

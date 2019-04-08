@@ -12,27 +12,27 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 
 /**
  * PartitionAnalysis captures the analysis of a Partition.
  */
-public interface PartitionAnalysis extends CompilerUtil.PartialRegion<@NonNull PartitionAnalysis, @NonNull TraceClassPartitionAnalysis, @NonNull TracePropertyPartitionAnalysis>
+public interface PartitionAnalysis extends PartialRegionAnalysis<@NonNull PartitionAnalysis>//, CompilerUtil.PartialRegion<@NonNull PartitionAnalysis, @NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>, @NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>>
 {
 	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	void analyzePartitionEdges();
 	void computeCheckedOrEnforcedEdges();
 	@NonNull Partition getPartition();
 	@NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis();
-	@Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassAnalyses();
-	@Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getProducedTracePropertyAnalyses();
-	@NonNull Iterable<@NonNull TraceClassPartitionAnalysis> getTraceClassAnalyses();
-	@NonNull Iterable<@NonNull TracePropertyPartitionAnalysis>  getTracePropertyAnalyses();
-	@Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getSuperProducedTraceClassAnalyses();
-	@NonNull Iterable<@NonNull Node> getTraceNodes();
+	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getProducedTraceClassAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getProducedTracePropertyAnalyses();
+	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getTraceClassAnalyses();
+	@NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>>  getTracePropertyAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getSuperProducedTraceClassAnalyses();
 	boolean isChecked(@NonNull Edge edge);
 }

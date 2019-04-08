@@ -32,6 +32,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TracePropertyRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
@@ -76,12 +78,12 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 	/**
 	 * The TraceClassAnalysis for each trace class.
 	 */
-	private final @NonNull Map<@NonNull ClassDatum, @NonNull TraceClassRegionAnalysis> classDatum2traceClassAnalysis = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>> classDatum2traceClassAnalysis = new HashMap<>();
 
 	/**
 	 * The TracePropertyAnalysis for each trace property.
 	 */
-	private final @NonNull Map<@NonNull PropertyDatum, @NonNull TracePropertyRegionAnalysis> propertyDatum2tracePropertyAnalysis = new HashMap<>();
+	private final @NonNull Map<@NonNull PropertyDatum, @NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>> propertyDatum2tracePropertyAnalysis = new HashMap<>();
 
 	/**
 	 * The analysis of cycles.
@@ -142,26 +144,26 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		}
 	}
 
-	public @NonNull TraceClassRegionAnalysis addConsumer(@NonNull ClassDatum classDatum, @NonNull RegionAnalysis consumer) {
-		TraceClassRegionAnalysis traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
+	public @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> addConsumer(@NonNull ClassDatum classDatum, @NonNull RegionAnalysis consumer) {
+		PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
 		traceClassAnalysis.addConsumer(consumer);
 		return traceClassAnalysis;
 	}
 
-	public @NonNull TracePropertyRegionAnalysis addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RegionAnalysis consumer) {
-		TracePropertyRegionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
+	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RegionAnalysis consumer) {
+		PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
 		tracePropertyAnalysis.addConsumer(consumer);
 		return tracePropertyAnalysis;
 	}
 
-	public @NonNull TraceClassRegionAnalysis addProducer(@NonNull ClassDatum classDatum, @NonNull RegionAnalysis producer) {
-		TraceClassRegionAnalysis traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
+	public @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> addProducer(@NonNull ClassDatum classDatum, @NonNull RegionAnalysis producer) {
+		PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
 		traceClassAnalysis.addProducer(producer);
 		return traceClassAnalysis;
 	}
 
-	public @NonNull TracePropertyRegionAnalysis addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RegionAnalysis producer) {
-		TracePropertyRegionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
+	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RegionAnalysis producer) {
+		PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
 		tracePropertyAnalysis.addProducer(producer);
 		return tracePropertyAnalysis;
 	}
@@ -192,7 +194,7 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		}
 	}
 
-	public @Nullable TraceClassRegionAnalysis basicGetTraceClassAnalysis(@NonNull ClassDatum classDatum) {
+	public @Nullable PartialRegionClassAnalysis<@NonNull RegionAnalysis> basicGetTraceClassAnalysis(@NonNull ClassDatum classDatum) {
 		return classDatum2traceClassAnalysis.get(classDatum);
 	}
 
@@ -200,7 +202,7 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return rootPartitionAnalysis;
 	}
 
-	public @Nullable TracePropertyRegionAnalysis basicGetTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+	public @Nullable PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> basicGetTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
 		return propertyDatum2tracePropertyAnalysis.get(propertyDatum);
 	}
@@ -210,18 +212,18 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 	}
 
 	protected void computeTraceClassDiscrimination() throws CompilerChainException {
-		for (@NonNull TraceClassRegionAnalysis traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
+		for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
 			traceClassAnalysis.discriminate();
 		}
 	}
 
 	public void computeTraceClassInheritance() {
 		Set<@NonNull ClassDatum> missingClassDatums = new HashSet<>();
-		for (@NonNull TraceClassRegionAnalysis subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
+		for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
 			ClassDatum classDatum = subTraceClassRegionAnalysis.getClassDatum();
 			for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(classDatum)) {
 				if (superClassDatum != classDatum) {
-					TraceClassRegionAnalysis superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
+					PartialRegionClassAnalysis<@NonNull RegionAnalysis> superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
 					if (superTraceClassRegionAnalysis == null) {
 						missingClassDatums.add(superClassDatum);
 					}
@@ -231,11 +233,11 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		for (@NonNull ClassDatum missingClassDatum : missingClassDatums) {
 			lazyCreateTraceClassAnalysis(missingClassDatum);
 		}
-		for (@NonNull TraceClassRegionAnalysis subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
+		for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
 			ClassDatum classDatum = subTraceClassRegionAnalysis.getClassDatum();
 			for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(classDatum)) {
 				if (superClassDatum != classDatum) {
-					TraceClassRegionAnalysis superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
+					PartialRegionClassAnalysis<@NonNull RegionAnalysis> superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
 					assert superTraceClassRegionAnalysis != null;
 					superTraceClassRegionAnalysis.addSubTraceClassAnalysis(subTraceClassRegionAnalysis);
 					subTraceClassRegionAnalysis.addSuperTraceClassAnalysis(superTraceClassRegionAnalysis);
@@ -244,11 +246,11 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		}
 	}
 
-	protected @NonNull TraceClassRegionAnalysis createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
+	protected @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
 		return new TraceClassRegionAnalysis(this, traceClassDatum);
 	}
 
-	protected @NonNull TracePropertyRegionAnalysis createTracePropertyAnalysis(@NonNull TraceClassRegionAnalysis traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+	protected @NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
 		return new TracePropertyRegionAnalysis(this, traceClassAnalysis, tracePropertyDatum);
 	}
 
@@ -323,11 +325,11 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return rootRegion;
 	}
 
-	public @NonNull TraceClassRegionAnalysis getTraceClassAnalysis(@NonNull ClassDatum classDatum) {
+	public @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> getTraceClassAnalysis(@NonNull ClassDatum classDatum) {
 		return ClassUtil.nonNullState(classDatum2traceClassAnalysis.get(classDatum));
 	}
 
-	public @NonNull TracePropertyRegionAnalysis getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
 		return ClassUtil.nonNullState(propertyDatum2tracePropertyAnalysis.get(propertyDatum));
 	}
@@ -371,7 +373,7 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return false;
 	}
 
-	public boolean isCyclic(@NonNull TraceClassRegionAnalysis traceClassAnalysis) {
+	public boolean isCyclic(@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis) {
 		assert cyclesRegionAnalysis != null;
 		return cyclesRegionAnalysis.isCyclic(traceClassAnalysis);
 	}
@@ -382,15 +384,15 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 	}
 
 	public boolean isCyclic(@NonNull ClassDatum traceClassDatum) {
-		TraceClassRegionAnalysis traceClassAnalysis = basicGetTraceClassAnalysis(traceClassDatum);
+		PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = basicGetTraceClassAnalysis(traceClassDatum);
 		if (traceClassAnalysis == null) {
 			return false;
 		}
 		return traceClassAnalysis.isCyclic();
 	}
 
-	private @NonNull TraceClassRegionAnalysis lazyCreateTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		TraceClassRegionAnalysis traceClassAnalysis = classDatum2traceClassAnalysis.get(classDatum);
+	private @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> lazyCreateTraceClassAnalysis(@NonNull ClassDatum classDatum) {
+		PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = classDatum2traceClassAnalysis.get(classDatum);
 		if (traceClassAnalysis == null) {
 			traceClassAnalysis = createTraceClassAnalysis(classDatum);
 			classDatum2traceClassAnalysis.put(classDatum, traceClassAnalysis);
@@ -398,11 +400,11 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return traceClassAnalysis;
 	}
 
-	private @NonNull TracePropertyRegionAnalysis lazyCreateTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
-		TracePropertyRegionAnalysis tracePropertyAnalysis = propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum);
+	private @NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> lazyCreateTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
+		PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> tracePropertyAnalysis = propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum);
 		if (tracePropertyAnalysis == null) {
 			ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
-			TraceClassRegionAnalysis traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
+			PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
 			tracePropertyAnalysis = createTracePropertyAnalysis(traceClassAnalysis, tracePropertyDatum);
 			propertyDatum2tracePropertyAnalysis.put(tracePropertyDatum, tracePropertyAnalysis);
 		}

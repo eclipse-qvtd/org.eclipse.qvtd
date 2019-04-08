@@ -60,6 +60,9 @@ import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.PartitionProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionProblem;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CompositePartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
@@ -88,33 +91,6 @@ public class CompilerUtil extends QVTscheduleUtil
 		defaultSavingOptions.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 		defaultSavingOptions.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
 
-	}
-
-	/**
-	 * PartialRegion definds the necessary partial-region functionality for a computeImmediatePredecessors participant.
-	 */
-	public interface PartialRegion<PR, TC, TP> extends Nameable
-	{
-		@Nullable Iterable<@NonNull TC> getConsumedTraceClassAnalyses();
-		@Nullable Iterable<@NonNull TP> getConsumedTracePropertyAnalyses();
-		@Nullable Iterable<@NonNull PR> getExplicitPredecessors();
-	}
-
-	/**
-	 * PartialRegion definds the necessary trace-class functionality for a computeImmediatePredecessors participant.
-	 */
-	public interface TraceClass<PR, TC, TP> extends Nameable
-	{
-		@NonNull Iterable<@NonNull PR> getProducers();
-		@NonNull Iterable<@NonNull TC> getSubTraceClassAnalyses();
-	}
-
-	/**
-	 * PartialRegion definds the necessary trace-property functionality for a computeImmediatePredecessors participant.
-	 */
-	public interface TraceProperty<PR, TC, TP> extends Nameable
-	{
-		@NonNull Iterable<@NonNull PR> getProducers();
 	}
 
 	/**
@@ -263,42 +239,41 @@ public class CompilerUtil extends QVTscheduleUtil
 		return from2tosClosure;
 	}
 
-
 	/**
 	 * Return a map of the PartialRegions that may execute immediately before each PartialRegion.
 	 *
 	 * This is a simple type-conformance exercise. Find the sources that are supertypes of the target.
 	 */
-	public static <@NonNull PR extends PartialRegion<PR, TC, TP>, @NonNull TC extends TraceClass<PR, TC, TP>, @NonNull TP extends TraceProperty<PR, TC, TP>> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeImmediatePredecessors(@NonNull Iterable<@NonNull PR> partialRegionAnalyses) {
-		Map<@NonNull PR, @NonNull Set<@NonNull PR>> consumer2producers = new HashMap<>();
-		Map<@NonNull PR, @NonNull Map<@NonNull Object, @NonNull Set<@NonNull PR>>> consumer2consumedElement2producers = new HashMap<>();
-		for (@NonNull PR partialRegionAnalysis : partialRegionAnalyses) {
+	public static <@NonNull PRA extends PartialRegionAnalysis<@NonNull PRA>> @NonNull Map<@NonNull PRA, @NonNull Set<@NonNull PRA>> computeImmediatePredecessors(@NonNull Iterable<@NonNull PRA> partialRegionAnalyses) {
+		Map<@NonNull PRA, @NonNull Set<@NonNull PRA>> consumer2producers = new HashMap<>();
+		Map<@NonNull PRA, @NonNull Map<@NonNull Object, @NonNull Set<@NonNull PRA>>> consumer2consumedElement2producers = new HashMap<>();
+		for (@NonNull PRA partialRegionAnalysis : partialRegionAnalyses) {
 			consumer2producers.put(partialRegionAnalysis, new HashSet<>());
 		}
-		for (@NonNull PR consumer : partialRegionAnalyses) {
-			Map<@NonNull Object, @NonNull Set<@NonNull PR>> consumedElement2producers = null;
+		for (@NonNull PRA consumer : partialRegionAnalyses) {
+			Map<@NonNull Object, @NonNull Set<@NonNull PRA>> consumedElement2producers = null;
 			if (Iterables.contains(partialRegionAnalyses, consumer)) {
 				consumedElement2producers = new HashMap<>();
 				consumer2consumedElement2producers.put(consumer, consumedElement2producers);
 			}
-			Iterable<@NonNull PR> explicitPredecessors = consumer.getExplicitPredecessors();		// Used by no-success QVTc trace
+			Iterable<@NonNull PRA> explicitPredecessors = consumer.getExplicitPredecessors();		// Used by no-success QVTc trace
 			if (explicitPredecessors != null) {
-				for (@NonNull PR explicitPredecessor : explicitPredecessors) {
-					Set<@NonNull PR> producers = consumer2producers.get(consumer);
+				for (@NonNull PRA explicitPredecessor : explicitPredecessors) {
+					Set<@NonNull PRA> producers = consumer2producers.get(consumer);
 					assert producers != null;
 					producers.add(explicitPredecessor);
 				}
 			}
-			Iterable<@NonNull TC> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
+			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses != null) {
-				for (@NonNull TC consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
-					for (@NonNull TC subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
-						for (@NonNull PR producer : subConsumedTraceClass.getProducers()) {
-							Set<@NonNull PR> producers = consumer2producers.get(consumer);
+				for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
+					for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
+						for (@NonNull PRA producer : subConsumedTraceClass.getProducers()) {
+							Set<@NonNull PRA> producers = consumer2producers.get(consumer);
 							assert producers != null;
 							producers.add(producer);
 							if ((consumedElement2producers != null) && Iterables.contains(partialRegionAnalyses, producer)) {
-								Set<@NonNull PR> producers2 = consumedElement2producers.get(subConsumedTraceClass);
+								Set<@NonNull PRA> producers2 = consumedElement2producers.get(subConsumedTraceClass);
 								if (producers2 == null) {
 									producers2 = new HashSet<>();
 									consumedElement2producers.put(subConsumedTraceClass, producers2);
@@ -309,15 +284,15 @@ public class CompilerUtil extends QVTscheduleUtil
 					}
 				}
 			}
-			Iterable<@NonNull TP> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
+			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses != null) {
-				for (@NonNull TP consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
-					for (@NonNull PR producer : consumedTracePropertyAnalysis.getProducers()) {
-						Set<@NonNull PR> producers = consumer2producers.get(consumer);
+				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
+					for (@NonNull PRA producer : consumedTracePropertyAnalysis.getProducers()) {
+						Set<@NonNull PRA> producers = consumer2producers.get(consumer);
 						assert producers != null;
 						producers.add(producer);
 						if ((consumedElement2producers != null) && Iterables.contains(partialRegionAnalyses, producer)) {
-							Set<@NonNull PR> producers2 = consumedElement2producers.get(consumedTracePropertyAnalysis);
+							Set<@NonNull PRA> producers2 = consumedElement2producers.get(consumedTracePropertyAnalysis);
 							if (producers2 == null) {
 								producers2 = new HashSet<>();
 								consumedElement2producers.put(consumedTracePropertyAnalysis, producers2);
@@ -438,34 +413,34 @@ public class CompilerUtil extends QVTscheduleUtil
 	}
 
 	/**
-	 * Return a map of the RAs that may execute before each PR.
+	 * Return a map of the RAs that may execute before each PRA.
 	 *
 	 * This is a simple type-conformance exercise. Find the sources that are supertypes of the target.
 	 */
-	public static <@NonNull PR extends PartialRegion<PR, TC, TP>, @NonNull TC extends TraceClass<PR, TC, TP>, @NonNull TP extends TraceProperty<PR, TC, TP>> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeTransitivePredecessors(@NonNull Iterable<@NonNull PR> partialRegionAnalyses) {
-		Map<@NonNull PR, @NonNull Set<@NonNull PR>> consumer2producers = computeImmediatePredecessors(partialRegionAnalyses);
-		List<@NonNull PR> successors = Lists.newArrayList(partialRegionAnalyses);
+	public static <@NonNull PRA extends PartialRegionAnalysis<@NonNull PRA>> @NonNull Map<@NonNull PRA, @NonNull Set<@NonNull PRA>> computeTransitivePredecessors(@NonNull Iterable<@NonNull PRA> partialRegionAnalyses) {
+		Map<@NonNull PRA, @NonNull Set<@NonNull PRA>> consumer2producers = computeImmediatePredecessors(partialRegionAnalyses);
+		List<@NonNull PRA> successors = Lists.newArrayList(partialRegionAnalyses);
 		Collections.sort(successors, NameUtil.NAMEABLE_COMPARATOR);
 		if (TransformationPartitioner.PREDECESSORS.isActive()) {
-			for (@NonNull PR successor : successors) {
+			for (@NonNull PRA successor : successors) {
 				StringBuilder s = new StringBuilder();
 				s.append(successor + ":");
-				List<@NonNull PR> producers = new ArrayList<>(consumer2producers.get(successor));
+				List<@NonNull PRA> producers = new ArrayList<>(consumer2producers.get(successor));
 				Collections.sort(producers, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull PR producer : producers) {
+				for (@NonNull PRA producer : producers) {
 					s.append(" " + producer);
 				}
 				TransformationPartitioner.PREDECESSORS.println(s.toString());
 			}
 		}
-		Map<@NonNull PR, @NonNull Set<@NonNull PR>> consumer2producersClosure = CompilerUtil.computeClosure(consumer2producers);
+		Map<@NonNull PRA, @NonNull Set<@NonNull PRA>> consumer2producersClosure = CompilerUtil.computeClosure(consumer2producers);
 		if (TransformationPartitioner.PREDECESSORS.isActive()) {
-			for (@NonNull PR successor : successors) {
+			for (@NonNull PRA successor : successors) {
 				StringBuilder s = new StringBuilder();
 				s.append(successor + ":");
-				List<@NonNull PR> producers = new ArrayList<>(consumer2producersClosure.get(successor));
+				List<@NonNull PRA> producers = new ArrayList<>(consumer2producersClosure.get(successor));
 				Collections.sort(producers, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull PR producer : producers) {
+				for (@NonNull PRA producer : producers) {
 					s.append(" " + producer);
 				}
 				TransformationPartitioner.PREDECESSORS.println(s.toString());
@@ -475,34 +450,34 @@ public class CompilerUtil extends QVTscheduleUtil
 	}
 
 	/**
-	 * Return a map of the RAs that may execute after each PR.
+	 * Return a map of the RAs that may execute after each PRA.
 	 *
 	 * This is an inconvenient type-conformance exercise. Find the sources that are subtypes of the target. We therefore
 	 * require the inverse computeTransitivePredecessors's result to be provided for inversion.
 	 */
-	public static <@NonNull PR extends Nameable/*PartialRegionAnalysis<@NonNull PR>*/> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeTransitiveSuccessors(@NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> partialRegion2predecessors) {
-		Map<@NonNull PR, @NonNull Set<@NonNull PR>> producer2consumersClosure = new HashMap<>();
-		Iterable<@NonNull PR> partialRegions = partialRegion2predecessors.keySet();
-		for (@NonNull PR predecessor : partialRegions) {
+	public static <@NonNull PRA extends Nameable/*PartialRegionAnalysis<@NonNull PRA>*/> @NonNull Map<@NonNull PRA, @NonNull Set<@NonNull PRA>> computeTransitiveSuccessors(@NonNull Map<@NonNull PRA, @NonNull Set<@NonNull PRA>> partialRegion2predecessors) {
+		Map<@NonNull PRA, @NonNull Set<@NonNull PRA>> producer2consumersClosure = new HashMap<>();
+		Iterable<@NonNull PRA> partialRegions = partialRegion2predecessors.keySet();
+		for (@NonNull PRA predecessor : partialRegions) {
 			producer2consumersClosure.put(predecessor, new HashSet<>());
 		}
-		for (@NonNull PR successor : partialRegions) {
-			Iterable<@NonNull PR> predecessors = partialRegion2predecessors.get(successor);
+		for (@NonNull PRA successor : partialRegions) {
+			Iterable<@NonNull PRA> predecessors = partialRegion2predecessors.get(successor);
 			assert predecessors != null;
-			for (@NonNull PR predecessor : predecessors) {
-				Set<@NonNull PR> successors = producer2consumersClosure.get(predecessor);
+			for (@NonNull PRA predecessor : predecessors) {
+				Set<@NonNull PRA> successors = producer2consumersClosure.get(predecessor);
 				assert successors != null;
 				successors.add(successor);
 			}
 		}
-		/*		for (@NonNull PR regionAnalysis : regionAnalyses) {
+		/*		for (@NonNull PRA regionAnalysis : regionAnalyses) {
 			producer2consumers.put(regionAnalysis, new HashSet<>());
 		}
-		for (@NonNull PR producer : regionAnalyses) {
-			Iterable<@NonNull PR> successors = producer.getSuccessors();		// Used by no-success QVTc trace
+		for (@NonNull PRA producer : regionAnalyses) {
+			Iterable<@NonNull PRA> successors = producer.getSuccessors();		// Used by no-success QVTc trace
 			if (successors != null) {
-				for (@NonNull PR successor : successors) {
-					Set<@NonNull PR> consumers = producer2consumers.get(producer);
+				for (@NonNull PRA successor : successors) {
+					Set<@NonNull PRA> consumers = producer2consumers.get(producer);
 					assert consumers != null;
 					consumers.add(successor);
 				}
@@ -511,19 +486,19 @@ public class CompilerUtil extends QVTscheduleUtil
 			if (producedTraceClassAnalyses != null) {
 				for (@NonNull TC producedTraceClassAnalysis : producedTraceClassAnalyses) {
 					for (@NonNull TC superProducedTraceClassAnalysis : producedTraceClassAnalysis.getSuperTraceClassAnalyses()) {
-						for (@NonNull PR consumer : superProducedTraceClassAnalysis.getConsumers()) {
-							Set<@NonNull PR> consumers = producer2consumers.get(producer);
+						for (@NonNull PRA consumer : superProducedTraceClassAnalysis.getConsumers()) {
+							Set<@NonNull PRA> consumers = producer2consumers.get(producer);
 							assert consumers != null;
 							consumers.add(consumer);
 						}
 					}
 				}
 			}
-			Iterable<@NonNull TracePropertyAnalysis<@NonNull PR>> producedTracePropertyAnalyses = producer.getProducedTracePropertyAnalyses();
+			Iterable<@NonNull TracePropertyAnalysis<@NonNull PRA>> producedTracePropertyAnalyses = producer.getProducedTracePropertyAnalyses();
 			if (producedTracePropertyAnalyses != null) {
-				for (@NonNull TracePropertyAnalysis<@NonNull PR> producedTracePropertyAnalysis : producedTracePropertyAnalyses) {
-					for (@NonNull PR consumer : producedTracePropertyAnalysis.getConsumers()) {
-						Set<@NonNull PR> consumers = producer2consumers.get(producer);
+				for (@NonNull TracePropertyAnalysis<@NonNull PRA> producedTracePropertyAnalysis : producedTracePropertyAnalyses) {
+					for (@NonNull PRA consumer : producedTracePropertyAnalysis.getConsumers()) {
+						Set<@NonNull PRA> consumers = producer2consumers.get(producer);
 						assert consumers != null;
 						consumers.add(consumer);
 					}
@@ -531,27 +506,27 @@ public class CompilerUtil extends QVTscheduleUtil
 			}
 		}
 		if (TransformationPartitioner.SUCCESSORS.isActive()) {
-			for (@NonNull PR successor : regionAnalyses) {
+			for (@NonNull PRA successor : regionAnalyses) {
 				StringBuilder s = new StringBuilder();
 				s.append(successor + ":");
-				List<@NonNull PR> consumers = new ArrayList<>(producer2consumers.get(successor));
+				List<@NonNull PRA> consumers = new ArrayList<>(producer2consumers.get(successor));
 				Collections.sort(consumers, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull PR consumer : consumers) {
+				for (@NonNull PRA consumer : consumers) {
 					s.append(" " + consumer);
 				}
 				TransformationPartitioner.SUCCESSORS.println(s.toString());
 			}
 		}
-		Map<@NonNull PR, @NonNull Set<@NonNull PR>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers); */
+		Map<@NonNull PRA, @NonNull Set<@NonNull PRA>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers); */
 		if (TransformationPartitioner.SUCCESSORS.isActive()) {
-			List<@NonNull PR> predecessors = Lists.newArrayList(partialRegions);
+			List<@NonNull PRA> predecessors = Lists.newArrayList(partialRegions);
 			Collections.sort(predecessors, NameUtil.NAMEABLE_COMPARATOR);
-			for (@NonNull PR predecessor : predecessors) {
+			for (@NonNull PRA predecessor : predecessors) {
 				StringBuilder s = new StringBuilder();
 				s.append(predecessor + ":");
-				List<@NonNull PR> consumers = new ArrayList<>(producer2consumersClosure.get(predecessor));
+				List<@NonNull PRA> consumers = new ArrayList<>(producer2consumersClosure.get(predecessor));
 				Collections.sort(consumers, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull PR consumer : consumers) {
+				for (@NonNull PRA consumer : consumers) {
 					s.append(" " + consumer);
 				}
 				TransformationPartitioner.SUCCESSORS.println(s.toString());

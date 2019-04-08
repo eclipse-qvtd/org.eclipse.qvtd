@@ -11,44 +11,16 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionPropertyAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * Each TracePropertyAnalysis identifies the usage of one middle trace property.
  */
-public class TracePropertyPartitionAnalysis extends TraceElementPartitionAnalysis implements CompilerUtil.TraceProperty<@NonNull PartitionAnalysis, @NonNull TraceClassPartitionAnalysis, @NonNull TracePropertyPartitionAnalysis>
+public class TracePropertyPartitionAnalysis extends AbstractPartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>
 {
-	//	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
-	protected final@NonNull TraceClassPartitionAnalysis traceClassAnalysis;
-	protected final @NonNull PropertyDatum tracePropertyDatum;
-
-	public TracePropertyPartitionAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull TraceClassPartitionAnalysis traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-		//		this.partitionedTransformationAnalysis = transformationPartitioner.getPartitionedTransformationAnalysis();
-		this.traceClassAnalysis = traceClassAnalysis;
-		this.tracePropertyDatum = tracePropertyDatum;
-		//	assert tracePropertyDatum.getReferredTypedModel() == regionsAnalysis.getScheduleManager().getTraceTypedModel();
-		//		ClassDatum traceClassDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
-		//	assert partitionedTransformationAnalysis.getTraceClassAnalysis(QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum)) == traceClassAnalysis;
-	}
-
-	@Override
-	public String getName() {
-		return tracePropertyDatum.getName();
-	}
-
-	public @NonNull PropertyDatum getPropertyDatum() {
-		return tracePropertyDatum;
-	}
-
-	public @NonNull Property getTraceProperty() {
-		return QVTscheduleUtil.getReferredProperty(tracePropertyDatum);
-	}
-
-	@Override
-	public String toString() {
-		return tracePropertyDatum.toString();
+	public TracePropertyPartitionAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+		super(traceClassAnalysis, tracePropertyDatum);
 	}
 }

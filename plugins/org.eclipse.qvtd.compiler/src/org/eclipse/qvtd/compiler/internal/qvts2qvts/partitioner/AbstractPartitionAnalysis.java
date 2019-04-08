@@ -16,6 +16,9 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -25,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 /**
  * PartitionAnalysis captures the analysis of a Partition.
  */
-public abstract class AbstractPartitionAnalysis<P extends Partition> implements PartitionAnalysis
+public abstract class AbstractPartitionAnalysis<P extends Partition> extends AbstractPartialRegionAnalysis<@NonNull PartitionAnalysis> implements PartitionAnalysis
 {
 	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 	protected final @NonNull ScheduleManager scheduleManager;
@@ -55,12 +58,12 @@ public abstract class AbstractPartitionAnalysis<P extends Partition> implements 
 	public void computeCheckedOrEnforcedEdges() {}
 
 	@Override
-	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getConsumedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getConsumedTraceClassAnalyses() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getConsumedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getConsumedTracePropertyAnalyses() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -85,27 +88,27 @@ public abstract class AbstractPartitionAnalysis<P extends Partition> implements 
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getProducedTraceClassAnalyses() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getProducedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getProducedTracePropertyAnalyses() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getSuperProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getSuperProducedTraceClassAnalyses() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull TraceClassPartitionAnalysis> getTraceClassAnalyses() {
+	public @NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getTraceClassAnalyses() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull TracePropertyPartitionAnalysis> getTracePropertyAnalyses() {
+	public @NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getTracePropertyAnalyses() {
 		throw new UnsupportedOperationException();
 	}
 
