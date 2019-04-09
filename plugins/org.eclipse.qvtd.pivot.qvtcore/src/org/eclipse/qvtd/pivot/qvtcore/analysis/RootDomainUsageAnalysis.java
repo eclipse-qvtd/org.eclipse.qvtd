@@ -240,12 +240,12 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	/**
 	 * No TypedModels is used by control infrastructure such as MappingLoops.
 	 */
-	private static final @NonNull Integer NONE_USAGE_BIT_MASK = 0;
+	protected static final @NonNull Integer NONE_USAGE_BIT_MASK = 0;
 
 	/**
 	 * The first bit is reserved for the primitive TypedModel that is used by DataTypes.
 	 */
-	private static final @NonNull Integer PRIMITIVE_USAGE_BIT_MASK = 1;
+	protected static final @NonNull Integer PRIMITIVE_USAGE_BIT_MASK = 1;
 
 	protected final @NonNull StandardLibrary standardLibrary;
 
@@ -322,8 +322,8 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		primitiveTypeModel.setName(QVTbaseUtil.PRIMITIVE_TYPED_MODEL_NAME);
 		primitiveTypeModel.setIsPrimitive(true);
 		add(primitiveTypeModel);
-		validUsages.put(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
-		validUsages.put(PRIMITIVE_USAGE_BIT_MASK, getConstantUsage(PRIMITIVE_USAGE_BIT_MASK));
+		addValidUsage(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
+		addValidUsage(PRIMITIVE_USAGE_BIT_MASK, getConstantUsage(PRIMITIVE_USAGE_BIT_MASK));
 		setUsage(primitiveTypeModel, getPrimitiveUsage());
 	}
 
@@ -340,6 +340,10 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		if (eProperty instanceof EReference) {
 			dirtyEReferences.add((EReference) eProperty);
 		}
+	}
+
+	protected void addValidUsage(int bitMask, @NonNull DomainUsageConstant typedModelUsage) {
+		validUsages.put(bitMask, typedModelUsage);
 	}
 
 	public @NonNull DomainUsageAnalysis analyzeOperation(@NonNull Operation object) {
@@ -378,13 +382,13 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 				continue;
 			}
 			if (typedModel.isIsTrace()) {
-				traceTypedModel = typedModel;
+				setTraceTypedModel(typedModel);
 				//				continue;
 			}
 			int nextBit = add(typedModel);
 			int bitMask = 1 << nextBit;
 			@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
-			validUsages.put(bitMask, typedModelUsage);
+			addValidUsage(bitMask, typedModelUsage);
 			boolean isEnforceable = false;
 			boolean isUnenforceable = false;
 			for (Rule rule : transformation.getRule()) {
@@ -454,9 +458,9 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			}
 		}
 		class2usage.put(((StandardLibraryInternal)standardLibrary).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
-		inputUsage = getConstantUsage(getAnyMask() & unenforceableMask);
-		outputUsage = getConstantUsage(getAnyMask() & enforceableMask);
-		middleUsage = getConstantUsage(getAnyMask() & ~unenforceableMask & ~enforceableMask & ~PRIMITIVE_USAGE_BIT_MASK);
+		setInputUsage(unenforceableMask);
+		setOutputUsage(enforceableMask);
+		setMiddleUsage(~unenforceableMask & ~enforceableMask & ~PRIMITIVE_USAGE_BIT_MASK);
 		if (traceTypedModel != null) {
 			setUsage(traceTypedModel, middleUsage);
 		}
@@ -467,6 +471,10 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		analyzePropertyAssignments(transformation);
 		visit(transformation);
 		return element2usage;
+	}
+
+	protected @Nullable TypedModel basicGetTraceTypedModel() {
+		return traceTypedModel;
 	}
 
 	@Override
@@ -736,4 +744,23 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	//		return PivotPackage.eNS_URI.equals(pURI) ||
 	//				OCLstdlib.STDLIB_URI.equals(pURI);
 	//	}
+
+	protected @NonNull DomainUsage setInputUsage(int inputMask) {
+		inputUsage = getConstantUsage(getAnyMask() & inputMask);
+		return inputUsage;
+	}
+
+	protected @NonNull DomainUsage setMiddleUsage(int middleMask) {
+		middleUsage = getConstantUsage(getAnyMask() & middleMask);
+		return middleUsage;
+	}
+
+	protected @NonNull DomainUsage setOutputUsage(int outputMask) {
+		outputUsage = getConstantUsage(getAnyMask() & outputMask);
+		return outputUsage;
+	}
+
+	protected void setTraceTypedModel(@NonNull TypedModel typedModel) {
+		this.traceTypedModel = typedModel;
+	}
 }

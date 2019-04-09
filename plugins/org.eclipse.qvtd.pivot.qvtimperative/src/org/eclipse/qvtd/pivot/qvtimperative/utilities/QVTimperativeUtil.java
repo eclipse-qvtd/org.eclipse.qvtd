@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -43,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
@@ -98,6 +100,15 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return null;
 	}
 
+	public static @Nullable Mapping basicGetContainingMapping(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Mapping) {
+				return (Mapping) eObject;
+			}
+		}
+		return null;
+	}
+
 	public static @Nullable ImperativeTypedModel basicGetOwnedTypedModel(@NonNull ImperativeTransformation transformation, @Nullable String name) {
 		return NameUtil.getNameable(getOwnedTypedModels(transformation), name);
 	}
@@ -106,13 +117,8 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)typedElement.getType());
 	}
 
-	public static @Nullable Mapping getContainingMapping(@Nullable EObject eObject) {
-		for ( ; eObject != null; eObject = eObject.eContainer()) {
-			if (eObject instanceof Mapping) {
-				return (Mapping) eObject;
-			}
-		}
-		return null;
+	public static @NonNull Mapping getContainingMapping(@Nullable EObject eObject) {
+		return ClassUtil.nonNullState(basicGetContainingMapping(eObject));
 	}
 
 	public static @Nullable Statement getContainingStatement(@Nullable EObject eObject) {
@@ -172,8 +178,24 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return (@NonNull Iterable<@NonNull ImperativeTypedModel>)modelParameter;
 	}
 
+	public static @NonNull MappingCall getOwningMappingCall(@NonNull MappingParameterBinding mappingParameterBinding) {
+		return ClassUtil.nonNullState(mappingParameterBinding.getOwningMappingCall());
+	}
+
 	public static @NonNull Mapping getReferredMapping(MappingCall asMappingCall) {
 		return ClassUtil.nonNullState(asMappingCall.getReferredMapping());
+	}
+
+	public static @NonNull TypedModel getReferredTypedModel(@NonNull GuardParameter asGuardParameter) {
+		return ClassUtil.nonNullState(asGuardParameter.getReferredTypedModel());
+	}
+
+	public static @NonNull TypedModel getReferredTypedModel(@NonNull NewStatement asNewStatement) {
+		return ClassUtil.nonNullState(asNewStatement.getReferredTypedModel());
+	}
+
+	public static @NonNull TypedModel getReferredTypedModel(@NonNull SimpleParameter asSimpleParameter) {
+		return ClassUtil.nonNullState(asSimpleParameter.getReferredTypedModel());
 	}
 
 	public static @NonNull Mapping getRootMapping(@NonNull ImperativeTransformation asTransformation) {
@@ -216,6 +238,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		else {
 			return referredProperty;
 		}
+	}
+
+	public static @NonNull VariableDeclaration getTargetVariable(@NonNull SetStatement asSetStatement) {
+		return ClassUtil.nonNullState(asSetStatement.getTargetVariable());
 	}
 
 	public static boolean isObserver(@NonNull Mapping asMapping) {
@@ -311,10 +337,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			//
 			ClassUtil.sort(variables, new PatternVariableComparator(def2refs));
 		}
-	}
-
-	public static @NonNull MappingCall getOwningMappingCall(@NonNull MappingParameterBinding mappingParameterBinding) {
-		return ClassUtil.nonNullState(mappingParameterBinding.getOwningMappingCall());
 	}
 
 	/**
