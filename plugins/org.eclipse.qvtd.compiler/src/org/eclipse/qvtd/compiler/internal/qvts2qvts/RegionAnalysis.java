@@ -149,6 +149,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		return getPartitionAnalyses().iterator().next().getPartitionedTransformationAnalysis();
 	}
 
+	@Override
 	public @NonNull Region getRegion() {
 		return region;
 	}

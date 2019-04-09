@@ -17,7 +17,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
-public interface PartialRegionAnalysis<@NonNull PRA extends PartialRegionsAnalysis> extends Nameable
+public interface PartialRegionAnalysis<@NonNull PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends Nameable
 {
 	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getConsumedTraceClassAnalyses();
 	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> getConsumedTracePropertyAnalyses();

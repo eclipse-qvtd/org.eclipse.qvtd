@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartition>
+public class BasicPartitionAnalysis extends MappingPartitionAnalysis<@NonNull BasicPartition>
 {
 	/**
 	 * The mechanisms to reach required nodes.

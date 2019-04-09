@@ -18,7 +18,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionProper
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 
-public class LoadingPartitionAnalysis extends AbstractPartitionAnalysis<LoadingPartition>
+public class LoadingPartitionAnalysis extends AbstractPartitionAnalysis<@NonNull LoadingPartition>
 {
 	public static @NonNull LoadingPartitionAnalysis createLoadingPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis,
 			@NonNull LoadingRegion loadingRegion) {

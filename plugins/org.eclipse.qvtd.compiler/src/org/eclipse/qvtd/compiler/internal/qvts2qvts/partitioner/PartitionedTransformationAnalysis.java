@@ -12,17 +12,12 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
@@ -42,25 +37,14 @@ import com.google.common.collect.Iterables;
 /**
  * A TransformationAnalysis accumulates the results of analyzing a RelationalTransformation and its contents.
  */
-public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAnalysis
+public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAnalysis<@NonNull PartitionsAnalysis>
 {
 	protected final @NonNull TransformationPartitioner transformationPartitioner;
-	protected final @NonNull ScheduleManager scheduleManager;
-
-	/**
-	 * The TraceClassAnalysis for each trace class.
-	 */
-	private final @NonNull Map<@NonNull ClassDatum, @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> classDatum2traceClassAnalysis = new HashMap<>();
-
-	/**
-	 * The TracePropertyAnalysis for each trace property.
-	 */
-	private final @NonNull Map<@NonNull PropertyDatum, @NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> propertyDatum2tracePropertyAnalysis = new HashMap<>();
 
 	/**
 	 * The PartitionAnalysis for each Partition.
 	 */
-	private final @NonNull Map<@NonNull Partition, @NonNull AbstractPartitionAnalysis<?>> partition2partitionAnalysis = new HashMap<>();
+	private final @NonNull Map<@NonNull Partition, @NonNull AbstractPartitionAnalysis<? extends @NonNull Partition>> partition2partitionAnalysis = new HashMap<>();
 
 	/**
 	 * The FallibilityAnalysis for each Partition.
@@ -72,9 +56,8 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = null;
 
 	public PartitionedTransformationAnalysis(@NonNull TransformationPartitioner transformationPartitioner) {
-		super(transformationPartitioner.getScheduleManager().getEnvironmentFactory());
+		super(transformationPartitioner.getScheduleManager());
 		this.transformationPartitioner = transformationPartitioner;
-		this.scheduleManager = transformationPartitioner.getScheduleManager();
 	}
 
 	public void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigationEdge predicatedEdge) {
@@ -97,37 +80,8 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " predicated for " + property);
 	}
 
-	public @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> addConsumer(@NonNull ClassDatum classDatum, @NonNull PartitionAnalysis consumer) {
-		PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-		traceClassAnalysis.addConsumer(consumer);
-		return traceClassAnalysis;
-	}
-
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartitionAnalysis consumer) {
-		PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-		tracePropertyAnalysis.addConsumer(consumer);
-		return tracePropertyAnalysis;
-	}
-
-	public void addPartitionAnalysis(@NonNull AbstractPartitionAnalysis<?> partitionAnalysis) {
+	public void addPartitionAnalysis(@NonNull AbstractPartitionAnalysis<? extends @NonNull Partition> partitionAnalysis) {
 		partition2partitionAnalysis.put(partitionAnalysis.getPartition(), partitionAnalysis);
-	}
-
-	public @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> addProducer(@NonNull ClassDatum classDatum, @NonNull PartitionAnalysis producer) {
-		PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-		traceClassAnalysis.addProducer(producer);
-		return traceClassAnalysis;
-	}
-
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartitionAnalysis producer) {
-		for (@NonNull PropertyDatum superPropertyDatum : QVTscheduleUtil.getSuperPropertyDatums(tracePropertyDatum)) {
-			PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> superTracePropertyAnalysis = lazyCreateTracePropertyAnalysis(superPropertyDatum);
-			superTracePropertyAnalysis.addProducer(producer);
-		}
-		return getTracePropertyAnalysis(tracePropertyDatum);
-		//		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-		//		tracePropertyAnalysis.addProducer(producer);
-		//		return tracePropertyAnalysis;
 	}
 
 	public void addRealizedEdge(@NonNull TypedModel typedModel, @NonNull NavigationEdge realizedEdge) {
@@ -229,45 +183,12 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		}
 	}
 
-	protected void computeTraceClassDiscrimination() throws CompilerChainException {
-		for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
-			traceClassAnalysis.discriminate();
-		}
-	}
-
-	public void computeTraceClassInheritance() {
-		Set<@NonNull ClassDatum> missingClassDatums = new HashSet<>();
-		for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
-			ClassDatum classDatum = subTraceClassRegionAnalysis.getClassDatum();
-			for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(classDatum)) {
-				if (superClassDatum != classDatum) {
-					PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
-					if (superTraceClassRegionAnalysis == null) {
-						missingClassDatums.add(superClassDatum);
-					}
-				}
-			}
-		}
-		for (@NonNull ClassDatum missingClassDatum : missingClassDatums) {
-			lazyCreateTraceClassAnalysis(missingClassDatum);
-		}
-		for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
-			ClassDatum classDatum = subTraceClassRegionAnalysis.getClassDatum();
-			for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(classDatum)) {
-				if (superClassDatum != classDatum) {
-					PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
-					assert superTraceClassRegionAnalysis != null;
-					superTraceClassRegionAnalysis.addSubTraceClassAnalysis(subTraceClassRegionAnalysis);
-					subTraceClassRegionAnalysis.addSuperTraceClassAnalysis(superTraceClassRegionAnalysis);
-				}
-			}
-		}
-	}
-
+	@Override
 	protected @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
 		return new TraceClassPartitionAnalysis(transformationPartitioner.getTransformationAnalysis().getTraceClassAnalysis(traceClassDatum));
 	}
 
+	@Override
 	protected @NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
 		return new TracePropertyPartitionAnalysis(transformationPartitioner, traceClassAnalysis, tracePropertyDatum);
 	}
@@ -280,8 +201,6 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		}
 		return fallibilityAnalysis;
 	}
-
-	//	protected abstract @NonNull Iterable<@NonNull Partition> getPartialRegionAnalyses();
 
 	@Override
 	public String getName() {
@@ -300,34 +219,6 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 
 	public @NonNull RootPartitionAnalysis getRootPartitionAnalysis() {
 		return ClassUtil.nonNullState(rootPartitionAnalysis);
-	}
-
-	public @NonNull ScheduleManager getScheduleManager() {
-		return scheduleManager;
-	}
-
-	private @NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> getTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
-		return ClassUtil.nonNullState(propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum));
-	}
-
-	private @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> lazyCreateTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis = classDatum2traceClassAnalysis.get(classDatum);
-		if (traceClassAnalysis == null) {
-			traceClassAnalysis = createTraceClassAnalysis(classDatum);
-			classDatum2traceClassAnalysis.put(classDatum, traceClassAnalysis);
-		}
-		return traceClassAnalysis;
-	}
-
-	private @NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> lazyCreateTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
-		PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> tracePropertyAnalysis = propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum);
-		if (tracePropertyAnalysis == null) {
-			ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
-			PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-			tracePropertyAnalysis = createTracePropertyAnalysis(traceClassAnalysis, tracePropertyDatum);
-			propertyDatum2tracePropertyAnalysis.put(tracePropertyDatum, tracePropertyAnalysis);
-		}
-		return tracePropertyAnalysis;
 	}
 
 	public void setLoadingRegionAnalysis(@NonNull LoadingPartitionAnalysis loadingPartitionAnalysis) {

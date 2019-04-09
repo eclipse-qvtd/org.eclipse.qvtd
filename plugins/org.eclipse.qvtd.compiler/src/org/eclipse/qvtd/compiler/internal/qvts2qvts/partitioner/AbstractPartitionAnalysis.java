@@ -15,7 +15,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
@@ -24,20 +23,21 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * PartitionAnalysis captures the analysis of a Partition.
  */
-public abstract class AbstractPartitionAnalysis<P extends Partition> extends AbstractPartialRegionAnalysis<@NonNull PartitionsAnalysis> implements PartitionAnalysis
+public abstract class AbstractPartitionAnalysis<@NonNull P extends Partition> extends AbstractPartialRegionAnalysis<@NonNull PartitionsAnalysis> implements PartitionAnalysis
 {
 	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
-	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull P partition;
 
 	protected AbstractPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull P partition) {
+		super(partitionedTransformationAnalysis);
 		this.partitionedTransformationAnalysis = partitionedTransformationAnalysis;
-		this.scheduleManager = partitionedTransformationAnalysis.getScheduleManager();
 		this.partition = partition;
 
 	}
@@ -57,16 +57,6 @@ public abstract class AbstractPartitionAnalysis<P extends Partition> extends Abs
 
 	@Override
 	public void computeCheckedOrEnforcedEdges() {}
-
-	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getConsumedTraceClassAnalyses() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getConsumedTracePropertyAnalyses() {
-		throw new UnsupportedOperationException();
-	}
 
 	@Override
 	public @Nullable Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> getExplicitPredecessors() {
@@ -89,18 +79,8 @@ public abstract class AbstractPartitionAnalysis<P extends Partition> extends Abs
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getProducedTraceClassAnalyses() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getProducedTracePropertyAnalyses() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getSuperProducedTraceClassAnalyses() {
-		throw new UnsupportedOperationException();
+	public @NonNull Region getRegion() {
+		return QVTscheduleUtil.getRegion(partition);
 	}
 
 	@Override

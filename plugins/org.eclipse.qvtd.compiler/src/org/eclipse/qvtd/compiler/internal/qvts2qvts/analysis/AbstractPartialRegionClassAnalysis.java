@@ -37,7 +37,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegionsAnalysis> extends AbstractPartialRegionElementAnalysis<@NonNull PRA> implements PartialRegionClassAnalysis<@NonNull PRA>
+public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends AbstractPartialRegionElementAnalysis<@NonNull PRA> implements PartialRegionClassAnalysis<@NonNull PRA>
 {
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ClassDatum traceClassDatum;

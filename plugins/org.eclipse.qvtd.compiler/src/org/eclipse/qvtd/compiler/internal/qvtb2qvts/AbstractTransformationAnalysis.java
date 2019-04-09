@@ -13,11 +13,8 @@ package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
@@ -56,12 +53,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * A TransformationAnalysis accumulates the tesults of analyzing a RelationalTransformation and its contents.
  */
-public abstract class AbstractTransformationAnalysis extends AbstractPartialRegionsAnalysis
+public abstract class AbstractTransformationAnalysis extends AbstractPartialRegionsAnalysis<@NonNull RegionsAnalysis>
 {
-	/**
-	 * The supervising ScheduleManager.
-	 */
-	protected final @NonNull ScheduleManager scheduleManager;
 
 	/**
 	 * The analyzed Transformation.
@@ -74,16 +67,6 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	protected final @NonNull RootRegion rootRegion;
 
 	protected final @NonNull Property oclContainerProperty;
-
-	/**
-	 * The TraceClassAnalysis for each trace class.
-	 */
-	private final @NonNull Map<@NonNull ClassDatum, @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> classDatum2traceClassAnalysis = new HashMap<>();
-
-	/**
-	 * The TracePropertyAnalysis for each trace property.
-	 */
-	private final @NonNull Map<@NonNull PropertyDatum, @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> propertyDatum2tracePropertyAnalysis = new HashMap<>();
 
 	/**
 	 * The analysis of cycles.
@@ -111,8 +94,7 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	private @Nullable RootPartitionAnalysis rootPartitionAnalysis = null;
 
 	protected AbstractTransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull RootRegion rootRegion) {
-		super(scheduleManager.getEnvironmentFactory());
-		this.scheduleManager = scheduleManager;
+		super(scheduleManager);
 		this.transformation = transformation;
 		this.rootRegion = rootRegion;
 		this.oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
@@ -144,30 +126,6 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		}
 	}
 
-	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> addConsumer(@NonNull ClassDatum classDatum, @NonNull RegionAnalysis consumer) {
-		PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-		traceClassAnalysis.addConsumer(consumer);
-		return traceClassAnalysis;
-	}
-
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RegionAnalysis consumer) {
-		PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-		tracePropertyAnalysis.addConsumer(consumer);
-		return tracePropertyAnalysis;
-	}
-
-	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> addProducer(@NonNull ClassDatum classDatum, @NonNull RegionAnalysis producer) {
-		PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-		traceClassAnalysis.addProducer(producer);
-		return traceClassAnalysis;
-	}
-
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RegionAnalysis producer) {
-		PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-		tracePropertyAnalysis.addProducer(producer);
-		return tracePropertyAnalysis;
-	}
-
 	/**
 	 * Perform the independent local analysis of each Rule.
 	 */
@@ -194,8 +152,8 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		}
 	}
 
-	public @Nullable PartialRegionClassAnalysis<@NonNull RegionsAnalysis> basicGetTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		return classDatum2traceClassAnalysis.get(classDatum);
+	public @Nullable RegionAnalysis basicGetRegionAnalysis(@NonNull Region region) {
+		return region2regionAnalysis.get(region);
 	}
 
 	public @Nullable RootPartitionAnalysis basicGetRootPartitionAnalysis() {
@@ -211,51 +169,14 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		this.cyclesRegionAnalysis = new CyclicRegionsAnalysis(regionAnalyses);
 	}
 
-	protected void computeTraceClassDiscrimination() throws CompilerChainException {
-		for (@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
-			traceClassAnalysis.discriminate();
-		}
-	}
-
-	public void computeTraceClassInheritance() {
-		Set<@NonNull ClassDatum> missingClassDatums = new HashSet<>();
-		for (@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
-			ClassDatum classDatum = subTraceClassRegionAnalysis.getClassDatum();
-			for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(classDatum)) {
-				if (superClassDatum != classDatum) {
-					PartialRegionClassAnalysis<@NonNull RegionsAnalysis> superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
-					if (superTraceClassRegionAnalysis == null) {
-						missingClassDatums.add(superClassDatum);
-					}
-				}
-			}
-		}
-		for (@NonNull ClassDatum missingClassDatum : missingClassDatums) {
-			lazyCreateTraceClassAnalysis(missingClassDatum);
-		}
-		for (@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
-			ClassDatum classDatum = subTraceClassRegionAnalysis.getClassDatum();
-			for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(classDatum)) {
-				if (superClassDatum != classDatum) {
-					PartialRegionClassAnalysis<@NonNull RegionsAnalysis> superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
-					assert superTraceClassRegionAnalysis != null;
-					superTraceClassRegionAnalysis.addSubTraceClassAnalysis(subTraceClassRegionAnalysis);
-					subTraceClassRegionAnalysis.addSuperTraceClassAnalysis(superTraceClassRegionAnalysis);
-				}
-			}
-		}
-	}
-
+	@Override
 	protected @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
 		return new TraceClassRegionAnalysis(this, traceClassDatum);
 	}
 
+	@Override
 	protected @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
 		return new TracePropertyRegionAnalysis(this, traceClassAnalysis, tracePropertyDatum);
-	}
-
-	public @Nullable RegionAnalysis basicGetRegionAnalysis(@NonNull Region region) {
-		return region2regionAnalysis.get(region);
 	}
 
 	public @NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions() {
@@ -317,21 +238,14 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		throw new IllegalStateException("No RuleAnalysis for '" + rule + "'"); */
 	}
 
-	public @NonNull ScheduleManager getScheduleManager() {
-		return scheduleManager;
-	}
-
 	public @NonNull RootRegion getRootRegion() {
 		return rootRegion;
 	}
 
-	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> getTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		return ClassUtil.nonNullState(classDatum2traceClassAnalysis.get(classDatum));
-	}
-
+	@Override
 	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
-		return ClassUtil.nonNullState(propertyDatum2tracePropertyAnalysis.get(propertyDatum));
+		return super.getTracePropertyAnalysis(propertyDatum);
 	}
 
 	public @NonNull Transformation getTransformation() {
@@ -389,26 +303,6 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 			return false;
 		}
 		return traceClassAnalysis.isCyclic();
-	}
-
-	private @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> lazyCreateTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis = classDatum2traceClassAnalysis.get(classDatum);
-		if (traceClassAnalysis == null) {
-			traceClassAnalysis = createTraceClassAnalysis(classDatum);
-			classDatum2traceClassAnalysis.put(classDatum, traceClassAnalysis);
-		}
-		return traceClassAnalysis;
-	}
-
-	private @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> lazyCreateTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
-		PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> tracePropertyAnalysis = propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum);
-		if (tracePropertyAnalysis == null) {
-			ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
-			PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-			tracePropertyAnalysis = createTracePropertyAnalysis(traceClassAnalysis, tracePropertyDatum);
-			propertyDatum2tracePropertyAnalysis.put(tracePropertyDatum, tracePropertyAnalysis);
-		}
-		return tracePropertyAnalysis;
 	}
 
 	public @NonNull PartitionedTransformationAnalysis partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<? extends @NonNull Region> activeRegions) throws CompilerChainException {

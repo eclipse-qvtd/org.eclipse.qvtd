@@ -27,12 +27,16 @@ public interface PartitionAnalysis extends PartialRegionAnalysis<@NonNull Partit
 	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	void analyzePartitionEdges();
 	void computeCheckedOrEnforcedEdges();
+	@Override
 	@NonNull Partition getPartition();
 	@NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis();
+	@Override
 	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getProducedTraceClassAnalyses();
+	@Override
 	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getProducedTracePropertyAnalyses();
 	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getTraceClassAnalyses();
 	@NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>>  getTracePropertyAnalyses();
+	@Override
 	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getSuperProducedTraceClassAnalyses();
 	boolean isChecked(@NonNull Edge edge);
 }

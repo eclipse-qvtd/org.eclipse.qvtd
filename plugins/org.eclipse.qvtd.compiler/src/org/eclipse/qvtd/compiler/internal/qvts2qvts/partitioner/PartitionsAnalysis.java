@@ -10,11 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionsAnalysis;
 
 /**
  * PartitionAnalysis captures the analysis of a Partition.
  */
-public interface PartitionsAnalysis extends PartialRegionsAnalysis
+public interface PartitionsAnalysis extends PartialRegionsAnalysis<@NonNull PartitionsAnalysis>
 {
 }

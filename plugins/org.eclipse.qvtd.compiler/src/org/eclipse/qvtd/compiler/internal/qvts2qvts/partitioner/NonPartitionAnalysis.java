@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.NonPartition;
 
-public class NonPartitionAnalysis extends MappingPartitionAnalysis<NonPartition>
+public class NonPartitionAnalysis extends MappingPartitionAnalysis<@NonNull NonPartition>
 {
 	/**
 	 * The mechanisms to reach required nodes.

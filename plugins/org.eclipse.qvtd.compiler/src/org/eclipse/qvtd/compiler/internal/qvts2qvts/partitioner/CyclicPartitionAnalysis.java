@@ -38,7 +38,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
 
-public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<CyclicPartition>
+public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<@NonNull CyclicPartition>
 {
 	public static @NonNull CyclicPartitionAnalysis createCyclicPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis,
 			@NonNull String name, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses,

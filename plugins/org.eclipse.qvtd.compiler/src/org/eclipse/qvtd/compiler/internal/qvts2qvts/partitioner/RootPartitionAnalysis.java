@@ -26,7 +26,7 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
-public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<RootPartition>
+public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<@NonNull RootPartition>
 {
 	public static @NonNull RootPartitionAnalysis createRootPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis,
 			@NonNull AbstractTransformationAnalysis transformationAnalysis,

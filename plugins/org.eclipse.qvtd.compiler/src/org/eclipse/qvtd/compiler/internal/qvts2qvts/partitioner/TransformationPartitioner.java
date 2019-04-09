@@ -205,7 +205,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 		//	Create the per-mapping partitioner and accumulate the local analyses
 		//
 		for (@NonNull Region region : activeRegions) {
-			RegionAnalysis regionAnalysis = (RegionAnalysis) transformationAnalysis.getRegionAnalysis(region);
+			RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(region);
 			if (region instanceof MappingRegion) {
 				MappingRegion mappingRegion = (MappingRegion)region;
 				MappingPartitioner mappingPartitioner = new MappingPartitioner(this, regionAnalysis);

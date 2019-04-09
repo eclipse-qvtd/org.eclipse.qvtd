@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -57,7 +56,9 @@ public class CyclicRegionsAnalysis
 		for (@NonNull PartialRegionAnalysis<@NonNull RegionsAnalysis> regionAnalysis : regionAnalyses) {
 			Set<@NonNull PartialRegionAnalysis<@NonNull RegionsAnalysis>> intersection = new HashSet<>(partitioner2predecessors.get(regionAnalysis));
 			intersection.retainAll(partitioner2successors.get(regionAnalysis));
-			cyclicRegionAnalyses.addAll((Collection<? extends @NonNull RegionAnalysis>) intersection);
+			for (@NonNull PartialRegionAnalysis<@NonNull RegionsAnalysis> intersectingRegionAnalysis : intersection) {
+				cyclicRegionAnalyses.add((RegionAnalysis)intersectingRegionAnalysis);
+			}
 		}
 		if (cyclicRegionAnalyses.isEmpty()) {
 			return;

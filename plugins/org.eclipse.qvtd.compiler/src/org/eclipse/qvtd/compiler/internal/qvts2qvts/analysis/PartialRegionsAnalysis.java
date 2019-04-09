@@ -10,8 +10,20 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 
-public interface PartialRegionsAnalysis extends Nameable
+public interface PartialRegionsAnalysis<@NonNull PRA extends PartialRegionsAnalysis<PRA>> extends Nameable
 {
+
+	@NonNull PartialRegionClassAnalysis<@NonNull PRA> addConsumer(@NonNull ClassDatum classDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> consumer);
+	@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> consumer);
+	@NonNull PartialRegionClassAnalysis<@NonNull PRA> addProducer(@NonNull ClassDatum classDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> producer);
+	@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> producer);
+	@NonNull ScheduleManager getScheduleManager();
+	@NonNull PartialRegionClassAnalysis<@NonNull PRA> getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum);
+	@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum);
 }

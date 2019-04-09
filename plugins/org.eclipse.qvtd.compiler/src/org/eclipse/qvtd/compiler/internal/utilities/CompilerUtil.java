@@ -245,7 +245,7 @@ public class CompilerUtil extends QVTscheduleUtil
 	 *
 	 * This is a simple type-conformance exercise. Find the sources that are supertypes of the target.
 	 */
-	public static <@NonNull PRA extends PartialRegionsAnalysis> @NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> computeImmediatePredecessors(@NonNull Iterable<? extends @NonNull PartialRegionAnalysis<@NonNull PRA>> partialRegionAnalyses) {
+	public static <@NonNull PRA extends PartialRegionsAnalysis<@NonNull PRA>> @NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> computeImmediatePredecessors(@NonNull Iterable<? extends @NonNull PartialRegionAnalysis<@NonNull PRA>> partialRegionAnalyses) {
 		Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> consumer2producers = new HashMap<>();
 		Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Map<@NonNull Object, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>>> consumer2consumedElement2producers = new HashMap<>();
 		for (@NonNull PartialRegionAnalysis<@NonNull PRA> partialRegionAnalysis : partialRegionAnalyses) {
@@ -418,7 +418,7 @@ public class CompilerUtil extends QVTscheduleUtil
 	 *
 	 * This is a simple type-conformance exercise. Find the sources that are supertypes of the target.
 	 */
-	public static <@NonNull PRA extends PartialRegionsAnalysis> @NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> computeTransitivePredecessors(@NonNull Iterable<? extends @NonNull PartialRegionAnalysis<@NonNull PRA>> partialRegionAnalyses) {
+	public static <@NonNull PRA extends PartialRegionsAnalysis<@NonNull PRA>> @NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> computeTransitivePredecessors(@NonNull Iterable<? extends @NonNull PartialRegionAnalysis<@NonNull PRA>> partialRegionAnalyses) {
 		Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> consumer2producers = computeImmediatePredecessors(partialRegionAnalyses);
 		List<@NonNull PartialRegionAnalysis<@NonNull PRA>> successors = Lists.newArrayList(partialRegionAnalyses);
 		Collections.sort(successors, NameUtil.NAMEABLE_COMPARATOR);
@@ -456,7 +456,7 @@ public class CompilerUtil extends QVTscheduleUtil
 	 * This is an inconvenient type-conformance exercise. Find the sources that are subtypes of the target. We therefore
 	 * require the inverse computeTransitivePredecessors's result to be provided for inversion.
 	 */
-	public static <@NonNull PRA extends PartialRegionsAnalysis> @NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> computeTransitiveSuccessors(@NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> partialRegion2predecessors) {
+	public static <@NonNull PRA extends PartialRegionsAnalysis<@NonNull PRA>> @NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> computeTransitiveSuccessors(@NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> partialRegion2predecessors) {
 		Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> producer2consumersClosure = new HashMap<>();
 		Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> partialRegions = partialRegion2predecessors.keySet();
 		for (@NonNull PartialRegionAnalysis<@NonNull PRA> predecessor : partialRegions) {

@@ -22,7 +22,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalys
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 
-public abstract class AbstractCompositePartitionAnalysis<P extends CompositePartition> extends AbstractPartitionAnalysis<P> implements CompositePartitionAnalysis
+public abstract class AbstractCompositePartitionAnalysis<@NonNull P extends CompositePartition> extends AbstractPartitionAnalysis<P> implements CompositePartitionAnalysis
 {
 	protected final @NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> originalPartitionAnalysis2predecessors;
 	protected final @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses;
