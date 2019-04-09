@@ -617,6 +617,10 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			//
 			for (@NonNull Region region : activeRegions2) {
 				if (!(region instanceof LoadingRegion)) {
+					String name = region.getName();
+					if ("classComplexAttributes".equals(name)) {
+						getClass();
+					}
 					connectionManager.createIncomingConnections(rootRegion, region);
 				}
 			}

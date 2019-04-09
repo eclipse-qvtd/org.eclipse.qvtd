@@ -61,6 +61,7 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<@NonNull Ba
 			partitionAnalyses.add(partitionedTransformationAnalysis.getPartitionAnalysis(partition));
 		}
 		this.explicitPredecessors = partitionAnalyses;
+		// FIXME derived trace property consumptions
 	}
 
 	/*	public void merge(@NonNull Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new) {

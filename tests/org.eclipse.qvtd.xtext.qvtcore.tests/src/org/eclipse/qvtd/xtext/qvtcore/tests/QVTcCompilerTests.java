@@ -429,6 +429,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		Scheduler.REGION_DEPTH.setState(true);
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
+		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
+		QVTscheduleConstants.POLLED_PROPERTIES.setState(true);
 		Splitter.RESULT.setState(true);
 		Splitter.STAGES.setState(true);
 		Splitter.RESULT.setState(true);

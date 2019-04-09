@@ -288,6 +288,10 @@ public class CompilerUtil extends QVTscheduleUtil
 			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses != null) {
 				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
+					String name = consumedTracePropertyAnalysis.getName();
+					if ("fromAttributes".equals(name)) {
+						CompilerUtil.class.getName();
+					}
 					for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : consumedTracePropertyAnalysis.getProducers()) {
 						Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
 						assert producers != null;

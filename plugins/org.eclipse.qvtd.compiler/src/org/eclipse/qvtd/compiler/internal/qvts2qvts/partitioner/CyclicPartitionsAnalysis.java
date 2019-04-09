@@ -142,7 +142,7 @@ public class CyclicPartitionsAnalysis
 			partitioning2predecessors.put(partitioning, predecessors);
 		}
 		//	Collections.sort(sortedPartitionings, QVTbaseUtil.CollectionSizeComparator.INSTANCE);	// Smallest first
-		Collections.sort(sortedPartitionings, new Comparator<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>>() {
+		Collections.sort(sortedPartitionings, new Comparator<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>>() { // Fewest predecessors first
 
 			@Override
 			public int compare(@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> o1, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> o2) {

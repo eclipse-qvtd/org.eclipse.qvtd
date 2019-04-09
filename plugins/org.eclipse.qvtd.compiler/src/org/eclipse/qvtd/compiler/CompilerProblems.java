@@ -59,10 +59,10 @@ public class CompilerProblems
 
 	public void throwCompilerChainExceptionForErrors() throws CompilerChainException {
 		if (errors != null) {
-			throw new CompilerChainException(String.valueOf(errors));
+			throw new CompilerChainException("{0}", String.valueOf(errors));
 		}
 		if (warnings != null) {
-			throw new CompilerChainException(String.valueOf(warnings));
+			throw new CompilerChainException("{0}", String.valueOf(warnings));
 		}
 	}
 
