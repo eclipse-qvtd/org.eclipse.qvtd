@@ -212,6 +212,24 @@ public class ConnectionManager
 				partialNames.add(QVTscheduleUtil.getName(predicatedEdge.getEdgeSource().getCompleteClass()));
 				partialNames.add(QVTscheduleUtil.getName(predicatedProperty));
 			}
+			if (predicatedProperty.isIsMany()) {
+				Property oppositeProperty = predicatedProperty.getOpposite();
+				if ((oppositeProperty != null) && !oppositeProperty.isIsMany()) {		// FIXME ?? need this ??
+					/*	Iterable<@NonNull NavigableEdge> inverseRealizedEdges = getNewInverseEdges(predicatedEdge, classDatum);
+					if (inverseRealizedEdges != null) {
+						for (@NonNull NavigableEdge inverseRealizedEdge : inverseRealizedEdges) {
+							if (true / *FIXME scheduleManager.isElementallyConformantSource(inverseRealizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(inverseRealizedEdge, predicatedEdge)* /) {
+								if (attributeConnectionSourceEdges == null) {
+									attributeConnectionSourceEdges = new ArrayList<>();
+								}
+								attributeConnectionSourceEdges.add(inverseRealizedEdge);
+							}
+						}
+						partialNames.add(QVTscheduleUtil.getName(predicatedEdge.getEdgeSource().getCompleteClass()));
+						partialNames.add(QVTscheduleUtil.getName(predicatedProperty));
+					} */
+				}
+			}
 			if (attributeConnectionSourceEdges != null) {
 				EdgeConnection edgeConnection = getAttributeConnection(invokingRegion2, attributeConnectionSourceEdges, partialNames, predicatedProperty);
 				edgeConnection.addUsedTargetEdge(predicatedEdge, false);
