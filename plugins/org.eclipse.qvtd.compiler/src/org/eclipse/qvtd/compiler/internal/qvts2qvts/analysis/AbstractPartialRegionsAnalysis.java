@@ -10,8 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis;
 
-import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 
-public interface PartialRegionsAnalysis extends Nameable
+public abstract class AbstractPartialRegionsAnalysis extends QVTbaseHelper implements PartialRegionsAnalysis
 {
+	protected AbstractPartialRegionsAnalysis(@NonNull EnvironmentFactory environmentFactory) {
+		super(environmentFactory);
+	}
 }
