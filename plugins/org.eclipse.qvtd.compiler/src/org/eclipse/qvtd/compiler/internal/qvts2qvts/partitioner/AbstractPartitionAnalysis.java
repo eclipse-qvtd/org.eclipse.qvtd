@@ -59,6 +59,11 @@ public abstract class AbstractPartitionAnalysis<@NonNull P extends Partition> ex
 	public void computeCheckedOrEnforcedEdges() {}
 
 	@Override
+	public @NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getClassAnalyses() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public @Nullable Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> getExplicitPredecessors() {
 		return null;
 	}
@@ -79,18 +84,13 @@ public abstract class AbstractPartitionAnalysis<@NonNull P extends Partition> ex
 	}
 
 	@Override
+	public @NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getPropertyAnalyses() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public @NonNull Region getRegion() {
 		return QVTscheduleUtil.getRegion(partition);
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getTraceClassAnalyses() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getTracePropertyAnalyses() {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override

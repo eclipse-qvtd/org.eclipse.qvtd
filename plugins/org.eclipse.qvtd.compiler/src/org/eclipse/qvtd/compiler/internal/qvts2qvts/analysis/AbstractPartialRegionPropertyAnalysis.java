@@ -21,61 +21,61 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
- * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
+ * Each ClassAnalysis identifies the usage of one middle trace class or property.
  */
 public abstract class AbstractPartialRegionPropertyAnalysis<@NonNull PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends AbstractPartialRegionElementAnalysis<@NonNull PRA> implements PartialRegionPropertyAnalysis<@NonNull PRA>
 {
 	protected final @NonNull PartialRegionsAnalysis<@NonNull PRA> partialRegionsAnalysis;
-	protected final @NonNull PartialRegionClassAnalysis<PRA> traceClassAnalysis;
-	protected final @NonNull PropertyDatum tracePropertyDatum;
+	protected final @NonNull PartialRegionClassAnalysis<PRA> classAnalysis;
+	protected final @NonNull PropertyDatum propertyDatum;
 
-	protected AbstractPartialRegionPropertyAnalysis(@NonNull PartialRegionsAnalysis<@NonNull PRA> partialRegionsAnalysis, @NonNull PartialRegionClassAnalysis<PRA> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+	protected AbstractPartialRegionPropertyAnalysis(@NonNull PartialRegionsAnalysis<@NonNull PRA> partialRegionsAnalysis, @NonNull PartialRegionClassAnalysis<PRA> classAnalysis, @NonNull PropertyDatum propertyDatum) {
 		this.partialRegionsAnalysis = partialRegionsAnalysis;
-		this.traceClassAnalysis = traceClassAnalysis;
-		this.tracePropertyDatum = tracePropertyDatum;
-		//	assert tracePropertyDatum.getReferredTypedModel() == partialRegionsAnalysis.getScheduleManager().getTraceTypedModel();
-		//		ClassDatum traceClassDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
-		assert partialRegionsAnalysis.getTraceClassAnalysis(QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum)) == traceClassAnalysis;
+		this.classAnalysis = classAnalysis;
+		this.propertyDatum = propertyDatum;
+		//	assert propertyDatum.getReferredTypedModel() == partialRegionsAnalysis.getScheduleManager().getTraceTypedModel();
+		//		ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
+		assert partialRegionsAnalysis.getClassAnalysis(QVTscheduleUtil.getOwningClassDatum(propertyDatum)) == classAnalysis;
+	}
+
+	public @NonNull PartialRegionClassAnalysis<PRA> getClassAnalysis() {
+		return classAnalysis;
 	}
 
 	@Override
 	public String getName() {
-		return tracePropertyDatum.getName();
+		return propertyDatum.getName();
+	}
+
+	public @NonNull Property getProperty() {
+		return QVTscheduleUtil.getReferredProperty(propertyDatum);
 	}
 
 	@Override
 	public @NonNull PropertyDatum getPropertyDatum() {
-		return tracePropertyDatum;
+		return propertyDatum;
 	}
 
-	public @NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> getSuperTracePropertyAnalyses() {
-		List<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> tracePropertyAnalyses = new ArrayList<>();
-		//		ClassDatum traceClassDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
-		//		TraceClassAnalysis<@NonNull RA> traceClassAnalysis = regionsAnalysis.getTraceClassAnalysis(traceClassDatum);
-		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> superTraceClassAnalysis : traceClassAnalysis.getSuperTraceClassAnalyses()) {
-			ClassDatum superTraceClassDatum = superTraceClassAnalysis.getClassDatum();
-			PropertyDatum propertyDatum = NameUtil.getNameable(superTraceClassDatum.getOwnedPropertyDatums(), getName());		// FIXME avoid 'name' usage - use tracePropertyDatum(.referredProperty)
+	public @NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> getSuperPropertyAnalyses() {
+		List<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> propertyAnalyses = new ArrayList<>();
+		//		ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
+		//		ClassAnalysis<@NonNull RA> classAnalysis = regionsAnalysis.getClassAnalysis(classDatum);
+		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> superClassAnalysis : classAnalysis.getSuperClassAnalyses()) {
+			ClassDatum superClassDatum = superClassAnalysis.getClassDatum();
+			PropertyDatum propertyDatum = NameUtil.getNameable(superClassDatum.getOwnedPropertyDatums(), getName());		// FIXME avoid 'name' usage - use propertyDatum(.referredProperty)
 			if (propertyDatum != null) {
-				PartialRegionPropertyAnalysis<@NonNull PRA> tracePropertyAnalysis = partialRegionsAnalysis.basicGetTracePropertyAnalysis(propertyDatum);	// FIXME is missing acceptable
-				if ((tracePropertyAnalysis != null) && !tracePropertyAnalyses.contains(tracePropertyAnalysis)) {
-					tracePropertyAnalyses.add(tracePropertyAnalysis);
+				PartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis = partialRegionsAnalysis.basicGetPropertyAnalysis(propertyDatum);	// FIXME is missing acceptable
+				if ((propertyAnalysis != null) && !propertyAnalyses.contains(propertyAnalysis)) {
+					propertyAnalyses.add(propertyAnalysis);
 				}
 			}
 		}
-		assert tracePropertyAnalyses.contains(this);
-		return tracePropertyAnalyses;
-	}
-
-	public @NonNull PartialRegionClassAnalysis<PRA> getTraceClassAnalysis() {
-		return traceClassAnalysis;
-	}
-
-	public @NonNull Property getTraceProperty() {
-		return QVTscheduleUtil.getReferredProperty(tracePropertyDatum);
+		assert propertyAnalyses.contains(this);
+		return propertyAnalyses;
 	}
 
 	@Override
 	public String toString() {
-		return tracePropertyDatum.toString();
+		return propertyDatum.toString();
 	}
 }

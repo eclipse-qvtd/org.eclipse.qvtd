@@ -20,11 +20,11 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassA
  */
 public class TraceClassPartitionAnalysis extends AbstractPartialRegionClassAnalysis<@NonNull PartitionsAnalysis>
 {
-	protected final @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassRegionAnalysis;
+	protected final @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> classAnalysis;
 
-	public TraceClassPartitionAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassRegionAnalysis) {
-		super(traceClassRegionAnalysis.getScheduleManager(), traceClassRegionAnalysis.getClassDatum());
-		this.traceClassRegionAnalysis = traceClassRegionAnalysis;
+	public TraceClassPartitionAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> classAnalysis) {
+		super(classAnalysis.getScheduleManager(), classAnalysis.getClassDatum());
+		this.classAnalysis = classAnalysis;
 	}
 
 	@Override

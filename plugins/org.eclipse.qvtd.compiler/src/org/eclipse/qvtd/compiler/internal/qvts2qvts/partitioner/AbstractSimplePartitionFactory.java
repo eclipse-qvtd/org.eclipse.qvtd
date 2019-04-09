@@ -236,8 +236,8 @@ public abstract class AbstractSimplePartitionFactory extends AbstractPartitionFa
 
 	protected void resolveDisambiguations(@NonNull BasicPartition partition) {
 		for (@NonNull Node traceNode : mappingPartitioner.getTraceNodes()) {
-			PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis = mappingPartitioner.getTraceClassAnalysis(traceNode);
-			Iterable<@NonNull Property> discriminatingProperties = traceClassAnalysis.getDiscriminatingProperties();
+			PartialRegionClassAnalysis<@NonNull RegionsAnalysis> classAnalysis = mappingPartitioner.getClassAnalysis(traceNode);
+			Iterable<@NonNull Property> discriminatingProperties = classAnalysis.getDiscriminatingProperties();
 			if (discriminatingProperties != null) {
 				for (@NonNull Property property : discriminatingProperties) {
 					Node targetNode = traceNode.getNavigableTarget(property);

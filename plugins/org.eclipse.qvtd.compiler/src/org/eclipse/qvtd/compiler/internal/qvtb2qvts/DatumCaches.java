@@ -118,10 +118,10 @@ public class DatumCaches
 			org.eclipse.ocl.pivot.Class asClass = completeClass.getPrimaryClass();
 			TypedModel containingTypedModel = asClass instanceof DataType ? domainUsageAnalysis.getPrimitiveTypeModel() : typedModel;
 			ClassDatum classDatum = getClassDatum(containingTypedModel, asClass);
-			for (@NonNull Property traceProperty : PivotUtil.getOwnedProperties(asClass)) {
-				if (traceProperty != oclContainerProperty) {
+			for (@NonNull Property property : PivotUtil.getOwnedProperties(asClass)) {
+				if (property != oclContainerProperty) {
 					@SuppressWarnings("unused")
-					PropertyDatum propertyDatumDatum = getPropertyDatum(classDatum, traceProperty);
+					PropertyDatum propertyDatumDatum = getPropertyDatum(classDatum, property);
 				}
 			}
 		}

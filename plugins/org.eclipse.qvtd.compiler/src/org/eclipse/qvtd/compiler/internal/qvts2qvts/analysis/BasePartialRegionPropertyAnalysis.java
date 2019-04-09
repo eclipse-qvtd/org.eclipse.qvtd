@@ -16,7 +16,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 /**
  * Each ClassAnalysis identifies the usage of one middle trace class or property.
  */
-public interface PartialRegionPropertyAnalysis<PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends PartialRegionElementAnalysis<@NonNull PRA>
+public class BasePartialRegionPropertyAnalysis<@NonNull PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends AbstractPartialRegionPropertyAnalysis<@NonNull PRA> implements PartialRegionPropertyAnalysis<@NonNull PRA>
 {
-	@NonNull PropertyDatum getPropertyDatum();
+	public BasePartialRegionPropertyAnalysis(@NonNull PartialRegionsAnalysis<@NonNull PRA> partialRegionsAnalysis, @NonNull PartialRegionClassAnalysis<PRA> classAnalysis, @NonNull PropertyDatum propertyDatum) {
+		super(partialRegionsAnalysis, classAnalysis, propertyDatum);
+	}
 }

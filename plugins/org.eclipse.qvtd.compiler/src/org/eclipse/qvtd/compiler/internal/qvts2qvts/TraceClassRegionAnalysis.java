@@ -18,7 +18,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassA
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 
 /**
- * Each TraceClassAnalysis identifies the usage of one middle trace class.
+ * Each ClassAnalysis identifies the usage of one middle trace class.
  */
 public class TraceClassRegionAnalysis extends AbstractPartialRegionClassAnalysis<@NonNull RegionsAnalysis>
 {
@@ -26,20 +26,20 @@ public class TraceClassRegionAnalysis extends AbstractPartialRegionClassAnalysis
 
 	private @Nullable Boolean isCyclic = null;
 
-	public TraceClassRegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ClassDatum traceClassDatum) {
-		super(transformationAnalysis.getScheduleManager(), traceClassDatum);
+	public TraceClassRegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ClassDatum classDatum) {
+		super(transformationAnalysis.getScheduleManager(), classDatum);
 		this.transformationAnalysis = transformationAnalysis;
 	}
 
 	/**
-	 * Return true if this TraceClassAnalyis participates in a production/consumption cycle of either the trace class or its trace properties.
+	 * Return true if this ClassAnalyis participates in a production/consumption cycle of either the trace class or its trace properties.
 	 */
 	@Override
 	public boolean isCyclic() {
 		Boolean isCyclic2 = isCyclic;
 		if (isCyclic2 == null) {
-			for (@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> subTraceClassAnalysis : getSubTraceClassAnalyses()) {
-				if (transformationAnalysis.isCyclic(subTraceClassAnalysis)) {
+			for (@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> subClassAnalysis : getSubClassAnalyses()) {
+				if (transformationAnalysis.isCyclic(subClassAnalysis)) {
 					isCyclic2 = isCyclic = true;
 					return isCyclic2;
 				}

@@ -27,16 +27,16 @@ public interface PartitionAnalysis extends PartialRegionAnalysis<@NonNull Partit
 	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	void analyzePartitionEdges();
 	void computeCheckedOrEnforcedEdges();
+	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getClassAnalyses();
 	@Override
 	@NonNull Partition getPartition();
 	@NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis();
 	@Override
-	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getProducedTraceClassAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getProducedClassAnalyses();
 	@Override
-	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getProducedTracePropertyAnalyses();
-	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getTraceClassAnalyses();
-	@NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>>  getTracePropertyAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getProducedPropertyAnalyses();
+	@NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>>  getPropertyAnalyses();
 	@Override
-	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getSuperProducedTraceClassAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getSuperProducedClassAnalyses();
 	boolean isChecked(@NonNull Edge edge);
 }

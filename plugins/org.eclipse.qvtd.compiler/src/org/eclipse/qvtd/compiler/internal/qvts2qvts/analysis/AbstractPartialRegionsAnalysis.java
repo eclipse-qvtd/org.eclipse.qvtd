@@ -34,14 +34,14 @@ public abstract class AbstractPartialRegionsAnalysis<@NonNull PRA extends Partia
 	protected final @NonNull ScheduleManager scheduleManager;
 
 	/**
-	 * The TraceClassAnalysis for each trace class.
+	 * The ClassAnalysis for each trace class.
 	 */
-	protected final @NonNull Map<@NonNull ClassDatum, @NonNull PartialRegionClassAnalysis<@NonNull PRA>> classDatum2traceClassAnalysis = new HashMap<>();
+	protected final @NonNull Map<@NonNull ClassDatum, @NonNull PartialRegionClassAnalysis<@NonNull PRA>> classDatum2classAnalysis = new HashMap<>();
 
 	/**
-	 * The TracePropertyAnalysis for each trace property.
+	 * The PropertyAnalysis for each trace property.
 	 */
-	protected final @NonNull Map<@NonNull PropertyDatum, @NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> propertyDatum2tracePropertyAnalysis = new HashMap<>();
+	protected final @NonNull Map<@NonNull PropertyDatum, @NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> propertyDatum2propertyAnalysis = new HashMap<>();
 
 	protected AbstractPartialRegionsAnalysis(@NonNull ScheduleManager scheduleManager) {
 		super(scheduleManager.getEnvironmentFactory());
@@ -50,89 +50,97 @@ public abstract class AbstractPartialRegionsAnalysis<@NonNull PRA extends Partia
 
 	@Override
 	public @NonNull PartialRegionClassAnalysis<@NonNull PRA> addConsumer(@NonNull ClassDatum classDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> consumer) {
-		PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-		traceClassAnalysis.addConsumer(consumer);
-		return traceClassAnalysis;
+		PartialRegionClassAnalysis<@NonNull PRA> classAnalysis = lazyCreateClassAnalysis(classDatum);
+		classAnalysis.addConsumer(consumer);
+		return classAnalysis;
 	}
 
 	@Override
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> consumer) {
-		PartialRegionPropertyAnalysis<@NonNull PRA> tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-		tracePropertyAnalysis.addConsumer(consumer);
-		return tracePropertyAnalysis;
+	public @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> addConsumer(@NonNull PropertyDatum propertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> consumer) {
+		PartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis = lazyCreatePropertyAnalysis(propertyDatum);
+		propertyAnalysis.addConsumer(consumer);
+		return propertyAnalysis;
 	}
 
 	@Override
 	public @NonNull PartialRegionClassAnalysis<@NonNull PRA> addProducer(@NonNull ClassDatum classDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> producer) {
-		PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-		traceClassAnalysis.addProducer(producer);
-		return traceClassAnalysis;
+		PartialRegionClassAnalysis<@NonNull PRA> classAnalysis = lazyCreateClassAnalysis(classDatum);
+		classAnalysis.addProducer(producer);
+		return classAnalysis;
 	}
 
 	@Override
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> producer) {
+	public @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> addProducer(@NonNull PropertyDatum propertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> producer) {
 		if (this instanceof AbstractTransformationAnalysis) {		// FIXME irregular for ATL2QVTr --- why??
-			PartialRegionPropertyAnalysis<@NonNull PRA> tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-			tracePropertyAnalysis.addProducer(producer);
-			return tracePropertyAnalysis;
+			PartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis = lazyCreatePropertyAnalysis(propertyDatum);
+			propertyAnalysis.addProducer(producer);
+			return propertyAnalysis;
 		}
-		for (@NonNull PropertyDatum superPropertyDatum : QVTscheduleUtil.getSuperPropertyDatums(tracePropertyDatum)) {
-			PartialRegionPropertyAnalysis<@NonNull PRA> superTracePropertyAnalysis = lazyCreateTracePropertyAnalysis(superPropertyDatum);
-			superTracePropertyAnalysis.addProducer(producer);
+		for (@NonNull PropertyDatum superPropertyDatum : QVTscheduleUtil.getSuperPropertyDatums(propertyDatum)) {
+			PartialRegionPropertyAnalysis<@NonNull PRA> superPropertyAnalysis = lazyCreatePropertyAnalysis(superPropertyDatum);
+			superPropertyAnalysis.addProducer(producer);
 		}
-		return getTracePropertyAnalysis(tracePropertyDatum);
+		return getPropertyAnalysis(propertyDatum);
 	}
 
-	public @Nullable PartialRegionClassAnalysis<@NonNull PRA> basicGetTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		return classDatum2traceClassAnalysis.get(classDatum);
+	public @Nullable PartialRegionClassAnalysis<@NonNull PRA> basicGetClassAnalysis(@NonNull ClassDatum classDatum) {
+		return classDatum2classAnalysis.get(classDatum);
 	}
 
 	@Override
-	public @Nullable PartialRegionPropertyAnalysis<@NonNull PRA> basicGetTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
-		return propertyDatum2tracePropertyAnalysis.get(propertyDatum);
+	public @Nullable PartialRegionPropertyAnalysis<@NonNull PRA> basicGetPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+		return propertyDatum2propertyAnalysis.get(propertyDatum);
 	}
 
 	protected void computeTraceClassDiscrimination() throws CompilerChainException {
-		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
-			traceClassAnalysis.discriminate();
+		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> classAnalysis : classDatum2classAnalysis.values()) {
+			classAnalysis.discriminate();
 		}
 	}
 
 	public void computeTraceClassInheritance() {
 		Set<@NonNull ClassDatum> missingClassDatums = new HashSet<>();
-		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
-			ClassDatum classDatum = subTraceClassRegionAnalysis.getClassDatum();
+		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> subClassRegionAnalysis : classDatum2classAnalysis.values()) {
+			ClassDatum classDatum = subClassRegionAnalysis.getClassDatum();
 			for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(classDatum)) {
 				if (superClassDatum != classDatum) {
-					PartialRegionClassAnalysis<@NonNull PRA> superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
-					if (superTraceClassRegionAnalysis == null) {
+					PartialRegionClassAnalysis<@NonNull PRA> superClassRegionAnalysis = classDatum2classAnalysis.get(superClassDatum);
+					if (superClassRegionAnalysis == null) {
 						missingClassDatums.add(superClassDatum);
 					}
 				}
 			}
 		}
 		for (@NonNull ClassDatum missingClassDatum : missingClassDatums) {
-			lazyCreateTraceClassAnalysis(missingClassDatum);
+			lazyCreateClassAnalysis(missingClassDatum);
 		}
-		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
-			ClassDatum classDatum = subTraceClassRegionAnalysis.getClassDatum();
+		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> subClassRegionAnalysis : classDatum2classAnalysis.values()) {
+			ClassDatum classDatum = subClassRegionAnalysis.getClassDatum();
 			for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(classDatum)) {
 				if (superClassDatum != classDatum) {
-					PartialRegionClassAnalysis<@NonNull PRA> superTraceClassRegionAnalysis = classDatum2traceClassAnalysis.get(superClassDatum);
-					assert superTraceClassRegionAnalysis != null;
-					superTraceClassRegionAnalysis.addSubTraceClassAnalysis(subTraceClassRegionAnalysis);
-					subTraceClassRegionAnalysis.addSuperTraceClassAnalysis(superTraceClassRegionAnalysis);
+					PartialRegionClassAnalysis<@NonNull PRA> superClassRegionAnalysis = classDatum2classAnalysis.get(superClassDatum);
+					assert superClassRegionAnalysis != null;
+					superClassRegionAnalysis.addSubClassAnalysis(subClassRegionAnalysis);
+					subClassRegionAnalysis.addSuperClassAnalysis(superClassRegionAnalysis);
 				}
 			}
 		}
 	}
 
-	protected abstract @NonNull PartialRegionClassAnalysis<@NonNull PRA> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum);
+	protected abstract @NonNull PartialRegionClassAnalysis<@NonNull PRA> createClassAnalysis(@NonNull ClassDatum classDatum);
 
-	//	protected abstract @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum);
+	protected @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> createPropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> classAnalysis, @NonNull PropertyDatum propertyDatum) {
+		return new AbstractPartialRegionPropertyAnalysis<@NonNull PRA>(this, classAnalysis, propertyDatum) {};
+	}
 
-	protected @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-		return new AbstractPartialRegionPropertyAnalysis<@NonNull PRA>(this, traceClassAnalysis, tracePropertyDatum) {};
+	@Override
+	public @NonNull PartialRegionClassAnalysis<@NonNull PRA> getClassAnalysis(@NonNull ClassDatum classDatum) {
+		return ClassUtil.nonNullState(classDatum2classAnalysis.get(classDatum));
+	}
+
+	@Override
+	public @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> getPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+		return ClassUtil.nonNullState(propertyDatum2propertyAnalysis.get(propertyDatum));
 	}
 
 	@Override
@@ -140,33 +148,23 @@ public abstract class AbstractPartialRegionsAnalysis<@NonNull PRA extends Partia
 		return scheduleManager;
 	}
 
-	@Override
-	public @NonNull PartialRegionClassAnalysis<@NonNull PRA> getTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		return ClassUtil.nonNullState(classDatum2traceClassAnalysis.get(classDatum));
-	}
-
-	@Override
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
-		return ClassUtil.nonNullState(propertyDatum2tracePropertyAnalysis.get(propertyDatum));
-	}
-
-	private @NonNull PartialRegionClassAnalysis<@NonNull PRA> lazyCreateTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis = classDatum2traceClassAnalysis.get(classDatum);
-		if (traceClassAnalysis == null) {
-			traceClassAnalysis = createTraceClassAnalysis(classDatum);
-			classDatum2traceClassAnalysis.put(classDatum, traceClassAnalysis);
+	private @NonNull PartialRegionClassAnalysis<@NonNull PRA> lazyCreateClassAnalysis(@NonNull ClassDatum classDatum) {
+		PartialRegionClassAnalysis<@NonNull PRA> classAnalysis = classDatum2classAnalysis.get(classDatum);
+		if (classAnalysis == null) {
+			classAnalysis = createClassAnalysis(classDatum);
+			classDatum2classAnalysis.put(classDatum, classAnalysis);
 		}
-		return traceClassAnalysis;
+		return classAnalysis;
 	}
 
-	private @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> lazyCreateTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
-		PartialRegionPropertyAnalysis<@NonNull PRA> tracePropertyAnalysis = propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum);
-		if (tracePropertyAnalysis == null) {
-			ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
-			PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-			tracePropertyAnalysis = createTracePropertyAnalysis(traceClassAnalysis, tracePropertyDatum);
-			propertyDatum2tracePropertyAnalysis.put(tracePropertyDatum, tracePropertyAnalysis);
+	private @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> lazyCreatePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+		PartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis = propertyDatum2propertyAnalysis.get(propertyDatum);
+		if (propertyAnalysis == null) {
+			ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
+			PartialRegionClassAnalysis<@NonNull PRA> classAnalysis = lazyCreateClassAnalysis(classDatum);
+			propertyAnalysis = createPropertyAnalysis(classAnalysis, propertyDatum);
+			propertyDatum2propertyAnalysis.put(propertyDatum, propertyAnalysis);
 		}
-		return tracePropertyAnalysis;
+		return propertyAnalysis;
 	}
 }

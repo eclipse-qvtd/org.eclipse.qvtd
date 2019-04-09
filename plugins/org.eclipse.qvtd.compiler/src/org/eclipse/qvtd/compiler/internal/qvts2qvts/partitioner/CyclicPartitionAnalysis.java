@@ -77,19 +77,19 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 
 		// FIXME WIP
 		Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> cyclicPartitionAnalyses = partitionAnalysis2predecessors.keySet();
-		Set<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> containmentTracePropertyPartitionAnalyses = new HashSet<>();
-		Set<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> containerTracePropertyPartitionAnalyses = new HashSet<>();
+		Set<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> containmentPropertyPartitionAnalyses = new HashSet<>();
+		Set<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> containerPropertyPartitionAnalyses = new HashSet<>();
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> consumer : cyclicPartitionAnalyses) {
-			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
-			if (consumedTracePropertyAnalyses != null) {
-				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
-					PropertyDatum propertyDatum = consumedTracePropertyAnalysis.getPropertyDatum();
+			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedPropertyAnalyses = consumer.getConsumedPropertyAnalyses();
+			if (consumedPropertyAnalyses != null) {
+				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> consumedPropertyAnalysis : consumedPropertyAnalyses) {
+					PropertyDatum propertyDatum = consumedPropertyAnalysis.getPropertyDatum();
 					Property consumedProperty = propertyDatum.getReferredProperty();
 					boolean isContainment = consumedProperty.isIsComposite();
 					Property consumedOppositeProperty = consumedProperty.getOpposite();
 					boolean isContainer = (consumedOppositeProperty != null) && consumedOppositeProperty.isIsComposite();
 					if (isContainment || isContainer) {
-						for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> producer : consumedTracePropertyAnalysis.getProducers()) {
+						for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> producer : consumedPropertyAnalysis.getProducers()) {
 							if (cyclicPartitionAnalyses.contains(producer)) {
 								Partition producingPartition = producer.getPartition();
 								for (@NonNull Edge edge : producingPartition.getPartialEdges()) {
@@ -98,10 +98,10 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 										NavigableEdge navigableEdge = (NavigableEdge)edge;
 										if (navigableEdge.getProperty() == consumedProperty) {
 											if (isContainment) {
-												containmentTracePropertyPartitionAnalyses.add(consumedTracePropertyAnalysis);
+												containmentPropertyPartitionAnalyses.add(consumedPropertyAnalysis);
 											}
 											if (isContainer) {
-												containerTracePropertyPartitionAnalyses.add(consumedTracePropertyAnalysis);
+												containerPropertyPartitionAnalyses.add(consumedPropertyAnalysis);
 											}
 										}
 									}
@@ -112,8 +112,8 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 				}
 			}
 		}
-		System.out.println("Containment: " + containmentTracePropertyPartitionAnalyses);
-		System.out.println("Container: " + containerTracePropertyPartitionAnalyses);
+		System.out.println("Containment: " + containmentPropertyPartitionAnalyses);
+		System.out.println("Container: " + containerPropertyPartitionAnalyses);
 	}
 
 	/**
@@ -169,10 +169,10 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionElementAnalysis<@NonNull PartitionsAnalysis>>> partitionAnalysis2mixedTraceElementPartitionAnalyses = new HashMap<>();
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> consumingPartitionAnalysis : partitionAnalyses) {
 			assert !externalPredecessors.contains(consumingPartitionAnalysis);
-			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedTraceClassAnalyses = consumingPartitionAnalysis.getConsumedTraceClassAnalyses();
-			if (consumedTraceClassAnalyses != null) {
-				for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
-					Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producingPartitionAnalyses = consumedTraceClassAnalysis.getProducers();
+			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedClassAnalyses = consumingPartitionAnalysis.getConsumedClassAnalyses();
+			if (consumedClassAnalyses != null) {
+				for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> consumedClassAnalysis : consumedClassAnalyses) {
+					Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producingPartitionAnalyses = consumedClassAnalysis.getProducers();
 					boolean isExternal = false;
 					boolean isInternal = false;
 					for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> producingPartitionAnalysis : producingPartitionAnalyses) {
@@ -198,13 +198,13 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 						traceElementPartitionAnalyses = new HashSet<>();
 						partitionAnalysis2traceElementPartitionAnalyses.put(consumingPartitionAnalysis, traceElementPartitionAnalyses);
 					}
-					traceElementPartitionAnalyses.add(consumedTraceClassAnalysis);
+					traceElementPartitionAnalyses.add(consumedClassAnalysis);
 				}
 			}
-			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedTracePropertyAnalyses = consumingPartitionAnalysis.getConsumedTracePropertyAnalyses();
-			if (consumedTracePropertyAnalyses != null) {
-				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
-					Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producingPartitionAnalyses = consumedTracePropertyAnalysis.getProducers();
+			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedPropertyAnalyses = consumingPartitionAnalysis.getConsumedPropertyAnalyses();
+			if (consumedPropertyAnalyses != null) {
+				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> consumedPropertyAnalysis : consumedPropertyAnalyses) {
+					Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producingPartitionAnalyses = consumedPropertyAnalysis.getProducers();
 					boolean isExternal = false;
 					boolean isInternal = false;
 					for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> producingPartitionAnalysis : producingPartitionAnalyses) {
@@ -234,7 +234,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 						traceElementPartitionAnalyses = new HashSet<>();
 						partitionAnalysis2traceElementPartitionAnalyses.put(consumingPartitionAnalysis, traceElementPartitionAnalyses);
 					}
-					traceElementPartitionAnalyses.add(consumedTracePropertyAnalysis);
+					traceElementPartitionAnalyses.add(consumedPropertyAnalysis);
 				}
 			}
 		}
@@ -315,12 +315,12 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getConsumedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getConsumedClassAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getConsumedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getConsumedPropertyAnalyses() {
 		return null;
 	}
 
@@ -330,17 +330,17 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getProducedClassAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getProducedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getProducedPropertyAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getSuperProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getSuperProducedClassAnalyses() {
 		return null;
 	}
 }

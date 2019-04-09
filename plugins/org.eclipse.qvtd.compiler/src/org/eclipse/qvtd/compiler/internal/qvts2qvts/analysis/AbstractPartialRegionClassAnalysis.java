@@ -35,15 +35,15 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 
 /**
- * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
+ * Each ClassAnalysis identifies the usage of one middle trace class or property.
  */
 public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends AbstractPartialRegionElementAnalysis<@NonNull PRA> implements PartialRegionClassAnalysis<@NonNull PRA>
 {
 	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull ClassDatum traceClassDatum;
+	protected final @NonNull ClassDatum classDatum;
 
-	private @NonNull List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> subTraceClassAnalyses = new ArrayList<>();
-	private @NonNull List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> superTraceClassAnalyses = new ArrayList<>();
+	private @NonNull List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> subClassAnalyses = new ArrayList<>();
+	private @NonNull List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> superClassAnalyses = new ArrayList<>();
 	private @Nullable Boolean isDispatcher = null;
 
 	/**
@@ -53,25 +53,25 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 	 */
 	private @Nullable List<@NonNull Property> discriminatingProperties = null;
 
-	protected AbstractPartialRegionClassAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull ClassDatum traceClassDatum) {
+	protected AbstractPartialRegionClassAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull ClassDatum classDatum) {
 		this.scheduleManager = scheduleManager;
-		this.traceClassDatum = traceClassDatum;
-		subTraceClassAnalyses.add(this);
-		superTraceClassAnalyses.add(this);
-		//	assert traceClassDatum.getReferredTypedModel() == scheduleManager.getTraceTypedModel();
+		this.classDatum = classDatum;
+		subClassAnalyses.add(this);
+		superClassAnalyses.add(this);
+		//	assert classDatum.getReferredTypedModel() == scheduleManager.getTraceTypedModel();
 	}
 
 	@Override
-	public void addSubTraceClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis) {
-		if (!subTraceClassAnalyses.contains(traceClassAnalysis)) {
-			subTraceClassAnalyses.add(traceClassAnalysis);
+	public void addSubClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> classAnalysis) {
+		if (!subClassAnalyses.contains(classAnalysis)) {
+			subClassAnalyses.add(classAnalysis);
 		}
 	}
 
 	@Override
-	public void addSuperTraceClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis) {
-		if (!superTraceClassAnalyses.contains(traceClassAnalysis)) {
-			superTraceClassAnalyses.add(traceClassAnalysis);
+	public void addSuperClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> classAnalysis) {
+		if (!superClassAnalyses.contains(classAnalysis)) {
+			superClassAnalyses.add(classAnalysis);
 		}
 	}
 
@@ -220,7 +220,11 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 
 	@Override
 	public @NonNull ClassDatum getClassDatum() {
-		return traceClassDatum;
+		return classDatum;
+	}
+
+	public @NonNull CompleteClass getCompleteClass() {
+		return QVTscheduleUtil.getCompleteClass(classDatum);
 	}
 
 	@Override
@@ -230,7 +234,7 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 
 	@Override
 	public String getName() {
-		return traceClassDatum.getName();
+		return classDatum.getName();
 	}
 
 	@Override
@@ -239,27 +243,23 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSubTraceClassAnalyses() {
-		return subTraceClassAnalyses;
+	public @NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSubClassAnalyses() {
+		return subClassAnalyses;
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSuperTraceClassAnalyses() {
-		return superTraceClassAnalyses;
-	}
-
-	public @NonNull CompleteClass getTraceClass() {
-		return QVTscheduleUtil.getCompleteClass(traceClassDatum);
+	public @NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSuperClassAnalyses() {
+		return superClassAnalyses;
 	}
 
 	/**
-	 * Return true if this TraceClassAnalyis is for an override hierarchy dispatcher.
+	 * Return true if this ClassAnalyis is for an override hierarchy dispatcher.
 	 */
 	public boolean isDispatcher() {
 		Boolean isDispatcher2 = isDispatcher;
 		if (isDispatcher2 == null) {
 			String abstractDispatchClassName = AbstractDispatch.class.getName();
-			for (org.eclipse.ocl.pivot.@NonNull Class superClass : QVTbaseUtil.getSuperClasses(QVTscheduleUtil.getCompleteClass(traceClassDatum).getPrimaryClass())) {
+			for (org.eclipse.ocl.pivot.@NonNull Class superClass : QVTbaseUtil.getSuperClasses(QVTscheduleUtil.getCompleteClass(classDatum).getPrimaryClass())) {
 				if (abstractDispatchClassName.equals(superClass.getInstanceClassName())) {
 					isDispatcher2 = isDispatcher = true;
 					return isDispatcher2;
@@ -292,6 +292,6 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 
 	@Override
 	public String toString() {
-		return traceClassDatum.toString();
+		return classDatum.toString();
 	}
 }

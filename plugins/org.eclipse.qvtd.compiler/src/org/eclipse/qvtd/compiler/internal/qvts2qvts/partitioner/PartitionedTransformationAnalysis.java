@@ -182,8 +182,8 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 	}
 
 	@Override
-	protected @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
-		return new TraceClassPartitionAnalysis(transformationPartitioner.getTransformationAnalysis().getTraceClassAnalysis(traceClassDatum));
+	protected @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> createClassAnalysis(@NonNull ClassDatum classDatum) {
+		return new TraceClassPartitionAnalysis(transformationPartitioner.getTransformationAnalysis().getClassAnalysis(classDatum));
 	}
 
 	public @NonNull AbstractFallibilityAnalysis getFallibilityAnalysis(@NonNull Partition partition) {
@@ -215,10 +215,10 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 	}
 
 	public void setLoadingRegionAnalysis(@NonNull LoadingPartitionAnalysis loadingPartitionAnalysis) {
-		for (@NonNull ClassDatum classDatum : classDatum2traceClassAnalysis.keySet()) {
+		for (@NonNull ClassDatum classDatum : classDatum2classAnalysis.keySet()) {
 			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 			if (scheduleManager.isInput(typedModel)) {
-				PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> classAnalysis = classDatum2traceClassAnalysis.get(classDatum);
+				PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> classAnalysis = classDatum2classAnalysis.get(classDatum);
 				assert classAnalysis != null;
 				Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producers = classAnalysis.getProducers();
 				if (Iterables.isEmpty(producers)) {

@@ -85,7 +85,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	/**
 	 * Closure of the mapping to the trace class analyses that must succeed unconditionally for the key trace class analysis to succeed unconditionally..
 	 */
-	//	private @Nullable Map<@NonNull TraceClassAnalysis, @NonNull Set<@NonNull TraceClassAnalysis>> traceClassAnalysis2traceClassAnalysesClosure = null;
+	//	private @Nullable Map<@NonNull ClassAnalysis, @NonNull Set<@NonNull ClassAnalysis>> classAnalysis2classAnalysesClosure = null;
 
 	/**
 	 * The analysis of cycles.
@@ -118,11 +118,11 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 		if (mappingPartitioner2cycleAnalysis2 == null) {
 			mappingPartitioner2cycleAnalysis = mappingPartitioner2cycleAnalysis2 = new HashMap<>();
 		}
-		Map<@NonNull TraceClassAnalysis, @NonNull CycleAnalysis> traceClassAnalysis2cycleAnalysis2 = traceClassAnalysis2cycleAnalysis;
-		if (traceClassAnalysis2cycleAnalysis2 == null) {
-			traceClassAnalysis2cycleAnalysis = traceClassAnalysis2cycleAnalysis2 = new HashMap<>();
+		Map<@NonNull ClassAnalysis, @NonNull CycleAnalysis> classAnalysis2cycleAnalysis2 = classAnalysis2cycleAnalysis;
+		if (classAnalysis2cycleAnalysis2 == null) {
+			classAnalysis2cycleAnalysis = classAnalysis2cycleAnalysis2 = new HashMap<>();
 		}
-		return CycleAnalysis.createCycleAnalysis(this, cyclicMappingPartitioners, mappingPartitioner2cycleAnalysis2, traceClassAnalysis2cycleAnalysis2);
+		return CycleAnalysis.createCycleAnalysis(this, cyclicMappingPartitioners, mappingPartitioner2cycleAnalysis2, classAnalysis2cycleAnalysis2);
 	} */
 
 
@@ -189,8 +189,8 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 		Set<@NonNull ClassDatum> classDatums = new HashSet<>(visitor.getTypeDependentConditions().values());
 		for (@NonNull ClassDatum classDatum : classDatums) {
 			assert classDatum.getReferredTypedModel() == scheduleManager.getTraceTypedModel();
-			TraceClassAnalysis traceClassAnalysis = transformationPartitioner.getTraceClassAnalysis(classDatum.getCompleteClass());
-			for (@NonNull MappingPartitioner mappingPartitioner : traceClassAnalysis.getProducers()) {
+			ClassAnalysis classAnalysis = transformationPartitioner.getClassAnalysis(classDatum.getCompleteClass());
+			for (@NonNull MappingPartitioner mappingPartitioner : classAnalysis.getProducers()) {
 				if (!mappingPartitioners.contains(mappingPartitioner)) {		// FIXME Externally ok ??
 					return false;
 				}

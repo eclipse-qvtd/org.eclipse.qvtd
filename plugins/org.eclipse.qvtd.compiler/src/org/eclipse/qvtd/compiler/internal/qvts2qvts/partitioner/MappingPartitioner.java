@@ -299,12 +299,12 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getConstantOutputNodes();
 	}
 
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getConsumedTraceClassAnalyses() {
-		return regionAnalysis.getConsumedTraceClassAnalyses();
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getConsumedClassAnalyses() {
+		return regionAnalysis.getConsumedClassAnalyses();
 	}
 
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> getConsumedTracePropertyAnalyses() {
-		return regionAnalysis.getConsumedTracePropertyAnalyses();
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> getConsumedPropertyAnalyses() {
+		return regionAnalysis.getConsumedPropertyAnalyses();
 	}
 
 	public @NonNull Iterable<@NonNull Node> getExecutionNodes() {
@@ -373,12 +373,12 @@ public class MappingPartitioner implements Nameable
 		return predicatedWhenNodes;
 	}
 
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getProducedTraceClassAnalyses() {
-		return regionAnalysis.getProducedTraceClassAnalyses();
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getProducedClassAnalyses() {
+		return regionAnalysis.getProducedClassAnalyses();
 	}
 
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> getProducedTracePropertyAnalyses() {
-		return regionAnalysis.getProducedTracePropertyAnalyses();
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> getProducedPropertyAnalyses() {
+		return regionAnalysis.getProducedPropertyAnalyses();
 	}
 
 	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
@@ -440,13 +440,13 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getSuccessEdges();
 	}
 
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getSuperProducedTraceClassAnalyses() {
-		return regionAnalysis.getSuperProducedTraceClassAnalyses();
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getSuperProducedClassAnalyses() {
+		return regionAnalysis.getSuperProducedClassAnalyses();
 	}
 
-	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> getTraceClassAnalysis(@NonNull Node traceNode) {
-		ClassDatum traceClassDatum = QVTscheduleUtil.getClassDatum(traceNode);
-		return transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
+	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> getClassAnalysis(@NonNull Node traceNode) {
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(traceNode);
+		return transformationAnalysis.getClassAnalysis(classDatum);
 	}
 
 	public @Nullable Edge getTraceEdge(@NonNull Node node) {
@@ -492,8 +492,8 @@ public class MappingPartitioner implements Nameable
 	}
 
 	public boolean isCyclic(@NonNull Node traceNode) {
-		ClassDatum traceClassDatum = QVTscheduleUtil.getClassDatum(traceNode);
-		return transformationAnalysis.isCyclic(traceClassDatum);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(traceNode);
+		return transformationAnalysis.isCyclic(classDatum);
 	}
 
 	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {

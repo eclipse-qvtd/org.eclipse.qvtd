@@ -172,6 +172,10 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 		return successEdge != null ? successEdge.getTargetNode() : null;
 	}
 
+	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> getClassAnalysis(@NonNull ClassDatum classDatum) {
+		return partialRegionsAnalysis.getClassAnalysis(classDatum);
+	}
+
 	public @NonNull SuccessEdge getGlobalSuccessEdge(@NonNull Node traceNode) {
 		return ClassUtil.nonNullState(traceNode2globalSuccessEdge.get(traceNode));
 	}
@@ -190,6 +194,10 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 		return QVTscheduleUtil.getTargetNode(successEdge);
 	}
 
+	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> getPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+		return partialRegionsAnalysis.getPropertyAnalysis(propertyDatum);
+	}
+
 	public @Nullable Role getRole(@NonNull Edge edge) {
 		return  edge.getEdgeRole();
 	}
@@ -200,14 +208,6 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
-	}
-
-	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
-		return partialRegionsAnalysis.getTraceClassAnalysis(traceClassDatum);
-	}
-
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
-		return partialRegionsAnalysis.getTracePropertyAnalysis(propertyDatum);
 	}
 
 	public @Nullable Edge getTraceEdge(@NonNull Node node) {

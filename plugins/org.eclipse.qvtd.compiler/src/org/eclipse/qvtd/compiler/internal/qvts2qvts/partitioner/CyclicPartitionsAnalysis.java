@@ -33,7 +33,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
- * The CyclicPartitionsAnalysis identifies the Partitions and TraceClassAnalysis' that contribute to a cycle.
+ * The CyclicPartitionsAnalysis identifies the Partitions and ClassAnalysis' that contribute to a cycle.
  *
  * This forms the basis of the cycle encpasulation and parallel schedule.
  */
@@ -50,7 +50,7 @@ public class CyclicPartitionsAnalysis
 	/**
 	 * Mapping to the cycle analysis that identifies the cycle involving each trace class analysis.
 	 */
-	protected final @NonNull Map<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>, @NonNull CyclicPartition> traceClassAnalysis2cyclicPartition = new HashMap<>();
+	protected final @NonNull Map<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>, @NonNull CyclicPartition> classAnalysis2cyclicPartition = new HashMap<>();
 
 	public CyclicPartitionsAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> leafPartitions) {
 		this.transformationPartitioner = transformationPartitioner;
@@ -77,8 +77,8 @@ public class CyclicPartitionsAnalysis
 		}
 		//
 		if (intersections.isEmpty()) {
-			//	Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> cyclicTraceClassAnalyses = computeTraceClassAnalysisDependencies(partitionedTransformationAnalysis, leafPartitionAnalyses);
-			//	Set<@NonNull TracePropertyPartitionAnalysis> cyclicTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(partitionedTransformationAnalysis, leafPartitionAnalyses);
+			//	Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> cyclicClassAnalyses = computeClassAnalysisDependencies(partitionedTransformationAnalysis, leafPartitionAnalyses);
+			//	Set<@NonNull PropertyPartitionAnalysis> cyclicPropertyAnalyses = computePropertyAnalysisDependencies(partitionedTransformationAnalysis, leafPartitionAnalyses);
 			String rootName = QVTscheduleConstants.ROOT_MAPPING_NAME;
 			return RootPartitionAnalysis.createRootPartitionAnalysis(partitionedTransformationAnalysis, transformationPartitioner.getTransformationAnalysis(), rootName, leafPartitionAnalysis2predecessors);
 		}
@@ -86,40 +86,40 @@ public class CyclicPartitionsAnalysis
 		return createAcyclicPartitionHierarchy(partitionedTransformationAnalysis, intersections, leafPartitionAnalysis2predecessors);
 	}
 
-	private @NonNull Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> computeTraceClassAnalysisDependencies(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> nestedPartitions) {
-		Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedTraceClassAnalyses = new HashSet<>();
-		Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> superProducedTraceClassAnalyses = new HashSet<>();
+	private @NonNull Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> computeClassAnalysisDependencies(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> nestedPartitions) {
+		Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedClassAnalyses = new HashSet<>();
+		Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> superProducedClassAnalyses = new HashSet<>();
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> nestedPartitionAnalysis : nestedPartitions) {
-			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedTraceClassAnalyses2 = nestedPartitionAnalysis.getConsumedTraceClassAnalyses();
-			if (consumedTraceClassAnalyses2 != null) {
-				Iterables.addAll(consumedTraceClassAnalyses, consumedTraceClassAnalyses2);
+			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedClassAnalyses2 = nestedPartitionAnalysis.getConsumedClassAnalyses();
+			if (consumedClassAnalyses2 != null) {
+				Iterables.addAll(consumedClassAnalyses, consumedClassAnalyses2);
 			}
-			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> superProducedTraceClassAnalyses2 = nestedPartitionAnalysis.getSuperProducedTraceClassAnalyses();
-			if (superProducedTraceClassAnalyses2 != null) {
-				Iterables.addAll(superProducedTraceClassAnalyses, superProducedTraceClassAnalyses2);
+			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> superProducedClassAnalyses2 = nestedPartitionAnalysis.getSuperProducedClassAnalyses();
+			if (superProducedClassAnalyses2 != null) {
+				Iterables.addAll(superProducedClassAnalyses, superProducedClassAnalyses2);
 			}
 		}
-		Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> cyclicTraceClassAnalyses = new HashSet<>(consumedTraceClassAnalyses);
-		cyclicTraceClassAnalyses.retainAll(superProducedTraceClassAnalyses);
-		return cyclicTraceClassAnalyses;
+		Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> cyclicClassAnalyses = new HashSet<>(consumedClassAnalyses);
+		cyclicClassAnalyses.retainAll(superProducedClassAnalyses);
+		return cyclicClassAnalyses;
 	}
 
-	/*	private @NonNull Set<@NonNull TracePropertyPartitionAnalysis> computeTracePropertyAnalysisDependencies(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Iterable<@NonNull PartitionAnalysis> nestedPartitions) {
-		Set<@NonNull TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses = new HashSet<>();
-		Set<@NonNull TracePropertyPartitionAnalysis> producedTracePropertyAnalyses = new HashSet<>();
+	/*	private @NonNull Set<@NonNull PropertyPartitionAnalysis> computePropertyAnalysisDependencies(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Iterable<@NonNull PartitionAnalysis> nestedPartitions) {
+		Set<@NonNull PropertyPartitionAnalysis> consumedPropertyAnalyses = new HashSet<>();
+		Set<@NonNull PropertyPartitionAnalysis> producedPropertyAnalyses = new HashSet<>();
 		for (@NonNull PartitionAnalysis nestedPartitionAnalysis : nestedPartitions) {
-			Iterable<@NonNull TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses2 = nestedPartitionAnalysis.getConsumedTracePropertyAnalyses();
-			if (consumedTracePropertyAnalyses2 != null) {
-				Iterables.addAll(consumedTracePropertyAnalyses, consumedTracePropertyAnalyses2);
+			Iterable<@NonNull PropertyPartitionAnalysis> consumedPropertyAnalyses2 = nestedPartitionAnalysis.getConsumedPropertyAnalyses();
+			if (consumedPropertyAnalyses2 != null) {
+				Iterables.addAll(consumedPropertyAnalyses, consumedPropertyAnalyses2);
 			}
-			Iterable<@NonNull TracePropertyPartitionAnalysis> producedTracePropertyAnalyses2 = nestedPartitionAnalysis.getProducedTracePropertyAnalyses();
-			if (producedTracePropertyAnalyses2 != null) {
-				Iterables.addAll(producedTracePropertyAnalyses, producedTracePropertyAnalyses2);
+			Iterable<@NonNull PropertyPartitionAnalysis> producedPropertyAnalyses2 = nestedPartitionAnalysis.getProducedPropertyAnalyses();
+			if (producedPropertyAnalyses2 != null) {
+				Iterables.addAll(producedPropertyAnalyses, producedPropertyAnalyses2);
 			}
 		}
-		Set<@NonNull TracePropertyPartitionAnalysis> cyclicTracePropertyAnalyses = new HashSet<>(consumedTracePropertyAnalyses);
-		cyclicTracePropertyAnalyses.retainAll(producedTracePropertyAnalyses);
-		return cyclicTracePropertyAnalyses;
+		Set<@NonNull PropertyPartitionAnalysis> cyclicPropertyAnalyses = new HashSet<>(consumedPropertyAnalyses);
+		cyclicPropertyAnalyses.retainAll(producedPropertyAnalyses);
+		return cyclicPropertyAnalyses;
 	} */
 
 	/**
@@ -172,8 +172,8 @@ public class CyclicPartitionsAnalysis
 			Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> nestedPartitioning = sortedPartitionings.get(i);
 			String cycleName = "«cycle-" + i + "»";
 			//	CyclicPartition nestedCyclicPartition = createCyclicPartition(cycleName, nestedPartitioning, partition2predecessors, partition2successors);
-			Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> cyclicTraceClassAnalyses = computeTraceClassAnalysisDependencies(partitionedTransformationAnalysis, nestedPartitioning);
-			//	Set<@NonNull TracePropertyPartitionAnalysis> cyclicTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(partitionedTransformationAnalysis, nestedPartitioning);
+			Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> cyclicClassAnalyses = computeClassAnalysisDependencies(partitionedTransformationAnalysis, nestedPartitioning);
+			//	Set<@NonNull PropertyPartitionAnalysis> cyclicPropertyAnalyses = computePropertyAnalysisDependencies(partitionedTransformationAnalysis, nestedPartitioning);
 			CyclicPartitionAnalysis nestedCyclicPartitionAnalysis = CyclicPartitionAnalysis.createCyclicPartitionAnalysis(partitionedTransformationAnalysis, cycleName, nestedPartitioning, partition2predecessors);
 			CyclicPartition nestedCyclicPartition = nestedCyclicPartitionAnalysis.getPartition();
 			acyclicPartitionHierarchy.add(nestedCyclicPartitionAnalysis);
@@ -186,8 +186,8 @@ public class CyclicPartitionsAnalysis
 			}
 			partition2predecessors.put(nestedCyclicPartitionAnalysis, nestedCyclicPartitionAnalysis.getExplicitPredecessors());
 			//
-			for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> cyclicTraceClassAnalysis : cyclicTraceClassAnalyses) {
-				CyclicPartition oldCycleAnalysis = traceClassAnalysis2cyclicPartition.put(cyclicTraceClassAnalysis, nestedCyclicPartition);
+			for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> cyclicClassAnalysis : cyclicClassAnalyses) {
+				CyclicPartition oldCycleAnalysis = classAnalysis2cyclicPartition.put(cyclicClassAnalysis, nestedCyclicPartition);
 				assert oldCycleAnalysis == null;
 			}
 
@@ -215,8 +215,8 @@ public class CyclicPartitionsAnalysis
 			}
 		}
 		//	Set<@NonNull PartitionAnalysis> rootPartitioning = sortedPartitionings.get(iMax-1);
-		//	Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> rootTraceClassAnalyses = computeTraceClassAnalysisDependencies(partitionedTransformationAnalysis, rootPartitioning);
-		//	Set<@NonNull TracePropertyPartitionAnalysis> rootTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(partitionedTransformationAnalysis, rootPartitioning);
+		//	Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> rootClassAnalyses = computeClassAnalysisDependencies(partitionedTransformationAnalysis, rootPartitioning);
+		//	Set<@NonNull PropertyPartitionAnalysis> rootPropertyAnalyses = computePropertyAnalysisDependencies(partitionedTransformationAnalysis, rootPartitioning);
 		String rootName = QVTscheduleConstants.ROOT_MAPPING_NAME;
 		RootPartitionAnalysis rootPartitionAnalysis = RootPartitionAnalysis.createRootPartitionAnalysis(partitionedTransformationAnalysis, transformationPartitioner.getTransformationAnalysis(), rootName, partition2predecessors);
 		acyclicPartitionHierarchy.add(rootPartitionAnalysis);
@@ -238,42 +238,42 @@ public class CyclicPartitionsAnalysis
 				Collections.sort(partitions2, NameUtil.NAMEABLE_COMPARATOR);
 				for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partition : partitions2) {
 					s.append("\n\t" + partition);
-					Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedTraceClassAnalyses = partition.getConsumedTraceClassAnalyses();
-					if (consumedTraceClassAnalyses != null) {
-						for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis : consumedTraceClassAnalyses) {
-							s.append("\n\t  =>" + traceClassAnalysis);
+					Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedClassAnalyses = partition.getConsumedClassAnalyses();
+					if (consumedClassAnalyses != null) {
+						for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> classAnalysis : consumedClassAnalyses) {
+							s.append("\n\t  =>" + classAnalysis);
 						}
 					}
-					Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> producedTraceClassAnalyses = partition.getProducedTraceClassAnalyses();
-					if (producedTraceClassAnalyses != null) {
-						for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis : producedTraceClassAnalyses) {
-							s.append("\n\t  <=" + traceClassAnalysis);
+					Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> producedClassAnalyses = partition.getProducedClassAnalyses();
+					if (producedClassAnalyses != null) {
+						for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> classAnalysis : producedClassAnalyses) {
+							s.append("\n\t  <=" + classAnalysis);
 						}
 					}
-					Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedTracePropertyAnalyses = partition.getConsumedTracePropertyAnalyses();
-					if (consumedTracePropertyAnalyses != null) {
-						for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> tracePropertyAnalysis : consumedTracePropertyAnalyses) {
-							s.append("\n\t  =>" + tracePropertyAnalysis);
+					Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedPropertyAnalyses = partition.getConsumedPropertyAnalyses();
+					if (consumedPropertyAnalyses != null) {
+						for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> propertyAnalysis : consumedPropertyAnalyses) {
+							s.append("\n\t  =>" + propertyAnalysis);
 						}
 					}
-					Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> producedTracePropertyAnalyses = partition.getProducedTracePropertyAnalyses();
-					if (producedTracePropertyAnalyses != null) {
-						for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> tracePropertyAnalysis : producedTracePropertyAnalyses) {
-							s.append("\n\t  <=" + tracePropertyAnalysis);
+					Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> producedPropertyAnalyses = partition.getProducedPropertyAnalyses();
+					if (producedPropertyAnalyses != null) {
+						for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> propertyAnalysis : producedPropertyAnalyses) {
+							s.append("\n\t  <=" + propertyAnalysis);
 						}
 					}
 				}
-				/*				s.append("\n  TraceClassAnalyses:");
-				List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> traceClassAnalyses = Lists.newArrayList(cyclicPartitionAnalysis.getTraceClassAnalyses());
-				Collections.sort(traceClassAnalyses, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis : traceClassAnalyses) {
-					s.append("\n\t" + traceClassAnalysis);
+				/*				s.append("\n  ClassAnalyses:");
+				List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> classAnalyses = Lists.newArrayList(cyclicPartitionAnalysis.getClassAnalyses());
+				Collections.sort(classAnalyses, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> classAnalysis : classAnalyses) {
+					s.append("\n\t" + classAnalysis);
 				}
-				s.append("\n  TracePropertyAnalyses:");
-				List<@NonNull TracePropertyPartitionAnalysis> tracePropertyAnalyses = Lists.newArrayList(cyclicPartitionAnalysis.getTracePropertyAnalyses());
-				Collections.sort(tracePropertyAnalyses, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull TracePropertyPartitionAnalysis tracePropertyAnalysis : tracePropertyAnalyses) {
-					s.append("\n\t" + tracePropertyAnalysis);
+				s.append("\n  PropertyAnalyses:");
+				List<@NonNull PropertyPartitionAnalysis> propertyAnalyses = Lists.newArrayList(cyclicPartitionAnalysis.getPropertyAnalyses());
+				Collections.sort(propertyAnalyses, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull PropertyPartitionAnalysis propertyAnalysis : propertyAnalyses) {
+					s.append("\n\t" + propertyAnalysis);
 				} */
 				TransformationPartitioner.CYCLES.println(s.toString());
 			}

@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
- * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
+ * Each ClassAnalysis identifies the usage of one middle trace class or property.
  */
 public abstract class AbstractPartialRegionElementAnalysis<PRA extends PartialRegionsAnalysis<@NonNull PRA>> implements PartialRegionElementAnalysis<@NonNull PRA>
 {

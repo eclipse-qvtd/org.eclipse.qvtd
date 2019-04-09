@@ -160,9 +160,9 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	}
 
 	@Override
-	public @Nullable PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> basicGetTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+	public @Nullable PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> basicGetPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
-		return super.basicGetTracePropertyAnalysis(propertyDatum);
+		return super.basicGetPropertyAnalysis(propertyDatum);
 	}
 
 	protected void computeCyclicRegionsAnalysis(@NonNull Iterable<@NonNull RegionAnalysis> regionAnalyses) {
@@ -170,8 +170,8 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	}
 
 	@Override
-	protected @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
-		return new TraceClassRegionAnalysis(this, traceClassDatum);
+	protected @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> createClassAnalysis(@NonNull ClassDatum classDatum) {
+		return new TraceClassRegionAnalysis(this, classDatum);
 	}
 
 	public @NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions() {
@@ -238,9 +238,9 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	}
 
 	@Override
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> getPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
-		return super.getTracePropertyAnalysis(propertyDatum);
+		return super.getPropertyAnalysis(propertyDatum);
 	}
 
 	public @NonNull Transformation getTransformation() {
@@ -282,9 +282,9 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		return false;
 	}
 
-	public boolean isCyclic(@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis) {
+	public boolean isCyclic(@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> classAnalysis) {
 		assert cyclesRegionAnalysis != null;
-		return cyclesRegionAnalysis.isCyclic(traceClassAnalysis);
+		return cyclesRegionAnalysis.isCyclic(classAnalysis);
 	}
 
 	public boolean isCyclic(@NonNull RegionAnalysis regionAnalysis) {
@@ -292,12 +292,12 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		return cyclesRegionAnalysis.isCyclic(regionAnalysis);
 	}
 
-	public boolean isCyclic(@NonNull ClassDatum traceClassDatum) {
-		PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis = basicGetTraceClassAnalysis(traceClassDatum);
-		if (traceClassAnalysis == null) {
+	public boolean isCyclic(@NonNull ClassDatum classDatum) {
+		PartialRegionClassAnalysis<@NonNull RegionsAnalysis> classAnalysis = basicGetClassAnalysis(classDatum);
+		if (classAnalysis == null) {
 			return false;
 		}
-		return traceClassAnalysis.isCyclic();
+		return classAnalysis.isCyclic();
 	}
 
 	public @NonNull PartitionedTransformationAnalysis partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<? extends @NonNull Region> activeRegions) throws CompilerChainException {

@@ -18,17 +18,17 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 
 /**
- * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
+ * Each ClassAnalysis identifies the usage of one middle trace class or property.
  */
 public interface PartialRegionClassAnalysis<PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends PartialRegionElementAnalysis<@NonNull PRA>
 {
-	void addSubTraceClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis);
-	void addSuperTraceClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis);
+	void addSubClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> classAnalysis);
+	void addSuperClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> classAnalysis);
 	void discriminate() throws CompilerChainException;
 	@NonNull ClassDatum getClassDatum();
 	@Nullable Iterable<@NonNull Property> getDiscriminatingProperties();
 	@NonNull ScheduleManager getScheduleManager();
-	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSubTraceClassAnalyses();
-	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSuperTraceClassAnalyses();
+	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSubClassAnalyses();
+	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSuperClassAnalyses();
 	boolean isCyclic();
 }

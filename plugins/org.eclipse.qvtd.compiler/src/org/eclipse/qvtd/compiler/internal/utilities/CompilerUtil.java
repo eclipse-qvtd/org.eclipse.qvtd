@@ -265,19 +265,19 @@ public class CompilerUtil extends QVTscheduleUtil
 					producers.add(explicitPredecessor);
 				}
 			}
-			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
-			if (consumedTraceClassAnalyses != null) {
-				for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
-					for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
-						for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : subConsumedTraceClass.getProducers()) {
+			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> consumedClassAnalyses = consumer.getConsumedClassAnalyses();
+			if (consumedClassAnalyses != null) {
+				for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> consumedClassAnalysis : consumedClassAnalyses) {
+					for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> subConsumedClass : consumedClassAnalysis.getSubClassAnalyses()) {
+						for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : subConsumedClass.getProducers()) {
 							Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
 							assert producers != null;
 							producers.add(producer);
 							if ((consumedElement2producers != null) && Iterables.contains(partialRegionAnalyses, producer)) {
-								Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers2 = consumedElement2producers.get(subConsumedTraceClass);
+								Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers2 = consumedElement2producers.get(subConsumedClass);
 								if (producers2 == null) {
 									producers2 = new HashSet<>();
-									consumedElement2producers.put(subConsumedTraceClass, producers2);
+									consumedElement2producers.put(subConsumedClass, producers2);
 								}
 								producers2.add(producer);
 							}
@@ -285,22 +285,22 @@ public class CompilerUtil extends QVTscheduleUtil
 					}
 				}
 			}
-			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
-			if (consumedTracePropertyAnalyses != null) {
-				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
-					String name = consumedTracePropertyAnalysis.getName();
+			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> consumedPropertyAnalyses = consumer.getConsumedPropertyAnalyses();
+			if (consumedPropertyAnalyses != null) {
+				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> consumedPropertyAnalysis : consumedPropertyAnalyses) {
+					String name = consumedPropertyAnalysis.getName();
 					if ("fromAttributes".equals(name)) {
 						CompilerUtil.class.getName();
 					}
-					for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : consumedTracePropertyAnalysis.getProducers()) {
+					for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : consumedPropertyAnalysis.getProducers()) {
 						Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
 						assert producers != null;
 						producers.add(producer);
 						if ((consumedElement2producers != null) && Iterables.contains(partialRegionAnalyses, producer)) {
-							Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers2 = consumedElement2producers.get(consumedTracePropertyAnalysis);
+							Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers2 = consumedElement2producers.get(consumedPropertyAnalysis);
 							if (producers2 == null) {
 								producers2 = new HashSet<>();
-								consumedElement2producers.put(consumedTracePropertyAnalysis, producers2);
+								consumedElement2producers.put(consumedPropertyAnalysis, producers2);
 							}
 							producers2.add(producer);
 						}
@@ -487,11 +487,11 @@ public class CompilerUtil extends QVTscheduleUtil
 					consumers.add(successor);
 				}
 			}
-			Iterable<@NonNull TC> producedTraceClassAnalyses = producer.getProducedTraceClassAnalyses();
-			if (producedTraceClassAnalyses != null) {
-				for (@NonNull TC producedTraceClassAnalysis : producedTraceClassAnalyses) {
-					for (@NonNull TC superProducedTraceClassAnalysis : producedTraceClassAnalysis.getSuperTraceClassAnalyses()) {
-						for (@NonNull PRA consumer : superProducedTraceClassAnalysis.getConsumers()) {
+			Iterable<@NonNull TC> producedClassAnalyses = producer.getProducedClassAnalyses();
+			if (producedClassAnalyses != null) {
+				for (@NonNull TC producedClassAnalysis : producedClassAnalyses) {
+					for (@NonNull TC superProducedClassAnalysis : producedClassAnalysis.getSuperClassAnalyses()) {
+						for (@NonNull PRA consumer : superProducedClassAnalysis.getConsumers()) {
 							Set<@NonNull PRA> consumers = producer2consumers.get(producer);
 							assert consumers != null;
 							consumers.add(consumer);
@@ -499,10 +499,10 @@ public class CompilerUtil extends QVTscheduleUtil
 					}
 				}
 			}
-			Iterable<@NonNull TracePropertyAnalysis<@NonNull PRA>> producedTracePropertyAnalyses = producer.getProducedTracePropertyAnalyses();
-			if (producedTracePropertyAnalyses != null) {
-				for (@NonNull TracePropertyAnalysis<@NonNull PRA> producedTracePropertyAnalysis : producedTracePropertyAnalyses) {
-					for (@NonNull PRA consumer : producedTracePropertyAnalysis.getConsumers()) {
+			Iterable<@NonNull PropertyAnalysis<@NonNull PRA>> producedPropertyAnalyses = producer.getProducedPropertyAnalyses();
+			if (producedPropertyAnalyses != null) {
+				for (@NonNull PropertyAnalysis<@NonNull PRA> producedPropertyAnalysis : producedPropertyAnalyses) {
+					for (@NonNull PRA consumer : producedPropertyAnalysis.getConsumers()) {
 						Set<@NonNull PRA> consumers = producer2consumers.get(producer);
 						assert consumers != null;
 						consumers.add(consumer);

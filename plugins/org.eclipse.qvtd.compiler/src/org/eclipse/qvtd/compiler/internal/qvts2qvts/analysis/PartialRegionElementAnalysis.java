@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
- * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
+ * Each ClassAnalysis identifies the usage of one middle trace class or property.
  */
 public interface PartialRegionElementAnalysis<PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends Nameable
 {
