@@ -28,7 +28,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.TracePropertyRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
@@ -160,9 +159,10 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		return rootPartitionAnalysis;
 	}
 
+	@Override
 	public @Nullable PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> basicGetTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
-		return propertyDatum2tracePropertyAnalysis.get(propertyDatum);
+		return super.basicGetTracePropertyAnalysis(propertyDatum);
 	}
 
 	protected void computeCyclicRegionsAnalysis(@NonNull Iterable<@NonNull RegionAnalysis> regionAnalyses) {
@@ -172,11 +172,6 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	@Override
 	protected @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
 		return new TraceClassRegionAnalysis(this, traceClassDatum);
-	}
-
-	@Override
-	protected @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-		return new TracePropertyRegionAnalysis(this, traceClassAnalysis, tracePropertyDatum);
 	}
 
 	public @NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions() {

@@ -87,6 +87,11 @@ public abstract class AbstractPartialRegionsAnalysis<@NonNull PRA extends Partia
 		return classDatum2traceClassAnalysis.get(classDatum);
 	}
 
+	@Override
+	public @Nullable PartialRegionPropertyAnalysis<@NonNull PRA> basicGetTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+		return propertyDatum2tracePropertyAnalysis.get(propertyDatum);
+	}
+
 	protected void computeTraceClassDiscrimination() throws CompilerChainException {
 		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
 			traceClassAnalysis.discriminate();
@@ -124,7 +129,11 @@ public abstract class AbstractPartialRegionsAnalysis<@NonNull PRA extends Partia
 
 	protected abstract @NonNull PartialRegionClassAnalysis<@NonNull PRA> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum);
 
-	protected abstract @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum);
+	//	protected abstract @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum);
+
+	protected @NonNull PartialRegionPropertyAnalysis<@NonNull PRA> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+		return new AbstractPartialRegionPropertyAnalysis<@NonNull PRA>(this, traceClassAnalysis, tracePropertyDatum) {};
+	}
 
 	@Override
 	public @NonNull ScheduleManager getScheduleManager() {

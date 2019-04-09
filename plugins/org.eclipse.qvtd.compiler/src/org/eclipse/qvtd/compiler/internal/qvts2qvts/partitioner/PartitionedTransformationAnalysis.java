@@ -22,13 +22,11 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
-import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -186,11 +184,6 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 	@Override
 	protected @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
 		return new TraceClassPartitionAnalysis(transformationPartitioner.getTransformationAnalysis().getTraceClassAnalysis(traceClassDatum));
-	}
-
-	@Override
-	protected @NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> createTracePropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-		return new TracePropertyPartitionAnalysis(transformationPartitioner, traceClassAnalysis, tracePropertyDatum);
 	}
 
 	public @NonNull AbstractFallibilityAnalysis getFallibilityAnalysis(@NonNull Partition partition) {
