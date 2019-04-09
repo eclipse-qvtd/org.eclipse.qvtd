@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 
 public abstract class AbstractCompilerStep implements CompilerStep
@@ -77,6 +78,11 @@ public abstract class AbstractCompilerStep implements CompilerStep
 	@Override
 	public @NonNull String getDefaultExtension() {
 		return defaultFileExtension;
+	}
+
+	@Override
+	public @NonNull EnvironmentFactory getEnvironmentFactory() {
+		return environmentFactory;
 	}
 
 	@Override

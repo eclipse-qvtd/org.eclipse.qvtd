@@ -11,9 +11,11 @@
 package org.eclipse.qvtd.compiler;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 
 public interface CompilerStep extends ProblemHandler
 {
 	@NonNull String getDefaultExtension();
+	@NonNull EnvironmentFactory getEnvironmentFactory();
 	@NonNull String getName();
 }
