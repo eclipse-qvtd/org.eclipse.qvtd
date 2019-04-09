@@ -11,16 +11,11 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public abstract class MappingPartitionAnalysis<@NonNull P extends MappingPartition> extends AbstractPartitionAnalysis<P>
 {
@@ -59,27 +54,9 @@ public abstract class MappingPartitionAnalysis<@NonNull P extends MappingPartiti
 
 	@Override
 	public void analyzePartition() {
+		@SuppressWarnings("unused") String name = getName();
 		analyzeNodes();
 		analyzeEdges();
-	}
-
-	@Override
-	public void analyzePartitionEdges(@Nullable StringBuilder s) {
-		for (@NonNull Edge edge : getPartialEdges()) {
-			if (edge.isNavigation()) {
-				NavigationEdge navigationEdge = (NavigationEdge) edge;
-				Node sourceNode = navigationEdge.getEdgeSource();
-				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(sourceNode);
-				TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
-				if (isPredicated(edge)) {
-					assert !navigationEdge.isCast();
-					partitionedTransformationAnalysis.addCheckedEdge(s, typedModel, navigationEdge);
-				}
-				else if (isRealized(edge)) {
-					partitionedTransformationAnalysis.addRealizedEdge(s, typedModel, navigationEdge);
-				}
-			}
-		}
 	}
 
 	@Override

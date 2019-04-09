@@ -58,8 +58,8 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	public static final @NonNull TracingOption PARTITION_IMMEDIATE_PREDECESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/immediate-predecessors");
 	public static final @NonNull TracingOption PARTITION_TRANSITIVE_PREDECESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/transitive-predecessors");
 	public static final @NonNull TracingOption PARTITION_TRANSITIVE_SUCCESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/transitive-successors");
-	public static final @NonNull TracingOption PROPERTY_ACCESS_ANALYSIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/property/analysis");
-	public static final @NonNull TracingOption PROPERTY_ACCESS_SYNTHESIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/property/synthesis");
+	public static final @NonNull TracingOption PROPERTY_NOTIFY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/property/notify");
+	public static final @NonNull TracingOption PROPERTY_OBSERVE = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/property/observe");
 	public static final @NonNull TracingOption REGION_CYCLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/region/cycles");
 	public static final @NonNull TracingOption REGION_IMMEDIATE_PREDECESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/region/immediate-predecessors");
 	public static final @NonNull TracingOption REGION_TRANSITIVE_PREDECESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/region/transitive-predecessors");

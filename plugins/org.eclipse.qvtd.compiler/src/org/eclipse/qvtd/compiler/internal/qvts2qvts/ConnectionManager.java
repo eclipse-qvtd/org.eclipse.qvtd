@@ -20,8 +20,11 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OriginalContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
@@ -127,7 +130,15 @@ public class ConnectionManager
 	}
 
 	/**
-	 * Create an EdgeConnection for the predicatedEdge and/or its target node.
+	 * Return true if there may be a dynamic type conforming to both the firstType and secondType static types.
+	 */
+	private boolean areConforming(@NonNull CompleteClass firstType, @NonNull CompleteClass secondType) {
+		return firstType.conformsTo(secondType) || firstType.conformsTo(secondType.getBehavioralClass())
+				|| secondType.conformsTo(firstType) || secondType.conformsTo(firstType.getBehavioralClass());
+	}
+
+	/**
+	 * Create an EdgeConnection for the predicatedEdges and/or their target DataType node.
 	 */
 	private void createAttributeEdgeConnection(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
 		RootRegion invokingRegion2 = rootRegion;
@@ -146,13 +157,57 @@ public class ConnectionManager
 			assert isDataType;
 			Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge, classDatum);
 			if (realizedEdges != null) {
+				CompleteClass predicatedSourceCompleteClass = QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(predicatedEdge)));
+				CompleteClass predicatedTargetCompleteClass = QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(predicatedEdge)));
+				Property oppositeProperty = predicatedProperty.getOpposite();
+				Boolean isOneToMany = predicatedProperty.isIsMany() && ((oppositeProperty != null) && !oppositeProperty.isIsMany());
+				if (isOneToMany) {
+					Type type = predicatedTargetCompleteClass.getPrimaryClass();
+					Type elementType = QVTbaseUtil.getElementType(((CollectionType)type));
+					predicatedTargetCompleteClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
+				}
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-					if (scheduleManager.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
+					CompleteClass firstCompleteClass = QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(realizedEdge)));
+					CompleteClass secondTargetCompleteClass = QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(realizedEdge)));
+					CompleteClass realizedSourceCompleteClass;
+					CompleteClass realizedTargetCompleteClass;
+					Property realizedProperty = realizedEdge.getProperty();
+					if (realizedProperty == predicatedProperty) {
+						realizedSourceCompleteClass = firstCompleteClass;
+						realizedTargetCompleteClass = secondTargetCompleteClass;
+					}
+					else {
+						assert realizedProperty == oppositeProperty;
+						realizedSourceCompleteClass = secondTargetCompleteClass;
+						realizedTargetCompleteClass = firstCompleteClass;
+					}
+					boolean conformingSources = areConforming(predicatedSourceCompleteClass, realizedSourceCompleteClass);
+					boolean conformingTargets;
+					//	if (isOneToMany) {
+					conformingTargets = areConforming(predicatedTargetCompleteClass, realizedTargetCompleteClass);
+					if (conformingSources && conformingTargets) {
 						if (attributeConnectionSourceEdges == null) {
 							attributeConnectionSourceEdges = new ArrayList<>();
 						}
 						attributeConnectionSourceEdges.add(realizedEdge);
 					}
+					else {
+						//	assert false;
+					}
+					/*	}
+					else {
+						conformingTargets = areConforming(predicatedTargetCompleteClass, realizedTargetCompleteClass);
+						if (scheduleManager.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
+							assert conformingSources && conformingTargets;
+							if (attributeConnectionSourceEdges == null) {
+								attributeConnectionSourceEdges = new ArrayList<>();
+							}
+							attributeConnectionSourceEdges.add(realizedEdge);
+						}
+						else {
+							assert !conformingSources || !conformingTargets;
+						}
+					} */
 				}
 				partialNames.add(QVTscheduleUtil.getName(predicatedEdge.getEdgeSource().getCompleteClass()));
 				partialNames.add(QVTscheduleUtil.getName(predicatedProperty));
@@ -162,6 +217,9 @@ public class ConnectionManager
 				edgeConnection.addUsedTargetEdge(predicatedEdge, false);
 				if (s != null) {
 					s.append("\n    Attribute EdgeConnection \"" + edgeConnection + "\" to " + castTarget);
+					for (@NonNull Edge sourceEdge : attributeConnectionSourceEdges) {
+						s.append("\n      from " + sourceEdge.getOwningRegion() + " : " + sourceEdge.getSourceNode());
+					}
 					//					Scheduler.CONNECTIONS.println("    classDatumAnalysis " + classDatumAnalysis);
 					//					for (@NonNull Node sourceNode : sourceNodes) {
 					//						Scheduler.CONNECTIONS.println("    from " + sourceNode.getRegion());
@@ -176,7 +234,7 @@ public class ConnectionManager
 	}
 
 	/**
-	 * Create an EdgeConnection for the predicatedEdge and/or its target node.
+	 * Create an EdgeConnection for the predicatedEdges and/or their target Class node.
 	 */
 	private void createClassEdgeConnection(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
 		RootRegion invokingRegion2 = rootRegion;
@@ -715,6 +773,18 @@ public class ConnectionManager
 		return nodes;
 	}
 
+	private int getLastConsumption(@NonNull Connection connection) {
+		int lastConsumption = -1;
+		for (@NonNull Partition targetPartition : connection.getTargetPartitions()) {
+			int lastPass = targetPartition.getLastPass();
+			if (lastPass > lastConsumption) {
+				lastConsumption = lastPass;
+			}
+		}
+		assert lastConsumption >= 0;
+		return lastConsumption;
+	}
+
 	public @NonNull List<@NonNull Connection> getLoopingConnections(@NonNull Partition partition) {
 		List<@NonNull Connection> loopingConnections = new ArrayList<>();
 		for (@NonNull Connection connection : getOutgoingConnections(partition)) {
@@ -734,6 +804,10 @@ public class ConnectionManager
 	private @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
 		return originalContentsAnalysis.getNewEdges(edge, requiredClassDatum);
 	}
+
+	//	private @Nullable Iterable<@NonNull NavigableEdge> getNewInverseEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
+	//		return originalContentsAnalysis.getNewInverseEdges(edge, requiredClassDatum);
+	//	}
 
 	private @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatum classDatum) {
 		return originalContentsAnalysis.getNewNodes(classDatum);
@@ -854,46 +928,84 @@ public class ConnectionManager
 		return true;
 	}
 
-	public boolean isHazardousRead(@NonNull Partition partition, @NonNull NavigableEdge edge) {
+	public boolean isHazardousRead(@Nullable StringBuilder s, @NonNull Partition partition, @NonNull NavigableEdge edge) {
 		Property property = edge.getProperty();
 		@SuppressWarnings("unused") String name = property.getName();
 		Property oppositeProperty = property.getOpposite();
 		@SuppressWarnings("unused") String oppositeName = oppositeProperty != null ? oppositeProperty.getName() : null;
 		int firstConsumption = partition.getFirstPass();
+		int firstProduction = Integer.MAX_VALUE;
+		int lastConsumption = partition.getLastPass();
 		int lastProduction = -1;
 		Connection connection = edge.getIncomingConnection();
 		if (connection != null) {
+			int firstWrite = connection.getFirstPass();
+			if (firstWrite < firstProduction) {
+				firstProduction = firstWrite;
+			}
 			int lastWrite = connection.getLastPass();
 			if (lastWrite > lastProduction) {
 				lastProduction = lastWrite;
 			}
 		}
+		if (s != null) {
+			if (lastProduction < 0) {
+				s.append("\n  unconnected");
+			}
+			else if (lastProduction < firstConsumption) {
+				s.append("\n  no-observe produce:[" + firstProduction +".." + lastProduction +"] consume:[" + firstConsumption +".." + lastConsumption +"]");
+			}
+			else {
+				s.append("\n  observe produce:[" + firstProduction +".." + lastProduction +"] consume:[" + firstConsumption +".." + lastConsumption +"]");
+			}
+			s.append(" " + property.getOwningClass().getName() + "::" + property.getName());
+			if (oppositeProperty !=null) {
+				s.append(" <=> " + oppositeProperty.getOwningClass().getName() + "::" + oppositeProperty.getName());
+			}
+		}
 		return lastProduction >= firstConsumption;
 	}
 
-	public boolean isHazardousWrite(@NonNull NavigableEdge edge) {
+	public boolean isHazardousWrite(@Nullable StringBuilder s, @NonNull NavigableEdge edge) {
 		Property property = edge.getProperty();
 		@SuppressWarnings("unused") String name = property.getName();
 		Property oppositeProperty = property.getOpposite();
 		@SuppressWarnings("unused") String oppositeName = oppositeProperty != null ? oppositeProperty.getName() : null;
 		int firstConsumption = Integer.MAX_VALUE;
+		int firstProduction = Integer.MAX_VALUE;
+		int lastConsumption = -1;
 		int lastProduction = -1;
 		for (@NonNull Connection connection : QVTscheduleUtil.getOutgoingConnections(edge)) {
 			int firstRead = getFirstConsumption(connection);
 			if (firstRead < firstConsumption) {
 				firstConsumption = firstRead;
 			}
-			//	int lastRead = getLastConsumption(connection);
-			//	if (lastRead < lastConsumption) {
-			//		lastConsumption = lastRead;
-			//	}
-			//	int firstWrite = connection.getFirstPass();
-			//	if (firstWrite > firstProduction) {
-			//		firstProduction = firstWrite;
-			//	}
+			int lastRead = getLastConsumption(connection);
+			if (lastRead > lastConsumption) {
+				lastConsumption = lastRead;
+			}
+			int firstWrite = connection.getFirstPass();
+			if (firstWrite < firstProduction) {
+				firstProduction = firstWrite;
+			}
 			int lastWrite = connection.getLastPass();
 			if (lastWrite > lastProduction) {
 				lastProduction = lastWrite;
+			}
+		}
+		if (s != null) {
+			if (lastProduction < 0) {
+				s.append("\n  unconnected");
+			}
+			else if (lastProduction < firstConsumption) {
+				s.append("\n  no-notify produce:[" + firstProduction +".." + lastProduction +"] consume:[" + firstConsumption +".." + lastConsumption +"]");
+			}
+			else {
+				s.append("\n  notify produce:[" + firstProduction +".." + lastProduction +"] consume:[" + firstConsumption +".." + lastConsumption +"]");
+			}
+			s.append(" " + property.getOwningClass().getName() + "::" + property.getName());
+			if (oppositeProperty !=null) {
+				s.append(" <=> " + oppositeProperty.getOwningClass().getName() + "::" + oppositeProperty.getName());
 			}
 		}
 		return lastProduction >= firstConsumption;

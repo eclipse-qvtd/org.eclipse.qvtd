@@ -45,6 +45,7 @@ import com.google.common.collect.Iterables;
 public class OriginalContentsAnalysis
 {
 	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull Property oclContainerProperty;
 	private final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
 	/**
@@ -91,6 +92,7 @@ public class OriginalContentsAnalysis
 
 	public OriginalContentsAnalysis(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
+		this.oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
 		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager.getTransformationAnalyses();
 		assert Iterables.size(transformationAnalyses) == 1;
 		this.transformationAnalysis = transformationAnalyses.iterator().next();
@@ -345,7 +347,7 @@ public class OriginalContentsAnalysis
 		if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
 			return null;
 		}
-		if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
+		if (property == oclContainerProperty) {
 			return getCompositeNewEdges(edge);
 		}
 		PropertyDatum propertyDatum = getPropertyDatum(edge);
@@ -363,9 +365,20 @@ public class OriginalContentsAnalysis
 		CompleteClass requiredClass = QVTscheduleUtil.getCompleteClass(requiredClassDatum);
 		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
 		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-			Node targetNode = realizedEdge.getEdgeTarget();
-			CompleteClass realizedClass = targetNode.getCompleteClass();
-			if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClass, requiredClass)) {
+			boolean matches = false;
+			Property realizedProperty = realizedEdge.getProperty();
+			if (realizedProperty != property) {
+				assert realizedProperty.getOpposite() == property;
+				matches = true;
+			}
+			else {
+				Node targetNode = realizedEdge.getEdgeTarget();
+				CompleteClass realizedClass = targetNode.getCompleteClass();
+				if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClass, requiredClass)) {
+					matches = true;
+				}
+			}
+			if (matches) {
 				if (conformantRealizedEdges == null) {
 					conformantRealizedEdges = new ArrayList<>();
 				}
@@ -374,6 +387,54 @@ public class OriginalContentsAnalysis
 		}
 		return conformantRealizedEdges;
 	}
+
+	/*	public @Nullable Iterable<@NonNull NavigableEdge> getNewInverseEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
+		Property property = edge.getProperty();
+		assert property.isIsMany();
+		if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
+			return null;
+		}
+		assert property != oclContainerProperty;
+		//		if (property == oclContainerProperty) {
+		//		return getCompositeNewEdges(edge);
+		//	}
+		PropertyDatum propertyDatum = getPropertyDatum(edge);
+		PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
+		PropertyDatum inversePropertyDatum = propertyDatum.getOpposite();
+		//		if (propertyDatum == null) {
+		//			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
+		//		}
+		//		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
+		//			return null;
+		//		}
+		Iterable<@NonNull NavigableEdge> inverseRealizedEdges = propertyDatum2newEdges.get(inversePropertyDatum);
+		if (inverseRealizedEdges == null) {
+			return null;
+		}
+		CompleteClass requiredClass = QVTscheduleUtil.getCompleteClass(requiredClassDatum);
+		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
+		for (@NonNull NavigableEdge inverseRealizedEdge : inverseRealizedEdges) {
+			CompleteClass requiredCollectionCompleteClass = QVTscheduleUtil.getCompleteClass(requiredClassDatum);
+			Type requiredElementType = QVTimperativeUtil.getElementType((CollectionType) requiredCollectionCompleteClass.getPrimaryClass());
+			ClassDatum requiredElementClassDatum = scheduleManager.getClassDatum(QVTscheduleUtil.getReferredTypedModel(requiredClassDatum), (org.eclipse.ocl.pivot.Class)requiredElementType);
+			CompleteClass requiredElementCompleteClass = QVTscheduleUtil.getCompleteClass(requiredElementClassDatum);
+
+			ClassDatum requiredSourceClassDatum = propertyDatum.getOwningClassDatum();
+			CompleteClass requiredSourceCompleteClass = QVTscheduleUtil.getCompleteClass(requiredSourceClassDatum);
+			Node sourceNode = inverseRealizedEdge.getEdgeSource();
+			Node targetNode = inverseRealizedEdge.getEdgeTarget();
+			CompleteClass realizedSourceClass = sourceNode.getCompleteClass();
+			CompleteClass realizedTargetClass = targetNode.getCompleteClass();
+			if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedTargetClass, requiredSourceCompleteClass)
+					&& QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedSourceClass, requiredElementCompleteClass)) {
+				if (conformantRealizedEdges == null) {
+					conformantRealizedEdges = new ArrayList<>();
+				}
+				conformantRealizedEdges.add(inverseRealizedEdge);
+			}
+		}
+		return conformantRealizedEdges;
+	} */
 
 	public @Nullable Iterable<@NonNull Node> getOldNodes(@NonNull ClassDatum classDatum) {
 		return classDatum2oldNodes.get(classDatum);

@@ -146,6 +146,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return ClassUtil.nullFree(observableStatement.getObservedProperties());
 	}
 
+	public static @NonNull OCLExpression getOwnedExpression(@NonNull SetStatement asSetStatement) {
+		return ClassUtil.nonNullState(asSetStatement.getOwnedExpression());
+	}
+
 	public static @NonNull Mapping getOwnedMapping(@NonNull ImperativeTransformation transformation, @Nullable String name) {
 		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedMappings(transformation), name));
 	}

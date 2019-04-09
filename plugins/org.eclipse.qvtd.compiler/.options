@@ -95,10 +95,10 @@ org.eclipse.qvtd.compiler/qvts2qvts/partition/transitive-predecessors=false
 # Turn on tracing of the transitive successors of each partition
 org.eclipse.qvtd.compiler/qvts2qvts/partition/transitive-successors=false
 
-# Turn on tracing of the analysis of property accesses by the schedule
-org.eclipse.qvtd.compiler/qvts2qvts/property/analysis=false
-# Turn on tracing of the synthesis of property access enforcement in the schedule
-org.eclipse.qvtd.compiler/qvts2qvts/property/analysis=false
+# Turn on tracing of the analysis of property notifications
+org.eclipse.qvtd.compiler/qvts2qvts/property/notify=false
+# Turn on tracing of the synthesis of property observations
+org.eclipse.qvtd.compiler/qvts2qvts/property/observe=false
 
 # Turn on tracing of the cycles in region dependencies
 org.eclipse.qvtd.compiler/qvts2qvts/region/cycles=false

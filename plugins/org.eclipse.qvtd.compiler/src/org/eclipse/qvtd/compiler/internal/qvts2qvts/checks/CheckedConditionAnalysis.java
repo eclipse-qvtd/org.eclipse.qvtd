@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartitionAnalysis;
@@ -172,8 +171,8 @@ public class CheckedConditionAnalysis
 				}
 			}
 			Property checkedProperty = checkedEdge.getProperty();
-			Set<@NonNull Property> allCheckedProperties2 = allCheckedProperties;
-			if ((allCheckedProperties2 != null) && allCheckedProperties2.contains(checkedProperty)) {
+			Set<@NonNull Property> allCheckedProperties2 = computeCheckedProperties(null);
+			if (allCheckedProperties2.contains(checkedProperty)) {
 				if (checkedNavigableEdges == null) {
 					checkedNavigableEdges = new HashSet<>();
 				}
@@ -315,7 +314,7 @@ public class CheckedConditionAnalysis
 	/**
 	 * All properties (and their opposites) that need to be checked for readiness before access.
 	 */
-	private final @Nullable Set<@NonNull Property> allCheckedProperties;
+	private @Nullable Set<@NonNull Property> allCheckedProperties;
 
 	/**
 	 * The unconditional old edges provide the pattern matching workload.
@@ -329,7 +328,6 @@ public class CheckedConditionAnalysis
 		this.partition = partitionAnalysis.getPartition();
 		this.scheduleManager = scheduleManager;
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
-		this.allCheckedProperties = computeCheckedProperties();
 		this.oldUnconditionalEdges = computeOldUnconditionalEdges();
 		String name = partition.getName();
 		if ("complexAttributePrimitiveAttributes«local»".equals(name)) {
@@ -354,7 +352,10 @@ public class CheckedConditionAnalysis
 	/**
 	 * Return all properties (and their opposites) that need checking for readiness prior to access.
 	 */
-	protected @NonNull Set<@NonNull Property> computeCheckedProperties() {
+	public @NonNull Set<@NonNull Property> computeCheckedProperties(@Nullable StringBuilder s) {
+		if (allCheckedProperties != null) {
+			return allCheckedProperties;
+		}
 		@SuppressWarnings("unused") String name = partition.getName();
 		if ("complexAttributePrimitiveAttributes«local»".equals(name)) {
 			getClass();
@@ -368,7 +369,7 @@ public class CheckedConditionAnalysis
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
 			if ((edge instanceof NavigableEdge) && partitionAnalysis.isChecked(edge)) {
 				NavigableEdge navigableEdge = (NavigableEdge)edge;
-				if (connectionManager.isHazardousRead(partition, navigableEdge)) {
+				if (connectionManager.isHazardousRead(s, partition, navigableEdge)) {
 					Property property = QVTscheduleUtil.getProperty(navigableEdge);
 					allCheckedProperties.add(property);
 					Property oppositeProperty = property.getOpposite();
@@ -402,7 +403,7 @@ public class CheckedConditionAnalysis
 	}
 
 	public @NonNull Set<@NonNull Property> getAllCheckedProperties() {
-		return ClassUtil.nonNullState(allCheckedProperties);
+		return computeCheckedProperties(null);
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getOldUnconditionalEdges() {

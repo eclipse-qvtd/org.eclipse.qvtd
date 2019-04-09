@@ -73,6 +73,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnaly
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.FallibilityAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -1272,6 +1273,14 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		this.regionAnalysis = scheduleManager.getRegionAnalysis(QVTscheduleUtil.getRegion(partition));
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
 		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partitionAnalysis, scheduleManager);
+		StringBuilder s = TransformationPartitioner.PROPERTY_OBSERVE.isActive() ? new StringBuilder() : null;
+		if (s != null) {
+			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
+		}
+		checkedConditionAnalysis.computeCheckedProperties(s);
+		if (s != null) {
+			TransformationPartitioner.PROPERTY_OBSERVE.println(s.toString());
+		}
 		this.resultNode2subexpression = computeSubexpressions();
 		//
 		//	Gather the subexpression contents.
@@ -1477,11 +1486,11 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		return castStatement;
 	}
 
-	private void createClassSetStatement(@NonNull NavigableEdge edge) {
+	private void createClassSetStatement(@Nullable StringBuilder s, @NonNull NavigableEdge edge) {
 		Node sourceNode = edge.getEdgeSource();
 		Node targetNode = edge.getEdgeTarget();
 		Property property = QVTscheduleUtil.getProperty(edge);
-		boolean isNotify = connectionManager.isHazardousWrite(edge);
+		boolean isNotify = connectionManager.isHazardousWrite(s, edge);
 		Property setProperty;
 		VariableDeclaration slotVariable;
 		OCLExpression targetVariableExp;
@@ -1662,6 +1671,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	private void createPropertyAssignments() {
+		StringBuilder s = TransformationPartitioner.PROPERTY_NOTIFY.isActive() ? new StringBuilder() : null;
+		if (s != null) {
+			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
+		}
 		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> classAssignments = null;
 		List<@NonNull NavigableEdge> navigableEdges = new ArrayList<>();
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
@@ -1687,7 +1700,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					valueExp = expressionCreator2.getExpression(targetNode);		// FIXME debugging
 				}
 				if (valueExp != null) {
-					boolean isNotify = connectionManager.isHazardousWrite(edge);
+					boolean isNotify = connectionManager.isHazardousWrite(s, edge);
 					SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, edge.isPartial(), isNotify);
 					//					addObservedProperties(setStatement);
 					mapping.getOwnedStatements().add(setStatement);
@@ -1716,13 +1729,16 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			}
 			for (@NonNull NavigableEdge edge : sortedEdges) {
 				if (classAssignmentEdges.contains(edge)) {
-					createClassSetStatement(edge);
+					createClassSetStatement(s, edge);
 				}
 			}
 		}
 		//		@SuppressWarnings("null")
 		//		@NonNull EList<@NonNull Statement> statements = mapping.getOwnedStatements();
 		//		ECollections.sort(statements, new StatementComparator(statements));
+		if (s != null) {
+			TransformationPartitioner.PROPERTY_NOTIFY.println(s.toString());
+		}
 	}
 
 	/*	private void createRealizedIncludesAssignments() {

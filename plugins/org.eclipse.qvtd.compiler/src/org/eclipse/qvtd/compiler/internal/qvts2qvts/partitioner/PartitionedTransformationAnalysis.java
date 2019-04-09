@@ -10,22 +10,16 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -49,15 +43,15 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 	private final @NonNull Map<@NonNull Partition, @NonNull AbstractFallibilityAnalysis> partition2fallibilityAnalysis = new HashMap<>();
 
 	private @Nullable RootPartitionAnalysis rootPartitionAnalysis = null;
-	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = null;
-	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = null;
+	//	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = null;
+	//	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = null;
 
 	public PartitionedTransformationAnalysis(@NonNull TransformationPartitioner transformationPartitioner) {
 		super(transformationPartitioner.getScheduleManager());
 		this.transformationPartitioner = transformationPartitioner;
 	}
 
-	public void addCheckedEdge(@Nullable StringBuilder s, @NonNull TypedModel typedModel, @NonNull NavigationEdge predicatedEdge) {
+	/*	public void addCheckedEdge(@Nullable StringBuilder s, @NonNull TypedModel typedModel, @NonNull NavigationEdge predicatedEdge) {
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges2 = typedModel2property2predicatedEdges;
 		assert typedModel2property2predicatedEdges2 != null;
 		Property property = QVTscheduleUtil.getProperty(predicatedEdge);
@@ -77,13 +71,13 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		if (s != null) {
 			s.append("\n    " + typedModel + " predicated for " + property);
 		}
-	}
+	} */
 
 	public void addPartitionAnalysis(@NonNull AbstractPartitionAnalysis<? extends @NonNull Partition> partitionAnalysis) {
 		partition2partitionAnalysis.put(partitionAnalysis.getPartition(), partitionAnalysis);
 	}
 
-	public void addRealizedEdge(@Nullable StringBuilder s, @NonNull TypedModel typedModel, @NonNull NavigationEdge realizedEdge) {
+	/*	public void addRealizedEdge(@Nullable StringBuilder s, @NonNull TypedModel typedModel, @NonNull NavigationEdge realizedEdge) {
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges2 = typedModel2property2realizedEdges;
 		assert typedModel2property2realizedEdges2 != null;
 		Property property = QVTscheduleUtil.getProperty(realizedEdge);
@@ -102,7 +96,7 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		if (s != null) {
 			s.append("\n    " + typedModel + " realized for " + property);
 		}
-	}
+	} */
 
 	public void analyzeFallibilities(@NonNull RootPartitionAnalysis rootPartitionAnalysis) {
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> nestedPartitionAnalysis : rootPartitionAnalysis.getPartitionAnalyses()) {
@@ -153,13 +147,17 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		return cyclicFallibilityAnalysis;
 	}
 
-	public void analyzePartitionEdges(@NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
+	/*	public void analyzePartitionEdges(@NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		typedModel2property2predicatedEdges = new HashMap<>();
 		typedModel2property2realizedEdges = new HashMap<>();
 		StringBuilder s = TransformationPartitioner.PROPERTY_ACCESS_ANALYSIS.isActive() ? new StringBuilder() : null;
 		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
+				String name = partition.getName();
+				if ("complexAttributeComplexAttributes«local»".equals(name)) {
+					getClass();
+				}
 				if (s != null) {
 					s.append("\n  [" + partition.getPassRangeText() + "] " + partition);
 				}
@@ -169,7 +167,7 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		if (s != null) {
 			TransformationPartitioner.PROPERTY_ACCESS_ANALYSIS.println(s.toString());
 		}
-	}
+	} */
 
 	public void analyzePartitions(@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses) {
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitionAnalyses) {
@@ -203,11 +201,11 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		return ClassUtil.nonNullState(partition2partitionAnalysis.get(partition));
 	}
 
-	public @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> getProperty2RealizedEdges(@NonNull TypedModel typedModel) {
+	/*	public @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> getProperty2RealizedEdges(@NonNull TypedModel typedModel) {
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges2 = typedModel2property2realizedEdges;
 		assert typedModel2property2realizedEdges2 != null;
 		return ClassUtil.nonNullState(typedModel2property2realizedEdges2.get(typedModel));
-	}
+	} */
 
 	public @NonNull RootPartitionAnalysis getRootPartitionAnalysis() {
 		return ClassUtil.nonNullState(rootPartitionAnalysis);
