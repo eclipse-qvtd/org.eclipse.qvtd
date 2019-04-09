@@ -1,21 +1,23 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 
 /**
@@ -27,7 +29,7 @@ import org.eclipse.ocl.pivot.Property;
  * An ObservableStatement may involve evaluation of an expression that accesses object properties whose
  * values may not be available. If not ready,the mapping execution is suspended until the required value
  * is made available by a notifying SetStatement.
- * 
+ *
  * syntax: oclText[observe class::property ...]
  * <!-- end-model-doc -->
  *
@@ -55,5 +57,7 @@ public interface ObservableStatement extends Statement {
 	 * @generated
 	 */
 	EList<Property> getObservedProperties();
+
+	@Nullable List<Property> basicGetObservedProperties();
 
 } // ObservableStatement

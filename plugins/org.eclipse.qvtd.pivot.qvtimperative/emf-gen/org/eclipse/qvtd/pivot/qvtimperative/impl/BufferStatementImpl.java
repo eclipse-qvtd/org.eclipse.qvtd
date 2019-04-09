@@ -185,6 +185,11 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		return observedProperties;
 	}
 
+	@Override
+	public @Nullable EList<Property> basicGetObservedProperties() {
+		return observedProperties;
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -450,17 +455,17 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				getObservedProperties().clear();
-				getObservedProperties().addAll((Collection<? extends Property>)newValue);
-				return;
+			getObservedProperties().addAll((Collection<? extends Property>)newValue);
+			return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setOwnedExpression((OCLExpression)newValue);
-				return;
+			return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setFirstPass((Integer)newValue);
-				return;
+			return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
 				setLastPass((Integer)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -475,16 +480,16 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				getObservedProperties().clear();
-				return;
+			return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setOwnedExpression((OCLExpression)null);
-				return;
+			return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setFirstPass(FIRST_PASS_EDEFAULT);
-				return;
+			return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
 				setLastPass(LAST_PASS_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}

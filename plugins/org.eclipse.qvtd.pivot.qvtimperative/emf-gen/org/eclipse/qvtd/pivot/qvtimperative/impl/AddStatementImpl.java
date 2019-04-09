@@ -167,6 +167,11 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		return observedProperties;
 	}
 
+	@Override
+	public @Nullable EList<Property> basicGetObservedProperties() {
+		return observedProperties;
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -384,7 +389,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 				return getObservedProperties();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getTargetVariable();
-				return basicGetTargetVariable();
+			return basicGetTargetVariable();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return isIsEnforcedUnique();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
@@ -404,17 +409,17 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-				getObservedProperties().addAll((Collection<? extends Property>)newValue);
-				return;
+			getObservedProperties().addAll((Collection<? extends Property>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setTargetVariable((ConnectionVariable)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setIsEnforcedUnique((Boolean)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -429,16 +434,16 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setTargetVariable((ConnectionVariable)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setIsEnforcedUnique(IS_ENFORCED_UNIQUE_EDEFAULT);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}

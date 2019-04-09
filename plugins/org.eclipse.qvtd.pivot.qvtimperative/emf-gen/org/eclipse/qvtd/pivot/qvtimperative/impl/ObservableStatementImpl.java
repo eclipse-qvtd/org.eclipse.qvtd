@@ -19,6 +19,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
@@ -96,6 +97,11 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 		return observedProperties;
 	}
 
+	@Override
+	public @Nullable EList<Property> basicGetObservedProperties() {
+		return observedProperties;
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -121,8 +127,8 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-				getObservedProperties().addAll((Collection<? extends Property>)newValue);
-				return;
+			getObservedProperties().addAll((Collection<? extends Property>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -137,7 +143,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
