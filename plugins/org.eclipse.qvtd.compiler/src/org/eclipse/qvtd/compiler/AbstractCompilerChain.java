@@ -44,6 +44,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
+import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTiProductionConsumption;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
@@ -269,6 +270,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			iResource.getContents().add(model);
 			saveResource(iResource);
 			ImperativeTransformation transformation = (ImperativeTransformation) getTransformation(iResource);
+			throwCompilerChainExceptionForErrors();
+			QVTiProductionConsumption qvtiProductionConsumption = new QVTiProductionConsumption(this, iResource);
+			qvtiProductionConsumption.analyze();
+			qvtiProductionConsumption.validate();
 			throwCompilerChainExceptionForErrors();
 			return transformation;
 		}
