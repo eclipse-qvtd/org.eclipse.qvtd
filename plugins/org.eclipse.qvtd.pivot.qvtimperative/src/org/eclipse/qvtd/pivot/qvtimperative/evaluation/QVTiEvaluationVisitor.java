@@ -293,7 +293,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public Object visitBufferStatement(@NonNull BufferStatement object) {
 		Mapping asMapping = QVTimperativeUtil.getContainingMapping(object);
-		assert asMapping != null;
 		Interval interval = executor.getInterval(asMapping);
 		Connection connection = null;
 		OCLExpression ownedExpression = object.getOwnedExpression();
