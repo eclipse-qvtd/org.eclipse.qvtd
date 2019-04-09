@@ -279,7 +279,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				}
 			}
 		}
-		Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationCallExp);
+		Mapping asMapping = QVTimperativeUtil.basicGetContainingMapping(navigationCallExp);
 		Object ecoreValue;
 		//		if ((asMapping != null) && transformationAnalysis.isHazardousRead(asMapping, navigationCallExp)) {		// null within queries
 		if ((asMapping != null) && isHazardous2(navigationCallExp)) {		// null within queries

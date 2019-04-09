@@ -78,7 +78,7 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 	public @Nullable Boolean visitNewStatement(@NonNull NewStatement object) {
 		//		if (object.eContainer() instanceof ImperativePattern) {
 		Mapping rule = QVTimperativeUtil.getContainingMapping(object);
-		if ((rule != null) && (rule.getName() != null)) {
+		if (rule.getName() != null) {
 			String name = object.getName();
 			if (name != null) {
 				s.append(VARIABLE_PREFIX);
@@ -94,7 +94,7 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 	@Override
 	public @Nullable Boolean visitVariable(@NonNull Variable object) {
 		if (object.eContainer() instanceof MappingLoop) {
-			Mapping rule = QVTimperativeUtil.getContainingMapping(object);
+			Mapping rule = QVTimperativeUtil.basicGetContainingMapping(object);
 			if ((rule != null) && (rule.getName() != null)) {
 				String name = object.getName();
 				if (name != null) {
