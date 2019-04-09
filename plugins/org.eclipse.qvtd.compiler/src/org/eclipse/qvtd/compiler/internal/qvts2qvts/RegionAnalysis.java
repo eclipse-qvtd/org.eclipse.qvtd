@@ -21,6 +21,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceClass;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceGroup;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -121,7 +122,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull RegionAnalysis> getExplicitPredecessors() {
+	public @Nullable Iterable<@NonNull PartialRegionAnalysis<@NonNull RegionsAnalysis>> getExplicitPredecessors() {
 		return null;
 	}
 

@@ -10,19 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtschedule.Partition;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
-
-public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends PartialRegionsAnalysis> implements PartialRegionAnalysis<@NonNull PRA>
+public interface PartialRegionsAnalysis //extends Nameable
 {
-	@Override
-	public @NonNull Partition getPartition() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @NonNull Region getRegion() {
-		throw new UnsupportedOperationException();
-	}
 }

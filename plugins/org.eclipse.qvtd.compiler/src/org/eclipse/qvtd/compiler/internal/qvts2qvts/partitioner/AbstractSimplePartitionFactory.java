@@ -18,7 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -236,7 +236,7 @@ public abstract class AbstractSimplePartitionFactory extends AbstractPartitionFa
 
 	protected void resolveDisambiguations(@NonNull BasicPartition partition) {
 		for (@NonNull Node traceNode : mappingPartitioner.getTraceNodes()) {
-			PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = mappingPartitioner.getTraceClassAnalysis(traceNode);
+			PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis = mappingPartitioner.getTraceClassAnalysis(traceNode);
 			Iterable<@NonNull Property> discriminatingProperties = traceClassAnalysis.getDiscriminatingProperties();
 			if (discriminatingProperties != null) {
 				for (@NonNull Property property : discriminatingProperties) {

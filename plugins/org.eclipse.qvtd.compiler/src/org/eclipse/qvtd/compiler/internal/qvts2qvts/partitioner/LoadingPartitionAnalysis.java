@@ -38,27 +38,27 @@ public class LoadingPartitionAnalysis extends AbstractPartitionAnalysis<LoadingP
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getConsumedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getConsumedTraceClassAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getConsumedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getConsumedTracePropertyAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getProducedTraceClassAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getProducedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getProducedTracePropertyAnalyses() {
 		return null;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getSuperProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getSuperProducedTraceClassAnalyses() {
 		return null;
 	}
 }

@@ -20,7 +20,9 @@ import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -57,7 +59,7 @@ public class CallTreeBuilder
 		Stack<@NonNull Partition> callStack = new Stack<>();
 		callStack.push(rootPartition);
 		for (@NonNull Concurrency concurrency : partitionSchedule) {
-			for (@NonNull PartitionAnalysis partition : concurrency) {
+			for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partition : concurrency) {
 				updateCallStack(callStack, partition.getPartition());
 			}
 		}

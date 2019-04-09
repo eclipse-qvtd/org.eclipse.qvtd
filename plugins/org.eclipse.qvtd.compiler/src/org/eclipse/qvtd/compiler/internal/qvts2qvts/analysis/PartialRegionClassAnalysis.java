@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public interface PartialRegionClassAnalysis<PRA extends PartialRegionAnalysis<@NonNull PRA>> extends PartialRegionElementAnalysis<@NonNull PRA>
+public interface PartialRegionClassAnalysis<PRA extends PartialRegionsAnalysis> extends PartialRegionElementAnalysis<@NonNull PRA>
 {
 	void addSubTraceClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis);
 	void addSuperTraceClassAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> traceClassAnalysis);

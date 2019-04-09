@@ -22,17 +22,17 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 /**
  * PartitionAnalysis captures the analysis of a Partition.
  */
-public interface PartitionAnalysis extends PartialRegionAnalysis<@NonNull PartitionAnalysis>//, CompilerUtil.PartialRegion<@NonNull PartitionAnalysis, @NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>, @NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>>
+public interface PartitionAnalysis extends PartialRegionAnalysis<@NonNull PartitionsAnalysis>
 {
 	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	void analyzePartitionEdges();
 	void computeCheckedOrEnforcedEdges();
 	@NonNull Partition getPartition();
 	@NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis();
-	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getProducedTraceClassAnalyses();
-	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getProducedTracePropertyAnalyses();
-	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getTraceClassAnalyses();
-	@NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>>  getTracePropertyAnalyses();
-	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getSuperProducedTraceClassAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getProducedTraceClassAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getProducedTracePropertyAnalyses();
+	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getTraceClassAnalyses();
+	@NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>>  getTracePropertyAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getSuperProducedTraceClassAnalyses();
 	boolean isChecked(@NonNull Edge edge);
 }

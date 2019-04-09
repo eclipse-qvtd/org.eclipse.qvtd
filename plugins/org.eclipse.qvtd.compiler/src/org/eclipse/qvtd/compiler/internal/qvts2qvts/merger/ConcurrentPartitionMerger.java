@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.AbstractCompositePartitionAnalysis;
@@ -28,6 +29,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.BasicPartitionAn
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MergedPartitionFactory;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
@@ -49,12 +51,12 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 		for (int i = 0; i < partitionSchedule.size(); i++) {
 			Concurrency oldConcurrency = partitionSchedule.get(i);
 			if (oldConcurrency.size() > 1) {
-				Map<@NonNull Region, @NonNull List<@NonNull PartitionAnalysis>> region2partitionAnalyses = new HashMap<>();
-				for (@NonNull PartitionAnalysis partitionAnalysis : oldConcurrency) {
+				Map<@NonNull Region, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> region2partitionAnalyses = new HashMap<>();
+				for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : oldConcurrency) {
 					Partition partition = partitionAnalysis.getPartition();
 					if (!(partition instanceof CyclicPartition)) {
 						Region region = QVTscheduleUtil.getRegion(partition);
-						List<@NonNull PartitionAnalysis> partitionAnalyses = region2partitionAnalyses.get(region);
+						List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses = region2partitionAnalyses.get(region);
 						if (partitionAnalyses == null) {
 							partitionAnalyses = new ArrayList<>();
 							region2partitionAnalyses.put(region, partitionAnalyses);
@@ -62,10 +64,10 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 						partitionAnalyses.add(partitionAnalysis);
 					}
 				}
-				Set<@NonNull PartitionAnalysis> concurrentPartitionAnalyses = null;
+				Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> concurrentPartitionAnalyses = null;
 				for (@NonNull Region region : region2partitionAnalyses.keySet()) {
 					if (!(region instanceof CyclicMappingRegion)) {
-						List<@NonNull PartitionAnalysis> partitionAnalyses = region2partitionAnalyses.get(region);
+						List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses = region2partitionAnalyses.get(region);
 						assert partitionAnalyses != null;
 						if (partitionAnalyses.size() > 1) {
 							ConcurrentPartitionMerger concurrentMerger = new ConcurrentPartitionMerger(partitionedTransformationAnalysis, partitionAnalyses);
@@ -84,7 +86,7 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 							}
 							if (concurrentPartitionAnalyses != null) {
 								Concurrency concurrency = new Concurrency();
-								for (@NonNull PartitionAnalysis partitionAnalysis : concurrentPartitionAnalyses) {
+								for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : concurrentPartitionAnalyses) {
 									concurrency.add(partitionAnalysis);
 								}
 								partitionSchedule.set(i, concurrency);
@@ -98,9 +100,9 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 	}
 
 	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
-	protected final @NonNull Iterable<@NonNull PartitionAnalysis> partitions;
+	protected final @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitions;
 
-	protected ConcurrentPartitionMerger(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Iterable<@NonNull PartitionAnalysis> partitions) {
+	protected ConcurrentPartitionMerger(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitions) {
 		this.partitionedTransformationAnalysis = partitionedTransformationAnalysis;
 		this.partitions = partitions;
 	}
@@ -112,7 +114,7 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 		ScheduleManager scheduleManager = partitionedTransformationAnalysis.getScheduleManager();
 		Map<@NonNull Integer, @NonNull Set<@NonNull BasicPartitionAnalysis>> hash2partitionAnalyses = new HashMap<>();
 		Map<@NonNull BasicPartitionAnalysis, @NonNull Set<@NonNull CheckedCondition>> partion2checkedConditions = new HashMap<>();
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitions) {
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitions) {
 			BasicPartitionAnalysis basicPartitionAnalysis = (BasicPartitionAnalysis) partitionAnalysis;
 			CheckedConditionAnalysis checkedConditionAnalysis = new CheckedConditionAnalysis(basicPartitionAnalysis, scheduleManager);
 			Set<@NonNull CheckedCondition> checkedConditions = checkedConditionAnalysis.computeCheckedConditions();

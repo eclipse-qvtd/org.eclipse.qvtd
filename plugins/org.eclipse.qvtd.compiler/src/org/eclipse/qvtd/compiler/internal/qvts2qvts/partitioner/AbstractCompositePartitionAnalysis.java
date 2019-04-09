@@ -18,22 +18,23 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 
 public abstract class AbstractCompositePartitionAnalysis<P extends CompositePartition> extends AbstractPartitionAnalysis<P> implements CompositePartitionAnalysis
 {
-	protected final @NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> originalPartitionAnalysis2predecessors;
-	protected final @NonNull Set<@NonNull PartitionAnalysis> partitionAnalyses;
+	protected final @NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> originalPartitionAnalysis2predecessors;
+	protected final @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses;
 	private @Nullable List<@NonNull Concurrency> partitionSchedule = null;
 
 	protected AbstractCompositePartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull P controlPartition,
-			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
+			@NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> partitionAnalysis2predecessors) {
 		super(partitionedTransformationAnalysis, controlPartition);
 		this.originalPartitionAnalysis2predecessors = partitionAnalysis2predecessors;
 		this.partitionAnalyses = new HashSet<>(partitionAnalysis2predecessors.keySet());
 		List<MappingPartition> ownedMappingPartitions = controlPartition.getOwnedMappingPartitions();
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitionAnalyses) {
 			ownedMappingPartitions.add((MappingPartition) partitionAnalysis.getPartition());
 		}
 	}
@@ -46,9 +47,9 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 	 * For composite partitionAnalyses, their first concurrency is folded into the first additional concurrency. Further concurrencies contribute
 	 * to further additional concurrencies similarly merged concurrencies.
 	 */
-	protected void appendConcurrency(@NonNull List<@NonNull Concurrency> partitionSchedule, @NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
+	protected void appendConcurrency(@NonNull List<@NonNull Concurrency> partitionSchedule, @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses) {
 		Concurrency nonCompositeConcurrency = null;
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {		// FIXME alphabetical for determinism
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitionAnalyses) {		// FIXME alphabetical for determinism
 			if (!(partitionAnalysis instanceof CompositePartitionAnalysis)) {
 				if (nonCompositeConcurrency == null) {
 					nonCompositeConcurrency = new Concurrency();
@@ -60,7 +61,7 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 			partitionSchedule.add(nonCompositeConcurrency);
 		}
 		int compositeConcurrencyPass = partitionSchedule.size();
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {		// FIXME alphabetical for determinism
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitionAnalyses) {		// FIXME alphabetical for determinism
 			if (partitionAnalysis instanceof CompositePartitionAnalysis) {
 				Iterable<@NonNull Concurrency> nestedConcurrencies = ((CompositePartitionAnalysis)partitionAnalysis).getPartitionSchedule();
 				overlayConcurrency(partitionSchedule, compositeConcurrencyPass, nestedConcurrencies);
@@ -71,7 +72,7 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 	protected abstract @NonNull List<@NonNull Concurrency> createPartitionSchedule();
 
 	@Override
-	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses() {
+	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> getPartitionAnalyses() {
 		return partitionAnalyses;
 	}
 
@@ -128,7 +129,7 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 			if (newConcurrency.isCycleEnd()) {
 				concurrency.setCycleEnd();
 			}
-			for (@NonNull PartitionAnalysis partitionAnalysis : newConcurrency) {
+			for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : newConcurrency) {
 				concurrency.add(partitionAnalysis);
 			}
 			mergePass++;

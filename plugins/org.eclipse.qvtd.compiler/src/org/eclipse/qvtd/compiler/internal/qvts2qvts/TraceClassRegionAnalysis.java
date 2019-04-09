@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
-public class TraceClassRegionAnalysis extends AbstractPartialRegionClassAnalysis<@NonNull RegionAnalysis>
+public class TraceClassRegionAnalysis extends AbstractPartialRegionClassAnalysis<@NonNull RegionsAnalysis>
 {
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
@@ -38,7 +38,7 @@ public class TraceClassRegionAnalysis extends AbstractPartialRegionClassAnalysis
 	public boolean isCyclic() {
 		Boolean isCyclic2 = isCyclic;
 		if (isCyclic2 == null) {
-			for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : getSubTraceClassAnalyses()) {
+			for (@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> subTraceClassAnalysis : getSubTraceClassAnalyses()) {
 				if (transformationAnalysis.isCyclic(subTraceClassAnalysis)) {
 					isCyclic2 = isCyclic = true;
 					return isCyclic2;

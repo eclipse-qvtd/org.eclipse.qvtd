@@ -18,9 +18,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 /**
  * Each TracePropertyAnalysis identifies the usage of one middle trace property.
  */
-public class TracePropertyPartitionAnalysis extends AbstractPartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>
+public class TracePropertyPartitionAnalysis extends AbstractPartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>
 {
-	public TracePropertyPartitionAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+	public TracePropertyPartitionAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
 		super(traceClassAnalysis, tracePropertyDatum);
 	}
 }

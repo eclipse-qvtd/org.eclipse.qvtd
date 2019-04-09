@@ -21,8 +21,9 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
@@ -51,7 +52,7 @@ public class ScheduleAnalysis
 	/**
 	 * All transitively callable partitions within the rootPartition.
 	 */
-	protected final @NonNull List<@NonNull PartitionAnalysis> allPartitionAnalyses;
+	protected final @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> allPartitionAnalyses;
 
 	private final @NonNull LoadingPartition loadingPartition;
 
@@ -121,7 +122,7 @@ public class ScheduleAnalysis
 		// Initialize the incoming/looping/outgoing connection analyses of each region
 		//
 		LoadingPartition loadingPartition = null;
-		for (@NonNull PartitionAnalysis partitionAnalysis : this.allPartitionAnalyses) {
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : this.allPartitionAnalyses) {
 			analyzeConnections(partitionAnalysis);
 			Partition partition = partitionAnalysis.getPartition();
 			if (partition instanceof LoadingPartition) {
@@ -135,7 +136,7 @@ public class ScheduleAnalysis
 		// Initialize the source/target of each connection.
 		// Compute the set of all connections that are not passed.
 		//
-		for (@NonNull PartitionAnalysis partitionAnalysis : this.allPartitionAnalyses) {
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : this.allPartitionAnalyses) {
 			analyzeSourcesAndTargets(partitionAnalysis.getPartition());
 		}
 		//
@@ -164,7 +165,7 @@ public class ScheduleAnalysis
 	/**
 	 * Initialize the incoming/looping/outgoing connection analyses of each region
 	 */
-	private void analyzeConnections(@NonNull PartitionAnalysis partitionAnalysis) {
+	private void analyzeConnections(@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis) {
 		Partition partition = partitionAnalysis.getPartition();
 		List<@NonNull Connection> incomingConnections = new ArrayList<>();
 		for (@NonNull Connection connection : connectionManager.getIncomingConnections(partitionAnalysis)) {
@@ -484,7 +485,7 @@ public class ScheduleAnalysis
 			}
 			Set<@NonNull Connection> incomingConnections = new HashSet<>();
 			Set<@NonNull Connection> outgoingConnections = new HashSet<>();
-			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
+			for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
 				changedPartitions.add(partition);
 				Iterables.addAll(incomingConnections, getIncomingConnections(partition));
@@ -543,9 +544,9 @@ public class ScheduleAnalysis
 	@Override
 	public @NonNull String toString() {
 		StringBuilder s = new StringBuilder();
-		List<@NonNull PartitionAnalysis> list = new ArrayList<>(allPartitionAnalyses);
+		List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> list = new ArrayList<>(allPartitionAnalyses);
 		Collections.sort(list, NameUtil.NAMEABLE_COMPARATOR);
-		for (@NonNull PartitionAnalysis entry : list) {
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> entry : list) {
 			if (s.length() > 0) {
 				s.append("\n");
 			}

@@ -8,14 +8,13 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionsAnalysis;
 
-public interface CompositePartitionAnalysis extends PartitionAnalysis
+/**
+ * PartitionAnalysis captures the analysis of a Partition.
+ */
+public interface RegionsAnalysis extends PartialRegionsAnalysis
 {
-	@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>  getPartitionAnalyses();
-	@NonNull Iterable<@NonNull Concurrency> getPartitionSchedule();
 }

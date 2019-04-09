@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -29,7 +30,7 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 {
 	public static @NonNull RootPartitionAnalysis createRootPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis,
 			@NonNull AbstractTransformationAnalysis transformationAnalysis,
-			@NonNull String name, @NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
+			@NonNull String name, @NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> partitionAnalysis2predecessors) {
 		RootPartition rootPartition = RegionHelper.createRootPartition(name, transformationAnalysis.getScheduleManager());
 		transformationAnalysis.getRootRegion().setOwnedRootPartition(rootPartition);
 		RootPartitionAnalysis rootPartitionAnalysis = new RootPartitionAnalysis(partitionedTransformationAnalysis, rootPartition, partitionAnalysis2predecessors);
@@ -39,7 +40,7 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 	private @Nullable RootRegion rootRegion = null;
 
 	private RootPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RootPartition rootPartition,
-			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
+			@NonNull Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> partitionAnalysis2predecessors) {
 		super(partitionedTransformationAnalysis, rootPartition, partitionAnalysis2predecessors);
 		partitionedTransformationAnalysis.setRootPartitionAnalysis(this);
 		//		partitionedTransformationAnalysis.addPartitionAnalysis(this);
@@ -49,7 +50,7 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 	protected @NonNull List<@NonNull Concurrency> createPartitionSchedule() {
 		List<@NonNull Concurrency>  flatPartitionSchedule = new ArrayList<>();
 		Iterable<@NonNull Concurrency> parallelSchedule = CompilerUtil.computeParallelSchedule(originalPartitionAnalysis2predecessors);
-		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : parallelSchedule) {
+		for (@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> concurrency : parallelSchedule) {
 			appendConcurrency(flatPartitionSchedule, concurrency);
 		}
 		return flatPartitionSchedule;

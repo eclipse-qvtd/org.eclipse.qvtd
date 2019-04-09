@@ -15,6 +15,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -30,7 +31,7 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 	 */
 	private final @NonNull ReachabilityForest reachabilityForest;
 
-	private @Nullable Set<@NonNull PartitionAnalysis> explicitPredecessors = null;
+	private @Nullable Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> explicitPredecessors = null;
 	//	private final @NonNull String namePrefix;
 	//	private final @NonNull String symbolSuffix;
 
@@ -55,7 +56,7 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 	@Override
 	public void analyzePartition2() {
 		super.analyzePartition2();
-		Set<@NonNull PartitionAnalysis> partitionAnalyses = new HashSet<>();
+		Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses = new HashSet<>();
 		for (@NonNull Partition partition : QVTscheduleUtil.getExplicitPredecessors(partition)) {
 			partitionAnalyses.add(partitionedTransformationAnalysis.getPartitionAnalysis(partition));
 		}
@@ -71,7 +72,7 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 	} */
 
 	@Override
-	public @Nullable Set<@NonNull PartitionAnalysis> getExplicitPredecessors() {
+	public @Nullable Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> getExplicitPredecessors() {
 		return explicitPredecessors;
 	}
 

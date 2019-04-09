@@ -26,7 +26,9 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OriginalContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -112,7 +114,7 @@ public class ConnectionManager
 	public void createConnections(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		Set<@NonNull Region> regions = new HashSet<>();
 		for (@NonNull Concurrency concurrency : partitionSchedule) {
-			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
+			for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : concurrency) {
 				regions.add(QVTscheduleUtil.getRegion(partitionAnalysis.getPartition()));
 			}
 		}
@@ -598,7 +600,7 @@ public class ConnectionManager
 		return connection;
 	}
 
-	public @NonNull Iterable<@NonNull Connection> getIncomingConnections(@NonNull PartitionAnalysis partitionAnalysis) {		// FIXME cache
+	public @NonNull Iterable<@NonNull Connection> getIncomingConnections(@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis) {		// FIXME cache
 		Partition partition = partitionAnalysis.getPartition();
 		/*	Region region = partition.getOriginalRegion();
 			if (region != null) {
@@ -660,7 +662,7 @@ public class ConnectionManager
 			//			}
 		}
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
-			if (partitionAnalysis.isChecked(edge) && (edge.isNavigation() || edge.isCast())) {
+			if (((PartitionAnalysis)partitionAnalysis).isChecked(edge) && (edge.isNavigation() || edge.isCast())) {
 				NavigableEdge navigationEdge = (NavigableEdge) edge;
 				EdgeConnection connection = navigationEdge.getIncomingConnection();
 				if ((connection != null) && !connections.contains(connection)) {

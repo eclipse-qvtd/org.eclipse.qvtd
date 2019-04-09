@@ -37,7 +37,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegionAnalysis<@NonNull PRA>> extends AbstractPartialRegionElementAnalysis<@NonNull PRA> implements PartialRegionClassAnalysis<@NonNull PRA>
+public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegionsAnalysis> extends AbstractPartialRegionElementAnalysis<@NonNull PRA> implements PartialRegionClassAnalysis<@NonNull PRA>
 {
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ClassDatum traceClassDatum;
@@ -91,9 +91,9 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 		//
 		//	Identify the properties available for discrimination.
 		//
-		Map<@NonNull PRA, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
+		Map<@NonNull PartialRegionAnalysis<@NonNull PRA>, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
 		Set<@NonNull Property> commonProperties = null;
-		for (@NonNull PRA producer : producers) {
+		for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : producers) {
 			Map<@NonNull Property, @NonNull NavigableEdge> property2edge = new HashMap<>();
 			partitioner2property2edge.put(producer, property2edge);
 			for (@NonNull Node traceNode : producer.getTraceNodes()) {	// FIXME Bug 488647 discriminate output classes too
@@ -121,9 +121,9 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 		//
 		List<@NonNull Property> sortedProperties = new ArrayList<@NonNull Property>(commonProperties);
 		Collections.sort(sortedProperties, NameUtil.NAMEABLE_COMPARATOR);
-		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull PRA>>> property2completeClass2regionAnalyses  = new HashMap<>();
+		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>>> property2completeClass2regionAnalyses  = new HashMap<>();
 		for (@NonNull Property property : sortedProperties) {
-			for (@NonNull PRA producer : producers) {
+			for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : producers) {
 				Map<@NonNull Property, @NonNull NavigableEdge> property2edge = partitioner2property2edge.get(producer);
 				assert property2edge != null;
 				NavigableEdge edge = property2edge.get(property);
@@ -131,7 +131,7 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 					property2completeClass2regionAnalyses.put(property, null);
 				}
 				else {
-					Map<@Nullable CompleteClass, @NonNull List<@NonNull PRA>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+					Map<@Nullable CompleteClass, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
 					if (completeClass2regionAnalyses == null) {
 						completeClass2regionAnalyses = new HashMap<>();
 						property2completeClass2regionAnalyses.put(property, completeClass2regionAnalyses);
@@ -144,7 +144,7 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 					else {
 						completeClass = targetNode.getCompleteClass(); // FIXME use/ignore inheritance
 					}
-					List<@NonNull PRA> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+					List<@NonNull PartialRegionAnalysis<@NonNull PRA>> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
 					if (regionAnalyses == null) {
 						regionAnalyses = new ArrayList<>();
 						completeClass2regionAnalyses.put(completeClass, regionAnalyses);
@@ -180,7 +180,7 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 		int bestSize = 0;
 		Property bestProperty = null;
 		for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
-			Map<@Nullable CompleteClass, @NonNull List<@NonNull PRA>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+			Map<@Nullable CompleteClass, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
 			if (completeClass2regionAnalyses != null) {
 				int size = completeClass2regionAnalyses.size();
 				if (size > bestSize) {
@@ -194,13 +194,13 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 			s.append("property->completeClass->regionAnalyses");
 			for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
 				s.append("\n\t" + property);
-				Map<@Nullable CompleteClass, @NonNull List<@NonNull PRA>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+				Map<@Nullable CompleteClass, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
 				if (completeClass2regionAnalyses != null) {
 					for (@Nullable CompleteClass completeClass : completeClass2regionAnalyses.keySet()) {
 						s.append("\n\t\t" + completeClass);
-						List<@NonNull PRA> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+						List<@NonNull PartialRegionAnalysis<@NonNull PRA>> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
 						assert regionAnalyses != null;
-						for (@NonNull PRA regionAnalysis : regionAnalyses) {
+						for (@NonNull PartialRegionAnalysis<@NonNull PRA> regionAnalysis : regionAnalyses) {
 							s.append("\n\t\t\t" + regionAnalysis);
 						}
 					}

@@ -18,39 +18,39 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public abstract class AbstractPartialRegionElementAnalysis<PRA extends PartialRegionAnalysis<@NonNull PRA>> implements PartialRegionElementAnalysis<@NonNull PRA>
+public abstract class AbstractPartialRegionElementAnalysis<PRA extends PartialRegionsAnalysis> implements PartialRegionElementAnalysis<@NonNull PRA>
 {
 	/**
 	 * The partitioners that consume (predicate) the trace class.
 	 */
-	protected final @NonNull List<@NonNull PRA> consumers = new ArrayList<>();
+	protected final @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>> consumers = new ArrayList<>();
 
 	/**
 	 * The partitioners that produce (realize) the trace class.
 	 */
-	protected final @NonNull List<@NonNull PRA> producers = new ArrayList<>();
+	protected final @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = new ArrayList<>();
 
 	@Override
-	public void addConsumer(@NonNull PRA consumer) {
+	public void addConsumer(@NonNull PartialRegionAnalysis<@NonNull PRA> consumer) {
 		if (!consumers.contains(consumer)) {		// multi-consumption is possible
 			consumers.add(consumer);
 		}
 	}
 
 	@Override
-	public void addProducer(@NonNull PRA producer) {
+	public void addProducer(@NonNull PartialRegionAnalysis<@NonNull PRA> producer) {
 		if (!producers.contains(producer)) {		// multi-production of e.g. OclAny is possible
 			producers.add(producer);
 		}
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull PRA> getConsumers() {
+	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getConsumers() {
 		return consumers;
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull PRA> getProducers() {
+	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getProducers() {
 		return producers;
 	}
 }

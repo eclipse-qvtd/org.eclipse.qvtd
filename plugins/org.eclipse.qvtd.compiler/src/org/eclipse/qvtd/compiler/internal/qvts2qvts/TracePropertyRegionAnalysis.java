@@ -26,11 +26,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * Each TracePropertyAnalysis identifies the usage of one middle trace property.
  */
-public class TracePropertyRegionAnalysis extends AbstractPartialRegionPropertyAnalysis<@NonNull RegionAnalysis>
+public class TracePropertyRegionAnalysis extends AbstractPartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>
 {
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
-	public TracePropertyRegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+	public TracePropertyRegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
 		super(traceClassAnalysis, tracePropertyDatum);
 		this.transformationAnalysis = transformationAnalysis;
 		//	assert tracePropertyDatum.getReferredTypedModel() == regionsAnalysis.getScheduleManager().getTraceTypedModel();
@@ -38,15 +38,15 @@ public class TracePropertyRegionAnalysis extends AbstractPartialRegionPropertyAn
 		assert transformationAnalysis.getTraceClassAnalysis(QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum)) == traceClassAnalysis;
 	}
 
-	public @NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>> getSuperTracePropertyAnalyses() {
-		List<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>> tracePropertyAnalyses = new ArrayList<>();
+	public @NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> getSuperTracePropertyAnalyses() {
+		List<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> tracePropertyAnalyses = new ArrayList<>();
 		//		ClassDatum traceClassDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
 		//		TraceClassAnalysis<@NonNull RA> traceClassAnalysis = regionsAnalysis.getTraceClassAnalysis(traceClassDatum);
-		for (@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> superTraceClassAnalysis : traceClassAnalysis.getSuperTraceClassAnalyses()) {
+		for (@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> superTraceClassAnalysis : traceClassAnalysis.getSuperTraceClassAnalyses()) {
 			ClassDatum superTraceClassDatum = superTraceClassAnalysis.getClassDatum();
 			PropertyDatum propertyDatum = NameUtil.getNameable(superTraceClassDatum.getOwnedPropertyDatums(), getName());		// FIXME avoid 'name' usage - use tracePropertyDatum(.referredProperty)
 			if (propertyDatum != null) {
-				PartialRegionPropertyAnalysis<@NonNull RegionAnalysis> tracePropertyAnalysis = transformationAnalysis.basicGetTracePropertyAnalysis(propertyDatum);	// FIXME is missing acceptable
+				PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> tracePropertyAnalysis = transformationAnalysis.basicGetTracePropertyAnalysis(propertyDatum);	// FIXME is missing acceptable
 				if ((tracePropertyAnalysis != null) && !tracePropertyAnalyses.contains(tracePropertyAnalysis)) {
 					tracePropertyAnalyses.add(tracePropertyAnalysis);
 				}

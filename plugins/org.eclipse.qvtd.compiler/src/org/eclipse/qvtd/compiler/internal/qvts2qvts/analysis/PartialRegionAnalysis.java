@@ -14,11 +14,18 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
-public interface PartialRegionAnalysis<@NonNull PRA extends PartialRegionAnalysis<@NonNull PRA>> extends Nameable // implements CompilerUtil.PartialRegion<@NonNull RegionAnalysis, @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis>, @NonNull PartialRegionPropertyAnalysis<@NonNull RegionAnalysis>>
+public interface PartialRegionAnalysis<@NonNull PRA extends PartialRegionsAnalysis> extends Nameable
 {
 	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getConsumedTraceClassAnalyses();
 	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> getConsumedTracePropertyAnalyses();
-	@Nullable Iterable<@NonNull PRA> getExplicitPredecessors();
+	@Nullable Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getExplicitPredecessors();
+	@NonNull Partition getPartition();
+	@NonNull Region getRegion();
 	@NonNull Iterable<@NonNull Node> getTraceNodes();
+	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getProducedTraceClassAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> getProducedTracePropertyAnalyses();
+	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSuperProducedTraceClassAnalyses();
 }

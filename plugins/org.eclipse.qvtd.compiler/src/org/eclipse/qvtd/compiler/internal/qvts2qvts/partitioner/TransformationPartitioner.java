@@ -29,6 +29,7 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
@@ -63,7 +64,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Iterable<@NonNull ? extends Region> activeRegions;
-	private final @NonNull List<@NonNull PartitionAnalysis> partitionAnalyses = new ArrayList<>();
+	private final @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses = new ArrayList<>();
 
 	/**
 	 * The partitioner for each region.
@@ -204,7 +205,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 		//	Create the per-mapping partitioner and accumulate the local analyses
 		//
 		for (@NonNull Region region : activeRegions) {
-			RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(region);
+			RegionAnalysis regionAnalysis = (RegionAnalysis) transformationAnalysis.getRegionAnalysis(region);
 			if (region instanceof MappingRegion) {
 				MappingRegion mappingRegion = (MappingRegion)region;
 				MappingPartitioner mappingPartitioner = new MappingPartitioner(this, regionAnalysis);

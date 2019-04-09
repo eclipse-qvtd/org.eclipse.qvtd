@@ -116,27 +116,27 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 	/**
 	 * The TraceClassAnalysis instances that are consumed by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> consumedTraceClassAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedTraceClassAnalyses = null;
 
 	/**
 	 * The TracePropertyAnalysis instances that are consumed by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> consumedTracePropertyAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedTracePropertyAnalyses = null;
 
 	/**
 	 * The TraceClassAnalysis instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> producedTraceClassAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> producedTraceClassAnalyses = null;
 
 	/**
 	 * The TracePropertyAnalysis instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> producedTracePropertyAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> producedTracePropertyAnalyses = null;
 
 	/**
 	 * The TraceClassAnalysis instances and super instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> superProducedTraceClassAnalyses = null;
+	private @Nullable Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> superProducedTraceClassAnalyses = null;
 
 	protected MappingPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull P partition) {
 		super(partitionedTransformationAnalysis, partition);
@@ -202,8 +202,8 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 
 	private void addConsumptionOfNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		Node castNode = QVTscheduleUtil.getCastTarget(node);
-		PartialRegionClassAnalysis<@NonNull PartitionAnalysis> consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), this);
-		List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
+		PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), this);
+		List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
 		if (consumedTraceClassAnalyses2 == null) {
 			consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
 		}
@@ -227,8 +227,8 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 	}
 
 	private void addConsumptionOfPropertyDatum(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull PropertyDatum propertyDatum) {
-		PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis> consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(propertyDatum, this);
-		List<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
+		PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(propertyDatum, this);
+		List<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
 		if (consumedTracePropertyAnalyses2 == null) {
 			consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
 		}
@@ -254,8 +254,8 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 		Property property = QVTscheduleUtil.getProperty(edge);
 		assert property != scheduleManager.getStandardLibraryHelper().getOclContainerProperty();		// oclContainer is not assignable
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-		PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis> producedTraceAnalysis = partitionedTransformationAnalysis.addProducer(propertyDatum, this);
-		List<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
+		PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> producedTraceAnalysis = partitionedTransformationAnalysis.addProducer(propertyDatum, this);
+		List<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
 		if (producedTracePropertyAnalyses2 == null) {
 			producedTracePropertyAnalyses = producedTracePropertyAnalyses2 = new ArrayList<>();
 		}
@@ -264,7 +264,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 		}
 		PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
 		if (oppositePropertyDatum != null) {
-			PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis> oppositeProducedTraceAnalysis = partitionedTransformationAnalysis.addProducer(oppositePropertyDatum, this);
+			PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> oppositeProducedTraceAnalysis = partitionedTransformationAnalysis.addProducer(oppositePropertyDatum, this);
 			if (!producedTracePropertyAnalyses2.contains(oppositeProducedTraceAnalysis)) {
 				producedTracePropertyAnalyses2.add(oppositeProducedTraceAnalysis);
 			}
@@ -287,8 +287,8 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 
 	private void addProductionOfNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		assert isNew(node);
-		PartialRegionClassAnalysis<@NonNull PartitionAnalysis> consumedTraceAnalysis = partitionedTransformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
-		List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
+		PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> consumedTraceAnalysis = partitionedTransformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
+		List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 == null) {
 			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();
 		}
@@ -730,13 +730,13 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 
 	//		@Override
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getConsumedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getConsumedTraceClassAnalyses() {
 		return consumedTraceClassAnalyses;
 	}
 
 	//		@Override
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getConsumedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getConsumedTracePropertyAnalyses() {
 		return consumedTracePropertyAnalyses;
 	}
 
@@ -775,12 +775,12 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getProducedTraceClassAnalyses() {
 		return producedTraceClassAnalyses;
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionAnalysis>> getProducedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> getProducedTracePropertyAnalyses() {
 		return producedTracePropertyAnalyses;
 	}
 
@@ -807,14 +807,14 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> getSuperProducedTraceClassAnalyses() {
-		List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
+	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getSuperProducedTraceClassAnalyses() {
+		List<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 != null) {
-			Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis>> superProducedTraceClassAnalyses2 = superProducedTraceClassAnalyses;
+			Set<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> superProducedTraceClassAnalyses2 = superProducedTraceClassAnalyses;
 			if (superProducedTraceClassAnalyses2 == null) {
 				superProducedTraceClassAnalyses = superProducedTraceClassAnalyses2 = new HashSet<>();
 			}
-			for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionAnalysis> producedTraceClassAnalysis : producedTraceClassAnalyses2) {
+			for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> producedTraceClassAnalysis : producedTraceClassAnalyses2) {
 				Iterables.addAll(superProducedTraceClassAnalyses2, producedTraceClassAnalysis.getSuperTraceClassAnalyses());
 			}
 		}

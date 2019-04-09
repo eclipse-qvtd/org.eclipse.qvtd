@@ -16,10 +16,10 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public interface PartialRegionElementAnalysis<PRA extends PartialRegionAnalysis<@NonNull PRA>> extends Nameable
+public interface PartialRegionElementAnalysis<PRA extends PartialRegionsAnalysis> extends Nameable
 {
-	void addConsumer(@NonNull PRA consumer);
-	void addProducer(@NonNull PRA producer);
-	@NonNull Iterable<@NonNull PRA> getConsumers();
-	@NonNull Iterable<@NonNull PRA> getProducers();
+	void addConsumer(@NonNull PartialRegionAnalysis<@NonNull PRA> consumer);
+	void addProducer(@NonNull PartialRegionAnalysis<@NonNull PRA> producer);
+	@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getConsumers();
+	@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getProducers();
 }

@@ -11,18 +11,18 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
-public class TraceClassPartitionAnalysis extends AbstractPartialRegionClassAnalysis<@NonNull PartitionAnalysis>
+public class TraceClassPartitionAnalysis extends AbstractPartialRegionClassAnalysis<@NonNull PartitionsAnalysis>
 {
-	protected final @NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassRegionAnalysis;
+	protected final @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassRegionAnalysis;
 
-	public TraceClassPartitionAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull RegionAnalysis> traceClassRegionAnalysis) {
+	public TraceClassPartitionAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> traceClassRegionAnalysis) {
 		super(traceClassRegionAnalysis.getScheduleManager(), traceClassRegionAnalysis.getClassDatum());
 		this.traceClassRegionAnalysis = traceClassRegionAnalysis;
 	}

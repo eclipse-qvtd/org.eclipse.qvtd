@@ -16,18 +16,20 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
 
 /**
  * A Concurrency identifies the PartitionAnalysis instances that may be executed concurrently as
  * one pass in the overall parallel schedule formed from a list of concurrencies.
  */
-public class Concurrency implements Iterable<@NonNull PartitionAnalysis>
+public class Concurrency implements Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>
 {
 	/**
 	 * The concurrently executable partitionAnalyses defining the schedule pass.
 	 */
-	protected final @NonNull Set<@NonNull PartitionAnalysis> partitionAnalyses;
+	protected final @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses;
 
 	/**
 	 * The concurrencies that may resume after exdecjution of this concurrency.
@@ -48,17 +50,17 @@ public class Concurrency implements Iterable<@NonNull PartitionAnalysis>
 	/**
 	 * Add an additional partitionAnalysis to the set of concurrent partitionAnalyses.
 	 */
-	public boolean add(@NonNull PartitionAnalysis partitionAnalysis) {
+	public boolean add(@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis) {
 		return partitionAnalyses.add(partitionAnalysis);
 	}
 
 	public void addPass(int cyclePass) {
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitionAnalyses) {
 			partitionAnalysis.getPartition().addPass(cyclePass);
 		}
 	}
 
-	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses() {
+	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> getPartitionAnalyses() {
 		return partitionAnalyses;
 	}
 
@@ -71,14 +73,14 @@ public class Concurrency implements Iterable<@NonNull PartitionAnalysis>
 	}
 
 	@Override
-	public @NonNull Iterator<@NonNull PartitionAnalysis> iterator() {
+	public @NonNull Iterator<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> iterator() {
 		return partitionAnalyses.iterator();
 	}
 
 	void setPass(int passNumber) {
 		assert this.passNumber == null;
 		this.passNumber = passNumber;
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitionAnalyses) {
 			partitionAnalysis.getPartition().setPass(passNumber);
 		}
 	}
@@ -106,7 +108,7 @@ public class Concurrency implements Iterable<@NonNull PartitionAnalysis>
 		if (isCycleEnd) {
 			s.append(", «end»");
 		}
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitionAnalyses) {
 			s.append(", ");
 			s.append(partitionAnalysis);
 		}
