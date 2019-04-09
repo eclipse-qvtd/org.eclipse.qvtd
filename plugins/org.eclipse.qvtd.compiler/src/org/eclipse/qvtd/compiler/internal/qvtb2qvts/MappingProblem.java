@@ -12,21 +12,21 @@ package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.AbstractCompilerProblem;
-import org.eclipse.qvtd.pivot.qvtschedule.Partition;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
-public class PartitionProblem extends AbstractCompilerProblem
+public class MappingProblem extends AbstractCompilerProblem
 {
-	protected final @NonNull Partition partition;
+	protected final @NonNull Mapping mapping;
 	protected final @NonNull String boundMessage;
 
-	public PartitionProblem(@NonNull Severity severity, @NonNull Partition partition, @NonNull String boundMessage) {
+	public MappingProblem(@NonNull Severity severity, @NonNull Mapping mapping, @NonNull String boundMessage) {
 		super(severity);
-		this.partition = partition;
+		this.mapping = mapping;
 		this.boundMessage = boundMessage;
 	}
 
 	@Override
 	public @NonNull String toString() {
-		return "PartitionProblem for " + partition.toString() + "\n\t" + boundMessage;
+		return "MappingProblem for " + mapping.toString() + "\n\t" + boundMessage;
 	}
 }
