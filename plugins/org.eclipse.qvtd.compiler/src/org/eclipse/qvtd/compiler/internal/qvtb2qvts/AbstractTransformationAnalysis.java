@@ -29,8 +29,8 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionsAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.ActualPartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
@@ -50,7 +50,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
- * A TransformationAnalysis accumulates the tesults of analyzing a RelationalTransformation and its contents.
+ * AbstractTransformationAnalysis provides the mandatory default management of ClassDatum and PropertyDatum usage by regions for a RegionsAnalysis.
  */
 public abstract class AbstractTransformationAnalysis extends AbstractPartialRegionsAnalysis<@NonNull RegionsAnalysis>
 {
@@ -160,7 +160,7 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	}
 
 	@Override
-	public @Nullable PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> basicGetPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+	public @Nullable ActualPartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> basicGetPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
 		return super.basicGetPropertyAnalysis(propertyDatum);
 	}
@@ -238,7 +238,7 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	}
 
 	@Override
-	public @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> getPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+	public @NonNull ActualPartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> getPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
 		return super.getPropertyAnalysis(propertyDatum);
 	}

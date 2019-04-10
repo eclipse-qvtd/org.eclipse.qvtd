@@ -384,7 +384,7 @@ public class DatumCaches
 		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
 		org.eclipse.ocl.pivot.Class owningClass = QVTbaseUtil.getOwningClass(property);
-		CompleteClass hostCompleteClass = completeModel.getCompleteClass(owningClass);
+		CompleteClass hostCompleteClass =classDatum.getCompleteClass();// completeModel.getCompleteClass(owningClass);
 		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setReferredTypedModel(typedModel);
 		propertyDatum.setReferredProperty(property);

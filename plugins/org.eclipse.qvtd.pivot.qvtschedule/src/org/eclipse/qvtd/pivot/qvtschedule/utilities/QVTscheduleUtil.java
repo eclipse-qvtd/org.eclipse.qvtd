@@ -755,6 +755,79 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return navigableEdge.isSecondary() ? getOppositeEdge(navigableEdge) : navigableEdge;
 	}
 
+	/**
+	 * Return the forward/reverse variant of property that is more easily navigable and therefore
+	 * to be preferred. When both variants are equally navigable a deterministic name-based choice is made.
+	 */
+	public static @NonNull Property getPrimaryProperty(@NonNull Property property) {
+		Property oppositeProperty = property.getOpposite();
+		if (oppositeProperty == null) {			// No opposite - no choice to make
+			return property;
+		}
+		if (property.isIsImplicit()) {			// Non-implicit preferred
+			return oppositeProperty;
+		}
+		if (oppositeProperty.isIsImplicit()) {	// Non-implicit preferred
+			return property;
+		}
+		if (property.isIsDerived() && !oppositeProperty.isIsDerived()) {	// choose non-derived
+			return oppositeProperty;
+		}
+		if (!property.isIsDerived() && oppositeProperty.isIsDerived()) {	// choose non-derived
+			return property;
+		}
+		if (property.isIsTransient() && !oppositeProperty.isIsTransient()) {	// choose non-transient
+			return oppositeProperty;
+		}
+		if (!property.isIsTransient() && oppositeProperty.isIsTransient()) {	// choose non-transient
+			return property;
+		}
+		if (property.isIsVolatile() && !oppositeProperty.isIsVolatile()) {	// choose non-volatile
+			return oppositeProperty;
+		}
+		if (!property.isIsVolatile() && oppositeProperty.isIsVolatile()) {	// choose non-volatile
+			return property;
+		}
+		if (property.isIsMany() && !oppositeProperty.isIsMany()) {			// 1:N - choose N:1
+			return oppositeProperty;
+		}
+		if (!property.isIsMany() && oppositeProperty.isIsMany()) {			// N:1 - choose N:1
+			return property;
+		}
+		// use name hierarchy
+		EObject e1 = property;
+		EObject e2 = oppositeProperty;
+		while ((e1 != null) && (e2 != null)) {
+			String n1 = e1 instanceof Nameable ? ((Nameable)e1).getName() : null;
+			String n2 = e2 instanceof Nameable ? ((Nameable)e2).getName() : null;
+			if ((n1 != null) || (n2 != null)) {
+				if (n1 == null) {
+					return oppositeProperty;
+				}
+				if (n2 == null) {
+					return property;
+				}
+				int diff = n1.compareTo(n2);
+				if (diff != 0) {
+					return diff > 0 ? property : oppositeProperty;
+				}
+			}
+			e1 = e1.eContainer();
+			e2 = e2.eContainer();
+		}
+		if ((e1 != null) || (e2 != null)) {
+			if (e1 == null) {
+				return oppositeProperty;
+			}
+			if (e2 == null) {
+				return property;
+			}
+		}
+		// last resort - never happens - use hash codes
+		int diff = System.identityHashCode(property) - System.identityHashCode(oppositeProperty);
+		return diff >= 0 ? property : oppositeProperty;
+	}
+
 	public static @NonNull Property getProperty(@NonNull NavigableEdge navigableEdge) {
 		return ClassUtil.nonNullState(navigableEdge.getProperty());
 	}

@@ -50,7 +50,7 @@ public abstract class AbstractPartialRegionElementAnalysis<PRA extends PartialRe
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getProducers() {
+	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getExactProducers() {
 		return producers;
 	}
 }

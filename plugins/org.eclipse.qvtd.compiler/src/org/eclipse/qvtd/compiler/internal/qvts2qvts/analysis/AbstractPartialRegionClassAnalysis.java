@@ -228,6 +228,11 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 	}
 
 	@Override
+	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getCompatibleProducers() {
+		return producers;
+	}
+
+	@Override
 	public @Nullable Iterable<@NonNull Property> getDiscriminatingProperties() {
 		return discriminatingProperties;
 	}

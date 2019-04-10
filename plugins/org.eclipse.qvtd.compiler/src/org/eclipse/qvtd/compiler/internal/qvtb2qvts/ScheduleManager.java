@@ -94,6 +94,7 @@ public interface ScheduleManager
 	@NonNull RuleAnalysis2TraceGroup createRuleAnalysis2TraceGroup(@NonNull RuleAnalysis ruleAnalysis);
 	@NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull AbstractTransformationAnalysis transformationAnalysis);
 	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
+	@NonNull PropertyDatum getBasePropertyDatum(@NonNull PropertyDatum propertyDatum);
 	@NonNull ClassDatum getBooleanClassDatum();
 	@NonNull Property getCastProperty(@NonNull Type type);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement);

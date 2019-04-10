@@ -33,7 +33,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 
 /**
- * A TransformationAnalysis accumulates the results of analyzing a RelationalTransformation and its contents.
+ * PartitionedTransformationAnalysis<PRA> provides the mandatory default mangement of ClassDatum and PropertyDatum usage by partitions for a PartitionsAnalysis.
  */
 public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAnalysis<@NonNull PartitionsAnalysis>
 {
@@ -210,7 +210,7 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 			if (scheduleManager.isInput(typedModel)) {
 				PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> classAnalysis = classDatum2classAnalysis.get(classDatum);
 				assert classAnalysis != null;
-				Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producers = classAnalysis.getProducers();
+				Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producers = classAnalysis.getCompatibleProducers();
 				if (Iterables.isEmpty(producers)) {
 					classAnalysis.addProducer(loadingPartitionAnalysis);
 				}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2018 Willink Transformations and others.
+ * Copyright (c) 2019 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -11,16 +11,14 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 
 /**
  * Each ClassAnalysis identifies the usage of one middle trace class or property.
  */
-public interface PartialRegionElementAnalysis<PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends Nameable
+public class OneOfManyToManyPartialRegionPropertyAnalysis<@NonNull PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends ActualPartialRegionPropertyAnalysis<@NonNull PRA>
 {
-	void addConsumer(@NonNull PartialRegionAnalysis<@NonNull PRA> consumer);
-	void addProducer(@NonNull PartialRegionAnalysis<@NonNull PRA> producer);
-	@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getConsumers();
-	@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getCompatibleProducers();
-	@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getExactProducers();
+	public OneOfManyToManyPartialRegionPropertyAnalysis(@NonNull BasePartialRegionPropertyAnalysis<PRA> basePropertyAnalysis, @NonNull PropertyDatum propertyDatum) {
+		super(basePropertyAnalysis, propertyDatum);
+	}
 }

@@ -35,7 +35,7 @@ public abstract class AbstractPartialRegionPropertyAnalysis<@NonNull PRA extends
 		this.propertyDatum = propertyDatum;
 		//	assert propertyDatum.getReferredTypedModel() == partialRegionsAnalysis.getScheduleManager().getTraceTypedModel();
 		//		ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
-		assert partialRegionsAnalysis.getClassAnalysis(QVTscheduleUtil.getOwningClassDatum(propertyDatum)) == classAnalysis;
+		//	assert partialRegionsAnalysis.getClassAnalysis(QVTscheduleUtil.getOwningClassDatum(propertyDatum)) == classAnalysis;
 	}
 
 	public @NonNull PartialRegionClassAnalysis<PRA> getClassAnalysis() {

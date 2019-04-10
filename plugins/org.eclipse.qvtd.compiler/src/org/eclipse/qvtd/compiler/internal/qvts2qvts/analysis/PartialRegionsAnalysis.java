@@ -17,15 +17,17 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 
-public interface PartialRegionsAnalysis<@NonNull PRA extends PartialRegionsAnalysis<PRA>> extends Nameable
+/**
+ * PartialRegionsAnalysis<PRA> manages the ClassDatum and PropertyDatum usage by partial regions for a PartialRegionsAnalysis.
+ */
+public interface PartialRegionsAnalysis<@NonNull PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends Nameable
 {
-
 	@NonNull PartialRegionClassAnalysis<@NonNull PRA> addConsumer(@NonNull ClassDatum classDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> consumer);
-	@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> addConsumer(@NonNull PropertyDatum propertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> consumer);
+	@NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> addConsumer(@NonNull PropertyDatum propertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> consumer);
 	@NonNull PartialRegionClassAnalysis<@NonNull PRA> addProducer(@NonNull ClassDatum classDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> producer);
-	@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> addProducer(@NonNull PropertyDatum propertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> producer);
-	@Nullable PartialRegionPropertyAnalysis<@NonNull PRA> basicGetPropertyAnalysis(@NonNull PropertyDatum propertyDatum);
+	@NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> addProducer(@NonNull PropertyDatum propertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> producer);
+	@Nullable ActualPartialRegionPropertyAnalysis<@NonNull PRA> basicGetPropertyAnalysis(@NonNull PropertyDatum propertyDatum);
 	@NonNull PartialRegionClassAnalysis<@NonNull PRA> getClassAnalysis(@NonNull ClassDatum classDatum);
-	@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> getPropertyAnalysis(@NonNull PropertyDatum propertyDatum);
+	@NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> getPropertyAnalysis(@NonNull PropertyDatum propertyDatum);
 	@NonNull ScheduleManager getScheduleManager();
 }

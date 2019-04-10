@@ -373,13 +373,13 @@ public class MappingPartitioner implements Nameable
 		return predicatedWhenNodes;
 	}
 
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getProducedClassAnalyses() {
-		return regionAnalysis.getProducedClassAnalyses();
-	}
+	//	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getProducedClassAnalyses() {
+	//		return regionAnalysis.getProducedClassAnalyses();
+	//	}
 
-	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> getProducedPropertyAnalyses() {
-		return regionAnalysis.getProducedPropertyAnalyses();
-	}
+	//	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> getProducedPropertyAnalyses() {
+	//		return regionAnalysis.getProducedPropertyAnalyses();
+	//	}
 
 	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
 		return regionAnalysis.getRealizedEdges();
@@ -440,9 +440,9 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getSuccessEdges();
 	}
 
-	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getSuperProducedClassAnalyses() {
-		return regionAnalysis.getSuperProducedClassAnalyses();
-	}
+	//	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getSuperProducedClassAnalyses() {
+	//		return regionAnalysis.getSuperProducedClassAnalyses();
+	//	}
 
 	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> getClassAnalysis(@NonNull Node traceNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(traceNode);
@@ -546,6 +546,10 @@ public class MappingPartitioner implements Nameable
 	public @NonNull Iterable<@NonNull PartitionAnalysis> partition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
 			return Collections.singletonList(new NonPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
+		}
+		String name = region.getName();
+		if ("mapVariableExp_referredVariable_VariableDeclaration_qvtr".equals(name)) {
+			getClass();
 		}
 		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
 		//	boolean isInfallible = false;

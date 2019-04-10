@@ -89,7 +89,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 					Property consumedOppositeProperty = consumedProperty.getOpposite();
 					boolean isContainer = (consumedOppositeProperty != null) && consumedOppositeProperty.isIsComposite();
 					if (isContainment || isContainer) {
-						for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> producer : consumedPropertyAnalysis.getProducers()) {
+						for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> producer : consumedPropertyAnalysis.getCompatibleProducers()) {
 							if (cyclicPartitionAnalyses.contains(producer)) {
 								Partition producingPartition = producer.getPartition();
 								for (@NonNull Edge edge : producingPartition.getPartialEdges()) {
@@ -172,7 +172,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedClassAnalyses = consumingPartitionAnalysis.getConsumedClassAnalyses();
 			if (consumedClassAnalyses != null) {
 				for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> consumedClassAnalysis : consumedClassAnalyses) {
-					Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producingPartitionAnalyses = consumedClassAnalysis.getProducers();
+					Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producingPartitionAnalyses = consumedClassAnalysis.getCompatibleProducers();
 					boolean isExternal = false;
 					boolean isInternal = false;
 					for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> producingPartitionAnalysis : producingPartitionAnalyses) {
@@ -204,7 +204,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 			Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedPropertyAnalyses = consumingPartitionAnalysis.getConsumedPropertyAnalyses();
 			if (consumedPropertyAnalyses != null) {
 				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> consumedPropertyAnalysis : consumedPropertyAnalyses) {
-					Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producingPartitionAnalyses = consumedPropertyAnalysis.getProducers();
+					Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> producingPartitionAnalyses = consumedPropertyAnalysis.getCompatibleProducers();
 					boolean isExternal = false;
 					boolean isInternal = false;
 					for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> producingPartitionAnalysis : producingPartitionAnalyses) {

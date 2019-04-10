@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
@@ -60,9 +59,9 @@ public class OriginalContentsAnalysis
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Node>> classDatum2oldNodes = new HashMap<>();
 
 	/**
-	 * The Realized Edges that produce each PropertyDatum (or its opposite).
+	 * The Realized Edges that produce each base PropertyDatum (or its opposite).
 	 */
-	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> propertyDatum2newEdges = new HashMap<>();
+	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> basePropertyDatum2newEdges = new HashMap<>();
 
 	/**
 	 * The regions that consume each ClassDatum, eagerly computed by addRegion().
@@ -102,16 +101,18 @@ public class OriginalContentsAnalysis
 		addNewEdge(region,newEdge, propertyDatum);
 	}
 	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {
-		List<@NonNull NavigableEdge> edges = propertyDatum2newEdges.get(propertyDatum);
+		String name = propertyDatum.getName();
+		PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
+		List<@NonNull NavigableEdge> edges = basePropertyDatum2newEdges.get(basePropertyDatum);
 		if (edges == null) {
 			edges = new ArrayList<>();
-			propertyDatum2newEdges.put(propertyDatum, edges);
+			basePropertyDatum2newEdges.put(basePropertyDatum, edges);
 		}
 		if (!edges.contains(newEdge)) {
 			edges.add(newEdge);
-			for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuperPropertyDatums())) {
-				addNewEdge(region, newEdge, superAbstractDatum);
-			}
+			//		for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuperPropertyDatums())) {
+			//			addNewEdge(region, newEdge, superAbstractDatum);
+			//		}
 		}
 	}
 
@@ -239,7 +240,7 @@ public class OriginalContentsAnalysis
 	 */
 	private @Nullable Iterable<@NonNull NavigableEdge> getCompositeNewEdges(@NonNull NavigableEdge predicatedEdge) {
 		Set<@NonNull NavigableEdge> realizedEdges = null;
-		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> entry : propertyDatum2newEdges.entrySet()) {
+		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> entry : basePropertyDatum2newEdges.entrySet()) {
 			Property property = entry.getKey().getReferredProperty();
 			if (property != null) {
 				@Nullable Property compositeProperty = null;
@@ -310,7 +311,7 @@ public class OriginalContentsAnalysis
 			producingRegions = new HashSet<>();
 			if (classAnalysis != null) {
 				for (@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> subClassAnalysis : classAnalysis.getSubClassAnalyses()) {
-					for (@NonNull PartialRegionAnalysis<@NonNull RegionsAnalysis> regionAnalysis : subClassAnalysis.getProducers()) {
+					for (@NonNull PartialRegionAnalysis<@NonNull RegionsAnalysis> regionAnalysis : subClassAnalysis.getExactProducers()) {
 						producingRegions.add((RuleRegion) regionAnalysis.getRegion());
 					}
 				}
@@ -348,13 +349,14 @@ public class OriginalContentsAnalysis
 			return getCompositeNewEdges(edge);
 		}
 		PropertyDatum propertyDatum = getPropertyDatum(edge);
+		PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
 		//		if (propertyDatum == null) {
 		//			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
 		//		}
 		//		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
 		//			return null;
 		//		}
-		Iterable<@NonNull NavigableEdge> realizedEdges = propertyDatum2newEdges.get(propertyDatum);
+		Iterable<@NonNull NavigableEdge> realizedEdges = basePropertyDatum2newEdges.get(basePropertyDatum);
 		if (realizedEdges == null) {
 			return null;
 		}

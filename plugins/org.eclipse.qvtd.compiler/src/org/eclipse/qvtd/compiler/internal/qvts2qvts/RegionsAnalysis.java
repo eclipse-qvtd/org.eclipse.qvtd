@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionsAnalysis;
 
 /**
- * PartitionAnalysis captures the analysis of a Partition.
+ * RegionsAnalysis manages the ClassDatum and PropertyDatum usage by regions for a RegionsAnalysis.
  */
 public interface RegionsAnalysis extends PartialRegionsAnalysis<@NonNull RegionsAnalysis>
 {

@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 /**
- * A RelationalTransformationAnalysis accumulates the tesults of analyzing a RelationalTransformation and its contents.
+ * RelationalTransformationAnalysis provides the QVTr management of ClassDatum and PropertyDatum usage by regions for a RegionsAnalysis.
  */
 public class RelationalTransformationAnalysis extends AbstractTransformationAnalysis
 {

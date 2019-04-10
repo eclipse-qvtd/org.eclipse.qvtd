@@ -192,7 +192,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 		assert isNew(edge);
 		Property property = QVTscheduleUtil.getProperty(edge);
 		assert property != scheduleManager.getStandardLibraryHelper().getOclContainerProperty();		// oclContainer is not assignable
-		if (property.toString().contains("toA1") || property.toString().contains("ownsB")) {
+		if (property.toString().contains("height") || property.toString().contains("ownsB")) {
 			property.toString();
 		}
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
@@ -204,13 +204,13 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 		if (!producedPropertyAnalyses2.contains(producedTraceAnalysis)) {
 			producedPropertyAnalyses2.add(producedTraceAnalysis);
 		}
-		PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
+		/*	PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
 		if (oppositePropertyDatum != null) {
 			PartialRegionPropertyAnalysis<@NonNull PRA> oppositeProducedTraceAnalysis = partialRegionsAnalysis.addProducer(oppositePropertyDatum, this);
 			if (!producedPropertyAnalyses2.contains(oppositeProducedTraceAnalysis)) {
 				producedPropertyAnalyses2.add(oppositeProducedTraceAnalysis);
 			}
-		}
+		} */
 	}
 
 	private void addProductionOfMiddleEdge(@NonNull NavigableEdge edge) {

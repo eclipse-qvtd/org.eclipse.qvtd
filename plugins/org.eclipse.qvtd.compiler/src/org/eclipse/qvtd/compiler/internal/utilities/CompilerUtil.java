@@ -252,6 +252,10 @@ public class CompilerUtil extends QVTscheduleUtil
 			consumer2producers.put(partialRegionAnalysis, new HashSet<>());
 		}
 		for (@NonNull PartialRegionAnalysis<@NonNull PRA> consumer : partialRegionAnalyses) {
+			String name2 = consumer.getName();
+			if ("mapOperationCallExp_Operation_qvtr".equals(name2)) {
+				consumer.getClass();
+			}
 			Map<@NonNull Object, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> consumedElement2producers = null;
 			if (Iterables.contains(partialRegionAnalyses, consumer)) {
 				consumedElement2producers = new HashMap<>();
@@ -269,7 +273,7 @@ public class CompilerUtil extends QVTscheduleUtil
 			if (consumedClassAnalyses != null) {
 				for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> consumedClassAnalysis : consumedClassAnalyses) {
 					for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> subConsumedClass : consumedClassAnalysis.getSubClassAnalyses()) {
-						for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : subConsumedClass.getProducers()) {
+						for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : subConsumedClass.getExactProducers()) {
 							Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
 							assert producers != null;
 							producers.add(producer);
@@ -289,10 +293,10 @@ public class CompilerUtil extends QVTscheduleUtil
 			if (consumedPropertyAnalyses != null) {
 				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> consumedPropertyAnalysis : consumedPropertyAnalyses) {
 					String name = consumedPropertyAnalysis.getName();
-					if ("fromAttributes".equals(name)) {
+					if ("toA2".equals(name)) {
 						CompilerUtil.class.getName();
 					}
-					for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : consumedPropertyAnalysis.getProducers()) {
+					for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : consumedPropertyAnalysis.getCompatibleProducers()) {
 						Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
 						assert producers != null;
 						producers.add(producer);

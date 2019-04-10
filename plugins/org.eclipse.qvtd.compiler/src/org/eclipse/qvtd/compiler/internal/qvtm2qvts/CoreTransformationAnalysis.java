@@ -17,7 +17,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 /**
- * A CoreTransformationAnalysis accumulates the tesults of analyzing a Core Transformation and its contents.
+ * CoreTransformationAnalysis provides the QVTc management of ClassDatum and PropertyDatum usage by regions for a RegionsAnalysis.
  */
 public class CoreTransformationAnalysis extends AbstractTransformationAnalysis
 {
