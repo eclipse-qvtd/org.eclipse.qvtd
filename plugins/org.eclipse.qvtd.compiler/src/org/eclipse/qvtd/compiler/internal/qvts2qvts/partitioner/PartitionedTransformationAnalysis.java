@@ -154,10 +154,6 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
-				String name = partition.getName();
-				if ("complexAttributeComplexAttributes«local»".equals(name)) {
-					getClass();
-				}
 				if (s != null) {
 					s.append("\n  [" + partition.getPassRangeText() + "] " + partition);
 				}
