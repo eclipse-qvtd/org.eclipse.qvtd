@@ -1,0 +1,4 @@
+# Debugging options for the org.eclipse.qvtd.umlx plug-in
+
+# Turn on tracing of dead variables
+org.eclipse.qvtd.umlx/qvtr2umlx/dead-variable=false

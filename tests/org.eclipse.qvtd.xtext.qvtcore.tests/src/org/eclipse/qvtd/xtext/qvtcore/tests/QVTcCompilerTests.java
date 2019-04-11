@@ -414,6 +414,27 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTcCompiler_SimpleUML2RDBMS_CG() throws Exception {
+		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
+		/*	TransformationPartitioner.REGION_IMMEDIATE_PREDECESSORS.setState(true);
+		TransformationPartitioner.REGION_TRANSITIVE_PREDECESSORS.setState(true);
+		TransformationPartitioner.REGION_TRANSITIVE_SUCCESSORS.setState(true);
+		TransformationPartitioner.REGION_CYCLES.setState(true);
+		TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);
+		TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);
+		TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);
+		TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);
+		TransformationPartitioner.CONTAINMENT.setState(true);
+		TransformationPartitioner.PARTITION_CYCLES.setState(true);
+		TransformationPartitioner.ROOT_SCHEDULE_PREDECESSORS.setState(true);
+		TransformationPartitioner.ROOT_SCHEDULE.setState(true);
+		TransformationPartitioner.CYCLE_SCHEDULE_PREDECESSORS.setState(true);
+		TransformationPartitioner.CYCLE_SCHEDULE.setState(true);
+		TransformationPartitioner.PARALLEL_SCHEDULE.setState(true);
+		TransformationPartitioner.PROPERTY_ACCESS_ANALYSIS.setState(true);
+		TransformationPartitioner.PROPERTY_ACCESS_SYNTHESIS.setState(true);
+		//	TransformationPartitioner.MERGE_SEQUENTIAL.setState(true);
+		QVTiProductionConsumption.SUMMARY.setState(true); */
+
 		//		OperationDependencyAnalysis.CALL.setState(true);
 		//		OperationDependencyAnalysis.CREATE.setState(true);
 		//		OperationDependencyAnalysis.FINISH.setState(true);
@@ -423,14 +444,13 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		OperationDependencyAnalysis.START.setState(true);
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//		TransformationPartitioner.DISCRIMINATION.setState(true);
 		//		Scheduler.CONNECTION_ROUTING.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
 		//		Scheduler.REGION_CYCLES.setState(true);
 		//		Scheduler.REGION_DEPTH.setState(true);
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
-		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
-		QVTscheduleConstants.POLLED_PROPERTIES.setState(true);
 		Splitter.RESULT.setState(true);
 		Splitter.STAGES.setState(true);
 		Splitter.RESULT.setState(true);

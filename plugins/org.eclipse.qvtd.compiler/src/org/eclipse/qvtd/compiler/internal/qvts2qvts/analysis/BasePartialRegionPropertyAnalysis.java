@@ -63,6 +63,11 @@ public class BasePartialRegionPropertyAnalysis<@NonNull PRA extends PartialRegio
 	}
 
 	@Override
+	public @NonNull BasePartialRegionPropertyAnalysis<@NonNull PRA> getBasePropertyAnalysis() {
+		return this;
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getConsumers() {
 		throw new UnsupportedOperationException();
 	}

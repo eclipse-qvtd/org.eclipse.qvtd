@@ -35,7 +35,9 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.CompilerStep;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.MappingProblem;
@@ -52,6 +54,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVisitor<@Nullable Object, @Nullable Object>
 {
+	public static final @NonNull TracingOption SUMMARY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvti/check/summary");
+
 	/**
 	 * Connection aggregates the producer/consumer analysis of a CompleteClass property slot value.
 	 *
@@ -142,7 +146,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			return s.toString();
 		}
 
-		public void validate() {
+		public void validate(@Nullable StringBuilder s) {
 			if ("ClassToTable::fromAttributes".equals(toString())) {
 				getClass();
 			}
@@ -155,12 +159,14 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
 				summary.setConsumer(mapping, completeClass, consumer);
 			}
-			System.out.println(summary.appendConnectionAnalysis());
+			if (s != null) {
+				s.append("\n  " + summary.appendConnectionAnalysis());
+			}
 			//	for (@NonNull NamedElement producer : producers) {
 			summary.checkProducers();
 			//	}
 			for (@NonNull NavigationCallExp consumer : consumers) {
-				summary.checkConsumer(consumer);
+				summary.checkConsumer(s, consumer);
 			}
 		}
 	}
@@ -209,7 +215,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			return s.toString();
 		}
 
-		public void checkConsumer(@NonNull NavigationCallExp consumer) {
+		public void checkConsumer(@Nullable StringBuilder s, @NonNull NavigationCallExp consumer) {
 			//	Property referredProperty = QVTimperativeUtil.getReferredProperty(consumer);
 			//	Map<@NonNull CompleteClass, @NonNull ConnectionAnalysis> class2connection = property2class2connection.get(referredProperty);
 			//	assert class2connection != null;
@@ -252,8 +258,10 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 						Mapping mapping2 = QVTimperativeUtil.getContainingMapping(consumer2);
 						summary.setConsumer(mapping2, completeClass, consumer2);
 					}
-					System.out.println(summary.appendConnectionAnalysis());
-					summary.checkConsumer(consumer);
+					if (s != null) {
+						s.append(summary.appendConnectionAnalysis());
+					}
+					summary.checkConsumer(s, consumer);
 					//	DomainUsage usage = domainUsageAnalysis.getUsage(callExp);
 					//	if (!usage.isInput() && !usage.isPrimitive()) {
 					//	StringBuilder s2 = initProblem(null, " should be produced");
@@ -510,6 +518,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		Set<@NonNull Property> allProperties = new HashSet<>(property2class2connection.keySet());
 		List<@NonNull Property> sortedProperties = new ArrayList<>(allProperties);
 		Collections.sort(sortedProperties, NameUtil.NAMEABLE_COMPARATOR);
+		StringBuilder s = SUMMARY.isActive() ? new StringBuilder() : null;
 		for (@NonNull Property property : sortedProperties) {
 			Map<@NonNull CompleteClass, @NonNull ConnectionAnalysis> class2connection = property2class2connection.get(property);
 			if (class2connection != null) {
@@ -518,9 +527,12 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				for (@NonNull CompleteClass asClass : sortedClasses) {
 					ConnectionAnalysis connection = class2connection.get(asClass);
 					assert connection != null;
-					connection.validate();
+					connection.validate(s);
 				}
 			}
+		}
+		if (s != null) {
+			SUMMARY.println(s.toString());
 		}
 	}
 

@@ -34,7 +34,6 @@ public class QVTscheduleConstants
 
 	public static final @NonNull TracingOption CONNECTION_CREATION = new TracingOption(PLUGIN_ID, "qvtm2qvts/connectionCreation");	// FIXME
 	public static final @NonNull TracingOption CONNECTION_ROUTING = new TracingOption(PLUGIN_ID, "qvtm2qvts/connectionRouting");
-	public static final @NonNull TracingOption POLLED_PROPERTIES = new TracingOption(PLUGIN_ID, "qvts2qvti/polledProperties");	// FIXME
 
 	public static final @NonNull String GLABAL_MAPPING_NAME = "«global»";
 	public static final @NonNull String LOAD_MAPPING_NAME = "«load»";

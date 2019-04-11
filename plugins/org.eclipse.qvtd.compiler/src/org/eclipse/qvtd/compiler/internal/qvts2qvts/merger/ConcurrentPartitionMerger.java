@@ -30,6 +30,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MergedPartitionF
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
@@ -164,7 +165,7 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 					}
 				}
 				if (merges != null) {
-					System.out.println("Concurrent Merge " + merges);
+					TransformationPartitioner.MERGE_CONCURRENT.println("" + merges);
 					BasicPartition firstPartition = merges.get(0).getPartition();
 					CompositePartition owningCompositePartition = firstPartition.getOwningCompositePartition();
 					assert owningCompositePartition != null;

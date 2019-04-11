@@ -49,6 +49,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -88,12 +89,15 @@ import org.eclipse.qvtd.umlx.UMLXElement;
 import org.eclipse.qvtd.umlx.UMLXFactory;
 import org.eclipse.qvtd.umlx.UMLXModel;
 import org.eclipse.qvtd.umlx.UMLXTypedElement;
+import org.eclipse.qvtd.umlx.compiler.UMLXCompilerChain;
 import org.eclipse.qvtd.umlx.utilities.UMLXUtil;
 
 import com.google.common.collect.Iterables;
 
 public class QVTr2UMLX
 {
+	public static final @NonNull TracingOption DEAD_VARIABLE = new TracingOption(UMLXCompilerChain.PLUGIN_ID, "qvtr2umlx/dead-variable");
+
 	protected static abstract class AbstractVisitor extends AbstractExtendingQVTrelationVisitor<@Nullable UMLXElement, @NonNull QVTr2UMLX>
 	{
 		public AbstractVisitor(@NonNull QVTr2UMLX context) {
@@ -312,7 +316,7 @@ public class QVTr2UMLX
 					List<@NonNull RelPatternNode> ownedNodes = null;
 					List<@NonNull RelationDomain> qvtrDomains = variable2domains.get(qvtrVariable);
 					if (qvtrDomains == null) {
-						System.out.println("Dead variable " + qvtrRelation.getName() + "." + qvtrVariable.getName());
+						DEAD_VARIABLE.println("Dead variable " + qvtrRelation.getName() + "." + qvtrVariable.getName());
 					}
 					else if (qvtrDomains.size() == 1) {
 						RelationDomain qvtrDomain = qvtrDomains.get(0);
@@ -393,7 +397,7 @@ public class QVTr2UMLX
 					List<@NonNull RelPatternNode> ownedNodes = null;
 					List<@NonNull RelationDomain> qvtrDomains = variable2domains.get(qvtrVariable);
 					if (qvtrDomains == null) {
-						System.out.println("Dead variable " + qvtrRelation.getName() + "." + qvtrVariable.getName());
+						DEAD_VARIABLE.println("Dead variable " + qvtrRelation.getName() + "." + qvtrVariable.getName());
 					}
 					else if (qvtrDomains.size() == 1) {
 						ownedNodes = UMLXUtil.Internal.getOwnedRelPatternNodesList(relDomainNode);

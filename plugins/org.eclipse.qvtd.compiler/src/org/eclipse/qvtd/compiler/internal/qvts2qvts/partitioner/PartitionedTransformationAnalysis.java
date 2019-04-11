@@ -27,7 +27,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -58,7 +57,7 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		this.transformationPartitioner = transformationPartitioner;
 	}
 
-	public void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigationEdge predicatedEdge) {
+	public void addCheckedEdge(@Nullable StringBuilder s, @NonNull TypedModel typedModel, @NonNull NavigationEdge predicatedEdge) {
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges2 = typedModel2property2predicatedEdges;
 		assert typedModel2property2predicatedEdges2 != null;
 		Property property = QVTscheduleUtil.getProperty(predicatedEdge);
@@ -75,14 +74,16 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		if (!predicatedEdges.contains(predicatedEdge)) {		// Same edge can come from multiple partitions
 			predicatedEdges.add(predicatedEdge);
 		}
-		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " predicated for " + property);
+		if (s != null) {
+			s.append("\n    " + typedModel + " predicated for " + property);
+		}
 	}
 
 	public void addPartitionAnalysis(@NonNull AbstractPartitionAnalysis<? extends @NonNull Partition> partitionAnalysis) {
 		partition2partitionAnalysis.put(partitionAnalysis.getPartition(), partitionAnalysis);
 	}
 
-	public void addRealizedEdge(@NonNull TypedModel typedModel, @NonNull NavigationEdge realizedEdge) {
+	public void addRealizedEdge(@Nullable StringBuilder s, @NonNull TypedModel typedModel, @NonNull NavigationEdge realizedEdge) {
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges2 = typedModel2property2realizedEdges;
 		assert typedModel2property2realizedEdges2 != null;
 		Property property = QVTscheduleUtil.getProperty(realizedEdge);
@@ -98,7 +99,9 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		}
 		assert !realizedEdges.contains(realizedEdge);		// Can only be realized in one partition.
 		realizedEdges.add(realizedEdge);
-		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " realized for " + property);
+		if (s != null) {
+			s.append("\n    " + typedModel + " realized for " + property);
+		}
 	}
 
 	public void analyzeFallibilities(@NonNull RootPartitionAnalysis rootPartitionAnalysis) {
@@ -153,12 +156,18 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 	public void analyzePartitionEdges(@NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		typedModel2property2predicatedEdges = new HashMap<>();
 		typedModel2property2realizedEdges = new HashMap<>();
+		StringBuilder s = TransformationPartitioner.PROPERTY_ACCESS_ANALYSIS.isActive() ? new StringBuilder() : null;
 		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
-				QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + partition + " " + partition.getPassRangeText());
-				((PartitionAnalysis)partitionAnalysis).analyzePartitionEdges();
+				if (s != null) {
+					s.append("\n  [" + partition.getPassRangeText() + "] " + partition);
+				}
+				((PartitionAnalysis)partitionAnalysis).analyzePartitionEdges(s);
 			}
+		}
+		if (s != null) {
+			TransformationPartitioner.PROPERTY_ACCESS_ANALYSIS.println(s.toString());
 		}
 	}
 

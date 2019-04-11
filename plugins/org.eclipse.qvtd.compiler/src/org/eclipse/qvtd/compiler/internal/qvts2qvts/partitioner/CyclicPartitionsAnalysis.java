@@ -20,16 +20,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -37,7 +34,7 @@ import com.google.common.collect.Sets;
  *
  * This forms the basis of the cycle encpasulation and parallel schedule.
  */
-public class CyclicPartitionsAnalysis
+public class CyclicPartitionsAnalysis extends AbstractCyclicPartialRegionsAnalysis<@NonNull PartitionsAnalysis>
 {
 	protected final @NonNull TransformationPartitioner transformationPartitioner;
 	protected final @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> leafPartitionAnalyses;
@@ -63,8 +60,8 @@ public class CyclicPartitionsAnalysis
 	 * NB cycles may involve trace classes and their trace class properties.
 	 */
 	public @NonNull RootPartitionAnalysis analyze(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> leafPartitionAnalysis2predecessors = CompilerUtil.computeTransitivePredecessors(leafPartitionAnalyses);
-		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> leafPartitionAnalysis2successors = CompilerUtil.computeTransitiveSuccessors(leafPartitionAnalysis2predecessors);
+		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> leafPartitionAnalysis2predecessors = CompilerUtil.computeTransitivePredecessors(leafPartitionAnalyses, TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS, TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS);
+		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> leafPartitionAnalysis2successors = CompilerUtil.computeTransitiveSuccessors(leafPartitionAnalysis2predecessors, TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS);
 		Set<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> intersections = new HashSet<>();
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> leafPartitionAnalysis : leafPartitionAnalyses) {
 			Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> predecessors = leafPartitionAnalysis2predecessors.get(leafPartitionAnalysis);
@@ -220,46 +217,48 @@ public class CyclicPartitionsAnalysis
 		String rootName = QVTscheduleConstants.ROOT_MAPPING_NAME;
 		RootPartitionAnalysis rootPartitionAnalysis = RootPartitionAnalysis.createRootPartitionAnalysis(partitionedTransformationAnalysis, transformationPartitioner.getTransformationAnalysis(), rootName, partition2predecessors);
 		acyclicPartitionHierarchy.add(rootPartitionAnalysis);
-		if (TransformationPartitioner.CYCLES.isActive()) {
-			showCycles(partitionedTransformationAnalysis, acyclicPartitionHierarchy);
+		if (TransformationPartitioner.PARTITION_CYCLES.isActive()) {
+			for (@NonNull CompositePartitionAnalysis cyclicPartitionAnalysis : acyclicPartitionHierarchy) {
+				TransformationPartitioner.PARTITION_CYCLES.println(cyclicPartitionAnalysis.getName());
+				showCycles(TransformationPartitioner.PARTITION_CYCLES, cyclicPartitionAnalysis.getPartitionAnalyses());
+			}
 		}
 		return rootPartitionAnalysis;
 	}
 
-	protected void showCycles(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, Iterable<@NonNull CompositePartitionAnalysis> cyclicPartitionAnalyses) {
+	/*	protected void showCycles(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, Iterable<@NonNull CompositePartitionAnalysis> cyclicPartitionAnalyses) {
 		if (Iterables.isEmpty(cyclicPartitionAnalyses)) {
-			TransformationPartitioner.CYCLES.println("No cycles");
+			TransformationPartitioner.PARTITION_CYCLES.println("No cycles");
 		}
 		else {
 			for (@NonNull CompositePartitionAnalysis cyclicPartitionAnalysis : cyclicPartitionAnalyses) {
 				StringBuilder s = new StringBuilder();
-				s.append("\n  Partitions:");
 				List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitions2 = Lists.newArrayList(cyclicPartitionAnalysis.getPartitionAnalyses());
 				Collections.sort(partitions2, NameUtil.NAMEABLE_COMPARATOR);
 				for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partition : partitions2) {
-					s.append("\n\t" + partition);
+					s.append("\n" + partition);
 					Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> consumedClassAnalyses = partition.getConsumedClassAnalyses();
 					if (consumedClassAnalyses != null) {
 						for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> classAnalysis : consumedClassAnalyses) {
-							s.append("\n\t  =>" + classAnalysis);
+							s.append("\n  =>" + classAnalysis);
 						}
 					}
 					Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> producedClassAnalyses = partition.getProducedClassAnalyses();
 					if (producedClassAnalyses != null) {
 						for (@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> classAnalysis : producedClassAnalyses) {
-							s.append("\n\t  <=" + classAnalysis);
+							s.append("\n  <=" + classAnalysis);
 						}
 					}
 					Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> consumedPropertyAnalyses = partition.getConsumedPropertyAnalyses();
 					if (consumedPropertyAnalyses != null) {
 						for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> propertyAnalysis : consumedPropertyAnalyses) {
-							s.append("\n\t  =>" + propertyAnalysis);
+							s.append("\n  =>" + propertyAnalysis + "(" + propertyAnalysis.getBasePropertyAnalysis() +")");
 						}
 					}
 					Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis>> producedPropertyAnalyses = partition.getProducedPropertyAnalyses();
 					if (producedPropertyAnalyses != null) {
 						for (@NonNull PartialRegionPropertyAnalysis<@NonNull PartitionsAnalysis> propertyAnalysis : producedPropertyAnalyses) {
-							s.append("\n\t  <=" + propertyAnalysis);
+							s.append("\n  <=" + propertyAnalysis + "(" + propertyAnalysis.getBasePropertyAnalysis() +")");
 						}
 					}
 				}
@@ -274,9 +273,9 @@ public class CyclicPartitionsAnalysis
 				Collections.sort(propertyAnalyses, NameUtil.NAMEABLE_COMPARATOR);
 				for (@NonNull PropertyPartitionAnalysis propertyAnalysis : propertyAnalyses) {
 					s.append("\n\t" + propertyAnalysis);
-				} */
-				TransformationPartitioner.CYCLES.println(s.toString());
+				} * /
+				TransformationPartitioner.PARTITION_CYCLES.println(s.toString());
 			}
 		}
-	}
+	} */
 }

@@ -30,6 +30,8 @@ import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
  */
 public class UMLXCompilerChain extends QVTrCompilerChain
 {
+	public static final @NonNull String PLUGIN_ID = UMLXCompilerChain.class.getPackage().getName();
+
 	protected static class UMLX2QVTrCompilerStep extends AbstractCompilerStep
 	{
 		public UMLX2QVTrCompilerStep(@NonNull CompilerChain compilerChain) {

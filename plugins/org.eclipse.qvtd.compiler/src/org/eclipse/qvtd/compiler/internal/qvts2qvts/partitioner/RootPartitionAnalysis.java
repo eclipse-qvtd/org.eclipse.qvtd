@@ -49,9 +49,15 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<@N
 	@Override
 	protected @NonNull List<@NonNull Concurrency> createPartitionSchedule() {
 		List<@NonNull Concurrency>  flatPartitionSchedule = new ArrayList<>();
-		Iterable<@NonNull Concurrency> parallelSchedule = CompilerUtil.computeParallelSchedule(originalPartitionAnalysis2predecessors);
+		Iterable<@NonNull Concurrency> parallelSchedule = CompilerUtil.computeParallelSchedule(originalPartitionAnalysis2predecessors, TransformationPartitioner.ROOT_SCHEDULE_PREDECESSORS);
+		if (TransformationPartitioner.ROOT_SCHEDULE.isActive()) {
+			CompilerUtil.traceSchedule(TransformationPartitioner.ROOT_SCHEDULE, getName(), parallelSchedule);
+		}
 		for (@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> concurrency : parallelSchedule) {
 			appendConcurrency(flatPartitionSchedule, concurrency);
+		}
+		if (TransformationPartitioner.PARALLEL_SCHEDULE.isActive()) {
+			CompilerUtil.traceSchedule(TransformationPartitioner.PARALLEL_SCHEDULE, null, flatPartitionSchedule);
 		}
 		return flatPartitionSchedule;
 	}

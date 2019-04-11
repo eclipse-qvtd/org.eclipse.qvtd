@@ -112,8 +112,8 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 				}
 			}
 		}
-		System.out.println("Containment: " + containmentPropertyPartitionAnalyses);
-		System.out.println("Container: " + containerPropertyPartitionAnalyses);
+		TransformationPartitioner.CONTAINMENT.println("Containment: " + containmentPropertyPartitionAnalyses);
+		TransformationPartitioner.CONTAINMENT.println("Container: " + containerPropertyPartitionAnalyses);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	 */
 	protected @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> computeBaseRecursingSteps(@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> recursingSteps, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> badPredecessors) {
 		Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> baseRecursingSteps = new HashSet<>();
-		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> immediatePredecessors = CompilerUtil.computeImmediatePredecessors(recursingSteps);
+		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> immediatePredecessors = CompilerUtil.computeImmediatePredecessors(recursingSteps, TransformationPartitioner.CYCLE_SCHEDULE_PREDECESSORS);
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : recursingSteps) {
 			Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> predecessors = immediatePredecessors.get(partitionAnalysis);
 			assert predecessors != null;
@@ -135,14 +135,14 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	}
 
 	protected @NonNull List<@NonNull Concurrency> computeRecursiveSchedule(@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> recursingSteps) {
-		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> immediatePredecessors = CompilerUtil.computeImmediatePredecessors(recursingSteps);
+		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> immediatePredecessors = CompilerUtil.computeImmediatePredecessors(recursingSteps, TransformationPartitioner.CYCLE_SCHEDULE_PREDECESSORS);
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : recursingSteps) {
 			Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> predecessors = immediatePredecessors.get(partitionAnalysis);
 			assert predecessors != null;
 			predecessors.retainAll(recursingSteps);
 		}
 		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> partitionAnalysis2predecessors = CompilerUtil.computeClosure(immediatePredecessors);
-		return CompilerUtil.computeParallelSchedule(partitionAnalysis2predecessors);
+		return CompilerUtil.computeParallelSchedule(partitionAnalysis2predecessors, TransformationPartitioner.CYCLE_SCHEDULE_PREDECESSORS);
 	}
 
 	@Override
@@ -311,6 +311,9 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		}
 		partitionSchedule.get(0).setCycleStart();
 		partitionSchedule.get(partitionSchedule.size()-1).setCycleEnd();
+		if (TransformationPartitioner.CYCLE_SCHEDULE.isActive()) {
+			CompilerUtil.traceSchedule(TransformationPartitioner.CYCLE_SCHEDULE, getName(), partitionSchedule);
+		}
 		return partitionSchedule;
 	}
 

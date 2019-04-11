@@ -614,14 +614,18 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			//
 			//	Create a connection between each consumer and the corresponding introducer/producer.
 			//
+			StringBuilder s = QVTscheduleConstants.CONNECTION_CREATION.isActive() ? new StringBuilder() : null;
 			for (@NonNull Region region : activeRegions2) {
 				if (!(region instanceof LoadingRegion)) {
 					String name = region.getName();
 					if ("classComplexAttributes".equals(name)) {
 						getClass();
 					}
-					connectionManager.createIncomingConnections(rootRegion, region);
+					connectionManager.createIncomingConnections(s, rootRegion, region);
 				}
+			}
+			if (s != null) {
+				QVTscheduleConstants.CONNECTION_CREATION.println(s.toString());;
 			}
 		}
 		scheduleManager.writeDebugGraphs("4-pre-partition", true, true, false);

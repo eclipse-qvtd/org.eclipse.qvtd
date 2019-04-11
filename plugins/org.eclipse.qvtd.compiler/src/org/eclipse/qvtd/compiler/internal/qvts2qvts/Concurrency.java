@@ -101,17 +101,21 @@ public class Concurrency implements Iterable<@NonNull PartialRegionAnalysis<@Non
 		StringBuilder s = new StringBuilder();
 		s.append("[");
 		s.append(passNumber);
+		toString(s);
+		s.append("]");
+		return s.toString();
+	}
+
+	public void toString(@NonNull StringBuilder s) {
 		if (isCycleStart) {
 			s.append(", «start»");
-		}
-		if (isCycleEnd) {
-			s.append(", «end»");
 		}
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitionAnalyses) {
 			s.append(", ");
 			s.append(partitionAnalysis);
 		}
-		s.append("]");
-		return s.toString();
+		if (isCycleEnd) {
+			s.append(", «end»");
+		}
 	}
 }

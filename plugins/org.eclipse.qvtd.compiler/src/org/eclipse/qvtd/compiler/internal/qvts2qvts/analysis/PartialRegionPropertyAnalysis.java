@@ -18,5 +18,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
  */
 public interface PartialRegionPropertyAnalysis<PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends PartialRegionElementAnalysis<@NonNull PRA>
 {
+	@NonNull BasePartialRegionPropertyAnalysis<@NonNull PRA> getBasePropertyAnalysis();
 	@NonNull PropertyDatum getPropertyDatum();
 }

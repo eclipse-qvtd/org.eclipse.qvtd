@@ -42,7 +42,6 @@ import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
@@ -218,7 +217,7 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG() throws Exception {
-		//		Splitter.GROUPS.setState(true);
+		/*	//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		AbstractTransformer.ASSIGNMENTS.setState(true);
@@ -235,17 +234,18 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTscheduleConstants.POLLED_PROPERTIES.setState(true);
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
 		//		FallibilityAnalysis.LOCAL.setState(true);;
-		TransformationPartitioner.CYCLES.setState(true);;
+		TransformationPartitioner.REGION_CYCLES.setState(true);;
+		TransformationPartitioner.PARTITION_CYCLES.setState(true);;
 		//		TransformationPartitioner.DISCRIMINATION.setState(true);;
-		TransformationPartitioner.PREDECESSORS.setState(true);;
-		TransformationPartitioner.SUCCESSORS.setState(true);;
+		TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);;
+		TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);;
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);;
 		//		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
-		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true); */
 		Class<? extends Transformer> txClass1 = null;
 		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);

@@ -79,7 +79,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 					this.value = ecoreValue;
 					break;
 				case ASSIGNED:
-					System.out.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
+					System.err.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
 					break;
 				case REASSIGNABLE:
 					mode = SlotMode.ASSIGNED;

@@ -1,4 +1,7 @@
-# Debugging options for the org.eclipse.ocl.examples.codegen plug-in
+# Debugging options for the org.eclipse.qvtd.compiler plug-in
+
+# Turn on tracing of the QVTi design rule check
+org.eclipse.qvtd.compiler/qvti/check/summary=false
 
 # Turn on tracing of the operation dependency analysis result of each unsuccessful attempt
 org.eclipse.qvtd.compiler/qvtm2qvts/dependency/attempt=false
@@ -47,9 +50,6 @@ org.eclipse.qvtd.compiler/qvtm2qvts/regionStack=false
 # Turn on tracing of the region traversal computation 
 org.eclipse.qvtd.compiler/qvtm2qvts/regionTraversal=false
 
-# Turn on tracing of the polled properties computation 
-org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
-
 # Turn on tracing of the QVTr relations callTree 
 #org.eclipse.qvtd.compiler/qvtr2qvtc/callTree=false
 # Turn on tracing of the QVTc synthesis 
@@ -73,21 +73,54 @@ org.eclipse.qvtd.compiler/qvts2qvts/fallibility/global=false
 # Turn on tracing of the contributing local fallibilities
 org.eclipse.qvtd.compiler/qvts2qvts/fallibility/local=false
 
+# Turn on tracing of the concurrent merger
+org.eclipse.qvtd.compiler/qvts2qvts/merge/concurrent=false
 # Turn on tracing of the early merge correlation attempts
 org.eclipse.qvtd.compiler/qvts2qvts/merge/early=false
 # Turn on tracing of the merge correelation failures
 org.eclipse.qvtd.compiler/qvts2qvts/merge/failure=false
 # Turn on tracing of the late merge correlation attempts
 org.eclipse.qvtd.compiler/qvts2qvts/merge/late=false
+# Turn on tracing of the sequential merger
+org.eclipse.qvtd.compiler/qvts2qvts/merge/sequential=false
 
 # Turn on tracing of the cycles that need partitioning
 org.eclipse.qvtd.compiler/qvts2qvts/partition/cycles=false
 # Turn on tracing of the properties that discriminate multiple consumers
 org.eclipse.qvtd.compiler/qvts2qvts/partition/discrimination=false
-# Turn on tracing of the predecessors of each mapping
-org.eclipse.qvtd.compiler/qvts2qvts/partition/predecessors=false
-# Turn on tracing of the successors of each mapping
-org.eclipse.qvtd.compiler/qvts2qvts/partition/successors=false
+# Turn on tracing of the immediate predecessors of each partition
+org.eclipse.qvtd.compiler/qvts2qvts/partition/immediate-predecessors=false
+# Turn on tracing of the transitive predecessors of each partition
+org.eclipse.qvtd.compiler/qvts2qvts/partition/transitive-predecessors=false
+# Turn on tracing of the transitive successors of each partition
+org.eclipse.qvtd.compiler/qvts2qvts/partition/transitive-successors=false
+
+# Turn on tracing of the analysis of property accesses by the schedule
+org.eclipse.qvtd.compiler/qvts2qvts/property/analysis=false
+# Turn on tracing of the synthesis of property access enforcement in the schedule
+org.eclipse.qvtd.compiler/qvts2qvts/property/analysis=false
+
+# Turn on tracing of the cycles in region dependencies
+org.eclipse.qvtd.compiler/qvts2qvts/region/cycles=false
+# Turn on tracing of the immediate predecessors of each region
+org.eclipse.qvtd.compiler/qvts2qvts/region/immediate-predecessors=false
+# Turn on tracing of the transitive predecessors of each region
+org.eclipse.qvtd.compiler/qvts2qvts/region/transitive-predecessors=false
+# Turn on tracing of the transitive successors of each region
+org.eclipse.qvtd.compiler/qvts2qvts/region/transitive-successors=false
+
+# Turn on tracing of containment to break cycles
+org.eclipse.qvtd.compiler/qvts2qvts/schedule/containment=false
+# Turn on tracing of the each cycle in the schedule
+org.eclipse.qvtd.compiler/qvts2qvts/schedule/cycle=false
+# Turn on tracing of the transitive predecessors of each cycle in the schedule
+org.eclipse.qvtd.compiler/qvts2qvts/schedule/cycle-predecessors=false
+# Turn on tracing of the each cycle of the flattened parallel schedule
+org.eclipse.qvtd.compiler/qvts2qvts/schedule/parallel=false
+# Turn on tracing of the each cycle of the root of the schedule
+org.eclipse.qvtd.compiler/qvts2qvts/schedule/root=false
+# Turn on tracing of the transitive predecessors of the root of the schedule
+org.eclipse.qvtd.compiler/qvts2qvts/schedule/root-predecessors=false
 
 # Turn on tracing of the analysis for splitting of multi-headed regions
 #org.eclipse.qvtd.compiler/qvtm2qvts/split/analysis=false

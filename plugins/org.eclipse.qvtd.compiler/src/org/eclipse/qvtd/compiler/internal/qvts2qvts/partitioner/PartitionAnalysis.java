@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
  */
 public interface PartitionAnalysis extends PartialRegionAnalysis<@NonNull PartitionsAnalysis>
 {
-	void analyzePartitionEdges();
+	void analyzePartitionEdges(@Nullable StringBuilder s);
 	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getClassAnalyses();
 	@Override
 	@NonNull Partition getPartition();

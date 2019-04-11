@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * Each ClassAnalysis identifies the usage of one middle trace class or property.
@@ -32,11 +33,16 @@ public abstract class ActualPartialRegionPropertyAnalysis<@NonNull PRA extends P
 	}
 
 	@Override
+	public @NonNull BasePartialRegionPropertyAnalysis<@NonNull PRA> getBasePropertyAnalysis() {
+		return basePropertyAnalysis;
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getCompatibleProducers() {
 		List<@NonNull PartialRegionAnalysis<@NonNull PRA>> compatibleProducers = new ArrayList<>();
 		Property compatibleProperty = propertyDatum.getReferredProperty();
-		ClassDatum owningClassDatum = propertyDatum.getOwningClassDatum();
-		CompleteClass owningCompleteClass = owningClassDatum.getCompleteClass();
+		ClassDatum owningClassDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
+		CompleteClass owningCompleteClass = QVTscheduleUtil.getCompleteClass(owningClassDatum);
 		Property compatibleOppositeProperty = compatibleProperty.getOpposite();
 		for (@NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> actualPropertyAnalysis : basePropertyAnalysis.propertyDatum2propertyAnalysis.values()) {
 			for (@NonNull PartialRegionAnalysis<@NonNull PRA> actualProducer : actualPropertyAnalysis.getExactProducers()) {

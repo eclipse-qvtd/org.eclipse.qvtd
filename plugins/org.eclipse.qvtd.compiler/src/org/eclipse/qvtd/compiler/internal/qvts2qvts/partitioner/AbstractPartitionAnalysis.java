@@ -49,7 +49,7 @@ public abstract class AbstractPartitionAnalysis<@NonNull P extends Partition> ex
 	 * Register all predicated and realized edges with the partitioned transformation analysis.
 	 */
 	@Override
-	public void analyzePartitionEdges() {}
+	public void analyzePartitionEdges(@Nullable StringBuilder s) {}
 
 	@Override
 	public @NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getClassAnalyses() {

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -63,7 +64,7 @@ public abstract class MappingPartitionAnalysis<@NonNull P extends MappingPartiti
 	}
 
 	@Override
-	public void analyzePartitionEdges() {
+	public void analyzePartitionEdges(@Nullable StringBuilder s) {
 		for (@NonNull Edge edge : getPartialEdges()) {
 			if (edge.isNavigation()) {
 				NavigationEdge navigationEdge = (NavigationEdge) edge;
@@ -72,10 +73,10 @@ public abstract class MappingPartitionAnalysis<@NonNull P extends MappingPartiti
 				TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 				if (isPredicated(edge)) {
 					assert !navigationEdge.isCast();
-					partitionedTransformationAnalysis.addCheckedEdge(typedModel, navigationEdge);
+					partitionedTransformationAnalysis.addCheckedEdge(s, typedModel, navigationEdge);
 				}
 				else if (isRealized(edge)) {
-					partitionedTransformationAnalysis.addRealizedEdge(typedModel, navigationEdge);
+					partitionedTransformationAnalysis.addRealizedEdge(s, typedModel, navigationEdge);
 				}
 			}
 		}

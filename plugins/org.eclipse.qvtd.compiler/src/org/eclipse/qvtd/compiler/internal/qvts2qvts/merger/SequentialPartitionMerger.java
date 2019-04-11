@@ -29,6 +29,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MergedPartitionF
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
@@ -79,7 +80,7 @@ public class SequentialPartitionMerger extends AbstractMerger
 												mergeablePartitionAnalyses.add((BasicPartitionAnalysis)sourcePartitionAnalysis);
 											}
 											mergeablePartitionAnalyses.add((BasicPartitionAnalysis)targetPartitionAnalysis);
-											System.out.println("Sequential Merge " + sourcePartition + " => " + connection + " => " + targetPartitionAnalysis);
+											TransformationPartitioner.MERGE_SEQUENTIAL.println(sourcePartition + " => " + connection + " => " + targetPartitionAnalysis);
 										}
 									}
 								}

@@ -47,7 +47,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
@@ -130,7 +129,7 @@ public class ConnectionManager
 	/**
 	 * Create an EdgeConnection for the predicatedEdge and/or its target node.
 	 */
-	private void createAttributeEdgeConnection(@NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
+	private void createAttributeEdgeConnection(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
 		RootRegion invokingRegion2 = rootRegion;
 		assert invokingRegion2 != null;
 		Node castTarget = castTargetNode;
@@ -161,8 +160,8 @@ public class ConnectionManager
 			if (attributeConnectionSourceEdges != null) {
 				EdgeConnection edgeConnection = getAttributeConnection(invokingRegion2, attributeConnectionSourceEdges, partialNames, predicatedProperty);
 				edgeConnection.addUsedTargetEdge(predicatedEdge, false);
-				if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
-					QVTscheduleConstants.CONNECTION_CREATION.println("  Attribute EdgeConnection \"" + edgeConnection + "\" to " + castTarget);
+				if (s != null) {
+					s.append("\n    Attribute EdgeConnection \"" + edgeConnection + "\" to " + castTarget);
 					//					Scheduler.CONNECTIONS.println("    classDatumAnalysis " + classDatumAnalysis);
 					//					for (@NonNull Node sourceNode : sourceNodes) {
 					//						Scheduler.CONNECTIONS.println("    from " + sourceNode.getRegion());
@@ -179,7 +178,7 @@ public class ConnectionManager
 	/**
 	 * Create an EdgeConnection for the predicatedEdge and/or its target node.
 	 */
-	private void createClassEdgeConnection(@NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
+	private void createClassEdgeConnection(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
 		RootRegion invokingRegion2 = rootRegion;
 		assert invokingRegion2 != null;
 		Node castTarget = castTargetNode;
@@ -228,14 +227,14 @@ public class ConnectionManager
 					}
 					if ((thoseEdges != null) && !nodeSourceRegions.containsAll(conformantEdgeSourceRegions)) {
 						EdgeConnection edgeConnection = getEdgeConnection(invokingRegion2, thoseEdges, predicatedProperty);
-						if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
-							QVTscheduleConstants.CONNECTION_CREATION.println("  EdgeConnection \"" + edgeConnection + "\" to " + predicatedEdge);
+						if (s != null) {
+							s.append("\n    EdgeConnection \"" + edgeConnection + "\" to " + predicatedEdge);
 						}
 						if (!Iterables.contains(edgeConnection.getTargetEdges(), castEdge)) {
 							edgeConnection.addUsedTargetEdge(castEdge, false);
-							if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
+							if (s != null) {
 								for (@NonNull NavigableEdge thatEdge : thoseEdges) {
-									QVTscheduleConstants.CONNECTION_CREATION.println("    from " + thatEdge.getOwningRegion() + "  : " + thatEdge);
+									s.append("\n      from " + thatEdge.getOwningRegion() + "  : " + thatEdge);
 								}
 							}
 						}
@@ -256,10 +255,10 @@ public class ConnectionManager
 						) {
 					NodeConnection predicatedConnection = getNodeConnection(invokingRegion2, sourceNodes, classDatum, scheduleManager.getDomainUsage(classDatum));
 					predicatedConnection.addUsedTargetNode(castTarget, false);
-					if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
-						QVTscheduleConstants.CONNECTION_CREATION.println("  NodeConnection \"" + predicatedConnection + "\" to " + castTarget);
+					if (s != null) {
+						s.append("\n    NodeConnection \"" + predicatedConnection + "\" to " + castTarget);
 						for (@NonNull Node sourceNode : sourceNodes) {
-							QVTscheduleConstants.CONNECTION_CREATION.println("    from " + sourceNode.getOwningRegion() + " : " + sourceNode);
+							s.append("\n      from " + sourceNode.getOwningRegion() + " : " + sourceNode);
 						}
 					}
 				}
@@ -298,7 +297,7 @@ public class ConnectionManager
 	 * Returns null if the pattern surrounding the headNode conflicts with the pattern
 	 * surrounding all possible sources.
 	 */
-	private @Nullable NodeConnection createHeadConnection(@NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node headNode) {
+	private @Nullable NodeConnection createHeadConnection(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node headNode) {
 		RootRegion invokingRegion2 = rootRegion;
 		List<@NonNull Node> headSources = null;
 		//
@@ -360,10 +359,10 @@ public class ConnectionManager
 		else {
 			headConnection.addPassedTargetNode(headNode);
 		}
-		if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
-			QVTscheduleConstants.CONNECTION_CREATION.println((headNode.isDependency() ? "  Extra NodeConnection " : "  Head NodeConnection \"") + headConnection + "\" to " + headNode);
+		if (s != null) {
+			s.append((headNode.isDependency() ? "\n    Extra NodeConnection " : "\n    Head NodeConnection \"") + headConnection + "\" to " + headNode);
 			for (@NonNull Node sourceNode : headSources) {
-				QVTscheduleConstants.CONNECTION_CREATION.println("    from " + sourceNode.getOwningRegion() + " : " + sourceNode);
+				s.append("\n      from " + sourceNode.getOwningRegion() + " : " + sourceNode);
 			}
 		}
 		return headConnection;
@@ -373,17 +372,17 @@ public class ConnectionManager
 	 * Return the Connections to each of the head nodes. Returns null if the pattern surrounding any headNode conflicts with the pattern
 	 * surrounding all its possible sources. (Any head with no sources is a non-invocation.)
 	 */
-	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections(@NonNull RootRegion rootRegion, @NonNull Region region) {
+	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region) {
 		List<@NonNull NodeConnection> headConnections = null;
 		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
 			if (headNode.isDependency()) {
-				createHeadConnection(rootRegion, region, headNode);	/** Dependency nodes have extra not-head connections. */
+				createHeadConnection(s, rootRegion, region, headNode);	/** Dependency nodes have extra not-head connections. */
 			}
 			else {
-				NodeConnection headConnection = createHeadConnection(rootRegion, region, headNode);
+				NodeConnection headConnection = createHeadConnection(s, rootRegion, region, headNode);
 				if (headConnection == null) {
 					scheduleManager.addRegionWarning(region, "No incoming connections for " + headNode.getName());
-					headConnection = createHeadConnection(rootRegion, region, headNode);	// FIXME debugging
+					headConnection = createHeadConnection(s, rootRegion, region, headNode);	// FIXME debugging
 					return null;										//  so matching only fails for unmatchable real heads
 				}
 				else {
@@ -426,12 +425,12 @@ public class ConnectionManager
 	 * Edges dependent on realization elsewhere are represented by connection from all head nodes of the dependent region
 	 * to all heads of the realizing region.
 	 */
-	public void createIncomingConnections(@NonNull RootRegion rootRegion, @NonNull Region region) {
-		if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
-			QVTscheduleConstants.CONNECTION_CREATION.println("connecting " + region);
+	public void createIncomingConnections(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region) {
+		if (s != null) {
+			s.append("\n  " + region);
 		}
 		assert !(region instanceof LoadingRegion);
-		Iterable<@NonNull NodeConnection> headConnections = createHeadConnections(rootRegion, region);
+		Iterable<@NonNull NodeConnection> headConnections = createHeadConnections(s, rootRegion, region);
 		assert (headConnections != null);// {
 		//
 		//	Gather multiple edges sharing the same target to avoid multiple incoming connections -- FIXME no need to gather
@@ -457,13 +456,12 @@ public class ConnectionManager
 			List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
 			assert predicatedEdges != null;
 			if (castTargetNode.isClass()) {
-				createClassEdgeConnection(rootRegion, region, castTargetNode, predicatedEdges);
+				createClassEdgeConnection(s, rootRegion, region, castTargetNode, predicatedEdges);
 			}
 			else {
-				createAttributeEdgeConnection(rootRegion, region, castTargetNode, predicatedEdges);
+				createAttributeEdgeConnection(s, rootRegion, region, castTargetNode, predicatedEdges);
 			}
 		}
-		//}
 	}
 
 	private @NonNull NodeConnection createNodeConnection(@NonNull RootRegion rootRegion, @NonNull Set<@NonNull Node> sourceSet, @NonNull ClassDatum classDatum, @NonNull SymbolNameBuilder s) {
