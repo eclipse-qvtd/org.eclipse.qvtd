@@ -211,7 +211,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 
 		public @NonNull Iterable<@NonNull CheckedCondition> analyze() {
-			String name = partition.getName();
 			//
 			//	A dispatch input node must be checked to confirm the correct derivation.
 			//
@@ -1482,7 +1481,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		Node sourceNode = edge.getEdgeSource();
 		Node targetNode = edge.getEdgeTarget();
 		Property property = QVTscheduleUtil.getProperty(edge);
-		boolean isNotify = isHazardousWrite(edge);
+		boolean isNotify = connectionManager.isHazardousWrite(edge);
 		Property setProperty;
 		VariableDeclaration slotVariable;
 		OCLExpression targetVariableExp;
@@ -1688,7 +1687,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					valueExp = expressionCreator2.getExpression(targetNode);		// FIXME debugging
 				}
 				if (valueExp != null) {
-					boolean isNotify = isHazardousWrite(edge);
+					boolean isNotify = connectionManager.isHazardousWrite(edge);
 					SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, edge.isPartial(), isNotify);
 					//					addObservedProperties(setStatement);
 					mapping.getOwnedStatements().add(setStatement);
@@ -1899,14 +1898,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		return variable; */
 	}
 
-	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {
-		Node sourceNode = edge.getEdgeSource();
-		Property asProperty = QVTscheduleUtil.getProperty(edge);
-		TypedModel typedModel = QVTscheduleUtil.getTypedModel(sourceNode);
-		Iterable<@NonNull NavigableEdge> enforcedEdges = partition.getEnforcedEdges(typedModel, asProperty);
-		return enforcedEdges != null;
-	}
-
 	private boolean isInfallible() {
 		PartitionedTransformationAnalysis partitionedTransformationAnalysis = regionAnalysis.getPartitionedTransformationAnalysis();
 		FallibilityAnalysis fallibilityAnalysis = partitionedTransformationAnalysis.getFallibilityAnalysis(partition);
@@ -1998,7 +1989,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	 */
 	@Override
 	public void synthesizeLocalStatements() {
-		String name = partition.getName();
+		@SuppressWarnings("unused") String name = partition.getName();
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
 		createPatternMatch();						// BLUE/CYAN nodes and edges
 		createRealizedVariables();					// GREEN nodes

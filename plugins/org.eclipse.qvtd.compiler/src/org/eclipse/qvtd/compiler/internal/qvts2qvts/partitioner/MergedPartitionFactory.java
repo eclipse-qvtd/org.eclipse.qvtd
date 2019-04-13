@@ -83,7 +83,6 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 			mergedPartition.getExplicitPredecessors().addAll(subPartition.getExplicitPredecessors());
 			mergedPartition.getExplicitSuccessors().addAll(subPartition.getExplicitSuccessors());
 		}
-		mergedPartition.initTypedModelAnalysis();
 		return createPartitionAnalysis(partitionedTransformationAnalysis, mergedPartition);
 	}
 

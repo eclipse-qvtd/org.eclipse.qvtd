@@ -27,16 +27,13 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -293,11 +290,11 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningCompositePartition((CompositePartition)otherEnd, msgs);
+			return basicSetOwningCompositePartition((CompositePartition)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (referedMappingRegion != null)
 					msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, MappingRegion.class, msgs);
-				return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
+			return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitSuccessors()).basicAdd(otherEnd, msgs);
 		}
@@ -348,13 +345,13 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				return getOwningCompositePartition();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getReferedMappingRegion();
-				return basicGetReferedMappingRegion();
+			return basicGetReferedMappingRegion();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getRegion();
-				return basicGetRegion();
+			return basicGetRegion();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getRootPartition();
-				return basicGetRootPartition();
+			return basicGetRootPartition();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return getExplicitSuccessors();
 		}
@@ -372,14 +369,14 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningCompositePartition((CompositePartition)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferedMappingRegion((MappingRegion)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getExplicitSuccessors().clear();
-				getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
-				return;
+			getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -394,13 +391,13 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningCompositePartition((CompositePartition)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferedMappingRegion((MappingRegion)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getExplicitSuccessors().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -477,25 +474,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitCyclicPartition(this);
 	}
 
-	@Override
-	public void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge checkedEdge) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
 	public Region basicGetRegion() {
 		return getReferedMappingRegion();
 	}
-
-	@Override
-	public @NonNull Property addEnforcedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge realizedEdge) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void initTypedModelAnalysis() {
-		throw new UnsupportedOperationException();
-	}
-
 } //CyclicPartitionImpl

@@ -27,9 +27,10 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
@@ -49,7 +50,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -122,7 +122,7 @@ public class CheckedConditionAnalysis
 		}
 
 		@Override
-		public Object visitEdge(@NonNull Edge object) {
+		public Object visitEdge(@NonNull Edge edge) {
 			return null;
 		}
 
@@ -307,6 +307,7 @@ public class CheckedConditionAnalysis
 		}
 	};
 
+	protected final @NonNull PartitionAnalysis partitionAnalysis;
 	protected final @NonNull Partition partition;
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ReachabilityForest reachabilityForest;		// FIXME Do we really need this so early?
@@ -324,6 +325,7 @@ public class CheckedConditionAnalysis
 	private final @NonNull List<@NonNull Edge> oldUnconditionalEdges;
 
 	public CheckedConditionAnalysis(@NonNull MappingPartitionAnalysis<?> partitionAnalysis, @NonNull ScheduleManager scheduleManager) {
+		this.partitionAnalysis = partitionAnalysis;
 		this.partition = partitionAnalysis.getPartition();
 		this.scheduleManager = scheduleManager;
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
@@ -352,26 +354,26 @@ public class CheckedConditionAnalysis
 	/**
 	 * Return all properties (and their opposites) that need checking for readiness prior to access.
 	 */
-	protected @Nullable Set<@NonNull Property> computeCheckedProperties() {
+	protected @NonNull Set<@NonNull Property> computeCheckedProperties() {
 		@SuppressWarnings("unused") String name = partition.getName();
 		if ("complexAttributePrimitiveAttributes«local»".equals(name)) {
 			getClass();
 		}
+		@NonNull ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 		//
 		// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous
 		// mappings, but that incurs many typedModel accuracy issues.
 		//
 		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
-		DomainUsage anyUsage = scheduleManager.getDomainUsageAnalysis().getAnyUsage();
-		for (@NonNull TypedModel typedModel : anyUsage.getTypedModels()) {
-			Iterable<@NonNull NavigableEdge> checkedEdges = partition.getCheckedEdges(typedModel);		// FIXME ensure this has been cached
-			if (checkedEdges != null) {
-				for (@NonNull NavigableEdge checkedEdge : checkedEdges) {
-					Property asProperty = QVTscheduleUtil.getProperty(checkedEdge);
-					allCheckedProperties.add(asProperty);
-					Property asOppositeProperty = asProperty.getOpposite();
-					if (asOppositeProperty != null) {
-						allCheckedProperties.add(asOppositeProperty);
+		for (@NonNull Edge edge : partition.getPartialEdges()) {
+			if ((edge instanceof NavigableEdge) && partitionAnalysis.isChecked(edge)) {
+				NavigableEdge navigableEdge = (NavigableEdge)edge;
+				if (connectionManager.isHazardousRead(partition, navigableEdge)) {
+					Property property = QVTscheduleUtil.getProperty(navigableEdge);
+					allCheckedProperties.add(property);
+					Property oppositeProperty = property.getOpposite();
+					if (oppositeProperty != null) {
+						allCheckedProperties.add(oppositeProperty);
 					}
 				}
 			}

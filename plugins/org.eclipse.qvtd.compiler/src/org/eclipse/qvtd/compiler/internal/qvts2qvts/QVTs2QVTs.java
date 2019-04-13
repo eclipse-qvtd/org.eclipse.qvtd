@@ -491,10 +491,9 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		partitionedTransformationAnalysis.analyzePartitionEdges(partitionSchedule);
 		List<Region> activeRegions = rootRegion.getActiveRegions();
 		activeRegions.clear();
-		partitionedTransformationAnalysis.computeCheckedOrEnforcedEdges(rootPartitionAnalysis.getPartitionSchedule());
 		List<@NonNull Concurrency> partitionSchedule1 = ConcurrentPartitionMerger.merge(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
 		List<@NonNull Concurrency> partitionSchedule2 = SequentialPartitionMerger.merge(partitionedTransformationAnalysis, partitionSchedule1);
-		List<@NonNull Concurrency> mergedPartitionSchedule = partitionSchedule2;
+		@SuppressWarnings("unused") List<@NonNull Concurrency> mergedPartitionSchedule = partitionSchedule2;
 		//
 		//	Identify the input models.
 		//

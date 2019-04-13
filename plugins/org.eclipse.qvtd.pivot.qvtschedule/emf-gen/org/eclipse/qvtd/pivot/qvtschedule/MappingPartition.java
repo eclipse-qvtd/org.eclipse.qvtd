@@ -16,10 +16,6 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Mapping Partition</b></em>'.
@@ -151,8 +147,4 @@ public interface MappingPartition extends Partition {
 	 * @generated
 	 */
 	List<BasicPartition> getExplicitSuccessors();
-
-	void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge checkedEdge);
-	@NonNull Property addEnforcedEdge(@NonNull TypedModel typedModel,@NonNull NavigableEdge realizedEdge);
-	void initTypedModelAnalysis();
 } // MappingPartition

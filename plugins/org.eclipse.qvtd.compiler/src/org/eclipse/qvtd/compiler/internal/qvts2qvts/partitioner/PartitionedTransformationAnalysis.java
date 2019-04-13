@@ -171,16 +171,6 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 		}
 	}
 
-	public void computeCheckedOrEnforcedEdges(@NonNull List<@NonNull Concurrency> mergedPartitionSchedule) {
-		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges2 = typedModel2property2realizedEdges;
-		assert typedModel2property2realizedEdges2 != null;
-		for (@NonNull Concurrency concurrency : mergedPartitionSchedule) {
-			for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : concurrency) {
-				((PartitionAnalysis)partitionAnalysis).computeCheckedOrEnforcedEdges();
-			}
-		}
-	}
-
 	@Override
 	protected @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> createClassAnalysis(@NonNull ClassDatum classDatum) {
 		return new TraceClassPartitionAnalysis(transformationPartitioner.getTransformationAnalysis().getClassAnalysis(classDatum));

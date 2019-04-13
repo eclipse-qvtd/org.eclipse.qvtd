@@ -15,13 +15,9 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 
@@ -101,8 +97,6 @@ public interface Partition extends NamedElement, Graphable, GraphNode {
 	void addIntermediateConnection(@NonNull NodeConnection connection);
 	boolean addPass(int passNumber);
 	void addRootConnection(@NonNull NodeConnection connection);
-	@Nullable Set<@NonNull NavigableEdge> getCheckedEdges(@NonNull TypedModel typedModel);
-	@Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel, @NonNull Property asProperty);
 	int getFirstPass();
 	List<Node> getHeadNodes();
 	@NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections();

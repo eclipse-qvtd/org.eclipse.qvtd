@@ -16,7 +16,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalys
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 
 /**
@@ -24,9 +23,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
  */
 public interface PartitionAnalysis extends PartialRegionAnalysis<@NonNull PartitionsAnalysis>
 {
-	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	void analyzePartitionEdges();
-	void computeCheckedOrEnforcedEdges();
 	@NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getClassAnalyses();
 	@Override
 	@NonNull Partition getPartition();

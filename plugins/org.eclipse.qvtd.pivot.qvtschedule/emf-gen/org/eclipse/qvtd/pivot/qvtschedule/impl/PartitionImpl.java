@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -203,16 +202,16 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				getPasses().addAll((Collection<? extends Integer>)newValue);
-				return;
+			getPasses().addAll((Collection<? extends Integer>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -227,13 +226,13 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -472,20 +471,8 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	}
 
 	@Override
-	public @Nullable Set<@NonNull NavigableEdge> getCheckedEdges(@NonNull TypedModel typedModel) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
 	public @NonNull String getColor() {
 		return QVTscheduleConstants.REGION_COLOR;
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel, @NonNull Property asProperty) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	@Override

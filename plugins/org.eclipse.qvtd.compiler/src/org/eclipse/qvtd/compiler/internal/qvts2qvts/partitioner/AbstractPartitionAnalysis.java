@@ -20,7 +20,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalys
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -42,9 +41,6 @@ public abstract class AbstractPartitionAnalysis<@NonNull P extends Partition> ex
 
 	}
 
-	@Override
-	public void addEnforcedEdge(@NonNull NavigableEdge realizedEdge) {}
-
 	public void analyzePartition() {}
 
 	public void analyzePartition2() {}
@@ -54,9 +50,6 @@ public abstract class AbstractPartitionAnalysis<@NonNull P extends Partition> ex
 	 */
 	@Override
 	public void analyzePartitionEdges() {}
-
-	@Override
-	public void computeCheckedOrEnforcedEdges() {}
 
 	@Override
 	public @NonNull Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>> getClassAnalyses() {

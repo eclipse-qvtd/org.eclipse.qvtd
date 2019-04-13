@@ -15,12 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -32,20 +27,15 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -443,76 +433,6 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 		return super.eIsSet(featureID);
 	}
 
-
-	/**
-	 * The per-typed model predicated navigable edges for which an execution may be attempted before assignment.
-	 */
-	private @Nullable Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2checkedEdges = null;
-
-	/**
-	 * The per-typed model realized navigable edges for which an execution may be attempted elsewhere before assignment here.
-	 * Sub-index is both by property and its opposite.
-	 */
-	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>>> typedModel2property2enforcedEdges = null;
-
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
-
-	@Override
-	public void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge checkedEdge) {
-		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2checkedEdges2 = typedModel2checkedEdges;
-		assert typedModel2checkedEdges2 != null;
-		Set<@NonNull NavigableEdge> checkedEdges = typedModel2checkedEdges2.get(typedModel);
-		if (checkedEdges == null) {
-			checkedEdges = new HashSet<>();
-			typedModel2checkedEdges2.put(typedModel, checkedEdges);
-		}
-		checkedEdges.add(checkedEdge);
-	}
-
-	@Override
-	public @NonNull Property addEnforcedEdge(@NonNull TypedModel typedModel,@NonNull NavigableEdge realizedEdge) {
-		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>>> typedModel2property2enforcedEdges2 = typedModel2property2enforcedEdges;
-		assert typedModel2property2enforcedEdges2 != null;
-		Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>> property2enforcedEdges2 = typedModel2property2enforcedEdges2.get(typedModel);
-		if (property2enforcedEdges2 == null) {
-			property2enforcedEdges2 = new HashMap<>();
-			typedModel2property2enforcedEdges2.put(typedModel, property2enforcedEdges2);
-		}
-		Property asProperty = QVTscheduleUtil.getProperty(realizedEdge);
-		Set<@NonNull NavigableEdge> enforcedEdges = property2enforcedEdges2.get(asProperty);
-		if (enforcedEdges == null) {
-			enforcedEdges = new HashSet<>();
-			property2enforcedEdges2.put(asProperty, enforcedEdges);
-			Property asOpposite = asProperty.getOpposite();
-			if (asOpposite != null) {
-				property2enforcedEdges2.put(asOpposite, enforcedEdges);
-			}
-		}
-		enforcedEdges.add(realizedEdge);
-		return asProperty;
-	}
-
-	@Override
-	public @Nullable Set<@NonNull NavigableEdge> getCheckedEdges(@NonNull TypedModel typedModel) {
-		assert typedModel2checkedEdges != null;
-		return typedModel2checkedEdges.get(typedModel);
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel, @NonNull Property asProperty) {
-		assert typedModel2property2enforcedEdges != null;
-		Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>> property2enforcedEdge = typedModel2property2enforcedEdges.get(typedModel);
-		if (property2enforcedEdge != null) {
-			Set<@NonNull NavigableEdge> enforcedEdges = property2enforcedEdge.get(asProperty);
-			return enforcedEdges;
-		}
-		return null;
-	}
-
-	@Override
-	public void initTypedModelAnalysis() {
-		typedModel2checkedEdges = new HashMap<>();
-		typedModel2property2enforcedEdges = new HashMap<>();
-	}
 } //MappingPartitionImpl

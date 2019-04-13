@@ -600,6 +600,18 @@ public class ConnectionManager
 		return connection;
 	}
 
+	private int getFirstConsumption(@NonNull Connection connection) {
+		int firstConsumption = Integer.MAX_VALUE;
+		for (@NonNull Partition targetPartition : connection.getTargetPartitions()) {
+			int firstPass = targetPartition.getFirstPass();
+			if (firstPass <= firstConsumption) {
+				firstConsumption = firstPass;
+			}
+		}
+		assert firstConsumption != Integer.MAX_VALUE;
+		return firstConsumption;
+	}
+
 	public @NonNull Iterable<@NonNull Connection> getIncomingConnections(@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis) {		// FIXME cache
 		Partition partition = partitionAnalysis.getPartition();
 		/*	Region region = partition.getOriginalRegion();
@@ -842,6 +854,51 @@ public class ConnectionManager
 			}
 		}
 		return true;
+	}
+
+	public boolean isHazardousRead(@NonNull Partition partition, @NonNull NavigableEdge edge) {
+		Property property = edge.getProperty();
+		@SuppressWarnings("unused") String name = property.getName();
+		Property oppositeProperty = property.getOpposite();
+		@SuppressWarnings("unused") String oppositeName = oppositeProperty != null ? oppositeProperty.getName() : null;
+		int firstConsumption = partition.getFirstPass();
+		int lastProduction = -1;
+		Connection connection = edge.getIncomingConnection();
+		if (connection != null) {
+			int lastWrite = connection.getLastPass();
+			if (lastWrite > lastProduction) {
+				lastProduction = lastWrite;
+			}
+		}
+		return lastProduction >= firstConsumption;
+	}
+
+	public boolean isHazardousWrite(@NonNull NavigableEdge edge) {
+		Property property = edge.getProperty();
+		@SuppressWarnings("unused") String name = property.getName();
+		Property oppositeProperty = property.getOpposite();
+		@SuppressWarnings("unused") String oppositeName = oppositeProperty != null ? oppositeProperty.getName() : null;
+		int firstConsumption = Integer.MAX_VALUE;
+		int lastProduction = -1;
+		for (@NonNull Connection connection : QVTscheduleUtil.getOutgoingConnections(edge)) {
+			int firstRead = getFirstConsumption(connection);
+			if (firstRead < firstConsumption) {
+				firstConsumption = firstRead;
+			}
+			//	int lastRead = getLastConsumption(connection);
+			//	if (lastRead < lastConsumption) {
+			//		lastConsumption = lastRead;
+			//	}
+			//	int firstWrite = connection.getFirstPass();
+			//	if (firstWrite > firstProduction) {
+			//		firstProduction = firstWrite;
+			//	}
+			int lastWrite = connection.getLastPass();
+			if (lastWrite > lastProduction) {
+				lastProduction = lastWrite;
+			}
+		}
+		return lastProduction >= firstConsumption;
 	}
 
 	public void removeCallToChild(@NonNull Partition parentPartition, @NonNull Partition childPartition) {
