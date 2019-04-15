@@ -863,6 +863,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(classDatum.getReferredTypedModel());
 	}
 
+	public static @NonNull TypedModel getReferredTypedModel(@NonNull PropertyDatum propertyDatum) {
+		return ClassUtil.nonNullState(propertyDatum.getReferredTypedModel());
+	}
+
 	public static @NonNull Region getRegion(@NonNull Partition partition) {
 		return ClassUtil.nonNullState(partition.getRegion());
 	}

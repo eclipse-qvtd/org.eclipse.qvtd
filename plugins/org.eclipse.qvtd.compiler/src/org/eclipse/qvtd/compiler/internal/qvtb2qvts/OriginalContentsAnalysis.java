@@ -100,10 +100,10 @@ public class OriginalContentsAnalysis
 
 	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge) {
 		PropertyDatum propertyDatum = getPropertyDatum(newEdge);
-		addNewEdge(region,newEdge, propertyDatum);
+		addNewEdge(region, newEdge, propertyDatum);
 	}
 	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {
-		String name = propertyDatum.getName();
+		@SuppressWarnings("unused") String name = propertyDatum.getName();
 		PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
 		List<@NonNull NavigableEdge> edges = basePropertyDatum2newEdges.get(basePropertyDatum);
 		if (edges == null) {
