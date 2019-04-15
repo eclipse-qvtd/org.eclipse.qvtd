@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Element;
@@ -32,6 +33,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
@@ -41,6 +43,7 @@ import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.CompilerStep;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.MappingProblem;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
@@ -136,11 +139,49 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			s.append(baseProperty.getOwningClass().getName());
 			s.append("::");
 			s.append(baseProperty.getName());
+			if (baseProperty.isIsMany()) {
+				s.append(/*baseProperty.isIsRequired() ? "[+]" :*/ "[*]");
+			}
+			else {
+				s.append(baseProperty.isIsRequired() ? "[1]" : "[?]");
+			}
+			Property oppositeProperty = baseProperty.getOpposite();
+			if (oppositeProperty != null) {
+				s.append(" <=> ");
+				s.append(oppositeProperty.getOwningClass().getName());
+				s.append("::");
+				s.append(oppositeProperty.getName());
+				if (baseProperty.isIsMany()) {
+					s.append(/*oppositeProperty.isIsRequired() ? "[+]" :*/ "[*]");
+				}
+				else {
+					s.append(oppositeProperty.isIsRequired() ? "[1]" : "[?]");
+				}
+			}
 			this.name = s.toString();
+			if ("OclElement::oclContainer[?] <=> OclElement::OclElement[1]".equals(name)) {
+				getClass();
+			}
 			assert baseProperty == QVTscheduleUtil.getPrimaryProperty(baseProperty);
 		}
 
+		public void accumulate(@NonNull BasePropertyAnalysis basePropertyAnalysis) {
+			for (@NonNull AccessAnalysis producingAnalysis : basePropertyAnalysis.producingAnalysis2connectionAnalyses.keySet()) {
+				for (@NonNull NamedElement producer : producingAnalysis.producers) {
+					addProducer(producer, producingAnalysis.sourceClass, producingAnalysis.property, producingAnalysis.targetClass);
+				}
+			}
+			for (@NonNull AccessAnalysis consumingAnalysis : basePropertyAnalysis.consumingAnalysis2connectionAnalysis.keySet()) {
+				for (@NonNull NavigationCallExp consumer : consumingAnalysis.consumers) {
+					addConsumer(consumer, consumingAnalysis.sourceClass, consumingAnalysis.property, consumingAnalysis.targetClass);
+				}
+			}
+		}
+
 		public void addConsumer(@NonNull NavigationCallExp navigationCallExp, @NonNull CompleteClass sourceClass, @NonNull Property property, @NonNull CompleteClass targetClass) {
+			if ("Column::keys[*] <=> Key::column[*]".equals(name)) {
+				getClass();
+			}
 			AccessAnalysis accessAnalysis = getAccessAnalysis(sourceClass, property, targetClass);
 			accessAnalysis.addConsumer(navigationCallExp);
 			if (!consumingAnalysis2connectionAnalysis.containsKey(accessAnalysis)) {
@@ -157,6 +198,9 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 
 		public void analyze() {
+			if ("Column::keys[*] <=> Key::column[*]".equals(name)) {
+				getClass();
+			}
 			for (@NonNull AccessAnalysis consumingAnalysis : consumingAnalysis2connectionAnalysis.keySet()) {
 				Set<@NonNull AccessAnalysis> conformingProducingAnalyses = null;
 				for (@NonNull AccessAnalysis producingAnalysis : producingAnalysis2connectionAnalyses.keySet()) {
@@ -216,22 +260,12 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			if (prefix != null) {
 				s.append(prefix);
 			}
+			Mapping mapping = QVTimperativeUtil.getContainingMapping(element);
+			s.append(mapping.getName());
+			s.append(" ");
+			s.append(PassRange.create(mapping));
+			s.append(" ");
 			s.append(element);
-			/*	Integer firstProducer2 = firstProducer;
-			s.append(" produced " + firstProducer2);
-			if (firstProducer2 != null) {
-				Integer lastProducer2 = lastProducer;
-				if ((lastProducer2 != null) && (lastProducer2 > firstProducer2)) {
-					s.append(".." + lastProducer2);
-				}
-			}
-			Integer firstConsumer2 = firstConsumer;
-			s.append(" consumed " + firstConsumer2);
-			if (firstConsumer2 != null) {
-				if ((lastConsumer != null) && (lastConsumer > firstConsumer2)) {
-					s.append(".." + lastConsumer);
-				}
-			} */
 			if (suffix != null) {
 				s.append(suffix);
 			}
@@ -314,17 +348,36 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			}
 			if (s != null) {
 				s.append("\n  " + name);
+				for (@NonNull AccessAnalysis producingAnalysis : producingAnalysis2connectionAnalyses.keySet()) {
+					List<@NonNull ConnectionAnalysis> connectionAnalyses = producingAnalysis2connectionAnalyses.get(producingAnalysis);
+					if (connectionAnalyses == null) {
+						for (@NonNull NamedElement producer : producingAnalysis.producers) {
+							Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
+							s.append("\n    unconnected " + mapping.getName() + " " + PassRange.create(mapping) + " " + producer);
+						}
+					}
+				}
 				for (@NonNull ConnectionAnalysis connectionAnalysis : producingAnalyses2connectionAnalysis.values()) {
-					s.append("\n    connect produce " + connectionAnalysis.productionPassRange + " consume " + connectionAnalysis.consumptionPassRange);
+					boolean needsNotify = connectionAnalysis.needsNotify();
+					s.append("\n    connect produce " + connectionAnalysis.productionPassRange + " consume " + connectionAnalysis.consumptionPassRange + (needsNotify ? " needsNotify" : " not-needsNotify"));
 					for (@NonNull AccessAnalysis producingAnalysis : connectionAnalysis.producingAnalyses) {
-						s.append("\n      produce " + producingAnalysis.name + " " + producingAnalysis.getProductionPassRange());
+						boolean needsNotify2 = false;
+						List<@NonNull ConnectionAnalysis> connectionAnalyses2 = producingAnalysis2connectionAnalyses.get(producingAnalysis);
+						assert connectionAnalyses2 != null;
+						for (@NonNull ConnectionAnalysis connectionAnalysis2 : connectionAnalyses2) {
+							if (connectionAnalysis2.needsNotify()) {
+								needsNotify2 = true;
+							}
+						}
+						s.append("\n      produce " + producingAnalysis.name + " " + producingAnalysis.getProductionPassRange() + (needsNotify2 ? " needsNotify" : " not-needsNotify"));
 						for (@NonNull NamedElement producer : producingAnalysis.producers) {
 							Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
 							s.append("\n        in " + mapping.getName() + " " + PassRange.create(mapping) + " " + producer);
 						}
 					}
 					for (@NonNull AccessAnalysis consumingAnalysis : connectionAnalysis.consumingAnalyses) {
-						s.append("\n      consume " + consumingAnalysis.name + " " + consumingAnalysis.getConsumptionPassRange()); // + (needsObserve ? " needsObserve" : " not-needsObserve"));
+						boolean needsObserve = !connectionAnalysis.getProductionPassRange().precedes(consumingAnalysis.getConsumptionPassRange());
+						s.append("\n      consume " + consumingAnalysis.name + " " + consumingAnalysis.getConsumptionPassRange() + (needsObserve ? " needsObserve" : " not-needsObserve"));
 						for (@NonNull NavigationCallExp consumer : consumingAnalysis.consumers) {
 							Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
 							s.append("\n        in " + mapping.getName() + " " + PassRange.create(mapping) + " " + consumer);
@@ -906,6 +959,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 	} */
 
+	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull CompilerStep compilerStep;
 	protected final @NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis;
 	//	protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull List<@NonNull NamedElement>> class2producers = new HashMap<>();
@@ -914,9 +968,10 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 
 	public QVTiProductionConsumption(@NonNull CompilerStep compilerStep, @NonNull Resource iResource) {
 		super(iResource);
+		this.environmentFactory = compilerStep.getEnvironmentFactory();
 		this.compilerStep = compilerStep;
-		this.domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(compilerStep.getEnvironmentFactory());
-		this.completeModel = compilerStep.getEnvironmentFactory().getCompleteModel();
+		this.domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory);
+		this.completeModel = environmentFactory.getCompleteModel();
 	}
 
 	public void analyze() {
@@ -926,6 +981,22 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		for (@NonNull EObject eObject : new TreeIterable(context)) {
 			if (eObject instanceof Visitable) {
 				((Visitable)eObject).accept(this);
+			}
+		}
+		//
+		//	Add the oclContainer pseudo-property if used.
+		//
+		StandardLibraryHelper standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
+		Property oclContainerProperty = standardLibraryHelper.getOclContainerProperty();
+		BasePropertyAnalysis oclContainerPropertyAnalysis = property2basePropertyAnalysis.get(oclContainerProperty);
+		if (oclContainerPropertyAnalysis != null) {
+			for (@NonNull BasePropertyAnalysis basePropertyAnalysis : property2basePropertyAnalysis.values()) {
+				if (basePropertyAnalysis != oclContainerPropertyAnalysis) {
+					Property baseOppositeProperty = basePropertyAnalysis.baseProperty.getOpposite();
+					if ((baseOppositeProperty != null) && baseOppositeProperty.isIsComposite()) {
+						oclContainerPropertyAnalysis.accumulate(basePropertyAnalysis);
+					}
+				}
 			}
 		}
 		//
@@ -1065,6 +1136,9 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(getProperty);
 				CompleteClass sourceClass = getCompleteClass(ownedSource);
 				CompleteClass targetClass = getCompleteClass(navigationCallExp);
+				if (getProperty.isIsMany()) {
+					targetClass = getCompleteClass(((CollectionType)targetClass.getPrimaryClass()).getElementType());
+				}
 				basePropertyAnalysis.addConsumer(navigationCallExp, sourceClass, getProperty, targetClass);
 			}
 		}
@@ -1095,7 +1169,14 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 		BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(setProperty);
 		CompleteClass sourceClass = getCompleteClass(QVTimperativeUtil.getTargetVariable(setStatement));
+		Property oppositeProperty = setProperty.getOpposite();
+		if ((oppositeProperty != null) && oppositeProperty.isIsMany()) {
+			//	sourceClass = getCompleteClass(((CollectionType)sourceClass.getPrimaryClass()).getElementType());
+		}
 		CompleteClass targetClass = getCompleteClass(QVTimperativeUtil.getOwnedExpression(setStatement));
+		if (!setStatement.isIsPartial() && setProperty.isIsMany()) {
+			targetClass = getCompleteClass(((CollectionType)targetClass.getPrimaryClass()).getElementType());
+		}
 		basePropertyAnalysis.addProducer(setStatement, sourceClass, setProperty, targetClass);
 		//	Property oppositeProperty = setProperty.getOpposite();
 		//	if (oppositeProperty != null) {

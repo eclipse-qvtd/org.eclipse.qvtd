@@ -958,7 +958,8 @@ public class ConnectionManager
 			else {
 				s.append("\n  observe produce:[" + firstProduction +".." + lastProduction +"] consume:[" + firstConsumption +".." + lastConsumption +"]");
 			}
-			s.append(" " + property.getOwningClass().getName() + "::" + property.getName());
+			org.eclipse.ocl.pivot.Class owningClass = property.getOwningClass();
+			s.append(" " + (owningClass != null ? owningClass.getName() : "«cast»") + "::" + property.getName());
 			if (oppositeProperty !=null) {
 				s.append(" <=> " + oppositeProperty.getOwningClass().getName() + "::" + oppositeProperty.getName());
 			}

@@ -764,6 +764,14 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		if (oppositeProperty == null) {			// No opposite - no choice to make
 			return property;
 		}
+		if (oppositeProperty.isIsComposite()) {	// Container preferred
+			assert !property.isIsMany();
+			return property;
+		}
+		if (property.isIsComposite()) {			// Container preferred
+			assert !oppositeProperty.isIsMany();
+			return oppositeProperty;
+		}
 		if (property.isIsImplicit()) {			// Non-implicit preferred
 			return oppositeProperty;
 		}

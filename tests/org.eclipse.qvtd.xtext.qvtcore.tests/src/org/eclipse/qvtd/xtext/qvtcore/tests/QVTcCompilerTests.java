@@ -435,7 +435,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		TransformationPartitioner.PROPERTY_NOTIFY.setState(true);
 		TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
 		//	TransformationPartitioner.MERGE_SEQUENTIAL.setState(true);
-		//	QVTiProductionConsumption.SUMMARY.setState(true);
+		QVTiProductionConsumption.SUMMARY.setState(true);
 
 		//		OperationDependencyAnalysis.CALL.setState(true);
 		//		OperationDependencyAnalysis.CREATE.setState(true);

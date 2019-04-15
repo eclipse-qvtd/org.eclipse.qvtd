@@ -264,10 +264,10 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getIncomingConnection();
-				return basicGetIncomingConnection();
+			return basicGetIncomingConnection();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getOppositeEdge();
-				return basicGetOppositeEdge();
+			return basicGetOppositeEdge();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getOutgoingConnections();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
@@ -287,17 +287,17 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setIncomingConnection((EdgeConnection)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setOppositeEdge((NavigableEdge)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getOutgoingConnections().clear();
-				getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
-				return;
+			getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setSecondary((Boolean)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -312,16 +312,16 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setIncomingConnection((EdgeConnection)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setOppositeEdge((NavigableEdge)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getOutgoingConnections().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setSecondary(SECONDARY_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -437,6 +437,9 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	protected void initializeOpposite(@NonNull NavigableEdge oppositeEdge) {
 		this.oppositeEdge = oppositeEdge;
 		((NavigableEdgeImpl)oppositeEdge).oppositeEdge = this;
+		// This differs from QVTscheduleUtil.getPrimaryProperty(property) which returns a context-independent forward/reverse choice as a baseProperty.
+		// The secondary here favours the calling usage as primary unlss it must be reversed.
+		// This makes a difference for the StructuredCladsses JUnit test that gets an NPE when assigning a not-null/null containment relationship backwards.
 		if (this.getProperty().isIsImplicit()) {
 			this.secondary = true;
 		}
