@@ -20,6 +20,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -36,6 +38,58 @@ import com.google.common.collect.Sets;
  */
 public class CyclicPartitionsAnalysis extends AbstractCyclicPartialRegionsAnalysis<@NonNull PartitionsAnalysis>
 {
+	/**
+	 * PartitioningComparator provides a deterministic and perhaps helpful ordering of partitionings.
+	 *
+	 * The comparison prefers partitionings with the fewest precedessors. Ties are broken by comparing
+	 * the serialization of the sorted partition names, which necessarily differ since they arise from
+	 * non-overlapping cycles.
+	 */
+	protected static class PartitioningComparator implements Comparator<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>>
+	{
+		private final @NonNull Map<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> partitioning2predecessors;
+		private @Nullable Map<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>, @NonNull String> partitioning2tieBreaker = null;
+
+		public PartitioningComparator(@NonNull Map<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> partitioning2predecessors) {
+			this.partitioning2predecessors = partitioning2predecessors;
+		}
+
+		@Override
+		public int compare(@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> o1, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> o2) {
+			Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> predecessors1 = partitioning2predecessors.get(o1);
+			Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> predecessors2 = partitioning2predecessors.get(o2);
+			assert predecessors1 != null;
+			assert predecessors2 != null;
+			int s1 = predecessors1.size();
+			int s2 = predecessors2.size();
+			if (s1 == s2) {
+				s1 = o1.size();
+				s2 = o2.size();
+			}
+			if (s1 != s2) {
+				return s1 - s2;
+			}
+			String n1 = getTieBreaker(o1);
+			String n2 = getTieBreaker(o2);
+			return n1.compareTo(n2);
+		}
+
+		private @NonNull String getTieBreaker(@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> analyses) {
+			Map<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>, @NonNull String> partitioning2tieBreaker2 = partitioning2tieBreaker;
+			if (partitioning2tieBreaker2 == null) {
+				partitioning2tieBreaker = partitioning2tieBreaker2 = new HashMap<>();
+			}
+			String tieBreaker = partitioning2tieBreaker2.get(analyses);
+			if (tieBreaker == null) {
+				List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> sortedAnalyses = new ArrayList<>(analyses);
+				Collections.sort(sortedAnalyses, NameUtil.NAMEABLE_COMPARATOR);
+				tieBreaker = String.valueOf(sortedAnalyses);
+				partitioning2tieBreaker2.put(analyses, tieBreaker);
+			}
+			return tieBreaker;
+		}
+	}
+
 	protected final @NonNull TransformationPartitioner transformationPartitioner;
 	protected final @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> leafPartitionAnalyses;
 
@@ -139,22 +193,7 @@ public class CyclicPartitionsAnalysis extends AbstractCyclicPartialRegionsAnalys
 			partitioning2predecessors.put(partitioning, predecessors);
 		}
 		//	Collections.sort(sortedPartitionings, QVTbaseUtil.CollectionSizeComparator.INSTANCE);	// Smallest first
-		Collections.sort(sortedPartitionings, new Comparator<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>>() { // Fewest predecessors first
-
-			@Override
-			public int compare(@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> o1, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> o2) {
-				Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> predecessors1 = partitioning2predecessors.get(o1);
-				Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> predecessors2 = partitioning2predecessors.get(o2);
-				assert predecessors1 != null;
-				assert predecessors2 != null;
-				int s1 = predecessors1.size();
-				int s2 = predecessors2.size();
-				if (s1 == s2) {
-					s1 = o1.size();
-					s2 = o2.size();
-				}
-				return s1 - s2;
-			}});
+		Collections.sort(sortedPartitionings, new PartitioningComparator(partitioning2predecessors));
 		//
 		//	A nested cycle is necessarily fully contained by a nesting cycle. We can therefore steadily replace
 		//	each set of nested elements by a cyclic element in the nesting context. The smallest first ordering

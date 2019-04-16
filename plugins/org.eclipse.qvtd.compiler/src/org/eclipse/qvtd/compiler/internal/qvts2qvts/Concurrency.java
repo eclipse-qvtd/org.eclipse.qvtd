@@ -10,10 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
-
+import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
@@ -28,7 +27,7 @@ public class Concurrency implements Iterable<@NonNull PartialRegionAnalysis<@Non
 	/**
 	 * The concurrently executable partitionAnalyses defining the schedule pass.
 	 */
-	protected final @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses;
+	protected final @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses;		// List rather than Set for deterministic iteration
 
 	/**
 	 * The concurrencies that may resume after exdecjution of this concurrency.
@@ -43,13 +42,17 @@ public class Concurrency implements Iterable<@NonNull PartialRegionAnalysis<@Non
 	private @Nullable Integer passNumber = null;
 
 	public Concurrency() {
-		this.partitionAnalyses = new HashSet<>();
+		this.partitionAnalyses = new ArrayList<>();
 	}
 
 	/**
 	 * Add an additional partitionAnalysis to the set of concurrent partitionAnalyses.
 	 */
 	public boolean add(@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis) {
+		assert !partitionAnalyses.contains(partitionAnalysis);
+		//	if (partitionAnalyses.contains(partitionAnalysis)) {
+		//		return false;
+		//	}
 		return partitionAnalyses.add(partitionAnalysis);
 	}
 

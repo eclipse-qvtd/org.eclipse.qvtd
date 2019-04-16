@@ -415,6 +415,7 @@ public class CompilerUtil extends QVTscheduleUtil
 				parallelSchedule.add(nextNonCompositeConcurrency);
 			}
 			if (nextCompositePartitionAnalyses != null) {
+				Collections.sort(nextCompositePartitionAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Re-instate construction order
 				for (CompositePartitionAnalysis compositePartitionAnalysis : nextCompositePartitionAnalyses) {
 					Concurrency nextCompositeConcurrency = new Concurrency();
 					nextCompositeConcurrency.add(compositePartitionAnalysis);
