@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -1130,7 +1131,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		Mapping mapping = QVTimperativeUtil.basicGetContainingMapping(navigationCallExp);
 		if (mapping != null) {
 			OCLExpression ownedSource = QVTimperativeUtil.getOwnedSource(navigationCallExp);
-			DomainUsage usage = domainUsageAnalysis.getUsage(ownedSource);
+			DomainUsage usage = domainUsageAnalysis.getUsage(navigationCallExp instanceof OppositePropertyCallExp ? navigationCallExp : ownedSource);
 			if (!usage.isInput() && !usage.isPrimitive()) {		// Skip endogenously confusing input
 				Property getProperty = QVTimperativeUtil.getReferredProperty(navigationCallExp);
 				BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(getProperty);
