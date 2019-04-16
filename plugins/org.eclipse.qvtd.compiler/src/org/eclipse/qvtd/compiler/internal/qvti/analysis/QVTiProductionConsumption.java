@@ -225,10 +225,10 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				targetClass2accessAnalysis = new HashMap<>();
 				sourceClass2targetClass2accessAnalysis.put(sourceClass, targetClass2accessAnalysis);
 			}
-			AccessAnalysis accessAnalysis = targetClass2accessAnalysis.get(sourceClass);
+			AccessAnalysis accessAnalysis = targetClass2accessAnalysis.get(targetClass);
 			if (accessAnalysis == null) {
 				accessAnalysis = new AccessAnalysis(this, sourceClass, property, targetClass);
-				targetClass2accessAnalysis.put(sourceClass, accessAnalysis);
+				targetClass2accessAnalysis.put(targetClass, accessAnalysis);
 			}
 			return accessAnalysis;
 		}
