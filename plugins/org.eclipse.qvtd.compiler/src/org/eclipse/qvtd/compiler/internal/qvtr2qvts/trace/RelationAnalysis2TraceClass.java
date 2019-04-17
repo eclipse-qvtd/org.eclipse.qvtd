@@ -134,14 +134,22 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(relation);
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(relationAnalysis.getRegion())) {
 			if (node.isPattern() && node.isMatched()) {
-				boolean unitOpposite = allHeadGroupNodes.contains(node) && !manyTracesPerHead;
-				TypedModel typedModel = QVTscheduleUtil.getTypedModel(node);
-				VariableDeclaration variable = node.basicGetOriginatingVariable();
-				if ((variable != null) && !rootVariables.contains(variable)) {
-					VariableDeclaration2TraceProperty variableDeclaration2traceProperty = basicGetVariableDeclaration2TraceProperty(variable);
-					if (variableDeclaration2traceProperty == null) {
-						createVariableDeclaration2TraceProperty(typedModel, variable, unitOpposite);
-					}
+				createVariableDeclaration2TraceProperty(node, rootVariables, allHeadGroupNodes, manyTracesPerHead);
+			}
+		}
+		//
+		//	Create a trace for all predicated ends of realized edges to ensure that no rediscovery
+		//	of predicates is needed after a region is partitioned.
+		//
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(relationAnalysis.getRegion())) {
+			if (edge.isRealized()) {
+				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+				if (sourceNode.isPredicated()) {
+					createVariableDeclaration2TraceProperty(sourceNode, rootVariables, allHeadGroupNodes, manyTracesPerHead);
+				}
+				if (targetNode.isPredicated()) {
+					createVariableDeclaration2TraceProperty(targetNode, rootVariables, allHeadGroupNodes, manyTracesPerHead);
 				}
 			}
 		}
@@ -420,6 +428,19 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	@Override
 	protected @NonNull String createTracePropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		return getTransformation2TracePackage().getNameGenerator().createTraceClassPropertyName(typedModel, variable);
+	}
+
+	protected void createVariableDeclaration2TraceProperty(@NonNull Node node, @NonNull List<@NonNull Variable> rootVariables,
+			@NonNull Set<@NonNull Node> allHeadGroupNodes, boolean manyTracesPerHead) {
+		boolean unitOpposite = allHeadGroupNodes.contains(node) && !manyTracesPerHead;
+		TypedModel typedModel = QVTscheduleUtil.getTypedModel(node);
+		VariableDeclaration variable = node.basicGetOriginatingVariable();
+		if ((variable != null) && !rootVariables.contains(variable)) {
+			VariableDeclaration2TraceProperty variableDeclaration2traceProperty = basicGetVariableDeclaration2TraceProperty(variable);
+			if (variableDeclaration2traceProperty == null) {
+				createVariableDeclaration2TraceProperty(typedModel, variable, unitOpposite);
+			}
+		}
 	}
 
 	public @NonNull Invocation2TraceProperty getInvocation2TraceProperty(@NonNull InvocationAnalysis invocationAnalysis) {
