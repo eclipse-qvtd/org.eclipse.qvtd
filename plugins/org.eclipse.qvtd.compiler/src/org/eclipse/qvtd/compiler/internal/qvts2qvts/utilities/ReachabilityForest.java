@@ -281,22 +281,29 @@ public class ReachabilityForest
 	}
 	private void getPredecessors(@NonNull Set<@NonNull Node> precedingNodes, @NonNull Node targetNode) {
 		if (precedingNodes.add(targetNode)) {
+			Edge parentEdge = null;
 			if (targetNode.isOperation()) {
-				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-					if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !edge.isRealized())) {
-						getPredecessors(precedingNodes, edge.getEdgeSource());
+				Edge reachingEdge = getReachingEdge(targetNode);
+				if ((reachingEdge != null) && reachingEdge.isNavigation()) {
+					parentEdge = reachingEdge;
+				}
+				else {
+					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+						if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !edge.isRealized())) {
+							getPredecessors(precedingNodes, edge.getEdgeSource());
+						}
 					}
 				}
 			}
 			else {
-				Edge parentEdge = getReachingEdge(targetNode);
-				if (parentEdge != null) {
-					Node sourceNode = parentEdge.getEdgeSource();
-					if (sourceNode == targetNode) {		// invert a backward edge
-						sourceNode = parentEdge.getEdgeTarget();
-					}
-					getPredecessors(precedingNodes, sourceNode);
+				parentEdge = getReachingEdge(targetNode);
+			}
+			if (parentEdge != null) {
+				Node sourceNode = parentEdge.getEdgeSource();
+				if (sourceNode == targetNode) {		// invert a backward edge
+					sourceNode = parentEdge.getEdgeTarget();
 				}
+				getPredecessors(precedingNodes, sourceNode);
 			}
 		}
 	}
