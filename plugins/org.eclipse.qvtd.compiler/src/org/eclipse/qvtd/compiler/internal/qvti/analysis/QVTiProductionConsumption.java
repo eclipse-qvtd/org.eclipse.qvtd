@@ -45,6 +45,7 @@ import org.eclipse.qvtd.compiler.CompilerStep;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.MappingProblem;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
@@ -1128,6 +1129,9 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	@Override
 	public @Nullable Object visitNavigationCallExp(@NonNull NavigationCallExp navigationCallExp) {
 		@SuppressWarnings("unused") String name = navigationCallExp.getName();
+		if ("middle".equals(name)) {
+			getClass();
+		}
 		Mapping mapping = QVTimperativeUtil.basicGetContainingMapping(navigationCallExp);
 		if (mapping != null) {
 			OCLExpression ownedSource = QVTimperativeUtil.getOwnedSource(navigationCallExp);
@@ -1136,7 +1140,14 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				Property getProperty = QVTimperativeUtil.getReferredProperty(navigationCallExp);
 				BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(getProperty);
 				CompleteClass sourceClass = getCompleteClass(ownedSource);
-				CompleteClass targetClass = getCompleteClass(navigationCallExp);
+				CompleteClass targetClass;
+				EObject eContainer = navigationCallExp.eContainer();
+				if (eContainer instanceof DeclareStatement) {
+					targetClass = getCompleteClass(QVTimperativeUtil.getType((DeclareStatement)eContainer));
+				}
+				else {
+					targetClass = getCompleteClass(navigationCallExp);
+				}
 				if (getProperty.isIsMany()) {
 					targetClass = getCompleteClass(((CollectionType)targetClass.getPrimaryClass()).getElementType());
 				}
