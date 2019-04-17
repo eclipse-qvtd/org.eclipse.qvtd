@@ -246,6 +246,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true); */
+		//		TransformationPartitioner.PARALLEL_SCHEDULE.setState(true);
+		//		TransformationPartitioner.PROPERTY_NOTIFY.setState(true);
+		//		TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
+		//	TransformationPartitioner.MERGE_SEQUENTIAL.setState(true);
+		//		QVTiProductionConsumption.SUMMARY.setState(true);
 		Class<? extends Transformer> txClass1 = null;
 		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);

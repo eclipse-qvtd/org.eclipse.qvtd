@@ -1069,9 +1069,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public void writeDOTfile(@NonNull Graphable graphable, @Nullable String suffix) {
 		if (doDotGraphs) {
 			URI dotURI = getGraphURI(graphable, suffix, ".dot");
-			//	if (dotURI.toString().contains("mElement_Telement2element")) {
-			//		getClass().toString();
-			//	}
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {

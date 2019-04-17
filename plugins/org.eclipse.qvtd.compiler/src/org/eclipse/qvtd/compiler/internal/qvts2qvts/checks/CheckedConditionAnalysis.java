@@ -329,20 +329,12 @@ public class CheckedConditionAnalysis
 		this.scheduleManager = scheduleManager;
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
 		this.oldUnconditionalEdges = computeOldUnconditionalEdges();
-		String name = partition.getName();
-		if ("complexAttributePrimitiveAttributes«local»".equals(name)) {
-			getClass();
-		}
 	}
 
 	/**
 	 * Return all conditions that need checking for mapping success.
 	 */
 	public @NonNull Set<@NonNull CheckedCondition> computeCheckedConditions() {
-		String name = partition.getName();
-		if ("complexAttributePrimitiveAttributes«local»".equals(name)) {
-			getClass();
-		}
 		Set<@NonNull CheckedCondition> checkedConditions = new HashSet<>();
 		Visitor visitor = new Visitor(checkedConditions);
 		visitor.analyze();
@@ -355,10 +347,6 @@ public class CheckedConditionAnalysis
 	public @NonNull Set<@NonNull Property> computeCheckedProperties(@Nullable StringBuilder s) {
 		if (allCheckedProperties != null) {
 			return allCheckedProperties;
-		}
-		@SuppressWarnings("unused") String name = partition.getName();
-		if ("complexAttributePrimitiveAttributes«local»".equals(name)) {
-			getClass();
 		}
 		@NonNull ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 		//

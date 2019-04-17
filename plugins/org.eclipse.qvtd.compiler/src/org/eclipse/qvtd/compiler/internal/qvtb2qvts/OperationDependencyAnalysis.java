@@ -1123,9 +1123,6 @@ public class OperationDependencyAnalysis
 		}
 
 		protected void addInvokedFutureAnalysis(@NonNull OperationAnalysis invokedAnalysis) {
-			//			if ("Boolean::not() : Boolean[?]".equals(operation.toString())) {
-			//				operation.toString();
-			//			}
 			Collection<@NonNull OperationAnalysis> invokedFutureAnalyses2 = invokedFutureAnalyses;
 			if (invokedFutureAnalyses2 == null) {
 				invokedFutureAnalyses = invokedFutureAnalyses2 = new HashSet<>();

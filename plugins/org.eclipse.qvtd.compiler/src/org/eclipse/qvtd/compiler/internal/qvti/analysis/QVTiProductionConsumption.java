@@ -57,6 +57,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
+/**
+ * QVTiProductionConsumption supports a design rule check on the QVTi model to verify that consumed edges are produced and that notify/observe annotations ensure
+ * that not-necessaryily-ready consumptions wait for their corresponding productions.
+ */
 public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVisitor<@Nullable Object, @NonNull Resource>
 {
 	public static final @NonNull TracingOption SUMMARY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvti/check/summary");
@@ -129,8 +133,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		protected final @NonNull Property baseProperty;
 		protected final @NonNull String name;
 		protected final @NonNull Map<@NonNull CompleteClass, @NonNull Map<@NonNull CompleteClass, @NonNull AccessAnalysis>> sourceClass2targetClass2accessAnalysis = new HashMap<>();
-		//	protected final @NonNull List<@NonNull AccessAnalysis> consumingAccessAnalyses = new ArrayList<>();
-		//	protected final @NonNull List<@NonNull AccessAnalysis> producingAccessAnalyses = new ArrayList<>();
 		protected final @NonNull Map<@NonNull Set<@NonNull AccessAnalysis>, @NonNull ConnectionAnalysis> producingAnalyses2connectionAnalysis = new HashMap<>();
 		protected final @NonNull Map<@NonNull AccessAnalysis, @Nullable List<@NonNull ConnectionAnalysis>> producingAnalysis2connectionAnalyses = new HashMap<>();
 		protected final @NonNull Map<@NonNull AccessAnalysis, @Nullable ConnectionAnalysis> consumingAnalysis2connectionAnalysis = new HashMap<>();
@@ -161,9 +163,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				}
 			}
 			this.name = s.toString();
-			if ("OclElement::oclContainer[?] <=> OclElement::OclElement[1]".equals(name)) {
-				getClass();
-			}
 			assert baseProperty == QVTscheduleUtil.getPrimaryProperty(baseProperty);
 		}
 
@@ -181,9 +180,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 
 		public void addConsumer(@NonNull NavigationCallExp navigationCallExp, @NonNull CompleteClass sourceClass, @NonNull Property property, @NonNull CompleteClass targetClass) {
-			if ("Column::keys[*] <=> Key::column[*]".equals(name)) {
-				getClass();
-			}
 			AccessAnalysis accessAnalysis = getAccessAnalysis(sourceClass, property, targetClass);
 			accessAnalysis.addConsumer(navigationCallExp);
 			if (!consumingAnalysis2connectionAnalysis.containsKey(accessAnalysis)) {
@@ -200,9 +196,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 
 		public void analyze() {
-			if ("Column::keys[*] <=> Key::column[*]".equals(name)) {
-				getClass();
-			}
 			for (@NonNull AccessAnalysis consumingAnalysis : consumingAnalysis2connectionAnalysis.keySet()) {
 				Set<@NonNull AccessAnalysis> conformingProducingAnalyses = null;
 				for (@NonNull AccessAnalysis producingAnalysis : producingAnalysis2connectionAnalyses.keySet()) {
@@ -345,9 +338,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 
 		public void validate(@Nullable StringBuilder s) {
-			if (baseProperty.getName().equals("height")) {
-				getClass();
-			}
 			if (s != null) {
 				s.append("\n  " + name);
 				for (@NonNull AccessAnalysis producingAnalysis : producingAnalysis2connectionAnalyses.keySet()) {
@@ -484,24 +474,11 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 
 		public void addConsumer(@NonNull NavigationCallExp consumer) {
 			assert consumptionPassRange == null;
-			isDebugTarget(QVTimperativeUtil.getReferredProperty(consumer));
 			consumers.add(consumer);
 		}
 
 		public void addProducer(@NonNull NamedElement producer) {
 			assert productionPassRange == null;
-			if ("AttributeToColumn::owner".equals(toString()) || "NonLeafAttribute::owner".equals(toString()) || "FromAttribute::owner".equals(toString())) {
-				getClass();
-			}
-			if (producer instanceof SetStatement) {
-				isDebugTarget(QVTimperativeUtil.getTargetProperty((SetStatement)producer));
-			}
-			else if (producer instanceof GuardParameter) {
-				Property successProperty = ((GuardParameter)producer).getSuccessProperty();
-				if (successProperty != null) {
-					isDebugTarget(successProperty);
-				}
-			}
 			producers.add(producer);
 		}
 
@@ -512,7 +489,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			}
 			return consumptionPassRange2;
 		}
-
 
 		@Override
 		public @NonNull String getName() {
@@ -527,52 +503,10 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			return productionPassRange2;
 		}
 
-		//	public @NonNull String getRangeTexts() {
-		//		return getProductionPassRange() + " " + getConsumptionPassRange();
-		//	}
-
-		private void isDebugTarget(@NonNull Property property) {
-			String name1 = property.getName();
-			if ("fromAttributes".equals(name1)) {
-				getClass();
-			}
-			Property opposite = property.getOpposite();
-			if (opposite != null) {
-				String name2 = opposite.getName();
-				if ("fromAttributes".equals(name2)) {
-					getClass();
-				}
-			}
-		}
-
 		@Override
 		public @NonNull String toString() {
 			return name;
 		}
-
-		/*	public void validate(@Nullable StringBuilder s) {
-			if ("ClassToTable::fromAttributes".equals(toString())) {
-				getClass();
-			}
-			Summary summary = new Summary(this, null);
-			for (@NonNull NamedElement producer : producers) {
-				Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-				summary.setProducer(mapping, sourceClass, producer);
-			}
-			for (@NonNull NavigationCallExp consumer : consumers) {
-				Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
-				summary.setConsumer(mapping, sourceClass, consumer);
-			}
-			if (s != null) {
-				s.append("\n  " + summary.appendAccessAnalysis());
-			}
-			//	for (@NonNull NamedElement producer : producers) {
-			summary.checkProducers();
-			//	}
-			for (@NonNull NavigationCallExp consumer : consumers) {
-				summary.checkConsumer(s, consumer);
-			}
-		} */
 	}
 
 	/**
@@ -622,351 +556,11 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		public @NonNull String toString() {
 			return basePropertyAnalysis.toString() + " " + productionPassRange + " " + consumptionPassRange;
 		}
-
-		/*	public void validate(@Nullable StringBuilder s) {
-			if (s != null) {
-				s.append("\n    connection " + productionPassRange + " " + consumptionPassRange + (needsNotify() ? " needsNotify" : " not-needsNotify"));
-			}
-			for (@NonNull AccessAnalysis producingAnalysis : producingAnalyses) {
-				if (s != null) {
-					s.append("\n    produce " + producingAnalysis.name + " " + producingAnalysis.getProductionPassRange());
-					for (@NonNull NamedElement producer : producingAnalysis.producers) {
-						Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-						s.append("\n      in " + mapping.getName() + " " + PassRange.create(mapping) + " " + producer);
-					}
-				}
-			}
-		} */
-
-		/*	private void validateConsumption(@Nullable StringBuilder s, @NonNull AccessAnalysis consumingAnalysis) {
-			PassRange consumingPassRange = consumingAnalysis.getConsumptionPassRange();
-			PassRange producingPassRange = new PassRange();
-			List<@NonNull AccessAnalysis> conformingProducingAnalyses = null;
-			for (@NonNull AccessAnalysis producingAnalysis : producingAccessAnalyses) {
-				if (isConforming(producingAnalysis, consumingAnalysis)) {
-					if (conformingProducingAnalyses == null) {
-						conformingProducingAnalyses = new ArrayList<>();
-					}
-					conformingProducingAnalyses.add(producingAnalysis);
-					producingPassRange = producingPassRange.max(producingAnalysis.getProductionPassRange());
-				}
-			}
-			boolean needsObserve = !producingPassRange.precedes(consumingPassRange);
-			if (s != null) {
-				s.append("\n    consume " + consumingAnalysis.name + " " + consumingAnalysis.getRangeTexts() + (needsObserve ? " needsObserve" : " not-needsObserve"));
-				for (@NonNull NavigationCallExp consumer : consumingAnalysis.consumers) {
-					Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
-					s.append("\n      in " + mapping.getName() + " " + PassRange.create(mapping) + " " + consumer);
-				}
-			}
-			if (conformingProducingAnalyses != null) {
-				for (@NonNull AccessAnalysis producingAnalysis : conformingProducingAnalyses) {
-					if (s != null) {
-						s.append("\n      conforming " + producingAnalysis.name + " " + producingAnalysis.getRangeTexts());
-						for (@NonNull NamedElement producer : producingAnalysis.producers) {
-							Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-							s.append("\n        from " + mapping.getName() + " " + PassRange.create(mapping) + " " + producer);
-						}
-					}
-				}
-			}
-			for (@NonNull NavigationCallExp consumer : consumingAnalysis.consumers) {
-				boolean isObserve = isObserve(consumer);
-				if (isObserve != needsObserve) {
-					StringBuilder sProblem = initProblem("", consumer, isObserve ? " should not be observed" : " should be observed");
-					Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
-					if (s != null) {
-						s.append("\n      BAD " + sProblem);
-					}
-				}
-			}
-		} */
-
-		/*	private void validateProduction(@Nullable StringBuilder s, @NonNull AccessAnalysis producingAnalysis) {
-			//	PassRange producingPassRange = producingAnalysis.getProductionPassRange();
-			PassRange producingPassRange = new PassRange();
-			PassRange consumingPassRange = new PassRange();
-			List<@NonNull AccessAnalysis> conformingConsumingAnalyses = null;
-			for (@NonNull AccessAnalysis consumingAnalysis : consumingAccessAnalyses) {
-				if (isConforming(producingAnalysis, consumingAnalysis)) {
-					if (conformingConsumingAnalyses == null) {
-						conformingConsumingAnalyses = new ArrayList<>();
-					}
-					conformingConsumingAnalyses.add(consumingAnalysis);
-					consumingPassRange = consumingPassRange.max(consumingAnalysis.getConsumptionPassRange());
-					producingPassRange = producingPassRange.max(producingAnalysis.getProductionPassRange());
-				}
-			}
-			boolean needsNotify = !producingPassRange.precedes(consumingPassRange);
-			if (s != null) {
-				s.append("\n    produce " + producingAnalysis.name + " " + producingAnalysis.getRangeTexts() + (needsNotify ? " needsNotify" : " not-needsNotify"));
-				for (@NonNull NamedElement producer : producingAnalysis.producers) {
-					Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-					s.append("\n      in " + mapping.getName() + " " + PassRange.create(mapping) + " " + producer);
-				}
-			}
-			if (conformingConsumingAnalyses != null) {
-				for (@NonNull AccessAnalysis consumingAnalysis : conformingConsumingAnalyses) {
-					if (s != null) {
-						s.append("\n      conforming " + consumingAnalysis.name + " " + consumingAnalysis.getRangeTexts());
-						for (@NonNull NavigationCallExp consumer : consumingAnalysis.consumers) {
-							Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
-							s.append("\n        for " + mapping.getName() + " " + PassRange.create(mapping) + " " + consumer);
-						}
-					}
-				}
-			}
-			for (@NonNull NamedElement producer : producingAnalysis.producers) {
-				boolean isNotify = isNotify(producer);
-				if (isNotify != needsNotify) {
-					StringBuilder sProblem = initProblem("", producer, isNotify ? " should not be notified" : " should be notified");
-					Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
-					if (s != null) {
-						s.append("\n      BAD " + sProblem);
-					}
-				}
-			}
-		} */
 	}
-
-	/**
-	 * Summary aggregates the production/consumption timing on a specific Connection.
-	 *
-	private class Summary
-	{
-		private final @NonNull AccessAnalysis accessAnalysis;
-		private final @Nullable AccessAnalysis forAccessAnalysis;
-		private @Nullable Integer firstProducer = null;
-		private @Nullable Integer lastProducer = null;
-		private @Nullable Integer firstConsumer = null;
-		private @Nullable Integer lastConsumer = null;
-		private final @NonNull StringBuilder s = new StringBuilder();
-		private boolean anyObserve = false;
-		private @NonNull List<@NonNull NavigationCallExp> debugConsumers = new ArrayList<>();
-		private @NonNull List<@NonNull NamedElement> debugProducers = new ArrayList<>();
-
-		public Summary(@NonNull AccessAnalysis accessAnalysis, @Nullable AccessAnalysis forAccessAnalysis) {
-			this.accessAnalysis = accessAnalysis;
-			this.forAccessAnalysis = forAccessAnalysis;
-			s.append(accessAnalysis.toString());
-			if (forAccessAnalysis != null) {
-				s.append(" for ");
-				s.append(forAccessAnalysis.toString());
-			}
-		}
-
-		public @NonNull String appendAccessAnalysis() {
-			Integer firstProducer2 = firstProducer;
-			s.append("\n\tproduce " + firstProducer2);
-			if (firstProducer2 != null) {
-				if ((lastProducer != null) && (lastProducer > firstProducer2)) {
-					s.append(".." + lastProducer);
-				}
-			}
-			Integer firstConsumer2 = firstConsumer;
-			s.append(" consume " + firstConsumer2);
-			if (firstConsumer2 != null) {
-				if ((lastConsumer != null) && (lastConsumer > firstConsumer2)) {
-					s.append(".." + lastConsumer);
-				}
-			}
-			return s.toString();
-		}
-
-		/*	public void checkConsumer(@Nullable StringBuilder s, @NonNull NavigationCallExp consumer) {
-			//	Property referredProperty = QVTimperativeUtil.getReferredProperty(consumer);
-			//	Map<@NonNull CompleteClass, @NonNull AccessAnalysis> class2connection = property2class2connection.get(referredProperty);
-			//	assert class2connection != null;
-			//	CompleteClass completeClass = getCompleteClass(QVTimperativeUtil.getOwningClass(referredProperty));
-			//	AccessAnalysis zbaseAccessAnalysis = accessAnalysis; //class2connection.get(completeClass);
-			//	assert zbaseAccessAnalysis != null;
-			CompleteClass completeClass = accessAnalysis.sourceClass;
-			//	Map<@NonNull CompleteClass, List<@NonNull NamedElement>> class2producers = property2class2producers.get(property);
-			//	assert class2producers != null;
-			//	List<@NonNull NamedElement> producers = connection.producers;
-			//	if (producers != null) {
-			//		for (@NonNull NavigationCallExp callExp : connection.consumers) {
-			///			Mapping mapping = QVTimperativeUtil.getContainingMapping(callExp);
-			//			connection.setConsumer(mapping, asClass, callExp);
-			//		}
-			//	}
-			boolean isObserve = isObserve(consumer);
-			Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
-			int firstPass = mapping.getFirstPass();
-			Integer lastProducer2 = lastProducer;
-			if (lastProducer2 == null) {
-				if (isObserve) {
-					StringBuilder s2 = initProblem("Not-produced ", " should not be observed");
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, s2.toString()));
-				}
-				else {
-					Property referredProperty = QVTimperativeUtil.getReferredProperty(consumer);
-					BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(referredProperty);
-					basePropertyAnalysis.checkConsumer(s, consumer, completeClass, referredProperty);
-				}
-			}
-			else if (!isObserve) {
-				if (firstPass <= lastProducer2) {
-					StringBuilder s2 = initProblem(null, " should be observed");
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, s2.toString()));
-				}
-			}
-			else {
-				if (firstPass > lastProducer2) {
-					StringBuilder s2 = initProblem(null, " should not be observed");
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, s2.toString()));
-				}
-			}
-		} */
-
-	/*	public void checkProducers() {
-			if (anyObserve) {
-				Integer firstConsumer2 = firstConsumer;
-				Integer lastProducer2 = lastProducer;
-				if ((firstConsumer2 != null) && (lastProducer2 != null) && (firstConsumer2 <= lastProducer2)) {
-					for (@NonNull NamedElement producer : accessAnalysis.producers) {
-						if (!isNotify(producer)) {
-							StringBuilder s = initProblem("", " should be notified");
-							Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-							compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, s.toString()));
-						}
-					}
-				}
-			}
-		} * /
-
-		private @NonNull StringBuilder initProblem(@Nullable String prefix, @Nullable String suffix) {
-			StringBuilder s = new StringBuilder();
-			if (prefix != null) {
-				s.append(prefix);
-			}
-			s.append(accessAnalysis);
-			Integer firstProducer2 = firstProducer;
-			s.append(" produced " + firstProducer2);
-			if (firstProducer2 != null) {
-				Integer lastProducer2 = lastProducer;
-				if ((lastProducer2 != null) && (lastProducer2 > firstProducer2)) {
-					s.append(".." + lastProducer2);
-				}
-			}
-			Integer firstConsumer2 = firstConsumer;
-			s.append(" consumed " + firstConsumer2);
-			if (firstConsumer2 != null) {
-				if ((lastConsumer != null) && (lastConsumer > firstConsumer2)) {
-					s.append(".." + lastConsumer);
-				}
-			}
-			if (suffix != null) {
-				s.append(suffix);
-			}
-			return s;
-		}
-
-		private boolean isNotify(NamedElement producer) {
-			if (producer instanceof SetStatement) {
-				return ((SetStatement)producer).isIsNotify();
-			}
-			else {
-				return false;
-			}
-		}
-
-		private boolean isObserve(@NonNull NavigationCallExp callExp) {
-			Statement statement = QVTimperativeUtil.getContainingStatement(callExp);
-			if (statement instanceof ObservableStatement) {
-				List<Property> observedProperties = ((ObservableStatement)statement).basicGetObservedProperties();
-				if (observedProperties != null) {
-					boolean contains1 = observedProperties.contains(accessAnalysis.property);
-					boolean contains2 = observedProperties.contains(accessAnalysis.property.getOpposite());
-					if (contains1) {
-						return true;
-					}
-					else if (contains2) {
-						return true;
-					}
-					else {
-						return false;
-					}
-				}
-			}
-			return false;
-		}
-
-		public void setConsumer(@NonNull Mapping mapping, @NonNull CompleteClass completeClass, @NonNull NavigationCallExp callExp) {
-			debugConsumers.add(callExp);
-			boolean anObserve = isObserve(callExp);
-			if (anObserve) {
-				anyObserve  = true;
-			}
-			int firstPass = mapping.getFirstPass();
-			Integer lastPassOrNull = mapping.getLastPass();
-			int lastPass = lastPassOrNull != null ? lastPassOrNull : firstPass;
-			Integer firstConsumer2 = firstConsumer;
-			if ((firstConsumer2 == null) || (firstPass < firstConsumer2)) {
-				firstConsumer = firstConsumer2 = firstPass;
-			}
-			Integer lastConsumer2 = lastConsumer;
-			if ((lastConsumer2 == null) || (lastPass > lastConsumer2)) {
-				lastConsumer = lastConsumer2 = lastPass;
-			}
-			s.append("\n\tconsume ");
-			s.append(accessAnalysis);
-			s.append(" in ");
-			s.append(mapping.getName());
-			s.append(" at " + firstPass);
-			if (lastPassOrNull != null) {
-				s.append(".." + lastPass);
-			}
-			s.append(" " + (anObserve ? "observe" : "no-observe"));
-		}
-
-		public void setProducer(@NonNull Mapping mapping, @NonNull CompleteClass completeClass, @NonNull NamedElement producer) {
-			debugProducers.add(producer);
-			boolean isNotify = isNotify(producer);
-			int firstPass = mapping.getFirstPass();
-			@Nullable Integer lastPassOrNull = mapping.getLastPass();
-			int lastPass = lastPassOrNull != null ? lastPassOrNull : firstPass;
-			Integer firstProducer2 = firstProducer;
-			if ((firstProducer2 == null) || (firstPass < firstProducer2)) {
-				firstProducer = firstProducer2 = firstPass;
-			}
-			Integer lastProducer2 = lastProducer;
-			if ((lastProducer2 == null) || (lastPass > lastProducer2)) {
-				lastProducer = lastProducer2 = lastPass;
-			}
-			s.append("\n\tproduce ");
-			s.append(accessAnalysis);
-			s.append(" in ");
-			s.append(mapping.getName());
-			s.append(" at " + firstPass);
-			if (lastPassOrNull != null) {
-				s.append(".." + lastPass);
-			}
-			s.append(" " + (isNotify ? "notify" : "no-notify"));
-		}
-
-		@Override
-		public String toString() {
-			StringBuilder s = new StringBuilder();
-			s.append(accessAnalysis.toString());
-			s.append(" produce ");
-			s.append(firstProducer);
-			s.append("..");
-			s.append(lastProducer);
-			s.append(" consume ");
-			s.append(firstConsumer);
-			s.append("..");
-			s.append(lastConsumer);
-			return s.toString();
-		}
-	} */
 
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull CompilerStep compilerStep;
 	protected final @NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis;
-	//	protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull List<@NonNull NamedElement>> class2producers = new HashMap<>();
 	protected final @NonNull Map<@NonNull Property, @NonNull BasePropertyAnalysis> property2basePropertyAnalysis = new HashMap<>();
 	protected final @NonNull CompleteModel completeModel;
 
@@ -1011,45 +605,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 	}
 
-	/*
-	 *	Propagate each producing AccessAnalysis to each conforming consuming AccessAnalysis.
-	 *
-	protected void analyzeProductionEquivalents() {
-		//
-		//	Propagate explicit producers to their sub producers.
-		//
-		for (@NonNull BasePropertyAnalysis basePropertyAnalysis : property2basePropertyAnalysis.values()) {
-			basePropertyAnalysis.propagateToSubs();
-		}
-		//
-		//	Propagate explicit derived producers to their super producers.
-		//
-		for (@NonNull BasePropertyAnalysis basePropertyAnalysis : property2basePropertyAnalysis.values()) {
-			basePropertyAnalysis.propagateToSupers();
-		}
-	} */
-
-	/*	protected void zdoProducer(@NonNull NamedElement producer, @NonNull CompleteClass targetClass, @NonNull Property setProperty) {
-		//	CompleteClass owningClass = getCompleteClass(QVTimperativeUtil.getOwningClass(setProperty));
-		//	CompleteInheritance owningInheritance = owningClass.getCompleteInheritance();
-		//	CompleteInheritance targetInheritance = targetClass.getCompleteInheritance();
-		//	int owningDepth = owningInheritance.getDepth();
-		//	int targetDepth = targetInheritance.getDepth();
-		//	for (int i = owningDepth; i <= targetDepth; i++) {
-		//		Iterable<@NonNull InheritanceFragment> superFragments = targetInheritance.getSuperFragments(i);
-		//		for (@NonNull InheritanceFragment superFragment : superFragments) {
-		//			Iterable<@NonNull InheritanceFragment> owningSuperFragments = superFragment.getDerivedInheritance().getSuperFragments(owningDepth);
-		//			for (@NonNull InheritanceFragment owningSuperFragment : owningSuperFragments) {
-		//				if (owningSuperFragment.getBaseInheritance() == owningInheritance) {
-		//					CompleteClass superClass = ((CompleteInheritanceImpl)superFragment.getBaseInheritance()).getCompleteClass();
-		AccessAnalysis accessAnalysis = getAccessAnalysis(targetClass, setProperty);
-		accessAnalysis.addProducer(producer);
-		//				}
-		//			}
-		//		}
-		//	}
-	} */
-
 	protected BasePropertyAnalysis getBasePropertyAnalysis(@NonNull Property property) {
 		Property baseProperty = QVTscheduleUtil.getPrimaryProperty(property);
 		BasePropertyAnalysis basePropertyAnalysis = property2basePropertyAnalysis.get(baseProperty);
@@ -1059,32 +614,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 		return basePropertyAnalysis;
 	}
-
-	/**
-	 * Return the distinct ancestors of derivedCompleteClass that are derived from baseCompleteClass. Result includes baseCompleteClass and derivedCompleteClass
-	 * unless derivedCompleteClass does nt actuall dertived from baseCompleteClass.
-	 *
-	private @NonNull List<@NonNull CompleteClass> getAncestors(@NonNull CompleteClass baseCompleteClass, @NonNull CompleteClass derivedCompleteClass) {
-		List<@NonNull CompleteClass> ancestors = new ArrayList<>();
-//		CompleteClass baseCompleteClass = getCompleteClass(QVTimperativeUtil.getOwningClass(property));
-		CompleteInheritance baseInheritance = baseCompleteClass.getCompleteInheritance();
-		CompleteInheritance derivedInheritance = derivedCompleteClass.getCompleteInheritance();
-		int baseDepth = baseInheritance.getDepth();
-		int derivedDepth = derivedInheritance.getDepth();
-		for (int i = baseDepth; i <= derivedDepth; i++) {
-			Iterable<@NonNull InheritanceFragment> derivedSuperFragments = derivedInheritance.getSuperFragments(i);
-			for (@NonNull InheritanceFragment superFragment : derivedSuperFragments) {
-				Iterable<@NonNull InheritanceFragment> owningSuperFragments = superFragment.getDerivedInheritance().getSuperFragments(baseDepth);
-				for (@NonNull InheritanceFragment owningSuperFragment : owningSuperFragments) {
-					if (owningSuperFragment.getBaseInheritance() == baseInheritance) {
-						CompleteClass superClass = ((CompleteInheritanceImpl)superFragment.getBaseInheritance()).getCompleteClass();
-						ancestors.add(superClass);
-					}
-				}
-			}
-		}
-		return ancestors;
-	} */
 
 	protected @NonNull CompleteClass getCompleteClass(@NonNull Type type) {
 		return completeModel.getCompleteClass(type);
@@ -1130,10 +659,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 
 	@Override
 	public @Nullable Object visitNavigationCallExp(@NonNull NavigationCallExp navigationCallExp) {
-		@SuppressWarnings("unused") String name = navigationCallExp.getName();
-		if ("middle".equals(name)) {
-			getClass();
-		}
 		Mapping mapping = QVTimperativeUtil.basicGetContainingMapping(navigationCallExp);
 		if (mapping != null) {
 			OCLExpression ownedSource = QVTimperativeUtil.getOwnedSource(navigationCallExp);
@@ -1161,41 +686,19 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 
 	@Override
 	public @Nullable Object visitNewStatement(@NonNull NewStatement newStatement) {
-		//	org.eclipse.ocl.pivot.Class newClass = (Class) QVTimperativeUtil.getType(newStatement);
-		//	List<@NonNull NamedElement> producers = class2producers.get(newClass);
-		//	if (producers == null) {
-		//		producers = new ArrayList<>();
-		//		class2producers.put(newClass, producers);
-		//	}
-		//	producers.add(newStatement);
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitSetStatement(@NonNull SetStatement setStatement) {
 		Property setProperty = QVTimperativeUtil.getTargetProperty(setStatement);
-		String name = setProperty.getName();
-		if (name.equals("fromAttributes")) {
-			getClass();
-		}
-		else if (name.equals("owner")) {
-			getClass();
-		}
 		BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(setProperty);
 		CompleteClass sourceClass = getCompleteClass(QVTimperativeUtil.getTargetVariable(setStatement));
-		Property oppositeProperty = setProperty.getOpposite();
-		if ((oppositeProperty != null) && oppositeProperty.isIsMany()) {
-			//	sourceClass = getCompleteClass(((CollectionType)sourceClass.getPrimaryClass()).getElementType());
-		}
 		CompleteClass targetClass = getCompleteClass(QVTimperativeUtil.getOwnedExpression(setStatement));
 		if (!setStatement.isIsPartial() && setProperty.isIsMany()) {
 			targetClass = getCompleteClass(((CollectionType)targetClass.getPrimaryClass()).getElementType());
 		}
 		basePropertyAnalysis.addProducer(setStatement, sourceClass, setProperty, targetClass);
-		//	Property oppositeProperty = setProperty.getOpposite();
-		//	if (oppositeProperty != null) {
-		//		basePropertyAnalysis.addProducer(setStatement, targetClass, oppositeProperty, sourceClass);
-		//	}
 		return null;
 	}
 
@@ -1204,5 +707,4 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		domainUsageAnalysis.analyzeTransformation(transformation);
 		return null;
 	}
-
 }

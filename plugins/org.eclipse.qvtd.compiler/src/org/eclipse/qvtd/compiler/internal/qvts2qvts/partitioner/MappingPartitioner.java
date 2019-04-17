@@ -525,31 +525,9 @@ public class MappingPartitioner implements Nameable
 		return true;
 	}
 
-	/*	private boolean isDead(@NonNull Edge edge) {
-		if (!edge.isExpression()) {
-			return false;
-		}
-		Node node = edge.getTarget();
-		for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
-			if ((incomingEdge != edge) && incomingEdge.isMatched()) {
-				return false;
-			}
-		}
-		for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
-			if (!isDead(outgoingEdge)) {
-				return false;
-			}
-		}
-		return true;
-	} */
-
 	public @NonNull Iterable<@NonNull PartitionAnalysis> partition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
 			return Collections.singletonList(new NonPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
-		}
-		String name = region.getName();
-		if ("mapVariableExp_referredVariable_VariableDeclaration_qvtr".equals(name)) {
-			getClass();
 		}
 		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
 		//	boolean isInfallible = false;

@@ -539,9 +539,6 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 				argNodes[i+1] = synthesize(ownedArguments.get(i));
 				argNames[i+1] = "«" + referredOperation.getOwnedParameters().get(i).getName() + "»";
 			}
-			if ("<>".equals(operationName)) {
-				operationName.toString();
-			}
 			Node operationNode = findOperationNode(referredOperation, argNodes);
 			if (operationNode == null) {
 
@@ -572,9 +569,6 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			}
 			else {
 				operationNode.addOriginatingElement(operationCallExp);
-				if ("<>".equals(operationName)) {
-					operationName.toString();
-				}
 			}
 			Type returnType = operationCallExp.getType();
 			if (returnType instanceof DataType) {

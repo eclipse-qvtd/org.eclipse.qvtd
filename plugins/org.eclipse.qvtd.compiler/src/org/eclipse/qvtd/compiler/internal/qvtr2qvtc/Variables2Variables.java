@@ -459,9 +459,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	public void assertNewAssignment(@NonNull Iterable<@NonNull Assignment> oldAssignments, @NonNull NavigationAssignment newAssignment) {
-		//		if ("tr.action := sm".equals(newAssignment.toString())) {
-		//			newAssignment.toString();
-		//		}
 		OCLExpression newSlotExpression = newAssignment.getSlotExpression();
 		if (newSlotExpression instanceof VariableExp) {
 			VariableDeclaration newVariable = ((VariableExp)newSlotExpression).getReferredVariable();
