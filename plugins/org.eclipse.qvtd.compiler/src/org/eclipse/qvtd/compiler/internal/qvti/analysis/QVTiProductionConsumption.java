@@ -409,13 +409,15 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 					}
 				}
 				for (@NonNull NamedElement producer : producingAnalysis.producers) {
-					boolean isNotify = isNotify(producer);
-					if (isNotify != needsNotify) {
-						StringBuilder sProblem = initProblem("", producer, isNotify ? " should not be notified" : " should be notified");
-						Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-						compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.ERROR, mapping, sProblem.toString()));
-						if (s != null) {
-							s.append("\n      BAD " + sProblem);
+					if (!(producer instanceof GuardParameter)) {			// GuardParameter are implicitly notified; no need to check
+						boolean isNotify = isNotify(producer);
+						if (isNotify != needsNotify) {
+							StringBuilder sProblem = initProblem("", producer, isNotify ? " should not be notified" : " should be notified");
+							Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
+							compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
+							if (s != null) {
+								s.append("\n      BAD " + sProblem);
+							}
 						}
 					}
 				}
@@ -429,7 +431,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				if (productionRange == null) {
 					StringBuilder sProblem = initProblem("", consumer, " is not produced");
 					Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.ERROR, mapping, sProblem.toString()));
+					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
 					if (s != null) {
 						s.append("\n      BAD " + sProblem);
 					}
@@ -441,7 +443,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 					if (isObserve != needsObserve) {
 						StringBuilder sProblem = initProblem("", consumer, isObserve ? " should not be observed" : " should be observed");
 						Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
-						compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.ERROR, mapping, sProblem.toString()));
+						compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
 						if (s != null) {
 							s.append("\n      BAD " + sProblem);
 						}
@@ -673,7 +675,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				if (isObserve != needsObserve) {
 					StringBuilder sProblem = initProblem("", consumer, isObserve ? " should not be observed" : " should be observed");
 					Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.ERROR, mapping, sProblem.toString()));
+					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
 					if (s != null) {
 						s.append("\n      BAD " + sProblem);
 					}
@@ -720,7 +722,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				if (isNotify != needsNotify) {
 					StringBuilder sProblem = initProblem("", producer, isNotify ? " should not be notified" : " should be notified");
 					Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.ERROR, mapping, sProblem.toString()));
+					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
 					if (s != null) {
 						s.append("\n      BAD " + sProblem);
 					}
@@ -797,7 +799,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			if (lastProducer2 == null) {
 				if (isObserve) {
 					StringBuilder s2 = initProblem("Not-produced ", " should not be observed");
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.ERROR, mapping, s2.toString()));
+					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, s2.toString()));
 				}
 				else {
 					Property referredProperty = QVTimperativeUtil.getReferredProperty(consumer);
@@ -808,13 +810,13 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			else if (!isObserve) {
 				if (firstPass <= lastProducer2) {
 					StringBuilder s2 = initProblem(null, " should be observed");
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.ERROR, mapping, s2.toString()));
+					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, s2.toString()));
 				}
 			}
 			else {
 				if (firstPass > lastProducer2) {
 					StringBuilder s2 = initProblem(null, " should not be observed");
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.ERROR, mapping, s2.toString()));
+					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, s2.toString()));
 				}
 			}
 		} */
@@ -828,7 +830,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 						if (!isNotify(producer)) {
 							StringBuilder s = initProblem("", " should be notified");
 							Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-							compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.ERROR, mapping, s.toString()));
+							compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, s.toString()));
 						}
 					}
 				}

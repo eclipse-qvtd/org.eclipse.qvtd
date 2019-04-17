@@ -62,7 +62,10 @@ public class CompilerProblems
 			throw new CompilerChainException("{0}", String.valueOf(errors));
 		}
 		if (warnings != null) {
-			throw new CompilerChainException("{0}", String.valueOf(warnings));
+			for (CompilerProblem warning : warnings) {
+				System.err.println(String.valueOf(warning));
+			}
+			//	throw new CompilerChainException("{0}", String.valueOf(warnings));
 		}
 	}
 
