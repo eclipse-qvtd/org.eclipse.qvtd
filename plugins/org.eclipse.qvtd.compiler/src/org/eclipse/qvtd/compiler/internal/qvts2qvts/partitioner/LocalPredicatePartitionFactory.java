@@ -71,7 +71,15 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 	 * Add all old nodes, including node, that have no cyclic dependency and are reachable by to-one navigation from node.
 	 */
 	protected void gatherReachableOldAcyclicNodes(@NonNull BasicPartition partition, @NonNull Set<@NonNull Node> checkableOldNodes, @NonNull Node node) {
-		if (!partition.hasNode(node) && !checkableOldNodes.contains(node) && (node.isHead() || node.isOld() && !mappingPartitioner.isCyclic(node))) {
+		if (partition.hasNode(node) || checkableOldNodes.contains(node) || mappingPartitioner.isCyclic(node)) {
+			return;
+		}
+		if ((node.isHead() || node.isOld())) {
+			// The QVTc SimpleUML2RDBMS uses 'poor style' of multi-child to parent, rather than multiple child-to-parent.
+			// this leads to a redundant Set node in classComplexAttributes<<local>>, which could be pruned by
+			// excluding predicated collection-type nodes. But it's a not-essential fudge. The true fix is
+			// 'good style' or auto-conversion to 'good style' or multi-stage local-predication.
+			// if (!(node.isDataType() && node.isPredicated())) {
 			checkableOldNodes.add(node);
 			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
 				if (edge.isOld()) {
@@ -79,6 +87,7 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 					gatherReachableOldAcyclicNodes(partition, checkableOldNodes, targetNode);
 				}
 			}
+			// }
 		}
 	}
 
