@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.EMFPlugin;
@@ -19,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
 import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
@@ -70,6 +73,24 @@ public class QVTrCompilerTests extends LoadTestCase
 	public static final boolean ENABLE_ATL2QVTr_CG_exec = false;	// Set true to debug; may fail if _QVTd_QVTrCompilerTests__testQVTrCompiler_ATL2QVTr_CG isn't a good polugin project.
 	public static final boolean ENABLE_ATL2QVTr_reverse_CG = false;	// Set true to debug; test does not pass yet - wip
 	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
+
+	protected static class MyQVTrelationTestFileSystemHelper extends QVTrelationTestFileSystemHelper
+	{
+		private @Nullable List<@NonNull String> requiredBundles = null;
+
+		public void addRequiredBundle(@NonNull String requiredBundle) {
+			List<@NonNull String> requiredBundles2 = requiredBundles;
+			if (requiredBundles2 == null) {
+				requiredBundles = requiredBundles2 = new ArrayList<>();
+			}
+			requiredBundles2.add(requiredBundle);
+		}
+
+		@Override
+		protected @NonNull List<@NonNull String> getRequiredBundles() {
+			return requiredBundles != null ? requiredBundles : super.getRequiredBundles();
+		}
+	}
 
 	protected class MyQVT extends AbstractTestQVT
 	{
@@ -169,6 +190,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
+	public MyQVTrelationTestFileSystemHelper testFileSystemHelper = null;
+
 	@Override
 	protected @NonNull OCLInternal createOCL() {
 		return QVTrelation.newInstance(getTestProjectManager(), null);
@@ -183,8 +206,12 @@ public class QVTrCompilerTests extends LoadTestCase
 	}
 
 	@Override
-	protected @NonNull TestFileSystemHelper getTestFileSystemHelper() {
-		return new QVTrelationTestFileSystemHelper();
+	protected @NonNull MyQVTrelationTestFileSystemHelper getTestFileSystemHelper() {
+		MyQVTrelationTestFileSystemHelper testFileSystemHelper2 = testFileSystemHelper;
+		if (testFileSystemHelper2 == null) {
+			testFileSystemHelper = testFileSystemHelper2 = new MyQVTrelationTestFileSystemHelper();
+		}
+		return testFileSystemHelper2;
 	}
 
 	/* (non-Javadoc)
@@ -251,6 +278,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
 		//	TransformationPartitioner.MERGE_SEQUENTIAL.setState(true);
 		//		QVTiProductionConsumption.SUMMARY.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
+		MyQVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
+		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.atl");
 		Class<? extends Transformer> txClass1 = null;
 		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
