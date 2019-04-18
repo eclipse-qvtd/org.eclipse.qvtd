@@ -132,6 +132,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * <p>
 	 * If the meaning of the '<em>Super Property Datums</em>' reference list isn't clear,
 	 * there really should be more of a description here...
+	 * @deprecated no longer used - cache too flaky, all candidates ssessed at consumption point
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Property Datums</em>' reference list.
@@ -139,6 +140,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!superPropertyDatums'"
 	 * @generated
 	 */
+	@Deprecated
 	List<PropertyDatum> getSuperPropertyDatums();
 
 	/**

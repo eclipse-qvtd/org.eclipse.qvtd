@@ -19,7 +19,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -75,16 +74,16 @@ public abstract class AbstractPartialRegionsAnalysis<@NonNull PRA extends Partia
 
 	@Override
 	public @NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> addProducer(@NonNull PropertyDatum propertyDatum, @NonNull PartialRegionAnalysis<@NonNull PRA> producer) {
-		if (this instanceof AbstractTransformationAnalysis) {		// FIXME irregular for ATL2QVTr --- why??
-			ActualPartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis = lazyCreatePropertyAnalysis(propertyDatum);
-			propertyAnalysis.addProducer(producer);
-			return propertyAnalysis;
-		}
-		for (@NonNull PropertyDatum superPropertyDatum : QVTscheduleUtil.getSuperPropertyDatums(propertyDatum)) {
-			ActualPartialRegionPropertyAnalysis<@NonNull PRA> superPropertyAnalysis = lazyCreatePropertyAnalysis(superPropertyDatum);
-			superPropertyAnalysis.addProducer(producer);
-		}
-		return getPropertyAnalysis(propertyDatum);
+		//		if (this instanceof AbstractTransformationAnalysis) {		// FIXME irregular for ATL2QVTr --- why??
+		ActualPartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis = lazyCreatePropertyAnalysis(propertyDatum);
+		propertyAnalysis.addProducer(producer);
+		return propertyAnalysis;
+		//		}
+		//		for (@NonNull PropertyDatum superPropertyDatum : QVTscheduleUtil.getSuperPropertyDatums(propertyDatum)) {
+		//			ActualPartialRegionPropertyAnalysis<@NonNull PRA> superPropertyAnalysis = lazyCreatePropertyAnalysis(superPropertyDatum);
+		//			superPropertyAnalysis.addProducer(producer);
+		//		}
+		//		return getPropertyAnalysis(propertyDatum);
 	}
 
 	public @Nullable PartialRegionClassAnalysis<@NonNull PRA> basicGetClassAnalysis(@NonNull ClassDatum classDatum) {

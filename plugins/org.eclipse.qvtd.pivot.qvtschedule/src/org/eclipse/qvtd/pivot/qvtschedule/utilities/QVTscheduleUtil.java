@@ -936,6 +936,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(classDatum.getSuperClassDatums());
 	}
 
+	@Deprecated /* @deprecated no longer used - cache too flaky, all candidates ssessed at consumption point */
 	public static @NonNull Iterable<@NonNull PropertyDatum> getSuperPropertyDatums(@NonNull PropertyDatum propertyDatum) {
 		return ClassUtil.nullFree(propertyDatum.getSuperPropertyDatums());
 	}

@@ -383,8 +383,8 @@ public class DatumCaches
 		// If not found we create it
 		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
-		org.eclipse.ocl.pivot.Class owningClass = QVTbaseUtil.getOwningClass(property);
-		CompleteClass hostCompleteClass =classDatum.getCompleteClass();// completeModel.getCompleteClass(owningClass);
+		//	org.eclipse.ocl.pivot.Class owningClass = QVTbaseUtil.getOwningClass(property);
+		CompleteClass hostCompleteClass = QVTscheduleUtil.getCompleteClass(classDatum);// completeModel.getCompleteClass(owningClass);
 		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setReferredTypedModel(typedModel);
 		propertyDatum.setReferredProperty(property);
@@ -393,12 +393,12 @@ public class DatumCaches
 		assert targetCompleteClass.conformsTo(hostCompleteClass);
 		PropertyDatum oldPropertyDatum = property2propertyDatum.put(property, propertyDatum);
 		assert oldPropertyDatum == null;
-		for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {
+		/*	for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {
 			if (superCompleteClass.conformsTo(hostCompleteClass)) {
 				PropertyDatum superPropDatum = getPropertyDatum(typedModel, superCompleteClass, property);
 				propertyDatum.getSuperPropertyDatums().add(superPropDatum);
 			}
-		}
+		} */
 		// Lazily assign the opposite
 		Property oppositeProperty = property.getOpposite();
 		if (oppositeProperty != null) {
