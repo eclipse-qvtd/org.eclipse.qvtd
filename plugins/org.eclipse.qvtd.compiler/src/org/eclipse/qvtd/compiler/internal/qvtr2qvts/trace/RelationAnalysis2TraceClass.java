@@ -412,7 +412,7 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		RelationAnalysis invokedRelationAnalysis = invocationAnalysis.getInvokedRelationAnalysis().getBaseRelationAnalysis();
 		RelationAnalysis2TraceGroup invokedRule2TraceGroup = invokedRelationAnalysis.getRuleAnalysis2TraceGroup();
 		String nameHint = relationAnalysis2traceGroup.getNameGenerator().createInvocationTraceProperty(invokedRelationAnalysis.getRule());
-		Invocation2TraceProperty relation2traceProperty = new Invocation2TraceProperty(this, nameHint, invokedRule2TraceGroup.getInvocationClass());
+		Invocation2TraceProperty relation2traceProperty = new Invocation2TraceProperty(this, nameHint, invokedRule2TraceGroup.getInvocationClass(), invocationAnalysis.isWhen() && !invocationAnalysis.isTop());
 		Invocation2TraceProperty oldRelation2traceProperty = invocationAnalysis2relation2traceProperty2.put(invocationAnalysis, relation2traceProperty);
 		assert oldRelation2traceProperty == null;
 		return relation2traceProperty;

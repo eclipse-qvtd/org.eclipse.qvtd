@@ -19,8 +19,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty
  */
 public class Invocation2TraceProperty extends Element2MiddleProperty
 {
-	public Invocation2TraceProperty(@NonNull RelationAnalysis2MiddleType invokingRelation2middleType, @NonNull String nameHint, org.eclipse.ocl.pivot.@NonNull Class type) {
-		super(invokingRelation2middleType, nameHint, type, false);
+	public Invocation2TraceProperty(@NonNull RelationAnalysis2MiddleType invokingRelation2middleType, @NonNull String nameHint, org.eclipse.ocl.pivot.@NonNull Class type, boolean isRequired) {
+		super(invokingRelation2middleType, nameHint, type, isRequired);
 	}
 
 	@Override
