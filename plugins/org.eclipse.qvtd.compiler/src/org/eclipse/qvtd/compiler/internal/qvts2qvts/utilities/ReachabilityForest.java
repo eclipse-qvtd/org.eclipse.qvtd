@@ -214,7 +214,10 @@ public class ReachabilityForest
 					Integer d1t = node2cost.get(t1);
 					Integer d2s = node2cost.get(s2);
 					Integer d2t = node2cost.get(t2);
-					assert (d1s != null) && (d1t != null) && (d2s != null) && (d2t != null);
+					assert d1s != null : s1 + " is not reachable within " + s1.getOwningRegion();		// FIXME chnage to PartitionProblem
+					assert d1t != null : t1 + " is not reachable within " + t1.getOwningRegion();
+					assert d2s != null : s2 + " is not reachable within " + s2.getOwningRegion();
+					assert d2t != null : t2 + " is not reachable within " + t2.getOwningRegion();
 					int d1 = Math.max(d1s,  d1t);
 					int d2 = Math.max(d2s,  d2t);
 					if (d1 != d2) {
