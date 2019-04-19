@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 
 /**
- * The Activator Partition creates the realized trace node ftom one (or more) head nodes
+ * The Activator Partition creates the realized trace node from one (or more) head nodes
  * exploiting the uniqueness of the micromapping invocation to share duplicate attempts at realization.
  *
  * FIXME. This functionality should eventually be absorbed into the roor region together with

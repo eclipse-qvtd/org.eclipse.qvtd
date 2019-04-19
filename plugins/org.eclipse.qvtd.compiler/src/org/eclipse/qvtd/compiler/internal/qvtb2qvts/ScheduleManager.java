@@ -178,7 +178,7 @@ public interface ScheduleManager
 	void setRootRegion(@NonNull MappingRegion mappingRegion, @Nullable RootRegion rootRegion);
 
 	/**
-	 * Eeturn true to use the new QVTr ActivatorRegion support, false to retain the older, one day obsolete support.
+	 * Return true to use the new QVTr ActivatorRegion support, false to retain the older, one day obsolete support.
 	 */
 	boolean useActivators();
 	void writeDebugGraphs(@NonNull Graphable graphable, @Nullable String context);

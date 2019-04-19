@@ -288,7 +288,13 @@ public class MappingPartitioner implements Nameable
 	//	}
 
 	private @NonNull PartitioningStrategy createPartitioningStrategy(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		return new AbstractPartitioningStrategy(partitionedTransformationAnalysis, this) {};
+		boolean useActivators = scheduleManager.useActivators();
+		if (useActivators) { 		// New QVTr-style spportg without activators
+			return new DefaultPartitioningStrategy(partitionedTransformationAnalysis, this);
+		}
+		else {			// Obsolete QVTc-sty;e spportg without activators
+			return new LegacyPartitioningStrategy(partitionedTransformationAnalysis, this);
+		}
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getAlreadyRealizedEdges() {
