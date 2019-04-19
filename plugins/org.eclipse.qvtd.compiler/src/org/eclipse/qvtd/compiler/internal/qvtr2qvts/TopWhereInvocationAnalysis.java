@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 /**
@@ -26,7 +28,17 @@ public class TopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 	}
 
 	@Override
+	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
+		throw new UnsupportedOperationException();	// Cannot happen synthesizeInvocationNodes is empty.
+	}
+
+	@Override
 	protected @NonNull Node createInvocationNode(@NonNull Node invokingTraceNode) {
+		throw new UnsupportedOperationException();	// Cannot happen synthesizeInvocationNodes is empty.
+	}
+
+	@Override
+	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
 		throw new UnsupportedOperationException();	// Cannot happen synthesizeInvocationNodes is empty.
 	}
 

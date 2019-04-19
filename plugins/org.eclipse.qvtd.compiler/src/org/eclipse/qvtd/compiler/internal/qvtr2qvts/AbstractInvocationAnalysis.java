@@ -55,9 +55,10 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 
 	protected void createGlobalSuccessNodeAndEdge(@NonNull Node invokedNode) {}
 
-	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(invokedNode, invocationProperty, argumentNode, null);
-	}
+	/**
+	 * Create the invocation edge for an input domain of the invoked relation.
+	 */
+	protected abstract @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode);
 
 	protected void createInvocationEdges(@NonNull Node invokedNode) {
 		RelationAnalysis2MiddleType baseInvokedRuleAnalysis2MiddleType = getBaseInvokedRuleAnalysis2MiddleType();
@@ -67,7 +68,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 			assert argumentNode != null;
 			VariableDeclaration overriddenRootVariable = QVTrelationUtil.getOverriddenVariable(baseInvokedRelation, rootVariable);
 			Property invocationProperty = baseInvokedRuleAnalysis2MiddleType.getTraceProperty(overriddenRootVariable);
-			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(invokedNode);
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(argumentNode);
 			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
 			if (domainUsage.isOutput()) {
 				createOutputEdge(invokedNode, invocationProperty, argumentNode);
@@ -78,6 +79,9 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		}
 	}
 
+	/**
+	 * Create the invocation trace node for the invoked relation.
+	 */
 	protected abstract @NonNull Node createInvocationNode(@NonNull Node invokingTraceNode);
 
 	protected void createInvokingTraceEdge(@NonNull Node invokedNode, @NonNull Node invokingTraceNode) {
@@ -88,9 +92,10 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		invokingRelationAnalysis.createRealizedNavigationEdge(invokingTraceNode, invocationTraceProperty, invokedNode, null);
 	}
 
-	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(invokedNode, invocationProperty, argumentNode, null);
-	}
+	/**
+	 * Create the invocation edge for an output domain of the invoked relation.
+	 */
+	protected abstract @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode);
 
 	protected @NonNull Relation getBaseInvokedRelation() {
 		return QVTrelationUtil.getBaseRelation(invokedRelationAnalysis.getRule());

@@ -44,8 +44,10 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 		String name = nameGenerator.createWhenInvocationPropertyName(invokedRelation);
 		ClassDatum classDatum = getInvokedClassDatum();
 		boolean isMatched = isMatched();
-		return invokingRelationAnalysis.createPredicatedNode(name, classDatum, isMatched);
+		return createInvocationNode(name, classDatum, isMatched);
 	}
+
+	protected abstract @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched);
 
 	@Override
 	protected void createInvokingTraceEdge(@NonNull Node invokedNode, @NonNull Node invokingTraceNode) {

@@ -11,9 +11,12 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 /**
  * A NonTopWhereInvocationAnalysis identifies the invocation of a non-top Relation by a where clause in another.
@@ -25,13 +28,8 @@ public class NonTopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 	}
 
 	@Override
-	public boolean isTop() {
-		return false;
-	}
-
-	@Override
-	public boolean isWhen() {
-		return false;
+	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
+		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, null);
 	}
 
 	@Override
@@ -43,6 +41,11 @@ public class NonTopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 		return invokingRelationAnalysis.createRealizedNode(name, classDatum, true);
 	}
 
+	@Override
+	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
+		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, null);
+	}
+
 	/*	@Override
 	protected @NonNull ClassDatum getInvokedClassDatum() {
 		TypedModel traceTypedModel = scheduleManager.getTraceTypedModel();
@@ -50,6 +53,16 @@ public class NonTopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 		org.eclipse.ocl.pivot.Class invokedInvocationClass = invokedRuleAnalysis2TraceGroup.getInvocationClass();
 		return scheduleManager.getClassDatum(traceTypedModel, invokedInvocationClass);
 	} */
+
+	@Override
+	public boolean isTop() {
+		return false;
+	}
+
+	@Override
+	public boolean isWhen() {
+		return false;
+	}
 
 	@Override
 	public @NonNull String toString() {

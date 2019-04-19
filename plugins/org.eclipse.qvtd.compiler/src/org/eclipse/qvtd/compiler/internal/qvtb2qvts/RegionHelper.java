@@ -435,7 +435,10 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 
 	public @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		Role phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode));
-		Role edgeRole = phase;
+		return createNavigationEdge(phase, sourceNode, source2targetProperty, targetNode, isPartial);
+	}
+
+	public @NonNull NavigableEdge createNavigationEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		NavigationEdge edge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 		edge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
 		edge.initializeProperty(source2targetProperty, isPartial);
