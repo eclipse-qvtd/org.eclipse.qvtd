@@ -126,6 +126,7 @@ public abstract class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 			s.append("Automatic-Module-Name: " + projectName + "\n");
 			s.append("Bundle-SymbolicName: " + projectName + ";singleton:=true\n");
 			s.append("Bundle-Version: 1.0.0.qualifier\n");
+			s.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.8\n");
 			boolean isFirst = true;
 			for (@NonNull String requiredBundle : getRequiredBundles()) {
 				s.append(isFirst ? "Require-Bundle: " : ",\n ");
@@ -133,12 +134,25 @@ public abstract class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 				isFirst = false;
 			}
 			s.append("\n");
-			s.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.8\n");
+			isFirst = true;
+			List<@NonNull String> exportedPackages = getExportedPackages();
+			if (exportedPackages != null) {
+				for (@NonNull String exportedPackage : exportedPackages) {
+					s.append(isFirst ? "Export-Package: " : ",\n ");
+					s.append(exportedPackage);
+					isFirst = false;
+				}
+			}
+			s.append("\n");
 			s.close();
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
 		return file;
+	}
+
+	protected @Nullable List<@NonNull String> getExportedPackages() {
+		return null;
 	}
 
 	protected @NonNull List<@NonNull String> getRequiredBundles() {

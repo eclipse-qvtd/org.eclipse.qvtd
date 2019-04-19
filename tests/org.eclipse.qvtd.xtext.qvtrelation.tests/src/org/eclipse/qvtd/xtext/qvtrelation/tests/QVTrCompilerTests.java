@@ -27,7 +27,6 @@ import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
-import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
@@ -76,7 +75,16 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	protected static class MyQVTrelationTestFileSystemHelper extends QVTrelationTestFileSystemHelper
 	{
+		private @Nullable List<@NonNull String> exportedPackages = null;
 		private @Nullable List<@NonNull String> requiredBundles = null;
+
+		public void addExportedPackage(@NonNull String exportedPackage) {
+			List<@NonNull String> exportedPackages2 = exportedPackages;
+			if (exportedPackages2 == null) {
+				exportedPackages = exportedPackages2 = new ArrayList<>();
+			}
+			exportedPackages2.add(exportedPackage);
+		}
 
 		public void addRequiredBundle(@NonNull String requiredBundle) {
 			List<@NonNull String> requiredBundles2 = requiredBundles;
@@ -84,6 +92,11 @@ public class QVTrCompilerTests extends LoadTestCase
 				requiredBundles = requiredBundles2 = new ArrayList<>();
 			}
 			requiredBundles2.add(requiredBundle);
+		}
+
+		@Override
+		protected @Nullable List<@NonNull String> getExportedPackages() {			// FIXME ?? compute from other content ??
+			return exportedPackages != null ? exportedPackages : super.getExportedPackages();
 		}
 
 		@Override
@@ -281,6 +294,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		MyQVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.atl");
+		testFileSystemHelper.addExportedPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr");
 		Class<? extends Transformer> txClass1 = null;
 		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
