@@ -184,7 +184,7 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.basicGetLocalSuccessNode(traceNode);
 	}
 
-	private void check(/*boolean isInfallible*/) {
+	/*private*/ void check(/*boolean isInfallible*/) {
 		/*	Set<@NonNull Edge> infallibleEdges = null;
 		Set<@NonNull Node> infallibleNodes = null;
 		if (isInfallible) {
@@ -286,6 +286,10 @@ public class MappingPartitioner implements Nameable
 	//	public @NonNull Iterable<@NonNull Edge> getAlreadyPredicatedEdges() {
 	//		return alreadyPredicatedEdges;
 	//	}
+
+	private @NonNull PartitioningStrategy createPartitioningStrategy(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+		return new AbstractPartitioningStrategy(partitionedTransformationAnalysis, this) {};
+	}
 
 	public @NonNull Iterable<@NonNull Edge> getAlreadyRealizedEdges() {
 		return alreadyRealizedEdges.keySet();
@@ -473,6 +477,10 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getTraceNodes();
 	}
 
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
+		return transformationAnalysis;
+	}
+
 	public boolean hasCheckedEdge(@NonNull Edge edge) {
 		return alreadyCheckedEdges.contains(edge);
 	}
@@ -539,99 +547,8 @@ public class MappingPartitioner implements Nameable
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
 			return Collections.singletonList(new NonPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
 		}
-		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
-		//	boolean isInfallible = false;
-		//	if (cycleAnalysis != null) {
-		//		isInfallible = cycleAnalysis.isInfallible();
-		//	}
-		boolean hasPredication = false;
-		boolean needsActivator = false;
-		List<@NonNull Node> realizedWhenNodes = getRealizedWhenNodes();
-		boolean useActivators = scheduleManager.useActivators();
-		if (useActivators) {		// QVTr
-			List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
-			hasPredication = (predicatedWhenNodes.size() > 0) || (realizedWhenNodes.size() > 0);
-			List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
-			if (realizedExecutionNodes.size() > 0)	{			// A 'single' realized "trace" node is a boring no-override top activation.
-				needsActivator = true;
-			}
-			else {
-				needsActivator = false;
-			}
-		}
-		else {		// legacy QVTc
-			Iterable<@NonNull Node> predicatedMiddleNodes = getPredicatedMiddleNodes();
-			hasPredication = !Iterables.isEmpty(predicatedMiddleNodes);
-		}
-		boolean needsSpeculation = isCyclic && hasPredication; //(dispatchedTraceNodes2.isEmpty() ? !predicatedMiddleNodes.isEmpty() : !predicatedMiddleNodes.containsAll(dispatchedTraceNodes2));
-		//
-		//	Create the partitioned regions
-		//
-		List<@NonNull PartitionAnalysis> newPartitionAnalyses = new ArrayList<>();
-		if (needsActivator) {
-			//
-			//	Create an activator to make a QVTr top relation behave as a non-top relation.
-			//
-			newPartitionAnalyses.add(new ActivatorPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
-		}
-		if (realizedWhenNodes.size() > 0) {
-			newPartitionAnalyses.add(new WhenPartitionFactory(this, useActivators).createPartitionAnalysis(partitionedTransformationAnalysis));
-		}
-		if (!needsSpeculation) {
-			//
-			//	If speculation is not needed just add the functionality as a single region.
-			//
-			if (newPartitionAnalyses.isEmpty()) {		// i.e. a QVTr non top relation - re-use as is
-				newPartitionAnalyses.add(new NonPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
-			}
-			else {							// i.e. a QVTr top relation - create a residue to finish off the activator
-				newPartitionAnalyses.add(new ResidualPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
-			}
-		}
-		else {								// cycles may need speculation and partitioning into isolated actions
-			//			if (isInfallible) {
-			//				regionAnalysis.getFallibilities()
-			//			}
-			if (useActivators) {
-				regionAnalysis.createLocalSuccess();
-			}
-			BasicPartitionAnalysis localPredicatePartition = new LocalPredicatePartitionFactory(this, useActivators).createPartitionAnalysis(partitionedTransformationAnalysis);
-			BasicPartitionAnalysis globalPredicatePartition = new GlobalPredicatePartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis);
-			BasicPartitionAnalysis speculatedPartition = new SpeculatedPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis);
-			newPartitionAnalyses.add(localPredicatePartition);
-			newPartitionAnalyses.add(globalPredicatePartition);
-			newPartitionAnalyses.add(speculatedPartition);
-			if (!useActivators) {
-				globalPredicatePartition.addExplicitPredecessor(localPredicatePartition);
-				speculatedPartition.addExplicitPredecessor(globalPredicatePartition);
-			}
-			//
-			//	Create an AssignmentRegion for each still to-be-realized edge to an output which may well result
-			//  in two realized edges.
-			//
-			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
-				if (!hasRealizedEdge(outputEdge)) {
-					newPartitionAnalyses.add(new AssignmentPartitionFactory(this, outputEdge).createPartitionAnalysis(partitionedTransformationAnalysis));
-				}
-			}
-			//
-			//	Create an AssignmentRegion for each still to-be-realized edge.
-			//
-			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
-				if (!hasRealizedEdge(edge)) {
-					newPartitionAnalyses.add(new AssignmentPartitionFactory(this, edge).createPartitionAnalysis(partitionedTransformationAnalysis));
-				}
-			}
-		}
-		//		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-		//			for (@NonNull PartitionAnalysis partitionAnalysis : newPartitionAnalyses) {
-		//				scheduleManager.writeDebugGraphs(partitionAnalysis.getPartition(), null);
-		//			}
-		//		}
-		if (newPartitionAnalyses.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
-			check(/*isInfallible*/);
-		}
-		return newPartitionAnalyses;
+		PartitioningStrategy partitioningStrategy = createPartitioningStrategy(partitionedTransformationAnalysis);
+		return partitioningStrategy.partition();
 	}
 
 	@Override
