@@ -37,7 +37,6 @@ import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 public class IncrementalObjectManager extends AbstractObjectManager
 {
@@ -80,7 +79,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 					this.value = ecoreValue;
 					break;
 				case ASSIGNED:
-					QVTruntimeUtil.errPrintln("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
+					objectManager.reassigned(eObject, eFeature, this.value, ecoreValue);
 					break;
 				case REASSIGNABLE:
 					mode = SlotMode.ASSIGNED;
@@ -947,5 +946,9 @@ public class IncrementalObjectManager extends AbstractObjectManager
 				execution.revoke();
 			}
 		}
+	}
+
+	public void reassigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object oldValue, @Nullable Object newValue) {
+		System.err.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + newValue);
 	}
 }

@@ -198,7 +198,8 @@ public class LazyObjectManager extends AbstractObjectManager
 					break;
 				case ASSIGNED:
 					if (!(eFeature instanceof EOppositeReferenceImpl)) {
-						QVTruntimeUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
+						objectManager.reassigned(eObject, eFeature, this.value, ecoreValue);
+						System.err.println("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
 					}
 					break;
 			}
@@ -1131,5 +1132,9 @@ public class LazyObjectManager extends AbstractObjectManager
 	@Override
 	public void got(Execution.@NonNull Incremental computation, @NonNull Object eObject, EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 		// Ignore incremental API
+	}
+
+	public void reassigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object oldValue, @Nullable Object newValue) {
+		System.err.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + newValue);
 	}
 }
