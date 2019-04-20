@@ -54,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -303,9 +304,14 @@ public class RelationAnalysis extends RuleAnalysis
 	private @NonNull Map<@NonNull VariableDeclaration, @NonNull List<@NonNull OCLExpression>> variable2expressions = new HashMap<>();
 
 	/**
-	 * The expressions that call this relation.
+	 * The implicit/when expressions that call this relation.
 	 */
-	//	private @Nullable List<@NonNull RelationCallExp> incomingInvocations = null;
+	private @Nullable List<@NonNull RelationCallExp> incomingWhenInvocations = null;
+
+	/**
+	 * The where expressions that call this relation.
+	 */
+	private @Nullable List<@NonNull RelationCallExp> incomingWhereInvocations = null;
 
 	/**
 	 * The expressions that call this relation from a when clause.
@@ -449,6 +455,22 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	}
 
+	protected void analyzeInvocations() {
+		for (@NonNull EObject eObject : new TreeIterable(rule, false)) {
+			if (eObject instanceof RelationCallExp) {
+				RelationCallExp relationInvocation = (RelationCallExp) eObject;
+				RelationAnalysis invokedRelationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(QVTrelationUtil.getReferredRelation(relationInvocation));
+				Pattern pattern = QVTrelationUtil.basicGetContainingPattern(eObject);
+				if ((pattern != null) && (pattern.eContainmentFeature() == QVTrelationPackage.Literals.RELATION__WHERE)) {
+					invokedRelationAnalysis.addIncomingWhereRelation(relationInvocation);
+				}
+				else {
+					invokedRelationAnalysis.addIncomingWhenRelation(relationInvocation);
+				}
+			}
+		}
+	}
+
 	protected void analyzeKeyedOutputVariables(@NonNull RelationDomain relationDomain, @NonNull Set<@NonNull VariableDeclaration> keyedOutputVariables) {
 		RelationalTransformationAnalysis transformationAnalysis2 = getTransformationAnalysis();
 		Set<@NonNull VariableDeclaration> whenedOutputVariables = getTopWhenedOutputVariables();
@@ -469,29 +491,21 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	}
 
-	/*	private void addIncomingRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> incomingInvocations2 = incomingInvocations;
-		if (incomingInvocations2 == null) {
-			incomingInvocations = incomingInvocations2 = new ArrayList<>();
-		}
-		incomingInvocations2.add(relationInvocation);
-	} */
-
-	/*	private void addIncomingWhenRelation(@NonNull RelationCallExp relationInvocation) {
+	private void addIncomingWhenRelation(@NonNull RelationCallExp relationInvocation) {
 		List<@NonNull RelationCallExp> incomingWhenInvocations2 = incomingWhenInvocations;
 		if (incomingWhenInvocations2 == null) {
 			incomingWhenInvocations = incomingWhenInvocations2 = new ArrayList<>();
 		}
 		incomingWhenInvocations2.add(relationInvocation);
-	} */
+	}
 
-	/*	private void addIncomingWhereRelation(@NonNull RelationCallExp relationInvocation) {
+	private void addIncomingWhereRelation(@NonNull RelationCallExp relationInvocation) {
 		List<@NonNull RelationCallExp> incomingWhereInvocations2 = incomingWhereInvocations;
 		if (incomingWhereInvocations2 == null) {
 			incomingWhereInvocations = incomingWhereInvocations2 = new ArrayList<>();
 		}
 		incomingWhereInvocations2.add(relationInvocation);
-	} */
+	}
 
 	/*	private void addOutgoingRelation(@NonNull RelationCallExp relationInvocation) {
 		List<@NonNull RelationCallExp> outgoingInvocations2 = outgoingInvocations;
@@ -558,54 +572,6 @@ public class RelationAnalysis extends RuleAnalysis
 		UtilityAnalysis.assignUtilities(scheduleManager, region);
 	}
 
-	/*	private void addIncomingRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> incomingInvocations2 = incomingInvocations;
-		if (incomingInvocations2 == null) {
-			incomingInvocations = incomingInvocations2 = new ArrayList<>();
-		}
-		incomingInvocations2.add(relationInvocation);
-	} */
-
-	/*	private void addIncomingWhenRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> incomingWhenInvocations2 = incomingWhenInvocations;
-		if (incomingWhenInvocations2 == null) {
-			incomingWhenInvocations = incomingWhenInvocations2 = new ArrayList<>();
-		}
-		incomingWhenInvocations2.add(relationInvocation);
-	} */
-
-	/*	private void addIncomingWhereRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> incomingWhereInvocations2 = incomingWhereInvocations;
-		if (incomingWhereInvocations2 == null) {
-			incomingWhereInvocations = incomingWhereInvocations2 = new ArrayList<>();
-		}
-		incomingWhereInvocations2.add(relationInvocation);
-	} */
-
-	/*	private void addOutgoingRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> outgoingInvocations2 = outgoingInvocations;
-		if (outgoingInvocations2 == null) {
-			outgoingInvocations = outgoingInvocations2 = new ArrayList<>();
-		}
-		outgoingInvocations2.add(relationInvocation);
-	} */
-
-	/*	private void addOutgoingWhenRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> outgoingWhenInvocations2 = outgoingWhenInvocations;
-		if (outgoingWhenInvocations2 == null) {
-			outgoingWhenInvocations = outgoingWhenInvocations2 = new ArrayList<>();
-		}
-		outgoingWhenInvocations2.add(relationInvocation);
-	} */
-
-	/*	private void addOutgoingWhereRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> outgoingWhereInvocations2 = outgoingWhereInvocations;
-		if (outgoingWhereInvocations2 == null) {
-			outgoingWhereInvocations = outgoingWhereInvocations2 = new ArrayList<>();
-		}
-		outgoingWhereInvocations2.add(relationInvocation);
-	} */
-
 	protected void analyzeRealizedOutputVariables(@NonNull RelationDomain relationDomain, @NonNull Set<@NonNull VariableDeclaration> realizedOutputVariables) {
 		for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(relationDomain)) {
 			TemplateExp templateExpression = QVTrelationUtil.getOwnedTemplateExpression(domainPattern);
@@ -624,6 +590,7 @@ public class RelationAnalysis extends RuleAnalysis
 		Relation relation = getRule();
 		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
 		variable2templateExp = analyzeVariable2TemplateExp();
+		analyzeInvocations();
 		Set<@NonNull VariableDeclaration> topWhenedOutputVariables2 = topWhenedOutputVariables = new HashSet<>();
 		Set<@NonNull VariableDeclaration> nonTopWhenedOutputVariables2 = nonTopWhenedOutputVariables = new HashSet<>();
 		analyzeWhenedOutputVariables(topWhenedOutputVariables2, nonTopWhenedOutputVariables2);
@@ -772,11 +739,24 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		}
 		else {
+			boolean hasWhenInvocations = (incomingWhenInvocations != null) && !incomingWhenInvocations.isEmpty();
+			boolean hasWhereInvocations = (incomingWhereInvocations != null) && !incomingWhereInvocations.isEmpty();
+			boolean hasWhenAndWhereInvocations = hasWhenInvocations && hasWhereInvocations;
 			if (isWhen) {
-				invocationAnalysis = new NonTopWhenInvocationAnalysis(this, invokedRelationAnalysis);
+				if (hasWhenAndWhereInvocations) {
+					invocationAnalysis = new NonTopWhenAfterWhereInvocationAnalysis(this, invokedRelationAnalysis);
+				}
+				else {
+					invocationAnalysis = new NonTopWhenOnlyInvocationAnalysis(this, invokedRelationAnalysis);
+				}
 			}
 			else {
-				invocationAnalysis = new NonTopWhereInvocationAnalysis(this, invokedRelationAnalysis);
+				if (hasWhenAndWhereInvocations) {
+					invocationAnalysis = new NonTopWhereBeforeWhenInvocationAnalysis(this, invokedRelationAnalysis);
+				}
+				else {
+					invocationAnalysis = new NonTopWhereOnlyInvocationAnalysis(this, invokedRelationAnalysis);
+				}
 			}
 		}
 		addOutgoingInvocationAnalysis(invocationAnalysis);

@@ -19,11 +19,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 /**
- * A NonTopWhereInvocationAnalysis identifies the invocation of a non-top Relation by a where clause in another.
+ * A NonTopWhereOnlyInvocationAnalysis identifies the invocation of a non-top Relation by a where clause in another.
+ * The results of the Relation invocation are exploited by a when clause somewhere else.
  */
-public class NonTopWhereInvocationAnalysis extends AbstractInvocationAnalysis
+public class NonTopWhereBeforeWhenInvocationAnalysis extends AbstractInvocationAnalysis
 {
-	public NonTopWhereInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
+	public NonTopWhereBeforeWhenInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
 		super(invokingRelationAnalysis, invokedRelationAnalysis);
 	}
 
