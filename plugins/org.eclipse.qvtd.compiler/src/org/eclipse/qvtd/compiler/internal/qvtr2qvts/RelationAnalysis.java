@@ -460,6 +460,10 @@ public class RelationAnalysis extends RuleAnalysis
 			if (eObject instanceof RelationCallExp) {
 				RelationCallExp relationInvocation = (RelationCallExp) eObject;
 				RelationAnalysis invokedRelationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(QVTrelationUtil.getReferredRelation(relationInvocation));
+				String name= invokedRelationAnalysis.getName();
+				if ("mapVariable_qvtr".equals(name)) {
+					getClass();
+				}
 				Pattern pattern = QVTrelationUtil.basicGetContainingPattern(eObject);
 				if ((pattern != null) && (pattern.eContainmentFeature() == QVTrelationPackage.Literals.RELATION__WHERE)) {
 					invokedRelationAnalysis.addIncomingWhereRelation(relationInvocation);
@@ -739,8 +743,8 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		}
 		else {
-			boolean hasWhenInvocations = (incomingWhenInvocations != null) && !incomingWhenInvocations.isEmpty();
-			boolean hasWhereInvocations = (incomingWhereInvocations != null) && !incomingWhereInvocations.isEmpty();
+			boolean hasWhenInvocations = (invokedRelationAnalysis.incomingWhenInvocations != null) && !invokedRelationAnalysis.incomingWhenInvocations.isEmpty();
+			boolean hasWhereInvocations = (invokedRelationAnalysis.incomingWhereInvocations != null) && !invokedRelationAnalysis.incomingWhereInvocations.isEmpty();
 			boolean hasWhenAndWhereInvocations = hasWhenInvocations && hasWhereInvocations;
 			if (isWhen) {
 				if (hasWhenAndWhereInvocations) {

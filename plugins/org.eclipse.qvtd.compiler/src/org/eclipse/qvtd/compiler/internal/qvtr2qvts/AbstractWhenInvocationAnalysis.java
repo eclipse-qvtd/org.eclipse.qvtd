@@ -16,7 +16,9 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2MiddleType;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 /**
  * An AbstractWhenInvocationAnalysis identifies the invocation of one Relation from the when clause of another.
@@ -38,6 +40,11 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 	}
 
 	@Override
+	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
+		return invokingRelationAnalysis.createNavigationEdge(Role.PREDICATED, invokedNode, invocationProperty, argumentNode, null);
+	}
+
+	@Override
 	protected @NonNull Node createInvocationNode(@NonNull Node invokingTraceNode) {
 		QVTrelationNameGenerator nameGenerator = scheduleManager.getNameGenerator();	// FIXME unique names
 		Relation invokedRelation = invokedRelationAnalysis.getRule();
@@ -45,6 +52,21 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 		ClassDatum classDatum = getInvokedClassDatum();
 		boolean isMatched = isMatched();
 		return createInvocationNode(name, classDatum, isMatched);
+	}
+
+	@Override
+	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
+		return invokingRelationAnalysis.createNavigationEdge(Role.PREDICATED, invokedNode, invocationProperty, argumentNode, null);
+	}
+
+	@Override
+	public boolean isTop() {
+		return true;
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return invokingRelationAnalysis.getRule().getName() + "==when==top==>" + invokedRelationAnalysis.getRule().getName();
 	}
 
 	protected abstract @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched);

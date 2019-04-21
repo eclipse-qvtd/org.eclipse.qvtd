@@ -67,6 +67,6 @@ public class NonTopWhereOnlyInvocationAnalysis extends AbstractInvocationAnalysi
 
 	@Override
 	public @NonNull String toString() {
-		return invokingRelationAnalysis.getRule().getName() + "==where==non-top==>" + invokedRelationAnalysis.getRule().getName();
+		return invokingRelationAnalysis.getRule().getName() + "==where-only==non-top==>" + invokedRelationAnalysis.getRule().getName();
 	}
 }
