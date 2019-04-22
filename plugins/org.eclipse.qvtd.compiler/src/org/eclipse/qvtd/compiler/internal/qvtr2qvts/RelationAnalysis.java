@@ -20,10 +20,12 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -758,7 +760,24 @@ public class RelationAnalysis extends RuleAnalysis
 					invocationAnalysis = new NonTopWhenAfterWhereInvocationAnalysis(this, invokedRelationAnalysis);
 				}
 				else {
-					invocationAnalysis = new NonTopWhenOnlyInvocationAnalysis(this, invokedRelationAnalysis);
+					boolean hasClassInput = false;
+					Relation rule2 = invokedRelationAnalysis.getRule();
+					for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(rule2)) {
+						if (scheduleManager.isInput(relationDomain)) {
+							for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
+								Type type = QVTrelationUtil.getType(rootVariable);
+								if (!(type instanceof DataType)) {
+									hasClassInput = true;
+								}
+							}
+						}
+					}
+					if (hasClassInput) {
+						invocationAnalysis = new NonTopWhenOnlyClassInvocationAnalysis(this, invokedRelationAnalysis);
+					}
+					else {
+						invocationAnalysis = new NonTopWhenOnlyDataTypeInvocationAnalysis(this, invokedRelationAnalysis);
+					}
 				}
 			}
 			else {
