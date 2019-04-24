@@ -361,15 +361,15 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getClassDatum();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass <em>Complete Class</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClasses <em>Complete Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Complete Class</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass()
+	 * @return the meta object for the reference list '<em>Complete Classes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClasses()
 	 * @see #getClassDatum()
 	 * @generated
 	 */
-	EReference getClassDatum_CompleteClass();
+	EReference getClassDatum_CompleteClasses();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwnedPropertyDatums <em>Owned Property Datums</em>}'.
@@ -2548,12 +2548,12 @@ public interface QVTschedulePackage extends EPackage {
 		EClass CLASS_DATUM = eINSTANCE.getClassDatum();
 
 		/**
-		 * The meta object literal for the '<em><b>Complete Class</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Complete Classes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS_DATUM__COMPLETE_CLASS = eINSTANCE.getClassDatum_CompleteClass();
+		EReference CLASS_DATUM__COMPLETE_CLASSES = eINSTANCE.getClassDatum_CompleteClasses();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Property Datums</b></em>' containment reference list feature.

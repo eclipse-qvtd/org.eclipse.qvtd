@@ -28,7 +28,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass <em>Complete Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClasses <em>Complete Classes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwnedPropertyDatums <em>Owned Property Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getReferredClass <em>Referred Class</em>}</li>
@@ -41,31 +41,21 @@ import org.eclipse.ocl.pivot.CompleteClass;
  */
 public interface ClassDatum extends AbstractDatum {
 	/**
-	 * Returns the value of the '<em><b>Complete Class</b></em>' reference.
+	 * Returns the value of the '<em><b>Complete Classes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.CompleteClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Complete Class</em>' reference isn't clear,
+	 * If the meaning of the '<em>Complete Classes</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Complete Class</em>' reference.
-	 * @see #setCompleteClass(CompleteClass)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_CompleteClass()
+	 * @return the value of the '<em>Complete Classes</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_CompleteClasses()
 	 * @model required="true" transient="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!completeClass'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!completeClasses'"
 	 * @generated
 	 */
-	CompleteClass getCompleteClass();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass <em>Complete Class</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Complete Class</em>' reference.
-	 * @see #getCompleteClass()
-	 * @generated
-	 */
-	void setCompleteClass(CompleteClass value);
+	List<CompleteClass> getCompleteClasses();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Property Datums</b></em>' containment reference list.

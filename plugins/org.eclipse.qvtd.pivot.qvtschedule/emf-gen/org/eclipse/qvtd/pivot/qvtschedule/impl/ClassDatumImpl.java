@@ -45,7 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getCompleteClass <em>Complete Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getCompleteClasses <em>Complete Classes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getOwnedPropertyDatums <em>Owned Property Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getReferredClass <em>Referred Class</em>}</li>
@@ -74,14 +74,14 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	public static final int CLASS_DATUM_OPERATION_COUNT = AbstractDatumImpl.ABSTRACT_DATUM_OPERATION_COUNT + 0;
 
 	/**
-	 * The cached value of the '{@link #getCompleteClass() <em>Complete Class</em>}' reference.
+	 * The cached value of the '{@link #getCompleteClasses() <em>Complete Classes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCompleteClass()
+	 * @see #getCompleteClasses()
 	 * @generated
 	 * @ordered
 	 */
-	protected CompleteClass completeClass;
+	protected EList<CompleteClass> completeClasses;
 
 	/**
 	 * The cached value of the '{@link #getOwnedPropertyDatums() <em>Owned Property Datums</em>}' containment reference list.
@@ -138,38 +138,11 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
-	public CompleteClass getCompleteClass() {
-		if (completeClass != null && completeClass.eIsProxy()) {
-			InternalEObject oldCompleteClass = (InternalEObject)completeClass;
-			completeClass = (CompleteClass)eResolveProxy(oldCompleteClass);
-			if (completeClass != oldCompleteClass) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldCompleteClass, completeClass));
-			}
+	public List<CompleteClass> getCompleteClasses() {
+		if (completeClasses == null) {
+			completeClasses = new EObjectResolvingEList<CompleteClass>(CompleteClass.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		}
-		return completeClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CompleteClass basicGetCompleteClass() {
-		return completeClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setCompleteClass(CompleteClass newCompleteClass) {
-		CompleteClass oldCompleteClass = completeClass;
-		completeClass = newCompleteClass;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldCompleteClass, completeClass));
+		return completeClasses;
 	}
 
 	/**
@@ -339,8 +312,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
-				if (resolve) return getCompleteClass();
-				return basicGetCompleteClass();
+				return getCompleteClasses();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getOwnedPropertyDatums();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
@@ -364,7 +336,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
-				setCompleteClass((CompleteClass)newValue);
+				getCompleteClasses().clear();
+				getCompleteClasses().addAll((Collection<? extends CompleteClass>)newValue);
 				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedPropertyDatums().clear();
@@ -393,7 +366,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
-				setCompleteClass((CompleteClass)null);
+				getCompleteClasses().clear();
 				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedPropertyDatums().clear();
@@ -420,7 +393,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
-				return completeClass != null;
+				return completeClasses != null && !completeClasses.isEmpty();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ownedPropertyDatums != null && !ownedPropertyDatums.isEmpty();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:

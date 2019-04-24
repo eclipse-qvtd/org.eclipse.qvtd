@@ -152,6 +152,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_BasicPartition = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_BasicPartition);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_ClassDatum = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_ClassDatum);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Cluster = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_Cluster);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_CompleteClass = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_CompleteClass);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Connection = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_Connection);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Edge = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_Edge);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_EdgeConnection = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_EdgeConnection);
@@ -1085,7 +1086,7 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _CastEdge__property = new EcoreExecutorProperty(QVTschedulePackage.Literals.CAST_EDGE__PROPERTY, Types._CastEdge, 0);
 		public static final @NonNull ExecutorProperty _CastEdge__referredClass = new EcoreExecutorProperty(QVTschedulePackage.Literals.CAST_EDGE__REFERRED_CLASS, Types._CastEdge, 1);
 
-		public static final @NonNull ExecutorProperty _ClassDatum__completeClass = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__COMPLETE_CLASS, Types._ClassDatum, 0);
+		public static final @NonNull ExecutorProperty _ClassDatum__completeClasses = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__COMPLETE_CLASSES, Types._ClassDatum, 0);
 		public static final @NonNull ExecutorProperty _ClassDatum__ownedPropertyDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__OWNED_PROPERTY_DATUMS, Types._ClassDatum, 1);
 		public static final @NonNull ExecutorProperty _ClassDatum__owningScheduleModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__OWNING_SCHEDULE_MODEL, Types._ClassDatum, 2);
 		public static final @NonNull ExecutorProperty _ClassDatum__referredClass = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_CLASS, Types._ClassDatum, 3);
@@ -5748,7 +5749,7 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ClassDatum = {
-			QVTscheduleTables.Properties._ClassDatum__completeClass,
+			QVTscheduleTables.Properties._ClassDatum__completeClasses,
 			QVTscheduleTables.Properties._ClassDatum__ownedPropertyDatums,
 			QVTscheduleTables.Properties._ClassDatum__owningScheduleModel,
 			QVTscheduleTables.Properties._ClassDatum__referredClass,
@@ -5767,7 +5768,7 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CollectionClassDatum = {
-			QVTscheduleTables.Properties._ClassDatum__completeClass,
+			QVTscheduleTables.Properties._ClassDatum__completeClasses,
 			QVTscheduleTables.Properties._CollectionClassDatum__elementalClassDatum,
 			QVTscheduleTables.Properties._ClassDatum__ownedPropertyDatums,
 			QVTscheduleTables.Properties._ClassDatum__owningScheduleModel,
