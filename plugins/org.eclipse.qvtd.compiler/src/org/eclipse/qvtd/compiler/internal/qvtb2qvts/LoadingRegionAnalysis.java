@@ -82,7 +82,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 		}
 		CompleteEnvironment completeEnvironment = scheduleManager.getEnvironmentFactory().getCompleteEnvironment();
 		ClassDatum consumedClassDatum = /*getCastTarget(consumerNode)*/QVTscheduleUtil.getClassDatum(consumerNode);
-		org.eclipse.ocl.pivot.Class elementType = consumedClassDatum.getCompleteClass().getPrimaryClass();
+		org.eclipse.ocl.pivot.Class elementType = consumedClassDatum.getPrimaryClass();
 		TypedModel typedModel = QVTscheduleUtil.getTypedModel(consumedClassDatum);
 		CollectionType childCollectionType = completeEnvironment.getSetType(elementType, true,  null, null);
 		ClassDatum childrenClassDatum = scheduleManager.getClassDatum(typedModel, childCollectionType);
@@ -125,7 +125,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 			if (introducedNode == null) {
 				introducedNode = createComposingNode("«" + elementType.getName() + "-oclContents»", childrenClassDatum);
 				type2node.put(containingClassDatum, introducedNode);
-				Node containerNode = createComposingNode("«" + containingClassDatum.getCompleteClass().getName() + "-oclContainer»", containingClassDatum);
+				Node containerNode = createComposingNode("«" + containingClassDatum.getName() + "-oclContainer»", containingClassDatum);
 				createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}
 		}

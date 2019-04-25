@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -73,14 +72,14 @@ public class HeadNodeGroup
 		for (@NonNull Edge source2targetEdge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 			if (isOldSource ? source2targetEdge.isOld() : source2targetEdge.isNew()) {
 				boolean isAggregateArgument = false;
-				Type targetType = null;
+				Boolean targetIsCollectionType = null;
 				Node targetNode = QVTscheduleUtil.getTargetNode(source2targetEdge);
 				if (uniqueNodes.contains(targetNode) || iteratedNodes.contains(targetNode) || aggregateNodes.contains(targetNode)) {
 					// targetType = null;			// already reached
 				}
 				else if (source2targetEdge.isCast() || source2targetEdge.isNavigation()) {
 					Property targetProperty = QVTscheduleUtil.getProperty((NavigableEdge) source2targetEdge);
-					targetType = targetProperty.getType();
+					targetIsCollectionType = targetProperty.getType() instanceof CollectionType;
 				}
 				else if (source2targetEdge.isPredicate()) {
 					// targetType = null;			// «includes» is not reachable
@@ -95,19 +94,18 @@ public class HeadNodeGroup
 								allArgumentsReachable = false;
 								break;
 							}
-							Type argumentType = argumentNode.getCompleteClass().getPrimaryClass();
-							if (argumentType instanceof CollectionType) {
+							if (argumentNode.getClassDatum().isCollectionType()) {
 								isAggregateArgument = targetNode.isOperation();
 							}
 						}
 					}
 					if (allArgumentsReachable) {
 						// assert targetNode.isOperation() || targetNode.isIterator();
-						targetType = targetNode.getCompleteClass().getPrimaryClass();
+						targetIsCollectionType = targetNode.getClassDatum().isCollectionType();
 					}
 				}
-				if (targetType != null) {
-					if (targetType instanceof CollectionType) {
+				if (targetIsCollectionType != null) {
+					if (targetIsCollectionType) {
 						aggregateNodes.add(targetNode);
 					}
 					else if ((isAggregateSource || isIteratedSource) &&!isAggregateArgument) {

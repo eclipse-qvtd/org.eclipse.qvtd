@@ -202,16 +202,16 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				getPasses().addAll((Collection<? extends Integer>)newValue);
-				return;
+			getPasses().addAll((Collection<? extends Integer>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -226,13 +226,13 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -368,7 +368,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 							isBetter = false;
 						}
 						else {
-							int diff = ClassUtil.safeCompareTo(bestNamingNode.getCompleteClass().getName(), node.getCompleteClass().getName());
+							int diff = ClassUtil.safeCompareTo(bestNamingNode.getClassDatum().getName(), node.getClassDatum().getName());
 							if (diff > 0) {
 								isBetter = true;
 							}
@@ -393,7 +393,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 			}
 			if (edgeNames.size() > 0) {
 				s = sIn;
-				s.appendName(bestNamingNode.getCompleteClass().getName());
+				s.appendName(bestNamingNode.getClassDatum().getName());
 				Collections.sort(edgeNames);
 				for (@NonNull String edgeName : edgeNames) {
 					s.appendString("_");
@@ -414,7 +414,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 				}
 				if (edgeNames.size() > 0) {
 					s = sIn;
-					s.appendName(bestNamingNode.getCompleteClass().getName());
+					s.appendName(bestNamingNode.getClassDatum().getName());
 					s.appendString("_");
 					Collections.sort(edgeNames);
 					for (@NonNull String edgeName : edgeNames) {
@@ -427,10 +427,10 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		if ((s == null) && (bestNamingNode != null)) {
 			s = sIn;
 			//			s.appendString(getSymbolNamePrefix());
-			s.appendName(bestNamingNode.getCompleteClass().getName());
+			s.appendName(bestNamingNode.getClassDatum().getName());
 			List<@NonNull String> headNames = new ArrayList<>();
 			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
-				String name = headNode.getCompleteClass().getName();
+				String name = headNode.getClassDatum().getName();
 				if (name != null) {
 					headNames.add(name);
 				}
@@ -444,7 +444,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
 				s = sIn;
 				//				s.appendString(getSymbolNamePrefix());
-				s.appendName(headNode.getCompleteClass().getName());
+				s.appendName(headNode.getClassDatum().getName());
 				List<@NonNull String> edgeNames = new ArrayList<>();
 				for (@NonNull NavigableEdge edge : headNode.getNavigableEdges()) {
 					String propertyName = PivotUtil.getName(QVTscheduleUtil.getProperty(edge));

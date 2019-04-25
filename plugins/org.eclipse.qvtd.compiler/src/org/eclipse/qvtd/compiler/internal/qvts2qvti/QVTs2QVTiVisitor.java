@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -222,7 +221,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		List<@NonNull ClassDatum> classDatums = new ArrayList<>(keyedClassDatum2propertyDatums.keySet());
 		Collections.sort(classDatums, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull ClassDatum classDatum : classDatums) {
-			CompleteClass completeClass = QVTscheduleUtil.getCompleteClass(classDatum);
+			org.eclipse.ocl.pivot.Class primaryClass = classDatum.getPrimaryClass();
 			List<@NonNull PropertyDatum> propertyDatums = new ArrayList<>(keyedClassDatum2propertyDatums.get(classDatum));
 			Collections.sort(propertyDatums, NameUtil.NAMEABLE_COMPARATOR);
 			String functionName = scheduleManager.getNameGenerator().createKeyFunctionName(classDatum);
@@ -257,8 +256,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 					}
 				}
 			} */
-			Function asFunction = helper.createFunction(functionName, completeClass.getPrimaryClass(), true, asParameters);
-			OCLExpression asShadowExp = helper.createShadowExp(completeClass.getPrimaryClass(), asShadowParts);
+			Function asFunction = helper.createFunction(functionName, primaryClass, true, asParameters);
+			OCLExpression asShadowExp = helper.createShadowExp(primaryClass, asShadowParts);
 			asFunction.setQueryExpression(asShadowExp);
 			qvtiTransformation.getOwnedOperations().add(asFunction);
 			classDatum2keyFunction.put(classDatum, asFunction);

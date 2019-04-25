@@ -26,11 +26,19 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.AnyType;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.InvalidType;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.internal.ModelImpl;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -268,7 +276,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
+			return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -319,7 +327,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 				return getOwningScheduleModel();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getReferredClass();
-				return basicGetReferredClass();
+			return basicGetReferredClass();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getSuperClassDatums();
 		}
@@ -337,22 +345,22 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getCompleteClasses().clear();
-				getCompleteClasses().addAll((Collection<? extends CompleteClass>)newValue);
-				return;
+			getCompleteClasses().addAll((Collection<? extends CompleteClass>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedPropertyDatums().clear();
-				getOwnedPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
-				return;
+			getOwnedPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwningScheduleModel((ScheduleModel)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getSuperClassDatums().clear();
-				getSuperClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
-				return;
+			getSuperClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -367,19 +375,19 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getCompleteClasses().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedPropertyDatums().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwningScheduleModel((ScheduleModel)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setReferredClass((org.eclipse.ocl.pivot.Class)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getSuperClassDatums().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -417,13 +425,92 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	}
 
 	@Override
-	public String toString() {
-		if (completeClass == null) {
-			return PivotConstantsInternal.NULL_MARKER;
+	public @Nullable List<@NonNull CompleteClass> basicGetCompleteClasses() {
+		return completeClasses != null ? ClassUtil.nullFree(completeClasses) : null;
+	}
+
+	@Override
+	public @NonNull Type getCollectionElementType() {
+		Type collectionType = getPrimaryClass();
+		Type elementType = ((CollectionType)collectionType).getElementType();
+		assert elementType != null;
+		return elementType;
+	}
+
+	@Override
+	public org.eclipse.ocl.pivot.@NonNull Class getPrimaryClass() {
+		List<CompleteClass> completeClasses2 = completeClasses;
+		if ((completeClasses2 == null) || (completeClasses2.size() != 1)) {
+			throw new IllegalStateException("No unique CompleteClass for " + this);
 		}
-		org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
-		org.eclipse.ocl.pivot.Package primaryPackage = primaryClass.getOwningPackage();
-		return String.valueOf(getReferredTypedModel()) + "!" + (primaryPackage != null ? String.valueOf(primaryPackage.getName()) : "null") + "::" + primaryClass.toString();
+		return completeClasses2.get(0).getPrimaryClass();
+	}
+
+	@Override
+	public boolean isCheckable() {
+		List<CompleteClass> completeClasses2 = completeClasses;
+		if (completeClasses2 == null) {
+			return false;
+		}
+		for (CompleteClass completeClass : completeClasses2) {
+			org.eclipse.ocl.pivot.Class type = completeClass.getPrimaryClass();
+			if ((type instanceof DataType) || (type instanceof AnyType) || (type instanceof VoidType) || (type instanceof InvalidType)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isCollectionType() {
+		List<CompleteClass> completeClasses2 = completeClasses;
+		if (completeClasses2 != null) {
+			for (CompleteClass completeClass : completeClasses2) {
+				org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
+				if (primaryClass instanceof CollectionType) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isDataType() {
+		List<CompleteClass> completeClasses2 = completeClasses;
+		if (completeClasses2 != null) {
+			for (CompleteClass completeClass : completeClasses2) {
+				org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
+				if (primaryClass instanceof DataType) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public @NonNull String toString() {
+		StringBuilder s = null;
+		List<CompleteClass> completeClasses2 = completeClasses;
+		if (completeClasses2 != null) {
+			for (CompleteClass completeClass : completeClasses2) {
+				if (s == null) {
+					s = new StringBuilder();
+				}
+				else {
+					s.append("&&");
+				}
+				org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
+				org.eclipse.ocl.pivot.Package primaryPackage = primaryClass.getOwningPackage();
+				s.append(String.valueOf(getReferredTypedModel()));
+				s.append("!");
+				s.append(primaryPackage != null ? String.valueOf(primaryPackage.getName()) : "null");
+				s.append("::");
+				s.append(primaryClass.toString());
+			}
+		}
+		return s != null ? s.toString() : PivotConstantsInternal.NULL_MARKER;
 	}
 
 	/*	public @Nullable List<Property> getMultiOpposites() {

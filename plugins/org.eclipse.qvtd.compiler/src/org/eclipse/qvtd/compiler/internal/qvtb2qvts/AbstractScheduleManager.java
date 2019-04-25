@@ -99,6 +99,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public abstract class AbstractScheduleManager implements ScheduleManager
 {
@@ -413,8 +414,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		if (!isMiddle(node)) {
 			return null;
 		}
-		CompleteClass completeClass = node.getCompleteClass();
-		return completeClass.getProperty(QVTrelationNameGenerator.TRACE_GLOBAL_SUCCESS_PROPERTY_NAME);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
+			Property property = completeClass.getProperty(QVTrelationNameGenerator.TRACE_GLOBAL_SUCCESS_PROPERTY_NAME);
+			if (property != null) {
+				return property;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -422,8 +429,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		if (!isMiddle(node)) {
 			return null;
 		}
-		CompleteClass completeClass = node.getCompleteClass();
-		return completeClass.getProperty(QVTrelationNameGenerator.TRACE_LOCAL_SUCCESS_PROPERTY_NAME);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
+			Property property = completeClass.getProperty(QVTrelationNameGenerator.TRACE_LOCAL_SUCCESS_PROPERTY_NAME);
+			if (property != null) {
+				return property;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -535,8 +548,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					TypedModel typedModel = stepUsage.getTypedModel(classStep.getElement());
 					assert typedModel != null;
 					ClassDatum classDatum = scheduleManager.getClassDatum(typedModel, stepType);
-					CompleteClass completeClass = classDatum.getCompleteClass();
-					Type primaryClass = completeClass.getPrimaryClass();
+					//	CompleteClass completeClass = classDatum.getCompleteClass();
+					Type primaryClass = classDatum.getPrimaryClass();
 					if (!(primaryClass instanceof DataType) && !(primaryClass instanceof VoidType)) {
 						//					OCLExpression source = operationCallExp.getOwnedSource();
 						//					assert source != null;
@@ -665,6 +678,17 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull Iterable<@NonNull CompleteClass> completeClasses) {
+		int size = Iterables.size(completeClasses);
+		if (size == 1) {
+			return datumCaches.getClassDatum(typedModel, completeClasses.iterator().next());
+		}
+		else {
+			return datumCaches.getClassDatum(typedModel, Sets.newHashSet(completeClasses));
+		}
+	}
+
+	@Override
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement) {
 		org.eclipse.ocl.pivot.Class asType = (org.eclipse.ocl.pivot.Class)asTypedElement.getType();
 		assert asType != null;
@@ -721,7 +745,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public @NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatum classDatum) {
-		Type type = classDatum.getCompleteClass().getPrimaryClass();
+		Type type = classDatum.getPrimaryClass();
 		Type elementType = type;
 		while (elementType instanceof CollectionType) {
 			elementType = ((CollectionType)elementType).getElementType();
@@ -890,12 +914,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		List<@NonNull ClassDatum> superClassDatums = QVTscheduleUtil.Internal.getSuperClassDatumsList(classDatum);
 		if (superClassDatums.isEmpty()) {
 			DomainUsage domainUsage = getDomainUsage(classDatum);
-			CompleteClass completeClass = classDatum.getCompleteClass();
-			for (@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
-				TypedModel typedModel = ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass));
-				ClassDatum superClassDatum = getClassDatum(typedModel, completeSuperClass);
-				if (!superClassDatums.contains(superClassDatum)) {
-					superClassDatums.add(superClassDatum);
+			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {
+				for (@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
+					TypedModel typedModel = ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass));
+					ClassDatum superClassDatum = getClassDatum(typedModel, completeSuperClass);
+					if (!superClassDatums.contains(superClassDatum)) {
+						superClassDatums.add(superClassDatum);
+					}
 				}
 			}
 		}
@@ -950,15 +975,20 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
 		Node thatSource = thatEdge.getEdgeSource();
-		CompleteClass thatType = ClassUtil.nonNullState(getElementalClassDatum(QVTscheduleUtil.getClassDatum(thatSource)).getCompleteClass());
-		CompleteClass thisType = ClassUtil.nonNullState(getElementalClassDatum(QVTscheduleUtil.getClassDatum(thisEdge.getEdgeSource())).getCompleteClass());
-		if (thatType.conformsTo(thisType)) {
+		Node thisSource = thisEdge.getEdgeSource();
+		ClassDatum thatClassDatum = QVTscheduleUtil.getClassDatum(thatSource);
+		ClassDatum thisClassDatum = QVTscheduleUtil.getClassDatum(thisSource);
+		ClassDatum thatElementalClassDatum = getElementalClassDatum(thatClassDatum);
+		ClassDatum thisElementalClassDatum = getElementalClassDatum(thisClassDatum);
+		//	CompleteClass thatType = ClassUtil.nonNullState(thatElementalClassDatum.getCompleteClass());
+		//	CompleteClass thisType = ClassUtil.nonNullState(thisElementalClassDatum.getCompleteClass());
+		if (QVTscheduleUtil.conformsTo(thatElementalClassDatum, thisElementalClassDatum)) {
 			return true;
 		}
 		if (thatSource.isRealized()) {
 			return false;
 		}
-		if (thisType.conformsTo(thatType)) {
+		if (QVTscheduleUtil.conformsTo(thisElementalClassDatum, thatElementalClassDatum)) {
 			return true;
 		}
 		return false;

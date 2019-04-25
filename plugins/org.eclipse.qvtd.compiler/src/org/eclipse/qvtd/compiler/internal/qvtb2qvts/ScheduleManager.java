@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
 import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -100,6 +99,7 @@ public interface ScheduleManager
 	@NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class asType);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass);
+	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull Iterable<@NonNull CompleteClass> completeClasses);
 	@NonNull Iterable<@NonNull ClassDatum> getClassDatums();
 	@NonNull ConnectionManager getConnectionManager();
 	@NonNull RootDomainUsageAnalysis getDomainUsageAnalysis();

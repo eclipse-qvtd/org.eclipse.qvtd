@@ -20,11 +20,11 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -236,7 +236,7 @@ class Correlator
 	}
 
 	protected boolean correlateHeadNodes() {
-		List<Node> extraHeadNodes = extraRegion.getHeadNodes();
+		List<@NonNull Node> extraHeadNodes = QVTscheduleUtil.Internal.getHeadNodesList(extraRegion);
 		if (extraHeadNodes.size() != 1) {			// FIXME Surely consistent multiple heads are ok?
 			if (debugFailures) {
 				AbstractMerger.FAILURE.println("More than 1 extra head nodes: " + extraHeadNodes.size());
@@ -247,11 +247,11 @@ class Correlator
 			return false;			// FIXME upgrade to allow merging of matching predicates
 		}
 		Node extraHeadNode = extraHeadNodes.get(0);
-		CompleteClass completeClass = extraHeadNode.getCompleteClass();
-		List<@NonNull NodeMerger> nodeMergers = regionMerger.getNodeMergers(completeClass);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(extraHeadNode);
+		List<@NonNull NodeMerger> nodeMergers = regionMerger.getNodeMergers(classDatum);
 		if ((nodeMergers == null) || (nodeMergers.size() == 0)) {
 			if (debugFailures) {
-				AbstractMerger.FAILURE.println("No node mergers of type: " + completeClass);
+				AbstractMerger.FAILURE.println("No node mergers of type: " + classDatum);
 			}
 			return false;
 		}
@@ -271,7 +271,7 @@ class Correlator
 			for (@NonNull NodeMerger nodeMerger : nodeMergers) {
 				if ((nodeMerger != headNodeMerger) && !nodeMerger.isLoaded()) {
 					if (debugFailures) {		// FIXME multiple matching not-speculated might be ok
-						AbstractMerger.FAILURE.println("Multiple node mergers of type: " + completeClass);
+						AbstractMerger.FAILURE.println("Multiple node mergers of type: " + classDatum);
 					}
 					return false;
 				}
@@ -309,20 +309,20 @@ class Correlator
 							}
 							return false;
 						}
-						Map<@NonNull CompleteClass, @NonNull NodeMerger> completeClass2targetNodeMergers = new HashMap<>();
+						Map<@NonNull ClassDatum, @NonNull NodeMerger> classDatum2targetNodeMergers = new HashMap<>();
 						for (@NonNull Node primaryTargetNode : QVTscheduleUtil.getCastTargets(uncastPrimaryTargetNode, true)) {
-							CompleteClass targetCompleteClass = primaryTargetNode.getCompleteClass();
-							NodeMerger oldNodeMerger = completeClass2targetNodeMergers.put(targetCompleteClass, regionMerger.getNodeMerger(primaryTargetNode));
+							ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(primaryTargetNode);
+							NodeMerger oldNodeMerger = classDatum2targetNodeMergers.put(targetClassDatum, regionMerger.getNodeMerger(primaryTargetNode));
 							if (oldNodeMerger != null) {
 								if (debugFailures) {
-									AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetCompleteClass);
+									AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetClassDatum);
 								}
 								return false;		// FIXME should have an earlier cast rationalizer
 							}
 						}
 						for (@NonNull Node extraTargetNode : extraTargetNodes) {
-							CompleteClass targetCompleteClass = extraTargetNode.getCompleteClass();
-							NodeMerger targetNodeMerger = completeClass2targetNodeMergers.remove(targetCompleteClass);
+							ClassDatum targetClassDatum = extraTargetNode.getClassDatum();
+							NodeMerger targetNodeMerger = classDatum2targetNodeMergers.remove(targetClassDatum);
 							if (targetNodeMerger == null) {
 								if (debugFailures) {
 									AbstractMerger.FAILURE.println("Inconsistent types at: " + targetNodeMerger + ", " + extraTargetNode);

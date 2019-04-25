@@ -298,7 +298,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	//	void getAllAncestors(@NonNull Set<@NonNull Node> ancestors);
 	@NonNull Iterable<@NonNull Edge> getArgumentEdges();
 	@NonNull Iterable<@NonNull NavigableEdge> getCastEdges();
-	@NonNull CompleteClass getCompleteClass();
+	@NonNull Iterable<@NonNull CompleteClass> getCompleteClasses();
 	@NonNull Iterable<@NonNull Edge> getComputationEdges();
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

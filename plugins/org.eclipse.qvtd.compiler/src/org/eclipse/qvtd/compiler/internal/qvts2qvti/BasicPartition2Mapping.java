@@ -1513,7 +1513,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	private @NonNull DeclareStatement createDeclareStatement(@NonNull Node node, @NonNull OCLExpression initExpression) {
-		Type variableType = node.getCompleteClass().getPrimaryClass();
+		Type variableType = node.getClassDatum().getPrimaryClass();
 		assert variableType != null;
 		boolean isRequired = node.isMatched() && node.isRequired();
 		if (initExpression.isIsRequired()) {
@@ -1529,7 +1529,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 
 	private @NonNull GuardParameter createGuardParameter(@NonNull Node guardNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(guardNode);
-		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
+		Type variableType = guardNode.getClassDatum().getPrimaryClass();
 		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatum.getReferredTypedModel()));
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
 		Property successProperty = null;
@@ -1820,7 +1820,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				ClassDatum classDatum = node.getClassDatum();
 				TypedModel pTypedModel = classDatum.getReferredTypedModel();
 				ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
-				NewStatement newStatement = helper.createNewStatement(getSafeName(node), iTypedModel, classDatum.getCompleteClass().getPrimaryClass());
+				NewStatement newStatement = helper.createNewStatement(getSafeName(node), iTypedModel, classDatum.getPrimaryClass());
 				newStatement.setOwnedExpression(constructor);
 				newStatement.setIsContained(node.isContained());
 				mapping.getOwnedStatements().add(newStatement);

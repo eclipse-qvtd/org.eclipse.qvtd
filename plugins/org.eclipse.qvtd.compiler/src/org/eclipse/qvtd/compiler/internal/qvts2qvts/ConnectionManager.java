@@ -20,11 +20,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OriginalContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
@@ -35,6 +31,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalys
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -130,14 +127,6 @@ public class ConnectionManager
 	}
 
 	/**
-	 * Return true if there may be a dynamic type conforming to both the firstType and secondType static types.
-	 */
-	private boolean areConforming(@NonNull CompleteClass firstType, @NonNull CompleteClass secondType) {
-		return firstType.conformsTo(secondType) || firstType.conformsTo(secondType.getBehavioralClass())
-				|| secondType.conformsTo(firstType) || secondType.conformsTo(firstType.getBehavioralClass());
-	}
-
-	/**
 	 * Create an EdgeConnection for the predicatedEdges and/or their target DataType node.
 	 */
 	private void createAttributeEdgeConnection(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
@@ -153,38 +142,39 @@ public class ConnectionManager
 			assert !predicatedEdge.isCast();
 			Property predicatedProperty = predicatedEdge.getProperty();
 			assert !predicatedProperty.isIsImplicit();
-			boolean isDataType = classDatum.getCompleteClass().getPrimaryClass() instanceof DataType;
+			boolean isDataType = classDatum.isDataType();
 			assert isDataType;
 			Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge, classDatum);
 			if (realizedEdges != null) {
-				CompleteClass predicatedSourceCompleteClass = QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(predicatedEdge)));
-				CompleteClass predicatedTargetCompleteClass = QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(predicatedEdge)));
+				ClassDatum predicatedSourceClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(predicatedEdge));
+				ClassDatum predicatedTargetClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(predicatedEdge));
 				Property oppositeProperty = predicatedProperty.getOpposite();
 				Boolean isOneToMany = predicatedProperty.isIsMany() && ((oppositeProperty != null) && !oppositeProperty.isIsMany());
 				if (isOneToMany) {
-					Type type = predicatedTargetCompleteClass.getPrimaryClass();
-					Type elementType = QVTbaseUtil.getElementType(((CollectionType)type));
-					predicatedTargetCompleteClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
+					//	Type type = predicatedTargetClassDatum.getPrimaryClass();
+					//	Type elementType = QVTbaseUtil.getElementType(((CollectionType)type));
+					//	predicatedTargetClassDatum = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
+					predicatedTargetClassDatum = ((CollectionClassDatum)predicatedTargetClassDatum).getElementalClassDatum();
 				}
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-					CompleteClass firstCompleteClass = QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(realizedEdge)));
-					CompleteClass secondTargetCompleteClass = QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(realizedEdge)));
-					CompleteClass realizedSourceCompleteClass;
-					CompleteClass realizedTargetCompleteClass;
+					ClassDatum firstClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(realizedEdge));
+					ClassDatum secondTargetClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(realizedEdge));
+					ClassDatum realizedSourceClassDatum;
+					ClassDatum realizedTargetClassDatum;
 					Property realizedProperty = realizedEdge.getProperty();
 					if (realizedProperty == predicatedProperty) {
-						realizedSourceCompleteClass = firstCompleteClass;
-						realizedTargetCompleteClass = secondTargetCompleteClass;
+						realizedSourceClassDatum = firstClassDatum;
+						realizedTargetClassDatum = secondTargetClassDatum;
 					}
 					else {
 						assert realizedProperty == oppositeProperty;
-						realizedSourceCompleteClass = secondTargetCompleteClass;
-						realizedTargetCompleteClass = firstCompleteClass;
+						realizedSourceClassDatum = secondTargetClassDatum;
+						realizedTargetClassDatum = firstClassDatum;
 					}
-					boolean conformingSources = areConforming(predicatedSourceCompleteClass, realizedSourceCompleteClass);
+					boolean conformingSources = QVTscheduleUtil.conformantWith(predicatedSourceClassDatum, realizedSourceClassDatum);
 					boolean conformingTargets;
 					//	if (isOneToMany) {
-					conformingTargets = areConforming(predicatedTargetCompleteClass, realizedTargetCompleteClass);
+					conformingTargets = QVTscheduleUtil.conformantWith(predicatedTargetClassDatum, realizedTargetClassDatum);
 					if (conformingSources && conformingTargets) {
 						if (attributeConnectionSourceEdges == null) {
 							attributeConnectionSourceEdges = new ArrayList<>();
@@ -209,7 +199,7 @@ public class ConnectionManager
 						}
 					} */
 				}
-				partialNames.add(QVTscheduleUtil.getName(predicatedEdge.getEdgeSource().getCompleteClass()));
+				partialNames.add(QVTscheduleUtil.getName(predicatedEdge.getEdgeSource().getClassDatum()));
 				partialNames.add(QVTscheduleUtil.getName(predicatedProperty));
 			}
 			if (attributeConnectionSourceEdges != null) {
@@ -248,7 +238,7 @@ public class ConnectionManager
 			Property predicatedProperty = predicatedEdge.getProperty();
 			assert !predicatedProperty.isIsImplicit();
 			NavigableEdge castEdge = QVTscheduleUtil.getCastTarget(predicatedEdge);
-			boolean isDataType = classDatum.getCompleteClass().getPrimaryClass() instanceof DataType;
+			boolean isDataType = classDatum.isDataType();
 			assert !isDataType;
 			Iterable<@NonNull Node> sourceNodes = getNewNodes(classDatum);
 			//			if (sourceNodes != null) {
@@ -760,7 +750,7 @@ public class ConnectionManager
 		List<@NonNull Node> nodes = new ArrayList<>();
 		nodes.add(loadingRegionAnalysis.getIntroducerNode(headNode));
 		for (@NonNull TypedModel dependsOn : QVTbaseUtil.getDependsOns(QVTscheduleUtil.getTypedModel(classDatum))) {
-			ClassDatum classDatum2 = scheduleManager.getClassDatum(dependsOn, headNode.getCompleteClass().getPrimaryClass());
+			ClassDatum classDatum2 = scheduleManager.getClassDatum(dependsOn, headNode.getCompleteClasses());
 			Iterable<@NonNull Node> newNodes = originalContentsAnalysis.getNewNodes(classDatum2);
 			if (newNodes != null) {
 				for (@NonNull Node newNode : newNodes) {
@@ -833,7 +823,7 @@ public class ConnectionManager
 			SymbolNameBuilder s = new SymbolNameBuilder();
 			s.appendString(domainUsage.isInput() ? JOIN_INPUT_PREFIX : domainUsage.isOutput() ? JOIN_OUTPUT_PREFIX : JOIN_MIDDLE_PREFIX);
 			s.appendString("_");
-			s.appendName(classDatum.getCompleteClass().getName());
+			s.appendName(classDatum.getName());
 			connection = createNodeConnection(rootRegion, sourceSet, classDatum, s);
 			nodes2connection.put(sourceSet, connection);
 		}

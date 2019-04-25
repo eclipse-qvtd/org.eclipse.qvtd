@@ -20,9 +20,9 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -56,7 +56,7 @@ abstract class RegionMerger // implements Region
 	 */
 	private final @NonNull Map<@NonNull Edge, @NonNull EdgeMerger> originalEdge2edgeMerger = new HashMap<>();
 
-	private final @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull NodeMerger>> completeClass2nodeMergers =  new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull NodeMerger>> classDatum2nodeMergers =  new HashMap<>();
 
 	/**
 	 * The original edges that are not represented in the result.
@@ -237,8 +237,8 @@ abstract class RegionMerger // implements Region
 		return node2nodeMerger;
 	}
 
-	public @Nullable List<@NonNull NodeMerger> getNodeMergers(@NonNull CompleteClass completeClass) {
-		return completeClass2nodeMergers.get(completeClass);
+	public @Nullable List<@NonNull NodeMerger> getNodeMergers(@NonNull ClassDatum classDatum) {
+		return classDatum2nodeMergers.get(classDatum);
 	}
 
 	protected @NonNull List<@NonNull MappingRegion> getOriginalRegions() {
@@ -267,11 +267,11 @@ abstract class RegionMerger // implements Region
 	protected void mapOriginalNode(@NonNull Node originalNode, @NonNull NodeMerger nodeMerger) {
 		NodeMerger originalMergedNode = originalNode2nodeMerger.put(originalNode, nodeMerger);
 		assert originalMergedNode == null;
-		CompleteClass completeClass = originalNode.getCompleteClass();
-		List<@NonNull NodeMerger> nodeMergers = completeClass2nodeMergers.get(completeClass);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(originalNode);
+		List<@NonNull NodeMerger> nodeMergers = classDatum2nodeMergers.get(classDatum);
 		if (nodeMergers == null) {
 			nodeMergers = new ArrayList<>();
-			completeClass2nodeMergers.put(completeClass, nodeMergers);
+			classDatum2nodeMergers.put(classDatum, nodeMergers);
 		}
 		if (!nodeMergers.contains(nodeMerger)) {
 			nodeMergers.add(nodeMerger);

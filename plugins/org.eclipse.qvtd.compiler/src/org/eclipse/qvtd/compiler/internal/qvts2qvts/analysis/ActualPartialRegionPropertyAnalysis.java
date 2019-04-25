@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -42,7 +41,6 @@ public abstract class ActualPartialRegionPropertyAnalysis<@NonNull PRA extends P
 		List<@NonNull PartialRegionAnalysis<@NonNull PRA>> compatibleProducers = new ArrayList<>();
 		Property compatibleProperty = propertyDatum.getReferredProperty();
 		ClassDatum owningClassDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
-		CompleteClass owningCompleteClass = QVTscheduleUtil.getCompleteClass(owningClassDatum);
 		Property compatibleOppositeProperty = compatibleProperty.getOpposite();
 		for (@NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> actualPropertyAnalysis : basePropertyAnalysis.propertyDatum2propertyAnalysis.values()) {
 			for (@NonNull PartialRegionAnalysis<@NonNull PRA> actualProducer : actualPropertyAnalysis.getExactProducers()) {
@@ -54,9 +52,8 @@ public abstract class ActualPartialRegionPropertyAnalysis<@NonNull PRA extends P
 				}
 				else {
 					assert actualProperty == compatibleProperty;
-					ClassDatum actualOwningClassDatum = actualPropertyDatum.getOwningClassDatum();
-					CompleteClass actualOwningCompleteClass = actualOwningClassDatum.getCompleteClass();
-					if (actualOwningCompleteClass.conformsTo(owningCompleteClass) || owningCompleteClass.conformsTo(actualOwningCompleteClass)) {
+					ClassDatum actualOwningClassDatum = QVTscheduleUtil.getOwningClassDatum(actualPropertyDatum);
+					if (QVTscheduleUtil.conformsTo(actualOwningClassDatum, owningClassDatum) || QVTscheduleUtil.conformsTo(owningClassDatum, actualOwningClassDatum)) {
 						isCompatible = true;
 					}
 				}

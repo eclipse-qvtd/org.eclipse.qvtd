@@ -25,6 +25,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -103,6 +104,12 @@ public abstract class AbstractTestQVT extends QVTimperative
 			Resource xmiResource = resourceSet.createResource(xmiURI);
 			xmiResource.getContents().addAll(ClassUtil.nullFree(xtextResource.getContents()));
 			xmiResource.save(DefaultCompilerOptions.defaultSavingOptions);
+			if (e instanceof WrappedException) {
+				e = ((WrappedException)e).getCause();
+			}
+			if (e instanceof Resource.IOWrappedException) {
+				e = ((Resource.IOWrappedException)e).getCause();
+			}
 			LoadTestCase.fail(e.toString());
 		}
 		return xtextResource;

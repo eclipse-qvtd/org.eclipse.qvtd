@@ -91,7 +91,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		for (@NonNull ClassDatum classDatum : scheduleManager.getClassDatums()) {
 			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
 			if (domainUsage.isInput() && !domainUsage.isOutput()) {
-				Type type = classDatum.getCompleteClass().getPrimaryClass();
+				Type type = classDatum.getPrimaryClass();
 				org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
 				if ((asPackage != null) && !PivotConstants.ORPHANAGE_URI.equals(asPackage.getURI())) {
 					Model model = PivotUtil.getContainingModel(type);

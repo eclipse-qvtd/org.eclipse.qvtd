@@ -74,7 +74,8 @@ public class DatumCaches
 	/**
 	 * The per-TypedModel mappings from a CompleteClass to its corresponding ClassDatum in that TypedModel.
 	 */
-	private @NonNull Map<@NonNull TypedModel, @NonNull Map<org.eclipse.ocl.pivot.@NonNull CompleteClass, @NonNull ClassDatum>> typedModel2completeClass2classDatum = new HashMap<>();
+	private @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull CompleteClass, @NonNull ClassDatum>> typedModel2completeClass2classDatum = new HashMap<>();
+	private @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Set<@NonNull CompleteClass>, @NonNull ClassDatum>> typedModel2completeClasses2classDatum = new HashMap<>();
 
 	/**
 	 * The per-ClassDatum mapping from a Property to its corresponding PropertyDatum.
@@ -209,7 +210,7 @@ public class DatumCaches
 
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass) {
 		assert assertValidTypedModel(typedModel, completeClass);
-		Map<org.eclipse.ocl.pivot.@NonNull CompleteClass, @NonNull ClassDatum> completeClass2classDatums = typedModel2completeClass2classDatum.get(typedModel);
+		Map<@NonNull CompleteClass, @NonNull ClassDatum> completeClass2classDatums = typedModel2completeClass2classDatum.get(typedModel);
 		if (completeClass2classDatums == null) {
 			completeClass2classDatums = new HashMap<>();
 			typedModel2completeClass2classDatum.put(typedModel, completeClass2classDatums);
@@ -230,7 +231,7 @@ public class DatumCaches
 				classDatum = QVTscheduleFactory.eINSTANCE.createClassDatum();
 			}
 			classDatum.setOwningScheduleModel(scheduleManager.getScheduleModel());
-			classDatum.setCompleteClass(completeClass);
+			classDatum.getCompleteClasses().add(completeClass);
 			classDatum.setReferredClass(primaryClass);
 			classDatum.setName(primaryClass.getName());
 			classDatum.setReferredTypedModel(typedModel);
@@ -249,6 +250,71 @@ public class DatumCaches
 				} */
 			}
 			completeClass2classDatums.put(completeClass, classDatum);
+		}
+		/**
+		 * Following check is useful for heterogeneous checking. assertValidTypedModel should be better once BUG 485647 is fixed.
+		 *
+		TypedModel tmKey = null;
+		for (TypedModel tm : typedModel2class2datum.keySet()) {
+			Map<Type, ClassDatum> c2d = typedModel2class2datum.get(tm);
+			if (c2d.containsKey(aType)) {
+				if (tmKey == null) {
+					tmKey = tm;
+				}
+				else if (!aType.getName().startsWith("Ocl") && !aType.getName().equals("EObject")) {
+					System.out.println(aType +  " is both " + tmKey + " and " + tm);
+					throw new IllegalStateException(aType +  " is both " + tmKey + " and " + tm);
+				}
+			}
+		} */
+		return classDatum;
+	}
+
+	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull Set<@NonNull CompleteClass> completeClasses) {
+		assert completeClasses.size() >= 2;
+		for (@NonNull CompleteClass completeClass : completeClasses) {
+			assert assertValidTypedModel(typedModel, completeClass);
+		}
+		Map<@NonNull Set<@NonNull CompleteClass>, @NonNull ClassDatum> completeClasses2classDatums = typedModel2completeClasses2classDatum.get(typedModel);
+		if (completeClasses2classDatums == null) {
+			completeClasses2classDatums = new HashMap<>();
+			typedModel2completeClasses2classDatum.put(typedModel, completeClasses2classDatums);
+		}
+		ClassDatum classDatum = completeClasses2classDatums.get(completeClasses);
+		if (classDatum == null) {
+			org.eclipse.ocl.pivot.@NonNull Class primaryClass = completeClasses.iterator().next().getPrimaryClass();
+			if (primaryClass instanceof CollectionType) {
+				Type elementType = PivotUtil.getElementType((CollectionType)primaryClass);
+				org.eclipse.ocl.pivot.@NonNull Class primaryElementClass = PivotUtil.getClass(elementType, scheduleManager.getStandardLibrary());
+				CompleteClass completeElementClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(primaryElementClass);
+				ClassDatum elementClassDatum = getClassDatum(typedModel, completeElementClass);
+				CollectionClassDatum collectionClassDatum = QVTscheduleFactory.eINSTANCE.createCollectionClassDatum();
+				collectionClassDatum.setElementalClassDatum(elementClassDatum);
+				classDatum = collectionClassDatum;
+			}
+			else {
+				classDatum = QVTscheduleFactory.eINSTANCE.createClassDatum();
+			}
+			classDatum.setOwningScheduleModel(scheduleManager.getScheduleModel());
+			classDatum.getCompleteClasses().addAll(completeClasses);
+			classDatum.setReferredClass(primaryClass);
+			classDatum.setName(primaryClass.getName());
+			classDatum.setReferredTypedModel(typedModel);
+			if (!(primaryClass instanceof DataType)) {
+				//				scheduleManager.getSuperClassDatums(classDatum);  -- lazily computed
+				/*				List<ClassDatum> superClassDatums = classDatum.getSuperClassDatums();
+				for (@NonNull CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {
+					DomainUsage superUsage = getUsage(superCompleteClass.getPrimaryClass());
+					if (superUsage != null) {		// Ignore superClassDatum with differet typedModels (OclAny)
+						Iterable<@NonNull TypedModel> superTypedModels = superUsage.getTypedModels();
+						if ((Iterables.size(superTypedModels) == 1) && Iterables.contains(superTypedModels, typedModel)) {
+							ClassDatum superClassDatum = getClassDatum(typedModel, superCompleteClass);
+							superClassDatums.add(superClassDatum);
+						}
+					}
+				} */
+			}
+			completeClasses2classDatums.put(completeClasses, classDatum);
 		}
 		/**
 		 * Following check is useful for heterogeneous checking. assertValidTypedModel should be better once BUG 485647 is fixed.
@@ -293,12 +359,13 @@ public class DatumCaches
 		if (oclContainerPropertyDatums == null) {
 			oclContainerPropertyDatums = new ArrayList<>();
 			classDatum2oclContainerPropertyDatums.put(containedClassDatum, oclContainerPropertyDatums);
-			CompleteClass containedCompleteClass = QVTscheduleUtil.getCompleteClass(containedClassDatum);
-			Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedCompleteClass);
-			for (@NonNull Property containmentProperty : containmentProperties) {
-				//	CompleteClass containingCompleteClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(PivotUtil.getOwningClass(containmentProperty));
-				ClassDatum containingClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(containedClassDatum), PivotUtil.getOwningClass(containmentProperty));
-				oclContainerPropertyDatums.add(getPropertyDatum(containingClassDatum, containmentProperty));
+			for (@NonNull CompleteClass containedCompleteClass : QVTscheduleUtil.getCompleteClasses(containedClassDatum)) {
+				Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedCompleteClass);
+				for (@NonNull Property containmentProperty : containmentProperties) {
+					//	CompleteClass containingCompleteClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(PivotUtil.getOwningClass(containmentProperty));
+					ClassDatum containingClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(containedClassDatum), PivotUtil.getOwningClass(containmentProperty));
+					oclContainerPropertyDatums.add(getPropertyDatum(containingClassDatum, containmentProperty));
+				}
 			}
 		}
 		return oclContainerPropertyDatums;
@@ -395,15 +462,15 @@ public class DatumCaches
 		}
 		// If not found we create it
 		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
-		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
+		//	Iterable<@NonNull CompleteClass> targetCompleteClasses = QVTscheduleUtil.getCompleteClasses(classDatum);
 		//	org.eclipse.ocl.pivot.Class owningClass = QVTbaseUtil.getOwningClass(property);
-		CompleteClass hostCompleteClass = QVTscheduleUtil.getCompleteClass(classDatum);// completeModel.getCompleteClass(owningClass);
+		//	Iterable<@NonNull CompleteClass> hostCompleteClasses = QVTscheduleUtil.getCompleteClasses(classDatum);// completeModel.getCompleteClass(owningClass);
 		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setReferredTypedModel(typedModel);
 		propertyDatum.setReferredProperty(property);
 		propertyDatum.setName(property.getName());
 		propertyDatum.setOwningClassDatum(classDatum);
-		assert targetCompleteClass.conformsTo(hostCompleteClass);
+		//	assert targetClassDatum.conformsTo(hostClassDatum);
 		PropertyDatum oldPropertyDatum = property2propertyDatum.put(property, propertyDatum);
 		assert oldPropertyDatum == null;
 		/*	for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {

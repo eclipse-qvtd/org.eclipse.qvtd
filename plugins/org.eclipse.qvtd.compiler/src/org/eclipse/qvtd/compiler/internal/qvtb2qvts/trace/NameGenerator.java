@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -61,8 +60,7 @@ public class NameGenerator
 
 	public @NonNull String createKeyFunctionName(@NonNull ClassDatum classDatum) {
 		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
-		CompleteClass completeClass = QVTscheduleUtil.getCompleteClass(classDatum);
-		return  "Key_" + QVTbaseUtil.getName(typedModel) + "_" + QVTbaseUtil.getName(completeClass);
+		return  "Key_" + QVTbaseUtil.getName(typedModel) + "_" + classDatum.getName();
 	}
 
 	//	public @NonNull String createTracePropertyName(@NonNull VariableDeclaration variable) {

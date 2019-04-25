@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.CollectionRange;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.EnumLiteralExp;
@@ -524,7 +523,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		//		return synthesizeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
 		//	}
 		else if ((operationCallExp.eContainer() instanceof Predicate)
-				&& (sourceNode.getCompleteClass().getPrimaryClass() instanceof CollectionType)
+				&& (sourceNode.getClassDatum().isCollectionType())
 				&& "includes".equals(operationName)) {
 			return synthesizeOperationCallExp_includes(sourceNode, operationCallExp);
 		}
@@ -690,9 +689,9 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			}
 			else {
-				CompleteClass propertyCompleteClass = scheduleManager.getClassDatum(source2targetProperty).getCompleteClass();
-				CompleteClass valueCompleteClass = targetNode.getCompleteClass();
-				if (valueCompleteClass == propertyCompleteClass) {
+				ClassDatum propertyClassDatum = scheduleManager.getClassDatum(source2targetProperty);
+				ClassDatum valueClassDatum = targetNode.getClassDatum();
+				if (valueClassDatum == propertyClassDatum) {
 					navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 				}
 				else {
@@ -931,17 +930,17 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		//		}
 		Type castType = QVTbaseUtil.getType(operationCallExp);
 		boolean castIsRequired = operationCallExp.isIsRequired();
-		CompleteClass requiredClass = environmentFactory.getCompleteModel().getCompleteClass(castType);
-		CompleteClass predicatedClass = sourceNode.getCompleteClass();
+		//	ClassDatum requiredClassDatum = environmentFactory.getCompleteModel().getCompleteClass(castType);
+		ClassDatum predicatedClassDatum = QVTscheduleUtil.getClassDatum(sourceNode);
 		boolean sourceIsRequired = sourceNode.isRequired();
-		if (predicatedClass.conformsTo(requiredClass) && (sourceIsRequired || !castIsRequired)) {
+		if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castType) && (sourceIsRequired || !castIsRequired)) {
 			sourceNode.addOriginatingElement(operationCallExp);
 			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
 		for (@NonNull NavigableEdge castEdge : sourceNode.getCastEdges()) {
 			Node targetNode = castEdge.getEdgeTarget();
-			predicatedClass = targetNode.getCompleteClass();
-			if (predicatedClass.conformsTo(requiredClass)) {
+			predicatedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+			if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castType)) {
 				targetNode.addOriginatingElement(operationCallExp);
 				return targetNode;										// Re-use a pre-existing class
 			}
@@ -1166,10 +1165,9 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		Node initNode = synthesize(ownedVariable.getOwnedInit());
 		assert initNode != null;
 		Type type = QVTbaseUtil.getType(ownedVariable);
-		CompleteClass actualClass = initNode.getCompleteClass();
-		ClassDatum classDatum = scheduleManager.getClassDatum(ownedVariable);
-		CompleteClass requiredClass = QVTscheduleUtil.getCompleteClass(classDatum);
-		if (actualClass.conformsTo(requiredClass)) {
+		ClassDatum actualClassDatum = QVTscheduleUtil.getClassDatum(initNode);
+		Type requiredType = QVTbaseUtil.getType(ownedVariable);
+		if (QVTscheduleUtil.conformsTo(actualClassDatum, requiredType)) {
 			context.getRegion().addVariableNode(ownedVariable, initNode);
 			initNode.setOriginatingVariable(ownedVariable);
 		}

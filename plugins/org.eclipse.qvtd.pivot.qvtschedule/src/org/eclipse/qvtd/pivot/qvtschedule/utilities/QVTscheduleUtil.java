@@ -10,21 +10,20 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.LoopExp;
@@ -352,8 +351,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			if (diff != 0) {
 				return diff;
 			}
-			n1 = o1.getCompleteClass().getPrimaryClass().toString();
-			n2 = o2.getCompleteClass().getPrimaryClass().toString();
+			n1 = o1.getClassDatum().getName();
+			n2 = o2.getClassDatum().getName();
 			diff = ClassUtil.safeCompareTo(n1, n2);
 			if (diff != 0) {
 				return diff;
@@ -399,8 +398,135 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return null;
 	}
 
-	public static boolean conformsToClassOrBehavioralClass(@NonNull CompleteClass firstType, @NonNull CompleteClass secondType) {
-		return firstType.conformsTo(secondType) || firstType.conformsTo(secondType.getBehavioralClass());
+	/**
+	 * Return true if there may be a dynamic type conforming to both the firstType and secondType static types.
+	 */
+	public static boolean conformantWith(@NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
+		//	if (conformsTo(thisClassDatum, thatClassDatum)) {
+		//		return true;
+		//	}
+		//	if (conformsTo(thatClassDatum, thisClassDatum)) {
+		//		return true;
+		//	}
+		if (conformsToClassOrBehavioralClass(thisClassDatum, thatClassDatum)) {
+			return true;
+		}
+		if (conformsToClassOrBehavioralClass(thatClassDatum, thisClassDatum)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Return true if thisClassDatum conforms to, i.e can be used as, thatClassDatum.
+	 *
+	 * If the ClassDatum is a multi-CompleteClass there must be a CompleteClass, not necessarily the same CompleteClass, of thisClassDatum's CompleteClasses
+	 * that conforms to each of thatClassDatum's CompleteClasses.
+	 */
+	public static boolean conformsTo(@NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
+		List<@NonNull CompleteClass> thoseCompleteClasses = thatClassDatum.basicGetCompleteClasses();
+		if (thoseCompleteClasses == null) {
+			return false;
+		}
+		for (CompleteClass thatCompleteClass : thoseCompleteClasses) {
+			if (!conformsTo(thisClassDatum, thatCompleteClass)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Return true if thisClassDatum conforms to, i.e can be used as, thatCompleteClass.
+	 *
+	 * If the ClassDatum is a multi-CompleteClass it is sufficient that any one of thisClassDatum's CompleteClasses conforms to thatCompleteClass.
+	 */
+	public static boolean conformsTo(@NonNull ClassDatum thisClassDatum, @NonNull CompleteClass thatCompleteClass) {
+		List<@NonNull CompleteClass> theseCompleteClasses = thisClassDatum.basicGetCompleteClasses();
+		if (theseCompleteClasses == null) {
+			return false;
+		}
+		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
+			if (thisCompleteClass.conformsTo(thatCompleteClass)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Return true if thisClassDatum conforms to, i.e can be used as, thatType.
+	 *
+	 * If the ClassDatum is a multi-CompleteClass it is sufficient that any one of thisClassDatum's CompleteClasses conforms to thatType.
+	 */
+	public static boolean conformsTo(@NonNull ClassDatum thisClassDatum, @NonNull Type thatType) {
+		List<@NonNull CompleteClass> theseCompleteClasses = thisClassDatum.basicGetCompleteClasses();
+		if (theseCompleteClasses == null) {
+			return false;
+		}
+		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
+			if (thisCompleteClass.conformsTo(thatType)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean conformsTo(@NonNull CompleteClass thisCompleteClass, @NonNull ClassDatum thatClassDatum) {
+		List<@NonNull CompleteClass> thoseCompleteClasses = thatClassDatum.basicGetCompleteClasses();
+		if (thoseCompleteClasses == null) {
+			return false;
+		}
+		for (@NonNull CompleteClass thatCompleteClass : thoseCompleteClasses) {
+			if (!thisCompleteClass.conformsTo(thatCompleteClass)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean conformsToClassOrBehavioralClass(@NonNull ClassDatum thisClassDatum, @NonNull Type thatType) {
+		if (conformsTo(thisClassDatum, thatType)) {
+			return true;
+		}
+		if (!(thatType instanceof DataType)) {
+			return false;
+		}
+		Class behavioralClass = ((DataType)thatType).getBehavioralClass();
+		if (behavioralClass == null) {
+			return false;
+		}
+		return conformsTo(thisClassDatum, behavioralClass);
+	}
+
+	public static boolean conformsToClassOrBehavioralClass(@NonNull CompleteClass thisCompleteClass, @NonNull CompleteClass thatCompleteClass) {
+		return thisCompleteClass.conformsTo(thatCompleteClass) || thisCompleteClass.conformsTo(thatCompleteClass.getBehavioralClass());
+	}
+
+	public static boolean conformsToClassOrBehavioralClass(@NonNull ClassDatum thisClassDatum, @NonNull CompleteClass thatCompleteClass) {
+		List<@NonNull CompleteClass> theseCompleteClasses = thisClassDatum.basicGetCompleteClasses();
+		if (theseCompleteClasses == null) {
+			return false;
+		}
+		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
+			if (conformsToClassOrBehavioralClass(thisCompleteClass, thatCompleteClass)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean conformsToClassOrBehavioralClass(@NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
+		List<@NonNull CompleteClass> thoseCompleteClasses = thatClassDatum.basicGetCompleteClasses();
+		if (thoseCompleteClasses == null) {
+			return false;
+		}
+		for (@NonNull CompleteClass thatCompleteClass : thoseCompleteClasses) {
+			if (!conformsToClassOrBehavioralClass(thisClassDatum, thatCompleteClass)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static boolean containsNone(@NonNull Iterable<@NonNull Node> firstNodes, @NonNull Iterable<@NonNull Node> secondNodes) {
@@ -531,11 +657,11 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static @NonNull CompleteClass getCompleteClass(@NonNull ClassDatum classDatum) {
-		return ClassUtil.nonNullState(classDatum.getCompleteClass());
+	public static @NonNull List<@NonNull CompleteClass> getCompleteClasses(@NonNull ClassDatum classDatum) {
+		return ClassUtil.nullFree(classDatum.getCompleteClasses());
 	}
 
-	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
+	/*	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
 		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2nodes = new HashMap<>();
 		for (@NonNull Node node : getOwnedNodes(region)) {
 			CompleteClass completeClass = node.getCompleteClass();
@@ -549,7 +675,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			}
 		}
 		return completeClass2nodes;
-	}
+	} */
 
 	public static @NonNull RootRegion getContainingRootRegion(@NonNull Region region) {
 		return ClassUtil.nonNullState(region.getContainingRootRegion());
@@ -624,7 +750,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull String getName(@NonNull ClassDatum classDatum) {
-		return classDatum.getReferredTypedModel().getName() + "!" + classDatum.getCompleteClass().getPrimaryClass().toString();
+		return String.valueOf(classDatum);
+		//		return classDatum.getReferredTypedModel().getName() + "!" + classDatum.getCompleteClass().getPrimaryClass().toString();
 	}
 
 	public static @NonNull Role getNodeRole(@NonNull Node node) {
@@ -897,7 +1024,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return connectionEnd instanceof Node ? partition.getRole((Node)connectionEnd) : connectionEnd instanceof Edge ? partition.getRole((Edge)connectionEnd) : null;
 	}
 
-	public static List<@NonNull NodeConnection> getRootConnections(@NonNull Partition partition) {
+	public static @NonNull List<@NonNull NodeConnection> getRootConnections(@NonNull Partition partition) {
 		return ClassUtil.nullFree(partition.getRootConnections());
 	}
 
@@ -976,8 +1103,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	public static boolean isConformantTarget(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
 		Node thatTarget = getCastTarget(thatEdge.getEdgeTarget());
 		Node thisTarget = getCastTarget(thisEdge.getEdgeTarget());
-		CompleteClass thatType = thatTarget.getCompleteClass();
-		CompleteClass thisType = thisTarget.getCompleteClass();
+		ClassDatum thatType = thatTarget.getClassDatum();
+		ClassDatum thisType = thisTarget.getClassDatum();
 		if (conformsToClassOrBehavioralClass(thatType, thisType)) {
 			return true;
 		}

@@ -362,7 +362,6 @@ public class OriginalContentsAnalysis
 		if (realizedEdges == null) {
 			return null;
 		}
-		CompleteClass requiredClass = QVTscheduleUtil.getCompleteClass(requiredClassDatum);
 		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
 		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 			boolean matches = false;
@@ -373,8 +372,8 @@ public class OriginalContentsAnalysis
 			}
 			else {
 				Node targetNode = realizedEdge.getEdgeTarget();
-				CompleteClass realizedClass = targetNode.getCompleteClass();
-				if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClass, requiredClass)) {
+				ClassDatum realizedClassDatum = targetNode.getClassDatum();
+				if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, requiredClassDatum)) {
 					matches = true;
 				}
 			}

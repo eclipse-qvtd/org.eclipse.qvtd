@@ -177,18 +177,20 @@ public class MappingAnalysis extends RuleAnalysis
 			Node targetNode = synthesize(value);
 			NavigableEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
 			Node valueNode = navigationEdge.getEdgeTarget();
-			CompleteClass valueCompleteClass = valueNode.getCompleteClass();
+			ClassDatum valueClassDatum = QVTscheduleUtil.getClassDatum(valueNode);
 			Type propertyType = PivotUtil.getType(property);
 			if (asNavigationAssignment.isIsPartial()) {
 				propertyType = PivotUtil.getElementType(((CollectionType)propertyType));
 			}
 			CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
-			if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(valueCompleteClass, targetCompleteClass)) {	// Allow value to be physical or behavioral
-				// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm
-				//	if (!valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass()) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {
-				// No test code follows this path.
-				throw new IllegalStateException("Incompatible types " + valueCompleteClass + ", " + targetCompleteClass + " for " + asNavigationAssignment);
-				//	}
+			//	Type targetType = propertyType;//environmentFactory.getCompleteModel().getCompleteClass(propertyType);
+			if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(valueClassDatum, targetCompleteClass)) {	// Allow value to be physical or behavioral
+				if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(valueClassDatum, targetCompleteClass)) {	// Allow value to be physical or behavioral
+					// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm
+					//	if (!valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass()) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {
+					// No test code follows this path.
+					throw new IllegalStateException("Incompatible types " + valueClassDatum + ", " + targetCompleteClass + " for " + asNavigationAssignment);
+				}
 			}
 			return slotNode;
 		}
@@ -578,12 +580,11 @@ public class MappingAnalysis extends RuleAnalysis
 				initNode = stepNode;
 			}
 		} */
-		CompleteClass initCompleteClass = bestInitNode.getCompleteClass();
-		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
-		CompleteClass variableCompleteClass = QVTscheduleUtil.getCompleteClass(variableClassDatum);
-		if (!initCompleteClass.conformsTo(variableCompleteClass)) {
+		ClassDatum initClassDatum = QVTscheduleUtil.getClassDatum(bestInitNode);
+		Type variableType = PivotUtil.getType(variable);
+		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableType)) {
 			Node castNode = createOldNode(variable);
-			Property castProperty = scheduleManager.getCastProperty(PivotUtil.getType(variable));
+			Property castProperty = scheduleManager.getCastProperty(variableType);
 			expressionSynthesizer.createCastEdge(bestInitNode, castProperty, castNode);
 			bestInitNode = castNode;
 		}

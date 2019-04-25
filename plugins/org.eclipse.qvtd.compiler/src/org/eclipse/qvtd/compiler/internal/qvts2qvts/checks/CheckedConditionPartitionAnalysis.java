@@ -31,6 +31,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -196,8 +197,8 @@ public class CheckedConditionPartitionAnalysis
 			Integer targetCost = reachabilityForest.getCost(targetNode);
 			assert (sourceCost != null) && (targetCost != null);
 			if (sourceCost < targetCost) {
-				CompleteClass targetNodeCompleteClass = targetNode.getCompleteClass();
-				if (!edgeTargetCompleteClass.conformsTo(targetNodeCompleteClass)) {
+				ClassDatum targetNodeClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+				if (!QVTscheduleUtil.conformsTo(edgeTargetCompleteClass, targetNodeClassDatum)) {
 					context.add(new CastEdgeCheckedCondition(navigableEdge));
 					//					return null;
 				}
@@ -252,6 +253,7 @@ public class CheckedConditionPartitionAnalysis
 		@Override
 		public Object visitOperationNode(@NonNull OperationNode operationNode) {
 			Element originatingElement = operationNode.basicGetOriginatingElement();
+			// FIXME isn't this all obsolete
 			if (originatingElement instanceof TypedElement) {		// TupleParts are not TypedElements
 				TypedElement typedElement = (TypedElement)originatingElement;
 				if (operationNode.isRequired() && !typedElement.isIsRequired()) {
@@ -259,8 +261,8 @@ public class CheckedConditionPartitionAnalysis
 				}
 				Type initializerType = QVTbaseUtil.getType(typedElement);
 				CompleteClass initializerCompleteClass = completeModel.getCompleteClass(initializerType);
-				CompleteClass targetCompleteClass = operationNode.getCompleteClass();
-				if (!initializerCompleteClass.conformsTo(targetCompleteClass)) {
+				ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(operationNode);
+				if (!QVTscheduleUtil.conformsTo(initializerCompleteClass, targetClassDatum)) {
 					context.add(new CastInitializerCheckedCondition(operationNode));
 				}
 			}

@@ -22,12 +22,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -190,7 +190,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 				return isPartial();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				if (resolve) return getReferredProperty();
-				return basicGetReferredProperty();
+			return basicGetReferredProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,10 +205,10 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setPartial((Boolean)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredProperty((Property)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -223,10 +223,10 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setPartial(PARTIAL_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredProperty((Property)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -287,11 +287,12 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	private void initializeIsPartial(@Nullable Boolean isPartial) {
 		boolean isComputedPartial = false;
 		Type propertyTargetType = PivotUtil.getType(QVTscheduleUtil.getProperty(this));
-		CompleteClass targetClass = targetNode.getCompleteClass();
-		if (!targetClass.conformsTo(propertyTargetType)) {
+		Node targetNode = QVTscheduleUtil.getTargetNode(this);
+		ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+		if (!QVTscheduleUtil.conformsTo(targetClassDatum, propertyTargetType)) {
 			if (propertyTargetType instanceof CollectionType) {
 				Type elementType = PivotUtil.getElementType(((CollectionType)propertyTargetType));
-				if (targetClass.conformsTo(elementType)) {
+				if (QVTscheduleUtil.conformsTo(targetClassDatum, elementType)) {
 					isComputedPartial = true;
 				}
 			}

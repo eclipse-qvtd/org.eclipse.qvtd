@@ -20,11 +20,11 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -915,10 +915,9 @@ public class RelationAnalysis extends RuleAnalysis
 				initNode = stepNode;
 			}
 		} */
-		CompleteClass initCompleteClass = bestInitNode.getCompleteClass();
+		ClassDatum initClassDatum = QVTscheduleUtil.getClassDatum(bestInitNode);
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
-		CompleteClass variableCompleteClass = QVTscheduleUtil.getCompleteClass(variableClassDatum);
-		if (!initCompleteClass.conformsTo(variableCompleteClass)) {
+		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableClassDatum)) {
 			Node castNode = createOldNode(variable);
 			Property castProperty = scheduleManager.getCastProperty(PivotUtil.getType(variable));
 			expressionSynthesizer2.createCastEdge(bestInitNode, castProperty, castNode);

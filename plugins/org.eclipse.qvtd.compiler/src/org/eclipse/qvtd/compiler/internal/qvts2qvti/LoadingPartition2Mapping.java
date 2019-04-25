@@ -20,16 +20,13 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.AnyType;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.DataType;
-import org.eclipse.ocl.pivot.InvalidType;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -89,9 +86,7 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(regionNode);
 				AppendParameter allInstancesVariable = classDatum2variable.get(classDatum);
 				if (allInstancesVariable == null) {
-					Type collectionType = classDatum.getCompleteClass().getPrimaryClass();
-					Type elementType = ((CollectionType)collectionType).getElementType();
-					assert elementType != null;
+					Type elementType = classDatum.getCollectionElementType();
 					assert !(elementType instanceof CollectionType);
 					String safeName = getSafeName(name);
 					allInstancesVariable = helper.createAppendParameter(safeName, elementType, true); //DeclareStatement(safeName, sourceType, true, asSource);
@@ -165,12 +160,15 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 	protected Type getType(@NonNull IdResolver idResolver, @NonNull NodeConnection rootConnection) {
 		Type commonType = null;
 		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(rootConnection)) {
-			Type nodeType = node.getCompleteClass().getPrimaryClass();
-			if (commonType == null) {
-				commonType = nodeType;
-			}
-			else {
-				commonType = commonType.getCommonType(idResolver, nodeType);
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// ??? never multiple
+				Type nodeType = completeClass.getPrimaryClass();
+				if (commonType == null) {
+					commonType = nodeType;
+				}
+				else {
+					commonType = commonType.getCommonType(idResolver, nodeType);
+				}
 			}
 		}
 		return commonType;
@@ -269,8 +267,7 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
 		for (@NonNull Node node : partition.getPartialNodes()) {
 			ClassDatum classDatum = node.getClassDatum();
-			org.eclipse.ocl.pivot.Class type = classDatum.getCompleteClass().getPrimaryClass();
-			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
+			if (classDatum.isCheckable()) {
 				TypedModel qvtmTypedModel = classDatum.getReferredTypedModel();
 				ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtmTypedModel);
 				if (qvtiTypedModel != null) {

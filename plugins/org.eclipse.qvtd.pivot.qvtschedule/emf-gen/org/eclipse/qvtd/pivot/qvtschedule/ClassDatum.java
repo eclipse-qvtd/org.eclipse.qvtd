@@ -13,7 +13,11 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -152,4 +156,16 @@ public interface ClassDatum extends AbstractDatum {
 	 */
 	List<ClassDatum> getSuperClassDatums();
 
+	@Nullable List<@NonNull CompleteClass> basicGetCompleteClasses();
+	@NonNull Type getCollectionElementType();
+	org.eclipse.ocl.pivot.@NonNull Class getPrimaryClass();
+
+	/**
+	 * Return true if the type is not a DataType/AnyType/InvalidType/VoidType.
+	 */
+	boolean isCheckable();
+
+	boolean isCollectionType();
+
+	boolean isDataType();
 } // ClassDatum

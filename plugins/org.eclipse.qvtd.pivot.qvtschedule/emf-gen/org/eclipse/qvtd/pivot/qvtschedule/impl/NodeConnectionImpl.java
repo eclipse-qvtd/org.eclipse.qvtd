@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
@@ -258,7 +259,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getClassDatum();
-				return basicGetClassDatum();
+			return basicGetClassDatum();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getMandatoryTargetNodes();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
@@ -280,19 +281,19 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setClassDatum((ClassDatum)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetNodes().clear();
-				getMandatoryTargetNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getMandatoryTargetNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPassedTargetNodes().clear();
-				getPassedTargetNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getPassedTargetNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				getPreferredTargetNodes().clear();
-				getPreferredTargetNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getPreferredTargetNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -307,16 +308,16 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setClassDatum((ClassDatum)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetNodes().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPassedTargetNodes().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				getPreferredTargetNodes().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -442,21 +443,24 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		//		System.out.println("commonType of " + this);
 		Type commonType = null;
 		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(this)) {
-			Type nodeType = node.getCompleteClass().getPrimaryClass();
-			if (nodeType instanceof CollectionType) {
-				nodeType = ((CollectionType)nodeType).getElementType();		// FIXME needed for composed source nodes
-				assert nodeType != null;
-			}
-			//			System.out.println("  nodeType " + nodeType);
-			//			CompleteEnvironment environment = idResolver.getEnvironment();
-			//			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
-			//				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
-			//			}
-			if (commonType == null) {
-				commonType = nodeType;
-			}
-			else if (nodeType != commonType) {
-				commonType = commonType.getCommonType(idResolver, nodeType);
+			ClassDatum classDatum2 = QVTscheduleUtil.getClassDatum(node);
+			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum2)) { // ?? never a multiple
+				Type nodeType = completeClass.getPrimaryClass();
+				if (nodeType instanceof CollectionType) {
+					nodeType = ((CollectionType)nodeType).getElementType();		// FIXME needed for composed source nodes
+					assert nodeType != null;
+				}
+				//			System.out.println("  nodeType " + nodeType);
+				//			CompleteEnvironment environment = idResolver.getEnvironment();
+				//			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
+				//				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
+				//			}
+				if (commonType == null) {
+					commonType = nodeType;
+				}
+				else if (nodeType != commonType) {
+					commonType = commonType.getCommonType(idResolver, nodeType);
+				}
 			}
 		}
 		//		System.out.println("=> " + commonType);

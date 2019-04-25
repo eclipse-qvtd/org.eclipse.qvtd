@@ -245,7 +245,7 @@ public class ConnectivityChecker
 	// FIXME this fudges the inconvenience that a ComposedNode has a Collection ClassDatum
 	private @NonNull ClassDatum getNormalizedClassDatum(@NonNull Node node) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
-		org.eclipse.ocl.pivot.Class primaryClass = classDatum.getCompleteClass().getPrimaryClass();
+		org.eclipse.ocl.pivot.Class primaryClass = classDatum.getCompleteClasses().iterator().next().getPrimaryClass();	// FIX fudge - never used - try CollectionClassDatum
 		if (primaryClass instanceof CollectionType) {
 			primaryClass = (org.eclipse.ocl.pivot.Class)PivotUtil.getElementType((CollectionType)primaryClass);
 			classDatum = scheduleManager.getClassDatum(QVTscheduleUtil.getReferredTypedModel(classDatum), primaryClass);

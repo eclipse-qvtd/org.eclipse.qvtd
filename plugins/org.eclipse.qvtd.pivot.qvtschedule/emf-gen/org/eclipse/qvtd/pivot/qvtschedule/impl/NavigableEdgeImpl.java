@@ -25,14 +25,17 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -264,10 +267,10 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getIncomingConnection();
-				return basicGetIncomingConnection();
+			return basicGetIncomingConnection();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getOppositeEdge();
-				return basicGetOppositeEdge();
+			return basicGetOppositeEdge();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getOutgoingConnections();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
@@ -287,17 +290,17 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setIncomingConnection((EdgeConnection)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setOppositeEdge((NavigableEdge)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getOutgoingConnections().clear();
-				getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
-				return;
+			getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setSecondary((Boolean)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -312,16 +315,16 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setIncomingConnection((EdgeConnection)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setOppositeEdge((NavigableEdge)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getOutgoingConnections().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setSecondary(SECONDARY_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -359,8 +362,12 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		NavigableEdge oppositeEdge2 = oppositeEdge;
 		if (oppositeEdge2 != null) {
 			String oppositeLabel = oppositeEdge2.getLabel();
-			if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(getSourceNode().getClassDatum().getCompleteClass().getName())) {
-				s.setTaillabel(oppositeLabel);
+			ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(this));
+			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(sourceClassDatum)) {
+				if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(completeClass.getName())) {
+					s.setTaillabel(oppositeLabel);
+					break;
+				}
 			}
 		}
 		String label = getLabel();

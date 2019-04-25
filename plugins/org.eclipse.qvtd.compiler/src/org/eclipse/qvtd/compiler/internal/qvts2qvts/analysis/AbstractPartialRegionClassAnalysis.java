@@ -20,7 +20,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -121,33 +120,33 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 		//
 		List<@NonNull Property> sortedProperties = new ArrayList<@NonNull Property>(commonProperties);
 		Collections.sort(sortedProperties, NameUtil.NAMEABLE_COMPARATOR);
-		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>>> property2completeClass2regionAnalyses  = new HashMap<>();
+		Map<@NonNull Property, @Nullable Map<@Nullable ClassDatum, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>>> property2classDatum2regionAnalyses  = new HashMap<>();
 		for (@NonNull Property property : sortedProperties) {
 			for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : producers) {
 				Map<@NonNull Property, @NonNull NavigableEdge> property2edge = partitioner2property2edge.get(producer);
 				assert property2edge != null;
 				NavigableEdge edge = property2edge.get(property);
 				if (edge == null) {
-					property2completeClass2regionAnalyses.put(property, null);
+					property2classDatum2regionAnalyses.put(property, null);
 				}
 				else {
-					Map<@Nullable CompleteClass, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
-					if (completeClass2regionAnalyses == null) {
-						completeClass2regionAnalyses = new HashMap<>();
-						property2completeClass2regionAnalyses.put(property, completeClass2regionAnalyses);
+					Map<@Nullable ClassDatum, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>> classDatum2regionAnalyses = property2classDatum2regionAnalyses.get(property);
+					if (classDatum2regionAnalyses == null) {
+						classDatum2regionAnalyses = new HashMap<>();
+						property2classDatum2regionAnalyses.put(property, classDatum2regionAnalyses);
 					}
-					CompleteClass completeClass;
+					ClassDatum classDatum;
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 					if (targetNode.isNullLiteral())  {
-						completeClass = null;
+						classDatum = null;
 					}
 					else {
-						completeClass = targetNode.getCompleteClass(); // FIXME use/ignore inheritance
+						classDatum = targetNode.getClassDatum(); // FIXME use/ignore inheritance
 					}
-					List<@NonNull PartialRegionAnalysis<@NonNull PRA>> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+					List<@NonNull PartialRegionAnalysis<@NonNull PRA>> regionAnalyses = classDatum2regionAnalyses.get(classDatum);
 					if (regionAnalyses == null) {
 						regionAnalyses = new ArrayList<>();
-						completeClass2regionAnalyses.put(completeClass, regionAnalyses);
+						classDatum2regionAnalyses.put(classDatum, regionAnalyses);
 					}
 					regionAnalyses.add(producer);
 				}
@@ -161,14 +160,14 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 				//				else if ((value != null) && !(value instanceof NullLiteralExp)) {
 				//					type = value.getType();
 				//				}
-				CompleteClass thisCompleteClass = targetNode.getCompleteClass();
-				for (@NonNull CompleteClass thatCompleteClass : valueCompleteClasses) {
-					if (!isDiscriminant(thisCompleteClass, thatCompleteClass)) {
+				ClassDatum thisClassDatum = targetNode.getClassDatum();
+				for (@NonNull ClassDatum thatClassDatum : valueClassDatumes) {
+					if (!isDiscriminant(thisClassDatum, thatClassDatum)) {
 						isDiscriminant = false;
 						break;
 					}
 				}
-				valueCompleteClasses.add(thisCompleteClass);
+				valueClassDatumes.add(thisClassDatum);
 				if (!isDiscriminant) {
 					break;
 				} */
@@ -179,10 +178,10 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 		//
 		int bestSize = 0;
 		Property bestProperty = null;
-		for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
-			Map<@Nullable CompleteClass, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
-			if (completeClass2regionAnalyses != null) {
-				int size = completeClass2regionAnalyses.size();
+		for (@NonNull Property property : property2classDatum2regionAnalyses.keySet()) {
+			Map<@Nullable ClassDatum, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>> classDatum2regionAnalyses = property2classDatum2regionAnalyses.get(property);
+			if (classDatum2regionAnalyses != null) {
+				int size = classDatum2regionAnalyses.size();
 				if (size > bestSize) {
 					bestSize = size;
 					bestProperty = property;
@@ -191,14 +190,14 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 		}
 		if (TransformationPartitioner.DISCRIMINATION.isActive()) {
 			StringBuilder s = new StringBuilder();
-			s.append("property->completeClass->regionAnalyses");
-			for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
+			s.append("property->classDatum->regionAnalyses");
+			for (@NonNull Property property : property2classDatum2regionAnalyses.keySet()) {
 				s.append("\n\t" + property);
-				Map<@Nullable CompleteClass, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
-				if (completeClass2regionAnalyses != null) {
-					for (@Nullable CompleteClass completeClass : completeClass2regionAnalyses.keySet()) {
-						s.append("\n\t\t" + completeClass);
-						List<@NonNull PartialRegionAnalysis<@NonNull PRA>> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+				Map<@Nullable ClassDatum, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PRA>>> classDatum2regionAnalyses = property2classDatum2regionAnalyses.get(property);
+				if (classDatum2regionAnalyses != null) {
+					for (@Nullable ClassDatum classDatum : classDatum2regionAnalyses.keySet()) {
+						s.append("\n\t\t" + classDatum);
+						List<@NonNull PartialRegionAnalysis<@NonNull PRA>> regionAnalyses = classDatum2regionAnalyses.get(classDatum);
 						assert regionAnalyses != null;
 						for (@NonNull PartialRegionAnalysis<@NonNull PRA> regionAnalysis : regionAnalyses) {
 							s.append("\n\t\t\t" + regionAnalysis);
@@ -221,10 +220,6 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 	@Override
 	public @NonNull ClassDatum getClassDatum() {
 		return classDatum;
-	}
-
-	public @NonNull CompleteClass getCompleteClass() {
-		return QVTscheduleUtil.getCompleteClass(classDatum);
 	}
 
 	@Override
@@ -264,7 +259,7 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 		Boolean isDispatcher2 = isDispatcher;
 		if (isDispatcher2 == null) {
 			String abstractDispatchClassName = AbstractDispatch.class.getName();
-			for (org.eclipse.ocl.pivot.@NonNull Class superClass : QVTbaseUtil.getSuperClasses(QVTscheduleUtil.getCompleteClass(classDatum).getPrimaryClass())) {
+			for (org.eclipse.ocl.pivot.@NonNull Class superClass : QVTbaseUtil.getSuperClasses(classDatum.getPrimaryClass())) {
 				if (abstractDispatchClassName.equals(superClass.getInstanceClassName())) {
 					isDispatcher2 = isDispatcher = true;
 					return isDispatcher2;
