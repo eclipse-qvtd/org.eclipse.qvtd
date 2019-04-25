@@ -110,6 +110,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createClusterAdapter();
 			}
 			@Override
+			public Adapter caseCollectionClassDatum(CollectionClassDatum object) {
+				return createCollectionClassDatumAdapter();
+			}
+			@Override
 			public Adapter caseCollectionLiteralNode(CollectionLiteralNode object) {
 				return createCollectionLiteralNodeAdapter();
 			}
@@ -512,6 +516,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClusterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum <em>Collection Class Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum
+	 * @generated
+	 */
+	public Adapter createCollectionClassDatumAdapter() {
 		return null;
 	}
 

@@ -81,6 +81,11 @@ public abstract class AbstractQVTscheduleFlowAnalysisDeducerFromNullVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitCollectionClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionClassDatum object) {
+		return visitClassDatum(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitCollectionLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionLiteralNode object) {
 		return visitOperationNode(object);
 	}

@@ -290,11 +290,11 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningCompositePartition((CompositePartition)otherEnd, msgs);
+				return basicSetOwningCompositePartition((CompositePartition)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (referedMappingRegion != null)
 					msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, MappingRegion.class, msgs);
-			return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
+				return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitSuccessors()).basicAdd(otherEnd, msgs);
 		}
@@ -345,13 +345,13 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				return getOwningCompositePartition();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getReferedMappingRegion();
-			return basicGetReferedMappingRegion();
+				return basicGetReferedMappingRegion();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getRegion();
-			return basicGetRegion();
+				return basicGetRegion();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getRootPartition();
-			return basicGetRootPartition();
+				return basicGetRootPartition();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return getExplicitSuccessors();
 		}
@@ -369,14 +369,14 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningCompositePartition((CompositePartition)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferedMappingRegion((MappingRegion)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getExplicitSuccessors().clear();
-			getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
-			return;
+				getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -391,13 +391,13 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningCompositePartition((CompositePartition)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferedMappingRegion((MappingRegion)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getExplicitSuccessors().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

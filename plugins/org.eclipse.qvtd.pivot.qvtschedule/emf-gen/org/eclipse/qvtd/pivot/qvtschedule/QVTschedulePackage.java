@@ -492,6 +492,27 @@ public interface QVTschedulePackage extends EPackage {
 	EAttribute getCluster_Depth();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum <em>Collection Class Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Collection Class Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum
+	 * @generated
+	 */
+	EClass getCollectionClassDatum();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum#getElementalClassDatum <em>Elemental Class Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Elemental Class Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum#getElementalClassDatum()
+	 * @see #getCollectionClassDatum()
+	 * @generated
+	 */
+	EReference getCollectionClassDatum_ElementalClassDatum();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode <em>Collection Literal Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2623,6 +2644,24 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CLUSTER__DEPTH = eINSTANCE.getCluster_Depth();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CollectionClassDatumImpl <em>Collection Class Datum</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.CollectionClassDatumImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getCollectionClassDatum()
+		 * @generated
+		 */
+		EClass COLLECTION_CLASS_DATUM = eINSTANCE.getCollectionClassDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Elemental Class Datum</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM = eINSTANCE.getCollectionClassDatum_ElementalClassDatum();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CollectionLiteralNodeImpl <em>Collection Literal Node</em>}' class.

@@ -69,6 +69,11 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitCollectionClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionClassDatum object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitCollectionLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionLiteralNode object) {
 		return visiting(object);
 	}

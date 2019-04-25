@@ -82,6 +82,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitCollectionClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionClassDatum object) {
+		return visitClassDatum(object);
+	}
+
+	@Override
 	public @Nullable Object visitCollectionLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionLiteralNode object) {
 		return visitOperationNode(object);
 	}

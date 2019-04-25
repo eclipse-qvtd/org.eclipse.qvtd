@@ -1,7 +1,7 @@
 /*******************************************************************************
  * <copyright>
  *
- * Copyright (c) 2013, 2019 Willink Transformations and others.
+ * Copyright (c) 2013, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -84,6 +84,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTscheduleTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ClassDatum = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ClassDatum", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Cluster = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Cluster", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionClassDatum = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("CollectionClassDatum", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionLiteralPart = QVTscheduleTables.PACKid_$metamodel$.getClassId("CollectionLiteralPart", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CompleteClass = QVTscheduleTables.PACKid_$metamodel$.getClassId("CompleteClass", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CompositePartition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("CompositePartition", 0);
@@ -131,6 +132,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_Role = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getEnumerationId("Role");
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_BasicPartition = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_BasicPartition);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_ClassDatum = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_ClassDatum);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_CollectionClassDatum = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_CollectionClassDatum);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Connection = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_Connection);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_CyclicMappingRegion = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_CyclicMappingRegion);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_DispatchRegion = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_DispatchRegion);
@@ -206,6 +208,7 @@ public class QVTscheduleTables
 		public static final @NonNull EcoreExecutorType _CastEdge = new EcoreExecutorType(QVTschedulePackage.Literals.CAST_EDGE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ClassDatum = new EcoreExecutorType(QVTschedulePackage.Literals.CLASS_DATUM, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Cluster = new EcoreExecutorType(QVTschedulePackage.Literals.CLUSTER, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _CollectionClassDatum = new EcoreExecutorType(QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _CollectionLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.COLLECTION_LITERAL_NODE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _CollectionPartEdge = new EcoreExecutorType(QVTschedulePackage.Literals.COLLECTION_PART_EDGE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _CollectionRangeNode = new EcoreExecutorType(QVTschedulePackage.Literals.COLLECTION_RANGE_NODE, PACKAGE, 0);
@@ -286,6 +289,7 @@ public class QVTscheduleTables
 			_CastEdge,
 			_ClassDatum,
 			_Cluster,
+			_CollectionClassDatum,
 			_CollectionLiteralNode,
 			_CollectionPartEdge,
 			_CollectionRangeNode,
@@ -433,6 +437,14 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorFragment _Cluster__OclAny = new ExecutorFragment(Types._Cluster, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Cluster__OclElement = new ExecutorFragment(Types._Cluster, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _Cluster__Symbolable = new ExecutorFragment(Types._Cluster, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull ExecutorFragment _CollectionClassDatum__AbstractDatum = new ExecutorFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._AbstractDatum);
+		private static final @NonNull ExecutorFragment _CollectionClassDatum__ClassDatum = new ExecutorFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._ClassDatum);
+		private static final @NonNull ExecutorFragment _CollectionClassDatum__CollectionClassDatum = new ExecutorFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._CollectionClassDatum);
+		private static final @NonNull ExecutorFragment _CollectionClassDatum__Element = new ExecutorFragment(Types._CollectionClassDatum, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _CollectionClassDatum__NamedElement = new ExecutorFragment(Types._CollectionClassDatum, PivotTables.Types._NamedElement);
+		private static final @NonNull ExecutorFragment _CollectionClassDatum__OclAny = new ExecutorFragment(Types._CollectionClassDatum, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _CollectionClassDatum__OclElement = new ExecutorFragment(Types._CollectionClassDatum, OCLstdlibTables.Types._OclElement);
 
 		private static final @NonNull ExecutorFragment _CollectionLiteralNode__CollectionLiteralNode = new ExecutorFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._CollectionLiteralNode);
 		private static final @NonNull ExecutorFragment _CollectionLiteralNode__ConnectionEnd = new ExecutorFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
@@ -1079,9 +1091,10 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _ClassDatum__referredClass = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_CLASS, Types._ClassDatum, 3);
 		public static final @NonNull ExecutorProperty _ClassDatum__superClassDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS, Types._ClassDatum, 4);
 		public static final @NonNull ExecutorProperty _ClassDatum__ClassDatum__superClassDatums = new ExecutorPropertyWithImplementation("ClassDatum", Types._ClassDatum, 5, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS));
-		public static final @NonNull ExecutorProperty _ClassDatum__KeyedValueNode__classDatumValue = new ExecutorPropertyWithImplementation("KeyedValueNode", Types._ClassDatum, 6, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE));
-		public static final @NonNull ExecutorProperty _ClassDatum__Node__classDatum = new ExecutorPropertyWithImplementation("Node", Types._ClassDatum, 7, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__CLASS_DATUM));
-		public static final @NonNull ExecutorProperty _ClassDatum__NodeConnection__classDatum = new ExecutorPropertyWithImplementation("NodeConnection", Types._ClassDatum, 8, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM));
+		public static final @NonNull ExecutorProperty _ClassDatum__CollectionClassDatum__elementalClassDatum = new ExecutorPropertyWithImplementation("CollectionClassDatum", Types._ClassDatum, 6, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM));
+		public static final @NonNull ExecutorProperty _ClassDatum__KeyedValueNode__classDatumValue = new ExecutorPropertyWithImplementation("KeyedValueNode", Types._ClassDatum, 7, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE));
+		public static final @NonNull ExecutorProperty _ClassDatum__Node__classDatum = new ExecutorPropertyWithImplementation("Node", Types._ClassDatum, 8, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__CLASS_DATUM));
+		public static final @NonNull ExecutorProperty _ClassDatum__NodeConnection__classDatum = new ExecutorPropertyWithImplementation("NodeConnection", Types._ClassDatum, 9, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM));
 
 		public static final @NonNull ExecutorProperty _Cluster__depth = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__DEPTH, Types._Cluster, 0);
 		public static final @NonNull ExecutorProperty _Cluster__memberEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__MEMBER_EDGES, Types._Cluster, 1);
@@ -1089,6 +1102,8 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _Cluster__owningRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__OWNING_REGION, Types._Cluster, 3);
 		public static final @NonNull ExecutorProperty _Cluster__precedingClusters = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__PRECEDING_CLUSTERS, Types._Cluster, 4);
 		public static final @NonNull ExecutorProperty _Cluster__succeedingClusters = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__SUCCEEDING_CLUSTERS, Types._Cluster, 5);
+
+		public static final @NonNull ExecutorProperty _CollectionClassDatum__elementalClassDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM, Types._CollectionClassDatum, 0);
 
 		public static final @NonNull ExecutorProperty _CollectionPartEdge__referredPart = new EcoreExecutorProperty(QVTschedulePackage.Literals.COLLECTION_PART_EDGE__REFERRED_PART, Types._CollectionPartEdge, 0);
 
@@ -1369,6 +1384,18 @@ public class QVTscheduleTables
 				Fragments._Cluster__Cluster /* 4 */
 			};
 		private static final int @NonNull [] __Cluster = { 1,1,2,1,1 };
+
+		private static final @NonNull ExecutorFragment @NonNull [] _CollectionClassDatum =
+			{
+				Fragments._CollectionClassDatum__OclAny /* 0 */,
+				Fragments._CollectionClassDatum__OclElement /* 1 */,
+				Fragments._CollectionClassDatum__Element /* 2 */,
+				Fragments._CollectionClassDatum__NamedElement /* 3 */,
+				Fragments._CollectionClassDatum__AbstractDatum /* 4 */,
+				Fragments._CollectionClassDatum__ClassDatum /* 5 */,
+				Fragments._CollectionClassDatum__CollectionClassDatum /* 6 */
+			};
+		private static final int @NonNull [] __CollectionClassDatum = { 1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CollectionLiteralNode =
 			{
@@ -2210,6 +2237,7 @@ public class QVTscheduleTables
 			Types._CastEdge.initFragments(_CastEdge, __CastEdge);
 			Types._ClassDatum.initFragments(_ClassDatum, __ClassDatum);
 			Types._Cluster.initFragments(_Cluster, __Cluster);
+			Types._CollectionClassDatum.initFragments(_CollectionClassDatum, __CollectionClassDatum);
 			Types._CollectionLiteralNode.initFragments(_CollectionLiteralNode, __CollectionLiteralNode);
 			Types._CollectionPartEdge.initFragments(_CollectionPartEdge, __CollectionPartEdge);
 			Types._CollectionRangeNode.initFragments(_CollectionRangeNode, __CollectionRangeNode);
@@ -2540,6 +2568,41 @@ public class QVTscheduleTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Cluster__Symbolable = {};
+
+		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__CollectionClassDatum = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__AbstractDatum = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__ClassDatum = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__CollectionLiteralNode = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__ConnectionEnd = {};
@@ -5044,6 +5107,14 @@ public class QVTscheduleTables
 			Fragments._Cluster__OclElement.initOperations(_Cluster__OclElement);
 			Fragments._Cluster__Symbolable.initOperations(_Cluster__Symbolable);
 
+			Fragments._CollectionClassDatum__AbstractDatum.initOperations(_CollectionClassDatum__AbstractDatum);
+			Fragments._CollectionClassDatum__ClassDatum.initOperations(_CollectionClassDatum__ClassDatum);
+			Fragments._CollectionClassDatum__CollectionClassDatum.initOperations(_CollectionClassDatum__CollectionClassDatum);
+			Fragments._CollectionClassDatum__Element.initOperations(_CollectionClassDatum__Element);
+			Fragments._CollectionClassDatum__NamedElement.initOperations(_CollectionClassDatum__NamedElement);
+			Fragments._CollectionClassDatum__OclAny.initOperations(_CollectionClassDatum__OclAny);
+			Fragments._CollectionClassDatum__OclElement.initOperations(_CollectionClassDatum__OclElement);
+
 			Fragments._CollectionLiteralNode__CollectionLiteralNode.initOperations(_CollectionLiteralNode__CollectionLiteralNode);
 			Fragments._CollectionLiteralNode__ConnectionEnd.initOperations(_CollectionLiteralNode__ConnectionEnd);
 			Fragments._CollectionLiteralNode__Element.initOperations(_CollectionLiteralNode__Element);
@@ -5693,6 +5764,16 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Cluster__precedingClusters,
 			QVTscheduleTables.Properties._Cluster__succeedingClusters,
 			QVTscheduleTables.Properties._Symbolable__symbolName
+		};
+
+		private static final @NonNull ExecutorProperty @NonNull [] _CollectionClassDatum = {
+			QVTscheduleTables.Properties._ClassDatum__completeClass,
+			QVTscheduleTables.Properties._CollectionClassDatum__elementalClassDatum,
+			QVTscheduleTables.Properties._ClassDatum__ownedPropertyDatums,
+			QVTscheduleTables.Properties._ClassDatum__owningScheduleModel,
+			QVTscheduleTables.Properties._ClassDatum__referredClass,
+			QVTscheduleTables.Properties._AbstractDatum__referredTypedModel,
+			QVTscheduleTables.Properties._ClassDatum__superClassDatums
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CollectionLiteralNode = {
@@ -6507,6 +6588,7 @@ public class QVTscheduleTables
 			Fragments._CastEdge__CastEdge.initProperties(_CastEdge);
 			Fragments._ClassDatum__ClassDatum.initProperties(_ClassDatum);
 			Fragments._Cluster__Cluster.initProperties(_Cluster);
+			Fragments._CollectionClassDatum__CollectionClassDatum.initProperties(_CollectionClassDatum);
 			Fragments._CollectionLiteralNode__CollectionLiteralNode.initProperties(_CollectionLiteralNode);
 			Fragments._CollectionPartEdge__CollectionPartEdge.initProperties(_CollectionPartEdge);
 			Fragments._CollectionRangeNode__CollectionRangeNode.initProperties(_CollectionRangeNode);

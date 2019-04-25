@@ -148,6 +148,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 7: {
+				CollectionClassDatum collectionClassDatum = (CollectionClassDatum)theEObject;
+				T result = caseCollectionClassDatum(collectionClassDatum);
+				if (result == null) result = caseClassDatum(collectionClassDatum);
+				if (result == null) result = caseAbstractDatum(collectionClassDatum);
+				if (result == null) result = caseNamedElement(collectionClassDatum);
+				if (result == null) result = caseElement(collectionClassDatum);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 8: {
 				CollectionLiteralNode collectionLiteralNode = (CollectionLiteralNode)theEObject;
 				T result = caseCollectionLiteralNode(collectionLiteralNode);
 				if (result == null) result = caseOperationNode(collectionLiteralNode);
@@ -158,7 +168,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 8: {
+			case 9: {
 				CollectionPartEdge collectionPartEdge = (CollectionPartEdge)theEObject;
 				T result = caseCollectionPartEdge(collectionPartEdge);
 				if (result == null) result = caseArgumentEdge(collectionPartEdge);
@@ -168,7 +178,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 9: {
+			case 10: {
 				CollectionRangeNode collectionRangeNode = (CollectionRangeNode)theEObject;
 				T result = caseCollectionRangeNode(collectionRangeNode);
 				if (result == null) result = caseOperationNode(collectionRangeNode);
@@ -179,7 +189,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 10: {
+			case 11: {
 				ComposedNode composedNode = (ComposedNode)theEObject;
 				T result = caseComposedNode(composedNode);
 				if (result == null) result = caseNode(composedNode);
@@ -188,7 +198,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 11: {
+			case 12: {
 				CompositePartition compositePartition = (CompositePartition)theEObject;
 				T result = caseCompositePartition(compositePartition);
 				if (result == null) result = casePartition(compositePartition);
@@ -197,7 +207,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 12: {
+			case 13: {
 				Connection connection = (Connection)theEObject;
 				T result = caseConnection(connection);
 				if (result == null) result = caseElement(connection);
@@ -205,13 +215,13 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 13: {
+			case 14: {
 				ConnectionEnd connectionEnd = (ConnectionEnd)theEObject;
 				T result = caseConnectionEnd(connectionEnd);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 14: {
+			case 15: {
 				CyclicMappingRegion cyclicMappingRegion = (CyclicMappingRegion)theEObject;
 				T result = caseCyclicMappingRegion(cyclicMappingRegion);
 				if (result == null) result = caseMappingRegion(cyclicMappingRegion);
@@ -222,7 +232,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 15: {
+			case 16: {
 				CyclicPartition cyclicPartition = (CyclicPartition)theEObject;
 				T result = caseCyclicPartition(cyclicPartition);
 				if (result == null) result = caseCompositePartition(cyclicPartition);
@@ -233,7 +243,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 16: {
+			case 17: {
 				DependencyEdge dependencyEdge = (DependencyEdge)theEObject;
 				T result = caseDependencyEdge(dependencyEdge);
 				if (result == null) result = caseEdge(dependencyEdge);
@@ -241,7 +251,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 17: {
+			case 18: {
 				DependencyNode dependencyNode = (DependencyNode)theEObject;
 				T result = caseDependencyNode(dependencyNode);
 				if (result == null) result = caseNode(dependencyNode);
@@ -250,7 +260,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 18: {
+			case 19: {
 				DispatchRegion dispatchRegion = (DispatchRegion)theEObject;
 				T result = caseDispatchRegion(dispatchRegion);
 				if (result == null) result = caseRuleRegion(dispatchRegion);
@@ -262,14 +272,14 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 19: {
+			case 20: {
 				Edge edge = (Edge)theEObject;
 				T result = caseEdge(edge);
 				if (result == null) result = caseElement(edge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 20: {
+			case 21: {
 				EdgeConnection edgeConnection = (EdgeConnection)theEObject;
 				T result = caseEdgeConnection(edgeConnection);
 				if (result == null) result = caseConnection(edgeConnection);
@@ -278,7 +288,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 21: {
+			case 22: {
 				EnumLiteralNode enumLiteralNode = (EnumLiteralNode)theEObject;
 				T result = caseEnumLiteralNode(enumLiteralNode);
 				if (result == null) result = caseOperationNode(enumLiteralNode);
@@ -289,7 +299,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 22: {
+			case 23: {
 				ErrorNode errorNode = (ErrorNode)theEObject;
 				T result = caseErrorNode(errorNode);
 				if (result == null) result = caseMappingNode(errorNode);
@@ -299,7 +309,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 23: {
+			case 24: {
 				ExpressionEdge expressionEdge = (ExpressionEdge)theEObject;
 				T result = caseExpressionEdge(expressionEdge);
 				if (result == null) result = caseEdge(expressionEdge);
@@ -307,7 +317,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 24: {
+			case 25: {
 				IfNode ifNode = (IfNode)theEObject;
 				T result = caseIfNode(ifNode);
 				if (result == null) result = caseOperationNode(ifNode);
@@ -318,7 +328,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 25: {
+			case 26: {
 				IncludesEdge includesEdge = (IncludesEdge)theEObject;
 				T result = caseIncludesEdge(includesEdge);
 				if (result == null) result = caseExpressionEdge(includesEdge);
@@ -327,7 +337,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 26: {
+			case 27: {
 				InputNode inputNode = (InputNode)theEObject;
 				T result = caseInputNode(inputNode);
 				if (result == null) result = caseNode(inputNode);
@@ -336,7 +346,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 27: {
+			case 28: {
 				IteratedEdge iteratedEdge = (IteratedEdge)theEObject;
 				T result = caseIteratedEdge(iteratedEdge);
 				if (result == null) result = caseEdge(iteratedEdge);
@@ -344,7 +354,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 28: {
+			case 29: {
 				IteratorNode iteratorNode = (IteratorNode)theEObject;
 				T result = caseIteratorNode(iteratorNode);
 				if (result == null) result = caseVariableNode(iteratorNode);
@@ -355,7 +365,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 29: {
+			case 30: {
 				KeyPartEdge keyPartEdge = (KeyPartEdge)theEObject;
 				T result = caseKeyPartEdge(keyPartEdge);
 				if (result == null) result = caseArgumentEdge(keyPartEdge);
@@ -365,7 +375,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 30: {
+			case 31: {
 				KeyedValueNode keyedValueNode = (KeyedValueNode)theEObject;
 				T result = caseKeyedValueNode(keyedValueNode);
 				if (result == null) result = caseOperationNode(keyedValueNode);
@@ -376,7 +386,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 31: {
+			case 32: {
 				LoadingPartition loadingPartition = (LoadingPartition)theEObject;
 				T result = caseLoadingPartition(loadingPartition);
 				if (result == null) result = caseMappingPartition(loadingPartition);
@@ -386,7 +396,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 32: {
+			case 33: {
 				LoadingRegion loadingRegion = (LoadingRegion)theEObject;
 				T result = caseLoadingRegion(loadingRegion);
 				if (result == null) result = caseRegion(loadingRegion);
@@ -396,7 +406,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 33: {
+			case 34: {
 				MapLiteralNode mapLiteralNode = (MapLiteralNode)theEObject;
 				T result = caseMapLiteralNode(mapLiteralNode);
 				if (result == null) result = caseOperationNode(mapLiteralNode);
@@ -407,7 +417,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 34: {
+			case 35: {
 				MapPartEdge mapPartEdge = (MapPartEdge)theEObject;
 				T result = caseMapPartEdge(mapPartEdge);
 				if (result == null) result = caseArgumentEdge(mapPartEdge);
@@ -417,7 +427,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 35: {
+			case 36: {
 				MapPartNode mapPartNode = (MapPartNode)theEObject;
 				T result = caseMapPartNode(mapPartNode);
 				if (result == null) result = caseOperationNode(mapPartNode);
@@ -428,7 +438,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 36: {
+			case 37: {
 				MappingNode mappingNode = (MappingNode)theEObject;
 				T result = caseMappingNode(mappingNode);
 				if (result == null) result = caseNode(mappingNode);
@@ -437,7 +447,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 37: {
+			case 38: {
 				MappingPartition mappingPartition = (MappingPartition)theEObject;
 				T result = caseMappingPartition(mappingPartition);
 				if (result == null) result = casePartition(mappingPartition);
@@ -446,7 +456,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 38: {
+			case 39: {
 				MappingRegion mappingRegion = (MappingRegion)theEObject;
 				T result = caseMappingRegion(mappingRegion);
 				if (result == null) result = caseRegion(mappingRegion);
@@ -456,7 +466,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 39: {
+			case 40: {
 				MergedPartition mergedPartition = (MergedPartition)theEObject;
 				T result = caseMergedPartition(mergedPartition);
 				if (result == null) result = caseBasicPartition(mergedPartition);
@@ -467,7 +477,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 40: {
+			case 41: {
 				NavigableEdge navigableEdge = (NavigableEdge)theEObject;
 				T result = caseNavigableEdge(navigableEdge);
 				if (result == null) result = caseEdge(navigableEdge);
@@ -476,7 +486,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 41: {
+			case 42: {
 				NavigationEdge navigationEdge = (NavigationEdge)theEObject;
 				T result = caseNavigationEdge(navigationEdge);
 				if (result == null) result = caseNavigableEdge(navigationEdge);
@@ -486,7 +496,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 42: {
+			case 43: {
 				Node node = (Node)theEObject;
 				T result = caseNode(node);
 				if (result == null) result = caseElement(node);
@@ -494,7 +504,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 43: {
+			case 44: {
 				NodeConnection nodeConnection = (NodeConnection)theEObject;
 				T result = caseNodeConnection(nodeConnection);
 				if (result == null) result = caseConnection(nodeConnection);
@@ -503,7 +513,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 44: {
+			case 45: {
 				NonPartition nonPartition = (NonPartition)theEObject;
 				T result = caseNonPartition(nonPartition);
 				if (result == null) result = caseMappingPartition(nonPartition);
@@ -513,7 +523,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 45: {
+			case 46: {
 				NullLiteralNode nullLiteralNode = (NullLiteralNode)theEObject;
 				T result = caseNullLiteralNode(nullLiteralNode);
 				if (result == null) result = caseOperationNode(nullLiteralNode);
@@ -524,7 +534,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 46: {
+			case 47: {
 				NumericLiteralNode numericLiteralNode = (NumericLiteralNode)theEObject;
 				T result = caseNumericLiteralNode(numericLiteralNode);
 				if (result == null) result = caseOperationNode(numericLiteralNode);
@@ -535,7 +545,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 47: {
+			case 48: {
 				OperationCallNode operationCallNode = (OperationCallNode)theEObject;
 				T result = caseOperationCallNode(operationCallNode);
 				if (result == null) result = caseOperationNode(operationCallNode);
@@ -546,7 +556,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 48: {
+			case 49: {
 				OperationNode operationNode = (OperationNode)theEObject;
 				T result = caseOperationNode(operationNode);
 				if (result == null) result = caseMappingNode(operationNode);
@@ -556,7 +566,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 49: {
+			case 50: {
 				OperationRegion operationRegion = (OperationRegion)theEObject;
 				T result = caseOperationRegion(operationRegion);
 				if (result == null) result = caseRegion(operationRegion);
@@ -566,7 +576,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 50: {
+			case 51: {
 				OperationParameterEdge operationParameterEdge = (OperationParameterEdge)theEObject;
 				T result = caseOperationParameterEdge(operationParameterEdge);
 				if (result == null) result = caseArgumentEdge(operationParameterEdge);
@@ -576,7 +586,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 51: {
+			case 52: {
 				OperationSelfEdge operationSelfEdge = (OperationSelfEdge)theEObject;
 				T result = caseOperationSelfEdge(operationSelfEdge);
 				if (result == null) result = caseArgumentEdge(operationSelfEdge);
@@ -586,7 +596,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 52: {
+			case 53: {
 				Partition partition = (Partition)theEObject;
 				T result = casePartition(partition);
 				if (result == null) result = caseNamedElement(partition);
@@ -594,7 +604,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 53: {
+			case 54: {
 				PatternTypedNode patternTypedNode = (PatternTypedNode)theEObject;
 				T result = casePatternTypedNode(patternTypedNode);
 				if (result == null) result = caseMappingNode(patternTypedNode);
@@ -604,7 +614,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 54: {
+			case 55: {
 				PatternVariableNode patternVariableNode = (PatternVariableNode)theEObject;
 				T result = casePatternVariableNode(patternVariableNode);
 				if (result == null) result = caseVariableNode(patternVariableNode);
@@ -615,7 +625,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 55: {
+			case 56: {
 				PredicateEdge predicateEdge = (PredicateEdge)theEObject;
 				T result = casePredicateEdge(predicateEdge);
 				if (result == null) result = caseEdge(predicateEdge);
@@ -623,7 +633,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 56: {
+			case 57: {
 				PropertyDatum propertyDatum = (PropertyDatum)theEObject;
 				T result = casePropertyDatum(propertyDatum);
 				if (result == null) result = caseAbstractDatum(propertyDatum);
@@ -632,7 +642,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 57: {
+			case 58: {
 				RecursionEdge recursionEdge = (RecursionEdge)theEObject;
 				T result = caseRecursionEdge(recursionEdge);
 				if (result == null) result = caseEdge(recursionEdge);
@@ -640,7 +650,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 58: {
+			case 59: {
 				Region region = (Region)theEObject;
 				T result = caseRegion(region);
 				if (result == null) result = caseNamedElement(region);
@@ -649,7 +659,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 59: {
+			case 60: {
 				RootPartition rootPartition = (RootPartition)theEObject;
 				T result = caseRootPartition(rootPartition);
 				if (result == null) result = caseCompositePartition(rootPartition);
@@ -659,7 +669,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 60: {
+			case 61: {
 				RootRegion rootRegion = (RootRegion)theEObject;
 				T result = caseRootRegion(rootRegion);
 				if (result == null) result = caseRegion(rootRegion);
@@ -669,7 +679,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 61: {
+			case 62: {
 				RuleRegion ruleRegion = (RuleRegion)theEObject;
 				T result = caseRuleRegion(ruleRegion);
 				if (result == null) result = caseMappingRegion(ruleRegion);
@@ -680,7 +690,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 62: {
+			case 63: {
 				ScheduleModel scheduleModel = (ScheduleModel)theEObject;
 				T result = caseScheduleModel(scheduleModel);
 				if (result == null) result = caseModel(scheduleModel);
@@ -690,7 +700,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 63: {
+			case 64: {
 				ShadowNode shadowNode = (ShadowNode)theEObject;
 				T result = caseShadowNode(shadowNode);
 				if (result == null) result = caseOperationNode(shadowNode);
@@ -701,7 +711,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 64: {
+			case 65: {
 				ShadowPartEdge shadowPartEdge = (ShadowPartEdge)theEObject;
 				T result = caseShadowPartEdge(shadowPartEdge);
 				if (result == null) result = caseArgumentEdge(shadowPartEdge);
@@ -711,7 +721,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 65: {
+			case 66: {
 				StringLiteralNode stringLiteralNode = (StringLiteralNode)theEObject;
 				T result = caseStringLiteralNode(stringLiteralNode);
 				if (result == null) result = caseOperationNode(stringLiteralNode);
@@ -722,7 +732,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 66: {
+			case 67: {
 				SuccessEdge successEdge = (SuccessEdge)theEObject;
 				T result = caseSuccessEdge(successEdge);
 				if (result == null) result = caseNavigationEdge(successEdge);
@@ -733,7 +743,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 67: {
+			case 68: {
 				SuccessNode successNode = (SuccessNode)theEObject;
 				T result = caseSuccessNode(successNode);
 				if (result == null) result = caseMappingNode(successNode);
@@ -743,13 +753,13 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 68: {
+			case 69: {
 				Symbolable symbolable = (Symbolable)theEObject;
 				T result = caseSymbolable(symbolable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 69: {
+			case 70: {
 				TupleLiteralNode tupleLiteralNode = (TupleLiteralNode)theEObject;
 				T result = caseTupleLiteralNode(tupleLiteralNode);
 				if (result == null) result = caseOperationNode(tupleLiteralNode);
@@ -760,7 +770,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 70: {
+			case 71: {
 				TuplePartEdge tuplePartEdge = (TuplePartEdge)theEObject;
 				T result = caseTuplePartEdge(tuplePartEdge);
 				if (result == null) result = caseArgumentEdge(tuplePartEdge);
@@ -770,7 +780,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 71: {
+			case 72: {
 				TypeLiteralNode typeLiteralNode = (TypeLiteralNode)theEObject;
 				T result = caseTypeLiteralNode(typeLiteralNode);
 				if (result == null) result = caseOperationNode(typeLiteralNode);
@@ -781,7 +791,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 72: {
+			case 73: {
 				UnknownNode unknownNode = (UnknownNode)theEObject;
 				T result = caseUnknownNode(unknownNode);
 				if (result == null) result = caseMappingNode(unknownNode);
@@ -791,7 +801,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 73: {
+			case 74: {
 				VariableNode variableNode = (VariableNode)theEObject;
 				T result = caseVariableNode(variableNode);
 				if (result == null) result = caseMappingNode(variableNode);
@@ -801,7 +811,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 74: {
+			case 75: {
 				VerdictRegion verdictRegion = (VerdictRegion)theEObject;
 				T result = caseVerdictRegion(verdictRegion);
 				if (result == null) result = caseRuleRegion(verdictRegion);
@@ -919,6 +929,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCluster(Cluster object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Class Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Class Datum</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCollectionClassDatum(CollectionClassDatum object) {
 		return null;
 	}
 

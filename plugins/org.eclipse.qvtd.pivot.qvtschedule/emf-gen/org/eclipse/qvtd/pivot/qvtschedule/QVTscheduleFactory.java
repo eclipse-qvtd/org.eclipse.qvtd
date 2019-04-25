@@ -80,6 +80,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull Cluster createCluster();
 
 	/**
+	 * Returns a new object of class '<em>Collection Class Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Class Datum</em>'.
+	 * @generated
+	 */
+	@NonNull CollectionClassDatum createCollectionClassDatum();
+
+	/**
 	 * Returns a new object of class '<em>Collection Literal Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

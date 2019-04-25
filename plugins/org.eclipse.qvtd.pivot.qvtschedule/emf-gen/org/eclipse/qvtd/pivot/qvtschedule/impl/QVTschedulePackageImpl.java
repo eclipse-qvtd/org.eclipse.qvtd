@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionRangeNode;
@@ -163,6 +164,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	private EClass clusterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass collectionClassDatumEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1104,6 +1112,26 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EAttribute getCluster_Depth() {
 		return (EAttribute)clusterEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCollectionClassDatum() {
+		return collectionClassDatumEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCollectionClassDatum_ElementalClassDatum() {
+		return (EReference)collectionClassDatumEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2870,19 +2898,22 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(clusterEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		createEAttribute(clusterEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 
-		collectionLiteralNodeEClass = createEClass(7);
+		collectionClassDatumEClass = createEClass(7);
+		createEReference(collectionClassDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 
-		collectionPartEdgeEClass = createEClass(8);
+		collectionLiteralNodeEClass = createEClass(8);
+
+		collectionPartEdgeEClass = createEClass(9);
 		createEReference(collectionPartEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
-		collectionRangeNodeEClass = createEClass(9);
+		collectionRangeNodeEClass = createEClass(10);
 
-		composedNodeEClass = createEClass(10);
+		composedNodeEClass = createEClass(11);
 
-		compositePartitionEClass = createEClass(11);
+		compositePartitionEClass = createEClass(12);
 		createEReference(compositePartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 
-		connectionEClass = createEClass(12);
+		connectionEClass = createEClass(13);
 		createEReference(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		createEAttribute(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
@@ -2890,21 +2921,21 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
 		createEReference(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
-		connectionEndEClass = createEClass(13);
+		connectionEndEClass = createEClass(14);
 
-		cyclicMappingRegionEClass = createEClass(14);
+		cyclicMappingRegionEClass = createEClass(15);
 		createEReference(cyclicMappingRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8);
 
-		cyclicPartitionEClass = createEClass(15);
+		cyclicPartitionEClass = createEClass(16);
 
-		dependencyEdgeEClass = createEClass(16);
+		dependencyEdgeEClass = createEClass(17);
 
-		dependencyNodeEClass = createEClass(17);
+		dependencyNodeEClass = createEClass(18);
 
-		dispatchRegionEClass = createEClass(18);
+		dispatchRegionEClass = createEClass(19);
 		createEReference(dispatchRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9);
 
-		edgeEClass = createEClass(19);
+		edgeEClass = createEClass(20);
 		createEReference(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		createEAttribute(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		createEAttribute(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
@@ -2912,77 +2943,77 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
 		createEReference(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
 
-		edgeConnectionEClass = createEClass(20);
+		edgeConnectionEClass = createEClass(21);
 		createEReference(edgeConnectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
 		createEReference(edgeConnectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
 		createEReference(edgeConnectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 9);
 
-		enumLiteralNodeEClass = createEClass(21);
+		enumLiteralNodeEClass = createEClass(22);
 		createEReference(enumLiteralNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 
-		errorNodeEClass = createEClass(22);
+		errorNodeEClass = createEClass(23);
 
-		expressionEdgeEClass = createEClass(23);
+		expressionEdgeEClass = createEClass(24);
 
-		ifNodeEClass = createEClass(24);
+		ifNodeEClass = createEClass(25);
 
-		includesEdgeEClass = createEClass(25);
+		includesEdgeEClass = createEClass(26);
 
-		inputNodeEClass = createEClass(26);
+		inputNodeEClass = createEClass(27);
 
-		iteratedEdgeEClass = createEClass(27);
+		iteratedEdgeEClass = createEClass(28);
 
-		iteratorNodeEClass = createEClass(28);
+		iteratorNodeEClass = createEClass(29);
 
-		keyPartEdgeEClass = createEClass(29);
+		keyPartEdgeEClass = createEClass(30);
 		createEReference(keyPartEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
-		keyedValueNodeEClass = createEClass(30);
+		keyedValueNodeEClass = createEClass(31);
 		createEReference(keyedValueNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 
-		loadingPartitionEClass = createEClass(31);
+		loadingPartitionEClass = createEClass(32);
 		createEReference(loadingPartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8);
 
-		loadingRegionEClass = createEClass(32);
+		loadingRegionEClass = createEClass(33);
 		createEReference(loadingRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		createEReference(loadingRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 
-		mapLiteralNodeEClass = createEClass(33);
+		mapLiteralNodeEClass = createEClass(34);
 
-		mapPartEdgeEClass = createEClass(34);
+		mapPartEdgeEClass = createEClass(35);
 		createEReference(mapPartEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
-		mapPartNodeEClass = createEClass(35);
+		mapPartNodeEClass = createEClass(36);
 
-		mappingNodeEClass = createEClass(36);
+		mappingNodeEClass = createEClass(37);
 		createEAttribute(mappingNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 9);
 
-		mappingPartitionEClass = createEClass(37);
+		mappingPartitionEClass = createEClass(38);
 		createEReference(mappingPartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 		createEReference(mappingPartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 		createEReference(mappingPartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		createEReference(mappingPartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 		createEReference(mappingPartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
 
-		mappingRegionEClass = createEClass(38);
+		mappingRegionEClass = createEClass(39);
 		createEReference(mappingRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		createEReference(mappingRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 		createEReference(mappingRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
 
-		mergedPartitionEClass = createEClass(39);
+		mergedPartitionEClass = createEClass(40);
 		createEReference(mergedPartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24);
 
-		navigableEdgeEClass = createEClass(40);
+		navigableEdgeEClass = createEClass(41);
 		createEReference(navigableEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 		createEReference(navigableEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
 		createEReference(navigableEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
 		createEAttribute(navigableEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 9);
 
-		navigationEdgeEClass = createEClass(41);
+		navigationEdgeEClass = createEClass(42);
 		createEAttribute(navigationEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 		createEReference(navigationEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 11);
 
-		nodeEClass = createEClass(42);
+		nodeEClass = createEClass(43);
 		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
@@ -2993,70 +3024,70 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
 		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
 
-		nodeConnectionEClass = createEClass(43);
+		nodeConnectionEClass = createEClass(44);
 		createEReference(nodeConnectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
 		createEReference(nodeConnectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
 		createEReference(nodeConnectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 9);
 		createEReference(nodeConnectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 
-		nonPartitionEClass = createEClass(44);
+		nonPartitionEClass = createEClass(45);
 
-		nullLiteralNodeEClass = createEClass(45);
+		nullLiteralNodeEClass = createEClass(46);
 
-		numericLiteralNodeEClass = createEClass(46);
+		numericLiteralNodeEClass = createEClass(47);
 		createEAttribute(numericLiteralNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 
-		operationCallNodeEClass = createEClass(47);
+		operationCallNodeEClass = createEClass(48);
 		createEReference(operationCallNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 
-		operationNodeEClass = createEClass(48);
+		operationNodeEClass = createEClass(49);
 
-		operationRegionEClass = createEClass(49);
+		operationRegionEClass = createEClass(50);
 		createEReference(operationRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		createEReference(operationRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 		createEReference(operationRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
 		createEReference(operationRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8);
 		createEReference(operationRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9);
 
-		operationParameterEdgeEClass = createEClass(50);
+		operationParameterEdgeEClass = createEClass(51);
 		createEReference(operationParameterEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 		createEAttribute(operationParameterEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
 
-		operationSelfEdgeEClass = createEClass(51);
+		operationSelfEdgeEClass = createEClass(52);
 		createEReference(operationSelfEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
-		partitionEClass = createEClass(52);
+		partitionEClass = createEClass(53);
 		createEAttribute(partitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(partitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(partitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 
-		patternTypedNodeEClass = createEClass(53);
+		patternTypedNodeEClass = createEClass(54);
 
-		patternVariableNodeEClass = createEClass(54);
+		patternVariableNodeEClass = createEClass(55);
 
-		predicateEdgeEClass = createEClass(55);
+		predicateEdgeEClass = createEClass(56);
 
-		propertyDatumEClass = createEClass(56);
+		propertyDatumEClass = createEClass(57);
 		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 		createEAttribute(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 
-		recursionEdgeEClass = createEClass(57);
+		recursionEdgeEClass = createEClass(58);
 		createEAttribute(recursionEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
-		regionEClass = createEClass(58);
+		regionEClass = createEClass(59);
 		createEReference(regionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(regionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEReference(regionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 		createEReference(regionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 
-		rootPartitionEClass = createEClass(59);
+		rootPartitionEClass = createEClass(60);
 		createEReference(rootPartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 		createEReference(rootPartitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 
-		rootRegionEClass = createEClass(60);
+		rootRegionEClass = createEClass(61);
 		createEReference(rootRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		createEReference(rootRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 		createEReference(rootRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
@@ -3064,52 +3095,52 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(rootRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9);
 		createEReference(rootRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10);
 
-		ruleRegionEClass = createEClass(61);
+		ruleRegionEClass = createEClass(62);
 		createEReference(ruleRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8);
 
-		scheduleModelEClass = createEClass(62);
+		scheduleModelEClass = createEClass(63);
 		createEReference(scheduleModelEClass, ModelImpl.MODEL_FEATURE_COUNT + 0);
 		createEReference(scheduleModelEClass, ModelImpl.MODEL_FEATURE_COUNT + 1);
 		createEReference(scheduleModelEClass, ModelImpl.MODEL_FEATURE_COUNT + 2);
 		createEReference(scheduleModelEClass, ModelImpl.MODEL_FEATURE_COUNT + 3);
 
-		shadowNodeEClass = createEClass(63);
+		shadowNodeEClass = createEClass(64);
 
-		shadowPartEdgeEClass = createEClass(64);
+		shadowPartEdgeEClass = createEClass(65);
 		createEReference(shadowPartEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
-		stringLiteralNodeEClass = createEClass(65);
+		stringLiteralNodeEClass = createEClass(66);
 		createEAttribute(stringLiteralNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 
-		successEdgeEClass = createEClass(66);
+		successEdgeEClass = createEClass(67);
 
-		successNodeEClass = createEClass(67);
+		successNodeEClass = createEClass(68);
 
-		symbolableEClass = createEClass(68);
+		symbolableEClass = createEClass(69);
 		createEAttribute(symbolableEClass, 0);
 
-		tupleLiteralNodeEClass = createEClass(69);
+		tupleLiteralNodeEClass = createEClass(70);
 
-		tuplePartEdgeEClass = createEClass(70);
+		tuplePartEdgeEClass = createEClass(71);
 		createEReference(tuplePartEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
-		typeLiteralNodeEClass = createEClass(71);
+		typeLiteralNodeEClass = createEClass(72);
 		createEReference(typeLiteralNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 
-		unknownNodeEClass = createEClass(72);
+		unknownNodeEClass = createEClass(73);
 
-		variableNodeEClass = createEClass(73);
+		variableNodeEClass = createEClass(74);
 		createEReference(variableNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 
-		verdictRegionEClass = createEClass(74);
+		verdictRegionEClass = createEClass(75);
 		createEReference(verdictRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9);
 
 		// Create enums
-		connectionRoleEEnum = createEEnum(75);
-		roleEEnum = createEEnum(76);
+		connectionRoleEEnum = createEEnum(76);
+		roleEEnum = createEEnum(77);
 
 		// Create data types
-		numberEDataType = createEDataType(77);
+		numberEDataType = createEDataType(78);
 	}
 
 	/**
@@ -3152,6 +3183,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		classDatumEClass.getESuperTypes().add(this.getAbstractDatum());
 		clusterEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		clusterEClass.getESuperTypes().add(this.getSymbolable());
+		collectionClassDatumEClass.getESuperTypes().add(this.getClassDatum());
 		collectionLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
 		collectionPartEdgeEClass.getESuperTypes().add(this.getArgumentEdge());
 		collectionRangeNodeEClass.getESuperTypes().add(this.getOperationNode());
@@ -3269,6 +3301,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getCluster_PrecedingClusters(), this.getCluster(), this.getCluster_SucceedingClusters(), "precedingClusters", null, 0, -1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCluster_SucceedingClusters(), this.getCluster(), this.getCluster_PrecedingClusters(), "succeedingClusters", null, 0, -1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCluster_Depth(), ecorePackage.getEIntegerObject(), "depth", null, 0, 1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(collectionClassDatumEClass, CollectionClassDatum.class, "CollectionClassDatum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCollectionClassDatum_ElementalClassDatum(), this.getClassDatum(), null, "elementalClassDatum", null, 1, 1, CollectionClassDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(collectionLiteralNodeEClass, CollectionLiteralNode.class, "CollectionLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -299,11 +299,11 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningCompositePartition((CompositePartition)otherEnd, msgs);
+				return basicSetOwningCompositePartition((CompositePartition)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (referedMappingRegion != null)
 					msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, MappingRegion.class, msgs);
-			return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
+				return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitSuccessors()).basicAdd(otherEnd, msgs);
 		}
@@ -354,13 +354,13 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 				return getOwningCompositePartition();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getReferedMappingRegion();
-			return basicGetReferedMappingRegion();
+				return basicGetReferedMappingRegion();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getRegion();
-			return basicGetRegion();
+				return basicGetRegion();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getRootPartition();
-			return basicGetRootPartition();
+				return basicGetRootPartition();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return getExplicitSuccessors();
 		}
@@ -378,14 +378,14 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwningCompositePartition((CompositePartition)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setReferedMappingRegion((MappingRegion)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				getExplicitSuccessors().clear();
-			getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
-			return;
+				getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -400,13 +400,13 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwningCompositePartition((CompositePartition)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setReferedMappingRegion((MappingRegion)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				getExplicitSuccessors().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
