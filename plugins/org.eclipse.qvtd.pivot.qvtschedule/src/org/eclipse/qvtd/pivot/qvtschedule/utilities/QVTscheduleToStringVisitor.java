@@ -24,6 +24,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionRangeNode;
@@ -172,6 +173,11 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitCluster(@NonNull Cluster object) {
+		return visiting(object);
+	}
+
+	@Override
+	public String visitCollectionClassDatum(@NonNull CollectionClassDatum object) {
 		return visiting(object);
 	}
 

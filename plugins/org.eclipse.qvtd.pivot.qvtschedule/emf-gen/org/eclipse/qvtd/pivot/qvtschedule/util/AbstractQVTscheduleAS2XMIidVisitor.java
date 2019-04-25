@@ -83,6 +83,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitCollectionClassDatum(@NonNull CollectionClassDatum object) {
+		return visitClassDatum(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitCollectionLiteralNode(@NonNull CollectionLiteralNode object) {
 		return visitOperationNode(object);
 	}

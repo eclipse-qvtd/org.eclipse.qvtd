@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.CompletePackage;
@@ -50,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
@@ -214,14 +216,25 @@ public class DatumCaches
 		}
 		ClassDatum classDatum = completeClass2classDatums.get(completeClass);
 		if (classDatum == null) {
-			classDatum = QVTscheduleFactory.eINSTANCE.createClassDatum();
+			org.eclipse.ocl.pivot.@NonNull Class primaryClass = completeClass.getPrimaryClass();
+			if (primaryClass instanceof CollectionType) {
+				Type elementType = PivotUtil.getElementType((CollectionType)primaryClass);
+				org.eclipse.ocl.pivot.@NonNull Class primaryElementClass = PivotUtil.getClass(elementType, scheduleManager.getStandardLibrary());
+				CompleteClass completeElementClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(primaryElementClass);
+				ClassDatum elementClassDatum = getClassDatum(typedModel, completeElementClass);
+				CollectionClassDatum collectionClassDatum = QVTscheduleFactory.eINSTANCE.createCollectionClassDatum();
+				collectionClassDatum.setElementalClassDatum(elementClassDatum);
+				classDatum = collectionClassDatum;
+			}
+			else {
+				classDatum = QVTscheduleFactory.eINSTANCE.createClassDatum();
+			}
 			classDatum.setOwningScheduleModel(scheduleManager.getScheduleModel());
 			classDatum.setCompleteClass(completeClass);
-			classDatum.setReferredClass(completeClass.getPrimaryClass());
-			classDatum.setName(completeClass.getPrimaryClass().getName());
+			classDatum.setReferredClass(primaryClass);
+			classDatum.setName(primaryClass.getName());
 			classDatum.setReferredTypedModel(typedModel);
-			org.eclipse.ocl.pivot.@NonNull Class aClass = completeClass.getPrimaryClass();
-			if (!(aClass instanceof DataType)) {
+			if (!(primaryClass instanceof DataType)) {
 				//				scheduleManager.getSuperClassDatums(classDatum);  -- lazily computed
 				/*				List<ClassDatum> superClassDatums = classDatum.getSuperClassDatums();
 				for (@NonNull CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {

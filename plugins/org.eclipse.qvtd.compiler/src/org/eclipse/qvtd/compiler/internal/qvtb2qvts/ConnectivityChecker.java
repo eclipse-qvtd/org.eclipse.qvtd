@@ -36,7 +36,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
- * ConnectivityChecker is a debug aid providing anslyses and consistency checks of a ScheduleModel.
+ * ConnectivityChecker is a debug aid providing analyses and consistency checks of a ScheduleModel.
  */
 public class ConnectivityChecker
 {
@@ -250,7 +250,8 @@ public class ConnectivityChecker
 			primaryClass = (org.eclipse.ocl.pivot.Class)PivotUtil.getElementType((CollectionType)primaryClass);
 			classDatum = scheduleManager.getClassDatum(QVTscheduleUtil.getReferredTypedModel(classDatum), primaryClass);
 		}
-		return classDatum;
+		//		return classDatum;
+		throw new UnsupportedOperationException();
 	}
 
 	private @NonNull Set<@NonNull Node> getSubConsumers(@NonNull ClassDatum classDatum) {
