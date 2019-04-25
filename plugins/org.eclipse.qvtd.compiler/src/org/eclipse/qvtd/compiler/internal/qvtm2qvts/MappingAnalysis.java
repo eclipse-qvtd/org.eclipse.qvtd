@@ -185,9 +185,10 @@ public class MappingAnalysis extends RuleAnalysis
 			CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
 			if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(valueCompleteClass, targetCompleteClass)) {	// Allow value to be physical or behavioral
 				// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm
-				if (!valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass()) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {
-					throw new IllegalStateException("Incompatible types " + valueCompleteClass + ", " + targetCompleteClass + " for " + asNavigationAssignment);
-				}
+				//	if (!valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass()) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {
+				// No test code follows this path.
+				throw new IllegalStateException("Incompatible types " + valueCompleteClass + ", " + targetCompleteClass + " for " + asNavigationAssignment);
+				//	}
 			}
 			return slotNode;
 		}
