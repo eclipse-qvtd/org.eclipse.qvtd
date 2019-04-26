@@ -42,3 +42,12 @@ map expressionsMaps in Expressions {
 	var s2d : Boolean := Map(Integer[?],String[?]){1 <- '1'}->forAll(key1 <- value1, key2 <- value2 | key1.toString().toUpper() = value2);
 --	var s3 : Boolean := Map{1 <- '1', true <- 'TRUE', false <- 'FALSE'}->forAll(key : OclAny <- value : String | key.toString().toUpper() = value);
 }
+
+map expressionsCasts in Expressions {
+	var s1 : Boolean := true.oclAsType(Boolean);
+	var s2 : Set(Boolean) := null.oclAsType(Set(Boolean));
+	var s3 : Set(Set(Integer[2..5|?])[3..4|1]) := null.oclAsType(Set(Set(Integer[2..5|?])[3..4|1]));
+--	var s3 : Set(Integer[2..5|?])[3..4] := null;--.oclAsType(Set(Integer[2..5|?]));
+	var s4 : Map(String[?], Integer[1]) := null.oclAsType(Map(String[?], Integer[1]));
+	var s5 : Tuple(s:String[?], i:Integer[1]) := null.oclAsType(Tuple(s:String[?], i:Integer[1]));
+}
