@@ -46,7 +46,7 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 		super(context);
 	}
 
-	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement) {
+	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement) {	// FIXME Bug 496810 promote to OCL
 		Type asType = asTypedElement.getType();
 		TypedRefCS csTypeRef = createTypeRefCS(asType);
 		if ((asType instanceof CollectionType) && (csTypeRef instanceof CollectionTypeCS)) {
@@ -59,12 +59,6 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 				csMultiplicity.setStringBounds("*");
 				csCollectionType.setOwnedCollectionMultiplicity(csMultiplicity);
 			}
-			MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();
-			if (!asTypedElement.isIsRequired()) {
-				csMultiplicity.setLowerBound(0);
-				csMultiplicity.setUpperBound(1);
-			}
-			csTypeRef.setOwnedMultiplicity(csMultiplicity);
 		}
 		else if (csTypeRef != null) {
 			if (asTypedElement.isIsRequired()) {
