@@ -20,10 +20,8 @@ import java.util.function.BinaryOperator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.LoopExp;
@@ -44,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -454,24 +453,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return false;
 	}
 
-	/**
-	 * Return true if thisClassDatum conforms to, i.e can be used as, thatType.
-	 *
-	 * If the ClassDatum is a multi-CompleteClass it is sufficient that any one of thisClassDatum's CompleteClasses conforms to thatType.
-	 */
-	public static boolean conformsTo(@NonNull ClassDatum thisClassDatum, @NonNull Type thatType) {
-		List<@NonNull CompleteClass> theseCompleteClasses = thisClassDatum.basicGetCompleteClasses();
-		if (theseCompleteClasses == null) {
-			return false;
-		}
-		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
-			if (thisCompleteClass.conformsTo(thatType)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public static boolean conformsTo(@NonNull CompleteClass thisCompleteClass, @NonNull ClassDatum thatClassDatum) {
 		List<@NonNull CompleteClass> thoseCompleteClasses = thatClassDatum.basicGetCompleteClasses();
 		if (thoseCompleteClasses == null) {
@@ -483,20 +464,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			}
 		}
 		return true;
-	}
-
-	public static boolean conformsToClassOrBehavioralClass(@NonNull ClassDatum thisClassDatum, @NonNull Type thatType) {
-		if (conformsTo(thisClassDatum, thatType)) {
-			return true;
-		}
-		if (!(thatType instanceof DataType)) {
-			return false;
-		}
-		Class behavioralClass = ((DataType)thatType).getBehavioralClass();
-		if (behavioralClass == null) {
-			return false;
-		}
-		return conformsTo(thisClassDatum, behavioralClass);
 	}
 
 	public static boolean conformsToClassOrBehavioralClass(@NonNull CompleteClass thisCompleteClass, @NonNull CompleteClass thatCompleteClass) {
@@ -687,6 +654,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Role getEdgeRole(@NonNull Edge edge) {
 		return ClassUtil.nonNullState(edge.getEdgeRole());
+	}
+
+	public static @NonNull ClassDatum getElementalClassDatum(@NonNull CollectionClassDatum collectionClassDatum) {
+		return ClassUtil.nonNullState(collectionClassDatum.getElementalClassDatum());
 	}
 
 	public static @NonNull Iterable<? extends @NonNull Partition> getExplicitPredecessors(@NonNull BasicPartition partition) {
@@ -1103,8 +1074,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	public static boolean isConformantTarget(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
 		Node thatTarget = getCastTarget(thatEdge.getEdgeTarget());
 		Node thisTarget = getCastTarget(thisEdge.getEdgeTarget());
-		ClassDatum thatType = thatTarget.getClassDatum();
-		ClassDatum thisType = thisTarget.getClassDatum();
+		ClassDatum thatType = getClassDatum(thatTarget);
+		ClassDatum thisType = getClassDatum(thisTarget);
 		if (conformsToClassOrBehavioralClass(thatType, thisType)) {
 			return true;
 		}

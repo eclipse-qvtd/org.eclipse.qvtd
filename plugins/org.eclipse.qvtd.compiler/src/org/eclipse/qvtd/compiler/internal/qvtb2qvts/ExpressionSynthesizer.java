@@ -288,14 +288,14 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		return context.createNavigationEdge(sourceNode, source2targetProperty, targetNode, false);
 	}
 
-	protected @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+	protected @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
 		return context.createNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
 	protected @NonNull NavigableEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
 		assert navigationEdge == null;
-		Boolean isPartial = navigationAssignment != null ? navigationAssignment.isIsPartial() : null;
+		boolean isPartial = navigationAssignment != null ? navigationAssignment.isIsPartial() : scheduleManager.computeIsPartial(targetNode, source2targetProperty);
 		if ((navigationAssignment != null) || context.isPropertyAssignment(sourceNode, source2targetProperty)) {
 			navigationEdge = createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 		}
@@ -352,7 +352,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		return context.createRealizedDataTypeNode(sourceNode, source2targetProperty);
 	}
 
-	protected @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+	protected @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
 		return context.createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
@@ -928,23 +928,24 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		//		if ((operationCallExp.getOwnedSource() instanceof CallExp) && sourceNode.refineClassDatumAnalysis(scheduler.getClassDatumAnalysis(operationCallExp))) {
 		//			return sourceNode;
 		//		}
-		Type castType = QVTbaseUtil.getType(operationCallExp);
+		ClassDatum castClassDatum = scheduleManager.getClassDatum(operationCallExp);
 		boolean castIsRequired = operationCallExp.isIsRequired();
 		//	ClassDatum requiredClassDatum = environmentFactory.getCompleteModel().getCompleteClass(castType);
 		ClassDatum predicatedClassDatum = QVTscheduleUtil.getClassDatum(sourceNode);
 		boolean sourceIsRequired = sourceNode.isRequired();
-		if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castType) && (sourceIsRequired || !castIsRequired)) {
+		if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castClassDatum) && (sourceIsRequired || !castIsRequired)) {
 			sourceNode.addOriginatingElement(operationCallExp);
 			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
 		for (@NonNull NavigableEdge castEdge : sourceNode.getCastEdges()) {
 			Node targetNode = castEdge.getEdgeTarget();
 			predicatedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-			if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castType)) {
+			if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castClassDatum)) {
 				targetNode.addOriginatingElement(operationCallExp);
 				return targetNode;										// Re-use a pre-existing class
 			}
 		}
+		Type castType = QVTbaseUtil.getType(operationCallExp);
 		Property castProperty = scheduleManager.getCastProperty(castType);
 		Edge castEdge = sourceNode.getPredicateEdge(castProperty);
 		if (castEdge != null) {
@@ -1166,8 +1167,8 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		assert initNode != null;
 		Type type = QVTbaseUtil.getType(ownedVariable);
 		ClassDatum actualClassDatum = QVTscheduleUtil.getClassDatum(initNode);
-		Type requiredType = QVTbaseUtil.getType(ownedVariable);
-		if (QVTscheduleUtil.conformsTo(actualClassDatum, requiredType)) {
+		ClassDatum variableClassDatum = scheduleManager.getClassDatum(ownedVariable);
+		if (QVTscheduleUtil.conformsTo(actualClassDatum, variableClassDatum)) {
 			context.getRegion().addVariableNode(ownedVariable, initNode);
 			initNode.setOriginatingVariable(ownedVariable);
 		}

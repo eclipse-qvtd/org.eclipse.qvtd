@@ -30,7 +30,7 @@ public class NonTopWhereOnlyInvocationAnalysis extends AbstractInvocationAnalysi
 
 	@Override
 	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, null);
+		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, false);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class NonTopWhereOnlyInvocationAnalysis extends AbstractInvocationAnalysi
 
 	@Override
 	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, null);
+		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, false);
 	}
 
 	/*	@Override

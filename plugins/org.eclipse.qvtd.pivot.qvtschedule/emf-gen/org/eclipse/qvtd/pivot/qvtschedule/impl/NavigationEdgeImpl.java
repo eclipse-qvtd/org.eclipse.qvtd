@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
@@ -22,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
@@ -132,6 +135,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 */
 	@Override
 	public void setPartial(boolean newPartial) {
+		checkIsPartial(newPartial);
 		boolean oldPartial = partial;
 		partial = newPartial;
 		if (eNotificationRequired())
@@ -262,6 +266,43 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitNavigationEdge(this);
 	}
 
+	private void checkIsPartial(boolean isPartial) {
+		Node targetNode = QVTscheduleUtil.getTargetNode(this);
+		ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+		Property property = QVTscheduleUtil.getProperty(this);
+		boolean isComputedPartial = false;
+		Type propertyTargetType = PivotUtil.getType(property);
+		if (!conformsTo(targetClassDatum, propertyTargetType)) {
+			if (propertyTargetType instanceof CollectionType) {
+				Type elementType = PivotUtil.getElementType(((CollectionType)propertyTargetType));
+				if (conformsTo(targetClassDatum, elementType)) {
+					isComputedPartial = true;
+				}
+			}
+		}
+		assert isPartial == isComputedPartial;
+	}
+
+	/**
+	 * Return true if thisClassDatum conforms to, i.e can be used as, thatType.
+	 *
+	 * If the ClassDatum is a multi-CompleteClass it is sufficient that any one of thisClassDatum's CompleteClasses conforms to thatType.
+	 *
+	 * This provate version of QVTscheduleUtil.comformsTo worksound the lack of access to a scheduleManager tyo create the property's CompleteClass.
+	 */
+	private boolean conformsTo(@NonNull ClassDatum thisClassDatum, @NonNull Type thatType) {
+		List<@NonNull CompleteClass> theseCompleteClasses = thisClassDatum.basicGetCompleteClasses();
+		if (theseCompleteClasses == null) {
+			return false;
+		}
+		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
+			if (thisCompleteClass.conformsTo(thatType)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		NavigationEdge edge = (NavigationEdge)super.createEdge(edgeRole, sourceNode, targetNode);
@@ -284,28 +325,8 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		return getReferredProperty();
 	}
 
-	private void initializeIsPartial(@Nullable Boolean isPartial) {
-		boolean isComputedPartial = false;
-		Type propertyTargetType = PivotUtil.getType(QVTscheduleUtil.getProperty(this));
-		Node targetNode = QVTscheduleUtil.getTargetNode(this);
-		ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-		if (!QVTscheduleUtil.conformsTo(targetClassDatum, propertyTargetType)) {
-			if (propertyTargetType instanceof CollectionType) {
-				Type elementType = PivotUtil.getElementType(((CollectionType)propertyTargetType));
-				if (QVTscheduleUtil.conformsTo(targetClassDatum, elementType)) {
-					isComputedPartial = true;
-				}
-			}
-		}
-		if (isPartial == null) {
-			isPartial = isComputedPartial;
-		}
-		assert isPartial == isComputedPartial;
-		setPartial(isPartial);
-	}
-
 	@Override
-	public void initializeProperty(@NonNull Property property, @Nullable Boolean isPartial) {
+	public void initializeProperty(@NonNull Property property, boolean isPartial) {
 		setReferredProperty(property);
 		Property target2sourceProperty = property.getOpposite();
 		if (target2sourceProperty != null)  {
@@ -322,12 +343,12 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 					NavigationEdge reverseEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 					reverseEdge.initialize(edgeRole2, targetNode2, target2sourceProperty.getName(), sourceNode2);
 					reverseEdge.setReferredProperty(target2sourceProperty);
-					((NavigationEdgeImpl)reverseEdge).initializeIsPartial(isPartial());
+					reverseEdge.setPartial(isPartial());
 					initializeOpposite(reverseEdge);
 				}
 			}
 		}
-		initializeIsPartial(isPartial);
+		setPartial(isPartial);
 	}
 
 	@Override

@@ -15,7 +15,6 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 
 /**
@@ -91,5 +90,5 @@ public interface NavigationEdge extends NavigableEdge {
 	 */
 	void setReferredProperty(Property value);
 
-	void initializeProperty(@NonNull Property property, @Nullable Boolean isPartial);
+	void initializeProperty(@NonNull Property property, boolean isPartial);
 } // NavigationEdge

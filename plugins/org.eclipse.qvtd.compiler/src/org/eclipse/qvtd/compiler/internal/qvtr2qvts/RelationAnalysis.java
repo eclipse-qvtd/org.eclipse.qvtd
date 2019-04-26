@@ -24,7 +24,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -160,7 +159,8 @@ public class RelationAnalysis extends RuleAnalysis
 						Property traceClassProperty = variableDeclaration2traceClassProperty.getTraceProperty();
 						//						Property traceInterfaceProperty = variableDeclaration2traceInterfaceProperty.getTraceProperty();
 						Node targetNode = createOldNode(variable);
-						createNavigationEdge(traceNode, traceClassProperty, targetNode, null);
+						boolean isPartial = scheduleManager.computeIsPartial(targetNode, traceClassProperty);
+						createNavigationEdge(traceNode, traceClassProperty, targetNode, isPartial);
 						if (isTopLevel) {
 							region.getHeadNodes().add(targetNode);
 							targetNode.setHead();
@@ -1363,21 +1363,23 @@ public class RelationAnalysis extends RuleAnalysis
 			Variable targetVariable = QVTrelationUtil.getBindsTo((CollectionTemplateExp) targetExpression);
 			Node targetNode = region.getNode(targetVariable);
 			if (targetNode != null) {
+				boolean isPartial = scheduleManager.computeIsPartial(targetNode, source2targetProperty);
 				if (scheduleManager.getDomainUsage(sourceVariable).isOutput() /*&& !propertyTemplateItem.isCheckOnly()*/) {
-					createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, null);
+					createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 				}
 				else {
-					createNavigationEdge(sourceNode, source2targetProperty, targetNode, null);
+					createNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 				}
 			}
 		}
 		else {
 			Node targetNode = expressionSynthesizer.synthesize(targetExpression);
+			boolean isPartial = scheduleManager.computeIsPartial(targetNode, source2targetProperty);
 			if (scheduleManager.getDomainUsage(sourceVariable).isOutput() /*&& !propertyTemplateItem.isCheckOnly()*/) {
-				createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, null);
+				createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 			}
 			else {
-				createNavigationEdge(sourceNode, source2targetProperty, targetNode, null);
+				createNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 			}
 		}
 		return targetExpression;
@@ -1470,7 +1472,8 @@ public class RelationAnalysis extends RuleAnalysis
 						Node rootVariableNode = getReferenceNode(rootVariable);
 						VariableDeclaration overridingRootVariable = QVTrelationUtil.getOverriddenVariable(overridingRelation, rootVariable);
 						Property invocationProperty = overridingRelationAnalysis2TraceInterface.getTraceProperty(overridingRootVariable);
-						createNavigationEdge(guardNode, invocationProperty, rootVariableNode, null);
+						boolean isPartial = scheduleManager.computeIsPartial(rootVariableNode, invocationProperty);
+						createNavigationEdge(guardNode, invocationProperty, rootVariableNode, isPartial);
 					}
 				}
 			}
@@ -1668,11 +1671,12 @@ public class RelationAnalysis extends RuleAnalysis
 					//					VariableDeclaration tracedVariable = overridingVariableDeclaration2traceProperty.getOverridingVariable();
 					Node targetNode = region.getNode(rootVariable);
 					assert targetNode != null;
+					boolean isPartial = scheduleManager.computeIsPartial(dispatchNode, traceProperty);
 					if (isInput) {
-						createNavigationEdge(dispatchNode, traceProperty, targetNode, null);
+						createNavigationEdge(dispatchNode, traceProperty, targetNode, isPartial);
 					}
 					else {
-						createRealizedNavigationEdge(dispatchNode, traceProperty, targetNode, null);
+						createRealizedNavigationEdge(dispatchNode, traceProperty, targetNode, isPartial);
 					}
 				}
 			}
@@ -1686,7 +1690,8 @@ public class RelationAnalysis extends RuleAnalysis
 				Node targetNode = region.getNode(tracedVariable);
 				assert targetNode != null;
 				if (!rootVariables.contains(tracedVariable)) {
-					createRealizedNavigationEdge(traceNode, traceProperty, targetNode, null);
+					boolean isPartial = scheduleManager.computeIsPartial(targetNode, traceProperty);
+					createRealizedNavigationEdge(traceNode, traceProperty, targetNode, isPartial);
 				}
 			}
 		}
@@ -1699,11 +1704,12 @@ public class RelationAnalysis extends RuleAnalysis
 				VariableDeclaration tracedVariable = variableDeclaration2traceProperty.getOverridingVariable();
 				Node targetNode = region.getNode(tracedVariable);
 				assert targetNode != null;
+				boolean isPartial = scheduleManager.computeIsPartial(traceNode, traceProperty);
 				if (hasPredicatedTrace && rootVariables.contains(tracedVariable)) {
-					createNavigationEdge(traceNode, traceProperty, targetNode, null);
+					createNavigationEdge(traceNode, traceProperty, targetNode, isPartial);
 				}
 				else {
-					createRealizedNavigationEdge(traceNode, traceProperty, targetNode, null);
+					createRealizedNavigationEdge(traceNode, traceProperty, targetNode, isPartial);
 				}
 			}
 		}

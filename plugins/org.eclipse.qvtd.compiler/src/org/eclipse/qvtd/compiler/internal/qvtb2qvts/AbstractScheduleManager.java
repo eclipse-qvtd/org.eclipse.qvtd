@@ -74,6 +74,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -437,6 +438,21 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean computeIsPartial(@NonNull Node targetNode, @NonNull Property property) {
+		ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+		ClassDatum propertyClassDatum = getClassDatum(property);
+		if (!QVTscheduleUtil.conformsTo(targetClassDatum, propertyClassDatum)) {
+			if (propertyClassDatum instanceof CollectionClassDatum) {
+				ClassDatum elementClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)propertyClassDatum);
+				if (QVTscheduleUtil.conformsTo(targetClassDatum, elementClassDatum)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override

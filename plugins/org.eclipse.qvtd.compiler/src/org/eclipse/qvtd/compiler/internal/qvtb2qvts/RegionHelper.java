@@ -433,12 +433,12 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return mergedPartition;
 	}
 
-	public @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+	public @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
 		Role phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode));
 		return createNavigationEdge(phase, sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
-	public @NonNull NavigableEdge createNavigationEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+	public @NonNull NavigableEdge createNavigationEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
 		NavigationEdge edge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 		edge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
 		edge.initializeProperty(source2targetProperty, isPartial);
@@ -572,13 +572,14 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull NavigableEdge createPredicatedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+	/*	public @NonNull NavigableEdge createPredicatedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		Role edgeRole = Role.PREDICATED;
 		NavigationEdge forwardEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 		forwardEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
-		forwardEdge.initializeProperty(source2targetProperty, isPartial);
+		boolean isPartial2 = QVTscheduleUtil.computeIsPartial(QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(forwardEdge)), source2targetProperty, isPartial);
+		forwardEdge.initializeProperty(source2targetProperty, isPartial2);
 		return forwardEdge;
-	}
+	} */
 
 	public @NonNull Node createPredicatedNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched) {
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
@@ -616,7 +617,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+	public @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
 		Role edgeRole = Role.REALIZED;
 		NavigationEdge forwardEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 		forwardEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);

@@ -89,7 +89,8 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		RelationAnalysis2TraceClass invokingRuleAnalysis2TraceClass = invokingRuleAnalysis2TraceGroup.getRuleAnalysis2TraceClass();
 		Invocation2TraceProperty invokingInvocation2TraceProperty = invokingRuleAnalysis2TraceClass.getInvocation2TraceProperty(this);
 		Property invocationTraceProperty = invokingInvocation2TraceProperty.getTraceProperty();
-		invokingRelationAnalysis.createRealizedNavigationEdge(invokingTraceNode, invocationTraceProperty, invokedNode, null);
+		boolean isPartial = scheduleManager.computeIsPartial(invokedNode, invocationTraceProperty);
+		invokingRelationAnalysis.createRealizedNavigationEdge(invokingTraceNode, invocationTraceProperty, invokedNode, isPartial);
 	}
 
 	/**

@@ -581,9 +581,10 @@ public class MappingAnalysis extends RuleAnalysis
 			}
 		} */
 		ClassDatum initClassDatum = QVTscheduleUtil.getClassDatum(bestInitNode);
-		Type variableType = PivotUtil.getType(variable);
-		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableType)) {
+		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
+		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableClassDatum)) {
 			Node castNode = createOldNode(variable);
+			Type variableType = PivotUtil.getType(variable);
 			Property castProperty = scheduleManager.getCastProperty(variableType);
 			expressionSynthesizer.createCastEdge(bestInitNode, castProperty, castNode);
 			bestInitNode = castNode;

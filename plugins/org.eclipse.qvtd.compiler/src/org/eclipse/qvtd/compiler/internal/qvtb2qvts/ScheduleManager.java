@@ -87,6 +87,13 @@ public interface ScheduleManager
 	@Nullable ConnectionManager basicGetConnectionManager();
 	@Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node);
 	@Nullable Property basicGetLocalSuccessProperty(@NonNull Node node);
+
+	/**
+	 * Return true if targetNode is one rather than all of the elements computed by the property navigation to targetNode.
+	 *
+	 * FIXME Many calls to this are lazy; cannot possibly be partial.
+	 */
+	boolean computeIsPartial(@NonNull Node targetNode, @NonNull Property property);
 	@NonNull ConnectionManager createConnectionManager(@NonNull ProblemHandler problemHandler, @NonNull LoadingRegionAnalysis loadingRegionAnalysis);
 	@NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis);
 	@NonNull RuleAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule);
