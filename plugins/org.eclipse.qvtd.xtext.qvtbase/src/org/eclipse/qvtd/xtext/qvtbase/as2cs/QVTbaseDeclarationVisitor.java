@@ -16,7 +16,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
@@ -29,7 +28,6 @@ import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityBoundsCS;
-import org.eclipse.ocl.xtext.basecs.MultiplicityStringCS;
 import org.eclipse.ocl.xtext.basecs.OperationCS;
 import org.eclipse.ocl.xtext.basecs.ParameterCS;
 import org.eclipse.ocl.xtext.basecs.SpecificationCS;
@@ -37,7 +35,6 @@ import org.eclipse.ocl.xtext.basecs.TemplateSignatureCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
-import org.eclipse.ocl.xtext.essentialoclcs.CollectionTypeCS;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 
 public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationVisitor implements QVTbaseVisitor<ElementCS>
@@ -49,23 +46,10 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement) {	// FIXME Bug 496810 promote to OCL
 		Type asType = asTypedElement.getType();
 		TypedRefCS csTypeRef = createTypeRefCS(asType);
-		if ((asType instanceof CollectionType) && (csTypeRef instanceof CollectionTypeCS)) {
-			CollectionType asCollectionType = (CollectionType)asType;
-			CollectionTypeCS csCollectionType = (CollectionTypeCS)csTypeRef;
-			boolean isNullFree = asCollectionType.isIsNullFree();
-			if (!isNullFree) {
-				MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();
-				csMultiplicity.setIsNullFree(false);
-				csMultiplicity.setStringBounds("*");
-				csCollectionType.setOwnedCollectionMultiplicity(csMultiplicity);
-			}
-		}
-		else if (csTypeRef != null) {
-			if (asTypedElement.isIsRequired()) {
-				MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();
-				csMultiplicity.setLowerBound(1);
-				csTypeRef.setOwnedMultiplicity(csMultiplicity);
-			}
+		if ((csTypeRef != null) && asTypedElement.isIsRequired()) {
+			MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();	// FIXME MultiplicityStringCS would be nicer but "1" is the default which confuses Xtext serialization
+			csMultiplicity.setLowerBound(1);
+			csTypeRef.setOwnedMultiplicity(csMultiplicity);
 		}
 		return csTypeRef;
 	}
