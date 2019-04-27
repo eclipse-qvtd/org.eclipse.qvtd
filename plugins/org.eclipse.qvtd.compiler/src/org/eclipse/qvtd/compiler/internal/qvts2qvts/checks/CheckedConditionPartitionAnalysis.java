@@ -109,8 +109,9 @@ public class CheckedConditionPartitionAnalysis
 
 		@Override
 		public Object visitCastEdge(@NonNull CastEdge castEdge) {
-			context.add(new CastEdgeCheckedCondition(castEdge));
-			return null;
+			//	context.add(new CastEdgeCheckedCondition(castEdge));
+			//	return null;
+			return visiting(castEdge);		// CastEdge should have been rewritten away
 		}
 
 		@Override

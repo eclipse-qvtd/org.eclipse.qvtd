@@ -587,7 +587,7 @@ public class MappingAnalysis extends RuleAnalysis
 			Node castNode = createOldNode(variable);
 			Type variableType = PivotUtil.getType(variable);
 			Property castProperty = scheduleManager.getCastProperty(variableType);
-			expressionSynthesizer.createCastEdge(bestInitNode, castProperty, castNode);
+			expressionSynthesizer.createCastEdge(bestInitNode, castProperty.getName(), castNode);
 			bestInitNode = castNode;
 		}
 		//		if (Iterables.isEmpty(bestInitNode.getTypedElements())) {

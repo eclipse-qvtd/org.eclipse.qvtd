@@ -131,8 +131,8 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		return context.createBooleanLiteralNode(isUnconditional(), booleanValue, booleanLiteralExp);
 	}
 
-	public @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
-		return context.createCastEdge(sourceNode, castProperty, castNode);
+	public @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode,  @NonNull String name, @NonNull Node castNode) {
+		return context.createCastEdge(sourceNode, name, castNode);
 	}
 
 	protected @NonNull Node createCollectionLiteral(@NonNull CollectionLiteralExp collectionLiteralExp, @NonNull CollectionLiteralPart [] collectionParts, @NonNull Node @NonNull [] partNodes) {
@@ -996,7 +996,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 				((MappingNode)castNode).setMatched(true);
 			}
 		}
-		castEdge = createCastEdge(sourceNode, castProperty, castNode);
+		castEdge = createCastEdge(sourceNode, castProperty.getName(), castNode);
 		OCLExpression argument = operationCallExp.getOwnedArguments().get(0);
 		if (!(argument instanceof TypeExp)) {
 			Node argumentNode = synthesize(argument);

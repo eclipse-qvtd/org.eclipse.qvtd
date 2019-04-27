@@ -14,25 +14,15 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,15 +55,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	 * @ordered
 	 */
 	public static final int CAST_EDGE_OPERATION_COUNT = NavigableEdgeImpl.NAVIGABLE_EDGE_OPERATION_COUNT + 0;
-	/**
-	 * The cached value of the '{@link #getReferredClass() <em>Referred Class</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferredClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected org.eclipse.ocl.pivot.Class referredClass;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -149,9 +131,9 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
-				return getProperty() != null;
+				return false;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
-				return referredClass != null;
+				return false;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -166,19 +148,9 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitCastEdge(this);
 	}
 
-	private Property property;
-
-	@Override
-	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
-		CastEdge castEdge = (CastEdge) super.createEdge(edgeRole, sourceNode, targetNode);
-		castEdge.initializeProperty(QVTscheduleUtil.getProperty(this));
-		return castEdge;
-	}
-
 	@Override
 	public Property getProperty() {
 		throw new UnsupportedOperationException();
-		//	return property;
 	}
 
 	/**
@@ -188,15 +160,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	 */
 	@Override
 	public org.eclipse.ocl.pivot.Class getReferredClass() {
-		if (referredClass != null && referredClass.eIsProxy()) {
-			InternalEObject oldReferredClass = (InternalEObject)referredClass;
-			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
-			if (referredClass != oldReferredClass) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 11, oldReferredClass, referredClass));
-			}
-		}
-		return referredClass;
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -205,7 +169,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	 * @generated
 	 */
 	public org.eclipse.ocl.pivot.Class basicGetReferredClass() {
-		return referredClass;
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -214,60 +178,10 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	 * @generated
 	 */
 	@Override
-	public void setReferredClass(org.eclipse.ocl.pivot.Class newReferredClass) {
-		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
-		referredClass = newReferredClass;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 11, oldReferredClass, referredClass));
-	}
-
-	@Override
-	public void initializeProperty(@NonNull Property property) {
-		setProperty(property);
-		Property target2sourceProperty = property.getOpposite();
-		if (target2sourceProperty != null) {
-			Node targetNode2 = targetNode;
-			assert targetNode2 != null;
-			if (!targetNode2.isNullLiteral()) {
-				assert (targetNode2.getNavigableEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany();
-				if (!property.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
-					Role edgeRole2 = edgeRole;
-					Node sourceNode2 = sourceNode;
-					assert (edgeRole2 != null) && (sourceNode2 != null);
-					CastEdgeImpl reverseEdge = (CastEdgeImpl) QVTscheduleFactory.eINSTANCE.createCastEdge();
-					reverseEdge.initialize(edgeRole2, targetNode2, target2sourceProperty.getName(), sourceNode2);
-					reverseEdge.setProperty(target2sourceProperty);
-					initializeOpposite(reverseEdge);
-				}
-			}
-		}
-	}
+	public void setReferredClass(org.eclipse.ocl.pivot.Class newReferredClass) {}
 
 	@Override
 	public final boolean isCast() {
 		return true;
-	}
-
-	@Override
-	public void setEdgeRole(Role edgeRole) {
-		assert !edgeRole.isNew();
-		super.setEdgeRole(edgeRole);
-	}
-
-	private void setProperty(@NonNull Property property) {
-		this.property = property;
-		setReferredClass(PivotUtil.getClass(property));
-	}
-
-	@Override
-	public void setSource(@Nullable Node sourceNode) {
-		assert (sourceNode == null) || !sourceNode.isNullLiteral();
-		super.setSource(sourceNode);
-	}
-
-	@Override
-	public void setTarget(@Nullable Node targetNode) {
-		assert (targetNode == null) || !targetNode.isNullLiteral();
-		super.setTarget(targetNode);
 	}
 } //CastEdgeImpl

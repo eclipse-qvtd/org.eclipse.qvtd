@@ -14,7 +14,6 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 
 /**
@@ -78,6 +77,4 @@ public interface CastEdge extends NavigableEdge
 	 * @generated
 	 */
 	void setReferredClass(org.eclipse.ocl.pivot.Class value);
-
-	void initializeProperty(@NonNull Property property);
 } // CastEdge
