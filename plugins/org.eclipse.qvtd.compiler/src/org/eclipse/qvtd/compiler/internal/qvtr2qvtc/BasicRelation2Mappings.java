@@ -70,6 +70,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -1638,7 +1639,7 @@ import com.google.common.collect.Sets;
 			}
 		}
 		else {
-			System.err.println("Override cycle for " + this + " at " + rOverriding);
+			QVTruntimeUtil.errPrintln("Override cycle for " + this + " at " + rOverriding);
 		};
 	}
 

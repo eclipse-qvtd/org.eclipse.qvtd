@@ -52,7 +52,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateUtil;
-
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import com.google.common.collect.Iterables;
 
 public class QVTrelationUtil extends QVTtemplateUtil
@@ -159,7 +159,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 				while ((aRule = aRelation.getOverridden()) instanceof Relation) {
 					aRelation = (Relation) aRule;
 					if (!relations.add(aRelation)) {
-						System.err.println("Cyclic override of '" + relation + "' ignored.");
+						QVTruntimeUtil.errPrintln("Cyclic override of '" + relation + "' ignored.");
 						return relation;
 					}
 				}

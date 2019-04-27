@@ -854,7 +854,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			}
 			else {
 				symbolName2 = s1.toString();
-				System.err.println("Failed to reserve '" + symbolName2 + "' for " + this);
+				QVTruntimeUtil.errPrintln("Failed to reserve '" + symbolName2 + "' for " + this);
 			}
 			symbolName = symbolName2;
 			//			if ((symbolName != null) && symbolName.contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {

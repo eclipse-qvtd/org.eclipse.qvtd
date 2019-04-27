@@ -68,6 +68,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseTestFileSystemHelper;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
@@ -119,7 +120,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		assertEquals("Region " + regionClass.getSimpleName() + " count:", count != 0 ? count : null, regionClass2count.get(regionClass));
 		//	}
 		public void assertRegionCount(@NonNull Class<? extends Region> partitionClass, int count) {
-			System.err.println("assertRegionCount suppressed");
+			QVTruntimeUtil.errPrintln("assertRegionCount suppressed");
 		}
 
 		//

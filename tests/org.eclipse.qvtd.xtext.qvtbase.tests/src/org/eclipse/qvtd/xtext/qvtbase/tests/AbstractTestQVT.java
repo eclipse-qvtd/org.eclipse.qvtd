@@ -74,6 +74,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -218,7 +219,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public void assertRegionCount(@NonNull Class<? extends Region> partitionClass, int count) {
-		System.err.println("assertRegionCount suppressed");
+		QVTruntimeUtil.errPrintln("assertRegionCount suppressed");
 	}
 
 	//	public void assertRegionCount(@NonNull Class<? extends Partition> partitionClass, int count) {

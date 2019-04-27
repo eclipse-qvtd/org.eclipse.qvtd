@@ -73,6 +73,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 public class QVTr2QVTc extends AbstractQVTc2QVTc
 {
@@ -139,7 +140,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 				overriddens = new HashSet<>();
 				for (Relation overridden = relation; overridden != null; overridden = QVTrelationUtil.basicGetOverridden(overridden)) {
 					if (!overriddens.add(overridden)) {
-						System.err.println("Cyclic override for " + relation + " at " + overridden);
+						QVTruntimeUtil.errPrintln("Cyclic override for " + relation + " at " + overridden);
 						break;
 					}
 				}

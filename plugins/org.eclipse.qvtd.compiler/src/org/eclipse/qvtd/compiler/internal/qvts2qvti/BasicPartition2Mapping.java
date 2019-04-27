@@ -123,6 +123,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -325,7 +326,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					createCheckStatement(checkExpression);
 				}
 				else {
-					System.err.println("Speculation code omitted for " + partition);
+					QVTruntimeUtil.errPrintln("Speculation code omitted for " + partition);
 				}
 			}
 			else {
@@ -1036,7 +1037,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				return PivotUtil.createVariableExp(iVariable);
 			}
 			else {
-				System.err.println("Creating unexpected variable for " + pVariable + " in " + context.getPartition());
+				QVTruntimeUtil.errPrintln("Creating unexpected variable for " + pVariable + " in " + context.getPartition());
 				Type variableType = pVariable.getType();
 				assert variableType != null;
 				String safeName = context.getSafeName(ClassUtil.nonNullState(pVariable.getName()));
@@ -1705,7 +1706,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					mapping.getOwnedStatements().add(setStatement);
 				}
 				else {
-					System.err.println("No assignment in " + this + " to " + asVariable + "." + property);
+					QVTruntimeUtil.errPrintln("No assignment in " + this + " to " + asVariable + "." + property);
 				}
 			}
 			else {
@@ -1769,7 +1770,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						bottomPattern.getAssignment().add(propertyAssignment);
 					}
 					else {
-						System.err.println("No assignment in " + this + " to " + slotVariableExp + "." + property);
+						QVTruntimeUtil.errPrintln("No assignment in " + this + " to " + slotVariableExp + "." + property);
 	 * /
 
 			}

@@ -67,6 +67,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * The QVTcCompilerChain supports generation of a QVTi Transformation from a QVTc Transformation.
@@ -85,11 +86,11 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
 			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, qvtrResource);
 			if (missingOperationCallSources != null) {
-				System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
+				QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
 			}
 			boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, qvtrResource);
 			if (missingTraceArtefacts) {
-				System.err.println("Missing trace TypedModel.Class artefacts were fixed up for '" + txURI + "'");
+				QVTruntimeUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + txURI + "'");
 			}
 			checkForProxyURIs(qvtrResource);
 			saveResource(qvtrResource);

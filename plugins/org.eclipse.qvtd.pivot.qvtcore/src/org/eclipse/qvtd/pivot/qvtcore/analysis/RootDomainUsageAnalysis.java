@@ -48,7 +48,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
-
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import com.google.common.collect.Iterables;
 
 public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAnalysis implements DomainUsageAnalysis.Root
@@ -82,7 +82,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 						return RootDomainUsageAnalysis.this.getTypedModel(i);
 					}
 					if (!(context instanceof NullLiteralExp)) {
-						System.err.println("Ambiguous TypedModel: " + this + " for " + LabelUtil.getLabel(context));
+						QVTruntimeUtil.errPrintln("Ambiguous TypedModel: " + this + " for " + LabelUtil.getLabel(context));
 					}
 					//					throw new IllegalStateException("Ambiguous TypedModel: " + this);
 					return RootDomainUsageAnalysis.this.getTypedModel(i);
@@ -360,13 +360,13 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
 		for (@NonNull Property dirtyProperty : dirtyProperties) {
 			if (!dirtyProperty.isIsTransient()) {
-				System.err.println("Dirty " + dirtyProperty + " is not transient");
+				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is not transient");
 			}
 			if (dirtyProperty.isIsReadOnly()) {
-				System.err.println("Dirty " + dirtyProperty + " is readonly");
+				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is readonly");
 			}
 			if (dirtyProperty.isIsRequired()) {
-				System.err.println("Dirty " + dirtyProperty + " is required");
+				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is required");
 			}
 		}
 	}
@@ -460,9 +460,9 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		class2usage.put(((StandardLibraryInternal)standardLibrary).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
 		setInputUsage(unenforceableMask);
 		setOutputUsage(enforceableMask);
-		setMiddleUsage(~unenforceableMask & ~enforceableMask & ~PRIMITIVE_USAGE_BIT_MASK);
+		DomainUsage middleUsage2 = setMiddleUsage(~unenforceableMask & ~enforceableMask & ~PRIMITIVE_USAGE_BIT_MASK);
 		if (traceTypedModel != null) {
-			setUsage(traceTypedModel, middleUsage);
+			setUsage(traceTypedModel, middleUsage2);
 		}
 		Variable ownedContext = transformation.getOwnedContext();
 		if (ownedContext != null) {

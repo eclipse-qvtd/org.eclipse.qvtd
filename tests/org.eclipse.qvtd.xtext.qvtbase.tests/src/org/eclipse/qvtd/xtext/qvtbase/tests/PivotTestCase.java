@@ -49,6 +49,7 @@ import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -347,6 +348,9 @@ public class PivotTestCase extends TestCase
 
 	@Override
 	protected void setUp() throws Exception {
+		if (!TEST_START.isActive()) {
+			QVTruntimeUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
+		}
 		super.setUp();
 		TracingOption.resetAll();
 		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
@@ -361,5 +365,6 @@ public class PivotTestCase extends TestCase
 		// TODO Auto-generated method stub
 		//	long time = System.nanoTime() - startTime;
 		super.tearDown();
+		QVTruntimeUtil.contextLine = null;
 	}
 }

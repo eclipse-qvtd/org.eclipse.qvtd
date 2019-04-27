@@ -50,6 +50,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
+
 import com.google.common.collect.Iterables;
 
 public class QVTbaseUtil extends PivotUtil
@@ -139,7 +141,7 @@ public class QVTbaseUtil extends PivotUtil
 		aRule = rule;
 		while (true) {
 			if (!rules.add(aRule)) {
-				System.err.println("Cyclic override of '" + rule + "' ignored.");
+				QVTruntimeUtil.errPrintln("Cyclic override of '" + rule + "' ignored.");
 				return rule;
 			}
 			Rule superRule = aRule.getOverridden();

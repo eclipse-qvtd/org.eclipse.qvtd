@@ -57,6 +57,7 @@ import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Invocation;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.InvocationFailedException;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.ObjectManager;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.SlotState;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 public class LazyObjectManager extends AbstractObjectManager
 {
@@ -205,7 +206,7 @@ public class LazyObjectManager extends AbstractObjectManager
 					break;
 				case ASSIGNED:
 					if (!(eFeature instanceof EOppositeReferenceImpl)) {
-						System.err.println("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
+						QVTruntimeUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
 					}
 					break;
 			}

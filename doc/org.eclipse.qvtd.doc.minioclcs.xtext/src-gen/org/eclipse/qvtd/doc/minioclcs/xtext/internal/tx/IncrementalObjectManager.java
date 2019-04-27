@@ -45,6 +45,7 @@ import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Invocation;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.InvocationFailedException;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.ObjectManager;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.SlotState;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 public class IncrementalObjectManager extends AbstractObjectManager
 {
@@ -87,7 +88,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 					this.value = ecoreValue;
 					break;
 				case ASSIGNED:
-					System.err.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
+					QVTruntimeUtil.errPrintln("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
 					break;
 				case REASSIGNABLE:
 					mode = SlotMode.ASSIGNED;

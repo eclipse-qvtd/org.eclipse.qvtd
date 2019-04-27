@@ -70,6 +70,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * AbstractQVTr2QVTr provides shared functionality for the early QVTr2QVTr steps in the QVTr2QVTc chain.
@@ -387,7 +388,7 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 					Resource vResource = variable.eResource();
 					//					assert vResource == eResource;
 					if (vResource != eResource) {
-						System.err.println(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
+						QVTruntimeUtil.errPrintln(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
 						vResource = variable.eResource();
 					}
 				}
@@ -904,14 +905,14 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 			EObject eSource = target2source.get(eTarget);
 			EObject eCopied = debugCopy2source.get(eTarget);
 			if ((eSource == null) && (eCopied == null)) {
-				System.err.println("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+				QVTruntimeUtil.errPrintln("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 			}
 		}
 
 		// F I X M E the following lines should go obsolete
 		//		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
 		//		if (missingOperationCallSources != null) {
-		//			System.err.println("Missing OperationCallExp sources  were fixed up for '" + target.getURI() + "'");
+		//			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources  were fixed up for '" + target.getURI() + "'");
 		//		}
 	}
 

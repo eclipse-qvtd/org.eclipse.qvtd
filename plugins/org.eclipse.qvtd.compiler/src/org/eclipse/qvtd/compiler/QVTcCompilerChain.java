@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * The QVTcCompilerChain supports generation of a QVTi Transformation from a QVTc Transformation.
@@ -40,7 +41,7 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
 			List<@NonNull OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, cResource);
 			if (missingOperationCallSources != null) {
-				System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
+				QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
 			}
 			checkForProxyURIs(cResource);
 			saveResource(cResource);

@@ -37,6 +37,7 @@ import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 public class IncrementalObjectManager extends AbstractObjectManager
 {
@@ -79,7 +80,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 					this.value = ecoreValue;
 					break;
 				case ASSIGNED:
-					System.err.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
+					QVTruntimeUtil.errPrintln("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
 					break;
 				case REASSIGNABLE:
 					mode = SlotMode.ASSIGNED;

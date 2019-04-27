@@ -103,6 +103,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -295,7 +296,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	//	and then other initializers are checked as predicates using equals edges.
 	//
 	public @NonNull Edge createEqualsEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		System.err.println("Unexpected " + EQUALS_NAME + " edge in " + region + " from " + sourceNode + " to " + targetNode);
+		QVTruntimeUtil.errPrintln("Unexpected " + EQUALS_NAME + " edge in " + region + " from " + sourceNode + " to " + targetNode);
 		//		Role edgeRole = getNodeRole(sourceNode);
 		//		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createEqualsEdge();
 		//		edge.initialize(edgeRole, sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);

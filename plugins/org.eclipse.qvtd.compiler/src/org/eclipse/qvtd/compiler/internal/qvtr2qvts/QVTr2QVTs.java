@@ -70,6 +70,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Lists;
 
@@ -549,11 +550,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		// FIXME the following lines should go obsolete
 		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
 		if (missingOperationCallSources != null) {
-			System.err.println("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
+			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
 		}
 		boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, source);
 		if (missingTraceArtefacts) {
-			System.err.println("Missing trace TypedModel.Class artefacts were fixed up for '" + target.getURI() + "'");
+			QVTruntimeUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + target.getURI() + "'");
 		}
 		//
 		QVTrelationScheduleManager scheduleManager2 = getScheduleManager();
@@ -630,7 +631,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			EObject eSource = target2source.get(eTarget);
 			EObject eCopied = debugCopy2source.get(eTarget);
 			if ((eSource == null) && (eCopied == null)) {
-				// FIXME				System.err.println("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+				// FIXME				QVTruntimeUtil.errPrintln("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 			}
 		}
 

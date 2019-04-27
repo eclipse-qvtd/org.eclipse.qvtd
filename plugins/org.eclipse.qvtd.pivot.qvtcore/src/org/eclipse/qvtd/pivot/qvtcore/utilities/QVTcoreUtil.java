@@ -54,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import com.google.common.collect.Iterables;
 
 public class QVTcoreUtil extends QVTbaseUtil
@@ -224,7 +225,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 			ASResource asResource = loadTransformations(CoreModel.class, environmentFactory, transformationURI, keepDebug);
 			List<@NonNull TypedModel> missingIsTraces = rewriteMissingTypedModelIsTrace(asResource);
 			if (missingIsTraces != null) {
-				System.err.println("TypedModel.isTrace fixed up for '" + transformationURI + "'");
+				QVTruntimeUtil.errPrintln("TypedModel.isTrace fixed up for '" + transformationURI + "'");
 			}
 			return asResource;
 		}

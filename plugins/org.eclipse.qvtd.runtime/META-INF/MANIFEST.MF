@@ -20,6 +20,7 @@ Export-Package: org.eclipse.qvtd.runtime.evaluation,
  org.eclipse.qvtd.runtime.library.model,
  org.eclipse.qvtd.runtime.qvttrace,
  org.eclipse.qvtd.runtime.qvttrace.impl,
- org.eclipse.qvtd.runtime.qvttrace.util
+ org.eclipse.qvtd.runtime.qvttrace.util,
+ org.eclipse.qvtd.runtime.utilities
 Import-Package: com.google.common.collect
 Automatic-Module-Name: org.eclipse.qvtd.runtime

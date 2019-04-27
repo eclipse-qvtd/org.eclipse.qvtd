@@ -29,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Sets;
 
@@ -81,7 +82,7 @@ public class UtilityAnalysis
 				node.setUtility(Node.Utility.STRONGLY_MATCHED);
 				//FIXME				assert unconditionalNodes.contains(node);
 				if (!unconditionalNodes.contains(node)) {
-					System.err.println(node + " is not unconditional in " + this);
+					QVTruntimeUtil.errPrintln(node + " is not unconditional in " + this);
 				}
 				//				assert !dependencyNodes.contains(node);
 			}
