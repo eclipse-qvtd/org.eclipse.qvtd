@@ -296,7 +296,9 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	//	and then other initializers are checked as predicates using equals edges.
 	//
 	public @NonNull Edge createEqualsEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		QVTruntimeUtil.errPrintln("Unexpected " + EQUALS_NAME + " edge in " + region + " from " + sourceNode + " to " + targetNode);
+		if (!region.isOperationRegion()) {
+			QVTruntimeUtil.errPrintln("Unexpected " + EQUALS_NAME + " edge in " + region + " from " + sourceNode + " to " + targetNode);
+		}
 		//		Role edgeRole = getNodeRole(sourceNode);
 		//		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createEqualsEdge();
 		//		edge.initialize(edgeRole, sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
