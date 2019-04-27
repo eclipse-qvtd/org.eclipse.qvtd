@@ -287,6 +287,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 
 		private void createCastPredicates(@NonNull Node sourceNode, @NonNull VariableDeclaration sourceVariable) {
 			for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
+				assert !edge.isCast();
 				if (edge.isCast() && edge.isUnconditional()) {
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 					Property castProperty = QVTscheduleUtil.getProperty(edge);
@@ -1074,13 +1075,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					OCLExpression ownedInit = ((Variable)variable).getOwnedInit();
 					if (ownedInit == null) {
 						for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {		// FIXME this can pick a downstream rather than upstream edge
+							assert !edge.isCast();
 							if (edge.isExpression() && RegionHelper.EQUALS_NAME.equals(edge.getName())) { // ?? always an Equals(Predicate)Edge
 								Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 								return create(sourceNode); //createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
-							}
-							else if (edge.isCast()) {
-								throw new UnsupportedOperationException();
-								//theVariable = createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
 							}
 							else if (edge.isNavigation()) {
 								Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
@@ -1326,9 +1324,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	protected @NonNull Iterable<@NonNull NavigableEdge> getAvailableNavigableEdges() {
 		Set<@NonNull NavigableEdge> oldEdges = new HashSet<>();
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
+			assert !edge.isCast();
 			Role edgeRole = partition.getRole(edge);
 			assert edgeRole != null;
-			if (edgeRole.isOld() && (edge.isCast() || edge.isNavigation()) /*&& edge.isUnconditional()*/) {
+			if (edgeRole.isOld() && edge.isNavigation() /*&& edge.isUnconditional()*/) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 				Role sourceNodeRole = partition.getRole(sourceNode);
 				assert sourceNodeRole != null;

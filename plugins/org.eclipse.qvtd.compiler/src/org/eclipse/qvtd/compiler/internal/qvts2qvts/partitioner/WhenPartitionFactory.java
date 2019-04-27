@@ -118,7 +118,8 @@ public class WhenPartitionFactory extends AbstractSimplePartitionFactory
 
 	protected boolean isTraced(@NonNull Node node, @NonNull Iterable<@NonNull Node> executionNodes) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isCast() || edge.isNavigation()) {
+			assert !edge.isCast();
+			if (edge.isNavigation()) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 				if (Iterables.contains(executionNodes, sourceNode)) {
 					return true;

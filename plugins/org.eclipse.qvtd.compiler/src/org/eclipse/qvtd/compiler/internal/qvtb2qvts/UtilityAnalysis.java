@@ -273,6 +273,7 @@ public class UtilityAnalysis
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node node : moreUnconditionalNodes) {
 				for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(node)) {
+					assert !incomingEdge.isCast();
 					Node sourceNode = incomingEdge.getEdgeSource();
 					if (!canBeUnconditional(sourceNode)) {}
 					else if (incomingEdge.isComputation()) {
@@ -286,7 +287,7 @@ public class UtilityAnalysis
 						// gather <<else>> visibilities
 						// intersection <<then>>/<<else>> is unconditional
 					}
-					else if (incomingEdge.isCast() || incomingEdge.isNavigation()) {		// Unconditional target has unconditional source
+					else if (incomingEdge.isNavigation()) {		// Unconditional target has unconditional source
 						if (unconditionalNodes.add(sourceNode)) {
 							moreMoreNodes.add(sourceNode);
 						}

@@ -106,7 +106,8 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private void addConstantNode(@NonNull Node node) {
 		assert isConstant(node);
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !isRealized(edge))) {
+			assert !edge.isCast();
+			if (edge.isComputation() || (edge.isNavigation() && !isRealized(edge))) {
 				constantOutputNodes.add(node);
 				return;
 			}
@@ -255,6 +256,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 
 	protected void analyzeEdges() {
 		for (@NonNull Edge edge : getPartialEdges()) {
+			assert !edge.isCast();
 			if (!edge.isSecondary()) {
 				if (isPredicated(edge)) {
 					predicatedEdges.add(edge);
@@ -270,7 +272,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 					else {
 						oldPrimaryNavigableEdges.add(navigableEdge);
 					}
-					if (!isRealized(navigableEdge) && navigableEdge.isMatched() && !navigableEdge.isCast()) {  // FIXME is this totally obsolete
+					if (!isRealized(navigableEdge) && navigableEdge.isMatched()) {  // FIXME is this totally obsolete
 						assert !navigableEdge.isExpression();
 						assert !navigableEdge.isComputation();
 					}
@@ -290,9 +292,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 					else { // || scheduleManager.isOutput(targetNode)) {
 						if (isLoaded(navigableEdge) || isConstant(navigableEdge)) {}
 						else if (isChecked(navigableEdge)) {  // || isSpeculated(navigableEdge)) {
-							if (!navigableEdge.isCast()) {
-								addConsumptionOfOutputEdge(navigableEdge);
-							}
+							addConsumptionOfOutputEdge(navigableEdge);
 						}
 						else if (isRealized(navigableEdge)) {
 							addProductionOfOutputEdge(navigableEdge);

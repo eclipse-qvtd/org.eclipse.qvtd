@@ -122,11 +122,12 @@ public class ReachabilityForest
 				for (@NonNull Node sourceNode : thisCostNodes) {
 					assert node2cost.get(sourceNode) == thisCost;
 					for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+						assert !edge.isCast();
 						Node targetNode = edge.getEdgeTarget();
 						if (!node2reachingEdge.containsKey(targetNode)) {
 							Integer targetCost = node2cost.get(targetNode);
 							assert (targetCost == null) || (thisCost < targetCost);
-							if (edge.isCast() || edge.isNavigation()) {
+							if (edge.isNavigation()) {
 								NavigableEdge navigableEdge = (NavigableEdge) edge;
 								if (forwardEdges.contains(navigableEdge)) {
 									int nextCost = thisCost + FORWARD_NAVIGATION_COST;
@@ -292,7 +293,8 @@ public class ReachabilityForest
 				}
 				else {
 					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-						if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !edge.isRealized())) {
+						assert !edge.isCast();
+						if (edge.isComputation() || (edge.isNavigation() && !edge.isRealized())) {
 							getPredecessors(precedingNodes, edge.getEdgeSource());
 						}
 					}

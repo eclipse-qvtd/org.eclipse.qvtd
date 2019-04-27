@@ -525,7 +525,8 @@ public class MappingPartitioner implements Nameable
 			return false;
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if ((edge.isCast() || edge.isNavigation())) {
+			assert !edge.isCast();
+			if (edge.isNavigation()) {
 				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeSource())) {
 					return false;
 				}
@@ -540,7 +541,8 @@ public class MappingPartitioner implements Nameable
 			//			}
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
-			if (edge.isCast() || edge.isNavigation() || edge.isExpression()) {
+			assert !edge.isCast();
+			if (edge.isNavigation() || edge.isExpression()) {
 				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeTarget())) {
 					return false;
 				}

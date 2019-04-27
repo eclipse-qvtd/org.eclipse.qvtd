@@ -12,9 +12,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.BinaryOperator;
 
 import org.eclipse.emf.ecore.EObject;
@@ -217,7 +215,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 		@Override
 		public boolean apply(@NonNull Edge edge) {
-			return edge.isCast() || edge.isNavigation();
+			assert !edge.isCast();
+			return edge.isNavigation();
 		}
 	}
 
@@ -515,25 +514,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	 * Return the edge unless it is subject to a cast chain in which case return the final cast.
 	 */
 	public static @NonNull NavigableEdge getCastTarget(@NonNull NavigableEdge edge) {
-		@NonNull NavigableEdge sourceEdge = edge;
 		while (true) {
-			@Nullable NavigableEdge targetEdge = null;
-			for (@NonNull Edge nextEdge : getOutgoingEdges(sourceEdge.getEdgeTarget())) {
-				if (nextEdge.isRecursion()) {
-					continue;
-				}
-				if (!nextEdge.isCast()) {
-					return sourceEdge;
-				}
-				if (targetEdge != null) {			// FIXME multi-cast support
-					return sourceEdge;
-				}
-				targetEdge = (NavigableEdge) nextEdge;
+			for (@NonNull Edge nextEdge : getOutgoingEdges(edge.getEdgeTarget())) {
+				assert !nextEdge.isCast();
+				return edge;
 			}
-			if (targetEdge == null) {
-				return sourceEdge;
-			}
-			sourceEdge = targetEdge;
+			return edge;
 		}
 	}
 
@@ -541,25 +527,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	 * Return the node unless it is subject to a cast chain in which case return the final cast.
 	 */
 	public static @NonNull Node getCastTarget(@NonNull Node node) {
-		@NonNull Node sourceNode = node;
 		while (true) {
-			@Nullable Node targetNode = null;
-			for (@NonNull Edge edge : getOutgoingEdges(sourceNode)) {
-				if (edge.isRecursion() || edge.isSecondary()) {
-					continue;
-				}
-				if (!edge.isCast()) {
-					return sourceNode;
-				}
-				if (targetNode != null) {			// FIXME multi-cast support
-					return sourceNode;
-				}
-				targetNode = edge.getEdgeTarget();
+			for (@NonNull Edge edge : getOutgoingEdges(node)) {
+				assert !edge.isCast();
+				return node;
 			}
-			if (targetNode == null) {
-				return sourceNode;
-			}
-			sourceNode = targetNode;
+			return node;
 		}
 	}
 
@@ -569,37 +542,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	 */
 	public static @NonNull Iterable<@NonNull Node> getCastTargets(@NonNull Node node, boolean includeUsedIntermediates) {
 		for (@NonNull Edge edge : getOutgoingEdges(node)) {
+			assert !edge.isCast();
 			if (edge.isRecursion() || edge.isSecondary()) {
 				continue;
 			}
-			else if (edge.isCast()) {
-				Set<@NonNull Node> castTargets = new HashSet<>();
-				getCastTargets(node, includeUsedIntermediates, new HashSet<>(), castTargets);
-				return castTargets;
-			}
 		}
 		return Collections.singletonList(node);
-	}
-
-	private static void getCastTargets(@NonNull Node sourceNode, boolean includeUsedIntermediates, @NonNull Set<@NonNull Node> castSources, @NonNull Set<@NonNull Node> castTargets) {
-		if (castSources.add(sourceNode)) {
-			boolean hasCast = false;
-			for (@NonNull Edge edge : getOutgoingEdges(sourceNode)) {
-				if (edge.isRecursion() || edge.isSecondary()) {
-					continue;
-				}
-				else if (edge.isCast()) {
-					hasCast = true;
-					getCastTargets(edge.getEdgeTarget(), includeUsedIntermediates, castSources, castTargets);
-				}
-				else if (includeUsedIntermediates) {
-					castTargets.add(sourceNode);
-				}
-			}
-			if (!hasCast) {
-				castTargets.add(sourceNode);
-			}
-		}
 	}
 
 	public static @NonNull ClassDatum getClassDatum(@NonNull Node node) {

@@ -21,7 +21,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
@@ -372,7 +371,7 @@ public class OriginalContentsAnalysis
 			}
 			else {
 				Node targetNode = realizedEdge.getEdgeTarget();
-				ClassDatum realizedClassDatum = targetNode.getClassDatum();
+				ClassDatum realizedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
 				if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, requiredClassDatum)) {
 					matches = true;
 				}
@@ -454,7 +453,8 @@ public class OriginalContentsAnalysis
 	private boolean isOnlyCastOrRecursed(@NonNull Node predicatedNode) {
 		boolean isCast = false;
 		for (Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(predicatedNode)) {
-			if (!outgoingEdge.isCast() && !outgoingEdge.isRecursion()) {
+			assert !outgoingEdge.isCast();
+			if (!outgoingEdge.isRecursion()) {
 				return false;
 			}
 			isCast = true;

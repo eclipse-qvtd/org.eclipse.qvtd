@@ -61,7 +61,8 @@ class SplitterUtil
 	private static void computeComputableTargetNodes(@NonNull Set<@NonNull Node> computableTargetNodes, @NonNull Node sourceNode, @NonNull Set<@NonNull Node> unresolvedOperationNodes) {
 		if (computableTargetNodes.add(sourceNode)) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
-				if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !edge.isMatched())) {
+				assert !edge.isCast();
+				if (edge.isComputation() || (edge.isNavigation() && !edge.isMatched())) {
 					Node targetNode = edge.getEdgeTarget();
 					if (targetNode.isRealized() && targetNode.isOperation()) {
 						unresolvedOperationNodes.add(targetNode);		// Keys require an all-input check.
@@ -140,7 +141,8 @@ class SplitterUtil
 		Node sourceNode = edge.getEdgeSource();
 		Node targetNode = edge.getEdgeTarget();
 		for (@NonNull Edge edge2 : QVTscheduleUtil.getOutgoingEdges(targetNode)) {
-			if ((edge.isCast() || edge2.isNavigation()) && (edge2.getEdgeTarget() == sourceNode)) {
+			assert !edge2.isCast();
+			if (edge2.isNavigation() && (edge2.getEdgeTarget() == sourceNode)) {
 				return true;
 			}
 		}

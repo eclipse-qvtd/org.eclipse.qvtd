@@ -70,6 +70,7 @@ public class HeadNodeGroup
 		boolean isAggregateSource = aggregateNodes.contains(sourceNode);
 		boolean isOldSource = sourceNode.isOld();
 		for (@NonNull Edge source2targetEdge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+			assert !source2targetEdge.isCast();
 			if (isOldSource ? source2targetEdge.isOld() : source2targetEdge.isNew()) {
 				boolean isAggregateArgument = false;
 				Boolean targetIsCollectionType = null;
@@ -77,7 +78,7 @@ public class HeadNodeGroup
 				if (uniqueNodes.contains(targetNode) || iteratedNodes.contains(targetNode) || aggregateNodes.contains(targetNode)) {
 					// targetType = null;			// already reached
 				}
-				else if (source2targetEdge.isCast() || source2targetEdge.isNavigation()) {
+				else if (source2targetEdge.isNavigation()) {
 					Property targetProperty = QVTscheduleUtil.getProperty((NavigableEdge) source2targetEdge);
 					targetIsCollectionType = targetProperty.getType() instanceof CollectionType;
 				}

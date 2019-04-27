@@ -130,7 +130,8 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 
 	private void analyzeTraceEdges(@NonNull Node traceNode) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
-			if (((edge.isCast() || edge.isNavigation()) && isRealized(edge))) {
+			assert !edge.isCast();
+			if ((edge.isNavigation() && isRealized(edge))) {
 				Node tracedNode = QVTscheduleUtil.getTargetNode(edge);
 				node2traceEdge.put(tracedNode, edge);
 			}

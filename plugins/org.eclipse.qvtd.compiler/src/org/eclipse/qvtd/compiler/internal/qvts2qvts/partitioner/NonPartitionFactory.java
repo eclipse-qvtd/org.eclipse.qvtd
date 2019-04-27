@@ -56,9 +56,10 @@ public class NonPartitionFactory extends AbstractSimplePartitionFactory
 		Set<@NonNull NavigableEdge> oldEdges = new HashSet<>();
 		MappingRegion region = mappingPartitioner.getRegion();
 		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+			assert !edge.isCast();
 			Role edgeRole = edge.getEdgeRole();
 			assert edgeRole != null;
-			if (edgeRole.isOld() && (edge.isCast() || edge.isNavigation()) /*&& edge.isUnconditional()*/) {
+			if (edgeRole.isOld() && edge.isNavigation() /*&& edge.isUnconditional()*/) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 				Role sourceNodeRole = sourceNode.getNodeRole();
 				assert sourceNodeRole != null;
