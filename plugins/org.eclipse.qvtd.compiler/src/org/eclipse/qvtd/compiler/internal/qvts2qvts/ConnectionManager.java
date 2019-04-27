@@ -154,7 +154,7 @@ public class ConnectionManager
 					//	Type type = predicatedTargetClassDatum.getPrimaryClass();
 					//	Type elementType = QVTbaseUtil.getElementType(((CollectionType)type));
 					//	predicatedTargetClassDatum = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
-					predicatedTargetClassDatum = ((CollectionClassDatum)predicatedTargetClassDatum).getElementalClassDatum();
+					predicatedTargetClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)predicatedTargetClassDatum);
 				}
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 					ClassDatum firstClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(realizedEdge));
@@ -199,7 +199,9 @@ public class ConnectionManager
 						}
 					} */
 				}
-				partialNames.add(QVTscheduleUtil.getName(predicatedEdge.getEdgeSource().getClassDatum()));
+				Node sourceNode = QVTscheduleUtil.getSourceNode(predicatedEdge);
+				ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(sourceNode);
+				partialNames.add(QVTscheduleUtil.getName(sourceClassDatum));
 				partialNames.add(QVTscheduleUtil.getName(predicatedProperty));
 			}
 			if (attributeConnectionSourceEdges != null) {
@@ -237,7 +239,6 @@ public class ConnectionManager
 			assert !predicatedEdge.isCast();
 			Property predicatedProperty = predicatedEdge.getProperty();
 			assert !predicatedProperty.isIsImplicit();
-			NavigableEdge castEdge = QVTscheduleUtil.getCastTarget(predicatedEdge);
 			boolean isDataType = classDatum.isDataType();
 			assert !isDataType;
 			Iterable<@NonNull Node> sourceNodes = getNewNodes(classDatum);
@@ -278,8 +279,8 @@ public class ConnectionManager
 						if (s != null) {
 							s.append("\n    EdgeConnection \"" + edgeConnection + "\" to " + predicatedEdge);
 						}
-						if (!Iterables.contains(edgeConnection.getTargetEdges(), castEdge)) {
-							edgeConnection.addUsedTargetEdge(castEdge, false);
+						if (!Iterables.contains(edgeConnection.getTargetEdges(), predicatedEdge)) {
+							edgeConnection.addUsedTargetEdge(predicatedEdge, false);
 							if (s != null) {
 								for (@NonNull NavigableEdge thatEdge : thoseEdges) {
 									s.append("\n      from " + thatEdge.getOwningRegion() + "  : " + thatEdge);
@@ -490,8 +491,7 @@ public class ConnectionManager
 			assert predicatedEdge.getIncomingConnection() == null;
 			Property predicatedProperty = predicatedEdge.getReferredProperty();
 			if (!predicatedProperty.isIsImplicit()) {		// unnavigable opposites are handled by the navigable property
-				NavigableEdge castEdge = QVTscheduleUtil.getCastTarget(predicatedEdge);
-				Node castTargetNode = QVTscheduleUtil.getCastTarget(castEdge.getEdgeTarget());
+				Node castTargetNode = predicatedEdge.getEdgeTarget();
 				List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
 				if (predicatedEdges == null) {
 					predicatedEdges = new ArrayList<>();

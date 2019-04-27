@@ -153,8 +153,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	}
 
 	private void addConsumptionOfNode(@NonNull Node node) {
-		Node castNode = QVTscheduleUtil.getCastTarget(node);
-		PartialRegionClassAnalysis<@NonNull PRA> consumedTraceAnalysis = partialRegionsAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), this);
+		PartialRegionClassAnalysis<@NonNull PRA> consumedTraceAnalysis = partialRegionsAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(node), this);
 		List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> consumedClassAnalyses2 = consumedClassAnalyses;
 		if (consumedClassAnalyses2 == null) {
 			consumedClassAnalyses = consumedClassAnalyses2 = new ArrayList<>();

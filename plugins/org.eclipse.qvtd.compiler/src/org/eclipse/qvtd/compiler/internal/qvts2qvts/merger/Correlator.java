@@ -294,7 +294,6 @@ class Correlator
 			}
 			for (@NonNull NavigableEdge uncastExtraEdge : extraSourceNode.getNavigableEdges()) {
 				Node uncastExtraTargetNode = uncastExtraEdge.getEdgeTarget();
-				Iterable<@NonNull Node> extraTargetNodes = QVTscheduleUtil.getCastTargets(uncastExtraTargetNode, true);
 				if (sourceNodeMerger != null) {
 					NavigableEdge uncastPrimaryEdge = sourceNodeMerger.getNavigableEdge(QVTscheduleUtil.getProperty(uncastExtraEdge));	// Skip isSecondary properties
 					EdgeMerger edgeMerger = uncastPrimaryEdge != null ? regionMerger.getEdgeMerger(uncastPrimaryEdge) : null;
@@ -310,44 +309,41 @@ class Correlator
 							return false;
 						}
 						Map<@NonNull ClassDatum, @NonNull NodeMerger> classDatum2targetNodeMergers = new HashMap<>();
-						for (@NonNull Node primaryTargetNode : QVTscheduleUtil.getCastTargets(uncastPrimaryTargetNode, true)) {
-							ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(primaryTargetNode);
-							NodeMerger oldNodeMerger = classDatum2targetNodeMergers.put(targetClassDatum, regionMerger.getNodeMerger(primaryTargetNode));
-							if (oldNodeMerger != null) {
-								if (debugFailures) {
-									AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetClassDatum);
-								}
-								return false;		// FIXME should have an earlier cast rationalizer
+						@NonNull Node primaryTargetNode = uncastPrimaryTargetNode;
+						ClassDatum targetClassDatum1 = QVTscheduleUtil.getClassDatum(primaryTargetNode);
+						NodeMerger oldNodeMerger = classDatum2targetNodeMergers.put(targetClassDatum1, regionMerger.getNodeMerger(primaryTargetNode));
+						if (oldNodeMerger != null) {
+							if (debugFailures) {
+								AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetClassDatum1);
 							}
+							return false;		// FIXME should have an earlier cast rationalizer
 						}
-						for (@NonNull Node extraTargetNode : extraTargetNodes) {
-							ClassDatum targetClassDatum = extraTargetNode.getClassDatum();
-							NodeMerger targetNodeMerger = classDatum2targetNodeMergers.remove(targetClassDatum);
-							if (targetNodeMerger == null) {
+						@NonNull Node extraTargetNode = uncastExtraTargetNode;
+						ClassDatum targetClassDatum2 = extraTargetNode.getClassDatum();
+						NodeMerger targetNodeMerger = classDatum2targetNodeMergers.remove(targetClassDatum2);
+						if (targetNodeMerger == null) {
+							if (debugFailures) {
+								AbstractMerger.FAILURE.println("Inconsistent types at: " + targetNodeMerger + ", " + extraTargetNode);
+							}
+							return false;		// FIXME Inconsistent navigation is too complex
+						}
+						else {
+							NodeMerger targetNodeMerger2 = extraNode2nodeMerger.get(extraTargetNode);
+							if (targetNodeMerger2 == null) {
+								extraNode2nodeMerger.put(extraTargetNode, targetNodeMerger);
+							}
+							else if (targetNodeMerger != targetNodeMerger2) {
 								if (debugFailures) {
-									AbstractMerger.FAILURE.println("Inconsistent types at: " + targetNodeMerger + ", " + extraTargetNode);
+									AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetNodeMerger + ", " + targetNodeMerger2);
 								}
 								return false;		// FIXME Inconsistent navigation is too complex
-							}
-							else {
-								NodeMerger targetNodeMerger2 = extraNode2nodeMerger.get(extraTargetNode);
-								if (targetNodeMerger2 == null) {
-									extraNode2nodeMerger.put(extraTargetNode, targetNodeMerger);
-								}
-								else if (targetNodeMerger != targetNodeMerger2) {
-									if (debugFailures) {
-										AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetNodeMerger + ", " + targetNodeMerger2);
-									}
-									return false;		// FIXME Inconsistent navigation is too complex
-								}
 							}
 						}
 					}
 				}
-				for (@NonNull Node extraTargetNode : extraTargetNodes) {
-					if (extraNodes.add(extraTargetNode)) {
-						extraNodesWorkList.add(extraTargetNode);
-					}
+				@NonNull Node extraTargetNode = uncastExtraTargetNode;
+				if (extraNodes.add(extraTargetNode)) {
+					extraNodesWorkList.add(extraTargetNode);
 				}
 			}
 		}

@@ -24,8 +24,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -126,14 +124,6 @@ public abstract class HeadAnalysis
 			//
 			if (o1.isPredicated() != o2.isPredicated()) {
 				return o1.isPredicated() ? -1 : 1;
-			}
-			//
-			//	Uncast next
-			//
-			boolean c1 = QVTscheduleUtil.getCastTarget(o1) != o1;
-			boolean c2 = QVTscheduleUtil.getCastTarget(o2) != o2;
-			if (c1 != c2) {
-				return !c1 ? -1 : 1;
 			}
 			//
 			//	Least implicit next (prefers middle to output)

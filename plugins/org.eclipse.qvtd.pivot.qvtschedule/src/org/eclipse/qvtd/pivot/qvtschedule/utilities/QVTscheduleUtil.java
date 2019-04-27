@@ -510,46 +510,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(rootRegion.getActiveRegions());
 	}
 
-	/**
-	 * Return the edge unless it is subject to a cast chain in which case return the final cast.
-	 */
-	public static @NonNull NavigableEdge getCastTarget(@NonNull NavigableEdge edge) {
-		while (true) {
-			for (@NonNull Edge nextEdge : getOutgoingEdges(edge.getEdgeTarget())) {
-				assert !nextEdge.isCast();
-				return edge;
-			}
-			return edge;
-		}
-	}
-
-	/**
-	 * Return the node unless it is subject to a cast chain in which case return the final cast.
-	 */
-	public static @NonNull Node getCastTarget(@NonNull Node node) {
-		while (true) {
-			for (@NonNull Edge edge : getOutgoingEdges(node)) {
-				assert !edge.isCast();
-				return node;
-			}
-			return node;
-		}
-	}
-
-	/**
-	 * Return all nodes to which node is transitively cast or just node in the total absence of casts.
-	 * If includeUsedIntermediates is set, cast edge inputs that are used by non-cast edges are also returned.
-	 */
-	public static @NonNull Iterable<@NonNull Node> getCastTargets(@NonNull Node node, boolean includeUsedIntermediates) {
-		for (@NonNull Edge edge : getOutgoingEdges(node)) {
-			assert !edge.isCast();
-			if (edge.isRecursion() || edge.isSecondary()) {
-				continue;
-			}
-		}
-		return Collections.singletonList(node);
-	}
-
 	public static @NonNull ClassDatum getClassDatum(@NonNull Node node) {
 		return ClassUtil.nonNullState(node.getClassDatum());
 	}
@@ -1020,8 +980,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	 * Return true if the target of thatEdge is compatible with the target of thisEdge.
 	 */
 	public static boolean isConformantTarget(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
-		Node thatTarget = getCastTarget(thatEdge.getEdgeTarget());
-		Node thisTarget = getCastTarget(thisEdge.getEdgeTarget());
+		Node thatTarget = thatEdge.getEdgeTarget();
+		Node thisTarget = thisEdge.getEdgeTarget();
 		ClassDatum thatType = getClassDatum(thatTarget);
 		ClassDatum thisType = getClassDatum(thisTarget);
 		if (conformsToClassOrBehavioralClass(thatType, thisType)) {
