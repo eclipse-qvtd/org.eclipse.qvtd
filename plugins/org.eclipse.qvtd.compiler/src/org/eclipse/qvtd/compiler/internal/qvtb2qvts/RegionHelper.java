@@ -152,11 +152,11 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return booleanLiteralNode;
 	}
 
-	public @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
+	public @NonNull CastEdge createCastEdge(@NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode) {
 		Role phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode));
 		Role edgeRole = phase;
 		CastEdge castEdge = QVTscheduleFactory.eINSTANCE.createCastEdge();
-		castEdge.initialize(edgeRole, sourceNode, name, targetNode);
+		castEdge.initialize(edgeRole, sourceNode, classDatum, targetNode);
 		return castEdge;
 	}
 

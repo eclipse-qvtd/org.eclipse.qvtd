@@ -67,7 +67,7 @@ public abstract class AbstractQVTscheduleFlowAnalysisDeducerFromFalseVisitor
 
 	@Override
 	public @Nullable Boolean visitCastEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CastEdge object) {
-		return visitNavigableEdge(object);
+		return visitEdge(object);
 	}
 
 	@Override

@@ -197,7 +197,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	/**
 	 * Property used as a navigation to cast to a specific type.
 	 */
-	private final @NonNull Map<Type, Property> type2castProperty = new HashMap<>();
+	//	private final @NonNull Map<Type, Property> type2castProperty = new HashMap<>();
 
 	/**
 	 * Property used as a navigation to iterate collection elements.
@@ -678,15 +678,15 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return booleanClassDatum2;
 	}
 
-	@Override
+	/*	@Override
 	public @NonNull Property getCastProperty(@NonNull Type type) {
 		Property castProperty = type2castProperty.get(type);
 		if (castProperty == null) {
-			castProperty = createProperty("«cast»\\n" + type.toString(), type, true);
+			castProperty = createProperty(getCastName(type), type, true);
 			type2castProperty.put(type, castProperty);
 		}
 		return castProperty;
-	}
+	} */
 
 	@Override
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass) {

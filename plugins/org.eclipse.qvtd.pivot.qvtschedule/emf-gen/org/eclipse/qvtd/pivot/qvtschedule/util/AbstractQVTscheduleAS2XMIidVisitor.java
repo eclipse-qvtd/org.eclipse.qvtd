@@ -69,7 +69,7 @@ implements QVTscheduleVisitor<Boolean>
 
 	@Override
 	public @Nullable Boolean visitCastEdge(@NonNull CastEdge object) {
-		return visitNavigableEdge(object);
+		return visitEdge(object);
 	}
 
 	@Override

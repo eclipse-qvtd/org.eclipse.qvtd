@@ -122,9 +122,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 			case 4: {
 				CastEdge castEdge = (CastEdge)theEObject;
 				T result = caseCastEdge(castEdge);
-				if (result == null) result = caseNavigableEdge(castEdge);
 				if (result == null) result = caseEdge(castEdge);
-				if (result == null) result = caseConnectionEnd(castEdge);
 				if (result == null) result = caseElement(castEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

@@ -131,8 +131,8 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		return context.createBooleanLiteralNode(isUnconditional(), booleanValue, booleanLiteralExp);
 	}
 
-	public @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode,  @NonNull String name, @NonNull Node castNode) {
-		return context.createCastEdge(sourceNode, name, castNode);
+	public @NonNull CastEdge createCastEdge(@NonNull Node sourceNode,  @NonNull ClassDatum classDatum, @NonNull Node castNode) {
+		return context.createCastEdge(sourceNode, classDatum, castNode);
 	}
 
 	protected @NonNull Node createCollectionLiteral(@NonNull CollectionLiteralExp collectionLiteralExp, @NonNull CollectionLiteralPart [] collectionParts, @NonNull Node @NonNull [] partNodes) {
@@ -971,7 +971,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			sourceNode.addOriginatingElement(operationCallExp);
 			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
-		for (@NonNull NavigableEdge castEdge : sourceNode.getCastEdges()) {
+		for (@NonNull CastEdge castEdge : sourceNode.getCastEdges()) {
 			Node targetNode = castEdge.getEdgeTarget();
 			predicatedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
 			if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castClassDatum)) {
@@ -980,13 +980,19 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			}
 		}
 		Type castType = QVTbaseUtil.getType(operationCallExp);
-		Property castProperty = scheduleManager.getCastProperty(castType);
-		Edge castEdge = sourceNode.getPredicateEdge(castProperty);
-		if (castEdge != null) {
-			Node castNode = castEdge.getEdgeTarget();
-			castNode.addOriginatingElement(operationCallExp);
-			return castNode;
+		for (@NonNull CastEdge castEdge : sourceNode.getCastEdges()) {
+			if (castClassDatum == castEdge.getReferredClassDatum()) {
+				Node castNode = castEdge.getEdgeTarget();
+				castNode.addOriginatingElement(operationCallExp);
+				return castNode;
+			}
 		}
+		//	Edge castEdge = sourceNode.getPredicateEdge(castProperty);
+		//	if (castEdge != null) {
+		//		Node castNode = castEdge.getEdgeTarget();
+		//		castNode.addOriginatingElement(operationCallExp);
+		//		return castNode;
+		//	}
 		String name = "a" + castType.getName();
 		//		assert name != null;
 		Node castNode = createStepNode(name, operationCallExp, sourceNode);
@@ -996,7 +1002,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 				((MappingNode)castNode).setMatched(true);
 			}
 		}
-		castEdge = createCastEdge(sourceNode, castProperty.getName(), castNode);
+		createCastEdge(sourceNode, castClassDatum, castNode);
 		OCLExpression argument = operationCallExp.getOwnedArguments().get(0);
 		if (!(argument instanceof TypeExp)) {
 			Node argumentNode = synthesize(argument);
@@ -1199,7 +1205,6 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		Variable ownedVariable = letExp.getOwnedVariable();
 		Node initNode = synthesize(ownedVariable.getOwnedInit());
 		assert initNode != null;
-		Type type = QVTbaseUtil.getType(ownedVariable);
 		ClassDatum actualClassDatum = QVTscheduleUtil.getClassDatum(initNode);
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(ownedVariable);
 		if (QVTscheduleUtil.conformsTo(actualClassDatum, variableClassDatum)) {
@@ -1208,8 +1213,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		}
 		else {
 			Node varNode = createLetNode(ownedVariable, initNode);
-			Property castProperty = scheduleManager.getCastProperty(type);
-			createNavigationEdge(initNode, castProperty, varNode, false);
+			createCastEdge(initNode, variableClassDatum, varNode);
 		}
 		return synthesize(letExp.getOwnedIn());
 	}

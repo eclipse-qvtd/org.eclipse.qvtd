@@ -329,26 +329,15 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getCastEdge();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getProperty <em>Property</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClassDatum <em>Referred Class Datum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Property</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getProperty()
+	 * @return the meta object for the reference '<em>Referred Class Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClassDatum()
 	 * @see #getCastEdge()
 	 * @generated
 	 */
-	EReference getCastEdge_Property();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClass <em>Referred Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Class</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClass()
-	 * @see #getCastEdge()
-	 * @generated
-	 */
-	EReference getCastEdge_ReferredClass();
+	EReference getCastEdge_ReferredClassDatum();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum <em>Class Datum</em>}'.
@@ -2522,20 +2511,12 @@ public interface QVTschedulePackage extends EPackage {
 		EClass CAST_EDGE = eINSTANCE.getCastEdge();
 
 		/**
-		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referred Class Datum</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CAST_EDGE__PROPERTY = eINSTANCE.getCastEdge_Property();
-
-		/**
-		 * The meta object literal for the '<em><b>Referred Class</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CAST_EDGE__REFERRED_CLASS = eINSTANCE.getCastEdge_ReferredClass();
+		EReference CAST_EDGE__REFERRED_CLASS_DATUM = eINSTANCE.getCastEdge_ReferredClassDatum();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl <em>Class Datum</em>}' class.

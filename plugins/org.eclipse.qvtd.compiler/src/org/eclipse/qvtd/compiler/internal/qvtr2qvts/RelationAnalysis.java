@@ -920,8 +920,7 @@ public class RelationAnalysis extends RuleAnalysis
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
 		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableClassDatum)) {
 			Node castNode = createOldNode(variable);
-			Property castProperty = scheduleManager.getCastProperty(PivotUtil.getType(variable));
-			expressionSynthesizer2.createCastEdge(bestInitNode, castProperty.getName(), castNode);
+			expressionSynthesizer2.createCastEdge(bestInitNode, variableClassDatum, castNode);
 			bestInitNode = castNode;
 		}
 		bestInitNode.setOriginatingVariable(variable);

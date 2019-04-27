@@ -133,13 +133,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setPartial(boolean newPartial) {
-		checkIsPartial(newPartial);
+	private void setPartialGen(boolean newPartial) {
 		boolean oldPartial = partial;
 		partial = newPartial;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldPartial, partial));
+	}
+	@Override
+	public void setPartial(boolean newPartial) {
+		checkIsPartial(newPartial);
+		setPartialGen(newPartial);
 	}
 
 	/**
@@ -194,7 +197,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 				return isPartial();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				if (resolve) return getReferredProperty();
-			return basicGetReferredProperty();
+				return basicGetReferredProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -209,10 +212,10 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setPartial((Boolean)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredProperty((Property)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -227,10 +230,10 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setPartial(PARTIAL_EDEFAULT);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredProperty((Property)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

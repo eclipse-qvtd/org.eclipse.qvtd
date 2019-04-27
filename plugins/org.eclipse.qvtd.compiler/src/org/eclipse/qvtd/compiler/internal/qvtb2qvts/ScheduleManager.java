@@ -19,7 +19,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerProblem;
@@ -102,7 +101,6 @@ public interface ScheduleManager
 	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull PropertyDatum getBasePropertyDatum(@NonNull PropertyDatum propertyDatum);
 	@NonNull ClassDatum getBooleanClassDatum();
-	@NonNull Property getCastProperty(@NonNull Type type);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class asType);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass);

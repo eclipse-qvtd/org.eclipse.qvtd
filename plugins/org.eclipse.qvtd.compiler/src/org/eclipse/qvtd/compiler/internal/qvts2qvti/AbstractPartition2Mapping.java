@@ -136,12 +136,8 @@ public abstract class AbstractPartition2Mapping
 
 	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
-			Type asType = asProperty.getType();
 			if (asProperty == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
 				return helper.createOperationCallExp(asSource, "oclContainer");
-			}
-			else if ((asType != null) && (asProperty == scheduleManager.getCastProperty(asType))) {
-				return createOclAsTypeCallExp(asSource, asType);
 			}
 			else {
 				throw new UnsupportedOperationException();

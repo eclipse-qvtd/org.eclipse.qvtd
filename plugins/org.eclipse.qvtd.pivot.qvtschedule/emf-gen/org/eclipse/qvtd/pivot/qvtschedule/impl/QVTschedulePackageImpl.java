@@ -970,18 +970,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getCastEdge_Property() {
+	public EReference getCastEdge_ReferredClassDatum() {
 		return (EReference)castEdgeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCastEdge_ReferredClass() {
-		return (EReference)castEdgeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2880,8 +2870,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEAttribute(booleanLiteralNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
 
 		castEdgeEClass = createEClass(4);
-		createEReference(castEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
-		createEReference(castEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 11);
+		createEReference(castEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
 		classDatumEClass = createEClass(5);
 		createEReference(classDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
@@ -3179,7 +3168,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		argumentEdgeEClass.getESuperTypes().add(this.getExpressionEdge());
 		basicPartitionEClass.getESuperTypes().add(this.getMappingPartition());
 		booleanLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
-		castEdgeEClass.getESuperTypes().add(this.getNavigableEdge());
+		castEdgeEClass.getESuperTypes().add(this.getEdge());
 		classDatumEClass.getESuperTypes().add(this.getAbstractDatum());
 		clusterEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		clusterEClass.getESuperTypes().add(this.getSymbolable());
@@ -3284,8 +3273,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEAttribute(getBooleanLiteralNode_BooleanValue(), thePivotPackage.getBoolean(), "booleanValue", null, 1, 1, BooleanLiteralNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(castEdgeEClass, CastEdge.class, "CastEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCastEdge_Property(), thePivotPackage.getProperty(), null, "property", null, 1, 1, CastEdge.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getCastEdge_ReferredClass(), thePivotPackage.getClass_(), null, "referredClass", null, 1, 1, CastEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCastEdge_ReferredClassDatum(), this.getClassDatum(), null, "referredClassDatum", null, 1, 1, CastEdge.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(classDatumEClass, ClassDatum.class, "ClassDatum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassDatum_CompleteClasses(), thePivotPackage.getCompleteClass(), null, "completeClasses", null, 1, -1, ClassDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

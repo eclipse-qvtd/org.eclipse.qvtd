@@ -14,67 +14,57 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.ocl.pivot.Property;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Cast Edge</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A CastEdge is temporaily created to model an oclAsType, but is rewritten once all casts are visible.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getProperty <em>Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClass <em>Referred Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClassDatum <em>Referred Class Datum</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCastEdge()
  * @model
  * @generated
  */
-public interface CastEdge extends NavigableEdge
+public interface CastEdge extends Edge
 {
-	/**
-	 * Returns the value of the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The property to navigate from source to target.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Property</em>' reference.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCastEdge_Property()
-	 * @model resolveProxies="false" required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CastEdge!property'"
-	 * @generated
-	 */
-	@Override
-	Property getProperty();
 
 	/**
-	 * Returns the value of the '<em><b>Referred Class</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referred Class</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred Class Datum</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referred Class</em>' reference.
-	 * @see #setReferredClass(org.eclipse.ocl.pivot.Class)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCastEdge_ReferredClass()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CastEdge!referredClass'"
+	 * @return the value of the '<em>Referred Class Datum</em>' reference.
+	 * @see #setReferredClassDatum(ClassDatum)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCastEdge_ReferredClassDatum()
+	 * @model required="true" transient="true" derived="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CastEdge!referredClassDatum'"
 	 * @generated
 	 */
-	org.eclipse.ocl.pivot.Class getReferredClass();
+	ClassDatum getReferredClassDatum();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClass <em>Referred Class</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClassDatum <em>Referred Class Datum</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Class</em>' reference.
-	 * @see #getReferredClass()
+	 * @param value the new value of the '<em>Referred Class Datum</em>' reference.
+	 * @see #getReferredClassDatum()
 	 * @generated
 	 */
-	void setReferredClass(org.eclipse.ocl.pivot.Class value);
+	void setReferredClassDatum(ClassDatum value);
+
+	void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode);
 } // CastEdge
