@@ -537,6 +537,7 @@ public class RelationAnalysis extends RuleAnalysis
 
 	@Override
 	public void analyzeMappingRegion() {
+		rewriteCastEdges();
 		//
 		// Create the BLUE/CYAN guard nodes.
 		//

@@ -47,6 +47,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -69,7 +70,10 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CompositePartiti
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -571,6 +575,28 @@ public class CompilerUtil extends QVTscheduleUtil
 			return false;
 		}
 		return false;
+	}
+
+	/**
+	 * Migrate the edges and elements of the oldEdge target node to the newTarget then destro oldEdge and its target node.
+	 */
+	public static void migrateCastEdgeTargetContents(@NonNull CastEdge oldEdge, @NonNull Node newTarget) {
+		Node fromNode = QVTscheduleUtil.getTargetNode(oldEdge);
+		oldEdge.destroy();
+		List<Edge> operationOutgoingEdgesList = newTarget.getOutgoingEdges();
+		for (Element element : fromNode.getOriginatingElements()) {
+			if (element instanceof VariableDeclaration) {
+				newTarget.setOriginatingVariable((VariableDeclaration) element);
+			}
+			else {
+				newTarget.addOriginatingElement(element);
+			}
+		}
+		for (Edge targetOutgoingEdge : Lists.newArrayList(fromNode.getOutgoingEdges())) {
+			operationOutgoingEdgesList.add(targetOutgoingEdge);
+		}
+		newTarget.getIncomingEdges().addAll(fromNode.getIncomingEdges());
+		fromNode.destroy();
 	}
 
 	/**

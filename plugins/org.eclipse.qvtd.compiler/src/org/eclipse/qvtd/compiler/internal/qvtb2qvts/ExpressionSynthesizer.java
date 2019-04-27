@@ -62,6 +62,7 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -75,6 +76,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
 import org.eclipse.qvtd.pivot.qvtschedule.TupleLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -810,6 +812,38 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	protected boolean isUnconditional() {
 		return true;
+	}
+
+	/**
+	 * Rewrite a CastEdge and its target node as an oclAsType call. THe castEdge and its target node are destroyed by the replacement.
+	 *
+	 * REturns the operation node,
+	 */
+	public @NonNull Node rewriteCastEdgeAsOclAsType(@NonNull CastEdge castEdge) {
+		Node sourceNode = QVTscheduleUtil.getSourceNode(castEdge);
+		Node targetNode = QVTscheduleUtil.getTargetNode(castEdge);
+		OperationCallExp operationCallExp = (OperationCallExp) targetNode.getOriginatingElement();
+		Operation referredOperation = PivotUtil.getReferredOperation(operationCallExp);
+		OCLExpression ownedSource = PivotUtil.getOwnedSource(operationCallExp);
+		Type sourceType = PivotUtil.getType(ownedSource);
+		TypeExp typeArgument = (TypeExp) PivotUtil.getOwnedArgument(operationCallExp, 0);
+		//
+		//	Create oclAsType operation node, type node and argument edges.
+		//
+		Node typeNode = createTypeLiteralNode(PivotUtil.getReferredType(typeArgument), typeArgument);
+		ExpressionSynthesizer nestedAnalyzer = getConditionalExpressionSynthesizer();
+		Node operationNode = nestedAnalyzer.createOperationCallNode(operationCallExp, referredOperation, new @NonNull Node[] {sourceNode, typeNode});
+		if (isRequired()) {
+			operationNode.setRequired();
+		}
+		nestedAnalyzer.createOperationSelfEdge(sourceNode, sourceType, operationNode);
+		Parameter parameter = QVTbaseUtil.getOwnedParameter(referredOperation, 0);
+		nestedAnalyzer.createOperationParameterEdge(typeNode, parameter, -1, operationNode);
+		//
+		//	Install operationNode as a replacement for targetNode.
+		//
+		CompilerUtil.migrateCastEdgeTargetContents(castEdge, operationNode);
+		return operationNode;
 	}
 
 	public @NonNull Node synthesize(/*@NonNull*/ Visitable element) {

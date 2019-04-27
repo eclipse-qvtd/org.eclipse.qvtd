@@ -483,6 +483,7 @@ public class MappingAnalysis extends RuleAnalysis
 		analyzeAssignmentValues();
 		analyzeComplexPredicates();
 		analyzeContainments();
+		rewriteCastEdges();
 		//
 		Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRuleHeadNodes(scheduleManager, region, null);
 		Iterables.addAll(QVTscheduleUtil.Internal.getHeadNodesList(region), headNodes);

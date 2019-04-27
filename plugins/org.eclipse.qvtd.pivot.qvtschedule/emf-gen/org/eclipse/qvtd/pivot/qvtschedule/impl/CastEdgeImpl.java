@@ -105,7 +105,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 				return getProperty();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				if (resolve) return getReferredClass();
-				return basicGetReferredClass();
+			return basicGetReferredClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,7 +120,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -135,7 +135,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredClass((org.eclipse.ocl.pivot.Class)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -177,7 +177,8 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 
 	@Override
 	public Property getProperty() {
-		return property;
+		throw new UnsupportedOperationException();
+		//	return property;
 	}
 
 	/**
