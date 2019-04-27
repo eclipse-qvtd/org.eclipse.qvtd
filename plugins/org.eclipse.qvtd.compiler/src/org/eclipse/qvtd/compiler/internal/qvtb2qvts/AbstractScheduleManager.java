@@ -798,7 +798,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		if (suffix != null) {
 			symbolName = symbolName + suffix;
 		}
-		symbolName = symbolName.replace("::", "!!");
+		symbolName = symbolName.replace("::", "!!").replace("?", "_").replace("*", "_").replace("|", "!");
 		return URI.createURI(symbolName + fileExtension).resolve(baseURI);
 	}
 
