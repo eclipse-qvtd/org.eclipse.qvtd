@@ -444,7 +444,18 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public boolean computeIsPartial(@NonNull Node targetNode, @NonNull Property property) {
 		ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-		ClassDatum propertyClassDatum = getClassDatum(property);
+		DomainUsage domainUsage = getDomainUsage(property);
+		TypedModel typedModel;
+		Iterable<@NonNull TypedModel> typedModels = domainUsage.getTypedModels();
+		if (Iterables.size(typedModels) == 1) {
+			typedModel = typedModels.iterator().next();
+		}
+		else {
+			typedModel = QVTscheduleUtil.getReferredTypedModel(targetClassDatum);
+		}
+		Type type = PivotUtil.getType(property);
+		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(type);
+		ClassDatum propertyClassDatum = getClassDatum(typedModel, completeClass);
 		if (!QVTscheduleUtil.conformsTo(targetClassDatum, propertyClassDatum)) {
 			if (propertyClassDatum instanceof CollectionClassDatum) {
 				ClassDatum elementClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)propertyClassDatum);
