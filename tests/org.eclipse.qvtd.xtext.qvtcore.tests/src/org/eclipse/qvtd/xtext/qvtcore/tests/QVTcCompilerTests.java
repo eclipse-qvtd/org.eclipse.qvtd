@@ -31,9 +31,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTiProductionConsumption;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -431,11 +429,11 @@ public class QVTcCompilerTests extends LoadTestCase
 		TransformationPartitioner.ROOT_SCHEDULE.setState(true);
 		TransformationPartitioner.CYCLE_SCHEDULE_PREDECESSORS.setState(true);
 		TransformationPartitioner.CYCLE_SCHEDULE.setState(true); */
-		TransformationPartitioner.PARALLEL_SCHEDULE.setState(true);
-		TransformationPartitioner.PROPERTY_NOTIFY.setState(true);
-		TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
+		//	TransformationPartitioner.PARALLEL_SCHEDULE.setState(true);
+		//	TransformationPartitioner.PROPERTY_NOTIFY.setState(true);
+		//	TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
 		//	TransformationPartitioner.MERGE_SEQUENTIAL.setState(true);
-		QVTiProductionConsumption.SUMMARY.setState(true);
+		//	QVTiProductionConsumption.SUMMARY.setState(true);
 
 		//		OperationDependencyAnalysis.CALL.setState(true);
 		//		OperationDependencyAnalysis.CREATE.setState(true);
@@ -562,7 +560,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
-		QVTiProductionConsumption.SUMMARY.setState(true);
+		//	QVTiProductionConsumption.SUMMARY.setState(true);
 		MyQVT myQVT = createQVT("upper2lower", getModelsURI("upper2lower/Upper2Lower.qvtcas"));
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {

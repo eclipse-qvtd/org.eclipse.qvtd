@@ -246,8 +246,8 @@ map packageToSchema in umlRdbms {
 			else if ass.destination=dstCls and ass.source<>srcCls then ass.name+'_'+srcCls.name
 			else dstCls.name+'_'+ass.name+'_'+srcCls.name endif endif endif;
 --			ass2fKey.name := name;
-			ass.name := if ass.destination=dstCls and ass.source=srcCls then name
-			else ass.name endif;
+--			ass.name := if ass.destination=dstCls and ass.source=srcCls then name
+--			else ass.name endif;
 			fKey.name := ass.name;
 			fCol.name := ass.name+'_tid';
 			--

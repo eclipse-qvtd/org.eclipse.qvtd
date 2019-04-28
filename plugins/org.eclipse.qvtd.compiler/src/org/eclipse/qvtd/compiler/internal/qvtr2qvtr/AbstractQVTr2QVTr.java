@@ -912,7 +912,7 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 		// F I X M E the following lines should go obsolete
 		//		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
 		//		if (missingOperationCallSources != null) {
-		//			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources  were fixed up for '" + target.getURI() + "'");
+		//			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
 		//		}
 	}
 

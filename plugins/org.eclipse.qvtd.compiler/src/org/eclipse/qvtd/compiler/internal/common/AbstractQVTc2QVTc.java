@@ -909,7 +909,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		// FIXME the following lines should go obsolete
 		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
 		if (missingOperationCallSources != null) {
-			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources  were fixed up for '" + target.getURI() + "'");
+			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
 		}
 	}
 
