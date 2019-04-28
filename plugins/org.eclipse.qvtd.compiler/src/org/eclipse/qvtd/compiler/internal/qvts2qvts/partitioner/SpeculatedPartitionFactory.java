@@ -20,6 +20,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -112,19 +113,24 @@ public class SpeculatedPartitionFactory extends AbstractSimplePartitionFactory
 
 	protected void resolveRealizedEdges(@NonNull BasicPartition partition) {
 		for (@NonNull NavigableEdge edge : mappingPartitioner.getRealizedEdges()) {
-			if (!mappingPartitioner.hasRealizedEdge(edge) && (mappingPartitioner.getCorollaryOf(edge) == null)) {
-				Node sourceNode = edge.getEdgeSource();
-				if (!sourceNode.isPredicated() || mappingPartitioner.hasCheckedNode(sourceNode)) { // || isLocalCorollary(sourceNode)) {
-					Node targetNode = edge.getEdgeTarget();
-					if (!targetNode.isPredicated() || mappingPartitioner.hasCheckedNode(targetNode)) { // || isLocalCorollary(sourceNode)) {
-						if (!partition.hasNode(sourceNode)) {
-							addNode(partition, sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
-						}
-						if (!partition.hasNode(targetNode)) {
-							addNode(partition, targetNode, QVTscheduleUtil.getNodeRole(targetNode));
+			if (edge instanceof NavigationEdge) {
+				if (!mappingPartitioner.hasRealizedEdge(edge) && (mappingPartitioner.getCorollaryOf((NavigationEdge) edge) == null)) {
+					Node sourceNode = edge.getEdgeSource();
+					if (!sourceNode.isPredicated() || mappingPartitioner.hasCheckedNode(sourceNode)) { // || isLocalCorollary(sourceNode)) {
+						Node targetNode = edge.getEdgeTarget();
+						if (!targetNode.isPredicated() || mappingPartitioner.hasCheckedNode(targetNode)) { // || isLocalCorollary(sourceNode)) {
+							if (!partition.hasNode(sourceNode)) {
+								addNode(partition, sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
+							}
+							if (!partition.hasNode(targetNode)) {
+								addNode(partition, targetNode, QVTscheduleUtil.getNodeRole(targetNode));
+							}
 						}
 					}
 				}
+			}
+			else {
+				// SharedEdge
 			}
 		}
 	}

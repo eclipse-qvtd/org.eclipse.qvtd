@@ -389,12 +389,12 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 		toGraphHelper.setColor(this);
 		@Nullable
-		NavigableEdge oppositeEdge2 = oppositeEdge;
+		NavigationEdge oppositeEdge2 = oppositeEdge;
 		if (oppositeEdge2 != null) {
 			String oppositeLabel = oppositeEdge2.getLabel();
 			ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(this));
 			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(sourceClassDatum)) {
-				if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(completeClass.getName())) {
+				if ((oppositeLabel != null) && !oppositeEdge2.getReferredProperty().getName().equals(completeClass.getName())) {
 					s.setTaillabel(oppositeLabel);
 					break;
 				}
@@ -474,6 +474,23 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	}
 
 	@Override
+	public @NonNull String getDisplayName() {
+		Property source2targetProperty2 = getReferredProperty();
+		if (source2targetProperty2 != null) {
+			org.eclipse.ocl.pivot.Class owningClass = source2targetProperty2.getOwningClass();
+			if (owningClass != null) {
+				return owningClass.getName() + "::" + source2targetProperty2.getName();
+			}
+			else {
+				return "" + source2targetProperty2.getName();
+			}
+		}
+		else {
+			return "null";
+		}
+	}
+
+	@Override
 	public @NonNull String getEdgeName() {
 		return PivotUtil.getName(QVTscheduleUtil.getReferredProperty(this));
 	}
@@ -495,7 +512,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			return "«includes»\\n" + super.getLabel();
 		}
 		else {
-			Property source2targetProperty2 = getProperty();
+			Property source2targetProperty2 = getReferredProperty();
 			if (source2targetProperty2 == null) {
 				return "null";
 			}
@@ -508,10 +525,10 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		}
 	}
 
-	@Override
-	public Property getProperty() {
-		return getReferredProperty();
-	}
+	//	@Override
+	//	public Property getProperty() {
+	//		return getReferredProperty();
+	//	}
 
 	protected void initializeOpposite(@NonNull NavigationEdge oppositeEdge) {
 		this.oppositeEdge = oppositeEdge;
@@ -519,7 +536,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		// This differs from QVTscheduleUtil.getPrimaryProperty(property) which returns a context-independent forward/reverse choice as a baseProperty.
 		// The secondary here favours the calling usage as primary unlss it must be reversed.
 		// This makes a difference for the StructuredCladsses JUnit test that gets an NPE when assigning a not-null/null containment relationship backwards.
-		if (this.getProperty().isIsImplicit()) {
+		if (this.getReferredProperty().isIsImplicit()) {
 			this.secondary = true;
 		}
 		else {

@@ -14,13 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -619,7 +614,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		return ancestors;
 	} */
 
-	private @NonNull NavigableEdge getBestEdge(@Nullable NavigableEdge bestEdge, @NonNull NavigableEdge candidateEdge) {
+	/*	private @NonNull NavigableEdge getBestEdge(@Nullable NavigableEdge bestEdge, @NonNull NavigableEdge candidateEdge) {
 		if (bestEdge == null) {
 			return candidateEdge;
 		}
@@ -627,9 +622,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			return candidateEdge;
 		}
 		return bestEdge;		// ??? containment
-	}
+	} */
 
-	protected @Nullable List<@NonNull NavigableEdge> getBestPath(@Nullable List<@NonNull NavigableEdge> bestPath, @Nullable List<@NonNull NavigableEdge> candidatePath) {
+	/*	protected @Nullable List<@NonNull NavigableEdge> getBestPath(@Nullable List<@NonNull NavigableEdge> bestPath, @Nullable List<@NonNull NavigableEdge> candidatePath) {
 		if (bestPath == null) {
 			return candidatePath;
 		}
@@ -642,7 +637,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			return candidatePath;
 		}
 		return bestPath;
-	}
+	} */
 
 	@Override
 	public @NonNull String getColor() {
@@ -654,7 +649,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsComposedNodePredicate.INSTANCE);
 	}
 
-	private int getCost(@NonNull List<@NonNull NavigableEdge> path) {
+	/*	private int getCost(@NonNull List<@NonNull NavigableEdge> path) {
 		int cost = 0;
 		for (@NonNull NavigableEdge edge : path) {
 			if (edge.getProperty().isIsImplicit()) {
@@ -662,7 +657,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			}		// ??? containment
 		}
 		return cost;
-	}
+	} */
 
 	@Override
 	public final @NonNull Iterable<@NonNull Edge> getExpressionEdges() {
@@ -757,7 +752,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsOldNodePredicate.INSTANCE);
 	}
 
-	protected @Nullable List<@NonNull NavigableEdge> getPath(@NonNull Node sourceNode, @NonNull Node targetNode, @NonNull Set<@NonNull Edge> usedEdges) {
+	/*	protected @Nullable List<@NonNull NavigableEdge> getPath(@NonNull Node sourceNode, @NonNull Node targetNode, @NonNull Set<@NonNull Edge> usedEdges) {
 		assert sourceNode.getOwningRegion() == targetNode.getOwningRegion();
 		NavigableEdge bestEdge = null;
 		List<@NonNull NavigableEdge> bestPath = null;
@@ -787,7 +782,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		else {
 			return getBestPath(Collections.singletonList(bestEdge), bestPath);
 		}
-	}
+	} */
 
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getPatternNodes() {

@@ -58,6 +58,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -380,11 +381,13 @@ public class MappingAnalysis extends RuleAnalysis
 		for (@NonNull Node node : region.getNewNodes()) {
 			boolean isContained = false;
 			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
-				Property property = edge.getProperty();
-				Property opposite = property.getOpposite();
-				if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
-					isContained = true;
-					break;
+				if (edge.isNavigation()) {
+					Property property = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge);
+					Property opposite = property.getOpposite();
+					if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
+						isContained = true;
+						break;
+					}
 				}
 			}
 			if (isContained) {

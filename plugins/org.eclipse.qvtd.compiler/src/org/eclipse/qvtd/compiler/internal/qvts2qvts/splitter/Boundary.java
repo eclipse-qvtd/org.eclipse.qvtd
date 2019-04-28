@@ -14,7 +14,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * A Boundary describes an edge between the reachable nodes of two head groups.
@@ -51,10 +52,10 @@ class Boundary implements Nameable
 	}
 
 	public boolean isReverseNavigable() {
-		if (!(edge instanceof NavigableEdge)) {
+		if (!(edge instanceof NavigationEdge)) {
 			return false;
 		}
-		Property forwardProperty = ((NavigableEdge)edge).getProperty();
+		Property forwardProperty = QVTscheduleUtil.getReferredProperty(((NavigationEdge)edge));
 		Property reverseProperty = forwardProperty.getOpposite();
 		if (reverseProperty == null) {
 			return false;

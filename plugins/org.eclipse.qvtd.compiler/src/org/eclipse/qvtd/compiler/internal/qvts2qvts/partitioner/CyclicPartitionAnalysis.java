@@ -29,7 +29,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionProper
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -94,8 +94,8 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 								for (@NonNull Edge edge : producingPartition.getPartialEdges()) {
 									Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 									if (targetNode.isRealized() && edge.isRealized() && edge.isNavigation()) {
-										NavigableEdge navigableEdge = (NavigableEdge)edge;
-										if (navigableEdge.getProperty() == consumedProperty) {
+										NavigationEdge navigationEdge = (NavigationEdge)edge;
+										if (QVTscheduleUtil.getReferredProperty(navigationEdge) == consumedProperty) {
 											if (isContainment) {
 												containmentPropertyPartitionAnalyses.add(consumedPropertyAnalysis);
 											}

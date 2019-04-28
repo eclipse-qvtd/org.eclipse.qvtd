@@ -42,7 +42,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -184,8 +183,8 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		return ruleRegions;
 	}
 
-	public @Nullable List<@NonNull Region> getCorollaryOf(@NonNull NavigableEdge edge) {
-		return corollaryProperty2regions.get(edge.getProperty());
+	public @Nullable List<@NonNull Region> getCorollaryOf(@NonNull NavigationEdge edge) {
+		return corollaryProperty2regions.get(QVTscheduleUtil.getReferredProperty(edge));
 	}
 
 	/*	public @Nullable Iterable<@NonNull RegionAnalysis> getCyclicRegionAnalyses(@NonNull RegionAnalysis regionAnalysis) {
@@ -262,20 +261,26 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	public boolean isCorollary(@NonNull Node node) {
 		if (node.isPredicated()) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isPredicated() && !edge.isSecondary() && (edge instanceof NavigableEdge)) {
-					List<@NonNull Region> corollaryOf = getCorollaryOf((NavigableEdge)edge);
-					if (corollaryOf != null) {
-						return true;
+				if (edge.isPredicated() && (edge instanceof NavigationEdge)) {
+					NavigationEdge navigationEdge =(NavigationEdge)edge;
+					if (!navigationEdge.isSecondary()) {
+						List<@NonNull Region> corollaryOf = getCorollaryOf(navigationEdge);
+						if (corollaryOf != null) {
+							return true;
+						}
 					}
 				}
 			}
 		}
 		else if (node.isRealized()) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isRealized() && !edge.isSecondary() && (edge instanceof NavigableEdge)) {
-					List<@NonNull Region> corollaryOf = getCorollaryOf((NavigableEdge)edge);
-					if (corollaryOf != null) {
-						return true;
+				if (edge.isRealized() && (edge instanceof NavigationEdge)) {
+					NavigationEdge navigationEdge =(NavigationEdge)edge;
+					if (!navigationEdge.isSecondary()) {
+						List<@NonNull Region> corollaryOf = getCorollaryOf(navigationEdge);
+						if (corollaryOf != null) {
+							return true;
+						}
 					}
 				}
 			}

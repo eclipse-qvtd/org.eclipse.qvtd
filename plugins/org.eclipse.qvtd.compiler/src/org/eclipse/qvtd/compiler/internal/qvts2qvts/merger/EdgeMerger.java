@@ -18,7 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -99,8 +99,8 @@ class EdgeMerger
 
 	public @Nullable Property getProperty() {
 		Edge primaryEdge = getPrimaryEdge();		// FIXME check all original edges
-		if (primaryEdge instanceof NavigableEdge) {
-			return ((NavigableEdge)primaryEdge).getProperty();
+		if (primaryEdge instanceof NavigationEdge) {
+			return QVTscheduleUtil.getReferredProperty((NavigationEdge)primaryEdge);
 		}
 		else {
 			return null;
@@ -147,11 +147,11 @@ class EdgeMerger
 	 * Return an originalEdge that is the same as mergedEdge or null if none.
 	 */
 	public @Nullable Edge sameEdge(@NonNull Edge mergedEdge) {
-		if (mergedEdge instanceof NavigableEdge) {
-			Property mergedProperty = ((NavigableEdge)mergedEdge).getProperty();
+		if (mergedEdge instanceof NavigationEdge) {
+			Property mergedProperty = QVTscheduleUtil.getReferredProperty((NavigationEdge)mergedEdge);
 			for (@NonNull Edge originalEdge : originalEdges) {
-				if (originalEdge instanceof NavigableEdge) {
-					Property originalProperty = ((NavigableEdge)originalEdge).getProperty();
+				if (originalEdge instanceof NavigationEdge) {
+					Property originalProperty = QVTscheduleUtil.getReferredProperty((NavigationEdge)originalEdge);
 					if (originalProperty == mergedProperty) {
 						return originalEdge;
 					}

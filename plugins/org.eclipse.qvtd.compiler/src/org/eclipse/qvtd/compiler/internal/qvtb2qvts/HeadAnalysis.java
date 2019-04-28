@@ -23,7 +23,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
 import com.google.common.collect.Iterables;
 
 /**
@@ -156,7 +159,7 @@ public abstract class HeadAnalysis
 			if (implicity == null) {
 				implicity = 0;
 				for (@NonNull NavigableEdge e : node.getNavigableEdges()) {
-					if (e.getProperty().isIsImplicit()) {
+					if (e.isNavigation() && QVTscheduleUtil.getReferredProperty((NavigationEdge)e).isIsImplicit()) {
 						implicity++;
 					}
 				}
