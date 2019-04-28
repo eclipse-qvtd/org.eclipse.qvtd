@@ -194,7 +194,7 @@ public class CheckedConditionAnalysis
 					//				return null;
 				}
 				//			assert navigableEdge.isOld();
-				Property property = QVTscheduleUtil.getProperty(navigationEdge);
+				Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
 				//	ClassDatum edgeTargetClassDatum = completeModel.getClassDatum(QVTrelationUtil.getType(property));
 				CompleteClass edgeTargetCompleteClass = completeModel.getCompleteClass(QVTrelationUtil.getType(property));
 				Node sourceNode = QVTscheduleUtil.getSourceNode(navigationEdge);
@@ -353,10 +353,10 @@ public class CheckedConditionAnalysis
 		//
 		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
-			if ((edge instanceof NavigableEdge) && partitionAnalysis.isChecked(edge)) {
-				NavigableEdge navigableEdge = (NavigableEdge)edge;
-				if (connectionManager.isHazardousRead(s, partition, navigableEdge)) {
-					Property property = QVTscheduleUtil.getProperty(navigableEdge);
+			if ((edge instanceof NavigationEdge) && partitionAnalysis.isChecked(edge)) {
+				NavigationEdge navigationEdge = (NavigationEdge)edge;
+				if (connectionManager.isHazardousRead(s, partition, navigationEdge)) {
+					Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
 					allCheckedProperties.add(property);
 					Property oppositeProperty = property.getOpposite();
 					if (oppositeProperty != null) {

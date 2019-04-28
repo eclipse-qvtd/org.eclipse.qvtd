@@ -287,32 +287,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			return sortedCheckedConditions;
 		}
 
-		private void createCastPredicates(@NonNull Node sourceNode, @NonNull VariableDeclaration sourceVariable) {
-			for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
-				assert !edge.isCast();
-				if (edge.isCast() && edge.isUnconditional()) {
-					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-					Property castProperty = QVTscheduleUtil.getProperty(edge);
-					Type targetType = PivotUtil.getType(castProperty);
-					VariableExp sourceExpression = helper.createVariableExp(sourceVariable);
-					VariableDeclaration targetVariable = node2variable.get(targetNode);
-					if (targetVariable == null) {
-						boolean isRequired = sourceVariable.isIsRequired();
-						String safeName = getSafeName(PivotUtil.getName(sourceVariable));
-						DeclareStatement declareStatement = helper.createDeclareStatement(safeName, targetType, isRequired, sourceExpression);
-						declareStatement.setIsCheck(true);
-						mapping.getOwnedStatements().add(declareStatement);
-						targetVariable = declareStatement;
-						node2variable.put(targetNode, targetVariable);
-						createCastPredicates(targetNode, targetVariable);
-					}
-					else {
-						createCheckStatement(sourceExpression, "oclIsKindOf", helper.createTypeExp(targetType));
-					}
-				}
-			}
-		}
-
 		protected void createConstantCheck(@NonNull Edge edge, @NonNull OCLExpression checkExpression) {
 			Role edgeRole = partition.getRole(edge);
 			assert edgeRole != null;
@@ -347,9 +321,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					assert targetNode.isUnconditional();
 					Role targetNodeRole = partition.getRole(targetNode);
 					if (targetNodeRole != null) {
-						if (edge instanceof NavigableEdge) {
-							NavigableEdge navigableEdge = (NavigableEdge)edge;
-							Property property = QVTscheduleUtil.getProperty(navigableEdge);
+						if (edge.isNavigation()) {
+							NavigationEdge navigationEdge = (NavigationEdge)edge;
+							Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
 							OCLExpression sourceExp = createVariableExp(sourceNode);
 							Type sourceType = sourceExp.getType();
 							Type requiredType = property.getOwningClass();
@@ -369,7 +343,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
 							createCheckStatement(targetVariableExp, "=", source2targetExp);
 						}
-						else*/ if (navigableEdge.isPartial()) {
+						else*/ if (navigationEdge.isPartial()) {
 							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
 							createCheckStatement(source2targetExp, "includes", targetVariableExp);
 						}
@@ -394,10 +368,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							else {
 								VariableDeclaration nodeVariable = node2variable.get(targetNode);
 								if (nodeVariable == null) {
-									DeclareStatement declareStatement = createDeclareStatement(targetNode, source2targetExp);
-									createCastPredicates(targetNode, declareStatement);
+									createDeclareStatement(targetNode, source2targetExp);
+									//	createCastPredicates(targetNode, declareStatement);
 								}
-								else if (navigableEdge.isPartial()) {
+								else if (navigationEdge.isPartial()) {
 									VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
 									createCheckStatement(source2targetExp, "includes", targetVariableExp);
 								}
@@ -430,6 +404,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						else if (edge instanceof ExpressionEdge) {
 							getSubexpressionDeclaration(targetNode);
 						}
+					}
+					else {
+						// SharedEdge
 					}
 				}
 			}
@@ -806,18 +783,23 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					return clonedElement;
 				}
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-					if (edge.isCast() || edge.isNavigation()) {
+					assert !edge.isCast();
+					if (edge.isNavigation()) {
+						NavigationEdge navigationEdge = (NavigationEdge)edge;
 						Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 						if (edgeRole == Role.LOADED) {
 							OCLExpression source = getExpression(edge.getEdgeSource());
 							if (source != null) {
-								return helper.createNavigationCallExp(source, QVTscheduleUtil.getProperty((NavigableEdge)edge));
+								return helper.createNavigationCallExp(source, QVTscheduleUtil.getReferredProperty(navigationEdge));
 							}
 						}
 						else if (edgeRole == Role.PREDICATED) {
 							OCLExpression source = create(edge.getEdgeSource());
-							return helper.createNavigationCallExp(source, QVTscheduleUtil.getProperty((NavigableEdge)edge));
+							return helper.createNavigationCallExp(source, QVTscheduleUtil.getReferredProperty(navigationEdge));
 						}
+					}
+					else {
+						// SharedEdge
 					}
 				}
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
@@ -1085,7 +1067,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							else if (edge.isNavigation()) {
 								Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 								OCLExpression sourceExpression = create(sourceNode);
-								Property referredProperty = QVTscheduleUtil.getProperty((NavigableEdge) edge);
+								Property referredProperty = QVTscheduleUtil.getReferredProperty((NavigationEdge) edge);
 								return helper.createNavigationCallExp(sourceExpression, referredProperty);
 							}
 						}
@@ -1488,29 +1470,35 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	private void createClassSetStatement(@Nullable StringBuilder s, @NonNull NavigableEdge edge) {
-		Node sourceNode = edge.getEdgeSource();
-		Node targetNode = edge.getEdgeTarget();
-		Property property = QVTscheduleUtil.getProperty(edge);
-		boolean isNotify = connectionManager.isHazardousWrite(s, edge);
-		Property setProperty;
-		VariableDeclaration slotVariable;
-		OCLExpression targetVariableExp;
-		SetStatement setStatement;
-		boolean isPartial;
-		if (/*!isPartial &&*/ property.isIsImplicit()) {
-			slotVariable = getVariable(targetNode);
-			setProperty = QVTrelationUtil.getOpposite(property);
-			targetVariableExp = createVariableExp(sourceNode);
-			isPartial = setProperty.isIsMany();
+		if (edge instanceof NavigationEdge) {
+			NavigationEdge navigationEdge = (NavigationEdge)edge;
+			Node sourceNode = edge.getEdgeSource();
+			Node targetNode = edge.getEdgeTarget();
+			Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+			boolean isNotify = connectionManager.isHazardousWrite(s, edge);
+			Property setProperty;
+			VariableDeclaration slotVariable;
+			OCLExpression targetVariableExp;
+			SetStatement setStatement;
+			boolean isPartial;
+			if (/*!isPartial &&*/ property.isIsImplicit()) {
+				slotVariable = getVariable(targetNode);
+				setProperty = QVTrelationUtil.getOpposite(property);
+				targetVariableExp = createVariableExp(sourceNode);
+				isPartial = setProperty.isIsMany();
+			}
+			else {
+				slotVariable = getVariable(sourceNode);
+				setProperty = property;
+				targetVariableExp = createVariableExp(targetNode);
+				isPartial = edge.isPartial();
+			}
+			setStatement = helper.createSetStatement(slotVariable, setProperty, targetVariableExp, isPartial, isNotify);
+			mapping.getOwnedStatements().add(setStatement);
 		}
 		else {
-			slotVariable = getVariable(sourceNode);
-			setProperty = property;
-			targetVariableExp = createVariableExp(targetNode);
-			isPartial = edge.isPartial();
+			// SharedEdge
 		}
-		setStatement = helper.createSetStatement(slotVariable, setProperty, targetVariableExp, isPartial, isNotify);
-		mapping.getOwnedStatements().add(setStatement);
 	}
 
 	private @NonNull DeclareStatement createDeclareStatement(@NonNull Node node, @NonNull OCLExpression initExpression) {
@@ -1688,38 +1676,44 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 		Iterable<@NonNull NavigableEdge> sortedEdges = NavigationEdgeSorter.getSortedAssignments(navigableEdges);
 		for (@NonNull NavigableEdge edge : sortedEdges) {
-			Node sourceNode = edge.getEdgeSource();
-			Node targetNode = edge.getEdgeTarget();
-			if (targetNode.isSuccess()) {}											// SuccessNode has a 'magic' automatic assignment
-			else if (targetNode.isDataType()) {
-				VariableDeclaration asVariable = getVariable(sourceNode);
-				Property property = QVTscheduleUtil.getProperty(edge);
-				ExpressionCreator expressionCreator = new ExpressionCreator(this);
-				OCLExpression valueExp = expressionCreator.getExpression(targetNode);
-				if (valueExp == null) {
-					ExpressionCreator expressionCreator2 = new ExpressionCreator(this);
-					valueExp = expressionCreator2.getExpression(targetNode);		// FIXME debugging
-				}
-				if (valueExp != null) {
-					boolean isNotify = connectionManager.isHazardousWrite(s, edge);
-					SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, edge.isPartial(), isNotify);
-					//					addObservedProperties(setStatement);
-					mapping.getOwnedStatements().add(setStatement);
+			if (edge instanceof NavigationEdge) {
+				NavigationEdge navigationEdge = (NavigationEdge)edge;
+				Node sourceNode = edge.getEdgeSource();
+				Node targetNode = edge.getEdgeTarget();
+				if (targetNode.isSuccess()) {}											// SuccessNode has a 'magic' automatic assignment
+				else if (targetNode.isDataType()) {
+					VariableDeclaration asVariable = getVariable(sourceNode);
+					Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+					ExpressionCreator expressionCreator = new ExpressionCreator(this);
+					OCLExpression valueExp = expressionCreator.getExpression(targetNode);
+					if (valueExp == null) {
+						ExpressionCreator expressionCreator2 = new ExpressionCreator(this);
+						valueExp = expressionCreator2.getExpression(targetNode);		// FIXME debugging
+					}
+					if (valueExp != null) {
+						boolean isNotify = connectionManager.isHazardousWrite(s, edge);
+						SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, edge.isPartial(), isNotify);
+						//					addObservedProperties(setStatement);
+						mapping.getOwnedStatements().add(setStatement);
+					}
+					else {
+						QVTruntimeUtil.errPrintln("No assignment in " + this + " to " + asVariable + "." + property);
+					}
 				}
 				else {
-					QVTruntimeUtil.errPrintln("No assignment in " + this + " to " + asVariable + "." + property);
+					if (classAssignments == null) {
+						classAssignments = new HashMap<>();
+					}
+					List<@NonNull NavigableEdge> edges = classAssignments.get(sourceNode);
+					if (edges == null) {
+						edges = new ArrayList<>();
+						classAssignments.put(sourceNode, edges);
+					}
+					edges.add(edge);
 				}
 			}
 			else {
-				if (classAssignments == null) {
-					classAssignments = new HashMap<>();
-				}
-				List<@NonNull NavigableEdge> edges = classAssignments.get(sourceNode);
-				if (edges == null) {
-					edges = new ArrayList<>();
-					classAssignments.put(sourceNode, edges);
-				}
-				edges.add(edge);
+				// SharedEdge
 			}
 		}
 		if (classAssignments != null) {

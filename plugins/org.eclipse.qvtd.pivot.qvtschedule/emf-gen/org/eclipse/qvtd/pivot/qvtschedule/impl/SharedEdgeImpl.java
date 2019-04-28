@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -253,6 +254,12 @@ public class SharedEdgeImpl extends NavigableEdgeImpl implements SharedEdge {
 			return "null";
 		}
 	}
+
+	@Override
+	public @NonNull String getEdgeName() {
+		return "~" + PivotUtil.getName(QVTscheduleUtil.getReferredOppositeProperty(this));
+	}
+
 
 	@Override
 	public @Nullable String getLabel() {

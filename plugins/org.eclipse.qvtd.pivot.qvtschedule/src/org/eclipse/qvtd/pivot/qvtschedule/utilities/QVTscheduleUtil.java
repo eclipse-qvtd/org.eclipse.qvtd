@@ -63,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 
@@ -388,7 +389,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
 			if (edge instanceof NavigationEdge) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
-				if (QVTscheduleUtil.getProperty(navigationEdge) == property) {
+				if (QVTscheduleUtil.getReferredProperty(navigationEdge) == property) {
 					return navigationEdge;
 				}
 			}
@@ -842,10 +843,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return diff >= 0 ? property : oppositeProperty;
 	}
 
-	public static @NonNull Property getProperty(@NonNull NavigableEdge navigableEdge) {
-		return ClassUtil.nonNullState(navigableEdge.getProperty());
-	}
-
 	//
 	//	Commented out since getCompleteClass() is usually more appropriate.
 	//
@@ -855,6 +852,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Operation getReferredOperation(@NonNull OperationCallNode operationCallNode) {
 		return ClassUtil.nonNullState(operationCallNode.getReferredOperation());		// FIXME should be declared as [1..1]
+	}
+
+	public static @NonNull Property getReferredOppositeProperty(@NonNull SharedEdge sharedEdge) {
+		return ClassUtil.nonNullState(sharedEdge.getReferredOppositeProperty());
 	}
 
 	public static @NonNull PropertyDatum getReferredPart(@NonNull KeyPartEdge keyPartEdge) {
@@ -883,6 +884,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Region getRegion(@NonNull Partition partition) {
 		return ClassUtil.nonNullState(partition.getRegion());
+	}
+
+	public static @NonNull Property getReferredProperty(@NonNull NavigationEdge navigationEdge) {
+		return ClassUtil.nonNullState(navigationEdge.getReferredProperty());
 	}
 
 	public static @NonNull Iterable<@NonNull MappingPartition> getRegionPartitions(@NonNull Region region) {

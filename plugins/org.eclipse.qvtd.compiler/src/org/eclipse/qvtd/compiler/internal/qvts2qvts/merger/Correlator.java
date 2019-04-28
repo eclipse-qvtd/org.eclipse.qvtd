@@ -28,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 import com.google.common.collect.Iterables;
@@ -294,52 +295,58 @@ class Correlator
 			}
 			for (@NonNull NavigableEdge uncastExtraEdge : extraSourceNode.getNavigableEdges()) {
 				Node uncastExtraTargetNode = uncastExtraEdge.getEdgeTarget();
-				if (sourceNodeMerger != null) {
-					NavigableEdge uncastPrimaryEdge = sourceNodeMerger.getNavigableEdge(QVTscheduleUtil.getProperty(uncastExtraEdge));	// Skip isSecondary properties
-					EdgeMerger edgeMerger = uncastPrimaryEdge != null ? regionMerger.getEdgeMerger(uncastPrimaryEdge) : null;
-					if (!strategy.navigableEdgesMatch(edgeMerger, uncastExtraEdge)) {
-						return false;
-					}
-					if (uncastPrimaryEdge != null) {
-						Node uncastPrimaryTargetNode = uncastPrimaryEdge.getEdgeTarget();
-						if (uncastExtraTargetNode.isNullLiteral() != uncastPrimaryTargetNode.isNullLiteral()) {
-							if (debugFailures) {
-								AbstractMerger.FAILURE.println("Inconsistent ExplicitNull: " + uncastExtraTargetNode);
-							}
+				if (uncastExtraEdge instanceof NavigationEdge) {
+					NavigationEdge uncastExtraNavigationEdge = (NavigationEdge)uncastExtraEdge;
+					if (sourceNodeMerger != null) {
+						NavigableEdge uncastPrimaryEdge = sourceNodeMerger.getNavigableEdge(QVTscheduleUtil.getReferredProperty(uncastExtraNavigationEdge));	// Skip isSecondary properties
+						EdgeMerger edgeMerger = uncastPrimaryEdge != null ? regionMerger.getEdgeMerger(uncastPrimaryEdge) : null;
+						if (!strategy.navigableEdgesMatch(edgeMerger, uncastExtraEdge)) {
 							return false;
 						}
-						Map<@NonNull ClassDatum, @NonNull NodeMerger> classDatum2targetNodeMergers = new HashMap<>();
-						@NonNull Node primaryTargetNode = uncastPrimaryTargetNode;
-						ClassDatum targetClassDatum1 = QVTscheduleUtil.getClassDatum(primaryTargetNode);
-						NodeMerger oldNodeMerger = classDatum2targetNodeMergers.put(targetClassDatum1, regionMerger.getNodeMerger(primaryTargetNode));
-						if (oldNodeMerger != null) {
-							if (debugFailures) {
-								AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetClassDatum1);
-							}
-							return false;		// FIXME should have an earlier cast rationalizer
-						}
-						@NonNull Node extraTargetNode = uncastExtraTargetNode;
-						ClassDatum targetClassDatum2 = extraTargetNode.getClassDatum();
-						NodeMerger targetNodeMerger = classDatum2targetNodeMergers.remove(targetClassDatum2);
-						if (targetNodeMerger == null) {
-							if (debugFailures) {
-								AbstractMerger.FAILURE.println("Inconsistent types at: " + targetNodeMerger + ", " + extraTargetNode);
-							}
-							return false;		// FIXME Inconsistent navigation is too complex
-						}
-						else {
-							NodeMerger targetNodeMerger2 = extraNode2nodeMerger.get(extraTargetNode);
-							if (targetNodeMerger2 == null) {
-								extraNode2nodeMerger.put(extraTargetNode, targetNodeMerger);
-							}
-							else if (targetNodeMerger != targetNodeMerger2) {
+						if (uncastPrimaryEdge != null) {
+							Node uncastPrimaryTargetNode = uncastPrimaryEdge.getEdgeTarget();
+							if (uncastExtraTargetNode.isNullLiteral() != uncastPrimaryTargetNode.isNullLiteral()) {
 								if (debugFailures) {
-									AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetNodeMerger + ", " + targetNodeMerger2);
+									AbstractMerger.FAILURE.println("Inconsistent ExplicitNull: " + uncastExtraTargetNode);
+								}
+								return false;
+							}
+							Map<@NonNull ClassDatum, @NonNull NodeMerger> classDatum2targetNodeMergers = new HashMap<>();
+							@NonNull Node primaryTargetNode = uncastPrimaryTargetNode;
+							ClassDatum targetClassDatum1 = QVTscheduleUtil.getClassDatum(primaryTargetNode);
+							NodeMerger oldNodeMerger = classDatum2targetNodeMergers.put(targetClassDatum1, regionMerger.getNodeMerger(primaryTargetNode));
+							if (oldNodeMerger != null) {
+								if (debugFailures) {
+									AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetClassDatum1);
+								}
+								return false;		// FIXME should have an earlier cast rationalizer
+							}
+							@NonNull Node extraTargetNode = uncastExtraTargetNode;
+							ClassDatum targetClassDatum2 = extraTargetNode.getClassDatum();
+							NodeMerger targetNodeMerger = classDatum2targetNodeMergers.remove(targetClassDatum2);
+							if (targetNodeMerger == null) {
+								if (debugFailures) {
+									AbstractMerger.FAILURE.println("Inconsistent types at: " + targetNodeMerger + ", " + extraTargetNode);
 								}
 								return false;		// FIXME Inconsistent navigation is too complex
 							}
+							else {
+								NodeMerger targetNodeMerger2 = extraNode2nodeMerger.get(extraTargetNode);
+								if (targetNodeMerger2 == null) {
+									extraNode2nodeMerger.put(extraTargetNode, targetNodeMerger);
+								}
+								else if (targetNodeMerger != targetNodeMerger2) {
+									if (debugFailures) {
+										AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetNodeMerger + ", " + targetNodeMerger2);
+									}
+									return false;		// FIXME Inconsistent navigation is too complex
+								}
+							}
 						}
 					}
+				}
+				else {
+					// SharedEdge
 				}
 				@NonNull Node extraTargetNode = uncastExtraTargetNode;
 				if (extraNodes.add(extraTargetNode)) {
@@ -424,11 +431,14 @@ class Correlator
 			boolean ok = !nodeMerger.isIterator();
 			if (ok) {
 				for (@NonNull NavigableEdge predicateEdge : predicateEdges) {
-					Property property = QVTscheduleUtil.getProperty(predicateEdge);
-					Node navigation = nodeMerger.getNavigableTarget(property);
-					if (navigation == null) {
-						ok = false;
-						break;
+					if (predicateEdge instanceof NavigationEdge) {
+						NavigationEdge navigationEdge = (NavigationEdge)predicateEdge;
+						Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+						Node navigation = nodeMerger.getNavigableTarget(property);
+						if (navigation == null) {
+							ok = false;
+							break;
+						}
 					}
 				}
 			}

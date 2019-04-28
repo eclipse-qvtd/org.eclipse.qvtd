@@ -795,13 +795,19 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node referenceNode) {
 		for (@NonNull NavigableEdge referenceEdge : referenceNode.getNavigableEdges()) {
-			if (!referenceEdge.isSecondary()) {
-				Node referenceTargetNode = referenceEdge.getEdgeTarget();
-				String name = QVTscheduleUtil.getName(referenceTargetNode);
-				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(referenceTargetNode);
-				Node instantiatedTargetNode = createDependencyNode(name, classDatum);
-				createNavigationEdge(instantiatedNode, QVTscheduleUtil.getProperty(referenceEdge), instantiatedTargetNode, false);
-				instantiate(instantiatedTargetNode, referenceTargetNode);
+			if (referenceEdge instanceof NavigationEdge) {
+				NavigationEdge navigationEdge = (NavigationEdge)referenceEdge;
+				if (!navigationEdge.isSecondary()) {
+					Node referenceTargetNode = navigationEdge.getEdgeTarget();
+					String name = QVTscheduleUtil.getName(referenceTargetNode);
+					ClassDatum classDatum = QVTscheduleUtil.getClassDatum(referenceTargetNode);
+					Node instantiatedTargetNode = createDependencyNode(name, classDatum);
+					createNavigationEdge(instantiatedNode, QVTscheduleUtil.getReferredProperty(navigationEdge), instantiatedTargetNode, false);
+					instantiate(instantiatedTargetNode, referenceTargetNode);
+				}
+			}
+			else {
+				// SharedEdge
 			}
 		}
 	}

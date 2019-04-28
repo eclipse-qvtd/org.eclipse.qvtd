@@ -147,18 +147,21 @@ public class RuleHeadAnalysis extends HeadAnalysis
 						sources1 = Sets.newHashSet(sourceNode);
 						targetFromSources.put(sourceNode, sources1);
 					}
-					for (@NonNull NavigableEdge navigationEdge : sourceNode.getNavigableEdges()) {
-						if (!navigationEdge.isRealized()) {
-							Property source2targetProperty = QVTscheduleUtil.getProperty(navigationEdge);
-							if (!source2targetProperty.isIsMany() /*&& source2targetProperty.isIsRequired()*/) {
-								Node targetNode = navigationEdge.getEdgeTarget();
-								if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isConstant()) {
-									Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
-									if (sources2 == null) {
-										sources2 = Sets.newHashSet(targetNode);
-										targetFromSources.put(targetNode, sources2);
+					for (@NonNull NavigableEdge navigableEdge : sourceNode.getNavigableEdges()) {
+						if (navigableEdge instanceof NavigationEdge) {
+							NavigationEdge navigationEdge = (NavigationEdge) navigableEdge;
+							if (!navigationEdge.isRealized()) {
+								Property source2targetProperty = QVTscheduleUtil.getReferredProperty(navigationEdge);
+								if (!source2targetProperty.isIsMany() /*&& source2targetProperty.isIsRequired()*/) {
+									Node targetNode = navigationEdge.getEdgeTarget();
+									if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isConstant()) {
+										Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
+										if (sources2 == null) {
+											sources2 = Sets.newHashSet(targetNode);
+											targetFromSources.put(targetNode, sources2);
+										}
+										sources2.add(sourceNode);
 									}
-									sources2.add(sourceNode);
 								}
 							}
 						}

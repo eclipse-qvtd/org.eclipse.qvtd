@@ -40,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
@@ -126,7 +127,7 @@ public interface ScheduleManager
 	@NonNull OriginalContentsAnalysis getOriginalContentsAnalysis();
 
 	@NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property);
-	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge edge);
+	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge edge);
 	@NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper();
 	@NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region);
 	@NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull RootRegion rootRegion);

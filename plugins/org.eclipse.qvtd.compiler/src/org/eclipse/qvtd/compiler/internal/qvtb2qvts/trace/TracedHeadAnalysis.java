@@ -23,6 +23,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -69,19 +70,22 @@ public class TracedHeadAnalysis extends HeadAnalysis
 					sources1 = Sets.newHashSet(sourceNode);
 					targetFromSources.put(sourceNode, sources1);
 				}
-				for (@NonNull NavigableEdge navigationEdge : sourceNode.getNavigableEdges()) {
-					Property source2targetProperty = QVTscheduleUtil.getProperty(navigationEdge);
-					//					boolean isRequired = source2targetProperty.isIsRequired();
-					boolean isMany = source2targetProperty.isIsMany();
-					Node targetNode = navigationEdge.getEdgeTarget();
-					if (!isMany || targetNode.isDataType()) {
-						if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isNullLiteral() && !targetNode.isConstant()) {
-							Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
-							if (sources2 == null) {
-								sources2 = Sets.newHashSet(targetNode);
-								targetFromSources.put(targetNode, sources2);
+				for (@NonNull NavigableEdge navigableEdge : sourceNode.getNavigableEdges()) {
+					if (navigableEdge instanceof NavigationEdge) {
+						NavigationEdge navigationEdge = (NavigationEdge) navigableEdge;
+						Property source2targetProperty = QVTscheduleUtil.getReferredProperty(navigationEdge);
+						//					boolean isRequired = source2targetProperty.isIsRequired();
+						boolean isMany = source2targetProperty.isIsMany();
+						Node targetNode = navigationEdge.getEdgeTarget();
+						if (!isMany || targetNode.isDataType()) {
+							if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isNullLiteral() && !targetNode.isConstant()) {
+								Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
+								if (sources2 == null) {
+									sources2 = Sets.newHashSet(targetNode);
+									targetFromSources.put(targetNode, sources2);
+								}
+								sources2.add(sourceNode);
 							}
-							sources2.add(sourceNode);
 						}
 					}
 				}

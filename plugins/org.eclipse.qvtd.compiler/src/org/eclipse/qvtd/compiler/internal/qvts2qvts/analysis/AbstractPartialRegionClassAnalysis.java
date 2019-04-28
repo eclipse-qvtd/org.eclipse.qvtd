@@ -98,7 +98,7 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 			for (@NonNull Node traceNode : producer.getTraceNodes()) {	// FIXME Bug 488647 discriminate output classes too
 				for (@NonNull NavigationEdge edge : traceNode.getRealizedNavigationEdges()) {
 					if (!edge.getEdgeTarget().isRealized()) {
-						property2edge.put(QVTscheduleUtil.getProperty(edge), edge);
+						property2edge.put(QVTscheduleUtil.getReferredProperty(edge), edge);
 					}
 				}
 			}

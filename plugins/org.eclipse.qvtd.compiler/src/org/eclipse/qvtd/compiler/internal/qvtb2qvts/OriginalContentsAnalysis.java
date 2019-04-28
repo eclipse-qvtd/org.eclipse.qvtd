@@ -29,6 +29,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassA
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -98,8 +99,13 @@ public class OriginalContentsAnalysis
 	}
 
 	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge) {
-		PropertyDatum propertyDatum = getPropertyDatum(newEdge);
-		addNewEdge(region, newEdge, propertyDatum);
+		if (newEdge instanceof NavigationEdge) {
+			PropertyDatum propertyDatum = getPropertyDatum((NavigationEdge) newEdge);
+			addNewEdge(region, newEdge, propertyDatum);
+		}
+		else {
+			// FIXME SharedEdge
+		}
 	}
 	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {
 		@SuppressWarnings("unused") String name = propertyDatum.getName();
@@ -349,15 +355,21 @@ public class OriginalContentsAnalysis
 		if (property == oclContainerProperty) {
 			return getCompositeNewEdges(edge);
 		}
-		PropertyDatum propertyDatum = getPropertyDatum(edge);
-		PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
-		//		if (propertyDatum == null) {
-		//			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
-		//		}
-		//		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
-		//			return null;
-		//		}
-		Iterable<@NonNull NavigableEdge> realizedEdges = basePropertyDatum2newEdges.get(basePropertyDatum);
+		Iterable<@NonNull NavigableEdge> realizedEdges = null;
+		if (edge instanceof NavigationEdge) {
+			PropertyDatum propertyDatum = getPropertyDatum((NavigationEdge) edge);
+			PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
+			//		if (propertyDatum == null) {
+			//			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
+			//		}
+			//		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
+			//			return null;
+			//		}
+			realizedEdges = basePropertyDatum2newEdges.get(basePropertyDatum);
+		}
+		else {
+			// FIXME SharedEdge
+		}
 		if (realizedEdges == null) {
 			return null;
 		}
@@ -438,9 +450,9 @@ public class OriginalContentsAnalysis
 		return classDatum2oldNodes.get(classDatum);
 	}
 
-	private @NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge producedEdge) {
+	private @NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
-		Property forwardProperty = QVTscheduleUtil.getProperty(producedEdge);
+		Property forwardProperty = QVTscheduleUtil.getReferredProperty(producedEdge);
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeSource());
 		ClassDatum forwardClassDatum = scheduleManager.getElementalClassDatum(classDatum);
 		return scheduleManager.getPropertyDatum(forwardClassDatum, forwardProperty);

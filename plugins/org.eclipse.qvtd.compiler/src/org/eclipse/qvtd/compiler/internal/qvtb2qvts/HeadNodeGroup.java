@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -79,7 +79,7 @@ public class HeadNodeGroup
 					// targetType = null;			// already reached
 				}
 				else if (source2targetEdge.isNavigation()) {
-					Property targetProperty = QVTscheduleUtil.getProperty((NavigableEdge) source2targetEdge);
+					Property targetProperty = QVTscheduleUtil.getReferredProperty((NavigationEdge) source2targetEdge);
 					targetIsCollectionType = targetProperty.getType() instanceof CollectionType;
 				}
 				else if (source2targetEdge.isPredicate()) {

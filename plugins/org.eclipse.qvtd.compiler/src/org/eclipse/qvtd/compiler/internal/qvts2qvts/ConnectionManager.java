@@ -573,20 +573,26 @@ public class ConnectionManager
 		//	a used edge connection.
 		//
 		for (@NonNull NavigableEdge edge : region.getRealizedNavigationEdges()) {
-			if (!edge.isSecondary()) {
-				boolean isAwaited = false;
-				for (@NonNull PartitionAnalysis partitionAnalysis : regionAnalysis.getPartitionAnalyses()) {
-					Role role = partitionAnalysis.getPartition().getRole(edge);
-					if ((role != null) && role.isChecked()) {
-						isAwaited = true;
-						break;
+			if (edge instanceof NavigationEdge) {
+				NavigationEdge navigationEdge = (NavigationEdge)edge;
+				if (!edge.isSecondary()) {
+					boolean isAwaited = false;
+					for (@NonNull PartitionAnalysis partitionAnalysis : regionAnalysis.getPartitionAnalyses()) {
+						Role role = partitionAnalysis.getPartition().getRole(edge);
+						if ((role != null) && role.isChecked()) {
+							isAwaited = true;
+							break;
+						}
+					}
+					if (isAwaited) {
+						Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+						EdgeConnection connection = getEdgeConnection(rootRegion, Collections.singleton(edge), property);
+						connection.addUsedTargetEdge(edge, true);
 					}
 				}
-				if (isAwaited) {
-					Property property = QVTscheduleUtil.getProperty(edge);
-					EdgeConnection connection = getEdgeConnection(rootRegion, Collections.singleton(edge), property);
-					connection.addUsedTargetEdge(edge, true);
-				}
+			}
+			else {
+				// SharedEdge
 			}
 		}
 	}
@@ -902,18 +908,24 @@ public class ConnectionManager
 			return oldPrevNode == callingNode;
 		}
 		for (@NonNull NavigableEdge calledEdge : calledNode.getNavigableEdges()) {
-			Node nextCalledNode = calledEdge.getEdgeTarget();
-			if (!nextCalledNode.isRealized() && !nextCalledNode.isDataType()) {  // FIXME why exclude AttributeNodes?
-				Edge nextCallingEdge = callingNode.getNavigableEdge(QVTscheduleUtil.getProperty(calledEdge));
-				if (nextCallingEdge != null) {
-					Node nextCallingNode = nextCallingEdge.getEdgeTarget();
-					if ((nextCallingNode.isNullLiteral() != nextCalledNode.isNullLiteral())) {
-						return false;
-					}
-					if (!isCompatiblePattern(region, nextCalledNode, nextCallingNode, called2calling)) {
-						return false;
+			if (calledEdge instanceof NavigationEdge) {
+				NavigationEdge calledNavigationEdge = (NavigationEdge)calledEdge;
+				Node nextCalledNode = calledEdge.getEdgeTarget();
+				if (!nextCalledNode.isRealized() && !nextCalledNode.isDataType()) {  // FIXME why exclude AttributeNodes?
+					Edge nextCallingEdge = callingNode.getNavigableEdge(QVTscheduleUtil.getReferredProperty(calledNavigationEdge));
+					if (nextCallingEdge != null) {
+						Node nextCallingNode = nextCallingEdge.getEdgeTarget();
+						if ((nextCallingNode.isNullLiteral() != nextCalledNode.isNullLiteral())) {
+							return false;
+						}
+						if (!isCompatiblePattern(region, nextCalledNode, nextCallingNode, called2calling)) {
+							return false;
+						}
 					}
 				}
+			}
+			else {
+				// SharedEdge
 			}
 		}
 		return true;

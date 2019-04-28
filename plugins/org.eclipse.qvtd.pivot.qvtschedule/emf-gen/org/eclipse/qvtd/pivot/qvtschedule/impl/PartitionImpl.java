@@ -31,7 +31,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -203,16 +202,16 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				getPasses().addAll((Collection<? extends Integer>)newValue);
-				return;
+			getPasses().addAll((Collection<? extends Integer>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -227,13 +226,13 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -389,7 +388,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		if (bestNamingNode != null) {
 			List<@NonNull String> edgeNames = new ArrayList<>();
 			for (@NonNull NavigableEdge edge : bestNamingNode.getRealizedNavigationEdges()) {
-				String name = PivotUtil.getName(QVTscheduleUtil.getProperty(edge));
+				String name = edge.getEdgeName();
 				edgeNames.add(name);
 			}
 			if (edgeNames.size() > 0) {
@@ -403,13 +402,11 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 			}
 			else {
 				for (@NonNull Edge edge : getPartialEdges()) {
-					if (edge.isNavigation()) {
+					if (edge.isNavigable()) {
 						Role edgeRole = getRole(edge);
 						assert edgeRole != null;
 						if (edgeRole.isRealized()) {
-							NavigableEdge navigableEdge = (org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge) edge;
-							String name = PivotUtil.getName(QVTscheduleUtil.getProperty(navigableEdge));
-							edgeNames.add(name);
+							edgeNames.add(((NavigableEdge)edge).getEdgeName());
 						}
 					}
 				}
@@ -448,7 +445,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 				s.appendName(headNode.getClassDatum().getName());
 				List<@NonNull String> edgeNames = new ArrayList<>();
 				for (@NonNull NavigableEdge edge : headNode.getNavigableEdges()) {
-					String propertyName = PivotUtil.getName(QVTscheduleUtil.getProperty(edge));
+					String propertyName = edge.getEdgeName();
 					edgeNames.add(edge.getEdgeTarget().isNullLiteral() ? propertyName + "0" : propertyName);
 				}
 				Collections.sort(edgeNames);

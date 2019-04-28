@@ -420,7 +420,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	private void checkIsPartial(boolean isPartial) {
 		Node targetNode = QVTscheduleUtil.getTargetNode(this);
 		ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-		Property property = QVTscheduleUtil.getProperty(this);
+		Property property = QVTscheduleUtil.getReferredProperty(this);
 		boolean isComputedPartial = false;
 		Type propertyTargetType = PivotUtil.getType(property);
 		if (!conformsTo(targetClassDatum, propertyTargetType)) {
@@ -457,7 +457,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		NavigationEdge edge = (NavigationEdge)super.createEdge(edgeRole, sourceNode, targetNode);
-		edge.initializeProperty(QVTscheduleUtil.getProperty(this), isPartial());
+		edge.initializeProperty(QVTscheduleUtil.getReferredProperty(this), isPartial());
 		return edge;
 	}
 
@@ -471,6 +471,11 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		else {
 			super.destroy();
 		}
+	}
+
+	@Override
+	public @NonNull String getEdgeName() {
+		return PivotUtil.getName(QVTscheduleUtil.getReferredProperty(this));
 	}
 
 	@Override
