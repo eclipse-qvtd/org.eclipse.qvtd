@@ -29,7 +29,7 @@ import org.eclipse.ocl.pivot.Property;
  * An ObservableStatement may involve evaluation of an expression that accesses object properties whose
  * values may not be available. If not ready,the mapping execution is suspended until the required value
  * is made available by a notifying SetStatement.
- *
+ * 
  * syntax: oclText[observe class::property ...]
  * <!-- end-model-doc -->
  *

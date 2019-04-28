@@ -158,62 +158,57 @@ public class CheckedConditionAnalysis
 		//		}
 
 		@Override
-		public Object visitNavigableEdge(@NonNull NavigableEdge navigableEdge) {
-			Role navigableEdgeRole = partition.getRole(navigableEdge);
-			assert navigableEdgeRole != null;
-			NavigableEdge checkedEdge = QVTscheduleUtil.getPrimaryEdge(navigableEdge);
-			NavigableEdge oppositeEdge = checkedEdge.getOppositeEdge();
-			if (oppositeEdge != null) {
-				Node sourceNode = QVTscheduleUtil.getSourceNode(checkedEdge);
-				Node targetNode = QVTscheduleUtil.getTargetNode(checkedEdge);
-				Integer sourceCost = reachabilityForest.getCost(sourceNode);
-				Integer targetCost = reachabilityForest.getCost(targetNode);
-				if ((sourceCost != null) && (targetCost != null) && (0 < targetCost) &&  (targetCost < sourceCost)) {
-					checkedEdge = oppositeEdge;
-				}
-			}
-			Property checkedProperty = checkedEdge.getProperty();
-			Set<@NonNull Property> allCheckedProperties2 = computeCheckedProperties(null);
-			if (allCheckedProperties2.contains(checkedProperty)) {
-				if (checkedNavigableEdges == null) {
-					checkedNavigableEdges = new HashSet<>();
-				}
-				if (checkedNavigableEdges.add(checkedEdge)) {
-					context.add(new NavigableEdgeCheckedCondition(checkedEdge));
-					//					return null;
-				}
-			}
-			Node targetNode = QVTscheduleUtil.getTargetNode(navigableEdge);
-			if (navigableEdgeRole.isPredicated() && targetNode.isConstant()) {
-				context.add(new ConstantTargetCheckedCondition(navigableEdge));
-				//				return null;
-			}
-			//			assert navigableEdge.isOld();
-			Property property = QVTscheduleUtil.getProperty(navigableEdge);
-			//	ClassDatum edgeTargetClassDatum = completeModel.getClassDatum(QVTrelationUtil.getType(property));
-			CompleteClass edgeTargetCompleteClass = completeModel.getCompleteClass(QVTrelationUtil.getType(property));
-			Node sourceNode = QVTscheduleUtil.getSourceNode(navigableEdge);
-			Integer sourceCost = reachabilityForest.getCost(sourceNode);
-			Integer targetCost = reachabilityForest.getCost(targetNode);
-			assert (sourceCost != null) && (targetCost != null);
-			if (sourceCost < targetCost) {
-				ClassDatum targetNodeClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-				if (!QVTscheduleUtil.conformsTo(edgeTargetCompleteClass, targetNodeClassDatum)) {
-					context.add(new CastEdgeCheckedCondition(navigableEdge));
-					//					return null;
-				}
-			}
-			return null;
-		}
-
-		@Override
 		public Object visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
 			if (isCheckedNavigation(navigationEdge)) {		// FIXME Why is this irregularity needed ?
 				context.add(new PredicateNavigationEdgeCheckedCondition(navigationEdge));
 				return null;
 			}
 			else {
-				return super.visitNavigationEdge(navigationEdge);
+				Role navigableEdgeRole = partition.getRole(navigationEdge);
+				assert navigableEdgeRole != null;
+				NavigationEdge checkedEdge = QVTscheduleUtil.getPrimaryEdge(navigationEdge);
+				NavigationEdge oppositeEdge = checkedEdge.getOppositeEdge();
+				if (oppositeEdge != null) {
+					Node sourceNode = QVTscheduleUtil.getSourceNode(checkedEdge);
+					Node targetNode = QVTscheduleUtil.getTargetNode(checkedEdge);
+					Integer sourceCost = reachabilityForest.getCost(sourceNode);
+					Integer targetCost = reachabilityForest.getCost(targetNode);
+					if ((sourceCost != null) && (targetCost != null) && (0 < targetCost) &&  (targetCost < sourceCost)) {
+						checkedEdge = oppositeEdge;
+					}
+				}
+				Property checkedProperty = checkedEdge.getProperty();
+				Set<@NonNull Property> allCheckedProperties2 = computeCheckedProperties(null);
+				if (allCheckedProperties2.contains(checkedProperty)) {
+					if (checkedNavigableEdges == null) {
+						checkedNavigableEdges = new HashSet<>();
+					}
+					if (checkedNavigableEdges.add(checkedEdge)) {
+						context.add(new NavigableEdgeCheckedCondition(checkedEdge));
+						//					return null;
+					}
+				}
+				Node targetNode = QVTscheduleUtil.getTargetNode(navigationEdge);
+				if (navigableEdgeRole.isPredicated() && targetNode.isConstant()) {
+					context.add(new ConstantTargetCheckedCondition(navigationEdge));
+					//				return null;
+				}
+				//			assert navigableEdge.isOld();
+				Property property = QVTscheduleUtil.getProperty(navigationEdge);
+				//	ClassDatum edgeTargetClassDatum = completeModel.getClassDatum(QVTrelationUtil.getType(property));
+				CompleteClass edgeTargetCompleteClass = completeModel.getCompleteClass(QVTrelationUtil.getType(property));
+				Node sourceNode = QVTscheduleUtil.getSourceNode(navigationEdge);
+				Integer sourceCost = reachabilityForest.getCost(sourceNode);
+				Integer targetCost = reachabilityForest.getCost(targetNode);
+				assert (sourceCost != null) && (targetCost != null);
+				if (sourceCost < targetCost) {
+					ClassDatum targetNodeClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+					if (!QVTscheduleUtil.conformsTo(edgeTargetCompleteClass, targetNodeClassDatum)) {
+						context.add(new CastEdgeCheckedCondition(navigationEdge));
+						//					return null;
+					}
+				}
+				return null;
 			}
 		}
 

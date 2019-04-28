@@ -138,7 +138,7 @@ public class CastEdgeImpl extends EdgeImpl implements CastEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getReferredClassDatum();
-			return basicGetReferredClassDatum();
+				return basicGetReferredClassDatum();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -153,7 +153,7 @@ public class CastEdgeImpl extends EdgeImpl implements CastEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredClassDatum((ClassDatum)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -168,7 +168,7 @@ public class CastEdgeImpl extends EdgeImpl implements CastEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredClassDatum((ClassDatum)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

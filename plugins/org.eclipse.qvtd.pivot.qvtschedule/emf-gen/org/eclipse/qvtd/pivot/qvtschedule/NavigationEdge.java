@@ -22,12 +22,18 @@ import org.eclipse.ocl.pivot.Property;
  * A representation of the model object '<em><b>Navigation Edge</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A NavigationEdge supports the directed Property-based relationship between Nodes within a Region.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#getOppositeEdge <em>Opposite Edge</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#isPartial <em>Partial</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#isSecondary <em>Secondary</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge()
@@ -35,6 +41,31 @@ import org.eclipse.ocl.pivot.Property;
  * @generated
  */
 public interface NavigationEdge extends NavigableEdge {
+
+	/**
+	 * Returns the value of the '<em><b>Opposite Edge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Non-null if this edge is part of a bidirectional pair.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Opposite Edge</em>' reference.
+	 * @see #setOppositeEdge(NavigationEdge)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge_OppositeEdge()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigationEdge!oppositeEdge'"
+	 * @generated
+	 */
+	NavigationEdge getOppositeEdge();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#getOppositeEdge <em>Opposite Edge</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Opposite Edge</em>' reference.
+	 * @see #getOppositeEdge()
+	 * @generated
+	 */
+	void setOppositeEdge(NavigationEdge value);
 
 	/**
 	 * Returns the value of the '<em><b>Partial</b></em>' attribute.
@@ -89,6 +120,34 @@ public interface NavigationEdge extends NavigableEdge {
 	 * @generated
 	 */
 	void setReferredProperty(Property value);
+
+	/**
+	 * Returns the value of the '<em><b>Secondary</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * True if this edge is the auto-created second half of a bidirectional pair.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Secondary</em>' attribute.
+	 * @see #setSecondary(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge_Secondary()
+	 * @model default="false" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigationEdge!secondary'"
+	 * @generated
+	 */
+	@Override
+	boolean isSecondary();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#isSecondary <em>Secondary</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Secondary</em>' attribute.
+	 * @see #isSecondary()
+	 * @generated
+	 */
+	void setSecondary(boolean value);
 
 	void initializeProperty(@NonNull Property property, boolean isPartial);
 } // NavigationEdge

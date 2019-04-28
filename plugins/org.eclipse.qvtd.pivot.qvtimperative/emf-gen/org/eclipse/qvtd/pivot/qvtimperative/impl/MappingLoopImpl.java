@@ -283,19 +283,19 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-			getObservedProperties().addAll((Collection<? extends Property>)newValue);
-			return;
+				getObservedProperties().addAll((Collection<? extends Property>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedIterators().clear();
-			getOwnedIterators().addAll((Collection<? extends LoopVariable>)newValue);
-			return;
+				getOwnedIterators().addAll((Collection<? extends LoopVariable>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedMappingStatements().clear();
-			getOwnedMappingStatements().addAll((Collection<? extends MappingStatement>)newValue);
-			return;
+				getOwnedMappingStatements().addAll((Collection<? extends MappingStatement>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -310,16 +310,16 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedIterators().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedMappingStatements().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

@@ -127,8 +127,8 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-			getObservedProperties().addAll((Collection<? extends Property>)newValue);
-			return;
+				getObservedProperties().addAll((Collection<? extends Property>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -143,7 +143,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

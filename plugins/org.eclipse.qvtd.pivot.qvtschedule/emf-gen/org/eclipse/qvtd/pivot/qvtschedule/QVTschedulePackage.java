@@ -1545,28 +1545,6 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getNavigableEdge_OutgoingConnections();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#isSecondary <em>Secondary</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Secondary</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#isSecondary()
-	 * @see #getNavigableEdge()
-	 * @generated
-	 */
-	EAttribute getNavigableEdge_Secondary();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getOppositeEdge <em>Opposite Edge</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Opposite Edge</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getOppositeEdge()
-	 * @see #getNavigableEdge()
-	 * @generated
-	 */
-	EReference getNavigableEdge_OppositeEdge();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge <em>Navigation Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1575,6 +1553,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNavigationEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#getOppositeEdge <em>Opposite Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Opposite Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#getOppositeEdge()
+	 * @see #getNavigationEdge()
+	 * @generated
+	 */
+	EReference getNavigationEdge_OppositeEdge();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#isPartial <em>Partial</em>}'.
@@ -1597,6 +1586,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNavigationEdge_ReferredProperty();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#isSecondary <em>Secondary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Secondary</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#isSecondary()
+	 * @see #getNavigationEdge()
+	 * @generated
+	 */
+	EAttribute getNavigationEdge_Secondary();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.Node <em>Node</em>}'.
@@ -3537,22 +3537,6 @@ public interface QVTschedulePackage extends EPackage {
 		EReference NAVIGABLE_EDGE__OUTGOING_CONNECTIONS = eINSTANCE.getNavigableEdge_OutgoingConnections();
 
 		/**
-		 * The meta object literal for the '<em><b>Secondary</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAVIGABLE_EDGE__SECONDARY = eINSTANCE.getNavigableEdge_Secondary();
-
-		/**
-		 * The meta object literal for the '<em><b>Opposite Edge</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAVIGABLE_EDGE__OPPOSITE_EDGE = eINSTANCE.getNavigableEdge_OppositeEdge();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl <em>Navigation Edge</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3561,6 +3545,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass NAVIGATION_EDGE = eINSTANCE.getNavigationEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite Edge</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAVIGATION_EDGE__OPPOSITE_EDGE = eINSTANCE.getNavigationEdge_OppositeEdge();
 
 		/**
 		 * The meta object literal for the '<em><b>Partial</b></em>' attribute feature.
@@ -3577,6 +3569,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference NAVIGATION_EDGE__REFERRED_PROPERTY = eINSTANCE.getNavigationEdge_ReferredProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Secondary</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAVIGATION_EDGE__SECONDARY = eINSTANCE.getNavigationEdge_Secondary();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl <em>Node</em>}' class.

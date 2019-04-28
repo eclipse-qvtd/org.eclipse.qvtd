@@ -2111,26 +2111,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 */
 	@Override
 	public EReference getNavigableEdge_OutgoingConnections() {
-		return (EReference)navigableEdgeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getNavigableEdge_Secondary() {
-		return (EAttribute)navigableEdgeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getNavigableEdge_OppositeEdge() {
 		return (EReference)navigableEdgeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2150,8 +2130,18 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EReference getNavigationEdge_OppositeEdge() {
+		return (EReference)navigationEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EAttribute getNavigationEdge_Partial() {
-		return (EAttribute)navigationEdgeEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)navigationEdgeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2161,7 +2151,17 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 */
 	@Override
 	public EReference getNavigationEdge_ReferredProperty() {
-		return (EReference)navigationEdgeEClass.getEStructuralFeatures().get(1);
+		return (EReference)navigationEdgeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getNavigationEdge_Secondary() {
+		return (EAttribute)navigationEdgeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2995,12 +2995,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		navigableEdgeEClass = createEClass(41);
 		createEReference(navigableEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 		createEReference(navigableEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
-		createEReference(navigableEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
-		createEAttribute(navigableEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 9);
 
 		navigationEdgeEClass = createEClass(42);
-		createEAttribute(navigationEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
-		createEReference(navigationEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 11);
+		createEReference(navigationEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
+		createEAttribute(navigationEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 9);
+		createEReference(navigationEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
+		createEAttribute(navigationEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 11);
 
 		nodeEClass = createEClass(43);
 		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
@@ -3397,13 +3397,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		initEClass(navigableEdgeEClass, NavigableEdge.class, "NavigableEdge", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNavigableEdge_IncomingConnection(), this.getEdgeConnection(), null, "incomingConnection", null, 0, 1, NavigableEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNavigableEdge_OppositeEdge(), this.getNavigableEdge(), null, "oppositeEdge", null, 0, 1, NavigableEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNavigableEdge_OutgoingConnections(), this.getEdgeConnection(), null, "outgoingConnections", null, 0, -1, NavigableEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNavigableEdge_Secondary(), ecorePackage.getEBoolean(), "secondary", "false", 1, 1, NavigableEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(navigationEdgeEClass, NavigationEdge.class, "NavigationEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNavigationEdge_OppositeEdge(), this.getNavigationEdge(), null, "oppositeEdge", null, 0, 1, NavigationEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNavigationEdge_Partial(), ecorePackage.getEBoolean(), "partial", "false", 1, 1, NavigationEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNavigationEdge_ReferredProperty(), thePivotPackage.getProperty(), null, "referredProperty", null, 1, 1, NavigationEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNavigationEdge_Secondary(), ecorePackage.getEBoolean(), "secondary", "false", 1, 1, NavigationEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNode_ClassDatum(), this.getClassDatum(), null, "classDatum", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3567,10 +3567,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this,
-		   source,
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**

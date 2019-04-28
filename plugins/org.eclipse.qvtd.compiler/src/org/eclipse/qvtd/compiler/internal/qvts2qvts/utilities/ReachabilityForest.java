@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Lists;
@@ -92,10 +93,13 @@ public class ReachabilityForest
 	}
 
 	protected void addEdge(@NonNull NavigableEdge edge) {
-		if (!edge.isSecondary()) {
-			forwardEdges.add(edge);
-			if ((edge.getEdgeSource().isClass()) && (edge.getOppositeEdge() == null)) {
-				manyToOneEdges.add(edge);
+		if (edge instanceof NavigationEdge) {
+			NavigationEdge navigationEdge = (NavigationEdge)edge;
+			if (!navigationEdge.isSecondary()) {
+				forwardEdges.add(navigationEdge);
+				if ((navigationEdge.getEdgeSource().isClass()) && (navigationEdge.getOppositeEdge() == null)) {
+					manyToOneEdges.add(navigationEdge);
+				}
 			}
 		}
 	}
@@ -128,8 +132,8 @@ public class ReachabilityForest
 							Integer targetCost = node2cost.get(targetNode);
 							assert (targetCost == null) || (thisCost < targetCost);
 							if (edge.isNavigation()) {
-								NavigableEdge navigableEdge = (NavigableEdge) edge;
-								if (forwardEdges.contains(navigableEdge)) {
+								NavigationEdge navigationEdge = (NavigationEdge) edge;
+								if (forwardEdges.contains(navigationEdge)) {
 									int nextCost = thisCost + FORWARD_NAVIGATION_COST;
 									if ((targetCost == null) || (nextCost < targetCost)) {
 										node2cost.put(targetNode, nextCost);
@@ -138,7 +142,7 @@ public class ReachabilityForest
 									}
 								}
 								else {
-									NavigableEdge oppositeEdge = navigableEdge.getOppositeEdge();
+									NavigationEdge oppositeEdge = navigationEdge.getOppositeEdge();
 									if (forwardEdges.contains(oppositeEdge)) {
 										boolean isImplicit = oppositeEdge.getProperty().isIsImplicit();
 										int nextCost = thisCost + (isImplicit ? INVERSE_NAVIGATION_COST : FORWARD_NAVIGATION_COST);

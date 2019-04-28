@@ -365,14 +365,14 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-			getObservedProperties().addAll((Collection<? extends Property>)newValue);
-			return;
+				getObservedProperties().addAll((Collection<? extends Property>)newValue);
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setIsCheck((Boolean)newValue);
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setOwnedExpression((OCLExpression)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -387,13 +387,13 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setIsCheck(IS_CHECK_EDEFAULT);
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setOwnedExpression((OCLExpression)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
