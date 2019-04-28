@@ -388,7 +388,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
 			if (edge instanceof NavigationEdge) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
-				if (QVTscheduleUtil.getProperty(navigationEdge) == property) {
+				if (QVTscheduleUtil.getReferredProperty(navigationEdge) == property) {
 					return navigationEdge;
 				}
 			}
@@ -842,10 +842,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return diff >= 0 ? property : oppositeProperty;
 	}
 
-	public static @NonNull Property getProperty(@NonNull NavigableEdge navigableEdge) {
-		return ClassUtil.nonNullState(navigableEdge.getProperty());
-	}
-
 	//
 	//	Commented out since getCompleteClass() is usually more appropriate.
 	//
@@ -883,6 +879,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Region getRegion(@NonNull Partition partition) {
 		return ClassUtil.nonNullState(partition.getRegion());
+	}
+
+	public static @NonNull Property getReferredProperty(@NonNull NavigationEdge navigationEdge) {
+		return ClassUtil.nonNullState(navigationEdge.getReferredProperty());
 	}
 
 	public static @NonNull Iterable<@NonNull MappingPartition> getRegionPartitions(@NonNull Region region) {

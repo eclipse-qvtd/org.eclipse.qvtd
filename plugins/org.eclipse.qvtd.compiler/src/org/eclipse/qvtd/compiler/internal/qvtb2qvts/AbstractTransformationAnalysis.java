@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -106,7 +107,7 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	/**
 	 * Register edge for delayed realization after speculation of the trace node of edge's region has completed successfully.
 	 */
-	public void addCorollary(@NonNull NavigableEdge edge) {
+	public void addCorollary(@NonNull NavigationEdge edge) {
 		assert edge.isRealized();
 		//	Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 		Node targetNode = QVTscheduleUtil.getTargetNode(edge);
@@ -114,7 +115,7 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		assert targetNode.isRealized();
 		//	assert sourceNode.isTrace() || targetNode.isTrace();	-- may be part of an extensive realized pattern
 		Region region = QVTscheduleUtil.getOwningRegion(edge);
-		Property property = QVTscheduleUtil.getProperty(edge);
+		Property property = QVTscheduleUtil.getReferredProperty(edge);
 		List<@NonNull Region> regions = corollaryProperty2regions.get(property);
 		if (regions == null) {
 			regions = new ArrayList<>();

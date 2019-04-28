@@ -448,19 +448,19 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (cluster != null)
 					msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Cluster.class, msgs);
-				return basicSetCluster((Cluster)otherEnd, msgs);
+			return basicSetCluster((Cluster)otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningRegion((Region)otherEnd, msgs);
+			return basicSetOwningRegion((Region)otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				if (sourceNode != null)
 					msgs = ((InternalEObject)sourceNode).eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 7, Node.class, msgs);
-				return basicSetSourceNode((Node)otherEnd, msgs);
+			return basicSetSourceNode((Node)otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				if (targetNode != null)
 					msgs = ((InternalEObject)targetNode).eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 3, Node.class, msgs);
-				return basicSetTargetNode((Node)otherEnd, msgs);
+			return basicSetTargetNode((Node)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -509,7 +509,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getCluster();
-				return basicGetCluster();
+			return basicGetCluster();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getEdgeRole();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
@@ -518,10 +518,10 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 				return getOwningRegion();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getSourceNode();
-				return basicGetSourceNode();
+			return basicGetSourceNode();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getTargetNode();
-				return basicGetTargetNode();
+			return basicGetTargetNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -536,22 +536,22 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setCluster((Cluster)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setEdgeRole((Role)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setName((String)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setOwningRegion((Region)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setSourceNode((Node)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setTargetNode((Node)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -566,22 +566,22 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setCluster((Cluster)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setEdgeRole(EDGE_ROLE_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setName(NAME_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setOwningRegion((Region)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setSourceNode((Node)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setTargetNode((Node)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -795,6 +795,11 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public final boolean isMatched() {
 		return QVTscheduleUtil.getSourceNode(this).isMatched() && QVTscheduleUtil.getTargetNode(this).isMatched();
+	}
+
+	@Override
+	public boolean isNavigable() {
+		return false;
 	}
 
 	@Override

@@ -247,4 +247,9 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			return "null";
 		}
 	}
+
+	@Override
+	public final boolean isNavigable() {
+		return true;
+	}
 } //NavigableEdgeImpl

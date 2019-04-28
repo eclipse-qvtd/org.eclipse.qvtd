@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -116,18 +117,24 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	}
 
 	private void addConsumptionOfEdge(@NonNull NavigableEdge edge) {
-		Property property = QVTscheduleUtil.getProperty(edge);
-		if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
-			Node targetNode = QVTscheduleUtil.getSourceNode(edge);
-			Node castTarget = targetNode;
-			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
-			for (@NonNull PropertyDatum propertyDatum : scheduleManager.getOclContainerPropertyDatums(classDatum)) {
+		if (edge.isNavigation()) {
+			NavigationEdge navigationEdge = (NavigationEdge)edge;
+			Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+			if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
+				Node targetNode = QVTscheduleUtil.getSourceNode(edge);
+				Node castTarget = targetNode;
+				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
+				for (@NonNull PropertyDatum propertyDatum : scheduleManager.getOclContainerPropertyDatums(classDatum)) {
+					addConsumptionOfPropertyDatum(propertyDatum);
+				}
+			}
+			else {
+				PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(navigationEdge);
 				addConsumptionOfPropertyDatum(propertyDatum);
 			}
 		}
 		else {
-			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-			addConsumptionOfPropertyDatum(propertyDatum);
+			// SharedEdge
 		}
 	}
 
@@ -190,27 +197,33 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 
 	private void addProductionOfEdge(@NonNull NavigableEdge edge) {
 		assert isNew(edge);
-		Property property = QVTscheduleUtil.getProperty(edge);
-		assert property != scheduleManager.getStandardLibraryHelper().getOclContainerProperty();		// oclContainer is not assignable
-		if (property.toString().contains("height") || property.toString().contains("ownsB")) {
-			property.toString();
-		}
-		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-		PartialRegionPropertyAnalysis<@NonNull PRA> producedTraceAnalysis = partialRegionsAnalysis.addProducer(propertyDatum, this);
-		List<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> producedPropertyAnalyses2 = producedPropertyAnalyses;
-		if (producedPropertyAnalyses2 == null) {
-			producedPropertyAnalyses = producedPropertyAnalyses2 = new ArrayList<>();
-		}
-		if (!producedPropertyAnalyses2.contains(producedTraceAnalysis)) {
-			producedPropertyAnalyses2.add(producedTraceAnalysis);
-		}
-		/*	PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
+		if (edge.isNavigation()) {
+			NavigationEdge navigationEdge = (NavigationEdge)edge;
+			Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+			assert property != scheduleManager.getStandardLibraryHelper().getOclContainerProperty();		// oclContainer is not assignable
+			if (property.toString().contains("height") || property.toString().contains("ownsB")) {
+				property.toString();
+			}
+			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(navigationEdge);
+			PartialRegionPropertyAnalysis<@NonNull PRA> producedTraceAnalysis = partialRegionsAnalysis.addProducer(propertyDatum, this);
+			List<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> producedPropertyAnalyses2 = producedPropertyAnalyses;
+			if (producedPropertyAnalyses2 == null) {
+				producedPropertyAnalyses = producedPropertyAnalyses2 = new ArrayList<>();
+			}
+			if (!producedPropertyAnalyses2.contains(producedTraceAnalysis)) {
+				producedPropertyAnalyses2.add(producedTraceAnalysis);
+			}
+			/*	PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
 		if (oppositePropertyDatum != null) {
 			PartialRegionPropertyAnalysis<@NonNull PRA> oppositeProducedTraceAnalysis = partialRegionsAnalysis.addProducer(oppositePropertyDatum, this);
 			if (!producedPropertyAnalyses2.contains(oppositeProducedTraceAnalysis)) {
 				producedPropertyAnalyses2.add(oppositeProducedTraceAnalysis);
 			}
 		} */
+		}
+		else {
+			// SharedEdge
+		}
 	}
 
 	private void addProductionOfMiddleEdge(@NonNull NavigableEdge edge) {

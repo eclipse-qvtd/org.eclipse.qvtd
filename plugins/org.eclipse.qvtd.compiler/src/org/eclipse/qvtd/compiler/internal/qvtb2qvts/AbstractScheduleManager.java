@@ -81,6 +81,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -846,9 +847,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge edge) {
+	public @NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge edge) {
 		Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-		Property property = QVTscheduleUtil.getProperty(edge);
+		Property property = QVTscheduleUtil.getReferredProperty(edge);
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(sourceNode);
 		return getPropertyDatum(classDatum, property);
 	}
