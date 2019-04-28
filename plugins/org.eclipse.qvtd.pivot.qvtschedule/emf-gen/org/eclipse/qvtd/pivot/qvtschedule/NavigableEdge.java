@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,8 +81,6 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 	 * @generated
 	 */
 	List<EdgeConnection> getOutgoingConnections();
-
-	Property getProperty();
 
 	@NonNull String getEdgeName();
 }

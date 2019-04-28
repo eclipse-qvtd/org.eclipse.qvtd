@@ -177,7 +177,7 @@ public class CheckedConditionAnalysis
 						checkedEdge = oppositeEdge;
 					}
 				}
-				Property checkedProperty = checkedEdge.getProperty();
+				Property checkedProperty = QVTscheduleUtil.getReferredProperty(checkedEdge);
 				Set<@NonNull Property> allCheckedProperties2 = computeCheckedProperties(null);
 				if (allCheckedProperties2.contains(checkedProperty)) {
 					if (checkedNavigableEdges == null) {

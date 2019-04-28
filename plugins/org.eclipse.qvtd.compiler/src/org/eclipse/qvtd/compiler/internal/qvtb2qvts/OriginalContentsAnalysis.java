@@ -348,15 +348,15 @@ public class OriginalContentsAnalysis
 	}
 
 	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
-		Property property = edge.getProperty();
-		if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
-			return null;
-		}
-		if (property == oclContainerProperty) {
-			return getCompositeNewEdges(edge);
-		}
-		Iterable<@NonNull NavigableEdge> realizedEdges = null;
 		if (edge instanceof NavigationEdge) {
+			Property property = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge);
+			if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
+				return null;
+			}
+			if (property == oclContainerProperty) {
+				return getCompositeNewEdges(edge);
+			}
+			Iterable<@NonNull NavigableEdge> realizedEdges = null;
 			PropertyDatum propertyDatum = getPropertyDatum((NavigationEdge) edge);
 			PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
 			//		if (propertyDatum == null) {
@@ -366,36 +366,40 @@ public class OriginalContentsAnalysis
 			//			return null;
 			//		}
 			realizedEdges = basePropertyDatum2newEdges.get(basePropertyDatum);
+			if (realizedEdges == null) {
+				return null;
+			}
+			List<@NonNull NavigableEdge> conformantRealizedEdges = null;
+			for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
+				boolean matches = false;
+				if (realizedEdge.isNavigation()) {
+					NavigationEdge realizedNavigationEdge = (NavigationEdge)realizedEdge;
+					Property realizedProperty = QVTscheduleUtil.getReferredProperty(realizedNavigationEdge);
+					if (realizedProperty != property) {
+						assert realizedProperty.getOpposite() == property;
+						matches = true;
+					}
+					else {
+						Node targetNode = realizedEdge.getEdgeTarget();
+						ClassDatum realizedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, requiredClassDatum)) {
+							matches = true;
+						}
+					}
+					if (matches) {
+						if (conformantRealizedEdges == null) {
+							conformantRealizedEdges = new ArrayList<>();
+						}
+						conformantRealizedEdges.add(realizedEdge);
+					}
+				}
+			}
+			return conformantRealizedEdges;
 		}
 		else {
 			// FIXME SharedEdge
-		}
-		if (realizedEdges == null) {
 			return null;
 		}
-		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
-		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-			boolean matches = false;
-			Property realizedProperty = realizedEdge.getProperty();
-			if (realizedProperty != property) {
-				assert realizedProperty.getOpposite() == property;
-				matches = true;
-			}
-			else {
-				Node targetNode = realizedEdge.getEdgeTarget();
-				ClassDatum realizedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-				if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, requiredClassDatum)) {
-					matches = true;
-				}
-			}
-			if (matches) {
-				if (conformantRealizedEdges == null) {
-					conformantRealizedEdges = new ArrayList<>();
-				}
-				conformantRealizedEdges.add(realizedEdge);
-			}
-		}
-		return conformantRealizedEdges;
 	}
 
 	/*	public @Nullable Iterable<@NonNull NavigableEdge> getNewInverseEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {

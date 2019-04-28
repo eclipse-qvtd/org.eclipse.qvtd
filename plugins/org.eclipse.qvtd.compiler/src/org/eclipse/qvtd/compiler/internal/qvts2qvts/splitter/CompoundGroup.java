@@ -25,7 +25,9 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -191,22 +193,28 @@ class CompoundGroup extends AbstractGroup
 	protected void createBoundaries(@NonNull SimpleGroup sourceGroup, @NonNull Iterable<@NonNull Node> nonOverlapNodes) {
 		for (@NonNull Node nonOverlapNode : nonOverlapNodes) {
 			for (@NonNull NavigableEdge edge : nonOverlapNode.getNavigableEdges()) {
-				assert edge.getEdgeSource() == nonOverlapNode;
-				if (!edge.isRealized() && edge.isMatched()) {
-					Property property = edge.getProperty();
-					Property opposite = property.getOpposite();
-					if ((opposite != null) && opposite.isIsMany()) {
-						Node targetNode = edge.getEdgeTarget();
-						if (!Iterables.contains(nonOverlapNodes, targetNode)) {
-							Iterable<@NonNull SimpleGroup> targetGroups = splitter.getReachableSimpleGroups(targetNode);
-							assert targetGroups != null;
-							for (@NonNull SimpleGroup targetGroup : targetGroups) {
-								if ((targetGroup != sourceGroup) && internalSimpleGroups.contains(targetGroup)) {
-									addBoundary(sourceGroup, edge, targetGroup);
+				if (edge.isNavigation()) {
+					NavigationEdge navigationEdge = (NavigationEdge)edge;
+					assert edge.getEdgeSource() == nonOverlapNode;
+					if (!edge.isRealized() && edge.isMatched()) {
+						Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+						Property opposite = property.getOpposite();
+						if ((opposite != null) && opposite.isIsMany()) {
+							Node targetNode = edge.getEdgeTarget();
+							if (!Iterables.contains(nonOverlapNodes, targetNode)) {
+								Iterable<@NonNull SimpleGroup> targetGroups = splitter.getReachableSimpleGroups(targetNode);
+								assert targetGroups != null;
+								for (@NonNull SimpleGroup targetGroup : targetGroups) {
+									if ((targetGroup != sourceGroup) && internalSimpleGroups.contains(targetGroup)) {
+										addBoundary(sourceGroup, edge, targetGroup);
+									}
 								}
 							}
 						}
 					}
+				}
+				else {
+					// SharedEdge
 				}
 			}
 		}

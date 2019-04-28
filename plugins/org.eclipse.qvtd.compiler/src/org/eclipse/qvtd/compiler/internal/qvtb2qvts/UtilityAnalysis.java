@@ -24,6 +24,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
@@ -214,13 +215,19 @@ public class UtilityAnalysis
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node sourceNode : moreStronglyMatchedNodes) {
 				for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
-					Node targetNode = edge.getEdgeTarget();
-					if (canBeStronglyMatched(targetNode)) {
-						if (targetNode.isNullLiteral() || edge.getProperty().isIsRequired()) {
-							if (stronglyMatchedNodes.add(targetNode)) {
-								moreMoreNodes.add(targetNode);
+					if (edge.isNavigation()) {
+						NavigationEdge navigationEdge = (NavigationEdge)edge;
+						Node targetNode = edge.getEdgeTarget();
+						if (canBeStronglyMatched(targetNode)) {
+							if (targetNode.isNullLiteral() || QVTscheduleUtil.getReferredProperty(navigationEdge).isIsRequired()) {
+								if (stronglyMatchedNodes.add(targetNode)) {
+									moreMoreNodes.add(targetNode);
+								}
 							}
 						}
+					}
+					else {
+						// SharedEdge
 					}
 				}
 			}
@@ -298,23 +305,24 @@ public class UtilityAnalysis
 					}
 				}
 				for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
+					assert !outgoingEdge.isCast();
 					Node targetNode = outgoingEdge.getEdgeTarget();
 					if (!canBeUnconditional(targetNode)) {}
 					else if (outgoingEdge.isComputation()) {}
 					else if (outgoingEdge.isDependency()) {}
-					else if (outgoingEdge.isCast() || outgoingEdge.isNavigation()) {
+					else if (outgoingEdge.isNavigation()) {
 						if (targetNode.isNullLiteral()) {
 							if (unconditionalNodes.add(targetNode)) {
 								moreMoreNodes.add(targetNode);
 							}
 						}
-						else if (node.isRequired() && ((NavigableEdge)outgoingEdge).getProperty().isIsRequired()) {
+						else if (node.isRequired() && QVTscheduleUtil.getReferredProperty((NavigationEdge)outgoingEdge).isIsRequired()) {
 							if (unconditionalNodes.add(targetNode)) {
 								moreMoreNodes.add(targetNode);
 							}
 						}
 					}
-					else {
+					else {		// SharedEdge
 						System.out.println("Unsupported outgoing edge in " + this + " : " + outgoingEdge);
 					}
 				}

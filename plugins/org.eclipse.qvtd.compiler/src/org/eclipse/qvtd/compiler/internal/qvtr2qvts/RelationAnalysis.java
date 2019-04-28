@@ -69,6 +69,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
@@ -442,11 +443,16 @@ public class RelationAnalysis extends RuleAnalysis
 		for (@NonNull Node node : region.getNewNodes()) {
 			boolean isContained = false;
 			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
-				Property property = edge.getProperty();
-				Property opposite = property.getOpposite();
-				if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
-					isContained = true;
-					break;
+				if (edge.isNavigation()) {
+					Property property = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge);
+					Property opposite = property.getOpposite();
+					if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
+						isContained = true;
+						break;
+					}
+				}
+				else {
+					// SharedEdge
 				}
 			}
 			if (isContained) {

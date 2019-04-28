@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
@@ -462,9 +463,14 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		if (toOneSubRegion.add(atNode)) {
 			for (@NonNull NavigableEdge edge : atNode.getNavigableEdges()) {
 				assert edge.getEdgeSource() == atNode;
-				Property source2target = edge.getProperty();
-				if (!source2target.isIsMany() && !source2target.isIsImplicit()) {
-					computeToOneSubRegion(toOneSubRegion, edge.getEdgeTarget());
+				if (edge.isNavigation()) {
+					Property source2target = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge);
+					if (!source2target.isIsMany() && !source2target.isIsImplicit()) {
+						computeToOneSubRegion(toOneSubRegion, edge.getEdgeTarget());
+					}
+				}
+				else {
+					// SharedEdge
 				}
 			}
 		}

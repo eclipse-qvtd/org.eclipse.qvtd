@@ -1475,7 +1475,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			Node sourceNode = edge.getEdgeSource();
 			Node targetNode = edge.getEdgeTarget();
 			Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
-			boolean isNotify = connectionManager.isHazardousWrite(s, edge);
+			boolean isNotify = connectionManager.isHazardousWrite(s, navigationEdge);
 			Property setProperty;
 			VariableDeclaration slotVariable;
 			OCLExpression targetVariableExp;
@@ -1664,7 +1664,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		if (s != null) {
 			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
 		}
-		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> classAssignments = null;
+		Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments = null;
 		List<@NonNull NavigableEdge> navigableEdges = new ArrayList<>();
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
 			if (edge.isNavigation()) {
@@ -1691,7 +1691,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						valueExp = expressionCreator2.getExpression(targetNode);		// FIXME debugging
 					}
 					if (valueExp != null) {
-						boolean isNotify = connectionManager.isHazardousWrite(s, edge);
+						boolean isNotify = connectionManager.isHazardousWrite(s, navigationEdge);
 						SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, edge.isPartial(), isNotify);
 						//					addObservedProperties(setStatement);
 						mapping.getOwnedStatements().add(setStatement);
@@ -1704,12 +1704,12 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					if (classAssignments == null) {
 						classAssignments = new HashMap<>();
 					}
-					List<@NonNull NavigableEdge> edges = classAssignments.get(sourceNode);
+					List<@NonNull NavigationEdge> edges = classAssignments.get(sourceNode);
 					if (edges == null) {
 						edges = new ArrayList<>();
 						classAssignments.put(sourceNode, edges);
 					}
-					edges.add(edge);
+					edges.add(navigationEdge);
 				}
 			}
 			else {
@@ -1718,8 +1718,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 		if (classAssignments != null) {
 			pruneClassAssignments(classAssignments);
-			Set<@NonNull NavigableEdge> classAssignmentEdges = new HashSet<>();
-			for (@NonNull List<@NonNull NavigableEdge> values : classAssignments.values()) {
+			Set<@NonNull NavigationEdge> classAssignmentEdges = new HashSet<>();
+			for (@NonNull List<@NonNull NavigationEdge> values : classAssignments.values()) {
 				classAssignmentEdges.addAll(values);
 			}
 			for (@NonNull NavigableEdge edge : sortedEdges) {
@@ -1924,20 +1924,20 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	/**
 	 * Filter classAssignments to retain only one of each opposite-property assignment pair.
 	 */
-	private void pruneClassAssignments(@NonNull Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> classAssignments) {
+	private void pruneClassAssignments(@NonNull Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments) {
 		for (@NonNull Node sourceNode : new ArrayList<>(classAssignments.keySet())) {
-			List<@NonNull NavigableEdge> forwardEdges = classAssignments.get(sourceNode);
+			List<@NonNull NavigationEdge> forwardEdges = classAssignments.get(sourceNode);
 			assert forwardEdges != null;
 			for (int iForward = forwardEdges.size()-1; iForward >= 0; iForward--) {
-				NavigableEdge forwardEdge = forwardEdges.get(iForward);
+				NavigationEdge forwardEdge = forwardEdges.get(iForward);
 				Node targetNode = forwardEdge.getEdgeTarget();
-				List<@NonNull NavigableEdge> reverseEdges = classAssignments.get(targetNode);
+				List<@NonNull NavigationEdge> reverseEdges = classAssignments.get(targetNode);
 				if (reverseEdges != null) {
 					for (int iReverse = reverseEdges.size()-1; iReverse >= 0; iReverse--) {
-						NavigableEdge reverseEdge = reverseEdges.get(iReverse);
+						NavigationEdge reverseEdge = reverseEdges.get(iReverse);
 						if (sourceNode == reverseEdge.getEdgeTarget()) {
-							Property forwardProperty = forwardEdge.getProperty();
-							Property reverseProperty = reverseEdge.getProperty();
+							Property forwardProperty = QVTscheduleUtil.getReferredProperty(forwardEdge);
+							Property reverseProperty = QVTscheduleUtil.getReferredProperty(reverseEdge);
 							if (forwardProperty.getOpposite() == reverseProperty) {
 								if (forwardProperty.isIsImplicit()) {
 									forwardEdges.remove(forwardEdge);

@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -70,14 +71,16 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 		Property parent2childProperty = null;
 		ClassDatum containingClassDatum = null;
 		for (@NonNull NavigableEdge edge : consumerNode.getNavigableEdges()) {
-			Property property = edge.getProperty().getOpposite();
-			if ((property != null) && property.isIsComposite() && !property.isIsRequired()) {
-				containerEdge = edge;
-				parent2childProperty = property;
-				if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
-					containingClassDatum = QVTscheduleUtil.getClassDatum(edge.getEdgeSource());
+			if (edge.isNavigation()) {
+				Property property = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge).getOpposite();
+				if ((property != null) && property.isIsComposite() && !property.isIsRequired()) {
+					containerEdge = edge;
+					parent2childProperty = property;
+					if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
+						containingClassDatum = QVTscheduleUtil.getClassDatum(edge.getEdgeSource());
+					}
+					break;
 				}
-				break;
 			}
 		}
 		CompleteEnvironment completeEnvironment = scheduleManager.getEnvironmentFactory().getCompleteEnvironment();

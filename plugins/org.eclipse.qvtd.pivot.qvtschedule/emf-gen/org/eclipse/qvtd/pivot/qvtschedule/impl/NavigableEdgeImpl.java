@@ -23,8 +23,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -224,28 +222,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 				return outgoingConnections != null && !outgoingConnections.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	@Override
-	public @NonNull String toString() {
-		return super.toString();
-	}
-
-	@Override
-	public @NonNull String getDisplayName() {
-		Property source2targetProperty2 = getProperty();
-		if (source2targetProperty2 != null) {
-			org.eclipse.ocl.pivot.Class owningClass = source2targetProperty2.getOwningClass();
-			if (owningClass != null) {
-				return owningClass.getName() + "::" + source2targetProperty2.getName();
-			}
-			else {
-				return "" + source2targetProperty2.getName();
-			}
-		}
-		else {
-			return "null";
-		}
 	}
 
 	@Override

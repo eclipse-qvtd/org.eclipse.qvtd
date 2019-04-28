@@ -271,9 +271,4 @@ public class SharedEdgeImpl extends NavigableEdgeImpl implements SharedEdge {
 			return "~" + target2sourceProperty2.getName();
 		}
 	}
-
-	@Override
-	public Property getProperty() {
-		throw new UnsupportedOperationException();
-	}
 } //SharedEdgeImpl

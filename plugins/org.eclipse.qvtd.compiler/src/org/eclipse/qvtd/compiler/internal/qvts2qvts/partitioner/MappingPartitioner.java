@@ -37,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -231,7 +232,7 @@ public class MappingPartitioner implements Nameable
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
-				if (!(edge instanceof NavigableEdge) || (transformationAnalysis.getCorollaryOf((NavigableEdge)edge) == null)) {// && !isDead(edge)) {
+				if (!(edge instanceof NavigationEdge) || (transformationAnalysis.getCorollaryOf((NavigationEdge)edge) == null)) {// && !isDead(edge)) {
 					addProblem(CompilerUtil.createRegionWarning(region, "Missing " + edge));
 				}
 			}
@@ -511,7 +512,7 @@ public class MappingPartitioner implements Nameable
 		return alreadyRealizedNodes.contains(node);
 	}
 
-	public @Nullable List<@NonNull Region> getCorollaryOf(@NonNull NavigableEdge edge) {
+	public @Nullable List<@NonNull Region> getCorollaryOf(@NonNull NavigationEdge edge) {
 		return transformationAnalysis.getCorollaryOf(edge);
 	}
 
