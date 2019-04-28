@@ -46,9 +46,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getIncomingConnection <em>Incoming Connection</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getOppositeEdge <em>Opposite Edge</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getOutgoingConnections <em>Outgoing Connections</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#isSecondary <em>Secondary</em>}</li>
  * </ul>
  *
  * @generated
@@ -61,7 +59,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NAVIGABLE_EDGE_FEATURE_COUNT = EdgeImpl.EDGE_FEATURE_COUNT + 4;
+	public static final int NAVIGABLE_EDGE_FEATURE_COUNT = EdgeImpl.EDGE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Navigable Edge</em>' class.
@@ -83,16 +81,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	protected EdgeConnection incomingConnection;
 
 	/**
-	 * The cached value of the '{@link #getOppositeEdge() <em>Opposite Edge</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOppositeEdge()
-	 * @generated
-	 * @ordered
-	 */
-	protected NavigableEdge oppositeEdge;
-
-	/**
 	 * The cached value of the '{@link #getOutgoingConnections() <em>Outgoing Connections</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,26 +89,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 * @ordered
 	 */
 	protected EList<EdgeConnection> outgoingConnections;
-
-	/**
-	 * The default value of the '{@link #isSecondary() <em>Secondary</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSecondary()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean SECONDARY_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isSecondary() <em>Secondary</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSecondary()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean secondary = SECONDARY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,72 +157,9 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public List<EdgeConnection> getOutgoingConnections() {
 		if (outgoingConnections == null) {
-			outgoingConnections = new EObjectResolvingEList<EdgeConnection>(EdgeConnection.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
+			outgoingConnections = new EObjectResolvingEList<EdgeConnection>(EdgeConnection.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
 		}
 		return outgoingConnections;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isSecondary() {
-		return secondary;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setSecondary(boolean newSecondary) {
-		boolean oldSecondary = secondary;
-		secondary = newSecondary;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 9, oldSecondary, secondary));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NavigableEdge getOppositeEdge() {
-		if (oppositeEdge != null && oppositeEdge.eIsProxy()) {
-			InternalEObject oldOppositeEdge = (InternalEObject)oppositeEdge;
-			oppositeEdge = (NavigableEdge)eResolveProxy(oldOppositeEdge);
-			if (oppositeEdge != oldOppositeEdge) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldOppositeEdge, oppositeEdge));
-			}
-		}
-		return oppositeEdge;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NavigableEdge basicGetOppositeEdge() {
-		return oppositeEdge;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOppositeEdge(NavigableEdge newOppositeEdge) {
-		NavigableEdge oldOppositeEdge = oppositeEdge;
-		oppositeEdge = newOppositeEdge;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldOppositeEdge, oppositeEdge));
 	}
 
 	/**
@@ -267,14 +172,9 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getIncomingConnection();
-				return basicGetIncomingConnection();
+			return basicGetIncomingConnection();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
-				if (resolve) return getOppositeEdge();
-				return basicGetOppositeEdge();
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getOutgoingConnections();
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				return isSecondary();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -290,17 +190,11 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setIncomingConnection((EdgeConnection)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
-				setOppositeEdge((NavigableEdge)newValue);
-				return;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getOutgoingConnections().clear();
-				getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
-				return;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				setSecondary((Boolean)newValue);
-				return;
+			getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -315,16 +209,10 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setIncomingConnection((EdgeConnection)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
-				setOppositeEdge((NavigableEdge)null);
-				return;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getOutgoingConnections().clear();
-				return;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				setSecondary(SECONDARY_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -340,11 +228,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				return incomingConnection != null;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
-				return oppositeEdge != null;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return outgoingConnections != null && !outgoingConnections.isEmpty();
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				return secondary != SECONDARY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -352,51 +236,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public @NonNull String toString() {
 		return super.toString();
-	}
-
-	@Override
-	public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
-		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-		toGraphHelper.setColor(this);
-		@Nullable
-		NavigableEdge oppositeEdge2 = oppositeEdge;
-		if (oppositeEdge2 != null) {
-			String oppositeLabel = oppositeEdge2.getLabel();
-			ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(this));
-			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(sourceClassDatum)) {
-				if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(completeClass.getName())) {
-					s.setTaillabel(oppositeLabel);
-					break;
-				}
-			}
-		}
-		String label = getLabel();
-		if (label != null) {
-			s.setHeadlabel(label);
-		}
-		String style = getStyle();
-		if (style != null) {
-			s.setStyle(style);
-		}
-		if (!isSecondary() && (oppositeEdge2 != null)) {
-			s.setDir("both");
-			s.setArrowtail("vee");
-		}
-		s.setArrowhead("normal");
-		s.setPenwidth(getPenwidth());
-		s.appendAttributedEdge(sourceName, this, targetName);
-	}
-
-	@Override
-	public void destroy() {
-		NavigableEdge oppositeEdge = this.oppositeEdge;
-		if (oppositeEdge != null) {
-			this.oppositeEdge = null;
-			oppositeEdge.destroy();
-		}
-		else {
-			super.destroy();
-		}
 	}
 
 	@Override
@@ -413,45 +252,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		}
 		else {
 			return "null";
-		}
-	}
-
-	@Override
-	public @NonNull NavigableEdge getForwardEdge() {
-		if (secondary) {
-			assert oppositeEdge != null;
-			return oppositeEdge;
-		}
-		else {
-			return this;
-		}
-	}
-
-	@Override
-	public @Nullable String getLabel() {
-		Property source2targetProperty2 = getProperty();
-		if (source2targetProperty2 == null) {
-			return "null";
-		}
-		else if (source2targetProperty2.eContainer() != null) {
-			return source2targetProperty2.getName() + "\\n" + PivotUtil.getMultiplicity(source2targetProperty2);
-		}
-		else {
-			return source2targetProperty2.getName();
-		}
-	}
-
-	protected void initializeOpposite(@NonNull NavigableEdge oppositeEdge) {
-		this.oppositeEdge = oppositeEdge;
-		((NavigableEdgeImpl)oppositeEdge).oppositeEdge = this;
-		// This differs from QVTscheduleUtil.getPrimaryProperty(property) which returns a context-independent forward/reverse choice as a baseProperty.
-		// The secondary here favours the calling usage as primary unlss it must be reversed.
-		// This makes a difference for the StructuredCladsses JUnit test that gets an NPE when assigning a not-null/null containment relationship backwards.
-		if (this.getProperty().isIsImplicit()) {
-			this.secondary = true;
-		}
-		else {
-			((NavigableEdgeImpl)oppositeEdge).secondary = true;
 		}
 	}
 } //NavigableEdgeImpl

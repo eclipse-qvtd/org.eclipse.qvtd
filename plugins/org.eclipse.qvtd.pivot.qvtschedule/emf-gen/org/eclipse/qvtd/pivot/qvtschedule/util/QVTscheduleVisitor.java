@@ -91,6 +91,7 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.ut
 	R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object);
 	R visitShadowNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ShadowNode object);
 	R visitShadowPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ShadowPartEdge object);
+	R visitSharedEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SharedEdge object);
 	R visitStringLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StringLiteralNode object);
 	R visitSuccessEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessEdge object);
 	R visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object);

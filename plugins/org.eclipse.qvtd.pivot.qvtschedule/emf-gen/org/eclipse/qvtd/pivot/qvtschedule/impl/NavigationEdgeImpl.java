@@ -30,6 +30,8 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -48,8 +50,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#getOppositeEdge <em>Opposite Edge</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#isPartial <em>Partial</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#isSecondary <em>Secondary</em>}</li>
  * </ul>
  *
  * @generated
@@ -62,7 +66,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NAVIGATION_EDGE_FEATURE_COUNT = NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 2;
+	public static final int NAVIGATION_EDGE_FEATURE_COUNT = NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 4;
 	/**
 	 * The number of operations of the '<em>Navigation Edge</em>' class.
 	 * <!-- begin-user-doc -->
@@ -71,6 +75,15 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 * @ordered
 	 */
 	public static final int NAVIGATION_EDGE_OPERATION_COUNT = NavigableEdgeImpl.NAVIGABLE_EDGE_OPERATION_COUNT + 0;
+	/**
+	 * The cached value of the '{@link #getOppositeEdge() <em>Opposite Edge</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOppositeEdge()
+	 * @generated
+	 * @ordered
+	 */
+	protected NavigationEdge oppositeEdge;
 	/**
 	 * The default value of the '{@link #isPartial() <em>Partial</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -100,6 +113,24 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 */
 	protected Property referredProperty;
 	/**
+	 * The default value of the '{@link #isSecondary() <em>Secondary</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSecondary()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SECONDARY_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isSecondary() <em>Secondary</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSecondary()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean secondary = SECONDARY_EDEFAULT;
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -124,6 +155,46 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 * @generated
 	 */
 	@Override
+	public NavigationEdge getOppositeEdge() {
+		if (oppositeEdge != null && oppositeEdge.eIsProxy()) {
+			InternalEObject oldOppositeEdge = (InternalEObject)oppositeEdge;
+			oppositeEdge = (NavigationEdge)eResolveProxy(oldOppositeEdge);
+			if (oppositeEdge != oldOppositeEdge) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 8, oldOppositeEdge, oppositeEdge));
+			}
+		}
+		return oppositeEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NavigationEdge basicGetOppositeEdge() {
+		return oppositeEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOppositeEdge(NavigationEdge newOppositeEdge) {
+		NavigationEdge oldOppositeEdge = oppositeEdge;
+		oppositeEdge = newOppositeEdge;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 8, oldOppositeEdge, oppositeEdge));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isPartial() {
 		return partial;
 	}
@@ -137,7 +208,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		boolean oldPartial = partial;
 		partial = newPartial;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldPartial, partial));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 9, oldPartial, partial));
 	}
 	@Override
 	public void setPartial(boolean newPartial) {
@@ -157,7 +228,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			referredProperty = (Property)eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 11, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldReferredProperty, referredProperty));
 			}
 		}
 		return referredProperty;
@@ -182,7 +253,30 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 11, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldReferredProperty, referredProperty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSecondary() {
+		return secondary;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSecondary(boolean newSecondary) {
+		boolean oldSecondary = secondary;
+		secondary = newSecondary;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 11, oldSecondary, secondary));
 	}
 
 	/**
@@ -193,11 +287,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
+				if (resolve) return getOppositeEdge();
+			return basicGetOppositeEdge();
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return isPartial();
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getReferredProperty();
-				return basicGetReferredProperty();
+			return basicGetReferredProperty();
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
+				return isSecondary();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,12 +309,18 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
+				setOppositeEdge((NavigationEdge)newValue);
+			return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setPartial((Boolean)newValue);
-				return;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
+			return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredProperty((Property)newValue);
-				return;
+			return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
+				setSecondary((Boolean)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -228,12 +333,18 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
+				setOppositeEdge((NavigationEdge)null);
+			return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setPartial(PARTIAL_EDEFAULT);
-				return;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
+			return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredProperty((Property)null);
-				return;
+			return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
+				setSecondary(SECONDARY_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -246,10 +357,14 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
+				return oppositeEdge != null;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return partial != PARTIAL_EDEFAULT;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return referredProperty != null;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
+				return secondary != SECONDARY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -267,6 +382,39 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitNavigationEdge(this);
+	}
+
+	@Override
+	public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+		toGraphHelper.setColor(this);
+		@Nullable
+		NavigableEdge oppositeEdge2 = oppositeEdge;
+		if (oppositeEdge2 != null) {
+			String oppositeLabel = oppositeEdge2.getLabel();
+			ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(this));
+			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(sourceClassDatum)) {
+				if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(completeClass.getName())) {
+					s.setTaillabel(oppositeLabel);
+					break;
+				}
+			}
+		}
+		String label = getLabel();
+		if (label != null) {
+			s.setHeadlabel(label);
+		}
+		String style = getStyle();
+		if (style != null) {
+			s.setStyle(style);
+		}
+		if (!isSecondary() && (oppositeEdge2 != null)) {
+			s.setDir("both");
+			s.setArrowtail("vee");
+		}
+		s.setArrowhead("normal");
+		s.setPenwidth(getPenwidth());
+		s.appendAttributedEdge(sourceName, this, targetName);
 	}
 
 	private void checkIsPartial(boolean isPartial) {
@@ -314,18 +462,64 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	}
 
 	@Override
+	public void destroy() {
+		NavigableEdge oppositeEdge = this.oppositeEdge;
+		if (oppositeEdge != null) {
+			this.oppositeEdge = null;
+			oppositeEdge.destroy();
+		}
+		else {
+			super.destroy();
+		}
+	}
+
+	@Override
+	public @NonNull NavigableEdge getForwardEdge() {
+		if (secondary) {
+			assert oppositeEdge != null;
+			return oppositeEdge;
+		}
+		else {
+			return this;
+		}
+	}
+
+	@Override
 	public @Nullable String getLabel() {
 		if (partial) {
 			return "«includes»\\n" + super.getLabel();
 		}
 		else {
-			return super.getLabel();
+			Property source2targetProperty2 = getProperty();
+			if (source2targetProperty2 == null) {
+				return "null";
+			}
+			else if (source2targetProperty2.eContainer() != null) {
+				return source2targetProperty2.getName() + "\\n" + PivotUtil.getMultiplicity(source2targetProperty2);
+			}
+			else {
+				return source2targetProperty2.getName();
+			}
 		}
 	}
 
 	@Override
 	public Property getProperty() {
 		return getReferredProperty();
+	}
+
+	protected void initializeOpposite(@NonNull NavigationEdge oppositeEdge) {
+		this.oppositeEdge = oppositeEdge;
+		((NavigationEdgeImpl)oppositeEdge).oppositeEdge = this;
+		// This differs from QVTscheduleUtil.getPrimaryProperty(property) which returns a context-independent forward/reverse choice as a baseProperty.
+		// The secondary here favours the calling usage as primary unlss it must be reversed.
+		// This makes a difference for the StructuredCladsses JUnit test that gets an NPE when assigning a not-null/null containment relationship backwards.
+		if (this.getProperty().isIsImplicit()) {
+			this.secondary = true;
+		}
+		else {
+			((NavigationEdgeImpl)oppositeEdge).secondary = true;
+		}
 	}
 
 	@Override

@@ -681,8 +681,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(propertyDatum.getOpposite());
 	}
 
-	public static @NonNull NavigableEdge getOppositeEdge(@NonNull NavigableEdge navigableEdge) {
-		return ClassUtil.nonNullState(navigableEdge.getOppositeEdge());
+	public static @NonNull NavigationEdge getOppositeEdge(@NonNull NavigationEdge navigationEdge) {
+		return ClassUtil.nonNullState(navigationEdge.getOppositeEdge());
 	}
 
 	public static @NonNull Iterable<@NonNull EdgeConnection> getOutgoingConnections(@NonNull NavigableEdge navigableEdge) {
@@ -757,8 +757,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(partition.getPasses());
 	}
 
-	public static @NonNull NavigableEdge getPrimaryEdge(@NonNull NavigableEdge navigableEdge) {
-		return navigableEdge.isSecondary() ? getOppositeEdge(navigableEdge) : navigableEdge;
+	public static @NonNull NavigationEdge getPrimaryEdge(@NonNull NavigationEdge navigationEdge) {
+		return navigationEdge.isSecondary() ? getOppositeEdge(navigationEdge) : navigationEdge;
 	}
 
 	/**

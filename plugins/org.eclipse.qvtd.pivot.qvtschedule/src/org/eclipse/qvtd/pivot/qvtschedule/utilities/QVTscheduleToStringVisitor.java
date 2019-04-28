@@ -83,6 +83,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
@@ -463,6 +464,11 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitShadowPartEdge(@NonNull ShadowPartEdge object) {
+		return visiting(object);
+	}
+
+	@Override
+	public String visitSharedEdge(@NonNull SharedEdge object) {
 		return visiting(object);
 	}
 

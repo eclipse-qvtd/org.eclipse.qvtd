@@ -373,6 +373,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitSharedEdge(@NonNull SharedEdge object) {
+		return visitNavigableEdge(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitStringLiteralNode(@NonNull StringLiteralNode object) {
 		return visitOperationNode(object);
 	}

@@ -107,6 +107,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.IfNode;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
@@ -160,9 +161,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		private void addEdge(@NonNull Edge edge) {
 			assert partition.getRole(edge) != null;
 			if (scheduledEdges.add(edge)) {
-				Edge oppositeEdge = null;
-				if (edge instanceof NavigableEdge) {
-					oppositeEdge = ((NavigableEdge)edge).getOppositeEdge();
+				NavigationEdge oppositeEdge = null;
+				if (edge instanceof NavigationEdge) {
+					oppositeEdge = ((NavigationEdge)edge).getOppositeEdge();
 					if (oppositeEdge != null) {
 						boolean wasAdded = scheduledEdges.add(oppositeEdge);
 						assert wasAdded;

@@ -21,6 +21,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -35,8 +36,8 @@ public abstract class AbstractPartitionFactory<R extends Region> extends RegionH
 	protected void addEdge(@NonNull BasicPartition partition, @NonNull Edge edge, @NonNull Role newEdgeRole) {
 		assert edge.getOwningRegion() == region;
 		addEdge2(partition, edge, newEdgeRole);
-		if (edge instanceof NavigableEdge) {
-			NavigableEdge oppositeEdge = ((NavigableEdge)edge).getOppositeEdge();
+		if (edge instanceof NavigationEdge) {
+			NavigationEdge oppositeEdge = ((NavigationEdge)edge).getOppositeEdge();
 			if (oppositeEdge != null) {
 				addEdge2(partition, oppositeEdge, newEdgeRole);
 			}

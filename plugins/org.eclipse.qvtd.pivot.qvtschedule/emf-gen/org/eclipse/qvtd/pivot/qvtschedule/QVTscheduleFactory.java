@@ -494,6 +494,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ShadowPartEdge createShadowPartEdge();
 
 	/**
+	 * Returns a new object of class '<em>Shared Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Shared Edge</em>'.
+	 * @generated
+	 */
+	@NonNull SharedEdge createSharedEdge();
+
+	/**
 	 * Returns a new object of class '<em>String Literal Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
