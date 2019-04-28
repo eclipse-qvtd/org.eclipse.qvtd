@@ -360,24 +360,21 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NavigableEdge" abstract="true" eSuperTypes="#//Edge #//ConnectionEnd">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An edge is directed and abstracts any Node interconnection within a Region."/>
+      <details key="documentation" value="A NavigableEdge is directed and abstracts any type-based relationship as a Node to Node interconnection within a Region."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingConnection" eType="#//EdgeConnection"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oppositeEdge" eType="#//NavigableEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingConnections" upperBound="-1"
+        eType="#//EdgeConnection"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationEdge" eSuperTypes="#//NavigableEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A NavigationEdge supports the directed Property-based relationship between Nodes within a Region."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oppositeEdge" eType="#//NavigationEdge">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingConnections" upperBound="-1"
-        eType="#//EdgeConnection"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="secondary" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True if this edge is the auto-created second half of a bidirectional pair."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NavigationEdge" eSuperTypes="#//NavigableEdge">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="partial" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -388,6 +385,12 @@
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The property to navigate from source to target."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="secondary" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if this edge is the auto-created second half of a bidirectional pair."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -643,6 +646,17 @@
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ShadowPart">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Shadow part for a shadow instamnce construction."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SharedEdge" eSuperTypes="#//NavigableEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A SharedEdge supports the directed shared aggregation from a DataType node to its aggregator node within a Region."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredOppositeProperty"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The property to navigate from source to target."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
