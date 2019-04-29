@@ -20,8 +20,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -121,14 +121,17 @@ public class RuleHeadAnalysis extends HeadAnalysis
 				sources1 = Sets.newHashSet(sourceNode);
 				targetFromSources.put(sourceNode, sources1);
 			}
-			for (@NonNull NavigationEdge navigationEdge : sourceNode.getRealizedNavigationEdges()) {
-				Node targetNode = navigationEdge.getEdgeTarget();
-				Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
-				if (sources2 == null) {
-					sources2 = Sets.newHashSet(targetNode);
-					targetFromSources.put(targetNode, sources2);
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+				if (edge.isRealized() && edge.isNavigation()) {
+					NavigationEdge navigationEdge = (NavigationEdge)edge;
+					Node targetNode = navigationEdge.getEdgeTarget();
+					Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
+					if (sources2 == null) {
+						sources2 = Sets.newHashSet(targetNode);
+						targetFromSources.put(targetNode, sources2);
+					}
+					sources2.add(sourceNode);
 				}
-				sources2.add(sourceNode);
 			}
 		}
 		return targetFromSources;
@@ -147,9 +150,9 @@ public class RuleHeadAnalysis extends HeadAnalysis
 						sources1 = Sets.newHashSet(sourceNode);
 						targetFromSources.put(sourceNode, sources1);
 					}
-					for (@NonNull NavigableEdge navigableEdge : sourceNode.getNavigableEdges()) {
-						if (navigableEdge instanceof NavigationEdge) {
-							NavigationEdge navigationEdge = (NavigationEdge) navigableEdge;
+					for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+						if (edge instanceof NavigationEdge) {
+							NavigationEdge navigationEdge = (NavigationEdge) edge;
 							if (!navigationEdge.isRealized()) {
 								Property source2targetProperty = QVTscheduleUtil.getReferredProperty(navigationEdge);
 								if (!source2targetProperty.isIsMany() /*&& source2targetProperty.isIsRequired()*/) {

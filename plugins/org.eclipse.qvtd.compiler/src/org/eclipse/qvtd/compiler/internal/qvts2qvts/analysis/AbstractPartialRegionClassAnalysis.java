@@ -27,6 +27,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -96,9 +97,12 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 			Map<@NonNull Property, @NonNull NavigableEdge> property2edge = new HashMap<>();
 			partitioner2property2edge.put(producer, property2edge);
 			for (@NonNull Node traceNode : producer.getTraceNodes()) {	// FIXME Bug 488647 discriminate output classes too
-				for (@NonNull NavigationEdge edge : traceNode.getRealizedNavigationEdges()) {
-					if (!edge.getEdgeTarget().isRealized()) {
-						property2edge.put(QVTscheduleUtil.getReferredProperty(edge), edge);
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
+					if (edge.isRealized() && edge.isNavigation()) {
+						NavigationEdge navigationEdge = (NavigationEdge)edge;
+						if (!navigationEdge.getEdgeTarget().isRealized()) {
+							property2edge.put(QVTscheduleUtil.getReferredProperty(navigationEdge), navigationEdge);
+						}
 					}
 				}
 			}

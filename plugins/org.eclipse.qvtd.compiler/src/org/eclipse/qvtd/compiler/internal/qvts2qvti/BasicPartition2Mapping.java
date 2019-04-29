@@ -638,8 +638,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			Parameter conditionParameter = qvtbaseLibraryHelper.getIfConditionParameter();
 			Parameter thenParameter = qvtbaseLibraryHelper.getIfThenParameter();
 			Parameter elseParameter = qvtbaseLibraryHelper.getIfElseParameter();
-			for (@NonNull Edge edge : node.getArgumentEdges()) {
-				if (edge instanceof OperationParameterEdge) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+				if (edge.isExpression() && (edge instanceof OperationParameterEdge)) {
 					OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
 					Node expNode = operationParameterEdge.getEdgeSource();
 					OCLExpression nestedExp = getExpression(expNode);
@@ -686,8 +686,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			for (int i = 0; i < parameters.size(); i++) {
 				argExps.add(null);
 			}
-			for (@NonNull Edge edge : node.getArgumentEdges()) {
-				if (edge instanceof OperationSelfEdge) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+				if (edge.isExpression() && (edge instanceof OperationSelfEdge)) {
 					OperationSelfEdge operationSelfEdge = (OperationSelfEdge)edge;
 					Node expNode = operationSelfEdge.getEdgeSource();
 					OCLExpression nestedExp = getExpression(expNode);
@@ -771,16 +771,18 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						throw new UnsupportedOperationException();
 					}
 				}
-				for (@NonNull Edge edge : node.getArgumentEdges()) {
-					Node expNode = edge.getEdgeSource();
-					OCLExpression clonedElement = create(expNode);
-					if (clonedElement instanceof VariableExp) {
-						VariableDeclaration referredVariable = ((VariableExp)clonedElement).getReferredVariable();
-						if (referredVariable instanceof Variable) {
-							context.addVariable(node, referredVariable);
+				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+					if (edge.isExpression()) {
+						Node expNode = edge.getEdgeSource();
+						OCLExpression clonedElement = create(expNode);
+						if (clonedElement instanceof VariableExp) {
+							VariableDeclaration referredVariable = ((VariableExp)clonedElement).getReferredVariable();
+							if (referredVariable instanceof Variable) {
+								context.addVariable(node, referredVariable);
+							}
 						}
+						return clonedElement;
 					}
-					return clonedElement;
 				}
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 					assert !edge.isCast();
@@ -1524,7 +1526,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		Property successProperty = null;
 		Property globalSuccessProperty = scheduleManager.basicGetGlobalSuccessProperty(guardNode);
 		if (globalSuccessProperty != null) {
-			NavigableEdge globalSuccessEdge = guardNode.getNavigableEdge(globalSuccessProperty);
+			NavigableEdge globalSuccessEdge = guardNode.getOutgoingNavigableEdge(globalSuccessProperty);
 			if (globalSuccessEdge != null) {
 				Role globalSuccessEdgeRole = partition.getRole(globalSuccessEdge);
 				if (globalSuccessEdgeRole != null) {
@@ -1539,7 +1541,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 		Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(guardNode);
 		if (localSuccessProperty != null) {
-			NavigableEdge localSuccessEdge = guardNode.getNavigableEdge(localSuccessProperty);
+			NavigableEdge localSuccessEdge = guardNode.getOutgoingNavigableEdge(localSuccessProperty);
 			if (localSuccessEdge != null) {
 				Role localSuccessEdgeRole = partition.getRole(localSuccessEdge);
 				if (localSuccessEdgeRole != null) {

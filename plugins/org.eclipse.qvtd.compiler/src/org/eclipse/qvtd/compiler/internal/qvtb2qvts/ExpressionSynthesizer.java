@@ -92,8 +92,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-import com.google.common.collect.Iterables;
-
 public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisitor<@Nullable Node, @NonNull RuleAnalysis>
 {
 	//	private static final @NonNull String @NonNull [] ifArgNames = new @NonNull String[]{QVTscheduleConstants.IF_CONDITION_NAME, QVTscheduleConstants.IF_THEN_NAME, QVTscheduleConstants.IF_ELSE_NAME};
@@ -295,7 +293,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	}
 
 	protected @NonNull NavigableEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
-		NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
+		NavigableEdge navigationEdge = sourceNode.getOutgoingNavigableEdge(source2targetProperty);
 		assert navigationEdge == null;
 		boolean isPartial = navigationAssignment != null ? navigationAssignment.isIsPartial() : scheduleManager.computeIsPartial(targetNode, source2targetProperty);
 		if ((navigationAssignment != null) || context.isPropertyAssignment(sourceNode, source2targetProperty)) {
@@ -451,7 +449,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		Property referredProperty = QVTbaseUtil.getReferredProperty(navigationCallExp);
 		if (sourceNode.isClass()) {
 			if (!referredProperty.isIsMany()) {
-				NavigableEdge navigationEdge = sourceNode.getNavigableEdge(referredProperty);
+				NavigableEdge navigationEdge = sourceNode.getOutgoingNavigableEdge(referredProperty);
 				if (navigationEdge != null) {
 					return navigationEdge.getEdgeTarget();
 				}
@@ -616,27 +614,35 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	protected @Nullable Node findOperationNode(@NonNull Operation operation, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
 		String name = QVTbaseUtil.getName(operation);
 		if (sourceAndArgumentNodes.length > 0) {
-			for (@NonNull Edge searchEdge : sourceAndArgumentNodes[0].getComputationEdges()) {
-				Node reusedNode = searchEdge.getEdgeTarget();
-				if (reusedNode.isOperation()) {
-					@SuppressWarnings("unused") OperationNode operationNode = (OperationNode)reusedNode;
-					boolean equals1 = name.equals(reusedNode.getName());
-					//					boolean equals2 = operation == operationNode.getReferredOperation();
-					//					assert equals1 == equals2;
-					if (equals1) {
-						Iterable<@NonNull Edge> reusedEdges = reusedNode.getArgumentEdges();
-						int iSize = Iterables.size(reusedEdges);
-						if (iSize == sourceAndArgumentNodes.length) {
-							int i = 0;
-							for (@NonNull Edge reusedEdge : reusedEdges) {
-								Node reusedArgumentNode = reusedEdge.getEdgeSource();
-								if (reusedArgumentNode != sourceAndArgumentNodes[i]) {
-									break;
+			for (@NonNull Edge searchEdge : QVTscheduleUtil.getOutgoingEdges(sourceAndArgumentNodes[0])) {
+				if (searchEdge.isComputation()) {
+					Node reusedNode = searchEdge.getEdgeTarget();
+					if (reusedNode.isOperation()) {
+						@SuppressWarnings("unused") OperationNode operationNode = (OperationNode)reusedNode;
+						boolean equals1 = name.equals(reusedNode.getName());
+						//					boolean equals2 = operation == operationNode.getReferredOperation();
+						//					assert equals1 == equals2;
+						if (equals1) {
+							int iSize = 0;
+							for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(reusedNode)) {
+								if (edge.isExpression()) {
+									iSize++;
 								}
-								i++;
 							}
-							if (i == iSize) {
-								return reusedNode;
+							if (iSize == sourceAndArgumentNodes.length) {
+								int i = 0;
+								for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(reusedNode)) {
+									if (edge.isExpression()) {
+										Node reusedArgumentNode = edge.getEdgeSource();
+										if (reusedArgumentNode != sourceAndArgumentNodes[i]) {
+											break;
+										}
+										i++;
+									}
+								}
+								if (i == iSize) {
+									return reusedNode;
+								}
 							}
 						}
 					}
@@ -685,7 +691,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		assert targetNode.isDataType();
 		Type type = source2targetProperty.getType();
 		assert type instanceof DataType;
-		NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
+		NavigableEdge navigationEdge = sourceNode.getOutgoingNavigableEdge(source2targetProperty);
 		if (navigationEdge == null) {
 			if (!targetNode.isOperation()) {
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
@@ -721,7 +727,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	protected @NonNull NavigableEdge getNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isClass();
-		NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
+		NavigableEdge navigationEdge = sourceNode.getOutgoingNavigableEdge(source2targetProperty);
 		if (navigationEdge != null) {
 			Node target = navigationEdge.getEdgeTarget();
 			if (target != targetNode) {
@@ -743,7 +749,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	protected @NonNull NavigableEdge getNavigationEdgeToExpression(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isExpression();
 		if (navigationAssignment != null) {
-			NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
+			NavigableEdge navigationEdge = sourceNode.getOutgoingNavigableEdge(source2targetProperty);
 			assert navigationEdge == null;
 			//			Node valueNode = navigationEdge.getTarget();
 			//			assert valueNode.isRealized();
@@ -762,7 +768,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			return navigationEdge;
 		}
 		else {
-			NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
+			NavigableEdge navigationEdge = sourceNode.getOutgoingNavigableEdge(source2targetProperty);
 			if (navigationEdge != null) {
 				Node valueNode = navigationEdge.getEdgeTarget();
 				assert valueNode.isRealized();
@@ -794,7 +800,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	}
 
 	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node referenceNode) {
-		for (@NonNull NavigableEdge referenceEdge : referenceNode.getNavigableEdges()) {
+		for (@NonNull Edge referenceEdge : QVTscheduleUtil.getOutgoingEdges(referenceNode)) {
 			if (referenceEdge instanceof NavigationEdge) {
 				NavigationEdge navigationEdge = (NavigationEdge)referenceEdge;
 				if (!navigationEdge.isSecondary()) {
@@ -977,20 +983,25 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			sourceNode.addOriginatingElement(operationCallExp);
 			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
-		for (@NonNull CastEdge castEdge : sourceNode.getCastEdges()) {
-			Node targetNode = castEdge.getEdgeTarget();
-			predicatedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-			if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castClassDatum)) {
-				targetNode.addOriginatingElement(operationCallExp);
-				return targetNode;										// Re-use a pre-existing class
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+			if (edge instanceof CastEdge) {
+				Node targetNode = edge.getEdgeTarget();
+				predicatedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+				if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castClassDatum)) {
+					targetNode.addOriginatingElement(operationCallExp);
+					return targetNode;										// Re-use a pre-existing class
+				}
 			}
 		}
 		Type castType = QVTbaseUtil.getType(operationCallExp);
-		for (@NonNull CastEdge castEdge : sourceNode.getCastEdges()) {
-			if (castClassDatum == castEdge.getReferredClassDatum()) {
-				Node castNode = castEdge.getEdgeTarget();
-				castNode.addOriginatingElement(operationCallExp);
-				return castNode;
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+			if (edge instanceof CastEdge) {
+				CastEdge castEdge = (CastEdge)edge;
+				if (castClassDatum == castEdge.getReferredClassDatum()) {
+					Node castNode = castEdge.getEdgeTarget();
+					castNode.addOriginatingElement(operationCallExp);
+					return castNode;
+				}
 			}
 		}
 		//	Edge castEdge = sourceNode.getPredicateEdge(castProperty);
@@ -1078,7 +1089,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	private @NonNull Node synthesizeOperationCallExp_oclContainer(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
 		//		Type castType = QVTbaseUtil.getType(operationCallExp);
 		Property oclContainerProperty = standardLibraryHelper.getOclContainerProperty();
-		Edge oclContainerEdge = sourceNode.getPredicateEdge(oclContainerProperty);
+		Edge oclContainerEdge = sourceNode.getOutgoingPredicateEdge(oclContainerProperty);
 		if (oclContainerEdge != null) {
 			return oclContainerEdge.getEdgeTarget();
 		}

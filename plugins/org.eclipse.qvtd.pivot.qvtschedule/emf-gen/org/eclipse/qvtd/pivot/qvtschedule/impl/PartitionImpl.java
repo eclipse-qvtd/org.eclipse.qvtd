@@ -360,8 +360,18 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 						isBetter = true;
 					}
 					else {
-						int bestRealizedNavigationEdgesSize = Iterables.size(bestNamingNode.getRealizedNavigationEdges());
-						int realizedNavigationEdgesSize = Iterables.size(node.getRealizedNavigationEdges());
+						int bestRealizedNavigationEdgesSize = 0;
+						for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(bestNamingNode)) {
+							if (edge.isRealized() && edge.isNavigation()) {
+								bestRealizedNavigationEdgesSize++;
+							}
+						}
+						int realizedNavigationEdgesSize = 0;
+						for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
+							if (edge.isRealized() && edge.isNavigation()) {
+								realizedNavigationEdgesSize++;
+							}
+						}
 						if (realizedNavigationEdgesSize > bestRealizedNavigationEdgesSize) {
 							isBetter = true;
 						}
@@ -388,9 +398,12 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		}
 		if (bestNamingNode != null) {
 			List<@NonNull String> edgeNames = new ArrayList<>();
-			for (@NonNull NavigableEdge edge : bestNamingNode.getRealizedNavigationEdges()) {
-				String name = edge.getEdgeName();
-				edgeNames.add(name);
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(bestNamingNode)) {
+				if (edge.isRealized() && edge.isNavigation()) {
+					NavigationEdge navigationEdge = (NavigationEdge)edge;
+					String name = navigationEdge.getEdgeName();
+					edgeNames.add(name);
+				}
 			}
 			if (edgeNames.size() > 0) {
 				s = sIn;
@@ -445,9 +458,12 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 				//				s.appendString(getSymbolNamePrefix());
 				s.appendName(headNode.getClassDatum().getName());
 				List<@NonNull String> edgeNames = new ArrayList<>();
-				for (@NonNull NavigableEdge edge : headNode.getNavigableEdges()) {
-					String propertyName = edge.getEdgeName();
-					edgeNames.add(edge.getEdgeTarget().isNullLiteral() ? propertyName + "0" : propertyName);
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(headNode)) {
+					if (edge.isNavigation()) {
+						NavigationEdge navigationEdge = (NavigationEdge)edge;
+						String propertyName = navigationEdge.getEdgeName();
+						edgeNames.add(navigationEdge.getEdgeTarget().isNullLiteral() ? propertyName + "0" : propertyName);
+					}
 				}
 				Collections.sort(edgeNames);
 				for (@NonNull String edgeName : edgeNames) {
@@ -461,12 +477,13 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 
 	private @NonNull Set<@NonNull Node> computeToOneSubRegion(@NonNull Set<@NonNull Node> toOneSubRegion, @NonNull Node atNode) {
 		if (toOneSubRegion.add(atNode)) {
-			for (@NonNull NavigableEdge edge : atNode.getNavigableEdges()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(atNode)) {
 				assert edge.getEdgeSource() == atNode;
 				if (edge.isNavigation()) {
-					Property source2target = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge);
+					NavigationEdge navigationEdge = (NavigationEdge)edge;
+					Property source2target = QVTscheduleUtil.getReferredProperty(navigationEdge);
 					if (!source2target.isIsMany() && !source2target.isIsImplicit()) {
-						computeToOneSubRegion(toOneSubRegion, edge.getEdgeTarget());
+						computeToOneSubRegion(toOneSubRegion, navigationEdge.getEdgeTarget());
 					}
 				}
 				else {

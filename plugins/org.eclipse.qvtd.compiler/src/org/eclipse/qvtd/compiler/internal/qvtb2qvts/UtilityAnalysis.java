@@ -23,7 +23,6 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
@@ -214,7 +213,7 @@ public class UtilityAnalysis
 		while (moreStronglyMatchedNodes.size() > 0) {
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node sourceNode : moreStronglyMatchedNodes) {
-				for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 					if (edge.isNavigation()) {
 						NavigationEdge navigationEdge = (NavigationEdge)edge;
 						Node targetNode = edge.getEdgeTarget();
@@ -266,8 +265,8 @@ public class UtilityAnalysis
 				unconditionalNodes.add(node);
 			}
 		}
-		for (@NonNull NavigableEdge edge : mappingRegion.getRealizedNavigationEdges()) {
-			if (!edge.isSecondary()) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(mappingRegion)) {
+			if (edge.isRealized() && edge.isNavigation() && !edge.isSecondary()) {
 				Node sourceNode = edge.getEdgeSource();
 				assert canBeUnconditional(sourceNode);
 				unconditionalNodes.add(sourceNode);

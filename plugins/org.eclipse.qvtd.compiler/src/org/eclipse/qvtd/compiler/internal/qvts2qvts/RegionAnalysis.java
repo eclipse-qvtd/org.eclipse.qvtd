@@ -70,19 +70,22 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 	private void analyzeCorollaries(@NonNull List<@NonNull Node> alreadyRealizedNodes) {
 		for (int i = 0; i < alreadyRealizedNodes.size(); i++) {
 			Node alreadyRealizedNode = alreadyRealizedNodes.get(i);
-			for (@NonNull NavigationEdge edge : alreadyRealizedNode.getRealizedNavigationEdges()) {
-				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-				if (targetNode.isRealized() && !targetNode.isSuccess()) {
-					assert !corollaryEdges.contains(edge);
-					corollaryEdges.add(edge);
-					if (!alreadyRealizedNodes.contains(targetNode)) {
-						alreadyRealizedNodes.add(targetNode);
-						assert !corollaryNodes.contains(targetNode);
-						if (!corollaryNodes.contains(targetNode)) {		// Overrides have a base and derived edge to the same rootVariable node
-							corollaryNodes.add(targetNode);
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(alreadyRealizedNode)) {
+				if (edge.isRealized() && edge.isNavigation()) {
+					NavigationEdge navigationEdge = (NavigationEdge)edge;
+					Node targetNode = QVTscheduleUtil.getTargetNode(navigationEdge);
+					if (targetNode.isRealized() && !targetNode.isSuccess()) {
+						assert !corollaryEdges.contains(navigationEdge);
+						corollaryEdges.add(navigationEdge);
+						if (!alreadyRealizedNodes.contains(targetNode)) {
+							alreadyRealizedNodes.add(targetNode);
+							assert !corollaryNodes.contains(targetNode);
+							if (!corollaryNodes.contains(targetNode)) {		// Overrides have a base and derived edge to the same rootVariable node
+								corollaryNodes.add(targetNode);
+							}
 						}
+						transformationAnalysis.addCorollary(navigationEdge);
 					}
-					transformationAnalysis.addCorollary(edge);
 				}
 			}
 		}

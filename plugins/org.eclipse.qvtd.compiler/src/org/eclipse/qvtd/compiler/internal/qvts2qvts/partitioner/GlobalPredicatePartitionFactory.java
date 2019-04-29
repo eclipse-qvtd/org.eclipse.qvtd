@@ -19,7 +19,6 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
@@ -311,8 +310,8 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 			addNode(partition, traceNode, Role.SPECULATED);
 		}
 		for (@NonNull Node traceNode : traceNodes) {
-			for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {
-				if (mappingPartitioner.hasRealizedEdge(edge)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
+				if (edge.isNavigation() && mappingPartitioner.hasRealizedEdge(edge)) {
 					tracedInputNodes.add(edge.getEdgeTarget());
 				}
 			}

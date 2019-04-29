@@ -14,8 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -46,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -369,15 +368,15 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				if (ownedLoadingRegion != null)
 					msgs = ((InternalEObject)ownedLoadingRegion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7), null, msgs);
-				return basicSetOwnedLoadingRegion((LoadingRegion)otherEnd, msgs);
+			return basicSetOwnedLoadingRegion((LoadingRegion)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
+			return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				if (ownedRootPartition != null)
 					msgs = ((InternalEObject)ownedRootPartition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10), null, msgs);
-				return basicSetOwnedRootPartition((RootPartition)otherEnd, msgs);
+			return basicSetOwnedRootPartition((RootPartition)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -436,7 +435,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 				return getOwningScheduleModel();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				if (resolve) return getReferredTransformation();
-				return basicGetReferredTransformation();
+			return basicGetReferredTransformation();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				return getOwnedRootPartition();
 		}
@@ -454,24 +453,24 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getActiveRegions().clear();
-				getActiveRegions().addAll((Collection<? extends Region>)newValue);
-				return;
+			getActiveRegions().addAll((Collection<? extends Region>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				getOwnedConnections().clear();
-				getOwnedConnections().addAll((Collection<? extends Connection>)newValue);
-				return;
+			getOwnedConnections().addAll((Collection<? extends Connection>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				setOwnedLoadingRegion((LoadingRegion)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setOwningScheduleModel((ScheduleModel)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				setReferredTransformation((Transformation)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				setOwnedRootPartition((RootPartition)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -486,22 +485,22 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getActiveRegions().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				getOwnedConnections().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				setOwnedLoadingRegion((LoadingRegion)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setOwningScheduleModel((ScheduleModel)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				setReferredTransformation((Transformation)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				setOwnedRootPartition((RootPartition)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -552,14 +551,15 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 
 	@Override
 	public @NonNull Iterable<@NonNull Region> getCallableRegions() {
+		List<@NonNull Region> callableRegions = new ArrayList<>();
 		LoadingRegion loadingRegion = getOwnedLoadingRegion();
-		Iterable<@NonNull Region> mappingRegions = QVTscheduleUtil.getActiveRegions(this);
 		if (loadingRegion != null) {
-			return Iterables.concat(Collections.singletonList(loadingRegion), Iterables.filter(mappingRegions, QVTscheduleUtil.IsCallableRegionPredicate.INSTANCE));
+			callableRegions.add(loadingRegion);
 		}
-		else {
-			return Iterables.filter(mappingRegions, QVTscheduleUtil.IsCallableRegionPredicate.INSTANCE);
+		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(this)) {
+			callableRegions.add(region);
 		}
+		return callableRegions;
 	}
 
 	@Override

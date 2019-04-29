@@ -24,7 +24,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -192,7 +191,7 @@ class CompoundGroup extends AbstractGroup
 	 */
 	protected void createBoundaries(@NonNull SimpleGroup sourceGroup, @NonNull Iterable<@NonNull Node> nonOverlapNodes) {
 		for (@NonNull Node nonOverlapNode : nonOverlapNodes) {
-			for (@NonNull NavigableEdge edge : nonOverlapNode.getNavigableEdges()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(nonOverlapNode)) {
 				if (edge.isNavigation()) {
 					NavigationEdge navigationEdge = (NavigationEdge)edge;
 					assert edge.getEdgeSource() == nonOverlapNode;
