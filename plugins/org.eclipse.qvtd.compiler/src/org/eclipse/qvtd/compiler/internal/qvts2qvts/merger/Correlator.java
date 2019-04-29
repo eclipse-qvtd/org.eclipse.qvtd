@@ -165,20 +165,22 @@ class Correlator
 		Map<@NonNull Node, @NonNull NodeMerger> nestedFirst2second = new HashMap<>(first2second);
 		nestedFirst2second.put(firstNode, secondNodeMerger);
 		List<@NonNull Edge> residualSecondArgumentEdges = Lists.newArrayList(secondNodeMerger.getArgumentEdges());
-		for (@NonNull Edge firstEdge : firstNode.getArgumentEdges()) {
-			boolean gotIt = false;
-			for (@NonNull Edge secondEdge : residualSecondArgumentEdges) {
-				if (ClassUtil.safeEquals(firstEdge.getName(), secondEdge.getName())) {
-					if (!correlateComputation(firstEdge.getEdgeSource(), regionMerger.getNodeMerger(secondEdge.getEdgeSource()), nestedFirst2second)) {
-						return false;
+		for (@NonNull Edge firstEdge : QVTscheduleUtil.getIncomingEdges(firstNode)) {
+			if (firstEdge.isExpression()) {
+				boolean gotIt = false;
+				for (@NonNull Edge secondEdge : residualSecondArgumentEdges) {
+					if (ClassUtil.safeEquals(firstEdge.getName(), secondEdge.getName())) {
+						if (!correlateComputation(firstEdge.getEdgeSource(), regionMerger.getNodeMerger(secondEdge.getEdgeSource()), nestedFirst2second)) {
+							return false;
+						}
+						gotIt = true;
+						residualSecondArgumentEdges.remove(secondEdge);
+						break;
 					}
-					gotIt = true;
-					residualSecondArgumentEdges.remove(secondEdge);
-					break;
 				}
-			}
-			if (!gotIt) {
-				return false;
+				if (!gotIt) {
+					return false;
+				}
 			}
 		}
 		first2second.putAll(nestedFirst2second);
@@ -293,14 +295,14 @@ class Correlator
 			if (!strategy.navigableNodesMatch(sourceNodeMerger, extraSourceNode)) {
 				return false;
 			}
-			for (@NonNull NavigableEdge uncastExtraEdge : extraSourceNode.getNavigableEdges()) {
+			for (@NonNull Edge uncastExtraEdge : QVTscheduleUtil.getOutgoingEdges(extraSourceNode)) {
 				Node uncastExtraTargetNode = uncastExtraEdge.getEdgeTarget();
 				if (uncastExtraEdge instanceof NavigationEdge) {
 					NavigationEdge uncastExtraNavigationEdge = (NavigationEdge)uncastExtraEdge;
 					if (sourceNodeMerger != null) {
 						NavigableEdge uncastPrimaryEdge = sourceNodeMerger.getNavigableEdge(QVTscheduleUtil.getReferredProperty(uncastExtraNavigationEdge));	// Skip isSecondary properties
 						EdgeMerger edgeMerger = uncastPrimaryEdge != null ? regionMerger.getEdgeMerger(uncastPrimaryEdge) : null;
-						if (!strategy.navigableEdgesMatch(edgeMerger, uncastExtraEdge)) {
+						if (!strategy.navigableEdgesMatch(edgeMerger, uncastExtraNavigationEdge)) {
 							return false;
 						}
 						if (uncastPrimaryEdge != null) {
@@ -426,13 +428,13 @@ class Correlator
 		if (nodeMergers.size() == 0) {
 			return null;
 		}
-		Iterable<NavigableEdge> predicateEdges = headNode.getPredicateEdges();
+		Iterable<Edge> outgoingHeadEdges = QVTscheduleUtil.getOutgoingEdges(headNode);
 		for (@NonNull NodeMerger nodeMerger : nodeMergers) {
 			boolean ok = !nodeMerger.isIterator();
 			if (ok) {
-				for (@NonNull NavigableEdge predicateEdge : predicateEdges) {
-					if (predicateEdge instanceof NavigationEdge) {
-						NavigationEdge navigationEdge = (NavigationEdge)predicateEdge;
+				for (@NonNull Edge edge : outgoingHeadEdges) {
+					if (edge.isPredicated() && (edge instanceof NavigationEdge)) {
+						NavigationEdge navigationEdge = (NavigationEdge)edge;
 						Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
 						Node navigation = nodeMerger.getNavigableTarget(property);
 						if (navigation == null) {

@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.BinaryOperator;
 
@@ -31,7 +30,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -67,54 +65,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-
 public class QVTscheduleUtil extends QVTscheduleConstants
 {
-	public static @NonNull BinaryOperator<@NonNull String> stringJoin(@NonNull String delimiter) {
-		return (a, b) -> String.valueOf(a) + delimiter + String.valueOf(b);
-	}
-
-	/*	public static class EarliestRegionComparator implements Comparator<@NonNull Region>
-	{
-		public static final @NonNull EarliestRegionComparator INSTANCE = new EarliestRegionComparator();
-
-		public static @NonNull List<@NonNull Region> sort(@NonNull Iterable<@NonNull Region> regions) {
-			List<@NonNull Region> sortedRegions = new ArrayList<>();
-			Iterables.addAll(sortedRegions, regions);
-			Collections.sort(sortedRegions, INSTANCE);
-			return sortedRegions;
-		}
-
-		@Override
-		public int compare(@NonNull Region o1, @NonNull Region o2) {
-			int i1 = scheduleManager.wipGetFirstPass(o1);
-			int i2 = scheduleManager.wipGetFirstPass(o2);
-			return i1 - i2;
-		}
-	} */
-
-	public static final class EdgeSourceFunction implements Function<@NonNull Edge, @NonNull Node>
-	{
-		public static final @NonNull EdgeSourceFunction INSTANCE = new EdgeSourceFunction();
-
-		@Override
-		public @NonNull Node apply(@NonNull Edge edge) {
-			return edge.getEdgeSource();
-		}
-	}
-
-	public static final class EdgeTargetFunction implements Function<@NonNull Edge, @NonNull Node>
-	{
-		public static final @NonNull EdgeTargetFunction INSTANCE = new EdgeTargetFunction();
-
-		@Override
-		public @NonNull Node apply(@NonNull Edge edge) {
-			return edge.getEdgeTarget();
-		}
-	}
-
 	public static class Internal
 	{
 		public static @NonNull List<@NonNull Region> getActiveRegionsList(@NonNull RootRegion rootRegion) {
@@ -135,228 +87,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 		public static @NonNull List<@NonNull ClassDatum> getSuperClassDatumsList(@NonNull ClassDatum classDatum) {
 			return ClassUtil.nullFree(classDatum.getSuperClassDatums());
-		}
-	}
-
-	@Deprecated /* Obsolete - always true */
-	public static final class IsCallableRegionPredicate implements Predicate<@NonNull Region>
-	{
-		public static final @NonNull IsCallableRegionPredicate INSTANCE = new IsCallableRegionPredicate();
-
-		@Override
-		public boolean apply(@NonNull Region region) {
-			assert !region.isOperationRegion();
-			return !region.isOperationRegion();
-		}
-	}
-
-	public static final class IsCastEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsCastEdgePredicate INSTANCE = new IsCastEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isCast();
-		}
-	}
-
-	public static final class IsComposedNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsComposedNodePredicate INSTANCE = new IsComposedNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isComposed();
-		}
-	}
-
-	public static final class IsComputationEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsComputationEdgePredicate INSTANCE = new IsComputationEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isComputation();
-		}
-	}
-
-	/*	public static final class IsComputedPredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsComputedPredicate INSTANCE = new IsComputedPredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node == Role.REALIZED;
-		}
-	} */
-
-	public static final class IsExpressionEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsExpressionEdgePredicate INSTANCE = new IsExpressionEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isExpression();
-		}
-	}
-
-	public static final class IsMatchedNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsMatchedNodePredicate INSTANCE = new IsMatchedNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isMatched();
-		}
-	}
-
-	public static final class IsNavigableEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsNavigableEdgePredicate INSTANCE = new IsNavigableEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			assert !edge.isCast();
-			return edge.isNavigation();
-		}
-	}
-
-	public static final class IsNewNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsNewNodePredicate INSTANCE = new IsNewNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isNew();
-		}
-	}
-
-	public static final class IsOldNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsOldNodePredicate INSTANCE = new IsOldNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isOld();
-		}
-	}
-
-	public static final class IsPassedBindingEdgePredicate implements Predicate<@NonNull NodeConnection>
-	{
-		public static final @NonNull IsPassedBindingEdgePredicate INSTANCE = new IsPassedBindingEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull NodeConnection connection) {
-			return connection.isPassed();
-		}
-	}
-
-	public static final class IsPatternNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsPatternNodePredicate INSTANCE = new IsPatternNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isPattern();
-		}
-	}
-
-	public static final class IsPredicatedEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsPredicatedEdgePredicate INSTANCE = new IsPredicatedEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isPredicated();
-		}
-	}
-
-	public static final class IsPredicatedNavigationEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsPredicatedNavigationEdgePredicate INSTANCE = new IsPredicatedNavigationEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isPredicated() && edge.isNavigation();
-		}
-	}
-
-	public static final class IsRealizedEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsRealizedEdgePredicate INSTANCE = new IsRealizedEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isRealized();
-		}
-	}
-
-	public static final class IsRealizedNavigationEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsRealizedNavigationEdgePredicate INSTANCE = new IsRealizedNavigationEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isRealized() && edge.isNavigation();
-		}
-	}
-
-	public static final class IsRecursionEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsRecursionEdgePredicate INSTANCE = new IsRecursionEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isRecursion();
-		}
-	}
-
-	public static final class IsUsedBindingEdgePredicate implements Predicate<@NonNull NodeConnection>
-	{
-		public static final @NonNull IsUsedBindingEdgePredicate INSTANCE = new IsUsedBindingEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull NodeConnection connection) {
-			return connection.isUsed();
-		}
-	}
-
-	public static final class MultiOppositeComparator implements Comparator<@NonNull Property>
-	{
-		public static final Comparator<@NonNull ? super Property> INSTANCE = new MultiOppositeComparator();
-
-		@Override
-		public int compare(@NonNull Property o1, @NonNull Property o2) {
-			boolean c1 = o1.isIsComposite();
-			boolean c2 = o1.isIsComposite();
-			if (c1 != c2) {
-				return Boolean.compare(c1, c2);
-			}
-			else {
-				return ClassUtil.safeCompareTo(o1.getName(), o2.getName());
-			}
-		}
-	}
-
-	public static final class NodeComparator implements Comparator<@NonNull Node>
-	{
-		public static final @NonNull NodeComparator INSTANCE = new NodeComparator();
-
-		@Override
-		public int compare(@NonNull Node o1, @NonNull Node o2) {
-			String n1 = NameUtil.getSafeName(o1);
-			String n2 = NameUtil.getSafeName(o2);
-			int diff = ClassUtil.safeCompareTo(n1, n2);
-			if (diff != 0) {
-				return diff;
-			}
-			n1 = o1.getClassDatum().getName();
-			n2 = o2.getClassDatum().getName();
-			diff = ClassUtil.safeCompareTo(n1, n2);
-			if (diff != 0) {
-				return diff;
-			}
-			return diff;
 		}
 	}
 
@@ -385,7 +115,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return null;
 	}
 
-	public static @Nullable NavigationEdge basicGetNavigationEdge(@NonNull Node traceNode, @NonNull Property property) {
+	public static @Nullable NavigationEdge basicGetOutgoingNavigationEdge(@NonNull Node traceNode, @NonNull Property property) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
 			if (edge instanceof NavigationEdge) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
@@ -1157,5 +887,9 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		else {
 			return Node.Utility.DEAD;
 		}
+	}
+
+	public static @NonNull BinaryOperator<@NonNull String> stringJoin(@NonNull String delimiter) {
+		return (a, b) -> String.valueOf(a) + delimiter + String.valueOf(b);
 	}
 }

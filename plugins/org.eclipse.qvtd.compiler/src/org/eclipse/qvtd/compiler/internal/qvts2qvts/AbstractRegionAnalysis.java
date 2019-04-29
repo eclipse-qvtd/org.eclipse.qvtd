@@ -92,7 +92,7 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 		SuccessEdge globalSuccessEdge = null;
 		Property globalSuccessProperty = scheduleManager.basicGetGlobalSuccessProperty(traceNode);
 		if (globalSuccessProperty != null) {
-			NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetNavigationEdge(traceNode, globalSuccessProperty);
+			NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetOutgoingNavigationEdge(traceNode, globalSuccessProperty);
 			if (statusNavigationEdge != null) {
 				globalSuccessEdge = (SuccessEdge) statusNavigationEdge;
 			}
@@ -112,7 +112,7 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 		SuccessEdge localSuccessEdge = null;
 		Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(traceNode);
 		if (localSuccessProperty != null) {
-			NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetNavigationEdge(traceNode, localSuccessProperty);
+			NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetOutgoingNavigationEdge(traceNode, localSuccessProperty);
 			if (statusNavigationEdge != null) {
 				localSuccessEdge = (SuccessEdge) statusNavigationEdge;
 			}

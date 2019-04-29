@@ -170,8 +170,8 @@ public class OriginalContentsAnalysis
 
 	public void addRegion(@NonNull RuleRegion region) {
 		// FIXME Eliminate duplication wrt the use of ClassAnalysis to determine regions.
-		for (@NonNull Node oldNode : region.getOldNodes()) {
-			if (!oldNode.isDependency() && !oldNode.isConstant()) {
+		for (@NonNull Node oldNode : QVTscheduleUtil.getOwnedNodes(region)) {
+			if (oldNode.isOld() && !oldNode.isDependency() && !oldNode.isConstant()) {
 				if (oldNode.isHead()) {
 					//					if (oldNode.isLoaded()) {
 					addOldNode(region, oldNode);
@@ -186,13 +186,15 @@ public class OriginalContentsAnalysis
 				}
 			}
 		}
-		for (@NonNull Node newNode : region.getNewNodes()) {
-			if (newNode.isClass()) {
+		for (@NonNull Node newNode : QVTscheduleUtil.getOwnedNodes(region)) {
+			if (newNode.isNew() && newNode.isClass()) {
 				addNewNode(region, newNode);
 			}
 		}
-		for (@NonNull NavigableEdge newEdge : region.getRealizedNavigationEdges()) {
-			addNewEdge(region, newEdge);
+		for (@NonNull Edge newEdge : QVTscheduleUtil.getOwnedEdges(region)) {
+			if (newEdge.isRealized() && newEdge.isNavigation()) {
+				addNewEdge(region, (NavigationEdge)newEdge);
+			}
 		}
 	}
 

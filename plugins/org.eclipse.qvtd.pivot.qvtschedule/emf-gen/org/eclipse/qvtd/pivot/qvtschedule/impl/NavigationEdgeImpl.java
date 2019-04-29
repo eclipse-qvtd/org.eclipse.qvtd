@@ -552,7 +552,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			Node targetNode2 = targetNode;
 			assert targetNode2 != null;
 			if (!targetNode2.isNullLiteral()) {
-				assert (targetNode2.getNavigableEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany() || (isPartial() == Boolean.TRUE);
+				assert (targetNode2.getOutgoingNavigableEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany() || (isPartial() == Boolean.TRUE);
 				boolean isClassComposite = property.isIsComposite() && targetNode.isClass();
 				boolean isBidirectionalOneToOne = !property.isIsMany() && !target2sourceProperty.isIsMany();
 				if (isClassComposite || isBidirectionalOneToOne /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??

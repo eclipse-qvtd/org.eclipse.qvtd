@@ -39,7 +39,6 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
-import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
@@ -52,9 +51,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -630,6 +627,65 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, Region.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
+				if (cluster != null)
+					msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Cluster.class, msgs);
+			return basicSetCluster((Cluster)otherEnd, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingEdges()).basicAdd(otherEnd, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetOwningRegion((Region)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
+				return basicSetCluster(null, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
+				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+				return ((InternalEList<?>)getOutgoingEdges()).basicRemove(otherEnd, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
+				return basicSetOwningRegion(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
 	private boolean isDataType;
 	private boolean isHead = false;
 	private boolean isContained = false;
@@ -710,19 +766,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull Edge> getArgumentEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getIncomingEdges(this), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull CastEdge> getCastEdges() {
-		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull CastEdge> filter = (Iterable<@NonNull CastEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsCastEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
 	public @NonNull String getColor() {
 		assert nodeRole != null;
 		return QVTscheduleUtil.getColor(nodeRole);
@@ -731,12 +774,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public @NonNull Iterable<@NonNull CompleteClass> getCompleteClasses() {
 		return QVTscheduleUtil.getCompleteClasses(QVTscheduleUtil.getClassDatum(this));
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Edge> getComputationEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsComputationEdgePredicate.INSTANCE);
-		return filter;
 	}
 
 	@Override
@@ -776,29 +813,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @Nullable NavigableEdge getNavigableEdge(@NonNull Property source2targetProperty) {
-		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
-			if (edge instanceof NavigationEdge) {
-				NavigationEdge navigationEdge = (NavigationEdge)edge;
-				if ((QVTscheduleUtil.getReferredProperty(navigationEdge) == source2targetProperty) && !navigationEdge.isPartial()) {
-					return navigationEdge;
-				}
-			}
-			else {
-				// SharedEdge
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull NavigableEdge> getNavigableEdges() {
-		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsNavigableEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
 	public @Nullable Node getNavigableTarget(@NonNull Property source2targetProperty) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
 			if (edge instanceof NavigationEdge) {
@@ -815,102 +829,33 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull Node> getNavigableTargets() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsNavigableEdgePredicate.INSTANCE);
-		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, QVTscheduleUtil.EdgeTargetFunction.INSTANCE);
-		return transform;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
-				if (cluster != null)
-					msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Cluster.class, msgs);
-			return basicSetCluster((Cluster)otherEnd, msgs);
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingEdges()).basicAdd(otherEnd, msgs);
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningRegion((Region)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
-				return basicSetCluster(null, msgs);
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
-				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
-				return ((InternalEList<?>)getOutgoingEdges()).basicRemove(otherEnd, msgs);
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
-				return basicSetOwningRegion(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
-				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, Region.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
+	public @NonNull Element getOriginatingElement() {
+		throw new UnsupportedOperationException();		// Should be MappingNode
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections() {
-		@NonNull Iterable<@NonNull NodeConnection> filter = Iterables.filter(QVTscheduleUtil.getOutgoingConnections(this), QVTscheduleUtil.IsPassedBindingEdgePredicate.INSTANCE);
-		return filter;
+	public @NonNull Iterable<@NonNull Element> getOriginatingElements() {
+		return Collections.emptyList();
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedBindingEdges() {
-		@NonNull Iterable<@NonNull NodeConnection> filter = Iterables.filter(QVTscheduleUtil.getOutgoingConnections(this), QVTscheduleUtil.IsUsedBindingEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	/*	@Override
-	public @NonNull Iterable<@NonNull Node> getPassedBindingTargets() {
-		List<@NonNull Node> targets = new ArrayList<>();
-		for (@NonNull NodeConnection connection : getOutgoingPassedConnections()) {
-			for (@NonNull Node target : StaticConnectionManager.INSTANCE.rawGetTargetNodes(connection)) {
-				if (!targets.contains(target)) {
-					targets.add(target);
+	public @Nullable NavigableEdge getOutgoingNavigableEdge(@NonNull Property source2targetProperty) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
+			if (edge instanceof NavigationEdge) {
+				NavigationEdge navigationEdge = (NavigationEdge)edge;
+				if ((QVTscheduleUtil.getReferredProperty(navigationEdge) == source2targetProperty) && !navigationEdge.isPartial()) {
+					return navigationEdge;
 				}
 			}
+			else {
+				// SharedEdge
+			}
 		}
-		return targets;
-	} */
-
-	protected @NonNull Integer getPenwidth() {
-		return isHead() ? QVTscheduleConstants.HEAD_WIDTH : !isExpression() ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH;
+		return null;
 	}
 
 	@Override
-	public final @Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty) {
+	public final @Nullable Edge getOutgoingPredicateEdge(@NonNull Property source2targetProperty) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
 			if (edge.isPredicated()) {
 				if (edge instanceof NavigationEdge) {
@@ -926,52 +871,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return null;
 	}
 
-	@Override
-	public final @NonNull Iterable<@NonNull NavigableEdge> getPredicateEdges() {
-		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsPredicatedEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull NavigationEdge> getRealizedNavigationEdges() {
-		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsRealizedNavigationEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Edge> getRecursionEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Node> getRecursionSources() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getIncomingEdges(this), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
-		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, QVTscheduleUtil.EdgeSourceFunction.INSTANCE);
-		return transform;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Node> getRecursionTargets() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
-		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, QVTscheduleUtil.EdgeTargetFunction.INSTANCE);
-		return transform;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull ? extends Edge> getResultEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	/*	//	@Override
-	public ScheduleModel getScheduleModel() {
-		Region region = getOwningRegion();
-		assert region != null;
-		return region.getScheduleModel();
-	} */
 
 	@Override
 	public @Nullable String getShape() {
@@ -997,16 +896,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			s.append("filled");
 		}
 		return "\"" + s.toString() + "\"";
-	}
-
-	@Override
-	public @NonNull Element getOriginatingElement() {
-		throw new UnsupportedOperationException();		// Should be MappingNode
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Element> getOriginatingElements() {
-		return Collections.emptyList();
 	}
 
 	@Override

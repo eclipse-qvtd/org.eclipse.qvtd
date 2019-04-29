@@ -21,7 +21,6 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -83,8 +82,8 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 			// 'good style' or auto-conversion to 'good style' or multi-stage local-predication.
 			// if (!(node.isDataType() && node.isPredicated())) {
 			checkableOldNodes.add(node);
-			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
-				if (edge.isOld()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
+				if (edge.isNavigation() && edge.isOld()) {
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 					gatherReachableOldAcyclicNodes(partition, checkableOldNodes, targetNode);
 				}

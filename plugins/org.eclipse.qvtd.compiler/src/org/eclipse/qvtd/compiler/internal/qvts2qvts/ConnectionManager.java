@@ -497,19 +497,21 @@ public class ConnectionManager
 		//	Gather multiple edges sharing the same target to avoid multiple incoming connections -- FIXME no need to gather
 		//
 		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> castTargetNode2predicatedEdges = new HashMap<>();
-		for (@NonNull NavigationEdge predicatedEdge : region.getPredicatedNavigationEdges()) {
-			assert !predicatedEdge.isCast();
-			assert predicatedEdge.isNavigation();
-			assert predicatedEdge.getIncomingConnection() == null;
-			Property predicatedProperty = predicatedEdge.getReferredProperty();
-			if (!predicatedProperty.isIsImplicit()) {		// unnavigable opposites are handled by the navigable property
-				Node castTargetNode = predicatedEdge.getEdgeTarget();
-				List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
-				if (predicatedEdges == null) {
-					predicatedEdges = new ArrayList<>();
-					castTargetNode2predicatedEdges.put(castTargetNode, predicatedEdges);
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+			assert !edge.isCast();
+			if (edge.isPredicated() && edge.isNavigation()) {
+				NavigationEdge predicatedEdge = (NavigationEdge)edge;
+				assert predicatedEdge.getIncomingConnection() == null;
+				Property predicatedProperty = predicatedEdge.getReferredProperty();
+				if (!predicatedProperty.isIsImplicit()) {		// unnavigable opposites are handled by the navigable property
+					Node castTargetNode = predicatedEdge.getEdgeTarget();
+					List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
+					if (predicatedEdges == null) {
+						predicatedEdges = new ArrayList<>();
+						castTargetNode2predicatedEdges.put(castTargetNode, predicatedEdges);
+					}
+					predicatedEdges.add(predicatedEdge);
 				}
-				predicatedEdges.add(predicatedEdge);
 			}
 		}
 		for (@NonNull Node castTargetNode : castTargetNode2predicatedEdges.keySet()) {
@@ -584,13 +586,13 @@ public class ConnectionManager
 		//	Every edge that is realized in the original region and is predicated in one of the partitions requires
 		//	a used edge connection.
 		//
-		for (@NonNull NavigableEdge edge : region.getRealizedNavigationEdges()) {
-			if (edge instanceof NavigationEdge) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+			if (edge.isRealized() && edge.isNavigation()) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
 				if (!edge.isSecondary()) {
 					boolean isAwaited = false;
 					for (@NonNull PartitionAnalysis partitionAnalysis : regionAnalysis.getPartitionAnalyses()) {
-						Role role = partitionAnalysis.getPartition().getRole(edge);
+						Role role = partitionAnalysis.getPartition().getRole(navigationEdge);
 						if ((role != null) && role.isChecked()) {
 							isAwaited = true;
 							break;
@@ -598,8 +600,8 @@ public class ConnectionManager
 					}
 					if (isAwaited) {
 						Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
-						EdgeConnection connection = getEdgeConnection(rootRegion, Collections.singleton(edge), property);
-						connection.addUsedTargetEdge(edge, true);
+						EdgeConnection connection = getEdgeConnection(rootRegion, Collections.singleton(navigationEdge), property);
+						connection.addUsedTargetEdge(navigationEdge, true);
 					}
 				}
 			}
@@ -858,11 +860,15 @@ public class ConnectionManager
 		for (@NonNull Node node : partition.getPartialNodes()) {
 			Role role = partition.getRole(node);
 			if ((role != null) && !role.isChecked()) { //(role.isNew() || role.isLoaded())) {
-				for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
-					connections.add(connection);
+				for (@NonNull NodeConnection connection : QVTscheduleUtil.getOutgoingConnections(node)) {
+					if (connection.isPassed()) {
+						connections.add(connection);
+					}
 				}
-				for (@NonNull NodeConnection connection : node.getOutgoingUsedBindingEdges()) {
-					connections.add(connection);
+				for (@NonNull NodeConnection connection : QVTscheduleUtil.getOutgoingConnections(node)) {
+					if (connection.isUsed()) {
+						connections.add(connection);
+					}
 				}
 			}
 		}
@@ -919,12 +925,12 @@ public class ConnectionManager
 		if (oldPrevNode != null) {
 			return oldPrevNode == callingNode;
 		}
-		for (@NonNull NavigableEdge calledEdge : calledNode.getNavigableEdges()) {
+		for (@NonNull Edge calledEdge : QVTscheduleUtil.getOutgoingEdges(calledNode)) {
 			if (calledEdge instanceof NavigationEdge) {
 				NavigationEdge calledNavigationEdge = (NavigationEdge)calledEdge;
 				Node nextCalledNode = calledEdge.getEdgeTarget();
 				if (!nextCalledNode.isRealized() && !nextCalledNode.isDataType()) {  // FIXME why exclude AttributeNodes?
-					Edge nextCallingEdge = callingNode.getNavigableEdge(QVTscheduleUtil.getReferredProperty(calledNavigationEdge));
+					Edge nextCallingEdge = callingNode.getOutgoingNavigableEdge(QVTscheduleUtil.getReferredProperty(calledNavigationEdge));
 					if (nextCallingEdge != null) {
 						Node nextCallingNode = nextCallingEdge.getEdgeTarget();
 						if ((nextCallingNode.isNullLiteral() != nextCalledNode.isNullLiteral())) {

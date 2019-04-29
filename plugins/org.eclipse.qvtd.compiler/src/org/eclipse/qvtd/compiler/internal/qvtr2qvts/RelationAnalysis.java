@@ -69,8 +69,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -442,23 +442,26 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	protected void analyzeContainments() {
-		for (@NonNull Node node : region.getNewNodes()) {
-			boolean isContained = false;
-			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
-				if (edge.isNavigation()) {
-					Property property = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge);
-					Property opposite = property.getOpposite();
-					if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
-						isContained = true;
-						break;
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+			if (node.isNew()) {
+				boolean isContained = false;
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
+					if (edge.isNavigation()) {
+						NavigationEdge navigationEdge = (NavigationEdge)edge;
+						Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+						Property opposite = property.getOpposite();
+						if ((opposite != null) && opposite.isIsComposite() && !navigationEdge.getEdgeTarget().isNullLiteral()) {
+							isContained = true;
+							break;
+						}
+					}
+					else {
+						// SharedEdge
 					}
 				}
-				else {
-					// SharedEdge
+				if (isContained) {
+					node.setContained(true);
 				}
-			}
-			if (isContained) {
-				node.setContained(true);
 			}
 		}
 	}

@@ -145,9 +145,14 @@ class BodyStage extends AbstractStage
 
 	protected @NonNull Iterable<@NonNull Node> computeNewNodes() {
 		Region region = splitter.getRegion();
-		List<@NonNull Node> newNode = Lists.newArrayList(region.getNewNodes());
-		Collections.sort(newNode, NameUtil.NAMEABLE_COMPARATOR);
-		return newNode;
+		List<@NonNull Node> newNodes = new ArrayList<>();
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+			if (node.isNew()) {
+				newNodes.add(node);
+			}
+		}
+		Collections.sort(newNodes, NameUtil.NAMEABLE_COMPARATOR);
+		return newNodes;
 	}
 
 	protected @NonNull Iterable<@NonNull Node> computeReachableNodes(@NonNull Iterable<@NonNull Node> requiredNodes) {
@@ -173,9 +178,11 @@ class BodyStage extends AbstractStage
 			}
 		}
 		Region region = splitter.getRegion();
-		for (@NonNull Edge edge : region.getRealizedEdges()) {
-			requiredNodeSet.add(edge.getEdgeSource());
-			requiredNodeSet.add(edge.getEdgeTarget());
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+			if (edge.isRealized()) {
+				requiredNodeSet.add(edge.getEdgeSource());
+				requiredNodeSet.add(edge.getEdgeTarget());
+			}
 		}
 		for (@NonNull Node node : realizedNodes) {
 			requiredNodeSet.remove(node);

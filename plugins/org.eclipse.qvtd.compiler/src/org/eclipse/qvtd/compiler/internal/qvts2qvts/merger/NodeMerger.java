@@ -119,7 +119,13 @@ class NodeMerger
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getArgumentEdges() {
-		return getPrimaryNode().getArgumentEdges();		// FIXME check all original nodes
+		List<@NonNull Edge> argumentEdges = new ArrayList<>();
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(getPrimaryNode())) {
+			if (edge.isExpression()) {
+				argumentEdges.add(edge);
+			}
+		}
+		return argumentEdges;		// FIXME check all original nodes
 	}
 
 	public @NonNull List<@NonNull EdgeMerger> getIncomingEdgeMergers(@NonNull NodeMerger sourceNodeMerger) {
@@ -140,7 +146,7 @@ class NodeMerger
 	}
 
 	public @Nullable NavigableEdge getNavigableEdge(@NonNull Property property) {
-		return getPrimaryNode().getNavigableEdge(property);		// FIXME check all original nodes
+		return getPrimaryNode().getOutgoingNavigableEdge(property);		// FIXME check all original nodes
 	}
 
 	public @Nullable Node getNavigableTarget(@NonNull Property property) {

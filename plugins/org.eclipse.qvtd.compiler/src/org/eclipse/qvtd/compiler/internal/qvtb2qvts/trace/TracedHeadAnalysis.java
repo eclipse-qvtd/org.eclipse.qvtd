@@ -21,8 +21,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -70,9 +70,9 @@ public class TracedHeadAnalysis extends HeadAnalysis
 					sources1 = Sets.newHashSet(sourceNode);
 					targetFromSources.put(sourceNode, sources1);
 				}
-				for (@NonNull NavigableEdge navigableEdge : sourceNode.getNavigableEdges()) {
-					if (navigableEdge instanceof NavigationEdge) {
-						NavigationEdge navigationEdge = (NavigationEdge) navigableEdge;
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+					if (edge instanceof NavigationEdge) {
+						NavigationEdge navigationEdge = (NavigationEdge) edge;
 						Property source2targetProperty = QVTscheduleUtil.getReferredProperty(navigationEdge);
 						//					boolean isRequired = source2targetProperty.isIsRequired();
 						boolean isMany = source2targetProperty.isIsMany();

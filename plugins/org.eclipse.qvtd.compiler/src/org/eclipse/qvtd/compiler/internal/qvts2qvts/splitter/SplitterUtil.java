@@ -19,7 +19,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -123,11 +123,14 @@ class SplitterUtil
 
 	private static @NonNull Set<@NonNull Node> computeNavigableNodes(@NonNull Set<@NonNull Node> reachableNodes, @NonNull Node sourceNode) {
 		if (reachableNodes.add(sourceNode)) {
-			for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 				assert edge.getEdgeSource() == sourceNode;
-				if (!edge.isRealized() && edge.isMatched()) {
-					Node targetNode = edge.getEdgeTarget();
-					computeNavigableNodes(reachableNodes, targetNode);
+				if (edge instanceof NavigationEdge) {
+					NavigationEdge navigationEdge = (NavigationEdge) edge;
+					if (!navigationEdge.isRealized() && navigationEdge.isMatched()) {
+						Node targetNode = navigationEdge.getEdgeTarget();
+						computeNavigableNodes(reachableNodes, targetNode);
+					}
 				}
 			}
 		}

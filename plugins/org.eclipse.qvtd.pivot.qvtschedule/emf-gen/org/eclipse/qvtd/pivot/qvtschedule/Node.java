@@ -296,10 +296,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * On completion there is exactly one entry per region from each possible call path.
 	 */
 	//	void getAllAncestors(@NonNull Set<@NonNull Node> ancestors);
-	@NonNull Iterable<@NonNull Edge> getArgumentEdges();
-	@NonNull Iterable<@NonNull CastEdge> getCastEdges();
 	@NonNull Iterable<@NonNull CompleteClass> getCompleteClasses();
-	@NonNull Iterable<@NonNull Edge> getComputationEdges();
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -331,10 +328,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	@Nullable NodeConnection getIncomingPassedConnection();
 	//	@Nullable NodeConnection getIncomingUsedConnection();
 	@NonNull String getLabel();
-	@Nullable NavigableEdge getNavigableEdge(@NonNull Property source2targetProperty);
-	@NonNull Iterable<@NonNull NavigableEdge> getNavigableEdges();
 	@Nullable Node getNavigableTarget(@NonNull Property source2targetProperty);
-	@NonNull Iterable<@NonNull Node> getNavigableTargets();
 
 	/**
 	 * Return the element from which this node originated. Throws an IllegalStateException
@@ -348,9 +342,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 */
 	@NonNull Iterable<@NonNull Element> getOriginatingElements();
 
-	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();
-	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedBindingEdges();
-	//	@Nullable InterRegionEdge getPassedBindingEdge();
+	@Nullable NavigableEdge getOutgoingNavigableEdge(@NonNull Property source2targetProperty);
 
 	/**
 	 * Get all sources that pass a value to this target.
@@ -361,21 +353,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * Get all targets that are passed a value from this source.
 	 */
 	//	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
-	@Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty);
-	@NonNull Iterable<@NonNull NavigableEdge> getPredicateEdges();
-	@NonNull Iterable<@NonNull NavigationEdge> getRealizedNavigationEdges();
-	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
-
-	/**
-	 * Get all 'targets' that pass a value to this target recursively.
-	 */
-	@NonNull Iterable<@NonNull Node> getRecursionSources();
-
-	/**
-	 * Get all 'sources' that pass a value to this target recursively.
-	 */
-	@NonNull Iterable<@NonNull Node> getRecursionTargets();
-	@NonNull Iterable<@NonNull ? extends Edge> getResultEdges();
+	@Nullable Edge getOutgoingPredicateEdge(@NonNull Property source2targetProperty);
 	//	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
 	@Nullable String getShape();
 	@Nullable String getStyle();

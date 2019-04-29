@@ -378,20 +378,23 @@ public class MappingAnalysis extends RuleAnalysis
 	}
 
 	protected void analyzeContainments() {
-		for (@NonNull Node node : region.getNewNodes()) {
-			boolean isContained = false;
-			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
-				if (edge.isNavigation()) {
-					Property property = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge);
-					Property opposite = property.getOpposite();
-					if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
-						isContained = true;
-						break;
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+			if (node.isNew()) {
+				boolean isContained = false;
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
+					if (edge.isNavigation()) {
+						NavigationEdge navigationEdge = (NavigationEdge)edge;
+						Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+						Property opposite = property.getOpposite();
+						if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
+							isContained = true;
+							break;
+						}
 					}
 				}
-			}
-			if (isContained) {
-				node.setContained(true);
+				if (isContained) {
+					node.setContained(true);
+				}
 			}
 		}
 	}
@@ -529,7 +532,7 @@ public class MappingAnalysis extends RuleAnalysis
 				//				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
 				if (!referredProperty.isIsMany()) {
-					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
+					Edge predicateEdge = sourceNode.getOutgoingPredicateEdge(referredProperty);
 					if (predicateEdge == null) {
 						createNavigationEdge(sourceNode, referredProperty, targetNode, false);
 					}

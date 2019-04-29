@@ -135,45 +135,13 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	List<Node> getOwnedNodes();
 
 	void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node);
-
-	/**
-	 * Return all the nodes in this region that are call-tree ancestors of node.
-	 */
-	//	@NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node);
-
-	@NonNull Iterable<@NonNull Node> getComposedNodes();
 	@Nullable RootRegion getContainingRootRegion();
-	@NonNull Iterable<@NonNull Edge> getExpressionEdges();
-
 	List<Node> getHeadNodes();
+	int getNextPartitionNumber();
 
-	/**
-	 * Return the nodes that are navigated by navigation from the region's guards.
-	 */
-	@NonNull Iterable<@NonNull Node> getMatchedNodes();
-	@NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges();
-
-	/**
-	 * Return all nodes created by this region. i.e. Speculation or Realized nodes.
-	 */
-	@NonNull Iterable<@NonNull Node> getNewNodes();
-
-	/**
-	 * Return all nodes referenced by this region. i.e. Constant, Loaded, Predicated, Speculated nodes.
-	 */
-	@NonNull Iterable<@NonNull Node> getOldNodes();
-
-	@NonNull Iterable<@NonNull Node> getPatternNodes();
-	@NonNull Iterable<@NonNull NavigationEdge> getPredicatedNavigationEdges();
-	@NonNull Iterable<@NonNull Edge> getRealizedEdges();
-	@NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges();
-	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 	@Nullable String getShape();
 	@Nullable String getStyle();
-
 	boolean isLoadingRegion();
 	boolean isOperationRegion();
 	void resetHead(@NonNull Node headNode);
-
-	int getNextPartitionNumber();
 } // Region

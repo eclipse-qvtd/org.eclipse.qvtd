@@ -35,18 +35,13 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
-
-import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -644,49 +639,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		return "blue";
 	}
 
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getComposedNodes() {
-		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsComposedNodePredicate.INSTANCE);
-	}
-
-	/*	private int getCost(@NonNull List<@NonNull NavigableEdge> path) {
-		int cost = 0;
-		for (@NonNull NavigableEdge edge : path) {
-			if (edge.getProperty().isIsImplicit()) {
-				cost++;
-			}		// ??? containment
-		}
-		return cost;
-	} */
-
-	@Override
-	public final @NonNull Iterable<@NonNull Edge> getExpressionEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getMatchedNodes() {
-		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsMatchedNodePredicate.INSTANCE);
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges() {
-		@NonNull Iterable<@NonNull NavigableEdge> filter = Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), NavigableEdge.class);
-		return filter;
-	}
-
-	//	@Override
-	//	public @Nullable Node getNavigationTarget(@NonNull ClassNode sourceNode, @NonNull Property source2targetProperty) {
-	//		NavigationEdge navigationEdge = getNavigationEdge(sourceNode, source2targetProperty);
-	//		return navigationEdge !=  null ? navigationEdge.getTarget() : null;
-	//	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getNewNodes() {
-		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsNewNodePredicate.INSTANCE);
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -745,80 +697,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public int getNextPartitionNumber() {
 		return ++nextPartitionNumber;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getOldNodes() {
-		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsOldNodePredicate.INSTANCE);
-	}
-
-	/*	protected @Nullable List<@NonNull NavigableEdge> getPath(@NonNull Node sourceNode, @NonNull Node targetNode, @NonNull Set<@NonNull Edge> usedEdges) {
-		assert sourceNode.getOwningRegion() == targetNode.getOwningRegion();
-		NavigableEdge bestEdge = null;
-		List<@NonNull NavigableEdge> bestPath = null;
-		for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
-			if (!usedEdges.contains(edge) && !edge.getProperty().isIsMany() && !edge.isRealized()) {
-				if (edge.getEdgeTarget() == targetNode) {
-					bestEdge = getBestEdge(bestEdge, edge);
-				}
-				else {
-					Set<@NonNull Edge> moreUsedEdges = new HashSet<>(usedEdges);
-					moreUsedEdges.add(edge);
-					List<@NonNull NavigableEdge> tailPath = getPath(edge.getEdgeTarget(), targetNode, moreUsedEdges);
-					if (tailPath != null) {
-						tailPath = new ArrayList<>(tailPath);
-						tailPath.add(0, edge);
-					}
-					bestPath = getBestPath(bestPath, tailPath);
-				}
-			}
-		}
-		if (bestEdge == null) {
-			return bestPath;
-		}
-		else if (bestPath == null) {
-			return Collections.singletonList(bestEdge);
-		}
-		else {
-			return getBestPath(Collections.singletonList(bestEdge), bestPath);
-		}
-	} */
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getPatternNodes() {
-		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsPatternNodePredicate.INSTANCE);
-	}
-
-	public final @NonNull Iterable<NavigableEdge> getPredicateEdges() {
-		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), QVTscheduleUtil.IsPredicatedEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull NavigationEdge> getPredicatedNavigationEdges() {
-		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), QVTscheduleUtil.IsPredicatedNavigationEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Edge> getRealizedEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), QVTscheduleUtil.IsRealizedEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges() {
-		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), QVTscheduleUtil.IsRealizedNavigationEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Edge> getRecursionEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
-		return filter;
 	}
 
 	@Override

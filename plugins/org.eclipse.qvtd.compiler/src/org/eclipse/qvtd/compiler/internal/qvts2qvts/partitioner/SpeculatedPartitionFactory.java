@@ -191,9 +191,12 @@ public class SpeculatedPartitionFactory extends AbstractSimplePartitionFactory
 		//	}
 		//		}
 		//		for (@NonNull Node traceNode : executionNodes) {
-		for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {
-			if (mappingPartitioner.hasRealizedEdge(edge)) {
-				tracedInputNodes.add(edge.getEdgeTarget());
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
+			if (edge instanceof NavigationEdge) {
+				NavigationEdge navigationEdge = (NavigationEdge) edge;
+				if (mappingPartitioner.hasRealizedEdge(navigationEdge)) {
+					tracedInputNodes.add(navigationEdge.getEdgeTarget());
+				}
 			}
 		}
 		//		}
