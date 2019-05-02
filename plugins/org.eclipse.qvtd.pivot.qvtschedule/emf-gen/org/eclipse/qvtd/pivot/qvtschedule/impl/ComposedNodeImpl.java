@@ -78,6 +78,11 @@ public class ComposedNodeImpl extends NodeImpl implements ComposedNode {
 	}
 
 	@Override
+	public boolean isComposed() {
+		return true;
+	}
+
+	@Override
 	public boolean isMatched() {
 		return true;
 	}

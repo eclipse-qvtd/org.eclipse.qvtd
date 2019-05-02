@@ -29,6 +29,7 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.UtilityAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.ConcurrentPartitionMerger;
@@ -624,6 +625,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				QVTscheduleConstants.CONNECTION_CREATION.println(s.toString());;
 			}
 		}
+		UtilityAnalysis.assignUtilities(scheduleManager, loadingRegion);
 		scheduleManager.writeDebugGraphs("4-pre-partition", true, true, false);
 		//
 		for (@NonNull RootRegion rootRegion : rootRegions) {

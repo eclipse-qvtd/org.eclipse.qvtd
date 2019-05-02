@@ -147,7 +147,7 @@ public class CallTreeBuilder
 					Partition checkCommonPartition = connectionManager.getLoopingConnections(commonPartition).size() > 0 ? rootPartition : commonPartition;
 					assert connectionManager.getLoopingConnections(commonPartition).size() > 0
 					? Iterables.contains(connectionManager.getCallableParents(commonPartition), getCommonPartition(commonPartition, intermediatePartition))
-						: getCommonPartition(commonPartition, intermediatePartition) == checkCommonPartition;
+						: getCommonPartition(commonPartition, intermediatePartition) == checkCommonPartition : "No common partition for " + connection;
 				}
 			}
 		}

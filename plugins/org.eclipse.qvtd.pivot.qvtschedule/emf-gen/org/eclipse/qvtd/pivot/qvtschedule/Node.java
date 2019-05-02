@@ -264,6 +264,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 		//		UNCONDITIONALLY_COMPUTED,		// else always computable
 		CONDITIONAL,					// else selectively computable depending on if conditions / loops
 		DEPENDENCY,						// else solely used to establish a dependency
+		COMPOSED,						// else solely used to characterize a LoadingRegion node
 		DEAD							// else never used
 	}
 

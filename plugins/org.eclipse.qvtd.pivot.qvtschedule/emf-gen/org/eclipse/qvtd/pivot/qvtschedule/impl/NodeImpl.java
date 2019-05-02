@@ -1062,7 +1062,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public boolean isUnconditional() {
-		return QVTscheduleUtil.isUnconditional(utility);
+		return QVTscheduleUtil.isUnconditional(getUtility());
 	}
 
 	/*	@Override

@@ -643,6 +643,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			}
 		}
 		//
+		UtilityAnalysis.assignUtilities(scheduleManager, operationRegion);
 		operationRegion.toGraph(new DOTStringBuilder());
 		operationRegion.toGraph(new GraphMLStringBuilder());
 		return operationRegion;
