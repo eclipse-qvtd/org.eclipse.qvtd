@@ -64,7 +64,7 @@ public class TracedHeadAnalysis extends HeadAnalysis
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeTracedTargetFromSources() {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
 		for (@NonNull Node sourceNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (sourceNode.isPattern() && sourceNode.isUnconditional()) {
+			if (sourceNode.isPattern() /*&& sourceNode.isUnconditional()*/) {
 				Set<@NonNull Node> sources1 = targetFromSources.get(sourceNode);
 				if (sources1 == null) {
 					sources1 = Sets.newHashSet(sourceNode);
