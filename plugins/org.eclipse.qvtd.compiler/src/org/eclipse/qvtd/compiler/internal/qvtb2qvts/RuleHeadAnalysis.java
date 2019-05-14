@@ -19,6 +19,8 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
+import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -33,6 +35,8 @@ import com.google.common.collect.Sets;
  */
 public class RuleHeadAnalysis extends HeadAnalysis
 {
+	public static final @NonNull TracingOption RULE_HEAD_NODE_GROUPS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/headNodeGroups");
+
 	/**
 	 * Return the minimal head(s) of a partitioned MappingRegion from which all old nodes in the region may be reached by to-one navigation.
 	 *
@@ -98,6 +102,15 @@ public class RuleHeadAnalysis extends HeadAnalysis
 		//
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> sourceToTargetsClosure = CompilerUtil.computeInverseClosure(targetFromSourcesClosure);
 		List<@NonNull HeadNodeGroup> headNodeGroups = computeHeadNodeGroups(targetFromSourcesClosure, sourceToTargetsClosure, preferredHeadNodes);
+		if (RULE_HEAD_NODE_GROUPS.isActive()) {
+			StringBuilder s = new StringBuilder();
+			s.append(mappingRegion.getName());
+			for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {
+				s.append("\n\t");
+				headNodeGroup.appendTo(s);
+			}
+			RULE_HEAD_NODE_GROUPS.println(s.toString());
+		}
 		List<@NonNull Node> headNodes = selectHeadNodes(headNodeGroups, preferredHeadNodes);
 		//
 		//	Add the pseudo-heads for true and dependency nodes.
@@ -173,6 +186,23 @@ public class RuleHeadAnalysis extends HeadAnalysis
 			}
 		}
 		return targetFromSources;
+	}
+
+	@Override
+	protected @NonNull HeadNodeGroup createHeadNodeGroup(@NonNull List<@NonNull Node> headNodeGroup) {
+		return new HeadNodeGroup(headNodeGroup)
+		{
+			@Override
+			protected boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge) {
+				boolean isOldSource = sourceNode.isOld();
+				return isOldSource ? source2targetEdge.isOld() : source2targetEdge.isNew();
+			}
+
+			@Override
+			public String getName() {
+				return headNodeGroup.get(0).getName();
+			}
+		};
 	}
 
 	private void setHeadNodes(@NonNull Set<@NonNull Node> reachableNodes, @NonNull List<@NonNull Node> headNodes) {

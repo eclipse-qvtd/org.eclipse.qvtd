@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +22,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -30,10 +34,10 @@ import com.google.common.collect.Iterables;
 /**
  * A HeadNodeGroup identifies a set of mutually one to one navigable nodes from which many nodes can be navigated.
  *
- * If necessary a HeadNodeGroup supports a determination atht all nodes in one head node group can be derived from
+ * If necessary a HeadNodeGroup supports a determination that all nodes in one head node group can be derived from
  * those in another.
  */
-public class HeadNodeGroup
+public abstract class HeadNodeGroup implements Nameable
 {
 	/**
 	 * The mutually to-one navigable nodes that define the head group.
@@ -61,6 +65,7 @@ public class HeadNodeGroup
 	private Set<@NonNull Node> aggregateNodes = null;
 
 	public HeadNodeGroup(@NonNull List<@NonNull Node> headGroupNodes) {
+		assert !headGroupNodes.isEmpty();
 		this.headGroupNodes = headGroupNodes;
 	}
 
@@ -68,15 +73,18 @@ public class HeadNodeGroup
 		boolean gotOne = false;
 		boolean isIteratedSource = iteratedNodes.contains(sourceNode);
 		boolean isAggregateSource = aggregateNodes.contains(sourceNode);
-		boolean isOldSource = sourceNode.isOld();
 		for (@NonNull Edge source2targetEdge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
-			assert !source2targetEdge.isCast();
-			if (isOldSource ? source2targetEdge.isOld() : source2targetEdge.isNew()) {
+			if (canBeSameGroup(sourceNode, source2targetEdge)) {
 				boolean isAggregateArgument = false;
 				Boolean targetIsCollectionType = null;
 				Node targetNode = QVTscheduleUtil.getTargetNode(source2targetEdge);
 				if (uniqueNodes.contains(targetNode) || iteratedNodes.contains(targetNode) || aggregateNodes.contains(targetNode)) {
 					// targetType = null;			// already reached
+				}
+				else if (source2targetEdge.isCast()) {				// Can happen when analzing traced heads
+					uniqueNodes.add(targetNode);
+					workList.add(targetNode);
+					gotOne = true;
 				}
 				else if (source2targetEdge.isNavigation()) {
 					Property targetProperty = QVTscheduleUtil.getReferredProperty((NavigationEdge) source2targetEdge);
@@ -134,6 +142,52 @@ public class HeadNodeGroup
 			accumulateReachableTargets(workNode);
 		}
 	}
+
+	public void appendTo(@NonNull StringBuilder s) {
+		s.append("heads:");
+		List<@NonNull Node> nodeList1 = new ArrayList<>(headGroupNodes);
+		Collections.sort(nodeList1, NameUtil.NAMEABLE_COMPARATOR);
+		for (@NonNull Node node : nodeList1) {
+			s.append(" ");
+			s.append(node.getName());
+		}
+		if (uniqueNodes != null) {
+			List<@NonNull Node> nodeList2 = new ArrayList<>(uniqueNodes);
+			nodeList2.removeAll(headGroupNodes);
+			if (nodeList2.size() > 0) {
+				Collections.sort(nodeList2, NameUtil.NAMEABLE_COMPARATOR);
+				s.append(", to-ones:");
+				for (@NonNull Node node : nodeList2) {
+					s.append(" ");
+					s.append(node.getName());
+				}
+			}
+		}
+		if (iteratedNodes != null) {
+			List<@NonNull Node> nodeList3 = new ArrayList<>(iteratedNodes);
+			if (nodeList3.size() > 0) {
+				Collections.sort(nodeList3, NameUtil.NAMEABLE_COMPARATOR);
+				s.append(", to-iterated:");
+				for (@NonNull Node node : nodeList3) {
+					s.append(" ");
+					s.append(node.getName());
+				}
+			}
+		}
+		if (aggregateNodes != null) {
+			List<@NonNull Node> nodeList4 = new ArrayList<>(iteratedNodes);
+			if (nodeList4.size() > 0) {
+				Collections.sort(nodeList4, NameUtil.NAMEABLE_COMPARATOR);
+				s.append(", to-aggregates:");
+				for (@NonNull Node node : nodeList4) {
+					s.append(" ");
+					s.append(node.getName());
+				}
+			}
+		}
+	}
+
+	protected abstract boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge);
 
 	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
 		return headGroupNodes;

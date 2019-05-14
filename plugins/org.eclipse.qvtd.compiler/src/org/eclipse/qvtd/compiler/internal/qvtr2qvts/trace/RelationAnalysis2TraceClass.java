@@ -126,6 +126,10 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	} */
 
 	protected void analyzePatternNodes(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups) {
+		String name = relation.getName();
+		if ("mapInPattern_filter".equals(name)) {
+			getClass();
+		}
 		boolean manyTracesPerHead = headNodeGroups.size() > 2;
 		Set<@NonNull Node> allHeadGroupNodes = new HashSet<>();
 		for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {

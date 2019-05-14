@@ -65,7 +65,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	public static final @NonNull TracingOption REGION_TRANSITIVE_PREDECESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/region/transitive-predecessors");
 	public static final @NonNull TracingOption REGION_TRANSITIVE_SUCCESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/region/transitive-successors");
 	public static final @NonNull TracingOption ROOT_SCHEDULE = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/schedule/root");
-	public static final @NonNull TracingOption ROOT_SCHEDULE_PREDECESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/schedule/root-predecessors");
+	public static final @NonNull TracingOption ROOT_SCHEDULE_SUCCESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/schedule/root-successors");	// FIXME same as PARTITION_TRANSITIVE_SUCCESSORS
 
 	public static @NonNull PartitionedTransformationAnalysis partition(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
 		TransformationPartitioner transformationPartitioner = new TransformationPartitioner(transformationAnalysis, problemHandler, activeRegions);
