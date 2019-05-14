@@ -212,7 +212,7 @@ public abstract class HeadAnalysis
 					}
 				}
 			}
-			headNodeGroups.add(new HeadNodeGroup(headNodeGroup));
+			headNodeGroups.add(createHeadNodeGroup(headNodeGroup));
 		}
 		//
 		//	Prune any computationally derived heads
@@ -232,6 +232,8 @@ public abstract class HeadAnalysis
 		}
 		return headNodeGroups;
 	}
+
+	protected abstract @NonNull HeadNodeGroup createHeadNodeGroup(@NonNull List<@NonNull Node> headNodeGroup);
 
 	/*
 	 *	Pick the first element of each headNodeGroup as a headNode.

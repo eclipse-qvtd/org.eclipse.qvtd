@@ -57,6 +57,9 @@ org.eclipse.qvtd.compiler/qvtr2qvtc/synthesize=false
 # Turn on tracing of the QVTr variables analysis 
 org.eclipse.qvtd.compiler/qvtr2qvtc/variables=false
 
+# Turn on tracing of the head node groups controlling the trace model synthesis
+org.eclipse.qvtd.compiler/qvtr2qvts/qvtr2qvts/trace/headNodeGroups=false
+
 # Turn on optional check for producer-less consumed nodes
 org.eclipse.qvtd.compiler/qvts2qvts/connectivity=false
 # Turn on display of the final of classdatum inheritance
@@ -88,6 +91,8 @@ org.eclipse.qvtd.compiler/qvts2qvts/merge/sequential=false
 org.eclipse.qvtd.compiler/qvts2qvts/partition/cycles=false
 # Turn on tracing of the properties that discriminate multiple consumers
 org.eclipse.qvtd.compiler/qvts2qvts/partition/discrimination=false
+# Turn on tracing of the head node groups controlling the partitioning
+org.eclipse.qvtd.compiler/qvts2qvts/partition/headNodeGroups=false
 # Turn on tracing of the immediate predecessors of each partition
 org.eclipse.qvtd.compiler/qvts2qvts/partition/immediate-predecessors=false
 # Turn on tracing of the transitive predecessors of each partition
@@ -120,7 +125,8 @@ org.eclipse.qvtd.compiler/qvts2qvts/schedule/parallel=false
 # Turn on tracing of the each cycle of the root of the schedule
 org.eclipse.qvtd.compiler/qvts2qvts/schedule/root=false
 # Turn on tracing of the transitive predecessors of the root of the schedule
-org.eclipse.qvtd.compiler/qvts2qvts/schedule/root-predecessors=false
+# deprecated use org.eclipse.qvtd.compiler/qvts2qvts/partition/transitive-predecessors
+org.eclipse.qvtd.compiler/qvts2qvts/schedule/root-successors=false
 
 # Turn on tracing of the analysis for splitting of multi-headed regions
 #org.eclipse.qvtd.compiler/qvtm2qvts/split/analysis=false
