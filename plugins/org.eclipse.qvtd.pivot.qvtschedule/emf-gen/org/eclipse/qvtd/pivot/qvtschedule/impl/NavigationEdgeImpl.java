@@ -546,6 +546,9 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		if (this.getReferredProperty().isIsImplicit()) {
 			this.secondary = true;
 		}
+		else if (partial && !((NavigationEdgeImpl)oppositeEdge).partial) {
+			this.secondary = true;
+		}
 		else {
 			((NavigationEdgeImpl)oppositeEdge).secondary = true;
 		}
@@ -554,6 +557,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public void initializeProperty(@NonNull Property property, boolean isPartial) {
 		setReferredProperty(property);
+		setPartial(isPartial);
 		Property target2sourceProperty = property.getOpposite();
 		if (target2sourceProperty != null)  {
 			Node targetNode2 = targetNode;
@@ -569,12 +573,11 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 					NavigationEdge reverseEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 					reverseEdge.initialize(edgeRole2, targetNode2, target2sourceProperty.getName(), sourceNode2);
 					reverseEdge.setReferredProperty(target2sourceProperty);
-					reverseEdge.setPartial(isPartial());
+					reverseEdge.setPartial(false /*isPartial()*/);			// FIXWE assert false not isPartial()
 					initializeOpposite(reverseEdge);
 				}
 			}
 		}
-		setPartial(isPartial);
 	}
 
 	@Override
