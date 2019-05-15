@@ -709,7 +709,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		toGraphHelper.setLabel(this);
 		toGraphHelper.setShapeAndStyle(this);
 		toGraphHelper.setColor(this);
-		if (!isUnconditional()) {
+		if ((utility != null) && !isUnconditional()) {
 			s.setFillColor(getFillColor());
 		}
 		toGraphHelper.setPenwidth(this);
@@ -889,7 +889,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			}
 			s.append("dashed");
 		}
-		if (!isUnconditional()) {
+		if ((utility != null) && !isUnconditional()) {
 			if (s.length() > 0) {
 				s.append(",");
 			}
