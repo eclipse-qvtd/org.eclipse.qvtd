@@ -189,7 +189,10 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		//			sourceArrowType = ArrowType.delta;
 		//			targetArrowType = ArrowType.none;
 		//		}
-		if ("normal".equals(arrowhead)) {
+		if ("none".equals(arrowhead)) {
+			targetArrowType = ArrowType.none;
+		}
+		else if ("normal".equals(arrowhead)) {
 			targetArrowType = ArrowType.delta;
 		}
 		else if ("vee".equals(arrowhead)) {
