@@ -388,13 +388,13 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
 		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 		toGraphHelper.setColor(this);
-		@Nullable
 		NavigationEdge oppositeEdge2 = oppositeEdge;
 		if (oppositeEdge2 != null) {
+			String oppositeName = oppositeEdge2.getReferredProperty().getName();
 			String oppositeLabel = oppositeEdge2.getLabel();
 			ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(this));
 			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(sourceClassDatum)) {
-				if ((oppositeLabel != null) && !oppositeEdge2.getReferredProperty().getName().equals(completeClass.getName())) {
+				if ((oppositeLabel != null) && !oppositeName.equals(completeClass.getName())) {
 					s.setTaillabel(oppositeLabel);
 					break;
 				}
@@ -408,11 +408,17 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		if (style != null) {
 			s.setStyle(style);
 		}
-		if (!isSecondary() && (oppositeEdge2 != null)) {
+		boolean isComposite = (referredProperty != null) && referredProperty.isIsComposite();
+		if (isComposite) {
 			s.setDir("both");
-			s.setArrowtail("vee");
+			s.setArrowtail("diamond");
 		}
-		s.setArrowhead(partial ? "none" : "normal");
+		else if (!isSecondary() && (oppositeEdge2 != null)) {
+			s.setDir("both");
+			s.setArrowtail(oppositeEdge2.isPartial() ? "none" : "vee");
+		}
+		boolean isOppositeComposite = (referredProperty != null) && (referredProperty.getOpposite() != null) && referredProperty.getOpposite().isIsComposite();
+		s.setArrowhead(partial ? "none" : isOppositeComposite ? "diamond" : "normal");
 		s.setPenwidth(getPenwidth());
 		s.appendAttributedEdge(sourceName, this, targetName);
 	}
