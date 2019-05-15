@@ -53,7 +53,9 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	private @NonNull LineType lineType = LineType.line;
 	private @NonNull String labelColor = "#000000";
 	private @Nullable ArrowType sourceArrowType = null;
+	private @Nullable String sourceLabel = null;
 	private @Nullable ArrowType targetArrowType = null;
+	private @Nullable String targetLabel = null;
 
 	public GraphMLStringBuilder() {
 		this.node2name = new HashMap<>();
@@ -76,7 +78,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		s.pushTag("y:PolyLineEdge");
 		appendLineStyle(new LineStyle(lineColor, lineType, width));
 		appendArrows(sourceArrowType != null ? sourceArrowType.name() : ArrowType.none.name(), targetArrowType != null ? targetArrowType.name() : ArrowType.delta.name());
-		appendEdgeLabel(label, labelColor);
+		appendEdgeLabel(sourceLabel, labelColor, targetLabel);
 		s.popTag();
 		s.popTag();
 		s.popTag();
@@ -176,6 +178,8 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		color = "#000000";
 		fillColor = "#ffffff";
 		label = null;
+		sourceLabel = null;
+		targetLabel = null;
 		lineType = LineType.line;
 		penwidth = "2.0";
 		shape = "rectangle";
@@ -252,7 +256,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		if (replace.length() < 10) {
 			replace = "   " + replace + "    ";
 		}
-		this.label = replace;
+		this.sourceLabel = replace;
 	}
 
 	@Override
@@ -304,7 +308,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		if (replace.length() < 10) {
 			replace = "   " + replace + "    ";
 		}
-		this.label = replace;
+		this.targetLabel = replace;
 	}
 
 	@Override
