@@ -412,7 +412,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			s.setDir("both");
 			s.setArrowtail("vee");
 		}
-		s.setArrowhead("normal");
+		s.setArrowhead(partial ? "none" : "normal");
 		s.setPenwidth(getPenwidth());
 		s.appendAttributedEdge(sourceName, this, targetName);
 	}
@@ -508,15 +508,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 
 	@Override
 	public @Nullable String getLabel() {
+		Property source2targetProperty2 = getReferredProperty();
+		if (source2targetProperty2 == null) {
+			return "null";
+		}
 		if (partial) {
-			return "«includes»\\n" + super.getLabel();
+			String multiplicityString = PivotUtil.getMultiplicity(source2targetProperty2);
+			return super.getLabel() + "\\n" + multiplicityString.substring(0, 1) + "1 of " + multiplicityString.substring(1);
 		}
 		else {
-			Property source2targetProperty2 = getReferredProperty();
-			if (source2targetProperty2 == null) {
-				return "null";
-			}
-			else if (source2targetProperty2.eContainer() != null) {
+			if (source2targetProperty2.eContainer() != null) {
 				return source2targetProperty2.getName() + "\\n" + PivotUtil.getMultiplicity(source2targetProperty2);
 			}
 			else {
