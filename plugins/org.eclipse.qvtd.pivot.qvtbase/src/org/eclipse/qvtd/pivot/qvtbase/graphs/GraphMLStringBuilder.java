@@ -189,11 +189,17 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		//			sourceArrowType = ArrowType.delta;
 		//			targetArrowType = ArrowType.none;
 		//		}
-		if ("none".equals(arrowhead)) {
+		if ("diamond".equals(arrowhead)) {
+			targetArrowType = ArrowType.diamond;
+		}
+		else if ("none".equals(arrowhead)) {
 			targetArrowType = ArrowType.none;
 		}
 		else if ("normal".equals(arrowhead)) {
 			targetArrowType = ArrowType.delta;
+		}
+		else if ("odiamond".equals(arrowhead)) {
+			targetArrowType = ArrowType.white_diamond;
 		}
 		else if ("vee".equals(arrowhead)) {
 			targetArrowType = ArrowType.standard;
@@ -202,8 +208,17 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 
 	@Override
 	public void setArrowtail(@NonNull String arrowtail) {
-		if ("normal".equals(arrowtail)) {
+		if ("diamond".equals(arrowtail)) {
+			sourceArrowType = ArrowType.diamond;
+		}
+		else if ("none".equals(arrowtail)) {
+			sourceArrowType = ArrowType.none;
+		}
+		else if ("normal".equals(arrowtail)) {
 			sourceArrowType = ArrowType.delta;
+		}
+		else if ("odiamond".equals(arrowtail)) {
+			sourceArrowType = ArrowType.white_diamond;
 		}
 		else if ("vee".equals(arrowtail)) {
 			sourceArrowType = ArrowType.standard;
