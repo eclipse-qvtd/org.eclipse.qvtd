@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
@@ -183,6 +184,7 @@ public interface ScheduleManager
 
 	void setRootRegion(@NonNull MappingRegion mappingRegion, @Nullable RootRegion rootRegion);
 
+	void throwCompilerChainExceptionForErrors() throws CompilerChainException;
 	/**
 	 * Return true to use the new QVTr ActivatorRegion support, false to retain the older, one day obsolete support.
 	 */

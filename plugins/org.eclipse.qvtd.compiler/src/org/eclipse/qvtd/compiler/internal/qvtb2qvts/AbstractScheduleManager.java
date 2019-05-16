@@ -50,6 +50,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
@@ -1110,6 +1111,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			}
 		}
 	} */
+
+	@Override
+	public void throwCompilerChainExceptionForErrors() throws CompilerChainException {
+		problemHandler.throwCompilerChainExceptionForErrors();
+	}
 
 	@Override
 	public void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {

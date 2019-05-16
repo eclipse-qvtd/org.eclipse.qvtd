@@ -15,4 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface ProblemHandler
 {
 	void addProblem(@NonNull CompilerProblem problem);
+
+	void throwCompilerChainExceptionForErrors() throws CompilerChainException;
 }
