@@ -45,6 +45,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TracedHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
@@ -294,7 +295,14 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTiProductionConsumption.SUMMARY.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		TracedHeadAnalysis.TRACED_HEAD_NODE_GROUPS.setState(true);
+		TracedHeadAnalysis.TRACED_HEAD_IMMEDIATE_SOURCES.setState(true);
 		//	RuleHeadAnalysis.RULE_HEAD_NODE_GROUPS.setState(true);
+		//	TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);
+		//	TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);
+		//	TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);
+		//	TransformationPartitioner.REGION_IMMEDIATE_PREDECESSORS.setState(true);
+		//	TransformationPartitioner.REGION_TRANSITIVE_PREDECESSORS.setState(true);
+		//	TransformationPartitioner.REGION_TRANSITIVE_SUCCESSORS.setState(true);
 		MyQVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.atl");
 		testFileSystemHelper.addExportedPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr");
@@ -1093,6 +1101,15 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		TracedHeadAnalysis.TRACED_HEAD_NODE_GROUPS.setState(true);
+		TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);
+		TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);
+		TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);
+		TransformationPartitioner.REGION_IMMEDIATE_PREDECESSORS.setState(true);
+		TransformationPartitioner.REGION_TRANSITIVE_PREDECESSORS.setState(true);
+		TransformationPartitioner.REGION_TRANSITIVE_SUCCESSORS.setState(true);
+		//	TransformationPartitioner.ROOT_SCHEDULE_PREDECESSORS.setState(true);
+		TransformationPartitioner.ROOT_SCHEDULE.setState(true);
 		Class<? extends Transformer> txClass;
 		MyQVT myQVT1 = createQVT("MiToSiSimpleWithKeys", getModelsURI("mitosi/MiToSiSimpleWithKeys.qvtr"));
 		try {

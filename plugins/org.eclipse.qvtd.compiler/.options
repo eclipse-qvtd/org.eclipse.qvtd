@@ -59,6 +59,8 @@ org.eclipse.qvtd.compiler/qvtr2qvtc/variables=false
 
 # Turn on tracing of the head node groups controlling the trace model synthesis
 org.eclipse.qvtd.compiler/qvtr2qvts/qvtr2qvts/trace/headNodeGroups=false
+# Turn on tracing of the per-target node sources for the head node groups controlling the trace model synthesis
+org.eclipse.qvtd.compiler/qvtr2qvts/qvtr2qvts/trace/headSources=false
 
 # Turn on optional check for producer-less consumed nodes
 org.eclipse.qvtd.compiler/qvts2qvts/connectivity=false
