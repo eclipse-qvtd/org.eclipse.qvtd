@@ -107,6 +107,7 @@ public abstract class AbstractCompilerStep implements CompilerStep
 		return asResource;
 	}
 
+	@Override
 	public void throwCompilerChainExceptionForErrors() throws CompilerChainException {
 		if (compilerProblems != null) {
 			compilerProblems.throwCompilerChainExceptionForErrors();

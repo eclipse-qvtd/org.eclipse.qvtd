@@ -26,6 +26,8 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalys
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
@@ -115,6 +117,19 @@ public class CyclicPartitionsAnalysis extends AbstractCyclicPartialRegionsAnalys
 	 */
 	public @NonNull RootPartitionAnalysis analyze(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> leafPartitionAnalysis2predecessors = CompilerUtil.computeTransitivePredecessors(leafPartitionAnalyses, TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS, TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS);
+		//
+		//	Diagnose no-predessors since really confusing things happen for false roots.
+		//
+		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> leafPartitionAnalysis : leafPartitionAnalysis2predecessors.keySet()) {
+			Partition partition = leafPartitionAnalysis.getPartition();
+			if (!(partition instanceof LoadingPartition)) {
+				Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> predecessors = leafPartitionAnalysis2predecessors.get(leafPartitionAnalysis);
+				assert predecessors != null;
+				if (predecessors.isEmpty()) {
+					partitionedTransformationAnalysis.getScheduleManager().addPartitionError(partition, "has no predecessors");
+				}
+			}
+		}
 		Map<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> leafPartitionAnalysis2successors = CompilerUtil.computeTransitiveSuccessors(leafPartitionAnalysis2predecessors, TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS);
 		Set<@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>> intersections = new HashSet<>();
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> leafPartitionAnalysis : leafPartitionAnalyses) {

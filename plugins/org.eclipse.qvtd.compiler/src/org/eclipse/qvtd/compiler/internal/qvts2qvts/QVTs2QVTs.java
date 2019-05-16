@@ -638,6 +638,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 		//		getRegionAnalysis(loadingRegion).setPartitions(Collections.singletonList(new NonPartition(loadingRegion));
 		scheduleManager.writeDebugGraphs("5-post-partition", true, true, false);
+		scheduleManager.throwCompilerChainExceptionForErrors();
 		//
 		for (@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis : partitionedTransformationAnalyses) {
 			schedule(partitionedTransformationAnalysis);
