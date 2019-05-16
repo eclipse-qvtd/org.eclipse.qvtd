@@ -47,9 +47,9 @@ public class TracedHeadNodeGroup extends HeadNodeGroup
 	protected boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge) {
 		Node targetNode = source2targetEdge.getEdgeTarget();
 		TypedModel sourceTypedModel = QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getClassDatum(sourceNode));
-		assert typedModel == sourceTypedModel;
+		assert (typedModel == sourceTypedModel) || sourceTypedModel.isIsPrimitive();
 		TypedModel targetTypedModel = QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getClassDatum(targetNode));
-		return typedModel == targetTypedModel;
+		return (typedModel == targetTypedModel) || targetTypedModel.isIsPrimitive();
 	}
 
 	@Override
