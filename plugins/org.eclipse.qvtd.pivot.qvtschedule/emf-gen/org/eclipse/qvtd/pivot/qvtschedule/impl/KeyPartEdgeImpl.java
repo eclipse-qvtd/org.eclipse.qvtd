@@ -207,4 +207,14 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 		newEdge.setReferredPart(getReferredPart());
 		return newEdge;
 	}
+
+	@Override
+	public String getArrowhead() {
+		return "normal";
+	}
+
+	@Override
+	public String getArrowtail() {
+		return "normal";
+	}
 } //KeyPartEdgeImpl
