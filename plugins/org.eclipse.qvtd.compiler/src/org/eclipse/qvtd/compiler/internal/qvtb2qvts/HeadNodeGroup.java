@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -81,9 +82,13 @@ public abstract class HeadNodeGroup implements Nameable
 				if (uniqueNodes.contains(targetNode) || iteratedNodes.contains(targetNode) || aggregateNodes.contains(targetNode)) {
 					// targetType = null;			// already reached
 				}
-				else if (source2targetEdge.isCast()) {				// Can happen when analzing traced heads
+				else if (source2targetEdge.isCast()) {				// Can happen when analyzing traced heads
 					uniqueNodes.add(targetNode);
 					workList.add(targetNode);
+					gotOne = true;
+				}
+				else if (source2targetEdge.isPredicate()) {
+					uniqueNodes.add(targetNode);
 					gotOne = true;
 				}
 				else if (source2targetEdge.isNavigation()) {
@@ -127,6 +132,14 @@ public abstract class HeadNodeGroup implements Nameable
 					workList.add(targetNode);
 					gotOne = true;
 				}
+			}
+		}
+		for (@NonNull Edge target2sourceEdge : QVTscheduleUtil.getIncomingEdges(sourceNode)) {
+			if (target2sourceEdge instanceof KeyPartEdge) {		// FIXME KeyPartEdge is bidirectional
+				Node targetNode = QVTscheduleUtil.getSourceNode(target2sourceEdge);
+				uniqueNodes.add(targetNode);
+				workList.add(targetNode);
+				gotOne = true;
 			}
 		}
 		return gotOne;
