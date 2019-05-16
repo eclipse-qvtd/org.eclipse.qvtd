@@ -628,6 +628,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		}
 		String arrowtail = getArrowtail();
 		if (arrowtail != null) {
+			s.setDir("both");
 			s.setArrowtail(arrowtail);
 		}
 		s.setPenwidth(getPenwidth());
