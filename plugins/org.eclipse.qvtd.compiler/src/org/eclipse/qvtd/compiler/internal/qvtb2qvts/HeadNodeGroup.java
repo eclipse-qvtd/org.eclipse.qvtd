@@ -20,13 +20,10 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -58,12 +55,12 @@ public abstract class HeadNodeGroup implements Nameable
 	/**
 	 * The iterated nodes currently known to be to-one navigable from the head.
 	 */
-	private Set<@NonNull Node> iteratedNodes = null;
+	//	private Set<@NonNull Node> iteratedNodes = null;
 
 	/**
 	 * The collection nodes currently known to be to-one navigable from the head.
 	 */
-	private Set<@NonNull Node> aggregateNodes = null;
+	//	private Set<@NonNull Node> aggregateNodes = null;
 
 	public HeadNodeGroup(@NonNull List<@NonNull Node> headGroupNodes) {
 		assert !headGroupNodes.isEmpty();
@@ -71,18 +68,19 @@ public abstract class HeadNodeGroup implements Nameable
 	}
 
 	private boolean accumulateReachableTargets(@NonNull Node sourceNode) {
+		assert sourceNode.isMatched();
 		boolean gotOne = false;
-		boolean isIteratedSource = iteratedNodes.contains(sourceNode);
-		boolean isAggregateSource = aggregateNodes.contains(sourceNode);
+		//	boolean isIteratedSource = iteratedNodes.contains(sourceNode);
+		//	boolean isAggregateSource = aggregateNodes.contains(sourceNode);
 		for (@NonNull Edge source2targetEdge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
-			if (canBeSameGroup(sourceNode, source2targetEdge)) {
-				boolean isAggregateArgument = false;
-				Boolean targetIsCollectionType = null;
-				Node targetNode = QVTscheduleUtil.getTargetNode(source2targetEdge);
-				if (uniqueNodes.contains(targetNode) || iteratedNodes.contains(targetNode) || aggregateNodes.contains(targetNode)) {
+			Node targetNode = QVTscheduleUtil.getTargetNode(source2targetEdge);
+			if (targetNode.isMatched() && canBeSameGroup(sourceNode, source2targetEdge) && !uniqueNodes.contains(targetNode)) {
+				//	boolean isAggregateArgument = false;
+				//	Boolean targetIsCollectionType = null;
+				/*if (uniqueNodes.contains(targetNode) || iteratedNodes.contains(targetNode) || aggregateNodes.contains(targetNode)) {
 					// targetType = null;			// already reached
 				}
-				else if (source2targetEdge.isCast()) {				// Can happen when analyzing traced heads
+				else*/ if (source2targetEdge.isCast()) {				// Can happen when analyzing traced heads
 					uniqueNodes.add(targetNode);
 					workList.add(targetNode);
 					gotOne = true;
@@ -92,33 +90,36 @@ public abstract class HeadNodeGroup implements Nameable
 					gotOne = true;
 				}
 				else if (source2targetEdge.isNavigation()) {
-					Property targetProperty = QVTscheduleUtil.getReferredProperty((NavigationEdge) source2targetEdge);
-					targetIsCollectionType = targetProperty.getType() instanceof CollectionType;
+					if (!source2targetEdge.isPartial()) {
+						uniqueNodes.add(targetNode);
+						workList.add(targetNode);
+						gotOne = true;
+					}
 				}
 				else if (source2targetEdge.isPredicate()) {
 					// targetType = null;			// «includes» is not reachable
 				}
 				else if (source2targetEdge.isComputation()) {
-					isAggregateArgument = isAggregateSource && targetNode.isOperation();
+					//	isAggregateArgument = isAggregateSource && targetNode.isOperation();
 					boolean allArgumentsReachable = true;
 					for (@NonNull Edge argumentEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 						if ((argumentEdge != source2targetEdge) && argumentEdge.isComputation()) {
 							Node argumentNode = QVTscheduleUtil.getSourceNode(argumentEdge);
-							if (!argumentNode.isConstant() && !uniqueNodes.contains(argumentNode) && !iteratedNodes.contains(argumentNode) && !aggregateNodes.contains(argumentNode)) {
-								allArgumentsReachable = false;
-								break;
-							}
-							if (argumentNode.getClassDatum().isCollectionType()) {
-								isAggregateArgument = targetNode.isOperation();
+							if (argumentNode.isMatched()) {
+								if (!argumentNode.isConstant() && !uniqueNodes.contains(argumentNode)) {
+									allArgumentsReachable = false;
+									break;
+								}
 							}
 						}
 					}
 					if (allArgumentsReachable) {
-						// assert targetNode.isOperation() || targetNode.isIterator();
-						targetIsCollectionType = targetNode.getClassDatum().isCollectionType();
+						uniqueNodes.add(targetNode);
+						workList.add(targetNode);
+						gotOne = true;
 					}
 				}
-				if (targetIsCollectionType != null) {
+				/*	if (targetIsCollectionType != null) {
 					if (targetIsCollectionType) {
 						aggregateNodes.add(targetNode);
 					}
@@ -131,14 +132,16 @@ public abstract class HeadNodeGroup implements Nameable
 					}
 					workList.add(targetNode);
 					gotOne = true;
-				}
+				} */
 			}
 		}
 		for (@NonNull Edge target2sourceEdge : QVTscheduleUtil.getIncomingEdges(sourceNode)) {
 			if (target2sourceEdge instanceof KeyPartEdge) {		// FIXME KeyPartEdge is bidirectional
 				Node targetNode = QVTscheduleUtil.getSourceNode(target2sourceEdge);
 				uniqueNodes.add(targetNode);
-				workList.add(targetNode);
+				if (targetNode.isMatched()) {
+					workList.add(targetNode);
+				}
 				gotOne = true;
 			}
 		}
@@ -148,8 +151,8 @@ public abstract class HeadNodeGroup implements Nameable
 	private void accumulateReachables() {
 		workList = new ArrayDeque<>(headGroupNodes);
 		uniqueNodes = new HashSet<>(headGroupNodes);
-		iteratedNodes = new HashSet<>();
-		aggregateNodes = new HashSet<>();
+		//	iteratedNodes = new HashSet<>();
+		//	aggregateNodes = new HashSet<>();
 		while (!workList.isEmpty()) {
 			Node workNode = workList.removeFirst();
 			accumulateReachableTargets(workNode);
@@ -176,7 +179,7 @@ public abstract class HeadNodeGroup implements Nameable
 				}
 			}
 		}
-		if (iteratedNodes != null) {
+		/*	if (iteratedNodes != null) {
 			List<@NonNull Node> nodeList3 = new ArrayList<>(iteratedNodes);
 			if (nodeList3.size() > 0) {
 				Collections.sort(nodeList3, NameUtil.NAMEABLE_COMPARATOR);
@@ -197,7 +200,7 @@ public abstract class HeadNodeGroup implements Nameable
 					s.append(node.getName());
 				}
 			}
-		}
+		} */
 	}
 
 	protected abstract boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge);
@@ -250,7 +253,7 @@ public abstract class HeadNodeGroup implements Nameable
 				s.append(node);
 			}
 		}
-		if (iteratedNodes != null) {
+		/*	if (iteratedNodes != null) {
 			s.append("\n\tto-iterated:");
 			for (@NonNull Node node : iteratedNodes) {
 				s.append("\n\t\t");
@@ -263,7 +266,7 @@ public abstract class HeadNodeGroup implements Nameable
 				s.append("\n\t\t");
 				s.append(node);
 			}
-		}
+		} */
 		if (workList != null) {
 			s.append("\n\twork-list:");
 			for (@NonNull Node node : workList) {

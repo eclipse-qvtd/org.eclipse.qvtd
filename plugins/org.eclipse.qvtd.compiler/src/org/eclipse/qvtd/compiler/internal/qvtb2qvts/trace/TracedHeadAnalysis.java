@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +42,7 @@ import com.google.common.collect.Sets;
 public class TracedHeadAnalysis extends HeadAnalysis
 {
 	public static final @NonNull TracingOption TRACED_HEAD_NODE_GROUPS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvts/trace/headNodeGroups");
+	public static final @NonNull TracingOption TRACED_HEAD_IMMEDIATE_SOURCES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvts/trace/headSources");
 
 	/**
 	 * Return the head(s) of each TypedModel, mapped to the closure of elements that are transitively and bidirectionally one to one navigable from them.
@@ -49,8 +51,25 @@ public class TracedHeadAnalysis extends HeadAnalysis
 	 */
 	public static @NonNull List<@NonNull HeadNodeGroup> computeTraceHeadGroupNodes(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion mappingRegion) {
 		String name = mappingRegion.getName();
+		if ("mapInPattern_qvtr".equals(name)) {
+			scheduleManager.getClass();
+		}
 		TracedHeadAnalysis mappingRegionAnalysis = new TracedHeadAnalysis(mappingRegion);
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = mappingRegionAnalysis.computeTracedTargetFromSources();
+		if (TRACED_HEAD_IMMEDIATE_SOURCES.isActive()) {
+			StringBuilder s = new StringBuilder();
+			List<@NonNull Node> targets = new ArrayList<>(targetFromSources.keySet());
+			Collections.sort(targets, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull Node target : targets) {
+				s.append("\n  " + target.getName() + ":");
+				List<@NonNull Node> sources = new ArrayList<>(targetFromSources.get(target));
+				Collections.sort(sources, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull Node source : sources) {
+					s.append(" " + source.getName());
+				}
+			}
+			TRACED_HEAD_IMMEDIATE_SOURCES.println(s.toString());
+		}
 		//
 		//	Ripple the local target-from-sources to compute the overall target-from-sources closure.
 		//
@@ -83,21 +102,33 @@ public class TracedHeadAnalysis extends HeadAnalysis
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeTracedTargetFromSources() {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
 		for (@NonNull Node sourceNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			//	if (sourceNode.isPattern() /*&& sourceNode.isUnconditional()*/) {
-			Set<@NonNull Node> sources1 = targetFromSources.get(sourceNode);
-			if (sources1 == null) {
-				sources1 = Sets.newHashSet(sourceNode);
-				targetFromSources.put(sourceNode, sources1);
-			}
-			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
-				Node targetNode = edge.getEdgeTarget();
-				if (edge instanceof NavigationEdge) {
-					NavigationEdge navigationEdge = (NavigationEdge) edge;
-					Property source2targetProperty = QVTscheduleUtil.getReferredProperty(navigationEdge);
-					//					boolean isRequired = source2targetProperty.isIsRequired();
-					boolean isMany = source2targetProperty.isIsMany();
-					if (!isMany || targetNode.isDataType()) {
-						if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isNullLiteral() && !targetNode.isConstant()) {
+			if (sourceNode.isMatched() && !sourceNode.isConstant()) {
+				//	if (sourceNode.isPattern() /*&& sourceNode.isUnconditional()*/) {
+				Set<@NonNull Node> sources1 = targetFromSources.get(sourceNode);
+				if (sources1 == null) {
+					sources1 = Sets.newHashSet(sourceNode);
+					targetFromSources.put(sourceNode, sources1);
+				}
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+					Node targetNode = edge.getEdgeTarget();
+					if (targetNode.isMatched() && !targetNode.isConstant()) {
+						if (edge instanceof NavigationEdge) {
+							NavigationEdge navigationEdge = (NavigationEdge) edge;
+							Property source2targetProperty = QVTscheduleUtil.getReferredProperty(navigationEdge);
+							//					boolean isRequired = source2targetProperty.isIsRequired();
+							boolean isMany = source2targetProperty.isIsMany();
+							if (!isMany || targetNode.isDataType()) {
+								if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isNullLiteral() && !targetNode.isConstant()) {
+									Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
+									if (sources2 == null) {
+										sources2 = Sets.newHashSet(targetNode);
+										targetFromSources.put(targetNode, sources2);
+									}
+									sources2.add(sourceNode);
+								}
+							}
+						}
+						else if (edge instanceof CastEdge) {
 							Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
 							if (sources2 == null) {
 								sources2 = Sets.newHashSet(targetNode);
@@ -107,16 +138,8 @@ public class TracedHeadAnalysis extends HeadAnalysis
 						}
 					}
 				}
-				else if (edge instanceof CastEdge) {
-					Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
-					if (sources2 == null) {
-						sources2 = Sets.newHashSet(targetNode);
-						targetFromSources.put(targetNode, sources2);
-					}
-					sources2.add(sourceNode);
-				}
+				//	}
 			}
-			//	}
 		}
 		return targetFromSources;
 	}
