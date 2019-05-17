@@ -43,44 +43,23 @@ public abstract class HeadNodeGroup implements Nameable
 	private final @NonNull List<@NonNull Node> headGroupNodes;
 
 	/**
-	 * The object nodes awaiting analysis.
-	 */
-	private Deque<@NonNull Node> workList = null;
-
-	/**
 	 * The object nodes currently known to be to-one navigable from the head.
 	 */
 	private Set<@NonNull Node> uniqueNodes = null;
-
-	/**
-	 * The iterated nodes currently known to be to-one navigable from the head.
-	 */
-	//	private Set<@NonNull Node> iteratedNodes = null;
-
-	/**
-	 * The collection nodes currently known to be to-one navigable from the head.
-	 */
-	//	private Set<@NonNull Node> aggregateNodes = null;
 
 	public HeadNodeGroup(@NonNull List<@NonNull Node> headGroupNodes) {
 		assert !headGroupNodes.isEmpty();
 		this.headGroupNodes = headGroupNodes;
 	}
 
-	private boolean accumulateReachableTargets(@NonNull Node sourceNode) {
+	private boolean accumulateReachableTargets(@NonNull Deque<@NonNull Node> workList) {
+		Node sourceNode = workList.removeFirst();
 		assert sourceNode.isMatched();
 		boolean gotOne = false;
-		//	boolean isIteratedSource = iteratedNodes.contains(sourceNode);
-		//	boolean isAggregateSource = aggregateNodes.contains(sourceNode);
 		for (@NonNull Edge source2targetEdge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 			Node targetNode = QVTscheduleUtil.getTargetNode(source2targetEdge);
 			if (targetNode.isMatched() && canBeSameGroup(sourceNode, source2targetEdge) && !uniqueNodes.contains(targetNode)) {
-				//	boolean isAggregateArgument = false;
-				//	Boolean targetIsCollectionType = null;
-				/*if (uniqueNodes.contains(targetNode) || iteratedNodes.contains(targetNode) || aggregateNodes.contains(targetNode)) {
-					// targetType = null;			// already reached
-				}
-				else*/ if (source2targetEdge.isCast()) {				// Can happen when analyzing traced heads
+				if (source2targetEdge.isCast()) {				// Can happen when analyzing traced heads
 					uniqueNodes.add(targetNode);
 					workList.add(targetNode);
 					gotOne = true;
@@ -96,11 +75,7 @@ public abstract class HeadNodeGroup implements Nameable
 						gotOne = true;
 					}
 				}
-				else if (source2targetEdge.isPredicate()) {
-					// targetType = null;			// «includes» is not reachable
-				}
 				else if (source2targetEdge.isComputation()) {
-					//	isAggregateArgument = isAggregateSource && targetNode.isOperation();
 					boolean allArgumentsReachable = true;
 					for (@NonNull Edge argumentEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 						if ((argumentEdge != source2targetEdge) && argumentEdge.isComputation()) {
@@ -119,20 +94,6 @@ public abstract class HeadNodeGroup implements Nameable
 						gotOne = true;
 					}
 				}
-				/*	if (targetIsCollectionType != null) {
-					if (targetIsCollectionType) {
-						aggregateNodes.add(targetNode);
-					}
-					else if ((isAggregateSource || isIteratedSource) &&!isAggregateArgument) {
-						iteratedNodes.add(targetNode);
-					}
-					else {
-						//							assert isToOne;
-						uniqueNodes.add(targetNode);
-					}
-					workList.add(targetNode);
-					gotOne = true;
-				} */
 			}
 		}
 		for (@NonNull Edge target2sourceEdge : QVTscheduleUtil.getIncomingEdges(sourceNode)) {
@@ -149,13 +110,10 @@ public abstract class HeadNodeGroup implements Nameable
 	}
 
 	private void accumulateReachables() {
-		workList = new ArrayDeque<>(headGroupNodes);
+		Deque<@NonNull Node> workList = new ArrayDeque<>(headGroupNodes);
 		uniqueNodes = new HashSet<>(headGroupNodes);
-		//	iteratedNodes = new HashSet<>();
-		//	aggregateNodes = new HashSet<>();
 		while (!workList.isEmpty()) {
-			Node workNode = workList.removeFirst();
-			accumulateReachableTargets(workNode);
+			accumulateReachableTargets(workList);
 		}
 	}
 
@@ -179,28 +137,6 @@ public abstract class HeadNodeGroup implements Nameable
 				}
 			}
 		}
-		/*	if (iteratedNodes != null) {
-			List<@NonNull Node> nodeList3 = new ArrayList<>(iteratedNodes);
-			if (nodeList3.size() > 0) {
-				Collections.sort(nodeList3, NameUtil.NAMEABLE_COMPARATOR);
-				s.append(", to-iterated:");
-				for (@NonNull Node node : nodeList3) {
-					s.append(" ");
-					s.append(node.getName());
-				}
-			}
-		}
-		if (aggregateNodes != null) {
-			List<@NonNull Node> nodeList4 = new ArrayList<>(iteratedNodes);
-			if (nodeList4.size() > 0) {
-				Collections.sort(nodeList4, NameUtil.NAMEABLE_COMPARATOR);
-				s.append(", to-aggregates:");
-				for (@NonNull Node node : nodeList4) {
-					s.append(" ");
-					s.append(node.getName());
-				}
-			}
-		} */
 	}
 
 	protected abstract boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge);
@@ -249,27 +185,6 @@ public abstract class HeadNodeGroup implements Nameable
 		if (uniqueNodes != null) {
 			s.append("\n\tto-ones:");
 			for (@NonNull Node node : uniqueNodes) {
-				s.append("\n\t\t");
-				s.append(node);
-			}
-		}
-		/*	if (iteratedNodes != null) {
-			s.append("\n\tto-iterated:");
-			for (@NonNull Node node : iteratedNodes) {
-				s.append("\n\t\t");
-				s.append(node);
-			}
-		}
-		if (aggregateNodes != null) {
-			s.append("\n\tto-aggregates:");
-			for (@NonNull Node node : aggregateNodes) {
-				s.append("\n\t\t");
-				s.append(node);
-			}
-		} */
-		if (workList != null) {
-			s.append("\n\twork-list:");
-			for (@NonNull Node node : workList) {
 				s.append("\n\t\t");
 				s.append(node);
 			}
