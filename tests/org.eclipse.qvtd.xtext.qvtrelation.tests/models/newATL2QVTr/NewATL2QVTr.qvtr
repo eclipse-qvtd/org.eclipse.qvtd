@@ -228,18 +228,14 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				rule = atlRule : MatchedRule{},
 				filter = atlExpression
 			};
-			enforce domain qvtr qvtrDomain : RelationDomain {
-				rule = qvtrRelation : Relation {
-					when = w : Pattern{
-						predicate = p : Predicate{
-							conditionExpression = qvtrExpression
-						}
-					}
+			enforce domain qvtr qvtrPattern : Pattern {
+				whenOwner = qvtrRelation : Relation{},
+				predicate = qvtrPredicate : Predicate{
+					conditionExpression = qvtrExpression
 				}
 			};
 			when {
 				mapMatchedRule(atlRule, qvtrRelation);
-				mapInPattern(atlPattern, qvtrDomain);
 				mapOclExpression(atlExpression, qvtrExpression);
 			}
 		}
