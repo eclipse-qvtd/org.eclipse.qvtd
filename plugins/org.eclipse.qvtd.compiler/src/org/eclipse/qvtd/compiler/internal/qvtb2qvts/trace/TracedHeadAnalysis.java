@@ -50,10 +50,7 @@ public class TracedHeadAnalysis extends HeadAnalysis
 	 * This computation has no side effects.
 	 */
 	public static @NonNull List<@NonNull HeadNodeGroup> computeTraceHeadGroupNodes(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion mappingRegion) {
-		String name = mappingRegion.getName();
-		if ("mapInPattern_qvtr".equals(name)) {
-			scheduleManager.getClass();
-		}
+		//	String name = mappingRegion.getName();
 		TracedHeadAnalysis mappingRegionAnalysis = new TracedHeadAnalysis(mappingRegion);
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = mappingRegionAnalysis.computeTracedTargetFromSources();
 		if (TRACED_HEAD_IMMEDIATE_SOURCES.isActive()) {
