@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -51,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -1193,33 +1195,22 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 		OCLExpression leftExpression = QVTrelationUtil.getOwnedSource(operationCallExp);
 		OCLExpression rightExpression = QVTrelationUtil.getOwnedArgument(operationCallExp, 0);
-		Variable variable;
-		OCLExpression valueExp;
 		if (leftExpression instanceof VariableExp) {
-			variable = QVTrelationUtil.getReferredVariable((VariableExp)leftExpression);
-			valueExp = rightExpression;
+			VariableDeclaration leftVariable = QVTrelationUtil.getReferredVariable((VariableExp)leftExpression);
+			return synthesizeVariableEqualsPredicate(leftVariable, rightExpression);
 		}
-		else if (rightExpression instanceof VariableExp) {
-			variable = QVTrelationUtil.getReferredVariable((VariableExp)rightExpression);
-			valueExp = leftExpression;
+		if (rightExpression instanceof VariableExp) {
+			VariableDeclaration rightVariable = QVTrelationUtil.getReferredVariable((VariableExp)rightExpression);
+			return synthesizeVariableEqualsPredicate(rightVariable, leftExpression);
 		}
-		else {
-			return false;
+		if (leftExpression instanceof NavigationCallExp) {
+			return synthesizeNavigationCallEqualsPredicate((NavigationCallExp)leftExpression, rightExpression);
 		}
-		Node variableNode = region.getNode(variable);
-		if (variableNode == null) {
-			if (variable instanceof SharedVariable) {
-				variableNode = getReferenceNodeForSharedVariable((SharedVariable)variable, valueExp);
-			}
-			if (variableNode != null) {
-				return true;
-			}
+		if (rightExpression instanceof NavigationCallExp) {
+			return synthesizeNavigationCallEqualsPredicate((NavigationCallExp)rightExpression, leftExpression);
 		}
-		variableNode = variable.accept(expressionSynthesizer);
-		Node expressionNode = valueExp.accept(expressionSynthesizer);
-		assert (variableNode != null) && (expressionNode != null);
-		createEqualsEdge(expressionNode, variableNode);
-		return true;
+		// FIXME What about OperationCallExp ?? see Bug 547263
+		return false;
 	}
 
 	/**
@@ -1358,6 +1349,17 @@ public class RelationAnalysis extends RuleAnalysis
 			Node isEmptyNode = createOperationCallNode(isUnconditional(collectionTemplateExp), null, collectionIsEmptyOperation, collectionTemplateExp, residueNode);
 			createPredicatedStepNode(isEmptyNode, false);
 		}
+	}
+
+	protected boolean synthesizeNavigationCallEqualsPredicate(@NonNull NavigationCallExp navExpression, @NonNull OCLExpression valueExpression) {
+		Node valueNode = valueExpression.accept(expressionSynthesizer);
+		assert valueNode != null;
+		OCLExpression sourceExpression = QVTbaseUtil.getOwnedSource(navExpression);
+		Node sourceNode = sourceExpression.accept(expressionSynthesizer);
+		assert sourceNode != null;
+		Property source2targetProperty = QVTbaseUtil.getReferredProperty(navExpression);
+		createNavigationEdge(sourceNode, source2targetProperty, valueNode, false);
+		return true;
 	}
 
 	public @NonNull OCLExpression synthesizeObjectTemplatePart(@NonNull PropertyTemplateItem propertyTemplateItem) {
@@ -1562,7 +1564,7 @@ public class RelationAnalysis extends RuleAnalysis
 		if (synthesizeEqualsPredicate(predicateExpression)) {
 			return;
 		}
-		Node resultNode = predicateExpression.accept(expressionSynthesizer);
+		Node resultNode = predicateExpression.accept(expressionSynthesizer); //.getConditionalExpressionSynthesizer());	// See Bug 547263
 		if (resultNode != null) {
 			Node trueNode = createBooleanLiteralNode(true);
 			createPredicateEdge(resultNode, null, trueNode);
@@ -1911,5 +1913,22 @@ public class RelationAnalysis extends RuleAnalysis
 				createOldNode(variableDeclaration);		// Never happens
 			}
 		}
+	}
+
+	protected boolean synthesizeVariableEqualsPredicate(@NonNull VariableDeclaration variable, @NonNull OCLExpression valueExp) {
+		Node variableNode = region.getNode(variable);
+		if (variableNode == null) {
+			if (variable instanceof SharedVariable) {
+				variableNode = getReferenceNodeForSharedVariable((SharedVariable)variable, valueExp);
+			}
+			if (variableNode != null) {
+				return true;
+			}
+		}
+		variableNode = variable.accept(expressionSynthesizer);
+		Node expressionNode = valueExp.accept(expressionSynthesizer);
+		assert (variableNode != null) && (expressionNode != null);
+		createEqualsEdge(expressionNode, variableNode);
+		return true;
 	}
 }
