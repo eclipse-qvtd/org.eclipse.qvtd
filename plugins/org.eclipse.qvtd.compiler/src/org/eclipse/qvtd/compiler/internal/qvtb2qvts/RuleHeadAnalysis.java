@@ -18,7 +18,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -128,22 +127,14 @@ public class RuleHeadAnalysis extends HeadAnalysis
 	//
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeNewTargetFromSources(@NonNull Iterable<@NonNull Node> realizedMiddleNodes) {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
-		for (@NonNull Node sourceNode : realizedMiddleNodes) {
-			Set<@NonNull Node> sources1 = targetFromSources.get(sourceNode);
-			if (sources1 == null) {
-				sources1 = Sets.newHashSet(sourceNode);
-				targetFromSources.put(sourceNode, sources1);
-			}
-			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+		for (@NonNull Node targetNode : realizedMiddleNodes) {
+			Set<@NonNull Node> sources = Sets.newHashSet(targetNode);
+			targetFromSources.put(targetNode, sources);
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 				if (edge.isRealized() && edge.isNavigation()) {
 					NavigationEdge navigationEdge = (NavigationEdge)edge;
-					Node targetNode = navigationEdge.getEdgeTarget();
-					Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
-					if (sources2 == null) {
-						sources2 = Sets.newHashSet(targetNode);
-						targetFromSources.put(targetNode, sources2);
-					}
-					sources2.add(sourceNode);
+					Node sourceNode = navigationEdge.getEdgeSource();
+					sources.add(sourceNode);
 				}
 			}
 		}
@@ -155,28 +146,18 @@ public class RuleHeadAnalysis extends HeadAnalysis
 	//
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeOldTargetFromSources() {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
-		for (@NonNull Node sourceNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (sourceNode.isPattern() && sourceNode.isMatched() && sourceNode.isClass() && !sourceNode.isConstant() && !sourceNode.isOperation()) {	// Excludes, null, attributes, constants, operations
-				if (sourceNode.isLoaded() || sourceNode.isChecked()) {
-					Set<@NonNull Node> sources1 = targetFromSources.get(sourceNode);
-					if (sources1 == null) {
-						sources1 = Sets.newHashSet(sourceNode);
-						targetFromSources.put(sourceNode, sources1);
-					}
-					for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+		for (@NonNull Node targetNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+			if (targetNode.isMatched() && !targetNode.isConstant() && !targetNode.isOperation()) {		// Operations are traversed by derived head group analysis
+				if (targetNode.isLoaded() || targetNode.isChecked()) {
+					Set<@NonNull Node> sources = Sets.newHashSet(targetNode);
+					targetFromSources.put(targetNode, sources);
+					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 						if (edge instanceof NavigationEdge) {
-							NavigationEdge navigationEdge = (NavigationEdge) edge;
-							if (!navigationEdge.isRealized()) {
-								Property source2targetProperty = QVTscheduleUtil.getReferredProperty(navigationEdge);
-								if (!source2targetProperty.isIsMany() /*&& source2targetProperty.isIsRequired()*/) {
-									Node targetNode = navigationEdge.getEdgeTarget();
-									if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isConstant()) {
-										Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
-										if (sources2 == null) {
-											sources2 = Sets.newHashSet(targetNode);
-											targetFromSources.put(targetNode, sources2);
-										}
-										sources2.add(sourceNode);
+							if (!edge.isRealized() && !((NavigationEdge)edge).isPartial()) {
+								Node sourceNode = edge.getEdgeSource();
+								if (sourceNode.isMatched() && !sourceNode.isConstant() && !sourceNode.isOperation()) {
+									if (sourceNode.isLoaded() || sourceNode.isChecked()) {
+										sources.add(sourceNode);
 									}
 								}
 							}

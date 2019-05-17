@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
@@ -28,9 +27,11 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
@@ -98,44 +99,32 @@ public class TracedHeadAnalysis extends HeadAnalysis
 
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeTracedTargetFromSources() {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
-		for (@NonNull Node sourceNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (sourceNode.isMatched() && !sourceNode.isConstant()) {
-				//	if (sourceNode.isPattern() /*&& sourceNode.isUnconditional()*/) {
-				Set<@NonNull Node> sources1 = targetFromSources.get(sourceNode);
-				if (sources1 == null) {
-					sources1 = Sets.newHashSet(sourceNode);
-					targetFromSources.put(sourceNode, sources1);
+		for (@NonNull Node targetNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+			if (targetNode.isMatched() && !targetNode.isConstant()) {
+				Set<@NonNull Node> sources = targetFromSources.get(targetNode);
+				if (sources == null) {
+					sources = Sets.newHashSet(targetNode);
+					targetFromSources.put(targetNode, sources);
 				}
-				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
-					Node targetNode = edge.getEdgeTarget();
-					if (targetNode.isMatched() && !targetNode.isConstant()) {
+				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+					Node sourceNode = edge.getEdgeSource();
+					if (sourceNode.isMatched() && !sourceNode.isConstant()) {
 						if (edge instanceof NavigationEdge) {
-							NavigationEdge navigationEdge = (NavigationEdge) edge;
-							Property source2targetProperty = QVTscheduleUtil.getReferredProperty(navigationEdge);
-							//					boolean isRequired = source2targetProperty.isIsRequired();
-							boolean isMany = source2targetProperty.isIsMany();
-							if (!isMany || targetNode.isDataType()) {
-								if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isNullLiteral() && !targetNode.isConstant()) {
-									Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
-									if (sources2 == null) {
-										sources2 = Sets.newHashSet(targetNode);
-										targetFromSources.put(targetNode, sources2);
-									}
-									sources2.add(sourceNode);
-								}
+							if (!((NavigationEdge)edge).isPartial()) {
+								sources.add(sourceNode);
 							}
 						}
 						else if (edge instanceof CastEdge) {
-							Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
-							if (sources2 == null) {
-								sources2 = Sets.newHashSet(targetNode);
-								targetFromSources.put(targetNode, sources2);
-							}
-							sources2.add(sourceNode);
+							sources.add(sourceNode);
+						}
+						else if (edge instanceof KeyPartEdge) {
+							sources.add(sourceNode);
+						}
+						else if (edge instanceof PredicateEdge) {
+							sources.add(sourceNode);
 						}
 					}
 				}
-				//	}
 			}
 		}
 		return targetFromSources;
