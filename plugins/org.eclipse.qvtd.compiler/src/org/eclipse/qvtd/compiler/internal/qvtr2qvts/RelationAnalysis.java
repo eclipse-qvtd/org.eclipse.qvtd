@@ -473,10 +473,7 @@ public class RelationAnalysis extends RuleAnalysis
 			if (eObject instanceof RelationCallExp) {
 				RelationCallExp relationInvocation = (RelationCallExp) eObject;
 				RelationAnalysis invokedRelationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(QVTrelationUtil.getReferredRelation(relationInvocation));
-				String name= invokedRelationAnalysis.getName();
-				if ("mapVariable_qvtr".equals(name)) {
-					getClass();
-				}
+				//	String name= invokedRelationAnalysis.getName();
 				Pattern pattern = QVTrelationUtil.basicGetContainingPattern(eObject);
 				if ((pattern != null) && (pattern.eContainmentFeature() == QVTrelationPackage.Literals.RELATION__WHERE)) {
 					invokedRelationAnalysis.addIncomingWhereRelation(relationInvocation);

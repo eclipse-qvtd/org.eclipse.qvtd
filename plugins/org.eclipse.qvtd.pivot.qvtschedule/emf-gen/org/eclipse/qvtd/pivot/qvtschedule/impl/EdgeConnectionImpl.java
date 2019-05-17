@@ -230,7 +230,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getReferredProperty();
-				return basicGetReferredProperty();
+			return basicGetReferredProperty();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getMandatoryTargetEdges();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
@@ -250,15 +250,15 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setReferredProperty((Property)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetEdges().clear();
-				getMandatoryTargetEdges().addAll((Collection<? extends NavigableEdge>)newValue);
-				return;
+			getMandatoryTargetEdges().addAll((Collection<? extends NavigableEdge>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPreferredTargetEdges().clear();
-				getPreferredTargetEdges().addAll((Collection<? extends NavigableEdge>)newValue);
-				return;
+			getPreferredTargetEdges().addAll((Collection<? extends NavigableEdge>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -273,13 +273,13 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setReferredProperty((Property)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetEdges().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPreferredTargetEdges().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -320,14 +320,6 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public boolean isPassed() {
 		return false;
-	}
-
-	@Override
-	public void setName(String newName) {
-		if ("je_Telement2element_success_1".equals(newName)) {
-			getClass();
-		}
-		super.setName(newName);
 	}
 
 	private final @NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = new HashMap<>();
