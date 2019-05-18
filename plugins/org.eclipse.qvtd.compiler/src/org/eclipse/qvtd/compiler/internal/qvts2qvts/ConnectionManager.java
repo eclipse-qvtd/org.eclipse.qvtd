@@ -430,19 +430,24 @@ public class ConnectionManager
 	}
 
 	/**
-	 * Return the Connections to each of the head nodes. Returns null if the pattern surrounding any headNode conflicts with the pattern
+	 * Return the Connections to each of the head nodes. Returns null after registering region error problems,
+	 * if the pattern surrounding any headNode conflicts with the pattern
 	 * surrounding all its possible sources. (Any head with no sources is a non-invocation.)
 	 */
 	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region) {
 		List<@NonNull NodeConnection> headConnections = null;
-		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
+		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
+		if (Iterables.isEmpty(region.getHeadNodes())) {
+			scheduleManager.addRegionError(region, "No head nodes");
+		}
+		for (@NonNull Node headNode : headNodes) {
 			if (headNode.isDependency()) {
 				createHeadConnection(s, rootRegion, region, headNode);	/** Dependency nodes have extra not-head connections. */
 			}
 			else {
 				NodeConnection headConnection = createHeadConnection(s, rootRegion, region, headNode);
 				if (headConnection == null) {
-					scheduleManager.addRegionWarning(region, "No incoming connections for " + headNode.getName());
+					scheduleManager.addRegionError(region, "No incoming connections for " + headNode.getName());
 					headConnection = createHeadConnection(s, rootRegion, region, headNode);	// FIXME debugging
 					return null;										//  so matching only fails for unmatchable real heads
 				}
@@ -455,6 +460,9 @@ public class ConnectionManager
 				// FIXME. If there are multiple heads and an internal node is reachable from more than one head, then the possible
 				// sources for the internal node are the intersection of the alternatives which may eliminate some call paths.
 			}
+		}
+		if (headConnections == null) {
+			scheduleManager.addRegionError(region, "No incoming connections");
 		}
 		return headConnections;
 	}
@@ -492,7 +500,9 @@ public class ConnectionManager
 		}
 		assert !(region instanceof LoadingRegion);
 		Iterable<@NonNull NodeConnection> headConnections = createHeadConnections(s, rootRegion, region);
-		assert (headConnections != null);// {
+		if (headConnections == null) {
+			return;		// Error already reported.
+		}
 		//
 		//	Gather multiple edges sharing the same target to avoid multiple incoming connections -- FIXME no need to gather
 		//

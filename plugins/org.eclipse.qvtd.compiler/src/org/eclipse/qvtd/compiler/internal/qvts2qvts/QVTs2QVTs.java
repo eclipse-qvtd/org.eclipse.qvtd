@@ -627,6 +627,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 		UtilityAnalysis.assignUtilities(scheduleManager, loadingRegion);
 		scheduleManager.writeDebugGraphs("4-pre-partition", true, true, false);
+		scheduleManager.throwCompilerChainExceptionForErrors();
 		//
 		for (@NonNull RootRegion rootRegion : rootRegions) {
 			Iterable<@NonNull Region> activeRegions2 = QVTscheduleUtil.getActiveRegions(rootRegion);
