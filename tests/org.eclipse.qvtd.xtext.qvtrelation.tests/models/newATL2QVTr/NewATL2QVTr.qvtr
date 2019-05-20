@@ -769,7 +769,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			enforce domain qvtr qvtrExpression : VariableExp {};
 		}
 		relation mapVariableExp_referredVariable_Helper overrides mapVariableExp_referredVariable {
-			atlHelper : atlMM::Helper;
+			atlHelper : atlMM::Helper[?];
 			enforce domain atl atlExpression : VariableExp {
 				referredVariable = atlVariable : VariableDeclaration{
 					varName = 'self'
