@@ -134,7 +134,7 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		}
 		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(relation);
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(relationAnalysis.getRegion())) {
-			if (node.isPattern() && node.isMatched()) {
+			if (/*node.isPattern() &&*/ node.isMatched() && !node.isConstant()) {
 				createVariableDeclaration2TraceProperty(node, rootVariables, allHeadGroupNodes, manyTracesPerHead);
 			}
 		}
