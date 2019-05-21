@@ -468,7 +468,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		}
 	}
 
-	@Deprecated // only used by exe2016/bugmde2016 tests
+	@Deprecated // only used by exe2016/bigmde2016 tests
 	private static class UnenforcedSetAccumulator extends SetValueImpl implements SetValue.Accumulator
 	{
 		public UnenforcedSetAccumulator(@NonNull CollectionTypeId typeId) {

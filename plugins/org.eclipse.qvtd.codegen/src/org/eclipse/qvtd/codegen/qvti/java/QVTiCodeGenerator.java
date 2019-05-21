@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
+import org.eclipse.ocl.examples.codegen.java.JavaImportNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -172,6 +173,19 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
 		return new QVTiFieldingAnalyzer(cgAnalyzer);
+	}
+
+	@Override
+	public @NonNull ImportNameManager createImportNameManager() {
+		return new JavaImportNameManager() {
+			{		// Ensure re-used inherited names are not confused
+				reserveImportName(org.eclipse.qvtd.runtime.evaluation.AbstractTransformer.class);
+				reserveImportName(org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable.class);
+				reserveImportName(org.eclipse.qvtd.runtime.evaluation.Transformer.class);
+				reserveImportName(org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal.Incremental.class);
+				reserveImportName(org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal.Model.class);
+			}
+		};
 	}
 
 	@Override
