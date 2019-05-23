@@ -275,13 +275,13 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 		switch (featureID) {
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				setName((String)newValue);
-			return;
+				return;
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setOwnedType((TypedRefCS)newValue);
-			return;
+				return;
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setOwnedGuardExpression((ExpCS)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -296,13 +296,13 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 		switch (featureID) {
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				setName(NAME_EDEFAULT);
-			return;
+				return;
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setOwnedType((TypedRefCS)null);
-			return;
+				return;
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setOwnedGuardExpression((ExpCS)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

@@ -283,7 +283,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				return getOwnedClusters();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getRootRegion();
-			return basicGetRootRegion();
+				return basicGetRootRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -299,22 +299,22 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName((String)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedNodes().clear();
-			getOwnedNodes().addAll((Collection<? extends Node>)newValue);
-			return;
+				getOwnedNodes().addAll((Collection<? extends Node>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedEdges().clear();
-			getOwnedEdges().addAll((Collection<? extends Edge>)newValue);
-			return;
+				getOwnedEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedClusters().clear();
-			getOwnedClusters().addAll((Collection<? extends Cluster>)newValue);
-			return;
+				getOwnedClusters().addAll((Collection<? extends Cluster>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setRootRegion((RootRegion)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -329,19 +329,19 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName(SYMBOL_NAME_EDEFAULT);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedNodes().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedEdges().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedClusters().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setRootRegion((RootRegion)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -657,7 +657,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (rootRegion != null)
 					msgs = ((InternalEObject)rootRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, RootRegion.class, msgs);
-			return basicSetRootRegion((RootRegion)otherEnd, msgs);
+				return basicSetRootRegion((RootRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
