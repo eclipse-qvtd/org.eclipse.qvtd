@@ -292,7 +292,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 */
 	@Override
 	public boolean isBoxed() {
-		return false;
+		return true;
 	}
 
 	/**
@@ -337,6 +337,6 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 */
 	@Override
 	public boolean isUnboxed() {
-		return true;
+		return false;
 	}
 } //CGGuardVariableImpl

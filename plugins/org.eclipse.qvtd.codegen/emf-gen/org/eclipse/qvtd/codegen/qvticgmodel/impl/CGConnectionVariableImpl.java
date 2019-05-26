@@ -67,22 +67,4 @@ public class CGConnectionVariableImpl extends CGGuardVariableImpl implements CGC
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGConnectionVariable(this);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isBoxed() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isUnboxed() {
-		return false;
-	}
-
 } //CGConnectionVariableImpl

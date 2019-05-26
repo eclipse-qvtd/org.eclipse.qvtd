@@ -121,7 +121,7 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 		switch (featureID) {
 			case CGOperationCallExpImpl.CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0:
 				setFunction((CGFunction)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -136,7 +136,7 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 		switch (featureID) {
 			case CGOperationCallExpImpl.CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0:
 				setFunction((CGFunction)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
