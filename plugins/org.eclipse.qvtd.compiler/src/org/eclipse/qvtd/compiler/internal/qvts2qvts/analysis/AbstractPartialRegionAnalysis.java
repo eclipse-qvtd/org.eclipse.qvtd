@@ -273,44 +273,44 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 				if (isPredicated(edge)) {
 					predicatedEdges.add(edge);
 				}
-				if (edge instanceof NavigableEdge) {
-					NavigableEdge navigableEdge = (NavigableEdge)edge;
-					if (navigableEdge.isSuccess()) {
-						successEdges.add((SuccessEdge) navigableEdge);
+				if (edge.isNavigation()) {
+					NavigationEdge navigationEdge = (NavigationEdge)edge;
+					if (navigationEdge.isSuccess()) {
+						successEdges.add((SuccessEdge) navigationEdge);
 					}
-					if (isRealized(navigableEdge)) {
-						realizedEdges.add(navigableEdge);
+					if (isRealized(navigationEdge)) {
+						realizedEdges.add(navigationEdge);
 					}
 					else {
-						oldPrimaryNavigableEdges.add(navigableEdge);
+						oldPrimaryNavigableEdges.add(navigationEdge);
 					}
-					if (!isRealized(navigableEdge) && navigableEdge.isMatched()) {  // FIXME is this totally obsolete
-						assert !navigableEdge.isExpression();
-						assert !navigableEdge.isComputation();
+					if (!isRealized(navigationEdge) && navigationEdge.isMatched()) {  // FIXME is this totally obsolete
+						assert !navigationEdge.isExpression();
+						assert !navigationEdge.isComputation();
 					}
-					Node sourceNode = navigableEdge.getEdgeSource();
+					Node sourceNode = navigationEdge.getEdgeSource();
 					//	Node targetNode = navigableEdge.getEdgeTarget();
 					if (scheduleManager.isMiddle(sourceNode)) { // || scheduleManager.isMiddle(targetNode)) {
-						if (isChecked(navigableEdge)) {
-							addConsumptionOfMiddleEdge(navigableEdge);
+						if (isChecked(navigationEdge)) {
+							addConsumptionOfMiddleEdge(navigationEdge);
 						}
-						else if (isRealized(navigableEdge)) {
-							addProductionOfMiddleEdge(navigableEdge);
+						else if (isRealized(navigationEdge)) {
+							addProductionOfMiddleEdge(navigationEdge);
 						}
 						else {
-							throw new IllegalStateException("middle edge must be predicated or realized : " + navigableEdge);
+							throw new IllegalStateException("middle edge must be predicated or realized : " + navigationEdge);
 						}
 					}
 					else { // || scheduleManager.isOutput(targetNode)) {
-						if (isLoaded(navigableEdge) || isConstant(navigableEdge)) {}
-						else if (isChecked(navigableEdge)) {  // || isSpeculated(navigableEdge)) {
-							addConsumptionOfOutputEdge(navigableEdge);
+						if (isLoaded(navigationEdge) || isConstant(navigationEdge)) {}
+						else if (isChecked(navigationEdge)) {  // || isSpeculated(navigableEdge)) {
+							addConsumptionOfOutputEdge(navigationEdge);
 						}
-						else if (isRealized(navigableEdge)) {
-							addProductionOfOutputEdge(navigableEdge);
+						else if (isRealized(navigationEdge)) {
+							addProductionOfOutputEdge(navigationEdge);
 						}
 						else {
-							throw new IllegalStateException("other edge must be predicated or realized : " + navigableEdge);
+							throw new IllegalStateException("other edge must be predicated or realized : " + navigationEdge);
 						}
 					}
 				}
@@ -532,6 +532,10 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 
 	public @NonNull Iterable<@NonNull Node> getRealizedOutputNodes() {
 		return realizedOutputNodes;
+	}
+
+	public @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
 	}
 
 	public @NonNull Iterable<@NonNull SuccessEdge> getSuccessEdges() {

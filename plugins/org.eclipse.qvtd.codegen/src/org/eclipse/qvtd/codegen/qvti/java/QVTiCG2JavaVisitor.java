@@ -111,7 +111,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -696,16 +695,16 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//
 		final Class<?> javaClass = eDataType.getInstanceClass();
 		if (javaClass == null) {
-			throw new IllegalStateException("No Java class for " + cgElement + " in CG2JavaVisitor.visitCGEcoreDataTypeShadowExp()");
+			throw new IllegalStateException("No Java class for " + cgElement + " in QVTiCG2JavaVisitor.doEcoreCreateDataType()");
 		}
 		final EPackage ePackage = eDataType.getEPackage();
 		String nsURI = ePackage.getNsURI();
 		if (nsURI == null) {
-			throw new IllegalStateException("No EPackage NsURI for " + cgElement + " in CG2JavaVisitor.visitCGEcoreDataTypeShadowExp()");
+			throw new IllegalStateException("No EPackage NsURI for " + cgElement + " in QVTiCG2JavaVisitor.doEcoreCreateDataType()");
 		}
 		GenPackage genPackage = environmentFactory.getMetamodelManager().getGenPackage(nsURI);
 		if (genPackage == null) {
-			throw new IllegalStateException("No GenPackage for " + cgElement + " in CG2JavaVisitor.visitCGEcoreDataTypeShadowExp()");
+			throw new IllegalStateException("No GenPackage for " + cgElement + " in QVTiCG2JavaVisitor.doEcoreCreateDataType()");
 		}
 		final String eFactoryName = genPackage.getQualifiedFactoryInterfaceName();
 		final String ePackageName = genPackage.getQualifiedPackageInterfaceName();
@@ -715,10 +714,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		Class<?> packageClass;
 		try {
 			factoryClass = classLoader.loadClass(eFactoryName);
-			packageClass = eDataType.getClass().getClassLoader().loadClass(ePackageName);
+			packageClass = classLoader.loadClass(ePackageName);
 		}
 		catch (ClassNotFoundException e) {
-			throw new IllegalStateException("Load class failure for " + cgElement + " in CG2JavaVisitor.visitCGEcoreDataTypeShadowExp()", e);
+			throw new IllegalStateException("Load class failure for " + cgElement + " in QVTiCG2JavaVisitor.doEcoreCreateDataType()", e);
 		}
 		//
 
@@ -840,12 +839,17 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.appendValueName(body);
 			js.append(";\n");
 		}
-		else if (QVTiCGUtil.getAST(cgFunction).getImplementationClass() != null) {
+		/*	else if (QVTiCGUtil.getAST(cgFunction).getImplementationClass() != null) { -- Java Class has synthesized CGLibraryOperationCallExp
 			final CGTypeId resultType = cgFunction.getTypeId();
 			Function asFunction = QVTiCGUtil.getAST(cgFunction);
-			js.appendThis(functionName);
-			js.append("." + instanceName + " = ");
-			//			js.appendClassCast(cgFunction);
+			TypeDescriptor functionTypeDescriptor = context.getTypeDescriptor(cgFunction).getEcoreDescriptor(context, null);
+			//	js.append("/* " + localContext.getIdResolverVariable(cgFunction) + "* /");
+
+			functionTypeDescriptor.appendBox(js, localContext, cgFunction, cgFunction);
+			/*	js.appendClassReference(null, ValueUtil.class);
+			js.append(".createSetValue(");
+			js.appendValueName(resultType);
+			js.append(", "); * /
 			js.append(asFunction.getImplementationClass());
 			js.append(".INSTANCE.evaluate(");
 			js.append(JavaConstants.EXECUTOR_NAME);
@@ -856,7 +860,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.appendValueName(cgParameter);
 			}
 			js.append(");\n");
-		}
+			js.appendThis(functionName);
+			js.append("." + instanceName + " = ");
+			js.appendValueName(cgFunction);
+			js.append(";\n");
+		} */
 		else {
 			TypeId asTypeId = cgFunction.getASTypeId();
 			if (asTypeId == TypeId.STRING) {			// FIXME Fudge for body-less functions
@@ -1619,7 +1627,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(getValueName(cgFreeVariable));
 		}
 		else{
-			js.appendDeclaration(cgFreeVariable);
+			js.getBoxedTypeRepresentation().appendDeclaration(cgFreeVariable);
 		}
 	}
 

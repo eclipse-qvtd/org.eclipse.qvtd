@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.analyzer;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -40,6 +41,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsKindOfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -48,6 +50,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
+import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
@@ -58,6 +61,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -66,6 +70,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
+import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -94,6 +99,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
+import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -380,7 +386,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		this.standardLibrary = environmentFactory.getStandardLibrary();
 	}
 
-	private @NonNull Set<@NonNull Mapping> computeUseClases(@NonNull ImperativeTransformation asTransformation) {
+	private @NonNull Set<@NonNull Mapping> computeUseClasses(@NonNull ImperativeTransformation asTransformation) {
 		//
 		//	Compute the intervalIndex of each Mapping.
 		//
@@ -843,6 +849,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return visiting(object);
 	}
 
+	protected @NonNull String getFunctionInstanceName(@NonNull CGFunction cgFunction) {
+		JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
+		Object instanceKey = cgFunction.getBody();
+		if (instanceKey == null) {
+			instanceKey = QVTiCGUtil.getAST(cgFunction).getImplementationClass();
+		}
+		return functionContext.getNameManagerContext().getSymbolName(instanceKey, "instance");
+	}
+
 	@Override
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
@@ -852,6 +867,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgFunction.getParameters().add(doVisit(CGParameter.class, pParameter));
 		}
 		OCLExpression query = asFunction.getQueryExpression(); //getBodyExpression();
+		String implementationClass = asFunction.getImplementationClass();
 		if (query != null) {
 			//			try {
 			//				ExpressionInOCL query = metamodelManager.parseSpecification(specification);
@@ -867,6 +883,90 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			// TODO Auto-generated catch block
 			//				e.printStackTrace();
 			//			}
+		} else if (implementationClass != null) {
+			ClassLoader classLoader = asFunction.getClass().getClassLoader();
+			Object implementationInstance;
+			try {
+				Class<?> functionClass = classLoader.loadClass(implementationClass);
+				Field implementationField = functionClass.getField("INSTANCE");
+				implementationInstance = implementationField.get(null);
+			}
+			catch (ClassNotFoundException e) {
+				throw new IllegalStateException("Load class failure for " + implementationClass + " in QVTiAS2CGVisitor.visitFunction()", e);
+			} catch (NoSuchFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new IllegalStateException(e);
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new IllegalStateException(e);
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new IllegalStateException(e);
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new IllegalStateException(e);
+			}
+			Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asFunction);
+			VariableDeclaration asThis = QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
+			VariableExp asThisExp = PivotUtil.createVariableExp(asThis);
+			CGValuedElement cgSource = doVisit(CGValuedElement.class, asThisExp);
+			CGLibraryOperationCallExp cgLibraryOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
+			cgLibraryOperationCallExp.setSource(cgSource);
+			//	cgLibraryOperationCallExp.setTypeId(value);
+			//	cgLibraryOperationCallExp.setThisIsSelf(true);
+			OperationCallExp asOperationCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
+			asOperationCallExp.setReferredOperation(asFunction);
+			asOperationCallExp.setOwnedSource(asThisExp);
+			asOperationCallExp.setName(asFunction.getName());
+			asOperationCallExp.setType(asFunction.getType());
+			setAst(cgLibraryOperationCallExp, asOperationCallExp);
+			for (@NonNull Parameter asParameter : ClassUtil.nullFree(asFunction.getOwnedParameters())) {
+				VariableExp asParameterExp = PivotUtil.createVariableExp(asParameter);
+				asOperationCallExp.getOwnedArguments().add(asParameterExp);
+				CGValuedElement cgArgument = doVisit(CGValuedElement.class, asParameterExp);
+				cgLibraryOperationCallExp.getArguments().add(cgArgument);
+			}
+			//	for (@NonNull OCLExpression pArgument : ClassUtil.nullFree(element.getOwnedArguments())) {
+			//		CGValuedElement cgArgument = doVisit(CGValuedElement.class, pArgument);
+			//		cgNativeOperationCallExp.getArguments().add(cgArgument);
+			//	}
+			cgLibraryOperationCallExp.setReferredOperation(asFunction);
+			cgLibraryOperationCallExp.setLibraryOperation((LibraryOperation)implementationInstance);
+			cgFunction.setBody(cgLibraryOperationCallExp); //.getOwnedBody()));
+			String instanceName = getFunctionInstanceName(cgFunction);
+			cgLibraryOperationCallExp.setName(instanceName);
+			//				final CGTypeId resultType = cgFunction.getTypeId();
+			//	Function asFunction = QVTiCGUtil.getAST(cgFunction);
+			//	TypeDescriptor functionTypeDescriptor = context.getTypeDescriptor(cgFunction).getEcoreDescriptor(context, null);
+			//	js.append("/* " + localContext.getIdResolverVariable(cgFunction) + "*/");
+
+			//	functionTypeDescriptor.appendBox(js, localContext, cgFunction, cgFunction);
+			/*	js.appendClassReference(null, ValueUtil.class);
+					js.append(".createSetValue(");
+					js.appendValueName(resultType);
+					js.append(", "); * /
+					js.append(asFunction.getImplementationClass());
+					js.append(".INSTANCE.evaluate(");
+					js.append(JavaConstants.EXECUTOR_NAME);
+					js.append(", ");
+					js.appendValueName(resultType);
+					for (@NonNull CGParameter cgParameter : QVTiCGUtil.getParameters(cgFunction)) {
+						js.append(", ");
+						js.appendValueName(cgParameter);
+					}
+					//	js.append(")");
+					js.append(");\n");
+					js.appendThis(functionName);
+					js.append("." + instanceName + " = ");
+					js.appendValueName(cgFunction);
+					js.append(";\n");
+			 */
+			//	}
+
 		}
 		analyzer.addFunction(asFunction, cgFunction);
 		return cgFunction;
@@ -919,7 +1019,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgTypedModel.setModelIndex(cgTypedModels.size());
 			cgTypedModels.add(cgTypedModel);
 		}
-		Set<@NonNull Mapping> useClasses = computeUseClases(asTransformation);
+		Set<@NonNull Mapping> useClasses = computeUseClasses(asTransformation);
 		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
 			CGMapping cgMapping = doVisit(CGMapping.class, asMapping);
 			cgTransformation.getOwnedMappings().add(cgMapping);

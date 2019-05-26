@@ -745,7 +745,7 @@ public class ATL2QVTr extends AbstractTransformer
 			this.self = (ATL2QVTr)boundValues[0];
 			this.type1 = (@NonNull Type)boundValues[1];
 			this.type2 = (@NonNull Type)boundValues[2];
-			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getCommonType.INSTANCE.evaluate(executor, CLSSid_Type, type1, type2);
+			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getCommonType.INSTANCE.evaluate(executor, CLSSid_Type, this, type1, type2);
 		}
 
 		@Override
@@ -756,8 +756,8 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
 			return this.self == thoseValues[0]
-				&& idResolver.oclEquals(this.type1, thoseValues[1])
-				&& idResolver.oclEquals(this.type2, thoseValues[2]);
+					&& idResolver.oclEquals(this.type1, thoseValues[1])
+					&& idResolver.oclEquals(this.type2, thoseValues[2]);
 		}
 	}
 
@@ -843,7 +843,7 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
 			return this.self == thoseValues[0]
-				&& idResolver.oclEquals(this.element, thoseValues[1]);
+					&& idResolver.oclEquals(this.element, thoseValues[1]);
 		}
 	}
 
@@ -860,7 +860,7 @@ public class ATL2QVTr extends AbstractTransformer
 		public FUN_getModule(/*Nullable*/ Object @NonNull [] boundValues) {
 			this.self = (ATL2QVTr)boundValues[0];
 			this.element_0 = (@Nullable LocatedElement)boundValues[1];
-			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getModule.INSTANCE.evaluate(executor, CLSSid_Module, element_0);
+			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getModule.INSTANCE.evaluate(executor, CLSSid_Module, this, element_0);
 		}
 
 		@Override
@@ -871,7 +871,7 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
 			return this.self == thoseValues[0]
-				&& idResolver.oclEquals(this.element_0, thoseValues[1]);
+					&& idResolver.oclEquals(this.element_0, thoseValues[1]);
 		}
 	}
 
@@ -890,7 +890,7 @@ public class ATL2QVTr extends AbstractTransformer
 			this.self = (ATL2QVTr)boundValues[0];
 			this.type = (@NonNull Type)boundValues[1];
 			this.name = (@NonNull String)boundValues[2];
-			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getOperation.INSTANCE.evaluate(executor, CLSSid_Operation_0, type, name);
+			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getOperation.INSTANCE.evaluate(executor, CLSSid_Operation_0, this, type, name);
 		}
 
 		@Override
@@ -901,8 +901,8 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
 			return this.self == thoseValues[0]
-				&& idResolver.oclEquals(this.type, thoseValues[1])
-				&& idResolver.oclEquals(this.name, thoseValues[2]);
+					&& idResolver.oclEquals(this.type, thoseValues[1])
+					&& idResolver.oclEquals(this.name, thoseValues[2]);
 		}
 	}
 
@@ -921,7 +921,7 @@ public class ATL2QVTr extends AbstractTransformer
 			this.self = (ATL2QVTr)boundValues[0];
 			this.atlModule_0 = (@NonNull Module)boundValues[1];
 			this.name_0 = (@NonNull String)boundValues[2];
-			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getPackage.INSTANCE.evaluate(executor, CLSSid_Package, atlModule_0, name_0);
+			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getPackage.INSTANCE.evaluate(executor, CLSSid_Package, this, atlModule_0, name_0);
 		}
 
 		@Override
@@ -932,8 +932,8 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
 			return this.self == thoseValues[0]
-				&& idResolver.oclEquals(this.atlModule_0, thoseValues[1])
-				&& idResolver.oclEquals(this.name_0, thoseValues[2]);
+					&& idResolver.oclEquals(this.atlModule_0, thoseValues[1])
+					&& idResolver.oclEquals(this.name_0, thoseValues[2]);
 		}
 	}
 
@@ -952,7 +952,7 @@ public class ATL2QVTr extends AbstractTransformer
 			this.self = (ATL2QVTr)boundValues[0];
 			this.type_0 = (@NonNull Type)boundValues[1];
 			this.name_1 = (@NonNull String)boundValues[2];
-			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getProperty.INSTANCE.evaluate(executor, CLSSid_Property, type_0, name_1);
+			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getProperty.INSTANCE.evaluate(executor, CLSSid_Property, this, type_0, name_1);
 		}
 
 		@Override
@@ -963,8 +963,8 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
 			return this.self == thoseValues[0]
-				&& idResolver.oclEquals(this.type_0, thoseValues[1])
-				&& idResolver.oclEquals(this.name_1, thoseValues[2]);
+					&& idResolver.oclEquals(this.type_0, thoseValues[1])
+					&& idResolver.oclEquals(this.name_1, thoseValues[2]);
 		}
 	}
 
@@ -981,7 +981,7 @@ public class ATL2QVTr extends AbstractTransformer
 		public FUN_getType(/*Nullable*/ Object @NonNull [] boundValues) {
 			this.self = (ATL2QVTr)boundValues[0];
 			this.type_1 = (@Nullable OclType)boundValues[1];
-			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getType.INSTANCE.evaluate(executor, CLSSid_Class, type_1);
+			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getType.INSTANCE.evaluate(executor, CLSSid_Class, this, type_1);
 		}
 
 		@Override
@@ -992,7 +992,7 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
 			return this.self == thoseValues[0]
-				&& idResolver.oclEquals(this.type_1, thoseValues[1]);
+					&& idResolver.oclEquals(this.type_1, thoseValues[1]);
 		}
 	}
 
@@ -1999,17 +1999,17 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			return idResolver.oclEquals(ji_Binding, thoseValues[0])
-				&& idResolver.oclEquals(ji_Helper, thoseValues[1])
-				&& idResolver.oclEquals(ji_InPattern, thoseValues[2])
-				&& idResolver.oclEquals(ji_MatchedRule, thoseValues[3])
-				&& idResolver.oclEquals(ji_Module, thoseValues[4])
-				&& idResolver.oclEquals(ji_NavigationOrAttributeCallExp, thoseValues[5])
-				&& idResolver.oclEquals(ji_OclExpression, thoseValues[6])
-				&& idResolver.oclEquals(ji_OclModel, thoseValues[7])
-				&& idResolver.oclEquals(ji_OperationCallExp, thoseValues[8])
-				&& idResolver.oclEquals(ji_SimpleInPatternElement, thoseValues[9])
-				&& idResolver.oclEquals(ji_SimpleOutPatternElement, thoseValues[10])
-				&& idResolver.oclEquals(ji_VariableExp, thoseValues[11]);
+					&& idResolver.oclEquals(ji_Helper, thoseValues[1])
+					&& idResolver.oclEquals(ji_InPattern, thoseValues[2])
+					&& idResolver.oclEquals(ji_MatchedRule, thoseValues[3])
+					&& idResolver.oclEquals(ji_Module, thoseValues[4])
+					&& idResolver.oclEquals(ji_NavigationOrAttributeCallExp, thoseValues[5])
+					&& idResolver.oclEquals(ji_OclExpression, thoseValues[6])
+					&& idResolver.oclEquals(ji_OclModel, thoseValues[7])
+					&& idResolver.oclEquals(ji_OperationCallExp, thoseValues[8])
+					&& idResolver.oclEquals(ji_SimpleInPatternElement, thoseValues[9])
+					&& idResolver.oclEquals(ji_SimpleOutPatternElement, thoseValues[10])
+					&& idResolver.oclEquals(ji_VariableExp, thoseValues[11]);
 		}
 	}
 
@@ -2026,7 +2026,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapInPattern__filter__qvtr__activator__(final /*@NonInvalid*/ @NonNull InPattern atlPattern, final @NonNull Connection jm_TmapInPattern__filter)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapInPattern__filter__qvtr__activator__" +
-				"\n\t\"atlPattern\":" + toDebugString(atlPattern));
+					"\n\t\"atlPattern\":" + toDebugString(atlPattern));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapInPattern_filter trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapInPattern_filter();
@@ -2057,7 +2057,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapSimpleOutPatternElement__qvtr__activator__(final /*@NonInvalid*/ @NonNull SimpleOutPatternElement atlElement, final @NonNull Connection jm_TmapSimpleOutPatternElement)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapSimpleOutPatternElement__qvtr__activator__" +
-				"\n\t\"atlElement\":" + toDebugString(atlElement));
+					"\n\t\"atlElement\":" + toDebugString(atlElement));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapSimpleOutPatternElement trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapSimpleOutPatternElement();
@@ -2089,7 +2089,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapMatchedRule__qvtr__activator__(final @NonNull Connection jm_TmapMatchedRule, final /*@NonInvalid*/ @NonNull MatchedRule matchedRule)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapMatchedRule__qvtr__activator__" +
-				"\n\t\"matchedRule\":" + toDebugString(matchedRule));
+					"\n\t\"matchedRule\":" + toDebugString(matchedRule));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapMatchedRule trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapMatchedRule();
@@ -2121,7 +2121,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOclModel__IN__qvtr__activator__(final @NonNull Connection jm_TmapOclModel__IN, final /*@NonInvalid*/ @NonNull OclModel oclModel)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOclModel__IN__qvtr__activator__" +
-				"\n\t\"oclModel\":" + toDebugString(oclModel));
+					"\n\t\"oclModel\":" + toDebugString(oclModel));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapOclModel_IN trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapOclModel_IN();
@@ -2152,7 +2152,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOclMetamodel__qvtr__activator__(final @NonNull Connection jm_TmapOclMetamodel, final /*@NonInvalid*/ @NonNull OclModel oclMetamodel)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOclMetamodel__qvtr__activator__" +
-				"\n\t\"oclMetamodel\":" + toDebugString(oclMetamodel));
+					"\n\t\"oclMetamodel\":" + toDebugString(oclMetamodel));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapOclMetamodel trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapOclMetamodel();
@@ -2184,7 +2184,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapModule__qvtr__activator__(final /*@NonInvalid*/ @NonNull Module atlModule, final @NonNull Connection jm_TmapModule)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapModule__qvtr__activator__" +
-				"\n\t\"atlModule\":" + toDebugString(atlModule));
+					"\n\t\"atlModule\":" + toDebugString(atlModule));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapModule trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapModule();
@@ -2216,7 +2216,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapMatchedRule__super__qvtr__activator__(final /*@NonInvalid*/ @NonNull MatchedRule atlChildRule, final @NonNull Connection jm_TmapMatchedRule__super)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapMatchedRule__super__qvtr__activator__" +
-				"\n\t\"atlChildRule\":" + toDebugString(atlChildRule));
+					"\n\t\"atlChildRule\":" + toDebugString(atlChildRule));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapMatchedRule_super trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapMatchedRule_super();
@@ -2247,7 +2247,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOclModel__OUT__qvtr__activator__(final @NonNull Connection jm_TmapOclModel__OUT, final /*@NonInvalid*/ @NonNull OclModel oclModel_0)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOclModel__OUT__qvtr__activator__" +
-				"\n\t\"oclModel\":" + toDebugString(oclModel_0));
+					"\n\t\"oclModel\":" + toDebugString(oclModel_0));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapOclModel_OUT trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapOclModel_OUT();
@@ -2322,7 +2322,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOclExpression__dispatch__qvtr(final /*@NonInvalid*/ @NonNull OclExpression atlExpression, final @NonNull Connection jm_DmapOclExpression, final @NonNull Connection jm_TmapBooleanExp, final @NonNull Connection jm_TmapIfExp, final @NonNull Connection jm_TmapIntegerExp, final @NonNull Connection jm_TmapNavigationOrAttributeCallExp__Helper, final @NonNull Connection jm_TmapNavigationOrAttributeCallExp__Property, final @NonNull Connection jm_TmapOclType, final @NonNull Connection jm_TmapOperationCallExp__Helper, final @NonNull Connection jm_TmapOperationCallExp__Operation, final @NonNull Connection jm_TmapOperatorCallExp, final @NonNull Connection jm_TmapStringExp, final @NonNull Connection jm_TmapVariableExp)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOclExpression__dispatch__qvtr" +
-				"\n\t\"atlExpression\":" + toDebugString(atlExpression));
+					"\n\t\"atlExpression\":" + toDebugString(atlExpression));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull DmapOclExpression dispatcher_0 = trace_ATL2QVTrFactory.eINSTANCE.createDmapOclExpression();
@@ -2431,7 +2431,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapSimpleInPatternElement__qvtr__activator__(final /*@NonInvalid*/ @NonNull SimpleInPatternElement atlElement_0, final @NonNull Connection jm_TmapSimpleInPatternElement)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapSimpleInPatternElement__qvtr__activator__" +
-				"\n\t\"atlElement\":" + toDebugString(atlElement_0));
+					"\n\t\"atlElement\":" + toDebugString(atlElement_0));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapSimpleInPatternElement trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapSimpleInPatternElement();
@@ -2470,7 +2470,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapHelper__dispatch__qvtr(final /*@NonInvalid*/ @NonNull Helper atlHelper, final @NonNull Connection jm_DmapHelper, final @NonNull Connection jm_TmapHelper__Attribute, final @NonNull Connection jm_TmapHelper__Operation)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapHelper__dispatch__qvtr" +
-				"\n\t\"atlHelper\":" + toDebugString(atlHelper));
+					"\n\t\"atlHelper\":" + toDebugString(atlHelper));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull DmapHelper dispatcher_0 = trace_ATL2QVTrFactory.eINSTANCE.createDmapHelper();
@@ -2516,7 +2516,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapInPattern__qvtr__activator__(final /*@NonInvalid*/ @NonNull InPattern atlPattern_0, final @NonNull Connection jm_TmapInPattern)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapInPattern__qvtr__activator__" +
-				"\n\t\"atlPattern\":" + toDebugString(atlPattern_0));
+					"\n\t\"atlPattern\":" + toDebugString(atlPattern_0));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapInPattern trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapInPattern();
@@ -2548,7 +2548,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOperationCallExp__argument__qvtr__activator__(final /*@NonInvalid*/ @NonNull OclExpression atlArgument, final @NonNull Connection jm_TmapOperationCallExp__argument)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOperationCallExp__argument__qvtr__activator__" +
-				"\n\t\"atlArgument\":" + toDebugString(atlArgument));
+					"\n\t\"atlArgument\":" + toDebugString(atlArgument));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapOperationCallExp_argument trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapOperationCallExp_argument();
@@ -2579,7 +2579,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapBinding__qvtr__activator__(final /*@NonInvalid*/ @NonNull Binding atlBinding, final @NonNull Connection jm_TmapBinding)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapBinding__qvtr__activator__" +
-				"\n\t\"atlBinding\":" + toDebugString(atlBinding));
+					"\n\t\"atlBinding\":" + toDebugString(atlBinding));
 		}
 		// creations
 		final @SuppressWarnings("null")@NonNull TmapBinding trace_69 = trace_ATL2QVTrFactory.eINSTANCE.createTmapBinding();
@@ -2618,10 +2618,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapBooleanExp__qvtr(final /*@NonInvalid*/ @NonNull TmapBooleanExp trace)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapBooleanExp__qvtr" +
-				"\n\t\"trace\":" + toDebugString(trace) +
-				"\n\t\"dispatcher\":" + toDebugString(trace.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace) +
+					"\n\t\"dispatcher\":" + toDebugString(trace.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace.getDispatcher().getD2qvtrExpression()));
 		}
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		@SuppressWarnings("null")
@@ -2647,7 +2647,7 @@ public class ATL2QVTr extends AbstractTransformer
 				// mapping statements
 				trace.setT0symbol(booleanSymbol);
 				qvtrExpression.setBooleanSymbol(booleanSymbol);
-				dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+				dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 				objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 				dispatcher_0.setD2qvtrExpression(qvtrExpression);
 				dispatcher_0.setResult(trace);
@@ -2701,10 +2701,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapVariableExp__qvtr(final @NonNull Connection jm_DmapVariableExp__referredVariable, final @NonNull Connection jo_VariableExp, final /*@NonInvalid*/ @NonNull TmapVariableExp trace_0)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapVariableExp__qvtr" +
-				"\n\t\"trace\":" + toDebugString(trace_0) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_0.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_0.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_0.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_0) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_0.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_0.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_0.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_0.getDispatcher();
@@ -2736,7 +2736,7 @@ public class ATL2QVTr extends AbstractTransformer
 				// mapping statements
 				trace_0.setT0varName(varName);
 				qvtrExpression.setName(varName);
-				dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+				dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 				objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 				dispatcher_0.setD2qvtrExpression(qvtrExpression);
 				dispatcher_0.setResult(trace_0);
@@ -2798,7 +2798,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapModule__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapModule trace_1)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapModule__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_1));
+					"\n\t\"trace\":" + toDebugString(trace_1));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull Module t1atlModule = trace_1.getT1atlModule();
@@ -2871,7 +2871,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOclMetamodel__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapOclMetamodel trace_2)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOclMetamodel__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_2));
+					"\n\t\"trace\":" + toDebugString(trace_2));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull OclModel t1oclMetamodel = trace_2.getT1oclMetamodel();
@@ -2924,10 +2924,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapIntegerExp__qvtr(final /*@NonInvalid*/ @NonNull TmapIntegerExp trace_3)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapIntegerExp__qvtr" +
-				"\n\t\"trace\":" + toDebugString(trace_3) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_3.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_3.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_3.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_3) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_3.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_3.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_3.getDispatcher().getD2qvtrExpression()));
 		}
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		@SuppressWarnings("null")
@@ -2953,7 +2953,7 @@ public class ATL2QVTr extends AbstractTransformer
 				// mapping statements
 				trace_3.setT0symbol(ValueUtil.bigIntegerValueOf(integerSymbol));
 				qvtrExpression.setIntegerSymbol(integerSymbol);
-				dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+				dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 				objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 				dispatcher_0.setD2qvtrExpression(qvtrExpression);
 				dispatcher_0.setResult(trace_3);
@@ -2999,10 +2999,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapStringExp__qvtr(final /*@NonInvalid*/ @NonNull TmapStringExp trace_4)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapStringExp__qvtr" +
-				"\n\t\"trace\":" + toDebugString(trace_4) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_4.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_4.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_4.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_4) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_4.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_4.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_4.getDispatcher().getD2qvtrExpression()));
 		}
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		@SuppressWarnings("null")
@@ -3029,7 +3029,7 @@ public class ATL2QVTr extends AbstractTransformer
 				// mapping statements
 				trace_4.setT0symbol(stringSymbol);
 				qvtrExpression.setStringSymbol(stringSymbol);
-				dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+				dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 				objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 				dispatcher_0.setD2qvtrExpression(qvtrExpression);
 				dispatcher_0.setResult(trace_4);
@@ -3068,10 +3068,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOclType__qvtr(final /*@NonInvalid*/ @NonNull TmapOclType trace_5)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOclType__qvtr" +
-				"\n\t\"trace\":" + toDebugString(trace_5) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_5.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_5.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_5.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_5) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_5.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_5.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_5.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_5.getDispatcher();
@@ -3086,7 +3086,7 @@ public class ATL2QVTr extends AbstractTransformer
 			if (symbol_0) {
 				final /*@NonInvalid*/ @NonNull OclType symbol_1 = (OclType)temp1_atlExpression;
 				// mapping statements
-				dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+				dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 				objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 				dispatcher_0.setResult(trace_5);
 				final /*@Thrown*/ @Nullable Boolean mmapOclType__qvtr = ValueUtil.TRUE_VALUE;
@@ -3139,7 +3139,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOclModel__IN__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapOclModel_IN trace_6)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOclModel__IN__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_6));
+					"\n\t\"trace\":" + toDebugString(trace_6));
 		}
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		@SuppressWarnings("null")
@@ -3269,7 +3269,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOclModel__OUT__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapOclModel_OUT trace_7)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOclModel__OUT__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_7));
+					"\n\t\"trace\":" + toDebugString(trace_7));
 		}
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		@SuppressWarnings("null")
@@ -3402,7 +3402,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapMatchedRule__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapMatchedRule trace_8)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapMatchedRule__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_8));
+					"\n\t\"trace\":" + toDebugString(trace_8));
 		}
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		@SuppressWarnings("null")
@@ -3503,7 +3503,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapVariableExp__referredVariable__dispatch__qvtr(final /*@NonInvalid*/ @NonNull DmapVariableExp_referredVariable dispatcher, final @NonNull Connection jm_TmapVariableExp__referredVariable__Helper, final @NonNull Connection jm_TmapVariableExp__referredVariable__VariableDecl)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapVariableExp__referredVariable__dispatch__qvtr" +
-				"\n\t\"dispatcher\":" + toDebugString(dispatcher));
+					"\n\t\"dispatcher\":" + toDebugString(dispatcher));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull VariableExp d1atlExpression = dispatcher.getD1atlExpression();
@@ -5785,7 +5785,7 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						// mapping statements
 						qvtrExpression.setName(t0operationName);
-						dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+						dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 						objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 						dispatcher_0.setD2qvtrExpression(qvtrExpression);
 						jo_OperationCallExp.appendElement(qvtrExpression);
@@ -5811,7 +5811,7 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			return idResolver.oclEquals(jo_OperationCallExp, thoseValues[0])
-				&& idResolver.oclEquals(trace_25, thoseValues[1]);
+					&& idResolver.oclEquals(trace_25, thoseValues[1]);
 		}
 	}
 
@@ -5862,7 +5862,7 @@ public class ATL2QVTr extends AbstractTransformer
 						/*@Thrown*/ @Nullable Boolean symbol_4;
 						if (eq_0) {
 							// mapping statements
-							mapHelper.setSuccess((Boolean)ValueUtil.FALSE_VALUE);
+							mapHelper.setSuccess(ValueUtil.FALSE_VALUE);
 							objectManager.assigned(mapHelper, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.FALSE_VALUE);
 							final /*@Thrown*/ @Nullable Boolean mmapHelper__verdict__qvtr = ValueUtil.TRUE_VALUE;
 							symbol_4 = mmapHelper__verdict__qvtr;
@@ -5972,7 +5972,7 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						// mapping statements
 						qvtrFunction.setName(t0operationName);
-						dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+						dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 						objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 						dispatcher_0.setD2qvtrFunction(qvtrFunction);
 						trace_26.setWmapHelper_Context(where_mapHelper_Context);
@@ -6002,7 +6002,7 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			return idResolver.oclEquals(jm_TmapHelper__Context, thoseValues[0])
-				&& idResolver.oclEquals(trace_26, thoseValues[1]);
+					&& idResolver.oclEquals(trace_26, thoseValues[1]);
 		}
 	}
 
@@ -6057,7 +6057,7 @@ public class ATL2QVTr extends AbstractTransformer
 							AbstractTransformer.CREATIONS.println("created " + toDebugString(qvtrExpression));
 						}
 						// mapping statements
-						dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+						dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 						objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 						dispatcher_0.setD2qvtrExpression(qvtrExpression);
 						final /*@Thrown*/ @Nullable Boolean mmapIfExp__qvtr__speculated__ = ValueUtil.TRUE_VALUE;
@@ -6258,7 +6258,7 @@ public class ATL2QVTr extends AbstractTransformer
 																								/*@Thrown*/ @Nullable Boolean symbol_13;
 																								if (eq_9) {
 																									// mapping statements
-																									mapOclExpression.setSuccess((Boolean)ValueUtil.FALSE_VALUE);
+																									mapOclExpression.setSuccess(ValueUtil.FALSE_VALUE);
 																									objectManager.assigned(mapOclExpression, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.FALSE_VALUE);
 																									final /*@Thrown*/ @Nullable Boolean mmapOclExpression__verdict__qvtr = ValueUtil.TRUE_VALUE;
 																									symbol_13 = mmapOclExpression__verdict__qvtr;
@@ -6441,7 +6441,7 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						// mapping statements
 						qvtrExpression.setName(t0propertyName);
-						dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+						dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 						objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 						dispatcher_0.setD2qvtrExpression(qvtrExpression);
 						jo_PropertyCallExp.appendElement(qvtrExpression);
@@ -6467,7 +6467,7 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			return idResolver.oclEquals(jo_PropertyCallExp, thoseValues[0])
-				&& idResolver.oclEquals(trace_28, thoseValues[1]);
+					&& idResolver.oclEquals(trace_28, thoseValues[1]);
 		}
 	}
 
@@ -6549,7 +6549,7 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						// mapping statements
 						qvtrFunction.setName(t0attributeName);
-						dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+						dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 						objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 						dispatcher_0.setD2qvtrFunction(qvtrFunction);
 						trace_29.setWmapHelper_Context(where_mapHelper_Context);
@@ -6579,7 +6579,7 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			return idResolver.oclEquals(jm_TmapHelper__Context_0, thoseValues[0])
-				&& idResolver.oclEquals(trace_29, thoseValues[1]);
+					&& idResolver.oclEquals(trace_29, thoseValues[1]);
 		}
 	}
 
@@ -6644,7 +6644,7 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						// mapping statements
 						qvtrExpression.setName(t0operationName);
-						dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+						dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 						objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 						dispatcher_0.setD2qvtrExpression(qvtrExpression);
 						jo_OperationCallExp_0.appendElement(qvtrExpression);
@@ -6670,7 +6670,7 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			return idResolver.oclEquals(jo_OperationCallExp_0, thoseValues[0])
-				&& idResolver.oclEquals(trace_30, thoseValues[1]);
+					&& idResolver.oclEquals(trace_30, thoseValues[1]);
 		}
 	}
 
@@ -6747,7 +6747,7 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						// mapping statements
 						qvtrExpression.setName(t0operationName);
-						dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+						dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 						objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 						dispatcher_0.setD2qvtrExpression(qvtrExpression);
 						trace_31.setT2qvtrSource(qvtrSource);
@@ -6776,8 +6776,8 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			return idResolver.oclEquals(jo_OperationCallExp_1, thoseValues[0])
-				&& idResolver.oclEquals(jo_VariableExp_0, thoseValues[1])
-				&& idResolver.oclEquals(trace_31, thoseValues[2]);
+					&& idResolver.oclEquals(jo_VariableExp_0, thoseValues[1])
+					&& idResolver.oclEquals(trace_31, thoseValues[2]);
 		}
 	}
 
@@ -6854,7 +6854,7 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						// mapping statements
 						qvtrExpression.setName(t0propertyName);
-						dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+						dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 						objectManager.assigned(dispatcher_0, QVTtracePackage.Literals.DISPATCH__SUCCESS, ValueUtil.TRUE_VALUE);
 						dispatcher_0.setD2qvtrExpression(qvtrExpression);
 						trace_32.setT2qvtrSource(qvtrSource);
@@ -6883,8 +6883,8 @@ public class ATL2QVTr extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			return idResolver.oclEquals(jo_OperationCallExp_2, thoseValues[0])
-				&& idResolver.oclEquals(jo_VariableExp_1, thoseValues[1])
-				&& idResolver.oclEquals(trace_32, thoseValues[2]);
+					&& idResolver.oclEquals(jo_VariableExp_1, thoseValues[1])
+					&& idResolver.oclEquals(trace_32, thoseValues[2]);
 		}
 	}
 
@@ -6906,10 +6906,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg(final /*@NonInvalid*/ @NonNull TmapNavigationOrAttributeCallExp_Helper trace_33)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg" +
-				"\n\t\"trace\":" + toDebugString(trace_33) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_33.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_33.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_33.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_33) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_33.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_33.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_33.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_33.getDispatcher();
@@ -7019,7 +7019,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapInPattern__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapInPattern trace_34)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapInPattern__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_34));
+					"\n\t\"trace\":" + toDebugString(trace_34));
 		}
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		@SuppressWarnings("null")
@@ -7160,10 +7160,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapHelper__Operation__qvtr__edge4__type__(final /*@NonInvalid*/ @NonNull TmapHelper_Operation trace_35)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapHelper__Operation__qvtr__edge4__type__" +
-				"\n\t\"trace\":" + toDebugString(trace_35) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_35.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlHelper\":" + toDebugString(trace_35.getDispatcher().getD1atlHelper()) +
-				"\n\t\"dispatcher.d2qvtrFunction\":" + toDebugString(trace_35.getDispatcher().getD2qvtrFunction()));
+					"\n\t\"trace\":" + toDebugString(trace_35) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_35.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlHelper\":" + toDebugString(trace_35.getDispatcher().getD1atlHelper()) +
+					"\n\t\"dispatcher.d2qvtrFunction\":" + toDebugString(trace_35.getDispatcher().getD2qvtrFunction()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapHelper dispatcher_0 = trace_35.getDispatcher();
@@ -7230,10 +7230,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapHelper__Attribute__qvtr__edge4__type__(final /*@NonInvalid*/ @NonNull TmapHelper_Attribute trace_36)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapHelper__Attribute__qvtr__edge4__type__" +
-				"\n\t\"trace\":" + toDebugString(trace_36) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_36.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlHelper\":" + toDebugString(trace_36.getDispatcher().getD1atlHelper()) +
-				"\n\t\"dispatcher.d2qvtrFunction\":" + toDebugString(trace_36.getDispatcher().getD2qvtrFunction()));
+					"\n\t\"trace\":" + toDebugString(trace_36) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_36.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlHelper\":" + toDebugString(trace_36.getDispatcher().getD1atlHelper()) +
+					"\n\t\"dispatcher.d2qvtrFunction\":" + toDebugString(trace_36.getDispatcher().getD2qvtrFunction()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapHelper dispatcher_0 = trace_36.getDispatcher();
@@ -7305,7 +7305,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapMatchedRule__super__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapMatchedRule_super trace_37)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapMatchedRule__super__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_37));
+					"\n\t\"trace\":" + toDebugString(trace_37));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull MatchedRule t1atlChildRule = trace_37.getT1atlChildRule();
@@ -7444,7 +7444,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapSimpleOutPatternElement__qvtr__residue__(final @NonNull Connection jm_TmapVariable, final /*@NonInvalid*/ @NonNull TmapSimpleOutPatternElement trace_38)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapSimpleOutPatternElement__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_38));
+					"\n\t\"trace\":" + toDebugString(trace_38));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull SimpleOutPatternElement t1atlElement = trace_38.getT1atlElement();
@@ -7626,7 +7626,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapHelper__Context__qvtr(final @NonNull Connection jm_TmapVariable_0, final /*@NonInvalid*/ @NonNull TmapHelper_Context trace_39)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapHelper__Context__qvtr" +
-				"\n\t\"trace\":" + toDebugString(trace_39));
+					"\n\t\"trace\":" + toDebugString(trace_39));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull Helper t1atlHelper = trace_39.getT1atlHelper();
@@ -7698,10 +7698,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOperationCallExp__Helper__qvtr__edge8__referred(final /*@NonInvalid*/ @NonNull TmapOperationCallExp_Helper trace_40)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOperationCallExp__Helper__qvtr__edge8__referred" +
-				"\n\t\"trace\":" + toDebugString(trace_40) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_40.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_40.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_40.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_40) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_40.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_40.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_40.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_40.getDispatcher();
@@ -7788,10 +7788,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg_1(final /*@NonInvalid*/ @NonNull TmapNavigationOrAttributeCallExp_Helper trace_41)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg_1" +
-				"\n\t\"trace\":" + toDebugString(trace_41) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_41.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_41.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_41.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_41) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_41.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_41.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_41.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_41.getDispatcher();
@@ -7867,10 +7867,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOperationCallExp__Helper__qvtr__edge9__type__(final /*@NonInvalid*/ @NonNull TmapOperationCallExp_Helper trace_42)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOperationCallExp__Helper__qvtr__edge9__type__" +
-				"\n\t\"trace\":" + toDebugString(trace_42) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_42.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_42.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_42.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_42) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_42.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_42.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_42.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_42.getDispatcher();
@@ -7981,7 +7981,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapSimpleInPatternElement__qvtr__residue__(final @NonNull Connection jm_TmapVariable_1, final /*@NonInvalid*/ @NonNull TmapSimpleInPatternElement trace_43)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapSimpleInPatternElement__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_43));
+					"\n\t\"trace\":" + toDebugString(trace_43));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull SimpleInPatternElement t1atlElement = trace_43.getT1atlElement();
@@ -8135,7 +8135,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapInPattern__filter__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapInPattern_filter trace_44)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapInPattern__filter__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_44));
+					"\n\t\"trace\":" + toDebugString(trace_44));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull InPattern t1atlPattern = trace_44.getT1atlPattern();
@@ -8279,10 +8279,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapHelper__Operation__qvtr__edge5__queryExpression(final /*@NonInvalid*/ @NonNull TmapHelper_Operation trace_45)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapHelper__Operation__qvtr__edge5__queryExpression" +
-				"\n\t\"trace\":" + toDebugString(trace_45) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_45.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlHelper\":" + toDebugString(trace_45.getDispatcher().getD1atlHelper()) +
-				"\n\t\"dispatcher.d2qvtrFunction\":" + toDebugString(trace_45.getDispatcher().getD2qvtrFunction()));
+					"\n\t\"trace\":" + toDebugString(trace_45) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_45.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlHelper\":" + toDebugString(trace_45.getDispatcher().getD1atlHelper()) +
+					"\n\t\"dispatcher.d2qvtrFunction\":" + toDebugString(trace_45.getDispatcher().getD2qvtrFunction()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapHelper dispatcher_0 = trace_45.getDispatcher();
@@ -8361,10 +8361,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOperationCallExp__Helper__qvtr__edge7__ownedArg(final /*@NonInvalid*/ @NonNull TmapOperationCallExp_Helper trace_46)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOperationCallExp__Helper__qvtr__edge7__ownedArg" +
-				"\n\t\"trace\":" + toDebugString(trace_46) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_46.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_46.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_46.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_46) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_46.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_46.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_46.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_46.getDispatcher();
@@ -8452,10 +8452,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOperationCallExp__Operation__qvtr__edge4__owned(final /*@NonInvalid*/ @NonNull TmapOperationCallExp_Operation trace_47)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOperationCallExp__Operation__qvtr__edge4__owned" +
-				"\n\t\"trace\":" + toDebugString(trace_47) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_47.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_47.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_47.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_47) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_47.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_47.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_47.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_47.getDispatcher();
@@ -8545,10 +8545,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOperationCallExp__Helper__qvtr__edge4__referred(final /*@NonInvalid*/ @NonNull TmapOperationCallExp_Helper trace_48)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOperationCallExp__Helper__qvtr__edge4__referred" +
-				"\n\t\"trace\":" + toDebugString(trace_48) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_48.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_48.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_48.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_48) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_48.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_48.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_48.getDispatcher().getD2qvtrExpression()));
 		}
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ @Nullable Boolean localSuccess = trace_48.getLocalSuccess();
@@ -8576,7 +8576,7 @@ public class ATL2QVTr extends AbstractTransformer
 					final /*@NonInvalid*/ boolean symbol_1 = ownedContext instanceof org.eclipse.ocl.pivot.VariableDeclaration;
 					/*@Thrown*/ @Nullable Boolean symbol_7;
 					if (symbol_1) {
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable VariableDeclaration symbol_2 = (org.eclipse.ocl.pivot.VariableDeclaration)ownedContext;
+						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable VariableDeclaration symbol_2 = ownedContext;
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_VariableDeclaration_0 = idResolver.getClass(CLSSid_VariableDeclaration_0, null);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull VariableDeclaration oclAsType = (org.eclipse.ocl.pivot.@NonNull VariableDeclaration)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ownedContext, TYP_VariableDeclaration_0);
@@ -8638,10 +8638,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOperatorCallExp__qvtr__edge4__ownedSource__(final /*@NonInvalid*/ @NonNull TmapOperatorCallExp trace_49)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOperatorCallExp__qvtr__edge4__ownedSource__" +
-				"\n\t\"trace\":" + toDebugString(trace_49) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_49.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_49.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_49.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_49) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_49.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_49.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_49.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_49.getDispatcher();
@@ -8722,7 +8722,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapVariable__qvtr(final /*@NonInvalid*/ @NonNull TmapVariable trace_50)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapVariable__qvtr" +
-				"\n\t\"trace\":" + toDebugString(trace_50));
+					"\n\t\"trace\":" + toDebugString(trace_50));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull LocatedElement t1atlVariable = trace_50.getT1atlVariable();
@@ -8756,10 +8756,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapHelper__Attribute__qvtr__edge5__queryExpression(final /*@NonInvalid*/ @NonNull TmapHelper_Attribute trace_51)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapHelper__Attribute__qvtr__edge5__queryExpression" +
-				"\n\t\"trace\":" + toDebugString(trace_51) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_51.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlHelper\":" + toDebugString(trace_51.getDispatcher().getD1atlHelper()) +
-				"\n\t\"dispatcher.d2qvtrFunction\":" + toDebugString(trace_51.getDispatcher().getD2qvtrFunction()));
+					"\n\t\"trace\":" + toDebugString(trace_51) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_51.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlHelper\":" + toDebugString(trace_51.getDispatcher().getD1atlHelper()) +
+					"\n\t\"dispatcher.d2qvtrFunction\":" + toDebugString(trace_51.getDispatcher().getD2qvtrFunction()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapHelper dispatcher_0 = trace_51.getDispatcher();
@@ -8838,10 +8838,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg_2(final /*@NonInvalid*/ @NonNull TmapNavigationOrAttributeCallExp_Helper trace_52)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg_2" +
-				"\n\t\"trace\":" + toDebugString(trace_52) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_52.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_52.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_52.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_52) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_52.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_52.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_52.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_52.getDispatcher();
@@ -8937,10 +8937,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapIfExp__qvtr__edge5__ownedThen__edge4__ownedCond(final /*@NonInvalid*/ @NonNull TmapIfExp trace_53)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapIfExp__qvtr__edge5__ownedThen__edge4__ownedCond" +
-				"\n\t\"trace\":" + toDebugString(trace_53) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_53.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_53.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_53.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_53) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_53.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_53.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_53.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_53.getDispatcher();
@@ -9062,10 +9062,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg_3(final /*@NonInvalid*/ @NonNull TmapNavigationOrAttributeCallExp_Helper trace_54)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg_3" +
-				"\n\t\"trace\":" + toDebugString(trace_54) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_54.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_54.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_54.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_54) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_54.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_54.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_54.getDispatcher().getD2qvtrExpression()));
 		}
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ @Nullable Boolean localSuccess = trace_54.getLocalSuccess();
@@ -9093,7 +9093,7 @@ public class ATL2QVTr extends AbstractTransformer
 					final /*@NonInvalid*/ boolean symbol_1 = ownedContext instanceof org.eclipse.ocl.pivot.VariableDeclaration;
 					/*@Thrown*/ @Nullable Boolean symbol_7;
 					if (symbol_1) {
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable VariableDeclaration symbol_2 = (org.eclipse.ocl.pivot.VariableDeclaration)ownedContext;
+						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable VariableDeclaration symbol_2 = ownedContext;
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_VariableDeclaration_0 = idResolver.getClass(CLSSid_VariableDeclaration_0, null);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull VariableDeclaration oclAsType = (org.eclipse.ocl.pivot.@NonNull VariableDeclaration)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ownedContext, TYP_VariableDeclaration_0);
@@ -9160,7 +9160,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOperationCallExp__argument__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapOperationCallExp_argument trace_55)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOperationCallExp__argument__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_55));
+					"\n\t\"trace\":" + toDebugString(trace_55));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull OclExpression t1atlArgument = trace_55.getT1atlArgument();
@@ -9283,7 +9283,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapBinding__qvtr__residue__(final /*@NonInvalid*/ @NonNull TmapBinding trace_56)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapBinding__qvtr__residue__" +
-				"\n\t\"trace\":" + toDebugString(trace_56));
+					"\n\t\"trace\":" + toDebugString(trace_56));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull Binding t1atlBinding = trace_56.getT1atlBinding();
@@ -9397,10 +9397,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapNavigationOrAttributeCallExp__Property__qvtr__e(final /*@NonInvalid*/ @NonNull TmapNavigationOrAttributeCallExp_Property trace_57)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapNavigationOrAttributeCallExp__Property__qvtr__e" +
-				"\n\t\"trace\":" + toDebugString(trace_57) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_57.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_57.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_57.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_57) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_57.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_57.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_57.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapOclExpression dispatcher_0 = trace_57.getDispatcher();
@@ -9680,10 +9680,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapVariableExp__referredVariable__VariableDeclarat(final /*@NonInvalid*/ @NonNull TmapVariableExp_referredVariable_VariableDeclaration trace_60)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapVariableExp__referredVariable__VariableDeclarat" +
-				"\n\t\"trace\":" + toDebugString(trace_60) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_60.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_60.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_60.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_60) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_60.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_60.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_60.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapVariableExp_referredVariable dispatcher_0 = trace_60.getDispatcher();
@@ -9720,7 +9720,7 @@ public class ATL2QVTr extends AbstractTransformer
 						final /*@Thrown*/ @Nullable Type type_2 = t2qvtrVariable.getType();
 						// mapping statements
 						d2qvtrExpression.setName(name_2);
-						dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+						dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 						dispatcher_0.setResult(trace_60);
 						d2qvtrExpression.setReferredVariable(t2qvtrVariable);
 						d2qvtrExpression.setType(type_2);
@@ -9879,10 +9879,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapVariableExp__referredVariable__Helper__qvtr(final /*@NonInvalid*/ @NonNull TmapVariableExp_referredVariable_Helper trace_62)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapVariableExp__referredVariable__Helper__qvtr" +
-				"\n\t\"trace\":" + toDebugString(trace_62) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_62.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_62.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_62.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_62) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_62.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_62.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_62.getDispatcher().getD2qvtrExpression()));
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull DmapVariableExp_referredVariable dispatcher_0 = trace_62.getDispatcher();
@@ -9926,7 +9926,7 @@ public class ATL2QVTr extends AbstractTransformer
 							final /*@Thrown*/ @Nullable Type type_2 = t2qvtrVariable.getType();
 							// mapping statements
 							d2qvtrExpression.setName(STR_self);
-							dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+							dispatcher_0.setSuccess(ValueUtil.TRUE_VALUE);
 							dispatcher_0.setResult(trace_62);
 							d2qvtrExpression.setReferredVariable(t2qvtrVariable);
 							d2qvtrExpression.setType(type_2);
@@ -10179,7 +10179,7 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapVariableExp__referredVariable__verdict__qvtr(final /*@NonInvalid*/ @NonNull DmapVariableExp_referredVariable mapVariableExp_referredVariable)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapVariableExp__referredVariable__verdict__qvtr" +
-				"\n\t\"mapVariableExp_referredVariable\":" + toDebugString(mapVariableExp_referredVariable));
+					"\n\t\"mapVariableExp_referredVariable\":" + toDebugString(mapVariableExp_referredVariable));
 		}
 		final /*@NonInvalid*/ @Nullable TmapVariableExp_referredVariable_VariableDeclaration domapVariableExp_referredVariable_VariableDeclaration = mapVariableExp_referredVariable.getDomapVariableExp_referredVariable_VariableDeclaration();
 		final /*@NonInvalid*/ boolean symbol_0 = domapVariableExp_referredVariable_VariableDeclaration != null;
@@ -10204,7 +10204,7 @@ public class ATL2QVTr extends AbstractTransformer
 					/*@Thrown*/ @Nullable Boolean symbol_4;
 					if (eq_0) {
 						// mapping statements
-						mapVariableExp_referredVariable.setSuccess((Boolean)ValueUtil.FALSE_VALUE);
+						mapVariableExp_referredVariable.setSuccess(ValueUtil.FALSE_VALUE);
 						final /*@Thrown*/ @Nullable Boolean mmapVariableExp__referredVariable__verdict__qvtr = ValueUtil.TRUE_VALUE;
 						symbol_4 = mmapVariableExp__referredVariable__verdict__qvtr;
 					}
@@ -10249,10 +10249,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg_4(final /*@NonInvalid*/ @NonNull TmapNavigationOrAttributeCallExp_Helper trace_65)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapNavigationOrAttributeCallExp__Helper__qvtr__edg_4" +
-				"\n\t\"trace\":" + toDebugString(trace_65) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_65.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_65.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_65.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_65) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_65.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_65.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_65.getDispatcher().getD2qvtrExpression()));
 		}
 		final /*@NonInvalid*/ @Nullable Boolean localSuccess = trace_65.getLocalSuccess();
 		if (localSuccess == null) {
@@ -10538,10 +10538,10 @@ public class ATL2QVTr extends AbstractTransformer
 	protected boolean MAP_mmapOperationCallExp__Helper__qvtr__edge6__name__ed(final /*@NonInvalid*/ @NonNull TmapOperationCallExp_Helper trace_68)  {
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mmapOperationCallExp__Helper__qvtr__edge6__name__ed" +
-				"\n\t\"trace\":" + toDebugString(trace_68) +
-				"\n\t\"dispatcher\":" + toDebugString(trace_68.getDispatcher()) +
-				"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_68.getDispatcher().getD1atlExpression()) +
-				"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_68.getDispatcher().getD2qvtrExpression()));
+					"\n\t\"trace\":" + toDebugString(trace_68) +
+					"\n\t\"dispatcher\":" + toDebugString(trace_68.getDispatcher()) +
+					"\n\t\"dispatcher.d1atlExpression\":" + toDebugString(trace_68.getDispatcher().getD1atlExpression()) +
+					"\n\t\"dispatcher.d2qvtrExpression\":" + toDebugString(trace_68.getDispatcher().getD2qvtrExpression()));
 		}
 		final /*@NonInvalid*/ @Nullable Boolean localSuccess = trace_68.getLocalSuccess();
 		if (localSuccess == null) {

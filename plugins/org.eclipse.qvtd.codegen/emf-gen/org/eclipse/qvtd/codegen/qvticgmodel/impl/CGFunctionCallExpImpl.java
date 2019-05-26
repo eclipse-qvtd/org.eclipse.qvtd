@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -121,7 +121,7 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 		switch (featureID) {
 			case CGOperationCallExpImpl.CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0:
 				setFunction((CGFunction)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -136,7 +136,7 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 		switch (featureID) {
 			case CGOperationCallExpImpl.CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0:
 				setFunction((CGFunction)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -180,7 +180,7 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 	 */
 	@Override
 	public boolean isBoxed() {
-		return false;
+		return true;
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 	 */
 	@Override
 	public boolean isUnboxed() {
-		return true;
+		return false;
 	}
 
 } //CGFunctionCallExpImpl

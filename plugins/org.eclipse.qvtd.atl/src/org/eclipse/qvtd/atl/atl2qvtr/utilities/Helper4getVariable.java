@@ -17,14 +17,14 @@ import org.eclipse.m2m.atl.common.OCL.OclFeatureDefinition;
 import org.eclipse.m2m.atl.common.OCL.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.library.AbstractUnaryOperation;
+import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 
-public class Helper4getVariable extends AbstractUnaryOperation
+public class Helper4getVariable extends AbstractBinaryOperation
 {
 	public static final @NonNull Helper4getVariable INSTANCE = new Helper4getVariable();
 
 	@Override
-	public @Nullable Object evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+	public @Nullable Object evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object selfValue, @Nullable Object sourceValue) {
 		VariableDeclaration atlVariable = (VariableDeclaration)sourceValue;
 		assert atlVariable != null;
 		String varName = atlVariable.getVarName();

@@ -110,7 +110,8 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	@Override
 	public @Nullable Object visitCGFunction(@NonNull CGFunction cgFunction) {
 		visitCGOperation(cgFunction);
-		rewriteAsUnboxed(cgFunction.getBody());
+		//	rewriteAsUnboxed(cgFunction.getBody());
+		rewriteAsBoxed(cgFunction.getBody());
 		return null;
 	}
 

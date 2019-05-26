@@ -17,9 +17,9 @@ import org.eclipse.m2m.atl.common.ATL.LocatedElement;
 import org.eclipse.m2m.atl.common.ATL.Module;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.library.AbstractUnaryOperation;
+import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 
-public class Helper4getModule extends AbstractUnaryOperation
+public class Helper4getModule extends AbstractBinaryOperation
 {
 	public static final @NonNull Helper4getModule INSTANCE = new Helper4getModule();
 
@@ -27,7 +27,7 @@ public class Helper4getModule extends AbstractUnaryOperation
 	//			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
 	//		}
 	@Override
-	public @NonNull Module evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+	public @NonNull Module evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object selfValue, @Nullable Object sourceValue) {
 		for (EObject eObject = (LocatedElement)sourceValue; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Module) {
 				return (Module) eObject;
