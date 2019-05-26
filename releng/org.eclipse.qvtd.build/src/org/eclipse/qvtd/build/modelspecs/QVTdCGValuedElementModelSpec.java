@@ -85,12 +85,12 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 
 	public static class Register {
 		public Register() {
-			new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,						Box.UNBOX, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,						Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGConnectionVariable.class, null,					Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,					Box.UNBOX, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGEcoreRealizedVariable.class, null,				null     , null     , null     , Nul.ASSRT, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
-			new QVTdCGValuedElementModelSpec(CGFunctionCallExp.class, null,						Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGFunctionCallExp.class, null,						Box.BOX,   null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGFunctionParameter.class, null,					Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGConnectionAssignment.class, "ownedInitValue",	Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.UNSUP);
 			new QVTdCGValuedElementModelSpec(CGMappingCallBinding.class, "ownedValue",			Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
