@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2018 Willink Transformations and others.
+ * Copyright (c) 2010, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -18,17 +18,28 @@
 package	org.eclipse.qvtd.pivot.qvtbase.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.*;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.Package;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.PackageId;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
@@ -36,7 +47,13 @@ import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLmetamodel;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
+
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
 /**
  * This is the http://www.eclipse.org/qvt/2015/QVTbaseLibrary Standard Library
@@ -245,7 +262,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 		public @NonNull Model getModel() {
 			return model;
 		}
-
+		
 		private final @NonNull Package _ocl = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
 		private final @NonNull Package _pivot = getPackage(org.eclipse.ocl.pivot.model.OCLmetamodel.getDefaultModel(), "pivot");
 		private final @NonNull Package _qvtbase = getPackage(org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel.getDefaultModel(), "qvtbase");
@@ -270,18 +287,18 @@ public class QVTbaseLibrary extends ASResourceImpl
 		private final @NonNull TemplateParameter _Collection_T = getTemplateParameter(_Collection, 0);
 		private final @NonNull TemplateParameter _Set_T = getTemplateParameter(_Set, 0);
 		private final @NonNull TemplateParameter _UniqueCollection_T = getTemplateParameter(_UniqueCollection, 0);
-
+		
 		private void installPackages() {
 			model.getOwnedPackages().add(qvtbaselibrary);
 			model.getOwnedPackages().add(orphanage);
 			model.getOwnedImports().add(createImport(null, _ocl));
 			model.getOwnedImports().add(createImport("qvtb", _qvtbase));
 		}
-
+		
 		private final @NonNull Class _Model = createClass("Model");
 		private final @NonNull Class _PseudoOperations = createClass("PseudoOperations");
 		private final @NonNull Class _Transformation = createClass("Transformation");
-
+		
 		private final @NonNull TemplateParameter tp_PseudoOperations_collection_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_error_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_if_T = createTemplateParameter("T");
@@ -293,7 +310,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 		private final @NonNull TemplateParameter tp_PseudoOperations_shadow_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_tuple_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_type_V = createTemplateParameter("V");
-
+		
 		private final @NonNull CollectionType _Collection_CollectionItem = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Element = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Property = createCollectionType(_Collection);
@@ -309,12 +326,12 @@ public class QVTbaseLibrary extends ASResourceImpl
 		private final @NonNull CollectionType _UniqueCollection_Property = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_TupleLiteralPart = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_PseudoOperations_loop_E = createCollectionType(_UniqueCollection);
-
+		
 		private void installClassTypes() {
 			List<Class> ownedClasses;
 			List<Class> superClasses;
 			Class type;
-
+		
 			ownedClasses = qvtbaselibrary.getOwnedClasses();
 			ownedClasses.add(type = _Model);
 			superClasses = type.getSuperClasses();
@@ -326,12 +343,12 @@ public class QVTbaseLibrary extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 		}
-
+		
 		private void installCollectionTypes() {
 			List<Class> ownedClasses;
 			List<Class> superClasses;
 			CollectionType type;
-
+		
 			ownedClasses = orphanage.getOwnedClasses();
 			ownedClasses.add(type = _Collection_CollectionItem);
 			superClasses = type.getSuperClasses();
@@ -379,7 +396,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_PseudoOperations_loop_E);
 		}
-
+		
 		private final @NonNull Operation op_PseudoOperations_collection = createOperation("collection", _CollectionLiteralExp, null, null, tp_PseudoOperations_collection_T);
 		private final @NonNull Operation op_PseudoOperations_error = createOperation("error", _OclVoid, null, null, tp_PseudoOperations_error_T);
 		private final @NonNull Operation op_PseudoOperations_if = createOperation("if", tp_PseudoOperations_if_T, null, null, tp_PseudoOperations_if_T);
@@ -390,13 +407,13 @@ public class QVTbaseLibrary extends ASResourceImpl
 		private final @NonNull Operation op_PseudoOperations_shadow = createOperation("shadow", _ShadowExp, null, null, tp_PseudoOperations_shadow_T);
 		private final @NonNull Operation op_PseudoOperations_tuple = createOperation("tuple", _TupleLiteralExp, null, null, tp_PseudoOperations_tuple_T);
 		private final @NonNull Operation op_PseudoOperations_type = createOperation("type", _TypeExp, null, null, tp_PseudoOperations_type_V);
-
+		
 		private void installOperations() {
 			List<Operation> ownedOperations;
 			List<Parameter> ownedParameters;
 			Operation operation;
 			Parameter parameter;
-
+		
 			ownedOperations = _PseudoOperations.getOwnedOperations();
 			ownedOperations.add(operation = op_PseudoOperations_collection);
 			operation.setIsStatic(true);
@@ -447,7 +464,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("type", tp_PseudoOperations_type_V, false));
 		}
-
+		
 		private void installTemplateBindings() {
 			addBinding(_Collection_CollectionItem, _CollectionItem);
 			addBinding(_Collection_Element, _Element);
@@ -465,7 +482,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 			addBinding(_UniqueCollection_PseudoOperations_loop_E, tp_PseudoOperations_loop_E);
 			addBinding(_UniqueCollection_TupleLiteralPart, _TupleLiteralPart);
 		}
-
+		
 		private void installComments() {
 			installComment(op_PseudoOperations_collection, "The PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated\nas an Operation within QVTs.");
 			installComment(op_PseudoOperations_error, "The PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated\nas an Operation within QVTs.");

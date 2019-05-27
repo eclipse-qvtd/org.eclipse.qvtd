@@ -27,7 +27,7 @@ Workflow {
     	platformUri = "../../plugins"
 //    	scanClassPath = true
     }
-    bean = GenModelSetup { resourceSet = libResourceSet }
+    bean = EcoreGenModelSetup { resourceSet = libResourceSet }
     component = GenerateOCLstdlibXtend { resourceSet = libResourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
     	modelFile = "model/QVTbaseLibrary.oclstdlib"
@@ -51,6 +51,7 @@ Workflow {
     	excludedEClassifierName = "PseudoOperations"
     	excludedEClassifierName = "Model"
     	excludedEClassifierName = "Transformation"
+    	useOCLstdlib = true
     }
 	bean = ResourceSetImpl : qvtbResourceSet {}
     component = GenerateModel { resourceSet = qvtbResourceSet skipOnErrors = true
