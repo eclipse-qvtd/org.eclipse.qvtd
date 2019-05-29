@@ -426,7 +426,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="classDatum" lowerBound="1"
         eType="#//ClassDatum">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
+        <details key="documentation" value="The type and typed model of the passed connection element."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if the connection input is a DataType for which the output is the  singletone trace element."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mandatoryTargetNodes" ordered="false"
@@ -646,6 +652,17 @@
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ShadowPart">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Shadow part for a shadow instamnce construction."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SharedEdge" eSuperTypes="#//NavigableEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A SharedEdge supports the directed shared aggregation from a DataType node to its aggregator node within a Region."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredOppositeProperty"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The property to navigate from source to target."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

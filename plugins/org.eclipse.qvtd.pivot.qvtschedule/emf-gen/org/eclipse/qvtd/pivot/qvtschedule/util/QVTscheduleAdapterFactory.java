@@ -346,6 +346,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createShadowPartEdgeAdapter();
 			}
 			@Override
+			public Adapter caseSharedEdge(SharedEdge object) {
+				return createSharedEdgeAdapter();
+			}
+			@Override
 			public Adapter caseStringLiteralNode(StringLiteralNode object) {
 				return createStringLiteralNodeAdapter();
 			}
@@ -782,6 +786,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createShadowPartEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.SharedEdge <em>Shared Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.SharedEdge
+	 * @generated
+	 */
+	public Adapter createSharedEdgeAdapter() {
 		return null;
 	}
 

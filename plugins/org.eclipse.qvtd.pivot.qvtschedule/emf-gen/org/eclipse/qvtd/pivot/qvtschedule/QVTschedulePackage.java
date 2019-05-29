@@ -981,6 +981,27 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getShadowPartEdge_ReferredPart();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.SharedEdge <em>Shared Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Shared Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.SharedEdge
+	 * @generated
+	 */
+	EClass getSharedEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.SharedEdge#getReferredOppositeProperty <em>Referred Opposite Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Opposite Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.SharedEdge#getReferredOppositeProperty()
+	 * @see #getSharedEdge()
+	 * @generated
+	 */
+	EReference getSharedEdge_ReferredOppositeProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode <em>String Literal Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1727,6 +1748,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNodeConnection_ClassDatum();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#isDataType <em>Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Data Type</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#isDataType()
+	 * @see #getNodeConnection()
+	 * @generated
+	 */
+	EAttribute getNodeConnection_DataType();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getMandatoryTargetNodes <em>Mandatory Target Nodes</em>}'.
@@ -3045,6 +3077,24 @@ public interface QVTschedulePackage extends EPackage {
 		EReference SHADOW_PART_EDGE__REFERRED_PART = eINSTANCE.getShadowPartEdge_ReferredPart();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.SharedEdgeImpl <em>Shared Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.SharedEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSharedEdge()
+		 * @generated
+		 */
+		EClass SHARED_EDGE = eINSTANCE.getSharedEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Opposite Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SHARED_EDGE__REFERRED_OPPOSITE_PROPERTY = eINSTANCE.getSharedEdge_ReferredOppositeProperty();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.StringLiteralNodeImpl <em>String Literal Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3677,6 +3727,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference NODE_CONNECTION__CLASS_DATUM = eINSTANCE.getNodeConnection_ClassDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE_CONNECTION__DATA_TYPE = eINSTANCE.getNodeConnection_DataType();
 
 		/**
 		 * The meta object literal for the '<em><b>Mandatory Target Nodes</b></em>' reference list feature.

@@ -120,14 +120,15 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case 63: return createScheduleModel();
 			case 64: return createShadowNode();
 			case 65: return createShadowPartEdge();
-			case 66: return createStringLiteralNode();
-			case 67: return createSuccessEdge();
-			case 68: return createSuccessNode();
-			case 70: return createTupleLiteralNode();
-			case 71: return createTuplePartEdge();
-			case 72: return createTypeLiteralNode();
-			case 73: return createUnknownNode();
-			case 75: return createVerdictRegion();
+			case 66: return createSharedEdge();
+			case 67: return createStringLiteralNode();
+			case 68: return createSuccessEdge();
+			case 69: return createSuccessNode();
+			case 71: return createTupleLiteralNode();
+			case 72: return createTuplePartEdge();
+			case 73: return createTypeLiteralNode();
+			case 74: return createUnknownNode();
+			case 76: return createVerdictRegion();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -141,11 +142,11 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case 76:
-				return createConnectionRoleFromString(eDataType, initialValue);
 			case 77:
-				return createRoleFromString(eDataType, initialValue);
+				return createConnectionRoleFromString(eDataType, initialValue);
 			case 78:
+				return createRoleFromString(eDataType, initialValue);
+			case 79:
 				return createNumberFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -160,11 +161,11 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case 76:
-				return convertConnectionRoleToString(eDataType, instanceValue);
 			case 77:
-				return convertRoleToString(eDataType, instanceValue);
+				return convertConnectionRoleToString(eDataType, instanceValue);
 			case 78:
+				return convertRoleToString(eDataType, instanceValue);
+			case 79:
 				return convertNumberToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -730,6 +731,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull ShadowPartEdge createShadowPartEdge() {
 		ShadowPartEdgeImpl shadowPartEdge = new ShadowPartEdgeImpl();
 		return shadowPartEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull SharedEdge createSharedEdge() {
+		SharedEdgeImpl sharedEdge = new SharedEdgeImpl();
+		return sharedEdge;
 	}
 
 	/**

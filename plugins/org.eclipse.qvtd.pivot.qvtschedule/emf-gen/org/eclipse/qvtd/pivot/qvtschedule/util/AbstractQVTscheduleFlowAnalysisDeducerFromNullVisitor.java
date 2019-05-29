@@ -371,6 +371,11 @@ public abstract class AbstractQVTscheduleFlowAnalysisDeducerFromNullVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitSharedEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SharedEdge object) {
+		return visitNavigableEdge(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitStringLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StringLiteralNode object) {
 		return visitOperationNode(object);
 	}

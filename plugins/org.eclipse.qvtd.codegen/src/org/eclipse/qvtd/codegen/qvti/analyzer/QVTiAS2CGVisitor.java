@@ -453,6 +453,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			else if (QVTimperativeUtil.isObserver(asMapping)) {
 				useClassMappings.add(asMapping);
 			}
+			else if (QVTimperativeUtil.isDataType(asMapping)) {
+				useClassMappings.add(asMapping);
+			}
 		}
 		if (useClassMappings.size() > 0) {
 			useClassMappings.add(QVTimperativeUtil.getRootMapping(asTransformation));

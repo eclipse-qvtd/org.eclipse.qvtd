@@ -12,6 +12,7 @@ package org.eclipse.qvtd.codegen.qvti.java;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -246,11 +247,18 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append("().");
 			js.append(isPartial ? "add" : "addAll");		// FIXME may need to loop addAll manually
 			js.append("(");
-			if (instanceClassName != null) {
+			if (instanceClassName == null) {
+				js.appendAtomicReferenceTo(cgInit);
+			}
+			else if (isPartial) {
 				js.appendEcoreValue(instanceClassName, cgInit);
 			}
 			else {
-				js.appendAtomicReferenceTo(cgInit);
+				//				js.appendEcoreValue("Collection<" + instanceClassName + ">", cgInit);
+				js.append("(");
+				js.appendClassReference(null, Collection.class, false, instanceClassName);
+				js.append(")");
+				js.appendValueName(cgInit);
 			}
 			js.append(");\n");
 		}
@@ -261,11 +269,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(".");
 			js.append(setAccessor);
 			js.append("(");
-			if (instanceClassName != null) {
-				js.appendEcoreValue(instanceClassName, cgInit);
+			if (instanceClassName == null) {
+				js.appendAtomicReferenceTo(cgInit);
 			}
 			else {
-				js.appendAtomicReferenceTo(cgInit);
+				js.appendEcoreValue(instanceClassName, cgInit);
 			}
 			js.append(");\n");
 		}
@@ -859,6 +867,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.append(", ");
 				js.appendValueName(cgParameter);
 			}
+			//	js.append(")");
 			js.append(");\n");
 			js.appendThis(functionName);
 			js.append("." + instanceName + " = ");
@@ -2277,9 +2286,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement value = cgMappingCallBinding.getOwnedValue();
 		TypeDescriptor argumentTypeDescriptor = context.getTypeDescriptor(cgMappingCallBinding);
 		TypeId pivotTypeId = value.getASTypeId();
-		if (pivotTypeId instanceof CollectionTypeId) {
-			pivotTypeId = ((CollectionTypeId)pivotTypeId).getElementTypeId();
-		}
 		TypeDescriptor iteratorTypeDescriptor = context.getBoxedDescriptor(ClassUtil.nonNullState(pivotTypeId));
 		if (argumentTypeDescriptor.isAssignableFrom(iteratorTypeDescriptor)) {
 			return null;
@@ -2329,22 +2335,24 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (!js.appendLocalStatements(initValue)) {
 			return false;
 		}
-		final String iteratorName = getSymbolName(null, "iterator");
-		TypeId concreteElementTypeId = cgConnectionAssignment.getConnectionVariable().getASTypeId();
-		assert concreteElementTypeId != null;
-		BoxedDescriptor concreteBoxedDescriptor = context.getBoxedDescriptor(concreteElementTypeId);
-		BoxedDescriptor abstractBoxedDescriptor = concreteBoxedDescriptor;
-		if (!(initValue.getASTypeId() instanceof CollectionTypeId)) {
-			if (isIncremental) {
-				js.appendValueName(cgConnectionAssignment);
-				js.append(" = ");
-			}
-			js.appendReferenceTo(cgConnectionAssignment.getConnectionVariable());
-			js.append(".appendElement(");
-			js.appendValueName(initValue);
-			js.append(");\n");
+		//	TypeId concreteElementTypeId = cgConnectionAssignment.getConnectionVariable().getASTypeId();
+		//	assert concreteElementTypeId != null;
+		//	BoxedDescriptor concreteBoxedDescriptor = context.getBoxedDescriptor(concreteElementTypeId);
+		//	BoxedDescriptor abstractBoxedDescriptor = concreteBoxedDescriptor;
+		//	TypeId initTypeId = initValue.getASTypeId();
+		//	if ((initTypeId == concreteElementTypeId) || !(initTypeId instanceof CollectionTypeId)) {
+		if (isIncremental) {
+			js.appendValueName(cgConnectionAssignment);
+			js.append(" = ");
 		}
-		else {
+		js.appendReferenceTo(cgConnectionAssignment.getConnectionVariable());
+		js.append(".appendElement(");
+		js.appendValueName(initValue);
+		js.append(");\n");
+		//	}
+		//	The following is not used; it makes no sense to support a multi-addition to a connection.
+		/*	else {
+			final String iteratorName = getSymbolName(null, "iterator");		// FIXME use reserved iterator name
 			js.append("for (");
 			js.appendClassReference(Boolean.TRUE, abstractBoxedDescriptor);
 			js.append(" ");
@@ -2372,7 +2380,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.pushIndentation(null);
 			}
 			js.appendReferenceTo(cgConnectionAssignment.getConnectionVariable());
-			js.append(".add(");
+			js.append(".add(");			// FIXME Is there ever used ?? there is no "add"
 			js.append(iteratorName);
 			js.append(");\n");
 			if (concreteBoxedDescriptor != abstractBoxedDescriptor) {
@@ -2381,7 +2389,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 			js.popIndentation();
 			js.append("}\n");
-		}
+		} */
 		return true;
 	}
 
@@ -2608,6 +2616,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//
 		js.appendDeclaration(cgFunctionCallExp);
 		js.append(" = ");
+		//	js.appendClassReference(null, ValueUtil.class);
+		//	js.append(".createSetValue(");
+		//	js.appendValueName(resultType);
+		//	js.append(", ");
 		boolean needComma = false;
 		if (isIdentifiedInstance) {
 			js.append("((");

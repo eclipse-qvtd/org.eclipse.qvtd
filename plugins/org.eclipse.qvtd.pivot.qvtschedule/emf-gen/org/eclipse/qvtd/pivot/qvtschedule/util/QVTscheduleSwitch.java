@@ -720,6 +720,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 66: {
+				SharedEdge sharedEdge = (SharedEdge)theEObject;
+				T result = caseSharedEdge(sharedEdge);
+				if (result == null) result = caseNavigableEdge(sharedEdge);
+				if (result == null) result = caseEdge(sharedEdge);
+				if (result == null) result = caseConnectionEnd(sharedEdge);
+				if (result == null) result = caseElement(sharedEdge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 67: {
 				StringLiteralNode stringLiteralNode = (StringLiteralNode)theEObject;
 				T result = caseStringLiteralNode(stringLiteralNode);
 				if (result == null) result = caseOperationNode(stringLiteralNode);
@@ -730,7 +740,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 67: {
+			case 68: {
 				SuccessEdge successEdge = (SuccessEdge)theEObject;
 				T result = caseSuccessEdge(successEdge);
 				if (result == null) result = caseNavigationEdge(successEdge);
@@ -741,7 +751,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 68: {
+			case 69: {
 				SuccessNode successNode = (SuccessNode)theEObject;
 				T result = caseSuccessNode(successNode);
 				if (result == null) result = caseMappingNode(successNode);
@@ -751,13 +761,13 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 69: {
+			case 70: {
 				Symbolable symbolable = (Symbolable)theEObject;
 				T result = caseSymbolable(symbolable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 70: {
+			case 71: {
 				TupleLiteralNode tupleLiteralNode = (TupleLiteralNode)theEObject;
 				T result = caseTupleLiteralNode(tupleLiteralNode);
 				if (result == null) result = caseOperationNode(tupleLiteralNode);
@@ -768,7 +778,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 71: {
+			case 72: {
 				TuplePartEdge tuplePartEdge = (TuplePartEdge)theEObject;
 				T result = caseTuplePartEdge(tuplePartEdge);
 				if (result == null) result = caseArgumentEdge(tuplePartEdge);
@@ -778,7 +788,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 72: {
+			case 73: {
 				TypeLiteralNode typeLiteralNode = (TypeLiteralNode)theEObject;
 				T result = caseTypeLiteralNode(typeLiteralNode);
 				if (result == null) result = caseOperationNode(typeLiteralNode);
@@ -789,7 +799,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 73: {
+			case 74: {
 				UnknownNode unknownNode = (UnknownNode)theEObject;
 				T result = caseUnknownNode(unknownNode);
 				if (result == null) result = caseMappingNode(unknownNode);
@@ -799,7 +809,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 74: {
+			case 75: {
 				VariableNode variableNode = (VariableNode)theEObject;
 				T result = caseVariableNode(variableNode);
 				if (result == null) result = caseMappingNode(variableNode);
@@ -809,7 +819,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 75: {
+			case 76: {
 				VerdictRegion verdictRegion = (VerdictRegion)theEObject;
 				T result = caseVerdictRegion(verdictRegion);
 				if (result == null) result = caseRuleRegion(verdictRegion);
@@ -1212,6 +1222,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseShadowPartEdge(ShadowPartEdge object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Shared Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Shared Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSharedEdge(SharedEdge object) {
 		return null;
 	}
 

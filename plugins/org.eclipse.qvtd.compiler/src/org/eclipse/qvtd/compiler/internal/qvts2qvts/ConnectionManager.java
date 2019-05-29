@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
@@ -63,6 +64,7 @@ public class ConnectionManager
 	private static final @NonNull String JOIN_INPUT_PREFIX = "ji";
 	private static final @NonNull String JOIN_MIDDLE_PREFIX = "jm";
 	private static final @NonNull String JOIN_OUTPUT_PREFIX = "jo";
+	private static final @NonNull String JOIN_SHARED_PREFIX = "js";
 
 	public static final @NonNull List<@NonNull Partition> EMPTY_PARTITION_LIST = Collections.emptyList();
 
@@ -146,7 +148,7 @@ public class ConnectionManager
 				assert !predicatedProperty.isIsImplicit();
 				boolean isDataType = classDatum.isDataType();
 				assert isDataType;
-				Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge, classDatum);
+				Iterable<@NonNull NavigationEdge> realizedEdges = getNewEdges(predicatedEdge, classDatum);
 				if (realizedEdges != null) {
 					ClassDatum predicatedSourceClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(predicatedEdge));
 					ClassDatum predicatedTargetClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(predicatedEdge));
@@ -158,41 +160,36 @@ public class ConnectionManager
 						//	predicatedTargetClassDatum = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
 						predicatedTargetClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)predicatedTargetClassDatum);
 					}
-					for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-						if (realizedEdge.isNavigation()) {
-							NavigationEdge predicatedRealizedEdge = (NavigationEdge)realizedEdge;
-							ClassDatum firstClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(realizedEdge));
-							ClassDatum secondTargetClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(realizedEdge));
-							ClassDatum realizedSourceClassDatum;
-							ClassDatum realizedTargetClassDatum;
-							Property realizedProperty = QVTscheduleUtil.getReferredProperty(predicatedRealizedEdge);
-							if (realizedProperty == predicatedProperty) {
-								realizedSourceClassDatum = firstClassDatum;
-								realizedTargetClassDatum = secondTargetClassDatum;
-							}
-							else {
-								assert realizedProperty == oppositeProperty;
-								realizedSourceClassDatum = secondTargetClassDatum;
-								realizedTargetClassDatum = firstClassDatum;
-							}
-							boolean conformingSources = QVTscheduleUtil.conformantWith(predicatedSourceClassDatum, realizedSourceClassDatum);
-							boolean conformingTargets;
-							//	if (isOneToMany) {
-							conformingTargets = QVTscheduleUtil.conformantWith(predicatedTargetClassDatum, realizedTargetClassDatum);
-							if (conformingSources && conformingTargets) {
-								if (attributeConnectionSourceEdges == null) {
-									attributeConnectionSourceEdges = new ArrayList<>();
-								}
-								attributeConnectionSourceEdges.add(realizedEdge);
-							}
-							else {
-								//	assert false;
-							}
+					for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
+						ClassDatum firstClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(realizedEdge));
+						ClassDatum secondTargetClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(realizedEdge));
+						ClassDatum realizedSourceClassDatum;
+						ClassDatum realizedTargetClassDatum;
+						Property realizedProperty = QVTscheduleUtil.getReferredProperty(realizedEdge);
+						if (realizedProperty == predicatedProperty) {
+							realizedSourceClassDatum = firstClassDatum;
+							realizedTargetClassDatum = secondTargetClassDatum;
 						}
 						else {
-							// SharedEdge
+							assert realizedProperty == oppositeProperty;
+							realizedSourceClassDatum = secondTargetClassDatum;
+							realizedTargetClassDatum = firstClassDatum;
 						}
-						/*	}
+						boolean conformingSources = QVTscheduleUtil.conformantWith(predicatedSourceClassDatum, realizedSourceClassDatum);
+						boolean conformingTargets;
+						//	if (isOneToMany) {
+						conformingTargets = QVTscheduleUtil.conformantWith(predicatedTargetClassDatum, realizedTargetClassDatum);
+						if (conformingSources && conformingTargets) {
+							if (attributeConnectionSourceEdges == null) {
+								attributeConnectionSourceEdges = new ArrayList<>();
+							}
+							attributeConnectionSourceEdges.add(realizedEdge);
+						}
+						else {
+							//	assert false;
+						}
+					}
+					/*	}
 					else {
 						conformingTargets = areConforming(predicatedTargetCompleteClass, realizedTargetCompleteClass);
 						if (scheduleManager.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
@@ -206,11 +203,29 @@ public class ConnectionManager
 							assert !conformingSources || !conformingTargets;
 						}
 					} */
-					}
+					//	}
 					Node sourceNode = QVTscheduleUtil.getSourceNode(predicatedEdge);
 					ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(sourceNode);
 					partialNames.add(QVTscheduleUtil.getName(sourceClassDatum));
 					partialNames.add(QVTscheduleUtil.getName(predicatedProperty));
+				}
+				if (attributeConnectionSourceEdges != null) {
+					EdgeConnection edgeConnection = getAttributeConnection(invokingRegion2, attributeConnectionSourceEdges, partialNames, predicatedProperty);
+					edgeConnection.addUsedTargetEdge(predicatedEdge, false);
+					if (s != null) {
+						s.append("\n    Attribute EdgeConnection \"" + edgeConnection + "\" to " + castTarget);
+						for (@NonNull Edge sourceEdge : attributeConnectionSourceEdges) {
+							s.append("\n      from " + sourceEdge.getOwningRegion() + " : " + sourceEdge.getSourceNode());
+						}
+						//					Scheduler.CONNECTIONS.println("    classDatumAnalysis " + classDatumAnalysis);
+						//					for (@NonNull Node sourceNode : sourceNodes) {
+						//						Scheduler.CONNECTIONS.println("    from " + sourceNode.getRegion());
+						//						Scheduler.CONNECTIONS.println("       " + sourceNode);
+						//					}
+						//					for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
+						//						Scheduler.CONNECTIONS.println("    edge " + realizedEdge);
+						//					}
+					}
 				}
 				if (attributeConnectionSourceEdges != null) {
 					EdgeConnection edgeConnection = getAttributeConnection(invokingRegion2, attributeConnectionSourceEdges, partialNames, predicatedProperty);
@@ -255,7 +270,7 @@ public class ConnectionManager
 			assert !isDataType;
 			Iterable<@NonNull Node> sourceNodes = getNewNodes(classDatum);
 			//			if (sourceNodes != null) {
-			Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge, classDatum);
+			Iterable<@NonNull NavigationEdge> realizedEdges = getNewEdges(predicatedEdge, classDatum);
 			if (realizedEdges != null) {
 				Set<@NonNull Region> edgeSourceRegions = new HashSet<>();
 				Set<@NonNull Region> nodeSourceRegions = new HashSet<>();
@@ -314,7 +329,7 @@ public class ConnectionManager
 						//			 && !rootRootRegion.isOnlyCastOrRecursed(predicatedNode)
 						//			 && !hasEdgeConnection(predicatedNode)
 						) {
-					NodeConnection predicatedConnection = getNodeConnection(invokingRegion2, sourceNodes, classDatum, scheduleManager.getDomainUsage(classDatum));
+					NodeConnection predicatedConnection = getNodeConnection(invokingRegion2, sourceNodes, classDatum);
 					predicatedConnection.addUsedTargetNode(castTarget, false);
 					if (s != null) {
 						s.append("\n    NodeConnection \"" + predicatedConnection + "\" to " + castTarget);
@@ -413,7 +428,7 @@ public class ConnectionManager
 		//
 		//	Connect up the head
 		//
-		NodeConnection headConnection = getNodeConnection(invokingRegion2, headSources, classDatum, scheduleManager.getDomainUsage(classDatum));
+		NodeConnection headConnection = getNodeConnection(invokingRegion2, headSources, classDatum);
 		if (headNode.isDependency()) {
 			headConnection.addUsedTargetNode(headNode, false);
 		}
@@ -437,29 +452,38 @@ public class ConnectionManager
 	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region) {
 		List<@NonNull NodeConnection> headConnections = null;
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
-		if (Iterables.isEmpty(region.getHeadNodes())) {
+		if (Iterables.isEmpty(headNodes)) {
 			scheduleManager.addRegionError(region, "No head nodes");
 		}
 		for (@NonNull Node headNode : headNodes) {
+			NodeConnection headConnection = null;
+			SharedEdge sharedEdge = isShared(headNode);
 			if (headNode.isDependency()) {
 				createHeadConnection(s, rootRegion, region, headNode);	/** Dependency nodes have extra not-head connections. */
 			}
+			else if (sharedEdge != null) {
+				headConnection = createSharedHeadConnection(s, rootRegion, region, sharedEdge);
+			}
 			else {
-				NodeConnection headConnection = createHeadConnection(s, rootRegion, region, headNode);
+				headConnection = createHeadConnection(s, rootRegion, region, headNode);
 				if (headConnection == null) {
 					scheduleManager.addRegionError(region, "No incoming connections for " + headNode.getName());
 					headConnection = createHeadConnection(s, rootRegion, region, headNode);	// FIXME debugging
 					return null;										//  so matching only fails for unmatchable real heads
 				}
-				else {
-					if (headConnections == null) {
-						headConnections = new ArrayList<>();
-					}
-					headConnections.add(headConnection);
-				}
-				// FIXME. If there are multiple heads and an internal node is reachable from more than one head, then the possible
-				// sources for the internal node are the intersection of the alternatives which may eliminate some call paths.
 			}
+			if (headConnection != null) {
+				if (headConnections == null) {
+					headConnections = new ArrayList<>();
+				}
+				headConnections.add(headConnection);
+			}
+			// FIXME. If there are multiple heads and an internal node is reachable from more than one head, then the possible
+			// sources for the internal node are the intersection of the alternatives which may eliminate some call paths.
+			//		}
+		}
+		if (headConnections == null) {
+			scheduleManager.addRegionError(region, "No incoming connections");
 		}
 		if (headConnections == null) {
 			scheduleManager.addRegionError(region, "No incoming connections");
@@ -506,32 +530,55 @@ public class ConnectionManager
 		//
 		//	Gather multiple edges sharing the same target to avoid multiple incoming connections -- FIXME no need to gather
 		//
-		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> castTargetNode2predicatedEdges = new HashMap<>();
+		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> targetNode2predicatedEdges = new HashMap<>();
 		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			assert !edge.isCast();
-			if (edge.isPredicated() && edge.isNavigation()) {
-				NavigationEdge predicatedEdge = (NavigationEdge)edge;
-				assert predicatedEdge.getIncomingConnection() == null;
-				Property predicatedProperty = predicatedEdge.getReferredProperty();
-				if (!predicatedProperty.isIsImplicit()) {		// unnavigable opposites are handled by the navigable property
-					Node castTargetNode = predicatedEdge.getEdgeTarget();
-					List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
-					if (predicatedEdges == null) {
-						predicatedEdges = new ArrayList<>();
-						castTargetNode2predicatedEdges.put(castTargetNode, predicatedEdges);
+			if (edge.isPredicated()) {
+				if (edge.isNavigation()) {
+					NavigationEdge predicatedEdge = (NavigationEdge)edge;
+					assert predicatedEdge.getIncomingConnection() == null;
+					Property predicatedProperty = predicatedEdge.getReferredProperty();
+					if (!predicatedProperty.isIsImplicit()) {		// unnavigable opposites are handled by the navigable property
+						Node targetNode = predicatedEdge.getEdgeTarget();
+						List<@NonNull NavigableEdge> predicatedEdges = targetNode2predicatedEdges.get(targetNode);
+						if (predicatedEdges == null) {
+							predicatedEdges = new ArrayList<>();
+							targetNode2predicatedEdges.put(targetNode, predicatedEdges);
+						}
+						predicatedEdges.add(predicatedEdge);
 					}
-					predicatedEdges.add(predicatedEdge);
+				}
+				else if (edge.isShared()) {
+					SharedEdge callingSharedEdge = (SharedEdge)edge;
+					SharedEdge calledSharedEdge = originalContentsAnalysis.getNewSharedEdge((SharedEdge)edge);
+					if (calledSharedEdge == null) {
+						scheduleManager.addRegionError(region, "no source for " + callingSharedEdge);
+					}
+					//	else {
+					//		NodeConnection ec = getNodeConnection(rootRegion, Collections.singletonList(sourceNode), classDatum, scheduleManager.getDomainUsage(classDatum));
+					//	}
+					/*	assert predicatedEdge.getIncomingConnection() == null;
+					Property predicatedProperty = predicatedEdge.getReferredProperty();
+					if (!predicatedProperty.isIsImplicit()) {		// unnavigable opposites are handled by the navigable property
+						Node castTargetNode = predicatedEdge.getEdgeTarget();
+						List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
+						if (predicatedEdges == null) {
+							predicatedEdges = new ArrayList<>();
+							castTargetNode2predicatedEdges.put(castTargetNode, predicatedEdges);
+						}
+						predicatedEdges.add(predicatedEdge);
+					} */
 				}
 			}
 		}
-		for (@NonNull Node castTargetNode : castTargetNode2predicatedEdges.keySet()) {
-			List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
+		for (@NonNull Node targetNode : targetNode2predicatedEdges.keySet()) {
+			List<@NonNull NavigableEdge> predicatedEdges = targetNode2predicatedEdges.get(targetNode);
 			assert predicatedEdges != null;
-			if (castTargetNode.isClass()) {
-				createClassEdgeConnection(s, rootRegion, region, castTargetNode, predicatedEdges);
+			if (targetNode.isClass()) {
+				createClassEdgeConnection(s, rootRegion, region, targetNode, predicatedEdges);
 			}
 			else {
-				createAttributeEdgeConnection(s, rootRegion, region, castTargetNode, predicatedEdges);
+				createAttributeEdgeConnection(s, rootRegion, region, targetNode, predicatedEdges);
 			}
 		}
 	}
@@ -579,7 +626,7 @@ public class ConnectionManager
 			//
 			if (!sourceNodes.isEmpty()) {
 				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(traceNode);
-				NodeConnection connection = getNodeConnection(rootRegion, sourceNodes, classDatum, scheduleManager.getDomainUsage(classDatum));
+				NodeConnection connection = getNodeConnection(rootRegion, sourceNodes, classDatum);
 				//
 				Set<@NonNull Node> targetNodes = new HashSet<>();
 				for (@NonNull Partition partition : partitions) {
@@ -619,6 +666,32 @@ public class ConnectionManager
 				// SharedEdge
 			}
 		}
+	}
+
+	private @Nullable NodeConnection createSharedHeadConnection(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region, @NonNull SharedEdge sharedEdge) {
+		Node headNode = QVTscheduleUtil.getSourceNode(sharedEdge);
+		Node sharedNode = QVTscheduleUtil.getTargetNode(sharedEdge);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(sharedNode);
+		Iterable<@NonNull SharedEdge> oldSharedEdges = originalContentsAnalysis.getOldSharedEdges(sharedEdge);
+		if (oldSharedEdges != null) {
+			List<@NonNull Node> sourceNodes = new ArrayList<>();
+			for (@NonNull SharedEdge edge : oldSharedEdges) {
+				sourceNodes.add(QVTscheduleUtil.getSourceNode(edge));
+			}
+			NodeConnection connection = getNodeConnection(rootRegion, sourceNodes, classDatum);
+			connection.setDataType(true);
+			//	Set<@NonNull Node> targetNodes = new HashSet<>();
+			//	for (@NonNull Partition partition : partitions) {
+			//		Role nodeRole = QVTscheduleUtil.getRole(partition, traceNode);
+			//		if ((nodeRole != null) && nodeRole.isOld()) {
+			//			if (targetNodes.add(traceNode)) {
+			connection.addPassedTargetNode(headNode);
+			//			}
+			//		}
+			//	}
+			return connection;
+		}
+		return null;
 	}
 
 	private @NonNull EdgeConnection getAttributeConnection(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull List<@NonNull String> partialNames, @NonNull Property property) {
@@ -822,7 +895,7 @@ public class ConnectionManager
 		return loopingConnections;
 	}
 
-	private @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
+	private @Nullable Iterable<@NonNull NavigationEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
 		return originalContentsAnalysis.getNewEdges(edge, requiredClassDatum);
 	}
 
@@ -842,7 +915,7 @@ public class ConnectionManager
 		return getOutgoingConnections(partition);
 	}
 
-	private @NonNull NodeConnection getNodeConnection(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum, @NonNull DomainUsage domainUsage) {
+	private @NonNull NodeConnection getNodeConnection(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum) {
 		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatum2nodes2nodeConnections.get(classDatum);
 		if (nodes2connection == null) {
 			nodes2connection = new HashMap<>();
@@ -851,8 +924,28 @@ public class ConnectionManager
 		Set<@NonNull Node> sourceSet = Sets.newHashSet(sourceNodes);
 		NodeConnection connection = nodes2connection.get(sourceSet);
 		if (connection == null) {
+			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
 			SymbolNameBuilder s = new SymbolNameBuilder();
-			s.appendString(domainUsage.isInput() ? JOIN_INPUT_PREFIX : domainUsage.isOutput() ? JOIN_OUTPUT_PREFIX : JOIN_MIDDLE_PREFIX);
+			if (domainUsage.isInput()) {
+				s.appendString(JOIN_INPUT_PREFIX);
+			}
+			else if (domainUsage.isOutput()) {
+				s.appendString(JOIN_OUTPUT_PREFIX);
+			}
+			else {
+				boolean isShared = false;
+				for (@NonNull Node node : sourceNodes) {
+					if (isShared(node) != null) {
+						isShared = true;
+					}
+				}
+				if (isShared) {
+					s.appendString(JOIN_SHARED_PREFIX);
+				}
+				else {
+					s.appendString(JOIN_MIDDLE_PREFIX);
+				}
+			}
 			s.appendString("_");
 			s.appendName(classDatum.getName());
 			connection = createNodeConnection(rootRegion, sourceSet, classDatum, s);
@@ -1041,6 +1134,15 @@ public class ConnectionManager
 			}
 		}
 		return lastProduction >= firstConsumption;
+	}
+
+	private @Nullable SharedEdge isShared(@NonNull Node headNode) {
+		for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(headNode)) {
+			if (outgoingEdge.isShared()) {
+				return (SharedEdge) outgoingEdge;
+			}
+		}
+		return null;
 	}
 
 	public void removeCallToChild(@NonNull Partition parentPartition, @NonNull Partition childPartition) {

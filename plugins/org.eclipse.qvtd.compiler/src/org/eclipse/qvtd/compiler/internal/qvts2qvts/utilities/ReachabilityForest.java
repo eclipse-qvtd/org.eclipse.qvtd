@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Lists;
 
@@ -42,11 +43,17 @@ public class ReachabilityForest
 	private static final int ITERATOR_COST = 1;
 	private static final int OPERATION_COST = 10;
 	private static final int RESULT_COST = 1;
+	private static final int SHARED_NAVIGATION_COST = 10;
 
 	/**
 	 * The preferred non-secondary edges to be used in the tree.
 	 */
-	private final @NonNull Set<@NonNull NavigableEdge> forwardEdges = new HashSet<>();
+	private final @NonNull Set<@NonNull NavigationEdge> forwardEdges = new HashSet<>();
+
+	/**
+	 * The shared edges to be used in the tree.
+	 */
+	private @Nullable List<@NonNull SharedEdge> sharedEdges = null;
 
 	/**
 	 * Edges that have no opposite.
@@ -101,6 +108,13 @@ public class ReachabilityForest
 					manyToOneEdges.add(navigationEdge);
 				}
 			}
+		}
+		else if (edge instanceof SharedEdge) {
+			List<@NonNull SharedEdge> sharedEdges2 = sharedEdges;
+			if (sharedEdges2 == null) {
+				sharedEdges = sharedEdges2 = new ArrayList<>();
+			}
+			sharedEdges2.add((SharedEdge)edge);
 		}
 	}
 
@@ -191,6 +205,22 @@ public class ReachabilityForest
 								}
 							}
 						}
+					}
+				}
+			}
+		}
+		if (sharedEdges != null) {
+			for (@NonNull SharedEdge sharedEdge : sharedEdges) {
+				Node targetNode = sharedEdge.getEdgeTarget();
+				if (!node2reachingEdge.containsKey(targetNode)) {
+					Integer targetCost = node2cost.get(targetNode);
+					assert targetCost == null;
+					Node sourceNode = sharedEdge.getEdgeSource();
+					Integer sourceCost = node2cost.get(sourceNode);
+					if (sourceCost != null) {
+						int nextCost = sourceCost + SHARED_NAVIGATION_COST;
+						node2cost.put(targetNode, nextCost);
+						node2reachingEdge.put(targetNode, sharedEdge);
 					}
 				}
 			}

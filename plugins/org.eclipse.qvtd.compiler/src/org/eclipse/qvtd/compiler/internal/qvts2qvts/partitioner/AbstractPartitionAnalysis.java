@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -21,9 +22,11 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassA
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -84,6 +87,27 @@ public abstract class AbstractPartitionAnalysis<@NonNull P extends Partition> ex
 	@Override
 	public @NonNull Region getRegion() {
 		return QVTscheduleUtil.getRegion(partition);
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> getSharedPredecessors() {
+		List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> sharedPredecessors = null;
+		for (@NonNull SharedEdge sharedEdge : getRealizedSharedEdges()) {
+			Node thisNode = QVTscheduleUtil.getSourceNode(sharedEdge);
+			NodeConnection connection = thisNode.getIncomingConnection();
+			if (connection != null) {
+				for (@NonNull Partition thatPartition : connection.getSourcePartitions()) {
+					if (sharedPredecessors == null) {
+						sharedPredecessors = new ArrayList<>();
+					}
+					PartitionAnalysis partitionAnalysis = partitionedTransformationAnalysis.getPartitionAnalysis(thatPartition);
+					if (!sharedPredecessors.contains(partitionAnalysis)) {
+						sharedPredecessors.add(partitionAnalysis);
+					}
+				}
+			}
+		}
+		return sharedPredecessors;
 	}
 
 	@Override

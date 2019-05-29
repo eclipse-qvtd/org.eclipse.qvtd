@@ -101,6 +101,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IfNode;
@@ -121,6 +122,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -1205,6 +1207,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 	}
 
+	protected final @NonNull MappingPartitionAnalysis<?> partitionAnalysis;
 	protected final @NonNull RegionAnalysis regionAnalysis;
 
 	/**
@@ -1254,6 +1257,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 
 	public BasicPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull MappingPartitionAnalysis<?> partitionAnalysis) {
 		super(visitor, partitionAnalysis.getPartition());
+		this.partitionAnalysis = partitionAnalysis;
 		this.regionAnalysis = scheduleManager.getRegionAnalysis(QVTscheduleUtil.getRegion(partition));
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
 		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partitionAnalysis, scheduleManager);
@@ -1400,6 +1404,20 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private void createAddStatements() {
 		if (connection2variable != null) {
 			for (@NonNull NodeConnection connection : connection2variable.keySet()) {
+				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(connection);
+				if (classDatum.isDataType()) {
+					boolean hasTargetEdges = false;
+					for (@NonNull ConnectionEnd connectionEnd : connection.getTargetConnectionEnds(partition)) {
+						Iterable<@NonNull Edge> edges = QVTscheduleUtil.getOutgoingEdges((Node) connectionEnd);
+						if (!Iterables.isEmpty(edges)) {
+							hasTargetEdges =  true;
+							break;
+						}
+					}
+					if (hasTargetEdges) {
+						continue;
+					}
+				}
 				Node sourceNode = connection.getSource(partition);
 				OCLExpression variableExpression = createVariableExp(sourceNode);
 				ConnectionVariable connectionVariable = connection2variable.get(connection);
@@ -1592,6 +1610,20 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			}
 		}
 		guardNodes.addAll(headNodes);
+	/*	for (@NonNull SharedEdge sharedEdge : partitionAnalysis.getPredicatedSharedEdges()) {
+			Node targetNode = QVTscheduleUtil.getTargetNode(sharedEdge);
+			boolean hasOutgoingEdges = false;
+			for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(targetNode)) {
+				Role edgeRole = partition.getRole(outgoingEdge);
+				if (edgeRole != null) {
+					hasOutgoingEdges = true;
+				}
+			}
+			if (hasOutgoingEdges) {
+				assert !guardNodes.contains(targetNode);
+				guardNodes.add(targetNode);
+			}
+		} */
 		Collections.sort(guardNodes, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull Node guardNode : guardNodes) {
 			if (!guardNode.isDependency()) {

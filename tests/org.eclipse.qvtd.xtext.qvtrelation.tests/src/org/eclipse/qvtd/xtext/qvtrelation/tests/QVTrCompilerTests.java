@@ -621,10 +621,22 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
+		//	TracedHeadAnalysis.TRACED_HEAD_NODE_GROUPS.setState(true);
+		//	TracedHeadAnalysis.TRACED_HEAD_IMMEDIATE_SOURCES.setState(true);
+		//	RuleHeadAnalysis.RULE_HEAD_NODE_GROUPS.setState(true);
+		//	TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);
+		//	TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);
+		//	TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);
+		//	TransformationPartitioner.REGION_IMMEDIATE_PREDECESSORS.setState(true);
+		//	TransformationPartitioner.REGION_TRANSITIVE_PREDECESSORS.setState(true);
+		//	TransformationPartitioner.REGION_TRANSITIVE_SUCCESSORS.setState(true);
 		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
 		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
 		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		MyQVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
+		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.xtext.qvtrelation.tests");
+		//	testFileSystemHelper.addExportedPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.helpers");
 		Class<? extends Transformer> txClass1 = null;
 		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.ocl.pivot/model/Ecore2Pivot.qvtr", true);
 		URI txURI1 = getModelsURI("ecore2pivot/Ecore2Pivot.qvtr");
@@ -651,7 +663,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
 			myQVT2.createGeneratedExecutor(txClass1);
-			myQVT2.loadInput("ecore", getModelsURI("families2persons/Families.ecore"));
+			//			myQVT2.loadInput("ecore", getModelsURI("families2persons/Families.ecore"));
+			myQVT2.loadInput("ecore", getModelsURI("ecore2pivot/Families.ecore"));
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("as", asURI2, getModelsURI("ecore2pivot/Families_expected.ecore.oclas"), null);
 		}

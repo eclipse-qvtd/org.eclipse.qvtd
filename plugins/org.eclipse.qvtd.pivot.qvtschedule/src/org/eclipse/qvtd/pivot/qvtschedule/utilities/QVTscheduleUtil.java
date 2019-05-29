@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BinaryOperator;
@@ -61,6 +62,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 
@@ -427,6 +429,41 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(node.getOutgoingEdges());
 	}
 
+	public static @Nullable Iterable<@NonNull SharedEdge> getOutgoingSharedEdges(@NonNull Partition partition, @NonNull Node sourceNode) {
+		List<@NonNull SharedEdge> sharedEdges = null;
+		for (@NonNull Edge edge : getOutgoingEdges(sourceNode)) {
+			if (edge.isShared() && (partition.getRole(edge) != null)) {
+				if (sharedEdges == null) {
+					sharedEdges = new ArrayList<>();
+				}
+				sharedEdges.add((SharedEdge)edge);
+			}
+		}
+		return sharedEdges;
+	}
+
+	public static @Nullable Iterable<@NonNull Node> getSharedEdgeTargetNodes(@NonNull Partition partition, @NonNull Node sourceNode) {
+		List<@NonNull Node> targetNodes = null;
+		for (@NonNull Edge edge : getOutgoingEdges(sourceNode)) {
+			if (edge.isShared() && (partition.getRole(edge) != null)) {
+				Node targetNode = getTargetNode(edge);
+				boolean hasOutgoingEdges = false;
+				for (@NonNull Edge edge2 : getOutgoingEdges(targetNode)) {
+					if (partition.getRole(edge2) != null) {
+						hasOutgoingEdges = true;
+					}
+				}
+				if (hasOutgoingEdges) {
+					if (targetNodes == null) {
+						targetNodes = new ArrayList<>();
+					}
+					targetNodes.add(targetNode);
+				}
+			}
+		}
+		return targetNodes;
+	}
+
 	public static @NonNull Iterable<@NonNull ClassDatum> getOwnedClassDatums(@NonNull ScheduleModel scheduleModel) {
 		return ClassUtil.nullFree(scheduleModel.getOwnedClassDatums());
 	}
@@ -581,6 +618,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Operation getReferredOperation(@NonNull OperationCallNode operationCallNode) {
 		return ClassUtil.nonNullState(operationCallNode.getReferredOperation());		// FIXME should be declared as [1..1]
+	}
+
+	public static @NonNull Property getReferredOppositeProperty(@NonNull SharedEdge sharedEdge) {
+		return ClassUtil.nonNullState(sharedEdge.getReferredOppositeProperty());
 	}
 
 	public static @NonNull PropertyDatum getReferredPart(@NonNull KeyPartEdge keyPartEdge) {

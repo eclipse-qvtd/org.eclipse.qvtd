@@ -289,11 +289,16 @@ public class MappingPartitioner implements Nameable
 	//	}
 
 	private @NonNull PartitioningStrategy createPartitioningStrategy(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+			if (edge.isShared() && edge.isRealized()) {
+				return new SharedPartitioningStrategy(partitionedTransformationAnalysis, this);
+			}
+		}
 		boolean useActivators = scheduleManager.useActivators();
-		if (useActivators) { 		// New QVTr-style spportg without activators
+		if (useActivators) { 		// New QVTr-style support with activators
 			return new DefaultPartitioningStrategy(partitionedTransformationAnalysis, this);
 		}
-		else {			// Obsolete QVTc-sty;e spportg without activators
+		else {			// Obsolete QVTc-style spportg without activators
 			return new LegacyPartitioningStrategy(partitionedTransformationAnalysis, this);
 		}
 	}

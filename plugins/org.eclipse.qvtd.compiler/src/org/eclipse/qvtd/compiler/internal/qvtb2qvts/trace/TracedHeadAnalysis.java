@@ -25,13 +25,11 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
@@ -114,13 +112,16 @@ public class TracedHeadAnalysis extends HeadAnalysis
 								sources.add(sourceNode);
 							}
 						}
-						else if (edge instanceof CastEdge) {
+						else if (edge.isCast()) {
 							sources.add(sourceNode);
 						}
 						else if (edge instanceof KeyPartEdge) {
 							sources.add(sourceNode);
 						}
-						else if (edge instanceof PredicateEdge) {
+						else if (edge.isPredicate()) {
+							sources.add(sourceNode);
+						}
+						else if (edge.isShared()) {
 							sources.add(sourceNode);
 						}
 					}

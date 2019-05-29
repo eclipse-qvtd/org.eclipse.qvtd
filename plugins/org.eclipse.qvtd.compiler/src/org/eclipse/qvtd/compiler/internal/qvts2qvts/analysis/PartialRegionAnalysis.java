@@ -22,6 +22,7 @@ public interface PartialRegionAnalysis<@NonNull PRA extends PartialRegionsAnalys
 	@Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getConsumedClassAnalyses();
 	@Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> getConsumedPropertyAnalyses();
 	@Nullable Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getExplicitPredecessors();
+	@Nullable Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getSharedPredecessors();
 	@NonNull Partition getPartition();
 	@NonNull Region getRegion();
 	@NonNull Iterable<@NonNull Node> getTraceNodes();

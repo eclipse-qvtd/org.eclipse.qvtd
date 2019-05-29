@@ -73,7 +73,12 @@ public abstract class AbstractPartitioningStrategy implements PartitioningStrate
 		if (useActivators) {
 			regionAnalysis.createLocalSuccess();
 		}
-		BasicPartitionAnalysis localPredicatePartition = new LocalPredicatePartitionFactory(mappingPartitioner, useActivators).createPartitionAnalysis(partitionedTransformationAnalysis);
+		LocalPredicatePartitionFactory localPredicatePartitionFactory = new LocalPredicatePartitionFactory(mappingPartitioner, useActivators);
+		if (localPredicatePartitionFactory.hasSharedEdges()) {
+			regionAnalysis.createLocalSuccess();
+			//			regionAnalysis.createGlobalSuccess();
+		}
+		BasicPartitionAnalysis localPredicatePartition = localPredicatePartitionFactory.createPartitionAnalysis(partitionedTransformationAnalysis);
 		BasicPartitionAnalysis globalPredicatePartition = new GlobalPredicatePartitionFactory(mappingPartitioner).createPartitionAnalysis(partitionedTransformationAnalysis);
 		BasicPartitionAnalysis speculatedPartition = new SpeculatedPartitionFactory(mappingPartitioner).createPartitionAnalysis(partitionedTransformationAnalysis);
 		newPartitionAnalyses.add(localPredicatePartition);

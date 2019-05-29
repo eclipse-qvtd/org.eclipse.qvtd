@@ -75,6 +75,11 @@ public abstract class HeadNodeGroup implements Nameable
 						gotOne = true;
 					}
 				}
+				else if (source2targetEdge.isShared()) {
+					uniqueNodes.add(targetNode);
+					workList.add(targetNode);
+					gotOne = true;
+				}
 				else if (source2targetEdge.isComputation()) {
 					boolean allArgumentsReachable = true;
 					for (@NonNull Edge argumentEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {

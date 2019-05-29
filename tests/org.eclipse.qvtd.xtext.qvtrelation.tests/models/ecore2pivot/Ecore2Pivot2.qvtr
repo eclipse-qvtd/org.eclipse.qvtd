@@ -1,0 +1,233 @@
+/*******************************************************************************
+ * Copyright (c) 2017 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial implementation
+ *******************************************************************************/
+import ecoreMM : 'http://www.eclipse.org/emf/2002/Ecore'; 
+import pivotMM : 'http://www.eclipse.org/ocl/2015/Pivot';
+--import pivotMM : 'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'::pivot;
+
+package org::eclipse::ocl::pivot2::ecore2pivot {
+/**
+ * Transform an Ecore metamodel to a Pivot metamodel
+ */
+	transformation Ecore2Pivot(ecore:ecoreMM, as:pivotMM)
+	{
+		/**
+		 *  ecore::EAttribute <=> pivot::Property
+		 */
+		top relation mapElement_EAttribute {
+			eClass : ecoreMM::EClass;
+			eDataType : ecoreMM::EDataType;
+			asClass : pivotMM::Class;
+--			asDataType : pivotMM::DataType;
+			name : String;
+			lower : Integer;
+			upper : Integer;
+			/*enforce*/ domain ecore eAttribute : EAttribute {
+				eContainingClass = eClass,
+				name = name,
+				eAttributeType = eDataType,
+				lowerBound = lower,
+				upperBound = upper
+			} { (0 <= upper) and (upper <= 1) };
+			enforce domain as asProperty : Property {
+				owningClass = asClass,
+				name = name,
+--				type = asDataType,
+				isRequired = (lower = 1)
+			};
+			when {
+				mapElement_EClass(eClass, asClass);
+--				mapReference_EClassifier(eDataType, asDataType);
+			}
+		}
+		
+		/**
+		 *  ecore::EClass <=> pivot::Class
+		 */
+		top relation mapElement_EClass {
+			ePackage : ecoreMM::EPackage;
+			asPackage : pivotMM::Package;
+			name : String;
+			isAbstract : Boolean;
+			isInterface : Boolean;
+			/*enforce*/ domain ecore eClass : EClass {
+				ePackage = ePackage,
+				name = name,
+				abstract = isAbstract,
+				interface = isInterface
+			};
+			enforce domain as asClass : Class {
+				owningPackage = asPackage,
+				name = name,
+				isAbstract = isAbstract,
+				isInterface = isInterface
+			};
+			when {
+				mapElement_EPackage(ePackage, asPackage);
+			}
+		}
+		
+		/**
+		 *  ecore::mapElement_EClass_eSuperTypes <=> pivot::Class_superClasses
+		 */
+		top relation mapElement_EClass_superClass {
+			/*enforce*/ domain ecore eSubClass : EClass {
+				eSuperTypes = eSuperClass : EClass {}
+			};
+			enforce domain as asSubClass : Class {
+				superClasses = asSuperClass : Class {}
+			};
+			when {
+				mapElement_EClass(eSubClass, asSubClass);
+				mapElement_EClass(eSuperClass, asSuperClass);
+			}
+		}
+		
+		/**
+		 *  ecore::EPackage <=> pivot::Package
+		 */
+		top relation mapElement_EPackage {
+			name : String;
+			nsPrefix : String;
+			nsURI : String;
+			/*enforce*/ domain ecore ePackage : EPackage {
+				name = name,
+				nsPrefix = nsPrefix,
+				nsURI = nsURI
+			};
+			enforce domain as asPackage : Package {
+				name = name,
+				nsPrefix = nsPrefix,
+				URI = nsURI
+			};
+		}
+
+		/**
+		 *  ecore::EReference <=> pivot::Property
+		 */
+		top relation mapElement_EReference {
+			eClass : ecoreMM::EClass;
+			asClass : pivotMM::Class;
+			name : String;
+			/*enforce*/ domain ecore eReference : EReference {
+				eContainingClass = eClass,
+				name = name
+			};
+--			} { (0 <= upper) and (upper <= 1) };
+			enforce domain as asProperty : Property {
+				owningClass = asClass,
+				name = name
+			};
+			when {
+				mapElement_EClass(eClass, asClass);
+			}
+			where {
+				mapElement_EReference_type(eReference, asProperty);
+			}
+		}
+
+		/**
+		 *  ecore::EReference.eType <=> pivot::Property.type
+		 */
+		abstract relation mapElement_EReference_type {
+			/*enforce*/ domain ecore eReference : EReference {};
+			enforce domain as asProperty : Property {};
+		}
+
+		/**
+		 *  ecore::EReference.eType <=> pivot::Property.type
+		 */
+		relation mapElement_EReference_collection_type overrides mapElement_EReference_type {
+			eReferredClass : ecoreMM::EClass;
+			asReferredClass : pivotMM::Class;
+			lower : Integer;
+			upper : Integer;
+			/*enforce*/ domain ecore eReference : EReference {
+				eReferenceType = eReferredClass,
+				lowerBound = lower,
+				upperBound = upper
+			} { (upper < 0) or (1 < upper) };
+			enforce domain as asProperty : Property {
+				type = asReferredClass,
+				isRequired = true --(lower = 1)
+			};
+			when {
+				mapSet_EClass(eReferredClass, lower, upper, asReferredClass);
+			}
+		}
+
+		/**
+		 *  ecore::EReference.eType <=> pivot::Property.type
+		 */
+		relation mapElement_EReference_scalar_type overrides mapElement_EReference_type {
+			eReferredClass : ecoreMM::EClass;
+			asReferredClass : pivotMM::Class;
+			lower : Integer;
+			upper : Integer;
+			/*enforce*/ domain ecore eReference : EReference {
+				eReferenceType = eReferredClass,
+				lowerBound = lower,
+				upperBound = upper
+			} { (0 <= upper) and (upper <= 1) };
+			enforce domain as asProperty : Property {
+				type = asReferredClass,
+				isRequired = false --(lower = 1)
+			};
+			when {
+				mapElement_EClass(eReferredClass, asReferredClass);
+			}
+		}
+		
+		/**
+		 *  ecore::EClassifier <=> pivot::Type
+		 */
+--		abstract relation mapReference_EClassifier {
+--			/*enforce*/ domain ecore eClassifier : EClassifier {};
+--			enforce domain as asClassifier : Type {};
+--		}
+		
+		/**
+		 *  ecore::EClassifier <=> pivot::Type
+		 *
+		relation mapReference_EClass { --overrides mapReference_EClassifier {
+			/ *enforce* / domain ecore eClass : EClass {};
+			enforce domain as asClass : Class {};
+			when {
+				mapElement_EClass(eClass, asClass);
+			}
+		} */
+		
+		/**
+		 *  ecore::EClassifier <=> pivot::Type
+		 *
+		relation mapReference_EString overrides mapReference_EClassifier {
+			/ *enforce* / domain ecore eClass : EClass {};
+			enforce domain as asClassifier : String {};
+		} */
+		
+		/**
+		 *  ecore::EClass <=> pivot::Class
+		 */
+		relation mapSet_EClass {
+			/*enforce*/ domain ecore eClass : EClass{},
+				lower : Integer{},
+				upper : Integer{}
+			;
+			enforce domain as asClass : SetType {
+				elementType = asClass,
+				lower = lower,
+				upper = upper.toUnlimitedNatural()
+			};
+			when {
+				mapElement_EClass(eClass, asClass);
+			}
+		}
+	}
+}

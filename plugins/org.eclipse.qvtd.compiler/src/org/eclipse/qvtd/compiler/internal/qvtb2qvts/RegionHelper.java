@@ -93,6 +93,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
@@ -693,6 +694,13 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		edge.setReferredPart(shadowPart);
 		String label = "«" + shadowPart.getName() + "»";
 		edge.initialize(edgeRole, sourceNode, label, targetNode);
+		return edge;
+	}
+
+	public @NonNull Edge createSharedEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Property target2sourceProperty, @NonNull Node targetNode) {
+		SharedEdge edge = QVTscheduleFactory.eINSTANCE.createSharedEdge();
+		edge.initialize(edgeRole, sourceNode, "«shared»", targetNode);
+		edge.initializeProperty(target2sourceProperty);
 		return edge;
 	}
 

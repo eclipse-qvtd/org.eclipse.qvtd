@@ -19,16 +19,19 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -207,8 +210,26 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 		return  node.getNodeRole();
 	}
 
-	public @NonNull ScheduleManager getScheduleManager() {
-		return scheduleManager;
+	@Override
+	public @Nullable Iterable<@NonNull PartialRegionAnalysis<@NonNull RegionsAnalysis>> getSharedPredecessors() {
+		List<@NonNull PartialRegionAnalysis<@NonNull RegionsAnalysis>> sharedPredecessors = null;
+		for (@NonNull SharedEdge sharedEdge : getRealizedSharedEdges()) {
+			Node thisNode = QVTscheduleUtil.getSourceNode(sharedEdge);
+			NodeConnection connection = thisNode.getIncomingConnection();
+			if (connection != null) {
+				for (@NonNull Node thatNode : QVTscheduleUtil.getSourceEnds(connection)) {
+					if (sharedPredecessors == null) {
+						sharedPredecessors = new ArrayList<>();
+					}
+					Region thatRegion = QVTscheduleUtil.getOwningRegion(thatNode);
+					RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(thatRegion);
+					if (!sharedPredecessors.contains(regionAnalysis)) {
+						sharedPredecessors.add(regionAnalysis);
+					}
+				}
+			}
+		}
+		return sharedPredecessors;
 	}
 
 	public @Nullable Edge getTraceEdge(@NonNull Node node) {

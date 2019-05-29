@@ -15,6 +15,8 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
@@ -113,7 +115,9 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 
 	@Override
 	protected @NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis> createClassAnalysis(@NonNull ClassDatum classDatum) {
-		return new TraceClassPartitionAnalysis(transformationPartitioner.getTransformationAnalysis().getClassAnalysis(classDatum));
+		AbstractTransformationAnalysis transformationAnalysis = transformationPartitioner.getTransformationAnalysis();
+		PartialRegionClassAnalysis<@NonNull RegionsAnalysis> classAnalysis = transformationAnalysis.getClassAnalysis(classDatum);	// This fails if ClassDatum instances are not created in a timely fashion
+		return new TraceClassPartitionAnalysis(classAnalysis);
 	}
 
 	public @NonNull AbstractFallibilityAnalysis getFallibilityAnalysis(@NonNull Partition partition) {

@@ -33,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -62,7 +63,17 @@ public class OriginalContentsAnalysis
 	/**
 	 * The Realized Edges that produce each base PropertyDatum (or its opposite).
 	 */
-	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> basePropertyDatum2newEdges = new HashMap<>();
+	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigationEdge>> basePropertyDatum2newEdges = new HashMap<>();
+
+	/**
+	 * The Shared Edge that produces each singleton ClassDatum.
+	 */
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull SharedEdge> classDatum2newSharedEdge = new HashMap<>();
+
+	/**
+	 * The Shared Edge that produces each singleton ClassDatum.
+	 */
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull SharedEdge>> classDatum2oldSharedEdges = new HashMap<>();
 
 	/**
 	 * The regions that consume each ClassDatum, eagerly computed by addRegion().
@@ -100,17 +111,20 @@ public class OriginalContentsAnalysis
 
 	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge) {
 		if (newEdge instanceof NavigationEdge) {
-			PropertyDatum propertyDatum = getPropertyDatum((NavigationEdge) newEdge);
-			addNewEdge(region, newEdge, propertyDatum);
+			PropertyDatum propertyDatum = getPropertyDatum((NavigationEdge)newEdge);
+			addNewEdge(region, (NavigationEdge)newEdge, propertyDatum);
 		}
 		else {
-			// FIXME SharedEdge
+			assert newEdge.isShared();
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(newEdge));
+			SharedEdge oldEdge = classDatum2newSharedEdge.put(classDatum, (SharedEdge)newEdge);
+			assert oldEdge == null : "Duplicate new SharedEdge for " + classDatum;
 		}
 	}
-	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {
+	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigationEdge newEdge, @NonNull PropertyDatum propertyDatum) {
 		@SuppressWarnings("unused") String name = propertyDatum.getName();
 		PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
-		List<@NonNull NavigableEdge> edges = basePropertyDatum2newEdges.get(basePropertyDatum);
+		List<@NonNull NavigationEdge> edges = basePropertyDatum2newEdges.get(basePropertyDatum);
 		if (edges == null) {
 			edges = new ArrayList<>();
 			basePropertyDatum2newEdges.put(basePropertyDatum, edges);
@@ -139,6 +153,21 @@ public class OriginalContentsAnalysis
 				classDatum2producingRegions2.put(superClassDatum, regions);
 			}
 			regions.add(region);
+		}
+	}
+
+	private void addOldEdge(@NonNull RuleRegion region, @NonNull NavigableEdge oldEdge) {
+		if (oldEdge instanceof NavigationEdge) {
+		}
+		else {
+			assert oldEdge.isShared();
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(oldEdge));
+			List<@NonNull SharedEdge> edges = classDatum2oldSharedEdges.get(classDatum);
+			if (edges == null) {
+				edges = new ArrayList<>();
+				classDatum2oldSharedEdges.put(classDatum, edges);
+			}
+			edges.add((SharedEdge)oldEdge);
 		}
 	}
 
@@ -192,8 +221,13 @@ public class OriginalContentsAnalysis
 			}
 		}
 		for (@NonNull Edge newEdge : QVTscheduleUtil.getOwnedEdges(region)) {
-			if (newEdge.isRealized() && newEdge.isNavigation()) {
-				addNewEdge(region, (NavigationEdge)newEdge);
+			if (newEdge.isNavigable()) {
+				if (newEdge.isRealized()) {
+					addNewEdge(region, (NavigableEdge)newEdge);
+				}
+				else {
+					addOldEdge(region, (NavigableEdge)newEdge);
+				}
 			}
 		}
 	}
@@ -247,9 +281,9 @@ public class OriginalContentsAnalysis
 	 * FIXME In the event that the ends of the realized edges are realized variables, we do know the precise
 	 * type and could filter accordingly; a not-yet-exploited optimisation.
 	 */
-	private @Nullable Iterable<@NonNull NavigableEdge> getCompositeNewEdges(@NonNull NavigableEdge predicatedEdge) {
-		Set<@NonNull NavigableEdge> realizedEdges = null;
-		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> entry : basePropertyDatum2newEdges.entrySet()) {
+	private @Nullable Iterable<@NonNull NavigationEdge> getCompositeNewEdges(@NonNull NavigableEdge predicatedEdge) {
+		Set<@NonNull NavigationEdge> realizedEdges = null;
+		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigationEdge>> entry : basePropertyDatum2newEdges.entrySet()) {
 			Property property = entry.getKey().getReferredProperty();
 			if (property != null) {
 				@Nullable Property compositeProperty = null;
@@ -349,7 +383,7 @@ public class OriginalContentsAnalysis
 		return newNodes;
 	}
 
-	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
+	public @Nullable Iterable<@NonNull NavigationEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
 		if (edge instanceof NavigationEdge) {
 			Property property = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge);
 			if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
@@ -358,7 +392,7 @@ public class OriginalContentsAnalysis
 			if (property == oclContainerProperty) {
 				return getCompositeNewEdges(edge);
 			}
-			Iterable<@NonNull NavigableEdge> realizedEdges = null;
+			Iterable<@NonNull NavigationEdge> realizedEdges = null;
 			PropertyDatum propertyDatum = getPropertyDatum((NavigationEdge) edge);
 			PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
 			//		if (propertyDatum == null) {
@@ -371,29 +405,26 @@ public class OriginalContentsAnalysis
 			if (realizedEdges == null) {
 				return null;
 			}
-			List<@NonNull NavigableEdge> conformantRealizedEdges = null;
-			for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
+			List<@NonNull NavigationEdge> conformantRealizedEdges = null;
+			for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
 				boolean matches = false;
-				if (realizedEdge.isNavigation()) {
-					NavigationEdge realizedNavigationEdge = (NavigationEdge)realizedEdge;
-					Property realizedProperty = QVTscheduleUtil.getReferredProperty(realizedNavigationEdge);
-					if (realizedProperty != property) {
-						assert realizedProperty.getOpposite() == property;
+				Property realizedProperty = QVTscheduleUtil.getReferredProperty(realizedEdge);
+				if (realizedProperty != property) {
+					assert realizedProperty.getOpposite() == property;
+					matches = true;
+				}
+				else {
+					Node targetNode = realizedEdge.getEdgeTarget();
+					ClassDatum realizedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+					if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, requiredClassDatum)) {
 						matches = true;
 					}
-					else {
-						Node targetNode = realizedEdge.getEdgeTarget();
-						ClassDatum realizedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, requiredClassDatum)) {
-							matches = true;
-						}
+				}
+				if (matches) {
+					if (conformantRealizedEdges == null) {
+						conformantRealizedEdges = new ArrayList<>();
 					}
-					if (matches) {
-						if (conformantRealizedEdges == null) {
-							conformantRealizedEdges = new ArrayList<>();
-						}
-						conformantRealizedEdges.add(realizedEdge);
-					}
+					conformantRealizedEdges.add(realizedEdge);
 				}
 			}
 			return conformantRealizedEdges;
@@ -456,12 +487,24 @@ public class OriginalContentsAnalysis
 		return classDatum2oldNodes.get(classDatum);
 	}
 
+	public @Nullable Iterable<@NonNull SharedEdge> getOldSharedEdges(@NonNull SharedEdge edge) {
+		Node traceNode = QVTscheduleUtil.getTargetNode(edge);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(traceNode);
+		return classDatum2oldSharedEdges.get(classDatum);
+	}
+
 	private @NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
 		Property forwardProperty = QVTscheduleUtil.getReferredProperty(producedEdge);
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeSource());
 		ClassDatum forwardClassDatum = scheduleManager.getElementalClassDatum(classDatum);
 		return scheduleManager.getPropertyDatum(forwardClassDatum, forwardProperty);
+	}
+
+	public @Nullable SharedEdge getNewSharedEdge(@NonNull SharedEdge edge) {
+		Node traceNode = QVTscheduleUtil.getTargetNode(edge);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(traceNode);
+		return classDatum2newSharedEdge.get(classDatum);
 	}
 
 	/**

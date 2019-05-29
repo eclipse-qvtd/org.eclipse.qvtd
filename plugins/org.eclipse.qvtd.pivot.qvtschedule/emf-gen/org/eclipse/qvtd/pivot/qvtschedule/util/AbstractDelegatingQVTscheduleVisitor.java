@@ -363,6 +363,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitSharedEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SharedEdge object) {
+		return delegate.visitSharedEdge(object);
+	}
+
+	@Override
 	public R visitStringLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StringLiteralNode object) {
 		return delegate.visitStringLiteralNode(object);
 	}

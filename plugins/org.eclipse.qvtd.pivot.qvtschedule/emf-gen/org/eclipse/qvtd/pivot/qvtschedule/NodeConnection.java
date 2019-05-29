@@ -28,7 +28,7 @@ public interface NodeConnection extends Connection
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Non-null if this edge is part of a bidirectional pair.
+	 * The type and typed model of the passed connection element.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Class Datum</em>' reference.
 	 * @see #setClassDatum(ClassDatum)
@@ -48,6 +48,31 @@ public interface NodeConnection extends Connection
 	 */
 	void setClassDatum(ClassDatum value);
 
+	/**
+	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * True if the connection input is a DataType for which the output is the  singletone trace element.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Data Type</em>' attribute.
+	 * @see #setDataType(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNodeConnection_DataType()
+	 * @model default="false" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NodeConnection!dataType'"
+	 * @generated
+	 */
+	boolean isDataType();
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#isDataType <em>Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Data Type</em>' attribute.
+	 * @see #isDataType()
+	 * @generated
+	 */
+	void setDataType(boolean value);
 	/**
 	 * Returns the value of the '<em><b>Mandatory Target Nodes</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Node}.

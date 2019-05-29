@@ -226,6 +226,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	private final boolean doYedGraphs;
 
 	private @Nullable ConnectionManager connectionManager = null;
+	//	private @Nullable Set<@NonNull RelationAnalysis> sharedAggregateRelations = null;
 
 	//	private final @NonNull Map<@NonNull TransformationAnalysis, @NonNull TransformationAnalysis2TracePackage> transformationAnalysis2transformationAnalysis2tracePackage = new HashMap<>();
 
@@ -283,6 +284,15 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
 		problemHandler.addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
 	}
+
+	/*	@Override
+	public void addSharedAggregateRelation(@NonNull RelationAnalysis relationAnalysis) {
+		Set<@NonNull RelationAnalysis> sharedAggregateRelations2 = sharedAggregateRelations;
+		if (sharedAggregateRelations2 == null) {
+			sharedAggregateRelations = sharedAggregateRelations2 = new HashSet<>();
+		}
+		sharedAggregateRelations2.add(relationAnalysis);
+	} */
 
 	@Override
 	public @NonNull AbstractTransformationAnalysis addTransformation(@NonNull Transformation asTransformation) {

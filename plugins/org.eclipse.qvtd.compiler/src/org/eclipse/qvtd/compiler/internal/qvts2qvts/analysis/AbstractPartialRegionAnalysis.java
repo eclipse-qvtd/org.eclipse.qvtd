@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -86,9 +87,11 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private final @NonNull List<@NonNull Node> predicatedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull NavigableEdge> predicatedOutputEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedOutputNodes = new ArrayList<>();
+	private final @NonNull List<@NonNull SharedEdge> predicatedSharedEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull NavigableEdge> realizedMiddleEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> realizedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull NavigableEdge> realizedOutputEdges = new ArrayList<>();
+	private final @NonNull List<@NonNull SharedEdge> realizedSharedEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> realizedOutputNodes = new ArrayList<>();
 
 	/**
@@ -195,6 +198,13 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 		}
 	}
 
+	private void addConsumptionOfSharedEdge(@NonNull SharedEdge edge) {
+		if (!predicatedSharedEdges.contains(edge)) {
+			predicatedSharedEdges.add(edge);
+			//	addConsumptionOfEdge(sharedEdge);
+		}
+	}
+
 	private void addProductionOfEdge(@NonNull NavigableEdge edge) {
 		assert isNew(edge);
 		if (edge.isNavigation()) {
@@ -266,6 +276,13 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 		}
 	}
 
+	private void addProductionOfSharedEdge(@NonNull SharedEdge edge) {
+		if (!realizedSharedEdges.contains(edge)) {
+			realizedSharedEdges.add(edge);
+			//	addProductionOfEdge(sharedEdge);
+		}
+	}
+
 	protected void analyzeEdges() {
 		for (@NonNull Edge edge : getPartialEdges()) {
 			assert !edge.isCast();
@@ -312,6 +329,16 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 						else {
 							throw new IllegalStateException("other edge must be predicated or realized : " + navigationEdge);
 						}
+					}
+				}
+				else if (edge.isShared()) {
+					SharedEdge sharedEdge = (SharedEdge)edge;
+					if (sharedEdge.isPredicated()) {
+						addConsumptionOfSharedEdge(sharedEdge);
+						oldPrimaryNavigableEdges.add(sharedEdge);
+					}
+					else if (sharedEdge.isRealized()) {
+						addProductionOfSharedEdge(sharedEdge);
 					}
 				}
 				else if (edge.isExpression()) {}
@@ -518,6 +545,10 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 		return predicatedOutputNodes;
 	}
 
+	public @NonNull Iterable<@NonNull SharedEdge> getPredicatedSharedEdges() {
+		return predicatedSharedEdges;
+	}
+
 	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
 		return realizedEdges;
 	}
@@ -532,6 +563,10 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 
 	public @NonNull Iterable<@NonNull Node> getRealizedOutputNodes() {
 		return realizedOutputNodes;
+	}
+
+	public @NonNull Iterable<@NonNull SharedEdge> getRealizedSharedEdges() {
+		return realizedSharedEdges;
 	}
 
 	public @NonNull ScheduleManager getScheduleManager() {

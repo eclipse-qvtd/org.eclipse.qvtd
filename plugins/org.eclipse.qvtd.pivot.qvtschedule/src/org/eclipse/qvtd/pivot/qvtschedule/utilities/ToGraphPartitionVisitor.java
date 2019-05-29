@@ -13,9 +13,11 @@ package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.DelegatingToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -178,7 +180,30 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 									sourceNode = (@NonNull Node) sourceEnd;
 								}
 								setScope(sourcePartition);
-								appendEdge(sourceNode, connection, connection);
+								Iterable<@NonNull Node> sharedEdgeTargetNodes = QVTscheduleUtil.getSharedEdgeTargetNodes(sourcePartition, sourceNode);
+								if (sharedEdgeTargetNodes != null) {
+									for (@NonNull Node targetNode : sharedEdgeTargetNodes) {
+										ToGraphHelper sourceGraphHelper = new DelegatingToGraphHelper(this)
+										{
+											@Override
+											public void setColor(@NonNull GraphElement element) {
+												super.setColor(sourceNode);
+											}
+										};
+										context.appendEdge(sourceGraphHelper, sourceNode, connection, connection);
+										ToGraphHelper targetGraphHelper = new DelegatingToGraphHelper(this)
+										{
+											@Override
+											public void setColor(@NonNull GraphElement element) {
+												super.setColor(targetNode);
+											}
+										};
+										context.appendEdge(targetGraphHelper, connection, connection, targetNode);
+									}
+								}
+								else {
+									appendEdge(sourceNode, connection, connection);
+								}
 							}
 						}
 					}

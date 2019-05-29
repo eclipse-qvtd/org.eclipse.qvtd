@@ -23,8 +23,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -246,6 +248,22 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	public static @NonNull VariableDeclaration getTargetVariable(@NonNull SetStatement asSetStatement) {
 		return ClassUtil.nonNullState(asSetStatement.getTargetVariable());
+	}
+
+	/**
+	 * Return true if one of the non-primitive domains has a DataType root variable. This will need a SharedEdge
+	 * to enforce the DataType-to-singleton mapping.
+	 */
+	public static boolean isDataType(@NonNull Mapping asMapping) {
+		for (@NonNull MappingParameter mappingParameter : getOwnedMappingParameters(asMapping)) {
+			if (mappingParameter instanceof GuardParameter) {
+				Type rootType = getType(mappingParameter);
+				if (rootType instanceof DataType) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static boolean isObserver(@NonNull Mapping asMapping) {

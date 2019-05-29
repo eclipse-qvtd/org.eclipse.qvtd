@@ -269,6 +269,14 @@ public class CompilerUtil extends QVTscheduleUtil
 					producers.add(explicitPredecessor);
 				}
 			}
+			Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> sharedPredecessors = consumer.getSharedPredecessors();		// Used by no-success QVTc trace
+			if (sharedPredecessors != null) {
+				for (@NonNull PartialRegionAnalysis<@NonNull PRA> sharedPredecessor : sharedPredecessors) {
+					Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
+					assert producers != null;
+					producers.add(sharedPredecessor);
+				}
+			}
 			Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> consumedClassAnalyses = consumer.getConsumedClassAnalyses();
 			if (consumedClassAnalyses != null) {
 				for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> consumedClassAnalysis : consumedClassAnalyses) {

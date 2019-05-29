@@ -61,6 +61,7 @@ public interface ScheduleManager
 	void addProblem(@NonNull CompilerProblem problem);
 	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 	void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
+	//	void addSharedAggregateRelation(@NonNull RelationAnalysis relationAnalysis);
 
 	/**
 	 * Define an additional/only Transformation to be scheduled by the subsequent anayses and syntheses.

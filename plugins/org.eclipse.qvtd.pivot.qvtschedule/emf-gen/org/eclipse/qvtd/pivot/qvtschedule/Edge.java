@@ -365,6 +365,11 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	boolean isSecondary();
 
 	/**
+	 * Return true if this edge is to a shared singleton.
+	 */
+	boolean isShared();
+
+	/**
 	 * Return true if this edge is for a multi-region speculated predicate.
 	 */
 	boolean isSpeculated();

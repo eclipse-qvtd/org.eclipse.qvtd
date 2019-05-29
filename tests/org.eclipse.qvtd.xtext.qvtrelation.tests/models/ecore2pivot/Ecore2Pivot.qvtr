@@ -18,89 +18,37 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
  */
 	transformation Ecore2Pivot(ecore:ecoreMM, as:pivotMM)
 	{
-		/**
-		 *  ecore::EAttribute <=> pivot::Property
-		 */
-		top relation mapEAttribute {
-			eClass : ecoreMM::EClass;
-			asClass : pivotMM::Class;
-			name : String;
-			/*enforce*/ domain ecore eAttribute : EAttribute {
-				eContainingClass = eClass,
-				name = name
-			};
-			enforce domain as asProperty : Property {
-				owningClass = asClass,
-				name = name
-			};
-			when {
-				mapEClass(eClass, asClass);
-			}
-		}
-		
-		/**
-		 *  ecore::EClass <=> pivot::Class
-		 */
-		top relation mapEClass {
-			ePackage : ecoreMM::EPackage;
-			asPackage : pivotMM::Package;
-			name : String;
-			isAbstract : Boolean;
-			isInterface : Boolean;
-			/*enforce*/ domain ecore eClass : EClass {
-				ePackage = ePackage,
-				name = name,
-				abstract = isAbstract,
-				interface = isInterface
-			};
-			enforce domain as asClass : Class {
-				owningPackage = asPackage,
-				name = name,
-				isAbstract = isAbstract,
-				isInterface = isInterface
-			};
-			when {
-				mapEPackage(ePackage, asPackage);
-			}
-		}
-		
+		query getRootEPackages(ePackage : ecoreMM::EPackage[1]) : Set(ecoreMM::EPackage)[1] implementedby 'org.eclipse.qvtd.xtext.qvtrelation.tests.helpers.GetRootEPackages';
+
 		/**
 		 *  ecore::EPackage <=> pivot::Package
 		 */
-		top relation mapEPackage {
+		top relation mapEPackage_root {
 			name : String;
-			nsPrefix : String;
-			nsURI : String;
+--			nsPrefix : String;
+--			nsURI : String;
+			ePackages : Set(ecore::EPackage) = getRootEPackages(ePackage);
+			asModel : pivotMM::Model;
 			/*enforce*/ domain ecore ePackage : EPackage {
-				name = name,
-				nsPrefix = nsPrefix,
-				nsURI = nsURI
+				eSuperPackage = null,
+				name = name
+--				nsPrefix = nsPrefix,
+--				nsURI = nsURI
 			};
 			enforce domain as asPackage : Package {
 				name = name,
-				nsPrefix = nsPrefix,
-				URI = nsURI
-			};
-		}
-
-		/**
-		 *  ecore::EReference <=> pivot::Property
-		 */
-		top relation mapEReference {
-			eClass : ecoreMM::EClass;
-			asClass : pivotMM::Class;
-			name : String;
-			/*enforce*/ domain ecore eReference : EReference {
-				eContainingClass = eClass,
-				name = name
-			};
-			enforce domain as asProperty : Property {
-				owningClass = asClass,
-				name = name
+--				nsPrefix = nsPrefix,
+--				URI = nsURI,
+				Model = asModel
 			};
 			when {
-				mapEClass(eClass, asClass);
+				mapEPackages(ePackages, asModel);
 			}
+		}
+		
+		relation mapEPackages {
+			/*enforce*/ domain ecore ePackages : Set(ecoreMM::EPackage) {};
+			enforce domain as asModel : Model {};
 		}
 	}
 }

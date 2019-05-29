@@ -59,6 +59,7 @@ import java.util.Collection;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl#getClassDatum <em>Class Datum</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl#isDataType <em>Data Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl#getMandatoryTargetNodes <em>Mandatory Target Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl#getPassedTargetNodes <em>Passed Target Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl#getPreferredTargetNodes <em>Preferred Target Nodes</em>}</li>
@@ -75,7 +76,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NODE_CONNECTION_FEATURE_COUNT = ConnectionImpl.CONNECTION_FEATURE_COUNT + 4;
+	public static final int NODE_CONNECTION_FEATURE_COUNT = ConnectionImpl.CONNECTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Node Connection</em>' class.
@@ -121,6 +122,26 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	 * @ordered
 	 */
 	protected ClassDatum classDatum;
+
+	/**
+	 * The default value of the '{@link #isDataType() <em>Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDataType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DATA_TYPE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDataType() <em>Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDataType()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean dataType = DATA_TYPE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getMandatoryTargetNodes() <em>Mandatory Target Nodes</em>}' reference list.
@@ -212,6 +233,29 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isDataType() {
+		return dataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDataType(boolean newDataType) {
+		boolean oldDataType = dataType;
+		dataType = newDataType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 8, oldDataType, dataType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -258,12 +302,14 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getClassDatum();
-				return basicGetClassDatum();
+			return basicGetClassDatum();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
-				return getMandatoryTargetNodes();
+				return isDataType();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				return getPassedTargetNodes();
+				return getMandatoryTargetNodes();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
+				return getPassedTargetNodes();
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				return getPreferredTargetNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -280,19 +326,22 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setClassDatum((ClassDatum)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
-				getMandatoryTargetNodes().clear();
-				getMandatoryTargetNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+				setDataType((Boolean)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				getPassedTargetNodes().clear();
-				getPassedTargetNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+				getMandatoryTargetNodes().clear();
+			getMandatoryTargetNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
+				getPassedTargetNodes().clear();
+			getPassedTargetNodes().addAll((Collection<? extends Node>)newValue);
+			return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				getPreferredTargetNodes().clear();
-				getPreferredTargetNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getPreferredTargetNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -307,16 +356,19 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setClassDatum((ClassDatum)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
-				getMandatoryTargetNodes().clear();
-				return;
+				setDataType(DATA_TYPE_EDEFAULT);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				getPassedTargetNodes().clear();
-				return;
+				getMandatoryTargetNodes().clear();
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
+				getPassedTargetNodes().clear();
+			return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				getPreferredTargetNodes().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -332,13 +384,20 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return classDatum != null;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
-				return mandatoryTargetNodes != null && !mandatoryTargetNodes.isEmpty();
+				return dataType != DATA_TYPE_EDEFAULT;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				return passedTargetNodes != null && !passedTargetNodes.isEmpty();
+				return mandatoryTargetNodes != null && !mandatoryTargetNodes.isEmpty();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
+				return passedTargetNodes != null && !passedTargetNodes.isEmpty();
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				return preferredTargetNodes != null && !preferredTargetNodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	/**

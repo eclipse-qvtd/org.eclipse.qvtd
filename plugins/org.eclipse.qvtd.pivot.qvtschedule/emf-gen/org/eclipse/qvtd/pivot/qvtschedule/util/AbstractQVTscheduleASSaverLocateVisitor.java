@@ -371,6 +371,11 @@ public abstract class AbstractQVTscheduleASSaverLocateVisitor
 	}
 
 	@Override
+	public @Nullable Object visitSharedEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SharedEdge object) {
+		return visitNavigableEdge(object);
+	}
+
+	@Override
 	public @Nullable Object visitStringLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StringLiteralNode object) {
 		return visitOperationNode(object);
 	}

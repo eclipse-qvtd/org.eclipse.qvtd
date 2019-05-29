@@ -259,38 +259,43 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	//
 	protected void analyzeGlobalSuccessNode(@Nullable RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface) {
 		boolean hasTraceInterface = baseRelationAnalysis2traceInterface != null;
-		boolean hasWhenInvocation = getRuleAnalysis().hasIncomingWhenInvocationAnalyses();
 		if (hasTraceInterface) {		// FIXME Bug 540797 - this is used by e.g. mapBooleanExp in ATL2QVTr
 			return;
 		}
-		if (!hasWhenInvocation) {		// FIXME enforced guard needs globalSucess
-			return;
+		boolean hasWhenInvocation = getRuleAnalysis().hasIncomingWhenInvocationAnalyses();
+		boolean isDataTypeRelation = QVTrelationUtil.isDataTypeRelation(relation);
+		boolean needsGlobalSuccessProperty = false;
+		if (hasWhenInvocation && !isDataTypeRelation) {		// FIXME enforced guard needs globalSucess
+			needsGlobalSuccessProperty = true;
 		}
-		if (!QVTrelationUtil.hasOverrides(relation)) {
-			boolean hasPredicatedElement = false;
+		if (!needsGlobalSuccessProperty && !QVTrelationUtil.hasOverrides(relation) && !isDataTypeRelation) {
 			RuleRegion region = getRuleAnalysis().getRegion();
 			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 				if (node.isPredicated()) {
-					hasPredicatedElement = true;
+					needsGlobalSuccessProperty = true;
 					break;
 				}
 			}
-			if (!hasPredicatedElement) {
+			if (!needsGlobalSuccessProperty) {
 				for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 					if (edge.isPredicated()) {
-						hasPredicatedElement = true;
+						needsGlobalSuccessProperty = true;
 						break;
 					}
 				}
-			}
-			if (!hasPredicatedElement) {
-				return;			// extStat is identical to trace class existence
-			}
+			}			// globalSuccess is identical to trace class existence
 		}
-		QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
-		String globalSuccessPropertyName = nameGenerator.createTraceGlobalSuccessPropertyName();
-		createRelation2GlobalSuccessProperty(globalSuccessPropertyName);
+		if (!needsGlobalSuccessProperty && hasSharedEdge()) {
+			needsGlobalSuccessProperty = true;
+		}
+		if (needsGlobalSuccessProperty) {
+			QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
+			String globalSuccessPropertyName = nameGenerator.createTraceGlobalSuccessPropertyName();
+			createRelation2GlobalSuccessProperty(globalSuccessPropertyName);
+		}
 	}
+
+
 
 	/*	@Override
 	public @Nullable RelationAnalysis2MiddleType getSuperRuleAnalysis2MiddleType() {
@@ -488,6 +493,10 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		}
 		return false;
 	} */
+
+	private boolean hasSharedEdge() {
+		return false;
+	}
 
 	/**
 	 * Return true if there may be more than one trace instance for a given root variable.

@@ -208,6 +208,9 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		else if ("vee".equals(arrowhead)) {
 			targetArrowType = ArrowType.standard;
 		}
+		else if ("odiamond".equals(arrowhead)) {
+			targetArrowType = ArrowType.white_diamond;
+		}
 	}
 
 	@Override
@@ -226,6 +229,9 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		}
 		else if ("vee".equals(arrowtail)) {
 			sourceArrowType = ArrowType.standard;
+		}
+		else if ("odiamond".equals(arrowtail)) {
+			sourceArrowType = ArrowType.white_diamond;
 		}
 	}
 

@@ -853,6 +853,11 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
+	public boolean isShared() {
+		return false;
+	}
+
+	@Override
 	public boolean isSpeculated() {
 		assert edgeRole != null;
 		return edgeRole == Role.SPECULATED;

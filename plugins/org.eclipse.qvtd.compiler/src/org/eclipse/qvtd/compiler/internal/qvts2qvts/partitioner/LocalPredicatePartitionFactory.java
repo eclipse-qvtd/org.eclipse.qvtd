@@ -24,6 +24,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -44,6 +45,8 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
 	private final @NonNull Iterable<@NonNull Node> realizedWhenNodes;
 	private final @Nullable Node dispatchNode;
+	private final @Nullable Iterable<@NonNull SharedEdge> sharedEdges;
+	private final @Nullable Iterable<@NonNull Node> sharedEdgeTargets;
 
 	public LocalPredicatePartitionFactory(@NonNull MappingPartitioner mappingPartitioner, boolean useActivators) {
 		super(mappingPartitioner);
@@ -51,6 +54,25 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 		this.useActivators = useActivators;
 		this.realizedWhenNodes = mappingPartitioner.getRealizedWhenNodes();
 		this.dispatchNode = mappingPartitioner.basicGetDispatchNode();
+		List<@NonNull SharedEdge> sharedEdges = null;
+		List<@NonNull Node> sharedEdgeTargets = null;
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+			if (edge.isShared()) {
+				if (sharedEdges == null) {
+					sharedEdges = new ArrayList<>();
+				}
+				sharedEdges.add((SharedEdge) edge);
+				if (sharedEdgeTargets == null) {
+					sharedEdgeTargets = new ArrayList<>();
+				}
+				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+				if (!sharedEdgeTargets.contains(targetNode)) { 		// In practice two shared edges is an error
+					sharedEdgeTargets.add(targetNode);
+				}
+			}
+		}
+		this.sharedEdges = sharedEdges;
+		this.sharedEdgeTargets = sharedEdgeTargets;
 	}
 
 	@Override
@@ -108,6 +130,10 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 		return rootNodes;
 	}
 
+	public boolean hasSharedEdges() {
+		return sharedEdges != null;
+	}
+
 	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis) {
 		BasicPartition partition = partitionAnalysis.getPartition();
 		//	this.traceNode = mappingPartitioner.getTraceNode();
@@ -149,6 +175,16 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 				if (scheduleManager.isOutput(argumentNode)) {
 					addNode(partition, argumentNode); //, Role.SPECULATED);
 				}
+			}
+		}
+		//
+		//	Prime all shared edges
+		//
+		if (sharedEdges != null) {
+			for (@NonNull Edge edge : sharedEdges) {
+				addNode(partition, QVTscheduleUtil.getSourceNode(edge));
+				addNode(partition, QVTscheduleUtil.getTargetNode(edge));
+				addEdge(partition, edge, Role.PREDICATED);
 			}
 		}
 		//
@@ -242,6 +278,13 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
+		if (sharedEdgeTargets != null) {		// No more edges to phantom shared edge target
+			Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+			Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+			if (Iterables.contains(sharedEdgeTargets, sourceNode) || Iterables.contains(sharedEdgeTargets, targetNode)) {
+				return null;
+			}
+		}
 		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED) {
 			if (mappingPartitioner.hasRealizedEdge(edge)) {

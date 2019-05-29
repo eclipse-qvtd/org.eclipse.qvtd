@@ -301,6 +301,7 @@ public class UtilityAnalysis
 							moreMoreNodes.add(sourceNode);
 						}
 					}
+					else if (incomingEdge.isShared()) {}
 					else {
 						System.out.println("Unsupported incoming edge in " + this + " : " + incomingEdge);
 					}
@@ -323,7 +324,12 @@ public class UtilityAnalysis
 							}
 						}
 					}
-					else {		// SharedEdge
+					else if (outgoingEdge.isShared()) {
+						if (unconditionalNodes.add(targetNode)) {
+							moreMoreNodes.add(targetNode);
+						}
+					}
+					else {
 						System.out.println("Unsupported outgoing edge in " + this + " : " + outgoingEdge);
 					}
 				}

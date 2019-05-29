@@ -178,7 +178,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull ImportNameManager createImportNameManager() {
 		return new JavaImportNameManager() {
-			{		// Ensure re-used inherited names are not confused
+			@Override
+			protected void reserveImportNames() {	// Ensure re-used inherited names are not confused
+				super.reserveImportNames();
 				reserveImportName(org.eclipse.qvtd.runtime.evaluation.AbstractTransformer.class);
 				reserveImportName(org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable.class);
 				reserveImportName(org.eclipse.qvtd.runtime.evaluation.Transformer.class);

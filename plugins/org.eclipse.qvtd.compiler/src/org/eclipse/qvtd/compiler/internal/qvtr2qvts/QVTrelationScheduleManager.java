@@ -12,6 +12,9 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
@@ -32,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
@@ -71,7 +75,13 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 		//		}
 		ruleRegion.setReferredRule(asRule);
 		ruleRegion.setName(getNameGenerator().createMappingName((Relation) asRule, null, qvtuConfiguration));
-		return new RelationAnalysis(transformationAnalysis, qvtuConfiguration, ruleRegion);
+		Relation relation = (Relation) asRule;
+		if (isSharedAggregator(relation)) {
+			return new SharedAggregatorRelationAnalysis(transformationAnalysis, qvtuConfiguration, ruleRegion);
+		}
+		else {
+			return new RelationAnalysis(transformationAnalysis, qvtuConfiguration, ruleRegion);
+		}
 	}
 
 	@Override
@@ -135,6 +145,28 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 	@Override
 	public boolean isOutput(@NonNull Domain domain) {
 		return qvtuConfiguration.isOutput(QVTrelationUtil.getTypedModel(domain));
+	}
+
+	protected boolean isSharedAggregator(@NonNull Relation relation) {
+		if (relation.isIsTopLevel()) {
+			return false;
+		}
+		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+			if (relationDomain.isIsCheckable()) {
+				boolean allData = true;
+				for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
+					Type rootType = rootVariable.getType();
+					if (!(rootType instanceof DataType)) {
+						allData = false;
+						break;
+					}
+				}
+				if (allData) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override

@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -21,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SharedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -32,9 +35,20 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFactory
 {
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
+	private final @Nullable Iterable<@NonNull SharedEdge> sharedEdges;
 
 	public GlobalPredicatePartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
 		super(mappingPartitioner);
+		List<@NonNull SharedEdge> sharedEdges = null;
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+			if (edge.isShared()) {
+				if (sharedEdges == null) {
+					sharedEdges = new ArrayList<>();
+				}
+				sharedEdges.add((SharedEdge) edge);
+			}
+		}
+		this.sharedEdges = sharedEdges;
 	}
 
 	@Override
@@ -102,6 +116,16 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 		//	The localSuccess nodes are predicated, and the globalSuccess realized to sequence speculating/speculation/speculated partitions.
 		//
 		resolveSuccessNodes(partition, executionNodes);
+		//
+		//	Prime all shared edges
+		//
+		if (sharedEdges != null) {
+			for (@NonNull Edge edge : sharedEdges) {
+				addNode(partition, QVTscheduleUtil.getSourceNode(edge));
+				addNode(partition, QVTscheduleUtil.getTargetNode(edge));
+				addEdge(partition, edge, Role.PREDICATED);
+			}
+		}
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//

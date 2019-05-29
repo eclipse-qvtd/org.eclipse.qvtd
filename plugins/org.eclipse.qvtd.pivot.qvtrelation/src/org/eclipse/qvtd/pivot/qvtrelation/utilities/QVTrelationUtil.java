@@ -23,8 +23,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -375,6 +377,24 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	//	public static @NonNull Pattern getWhere(@NonNull Relation rRelation) {
 	//		return ClassUtil.nonNullState(rRelation.getWhere());
 	//	}
+
+	/**
+	 * Return true if one of the non-primitive domains has a DataType root variable. This will need a SharedEdge
+	 * to enforce the DataType-to-singleton mapping.
+	 */
+	public static boolean isDataTypeRelation(@NonNull Relation relation) {
+		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+			if (!getTypedModel(relationDomain).isIsPrimitive()) {
+				for (@NonNull VariableDeclaration rootVariable : getRootVariables(relationDomain)) {
+					Type rootType = QVTrelationUtil.getType(rootVariable);
+					if (rootType instanceof DataType) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	public static boolean isTraceClassVariable(@NonNull VariableDeclaration variable) {
 		return TRACE_CLASS_NAME.equals(variable.getName()) && (variable instanceof SharedVariable) && ((SharedVariable)variable).isIsImplicit();

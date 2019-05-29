@@ -20,11 +20,13 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -86,7 +88,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
- * A RelationAnalysis provides the analysis a QVTc mapping.
+ * A RelationAnalysis provides the analysis a QVTr mapping.
  */
 public class RelationAnalysis extends RuleAnalysis
 {
@@ -760,7 +762,24 @@ public class RelationAnalysis extends RuleAnalysis
 					invocationAnalysis = new NonTopWhenAfterWhereInvocationAnalysis(this, invokedRelationAnalysis);
 				}
 				else {
-					invocationAnalysis = new NonTopWhenOnlyInvocationAnalysis(this, invokedRelationAnalysis);
+					boolean hasClassInput = false;
+					Relation rule2 = invokedRelationAnalysis.getRule();
+					for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(rule2)) {
+						if (scheduleManager.isInput(relationDomain)) {
+							for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
+								Type type = QVTrelationUtil.getType(rootVariable);
+								if (!(type instanceof DataType)) {
+									hasClassInput = true;
+								}
+							}
+						}
+					}
+					if (hasClassInput) {
+						invocationAnalysis = new NonTopWhenOnlyClassInvocationAnalysis(this, invokedRelationAnalysis);
+					}
+					else {
+						invocationAnalysis = new NonTopWhenOnlyDataTypeInvocationAnalysis(this, invokedRelationAnalysis);
+					}
 				}
 			}
 			else {
@@ -1033,6 +1052,10 @@ public class RelationAnalysis extends RuleAnalysis
 		return false;
 	}
 
+	public boolean isSharedAggregator() {
+		return false;
+	}
+
 	/*	public OCLExpression synthesizeKeyTemplate(@NonNull VariableDeclaration templateVariable, @NonNull Node @NonNull [] argNodes) {
 		Node keyNode = createOperationNode(true, QVTrelationUtil.getName(templateVariable), templateVariable, argNodes);
 		region.addVariableNode(templateVariable, keyNode);
@@ -1119,8 +1142,10 @@ public class RelationAnalysis extends RuleAnalysis
 		if (isOutput) {
 			synthesizeOutputCollectionTemplate(collectionTemplateExp);
 		}
-		else if (!synthesizeSingleInputCollectionTemplate(collectionTemplateExp)) {
-			synthesizeMultipleInputCollectionTemplate(collectionTemplateExp);
+		else if (!synthesizeEmptyInputCollectionTemplate(collectionTemplateExp)) {
+			if (!synthesizeSingleInputCollectionTemplate(collectionTemplateExp)) {
+				synthesizeMultipleInputCollectionTemplate(collectionTemplateExp);
+			}
 		}
 	}
 
@@ -1175,6 +1200,23 @@ public class RelationAnalysis extends RuleAnalysis
 		region.getHeadNodes().add(headNode);
 		headNode.setHead();
 		return dispatchNode;
+	}
+
+	/**
+	 * Synthesize the simple CollectionTemplateExp pattern only match comprising no members and no rest.
+	 *
+	 * Returns false if a more complex match is needed.
+	 */
+	protected boolean synthesizeEmptyInputCollectionTemplate(@NonNull CollectionTemplateExp collectionTemplateExp) {
+		Variable rest = collectionTemplateExp.getRest();
+		if (rest != null) {
+			return false;
+		}
+		List<OCLExpression> members = collectionTemplateExp.getMember();
+		if (members.size() > 0) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -1813,6 +1855,9 @@ public class RelationAnalysis extends RuleAnalysis
 		if (hasOverrides) {
 			traceNode = createOldNode(traceVariable);
 		}
+		//	else if (isSharedAggregator()) {
+		//		traceNode = createRealizedStepNode(traceVariable);
+		//	}
 		else if (!relation.isIsTopLevel()) {
 			//			if (hasOverrides) {
 			traceNode = createOldNode(traceVariable);
@@ -1856,6 +1901,7 @@ public class RelationAnalysis extends RuleAnalysis
 		return traceNode;
 	}
 
+	// FIXME Introduce derived RelationAnalysis strategies
 	public void synthesizeVariableDeclaration(@NonNull VariableDeclaration variableDeclaration) {	// FIXME move to derived visitVariableDeclaration
 		//		boolean isEnforced = false;
 		//		ClassDatum classDatum = scheduleManager.getClassDatum(variableDeclaration);
@@ -1886,6 +1932,9 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 		else if (getRealizedOutputVariables().contains(variableDeclaration)) {
 			createRealizedStepNode(variableDeclaration);
+		}
+		else if (hasIncomingWhenInvocationAnalyses() && Iterables.contains(QVTrelationUtil.getRootVariables(getRule()), variableDeclaration)) {
+			createOldNode(variableDeclaration);		// where 'output' is created by invoker
 		}
 		else {
 			if (variableDeclaration instanceof TemplateVariable) {
