@@ -884,16 +884,30 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//				e.printStackTrace();
 			//			}
 		} else if (implementationClass != null) {
-			ClassLoader classLoader = asFunction.getClass().getClassLoader();
+			ClassNotFoundException cnfe = null;
+			Class<?> functionClass = null;
+			for (@NonNull ClassLoader classLoader : metamodelManager.getImplementationManager().getClassLoaders()) {
+				try {
+					functionClass = classLoader.loadClass(implementationClass);
+					cnfe = null;
+					break;
+				} catch (ClassNotFoundException e) {
+					if (cnfe == null) {
+						cnfe = e;
+					}
+				}
+			}
+			if (cnfe != null) {
+				throw new IllegalStateException("Load class failure for " + implementationClass + " in QVTiAS2CGVisitor.visitFunction()", cnfe);
+			}
+			assert functionClass != null;
+			//			ClassLoader classLoader = asFunction.getClass().getClassLoader();
 			Object implementationInstance;
 			try {
-				Class<?> functionClass = classLoader.loadClass(implementationClass);
 				Field implementationField = functionClass.getField("INSTANCE");
 				implementationInstance = implementationField.get(null);
 			}
-			catch (ClassNotFoundException e) {
-				throw new IllegalStateException("Load class failure for " + implementationClass + " in QVTiAS2CGVisitor.visitFunction()", e);
-			} catch (NoSuchFieldException e) {
+			catch (NoSuchFieldException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				throw new IllegalStateException(e);
