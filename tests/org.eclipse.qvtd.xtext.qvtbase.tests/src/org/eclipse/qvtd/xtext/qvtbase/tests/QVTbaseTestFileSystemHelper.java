@@ -22,8 +22,27 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 
-public abstract class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
+public class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 {
+	private @NonNull List<@NonNull String> exportedPackages = new ArrayList<>();
+	private @NonNull List<@NonNull String> requiredBundles = new ArrayList<>();
+
+	public QVTbaseTestFileSystemHelper() {
+		addRequiredBundle("org.eclipse.qvtd.runtime");
+	}
+
+	public void addExportedPackage(@NonNull String exportedPackage) {
+		if (!exportedPackages.contains(exportedPackage)) {
+			exportedPackages.add(exportedPackage);
+		}
+	}
+
+	public void addRequiredBundle(@NonNull String requiredBundle) {
+		if (!requiredBundles.contains(requiredBundle)) {
+			requiredBundles.add(requiredBundle);
+		}
+	}
+
 	@Override
 	protected void appendBuildSpec(@NonNull Writer s) throws IOException {
 		s.append("  <buildSpec>\n");
@@ -136,12 +155,10 @@ public abstract class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 			s.append("\n");
 			isFirst = true;
 			List<@NonNull String> exportedPackages = getExportedPackages();
-			if (exportedPackages != null) {
-				for (@NonNull String exportedPackage : exportedPackages) {
-					s.append(isFirst ? "Export-Package: " : ",\n ");
-					s.append(exportedPackage);
-					isFirst = false;
-				}
+			for (@NonNull String exportedPackage : exportedPackages) {
+				s.append(isFirst ? "Export-Package: " : ",\n ");
+				s.append(exportedPackage);
+				isFirst = false;
 			}
 			s.append("\n");
 			s.close();
@@ -151,13 +168,11 @@ public abstract class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 		return file;
 	}
 
-	protected @Nullable List<@NonNull String> getExportedPackages() {
-		return null;
+	protected @NonNull List<@NonNull String> getExportedPackages() {
+		return exportedPackages;
 	}
 
 	protected @NonNull List<@NonNull String> getRequiredBundles() {
-		List<@NonNull String> requiredBundles = new ArrayList<>();
-		requiredBundles.add("org.eclipse.qvtd.runtime");
 		return requiredBundles;
 	}
 }

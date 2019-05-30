@@ -12,7 +12,6 @@ package org.eclipse.qvtd.cs2as.compiler.tests;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -314,14 +313,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Override
 	protected @NonNull TestFileSystemHelper getTestFileSystemHelper() {
-		return new QVTbaseTestFileSystemHelper() {
-			@Override
-			protected @NonNull List<@NonNull String> getRequiredBundles() {
-				List<@NonNull String> requiredBundles = super.getRequiredBundles();
-				requiredBundles.add("org.eclipse.qvtd.cs2as.compiler.tests");
-				return requiredBundles;
-			}
-		};
+		QVTbaseTestFileSystemHelper testFileSystemHelper = new QVTbaseTestFileSystemHelper();
+		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.cs2as.compiler.tests");
+		return testFileSystemHelper;
 	}
 
 	@Override

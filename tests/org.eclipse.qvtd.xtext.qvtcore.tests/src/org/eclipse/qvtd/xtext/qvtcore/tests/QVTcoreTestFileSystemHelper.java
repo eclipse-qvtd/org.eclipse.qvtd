@@ -10,17 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.tests;
 
-import java.util.List;
-
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseTestFileSystemHelper;
 
 public class QVTcoreTestFileSystemHelper extends QVTbaseTestFileSystemHelper
 {
-	@Override
-	protected @NonNull List<@NonNull String> getRequiredBundles() {
-		List<@NonNull String> requiredBundles = super.getRequiredBundles();
-		requiredBundles.add("org.eclipse.qvtd.xtext.qvtcore.tests");
-		return requiredBundles;
+	public QVTcoreTestFileSystemHelper() {
+		//	addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
+		addRequiredBundle("org.eclipse.qvtd.xtext.qvtcore.tests");
 	}
 }

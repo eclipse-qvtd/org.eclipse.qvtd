@@ -11,8 +11,6 @@
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.EMFPlugin;
@@ -21,7 +19,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
 import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
@@ -72,38 +69,6 @@ public class QVTrCompilerTests extends LoadTestCase
 	public static final boolean ENABLE_ATL2QVTr_CG_exec = false;	// Set true to debug; may fail if _QVTd_QVTrCompilerTests__testQVTrCompiler_ATL2QVTr_CG isn't a good polugin project.
 	public static final boolean ENABLE_ATL2QVTr_reverse_CG = false;	// Set true to debug; test does not pass yet - wip
 	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
-
-	protected static class MyQVTrelationTestFileSystemHelper extends QVTrelationTestFileSystemHelper
-	{
-		private @Nullable List<@NonNull String> exportedPackages = null;
-		private @Nullable List<@NonNull String> requiredBundles = null;
-
-		public void addExportedPackage(@NonNull String exportedPackage) {
-			List<@NonNull String> exportedPackages2 = exportedPackages;
-			if (exportedPackages2 == null) {
-				exportedPackages = exportedPackages2 = new ArrayList<>();
-			}
-			exportedPackages2.add(exportedPackage);
-		}
-
-		public void addRequiredBundle(@NonNull String requiredBundle) {
-			List<@NonNull String> requiredBundles2 = requiredBundles;
-			if (requiredBundles2 == null) {
-				requiredBundles = requiredBundles2 = new ArrayList<>();
-			}
-			requiredBundles2.add(requiredBundle);
-		}
-
-		@Override
-		protected @Nullable List<@NonNull String> getExportedPackages() {			// FIXME ?? compute from other content ??
-			return exportedPackages != null ? exportedPackages : super.getExportedPackages();
-		}
-
-		@Override
-		protected @NonNull List<@NonNull String> getRequiredBundles() {
-			return requiredBundles != null ? requiredBundles : super.getRequiredBundles();
-		}
-	}
 
 	protected class MyQVT extends AbstractTestQVT
 	{
@@ -203,7 +168,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public MyQVTrelationTestFileSystemHelper testFileSystemHelper = null;
+	public QVTrelationTestFileSystemHelper testFileSystemHelper = null;
 
 	@Override
 	protected @NonNull OCLInternal createOCL() {
@@ -219,10 +184,10 @@ public class QVTrCompilerTests extends LoadTestCase
 	}
 
 	@Override
-	protected @NonNull MyQVTrelationTestFileSystemHelper getTestFileSystemHelper() {
-		MyQVTrelationTestFileSystemHelper testFileSystemHelper2 = testFileSystemHelper;
+	protected @NonNull QVTrelationTestFileSystemHelper getTestFileSystemHelper() {
+		QVTrelationTestFileSystemHelper testFileSystemHelper2 = testFileSystemHelper;
 		if (testFileSystemHelper2 == null) {
-			testFileSystemHelper = testFileSystemHelper2 = new MyQVTrelationTestFileSystemHelper();
+			testFileSystemHelper = testFileSystemHelper2 = new QVTrelationTestFileSystemHelper();
 		}
 		return testFileSystemHelper2;
 	}
@@ -301,7 +266,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//	TransformationPartitioner.REGION_IMMEDIATE_PREDECESSORS.setState(true);
 		//	TransformationPartitioner.REGION_TRANSITIVE_PREDECESSORS.setState(true);
 		//	TransformationPartitioner.REGION_TRANSITIVE_SUCCESSORS.setState(true);
-		MyQVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
+		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.atl");
 		testFileSystemHelper.addExportedPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr");
 		Class<? extends Transformer> txClass1 = null;

@@ -48,7 +48,6 @@ import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase.GlobalStateMemento;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
-import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
@@ -429,6 +428,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		assertEquals("All objects post-clear", 0, Iterables.size(allObjects));
 	}
 
+	public QVTimperativeTestFileSystemHelper testFileSystemHelper = null;
+
 	@Override
 	protected @NonNull OCLInternal createOCL() {
 		return QVTimperative.newInstance(getTestProjectManager(), null);
@@ -439,8 +440,12 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	@Override
-	protected @NonNull TestFileSystemHelper getTestFileSystemHelper() {
-		return new QVTimperativeTestFileSystemHelper();
+	protected @NonNull QVTimperativeTestFileSystemHelper getTestFileSystemHelper() {
+		QVTimperativeTestFileSystemHelper testFileSystemHelper2 = testFileSystemHelper;
+		if (testFileSystemHelper2 == null) {
+			testFileSystemHelper = testFileSystemHelper2 = new QVTimperativeTestFileSystemHelper();
+		}
+		return testFileSystemHelper2;
 	}
 
 	@Override
