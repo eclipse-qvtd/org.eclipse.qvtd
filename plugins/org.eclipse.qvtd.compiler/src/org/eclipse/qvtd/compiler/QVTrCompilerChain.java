@@ -126,26 +126,28 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				//					t.setTraceNsURI(traceNsURI);
 				//				}
 				Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions = qvtr2qvts.transform(qvtrResource, qvtsResource, traceNsURI, traceResource);
-				//
-				//	Save trace (occurs as part of GenModel creation)
-				//
-				if (false) {		// FIXME true for debugging but results in two same-URI resources, need to unload this temporary
+				try {
+					//
+					//	QVTs optimization
+					//
+					//				List<@NonNull MappingRegion> activeRegions = qvtr2qvts.getActiveRegions();
+					String rootName = ClassUtil.nonNullState(qvtrResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
+					QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
+					qvts2qvts.transform(scheduleManager, rootRegion2activeRegions);
+					throwCompilerChainExceptionForErrors();
+					saveResource(qvtsResource);
+					return scheduleManager;
+				}
+				catch (CompilerChainException e) {
+					//
+					//	Save trace for debugging. Normally trace saved as part of GenModel creation.
+					//
 					URI ecoreURI = traceResource.getURI().trimFileExtension();
 					AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
 					XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
 					ecoreResource.save(null);
-					throwCompilerChainExceptionForErrors();
+					throw e;
 				}
-				//
-				//	QVTs optimization
-				//
-				//				List<@NonNull MappingRegion> activeRegions = qvtr2qvts.getActiveRegions();
-				String rootName = ClassUtil.nonNullState(qvtrResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
-				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
-				qvts2qvts.transform(scheduleManager, rootRegion2activeRegions);
-				throwCompilerChainExceptionForErrors();
-				saveResource(qvtsResource);
-				return scheduleManager;
 			}
 			finally {
 				environmentFactory.setCreateStrategy(savedStrategy);
