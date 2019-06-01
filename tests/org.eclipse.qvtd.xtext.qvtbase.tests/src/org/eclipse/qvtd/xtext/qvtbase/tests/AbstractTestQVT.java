@@ -40,7 +40,6 @@ import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
-import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
@@ -193,9 +192,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
 		// therefore suppress diagnostics about confusing usage.
 		//
-		URI ecoreURI = URI.createURI(EcorePackage.eNS_URI);
-		getProjectManager().getPackageDescriptor(ecoreURI).configure(getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
-			StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+		getProjectManager().configureLoadFirst(getResourceSet(), EcorePackage.eNS_URI);
 	}
 
 	public void addClasspathClass(@NonNull Class<?> classpathClass) {

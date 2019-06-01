@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
+import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
@@ -616,7 +617,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
 			myQVT2.createGeneratedExecutor(txClass1);
-			myQVT2.loadInput("ecore", getModelsURI("families2persons/Families.ecore"));
+			//			myQVT2.loadInput("ecore", getModelsURI("families2persons/Families.ecore"));
+			myQVT2.loadInput("ecore", getModelsURI("ecore2pivot/Families.ecore"));
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("as", asURI2, getModelsURI("ecore2pivot/Families_expected.ecore.oclas"), null);
 		}
@@ -982,6 +984,8 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_Iterated2Iterated_CG() throws Exception {
+		//	StandaloneProjectMap.addTrace(EcorePackage.eNS_URI, ~0);
+		//	StandaloneProjectMap.addTrace("http://www.eclipse.org/ocl/2015/Library", ~0);
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
@@ -993,6 +997,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Iterated2Iterated", getModelsURI("iterated2iterated/Iterated2Iterated.qvtr"));
 		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		try {
+			ProjectManager projectMap = myQVT1.getProjectManager();
+			projectMap.configure(myQVT1.getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
 			txClass = myQVT1.buildTransformation(Lists.newArrayList("to", "via"), false);
 		}
 		finally {

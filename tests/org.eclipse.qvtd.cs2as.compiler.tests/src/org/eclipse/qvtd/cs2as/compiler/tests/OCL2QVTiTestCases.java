@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
-import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -110,9 +109,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
 			// therefore suppress diagnostics about confusing usage.
 			//
-			URI ecoreURI = URI.createURI(EcorePackage.eNS_URI);
-			getProjectManager().getPackageDescriptor(ecoreURI).configure(getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
-				StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+			getProjectManager().configureLoadFirst(getResourceSet(), EcorePackage.eNS_URI);
 		}
 
 		//	public void assertRegionCount(@NonNull Class<? extends Region> regionClass, @NonNull Integer count) {

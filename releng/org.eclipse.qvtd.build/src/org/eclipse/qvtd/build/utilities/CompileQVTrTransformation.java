@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
-import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -253,11 +252,8 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 				GenPackage genPackage = myQVT.addUsedGenPackage(projectPath, genPackageFragment);
 				EPackage ePackage = genPackage.getEcorePackage();
 				String nsURI = ePackage.getNsURI();
-				URI uri = URI.createURI(nsURI);
-				testProjectManager.getPackageDescriptor(uri).configure(myQVT.getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
-					StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-				testProjectManager.getPackageDescriptor(uri).configure(myQVT.getMetamodelManager().getASResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
-					StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+				testProjectManager.configureLoadFirst(myQVT.getResourceSet(), nsURI);
+				testProjectManager.configureLoadFirst(myQVT.getMetamodelManager().getASResourceSet(), nsURI);
 			}
 			@SuppressWarnings("unused")
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("qvtr", false); //,
