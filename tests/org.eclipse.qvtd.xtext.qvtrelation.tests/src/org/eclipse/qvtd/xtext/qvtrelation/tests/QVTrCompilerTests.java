@@ -576,7 +576,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	@Test
+	/*	@Test
 	public void testQVTrCompiler_Ecore2Pivot_CG() throws Exception {
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
@@ -625,7 +625,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT2.dispose();
 		}
-	}
+	}*/
 
 	@Test
 	public void testQVTrCompiler_Families2Persons_CG() throws Exception {
