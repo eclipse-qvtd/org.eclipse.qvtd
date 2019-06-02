@@ -41,13 +41,13 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.oclstdlib.scoping.JavaClassScope;
-import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
 import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel;
+import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
 /**
  * Tests.
  */
-public class QVTbaseLibraryTests extends XtextTestCase
+public class QVTruntimeLibraryTests extends XtextTestCase
 {
 	public static class MonikeredComparator implements Comparator<@NonNull Element>
 	{
@@ -192,14 +192,14 @@ public class QVTbaseLibraryTests extends XtextTestCase
 	 *
 	 * FIXME check the library/model version instead.
 	 */
-	public void testQVTbaseLibrary() throws Exception {
+	public void testQVTruntimeLibrary() throws Exception {
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		//
-		//	Load OCL QVTbaseLibrary as a file.
+		//	Load OCL QVTruntimeLibrary as a file.
 		//
 		ResourceSet resourceSet = ocl.getResourceSet();
 		getTestProjectManager().initializeResourceSet(resourceSet);
-		URI libraryURI = URI.createPlatformResourceURI("org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib", true);
+		URI libraryURI = URI.createPlatformResourceURI("org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.oclstdlib", true);
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
 		assert xtextResource != null;
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -215,9 +215,9 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		assertNoUnresolvedProxies("File Model", fileResource);
 		assertNoValidationErrors("File Model", fileResource);
 		//
-		//	Load 'QVTbaseLibrary.oclstdlib' as pre-code-generated Java.
+		//	Load 'QVTruntimeLibrary.oclstdlib' as pre-code-generated Java.
 		//
-		Resource javaResource = QVTbaseLibrary.getDefault();
+		Resource javaResource = QVTruntimeLibrary.getDefault();
 		//		PivotAliasCreator.refreshPackageAliases(javaResource);
 		assertNoResourceErrors("Java Model", javaResource);
 		assertNoUnresolvedProxies("Java Model", javaResource);
@@ -305,16 +305,16 @@ public class QVTbaseLibraryTests extends XtextTestCase
 	 * Checks that the QVTbase-1.3 AS model is the same as the pre-compiled
 	 * Java implementation.
 	 */
-	public void testQVTbaseLibrary_AS() throws Exception {
+	public void testQVTruntimeLibrary_AS() throws Exception {
 		OCL ocl = OCL.newInstance(getTestProjectManager());
 		//
 		//	Load QVTbase-1.3 as an AS file.
 		//
-		URI libraryURI = URI.createPlatformResourceURI("org.eclipse.qvtd.pivot.qvtbase/model-gen/QVTbaseLibrary.oclas", true);
+		URI libraryURI = URI.createPlatformResourceURI("org.eclipse.qvtd.runtime/model-gen/QVTruntimeLibrary.oclas", true);
 		//
 		//	Load 'QVTbase-1.3.oclstdlib' as pre-code-generated Java.
 		//
-		Resource javaResource = QVTbaseLibrary.getDefault();
+		Resource javaResource = QVTruntimeLibrary.getDefault();
 		@SuppressWarnings("unused")Resource asResource = doLoadAS(ocl.getMetamodelManager().getASResourceSet(), libraryURI, javaResource, false);		// FIXME Contents are far from identical
 		ocl.dispose();
 	}

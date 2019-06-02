@@ -18,8 +18,8 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.FlowAnalysis;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
+import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
 public class QVTcEnvironmentFactory extends QVTbaseEnvironmentFactory
 {
@@ -36,7 +36,7 @@ public class QVTcEnvironmentFactory extends QVTbaseEnvironmentFactory
 
 	public QVTcEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 		super(projectMap, externalResourceSet, CREATE_STRATEGY);
-		getStandardLibrary().setDefaultStandardLibraryURI(QVTbaseLibrary.STDLIB_URI);
+		getStandardLibrary().setDefaultStandardLibraryURI(QVTruntimeLibrary.STDLIB_URI);
 	}
 
 	@Override

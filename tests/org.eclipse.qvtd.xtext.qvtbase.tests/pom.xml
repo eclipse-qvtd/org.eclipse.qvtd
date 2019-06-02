@@ -42,7 +42,7 @@
         <artifactId>tycho-surefire-plugin</artifactId>
         <configuration>
           <!--debugPort>5005</debugPort-->
-          <testClass>org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests</testClass>
+          <testClass>org.eclipse.qvtd.xtext.qvtbase.tests.QVTruntimeLibraryTests</testClass>
           <useUIHarness>true</useUIHarness>
           <useUIThread>true</useUIThread>
           <argLine>-DtestNameSuffix="tycho" -ea</argLine>

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
 import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -34,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
@@ -47,11 +47,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
 
 public interface ScheduleManager
 {
@@ -129,7 +130,7 @@ public interface ScheduleManager
 
 	@NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property);
 	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge edge);
-	@NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper();
+	@NonNull QVTruntimeLibraryHelper getQVTruntimeLibraryHelper();
 	@NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region);
 	@NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull RootRegion rootRegion);
 	@NonNull ScheduleModel getScheduleModel();

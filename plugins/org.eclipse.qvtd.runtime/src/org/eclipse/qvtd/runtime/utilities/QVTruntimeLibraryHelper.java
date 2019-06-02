@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtbase.utilities;
+package org.eclipse.qvtd.runtime.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Model;
@@ -17,9 +17,9 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
+import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
-public class QVTbaseLibraryHelper
+public class QVTruntimeLibraryHelper
 {
 	private final @NonNull Operation collectionOperation;
 	private final @NonNull Operation errorOperation;
@@ -43,11 +43,11 @@ public class QVTbaseLibraryHelper
 	private final @NonNull Operation tupleOperation;
 	private final @NonNull Operation typeOperation;
 
-	public QVTbaseLibraryHelper() {
-		Model libModel = QVTbaseLibrary.getDefaultModel();
-		org.eclipse.ocl.pivot.Package libPackage = ClassUtil.nonNullState(NameUtil.getNameable(libModel.getOwnedPackages(), "qvtbaselibrary"));
+	public QVTruntimeLibraryHelper() {
+		Model libModel = QVTruntimeLibrary.getDefaultModel();
+		org.eclipse.ocl.pivot.Package libPackage = ClassUtil.nonNullState(NameUtil.getNameable(libModel.getOwnedPackages(), "qvtruntimelibrary"));
 		org.eclipse.ocl.pivot.Class libClass = ClassUtil.nonNullState(NameUtil.getNameable(libPackage.getOwnedClasses(), "PseudoOperations"));
-		Iterable<@NonNull Operation> ownedOperations = QVTbaseUtil.getOwnedOperations(libClass);
+		Iterable<@NonNull Operation> ownedOperations = PivotUtil.getOwnedOperations(libClass);
 		this.collectionOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "collection"));
 		this.errorOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "error"));
 		this.errorElementsParameter = PivotUtil.getOwnedParameter(errorOperation, 0);

@@ -42,4 +42,19 @@
          </describer>
       </content-type>
    </extension>
+
+   <extension point="org.eclipse.ocl.pivot.standard_library"
+         id="qvtruntimelibrary" name="QVTruntime Library">
+     <library uri="http://www.eclipse.org/qvt/2019/QVTruntimeLibrary"
+     	class="org.eclipse.qvtd.runtime.model.QVTruntimeLibrary$Loader"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated QVTruntimeLibrary -->
+      <package
+            uri="http://www.eclipse.org/qvt/2019/QVTruntimeLibrary"
+            class="org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage"
+            genModel="model/QVTruntimeLibrary.genmodel"/>
+   </extension>
+
 </plugin>

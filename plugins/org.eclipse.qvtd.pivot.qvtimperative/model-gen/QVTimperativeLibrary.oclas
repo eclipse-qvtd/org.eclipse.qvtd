@@ -2,29 +2,30 @@
 <pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" xmi:id="AAAAA" externalURI="platform:/resource/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.oclstdlib"
     name="QVTimperativeLibrary.oclstdlib" xmiidVersion="1">
-  <ownedImports importedNamespace="pivot:Model ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib.oclas#AAAAA" xmiidVersion="1"/>
-  <ownedPackages xsi:type="pivot:Library" xmi:id="1,PhY" URI="http://www.eclipse.org/qvt/2015/QVTbaseLibrary" name="qvtbaselibrary" nsPrefix="qvtbaselib">
-    <ownedClasses xmi:id="v,4ov" name="Model" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR">
-      <ownedOperations xmi:id="batcx" implementationClass="org.eclipse.qvtd.runtime.library.model.AllObjectsOperation" name="allObjects"
+  <ownedImports importedNamespace="pivot:Model ../../org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.oclstdlib.oclas#AAAAA" xmiidVersion="1"/>
+  <ownedPackages xsi:type="pivot:Library" xmi:id="MwsHK" URI="http://www.eclipse.org/qvt/2019/QVTruntimeLibrary" name="qvtruntimelibrary"
+      nsPrefix="qvtrtlib">
+    <ownedClasses xmi:id="qeoBC" name="Model" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR">
+      <ownedOperations xmi:id="qtNKG" implementationClass="org.eclipse.qvtd.runtime.library.model.AllObjectsOperation" name="allObjects"
           type="#U6ALG"/>
-      <ownedOperations xmi:id="IcWbe" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation" name="objectsOfKind"
-          type="#,TxuB">
-        <ownedParameters isRequired="false" isTypeof="true" name="type" type="#WxboD"/>
+      <ownedOperations xmi:id="Xv2Iz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation" name="objectsOfKind"
+          type="#uiPkW">
+        <ownedParameters isRequired="false" isTypeof="true" name="type" type="#d+Hh6"/>
         <ownedSignature>
-          <ownedParameters xmi:id="WxboD" name="TT"/>
+          <ownedParameters xmi:id="d+Hh6" name="TT"/>
         </ownedSignature>
       </ownedOperations>
-      <ownedOperations xmi:id="uqbce" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation" name="objectsOfType"
-          type="#l97sA">
-        <ownedParameters isRequired="false" isTypeof="true" name="type" type="#s0RUW"/>
+      <ownedOperations xmi:id="997Jz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation" name="objectsOfType"
+          type="#UMaiV">
+        <ownedParameters isRequired="false" isTypeof="true" name="type" type="#zB+MN"/>
         <ownedSignature>
-          <ownedParameters xmi:id="s0RUW" name="TT"/>
+          <ownedParameters xmi:id="zB+MN" name="TT"/>
         </ownedSignature>
       </ownedOperations>
-      <ownedOperations xmi:id="6QVJX" implementationClass="org.eclipse.qvtd.runtime.library.model.RootObjectsOperation" name="rootObjects"
+      <ownedOperations xmi:id="Jk12r" implementationClass="org.eclipse.qvtd.runtime.library.model.RootObjectsOperation" name="rootObjects"
           type="#U6ALG"/>
     </ownedClasses>
-    <ownedClasses xmi:id="PQm3L" name="Transformation" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
+    <ownedClasses xmi:id="KvVQe" name="Transformation" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
   </ownedPackages>
   <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id="LVlMV" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
@@ -32,14 +33,14 @@
         <ownedSubstitutions actual="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="2uVwQ" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="l9zll" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="#WxboD" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
+        <ownedSubstitutions actual="#d+Hh6" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="cYguP" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Ln+jk" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="#s0RUW" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
+        <ownedSubstitutions actual="#zB+MN" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:SetType" xmi:id="U6ALG" isNullFree="true" name="Set" superClasses="#8PVIF">
@@ -47,14 +48,14 @@
         <ownedSubstitutions actual="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id=",TxuB" isNullFree="true" name="Set" superClasses="#npFsA">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="uiPkW" isNullFree="true" name="Set" superClasses="#W4jhV">
       <ownedBindings>
-        <ownedSubstitutions actual="#WxboD" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
+        <ownedSubstitutions actual="#d+Hh6" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="l97sA" isNullFree="true" name="Set" superClasses="#NTQq,">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="UMaiV" isNullFree="true" name="Set" superClasses="#8hufU">
       <ownedBindings>
-        <ownedSubstitutions actual="#s0RUW" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
+        <ownedSubstitutions actual="#zB+MN" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8PVIF" name="UniqueCollection" superClasses="#LVlMV">
@@ -62,14 +63,14 @@
         <ownedSubstitutions actual="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="npFsA" name="UniqueCollection" superClasses="#2uVwQ">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="W4jhV" name="UniqueCollection" superClasses="#l9zll">
       <ownedBindings>
-        <ownedSubstitutions actual="#WxboD" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
+        <ownedSubstitutions actual="#d+Hh6" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="NTQq," name="UniqueCollection" superClasses="#cYguP">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8hufU" name="UniqueCollection" superClasses="#Ln+jk">
       <ownedBindings>
-        <ownedSubstitutions actual="#s0RUW" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
+        <ownedSubstitutions actual="#zB+MN" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
   </ownedPackages>

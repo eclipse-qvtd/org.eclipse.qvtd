@@ -80,7 +80,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractExtendingQVTbaseVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -124,6 +123,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Iterables;
@@ -439,7 +439,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private static class ExpressionCreator extends AbstractExtendingQVTbaseVisitor<@NonNull OCLExpression, @NonNull BasicPartition2Mapping>
 	{
 		protected final @NonNull QVTimperativeHelper helper;
-		protected final @NonNull QVTbaseLibraryHelper qvtbaseLibraryHelper;
+		protected final @NonNull QVTruntimeLibraryHelper qvtbaseLibraryHelper;
 		protected final @NonNull Set<@NonNull Node> multiAccessedNodes = new HashSet<>();
 		protected final @NonNull Set<@NonNull Node> conditionalNodes = new HashSet<>();
 
@@ -448,7 +448,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		public ExpressionCreator(@NonNull BasicPartition2Mapping context) {
 			super(context);
 			this.helper = context.getHelper();
-			this.qvtbaseLibraryHelper = context.getQVTbaseLibraryHelper();
+			this.qvtbaseLibraryHelper = context.getQVTruntimeLibraryHelper();
 			analyzeExpressions(multiAccessedNodes, conditionalNodes);
 		}
 
@@ -1875,8 +1875,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		return precedingNodes;
 	}
 
-	public @NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper() {
-		return scheduleManager.getQVTbaseLibraryHelper();
+	public @NonNull QVTruntimeLibraryHelper getQVTruntimeLibraryHelper() {
+		return scheduleManager.getQVTruntimeLibraryHelper();
 	}
 
 	private @NonNull VariableDeclaration getSubexpressionDeclaration(@NonNull Node node) {

@@ -9,11 +9,11 @@
     <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="T..classescs2as" name="classescs2as" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..classescs2as.leftCS" name="leftCS" usedPackage="helpers.ocl.oclas#P.classescs"
           isChecked="true">
-        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..classescs2as.leftCS.leftCS" name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..classescs2as.leftCS.leftCS" name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtruntimelibrary.Model"/>
       </modelParameter>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..classescs2as.rightAS" name="rightAS" usedPackage="../Classes.ecore.oclas#P.classes"
           isEnforced="true">
-        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..classescs2as.rightAS.rightAS" name="rightAS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..classescs2as.rightAS.rightAS" name="rightAS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtruntimelibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.createPackage" name="createPackage">
         <ownedMappingParameters xsi:type="qvti:GuardParameter" name="packageCS" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"

@@ -27,15 +27,16 @@ Workflow {
     	platformUri = "../../plugins"
 //    	scanClassPath = true
     }
+	bean = ProjectMapSetup { resourceSet = libResourceSet }
     bean = EcoreGenModelSetup { resourceSet = libResourceSet }
     component = GenerateOCLstdlibXtend { resourceSet = libResourceSet
-    	projectName = "org.eclipse.qvtd.pivot.qvtbase"
-    	modelFile = "model/QVTbaseLibrary.oclstdlib"
-    	uri = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
-    	ecoreFile = "/org.eclipse.qvtd.pivot.qvtbase/model-gen/QVTbaseLibrary.ecore"
-    	javaFolder = "/org.eclipse.qvtd.pivot.qvtbase/emf-gen"
-    	javaPackageName = "org.eclipse.qvtd.pivot.qvtbase.model"
-    	javaClassName = "QVTbaseLibrary"
+    	projectName = "org.eclipse.qvtd.runtime"
+    	modelFile = "model/QVTruntimeLibrary.oclstdlib"
+    	uri = "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary"
+    	ecoreFile = "/org.eclipse.qvtd.runtime/model-gen/QVTruntimeLibrary.ecore"
+    	javaFolder = "/org.eclipse.qvtd.runtime/emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.runtime.model"
+    	javaClassName = "QVTruntimeLibrary"
     	generatedClassNameMap = {
     		from = "http://www.eclipse.org/ocl/2015/Pivot"
     		to = "org.eclipse.ocl.pivot.model.OCLmetamodel"
@@ -49,16 +50,19 @@ Workflow {
     		to = "org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel"
     	}
     	excludedEClassifierName = "PseudoOperations"
-    	excludedEClassifierName = "Model"
-    	excludedEClassifierName = "Transformation"
+    //	excludedEClassifierName = "Extent"
+    //	excludedEClassifierName = "Model"
+    //	excludedEClassifierName = "Transformation"
     	useOCLstdlib = true
+    	isASLibrary = false
     }
 	bean = ResourceSetImpl : qvtbResourceSet {}
+	bean = ProjectMapSetup { resourceSet = qvtbResourceSet }
     component = GenerateModel { resourceSet = qvtbResourceSet skipOnErrors = true
-    	genModel = "/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.genmodel"
+    	genModel = "/org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.genmodel"
     }
     component = Model2tablesGenerator { resourceSet = qvtbResourceSet
-    	genModelFile = "/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.genmodel"
+    	genModelFile = "/org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.genmodel"
     	genOCLstdlib = true
     }
     component = GenerateOCLstdlibXtend { resourceSet = libResourceSet
@@ -82,10 +86,13 @@ Workflow {
     		to = "org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeMetamodel"
     	}
     	excludedEClassifierName = "PseudoOperations"
+    	excludedEClassifierName = "Extent"
     	excludedEClassifierName = "Model"
     	excludedEClassifierName = "Transformation"
+    	isASLibrary = false
     }
 	bean = ResourceSetImpl : qvtiResourceSet {}
+	bean = ProjectMapSetup { resourceSet = qvtiResourceSet }
     component = GenerateModel { resourceSet = qvtiResourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.genmodel"
     }

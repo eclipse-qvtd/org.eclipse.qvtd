@@ -1,6 +1,8 @@
-import qvtb : 'QVTbase.ecore#/';
+--import qvtb : 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/';
+--import ocl : 'platform:/resource/org.eclipse.ocl.pivot/model/OCL-2.5.oclstdlib';
+import ocl : 'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore#/';
 
-library qvtbaselibrary : qvtbaselib = 'http://www.eclipse.org/qvt/2015/QVTbaseLibrary'
+library qvtruntimelibrary : qvtrtlib = 'http://www.eclipse.org/qvt/2019/QVTruntimeLibrary'
 {
 	type PseudoOperations : Class {
 		/**

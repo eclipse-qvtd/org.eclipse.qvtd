@@ -420,7 +420,7 @@
               name="MessageSequenceToTransitionSequence_stm_v" type="pivot:Class SeqToStm.ecore.oclas#T.PSeqToStm.TMessageSequenceToTransitionSequence"/>
         </bottomPattern>
       </rule>
-      <ownedContext name="this" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTbaseLibrary.oclas#T.qvtbaselibrary.Transformation"/>
+      <ownedContext name="this" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTbaseLibrary.oclas#T.qvtruntimelibrary.Transformation"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">

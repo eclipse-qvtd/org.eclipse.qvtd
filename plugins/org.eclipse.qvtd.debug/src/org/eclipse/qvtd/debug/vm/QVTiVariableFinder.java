@@ -110,11 +110,11 @@ public class QVTiVariableFinder extends VariableFinder
 	@Override
 	protected String getDeclaredType(Object valueObject) {
 		if (valueObject instanceof QVTiTransformationInstance) {
-			return "qvtbaselibrary::Transformation";
+			return "qvtruntimelibrary::Transformation";
 			//				return super.getDeclaredType(((QVTiTransformationInstance)valueObject).getTransformation());
 		}
 		else if (valueObject instanceof QVTiTypedModelInstance) {
-			return "qvtbaselibrary::Model";
+			return "qvtruntimelibrary::Model";
 			/*				QVTiTypedModelInstance typedModelInstance = (QVTiTypedModelInstance)valueObject;
 				QVTiModelManager modelManager = typedModelInstance.getModelManager();
 				TypedModel typedModel = typedModelInstance.getTypedModel();

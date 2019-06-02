@@ -9,13 +9,13 @@
  *     E.D.Willink - initial API and implementation
  *******************************************************************************
  * This code is 100% auto-generated
- * from: /org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib
+ * from: /org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.oclstdlib
  * by: org.eclipse.ocl.examples.build.xtend.generateOCLstdlib.xtend
  * and: org.eclipse.ocl.examples.build.GenerateOCLstdlibModel.mwe2
  *
  * Do not edit it.
  *******************************************************************************/
-package	org.eclipse.qvtd.pivot.qvtbase.model;
+package	org.eclipse.qvtd.runtime.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,11 +53,11 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.PivotPackage;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 
 /**
- * This is the http://www.eclipse.org/qvt/2015/QVTbaseLibrary Standard Library
- * auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib.
+ * This is the http://www.eclipse.org/qvt/2019/QVTruntimeLibrary Standard Library
+ * auto-generated from /org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.oclstdlib.
  * It facilitates efficient library loading without the overheads of model reading.
  * <p>
  * This Standard Library may be registered as the definition of a Standard Library for
@@ -68,33 +68,33 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
  * as this Standard Library.
  */
 @SuppressWarnings("unused")
-public class QVTbaseLibrary extends ASResourceImpl
+public class QVTruntimeLibrary extends ASResourceImpl
 {
 	/**
 	 *	The static package-of-types pivot model of the Standard Library.
 	 */
-	private static QVTbaseLibrary INSTANCE = null;
+	private static QVTruntimeLibrary INSTANCE = null;
 
 	/**
 	 *	The URI of this Standard Library.
 	 */
-	public static final @NonNull String STDLIB_URI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary";
+	public static final @NonNull String STDLIB_URI = "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary";
 
 	/**
 	 *	The URI of the AS representation of this Standard Library.
 	 */
-	public static final @NonNull URI STDLIB_AS_URI = URI.createURI("http://www.eclipse.org/qvt/2015/QVTbaseLibrary" + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
+	public static final @NonNull URI STDLIB_AS_URI = URI.createURI("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary" + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
 
 	/**
-	 * Return the default http://www.eclipse.org/qvt/2015/QVTbaseLibrary standard Library Resource.
-	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib
+	 * Return the default http://www.eclipse.org/qvt/2019/QVTruntimeLibrary standard Library Resource.
+	 *  This static definition auto-generated from /org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.oclstdlib
 	 *  is used as the default when no overriding copy is registered.
 	 * It cannot be unloaded or rather unloading has no effect.
 	 */
-	public static @NonNull QVTbaseLibrary getDefault() {
-		QVTbaseLibrary oclstdlib = INSTANCE;
+	public static @NonNull QVTruntimeLibrary getDefault() {
+		QVTruntimeLibrary oclstdlib = INSTANCE;
 		if (oclstdlib == null) {
-			Contents contents = new Contents("http://www.eclipse.org/qvt/2015/QVTbaseLibrary");
+			Contents contents = new Contents("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary");
 			String asURI = STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
 			oclstdlib = INSTANCE = new ReadOnly(asURI, contents.getModel());
 		}
@@ -102,8 +102,8 @@ public class QVTbaseLibrary extends ASResourceImpl
 	}
 
 	/**
-	 * Return the default http://www.eclipse.org/qvt/2015/QVTbaseLibrary standard Library model.
-	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib
+	 * Return the default http://www.eclipse.org/qvt/2019/QVTruntimeLibrary standard Library model.
+	 *  This static definition auto-generated from /org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.oclstdlib
 	 *  is used as the default when no overriding copy is registered.
 	 */
 	public static @NonNull Model getDefaultModel() {
@@ -167,9 +167,9 @@ public class QVTbaseLibrary extends ASResourceImpl
 	}
 
 	/**
-	 * A ReadOnly QVTbaseLibrary overrides inherited functionality to impose immutable shared behaviour.
+	 * A ReadOnly QVTruntimeLibrary overrides inherited functionality to impose immutable shared behaviour.
 	 */
-	protected static class ReadOnly extends QVTbaseLibrary implements ImmutableResource
+	protected static class ReadOnly extends QVTruntimeLibrary implements ImmutableResource
 	{
 		protected ReadOnly(@NonNull String asURI, @NonNull Model libraryModel) {
 			super(asURI, libraryModel);
@@ -226,15 +226,15 @@ public class QVTbaseLibrary extends ASResourceImpl
 	 *	Construct a copy of the OCL Standard Library with specified resource URI,
 	 *  and package name, prefix and namespace URI.
 	 */
-	public static @NonNull QVTbaseLibrary create(@NonNull String asURI) {
+	public static @NonNull QVTruntimeLibrary create(@NonNull String asURI) {
 		Contents contents = new Contents(asURI);
-		return new QVTbaseLibrary(asURI, contents.getModel());
+		return new QVTruntimeLibrary(asURI, contents.getModel());
 	}
 
 	/**
 	 *	Construct an OCL Standard Library with specified resource URI and library content.
 	 */
-	private QVTbaseLibrary(@NonNull String asURI, @NonNull Model libraryModel) {
+	private QVTruntimeLibrary(@NonNull String asURI, @NonNull Model libraryModel) {
 		super(ClassUtil.nonNullState(URI.createURI(asURI)), OCLASResourceFactory.getInstance());
 		assert PivotUtilInternal.isASURI(asURI);
 		getContents().add(libraryModel);
@@ -243,13 +243,13 @@ public class QVTbaseLibrary extends ASResourceImpl
 	private static class Contents extends AbstractContents
 	{
 		private final @NonNull Model model;
-		private final @NonNull Library qvtbaselibrary;
+		private final @NonNull Library qvtruntimelibrary;
 		private final @NonNull Package orphanage;
 
 		private Contents(@NonNull String asURI)
 		{
 			model = createModel(asURI);
-			qvtbaselibrary = createLibrary("qvtbaselibrary", "qvtbaselib", "http://www.eclipse.org/qvt/2015/QVTbaseLibrary", null);
+			qvtruntimelibrary = createLibrary("qvtruntimelibrary", "qvtrtlib", "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null);
 			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
 			installPackages();
 			installClassTypes();
@@ -265,7 +265,6 @@ public class QVTbaseLibrary extends ASResourceImpl
 		
 		private final @NonNull Package _ocl = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
 		private final @NonNull Package _pivot = getPackage(org.eclipse.ocl.pivot.model.OCLmetamodel.getDefaultModel(), "pivot");
-		private final @NonNull Package _qvtbase = getPackage(org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel.getDefaultModel(), "qvtbase");
 		private final @NonNull CollectionType _Collection = getCollectionType(_ocl, "Collection");
 		private final @NonNull Class _CollectionItem = getClass(_pivot, "CollectionItem");
 		private final @NonNull Class _CollectionLiteralExp = getClass(_pivot, "CollectionLiteralExp");
@@ -289,15 +288,15 @@ public class QVTbaseLibrary extends ASResourceImpl
 		private final @NonNull TemplateParameter _UniqueCollection_T = getTemplateParameter(_UniqueCollection, 0);
 		
 		private void installPackages() {
-			model.getOwnedPackages().add(qvtbaselibrary);
+			model.getOwnedPackages().add(qvtruntimelibrary);
 			model.getOwnedPackages().add(orphanage);
 			model.getOwnedImports().add(createImport(null, _ocl));
-			model.getOwnedImports().add(createImport("qvtb", _qvtbase));
+			model.getOwnedImports().add(createImport("ocl", _pivot));
 		}
 		
-		private final @NonNull Class _Model = createClass("Model");
+		private final @NonNull Class _Model = createClass(QVTruntimeLibraryPackage.Literals.MODEL);
 		private final @NonNull Class _PseudoOperations = createClass("PseudoOperations");
-		private final @NonNull Class _Transformation = createClass("Transformation");
+		private final @NonNull Class _Transformation = createClass(QVTruntimeLibraryPackage.Literals.TRANSFORMATION);
 		
 		private final @NonNull TemplateParameter tp_PseudoOperations_collection_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_error_T = createTemplateParameter("T");
@@ -332,7 +331,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 			List<Class> superClasses;
 			Class type;
 		
-			ownedClasses = qvtbaselibrary.getOwnedClasses();
+			ownedClasses = qvtruntimelibrary.getOwnedClasses();
 			ownedClasses.add(type = _Model);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);

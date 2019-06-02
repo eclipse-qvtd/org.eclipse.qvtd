@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -28,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Sets;
@@ -45,7 +45,7 @@ public class UtilityAnalysis
 
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull Region region;
-	protected final @NonNull QVTbaseLibraryHelper qvtbaseLibraryHelper;
+	protected final @NonNull QVTruntimeLibraryHelper qvtbaseLibraryHelper;
 
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> stronglyMatchedNodes = null;
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> unconditionalNodes = null;
@@ -56,7 +56,7 @@ public class UtilityAnalysis
 	protected UtilityAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Region region) {
 		this.scheduleManager = scheduleManager;
 		this.region = region;
-		this.qvtbaseLibraryHelper = scheduleManager.getQVTbaseLibraryHelper();
+		this.qvtbaseLibraryHelper = scheduleManager.getQVTruntimeLibraryHelper();
 	}
 
 	protected void assignUtilities() {		// FIXME remove assertions after 1-Jan-2017

@@ -68,7 +68,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
@@ -83,7 +82,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
@@ -91,14 +89,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.AbstractToGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphPartitionVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Iterables;
@@ -187,7 +187,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull DatumCaches datumCaches;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
-	protected final @NonNull QVTbaseLibraryHelper qvtbaseLibraryHelper;
+	protected final @NonNull QVTruntimeLibraryHelper qvtruntimeLibraryHelper;
 
 	private @Nullable ClassDatum booleanClassDatum;
 	private @Nullable ClassDatum oclVoidClassDatum;
@@ -238,7 +238,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		this.schedulerOptions = schedulerOptions;
 		this.domainUsageAnalysis = createDomainUsageAnalysis();
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
-		this.qvtbaseLibraryHelper = new QVTbaseLibraryHelper();
+		this.qvtruntimeLibraryHelper = new QVTruntimeLibraryHelper();
 		this.datumCaches = createDatumCaches();
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			this.doDotGraphs = true;
@@ -874,8 +874,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper() {
-		return qvtbaseLibraryHelper;
+	public @NonNull QVTruntimeLibraryHelper getQVTruntimeLibraryHelper() {
+		return qvtruntimeLibraryHelper;
 	}
 
 	protected @Nullable QVTuConfiguration getQVTuConfiguration() {

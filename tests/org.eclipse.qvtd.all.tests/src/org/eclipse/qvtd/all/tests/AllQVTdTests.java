@@ -17,7 +17,7 @@ import org.eclipse.qvtd.doc.bigmde2016.tests.AllbigMDE2016Tests;
 import org.eclipse.qvtd.doc.exe2016.tests.Allexe2016Tests;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tests.MiniOCLCSParsingTest;
 import org.eclipse.qvtd.umlx.tests.AllUMLXTests;
-import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests;
+import org.eclipse.qvtd.xtext.qvtbase.tests.QVTruntimeLibraryTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AllQVTcoreTests;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.AllQVTimperativeTests;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.AllQVTrelationTests;
@@ -42,7 +42,7 @@ public class AllQVTdTests extends TestCase
 		result.addTest(AllQVTcoreTests.suite());
 		result.addTest(AllQVTimperativeTests.suite());
 		result.addTest(AllQVTrelationTests.suite());
-		result.addTestSuite(QVTbaseLibraryTests.class);
+		result.addTestSuite(QVTruntimeLibraryTests.class);
 		result.addTestSuite(GrammarTests.class);
 		result.addTestSuite(TextModelTests.class);
 		result.addTestSuite(XMLmodelTests.class);

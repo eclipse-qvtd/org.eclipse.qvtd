@@ -17,7 +17,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
+import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
 public class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
 {
@@ -33,7 +33,7 @@ public class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
 			@Nullable ResourceSet externalResourceSet, @Nullable CreateStrategy createStrategy) {
 		super(projectManager, externalResourceSet);
 		this.createStrategy = createStrategy;
-		getStandardLibrary().setDefaultStandardLibraryURI(QVTbaseLibrary.STDLIB_URI);
+		getStandardLibrary().setDefaultStandardLibraryURI(QVTruntimeLibrary.STDLIB_URI);
 	}
 
 	@Override

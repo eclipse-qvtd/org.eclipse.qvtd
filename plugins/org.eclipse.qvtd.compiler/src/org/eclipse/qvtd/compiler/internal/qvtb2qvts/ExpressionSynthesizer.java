@@ -68,14 +68,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractExtendingQVTbaseVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
-import org.eclipse.qvtd.pivot.qvtschedule.TupleLiteralNode;
-import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
@@ -89,8 +84,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
+import org.eclipse.qvtd.pivot.qvtschedule.TupleLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
 
 public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisitor<@Nullable Node, @NonNull RuleAnalysis>
 {
@@ -104,7 +104,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull QVTbaseHelper helper;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
-	protected final @NonNull QVTbaseLibraryHelper qvtbaseLibraryHelper;
+	protected final @NonNull QVTruntimeLibraryHelper qvtbaseLibraryHelper;
 	private /*@LazyNonNull*/ ExpressionSynthesizer conditionalExpressionSynthesizer = null;
 	private /*@LazyNonNull*/ ExpressionSynthesizer requiredExpressionSynthesizer = null;
 	//	private /*@LazyNonNull*/ OperationDependencyAnalysis operationDependencyAnalysis;
@@ -121,7 +121,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		this.environmentFactory = scheduleManager.getEnvironmentFactory();
 		this.helper = new QVTbaseHelper(environmentFactory);
 		this.standardLibraryHelper = scheduleManager.getStandardLibraryHelper();
-		this.qvtbaseLibraryHelper = scheduleManager.getQVTbaseLibraryHelper();
+		this.qvtbaseLibraryHelper = scheduleManager.getQVTruntimeLibraryHelper();
 		//		this.operationDependencyAnalysis = getOperationDependencyAnalysis();
 	}
 
