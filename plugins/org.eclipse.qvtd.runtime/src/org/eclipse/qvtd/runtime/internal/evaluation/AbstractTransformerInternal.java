@@ -58,6 +58,10 @@ import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent;
+import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryFactory;
+
+import com.google.common.collect.Iterables;
 
 /**
  * The abstract implementation of an auto-generated transformation provides the shared infrastructure for maintaining
@@ -330,6 +334,13 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 						}
 					}
 				}
+			}
+			ClassId extentClassId = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, null).getClassId("Extent", 0);
+			Integer extentClassIndex = transformer.classId2classIndex.get(extentClassId);
+			if (extentClassIndex != null) {
+				Extent extent = QVTruntimeLibraryFactory.eINSTANCE.createExtent();
+				Iterables.addAll(extent.getElements(), eRootObjects);
+				accumulateEObject1(extent, extent.eClass());
 			}
 		}
 
@@ -787,11 +798,24 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	 */
 	@Override
 	public @NonNull Collection<@NonNull EObject> getRootEObjects(@NonNull String modelName) {
+		boolean hasExtent = false;
 		Model model = getTypedModelInstance(modelName);
 		List<@NonNull EObject> rootEObjects = new ArrayList<>();
 		for (@NonNull Object rootObject : model.getRootObjects()) {
-			if (rootObject instanceof EObject) {
-				rootEObjects.add((EObject)rootObject);
+			if (rootObject instanceof Extent) {
+				hasExtent = true;
+				for (Object object : ((Extent)rootObject).getElements()) {
+					if (object != null) {
+						rootEObjects.add((EObject)object);
+					}
+				}
+			}
+		}
+		if (!hasExtent) {
+			for (@NonNull Object rootObject : model.getRootObjects()) {
+				if (rootObject instanceof EObject) {
+					rootEObjects.add((EObject)rootObject);
+				}
 			}
 		}
 		return rootEObjects;
