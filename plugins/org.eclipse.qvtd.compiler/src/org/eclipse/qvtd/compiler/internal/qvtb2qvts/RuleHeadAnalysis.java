@@ -37,20 +37,6 @@ public class RuleHeadAnalysis extends HeadAnalysis
 	public static final @NonNull TracingOption RULE_HEAD_NODE_GROUPS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/headNodeGroups");
 
 	/**
-	 * Return the minimal head(s) of a partitioned MappingRegion from which all old nodes in the region may be reached by to-one navigation.
-	 *
-	 * The head/not-head nodes are installed by invoking Node.setHead(true/false) as appropriate.
-	 *
-	 * FIXME is this an unduely complicated way of computing the traceNode ??
-	 */
-	public static @NonNull Iterable<@NonNull Node> computeRealizedHeadNodes(@NonNull MappingRegion mappingRegion, @NonNull List<@NonNull Node> realizedMiddleNodes) {
-		RuleHeadAnalysis mappingRegionAnalysis = new RuleHeadAnalysis(mappingRegion);
-		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure = mappingRegionAnalysis.computeNewTargetFromSources(realizedMiddleNodes);
-		Iterable<@NonNull Node> headNodes = mappingRegionAnalysis.computeHeadNodes(targetFromSourceClosure, null);
-		return headNodes;
-	}
-
-	/**
 	 * Return the minimal head(s) of a MappingRegion from which all old nodes in the region may be reached by to-one navigation.
 	 *
 	 * This uni-directional analysis is performed after the trace nodes are synthesized and so can exploit to-one traces to
