@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -27,6 +27,15 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class Transformation extends EObjectImpl implements EObject {
 	/**
+	 * The number of structural features of the '<em>Transformation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRANSFORMATION_FEATURE_COUNT = 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -44,5 +53,6 @@ public class Transformation extends EObjectImpl implements EObject {
 	protected EClass eStaticClass() {
 		return QVTruntimeLibraryPackage.Literals.TRANSFORMATION;
 	}
+
 
 } // Transformation

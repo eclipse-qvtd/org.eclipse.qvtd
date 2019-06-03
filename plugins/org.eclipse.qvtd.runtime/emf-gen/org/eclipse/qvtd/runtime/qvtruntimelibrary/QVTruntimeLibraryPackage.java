@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -12,8 +12,10 @@ package org.eclipse.qvtd.runtime.qvtruntimelibrary;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,42 +66,11 @@ public class QVTruntimeLibraryPackage extends EPackageImpl {
 	public static final QVTruntimeLibraryPackage eINSTANCE = org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.runtime.qvtruntimelibrary.Model <em>Model</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.Model
-	 * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage#getModel()
-	 * @generated
-	 */
-	public static final int MODEL = 0;
-
-	/**
-	 * The number of structural features of the '<em>Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @ordered
 	 */
-	public static final int MODEL_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.runtime.qvtruntimelibrary.Transformation <em>Transformation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.Transformation
-	 * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage#getTransformation()
-	 * @generated
-	 */
-	public static final int TRANSFORMATION = 1;
-
-	/**
-	 * The number of structural features of the '<em>Transformation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	public static final int TRANSFORMATION_FEATURE_COUNT = 0;
+	private EClass extentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -162,6 +133,9 @@ public class QVTruntimeLibraryPackage extends EPackageImpl {
 
 		isInited = true;
 
+		// Initialize simple dependencies
+		OCLstdlibPackage.eINSTANCE.eClass();
+
 		// Create package meta-data objects
 		theQVTruntimeLibraryPackage.createPackageContents();
 
@@ -176,6 +150,31 @@ public class QVTruntimeLibraryPackage extends EPackageImpl {
 		return theQVTruntimeLibraryPackage;
 	}
 
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent <em>Extent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Extent</em>'.
+	 * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent
+	 * @generated
+	 */
+	public EClass getExtent() {
+		return extentEClass;
+	}
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent#getElements <em>Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Elements</em>'.
+	 * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent#getElements()
+	 * @see #getExtent()
+	 * @generated
+	 */
+	public EReference getExtent_Elements() {
+		return (EReference)extentEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.runtime.qvtruntimelibrary.Model <em>Model</em>}'.
@@ -231,9 +230,12 @@ public class QVTruntimeLibraryPackage extends EPackageImpl {
 		isCreated = true;
 
 		// Create classes and their features
-		modelEClass = createEClass(MODEL);
+		extentEClass = createEClass(0);
+		createEReference(extentEClass, 0);
 
-		transformationEClass = createEClass(TRANSFORMATION);
+		modelEClass = createEClass(1);
+
+		transformationEClass = createEClass(2);
 	}
 
 	/**
@@ -259,6 +261,9 @@ public class QVTruntimeLibraryPackage extends EPackageImpl {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		OCLstdlibPackage theOCLstdlibPackage = (OCLstdlibPackage)EPackage.Registry.INSTANCE.getEPackage(OCLstdlibPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
@@ -266,12 +271,35 @@ public class QVTruntimeLibraryPackage extends EPackageImpl {
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(extentEClass, Extent.class, "Extent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getExtent_Elements(), theOCLstdlibPackage.getOclElement(), null, "elements", null, 0, -1, Extent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(transformationEClass, Transformation.class, "Transformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEmofAnnotations() {
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"; //$NON-NLS-1$
+		addAnnotation
+		(getExtent_Elements(),
+			source,
+			new String[] {
+				"body", "extent" //$NON-NLS-1$ //$NON-NLS-2$
+		});
 	}
 
 	/**
@@ -287,6 +315,24 @@ public class QVTruntimeLibraryPackage extends EPackageImpl {
 	 * @generated
 	 */
 	public interface Literals {
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent <em>Extent</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent
+		 * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage#getExtent()
+		 * @generated
+		 */
+		public static final EClass EXTENT = eINSTANCE.getExtent();
+
+		/**
+		 * The meta object literal for the '<em><b>Elements</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference EXTENT__ELEMENTS = eINSTANCE.getExtent_Elements();
+
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.runtime.qvtruntimelibrary.Model <em>Model</em>}' class.
 		 * <!-- begin-user-doc -->

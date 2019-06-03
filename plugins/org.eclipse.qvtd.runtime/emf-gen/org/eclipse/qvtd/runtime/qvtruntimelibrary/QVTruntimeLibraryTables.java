@@ -21,6 +21,7 @@ package org.eclipse.qvtd.runtime.qvtruntimelibrary;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
+import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
@@ -79,10 +80,12 @@ public class QVTruntimeLibraryTables
 			TypeParameters.init();
 		}
 
+		public static final @NonNull EcoreExecutorType _Extent = new EcoreExecutorType(QVTruntimeLibraryPackage.Literals.EXTENT, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Model = new EcoreExecutorType(QVTruntimeLibraryPackage.Literals.MODEL, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Transformation = new EcoreExecutorType(QVTruntimeLibraryPackage.Literals.TRANSFORMATION, PACKAGE, 0);
 
 		private static final @NonNull EcoreExecutorType @NonNull [] types = {
+			_Extent,
 			_Model,
 			_Transformation
 		};
@@ -109,6 +112,10 @@ public class QVTruntimeLibraryTables
 			Init.initStart();
 			Types.init();
 		}
+
+		private static final @NonNull ExecutorFragment _Extent__Extent = new ExecutorFragment(Types._Extent, QVTruntimeLibraryTables.Types._Extent);
+		private static final @NonNull ExecutorFragment _Extent__OclAny = new ExecutorFragment(Types._Extent, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _Extent__OclElement = new ExecutorFragment(Types._Extent, OCLstdlibTables.Types._OclElement);
 
 		private static final @NonNull ExecutorFragment _Model__Model = new ExecutorFragment(Types._Model, QVTruntimeLibraryTables.Types._Model);
 		private static final @NonNull ExecutorFragment _Model__OclAny = new ExecutorFragment(Types._Model, OCLstdlibTables.Types._OclAny);
@@ -188,6 +195,7 @@ public class QVTruntimeLibraryTables
 			Operations.init();
 		}
 
+		public static final @NonNull ExecutorProperty _Extent__elements = new EcoreExecutorProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, Types._Extent, 0);
 		static {
 			Init.initEnd();
 		}
@@ -206,6 +214,14 @@ public class QVTruntimeLibraryTables
 			Init.initStart();
 			Properties.init();
 		}
+
+		private static final @NonNull ExecutorFragment @NonNull [] _Extent =
+			{
+				Fragments._Extent__OclAny /* 0 */,
+				Fragments._Extent__OclElement /* 1 */,
+				Fragments._Extent__Extent /* 2 */
+			};
+		private static final int @NonNull [] __Extent = { 1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Model =
 			{
@@ -227,6 +243,7 @@ public class QVTruntimeLibraryTables
 		 *	Install the fragment descriptors in the class descriptors.
 		 */
 		static {
+			Types._Extent.initFragments(_Extent, __Extent);
 			Types._Model.initFragments(_Model, __Model);
 			Types._Transformation.initFragments(_Transformation, __Transformation);
 
@@ -247,6 +264,34 @@ public class QVTruntimeLibraryTables
 			Init.initStart();
 			TypeFragments.init();
 		}
+
+		private static final @NonNull ExecutorOperation @NonNull [] _Extent__Extent = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _Extent__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _Extent__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Model__Model = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Model__OclAny = {
@@ -308,6 +353,10 @@ public class QVTruntimeLibraryTables
 		 *	Install the operation descriptors in the fragment descriptors.
 		 */
 		static {
+			Fragments._Extent__Extent.initOperations(_Extent__Extent);
+			Fragments._Extent__OclAny.initOperations(_Extent__OclAny);
+			Fragments._Extent__OclElement.initOperations(_Extent__OclElement);
+
 			Fragments._Model__Model.initOperations(_Model__Model);
 			Fragments._Model__OclAny.initOperations(_Model__OclAny);
 			Fragments._Model__OclElement.initOperations(_Model__OclElement);
@@ -334,6 +383,10 @@ public class QVTruntimeLibraryTables
 			FragmentOperations.init();
 		}
 
+		private static final @NonNull ExecutorProperty @NonNull [] _Extent = {
+			QVTruntimeLibraryTables.Properties._Extent__elements
+		};
+
 		private static final @NonNull ExecutorProperty @NonNull [] _Model = {};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Transformation = {};
@@ -342,6 +395,7 @@ public class QVTruntimeLibraryTables
 		 *	Install the property descriptors in the fragment descriptors.
 		 */
 		static {
+			Fragments._Extent__Extent.initProperties(_Extent);
 			Fragments._Model__Model.initProperties(_Model);
 			Fragments._Transformation__Transformation.initProperties(_Transformation);
 

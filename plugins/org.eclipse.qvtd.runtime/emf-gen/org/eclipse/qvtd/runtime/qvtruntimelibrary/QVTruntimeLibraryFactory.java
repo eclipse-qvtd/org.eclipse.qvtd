@@ -72,11 +72,22 @@ public class QVTruntimeLibraryFactory extends EFactoryImpl {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTruntimeLibraryPackage.MODEL: return createModel();
-			case QVTruntimeLibraryPackage.TRANSFORMATION: return createTransformation();
+			case 0: return createExtent();
+			case 1: return createModel();
+			case 2: return createTransformation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Extent createExtent() {
+		Extent extent = new Extent();
+		return extent;
 	}
 
 	/**

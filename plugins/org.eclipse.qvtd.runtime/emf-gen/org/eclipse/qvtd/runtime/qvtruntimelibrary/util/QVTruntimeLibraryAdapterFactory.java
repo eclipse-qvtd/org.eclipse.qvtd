@@ -17,6 +17,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.*;
 
 /**
@@ -73,8 +74,12 @@ public class QVTruntimeLibraryAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTruntimeLibrarySwitch<Adapter> modelSwitch =
-		new QVTruntimeLibrarySwitch<Adapter>() {
+	protected QVTruntimeLibrarySwitch<@Nullable Adapter> modelSwitch =
+		new QVTruntimeLibrarySwitch<@Nullable Adapter>() {
+			@Override
+			public Adapter caseExtent(Extent object) {
+				return createExtentAdapter();
+			}
 			@Override
 			public Adapter caseModel(Model object) {
 				return createModelAdapter();
@@ -102,6 +107,20 @@ public class QVTruntimeLibraryAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent <em>Extent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent
+	 * @generated
+	 */
+	public Adapter createExtentAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.runtime.qvtruntimelibrary.Model <em>Model</em>}'.

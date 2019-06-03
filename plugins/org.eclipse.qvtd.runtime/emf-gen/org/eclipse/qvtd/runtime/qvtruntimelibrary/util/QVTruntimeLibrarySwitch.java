@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.*;
 
 /**
@@ -30,7 +31,7 @@ import org.eclipse.qvtd.runtime.qvtruntimelibrary.*;
  * @see org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage
  * @generated
  */
-public class QVTruntimeLibrarySwitch<T> extends Switch<T> {
+public class QVTruntimeLibrarySwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -74,13 +75,19 @@ public class QVTruntimeLibrarySwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case QVTruntimeLibraryPackage.MODEL: {
+			case 0: {
+				Extent extent = (Extent)theEObject;
+				T result = caseExtent(extent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 1: {
 				Model model = (Model)theEObject;
 				T result = caseModel(model);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTruntimeLibraryPackage.TRANSFORMATION: {
+			case 2: {
 				Transformation transformation = (Transformation)theEObject;
 				T result = caseTransformation(transformation);
 				if (result == null) result = defaultCase(theEObject);
@@ -88,6 +95,21 @@ public class QVTruntimeLibrarySwitch<T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extent</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extent</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtent(Extent object) {
+		return null;
 	}
 
 	/**
