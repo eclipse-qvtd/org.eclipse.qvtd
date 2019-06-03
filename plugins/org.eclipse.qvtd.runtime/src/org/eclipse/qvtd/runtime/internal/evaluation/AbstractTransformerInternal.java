@@ -134,7 +134,9 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			public void remove(@NonNull EObject eObject) {
 				rootObjects.remove(eObject);
 				potentialOrphanObjects.remove(eObject);
-				unaccumulateEObject(eClass2allClassIndexes, null, null, eObject);
+				if (classIndex2connection != null) {
+					unaccumulateEObject(eClass2allClassIndexes, null, null, eObject);
+				}
 			}
 
 			/**
@@ -242,7 +244,8 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		 * the state of a new EClass.
 		 */
 		private void accumulateEObject1(@NonNull Object eObject, @NonNull EClass eClass) {
-			assert classIndex2connection != null;
+			assert classIndex2classId != null;
+			assert eClass2allClassIndexes != null;
 			Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
 			if (allClassIndexes == null) {
 				allClassIndexes = getClassIndexes(eClass);
@@ -311,8 +314,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 				assert !potentialOrphanObjects.contains(eObject);
 				potentialOrphanObjects.add(eObject);
 			}
-			EClass eClass = transformer.eClass(eObject);
-			accumulateEObject1(eObject, eClass);
+			if (classIndex2classId != null) {
+				EClass eClass = transformer.eClass(eObject);
+				accumulateEObject1(eObject, eClass);
+			}
 		}
 
 		/**
@@ -330,21 +335,23 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 				//	Accumulate the root object in the model extent
 				//
 				rootObjects.add(eRootObject);
-				//
-				//	Accumulate the root object and all its child objects in the allInstances() returns
-				//
-				EClass eRootClass = transformer.eClass(eRootObject);
-				accumulateEObject1(eRootObject, eRootClass);
-				if (eClass2allPropertyIndexes != null) {
-					accumulateEObject2(eRootObject, eRootClass, eClass2allPropertyIndexes, eReference2propertyIndex);
-				}
-				for (TreeIterator<? extends Object> tit = transformer.eAllContents(eRootObject); tit.hasNext(); ) {
-					Object eObject = tit.next();
-					if (eObject != null) {
-						EClass eClass = transformer.eClass(eObject);
-						accumulateEObject1(eObject, eClass);
-						if (eClass2allPropertyIndexes != null) {
-							accumulateEObject2(eObject, eClass, eClass2allPropertyIndexes, eReference2propertyIndex);
+				if (classIndex2classId != null) {
+					//
+					//	Accumulate the root object and all its child objects in the allInstances() returns
+					//
+					EClass eRootClass = transformer.eClass(eRootObject);
+					accumulateEObject1(eRootObject, eRootClass);
+					if (eClass2allPropertyIndexes != null) {
+						accumulateEObject2(eRootObject, eRootClass, eClass2allPropertyIndexes, eReference2propertyIndex);
+					}
+					for (TreeIterator<? extends Object> tit = transformer.eAllContents(eRootObject); tit.hasNext(); ) {
+						Object eObject = tit.next();
+						if (eObject != null) {
+							EClass eClass = transformer.eClass(eObject);
+							accumulateEObject1(eObject, eClass);
+							if (eClass2allPropertyIndexes != null) {
+								accumulateEObject2(eObject, eClass, eClass2allPropertyIndexes, eReference2propertyIndex);
+							}
 						}
 					}
 				}
@@ -513,13 +520,14 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			//	Prepare the allInstances() fields
 			//
 			@NonNull ClassId[] classIndex2classId2 = classIndex2classId;
-			assert classIndex2classId2 != null;
-			@NonNull Connection [] classIndex2connection = this.classIndex2connection = new @NonNull Connection[classIndex2classId2.length];
-			int classIndex = 0;
-			for (@NonNull ClassId classId : classIndex2classId2) {
-				String connectionName = name + "!" + classId.getName();
-				classIndex2connection[classIndex] = rootInterval.createConnection(connectionName, classId, false, transformer.getModeFactory());
-				classIndex++;
+			if (classIndex2classId2 != null) {
+				@NonNull Connection [] classIndex2connection = this.classIndex2connection = new @NonNull Connection[classIndex2classId2.length];
+				int classIndex = 0;
+				for (@NonNull ClassId classId : classIndex2classId2) {
+					String connectionName = name + "!" + classId.getName();
+					classIndex2connection[classIndex] = rootInterval.createConnection(connectionName, classId, false, transformer.getModeFactory());
+					classIndex++;
+				}
 			}
 		}
 
