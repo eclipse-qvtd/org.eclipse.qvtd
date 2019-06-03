@@ -196,6 +196,7 @@ public class CompilerUtil extends QVTscheduleUtil
 	public static @NonNull JavaClasspath createDefaultQVTiClasspath() {
 		JavaClasspath classpath = JavaFileUtil.createDefaultOCLClasspath();
 		classpath.addClass(org.eclipse.qvtd.runtime.evaluation.Invocation.class);
+		classpath.addClass(org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent.class);
 		return classpath;
 	}
 
