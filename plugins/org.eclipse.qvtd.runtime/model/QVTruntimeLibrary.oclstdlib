@@ -65,6 +65,9 @@ library qvtruntimelibrary : qvtrtlib = 'http://www.eclipse.org/qvt/2019/QVTrunti
 		 */
 		static operation _'type'(V)(_'type' : V[?]) : ocl::TypeExp[1];
 	}
+	type Extent : Class {
+		property elements : ocl::OrderedSet(ocl::OclElement) opposite extent : Extent[?];
+	}
 	type Model : TypedModel {}
 	type Transformation : Transformation {}
 }
