@@ -83,7 +83,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 /**
  * A RelationAnalysis provides the analysis a QVTc mapping.
@@ -563,14 +562,33 @@ public class RelationAnalysis extends RuleAnalysis
 		//		analyzeComplexPredicates();
 		//		analyzeContainments();
 		//
-		List<@NonNull Node> preferredHeadNodes = Lists.newArrayList(QVTscheduleUtil.getHeadNodes(region));  // FIXME Use domain roots as preferred heads
-		if (preferredHeadNodes.isEmpty()) {
-			for (@NonNull Variable rootVariable : QVTrelationUtil.getRootVariables(getRule())) {
-				Node rootNode = region.getNode(rootVariable);
-				if (rootNode != null) {
-					preferredHeadNodes.add(rootNode);
+		Relation relation = getRule();
+		boolean hasOverrides = QVTrelationUtil.hasOverrides(relation);
+		Relation baseRelation = QVTrelationUtil.getBaseRelation(relation);
+		boolean isTop = relation.isIsTopLevel();
+		Iterable<@NonNull Node> tracedHeadNodes = QVTscheduleUtil.getHeadNodes(region);
+		List<@NonNull Node> preferredHeadNodes = new ArrayList<>();
+		if (!Iterables.isEmpty(tracedHeadNodes) && (!isTop || (hasOverrides && (baseRelation != relation)))) {
+			// Prefer the trace node that has been specified as the head for a dispatched/invoked relation.
+			for (@NonNull Node headNode : tracedHeadNodes) {
+				if (!scheduleManager.isOutput(headNode)) {
+					//	if (!headNode.isNew()) {
+					preferredHeadNodes.add(headNode);
 				}
-			};
+			}
+		}
+		else {
+			// Prefer the root nodes of input domains as head nodes.
+			for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+				if (scheduleManager.isInput(relationDomain)) {
+					for (@NonNull Variable rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
+						Node rootNode = region.getNode(rootVariable);
+						if (rootNode != null) {
+							preferredHeadNodes.add(rootNode);
+						}
+					}
+				}
+			}
 		}
 		Iterable<@NonNull Node> headNodes;
 		if (getBaseRelationAnalysis() != this) {
