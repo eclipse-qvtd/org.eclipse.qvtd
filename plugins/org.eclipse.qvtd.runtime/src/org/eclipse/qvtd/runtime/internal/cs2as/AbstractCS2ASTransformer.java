@@ -33,6 +33,10 @@ implements CS2ASTransformer
 		super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
 	}
 
+	protected AbstractCS2ASTransformer(@NonNull TransformationExecutor executor, int models) {
+		super(executor, models);
+	}
+
 	protected @NonNull RuntimeException throwNull(@NonNull EObject csObject, @NonNull String message) {
 		throw new CS2ASException(csObject, message);
 	}

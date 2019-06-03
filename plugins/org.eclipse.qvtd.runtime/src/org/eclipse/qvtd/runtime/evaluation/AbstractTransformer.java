@@ -29,7 +29,11 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 	{
 		protected Incremental(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
 				@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-			super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
+			super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+		}
+
+		protected Incremental(@NonNull TransformationExecutor executor, int models) {
+			super(executor, models);
 		}
 	}
 
@@ -56,5 +60,9 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 	protected AbstractTransformer(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
+	}
+
+	protected AbstractTransformer(@NonNull TransformationExecutor executor, int models) {
+		super(executor, models);
 	}
 }

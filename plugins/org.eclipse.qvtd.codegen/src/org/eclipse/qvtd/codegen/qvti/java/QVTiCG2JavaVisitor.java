@@ -501,41 +501,39 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
 		String evaluatorName = JavaConstants.EXECUTOR_NAME;
 		String className = cgTransformation.getName();
+		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
 		//
 		js.append("public " + className + "(final ");
 		js.appendClassReference(true, TransformationExecutor.class);
 		js.append(" " + evaluatorName + ") {\n");
 		js.pushIndentation(null);
-		js.append("super(" + evaluatorName + ", new ");
-		js.appendIsRequired(true);
-		js.append(" String[] {");
-		boolean isFirst = true;
-		for (@NonNull CGTypedModel cgTypedModel : QVTiCGUtil.getOwnedTypedModels(cgTransformation)) {
-			if (!isFirst) {
-				js.append(", ");
-			}
+		js.append("super(" + evaluatorName + ", ");
+		js.appendIntegerString(Iterables.size(cgTypedModels));
+		js.append(");\n");
+		if (oppositeName != null) {
+			js.append("initOpposites(");
+			js.append(oppositeName);
+			js.append(");\n");
+		}
+		int modelNumber = 0;
+		for (@NonNull CGTypedModel cgTypedModel : cgTypedModels) {
+			js.append("initModel(");
+			js.appendIntegerString(modelNumber);
+			js.append(", ");
 			String name = cgTypedModel.getName();
 			js.appendString(name != null ? name : "");
-			isFirst = false;
+			js.append(")");
+			if (allInstancesNames != null) {
+				js.append(".initClassIds(");
+				js.append(allInstancesNames[0]);
+				js.append(", ");
+				js.append(allInstancesNames[1]);
+				js.append(")");
+			}
+			js.append(";\n");
+			modelNumber++;
 		}
-		js.append("}");
-		if (oppositeName != null) {
-			js.append(", ");
-			js.append(oppositeName);
-		}
-		else {
-			js.append(", null");
-		}
-		if (allInstancesNames != null) {
-			js.append(", ");
-			js.append(allInstancesNames[0]);
-			js.append(", ");
-			js.append(allInstancesNames[1]);
-		}
-		else {
-			js.append(", null, null");
-		}
-		js.append(");\n");
+		js.append("initConnections();\n");
 		//		doMappingConstructorInitializers(cgTransformation);
 		//		doFunctionConstructorInitializers(cgTransformation);
 		js.popIndentation();
