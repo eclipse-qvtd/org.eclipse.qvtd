@@ -21,16 +21,94 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
  */
 	transformation Ecore2Pivot(ecore:{extentMM,ecoreMM}, as:{extentMM,pivotMM})
 	{
-		top relation mapEPackage {
-			/*enforce*/ domain ecore ePackage : ecoreMM::EPackage {
-				eSuperPackage = null,
-				extent = eExtent : extentMM::qvtruntimelibrary::Extent{}
+		/**
+		 *  ecore::EAttribute <=> pivot::Property
+		 */
+		top relation mapEAttribute {
+			eClass : ecoreMM::EClass;
+			asClass : pivotMM::Class;
+			name : String;
+			/*enforce*/ domain ecore eAttribute : EAttribute {
+				eContainingClass = eClass,
+				name = name
 			};
-			enforce domain as asPackage : pivotMM::Package {
-				Model = asModel : pivotMM::Model{}
+			enforce domain as asProperty : Property {
+				owningClass = asClass,
+				name = name
+			};
+			when {
+				mapEClass(eClass, asClass);
+			}
+		}
+		
+		/**
+		 *  ecore::EClass <=> pivot::Class
+		 */
+		top relation mapEClass {
+			ePackage : ecoreMM::EPackage;
+			asPackage : pivotMM::Package;
+			name : String;
+			isAbstract : Boolean;
+			isInterface : Boolean;
+			/*enforce*/ domain ecore eClass : EClass {
+				ePackage = ePackage,
+				name = name,
+				abstract = isAbstract,
+				interface = isInterface
+			};
+			enforce domain as asClass : Class {
+				owningPackage = asPackage,
+				name = name,
+				isAbstract = isAbstract,
+				isInterface = isInterface
+			};
+			when {
+				mapEPackage(ePackage, asPackage);
+			}
+		}
+		
+		/**
+		 *  ecore::EPackage <=> pivot::Package
+		 */
+		top relation mapEPackage {
+			name : String;
+			nsPrefix : String;
+			nsURI : String;
+			/*enforce*/ domain ecore ePackage : EPackage {
+				eSuperPackage = null,
+				extent = eExtent : extentMM::qvtruntimelibrary::Extent{},
+				name = name,
+				nsPrefix = nsPrefix,
+				nsURI = nsURI
+			};
+			enforce domain as asPackage : Package {
+				Model = asModel : pivotMM::Model{},
+				name = name,
+				nsPrefix = nsPrefix,
+				URI = nsURI
 			};
 			when {
 				mapEResource(eExtent, asModel);
+			}
+		}
+
+		/**
+		 *  ecore::EReference <=> pivot::Property
+		 */
+		top relation mapEReference {
+			eClass : ecoreMM::EClass;
+			asClass : pivotMM::Class;
+			name : String;
+			/*enforce*/ domain ecore eReference : EReference {
+				eContainingClass = eClass,
+				name = name
+			};
+			enforce domain as asProperty : Property {
+				owningClass = asClass,
+				name = name
+			};
+			when {
+				mapEClass(eClass, asClass);
 			}
 		}
 		

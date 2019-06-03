@@ -2,5 +2,23 @@
 <pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" xmi:id="AAAAA" externalURI="platform:/resource/_QVTd_QVTrCompilerTests__testQVTrCompiler_Ecore2Pivot/Families.ecore.oclas"
     name="Families.ecore.oclas" xmiidVersion="1">
-  <ownedPackages xmi:id="6Fh3I"/>
+  <ownedPackages xmi:id="ci1p7" URI="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Families2Persons/1.0/Families" name="Families"
+      nsPrefix="families">
+    <ownedClasses xmi:id="0bOMH" isAbstract="true" name="Entity"/>
+    <ownedClasses xmi:id="AeUhP" isAbstract="true" isInterface="true" name="Entity2"/>
+    <ownedClasses xmi:id="151KI" name="Family">
+      <ownedProperties xmi:id="kuX1r" name="daughters"/>
+      <ownedProperties xmi:id="Va5d1" name="father"/>
+      <ownedProperties xmi:id="6dF3q" name="lastName"/>
+      <ownedProperties xmi:id="8vsLC" name="mother"/>
+      <ownedProperties xmi:id="aZgEC" name="sons"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="r2YVU" name="Member">
+      <ownedProperties xmi:id="j4ucQ" name="familyDaughter"/>
+      <ownedProperties xmi:id="31gsl" name="familyFather"/>
+      <ownedProperties xmi:id="eLUay" name="familyMother"/>
+      <ownedProperties xmi:id="lstD1" name="familySon"/>
+      <ownedProperties xmi:id="yTUBO" name="firstName"/>
+    </ownedClasses>
+  </ownedPackages>
 </pivot:Model>
