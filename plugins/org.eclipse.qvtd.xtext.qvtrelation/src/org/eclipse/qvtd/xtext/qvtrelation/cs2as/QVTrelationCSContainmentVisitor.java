@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
@@ -146,7 +147,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		public BasicContinuation<?> execute() {
 			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
-				List<org.eclipse.ocl.pivot.Package> newUsedPackages = new ArrayList<>();
+				List<org.eclipse.ocl.pivot.Package> newUsedPackages = new UniqueList<>();
 				for (Namespace metamodelId : csElement.getMetamodelIds()) {
 					if (metamodelId instanceof Model) {
 						newUsedPackages.addAll(((Model)metamodelId).getOwnedPackages());
