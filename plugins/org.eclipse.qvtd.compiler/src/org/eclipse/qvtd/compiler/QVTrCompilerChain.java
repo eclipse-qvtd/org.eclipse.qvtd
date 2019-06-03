@@ -24,11 +24,13 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.importer.ecore.EcoreImporter;
 import org.eclipse.jdt.annotation.NonNull;
@@ -43,7 +45,9 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.util.DerivedConstants;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -67,6 +71,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
@@ -188,9 +193,14 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					saveOptions = XMIUtil.createSaveOptions();
 				}
 				saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+				// FIXME genmodels must have their ecore LodFirst to avoid metmodel schizophrenia
+				ResourceSet resourceSet = environmentFactory.getResourceSet();
+				environmentFactory.getProjectManager().configureLoadFirst(resourceSet, OCLstdlibPackage.eNS_URI);
+				environmentFactory.getProjectManager().configureLoadFirst(resourceSet, QVTruntimeLibraryPackage.eNS_URI);
 				Set<@NonNull GenPackage> usedGenPackages = new HashSet<>();
-				GenPackage traceGenPackage = CompilerUtil.getGenPackage(environmentFactory.getResourceSet(), AbstractTransformer.TRACE_GENMODEL, AbstractTransformer.TRACE_GENMODEL_FRAGMENT);
-				usedGenPackages.add(traceGenPackage);
+				usedGenPackages.add(CompilerUtil.getGenPackage(resourceSet, AbstractTransformer.TRACE_GENMODEL, AbstractTransformer.TRACE_GENMODEL_FRAGMENT));
+				usedGenPackages.add(CompilerUtil.getGenPackage(resourceSet, AbstractTransformer.QVTLIB_GENMODEL, AbstractTransformer.QVTLIB_GENMODEL_FRAGMENT));
+				usedGenPackages.add(CompilerUtil.getGenPackage(resourceSet, AbstractTransformer.OCLLIB_GENMODEL, AbstractTransformer.OCLLIB_GENMODEL_FRAGMENT));
 				Collection<@NonNull ? extends GenPackage> moreUsedGenPackages = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
 				if (moreUsedGenPackages != null) {
 					usedGenPackages.addAll(moreUsedGenPackages);
@@ -216,7 +226,26 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 						}
 						else {
 							GenModel newGenModel = newGenPackage.getGenModel();
-							Iterable<GenPackage> newUsedGenPackages = ClassUtil.nullFree(newGenModel.getUsedGenPackages());
+							//	Object unresolvedList = newGenModel.eGet(GenModelPackage.Literals.GEN_MODEL__USED_GEN_PACKAGES, false);
+							EList<GenPackage> newUsedGenPackages = newGenModel.getUsedGenPackages();
+
+							// FIXME need prvate ResourceSEt to handle genmodel/ecore schizophrenia else universal LOadFirst strategy
+							/*	//	for (int i = 0;  i < newUsedGenPackages.size(); i++) {
+							//		newGenModel.eGet(GenModelPackage.Literals.GEN_MODEL__USED_GEN_PACKAGES, 0, false);
+							//	}
+							ListIterator<GenPackage> newIterator = newUsedGenPackages instanceof EObjectResolvingEList ? ((EObjectResolvingEList<GenPackage>)newUsedGenPackages).basicListIterator() : newUsedGenPackages.listIterator();
+							while (newIterator.hasNext()) {
+								GenPackage next = newIterator.next();
+								if (next.eIsProxy()) {
+									URI proxyURI = EcoreUtil.getURI(next);
+									if (proxyURI != null) {
+										URI genModelURI = proxyURI.trimFragment();
+										//	environmentFactory.getMetamodelManager().ge
+										environmentFactory.getProjectManager().configureLoadFirst(newGenPackage.eResource().getResourceSet(), genModelURI.toString());
+									}
+								}
+								next.toString();
+							} */
 							getUsedGenPackageClosure(problemHandler, uri2genPackage, newUsedGenPackages);
 						}
 					}
@@ -250,6 +279,22 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			Map<@NonNull String, @NonNull GenPackage> uri2genPackage = new HashMap<>();
 			List<@NonNull GenPackage> allUsedGenPackages = new ArrayList<>();
 			if (usedGenPackages != null) {
+
+				ProjectManager projectManager = environmentFactory.getProjectManager();
+				for (@NonNull GenPackage genPackage : usedGenPackages) {
+					//	int separator = usedGenPackage.indexOf("#");
+					//	String projectPath = usedGenPackage.substring(0, separator);
+					//	String genPackageFragment = usedGenPackage.substring(separator+1);
+					//	GenPackage genPackage = myQVT.addUsedGenPackage(projectPath, genPackageFragment);
+					EPackage ePackage = genPackage.getEcorePackage();
+					String nsURI = ePackage.getNsURI();
+					projectManager.configureLoadFirst(environmentFactory.getResourceSet(), nsURI);
+					projectManager.configureLoadFirst(environmentFactory.getMetamodelManager().getASResourceSet(), nsURI);
+				}
+
+
+
+
 				getUsedGenPackageClosure(problemHandler, uri2genPackage, usedGenPackages);
 				allUsedGenPackages.addAll(uri2genPackage.values());
 				Collections.sort(allUsedGenPackages, GenPackageComparator.INSTANCE);
