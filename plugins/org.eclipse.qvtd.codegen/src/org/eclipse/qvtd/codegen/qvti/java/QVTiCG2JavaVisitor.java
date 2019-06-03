@@ -73,6 +73,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
+import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -151,15 +152,17 @@ import com.google.common.collect.Sets;
  */
 public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerator> implements QVTiCGModelVisitor<@NonNull Boolean>
 {
-	protected static class AllInstancesAnalysis
+	protected /*static*/ class AllInstancesAnalysis
 	{
 		protected final @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses;
 		protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> instancesClassAnalysis;
 		protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Integer> instancesClass2index;
 		protected final @NonNull List<org.eclipse.ocl.pivot.@NonNull Class> sortedList;
 		private @NonNull String @Nullable [] names = null;
+		private int extentClassIndex = -1;
+		private @Nullable String extentOppositesName = null;
 
-		public AllInstancesAnalysis(@NonNull QVTiTransformationAnalysis transformationAnalysis, @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses) {
+		public AllInstancesAnalysis(@NonNull QVTiTransformationAnalysis transformationAnalysis, @NonNull TypedModel typedModel, @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses) {
 			this.allInstancesClasses = allInstancesClasses;
 			this.instancesClassAnalysis = transformationAnalysis.getInstancesClassAnalysis(allInstancesClasses);
 			//
@@ -168,9 +171,37 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			this.instancesClass2index = new HashMap<>(instancesClassAnalysis.size());
 			this.sortedList = new ArrayList<>(instancesClassAnalysis.keySet());
 			Collections.sort(sortedList, NameUtil.NameableComparator.INSTANCE);
+			ClassId extentClassId = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, null).getClassId("Extent", 0);
 			for (int i = 0; i < sortedList.size(); i++) {
-				instancesClass2index.put(sortedList.get(i), i);
+				org.eclipse.ocl.pivot.Class sortedClass = sortedList.get(i);
+				instancesClass2index.put(sortedClass, i);
+				TypeId typeId = sortedClass.getTypeId();
+				if (typeId == extentClassId) {
+					extentClassIndex = i;
+				}
 			}
+			//	if (QVTbaseUtil.is)
+			Map<@NonNull Property, @NonNull Integer> opposites = transformationAnalysis.getCaches();
+			for (@NonNull Property property : opposites.keySet()) {
+				org.eclipse.ocl.pivot.Class owningClass = PivotUtil.getOwningClass(property);
+				TypeId typeId = owningClass.getTypeId();
+				if (typeId == extentClassId) {
+					Integer index = opposites.get(property);
+					assert index != null;
+					Map<@NonNull Property, @NonNull String> oppositeProperties = getGlobalContext().getOppositeProperties();
+					assert oppositeProperties != null;
+					extentOppositesName = oppositeProperties.get(property);
+					//	extentOppositesName = "xyzzy";
+				}
+			}
+		}
+
+		public int getExtentClassIndex() {
+			return extentClassIndex;
+		}
+
+		public @Nullable String getExtentOppositesName() {
+			return extentOppositesName;
 		}
 
 		protected @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Integer> getInstancesClass2index() {
@@ -338,7 +369,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses2 = Sets.newHashSet(QVTimperativeUtil.getUsedClasses(typedModel));
 			allInstancesClasses2.retainAll(allInstancesClasses);
 			if (!allInstancesClasses2.isEmpty()) {
-				AllInstancesAnalysis allInstancesAnalysis = new AllInstancesAnalysis(transformationAnalysis, allInstancesClasses2);
+				AllInstancesAnalysis allInstancesAnalysis = new AllInstancesAnalysis(transformationAnalysis, typedModel, allInstancesClasses2);
 				Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Integer> instancesClass2index = allInstancesAnalysis.getInstancesClass2index();
 				List<org.eclipse.ocl.pivot.@NonNull Class> sortedList = allInstancesAnalysis.getSortedList();
 				Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> instancesClassAnalysis = allInstancesAnalysis.getInstancesClassAnalysis();
@@ -546,6 +577,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append(", ");
 					js.append(allInstancesAnalysis.getNames()[1]);
 					js.append(")");
+					int extentClassIndex = allInstancesAnalysis.getExtentClassIndex();
+					if (extentClassIndex >= 0) {
+						js.append(".initExtent(");
+						js.appendIntegerString(extentClassIndex);
+						js.append(", ");
+						String extentOppositesName = allInstancesAnalysis.getExtentOppositesName();
+						js.append(extentOppositesName != null ? extentOppositesName : "null");
+						js.append(")");
+					}
 				}
 			}
 			js.append(";\n");

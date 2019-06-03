@@ -223,6 +223,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		 * Must be sert non-null by initConnections() before transformation execution starts.
 		 */
 		protected @NonNull Connection [] classIndex2connection;
+
+		private int extentClassIndex = -1;
+		private @Nullable Map<Object, Object> extentOpposites = null;
+
 		private int isContainedCount = 0;
 		private int isNotContainedCount = 0;
 
@@ -356,12 +360,18 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 					}
 				}
 			}
-			ClassId extentClassId = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, null).getClassId("Extent", 0);
-			Integer extentClassIndex = classId2classIndex != null ? classId2classIndex.get(extentClassId) : null;
-			if (extentClassIndex != null) {
+			//	ClassId extentClassId = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, null).getClassId("Extent", 0);
+			//	Integer extentClassIndex = classId2classIndex != null ? classId2classIndex.get(extentClassId) : null;
+			if (extentClassIndex >= 0) {
 				Extent extent = QVTruntimeLibraryFactory.eINSTANCE.createExtent();
 				Iterables.addAll(extent.getElements(), eRootObjects);
 				accumulateEObject1(extent, extent.eClass());
+				Map<Object, Object> extentOpposites2 = extentOpposites;
+				if (extentOpposites2 != null) {
+					for (Object object : extent.getElements()) {
+						extentOpposites2.put(object, extent);
+					}
+				}
 			}
 		}
 
@@ -529,6 +539,11 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 					classIndex++;
 				}
 			}
+		}
+
+		public <K,V> void initExtent(int extentClassIndex, @Nullable Map<K, V> extentOpposites) {
+			this.extentClassIndex = extentClassIndex;
+			this.extentOpposites = (Map<Object,Object>)extentOpposites;
 		}
 
 		@Override

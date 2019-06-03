@@ -16,6 +16,7 @@ import java.util.Map;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -32,6 +33,7 @@ import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
@@ -576,13 +578,16 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	/*	@Test
+	@Test
 	public void testQVTrCompiler_Ecore2Pivot_CG() throws Exception {
+		//	StandaloneProjectMap.addTrace(EcorePackage.eNS_URI, ~0);
+		//	StandaloneProjectMap.addTrace(OCLstdlibPackage.eNS_URI, ~0);
+		//	StandaloneProjectMap.addTrace(PivotPackage.eNS_URI, ~0);
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
@@ -591,6 +596,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
 		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
+		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
 		Class<? extends Transformer> txClass1 = null;
 		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.ocl.pivot/model/Ecore2Pivot.qvtr", true);
 		URI txURI1 = getModelsURI("ecore2pivot/Ecore2Pivot.qvtr");
@@ -625,7 +632,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT2.dispose();
 		}
-	}*/
+	}
 
 	@Test
 	public void testQVTrCompiler_Families2Persons_CG() throws Exception {
