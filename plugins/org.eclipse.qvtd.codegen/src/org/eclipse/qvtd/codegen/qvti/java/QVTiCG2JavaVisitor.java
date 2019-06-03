@@ -2001,7 +2001,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			Property property = key2property.get(key);
 			assert property != null;
 			TypeDescriptor outerTypeDescriptor = context.getBoxedDescriptor(property.getOwningClass().getTypeId());
-			TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(property.getType().getTypeId());
+			TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(PivotUtil.getElementalType(PivotUtil.getType(property)).getTypeId());
 			js.append("protected final ");
 			js.appendIsRequired(true);
 			js.append(" ");
@@ -2958,7 +2958,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			String cacheName = oppositeProperties.get(pReferredProperty);
 			if (cacheName != null) {
 				TypeDescriptor outerTypeDescriptor = context.getBoxedDescriptor(pReferredProperty.getOwningClass().getTypeId());
-				TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(pReferredProperty.getType().getTypeId());
+				TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(PivotUtil.getElementalType(PivotUtil.getType(pReferredProperty)).getTypeId());
 				js.append(cacheName);
 				js.append(".put(");
 				js.appendReferenceTo(middleTypeDescriptor, initValue);
