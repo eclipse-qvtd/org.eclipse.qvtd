@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -439,7 +440,16 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	@Override
 	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue) {
 		Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
-		targetProperty.initValue(slotObject, ecoreValue);
+		if (setStatement.isIsPartial()) {		// FIXME add Property.addValue() API
+			//	assert ValueUtil.isEcore(ecoreValue);
+			EStructuralFeature eTarget = (EStructuralFeature)targetProperty.getESObject();
+			EStructuralFeature eFeature = eTarget;
+			List<Object> eObjects = (List<Object>) ((EObject)slotObject).eGet(eFeature);
+			eObjects.add(ecoreValue);
+		}
+		else {
+			targetProperty.initValue(slotObject, ecoreValue);
+		}
 		Integer cacheIndex = modelsManager.getTransformationAnalysis().getCacheIndex(setStatement);
 		if (cacheIndex != null) {
 			modelsManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);

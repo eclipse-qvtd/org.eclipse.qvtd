@@ -25,16 +25,23 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -43,6 +50,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationInstance;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.TransformationInstance;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
+import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 
 import com.google.common.collect.Iterables;
 
@@ -51,11 +59,14 @@ import com.google.common.collect.Iterables;
  */
 public class QVTiModelsManager
 {
+	@SuppressWarnings("null")
+	private static final @NonNull ClassId EXTENT_CLASSID = IdManager.getClassId(QVTruntimeLibraryPackage.Literals.EXTENT);
+
 	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
 	// TODO how to manage aliases?
-	/** Map a typed model to its resource (model). */
-	private @NonNull Map<@NonNull ImperativeTypedModel, @NonNull Resource> modelResourceMap = new HashMap<>();
+	/** Map a typed model to its resources (models). */
+	private @NonNull Map<@NonNull ImperativeTypedModel, @NonNull List<@NonNull Resource>> modelResourcesMap = new HashMap<>();
 	private @NonNull Map<@NonNull Resource, @NonNull ImperativeTypedModel> resource2typedModel = new HashMap<>();
 
 	private @NonNull Map<@NonNull ImperativeTypedModel, @NonNull List<@NonNull EObject>> modelElementsMap = new HashMap<>();
@@ -109,7 +120,12 @@ public class QVTiModelsManager
 	 */
 	// TODO support multiple model instances by alias
 	public void addModel(@NonNull ImperativeTypedModel typedModel, @NonNull Resource model) {
-		modelResourceMap.put(typedModel, model);
+		List<@NonNull Resource> resources = modelResourcesMap.get(typedModel);
+		if (resources == null) {
+			resources = new UniqueList<>();
+			modelResourcesMap.put(typedModel, resources);
+		}
+		resources.add(model);
 		resource2typedModel.put(model, typedModel);
 	}
 
@@ -122,9 +138,12 @@ public class QVTiModelsManager
 	public void addModelElement(@NonNull ImperativeTypedModel model, @NonNull Object element) {
 		List<@NonNull EObject> elements = modelElementsMap.get(model);
 		if (elements == null) {
-			Resource resource = modelResourceMap.get(model);
-			if (resource != null) {
-				elements = new ArrayList<>(resource.getContents());
+			List<@NonNull Resource> resources = modelResourcesMap.get(model);
+			if (resources != null) {
+				elements = new ArrayList<>();
+				for (@NonNull Resource resource : resources) {
+					elements.addAll(resource.getContents());
+				}
 				modelElementsMap.put(model, elements);
 			}
 		}
@@ -139,7 +158,7 @@ public class QVTiModelsManager
 	 */
 	public void dispose() {
 		modelElementsMap.clear();
-		modelResourceMap.clear();
+		modelResourcesMap.clear();
 		allInstancesClasses.clear();
 		for (Map<?, ?> unnavigableOpposite : unnavigableOpposites) {
 			unnavigableOpposite.clear();
@@ -165,8 +184,13 @@ public class QVTiModelsManager
 	 *
 	 * @return a collection of all the resources
 	 */
+	@Deprecated /* @deprecated not used */
 	public @NonNull Collection<@NonNull Resource> getAllModelResources() {
-		return modelResourceMap.values();
+		List<@NonNull Resource> allResources = new ArrayList<>();
+		for (@NonNull List<@NonNull Resource> resources : modelResourcesMap.values()) {
+			allResources.addAll(resources);
+		}
+		return allResources;
 	}
 
 	/**
@@ -177,6 +201,7 @@ public class QVTiModelsManager
 	 * @return the instances
 	 */
 	public @NonNull List<@NonNull Object> getElementsByType(@Nullable ImperativeTypedModel model, @NonNull Type type) {
+		boolean isExtent = type.getTypeId() == EXTENT_CLASSID;
 		List<@NonNull Object> elements = new ArrayList<>();
 		// Is the TypedModel the middle or output, hence we have elements in the elementsMap
 		if (modelElementsMap.containsKey(model)) {
@@ -200,16 +225,36 @@ public class QVTiModelsManager
 			}
 		}
 		else {
-			Resource resource = modelResourceMap.get(model);
-			if (resource != null) {
-				for (TreeIterator<EObject> contents = resource.getAllContents(); contents.hasNext();) {
-					EObject element = contents.next();
-					//System.out.println(type.getETarget());
-					//System.out.println(((EClassifier) type.getETarget()).getName());
-					//System.out.println(object.eClass().getName());
-					if ((element != null) && isInstance(type, element)) {
-						//                if (((EClass) type.getETarget()).getName().equals(element.eClass().getName())) {
-						elements.add(element);
+			List<@NonNull Resource> resources = modelResourcesMap.get(model);
+			if (resources != null) {
+				for (Resource resource : resources) {
+					if (isExtent) {
+						Property extentElementProperty = NameUtil.getNameable(((org.eclipse.ocl.pivot.Class)type).getOwnedProperties(), QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS.getName());
+						Integer cacheIndex = getTransformationAnalysis().getCaches().get(extentElementProperty);;
+						EClass eClass = (EClass)type.getESObject();
+						EStructuralFeature eStructuralFeature = eClass.getEStructuralFeature(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS.getName());
+						EObject extent = eClass.getEPackage().getEFactoryInstance().create(eClass);
+						Object eGet = extent.eGet(eStructuralFeature);
+						@SuppressWarnings("unchecked")
+						List<Object> extentElements = (List<Object>) eGet;
+						for (@NonNull EObject rootObject : resource.getContents()) {
+							extentElements.add(rootObject);
+							if (cacheIndex != null) {
+								setUnnavigableOpposite(cacheIndex, extent, rootObject);
+							}
+						}
+						elements.add(extent);
+					}
+					else {
+						for (EObject element : new TreeIterable(resource)) {
+							//System.out.println(type.getETarget());
+							//System.out.println(((EClassifier) type.getETarget()).getName());
+							//System.out.println(object.eClass().getName());
+							if (isInstance(type, element)) {
+								//                if (((EClass) type.getETarget()).getName().equals(element.eClass().getName())) {
+								elements.add(element);
+							}
+						}
 					}
 				}
 			}
@@ -227,12 +272,19 @@ public class QVTiModelsManager
 	 * @param typedModel the typed model
 	 * @return the resource
 	 */
+	// FIXME Change API for multiple extents
 	public Resource getModel(@NonNull ImperativeTypedModel typedModel) {
-		return modelResourceMap.get(typedModel);
+		List<@NonNull Resource> resources = modelResourcesMap.get(typedModel);
+		return resources != null ? resources.get(0) : null;
 	}
 
 	public @NonNull Collection<@NonNull EObject> getRootObjects(@NonNull ImperativeTypedModel typedModel) {
-		return ClassUtil.nonNullState(modelResourceMap.get(typedModel)).getContents();
+		List<@NonNull EObject> rootObjects = new ArrayList<>();
+		List<@NonNull Resource> resources = ClassUtil.nonNullState(modelResourcesMap.get(typedModel));
+		for (@NonNull Resource resource : resources) {
+			rootObjects.addAll(resource.getContents());
+		}
+		return rootObjects;
 	}
 
 	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
@@ -290,16 +342,30 @@ public class QVTiModelsManager
 	}
 
 	public void saveContents() {
-		for (Map.Entry<@NonNull ImperativeTypedModel, @NonNull Resource> entry : modelResourceMap.entrySet()) {
-			Resource model = entry.getValue();
+		for (Map.Entry<@NonNull ImperativeTypedModel, @NonNull List<@NonNull Resource>> entry : modelResourcesMap.entrySet()) {
+			List<@NonNull Resource> models = entry.getValue();
+			Resource model = models.get(0);
 			ImperativeTypedModel key = entry.getKey();
 			if (modelElementsMap.containsKey(key)) {       // Only save modified models
 				// Move elements without container to the resource contents
 				List<EObject> elements = modelElementsMap.get(key);
 				assert elements != null;
 				for (EObject e : elements) {
-					if (e.eContainer() == null) {
-						model.getContents().add(e);
+					EClass eClass = e.eClass();
+					assert eClass != null;
+					ClassId classId = IdManager.getClassId(eClass);
+					if (classId == EXTENT_CLASSID) {
+						EStructuralFeature eStructuralFeature = eClass.getEStructuralFeature(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS.getName());
+						Object eGet = e.eGet(eStructuralFeature);
+						if (eGet instanceof List) {
+							@SuppressWarnings("unchecked") List<EObject> castEGet = (List<EObject>)eGet;
+							model.getContents().addAll(castEGet);
+						}
+					}
+					else {
+						if (e.eContainer() == null) {
+							model.getContents().add(e);
+						}
 					}
 				}
 			}
@@ -320,12 +386,14 @@ public class QVTiModelsManager
 	 */
 	public void saveModels(@Nullable Map<?, ?> savingOptions) {
 		saveContents();
-		for (Map.Entry<@NonNull ImperativeTypedModel, @NonNull Resource> entry : modelResourceMap.entrySet()) {
-			Resource model = entry.getValue();
+		for (Map.Entry<@NonNull ImperativeTypedModel, @NonNull List<@NonNull Resource>> entry : modelResourcesMap.entrySet()) {
+			List<@NonNull Resource> models = entry.getValue();
 			ImperativeTypedModel key = entry.getKey();
 			if (modelElementsMap.containsKey(key)) {       // Only save modified models
-				try{
-					model.save(savingOptions);
+				try {
+					for (@NonNull Resource model : models) {
+						model.save(savingOptions);
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

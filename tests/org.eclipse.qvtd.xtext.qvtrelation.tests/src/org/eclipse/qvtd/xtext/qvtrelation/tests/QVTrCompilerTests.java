@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
@@ -26,16 +27,22 @@ import org.eclipse.m2m.atl.engine.parser.AtlParser;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
+import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -579,6 +586,62 @@ public class QVTrCompilerTests extends LoadTestCase
 	}
 
 	@Test
+	public void testQVTrCompiler_Ecore2Pivot() throws Exception {
+		/*	QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
+		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
+		Class<? extends Transformer> txClass1 = null;
+		URI txURI1 = getModelsURI("ecore2pivot/Ecore2Pivot.qvtr");
+		MyQVT myQVT1 = createQVT("Ecore2Pivot", txURI1);
+		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
+		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+		ProjectManager projectManager = myQVT1.getProjectManager();
+		try {
+			ClassLoader classLoader = getClass().getClassLoader();
+			assert classLoader != null;
+			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
+			txClass1 = myQVT1.buildTransformation("as", false);
+		}
+		finally {
+			myQVT1.dispose();
+		} */
+		URI ecoreURI = getModelsURI("ecore2pivot/Families.ecore");
+		/*	URI asURI2a = getTestURI("Families2.ecore.oclas");
+			ProjectManager testProjectManager = getTestProjectManager();
+		OCL ocl = OCL.newInstance(testProjectManager);
+		try {
+			Resource inputResource = ocl.getResourceSet().getResource(ecoreURI, true);
+			assert inputResource != null;
+			assertNoResourceErrors("Ecore load", inputResource);
+			assertNoValidationErrors("Ecore load", inputResource);
+			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, (EnvironmentFactoryInternal) ocl.getEnvironmentFactory());
+			Model pivotModel = ecore2as.getASModel();
+			Resource asResource = pivotModel.eResource();
+			asResource.setURI(asURI2a);
+			assertNoResourceErrors("Ecore2AS failed", asResource);
+			asResource.save(XMIUtil.createSaveOptions());
+			assertValidationDiagnostics("Ecore2AS invalid", asResource, NO_MESSAGES);
+		}
+		finally {
+			ocl.dispose();
+		} */
+		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("ecore2pivot/Ecore2Pivot.qvtr"));
+		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		URI asURI2 = getTestURI("Families.ecore.oclas");
+		try {
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("as");
+			//
+			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("ecore", ecoreURI);
+			myQVT.createModel("as", asURI2);
+			myQVT.executeTransformation();
+			myQVT.saveOutput("as", asURI2, getModelsURI("ecore2pivot/Families_expected2.ecore.oclas"), null); //Forward2ReverseNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
 	public void testQVTrCompiler_Ecore2Pivot_CG() throws Exception {
 		//	StandaloneProjectMap.addTrace(EcorePackage.eNS_URI, ~0);
 		//	StandaloneProjectMap.addTrace(OCLstdlibPackage.eNS_URI, ~0);
@@ -586,16 +649,16 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
-		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
-		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
-		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
-		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
 		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
 		Class<? extends Transformer> txClass1 = null;
@@ -604,6 +667,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Ecore2Pivot", txURI1);
 		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+		ProjectManager projectManager = myQVT1.getProjectManager();
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
@@ -619,13 +683,33 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT1.dispose();
 		}
+		URI asURI2a = getTestURI("Families2.ecore.oclas");
+		URI ecoreURI = getModelsURI("ecore2pivot/Families.ecore");
+		OCL ocl = OCL.newInstance(projectManager);
+		try {
+			Resource inputResource = ocl.getResourceSet().getResource(ecoreURI, true);
+			assert inputResource != null;
+			assertNoResourceErrors("Ecore load", inputResource);
+			assertNoValidationErrors("Ecore load", inputResource);
+			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, (EnvironmentFactoryInternal) ocl.getEnvironmentFactory());
+			Model pivotModel = ecore2as.getASModel();
+			Resource asResource = pivotModel.eResource();
+			asResource.setURI(asURI2a);
+			assertNoResourceErrors("Ecore2AS failed", asResource);
+			asResource.save(XMIUtil.createSaveOptions());
+			assertValidationDiagnostics("Ecore2AS invalid", asResource, NO_MESSAGES);
+		}
+		finally {
+			ocl.dispose();
+		}
+		//
 		URI asURI2 = getTestURI("Families.ecore.oclas");
 		MyQVT myQVT2 = createQVT("Ecore2Pivot", txURI1);
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
 			myQVT2.createGeneratedExecutor(txClass1);
 			//			myQVT2.loadInput("ecore", getModelsURI("families2persons/Families.ecore"));
-			myQVT2.loadInput("ecore", getModelsURI("ecore2pivot/Families.ecore"));
+			myQVT2.loadInput("ecore", ecoreURI);
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("as", asURI2, getModelsURI("ecore2pivot/Families_expected.ecore.oclas"), null);
 		}
