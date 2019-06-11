@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -59,6 +60,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NavigationCallExp;
@@ -77,6 +79,7 @@ import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.complete.CompleteModelInternal;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
@@ -145,7 +148,6 @@ import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationConstructo
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal.Model;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 
 /**
  * A QVTiCG2JavaVisitor supports generation of Java code from an optimized QVTi CG transformation tree.
@@ -154,28 +156,28 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 {
 	protected /*static*/ class AllInstancesAnalysis
 	{
-		protected final @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses;
-		protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> instancesClassAnalysis;
-		protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Integer> instancesClass2index;
-		protected final @NonNull List<org.eclipse.ocl.pivot.@NonNull Class> sortedList;
+		protected final @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses;
+		protected final @NonNull Map<@NonNull CompleteClass, @Nullable List<@NonNull CompleteClass>> instancesCompleteClassAnalysis;
+		protected final @NonNull Map<@NonNull CompleteClass, @NonNull Integer> instancesCompleteClass2index;
+		protected final @NonNull List<@NonNull CompleteClass> sortedCompleteClasses;
 		private @NonNull String @Nullable [] names = null;
 		private int extentClassIndex = -1;
 		private @Nullable String extentOppositesName = null;
 
-		public AllInstancesAnalysis(@NonNull QVTiTransformationAnalysis transformationAnalysis, @NonNull TypedModel typedModel, @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses) {
-			this.allInstancesClasses = allInstancesClasses;
-			this.instancesClassAnalysis = transformationAnalysis.getInstancesClassAnalysis(allInstancesClasses);
+		public AllInstancesAnalysis(@NonNull QVTiTransformationAnalysis transformationAnalysis, @NonNull TypedModel typedModel, @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses) {
+			this.allInstancesCompleteClasses = allInstancesCompleteClasses;
+			this.instancesCompleteClassAnalysis = transformationAnalysis.getInstancesCompleteClassAnalysis(allInstancesCompleteClasses);
 			//
 			// Populate a mapping from instancesClass to linear index.
 			//
-			this.instancesClass2index = new HashMap<>(instancesClassAnalysis.size());
-			this.sortedList = new ArrayList<>(instancesClassAnalysis.keySet());
-			Collections.sort(sortedList, NameUtil.NameableComparator.INSTANCE);
+			this.instancesCompleteClass2index = new HashMap<>(instancesCompleteClassAnalysis.size());
+			this.sortedCompleteClasses = new ArrayList<>(instancesCompleteClassAnalysis.keySet());
+			Collections.sort(sortedCompleteClasses, NameUtil.NameableComparator.INSTANCE);
 			ClassId extentClassId = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, null).getClassId("Extent", 0);
-			for (int i = 0; i < sortedList.size(); i++) {
-				org.eclipse.ocl.pivot.Class sortedClass = sortedList.get(i);
-				instancesClass2index.put(sortedClass, i);
-				TypeId typeId = sortedClass.getTypeId();
+			for (int i = 0; i < sortedCompleteClasses.size(); i++) {
+				CompleteClass sortedCompleteClass = sortedCompleteClasses.get(i);
+				instancesCompleteClass2index.put(sortedCompleteClass, i);
+				TypeId typeId = sortedCompleteClass.getPrimaryClass().getTypeId();
 				if (typeId == extentClassId) {
 					extentClassIndex = i;
 				}
@@ -204,20 +206,20 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			return extentOppositesName;
 		}
 
-		protected @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Integer> getInstancesClass2index() {
-			return instancesClass2index;
+		protected @NonNull Map<@NonNull CompleteClass, @NonNull Integer> getInstancesCompleteClass2index() {
+			return instancesCompleteClass2index;
 		}
 
-		protected @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> getInstancesClassAnalysis() {
-			return instancesClassAnalysis;
+		protected @NonNull Map<@NonNull CompleteClass, @Nullable List<@NonNull CompleteClass>> getInstancesCompleteClassAnalysis() {
+			return instancesCompleteClassAnalysis;
 		}
 
 		protected @NonNull String @NonNull [] getNames() {
 			return ClassUtil.nonNullState(names);
 		}
 
-		protected @NonNull List<org.eclipse.ocl.pivot.@NonNull Class> getSortedList() {
-			return sortedList;
+		protected @NonNull List<@NonNull CompleteClass> getSortedCompleteClasses() {
+			return sortedCompleteClasses;
 		}
 
 		public void setNames(@NonNull String[] names) {
@@ -359,20 +361,27 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected @Nullable List<@Nullable AllInstancesAnalysis> doAllInstances(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
-		if (allInstancesClasses.size() <= 0) {
+		CompleteModelInternal completeModel = environmentFactory.getCompleteModel();
+		Set<@NonNull CompleteClass> allInstancesCompleteClasses = new HashSet<>();
+		for (org.eclipse.ocl.pivot.@NonNull Class allInstancesClass : transformationAnalysis.getAllInstancesClasses()) {
+			allInstancesCompleteClasses.add(completeModel.getCompleteClass(allInstancesClass));
+		}
+		if (allInstancesCompleteClasses.size() <= 0) {
 			return null;
 		}
 		List<@Nullable AllInstancesAnalysis> allInstancesAnalyses = new ArrayList<>();
 		int typedModelNumber = 0;
-		for (@NonNull TypedModel typedModel : transformationAnalysis.getTransformation().getModelParameter()) {
-			Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses2 = Sets.newHashSet(QVTimperativeUtil.getUsedClasses(typedModel));
-			allInstancesClasses2.retainAll(allInstancesClasses);
-			if (!allInstancesClasses2.isEmpty()) {
-				AllInstancesAnalysis allInstancesAnalysis = new AllInstancesAnalysis(transformationAnalysis, typedModel, allInstancesClasses2);
-				Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Integer> instancesClass2index = allInstancesAnalysis.getInstancesClass2index();
-				List<org.eclipse.ocl.pivot.@NonNull Class> sortedList = allInstancesAnalysis.getSortedList();
-				Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> instancesClassAnalysis = allInstancesAnalysis.getInstancesClassAnalysis();
+		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(transformationAnalysis.getTransformation())) {
+			Set<@NonNull CompleteClass> allInstancesCompleteClasses2 = new HashSet<>();
+			for (org.eclipse.ocl.pivot.@NonNull Class usedClass : QVTimperativeUtil.getUsedClasses(typedModel)) {
+				allInstancesCompleteClasses2.add(completeModel.getCompleteClass(usedClass));
+			}
+			allInstancesCompleteClasses2.retainAll(allInstancesCompleteClasses);
+			if (!allInstancesCompleteClasses2.isEmpty()) {
+				AllInstancesAnalysis allInstancesAnalysis = new AllInstancesAnalysis(transformationAnalysis, typedModel, allInstancesCompleteClasses2);
+				Map<@NonNull CompleteClass, @NonNull Integer> instancesClass2index = allInstancesAnalysis.getInstancesCompleteClass2index();
+				List<@NonNull CompleteClass> sortedCompleteClasses = allInstancesAnalysis.getSortedCompleteClasses();
+				Map<@NonNull CompleteClass, @Nullable List<@NonNull CompleteClass>> instancesClassAnalysis = allInstancesAnalysis.getInstancesCompleteClassAnalysis();
 				NameManager nameManager = getGlobalContext().getNameManager();
 				//
 				//	Emit the ClassId array
@@ -391,12 +400,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.appendClassReference(true, ClassId.class);
 				js.append("[]{\n");
 				js.pushIndentation(null);
-				for (int i = 0; i < sortedList.size(); i++) {
-					org.eclipse.ocl.pivot.Class instancesClass = sortedList.get(i);
-					CGTypeId cgTypeId = getCodeGenerator().getAnalyzer().getTypeId(instancesClass.getTypeId());
+				for (int i = 0; i < sortedCompleteClasses.size(); i++) {
+					CompleteClass instancesClass = sortedCompleteClasses.get(i);
+					CGTypeId cgTypeId = getCodeGenerator().getAnalyzer().getTypeId(instancesClass.getPrimaryClass().getTypeId());
 					int startLength = js.length();
 					js.appendValueName(cgTypeId);
-					if ((i+1) < sortedList.size()) {
+					if ((i+1) < sortedCompleteClasses.size()) {
 						js.append(",");
 					}
 					for (int j = js.length() - startLength; j < 40; j++) {
@@ -429,13 +438,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.appendIsRequired(true);
 				js.append(" [] {\n");
 				js.pushIndentation(null);
-				for (int i = 0; i < sortedList.size(); i++) {
-					org.eclipse.ocl.pivot.Class instancesClass = sortedList.get(i);
-					List<org.eclipse.ocl.pivot.@NonNull Class> superInstancesClasses = ClassUtil.nonNullState(instancesClassAnalysis.get(instancesClass));
+				for (int i = 0; i < sortedCompleteClasses.size(); i++) {
+					CompleteClass instancesClass = sortedCompleteClasses.get(i);
+					List<@NonNull CompleteClass> superInstancesClasses = ClassUtil.nonNullState(instancesClassAnalysis.get(instancesClass));
 					int startLength = js.length();
 					js.append("{");
 					boolean isFirst = true;
-					for (org.eclipse.ocl.pivot.@NonNull Class superInstancesClass : superInstancesClasses) {
+					for (@NonNull CompleteClass superInstancesClass : superInstancesClasses) {
 						if (!isFirst) {
 							js.append(",");
 						}
@@ -443,7 +452,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 						isFirst = false;
 					}
 					js.append("}");
-					if ((i+1) < sortedList.size()) {
+					if ((i+1) < sortedCompleteClasses.size()) {
 						js.append(",");
 					}
 					for (int j = js.length() - startLength; j < 32; j++) {
@@ -453,7 +462,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append(instancesClass.getName());
 					js.append(" -> {");
 					isFirst = true;
-					for (org.eclipse.ocl.pivot.@NonNull Class superInstancesClass : superInstancesClasses) {
+					for (@NonNull CompleteClass superInstancesClass : superInstancesClasses) {
 						if (!isFirst) {
 							js.append(",");
 						}
@@ -2118,6 +2127,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doRun(@NonNull CGTransformation cgTransformation, @Nullable List<@Nullable AllInstancesAnalysis> allInstancesAnalyses) {
+		CompleteModelInternal completeModel = environmentFactory.getCompleteModel();
 		CGMapping cgRootMapping = QVTiCGUtil.getRootMapping(cgTransformation);
 		js.append("@Override\n");
 		js.append("public boolean run() {\n");
@@ -2132,7 +2142,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(QVTiGlobalContext.MODELS_NAME);
 			js.append("[");
 			VariableDeclaration asGuardVariable = QVTiCGUtil.getAST(cgGuardVariable);
-			Type type = asGuardVariable.getType();
+			Type type = QVTimperativeUtil.getType(asGuardVariable);
 			org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
 			assert asPackage != null;
 			AllInstancesAnalysis allInstancesAnalysis = null;
@@ -2147,7 +2157,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 			js.append("].getConnection(");
 			assert allInstancesAnalysis != null;
-			Integer classIndex = allInstancesAnalysis.getInstancesClass2index().get(type);
+			CompleteClass completeType = completeModel.getCompleteClass(type);
+			Integer classIndex = allInstancesAnalysis.getInstancesCompleteClass2index().get(completeType);
 			js.append(classIndex + "/*" + type + "*/");
 			js.append(");\n");
 		}

@@ -354,23 +354,19 @@ public class QVTiTransformationAnalysis
 	/**
 	 * Return a Map from each instanceClasses to the subset of instanceClasses that are transitive superClasses of the particular instanceClass.
 	 */
-	public @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> getInstancesClassAnalysis(@NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Class> instanceClasses) {
-		Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> instancesClassAnalysis = new HashMap<>();
-		MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
-		for (org.eclipse.ocl.pivot.@NonNull Class instanceClass : instanceClasses) {
-			CompleteClass completeInstanceClass = metamodelManager.getCompleteClass(instanceClass);
-			instancesClassAnalysis.put(completeInstanceClass.getPrimaryClass(), null);
+	public @NonNull Map<@NonNull CompleteClass, @Nullable List<@NonNull CompleteClass>> getInstancesCompleteClassAnalysis(@NonNull Iterable<@NonNull CompleteClass> instanceCompleteClasses) {
+		Map<@NonNull CompleteClass, @Nullable List<@NonNull CompleteClass>> instancesClassAnalysis = new HashMap<>();
+		for (@NonNull CompleteClass instanceCompleteClass : instanceCompleteClasses) {
+			instancesClassAnalysis.put(instanceCompleteClass, null);
 		}
-		for (org.eclipse.ocl.pivot.@NonNull Class instanceClass : instancesClassAnalysis.keySet()) {
-			List<org.eclipse.ocl.pivot.Class> superInstanceClasses = new ArrayList<>();
-			superInstanceClasses.add(instanceClass);
-			CompleteClass completeClass = metamodelManager.getCompleteClass(instanceClass);
-			for (@NonNull CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {
-				org.eclipse.ocl.pivot.Class superClass = superCompleteClass.getPrimaryClass();
-				if (instancesClassAnalysis.containsKey(superClass)) {
-					superInstanceClasses.add(superClass);
+		for (@NonNull CompleteClass instanceCompleteClass : instancesClassAnalysis.keySet()) {
+			List<@NonNull CompleteClass> superInstanceCompleteClasses = new ArrayList<>();
+			superInstanceCompleteClasses.add(instanceCompleteClass);
+			for (@NonNull CompleteClass superCompleteClass : instanceCompleteClass.getProperSuperCompleteClasses()) {
+				if (instancesClassAnalysis.containsKey(superCompleteClass)) {
+					superInstanceCompleteClasses.add(superCompleteClass);
 				}
-				instancesClassAnalysis.put(instanceClass, superInstanceClasses);
+				instancesClassAnalysis.put(instanceCompleteClass, superInstanceCompleteClasses);
 			}
 		}
 		return instancesClassAnalysis;
