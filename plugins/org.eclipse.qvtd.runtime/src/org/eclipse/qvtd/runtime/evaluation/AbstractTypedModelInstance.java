@@ -39,7 +39,6 @@ import org.eclipse.ocl.pivot.utilities.XMIUtil;
  */
 public abstract class AbstractTypedModelInstance implements TypedModelInstance
 {
-	@SuppressWarnings("null")
 	private static final @NonNull List<@NonNull Object> EMPTY_EOBJECT_LIST = Collections.emptyList();
 
 	protected final @NonNull ModelsManager modelsManager;
@@ -63,8 +62,6 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 
 	private int extentClassIndex = -1;
 	protected @Nullable Map<Object, Object> extentOpposites = null;
-
-	private final @NonNull Map<@NonNull EClass, @NonNull EClassAnalysis> eClass2eClassAnalysis = new HashMap<>();
 
 	/**
 	 * All possible allInstances() returns indexed by the ClassIndex of the ClassId for which allInstances() may be invoked.
@@ -94,7 +91,7 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 	/**
 	 * The objects added by add filtered as defined by trackObjects.
 	 */
-	protected final @NonNull List<@NonNull EObject> potentialOrphanObjects = new ArrayList<>();
+	private @Nullable List<@NonNull EObject> potentialOrphanObjects = null;
 
 	protected int isContainedCount = 0;
 	protected int isNotContainedCount = 0;
@@ -111,9 +108,15 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 	 */
 	private @Nullable List<@NonNull Resource> outputResources = null;
 
+	/**
+	 * List heads of same-hashed EClassAnalysis singly linked lists.
+	 */
+	private @Nullable EClassAnalysis eClassAnalysisListHeads @Nullable [];
+
 	protected AbstractTypedModelInstance(@NonNull ModelsManager modelsManager, @NonNull String name) {
 		this.modelsManager = modelsManager;
 		this.name = name;
+		this.eClassAnalysisListHeads = null;
 	}
 
 	/**
@@ -128,8 +131,14 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 		}
 		else {
 			isNotContainedCount++;
-			assert !potentialOrphanObjects.contains(eObject);
-			potentialOrphanObjects.add(eObject);
+			List<@NonNull EObject> potentialOrphanObjects2 = potentialOrphanObjects;
+			if (potentialOrphanObjects2 == null) {
+				potentialOrphanObjects = potentialOrphanObjects2 = new ArrayList<>();
+			}
+			else {
+				assert !potentialOrphanObjects2.contains(eObject);
+			}
+			potentialOrphanObjects2.add(eObject);
 		}
 		if (classIndex2classId != null) {
 			getEClassAnalysis(eObject).propagate(eObject);
@@ -258,7 +267,7 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 				}
 			}
 		} */
-		return potentialOrphanObjects;
+		return potentialOrphanObjects != null ? potentialOrphanObjects : Collections.emptyList();
 	}
 
 	/**
@@ -286,14 +295,46 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 		return classIndex2connection[classIndex];
 	}
 
-	protected @NonNull EClassAnalysis getEClassAnalysis(@NonNull EObject eObject) {
+	/**
+	 * Return the EClassAnalysis corresponding to eObject's eClass().
+	 *
+	 * The EClass lookup used a 256 singly linked lists selected from the EClass' identityHashCode.
+	 * For small metaamodels, the required EClass will be found at the list head. For larger metamodels
+	 * a short list search may be necessary. When a longer than two entry search is required the hit
+	 * is promoted to the list head in the hope that most recently accessed classes are also the most likley
+	 * next accesses.
+	 */
+	// FIXME synchronized / simple grow if not synchronized
+	protected @NonNull EClassAnalysis getEClassAnalysis(@NonNull EObject eObject) {			// This code is tested by setting ECLASS_IDENTITIES to 16 and using a bigger model like ATL2QVTr
+		final int ECLASS_IDENTITIES = 1 << 8;
+		final int ECLASS_IDENTITY_MASK = ECLASS_IDENTITIES-1;
+		@Nullable EClassAnalysis [] eClassAnalysisListHeads2 = eClassAnalysisListHeads;
+		if (eClassAnalysisListHeads2 == null) {
+			this.eClassAnalysisListHeads = eClassAnalysisListHeads2 = new @Nullable EClassAnalysis[ECLASS_IDENTITIES];
+			for (int i = 0; i < ECLASS_IDENTITIES; i++) {
+				eClassAnalysisListHeads2[i] = null;
+			}
+		}
 		EClass eClass = eObject.eClass();
 		assert eClass != null;
-		EClassAnalysis eClassAnalysis = eClass2eClassAnalysis.get(eClass);			// FIXME use eClass.hashCode to index multi-line cache
-		if (eClassAnalysis == null) {
-			eClassAnalysis = new EClassAnalysis(this, eClass);
-			eClass2eClassAnalysis.put(eClass, eClassAnalysis);
+		int hashCode = (System.identityHashCode(eClass) >> 8) & ECLASS_IDENTITY_MASK;		// EClassImpl is approximately 256 bytes so avoid less-random bits.
+		EClassAnalysis eClassAnalysisListHead = eClassAnalysisListHeads2[hashCode];
+		for (EClassAnalysis eClassAnalysis = eClassAnalysisListHead, prevEClassAnalysis = null;
+				eClassAnalysis != null;
+				prevEClassAnalysis = eClassAnalysis, eClassAnalysis = eClassAnalysis.nextEClassAnalysis) {
+			if (eClassAnalysis.getEClass() == eClass) {
+				if ((prevEClassAnalysis != null) && (prevEClassAnalysis != eClassAnalysisListHead)) {		// pull to front if third or later in list
+					assert eClassAnalysisListHead != null;													// don't pull to front for second to reduce thrashing
+					assert prevEClassAnalysis.nextEClassAnalysis == eClassAnalysis;
+					prevEClassAnalysis.nextEClassAnalysis = eClassAnalysis.nextEClassAnalysis;
+					eClassAnalysis.nextEClassAnalysis = eClassAnalysisListHead;
+					eClassAnalysisListHeads2[hashCode] = eClassAnalysis;
+				}
+				return eClassAnalysis;
+			}
 		}
+		EClassAnalysis eClassAnalysis = new EClassAnalysis(this, eClass, eClassAnalysisListHead);			// create new analysis at front of list
+		eClassAnalysisListHeads2[hashCode] = eClassAnalysis;
 		return eClassAnalysis;
 	}
 
@@ -374,9 +415,11 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 			return rootObjects;
 		}
 		List<@NonNull EObject> rootObjects2 = new ArrayList<>();
-		for (@NonNull EObject eObject : potentialOrphanObjects) {
-			if (eObject.eContainer() == null) {
-				rootObjects2.add(eObject);
+		if (potentialOrphanObjects != null) {
+			for (@NonNull EObject eObject : potentialOrphanObjects) {
+				if (eObject.eContainer() == null) {
+					rootObjects2.add(eObject);
+				}
 			}
 		}
 		if (AbstractTransformer.CONTAINMENTS.isActive()) {
@@ -421,10 +464,17 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <K,V> void initExtent(int extentClassIndex, @Nullable Map<K, V> extentOpposites) {
 		this.extentClassIndex = extentClassIndex;
 		this.extentOpposites = (Map<Object, Object>) extentOpposites;
+	}
+
+	public void remove(@NonNull EObject eObject) {
+		if (potentialOrphanObjects != null) {
+			potentialOrphanObjects.remove(eObject);
+		}
 	}
 
 	@Override
@@ -433,7 +483,8 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 		if (outputResources2 != null) {
 			if (saveOptions == null) {
 				saveOptions = XMIUtil.createSaveOptions();
-				((Map<Object,Object>)saveOptions).put(XMIResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
+				@SuppressWarnings("unchecked") Map<Object, Object> castSaveOptions = (Map<Object,Object>)saveOptions;
+				castSaveOptions.put(XMIResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 			}
 			for (@NonNull Resource outputResource : outputResources2) {
 				outputResource.save(saveOptions);
@@ -453,7 +504,7 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 
 	@Override
 	public String toString() {
-		return name + " " + rootObjects.size() + " (" + potentialOrphanObjects.size() + ")";
+		return name + " " + rootObjects.size() + " (" + (potentialOrphanObjects != null ? potentialOrphanObjects.size() : 0) + ")";
 	}
 
 	public <@NonNull T> Iterable<T> typedIterable(Class<T> javaClass, org.eclipse.ocl.pivot.@NonNull Class pivotType) {

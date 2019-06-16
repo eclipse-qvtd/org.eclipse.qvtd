@@ -38,9 +38,10 @@ public class RuntimeModelsManager extends AbstractModelsManager
 				super(transformer, name);
 			}
 
+			@Override
 			public void remove(@NonNull EObject eObject) {
+				super.remove(eObject);
 				rootObjects.remove(eObject);
-				potentialOrphanObjects.remove(eObject);
 				if (classIndex2connection != null) {
 					getEClassAnalysis(eObject).unpropagate(eObject);
 				}

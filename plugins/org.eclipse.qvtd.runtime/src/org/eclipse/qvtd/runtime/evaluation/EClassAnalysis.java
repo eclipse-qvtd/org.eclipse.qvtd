@@ -30,7 +30,16 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public class EClassAnalysis
 {
+	/**
+	 * The TypedModel instance for which this EClassAnalysis provides details.
+	 */
 	protected final @NonNull AbstractTypedModelInstance typedModelInstance;
+
+	/**
+	 * Next EClassAnalysis in a singly linked list of same-hashed EClassAnalysis instances.
+	 * (For the exclusive use of AbstractTypedModelInstance.getEClassAnalysis.)
+	 */
+	/*package*/ @Nullable EClassAnalysis nextEClassAnalysis = null;
 
 	/**
 	 * The analyzed EClass.
@@ -47,9 +56,10 @@ public class EClassAnalysis
 	 */
 	private final @NonNull Connection @NonNull [] connections;
 
-	public EClassAnalysis(@NonNull AbstractTypedModelInstance typedModelInstance, @NonNull EClass eClass) {
+	public EClassAnalysis(@NonNull AbstractTypedModelInstance typedModelInstance, @NonNull EClass eClass, @Nullable EClassAnalysis nextEClassAnalysis) {
 		this.typedModelInstance = typedModelInstance;
 		this.eClass = eClass;
+		this.nextEClassAnalysis = nextEClassAnalysis;
 		ModelsManager modelsManager = typedModelInstance.getModelsManager();
 		List<@NonNull EReferenceAnalysis> eReferenceAnalyses = null;
 		for (EStructuralFeature eStructuralFeature : eClass.getEAllStructuralFeatures()) {
@@ -76,6 +86,10 @@ public class EClassAnalysis
 		for (@NonNull Integer classIndex : allClassIndexes) {
 			connections[connectionIndex++] = typedModelInstance.classIndex2connection[classIndex];
 		}
+	}
+
+	public @NonNull EClass getEClass() {
+		return eClass;
 	}
 
 	public ModelsManager getModelsManager() {
@@ -116,7 +130,7 @@ public class EClassAnalysis
 
 	@Override
 	public String toString() {
-		return super.toString();
+		return eClass.getName();
 	}
 
 	/**
