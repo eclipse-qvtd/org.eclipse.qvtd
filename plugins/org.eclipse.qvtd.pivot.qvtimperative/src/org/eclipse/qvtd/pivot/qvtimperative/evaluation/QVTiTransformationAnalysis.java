@@ -35,12 +35,14 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
+import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -66,7 +68,7 @@ public class QVTiTransformationAnalysis
 	/**
 	 *  Set of all types for which allInstances() is invoked.
 	 */
-	private final @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses = new HashSet<>();
+	private final @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses = new HashSet<>();
 
 	/**
 	 *  Map from navigable property to sequential index in any TypedModel.
@@ -126,7 +128,8 @@ public class QVTiTransformationAnalysis
 		if (asType instanceof org.eclipse.ocl.pivot.Class) {
 			assert !(asType instanceof PrimitiveType);
 			assert !(asType instanceof CollectionType);
-			allInstancesClasses.add((org.eclipse.ocl.pivot.Class)asType);
+			CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(asType);
+			allInstancesCompleteClasses.add(completeClass);
 		}
 	}
 
@@ -251,8 +254,7 @@ public class QVTiTransformationAnalysis
 		OperationId objectsOfKindOperationId = modelType.getTypeId().getOperationId(1, "objectsOfKind", IdManager.getParametersId(TypeId.T_1));
 		OperationId objectsOfTypeOperationId = modelType.getTypeId().getOperationId(1, "objectsOfType", IdManager.getParametersId(TypeId.T_1));
 		List<@NonNull SetStatement> setStatements = new ArrayList<>();
-		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
+		for (EObject eObject : new TreeIterable(transformation, true)) {
 			if (eObject instanceof Mapping) {
 				Mapping mapping = (Mapping)eObject;
 				analyzeMappingPropertyAccesses(mapping);
@@ -323,8 +325,8 @@ public class QVTiTransformationAnalysis
 		analyzeProperties();
 	}
 
-	public @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getAllInstancesClasses() {
-		return allInstancesClasses;
+	public @NonNull Set<@NonNull CompleteClass> getAllInstancesCompleteClasses() {
+		return allInstancesCompleteClasses;
 	}
 
 	public @Nullable Integer getCacheIndex(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
@@ -382,6 +384,16 @@ public class QVTiTransformationAnalysis
 
 	public @NonNull MetamodelManagerInternal getMetamodelManager() {
 		return environmentFactory.getMetamodelManager();
+	}
+
+	public @NonNull PropertyId @NonNull [] getPropertyIndex2propertyId() {
+		@NonNull PropertyId @NonNull [] propertyIndex2propertyId = new @NonNull PropertyId[property2cacheIndex.size()];
+		for (@NonNull Property property : property2cacheIndex.keySet()) {
+			Integer index = property2cacheIndex.get(property);
+			assert index != null;
+			propertyIndex2propertyId[index] = property.getPropertyId();
+		}
+		return propertyIndex2propertyId;
 	}
 
 	public @NonNull ImperativeTransformation getTransformation() {

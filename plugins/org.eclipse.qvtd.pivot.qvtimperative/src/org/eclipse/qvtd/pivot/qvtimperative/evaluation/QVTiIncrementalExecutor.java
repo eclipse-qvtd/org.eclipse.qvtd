@@ -12,20 +12,25 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -34,22 +39,27 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager.QVTiTypedModelInstance;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Computation;
+import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationConstructor;
 import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalInvocationManager;
@@ -82,6 +92,11 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			this.mappingCall = mappingCall;
 			this.undecoratedVisitor = undecoratedVisitor;
 		}
+
+		//	@Override
+		//	public @NonNull ModeFactory getModeFactory() {
+		//		return ModeFactory.NON_INCREMENTAL;
+		//	}
 
 		@Override
 		public @NonNull Invocation newInstance(int invocationHashCode, @NonNull Object @NonNull [] theseValues) {
@@ -143,21 +158,40 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		REPAIR						// EvaluationStatus is updated for all mapping elements
 	};
 
-	protected final @NonNull Mode mode;
-	//	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull InvocationManager invocationManager;
 	protected final @NonNull ObjectManager objectManager;
 	private Invocation.@Nullable Incremental currentInvocation = null;
 	private @Nullable Map<@NonNull Mapping, @NonNull InvocationConstructor> mapping2invocationConstructor = null;
 	private @Nullable Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor = null;
 
-	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation, @NonNull Mode mode) {
-		super(environmentFactory, transformation);
-		this.mode = mode;
-		//		this.transformationAnalysis = getModelsManager().getTransformationAnalysis();
-		boolean isLazy = mode == Mode.LAZY;
+	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation, @NonNull ModeFactory modeFactory) {
+		super(environmentFactory, transformation, modeFactory);
+		boolean isLazy = modeFactory.isLazy();
 		this.invocationManager = isLazy ? new LazyInvocationManager(this) : new IncrementalInvocationManager(this);
 		this.objectManager = isLazy ? new LazyObjectManager((LazyInvocationManager)invocationManager) : new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
+		Set<@NonNull CompleteClass> allInstancesCompleteClasses = transformationAnalysis.getAllInstancesCompleteClasses();
+		@NonNull PropertyId @NonNull [] propertyIndex2propertyId = transformationAnalysis.getPropertyIndex2propertyId();
+		modelsManager.initOpposites(propertyIndex2propertyId);
+
+		for (@NonNull QVTiTypedModelInstance typedModelInstance : modelsManager.getTypedModelInstances()) {
+			ImperativeTypedModel typedModel = typedModelInstance.getTypedModel();
+			Set<@NonNull CompleteClass> usedCompleteClasses = new HashSet<>();
+			for (org.eclipse.ocl.pivot.@NonNull Class usedClass : QVTimperativeUtil.getUsedClasses(typedModel)) {
+				usedCompleteClasses.add(environmentFactory.getCompleteModel().getCompleteClass(usedClass));
+			}
+			usedCompleteClasses.retainAll(allInstancesCompleteClasses);
+			TypedModelAnalysis typedModelAnalysis = new TypedModelAnalysis(transformationAnalysis, typedModel, usedCompleteClasses);
+			@NonNull ClassId @NonNull [] classIndex2classId = typedModelAnalysis.getClassIndex2ClassId();
+			int @Nullable [] @NonNull [] classIndex2allClassIndexes = typedModelAnalysis.getClassIndex2allClassIndexes();
+			typedModelInstance.initClassIds(classIndex2classId, classIndex2allClassIndexes);
+			int extentClassIndex = typedModelAnalysis.getExtentClassIndex();
+			if (extentClassIndex >= 0) {
+				Map<@NonNull Object, Object> extentOpposites = modelsManager.getExtentOpposites();
+				typedModelInstance.initExtent(extentClassIndex, extentOpposites);
+			}
+			typedModelAnalysis.toString();
+		}
+		initConnections();
 	}
 
 	public @NonNull String createGraph(@NonNull GraphStringBuilder s) {
@@ -168,7 +202,6 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		assert string != null;
 		return string;
 	}
-
 	@Override
 	public @NonNull InvocationConstructor getInvocationConstructor(@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping asMapping = ClassUtil.nonNullState(mappingCall.getReferredMapping());
@@ -187,6 +220,25 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	@Override
 	public @NonNull InvocationManager getInvocationManager() {
 		return invocationManager;
+	}
+
+	@Override
+	public @NonNull Transformer getTransformer() {
+		throw new UnsupportedOperationException("Transformer API not implemented by interpreted executor");
+	}
+
+	@Override
+	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName) {
+		return modelsManager.getTypedModelInstance(modelName);
+	}
+
+	protected void initConnections() {
+		Interval rootInterval = getInvocationManager().getRootInterval();
+		//		Interval rootInterval = lazyCreateInterval(0);
+		ModeFactory modeFactory = ModeFactory.NON_INCREMENTAL;// getModeFactory();
+		for (@NonNull TypedModelInstance model : getModelsManager().getTypedModelInstances()) {
+			model.initConnections(rootInterval, modeFactory);
+		}
 	}
 
 	@Override
@@ -252,7 +304,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	@Override
 	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping asMapping = ClassUtil.nonNullState(mappingCall.getReferredMapping());
-		if (mode == Mode.LAZY) {
+		if (modeFactory.isLazy()) {
 			if (!transformationAnalysis.isHazardous(asMapping)) {
 				return super.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
 			}
@@ -269,10 +321,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex((OppositePropertyCallExp) navigationCallExp);
 			if (cacheIndex != null) {
 				if (sourceValue != null) {
-					Object middleOpposite = modelManager.getUnnavigableOpposite(cacheIndex, sourceValue);
-					if (middleOpposite != null) {
-						return middleOpposite;
-					}
+					return modelManager.getUnnavigableOpposite(cacheIndex, sourceValue);
 				}
 				else {
 					throw new InvalidValueException("Failed to evaluate '" + referredProperty + "'", sourceValue, navigationCallExp);
@@ -304,7 +353,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		else {
 			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
 		}
-		if (mode != Mode.LAZY) {
+		if (!modeFactory.isLazy()) {
 			Invocation.Incremental currentInvocation2 = currentInvocation;
 			if (currentInvocation2 != null) {			// Null at root
 				assert sourceValue != null;
@@ -330,7 +379,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	@Override
 	public @Nullable Object internalExecuteNewStatement(@NonNull NewStatement asNewStatement, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Object element = super.internalExecuteNewStatement(asNewStatement, undecoratedVisitor);
-		if ((element != null) && (mode == Mode.INCREMENTAL)) {
+		if ((element != null) && modeFactory.isIncremental()) {
 			Invocation.Incremental currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;
 			objectManager.created(currentInvocation2, element);
@@ -346,7 +395,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	@Override
 	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object sourceObject, @Nullable Object ecoreValue) {
 		super.internalExecuteSetStatement(setStatement, sourceObject, ecoreValue);
-		if (mode == Mode.LAZY) {
+		if (modeFactory.isLazy()) {
 			if (setStatement.isIsNotify()) {
 				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 				assert targetProperty != null;

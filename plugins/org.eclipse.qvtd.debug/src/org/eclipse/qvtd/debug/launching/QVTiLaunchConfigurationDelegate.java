@@ -30,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
@@ -56,7 +57,7 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
 	}
 
 	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTiEnvironmentFactory envFactory, @NonNull ImperativeTransformation transformation) {
-		return new QVTiIncrementalExecutor(envFactory, transformation, QVTiIncrementalExecutor.Mode.LAZY);
+		return new QVTiIncrementalExecutor(envFactory, transformation, ModeFactory.LAZY);
 	}
 
 	protected @NonNull QVTiDebugCore getDebugCore() {

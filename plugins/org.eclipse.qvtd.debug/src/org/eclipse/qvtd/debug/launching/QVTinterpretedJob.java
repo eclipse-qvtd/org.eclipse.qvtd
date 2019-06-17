@@ -33,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.ui.statushandlers.StatusManager;
 
@@ -70,6 +71,7 @@ public class QVTinterpretedJob extends QVTimperativeJob
 			//		QVTiExecutor executor2 = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 
 			QVTiExecutor executor = launchConfigurationDelegate.createExecutor(environmentFactory, transformation);
+			QVTiModelsManager modelsManager = executor.getModelsManager();
 			for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
 				if (monitor.isCanceled()) {
 					throw new OperationCanceledException();
@@ -91,17 +93,7 @@ public class QVTinterpretedJob extends QVTimperativeJob
 				if (inName != null) {
 					URI inURI = URI.createURI(inMap.get(inName), true);
 					subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Loading '" + inURI + "'", 1);
-					executor.loadModel(inName, inURI, null);
-				}
-			}
-			for (String outName : outMap.keySet()) {
-				if (monitor.isCanceled()) {
-					throw new OperationCanceledException();
-				}
-				if (outName != null) { //&& !QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(outName)) {
-					URI outURI = URI.createURI(outMap.get(outName), true);
-					subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Creating '" + outURI + "'", 1);
-					executor.createModel(outName, outURI, null);
+					modelsManager.getTypedModelInstance(inName).addInputResource(inURI, null);
 				}
 			}
 			if (monitor.isCanceled()) {
@@ -118,7 +110,17 @@ public class QVTinterpretedJob extends QVTimperativeJob
 				throw new OperationCanceledException();
 			}
 			subMonitor.split(SAVING_TICKS, SubMonitor.SUPPRESS_NONE).beginTask("Saving output models for '" + txURI + "'", SAVING_TICKS);
-			executor.saveModels();
+			for (String outName : outMap.keySet()) {
+				if (monitor.isCanceled()) {
+					throw new OperationCanceledException();
+				}
+				if (outName != null) { //&& !QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(outName)) {
+					URI outURI = URI.createURI(outMap.get(outName), true);
+					subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Creating '" + outURI + "'", 1);
+					executor.saveOutput(outName, outURI);
+				}
+			}
+			executor.saveModels(null);
 			return new Status(IStatus.OK, getPluginId(), null);
 		}
 		catch (OperationCanceledException oce) {

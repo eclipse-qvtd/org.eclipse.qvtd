@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 
 public class QVTiVMExecutor extends QVTiIncrementalExecutor implements VMExecutor
 {
@@ -34,7 +35,7 @@ public class QVTiVMExecutor extends QVTiIncrementalExecutor implements VMExecuto
 	private long envId = 0;
 
 	public QVTiVMExecutor(@NonNull IVMContext vmContext, @NonNull URI transformationURI) throws IOException {
-		super((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), QVTimperativeUtil.loadTransformation((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()), Mode.LAZY);
+		super((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), QVTimperativeUtil.loadTransformation((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()), ModeFactory.LAZY);
 		this.vmContext = vmContext;
 	}
 
@@ -71,6 +72,16 @@ public class QVTiVMExecutor extends QVTiIncrementalExecutor implements VMExecuto
 	@Override
 	public @NonNull String getPluginId() {
 		return QVTiDebugPlugin.PLUGIN_ID;
+	}
+
+	@Override
+	public void saveModels() {
+		try {
+			modelsManager.saveModels(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

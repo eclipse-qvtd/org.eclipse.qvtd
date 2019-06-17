@@ -183,7 +183,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				reserveImportName(org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable.class);
 				reserveImportName(org.eclipse.qvtd.runtime.evaluation.Transformer.class);
 				reserveImportName(org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal.Incremental.class);
-				reserveImportName(org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal.Model.class);
+				reserveImportName(org.eclipse.qvtd.runtime.internal.evaluation.RuntimeModelsManager.Model.class);
 			}
 		};
 	}

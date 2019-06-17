@@ -119,7 +119,7 @@ public class ATLExampleTests extends LoadTestCase
 			@NonNull Class<? extends Transformer> txCastClass = (Class<? extends Transformer>)txClass;
 			myQVT.createGeneratedExecutor(txCastClass);
 			URI atlXMIURI = getTestURIWithExtension(atlURI, "xmi");
-			Resource atlResource = myQVT.loadInput("atl", atlURI);
+			Resource atlResource = myQVT.addInputURI("atl", atlURI);
 			assert atlResource != null;
 			EList<@NonNull EObject> contents = atlResource.getContents();
 			assert !contents.isEmpty() : "ATL's ANTLR cannot co-exist with Xext's ANTLR - run test separately";
@@ -130,12 +130,14 @@ public class ATLExampleTests extends LoadTestCase
 			String name = atlURI.trimFileExtension().lastSegment();
 			URI outputURI = getTestURIWithExtension(atlURI.trimSegments(1).appendSegment(name + "_CG.qvtras"), "qvtras");
 			try {
-				@SuppressWarnings("unused")
-				Transformer executeTransformation = myQVT.executeTransformation();
-				myQVT.saveOutput("qvtr", outputURI, atlURI.trimSegments(1).appendSegment(name + "_expected.qvtras"), null);
+				myQVT.executeTransformation();
+				myQVT.addOutputURI("qvtr", outputURI);
+				myQVT.saveModels(null);
+				myQVT.checkOutput(outputURI, atlURI.trimSegments(1).appendSegment(name + "_expected.qvtras"), null);
 			}
 			catch (InvalidEvaluationException e) {
-				myQVT.saveOutput("qvtr", outputURI, null, null);
+				myQVT.addOutputURI("qvtr", outputURI);
+				myQVT.saveModels(null);
 				throw e;
 			}
 		}

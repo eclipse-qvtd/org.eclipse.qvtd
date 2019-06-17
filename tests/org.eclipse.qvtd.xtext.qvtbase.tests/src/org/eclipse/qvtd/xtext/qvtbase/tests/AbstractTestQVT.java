@@ -62,6 +62,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
@@ -72,7 +73,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -161,8 +165,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	private final @NonNull Map<@NonNull Class<? extends Partition>, @NonNull Integer> partitionClass2count = new HashMap<>();
 
 	protected AbstractCompilerChain compilerChain = null;
-	private BasicQVTiExecutor interpretedExecutor = null;
-	private QVTiTransformationExecutor generatedExecutor = null;
+	private TransformationExecutor executor = null;
 	private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
 	private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
 
@@ -197,6 +200,29 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	public void addClasspathClass(@NonNull Class<?> classpathClass) {
 		classpath.addClass(classpathClass);
+	}
+
+	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
+		ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in exteranl RespurcSet
+		PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
+		Resource inputResource = ClassUtil.nonNullState(resourceSet.getResource(modelURI, true));
+		TypedModelInstance typedModelInstance = executor.getTypedModelInstance(modelName);
+		typedModelInstance.addInputResource(inputResource);
+		return inputResource;
+	}
+
+	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
+		ResourceSet resourceSet;
+		if (PivotUtilInternal.isASURI(modelURI)) {
+			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
+		}
+		else {
+			resourceSet = getResourceSet();
+		}
+		TypedModelInstance typedModelInstance = executor.getTypedModelInstance(modelName);
+		Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(modelURI));
+		typedModelInstance.addOutputResource(outputResource);
+		return outputResource;
 	}
 
 	public void addRegisteredPackage(@NonNull String ePackageClassName) throws Exception {
@@ -242,19 +268,32 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return doBuild(txURI, intermediateFileNamePrefixURI, Collections.singletonList(outputName), options, genModelFiles);
 	}
 
-	//	protected void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFilePath, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-	//		URI referenceModelURI = testSamplesUri.appendSegments(expectedFilePath.split("/"));
-	//		checkOutput(outputResource, referenceModelURI, normalizer);
-	//	}
-
 	protected void checkOutput(@NonNull Resource outputResource, @NonNull URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 		Resource referenceResource = outputResource.getResourceSet().getResource(referenceModelURI, true);
 		assert referenceResource != null;
 		if (normalizer != null) {
+			assert !referenceResource.getContents().isEmpty() : referenceResource.getURI() + " has no contents";
+			assert !outputResource.getContents().isEmpty() : outputResource.getURI() + " has no contents";
 			normalizer.normalize(referenceResource);
 			normalizer.normalize(outputResource);
 		}
 		LoadTestCase.assertSameModel(referenceResource, outputResource);
+	}
+
+	public @NonNull Resource checkOutput(@NonNull URI modelURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
+		ResourceSet resourceSet;// = new ResourceSetImpl();//;		// FIXME new ResourceSet
+		//	environmentFactory.getProjectManager().initializeResourceSet(resourceSet);
+		if (PivotUtilInternal.isASURI(modelURI)) {
+			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
+		}
+		else {
+			resourceSet = getResourceSet();
+		}
+		Resource outputResource = ClassUtil.nonNullState(resourceSet.getResource(modelURI, true));
+		if (expectedURI != null) {
+			checkOutput(outputResource, expectedURI, normalizer);
+		}
+		return outputResource;
 	}
 
 	public @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Exception {
@@ -324,22 +363,29 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return txClass;
 	}
 
-	public void createGeneratedExecutor(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
+	/*	public void createGeneratedExecutor(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
 		Class<? extends Transformer> txClass = createGeneratedClass(asTransformation, genModelFiles);
 		createGeneratedExecutor(txClass);
+	} */
+
+	public @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull Class<? extends Transformer> txClass)  throws Exception {
+		QVTiTransformationExecutor generatedExecutor = createGeneratedExecutor(getEnvironmentFactory(), txClass);
+		this.executor = generatedExecutor;
+		return generatedExecutor;
 	}
 
-	public QVTiTransformationExecutor createGeneratedExecutor(@NonNull Class<? extends Transformer> txClass)  throws Exception {
-		return generatedExecutor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
+	protected @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+		return new QVTiTransformationExecutor(environmentFactory, txClass);
 	}
 
 	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull ImperativeTransformation asTransformation) throws Exception {
-		interpretedExecutor = new QVTiIncrementalExecutor(getEnvironmentFactory(), asTransformation, QVTiIncrementalExecutor.Mode.LAZY);
+		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(getEnvironmentFactory(), asTransformation);
+		this.executor = interpretedExecutor;
 		return interpretedExecutor;
 	}
 
-	public @Nullable Resource createModel(@NonNull String modelName, @NonNull URI modelURI) {
-		return interpretedExecutor.createModel(modelName, modelURI, null);
+	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) throws Exception {
+		return new QVTiIncrementalExecutor(environmentFactory, asTransformation, ModeFactory.LAZY);
 	}
 
 	@Override
@@ -350,8 +396,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 			}
 		}
 		super.dispose();
-		if (interpretedExecutor != null) {
-			interpretedExecutor.dispose();
+		if (executor != null) {
+			executor.dispose();
 		}
 		if (compilerChain != null) {
 			compilerChain.dispose();
@@ -439,27 +485,16 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
-	public Transformer executeTransformation() throws Exception {
-		if (interpretedExecutor != null) {
-			interpretedExecutor.execute();
-			interpretedExecutor.saveModels(DefaultCompilerOptions.defaultSavingOptions);
-			return null;
+	public boolean executeTransformation() throws Exception {
+		if (suppressFailureDiagnosis) {
+			executor.setSuppressFailureDiagnosis(true);
 		}
-		else {
-			Transformer transformer = generatedExecutor.getTransformer();
-			if (!transformer.run()) {
-				if (!suppressFailureDiagnosis) {						// FIXME BUG 511028
-					StringBuilder s = new StringBuilder();
-					transformer.getInvocationManager().diagnoseWorkLists(s);
-					throw new Exception("Failed to execute" + s.toString());
-				}
-			}
-			return transformer;
-		}
+		Boolean success = executor.execute();
+		return success == Boolean.TRUE;
 	}
 
 	/**
-	 * Return true if this chanin generates the GenModel.
+	 * Return true if this chain generates the GenModel.
 	 */
 	protected boolean generateGenModel() {
 		return false;
@@ -476,6 +511,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return super.getEnvironmentFactory();
 	}
 
+	public @NonNull TransformationExecutor getExecutor() {
+		return ClassUtil.nonNullState(executor);
+	}
+
 	@Deprecated /** @deprecated use known writeable area in caller */
 	private @NonNull URI getJavaClassURI() {
 		return testBundleURI.appendSegment("bin");
@@ -486,13 +525,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return testBundleURI.appendSegment("test-gen");
 	}
 
-	public @NonNull Collection<@NonNull ? extends Object> getRootObjects(@NonNull String modelName) {
-		if (interpretedExecutor != null) {
-			return interpretedExecutor.getRootObjects(modelName);
-		}
-		else {
-			return generatedExecutor.getTransformer().getRootObjects(modelName);
-		}
+	public @NonNull Collection<@NonNull ? extends EObject> getRootEObjects(@NonNull String modelName) {
+		return executor.getTypedModelInstance(modelName).getRootEObjects();
 	}
 
 	public @NonNull Map<Object, Object> getSaveOptions() {
@@ -561,6 +595,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	public void loadEcoreFile(URI fileURI, EPackage ePackage) {
 		ResourceSet rSet = getResourceSet();
 		rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
+		rSet.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
 	}
 
 	protected void loadGenModel(@NonNull URI genModelURI) {
@@ -585,18 +620,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
-	public @Nullable Resource loadInput(@NonNull String modelName, @NonNull URI modelURI) {
-		if (interpretedExecutor != null) {
-			return interpretedExecutor.loadModel(modelName, modelURI);
-		}
-		else {
-			//				Resource inputResource = getResourceSet().getResource(modelURI, true);
-			//			ResourceSet resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();		// FIXME get package registrations in exteranl RespurcSet
-			ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in exteranl RespurcSet
-			PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
-			Resource inputResource = resourceSet.getResource(modelURI, true);
-			generatedExecutor.getTransformer().addRootObjects(modelName, ClassUtil.nonNullState(inputResource.getContents()));
-			return inputResource;
+	public void loadGenModels(@NonNull URI @NonNull... genModelURIs) {
+		for (@NonNull URI genModelURI : genModelURIs) {
+			loadGenModel(genModelURI);
 		}
 	}
 
@@ -638,28 +664,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
-	public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull URI modelURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-		ResourceSet resourceSet;
-		if (PivotUtilInternal.isASURI(modelURI)) {
-			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
-		}
-		else {
-			resourceSet = getResourceSet();
-		}
-		Resource outputResource;
-		if (interpretedExecutor != null) {
-			outputResource = interpretedExecutor.saveModel(modelName, modelURI, null, getSaveOptions());
-		}
-		else {
-			outputResource = resourceSet.createResource(modelURI);
-			outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
-			outputResource.save(getSaveOptions());
-		}
-		assert outputResource != null;
-		if (expectedURI != null) {
-			checkOutput(outputResource, expectedURI, normalizer);
-		}
-		return outputResource;
+	public void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
+		getExecutor().getModelsManager().saveModels(saveOptions);
 	}
 
 	public void setCopyright(@Nullable String copyright) {
@@ -670,5 +676,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	public void setSuppressFailureDiagnosis(boolean suppressFailureDiagnosis) {		// FIXME BUG 511028
 		this.suppressFailureDiagnosis = suppressFailureDiagnosis;
+	}
+
+	public void writeGraphMLfile(@NonNull URI graphURI) {
+		Transformer transformer = ((QVTiTransformationExecutor)executor).getTransformer();
+		Execution2GraphVisitor.writeGraphMLfile(transformer, graphURI);
 	}
 }

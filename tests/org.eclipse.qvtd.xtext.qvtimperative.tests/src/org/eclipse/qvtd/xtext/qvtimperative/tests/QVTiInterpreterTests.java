@@ -16,10 +16,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,32 +23,31 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
-import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.compiler.AbstractCompilerChain;
+import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.QVTiCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
+import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
@@ -60,97 +55,38 @@ import org.junit.Test;
 
 public class QVTiInterpreterTests extends LoadTestCase
 {
-	protected static class MyQVT extends QVTimperative
+	protected class MyQVT extends AbstractTestQVT
 	{
-		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
-			super(environmentFactory);
+		private @NonNull ModeFactory modeFactory;
+
+		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI, @NonNull ModeFactory modeFactory) throws IOException {
+			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+			this.modeFactory = modeFactory;
 		}
 
-		public @NonNull MyQvtiExecutor createEvaluator(@NonNull URI txURI, QVTiIncrementalExecutor.@NonNull Mode mode) throws IOException {
-			return new MyQvtiExecutor(getEnvironmentFactory(), txURI, mode);
-		}
-	}
-
-	/**
-	 * The Class MyQvtiEvaluator provides helper methods for loading and creating models used in the test
-	 */
-	private static class MyQvtiExecutor extends QVTiIncrementalExecutor
-	{
-
-		/** The typed model validation resource map. */
-		protected final @NonNull Map<ImperativeTypedModel, Resource> typedModelValidationResourceMap = new HashMap<>();
-
-		/**
-		 * Instantiates a new my Qvti evaluator.
-		 *
-		 * @param metamodelManager the meta model manager
-		 * @param fileNamePrefix the file name prefix
-		 * @param transformationFileName the transformation file name
-		 * @throws IOException Signals that an I/O exception has occurred.
-		 */
-		public MyQvtiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Mode mode) throws IOException {
-			super(environmentFactory, QVTimperativeUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug()), mode);
+		@Override
+		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+			return new QVTiCompilerChain(getEnvironmentFactory(), txURI, intermediateFileNamePrefixURI/*getTestURIWithExtension(txURI, null)*/, createCompilerOptions());
 		}
 
-		public void checkModels(@Nullable ModelNormalizer modelNormalizer) throws IOException, InterruptedException {
-			for (Entry<ImperativeTypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
-				ImperativeTypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
-				Resource expectedModel = entry.getValue();
-				assert expectedModel != null;
-				Resource actualModel = getModelsManager().getModel(typedModel);
-				assert actualModel != null;
-				if (modelNormalizer != null) {
-					modelNormalizer.normalize(expectedModel);
-					modelNormalizer.normalize(actualModel);
-				}
-				assertSameModel(expectedModel, actualModel);
-			}
+		@Override
+		protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) throws Exception {
+			return new QVTiIncrementalExecutor(environmentFactory, asTransformation, modeFactory);
 		}
 
-		/**
-		 * Associates a typed model, identified by typedModelName, with a new resource with
-		 * name modelFileName, in the current project.
-		 *
-		 * @param typedModelName the name of the typed model
-		 * @param modelFileName the model file name
-		 *
-		 * @see #loadModel(String, String)
-		 *
-		public void createModel(@NonNull String typedModelName, @NonNull String modelFileName) {
-			createModel(typedModelName, getModelsURI(fileNamePrefix + "/" + modelFileName), null);
-		} */
+		@Override
+		protected @NonNull String getBasePrefix() {
+			return "org.eclipse.qvtd.xtext.qvtimperative.tests";
+		}
 
-		/**
-		 * Associates a typed model, identified by typedModelName, with an existing resource
-		 * with name modelFileName, in the current project.
-		 *
-		 * @param name the name
-		 * @param modelFileName the model file name
-		 *
-		 * @see #createModel(String, String)
-		 *
-		public void loadModel(@NonNull String name, @NonNull String modelFileName) {
-			loadModel(name, getModelsURI(fileNamePrefix + "/" + modelFileName));
-		} */
+		@Override
+		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
+			return QVTiInterpreterTests.this.getTestProjectManager();
+		}
 
-		/**
-		 * Loads a reference model, identified by modelFileName, as a resource. The reference
-		 * model is used to validate if the generated model is correct, i.e. the output
-		 * and reference model must be equal.
-		 *
-		 * @param name the name
-		 * @param modelFileName the model file name
-		 */
-		//		public void loadReference(@NonNull String name, @NonNull String modelFileName) {
-		//			loadReference(name, getModelsURI(fileNamePrefix + "/" + modelFileName));
-		//		}
-		public void loadReference(@NonNull String name, @NonNull URI modelURI) {
-			ImperativeTypedModel typedModel = (ImperativeTypedModel) NameUtil.getNameable(transformation.getModelParameter(), name);
-			if (typedModel == null) {
-				throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-			}
-			Resource resource = environmentFactory.getResourceSet().getResource(modelURI, true);
-			typedModelValidationResourceMap.put(typedModel, resource);
+		public @NonNull ImperativeTransformation loadTransformation() throws IOException {
+			QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+			return QVTimperativeUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 		}
 
 		public void saveExecutionGraph(@NonNull URI graphmlURI) throws Exception, IOException {
@@ -163,22 +99,12 @@ public class QVTiInterpreterTests extends LoadTestCase
 			writer.close();
 		}
 
-		/**
-		 * Test.
-		 *
-		 * @throws Exception the exception
-		 */
-		public void test() throws Exception {
-			boolean result = execute();
-			assertTrue(getClass().getSimpleName() + " should not return null.", result);
-		}
-
 		public void writeExecutionGraphMLfile(@NonNull URI graphmlURI) {
 			URIConverter uriConverter = getEnvironmentFactory().getResourceSet().getURIConverter();
 			try {
 				OutputStream outputStream = uriConverter.createOutputStream(graphmlURI);
 				GraphMLStringBuilder s = new GraphMLStringBuilder();
-				createGraph(s);
+				((QVTiIncrementalExecutor)getExecutor()).createGraph(s);
 				outputStream.write(s.toString().getBytes());
 				outputStream.close();
 			} catch (IOException e) {
@@ -229,10 +155,12 @@ public class QVTiInterpreterTests extends LoadTestCase
 		return QVTimperative.newInstance(getTestProjectManager(), null);
 	}
 
-	protected @NonNull MyQVT createQVT() throws Exception {
-		ProjectManager projectManager = getTestProjectManager();
-		MyQVT myQVT = new MyQVT(new QVTiEnvironmentFactory(projectManager, null));
-		return myQVT;
+	private @NonNull MyQVT createQVT(@NonNull String modelTestName, @NonNull URI txURI, @NonNull ModeFactory modeFactory) throws Exception {
+		ProjectManager testProjectManager = getTestProjectManager();
+		URI intermediateFileNamePrefixURI = getTestURI(modelTestName);
+		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
+		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
+		return new MyQVT(testProjectManager, getTestProject(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI, modeFactory);
 	}
 
 	/* (non-Javadoc)
@@ -258,21 +186,22 @@ public class QVTiInterpreterTests extends LoadTestCase
 	public void testQVTiInterpreter_Graph2GraphMinimal() throws Exception {
 		URI txURI = getModelsURI("Graph2GraphMinimal/Graph2GraphMinimal.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, "qvtias");
-		MyQVT myQVT = createQVT();
-		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		MyQvtiExecutor testEvaluator = myQVT.createEvaluator(txURI, QVTiIncrementalExecutor.Mode.LAZY);
+		URI inputURI = getModelsURI("Graph2GraphMinimal/SimpleGraph.xmi");
+		URI outputURI = getTestURI("Graph2GraphMinimal.xmi");
+		URI traceURI = getTestURI("Graph2Graph.xmi");
+		MyQVT myQVT = createQVT("Graph2GraphMinimal", txURI, ModeFactory.LAZY);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
-		testEvaluator.loadModel("upperGraph", getModelsURI("Graph2GraphMinimal/SimpleGraph.xmi"));
-		testEvaluator.createModel("middle", getTestURI("Graph2Graph.xmi"));
-		testEvaluator.createModel("lowerGraph", getTestURI("Graph2GraphMinimal.xmi"));
-		testEvaluator.loadReference("lowerGraph", getModelsURI("Graph2GraphMinimal/Graph2GraphMinimalValidate.xmi"));
-		testEvaluator.test();
-		testEvaluator.saveModels(getTestURI("middle.xmi"));
-		testEvaluator.checkModels(null);
-		testEvaluator.saveExecutionGraph(getTestURI("Graph2GraphMinimal_LAZY.graphml"));
-		testEvaluator.dispose();
+		myQVT.addInputURI("upperGraph", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("lowerGraph", outputURI);
+		myQVT.addOutputURI("middle", traceURI);
+		myQVT.saveModels(null);
+		myQVT.saveExecutionGraph(getTestURI("Graph2GraphMinimal_LAZY.graphml"));
+		myQVT.checkOutput(outputURI, getModelsURI("Graph2GraphMinimal/Graph2GraphMinimalValidate.xmi"), null);
 		myQVT.dispose();
 	}
 
@@ -288,20 +217,22 @@ public class QVTiInterpreterTests extends LoadTestCase
 	public void testQVTiInterpreter_Graph2GraphHierarchical() throws Exception {
 		URI txURI = getModelsURI("Graph2GraphHierarchical/Graph2GraphHierarchical.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, "qvtias");
-		MyQVT myQVT = createQVT();
-		MyQvtiExecutor testEvaluator = myQVT.createEvaluator(txURI, QVTiIncrementalExecutor.Mode.LAZY);
+		URI inputURI = getModelsURI("Graph2GraphMinimal/SimpleGraph.xmi");
+		URI outputURI = getTestURI("Graph2GraphHierarchical.xmi");
+		URI traceURI = getTestURI("Graph2Graph.xmi");
+		MyQVT myQVT = createQVT("Graph2GraphHierarchical", txURI, ModeFactory.LAZY);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
-		testEvaluator.loadModel("upperGraph", getModelsURI("Graph2GraphMinimal/SimpleGraph.xmi"));
-		testEvaluator.createModel("middle", getTestURI("Graph2Graph.xmi"));
-		testEvaluator.createModel("lowerGraph", getTestURI("Graph2GraphHierarchical.xmi"));
-		testEvaluator.loadReference("lowerGraph", getModelsURI("Graph2GraphHierarchical/Graph2GraphHierarchicalValidate.xmi"));
-		testEvaluator.test();
-		testEvaluator.saveModels(getTestURI("middle.xmi"));
-		testEvaluator.checkModels(null);
-		testEvaluator.saveExecutionGraph(getTestURI("Graph2GraphMinimal_LAZY.graphml"));
-		testEvaluator.dispose();
+		myQVT.addInputURI("upperGraph", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("lowerGraph", outputURI);
+		myQVT.addOutputURI("middle", traceURI);
+		myQVT.saveModels(null);
+		myQVT.saveExecutionGraph(getTestURI("Graph2GraphMinimal_LAZY.graphml"));
+		myQVT.checkOutput(outputURI, getModelsURI("Graph2GraphHierarchical/Graph2GraphHierarchicalValidate.xmi"), null);
 		myQVT.dispose();
 	}
 
@@ -318,23 +249,24 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 */
 	@Test
 	public void testQVTiInterpreter_HSV2HSL() throws Exception {
-		MyQVT myQVT = createQVT();
 		URI txURI = getModelsURI("HSV2HSL/HSV2HSL.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, "qvtias");
-		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		MyQvtiExecutor testEvaluator = myQVT.createEvaluator(txURI, QVTiIncrementalExecutor.Mode.LAZY);
+		URI inputURI = getModelsURI("HSV2HSL/HSVNode.xmi");
+		URI outputURI = getTestURI("HSLNode.xmi");
+		URI traceURI = getTestURI("HSV2HSLNode.xmi");
+		MyQVT myQVT = createQVT("HSV2HSL", txURI, ModeFactory.LAZY);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
-		testEvaluator.loadModel("hsv", getModelsURI("HSV2HSL/HSVNode.xmi"));
-		testEvaluator.createModel("middle", getTestURI("HSL2HSLNode.xmi"));
-		testEvaluator.createModel("hsl", getTestURI("HSLNode.xmi"));
-		testEvaluator.loadReference("hsl", getModelsURI("HSV2HSL/HSLNodeValidate.xmi"));
-		testEvaluator.test();
-		testEvaluator.saveModels(getTestURI("middle.xmi"));
-		testEvaluator.checkModels(null);
-		testEvaluator.saveExecutionGraph(getTestURI("HSV2HSL_LAZY.graphml"));
-		testEvaluator.dispose();
+		myQVT.addInputURI("hsv", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("hsl", outputURI);
+		myQVT.addOutputURI("middle", traceURI);
+		myQVT.saveModels(null);
+		myQVT.saveExecutionGraph(getTestURI("HSV2HSL_LAZY.graphml"));
+		myQVT.checkOutput(outputURI, getModelsURI("HSV2HSL/HSLNodeValidate.xmi"), null);
 		myQVT.dispose();
 	}
 
@@ -345,22 +277,23 @@ public class QVTiInterpreterTests extends LoadTestCase
 	public void testQVTiInterpreter_Tree2TallTreeIncremental() throws Exception {
 		URI txURI = getModelsURI("Tree2TallTree/Tree2TallTree.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, "qvtias");
-		MyQVT myQVT = createQVT();
-		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		MyQvtiExecutor testEvaluator = myQVT.createEvaluator(txURI, QVTiIncrementalExecutor.Mode.INCREMENTAL);
+		URI inputURI = getModelsURI("Tree2TallTree/samples/Tree.xmi");
+		URI outputURI = getTestURI("TallTree.xmi");
+		URI traceURI = getTestURI("Tree2TallTree.xmi");
+		MyQVT myQVT = createQVT("Tree2TallTree", txURI, ModeFactory.INCREMENTAL);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
-		testEvaluator.loadModel("tree", getModelsURI("Tree2TallTree/samples/Tree.xmi"));
-		testEvaluator.createModel("tree2talltree", getTestURI("Tree2TallTree.xmi"));
-		testEvaluator.createModel("talltree", getTestURI("TallTree.xmi"));
-		testEvaluator.loadReference("talltree", getModelsURI("Tree2TallTree/samples/TallTreeValidate.xmi"));
-		testEvaluator.test();
-		testEvaluator.saveModels(getTestURI("middle.xmi"));
-		testEvaluator.checkModels(null);
-		testEvaluator.writeExecutionGraphMLfile(getTestURI("Tree2TallTree-execution.graphml"));
-		testEvaluator.saveExecutionGraph(getTestURI("Tree2TallTree_INCREMENTAL.graphml"));
-		testEvaluator.dispose();
+		myQVT.addInputURI("tree", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("talltree", outputURI);
+		myQVT.addOutputURI("tree2talltree", traceURI);
+		myQVT.saveModels(null);
+		myQVT.writeExecutionGraphMLfile(getTestURI("Tree2TallTree-execution.graphml"));
+		myQVT.saveExecutionGraph(getTestURI("Tree2TallTree_INCREMENTAL.graphml"));
+		myQVT.checkOutput(outputURI, getModelsURI("Tree2TallTree/samples/TallTreeValidate.xmi"), null);
 		myQVT.dispose();
 	}
 
@@ -372,21 +305,22 @@ public class QVTiInterpreterTests extends LoadTestCase
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		URI txURI = getModelsURI("Tree2TallTree/Tree2TallTree.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, "qvtias");
-		MyQVT myQVT = createQVT();
-		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		MyQvtiExecutor testEvaluator = myQVT.createEvaluator(txURI, QVTiIncrementalExecutor.Mode.LAZY);
+		URI inputURI = getModelsURI("Tree2TallTree/samples/Tree.xmi");
+		URI outputURI = getTestURI("TallTree.xmi");
+		URI traceURI = getTestURI("Tree2TallTree.xmi");
+		MyQVT myQVT = createQVT("Tree2TallTree", txURI, ModeFactory.LAZY);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
-		testEvaluator.loadModel("tree", getModelsURI("Tree2TallTree/samples/Tree.xmi"));
-		testEvaluator.createModel("tree2talltree", getTestURI("Tree2TallTree.xmi"));
-		testEvaluator.createModel("talltree", getTestURI("TallTree.xmi"));
-		testEvaluator.loadReference("talltree", getModelsURI("Tree2TallTree/samples/TallTreeValidate.xmi"));
-		testEvaluator.test();
-		testEvaluator.saveModels(getTestURI("middle.xmi"));
-		testEvaluator.checkModels(null);
-		testEvaluator.saveExecutionGraph(getTestURI("Tree2TallTree_LAZY.graphml"));
-		testEvaluator.dispose();
+		myQVT.addInputURI("tree", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("talltree", outputURI);
+		myQVT.addOutputURI("tree2talltree", traceURI);
+		myQVT.saveModels(null);
+		myQVT.saveExecutionGraph(getTestURI("Tree2TallTree_LAZY.graphml"));
+		myQVT.checkOutput(outputURI, getModelsURI("Tree2TallTree/samples/TallTreeValidate.xmi"), null);
 		myQVT.dispose();
 	}
 
@@ -399,27 +333,28 @@ public class QVTiInterpreterTests extends LoadTestCase
 	public void testQVTiInterpreter_ManualUML2RDBMS() throws Exception {
 		URI txURI = getModelsURI("ManualUML2RDBMS/ManualUML2RDBMS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, "qvtias");
-		MyQVT myQVT = createQVT();
+		URI inputURI = getModelsURI("ManualUML2RDBMS/ManualUMLPeople.xmi");
+		URI outputURI = getTestURI("ManualRDBMSPeople.xmi");
+		URI traceURI = getTestURI("ManualUML2RDBMS.xmi");
+		MyQVT myQVT = createQVT("ManualUML2RDBMS", txURI, ModeFactory.LAZY);
 		TestUtil.doCompleteOCLSetup();
 		URI oclURI = getResourceURI("org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl");
 		//  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
 		@SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
 
-		MyQvtiExecutor testEvaluator = myQVT.createEvaluator(txURI, QVTiIncrementalExecutor.Mode.LAZY);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		//assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
 		assertLoadable(txASURI);
 		//
-		testEvaluator.loadModel("uml", getModelsURI("ManualUML2RDBMS/ManualUMLPeople.xmi"));
-		testEvaluator.createModel("middle", getTestURI("ManualUML2RDBMS.xmi"));
-		testEvaluator.createModel("rdbms", getTestURI("ManualRDBMSPeople.xmi"));
-		testEvaluator.loadReference("rdbms", getModelsURI("ManualUML2RDBMS/ManualRDBMSPeopleValidate.xmi"));
-		testEvaluator.test();
-		testEvaluator.saveModels(getTestURI("middle.xmi"));
-		testEvaluator.checkModels(ManualRDBMSNormalizer.INSTANCE);
-		testEvaluator.saveExecutionGraph(getTestURI("ManualUML2RDBMS_LAZY.graphml"));
-		testEvaluator.dispose();
+		myQVT.addInputURI("uml", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("rdbms", outputURI);
+		myQVT.addOutputURI("middle", traceURI);
+		myQVT.saveModels(null);
+		myQVT.saveExecutionGraph(getTestURI("ManualUML2RDBMS_LAZY.graphml"));
+		myQVT.checkOutput(outputURI, getModelsURI("ManualUML2RDBMS/ManualRDBMSPeopleValidate.xmi"), ManualRDBMSNormalizer.INSTANCE);
 		myQVT.dispose();
 	}
 
@@ -432,7 +367,10 @@ public class QVTiInterpreterTests extends LoadTestCase
 	public void testQVTiInterpreter_SimpleUML2RDBMS() throws Exception {
 		URI txURI = getModelsURI("SimpleUML2RDBMS/SimpleUML2RDBMS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, "qvtias");
-		MyQVT myQVT = createQVT();
+		URI inputURI = getModelsURI("SimpleUML2RDBMS/SimpleUMLPeople.xmi");
+		URI outputURI = getTestURI("SimpleRDBMSPeople.xmi");
+		URI traceURI = getTestURI("SimpleUML2RDBMS.xmi");
+		MyQVT myQVT = createQVT("SimpleUML2RDBMS", txURI, ModeFactory.LAZY);
 		TestUtil.doCompleteOCLSetup();
 		URI oclURI = getResourceURI("org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl");
 		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
@@ -440,20 +378,18 @@ public class QVTiInterpreterTests extends LoadTestCase
 		@SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, environmentFactory);
 
-		MyQvtiExecutor testEvaluator = new MyQvtiExecutor(environmentFactory, txURI, QVTiIncrementalExecutor.Mode.LAZY);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		//assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
 		assertLoadable(txASURI);
 		//
-		testEvaluator.loadModel("uml", getModelsURI("SimpleUML2RDBMS/SimpleUMLPeople.xmi"));
-		testEvaluator.createModel("middle", getTestURI("SimpleUML2RDBMS.xmi"));
-		testEvaluator.createModel("rdbms", getTestURI("SimpleRDBMSPeople.xmi"));
-		testEvaluator.loadReference("rdbms", getModelsURI("SimpleUML2RDBMS/SimpleRDBMSPeopleValidate.xmi"));
-		testEvaluator.test();
-		testEvaluator.saveModels(getTestURI("middle.xmi"));
-		testEvaluator.checkModels(SimpleRDBMSNormalizer.INSTANCE);
-		testEvaluator.saveExecutionGraph(getTestURI("SimpleUML2RDBMS_LAZY.graphml"));
-		testEvaluator.dispose();
+		myQVT.addInputURI("uml", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("rdbms", outputURI);
+		myQVT.addOutputURI("middle", traceURI);
+		myQVT.saveModels(null);
+		myQVT.saveExecutionGraph(getTestURI("SimpleUML2RDBMS_LAZY.graphml"));
+		myQVT.checkOutput(outputURI, getModelsURI("SimpleUML2RDBMS/SimpleRDBMSPeopleValidate.xmi"), SimpleRDBMSNormalizer.INSTANCE);
 		myQVT.dispose();
 	}
 
@@ -462,21 +398,21 @@ public class QVTiInterpreterTests extends LoadTestCase
 	public void testQVTiInterpreter_ClassesCS2AS_bug456900() throws Exception {
 		URI txURI = getModelsURI("ClassesCS2AS/bug456900/ClassesCS2AS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, "qvtias");
-		MyQVT myQVT = createQVT();
-		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
-		//		environmentFactory.setEvaluationTracingEnabled(true);
-		MyQvtiExecutor testEvaluator = new MyQvtiExecutor(environmentFactory, txURI, QVTiIncrementalExecutor.Mode.LAZY);
+		URI inputURI = getModelsURI("ClassesCS2AS/bug456900/example_input.xmi");
+		URI outputURI = getTestURI("example_output.xmi");
+		MyQVT myQVT = createQVT("ClassesCS2AS", txURI, ModeFactory.LAZY);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
-		testEvaluator.loadModel("leftCS", getModelsURI("ClassesCS2AS/bug456900/example_input.xmi"));
-		testEvaluator.createModel("rightAS", getTestURI("example_output.xmi"));
-		testEvaluator.loadReference("rightAS", getModelsURI("ClassesCS2AS/bug456900/example_output_ref.xmi"));
-		testEvaluator.test();
-		testEvaluator.saveModels(getTestURI("middle.xmi"));
-		testEvaluator.checkModels(null);
-		testEvaluator.saveExecutionGraph(getTestURI("ClassesCS2AS_LAZY.graphml"));
-		testEvaluator.dispose();
+		myQVT.addInputURI("leftCS", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("rightAS", outputURI);
+		//	myQVT.saveOutput("middle", getTestURI("middle.xmi"));
+		myQVT.saveModels(null);
+		myQVT.saveExecutionGraph(getTestURI("ClassesCS2AS_LAZY.graphml"));
+		myQVT.checkOutput(outputURI, getModelsURI("ClassesCS2AS/bug456900/example_output_ref.xmi"), null);
 		myQVT.dispose();
 	}
 
@@ -485,62 +421,39 @@ public class QVTiInterpreterTests extends LoadTestCase
 		TestUtil.doCompleteOCLSetup();
 		URI txURI = getModelsURI("ClassesCS2AS/bug457239/ClassesCS2AS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, "qvtias");
-		MyQVT myQVT = createQVT();
-		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		MyQvtiExecutor testEvaluator = new MyQvtiExecutor(myQVT.getEnvironmentFactory(), txURI, QVTiIncrementalExecutor.Mode.LAZY);
+		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");
+		URI outputURI = getTestURI("example_output.xmi");
+		MyQVT myQVT = createQVT("ClassesCS2AS", txURI, ModeFactory.LAZY);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
-		testEvaluator.loadModel("leftCS", getModelsURI("ClassesCS2AS/bug457239/example_input.xmi"));
-		testEvaluator.createModel("rightAS", getTestURI("example_output.xmi"));
-		testEvaluator.loadReference("rightAS", getModelsURI("ClassesCS2AS/bug457239/example_output_ref.xmi"));
-		testEvaluator.test();
-		testEvaluator.saveModels(getTestURI("middle.xmi"));
-		testEvaluator.checkModels(null);
-		testEvaluator.saveExecutionGraph(getTestURI("ClassesCS2AS_LAZY.graphml"));
-		testEvaluator.dispose();
+		myQVT.addInputURI("leftCS", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("rightAS", outputURI);
+		//	myQVT.saveOutput("middle", getTestURI("middle.xmi"));
+		myQVT.saveModels(null);
+		myQVT.saveExecutionGraph(getTestURI("ClassesCS2AS_LAZY.graphml"));
+		myQVT.checkOutput(outputURI, getModelsURI("ClassesCS2AS/bug457239/example_output_ref.xmi"), null);
 		myQVT.dispose();
 	}
 
 	@Test
 	public void testQVTiInterpreter_ClassesCS2AS_bug457239b() throws Exception {
 		TestUtil.doCompleteOCLSetup();
-		MyQVT myQVT = createQVT();
 		URI txURI = getModelsURI("ClassesCS2AS/bug457239/ClassesCS2ASv2_AS.qvtias");
-		assertLoadable(ClassUtil.nonNullState(txURI));
-
-		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
-		QVTiIncrementalExecutor testExecutor =  new QVTiIncrementalExecutor(environmentFactory,
-			(ImperativeTransformation) ClassUtil.nonNullState(loadTransformation(environmentFactory.getMetamodelManager(), txURI)),
-			QVTiIncrementalExecutor.Mode.LAZY);
-
-		URI csModelURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");
-		URI asModelURI = getTestURI("example_output.xmi");
-		URI refAsModelURI = getModelsURI("ClassesCS2AS/bug457239/exampleV2_output_ref.xmi");
-
-		testExecutor.loadModel("leftCS", ClassUtil.nonNullState(csModelURI));
-		testExecutor.createModel("rightAS", ClassUtil.nonNullState(asModelURI), null);
-		testExecutor.execute();
-		testExecutor.saveModels(DefaultCompilerOptions.defaultSavingOptions);
-		testExecutor.dispose();
-
-		ResourceSet rSet = environmentFactory.getResourceSet();
-		assertSameModel(rSet.getResource(refAsModelURI, true),
-			rSet.getResource(asModelURI, true));
+		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");
+		URI outputURI = getTestURI("example_output.xmi");
+		MyQVT myQVT = createQVT("ClassesCS2AS", txURI, ModeFactory.LAZY);
+		ImperativeTransformation asTransformation = myQVT.loadTransformation();
+		myQVT.createInterpretedExecutor(asTransformation);
+		//
+		myQVT.addInputURI("leftCS", inputURI);
+		assertTrue(myQVT.executeTransformation());
+		myQVT.addOutputURI("rightAS", outputURI);
+		myQVT.saveModels(null);
+		myQVT.checkOutput(outputURI, getModelsURI("ClassesCS2AS/bug457239/exampleV2_output_ref.xmi"), null);
 		myQVT.dispose();
 	}
-
-	static  protected Transformation loadTransformation(MetamodelManager metamodelManager, URI txURI) {
-		Resource txResource = metamodelManager.getASResourceSet().getResource(txURI, true);
-		ImperativeModel iModel = (ImperativeModel) txResource.getContents().get(0);
-		for (org.eclipse.ocl.pivot.Package p : iModel.getOwnedPackages()) {
-			for (org.eclipse.ocl.pivot.Class c : p.getOwnedClasses()) {
-				if (c instanceof Transformation){
-					return (Transformation) c;
-				}
-			}
-		}
-		return null;
-	}
-
 }

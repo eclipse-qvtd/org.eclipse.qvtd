@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -115,15 +116,16 @@ public class EXE2016_QVTr_AutomatedTests extends AbstractEXE2016CGTests
 		Class<@NonNull Forward2Reverse> txClass = Forward2Reverse.class;
 		QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, txClass);
 		Transformer transformer = generatedExecutor.getTransformer();
-		transformer.addRootObjects("forward", rootObjects);
+		transformer.getTypedModelInstance("forward").addRootObjects(rootObjects);
 		garbageCollect();
 		logger.printf("%9d, ", testSize);
 		long startTime = System.nanoTime();
+		transformer.analyzeInputResources();
 		transformer.run();
 		long endTime = System.nanoTime();
 		logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-		Collection<@NonNull Object> rootObjects2 = transformer.getRootObjects("reverse");
-		Iterator<Object> it = rootObjects2.iterator();
+		Collection<@NonNull EObject> rootObjects2 = transformer.getTypedModelInstance("reverse").getRootEObjects();
+		Iterator<EObject> it = rootObjects2.iterator();
 		Object rootObject = it.next();
 		assert !it.hasNext();
 		assert ((DoublyLinkedList)rootObject).getOwnedElements().size() == testSize-1;

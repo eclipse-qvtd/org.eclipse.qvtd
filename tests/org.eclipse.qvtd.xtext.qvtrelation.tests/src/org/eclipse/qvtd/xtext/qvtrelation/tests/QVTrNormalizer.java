@@ -15,13 +15,13 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.ECollections;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -63,6 +63,7 @@ public class QVTrNormalizer extends PivotNormalizer
 		@Override
 		public void normalize() {
 			ECollections.sort(asRelation.getDomain(), DomainComparator.INSTANCE);
+			ECollections.sort(asRelation.getVariable(), NameUtil.NAMEABLE_COMPARATOR);
 		}
 	}
 
@@ -76,14 +77,14 @@ public class QVTrNormalizer extends PivotNormalizer
 		public void normalize() {
 			super.normalize();
 			ECollections.sort(((Transformation)asClass).getModelParameter(), NameUtil.NAMEABLE_COMPARATOR);
+			ECollections.sort(((Transformation)asClass).getRule(), NameUtil.NAMEABLE_COMPARATOR);
 		}
 	}
 
 	@Override
 	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
 		List<@NonNull Normalizer> normalizers = new ArrayList<>();
-		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
+		for (@NonNull EObject eObject : new TreeIterable(resource)) {
 			if (eObject instanceof Model) {
 				normalizers.add(new ModelNormalizer((Model)eObject));
 			}

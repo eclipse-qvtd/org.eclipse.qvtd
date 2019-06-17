@@ -14,9 +14,6 @@ package org.eclipse.qvtd.debug.launching;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -33,10 +30,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
+import org.eclipse.qvtd.runtime.evaluation.ModelsManager;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 /**
@@ -93,6 +91,8 @@ public class QVTcompiledJob extends QVTimperativeJob
 			} */
 			ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in external RespurcSet
 			PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
+			Transformer transformer = generatedExecutor.getTransformer();
+			ModelsManager modelsManager = transformer.getModelsManager();
 			for (String inName : inMap.keySet()) {
 				if (monitor.isCanceled()) {
 					throw new OperationCanceledException();
@@ -100,8 +100,9 @@ public class QVTcompiledJob extends QVTimperativeJob
 				if (inName != null) {
 					URI inURI = URI.createURI(inMap.get(inName), true);
 					subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Loading '" + inURI + "'", 1);
-					Resource inputResource = resourceSet.getResource(inURI, true);
-					generatedExecutor.getTransformer().addRootObjects(inName, ClassUtil.nonNullState(inputResource.getContents()));
+					Resource inputResource = ClassUtil.nonNullState(resourceSet.getResource(inURI, true));
+					TypedModelInstance typedModelInstance = modelsManager.getTypedModelInstance(inName);
+					typedModelInstance.addInputResource(inputResource);
 				}
 			}
 			if (monitor.isCanceled()) {
@@ -113,8 +114,10 @@ public class QVTcompiledJob extends QVTimperativeJob
 			//		throw new OperationCanceledException();
 			//	}
 			subMonitor.split(EXECUTING_TICKS, SubMonitor.SUPPRESS_NONE).beginTask("Executing '" + txURI + "'", EXECUTING_TICKS);
-			Transformer transformer = generatedExecutor.getTransformer();
-			if (!transformer.run()) {
+			//	if (!generatedExecutor.preExecute()) {
+			//
+			//	}
+			if (!generatedExecutor.execute()) {
 				//	if (!suppressFailureDiagnosis) {						// FIXME BUG 511028
 				StringBuilder s = new StringBuilder();
 				transformer.getInvocationManager().diagnoseWorkLists(s);
@@ -125,27 +128,26 @@ public class QVTcompiledJob extends QVTimperativeJob
 				throw new OperationCanceledException();
 			}
 			subMonitor.split(SAVING_TICKS, SubMonitor.SUPPRESS_NONE).beginTask("Saving output models for '" + txURI + "'", SAVING_TICKS);
-			List<@NonNull Resource> outputResources = new ArrayList<>();
 			for (String outName : outMap.keySet()) {
 				if (monitor.isCanceled()) {
 					throw new OperationCanceledException();
 				}
 				if (outName != null) { //&& !QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(outName)) {
 					URI outURI = URI.createURI(outMap.get(outName), true);
-					subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Populating '" + outURI + "'", 1);
-					//	executor.createModel(outName, outURI, null);
-					Resource outputResource = resourceSet.createResource(outURI);
-					outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(outName));
-					outputResources.add(outputResource);
+					subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Creating '" + outURI + "'", 1);
+					Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(outURI));
+					TypedModelInstance typedModelInstance = modelsManager.getTypedModelInstance(outName);
+					typedModelInstance.addOutputResource(outputResource);
 				}
 			}
-			for (Resource outputResource : outputResources) {
-				if (monitor.isCanceled()) {
-					throw new OperationCanceledException();
-				}
-				subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Creating '" + outputResource.getURI() + "'", 1);
-				outputResource.save(DefaultCompilerOptions.defaultSavingOptions);
+			//	for (Resource outputResource : outputResources) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
 			}
+			subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Saving", 1);
+			modelsManager.saveModels(null);
+			//		outputResource.save(DefaultCompilerOptions.defaultSavingOptions);
+			//	}
 			return new Status(IStatus.OK, getPluginId(), null);
 		}
 		catch (OperationCanceledException oce) {

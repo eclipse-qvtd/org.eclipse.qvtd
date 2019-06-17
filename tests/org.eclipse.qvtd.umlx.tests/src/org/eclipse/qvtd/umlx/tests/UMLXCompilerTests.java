@@ -191,24 +191,32 @@ public class UMLXCompilerTests extends LoadTestCase
 			//				Field field = txClass.getField("PLUGIN_ID");
 			//				Object pluginId = field.get(null);
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.loadInput("forward", inURI);
+			myQVT2.addInputURI("forward", inURI);
 			myQVT2.executeTransformation();
-			myQVT2.saveOutput("reverse", outURI, expectedURI, Forward2ReverseNormalizer.INSTANCE);
+			myQVT2.addOutputURI("reverse", outURI);
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(outURI, expectedURI, Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.loadInput("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
+			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
 			myQVT2.executeTransformation();
-			myQVT2.saveOutput("reverse", getTestURI("OneElementList_CG.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			myQVT2.addOutputURI("reverse", getTestURI("OneElementList_CG.xmi"));
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(getTestURI("OneElementList_CG.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.loadInput("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
+			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
 			myQVT2.executeTransformation();
-			myQVT2.saveOutput("reverse", getTestURI("TwoElementList_CG.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			myQVT2.addOutputURI("reverse", getTestURI("TwoElementList_CG.xmi"));
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(getTestURI("TwoElementList_CG.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.loadInput("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
+			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
 			myQVT2.executeTransformation();
-			myQVT2.saveOutput("reverse", getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			myQVT2.addOutputURI("reverse", getTestURI("ThreeElementList_CG.xmi"));
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT2.dispose();
@@ -247,9 +255,11 @@ public class UMLXCompilerTests extends LoadTestCase
 			URI outURI = getTestURI("generated_CG.xmi");
 			URI expectedURI = getResourceURI("/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/out/expected.xmi");
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.loadInput("hier", inURI);
+			myQVT2.addInputURI("hier", inURI);
 			myQVT2.executeTransformation();
-			myQVT2.saveOutput("flat", outURI, expectedURI, null);//FlatStateMachineNormalizer.INSTANCE);
+			myQVT2.addOutputURI("flat", outURI);
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(outURI, expectedURI, null);//FlatStateMachineNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT2.dispose();

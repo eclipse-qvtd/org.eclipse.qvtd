@@ -350,14 +350,19 @@ public class QVTiCompilerTests extends LoadTestCase
 			return null;
 		}
 
+		public void execute(@NonNull Transformer tx) throws Exception {
+			tx.analyzeInputResources();
+			tx.run();
+		}
+
 		@Override
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
 		}
 
 		public @NonNull Resource loadInput(@NonNull Transformer tx, @NonNull String inputModelName, URI inputModelURI) {
-			Resource inputResource = getResourceSet().getResource(inputModelURI, true);
-			tx.addRootObjects(inputModelName, ClassUtil.nonNullState(inputResource.getContents()));
+			Resource inputResource = ClassUtil.nonNullState(getResourceSet().getResource(inputModelURI, true));
+			tx.getTypedModelInstance(inputModelName).addInputResource(inputResource);
 			return inputResource;
 		}
 
@@ -394,7 +399,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		public void saveOutput(@NonNull Transformer tx, @NonNull String outputModelName, @NonNull URI outputModelURI, @Nullable URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 			ResourceSet resourceSet = getResourceSet();
 			Resource outputResource = resourceSet.createResource(outputModelURI);
-			outputResource.getContents().addAll(tx.getRootEObjects(outputModelName));
+			outputResource.getContents().addAll(tx.getTypedModelInstance(outputModelName).getRootEObjects());
 			outputResource.save(getSaveOptions());
 			Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
 			assert referenceResource != null;
@@ -471,7 +476,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "hsv", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "hsl", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
 	}
@@ -501,7 +506,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "leftCS", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "rightAS", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
 	}
@@ -520,7 +525,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "uml", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "rdbms", outputModelURI, referenceModelURI, ManualRDBMSNormalizer.INSTANCE);
 		myQVT.dispose();
 	}
@@ -539,7 +544,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "uml", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "rdbms", outputModelURI, referenceModelURI, SimpleRDBMSNormalizer.INSTANCE);
 		myQVT.dispose();
 	}
@@ -561,7 +566,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "tree", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
 		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-execution.graphml"));
 		myQVT.dispose();
@@ -585,7 +590,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
 		Transformer tx = myQVT.createTransformer(txClass);
 		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-inc.graphml"));
 		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
 		TransformationExecutor executor = tx.getExecutor();
@@ -629,7 +634,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
 		Transformer tx = myQVT.createTransformer(txClass);
 		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-inc.graphml"));
 		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
 		TransformationExecutor executor = tx.getExecutor();
@@ -676,7 +681,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
 		Transformer tx = myQVT.createTransformer(txClass);
 		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-inc.graphml"));
 		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
 		TransformationExecutor executor = tx.getExecutor();
@@ -715,7 +720,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = Tree2TallTree.class;
 		Transformer tx = myQVT.createTransformer(txClass);
 		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		Execution2GraphVisitor.writeGraphMLfile(tx, getTestModelsFileURI("Tree2TallTree/graphs/Tree2TallTree-inc.graphml"));
 		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
 		TransformationExecutor executor = tx.getExecutor();
@@ -752,7 +757,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "tree", inputModelURI);
-		tx.run();
+		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
 	} */

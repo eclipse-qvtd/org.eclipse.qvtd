@@ -1,5 +1,5 @@
-import classes : '../Classes.ecore';
-import classescs : '../ClassesCS.ecore';
+import classes : '../Classes.ecore#/';
+import classescs : '../ClassesCS.ecore#/';
 import 'helpers.ocl';
 
 transformation classescs2as

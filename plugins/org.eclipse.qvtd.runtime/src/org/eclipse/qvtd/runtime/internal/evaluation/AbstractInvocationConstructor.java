@@ -25,6 +25,7 @@ import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 
 public abstract class AbstractInvocationConstructor implements InvocationConstructor
 {
@@ -51,6 +52,10 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		@Override
 		public @NonNull List<Connection.@NonNull Incremental> getConsumedConnections() {
 			return consumedConnections;
+		}
+
+		public @NonNull ModeFactory getModeFactory() {
+			return ModeFactory.INCREMENTAL;
 		}
 
 		@Override

@@ -12,6 +12,7 @@ package org.eclipse.qvtd.doc.bigmde2016.tests.qvtc;
 
 import java.util.Collection;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -44,14 +45,15 @@ public class BigMDE2016_QVTc_AutomatedTests extends TestCase
 		Iterable<@NonNull ? extends Object> rootObjects = FamiliesGenerator.createFamiliesModel(testSize, 9);
 		QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, Families2Persons.class);
 		Transformer transformer = generatedExecutor.getTransformer();
-		transformer.addRootObjects("family", rootObjects);
+		transformer.getTypedModelInstance("family").addRootObjects(rootObjects);
 		garbageCollect();
 		logger.printf("%9d, ", 10*testSize);
 		long startTime = System.nanoTime();
+		transformer.analyzeInputResources();
 		transformer.run();
 		long endTime = System.nanoTime();
 		logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-		Collection<@NonNull Object> rootObjects2 = transformer.getRootObjects("person");
+		Collection<@NonNull EObject> rootObjects2 = transformer.getTypedModelInstance("person").getRootEObjects();
 		assert rootObjects2.size() == 9*testSize;
 	}
 

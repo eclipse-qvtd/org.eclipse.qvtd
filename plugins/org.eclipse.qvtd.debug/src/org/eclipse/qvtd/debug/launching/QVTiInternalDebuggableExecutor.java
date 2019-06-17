@@ -20,16 +20,18 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.IVMContext;
 import org.eclipse.ocl.examples.debug.vm.launching.InternalDebuggableExecutor;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager.QVTiTypedModelInstance;
 
 /**
  * Internal transformation executor
- * 
+ *
  * @since 3.0
  */
 public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
 {
 	protected final @NonNull QVTiEvaluationContext evaluationContext;
-	
+
 	public QVTiInternalDebuggableExecutor(@NonNull QVTiEvaluationContext evaluationContext, @NonNull IVMContext vmContext) {
 		super(vmContext, evaluationContext.getTransformationURI());
 		this.evaluationContext = evaluationContext;
@@ -38,15 +40,18 @@ public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
 	@Override
 	protected @NonNull QVTiVMExecutor createVMExecutor() throws IOException {
 		QVTiVMExecutor vmExecutor = new QVTiVMExecutor(vmContext, evaluationContext.getTransformationURI());
+		QVTiModelsManager modelsManager = vmExecutor.getModelsManager();
 		for (Map.Entry<String, URI> inEntry : evaluationContext.getInputURIs().entrySet()) {
 			@SuppressWarnings("null")@NonNull String inKey = inEntry.getKey();
 			@SuppressWarnings("null")@NonNull URI inURI = inEntry.getValue();
-			vmExecutor.loadModel(inKey, inURI, null);
+			QVTiTypedModelInstance typedModelInstance = modelsManager.getTypedModelInstance(inKey);
+			typedModelInstance.addInputResource(inURI, null);
 		}
 		for (Map.Entry<String, URI> outEntry : evaluationContext.getOutputURIs().entrySet()) {
 			@SuppressWarnings("null")@NonNull String outKey = outEntry.getKey();
 			@SuppressWarnings("null")@NonNull URI outURI = outEntry.getValue();
-			vmExecutor.createModel(outKey, outURI, null);
+			QVTiTypedModelInstance typedModelInstance = modelsManager.getTypedModelInstance(outKey);
+			typedModelInstance.addOutputResource(outURI, null);
 		}
 		return vmExecutor;
 	}

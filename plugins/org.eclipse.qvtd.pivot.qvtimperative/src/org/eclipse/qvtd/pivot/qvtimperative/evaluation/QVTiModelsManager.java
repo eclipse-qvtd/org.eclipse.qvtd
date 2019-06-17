@@ -12,40 +12,30 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.ParserException;
-import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.ocl.pivot.utilities.UniqueList;
-import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.AbstractModelsManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationInstance;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.TransformationInstance;
@@ -53,28 +43,18 @@ import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
  * QVTiModelsManager manager the source, middle and target models during a QVTi transformation.
  */
-public class QVTiModelsManager
+public class QVTiModelsManager extends AbstractModelsManager
 {
 	@SuppressWarnings("null")
-	private static final @NonNull ClassId EXTENT_CLASSID = IdManager.getClassId(QVTruntimeLibraryPackage.Literals.EXTENT);
+	public static final @NonNull ClassId EXTENT_CLASSID = IdManager.getClassId(QVTruntimeLibraryPackage.Literals.EXTENT);
 
 	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
-	// TODO how to manage aliases?
-	/** Map a typed model to its resources (models). */
-	private @NonNull Map<@NonNull ImperativeTypedModel, @NonNull List<@NonNull Resource>> modelResourcesMap = new HashMap<>();
-	private @NonNull Map<@NonNull Resource, @NonNull ImperativeTypedModel> resource2typedModel = new HashMap<>();
-
-	private @NonNull Map<@NonNull ImperativeTypedModel, @NonNull List<@NonNull EObject>> modelElementsMap = new HashMap<>();
-
-	/**
-	 * The types upon which execution of the transformation may invoke allInstances().
-	 */
-	private @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses;
 
 	/**
 	 * Array of caches for the un-navigable opposite of each used property.
@@ -83,7 +63,7 @@ public class QVTiModelsManager
 	 * <p>
 	 * Keys and values cannot be null, since null cannot participate in a 'bidirectional' relationship.
 	 */
-	private @NonNull Map<?, ?> unnavigableOpposites[];
+	private final @NonNull Map<?, ?> unnavigableOpposites @NonNull [];
 
 	/**
 	 * The run-time instance of the transformation.
@@ -92,8 +72,10 @@ public class QVTiModelsManager
 
 	/**
 	 * The run-time instance of each TypedModel.
+	 *
+	 * More than four typedModelInstances is very unlikley so use of a Map to accelerate lookup is unjustified.
 	 */
-	private /*@LazyNonNull*/ Map<@NonNull ImperativeTypedModel, @NonNull TypedModelInstance> typedModel2typedModelInstance = null;
+	private @NonNull List<@NonNull QVTiTypedModelInstance> typedModelInstances = new ArrayList<>();
 
 	/**
 	 * Instantiates a new QVTi Domain Manager. Responsible for creating new
@@ -102,7 +84,7 @@ public class QVTiModelsManager
 	public QVTiModelsManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		this.transformationAnalysis = transformationAnalysis;
 		this.environmentFactory = (EnvironmentFactoryInternalExtension) transformationAnalysis.getEnvironmentFactory();
-		this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
+		//	this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
 		int cacheIndexes = transformationAnalysis.getCacheIndexes();
 		this.unnavigableOpposites = new @NonNull Map<?, ?>[cacheIndexes];
 		for (int i = 0; i < cacheIndexes; i++) {
@@ -111,55 +93,12 @@ public class QVTiModelsManager
 	}
 
 	/**
-	 * Adds the model to the list of models managed by this domain manager. The
-	 * domain manager supports only one root resource per typed model, this means that
-	 * if a model was already binded to the TypedModel it will be replaced.
-	 *
-	 * @param typedModel the type model associated to the model
-	 * @param model the resource
-	 */
-	// TODO support multiple model instances by alias
-	public void addModel(@NonNull ImperativeTypedModel typedModel, @NonNull Resource model) {
-		List<@NonNull Resource> resources = modelResourcesMap.get(typedModel);
-		if (resources == null) {
-			resources = new UniqueList<>();
-			modelResourcesMap.put(typedModel, resources);
-		}
-		resources.add(model);
-		resource2typedModel.put(model, typedModel);
-	}
-
-	/**
-	 * Adds the model element to the resource of the given TypeModel
-	 *
-	 * @param tm the TypeModel
-	 * @param element the element
-	 */
-	public void addModelElement(@NonNull ImperativeTypedModel model, @NonNull Object element) {
-		List<@NonNull EObject> elements = modelElementsMap.get(model);
-		if (elements == null) {
-			List<@NonNull Resource> resources = modelResourcesMap.get(model);
-			if (resources != null) {
-				elements = new ArrayList<>();
-				for (@NonNull Resource resource : resources) {
-					elements.addAll(resource.getContents());
-				}
-				modelElementsMap.put(model, elements);
-			}
-		}
-		if (elements != null) {
-			assert !elements.contains(element);
-			elements.add((EObject) element);
-		}
-	}
-
-	/**
 	 * Dispose.
 	 */
 	public void dispose() {
-		modelElementsMap.clear();
-		modelResourcesMap.clear();
-		allInstancesClasses.clear();
+		for (@NonNull QVTiTypedModelInstance typedModelInstance : typedModelInstances) {
+			typedModelInstance.dispose();
+		}
 		for (Map<?, ?> unnavigableOpposite : unnavigableOpposites) {
 			unnavigableOpposite.clear();
 		}
@@ -179,87 +118,9 @@ public class QVTiModelsManager
 		return elements;
 	}
 
-	/**
-	 * Gets the resources for all the models.
-	 *
-	 * @return a collection of all the resources
-	 */
-	@Deprecated /* @deprecated not used */
-	public @NonNull Collection<@NonNull Resource> getAllModelResources() {
-		List<@NonNull Resource> allResources = new ArrayList<>();
-		for (@NonNull List<@NonNull Resource> resources : modelResourcesMap.values()) {
-			allResources.addAll(resources);
-		}
-		return allResources;
-	}
-
-	/**
-	 * Gets the all the instances of the specified Type in the given TypeModel
-	 *
-	 * @param tm the TypeModel (can be null if it is the middle model)
-	 * @param type the type of the elements that are retrieved
-	 * @return the instances
-	 */
-	public @NonNull List<@NonNull Object> getElementsByType(@Nullable ImperativeTypedModel model, @NonNull Type type) {
-		boolean isExtent = type.getTypeId() == EXTENT_CLASSID;
-		List<@NonNull Object> elements = new ArrayList<>();
-		// Is the TypedModel the middle or output, hence we have elements in the elementsMap
-		if (modelElementsMap.containsKey(model)) {
-			List<@NonNull EObject> roots = modelElementsMap.get(model);
-			assert roots != null;
-			for (@NonNull EObject root : roots) {
-				//            if (root != null) {
-				//if (root.eClass().getName().equals(type.getName())) {
-				if (root.eContainer() == null) {
-					if (isInstance(type, root)) {
-						elements.add(root);
-					}
-					for (TreeIterator<EObject> contents = root.eAllContents(); contents.hasNext();) {
-						EObject element = contents.next();
-						if ((element != null) && isInstance(type, element)) {
-							//                    if (((EClass) type.getETarget()).getName().equals(element.eClass().getName())) {
-							elements.add(element);
-						}
-					}
-				}
-			}
-		}
-		else {
-			List<@NonNull Resource> resources = modelResourcesMap.get(model);
-			if (resources != null) {
-				for (Resource resource : resources) {
-					if (isExtent) {
-						Property extentElementProperty = NameUtil.getNameable(((org.eclipse.ocl.pivot.Class)type).getOwnedProperties(), QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS.getName());
-						Integer cacheIndex = getTransformationAnalysis().getCaches().get(extentElementProperty);;
-						EClass eClass = (EClass)type.getESObject();
-						EStructuralFeature eStructuralFeature = eClass.getEStructuralFeature(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS.getName());
-						EObject extent = eClass.getEPackage().getEFactoryInstance().create(eClass);
-						Object eGet = extent.eGet(eStructuralFeature);
-						@SuppressWarnings("unchecked")
-						List<Object> extentElements = (List<Object>) eGet;
-						for (@NonNull EObject rootObject : resource.getContents()) {
-							extentElements.add(rootObject);
-							if (cacheIndex != null) {
-								setUnnavigableOpposite(cacheIndex, extent, rootObject);
-							}
-						}
-						elements.add(extent);
-					}
-					else {
-						for (EObject element : new TreeIterable(resource)) {
-							//System.out.println(type.getETarget());
-							//System.out.println(((EClassifier) type.getETarget()).getName());
-							//System.out.println(object.eClass().getName());
-							if (isInstance(type, element)) {
-								//                if (((EClass) type.getETarget()).getName().equals(element.eClass().getName())) {
-								elements.add(element);
-							}
-						}
-					}
-				}
-			}
-		}
-		return elements;
+	public @Nullable Map<@NonNull Object, Object> getExtentOpposites() {
+		int propertyIndex = getOppositePropertyIndex(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS);
+		return (Map<@NonNull Object, Object>)unnavigableOpposites[propertyIndex];
 	}
 
 	public @NonNull MetamodelManager getMetamodelManager() {
@@ -274,17 +135,13 @@ public class QVTiModelsManager
 	 */
 	// FIXME Change API for multiple extents
 	public Resource getModel(@NonNull ImperativeTypedModel typedModel) {
-		List<@NonNull Resource> resources = modelResourcesMap.get(typedModel);
-		return resources != null ? resources.get(0) : null;
+		QVTiTypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
+		return typedModelInstance.getModel();
 	}
 
-	public @NonNull Collection<@NonNull EObject> getRootObjects(@NonNull ImperativeTypedModel typedModel) {
-		List<@NonNull EObject> rootObjects = new ArrayList<>();
-		List<@NonNull Resource> resources = ClassUtil.nonNullState(modelResourcesMap.get(typedModel));
-		for (@NonNull Resource resource : resources) {
-			rootObjects.addAll(resource.getContents());
-		}
-		return rootObjects;
+	public @NonNull Iterable<@NonNull Object> getOpposite(@NonNull Property target2sourceProperty, @NonNull Object sourceObject) {
+		//	return modelsManager.getOpposite(target2sourceProperty, sourceObject);
+		throw new UnsupportedOperationException();
 	}
 
 	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
@@ -299,9 +156,38 @@ public class QVTiModelsManager
 		}
 	} */
 
-	public @Nullable ImperativeTypedModel getTypedModel(@NonNull Resource resource) {
-		return resource2typedModel.get(resource);
+	public @NonNull TransformationInstance getTransformationInstance(@NonNull ImperativeTransformation transformation) {
+		TransformationInstance transformationInstance2 = transformationInstance;
+		if (transformationInstance2 == null) {
+			transformationInstance = transformationInstance2 = new QVTiTransformationInstance(this, transformation);
+		}
+		return transformationInstance2;
 	}
+
+	public @NonNull QVTiTypedModelInstance getTypedModelInstance(@NonNull ImperativeTypedModel typedModel) {
+		String modelName = typedModel.getName();
+		assert modelName != null;
+		return getTypedModelInstance(modelName);
+	}
+
+	@Override
+	public @NonNull QVTiTypedModelInstance getTypedModelInstance(@NonNull String modelName) {
+		for (@NonNull QVTiTypedModelInstance typedModelInstance : typedModelInstances) {
+			if (modelName.equals(typedModelInstance.getName())) {
+				return typedModelInstance;
+			}
+		}
+		throw new IllegalStateException("Unknown model name '" + modelName + "'");
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull QVTiTypedModelInstance> getTypedModelInstances() {
+		return typedModelInstances;
+	}
+
+	//	public @Nullable ImperativeTypedModel getTypedModel(@NonNull Resource resource) {
+	//		return resource2typedModel.get(resource);
+	//	}
 
 	/**
 	 * Return the target object of the unnavigable property, associated with cacheIndex, navigation from sourceObject.
@@ -310,116 +196,8 @@ public class QVTiModelsManager
 		return unnavigableOpposites[cacheIndex].get(sourceObject);
 	}
 
-	/**
-	 * Implemented by subclasses to determine whether the specified element
-	 * is an instance of the specified class, according to the metamodel
-	 * semantics implemented by the environment that created this extent map.
-	 *
-	 * @param type the type
-	 * @param element a potential run-time (M0) instance of that class
-	 * @return <code>true</code> if this element is an instance of the given
-	 * class; <code>false</code> otherwise
-	 */
-	protected boolean isInstance(@NonNull Type requiredType, @NonNull EObject eObject) {
-		EClass eClass = eObject.eClass();
-		EPackage ePackage = eClass.getEPackage();
-		Type objectType = null;
-		if (ePackage == PivotPackage.eINSTANCE) {
-			String name = ClassUtil.nonNullEMF(eClass.getName());
-			objectType = environmentFactory.getASClass(name);
-		}
-		else {
-			try {
-				objectType = environmentFactory.getASOf(Type.class,  eClass);
-			} catch (ParserException e) {
-				// FIXME				if (!generatedErrorMessage) {
-				//					generatedErrorMessage = true;
-				//					logger.error("Failed to load an '" + eClass.getName() + "'", e);
-				//				}
-			}
-		}
-		return (objectType != null) && objectType.conformsTo(environmentFactory.getStandardLibrary(), requiredType);
-	}
-
-	public void saveContents() {
-		for (Map.Entry<@NonNull ImperativeTypedModel, @NonNull List<@NonNull Resource>> entry : modelResourcesMap.entrySet()) {
-			List<@NonNull Resource> models = entry.getValue();
-			Resource model = models.get(0);
-			ImperativeTypedModel key = entry.getKey();
-			if (modelElementsMap.containsKey(key)) {       // Only save modified models
-				// Move elements without container to the resource contents
-				List<EObject> elements = modelElementsMap.get(key);
-				assert elements != null;
-				for (EObject e : elements) {
-					EClass eClass = e.eClass();
-					assert eClass != null;
-					ClassId classId = IdManager.getClassId(eClass);
-					if (classId == EXTENT_CLASSID) {
-						EStructuralFeature eStructuralFeature = eClass.getEStructuralFeature(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS.getName());
-						Object eGet = e.eGet(eStructuralFeature);
-						if (eGet instanceof List) {
-							@SuppressWarnings("unchecked") List<EObject> castEGet = (List<EObject>)eGet;
-							model.getContents().addAll(castEGet);
-						}
-					}
-					else {
-						if (e.eContainer() == null) {
-							model.getContents().add(e);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * Saves all the models managed by the domain manager
-	 */
-	public void saveModels() {
-		Map<Object, Object> saveOptions = XMIUtil.createSaveOptions();
-		saveOptions.put(XMIResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
-		this.saveModels(saveOptions);
-	}
-	/**
-	 * Saves all the models managed by the domain manager using the provided (optional)
-	 * saving options.
-	 */
-	public void saveModels(@Nullable Map<?, ?> savingOptions) {
-		saveContents();
-		for (Map.Entry<@NonNull ImperativeTypedModel, @NonNull List<@NonNull Resource>> entry : modelResourcesMap.entrySet()) {
-			List<@NonNull Resource> models = entry.getValue();
-			ImperativeTypedModel key = entry.getKey();
-			if (modelElementsMap.containsKey(key)) {       // Only save modified models
-				try {
-					for (@NonNull Resource model : models) {
-						model.save(savingOptions);
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	public void saveMiddleModel(@NonNull URI uri) {
-		this.saveMiddleModel(uri, null);
-	}
-
-	public void saveMiddleModel(@NonNull URI uri, Map<?, ?> savingOptions) {
-		// TODO
-		/*        Resource r = metamodelManager.getExternalResourceSet().createResource(uri);
-        for (EObject e : modelElementsMap.get(MIDDLE_MODEL)) {
-            if (e.eContainer() == null) {
-                r.getContents().add(e);
-            }
-        }
-        try{
-            Map<Object, Object> options = new HashMap<Object, Object>();
-            options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-            r.save(options);
-           } catch (IOException e) {
-              e.printStackTrace();
-           } */
+	public void initTypedModelInstance(/*int i,*/@NonNull QVTiTypedModelInstance model) {
+		typedModelInstances.add(model);
 	}
 
 	/**
@@ -456,100 +234,109 @@ public class QVTiModelsManager
 
 	public static class QVTiTypedModelInstance extends AbstractTypedModelInstance	// FIXME reimplement using CG variant
 	{
-		protected final @NonNull QVTiModelsManager modelManager;
+		protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
 		protected final @NonNull ImperativeTypedModel typedModel;
-		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull List<@NonNull Object>> kind2instances = null;
-		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull List<@NonNull Object>> type2instances = null;
+		private @Nullable EClass extentEClass = null;
 
-		public QVTiTypedModelInstance(@NonNull QVTiModelsManager modelManager, @NonNull ImperativeTypedModel typedModel) {
-			this.modelManager = modelManager;
+		public QVTiTypedModelInstance(@NonNull QVTiModelsManager modelsManager, @NonNull ImperativeTypedModel typedModel) {
+			super(modelsManager, QVTimperativeUtil.getName(typedModel));
+			this.environmentFactory = modelsManager.environmentFactory;
 			this.typedModel = typedModel;
 		}
 
 		@Override
-		public @NonNull Iterable<@NonNull Object> getAllObjects() {
-			throw new UnsupportedOperationException();
+		protected void addExtent() {
+			EClass extentEClass2 = extentEClass;
+			assert extentEClass2 != null;
+			EObject extent = extentEClass2.getEPackage().getEFactoryInstance().create(extentEClass2);
+			EStructuralFeature elementsFeature = extentEClass2.getEStructuralFeature(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS.getFeatureID());
+			assert elementsFeature != null;
+			@SuppressWarnings("unchecked")
+			List<Object> elements = (List<Object>) extent.eGet(elementsFeature);
+			assert elements != null;
+			addExtent(extent, elements);
 		}
 
-		@Override
-		public @Nullable String getName() {
-			return typedModel.getName();
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
-			if (kind2instances == null) {
-				kind2instances = new HashMap<>();
+		public void addInputResource(@NonNull URI modelURI, @Nullable String contentType) {
+			Resource resource;
+			ResourceSet resourceSet = environmentFactory.getResourceSet();
+			if (contentType == null) {
+				resource = resourceSet.getResource(modelURI, true);
 			}
-			List<@NonNull Object> elements = kind2instances.get(type);
-			if (elements == null) {
-				elements = modelManager.getElementsByType(typedModel, type);
-				kind2instances.put(type, elements);
-			}
-			return elements;
-		}
-
-		@Override
-		public @NonNull List<@NonNull Object> getObjectsOfType(org.eclipse.ocl.pivot.@NonNull Class type) {
-			if (type2instances == null) {
-				type2instances = new HashMap<>();
-			}
-			List<@NonNull Object> elements = type2instances.get(type);
-			if (elements == null) {
-				elements = new ArrayList<>();
-				type2instances.put(type, elements);
-				EObject eClass = type.getESObject();
-				for (@NonNull Object eObject : getObjectsOfKind(type)) {
-					if (modelManager.eClass(eObject) == eClass) {
-						elements.add(eObject);
-					}
+			else {
+				resource = resourceSet.createResource(modelURI, contentType);
+				try {
+					resource.load(null);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
+			if (resource != null) {
+				addInputResource(resource);
+			}
+		}
+
+		public void addOutputResource(@NonNull URI modelURI, @Nullable String contentType) {
+			Resource resource = environmentFactory.getResourceSet().createResource(modelURI, null);
+			if (resource != null) {
+				addOutputResource(resource);
+			}
+		}
+
+		/**
+		 * Return the elements of a root Extent object, iff rootObject is an Extent.
+		 * Return null otherwise.
+		 */
+		@Override
+		protected @Nullable Iterable<@NonNull EObject> getExtentElements(@NonNull EObject rootObject) {
+			EClass eClass = rootObject.eClass();
+			TypeId classId = IdManager.getClassId(eClass);
+			if (classId != EXTENT_CLASSID) {
+				return null;
+			}
+			EStructuralFeature elementsFeature = eClass.getEStructuralFeature(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS.getFeatureID());
+			assert elementsFeature != null;
+			@SuppressWarnings("unchecked")
+			List<@NonNull EObject> elements = (List<@NonNull EObject>) rootObject.eGet(elementsFeature);
 			return elements;
+		}
+
+		/**
+		 * Gets the model (resource) for a given TypedModel.
+		 *
+		 * @param typedModel the typed model
+		 * @return the resource
+		 */
+		// FIXME Change API for multiple extents
+		public @Nullable Resource getModel() {
+			List<@NonNull Resource> inputResources = basicGetInputResources();
+			return (inputResources != null) && !inputResources.isEmpty() ? inputResources.get(0) : null;
 		}
 
 		public @NonNull QVTiModelsManager getModelManager() {
-			return modelManager;
-		}
-
-		@Override
-		public @NonNull Collection<@NonNull ? extends Object> getRootObjects() {
-			Resource resource = modelManager.getModel(typedModel);
-			if (resource != null) {
-				return resource.getContents();
-			}
-			else {
-				return Collections.<@NonNull Object>emptyList();
-			}
+			return (QVTiModelsManager) modelsManager;
 		}
 
 		public @NonNull ImperativeTypedModel getTypedModel() {
 			return typedModel;
 		}
-	}
 
-	@SuppressWarnings("null")
-	public @NonNull EClass eClass(@NonNull Object object) {
-		return ((EObject)object).eClass();
-	}
-
-	public @NonNull TransformationInstance getTransformationInstance(@NonNull ImperativeTransformation transformation) {
-		TransformationInstance transformationInstance2 = transformationInstance;
-		if (transformationInstance2 == null) {
-			transformationInstance = transformationInstance2 = new QVTiTransformationInstance(this, transformation);
+		@Override
+		public <K,V> void initExtent(int extentClassIndex, @Nullable Map<K, V> extentOpposites) {
+			super.initExtent(extentClassIndex, extentOpposites);
+			ImperativeTypedModel typedModel = getTypedModel();
+			Set<org.eclipse.ocl.pivot.@NonNull Class> usedClasses = Sets.newHashSet(QVTimperativeUtil.getUsedClasses(typedModel));
+			ClassId[] classIndex2classId2 = classIndex2classId;
+			assert classIndex2classId2 != null;
+			ClassId extentClassId = classIndex2classId2[extentClassIndex];
+			for (org.eclipse.ocl.pivot.@NonNull Class usedClass : usedClasses) {
+				if (usedClass.getTypeId() == extentClassId) {
+					extentEClass = (EClass) usedClass.getESObject();
+					break;
+				}
+			}
+			assert extentEClass != null;
 		}
-		return transformationInstance2;
-	}
-
-	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull ImperativeTypedModel typedModel) {
-		if (typedModel2typedModelInstance == null) {
-			typedModel2typedModelInstance = new HashMap<>();
-		}
-		TypedModelInstance typedModelInstance = typedModel2typedModelInstance.get(typedModel);
-		if (typedModelInstance == null) {
-			typedModelInstance = new QVTiTypedModelInstance(this, typedModel);
-			typedModel2typedModelInstance.put(typedModel, typedModelInstance);
-		}
-		return typedModelInstance;
 	}
 }

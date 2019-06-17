@@ -22,7 +22,6 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.Doublylinkedlist
 import org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.List2listPackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
 import org.junit.Test;
 
@@ -48,27 +47,26 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 			int[] tests = /**new int[]{100000}; //*/PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
 				@SuppressWarnings("unused")BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
-				Resource inResource = myQVT.loadInput("forward", getModelsURI("families2persons/samples/EmptyList.xmi"));
+				Resource inResource = myQVT.addInputURI("forward", getModelsURI("families2persons/samples/EmptyList.xmi"));
 				assert inResource != null;
 				inResource.getContents().clear();
 				inResource.getContents().addAll(doublyLinkedListGenerator.createDoublyLinkedListModel(testSize));
-				//				myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Forward2Reverse_trace.xmi");
-				Resource outResource = myQVT.createModel("reverse", getTestURI("List_Interpreted.xmi"));
-				assert outResource != null;
 				AbstractEXE2016CGTests.garbageCollect();
 				logger.printf("%9d, ", testSize);
 				long startTime = System.nanoTime();
 				myQVT.executeTransformation();
-				Collection<@NonNull ?> rootObjects = myQVT.getRootObjects("reverse");
+				Collection<@NonNull ?> rootEObjects = myQVT.getRootEObjects("reverse");
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-				doublyLinkedListGenerator.checkModel((@NonNull DoublyLinkedList) rootObjects.iterator().next(), testSize);
-				//				myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+				//				myQVT.saveOutput(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Forward2Reverse_trace.xmi", null, null);
+				//				Resource outResource = myQVT.saveOutput("reverse", getTestURI("List_Interpreted.xmi"), null, null);
+				//				assert outResource != null;
+				doublyLinkedListGenerator.checkModel((@NonNull DoublyLinkedList) rootEObjects.iterator().next(), testSize);
 				myQVT.getResourceSet().getResources().remove(inResource);
-				myQVT.getResourceSet().getResources().remove(outResource);
+				//				myQVT.getResourceSet().getResources().remove(outResource);
 				inResource = null;
-				outResource = null;
-				rootObjects = null;
+				//				outResource = null;
+				rootEObjects = null;
 				interpretedExecutor = null;
 			}
 		}
@@ -92,22 +90,21 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("reverse");
 			int testSize = 100000;
 			BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
-			myQVT.loadInput("forward", getModelsURI("families2persons/samples/EmptyList.xmi"));
+			myQVT.addInputURI("forward", getModelsURI("families2persons/samples/EmptyList.xmi"));
 			Resource inResource = interpretedExecutor.getModel("forward");
 			assert inResource != null;
 			inResource.getContents().clear();
 			inResource.getContents().addAll(doublyLinkedListGenerator.createDoublyLinkedListModel(testSize));
-			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, getTestURI("Forward2Reverse_trace.xmi"));
-			myQVT.createModel("reverse", getTestURI("List_Interpreted.xmi"));
 			AbstractEXE2016CGTests.garbageCollect();
 			logger.printf("%9d, ", testSize);
 			long startTime = System.nanoTime();
 			myQVT.executeTransformation();
-			Collection<@NonNull ?> rootObjects = myQVT.getRootObjects("reverse");
+			Collection<@NonNull ?> rootObjects = myQVT.getRootEObjects("reverse");
 			long endTime = System.nanoTime();
 			logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
+			//			myQVT.saveOutput(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, getTestURI("Forward2Reverse_trace.xmi"), null, null);
+			//			myQVT.saveOutput("reverse", getTestURI("List_Interpreted.xmi"), null, null);
 			doublyLinkedListGenerator.checkModel((@NonNull DoublyLinkedList) rootObjects.iterator().next(), testSize);
-			//				myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();

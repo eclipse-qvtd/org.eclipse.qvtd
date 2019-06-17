@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2018 Willink Transformations and others.
+ * Copyright (c) 2019 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -10,21 +10,19 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.evaluation.Executor;
+import java.io.IOException;
+import java.util.Map;
 
-/**
- * A TransformationExecutor supervises the execution of an auto-generated transformation.
- *
- * @noimplement
- */
-public interface TransformationExecutor extends Executor
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+public interface ModelsManager
 {
-	@Override
-	void dispose();
-	Boolean execute() throws Exception;
-	@NonNull ModelsManager getModelsManager();
-	@NonNull Transformer getTransformer();
+	@NonNull Map<@NonNull Object, @NonNull Object>[] getObject2oppositeObject();
+	int getOppositePropertyIndex(@NonNull EReference eReference);
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
-	void setSuppressFailureDiagnosis(boolean suppressFailureDiagnosis);
+	@NonNull Iterable<? extends @NonNull TypedModelInstance> getTypedModelInstances();
+	@NonNull EReference @NonNull [] getPropertyIndex2eReference();
+	void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException;
 }

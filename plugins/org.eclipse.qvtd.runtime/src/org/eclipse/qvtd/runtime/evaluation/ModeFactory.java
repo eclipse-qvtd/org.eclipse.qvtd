@@ -19,7 +19,11 @@ import org.eclipse.ocl.pivot.ids.TypeId;
  */
 public interface ModeFactory
 {
+	// EvaluationStatus is created lazily where necessary
+	public static final @NonNull ModeFactory LAZY = new Lazy();
+	// EvaluationStatus is created for all mapping elements
 	public static final @NonNull ModeFactory INCREMENTAL = new Incremental();
+	// EvaluationStatus is updated for all mapping elements
 	public static final @NonNull ModeFactory NON_INCREMENTAL = new NonIncremental();
 
 	public class Incremental implements ModeFactory
@@ -32,6 +36,39 @@ public interface ModeFactory
 			else {
 				return new SimpleIncrementalConnection(interval, name, typeId);
 			}
+		}
+
+		@Override
+		public boolean isIncremental() {
+			return true;
+		}
+
+		@Override
+		public boolean isLazy() {
+			return false;
+		}
+	}
+
+	public class Lazy implements ModeFactory
+	{
+		@Override
+		public @NonNull Connection createConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
+			if (isStrict) {
+				return new StrictIncrementalConnection(interval, name, typeId);
+			}
+			else {
+				return new SimpleIncrementalConnection(interval, name, typeId);
+			}
+		}
+
+		@Override
+		public boolean isIncremental() {
+			return false;
+		}
+
+		@Override
+		public boolean isLazy() {
+			return true;
 		}
 	}
 
@@ -46,7 +83,22 @@ public interface ModeFactory
 				return new SimpleConnection(interval, name, typeId);
 			}
 		}
+
+		@Override
+		public boolean isIncremental() {
+			return false;
+		}
+
+		@Override
+		public boolean isLazy() {
+			return false;
+		}
 	}
 
 	@NonNull Connection createConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId, boolean isStrict);
+
+
+	boolean isIncremental();
+
+	boolean isLazy();
 }

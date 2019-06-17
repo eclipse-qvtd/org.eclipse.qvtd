@@ -74,6 +74,11 @@ public abstract class AbstractConnection implements Connection
 		return nextConnection;
 	}
 
+	@Override
+	public @NonNull TypeId getTypeId() {
+		return typeId;
+	}
+
 	//	@Override
 	public boolean isQueued() {
 		return isQueued;

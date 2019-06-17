@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +23,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -44,6 +41,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
@@ -52,11 +50,11 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.NullValue;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -73,49 +71,55 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager.QVTiTypedModelInstance;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
-public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
+public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor, TransformationExecutor
 {
 	/**
 	 * WrappedModelManager enables the unhelpful model access API to be observed without infecting the
 	 * more streamlined QVTi accesses.
 	 */
-	private class WrappedModelManager extends AbstractModelManager
+	private class WrappedModelManager extends AbstractModelManager implements ModelManager.ModelManagerExtension2
 	{
 		@Override
 		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 			return modelsManager.get(type);
 		}
+
+		@Override
+		public @NonNull Iterable<@NonNull Object> getOpposite(@NonNull Property target2sourceProperty, @NonNull Object sourceObject) {
+			return modelsManager.getOpposite(target2sourceProperty, sourceObject);
+		}
 	}
 
 	protected final @NonNull ImperativeTransformation transformation;
 	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
+	protected final @NonNull ModeFactory modeFactory;
 	protected final @NonNull QVTiModelsManager modelsManager;
 	private @Nullable WrappedModelManager wrappedModelManager = null;
 	protected final boolean debugExceptions = AbstractTransformer.EXCEPTIONS.isActive();
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 	private final @NonNull Map<@NonNull Mapping, @NonNull Interval> mapping2interval = new HashMap<>();;
 
-	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
+	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation, @NonNull ModeFactory modeFactory) {
 		super(environmentFactory);
 		this.transformation = transformation;
 		this.transformationAnalysis = environmentFactory.createTransformationAnalysis(transformation);
+		this.modeFactory = modeFactory;
 		transformationAnalysis.analyzeTransformation();
 		this.modelsManager = environmentFactory.createModelsManager(transformationAnalysis);
-	}
-
-	/**
-	 * Adds the model.
-	 */
-	public void addModel(@NonNull ImperativeTypedModel typedModel, @NonNull Resource resource) {
-		modelsManager.addModel(typedModel, resource);
+		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(transformation)) {
+			QVTiTypedModelInstance typedModelInstance = createTypedModelInstance((ImperativeTypedModel)typedModel);
+			modelsManager.initTypedModelInstance(typedModelInstance);
+		}
 	}
 
 	@Override
@@ -147,19 +151,6 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		return visitor;
 	}
 
-	public @Nullable Resource createModel(@NonNull String name, @NonNull URI modelURI) {
-		return createModel(name, modelURI, null);
-	}
-	@Override
-	public @Nullable Resource createModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
-		ImperativeTypedModel typedModel = getTypedModel(name);
-		Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
-		if (resource != null) {
-			modelsManager.addModel(typedModel, resource);
-		}
-		return resource;
-	}
-
 	@Override
 	protected EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension createNestedEvaluationEnvironment(EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable Object caller) {
 		if (evaluationEnvironment instanceof QVTiEvaluationEnvironment) {
@@ -180,6 +171,10 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		}
 	}
 
+	protected @NonNull QVTiTypedModelInstance createTypedModelInstance(@NonNull ImperativeTypedModel typedModel) {
+		return new QVTiTypedModelInstance(modelsManager, typedModel);
+	}
+
 	@Override
 	public void dispose() {
 		modelsManager.dispose();
@@ -188,6 +183,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 
 	@Override
 	public Boolean execute() {
+		modelsManager.analyzeInputResources();
 		initializeEvaluationEnvironment(transformation);
 		getRootEvaluationEnvironment();
 		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
@@ -243,9 +239,9 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		return modelsManager;
 	}
 
-	public @NonNull Collection<@NonNull EObject> getRootObjects(@NonNull String name) {
-		return modelsManager.getRootObjects(getTypedModel(name));
-	}
+	//	public @NonNull Collection<@NonNull EObject> getRootEObjects(@NonNull String name) {
+	//		return modelsManager.getRootEObjects(getTypedModel(name));
+	//	}
 
 	public @NonNull Transformation getTransformation() {
 		return transformation;
@@ -399,6 +395,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 
 	@Override
 	public @Nullable Object internalExecuteNewStatement(@NonNull NewStatement newStatement, @NonNull EvaluationVisitor undecoratedVisitor) {
+		boolean isContained = false;		// FIXME compute containment guarantee
 		OCLExpression ownedExpression = newStatement.getOwnedExpression();
 		if (ownedExpression != null) {
 			Object initValue = ownedExpression.accept(undecoratedVisitor);
@@ -406,9 +403,9 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			replace(newStatement, initValue);
 			ImperativeTypedModel typedModel = newStatement.getReferredTypedModel();
 			assert typedModel != null;
-			Object ecoreValue = getIdResolver().ecoreValueOf(null, initValue);
+			EObject ecoreValue = (EObject) getIdResolver().ecoreValueOf(null, initValue);
 			assert ecoreValue != null;
-			modelsManager.addModelElement(typedModel, ecoreValue);
+			modelsManager.getTypedModelInstance(typedModel).add(ecoreValue, isContained);
 			return ecoreValue;
 		}
 		else {
@@ -421,20 +418,19 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			}
 			ImperativeTypedModel typedModel = newStatement.getReferredTypedModel();
 			assert typedModel != null;
-			Object element = ((org.eclipse.ocl.pivot.Class)type).createInstance();
+			org.eclipse.ocl.pivot.Class asClass = (org.eclipse.ocl.pivot.Class)type;
+			if (asClass.isIsAbstract()) {
+				Mapping asMapping = QVTimperativeUtil.getContainingMapping(newStatement);
+				throw new IllegalStateException("Attempted to create instance of abstract '" + asClass.getName() + "' in " + asMapping.getName());
+			}
+			EObject element = asClass.createInstance();
 			// Add the realize variable binding to the environment
 			if (!replace(newStatement, element, false)) {
 				return null;
 			}
-			modelsManager.addModelElement(typedModel, element);
+			modelsManager.getTypedModelInstance(typedModel).add(element, isContained);
 			return element;
 		}
-	}
-
-	@Deprecated /* @deprecated childKey not used */
-	@Override
-	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
-		internalExecuteSetStatement(setStatement, slotObject, ecoreValue);
 	}
 
 	@Override
@@ -475,12 +471,15 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(rule)) {
 				if (mappingParameter instanceof AppendParameter) {
 					org.eclipse.ocl.pivot.Class type = QVTimperativeUtil.getClassType(mappingParameter);
-					Connection connection = rootInterval.createConnection(QVTimperativeUtil.getName(mappingParameter), type.getTypeId(), false, ModeFactory.NON_INCREMENTAL);
-					Iterable<@NonNull ? extends Object> objectsOfKind = modelInstance.getObjectsOfKind(type);
-					for (@NonNull Object object : objectsOfKind) {
-						connection.appendElement(object);
+					Connection theConnection = null;
+					for (@NonNull Connection connection : rootInterval.getConnections()) {	// FIXME Can we use a linear ClassIndex ?
+						if (connection.getTypeId() == type.getTypeId()) {
+							theConnection = connection;
+							break;
+						}
 					}
-					getEvaluationEnvironment().add(mappingParameter, connection);
+					assert theConnection != null;
+					getEvaluationEnvironment().add(mappingParameter, theConnection);
 				}
 			}
 			rule.accept(undecoratedVisitor);			// Use an outer InvocationConstructor?
@@ -490,40 +489,6 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			popEvaluationEnvironment();
 		}
 		return true;
-	}
-
-	/**
-	 * Loads the modelURI and binds it to the named TypedModel.
-	 */
-	public @Nullable Resource loadModel(@NonNull String name, @NonNull URI modelURI) {
-		ImperativeTypedModel typedModel = getTypedModel(name);
-		Resource resource = environmentFactory.getResourceSet().getResource(modelURI, true);
-		if (resource != null) {
-			modelsManager.addModel(typedModel, resource);
-		}
-		return resource;
-	}
-
-	@Override
-	public void loadModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
-		ImperativeTypedModel typedModel = getTypedModel(name);
-		Resource resource;
-		ResourceSet resourceSet = environmentFactory.getResourceSet();
-		if (contentType == null) {
-			resource = resourceSet.getResource(modelURI, true);
-		}
-		else {
-			resource = resourceSet.createResource(modelURI, contentType);
-			try {
-				resource.load(null);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if (resource != null) {
-			modelsManager.addModel(typedModel, resource);
-		}
 	}
 
 	@Override
@@ -558,48 +523,16 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		return true;
 	}
 
-	//	@Override
-	public void saveContents() {
-		modelsManager.saveContents();
-	}
-
-	public Resource saveModel(@NonNull String name, @NonNull URI modelURI, String contentType, @Nullable Map<?, ?> savingOptions) throws IOException {
-		ImperativeTypedModel typedModel = getTypedModel(name);
-		Resource resource = modelsManager.getModel(typedModel);
-		if (resource == null) {
-			resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
-		}
-		if (resource != null) {
-			resource.save(savingOptions);
-		}
-		return resource;
+	@Override
+	public void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
+		modelsManager.saveModels(saveOptions);
 	}
 
 	@Override
-	public void saveModels() {
-		modelsManager.saveModels();
-	}
-
-	public void saveModels(@Nullable Map<?, ?> savingOptions) {
-		modelsManager.saveModels(savingOptions);
-	}
-
-	public void saveModels(@Nullable URI traceURI) {
-		Map<Object, Object> saveOptions = XMIUtil.createSaveOptions();
-		saveOptions.put(XMIResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
-		this.saveModels(traceURI, saveOptions);
-	}
-
-	public void saveModels(@Nullable URI traceURI, @Nullable Map<?, ?> savingOptions) {
-		this.saveModels(savingOptions);
-		if (traceURI != null) {
-			modelsManager.saveMiddleModel(traceURI, savingOptions);
-		}
-	}
-
-	@Deprecated /* @deprecated supply URI */
-	public void saveTransformation(Map<?,?> options) throws IOException {
-		saveTransformation(null, options);
+	public void saveOutput(@NonNull String modelName, @NonNull URI uri) {
+		Resource outputResource = ClassUtil.nonNullState(environmentFactory.getResourceSet().createResource(uri));
+		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
+		typedModelInstance.addOutputResource(outputResource);
 	}
 
 	public void saveTransformation(URI saveURI, Map<?,?> options) throws IOException {
@@ -623,4 +556,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			}
 		}
 	}
+
+	@Override
+	public void setSuppressFailureDiagnosis(boolean suppressFailureDiagnosis) {}
 }

@@ -14,7 +14,9 @@ import java.lang.reflect.Constructor;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
+import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -28,17 +30,23 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	 * WrappedModelManager enables the unhelpful model access API to be observed without infecting the
 	 * more streamlined QVTi accesses.
 	 */
-	private class WrappedModelManager extends AbstractModelManager
+	private class WrappedModelManager extends AbstractModelManager implements ModelManager.ModelManagerExtension2
 	{
 		@Override
 		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 			return new IterableAsSet<@NonNull Object>(((AbstractTransformerInternal)transformer).get(type));
+		}
+
+		@Override
+		public @NonNull Iterable<@NonNull Object> getOpposite(@NonNull Property target2sourceProperty, @NonNull Object sourceObject) {
+			throw new UnsupportedOperationException();		// FIXME
 		}
 	}
 
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull Transformer transformer;
 	private WrappedModelManager wrappedModelManager = null;
+	protected boolean suppressFailureDiagnosis = false;
 
 	private AbstractTransformationExecutor(@NonNull EnvironmentFactory environmentFactory, @NonNull Constructor<? extends Transformer> txConstructor)
 			throws ReflectiveOperationException {
@@ -50,6 +58,20 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	protected AbstractTransformationExecutor(@NonNull EnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass)
 			throws ReflectiveOperationException {
 		this(environmentFactory, ClassUtil.nonNullState(txClass.getConstructor(TransformationExecutor.class)));
+	}
+
+	@Override
+	public final Boolean execute() throws Exception {
+		transformer.analyzeInputResources();
+		if (transformer.run()) {
+			return Boolean.TRUE;
+		}
+		if (!suppressFailureDiagnosis) {						// FIXME BUG 511028
+			StringBuilder s = new StringBuilder();
+			transformer.getInvocationManager().diagnoseWorkLists(s);
+			throw new Exception("Failed to execute" + s.toString());
+		}
+		return Boolean.FALSE;
 	}
 
 	@Override
@@ -77,7 +99,22 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	}
 
 	@Override
+	public @NonNull ModelsManager getModelsManager() {
+		return transformer.getModelsManager();
+	}
+
+	@Override
 	public @NonNull Transformer getTransformer() {
 		return transformer;
+	}
+
+	@Override
+	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName) {
+		return transformer.getTypedModelInstance(modelName);
+	}
+
+	@Override
+	public void setSuppressFailureDiagnosis(boolean suppressFailureDiagnosis) {
+		this.suppressFailureDiagnosis = suppressFailureDiagnosis;
 	}
 }

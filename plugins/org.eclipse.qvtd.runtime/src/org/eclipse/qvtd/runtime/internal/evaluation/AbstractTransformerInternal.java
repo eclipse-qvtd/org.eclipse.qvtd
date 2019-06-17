@@ -13,39 +13,20 @@ package org.eclipse.qvtd.runtime.internal.evaluation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.PackageId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
 import org.eclipse.ocl.pivot.internal.values.SetValueImpl;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.DefaultInterval;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
@@ -58,10 +39,7 @@ import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
-import org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent;
-import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryFactory;
-
-import com.google.common.collect.Iterables;
+import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
 /**
  * The abstract implementation of an auto-generated transformation provides the shared infrastructure for maintaining
@@ -96,16 +74,9 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			return new IncrementalInvocationManager(executor);
 		}
 
-		//		@Override
-		//		@Deprecated /* @deprecated pass explit root interval */
-		//		protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
-		//				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-		//			return new Model.Incremental(this, modelName);
-		//		}
-
 		@Override
-		protected @NonNull Model createModel(@NonNull String modelName) {
-			return new Model.Incremental(this, modelName);
+		protected RuntimeModelsManager.@NonNull Model createTypedModelInstance(@NonNull String modelName) {
+			return new RuntimeModelsManager.Model.Incremental(modelsManager, modelName);
 		}
 
 		@Override
@@ -117,464 +88,6 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		@NonNull
 		public ModeFactory getModeFactory() {
 			return ModeFactory.INCREMENTAL;
-		}
-	}
-
-	private static final @NonNull List<@NonNull Integer> EMPTY_INDEX_LIST = Collections.emptyList();
-	private static final @NonNull List<@NonNull Object> EMPTY_EOBJECT_LIST = Collections.emptyList();
-
-	public static class Model extends AbstractTypedModelInstance
-	{
-		public static class Incremental extends Model
-		{
-			public Incremental(@NonNull AbstractTransformerInternal transformer, @NonNull String name) {
-				super(transformer, name);
-			}
-
-			public void remove(@NonNull EObject eObject) {
-				rootObjects.remove(eObject);
-				potentialOrphanObjects.remove(eObject);
-				if (classIndex2connection != null) {
-					unaccumulateEObject(eClass2allClassIndexes, null, null, eObject);
-				}
-			}
-
-			/**
-			 * Remove eObject from the caches.
-			 * <p>
-			 * If eClass2allClassIndexes is non-null, eObject is removed from the allInstances() caches potentially updating eClass2allClassIndexes with
-			 * the state of a new EClass.
-			 * <p>
-			 * If eClass2allPropertyIndexes is non-null, eObject is removed fromun the unnavigable opposites caches potentially updating eClass2allPropertyIndexes with
-			 * the state of a new EClass.
-			 */
-			private void unaccumulateEObject(@Nullable Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes,
-					@Nullable Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes, @Nullable Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex,
-					@NonNull Object eObject) {
-				assert classIndex2connection != null;
-				EClass eClass = transformer.eClass(eObject);
-				if (eClass2allClassIndexes != null) {
-					Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
-					if (allClassIndexes != null) {
-						for (@NonNull Integer classIndex : allClassIndexes) {
-							Connection.Incremental connection = (Connection.Incremental)classIndex2connection[classIndex];
-							connection.removeElement(eObject);
-						}
-					}
-				}
-				if (eClass2allPropertyIndexes != null) {
-					Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex2 = eReference2propertyIndex;
-					assert eReference2propertyIndex2 != null;
-					List<@NonNull Integer> allPropertyIndexes = eClass2allPropertyIndexes.get(eClass);
-					if (allPropertyIndexes != null) {
-						Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = transformer.object2oppositeObject;
-						assert object2oppositeObject2 != null;
-						for (@NonNull Integer propertyIndex : allPropertyIndexes) {
-							EReference @Nullable [] propertyIndex2eReference2 = transformer.propertyIndex2eReference;
-							assert propertyIndex2eReference2 != null;
-							EReference eReference = propertyIndex2eReference2[propertyIndex];
-							if (eReference != null) {
-								Object object = transformer.eGet(eObject, eReference);
-								assert object != null;
-								object2oppositeObject2[propertyIndex].remove(object);
-							}
-						}
-					}
-				}
-			}
-		}
-
-		protected final @NonNull AbstractTransformerInternal transformer;
-		protected final @NonNull String name;
-
-		/**
-		 * The (input) root objects added explicitly by addRootObjects.
-		 */
-		protected final @NonNull List<@NonNull Object> rootObjects = new ArrayList<>();
-
-		/**
-		 * The objects added by add filtered as defined by trackObjects.
-		 */
-		protected final @NonNull List<@NonNull Object> potentialOrphanObjects = new ArrayList<>();
-
-		protected final @NonNull Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes = new HashMap<>();
-
-		/**
-		 * Unchanging list, in class index order, of the ClassId for which allInstances() may be invoked.
-		 */
-		protected @NonNull ClassId @Nullable [] classIndex2classId = null;
-
-		/**
-		 * Unchanging configured map from the ClassId for which allInstances() may be invoked to the ClassIndex for that ClassId.
-		 */
-		protected @Nullable Map<@NonNull ClassId, @NonNull Integer> classId2classIndex = null;
-
-		/**
-		 * Evolving map from the ClassId of some model object's class to all the ClassIndexes for which the model object
-		 * might contribute to an allInstances() return. This is initially populated for the ClassIndexes of the ClassIds
-		 * for which allInstances() may be invoked. It evolves lazily to include the ClassIds for all objects in the user
-		 * models.
-		 */
-		protected @Nullable Map<@NonNull ClassId, @NonNull Set<@NonNull Integer>> classId2classIndexes = null;
-
-		/**
-		 * All possible allInstances() returns indexed by the ClassIndex of the ClassId for which allInstances() may be invoked.
-		 *
-		 * Must be sert non-null by initConnections() before transformation execution starts.
-		 */
-		protected @NonNull Connection [] classIndex2connection;
-
-		private int extentClassIndex = -1;
-		private @Nullable Map<Object, Object> extentOpposites = null;
-
-		private int isContainedCount = 0;
-		private int isNotContainedCount = 0;
-
-		/**
-		 * true to add all EObjects to allEObjects unconditionally
-		 * false to add no EObjects to allEObjects unconditionally
-		 * null to add EObjects to allEObjects unless isContained
-		 */
-		private @Nullable Boolean trackAdditions = null;
-
-		//	@Deprecated /* @deprecated omit redundant argument */
-		public Model(@NonNull AbstractTransformerInternal transformer, @NonNull String name) { // FIXME Bug 540500 per-model classIndex2classId etc
-			this.transformer = transformer;
-			this.name = name;
-		}
-
-		/**
-		 * Add eObject to the the allInstances() caches potentially updating eClass2allClassIndexes with
-		 * the state of a new EClass.
-		 */
-		private void accumulateEObject1(@NonNull Object eObject, @NonNull EClass eClass) {
-			assert classIndex2classId != null;
-			assert eClass2allClassIndexes != null;
-			Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
-			if (allClassIndexes == null) {
-				allClassIndexes = getClassIndexes(eClass);
-				eClass2allClassIndexes.put(eClass, allClassIndexes);
-			}
-			for (@NonNull Integer classIndex : allClassIndexes) {
-				classIndex2connection[classIndex].appendElement(eObject);
-			}
-		}
-
-		/**
-		 * Add eObject to the caches.
-		 * <p>
-		 * If eClass2allPropertyIndexes is non-null, eObject is added to the unnavigable opposites caches potentially updating eClass2allPropertyIndexes with
-		 * the state of a new EClass.
-		 */
-		private void accumulateEObject2(@NonNull Object eObject, @NonNull EClass eClass,
-				@NonNull Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes,
-				@Nullable Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex) {
-			Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex2 = eReference2propertyIndex;
-			assert eReference2propertyIndex2 != null;
-			List<@NonNull Integer> allPropertyIndexes = eClass2allPropertyIndexes.get(eClass);
-			if (allPropertyIndexes == null) {
-				allPropertyIndexes = transformer.getOppositePropertyIndexes(eReference2propertyIndex2, eClass);
-				eClass2allPropertyIndexes.put(eClass, allPropertyIndexes);
-			}
-			Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = transformer.object2oppositeObject;
-			assert object2oppositeObject2 != null;
-			for (@NonNull Integer propertyIndex : allPropertyIndexes) {
-				EReference @Nullable [] propertyIndex2eReference2 = transformer.propertyIndex2eReference;
-				assert propertyIndex2eReference2 != null;
-				EReference eReference = propertyIndex2eReference2[propertyIndex];
-				if (eReference == null) {
-					PropertyId @Nullable [] propertyIndex2propertyId2 = transformer.propertyIndex2propertyId;
-					assert propertyIndex2propertyId2 != null;
-					PropertyId propertyId = propertyIndex2propertyId2[propertyIndex];
-					assert propertyId != null;
-					eReference = (EReference) NameUtil.getENamedElement(eClass.getEAllStructuralFeatures(), propertyId.getName());
-					assert eReference != null;
-				}
-				Object object = transformer.eGet(eObject, eReference);
-				assert object != null;
-				object2oppositeObject2[propertyIndex].put(object, eObject);
-			}
-		}
-
-		/**
-		 * @deprecated provide isContained argument
-		 */
-		@Deprecated
-		public void add(@NonNull EObject eObject) {
-			add(eObject, false);
-		}
-
-		/**
-		 * Add another eObject to the model, which must be distinct from all previously added eObjects.
-		 * If isContained, the caller asserts that the caller will define the eObjects eContainer eliminating
-		 * the need for the eObject to be tracked as a potential orphan to be assigned to the model root.
-		 */
-		public void add(@NonNull EObject eObject, boolean isContained) {
-			if ((trackAdditions == Boolean.FALSE) || (isContained && (trackAdditions == null))) {
-				isContainedCount++;
-			}
-			else {
-				isNotContainedCount++;
-				assert !potentialOrphanObjects.contains(eObject);
-				potentialOrphanObjects.add(eObject);
-			}
-			if (classIndex2classId != null) {
-				EClass eClass = transformer.eClass(eObject);
-				accumulateEObject1(eObject, eClass);
-			}
-		}
-
-		/**
-		 * Add eRootObjects to the modelIndex model.
-		 */
-		public void addRootObjects(@NonNull Iterable<@NonNull ? extends Object> eRootObjects) {
-			Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes = null;
-			Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex = null;
-			if (transformer.propertyIndex2propertyId != null) {
-				eClass2allPropertyIndexes = new HashMap<>();
-				eReference2propertyIndex = new HashMap<>();
-			}
-			for (@NonNull Object eRootObject : eRootObjects) {
-				//
-				//	Accumulate the root object in the model extent
-				//
-				rootObjects.add(eRootObject);
-				if (classIndex2classId != null) {
-					//
-					//	Accumulate the root object and all its child objects in the allInstances() returns
-					//
-					EClass eRootClass = transformer.eClass(eRootObject);
-					accumulateEObject1(eRootObject, eRootClass);
-					if (eClass2allPropertyIndexes != null) {
-						accumulateEObject2(eRootObject, eRootClass, eClass2allPropertyIndexes, eReference2propertyIndex);
-					}
-					for (TreeIterator<? extends Object> tit = transformer.eAllContents(eRootObject); tit.hasNext(); ) {
-						Object eObject = tit.next();
-						if (eObject != null) {
-							EClass eClass = transformer.eClass(eObject);
-							accumulateEObject1(eObject, eClass);
-							if (eClass2allPropertyIndexes != null) {
-								accumulateEObject2(eObject, eClass, eClass2allPropertyIndexes, eReference2propertyIndex);
-							}
-						}
-					}
-				}
-			}
-			//	ClassId extentClassId = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, null).getClassId("Extent", 0);
-			//	Integer extentClassIndex = classId2classIndex != null ? classId2classIndex.get(extentClassId) : null;
-			if (extentClassIndex >= 0) {
-				Extent extent = QVTruntimeLibraryFactory.eINSTANCE.createExtent();
-				Iterables.addAll(extent.getElements(), eRootObjects);
-				accumulateEObject1(extent, extent.eClass());
-				Map<Object, Object> extentOpposites2 = extentOpposites;
-				if (extentOpposites2 != null) {
-					for (Object object : extent.getElements()) {
-						extentOpposites2.put(object, extent);
-					}
-				}
-			}
-		}
-
-		//	protected @NonNull Connection createConnection(@NonNull Interval rootInterval, @NonNull ClassId classId, @NonNull String connectionName, boolean isStrict, boolean isIncremental) {
-		//		return rootInterval.createConnection(connectionName, classId, isStrict, isIncremental);
-		//	}
-
-		/**
-		 * This is solely used by the Model::allObjects Operation which is not needed by synthesized QVTr.
-		 * @deprecated
-		 */
-		@Deprecated
-		@Override
-		public @NonNull Collection<@NonNull Object> getAllObjects() {
-			/*			List<@NonNull Object> allEObjects2 = allEObjects;
-			if (allEObjects2 == null) {
-				allEObjects = allEObjects2 = new ArrayList<>();
-				List<@NonNull Object> rootEObjects2 = rootEObjects;
-				if (rootEObjects2 != null) {
-					for (@NonNull Object eRootObject : rootEObjects2) {
-						assert !allEObjects2.contains(eRootObject);
-						allEObjects2.add(eRootObject);
-						for (TreeIterator<? extends Object> tit = transformer.eAllContents(eRootObject); tit.hasNext(); ) {
-							Object eObject = tit.next();
-							if (eObject != null) {
-								assert !allEObjects2.contains(eObject);
-								allEObjects2.add(eObject);
-							}
-						}
-					}
-				}
-			} */
-			return potentialOrphanObjects;
-		}
-
-		/**
-		 * Return the Set of all ClassIndexes to which an EClass instance contributes to allInstances() returns.
-		 */
-		private @NonNull Set<@NonNull Integer> getClassIndexes(@NonNull EClass eClass) {
-			//	ClassId classId = IdManager.getClassId(eClass);
-			EPackage ePackage = ClassUtil.nonNullEMF(eClass.getEPackage());
-			PackageId packageId = IdManager.getPackageId(ePackage);
-			String className = ClassUtil.nonNullEMF(eClass.getName());		// FIXME Original name
-			ClassId classId = packageId.getClassId(className, eClass.getETypeParameters().size());
-			Map<@NonNull ClassId, @NonNull Set<@NonNull Integer>> classId2classIndexes2 = classId2classIndexes;
-			assert classId2classIndexes2 != null;
-			Set<@NonNull Integer> classIndexes = classId2classIndexes2.get(classId);
-			if (classIndexes == null) {
-				classIndexes = new HashSet<>();
-				for (@NonNull EClass eSuperClass : ClassUtil.nullFree(eClass.getESuperTypes())) {
-					Set<@NonNull Integer> partialResult = getClassIndexes(eSuperClass);
-					classIndexes.addAll(partialResult);
-				}
-				classId2classIndexes2.put(classId, classIndexes);
-			}
-			return classIndexes;
-		}
-
-		public @NonNull Connection getConnection(int classIndex) {
-			assert classIndex2connection != null;
-			return classIndex2connection[classIndex];
-		}
-
-		/**
-		 * This is solely used by the Model::objectsOfKind Operation which is not needed by synthesized QVTr.
-		 */
-		@Override
-		public @NonNull Iterable<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
-			assert classIndex2connection != null;
-			TypeId classId = type.getTypeId();
-			Integer classIndex = classId2classIndex != null ? classId2classIndex.get(classId) : null;
-			if (classIndex != null) {
-				Iterable<@NonNull Object> typedIterable = classIndex2connection[classIndex].typedIterable(Object.class);
-				//				List<@NonNull Object> collection =  new ArrayList<>();
-				//				for (@NonNull Object object : typedIterable) {
-				//					collection.add(object);
-				//				}
-				return typedIterable;
-			}
-			return EMPTY_EOBJECT_LIST;
-		}
-
-		/**
-		 * This is solely used by the Model::objectsOfType Operation which is not needed by synthesized QVTr.
-		 * @deprecated
-		 */
-		@Deprecated
-		@Override
-		public @NonNull Collection<@NonNull Object> getObjectsOfType(org.eclipse.ocl.pivot.@NonNull Class type) {
-			throw new UnsupportedOperationException();
-		}
-
-		/**
-		 * Return all objects in the modelIndex model that conform to eClass.
-		 *
-	    protected @NonNull <T extends EObject> List<T> getObjectsByType(@NonNull EClass eClass) {
-	    	List<T> selectedEObjects = new ArrayList<T>();
-			if (rootEObjects != null) {
-		    	for (EObject eRootObject : rootEObjects) {
-		    		if (eClass.isInstance(eRootObject)) {
-		    			@SuppressWarnings("unchecked") T eObject2 = (T)eRootObject;
-		    			selectedEObjects.add(eObject2);
-		    		}
-		        	for (TreeIterator<EObject> tit = eRootObject.eAllContents(); tit.hasNext(); ) {
-		        		@SuppressWarnings("null")@NonNull EObject eObject = tit.next();
-			    		if (eClass.isInstance(eObject)) {
-			    			@SuppressWarnings("unchecked") T eObject2 = (T)eObject;
-			    			selectedEObjects.add(eObject2);
-			    		}
-		        	}
-		    	}
-			}
-			return selectedEObjects;
-		} */
-
-		@Override
-		public @NonNull Collection<@NonNull Object> getRootObjects() {
-			if (rootObjects.size() > 0) {		// If we have explicit (input) roots
-				return rootObjects;
-			}
-			List<@NonNull Object> rootObjects2 = new ArrayList<>();
-			for (@NonNull Object eObject : potentialOrphanObjects) {
-				if (transformer.eContainer(eObject) == null) {
-					rootObjects2.add(eObject);
-				}
-			}
-			if (AbstractTransformer.CONTAINMENTS.isActive()) {
-				AbstractTransformer.CONTAINMENTS.println(name + " " + isContainedCount + "/" + (isContainedCount + isNotContainedCount));
-			}
-			return rootObjects2;
-		}
-
-		public @NonNull Model initClassIds(@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-			this.classIndex2classId = classIndex2classId;
-			//
-			//	Prepare the allInstances() fields
-			//
-			assert classIndex2allClassIndexes != null;
-			int classIds = classIndex2classId.length;
-			Map<@NonNull ClassId, @NonNull Integer> classId2classIndex = this.classId2classIndex = new HashMap<>(classIds);
-			Map<@NonNull ClassId, @NonNull Set<@NonNull Integer>> classId2classIndexes = this.classId2classIndexes = new HashMap<>(classIds);
-			for (int classIndex = 0; classIndex < classIds; classIndex++) {
-				ClassId classId = classIndex2classId[classIndex];
-				classId2classIndex.put(classId, classIndex);
-				Set<@NonNull Integer> superClassIndexes = new HashSet<>();
-				for (int allClassIndex : classIndex2allClassIndexes[classIndex]) {
-					superClassIndexes.add(allClassIndex);
-				}
-				classId2classIndexes.put(classId, superClassIndexes);
-			}
-			return this;
-		}
-
-		void initConnections(@NonNull Interval rootInterval) {
-			//
-			//	Prepare the allInstances() fields
-			//
-			@NonNull ClassId[] classIndex2classId2 = classIndex2classId;
-			if (classIndex2classId2 != null) {
-				@NonNull Connection [] classIndex2connection = this.classIndex2connection = new @NonNull Connection[classIndex2classId2.length];
-				int classIndex = 0;
-				for (@NonNull ClassId classId : classIndex2classId2) {
-					String connectionName = name + "!" + classId.getName();
-					classIndex2connection[classIndex] = rootInterval.createConnection(connectionName, classId, false, transformer.getModeFactory());
-					classIndex++;
-				}
-			}
-		}
-
-		public <K,V> void initExtent(int extentClassIndex, @Nullable Map<K, V> extentOpposites) {
-			this.extentClassIndex = extentClassIndex;
-			this.extentOpposites = (Map<Object,Object>)extentOpposites;
-		}
-
-		@Override
-		public String toString() {
-			return name + " " + rootObjects.size();
-		}
-
-		@Override
-		public @NonNull String getName() {
-			return name;
-		}
-
-		/**
-		 * Set the behavior of add(eObject,isContained),
-		 * true to add all EObjects to allEObjects unconditionally,
-		 * false to add no EObjects to allEObjects unconditionally,
-		 * null to add EObjects to allEObjects unless isContained
-		 */
-		public void setTrackAdditions(@Nullable Boolean trackAdditions) {
-			this.trackAdditions = trackAdditions;
-		}
-
-		public <@NonNull T> Iterable<T> typedIterable(Class<T> javaClass, org.eclipse.ocl.pivot.@NonNull Class pivotType) {
-			assert classIndex2connection != null;
-			TypeId typeId = pivotType.getTypeId();
-			Integer classIndex = classId2classIndex != null ? classId2classIndex.get(typeId) : null;
-			if (classIndex != null) {
-				Connection connection = classIndex2connection[classIndex];
-				return connection.typedIterable(javaClass);
-			}
-			return null;
 		}
 	}
 
@@ -598,33 +111,14 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	@Deprecated
 	protected final @NonNull Evaluator evaluator;
 	protected final IdResolver.@NonNull IdResolverExtension idResolver;
-	protected final @NonNull Model @NonNull [] models;
-	protected final @NonNull Map<@NonNull String, @NonNull Integer> modelIndexes = new HashMap<>();
+	protected final RuntimeModelsManager.@NonNull Model @NonNull [] models;
+	//	protected final @NonNull Map<@Nullable String, @NonNull Integer> modelIndexes = new HashMap<>();
+	protected final @NonNull RuntimeModelsManager modelsManager;
 	protected final boolean debugAssignments = AbstractTransformer.ASSIGNMENTS.isActive();
 	protected final boolean debugCreations = AbstractTransformer.CREATIONS.isActive();
 	protected final boolean debugExceptions = AbstractTransformer.EXCEPTIONS.isActive();
 	protected final boolean debugGettings = AbstractTransformer.GETTINGS.isActive();
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
-
-	/**
-	 * Unchanging configured list PropertyId for which unnavigable opposite navigation may occur indexed by the PropertyIndex for that PropertyId.
-	 */
-	private @NonNull PropertyId @Nullable [] propertyIndex2propertyId;
-
-	/**
-	 * Unchanging configured map from the PropertyId for which unnavigable opposite navigation may occur to the PropertyIndex for that PropertyId.
-	 */
-	private @Nullable Map<PropertyId, Integer> propertyId2propertyIndex;
-
-	/**
-	 * Unchanging configured map from the PropertyIndex to the EReference for the opposite property navigation.
-	 */
-	private @Nullable EReference @Nullable[] propertyIndex2eReference;
-
-	/**
-	 * Unchanging maps from an EObject to its opposite using the Property whose PropertyIndex indexes the map.
-	 */
-	private @NonNull Map<@NonNull Object, @NonNull Object> @Nullable [] object2oppositeObject;
 
 	/**
 	 * Manager for the blocked and unblocked invocations.
@@ -648,7 +142,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			initOpposites(propertyIndex2propertyId);
 		}
 		for (int i = 0; i < modelNames.length; i++) {
-			Model model = initModel(i, modelNames[i]);
+			TypedModelInstance model = initModel(i, modelNames[i]);
 			model.initClassIds(classIndex2classId, classIndex2allClassIndexes);
 		}
 		initConnections();
@@ -661,7 +155,8 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		this.invocationManager = createInvocationManager();
 		this.objectManager = createObjectManager();
 		this.evaluationCache = createEvaluationCache();
-		this.models = new @NonNull Model @NonNull [models];
+		this.modelsManager = new RuntimeModelsManager(models);
+		this.models = modelsManager.getModels();
 	}
 
 	@Override
@@ -670,12 +165,20 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	/**
+	 * Add eResource to the modelIndex model.
+	 *
+	@Override
+	public void addRootObjects(@NonNull String modelName, @NonNull Resource eResource) {
+		getTypedModelInstance(modelName).addRootObjects(eResource);
+	} */
+
+	/**
 	 * Add eRootObjects to the modelIndex model.
-	 */
+	 *
 	@Override
 	public void addRootObjects(@NonNull String modelName, @NonNull Iterable<@NonNull ? extends Object> eRootObjects) {
 		getTypedModelInstance(modelName).addRootObjects(eRootObjects);
-	}
+	} */
 
 	@Deprecated /* @deprecated pass interval */
 	protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
@@ -704,14 +207,8 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		return new LazyInvocationManager(executor);
 	}
 
-	//	@Deprecated /* @deprecated pass explicit root interval */
-	//	protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
-	//			@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-	//		return new Model(this, modelName);
-	//	}
-
-	protected @NonNull Model createModel(@NonNull String modelName) {
-		return new Model(this, modelName);
+	protected RuntimeModelsManager.@NonNull Model createTypedModelInstance(@NonNull String modelName) {
+		return new RuntimeModelsManager.Model(modelsManager, modelName);
 	}
 
 	@Deprecated // Use createConnection
@@ -726,24 +223,12 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		return new LazyObjectManager((LazyInvocationManager)invocationManager);
 	}
 
-	@SuppressWarnings("null")
-	protected @NonNull TreeIterator<? extends Object> eAllContents(@NonNull Object object) {
-		return ((EObject)object).eAllContents();
-	}
-
-	@SuppressWarnings("null")
-	protected @NonNull EClass eClass(@NonNull Object object) {
-		return ((EObject)object).eClass();
-	}
-
-	protected @Nullable Object eContainer(@NonNull Object object) {
-		return ((EObject)object).eContainer();
-	}
-
-	protected @Nullable Object eGet(@NonNull Object object, @NonNull EStructuralFeature eFeature) {
-		return ((EObject)object).eGet(eFeature);
-	}
-
+	/**
+	 * Get the elements of type from the zeroth TypedModelInstance.
+	 *
+	 * This obsolete method is used by some legacy tests that dispatch via allInstances()rtaher than Connections.
+	 */
+	@Deprecated /* @deprecated Connections should be used to aggregate model elements */
 	public @NonNull Iterable<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 		return models[0].getObjectsOfKind(type);
 	}
@@ -768,6 +253,11 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	@Override
+	public @NonNull RuntimeModelsManager getModelsManager() {
+		return modelsManager;
+	}
+
+	@Override
 	public @NonNull ObjectManager getObjectManager() {
 		return objectManager;
 	}
@@ -779,90 +269,9 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		return models[modelIndex].getObjectsByType(eClass);
 	} */
 
-	/**
-	 * Return the List of all PropertyIndexes for which an EClass instance could be the unnavigable opposite.
-	 * eReference2propertyIndex contains known equivalences and may be updated if more are discovered
-	 * using -1 as a propertyIndex for which no unnavigable opposite is appropriate.
-	 */
-	private @NonNull List<@NonNull Integer> getOppositePropertyIndexes(@NonNull Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex, @NonNull EClass eClass) {
-		List<@NonNull Integer> propertyIndexes = null;
-		for (EStructuralFeature eStructuralFeature : eClass.getEAllStructuralFeatures()) {
-			if (eStructuralFeature instanceof EReference) {
-				EReference eReference = (EReference)eStructuralFeature;
-				Integer propertyIndex = eReference2propertyIndex.get(eReference);
-				if (propertyIndex == null) {
-					if ((eReference.getEOpposite() == null) && !eReference.isDerived() && !eReference.isTransient() && !eReference.isVolatile()) {
-						//	PropertyId propertyId = IdManager.getPropertyId(eReference);
-						EClass eContainingClass = eReference.getEContainingClass();
-						EPackage ePackage = ClassUtil.nonNullEMF(eContainingClass.getEPackage());
-						PackageId packageId = IdManager.getPackageId(ePackage);
-						String className = ClassUtil.nonNullEMF(eContainingClass.getName());				// FIXME Original name
-						ClassId classId = packageId.getClassId(className, eContainingClass.getETypeParameters().size());
-						String propertyName = ClassUtil.nonNullEMF(eReference.getName());		// FIXME Original name
-						PropertyId propertyId = classId.getPropertyId(propertyName);
-						Map<PropertyId, Integer> propertyId2propertyIndex2 = propertyId2propertyIndex;
-						assert propertyId2propertyIndex2 != null;
-						propertyIndex = propertyId2propertyIndex2.get(propertyId);
-					}
-					if (propertyIndex == null) {
-						propertyIndex = -1;
-					}
-					eReference2propertyIndex.put(eReference, propertyIndex);
-				}
-				if (propertyIndex >= 0) {
-					if (propertyIndexes == null) {
-						propertyIndexes = new ArrayList<>();
-					}
-					propertyIndexes.add(propertyIndex);
-				}
-			}
-		}
-		return propertyIndexes != null ? propertyIndexes : EMPTY_INDEX_LIST;
-	}
-
-	/**
-	 * Return all the container-less objects in the modelName model.
-	 */
 	@Override
-	public @NonNull Collection<@NonNull EObject> getRootEObjects(@NonNull String modelName) {
-		boolean hasExtent = false;
-		Model model = getTypedModelInstance(modelName);
-		List<@NonNull EObject> rootEObjects = new ArrayList<>();
-		for (@NonNull Object rootObject : model.getRootObjects()) {
-			if (rootObject instanceof Extent) {
-				hasExtent = true;
-				for (Object object : ((Extent)rootObject).getElements()) {
-					if (object != null) {
-						rootEObjects.add((EObject)object);
-					}
-				}
-			}
-		}
-		if (!hasExtent) {
-			for (@NonNull Object rootObject : model.getRootObjects()) {
-				if (rootObject instanceof EObject) {
-					rootEObjects.add((EObject)rootObject);
-				}
-			}
-		}
-		return rootEObjects;
-	}
-
-	/**
-	 * Return all the container-less objects in the modelName model.
-	 */
-	@Override
-	public @NonNull Collection<@NonNull Object> getRootObjects(@NonNull String modelName) {
-		return getTypedModelInstance(modelName).getRootObjects();
-	}
-
-	@Override
-	public @NonNull Model getTypedModelInstance(@NonNull String modelName) {
-		Integer modelIndex = modelIndexes.get(modelName);
-		if (modelIndex == null) {
-			throw new IllegalStateException("Unknown model name '" + modelName + "'");
-		}
-		return models[modelIndex];
+	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName) {
+		return modelsManager.getTypedModelInstance(modelName);
 	}
 
 	/**
@@ -921,59 +330,21 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 	protected void initConnections() {
 		Interval rootInterval = lazyCreateInterval(0);
-		for (@NonNull Model model : models) {
-			model.initConnections(rootInterval);
+		ModeFactory modeFactory = getModeFactory();
+		for (@NonNull TypedModelInstance model : models) {
+			model.initConnections(rootInterval, modeFactory);
 		}
 	}
 
-	protected @NonNull Model initModel(int i, @NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
-			@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes, @NonNull Interval rootInterval) {
-		Model model = createModel(modelName); //, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
-		models[i] = model;
-		modelIndexes.put(modelName, i);
-		return model;
-	}
-
-	protected @NonNull Model initModel(int i, @NonNull String modelName) {
-		Model model = createModel(modelName);
-		models[i] = model;
-		modelIndexes.put(modelName, i);
+	protected RuntimeModelsManager.@NonNull Model initModel(int i, @NonNull String modelName) {
+		RuntimeModelsManager.Model model = createTypedModelInstance(modelName);
+		modelsManager.initTypedModelInstance(i, model);
 		return model;
 	}
 
 	protected void initOpposites(@NonNull PropertyId @NonNull [] propertyIndex2propertyId) {
-		//
-		//	Prepare the unnavigable opposite property fields
-		//
-		int propertyIds = propertyIndex2propertyId.length;
-		this.propertyIndex2propertyId = propertyIndex2propertyId;
-		Map<@NonNull PropertyId, @NonNull Integer> propertyId2propertyIndex2 = new HashMap<>(propertyIds);
-		this.propertyId2propertyIndex = propertyId2propertyIndex2;
-		this.propertyIndex2eReference = new @Nullable EReference @NonNull [propertyIds];
-		for (int propertyIndex = 0; propertyIndex < propertyIds; propertyIndex++) {
-			PropertyId propertyId = propertyIndex2propertyId[propertyIndex];
-			propertyId2propertyIndex2.put(propertyId, propertyIndex);
-		}
-		@SuppressWarnings("unchecked")@NonNull Map<@NonNull Object, @NonNull Object> @Nullable [] object2oppositeObject = (@NonNull Map<@NonNull Object, @NonNull Object> @NonNull []) new HashMap<?,?> @NonNull [propertyIds];
-		this.object2oppositeObject = object2oppositeObject;
-		for (int i = 0; i < propertyIds; i++) {
-			object2oppositeObject[i] = new HashMap<>();
-		}
+		modelsManager.initOpposites(propertyIndex2propertyId);
 	}
-
-	/*	protected void install(@NonNull InvocationConstructor constructor, int consumedConnections, @NonNull Connection @NonNull ... connections) {
-		//		InvocationConstructor invoker = invocationManager.createInvoker(constructor, consumedConnections, interval, connections);
-		for (int i = 0; i < consumedConnections; i++) {
-			Connection consumedConnection = connections[i];
-			consumedConnection.addConsumer(constructor);
-			constructor.addConsumedConection(consumedConnection);
-		}
-		for (int i = consumedConnections; i < connections.length; i++) {
-			Connection appendedConnection = connections[i];
-			appendedConnection.addProducer(constructor);
-			constructor.addAppendedConnection(appendedConnection);
-		}
-	} */
 
 	protected @NonNull Interval lazyCreateInterval(int intervalIndex) {
 		if (intervalIndex < 0) {
@@ -986,14 +357,29 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		return interval != null ? interval : createInterval(intervalIndex);
 	}
 
+	private boolean hasPreExecuted = false;
+
 	@Override
+	public void analyzeInputResources() {
+		for (RuntimeModelsManager.@NonNull Model model : models) {
+			model.analyzeInputResources();
+		}
+	}
+
+	/*	@Override
 	public void setExternalURI(@NonNull String modelName, @NonNull URI modelURI) {
-		Model model = getTypedModelInstance(modelName);
+		TypedModelInstance model = getTypedModelInstance(modelName);
 		for (Object object : model.getRootObjects()) {
 			if (object instanceof org.eclipse.ocl.pivot.Model) {
 				((org.eclipse.ocl.pivot.Model)object).setExternalURI(modelURI.toString());
 			}
 		}
+	} */
+
+	@Override
+	public boolean run()throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	public @NonNull Object throwInvalidEvaluationException(@NonNull String message, Object... bindings) {

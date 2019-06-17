@@ -10,10 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
 
@@ -42,14 +38,12 @@ public interface Transformer extends ExecutionVisitable
 	 */
 	public static int RUN_TIME_EVALUATOR_API_VERSION = RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
 
-	void addRootObjects(@NonNull String modelName, @NonNull Iterable<@NonNull ? extends Object> rootObjects);
+	void analyzeInputResources();
 	@NonNull EvaluationCache getEvaluationCache();
 	@NonNull TransformationExecutor getExecutor();
 	@NonNull InvocationManager getInvocationManager();
+	@NonNull ModelsManager getModelsManager();
 	@NonNull ObjectManager getObjectManager();
-	@NonNull Collection<@NonNull ? extends EObject> getRootEObjects(@NonNull String modelName);
-	@NonNull Collection<@NonNull Object> getRootObjects(@NonNull String modelName);
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
 	boolean run() throws Exception;
-	void setExternalURI(@NonNull String modelName, @NonNull URI modelURI);
 }

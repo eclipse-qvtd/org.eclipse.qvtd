@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import java.io.IOException;
+import java.util.Map;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,7 +33,6 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 public interface QVTiExecutor extends ExecutorInternal
 {
 	void checkModels() throws CoreException;
-	@Nullable Resource createModel(@NonNull String outName, @NonNull URI outURI, @Nullable String contentType);
 	Boolean execute();
 	@Override
 	@NonNull QVTiEvaluationEnvironment getEvaluationEnvironment();
@@ -43,10 +45,8 @@ public interface QVTiExecutor extends ExecutorInternal
 	@Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor);
 	@Nullable Object internalExecuteNewStatement(@NonNull NewStatement newStatement, @NonNull EvaluationVisitor undecoratedVisitor);
 	void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue);
-	@Deprecated /* @deprecated childKey not used */
-	void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey);
 	@Nullable Object internalExecuteTransformation(@NonNull ImperativeTransformation transformation, @NonNull EvaluationVisitor undecoratedVisitor);
-	void loadModel(@NonNull String inName, @NonNull URI inURI, @Nullable String contentType);
 	boolean replace(@NonNull TypedElement referredVariable, @Nullable Object value, boolean checkType);
-	void saveModels();
+	void saveModels(@Nullable Map<?, ?> savingOptions) throws IOException;
+	void saveOutput(@NonNull String outName, @NonNull URI outURI);
 }

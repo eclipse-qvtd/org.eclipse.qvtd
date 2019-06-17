@@ -75,7 +75,6 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
-import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -130,7 +129,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.TypedModelAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
@@ -145,8 +146,7 @@ import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationConstructor;
-import org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal.Model;
-
+import org.eclipse.qvtd.runtime.internal.evaluation.RuntimeModelsManager;
 import com.google.common.collect.Iterables;
 
 /**
@@ -154,35 +154,14 @@ import com.google.common.collect.Iterables;
  */
 public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerator> implements QVTiCGModelVisitor<@NonNull Boolean>
 {
-	protected /*static*/ class AllInstancesAnalysis
+	protected /*static*/ class AllInstancesAnalysis extends TypedModelAnalysis
 	{
-		protected final @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses;
-		protected final @NonNull Map<@NonNull CompleteClass, @Nullable List<@NonNull CompleteClass>> instancesCompleteClassAnalysis;
-		protected final @NonNull Map<@NonNull CompleteClass, @NonNull Integer> instancesCompleteClass2index;
-		protected final @NonNull List<@NonNull CompleteClass> sortedCompleteClasses;
 		private @NonNull String @Nullable [] names = null;
-		private int extentClassIndex = -1;
 		private @Nullable String extentOppositesName = null;
 
 		public AllInstancesAnalysis(@NonNull QVTiTransformationAnalysis transformationAnalysis, @NonNull TypedModel typedModel, @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses) {
-			this.allInstancesCompleteClasses = allInstancesCompleteClasses;
-			this.instancesCompleteClassAnalysis = transformationAnalysis.getInstancesCompleteClassAnalysis(allInstancesCompleteClasses);
-			//
-			// Populate a mapping from instancesClass to linear index.
-			//
-			this.instancesCompleteClass2index = new HashMap<>(instancesCompleteClassAnalysis.size());
-			this.sortedCompleteClasses = new ArrayList<>(instancesCompleteClassAnalysis.keySet());
-			Collections.sort(sortedCompleteClasses, NameUtil.NameableComparator.INSTANCE);
-			ClassId extentClassId = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, null).getClassId("Extent", 0);
-			for (int i = 0; i < sortedCompleteClasses.size(); i++) {
-				CompleteClass sortedCompleteClass = sortedCompleteClasses.get(i);
-				instancesCompleteClass2index.put(sortedCompleteClass, i);
-				TypeId typeId = sortedCompleteClass.getPrimaryClass().getTypeId();
-				if (typeId == extentClassId) {
-					extentClassIndex = i;
-				}
-			}
-			//	if (QVTbaseUtil.is)
+			super(transformationAnalysis, typedModel, allInstancesCompleteClasses);
+			ClassId extentClassId = QVTiModelsManager.EXTENT_CLASSID;
 			Map<@NonNull Property, @NonNull Integer> opposites = transformationAnalysis.getCaches();
 			for (@NonNull Property property : opposites.keySet()) {
 				org.eclipse.ocl.pivot.Class owningClass = PivotUtil.getOwningClass(property);
@@ -196,10 +175,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					//	extentOppositesName = "xyzzy";
 				}
 			}
-		}
-
-		public int getExtentClassIndex() {
-			return extentClassIndex;
 		}
 
 		public @Nullable String getExtentOppositesName() {
@@ -363,8 +338,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	protected @Nullable List<@Nullable AllInstancesAnalysis> doAllInstances(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		CompleteModelInternal completeModel = environmentFactory.getCompleteModel();
 		Set<@NonNull CompleteClass> allInstancesCompleteClasses = new HashSet<>();
-		for (org.eclipse.ocl.pivot.@NonNull Class allInstancesClass : transformationAnalysis.getAllInstancesClasses()) {
-			allInstancesCompleteClasses.add(completeModel.getCompleteClass(allInstancesClass));
+		for (@NonNull CompleteClass allInstancesCompleteClass : transformationAnalysis.getAllInstancesCompleteClasses()) {
+			allInstancesCompleteClasses.add(allInstancesCompleteClass);
 		}
 		if (allInstancesCompleteClasses.size() <= 0) {
 			return null;
@@ -1888,7 +1863,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.append(" != null) {\n");
 				js.pushIndentation(null);
 				js.append("((");
-				js.appendClassReference(null, Model.Incremental.class);
+				js.appendClassReference(null, RuntimeModelsManager.Model.Incremental.class);
 				js.append(")");
 				js.append(QVTiGlobalContext.MODELS_NAME);
 				js.append("[");
@@ -3164,11 +3139,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" * <p>\n");
 		js.append(" * Construct with an evaluator\n");
 		js.append(" * <br>\n");
-		js.append(" * Populate each input model with {@link addRootObjects(String,List)}\n");
+		js.append(" * Populate each input model with {@link addRootEObjects(String,List)}\n");
 		js.append(" * <br>\n");
 		js.append(" * {@link run()}\n");
 		js.append(" * <br>\n");
-		js.append(" * Extract each output model with {@link getRootObjects(String)}\n");
+		js.append(" * Extract each output model with {@link getRootEObjects(String)}\n");
 		js.append(" */\n");
 		//		js.append("@SuppressWarnings({\"nls\",\"unused\"})\n");
 		js.append("@SuppressWarnings(\"unused\")\n");

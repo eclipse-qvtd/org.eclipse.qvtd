@@ -15,6 +15,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 
 /**
  * A BasicQVTrExecutor supports loading a QVTr transformation as source then loading models, performing a transformation
@@ -25,6 +26,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 public class BasicQVTrExecutor extends QVTiIncrementalExecutor
 {
 	public BasicQVTrExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
-		super(environmentFactory, transformation, Mode.LAZY);
+		super(environmentFactory, transformation, ModeFactory.LAZY);
 	}
 }

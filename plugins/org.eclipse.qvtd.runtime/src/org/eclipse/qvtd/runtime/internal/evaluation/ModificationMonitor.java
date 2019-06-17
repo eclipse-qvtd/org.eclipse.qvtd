@@ -62,7 +62,7 @@ public class ModificationMonitor implements Adapter
 		return monitor;
 	}
 
-	private final AbstractTransformerInternal.Model.@NonNull Incremental typedModelInstance;
+	private final RuntimeModelsManager.Model.@NonNull Incremental typedModelInstance;
 	private final @NonNull Resource resource;
 	private final @NonNull TransformationExecutor executor;
 	private final AbstractTransformer.@NonNull Incremental transformer;
@@ -72,7 +72,7 @@ public class ModificationMonitor implements Adapter
 	private boolean isDisabled = false;
 
 	public ModificationMonitor(@NonNull TypedModelInstance typedModelInstance, @NonNull Resource resource, @NonNull TransformationExecutor executor) {
-		this.typedModelInstance = (AbstractTransformerInternal.Model.Incremental)typedModelInstance;
+		this.typedModelInstance = (RuntimeModelsManager.Model.Incremental)typedModelInstance;
 		this.resource = resource;
 		this.executor = executor;
 		this.transformer = (AbstractTransformer.Incremental) executor.getTransformer();

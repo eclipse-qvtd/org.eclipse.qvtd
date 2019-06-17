@@ -12,6 +12,7 @@ package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
@@ -91,6 +92,8 @@ public interface Connection extends ExecutionVisitable, Nameable
 	int getCapacity();
 
 	@NonNull Iterable<@NonNull InvocationConstructor> getConsumers();
+
+	@NonNull TypeId getTypeId();
 
 	@Nullable Object getValue(int i);
 

@@ -37,8 +37,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
+import org.eclipse.qvtd.runtime.evaluation.ModelsManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.junit.Before;
@@ -61,7 +64,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		}
 
 		public @NonNull BasicQVTiExecutor createEvaluator(@NonNull ImperativeTransformation transformation) {
-			return new QVTiIncrementalExecutor(getEnvironmentFactory(), transformation, QVTiIncrementalExecutor.Mode.LAZY);
+			return new QVTiIncrementalExecutor(getEnvironmentFactory(), transformation, ModeFactory.LAZY);
 		}
 
 		public @NonNull TransformationExecutor createEvaluator(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
@@ -242,20 +245,22 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	// Execute the transformation with the interpreter
 	//
 	protected void executeModelsTX_CG(MyQVT qvt, @NonNull Class<? extends Transformer> txClass, URI baseURI, String modelName) throws Exception {
-
-		TransformationExecutor evaluator = qvt.createEvaluator(txClass);
-		Transformer tx = evaluator.getTransformer();
 		URI samplesBaseUri = baseURI.appendSegment("samples");
 		URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
 		URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_CG.xmi", modelName));
+		TransformationExecutor evaluator = qvt.createEvaluator(txClass);
+		Transformer tx = evaluator.getTransformer();
+		ModelsManager modelsManager = tx.getModelsManager();
+		TypedModelInstance inputTypedModelInstance = modelsManager.getTypedModelInstance("leftCS");
+		TypedModelInstance outputTypedModelInstance = modelsManager.getTypedModelInstance("rightAS");
 
 		ResourceSet rSet = qvt.getResourceSet();
-		Resource inputResource = rSet.getResource(csModelURI, true);
-		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
+		Resource inputResource = ClassUtil.nonNullState(rSet.getResource(csModelURI, true));
+		inputTypedModelInstance.addInputResource(inputResource);
 		boolean success = tx.run();
-		Resource outputResource = rSet.createResource(asModelURI);
-		outputResource.getContents().addAll(tx.getRootEObjects("rightAS"));
-		outputResource.save(DefaultCompilerOptions.defaultSavingOptions);
+		Resource outputResource = ClassUtil.nonNullState(rSet.createResource(asModelURI));
+		outputTypedModelInstance.addOutputResource(outputResource);
+		modelsManager.saveModels(DefaultCompilerOptions.defaultSavingOptions);
 		assertTrue(success);
 	}
 
@@ -264,17 +269,22 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	//
 
 	protected void executeModelsTX_Interpreted(MyQVT qvt, @NonNull ImperativeTransformation tx, URI baseURI, String modelName) throws Exception {
-
 		URI samplesBaseUri = baseURI.appendSegment("samples");
 		URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
 		URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_Interpreted.xmi", modelName));
 
 		BasicQVTiExecutor testEvaluator = qvt.createEvaluator(tx);
 		testEvaluator.saveTransformation(null, null);
-		testEvaluator.loadModel("leftCS", csModelURI);
-		testEvaluator.createModel("rightAS", asModelURI, null);
+		ModelsManager modelsManager = testEvaluator.getModelsManager();
+		TypedModelInstance inputTypedModelInstance = modelsManager.getTypedModelInstance("leftCS");
+		TypedModelInstance outputTypedModelInstance = modelsManager.getTypedModelInstance("rightAS");
+		ResourceSet rSet = qvt.getResourceSet();
+		Resource inputResource = ClassUtil.nonNullState(rSet.getResource(csModelURI, true));
+		inputTypedModelInstance.addInputResource(inputResource);
 		boolean success = testEvaluator.execute();
-		testEvaluator.saveModels(DefaultCompilerOptions.defaultSavingOptions);
+		Resource outputResource = ClassUtil.nonNullState(rSet.createResource(asModelURI));
+		outputTypedModelInstance.addOutputResource(outputResource);
+		modelsManager.saveModels(DefaultCompilerOptions.defaultSavingOptions);
 		testEvaluator.dispose();
 		assertTrue(success);
 	}
