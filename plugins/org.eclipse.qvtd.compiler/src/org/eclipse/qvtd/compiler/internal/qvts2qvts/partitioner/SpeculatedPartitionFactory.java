@@ -138,7 +138,12 @@ public class SpeculatedPartitionFactory extends AbstractSimplePartitionFactory
 	protected void resolveRealizedOutputNodes(@NonNull BasicPartition partition) {
 		for (@NonNull Node node : mappingPartitioner.getRegionAnalysis().getCorollaryNodes()) {
 			if (!partition.hasNode(node) && !node.isSuccess()) {
-				addNode(partition, node);
+				if (mappingPartitioner.hasRealizedNode(node)) {
+					addNode(partition, node, Role.PREDICATED);
+				}
+				else {
+					addNode(partition, node);
+				}
 			}
 		}
 	}

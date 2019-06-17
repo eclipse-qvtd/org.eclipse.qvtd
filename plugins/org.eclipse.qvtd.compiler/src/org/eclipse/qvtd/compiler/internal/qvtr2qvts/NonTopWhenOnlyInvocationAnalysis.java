@@ -11,8 +11,11 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 /**
  * A NonTopWhenOnlyInvocationAnalysis identifies the invocation of a non-top Relation by a when clause in another.
@@ -22,6 +25,11 @@ public class NonTopWhenOnlyInvocationAnalysis extends AbstractWhenInvocationAnal
 {
 	public NonTopWhenOnlyInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
 		super(invokingRelationAnalysis, invokedRelationAnalysis);
+	}
+
+	@Override
+	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
+		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, false);
 	}
 
 	@Override
