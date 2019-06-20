@@ -237,7 +237,7 @@ public class RelationAnalysis extends RuleAnalysis
 				//
 				//	Require the overriding relation to have failed.
 				//
-				Property successProperty = relationAnalysis2TraceInterface.getGlobalSuccessProperty();
+				Property successProperty = relationAnalysis2TraceInterface.getGlobalSuccessProperty(getScheduleManager().getTargetTypedModel());
 				createPredicatedSuccess(dispatchedNode, successProperty, false);
 			}
 			for (@NonNull Relation overridingRelation : QVTrelationUtil.getOverrides(relation)) {
@@ -291,6 +291,11 @@ public class RelationAnalysis extends RuleAnalysis
 	 * Synthesizer for the override verdict region.
 	 */
 	private final @Nullable Verdict verdict;
+
+	/**
+	 * Synthesizer for the override verdict region.
+	 */
+	private final @NonNull TypedModel targetTypedModel;
 
 	/**
 	 * Predicates that are too complex to analyze. i.e. more than a comparison of a bound variable wrt
@@ -392,6 +397,7 @@ public class RelationAnalysis extends RuleAnalysis
 		super(transformationAnalysis, ruleRegion);
 		dispatch = createDispatch(qvtuConfiguration);
 		verdict = createVerdict(qvtuConfiguration);
+		targetTypedModel = qvtuConfiguration.getOutputTypedModels().iterator().next();
 	}
 
 	protected void addExpression(@NonNull VariableDeclaration variable, @NonNull OCLExpression expression) {
@@ -982,6 +988,10 @@ public class RelationAnalysis extends RuleAnalysis
 	//		return ClassUtil.nonNullState(basicGetTemplateExp(variable));
 	//	}
 
+	public @NonNull TypedModel getTargetTypedModel() {
+		return targetTypedModel;
+	}
+
 	public @NonNull TypedModel getTraceTypedModel() {
 		return scheduleManager.getTraceTypedModel();
 	}
@@ -1486,7 +1496,7 @@ public class RelationAnalysis extends RuleAnalysis
 				RelationAnalysis2MiddleType overridingRelationAnalysis2TraceClass = overridingRelationAnalysis2TraceGroup.getRuleAnalysis2TraceClass();
 				ClassDatum overridingClassDatum = scheduleManager2.getClassDatum(traceTypedModel, overridingRelationAnalysis2TraceInterface.getMiddleClass());
 				Node guardNode = createPredicatedNode("not_" + overridingRelation.getName(), overridingClassDatum, true);
-				Property globalSuccessProperty = overridingRelationAnalysis2TraceClass.getGlobalSuccessProperty();
+				Property globalSuccessProperty = overridingRelationAnalysis2TraceClass.getGlobalSuccessProperty(targetTypedModel);
 				createPredicatedSuccess(guardNode, globalSuccessProperty, false);
 				if (dispatchNode != null) {
 					RelationAnalysis2DispatchClass relationAnalysis2dispatchClass = overriddenRelationAnalysis.getRuleAnalysis2TraceGroup().getRuleAnalysis2DispatchClass();
@@ -1807,7 +1817,7 @@ public class RelationAnalysis extends RuleAnalysis
 
 	protected void synthesizeTraceGlobalSuccessAssignment(@NonNull RelationAnalysis2TraceGroup relationAnalysis2traceGroup, @NonNull Node traceNode) {
 		RelationAnalysis2TraceClass relationAnalysis2TraceClass = relationAnalysis2traceGroup.getRuleAnalysis2TraceClass();
-		Element2MiddleProperty relation2globalSuccessProperty = relationAnalysis2TraceClass.basicGetRelation2GlobalSuccessProperty();
+		Element2MiddleProperty relation2globalSuccessProperty = relationAnalysis2TraceClass.basicGetRelation2GlobalSuccessProperty(targetTypedModel);
 		if (relation2globalSuccessProperty != null) {
 			createRealizedSuccess(traceNode, relation2globalSuccessProperty.getTraceProperty(), null);
 		}

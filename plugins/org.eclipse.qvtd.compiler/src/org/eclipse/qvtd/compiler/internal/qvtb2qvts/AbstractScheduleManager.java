@@ -57,7 +57,6 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
@@ -398,13 +397,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		if (!isMiddle(node)) {
 			return null;
 		}
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
-		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
-			Property property = completeClass.getProperty(QVTrelationNameGenerator.TRACE_GLOBAL_SUCCESS_PROPERTY_NAME);
-			if (property != null) {
-				return property;
-			}
-		}
+		//		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+		//		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
+		//			Property property = completeClass.getProperty(QVTrelationNameGenerator.TRACE_GLOBAL_SUCCESS_PROPERTY_NAME);
+		//			if (property != null) {
+		//				return property;
+		//			}
+		//		}
 		return null;
 	}
 
@@ -413,13 +412,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		if (!isMiddle(node)) {
 			return null;
 		}
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
-		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
-			Property property = completeClass.getProperty(QVTrelationNameGenerator.TRACE_LOCAL_SUCCESS_PROPERTY_NAME);
-			if (property != null) {
-				return property;
-			}
-		}
+		//		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+		//		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
+		//			Property property = completeClass.getProperty(QVTrelationNameGenerator.TRACE_LOCAL_SUCCESS_PROPERTY_NAME);
+		//			if (property != null) {
+		//				return property;
+		//			}
+		//		}
 		return null;
 	}
 
@@ -941,6 +940,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			}
 		}
 		return superClassDatums;
+	}
+
+	@Override
+	public @NonNull TypedModel getTargetTypedModel() {
+		QVTuConfiguration qvtuConfiguration = ClassUtil.nonNullState(getQVTuConfiguration());
+		Iterable<@NonNull TypedModel> outputTypedModels = qvtuConfiguration.getOutputTypedModels();
+		return outputTypedModels.iterator().next();
 	}
 
 	@Override

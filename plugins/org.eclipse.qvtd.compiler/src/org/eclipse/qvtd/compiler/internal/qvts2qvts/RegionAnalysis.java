@@ -107,7 +107,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		Element2MiddleProperty relation2localSuccessProperty = relationAnalysis2TraceClass.basicGetRelation2LocalSuccessProperty();
 		Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(traceNode);
 		if (relation2localSuccessProperty == null) {
-			String localSuccessPropertyName = relationAnalysis2traceGroup.getNameGenerator().createTraceLocalSuccessPropertyName();
+			String localSuccessPropertyName = relationAnalysis2traceGroup.getNameGenerator().createTraceLocalSuccessPropertyName(scheduleManager.getTargetTypedModel());
 			relation2localSuccessProperty = relationAnalysis2TraceClass.createRelation2LocalSuccessProperty(localSuccessPropertyName);
 			localSuccessProperty = relation2localSuccessProperty.getTraceProperty();
 			SuccessEdge localSuccessEdge = relationAnalysis.createRealizedSuccess(traceNode, localSuccessProperty, null);

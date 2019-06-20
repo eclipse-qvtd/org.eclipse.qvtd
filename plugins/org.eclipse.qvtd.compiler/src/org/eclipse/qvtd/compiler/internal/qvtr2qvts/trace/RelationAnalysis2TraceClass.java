@@ -31,6 +31,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvts.InvocationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -285,9 +286,12 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 			}
 		}
 		if (needsGlobalSuccess) {
-			QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
-			String globalSuccessPropertyName = nameGenerator.createTraceGlobalSuccessPropertyName();
-			createRelation2GlobalSuccessProperty(globalSuccessPropertyName);
+			//			QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
+			for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+				if (scheduleManager.isOutput(relationDomain)) {
+					createRelation2GlobalSuccessProperty(QVTrelationUtil.getTypedModel(relationDomain));
+				}
+			}
 		}
 	}
 
@@ -309,15 +313,15 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	} */
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
-		Element2MiddleProperty relation2SuccessProperty = super.basicGetRelation2GlobalSuccessProperty();
+	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel) {
+		Element2MiddleProperty relation2SuccessProperty = super.basicGetRelation2GlobalSuccessProperty(targetTypedModel);
 		if (relation2SuccessProperty != null) {
 			return relation2SuccessProperty;
 		}
 		RelationAnalysis2TraceGroup baseRelationAnalysis2TraceGroup = relationAnalysis2traceGroup.getBaseRelationAnalysis2TraceGroup();
 		RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface = baseRelationAnalysis2TraceGroup.basicGetRuleAnalysis2TraceInterface();
 		if (baseRelationAnalysis2traceInterface != null) {
-			return baseRelationAnalysis2traceInterface.basicGetRelation2GlobalSuccessProperty();
+			return baseRelationAnalysis2traceInterface.basicGetRelation2GlobalSuccessProperty(targetTypedModel);
 		}
 		return null;
 	}

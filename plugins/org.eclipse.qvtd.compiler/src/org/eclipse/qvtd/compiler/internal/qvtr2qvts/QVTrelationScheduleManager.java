@@ -12,6 +12,8 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
@@ -34,8 +36,11 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 public class QVTrelationScheduleManager extends AbstractScheduleManager
@@ -46,6 +51,36 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 			@NonNull QVTuConfiguration qvtuConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, problemHandler, schedulerOptions);
 		this.qvtuConfiguration = qvtuConfiguration;
+	}
+
+	@Override
+	public @Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node) {
+		if (!isMiddle(node)) {
+			return null;
+		}
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
+			Property property = completeClass.getProperty(getNameGenerator().createTraceGlobalSuccessPropertyName(getTargetTypedModel()));
+			if (property != null) {
+				return property;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Property basicGetLocalSuccessProperty(@NonNull Node node) {
+		if (!isMiddle(node)) {
+			return null;
+		}
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
+		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
+			Property property = completeClass.getProperty(getNameGenerator().createTraceLocalSuccessPropertyName(getTargetTypedModel()));
+			if (property != null) {
+				return property;
+			}
+		}
+		return null;
 	}
 
 	@Override

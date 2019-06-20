@@ -24,6 +24,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2MiddleType;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -68,7 +69,7 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	/**
 	 * The future Property that provides the global success/failure/not-ready state of the traced mapping.
 	 */
-	private @Nullable Element2MiddleProperty relation2globalSuccessProperty = null;
+	private @Nullable Map<@NonNull TypedModel, @Nullable Element2MiddleProperty> targetTypedModel2relation2globalSuccessProperty = null;
 
 	/**
 	 * The future Property that provides the local success/failure/not-ready state of the traced mapping.
@@ -137,8 +138,8 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	}
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
-		return relation2globalSuccessProperty;
+	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel) {
+		return targetTypedModel2relation2globalSuccessProperty != null ? targetTypedModel2relation2globalSuccessProperty.get(targetTypedModel) : null;
 	}
 
 	@Override
@@ -181,17 +182,25 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 		return relation2dispatchSuccessProperty;
 	}
 
-	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty(@NonNull String nameHint) {
-		assert relation2globalSuccessProperty == null;
-		relation2globalSuccessProperty = new Relation2SuccessProperty(this, nameHint);
+	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel) {
+		QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
+		String globalSuccessPropertyName = nameGenerator.createTraceGlobalSuccessPropertyName(targetTypedModel);
+		assert basicGetRelation2GlobalSuccessProperty(targetTypedModel) == null;
+		Element2MiddleProperty relation2globalSuccessProperty = new Relation2SuccessProperty(this, globalSuccessPropertyName);
+		Map<@NonNull TypedModel, @Nullable Element2MiddleProperty> targetTypedModel2relation2globalSuccessProperty2 = targetTypedModel2relation2globalSuccessProperty;
+		if (targetTypedModel2relation2globalSuccessProperty2 == null) {
+			targetTypedModel2relation2globalSuccessProperty = targetTypedModel2relation2globalSuccessProperty2 = new HashMap<>();
+		}
+		targetTypedModel2relation2globalSuccessProperty2.put(targetTypedModel, relation2globalSuccessProperty);
 		return relation2globalSuccessProperty;
 	}
 
-	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty(@NonNull Property property) {
+	/*	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull Property property) {
 		assert relation2globalSuccessProperty == null;
-		relation2globalSuccessProperty = new Relation2InheritedProperty(this, property);
+		Element2MiddleProperty relation2globalSuccessProperty = new Relation2InheritedProperty(this, property);
+		name2relation2globalSuccessProperty.put();
 		return relation2globalSuccessProperty;
-	}
+	} */
 
 	public @NonNull Element2MiddleProperty createRelation2LocalSuccessProperty(@NonNull String nameHint) {
 		assert relation2localSuccessProperty == null;
@@ -238,8 +247,8 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	}
 
 	@Override
-	public @NonNull Property getGlobalSuccessProperty() {
-		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty()).getTraceProperty();
+	public @NonNull Property getGlobalSuccessProperty(@NonNull TypedModel targetTypedModel) {
+		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty(targetTypedModel)).getTraceProperty();
 	}
 
 	@Override
@@ -265,8 +274,8 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 		return ClassUtil.nonNullState(relation2dispatchSuccessProperty);
 	}
 
-	public @NonNull Element2MiddleProperty getRelation2GlobalSuccessProperty() {
-		return ClassUtil.nonNullState(relation2globalSuccessProperty);
+	public @NonNull Element2MiddleProperty getRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel) {
+		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty(targetTypedModel));
 	}
 
 	public @NonNull Element2MiddleProperty getRelation2LocalSuccessProperty() {
@@ -352,8 +361,10 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 		if (relation2dispatchSuccessProperty != null) {
 			relation2dispatchSuccessProperty.getTraceProperty();
 		}
-		if (relation2globalSuccessProperty != null) {
-			relation2globalSuccessProperty.getTraceProperty();
+		if (targetTypedModel2relation2globalSuccessProperty != null) {
+			for (@NonNull TypedModel typedModel : targetTypedModel2relation2globalSuccessProperty.keySet()) {
+				getRelation2GlobalSuccessProperty(typedModel).getTraceProperty();
+			}
 		}
 		if (relation2resultProperty != null) {
 			relation2resultProperty.getTraceProperty();

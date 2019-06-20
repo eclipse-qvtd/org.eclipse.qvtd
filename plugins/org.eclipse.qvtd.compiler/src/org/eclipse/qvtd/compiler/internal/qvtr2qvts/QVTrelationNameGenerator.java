@@ -36,24 +36,40 @@ public class QVTrelationNameGenerator extends NameGenerator
 	public static final @NonNull String IDENTIFIED_INSTANCE_VARIABLE_NAME = "identifiedInstance";
 	public static final @NonNull String KEYED_INSTANCE_PROPERTY_NAME = "instance";
 	public static final @NonNull String KEY2INSTANCE_VARIABLE_NAME = "key2instance";
+	@SuppressWarnings("null")
 	public static final @NonNull String TRACE_DISPATCH_SUCCESS_PROPERTY_NAME = QVTtracePackage.Literals.DISPATCH__SUCCESS.getName();
-	public static final @NonNull String TRACE_GLOBAL_SUCCESS_PROPERTY_NAME = "successGlobal"; // "globalSuccess";
-	public static final @NonNull String TRACE_LOCAL_SUCCESS_PROPERTY_NAME = "successLocal";
+	public static final @NonNull String TRACE_GLOBAL_SUCCESS_PROPERTY_NAME_SUFFIX = "global";
+	public static final @NonNull String TRACE_LOCAL_SUCCESS_PROPERTY_NAME_SUFFIX = "local";
 	public static final @NonNull String TRACECLASS_PROPERTY_NAME = "trace";
 
+	public static final @NonNull String TRACE_DISPATCH_CLASS_NAME_PREFIX = "D";
+	public static final @NonNull String TRACE_INVOCATION_CLASS_NAME_PREFIX = "C";
+	public static final @NonNull String TRACE_INTERFACE_CLASS_NAME_PREFIX = "I";
+	public static final @NonNull String TRACE_TRACE_CLASS_NAME_PREFIX = "T";
+
+	public static final @NonNull String TRACE_DISPATCH_CLASS_DISPATCH_PROPERTY_NAME_PREFIX = "do";
+	public static final @NonNull String TRACE_DISPATCH_PROPERTY_NAME_PREFIX = "d";
+	public static final @NonNull String TRACE_INTERFACE_PROPERTY_NAME_PREFIX = "i";
+	public static final @NonNull String TRACE_INVOCATION_PROPERTY_NAME_PREFIX = "c";
+	public static final @NonNull String TRACE_INVOCATION_TRACE_PROPERTY_NAME_PREFIX = "w";
+	public static final @NonNull String TRACE_SUCCESS_PROPERTY_NAME_PREFIX = "s";
+	public static final @NonNull String TRACE_TRACE_PROPERTY_NAME_PREFIX = "t";
+	public static final @NonNull String TRACE_WHEN_PROPERTY_NAME_PREFIX = "when_";
+	public static final @NonNull String TRACE_WHERE_PROPERTY_NAME_PREFIX = "where_";
+
 	public @NonNull String createDispatchClassName(@NonNull Rule rule) {
-		return "D" + QVTbaseUtil.getName(rule);
+		return TRACE_DISPATCH_CLASS_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 
 	public @NonNull String createDispatchClassDispatchPropertyName(@NonNull Relation relation) {
 		String name = QVTrelationUtil.getName(relation);
-		return "do" + name;
+		return TRACE_DISPATCH_CLASS_DISPATCH_PROPERTY_NAME_PREFIX + name;
 	}
 
 	public @NonNull String createDispatchClassPropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		int index = QVTbaseUtil.getTypedModelIndex(typedModel);
 		String name = QVTrelationUtil.getName(variable);
-		return "d" + index + name;
+		return TRACE_DISPATCH_PROPERTY_NAME_PREFIX + index + name;
 	}
 
 	public @NonNull String createDispatchClassResultPropertyName() {
@@ -61,13 +77,13 @@ public class QVTrelationNameGenerator extends NameGenerator
 	}
 
 	public @NonNull String createInvocationClassName(@NonNull Rule rule) {
-		return "C" + QVTbaseUtil.getName(rule);
+		return TRACE_INVOCATION_CLASS_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 
 	public @NonNull String createInvocationClassPropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		int index = QVTbaseUtil.getTypedModelIndex(typedModel);
 		String name = QVTrelationUtil.getName(variable);
-		return "c" + index + name;
+		return TRACE_INVOCATION_PROPERTY_NAME_PREFIX + index + name;
 	}
 
 
@@ -82,7 +98,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 	//	}
 
 	public @NonNull String createInvocationTraceProperty(@NonNull Relation invokedRelation) {
-		return "w" + invokedRelation.getName();
+		return TRACE_INVOCATION_TRACE_PROPERTY_NAME_PREFIX + invokedRelation.getName();
 	}
 
 	public @NonNull String createKeyedVariableName(@NonNull Variable identifiedVariable) {
@@ -107,35 +123,37 @@ public class QVTrelationNameGenerator extends NameGenerator
 	}
 
 	public @NonNull String createTraceClassName(@NonNull Rule rule) {
-		return "T" + QVTbaseUtil.getName(rule);
+		return TRACE_TRACE_CLASS_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 
 	public @NonNull String createTraceClassPropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		int index = QVTbaseUtil.getTypedModelIndex(typedModel);
 		String name = QVTrelationUtil.getName(variable);
-		return "t" + index  + name;
+		return TRACE_TRACE_PROPERTY_NAME_PREFIX + index  + name;
 	}
 
-	public @NonNull String createTraceGlobalSuccessPropertyName() {
-		return TRACE_GLOBAL_SUCCESS_PROPERTY_NAME;
+	public @NonNull String createTraceGlobalSuccessPropertyName(@NonNull TypedModel targetTypedModel) {
+		int index = QVTbaseUtil.getTypedModelIndex(targetTypedModel);
+		return TRACE_SUCCESS_PROPERTY_NAME_PREFIX + index + TRACE_GLOBAL_SUCCESS_PROPERTY_NAME_SUFFIX;
 	}
 
-	public @NonNull String createTraceLocalSuccessPropertyName() {
-		return TRACE_LOCAL_SUCCESS_PROPERTY_NAME;
+	public @NonNull String createTraceLocalSuccessPropertyName(@NonNull TypedModel targetTypedModel) {
+		int index = QVTbaseUtil.getTypedModelIndex(targetTypedModel);
+		return TRACE_SUCCESS_PROPERTY_NAME_PREFIX + index + TRACE_LOCAL_SUCCESS_PROPERTY_NAME_SUFFIX;
 	}
 
 	public @NonNull String createTraceInterfaceName(@NonNull Rule rule) {
-		return "I" + QVTbaseUtil.getName(rule);
+		return TRACE_INTERFACE_CLASS_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 
 	public @NonNull String createTraceInterfacePropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		int index = QVTbaseUtil.getTypedModelIndex(typedModel);
 		String name = QVTrelationUtil.getName(variable);
-		return "i" + index + name;
+		return TRACE_INTERFACE_PROPERTY_NAME_PREFIX + index + name;
 	}
 
 	public @NonNull String createWhenInvocationPropertyName(@NonNull Rule rule) {
-		return "when_" + QVTbaseUtil.getName(rule);
+		return TRACE_WHEN_PROPERTY_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 
 	//	public @NonNull String createWhenMappingClassName(@NonNull RelationDomain rInvokedDomain) {
@@ -157,7 +175,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 	} */
 
 	//	public @NonNull String createWhenTraceClassName(@NonNull Relation invokingRelation, @NonNull Relation invokedRelation) {
-	//		return "T" + invokingRelation.getName() + "_when_" + invokedRelation.getName();
+	//		return TRACE_TRACE_CLASS_NAME_PREFIX + invokingRelation.getName() + "_when_" + invokedRelation.getName();
 	//	}
 
 	//	public @NonNull String createWhereMappingClassName(@NonNull RelationDomain rInvokedDomain) {
@@ -179,6 +197,6 @@ public class QVTrelationNameGenerator extends NameGenerator
 	} */
 
 	public @NonNull String createWhereInvocationPropertyName(@NonNull Rule rule) {
-		return "where_" + QVTbaseUtil.getName(rule);
+		return TRACE_WHERE_PROPERTY_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 }

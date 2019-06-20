@@ -21,6 +21,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
@@ -55,7 +56,12 @@ public class RelationAnalysis2TraceInterface extends AbstractRelationAnalysis2Mi
 		//
 		// There is always a trace interface success
 		//
-		createRelation2GlobalSuccessProperty(relationAnalysis2traceGroup.getNameGenerator().createTraceGlobalSuccessPropertyName());
+		//	QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
+		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+			if (scheduleManager.isOutput(relationDomain)) {
+				createRelation2GlobalSuccessProperty(QVTrelationUtil.getTypedModel(relationDomain));//, nameGenerator.createTraceGlobalSuccessPropertyName(typedModel));
+			}
+		}
 		//
 		//	No result property.
 		//

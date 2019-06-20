@@ -26,7 +26,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 public interface RelationAnalysis2MiddleType extends RuleAnalysis2MiddleType
 {
 	@Nullable Element2MiddleProperty basicGetRelation2DispatchSuccessProperty();
-	@Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty();
+	@Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel);
 	@Nullable Element2MiddleProperty basicGetRelation2LocalSuccessProperty();
 	@Nullable Relation2ResultProperty basicGetRelation2ResultProperty();
 	@Nullable VariableDeclaration2TraceProperty basicGetVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable);
