@@ -37,7 +37,6 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -166,7 +165,7 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTcCompiler_Families2Persons() throws Exception {
-		AbstractTransformer.APPENDS.setState(true);
+		//		AbstractTransformer.APPENDS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons.qvtc"));
 		myQVT.loadEcoreFile(getModelsURI("families2persons/Families.ecore"), FamiliesPackage.eINSTANCE);
