@@ -275,7 +275,7 @@ public class RelationAnalysis extends RuleAnalysis
 			region.getHeadNodes().add(traceNode);
 			traceNode.setHead();
 
-			Property successProperty = relationAnalysis2dispatchClass.getGlobalSuccessProperty();
+			Property successProperty = relationAnalysis2dispatchClass.getDispatchSuccessProperty();
 			createRealizedSuccess(traceNode, successProperty, false);
 
 			return traceNode;
@@ -1184,8 +1184,8 @@ public class RelationAnalysis extends RuleAnalysis
 		//
 		//	Set the dispatch node success as true.
 		//
-		Property globalSuccessProperty = relationAnalysis2dispatchClass.getGlobalSuccessProperty();
-		createRealizedSuccess(dispatchNode, globalSuccessProperty, true);
+		Property dispatchSuccessProperty = relationAnalysis2dispatchClass.getDispatchSuccessProperty();
+		createRealizedSuccess(dispatchNode, dispatchSuccessProperty, true);
 		//
 		//	dispatch node is the head.
 		//

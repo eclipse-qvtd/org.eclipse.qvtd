@@ -258,38 +258,37 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	// If there is a trace interface or a when invocation then there is a trace class global success.
 	//
 	protected void analyzeGlobalSuccessNode(@Nullable RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface) {
-		boolean hasTraceInterface = baseRelationAnalysis2traceInterface != null;
+		boolean hasTraceInterface2 = baseRelationAnalysis2traceInterface != null;
+		if (hasTraceInterface2) {
+			//	relationAnalysis2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasInterfaceTracingStrategy.INSTANCE);
+			return;					// FIXME Bug 540797 - this is used by e.g. mapBooleanExp in ATL2QVTr
+		}
+
 		boolean hasWhenInvocation = getRuleAnalysis().hasIncomingWhenInvocationAnalyses();
-		if (hasTraceInterface) {		// FIXME Bug 540797 - this is used by e.g. mapBooleanExp in ATL2QVTr
-			return;
+		if (hasWhenInvocation) {
+			relationAnalysis2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasWhenInvocationTracingStrategy.INSTANCE);
 		}
-		if (!hasWhenInvocation) {		// FIXME enforced guard needs globalSucess
-			return;
+		else {		// FIXME enforced guard needs globalSucess
+			//		return;
 		}
-		if (!QVTrelationUtil.hasOverrides(relation)) {
-			boolean hasPredicatedElement = false;
-			RuleRegion region = getRuleAnalysis().getRegion();
-			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-				if (node.isPredicated()) {
-					hasPredicatedElement = true;
-					break;
-				}
-			}
-			if (!hasPredicatedElement) {
-				for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
-					if (edge.isPredicated()) {
-						hasPredicatedElement = true;
-						break;
-					}
-				}
-			}
-			if (!hasPredicatedElement) {
-				return;			// extStat is identical to trace class existence
+		boolean hasPredicatedElement = hasPredicatedElement();
+		if (hasPredicatedElement) {
+			relationAnalysis2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasPredicatedElementTracingStrategy.INSTANCE);
+		}
+		else {
+			//		return;			// extStat is identical to trace class existence
+		}
+		boolean needsGlobalSuccess = false;
+		for (@NonNull TracingStrategy tracingStrategy : relationAnalysis2traceGroup.getTracingStrategies()) {
+			if (tracingStrategy.needsGlobalSuccess(this)) {
+				needsGlobalSuccess = true;
 			}
 		}
-		QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
-		String globalSuccessPropertyName = nameGenerator.createTraceGlobalSuccessPropertyName();
-		createRelation2GlobalSuccessProperty(globalSuccessPropertyName);
+		if (needsGlobalSuccess) {
+			QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
+			String globalSuccessPropertyName = nameGenerator.createTraceGlobalSuccessPropertyName();
+			createRelation2GlobalSuccessProperty(globalSuccessPropertyName);
+		}
 	}
 
 	/*	@Override
@@ -475,6 +474,26 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	@Override
 	public @NonNull String getUniquePropertyName(@NonNull Element2MiddleProperty element2traceProperty, @NonNull String name) {
 		return QVTrelationNameGenerator.getUniqueName(name2element2traceProperty, name, element2traceProperty);
+	}
+
+	private boolean hasPredicatedElement() {
+		if (!QVTrelationUtil.hasOverrides(relation)) {
+			boolean hasPredicatedElement = false;
+			RuleRegion region = getRuleAnalysis().getRegion();
+			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+				if (node.isPredicated()) {
+					return true;
+				}
+			}
+			if (!hasPredicatedElement) {
+				for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+					if (edge.isPredicated()) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/*	private boolean hasCollectionMemberMatches() {

@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -36,6 +37,11 @@ public class RelationAnalysis2TraceGroup extends RuleAnalysis2TraceGroup
 	protected final @Nullable RelationAnalysis2TraceInterface relationAnalysis2traceInterface;
 	protected final @Nullable RelationAnalysis2InvocationClass relationAnalysis2invocationClass;
 	protected final @Nullable RelationAnalysis2DispatchClass relationAnalysis2dispatchClass;
+
+	private final @NonNull List<@NonNull TracingStrategy> tracingStrategies = new ArrayList<>();
+
+
+
 
 	public RelationAnalysis2TraceGroup(@NonNull RelationAnalysis relationAnalysis) {
 		super(relationAnalysis);
@@ -67,8 +73,20 @@ public class RelationAnalysis2TraceGroup extends RuleAnalysis2TraceGroup
 			}
 		}
 		relationAnalysis2traceClass = traceClassName != null ? new RelationAnalysis2TraceClass(this, traceClassName) : null;
-		relationAnalysis2traceInterface = traceInterfaceName != null ? new RelationAnalysis2TraceInterface(this, traceInterfaceName) : null;
-		relationAnalysis2dispatchClass = dispatchClassName != null ? new RelationAnalysis2DispatchClass(this, dispatchClassName) : null;
+		if (traceInterfaceName != null) {
+			relationAnalysis2traceInterface = new RelationAnalysis2TraceInterface(this, traceInterfaceName);
+			addTracingStrategy(AbstractTracingStrategy.HasInterfaceTracingStrategy.INSTANCE);
+		}
+		else {
+			relationAnalysis2traceInterface = null;
+		}
+		if (dispatchClassName != null) {
+			relationAnalysis2dispatchClass = new RelationAnalysis2DispatchClass(this, dispatchClassName);
+			addTracingStrategy(AbstractTracingStrategy.HasDispatcherTracingStrategy.INSTANCE);
+		}
+		else {
+			relationAnalysis2dispatchClass = null;
+		}
 		relationAnalysis2invocationClass = invocationClassName != null ? new RelationAnalysis2InvocationClass(this, invocationClassName) : null;
 		//
 		//	Set the trace variable type
@@ -86,6 +104,10 @@ public class RelationAnalysis2TraceGroup extends RuleAnalysis2TraceGroup
 			getInvocation2TraceProperty(invocation);
 		}
 	} */
+
+	public void addTracingStrategy(@NonNull TracingStrategy tracingStrategy) {
+		tracingStrategies.add(tracingStrategy);
+	}
 
 	@Override
 	public void analyzeTraceElements() throws CompilerChainException {
@@ -206,6 +228,10 @@ public class RelationAnalysis2TraceGroup extends RuleAnalysis2TraceGroup
 
 	public org.eclipse.ocl.pivot.@NonNull Class getTraceInterface() {
 		return getRuleAnalysis2TraceInterface().getMiddleClass();
+	}
+
+	public @NonNull Iterable<@NonNull TracingStrategy> getTracingStrategies() {
+		return tracingStrategies;
 	}
 
 	/*	@Override

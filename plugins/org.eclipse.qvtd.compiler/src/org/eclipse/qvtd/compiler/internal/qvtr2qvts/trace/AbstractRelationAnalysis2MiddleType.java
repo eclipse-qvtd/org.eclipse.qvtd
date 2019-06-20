@@ -61,6 +61,11 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull VariableDeclaration2TraceProperty> variable2variableDeclaration2traceProperty = new HashMap<>();
 
 	/**
+	 * The future Property that provides the dispatch success/failure/not-ready state of the traced mapping.
+	 */
+	private @Nullable Element2MiddleProperty relation2dispatchSuccessProperty = null;
+
+	/**
 	 * The future Property that provides the global success/failure/not-ready state of the traced mapping.
 	 */
 	private @Nullable Element2MiddleProperty relation2globalSuccessProperty = null;
@@ -127,6 +132,11 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	}
 
 	@Override
+	public @Nullable Element2MiddleProperty basicGetRelation2DispatchSuccessProperty() {
+		return relation2dispatchSuccessProperty;
+	}
+
+	@Override
 	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
 		return relation2globalSuccessProperty;
 	}
@@ -163,6 +173,12 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	public void createRelation2ResultProperty(@NonNull String nameHint) {
 		assert relation2resultProperty == null;
 		relation2resultProperty = new Relation2ResultProperty(this, nameHint, getRuleAnalysis2TraceGroup().getTraceInterface());
+	}
+
+	public @NonNull Element2MiddleProperty createRelation2DispatchSuccessProperty(@NonNull Property property) {
+		assert relation2dispatchSuccessProperty == null;
+		relation2dispatchSuccessProperty = new Relation2InheritedProperty(this, property);
+		return relation2dispatchSuccessProperty;
 	}
 
 	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty(@NonNull String nameHint) {
@@ -217,6 +233,11 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	}
 
 	@Override
+	public @NonNull Property getDispatchSuccessProperty() {
+		return ClassUtil.nonNullState(basicGetRelation2DispatchSuccessProperty()).getTraceProperty();
+	}
+
+	@Override
 	public @NonNull Property getGlobalSuccessProperty() {
 		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty()).getTraceProperty();
 	}
@@ -238,6 +259,10 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 		//		}
 		//		return relation2resultProperty2;
 		return ClassUtil.nonNullState(relation2resultProperty);
+	}
+
+	public @NonNull Element2MiddleProperty getRelation2DispatchSuccessProperty() {
+		return ClassUtil.nonNullState(relation2dispatchSuccessProperty);
 	}
 
 	public @NonNull Element2MiddleProperty getRelation2GlobalSuccessProperty() {
@@ -323,6 +348,9 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	public void synthesizeTraceModel() {
 		if (relation2localSuccessProperty != null) {
 			relation2localSuccessProperty.getTraceProperty();
+		}
+		if (relation2dispatchSuccessProperty != null) {
+			relation2dispatchSuccessProperty.getTraceProperty();
 		}
 		if (relation2globalSuccessProperty != null) {
 			relation2globalSuccessProperty.getTraceProperty();

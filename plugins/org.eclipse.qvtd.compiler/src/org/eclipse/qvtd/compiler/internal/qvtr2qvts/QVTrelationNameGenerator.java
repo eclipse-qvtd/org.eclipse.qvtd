@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
 
 /**
  * NameGenerator localizes the name generation functionality to facilitate a chnage / rewrite.
@@ -35,8 +36,9 @@ public class QVTrelationNameGenerator extends NameGenerator
 	public static final @NonNull String IDENTIFIED_INSTANCE_VARIABLE_NAME = "identifiedInstance";
 	public static final @NonNull String KEYED_INSTANCE_PROPERTY_NAME = "instance";
 	public static final @NonNull String KEY2INSTANCE_VARIABLE_NAME = "key2instance";
-	public static final @NonNull String TRACE_GLOBAL_SUCCESS_PROPERTY_NAME = "success"; // "globalSuccess";
-	public static final @NonNull String TRACE_LOCAL_SUCCESS_PROPERTY_NAME = "localSuccess";
+	public static final @NonNull String TRACE_DISPATCH_SUCCESS_PROPERTY_NAME = QVTtracePackage.Literals.DISPATCH__SUCCESS.getName();
+	public static final @NonNull String TRACE_GLOBAL_SUCCESS_PROPERTY_NAME = "successGlobal"; // "globalSuccess";
+	public static final @NonNull String TRACE_LOCAL_SUCCESS_PROPERTY_NAME = "successLocal";
 	public static final @NonNull String TRACECLASS_PROPERTY_NAME = "trace";
 
 	public @NonNull String createDispatchClassName(@NonNull Rule rule) {

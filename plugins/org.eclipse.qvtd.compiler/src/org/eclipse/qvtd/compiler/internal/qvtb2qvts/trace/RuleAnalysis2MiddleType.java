@@ -33,6 +33,7 @@ public interface RuleAnalysis2MiddleType extends Nameable, Comparable<@NonNull R
 	//	@Nullable VariableDeclaration2TraceProperty basicGetVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable);
 	//	void createRootVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration rVariable, boolean manyTraces);
 	org.eclipse.ocl.pivot.@NonNull Class getBagOfMiddleClass();
+	@NonNull Property getDispatchSuccessProperty();
 	@NonNull Property getGlobalSuccessProperty();
 	org.eclipse.ocl.pivot.@NonNull Class getMiddleClass();
 
