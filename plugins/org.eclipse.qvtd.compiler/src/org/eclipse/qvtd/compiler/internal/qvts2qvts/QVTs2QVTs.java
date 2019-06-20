@@ -89,6 +89,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		this.rootName = rootName;
 		this.loadingRegionAnalysis = new LoadingRegionAnalysis(directedScheduleManager, createLoadingRegion());		// FIXME Should treat LoadingRegion uniformly
 		this.completeModel = environmentFactory.getCompleteModel();
+		directedScheduleManager.createCollationManager(problemHandler, loadingRegionAnalysis);
 		directedScheduleManager.createConnectionManager(problemHandler, loadingRegionAnalysis);
 	}
 
@@ -601,6 +602,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	}
 
 	public @NonNull Iterable<@NonNull RootRegion> transform(@NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions) throws CompilerChainException {
+		CollationManager collationManager = directedScheduleManager.getCollationManager();
 		ConnectionManager connectionManager = directedScheduleManager.getConnectionManager();
 		LoadingRegion loadingRegion = loadingRegionAnalysis.getRegion();
 		Iterable<@NonNull RootRegion> rootRegions = rootRegion2activeRegions.keySet();
@@ -623,6 +625,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			for (@NonNull Region region : activeRegions2) {
 				if (!(region instanceof LoadingRegion)) {
 					connectionManager.createIncomingConnections(s, rootRegion, region);
+					collationManager.createCollations(s, rootRegion, region);
 				}
 			}
 			if (s != null) {

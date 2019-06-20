@@ -28,6 +28,7 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.CollationManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
@@ -80,6 +81,7 @@ public interface ScheduleManager
 	 */
 	@NonNull Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations();
 
+	@Nullable CollationManager basicGetCollationManager();
 	@Nullable ConnectionManager basicGetConnectionManager();
 	//	@Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node);
 	//	@Nullable Property basicGetLocalSuccessProperty(@NonNull Node node);
@@ -90,6 +92,7 @@ public interface ScheduleManager
 	 * FIXME Many calls to this are lazy; cannot possibly be partial.
 	 */
 	boolean computeIsPartial(@NonNull Node targetNode, @NonNull Property property);
+	@NonNull CollationManager createCollationManager(@NonNull ProblemHandler problemHandler, @NonNull LoadingRegionAnalysis loadingRegionAnalysis);
 	@NonNull ConnectionManager createConnectionManager(@NonNull ProblemHandler problemHandler, @NonNull LoadingRegionAnalysis loadingRegionAnalysis);
 	@NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis);
 	@NonNull RuleAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule);
@@ -104,6 +107,7 @@ public interface ScheduleManager
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull Iterable<@NonNull CompleteClass> completeClasses);
 	@NonNull Iterable<@NonNull ClassDatum> getClassDatums();
+	@NonNull CollationManager getCollationManager();
 	@NonNull ConnectionManager getConnectionManager();
 	@NonNull ScheduleManager getDirectedScheduleManager(@NonNull RootRegion rootRegion);
 	@NonNull RootDomainUsageAnalysis getDomainUsageAnalysis();

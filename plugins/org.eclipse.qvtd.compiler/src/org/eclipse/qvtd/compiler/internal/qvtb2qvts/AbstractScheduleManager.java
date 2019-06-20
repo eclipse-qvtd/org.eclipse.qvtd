@@ -51,6 +51,7 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.CollationManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
@@ -196,6 +197,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	private final boolean doDotGraphs;
 	private final boolean doYedGraphs;
 
+	private @Nullable CollationManager collationManager = null;
 	private @Nullable ConnectionManager connectionManager = null;
 
 	//	private final @NonNull Map<@NonNull TransformationAnalysis, @NonNull TransformationAnalysis2TracePackage> transformationAnalysis2transformationAnalysis2tracePackage = new HashMap<>();
@@ -344,6 +346,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public @Nullable CollationManager basicGetCollationManager() {
+		return collationManager;
+	}
+
+	@Override
 	public @Nullable ConnectionManager basicGetConnectionManager() {
 		return connectionManager;
 	}
@@ -402,6 +409,12 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public @NonNull CollationManager createCollationManager(@NonNull ProblemHandler problemHandler, @NonNull LoadingRegionAnalysis loadingRegionAnalysis) {
+		this.collationManager  = new CollationManager(problemHandler, this, loadingRegionAnalysis);
+		return collationManager;
 	}
 
 	@Override
@@ -634,6 +647,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 		return castProperty;
 	} */
+
+	@Override
+	public @NonNull CollationManager getCollationManager() {
+		return ClassUtil.nonNullState(collationManager);
+	}
 
 	@Override
 	public @NonNull ConnectionManager getConnectionManager() {

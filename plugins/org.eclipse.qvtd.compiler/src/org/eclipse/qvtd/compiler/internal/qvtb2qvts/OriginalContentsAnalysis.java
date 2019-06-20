@@ -236,6 +236,11 @@ public class OriginalContentsAnalysis
 		return s.toString();
 	}
 
+
+	public @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> getBasePropertyDatum2newEdges() {
+		return basePropertyDatum2newEdges;
+	}
+
 	/**
 	 * Return all Realized NavigationEdges corresponding to predicatedEdge that navigate an isComposite property in either direction.
 	 * Returns null in the very unusual event that there are none.
