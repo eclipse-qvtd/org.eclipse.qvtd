@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Package;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -91,6 +92,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.xtext.qvtbase.as2cs.QVTbaseDeclarationVisitor;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
@@ -372,6 +375,14 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		context.refreshList(csQuery.getOwnedParameters(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
 		csQuery.setOwnedExpression(createExpCS(asFunction.getQueryExpression()));
 		csQuery.setIsTransient(asFunction.isIsTransient());
+		JavaClassCS csJavaClass = null;
+		String implementationClass = asFunction.getImplementationClass();
+		if (implementationClass != null) {
+			csJavaClass = QVTbaseCSFactory.eINSTANCE.createJavaClassCS();
+			csJavaClass.setName(implementationClass);
+			ClassUtil.nonNullState(context.getCSResource()).getContents().add(csJavaClass);
+		}
+		csQuery.setImplementation(csJavaClass);
 		return csQuery;
 	}
 
@@ -506,7 +517,17 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	public ElementCS visitPropertyTemplateItem(@NonNull PropertyTemplateItem asPropertyTemplateItem) {
 		PropertyTemplateCS csPropertyTemplate = context.refreshElement(PropertyTemplateCS.class, QVTrelationCSPackage.Literals.PROPERTY_TEMPLATE_CS, asPropertyTemplateItem);
 		csPropertyTemplate.setPivot(asPropertyTemplateItem);
-		csPropertyTemplate.setPropertyId(QVTrelationUtil.getReferredProperty(asPropertyTemplateItem));
+		Property referredProperty = QVTrelationUtil.getReferredProperty(asPropertyTemplateItem);
+		if (asPropertyTemplateItem.isIsOpposite()) {
+			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			context.refreshPathName(csPathName, ClassUtil.nonNullState(referredProperty.getOpposite()), null);
+			csPropertyTemplate.setOwnedOppositePropertyId(csPathName);
+			csPropertyTemplate.setPropertyId(null);
+		}
+		else {
+			csPropertyTemplate.setOwnedOppositePropertyId(null);
+			csPropertyTemplate.setPropertyId(referredProperty);
+		}
 		csPropertyTemplate.setOwnedExpression(context.visitDeclaration(ExpCS.class, asPropertyTemplateItem.getValue()));
 		return csPropertyTemplate;
 	}

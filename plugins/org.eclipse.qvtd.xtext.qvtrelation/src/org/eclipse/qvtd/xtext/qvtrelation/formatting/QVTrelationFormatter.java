@@ -20,6 +20,7 @@ import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.Mode
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.ObjectTemplateCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.PredicateCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.PrimitiveTypeDomainCSElements;
+import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.PropertyTemplateCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.QualifiedPackageCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.QueryCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.RelationCSElements;
@@ -133,6 +134,11 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 			PrimitiveTypeDomainCSElements a = f.getPrimitiveTypeDomainCSAccess();
 			setNoSpaceLineWrap(c, a.getCommaKeyword_3_0());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
+		}
+		{
+			PropertyTemplateCSElements a = f.getPropertyTemplateCSAccess();
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_0_1_1());
+			c.setNoSpace().before(a.getRightParenthesisKeyword_0_1_3());
 		}
 		{
 			QualifiedPackageCSElements a = f.getQualifiedPackageCSAccess();
