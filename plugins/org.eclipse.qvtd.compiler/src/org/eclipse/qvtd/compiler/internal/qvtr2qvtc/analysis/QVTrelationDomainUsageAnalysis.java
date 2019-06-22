@@ -154,7 +154,11 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 
 	@Override
 	public @NonNull DomainUsage visitRelationDomain(@NonNull RelationDomain object) {
-		DomainUsage usage = visit(object.getTypedModel());
+		TypedModel typedModel = object.getTypedModel();
+		if (typedModel == null) {
+			return getPrimitiveUsage();
+		}
+		DomainUsage usage = visit(typedModel);
 		setUsage(object, usage);
 		for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(object)) {
 			visit(domainPattern);
