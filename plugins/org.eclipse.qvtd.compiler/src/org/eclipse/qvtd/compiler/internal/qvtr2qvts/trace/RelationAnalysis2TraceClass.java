@@ -210,20 +210,24 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		Iterable<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses = getRuleAnalysis().basicGetOutgoingWhereInvocationAnalyses();
 		if (outgoingWhereInvocationAnalyses != null) {
 			for (@NonNull InvocationAnalysis outgoingWhereInvocationAnalysis : outgoingWhereInvocationAnalyses) {
-				createInvocation2TraceProperty(outgoingWhereInvocationAnalysis);
+				if (outgoingWhereInvocationAnalysis.needsInvocationTraceProperty()) {
+					createInvocation2TraceProperty(outgoingWhereInvocationAnalysis);
+				}
 			}
 		}
 		//
 		//	Create an outgoing invocation property for each when invocation.
 		//
-		if (relation.isIsTopLevel()) {
-			Iterable<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses = getRuleAnalysis().basicGetOutgoingWhenInvocationAnalyses();
-			if (outgoingWhenInvocationAnalyses != null) {
-				for (@NonNull InvocationAnalysis outgoingWhenInvocationAnalysis : outgoingWhenInvocationAnalyses) {
+		//	if (relation.isIsTopLevel()) {
+		Iterable<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses = getRuleAnalysis().basicGetOutgoingWhenInvocationAnalyses();
+		if (outgoingWhenInvocationAnalyses != null) {
+			for (@NonNull InvocationAnalysis outgoingWhenInvocationAnalysis : outgoingWhenInvocationAnalyses) {
+				if (outgoingWhenInvocationAnalysis.needsInvocationTraceProperty()) {
 					createInvocation2TraceProperty(outgoingWhenInvocationAnalysis);
 				}
 			}
 		}
+		//	}
 		//
 		//	Create one trace property per root variable.
 		//

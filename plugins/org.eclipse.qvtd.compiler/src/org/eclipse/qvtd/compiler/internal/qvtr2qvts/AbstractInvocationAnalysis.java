@@ -159,6 +159,11 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	}
 
 	@Override
+	public boolean needsInvocationTraceProperty() {
+		return true;
+	}
+
+	@Override
 	public void synthesizeInvocationNodes(@NonNull Node invokingTraceNode) {
 		//
 		//	Create the invokedNode that causes the invocation.

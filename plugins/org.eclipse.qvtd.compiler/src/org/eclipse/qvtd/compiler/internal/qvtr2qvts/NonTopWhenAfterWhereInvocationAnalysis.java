@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
@@ -32,6 +33,12 @@ public class NonTopWhenAfterWhereInvocationAnalysis extends AbstractWhenInvocati
 	@Override
 	public boolean isTop() {
 		return false;
+	}
+
+	@Override
+	public boolean needsInvocationTraceProperty() {
+		Relation invokingRelation = invokingRelationAnalysis.getRule();
+		return invokingRelation.isIsTopLevel();
 	}
 
 	@Override

@@ -32,5 +32,10 @@ public interface InvocationAnalysis
 	 * Return true if the invocation is from a when clause, else false for a where clause.
 	 */
 	boolean isWhen();
+
+	/**
+	 * Return true if a trace property is needed for the invocation.
+	 */
+	boolean needsInvocationTraceProperty();
 	void synthesizeInvocationNodes(@NonNull Node traceNode);
 }

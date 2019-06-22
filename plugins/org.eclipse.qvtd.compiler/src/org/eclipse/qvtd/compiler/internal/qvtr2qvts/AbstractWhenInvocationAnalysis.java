@@ -55,6 +55,13 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 	}
 
 	@Override
+	protected void createInvokingTraceEdge(@NonNull Node invokedNode, @NonNull Node invokingTraceNode) {
+		if (needsInvocationTraceProperty()) {
+			super.createInvokingTraceEdge(invokedNode, invokingTraceNode);
+		}
+	}
+
+	@Override
 	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
 		return invokingRelationAnalysis.createNavigationEdge(Role.PREDICATED, invokedNode, invocationProperty, argumentNode, false);
 	}
@@ -70,14 +77,6 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 	}
 
 	protected abstract @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched);
-
-	@Override
-	protected void createInvokingTraceEdge(@NonNull Node invokedNode, @NonNull Node invokingTraceNode) {
-		Relation invokingRelation = invokingRelationAnalysis.getRule();
-		if (invokingRelation.isIsTopLevel()) {
-			super.createInvokingTraceEdge(invokedNode, invokingTraceNode);
-		}
-	}
 
 	@Override
 	public final boolean isWhen() {
