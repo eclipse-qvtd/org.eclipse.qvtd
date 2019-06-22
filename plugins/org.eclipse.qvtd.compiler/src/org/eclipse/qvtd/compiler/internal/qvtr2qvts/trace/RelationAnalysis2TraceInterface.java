@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
@@ -74,7 +75,7 @@ public class RelationAnalysis2TraceInterface extends AbstractRelationAnalysis2Mi
 	}
 
 	@Override
-	protected @NonNull String createTracePropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
+	protected @NonNull String createTracePropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		return getTransformation2TracePackage().getNameGenerator().createTraceInterfacePropertyName(typedModel, variable);
 	}
 

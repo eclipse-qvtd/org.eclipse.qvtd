@@ -307,30 +307,32 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 		for (@NonNull Rule rule : QVTbaseUtil.getRule(qvtmTransformation)) {
 			for (@NonNull Domain domain : QVTbaseUtil.getOwnedDomains(rule)) {
-				TypedModel typedModel = QVTbaseUtil.getTypedModel(domain);
-				if (scheduleManager.isInput(domain)) {
-					ImperativeTypedModel checkableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
-					if ((checkableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(checkableTypedModel)) {
-						checkableTypedModel.setIsChecked(true);
-						if (enforceableTypedModels.contains(checkableTypedModel)) {
-							checkableAndEnforceableTypedModels.add(checkableTypedModel);
-							enforceableTypedModels.remove(checkableTypedModel);
-						}
-						else if (!checkableTypedModels.contains(checkableTypedModel)) {
-							checkableTypedModels.add(checkableTypedModel);
+				TypedModel typedModel = domain.getTypedModel();
+				if (typedModel != null) {
+					if (scheduleManager.isInput(domain)) {
+						ImperativeTypedModel checkableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
+						if ((checkableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(checkableTypedModel)) {
+							checkableTypedModel.setIsChecked(true);
+							if (enforceableTypedModels.contains(checkableTypedModel)) {
+								checkableAndEnforceableTypedModels.add(checkableTypedModel);
+								enforceableTypedModels.remove(checkableTypedModel);
+							}
+							else if (!checkableTypedModels.contains(checkableTypedModel)) {
+								checkableTypedModels.add(checkableTypedModel);
+							}
 						}
 					}
-				}
-				if (scheduleManager.isOutput(domain)) {
-					ImperativeTypedModel enforceableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
-					if ((enforceableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(enforceableTypedModel)) {
-						enforceableTypedModel.setIsEnforced(true);
-						if (checkableTypedModels.contains(enforceableTypedModel)) {
-							checkableAndEnforceableTypedModels.add(enforceableTypedModel);
-							checkableTypedModels.remove(enforceableTypedModel);
-						}
-						else if (!enforceableTypedModels.contains(enforceableTypedModel)) {
-							enforceableTypedModels.add(enforceableTypedModel);
+					if (scheduleManager.isOutput(domain)) {
+						ImperativeTypedModel enforceableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
+						if ((enforceableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(enforceableTypedModel)) {
+							enforceableTypedModel.setIsEnforced(true);
+							if (checkableTypedModels.contains(enforceableTypedModel)) {
+								checkableAndEnforceableTypedModels.add(enforceableTypedModel);
+								checkableTypedModels.remove(enforceableTypedModel);
+							}
+							else if (!enforceableTypedModels.contains(enforceableTypedModel)) {
+								enforceableTypedModels.add(enforceableTypedModel);
+							}
 						}
 					}
 				}

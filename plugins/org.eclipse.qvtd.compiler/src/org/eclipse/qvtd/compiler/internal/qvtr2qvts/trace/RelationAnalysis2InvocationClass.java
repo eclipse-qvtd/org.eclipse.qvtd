@@ -101,7 +101,7 @@ public class RelationAnalysis2InvocationClass extends AbstractRelationAnalysis2M
 	} */
 
 	@Override
-	protected @NonNull String createTracePropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
+	protected @NonNull String createTracePropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		return getTransformation2TracePackage().getNameGenerator().createInvocationClassPropertyName(typedModel, variable);
 	}
 

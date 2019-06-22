@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -51,7 +52,7 @@ public class OverridingVariableDeclaration2TraceProperty extends VariableDeclara
 	}
 
 	@Override
-	public @NonNull TypedModel getTypedModel() {
+	public @Nullable TypedModel getTypedModel() {
 		return overrideableVariableDeclaration2TraceProperty.getTypedModel();
 	}
 

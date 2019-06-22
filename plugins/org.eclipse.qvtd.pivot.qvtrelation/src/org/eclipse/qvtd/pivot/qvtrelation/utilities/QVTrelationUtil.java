@@ -212,7 +212,8 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(overridingDomain);
 		int rootVariableIndex = rootVariables.indexOf(overridingRootVariable);
 		assert rootVariableIndex >= 0;
-		RelationDomain overriddenRelationDomain = QVTrelationUtil.getRelationDomain(overriddenRelation, QVTrelationUtil.getTypedModel(overridingDomain));
+		TypedModel typedModel = overridingDomain.getTypedModel();
+		RelationDomain overriddenRelationDomain = QVTrelationUtil.getRelationDomain(overriddenRelation, typedModel);
 		List<@NonNull Variable> overriddenRootVariables = QVTrelationUtil.getRootVariables(overriddenRelationDomain);
 		assert rootVariableIndex < overriddenRootVariables.size();
 		return overriddenRootVariables.get(rootVariableIndex);
@@ -288,13 +289,13 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		throw new IndexOutOfBoundsException(argumentIndex + " > " + iFirst + " for " + rRelation);
 	}
 
-	public static @NonNull RelationDomain getRelationDomain(@NonNull Relation qvtrRelation, @NonNull TypedModel typedModel) {
+	public static @NonNull RelationDomain getRelationDomain(@NonNull Relation qvtrRelation, @Nullable TypedModel typedModel) {
 		for (@NonNull RelationDomain rRelationDomain : getOwnedDomains(qvtrRelation)) {
 			if (rRelationDomain.getTypedModel() == typedModel) {
 				return rRelationDomain;
 			}
 		}
-		throw new IllegalArgumentException("No " + typedModel.getName() + " domain in " + qvtrRelation.getName());
+		throw new IllegalArgumentException("No " + (typedModel != null ? typedModel.getName() : "null") + " domain in " + qvtrRelation.getName());
 	}
 
 	/**

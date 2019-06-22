@@ -73,7 +73,12 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 
 	@Override
 	public @NonNull DomainUsage visitDomainPattern(@NonNull DomainPattern object) {
-		DomainUsage usage = getUsage(QVTrelationUtil.getTypedModel(QVTrelationUtil.getContainingDomain(object)));
+		Domain relationDomain = QVTrelationUtil.getContainingDomain(object);
+		TypedModel typedModel = relationDomain.getTypedModel();
+		if (typedModel == null) {
+			return getPrimitiveUsage();
+		}
+		DomainUsage usage = getUsage(typedModel);
 		setUsage(object, usage);
 		visit(QVTrelationUtil.getOwnedTemplateExpression(object));
 		return usage;
@@ -137,7 +142,8 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 		for (@NonNull OCLExpression argument : QVTrelationUtil.getOwnedArguments(object)) {
 			if (argument instanceof VariableExp) {
 				RelationDomain relationDomain = QVTrelationUtil.getRelationCallExpArgumentDomain(object, i);
-				DomainUsage usage = getUsage(QVTrelationUtil.getTypedModel(relationDomain));
+				TypedModel typedModel = relationDomain.getTypedModel();
+				DomainUsage usage = typedModel != null ? getUsage(typedModel) : getPrimitiveUsage();
 				setUsage(QVTrelationUtil.getReferredVariable((VariableExp)argument), usage);
 			}
 			visit(argument);

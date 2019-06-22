@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -131,7 +132,7 @@ public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2Mid
 	} */
 
 	@Override
-	protected @NonNull String createTracePropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
+	protected @NonNull String createTracePropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		return getTransformation2TracePackage().getNameGenerator().createDispatchClassPropertyName(typedModel, variable);
 	}
 

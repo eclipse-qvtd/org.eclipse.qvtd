@@ -507,11 +507,14 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nonNullState(asDomain.getTypedModel());
 	}
 
-	public static int getTypedModelIndex(@NonNull TypedModel typedModel) {
+	public static int getTypedModelIndex(@Nullable TypedModel typedModel) {
+		if (typedModel == null) {
+			return 0;
+		}
 		Transformation transformation = ClassUtil.nonNullState(typedModel.getTransformation());
 		int index = transformation.getModelParameter().indexOf(typedModel);
 		assert index >= 0;
-		return index;
+		return 1+index;
 	}
 
 	public static @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Class> getUsedClasses(@NonNull TypedModel asTypedModel) {

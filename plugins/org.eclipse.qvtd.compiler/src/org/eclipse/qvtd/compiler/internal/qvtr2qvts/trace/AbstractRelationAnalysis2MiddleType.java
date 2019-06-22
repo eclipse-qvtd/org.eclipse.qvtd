@@ -108,7 +108,7 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 		//	Prepare a trace property for each root variable.
 		//
 		for (@NonNull Domain domain : QVTbaseUtil.getOwnedDomains(relation)) {
-			TypedModel typedModel = QVTbaseUtil.getTypedModel(domain);
+			TypedModel typedModel = domain.getTypedModel();
 			for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables((RelationDomain)domain)) {
 				//				VariableDeclaration2TraceProperty variableDeclaration2traceProperty = basicGetVariableDeclaration2TraceProperty(rootVariable);
 				//				assert variableDeclaration2traceProperty == null;
@@ -215,16 +215,16 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	}
 
 	@Override
-	public void createRootVariableDeclaration2TraceProperty(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable, boolean manyTraces) {
+	public void createRootVariableDeclaration2TraceProperty(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable, boolean manyTraces) {
 		//		VariableDeclaration2TraceProperty variableDeclaration2traceProperty = variable2variableDeclaration2traceProperty.get(variable);
 		//		assert variableDeclaration2traceProperty == null;
 		/*variableDeclaration2traceProperty =*/ createVariableDeclaration2TraceProperty(typedModel, variable, !manyTraces);
 		//		variable2variableDeclaration2traceProperty.put(variable, variableDeclaration2traceProperty);
 	}
 
-	protected abstract @NonNull String createTracePropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable);
+	protected abstract @NonNull String createTracePropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable);
 
-	protected @NonNull VariableDeclaration2TraceProperty createVariableDeclaration2TraceProperty(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
+	protected @NonNull VariableDeclaration2TraceProperty createVariableDeclaration2TraceProperty(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
 		String nameHint = createTracePropertyName(typedModel, variable);
 		OverrideableVariableDeclaration2TraceProperty variableDeclaration2TraceProperty = new OverrideableVariableDeclaration2TraceProperty(this, nameHint, typedModel, variable, unitOpposite);
 		VariableDeclaration2TraceProperty oldVariableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.put(variable, variableDeclaration2TraceProperty);

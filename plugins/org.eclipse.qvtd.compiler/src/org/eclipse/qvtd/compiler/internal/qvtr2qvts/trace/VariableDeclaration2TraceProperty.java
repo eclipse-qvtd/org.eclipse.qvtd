@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2MiddleType;
@@ -41,7 +42,7 @@ public abstract class VariableDeclaration2TraceProperty extends Element2MiddlePr
 
 	public abstract @NonNull VariableDeclaration getOverridingVariable();
 
-	public abstract @NonNull TypedModel getTypedModel();
+	public abstract @Nullable TypedModel getTypedModel();
 
 	//	public abstract void refineProperty(@Nullable TypedModel rTypedModel, boolean isNestedOneToOne);
 }

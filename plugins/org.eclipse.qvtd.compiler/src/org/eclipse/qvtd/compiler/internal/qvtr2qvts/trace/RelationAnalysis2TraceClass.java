@@ -437,7 +437,7 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	}
 
 	@Override
-	protected @NonNull String createTracePropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
+	protected @NonNull String createTracePropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		return getTransformation2TracePackage().getNameGenerator().createTraceClassPropertyName(typedModel, variable);
 	}
 

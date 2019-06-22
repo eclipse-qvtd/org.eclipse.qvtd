@@ -66,7 +66,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 		return TRACE_DISPATCH_CLASS_DISPATCH_PROPERTY_NAME_PREFIX + name;
 	}
 
-	public @NonNull String createDispatchClassPropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
+	public @NonNull String createDispatchClassPropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		int index = QVTbaseUtil.getTypedModelIndex(typedModel);
 		String name = QVTrelationUtil.getName(variable);
 		return TRACE_DISPATCH_PROPERTY_NAME_PREFIX + index + name;
@@ -80,7 +80,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 		return TRACE_INVOCATION_CLASS_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 
-	public @NonNull String createInvocationClassPropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
+	public @NonNull String createInvocationClassPropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		int index = QVTbaseUtil.getTypedModelIndex(typedModel);
 		String name = QVTrelationUtil.getName(variable);
 		return TRACE_INVOCATION_PROPERTY_NAME_PREFIX + index + name;
@@ -113,8 +113,8 @@ public class QVTrelationNameGenerator extends NameGenerator
 			s.append(role);
 		}
 		for (@NonNull RelationDomain domain : QVTrelationUtil.getOwnedDomains(rule)) {
-			TypedModel typedModel = QVTrelationUtil.getTypedModel(domain);
-			if (qvtuConfiguration.isOutput(typedModel)) {
+			TypedModel typedModel = domain.getTypedModel();
+			if ((typedModel != null) && qvtuConfiguration.isOutput(typedModel)) {
 				s.append("_");
 				s.append(PivotUtil.getName(typedModel));
 			}
@@ -126,7 +126,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 		return TRACE_TRACE_CLASS_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 
-	public @NonNull String createTraceClassPropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
+	public @NonNull String createTraceClassPropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		int index = QVTbaseUtil.getTypedModelIndex(typedModel);
 		String name = QVTrelationUtil.getName(variable);
 		return TRACE_TRACE_PROPERTY_NAME_PREFIX + index  + name;
@@ -146,7 +146,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 		return TRACE_INTERFACE_CLASS_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 
-	public @NonNull String createTraceInterfacePropertyName(@NonNull TypedModel typedModel, @NonNull VariableDeclaration variable) {
+	public @NonNull String createTraceInterfacePropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable) {
 		int index = QVTbaseUtil.getTypedModelIndex(typedModel);
 		String name = QVTrelationUtil.getName(variable);
 		return TRACE_INTERFACE_PROPERTY_NAME_PREFIX + index + name;

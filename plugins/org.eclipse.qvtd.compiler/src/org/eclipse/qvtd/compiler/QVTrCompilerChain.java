@@ -98,6 +98,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				QVTruntimeUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + txURI + "'");
 			}
 			checkForProxyURIs(qvtrResource);
+			qvtrResource.setSaveable(true);			// By default *.qvtras is a derived not-saveable Resource see Bug 535842
 			saveResource(qvtrResource);
 			return qvtrResource;
 		}

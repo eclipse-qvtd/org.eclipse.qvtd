@@ -35,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
@@ -159,7 +158,8 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 
 	@Override
 	public boolean isInput(@NonNull Domain domain) {
-		return qvtuConfiguration.isInput(QVTrelationUtil.getTypedModel(domain));
+		TypedModel typedModel = domain.getTypedModel();
+		return (typedModel != null) && qvtuConfiguration.isInput(typedModel);
 	}
 
 	@Override
@@ -169,7 +169,8 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 
 	@Override
 	public boolean isOutput(@NonNull Domain domain) {
-		return qvtuConfiguration.isOutput(QVTrelationUtil.getTypedModel(domain));
+		TypedModel typedModel = domain.getTypedModel();
+		return (typedModel != null) && qvtuConfiguration.isOutput(typedModel);
 	}
 
 	@Override

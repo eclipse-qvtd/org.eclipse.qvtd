@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2MiddleType;
@@ -25,7 +26,7 @@ public class OverrideableVariableDeclaration2TraceProperty extends VariableDecla
 	/**
 	 * The typed model within which the variable's reference is located.
 	 */
-	private final @NonNull TypedModel typedModel;
+	private final @Nullable TypedModel typedModel;
 
 	/**
 	 * True if there is known to be at most one instance of the trace class for each value of the trace variable.
@@ -33,7 +34,7 @@ public class OverrideableVariableDeclaration2TraceProperty extends VariableDecla
 	 */
 	private final boolean unitOpposite;
 
-	public OverrideableVariableDeclaration2TraceProperty(@NonNull RuleAnalysis2MiddleType relation2middleType, @NonNull String nameHint, @NonNull TypedModel typedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
+	public OverrideableVariableDeclaration2TraceProperty(@NonNull RuleAnalysis2MiddleType relation2middleType, @NonNull String nameHint, @Nullable TypedModel typedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
 		super(relation2middleType, nameHint, variable);
 		this.typedModel = typedModel;
 		this.unitOpposite = unitOpposite;
@@ -59,7 +60,7 @@ public class OverrideableVariableDeclaration2TraceProperty extends VariableDecla
 	}
 
 	@Override
-	public @NonNull TypedModel getTypedModel() {
+	public @Nullable TypedModel getTypedModel() {
 		return typedModel;
 	}
 

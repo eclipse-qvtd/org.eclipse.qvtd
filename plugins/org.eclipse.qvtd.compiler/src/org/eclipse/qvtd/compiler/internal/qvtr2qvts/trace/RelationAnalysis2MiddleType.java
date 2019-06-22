@@ -30,7 +30,7 @@ public interface RelationAnalysis2MiddleType extends RuleAnalysis2MiddleType
 	@Nullable Element2MiddleProperty basicGetRelation2LocalSuccessProperty();
 	@Nullable Relation2ResultProperty basicGetRelation2ResultProperty();
 	@Nullable VariableDeclaration2TraceProperty basicGetVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable);
-	void createRootVariableDeclaration2TraceProperty(@NonNull TypedModel rTypedModel, @NonNull VariableDeclaration rVariable, boolean manyTraces);
+	void createRootVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration rVariable, boolean manyTraces);
 	@Override
 	@NonNull Relation getRule();
 	@Override
