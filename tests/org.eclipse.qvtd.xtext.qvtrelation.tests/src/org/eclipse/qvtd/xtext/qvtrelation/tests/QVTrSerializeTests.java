@@ -147,6 +147,13 @@ public class QVTrSerializeTests extends LoadTestCase
 		super.setUp();
 	}
 
+	/**
+	 * FIXME Bug 510503, Bug 548543 the reserialized *.qvtr uses the 'wrong' Boolean.
+	 *
+	public void testQVTrSerialize_ATL2QVTr() throws Exception {
+		doSerializeRoundTripFromCS(getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr"), null);
+	} */
+
 	public void testQVTrSerialize_ClassModelToClassModel() throws Exception {
 		doSerializeRoundTripFromCS(getModelsURI("classmodel2classmodel/ClassModelToClassModel.qvtr"), null);
 	}
