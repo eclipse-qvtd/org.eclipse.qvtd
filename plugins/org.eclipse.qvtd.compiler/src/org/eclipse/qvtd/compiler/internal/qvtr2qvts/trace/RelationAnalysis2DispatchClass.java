@@ -97,7 +97,7 @@ public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2Mid
 		//
 		analyzeRootTemplateVariables(headNodeGroups);
 		//
-		//	One trace dispatch property per non-abstract relation in the overrode hierarchy.
+		//	One trace dispatch property per non-abstract relation in the override hierarchy.
 		//
 		assert relation.getOverridden() == null;
 		assert !relation.getOverrides().isEmpty();

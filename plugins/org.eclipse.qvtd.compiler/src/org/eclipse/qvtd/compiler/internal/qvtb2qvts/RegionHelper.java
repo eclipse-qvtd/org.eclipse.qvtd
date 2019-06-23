@@ -802,4 +802,11 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
 	}
+
+	@SuppressWarnings("null")
+	@Override
+	public String toString() {
+		@Nullable R region2 = region;
+		return region2 != null ? region2.toString() : super.toString();
+	}
 }

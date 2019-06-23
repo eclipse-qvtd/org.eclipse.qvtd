@@ -298,11 +298,13 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			//
 			//	First create all the pattern variable nodes.
 			//
+			//	if (!rIn.isIsAbstract() || !rIn.isIsTopLevel()) {
 			for (@NonNull VariableDeclaration vIn : QVTrelationUtil.getOwnedVariables(rIn)) {
-				//				if (!QVTrelationUtil.isTraceClassVariable(vIn)) {
-				relationAnalysis.synthesizeVariableDeclaration(vIn);
-				//				}
+				if (!QVTrelationUtil.isTraceClassVariable(vIn)) {
+					relationAnalysis.synthesizeVariableDeclaration(vIn);
+				}
 			}
+			//	}
 			acceptAll(QVTrelationUtil.getOwnedVariables(rIn));		// FIXME does nothing, reuse as earlier traversal
 			//
 			//	Then join up those that have pattern relationships.
