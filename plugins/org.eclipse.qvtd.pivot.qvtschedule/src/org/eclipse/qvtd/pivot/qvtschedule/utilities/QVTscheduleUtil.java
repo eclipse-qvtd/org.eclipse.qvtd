@@ -358,11 +358,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(nameable.getName());
 	}
 
-	public static @NonNull String getName(@NonNull ClassDatum classDatum) {
-		return String.valueOf(classDatum);
-		//		return classDatum.getReferredTypedModel().getName() + "!" + classDatum.getCompleteClass().getPrimaryClass().toString();
-	}
-
 	public static @NonNull Role getNodeRole(@NonNull Node node) {
 		return ClassUtil.nonNullState(node.getNodeRole());
 	}
