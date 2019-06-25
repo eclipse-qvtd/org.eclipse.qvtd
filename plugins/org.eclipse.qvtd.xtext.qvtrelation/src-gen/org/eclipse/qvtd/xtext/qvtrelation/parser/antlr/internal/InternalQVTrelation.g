@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 Willink Transformations and others.
+ * Copyright (c) 2011, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -379,15 +379,15 @@ ruleCollectionTemplateCS returns [EObject current=null]
 	    }
 
 )
-)	otherlv_3='{'
+)(	otherlv_3='{'
     {
-    	newLeafNode(otherlv_3, grammarAccess.getCollectionTemplateCSAccess().getLeftCurlyBracketKeyword_3());
+    	newLeafNode(otherlv_3, grammarAccess.getCollectionTemplateCSAccess().getLeftCurlyBracketKeyword_3_0());
     }
 ((
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersTemplateCSParserRuleCall_4_0_0_0());
+	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersTemplateCSParserRuleCall_3_1_0_0_0());
 	    }
 		lv_ownedMemberIdentifiers_4_1=ruleTemplateCS		{
 	        if ($current==null) {
@@ -402,7 +402,7 @@ ruleCollectionTemplateCS returns [EObject current=null]
 	    }
 
     |		{
-	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_0_0_1());
+	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_3_1_0_0_1());
 	    }
 		lv_ownedMemberIdentifiers_4_2=ruleElementTemplateCS		{
 	        if ($current==null) {
@@ -421,13 +421,13 @@ ruleCollectionTemplateCS returns [EObject current=null]
 )
 )(	otherlv_5=','
     {
-    	newLeafNode(otherlv_5, grammarAccess.getCollectionTemplateCSAccess().getCommaKeyword_4_1_0());
+    	newLeafNode(otherlv_5, grammarAccess.getCollectionTemplateCSAccess().getCommaKeyword_3_1_1_0());
     }
 (
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersTemplateCSParserRuleCall_4_1_1_0_0());
+	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersTemplateCSParserRuleCall_3_1_1_1_0_0());
 	    }
 		lv_ownedMemberIdentifiers_6_1=ruleTemplateCS		{
 	        if ($current==null) {
@@ -442,7 +442,7 @@ ruleCollectionTemplateCS returns [EObject current=null]
 	    }
 
     |		{
-	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_1_1_0_1());
+	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_3_1_1_1_0_1());
 	    }
 		lv_ownedMemberIdentifiers_6_2=ruleElementTemplateCS		{
 	        if ($current==null) {
@@ -461,12 +461,12 @@ ruleCollectionTemplateCS returns [EObject current=null]
 )
 ))*	otherlv_7='++'
     {
-    	newLeafNode(otherlv_7, grammarAccess.getCollectionTemplateCSAccess().getPlusSignPlusSignKeyword_4_2());
+    	newLeafNode(otherlv_7, grammarAccess.getCollectionTemplateCSAccess().getPlusSignPlusSignKeyword_3_1_2());
     }
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedRestIdentifierElementTemplateCSParserRuleCall_4_3_0());
+	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedRestIdentifierElementTemplateCSParserRuleCall_3_1_3_0());
 	    }
 		lv_ownedRestIdentifier_8_0=ruleElementTemplateCS		{
 	        if ($current==null) {
@@ -483,9 +483,9 @@ ruleCollectionTemplateCS returns [EObject current=null]
 )
 ))?	otherlv_9='}'
     {
-    	newLeafNode(otherlv_9, grammarAccess.getCollectionTemplateCSAccess().getRightCurlyBracketKeyword_5());
+    	newLeafNode(otherlv_9, grammarAccess.getCollectionTemplateCSAccess().getRightCurlyBracketKeyword_3_2());
     }
-)
+)?)
 ;
 
 
@@ -1175,14 +1175,14 @@ ruleObjectTemplateCS returns [EObject current=null]
 	    }
 
 )
-)	otherlv_3='{'
+)(	otherlv_3='{'
     {
-    	newLeafNode(otherlv_3, grammarAccess.getObjectTemplateCSAccess().getLeftCurlyBracketKeyword_3());
+    	newLeafNode(otherlv_3, grammarAccess.getObjectTemplateCSAccess().getLeftCurlyBracketKeyword_3_0());
     }
 ((
 (
 		{
-	        newCompositeNode(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_0_0());
+	        newCompositeNode(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_3_1_0_0());
 	    }
 		lv_ownedPropertyTemplates_4_0=rulePropertyTemplateCS		{
 	        if ($current==null) {
@@ -1199,12 +1199,12 @@ ruleObjectTemplateCS returns [EObject current=null]
 )
 )(	otherlv_5=','
     {
-    	newLeafNode(otherlv_5, grammarAccess.getObjectTemplateCSAccess().getCommaKeyword_4_1_0());
+    	newLeafNode(otherlv_5, grammarAccess.getObjectTemplateCSAccess().getCommaKeyword_3_1_1_0());
     }
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_1_1_0());
+	        newCompositeNode(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_3_1_1_1_0());
 	    }
 		lv_ownedPropertyTemplates_6_0=rulePropertyTemplateCS		{
 	        if ($current==null) {
@@ -1221,9 +1221,9 @@ ruleObjectTemplateCS returns [EObject current=null]
 )
 ))*)?	otherlv_7='}'
     {
-    	newLeafNode(otherlv_7, grammarAccess.getObjectTemplateCSAccess().getRightCurlyBracketKeyword_5());
+    	newLeafNode(otherlv_7, grammarAccess.getObjectTemplateCSAccess().getRightCurlyBracketKeyword_3_2());
     }
-)
+)?)
 ;
 
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 Willink Transformations and others.
+ * Copyright (c) 2011, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -189,32 +189,33 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cOwnedTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedTypeCollectionTypeCSParserRuleCall_2_0 = (RuleCall)cOwnedTypeAssignment_2.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Assignment cOwnedMemberIdentifiersAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
-		private final Alternatives cOwnedMemberIdentifiersAlternatives_4_0_0 = (Alternatives)cOwnedMemberIdentifiersAssignment_4_0.eContents().get(0);
-		private final RuleCall cOwnedMemberIdentifiersTemplateCSParserRuleCall_4_0_0_0 = (RuleCall)cOwnedMemberIdentifiersAlternatives_4_0_0.eContents().get(0);
-		private final RuleCall cOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_0_0_1 = (RuleCall)cOwnedMemberIdentifiersAlternatives_4_0_0.eContents().get(1);
-		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
-		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Assignment cOwnedMemberIdentifiersAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
-		private final Alternatives cOwnedMemberIdentifiersAlternatives_4_1_1_0 = (Alternatives)cOwnedMemberIdentifiersAssignment_4_1_1.eContents().get(0);
-		private final RuleCall cOwnedMemberIdentifiersTemplateCSParserRuleCall_4_1_1_0_0 = (RuleCall)cOwnedMemberIdentifiersAlternatives_4_1_1_0.eContents().get(0);
-		private final RuleCall cOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_1_1_0_1 = (RuleCall)cOwnedMemberIdentifiersAlternatives_4_1_1_0.eContents().get(1);
-		private final Keyword cPlusSignPlusSignKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Assignment cOwnedRestIdentifierAssignment_4_3 = (Assignment)cGroup_4.eContents().get(3);
-		private final RuleCall cOwnedRestIdentifierElementTemplateCSParserRuleCall_4_3_0 = (RuleCall)cOwnedRestIdentifierAssignment_4_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Assignment cOwnedMemberIdentifiersAssignment_3_1_0 = (Assignment)cGroup_3_1.eContents().get(0);
+		private final Alternatives cOwnedMemberIdentifiersAlternatives_3_1_0_0 = (Alternatives)cOwnedMemberIdentifiersAssignment_3_1_0.eContents().get(0);
+		private final RuleCall cOwnedMemberIdentifiersTemplateCSParserRuleCall_3_1_0_0_0 = (RuleCall)cOwnedMemberIdentifiersAlternatives_3_1_0_0.eContents().get(0);
+		private final RuleCall cOwnedMemberIdentifiersElementTemplateCSParserRuleCall_3_1_0_0_1 = (RuleCall)cOwnedMemberIdentifiersAlternatives_3_1_0_0.eContents().get(1);
+		private final Group cGroup_3_1_1 = (Group)cGroup_3_1.eContents().get(1);
+		private final Keyword cCommaKeyword_3_1_1_0 = (Keyword)cGroup_3_1_1.eContents().get(0);
+		private final Assignment cOwnedMemberIdentifiersAssignment_3_1_1_1 = (Assignment)cGroup_3_1_1.eContents().get(1);
+		private final Alternatives cOwnedMemberIdentifiersAlternatives_3_1_1_1_0 = (Alternatives)cOwnedMemberIdentifiersAssignment_3_1_1_1.eContents().get(0);
+		private final RuleCall cOwnedMemberIdentifiersTemplateCSParserRuleCall_3_1_1_1_0_0 = (RuleCall)cOwnedMemberIdentifiersAlternatives_3_1_1_1_0.eContents().get(0);
+		private final RuleCall cOwnedMemberIdentifiersElementTemplateCSParserRuleCall_3_1_1_1_0_1 = (RuleCall)cOwnedMemberIdentifiersAlternatives_3_1_1_1_0.eContents().get(1);
+		private final Keyword cPlusSignPlusSignKeyword_3_1_2 = (Keyword)cGroup_3_1.eContents().get(2);
+		private final Assignment cOwnedRestIdentifierAssignment_3_1_3 = (Assignment)cGroup_3_1.eContents().get(3);
+		private final RuleCall cOwnedRestIdentifierElementTemplateCSParserRuleCall_3_1_3_0 = (RuleCall)cOwnedRestIdentifierAssignment_3_1_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 
 		////UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
 		//
 		//CollectionTemplateCS:
-		//	name=UnrestrictedName? ':' ownedType=CollectionTypeCS '{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
-		//	(',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* '++' ownedRestIdentifier=ElementTemplateCS)? '}';
+		//	name=UnrestrictedName? ':' ownedType=CollectionTypeCS ('{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
+		//	(',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* '++' ownedRestIdentifier=ElementTemplateCS)? '}')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=UnrestrictedName? ':' ownedType=CollectionTypeCS '{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS) (','
-		//ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* '++' ownedRestIdentifier=ElementTemplateCS)? '}'
+		//name=UnrestrictedName? ':' ownedType=CollectionTypeCS ('{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
+		//(',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* '++' ownedRestIdentifier=ElementTemplateCS)? '}')?
 		public Group getGroup() { return cGroup; }
 
 		//name=UnrestrictedName?
@@ -232,54 +233,58 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//CollectionTypeCS
 		public RuleCall getOwnedTypeCollectionTypeCSParserRuleCall_2_0() { return cOwnedTypeCollectionTypeCSParserRuleCall_2_0; }
 
+		//('{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS) (',' ownedMemberIdentifiers+=(TemplateCS |
+		//ElementTemplateCS))* '++' ownedRestIdentifier=ElementTemplateCS)? '}')?
+		public Group getGroup_3() { return cGroup_3; }
+
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 
 		//(ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS) (',' ownedMemberIdentifiers+=(TemplateCS |
 		//ElementTemplateCS))* '++' ownedRestIdentifier=ElementTemplateCS)?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
-		public Assignment getOwnedMemberIdentifiersAssignment_4_0() { return cOwnedMemberIdentifiersAssignment_4_0; }
+		public Assignment getOwnedMemberIdentifiersAssignment_3_1_0() { return cOwnedMemberIdentifiersAssignment_3_1_0; }
 
 		//(TemplateCS | ElementTemplateCS)
-		public Alternatives getOwnedMemberIdentifiersAlternatives_4_0_0() { return cOwnedMemberIdentifiersAlternatives_4_0_0; }
+		public Alternatives getOwnedMemberIdentifiersAlternatives_3_1_0_0() { return cOwnedMemberIdentifiersAlternatives_3_1_0_0; }
 
 		//TemplateCS
-		public RuleCall getOwnedMemberIdentifiersTemplateCSParserRuleCall_4_0_0_0() { return cOwnedMemberIdentifiersTemplateCSParserRuleCall_4_0_0_0; }
+		public RuleCall getOwnedMemberIdentifiersTemplateCSParserRuleCall_3_1_0_0_0() { return cOwnedMemberIdentifiersTemplateCSParserRuleCall_3_1_0_0_0; }
 
 		//ElementTemplateCS
-		public RuleCall getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_0_0_1() { return cOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_0_0_1; }
+		public RuleCall getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_3_1_0_0_1() { return cOwnedMemberIdentifiersElementTemplateCSParserRuleCall_3_1_0_0_1; }
 
 		//(',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))*
-		public Group getGroup_4_1() { return cGroup_4_1; }
+		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
 
 		//','
-		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
+		public Keyword getCommaKeyword_3_1_1_0() { return cCommaKeyword_3_1_1_0; }
 
 		//ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
-		public Assignment getOwnedMemberIdentifiersAssignment_4_1_1() { return cOwnedMemberIdentifiersAssignment_4_1_1; }
+		public Assignment getOwnedMemberIdentifiersAssignment_3_1_1_1() { return cOwnedMemberIdentifiersAssignment_3_1_1_1; }
 
 		//(TemplateCS | ElementTemplateCS)
-		public Alternatives getOwnedMemberIdentifiersAlternatives_4_1_1_0() { return cOwnedMemberIdentifiersAlternatives_4_1_1_0; }
+		public Alternatives getOwnedMemberIdentifiersAlternatives_3_1_1_1_0() { return cOwnedMemberIdentifiersAlternatives_3_1_1_1_0; }
 
 		//TemplateCS
-		public RuleCall getOwnedMemberIdentifiersTemplateCSParserRuleCall_4_1_1_0_0() { return cOwnedMemberIdentifiersTemplateCSParserRuleCall_4_1_1_0_0; }
+		public RuleCall getOwnedMemberIdentifiersTemplateCSParserRuleCall_3_1_1_1_0_0() { return cOwnedMemberIdentifiersTemplateCSParserRuleCall_3_1_1_1_0_0; }
 
 		//ElementTemplateCS
-		public RuleCall getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_1_1_0_1() { return cOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_1_1_0_1; }
+		public RuleCall getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_3_1_1_1_0_1() { return cOwnedMemberIdentifiersElementTemplateCSParserRuleCall_3_1_1_1_0_1; }
 
 		//'++'
-		public Keyword getPlusSignPlusSignKeyword_4_2() { return cPlusSignPlusSignKeyword_4_2; }
+		public Keyword getPlusSignPlusSignKeyword_3_1_2() { return cPlusSignPlusSignKeyword_3_1_2; }
 
 		//ownedRestIdentifier=ElementTemplateCS
-		public Assignment getOwnedRestIdentifierAssignment_4_3() { return cOwnedRestIdentifierAssignment_4_3; }
+		public Assignment getOwnedRestIdentifierAssignment_3_1_3() { return cOwnedRestIdentifierAssignment_3_1_3; }
 
 		//ElementTemplateCS
-		public RuleCall getOwnedRestIdentifierElementTemplateCSParserRuleCall_4_3_0() { return cOwnedRestIdentifierElementTemplateCSParserRuleCall_4_3_0; }
+		public RuleCall getOwnedRestIdentifierElementTemplateCSParserRuleCall_3_1_3_0() { return cOwnedRestIdentifierElementTemplateCSParserRuleCall_3_1_3_0; }
 
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
 
 	public class DefaultValueCSElements extends AbstractParserRuleElementFinder {
@@ -752,23 +757,24 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cOwnedTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedTypeTypedRefCSParserRuleCall_2_0 = (RuleCall)cOwnedTypeAssignment_2.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Assignment cOwnedPropertyTemplatesAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
-		private final RuleCall cOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_0_0 = (RuleCall)cOwnedPropertyTemplatesAssignment_4_0.eContents().get(0);
-		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
-		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Assignment cOwnedPropertyTemplatesAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
-		private final RuleCall cOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_1_1_0 = (RuleCall)cOwnedPropertyTemplatesAssignment_4_1_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Assignment cOwnedPropertyTemplatesAssignment_3_1_0 = (Assignment)cGroup_3_1.eContents().get(0);
+		private final RuleCall cOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_3_1_0_0 = (RuleCall)cOwnedPropertyTemplatesAssignment_3_1_0.eContents().get(0);
+		private final Group cGroup_3_1_1 = (Group)cGroup_3_1.eContents().get(1);
+		private final Keyword cCommaKeyword_3_1_1_0 = (Keyword)cGroup_3_1_1.eContents().get(0);
+		private final Assignment cOwnedPropertyTemplatesAssignment_3_1_1_1 = (Assignment)cGroup_3_1_1.eContents().get(1);
+		private final RuleCall cOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_3_1_1_1_0 = (RuleCall)cOwnedPropertyTemplatesAssignment_3_1_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 
 		//ObjectTemplateCS:
-		//	name=UnrestrictedName? ':' ownedType=TypedRefCS '{' (ownedPropertyTemplates+=PropertyTemplateCS (','
-		//	ownedPropertyTemplates+=PropertyTemplateCS)*)? '}';
+		//	name=UnrestrictedName? ':' ownedType=TypedRefCS ('{' (ownedPropertyTemplates+=PropertyTemplateCS (','
+		//	ownedPropertyTemplates+=PropertyTemplateCS)*)? '}')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=UnrestrictedName? ':' ownedType=TypedRefCS '{' (ownedPropertyTemplates+=PropertyTemplateCS (','
-		//ownedPropertyTemplates+=PropertyTemplateCS)*)? '}'
+		//name=UnrestrictedName? ':' ownedType=TypedRefCS ('{' (ownedPropertyTemplates+=PropertyTemplateCS (','
+		//ownedPropertyTemplates+=PropertyTemplateCS)*)? '}')?
 		public Group getGroup() { return cGroup; }
 
 		//name=UnrestrictedName?
@@ -786,32 +792,35 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//TypedRefCS
 		public RuleCall getOwnedTypeTypedRefCSParserRuleCall_2_0() { return cOwnedTypeTypedRefCSParserRuleCall_2_0; }
 
+		//('{' (ownedPropertyTemplates+=PropertyTemplateCS (',' ownedPropertyTemplates+=PropertyTemplateCS)*)? '}')?
+		public Group getGroup_3() { return cGroup_3; }
+
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 
 		//(ownedPropertyTemplates+=PropertyTemplateCS (',' ownedPropertyTemplates+=PropertyTemplateCS)*)?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//ownedPropertyTemplates+=PropertyTemplateCS
-		public Assignment getOwnedPropertyTemplatesAssignment_4_0() { return cOwnedPropertyTemplatesAssignment_4_0; }
+		public Assignment getOwnedPropertyTemplatesAssignment_3_1_0() { return cOwnedPropertyTemplatesAssignment_3_1_0; }
 
 		//PropertyTemplateCS
-		public RuleCall getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_0_0() { return cOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_0_0; }
+		public RuleCall getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_3_1_0_0() { return cOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_3_1_0_0; }
 
 		//(',' ownedPropertyTemplates+=PropertyTemplateCS)*
-		public Group getGroup_4_1() { return cGroup_4_1; }
+		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
 
 		//','
-		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
+		public Keyword getCommaKeyword_3_1_1_0() { return cCommaKeyword_3_1_1_0; }
 
 		//ownedPropertyTemplates+=PropertyTemplateCS
-		public Assignment getOwnedPropertyTemplatesAssignment_4_1_1() { return cOwnedPropertyTemplatesAssignment_4_1_1; }
+		public Assignment getOwnedPropertyTemplatesAssignment_3_1_1_1() { return cOwnedPropertyTemplatesAssignment_3_1_1_1; }
 
 		//PropertyTemplateCS
-		public RuleCall getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_1_1_0() { return cOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_1_1_0; }
+		public RuleCall getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_3_1_1_1_0() { return cOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_3_1_1_1_0; }
 
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
 
 	public class ParamDeclarationCSElements extends AbstractParserRuleElementFinder {
@@ -2109,8 +2118,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	////UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
 	//
 	//CollectionTemplateCS:
-	//	name=UnrestrictedName? ':' ownedType=CollectionTypeCS '{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
-	//	(',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* '++' ownedRestIdentifier=ElementTemplateCS)? '}';
+	//	name=UnrestrictedName? ':' ownedType=CollectionTypeCS ('{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
+	//	(',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* '++' ownedRestIdentifier=ElementTemplateCS)? '}')?;
 	public CollectionTemplateCSElements getCollectionTemplateCSAccess() {
 		return pCollectionTemplateCS;
 	}
@@ -2187,8 +2196,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ObjectTemplateCS:
-	//	name=UnrestrictedName? ':' ownedType=TypedRefCS '{' (ownedPropertyTemplates+=PropertyTemplateCS (','
-	//	ownedPropertyTemplates+=PropertyTemplateCS)*)? '}';
+	//	name=UnrestrictedName? ':' ownedType=TypedRefCS ('{' (ownedPropertyTemplates+=PropertyTemplateCS (','
+	//	ownedPropertyTemplates+=PropertyTemplateCS)*)? '}')?;
 	public ObjectTemplateCSElements getObjectTemplateCSAccess() {
 		return pObjectTemplateCS;
 	}

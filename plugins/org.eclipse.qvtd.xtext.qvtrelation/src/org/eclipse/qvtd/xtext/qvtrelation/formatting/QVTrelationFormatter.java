@@ -80,11 +80,11 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 
 		{
 			CollectionTemplateCSElements a = f.getCollectionTemplateCSAccess();
-			c.setLinewrap(1).before(a.getOwnedMemberIdentifiersAssignment_4_0());
-			c.setLinewrap(1).before(a.getOwnedMemberIdentifiersAssignment_4_1_1());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
-			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
-			c.setNoSpace().before(a.getCommaKeyword_4_1_0());
+			c.setLinewrap(1).before(a.getOwnedMemberIdentifiersAssignment_3_1_0());
+			c.setLinewrap(1).before(a.getOwnedMemberIdentifiersAssignment_3_1_1_1());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3_0(), a.getRightCurlyBracketKeyword_3_2());
+			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3_0(), a.getRightCurlyBracketKeyword_3_2());
+			c.setNoSpace().before(a.getCommaKeyword_3_1_1_0());
 			//			c.setLinewrap(0).before(a.getPlusSignPlusSignKeyword_4_2());
 		}
 		{
@@ -118,12 +118,12 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			ObjectTemplateCSElements a = f.getObjectTemplateCSAccess();
-			c.setLinewrap(1).before(a.getOwnedPropertyTemplatesAssignment_4_0());
-			c.setLinewrap(1).before(a.getOwnedPropertyTemplatesAssignment_4_1_1());
+			c.setLinewrap(1).before(a.getOwnedPropertyTemplatesAssignment_3_1_0());
+			c.setLinewrap(1).before(a.getOwnedPropertyTemplatesAssignment_3_1_1_1());
 			//			c.setNoSpace().before(a.getLeftCurlyBracketKeyword_3());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
-			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
-			c.setNoSpace().before(a.getCommaKeyword_4_1_0());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3_0(), a.getRightCurlyBracketKeyword_3_2());
+			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3_0(), a.getRightCurlyBracketKeyword_3_2());
+			c.setNoSpace().before(a.getCommaKeyword_3_1_1_0());
 		}
 		{
 			PredicateCSElements a = f.getPredicateCSAccess();
