@@ -47,11 +47,11 @@ public abstract class AbstractQVTb2QVTs extends PivotHelper
 	}
 
 	public void addPartitionError(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
-		addProblem(CompilerUtil.createPartitionError(partition, messageTemplate, bindings));
+		CompilerUtil.addPartitionError(problemHandler, partition, messageTemplate, bindings);
 	}
 
 	public void addPartitionWarning(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
-		addProblem(CompilerUtil.createPartitionWarning(partition, messageTemplate, bindings));
+		CompilerUtil.addPartitionWarning(problemHandler, partition, messageTemplate, bindings);
 	}
 
 	public void addProblem(@NonNull CompilerProblem problem) {
@@ -59,11 +59,11 @@ public abstract class AbstractQVTb2QVTs extends PivotHelper
 	}
 
 	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		addProblem(CompilerUtil.createRegionError(region, messageTemplate, bindings));
+		CompilerUtil.addRegionError(problemHandler, region, messageTemplate, bindings);
 	}
 
 	public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
+		CompilerUtil.addRegionWarning(problemHandler, region, messageTemplate, bindings);
 	}
 
 	public @NonNull ScheduleManager getScheduleManager() {

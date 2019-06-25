@@ -59,6 +59,8 @@ import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectionProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.PartitionProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionProblem;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
@@ -71,6 +73,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalys
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -96,6 +99,36 @@ public class CompilerUtil extends QVTscheduleUtil
 		defaultSavingOptions.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 		defaultSavingOptions.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
 
+	}
+
+	public static void addConnectionError(@NonNull ProblemHandler problemHandler, @NonNull Connection connection, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		problemHandler.addProblem(new ConnectionProblem(CompilerProblem.Severity.ERROR, connection, boundMessage));
+	}
+
+	public static void addConnectionWarning(@NonNull ProblemHandler problemHandler, @NonNull Connection connection, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		problemHandler.addProblem(new ConnectionProblem(CompilerProblem.Severity.WARNING, connection, boundMessage));
+	}
+
+	public static void addPartitionError(@NonNull ProblemHandler problemHandler, @NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		problemHandler.addProblem(new PartitionProblem(CompilerProblem.Severity.ERROR, partition, boundMessage));
+	}
+
+	public static void addPartitionWarning(@NonNull ProblemHandler problemHandler, @NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		problemHandler.addProblem(new PartitionProblem(CompilerProblem.Severity.WARNING, partition, boundMessage));
+	}
+
+	public static void addRegionError(@NonNull ProblemHandler problemHandler, @NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		problemHandler.addProblem(new RegionProblem(CompilerProblem.Severity.ERROR, region, boundMessage));
+	}
+
+	public static void addRegionWarning(@NonNull ProblemHandler problemHandler, @NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		problemHandler.addProblem(new RegionProblem(CompilerProblem.Severity.WARNING, region, boundMessage));
 	}
 
 	/**
@@ -512,26 +545,6 @@ public class CompilerUtil extends QVTscheduleUtil
 			tracePredecessorsAndSuccessors(transitiveSuccessorTraceOption, producer2consumersClosure);
 		}
 		return producer2consumersClosure;
-	}
-
-	public static @NonNull PartitionProblem createPartitionError(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
-		String boundMessage = StringUtil.bind(messageTemplate, bindings);
-		return new PartitionProblem(CompilerProblem.Severity.ERROR, partition, boundMessage);
-	}
-
-	public static @NonNull PartitionProblem createPartitionWarning(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
-		String boundMessage = StringUtil.bind(messageTemplate, bindings);
-		return new PartitionProblem(CompilerProblem.Severity.WARNING, partition, boundMessage);
-	}
-
-	public static @NonNull RegionProblem createRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		String boundMessage = StringUtil.bind(messageTemplate, bindings);
-		return new RegionProblem(CompilerProblem.Severity.ERROR, region, boundMessage);
-	}
-
-	public static @NonNull RegionProblem createRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		String boundMessage = StringUtil.bind(messageTemplate, bindings);
-		return new RegionProblem(CompilerProblem.Severity.WARNING, region, boundMessage);
 	}
 
 	public static @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> gatherPartitionAnalyses(@NonNull CompositePartitionAnalysis rootPartitionAnalysis, @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> allPartitionAnalyses) {

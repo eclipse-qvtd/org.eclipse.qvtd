@@ -126,7 +126,7 @@ public class CyclicPartitionsAnalysis extends AbstractCyclicPartialRegionsAnalys
 				Set<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> predecessors = leafPartitionAnalysis2predecessors.get(leafPartitionAnalysis);
 				assert predecessors != null;
 				if (predecessors.isEmpty()) {
-					partitionedTransformationAnalysis.getScheduleManager().addPartitionError(partition, "has no predecessors");
+					CompilerUtil.addPartitionError(partitionedTransformationAnalysis.getScheduleManager().getProblemHandler(), partition, "has no predecessors");
 				}
 			}
 		}

@@ -28,6 +28,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -438,7 +439,7 @@ public class ConnectionManager
 		List<@NonNull NodeConnection> headConnections = null;
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
 		if (Iterables.isEmpty(region.getHeadNodes())) {
-			scheduleManager.addRegionError(region, "No head nodes");
+			CompilerUtil.addRegionError(getProblemHandler(), region, "No head nodes");
 		}
 		for (@NonNull Node headNode : headNodes) {
 			if (headNode.isDependency()) {
@@ -447,7 +448,7 @@ public class ConnectionManager
 			else {
 				NodeConnection headConnection = createHeadConnection(s, rootRegion, region, headNode);
 				if (headConnection == null) {
-					scheduleManager.addRegionError(region, "No incoming connections for " + headNode.getName());
+					CompilerUtil.addRegionError(getProblemHandler(), region, "No incoming connections for " + headNode.getName());
 					headConnection = createHeadConnection(s, rootRegion, region, headNode);	// FIXME debugging
 					return null;										//  so matching only fails for unmatchable real heads
 				}
@@ -462,7 +463,7 @@ public class ConnectionManager
 			}
 		}
 		if (headConnections == null) {
-			scheduleManager.addRegionError(region, "No incoming connections");
+			CompilerUtil.addRegionError(getProblemHandler(), region, "No incoming connections");
 		}
 		return headConnections;
 	}
@@ -894,6 +895,10 @@ public class ConnectionManager
 			}
 		}
 		return connections;
+	}
+
+	public @NonNull ProblemHandler getProblemHandler() {
+		return scheduleManager.getProblemHandler();
 	}
 
 	public @NonNull ScheduleManager getScheduleManager() {

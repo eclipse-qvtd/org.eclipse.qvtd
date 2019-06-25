@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.UtilityAnalysis;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
@@ -694,7 +695,7 @@ public class MappingAnalysis extends RuleAnalysis
 					if (isEnforceable) {
 						//						assert variable instanceof RealizedVariable;
 						if (!(variable instanceof RealizedVariable)) {
-							scheduleManager.addRegionError(region, "Enforceable variable ''{0}'' has not been realized in ''{1}''", variable, region);
+							CompilerUtil.addRegionError(getProblemHandler(), region, "Enforceable variable ''{0}'' has not been realized in ''{1}''", variable, region);
 						}
 						node = createRealizedStepNode(variable);
 					}

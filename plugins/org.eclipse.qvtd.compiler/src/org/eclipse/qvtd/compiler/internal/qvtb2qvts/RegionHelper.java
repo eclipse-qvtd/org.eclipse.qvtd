@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
@@ -788,6 +789,10 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 			default: throw new UnsupportedOperationException();
 		}
 		return phase;
+	}
+
+	public @NonNull ProblemHandler getProblemHandler() {
+		return scheduleManager.getProblemHandler();
 	}
 
 	public @NonNull R getRegion() {

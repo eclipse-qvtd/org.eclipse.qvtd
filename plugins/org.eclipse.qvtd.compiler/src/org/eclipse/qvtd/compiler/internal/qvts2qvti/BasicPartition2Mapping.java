@@ -1587,7 +1587,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					headNodes.add(bestHeadNode);
 				}
 				else {
-					visitor.addProblem(CompilerUtil.createPartitionError(partition, "No best head"));
+					CompilerUtil.addPartitionError(visitor.getProblemHandler(), partition, "No best head");
 				}
 			}
 		}

@@ -428,6 +428,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		assert region2mapping != null : "No AbstractRegion2Mapping for " + mergedPartition;
 		return region2mapping;
 	}
+	
+	public @NonNull ProblemHandler getProblemHandler() {
+		return problemHandler;
+	}
 
 	public @NonNull Set<@NonNull String> getReservedNames() {
 		Set<@NonNull String> reservedNames2 = reservedNames;

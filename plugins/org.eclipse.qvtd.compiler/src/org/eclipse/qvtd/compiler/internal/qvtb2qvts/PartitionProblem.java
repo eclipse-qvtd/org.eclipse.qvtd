@@ -27,6 +27,6 @@ public class PartitionProblem extends AbstractCompilerProblem
 
 	@Override
 	public @NonNull String toString() {
-		return "PartitionProblem for " + partition.toString() + "\n\t" + boundMessage;
+		return "Partition " + severity + " for " + partition.toString() + "\n\t" + boundMessage;
 	}
 }

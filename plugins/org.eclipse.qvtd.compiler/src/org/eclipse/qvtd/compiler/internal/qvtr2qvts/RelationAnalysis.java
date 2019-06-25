@@ -43,6 +43,7 @@ import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.VariableDeclaration2TraceProperty;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.DispatchClass2TraceProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2ResultProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2DispatchClass;
@@ -1147,13 +1148,13 @@ public class RelationAnalysis extends RuleAnalysis
 		OCLExpression valueExp = QVTrelationUtil.getValueExp(relationDomainAssignment);
 		Node variableNode = region.getNode(variable);
 		if (variableNode != null) {
-			scheduleManager.addRegionWarning(region, "Conflicting default assignment " + relationDomainAssignment);
+			CompilerUtil.addRegionWarning(getProblemHandler(), region, "Conflicting default assignment " + relationDomainAssignment);
 		}
 		else if (!(variable instanceof SharedVariable)) {
-			scheduleManager.addRegionError(region, "Non-SharedVariable for " + relationDomainAssignment);
+			CompilerUtil.addRegionError(getProblemHandler(), region, "Non-SharedVariable for " + relationDomainAssignment);
 		}
 		else if (variable.getOwnedInit() != null) {
-			scheduleManager.addRegionError(region, "Default assignment for initialized variable: " + relationDomainAssignment);
+			CompilerUtil.addRegionError(getProblemHandler(), region, "Default assignment for initialized variable: " + relationDomainAssignment);
 		}
 		else {
 			variableNode = getReferenceNodeForSharedVariable((SharedVariable)variable, valueExp);

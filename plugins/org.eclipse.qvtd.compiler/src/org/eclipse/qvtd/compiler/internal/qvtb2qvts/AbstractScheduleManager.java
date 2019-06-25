@@ -260,28 +260,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public void addPartitionError(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
-		problemHandler.addProblem(CompilerUtil.createPartitionError(partition, messageTemplate, bindings));
-	}
-
-	@Override
-	public void addPartitionWarning(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
-		problemHandler.addProblem(CompilerUtil.createPartitionWarning(partition, messageTemplate, bindings));
-	}
-
-	@Override
 	public void addProblem(@NonNull CompilerProblem problem) {
 		problemHandler.addProblem(problem);
-	}
-
-	@Override
-	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		problemHandler.addProblem(CompilerUtil.createRegionError(region, messageTemplate, bindings));
-	}
-
-	@Override
-	public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		problemHandler.addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
 	}
 
 	@Override
@@ -871,6 +851,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public @NonNull OriginalContentsAnalysis getOriginalContentsAnalysis() {
 		return ClassUtil.nonNullState(originalContentsAnalysis);
+	}
+
+	@Override
+	public @NonNull ProblemHandler getProblemHandler() {
+		return problemHandler;
 	}
 
 	@Override

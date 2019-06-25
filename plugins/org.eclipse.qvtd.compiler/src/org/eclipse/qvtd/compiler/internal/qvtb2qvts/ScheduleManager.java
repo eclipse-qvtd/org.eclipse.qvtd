@@ -44,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -57,11 +56,11 @@ import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
 public interface ScheduleManager
 {
 	void addMappingRegion(@NonNull MappingRegion mappingRegion);
-	void addPartitionError(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings);
-	void addPartitionWarning(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings);
+	//	void addPartitionError(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings);
+	//	void addPartitionWarning(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings);
 	void addProblem(@NonNull CompilerProblem problem);
-	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
-	void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
+	//	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
+	//	void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 
 	/**
 	 * Define an additional/only Transformation to be scheduled by the subsequent anayses and syntheses.
@@ -128,6 +127,7 @@ public interface ScheduleManager
 	 */
 	@NonNull OriginalContentsAnalysis getOriginalContentsAnalysis();
 
+	@NonNull ProblemHandler getProblemHandler();
 	@NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property);
 	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge edge);
 	@NonNull QVTruntimeLibraryHelper getQVTruntimeLibraryHelper();

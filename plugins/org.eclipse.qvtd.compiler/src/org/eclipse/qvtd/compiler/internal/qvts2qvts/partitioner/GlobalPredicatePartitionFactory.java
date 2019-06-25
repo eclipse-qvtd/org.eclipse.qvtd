@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -268,14 +269,14 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 				addNode(partition, localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 			}
 			else {
-				scheduleManager.addPartitionError(partition, "Missing localSuccess");
+				CompilerUtil.addPartitionError(getProblemHandler(), partition, "Missing localSuccess");
 			}
 			Node globalSuccessNode = mappingPartitioner.basicGetGlobalSuccessNode(traceNode);
 			if (globalSuccessNode != null) {
 				addNode(partition, globalSuccessNode, Role.REALIZED);
 			}
 			else {
-				scheduleManager.addPartitionError(partition, "Missing globalSuccess");
+				CompilerUtil.addPartitionError(getProblemHandler(), partition, "Missing globalSuccess");
 			}
 		}
 		//	Iterable<@NonNull Edge> fallibleEdges = isInfallible ? regionAnalysis.getFallibleEdges() : null;

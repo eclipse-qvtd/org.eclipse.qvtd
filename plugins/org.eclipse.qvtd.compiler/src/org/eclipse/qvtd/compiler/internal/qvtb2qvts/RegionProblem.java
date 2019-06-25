@@ -27,6 +27,6 @@ public class RegionProblem extends AbstractCompilerProblem
 
 	@Override
 	public @NonNull String toString() {
-		return "RegionProblem for " + region.toString() + "\n\t" + boundMessage;
+		return "Region " + severity + " for " + region.toString() + "\n\t" + boundMessage;
 	}
 }

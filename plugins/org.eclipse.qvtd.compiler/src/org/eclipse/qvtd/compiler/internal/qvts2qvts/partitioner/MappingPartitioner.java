@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
@@ -157,10 +157,6 @@ public class MappingPartitioner implements Nameable
 		partitions.add(partition);
 	}
 
-	public void addProblem(@NonNull CompilerProblem problem) {
-		scheduleManager.addProblem(problem);
-	}
-
 	public boolean addRealizedNode(@NonNull Node node) {
 		return alreadyRealizedNodes.add(node);
 	}
@@ -199,7 +195,7 @@ public class MappingPartitioner implements Nameable
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if (((node.isSpeculated() && !node.isHead()) || node.isRealized()) && !hasRealizedNode(node)) {
 				//	if ((infallibleNodes == null) || !infallibleNodes.contains(node)) {
-				addProblem(CompilerUtil.createRegionError(region, "Should have realized " + node));
+				CompilerUtil.addRegionError(getProblemHandler(), region, "Should have realized " + node);
 				//	}
 			}
 		}
@@ -209,7 +205,7 @@ public class MappingPartitioner implements Nameable
 				allPrimaryEdges.add(edge);
 				if (edge.isRealized() && !hasRealizedEdge(edge) && !edge.isExpression()) {
 					//	if ((infallibleEdges == null) || !infallibleEdges.contains(edge)) {
-					addProblem(CompilerUtil.createRegionError(region, "Should have realized " + edge));
+					CompilerUtil.addRegionError(getProblemHandler(), region, "Should have realized " + edge);
 					//	}
 				}
 			}
@@ -226,14 +222,14 @@ public class MappingPartitioner implements Nameable
 				if (!edge.isSecondary()) {
 					@SuppressWarnings("unused")
 					List<@NonNull BasicPartition> extraPartitions = debugEdge2partitions.get(edge);
-					addProblem(CompilerUtil.createRegionWarning(region, "Extra " + edge));
+					CompilerUtil.addRegionWarning(getProblemHandler(), region, "Extra " + edge);
 				}
 			}
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
 				if (!(edge instanceof NavigationEdge) || (transformationAnalysis.getCorollaryOf((NavigationEdge)edge) == null)) {// && !isDead(edge)) {
-					addProblem(CompilerUtil.createRegionWarning(region, "Missing " + edge));
+					CompilerUtil.addRegionWarning(getProblemHandler(), region, "Missing " + edge);
 				}
 			}
 		}
@@ -382,6 +378,10 @@ public class MappingPartitioner implements Nameable
 			}
 		}
 		return predicatedWhenNodes;
+	}
+
+	public @NonNull ProblemHandler getProblemHandler() {
+		return scheduleManager.getProblemHandler();
 	}
 
 	//	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> getProducedClassAnalyses() {

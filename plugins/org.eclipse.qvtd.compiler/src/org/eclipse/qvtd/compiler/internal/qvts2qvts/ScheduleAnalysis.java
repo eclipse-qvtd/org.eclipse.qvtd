@@ -435,8 +435,11 @@ public class ScheduleAnalysis
 
 	protected @NonNull Iterable<@NonNull Partition> getTargetPartitions(@NonNull Connection connection) {
 		List<@NonNull Partition> targetPartitions = connection2targetPartitions.get(connection);
-		assert targetPartitions != null;
-		return targetPartitions;
+		if (targetPartitions != null) {
+			return targetPartitions;
+		}
+		CompilerUtil.addConnectionWarning(scheduleManager.getProblemHandler(), connection, "No outputs");
+		return Collections.emptyList();
 	}
 
 	private void propagatePassNumbers(@NonNull Partition sourcePartition, @NonNull Set<@NonNull Connection> changedConnections) {
