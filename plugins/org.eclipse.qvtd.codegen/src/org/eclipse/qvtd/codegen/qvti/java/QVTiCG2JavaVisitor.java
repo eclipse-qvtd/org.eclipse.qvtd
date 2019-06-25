@@ -1396,7 +1396,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 									js.append("\\\"dispatcher." + name + "\\\":\"");
 									js.append(" + toDebugString(");
 									js.append(getValueName(cgGuardVariable));
-									js.append(".getDispatcher().get" + Character.toUpperCase(name.charAt(0)) + name.substring(1) + "())");
+									String prefix = dispatcherProperty.getTypeId() == TypeId.BOOLEAN ? "is" : "get";		// FIXME Use GenModel
+									js.append(".getDispatcher()." + prefix + Character.toUpperCase(name.charAt(0)) + name.substring(1) + "())");
 
 								}
 							}
