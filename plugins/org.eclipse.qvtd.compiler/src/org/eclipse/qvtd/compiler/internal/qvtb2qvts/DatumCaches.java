@@ -134,7 +134,7 @@ public class DatumCaches
 		org.eclipse.ocl.pivot.@NonNull Class aType = completeClass.getPrimaryClass();
 		Type elementType = QVTbaseUtil.getElementalType(aType);
 		if (elementType instanceof DataType) {
-			assert typedModel == domainUsageAnalysis.getPrimitiveTypeModel();
+			//	assert typedModel == domainUsageAnalysis.getPrimitiveTypeModel();
 		}
 		else {
 			assert typedModel != null;
