@@ -232,10 +232,63 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 		--		mapEClassifier(eType, asType);
 		--	}
 		}
+		relation mapEClassifier_Bag overrides mapEClassifier_Collection {
+			enforce domain ecore eType : EClassifier, isOrdered : Boolean, isUnique : Boolean;
+			enforce domain as asCollection: BagType {
+				ownedBindings = asBinding : TemplateBinding {
+					ownedSubstitutions = asSubstitution : TemplateParameterSubstitution {
+						actual = asType : Type,
+						formal = pivotMM::Bag::T 
+					}
+				}
+			};
+			when {
+				not isOrdered;
+				not isUnique;
+				mapEClassifier(eType, asType);
+			}
+		}
+		relation mapEClassifier_OrderedSet overrides mapEClassifier_Collection {
+			enforce domain ecore eType : EClassifier, isOrdered : Boolean, isUnique : Boolean;
+			enforce domain as asCollection: OrderedSetType {
+				ownedBindings = asBinding : TemplateBinding {
+					ownedSubstitutions = asSubstitution : TemplateParameterSubstitution {
+						actual = asType : Type,
+						formal = pivotMM::OrderedSet::T 
+					}
+				}
+			};
+			when {
+				isOrdered;
+				isUnique;
+				mapEClassifier(eType, asType);
+			}
+		}
+		relation mapEClassifier_Sequence overrides mapEClassifier_Collection {
+			enforce domain ecore eType : EClassifier, isOrdered : Boolean, isUnique : Boolean;
+			enforce domain as asCollection: SequenceType {
+				ownedBindings = asBinding : TemplateBinding {
+					ownedSubstitutions = asSubstitution : TemplateParameterSubstitution {
+						actual = asType : Type,
+						formal = pivotMM::Sequence::T 
+					}
+				}
+			};
+			when {
+				isOrdered;
+				not isUnique;
+				mapEClassifier(eType, asType);
+			}
+		}
 		relation mapEClassifier_Set overrides mapEClassifier_Collection {
 			enforce domain ecore eType : EClassifier, isOrdered : Boolean, isUnique : Boolean;
 			enforce domain as asCollection: SetType {
-				elementType = asType : Type
+				ownedBindings = asBinding : TemplateBinding {
+					ownedSubstitutions = asSubstitution : TemplateParameterSubstitution {
+						actual = asType : Type,
+						formal = pivotMM::Set::T 
+					}
+				}
 			};
 			when {
 				not isOrdered;

@@ -100,6 +100,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IfNode;
@@ -1418,11 +1419,12 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private void createAddStatements() {
 		if (connection2variable != null) {
 			for (@NonNull NodeConnection connection : connection2variable.keySet()) {
-				Node sourceNode = connection.getSource(partition);
-				OCLExpression variableExpression = createVariableExp(sourceNode);
-				ConnectionVariable connectionVariable = connection2variable.get(connection);
-				assert connectionVariable != null;
-				createAddStatement(connectionVariable, variableExpression);
+				for (@NonNull ConnectionEnd sourceNode : connection.getSources(partition)) {
+					OCLExpression variableExpression = createVariableExp((Node)sourceNode);
+					ConnectionVariable connectionVariable = connection2variable.get(connection);
+					assert connectionVariable != null;
+					createAddStatement(connectionVariable, variableExpression);
+				}
 			}
 		}
 	}

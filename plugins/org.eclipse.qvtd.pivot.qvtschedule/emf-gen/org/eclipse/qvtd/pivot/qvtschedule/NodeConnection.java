@@ -101,7 +101,7 @@ public interface NodeConnection extends Connection
 	void addUsedTargetNode(@NonNull Node targetNode, boolean mustBeLater);
 	@Nullable Node basicGetSource(@NonNull Partition sourcePartition);
 	@Override
-	@NonNull Node getSource(@NonNull Partition sourcePartition);
+	@NonNull Iterable<@NonNull ConnectionEnd> getSources(@NonNull Partition sourcePartition);
 	@NonNull Type getSourcesType(@NonNull IdResolver idResolver);
 	@Override
 	@NonNull Set<@NonNull Node> getTargetNodes();

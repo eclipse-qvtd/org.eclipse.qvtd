@@ -32,10 +32,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
+import com.google.common.collect.Iterables;
 
 public abstract class AbstractRootRegion2Mapping extends AbstractPartition2Mapping
 {
@@ -64,7 +67,9 @@ public abstract class AbstractRootRegion2Mapping extends AbstractPartition2Mappi
 						connectionExpression = PivotUtil.createVariableExp(connectionVariable);
 					}
 					else {
-						Node callingNode = callingConnection.getSource(partition);
+						Iterable<@NonNull ConnectionEnd> callingNodes = callingConnection.getSources(partition);
+						assert Iterables.size(callingNodes) == 1;				// FIXME > 1 ??
+						Node callingNode = (Node) callingNodes.iterator().next();
 						connectionExpression = createSelectByKind(callingNode);
 					}
 				}

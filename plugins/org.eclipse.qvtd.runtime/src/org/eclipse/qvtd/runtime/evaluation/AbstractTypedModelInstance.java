@@ -401,12 +401,15 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 					rootEObjects.add((EObject)object);
 				}
 			}
-		}
-		if (!hasExtent) {
-			for (@NonNull EObject rootObject : rootEObjects2) {
+			else {
 				rootEObjects.add(rootObject);
 			}
 		}
+		//	if (!hasExtent) {
+		//		for (@NonNull EObject rootObject : rootEObjects2) {
+		//			rootEObjects.add(rootObject);
+		//		}
+		//	}
 		return rootEObjects;
 	}
 

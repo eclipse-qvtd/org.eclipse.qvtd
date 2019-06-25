@@ -198,7 +198,7 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	int getFirstPass();
 	int getLastPass();
 	@NonNull List<@NonNull Integer> getPasses();
-	@NonNull ConnectionEnd getSource(@NonNull Partition sourcePartition);
+	@NonNull Iterable<@NonNull ConnectionEnd> getSources(@NonNull Partition sourcePartition);
 	@NonNull Iterable<@NonNull Node> getSourceNodes();
 	@NonNull Iterable<@NonNull Partition> getSourcePartitions();
 	@NonNull Iterable<@NonNull ConnectionEnd> getTargetConnectionEnds(@NonNull Partition targetPartition);

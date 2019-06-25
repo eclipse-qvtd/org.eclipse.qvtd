@@ -258,7 +258,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getClassDatum();
-				return basicGetClassDatum();
+			return basicGetClassDatum();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getMandatoryTargetNodes();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
@@ -280,19 +280,19 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setClassDatum((ClassDatum)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetNodes().clear();
-				getMandatoryTargetNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getMandatoryTargetNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPassedTargetNodes().clear();
-				getPassedTargetNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getPassedTargetNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				getPreferredTargetNodes().clear();
-				getPreferredTargetNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getPreferredTargetNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -307,16 +307,16 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setClassDatum((ClassDatum)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetNodes().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPassedTargetNodes().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				getPreferredTargetNodes().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -427,10 +427,10 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		super.destroy();
 	}
 
-	@Override
-	public @NonNull Node getSource(@NonNull Partition sourcePartition) {
-		return (Node) super.getSource(sourcePartition);
-	}
+	//	@Override
+	//	public @NonNull Iterable<@NonNull Node> getSources(@NonNull Partition sourcePartition) {
+	//		return (Iterable<@NonNull Node>) super.getSources(sourcePartition);
+	//	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getSourceNodes() {

@@ -611,21 +611,6 @@ public class QVTrCompilerTests extends LoadTestCase
 	public void testQVTrCompiler_Ecore2Pivot() throws Exception {
 		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
-		Class<? extends Transformer> txClass1 = null;
-		URI txURI1 = getModelsURI("ecore2pivot/Ecore2Pivot.qvtr");
-		MyQVT myQVT1 = createQVT("Ecore2Pivot", txURI1);
-		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
-		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
-		//		ProjectManager projectManager = myQVT1.getProjectManager();
-		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-			assert classLoader != null;
-			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
-			txClass1 = myQVT1.buildTransformation("as", false);
-		}
-		finally {
-			myQVT1.dispose();
-		}
 		URI ecoreURI = getModelsURI("ecore2pivot/Families.ecore");
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
 		ProjectManager testProjectManager = getTestProjectManager();
@@ -747,23 +732,6 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_Ecore2PivotRoot() throws Exception {
-		/*	QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
-		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
-		Class<? extends Transformer> txClass1 = null;
-		URI txURI1 = getModelsURI("ecore2pivot/Ecore2Pivot.qvtr");
-		MyQVT myQVT1 = createQVT("Ecore2Pivot", txURI1);
-		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
-		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
-		ProjectManager projectManager = myQVT1.getProjectManager();
-		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-			assert classLoader != null;
-			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
-			txClass1 = myQVT1.buildTransformation("as", false);
-		}
-		finally {
-			myQVT1.dispose();
-		} */
 		URI ecoreURI = getModelsURI("ecore2pivotRoot/Families.ecore");
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
 		ProjectManager testProjectManager = getTestProjectManager();

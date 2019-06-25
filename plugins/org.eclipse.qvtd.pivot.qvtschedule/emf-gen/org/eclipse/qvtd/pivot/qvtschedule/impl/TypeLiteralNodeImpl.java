@@ -142,7 +142,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getTypeValue();
-				return basicGetTypeValue();
+			return basicGetTypeValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,7 +157,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setTypeValue((Type)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -172,7 +172,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setTypeValue((Type)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -207,4 +207,9 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 		node.setTypeValue(typeValue);
 		return node;
 	}
+
+	//	@Override		-- FIXME we shouldn't need a variable but SetStatement synthesis does
+	//	public boolean isPrimitive() {
+	//		return true;
+	//	}
 } //TypeLiteralNodeImpl

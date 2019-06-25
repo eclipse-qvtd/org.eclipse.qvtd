@@ -371,7 +371,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
+			return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -426,7 +426,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				return getIntermediatePartitions();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getCommonPartition();
-				return basicGetCommonPartition();
+			return basicGetCommonPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -442,27 +442,27 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName((String)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setOwningRootRegion((RootRegion)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setConnectionRole((ConnectionRole)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setName((String)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				getSourceEnds().clear();
-				getSourceEnds().addAll((Collection<? extends ConnectionEnd>)newValue);
-				return;
+			getSourceEnds().addAll((Collection<? extends ConnectionEnd>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				getIntermediatePartitions().clear();
-				getIntermediatePartitions().addAll((Collection<? extends Partition>)newValue);
-				return;
+			getIntermediatePartitions().addAll((Collection<? extends Partition>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setCommonPartition((Partition)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -477,25 +477,25 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName(SYMBOL_NAME_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setOwningRootRegion((RootRegion)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setConnectionRole(CONNECTION_ROLE_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setName(NAME_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				getSourceEnds().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				getIntermediatePartitions().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setCommonPartition((Partition)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -692,21 +692,20 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	}
 
 	@Override
-	public @NonNull ConnectionEnd getSource(@NonNull Partition sourcePartition) {
-		@Nullable ConnectionEnd theSourceEnd = null;
+	public @NonNull Iterable<@NonNull ConnectionEnd> getSources(@NonNull Partition sourcePartition) {
+		List<@NonNull ConnectionEnd> theSourceEnds = new ArrayList<>();
 		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
 			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
 			Iterable<@NonNull MappingPartition> sourceRegionPartitions = QVTscheduleUtil.getRegionPartitions(sourceRegion);
 			if (Iterables.contains(sourceRegionPartitions, sourcePartition)) {
 				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
 				if ((sourceRole != null) && !sourceRole.isChecked()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
-					assert theSourceEnd == null;
-					theSourceEnd = sourceEnd;
+					theSourceEnds.add(sourceEnd);
 				}
 			}
 		}
-		assert theSourceEnd != null;
-		return theSourceEnd;
+		assert !theSourceEnds.isEmpty();
+		return theSourceEnds;
 	}
 
 	@Override
