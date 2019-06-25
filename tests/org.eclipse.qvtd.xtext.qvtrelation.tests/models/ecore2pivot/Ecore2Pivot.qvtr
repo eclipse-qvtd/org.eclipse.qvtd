@@ -28,7 +28,7 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 			eClass : ecoreMM::EClass;
 			asClass : pivotMM::Class;
 			name : String;
-			/*enforce*/ domain ecore eAttribute : EAttribute {
+			enforce domain ecore eAttribute : EAttribute {
 				eContainingClass = eClass,
 				name = name
 			};
@@ -39,18 +39,21 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 			when {
 				mapEClass(eClass, asClass);
 			}
+			where {
+				mapETypedElement_type(eAttribute, asProperty);
+			}
 		}
 		
 		/**
 		 *  ecore::EClass <=> pivot::Class
 		 */
-		top relation mapEClass {
+		top relation mapEClass overrides mapEClassifier {
 			ePackage : ecoreMM::EPackage;
 			asPackage : pivotMM::Package;
 			name : String;
 			isAbstract : Boolean;
 			isInterface : Boolean;
-			/*enforce*/ domain ecore eClass : EClass {
+			enforce domain ecore eClass : EClass {
 				ePackage = ePackage,
 				name = name,
 				abstract = isAbstract,
@@ -68,21 +71,49 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 		}
 		
 		/**
+		 *  ecore::EClassifier <=> pivot::Type
+		 */
+		top abstract relation mapEClassifier {
+			enforce domain ecore eClassifier : EClassifier;
+			enforce domain as asType : Type;
+		}
+		
+		/**
+		 *  ecore::EDataType <=> pivot::DataType
+		 */
+		top relation mapEDataType overrides mapEClassifier {
+			ePackage : ecoreMM::EPackage;
+			asPackage : pivotMM::Package;
+			name : String;
+			enforce domain ecore eDataType : EDataType {
+				ePackage = ePackage,
+				name = name
+			};
+			enforce domain as asDataType : DataType {
+				owningPackage = asPackage,
+				name = name
+			};
+			when {
+				mapEPackage(ePackage, asPackage);
+			}
+		}
+		
+		/**
 		 *  ecore::EPackage <=> pivot::Package
 		 */
 		top relation mapEPackage {
 			name : String;
 			nsPrefix : String;
 			nsURI : String;
-			/*enforce*/ domain ecore ePackage : EPackage {
+			enforce domain ecore ePackage : EPackage {
 				eSuperPackage = null,
-				extent = eExtent : extentMM::qvtruntimelibrary::Extent{},
+				extent = eExtent : extentMM::qvtruntimelibrary::Extent,
 				name = name,
 				nsPrefix = nsPrefix,
 				nsURI = nsURI
 			};
 			enforce domain as asPackage : Package {
-				Model = asModel : pivotMM::Model{},
+				Model = asModel : pivotMM::Model,
 				name = name,
 				nsPrefix = nsPrefix,
 				URI = nsURI
@@ -99,24 +130,133 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 			eClass : ecoreMM::EClass;
 			asClass : pivotMM::Class;
 			name : String;
-			/*enforce*/ domain ecore eReference : EReference {
+			isComposite : Boolean;
+			enforce domain ecore eReference : EReference {
 				eContainingClass = eClass,
-				name = name
+				name = name,
+				containment = isComposite
 			};
 			enforce domain as asProperty : Property {
 				owningClass = asClass,
-				name = name
+				name = name,
+				isComposite = isComposite
 			};
 			when {
 				mapEClass(eClass, asClass);
 			}
+			where {
+				mapETypedElement_type(eReference, asProperty);
+			}
+		}
+
+		/**
+		 *  ecore::EReference <=> pivot::Property
+		 */
+		top relation mapEReference_implicitOpposite {
+			eTargetClass : ecoreMM::EClass;
+			eContainingClass : ecoreMM::EClass;
+			asContainingClass : pivotMM::Class;
+			asOpposite : pivotMM::Property;
+			asTargetType : pivotMM::Class;
+			name : String;
+			enforce domain ecore eReference : EReference {
+				eContainingClass = eContainingClass,
+				eType = eTargetClass,
+				eOpposite = null
+			};
+			enforce domain as asProperty : Property {
+				owningClass = asContainingClass,
+				type = asTargetType,
+				name = asTargetType.name,
+				isImplicit = true,
+				opposite = asOpposite
+			};
+			when {
+				mapEClass(eTargetClass, asContainingClass);
+				mapEClass(eContainingClass, asTargetType);
+				mapEReference(eReference, asOpposite);
+			}
+		--	where {
+		--		mapETypedElement_type(eReference, asProperty);
+		--	}
 		}
 		
 		top relation mapEResource {
-			/*enforce*/ domain ecore eExtent : extentMM::qvtruntimelibrary::Extent {};
+			enforce domain ecore eExtent : extentMM::qvtruntimelibrary::Extent;
 			enforce domain as asModel : pivotMM::Model {
-				extent = asExtent : extentMM::qvtruntimelibrary::Extent {}
+				extent = asExtent : extentMM::qvtruntimelibrary::Extent
 			};
 		}
+
+		/**
+		 *  ecore::ETypedElement.type <=> pivot::TypedElement.type
+		 */
+		abstract relation mapETypedElement_type {
+			enforce domain ecore eTypedElement : ETypedElement;
+			enforce domain as asTypedElement: TypedElement;
+		}
+		relation mapETypedElement_type_unit overrides mapETypedElement_type {
+			enforce domain ecore eTypedElement : ETypedElement {
+				eType = eType : EClassifier
+			} { eTypedElement.upperBound = 1};
+			enforce domain as asTypedElement: TypedElement {
+				type = asType : Type
+			};
+			when {
+				mapEClassifier(eType, asType);
+			}
+		}
+		relation mapETypedElement_type_collection overrides mapETypedElement_type {
+			isOrdered : Boolean;
+			isUnique : Boolean;
+			asCollection : pivotMM::CollectionType;
+			enforce domain ecore eTypedElement : ETypedElement {
+				eType = eType : EClassifier,
+				_'ordered' = isOrdered,
+				_'unique' = isUnique
+			} { eTypedElement.upperBound > 1};
+			enforce domain as asTypedElement: TypedElement {
+				type = asCollection
+			};
+			when {
+			--	mapEClassifier(eType, asType);
+				mapEClassifier_Collection(eType, isOrdered, isUnique, asCollection);
+			}
+		}
+		abstract relation mapEClassifier_Collection {
+			enforce domain ecore eType : EClassifier, isOrdered : Boolean, isUnique : Boolean;
+			enforce domain as asCollection: CollectionType {
+		--		elementType = asType : Type
+			};
+		--	when {
+		--		mapEClassifier(eType, asType);
+		--	}
+		}
+		relation mapEClassifier_Set overrides mapEClassifier_Collection {
+			enforce domain ecore eType : EClassifier, isOrdered : Boolean, isUnique : Boolean;
+			enforce domain as asCollection: SetType {
+				elementType = asType : Type
+			};
+			when {
+				not isOrdered;
+				isUnique;
+				mapEClassifier(eType, asType);
+			}
+		}
+	/*	relation map2SetType {
+			/*enforce* / domain ecore eTypedElement : ETypedElement {
+				eType = eType : EClassifier
+			} { eTypedElement.upperBound > 1};
+			enforce domain as asSet : pivotMM::SetType {
+				ownedBindings = asBinding : pivotMM::TemplateBinding {
+					ownedSubstitutions = asSubstitution : pivotMM::TemplateParameterSubstitution {
+						actual = asType : pivotMM::Type
+					}	
+				}
+			};
+			when {
+				mapEClassifier(eType, asType);
+			}
+		} */
 	}
 }

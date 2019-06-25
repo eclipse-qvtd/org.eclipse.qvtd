@@ -609,14 +609,14 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_Ecore2Pivot() throws Exception {
-		/*	QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
+		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
 		Class<? extends Transformer> txClass1 = null;
 		URI txURI1 = getModelsURI("ecore2pivot/Ecore2Pivot.qvtr");
 		MyQVT myQVT1 = createQVT("Ecore2Pivot", txURI1);
 		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
-		ProjectManager projectManager = myQVT1.getProjectManager();
+		//		ProjectManager projectManager = myQVT1.getProjectManager();
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
@@ -647,7 +647,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			ocl.dispose();
 		}
 		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("ecore2pivot/Ecore2Pivot.qvtr"));
-		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		//	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		URI asURI2 = getTestURI("Families.ecore.oclas");
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("as");
@@ -657,16 +657,17 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("as", asURI2);
 			myQVT.saveModels(null);
-			myQVT.checkOutput(asURI2, asURI2a, null); //Forward2ReverseNormalizer.INSTANCE);
+			myQVT.checkOutput(asURI2, asURI2a, PivotNormalizer.INSTANCE);
+			//			myQVT.checkOutput(asURI2, asURI2a, DummyPivotExternalURINormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
-		} */
+		}
 	}
 
 	@Test
 	public void testQVTrCompiler_Ecore2Pivot_CG() throws Exception {
-		/*	//	StandaloneProjectMap.addTrace(EcorePackage.eNS_URI, ~0);
+		//	StandaloneProjectMap.addTrace(EcorePackage.eNS_URI, ~0);
 		//	StandaloneProjectMap.addTrace(OCLstdlibPackage.eNS_URI, ~0);
 		//	StandaloneProjectMap.addTrace(PivotPackage.eNS_URI, ~0);
 		//		Splitter.GROUPS.setState(true);
@@ -736,11 +737,12 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.executeTransformation();
 			myQVT2.addOutputURI("as", asURI2);
 			myQVT2.saveModels(null);
-			myQVT2.checkOutput(asURI2, asURI2a, null);
+			myQVT2.checkOutput(asURI2, asURI2a, PivotNormalizer.INSTANCE);
+			//			myQVT2.checkOutput(asURI2, asURI2a, DummyPivotExternalURINormalizer.INSTANCE);
 		}
 		finally {
 			myQVT2.dispose();
-		} */
+		}
 	}
 
 	@Test
