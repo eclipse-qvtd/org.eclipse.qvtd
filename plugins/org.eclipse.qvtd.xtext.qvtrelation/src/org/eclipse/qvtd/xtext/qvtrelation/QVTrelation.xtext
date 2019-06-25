@@ -36,10 +36,10 @@ QualifiedPackageCS returns qvtbasecs::QualifiedPackageCS:
 //UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
 	
 CollectionTemplateCS: name=UnrestrictedName? ':' ownedType=CollectionTypeCS
-	'{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
+	('{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
 	    (',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))*
         '++' ownedRestIdentifier=ElementTemplateCS
-         )? '}';
+         )? '}')?;
 
 DefaultValueCS: propertyId=[qvtrelation::SharedVariable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
 
@@ -66,7 +66,7 @@ ModelDeclCS: name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|Unrestri
 	('uses' dependsOn+=[qvtbase::TypedModel|UnrestrictedName] (',' dependsOn+=[qvtbase::TypedModel|UnrestrictedName])*)?;
 
 ObjectTemplateCS: name=UnrestrictedName? ':' ownedType=TypedRefCS
-	'{' (ownedPropertyTemplates+=PropertyTemplateCS (',' ownedPropertyTemplates+=PropertyTemplateCS)*)? '}';
+	('{' (ownedPropertyTemplates+=PropertyTemplateCS (',' ownedPropertyTemplates+=PropertyTemplateCS)*)? '}')?;
 
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;	
 
