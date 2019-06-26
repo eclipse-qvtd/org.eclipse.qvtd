@@ -121,6 +121,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
@@ -715,14 +716,25 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					return null;
 				}
 			}
-			if (sourceExp != null) {
-				return helper.createOperationCallExp(sourceExp, referredOperation, ClassUtil.nullFree(argExps));
+			if ((sourceExp == null) && (referredOperation instanceof Function)) {
+				StandardLibrary standardLibrary = helper.getEnvironmentFactory().getStandardLibrary();
+				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, context.getTransformation());
+				sourceExp = PivotUtil.createVariableExp(thisVariable);
 			}
-			return null;
+			//	if (referredOperation instanceof Function) {
+			//		return helper.createFunctionCallExp(sourceExp, referredOperation, ClassUtil.nullFree(argExps));
+			//	}
+			//	else {
+			return helper.createOperationCallExp(sourceExp, referredOperation, ClassUtil.nullFree(argExps));
+			//	}
 		}
 
 		protected @Nullable OCLExpression doStringLiteralNode(@NonNull StringLiteralNode node) {
 			return helper.createStringLiteralExp(ClassUtil.nonNullState(node.getStringValue()));
+		}
+
+		protected @Nullable OCLExpression doTypeLiteralNode(@NonNull TypeLiteralNode node) {
+			return helper.createTypeExp(ClassUtil.nonNullState(node.getTypeValue()));
 		}
 
 		public @Nullable OCLExpression getExpression(@NonNull Node node) {
@@ -739,17 +751,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					return PivotUtil.createVariableExp(variable);
 				}
 				if (node.isOperation()) {
-					// FIXME phase out use of originatingElement and use a Visitor now that the Node hierarchy is more relevant
-					Element originatingElement = node.basicGetOriginatingElement();
-					if (originatingElement instanceof CollectionTemplateExp) {	// The CollectionTemplateExp synthesis has already identified the necessary operations
-						OperationCallNode operationCallNode = (OperationCallNode)node;
-						Operation operation = operationCallNode.getReferredOperation();
-						return createOperationCallExp(operation.getOperationId(), operationCallNode);
-					}
-					else if (originatingElement != null) {
-						return originatingElement.accept(getInlineExpressionCreator());
-					}
-					else if (node instanceof BooleanLiteralNode) {
+					if (node instanceof BooleanLiteralNode) {
 						return doBooleanLiteralNode((BooleanLiteralNode)node);
 					}
 					else if (node instanceof IfNode) {
@@ -761,11 +763,27 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					else if (node instanceof NumericLiteralNode) {
 						return doNumericLiteralNode((NumericLiteralNode)node);
 					}
-					else if (node instanceof OperationCallNode) {
-						return doOperationCallNode((OperationCallNode)node);
-					}
 					else if (node instanceof StringLiteralNode) {
 						return doStringLiteralNode((StringLiteralNode)node);
+					}
+					else if (node instanceof TypeLiteralNode) {
+						return doTypeLiteralNode((TypeLiteralNode)node);
+					}
+					//	else if (node instanceof OperationCallNode) {		// FIXME doesn't do lazy copy of invoked queries
+					//		return doOperationCallNode((OperationCallNode)node);
+					//	}
+					// FIXME phase out use of originatingElement and use a Visitor now that the Node hierarchy is more relevant
+					Element originatingElement = node.basicGetOriginatingElement();
+					if (originatingElement instanceof CollectionTemplateExp) {	// The CollectionTemplateExp synthesis has already identified the necessary operations
+						OperationCallNode operationCallNode = (OperationCallNode)node;
+						Operation operation = operationCallNode.getReferredOperation();
+						return createOperationCallExp(operation.getOperationId(), operationCallNode);
+					}
+					else if (originatingElement != null) {
+						return originatingElement.accept(getInlineExpressionCreator());
+					}
+					else if (node instanceof OperationCallNode) {		// equals()s
+						return doOperationCallNode((OperationCallNode)node);
 					}
 					else {
 						throw new UnsupportedOperationException();
