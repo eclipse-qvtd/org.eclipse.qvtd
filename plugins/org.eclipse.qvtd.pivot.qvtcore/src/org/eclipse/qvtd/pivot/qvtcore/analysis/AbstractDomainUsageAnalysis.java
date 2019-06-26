@@ -69,6 +69,7 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ParserException;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
@@ -131,6 +132,16 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 	}
 
 	protected abstract @NonNull RootDomainUsageAnalysis getRootAnalysis();
+
+	protected @NonNull DomainUsage getTypeUsage(@NonNull Type type) {
+		DomainUsage usage = getRootAnalysis().basicGetTypeUsage(type);
+		if (usage != null) {
+			return usage;
+		}
+		else {
+			return getRootAnalysis().getPrimitiveUsage();
+		}
+	}
 
 	@Override
 	public @NonNull DomainUsage getUsage(@NonNull Element element) {
@@ -295,13 +306,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	@Override
 	public @NonNull DomainUsage visitClass(org.eclipse.ocl.pivot.@NonNull Class object) {
-		DomainUsage usage = getRootAnalysis().class2usage.get(object);
-		if (usage != null) {
-			return usage;
-		}
-		else {
-			return getRootAnalysis().getPrimitiveUsage();
-		}
+		return getTypeUsage(object);
 	}
 
 	@Override
@@ -311,7 +316,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	@Override
 	public @NonNull DomainUsage visitCollectionLiteralExp(@NonNull CollectionLiteralExp object) {
-		DomainUsage usage = visit(((CollectionType)object.getType()).getElementType());
+		CollectionType collectionType = (CollectionType)PivotUtil.getType(object);
+		DomainUsage usage = visit(PivotUtil.getElementType(collectionType));
 		//		DomainUsage usage = getRootAnalysis().getAnyUsage();
 		for (@SuppressWarnings("null")@NonNull CollectionLiteralPart part : object.getOwnedParts()) {
 			usage = intersection(usage, visit(part));
@@ -328,7 +334,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	@Override
 	public @NonNull DomainUsage visitCollectionType(@NonNull CollectionType object) {
-		return visit(object.getElementType());
+		return visit(PivotUtil.getElementType(object));
 	}
 
 	@Override
@@ -673,12 +679,20 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	@Override
 	public @NonNull DomainUsage visitType(@NonNull Type object) {
-		return getRootAnalysis().getPrimitiveUsage();
+		throw new UnsupportedOperationException();
+		//		return getRootAnalysis().getPrimitiveUsage();
 	}
 
 	@Override
 	public @NonNull DomainUsage visitTypeExp(@NonNull TypeExp object) {
-		DomainUsage usage = visit(object.getReferredType());
+		Type referredType = object.getReferredType();
+		DomainUsage usage;
+		if (referredType instanceof TemplateParameter) {
+			usage = getTypeUsage(referredType);
+		}
+		else {
+			usage = visit(referredType);
+		}
 		return getRootAnalysis().getValidOrVariableUsage(usage);
 	}
 

@@ -33,6 +33,10 @@ import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.TemplateParameter;
+import org.eclipse.ocl.pivot.TemplateSignature;
+import org.eclipse.ocl.pivot.TemplateableElement;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
@@ -285,9 +289,9 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	private DomainUsageConstant outputUsage = null;
 
 	/**
-	 * The domains in which each class may be used.
+	 * The domains in which each class or template parameter may be used.
 	 */
-	protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull DomainUsageConstant> class2usage = new HashMap<>();
+	private final @NonNull Map<@NonNull Type, @NonNull DomainUsageConstant> type2usage = new HashMap<>();
 
 	/**
 	 * The domains in which the containing class of a property may be used.
@@ -357,6 +361,25 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		return analysis;
 	}
 
+	protected void analyzeProperties() {
+		for (@NonNull Type asType : type2usage.keySet()) {
+			if (asType instanceof org.eclipse.ocl.pivot.Class) {
+				org.eclipse.ocl.pivot.Class asClass = (org.eclipse.ocl.pivot.Class)asType;
+				DomainUsage newUsage = type2usage.get(asClass);
+				assert newUsage != null;
+				for (@NonNull Property property : PivotUtil.getOwnedProperties(asClass)) {
+					property2containingClassUsage.put(property, newUsage);
+					DomainUsage referredTypeUsage = getAnnotatedUsage(property);
+					if (referredTypeUsage == null) {
+						referredTypeUsage = visit(property.getType());
+					}
+					//				System.out.println(property + " => " + referredTypeUsage);
+					//				property2referredTypeUsage.put(property, referredTypeUsage);
+				}
+			}
+		}
+	}
+
 	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
 		for (@NonNull Property dirtyProperty : dirtyProperties) {
 			if (!dirtyProperty.isIsTransient()) {
@@ -371,12 +394,20 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		}
 	}
 
+	private void analyzeTemplateSignature(@NonNull TemplateableElement asTemplateableElement, @NonNull DomainUsageConstant newUsage) {
+		TemplateSignature asSignature = asTemplateableElement.getOwnedSignature();
+		if (asSignature !=  null) {
+			for (@NonNull TemplateParameter asTemplateParameter : PivotUtil.getOwnedParameters(asSignature)) {
+				type2usage.put(asTemplateParameter, newUsage);
+			}
+		}
+	}
+
 	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {}
 
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation, @Nullable Iterable<@NonNull TypedModel> outputTypedModels) {
 		int unenforceableMask = 0;
 		int enforceableMask = 0;
-		CompleteModel completeModel = context.getCompleteModel();
 		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
 			if (typedModel == primitiveTypeModel) {
 				continue;
@@ -414,53 +445,18 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			if (ownedContext != null) {
 				setUsage(ownedContext, typedModelUsage);
 			}
-			Set<@NonNull CompleteClass> completeClasses = new HashSet<>();
-			// TODO		There is an issue with extending transformations, because just classes extended by the
-			//			the extending metamodel are tracked. Following code tries to workaround this issue. Also take into account
-			//			that pivot/ocl are filtered. This might be an issue, when the transformations involve the own pivot metamodel
-			//			(e.g. the CS2AS transformation for QVTo, Pivot-based QVTo AS extends Pivot metamodel).
-			//			Set<Package> allPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
-			//			Deque<Package> pckQueue = new LinkedList<Package>();	// To track new discovered packages
-			//			pckQueue.addAll(allPackages);
-			//			while (!pckQueue.isEmpty()) {
-			//			Package asPackage = pckQueue.pop();
-			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : QVTbaseUtil.getAllUsedPackages(typedModel)) {
-				CompletePackage completePackage = completeModel.getCompletePackage(asPackage);
-				for (@NonNull CompleteClass completeClass : ClassUtil.nullFree(completePackage.getOwnedCompleteClasses())) {
-					for (@NonNull CompleteClass superCompleteClass : completeClass.getSuperCompleteClasses()) {
-						completeClasses.add(superCompleteClass);
-					}
-				}
-			}
-			for (@NonNull CompleteClass completeClass : completeClasses) {
-				for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(completeClass.getPartialClasses())) {
-					DomainUsageConstant oldUsage = class2usage.get(asClass);
-					DomainUsageConstant classUsage = typedModelUsage;
-					if ((asClass instanceof DataType) && !(asClass instanceof CollectionType)) {	// FIXME use a visitor ? perhaps CollectionTypes are not evidence of usage
-						classUsage = getPrimitiveUsage();
-					}
-					DomainUsageConstant newUsage = oldUsage != null ? classUsage.union(oldUsage) : classUsage;
-					class2usage.put(asClass, newUsage);
-				}
-			}
+			analyzeTypedModelTypes(typedModel, typedModelUsage);
 		}
-		for (org.eclipse.ocl.pivot.@NonNull Class asClass : class2usage.keySet()) {
-			DomainUsage newUsage = class2usage.get(asClass);
-			assert newUsage != null;
-			for (@NonNull Property property : ClassUtil.nullFree(asClass.getOwnedProperties())) {
-				property2containingClassUsage.put(property, newUsage);
-				DomainUsage referredTypeUsage = getAnnotatedUsage(property);
-				if (referredTypeUsage == null) {
-					referredTypeUsage = visit(property.getType());
-				}
-				//				System.out.println(property + " => " + referredTypeUsage);
-				//				property2referredTypeUsage.put(property, referredTypeUsage);
-			}
-		}
-		class2usage.put(((StandardLibraryInternal)standardLibrary).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
-		setInputUsage(unenforceableMask);
-		setOutputUsage(enforceableMask);
-		DomainUsage middleUsage2 = setMiddleUsage(~unenforceableMask & ~enforceableMask & ~PRIMITIVE_USAGE_BIT_MASK);
+		analyzeTransformation2(transformation, unenforceableMask, enforceableMask);
+		return element2usage;
+	}
+
+	protected void analyzeTransformation2(@NonNull Transformation transformation, int inputMask, int outputMask) {
+		analyzeProperties();
+		type2usage.put(((StandardLibraryInternal)standardLibrary).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
+		setInputUsage(inputMask);
+		setOutputUsage(outputMask);
+		DomainUsage middleUsage2 = setMiddleUsage(~inputMask & ~outputMask & ~PRIMITIVE_USAGE_BIT_MASK);
 		if (traceTypedModel != null) {
 			setUsage(traceTypedModel, middleUsage2);
 		}
@@ -470,11 +466,51 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		}
 		analyzePropertyAssignments(transformation);
 		visit(transformation);
-		return element2usage;
+	}
+
+	protected void analyzeTypedModelTypes(@NonNull TypedModel typedModel, @NonNull DomainUsageConstant typedModelUsage) {
+		CompleteModel completeModel = context.getCompleteModel();
+		Set<@NonNull CompleteClass> completeClasses = new HashSet<>();
+		// TODO		There is an issue with extending transformations, because just classes extended by the
+		//			the extending metamodel are tracked. Following code tries to workaround this issue. Also take into account
+		//			that pivot/ocl are filtered. This might be an issue, when the transformations involve the own pivot metamodel
+		//			(e.g. the CS2AS transformation for QVTo, Pivot-based QVTo AS extends Pivot metamodel).
+		//			Set<Package> allPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
+		//			Deque<Package> pckQueue = new LinkedList<Package>();	// To track new discovered packages
+		//			pckQueue.addAll(allPackages);
+		//			while (!pckQueue.isEmpty()) {
+		//			Package asPackage = pckQueue.pop();
+		for (org.eclipse.ocl.pivot.@NonNull Package asPackage : QVTbaseUtil.getAllUsedPackages(typedModel)) {
+			CompletePackage completePackage = completeModel.getCompletePackage(asPackage);
+			for (@NonNull CompleteClass completeClass : ClassUtil.nullFree(completePackage.getOwnedCompleteClasses())) {
+				for (@NonNull CompleteClass superCompleteClass : completeClass.getSuperCompleteClasses()) {
+					completeClasses.add(superCompleteClass);
+				}
+			}
+		}
+		for (@NonNull CompleteClass completeClass : completeClasses) {
+			for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(completeClass.getPartialClasses())) {
+				DomainUsageConstant oldUsage = type2usage.get(asClass);
+				DomainUsageConstant classUsage = typedModelUsage;
+				if ((asClass instanceof DataType) && !(asClass instanceof CollectionType)) {	// FIXME use a visitor ? perhaps CollectionTypes are not evidence of usage
+					classUsage = getPrimitiveUsage();
+				}
+				DomainUsageConstant newUsage = oldUsage != null ? classUsage.union(oldUsage) : classUsage;
+				type2usage.put(asClass, newUsage);
+				analyzeTemplateSignature(asClass, newUsage);
+				for (@NonNull Operation asOperation : PivotUtil.getOwnedOperations(asClass)) {
+					analyzeTemplateSignature(asOperation, newUsage);
+				}
+			}
+		}
 	}
 
 	protected @Nullable TypedModel basicGetTraceTypedModel() {
 		return traceTypedModel;
+	}
+
+	protected @Nullable DomainUsage basicGetTypeUsage(@NonNull Type type) {
+		return type2usage.get(type);
 	}
 
 	@Override
