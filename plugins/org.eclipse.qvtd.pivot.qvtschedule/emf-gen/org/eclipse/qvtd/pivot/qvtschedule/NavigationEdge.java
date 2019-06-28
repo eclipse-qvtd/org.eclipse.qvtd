@@ -52,7 +52,7 @@ public interface NavigationEdge extends NavigableEdge {
 	 * @return the value of the '<em>Opposite Edge</em>' reference.
 	 * @see #setOppositeEdge(NavigationEdge)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge_OppositeEdge()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigationEdge!oppositeEdge'"
+	 * @model
 	 * @generated
 	 */
 	NavigationEdge getOppositeEdge();
@@ -79,7 +79,6 @@ public interface NavigationEdge extends NavigableEdge {
 	 * @see #setPartial(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge_Partial()
 	 * @model default="false" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigationEdge!partial'"
 	 * @generated
 	 */
 	@Override
@@ -106,7 +105,6 @@ public interface NavigationEdge extends NavigableEdge {
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge_ReferredProperty()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigationEdge!referredProperty'"
 	 * @generated
 	 */
 	Property getReferredProperty();
@@ -133,7 +131,6 @@ public interface NavigationEdge extends NavigableEdge {
 	 * @see #setSecondary(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge_Secondary()
 	 * @model default="false" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigationEdge!secondary'"
 	 * @generated
 	 */
 	@Override

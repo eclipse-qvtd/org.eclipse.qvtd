@@ -49,7 +49,6 @@ public interface CompositePartition extends Partition {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCompositePartition_OwnedMappingPartitions()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getOwningCompositePartition
 	 * @model opposite="owningCompositePartition" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CompositePartition!ownedMappingPartitions'"
 	 * @generated
 	 */
 	List<MappingPartition> getOwnedMappingPartitions();

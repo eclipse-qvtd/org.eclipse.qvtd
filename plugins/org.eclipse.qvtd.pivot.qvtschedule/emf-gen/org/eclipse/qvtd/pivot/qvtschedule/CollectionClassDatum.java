@@ -48,7 +48,6 @@ public interface CollectionClassDatum extends ClassDatum {
 	 * @see #setElementalClassDatum(ClassDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCollectionClassDatum_ElementalClassDatum()
 	 * @model required="true" transient="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CollectionClassDatum!elementalClassDatum'"
 	 * @generated
 	 */
 	ClassDatum getElementalClassDatum();

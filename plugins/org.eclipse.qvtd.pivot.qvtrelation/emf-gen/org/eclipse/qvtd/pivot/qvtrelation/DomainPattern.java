@@ -45,7 +45,6 @@ public interface DomainPattern extends Pattern {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getDomainPattern_RelationDomain()
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getPattern
 	 * @model opposite="pattern" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!DomainPattern!relationDomain'"
 	 * @generated
 	 */
 	RelationDomain getRelationDomain();
@@ -72,7 +71,6 @@ public interface DomainPattern extends Pattern {
 	 * @see #setTemplateExpression(TemplateExp)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getDomainPattern_TemplateExpression()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!DomainPattern!templateExpression'"
 	 * @generated
 	 */
 	TemplateExp getTemplateExpression();

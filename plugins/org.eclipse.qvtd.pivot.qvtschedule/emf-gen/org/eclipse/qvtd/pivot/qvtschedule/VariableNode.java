@@ -48,7 +48,6 @@ public interface VariableNode extends MappingNode {
 	 * @see #setReferredVariable(VariableDeclaration)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getVariableNode_ReferredVariable()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!VariableNode!referredVariable'"
 	 * @generated
 	 */
 	VariableDeclaration getReferredVariable();

@@ -52,7 +52,6 @@ public interface MappingPartition extends Partition {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingPartition_OwningCompositePartition()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.CompositePartition#getOwnedMappingPartitions
 	 * @model opposite="ownedMappingPartitions" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingPartition!owningCompositePartition'"
 	 * @generated
 	 */
 	CompositePartition getOwningCompositePartition();
@@ -81,7 +80,6 @@ public interface MappingPartition extends Partition {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingPartition_ReferedMappingRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getMappingPartitions
 	 * @model opposite="mappingPartitions"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingPartition!referedMappingRegion'"
 	 * @generated
 	 */
 	MappingRegion getReferedMappingRegion();
@@ -107,7 +105,6 @@ public interface MappingPartition extends Partition {
 	 * @return the value of the '<em>Region</em>' reference.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingPartition_Region()
 	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingPartition!region'"
 	 * @generated
 	 */
 	@Override
@@ -124,7 +121,6 @@ public interface MappingPartition extends Partition {
 	 * @return the value of the '<em>Root Partition</em>' reference.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingPartition_RootPartition()
 	 * @model required="true" transient="true" changeable="false" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingPartition!rootPartition'"
 	 * @generated
 	 */
 	RootPartition getRootPartition();
@@ -143,7 +139,6 @@ public interface MappingPartition extends Partition {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingPartition_ExplicitSuccessors()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getExplicitPredecessors
 	 * @model opposite="explicitPredecessors" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingPartition!explicitSuccessors'"
 	 * @generated
 	 */
 	List<BasicPartition> getExplicitSuccessors();

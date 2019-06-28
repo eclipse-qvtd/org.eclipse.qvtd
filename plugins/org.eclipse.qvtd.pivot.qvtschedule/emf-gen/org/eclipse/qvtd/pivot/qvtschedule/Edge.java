@@ -61,7 +61,6 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_Cluster()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberEdges
 	 * @model opposite="memberEdges"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!cluster'"
 	 * @generated
 	 */
 	Cluster getCluster();
@@ -90,7 +89,6 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * @see #setEdgeRole(Role)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_EdgeRole()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!edgeRole'"
 	 * @generated
 	 */
 	Role getEdgeRole();
@@ -117,7 +115,7 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_Name()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!name'"
+	 * @model
 	 * @generated
 	 */
 	@Override
@@ -147,7 +145,6 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_OwningRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges
 	 * @model opposite="ownedEdges" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!owningRegion'"
 	 * @generated
 	 */
 	Region getOwningRegion();
@@ -176,7 +173,6 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_SourceNode()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingEdges
 	 * @model opposite="outgoingEdges" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!sourceNode'"
 	 * @generated
 	 */
 	Node getSourceNode();
@@ -205,7 +201,6 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_TargetNode()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingEdges
 	 * @model opposite="incomingEdges" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!targetNode'"
 	 * @generated
 	 */
 	Node getTargetNode();

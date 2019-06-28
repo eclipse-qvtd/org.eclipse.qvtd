@@ -56,7 +56,6 @@ public interface ClassDatum extends AbstractDatum {
 	 * @return the value of the '<em>Complete Classes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_CompleteClasses()
 	 * @model required="true" transient="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!completeClasses'"
 	 * @generated
 	 */
 	List<CompleteClass> getCompleteClasses();
@@ -75,7 +74,6 @@ public interface ClassDatum extends AbstractDatum {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_OwnedPropertyDatums()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getOwningClassDatum
 	 * @model opposite="owningClassDatum" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!ownedPropertyDatums'"
 	 * @generated
 	 */
 	List<PropertyDatum> getOwnedPropertyDatums();
@@ -97,7 +95,6 @@ public interface ClassDatum extends AbstractDatum {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_OwningScheduleModel()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedClassDatums
 	 * @model opposite="ownedClassDatums" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!owningScheduleModel'"
 	 * @generated
 	 */
 	ScheduleModel getOwningScheduleModel();
@@ -124,7 +121,6 @@ public interface ClassDatum extends AbstractDatum {
 	 * @see #setReferredClass(org.eclipse.ocl.pivot.Class)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_ReferredClass()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!referredClass'"
 	 * @generated
 	 */
 	org.eclipse.ocl.pivot.Class getReferredClass();
@@ -151,7 +147,6 @@ public interface ClassDatum extends AbstractDatum {
 	 * @return the value of the '<em>Super Class Datums</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_SuperClassDatums()
 	 * @model transient="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!superClassDatums'"
 	 * @generated
 	 */
 	List<ClassDatum> getSuperClassDatums();

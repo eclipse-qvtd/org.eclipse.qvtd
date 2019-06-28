@@ -36,7 +36,7 @@ public interface MappingRegion extends Region
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Head Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingRegion_HeadNodes()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingRegion!headNodes'"
+	 * @model
 	 * @generated
 	 */
 	@Override
@@ -56,7 +56,6 @@ public interface MappingRegion extends Region
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingRegion_MappingPartitions()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getReferedMappingRegion
 	 * @model opposite="referedMappingRegion"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingRegion!mappingPartitions'"
 	 * @generated
 	 */
 	List<MappingPartition> getMappingPartitions();
@@ -74,7 +73,6 @@ public interface MappingRegion extends Region
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingRegion_OwningScheduleModel()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedMappingRegions
 	 * @model opposite="ownedMappingRegions" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingRegion!owningScheduleModel'"
 	 * @generated
 	 */
 	ScheduleModel getOwningScheduleModel();

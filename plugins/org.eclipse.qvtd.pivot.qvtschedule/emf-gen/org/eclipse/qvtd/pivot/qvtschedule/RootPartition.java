@@ -48,7 +48,6 @@ public interface RootPartition extends CompositePartition {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootPartition_OwningRootRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwnedRootPartition
 	 * @model opposite="ownedRootPartition" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RootPartition!owningRootRegion'"
 	 * @generated
 	 */
 	RootRegion getOwningRootRegion();
@@ -74,7 +73,7 @@ public interface RootPartition extends CompositePartition {
 	 * @return the value of the '<em>Loading Partition</em>' reference.
 	 * @see #setLoadingPartition(LoadingPartition)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootPartition_LoadingPartition()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RootPartition!loadingPartition'"
+	 * @model
 	 * @generated
 	 */
 	LoadingPartition getLoadingPartition();

@@ -62,7 +62,6 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_OwnedEdges()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getOwningRegion
 	 * @model opposite="owningRegion" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!ownedEdges'"
 	 * @generated
 	 */
 	List<Edge> getOwnedEdges();
@@ -81,7 +80,6 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_OwnedClusters()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getOwningRegion
 	 * @model opposite="owningRegion" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!ownedClusters'"
 	 * @generated
 	 */
 	List<Cluster> getOwnedClusters();
@@ -100,7 +98,6 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_RootRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getActiveRegions
 	 * @model opposite="activeRegions"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!rootRegion'"
 	 * @generated
 	 */
 	RootRegion getRootRegion();
@@ -129,7 +126,6 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_OwnedNodes()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getOwningRegion
 	 * @model opposite="owningRegion" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!ownedNodes'"
 	 * @generated
 	 */
 	List<Node> getOwnedNodes();

@@ -48,7 +48,6 @@ public interface TypeLiteralNode extends OperationNode {
 	 * @see #setTypeValue(Type)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getTypeLiteralNode_TypeValue()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!TypeLiteralNode!typeValue'"
 	 * @generated
 	 */
 	Type getTypeValue();

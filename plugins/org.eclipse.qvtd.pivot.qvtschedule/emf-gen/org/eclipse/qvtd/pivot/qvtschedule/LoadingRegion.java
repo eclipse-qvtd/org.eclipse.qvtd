@@ -52,7 +52,6 @@ public interface LoadingRegion extends Region {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingRegion_LoadingPartition()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition#getReferredLoadingRegion
 	 * @model opposite="referredLoadingRegion" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!LoadingRegion!loadingPartition'"
 	 * @generated
 	 */
 	LoadingPartition getLoadingPartition();
@@ -81,7 +80,6 @@ public interface LoadingRegion extends Region {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingRegion_OwningRootRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwnedLoadingRegion
 	 * @model opposite="ownedLoadingRegion" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!LoadingRegion!owningRootRegion'"
 	 * @generated
 	 */
 	RootRegion getOwningRootRegion();

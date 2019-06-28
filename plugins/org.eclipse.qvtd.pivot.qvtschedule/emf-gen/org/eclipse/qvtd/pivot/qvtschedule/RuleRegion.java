@@ -53,7 +53,6 @@ public interface RuleRegion extends MappingRegion {
 	 * @see #setReferredRule(Rule)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRuleRegion_ReferredRule()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RuleRegion!referredRule'"
 	 * @generated
 	 */
 	Rule getReferredRule();

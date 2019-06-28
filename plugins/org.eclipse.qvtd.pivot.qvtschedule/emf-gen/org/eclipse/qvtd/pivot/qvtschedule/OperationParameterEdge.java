@@ -49,7 +49,6 @@ public interface OperationParameterEdge extends ArgumentEdge {
 	 * @see #setReferredParameter(Parameter)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationParameterEdge_ReferredParameter()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationParameterEdge!referredParameter'"
 	 * @generated
 	 */
 	Parameter getReferredParameter();
@@ -76,7 +75,6 @@ public interface OperationParameterEdge extends ArgumentEdge {
 	 * @see #setParameterIndex(int)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationParameterEdge_ParameterIndex()
 	 * @model default="-1" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationParameterEdge!parameterIndex'"
 	 * @generated
 	 */
 	int getParameterIndex();

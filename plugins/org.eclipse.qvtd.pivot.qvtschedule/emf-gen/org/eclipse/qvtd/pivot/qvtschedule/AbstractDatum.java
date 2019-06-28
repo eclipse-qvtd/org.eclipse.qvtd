@@ -52,7 +52,6 @@ public interface AbstractDatum extends NamedElement {
 	 * @see #setReferredTypedModel(TypedModel)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum_ReferredTypedModel()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!AbstractDatum!referredTypedModel'"
 	 * @generated
 	 */
 	TypedModel getReferredTypedModel();

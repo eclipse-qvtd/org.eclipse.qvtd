@@ -34,7 +34,6 @@ public interface EdgeConnection extends Connection
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdgeConnection_ReferredProperty()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!EdgeConnection!referredProperty'"
 	 * @generated
 	 */
 	Property getReferredProperty();
@@ -60,7 +59,6 @@ public interface EdgeConnection extends Connection
 	 * @return the value of the '<em>Mandatory Target Edges</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdgeConnection_MandatoryTargetEdges()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!EdgeConnection!mandatoryTargetEdges'"
 	 * @generated
 	 */
 	List<NavigableEdge> getMandatoryTargetEdges();
@@ -76,7 +74,6 @@ public interface EdgeConnection extends Connection
 	 * @return the value of the '<em>Preferred Target Edges</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdgeConnection_PreferredTargetEdges()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!EdgeConnection!preferredTargetEdges'"
 	 * @generated
 	 */
 	List<NavigableEdge> getPreferredTargetEdges();

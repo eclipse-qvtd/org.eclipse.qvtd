@@ -66,7 +66,6 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_OwningRootRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwnedConnections
 	 * @model opposite="ownedConnections" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!owningRootRegion'"
 	 * @generated
 	 */
 	RootRegion getOwningRootRegion();
@@ -96,7 +95,6 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * @see #setConnectionRole(ConnectionRole)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_ConnectionRole()
 	 * @model default="UNDEFINED" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!connectionRole'"
 	 * @generated
 	 */
 	ConnectionRole getConnectionRole();
@@ -124,7 +122,6 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * @see #setName(String)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_Name()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!name'"
 	 * @generated
 	 */
 	@Override
@@ -151,7 +148,6 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * @return the value of the '<em>Source Ends</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_SourceEnds()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!sourceEnds'"
 	 * @generated
 	 */
 	List<ConnectionEnd> getSourceEnds();
@@ -167,7 +163,6 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * @return the value of the '<em>Intermediate Partitions</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_IntermediatePartitions()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!intermediatePartitions'"
 	 * @generated
 	 */
 	List<Partition> getIntermediatePartitions();
@@ -183,7 +178,6 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * @see #setCommonPartition(Partition)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_CommonPartition()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!commonPartition'"
 	 * @generated
 	 */
 	Partition getCommonPartition();

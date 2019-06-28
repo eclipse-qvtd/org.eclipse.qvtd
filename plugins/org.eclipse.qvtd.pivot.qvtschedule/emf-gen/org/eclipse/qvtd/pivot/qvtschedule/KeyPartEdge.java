@@ -47,7 +47,6 @@ public interface KeyPartEdge extends ArgumentEdge {
 	 * @see #setReferredPart(PropertyDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getKeyPartEdge_ReferredPart()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!KeyPartEdge!referredPart'"
 	 * @generated
 	 */
 	PropertyDatum getReferredPart();

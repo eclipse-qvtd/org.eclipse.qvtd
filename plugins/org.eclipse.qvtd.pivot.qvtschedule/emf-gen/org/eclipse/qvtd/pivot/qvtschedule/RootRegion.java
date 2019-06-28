@@ -31,7 +31,6 @@ public interface RootRegion extends Region
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootRegion_ActiveRegions()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getRootRegion
 	 * @model opposite="rootRegion"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RootRegion!activeRegions'"
 	 * @generated
 	 */
 	List<Region> getActiveRegions();
@@ -49,7 +48,6 @@ public interface RootRegion extends Region
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootRegion_OwnedConnections()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Connection#getOwningRootRegion
 	 * @model opposite="owningRootRegion" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RootRegion!ownedConnections'"
 	 * @generated
 	 */
 	List<Connection> getOwnedConnections();
@@ -67,7 +65,6 @@ public interface RootRegion extends Region
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootRegion_OwnedLoadingRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningRootRegion
 	 * @model opposite="owningRootRegion" containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RootRegion!ownedLoadingRegion'"
 	 * @generated
 	 */
 	LoadingRegion getOwnedLoadingRegion();
@@ -97,7 +94,6 @@ public interface RootRegion extends Region
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootRegion_OwningScheduleModel()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedRootRegions
 	 * @model opposite="ownedRootRegions" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RootRegion!owningScheduleModel'"
 	 * @generated
 	 */
 	ScheduleModel getOwningScheduleModel();
@@ -120,7 +116,7 @@ public interface RootRegion extends Region
 	 * @return the value of the '<em>Referred Transformation</em>' reference.
 	 * @see #setReferredTransformation(Transformation)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootRegion_ReferredTransformation()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RootRegion!referredTransformation'"
+	 * @model
 	 * @generated
 	 */
 	Transformation getReferredTransformation();
@@ -147,7 +143,6 @@ public interface RootRegion extends Region
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootRegion_OwnedRootPartition()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootPartition#getOwningRootRegion
 	 * @model opposite="owningRootRegion" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RootRegion!ownedRootPartition'"
 	 * @generated
 	 */
 	RootPartition getOwnedRootPartition();

@@ -53,7 +53,7 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 	 * @return the value of the '<em>Incoming Connection</em>' reference.
 	 * @see #setIncomingConnection(EdgeConnection)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigableEdge_IncomingConnection()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigableEdge!incomingConnection'"
+	 * @model
 	 * @generated
 	 */
 	EdgeConnection getIncomingConnection();
@@ -77,7 +77,7 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Outgoing Connections</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigableEdge_OutgoingConnections()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigableEdge!outgoingConnections'"
+	 * @model
 	 * @generated
 	 */
 	List<EdgeConnection> getOutgoingConnections();

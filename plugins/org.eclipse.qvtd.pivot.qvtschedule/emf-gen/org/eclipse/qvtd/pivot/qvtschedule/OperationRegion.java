@@ -27,7 +27,7 @@ public interface OperationRegion extends Region
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dependency Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationRegion_DependencyNodes()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationRegion!dependencyNodes'"
+	 * @model
 	 * @generated
 	 */
 	List<Node> getDependencyNodes();
@@ -42,7 +42,7 @@ public interface OperationRegion extends Region
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Head Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationRegion_HeadNodes()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationRegion!headNodes'"
+	 * @model
 	 * @generated
 	 */
 	@Override
@@ -62,7 +62,6 @@ public interface OperationRegion extends Region
 	 * @see #setReferredOperation(Operation)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationRegion_ReferredOperation()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationRegion!referredOperation'"
 	 * @generated
 	 */
 	Operation getReferredOperation();
@@ -86,7 +85,7 @@ public interface OperationRegion extends Region
 	 * @return the value of the '<em>Result Node</em>' reference.
 	 * @see #setResultNode(Node)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationRegion_ResultNode()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationRegion!resultNode'"
+	 * @model
 	 * @generated
 	 */
 	Node getResultNode();
@@ -117,7 +116,6 @@ public interface OperationRegion extends Region
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationRegion_OwningScheduleModel()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedOperationRegions
 	 * @model opposite="ownedOperationRegions" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationRegion!owningScheduleModel'"
 	 * @generated
 	 */
 	ScheduleModel getOwningScheduleModel();

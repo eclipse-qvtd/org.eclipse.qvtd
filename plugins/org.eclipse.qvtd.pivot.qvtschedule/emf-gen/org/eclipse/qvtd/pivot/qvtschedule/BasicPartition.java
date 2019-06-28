@@ -65,7 +65,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Constant Edges</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_ConstantEdges()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!constantEdges'"
 	 * @generated
 	 */
 	List<Edge> getConstantEdges();
@@ -82,7 +81,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Constant Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_ConstantNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!constantNodes'"
 	 * @generated
 	 */
 	List<Node> getConstantNodes();
@@ -99,7 +97,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Constant Success False Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_ConstantSuccessFalseNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!constantSuccessFalseNodes'"
 	 * @generated
 	 */
 	List<Node> getConstantSuccessFalseNodes();
@@ -116,7 +113,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Constant Success True Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_ConstantSuccessTrueNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!constantSuccessTrueNodes'"
 	 * @generated
 	 */
 	List<Node> getConstantSuccessTrueNodes();
@@ -133,7 +129,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Head Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_HeadNodes()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!headNodes'"
 	 * @generated
 	 */
 	@Override
@@ -151,7 +146,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Loaded Edges</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_LoadedEdges()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!loadedEdges'"
 	 * @generated
 	 */
 	List<Edge> getLoadedEdges();
@@ -168,7 +162,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Loaded Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_LoadedNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!loadedNodes'"
 	 * @generated
 	 */
 	List<Node> getLoadedNodes();
@@ -185,7 +178,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Predicated Edges</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_PredicatedEdges()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!predicatedEdges'"
 	 * @generated
 	 */
 	List<Edge> getPredicatedEdges();
@@ -202,7 +194,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Predicated Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_PredicatedNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!predicatedNodes'"
 	 * @generated
 	 */
 	List<Node> getPredicatedNodes();
@@ -219,7 +210,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Realized Edges</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_RealizedEdges()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!realizedEdges'"
 	 * @generated
 	 */
 	List<Edge> getRealizedEdges();
@@ -236,7 +226,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Realized Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_RealizedNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!realizedNodes'"
 	 * @generated
 	 */
 	List<Node> getRealizedNodes();
@@ -253,7 +242,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Speculated Edges</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_SpeculatedEdges()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!speculatedEdges'"
 	 * @generated
 	 */
 	List<Edge> getSpeculatedEdges();
@@ -270,7 +258,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Speculated Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_SpeculatedNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!speculatedNodes'"
 	 * @generated
 	 */
 	List<Node> getSpeculatedNodes();
@@ -287,7 +274,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @return the value of the '<em>Speculation Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_SpeculationNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!speculationNodes'"
 	 * @generated
 	 */
 	List<Node> getSpeculationNodes();
@@ -306,7 +292,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_OwningMergedPartition()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.MergedPartition#getOwnedMergedPartitions
 	 * @model opposite="ownedMergedPartitions" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!owningMergedPartition'"
 	 * @generated
 	 */
 	MergedPartition getOwningMergedPartition();
@@ -335,7 +320,6 @@ public interface BasicPartition extends MappingPartition {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_ExplicitPredecessors()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getExplicitSuccessors
 	 * @model opposite="explicitSuccessors" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!explicitPredecessors'"
 	 * @generated
 	 */
 	List<MappingPartition> getExplicitPredecessors();

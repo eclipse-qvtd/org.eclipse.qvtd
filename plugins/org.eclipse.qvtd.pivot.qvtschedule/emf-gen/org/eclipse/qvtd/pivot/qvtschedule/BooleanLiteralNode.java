@@ -47,7 +47,6 @@ public interface BooleanLiteralNode extends OperationNode {
 	 * @see #setBooleanValue(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBooleanLiteralNode_BooleanValue()
 	 * @model dataType="org.eclipse.ocl.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BooleanLiteralNode!booleanValue'"
 	 * @generated
 	 */
 	boolean isBooleanValue();

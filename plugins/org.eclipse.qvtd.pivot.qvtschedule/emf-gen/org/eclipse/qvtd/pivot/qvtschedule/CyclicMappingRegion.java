@@ -49,7 +49,6 @@ public interface CyclicMappingRegion extends MappingRegion {
 	 * @return the value of the '<em>Element Regions</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCyclicMappingRegion_ElementRegions()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CyclicMappingRegion!elementRegions'"
 	 * @generated
 	 */
 	List<MappingRegion> getElementRegions();

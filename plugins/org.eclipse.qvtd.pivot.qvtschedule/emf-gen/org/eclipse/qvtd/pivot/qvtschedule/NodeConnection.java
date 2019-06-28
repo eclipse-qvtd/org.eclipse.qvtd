@@ -34,7 +34,6 @@ public interface NodeConnection extends Connection
 	 * @see #setClassDatum(ClassDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNodeConnection_ClassDatum()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NodeConnection!classDatum'"
 	 * @generated
 	 */
 	ClassDatum getClassDatum();
@@ -60,7 +59,6 @@ public interface NodeConnection extends Connection
 	 * @return the value of the '<em>Mandatory Target Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNodeConnection_MandatoryTargetNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NodeConnection!mandatoryTargetNodes'"
 	 * @generated
 	 */
 	List<Node> getMandatoryTargetNodes();
@@ -76,7 +74,6 @@ public interface NodeConnection extends Connection
 	 * @return the value of the '<em>Passed Target Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNodeConnection_PassedTargetNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NodeConnection!passedTargetNodes'"
 	 * @generated
 	 */
 	List<Node> getPassedTargetNodes();
@@ -92,7 +89,6 @@ public interface NodeConnection extends Connection
 	 * @return the value of the '<em>Preferred Target Nodes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNodeConnection_PreferredTargetNodes()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NodeConnection!preferredTargetNodes'"
 	 * @generated
 	 */
 	List<Node> getPreferredTargetNodes();

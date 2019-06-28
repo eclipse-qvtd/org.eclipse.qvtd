@@ -47,7 +47,6 @@ public interface MergedPartition extends BasicPartition {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMergedPartition_OwnedMergedPartitions()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getOwningMergedPartition
 	 * @model opposite="owningMergedPartition" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MergedPartition!ownedMergedPartitions'"
 	 * @generated
 	 */
 	List<BasicPartition> getOwnedMergedPartitions();

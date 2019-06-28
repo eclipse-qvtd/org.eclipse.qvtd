@@ -47,7 +47,6 @@ public interface LoadingPartition extends MappingPartition {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingPartition_ReferredLoadingRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getLoadingPartition
 	 * @model opposite="loadingPartition" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!LoadingPartition!referredLoadingRegion'"
 	 * @generated
 	 */
 	LoadingRegion getReferredLoadingRegion();

@@ -51,7 +51,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @return the value of the '<em>Opposite</em>' reference.
 	 * @see #setOpposite(PropertyDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_Opposite()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!opposite'"
+	 * @model
 	 * @generated
 	 */
 	PropertyDatum getOpposite();
@@ -83,7 +83,6 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_OwningClassDatum()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwnedPropertyDatums
 	 * @model opposite="ownedPropertyDatums" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!owningClassDatum'"
 	 * @generated
 	 */
 	ClassDatum getOwningClassDatum();
@@ -110,7 +109,6 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_ReferredProperty()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!referredProperty'"
 	 * @generated
 	 */
 	Property getReferredProperty();
@@ -137,7 +135,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Property Datums</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_SuperPropertyDatums()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!superPropertyDatums'"
+	 * @model
 	 * @generated
 	 */
 	@Deprecated
@@ -153,7 +151,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @return the value of the '<em>Key</em>' attribute.
 	 * @see #setKey(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_Key()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!key'"
+	 * @model
 	 * @generated
 	 */
 	boolean isKey();

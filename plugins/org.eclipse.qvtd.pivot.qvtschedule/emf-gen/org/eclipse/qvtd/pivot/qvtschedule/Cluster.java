@@ -57,7 +57,6 @@ public interface Cluster extends NamedElement, Symbolable {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCluster_OwningRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedClusters
 	 * @model opposite="ownedClusters" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!owningRegion'"
 	 * @generated
 	 */
 	Region getOwningRegion();
@@ -86,7 +85,6 @@ public interface Cluster extends NamedElement, Symbolable {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCluster_MemberNodes()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getCluster
 	 * @model opposite="cluster"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!memberNodes'"
 	 * @generated
 	 */
 	List<Node> getMemberNodes();
@@ -105,7 +103,6 @@ public interface Cluster extends NamedElement, Symbolable {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCluster_MemberEdges()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getCluster
 	 * @model opposite="cluster"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!memberEdges'"
 	 * @generated
 	 */
 	List<Edge> getMemberEdges();
@@ -124,7 +121,6 @@ public interface Cluster extends NamedElement, Symbolable {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCluster_PrecedingClusters()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getSucceedingClusters
 	 * @model opposite="succeedingClusters"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!precedingClusters'"
 	 * @generated
 	 */
 	List<Cluster> getPrecedingClusters();
@@ -143,7 +139,6 @@ public interface Cluster extends NamedElement, Symbolable {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCluster_SucceedingClusters()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getPrecedingClusters
 	 * @model opposite="precedingClusters"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!succeedingClusters'"
 	 * @generated
 	 */
 	List<Cluster> getSucceedingClusters();
@@ -159,7 +154,7 @@ public interface Cluster extends NamedElement, Symbolable {
 	 * @return the value of the '<em>Depth</em>' attribute.
 	 * @see #setDepth(Integer)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCluster_Depth()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!depth'"
+	 * @model
 	 * @generated
 	 */
 	Integer getDepth();

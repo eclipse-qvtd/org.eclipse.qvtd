@@ -51,7 +51,6 @@ public interface CastEdge extends Edge
 	 * @see #setReferredClassDatum(ClassDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCastEdge_ReferredClassDatum()
 	 * @model required="true" transient="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CastEdge!referredClassDatum'"
 	 * @generated
 	 */
 	ClassDatum getReferredClassDatum();

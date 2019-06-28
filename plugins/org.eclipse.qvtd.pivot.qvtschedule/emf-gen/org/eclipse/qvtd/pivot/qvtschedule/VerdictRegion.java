@@ -46,7 +46,6 @@ public interface VerdictRegion extends RuleRegion {
 	 * @see #setReferredRuleRegion(RuleRegion)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getVerdictRegion_ReferredRuleRegion()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!VerdictRegion!referredRuleRegion'"
 	 * @generated
 	 */
 	RuleRegion getReferredRuleRegion();

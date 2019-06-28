@@ -51,7 +51,6 @@ public interface KeyedValueNode extends OperationNode {
 	 * @see #setClassDatumValue(ClassDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getKeyedValueNode_ClassDatumValue()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!KeyedValueNode!classDatumValue'"
 	 * @generated
 	 */
 	ClassDatum getClassDatumValue();

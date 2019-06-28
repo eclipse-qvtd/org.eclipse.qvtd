@@ -67,7 +67,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @see #setClassDatum(ClassDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_ClassDatum()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!classDatum'"
 	 * @generated
 	 */
 	ClassDatum getClassDatum();
@@ -96,7 +95,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_Cluster()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberNodes
 	 * @model opposite="memberNodes"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!cluster'"
 	 * @generated
 	 */
 	Cluster getCluster();
@@ -122,7 +120,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @return the value of the '<em>Incoming Connection</em>' reference.
 	 * @see #setIncomingConnection(NodeConnection)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_IncomingConnection()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!incomingConnection'"
+	 * @model
 	 * @generated
 	 */
 	NodeConnection getIncomingConnection();
@@ -151,7 +149,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_IncomingEdges()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getTargetNode
 	 * @model opposite="targetNode"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!incomingEdges'"
 	 * @generated
 	 */
 	List<Edge> getIncomingEdges();
@@ -170,7 +167,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @see #setNodeRole(Role)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_NodeRole()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!nodeRole'"
 	 * @generated
 	 */
 	Role getNodeRole();
@@ -197,7 +193,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Outgoing Connections</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_OutgoingConnections()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!outgoingConnections'"
+	 * @model
 	 * @generated
 	 */
 	List<NodeConnection> getOutgoingConnections();
@@ -216,7 +212,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_OutgoingEdges()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode
 	 * @model opposite="sourceNode"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!outgoingEdges'"
 	 * @generated
 	 */
 	List<Edge> getOutgoingEdges();
@@ -235,7 +230,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_OwningRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedNodes
 	 * @model opposite="ownedNodes" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!owningRegion'"
 	 * @generated
 	 */
 	@Override
@@ -310,7 +304,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @see #setName(String)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_Name()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!name'"
 	 * @generated
 	 */
 	@Override

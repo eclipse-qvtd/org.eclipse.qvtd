@@ -56,7 +56,6 @@ public interface MappingNode extends Node {
 	 * @see #setMatched(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingNode_Matched()
 	 * @model default="false" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingNode!matched'"
 	 * @generated
 	 */
 	@Override

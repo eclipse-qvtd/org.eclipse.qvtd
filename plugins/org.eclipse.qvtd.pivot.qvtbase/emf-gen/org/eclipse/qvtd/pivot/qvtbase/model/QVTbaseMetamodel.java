@@ -638,6 +638,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setOpposite(pr_Domain_rule);
 			ownedProperties.add(property = pr_Rule_isAbstract);
 			property.setIsResolveProxies(true);
+			property.setDefaultValueString("false");
 			ownedProperties.add(property = pr_Rule_overridden);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
@@ -684,8 +685,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setOpposite(pr_TypedModel_dependent_dependsOn);
 			ownedProperties.add(property = pr_TypedModel_isPrimitive);
 			property.setIsResolveProxies(true);
+			property.setDefaultValueString("false");
 			ownedProperties.add(property = pr_TypedModel_isTrace);
 			property.setIsResolveProxies(true);
+			property.setDefaultValueString("false");
 			ownedProperties.add(property = pr_TypedModel_ownedContext);
 			property.setIsComposite(true);
 			property.setIsRequired(false);

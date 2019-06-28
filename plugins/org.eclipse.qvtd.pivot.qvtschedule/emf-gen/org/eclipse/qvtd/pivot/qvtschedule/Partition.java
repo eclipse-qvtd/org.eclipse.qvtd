@@ -57,7 +57,7 @@ public interface Partition extends NamedElement, Graphable, GraphNode {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Passes</em>' attribute list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPartition_Passes()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Partition!passes'"
+	 * @model
 	 * @generated
 	 */
 	List<Integer> getPasses();
@@ -73,7 +73,6 @@ public interface Partition extends NamedElement, Graphable, GraphNode {
 	 * @return the value of the '<em>Intermediate Connections</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPartition_IntermediateConnections()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Partition!intermediateConnections'"
 	 * @generated
 	 */
 	List<NodeConnection> getIntermediateConnections();
@@ -89,7 +88,6 @@ public interface Partition extends NamedElement, Graphable, GraphNode {
 	 * @return the value of the '<em>Root Connections</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPartition_RootConnections()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Partition!rootConnections'"
 	 * @generated
 	 */
 	List<NodeConnection> getRootConnections();

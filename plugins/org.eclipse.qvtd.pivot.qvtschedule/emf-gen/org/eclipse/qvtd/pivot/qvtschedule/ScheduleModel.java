@@ -35,7 +35,6 @@ public interface ScheduleModel extends Model
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_OwnedClassDatums()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningScheduleModel
 	 * @model opposite="owningScheduleModel" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedClassDatums'"
 	 * @generated
 	 */
 	List<ClassDatum> getOwnedClassDatums();
@@ -53,7 +52,6 @@ public interface ScheduleModel extends Model
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_OwnedOperationRegions()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getOwningScheduleModel
 	 * @model opposite="owningScheduleModel" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedOperationRegions'"
 	 * @generated
 	 */
 	List<OperationRegion> getOwnedOperationRegions();
@@ -71,7 +69,6 @@ public interface ScheduleModel extends Model
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_OwnedRootRegions()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwningScheduleModel
 	 * @model opposite="owningScheduleModel" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedRootRegions'"
 	 * @generated
 	 */
 	List<RootRegion> getOwnedRootRegions();
@@ -89,7 +86,6 @@ public interface ScheduleModel extends Model
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_OwnedMappingRegions()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getOwningScheduleModel
 	 * @model opposite="owningScheduleModel" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedMappingRegions'"
 	 * @generated
 	 */
 	List<MappingRegion> getOwnedMappingRegions();

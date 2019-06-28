@@ -48,7 +48,6 @@ public interface CollectionPartEdge extends ArgumentEdge {
 	 * @see #setReferredPart(CollectionLiteralPart)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCollectionPartEdge_ReferredPart()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CollectionPartEdge!referredPart'"
 	 * @generated
 	 */
 	CollectionLiteralPart getReferredPart();
