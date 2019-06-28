@@ -184,8 +184,12 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 		top relation mapEResource {
 			enforce domain ecore eExtent : extentMM::qvtruntimelibrary::Extent;
 			enforce domain as asModel : pivotMM::Model {
-				extent = asExtent : extentMM::qvtruntimelibrary::Extent
+				extent = asExtent : extentMM::qvtruntimelibrary::Extent,
+				ownedPackages = asOrphanage : Package
 			};
+		--	where {
+		--		mapOrphanage(asOrphanage);
+		--	}
 		}
 
 		/**
@@ -240,15 +244,18 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 						actual = asType : Type,
 						formal = pivotMM::Bag::T 
 					}
-				}
+				},
+				owningPackage = asOrphanage : Package
 			};
 			when {
 				not isOrdered;
 				not isUnique;
 				mapEClassifier(eType, asType);
+				mapOrphanage(asOrphanage);
 			}
 		}
 		relation mapEClassifier_OrderedSet overrides mapEClassifier_Collection {
+			
 			enforce domain ecore eType : EClassifier, isOrdered : Boolean, isUnique : Boolean;
 			enforce domain as asCollection: OrderedSetType {
 				ownedBindings = asBinding : TemplateBinding {
@@ -256,12 +263,14 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 						actual = asType : Type,
 						formal = pivotMM::OrderedSet::T 
 					}
-				}
+				},
+				owningPackage = asOrphanage : Package
 			};
 			when {
 				isOrdered;
 				isUnique;
 				mapEClassifier(eType, asType);
+				mapOrphanage(asOrphanage);
 			}
 		}
 		relation mapEClassifier_Sequence overrides mapEClassifier_Collection {
@@ -272,12 +281,14 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 						actual = asType : Type,
 						formal = pivotMM::Sequence::T 
 					}
-				}
+				},
+				owningPackage = asOrphanage : Package
 			};
 			when {
 				isOrdered;
 				not isUnique;
 				mapEClassifier(eType, asType);
+				mapOrphanage(asOrphanage);
 			}
 		}
 		relation mapEClassifier_Set overrides mapEClassifier_Collection {
@@ -288,12 +299,14 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 						actual = asType : Type,
 						formal = pivotMM::Set::T 
 					}
-				}
+				},
+				owningPackage = asOrphanage : Package
 			};
 			when {
 				not isOrdered;
 				isUnique;
 				mapEClassifier(eType, asType);
+				mapOrphanage(asOrphanage);
 			}
 		}
 	/*	relation map2SetType {
@@ -311,5 +324,16 @@ package org::eclipse::ocl::pivot2::ecore2pivot {
 				mapEClassifier(eType, asType);
 			}
 		} */
+		
+		/**
+		 *  signleton <=> pivot::Package for the local Orphanage
+		 */
+		relation mapOrphanage {
+			enforce domain as asPackage : Package {
+				name = '$$',
+				nsPrefix = 'orphanage',
+				URI = 'http://www.eclipse.org/ocl/2015/Orphanage'
+			};
+		}
 	}
 }
