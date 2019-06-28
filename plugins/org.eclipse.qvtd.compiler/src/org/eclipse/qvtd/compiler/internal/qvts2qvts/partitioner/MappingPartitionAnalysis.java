@@ -117,6 +117,12 @@ public abstract class MappingPartitionAnalysis<@NonNull P extends MappingPartiti
 		return role.isNew();
 	}
 
+	protected boolean isOld(@NonNull Node node) {
+		Role role = partition.getRole(node);
+		assert role != null;
+		return role.isOld();
+	}
+
 	protected boolean isOld(@NonNull Edge edge) {
 		Role role = partition.getRole(edge);
 		assert role != null;

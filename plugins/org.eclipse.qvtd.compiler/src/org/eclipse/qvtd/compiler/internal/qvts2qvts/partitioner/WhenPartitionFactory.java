@@ -86,10 +86,12 @@ public class WhenPartitionFactory extends AbstractSimplePartitionFactory
 		//
 		for (@NonNull Node realizedWhenNode : realizedWhenNodes) {
 			addNode(partition, realizedWhenNode); //, Role.SPECULATED);
-			for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(realizedWhenNode)) {
-				Node argumentNode = QVTscheduleUtil.getSourceNode(incomingEdge);
-				if (scheduleManager.isInput(argumentNode)) {
-					addNode(partition, argumentNode); //, Role.SPECULATED);
+			for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(realizedWhenNode)) {
+				if (outgoingEdge.isRealized()) {
+					Node argumentNode = QVTscheduleUtil.getTargetNode(outgoingEdge);
+					if (argumentNode.isOld()) {
+						addNode(partition, argumentNode);
+					}
 				}
 			}
 		}
