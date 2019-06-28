@@ -1362,6 +1362,19 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	/**
+	 * Return true if this mapping may be invoked more than once with the same bindings. i.e. all incoming connections are strict.
+	 */
+	private boolean computeIsStrict() {
+		for (@NonNull Node headNode : headNodes) {
+			NodeConnection incomingPassedConnection = connectionManager.getIncomingPassedConnection(headNode);
+			if (!connectionManager.isInherentlyStrict(incomingPassedConnection)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Return all subexpressions and their content. A subexpression is an OperationNode whose value is consumed by
 	 * one (or more) PatternNodes or by two (or more) OperationNodes.
 	 */
@@ -2030,6 +2043,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		createAddStatements();						// export to append nodes
 		//	createRealizedIncludesAssignments();
 		createObservedProperties();					// wrap observable clauses around hazardous accesses
+		mapping.setIsStrict(computeIsStrict());
 	}
 
 	@Override

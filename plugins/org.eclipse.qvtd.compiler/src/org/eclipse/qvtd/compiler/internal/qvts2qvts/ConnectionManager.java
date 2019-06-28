@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OriginalContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
@@ -764,6 +765,10 @@ public class ConnectionManager
 		//	}
 	}
 
+	public @NonNull NodeConnection getIncomingPassedConnection(@NonNull Node node) {
+		return ClassUtil.nonNullState(node.getIncomingPassedConnection());
+	}
+
 	public @Nullable NodeConnection getIncomingUsedConnection(@NonNull Node node) {
 		NodeConnection incomingConnection = node.getIncomingConnection();
 		if ((incomingConnection != null) && incomingConnection.isUsed(node)) {
@@ -907,12 +912,10 @@ public class ConnectionManager
 
 	public @NonNull Iterable<@NonNull Node> getPassedBindingSources(@NonNull Node node) {
 		List<@NonNull Node> sources = new ArrayList<>();
-		NodeConnection connection = node.getIncomingPassedConnection();
-		if (connection != null) {
-			for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(connection)) {
-				if (!sources.contains(source)) {
-					sources.add(source);
-				}
+		NodeConnection connection = getIncomingPassedConnection(node);
+		for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(connection)) {
+			if (!sources.contains(source)) {
+				sources.add(source);
 			}
 		}
 		return sources;
@@ -1046,6 +1049,43 @@ public class ConnectionManager
 			}
 		}
 		return lastProduction >= firstConsumption;
+	}
+
+	/**
+	 * Return true if the values passed by connection inherently contribute to distinct consuming invocations
+	 * avoiding the need for the connection implementation to enforce unique content and the need for the
+	 * consumer to re-use repeated invocations.
+	 */
+	public boolean isInherentlyStrict(@NonNull NodeConnection connection) {
+		Iterable<@NonNull Partition> sourcePartitions = connection.getSourcePartitions();
+		if (Iterables.size(sourcePartitions) != 1) {
+			// FIXME Just because there are multiple sources doesn't mean that there can be duplicates
+			//  but it is a much more complex analysis to prove distinctness.
+			return false;
+		}
+		Iterable<@NonNull Node> sourceNodes = connection.getSourceNodes();
+		if (Iterables.size(sourceNodes) != 1) {
+			// FIXME Just because there are multiple sources doesn't mean that there can be duplicates
+			//  but it is a much more complex analysis to prove distinctness.
+			return false;
+		}
+		Partition sourcePartition = sourcePartitions.iterator().next();
+		Node sourceNode = sourceNodes.iterator().next();
+		List<Node> headNodes = sourcePartition.getHeadNodes();
+		if (!scheduleManager.isMiddle(sourceNode)) {
+			if (sourceNode.isRealized()) {
+				return true;			// Produced nodes are unique since the producing invocation is unique
+			}
+			if ((headNodes.size() == 1) && headNodes.contains(sourceNode)) {
+				return true;			// Head nodes are unique since the producing invocation is unique
+			}
+			// FIXME to-one reachable from unique head
+			return false;
+		}
+		else {
+			// FIXME if the procuders of each input trace property are unique the trace is unqiue
+			return false;
+		}
 	}
 
 	public void removeCallToChild(@NonNull Partition parentPartition, @NonNull Partition childPartition) {
