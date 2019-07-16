@@ -16,7 +16,7 @@
           </style>
         </edgeMappings>
         <edgeMappings name="org.eclipse.qvtd.xml.element2elementReference2" label="Element2ElementReference2" semanticCandidatesExpression="service:xmlElement2ElementReference2SemanticCandidatesExpression" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetFinderExpression="service:xmlElement2ElementReferenceTargetFinderExpression" sourceFinderExpression="service:xmlElement2ElementReferenceSourceFinderExpression" domainClass="xml.ClassAttribute" useDomainElement="true">
-          <style lineStyle="dash" sourceArrow="InputArrow" sizeComputationExpression="2">
+          <style lineStyle="dash" sourceArrow="InputArrow" targetArrow="InputArrow" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <beginLabelStyleDescription showIcon="false" labelExpression="service:xmlElement2ElementReferenceBeginLabel">
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -27,7 +27,7 @@
           </style>
         </edgeMappings>
         <edgeMappings name="org.eclipse.qvtd.xml.element2elementReference1" label="Element2ElementReference1" semanticCandidatesExpression="service:xmlElement2ElementReference1SemanticCandidatesExpression" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetFinderExpression="service:xmlElement2ElementReferenceTargetFinderExpression" sourceFinderExpression="service:xmlElement2ElementReferenceSourceFinderExpression" domainClass="xml.ClassAttribute" useDomainElement="true">
-          <style lineStyle="dot" sourceArrow="InputArrow" targetArrow="NoDecoration" sizeComputationExpression="2">
+          <style lineStyle="dot" sourceArrow="NoDecoration" targetArrow="InputArrow" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <beginLabelStyleDescription showIcon="false" labelExpression="service:xmlElement2ElementReferenceBeginLabel">
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
