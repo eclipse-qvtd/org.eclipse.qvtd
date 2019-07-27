@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractScheduleManager;
@@ -32,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
@@ -118,13 +120,22 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 		RootRegion rootRegion = QVTscheduleFactory.eINSTANCE.createRootRegion();
 		getScheduleModel().getOwnedRootRegions().add(rootRegion);
 		rootRegion.setReferredTransformation(asTransformation);
-		rootRegion.setName(asTransformation.getName());
+		rootRegion.setName(getDirectedName(asTransformation));
 		return new RelationalTransformationAnalysis(this, (RelationalTransformation) asTransformation, rootRegion);
 	}
 
 	@Override
 	public @NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull AbstractTransformationAnalysis transformationAnalysis) {
 		return new RelationalTransformationAnalysis2TracePackage(this, transformationAnalysis);
+	}
+
+	@Override
+	public @NonNull String getDirectedName(@NonNull Transformation asTransformation) {
+		StringBuilder s = new StringBuilder();
+		s.append(QVTbaseUtil.getName(asTransformation));
+		s.append("_");
+		s.append(PivotUtil.getName(qvtuConfiguration.getTargetTypedModel()));
+		return s.toString();
 	}
 
 	@Override

@@ -24,7 +24,6 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -135,9 +134,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					//
 					//	QVTs optimization
 					//
-					//				List<@NonNull MappingRegion> activeRegions = qvtr2qvts.getActiveRegions();
-					String rootName = ClassUtil.nonNullState(qvtrResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
-					QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
+					QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, scheduleManager.getDirectedName(asTransformation));
 					qvts2qvts.transform(scheduleManager, rootRegion2activeRegions);
 					throwCompilerChainExceptionForErrors();
 					saveResource(qvtsResource);
@@ -227,8 +224,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 						else {
 							GenModel newGenModel = newGenPackage.getGenModel();
 							//	Object unresolvedList = newGenModel.eGet(GenModelPackage.Literals.GEN_MODEL__USED_GEN_PACKAGES, false);
-							EList<GenPackage> newUsedGenPackages = newGenModel.getUsedGenPackages();
-
+							Iterable<GenPackage> newUsedGenPackages = newGenModel.getUsedGenPackages();
+							assert newUsedGenPackages != null;
 							// FIXME need prvate ResourceSEt to handle genmodel/ecore schizophrenia else universal LOadFirst strategy
 							/*	//	for (int i = 0;  i < newUsedGenPackages.size(); i++) {
 							//		newGenModel.eGet(GenModelPackage.Literals.GEN_MODEL__USED_GEN_PACKAGES, 0, false);

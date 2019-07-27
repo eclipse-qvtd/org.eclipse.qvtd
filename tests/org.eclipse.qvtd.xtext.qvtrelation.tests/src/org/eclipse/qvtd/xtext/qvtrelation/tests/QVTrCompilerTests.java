@@ -91,7 +91,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	protected class MyQVT extends AbstractTestQVT
+	public class MyQVT extends AbstractTestQVT
 	{
 		protected class InstrumentedCompilerChain extends QVTrCompilerChain
 		{
@@ -906,7 +906,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT1.dispose();
 		}
-		MyQVT myQVT2 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
+		MyQVT myQVT2 = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons_expected.qvtras"));
 		try {
 			myQVT2.loadEPackage(txClass, "Families.FamiliesPackage");
 			myQVT2.loadEPackage(txClass, "Persons.PersonsPackage");

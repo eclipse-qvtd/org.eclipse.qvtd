@@ -52,6 +52,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 
@@ -246,8 +247,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			cgPackage = cgPackage.getPackages().get(0);
 			appendSegmentName(s, cgPackage);
 		}
-
-		s.append(transformation.getName());
+		s.append(QVTbaseUtil.getName(transformation));
 		return s.toString();
 	}
 

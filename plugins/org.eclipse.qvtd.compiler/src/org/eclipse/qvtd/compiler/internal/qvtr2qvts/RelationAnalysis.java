@@ -203,7 +203,7 @@ public class RelationAnalysis extends RuleAnalysis
 		super(transformationAnalysis, ruleRegion);
 		dispatchAnalysis = createDispatchAnalysis(qvtuConfiguration);
 		verdictAnalysis = createVerdictAnalysis(qvtuConfiguration);
-		targetTypedModel = qvtuConfiguration.getOutputTypedModels().iterator().next();
+		targetTypedModel = qvtuConfiguration.getTargetTypedModel();
 	}
 
 	protected void addExpression(@NonNull VariableDeclaration variable, @NonNull OCLExpression expression) {

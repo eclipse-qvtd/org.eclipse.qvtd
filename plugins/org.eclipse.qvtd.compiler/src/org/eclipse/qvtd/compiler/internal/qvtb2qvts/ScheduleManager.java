@@ -109,6 +109,12 @@ public interface ScheduleManager
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull Iterable<@NonNull CompleteClass> completeClasses);
 	@NonNull Iterable<@NonNull ClassDatum> getClassDatums();
 	@NonNull ConnectionManager getConnectionManager();
+
+	/**
+	 * Return the name for the root directional transformation artefact.
+	 */
+	@NonNull String getDirectedName(@NonNull Transformation asTransformation);
+
 	@NonNull RootDomainUsageAnalysis getDomainUsageAnalysis();
 	@NonNull DomainUsage getDomainUsage(@NonNull Element element);
 	@NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatum classDatum);

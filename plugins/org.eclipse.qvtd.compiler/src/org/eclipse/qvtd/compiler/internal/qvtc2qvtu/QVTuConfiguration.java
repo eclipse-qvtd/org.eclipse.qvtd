@@ -44,6 +44,10 @@ public class QVTuConfiguration
 		return outputTypedModels;
 	}
 
+	public @NonNull TypedModel getTargetTypedModel() {
+		return outputTypedModels.get(0);
+	}
+
 	/**
 	 * Checks if is check mode.
 	 */

@@ -737,6 +737,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public @NonNull String getDirectedName(@NonNull Transformation asTransformation) {
+		return QVTbaseUtil.getName(asTransformation);
+	}
+
+	@Override
 	public @NonNull DomainUsage getDomainUsage(@NonNull Element element) {
 		if (element instanceof ClassDatum) {
 			return getDomainUsage(QVTscheduleUtil.getReferredTypedModel((ClassDatum)element));
@@ -942,12 +947,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 		return superClassDatums;
 	}
-
 	@Override
 	public @NonNull TypedModel getTargetTypedModel() {
 		QVTuConfiguration qvtuConfiguration = ClassUtil.nonNullState(getQVTuConfiguration());
-		Iterable<@NonNull TypedModel> outputTypedModels = qvtuConfiguration.getOutputTypedModels();
-		return outputTypedModels.iterator().next();
+		return qvtuConfiguration.getTargetTypedModel();
 	}
 
 	@Override
