@@ -133,12 +133,12 @@ public class QVTrelationNameGenerator extends NameGenerator
 	}
 
 	public @NonNull String createTraceGlobalSuccessPropertyName(@NonNull TypedModel targetTypedModel) {
-		int index = QVTbaseUtil.getTypedModelIndex(targetTypedModel);
+		int index = 0; //QVTbaseUtil.getTypedModelIndex(targetTypedModel);
 		return TRACE_SUCCESS_PROPERTY_NAME_PREFIX + index + TRACE_GLOBAL_SUCCESS_PROPERTY_NAME_SUFFIX;
 	}
 
 	public @NonNull String createTraceLocalSuccessPropertyName(@NonNull TypedModel targetTypedModel) {
-		int index = QVTbaseUtil.getTypedModelIndex(targetTypedModel);
+		int index = 0; //QVTbaseUtil.getTypedModelIndex(targetTypedModel);
 		return TRACE_SUCCESS_PROPERTY_NAME_PREFIX + index + TRACE_LOCAL_SUCCESS_PROPERTY_NAME_SUFFIX;
 	}
 
