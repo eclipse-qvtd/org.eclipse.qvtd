@@ -57,11 +57,13 @@ import com.google.common.collect.Iterables;
 
 public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAnalysis implements DomainUsageAnalysis.Root
 {
-	protected abstract class AbstractDomainUsage implements DomainUsage.Internal
+	protected abstract static class AbstractDomainUsage implements DomainUsage.Internal
 	{
+		protected final @NonNull RootDomainUsageAnalysis rootDomainUsageAnalysis;
 		protected final int bitMask;
 
-		protected AbstractDomainUsage(int bitMask) {
+		protected AbstractDomainUsage(@NonNull RootDomainUsageAnalysis rootDomainUsageAnalysis, int bitMask) {
+			this.rootDomainUsageAnalysis = rootDomainUsageAnalysis;
 			this.bitMask = bitMask;
 		}
 
@@ -83,13 +85,13 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 				if ((residue & bit) != 0) {
 					residue &= ~bit;
 					if (residue == 0) {
-						return RootDomainUsageAnalysis.this.getTypedModel(i);
+						return rootDomainUsageAnalysis.getTypedModel(i);
 					}
 					if (!(context instanceof NullLiteralExp)) {
 						QVTruntimeUtil.errPrintln("Ambiguous TypedModel: " + this + " for " + LabelUtil.getLabel(context));
 					}
 					//					throw new IllegalStateException("Ambiguous TypedModel: " + this);
-					return RootDomainUsageAnalysis.this.getTypedModel(i);
+					return rootDomainUsageAnalysis.getTypedModel(i);
 				}
 			}
 			return null;
@@ -103,7 +105,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 				int bit = 1 << i;
 				if ((residue & bit) != 0) {
 					residue &= ~bit;
-					typedModels.add(RootDomainUsageAnalysis.this.getTypedModel(i));
+					typedModels.add(rootDomainUsageAnalysis.getTypedModel(i));
 				}
 			}
 			return typedModels;
@@ -121,12 +123,12 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 		@Override
 		public boolean isInput() {
-			return (bitMask & inputUsage.bitMask) != 0;
+			return (bitMask & rootDomainUsageAnalysis.inputUsage.bitMask) != 0;
 		}
 
 		@Override
 		public boolean isMiddle() {
-			return (bitMask & middleUsage.bitMask) != 0;
+			return (bitMask & rootDomainUsageAnalysis.middleUsage.bitMask) != 0;
 		}
 
 		@Override
@@ -136,7 +138,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 		@Override
 		public boolean isOutput() {
-			return (bitMask & outputUsage.bitMask) != 0;
+			return (bitMask & rootDomainUsageAnalysis.outputUsage.bitMask) != 0;
 		}
 
 		@Override
@@ -148,14 +150,14 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			StringBuilder s = new StringBuilder();
 			s.append(prefix);
 			boolean first = true;
-			for (int i = 0; i < bit2typedModel.size(); i++) {
+			for (int i = 0; i < rootDomainUsageAnalysis.bit2typedModel.size(); i++) {
 				int iMask = 1 << i;
 				if ((bitMask & iMask) != 0) {
 					if (!first) {
 						s.append("|");
 					}
-					String name = bit2typedModel.get(i).getName();
-					s.append(name != null ? name : "$middle$");
+					String name = rootDomainUsageAnalysis.bit2typedModel.get(i).getName();
+					s.append(name != null ? name : QVTbaseUtil.TRACE_TYPED_MODEL_NAME);
 					first = false;
 				}
 			}
@@ -169,10 +171,10 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	/**
 	 * A DomainUsageConstant identifies a specific domain result from the DomainUsageAnalysis of an OCL AST node.
 	 */
-	protected class DomainUsageConstant extends AbstractDomainUsage
+	protected static class DomainUsageConstant extends AbstractDomainUsage
 	{
-		protected DomainUsageConstant(int bitMask) {
-			super(bitMask);
+		protected DomainUsageConstant(@NonNull RootDomainUsageAnalysis rootDomainUsageAnalysis, int bitMask) {
+			super(rootDomainUsageAnalysis, bitMask);
 		}
 
 		@Override
@@ -199,19 +201,19 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		}
 
 		public @NonNull DomainUsageConstant union(@NonNull DomainUsageConstant usage) {
-			return RootDomainUsageAnalysis.this.getConstantUsage(bitMask | usage.bitMask);
+			return rootDomainUsageAnalysis.getConstantUsage(bitMask | usage.bitMask);
 		}
 	}
 
 	/**
 	 * A DomainUsageVariable identifies a constrained domain result from the DomainUsageAnalysis of an OCL AST node.
 	 */
-	protected class DomainUsageVariable extends AbstractDomainUsage
+	protected static class DomainUsageVariable extends AbstractDomainUsage
 	{
 		protected final @NonNull List<Element> usedBy = new ArrayList<>();
 
-		protected DomainUsageVariable(int bitMask) {
-			super(bitMask);
+		protected DomainUsageVariable(@NonNull RootDomainUsageAnalysis rootDomainUsageAnalysis, int bitMask) {
+			super(rootDomainUsageAnalysis, bitMask);
 			assert bitMask != 0;
 		}
 
@@ -222,7 +224,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 		@Override
 		public @NonNull DomainUsage cloneVariable() {
-			return new DomainUsageVariable(bitMask);
+			return new DomainUsageVariable(rootDomainUsageAnalysis, bitMask);
 		}
 
 		@Override
@@ -533,7 +535,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	}
 
 	public @NonNull DomainUsage createVariableUsage(int intersectionMask) {
-		return new DomainUsageVariable(intersectionMask);
+		return new DomainUsageVariable(this, intersectionMask);
 	}
 
 	public @NonNull DomainUsageAnalysis getAnalysis(@NonNull Operation operation) {
@@ -589,7 +591,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	public @NonNull DomainUsageConstant getConstantUsage(int bitMask) {
 		DomainUsageConstant usage = constantUsages.get(bitMask);
 		if (usage == null) {
-			usage = new DomainUsageConstant(bitMask);
+			usage = new DomainUsageConstant(this, bitMask);
 			constantUsages.put(bitMask, usage);
 		}
 		return usage;
