@@ -43,6 +43,10 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 			if (missingOperationCallSources != null) {
 				QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
 			}
+			//			boolean missingTraceArtefacts = QVTcoreUtil.rewriteMissingPrimitiveArtefacts(environmentFactory, cResource);
+			//			if (missingTraceArtefacts) {
+			//				QVTruntimeUtil.errPrintln("Missing primitive TypedModel artefacts were fixed up for '" + txURI + "'");
+			//			}
 			checkForProxyURIs(cResource);
 			saveResource(cResource);
 			return cResource;

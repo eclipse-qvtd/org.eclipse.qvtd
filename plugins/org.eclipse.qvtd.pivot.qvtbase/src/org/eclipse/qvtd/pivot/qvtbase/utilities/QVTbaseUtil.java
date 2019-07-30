@@ -205,6 +205,19 @@ public class QVTbaseUtil extends PivotUtil
 		return null;
 	}
 
+	public static @Nullable TypedModel basicGetPrimitiveTypedModel(@NonNull Transformation asTransformation) {
+		return basicGetPrimitiveTypedModel(getModelParameters(asTransformation));
+	}
+
+	public static @Nullable TypedModel basicGetPrimitiveTypedModel(@NonNull Iterable<@NonNull TypedModel> modelParameters) {
+		for (@NonNull TypedModel typedModel : modelParameters) {
+			if (typedModel.isIsPrimitive()) {
+				return typedModel;
+			}
+		}
+		return null;
+	}
+
 	public static @Nullable TypedModel basicGetTraceTypedModel(@NonNull Iterable<@NonNull TypedModel> modelParameters) {
 		for (@NonNull TypedModel typedModel : modelParameters) {
 			if (typedModel.isIsTrace()) {
@@ -483,6 +496,10 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull Transformation getOwningTransformation(@NonNull Rule asRule) {
 		return ClassUtil.nonNullState(asRule.getTransformation());
+	}
+
+	public static @NonNull TypedModel getPrimitiveTypedModel(@NonNull Transformation asTransformation) {
+		return ClassUtil.nonNullState(basicGetPrimitiveTypedModel(getModelParameters(asTransformation)));
 	}
 
 	public static @NonNull OCLExpression getQueryExpression(@NonNull Function asFunction) {

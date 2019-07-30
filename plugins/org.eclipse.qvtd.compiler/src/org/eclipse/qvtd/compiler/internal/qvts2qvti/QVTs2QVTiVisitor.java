@@ -301,9 +301,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 				qvtiMiddleTypedModel = qvtiTypedModel;
 			}
 			qvtmTypedModel2qvtiTypedModel.put(qvtmTypedModel, qvtiTypedModel);
-			if (!isPrimitive) {
-				qvtiTransformation.getModelParameter().add(qvtiTypedModel);
-			}
+			qvtiTransformation.getModelParameter().add(qvtiTypedModel);
 		}
 		for (@NonNull Rule rule : QVTbaseUtil.getRule(qvtmTransformation)) {
 			for (@NonNull Domain domain : QVTbaseUtil.getOwnedDomains(rule)) {
@@ -430,7 +428,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		assert region2mapping != null : "No AbstractRegion2Mapping for " + mergedPartition;
 		return region2mapping;
 	}
-	
+
 	public @NonNull ProblemHandler getProblemHandler() {
 		return problemHandler;
 	}

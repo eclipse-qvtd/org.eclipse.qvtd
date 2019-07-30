@@ -562,6 +562,9 @@ public class QVTr2UMLX
 
 		@Override
 		public @Nullable UMLXElement visitTypedModel(@NonNull TypedModel qvtrTypedModel) {
+			if (qvtrTypedModel.isIsPrimitive()) {
+				return null;
+			}
 			TxTypedModelNode txTypedModelNode = UMLXFactory.eINSTANCE.createTxTypedModelNode();
 			context.install(qvtrTypedModel, txTypedModelNode);
 			String name = qvtrTypedModel.getName();

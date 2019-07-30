@@ -56,6 +56,7 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.DirectionCS;
@@ -139,6 +140,10 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 	public QVTcoreCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
+	}
+
+	protected @NonNull QVTcoreHelper getHelper() {
+		return (QVTcoreHelper)helper;
 	}
 
 	protected void resolveTransformationMappings(@NonNull Iterable<? extends @NonNull MappingCS> csMappings) {
@@ -371,7 +376,10 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		@SuppressWarnings("null") @NonNull EClass eClass = QVTbasePackage.Literals.TRANSFORMATION;
 		Transformation asTransformation = refreshNamedElement(Transformation.class, eClass, csElement);
 		refreshClassifier(asTransformation, csElement);
-		context.refreshPivotList(TypedModel.class, asTransformation.getModelParameter(), csElement.getOwnedDirections());
+		List<TypedModel> newModelParameters = new ArrayList<>();
+		context.refreshPivotList(TypedModel.class, newModelParameters, csElement.getOwnedDirections());
+		newModelParameters.add(0, getHelper().createPrimitiveTypedModel());
+		PivotUtilInternal.refreshList(asTransformation.getModelParameter(), newModelParameters);
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
 		return null;
 	}

@@ -35,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -135,6 +134,13 @@ public class QVTbaseHelper extends PivotHelper
 		Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 		asPredicate.setConditionExpression(asConditionExpression);
 		return asPredicate;
+	}
+
+	public @NonNull TypedModel createPrimitiveTypedModel() {
+		TypedModel asTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
+		asTypedModel.setName(QVTbaseUtil.PRIMITIVE_TYPED_MODEL_NAME);
+		asTypedModel.setIsPrimitive(true);
+		return asTypedModel;
 	}
 
 	public @NonNull Transformation createTransformation(@NonNull String name) {

@@ -33,6 +33,8 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -41,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -223,7 +226,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 		try {
 			ASResource asResource = loadTransformations(CoreModel.class, environmentFactory, transformationURI, keepDebug);
-			List<@NonNull TypedModel> missingIsTraces = rewriteMissingTypedModelIsTrace(asResource);
+			List<@NonNull TypedModel> missingIsTraces = rewriteMissingTypedModelIsTrace(environmentFactory, asResource);
 			if (missingIsTraces != null) {
 				QVTruntimeUtil.errPrintln("TypedModel.isTrace fixed up for '" + transformationURI + "'");
 			}
@@ -237,11 +240,23 @@ public class QVTcoreUtil extends QVTbaseUtil
 	/**
 	 * Rewrite asResource to ensure null-named TypedModel s are isImplicit.
 	 */
-	public static @Nullable List<@NonNull TypedModel> rewriteMissingTypedModelIsTrace(@NonNull Resource asResource) {
+	public static @Nullable List<@NonNull TypedModel> rewriteMissingTypedModelIsTrace(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource asResource) {
+		QVTcoreHelper helper = null;
 		List<@NonNull TypedModel> missingImplicits = null;
 		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
-			if (eObject instanceof TypedModel) {
+			if (eObject instanceof Transformation) {
+				Transformation asTransformation = (Transformation)eObject;
+				List<@NonNull TypedModel> modelParameters = Internal.getModelParameterList(asTransformation);
+				TypedModel primitiveTypedModel = QVTbaseUtil.basicGetPrimitiveTypedModel(modelParameters);
+				if (primitiveTypedModel == null) {
+					if (helper == null) {
+						helper = new QVTcoreHelper(environmentFactory);
+					}
+					modelParameters.add(0, helper.createPrimitiveTypedModel());
+				}
+			}
+			else if (eObject instanceof TypedModel) {
 				TypedModel typedModel = (TypedModel)eObject;
 				if ((typedModel.getName() == null) && !typedModel.isIsTrace()) {
 					if (missingImplicits == null) {

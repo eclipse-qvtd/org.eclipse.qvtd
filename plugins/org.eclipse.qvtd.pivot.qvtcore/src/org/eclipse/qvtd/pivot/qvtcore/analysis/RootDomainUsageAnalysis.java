@@ -46,11 +46,11 @@ import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import com.google.common.collect.Iterables;
@@ -306,7 +306,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	 */
 	protected final @NonNull Map<@NonNull Operation, DomainUsageAnalysis.@NonNull Internal> operation2analysis = new HashMap<>();
 
-	private final @NonNull TypedModel primitiveTypeModel = QVTbaseFactory.eINSTANCE.createTypedModel();
+	private final @NonNull TypedModel primitiveTypeModel;
 
 	private @Nullable TypedModel traceTypedModel = null;
 
@@ -327,8 +327,13 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		super(environmentFactory);
 		this.transformation = transformation;
 		this.standardLibrary = context.getStandardLibrary();
-		primitiveTypeModel.setName(QVTbaseUtil.PRIMITIVE_TYPED_MODEL_NAME);
-		primitiveTypeModel.setIsPrimitive(true);
+		TypedModel primitiveTypedModel = QVTbaseUtil.basicGetPrimitiveTypedModel(transformation);
+		if (primitiveTypedModel == null) {
+			primitiveTypedModel = new QVTimperativeHelper(environmentFactory).createPrimitiveTypedModel();
+			transformation.getModelParameter().add(0, primitiveTypedModel);
+			QVTruntimeUtil.errPrintln("Missing primitive TypedModel fixed up for " + transformation);
+		}
+		this.primitiveTypeModel = primitiveTypedModel;
 		add(primitiveTypeModel);
 		addValidUsage(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
 		addValidUsage(PRIMITIVE_USAGE_BIT_MASK, getConstantUsage(PRIMITIVE_USAGE_BIT_MASK));

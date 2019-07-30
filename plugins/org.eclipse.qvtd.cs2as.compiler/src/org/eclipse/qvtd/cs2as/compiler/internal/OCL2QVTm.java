@@ -60,6 +60,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
@@ -139,6 +140,7 @@ public class OCL2QVTm {
 			pTx.setName(iModel.getName().replace('.', '_')); // FIXME . as part of the name is causing issues in the CG);
 			pPackage.getOwnedClasses().add(pTx);
 
+			pTx.getModelParameter().add(new QVTbaseHelper(envFact).createPrimitiveTypedModel());
 			leftTypedModel.setName(LEFT_MODEL_TYPE_NAME);
 			leftTypedModel.getUsedPackage().addAll(shadowExps.stream()
 				.map(getExpressionContextType())

@@ -674,6 +674,9 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 
 	@Override
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
+		if (asTypedModel.isIsPrimitive()) {
+			return null;
+		}
 		ModelDeclCS csDirection = context.refreshNamedElement(ModelDeclCS.class, QVTrelationCSPackage.Literals.MODEL_DECL_CS, asTypedModel, null);
 		if ("".equals(asTypedModel.getName())) {
 			csDirection.setName(null);

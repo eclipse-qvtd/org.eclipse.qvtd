@@ -234,6 +234,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		this.scheduleModel = scheduleModel;
 		this.environmentFactory = environmentFactory;
 		this.transformation = transformation;
+		QVTbaseUtil.getPrimitiveTypedModel(transformation);		// FIXME debugging the must-exist side effect
 		this.problemHandler = problemHandler;
 		this.nameGenerator = createNameGenerator();
 		this.schedulerOptions = schedulerOptions;
@@ -268,8 +269,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public @NonNull AbstractTransformationAnalysis addTransformation(@NonNull Transformation asTransformation) {
 		AbstractTransformationAnalysis transformationAnalysis = createTransformationAnalysis(asTransformation);
-		TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
-		asTransformation.getModelParameter().add(primitiveTypeModel);
 		transformation2transformationAnalysis.put(asTransformation, transformationAnalysis);
 		return transformationAnalysis;
 	}

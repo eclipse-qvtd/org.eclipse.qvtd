@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
@@ -162,6 +163,14 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		newStatement.setType(type);
 		newStatement.setIsRequired(true);
 		return newStatement;
+	}
+
+	@Override
+	public @NonNull TypedModel createPrimitiveTypedModel() {
+		TypedModel asTypedModel = QVTimperativeFactory.eINSTANCE.createImperativeTypedModel();
+		asTypedModel.setName(QVTimperativeUtil.PRIMITIVE_TYPED_MODEL_NAME);
+		asTypedModel.setIsPrimitive(true);
+		return asTypedModel;
 	}
 
 	public @NonNull SetStatement createSetStatement(@NonNull VariableDeclaration asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isPartial, boolean isNotify) {

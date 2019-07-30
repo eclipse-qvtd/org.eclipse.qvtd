@@ -370,6 +370,9 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			tOut.setOwnedContext(create(tIn.getOwnedContext()));
 			createAll(tIn.getOwnedOperations(), tOut.getOwnedOperations());
 			createAll(tIn.getModelParameter(), tOut.getModelParameter());
+			if (QVTbaseUtil.basicGetPrimitiveTypedModel(tIn) == null) {
+				tOut.getModelParameter().add(0, new QVTcoreHelper(context.getEnvironmentFactory()).createPrimitiveTypedModel());
+			}
 			doRules(tIn, tOut);
 			createAll(tIn.getOwnedComments(), tOut.getOwnedComments());
 			return tOut;
@@ -895,7 +898,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			}
 		}
 		//
-		//	Debug code to conform that every output object is traceable to some input object.
+		//	Debug code to confirm that every output object is traceable to some input object.
 		//
 		for (TreeIterator<EObject> tit = target.getAllContents(); tit.hasNext(); ) {
 			EObject eTarget = tit.next();

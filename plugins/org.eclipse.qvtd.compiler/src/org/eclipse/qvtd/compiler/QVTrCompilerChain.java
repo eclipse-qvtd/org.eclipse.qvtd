@@ -60,11 +60,11 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc.GenPackageComparat
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTr2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -115,7 +115,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
-				Transformation asTransformation = AbstractCompilerChain.getTransformation(qvtrResource);
+				RelationalTransformation asTransformation = (RelationalTransformation) AbstractCompilerChain.getTransformation(qvtrResource);
 				QVTuConfiguration qvtuConfiguration = ((AbstractCompilerChain)compilerChain).createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNames);
 				QVTr2QVTs qvtr2qvts = new QVTr2QVTs(environmentFactory, asTransformation, this, qvtuConfiguration, schedulerOptions);
 				ScheduleManager scheduleManager = qvtr2qvts.getScheduleManager();

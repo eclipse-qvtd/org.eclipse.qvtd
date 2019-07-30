@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationHelper;
@@ -53,7 +54,8 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 	public RelationalTransformationAnalysis(@NonNull QVTrelationScheduleManager scheduleManager, @NonNull RelationalTransformation transformation, @NonNull RootRegion rootRegion) {
 		super(scheduleManager, transformation, rootRegion);
 		this.helper = new QVTrelationHelper(scheduleManager.getEnvironmentFactory());
-		transformation.getModelParameter().add(0, scheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel());		// FIXME move to source
+		QVTbaseUtil.getPrimitiveTypedModel(transformation);		// FIXME debugging the must-exist side effect
+		//		transformation.getModelParameter().add(0, scheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel());		// FIXME move to source
 	}
 
 	protected void analyzeKey(@NonNull Key key) {

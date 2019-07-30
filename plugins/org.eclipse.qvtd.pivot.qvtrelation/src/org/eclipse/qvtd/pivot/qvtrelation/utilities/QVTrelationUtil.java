@@ -412,12 +412,20 @@ public class QVTrelationUtil extends QVTtemplateUtil
 			EObject eObject = tit.next();
 			if (eObject instanceof RelationalTransformation) {
 				RelationalTransformation asTransformation = (RelationalTransformation)eObject;
-				TypedModel traceTypedModel = QVTbaseUtil.basicGetTraceTypedModel(getModelParameters(asTransformation));
+				List<@NonNull TypedModel> modelParameters = Internal.getModelParameterList(asTransformation);
+				TypedModel traceTypedModel = QVTbaseUtil.basicGetTraceTypedModel(modelParameters);
 				if (traceTypedModel == null) {
 					if (helper == null) {
 						helper = new QVTrelationHelper(environmentFactory);
 					}
-					asTransformation.getModelParameter().add(helper.createTraceTypedModel());
+					modelParameters.add(helper.createTraceTypedModel());
+				}
+				TypedModel primitiveTypedModel = QVTbaseUtil.basicGetPrimitiveTypedModel(modelParameters);
+				if (primitiveTypedModel == null) {
+					if (helper == null) {
+						helper = new QVTrelationHelper(environmentFactory);
+					}
+					modelParameters.add(0, helper.createPrimitiveTypedModel());
 				}
 			}
 			if (eObject instanceof Relation) {
