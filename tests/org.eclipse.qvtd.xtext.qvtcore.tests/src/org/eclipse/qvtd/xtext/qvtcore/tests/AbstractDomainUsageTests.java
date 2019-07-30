@@ -47,15 +47,12 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 
 	protected static class MyQVT extends OCLInternal
 	{
-		protected final @NonNull RootDomainUsageAnalysis domainAnalysis;
-
-		public MyQVT(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull RootDomainUsageAnalysis domainAnalysis) {
+		public MyQVT(@NonNull EnvironmentFactoryInternal environmentFactory) {
 			super(environmentFactory);
-			this.domainAnalysis = domainAnalysis;
 		}
 
-		public void checkAnalysis(@NonNull Transformation asTransformation, boolean showAnalysis) {
-			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation(asTransformation, null);
+		public void checkAnalysis(@NonNull Transformation asTransformation, @NonNull RootDomainUsageAnalysis domainAnalysis, boolean showAnalysis) {
+			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation(null);
 			Map<DomainUsage, List<Element>> usage2elements = new HashMap<DomainUsage, List<Element>>();
 			List<@NonNull Operation> operations = new ArrayList<>();
 			for (TreeIterator<EObject> tit = asTransformation.eAllContents(); tit.hasNext(); ) {

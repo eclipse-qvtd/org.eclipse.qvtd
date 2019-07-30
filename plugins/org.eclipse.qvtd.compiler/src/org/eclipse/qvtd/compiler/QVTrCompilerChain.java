@@ -117,8 +117,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(qvtrResource);
 				QVTuConfiguration qvtuConfiguration = ((AbstractCompilerChain)compilerChain).createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNames);
-				//				>>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
-				QVTr2QVTs qvtr2qvts = new QVTr2QVTs(environmentFactory, this, qvtuConfiguration, schedulerOptions);
+				QVTr2QVTs qvtr2qvts = new QVTr2QVTs(environmentFactory, asTransformation, this, qvtuConfiguration, schedulerOptions);
 				ScheduleManager scheduleManager = qvtr2qvts.getScheduleManager();
 				scheduleManager.addTransformation(asTransformation);
 				Resource qvtsResource = createResource();

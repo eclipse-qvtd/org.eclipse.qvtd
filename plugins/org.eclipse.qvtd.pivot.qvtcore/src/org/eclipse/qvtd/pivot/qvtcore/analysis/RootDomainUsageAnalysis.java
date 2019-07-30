@@ -253,6 +253,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	 */
 	protected static final @NonNull Integer PRIMITIVE_USAGE_BIT_MASK = 1;
 
+	protected final @NonNull Transformation transformation;
 	protected final @NonNull StandardLibrary standardLibrary;
 
 	/**
@@ -322,8 +323,9 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	private final @NonNull Set<@NonNull Property> dirtyProperties = new HashSet<>();
 	private final @NonNull Set<@NonNull EReference> dirtyEReferences = new HashSet<>();
 
-	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
+	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory);
+		this.transformation = transformation;
 		this.standardLibrary = context.getStandardLibrary();
 		primitiveTypeModel.setName(QVTbaseUtil.PRIMITIVE_TYPED_MODEL_NAME);
 		primitiveTypeModel.setIsPrimitive(true);
@@ -407,7 +409,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {}
 
-	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation, @Nullable Iterable<@NonNull TypedModel> outputTypedModels) {
+	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@Nullable Iterable<@NonNull TypedModel> outputTypedModels) {
 		int unenforceableMask = 0;
 		int enforceableMask = 0;
 		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {

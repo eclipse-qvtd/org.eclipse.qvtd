@@ -31,7 +31,13 @@ public class QVTcDomainUsageTests extends AbstractDomainUsageTests
 
 	protected @NonNull MyQVT createQVT() throws Exception {
 		QVTcEnvironmentFactory myEnvironmentFactory = new QVTcEnvironmentFactory(getTestProjectManager(), null);
-		return new MyQVT(myEnvironmentFactory, new QVTcoreDomainUsageAnalysis(myEnvironmentFactory));
+		return new MyQVT(myEnvironmentFactory);
+	}
+
+	protected void doTest(@NonNull MyQVT myQVT, @NonNull URI transformURI) throws Exception {
+		Transformation asTransformation = loadTransformation(myQVT, transformURI);
+		QVTcoreDomainUsageAnalysis domainUsageAnalysis = new QVTcoreDomainUsageAnalysis(myQVT.getEnvironmentFactory(), asTransformation);
+		myQVT.checkAnalysis(asTransformation, domainUsageAnalysis, false);
 	}
 
 	@Override
@@ -44,8 +50,7 @@ public class QVTcDomainUsageTests extends AbstractDomainUsageTests
 	public void testQVTcDomainUsage_uml2rdbms_qvtu() throws Exception {
 		MyQVT myQVT = createQVT();
 		URI transformURI = getModelsURI("misc/uml2rdbms.qvtu.qvtc");
-		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation, false);
+		doTest(myQVT, transformURI);
 		myQVT.dispose();
 	}
 }

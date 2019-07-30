@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvti.analysis;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,6 +40,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.CompilerStep;
@@ -564,11 +566,12 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	protected final @NonNull Map<@NonNull Property, @NonNull BasePropertyAnalysis> property2basePropertyAnalysis = new HashMap<>();
 	protected final @NonNull CompleteModel completeModel;
 
-	public QVTiProductionConsumption(@NonNull CompilerStep compilerStep, @NonNull Resource iResource) {
+	public QVTiProductionConsumption(@NonNull CompilerStep compilerStep, @NonNull Resource iResource) throws IOException {
 		super(iResource);
 		this.environmentFactory = compilerStep.getEnvironmentFactory();
 		this.compilerStep = compilerStep;
-		this.domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory);
+		Transformation transformation = AbstractCompilerChain.getTransformation(iResource);
+		this.domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory, transformation);
 		this.completeModel = environmentFactory.getCompleteModel();
 	}
 

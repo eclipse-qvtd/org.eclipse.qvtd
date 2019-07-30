@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
@@ -45,8 +46,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
  */
 public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTrelationVisitor<@NonNull DomainUsage>
 {
-	public QVTrelationDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
-		super(environmentFactory);
+	public QVTrelationDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+		super(environmentFactory, transformation);
 	}
 
 	@Override

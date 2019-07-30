@@ -56,8 +56,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
  */
 public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTimperativeVisitor<@NonNull DomainUsage>
 {
-	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
-		super(environmentFactory);
+	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+		super(environmentFactory, transformation);
 	}
 
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {

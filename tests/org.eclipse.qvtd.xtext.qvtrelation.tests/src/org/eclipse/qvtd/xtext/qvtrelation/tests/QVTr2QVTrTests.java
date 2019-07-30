@@ -18,7 +18,6 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtr.AbstractQVTr2QVTr;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
@@ -70,7 +69,7 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 
 	protected @NonNull MyQVT createQVT() throws Exception {
 		QVTrEnvironmentFactory myEnvironmentFactory = new QVTrEnvironmentFactory(getTestProjectManager(), null);
-		return new MyQVT(myEnvironmentFactory, new QVTrelationDomainUsageAnalysis(myEnvironmentFactory));
+		return new MyQVT(myEnvironmentFactory);
 	}
 
 	protected void doCopierTest(@NonNull MyQVT myQVT, @NonNull URI inURI, @NonNull URI outURI) throws Exception {

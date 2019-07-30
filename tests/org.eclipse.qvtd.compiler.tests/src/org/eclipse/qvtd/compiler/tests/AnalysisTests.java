@@ -303,8 +303,8 @@ public class AnalysisTests extends XtextTestCase
 		Transformation asTransformation = QVTcoreUtil.getAllTransformations(asModel).get(0);
 
 		ContainmentAnalysis containmentAnalysis = new ContainmentAnalysis(environmentFactory);
-		QVTcoreDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
-		domainAnalysis.analyzeTransformation(asTransformation, null);
+		QVTcoreDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory, asTransformation);
+		domainAnalysis.analyzeTransformation(null);
 		//
 		Mapping asMapping = (Mapping) NameUtil.getNameable(asTransformation.getRule(), "uemployee_2_Employee_mentor");
 		Assignment asAssignment = asMapping.getBottomPattern().getAssignment().get(0);

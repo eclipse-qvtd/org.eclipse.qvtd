@@ -46,9 +46,9 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 {
 	protected final @NonNull QVTuConfiguration qvtuConfiguration;
 
-	protected QVTrelationScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler,
+	protected QVTrelationScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull ProblemHandler problemHandler,
 			@NonNull QVTuConfiguration qvtuConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, problemHandler, schedulerOptions);
+		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, transformation, problemHandler, schedulerOptions);
 		this.qvtuConfiguration = qvtuConfiguration;
 	}
 
@@ -84,7 +84,7 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 
 	@Override
 	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
-		return new QVTrelationDomainUsageAnalysis(environmentFactory);
+		return new QVTrelationDomainUsageAnalysis(environmentFactory, transformation);
 	}
 
 	@Override

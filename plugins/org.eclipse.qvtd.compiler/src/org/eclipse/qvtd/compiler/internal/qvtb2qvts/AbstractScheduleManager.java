@@ -179,6 +179,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	protected final @NonNull ScheduleModel scheduleModel;
 	protected final @NonNull EnvironmentFactory environmentFactory;
+	protected final @NonNull Transformation transformation;
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull NameGenerator nameGenerator;
 	private @Nullable TraceHelper traceHelper = null;
@@ -229,9 +230,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	//	private final @NonNull Map<@NonNull TransformationAnalysis, @NonNull TransformationAnalysis2TracePackage> transformationAnalysis2transformationAnalysis2tracePackage = new HashMap<>();
 
 	protected AbstractScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
-			@NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
+			@NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		this.scheduleModel = scheduleModel;
 		this.environmentFactory = environmentFactory;
+		this.transformation = transformation;
 		this.problemHandler = problemHandler;
 		this.nameGenerator = createNameGenerator();
 		this.schedulerOptions = schedulerOptions;
@@ -362,8 +364,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public void analyzeSourceModel() {
 		QVTuConfiguration qvtuConfiguration = getQVTuConfiguration();
 		Iterable<@NonNull TypedModel> outputTypedModels = qvtuConfiguration != null ? qvtuConfiguration.getOutputTypedModels() : null;
+		domainUsageAnalysis.analyzeTransformation(outputTypedModels);
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
-			domainUsageAnalysis.analyzeTransformation(transformationAnalysis.getTransformation(), outputTypedModels);
 			transformationAnalysis.analyzeSourceModel();
 		}
 	}

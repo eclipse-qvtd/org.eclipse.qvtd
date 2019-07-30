@@ -32,7 +32,13 @@ public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 
 	protected @NonNull MyQVT createQVT() throws Exception {
 		QVTrEnvironmentFactory myEnvironmentFactory = new QVTrEnvironmentFactory(getTestProjectManager(), null);
-		return new MyQVT(myEnvironmentFactory, new QVTrelationDomainUsageAnalysis(myEnvironmentFactory));
+		return new MyQVT(myEnvironmentFactory);
+	}
+
+	protected void doTest(@NonNull MyQVT myQVT, @NonNull URI transformURI) throws Exception {
+		Transformation asTransformation = loadTransformation(myQVT, transformURI);
+		QVTrelationDomainUsageAnalysis domainUsageAnalysis = new QVTrelationDomainUsageAnalysis(myQVT.getEnvironmentFactory(), asTransformation);
+		myQVT.checkAnalysis(asTransformation, domainUsageAnalysis, false);
 	}
 
 	@Override
@@ -45,24 +51,21 @@ public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 	public void testQVTrDomainUsage_HierarchicalStateMachine2FlatStateMachine() throws Exception {
 		MyQVT myQVT = createQVT();
 		URI transformURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/model/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
-		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation, false);
+		doTest(myQVT, transformURI);
 		myQVT.dispose();
 	}
 
 	public void testQVTrDomainUsage_Keys() throws Exception {
 		MyQVT myQVT = createQVT();
 		URI transformURI = getModelsURI("misc/Keys.qvtr");
-		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation, false);
+		doTest(myQVT, transformURI);
 		myQVT.dispose();
 	}
 
 	public void testQVTrDomainUsage_Rel2Core() throws Exception {
 		MyQVT myQVT = createQVT();
 		URI transformURI = getModelsURI("rel2core/RelToCore.qvtr");
-		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation, false);
+		doTest(myQVT, transformURI);
 		myQVT.dispose();
 	}
 }

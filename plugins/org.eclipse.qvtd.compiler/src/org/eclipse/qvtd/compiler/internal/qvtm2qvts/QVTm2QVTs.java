@@ -21,6 +21,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -31,8 +32,8 @@ import com.google.common.collect.Lists;
 public class QVTm2QVTs extends AbstractQVTb2QVTs
 {
 	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory,
-			CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(new QVTcoreScheduleManager(environmentFactory, problemHandler, schedulerOptions), problemHandler);
+			@NonNull Transformation transformation, CompilerOptions.@Nullable StepOptions schedulerOptions) {
+		super(new QVTcoreScheduleManager(environmentFactory, transformation, problemHandler, schedulerOptions), problemHandler);
 	}
 
 	public @NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {

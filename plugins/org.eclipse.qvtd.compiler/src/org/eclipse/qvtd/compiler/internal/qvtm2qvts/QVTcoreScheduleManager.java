@@ -34,13 +34,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 public class QVTcoreScheduleManager extends AbstractScheduleManager
 {
-	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, problemHandler, schedulerOptions);
+	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
+		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, transformation, problemHandler, schedulerOptions);
 	}
 
 	@Override
 	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
-		return new QVTcoreDomainUsageAnalysis(environmentFactory);
+		return new QVTcoreDomainUsageAnalysis(environmentFactory, transformation);
 	}
 
 	@Override

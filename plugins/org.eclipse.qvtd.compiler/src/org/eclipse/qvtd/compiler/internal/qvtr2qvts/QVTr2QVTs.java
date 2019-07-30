@@ -49,6 +49,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -417,9 +418,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	private @Nullable Resource debugSource = null;
 	private @Nullable Resource debugTarget = null;
 
-	public QVTr2QVTs(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler,
+	public QVTr2QVTs(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull ProblemHandler problemHandler,
 			@NonNull QVTuConfiguration qvtuConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(new QVTrelationScheduleManager(environmentFactory, problemHandler, qvtuConfiguration, schedulerOptions), problemHandler);
+		super(new QVTrelationScheduleManager(environmentFactory, transformation, problemHandler, qvtuConfiguration, schedulerOptions), problemHandler);
 		//		this.qvtuConfiguration = qvtuConfiguration;
 		//		this.createVisitor = new CreateVisitor(this, qvtuConfiguration);
 		//		this.updateVisitor = new UpdateVisitor(this);
