@@ -121,6 +121,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SimpleParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("SimpleParameterBinding", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Statement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("Statement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTimperativeTables.PACKid_$metamodel$.getClassId("Type", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTimperativeTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableExp = QVTimperativeTables.PACKid_$metamodel$.getClassId("VariableExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("VariableStatement", 0);
@@ -154,6 +155,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_MappingParameterBinding = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_MappingParameterBinding);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_MappingStatement = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_MappingStatement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Statement = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_Statement);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TypedModel = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_TypedModel);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_VariableStatement = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_VariableStatement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_MappingParameter = TypeId.SEQUENCE.getSpecializedId(QVTimperativeTables.CLSSid_MappingParameter);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_MappingParameter = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_MappingParameter);
@@ -201,6 +203,7 @@ public class QVTimperativeTables
 		public static final @NonNull EcoreExecutorType _CheckStatement = new EcoreExecutorType(QVTimperativePackage.Literals.CHECK_STATEMENT, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ConnectionVariable = new EcoreExecutorType(QVTimperativePackage.Literals.CONNECTION_VARIABLE, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _DeclareStatement = new EcoreExecutorType(QVTimperativePackage.Literals.DECLARE_STATEMENT, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _EntryPoint = new EcoreExecutorType(QVTimperativePackage.Literals.ENTRY_POINT, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _GuardParameter = new EcoreExecutorType(QVTimperativePackage.Literals.GUARD_PARAMETER, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _GuardParameterBinding = new EcoreExecutorType(QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ImperativeModel = new EcoreExecutorType(QVTimperativePackage.Literals.IMPERATIVE_MODEL, PACKAGE, 0);
@@ -230,6 +233,7 @@ public class QVTimperativeTables
 			_CheckStatement,
 			_ConnectionVariable,
 			_DeclareStatement,
+			_EntryPoint,
 			_GuardParameter,
 			_GuardParameterBinding,
 			_ImperativeModel,
@@ -338,6 +342,14 @@ public class QVTimperativeTables
 		private static final @NonNull ExecutorFragment _DeclareStatement__TypedElement = new ExecutorFragment(Types._DeclareStatement, PivotTables.Types._TypedElement);
 		private static final @NonNull ExecutorFragment _DeclareStatement__VariableDeclaration = new ExecutorFragment(Types._DeclareStatement, PivotTables.Types._VariableDeclaration);
 		private static final @NonNull ExecutorFragment _DeclareStatement__VariableStatement = new ExecutorFragment(Types._DeclareStatement, QVTimperativeTables.Types._VariableStatement);
+
+		private static final @NonNull ExecutorFragment _EntryPoint__Element = new ExecutorFragment(Types._EntryPoint, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _EntryPoint__EntryPoint = new ExecutorFragment(Types._EntryPoint, QVTimperativeTables.Types._EntryPoint);
+		private static final @NonNull ExecutorFragment _EntryPoint__Mapping = new ExecutorFragment(Types._EntryPoint, QVTimperativeTables.Types._Mapping);
+		private static final @NonNull ExecutorFragment _EntryPoint__NamedElement = new ExecutorFragment(Types._EntryPoint, PivotTables.Types._NamedElement);
+		private static final @NonNull ExecutorFragment _EntryPoint__OclAny = new ExecutorFragment(Types._EntryPoint, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _EntryPoint__OclElement = new ExecutorFragment(Types._EntryPoint, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _EntryPoint__Rule = new ExecutorFragment(Types._EntryPoint, QVTbaseTables.Types._Rule);
 
 		private static final @NonNull ExecutorFragment _GuardParameter__Element = new ExecutorFragment(Types._GuardParameter, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _GuardParameter__GuardParameter = new ExecutorFragment(Types._GuardParameter, QVTimperativeTables.Types._GuardParameter);
@@ -591,6 +603,9 @@ public class QVTimperativeTables
 		public static final @NonNull ExecutorProperty _DeclareStatement__isCheck = new EcoreExecutorProperty(QVTimperativePackage.Literals.DECLARE_STATEMENT__IS_CHECK, Types._DeclareStatement, 0);
 		public static final @NonNull ExecutorProperty _DeclareStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.DECLARE_STATEMENT__OWNED_EXPRESSION, Types._DeclareStatement, 1);
 
+		public static final @NonNull ExecutorProperty _EntryPoint__checkedTypedModels = new EcoreExecutorProperty(QVTimperativePackage.Literals.ENTRY_POINT__CHECKED_TYPED_MODELS, Types._EntryPoint, 0);
+		public static final @NonNull ExecutorProperty _EntryPoint__enforcedTypedModels = new EcoreExecutorProperty(QVTimperativePackage.Literals.ENTRY_POINT__ENFORCED_TYPED_MODELS, Types._EntryPoint, 1);
+
 		public static final @NonNull ExecutorProperty _GuardParameter__referredTypedModel = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__REFERRED_TYPED_MODEL, Types._GuardParameter, 0);
 		public static final @NonNull ExecutorProperty _GuardParameter__successProperty = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__SUCCESS_PROPERTY, Types._GuardParameter, 1);
 
@@ -766,6 +781,18 @@ public class QVTimperativeTables
 				Fragments._DeclareStatement__DeclareStatement /* 7 */
 			};
 		private static final int @NonNull [] __DeclareStatement = { 1,1,1,1,2,2,1,1 };
+
+		private static final @NonNull ExecutorFragment @NonNull [] _EntryPoint =
+			{
+				Fragments._EntryPoint__OclAny /* 0 */,
+				Fragments._EntryPoint__OclElement /* 1 */,
+				Fragments._EntryPoint__Element /* 2 */,
+				Fragments._EntryPoint__NamedElement /* 3 */,
+				Fragments._EntryPoint__Rule /* 4 */,
+				Fragments._EntryPoint__Mapping /* 5 */,
+				Fragments._EntryPoint__EntryPoint /* 6 */
+			};
+		private static final int @NonNull [] __EntryPoint = { 1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _GuardParameter =
 			{
@@ -1016,6 +1043,7 @@ public class QVTimperativeTables
 			Types._CheckStatement.initFragments(_CheckStatement, __CheckStatement);
 			Types._ConnectionVariable.initFragments(_ConnectionVariable, __ConnectionVariable);
 			Types._DeclareStatement.initFragments(_DeclareStatement, __DeclareStatement);
+			Types._EntryPoint.initFragments(_EntryPoint, __EntryPoint);
 			Types._GuardParameter.initFragments(_GuardParameter, __GuardParameter);
 			Types._GuardParameterBinding.initFragments(_GuardParameterBinding, __GuardParameterBinding);
 			Types._ImperativeModel.initFragments(_ImperativeModel, __ImperativeModel);
@@ -1323,6 +1351,41 @@ public class QVTimperativeTables
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _DeclareStatement__VariableDeclaration = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _DeclareStatement__VariableStatement = {};
+
+		private static final @NonNull ExecutorOperation @NonNull [] _EntryPoint__EntryPoint = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _EntryPoint__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _EntryPoint__Mapping = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _EntryPoint__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _EntryPoint__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _EntryPoint__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _EntryPoint__Rule = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardParameter__GuardParameter = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardParameter__Element = {
@@ -2131,6 +2194,14 @@ public class QVTimperativeTables
 			Fragments._DeclareStatement__VariableDeclaration.initOperations(_DeclareStatement__VariableDeclaration);
 			Fragments._DeclareStatement__VariableStatement.initOperations(_DeclareStatement__VariableStatement);
 
+			Fragments._EntryPoint__Element.initOperations(_EntryPoint__Element);
+			Fragments._EntryPoint__EntryPoint.initOperations(_EntryPoint__EntryPoint);
+			Fragments._EntryPoint__Mapping.initOperations(_EntryPoint__Mapping);
+			Fragments._EntryPoint__NamedElement.initOperations(_EntryPoint__NamedElement);
+			Fragments._EntryPoint__OclAny.initOperations(_EntryPoint__OclAny);
+			Fragments._EntryPoint__OclElement.initOperations(_EntryPoint__OclElement);
+			Fragments._EntryPoint__Rule.initOperations(_EntryPoint__Rule);
+
 			Fragments._GuardParameter__Element.initOperations(_GuardParameter__Element);
 			Fragments._GuardParameter__GuardParameter.initOperations(_GuardParameter__GuardParameter);
 			Fragments._GuardParameter__MappingParameter.initOperations(_GuardParameter__MappingParameter);
@@ -2348,6 +2419,16 @@ public class QVTimperativeTables
 			QVTimperativeTables.Properties._DeclareStatement__ownedExpression
 		};
 
+		private static final @NonNull ExecutorProperty @NonNull [] _EntryPoint = {
+			QVTimperativeTables.Properties._EntryPoint__checkedTypedModels,
+			QVTimperativeTables.Properties._EntryPoint__enforcedTypedModels,
+			QVTimperativeTables.Properties._Mapping__firstPass,
+			QVTimperativeTables.Properties._Mapping__isStrict,
+			QVTimperativeTables.Properties._Mapping__lastPass,
+			QVTimperativeTables.Properties._Mapping__ownedMappingParameters,
+			QVTimperativeTables.Properties._Mapping__ownedStatements
+		};
+
 		private static final @NonNull ExecutorProperty @NonNull [] _GuardParameter = {
 			QVTimperativeTables.Properties._MappingParameter__owningMapping,
 			QVTimperativeTables.Properties._GuardParameter__referredTypedModel,
@@ -2466,6 +2547,7 @@ public class QVTimperativeTables
 			Fragments._CheckStatement__CheckStatement.initProperties(_CheckStatement);
 			Fragments._ConnectionVariable__ConnectionVariable.initProperties(_ConnectionVariable);
 			Fragments._DeclareStatement__DeclareStatement.initProperties(_DeclareStatement);
+			Fragments._EntryPoint__EntryPoint.initProperties(_EntryPoint);
 			Fragments._GuardParameter__GuardParameter.initProperties(_GuardParameter);
 			Fragments._GuardParameterBinding__GuardParameterBinding.initProperties(_GuardParameterBinding);
 			Fragments._ImperativeModel__ImperativeModel.initProperties(_ImperativeModel);

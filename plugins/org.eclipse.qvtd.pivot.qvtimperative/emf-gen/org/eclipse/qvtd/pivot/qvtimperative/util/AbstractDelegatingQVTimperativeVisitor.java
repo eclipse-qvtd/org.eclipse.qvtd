@@ -71,6 +71,11 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, @NonNull D ex
 	}
 
 	@Override
+	public R visitEntryPoint(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EntryPoint object) {
+		return delegate.visitEntryPoint(object);
+	}
+
+	@Override
 	public R visitGuardParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardParameter object) {
 		return delegate.visitGuardParameter(object);
 	}

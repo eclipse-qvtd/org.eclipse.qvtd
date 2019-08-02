@@ -82,6 +82,11 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitEntryPoint(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EntryPoint object) {
+		return visitMapping(object);
+	}
+
+	@Override
 	public @Nullable Object visitGuardParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardParameter object) {
 		return visitMappingParameter(object);
 	}

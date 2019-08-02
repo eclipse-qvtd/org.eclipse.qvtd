@@ -58,6 +58,10 @@
         <genParameters ecoreParameter="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForUncheckedValue/context"/>
       </genOperations>
     </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-EntryPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-EntryPoint-checkedTypedModels"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-EntryPoint-enforcedTypedModels"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-GuardParameter">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-GuardParameter-referredTypedModel"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-GuardParameter-successProperty"/>

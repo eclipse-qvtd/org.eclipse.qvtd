@@ -19,6 +19,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.CheckStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DeclareStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.EntryPointCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardParameterBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardParameterCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImportCSElements;
@@ -122,6 +123,18 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			DirectionCSElements a = f.getDirectionCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_3_2_0());
+		}
+		{
+			EntryPointCSElements a = f.getEntryPointCSAccess();
+			c.setLinewrap(2).before(a.getGroup());
+			c.setNoSpace().around(a.getColonKeyword_3_0());
+			c.setNoSpace().around(a.getFullStopFullStopKeyword_3_2_0());
+			c.setNoSpace().before(a.getCommaKeyword_5_2_0());
+			c.setNoSpace().before(a.getCommaKeyword_6_2_0());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_13());
+			setBraces(c, a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_13());
+			//			c.setLinewrap(2).between(a.getDomainsAssignment_5(), a.getDomainsAssignment_5());
+			//			c.setLinewrap(1).before(a.getOwnedDomainsAssignment_5());
 		}
 		{
 			GuardParameterBindingCSElements a = f.getGuardParameterBindingCSAccess();

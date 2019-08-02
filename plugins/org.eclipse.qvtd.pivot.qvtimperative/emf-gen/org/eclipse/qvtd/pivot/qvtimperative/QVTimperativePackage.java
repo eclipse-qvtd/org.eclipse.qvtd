@@ -319,6 +319,38 @@ public interface QVTimperativePackage extends EPackage {
 	EOperation getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint <em>Entry Point</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Entry Point</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.EntryPoint
+	 * @generated
+	 */
+	EClass getEntryPoint();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getCheckedTypedModels <em>Checked Typed Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Checked Typed Models</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getCheckedTypedModels()
+	 * @see #getEntryPoint()
+	 * @generated
+	 */
+	EReference getEntryPoint_CheckedTypedModels();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getEnforcedTypedModels <em>Enforced Typed Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Enforced Typed Models</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getEnforcedTypedModels()
+	 * @see #getEntryPoint()
+	 * @generated
+	 */
+	EReference getEntryPoint_EnforcedTypedModels();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardParameter <em>Guard Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1380,6 +1412,32 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EntryPointImpl <em>Entry Point</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.EntryPointImpl
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getEntryPoint()
+		 * @generated
+		 */
+		EClass ENTRY_POINT = eINSTANCE.getEntryPoint();
+
+		/**
+		 * The meta object literal for the '<em><b>Checked Typed Models</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTRY_POINT__CHECKED_TYPED_MODELS = eINSTANCE.getEntryPoint_CheckedTypedModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Enforced Typed Models</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTRY_POINT__ENFORCED_TYPED_MODELS = eINSTANCE.getEntryPoint_EnforcedTypedModels();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardParameterImpl <em>Guard Parameter</em>}' class.

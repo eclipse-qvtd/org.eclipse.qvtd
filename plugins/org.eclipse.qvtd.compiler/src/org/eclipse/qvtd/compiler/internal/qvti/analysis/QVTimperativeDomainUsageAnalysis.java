@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -133,6 +134,11 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	@Override
 	public @NonNull DomainUsage visitDeclareStatement(@NonNull DeclareStatement object) {
 		return getUsage(PivotUtil.getType(object));
+	}
+
+	@Override
+	public @NonNull DomainUsage visitEntryPoint(@NonNull EntryPoint entryPoint) {
+		return visitMapping(entryPoint);
 	}
 
 	@Override

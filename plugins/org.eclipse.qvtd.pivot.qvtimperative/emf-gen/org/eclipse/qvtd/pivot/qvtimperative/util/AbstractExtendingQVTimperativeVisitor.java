@@ -75,6 +75,11 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}
 
 	@Override
+	public R visitEntryPoint(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EntryPoint object) {
+		return visitMapping(object);
+	}
+
+	@Override
 	public R visitGuardParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardParameter object) {
 		return visitMappingParameter(object);
 	}

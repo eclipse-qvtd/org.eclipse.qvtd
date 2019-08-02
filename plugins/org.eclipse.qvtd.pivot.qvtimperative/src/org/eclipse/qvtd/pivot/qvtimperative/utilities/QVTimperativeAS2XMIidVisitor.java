@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -49,6 +50,11 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 			s.append(index);
 			s.append(SCOPE_SEPARATOR);
 		}
+	}
+
+	@Override
+	public @Nullable Boolean visitEntryPoint(@NonNull EntryPoint entryPoint) {
+		return visitMapping(entryPoint);
 	}
 
 	@Override

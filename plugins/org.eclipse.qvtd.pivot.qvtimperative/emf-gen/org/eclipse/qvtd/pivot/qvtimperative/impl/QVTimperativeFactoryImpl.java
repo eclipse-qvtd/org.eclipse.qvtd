@@ -88,20 +88,21 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case 3: return createBufferStatement();
 			case 4: return createCheckStatement();
 			case 6: return createDeclareStatement();
-			case 7: return createGuardParameter();
-			case 8: return createGuardParameterBinding();
-			case 9: return createImperativeModel();
-			case 10: return createImperativeTransformation();
-			case 11: return createImperativeTypedModel();
-			case 12: return createLoopParameterBinding();
-			case 13: return createLoopVariable();
-			case 14: return createMapping();
-			case 15: return createMappingCall();
-			case 16: return createMappingLoop();
-			case 20: return createNewStatement();
-			case 22: return createSetStatement();
-			case 23: return createSimpleParameter();
-			case 24: return createSimpleParameterBinding();
+			case 7: return createEntryPoint();
+			case 8: return createGuardParameter();
+			case 9: return createGuardParameterBinding();
+			case 10: return createImperativeModel();
+			case 11: return createImperativeTransformation();
+			case 12: return createImperativeTypedModel();
+			case 13: return createLoopParameterBinding();
+			case 14: return createLoopVariable();
+			case 15: return createMapping();
+			case 16: return createMappingCall();
+			case 17: return createMappingLoop();
+			case 21: return createNewStatement();
+			case 23: return createSetStatement();
+			case 24: return createSimpleParameter();
+			case 25: return createSimpleParameterBinding();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -171,6 +172,17 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull DeclareStatement createDeclareStatement() {
 		DeclareStatementImpl declareStatement = new DeclareStatementImpl();
 		return declareStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EntryPoint createEntryPoint() {
+		EntryPointImpl entryPoint = new EntryPointImpl();
+		return entryPoint;
 	}
 
 	/**

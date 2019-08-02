@@ -141,6 +141,10 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createDeclareStatementAdapter();
 			}
 			@Override
+			public Adapter caseEntryPoint(EntryPoint object) {
+				return createEntryPointAdapter();
+			}
+			@Override
 			public Adapter caseGuardParameter(GuardParameter object) {
 				return createGuardParameterAdapter();
 			}
@@ -237,6 +241,10 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createVariableDeclarationAdapter();
 			}
 			@Override
+			public Adapter caseRule(Rule object) {
+				return createRuleAdapter();
+			}
+			@Override
 			public Adapter caseNamespace(Namespace object) {
 				return createNamespaceAdapter();
 			}
@@ -267,10 +275,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypedModel(TypedModel object) {
 				return createTypedModelAdapter();
-			}
-			@Override
-			public Adapter caseRule(Rule object) {
-				return createRuleAdapter();
 			}
 			@Override
 			public Adapter caseReferringElement(ReferringElement object) {
@@ -391,6 +395,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDeclareStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint <em>Entry Point</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.EntryPoint
+	 * @generated
+	 */
+	public Adapter createEntryPointAdapter() {
 		return null;
 	}
 

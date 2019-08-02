@@ -75,6 +75,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -108,6 +109,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
@@ -430,6 +432,21 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitDomain(@NonNull Domain object) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ElementCS visitEntryPoint(@NonNull EntryPoint asEntryPoint) {
+		EntryPointCS csEntryPoint = context.refreshNamedElement(EntryPointCS.class, QVTimperativeCSPackage.Literals.ENTRY_POINT_CS, asEntryPoint);
+		csEntryPoint.setPivot(asEntryPoint);
+		refreshOwnedInTransformation(csEntryPoint, asEntryPoint);
+		context.refreshList(csEntryPoint.getOwnedParameters(), context.visitDeclarations(MappingParameterCS.class, asEntryPoint.getOwnedMappingParameters(), null));
+		context.refreshList(csEntryPoint.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asEntryPoint.getOwnedStatements(), null));
+		context.refreshList(csEntryPoint.getCheckedDirections(), context.visitDeclarations(DirectionCS.class, asEntryPoint.getCheckedTypedModels(), null));
+		context.refreshList(csEntryPoint.getEnforcedDirections(), context.visitDeclarations(DirectionCS.class, asEntryPoint.getEnforcedTypedModels(), null));
+		csEntryPoint.setFirstPass(asEntryPoint.getFirstPass());
+		csEntryPoint.setIsStrict(asEntryPoint.isIsStrict());
+		csEntryPoint.setLastPass(asEntryPoint.getLastPass());
+		return csEntryPoint;
 	}
 
 	@Override

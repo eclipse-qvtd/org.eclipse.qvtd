@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -113,6 +114,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return NameUtil.getNameable(getOwnedTypedModels(transformation), name);
 	}
 
+	public static @NonNull Iterable<@NonNull TypedModel> getCheckedTypedModels(@NonNull EntryPoint entryPoint) {
+		return ClassUtil.nullFree(entryPoint.getCheckedTypedModels());
+	}
+
 	public static org.eclipse.ocl.pivot.@NonNull Class getClassType(@NonNull TypedElement typedElement) {
 		return ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)typedElement.getType());
 	}
@@ -132,6 +137,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	public static @NonNull ImperativeTransformation getContainingTransformation(@Nullable EObject eObject) {
 		return ClassUtil.nonNullState(basicGetContainingTransformation(eObject));
+	}
+
+	public static @NonNull Iterable<@NonNull TypedModel> getEnforcedTypedModels(@NonNull EntryPoint entryPoint) {
+		return ClassUtil.nullFree(entryPoint.getEnforcedTypedModels());
 	}
 
 	public static @NonNull String getName(@NonNull Mapping asMapping) {

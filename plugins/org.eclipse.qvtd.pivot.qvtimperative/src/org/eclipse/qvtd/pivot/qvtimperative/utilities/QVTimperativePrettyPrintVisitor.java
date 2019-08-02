@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
@@ -25,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -146,6 +148,47 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			safeVisit(asInit);
 		}
 		context.append(";\n");
+		return null;
+	}
+
+	@Override
+	public Object visitEntryPoint(@NonNull EntryPoint pEntryPoint) {
+		if (pEntryPoint.isIsStrict()) {
+			context.append("strict ");
+		}
+		context.append("entry ");
+		context.appendName(pEntryPoint);
+		boolean isFirst = true;
+		for (@NonNull TypedModel pTypedModel : QVTimperativeUtil.getCheckedTypedModels(pEntryPoint)) {
+			if (isFirst) {
+				context.append("check ");
+			}
+			else {
+				context.append(", ");
+			}
+			safeVisit(pTypedModel);
+		}
+		isFirst = true;
+		for (@NonNull TypedModel pTypedModel : QVTimperativeUtil.getEnforcedTypedModels(pEntryPoint)) {
+			if (isFirst) {
+				context.append("enforce ");
+			}
+			else {
+				context.append(", ");
+			}
+			safeVisit(pTypedModel);
+		}
+		context.append(" in ");
+		context.appendName(pEntryPoint.getTransformation());
+		context.append(" {\n");
+		context.push("", "");
+		for (@NonNull MappingParameter pVariable : QVTimperativeUtil.getOwnedMappingParameters(pEntryPoint)) {
+			safeVisit(pVariable);
+		}
+		for (Statement pStatement : pEntryPoint.getOwnedStatements()) {
+			safeVisit(pStatement);
+		}
+		context.pop();
 		return null;
 	}
 

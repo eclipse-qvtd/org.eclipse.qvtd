@@ -85,6 +85,15 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull DeclareStatement createDeclareStatement();
 
 	/**
+	 * Returns a new object of class '<em>Entry Point</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Entry Point</em>'.
+	 * @generated
+	 */
+	EntryPoint createEntryPoint();
+
+	/**
 	 * Returns a new object of class '<em>Guard Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

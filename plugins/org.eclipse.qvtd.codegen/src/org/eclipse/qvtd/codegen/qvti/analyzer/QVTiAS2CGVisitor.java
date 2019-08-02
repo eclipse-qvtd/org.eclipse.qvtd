@@ -117,6 +117,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -847,6 +848,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitDomain(@NonNull Domain object) {
 		return visiting(object);
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitEntryPoint(@NonNull EntryPoint pEntryPoint) {
+		return visitMapping(pEntryPoint);
 	}
 
 	protected @NonNull String getFunctionInstanceName(@NonNull CGFunction cgFunction) {

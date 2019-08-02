@@ -69,6 +69,11 @@ public abstract class AbstractMergedQVTimperativeVisitor<R, C>
 	}
 
 	@Override
+	public R visitEntryPoint(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EntryPoint object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitGuardParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardParameter object) {
 		return visiting(object);
 	}

@@ -24,6 +24,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -161,6 +162,12 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		}
 		return null;
 	}
+
+	@Override
+	public @Nullable String visitEntryPoint(@NonNull EntryPoint asEntryPoint) {
+		return visitMapping(asEntryPoint);
+	}
+
 
 	@Override
 	public @Nullable String visitGuardParameter(@NonNull GuardParameter asVariable) {

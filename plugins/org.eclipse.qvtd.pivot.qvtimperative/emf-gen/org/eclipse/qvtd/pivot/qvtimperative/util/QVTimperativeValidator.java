@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.pivot.util.PivotValidator;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseValidator;
+import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -340,44 +341,46 @@ public class QVTimperativeValidator extends EObjectValidator {
 			case 6:
 				return validateDeclareStatement((DeclareStatement)value, diagnostics, context);
 			case 7:
-				return validateGuardParameter((GuardParameter)value, diagnostics, context);
+				return validateEntryPoint((EntryPoint)value, diagnostics, context);
 			case 8:
-				return validateGuardParameterBinding((GuardParameterBinding)value, diagnostics, context);
+				return validateGuardParameter((GuardParameter)value, diagnostics, context);
 			case 9:
-				return validateImperativeModel((ImperativeModel)value, diagnostics, context);
+				return validateGuardParameterBinding((GuardParameterBinding)value, diagnostics, context);
 			case 10:
-				return validateImperativeTransformation((ImperativeTransformation)value, diagnostics, context);
+				return validateImperativeModel((ImperativeModel)value, diagnostics, context);
 			case 11:
-				return validateImperativeTypedModel((ImperativeTypedModel)value, diagnostics, context);
+				return validateImperativeTransformation((ImperativeTransformation)value, diagnostics, context);
 			case 12:
-				return validateLoopParameterBinding((LoopParameterBinding)value, diagnostics, context);
+				return validateImperativeTypedModel((ImperativeTypedModel)value, diagnostics, context);
 			case 13:
-				return validateLoopVariable((LoopVariable)value, diagnostics, context);
+				return validateLoopParameterBinding((LoopParameterBinding)value, diagnostics, context);
 			case 14:
-				return validateMapping((Mapping)value, diagnostics, context);
+				return validateLoopVariable((LoopVariable)value, diagnostics, context);
 			case 15:
-				return validateMappingCall((MappingCall)value, diagnostics, context);
+				return validateMapping((Mapping)value, diagnostics, context);
 			case 16:
-				return validateMappingLoop((MappingLoop)value, diagnostics, context);
+				return validateMappingCall((MappingCall)value, diagnostics, context);
 			case 17:
-				return validateMappingParameter((MappingParameter)value, diagnostics, context);
+				return validateMappingLoop((MappingLoop)value, diagnostics, context);
 			case 18:
-				return validateMappingParameterBinding((MappingParameterBinding)value, diagnostics, context);
+				return validateMappingParameter((MappingParameter)value, diagnostics, context);
 			case 19:
-				return validateMappingStatement((MappingStatement)value, diagnostics, context);
+				return validateMappingParameterBinding((MappingParameterBinding)value, diagnostics, context);
 			case 20:
-				return validateNewStatement((NewStatement)value, diagnostics, context);
+				return validateMappingStatement((MappingStatement)value, diagnostics, context);
 			case 21:
-				return validateObservableStatement((ObservableStatement)value, diagnostics, context);
+				return validateNewStatement((NewStatement)value, diagnostics, context);
 			case 22:
-				return validateSetStatement((SetStatement)value, diagnostics, context);
+				return validateObservableStatement((ObservableStatement)value, diagnostics, context);
 			case 23:
-				return validateSimpleParameter((SimpleParameter)value, diagnostics, context);
+				return validateSetStatement((SetStatement)value, diagnostics, context);
 			case 24:
-				return validateSimpleParameterBinding((SimpleParameterBinding)value, diagnostics, context);
+				return validateSimpleParameter((SimpleParameter)value, diagnostics, context);
 			case 25:
-				return validateStatement((Statement)value, diagnostics, context);
+				return validateSimpleParameterBinding((SimpleParameterBinding)value, diagnostics, context);
 			case 26:
+				return validateStatement((Statement)value, diagnostics, context);
+			case 27:
 				return validateVariableStatement((VariableStatement)value, diagnostics, context);
 			default:
 				return true;
@@ -565,6 +568,30 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 */
 	public boolean validateDeclareStatement_validateCompatibleTypeForUncheckedValue(DeclareStatement declareStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return declareStatement.validateCompatibleTypeForUncheckedValue(diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEntryPoint(EntryPoint entryPoint, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(entryPoint, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateNoOverridesCycle(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridingRuleOverridesAllDomains(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMapping_validateNameIsNotNull(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMapping_validateMappingParameterNamesAreUnique(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMapping_validateLocalVariableNamesAreUnique(entryPoint, diagnostics, context);
+		return result;
 	}
 
 	/**

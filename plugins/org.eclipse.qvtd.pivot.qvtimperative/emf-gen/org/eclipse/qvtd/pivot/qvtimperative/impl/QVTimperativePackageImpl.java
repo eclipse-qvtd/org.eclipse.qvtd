@@ -35,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -114,6 +115,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass declareStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass entryPointEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -548,6 +556,36 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EOperation getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map() {
 		return declareStatementEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEntryPoint() {
+		return entryPointEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEntryPoint_CheckedTypedModels() {
+		return (EReference)entryPointEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEntryPoint_EnforcedTypedModels() {
+		return (EReference)entryPointEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1418,34 +1456,38 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(declareStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2);
 		createEOperation(declareStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 1);
 
-		guardParameterEClass = createEClass(7);
+		entryPointEClass = createEClass(7);
+		createEReference(entryPointEClass, RuleImpl.RULE_FEATURE_COUNT + 5);
+		createEReference(entryPointEClass, RuleImpl.RULE_FEATURE_COUNT + 6);
+
+		guardParameterEClass = createEClass(8);
 		createEReference(guardParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
 		createEReference(guardParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2);
 
-		guardParameterBindingEClass = createEClass(8);
+		guardParameterBindingEClass = createEClass(9);
 		createEReference(guardParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(guardParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 
-		imperativeModelEClass = createEClass(9);
+		imperativeModelEClass = createEClass(10);
 
-		imperativeTransformationEClass = createEClass(10);
+		imperativeTransformationEClass = createEClass(11);
 		createEOperation(imperativeTransformationEClass, TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 0);
 
-		imperativeTypedModelEClass = createEClass(11);
+		imperativeTypedModelEClass = createEClass(12);
 		createEAttribute(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0);
 		createEAttribute(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1);
 		createEReference(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 2);
 		createEOperation(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 0);
 		createEOperation(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 1);
 
-		loopParameterBindingEClass = createEClass(12);
+		loopParameterBindingEClass = createEClass(13);
 		createEReference(loopParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(loopParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 
-		loopVariableEClass = createEClass(13);
+		loopVariableEClass = createEClass(14);
 		createEReference(loopVariableEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 
-		mappingEClass = createEClass(14);
+		mappingEClass = createEClass(15);
 		createEAttribute(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 0);
 		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 1);
 		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 2);
@@ -1455,7 +1497,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 1);
 		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 2);
 
-		mappingCallEClass = createEClass(15);
+		mappingCallEClass = createEClass(16);
 		createEReference(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEAttribute(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEAttribute(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
@@ -1466,32 +1508,32 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3);
 		createEOperation(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4);
 
-		mappingLoopEClass = createEClass(16);
+		mappingLoopEClass = createEClass(17);
 		createEReference(mappingLoopEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(mappingLoopEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEReference(mappingLoopEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 
-		mappingParameterEClass = createEClass(17);
+		mappingParameterEClass = createEClass(18);
 		createEReference(mappingParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 
-		mappingParameterBindingEClass = createEClass(18);
+		mappingParameterBindingEClass = createEClass(19);
 		createEReference(mappingParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		createEReference(mappingParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		createEOperation(mappingParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 
-		mappingStatementEClass = createEClass(19);
+		mappingStatementEClass = createEClass(20);
 
-		newStatementEClass = createEClass(20);
+		newStatementEClass = createEClass(21);
 		createEAttribute(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
 		createEReference(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2);
 		createEReference(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3);
 		createEOperation(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 1);
 		createEOperation(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 2);
 
-		observableStatementEClass = createEClass(21);
+		observableStatementEClass = createEClass(22);
 		createEReference(observableStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 
-		setStatementEClass = createEClass(22);
+		setStatementEClass = createEClass(23);
 		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
@@ -1505,19 +1547,19 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4);
 		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 5);
 
-		simpleParameterEClass = createEClass(23);
+		simpleParameterEClass = createEClass(24);
 		createEReference(simpleParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
 
-		simpleParameterBindingEClass = createEClass(24);
+		simpleParameterBindingEClass = createEClass(25);
 		createEReference(simpleParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(simpleParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
 
-		statementEClass = createEClass(25);
+		statementEClass = createEClass(26);
 		createEOperation(statementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
 
-		variableStatementEClass = createEClass(26);
+		variableStatementEClass = createEClass(27);
 	}
 
 	/**
@@ -1564,6 +1606,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		connectionVariableEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		declareStatementEClass.getESuperTypes().add(this.getVariableStatement());
 		declareStatementEClass.getESuperTypes().add(this.getObservableStatement());
+		entryPointEClass.getESuperTypes().add(this.getMapping());
 		guardParameterEClass.getESuperTypes().add(this.getMappingParameter());
 		guardParameterBindingEClass.getESuperTypes().add(this.getMappingParameterBinding());
 		imperativeModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
@@ -1650,6 +1693,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(entryPointEClass, EntryPoint.class, "EntryPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEntryPoint_CheckedTypedModels(), theQVTbasePackage.getTypedModel(), null, "checkedTypedModels", null, 0, -1, EntryPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEntryPoint_EnforcedTypedModels(), theQVTbasePackage.getTypedModel(), null, "enforcedTypedModels", null, 0, -1, EntryPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardParameterEClass, GuardParameter.class, "GuardParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardParameter_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
