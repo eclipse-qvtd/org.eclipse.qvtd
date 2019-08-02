@@ -47,7 +47,7 @@ public interface MappingCallCS extends MappingStatementCS {
 	 * @return the value of the '<em>Is Install</em>' attribute.
 	 * @see #setIsInstall(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_IsInstall()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsInstall();
@@ -74,7 +74,7 @@ public interface MappingCallCS extends MappingStatementCS {
 	 * @return the value of the '<em>Is Invoke</em>' attribute.
 	 * @see #setIsInvoke(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_IsInvoke()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsInvoke();

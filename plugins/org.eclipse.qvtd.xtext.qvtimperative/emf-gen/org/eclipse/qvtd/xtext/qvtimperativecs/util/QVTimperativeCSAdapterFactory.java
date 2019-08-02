@@ -116,6 +116,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createDirectionCSAdapter();
 			}
 			@Override
+			public Adapter caseEntryPointCS(EntryPointCS object) {
+				return createEntryPointCSAdapter();
+			}
+			@Override
 			public Adapter caseGuardParameterBindingCS(GuardParameterBindingCS object) {
 				return createGuardParameterBindingCSAdapter();
 			}
@@ -362,6 +366,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDirectionCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS <em>Entry Point CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS
+	 * @generated
+	 */
+	public Adapter createEntryPointCSAdapter() {
 		return null;
 	}
 

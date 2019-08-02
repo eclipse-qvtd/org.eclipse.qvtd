@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 Willink Transformations and others.
+ * Copyright (c) 2011, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -86,6 +86,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
@@ -484,6 +485,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			case QVTimperativeCSPackage.DIRECTION_CS:
 				sequence_DirectionCS(context, (DirectionCS) semanticObject);
 				return;
+			case QVTimperativeCSPackage.ENTRY_POINT_CS:
+				sequence_EntryPointCS(context, (EntryPointCS) semanticObject);
+				return;
 			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS:
 				sequence_GuardParameterBindingCS(context, (GuardParameterBindingCS) semanticObject);
 				return;
@@ -645,6 +649,29 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     )
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+
+
+	/**
+	 * Contexts:
+	 *     EntryPointCS returns EntryPointCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         isStrict?='strict'?
+	 *         (firstPass=LOWER lastPass=LOWER?)?
+	 *         name=UnrestrictedName
+	 *         (checkedDirections+=DirectionCS checkedDirections+=DirectionCS*)?
+	 *         (enforcedDirections+=DirectionCS enforcedDirections+=DirectionCS*)?
+	 *         ownedInPathName=PathNameCS?
+	 *         ownedParameters+=MappingParameterCS*
+	 *         ownedStatements+=GuardStatementCS*
+	 *         ownedStatements+=CommitStatementCS*
+	 *         ownedStatements+=ControlStatementCS*
+	 *     )
+	 */
+	protected void sequence_EntryPointCS(ISerializationContext context, EntryPointCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 

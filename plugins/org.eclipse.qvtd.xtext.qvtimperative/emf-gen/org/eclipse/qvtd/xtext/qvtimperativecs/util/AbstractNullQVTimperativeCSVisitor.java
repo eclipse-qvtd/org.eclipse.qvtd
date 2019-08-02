@@ -75,6 +75,11 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitEntryPointCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull EntryPointCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitGuardParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardParameterBindingCS object) {
 		return null;
 	}

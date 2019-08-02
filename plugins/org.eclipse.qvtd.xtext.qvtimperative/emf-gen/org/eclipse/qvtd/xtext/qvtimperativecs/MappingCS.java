@@ -48,7 +48,7 @@ public interface MappingCS extends NamedElementCS {
 	 * @return the value of the '<em>Is Strict</em>' attribute.
 	 * @see #setIsStrict(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_IsStrict()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsStrict();

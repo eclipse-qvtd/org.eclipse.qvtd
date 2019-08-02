@@ -91,20 +91,21 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case 4: return createCheckStatementCS();
 			case 5: return createDeclareStatementCS();
 			case 6: return createDirectionCS();
-			case 7: return createGuardParameterBindingCS();
-			case 8: return createGuardParameterCS();
-			case 9: return createLoopParameterBindingCS();
-			case 10: return createMappingCS();
-			case 11: return createMappingCallCS();
-			case 12: return createMappingLoopCS();
-			case 16: return createNewStatementCS();
-			case 18: return createParamDeclarationCS();
-			case 19: return createQueryCS();
-			case 20: return createSetStatementCS();
-			case 21: return createSimpleParameterBindingCS();
-			case 22: return createSimpleParameterCS();
-			case 24: return createTopLevelCS();
-			case 25: return createTransformationCS();
+			case 7: return createEntryPointCS();
+			case 8: return createGuardParameterBindingCS();
+			case 9: return createGuardParameterCS();
+			case 10: return createLoopParameterBindingCS();
+			case 11: return createMappingCS();
+			case 12: return createMappingCallCS();
+			case 13: return createMappingLoopCS();
+			case 17: return createNewStatementCS();
+			case 19: return createParamDeclarationCS();
+			case 20: return createQueryCS();
+			case 21: return createSetStatementCS();
+			case 22: return createSimpleParameterBindingCS();
+			case 23: return createSimpleParameterCS();
+			case 25: return createTopLevelCS();
+			case 26: return createTransformationCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -185,6 +186,17 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull DirectionCS createDirectionCS() {
 		DirectionCSImpl directionCS = new DirectionCSImpl();
 		return directionCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EntryPointCS createEntryPointCS() {
+		EntryPointCSImpl entryPointCS = new EntryPointCSImpl();
+		return entryPointCS;
 	}
 
 	/**

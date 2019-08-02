@@ -71,6 +71,11 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
+	public R visitEntryPointCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull EntryPointCS object) {
+		return delegate.visitEntryPointCS(object);
+	}
+
+	@Override
 	public R visitGuardParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardParameterBindingCS object) {
 		return delegate.visitGuardParameterBindingCS(object);
 	}

@@ -79,6 +79,11 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	@Override
+	public @Nullable Element visitEntryPointCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull EntryPointCS csElement) {
+		return visitMappingCS(csElement);
+	}
+
+	@Override
 	public @Nullable Element visitGuardParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardParameterBindingCS csElement) {
 		return visitMappingParameterBindingCS(csElement);
 	}

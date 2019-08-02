@@ -169,6 +169,17 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 7: {
+				EntryPointCS entryPointCS = (EntryPointCS)theEObject;
+				T result = caseEntryPointCS(entryPointCS);
+				if (result == null) result = caseMappingCS(entryPointCS);
+				if (result == null) result = caseNamedElementCS(entryPointCS);
+				if (result == null) result = caseModelElementCS(entryPointCS);
+				if (result == null) result = casePivotableElementCS(entryPointCS);
+				if (result == null) result = caseElementCS(entryPointCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 8: {
 				GuardParameterBindingCS guardParameterBindingCS = (GuardParameterBindingCS)theEObject;
 				T result = caseGuardParameterBindingCS(guardParameterBindingCS);
 				if (result == null) result = caseMappingParameterBindingCS(guardParameterBindingCS);
@@ -179,7 +190,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 8: {
+			case 9: {
 				GuardParameterCS guardParameterCS = (GuardParameterCS)theEObject;
 				T result = caseGuardParameterCS(guardParameterCS);
 				if (result == null) result = caseMappingParameterCS(guardParameterCS);
@@ -191,7 +202,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 9: {
+			case 10: {
 				LoopParameterBindingCS loopParameterBindingCS = (LoopParameterBindingCS)theEObject;
 				T result = caseLoopParameterBindingCS(loopParameterBindingCS);
 				if (result == null) result = caseMappingParameterBindingCS(loopParameterBindingCS);
@@ -202,7 +213,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 10: {
+			case 11: {
 				MappingCS mappingCS = (MappingCS)theEObject;
 				T result = caseMappingCS(mappingCS);
 				if (result == null) result = caseNamedElementCS(mappingCS);
@@ -212,7 +223,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 11: {
+			case 12: {
 				MappingCallCS mappingCallCS = (MappingCallCS)theEObject;
 				T result = caseMappingCallCS(mappingCallCS);
 				if (result == null) result = caseMappingStatementCS(mappingCallCS);
@@ -223,7 +234,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 12: {
+			case 13: {
 				MappingLoopCS mappingLoopCS = (MappingLoopCS)theEObject;
 				T result = caseMappingLoopCS(mappingLoopCS);
 				if (result == null) result = caseMappingStatementCS(mappingLoopCS);
@@ -235,7 +246,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 13: {
+			case 14: {
 				MappingParameterCS mappingParameterCS = (MappingParameterCS)theEObject;
 				T result = caseMappingParameterCS(mappingParameterCS);
 				if (result == null) result = caseTypedElementCS(mappingParameterCS);
@@ -246,7 +257,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 14: {
+			case 15: {
 				MappingParameterBindingCS mappingParameterBindingCS = (MappingParameterBindingCS)theEObject;
 				T result = caseMappingParameterBindingCS(mappingParameterBindingCS);
 				if (result == null) result = caseExpCS(mappingParameterBindingCS);
@@ -256,7 +267,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 15: {
+			case 16: {
 				MappingStatementCS mappingStatementCS = (MappingStatementCS)theEObject;
 				T result = caseMappingStatementCS(mappingStatementCS);
 				if (result == null) result = caseStatementCS(mappingStatementCS);
@@ -266,7 +277,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 16: {
+			case 17: {
 				NewStatementCS newStatementCS = (NewStatementCS)theEObject;
 				T result = caseNewStatementCS(newStatementCS);
 				if (result == null) result = caseTypedElementCS(newStatementCS);
@@ -279,7 +290,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 17: {
+			case 18: {
 				ObservableStatementCS observableStatementCS = (ObservableStatementCS)theEObject;
 				T result = caseObservableStatementCS(observableStatementCS);
 				if (result == null) result = caseStatementCS(observableStatementCS);
@@ -289,7 +300,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 18: {
+			case 19: {
 				ParamDeclarationCS paramDeclarationCS = (ParamDeclarationCS)theEObject;
 				T result = caseParamDeclarationCS(paramDeclarationCS);
 				if (result == null) result = caseTypedElementCS(paramDeclarationCS);
@@ -300,7 +311,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 19: {
+			case 20: {
 				QueryCS queryCS = (QueryCS)theEObject;
 				T result = caseQueryCS(queryCS);
 				if (result == null) result = caseTypedElementCS(queryCS);
@@ -312,7 +323,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 20: {
+			case 21: {
 				SetStatementCS setStatementCS = (SetStatementCS)theEObject;
 				T result = caseSetStatementCS(setStatementCS);
 				if (result == null) result = caseObservableStatementCS(setStatementCS);
@@ -323,7 +334,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 21: {
+			case 22: {
 				SimpleParameterBindingCS simpleParameterBindingCS = (SimpleParameterBindingCS)theEObject;
 				T result = caseSimpleParameterBindingCS(simpleParameterBindingCS);
 				if (result == null) result = caseMappingParameterBindingCS(simpleParameterBindingCS);
@@ -334,7 +345,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 22: {
+			case 23: {
 				SimpleParameterCS simpleParameterCS = (SimpleParameterCS)theEObject;
 				T result = caseSimpleParameterCS(simpleParameterCS);
 				if (result == null) result = caseMappingParameterCS(simpleParameterCS);
@@ -346,7 +357,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 23: {
+			case 24: {
 				StatementCS statementCS = (StatementCS)theEObject;
 				T result = caseStatementCS(statementCS);
 				if (result == null) result = caseModelElementCS(statementCS);
@@ -355,7 +366,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 24: {
+			case 25: {
 				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
 				T result = caseTopLevelCS(topLevelCS);
 				if (result == null) result = caseRootPackageCS(topLevelCS);
@@ -367,7 +378,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 25: {
+			case 26: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
 				if (result == null) result = caseAbstractTransformationCS(transformationCS);
@@ -487,6 +498,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDirectionCS(DirectionCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Entry Point CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Entry Point CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEntryPointCS(EntryPointCS object) {
 		return null;
 	}
 

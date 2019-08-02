@@ -79,6 +79,11 @@ public abstract class AbstractQVTimperativeCSContainmentVisitor
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitEntryPointCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull EntryPointCS csElement) {
+		return visitMappingCS(csElement);
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitGuardParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardParameterBindingCS csElement) {
 		return visitMappingParameterBindingCS(csElement);
 	}

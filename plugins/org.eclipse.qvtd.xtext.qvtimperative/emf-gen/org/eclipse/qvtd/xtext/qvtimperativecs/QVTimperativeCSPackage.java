@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/OCL/Import basecs='../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' essentialoclcs='../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/' qvtb='../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#P-qvtbase' qvtbcs='../../org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.ecore#/' qvti='../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#P-qvtimperative'"
  * @generated
  */
 public interface QVTimperativeCSPackage extends EPackage {
@@ -79,7 +80,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getStatementCS()
 	 * @generated
 	 */
-	int STATEMENT_CS = 23;
+	int STATEMENT_CS = 24;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl <em>Mapping CS</em>}' class.
@@ -89,7 +90,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCS()
 	 * @generated
 	 */
-	int MAPPING_CS = 10;
+	int MAPPING_CS = 11;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl <em>Entry Point CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getEntryPointCS()
+	 * @generated
+	 */
+	int ENTRY_POINT_CS = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
@@ -99,7 +110,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingStatementCS()
 	 * @generated
 	 */
-	int MAPPING_STATEMENT_CS = 15;
+	int MAPPING_STATEMENT_CS = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
@@ -109,7 +120,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallCS()
 	 * @generated
 	 */
-	int MAPPING_CALL_CS = 11;
+	int MAPPING_CALL_CS = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl <em>Mapping Loop CS</em>}' class.
@@ -119,7 +130,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingLoopCS()
 	 * @generated
 	 */
-	int MAPPING_LOOP_CS = 12;
+	int MAPPING_LOOP_CS = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
@@ -129,7 +140,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTopLevelCS()
 	 * @generated
 	 */
-	int TOP_LEVEL_CS = 24;
+	int TOP_LEVEL_CS = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.AddStatementCSImpl <em>Add Statement CS</em>}' class.
@@ -149,7 +160,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingParameterBindingCS()
 	 * @generated
 	 */
-	int MAPPING_PARAMETER_BINDING_CS = 14;
+	int MAPPING_PARAMETER_BINDING_CS = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.AppendParameterBindingCSImpl <em>Append Parameter Binding CS</em>}' class.
@@ -169,7 +180,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingParameterCS()
 	 * @generated
 	 */
-	int MAPPING_PARAMETER_CS = 13;
+	int MAPPING_PARAMETER_CS = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.AppendParameterCSImpl <em>Append Parameter CS</em>}' class.
@@ -219,7 +230,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getGuardParameterBindingCS()
 	 * @generated
 	 */
-	int GUARD_PARAMETER_BINDING_CS = 7;
+	int GUARD_PARAMETER_BINDING_CS = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardParameterCSImpl <em>Guard Parameter CS</em>}' class.
@@ -229,7 +240,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getGuardParameterCS()
 	 * @generated
 	 */
-	int GUARD_PARAMETER_CS = 8;
+	int GUARD_PARAMETER_CS = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BufferStatementCSImpl <em>Buffer Statement CS</em>}' class.
@@ -249,7 +260,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getLoopParameterBindingCS()
 	 * @generated
 	 */
-	int LOOP_PARAMETER_BINDING_CS = 9;
+	int LOOP_PARAMETER_BINDING_CS = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ParamDeclarationCSImpl <em>Param Declaration CS</em>}' class.
@@ -259,7 +270,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getParamDeclarationCS()
 	 * @generated
 	 */
-	int PARAM_DECLARATION_CS = 18;
+	int PARAM_DECLARATION_CS = 19;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl <em>Query CS</em>}' class.
@@ -269,7 +280,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getQueryCS()
 	 * @generated
 	 */
-	int QUERY_CS = 19;
+	int QUERY_CS = 20;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl <em>New Statement CS</em>}' class.
@@ -279,7 +290,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getNewStatementCS()
 	 * @generated
 	 */
-	int NEW_STATEMENT_CS = 16;
+	int NEW_STATEMENT_CS = 17;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ObservableStatementCSImpl <em>Observable Statement CS</em>}' class.
@@ -289,7 +300,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getObservableStatementCS()
 	 * @generated
 	 */
-	int OBSERVABLE_STATEMENT_CS = 17;
+	int OBSERVABLE_STATEMENT_CS = 18;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl <em>Set Statement CS</em>}' class.
@@ -299,7 +310,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getSetStatementCS()
 	 * @generated
 	 */
-	int SET_STATEMENT_CS = 20;
+	int SET_STATEMENT_CS = 21;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SimpleParameterBindingCSImpl <em>Simple Parameter Binding CS</em>}' class.
@@ -309,7 +320,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getSimpleParameterBindingCS()
 	 * @generated
 	 */
-	int SIMPLE_PARAMETER_BINDING_CS = 21;
+	int SIMPLE_PARAMETER_BINDING_CS = 22;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SimpleParameterCSImpl <em>Simple Parameter CS</em>}' class.
@@ -319,7 +330,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getSimpleParameterCS()
 	 * @generated
 	 */
-	int SIMPLE_PARAMETER_CS = 22;
+	int SIMPLE_PARAMETER_CS = 23;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TransformationCSImpl <em>Transformation CS</em>}' class.
@@ -329,7 +340,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTransformationCS()
 	 * @generated
 	 */
-	int TRANSFORMATION_CS = 25;
+	int TRANSFORMATION_CS = 26;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS <em>Add Statement CS</em>}'.
@@ -554,6 +565,38 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDirectionCS_IsEnforced();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS <em>Entry Point CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Entry Point CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS
+	 * @generated
+	 */
+	EClass getEntryPointCS();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedDirections <em>Checked Directions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Checked Directions</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedDirections()
+	 * @see #getEntryPointCS()
+	 * @generated
+	 */
+	EReference getEntryPointCS_CheckedDirections();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedDirections <em>Enforced Directions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Enforced Directions</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedDirections()
+	 * @see #getEntryPointCS()
+	 * @generated
+	 */
+	EReference getEntryPointCS_EnforcedDirections();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS <em>Guard Parameter Binding CS</em>}'.
@@ -1454,6 +1497,32 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DIRECTION_CS__IS_ENFORCED = eINSTANCE.getDirectionCS_IsEnforced();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl <em>Entry Point CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getEntryPointCS()
+		 * @generated
+		 */
+		EClass ENTRY_POINT_CS = eINSTANCE.getEntryPointCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Checked Directions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTRY_POINT_CS__CHECKED_DIRECTIONS = eINSTANCE.getEntryPointCS_CheckedDirections();
+
+		/**
+		 * The meta object literal for the '<em><b>Enforced Directions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTRY_POINT_CS__ENFORCED_DIRECTIONS = eINSTANCE.getEntryPointCS_EnforcedDirections();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardParameterBindingCSImpl <em>Guard Parameter Binding CS</em>}' class.

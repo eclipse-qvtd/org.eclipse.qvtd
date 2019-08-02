@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 Willink Transformations and others.
+ * Copyright (c) 2011, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -135,6 +135,14 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionCSAccess().getGroup(), "rule__DirectionCS__Group__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup_3(), "rule__DirectionCS__Group_3__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup_3_2(), "rule__DirectionCS__Group_3_2__0");
+					put(grammarAccess.getEntryPointCSAccess().getGroup(), "rule__EntryPointCS__Group__0");
+					put(grammarAccess.getEntryPointCSAccess().getGroup_3(), "rule__EntryPointCS__Group_3__0");
+					put(grammarAccess.getEntryPointCSAccess().getGroup_3_2(), "rule__EntryPointCS__Group_3_2__0");
+					put(grammarAccess.getEntryPointCSAccess().getGroup_5(), "rule__EntryPointCS__Group_5__0");
+					put(grammarAccess.getEntryPointCSAccess().getGroup_5_2(), "rule__EntryPointCS__Group_5_2__0");
+					put(grammarAccess.getEntryPointCSAccess().getGroup_6(), "rule__EntryPointCS__Group_6__0");
+					put(grammarAccess.getEntryPointCSAccess().getGroup_6_2(), "rule__EntryPointCS__Group_6_2__0");
+					put(grammarAccess.getEntryPointCSAccess().getGroup_7(), "rule__EntryPointCS__Group_7__0");
 					put(grammarAccess.getGuardParameterBindingCSAccess().getGroup(), "rule__GuardParameterBindingCS__Group__0");
 					put(grammarAccess.getGuardParameterCSAccess().getGroup(), "rule__GuardParameterCS__Group__0");
 					put(grammarAccess.getGuardParameterCSAccess().getGroup_6(), "rule__GuardParameterCS__Group_6__0");
@@ -370,6 +378,19 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionCSAccess().getNameAssignment_2(), "rule__DirectionCS__NameAssignment_2");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_3_1(), "rule__DirectionCS__ImportsAssignment_3_1");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_3_2_1(), "rule__DirectionCS__ImportsAssignment_3_2_1");
+					put(grammarAccess.getEntryPointCSAccess().getIsStrictAssignment_1(), "rule__EntryPointCS__IsStrictAssignment_1");
+					put(grammarAccess.getEntryPointCSAccess().getFirstPassAssignment_3_1(), "rule__EntryPointCS__FirstPassAssignment_3_1");
+					put(grammarAccess.getEntryPointCSAccess().getLastPassAssignment_3_2_1(), "rule__EntryPointCS__LastPassAssignment_3_2_1");
+					put(grammarAccess.getEntryPointCSAccess().getNameAssignment_4(), "rule__EntryPointCS__NameAssignment_4");
+					put(grammarAccess.getEntryPointCSAccess().getCheckedDirectionsAssignment_5_1(), "rule__EntryPointCS__CheckedDirectionsAssignment_5_1");
+					put(grammarAccess.getEntryPointCSAccess().getCheckedDirectionsAssignment_5_2_1(), "rule__EntryPointCS__CheckedDirectionsAssignment_5_2_1");
+					put(grammarAccess.getEntryPointCSAccess().getEnforcedDirectionsAssignment_6_1(), "rule__EntryPointCS__EnforcedDirectionsAssignment_6_1");
+					put(grammarAccess.getEntryPointCSAccess().getEnforcedDirectionsAssignment_6_2_1(), "rule__EntryPointCS__EnforcedDirectionsAssignment_6_2_1");
+					put(grammarAccess.getEntryPointCSAccess().getOwnedInPathNameAssignment_7_1(), "rule__EntryPointCS__OwnedInPathNameAssignment_7_1");
+					put(grammarAccess.getEntryPointCSAccess().getOwnedParametersAssignment_9(), "rule__EntryPointCS__OwnedParametersAssignment_9");
+					put(grammarAccess.getEntryPointCSAccess().getOwnedStatementsAssignment_10(), "rule__EntryPointCS__OwnedStatementsAssignment_10");
+					put(grammarAccess.getEntryPointCSAccess().getOwnedStatementsAssignment_11(), "rule__EntryPointCS__OwnedStatementsAssignment_11");
+					put(grammarAccess.getEntryPointCSAccess().getOwnedStatementsAssignment_12(), "rule__EntryPointCS__OwnedStatementsAssignment_12");
 					put(grammarAccess.getGuardParameterBindingCSAccess().getIsCheckAssignment_0(), "rule__GuardParameterBindingCS__IsCheckAssignment_0");
 					put(grammarAccess.getGuardParameterBindingCSAccess().getReferredVariableAssignment_1(), "rule__GuardParameterBindingCS__ReferredVariableAssignment_1");
 					put(grammarAccess.getGuardParameterBindingCSAccess().getValueAssignment_3(), "rule__GuardParameterBindingCS__ValueAssignment_3");

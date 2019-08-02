@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 Willink Transformations and others.
+ * Copyright (c) 2011, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -341,6 +341,8 @@ ruleDirectionCS
 finally {
 	restoreStackSize(stackSize);
 }
+
+
 
 
 
@@ -8551,6 +8553,14 @@ rule__DirectionCS__Group_3_2__1__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -28940,6 +28950,19 @@ rule__DirectionCS__ImportsAssignment_3_2_1
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 rule__GuardParameterBindingCS__IsCheckAssignment_0
     @init {

@@ -47,7 +47,7 @@ public interface NewStatementCS extends TypedElementCS, ObservableStatementCS {
 	 * @return the value of the '<em>Is Contained</em>' attribute.
 	 * @see #setIsContained(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getNewStatementCS_IsContained()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	boolean isIsContained();

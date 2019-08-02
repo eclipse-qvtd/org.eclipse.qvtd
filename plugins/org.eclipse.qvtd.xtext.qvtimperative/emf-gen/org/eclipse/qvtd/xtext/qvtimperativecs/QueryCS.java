@@ -140,7 +140,7 @@ public interface QueryCS extends TypedElementCS, JavaImplementationCS {
 	 * @return the value of the '<em>Is Transient</em>' attribute.
 	 * @see #setIsTransient(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getQueryCS_IsTransient()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsTransient();

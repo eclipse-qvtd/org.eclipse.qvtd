@@ -94,6 +94,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull DirectionCS createDirectionCS();
 
 	/**
+	 * Returns a new object of class '<em>Entry Point CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Entry Point CS</em>'.
+	 * @generated
+	 */
+	EntryPointCS createEntryPointCS();
+
+	/**
 	 * Returns a new object of class '<em>Guard Parameter Binding CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

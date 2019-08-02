@@ -50,7 +50,7 @@ public interface BufferStatementCS extends TypedElementCS, StatementCS {
 	 * @return the value of the '<em>Is Strict</em>' attribute.
 	 * @see #setIsStrict(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getBufferStatementCS_IsStrict()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsStrict();

@@ -74,7 +74,7 @@ public interface DeclareStatementCS extends TypedElementCS, StatementCS, Observa
 	 * @return the value of the '<em>Is Check</em>' attribute.
 	 * @see #setIsCheck(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDeclareStatementCS_IsCheck()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsCheck();

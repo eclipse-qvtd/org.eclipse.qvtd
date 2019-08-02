@@ -129,7 +129,7 @@ public interface SetStatementCS extends ObservableStatementCS {
 	 * @return the value of the '<em>Is Notify</em>' attribute.
 	 * @see #setIsNotify(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_IsNotify()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsNotify();
@@ -156,7 +156,7 @@ public interface SetStatementCS extends ObservableStatementCS {
 	 * @return the value of the '<em>Is Partial</em>' attribute.
 	 * @see #setIsPartial(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_IsPartial()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsPartial();

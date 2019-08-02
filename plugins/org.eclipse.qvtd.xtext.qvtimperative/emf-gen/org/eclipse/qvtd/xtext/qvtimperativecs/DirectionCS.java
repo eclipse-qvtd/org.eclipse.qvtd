@@ -63,7 +63,7 @@ public interface DirectionCS extends NamedElementCS {
 	 * @return the value of the '<em>Is Checked</em>' attribute.
 	 * @see #setIsChecked(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDirectionCS_IsChecked()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	boolean isIsChecked();
@@ -89,7 +89,7 @@ public interface DirectionCS extends NamedElementCS {
 	 * @return the value of the '<em>Is Enforced</em>' attribute.
 	 * @see #setIsEnforced(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDirectionCS_IsEnforced()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	boolean isIsEnforced();
