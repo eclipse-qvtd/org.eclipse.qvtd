@@ -523,6 +523,9 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitImperativeTypedModel(@NonNull ImperativeTypedModel asTypedModel) {
+		if (asTypedModel.isIsPrimitive()) {
+			return null;
+		}
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTimperativeCSPackage.Literals.DIRECTION_CS, asTypedModel, null);
 		if ("".equals(asTypedModel.getName())) {
 			csDirection.setName(null);
