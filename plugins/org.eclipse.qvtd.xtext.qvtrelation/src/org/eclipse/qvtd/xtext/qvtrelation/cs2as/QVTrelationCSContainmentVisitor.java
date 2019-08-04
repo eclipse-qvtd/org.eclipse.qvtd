@@ -503,8 +503,8 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 				boolean isEnforceable = true;
 				if (abstractDomainCS instanceof DomainCS) {
 					DomainCS domainCS = (DomainCS) abstractDomainCS;
-					isCheckable = !explicitCheckonly || domainCS.isIsCheckonly();
-					isEnforceable = !explicitEnforce || domainCS.isIsEnforce();
+					isCheckable = !explicitCheckonly || !explicitEnforce || domainCS.isIsCheckonly();
+					isEnforceable = !explicitCheckonly ||!explicitEnforce ||  domainCS.isIsEnforce();
 				}
 				domain.setIsCheckable(isCheckable);
 				domain.setIsEnforceable(isEnforceable);
