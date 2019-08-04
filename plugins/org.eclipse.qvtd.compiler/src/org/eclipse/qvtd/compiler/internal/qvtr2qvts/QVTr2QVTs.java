@@ -36,20 +36,16 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -84,7 +80,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	 */
 	protected static class QVTr2QVTsVisitor extends AbstractExtendingQVTrelationVisitor<Element, QVTr2QVTs>
 	{
-		protected final @NonNull QVTrelationScheduleManager scheduleManager;
+		protected final @NonNull QVTrelationDirectedScheduleManager scheduleManager;
 		private @Nullable RelationAnalysis relationAnalysis = null;
 
 		public QVTr2QVTsVisitor(@NonNull QVTr2QVTs context) {
@@ -418,9 +414,8 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	private @Nullable Resource debugSource = null;
 	private @Nullable Resource debugTarget = null;
 
-	public QVTr2QVTs(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull ProblemHandler problemHandler,
-			@NonNull QVTuConfiguration qvtuConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(new QVTrelationScheduleManager(environmentFactory, transformation, problemHandler, qvtuConfiguration, schedulerOptions), problemHandler);
+	public QVTr2QVTs(@NonNull QVTrelationDirectedScheduleManager directedScheduleManager, @NonNull ProblemHandler problemHandler) {
+		super(directedScheduleManager, problemHandler);
 		//		this.qvtuConfiguration = qvtuConfiguration;
 		//		this.createVisitor = new CreateVisitor(this, qvtuConfiguration);
 		//		this.updateVisitor = new UpdateVisitor(this);
@@ -536,8 +531,8 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	}
 
 	@Override
-	public @NonNull QVTrelationScheduleManager getScheduleManager() {
-		return (QVTrelationScheduleManager) super.getScheduleManager();
+	public @NonNull QVTrelationDirectedScheduleManager getScheduleManager() {
+		return (QVTrelationDirectedScheduleManager) super.getScheduleManager();
 	}
 
 	public void pushScope(@NonNull Nameable scope) {
@@ -550,17 +545,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	//	}
 
 	public @NonNull Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
-		// FIXME the following lines should go obsolete
-		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
-		if (missingOperationCallSources != null) {
-			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
-		}
-		boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, source);
-		if (missingTraceArtefacts) {
-			QVTruntimeUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + target.getURI() + "'");
-		}
+		transform1(source, target);
 		//
-		QVTrelationScheduleManager scheduleManager2 = getScheduleManager();
+		QVTrelationDirectedScheduleManager directedScheduleManager = getScheduleManager();
 		debugSource = source;
 		debugTarget = target;
 		//
@@ -568,9 +555,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		//	- Establish which domain each element is part of
 		//	- Establish which output variables are reachable by composition from their root
 		//
-		scheduleManager.analyzeSourceModel();
+		directedScheduleManager.analyzeSourceModel();
 		//
-		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager2.getOrderedTransformationAnalyses();
+		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = directedScheduleManager.getOrderedTransformationAnalyses();
 		List<@NonNull TransformationAnalysis2TracePackage> transformationAnalysis2tracePackages = new ArrayList<>();
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
 			transformationAnalysis2tracePackages.add(transformationAnalysis.getTransformationAnalysis2TracePackage());
@@ -617,15 +604,15 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		for (@NonNull TransformationAnalysis2TracePackage transformationAnalysis2tracePackage : transformationAnalysis2tracePackages) {
 			org.eclipse.ocl.pivot.Package tracePackage = transformationAnalysis2tracePackage.synthesizeTraceModel();
 			traceModel.getOwnedPackages().add(tracePackage);
-			TypedModel traceTypedModel = scheduleManager.getTraceTypedModel();
+			TypedModel traceTypedModel = directedScheduleManager.getTraceTypedModel();
 			traceTypedModel.getUsedPackage().add(tracePackage);
-			scheduleManager.analyzeTracePackage(traceTypedModel, tracePackage);
+			directedScheduleManager.analyzeTracePackage(traceTypedModel, tracePackage);
 		}
-		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
-			scheduleManager2.writeDebugGraphs(mappingRegion, null);
+		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(directedScheduleManager.getScheduleModel())) {
+			directedScheduleManager.writeDebugGraphs(mappingRegion, null);
 		}
-		scheduleManager2.analyzeOriginalContents();
-		scheduleManager2.writeDebugGraphs("0-init", true, true, false);
+		directedScheduleManager.analyzeOriginalContents();
+		directedScheduleManager.writeDebugGraphs("0-init", true, true, false);
 		//
 		//	Debug code to confirm that every output object is traceable to some input object.
 		//
@@ -638,7 +625,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			}
 		}
 
-		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> rootRegion2activeRegions = scheduleManager2.analyzeTransformations();
+		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> rootRegion2activeRegions = directedScheduleManager.analyzeTransformations();
 		//
 		//		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		//		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
@@ -665,5 +652,17 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		}
 		//		}
 		return rootRegion2mergedRegions;
+	}
+
+	protected void transform1(Resource source, Resource target) {
+		// FIXME the following lines should go obsolete
+		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
+		if (missingOperationCallSources != null) {
+			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
+		}
+		boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, source);
+		if (missingTraceArtefacts) {
+			QVTruntimeUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + target.getURI() + "'");
+		}
 	}
 }

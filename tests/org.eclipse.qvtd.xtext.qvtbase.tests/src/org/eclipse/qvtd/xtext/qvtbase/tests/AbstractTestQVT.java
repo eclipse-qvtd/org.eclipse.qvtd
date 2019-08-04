@@ -252,20 +252,26 @@ public abstract class AbstractTestQVT extends QVTimperative
 	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String outputName,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
-		return doBuild(txURI, intermediateFileNamePrefixURI, Collections.singletonList(outputName), options, genModelFiles);
+		return doBuild(txURI, intermediateFileNamePrefixURI, Collections.singletonList(Collections.singletonList(outputName)), options, genModelFiles);
 	}
 
-	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull Iterable<@NonNull String> outputNames,
+	/*	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull Iterable<@NonNull String> outputNames,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
-		return doBuild(txURI, intermediateFileNamePrefixURI, outputNames, options, genModelFiles);
+		return doBuild(txURI, intermediateFileNamePrefixURI, Collections.singletonList(outputNames), options, genModelFiles);
+	} */
+
+	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull Iterable<@NonNull Iterable<@NonNull String>> outputNamesList,
+			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
+		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
+		return doBuild(txURI, intermediateFileNamePrefixURI, outputNamesList, options, genModelFiles);
 	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation_486938(@NonNull String outputName,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		options.setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
-		return doBuild(txURI, intermediateFileNamePrefixURI, Collections.singletonList(outputName), options, genModelFiles);
+		return doBuild(txURI, intermediateFileNamePrefixURI, Collections.singletonList(Collections.singletonList(outputName)), options, genModelFiles);
 	}
 
 	protected void checkOutput(@NonNull Resource outputResource, @NonNull URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
@@ -411,10 +417,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
-	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull Iterable<@NonNull String> outputNames,
+	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull Iterable<@NonNull Iterable<@NonNull String>> outputNamesList,
 			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws IOException, Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
-		ImperativeTransformation asTransformation = compilerChain.compile(outputNames);
+		ImperativeTransformation asTransformation = compilerChain.compile(outputNamesList);
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
 			URI serializedURI = asURI.trimFileExtension().appendFileExtension("serialized.qvti");
@@ -553,17 +559,18 @@ public abstract class AbstractTestQVT extends QVTimperative
 	protected void instrumentPartition(@NonNull ScheduleManager scheduleManager) {
 		ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
 		for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {
-			RootPartitionAnalysis rootPartitionAnalysis = scheduleManager.getRootPartitionAnalysis(rootRegion);
-			instrumentPartition(scheduleManager, rootPartitionAnalysis.getPartition());
+			ScheduleManager directedScheduleManager = scheduleManager.getDirectedScheduleManager(rootRegion);
+			RootPartitionAnalysis rootPartitionAnalysis = directedScheduleManager.getRootPartitionAnalysis(rootRegion);
+			instrumentPartition(directedScheduleManager, rootPartitionAnalysis.getPartition());
 		}
 	}
 
-	protected void instrumentPartition(@NonNull ScheduleManager scheduleManager, @NonNull Partition parentPartition) {
+	protected void instrumentPartition(@NonNull ScheduleManager directedScheduleManager, @NonNull Partition parentPartition) {
 		Class<? extends @NonNull Partition> partitionClass = parentPartition.getClass();
 		Integer count = partitionClass2count.get(partitionClass);
 		partitionClass2count.put(partitionClass, count == null ? 1 : count+1);
-		for (@NonNull Partition childPartition : scheduleManager.getConnectionManager().getCallableChildren(parentPartition)) {
-			instrumentPartition(scheduleManager, childPartition);
+		for (@NonNull Partition childPartition : directedScheduleManager.getConnectionManager().getCallableChildren(parentPartition)) {
+			instrumentPartition(directedScheduleManager, childPartition);
 		}
 	}
 

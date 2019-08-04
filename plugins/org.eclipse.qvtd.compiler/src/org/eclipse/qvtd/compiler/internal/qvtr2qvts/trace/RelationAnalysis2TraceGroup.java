@@ -166,7 +166,7 @@ public class RelationAnalysis2TraceGroup extends RuleAnalysis2TraceGroup
 	}
 
 	public @NonNull QVTrelationNameGenerator getNameGenerator() {
-		return getScheduleManager().getNameGenerator();
+		return (QVTrelationNameGenerator)getScheduleManager().getNameGenerator();
 	}
 
 	@Override

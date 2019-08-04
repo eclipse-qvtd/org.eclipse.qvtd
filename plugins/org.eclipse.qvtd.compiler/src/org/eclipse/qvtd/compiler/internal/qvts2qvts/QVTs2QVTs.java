@@ -59,7 +59,7 @@ import com.google.common.collect.Iterables;
  */
 public class QVTs2QVTs extends QVTimperativeHelper
 {
-	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull ScheduleManager directedScheduleManager;
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull String rootName;
 	//	private final @NonNull LoadingRegion loadingRegion;
@@ -77,20 +77,20 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	//	private final @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<>();
 	//	private final @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<>();
 
-	public QVTs2QVTs(@NonNull ProblemHandler problemHandler, @NonNull ScheduleManager qvtm2qvts, @NonNull String rootName) {
-		super(qvtm2qvts.getEnvironmentFactory());
-		this.scheduleManager = qvtm2qvts;
+	public QVTs2QVTs(@NonNull ProblemHandler problemHandler, @NonNull ScheduleManager directedScheduleManager, @NonNull String rootName) {
+		super(directedScheduleManager.getEnvironmentFactory());
+		this.directedScheduleManager = directedScheduleManager;
 		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
 		this.problemHandler = problemHandler;
 		this.rootName = rootName;
-		this.loadingRegionAnalysis = new LoadingRegionAnalysis(scheduleManager, createLoadingRegion());		// FIXME Should treat LoadingRegion uniformly
+		this.loadingRegionAnalysis = new LoadingRegionAnalysis(directedScheduleManager, createLoadingRegion());		// FIXME Should treat LoadingRegion uniformly
 		this.completeModel = environmentFactory.getCompleteModel();
-		scheduleManager.createConnectionManager(problemHandler, loadingRegionAnalysis);
+		directedScheduleManager.createConnectionManager(problemHandler, loadingRegionAnalysis);
 	}
 
 	private void computeInputModels() {
-		for (@NonNull ClassDatum classDatum : scheduleManager.getClassDatums()) {
-			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
+		for (@NonNull ClassDatum classDatum : directedScheduleManager.getClassDatums()) {
+			DomainUsage domainUsage = directedScheduleManager.getDomainUsage(classDatum);
 			if (domainUsage.isInput() && !domainUsage.isOutput()) {
 				Type type = classDatum.getPrimaryClass();
 				org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
@@ -122,7 +122,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		LoadingRegion loadingRegion = loadingRegionAnalysis.getRegion();
 		//		loadingRegion.setOwningRootRegion(rootRootRegion);
 		assert rootRootRegion.getOwnedLoadingRegion() == loadingRegion;
-		scheduleManager.writeDebugGraphs(loadingRegion, null);
+		directedScheduleManager.writeDebugGraphs(loadingRegion, null);
 		return loadingRegion;
 	}
 
@@ -163,7 +163,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		loadingRegion.setName(rootName + QVTscheduleConstants.LOAD_MAPPING_NAME);
 		SymbolNameBuilder s = new SymbolNameBuilder();
 		s.appendString("__load__"); //QVTscheduleUtil.ROOT_MAPPING_NAME);
-		loadingRegion.setSymbolName(scheduleManager.getScheduleModel().reserveSymbolName(s, loadingRegion));
+		loadingRegion.setSymbolName(directedScheduleManager.getScheduleModel().reserveSymbolName(s, loadingRegion));
 		return loadingRegion;
 	}
 
@@ -323,7 +323,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
 		RegionAnalysis regionAnalysis = region2regionAnalysis.get(region);
 		if (regionAnalysis == null) {
-			regionAnalysis = scheduleManager.getRegionAnalysis(region);
+			regionAnalysis = directedScheduleManager.getRegionAnalysis(region);
 			region2regionAnalysis.put(region, regionAnalysis);
 		}
 		return regionAnalysis;
@@ -380,7 +380,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	} */
 
 	public @NonNull ScheduleManager getScheduleManager() {
-		return scheduleManager;
+		return directedScheduleManager;
 	}
 
 	public @NonNull StandardLibraryHelper getStandardLibraryHelper() {
@@ -477,7 +477,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		RootPartitionAnalysis rootPartitionAnalysis = partitionedTransformationAnalysis.getRootPartitionAnalysis();
 		RootPartition rootPartition = rootPartitionAnalysis.getPartition();
 		RootRegion rootRegion = rootPartitionAnalysis.getRootRegion();
-		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
+		ConnectionManager connectionManager = directedScheduleManager.getConnectionManager();
 		List<@NonNull Concurrency> partitionSchedule = rootPartitionAnalysis.getPartitionSchedule();
 		//
 		//	Create a connection between each consumer and the corresponding introducer/producer.
@@ -515,7 +515,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		// Remove the used connections whose consumers are necessarily after their last producer.
 		//
 		pruneRedundantConnections(connectionManager, rootRegion);
-		scheduleManager.writeDebugGraphs("8-pruned", true, true, false);
+		directedScheduleManager.writeDebugGraphs("8-pruned", true, true, false);
 
 		/*	boolean noLateConsumerMerge = scheduleManager.isNoLateConsumerMerge();
 		if (!noLateConsumerMerge) {
@@ -596,8 +596,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	}
 
-	public @NonNull Iterable<@NonNull RootRegion> transform(@NonNull ScheduleManager scheduleManager, @NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions) throws CompilerChainException {
-		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
+	public @NonNull Iterable<@NonNull RootRegion> transform(@NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions) throws CompilerChainException {
+		ConnectionManager connectionManager = directedScheduleManager.getConnectionManager();
 		LoadingRegion loadingRegion = loadingRegionAnalysis.getRegion();
 		Iterable<@NonNull RootRegion> rootRegions = rootRegion2activeRegions.keySet();
 		List<@NonNull PartitionedTransformationAnalysis> partitionedTransformationAnalyses = new ArrayList<>();
@@ -625,26 +625,26 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				QVTscheduleConstants.CONNECTION_CREATION.println(s.toString());;
 			}
 		}
-		UtilityAnalysis.assignUtilities(scheduleManager, loadingRegion);
-		scheduleManager.writeDebugGraphs("4-pre-partition", true, true, false);
-		scheduleManager.throwCompilerChainExceptionForErrors();
+		UtilityAnalysis.assignUtilities(directedScheduleManager, loadingRegion);
+		directedScheduleManager.writeDebugGraphs("4-pre-partition", true, true, false);
+		directedScheduleManager.throwCompilerChainExceptionForErrors();
 		//
 		for (@NonNull RootRegion rootRegion : rootRegions) {
 			Iterable<@NonNull Region> activeRegions2 = QVTscheduleUtil.getActiveRegions(rootRegion);
-			PartitionedTransformationAnalysis partitionedTransformationAnalysis = partition(scheduleManager, rootRegion, activeRegions2);
+			PartitionedTransformationAnalysis partitionedTransformationAnalysis = partition(directedScheduleManager, rootRegion, activeRegions2);
 			partitionedTransformationAnalyses.add(partitionedTransformationAnalysis);
 			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
 				connectionManager.createPartitionConnections(rootRegion, region);
 			}
 		}
 		//		getRegionAnalysis(loadingRegion).setPartitions(Collections.singletonList(new NonPartition(loadingRegion));
-		scheduleManager.writeDebugGraphs("5-post-partition", true, true, false);
-		scheduleManager.throwCompilerChainExceptionForErrors();
+		directedScheduleManager.writeDebugGraphs("5-post-partition", true, true, false);
+		directedScheduleManager.throwCompilerChainExceptionForErrors();
 		//
 		for (@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis : partitionedTransformationAnalyses) {
 			schedule(partitionedTransformationAnalysis);
 		}
-		scheduleManager.writeDebugGraphs("9-final", true, true, false);
+		directedScheduleManager.writeDebugGraphs("9-final", true, true, false);
 		return rootRegions;
 	}
 }

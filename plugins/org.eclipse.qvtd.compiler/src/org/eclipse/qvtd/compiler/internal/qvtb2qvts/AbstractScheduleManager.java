@@ -15,19 +15,14 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.CompleteModel;
-import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
@@ -39,7 +34,6 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VoidType;
@@ -102,7 +96,6 @@ import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public abstract class AbstractScheduleManager implements ScheduleManager
 {
@@ -181,43 +174,18 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull Transformation transformation;
 	protected final @NonNull ProblemHandler problemHandler;
-	protected final @NonNull NameGenerator nameGenerator;
 	private @Nullable TraceHelper traceHelper = null;
-	private CompilerOptions.@Nullable StepOptions schedulerOptions;
+	protected final CompilerOptions.@Nullable StepOptions schedulerOptions;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
-	protected final @NonNull DatumCaches datumCaches;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	protected final @NonNull QVTruntimeLibraryHelper qvtruntimeLibraryHelper;
 
-	private @Nullable ClassDatum booleanClassDatum;
-	private @Nullable ClassDatum oclVoidClassDatum;
-
-	/**
-	 * The extended analysis of each ClassDatum.
-	 */
-	private final @NonNull Set<@NonNull ClassDatum> classDatums = new HashSet<>();
-
-	/**
-	 * Property used as a navigation to cast to a specific type.
-	 */
-	//	private final @NonNull Map<Type, Property> type2castProperty = new HashMap<>();
-
-	/**
-	 * Property used as a navigation to iterate collection elements.
-	 */
-	private final @NonNull Map<Type, Property> type2iterateProperty = new HashMap<>();
-
-	/**
-	 * Property used as an argument role identification.
-	 */
-	private final @NonNull Map<String, Property> name2argumentProperty = new HashMap<>();
+	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
 	/**
 	 * The producing/consuming characteristics of each original (unpartitioned) region.
 	 */
 	private @Nullable OriginalContentsAnalysis originalContentsAnalysis = null;
-
-	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
@@ -230,18 +198,17 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	//	private final @NonNull Map<@NonNull TransformationAnalysis, @NonNull TransformationAnalysis2TracePackage> transformationAnalysis2transformationAnalysis2tracePackage = new HashMap<>();
 
 	protected AbstractScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
-			@NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
+			@NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions,
+			@Nullable RootDomainUsageAnalysis domainUsageAnalysis) {
 		this.scheduleModel = scheduleModel;
 		this.environmentFactory = environmentFactory;
 		this.transformation = transformation;
 		QVTbaseUtil.getPrimitiveTypedModel(transformation);		// FIXME debugging the must-exist side effect
 		this.problemHandler = problemHandler;
-		this.nameGenerator = createNameGenerator();
 		this.schedulerOptions = schedulerOptions;
-		this.domainUsageAnalysis = createDomainUsageAnalysis();
+		this.domainUsageAnalysis = domainUsageAnalysis != null ? domainUsageAnalysis : createDomainUsageAnalysis();
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
 		this.qvtruntimeLibraryHelper = new QVTruntimeLibraryHelper();
-		this.datumCaches = createDatumCaches();
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			this.doDotGraphs = true;
 			this.doYedGraphs = true;
@@ -311,12 +278,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public void analyzeCompletePackage(@NonNull TypedModel typedModel, @NonNull CompletePackage completePackage) {
-		//		domainUsageAnalysis.analyzeTracePackage(typedModel, tracePackage);
-		datumCaches.analyzeCompletePackage(typedModel, completePackage);
-	}
-
-	@Override
 	public @NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp) {
 		Operation operation = operationCallExp.getReferredOperation();
 		LanguageExpression bodyExpression = operation.getBodyExpression();
@@ -367,14 +328,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
 			transformationAnalysis.analyzeSourceModel();
 		}
-	}
-
-	@Override
-	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {
-		domainUsageAnalysis.analyzeTracePackage(typedModel, tracePackage);
-		CompleteModel completeModel = environmentFactory.getCompleteModel();
-		CompletePackage completePackage = completeModel.getCompletePackage(tracePackage);
-		datumCaches.analyzeCompletePackage(typedModel, completePackage);
 	}
 
 	@Override
@@ -638,19 +591,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	protected abstract @NonNull AbstractTransformationAnalysis createTransformationAnalysis(@NonNull Transformation asTransformation);
 
-	@Override
-	public @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum) {
-		return datumCaches.getAllPropertyDatums(classDatum);
-	}
-
-	public @NonNull Property getArgumentProperty(@NonNull String argumentName) {
-		Property argumentProperty = name2argumentProperty.get(argumentName);
-		if (argumentProperty == null) {
-			argumentProperty = createProperty(argumentName, getStandardLibrary().getOclAnyType(), true);
-			name2argumentProperty.put(argumentName, argumentProperty);
-		}
-		return argumentProperty;
-	}
+	//	public @NonNull Property getArgumentProperty(@NonNull String argumentName) {
+	//		Property argumentProperty = name2argumentProperty.get(argumentName);
+	//		if (argumentProperty == null) {
+	//			argumentProperty = createProperty(argumentName, getStandardLibrary().getOclAnyType(), true);
+	//			name2argumentProperty.put(argumentName, argumentProperty);
+	//		}
+	//		return argumentProperty;
+	//	}
 
 	@Override
 	public @NonNull PropertyDatum getBasePropertyDatum(@NonNull PropertyDatum propertyDatum) {
@@ -660,17 +608,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(propertyDatum);
 		ClassDatum classDatum = getClassDatum(typedModel, classType);
 		return getPropertyDatum(classDatum, property);
-	}
-
-	@Override
-	public @NonNull ClassDatum getBooleanClassDatum() {
-		ClassDatum booleanClassDatum2 = booleanClassDatum;
-		if (booleanClassDatum2 == null) {
-			TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
-			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-			booleanClassDatum = booleanClassDatum2 = getClassDatum(primitiveTypeModel, standardLibrary.getBooleanType());
-		}
-		return booleanClassDatum2;
 	}
 
 	/*	@Override
@@ -684,62 +621,16 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	} */
 
 	@Override
-	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass) {
-		return datumCaches.getClassDatum(typedModel, completeClass);
-	}
-
-	@Override
-	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull Iterable<@NonNull CompleteClass> completeClasses) {
-		int size = Iterables.size(completeClasses);
-		if (size == 1) {
-			return datumCaches.getClassDatum(typedModel, completeClasses.iterator().next());
-		}
-		else {
-			return datumCaches.getClassDatum(typedModel, Sets.newHashSet(completeClasses));
-		}
-	}
-
-	@Override
-	public @NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement) {
-		org.eclipse.ocl.pivot.Class asType = (org.eclipse.ocl.pivot.Class)asTypedElement.getType();
-		assert asType != null;
-		Type elementType = PivotUtil.getElementalType(asType);
-		TypedModel typedModel;
-		if (elementType instanceof DataType) {
-			typedModel = getDomainUsageAnalysis().getPrimitiveTypeModel();
-		}
-		else {
-			DomainUsage domainUsage = getDomainUsage(asTypedElement);
-			assert domainUsage != null;
-			typedModel = domainUsage.getTypedModel(asTypedElement);
-			assert typedModel != null;
-		}
-		return datumCaches.getClassDatum(typedModel, asType);
-	}
-
-	@Override
-	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class asType) {
-		return datumCaches.getClassDatum(typedModel, asType);
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull ClassDatum> getClassDatums() {
-		return classDatums;
-	}
-
-	@Override
 	public @NonNull ConnectionManager getConnectionManager() {
 		return ClassUtil.nonNullState(connectionManager);
 	}
 
-	public @NonNull ContainmentAnalysis getContainmentAnalysis() {
-		return datumCaches.getContainmentAnalysis();
-	}
+	public abstract @NonNull ContainmentAnalysis getContainmentAnalysis();
 
-	@Override
-	public @NonNull String getDirectedName(@NonNull Transformation asTransformation) {
-		return QVTbaseUtil.getName(asTransformation);
-	}
+	//	@Override
+	//	public @NonNull String getDirectedName(@NonNull Transformation asTransformation) {
+	//		return QVTbaseUtil.getName(asTransformation);
+	//	}
 
 	@Override
 	public @NonNull DomainUsage getDomainUsage(@NonNull Element element) {
@@ -752,6 +643,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			analysis = domainUsageAnalysis.getAnalysis(operation);
 		}
 		return ClassUtil.nonNullState(analysis.getUsage(element));
+	}
+
+	@Override
+	public @NonNull ScheduleManager getDirectedScheduleManager(@NonNull RootRegion rootRegion) {
+		return this;
 	}
 
 	@Override
@@ -790,35 +686,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return URI.createURI(symbolName + fileExtension).resolve(baseURI);
 	}
 
-	public @NonNull Property getIterateProperty(@NonNull Type type) {
-		Property iterateProperty = type2iterateProperty.get(type);
-		if (iterateProperty == null) {
-			iterateProperty = createProperty("«iterate»", type, true);
-			type2iterateProperty.put(type, iterateProperty);
-		}
-		return iterateProperty;
-	}
-
-	@Override
-	public @NonNull NameGenerator getNameGenerator() {
-		return nameGenerator;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum classDatum) {
-		return datumCaches.getOclContainerPropertyDatums(classDatum);
-	}
-
-	@Override
-	public @NonNull ClassDatum getOclVoidClassDatum() {
-		ClassDatum oclVoidClassDatum2 = oclVoidClassDatum;
-		if (oclVoidClassDatum2 == null) {
-			TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
-			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-			oclVoidClassDatum = oclVoidClassDatum2 = getClassDatum(primitiveTypeModel, standardLibrary.getOclVoidType());
-		}
-		return oclVoidClassDatum2;
-	}
+	public abstract @NonNull Property getIterateProperty(@NonNull Type type);
 
 	public @NonNull OperationDependencyAnalysis getOperationDependencyAnalysis() {
 		OperationDependencyAnalysis operationDependencyAnalysis2 = operationDependencyAnalysis;
@@ -826,19 +694,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			operationDependencyAnalysis = operationDependencyAnalysis2 = new OperationDependencyAnalysis(getContainmentAnalysis(), getDomainUsageAnalysis());
 		}
 		return operationDependencyAnalysis2;
-	}
-
-	@Override
-	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
-		return datumCaches.getPropertyDatum(classDatum, property);
-	}
-
-	@Override
-	public @NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge edge) {
-		Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-		Property property = QVTscheduleUtil.getReferredProperty(edge);
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(sourceNode);
-		return getPropertyDatum(classDatum, property);
 	}
 
 	/**
@@ -864,11 +719,19 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public @NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge edge) {
+		Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+		Property property = QVTscheduleUtil.getReferredProperty(edge);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(sourceNode);
+		return getPropertyDatum(classDatum, property);
+	}
+
+	@Override
 	public @NonNull QVTruntimeLibraryHelper getQVTruntimeLibraryHelper() {
 		return qvtruntimeLibraryHelper;
 	}
 
-	protected @Nullable QVTuConfiguration getQVTuConfiguration() {
+	protected @Nullable QVTuConfiguration getQVTuConfiguration() {		// FIXME Eliminate me
 		return null;
 	}
 
@@ -926,11 +789,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	} */
 
 	@Override
-	public @NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty) {
-		return datumCaches.getSuccessPropertyDatum(successProperty);
-	}
-
-	@Override
 	public @NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum) {
 		List<@NonNull ClassDatum> superClassDatums = QVTscheduleUtil.Internal.getSuperClassDatumsList(classDatum);
 		if (superClassDatums.isEmpty()) {
@@ -947,10 +805,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 		return superClassDatums;
 	}
+
 	@Override
-	public @NonNull TypedModel getTargetTypedModel() {
-		QVTuConfiguration qvtuConfiguration = ClassUtil.nonNullState(getQVTuConfiguration());
-		return qvtuConfiguration.getTargetTypedModel();
+	public @NonNull TypedModel getTargetTypedModel() {		// FIXME Eliminate me
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

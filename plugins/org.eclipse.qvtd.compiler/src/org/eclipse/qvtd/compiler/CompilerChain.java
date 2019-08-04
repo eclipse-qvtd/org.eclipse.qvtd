@@ -82,8 +82,9 @@ public interface CompilerChain
 	@Nullable URI basicGetURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey);
 	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;
 	@NonNull ImperativeTransformation compile(@NonNull String outputName) throws IOException;
-	@NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull String> outputNames) throws IOException;
+	@NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull Iterable<@NonNull String>> outputNamesList) throws IOException;
 	void compiled(@NonNull String stepKey, @NonNull Object object);
+	//	@NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource resource, QVTuConfiguration.Mode mode, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException;
 	@NonNull Resource createResource(@NonNull URI uri) throws IOException;
 	void dispose();
 	@NonNull QVTbaseEnvironmentFactory getEnvironmentFactory();

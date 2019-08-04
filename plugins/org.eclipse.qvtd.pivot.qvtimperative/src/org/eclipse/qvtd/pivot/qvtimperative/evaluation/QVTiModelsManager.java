@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -164,7 +165,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 		return transformationInstance2;
 	}
 
-	public @NonNull QVTiTypedModelInstance getTypedModelInstance(@NonNull ImperativeTypedModel typedModel) {
+	public @NonNull QVTiTypedModelInstance getTypedModelInstance(@NonNull TypedModel typedModel) {
 		String modelName = typedModel.getName();
 		assert modelName != null;
 		return getTypedModelInstance(modelName);

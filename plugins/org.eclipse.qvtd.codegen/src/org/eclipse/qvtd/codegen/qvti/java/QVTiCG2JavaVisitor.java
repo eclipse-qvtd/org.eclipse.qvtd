@@ -118,6 +118,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -2104,6 +2105,20 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doRun(@NonNull CGTransformation cgTransformation, @Nullable List<@Nullable AllInstancesAnalysis> allInstancesAnalyses) {
 		CompleteModelInternal completeModel = environmentFactory.getCompleteModel();
+		Map<@NonNull TypedModel, @NonNull CGTypedModel> asTypedModel2cgTypedModel = new HashMap<>();
+		ImperativeTransformation asTransformation = QVTiCGUtil.getAST(cgTransformation);
+		for (@NonNull CGTypedModel cgTypedModel : QVTiCGUtil.getOwnedTypedModels(cgTransformation)) {
+			TypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
+			asTypedModel2cgTypedModel.put(asTypedModel, cgTypedModel);
+		}
+		List<@NonNull EntryPoint> asEntryPoints = new ArrayList<>();
+		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+			if (asMapping instanceof EntryPoint) {
+				asEntryPoints.add((EntryPoint) asMapping);
+			}
+
+		}
+		EntryPoint asEntryPoint = (asEntryPoints.size() > 0) ? asEntryPoints.get(0) : null;
 		CGMapping cgRootMapping = QVTiCGUtil.getRootMapping(cgTransformation);
 		js.append("@Override\n");
 		js.append("public boolean run() {\n");
@@ -2122,14 +2137,30 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
 			assert asPackage != null;
 			AllInstancesAnalysis allInstancesAnalysis = null;
-			for (@NonNull CGTypedModel cgTypedModel : QVTiCGUtil.getOwnedTypedModels(cgTransformation)) {
-				ImperativeTypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
-				if (asTypedModel.isIsChecked() && asTypedModel.getUsedPackage().contains(asPackage)) {
-					appendModelIndex(cgTypedModel);
-					assert allInstancesAnalyses != null;
-					allInstancesAnalysis = allInstancesAnalyses.get(cgTypedModel.getModelIndex());
-					break;
+			CGTypedModel cgTypedModel = null;
+			if (asEntryPoint != null) {
+				for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getCheckedTypedModels(asEntryPoint)) {
+					if (asTypedModel.getUsedPackage().contains(asPackage)) {
+						cgTypedModel = asTypedModel2cgTypedModel.get(asTypedModel);
+						if (cgTypedModel != null) {
+							break;
+						}
+					}
 				}
+			}
+			else {			// FIXME Obsolete non-EntryPoint support
+				for (@NonNull CGTypedModel cgTypedModel2 : QVTiCGUtil.getOwnedTypedModels(cgTransformation)) {
+					ImperativeTypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel2);
+					if (asTypedModel.isIsChecked() && asTypedModel.getUsedPackage().contains(asPackage)) {
+						cgTypedModel = cgTypedModel2;
+						break;
+					}
+				}
+			}
+			if (cgTypedModel != null) {
+				appendModelIndex(cgTypedModel);
+				assert allInstancesAnalyses != null;
+				allInstancesAnalysis = allInstancesAnalyses.get(cgTypedModel.getModelIndex());
 			}
 			js.append("].getConnection(");
 			assert allInstancesAnalysis != null;

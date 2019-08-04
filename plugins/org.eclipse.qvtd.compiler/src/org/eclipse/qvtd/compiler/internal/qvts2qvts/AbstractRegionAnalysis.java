@@ -125,6 +125,7 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 				} */
 			}
 		}
+		//	System.out.println(NameUtil.debugSimpleName(this) + "\"" + getName() + "\" : " +  NameUtil.debugSimpleName(traceNode) + " !=> " + NameUtil.debugSimpleName(localSuccessEdge));
 		traceNode2localSuccessEdge.put(traceNode, localSuccessEdge);
 	}
 
@@ -165,10 +166,12 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 	}
 
 	public @Nullable SuccessEdge basicGetLocalSuccessEdge(@NonNull Node traceNode) {
+		//	System.out.println(NameUtil.debugSimpleName(this) + "\"" + getName() + "\" : " + NameUtil.debugSimpleName(traceNode));
 		return traceNode2localSuccessEdge.get(traceNode);
 	}
 
 	public @Nullable Node basicGetLocalSuccessNode(@NonNull Node traceNode) {
+		//	System.out.println(NameUtil.debugSimpleName(this) + "\"" + getName() + "\" : " + NameUtil.debugSimpleName(traceNode));
 		SuccessEdge successEdge = traceNode2localSuccessEdge.get(traceNode);
 		return successEdge != null ? successEdge.getTargetNode() : null;
 	}
@@ -187,10 +190,12 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 	}
 
 	public @NonNull SuccessEdge getLocalSuccessEdge(@NonNull Node traceNode) {
+		//	System.out.println(NameUtil.debugSimpleName(this) + "\"" + getName() + "\" : " + NameUtil.debugSimpleName(traceNode));
 		return ClassUtil.nonNullState(traceNode2localSuccessEdge.get(traceNode));
 	}
 
 	public @NonNull Node getLocalSuccessNode(@NonNull Node traceNode) {
+		//	System.out.println(NameUtil.debugSimpleName(this) + "\"" + getName() + "\" : " + NameUtil.debugSimpleName(traceNode));
 		SuccessEdge successEdge = ClassUtil.nonNullState(traceNode2localSuccessEdge.get(traceNode));
 		return QVTscheduleUtil.getTargetNode(successEdge);
 	}
@@ -207,6 +212,7 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 		return  node.getNodeRole();
 	}
 
+	@Override
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
 	}

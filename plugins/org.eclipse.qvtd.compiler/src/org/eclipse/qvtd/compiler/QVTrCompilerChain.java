@@ -57,6 +57,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc.GenPackageComparator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTr2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationDirectedScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationMultipleScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
@@ -67,7 +69,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
@@ -105,40 +109,44 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 	protected static class QVTr2QVTsCompilerStep extends AbstractCompilerStep
 	{
-		public QVTr2QVTsCompilerStep(@NonNull CompilerChain compilerChain) {
+		public QVTr2QVTsCompilerStep(@NonNull QVTrCompilerChain compilerChain) {
 			super(compilerChain, QVTS_STEP);
 			AbstractQVTb2QVTs.DEBUG_GRAPHS.setState(basicGetOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
+		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull QVTuConfiguration> qvtuConfigurations) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+			Resource qvtsResource = createResource();
+			ScheduleModel scheduleModel = QVTscheduleFactory.eINSTANCE.createScheduleModel();
+			qvtsResource.getContents().add(scheduleModel);
+			CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
+			RelationalTransformation asTransformation = (RelationalTransformation) AbstractCompilerChain.getTransformation(qvtrResource);
+			QVTrelationMultipleScheduleManager multipleScheduleManager = new QVTrelationMultipleScheduleManager(environmentFactory, asTransformation, this, scheduleModel, schedulerOptions);
 			try {
-				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
-				RelationalTransformation asTransformation = (RelationalTransformation) AbstractCompilerChain.getTransformation(qvtrResource);
-				QVTuConfiguration qvtuConfiguration = ((AbstractCompilerChain)compilerChain).createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNames);
-				QVTr2QVTs qvtr2qvts = new QVTr2QVTs(environmentFactory, asTransformation, this, qvtuConfiguration, schedulerOptions);
-				ScheduleManager scheduleManager = qvtr2qvts.getScheduleManager();
-				scheduleManager.addTransformation(asTransformation);
-				Resource qvtsResource = createResource();
-				qvtsResource.getContents().add(scheduleManager.getScheduleModel());
-				//
-				//	QVTr to QVTs and trace
-				//
-				Map<@NonNull String, @Nullable String> traceOptions = compilerChain.basicGetOption(TRACE_STEP, TRACE_OPTIONS_KEY);
-				String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
-				//				if (traceNsURI != null) {
-				//					t.setTraceNsURI(traceNsURI);
-				//				}
-				Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions = qvtr2qvts.transform(qvtrResource, qvtsResource, traceNsURI, traceResource);
 				try {
-					//
-					//	QVTs optimization
-					//
-					QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, scheduleManager.getDirectedName(asTransformation));
-					qvts2qvts.transform(scheduleManager, rootRegion2activeRegions);
+					for (@NonNull QVTuConfiguration qvtuConfiguration : qvtuConfigurations) {
+						QVTrelationDirectedScheduleManager directedScheduleManager = multipleScheduleManager.createDirectedScheduleManager(qvtuConfiguration);
+						QVTr2QVTs qvtr2qvts = new QVTr2QVTs(directedScheduleManager, this);
+						directedScheduleManager.addTransformation(asTransformation);
+						//
+						//	QVTr to QVTs and trace
+						//
+						Map<@NonNull String, @Nullable String> traceOptions = compilerChain.basicGetOption(TRACE_STEP, TRACE_OPTIONS_KEY);
+						String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
+						//				if (traceNsURI != null) {
+						//					t.setTraceNsURI(traceNsURI);
+						//				}
+						Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions = qvtr2qvts.transform(qvtrResource, qvtsResource, traceNsURI, traceResource);
+						multipleScheduleManager.addDirectedRootRegions(directedScheduleManager, rootRegion2activeRegions.keySet());
+						//
+						//	QVTs optimization
+						//
+						String directedName = directedScheduleManager.getDirectedName(asTransformation);
+						QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, directedScheduleManager, directedName);
+						qvts2qvts.transform(rootRegion2activeRegions);
+					}
 					throwCompilerChainExceptionForErrors();
 					saveResource(qvtsResource);
-					return scheduleManager;
 				}
 				catch (CompilerChainException e) {
 					//
@@ -150,6 +158,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					ecoreResource.save(null);
 					throw e;
 				}
+				return multipleScheduleManager;
 			}
 			finally {
 				environmentFactory.setCreateStrategy(savedStrategy);
@@ -415,17 +424,87 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNamesList) throws IOException {
 		Resource qvtrResource = xtext2qvtrCompilerStep.execute(txURI);
-		return qvtr2qvti(qvtrResource, enforcedOutputNames);
+		return qvtr2qvti(qvtrResource, enforcedOutputNamesList);
 	}
 
-	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
+	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNamesList) throws IOException {
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
 		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
 		Resource traceResource = createResource(traceURI);
-		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, enforcedOutputNames);
+		List<@NonNull QVTuConfiguration> qvtuConfigurations = new ArrayList<>();
+		for (@NonNull Iterable<@NonNull String> enforcedOutputNames : enforcedOutputNamesList) {
+			qvtuConfigurations.add(createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNames));
+		}
+		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, qvtuConfigurations);
+		//	ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
 		createGenModelCompilerStep.execute(traceResource);
+		//	CompilerOptions.StepOptions schedulerOptions = basicGetOptions(CompilerChain.QVTS_STEP);
+		//	RelationalTransformation asTransformation = (RelationalTransformation) AbstractCompilerChain.getTransformation(qvtrResource);
+		// FIXME Use a neutral scheduleManager
+		/*		ScheduleManager scheduleManager = new AbstractScheduleManager(scheduleModel, environmentFactory, asTransformation, qvtr2qvtsCompilerStep, schedulerOptions) {
+
+			@Override
+			public @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public @NonNull RuleAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public @NonNull RuleAnalysis2TraceGroup createRuleAnalysis2TraceGroup(@NonNull RuleAnalysis ruleAnalysis) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public @NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull AbstractTransformationAnalysis transformationAnalysis) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public boolean isInput(@NonNull Domain domain) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public boolean isInput(@NonNull TypedModel typedModel) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public boolean isOutput(@NonNull Domain domain) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public boolean isOutput(@NonNull TypedModel typedModel) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public boolean needsDiscrimination() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public boolean useActivators() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			protected @NonNull AbstractTransformationAnalysis createTransformationAnalysis(@NonNull Transformation asTransformation) {
+				throw new UnsupportedOperationException();
+			}}; */
+
 		return qvts2qvtiCompilerStep.execute(scheduleManager);
 	}
 

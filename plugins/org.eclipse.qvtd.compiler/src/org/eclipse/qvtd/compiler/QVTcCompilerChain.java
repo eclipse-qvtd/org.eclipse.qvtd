@@ -61,9 +61,9 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNamesList) throws IOException {
 		Resource cResource = xtext2qvtcCompilerStep.execute(txURI);
-		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNames);
+		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNamesList.iterator().next());	// FIXME multi-direction
 		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, qvtuConfiguration);
 		Resource pResource = qvtc2qvtm(cResource, qvtuConfiguration);
 		return qvtm2qvti(pResource);

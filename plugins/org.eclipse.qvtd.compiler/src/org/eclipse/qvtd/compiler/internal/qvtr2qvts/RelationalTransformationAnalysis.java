@@ -51,11 +51,11 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 	 */
 	private final @NonNull Map<@NonNull CompleteClass, @Nullable Key> completeClass2key  = new HashMap<>();
 
-	public RelationalTransformationAnalysis(@NonNull QVTrelationScheduleManager scheduleManager, @NonNull RelationalTransformation transformation, @NonNull RootRegion rootRegion) {
-		super(scheduleManager, transformation, rootRegion);
-		this.helper = new QVTrelationHelper(scheduleManager.getEnvironmentFactory());
+	public RelationalTransformationAnalysis(@NonNull QVTrelationDirectedScheduleManager directedScheduleManager, @NonNull RelationalTransformation transformation, @NonNull RootRegion rootRegion) {
+		super(directedScheduleManager, transformation, rootRegion);
+		this.helper = new QVTrelationHelper(directedScheduleManager.getEnvironmentFactory());
 		QVTbaseUtil.getPrimitiveTypedModel(transformation);		// FIXME debugging the must-exist side effect
-		//		transformation.getModelParameter().add(0, scheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel());		// FIXME move to source
+		//		transformation.getModelParameter().add(0, directedScheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel());		// FIXME move to source
 	}
 
 	protected void analyzeKey(@NonNull Key key) {
@@ -150,8 +150,8 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 	} */
 
 	@Override
-	public @NonNull QVTrelationScheduleManager getScheduleManager() {
-		return (QVTrelationScheduleManager) scheduleManager;
+	public @NonNull QVTrelationDirectedScheduleManager getScheduleManager() {
+		return (QVTrelationDirectedScheduleManager) scheduleManager;
 	}
 
 	@Override

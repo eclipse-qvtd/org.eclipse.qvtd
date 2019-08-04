@@ -277,10 +277,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			EntryPoint entryPoint = helper.createEntryPoint(mappingName);
 			for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(qvtmTransformation)) {
 				if (scheduleManager.isInput(typedModel) && !typedModel.isIsPrimitive()) {
-					entryPoint.getCheckedTypedModels().add(typedModel);
+					entryPoint.getCheckedTypedModels().add(qvtmTypedModel2qvtiTypedModel.get(typedModel));
 				}
 				if (scheduleManager.isOutput(typedModel)) {
-					entryPoint.getEnforcedTypedModels().add(typedModel);
+					entryPoint.getEnforcedTypedModels().add(qvtmTypedModel2qvtiTypedModel.get(typedModel));
 				}
 			}
 			partition2mapping = new LoadingPartition2Mapping(this, entryPoint, (LoadingPartition)partition);
@@ -323,7 +323,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			for (@NonNull Domain domain : QVTbaseUtil.getOwnedDomains(rule)) {
 				TypedModel typedModel = domain.getTypedModel();
 				if (typedModel != null) {
-					if (scheduleManager.isInput(domain)) {
+					/*	if (scheduleManager.isInput(domain)) {
 						ImperativeTypedModel checkableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
 						if ((checkableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(checkableTypedModel)) {
 							checkableTypedModel.setIsChecked(true);
@@ -348,7 +348,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 								enforceableTypedModels.add(enforceableTypedModel);
 							}
 						}
-					}
+					} */
 				}
 			}
 		}

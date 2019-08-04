@@ -238,7 +238,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				throwCompilerChainExceptionForErrors();
 				String rootName = ClassUtil.nonNullState(pResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
-				Iterable<@NonNull RootRegion> rootRegions = qvts2qvts.transform(scheduleManager, rootRegion2activeRegions);
+				Iterable<@NonNull RootRegion> rootRegions = qvts2qvts.transform(rootRegion2activeRegions);
 				for (@NonNull RootRegion rootRegion : rootRegions) {
 					rootRegion.setReferredTransformation(asTransformation);
 				}
@@ -262,9 +262,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			// Default QVTi strategy ok.
 			Resource iResource = createResource();
 			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
-			QVTs2QVTi tx = new QVTs2QVTi(scheduleManager, this, environmentFactory);
 			Model model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
 			for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {
+				ScheduleManager directedScheduleManager = scheduleManager.getDirectedScheduleManager(rootRegion);
+				QVTs2QVTi tx = new QVTs2QVTi(directedScheduleManager, this, environmentFactory);
 				tx.transform(model, rootRegion);
 			}
 			iResource.getContents().add(model);
@@ -417,7 +418,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	@Override
 	public final @NonNull ImperativeTransformation compile(@NonNull String outputName) throws IOException {
-		return compile(Collections.singletonList(outputName));
+		return compile(Collections.singletonList(Collections.singletonList(outputName)));
 	}
 
 	@Override

@@ -49,6 +49,7 @@ import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -104,8 +105,8 @@ public class QVTrCompilerTests extends LoadTestCase
 				return new QVTr2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
-						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, enforcedOutputNames);
+					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull QVTuConfiguration> qvtuConfigurations) throws IOException {
+						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, qvtuConfigurations);
 						instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}
@@ -113,7 +114,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 
 			@Override
-			public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
+			public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNames) throws IOException {
 				assertNoValidationErrors("QVTr validation", qvtrResource);
 				return super.qvtr2qvti(qvtrResource, enforcedOutputNames);
 			}
@@ -1030,7 +1031,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass;
 		MyQVT myQVT1 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		try {
-			txClass = myQVT1.buildTransformation("reverse", false);//,
+			Iterable<@NonNull String> forwardOutputNames = Collections.singletonList("forward");
+			Iterable<@NonNull String> reverseOutputNames = Collections.singletonList("reverse");
+			//			txClass = myQVT1.buildTransformation(Lists.newArrayList(reverseOutputNames, forwardOutputNames), false);//,
+			txClass = myQVT1.buildTransformation(Collections.singletonList(reverseOutputNames), false);//,
 			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
 			//			myQVT1.assertRegionCount(ActivatorRegionImpl.class, 2);
 			//	myQVT1.assertRegionCount(RuleRegionImpl.class, 1);
@@ -1279,7 +1283,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ProjectManager projectMap = myQVT1.getProjectManager();
 			projectMap.configure(myQVT1.getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-			txClass = myQVT1.buildTransformation(Lists.newArrayList("to", "via"), false);
+			txClass = myQVT1.buildTransformation(Collections.singletonList(Lists.newArrayList("to", "via")), false);
 		}
 		finally {
 			myQVT1.dispose();

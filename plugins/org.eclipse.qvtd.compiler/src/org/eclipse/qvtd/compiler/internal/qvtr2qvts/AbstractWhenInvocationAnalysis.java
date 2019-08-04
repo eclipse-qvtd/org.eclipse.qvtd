@@ -46,7 +46,7 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 
 	@Override
 	protected @NonNull Node createInvocationNode(@NonNull Node invokingTraceNode) {
-		QVTrelationNameGenerator nameGenerator = scheduleManager.getNameGenerator();	// FIXME unique names
+		QVTrelationNameGenerator nameGenerator = (QVTrelationNameGenerator) scheduleManager.getNameGenerator();	// FIXME unique names
 		Relation invokedRelation = invokedRelationAnalysis.getRule();
 		String name = nameGenerator.createWhenInvocationPropertyName(invokedRelation);
 		ClassDatum classDatum = getInvokedClassDatum();

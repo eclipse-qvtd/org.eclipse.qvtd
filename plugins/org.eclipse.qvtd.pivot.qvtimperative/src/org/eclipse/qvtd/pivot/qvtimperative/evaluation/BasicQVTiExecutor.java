@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -458,14 +460,34 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
 		pushEvaluationEnvironment(rule, (TypedElement)callExp);
 		try {
+			List<@NonNull EntryPoint> asEntryPoints = new ArrayList<>();
+			for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(transformation)) {
+				if (asMapping instanceof EntryPoint) {
+					asEntryPoints.add((EntryPoint) asMapping);
+				}
+
+			}
+			EntryPoint asEntryPoint = (asEntryPoints.size() > 0) ? asEntryPoints.get(0) : null;
 			Interval rootInterval = getInvocationManager().getRootInterval();
 			mapping2interval.put(rule, rootInterval);
 			TypedModelInstance modelInstance = null;
-			for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
-				if (typedModel.isIsChecked()) {
-					modelInstance = getModelsManager().getTypedModelInstance(typedModel);
+			TypedModel typedModel = null;
+			if (asEntryPoint != null) {
+				for (@NonNull TypedModel typedModel2 : QVTimperativeUtil.getCheckedTypedModels(asEntryPoint)) {
+					typedModel = typedModel2;
 					break;
 				}
+			}
+			else {			// FIXME Obsolete non-EntryPoint support
+				for (@NonNull ImperativeTypedModel typedModel2 : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
+					if (typedModel2.isIsChecked()) {
+						typedModel = typedModel2;
+						break;
+					}
+				}
+			}
+			if (typedModel != null) {
+				modelInstance = getModelsManager().getTypedModelInstance(typedModel);
 			}
 			assert modelInstance != null;
 			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(rule)) {

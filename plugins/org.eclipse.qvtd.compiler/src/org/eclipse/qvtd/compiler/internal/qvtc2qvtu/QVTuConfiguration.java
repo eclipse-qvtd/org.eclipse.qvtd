@@ -70,4 +70,38 @@ public class QVTuConfiguration
 	public boolean isOutput(@NonNull TypedModel typedModel) {
 		return outputTypedModels.contains(typedModel);
 	}
+
+	@Override
+	public @NonNull String toString() {
+		StringBuilder s = new StringBuilder();
+		boolean isFirst = true;
+		s.append("{");
+		for (@NonNull TypedModel typedModel : inputTypedModels) {
+			if (!isFirst) {
+				s.append(",");
+			}
+			s.append(typedModel.getName());
+			isFirst = false;
+		}
+		s.append("}->{");
+		isFirst = true;
+		for (@NonNull TypedModel typedModel : intermediateTypedModels) {
+			if (!isFirst) {
+				s.append(",");
+			}
+			s.append(typedModel.getName());
+			isFirst = false;
+		}
+		s.append("}->{");
+		isFirst = true;
+		for (@NonNull TypedModel typedModel : outputTypedModels) {
+			if (!isFirst) {
+				s.append(",");
+			}
+			s.append(typedModel.getName());
+			isFirst = false;
+		}
+		s.append("}");
+		return s.toString();
+	}
 }
