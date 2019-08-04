@@ -87,6 +87,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -1270,8 +1271,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	 */
 	private final @NonNull CheckedConditionAnalysis checkedConditionAnalysis;
 
-	public BasicPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull MappingPartitionAnalysis<?> partitionAnalysis) {
-		super(visitor, partitionAnalysis.getPartition());
+	public BasicPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Mapping mapping, @NonNull MappingPartitionAnalysis<?> partitionAnalysis) {
+		super(visitor, mapping, partitionAnalysis.getPartition());
 		this.regionAnalysis = scheduleManager.getRegionAnalysis(QVTscheduleUtil.getRegion(partition));
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
 		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partitionAnalysis, scheduleManager);

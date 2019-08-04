@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -74,6 +75,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
@@ -268,6 +270,17 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		asTypedModel.setIsEnforced(csElement.isIsEnforced());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTypedModel);
 		return continuation;
+	}
+
+	@Override
+	public Continuation<?> visitEntryPointCS(@NonNull EntryPointCS csElement) {
+		EntryPoint pivotElement = refreshNamedElement(EntryPoint.class, QVTimperativePackage.Literals.ENTRY_POINT, csElement);
+		context.refreshPivotList(MappingParameter.class, pivotElement.getOwnedMappingParameters(), csElement.getOwnedParameters());
+		context.refreshPivotList(Statement.class, pivotElement.getOwnedStatements(), csElement.getOwnedStatements());
+		pivotElement.setFirstPass(csElement.getFirstPass());
+		pivotElement.setIsStrict(csElement.isIsStrict());
+		pivotElement.setLastPass(csElement.getLastPass());
+		return null;
 	}
 
 	@Override

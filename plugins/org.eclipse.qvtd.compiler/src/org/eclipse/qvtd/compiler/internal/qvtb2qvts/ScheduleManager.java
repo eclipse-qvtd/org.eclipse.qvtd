@@ -175,6 +175,7 @@ public interface ScheduleManager
 	 * Return true if domain is an output domain.
 	 */
 	boolean isOutput(@NonNull Domain domain);
+	boolean isOutput(@NonNull TypedModel typedModel);
 
 	boolean isOutput(@NonNull Node node);
 

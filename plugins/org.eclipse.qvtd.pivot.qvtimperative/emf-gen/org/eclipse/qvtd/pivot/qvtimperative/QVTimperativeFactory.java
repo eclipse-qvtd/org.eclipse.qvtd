@@ -91,7 +91,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Entry Point</em>'.
 	 * @generated
 	 */
-	EntryPoint createEntryPoint();
+	@NonNull EntryPoint createEntryPoint();
 
 	/**
 	 * Returns a new object of class '<em>Guard Parameter</em>'.

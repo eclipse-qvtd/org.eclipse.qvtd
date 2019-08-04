@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -39,8 +40,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public abstract class AbstractRootRegion2Mapping extends AbstractPartition2Mapping
 {
-	protected AbstractRootRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Partition partition) {
-		super(visitor, partition);
+	protected AbstractRootRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Mapping mapping, @NonNull Partition partition) {
+		super(visitor, mapping, partition);
 		connection2variable = new HashMap<>();
 	}
 

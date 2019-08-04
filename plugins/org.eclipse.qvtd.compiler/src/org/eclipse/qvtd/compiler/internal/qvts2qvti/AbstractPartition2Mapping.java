@@ -91,7 +91,7 @@ public abstract class AbstractPartition2Mapping
 	 */
 	protected Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = null;
 
-	public AbstractPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Partition partition) {
+	public AbstractPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Mapping mapping, @NonNull Partition partition) {
 		this.visitor = visitor;
 		this.scheduleManager = visitor.getScheduleManager();
 		this.connectionManager = scheduleManager.getConnectionManager();
@@ -101,7 +101,7 @@ public abstract class AbstractPartition2Mapping
 		this.regionName = partition.getName();
 		String mappingName = partition.getSymbolName();
 		assert mappingName != null;
-		this.mapping = helper.createMapping(mappingName);
+		this.mapping = mapping; //helper.createMapping(mappingName);
 		this.mappingName = mappingName;
 		Region originalRegion = partition.getRegion();
 		if (originalRegion instanceof RuleRegion) {

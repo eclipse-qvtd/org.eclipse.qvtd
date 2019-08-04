@@ -51,10 +51,10 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EntryPointCS" eSuperTypes="#//MappingCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="checkedDirections" upperBound="-1"
-        eType="#//DirectionCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enforcedDirections" upperBound="-1"
-        eType="#//DirectionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="checkedTypedModels" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enforcedTypedModels" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GuardParameterBindingCS" eSuperTypes="#//MappingParameterBindingCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#T-qvtimperative-ConnectionVariable"/>

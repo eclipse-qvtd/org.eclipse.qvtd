@@ -577,26 +577,26 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getEntryPointCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedDirections <em>Checked Directions</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedTypedModels <em>Checked Typed Models</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Checked Directions</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedDirections()
+	 * @return the meta object for the reference list '<em>Checked Typed Models</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedTypedModels()
 	 * @see #getEntryPointCS()
 	 * @generated
 	 */
-	EReference getEntryPointCS_CheckedDirections();
+	EReference getEntryPointCS_CheckedTypedModels();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedDirections <em>Enforced Directions</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedTypedModels <em>Enforced Typed Models</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Enforced Directions</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedDirections()
+	 * @return the meta object for the reference list '<em>Enforced Typed Models</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedTypedModels()
 	 * @see #getEntryPointCS()
 	 * @generated
 	 */
-	EReference getEntryPointCS_EnforcedDirections();
+	EReference getEntryPointCS_EnforcedTypedModels();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS <em>Guard Parameter Binding CS</em>}'.
@@ -1509,20 +1509,20 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass ENTRY_POINT_CS = eINSTANCE.getEntryPointCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Checked Directions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Checked Typed Models</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENTRY_POINT_CS__CHECKED_DIRECTIONS = eINSTANCE.getEntryPointCS_CheckedDirections();
+		EReference ENTRY_POINT_CS__CHECKED_TYPED_MODELS = eINSTANCE.getEntryPointCS_CheckedTypedModels();
 
 		/**
-		 * The meta object literal for the '<em><b>Enforced Directions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Enforced Typed Models</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENTRY_POINT_CS__ENFORCED_DIRECTIONS = eINSTANCE.getEntryPointCS_EnforcedDirections();
+		EReference ENTRY_POINT_CS__ENFORCED_TYPED_MODELS = eINSTANCE.getEntryPointCS_EnforcedTypedModels();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardParameterBindingCSImpl <em>Guard Parameter Binding CS</em>}' class.

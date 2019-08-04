@@ -174,6 +174,11 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
+	public boolean isOutput(@NonNull TypedModel typedModel) {
+		return qvtuConfiguration.isOutput(typedModel);
+	}
+
+	@Override
 	public boolean needsDiscrimination() {
 		return false;			// FIXME Bug 488647 discriminate cyclic QVTr output classes too
 	}

@@ -662,8 +662,8 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         isStrict?='strict'?
 	 *         (firstPass=LOWER lastPass=LOWER?)?
 	 *         name=UnrestrictedName
-	 *         (checkedDirections+=DirectionCS checkedDirections+=DirectionCS*)?
-	 *         (enforcedDirections+=DirectionCS enforcedDirections+=DirectionCS*)?
+	 *         (checkedTypedModels+=[TypedModel|UnrestrictedName] checkedTypedModels+=[TypedModel|UnrestrictedName]*)?
+	 *         (enforcedTypedModels+=[TypedModel|UnrestrictedName] enforcedTypedModels+=[TypedModel|UnrestrictedName]*)?
 	 *         ownedInPathName=PathNameCS?
 	 *         ownedParameters+=MappingParameterCS*
 	 *         ownedStatements+=GuardStatementCS*
@@ -953,7 +953,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedImports+=ImportCS+ |
 	 *         (
 	 *             ownedImports+=ImportCS+
-	 *             (ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)+
+	 *             (
+	 *                 ownedPackages+=QualifiedPackageCS |
+	 *                 ownedTransformations+=TransformationCS |
+	 *                 ownedMappings+=EntryPointCS |
+	 *                 ownedMappings+=MappingCS |
+	 *                 ownedQueries+=QueryCS
+	 *             )+
 	 *         )
 	 *     )?
 	 */

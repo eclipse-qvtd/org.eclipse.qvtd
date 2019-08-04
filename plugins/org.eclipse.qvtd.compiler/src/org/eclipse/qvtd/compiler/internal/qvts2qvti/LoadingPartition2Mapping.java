@@ -34,6 +34,7 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -60,8 +61,8 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 
 	//	private final @NonNull Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = new HashMap<@NonNull NodeConnection, @NonNull ConnectionVariable>();
 
-	public LoadingPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull LoadingPartition partition) {
-		super(visitor, partition);
+	public LoadingPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull EntryPoint entryPoint, @NonNull LoadingPartition partition) {
+		super(visitor, entryPoint, partition);
 	}
 
 	private @NonNull BufferStatement createRootConnectionVariable(@NonNull String name, boolean isStrict, @NonNull Type type, @Nullable OCLExpression initExpression) {

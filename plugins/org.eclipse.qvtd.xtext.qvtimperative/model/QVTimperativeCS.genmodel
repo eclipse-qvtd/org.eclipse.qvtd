@@ -45,8 +45,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DirectionCS/isEnforced"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//EntryPointCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/checkedDirections"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/enforcedDirections"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/checkedTypedModels"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/enforcedTypedModels"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardParameterBindingCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardParameterBindingCS/value"/>

@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,8 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedDirections <em>Checked Directions</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedDirections <em>Enforced Directions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedTypedModels <em>Checked Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedTypedModels <em>Enforced Typed Models</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS()
@@ -35,35 +36,35 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface EntryPointCS extends MappingCS {
 	/**
-	 * Returns the value of the '<em><b>Checked Directions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS}.
+	 * Returns the value of the '<em><b>Checked Typed Models</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.TypedModel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Checked Directions</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Checked Typed Models</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Checked Directions</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS_CheckedDirections()
-	 * @model containment="true"
+	 * @return the value of the '<em>Checked Typed Models</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS_CheckedTypedModels()
+	 * @model
 	 * @generated
 	 */
-	EList<DirectionCS> getCheckedDirections();
+	EList<TypedModel> getCheckedTypedModels();
 
 	/**
-	 * Returns the value of the '<em><b>Enforced Directions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS}.
+	 * Returns the value of the '<em><b>Enforced Typed Models</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.TypedModel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Enforced Directions</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Enforced Typed Models</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Enforced Directions</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS_EnforcedDirections()
-	 * @model containment="true"
+	 * @return the value of the '<em>Enforced Typed Models</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS_EnforcedTypedModels()
+	 * @model
 	 * @generated
 	 */
-	EList<DirectionCS> getEnforcedDirections();
+	EList<TypedModel> getEnforcedTypedModels();
 
 } // EntryPointCS

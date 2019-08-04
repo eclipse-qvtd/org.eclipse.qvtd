@@ -52,7 +52,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -270,10 +272,24 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		assert partition2mapping == null : "Re-AbstractPartition2Mapping for " + partition;
 		//		assert !region.isConnectionRegion();
 		if (partition instanceof LoadingPartition) {
-			partition2mapping = new LoadingPartition2Mapping(this, (LoadingPartition)partition);
+			String mappingName = partition.getSymbolName();
+			assert mappingName != null;
+			EntryPoint entryPoint = helper.createEntryPoint(mappingName);
+			for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(qvtmTransformation)) {
+				if (scheduleManager.isInput(typedModel) && !typedModel.isIsPrimitive()) {
+					entryPoint.getCheckedTypedModels().add(typedModel);
+				}
+				if (scheduleManager.isOutput(typedModel)) {
+					entryPoint.getEnforcedTypedModels().add(typedModel);
+				}
+			}
+			partition2mapping = new LoadingPartition2Mapping(this, entryPoint, (LoadingPartition)partition);
 		}
 		else {
-			partition2mapping = new BasicPartition2Mapping(this, (MappingPartitionAnalysis<?>) partitionAnalysis);
+			String mappingName = partition.getSymbolName();
+			assert mappingName != null;
+			Mapping mapping = helper.createMapping(mappingName);
+			partition2mapping = new BasicPartition2Mapping(this, mapping, (MappingPartitionAnalysis<?>) partitionAnalysis);
 		}
 		partition2mapping.synthesizeLocalStatements();
 		partition2partition2mapping.put(partition, partition2mapping);

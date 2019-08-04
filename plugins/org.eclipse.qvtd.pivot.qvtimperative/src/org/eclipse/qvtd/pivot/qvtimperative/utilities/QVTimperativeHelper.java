@@ -30,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -99,6 +100,12 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		asVariableStatement.setName(name);
 		setType(asVariableStatement, asType, isRequired);
 		return asVariableStatement;
+	}
+
+	public @NonNull EntryPoint createEntryPoint(@NonNull String name) {
+		EntryPoint entryPoint = QVTimperativeFactory.eINSTANCE.createEntryPoint();
+		entryPoint.setName(name);
+		return entryPoint;
 	}
 
 	public @NonNull GuardParameter createGuardParameter(@NonNull String name, @NonNull ImperativeTypedModel typedModel, @NonNull Type type, boolean isRequired) {

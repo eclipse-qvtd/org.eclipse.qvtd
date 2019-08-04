@@ -92,6 +92,11 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
+	public boolean isOutput(@NonNull TypedModel typedModel) {
+		return getDomainUsage(typedModel).isOutput();
+	}
+
+	@Override
 	public boolean needsDiscrimination() {
 		return true;
 	}

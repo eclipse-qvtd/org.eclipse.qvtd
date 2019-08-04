@@ -180,7 +180,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EntryPoint createEntryPoint() {
+	public @NonNull EntryPoint createEntryPoint() {
 		EntryPointImpl entryPoint = new EntryPointImpl();
 		return entryPoint;
 	}

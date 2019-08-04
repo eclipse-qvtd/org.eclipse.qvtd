@@ -31,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -44,6 +45,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
@@ -213,6 +215,16 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS object) {
+		return null;
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitEntryPointCS(@NonNull EntryPointCS csElement) {
+		EntryPoint asEntryPoint = PivotUtil.getPivot(EntryPoint.class, csElement);
+		if (asEntryPoint != null) {
+			context.refreshList(asEntryPoint.getCheckedTypedModels(), csElement.getCheckedTypedModels());
+			context.refreshList(asEntryPoint.getEnforcedTypedModels(), csElement.getEnforcedTypedModels());
+		}
 		return null;
 	}
 

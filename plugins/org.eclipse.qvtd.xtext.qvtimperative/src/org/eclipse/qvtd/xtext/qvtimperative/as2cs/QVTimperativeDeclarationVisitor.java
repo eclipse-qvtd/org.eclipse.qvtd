@@ -441,8 +441,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		refreshOwnedInTransformation(csEntryPoint, asEntryPoint);
 		context.refreshList(csEntryPoint.getOwnedParameters(), context.visitDeclarations(MappingParameterCS.class, asEntryPoint.getOwnedMappingParameters(), null));
 		context.refreshList(csEntryPoint.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asEntryPoint.getOwnedStatements(), null));
-		context.refreshList(csEntryPoint.getCheckedDirections(), context.visitDeclarations(DirectionCS.class, asEntryPoint.getCheckedTypedModels(), null));
-		context.refreshList(csEntryPoint.getEnforcedDirections(), context.visitDeclarations(DirectionCS.class, asEntryPoint.getEnforcedTypedModels(), null));
+		context.refreshList(csEntryPoint.getCheckedTypedModels(), asEntryPoint.getCheckedTypedModels());
+		context.refreshList(csEntryPoint.getEnforcedTypedModels(), asEntryPoint.getEnforcedTypedModels());
 		csEntryPoint.setFirstPass(asEntryPoint.getFirstPass());
 		csEntryPoint.setIsStrict(asEntryPoint.isIsStrict());
 		csEntryPoint.setLastPass(asEntryPoint.getLastPass());
@@ -748,8 +748,17 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitTypedModel(@NonNull TypedModel object) {
-		return visiting(object);
+	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
+		if (asTypedModel.isIsPrimitive()) {
+			return null;
+		}
+		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTimperativeCSPackage.Literals.DIRECTION_CS, asTypedModel, null);
+		if ("".equals(asTypedModel.getName())) {
+			csDirection.setName(null);
+		}
+		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
+		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
+		return csDirection;
 	}
 
 	@Override

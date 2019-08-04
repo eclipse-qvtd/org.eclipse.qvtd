@@ -548,7 +548,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getEntryPointCS_CheckedDirections() {
+	public EReference getEntryPointCS_CheckedTypedModels() {
 		return (EReference)entryPointCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -558,7 +558,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getEntryPointCS_EnforcedDirections() {
+	public EReference getEntryPointCS_EnforcedTypedModels() {
 		return (EReference)entryPointCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1386,8 +1386,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		QVTimperativePackage theQVTimperativePackage = (QVTimperativePackage)EPackage.Registry.INSTANCE.getEPackage(QVTimperativePackage.eNS_URI);
 		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
-		QVTbaseCSPackage theQVTbaseCSPackage = (QVTbaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTbaseCSPackage.eNS_URI);
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
+		QVTbaseCSPackage theQVTbaseCSPackage = (QVTbaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTbaseCSPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1460,8 +1460,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEAttribute(getDirectionCS_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", null, 1, 1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entryPointCSEClass, EntryPointCS.class, "EntryPointCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEntryPointCS_CheckedDirections(), this.getDirectionCS(), null, "checkedDirections", null, 0, -1, EntryPointCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEntryPointCS_EnforcedDirections(), this.getDirectionCS(), null, "enforcedDirections", null, 0, -1, EntryPointCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEntryPointCS_CheckedTypedModels(), theQVTbasePackage.getTypedModel(), null, "checkedTypedModels", null, 0, -1, EntryPointCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEntryPointCS_EnforcedTypedModels(), theQVTbasePackage.getTypedModel(), null, "enforcedTypedModels", null, 0, -1, EntryPointCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardParameterBindingCSEClass, GuardParameterBindingCS.class, "GuardParameterBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardParameterBindingCS_Value(), theQVTimperativePackage.getConnectionVariable(), null, "value", null, 1, 1, GuardParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

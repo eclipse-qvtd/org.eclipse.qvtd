@@ -16,23 +16,17 @@ package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
-import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
@@ -46,8 +40,8 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl#getCheckedDirections <em>Checked Directions</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl#getEnforcedDirections <em>Enforced Directions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl#getCheckedTypedModels <em>Checked Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl#getEnforcedTypedModels <em>Enforced Typed Models</em>}</li>
  * </ul>
  *
  * @generated
@@ -64,24 +58,26 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 
 
 	/**
-	 * The cached value of the '{@link #getCheckedDirections() <em>Checked Directions</em>}' containment reference list.
+	 * The cached value of the '{@link #getCheckedTypedModels() <em>Checked Typed Models</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCheckedDirections()
+	 * @see #getCheckedTypedModels()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DirectionCS> checkedDirections;
+	protected EList<TypedModel> checkedTypedModels;
+
 
 	/**
-	 * The cached value of the '{@link #getEnforcedDirections() <em>Enforced Directions</em>}' containment reference list.
+	 * The cached value of the '{@link #getEnforcedTypedModels() <em>Enforced Typed Models</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEnforcedDirections()
+	 * @see #getEnforcedTypedModels()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DirectionCS> enforcedDirections;
+	protected EList<TypedModel> enforcedTypedModels;
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -108,11 +104,11 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	 * @generated
 	 */
 	@Override
-	public EList<DirectionCS> getCheckedDirections() {
-		if (checkedDirections == null) {
-			checkedDirections = new EObjectContainmentEList<DirectionCS>(DirectionCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6);
+	public EList<TypedModel> getCheckedTypedModels() {
+		if (checkedTypedModels == null) {
+			checkedTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6);
 		}
-		return checkedDirections;
+		return checkedTypedModels;
 	}
 
 	/**
@@ -121,27 +117,11 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	 * @generated
 	 */
 	@Override
-	public EList<DirectionCS> getEnforcedDirections() {
-		if (enforcedDirections == null) {
-			enforcedDirections = new EObjectContainmentEList<DirectionCS>(DirectionCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7);
+	public EList<TypedModel> getEnforcedTypedModels() {
+		if (enforcedTypedModels == null) {
+			enforcedTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7);
 		}
-		return enforcedDirections;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
-				return ((InternalEList<?>)getCheckedDirections()).basicRemove(otherEnd, msgs);
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7:
-				return ((InternalEList<?>)getEnforcedDirections()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return enforcedTypedModels;
 	}
 
 	/**
@@ -153,9 +133,9 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
-				return getCheckedDirections();
+				return getCheckedTypedModels();
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7:
-				return getEnforcedDirections();
+				return getEnforcedTypedModels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -170,12 +150,12 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
-				getCheckedDirections().clear();
-				getCheckedDirections().addAll((Collection<? extends DirectionCS>)newValue);
+				getCheckedTypedModels().clear();
+				getCheckedTypedModels().addAll((Collection<? extends TypedModel>)newValue);
 				return;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7:
-				getEnforcedDirections().clear();
-				getEnforcedDirections().addAll((Collection<? extends DirectionCS>)newValue);
+				getEnforcedTypedModels().clear();
+				getEnforcedTypedModels().addAll((Collection<? extends TypedModel>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -190,10 +170,10 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
-				getCheckedDirections().clear();
+				getCheckedTypedModels().clear();
 				return;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7:
-				getEnforcedDirections().clear();
+				getEnforcedTypedModels().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -208,9 +188,9 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
-				return checkedDirections != null && !checkedDirections.isEmpty();
+				return checkedTypedModels != null && !checkedTypedModels.isEmpty();
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7:
-				return enforcedDirections != null && !enforcedDirections.isEmpty();
+				return enforcedTypedModels != null && !enforcedTypedModels.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

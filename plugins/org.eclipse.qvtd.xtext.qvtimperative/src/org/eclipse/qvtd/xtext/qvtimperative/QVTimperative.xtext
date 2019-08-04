@@ -21,7 +21,7 @@ import "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperat
 
 TopLevelCS:
 	ownedImports+=ImportCS*
-	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
+	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS)*
 ;
 
 AddStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
@@ -51,8 +51,8 @@ DirectionCS: {DirectionCS} (isChecked?='check'|isEnforced?='enforce')? name=Unre
 
 EntryPointCS: {EntryPointCS} isStrict?='strict'? 'entry' (':' firstPass=LOWER ('..' lastPass=LOWER)?)?
 	name=UnrestrictedName
-	('check' checkedDirections+=DirectionCS (',' checkedDirections+=DirectionCS)*)?
-	('enforce' enforcedDirections+=DirectionCS (',' enforcedDirections+=DirectionCS)*)?
+	('check' checkedTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (',' checkedTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)?
+	('enforce' enforcedTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (',' enforcedTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)?
 	('in' ownedInPathName=PathNameCS)?
 	'{'
 	ownedParameters+=MappingParameterCS*
@@ -138,6 +138,7 @@ QVTimperativeUnrestrictedName:
 |	'check'
 |	'contained'
 |	'enforce'
+|	'entry'
 |	'for'
 |	'implementedby'
 |	'imports'
