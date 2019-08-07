@@ -26,8 +26,8 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2TraceGroup;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
@@ -98,8 +98,8 @@ public interface ScheduleManager
 	@NonNull ConnectionManager createConnectionManager(@NonNull ProblemHandler problemHandler, @NonNull LoadingRegionAnalysis loadingRegionAnalysis);
 	@NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis);
 	@NonNull RuleAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule);
-	@NonNull RuleAnalysis2TraceGroup createRuleAnalysis2TraceGroup(@NonNull RuleAnalysis ruleAnalysis);
-	@NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull AbstractTransformationAnalysis transformationAnalysis);
+	@NonNull Rule2TraceGroup createRule2TraceGroup(@NonNull Transformation2TracePackage transformation2TracePackage, @NonNull Rule rule);
+	@NonNull Transformation2TracePackage createTransformation2TracePackage(@NonNull Transformation transformation);
 	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull PropertyDatum getBasePropertyDatum(@NonNull PropertyDatum propertyDatum);
 	@NonNull ClassDatum getBooleanClassDatum();
@@ -114,6 +114,7 @@ public interface ScheduleManager
 	@NonNull DomainUsage getDomainUsage(@NonNull Element element);
 	@NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatum classDatum);
 	@NonNull EnvironmentFactory getEnvironmentFactory();
+	@NonNull ScheduleManager getMultipleScheduleManager();
 	@NonNull NameGenerator getNameGenerator();
 	@NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull ClassDatum getOclVoidClassDatum();
@@ -145,6 +146,7 @@ public interface ScheduleManager
 	@NonNull Iterable<@NonNull AbstractTransformationAnalysis> getTransformationAnalyses();
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull RootRegion rootRegion);
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
+	@NonNull Transformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation);
 
 	/**
 	 * Return true if a mapping may assign this property in an input model.

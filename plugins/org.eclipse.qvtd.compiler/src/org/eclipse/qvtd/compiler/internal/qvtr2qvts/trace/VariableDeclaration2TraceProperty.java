@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2MiddleType;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2MiddleType;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
@@ -28,7 +28,7 @@ public abstract class VariableDeclaration2TraceProperty extends Element2MiddlePr
 	 */
 	protected final @NonNull VariableDeclaration variable;
 
-	protected VariableDeclaration2TraceProperty(@NonNull RuleAnalysis2MiddleType relation2middleType, @NonNull String nameHint, @NonNull VariableDeclaration variable) {
+	protected VariableDeclaration2TraceProperty(@NonNull Rule2MiddleType relation2middleType, @NonNull String nameHint, @NonNull VariableDeclaration variable) {
 		super(relation2middleType, nameHint, QVTrelationUtil.getClass(variable), variable.isIsRequired());
 		this.variable = variable;
 	}

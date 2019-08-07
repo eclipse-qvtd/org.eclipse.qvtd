@@ -17,9 +17,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Invocation2TraceProperty;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2MiddleType;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceClass;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceGroup;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2MiddleType;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2TraceClass;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2TraceGroup;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -61,13 +61,13 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	protected abstract @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode);
 
 	protected void createInvocationEdges(@NonNull Node invokedNode) {
-		RelationAnalysis2MiddleType baseInvokedRuleAnalysis2MiddleType = getBaseInvokedRuleAnalysis2MiddleType();
+		Relation2MiddleType baseInvokedRule2MiddleType = getBaseInvokedRule2MiddleType();
 		Relation baseInvokedRelation = getBaseInvokedRelation();
 		for (@NonNull VariableDeclaration rootVariable : rootVariable2argumentNode.keySet()) {
 			Node argumentNode = rootVariable2argumentNode.get(rootVariable);
 			assert argumentNode != null;
 			VariableDeclaration overriddenRootVariable = QVTrelationUtil.getOverriddenVariable(baseInvokedRelation, rootVariable);
-			Property invocationProperty = baseInvokedRuleAnalysis2MiddleType.getTraceProperty(overriddenRootVariable);
+			Property invocationProperty = baseInvokedRule2MiddleType.getTraceProperty(overriddenRootVariable);
 			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(argumentNode);
 			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
 			if (domainUsage.isOutput()) {
@@ -85,9 +85,9 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	protected abstract @NonNull Node createInvocationNode(@NonNull Node invokingTraceNode);
 
 	protected void createInvokingTraceEdge(@NonNull Node invokedNode, @NonNull Node invokingTraceNode) {
-		RelationAnalysis2TraceGroup invokingRuleAnalysis2TraceGroup = invokingRelationAnalysis.getRuleAnalysis2TraceGroup();
-		RelationAnalysis2TraceClass invokingRuleAnalysis2TraceClass = invokingRuleAnalysis2TraceGroup.getRuleAnalysis2TraceClass();
-		Invocation2TraceProperty invokingInvocation2TraceProperty = invokingRuleAnalysis2TraceClass.getInvocation2TraceProperty(this);
+		Relation2TraceGroup invokingRule2TraceGroup = invokingRelationAnalysis.getRule2TraceGroup();
+		Relation2TraceClass invokingRule2TraceClass = invokingRule2TraceGroup.getRule2TraceClass();
+		Invocation2TraceProperty invokingInvocation2TraceProperty = invokingRule2TraceClass.getInvocation2TraceProperty(this);
 		Property invocationTraceProperty = invokingInvocation2TraceProperty.getTraceProperty();
 		boolean isPartial = scheduleManager.computeIsPartial(invokedNode, invocationTraceProperty);
 		invokingRelationAnalysis.createRealizedNavigationEdge(invokingTraceNode, invocationTraceProperty, invokedNode, isPartial);
@@ -102,28 +102,28 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		return QVTrelationUtil.getBaseRelation(invokedRelationAnalysis.getRule());
 	}
 
-	protected @NonNull RelationAnalysis2MiddleType getBaseInvokedRuleAnalysis2MiddleType() {
+	protected @NonNull Relation2MiddleType getBaseInvokedRule2MiddleType() {
 		Relation invokedRelation = invokedRelationAnalysis.getRule();
 		Relation baseInvokedRelation = getBaseInvokedRelation();
 		RelationAnalysis baseInvokedRelationAnalysis = scheduleManager.getRuleAnalysis(baseInvokedRelation);
-		RelationAnalysis2TraceGroup baseInvokedRelationAnalysis2TraceGroup = baseInvokedRelationAnalysis.getRuleAnalysis2TraceGroup();
-		RelationAnalysis2MiddleType baseInvokedRuleAnalysis2MiddleType;
+		Relation2TraceGroup baseInvokedrelation2traceGroup = baseInvokedRelationAnalysis.getRule2TraceGroup();
+		Relation2MiddleType baseInvokedRule2MiddleType;
 		if (QVTrelationUtil.hasOverrides(invokedRelation)) {
-			baseInvokedRuleAnalysis2MiddleType = baseInvokedRelationAnalysis2TraceGroup.getRuleAnalysis2DispatchClass();
+			baseInvokedRule2MiddleType = baseInvokedrelation2traceGroup.getRule2DispatchClass();
 		}
 		else if (isTop()) {
-			baseInvokedRuleAnalysis2MiddleType = baseInvokedRelationAnalysis2TraceGroup.getRuleAnalysis2TraceInterface();
+			baseInvokedRule2MiddleType = baseInvokedrelation2traceGroup.getRule2TraceInterface();
 		}
 		else {
-			baseInvokedRuleAnalysis2MiddleType = baseInvokedRelationAnalysis2TraceGroup.getRuleAnalysis2InvocationInterface();
+			baseInvokedRule2MiddleType = baseInvokedrelation2traceGroup.getRule2InvocationInterface();
 		}
-		return baseInvokedRuleAnalysis2MiddleType;
+		return baseInvokedRule2MiddleType;
 	}
 
 	protected @NonNull ClassDatum getInvokedClassDatum() {
 		TypedModel traceTypedModel = scheduleManager.getTraceTypedModel();
-		RelationAnalysis2MiddleType invokedRelationAnalysis2InvocationInterface = getInvokedRelationAnalysis2InvocationInterface();
-		org.eclipse.ocl.pivot.Class invokedInvocationInterface = invokedRelationAnalysis2InvocationInterface.getMiddleClass();
+		Relation2MiddleType invokedRelation2InvocationInterface = getInvokedRelation2InvocationInterface();
+		org.eclipse.ocl.pivot.Class invokedInvocationInterface = invokedRelation2InvocationInterface.getMiddleClass();
 		return scheduleManager.getClassDatum(traceTypedModel, invokedInvocationInterface);
 	}
 
@@ -132,11 +132,10 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		return invokedRelationAnalysis;
 	}
 
-	protected @NonNull RelationAnalysis2MiddleType getInvokedRelationAnalysis2InvocationInterface() {
-		RelationAnalysis2TraceGroup invokedRuleAnalysis2TraceGroup = invokedRelationAnalysis.getRuleAnalysis2TraceGroup();
-		RelationAnalysis2TraceGroup invokedBaseRelationAnalysis2TraceGroup = invokedRuleAnalysis2TraceGroup.getBaseRelationAnalysis2TraceGroup();
-		RelationAnalysis2MiddleType invokedRelationAnalysis2InvocationInterface = invokedBaseRelationAnalysis2TraceGroup.getRuleAnalysis2InvocationInterface();
-		return invokedRelationAnalysis2InvocationInterface;
+	protected @NonNull Relation2MiddleType getInvokedRelation2InvocationInterface() {
+		Relation2TraceGroup invokedBaserelation2traceGroup = invokedRelationAnalysis.getBaseRelationAnalysis().getRule2TraceGroup();
+		Relation2MiddleType invokedRelation2InvocationInterface = invokedBaserelation2traceGroup.getRule2InvocationInterface();
+		return invokedRelation2InvocationInterface;
 	}
 
 	@Override

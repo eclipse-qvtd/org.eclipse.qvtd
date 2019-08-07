@@ -13,9 +13,9 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2MiddleType;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2MiddleType;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
@@ -23,20 +23,20 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  * A Relation2MiddleType supports the future invocation/trace class/interface for a Relation
  * realized by a QVTc Mapping
  */
-public interface RelationAnalysis2MiddleType extends RuleAnalysis2MiddleType
+public interface Relation2MiddleType extends Rule2MiddleType
 {
 	@Nullable Element2MiddleProperty basicGetRelation2DispatchSuccessProperty();
-	@Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel);
+	@Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull RuleAnalysis ruleAnalysis);
 	@Nullable Element2MiddleProperty basicGetRelation2LocalSuccessProperty();
 	@Nullable Relation2ResultProperty basicGetRelation2ResultProperty();
 	@Nullable VariableDeclaration2TraceProperty basicGetVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable);
-	void createRootVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration rVariable, boolean manyTraces);
+	void getRootVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration rVariable, boolean manyTraces);
 	@Override
 	@NonNull Relation getRule();
 	@Override
-	@NonNull RelationAnalysis2TraceGroup getRuleAnalysis2TraceGroup();
+	@NonNull Relation2TraceGroup getRule2TraceGroup();
+	//	@Override
+	//	@NonNull RelationAnalysis getRuleAnalysis();
 	@Override
-	@NonNull RelationAnalysis getRuleAnalysis();
-	@Override
-	@NonNull RelationalTransformationAnalysis2TracePackage getTransformation2TracePackage();
+	@NonNull RelationalTransformation2TracePackage getTransformation2TracePackage();
 }

@@ -16,13 +16,13 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 
 /**
- * RelationAnalysis2MiddleType2TraceProperty defines the future trace property that identifies the trace class passed in to
+ * Relation2MiddleType2TraceProperty defines the future trace property that identifies the trace class passed in to
  * a non-top relation.
  */
 class Relation2TraceProperty extends Element2MiddleProperty
 {
-	public Relation2TraceProperty(@NonNull RelationAnalysis2MiddleType relationAnalysis2middleType) {
-		super(relationAnalysis2middleType, QVTrelationNameGenerator.TRACECLASS_PROPERTY_NAME, relationAnalysis2middleType.getMiddleClass(), false);
+	public Relation2TraceProperty(@NonNull Relation2MiddleType relation2middleType) {
+		super(relation2middleType, QVTrelationNameGenerator.TRACECLASS_PROPERTY_NAME, relation2middleType.getMiddleClass(), false);
 	}
 
 	@Override

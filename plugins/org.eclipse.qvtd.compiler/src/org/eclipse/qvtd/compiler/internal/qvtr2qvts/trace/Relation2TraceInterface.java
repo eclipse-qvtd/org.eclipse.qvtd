@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -26,30 +27,30 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
- * A RelationAnalysis2TraceInterface supervises the creation of a trace interface for the base relation
+ * A Relation2TraceInterface supervises the creation of a trace interface for the base relation
  * in an override hierarchy.
  *
  * The trace interface provides a trace property for each root variable.
  *
- * RelationAnalysis2TraceInterface instances do not form a polymorphic hierarchy mirroring the relation
+ * Relation2TraceInterface instances do not form a polymorphic hierarchy mirroring the relation
  * override hierarchy since mirroring a N-deep hierarchy would require N copies of each root variable,
  * one for each potentially distinct relation root variable type. THe minimal two level hierarchy comprising
  * a root relation interface and a concrete relation class minimises the overheads while retaining navigability.
  */
-public class RelationAnalysis2TraceInterface extends AbstractRelationAnalysis2MiddleType
+public class Relation2TraceInterface extends AbstractRelation2MiddleType
 {
 	/**
 	 * Name to corresponding future trace property
 	 */
 	private final @NonNull Map<@NonNull String, /*@NonNull*/ Element2MiddleProperty> name2element2traceProperty = new HashMap<>();
 
-	public RelationAnalysis2TraceInterface(@NonNull RelationAnalysis2TraceGroup relationAnalysis2traceGroup, @NonNull String middleClassName) {
-		super(relationAnalysis2traceGroup, middleClassName);
+	public Relation2TraceInterface(@NonNull Relation2TraceGroup relation2traceGroup, @NonNull String middleClassName) {
+		super(relation2traceGroup, middleClassName);
 		middleClass.setIsAbstract(true);
 	}
 
 	@Override
-	public void analyzeTraceElements(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups) throws CompilerChainException {
+	public void analyzeTraceElements(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups, @NonNull RuleAnalysis ruleAnalysis) throws CompilerChainException {
 		//
 		// The AbstractTrace clast is the superclass.
 		//
@@ -57,10 +58,10 @@ public class RelationAnalysis2TraceInterface extends AbstractRelationAnalysis2Mi
 		//
 		// There is always a trace interface success
 		//
-		//	QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
+		//	QVTrelationNameGenerator nameGenerator = relation2traceGroup.getNameGenerator();
 		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-			if (scheduleManager.isOutput(relationDomain)) {
-				createRelation2GlobalSuccessProperty(QVTrelationUtil.getTypedModel(relationDomain));//, nameGenerator.createTraceGlobalSuccessPropertyName(typedModel));
+			if (ruleAnalysis.getScheduleManager().isOutput(relationDomain)) {
+				createRelation2GlobalSuccessProperty(QVTrelationUtil.getTypedModel(relationDomain), ruleAnalysis);//, nameGenerator.createTraceGlobalSuccessPropertyName(typedModel));
 			}
 		}
 		//

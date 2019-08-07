@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -157,5 +158,10 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 	@Override
 	public @NonNull RelationalTransformation getTransformation() {
 		return (RelationalTransformation) super.getTransformation();
+	}
+
+	@Override
+	public @NonNull RelationalTransformation2TracePackage getTransformation2TracePackage() {
+		return (RelationalTransformation2TracePackage)super.getTransformation2TracePackage();
 	}
 }

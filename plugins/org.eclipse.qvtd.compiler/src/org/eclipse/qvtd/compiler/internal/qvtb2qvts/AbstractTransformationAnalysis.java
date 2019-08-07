@@ -24,7 +24,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
@@ -75,7 +75,7 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	/**
 	 * The mapping from analyzed Transformation to its corresponding trace Package.
 	 */
-	private @Nullable TransformationAnalysis2TracePackage transformationAnalysis2tracePackage = null;
+	private @Nullable Transformation2TracePackage transformation2tracePackage = null;
 
 	/**
 	 * Map from each rule to its analysis.
@@ -247,12 +247,12 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		return transformation;
 	}
 
-	public @NonNull TransformationAnalysis2TracePackage getTransformationAnalysis2TracePackage() {
-		TransformationAnalysis2TracePackage transformationAnalysis2tracePackage2 = transformationAnalysis2tracePackage;
-		if (transformationAnalysis2tracePackage2 == null) {
-			transformationAnalysis2tracePackage = transformationAnalysis2tracePackage2 = scheduleManager.createTransformationAnalysis2TracePackage(this);
+	public @NonNull Transformation2TracePackage getTransformation2TracePackage() {
+		Transformation2TracePackage transformation2tracePackage2 = transformation2tracePackage;
+		if (transformation2tracePackage2 == null) {
+			transformation2tracePackage = transformation2tracePackage2 = scheduleManager.getTransformation2TracePackage(transformation);
 		}
-		return transformationAnalysis2tracePackage2;
+		return transformation2tracePackage2;
 	}
 
 	/**

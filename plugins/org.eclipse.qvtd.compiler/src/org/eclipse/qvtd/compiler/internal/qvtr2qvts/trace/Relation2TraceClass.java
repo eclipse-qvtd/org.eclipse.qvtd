@@ -26,6 +26,8 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.InvocationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
@@ -41,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 
 /**
- * A RelationAnalysis2TraceClass supervises the creation of a trace class for a relation, which may be abstract.
+ * A Relation2TraceClass supervises the creation of a trace class for a relation, which may be abstract.
  *
  * If the relation participates in an override hierarchy, the trace class specifies the trace intrerface
  * of the base relation as its direct superclass regardless of the complexity of the override hierarchy.
@@ -56,7 +58,7 @@ import com.google.common.collect.Iterables;
  * The trace class of a relation whose successful execution is monitored by a when predicate also provides
  * a success property.
  */
-public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2MiddleType
+public class Relation2TraceClass extends AbstractRelation2MiddleType
 {
 	private @Nullable Map<@NonNull InvocationAnalysis, @NonNull Invocation2TraceProperty> invocationAnalysis2relation2traceProperty = null;
 
@@ -65,8 +67,8 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	 */
 	private final @NonNull Map<@NonNull String, /*@NonNull*/ Element2MiddleProperty> name2element2traceProperty = new HashMap<>();
 
-	public RelationAnalysis2TraceClass(@NonNull RelationAnalysis2TraceGroup relationAnalysis2traceGroup, @NonNull String middleClassName) {
-		super(relationAnalysis2traceGroup, middleClassName);
+	public Relation2TraceClass(@NonNull Relation2TraceGroup relation2traceGroup, @NonNull String middleClassName) {
+		super(relation2traceGroup, middleClassName);
 		//		traceClass.setIsAbstract(relation.isIsAbstract());
 		//		if (relation.isIsAbstract()) {
 		//		middleClass.getOwningPackage().getOwnedClasses().remove(middleClass);
@@ -126,7 +128,7 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		}
 	} */
 
-	protected void analyzePatternNodes(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups) {
+	protected void analyzePatternNodes(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups, @NonNull RelationAnalysis relationAnalysis) {
 		//	String name = relation.getName();
 		boolean manyTracesPerHead = headNodeGroups.size() > 2;
 		Set<@NonNull Node> allHeadGroupNodes = new HashSet<>();
@@ -183,14 +185,14 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		} */
 
 	@Override
-	public void analyzeTraceElements(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups) throws CompilerChainException {
+	public void analyzeTraceElements(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups, @NonNull RuleAnalysis ruleAnalysis) throws CompilerChainException {
 		//
 		// If there is a trace interface, then it is the superclass, otherwise the Execution class.
 		//
-		RelationAnalysis2TraceGroup baseRelationAnalysis2TraceGroup = relationAnalysis2traceGroup.getBaseRelationAnalysis2TraceGroup();
-		RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface = baseRelationAnalysis2TraceGroup.basicGetRuleAnalysis2TraceInterface();
-		if (baseRelationAnalysis2traceInterface != null) {
-			middleClass.getSuperClasses().add(baseRelationAnalysis2traceInterface.getMiddleClass());
+		Relation2TraceGroup baserelation2traceGroup = ((RelationAnalysis)ruleAnalysis).getBaseRelationAnalysis().getRule2TraceGroup();
+		Relation2TraceInterface baseRelation2traceInterface = baserelation2traceGroup.basicGetRule2TraceInterface();
+		if (baseRelation2traceInterface != null) {
+			middleClass.getSuperClasses().add(baseRelation2traceInterface.getMiddleClass());
 		}
 		else {
 			middleClass.getSuperClasses().add(getTransformation2TracePackage().getExecutionClass());
@@ -198,8 +200,8 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		//
 		// If there is a trace interface or a when invocation then there is a trace class success.
 		//
-		//		if ((baseRelationAnalysis2traceInterface != null) || getRuleAnalysis().hasIncomingWhenInvocationAnalyses()) {
-		//			createRelation2StatusProperty(relationAnalysis2traceGroup.getNameGenerator().createInternalTraceStatusPropertyName());
+		//		if ((baseRelation2traceInterface != null) || getRuleAnalysis().hasIncomingWhenInvocationAnalyses()) {
+		//			createRelation2StatusProperty(relation2traceGroup.getNameGenerator().createInternalTraceStatusPropertyName());
 		//		}
 		//
 		//	No result property.
@@ -207,7 +209,7 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		//
 		//	Create an incoming invocation property for each where invocation.
 		//
-		Iterable<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses = getRuleAnalysis().basicGetOutgoingWhereInvocationAnalyses();
+		Iterable<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses = ((RelationAnalysis)ruleAnalysis).basicGetOutgoingWhereInvocationAnalyses();
 		if (outgoingWhereInvocationAnalyses != null) {
 			for (@NonNull InvocationAnalysis outgoingWhereInvocationAnalysis : outgoingWhereInvocationAnalyses) {
 				if (outgoingWhereInvocationAnalysis.needsInvocationTraceProperty()) {
@@ -219,7 +221,7 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		//	Create an outgoing invocation property for each when invocation.
 		//
 		//	if (relation.isIsTopLevel()) {
-		Iterable<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses = getRuleAnalysis().basicGetOutgoingWhenInvocationAnalyses();
+		Iterable<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses = ((RelationAnalysis)ruleAnalysis).basicGetOutgoingWhenInvocationAnalyses();
 		if (outgoingWhenInvocationAnalyses != null) {
 			for (@NonNull InvocationAnalysis outgoingWhenInvocationAnalysis : outgoingWhenInvocationAnalyses) {
 				if (outgoingWhenInvocationAnalysis.needsInvocationTraceProperty()) {
@@ -237,7 +239,7 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		//
 		//	??
 		//
-		//		if (relationAnalysis2traceGroup.basicGetRuleAnalysis2TraceInterface() == null) {
+		//		if (relation2traceGroup.basicGetRule2TraceInterface() == null) {
 		//		}
 		//		else {
 		//			installRootVariableTraceProperties();
@@ -249,66 +251,66 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		//			assert rootNode != null;
 		//			allHeadGroupNodes.remove(rootNode);
 		//		}
-		analyzePatternNodes(headNodeGroups);
+		analyzePatternNodes(headNodeGroups, (RelationAnalysis) ruleAnalysis);
 		//		analyzeSharedVariables();
 		//		analyzeNonRootTemplateVariables(manyTraces);
 		//		analyzeInvocationVariables();
 		//
 		// If there is a trace interface or a when invocation then there is a trace class global success.
 		//
-		analyzeGlobalSuccessNode(baseRelationAnalysis2traceInterface);
+		analyzeGlobalSuccessNode(baseRelation2traceInterface, (RelationAnalysis) ruleAnalysis, scheduleManager);
 	}
 
 	//
 	// If there is a trace interface or a when invocation then there is a trace class global success.
 	//
-	protected void analyzeGlobalSuccessNode(@Nullable RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface) {
-		boolean hasTraceInterface2 = baseRelationAnalysis2traceInterface != null;
+	protected void analyzeGlobalSuccessNode(@Nullable Relation2TraceInterface baseRelation2traceInterface, @NonNull RelationAnalysis relationAnalysis, @NonNull ScheduleManager scheduleManager) {
+		boolean hasTraceInterface2 = baseRelation2traceInterface != null;
 		if (hasTraceInterface2) {
-			//	relationAnalysis2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasInterfaceTracingStrategy.INSTANCE);
+			//	relation2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasInterfaceTracingStrategy.INSTANCE);
 			return;					// FIXME Bug 540797 - this is used by e.g. mapBooleanExp in ATL2QVTr
 		}
 
-		boolean hasWhenInvocation = getRuleAnalysis().hasIncomingWhenInvocationAnalyses();
+		boolean hasWhenInvocation = relationAnalysis.hasIncomingWhenInvocationAnalyses();
 		if (hasWhenInvocation) {
-			relationAnalysis2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasWhenInvocationTracingStrategy.INSTANCE);
+			relation2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasWhenInvocationTracingStrategy.INSTANCE);
 		}
 		else {		// FIXME enforced guard needs globalSucess
 			//		return;
 		}
-		boolean hasPredicatedElement = hasPredicatedElement();
+		boolean hasPredicatedElement = hasPredicatedElement(relationAnalysis);
 		if (hasPredicatedElement) {
-			relationAnalysis2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasPredicatedElementTracingStrategy.INSTANCE);
+			relation2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasPredicatedElementTracingStrategy.INSTANCE);
 		}
 		else {
 			//		return;			// extStat is identical to trace class existence
 		}
 		boolean needsGlobalSuccess = false;
-		for (@NonNull TracingStrategy tracingStrategy : relationAnalysis2traceGroup.getTracingStrategies()) {
+		for (@NonNull TracingStrategy tracingStrategy : relation2traceGroup.getTracingStrategies()) {
 			if (tracingStrategy.needsGlobalSuccess(this)) {
 				needsGlobalSuccess = true;
 			}
 		}
 		if (needsGlobalSuccess) {
-			//			QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
+			//			QVTrelationNameGenerator nameGenerator = relation2traceGroup.getNameGenerator();
 			for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-				if (scheduleManager.isOutput(relationDomain)) {
-					createRelation2GlobalSuccessProperty(QVTrelationUtil.getTypedModel(relationDomain));
+				if (relationAnalysis.getScheduleManager().isOutput(relationDomain)) {
+					createRelation2GlobalSuccessProperty(QVTrelationUtil.getTypedModel(relationDomain), relationAnalysis);
 				}
 			}
 		}
 	}
 
 	/*	@Override
-	public @Nullable RelationAnalysis2MiddleType getSuperRuleAnalysis2MiddleType() {
-		RelationAnalysis2TraceInterface ruleAnalysis2TraceInterface = relationAnalysis2traceGroup.basicGetRuleAnalysis2TraceInterface();
-		if (ruleAnalysis2TraceInterface != null) {
-			return ruleAnalysis2TraceInterface;
+	public @Nullable Relation2MiddleType getSuperRule2MiddleType() {
+		Relation2TraceInterface rule2TraceInterface = relation2traceGroup.basicGetRule2TraceInterface();
+		if (rule2TraceInterface != null) {
+			return rule2TraceInterface;
 		}
 		else {
 			Rule overriddenRule = getRule().getOverridden();
 			if (overriddenRule != null) {
-				return transformationAnalysis2tracePackage.getRuleAnalysis2TraceGroup(overriddenRule).getRuleAnalysis2TraceClass();
+				return transformationAnalysis2tracePackage.getRule2TraceGroup(overriddenRule).getRule2TraceClass();
 			}
 			else {
 				return null;
@@ -317,15 +319,15 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	} */
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel) {
-		Element2MiddleProperty relation2SuccessProperty = super.basicGetRelation2GlobalSuccessProperty(targetTypedModel);
+	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull RuleAnalysis ruleAnalysis) {
+		Element2MiddleProperty relation2SuccessProperty = super.basicGetRelation2GlobalSuccessProperty(targetTypedModel, ruleAnalysis);
 		if (relation2SuccessProperty != null) {
 			return relation2SuccessProperty;
 		}
-		RelationAnalysis2TraceGroup baseRelationAnalysis2TraceGroup = relationAnalysis2traceGroup.getBaseRelationAnalysis2TraceGroup();
-		RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface = baseRelationAnalysis2TraceGroup.basicGetRuleAnalysis2TraceInterface();
-		if (baseRelationAnalysis2traceInterface != null) {
-			return baseRelationAnalysis2traceInterface.basicGetRelation2GlobalSuccessProperty(targetTypedModel);
+		Relation2TraceGroup baserelation2traceGroup = ((RelationAnalysis)ruleAnalysis).getBaseRelationAnalysis().getRule2TraceGroup();
+		Relation2TraceInterface baseRelation2traceInterface = baserelation2traceGroup.basicGetRule2TraceInterface();
+		if (baseRelation2traceInterface != null) {
+			return baseRelation2traceInterface.basicGetRelation2GlobalSuccessProperty(targetTypedModel, ruleAnalysis);
 		}
 		return null;
 	}
@@ -425,8 +427,8 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 			invocationAnalysis2relation2traceProperty = invocationAnalysis2relation2traceProperty2 = new HashMap<>();
 		}
 		RelationAnalysis invokedRelationAnalysis = invocationAnalysis.getInvokedRelationAnalysis().getBaseRelationAnalysis();
-		RelationAnalysis2TraceGroup invokedRule2TraceGroup = invokedRelationAnalysis.getRuleAnalysis2TraceGroup();
-		String nameHint = relationAnalysis2traceGroup.getNameGenerator().createInvocationTraceProperty(invokedRelationAnalysis.getRule());
+		Relation2TraceGroup invokedRule2TraceGroup = invokedRelationAnalysis.getRule2TraceGroup();
+		String nameHint = relation2traceGroup.getNameGenerator().createInvocationTraceProperty(invokedRelationAnalysis.getRule());
 		Invocation2TraceProperty relation2traceProperty = new Invocation2TraceProperty(this, nameHint, invokedRule2TraceGroup.getInvocationClass(), invocationAnalysis.isWhen() && !invocationAnalysis.isTop());
 		Invocation2TraceProperty oldRelation2traceProperty = invocationAnalysis2relation2traceProperty2.put(invocationAnalysis, relation2traceProperty);
 		assert oldRelation2traceProperty == null;
@@ -453,7 +455,7 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		if ((variable != null) && !rootVariables.contains(variable)) {
 			VariableDeclaration2TraceProperty variableDeclaration2traceProperty = basicGetVariableDeclaration2TraceProperty(variable);
 			if (variableDeclaration2traceProperty == null) {
-				createVariableDeclaration2TraceProperty(typedModel, variable, unitOpposite);
+				getVariableDeclaration2TraceProperty(typedModel, variable, unitOpposite);
 			}
 		}
 	}
@@ -463,15 +465,15 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	}
 
 	/*	@Override
-	public @Nullable RelationAnalysis2MiddleType getSuperRuleAnalysis2MiddleType() {
-		RelationAnalysis2TraceInterface ruleAnalysis2TraceInterface = relationAnalysis2traceGroup.basicGetRuleAnalysis2TraceInterface();
-		if (ruleAnalysis2TraceInterface != null) {
-			return ruleAnalysis2TraceInterface;
+	public @Nullable Relation2MiddleType getSuperRule2MiddleType() {
+		Relation2TraceInterface rule2TraceInterface = relation2traceGroup.basicGetRule2TraceInterface();
+		if (rule2TraceInterface != null) {
+			return rule2TraceInterface;
 		}
 		else {
 			Rule overriddenRule = getRule().getOverridden();
 			if (overriddenRule != null) {
-				return transformationAnalysis2tracePackage.getRuleAnalysis2TraceGroup(overriddenRule).getRuleAnalysis2TraceClass();
+				return transformationAnalysis2tracePackage.getRule2TraceGroup(overriddenRule).getRule2TraceClass();
 			}
 			else {
 				return null;
@@ -484,10 +486,10 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		return QVTrelationNameGenerator.getUniqueName(name2element2traceProperty, name, element2traceProperty);
 	}
 
-	private boolean hasPredicatedElement() {
+	private boolean hasPredicatedElement(@NonNull RelationAnalysis relationAnalysis) {
 		if (!QVTrelationUtil.hasOverrides(relation)) {
 			boolean hasPredicatedElement = false;
-			RuleRegion region = getRuleAnalysis().getRegion();
+			RuleRegion region = relationAnalysis.getRegion();
 			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 				if (node.isPredicated()) {
 					return true;
@@ -587,13 +589,13 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	}
 
 	@Override
-	public void synthesizeTraceModel() {
+	public void synthesizeTraceModel(@NonNull RuleAnalysis ruleAnalysis) {
 		Map<@NonNull InvocationAnalysis, @NonNull Invocation2TraceProperty> incomingInvocationAnalysis2relation2traceProperty2 = invocationAnalysis2relation2traceProperty;
 		if (incomingInvocationAnalysis2relation2traceProperty2 != null) {
 			for (@NonNull Invocation2TraceProperty relation2traceProperty : incomingInvocationAnalysis2relation2traceProperty2.values()) {
 				relation2traceProperty.synthesizeTraceModel();
 			}
 		}
-		super.synthesizeTraceModel();
+		super.synthesizeTraceModel(ruleAnalysis);
 	}
 }

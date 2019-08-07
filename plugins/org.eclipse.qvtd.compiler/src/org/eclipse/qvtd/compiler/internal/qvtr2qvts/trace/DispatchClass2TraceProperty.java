@@ -13,7 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2MiddleType;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2MiddleType;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -25,16 +25,16 @@ public class DispatchClass2TraceProperty extends Element2MiddleProperty
 	/**
 	 * The relation whose trace is composed by the dispatch property.
 	 */
-	protected final @NonNull RelationAnalysis2TraceClass relationAnalysis2traceClass;
+	protected final @NonNull Relation2TraceClass relation2traceClass;
 
-	protected DispatchClass2TraceProperty(@NonNull RuleAnalysis2MiddleType relation2middleType, @NonNull String nameHint, @NonNull RelationAnalysis2TraceClass relationAnalysis2traceClass) {
-		super(relation2middleType, nameHint, relationAnalysis2traceClass.getMiddleClass(), false);
-		this.relationAnalysis2traceClass = relationAnalysis2traceClass;
+	protected DispatchClass2TraceProperty(@NonNull Rule2MiddleType relation2middleType, @NonNull String nameHint, @NonNull Relation2TraceClass relation2traceClass) {
+		super(relation2middleType, nameHint, relation2traceClass.getMiddleClass(), false);
+		this.relation2traceClass = relation2traceClass;
 	}
 
 	@Override
 	protected @NonNull Property createTraceProperty() {
-		TypedModel traceTypedModel = relationAnalysis2traceClass.getTraceTypedModel();
+		TypedModel traceTypedModel = relation2traceClass.getTraceTypedModel();
 		Property dispatchProperty = createMiddleProperty(traceTypedModel, nameHint, true);
 		dispatchProperty.setIsComposite(true);
 		Property oppositeProperty = dispatchProperty.getOpposite();

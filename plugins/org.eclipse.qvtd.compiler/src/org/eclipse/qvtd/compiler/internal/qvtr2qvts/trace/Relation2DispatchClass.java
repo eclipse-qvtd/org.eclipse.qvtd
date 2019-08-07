@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
@@ -33,7 +34,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 /**
  * A TopRelation2TraceClass represents the mapping between a top level QVTr Relation and the trace class for a QVTc Mapping.
  */
-public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2MiddleType
+public class Relation2DispatchClass extends AbstractRelation2MiddleType
 {
 	private @NonNull Map<@NonNull Relation, @NonNull DispatchClass2TraceProperty> relation2dispatchClass2traceProperty = new HashMap<>();
 
@@ -42,8 +43,8 @@ public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2Mid
 	 */
 	private final @NonNull Map<@NonNull String, /*@NonNull*/ Element2MiddleProperty> name2element2traceProperty = new HashMap<>();
 
-	public RelationAnalysis2DispatchClass(@NonNull RelationAnalysis2TraceGroup relationAnalysis2traceGroup, @NonNull String middleClassName) {
-		super(relationAnalysis2traceGroup, middleClassName);
+	public Relation2DispatchClass(@NonNull Relation2TraceGroup relation2traceGroup, @NonNull String middleClassName) {
+		super(relation2traceGroup, middleClassName);
 		//		if (relation.isIsAbstract()) {
 		//			middleClass.setIsAbstract(true);
 		//		}
@@ -58,26 +59,26 @@ public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2Mid
 	/**
 	 * Descend the override hierrachy to create a DispatchClass2TraceProperty for each non-abstract relation.
 	 */
-	protected void analyzeOverrides(@NonNull Relation overriddenRelation) {
+	protected void analyzeOverrides(@NonNull Relation overriddenRelation, @NonNull RelationAnalysis relationAnalysis) {
 		if (!overriddenRelation.isIsAbstract()) {
 			RelationAnalysis dispatchedRelationAnalysis = relationAnalysis.getScheduleManager().getRuleAnalysis(overriddenRelation);
-			RelationAnalysis2TraceClass dispatchedRelationAnalysis2TraceClass = dispatchedRelationAnalysis.getRuleAnalysis2TraceGroup().getRuleAnalysis2TraceClass();
-			String nameHint = relationAnalysis2traceGroup.getNameGenerator().createDispatchClassDispatchPropertyName(overriddenRelation);
-			DispatchClass2TraceProperty dispatchClass2traceProperty = new DispatchClass2TraceProperty(this, nameHint, dispatchedRelationAnalysis2TraceClass);
+			Relation2TraceClass dispatchedRelation2TraceClass = dispatchedRelationAnalysis.getRule2TraceGroup().getRule2TraceClass();
+			String nameHint = relation2traceGroup.getNameGenerator().createDispatchClassDispatchPropertyName(overriddenRelation);
+			DispatchClass2TraceProperty dispatchClass2traceProperty = new DispatchClass2TraceProperty(this, nameHint, dispatchedRelation2TraceClass);
 			DispatchClass2TraceProperty oldDispatchClass2TraceProperty = relation2dispatchClass2traceProperty.put(overriddenRelation, dispatchClass2traceProperty);
 			assert oldDispatchClass2TraceProperty == null;
 		}
 		for (@NonNull Relation overridingRelation : QVTrelationUtil.getOverrides(overriddenRelation)) {
-			analyzeOverrides(overridingRelation);
+			analyzeOverrides(overridingRelation, relationAnalysis);
 		}
 	}
 
 	@Override
-	public void analyzeTraceElements(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups) throws CompilerChainException {
+	public void analyzeTraceElements(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups, @NonNull RuleAnalysis ruleAnalysis) throws CompilerChainException {
 		//
 		//	Dispatch is the superclass.
 		//
-		org.eclipse.ocl.pivot.Class dispatchClass = transformationAnalysis2tracePackage.getDispatchClass();
+		org.eclipse.ocl.pivot.Class dispatchClass = getTransformation2TracePackage().getDispatchClass();
 		middleClass.getSuperClasses().add(dispatchClass);
 		//
 		// There is always a trace interface success
@@ -90,7 +91,7 @@ public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2Mid
 		// There is always an invocation interface result
 		//
 		//		if (getRuleAnalysis().hasIncomingWhenInvocationAnalyses()) {
-		createRelation2ResultProperty(relationAnalysis2traceGroup.getNameGenerator().createDispatchClassResultPropertyName());
+		createRelation2ResultProperty(relation2traceGroup.getNameGenerator().createDispatchClassResultPropertyName());
 		//		}
 		//
 		//	One trace property per root variable.
@@ -101,7 +102,7 @@ public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2Mid
 		//
 		assert relation.getOverridden() == null;
 		assert !relation.getOverrides().isEmpty();
-		analyzeOverrides(relation);
+		analyzeOverrides(relation, (RelationAnalysis) ruleAnalysis);
 	}
 
 	/*	@Override
@@ -126,8 +127,8 @@ public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2Mid
 			return null;
 		}
 		VariableDeclaration overriddenVariable = overriddenRootVariables.get(rootVariableIndex);
-		RuleAnalysis2TraceGroup overriddenRuleAnalysis2TraceGroup = transformationAnalysis2tracePackage.getRuleAnalysis2TraceGroup(overriddenRule);
-		RuleAnalysis2MiddleType overriddenRelation2InvocationInterface = overriddenRuleAnalysis2TraceGroup.getRuleAnalysis2InvocationInterface();
+		Rule2TraceGroup overriddenRule2TraceGroup = transformationAnalysis2tracePackage.getRule2TraceGroup(overriddenRule);
+		Rule2MiddleType overriddenRelation2InvocationInterface = overriddenRule2TraceGroup.getRule2InvocationInterface();
 		return overriddenRelation2InvocationInterface.basicGetVariableDeclaration2TraceProperty(overriddenVariable);
 	} */
 
@@ -146,8 +147,8 @@ public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2Mid
 	}
 
 	@Override
-	public void synthesizeTraceModel() {
-		super.synthesizeTraceModel();
+	public void synthesizeTraceModel(@NonNull RuleAnalysis ruleAnalysis) {
+		super.synthesizeTraceModel(ruleAnalysis);
 		//
 		//	Create a trace dispatch property for each prepared trace dispatch property.
 		//

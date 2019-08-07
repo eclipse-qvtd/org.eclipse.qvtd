@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.VariableDeclaration2TraceProperty;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -27,15 +28,15 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * A Relation2MiddleType supports the future invocation/trace class/interface for a Relation
  * realized by a QVTc Mapping
  */
-public interface RuleAnalysis2MiddleType extends Nameable, Comparable<@NonNull RuleAnalysis2MiddleType>
+public interface Rule2MiddleType extends Nameable, Comparable<@NonNull Rule2MiddleType>
 {
-	void analyzeTraceElements(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups) throws CompilerChainException;
+	void analyzeTraceElements(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups, @NonNull RuleAnalysis ruleAnalysis) throws CompilerChainException;
 	@Nullable Property basicGetTraceProperty(@NonNull VariableDeclaration rVariable);
 	//	@Nullable VariableDeclaration2TraceProperty basicGetVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable);
 	//	void createRootVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration rVariable, boolean manyTraces);
 	org.eclipse.ocl.pivot.@NonNull Class getBagOfMiddleClass();
 	@NonNull Property getDispatchSuccessProperty();
-	@NonNull Property getGlobalSuccessProperty(@NonNull TypedModel targetTypedModel);
+	@NonNull Property getGlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull RuleAnalysis ruleAnalysis);
 	org.eclipse.ocl.pivot.@NonNull Class getMiddleClass();
 
 	@Override
@@ -43,11 +44,11 @@ public interface RuleAnalysis2MiddleType extends Nameable, Comparable<@NonNull R
 
 	@NonNull Property getResultProperty();
 	@NonNull Rule getRule();
-	@NonNull RuleAnalysis2TraceGroup getRuleAnalysis2TraceGroup();
-	@NonNull RuleAnalysis getRuleAnalysis();
-	@NonNull TransformationAnalysis2TracePackage getTransformation2TracePackage();
+	@NonNull Rule2TraceGroup getRule2TraceGroup();
+	@NonNull ScheduleManager getScheduleManager();
+	@NonNull Transformation2TracePackage getTransformation2TracePackage();
 	@NonNull Property getTraceProperty(@NonNull VariableDeclaration rVariable);
 	@NonNull String getUniquePropertyName(@NonNull Element2MiddleProperty variableDeclaration2middleProperty, @NonNull String name);
 	@NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration rVariable);
-	void synthesizeTraceModel();
+	void synthesizeTraceModel(@NonNull RuleAnalysis ruleAnalysis);
 }

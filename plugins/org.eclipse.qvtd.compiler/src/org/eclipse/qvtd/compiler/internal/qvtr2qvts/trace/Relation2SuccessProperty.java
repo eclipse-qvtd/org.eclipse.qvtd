@@ -20,8 +20,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty
  */
 public class Relation2SuccessProperty extends Element2MiddleProperty
 {
-	public Relation2SuccessProperty(@NonNull RelationAnalysis2MiddleType relationAnalysis2middleType, @NonNull String nameHint) {
-		super(relationAnalysis2middleType, nameHint, relationAnalysis2middleType.getTransformation2TracePackage().getBooleanType(), false);
+	public Relation2SuccessProperty(@NonNull Relation2MiddleType relation2middleType, @NonNull String nameHint) {
+		super(relation2middleType, nameHint, relation2middleType.getTransformation2TracePackage().getBooleanType(), false);
 	}
 
 	@Override

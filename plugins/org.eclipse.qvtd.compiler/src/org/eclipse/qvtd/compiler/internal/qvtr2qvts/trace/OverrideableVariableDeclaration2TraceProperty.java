@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2MiddleType;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2MiddleType;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
@@ -34,7 +34,7 @@ public class OverrideableVariableDeclaration2TraceProperty extends VariableDecla
 	 */
 	private final boolean unitOpposite;
 
-	public OverrideableVariableDeclaration2TraceProperty(@NonNull RuleAnalysis2MiddleType relation2middleType, @NonNull String nameHint, @Nullable TypedModel typedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
+	public OverrideableVariableDeclaration2TraceProperty(@NonNull Rule2MiddleType relation2middleType, @NonNull String nameHint, @Nullable TypedModel typedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
 		super(relation2middleType, nameHint, variable);
 		this.typedModel = typedModel;
 		this.unitOpposite = unitOpposite;
@@ -62,6 +62,10 @@ public class OverrideableVariableDeclaration2TraceProperty extends VariableDecla
 	@Override
 	public @Nullable TypedModel getTypedModel() {
 		return typedModel;
+	}
+
+	public boolean isUnitOpposite() {
+		return unitOpposite;
 	}
 
 	@Override

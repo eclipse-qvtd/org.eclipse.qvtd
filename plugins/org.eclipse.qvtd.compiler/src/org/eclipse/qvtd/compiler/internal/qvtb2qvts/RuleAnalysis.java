@@ -25,8 +25,8 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2TraceGroup;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -63,7 +63,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 	protected final @NonNull Rule rule;
 	protected final @NonNull ExpressionSynthesizer expressionSynthesizer;
 
-	private @Nullable RuleAnalysis2TraceGroup relationAnalysis2traceGroup = null;
+	private @Nullable Rule2TraceGroup relation2traceGroup = null;
 
 	/**
 	 * The dependency heads to accommodate operation content.
@@ -117,20 +117,20 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		return rule;
 	}
 
-	public @NonNull RuleAnalysis2TraceGroup getRuleAnalysis2TraceGroup() {
-		RuleAnalysis2TraceGroup relationAnalysis2traceGroup2 = relationAnalysis2traceGroup;
-		if (relationAnalysis2traceGroup2 == null) {
-			relationAnalysis2traceGroup = relationAnalysis2traceGroup2 = getTransformationAnalysis2TracePackage().getRuleAnalysis2TraceGroup(rule);
+	public @NonNull Rule2TraceGroup getRule2TraceGroup() {
+		Rule2TraceGroup relation2traceGroup2 = relation2traceGroup;
+		if (relation2traceGroup2 == null) {
+			relation2traceGroup = relation2traceGroup2 = getTransformation2TracePackage().getRule2TraceGroup(rule);
 		}
-		return relationAnalysis2traceGroup2;
+		return relation2traceGroup2;
 	}
 
 	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
 		return transformationAnalysis;
 	}
 
-	public @NonNull TransformationAnalysis2TracePackage getTransformationAnalysis2TracePackage() {
-		return transformationAnalysis.getTransformationAnalysis2TracePackage();
+	public @NonNull Transformation2TracePackage getTransformation2TracePackage() {
+		return transformationAnalysis.getTransformation2TracePackage();
 	}
 
 	public @NonNull Node getUnknownNode(@NonNull TypedElement typedElement) {

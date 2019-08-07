@@ -13,7 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2MiddleType;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2MiddleType;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -31,8 +31,8 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 
 	@Override
 	protected void createGlobalSuccessNodeAndEdge(@NonNull Node invokedNode) {
-		RelationAnalysis2MiddleType invokedRelationAnalysis2InvocationInterface = getInvokedRelationAnalysis2InvocationInterface();
-		Element2MiddleProperty relation2globalSuccessProperty = invokedRelationAnalysis2InvocationInterface.basicGetRelation2GlobalSuccessProperty(invokingRelationAnalysis.getTargetTypedModel());
+		Relation2MiddleType invokedRelation2InvocationInterface = getInvokedRelation2InvocationInterface();
+		Element2MiddleProperty relation2globalSuccessProperty = invokedRelation2InvocationInterface.basicGetRelation2GlobalSuccessProperty(invokingRelationAnalysis.getTargetTypedModel(), invokedRelationAnalysis);
 		if (relation2globalSuccessProperty != null) {
 			Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
 			invokingRelationAnalysis.createPredicatedSuccess(invokedNode, globalSuccessProperty, true);
@@ -46,7 +46,7 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 
 	@Override
 	protected @NonNull Node createInvocationNode(@NonNull Node invokingTraceNode) {
-		QVTrelationNameGenerator nameGenerator = (QVTrelationNameGenerator) scheduleManager.getNameGenerator();	// FIXME unique names
+		QVTrelationNameGenerator nameGenerator = scheduleManager.getNameGenerator();	// FIXME unique names
 		Relation invokedRelation = invokedRelationAnalysis.getRule();
 		String name = nameGenerator.createWhenInvocationPropertyName(invokedRelation);
 		ClassDatum classDatum = getInvokedClassDatum();

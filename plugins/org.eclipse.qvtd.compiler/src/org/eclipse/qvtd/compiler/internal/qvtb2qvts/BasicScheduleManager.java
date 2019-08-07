@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
@@ -63,6 +64,8 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 	 * Property used as a navigation to iterate collection elements.
 	 */
 	private final @NonNull Map<Type, Property> type2iterateProperty = new HashMap<>();
+
+	private final @NonNull Map<@NonNull Transformation, @NonNull Transformation2TracePackage> transformation2transformation2TracePackage = new HashMap<>();
 
 	protected BasicScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
 			@NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
@@ -195,5 +198,15 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 	@Override
 	public @NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty) {
 		return datumCaches.getSuccessPropertyDatum(successProperty);
+	}
+
+	@Override
+	public @NonNull Transformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation) {
+		Transformation2TracePackage transformation2TracePackage = transformation2transformation2TracePackage.get(transformation);
+		if (transformation2TracePackage == null) {
+			transformation2TracePackage = createTransformation2TracePackage(transformation);
+			transformation2transformation2TracePackage.put(transformation, transformation2TracePackage);
+		}
+		return transformation2TracePackage;
 	}
 }

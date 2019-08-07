@@ -50,8 +50,8 @@ public class NonTopWhereBeforeWhenInvocationAnalysis extends AbstractInvocationA
 	/*	@Override
 	protected @NonNull ClassDatum getInvokedClassDatum() {
 		TypedModel traceTypedModel = scheduleManager.getTraceTypedModel();
-		RelationAnalysis2TraceGroup invokedRuleAnalysis2TraceGroup = invokedRelationAnalysis.getRuleAnalysis2TraceGroup();
-		org.eclipse.ocl.pivot.Class invokedInvocationClass = invokedRuleAnalysis2TraceGroup.getInvocationClass();
+		relation2traceGroup invokedRule2TraceGroup = invokedRelationAnalysis.getRule2TraceGroup();
+		org.eclipse.ocl.pivot.Class invokedInvocationClass = invokedRule2TraceGroup.getInvocationClass();
 		return scheduleManager.getClassDatum(traceTypedModel, invokedInvocationClass);
 	} */
 

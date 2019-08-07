@@ -16,15 +16,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationMultipleScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 
-public class RelationalTransformationAnalysis2TracePackage extends TransformationAnalysis2TracePackage
+public class RelationalTransformation2TracePackage extends Transformation2TracePackage
 {
 	/**
 	 * Map of invocation to trace classes.
@@ -42,8 +42,8 @@ public class RelationalTransformationAnalysis2TracePackage extends Transformatio
 	 */
 	private org.eclipse.ocl.pivot.@Nullable Class executionClass = null;
 
-	public RelationalTransformationAnalysis2TracePackage(@NonNull QVTrelationScheduleManager scheduleManager, @NonNull AbstractTransformationAnalysis transformationAnalysis) {
-		super(scheduleManager, transformationAnalysis);
+	public RelationalTransformation2TracePackage(@NonNull QVTrelationMultipleScheduleManager scheduleManager, @NonNull RelationalTransformation transformation) {
+		super(scheduleManager, transformation);
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getDispatchClass() {
@@ -70,8 +70,8 @@ public class RelationalTransformationAnalysis2TracePackage extends Transformatio
 	}
 
 	@Override
-	public @NonNull RelationAnalysis2TraceGroup getRuleAnalysis2TraceGroup(@NonNull Rule rule) {
-		return (RelationAnalysis2TraceGroup) super.getRuleAnalysis2TraceGroup(rule);
+	public @NonNull Relation2TraceGroup getRule2TraceGroup(@NonNull Rule rule) {
+		return (Relation2TraceGroup) super.getRule2TraceGroup(rule);
 	}
 
 	public @NonNull EPackage getTraceEPackage() {

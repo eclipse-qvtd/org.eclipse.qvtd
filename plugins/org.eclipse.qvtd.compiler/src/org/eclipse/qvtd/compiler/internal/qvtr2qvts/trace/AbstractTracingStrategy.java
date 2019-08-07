@@ -11,12 +11,12 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2MiddleType;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2MiddleType;
 
 public class AbstractTracingStrategy implements TracingStrategy
 {
 	@Override
-	public boolean needsGlobalSuccess(@NonNull RuleAnalysis2MiddleType relationAnalysis2MiddleType) {
+	public boolean needsGlobalSuccess(@NonNull Rule2MiddleType relation2MiddleType) {
 		return false;
 	}
 
@@ -25,11 +25,11 @@ public class AbstractTracingStrategy implements TracingStrategy
 		return getClass().getSimpleName();
 	}
 
-	public static class AbstractRelationAnalysis2TraceClassTracingStrategy extends AbstractTracingStrategy
+	public static class AbstractRelation2TraceClassTracingStrategy extends AbstractTracingStrategy
 	{
 		@Override
-		public boolean needsGlobalSuccess(@NonNull RuleAnalysis2MiddleType relationAnalysis2MiddleType) {
-			assert relationAnalysis2MiddleType instanceof RelationAnalysis2TraceClass;
+		public boolean needsGlobalSuccess(@NonNull Rule2MiddleType relation2MiddleType) {
+			assert relation2MiddleType instanceof Relation2TraceClass;
 			return true;
 		}
 	}
@@ -39,17 +39,17 @@ public class AbstractTracingStrategy implements TracingStrategy
 		public static final @NonNull TracingStrategy INSTANCE = new HasDispatcherTracingStrategy();
 	}
 
-	public static class HasInterfaceTracingStrategy extends AbstractRelationAnalysis2TraceClassTracingStrategy
+	public static class HasInterfaceTracingStrategy extends AbstractRelation2TraceClassTracingStrategy
 	{
 		public static final @NonNull TracingStrategy INSTANCE = new HasInterfaceTracingStrategy();
 	}
 
-	public static class HasPredicatedElementTracingStrategy extends AbstractRelationAnalysis2TraceClassTracingStrategy
+	public static class HasPredicatedElementTracingStrategy extends AbstractRelation2TraceClassTracingStrategy
 	{
 		public static final @NonNull TracingStrategy INSTANCE = new HasPredicatedElementTracingStrategy();
 	}
 
-	public static class HasWhenInvocationTracingStrategy extends AbstractRelationAnalysis2TraceClassTracingStrategy
+	public static class HasWhenInvocationTracingStrategy extends AbstractRelation2TraceClassTracingStrategy
 	{
 		public static final @NonNull TracingStrategy INSTANCE = new HasWhenInvocationTracingStrategy();
 	}

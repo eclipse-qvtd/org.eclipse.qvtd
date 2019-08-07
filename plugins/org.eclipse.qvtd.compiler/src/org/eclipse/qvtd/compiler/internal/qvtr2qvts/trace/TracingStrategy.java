@@ -11,12 +11,12 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2MiddleType;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2MiddleType;
 
 /**
  * Each derived TracingStrategy identifies a behaviour that the trace class/interface of a Relation must exhibit.
  */
 public interface TracingStrategy
 {
-	boolean needsGlobalSuccess(@NonNull RuleAnalysis2MiddleType relationAnalysis2MiddleType);
+	boolean needsGlobalSuccess(@NonNull Rule2MiddleType rule2MiddleType);
 }

@@ -18,13 +18,13 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.BasicScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2TraceGroup;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -110,8 +110,9 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	public @NonNull RuleAnalysis2TraceGroup createRuleAnalysis2TraceGroup(@NonNull RuleAnalysis ruleAnalysis) {
-		return multipleScheduleManager.createRuleAnalysis2TraceGroup(ruleAnalysis);
+	public @NonNull Rule2TraceGroup createRule2TraceGroup(@NonNull Transformation2TracePackage transformation2TracePackage, @NonNull Rule rule) {
+		//		return multipleScheduleManager.createRule2TraceGroup(transformation2TracePackage, rule);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -124,8 +125,8 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	public @NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull AbstractTransformationAnalysis transformationAnalysis) {
-		return new RelationalTransformationAnalysis2TracePackage(this, transformationAnalysis);
+	public @NonNull Transformation2TracePackage createTransformation2TracePackage(@NonNull Transformation transformation) {
+		throw new UnsupportedOperationException();
 	}
 
 	public @NonNull String getDirectedName(@NonNull Transformation asTransformation) {
@@ -139,6 +140,11 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull QVTrelationDomainUsageAnalysis getDomainUsageAnalysis() {
 		return multipleScheduleManager.getDomainUsageAnalysis();
+	}
+
+	@Override
+	public @NonNull ScheduleManager getMultipleScheduleManager() {
+		return multipleScheduleManager;
 	}
 
 	@Override
@@ -164,6 +170,11 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull RelationalTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
 		return (RelationalTransformationAnalysis) super.getTransformationAnalysis(transformation);
+	}
+
+	@Override
+	public @NonNull Transformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation) {
+		return multipleScheduleManager.getTransformation2TracePackage(transformation);
 	}
 
 	@Override

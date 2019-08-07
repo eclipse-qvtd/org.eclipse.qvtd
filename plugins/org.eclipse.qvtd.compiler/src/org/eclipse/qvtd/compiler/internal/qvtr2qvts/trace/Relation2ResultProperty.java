@@ -20,8 +20,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty
  */
 public class Relation2ResultProperty extends Element2MiddleProperty
 {
-	public Relation2ResultProperty(@NonNull RelationAnalysis2MiddleType relationAnalysis2middleType, @NonNull String nameHint, org.eclipse.ocl.pivot.@NonNull Class traceClassType) {
-		super(relationAnalysis2middleType, nameHint, traceClassType, false);
+	public Relation2ResultProperty(@NonNull Relation2MiddleType relation2middleType, @NonNull String nameHint, org.eclipse.ocl.pivot.@NonNull Class traceClassType) {
+		super(relation2middleType, nameHint, traceClassType, false);
 	}
 
 	@Override

@@ -456,7 +456,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			}
 
 			@Override
-			public @NonNull RuleAnalysis2TraceGroup createRuleAnalysis2TraceGroup(@NonNull RuleAnalysis ruleAnalysis) {
+			public @NonNull Rule2TraceGroup createRule2TraceGroup(@NonNull RuleAnalysis ruleAnalysis) {
 				throw new UnsupportedOperationException();
 			}
 

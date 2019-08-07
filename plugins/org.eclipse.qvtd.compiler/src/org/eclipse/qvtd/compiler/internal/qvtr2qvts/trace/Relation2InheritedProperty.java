@@ -25,10 +25,10 @@ public class Relation2InheritedProperty extends Element2MiddleProperty
 {
 	private final @NonNull Property property;
 
-	public Relation2InheritedProperty(@NonNull RelationAnalysis2MiddleType relationAnalysis2middleType, @NonNull Property property) {
-		super(relationAnalysis2middleType, QVTbaseUtil.getName(property), relationAnalysis2middleType.getTransformation2TracePackage().getBooleanType(), false);
+	public Relation2InheritedProperty(@NonNull Relation2MiddleType relation2middleType, @NonNull Property property) {
+		super(relation2middleType, QVTbaseUtil.getName(property), relation2middleType.getTransformation2TracePackage().getBooleanType(), false);
 		this.property = property;
-		ScheduleManager scheduleManager = relationAnalysis2middleType.getRuleAnalysis().getScheduleManager();
+		ScheduleManager scheduleManager = relation2middleType.getScheduleManager();
 		ClassDatum classDatum = scheduleManager.getClassDatum(scheduleManager.getTraceTypedModel(), QVTbaseUtil.getOwningClass(property));
 		scheduleManager.getPropertyDatum(classDatum, property);		// FIXME why is this remedial installatioin needed?
 	}

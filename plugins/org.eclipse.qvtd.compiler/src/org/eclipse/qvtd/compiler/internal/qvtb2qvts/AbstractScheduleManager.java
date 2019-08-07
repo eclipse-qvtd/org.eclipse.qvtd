@@ -688,6 +688,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	public abstract @NonNull Property getIterateProperty(@NonNull Type type);
 
+	@Override
+	public @NonNull ScheduleManager getMultipleScheduleManager() {
+		return this;
+	}
+
 	public @NonNull OperationDependencyAnalysis getOperationDependencyAnalysis() {
 		OperationDependencyAnalysis operationDependencyAnalysis2 = operationDependencyAnalysis;
 		if (operationDependencyAnalysis2 == null) {

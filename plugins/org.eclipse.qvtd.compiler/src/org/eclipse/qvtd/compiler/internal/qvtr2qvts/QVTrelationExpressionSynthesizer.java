@@ -116,7 +116,7 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 			invocationAnalysis.addBinding(rootVariable, argumentNode);
 		}
 		//		for ()
-		//		if (referredRuleAnalysis2TraceClass.getStatusInterfaceProperty())
+		//		if (referredRule2TraceClass.getStatusInterfaceProperty())
 		return null;
 	}
 

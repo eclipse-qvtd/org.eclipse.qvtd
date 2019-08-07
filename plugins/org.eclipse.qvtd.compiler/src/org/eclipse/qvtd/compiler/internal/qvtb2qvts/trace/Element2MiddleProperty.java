@@ -32,7 +32,7 @@ public abstract class Element2MiddleProperty implements Nameable
 	/**
 	 * The future trace class.
 	 */
-	protected final @NonNull RuleAnalysis2MiddleType relation2middleType;
+	protected final @NonNull Rule2MiddleType relation2middleType;
 
 	/**
 	 * The preferred name for the trace property. A numeric suffix may be appended to the hint
@@ -55,7 +55,7 @@ public abstract class Element2MiddleProperty implements Nameable
 	 */
 	private @Nullable Property traceProperty;
 
-	protected Element2MiddleProperty(@NonNull RuleAnalysis2MiddleType relation2middleType, @NonNull String nameHint, org.eclipse.ocl.pivot.@NonNull Class type, boolean isRequired) {
+	protected Element2MiddleProperty(@NonNull Rule2MiddleType relation2middleType, @NonNull String nameHint, org.eclipse.ocl.pivot.@NonNull Class type, boolean isRequired) {
 		this.relation2middleType = relation2middleType;
 		this.nameHint = nameHint;
 		this.type = type;
