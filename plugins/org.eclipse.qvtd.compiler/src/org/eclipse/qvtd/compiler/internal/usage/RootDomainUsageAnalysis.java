@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
@@ -45,15 +43,12 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
-import com.google.common.collect.Iterables;
 
 public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAnalysis implements DomainUsageAnalysis.Root
 {
@@ -68,7 +63,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		}
 
 		@Override
-		public int compareTo(DomainUsage.Internal o) {
+		public int compareTo(@NonNull DomainUsage o) {
 			return getMask() - o.getMask();
 		}
 
@@ -122,11 +117,6 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		//		}
 
 		@Override
-		public boolean isInput() {
-			return (bitMask & rootDomainUsageAnalysis.inputUsage.bitMask) != 0;
-		}
-
-		@Override
 		public boolean isMiddle() {
 			return (bitMask & rootDomainUsageAnalysis.middleUsage.bitMask) != 0;
 		}
@@ -134,11 +124,6 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		@Override
 		public boolean isNone() {
 			return bitMask == 0;
-		}
-
-		@Override
-		public boolean isOutput() {
-			return (bitMask & rootDomainUsageAnalysis.outputUsage.bitMask) != 0;
 		}
 
 		@Override
@@ -282,16 +267,6 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	private DomainUsageConstant middleUsage = null;
 
 	/**
-	 * The TypedModels that are not enforceable.
-	 */
-	private DomainUsageConstant inputUsage = null;
-
-	/**
-	 * The TypedModels that are enforceable.
-	 */
-	private DomainUsageConstant outputUsage = null;
-
-	/**
 	 * The domains in which each class or template parameter may be used.
 	 */
 	private final @NonNull Map<@NonNull Type, @NonNull DomainUsageConstant> type2usage = new HashMap<>();
@@ -320,8 +295,8 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	 * The properties of the input models that are assigned by mappings and which cannot therefore
 	 * be trusted to be loaded from the input models.
 	 */
-	private final @NonNull Set<@NonNull Property> dirtyProperties = new HashSet<>();
-	private final @NonNull Set<@NonNull EReference> dirtyEReferences = new HashSet<>();
+	//	private final @NonNull Set<@NonNull Property> dirtyProperties = new HashSet<>();
+	//	private final @NonNull Set<@NonNull EReference> dirtyEReferences = new HashSet<>();
 
 	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory);
@@ -347,13 +322,13 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		return nextBit;
 	}
 
-	protected void addDirtyProperty(@NonNull Property property) {
+	/*	protected void addDirtyProperty(@NonNull Property property) {
 		dirtyProperties.add(property);
 		EObject eProperty = property.getESObject();
 		if (eProperty instanceof EReference) {
 			dirtyEReferences.add((EReference) eProperty);
 		}
-	}
+	} */
 
 	protected void addValidUsage(int bitMask, @NonNull DomainUsageConstant typedModelUsage) {
 		validUsages.put(bitMask, typedModelUsage);
@@ -389,7 +364,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		}
 	}
 
-	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
+	/*	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
 		for (@NonNull Property dirtyProperty : dirtyProperties) {
 			if (!dirtyProperty.isIsTransient()) {
 				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is not transient");
@@ -401,7 +376,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is required");
 			}
 		}
-	}
+	} */
 
 	private void analyzeTemplateSignature(@NonNull TemplateableElement asTemplateableElement, @NonNull DomainUsageConstant newUsage) {
 		TemplateSignature asSignature = asTemplateableElement.getOwnedSignature();
@@ -414,67 +389,37 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {}
 
-	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@Nullable Iterable<@NonNull TypedModel> outputTypedModels) {
-		int unenforceableMask = 0;
-		int enforceableMask = 0;
-		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
-			if (typedModel == primitiveTypeModel) {
-				continue;
-			}
-			if (typedModel.isIsTrace()) {
-				setTraceTypedModel(typedModel);
-				//				continue;
-			}
-			int nextBit = add(typedModel);
-			int bitMask = 1 << nextBit;
-			@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
-			addValidUsage(bitMask, typedModelUsage);
-			boolean isEnforceable = false;
-			boolean isUnenforceable = false;
-			for (Rule rule : transformation.getRule()) {
-				for (Domain domain : rule.getDomain()) {
-					if (domain.getTypedModel() == typedModel) {
-						if (domain.isIsEnforceable() && ((outputTypedModels == null) || Iterables.contains(outputTypedModels, typedModel))) {
-							isEnforceable = true;
-						}
-						else {
-							isUnenforceable = true;
-						}
-					}
+	public @NonNull Map<Element, DomainUsage> analyzeTransformation() {
+		for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(transformation)) {
+			if (!typedModel.isIsPrimitive()) {
+				int nextBit = add(typedModel);
+				int bitMask = 1 << nextBit;
+				@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
+				addValidUsage(bitMask, typedModelUsage);
+				setUsage(typedModel, typedModelUsage);
+				Variable ownedContext = typedModel.getOwnedContext();
+				if (ownedContext != null) {
+					setUsage(ownedContext, typedModelUsage);
+				}
+				analyzeTypedModelTypes(typedModel, typedModelUsage);
+				if (typedModel.isIsTrace()) {
+					setTraceTypedModel(typedModel);
+					DomainUsage middleUsage2 = setMiddleUsage(bitMask);
+					setUsage(typedModel, middleUsage2);
 				}
 			}
-			if (isEnforceable) {
-				enforceableMask |= bitMask;
-			}
-			if (isUnenforceable) {
-				unenforceableMask |= bitMask;
-			}
-			setUsage(typedModel, typedModelUsage);
-			Variable ownedContext = typedModel.getOwnedContext();
-			if (ownedContext != null) {
-				setUsage(ownedContext, typedModelUsage);
-			}
-			analyzeTypedModelTypes(typedModel, typedModelUsage);
 		}
-		analyzeTransformation2(transformation, unenforceableMask, enforceableMask);
-		return element2usage;
-	}
-
-	protected void analyzeTransformation2(@NonNull Transformation transformation, int inputMask, int outputMask) {
+		if (middleUsage == null) {
+			setMiddleUsage(0);
+		}
 		analyzeProperties();
 		type2usage.put(((StandardLibraryInternal)standardLibrary).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
-		setInputUsage(inputMask);
-		setOutputUsage(outputMask);
-		DomainUsage middleUsage2 = setMiddleUsage(~inputMask & ~outputMask & ~PRIMITIVE_USAGE_BIT_MASK);
-		if (traceTypedModel != null) {
-			setUsage(traceTypedModel, middleUsage2);
-		}
 		Variable ownedContext = transformation.getOwnedContext();
 		if (ownedContext != null) {
 			setUsage(ownedContext, getAnyUsage());
 		}
-		analyzePropertyAssignments(transformation);
 		visit(transformation);
+		return element2usage;
 	}
 
 	protected void analyzeTypedModelTypes(@NonNull TypedModel typedModel, @NonNull DomainUsageConstant typedModelUsage) {
@@ -537,6 +482,8 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		return usage;
 	}
 
+	public abstract @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis();
+
 	protected @NonNull OperationUsageAnalysis createOperationUsageAnalysis() {
 		return new OperationUsageAnalysis(this);
 	}
@@ -586,14 +533,6 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		return getConstantUsage(getAnyMask());
 	}
 
-	/**
-	 * @deprecated use getInputUsage();
-	 */
-	@Deprecated
-	public @NonNull DomainUsage getCheckableUsage() {
-		return getInputUsage();
-	}
-
 	@Override
 	public @NonNull DomainUsageConstant getConstantUsage(int bitMask) {
 		DomainUsageConstant usage = constantUsages.get(bitMask);
@@ -602,18 +541,6 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			constantUsages.put(bitMask, usage);
 		}
 		return usage;
-	}
-
-	/**
-	 * @deprecated use getOutputUsage();
-	 */
-	@Deprecated
-	public @NonNull DomainUsage getEnforceableUsage() {
-		return getOutputUsage();
-	}
-
-	public @NonNull DomainUsage getInputUsage() {
-		return ClassUtil.nonNullState(inputUsage);
 	}
 
 	public @NonNull DomainUsage getMiddleUsage() {
@@ -625,14 +552,6 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		assert noneUsage != null;
 		return noneUsage;
 	}
-
-	public @NonNull DomainUsage getOutputUsage() {
-		return ClassUtil.nonNullState(outputUsage);
-	}
-
-	//	public @NonNull TypedModel getPrimitiveTypeModel() {
-	//		return primitiveTypeModel;
-	//	}
 
 	public @NonNull OperationId getOclContainerId() {
 		OperationId oclElementOclContainerId2 = oclElementOclContainerId;
@@ -719,6 +638,14 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		return ClassUtil.nonNullState(traceTypedModel);
 	}
 
+	public @NonNull Transformation getTransformation() {
+		return transformation;
+	}
+
+	//	public @NonNull Transformation getTransformation() {
+	//		return transformation;
+	//	}
+
 	public @NonNull TypedModel getTypedModel(int i) {
 		return bit2typedModel.get(i);
 	}
@@ -757,7 +684,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	 * a variable usage for the multiple domains.
 	 */
 	public @NonNull DomainUsage getValidOrVariableUsage(@NonNull DomainUsage usage) {
-		int bitMask = ((DomainUsage.Internal)usage).getMask();
+		int bitMask = usage.getMask();
 		DomainUsage validUsage = getValidUsage(bitMask);
 		if (validUsage != null) {
 			return validUsage;
@@ -772,17 +699,17 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 	/**
 	 * Return true if a mapping may assign this property in an input model.
-	 */
+	 *
 	public boolean isDirty(@NonNull EReference eReference) {
 		return dirtyEReferences.contains(eReference);
-	}
+	} */
 
 	/**
 	 * Return true if a mapping may assign this property in an input model.
-	 */
+	 *
 	public boolean isDirty(@NonNull Property property) {
 		return property.isIsTransient() || dirtyProperties.contains(property);
-	}
+	} */
 
 	//	private boolean isPivotMMPackage(Package p) {
 	//		String pURI = p.getURI();
@@ -790,19 +717,9 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	//				OCLstdlib.STDLIB_URI.equals(pURI);
 	//	}
 
-	protected @NonNull DomainUsage setInputUsage(int inputMask) {
-		inputUsage = getConstantUsage(getAnyMask() & inputMask);
-		return inputUsage;
-	}
-
 	protected @NonNull DomainUsage setMiddleUsage(int middleMask) {
 		middleUsage = getConstantUsage(getAnyMask() & middleMask);
 		return middleUsage;
-	}
-
-	protected @NonNull DomainUsage setOutputUsage(int outputMask) {
-		outputUsage = getConstantUsage(getAnyMask() & outputMask);
-		return outputUsage;
 	}
 
 	protected void setTraceTypedModel(@NonNull TypedModel typedModel) {

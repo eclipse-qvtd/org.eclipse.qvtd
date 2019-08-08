@@ -61,7 +61,7 @@ public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsag
 
 	@Override
 	public @NonNull DomainUsage visitFunction(@NonNull Function object) {
-		for (@SuppressWarnings("null")@NonNull Parameter parameter : object.getOwnedParameters()) {
+		for (@NonNull Parameter parameter : QVTbaseUtil.getOwnedParameters(object)) {
 			visit(parameter);
 		}
 		OCLExpression queryExpression = object.getQueryExpression();

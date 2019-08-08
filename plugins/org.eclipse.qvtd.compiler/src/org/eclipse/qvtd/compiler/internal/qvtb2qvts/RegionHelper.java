@@ -487,7 +487,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 
 	public @NonNull VariableNode createOldNode(@NonNull VariableDeclaration variable) {
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(variable);
-		boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
+		boolean isEnforceable = scheduleManager.isOutput(domainUsage) || domainUsage.isMiddle();
 		Role phase = isEnforceable ? Role.PREDICATED : Role.LOADED;
 		Role nodeRole = phase;
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
@@ -699,7 +699,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 
 	public @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isMatched) {
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(callExp);
-		boolean isMiddleOrOutput = domainUsage.isOutput() || domainUsage.isMiddle();
+		boolean isMiddleOrOutput = scheduleManager.isOutput(domainUsage) || domainUsage.isMiddle();
 		boolean isDirty = false;
 		if (callExp instanceof NavigationCallExp) {
 			Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);

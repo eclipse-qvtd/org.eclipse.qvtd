@@ -691,7 +691,7 @@ public class MappingAnalysis extends RuleAnalysis
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
 					DomainUsage domainUsage = scheduleManager.getDomainUsage(variable);
-					boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
+					boolean isEnforceable = scheduleManager.isOutput(domainUsage) || domainUsage.isMiddle();
 					if (isEnforceable) {
 						//						assert variable instanceof RealizedVariable;
 						if (!(variable instanceof RealizedVariable)) {

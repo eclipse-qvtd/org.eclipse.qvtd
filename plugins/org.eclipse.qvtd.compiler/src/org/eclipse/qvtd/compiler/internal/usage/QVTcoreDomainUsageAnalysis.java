@@ -52,29 +52,38 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
  */
 public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<@NonNull DomainUsage>
 {
+	protected static class QVTcoreDirectedDomainUsageAnalysis extends DirectedDomainUsageAnalysis
+	{
+		public QVTcoreDirectedDomainUsageAnalysis(@NonNull QVTcoreDomainUsageAnalysis domainUsageAnalysis) {
+			super(domainUsageAnalysis);
+		}
+
+		@Override
+		protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
+			for (@NonNull EObject eObject : new TreeIterable(transformation, true)) {
+				if (eObject instanceof PropertyAssignment) {
+					PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
+					OCLExpression slotExpression = propertyAssignment.getSlotExpression();
+					assert slotExpression != null;
+					DomainUsage domainUsage = getUsage(PivotUtil.getType(slotExpression));
+					if (!isOutput(domainUsage) && !domainUsage.isMiddle()) {
+						Property targetProperty = ClassUtil.nonNullState(propertyAssignment.getTargetProperty());
+						//					System.out.println("Dirty " + targetProperty + " for " + eObject);
+						addDirtyProperty(targetProperty);
+					}
+				}
+			}
+			super.analyzePropertyAssignments(transformation);
+		}
+	}
+
 	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory, transformation);
 	}
 
 	@Override
-	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
-		for (@NonNull EObject eObject : new TreeIterable(transformation, true)) {
-			if (eObject instanceof PropertyAssignment) {
-				PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
-				//				if ("s.name := sn".equals(eObject.toString())) {
-				//					eObject.toString();
-				//				}
-				OCLExpression slotExpression = propertyAssignment.getSlotExpression();
-				assert slotExpression != null;
-				DomainUsage domainUsage = getUsage(PivotUtil.getType(slotExpression));
-				if (!domainUsage.isOutput() && !domainUsage.isMiddle()) {
-					Property targetProperty = ClassUtil.nonNullState(propertyAssignment.getTargetProperty());
-					//					System.out.println("Dirty " + targetProperty + " for " + eObject);
-					addDirtyProperty(targetProperty);
-				}
-			}
-		}
-		super.analyzePropertyAssignments(transformation);
+	public @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis() {
+		return new QVTcoreDirectedDomainUsageAnalysis(this);
 	}
 
 	protected @NonNull DomainUsage doNavigationAssignment(@NonNull Property property, @NonNull NavigationAssignment object) {
@@ -113,8 +122,8 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 			if (inputUsage != getNoneUsage()) {
 				return intersection(sourceUsage, inputUsage);
 			}
-			else {				// Att root so no domains, use input
-				return intersection(sourceUsage, getInputUsage());
+			else {				// At root so no domains, use input
+				return sourceUsage; //intersection(sourceUsage, getInputUsage());
 			}
 		}
 		else {
@@ -144,8 +153,8 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 			for (Variable variable : ((Mapping)rule).getGuardPattern().getVariable()) {
 				if (variable != null) {
 					DomainUsage variableUsage = visit(variable.getType());
-					//					if (variableUsage != primitiveUsage) {
-					if (!variableUsage.isInput() && !variableUsage.isOutput() && !variableUsage.isPrimitive()) {
+					if (variableUsage.isMiddle()) {
+						assert variableUsage == middleUsage;
 						variableUsage = middleUsage;
 					}
 					assert variableUsage != null;

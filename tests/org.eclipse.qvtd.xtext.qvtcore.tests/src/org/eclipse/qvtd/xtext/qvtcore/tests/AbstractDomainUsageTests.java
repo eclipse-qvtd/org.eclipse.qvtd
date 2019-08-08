@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -32,6 +31,7 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.DomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -52,20 +52,23 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 		}
 
 		public void checkAnalysis(@NonNull Transformation asTransformation, @NonNull RootDomainUsageAnalysis domainAnalysis, boolean showAnalysis) {
-			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation(null);
-			Map<DomainUsage, List<Element>> usage2elements = new HashMap<DomainUsage, List<Element>>();
+			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation();
+			DirectedDomainUsageAnalysis directedDomainUsageAnalysis = domainAnalysis.createDirectedDomainUsageAnalysis();
+			directedDomainUsageAnalysis.analyzeTransformation(null);
+			Map<@NonNull DomainUsage, @NonNull List<@NonNull Element>> usage2elements = new HashMap<>();
 			List<@NonNull Operation> operations = new ArrayList<>();
 			for (TreeIterator<EObject> tit = asTransformation.eAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
+				assert eObject != null;
 				if (eObject instanceof Comment) {
 					continue;
 				}
 				DomainUsage usage = analysis.get(eObject);
 				assert usage != null : "No usage for " + eObject.eClass().getName() + " " + eObject;
 				assert usage.isConstant() : "Variable usage for " + eObject;
-				List<Element> list = usage2elements.get(usage);
+				List<@NonNull Element> list = usage2elements.get(usage);
 				if (list == null) {
-					list = new ArrayList<Element>();
+					list = new ArrayList<>();
 					usage2elements.put(usage, list);
 				}
 				list.add((Element) eObject);
@@ -85,9 +88,9 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 						DomainUsage usage = operationAnalysis.getUsage((Element)eObject);
 						assert usage != null : "No nested usage for " + eObject.eClass().getName() + " " + eObject;
 						//					assert usage instanceof DomainUsageConstant : "Variable usage for " + eObject;
-						List<Element> list = usage2elements.get(usage);
+						List<@NonNull Element> list = usage2elements.get(usage);
 						if (list == null) {
-							list = new ArrayList<Element>();
+							list = new ArrayList<>();
 							usage2elements.put(usage, list);
 						}
 						list.add((Element) eObject);
@@ -99,14 +102,13 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 			}
 		}
 
-		public void printAnalysis(@NonNull Map<DomainUsage, List<Element>> usage2elements) {
-			@SuppressWarnings("unchecked")Set<DomainUsage.Internal> keySet = (Set<DomainUsage.Internal>)(Set<?>)usage2elements.keySet();
-			List<DomainUsage.Internal> sortedUsages = new ArrayList<DomainUsage.Internal>(keySet);
+		public void printAnalysis(@NonNull Map<@NonNull DomainUsage, @NonNull List<@NonNull Element>> usage2elements) {
+			List<@NonNull DomainUsage> sortedUsages = new ArrayList<>(usage2elements.keySet());
 			Collections.sort(sortedUsages);
-			for (DomainUsage usage : sortedUsages) {
+			for (@NonNull DomainUsage usage : sortedUsages) {
 				System.out.println(usage);
-				List<String> lines = new ArrayList<String>();
-				List<Element> elements = usage2elements.get(usage);
+				List<@NonNull String> lines = new ArrayList<>();
+				List<@NonNull Element> elements = usage2elements.get(usage);
 				if (elements != null) {
 					for (Element element : elements) {
 						lines.add(element.eClass().getName() + " " + element);
@@ -157,7 +159,7 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 		//		System.out.println("asResource.getURI() = " + asResource.getURI());
 		asResource.save(getSaveOptions());
 
-		for (EObject eObject : new TreeIterable(asResource)) {
+		for (@NonNull EObject eObject : new TreeIterable(asResource)) {
 			if (eObject instanceof Transformation) {
 				return (Transformation)eObject;
 			}

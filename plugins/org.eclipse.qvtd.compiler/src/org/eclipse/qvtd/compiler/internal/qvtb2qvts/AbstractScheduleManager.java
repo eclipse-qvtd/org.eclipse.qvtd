@@ -54,6 +54,7 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.DomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -177,6 +178,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	private @Nullable TraceHelper traceHelper = null;
 	protected final CompilerOptions.@Nullable StepOptions schedulerOptions;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
+	protected final @NonNull DirectedDomainUsageAnalysis directedDomainUsageAnalysis;
+	//	protected final @NonNull DatumCaches datumCaches;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	protected final @NonNull QVTruntimeLibraryHelper qvtruntimeLibraryHelper;
 
@@ -207,6 +210,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		this.problemHandler = problemHandler;
 		this.schedulerOptions = schedulerOptions;
 		this.domainUsageAnalysis = domainUsageAnalysis != null ? domainUsageAnalysis : createDomainUsageAnalysis();
+		this.directedDomainUsageAnalysis = this.domainUsageAnalysis.createDirectedDomainUsageAnalysis();
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
 		this.qvtruntimeLibraryHelper = new QVTruntimeLibraryHelper();
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
@@ -322,9 +326,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public void analyzeSourceModel() {
+		domainUsageAnalysis.analyzeTransformation();
 		QVTuConfiguration qvtuConfiguration = getQVTuConfiguration();
 		Iterable<@NonNull TypedModel> outputTypedModels = qvtuConfiguration != null ? qvtuConfiguration.getOutputTypedModels() : null;
-		domainUsageAnalysis.analyzeTransformation(outputTypedModels);
+		directedDomainUsageAnalysis.analyzeTransformation(outputTypedModels);
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
 			transformationAnalysis.analyzeSourceModel();
 		}
@@ -490,7 +495,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		//		System.out.println("Analyze2 " + operationCallExp + " gives\n\t" + paths);
 		Iterable<@NonNull List<@NonNull OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
 		Iterable<@NonNull List<@NonNull OperationDependencyStep>> returnPaths = paths.getReturnPaths();
-		RootDomainUsageAnalysis domainAnalysis = scheduleManager.getDomainUsageAnalysis();
 		Map<@NonNull ClassDatum, @NonNull Node> classDatum2node = new HashMap<>();
 		for (List<@NonNull OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
@@ -498,14 +502,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				for (int i = 1; i < steps.size(); i++) {
 					OperationDependencyStep.PropertyStep step = (OperationDependencyStep.PropertyStep) steps.get(i);
 					Property asProperty = step.getProperty();
-					if (domainAnalysis.isDirty(asProperty)) {
+					if (directedDomainUsageAnalysis.isDirty(asProperty)) {
 						isDirty = true;
 						break;
 					}
 				}
 				OperationDependencyStep.ClassStep classStep = (OperationDependencyStep.ClassStep) steps.get(0);
 				DomainUsage stepUsage = classStep.getUsage();
-				if (stepUsage.isOutput() && !stepUsage.isInput() || isDirty) {
+				if (isOutput(stepUsage) && !isInput(stepUsage) || isDirty) {
 					//					System.out.println("!checkable && enforceable: " + steps);
 					org.eclipse.ocl.pivot.Class stepType = steps.get(0).getElementalType();
 					TypedModel typedModel = stepUsage.getTypedModel(classStep.getElement());
@@ -636,6 +640,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public @NonNull DomainUsage getDomainUsage(@NonNull Element element) {
 		if (element instanceof ClassDatum) {
 			return getDomainUsage(QVTscheduleUtil.getReferredTypedModel((ClassDatum)element));
+		}
+		if (element instanceof TypedModel) {
+			int netMask = 0;
+			for (@NonNull TypedModel typedModel : QVTbaseUtil.getAllTypedModels((TypedModel) element)) {
+				DomainUsage usage = domainUsageAnalysis.getUsage(typedModel);
+				netMask |= usage.getMask();
+			}
+			return domainUsageAnalysis.getConstantUsage(netMask);
 		}
 		DomainUsageAnalysis analysis = domainUsageAnalysis;
 		Operation operation = PivotUtil.getContainingOperation(element);
@@ -858,7 +870,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public boolean isDirty(@NonNull Property property) {
-		return domainUsageAnalysis.isDirty(property);
+		return directedDomainUsageAnalysis.isDirty(property);
 	}
 
 	@Override
@@ -884,10 +896,21 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public boolean isInput(@NonNull DomainUsage domainUsage) {
+		return directedDomainUsageAnalysis.isInput(domainUsage);
+	}
+
+	@Override
+	public boolean isInput(@NonNull Element element) {
+		DomainUsage domainUsage = getDomainUsage(element);
+		return directedDomainUsageAnalysis.isInput(domainUsage);
+	}
+
+	@Override
 	public boolean isInput(@NonNull Node node) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 		DomainUsage domainUsage = getDomainUsage(classDatum);
-		return domainUsage.isInput();
+		return directedDomainUsageAnalysis.isOutput(domainUsage);
 	}
 
 	@Override
@@ -921,14 +944,25 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 		DomainUsage usage = getDomainUsage(sourceVariable);
 		assert usage != null;
-		return !usage.isOutput();
+		return !isOutput(usage);
+	}
+
+	@Override
+	public boolean isOutput(@NonNull DomainUsage domainUsage) {
+		return directedDomainUsageAnalysis.isOutput(domainUsage);
+	}
+
+	@Override
+	public boolean isOutput(@NonNull Element element) {
+		DomainUsage domainUsage = getDomainUsage(element);
+		return directedDomainUsageAnalysis.isOutput(domainUsage);
 	}
 
 	@Override
 	public boolean isOutput(@NonNull Node node) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 		DomainUsage domainUsage = getDomainUsage(classDatum);
-		return domainUsage.isOutput();
+		return directedDomainUsageAnalysis.isOutput(domainUsage);
 	}
 
 	@Override

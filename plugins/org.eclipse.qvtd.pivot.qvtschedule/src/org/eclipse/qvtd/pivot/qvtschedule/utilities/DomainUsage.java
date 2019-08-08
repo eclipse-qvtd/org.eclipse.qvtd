@@ -33,8 +33,11 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * For resolved usage a DomainUsageConstant returns the domain. For unresolved usage a DomainUsageVariable identifies
  * the possibilities. Further analysis may enable the possibilities to be trimmed and eventually converted to a constant.
  * A DomainUsageVariable tracks its clients so that a resolution to a constant is propagated to all clients.
+ *
+ * NB. While a DomainUsage can provode helper methods such as isMiddle/isPrimitive, it no longer provides isInput/isOutput
+ * since these depend on the direction. Use DirectedDomainUsageAnalysis.isInput/isOutput for the directional variants.
  */
-public interface DomainUsage
+public interface DomainUsage extends Comparable<@NonNull DomainUsage>
 {
 	/**
 	 * Source name of an EAnnotation that identifies domain usage of an EReference.
@@ -44,6 +47,11 @@ public interface DomainUsage
 	 * Key of an EAnnotation that identifies domain usage of an EReference. Values are the names of the Transformation ModelParameters.
 	 */
 	static final @NonNull String QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN = "referredDomain";
+
+	/**
+	 * Return the bit mask of used TypedModels.
+	 */
+	int getMask();
 
 	/**
 	 * Return the TypedModel for this usage, null for none, non-null for one, Exception for more than one.
@@ -64,11 +72,6 @@ public interface DomainUsage
 	boolean isConstant();
 
 	/**
-	 * Return true if this usage includes usage in an input domain, a domain that is fully not-enforceable transformation-wide.
-	 */
-	boolean isInput();
-
-	/**
 	 * Return true if this usage includes usage in the middle domain, a domain that is partially enforceable transformation-wide.
 	 */
 	boolean isMiddle();
@@ -79,20 +82,14 @@ public interface DomainUsage
 	boolean isNone();
 
 	/**
-	 * Return true if this usage includes usage in an output domain, a domain that is fully enforceable transformation-wide.
-	 */
-	boolean isOutput();
-
-	/**
 	 * Return true if this usage includes usage in a primitive domain, a domain that is just used.
 	 */
 	boolean isPrimitive();
 
-	public interface Internal extends DomainUsage, Comparable<DomainUsage.Internal>
+	public interface Internal extends DomainUsage
 	{
 		void addUsedBy(@NonNull Element element);
 		@NonNull DomainUsage cloneVariable();
 		@Nullable Iterable<Element> getElements();
-		int getMask();
 	}
 }

@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.DomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -46,6 +47,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
  */
 public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTrelationVisitor<@NonNull DomainUsage>
 {
+	protected static class QVTrelationDirectedDomainUsageAnalysis extends DirectedDomainUsageAnalysis
+	{
+		public QVTrelationDirectedDomainUsageAnalysis(@NonNull QVTrelationDomainUsageAnalysis domainUsageAnalysis) {
+			super(domainUsageAnalysis);
+		}
+	}
+
 	public QVTrelationDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory, transformation);
 	}
@@ -58,6 +66,11 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 		for (org.eclipse.ocl.pivot.@NonNull Class traceClass : QVTrelationUtil.getOwnedClasses(tracePackage)) {
 			setUsage(traceClass, typedModelUsage);
 		}
+	}
+
+	@Override
+	public @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis() {
+		return new QVTrelationDirectedDomainUsageAnalysis(this);
 	}
 
 	@Override

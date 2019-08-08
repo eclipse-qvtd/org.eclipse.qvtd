@@ -600,7 +600,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			RelationalTransformation2TracePackage transformation2tracePackage = transformationAnalysis2transformation2tracePackages.get(transformationAnalysis);
 			assert transformation2tracePackage != null;
 			//			transformation2tracePackage.analyzeTraceElements(transformationAnalysis.getScheduleManager());
-			for (@NonNull Rule rule : transformationAnalysis.getTransformation().getRule()) {
+			for (@NonNull Rule rule : QVTbaseUtil.getRule(transformationAnalysis.getTransformation())) {
 				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(rule);
 				Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
 				relation2traceGroup.analyzeTraceElements(relationAnalysis);
@@ -621,7 +621,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			Transformation2TracePackage transformation2tracePackage = transformationAnalysis2transformation2tracePackages.get(transformationAnalysis);
 			assert transformation2tracePackage != null;
 			//			transformation2tracePackage.synthesizeTraceElements();
-			for (@NonNull Rule rule : transformationAnalysis.getTransformation().getRule()) {
+			for (@NonNull Rule rule : QVTbaseUtil.getRule(transformationAnalysis.getTransformation())) {
 				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(rule);
 				Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
 				relationAnalysis.synthesizeTraceElements((Relation2TraceGroup) relation2traceGroup);
@@ -658,7 +658,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			assert transformation2tracePackage != null;
 			//			org.eclipse.ocl.pivot.Package tracePackage = transformation2tracePackage.synthesizeTraceModel();
 
-			for (@NonNull Rule rule : transformationAnalysis.getTransformation().getRule()) {
+			for (@NonNull Rule rule : QVTbaseUtil.getRule(transformationAnalysis.getTransformation())) {
 				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(rule);
 				Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
 				relation2traceGroup.synthesizeTraceModel(relationAnalysis);

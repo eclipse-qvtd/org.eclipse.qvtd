@@ -304,7 +304,7 @@ public class AnalysisTests extends XtextTestCase
 
 		ContainmentAnalysis containmentAnalysis = new ContainmentAnalysis(environmentFactory);
 		QVTcoreDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory, asTransformation);
-		domainAnalysis.analyzeTransformation(null);
+		domainAnalysis.analyzeTransformation();
 		//
 		Mapping asMapping = (Mapping) NameUtil.getNameable(asTransformation.getRule(), "uemployee_2_Employee_mentor");
 		Assignment asAssignment = asMapping.getBottomPattern().getAssignment().get(0);

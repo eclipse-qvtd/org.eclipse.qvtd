@@ -10,16 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvti.analysis;
 
-import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -57,48 +55,49 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
  */
 public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTimperativeVisitor<@NonNull DomainUsage>
 {
+	protected static class QVTimperativeDirectedDomainUsageAnalysis extends DirectedDomainUsageAnalysis
+	{
+		public QVTimperativeDirectedDomainUsageAnalysis(@NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis) {
+			super(domainUsageAnalysis);
+		}
+
+		public void analyzeTransformation() {
+			int checkedMask = 0;
+			int enforcedMask = 0;
+			for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(domainUsageAnalysis.getTransformation())) {
+				if (!typedModel.isIsPrimitive() && !typedModel.isIsTrace()) {
+					boolean isEnforced = false;
+					boolean isChecked = false;
+					ImperativeTypedModel imperativeTypedModel = (ImperativeTypedModel)typedModel;
+					if (imperativeTypedModel.isIsEnforced()) {
+						isEnforced = true;
+					}
+					else if (imperativeTypedModel.isIsChecked()) {
+						isChecked = true;
+					}
+					DomainUsage domainUsage = domainUsageAnalysis.getUsage(typedModel);
+					int bitMask = domainUsage.getMask();
+					if (isEnforced) {
+						enforcedMask |= bitMask;
+					}
+					if (isChecked) {
+						checkedMask |= bitMask;
+					}
+				}
+			}
+			setInputUsage(checkedMask);
+			setOutputUsage(enforcedMask);
+			analyzePropertyAssignments(domainUsageAnalysis.getTransformation());
+		}
+	}
+
 	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory, transformation);
 	}
 
-	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
-		int checkedMask = 0;
-		int enforcedMask = 0;
-		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
-			boolean isEnforced = false;
-			boolean isChecked = false;
-			ImperativeTypedModel imperativeTypedModel = (ImperativeTypedModel)typedModel;
-			if (imperativeTypedModel.isIsTrace()) {
-				setTraceTypedModel(typedModel);
-			}
-			else if (imperativeTypedModel.isIsEnforced()) {
-				isEnforced = true;
-			}
-			else if (imperativeTypedModel.isIsChecked()) {
-				isChecked = true;
-			}
-			else if (imperativeTypedModel.isIsPrimitive()) {
-				continue;
-			}
-			int nextBit = add(typedModel);
-			int bitMask = 1 << nextBit;
-			@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
-			addValidUsage(bitMask, typedModelUsage);
-			if (isEnforced) {
-				enforcedMask |= bitMask;
-			}
-			if (isChecked) {
-				checkedMask |= bitMask;
-			}
-			setUsage(typedModel, typedModelUsage);
-			Variable ownedContext = typedModel.getOwnedContext();
-			if (ownedContext != null) {
-				setUsage(ownedContext, typedModelUsage);
-			}
-			analyzeTypedModelTypes(typedModel, typedModelUsage);
-		}
-		analyzeTransformation2(transformation, checkedMask, enforcedMask);
-		return element2usage;
+	@Override
+	public @NonNull QVTimperativeDirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis() {
+		return new QVTimperativeDirectedDomainUsageAnalysis(this);
 	}
 
 	@Override

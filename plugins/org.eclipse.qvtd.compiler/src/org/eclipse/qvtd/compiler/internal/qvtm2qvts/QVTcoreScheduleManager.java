@@ -26,8 +26,6 @@ import org.eclipse.qvtd.compiler.internal.usage.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -74,26 +72,6 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 	@Override
 	public @NonNull Transformation2TracePackage createTransformation2TracePackage(@NonNull Transformation transformation) {
 		return new Transformation2TracePackage(this, transformation) {};
-	}
-
-	@Override
-	public boolean isInput(@NonNull Domain domain) {
-		return domain.isIsCheckable();
-	}
-
-	@Override
-	public boolean isInput(@NonNull TypedModel typedModel) {
-		return getDomainUsage(typedModel).isInput();
-	}
-
-	@Override
-	public boolean isOutput(@NonNull Domain domain) {
-		return domain.isIsEnforceable();
-	}
-
-	@Override
-	public boolean isOutput(@NonNull TypedModel typedModel) {
-		return getDomainUsage(typedModel).isOutput();
 	}
 
 	@Override

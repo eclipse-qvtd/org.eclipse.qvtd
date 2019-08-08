@@ -95,16 +95,40 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		DomainUsage usage = knownPropertyUsage;
 		RootDomainUsageAnalysis rootAnalysis = getRootAnalysis();
 		Property oppositeProperty = property.getOpposite();
-		if (property.isIsComposite()											// Composite properties have both ends in the sme domain
+		if (property.isIsComposite()											// Composite properties have both ends in the same domain
 				|| ((oppositeProperty != null) && oppositeProperty.isIsComposite())
 				|| (property == rootAnalysis.getOclContainerProperty())			// FIXME ensure these are isComposite
 				|| (property == rootAnalysis.getOclContentsProperty())) {
 			usage = intersection(usage, actualSourceUsage);
 		}
-		else if (!property.isIsImplicit() && !rootAnalysis.isDirty(property)	// Simple input domain nodes cannot reference middle or output domains
+		/*		else if (!property.isIsImplicit() && !property.isIsTransient() / *&& !rootAnalysis.isDirty(property)* /	// Simple input domain nodes cannot reference middle or output domains
 				&& (usage.isMiddle() || usage.isOutput())
 				&& actualSourceUsage.isInput() && !actualSourceUsage.isMiddle() && !actualSourceUsage.isOutput()) {
+			//			QVTruntimeUtil.errPrintln("Assuming !rootAnalysis.isDirty(property)");
 			usage = intersection(usage, actualSourceUsage);
+		} */
+		else if (!property.isIsImplicit() && !property.isIsTransient() /*&& !rootAnalysis.isDirty(property)*/) {	// Simple input domain nodes cannot reference middle or output domains
+			if (usage.isMiddle() && !actualSourceUsage.isMiddle()) {
+				/*	if (actualSourceUsage.isInput() && !actualSourceUsage.isOutput()) {
+					//			QVTruntimeUtil.errPrintln("Assuming !rootAnalysis.isDirty(property)");
+					usage = intersection(usage, actualSourceUsage);
+				}
+				else {
+					QVTruntimeUtil.errPrintln("Assuming actualSourceUsage.isInput() && !actualSourceUsage.isOutput()");
+					usage = intersection(usage, actualSourceUsage);
+				}
+			}
+			else if (usage.isOutput()) {
+				QVTruntimeUtil.errPrintln("Assuming actualSourceUsage.isInput() && !actualSourceUsage.isOutput()");
+				if (actualSourceUsage.isInput() && !actualSourceUsage.isMiddle() && !actualSourceUsage.isOutput()) {
+					//			QVTruntimeUtil.errPrintln("Assuming !rootAnalysis.isDirty(property)");
+					usage = intersection(usage, actualSourceUsage);
+				}
+			}
+			else  {
+				QVTruntimeUtil.errPrintln("Assuming !usage.isOutput()"); */
+				usage = intersection(usage, actualSourceUsage);
+			}
 		}
 		return usage;
 	}
@@ -158,8 +182,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 	}
 
 	public @NonNull DomainUsage intersection(@NonNull DomainUsage firstUsage, @NonNull DomainUsage secondUsage) {
-		int firstMask = ((DomainUsage.Internal)firstUsage).getMask();
-		int secondMask = ((DomainUsage.Internal)secondUsage).getMask();
+		int firstMask = firstUsage.getMask();
+		int secondMask = secondUsage.getMask();
 		if (firstMask == secondMask) {
 			if (firstUsage != secondUsage) {
 				if (!firstUsage.isConstant()) {
@@ -204,7 +228,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	protected DomainUsage pushSelfUsage(@NonNull DomainUsage usage) {
 		DomainUsage oldUsage = selfUsage;
-		int usageMask = ((DomainUsage.Internal)usage).getMask();
+		int usageMask = usage.getMask();
 		DomainUsage constantUsage = getRootAnalysis().getValidUsage(usageMask);
 		if (constantUsage == null) {
 			usage = getRootAnalysis().createVariableUsage(usageMask);
@@ -262,8 +286,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 	}
 
 	public @NonNull DomainUsage union(@NonNull DomainUsage firstUsage, @NonNull DomainUsage secondUsage) {
-		int firstMask = ((DomainUsage.Internal)firstUsage).getMask();
-		int secondMask = ((DomainUsage.Internal)secondUsage).getMask();
+		int firstMask = firstUsage.getMask();
+		int secondMask = secondUsage.getMask();
 		int unionMask = firstMask | secondMask;
 		if ((unionMask == firstMask) && firstUsage.isConstant()) {
 			return firstUsage;
@@ -563,7 +587,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 				else {
 					specializedParameterUsage = referred2specialized.get(referredParameterUsage);
 					if (specializedParameterUsage == null) {
-						//						specializedParameterUsage = new DomainUsageVariable(getRootAnalysis(), ((DomainUsage.Internal)referredParameterUsage).getMask());
+						//						specializedParameterUsage = new DomainUsageVariable(getRootAnalysis(), referredParameterUsage.getMask());
 						specializedParameterUsage = ((DomainUsage.Internal)referredParameterUsage).cloneVariable();
 						referred2specialized.put(referredParameterUsage, specializedParameterUsage);
 					}
@@ -573,7 +597,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			}
 			DomainUsage operationUsage = analysis.basicGetUsage(operation);
 			if ((operationUsage != null) && !operationUsage.isConstant()) {
-				//				operationUsage = new DomainUsageVariable(getRootAnalysis(), ((DomainUsage.Internal)operationUsage).getMask());
+				//				operationUsage = new DomainUsageVariable(getRootAnalysis(), operationUsage.getMask());
 				operationUsage = ((DomainUsage.Internal)operationUsage).cloneVariable();
 			}
 			DomainUsage operationCallUsage = visit(object.getType());

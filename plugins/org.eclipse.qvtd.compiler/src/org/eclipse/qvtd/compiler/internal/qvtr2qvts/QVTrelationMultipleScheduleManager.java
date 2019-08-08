@@ -32,10 +32,8 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUs
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -144,26 +142,6 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 
 	@Override
 	public @NonNull RelationalTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isInput(@NonNull Domain domain) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isInput(@NonNull TypedModel typedModel) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isOutput(@NonNull Domain domain) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isOutput(@NonNull TypedModel typedModel) {
 		throw new UnsupportedOperationException();
 	}
 

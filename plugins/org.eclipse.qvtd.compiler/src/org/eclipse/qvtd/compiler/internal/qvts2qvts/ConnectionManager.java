@@ -776,7 +776,7 @@ public class ConnectionManager
 
 	private @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(headNode);
-		if (!scheduleManager.getDomainUsage(classDatum).isInput()) {
+		if (!scheduleManager.isInput(scheduleManager.getDomainUsage(classDatum))) {
 			return originalContentsAnalysis.getNewNodes(classDatum);	// FIXME also dependsOn ??
 		}
 		List<@NonNull Node> nodes = new ArrayList<>();
@@ -853,7 +853,7 @@ public class ConnectionManager
 		NodeConnection connection = nodes2connection.get(sourceSet);
 		if (connection == null) {
 			SymbolNameBuilder s = new SymbolNameBuilder();
-			s.appendString(domainUsage.isInput() ? JOIN_INPUT_PREFIX : domainUsage.isOutput() ? JOIN_OUTPUT_PREFIX : JOIN_MIDDLE_PREFIX);
+			s.appendString(scheduleManager.isInput(domainUsage) ? JOIN_INPUT_PREFIX : scheduleManager.isOutput(domainUsage) ? JOIN_OUTPUT_PREFIX : JOIN_MIDDLE_PREFIX);
 			s.appendString("_");
 			s.appendName(classDatum.getName());
 			connection = createNodeConnection(rootRegion, sourceSet, classDatum, s);

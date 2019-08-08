@@ -38,6 +38,7 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
@@ -45,6 +46,7 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.CompilerStep;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.MappingProblem;
+import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTimperativeDomainUsageAnalysis.QVTimperativeDirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
@@ -563,6 +565,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull CompilerStep compilerStep;
 	protected final @NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis;
+	protected final @NonNull QVTimperativeDirectedDomainUsageAnalysis directedDomainUsageAnalysis;
 	protected final @NonNull Map<@NonNull Property, @NonNull BasePropertyAnalysis> property2basePropertyAnalysis = new HashMap<>();
 	protected final @NonNull CompleteModel completeModel;
 
@@ -572,6 +575,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		this.compilerStep = compilerStep;
 		Transformation transformation = AbstractCompilerChain.getTransformation(iResource);
 		this.domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory, transformation);
+		this.directedDomainUsageAnalysis = domainUsageAnalysis.createDirectedDomainUsageAnalysis();
 		this.completeModel = environmentFactory.getCompleteModel();
 	}
 
@@ -666,7 +670,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		if (mapping != null) {
 			OCLExpression ownedSource = QVTimperativeUtil.getOwnedSource(navigationCallExp);
 			DomainUsage usage = domainUsageAnalysis.getUsage(navigationCallExp instanceof OppositePropertyCallExp ? navigationCallExp : ownedSource);
-			if (!usage.isInput() && !usage.isPrimitive()) {		// Skip endogenously confusing input
+			if (!directedDomainUsageAnalysis.isInput(usage) && !usage.isPrimitive()) {		// Skip endogenously confusing input
 				Property getProperty = QVTimperativeUtil.getReferredProperty(navigationCallExp);
 				BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(getProperty);
 				CompleteClass sourceClass = getCompleteClass(ownedSource);
@@ -679,7 +683,8 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 					targetClass = getCompleteClass(navigationCallExp);
 				}
 				if (getProperty.isIsMany()) {
-					targetClass = getCompleteClass(((CollectionType)targetClass.getPrimaryClass()).getElementType());
+					CollectionType collectionType = (CollectionType)targetClass.getPrimaryClass();
+					targetClass = getCompleteClass(PivotUtil.getElementType(collectionType));
 				}
 				basePropertyAnalysis.addConsumer(navigationCallExp, sourceClass, getProperty, targetClass);
 			}
@@ -699,7 +704,8 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		CompleteClass sourceClass = getCompleteClass(QVTimperativeUtil.getTargetVariable(setStatement));
 		CompleteClass targetClass = getCompleteClass(QVTimperativeUtil.getOwnedExpression(setStatement));
 		if (!setStatement.isIsPartial() && setProperty.isIsMany()) {
-			targetClass = getCompleteClass(((CollectionType)targetClass.getPrimaryClass()).getElementType());
+			CollectionType collectionType = (CollectionType)targetClass.getPrimaryClass();
+			targetClass = getCompleteClass(PivotUtil.getElementType(collectionType));
 		}
 		basePropertyAnalysis.addProducer(setStatement, sourceClass, setProperty, targetClass);
 		return null;
@@ -707,7 +713,8 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 
 	@Override
 	public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
-		domainUsageAnalysis.analyzeTransformation(transformation);
+		domainUsageAnalysis.analyzeTransformation();
+		directedDomainUsageAnalysis.analyzeTransformation();
 		return null;
 	}
 }

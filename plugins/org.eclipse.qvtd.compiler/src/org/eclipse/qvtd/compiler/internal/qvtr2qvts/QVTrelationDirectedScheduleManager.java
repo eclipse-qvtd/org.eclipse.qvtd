@@ -26,7 +26,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePa
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -101,9 +100,7 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull RelationAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule) {
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
-		//		if (!asRule.isIsAbstract()) {
 		ruleRegion.setOwningScheduleModel(scheduleModel);
-		//		}
 		ruleRegion.setReferredRule(asRule);
 		ruleRegion.setName(getNameGenerator().createMappingName((Relation) asRule, null, qvtuConfiguration));
 		return new RelationAnalysis(transformationAnalysis, qvtuConfiguration, ruleRegion);
@@ -175,28 +172,6 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull Transformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation) {
 		return multipleScheduleManager.getTransformation2TracePackage(transformation);
-	}
-
-	@Override
-	public boolean isInput(@NonNull Domain domain) {
-		TypedModel typedModel = domain.getTypedModel();
-		return (typedModel != null) && qvtuConfiguration.isInput(typedModel);
-	}
-
-	@Override
-	public boolean isInput(@NonNull TypedModel typedModel) {
-		return qvtuConfiguration.isInput(typedModel);
-	}
-
-	@Override
-	public boolean isOutput(@NonNull Domain domain) {
-		TypedModel typedModel = domain.getTypedModel();
-		return (typedModel != null) && qvtuConfiguration.isOutput(typedModel);
-	}
-
-	@Override
-	public boolean isOutput(@NonNull TypedModel typedModel) {
-		return qvtuConfiguration.isOutput(typedModel);
 	}
 
 	@Override

@@ -70,7 +70,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 			Property invocationProperty = baseInvokedRule2MiddleType.getTraceProperty(overriddenRootVariable);
 			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(argumentNode);
 			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
-			if (domainUsage.isOutput()) {
+			if (scheduleManager.isOutput(domainUsage)) {
 				createOutputEdge(invokedNode, invocationProperty, argumentNode);
 			}
 			else {

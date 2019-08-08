@@ -218,7 +218,7 @@ public class ConnectivityChecker
 			ClassDatum classDatum = name2classDatum.get(name);
 			assert classDatum != null;
 			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
-			if (domainUsage.isMiddle() || domainUsage.isOutput()) {
+			if (domainUsage.isMiddle() || scheduleManager.isOutput(domainUsage)) {
 				int subProducers = getSubProducers(classDatum).size();
 				List<@NonNull Node> producingNodes = producer2nodes.get(classDatum);
 				List<@NonNull Node> consumingNodes = consumer2nodes.get(classDatum);

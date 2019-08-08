@@ -442,7 +442,7 @@ public class RelationAnalysis extends RuleAnalysis
 		Set<@NonNull VariableDeclaration> realizedOutputVariables = this.realizedOutputVariables = new HashSet<>();
 		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
 			DomainUsage domainUsage = scheduleManager.getDomainUsage(relationDomain);
-			if (domainUsage.isOutput()) {
+			if (scheduleManager.isOutput(domainUsage)) {
 				//	assert keyedOutputVariables == null;	-- The assumption of a single output domain does not seem to  be justified
 				analyzeKeyedOutputVariables(relationDomain, keyedOutputVariables);
 				//	assert realizedOutputVariables == null;	-- The assumption of a single output domain does not seem to  be justified
@@ -520,7 +520,7 @@ public class RelationAnalysis extends RuleAnalysis
 							assert argumentIndex >= 0;
 							RelationDomain domain = QVTrelationUtil.getRelationCallExpArgumentDomain(invocation, argumentIndex);
 							DomainUsage domainUsage = scheduleManager.getDomainUsage(domain);
-							if (domainUsage.isOutput()) {
+							if (scheduleManager.isOutput(domainUsage)) {
 								if (invocation.getReferredRelation().isIsTopLevel()) {
 									topWhenedOutputVariables.add(QVTrelationUtil.getReferredVariable(variableExp));
 								}
@@ -950,7 +950,7 @@ public class RelationAnalysis extends RuleAnalysis
 	} */
 
 	public void synthesizeCollectionTemplate(@NonNull CollectionTemplateExp collectionTemplateExp) {
-		boolean isOutput = scheduleManager.getDomainUsage(collectionTemplateExp).isOutput();
+		boolean isOutput = scheduleManager.isOutput(scheduleManager.getDomainUsage(collectionTemplateExp));
 		if (isOutput) {
 			synthesizeOutputCollectionTemplate(collectionTemplateExp);
 		}
@@ -1207,7 +1207,7 @@ public class RelationAnalysis extends RuleAnalysis
 			Node targetNode = region.getNode(targetVariable);
 			if (targetNode != null) {
 				boolean isPartial = scheduleManager.computeIsPartial(targetNode, source2targetProperty);
-				if (scheduleManager.getDomainUsage(sourceVariable).isOutput() /*&& !propertyTemplateItem.isCheckOnly()*/) {
+				if (scheduleManager.isOutput(scheduleManager.getDomainUsage(sourceVariable)) /*&& !propertyTemplateItem.isCheckOnly()*/) {
 					createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 				}
 				else {
@@ -1218,7 +1218,7 @@ public class RelationAnalysis extends RuleAnalysis
 		else {
 			Node targetNode = expressionSynthesizer.synthesize(targetExpression);
 			boolean isPartial = scheduleManager.computeIsPartial(targetNode, source2targetProperty);
-			if (scheduleManager.getDomainUsage(sourceVariable).isOutput() /*&& !propertyTemplateItem.isCheckOnly()*/) {
+			if (scheduleManager.isOutput(scheduleManager.getDomainUsage(sourceVariable)) /*&& !propertyTemplateItem.isCheckOnly()*/) {
 				createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 			}
 			else {

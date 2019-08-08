@@ -32,7 +32,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -56,11 +55,7 @@ import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
 public interface ScheduleManager
 {
 	void addMappingRegion(@NonNull MappingRegion mappingRegion);
-	//	void addPartitionError(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings);
-	//	void addPartitionWarning(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings);
 	void addProblem(@NonNull CompilerProblem problem);
-	//	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
-	//	void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 
 	/**
 	 * Define an additional/only Transformation to be scheduled by the subsequent anayses and syntheses.
@@ -161,11 +156,10 @@ public interface ScheduleManager
 	/**
 	 * Return true if domain is an input domain.
 	 */
-	boolean isInput(@NonNull Domain domain);
-
+	boolean isInput(@NonNull DomainUsage domainUsage);
+	boolean isInput(@NonNull Element element);
 	boolean isInput(@NonNull Node node);
 
-	boolean isInput(@NonNull TypedModel typedModel);
 	/**
 	 * Return true if node is part of the middle (traced) domain.
 	 */
@@ -177,9 +171,8 @@ public interface ScheduleManager
 	/**
 	 * Return true if domain is an output domain.
 	 */
-	boolean isOutput(@NonNull Domain domain);
-	boolean isOutput(@NonNull TypedModel typedModel);
-
+	boolean isOutput(@NonNull DomainUsage domainUsage);
+	boolean isOutput(@NonNull Element element);
 	boolean isOutput(@NonNull Node node);
 
 	/**
@@ -197,8 +190,4 @@ public interface ScheduleManager
 	boolean useActivators();
 	void writeDebugGraphs(@NonNull Graphable graphable, @Nullable String context);
 	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
-
-	//	void wipAddPartition(@NonNull Partition partition, @NonNull Region partitionedRegion);
-	//	@NonNull Partition wipGetPartition(@NonNull Region partitionedRegion);
-	//	@NonNull Region wipGetRegion(@NonNull Partition partition);
 }
