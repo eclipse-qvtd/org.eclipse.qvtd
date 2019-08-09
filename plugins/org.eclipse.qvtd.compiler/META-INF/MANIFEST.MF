@@ -42,6 +42,7 @@ Export-Package: org.eclipse.qvtd.compiler,
  org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter,
  org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities,
  org.eclipse.qvtd.compiler.internal.qvtu2qvtm,
+ org.eclipse.qvtd.compiler.internal.usage,
  org.eclipse.qvtd.compiler.internal.utilities
 Import-Package: com.google.common.base,
  com.google.common.collect
