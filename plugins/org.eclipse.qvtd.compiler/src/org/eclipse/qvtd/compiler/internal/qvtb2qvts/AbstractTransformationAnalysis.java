@@ -176,11 +176,15 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 
 	public @NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions() {
 		List<@NonNull RuleRegion> ruleRegions = new ArrayList<>();
+		gatherRuleRegions(ruleRegions);
+		Collections.sort(ruleRegions, NameUtil.NAMEABLE_COMPARATOR);		// For predictability
+		return ruleRegions;
+	}
+
+	public void gatherRuleRegions(@NonNull List<@NonNull RuleRegion> ruleRegions) {
 		for (@NonNull RuleAnalysis ruleAnalysis : rule2ruleAnalysis.values()) {
 			ruleAnalysis.gatherRuleRegions(ruleRegions);
 		}
-		Collections.sort(ruleRegions, NameUtil.NAMEABLE_COMPARATOR);		// For predictability
-		return ruleRegions;
 	}
 
 	public @Nullable List<@NonNull Region> getCorollaryOf(@NonNull NavigationEdge edge) {

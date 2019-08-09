@@ -92,6 +92,10 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		return dependencyHeadNode;
 	}
 
+	public @Nullable Rule2TraceGroup basicGetRule2TraceGroup() {
+		return relation2traceGroup;
+	}
+
 	public void gatherRuleRegions(@NonNull List<@NonNull RuleRegion> ruleRegions) {
 		ruleRegions.add(getRegion());
 	}

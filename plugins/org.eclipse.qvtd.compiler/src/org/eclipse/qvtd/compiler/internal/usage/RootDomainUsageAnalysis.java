@@ -318,7 +318,8 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	protected int add(@NonNull TypedModel typedModel) {
 		int nextBit = bit2typedModel.size();
 		bit2typedModel.add(typedModel);
-		name2bit.put(typedModel.getName(), nextBit);
+		Integer oldBit = name2bit.put(typedModel.getName(), nextBit);
+		assert oldBit == null;
 		return nextBit;
 	}
 

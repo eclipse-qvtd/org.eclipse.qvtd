@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TracedHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
@@ -34,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
  */
 public class Relation2TraceGroup extends Rule2TraceGroup
 {
+	protected final @NonNull Relation2TraceGroup baseRelation2traceGroup;
 	protected final @Nullable Relation2TraceClass relation2traceClass;
 	protected final @Nullable Relation2TraceInterface relation2traceInterface;
 	protected final @Nullable Relation2InvocationClass relation2invocationClass;
@@ -49,6 +51,7 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 		String invocationClassName = null;
 		String dispatchClassName = null;
 		Rule baseRelation = QVTrelationUtil.basicGetBaseRule(relation);
+		this.baseRelation2traceGroup = (baseRelation != null) && (baseRelation != relation) ? (Relation2TraceGroup) transformation2tracePackage.getRule2TraceGroup(baseRelation) : this;
 		boolean hasOverrides = QVTrelationUtil.hasOverrides(relation);
 		boolean isAbstract = relation.isIsAbstract();
 		boolean topLevel = relation.isIsTopLevel();
@@ -128,6 +131,16 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 		}
 	}
 
+	@Override
+	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
+		return relation2traceClass != null ? relation2traceClass.basicGetRelation2GlobalSuccessProperty() : null;
+	}
+
+	@Override
+	public @Nullable Element2MiddleProperty basicGetRelation2LocalSuccessProperty() {
+		return relation2traceClass != null ? relation2traceClass.basicGetRelation2LocalSuccessProperty() : null;
+	}
+
 	public @Nullable Relation2InvocationClass basicGetRule2InvocationClass() {
 		return relation2invocationClass;
 	}
@@ -138,6 +151,10 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 
 	public @Nullable Relation2TraceInterface basicGetRule2TraceInterface() {
 		return relation2traceInterface;
+	}
+
+	public @NonNull Relation2TraceGroup getBaseRelation2TraceGroup() {
+		return baseRelation2traceGroup;
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getInvocationClass() {

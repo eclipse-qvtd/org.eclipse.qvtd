@@ -81,8 +81,8 @@ public interface ScheduleManager
 	@NonNull Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations();
 
 	@Nullable ConnectionManager basicGetConnectionManager();
-	@Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node);
-	@Nullable Property basicGetLocalSuccessProperty(@NonNull Node node);
+	//	@Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node);
+	//	@Nullable Property basicGetLocalSuccessProperty(@NonNull Node node);
 
 	/**
 	 * Return true if targetNode is one rather than all of the elements computed by the property navigation to targetNode.
@@ -96,6 +96,7 @@ public interface ScheduleManager
 	@NonNull Rule2TraceGroup createRule2TraceGroup(@NonNull Transformation2TracePackage transformation2TracePackage, @NonNull Rule rule);
 	@NonNull Transformation2TracePackage createTransformation2TracePackage(@NonNull Transformation transformation);
 	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
+	@NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions();
 	@NonNull PropertyDatum getBasePropertyDatum(@NonNull PropertyDatum propertyDatum);
 	@NonNull ClassDatum getBooleanClassDatum();
 	@NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement);

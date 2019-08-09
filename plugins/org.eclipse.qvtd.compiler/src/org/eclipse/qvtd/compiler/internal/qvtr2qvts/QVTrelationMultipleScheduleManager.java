@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -36,11 +34,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * A QVTrelationMultipleScheduleManager supervises and proviides the shared functionality for a distinct
@@ -62,20 +57,20 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 		}
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node) {
 		if (!isMiddle(node)) {
 			return null;
 		}
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
-			Property property = completeClass.getProperty(getNameGenerator().createTraceGlobalSuccessPropertyName(getTargetTypedModel()));
+			Property property = completeClass.getProperty(getNameGenerator().createTraceGlobalSuccessPropertyName());
 			if (property != null) {
 				return property;
 			}
 		}
 		return null;
-	}
+	} */
 
 	public @NonNull QVTrelationDirectedScheduleManager createDirectedScheduleManager(@NonNull QVTuConfiguration qvtuConfiguration) {
 		return new QVTrelationDirectedScheduleManager(this, transformation, qvtuConfiguration, schedulerOptions);

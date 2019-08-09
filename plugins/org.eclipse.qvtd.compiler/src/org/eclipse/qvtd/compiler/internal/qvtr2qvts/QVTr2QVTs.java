@@ -68,7 +68,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -679,8 +678,8 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			}
 			directedScheduleManager.analyzeTracePackage(traceTypedModel, tracePackage);
 		}
-		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(directedScheduleManager.getScheduleModel())) {
-			directedScheduleManager.writeDebugGraphs(mappingRegion, null);
+		for (@NonNull RuleRegion ruleRegion : directedScheduleManager.gatherRuleRegions()) {
+			directedScheduleManager.writeDebugGraphs(ruleRegion, null);
 		}
 		directedScheduleManager.analyzeOriginalContents();
 		directedScheduleManager.writeDebugGraphs("0-init", true, true, false);

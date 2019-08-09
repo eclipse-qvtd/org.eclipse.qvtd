@@ -25,11 +25,16 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
@@ -47,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
@@ -287,8 +293,17 @@ public class CheckedConditionAnalysis
 		@Override
 		public Object visitSuccessEdge(@NonNull SuccessEdge successEdge) {
 			assert isCheckedNavigation(successEdge);
-			Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(QVTscheduleUtil.getSourceNode(successEdge));
-			boolean isLocalSuccess = successEdge.getReferredProperty() == localSuccessProperty;
+			RuleRegion ruleRegion = (RuleRegion)partitionAnalysis.getRegion();
+			Rule rule = QVTscheduleUtil.getReferredRule(ruleRegion);
+			AbstractTransformationAnalysis transformationAnalysis = partitionAnalysis.getPartitionedTransformationAnalysis().getTransformationAnalysis();
+			RuleAnalysis ruleAnalysis = transformationAnalysis.getRuleAnalysis(rule);
+			Rule2TraceGroup rule2TraceGroup = ruleAnalysis.getRule2TraceGroup();
+			boolean isLocalSuccess = false;
+			Element2MiddleProperty basicGetRelation2LocalSuccessProperty = rule2TraceGroup.basicGetRelation2LocalSuccessProperty();
+			if (basicGetRelation2LocalSuccessProperty != null) {
+				Property localSuccessProperty = basicGetRelation2LocalSuccessProperty.getTraceProperty();
+				isLocalSuccess = successEdge.getReferredProperty() == localSuccessProperty;
+			}
 			context.add(new ConstantTargetCheckedCondition(successEdge, isLocalSuccess));
 			return null;
 		}

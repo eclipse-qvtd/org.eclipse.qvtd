@@ -67,6 +67,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
@@ -1543,33 +1545,41 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatum.getReferredTypedModel()));
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
 		Property successProperty = null;
-		Property globalSuccessProperty = scheduleManager.basicGetGlobalSuccessProperty(guardNode);
-		if (globalSuccessProperty != null) {
-			NavigableEdge globalSuccessEdge = guardNode.getOutgoingNavigableEdge(globalSuccessProperty);
-			if (globalSuccessEdge != null) {
-				Role globalSuccessEdgeRole = partition.getRole(globalSuccessEdge);
-				if (globalSuccessEdgeRole != null) {
-					Node globalSuccessNode = QVTscheduleUtil.getTargetNode(globalSuccessEdge);
-					if (globalSuccessNode.isSuccess() && !globalSuccessEdgeRole.isPredicated()) {		// Skip predicated success
-						assert globalSuccessEdgeRole.isRealized();
-						successProperty = globalSuccessProperty;
-						//	assert !isHazardousWrite(globalSuccessEdge);
+
+		Rule2TraceGroup rule2traceGroup = regionAnalysis.basicGetRule2TraceGroup();
+		if (rule2traceGroup != null) {
+			Element2MiddleProperty relation2globalSuccessProperty = rule2traceGroup.basicGetRelation2GlobalSuccessProperty();
+			Property globalSuccessProperty = null;
+			if (relation2globalSuccessProperty != null) {
+				globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
+				NavigableEdge globalSuccessEdge = guardNode.getOutgoingNavigableEdge(globalSuccessProperty);
+				if (globalSuccessEdge != null) {
+					Role globalSuccessEdgeRole = partition.getRole(globalSuccessEdge);
+					if (globalSuccessEdgeRole != null) {
+						Node globalSuccessNode = QVTscheduleUtil.getTargetNode(globalSuccessEdge);
+						if (globalSuccessNode.isSuccess() && !globalSuccessEdgeRole.isPredicated()) {		// Skip predicated success
+							assert globalSuccessEdgeRole.isRealized();
+							successProperty = globalSuccessProperty;
+							//	assert !isHazardousWrite(globalSuccessEdge);
+						}
 					}
 				}
 			}
-		}
-		Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(guardNode);
-		if (localSuccessProperty != null) {
-			NavigableEdge localSuccessEdge = guardNode.getOutgoingNavigableEdge(localSuccessProperty);
-			if (localSuccessEdge != null) {
-				Role localSuccessEdgeRole = partition.getRole(localSuccessEdge);
-				if (localSuccessEdgeRole != null) {
-					Node localSuccessNode = QVTscheduleUtil.getTargetNode(localSuccessEdge);
-					if (localSuccessNode.isSuccess() && !localSuccessEdgeRole.isPredicated()) {		// Skip predicated local-success
-						assert localSuccessEdgeRole.isRealized();
-						assert successProperty == null;
-						successProperty = localSuccessProperty;
-						//	assert !isHazardousWrite(localSuccessEdge);
+			Property localSuccessProperty = null;
+			Element2MiddleProperty relation2localSuccessProperty = rule2traceGroup.basicGetRelation2LocalSuccessProperty();
+			if (relation2localSuccessProperty != null) {
+				localSuccessProperty = relation2localSuccessProperty.getTraceProperty();
+				NavigableEdge localSuccessEdge = guardNode.getOutgoingNavigableEdge(localSuccessProperty);
+				if (localSuccessEdge != null) {
+					Role localSuccessEdgeRole = partition.getRole(localSuccessEdge);
+					if (localSuccessEdgeRole != null) {
+						Node localSuccessNode = QVTscheduleUtil.getTargetNode(localSuccessEdge);
+						if (localSuccessNode.isSuccess() && !localSuccessEdgeRole.isPredicated()) {		// Skip predicated local-success
+							assert localSuccessEdgeRole.isRealized();
+							assert successProperty == null;
+							successProperty = localSuccessProperty;
+							//	assert !isHazardousWrite(localSuccessEdge);
+						}
 					}
 				}
 			}

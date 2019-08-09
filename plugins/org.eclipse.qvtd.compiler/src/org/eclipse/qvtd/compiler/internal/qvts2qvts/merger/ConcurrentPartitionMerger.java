@@ -112,12 +112,12 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 		//
 		//	Build maps of failure mechanisms of each partition.
 		//
-		ScheduleManager scheduleManager = partitionedTransformationAnalysis.getScheduleManager();
+		ScheduleManager directedScheduleManager = partitionedTransformationAnalysis.getScheduleManager();
 		Map<@NonNull Integer, @NonNull Set<@NonNull BasicPartitionAnalysis>> hash2partitionAnalyses = new HashMap<>();
 		Map<@NonNull BasicPartitionAnalysis, @NonNull Set<@NonNull CheckedCondition>> partion2checkedConditions = new HashMap<>();
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : partitions) {
 			BasicPartitionAnalysis basicPartitionAnalysis = (BasicPartitionAnalysis) partitionAnalysis;
-			CheckedConditionAnalysis checkedConditionAnalysis = new CheckedConditionAnalysis(basicPartitionAnalysis, scheduleManager);
+			CheckedConditionAnalysis checkedConditionAnalysis = new CheckedConditionAnalysis(basicPartitionAnalysis, directedScheduleManager);
 			Set<@NonNull CheckedCondition> checkedConditions = checkedConditionAnalysis.computeCheckedConditions();
 			if (checkedConditions.size() > 0) {
 				int hash = checkedConditions.hashCode();
@@ -171,7 +171,7 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 					assert owningCompositePartition != null;
 					AbstractCompositePartitionAnalysis<?> compositePartitionAnalysis = (AbstractCompositePartitionAnalysis<?>)partitionedTransformationAnalysis.getPartitionAnalysis(owningCompositePartition);
 					List<MappingPartition> ownedMappingPartitions = owningCompositePartition.getOwnedMappingPartitions();
-					MergedPartitionFactory mergedPartitionFactory = new MergedPartitionFactory(scheduleManager, QVTscheduleUtil.getRegion(firstPartition), merges);
+					MergedPartitionFactory mergedPartitionFactory = new MergedPartitionFactory(directedScheduleManager, QVTscheduleUtil.getRegion(firstPartition), merges);
 					BasicPartitionAnalysis mergedPartitionAnalysis = mergedPartitionFactory.createPartitionAnalysis(partitionedTransformationAnalysis);
 					BasicPartition mergedPartition = mergedPartitionAnalysis.getPartition();
 					//					MappingRegion mappingRegion = (MappingRegion)regionAnalysis.getRegion();
@@ -192,7 +192,7 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 					for (int pass : merges.iterator().next().getPartition().getPasses()) {
 						mergedPartition.addPass(pass);
 					}
-					scheduleManager.writeDebugGraphs(mergedPartition, null);
+					directedScheduleManager.writeDebugGraphs(mergedPartition, null);
 					ownedMappingPartitions.add(mergedPartition);
 					compositePartitionAnalysis.merge(old2new);
 				}

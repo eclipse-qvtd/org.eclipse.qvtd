@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
@@ -35,6 +36,14 @@ public abstract class Rule2TraceGroup
 	}
 
 	public abstract void analyzeTraceElements(@NonNull RuleAnalysis ruleAnalysis) throws CompilerChainException;
+
+	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
+		return null;
+	}
+
+	public @Nullable Element2MiddleProperty basicGetRelation2LocalSuccessProperty() {
+		return null;
+	}
 
 	public @NonNull String getName() {
 		return QVTscheduleUtil.getName(rule);

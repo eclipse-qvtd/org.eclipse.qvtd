@@ -54,7 +54,7 @@ public class RelationVerdictAnalysis extends RegionHelper<@NonNull RuleRegion>
 			//
 			QVTrelationScheduleManager scheduleManager =(QVTrelationScheduleManager)getScheduleManager();
 			Relation2TraceClass relation2TraceClass = scheduleManager.getRuleAnalysis(relation).getRule2TraceGroup().getRule2TraceClass();
-			Relation2MiddleType relation2TraceInterface = relationAnalysis.getBaseRelationAnalysis().getRule2TraceGroup().getRule2TraceInterface();
+			Relation2MiddleType relation2TraceInterface = relationAnalysis.getRule2TraceGroup().getBaseRelation2TraceGroup().getRule2TraceInterface();
 			TypedModel traceTypedModel = relationAnalysis.getTraceTypedModel();
 			ClassDatum dispatchedClassDatum = scheduleManager.getClassDatum(traceTypedModel, relation2TraceClass.getMiddleClass());
 			Node dispatchedNode = createPredicatedNode(getName(relation), dispatchedClassDatum, true);
@@ -66,7 +66,7 @@ public class RelationVerdictAnalysis extends RegionHelper<@NonNull RuleRegion>
 			//
 			//	Require the overriding relation to have failed.
 			//
-			Property successProperty = relation2TraceInterface.getGlobalSuccessProperty(getScheduleManager().getTargetTypedModel(), relationAnalysis);
+			Property successProperty = relation2TraceInterface.getGlobalSuccessProperty();
 			createPredicatedSuccess(dispatchedNode, successProperty, false);
 		}
 		for (@NonNull Relation overridingRelation : QVTrelationUtil.getOverrides(relation)) {

@@ -133,7 +133,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	}
 
 	protected @NonNull Relation2MiddleType getInvokedRelation2InvocationInterface() {
-		Relation2TraceGroup invokedBaserelation2traceGroup = invokedRelationAnalysis.getBaseRelationAnalysis().getRule2TraceGroup();
+		Relation2TraceGroup invokedBaserelation2traceGroup = invokedRelationAnalysis.getRule2TraceGroup().getBaseRelation2TraceGroup();
 		Relation2MiddleType invokedRelation2InvocationInterface = invokedBaserelation2traceGroup.getRule2InvocationInterface();
 		return invokedRelation2InvocationInterface;
 	}

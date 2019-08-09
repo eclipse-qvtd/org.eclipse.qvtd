@@ -22,7 +22,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.VariableDeclaration2TraceProperty;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * A Relation2MiddleType supports the future invocation/trace class/interface for a Relation
@@ -36,7 +35,7 @@ public interface Rule2MiddleType extends Nameable, Comparable<@NonNull Rule2Midd
 	//	void createRootVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration rVariable, boolean manyTraces);
 	org.eclipse.ocl.pivot.@NonNull Class getBagOfMiddleClass();
 	@NonNull Property getDispatchSuccessProperty();
-	@NonNull Property getGlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull RuleAnalysis ruleAnalysis);
+	@NonNull Property getGlobalSuccessProperty();
 	org.eclipse.ocl.pivot.@NonNull Class getMiddleClass();
 
 	@Override

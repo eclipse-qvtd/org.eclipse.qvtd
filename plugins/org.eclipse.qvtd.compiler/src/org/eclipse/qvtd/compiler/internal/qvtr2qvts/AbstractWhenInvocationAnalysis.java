@@ -32,7 +32,7 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 	@Override
 	protected void createGlobalSuccessNodeAndEdge(@NonNull Node invokedNode) {
 		Relation2MiddleType invokedRelation2InvocationInterface = getInvokedRelation2InvocationInterface();
-		Element2MiddleProperty relation2globalSuccessProperty = invokedRelation2InvocationInterface.basicGetRelation2GlobalSuccessProperty(invokingRelationAnalysis.getTargetTypedModel(), invokedRelationAnalysis);
+		Element2MiddleProperty relation2globalSuccessProperty = invokedRelation2InvocationInterface.basicGetRelation2GlobalSuccessProperty();
 		if (relation2globalSuccessProperty != null) {
 			Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
 			invokingRelationAnalysis.createPredicatedSuccess(invokedNode, globalSuccessProperty, true);

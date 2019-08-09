@@ -19,16 +19,21 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -75,7 +80,7 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 	protected @NonNull List<@NonNull Node> analyze() {
 		analyzeNodes();
 		for (@NonNull Node traceNode : analyzeTraceNodes()) {
-			analyzeLocalSuccessEdge(traceNode);
+			//	analyzeLocalSuccessEdge(traceNode);  -- no intial local success
 			analyzeGlobalSuccessEdge(traceNode);
 			analyzeTraceEdges(traceNode);
 		}
@@ -90,19 +95,23 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 
 	private void analyzeGlobalSuccessEdge(@NonNull Node traceNode) {
 		SuccessEdge globalSuccessEdge = null;
-		Property globalSuccessProperty = scheduleManager.basicGetGlobalSuccessProperty(traceNode);
-		if (globalSuccessProperty != null) {
-			NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetOutgoingNavigationEdge(traceNode, globalSuccessProperty);
-			if (statusNavigationEdge != null) {
-				globalSuccessEdge = (SuccessEdge) statusNavigationEdge;
-			}
-			else {		// Never needed
-				/*				if (!(region instanceof DispatchRegion) && !(region instanceof VerdictRegion)) {
-					RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, (MappingRegion)region);
-					successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);		// FIXME This creates a premature success in a speculation
-					Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
-					successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
-				} */
+		Rule2TraceGroup rule2traceGroup = basicGetRule2TraceGroup();
+		if (rule2traceGroup != null) {
+			Element2MiddleProperty relation2globalSuccessProperty = rule2traceGroup.basicGetRelation2GlobalSuccessProperty();
+			if (relation2globalSuccessProperty != null) {
+				Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
+				NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetOutgoingNavigationEdge(traceNode, globalSuccessProperty);
+				if (statusNavigationEdge != null) {
+					globalSuccessEdge = (SuccessEdge) statusNavigationEdge;
+				}
+				else {		// Never needed
+					/*				if (!(region instanceof DispatchRegion) && !(region instanceof VerdictRegion)) {
+						RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, (MappingRegion)region);
+						successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);		// FIXME This creates a premature success in a speculation
+						Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
+						successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
+					} */
+				}
 			}
 		}
 		traceNode2globalSuccessEdge.put(traceNode, globalSuccessEdge);
@@ -110,19 +119,23 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 
 	protected void analyzeLocalSuccessEdge(@NonNull Node traceNode) {
 		SuccessEdge localSuccessEdge = null;
-		Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(traceNode);
-		if (localSuccessProperty != null) {
-			NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetOutgoingNavigationEdge(traceNode, localSuccessProperty);
-			if (statusNavigationEdge != null) {
-				localSuccessEdge = (SuccessEdge) statusNavigationEdge;
-			}
-			else {		// Never needed
-				/*				if (!(region instanceof DispatchRegion) && !(region instanceof VerdictRegion)) {
-					RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, (MappingRegion)region);
-					successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);		// FIXME This creates a premature success in a speculation
-					Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
-					successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
-				} */
+		Rule2TraceGroup rule2traceGroup = basicGetRule2TraceGroup();
+		if (rule2traceGroup != null) {
+			Element2MiddleProperty relation2localSuccessProperty = rule2traceGroup.basicGetRelation2LocalSuccessProperty();
+			if (relation2localSuccessProperty != null) {
+				Property localSuccessProperty = relation2localSuccessProperty.getTraceProperty();
+				NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetOutgoingNavigationEdge(traceNode, localSuccessProperty);
+				if (statusNavigationEdge != null) {
+					localSuccessEdge = (SuccessEdge) statusNavigationEdge;
+				}
+				else {		// Never needed
+					/*				if (!(region instanceof DispatchRegion) && !(region instanceof VerdictRegion)) {
+						RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, (MappingRegion)region);
+						successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);		// FIXME This creates a premature success in a speculation
+						Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
+						successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
+					} */
+				}
 			}
 		}
 		//	System.out.println(NameUtil.debugSimpleName(this) + "\"" + getName() + "\" : " +  NameUtil.debugSimpleName(traceNode) + " !=> " + NameUtil.debugSimpleName(localSuccessEdge));
@@ -176,6 +189,12 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 		return successEdge != null ? successEdge.getTargetNode() : null;
 	}
 
+	public @Nullable Rule2TraceGroup basicGetRule2TraceGroup() {
+		Rule referredRule = QVTscheduleUtil.getReferredRule((RuleRegion)getRegion());
+		RuleAnalysis ruleAnalysis = transformationAnalysis.getRuleAnalysis(referredRule);
+		return ruleAnalysis.basicGetRule2TraceGroup();
+	}
+
 	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> getClassAnalysis(@NonNull ClassDatum classDatum) {
 		return partialRegionsAnalysis.getClassAnalysis(classDatum);
 	}
@@ -210,6 +229,12 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 
 	public @Nullable Role getRole(@NonNull Node node) {
 		return  node.getNodeRole();
+	}
+
+	public @NonNull Rule2TraceGroup getRule2TraceGroup() {
+		Rule referredRule = QVTscheduleUtil.getReferredRule((RuleRegion)getRegion());
+		RuleAnalysis ruleAnalysis = transformationAnalysis.getRuleAnalysis(referredRule);
+		return ruleAnalysis.getRule2TraceGroup();
 	}
 
 	@Override

@@ -123,6 +123,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			RelationalTransformation asTransformation = (RelationalTransformation) AbstractCompilerChain.getTransformation(qvtrResource);
 			QVTrelationMultipleScheduleManager multipleScheduleManager = new QVTrelationMultipleScheduleManager(environmentFactory, asTransformation, this, scheduleModel, schedulerOptions);
 			try {
+				multipleScheduleManager.getDomainUsageAnalysis().analyzeTransformation();
 				try {
 					for (@NonNull QVTuConfiguration qvtuConfiguration : qvtuConfigurations) {
 						QVTrelationDirectedScheduleManager directedScheduleManager = multipleScheduleManager.createDirectedScheduleManager(qvtuConfiguration);

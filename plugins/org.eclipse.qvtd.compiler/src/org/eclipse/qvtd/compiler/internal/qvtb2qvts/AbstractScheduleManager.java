@@ -307,10 +307,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public @NonNull OriginalContentsAnalysis analyzeOriginalContents() {
 		OriginalContentsAnalysis contentsAnalysis = new OriginalContentsAnalysis(this);
-		List<@NonNull MappingRegion> mappingRegions = Lists.newArrayList(QVTscheduleUtil.getOwnedMappingRegions(getScheduleModel()));
-		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-		for (@NonNull MappingRegion mappingRegion : mappingRegions) {		// FIXME Should treat LoadingRegion uniformly
-			RuleRegion ruleRegion = (RuleRegion) mappingRegion;
+		for (@NonNull RuleRegion ruleRegion : gatherRuleRegions()) {		// FIXME Should treat LoadingRegion uniformly
 			contentsAnalysis.addRegion(ruleRegion);
 			getRegionAnalysis(ruleRegion);
 			//			Transformation transformation = QVTbaseUtil.getOwningTransformation(QVTscheduleUtil.getReferredRule(ruleRegion));
@@ -326,7 +323,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public void analyzeSourceModel() {
-		domainUsageAnalysis.analyzeTransformation();
+		//		domainUsageAnalysis.analyzeTransformation();	// FIXME just once
 		QVTuConfiguration qvtuConfiguration = getQVTuConfiguration();
 		Iterable<@NonNull TypedModel> outputTypedModels = qvtuConfiguration != null ? qvtuConfiguration.getOutputTypedModels() : null;
 		directedDomainUsageAnalysis.analyzeTransformation(outputTypedModels);
@@ -351,7 +348,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return connectionManager;
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node) {
 		if (!isMiddle(node)) {
 			return null;
@@ -364,9 +361,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		//			}
 		//		}
 		return null;
-	}
+	} */
 
-	@Override
+	/*	@Override
 	public @Nullable Property basicGetLocalSuccessProperty(@NonNull Node node) {
 		if (!isMiddle(node)) {
 			return null;
@@ -379,7 +376,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		//			}
 		//		}
 		return null;
-	}
+	} */
 
 	@Override
 	public boolean computeIsPartial(@NonNull Node targetNode, @NonNull Property property) {
@@ -594,6 +591,20 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	protected abstract @NonNull AbstractTransformationAnalysis createTransformationAnalysis(@NonNull Transformation asTransformation);
+
+	@Override
+	public @NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions() {
+		List<@NonNull RuleRegion> ruleRegions = new ArrayList<>();
+		gatherRuleRegions(ruleRegions);
+		Collections.sort(ruleRegions, NameUtil.NAMEABLE_COMPARATOR);		// For predictability
+		return ruleRegions;
+	}
+
+	public void gatherRuleRegions(@NonNull List<@NonNull RuleRegion> ruleRegions) {
+		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
+			transformationAnalysis.gatherRuleRegions(ruleRegions);
+		}
+	}
 
 	//	public @NonNull Property getArgumentProperty(@NonNull String argumentName) {
 	//		Property argumentProperty = name2argumentProperty.get(argumentName);
@@ -1007,6 +1018,22 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public void throwCompilerChainExceptionForErrors() throws CompilerChainException {
 		problemHandler.throwCompilerChainExceptionForErrors();
+	}
+
+	@Override
+	public @NonNull String toString() {
+		StringBuilder s = new StringBuilder();
+		boolean isFirst = true;
+		s.append("{");
+		for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(transformation)) {
+			if (!isFirst) {
+				s.append(",");
+			}
+			s.append(typedModel.getName());
+			isFirst = false;
+		}
+		s.append("}");
+		return s.toString();
 	}
 
 	@Override

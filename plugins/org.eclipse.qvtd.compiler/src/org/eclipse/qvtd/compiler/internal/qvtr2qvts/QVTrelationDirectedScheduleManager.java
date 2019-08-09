@@ -12,8 +12,6 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
@@ -24,7 +22,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.BasicScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -32,11 +29,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 /**
@@ -57,35 +51,35 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 		this.qvtuConfiguration = qvtuConfiguration;
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node) {
 		if (!isMiddle(node)) {
 			return null;
 		}
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
-			Property property = completeClass.getProperty(getNameGenerator().createTraceGlobalSuccessPropertyName(getTargetTypedModel()));
+			Property property = completeClass.getProperty(getNameGenerator().createTraceGlobalSuccessPropertyName());
 			if (property != null) {
 				return property;
 			}
 		}
 		return null;
-	}
+	} */
 
-	@Override
+	/*	@Override
 	public @Nullable Property basicGetLocalSuccessProperty(@NonNull Node node) {
 		if (!isMiddle(node)) {
 			return null;
 		}
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 		for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// Middle model never has multiples
-			Property property = completeClass.getProperty(getNameGenerator().createTraceLocalSuccessPropertyName(getTargetTypedModel()));
+			Property property = completeClass.getProperty(getNameGenerator().createTraceLocalSuccessPropertyName());
 			if (property != null) {
 				return property;
 			}
 		}
 		return null;
-	}
+	} */
 
 	@Override
 	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
@@ -135,11 +129,6 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	public @NonNull QVTrelationDomainUsageAnalysis getDomainUsageAnalysis() {
-		return multipleScheduleManager.getDomainUsageAnalysis();
-	}
-
-	@Override
 	public @NonNull ScheduleManager getMultipleScheduleManager() {
 		return multipleScheduleManager;
 	}
@@ -177,6 +166,11 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	@Override
 	public boolean needsDiscrimination() {
 		return multipleScheduleManager.needsDiscrimination();
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return qvtuConfiguration.toString();
 	}
 
 	@Override

@@ -70,7 +70,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	/**
 	 * The future Property that provides the global success/failure/not-ready state of the traced mapping.
 	 */
-	private @Nullable Map<@NonNull TypedModel, @Nullable Element2MiddleProperty> targetTypedModel2relation2globalSuccessProperty = null;
+	private @Nullable Element2MiddleProperty relation2globalSuccessProperty = null;
 
 	/**
 	 * The future Property that provides the local success/failure/not-ready state of the traced mapping.
@@ -139,8 +139,8 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	}
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull RuleAnalysis ruleAnalysis) {
-		return targetTypedModel2relation2globalSuccessProperty != null ? targetTypedModel2relation2globalSuccessProperty.get(targetTypedModel) : null;
+	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
+		return relation2globalSuccessProperty;
 	}
 
 	@Override
@@ -183,16 +183,11 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		return relation2dispatchSuccessProperty;
 	}
 
-	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull RuleAnalysis ruleAnalysis) {
+	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty() {
+		assert relation2globalSuccessProperty == null;
 		QVTrelationNameGenerator nameGenerator = relation2traceGroup.getNameGenerator();
-		String globalSuccessPropertyName = nameGenerator.createTraceGlobalSuccessPropertyName(targetTypedModel);
-		assert basicGetRelation2GlobalSuccessProperty(targetTypedModel, ruleAnalysis) == null;
-		Element2MiddleProperty relation2globalSuccessProperty = new Relation2SuccessProperty(this, globalSuccessPropertyName);
-		Map<@NonNull TypedModel, @Nullable Element2MiddleProperty> targetTypedModel2relation2globalSuccessProperty2 = targetTypedModel2relation2globalSuccessProperty;
-		if (targetTypedModel2relation2globalSuccessProperty2 == null) {
-			targetTypedModel2relation2globalSuccessProperty = targetTypedModel2relation2globalSuccessProperty2 = new HashMap<>();
-		}
-		targetTypedModel2relation2globalSuccessProperty2.put(targetTypedModel, relation2globalSuccessProperty);
+		String globalSuccessPropertyName = nameGenerator.createTraceGlobalSuccessPropertyName();
+		relation2globalSuccessProperty = new Relation2SuccessProperty(this, globalSuccessPropertyName);
 		return relation2globalSuccessProperty;
 	}
 
@@ -232,8 +227,8 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	}
 
 	@Override
-	public @NonNull Property getGlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull RuleAnalysis ruleAnalysis) {
-		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty(targetTypedModel, ruleAnalysis)).getTraceProperty();
+	public @NonNull Property getGlobalSuccessProperty() {
+		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty()).getTraceProperty();
 	}
 
 	@Override
@@ -259,8 +254,8 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		return ClassUtil.nonNullState(relation2dispatchSuccessProperty);
 	}
 
-	public @NonNull Element2MiddleProperty getRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull RuleAnalysis ruleAnalysis) {
-		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty(targetTypedModel, ruleAnalysis));
+	public @NonNull Element2MiddleProperty getRelation2GlobalSuccessProperty() {
+		return ClassUtil.nonNullState(relation2globalSuccessProperty);
 	}
 
 	public @NonNull Element2MiddleProperty getRelation2LocalSuccessProperty() {
@@ -369,10 +364,8 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		if (relation2dispatchSuccessProperty != null) {
 			relation2dispatchSuccessProperty.getTraceProperty();
 		}
-		if (targetTypedModel2relation2globalSuccessProperty != null) {
-			for (@NonNull TypedModel typedModel : targetTypedModel2relation2globalSuccessProperty.keySet()) {
-				getRelation2GlobalSuccessProperty(typedModel, ruleAnalysis).getTraceProperty();
-			}
+		if (relation2globalSuccessProperty != null) {
+			relation2globalSuccessProperty.getTraceProperty();
 		}
 		if (relation2resultProperty != null) {
 			relation2resultProperty.getTraceProperty();

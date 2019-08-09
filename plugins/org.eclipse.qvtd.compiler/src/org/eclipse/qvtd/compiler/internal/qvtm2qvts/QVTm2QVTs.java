@@ -25,8 +25,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-
 import com.google.common.collect.Lists;
 
 public class QVTm2QVTs extends AbstractQVTb2QVTs
@@ -37,6 +35,7 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 	}
 
 	public @NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {
+		scheduleManager.getDomainUsageAnalysis().analyzeTransformation();
 		scheduleManager.analyzeSourceModel();
 		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager.getOrderedTransformationAnalyses();
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
@@ -44,7 +43,7 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 		}
 		scheduleManager.analyzeOriginalContents();		// FIXME Should treat LoadingRegion uniformly
 		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> rootRegion2activeRegions = scheduleManager.analyzeTransformations();
-		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager.getScheduleModel())) {
+		for (@NonNull RuleRegion ruleRegion : scheduleManager.gatherRuleRegions()) {
 			scheduleManager.writeDebugGraphs(ruleRegion, null);
 		}
 		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> rootRegion2mergedRegions = new HashMap<>();

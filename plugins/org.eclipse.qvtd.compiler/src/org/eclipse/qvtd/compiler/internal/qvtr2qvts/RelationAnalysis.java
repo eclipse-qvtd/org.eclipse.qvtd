@@ -551,6 +551,11 @@ public class RelationAnalysis extends RuleAnalysis
 		return outgoingWhereInvocationAnalyses;
 	}
 
+	@Override
+	public @Nullable Relation2TraceGroup basicGetRule2TraceGroup() {
+		return (Relation2TraceGroup) super.basicGetRule2TraceGroup();
+	}
+
 	protected @Nullable TemplateExp basicGetTemplateExp(@NonNull VariableDeclaration variable) {
 		return ClassUtil.nonNullState(variable2templateExp).get(variable);
 	}
@@ -657,9 +662,7 @@ public class RelationAnalysis extends RuleAnalysis
 
 	@Override
 	public void gatherRuleRegions(@NonNull List<@NonNull RuleRegion> ruleRegions) {
-		//	if (!getRule().isIsAbstract()) {
 		super.gatherRuleRegions(ruleRegions);
-		//}
 		if (dispatchAnalysis != null) {
 			dispatchAnalysis.gatherRuleRegions(ruleRegions);
 		}
@@ -668,7 +671,7 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	}
 
-	public @NonNull RelationAnalysis getBaseRelationAnalysis() {
+	private @NonNull RelationAnalysis getBaseRelationAnalysis() {
 		return ClassUtil.nonNullState(baseRelationAnalysis);
 	}
 
@@ -986,7 +989,7 @@ public class RelationAnalysis extends RuleAnalysis
 		//
 		//	Connect a dispatch node using its do Property.
 		//
-		Relation2DispatchClass relation2dispatchClass = getBaseRelationAnalysis().getRule2TraceGroup().getRule2DispatchClass();
+		Relation2DispatchClass relation2dispatchClass = getRule2TraceGroup().getBaseRelation2TraceGroup().getRule2DispatchClass();
 		ClassDatum classDatum = scheduleManager.getClassDatum(getTraceTypedModel(), relation2dispatchClass.getMiddleClass());
 		Node dispatchNode = createPredicatedNode(QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME, classDatum, true);
 		dispatchNode.setUtility(Utility.DISPATCH);
@@ -1053,9 +1056,8 @@ public class RelationAnalysis extends RuleAnalysis
 		if (!relation.isIsTopLevel()) {
 			if (QVTrelationUtil.hasOverrides(relation)) {
 				Relation baseRelation = QVTrelationUtil.getBaseRelation(relation);
-				RelationAnalysis baseRelationAnalysis = getBaseRelationAnalysis();
-				Relation2TraceGroup baserelation2traceGroup = baseRelationAnalysis.getRule2TraceGroup();
-				Relation2MiddleType baseRelation2invocationInterface = baserelation2traceGroup.getRule2InvocationInterface();
+				Relation2TraceGroup baseRelation2traceGroup = getRule2TraceGroup().getBaseRelation2TraceGroup();
+				Relation2MiddleType baseRelation2invocationInterface = baseRelation2traceGroup.getRule2InvocationInterface();
 				org.eclipse.ocl.pivot.Class baseInvocationClass = baseRelation2invocationInterface.getMiddleClass();
 				ClassDatum classDatum = scheduleManager.getClassDatum(scheduleManager.getTraceTypedModel(), baseInvocationClass);
 				Node invocationNode = createPredicatedNode(QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME, classDatum, true);
@@ -1302,7 +1304,7 @@ public class RelationAnalysis extends RuleAnalysis
 				Relation2MiddleType overridingRelation2TraceClass = overridingrelation2traceGroup.getRule2TraceClass();
 				ClassDatum overridingClassDatum = scheduleManager2.getClassDatum(traceTypedModel, overridingRelation2TraceInterface.getMiddleClass());
 				Node guardNode = createPredicatedNode("not_" + overridingRelation.getName(), overridingClassDatum, true);
-				Property globalSuccessProperty = overridingRelation2TraceClass.getGlobalSuccessProperty(targetTypedModel, overridingRelationAnalysis);
+				Property globalSuccessProperty = overridingRelation2TraceClass.getGlobalSuccessProperty();
 				createPredicatedSuccess(guardNode, globalSuccessProperty, false);
 				if (dispatchNode != null) {
 					Relation2DispatchClass relation2dispatchClass = overriddenRelationAnalysis.getRule2TraceGroup().getRule2DispatchClass();
@@ -1501,9 +1503,10 @@ public class RelationAnalysis extends RuleAnalysis
 	protected void synthesizeTraceEdges(@NonNull Node traceNode, @Nullable Node dispatchNode) {
 		Relation relation = getRule();
 		if (dispatchNode != null) {
-			Relation2DispatchClass rule2dispatchClass = getBaseRelationAnalysis().getRule2TraceGroup().getRule2DispatchClass();
+			Relation2TraceGroup baseRelation2traceGroup = getRule2TraceGroup().getBaseRelation2TraceGroup();
+			Relation2DispatchClass rule2dispatchClass = baseRelation2traceGroup.getRule2DispatchClass();
 			//			Relation2TraceClass rule2traceClass = getRule2TraceGroup().getRule2TraceClass();
-			Relation baseRelation = getBaseRelationAnalysis().getRule();
+			Relation baseRelation = baseRelation2traceGroup.getRule();
 			for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
 				Boolean isInput = getScheduleManager().isInput(relationDomain) || !relation.isIsTopLevel();
 				for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
@@ -1643,8 +1646,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	protected void synthesizeTraceGlobalSuccessAssignment(@NonNull Relation2TraceGroup relation2traceGroup, @NonNull Node traceNode) {
-		Relation2TraceClass relation2TraceClass = relation2traceGroup.getRule2TraceClass();
-		Element2MiddleProperty relation2globalSuccessProperty = relation2TraceClass.basicGetRelation2GlobalSuccessProperty(targetTypedModel, this);
+		Element2MiddleProperty relation2globalSuccessProperty = relation2traceGroup.basicGetRelation2GlobalSuccessProperty();
 		if (relation2globalSuccessProperty != null) {
 			createRealizedSuccess(traceNode, relation2globalSuccessProperty.getTraceProperty(), null);
 		}

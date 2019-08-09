@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
@@ -136,6 +137,10 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 
 	public @NonNull RootPartitionAnalysis getRootPartitionAnalysis() {
 		return ClassUtil.nonNullState(rootPartitionAnalysis);
+	}
+
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
+		return transformationPartitioner.getTransformationAnalysis();
 	}
 
 	public void setLoadingRegionAnalysis(@NonNull LoadingPartitionAnalysis loadingPartitionAnalysis) {
