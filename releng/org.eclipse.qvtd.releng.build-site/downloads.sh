@@ -12,15 +12,27 @@
 #
 #	Promote the PUBLISH__URL to the downloads 'page'.
 #
-#    PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/ocl/job/qvtd-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
-#    PUBLISH__VERSION        Unqualified version e.g. 0.16.0
-#    PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
-#    PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
-#    PUBLISH__ALIAS          Non blank to use alias as part of final name
+#    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/ocl/job/qvtd-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
+#    -v PUBLISH__VERSION        Unqualified version e.g. 0.16.0
+#    -t PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
+#    -q PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
+#    -a PUBLISH__ALIAS          Non blank to use alias as part of final name
 #
 dropsFolder="/home/data/httpd/download.eclipse.org/mmt/qvtd/downloads/drops/"
 group="modeling.mmt.qvtd"
 zipPrefix="qvtd-incubation-Update-"
+
+while getopts u:v:t:q:a: option
+do
+case "${option}"
+in
+u) PUBLISH__URL=${OPTARG};;
+v) PUBLISH__VERSION=${OPTARG};;
+t) PUBLISH__BUILD_T=${OPTARG};;
+q) PUBLISH__QUALIFIER=${OPTARG};;
+a) PUBLISH__ALIAS=${OPTARG};;
+esac
+done
 
 if [ -n "${PUBLISH__BUILD_T}" ]
 then

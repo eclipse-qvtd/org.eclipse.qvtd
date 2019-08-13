@@ -12,17 +12,28 @@
 #
 #    Promote the PUBLISH__URL to an updates repository.
 #
-#    PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/ocl/job/qvtd-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
-#    PUBLISH__VERSION        Unqualified version e.g. 0.16.0
-#    PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
-#    PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
+#    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/ocl/job/qvtd-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
+#    -v PUBLISH__VERSION        Unqualified version e.g. 0.16.0
+#    -t PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
+#    -q PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
 #
 updatesFolder="/home/data/httpd/download.eclipse.org/mmt/qvtd/updates/"
 group="modeling.mmt.qvtd"
 localZip="qvtd.zip"
 projectRepoName="QVTd"
 manageComposite="/shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml"
-externalUpdatesFolder="http://download.eclipse.org/mmt/qvtd/updates/"
+externalUpdatesFolder="https://download.eclipse.org/mmt/qvtd/updates/"
+
+while getopts u:v:t:q: option
+do
+case "${option}"
+in
+u) PUBLISH__URL=${OPTARG};;
+v) PUBLISH__VERSION=${OPTARG};;
+t) PUBLISH__BUILD_T=${OPTARG};;
+q) PUBLISH__QUALIFIER=${OPTARG};;
+esac
+done
 
 if [ -n "${PUBLISH__BUILD_T}" ]
 then
