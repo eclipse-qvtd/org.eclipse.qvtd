@@ -6,8 +6,8 @@ package simpleUML2RDBMS = 'http://simpleUML2RDBMS'
 {
 	transformation SimpleUML2RDBMS
 	{
-		check uml imports simpleuml;
-		enforce rdbms imports simplerdbms;
+		uml imports simpleuml;
+		rdbms imports simplerdbms;
 		middle imports umltordbms;
 	}
 }
@@ -320,7 +320,7 @@ map attributeColumns_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 	set c.type := ct;
 }
 
-map __root__ in simpleUML2RDBMS::SimpleUML2RDBMS
+entry __root__ check uml enforce rdbms in simpleUML2RDBMS::SimpleUML2RDBMS
 {
 	for p : simpleuml::Package in uml.objectsOfKind(Package) {
 		call packageToSchema_LM {

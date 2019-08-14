@@ -41,7 +41,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 
 public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGModelVisitor<@Nullable Object>
 {
@@ -165,8 +165,8 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 	@Override
 	public Object visitCGTransformation(@NonNull CGTransformation cgTransformation) {
 		ImperativeTransformation transformation = QVTiCGUtil.getAST(cgTransformation);
-		QVTiTransformationAnalysis transformationAnalysis = getCodeGenerator().getTransformationAnalysis(transformation);
-		Map<@NonNull Property, @NonNull Integer> opposites = transformationAnalysis.getCaches();
+		EntryPointsAnalysis entryPointsAnalysis = getCodeGenerator().getEntryPointsAnalysis(transformation);
+		Map<@NonNull Property, @NonNull Integer> opposites = entryPointsAnalysis.getCaches();
 		for (@NonNull Property property : opposites.keySet()) {
 			CGElementId cgPropertyId = analyzer.getElementId(property.getPropertyId());
 			cgPropertyId.accept(this);

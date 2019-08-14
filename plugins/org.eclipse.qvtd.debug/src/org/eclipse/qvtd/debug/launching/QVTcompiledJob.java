@@ -117,7 +117,7 @@ public class QVTcompiledJob extends QVTimperativeJob
 			//	if (!generatedExecutor.preExecute()) {
 			//
 			//	}
-			if (!generatedExecutor.execute()) {
+			if (!generatedExecutor.execute(null)) {		// FIXME TypedModel index
 				//	if (!suppressFailureDiagnosis) {						// FIXME BUG 511028
 				StringBuilder s = new StringBuilder();
 				transformer.getInvocationManager().diagnoseWorkLists(s);

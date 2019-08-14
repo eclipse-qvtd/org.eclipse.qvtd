@@ -139,6 +139,20 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return ClassUtil.nonNullState(basicGetContainingTransformation(eObject));
 	}
 
+	/**
+	 * Return the default (first) entry point of asTransformation.
+	 *
+	 * This method is close to deprecated being mainly intended for legacy / unidirectional usage.
+	 */
+	public static @NonNull EntryPoint getDefaultEntryPoint(@NonNull ImperativeTransformation asTransformation) {
+		for (@NonNull Mapping mapping : getOwnedMappings(asTransformation)) {
+			if (mapping instanceof EntryPoint) {
+				return (EntryPoint)mapping;
+			}
+		}
+		throw new IllegalStateException();
+	}
+
 	public static @NonNull Iterable<@NonNull TypedModel> getEnforcedTypedModels(@NonNull EntryPoint entryPoint) {
 		return ClassUtil.nullFree(entryPoint.getEnforcedTypedModels());
 	}

@@ -38,7 +38,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -164,13 +164,13 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	private @Nullable Map<@NonNull Mapping, @NonNull InvocationConstructor> mapping2invocationConstructor = null;
 	private @Nullable Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor = null;
 
-	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation, @NonNull ModeFactory modeFactory) {
-		super(environmentFactory, transformation, modeFactory);
+	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) {
+		super(environmentFactory, entryPoint, modeFactory);
 		boolean isLazy = modeFactory.isLazy();
 		this.invocationManager = isLazy ? new LazyInvocationManager(this) : new IncrementalInvocationManager(this);
 		this.objectManager = isLazy ? new LazyObjectManager((LazyInvocationManager)invocationManager) : new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
-		Set<@NonNull CompleteClass> allInstancesCompleteClasses = transformationAnalysis.getAllInstancesCompleteClasses();
-		@NonNull PropertyId @NonNull [] propertyIndex2propertyId = transformationAnalysis.getPropertyIndex2propertyId();
+		Set<@NonNull CompleteClass> allInstancesCompleteClasses = entryPointAnalysis.getAllInstancesCompleteClasses();
+		@NonNull PropertyId @NonNull [] propertyIndex2propertyId = entryPointsAnalysis.getPropertyIndex2propertyId();
 		modelsManager.initOpposites(propertyIndex2propertyId);
 
 		for (@NonNull QVTiTypedModelInstance typedModelInstance : modelsManager.getTypedModelInstances()) {
@@ -180,7 +180,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				usedCompleteClasses.add(environmentFactory.getCompleteModel().getCompleteClass(usedClass));
 			}
 			usedCompleteClasses.retainAll(allInstancesCompleteClasses);
-			TypedModelAnalysis typedModelAnalysis = new TypedModelAnalysis(transformationAnalysis, typedModel, usedCompleteClasses);
+			TypedModelAnalysis typedModelAnalysis = new TypedModelAnalysis(entryPointsAnalysis, typedModel, usedCompleteClasses);
 			@NonNull ClassId @NonNull [] classIndex2classId = typedModelAnalysis.getClassIndex2ClassId();
 			int @Nullable [] @NonNull [] classIndex2allClassIndexes = typedModelAnalysis.getClassIndex2allClassIndexes();
 			typedModelInstance.initClassIds(classIndex2classId, classIndex2allClassIndexes);
@@ -189,7 +189,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				Map<@NonNull Object, Object> extentOpposites = modelsManager.getExtentOpposites();
 				typedModelInstance.initExtent(extentClassIndex, extentOpposites);
 			}
-			typedModelAnalysis.toString();
+			//			typedModelAnalysis.toString();
 		}
 		initConnections();
 	}
@@ -305,7 +305,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping asMapping = ClassUtil.nonNullState(mappingCall.getReferredMapping());
 		if (modeFactory.isLazy()) {
-			if (!transformationAnalysis.isHazardous(asMapping)) {
+			if (!entryPointAnalysis.isHazardous(asMapping)) {
 				return super.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
 			}
 		}
@@ -318,7 +318,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public @Nullable Object internalExecuteNavigationCallExp(@NonNull NavigationCallExp navigationCallExp, @NonNull Property referredProperty, @Nullable Object sourceValue) {
 		if (referredProperty.isIsImplicit()) {
 			QVTiModelsManager modelManager = getModelsManager();
-			Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex((OppositePropertyCallExp) navigationCallExp);
+			Integer cacheIndex = entryPointAnalysis.getCacheIndex((OppositePropertyCallExp) navigationCallExp);
 			if (cacheIndex != null) {
 				if (sourceValue != null) {
 					return modelManager.getUnnavigableOpposite(cacheIndex, sourceValue);

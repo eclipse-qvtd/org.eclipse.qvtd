@@ -6,8 +6,8 @@ import hsv2hsl_0 : 'HSV2HSL.ecore'::HSV2HSL; -- A name is useful to define an al
 -- library '../../myOclHelper.ocl'; -- Import a complete OCL with helpers
 
 transformation hsv2hsl {
-	check hsv imports HSVTree;  -- Should specify the correct package
-	enforce hsl imports HSLTree;  --
+	hsv imports HSVTree;  -- Should specify the correct package
+	hsl imports HSLTree;  --
 	-- hsl imports "strict" HSLTree;  -- 
 	-- hsl imports HSLTree{strict};   -- The model has to strictly conform to the HSLTree mm, without strict the model can have classes that match the name but not completely conform to the mm  
 	middle imports HSV2HSL;
@@ -18,7 +18,7 @@ query hsv2hsl::hsv2rgb(color : HSVTree::HSV) : HSV2HSL::RGB;
 query hsv2hsl::rgb2hsl(color : HSV2HSL::RGB) : HSLTree::HSL;
 query hsv2hsl::rgb2hsv(color : HSV2HSL::RGB) : HSVTree::HSV;
 
-map __root__ in hsv2hsl {
+entry __root__ check hsv enforce hsl in hsv2hsl {
 	append nodes : HSVTree::HSVNode;
     for hsvRoot : HSVTree::HSVNode in nodes {
         call HSV2MiddleRoot {

@@ -4,8 +4,8 @@ import classescstraces : 'ClassesCS2AS.ecore#/';
 
 transformation classescs2as
 {
-	check leftCS imports classescs;
-	enforce rightAS imports classes;
+	leftCS imports classescs;
+	rightAS imports classes;
 	middle imports classescstraces;
 }
 
@@ -85,7 +85,7 @@ map uPackage_ownedClasses in classescs2as
 	set	_'package'.ownedClasses := ownedClasses;
 }
 
-map __root__ in classescs2as
+entry __root__ check leftCS enforce rightAS in classescs2as
 {
 	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 		call mPackageCS2Package_LM {

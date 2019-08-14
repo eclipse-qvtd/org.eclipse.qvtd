@@ -60,6 +60,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
@@ -384,14 +385,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return new QVTiTransformationExecutor(environmentFactory, txClass);
 	}
 
-	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull ImperativeTransformation asTransformation) throws Exception {
-		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(getEnvironmentFactory(), asTransformation);
+	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull EntryPoint entryPoint) throws Exception {
+		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(getEnvironmentFactory(), entryPoint);
 		this.executor = interpretedExecutor;
 		return interpretedExecutor;
 	}
 
-	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) throws Exception {
-		return new QVTiIncrementalExecutor(environmentFactory, asTransformation, ModeFactory.LAZY);
+	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint) throws Exception {
+		return new QVTiIncrementalExecutor(environmentFactory, entryPoint, ModeFactory.LAZY);
 	}
 
 	@Override
@@ -495,7 +496,15 @@ public abstract class AbstractTestQVT extends QVTimperative
 		if (suppressFailureDiagnosis) {
 			executor.setSuppressFailureDiagnosis(true);
 		}
-		Boolean success = executor.execute();
+		Boolean success = executor.execute(null);
+		return success == Boolean.TRUE;
+	}
+
+	public boolean executeTransformation(@NonNull String targetModelName) throws Exception {
+		if (suppressFailureDiagnosis) {
+			executor.setSuppressFailureDiagnosis(true);
+		}
+		Boolean success = executor.execute(executor.getTypedModelIndex(targetModelName));
 		return success == Boolean.TRUE;
 	}
 

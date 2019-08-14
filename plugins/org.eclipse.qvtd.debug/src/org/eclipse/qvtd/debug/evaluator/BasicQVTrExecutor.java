@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.debug.evaluator;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
@@ -25,7 +25,7 @@ import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
  */
 public class BasicQVTrExecutor extends QVTiIncrementalExecutor
 {
-	public BasicQVTrExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
-		super(environmentFactory, transformation, ModeFactory.LAZY);
+	public BasicQVTrExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint) {
+		super(environmentFactory, entryPoint, ModeFactory.LAZY);
 	}
 }

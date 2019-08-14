@@ -1,69 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xmlns:qvti="http://www.eclipse.org/qvt/2016/QVTimperative" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2016/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
-    name="ClassesCS2ASv2.qvti" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/bug457239/ClassesCS2ASv2.qvti">
-  <ownedImports name="classes" importedNamespace="pivot:Model ../Classes.ecore.oclas#/"/>
-  <ownedImports name="classescs" importedNamespace="pivot:Model ../ClassesCS.ecore.oclas#/"/>
-  <ownedImports importedNamespace="pivot:Model helpers.ocl.oclas#/"/>
-  <ownedPackages xmi:id="P." name="">
-    <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="T..classescs2as" name="classescs2as" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..classescs2as.leftCS" name="leftCS" usedPackage="helpers.ocl.oclas#P.classescs"
-          isChecked="true">
-        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..classescs2as.leftCS.leftCS" name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtruntimelibrary.Model"/>
+    xmi:id="AAAAA" name="ClassesCS2ASv2.qvti" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/models/ClassesCS2AS/bug457239/ClassesCS2ASv2.qvti"
+    xmiidVersion="1">
+  <ownedImports name="classes" importedNamespace="pivot:Package ../Classes.ecore.oclas#gm0v7" xmiidVersion="1"/>
+  <ownedImports name="classescs" importedNamespace="pivot:Package ../ClassesCS.ecore.oclas#QSeUI" xmiidVersion="1"/>
+  <ownedImports importedNamespace="pivot:Model helpers.ocl.oclas#AAAAA" xmiidVersion="1"/>
+  <ownedPackages xmi:id="6Fh3I" name="">
+    <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="ll3DG" name="classescs2as" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR">
+      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="IsZt9" name="leftCS" usedPackage="../ClassesCS.ecore.oclas#QSeUI">
+        <ownedContext xsi:type="pivot:ParameterVariable" name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#qeoBC"/>
       </modelParameter>
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..classescs2as.rightAS" name="rightAS" usedPackage="../Classes.ecore.oclas#P.classes"
-          isEnforced="true">
-        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..classescs2as.rightAS.rightAS" name="rightAS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtruntimelibrary.Model"/>
+      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="fuoOH" name="rightAS" usedPackage="../Classes.ecore.oclas#gm0v7">
+        <ownedContext xsi:type="pivot:ParameterVariable" name="rightAS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#qeoBC"/>
       </modelParameter>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.createPackage" name="createPackage">
-        <ownedMappingParameters xsi:type="qvti:GuardParameter" name="packageCS" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
-            referredTypedModel="#qT..classescs2as.leftCS"/>
-        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..classescs2as.createPackage._package" name="_package" isRequired="false"
-            type="pivot:Class ../Classes.ecore.oclas#T.classes.Package" referredTypedModel="#qT..classescs2as.rightAS"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..classescs2as.createPackage._package" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
-          <ownedExpression xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
-            <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="helpers.ocl.oclas#o.ocl.OclElement.aBooleanElementOp">
-              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@ownedMappingParameters.0"/>
+      <rule xsi:type="qvti:Mapping" xmi:id="nJ3jC" name="createPackage">
+        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="AYM4v" name="packageCS" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#rYaOy"
+            referredTypedModel="#IsZt9"/>
+        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="f7sVT" name="_package" isRequired="false" type="pivot:Class ../Classes.ecore.oclas#LACyd"
+            referredTypedModel="#fuoOH"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#f7sVT" targetProperty="../Classes.ecore.oclas#LKAVE">
+          <ownedExpression xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+            <ownedCondition xsi:type="pivot:OperationCallExp" name="aBooleanElementOp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"
+                referredOperation="helpers.ocl.oclas#S+Y2+">
+              <ownedSource xsi:type="pivot:VariableExp" name="packageCS" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#rYaOy"
+                  referredVariable="#AYM4v"/>
             </ownedCondition>
-            <ownedElse xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+            <ownedElse xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"
                 stringSymbol="unexpected"/>
-            <ownedThen xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+            <ownedThen xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"
                 stringSymbol="transformation worked"/>
           </ownedExpression>
         </ownedStatements>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.__root__" name="__root__">
+      <rule xsi:type="qvti:EntryPoint" name="__root__" checkedTypedModels="#IsZt9" enforcedTypedModels="#fuoOH">
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators name="packageCS" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
-          <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2as.createPackage">
-            <ownedMappingParameterBindings xsi:type="qvti:LoopParameterBinding" boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@ownedMappingParameters.0"
-                value="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedStatements.0/@ownedIterators.0"/>
+          <ownedIterators xmi:id="GM8oC" name="packageCS" type="pivot:Class ../ClassesCS.ecore.oclas#rYaOy"/>
+          <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#nJ3jC">
+            <ownedMappingParameterBindings xsi:type="qvti:LoopParameterBinding" boundVariable="#AYM4v" value="#GM8oC"/>
           </ownedMappingStatements>
-          <ownedExpression xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-            <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Pivot.oclas#T.pivot.Class" referredType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="allInstances" type="#MA2i0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#5w96x">
+            <ownedSource xsi:type="pivot:TypeExp" name="PackageCS" type="pivot:Class http://www.eclipse.org/ocl/2015/Pivot.oclas#pDcbe"
+                referredType="pivot:Class ../ClassesCS.ecore.oclas#rYaOy"/>
           </ownedExpression>
         </ownedStatements>
       </rule>
-      <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..classescs2as.this" name="this" type="#T..classescs2as"/>
+      <ownedContext xsi:type="pivot:ParameterVariable" name="this" type="#ll3DG"/>
     </ownedClasses>
   </ownedPackages>
-  <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.1"
-        isNullFree="true">
+  <ownedPackages name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="MA2i0" name="Set" superClasses="#0VKgz" isNullFree="true">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#rYaOy" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="0VKgz" name="UniqueCollection" superClasses="#DbakD">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#rYaOy" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="DbakD" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#rYaOy" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
   </ownedPackages>

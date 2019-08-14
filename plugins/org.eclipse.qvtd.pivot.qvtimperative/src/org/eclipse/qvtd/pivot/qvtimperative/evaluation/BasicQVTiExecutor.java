@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,8 +101,10 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		}
 	}
 
+	//	protected final @NonNull Mapping entryPoint;
 	protected final @NonNull ImperativeTransformation transformation;
-	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
+	protected final @NonNull EntryPointsAnalysis entryPointsAnalysis;
+	protected final @NonNull EntryPointAnalysis entryPointAnalysis;
 	protected final @NonNull ModeFactory modeFactory;
 	protected final @NonNull QVTiModelsManager modelsManager;
 	private @Nullable WrappedModelManager wrappedModelManager = null;
@@ -111,13 +112,15 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 	private final @NonNull Map<@NonNull Mapping, @NonNull Interval> mapping2interval = new HashMap<>();;
 
-	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation, @NonNull ModeFactory modeFactory) {
+	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) {
 		super(environmentFactory);
-		this.transformation = transformation;
-		this.transformationAnalysis = environmentFactory.createTransformationAnalysis(transformation);
+		//		this.entryPoint = entryPoint;
+		this.transformation = QVTimperativeUtil.getContainingTransformation(entryPoint);
+		this.entryPointsAnalysis = environmentFactory.createEntryPointsAnalysis(transformation);
 		this.modeFactory = modeFactory;
-		transformationAnalysis.analyzeTransformation();
-		this.modelsManager = environmentFactory.createModelsManager(transformationAnalysis);
+		entryPointsAnalysis.analyzeTransformation();
+		this.entryPointAnalysis = entryPointsAnalysis.getEntryPointAnalysis(entryPoint);
+		this.modelsManager = environmentFactory.createModelsManager(entryPointAnalysis);
 		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(transformation)) {
 			QVTiTypedModelInstance typedModelInstance = createTypedModelInstance((ImperativeTypedModel)typedModel);
 			modelsManager.initTypedModelInstance(typedModelInstance);
@@ -184,7 +187,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	}
 
 	@Override
-	public Boolean execute() {
+	public Boolean execute(@Nullable Integer targetTypedModelIndex) {
 		modelsManager.analyzeInputResources();
 		initializeEvaluationEnvironment(transformation);
 		getRootEvaluationEnvironment();
@@ -201,6 +204,10 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	protected Boolean executeInternal() {
 		return (Boolean) getEvaluationVisitor().visit(transformation);
 	}
+
+	//	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis() {
+	//		return entryPointsAnalysis;
+	//	}
 
 	@Override
 	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
@@ -249,10 +256,6 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		return transformation;
 	}
 
-	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
-		return transformationAnalysis;
-	}
-
 	public @NonNull ImperativeTypedModel getTypedModel(@NonNull String name) {
 		ImperativeTypedModel typedModel = NameUtil.getNameable(QVTimperativeUtil.getOwnedTypedModels(transformation), name);
 		if (typedModel == null) {
@@ -264,6 +267,18 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			//			}
 		}
 		return typedModel;
+	}
+
+	@Override
+	public int getTypedModelIndex(@NonNull String targetModelName) {
+		int index = 0;
+		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
+			if (targetModelName.equals(typedModel.getName())) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
 	}
 
 	protected @Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
@@ -448,49 +463,26 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		else {
 			targetProperty.initValue(slotObject, ecoreValue);
 		}
-		Integer cacheIndex = modelsManager.getTransformationAnalysis().getCacheIndex(setStatement);
+		Integer cacheIndex = entryPointsAnalysis.getCacheIndex(setStatement);
 		if (cacheIndex != null) {
 			modelsManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
 		}
 	}
 
 	@Override
-	public @Nullable Object internalExecuteTransformation(@NonNull ImperativeTransformation transformation, @NonNull EvaluationVisitor undecoratedVisitor) {
-		Mapping rule = QVTimperativeUtil.getRootMapping(transformation);
+	public @Nullable Object internalExecuteTransformation(@NonNull EntryPoint entryPoint, @NonNull EvaluationVisitor undecoratedVisitor) {
 		CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
-		pushEvaluationEnvironment(rule, (TypedElement)callExp);
+		pushEvaluationEnvironment(entryPoint, (TypedElement)callExp);
 		try {
-			List<@NonNull EntryPoint> asEntryPoints = new ArrayList<>();
-			for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(transformation)) {
-				if (asMapping instanceof EntryPoint) {
-					asEntryPoints.add((EntryPoint) asMapping);
-				}
-
-			}
-			EntryPoint asEntryPoint = (asEntryPoints.size() > 0) ? asEntryPoints.get(0) : null;
 			Interval rootInterval = getInvocationManager().getRootInterval();
-			mapping2interval.put(rule, rootInterval);
+			mapping2interval.put(entryPoint, rootInterval);
 			TypedModelInstance modelInstance = null;
-			TypedModel typedModel = null;
-			if (asEntryPoint != null) {
-				for (@NonNull TypedModel typedModel2 : QVTimperativeUtil.getCheckedTypedModels(asEntryPoint)) {
-					typedModel = typedModel2;
-					break;
-				}
-			}
-			else {			// FIXME Obsolete non-EntryPoint support
-				for (@NonNull ImperativeTypedModel typedModel2 : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
-					if (typedModel2.isIsChecked()) {
-						typedModel = typedModel2;
-						break;
-					}
-				}
-			}
-			if (typedModel != null) {
+			for (@NonNull TypedModel typedModel : QVTimperativeUtil.getCheckedTypedModels(entryPoint)) {
 				modelInstance = getModelsManager().getTypedModelInstance(typedModel);
+				break;
 			}
 			assert modelInstance != null;
-			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(rule)) {
+			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(entryPoint)) {
 				if (mappingParameter instanceof AppendParameter) {
 					org.eclipse.ocl.pivot.Class type = QVTimperativeUtil.getClassType(mappingParameter);
 					Connection theConnection = null;
@@ -504,7 +496,8 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 					getEvaluationEnvironment().add(mappingParameter, theConnection);
 				}
 			}
-			rule.accept(undecoratedVisitor);			// Use an outer InvocationConstructor?
+			//	rule.accept(undecoratedVisitor);			// Use an outer InvocationConstructor?
+			internalExecuteMapping(entryPoint, undecoratedVisitor);
 			getInvocationManager().flush();
 		}
 		finally {

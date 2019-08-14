@@ -35,7 +35,7 @@ public class QVTiVMExecutor extends QVTiIncrementalExecutor implements VMExecuto
 	private long envId = 0;
 
 	public QVTiVMExecutor(@NonNull IVMContext vmContext, @NonNull URI transformationURI) throws IOException {
-		super((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), QVTimperativeUtil.loadTransformation((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()), ModeFactory.LAZY);
+		super((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), QVTimperativeUtil.getDefaultEntryPoint(QVTimperativeUtil.loadTransformation((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug())), ModeFactory.LAZY);
 		this.vmContext = vmContext;
 	}
 
@@ -54,6 +54,11 @@ public class QVTiVMExecutor extends QVTiIncrementalExecutor implements VMExecuto
 	@Override
 	protected @NonNull QVTiVMEvaluationEnvironment createRootEvaluationEnvironment(@NonNull NamedElement executableObject) {
 		return new QVTiVMRootEvaluationEnvironment(this, (Transformation)executableObject, ++envId);
+	}
+
+	@Override
+	public Boolean execute() {
+		return execute(null);
 	}
 
 	@Override

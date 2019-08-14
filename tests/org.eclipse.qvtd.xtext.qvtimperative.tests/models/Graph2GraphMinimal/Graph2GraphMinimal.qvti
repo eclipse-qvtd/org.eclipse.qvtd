@@ -2,8 +2,8 @@ import SimpleGraph : 'SimpleGraph.ecore'::simplegraph;
 import SimpleGraph2Graph : 'SimpleGraph2Graph.ecore'::simplegraph2graph;
 
 transformation CopyGraphMinimal {
-	check upperGraph imports SimpleGraph;
-	enforce lowerGraph imports SimpleGraph;
+	upperGraph imports SimpleGraph;
+	lowerGraph imports SimpleGraph;
 	middle imports SimpleGraph2Graph;
 }
 
@@ -24,7 +24,7 @@ map graph2graphMR in CopyGraphMinimal {
     set g2.name := g2gout.name;
 }
 
-map __root__ in CopyGraphMinimal {
+entry __root__ check upperGraph enforce lowerGraph in CopyGraphMinimal {
     for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
         call graph2graphLM {
             g1 iterates g1;

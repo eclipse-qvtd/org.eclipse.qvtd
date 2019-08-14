@@ -3,8 +3,8 @@ import classescs : '../ClassesCS.ecore#/';
 
 transformation classescs2as
 {
-	check leftCS imports classescs;
-	enforce rightAS imports classes;
+	leftCS imports classescs;
+	rightAS imports classes;
 }
 
 map mCreationRootCS2Root in classescs2as
@@ -36,7 +36,8 @@ map uRoot_ownedPackages in classescs2as
 	set z1.ownedPackages :=
 		rootCS.ownedPackages.ast.oclAsType(classes::Package)->asOrderedSet();
 }
-map __root__ in classescs2as
+
+entry __root__ check leftCS enforce rightAS in classescs2as
 {
 	for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
 		call mCreationRootCS2Root {

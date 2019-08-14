@@ -3,12 +3,12 @@ import 'TallTree.ecore'::talltree;
 import 'Tree2TallTree.ecore'::tree2talltree;
 
 transformation Tree2TallTree {
-	check tree imports tree;
-	enforce talltree imports talltree;
+	tree imports tree;
+	talltree imports talltree;
 	tree2talltree imports tree2talltree;
 }
 
-map __root__ in Tree2TallTree {
+entry __root__ check tree enforce talltree in Tree2TallTree {
     append nodes : tree::Node;
     buffer node2tallNodes : tree2talltree::Node2TallNode;
     install Node2MiddleNode {

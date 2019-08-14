@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -37,6 +38,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.ModelsManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
@@ -63,8 +65,8 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			super(environmentFactory);
 		}
 
-		public @NonNull BasicQVTiExecutor createEvaluator(@NonNull ImperativeTransformation transformation) {
-			return new QVTiIncrementalExecutor(getEnvironmentFactory(), transformation, ModeFactory.LAZY);
+		public @NonNull BasicQVTiExecutor createEvaluator(@NonNull EntryPoint entryPoint) {
+			return new QVTiIncrementalExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY);
 		}
 
 		public @NonNull TransformationExecutor createEvaluator(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
@@ -110,13 +112,14 @@ public class ExecutionBenchmarks extends LoadTestCase {
 
 			ImperativeTransformation qvtiTransf = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
 			assert qvtiTransf != null;
-			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model1", results);
-			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model2", results);
-			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model3", results);
-			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model4", results);
-			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model5", results);
-			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model6", results);
-			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model7", results);
+			EntryPoint entryPoint = QVTimperativeUtil.getDefaultEntryPoint(qvtiTransf);
+			trackExample_Interpreted(myQVT, entryPoint, baseURI, "model1", results);
+			trackExample_Interpreted(myQVT, entryPoint, baseURI, "model2", results);
+			trackExample_Interpreted(myQVT, entryPoint, baseURI, "model3", results);
+			trackExample_Interpreted(myQVT, entryPoint, baseURI, "model4", results);
+			trackExample_Interpreted(myQVT, entryPoint, baseURI, "model5", results);
+			trackExample_Interpreted(myQVT, entryPoint, baseURI, "model6", results);
+			trackExample_Interpreted(myQVT, entryPoint, baseURI, "model7", results);
 			myQVT.dispose();
 
 		}
@@ -192,10 +195,10 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		System.out.println("Iteration on " +modelName+": " + (finalStamp - initStamp) + " ms");
 	}
 
-	private void trackExample_Interpreted(MyQVT qvt, @NonNull ImperativeTransformation tx, URI baseURI, String modelName,
+	private void trackExample_Interpreted(MyQVT qvt, @NonNull EntryPoint entryPoint, URI baseURI, String modelName,
 			Map<String, List<Integer>> results)  throws Exception  {
 		long initStamp = System.currentTimeMillis();
-		executeModelsTX_Interpreted(qvt, tx, baseURI, modelName);
+		executeModelsTX_Interpreted(qvt, entryPoint, baseURI, modelName);
 		long finalStamp = System.currentTimeMillis();
 		trackResults(results, modelName, initStamp, finalStamp);
 		System.out.println("Iteration on " +modelName+": " + (finalStamp - initStamp) + " ms");
@@ -268,12 +271,12 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	// Execute the transformation with the CGed transformation
 	//
 
-	protected void executeModelsTX_Interpreted(MyQVT qvt, @NonNull ImperativeTransformation tx, URI baseURI, String modelName) throws Exception {
+	protected void executeModelsTX_Interpreted(MyQVT qvt, @NonNull EntryPoint entryPoint, URI baseURI, String modelName) throws Exception {
 		URI samplesBaseUri = baseURI.appendSegment("samples");
 		URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
 		URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_Interpreted.xmi", modelName));
 
-		BasicQVTiExecutor testEvaluator = qvt.createEvaluator(tx);
+		BasicQVTiExecutor testEvaluator = qvt.createEvaluator(entryPoint);
 		testEvaluator.saveTransformation(null, null);
 		ModelsManager modelsManager = testEvaluator.getModelsManager();
 		TypedModelInstance inputTypedModelInstance = modelsManager.getTypedModelInstance("leftCS");
@@ -281,7 +284,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		ResourceSet rSet = qvt.getResourceSet();
 		Resource inputResource = ClassUtil.nonNullState(rSet.getResource(csModelURI, true));
 		inputTypedModelInstance.addInputResource(inputResource);
-		boolean success = testEvaluator.execute();
+		boolean success = testEvaluator.execute(null);
 		Resource outputResource = ClassUtil.nonNullState(rSet.createResource(asModelURI));
 		outputTypedModelInstance.addOutputResource(outputResource);
 		modelsManager.saveModels(DefaultCompilerOptions.defaultSavingOptions);

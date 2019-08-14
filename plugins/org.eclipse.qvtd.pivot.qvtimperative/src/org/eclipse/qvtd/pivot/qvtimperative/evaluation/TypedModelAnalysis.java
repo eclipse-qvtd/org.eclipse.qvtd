@@ -28,9 +28,12 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
+/**
+ * TypedModelAnalysis captures the class and property relationships of the use packges of a TypedModel.
+ */
 public class TypedModelAnalysis
 {
-	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
+	protected final @NonNull EntryPointsAnalysis entryPointsAnalysis;
 	protected final @NonNull TypedModel typedModel;
 	protected final @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses;
 	protected final @NonNull Map<@NonNull CompleteClass, @Nullable List<@NonNull CompleteClass>> instancesCompleteClassAnalysis;
@@ -39,11 +42,11 @@ public class TypedModelAnalysis
 	protected final int extentClassIndex;
 	protected @Nullable List<@NonNull Integer> extentOppositePropertyIndexes = null;
 
-	public TypedModelAnalysis(@NonNull QVTiTransformationAnalysis transformationAnalysis, @NonNull TypedModel typedModel, @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses) {
-		this.transformationAnalysis = transformationAnalysis;
+	public TypedModelAnalysis(@NonNull EntryPointsAnalysis entryPointsAnalysis, @NonNull TypedModel typedModel, @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses) {
+		this.entryPointsAnalysis = entryPointsAnalysis;
 		this.typedModel = typedModel;
 		this.allInstancesCompleteClasses = allInstancesCompleteClasses;
-		this.instancesCompleteClassAnalysis = transformationAnalysis.getInstancesCompleteClassAnalysis(allInstancesCompleteClasses);
+		this.instancesCompleteClassAnalysis = entryPointsAnalysis.getInstancesCompleteClassAnalysis(allInstancesCompleteClasses);
 		//
 		// Populate a mapping from instancesClass to linear index.
 		//
@@ -62,7 +65,7 @@ public class TypedModelAnalysis
 		}
 		this.extentClassIndex = extentClassIndex;
 		//
-		Map<@NonNull Property, @NonNull Integer> opposites = transformationAnalysis.getCaches();
+		Map<@NonNull Property, @NonNull Integer> opposites = entryPointsAnalysis.getCaches();
 		for (@NonNull Property property : opposites.keySet()) {
 			org.eclipse.ocl.pivot.Class owningClass = PivotUtil.getOwningClass(property);
 			TypeId typeId = owningClass.getTypeId();
@@ -90,7 +93,7 @@ public class TypedModelAnalysis
 
 	public int @Nullable [] @NonNull [] getClassIndex2allClassIndexes() {
 		int iMax = sortedCompleteClasses.size();
-		int [] @NonNull [] classIndex2allClassIndexes = new int @Nullable [iMax] [];
+		int [] @NonNull [] classIndex2allClassIndexes = new int [iMax] @NonNull [];
 		for (int i = 0; i < iMax; i++) {
 			CompleteClass instancesClass = sortedCompleteClasses.get(i);
 			List<@NonNull CompleteClass> superInstancesClasses = ClassUtil.nonNullState(instancesCompleteClassAnalysis.get(instancesClass));

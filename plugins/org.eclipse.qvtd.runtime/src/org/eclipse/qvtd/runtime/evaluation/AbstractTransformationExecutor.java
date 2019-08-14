@@ -14,6 +14,7 @@ import java.lang.reflect.Constructor;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
@@ -61,9 +62,9 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	}
 
 	@Override
-	public final Boolean execute() throws Exception {
+	public final Boolean execute(@Nullable Integer targetTypedModelIndex) throws Exception {
 		transformer.analyzeInputResources();
-		if (transformer.run()) {
+		if (targetTypedModelIndex != null ? transformer.run(targetTypedModelIndex) : transformer.run()) {
 			return Boolean.TRUE;
 		}
 		if (!suppressFailureDiagnosis) {						// FIXME BUG 511028
@@ -106,6 +107,11 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	@Override
 	public @NonNull Transformer getTransformer() {
 		return transformer;
+	}
+
+	@Override
+	public int getTypedModelIndex(@NonNull String targetModelName) {
+		return transformer.getTypedModelIndex(targetModelName);
 	}
 
 	@Override

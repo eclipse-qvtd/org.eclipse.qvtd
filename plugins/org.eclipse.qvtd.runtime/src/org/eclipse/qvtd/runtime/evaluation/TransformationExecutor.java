@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 /**
@@ -22,9 +23,10 @@ public interface TransformationExecutor extends Executor
 {
 	@Override
 	void dispose();
-	Boolean execute() throws Exception;
+	Boolean execute(@Nullable Integer targetTypedModelIndex) throws Exception;
 	@NonNull ModelsManager getModelsManager();
 	@NonNull Transformer getTransformer();
+	int getTypedModelIndex(@NonNull String targetModelName);
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
 	void setSuppressFailureDiagnosis(boolean suppressFailureDiagnosis);
 }

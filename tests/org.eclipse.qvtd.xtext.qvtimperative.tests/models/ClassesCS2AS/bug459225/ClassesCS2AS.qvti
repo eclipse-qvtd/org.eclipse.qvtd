@@ -4,8 +4,8 @@ import 'helpers.ocl';
 
 transformation classescs2as_Bug459225
 {
-	check leftCS imports classescs;
-	enforce rightAS imports classes;
+	leftCS imports classescs;
+	rightAS imports classes;
 }
 
 map createPackage in classescs2as_Bug459225
@@ -18,7 +18,7 @@ map createPackage in classescs2as_Bug459225
 						endif;
 }
 
-map __root__ in classescs2as_Bug459225
+entry __root__ check leftCS enforce rightAS in classescs2as_Bug459225
 {
 	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 		call createPackage {

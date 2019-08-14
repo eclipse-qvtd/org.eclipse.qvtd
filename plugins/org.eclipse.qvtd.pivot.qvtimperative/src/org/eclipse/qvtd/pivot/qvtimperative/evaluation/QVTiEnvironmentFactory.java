@@ -42,22 +42,22 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 		getStandardLibrary().setDefaultStandardLibraryURI(QVTimperativeLibrary.STDLIB_URI);
 	}
 
+	public @NonNull EntryPointsAnalysis createEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
+		return new EntryPointsAnalysis(this, transformation);
+	}
+
 	//	@Override
 	//	public @NonNull BasicOCLExecutor createExecutor( @NonNull ModelManager modelManager) {
 	//		return new BasicOCLExecutor(this, modelManager);		// Inherited functionality used for validation
 	//	}
 
-	public @NonNull QVTiModelsManager createModelsManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		return new QVTiModelsManager(transformationAnalysis);
+	public @NonNull QVTiModelsManager createModelsManager(@NonNull EntryPointAnalysis entryPointAnalysis) {
+		return new QVTiModelsManager(entryPointAnalysis);
 	}
 
 	@Override
 	public @NonNull FlowAnalysis createFlowAnalysis(@NonNull OCLExpression contextExpression) {
 		return new QVTimperativeFlowAnalysis(this, contextExpression);
-	}
-
-	public @NonNull QVTiTransformationAnalysis createTransformationAnalysis(@NonNull ImperativeTransformation transformation) {
-		return new QVTiTransformationAnalysis(this, transformation);
 	}
 
 	public boolean keepDebug() {

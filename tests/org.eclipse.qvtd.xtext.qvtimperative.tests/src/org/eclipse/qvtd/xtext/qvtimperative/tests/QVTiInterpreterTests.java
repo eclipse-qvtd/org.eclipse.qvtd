@@ -38,6 +38,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTiCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -70,8 +71,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) throws Exception {
-			return new QVTiIncrementalExecutor(environmentFactory, asTransformation, modeFactory);
+		protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint) throws Exception {
+			return new QVTiIncrementalExecutor(environmentFactory, entryPoint, modeFactory);
 		}
 
 		@Override
@@ -190,8 +191,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("Graph2GraphMinimal.xmi");
 		URI traceURI = getTestURI("Graph2Graph.xmi");
 		MyQVT myQVT = createQVT("Graph2GraphMinimal", txURI, ModeFactory.LAZY);
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iEntryPoint);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
@@ -221,8 +223,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("Graph2GraphHierarchical.xmi");
 		URI traceURI = getTestURI("Graph2Graph.xmi");
 		MyQVT myQVT = createQVT("Graph2GraphHierarchical", txURI, ModeFactory.LAZY);
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iEntryPoint);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
@@ -255,8 +258,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("HSLNode.xmi");
 		URI traceURI = getTestURI("HSV2HSLNode.xmi");
 		MyQVT myQVT = createQVT("HSV2HSL", txURI, ModeFactory.LAZY);
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iEntryPoint);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
@@ -281,8 +285,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("TallTree.xmi");
 		URI traceURI = getTestURI("Tree2TallTree.xmi");
 		MyQVT myQVT = createQVT("Tree2TallTree", txURI, ModeFactory.INCREMENTAL);
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iEntryPoint);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
@@ -309,8 +314,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("TallTree.xmi");
 		URI traceURI = getTestURI("Tree2TallTree.xmi");
 		MyQVT myQVT = createQVT("Tree2TallTree", txURI, ModeFactory.LAZY);
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iEntryPoint);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
@@ -343,8 +349,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		@SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
 
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iEntryPoint);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
@@ -378,8 +385,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		@SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, environmentFactory);
 
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iEntryPoint);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
@@ -401,8 +409,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI inputURI = getModelsURI("ClassesCS2AS/bug456900/example_input.xmi");
 		URI outputURI = getTestURI("example_output.xmi");
 		MyQVT myQVT = createQVT("ClassesCS2AS", txURI, ModeFactory.LAZY);
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iEntryPoint);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
@@ -424,8 +433,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");
 		URI outputURI = getTestURI("example_output.xmi");
 		MyQVT myQVT = createQVT("ClassesCS2AS", txURI, ModeFactory.LAZY);
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iEntryPoint);
 		testEvaluator.saveTransformation(txASURI, null);
 		assertLoadable(txASURI);
 		//
@@ -446,8 +456,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");
 		URI outputURI = getTestURI("example_output.xmi");
 		MyQVT myQVT = createQVT("ClassesCS2AS", txURI, ModeFactory.LAZY);
-		ImperativeTransformation asTransformation = myQVT.loadTransformation();
-		myQVT.createInterpretedExecutor(asTransformation);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation();
+		EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+		myQVT.createInterpretedExecutor(iEntryPoint);
 		//
 		myQVT.addInputURI("leftCS", inputURI);
 		assertTrue(myQVT.executeTransformation());

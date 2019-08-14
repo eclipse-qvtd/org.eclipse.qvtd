@@ -138,7 +138,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -1029,7 +1029,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
-		/*QVTiTransformationAnalysis transformationAnalysis =*/ analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
+		/*QVTiTransformationAnalysis entryPointsAnalysis =*/ analyzer.getCodeGenerator().getEntryPointsAnalysis(asTransformation);
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 		setAst(cgTransformation, asTransformation);
 		pushCurrentClass(cgTransformation);
@@ -1203,8 +1203,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitSetStatement(@NonNull SetStatement asSetStatement) {
 		ImperativeTransformation asTransformation = QVTimperativeUtil.getContainingTransformation(asSetStatement);
-		QVTiTransformationAnalysis transformationAnalysis = analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
-		Integer cacheIndex = transformationAnalysis.getCacheIndex(asSetStatement);
+		EntryPointsAnalysis entryPointsAnalysis = analyzer.getCodeGenerator().getEntryPointsAnalysis(asTransformation);
+		Integer cacheIndex = entryPointsAnalysis.getCacheIndex(asSetStatement);
 		if (cacheIndex != null) {
 			//			Property asProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
 			CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();

@@ -3,12 +3,12 @@ import RDBMS: 'ManualRDBMS.ecore'::rdbms;
 import UML2RDBMS: 'ManualUML2RDBMS.ecore'::uml2rdbms;
 
 transformation ManualUML2RDBMS {
-    check uml imports UML;
-    enforce rdbms imports RDBMS;
+    uml imports UML;
+    rdbms imports RDBMS;
     middle imports UML2RDBMS;
 }
 
-map __root__ in ManualUML2RDBMS {
+entry __root__ check uml enforce rdbms in ManualUML2RDBMS {
     for p1 : UML::Package in UML::Package.allInstances() {
         call packageToSchemaLM {
             p iterates p1;

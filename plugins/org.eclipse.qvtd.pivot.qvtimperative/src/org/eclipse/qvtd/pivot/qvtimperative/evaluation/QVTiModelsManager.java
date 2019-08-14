@@ -54,7 +54,8 @@ public class QVTiModelsManager extends AbstractModelsManager
 	@SuppressWarnings("null")
 	public static final @NonNull ClassId EXTENT_CLASSID = IdManager.getClassId(QVTruntimeLibraryPackage.Literals.EXTENT);
 
-	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
+	protected final @NonNull EntryPointAnalysis entryPointAnalysis;
+	protected final @NonNull EntryPointsAnalysis entryPointsAnalysis;
 	protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
 
 	/**
@@ -82,11 +83,12 @@ public class QVTiModelsManager extends AbstractModelsManager
 	 * Instantiates a new QVTi Domain Manager. Responsible for creating new
 	 * instances of the middle model and the middle model EFactory.
 	 */
-	public QVTiModelsManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		this.transformationAnalysis = transformationAnalysis;
-		this.environmentFactory = (EnvironmentFactoryInternalExtension) transformationAnalysis.getEnvironmentFactory();
-		//	this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
-		int cacheIndexes = transformationAnalysis.getCacheIndexes();
+	public QVTiModelsManager(@NonNull EntryPointAnalysis entryPointAnalysis) {
+		this.entryPointAnalysis = entryPointAnalysis;
+		this.entryPointsAnalysis = entryPointAnalysis.getEntryPointsAnalysis();
+		this.environmentFactory = (EnvironmentFactoryInternalExtension) entryPointsAnalysis.getEnvironmentFactory();
+		//	this.allInstancesClasses = entryPointsAnalysis.getAllInstancesClasses();
+		int cacheIndexes = entryPointsAnalysis.getCacheIndexes();
 		this.unnavigableOpposites = new @NonNull Map<?, ?>[cacheIndexes];
 		for (int i = 0; i < cacheIndexes; i++) {
 			this.unnavigableOpposites[i] = new HashMap<>();
@@ -110,11 +112,9 @@ public class QVTiModelsManager extends AbstractModelsManager
 	 */
 	public @NonNull Set<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 		Set<@NonNull Object> elements = new HashSet<>();
-		for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformationAnalysis.getTransformation())) {
-			if (typedModel.isIsChecked()) {
-				TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
-				Iterables.addAll(elements, typedModelInstance.getObjectsOfKind(type));
-			}
+		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getCheckedTypedModels(entryPointAnalysis.getEntryPoint())) {
+			TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
+			Iterables.addAll(elements, typedModelInstance.getObjectsOfKind(type));
 		}
 		return elements;
 	}
@@ -145,8 +145,8 @@ public class QVTiModelsManager extends AbstractModelsManager
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
-		return transformationAnalysis;
+	public @NonNull EntryPointsAnalysis getTransformationAnalysis() {
+		return entryPointsAnalysis;
 	}
 
 	/*	public List<EObject> getTypeModelEObjectList(@NonNull ImperativeTypedModel model) {

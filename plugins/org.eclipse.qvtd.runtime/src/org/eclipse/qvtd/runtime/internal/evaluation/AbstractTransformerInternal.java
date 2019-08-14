@@ -270,6 +270,11 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	} */
 
 	@Override
+	public int getTypedModelIndex(@NonNull String targetModelName) {
+		return modelsManager.getTypedModelIndex(targetModelName);
+	}
+
+	@Override
 	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName) {
 		return modelsManager.getTypedModelInstance(modelName);
 	}
@@ -377,8 +382,12 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	} */
 
 	@Override
-	public boolean run()throws Exception {
-		// TODO Auto-generated method stub
+	public boolean run() throws Exception {
+		return false;
+	}
+
+	@Override
+	public boolean run(int targetTypedModelIndex) throws Exception {
 		return false;
 	}
 

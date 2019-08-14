@@ -98,6 +98,17 @@ public class RuntimeModelsManager extends AbstractModelsManager
 		throw new IllegalStateException("Unknown model name '" + modelName + "'");
 	}
 
+	public int getTypedModelIndex(@NonNull String targetModelName) {
+		int index = 0;
+		for (@NonNull Model model : models) {
+			if (targetModelName.equals(model.getName())) {
+				return index;
+			}
+			index++;
+		}
+		throw new IllegalStateException("Unknown model name '" + targetModelName + "'");
+	}
+
 	@Override
 	public @NonNull Iterable<@NonNull TypedModelInstance> getTypedModelInstances() {
 		return new ArrayIterable<@NonNull TypedModelInstance>(models);

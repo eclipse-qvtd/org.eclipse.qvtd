@@ -25,7 +25,7 @@ import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.evaluator.BasicQVTrExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -106,8 +106,8 @@ public class QVTrLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 	}
 
 	@Override
-	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTiEnvironmentFactory envFactory, @NonNull ImperativeTransformation transformation) {
-		return new BasicQVTrExecutor(envFactory, transformation);
+	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTiEnvironmentFactory envFactory, @NonNull EntryPoint entryPoint) {
+		return new BasicQVTrExecutor(envFactory, entryPoint);
 	}
 
 	@Override

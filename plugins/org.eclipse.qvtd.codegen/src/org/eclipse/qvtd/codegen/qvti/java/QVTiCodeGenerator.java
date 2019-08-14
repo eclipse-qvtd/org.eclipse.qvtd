@@ -54,7 +54,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 
 /**
  * QVTiCodeGenerator supports generation of the content of a JavaClassFile to
@@ -67,7 +67,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
 	protected final @NonNull QVTiGlobalContext globalContext = new QVTiGlobalContext(this);
-	protected final @NonNull Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
+	protected final @NonNull Map<@NonNull Transformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory);
@@ -259,15 +259,15 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		}
 	}
 
-	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis(@NonNull ImperativeTransformation transformation) {
+	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
 		//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
-		QVTiTransformationAnalysis transformationAnalysis = transformation2analysis.get(transformation);
-		if (transformationAnalysis == null) {
-			transformationAnalysis = new QVTiTransformationAnalysis(getEnvironmentFactory(), transformation);
-			transformationAnalysis.analyzeTransformation();
-			transformation2analysis.put(transformation, transformationAnalysis);
+		EntryPointsAnalysis entryPointsAnalysis = transformation2analysis.get(transformation);
+		if (entryPointsAnalysis == null) {
+			entryPointsAnalysis = new EntryPointsAnalysis(getEnvironmentFactory(), transformation);
+			entryPointsAnalysis.analyzeTransformation();
+			transformation2analysis.put(transformation, entryPointsAnalysis);
 		}
-		return transformationAnalysis;
+		return entryPointsAnalysis;
 	}
 
 	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {

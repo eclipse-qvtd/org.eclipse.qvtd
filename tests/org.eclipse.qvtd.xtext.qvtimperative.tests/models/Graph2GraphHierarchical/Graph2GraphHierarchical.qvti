@@ -2,12 +2,12 @@ import SimpleGraph : '../Graph2GraphMinimal/SimpleGraph.ecore'::simplegraph;
 import SimpleGraph2Graph : '../Graph2GraphMinimal/SimpleGraph2Graph.ecore'::simplegraph2graph;
 
 transformation CopyGraph {
-	check upperGraph imports SimpleGraph;
-	enforce lowerGraph imports SimpleGraph;
+	upperGraph imports SimpleGraph;
+	lowerGraph imports SimpleGraph;
 	middle imports SimpleGraph2Graph;
 }
 
-map __root__ in CopyGraph {
+entry __root__ check upperGraph enforce lowerGraph in CopyGraph {
     
     for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
         call Graph2Middle {
