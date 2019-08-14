@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
@@ -45,17 +44,15 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartition
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+//import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -99,17 +96,16 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull QVTimperativeHelper helper;
+	protected final @NonNull QVTs2QVTi qvts2qvti;
 	protected final @NonNull EnvironmentFactory environmentFactory;
-	protected final @NonNull ProblemHandler problemHandler;
-	protected final @NonNull Transformation qvtmTransformation;
+	protected final @NonNull Transformation asTransformation;
 	protected final @NonNull SymbolNameReservation symbolNameReservation;
 
-	protected final @NonNull Transformation qvtiTransformation;
-	protected final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeTypedModel> qvtmTypedModel2qvtiTypedModel = new HashMap<>();
-	protected final @NonNull List<@NonNull ImperativeTypedModel> checkableTypedModels = new ArrayList<>();
-	protected final @NonNull List<@NonNull ImperativeTypedModel> checkableAndEnforceableTypedModels = new ArrayList<>();
-	protected final @NonNull List<@NonNull ImperativeTypedModel> enforceableTypedModels = new ArrayList<>();
+	protected final @NonNull Transformation iTransformation;
+	protected final @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> asTypedModel2iTypedModel;
+	protected final @NonNull List<@NonNull TypedModel> checkableTypedModels = new ArrayList<>();
+	protected final @NonNull List<@NonNull TypedModel> checkableAndEnforceableTypedModels = new ArrayList<>();
+	protected final @NonNull List<@NonNull TypedModel> enforceableTypedModels = new ArrayList<>();
 	protected final @NonNull Map<@NonNull Partition, @NonNull AbstractPartition2Mapping> partition2partition2mapping = new HashMap<>();
 	private @Nullable Set<@NonNull String> reservedNames = null;
 	private @NonNull Map<@NonNull Operation, @NonNull Operation> qvtmOperation2qvtiOperation = new HashMap<>();
@@ -117,21 +113,23 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	private final @NonNull Set<@NonNull Transformation> otherTransformations = new HashSet<>();	// Workaround Bug 481658
 	private final @NonNull Map<@NonNull String, @NonNull Operation> name2operation = new HashMap<>();	// Workaround Bug 481658
 
-	private /*@LazyNonNull*/ ImperativeTypedModel qvtiMiddleTypedModel = null;
+	private /*@LazyNonNull*/ TypedModel iMiddleTypedModel = null;
 	private @NonNull Map<@NonNull ClassDatum, @NonNull Function> classDatum2keyFunction = new HashMap<>();
 
-	public QVTs2QVTiVisitor(@NonNull ScheduleManager scheduleManager, @NonNull ProblemHandler problemHandler, @NonNull QVTimperativeHelper helper, @NonNull Transformation qvtmTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
+	public QVTs2QVTiVisitor(@NonNull QVTs2QVTi qvts2qvti, @NonNull SymbolNameReservation symbolNameReservation, @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> asTypedModel2iTypedModel) {
 		super(null);
-		this.scheduleManager = scheduleManager;
-		this.helper = helper;
-		this.environmentFactory = helper.getEnvironmentFactory();
-		this.problemHandler = problemHandler;
-		this.qvtmTransformation = qvtmTransformation;
+		this.scheduleManager = qvts2qvti.getScheduleManager();
+		this.qvts2qvti = qvts2qvti;
+		this.environmentFactory = qvts2qvti.getEnvironmentFactory();
+		this.asTransformation = QVTbaseUtil.getContainingTransformation(asTypedModel2iTypedModel.keySet().iterator().next());
 		this.symbolNameReservation = symbolNameReservation;
-		String transformationName = qvtmTransformation.getName();
-		assert transformationName != null;
-		qvtiTransformation = helper.createTransformation(transformationName);
-		createTypedModels();
+		this.iTransformation = QVTimperativeUtil.getContainingTransformation(asTypedModel2iTypedModel.values().iterator().next());
+		this.asTypedModel2iTypedModel = asTypedModel2iTypedModel;
+		for (@NonNull TypedModel iTypedModel : asTypedModel2iTypedModel.values()) {
+			if (iTypedModel.isIsTrace()) {
+				iMiddleTypedModel = iTypedModel;
+			}
+		}
 		//		analyzeConnections();
 	}
 
@@ -181,10 +179,6 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 	} */
 
-	public void addProblem(@NonNull CompilerProblem problem) {
-		problemHandler.addProblem(problem);
-	}
-
 	public @Nullable Operation create(@Nullable Operation pOperation) {
 		if (pOperation == null) {
 			return null;
@@ -192,11 +186,11 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		Operation iOperation = qvtmOperation2qvtiOperation.get(pOperation);
 		if (iOperation == null) {
 			Transformation containingTransformation = QVTbaseUtil.basicGetContainingTransformation(pOperation);
-			if (containingTransformation == qvtmTransformation) {
+			if (containingTransformation == asTransformation) {
 				iOperation = EcoreUtil.copy(pOperation);
 				assert iOperation != null;
 				qvtmOperation2qvtiOperation.put(pOperation, iOperation);
-				qvtiTransformation.getOwnedOperations().add(iOperation);
+				iTransformation.getOwnedOperations().add(iOperation);
 			}
 			else {					// FIXME Foreign queries ...
 				// FIXME working around Bug 481658
@@ -208,7 +202,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 					iOperation = EcoreUtil.copy(pOperation);
 					assert iOperation != null;
 					qvtmOperation2qvtiOperation.put(pOperation, iOperation);
-					qvtiTransformation.getOwnedOperations().add(iOperation);
+					iTransformation.getOwnedOperations().add(iOperation);
 				}
 				else {
 					iOperation = pOperation;
@@ -234,9 +228,9 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			//
 			for (@NonNull PropertyDatum propertyDatum : propertyDatums) {
 				Property keyProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
-				FunctionParameter cParameter = helper.createFunctionParameter(keyProperty);
+				FunctionParameter cParameter = qvts2qvti.createFunctionParameter(keyProperty);
 				asParameters.add(cParameter);
-				ShadowPart asShadowPart = helper.createShadowPart(keyProperty, helper.createVariableExp(cParameter));
+				ShadowPart asShadowPart = qvts2qvti.createShadowPart(keyProperty, qvts2qvti.createVariableExp(cParameter));
 				asShadowParts.add(asShadowPart);
 			}
 			Collections.sort(asParameters, NameUtil.NAMEABLE_COMPARATOR);
@@ -258,10 +252,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 					}
 				}
 			} */
-			Function asFunction = helper.createFunction(functionName, primaryClass, true, asParameters);
-			OCLExpression asShadowExp = helper.createShadowExp(primaryClass, asShadowParts);
+			Function asFunction = qvts2qvti.createFunction(functionName, primaryClass, true, asParameters);
+			OCLExpression asShadowExp = qvts2qvti.createShadowExp(primaryClass, asShadowParts);
 			asFunction.setQueryExpression(asShadowExp);
-			qvtiTransformation.getOwnedOperations().add(asFunction);
+			iTransformation.getOwnedOperations().add(asFunction);
 			classDatum2keyFunction.put(classDatum, asFunction);
 		}
 	}
@@ -274,13 +268,13 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		if (partition instanceof LoadingPartition) {
 			String mappingName = partition.getSymbolName();
 			assert mappingName != null;
-			EntryPoint entryPoint = helper.createEntryPoint(mappingName);
-			for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(qvtmTransformation)) {
+			EntryPoint entryPoint = qvts2qvti.createEntryPoint(mappingName);
+			for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(asTransformation)) {
 				if (scheduleManager.isInput(typedModel) && !typedModel.isIsPrimitive()) {
-					entryPoint.getCheckedTypedModels().add(qvtmTypedModel2qvtiTypedModel.get(typedModel));
+					entryPoint.getCheckedTypedModels().add(asTypedModel2iTypedModel.get(typedModel));
 				}
 				if (scheduleManager.isOutput(typedModel)) {
-					entryPoint.getEnforcedTypedModels().add(qvtmTypedModel2qvtiTypedModel.get(typedModel));
+					entryPoint.getEnforcedTypedModels().add(asTypedModel2iTypedModel.get(typedModel));
 				}
 			}
 			partition2mapping = new LoadingPartition2Mapping(this, entryPoint, (LoadingPartition)partition);
@@ -288,70 +282,18 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		else {
 			String mappingName = partition.getSymbolName();
 			assert mappingName != null;
-			Mapping mapping = helper.createMapping(mappingName);
+			Mapping mapping = qvts2qvti.createMapping(mappingName);
 			partition2mapping = new BasicPartition2Mapping(this, mapping, (MappingPartitionAnalysis<?>) partitionAnalysis);
 		}
 		partition2mapping.synthesizeLocalStatements();
 		partition2partition2mapping.put(partition, partition2mapping);
-		qvtiTransformation.getRule().add(partition2mapping.getMapping());
+		iTransformation.getRule().add(partition2mapping.getMapping());
 		visitPartition(partition);
 		//		for (@SuppressWarnings("null")@NonNull Region childRegion : region.getCalledRegions()) {
 		//			if (region2region2mapping.get(childRegion) == null) {
 		//				createRegion2Mapping(childRegion);
 		//			}
 		//		}
-	}
-
-	protected void createTypedModels() {
-		for (TypedModel qvtmTypedModel : qvtmTransformation.getModelParameter()) {
-			String typedModelName = qvtmTypedModel.getName();
-			assert typedModelName != null;
-			ImperativeTypedModel qvtiTypedModel = helper.createTypedModel(typedModelName);
-			qvtiTypedModel.getUsedPackage().addAll(qvtmTypedModel.getUsedPackage());
-			boolean isPrimitive = qvtmTypedModel.isIsPrimitive();
-			boolean isTrace = qvtmTypedModel.isIsTrace();
-			qvtiTypedModel.setIsPrimitive(isPrimitive);
-			qvtiTypedModel.setIsTrace(isTrace);
-			if (isTrace) {
-				assert qvtiMiddleTypedModel == null;
-				qvtiMiddleTypedModel = qvtiTypedModel;
-			}
-			qvtmTypedModel2qvtiTypedModel.put(qvtmTypedModel, qvtiTypedModel);
-			qvtiTransformation.getModelParameter().add(qvtiTypedModel);
-		}
-		for (@NonNull Rule rule : QVTbaseUtil.getRule(qvtmTransformation)) {
-			for (@NonNull Domain domain : QVTbaseUtil.getOwnedDomains(rule)) {
-				TypedModel typedModel = domain.getTypedModel();
-				if (typedModel != null) {
-					/*	if (scheduleManager.isInput(domain)) {
-						ImperativeTypedModel checkableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
-						if ((checkableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(checkableTypedModel)) {
-							checkableTypedModel.setIsChecked(true);
-							if (enforceableTypedModels.contains(checkableTypedModel)) {
-								checkableAndEnforceableTypedModels.add(checkableTypedModel);
-								enforceableTypedModels.remove(checkableTypedModel);
-							}
-							else if (!checkableTypedModels.contains(checkableTypedModel)) {
-								checkableTypedModels.add(checkableTypedModel);
-							}
-						}
-					}
-					if (scheduleManager.isOutput(domain)) {
-						ImperativeTypedModel enforceableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
-						if ((enforceableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(enforceableTypedModel)) {
-							enforceableTypedModel.setIsEnforced(true);
-							if (checkableTypedModels.contains(enforceableTypedModel)) {
-								checkableAndEnforceableTypedModels.add(enforceableTypedModel);
-								checkableTypedModels.remove(enforceableTypedModel);
-							}
-							else if (!enforceableTypedModels.contains(enforceableTypedModel)) {
-								enforceableTypedModels.add(enforceableTypedModel);
-							}
-						}
-					} */
-				}
-			}
-		}
 	}
 
 	protected @NonNull Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> gatherKeyCalls(List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> sortedPartitionAnalyses) {
@@ -430,12 +372,12 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
 	}
 
-	public @Nullable ImperativeTypedModel getQVTiTypedModel(@Nullable TypedModel qvtmTypedModel) {
-		if (qvtmTypedModel == null) {
-			assert qvtiMiddleTypedModel != null;
-			return qvtiMiddleTypedModel;
+	public @Nullable TypedModel getQVTiTypedModel(@Nullable TypedModel asTypedModel) {
+		if (asTypedModel == null) {
+			assert iMiddleTypedModel != null;
+			return iMiddleTypedModel;
 		}
-		return qvtmTypedModel2qvtiTypedModel.get(qvtmTypedModel);
+		return asTypedModel2iTypedModel.get(asTypedModel);
 	}
 
 	public @NonNull AbstractPartition2Mapping getPartition2Mapping(@NonNull Partition partition) {
@@ -446,7 +388,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	public @NonNull ProblemHandler getProblemHandler() {
-		return problemHandler;
+		return qvts2qvti.getProblemHandler();
 	}
 
 	public @NonNull Set<@NonNull String> getReservedNames() {
@@ -455,15 +397,15 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			reservedNames = reservedNames2 = new HashSet<>();
 			org.eclipse.ocl.pivot.Package standardLibraryPackage = getStandardLibrary().getPackage();
 			gatherReservedPackageNames(reservedNames2, Collections.singletonList(standardLibraryPackage));
-			reservedNames2.add(ClassUtil.nonNull(qvtmTransformation.getName()));
-			for (TypedModel typedModel : qvtmTransformation.getModelParameter()) {
+			reservedNames2.add(ClassUtil.nonNull(asTransformation.getName()));
+			for (TypedModel typedModel : asTransformation.getModelParameter()) {
 				reservedNames2.add(ClassUtil.nonNullState(typedModel.getName()));
 				gatherReservedPackageNames(reservedNames2, typedModel.getUsedPackage());
 			}
-			for (Operation operation : qvtmTransformation.getOwnedOperations()) {
+			for (Operation operation : asTransformation.getOwnedOperations()) {
 				reservedNames2.add(ClassUtil.nonNull(operation.getName()));
 			}
-			for (Property property : qvtmTransformation.getOwnedProperties()) {
+			for (Property property : asTransformation.getOwnedProperties()) {
 				reservedNames2.add(ClassUtil.nonNull(property.getName()));
 			}
 		}
@@ -479,7 +421,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	public @NonNull Transformation getTransformation() {
-		return qvtiTransformation;
+		return iTransformation;
 	}
 
 	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object object) {
@@ -652,7 +594,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		for (@NonNull Namespace importedNamespace : importedNamespaces) {
 			ownedImports.add(createImport(null, importedNamespace));
 		} */
-		return qvtiTransformation;
+		return null;
 	}
 
 	@Override

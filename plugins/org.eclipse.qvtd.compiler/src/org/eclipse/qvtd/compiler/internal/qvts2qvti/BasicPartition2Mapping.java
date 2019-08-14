@@ -87,7 +87,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
@@ -1542,7 +1541,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private @NonNull GuardParameter createGuardParameter(@NonNull Node guardNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(guardNode);
 		Type variableType = guardNode.getClassDatum().getPrimaryClass();
-		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatum.getReferredTypedModel()));
+		TypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatum.getReferredTypedModel()));
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
 		Property successProperty = null;
 
@@ -1845,7 +1844,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				}
 				ClassDatum classDatum = node.getClassDatum();
 				TypedModel pTypedModel = classDatum.getReferredTypedModel();
-				ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
+				TypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
 				NewStatement newStatement = helper.createNewStatement(getSafeName(node), iTypedModel, classDatum.getPrimaryClass());
 				newStatement.setOwnedExpression(constructor);
 				newStatement.setIsContained(node.isContained());

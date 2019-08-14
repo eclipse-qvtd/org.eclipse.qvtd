@@ -108,10 +108,10 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return entryPoint;
 	}
 
-	public @NonNull GuardParameter createGuardParameter(@NonNull String name, @NonNull ImperativeTypedModel typedModel, @NonNull Type type, boolean isRequired) {
+	public @NonNull GuardParameter createGuardParameter(@NonNull String name, @NonNull TypedModel typedModel, @NonNull Type type, boolean isRequired) {
 		GuardParameter asVariable = QVTimperativeFactory.eINSTANCE.createGuardParameter();
 		asVariable.setName(name);
-		asVariable.setReferredTypedModel(typedModel);
+		asVariable.setReferredTypedModel((ImperativeTypedModel) typedModel);
 		setType(asVariable, type, isRequired);
 		return asVariable;
 	}
@@ -163,10 +163,10 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return ml;
 	}
 
-	public @NonNull NewStatement createNewStatement(@NonNull String name, @NonNull ImperativeTypedModel typedModel, @NonNull Type type) {
+	public @NonNull NewStatement createNewStatement(@NonNull String name, @NonNull TypedModel typedModel, @NonNull Type type) {
 		NewStatement newStatement = QVTimperativeFactory.eINSTANCE.createNewStatement();
 		newStatement.setName(name);
-		newStatement.setReferredTypedModel(typedModel);
+		newStatement.setReferredTypedModel((ImperativeTypedModel) typedModel);
 		newStatement.setType(type);
 		newStatement.setIsRequired(true);
 		return newStatement;

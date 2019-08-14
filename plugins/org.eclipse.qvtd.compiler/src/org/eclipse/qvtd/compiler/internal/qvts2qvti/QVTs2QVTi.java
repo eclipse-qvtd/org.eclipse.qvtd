@@ -12,8 +12,10 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -22,22 +24,28 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
+import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
@@ -57,7 +65,74 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		assert scheduleManager.getEnvironmentFactory() == environmentFactory;
 	}
 
-	protected void resolveImports(@NonNull Model model) {
+	protected @NonNull Package getPackage(@NonNull ImperativeModel iModel, org.eclipse.ocl.pivot.@NonNull Package asPackage) {
+		List<org.eclipse.ocl.pivot.@NonNull Package> iPackages;
+		org.eclipse.ocl.pivot.Package asParentPackage = asPackage.getOwningPackage();
+		if (asParentPackage != null) {
+			org.eclipse.ocl.pivot.@NonNull Package iParentPackage = getPackage(iModel, asParentPackage);
+			iPackages = QVTimperativeUtil.Internal.getOwnedPackagesList(iParentPackage);
+		}
+		else {
+			iPackages = QVTimperativeUtil.Internal.getOwnedPackagesList(iModel);
+		}
+		String name = PivotUtil.getName(asPackage);
+		org.eclipse.ocl.pivot.Package iPackage = NameUtil.getNameable(iPackages, name);
+		if (iPackage == null) {
+			iPackage = createPackage(name, asPackage.getNsPrefix(), asPackage.getURI());
+			iPackages.add(iPackage);
+		}
+		return iPackage;
+	}
+
+	public @NonNull ProblemHandler getProblemHandler() {
+		return problemHandler;
+	}
+
+	public @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
+	}
+
+	protected @NonNull ImperativeTransformation getTransformation(@NonNull ImperativeModel iModel, @NonNull Transformation asTransformation) {
+		org.eclipse.ocl.pivot.Package asParentPackage = ClassUtil.nonNullState(asTransformation.getOwningPackage());
+		org.eclipse.ocl.pivot.@NonNull Package iParentPackage = getPackage(iModel, asParentPackage);
+		List<org.eclipse.ocl.pivot.@NonNull Class> iClasses = QVTimperativeUtil.Internal.getOwnedClassesList(iParentPackage);
+		String name = PivotUtil.getName(asTransformation);
+		org.eclipse.ocl.pivot.Class iTransformation = NameUtil.getNameable(iClasses, name);
+		if ((iTransformation == null) || !(iTransformation instanceof ImperativeTransformation)) {
+			iTransformation = createTransformation(name);
+			iClasses.add(iTransformation);
+			for (@NonNull TypedModel qvtmTypedModel : QVTbaseUtil.getModelParameters(asTransformation)) {
+				ImperativeTypedModel qvtiTypedModel = createTypedModel(PivotUtil.getName(qvtmTypedModel));
+				qvtiTypedModel.getUsedPackage().addAll(qvtmTypedModel.getUsedPackage());
+				qvtiTypedModel.setIsPrimitive(qvtmTypedModel.isIsPrimitive());
+				qvtiTypedModel.setIsTrace(qvtmTypedModel.isIsTrace());
+			}
+		}
+		return (ImperativeTransformation) iTransformation;
+	}
+
+	protected @NonNull TypedModel getTypedModel(@NonNull ImperativeTransformation iTransformation, @NonNull TypedModel asTypedModel) {
+		TypedModel iTypedModel = NameUtil.getNameable(QVTimperativeUtil.getModelParameters(iTransformation), PivotUtil.getName(asTypedModel));
+		if (iTypedModel == null) {
+			iTypedModel = createTypedModel(PivotUtil.getName(asTypedModel));
+			iTypedModel.getUsedPackage().addAll(asTypedModel.getUsedPackage());
+			iTypedModel.setIsPrimitive(asTypedModel.isIsPrimitive());
+			iTypedModel.setIsTrace(asTypedModel.isIsTrace());
+			iTransformation.getModelParameter().add(iTypedModel);
+		}
+		return iTypedModel;
+	}
+
+	protected @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> getTypedModels(@NonNull ImperativeTransformation iTransformation, @NonNull Transformation asTransformation) {
+		@NonNull Map<@NonNull TypedModel, @NonNull TypedModel> asTypedModel2qvtiTypedModel = new HashMap<>();
+		for (@NonNull TypedModel asTypedModel : QVTbaseUtil.getModelParameters(asTransformation)) {
+			TypedModel iTypedModel = getTypedModel(iTransformation, asTypedModel);
+			asTypedModel2qvtiTypedModel.put(asTypedModel, iTypedModel);
+		}
+		return asTypedModel2qvtiTypedModel;
+	}
+
+	public void resolveImports(@NonNull ImperativeModel model) {
 		Set<@NonNull Namespace> importedNamespaces = new HashSet<@NonNull Namespace>();
 		for (EObject eObject : new TreeIterable(model, false)) {
 			if (eObject instanceof ImperativeTypedModel) {
@@ -131,28 +206,13 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		}
 	}
 
-	protected void resolveTransformation(@NonNull Model model, @NonNull RootRegion rootRegion) {
+	public @NonNull Model transform(@NonNull ImperativeModel model, @NonNull RootRegion rootRegion) {
 		SymbolNameReservation symbolNameReservation = scheduleManager.getScheduleModel().getSymbolNameAdapter();
-		Transformation transformation = QVTscheduleUtil.getReferredTransformation(rootRegion);
-		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(scheduleManager, problemHandler, this, transformation, symbolNameReservation);
-		Transformation qvtiTransformation = (Transformation)rootRegion.accept(visitor);
-		NamedElement qvtiChild = qvtiTransformation;
-		for (org.eclipse.ocl.pivot.Package qvtmPackage = transformation.getOwningPackage(); qvtmPackage != null; qvtmPackage = qvtmPackage.getOwningPackage()) {
-			org.eclipse.ocl.pivot.@NonNull Package qvtiPackage = createPackage(ClassUtil.nonNull(qvtmPackage.getName()), qvtmPackage.getNsPrefix(), qvtmPackage.getURI());
-			if (qvtiChild instanceof Transformation) {
-				qvtiPackage.getOwnedClasses().add((Transformation)qvtiChild);
-			}
-			else {
-				qvtiPackage.getOwnedPackages().add((org.eclipse.ocl.pivot.Package)qvtiChild);
-			}
-			qvtiChild = qvtiPackage;
-		}
-		model.getOwnedPackages().add((org.eclipse.ocl.pivot.Package)qvtiChild);
-	}
-
-	public @NonNull Model transform(@NonNull Model model, @NonNull RootRegion rootRegion) {
-		resolveTransformation(model, rootRegion);
-		resolveImports(model);
+		Transformation asTransformation = QVTscheduleUtil.getReferredTransformation(rootRegion);
+		ImperativeTransformation iTransformation = getTransformation(model, asTransformation);
+		Map<@NonNull TypedModel, @NonNull TypedModel> asTypedModel2qvtiTypedModel = getTypedModels(iTransformation, asTransformation);
+		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(this, symbolNameReservation, asTypedModel2qvtiTypedModel);
+		rootRegion.accept(visitor);
 		return model;
 	}
 }

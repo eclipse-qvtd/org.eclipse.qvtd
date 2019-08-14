@@ -35,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -265,14 +264,14 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 		//
 		//	Create domains
 		//
-		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
+		Set<@NonNull TypedModel> checkableTypedModels = new HashSet<>();
 		for (@NonNull Node node : partition.getPartialNodes()) {
 			ClassDatum classDatum = node.getClassDatum();
 			if (classDatum.isCheckable()) {
-				TypedModel qvtmTypedModel = classDatum.getReferredTypedModel();
-				ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtmTypedModel);
-				if (qvtiTypedModel != null) {
-					checkableTypedModels.add(qvtiTypedModel);
+				TypedModel asTypedModel = classDatum.getReferredTypedModel();
+				TypedModel iTypedModel = visitor.getQVTiTypedModel(asTypedModel);
+				if (iTypedModel != null) {
+					checkableTypedModels.add(iTypedModel);
 				}
 			}
 		}
