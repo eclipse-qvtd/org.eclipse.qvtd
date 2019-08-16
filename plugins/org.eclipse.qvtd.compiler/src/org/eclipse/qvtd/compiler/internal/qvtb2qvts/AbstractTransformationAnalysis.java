@@ -147,6 +147,9 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	 */
 	public void analyzeSourceModel() {
 		for (@NonNull RuleAnalysis ruleAnalysis : rule2ruleAnalysis.values()) {
+			ruleAnalysis.analyzeInvocations();
+		}
+		for (@NonNull RuleAnalysis ruleAnalysis : rule2ruleAnalysis.values()) {
 			ruleAnalysis.analyzeSourceModel();
 		}
 	}

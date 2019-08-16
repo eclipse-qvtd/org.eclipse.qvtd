@@ -278,7 +278,8 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	}
 
-	protected void analyzeInvocations() {
+	@Override
+	public void analyzeInvocations() {
 		for (@NonNull EObject eObject : new TreeIterable(rule, false)) {
 			if (eObject instanceof RelationCallExp) {
 				RelationCallExp relationInvocation = (RelationCallExp) eObject;
@@ -419,7 +420,10 @@ public class RelationAnalysis extends RuleAnalysis
 	protected void analyzeRealizedOutputVariables(@NonNull RelationDomain relationDomain, @NonNull Set<@NonNull VariableDeclaration> realizedOutputVariables) {
 		for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(relationDomain)) {
 			TemplateExp templateExpression = QVTrelationUtil.getOwnedTemplateExpression(domainPattern);
-			for (@NonNull EObject eObject : new TreeIterable(templateExpression, true)) {
+			boolean isTopLevel = ((Relation)rule).isIsTopLevel();
+			boolean isWhenInvoked = (incomingWhenInvocationAnalyses != null) && !incomingWhenInvocationAnalyses.isEmpty();
+			boolean rootIsRealized = isTopLevel || isWhenInvoked;
+			for (@NonNull EObject eObject : new TreeIterable(templateExpression, rootIsRealized)) {
 				if (eObject instanceof TemplateExp) {
 					TemplateExp templateExp = (TemplateExp)eObject;
 					TemplateVariable templateVariable = (TemplateVariable) QVTrelationUtil.getBindsTo(templateExp);
@@ -434,7 +438,6 @@ public class RelationAnalysis extends RuleAnalysis
 		Relation relation = getRule();
 		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
 		variable2templateExp = analyzeVariable2TemplateExp();
-		analyzeInvocations();
 		Set<@NonNull VariableDeclaration> topWhenedOutputVariables2 = topWhenedOutputVariables = new HashSet<>();
 		Set<@NonNull VariableDeclaration> nonTopWhenedOutputVariables2 = nonTopWhenedOutputVariables = new HashSet<>();
 		analyzeWhenedOutputVariables(topWhenedOutputVariables2, nonTopWhenedOutputVariables2);

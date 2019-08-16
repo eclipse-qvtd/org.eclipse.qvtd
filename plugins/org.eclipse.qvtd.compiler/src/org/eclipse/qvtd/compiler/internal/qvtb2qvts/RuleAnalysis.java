@@ -78,6 +78,8 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		//		assert !rule.isIsAbstract() == scheduleManager.getScheduleModel().getOwnedMappingRegions().contains(ruleRegion);
 	}
 
+	public void analyzeInvocations() {}
+
 	public abstract void analyzeMappingRegion();
 
 	public void analyzeSourceModel() {}
