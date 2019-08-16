@@ -247,12 +247,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 	}
 
 	protected void setUsage(@NonNull Element element, @NonNull DomainUsage newUsage) {
-		//		if (newUsage.isNone()) {
-		//			element.toString();
-		//		}
-		//		if ("s".equals(element.toString())) {
-		//			element.toString();
-		//		}
 		element2usage.put(element, newUsage);
 		((DomainUsage.Internal)newUsage).addUsedBy(element);
 		//		System.out.println("        setUsage " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this))

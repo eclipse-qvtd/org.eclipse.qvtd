@@ -261,7 +261,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		//
 		checkPosition(vmThread, 21, 1067, 1075);
 		checkVariables(vmThread, VMVirtualMachine.PC_NAME, "nodes");
-		checkVariable(vmThread, VMVirtualMachine.PC_NAME, QVTimperativeUtil.getRootMapping(asTransformation));
+		checkVariable(vmThread, VMVirtualMachine.PC_NAME, QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
 		//
 		vmThread.stepReturn();
 		//		TestUIUtil.waitForTerminated(vmThread);

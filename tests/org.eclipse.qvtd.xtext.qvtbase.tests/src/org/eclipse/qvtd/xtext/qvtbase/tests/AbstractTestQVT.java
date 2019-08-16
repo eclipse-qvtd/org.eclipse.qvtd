@@ -504,7 +504,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		if (suppressFailureDiagnosis) {
 			executor.setSuppressFailureDiagnosis(true);
 		}
-		Boolean success = executor.execute(executor.getTypedModelIndex(targetModelName));
+		Integer typedModelIndex = executor.getTypedModelIndex(targetModelName);
+		Boolean success = executor.execute(typedModelIndex);
 		return success == Boolean.TRUE;
 	}
 

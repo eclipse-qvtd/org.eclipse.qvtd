@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -224,7 +225,9 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 	@Override
 	public void analyzeOutputResources() {
 		if (outputResources != null) {
-			outputResources.get(0).getContents().addAll(getRootEObjects());
+			EList<@NonNull EObject> contents = outputResources.get(0).getContents();
+			contents.clear();			// FIXME incremental update
+			contents.addAll(getRootEObjects());
 		}
 	}
 

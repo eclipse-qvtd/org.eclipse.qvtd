@@ -338,11 +338,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 	}
 
-	protected @Nullable List<@Nullable AllInstancesAnalysis> doAllInstances(@NonNull EntryPointAnalysis entryPointAnalysis) {
-		EntryPointsAnalysis entryPointsAnalysis = entryPointAnalysis.getEntryPointsAnalysis();
+	protected @Nullable List<@Nullable AllInstancesAnalysis> doAllInstances(@NonNull EntryPointsAnalysis entryPointsAnalysis) {
 		CompleteModelInternal completeModel = environmentFactory.getCompleteModel();
 		Set<@NonNull CompleteClass> allInstancesCompleteClasses = new HashSet<>();
-		for (@NonNull CompleteClass allInstancesCompleteClass : entryPointAnalysis.getAllInstancesCompleteClasses()) {
+		for (@NonNull CompleteClass allInstancesCompleteClass : entryPointsAnalysis.getAllInstancesCompleteClasses()) {
 			allInstancesCompleteClasses.add(allInstancesCompleteClass);
 		}
 		if (allInstancesCompleteClasses.size() <= 0) {
@@ -3234,10 +3233,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		doMappingConstructorConstants(cgMappings);
 		doFunctionConstructorConstants(ClassUtil.nullFree(cgOperations));
 		js.append("\n");
+		List<@Nullable AllInstancesAnalysis> allInstancesAnalyses = doAllInstances(entryPointsAnalysis);
+		//		Map<@NonNull EntryPoint, @Nullable List<@Nullable AllInstancesAnalysis>> entryPoint2allInstancesAnalyses = new HashMap<>();
+		//		for (@NonNull EntryPointAnalysis entryPointAnalysis : entryPointsAnalysis.getEntryPointAnalyses()) {
+		//	@NonNull String @Nullable [] allInstancesNames = allInstancesAnalysis != null ? allInstancesAnalysis.getNames() : null;
+		js.append("\n");
+		//			entryPoint2allInstancesAnalyses.put(entryPointAnalysis.getEntryPoint(), allInstancesAnalyses);
+		//		}
 		for (@NonNull EntryPointAnalysis entryPointAnalysis : entryPointsAnalysis.getEntryPointAnalyses()) {
-			List<@Nullable AllInstancesAnalysis> allInstancesAnalyses = doAllInstances(entryPointAnalysis);
-			//	@NonNull String @Nullable [] allInstancesNames = allInstancesAnalysis != null ? allInstancesAnalysis.getNames() : null;
-			js.append("\n");
+			//			List<@Nullable AllInstancesAnalysis> allInstancesAnalyses = entryPoint2allInstancesAnalyses.get(entryPointAnalysis.getEntryPoint());
 			doConstructor(cgTransformation, oppositeIndex2propertyIdName, allInstancesAnalyses);
 			js.append("\n");
 			/*		if (isIncremental) {

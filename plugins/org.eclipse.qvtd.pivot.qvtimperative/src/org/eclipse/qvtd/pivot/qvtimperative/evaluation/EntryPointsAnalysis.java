@@ -12,15 +12,21 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
@@ -46,8 +52,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 public class EntryPointsAnalysis
 {
 	protected final @NonNull EnvironmentFactoryInternal environmentFactory;
-
 	protected final @NonNull ImperativeTransformation transformation;
+
+	/**
+	 *  Set of all types for which allInstances() is invoked.
+	 */
+	private final @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses = new HashSet<>();
 
 	/**
 	 *  Map from navigable property to sequential index in any TypedModel.
@@ -124,6 +134,23 @@ public class EntryPointsAnalysis
 		}
 	}
 
+	public void addAllInstancesClass(@NonNull TypedElement asExpression) {
+		Type asType = asExpression instanceof OCLExpression ? ((OCLExpression)asExpression).getTypeValue() : null;
+		if (asType == null) {
+			asType = asExpression.getType();
+		}
+		if (asType instanceof org.eclipse.ocl.pivot.Class) {
+			assert !(asType instanceof PrimitiveType);
+			assert !(asType instanceof CollectionType);
+			CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(asType);
+			allInstancesCompleteClasses.add(completeClass);
+		}
+	}
+
+	public @NonNull Set<@NonNull CompleteClass> getAllInstancesCompleteClasses() {
+		return allInstancesCompleteClasses;
+	}
+
 	public @Nullable Integer getCacheIndex(@NonNull SetStatement setStatement) {
 		return setStatement2cacheIndex.get(setStatement);
 	}
@@ -190,5 +217,10 @@ public class EntryPointsAnalysis
 
 	public @NonNull ImperativeTransformation getTransformation() {
 		return transformation;
+	}
+
+	@Override
+	public String toString() {
+		return entryPoint2entryPointAnalysis.keySet().toString();
 	}
 }

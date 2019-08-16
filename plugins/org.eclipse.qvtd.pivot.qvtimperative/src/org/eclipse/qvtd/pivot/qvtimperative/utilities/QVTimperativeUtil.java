@@ -51,7 +51,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class QVTimperativeUtil extends QVTbaseUtil
 {
@@ -223,35 +222,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull SimpleParameter asSimpleParameter) {
 		return ClassUtil.nonNullState(asSimpleParameter.getReferredTypedModel());
-	}
-
-	public static @NonNull Mapping getRootMapping(@NonNull ImperativeTransformation asTransformation) {
-		Mapping asRootMapping = NameUtil.getNameable(getOwnedMappings(asTransformation), QVTscheduleUtil.ROOT_MAPPING_NAME);	// Obsolete relic
-		for (@NonNull Mapping asMapping : getOwnedMappings(asTransformation)) {
-			boolean isRoot = true;
-			for (@NonNull MappingParameter asParameter : QVTimperativeUtil.getOwnedMappingParameters(asMapping)) {
-				if (asParameter instanceof GuardParameter) {
-					isRoot = false;
-					break;
-				}
-				if (asParameter instanceof SimpleParameter) {
-					isRoot = false;
-					break;
-				}
-			}
-			if (isRoot) {
-				if (asRootMapping == null) {
-					asRootMapping = asMapping;
-				}
-				else if (asRootMapping != asMapping) {
-					throw new IllegalStateException("Transformation " + asTransformation.getName() + " has ambiguous root mappings: " + asRootMapping + ", " + asMapping);
-				}
-			}
-		}
-		if (asRootMapping  == null) {
-			throw new IllegalStateException("Transformation " + asTransformation.getName() + " has no root mapping");
-		}
-		return asRootMapping;
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {

@@ -21,18 +21,15 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
-import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -55,10 +52,6 @@ public class EntryPointAnalysis
 	protected final @NonNull EntryPoint entryPoint;
 	protected final @NonNull UniqueList<@NonNull Mapping> mappings = new UniqueList<>();
 
-	/**
-	 *  Set of all types for which allInstances() is invoked.
-	 */
-	private final @NonNull Set<@NonNull CompleteClass> allInstancesCompleteClasses = new HashSet<>();
 	/**
 	 * Map from oppositePropertyCallExp to the cache index identifying the relevant un-navigable lookup cache.
 	 */
@@ -98,19 +91,6 @@ public class EntryPointAnalysis
 		this.entryPointsAnalysis = entryPointsAnalysis;
 		this.entryPoint = entryPoint;
 		mappings.add(entryPoint);
-	}
-
-	private void addAllInstancesClass(@NonNull TypedElement asExpression) {
-		Type asType = asExpression instanceof OCLExpression ? ((OCLExpression)asExpression).getTypeValue() : null;
-		if (asType == null) {
-			asType = asExpression.getType();
-		}
-		if (asType instanceof org.eclipse.ocl.pivot.Class) {
-			assert !(asType instanceof PrimitiveType);
-			assert !(asType instanceof CollectionType);
-			CompleteClass completeClass = entryPointsAnalysis.environmentFactory.getCompleteModel().getCompleteClass(asType);
-			allInstancesCompleteClasses.add(completeClass);
-		}
 	}
 
 	public boolean addMapping(@NonNull Mapping iMapping) {
@@ -154,7 +134,7 @@ public class EntryPointAnalysis
 				else if (eObject instanceof AppendParameter) {
 					Mapping mapping = QVTimperativeUtil.getContainingMapping(eObject);
 					if (entryPoint == mapping) {
-						addAllInstancesClass((AppendParameter)eObject);
+						entryPointsAnalysis.addAllInstancesClass((AppendParameter)eObject);
 					}
 				}
 				else if (eObject instanceof OperationCallExp) {
@@ -165,13 +145,13 @@ public class EntryPointAnalysis
 						if (operationId == allInstancesOperationId) {
 							OCLExpression source = operationCallExp.getOwnedSource();
 							if (source != null) {
-								addAllInstancesClass(source);
+								entryPointsAnalysis.addAllInstancesClass(source);
 							}
 						}
 						else if ((operationId == objectsOfKindOperationId) || (operationId == objectsOfTypeOperationId)) {
 							OCLExpression argument = operationCallExp.getOwnedArguments().get(0);
 							if (argument != null) {
-								addAllInstancesClass(argument);
+								entryPointsAnalysis.addAllInstancesClass(argument);
 							}
 						}
 					}
@@ -292,8 +272,8 @@ public class EntryPointAnalysis
 		}
 	}
 
-	public @NonNull Set<@NonNull CompleteClass> getAllInstancesCompleteClasses() {
-		return allInstancesCompleteClasses;
+	public Set<@NonNull CompleteClass> getAllInstancesCompleteClasses() {
+		return entryPointsAnalysis.getAllInstancesCompleteClasses();		// FIXME filter by used packages
 	}
 
 	public @Nullable Integer getCacheIndex(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
@@ -326,5 +306,10 @@ public class EntryPointAnalysis
 
 	public boolean isHazardous(@NonNull Mapping mapping) {
 		return hazardousMappings.contains(mapping);
+	}
+
+	@Override
+	public String toString() {
+		return entryPoint.toString();
 	}
 }
