@@ -10,23 +10,23 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.scoping;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.essentialocl.attributes.NavigatingArgCSAttribution;
 import org.eclipse.ocl.xtext.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NavigatingArgCS;
 import org.eclipse.ocl.xtext.essentialoclcs.RoundBracketedClauseCS;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS;
 
 public class QVTrelationNavigatingArgCSAttribution extends NavigatingArgCSAttribution
@@ -41,32 +41,26 @@ public class QVTrelationNavigatingArgCSAttribution extends NavigatingArgCSAttrib
 		assert targetElement != null;
 		OCLExpression pivot = PivotUtil.getPivot(OCLExpression.class, targetElement);
 		if (pivot instanceof RelationCallExp) {
-			int index = csRoundBracketedClause.getOwnedArguments().indexOf(fromArgument);
-			if (index >= 0) {
-				for (EObject eObject = csRoundBracketedClause; eObject != null; eObject = eObject.eContainer()) {
-					if (eObject instanceof RelationCS) {
-						Relation relation = PivotUtil.getPivot(Relation.class, (RelationCS)eObject);
-						if (relation != null) {
-							int firstIndex = 0;
-							for (Domain asDomain : relation.getDomain()) {
-								if (asDomain instanceof RelationDomain) {
-									List<DomainPattern> asPatterns = ((RelationDomain)asDomain).getPattern();
-									int lastIndex = firstIndex + asPatterns.size();
-									if ((firstIndex <= index) && (index < lastIndex)) {
-										for (DomainPattern asPattern : asPatterns) {
-											if (asPattern != null) {
-												environmentView.addNamedElements(asPattern.getBindsTo());
-											}
-										}
-										if (environmentView.hasFinalResult()) {
-											return null;
-										}
-									}
-									firstIndex = lastIndex;
+			int argumentIndex = csRoundBracketedClause.getOwnedArguments().indexOf(fromArgument);
+			if (argumentIndex >= 0) {
+				RelationCallExp relationCallExp = (RelationCallExp)pivot;
+				RelationDomain argumentDomain = QVTrelationUtil.getRelationCallExpArgumentDomain(relationCallExp, argumentIndex);
+				TypedModel argumentTypedModel = argumentDomain.getTypedModel();
+				if (argumentTypedModel != null) {
+					for (EObject eObject = csRoundBracketedClause; eObject != null; eObject = eObject.eContainer()) {
+						if (eObject instanceof RelationCS) {
+							Relation invokingRelation = ClassUtil.nonNullState(PivotUtil.getPivot(Relation.class, (RelationCS)eObject));
+							RelationDomain asRelationDomain = QVTrelationUtil.basicGetRelationDomain(invokingRelation, argumentTypedModel);
+							if (asRelationDomain != null) {
+								for (@NonNull DomainPattern asPattern : QVTrelationUtil.getOwnedPatterns(asRelationDomain)) {
+									environmentView.addNamedElements(asPattern.getBindsTo());
 								}
 							}
+							if (environmentView.hasFinalResult()) {
+								return null;
+							}
+							break;
 						}
-						break;
 					}
 				}
 			}

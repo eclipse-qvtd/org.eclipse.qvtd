@@ -127,6 +127,15 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return (Relation) relation.getOverridden();
 	}
 
+	public static @Nullable RelationDomain basicGetRelationDomain(@NonNull Relation qvtrRelation, @Nullable TypedModel typedModel) {
+		for (@NonNull RelationDomain rRelationDomain : getOwnedDomains(qvtrRelation)) {
+			if (rRelationDomain.getTypedModel() == typedModel) {
+				return rRelationDomain;
+			}
+		}
+		return null;
+	}
+
 	/*	public static @NonNull Iterable<@NonNull Relation> getAllOverrides(@NonNull Relation rRelation) {
 		Set<@NonNull Relation> allOverrides = new HashSet<>();
 		Collection<@NonNull Relation> moreOverrides = Collections.singletonList(rRelation);
