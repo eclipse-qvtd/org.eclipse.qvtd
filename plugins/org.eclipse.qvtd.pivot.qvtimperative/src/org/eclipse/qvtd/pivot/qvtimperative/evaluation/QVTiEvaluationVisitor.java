@@ -358,7 +358,8 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitEntryPoint(@NonNull EntryPoint entryPoint) {
-		return executor.internalExecuteTransformation(entryPoint, undecoratedVisitor);
+		return visitMapping(entryPoint);
+		//		return executor.internalExecuteTransformation(entryPoint, undecoratedVisitor);
 	}
 
 	@Override
@@ -391,8 +392,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitImperativeTransformation(@NonNull ImperativeTransformation transformation) {
-		EntryPoint entryPoint = QVTimperativeUtil.getDefaultEntryPoint(transformation);
-		return executor.internalExecuteTransformation(entryPoint, undecoratedVisitor);
+		return executor.internalExecuteTransformation(transformation, undecoratedVisitor);
 	}
 
 	@Override

@@ -470,7 +470,8 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	}
 
 	@Override
-	public @Nullable Object internalExecuteTransformation(@NonNull EntryPoint entryPoint, @NonNull EvaluationVisitor undecoratedVisitor) {
+	public @Nullable Object internalExecuteTransformation(@NonNull ImperativeTransformation transformation, @NonNull EvaluationVisitor undecoratedVisitor) {
+		EntryPoint entryPoint = QVTimperativeUtil.getDefaultEntryPoint(transformation);
 		CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
 		pushEvaluationEnvironment(entryPoint, (TypedElement)callExp);
 		try {
@@ -479,25 +480,20 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			TypedModelInstance modelInstance = null;
 			for (@NonNull TypedModel typedModel : QVTimperativeUtil.getCheckedTypedModels(entryPoint)) {
 				modelInstance = getModelsManager().getTypedModelInstance(typedModel);
-				break;
 			}
 			assert modelInstance != null;
 			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(entryPoint)) {
 				if (mappingParameter instanceof AppendParameter) {
 					org.eclipse.ocl.pivot.Class type = QVTimperativeUtil.getClassType(mappingParameter);
-					Connection theConnection = null;
-					for (@NonNull Connection connection : rootInterval.getConnections()) {	// FIXME Can we use a linear ClassIndex ?
-						if (connection.getTypeId() == type.getTypeId()) {
-							theConnection = connection;
-							break;
-						}
+					Connection connection = rootInterval.createConnection(QVTimperativeUtil.getName(mappingParameter), type.getTypeId(), false, ModeFactory.NON_INCREMENTAL);
+					Iterable<@NonNull ? extends Object> objectsOfKind = modelInstance.getObjectsOfKind(type);
+					for (@NonNull Object object : objectsOfKind) {
+						connection.appendElement(object);
 					}
-					assert theConnection != null;
-					getEvaluationEnvironment().add(mappingParameter, theConnection);
+					getEvaluationEnvironment().add(mappingParameter, connection);
 				}
 			}
-			//	rule.accept(undecoratedVisitor);			// Use an outer InvocationConstructor?
-			internalExecuteMapping(entryPoint, undecoratedVisitor);
+			entryPoint.accept(undecoratedVisitor);			// Use an outer InvocationConstructor?
 			getInvocationManager().flush();
 		}
 		finally {

@@ -28,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -210,6 +211,14 @@ implements IQVTiEvaluationVisitor {
 	@Override
 	public @Nullable Object visitDomain(@NonNull Domain domain) {
 		return delegate.visitDomain(domain);
+	}
+
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	@Override
+	public @Nullable Object visitEntryPoint(@NonNull EntryPoint entryPoint) {
+		return delegate.visitEntryPoint(entryPoint);
 	}
 
 	/**

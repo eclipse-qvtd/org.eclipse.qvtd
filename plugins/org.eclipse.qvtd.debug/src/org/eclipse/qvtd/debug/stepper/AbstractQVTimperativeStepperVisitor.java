@@ -13,6 +13,7 @@ package	org.eclipse.qvtd.debug.stepper;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -43,6 +44,11 @@ implements QVTimperativeVisitor<IStepper>
 	@Override
 	public @Nullable IStepper visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
 		return visitVariableDeclaration(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitEntryPoint(@NonNull EntryPoint object) {
+		return visitMapping(object);
 	}
 
 	@Override
