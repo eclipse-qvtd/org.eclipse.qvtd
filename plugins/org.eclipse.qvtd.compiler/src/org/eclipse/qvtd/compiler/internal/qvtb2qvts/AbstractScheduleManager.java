@@ -823,10 +823,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			DomainUsage domainUsage = getDomainUsage(classDatum);
 			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {
 				for (@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
-					TypedModel typedModel = ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass));
-					ClassDatum superClassDatum = getClassDatum(typedModel, completeSuperClass);
-					if (!superClassDatums.contains(superClassDatum)) {
-						superClassDatums.add(superClassDatum);
+					for (@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
+						ClassDatum superClassDatum = getClassDatum(typedModel, completeSuperClass);
+						if (!superClassDatums.contains(superClassDatum)) {
+							superClassDatums.add(superClassDatum);
+						}
 					}
 				}
 			}
