@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.xtext.base.as2cs.BaseReferenceVisitor;
@@ -408,7 +409,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		if ((importURI == null) && (csResource != null)) {
 			URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : asNamespace);
 			URI csURI = csResource.getURI();
-			URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
+			URI deresolvedURI = URIUtil.deresolve(fullURI, csURI, true, true, false);
 			importURI = deresolvedURI.toString();
 		}
 		ImportCS csImport = context.refreshElement(ImportCS.class, BaseCSPackage.Literals.IMPORT_CS, asUnit);

@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2ASReferenceSwitch;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.UnlimitedNaturalValue;
@@ -596,7 +597,7 @@ public class UMLXServices
 			s.append("\n");
 			@NonNull
 			URI uri = EcoreUtil.getURI(ePackage);
-			uri = uri.deresolve(context.eResource().getURI());
+			uri = URIUtil.deresolve(uri, context.eResource().getURI());
 			s.append(uri);
 			return s.toString();
 		}

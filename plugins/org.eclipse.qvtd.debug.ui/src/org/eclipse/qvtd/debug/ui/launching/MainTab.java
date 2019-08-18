@@ -49,6 +49,7 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
@@ -738,7 +739,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		URI rawURI = URI.createURI(rawValue);
 		String projectName = getProjectName();
 		if (rawURI.isPlatformResource()) {
-			URI normalizedURI = rawURI.deresolve(getProjectURI());
+			URI normalizedURI = URIUtil.deresolve(rawURI, getProjectURI());
 			rawValue = String.valueOf(normalizedURI);
 		}
 		else if ((projectName.length() > 0) && rawValue.startsWith(projectName)) {			// FIXME temporary migration fudge
@@ -780,19 +781,19 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 				prefixURI = URI.createURI(subPath, true).resolve(prefixURI.appendSegment(""));
 			}
 			String name = txURI.trimFileExtension().lastSegment();
-			URI deresolveSrcURI = prefixURI.appendSegment(name).appendFileExtension(AbstractCompilerChain.getDefaultFileExtension(step)).deresolve(getProjectURI());
+			URI deresolveSrcURI = URIUtil.deresolve(prefixURI.appendSegment(name).appendFileExtension(AbstractCompilerChain.getDefaultFileExtension(step)), getProjectURI());
 			List<String> stepProjectSegments = deresolveSrcURI.segmentsList();//.subList(2, segmentCount2);
 			int stepProjectSegmentCount = stepProjectSegments.size();
 			if (prefixURI.isPlatformResource() && (stepProjectSegmentCount >= 2)) {
 				if (step == CompilerChain.CLASS_STEP) {
 					String stepProjectName = prefixURI.segment(1);
 					URI stepProjectURI = URI.createPlatformResourceURI(stepProjectName, false);
-					return String.valueOf(stepProjectURI.appendSegment("bin").deresolve(getProjectURI()));				// FIXME Use JDT Propject path
+					return String.valueOf(URIUtil.deresolve(stepProjectURI.appendSegment("bin"), getProjectURI()));				// FIXME Use JDT Propject path
 				}
 				else if (step == CompilerChain.JAVA_STEP) {
 					String stepProjectName = prefixURI.segment(1);
 					URI stepProjectURI = URI.createPlatformResourceURI(stepProjectName, false);
-					return String.valueOf(stepProjectURI.appendSegment("src-gen").deresolve(getProjectURI()));				// FIXME Use JDT Propject path
+					return String.valueOf(URIUtil.deresolve(stepProjectURI.appendSegment("src-gen"), getProjectURI()));				// FIXME Use JDT Propject path
 				}
 			}
 			return String.valueOf(deresolveSrcURI);
@@ -811,7 +812,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 			if (subPath != null) {
 				prefixURI = URI.createURI(subPath, true).resolve(prefixURI.appendSegment(""));
 			}
-			return String.valueOf(prefixURI.appendSegment(name).appendFileExtension("xmi").deresolve(getProjectURI()));
+			return String.valueOf(URIUtil.deresolve(prefixURI.appendSegment(name).appendFileExtension("xmi"), getProjectURI()));
 		}
 		return "";
 	}
@@ -916,7 +917,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		//		if (uri.scheme() == null) {
 		//			uri = URI.createPlatformResourceURI(txAttribute, true);
 		//		}
-		txPath.setText(String.valueOf(uri.deresolve(projectURI)));
+		txPath.setText(String.valueOf(URIUtil.deresolve(uri, projectURI)));
 		//		autoBuildCheckButton.setSelection(configuration.getAttribute(AUTO_BUILD_KEY, true));					// FIXME disabled
 		interpretedCheckButton.setSelection(configuration.getAttribute(INTERPRETED_KEY, true));
 		isInterpreted = interpretedCheckButton.getSelection();
@@ -962,14 +963,14 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 				URI txURI = getTxURI();
 				String name = txURI.trimFileExtension().lastSegment();
 				URI prefixURI = txURI.trimSegments(1);
-				URI deresolveSrcURI = prefixURI.appendSegment(name).appendFileExtension("genmodel").deresolve(getProjectURI());
+				URI deresolveSrcURI = URIUtil.deresolve(prefixURI.appendSegment(name).appendFileExtension("genmodel"), getProjectURI());
 				genmodelAttribute = deresolveSrcURI.toString();
 			}
 			uri = URI.createURI(genmodelAttribute);
 			if (uri.scheme() == null) {
 				uri = URI.createPlatformResourceURI(genmodelAttribute, true);
 			}
-			genmodelPath.setText(String.valueOf(uri.deresolve(getProjectURI())));
+			genmodelPath.setText(String.valueOf(URIUtil.deresolve(uri, getProjectURI())));
 		}
 	}
 
