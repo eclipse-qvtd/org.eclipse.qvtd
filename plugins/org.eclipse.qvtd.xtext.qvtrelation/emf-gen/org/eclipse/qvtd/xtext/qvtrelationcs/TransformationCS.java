@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 
@@ -26,6 +27,7 @@ import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedModelDecls <em>Owned Model Decls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedKeyDecls <em>Owned Key Decls</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedProperties <em>Owned Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedQueries <em>Owned Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedRelations <em>Owned Relations</em>}</li>
  * </ul>
@@ -82,6 +84,22 @@ public interface TransformationCS extends AbstractTransformationCS {
 	 * @generated
 	 */
 	EList<KeyDeclCS> getOwnedKeyDecls();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.StructuralFeatureCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Properties</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Properties</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_OwnedProperties()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<StructuralFeatureCS> getOwnedProperties();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Queries</b></em>' containment reference list.

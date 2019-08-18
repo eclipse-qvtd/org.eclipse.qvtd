@@ -1396,19 +1396,21 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedRelationsRelationCSParserRuleCall_10_0_0 = (RuleCall)cOwnedRelationsAssignment_10_0.eContents().get(0);
 		private final Assignment cOwnedQueriesAssignment_10_1 = (Assignment)cAlternatives_10.eContents().get(1);
 		private final RuleCall cOwnedQueriesQueryCSParserRuleCall_10_1_0 = (RuleCall)cOwnedQueriesAssignment_10_1.eContents().get(0);
+		private final Assignment cOwnedPropertiesAssignment_10_2 = (Assignment)cAlternatives_10.eContents().get(2);
+		private final RuleCall cOwnedPropertiesStructuralFeatureCSParserRuleCall_10_2_0 = (RuleCall)cOwnedPropertiesAssignment_10_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
 
 		//TransformationCS:
 		//	'transformation' ownedPathName=ScopeNameCS? name=UnrestrictedName '(' ownedModelDecls+=ModelDeclCS (','
 		//	ownedModelDecls+=ModelDeclCS)* ')' ('extends' extends+=[qvtbase::Transformation|UnrestrictedName] (','
 		//	extends+=[qvtbase::Transformation|UnrestrictedName])*)? '{' ownedKeyDecls+=KeyDeclCS* (ownedRelations+=RelationCS |
-		//	ownedQueries+=QueryCS)* '}';
+		//	ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}';
 		@Override public ParserRule getRule() { return rule; }
 
 		//'transformation' ownedPathName=ScopeNameCS? name=UnrestrictedName '(' ownedModelDecls+=ModelDeclCS (','
 		//ownedModelDecls+=ModelDeclCS)* ')' ('extends' extends+=[qvtbase::Transformation|UnrestrictedName] (','
 		//extends+=[qvtbase::Transformation|UnrestrictedName])*)? '{' ownedKeyDecls+=KeyDeclCS* (ownedRelations+=RelationCS |
-		//ownedQueries+=QueryCS)* '}'
+		//ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}'
 		public Group getGroup() { return cGroup; }
 
 		//'transformation'
@@ -1490,7 +1492,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//KeyDeclCS
 		public RuleCall getOwnedKeyDeclsKeyDeclCSParserRuleCall_9_0() { return cOwnedKeyDeclsKeyDeclCSParserRuleCall_9_0; }
 
-		//(ownedRelations+=RelationCS | ownedQueries+=QueryCS)*
+		//(ownedRelations+=RelationCS | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)*
 		public Alternatives getAlternatives_10() { return cAlternatives_10; }
 
 		//ownedRelations+=RelationCS
@@ -1504,6 +1506,12 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 		//QueryCS
 		public RuleCall getOwnedQueriesQueryCSParserRuleCall_10_1_0() { return cOwnedQueriesQueryCSParserRuleCall_10_1_0; }
+
+		//ownedProperties+=StructuralFeatureCS
+		public Assignment getOwnedPropertiesAssignment_10_2() { return cOwnedPropertiesAssignment_10_2; }
+
+		//StructuralFeatureCS
+		public RuleCall getOwnedPropertiesStructuralFeatureCSParserRuleCall_10_2_0() { return cOwnedPropertiesStructuralFeatureCSParserRuleCall_10_2_0; }
 
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_11() { return cRightCurlyBracketKeyword_11; }
@@ -2306,7 +2314,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	//	'transformation' ownedPathName=ScopeNameCS? name=UnrestrictedName '(' ownedModelDecls+=ModelDeclCS (','
 	//	ownedModelDecls+=ModelDeclCS)* ')' ('extends' extends+=[qvtbase::Transformation|UnrestrictedName] (','
 	//	extends+=[qvtbase::Transformation|UnrestrictedName])*)? '{' ownedKeyDecls+=KeyDeclCS* (ownedRelations+=RelationCS |
-	//	ownedQueries+=QueryCS)* '}';
+	//	ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}';
 	public TransformationCSElements getTransformationCSAccess() {
 		return pTransformationCS;
 	}

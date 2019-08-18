@@ -597,8 +597,8 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *         ownedType=CollectionTypeCS
 	 *         (
 	 *             (ownedMemberIdentifiers+=TemplateCS | ownedMemberIdentifiers+=ElementTemplateCS)
-	 *             ownedMemberIdentifiers+=ElementTemplateCS?
-	 *             (ownedMemberIdentifiers+=TemplateCS? ownedMemberIdentifiers+=ElementTemplateCS?)*
+	 *             ownedMemberIdentifiers+=TemplateCS?
+	 *             (ownedMemberIdentifiers+=ElementTemplateCS? ownedMemberIdentifiers+=TemplateCS?)*
 	 *             ownedRestIdentifier=ElementTemplateCS
 	 *         )?
 	 *         ownedGuardExpression=ExpCS?
@@ -983,7 +983,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *         ownedModelDecls+=ModelDeclCS*
 	 *         (extends+=[Transformation|UnrestrictedName] extends+=[Transformation|UnrestrictedName]*)?
 	 *         ownedKeyDecls+=KeyDeclCS*
-	 *         (ownedRelations+=RelationCS | ownedQueries+=QueryCS)*
+	 *         (ownedRelations+=RelationCS | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)*
 	 *     )
 	 */
 	protected void sequence_TransformationCS(ISerializationContext context, TransformationCS semanticObject) {

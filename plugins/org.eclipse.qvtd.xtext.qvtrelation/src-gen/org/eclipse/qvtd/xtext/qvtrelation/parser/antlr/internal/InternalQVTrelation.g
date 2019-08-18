@@ -2280,9 +2280,28 @@ ruleTransformationCS returns [EObject current=null]
 	    }
 
 )
-))*	otherlv_16='}'
+)
+    |(
+(
+		{
+	        newCompositeNode(grammarAccess.getTransformationCSAccess().getOwnedPropertiesStructuralFeatureCSParserRuleCall_10_2_0());
+	    }
+		lv_ownedProperties_16_0=ruleStructuralFeatureCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTransformationCSRule());
+	        }
+       		add(
+       			$current,
+       			"ownedProperties",
+        		lv_ownedProperties_16_0,
+        		"org.eclipse.qvtd.xtext.qvtbase.QVTbase.StructuralFeatureCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_17='}'
     {
-    	newLeafNode(otherlv_16, grammarAccess.getTransformationCSAccess().getRightCurlyBracketKeyword_11());
+    	newLeafNode(otherlv_17, grammarAccess.getTransformationCSAccess().getRightCurlyBracketKeyword_11());
     }
 )
 ;
