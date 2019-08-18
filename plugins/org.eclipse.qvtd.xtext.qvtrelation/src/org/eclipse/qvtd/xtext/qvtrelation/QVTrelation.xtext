@@ -19,7 +19,7 @@ import "platform:/resource/org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.ecore"
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore" as qvtrelation
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCS.ecore"
 
-TopLevelCS:
+TopLevelCS: 
 	ownedImports+=UnitCS*
 	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS)*	
 ;
@@ -102,7 +102,7 @@ TemplateCS: (CollectionTemplateCS | ObjectTemplateCS) ('{' ownedGuardExpression=
 TransformationCS: 'transformation' ownedPathName=ScopeNameCS? name=UnrestrictedName 
                      '(' ownedModelDecls+=ModelDeclCS (',' ownedModelDecls+=ModelDeclCS)* ')' 
                      ('extends' extends+=[qvtbase::Transformation|UnrestrictedName] (',' extends+=[qvtbase::Transformation|UnrestrictedName])*)?
-                     '{' ownedKeyDecls+=KeyDeclCS* ( ownedRelations+=RelationCS | ownedQueries+=QueryCS )* '}'
+                     '{' ownedKeyDecls+=KeyDeclCS* ( ownedRelations+=RelationCS | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS )* '}'
 ;
 
 UnitCS returns base::ImportCS:
