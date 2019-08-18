@@ -60,6 +60,7 @@ import org.eclipse.ocl.xtext.basecs.PathElementCS;
 import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
+import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSFactory;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
@@ -611,9 +612,9 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 
 		buildModel(csDocument, asModel);
 
-		List<Transformation> asTransformations = new ArrayList<>();
-		gatherTransformations(asTransformations, asModel.getOwnedPackages());
-		context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
+		//		List<Transformation> asTransformations = new ArrayList<>();
+		//		gatherTransformations(asTransformations, asModel.getOwnedPackages());
+		//		context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
 		return csDocument;
 	}
 
@@ -621,15 +622,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	public ElementCS visitRelationalTransformation(@NonNull RelationalTransformation asTransformation) {
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTrelationCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
 		csTransformation.setPivot(asTransformation);
-		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
-		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
-			csTransformation.setOwnedPathName(null);
-		}
-		else {
-			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-			csTransformation.setOwnedPathName(csPathName);
-			context.refreshPathName(csPathName, owningPackage, null);
-		}
+		csTransformation.setOwnedPathName(null);
 		List<@NonNull TypedModel> modelParameters = Lists.newArrayList(QVTrelationUtil.getModelParameters(asTransformation));
 		TypedModel traceTypedModel = QVTbaseUtil.basicGetTraceTypedModel(modelParameters);
 		if (traceTypedModel != null) {
@@ -637,6 +630,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		}
 		context.refreshList(csTransformation.getOwnedModelDecls(), context.visitDeclarations(ModelDeclCS.class, modelParameters, null));
 		context.refreshList(csTransformation.getOwnedKeyDecls(), context.visitDeclarations(KeyDeclCS.class, asTransformation.getOwnedKey(), null));
+		context.refreshList(csTransformation.getOwnedProperties(), context.visitDeclarations(StructuralFeatureCS.class, asTransformation.getOwnedProperties(), null));
 		context.refreshList(csTransformation.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asTransformation.getOwnedOperations(), null));
 		context.refreshList(csTransformation.getOwnedRelations(), context.visitDeclarations(RelationCS.class, asTransformation.getRule(), null));
 		return csTransformation;

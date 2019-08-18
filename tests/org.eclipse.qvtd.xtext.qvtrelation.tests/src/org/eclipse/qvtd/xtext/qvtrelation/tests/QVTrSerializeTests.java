@@ -175,6 +175,10 @@ public class QVTrSerializeTests extends LoadTestCase
 		doSerializeRoundTripFromCS(getModelsURI("mitosi/MiToSiSimple.qvtr"), null);
 	}
 
+	public void testQVTrSerialize_Packages() throws Exception {
+		doSerializeRoundTripFromCS(getModelsURI("misc/Packages.qvtr"), null);
+	}
+
 	public void testQVTrSerialize_PetriNet2StateChart() throws Exception {
 		doSerializeRoundTripFromCS(getModelsURI("pn2sc/PetriNet2StateChart.qvtr"), null);
 	}

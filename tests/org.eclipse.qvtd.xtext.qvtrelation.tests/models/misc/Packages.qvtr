@@ -23,5 +23,6 @@ package pkg : pfx = 'ns' {
 	--     key Class{key};
 	--     key Class{key, name};
 	--     key Class{};
+		property contextual : String[1];
 	}
 }
