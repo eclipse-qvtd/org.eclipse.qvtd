@@ -43,6 +43,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTiProductionConsumption;
+import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTimperativeDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
@@ -55,10 +56,12 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.Create
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -270,13 +273,17 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			QVTs2QVTi tx = new QVTs2QVTi(scheduleManager, this, environmentFactory);
 			tx.resolveImports(model);
 			saveResource(iResource);
-			ImperativeTransformation transformation = (ImperativeTransformation) getTransformation(iResource);
+			ImperativeTransformation iTransformation = (ImperativeTransformation) getTransformation(iResource);
 			throwCompilerChainExceptionForErrors();
-			QVTiProductionConsumption qvtiProductionConsumption = new QVTiProductionConsumption(this, iResource);
-			qvtiProductionConsumption.analyze();
-			qvtiProductionConsumption.validate();
+			QVTimperativeDomainUsageAnalysis domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory, iTransformation);
+			domainUsageAnalysis.analyzeTransformation();
+			for (@NonNull EntryPoint iEntryPoint : QVTimperativeUtil.computeEntryPoints(iTransformation)) {
+				QVTiProductionConsumption qvtiProductionConsumption = new QVTiProductionConsumption(this, domainUsageAnalysis, iEntryPoint);
+				qvtiProductionConsumption.analyze();
+				qvtiProductionConsumption.validate();
+			}
 			throwCompilerChainExceptionForErrors();
-			return transformation;
+			return iTransformation;
 		}
 	}
 

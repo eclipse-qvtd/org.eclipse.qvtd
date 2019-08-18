@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -32,11 +31,9 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -108,24 +105,12 @@ public class EntryPointsAnalysis
 	}
 
 	public void analyzeTransformation() {
-		for (@NonNull Mapping iMapping : QVTimperativeUtil.getOwnedMappings(transformation)) {
-			if (iMapping instanceof EntryPoint) {
-				EntryPoint iEntryPoint = (EntryPoint) iMapping;
-				EntryPointAnalysis entryPointAnalysis = new EntryPointAnalysis(this, iEntryPoint);
-				entryPoint2entryPointAnalysis.put(iEntryPoint, entryPointAnalysis);
-				mapping2entryPointAnalysis.put(iEntryPoint, entryPointAnalysis);
-				List<@NonNull Mapping> mappings = entryPointAnalysis.getMappings();
-				for (int i = 0; i < mappings.size(); i++) {
-					for (EObject eObject : new TreeIterable(mappings.get(i), true)) {
-						if (eObject instanceof MappingCall) {
-							MappingCall iMappingCall = (MappingCall)eObject;
-							Mapping referredMapping = QVTimperativeUtil.getReferredMapping(iMappingCall);
-							if (entryPointAnalysis.addMapping(referredMapping)) {
-								mapping2entryPointAnalysis.put(referredMapping, entryPointAnalysis);
-							}
-						}
-					}
-				}
+		for (@NonNull EntryPoint iEntryPoint : QVTimperativeUtil.computeEntryPoints(transformation)) {
+			EntryPointAnalysis entryPointAnalysis = new EntryPointAnalysis(this, iEntryPoint);
+			entryPoint2entryPointAnalysis.put(iEntryPoint, entryPointAnalysis);
+			for (@NonNull Mapping mapping : QVTimperativeUtil.computeMappingClosure(iEntryPoint)) {
+				entryPointAnalysis.addMapping(mapping);
+				mapping2entryPointAnalysis.put(mapping, entryPointAnalysis);
 			}
 		}
 		assert !entryPoint2entryPointAnalysis.isEmpty();

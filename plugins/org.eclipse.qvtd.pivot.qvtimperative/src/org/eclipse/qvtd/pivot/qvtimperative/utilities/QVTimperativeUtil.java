@@ -16,7 +16,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -32,6 +31,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
@@ -113,6 +113,29 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return NameUtil.getNameable(getOwnedTypedModels(transformation), name);
 	}
 
+	public static @NonNull Iterable<@NonNull EntryPoint> computeEntryPoints(@NonNull ImperativeTransformation iTransformation) {
+		List<@NonNull EntryPoint> iMappings = new ArrayList<>();
+		for (@NonNull Mapping iMapping : getOwnedMappings(iTransformation)) {
+			if (iMapping instanceof EntryPoint) {
+				iMappings.add((EntryPoint)iMapping);
+			}
+		}
+		return iMappings;
+	}
+
+	public static @NonNull Iterable<@NonNull Mapping> computeMappingClosure(@NonNull EntryPoint entryPoint) {
+		UniqueList<@NonNull Mapping> mappings = new UniqueList<>();
+		mappings.add(entryPoint);
+		for (int i = 0; i < mappings.size(); i++) {
+			for (@NonNull EObject eObject : new TreeIterable(mappings.get(i), true)) {
+				if (eObject instanceof MappingCall) {
+					mappings.add(QVTimperativeUtil.getReferredMapping((MappingCall)eObject));
+				}
+			}
+		}
+		return mappings;
+	}
+
 	public static @NonNull Iterable<@NonNull TypedModel> getCheckedTypedModels(@NonNull EntryPoint entryPoint) {
 		return ClassUtil.nullFree(entryPoint.getCheckedTypedModels());
 	}
@@ -143,13 +166,8 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	 *
 	 * This method is close to deprecated being mainly intended for legacy / unidirectional usage.
 	 */
-	public static @NonNull EntryPoint getDefaultEntryPoint(@NonNull ImperativeTransformation asTransformation) {
-		for (@NonNull Mapping mapping : getOwnedMappings(asTransformation)) {
-			if (mapping instanceof EntryPoint) {
-				return (EntryPoint)mapping;
-			}
-		}
-		throw new IllegalStateException();
+	public static @NonNull EntryPoint getDefaultEntryPoint(@NonNull ImperativeTransformation iTransformation) {
+		return computeEntryPoints(iTransformation).iterator().next();
 	}
 
 	public static @NonNull Iterable<@NonNull TypedModel> getEnforcedTypedModels(@NonNull EntryPoint entryPoint) {

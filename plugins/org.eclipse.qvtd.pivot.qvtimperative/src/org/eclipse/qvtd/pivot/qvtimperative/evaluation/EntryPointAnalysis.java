@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -50,7 +49,7 @@ public class EntryPointAnalysis
 {
 	protected final @NonNull EntryPointsAnalysis entryPointsAnalysis;
 	protected final @NonNull EntryPoint entryPoint;
-	protected final @NonNull UniqueList<@NonNull Mapping> mappings = new UniqueList<>();
+	protected final @NonNull List<@NonNull Mapping> mappings = new ArrayList<>();
 
 	/**
 	 * Map from oppositePropertyCallExp to the cache index identifying the relevant un-navigable lookup cache.
@@ -90,10 +89,10 @@ public class EntryPointAnalysis
 	public EntryPointAnalysis(@NonNull EntryPointsAnalysis entryPointsAnalysis, @NonNull EntryPoint entryPoint) {
 		this.entryPointsAnalysis = entryPointsAnalysis;
 		this.entryPoint = entryPoint;
-		mappings.add(entryPoint);
 	}
 
 	public boolean addMapping(@NonNull Mapping iMapping) {
+		assert !mappings.contains(iMapping);
 		return mappings.add(iMapping);
 	}
 

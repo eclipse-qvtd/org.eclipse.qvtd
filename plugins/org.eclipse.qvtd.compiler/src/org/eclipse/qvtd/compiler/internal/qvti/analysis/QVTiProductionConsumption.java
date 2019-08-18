@@ -35,21 +35,21 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.CompilerStep;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.MappingProblem;
-import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTimperativeDomainUsageAnalysis.QVTimperativeDirectedDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
@@ -565,27 +565,40 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull CompilerStep compilerStep;
 	protected final @NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis;
-	protected final @NonNull QVTimperativeDirectedDomainUsageAnalysis directedDomainUsageAnalysis;
 	protected final @NonNull Map<@NonNull Property, @NonNull BasePropertyAnalysis> property2basePropertyAnalysis = new HashMap<>();
 	protected final @NonNull CompleteModel completeModel;
+	protected final @NonNull Iterable<@NonNull Mapping> mappings;
+	protected final @NonNull DomainUsage checkedUsage;
+	protected final @NonNull DomainUsage enforcedUsage;
 
-	public QVTiProductionConsumption(@NonNull CompilerStep compilerStep, @NonNull Resource iResource) throws IOException {
-		super(iResource);
+	public QVTiProductionConsumption(@NonNull CompilerStep compilerStep, @NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis, @NonNull EntryPoint iEntryPoint) throws IOException {
+		super(ClassUtil.nonNullState(iEntryPoint.eResource()));
 		this.environmentFactory = compilerStep.getEnvironmentFactory();
 		this.compilerStep = compilerStep;
-		Transformation transformation = AbstractCompilerChain.getTransformation(iResource);
-		this.domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory, transformation);
-		this.directedDomainUsageAnalysis = domainUsageAnalysis.createDirectedDomainUsageAnalysis();
+		this.domainUsageAnalysis = domainUsageAnalysis;
 		this.completeModel = environmentFactory.getCompleteModel();
+		this.mappings = QVTimperativeUtil.computeMappingClosure(iEntryPoint);
+		DomainUsage checkedUsage = domainUsageAnalysis.getNoneUsage();
+		for (@NonNull TypedModel checkedTypedModel : QVTimperativeUtil.getCheckedTypedModels(iEntryPoint)) {
+			checkedUsage = domainUsageAnalysis.union(checkedUsage, domainUsageAnalysis.getUsage(checkedTypedModel));
+		}
+		this.checkedUsage = checkedUsage;
+		DomainUsage enforcedUsage = domainUsageAnalysis.getNoneUsage();
+		for (@NonNull TypedModel enforcedTypedModel : QVTimperativeUtil.getEnforcedTypedModels(iEntryPoint)) {
+			enforcedUsage = domainUsageAnalysis.union(enforcedUsage, domainUsageAnalysis.getUsage(enforcedTypedModel));
+		}
+		this.enforcedUsage = enforcedUsage;
 	}
 
 	public void analyze() {
 		//
 		//	Traverse the model to discover all producers and consumers with a corresponding AccessAnalysis supervised by a BasePropertyAnalysis.
 		//
-		for (@NonNull EObject eObject : new TreeIterable(context)) {
-			if (eObject instanceof Visitable) {
-				((Visitable)eObject).accept(this);
+		for (@NonNull Mapping mapping : mappings) {
+			for (@NonNull EObject eObject : new TreeIterable(mapping, true)) {
+				if (eObject instanceof Visitable) {
+					((Visitable)eObject).accept(this);
+				}
 			}
 		}
 		//
@@ -630,6 +643,10 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		return getCompleteClass(QVTimperativeUtil.getType(typedElement));
 	}
 
+	protected boolean isInput(@NonNull DomainUsage usage) {
+		return (checkedUsage.getMask() & usage.getMask()) != 0;
+	}
+
 	public void validate() {
 		List<@NonNull BasePropertyAnalysis> sortedBasePropertyAnalyses = new ArrayList<>(property2basePropertyAnalysis.values());
 		Collections.sort(sortedBasePropertyAnalyses, NameUtil.NAMEABLE_COMPARATOR);
@@ -670,7 +687,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		if (mapping != null) {
 			OCLExpression ownedSource = QVTimperativeUtil.getOwnedSource(navigationCallExp);
 			DomainUsage usage = domainUsageAnalysis.getUsage(navigationCallExp instanceof OppositePropertyCallExp ? navigationCallExp : ownedSource);
-			if (!directedDomainUsageAnalysis.isInput(usage) && !usage.isPrimitive()) {		// Skip endogenously confusing input
+			if (!isInput(usage) && !usage.isPrimitive()) {		// Skip endogenously confusing input
 				Property getProperty = QVTimperativeUtil.getReferredProperty(navigationCallExp);
 				BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(getProperty);
 				CompleteClass sourceClass = getCompleteClass(ownedSource);
@@ -711,10 +728,9 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		return null;
 	}
 
-	@Override
-	public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
-		domainUsageAnalysis.analyzeTransformation();
-		directedDomainUsageAnalysis.analyzeTransformation();
-		return null;
-	}
+	//	@Override
+	//	public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
+	//		domainUsageAnalysis.analyzeTransformation();
+	//		return null;
+	//	}
 }
