@@ -143,6 +143,12 @@ public class QVTbaseHelper extends PivotHelper
 		return asTypedModel;
 	}
 
+	public @NonNull TypedModel createThisTypedModel() {
+		TypedModel asTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
+		asTypedModel.setName(QVTbaseUtil.THIS_TYPED_MODEL_NAME);
+		return asTypedModel;
+	}
+
 	public @NonNull Transformation createTransformation(@NonNull String name) {
 		Transformation transformation = QVTbaseFactory.eINSTANCE.createTransformation();
 		transformation.setName(name);

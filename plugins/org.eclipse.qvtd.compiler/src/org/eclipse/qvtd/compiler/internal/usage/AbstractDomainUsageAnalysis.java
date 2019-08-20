@@ -108,7 +108,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			usage = intersection(usage, actualSourceUsage);
 		} */
 		else if (!property.isIsImplicit() && !property.isIsTransient() /*&& !rootAnalysis.isDirty(property)*/) {	// Simple input domain nodes cannot reference middle or output domains
-			if (/*usage.isMiddle() &&*/ !actualSourceUsage.isMiddle()) {			// Only testQVTcCompiler_Forward2Reverse needs this guard
+			if (/*usage.isMiddle() &&*/ !actualSourceUsage.isMiddle() && !actualSourceUsage.isThis()) {			// Only testQVTcCompiler_Forward2Reverse needs this guard
 				/*	if (actualSourceUsage.isInput() && !actualSourceUsage.isOutput()) {
 					//			QVTruntimeUtil.errPrintln("Assuming !rootAnalysis.isDirty(property)");
 					usage = intersection(usage, actualSourceUsage);

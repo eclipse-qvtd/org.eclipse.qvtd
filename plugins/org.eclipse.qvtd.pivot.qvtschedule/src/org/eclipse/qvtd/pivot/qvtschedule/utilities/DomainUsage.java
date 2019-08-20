@@ -86,6 +86,11 @@ public interface DomainUsage extends Comparable<@NonNull DomainUsage>
 	 */
 	boolean isPrimitive();
 
+	/**
+	 * Return true if this usage includes usage in the this domain, a domain that is just used.
+	 */
+	boolean isThis();
+
 	public interface Internal extends DomainUsage
 	{
 		void addUsedBy(@NonNull Element element);

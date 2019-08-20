@@ -98,7 +98,7 @@ public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsag
 
 	@Override
 	public @NonNull DomainUsage visitTransformation(@NonNull Transformation object) {
-		return visitClass(object);
+		return getRootAnalysis().getThisUsage();
 	}
 
 	@Override

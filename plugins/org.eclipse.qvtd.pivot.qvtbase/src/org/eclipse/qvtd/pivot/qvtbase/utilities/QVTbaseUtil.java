@@ -57,6 +57,7 @@ import com.google.common.collect.Iterables;
 public class QVTbaseUtil extends PivotUtil
 {
 	public static final @NonNull String PRIMITIVE_TYPED_MODEL_NAME = "$primitive$";
+	public static final @NonNull String THIS_TYPED_MODEL_NAME = "$this$";
 	public static final @NonNull String TRACE_CLASS_NAME = "trace";
 	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "middle"; //"$trace$";
 
@@ -212,6 +213,19 @@ public class QVTbaseUtil extends PivotUtil
 	public static @Nullable TypedModel basicGetPrimitiveTypedModel(@NonNull Iterable<@NonNull TypedModel> modelParameters) {
 		for (@NonNull TypedModel typedModel : modelParameters) {
 			if (typedModel.isIsPrimitive()) {
+				return typedModel;
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable TypedModel basicGetThisTypedModel(@NonNull Transformation asTransformation) {
+		return basicGetThisTypedModel(getModelParameters(asTransformation));
+	}
+
+	public static @Nullable TypedModel basicGetThisTypedModel(@NonNull Iterable<@NonNull TypedModel> modelParameters) {
+		for (@NonNull TypedModel typedModel : modelParameters) {
+			if (THIS_TYPED_MODEL_NAME.equals(typedModel.getName())) {
 				return typedModel;
 			}
 		}
@@ -564,6 +578,11 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		return false;
+	}
+
+	public static boolean isThis(@NonNull TypedModel typedModel) {
+		String name = typedModel.getName();
+		return THIS_TYPED_MODEL_NAME.equals(name);
 	}
 
 	public static boolean isThis(@NonNull VariableDeclaration variable) {

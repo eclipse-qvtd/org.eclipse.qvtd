@@ -207,6 +207,13 @@ public class QVTimperativeHelper extends QVTbaseHelper
 	}
 
 	@Override
+	public @NonNull TypedModel createThisTypedModel() {
+		TypedModel asTypedModel = QVTimperativeFactory.eINSTANCE.createImperativeTypedModel();
+		asTypedModel.setName(QVTimperativeUtil.THIS_TYPED_MODEL_NAME);
+		return asTypedModel;
+	}
+
+	@Override
 	public @NonNull ImperativeTransformation createTransformation(@NonNull String name) {
 		ImperativeTransformation transformation = QVTimperativeFactory.eINSTANCE.createImperativeTransformation();
 		transformation.setName(name);

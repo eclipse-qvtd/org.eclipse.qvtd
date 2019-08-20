@@ -131,6 +131,11 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			return (bitMask & PRIMITIVE_USAGE_BIT_MASK) != 0;
 		}
 
+		@Override
+		public boolean isThis() {
+			return (bitMask & THIS_USAGE_BIT_MASK) != 0;
+		}
+
 		protected String toString(@NonNull String prefix) {
 			StringBuilder s = new StringBuilder();
 			s.append(prefix);
@@ -238,6 +243,11 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	 */
 	protected static final @NonNull Integer PRIMITIVE_USAGE_BIT_MASK = 1;
 
+	/**
+	 * The second bit is reserved for the this TypedModel that is used by the Transformation metamodel.
+	 */
+	protected static final @NonNull Integer THIS_USAGE_BIT_MASK = 2;
+
 	protected final @NonNull Transformation transformation;
 	protected final @NonNull StandardLibrary standardLibrary;
 
@@ -262,7 +272,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	private final @NonNull Map<@NonNull Integer, @NonNull DomainUsageConstant> validUsages = new HashMap<>();
 
 	/**
-	 * The TypedModels that are not primitive and not checkable and not enforceable.
+	 * The TypedModels of the middle/trace model - not primitive and not checkable and not enforceable.
 	 */
 	private DomainUsageConstant middleUsage = null;
 
@@ -282,7 +292,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	protected final @NonNull Map<@NonNull Operation, DomainUsageAnalysis.@NonNull Internal> operation2analysis = new HashMap<>();
 
 	private final @NonNull TypedModel primitiveTypedModel;
-
+	private final @NonNull TypedModel thisTypedModel;
 	private @Nullable TypedModel traceTypedModel = null;
 
 	private /*@LazyNonNull*/ OperationId oclAnyEqualsOperationId;
@@ -302,6 +312,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		super(environmentFactory);
 		this.transformation = transformation;
 		this.standardLibrary = context.getStandardLibrary();
+		addValidUsage(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
 		TypedModel primitiveTypedModel = QVTbaseUtil.basicGetPrimitiveTypedModel(transformation);
 		if (primitiveTypedModel == null) {
 			primitiveTypedModel = new QVTimperativeHelper(environmentFactory).createPrimitiveTypedModel();
@@ -310,9 +321,18 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		}
 		this.primitiveTypedModel = primitiveTypedModel;
 		add(primitiveTypedModel);
-		addValidUsage(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
 		addValidUsage(PRIMITIVE_USAGE_BIT_MASK, getConstantUsage(PRIMITIVE_USAGE_BIT_MASK));
 		setUsage(primitiveTypedModel, getPrimitiveUsage());
+		TypedModel thisTypedModel = QVTbaseUtil.basicGetThisTypedModel(transformation);
+		if (thisTypedModel == null) {
+			thisTypedModel = new QVTimperativeHelper(environmentFactory).createThisTypedModel();
+			transformation.getModelParameter().add(1, thisTypedModel);
+			//	QVTruntimeUtil.errPrintln("Missing this TypedModel fixed up for " + transformation);
+		}
+		this.thisTypedModel = thisTypedModel;
+		add(thisTypedModel);
+		addValidUsage(THIS_USAGE_BIT_MASK, getConstantUsage(THIS_USAGE_BIT_MASK));
+		setUsage(thisTypedModel, getThisUsage());
 	}
 
 	protected int add(@NonNull TypedModel typedModel) {
@@ -392,7 +412,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation() {
 		for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(transformation)) {
-			if (!typedModel.isIsPrimitive()) {
+			if (!typedModel.isIsPrimitive() && !QVTbaseUtil.isThis(typedModel)) {
 				int nextBit = add(typedModel);
 				int bitMask = 1 << nextBit;
 				@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
@@ -417,7 +437,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		type2usage.put(((StandardLibraryInternal)standardLibrary).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
 		Variable ownedContext = transformation.getOwnedContext();
 		if (ownedContext != null) {
-			setUsage(ownedContext, getAnyUsage());
+			setUsage(ownedContext, getThisUsage());
 		}
 		visit(transformation);
 		return element2usage;
@@ -633,6 +653,16 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	@Override
 	protected @NonNull RootDomainUsageAnalysis getRootAnalysis() {
 		return this;
+	}
+
+	public @NonNull TypedModel getThisTypedModel() {
+		return thisTypedModel;
+	}
+
+	public @NonNull DomainUsageConstant getThisUsage() {
+		DomainUsageConstant thisUsage = constantUsages.get(THIS_USAGE_BIT_MASK);
+		assert thisUsage != null;
+		return thisUsage;
 	}
 
 	public @NonNull TypedModel getTraceTypedModel() {
