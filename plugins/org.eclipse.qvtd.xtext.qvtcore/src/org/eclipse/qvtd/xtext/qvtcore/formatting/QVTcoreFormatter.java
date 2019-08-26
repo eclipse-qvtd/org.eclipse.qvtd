@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.formatting;
 
-import org.eclipse.ocl.xtext.essentialocl.formatting.AbstractEssentialOCLFormatter;
+import org.eclipse.qvtd.xtext.qvtbase.formatting.QVTbaseFormatter;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess.BottomPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess.DirectionCSElements;
@@ -34,7 +34,7 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig;
  *
  * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
  */
-public class QVTcoreFormatter extends AbstractEssentialOCLFormatter
+public class QVTcoreFormatter extends QVTbaseFormatter
 {
 
 	protected void configureBottomPatternCS(FormattingConfig c, BottomPatternCSElements a) {
@@ -165,9 +165,13 @@ public class QVTcoreFormatter extends AbstractEssentialOCLFormatter
 
 		QVTcoreGrammarAccess f = getGrammarAccess();
 
+		configureAttributeCS(c, f.getAttributeCSAccess());
 		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
 		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
 		configureCurlyBracketedClauseCS(c, f.getCurlyBracketedClauseCSAccess());
+		configureDataTypeCS(c, f.getDataTypeCSAccess());
+		configureEnumerationCS(c, f.getEnumerationCSAccess());
+		configureEnumerationLiteralCS(c, f.getEnumerationLiteralCSAccess());
 		configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorNameAccess());
 		configureExpCS(c, f.getExpCSAccess());
 		configureIfExpCS(c, f.getIfExpCSAccess());
@@ -180,11 +184,15 @@ public class QVTcoreFormatter extends AbstractEssentialOCLFormatter
 		configureNavigatingCommaArgCS(c, f.getNavigatingCommaArgCSAccess());
 		configureNavigatingSemiArgCS(c, f.getNavigatingSemiArgCSAccess());
 		configureNestedExpCS(c, f.getNestedExpCSAccess());
+		configureOperationCS(c, f.getOperationCSAccess());
+		configureParameterCS(c, f.getParameterCSAccess());
 		configurePathNameCS(c, f.getPathNameCSAccess());
 		configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());
 		configureQualifiedPackageCS(c, f.getQualifiedPackageCSAccess());
+		configureReferenceCS(c, f.getReferenceCSAccess());
 		configureRoundBracketedClauseCS(c, f.getRoundBracketedClauseCSAccess());
 		configureSquareBracketedClauseCS(c, f.getSquareBracketedClauseCSAccess());
+		configureStructuredClassCS(c, f.getStructuredClassCSAccess());
 		configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
 		configureTupleTypeCS(c, f.getTupleTypeCSAccess());
 		configureTypedTypeRefCS(c, f.getTypedTypeRefCSAccess());
