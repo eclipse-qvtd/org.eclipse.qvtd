@@ -363,7 +363,12 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTcoreVisitor<?>)visitor).visitGuardPattern(this);
+		try {
+			return (R) ((QVTcoreVisitor<?>)visitor).visitGuardPattern(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //GuardPatternImpl

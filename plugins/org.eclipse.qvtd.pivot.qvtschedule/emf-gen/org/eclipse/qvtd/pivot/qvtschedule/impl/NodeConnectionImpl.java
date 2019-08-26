@@ -348,7 +348,12 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitNodeConnection(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitNodeConnection(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

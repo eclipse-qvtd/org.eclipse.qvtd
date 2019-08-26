@@ -296,6 +296,11 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTrelationVisitor<?>)visitor).visitDomainPattern(this);
+		try {
+			return (R) ((QVTrelationVisitor<?>)visitor).visitDomainPattern(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //DomainPatternImpl

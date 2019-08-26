@@ -471,7 +471,12 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitCyclicPartition(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitCyclicPartition(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	public Region basicGetRegion() {

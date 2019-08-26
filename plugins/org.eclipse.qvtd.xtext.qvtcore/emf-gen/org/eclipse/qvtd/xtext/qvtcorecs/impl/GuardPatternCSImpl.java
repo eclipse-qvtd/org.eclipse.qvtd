@@ -182,7 +182,12 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitGuardPatternCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitGuardPatternCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //GuardPatternCSImpl

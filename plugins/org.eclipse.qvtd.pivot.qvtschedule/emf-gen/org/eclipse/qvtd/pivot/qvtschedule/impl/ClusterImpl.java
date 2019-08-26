@@ -563,7 +563,12 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitCluster(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitCluster(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 

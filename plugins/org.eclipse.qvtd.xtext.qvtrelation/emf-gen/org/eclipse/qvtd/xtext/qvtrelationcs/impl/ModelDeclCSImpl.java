@@ -189,6 +189,11 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitModelDeclCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitModelDeclCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //ModelDeclCSImpl

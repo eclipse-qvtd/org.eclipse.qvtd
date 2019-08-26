@@ -187,6 +187,11 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitObjectTemplateCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitObjectTemplateCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //ObjectTemplateCSImpl

@@ -158,7 +158,12 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitRuleRegion(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitRuleRegion(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

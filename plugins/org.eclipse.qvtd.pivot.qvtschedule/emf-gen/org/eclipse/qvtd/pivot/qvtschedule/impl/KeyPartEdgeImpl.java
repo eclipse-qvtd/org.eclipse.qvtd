@@ -198,7 +198,12 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitKeyPartEdge(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitKeyPartEdge(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

@@ -63,7 +63,12 @@ public class CGFunctionImpl extends CGOperationImpl implements CGFunction {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGFunction(this);
+		try {
+			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGFunction(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

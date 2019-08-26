@@ -482,7 +482,12 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTbaseVisitor<?>)visitor).visitTransformation(this);
+		try {
+			return (R) ((QVTbaseVisitor<?>)visitor).visitTransformation(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

@@ -383,6 +383,11 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitMappingLoop(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitMappingLoop(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //MappingLoopImpl

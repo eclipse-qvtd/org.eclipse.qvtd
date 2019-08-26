@@ -70,6 +70,11 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTbaseVisitor<?>)visitor).visitFunctionParameter(this);
+		try {
+			return (R) ((QVTbaseVisitor<?>)visitor).visitFunctionParameter(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //FunctionParameterImpl

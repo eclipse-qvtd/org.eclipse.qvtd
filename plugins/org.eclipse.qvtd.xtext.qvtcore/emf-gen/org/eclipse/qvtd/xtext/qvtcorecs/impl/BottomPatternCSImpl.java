@@ -259,7 +259,12 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitBottomPatternCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitBottomPatternCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //BottomPatternCSImpl

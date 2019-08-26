@@ -191,7 +191,12 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitSimpleParameter(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitSimpleParameter(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //SimpleParameterImpl

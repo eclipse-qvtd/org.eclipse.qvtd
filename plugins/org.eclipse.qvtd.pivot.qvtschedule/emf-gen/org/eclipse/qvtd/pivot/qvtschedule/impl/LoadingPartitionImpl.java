@@ -253,7 +253,12 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitLoadingPartition(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitLoadingPartition(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

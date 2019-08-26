@@ -73,7 +73,12 @@ public class PredicateEdgeImpl extends EdgeImpl implements PredicateEdge {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitPredicateEdge(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitPredicateEdge(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

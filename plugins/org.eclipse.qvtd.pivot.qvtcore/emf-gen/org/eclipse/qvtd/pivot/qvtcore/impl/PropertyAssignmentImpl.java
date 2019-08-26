@@ -711,7 +711,12 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTcoreVisitor<?>)visitor).visitPropertyAssignment(this);
+		try {
+			return (R) ((QVTcoreVisitor<?>)visitor).visitPropertyAssignment(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //PropertyAssignmentImpl

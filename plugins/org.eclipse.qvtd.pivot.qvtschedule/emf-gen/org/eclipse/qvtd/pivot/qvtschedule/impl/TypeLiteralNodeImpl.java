@@ -198,7 +198,12 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitTypeLiteralNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitTypeLiteralNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

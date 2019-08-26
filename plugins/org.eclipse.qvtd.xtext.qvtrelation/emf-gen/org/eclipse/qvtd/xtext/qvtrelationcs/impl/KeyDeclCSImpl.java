@@ -285,7 +285,12 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitKeyDeclCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitKeyDeclCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

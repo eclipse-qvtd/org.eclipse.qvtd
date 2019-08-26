@@ -466,6 +466,11 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTrelationVisitor<?>)visitor).visitRelationDomainAssignment(this);
+		try {
+			return (R) ((QVTrelationVisitor<?>)visitor).visitRelationDomainAssignment(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //RelationDomainAssignmentImpl

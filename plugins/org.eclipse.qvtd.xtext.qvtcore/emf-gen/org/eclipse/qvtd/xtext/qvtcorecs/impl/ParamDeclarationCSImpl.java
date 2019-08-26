@@ -70,7 +70,12 @@ public class ParamDeclarationCSImpl extends TypedElementCSImpl implements ParamD
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitParamDeclarationCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitParamDeclarationCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //ParamDeclarationCSImpl

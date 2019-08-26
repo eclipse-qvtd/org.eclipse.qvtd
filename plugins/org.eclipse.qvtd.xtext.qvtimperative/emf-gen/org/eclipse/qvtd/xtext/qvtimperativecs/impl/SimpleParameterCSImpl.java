@@ -183,7 +183,12 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitSimpleParameterCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitSimpleParameterCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //SimpleParameterCSImpl

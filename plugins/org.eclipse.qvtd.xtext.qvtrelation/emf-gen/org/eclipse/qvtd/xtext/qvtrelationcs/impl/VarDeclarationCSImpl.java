@@ -309,6 +309,11 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitVarDeclarationCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitVarDeclarationCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //VarDeclarationCSImpl

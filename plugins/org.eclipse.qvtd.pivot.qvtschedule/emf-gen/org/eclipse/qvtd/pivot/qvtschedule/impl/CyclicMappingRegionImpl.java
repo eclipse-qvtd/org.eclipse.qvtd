@@ -173,7 +173,12 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitCyclicMappingRegion(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitCyclicMappingRegion(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //CyclicMappingRegionImpl

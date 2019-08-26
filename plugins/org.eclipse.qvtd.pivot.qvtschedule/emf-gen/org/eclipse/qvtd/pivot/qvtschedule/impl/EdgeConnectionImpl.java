@@ -309,7 +309,12 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitEdgeConnection(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitEdgeConnection(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

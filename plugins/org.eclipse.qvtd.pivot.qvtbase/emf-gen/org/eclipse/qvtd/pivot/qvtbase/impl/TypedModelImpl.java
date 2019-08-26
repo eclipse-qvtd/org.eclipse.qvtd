@@ -483,7 +483,12 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTbaseVisitor<?>)visitor).visitTypedModel(this);
+		try {
+			return (R) ((QVTbaseVisitor<?>)visitor).visitTypedModel(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

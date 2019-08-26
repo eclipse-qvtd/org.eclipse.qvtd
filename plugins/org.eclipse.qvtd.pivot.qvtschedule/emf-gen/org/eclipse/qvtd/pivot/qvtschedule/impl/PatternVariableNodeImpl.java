@@ -80,7 +80,12 @@ public class PatternVariableNodeImpl extends VariableNodeImpl implements Pattern
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitPatternVariableNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitPatternVariableNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

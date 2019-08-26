@@ -247,7 +247,12 @@ public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitAppendParameterBindingCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitAppendParameterBindingCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //AppendParameterBindingCSImpl

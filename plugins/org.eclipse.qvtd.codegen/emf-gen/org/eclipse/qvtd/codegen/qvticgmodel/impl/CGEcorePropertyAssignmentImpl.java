@@ -160,7 +160,12 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGEcorePropertyAssignment(this);
+		try {
+			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGEcorePropertyAssignment(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //CGEcorePropertyAssignmentImpl

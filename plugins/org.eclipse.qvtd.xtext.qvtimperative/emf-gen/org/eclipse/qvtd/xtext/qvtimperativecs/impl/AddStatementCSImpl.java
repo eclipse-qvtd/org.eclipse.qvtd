@@ -343,7 +343,12 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitAddStatementCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitAddStatementCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //AddStatementCSImpl

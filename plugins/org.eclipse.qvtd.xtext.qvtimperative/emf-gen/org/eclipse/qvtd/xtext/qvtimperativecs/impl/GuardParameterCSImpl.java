@@ -264,7 +264,12 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitGuardParameterCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitGuardParameterCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //GuardParameterCSImpl

@@ -264,7 +264,12 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitAppendParameter(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitAppendParameter(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //AppendParameterImpl

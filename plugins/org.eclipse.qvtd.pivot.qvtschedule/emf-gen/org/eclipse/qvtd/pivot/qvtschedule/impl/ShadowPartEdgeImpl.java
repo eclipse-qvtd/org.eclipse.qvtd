@@ -200,7 +200,12 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitShadowPartEdge(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitShadowPartEdge(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

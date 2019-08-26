@@ -63,7 +63,12 @@ public class CGMiddlePropertyCallExpImpl extends CGOppositePropertyCallExpImpl i
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMiddlePropertyCallExp(this);
+		try {
+			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMiddlePropertyCallExp(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

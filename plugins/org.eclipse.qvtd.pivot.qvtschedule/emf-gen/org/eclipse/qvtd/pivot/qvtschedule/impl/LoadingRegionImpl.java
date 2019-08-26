@@ -324,7 +324,12 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitLoadingRegion(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitLoadingRegion(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	//	@Override

@@ -73,6 +73,11 @@ public class CollectionLiteralNodeImpl extends OperationNodeImpl implements Coll
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitCollectionLiteralNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitCollectionLiteralNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //CollectionLiteralNodeImpl

@@ -1199,7 +1199,12 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitSetStatement(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitSetStatement(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //SetStatementImpl

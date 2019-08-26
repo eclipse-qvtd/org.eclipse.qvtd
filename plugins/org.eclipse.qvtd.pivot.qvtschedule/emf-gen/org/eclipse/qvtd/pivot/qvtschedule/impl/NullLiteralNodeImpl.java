@@ -76,7 +76,12 @@ public class NullLiteralNodeImpl extends OperationNodeImpl implements NullLitera
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitNullLiteralNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitNullLiteralNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

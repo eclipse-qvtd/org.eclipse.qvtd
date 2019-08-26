@@ -190,7 +190,12 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitStringLiteralNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitStringLiteralNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

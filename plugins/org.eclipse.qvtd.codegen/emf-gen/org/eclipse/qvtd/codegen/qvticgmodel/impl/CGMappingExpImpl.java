@@ -252,7 +252,12 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMappingExp(this);
+		try {
+			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMappingExp(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

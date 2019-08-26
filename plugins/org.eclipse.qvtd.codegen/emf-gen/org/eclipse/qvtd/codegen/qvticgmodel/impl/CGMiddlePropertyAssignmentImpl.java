@@ -60,7 +60,12 @@ public class CGMiddlePropertyAssignmentImpl extends CGEcorePropertyAssignmentImp
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMiddlePropertyAssignment(this);
+		try {
+			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMiddlePropertyAssignment(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //CGMiddlePropertyAssignmentImpl

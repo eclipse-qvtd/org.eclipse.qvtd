@@ -62,6 +62,11 @@ public class VarDeclarationIdCSImpl extends NamedElementCSImpl implements VarDec
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitVarDeclarationIdCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitVarDeclarationIdCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //VarDeclarationIdCSImpl

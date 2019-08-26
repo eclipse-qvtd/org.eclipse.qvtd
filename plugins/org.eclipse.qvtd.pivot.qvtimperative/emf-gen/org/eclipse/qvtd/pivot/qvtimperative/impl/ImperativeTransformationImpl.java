@@ -201,7 +201,12 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitImperativeTransformation(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitImperativeTransformation(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //ImperativeTransformationImpl

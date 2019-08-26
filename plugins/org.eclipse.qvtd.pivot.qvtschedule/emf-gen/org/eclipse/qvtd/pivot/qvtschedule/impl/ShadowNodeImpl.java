@@ -74,6 +74,11 @@ public class ShadowNodeImpl extends OperationNodeImpl implements ShadowNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitShadowNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitShadowNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //ShadowNodeImpl

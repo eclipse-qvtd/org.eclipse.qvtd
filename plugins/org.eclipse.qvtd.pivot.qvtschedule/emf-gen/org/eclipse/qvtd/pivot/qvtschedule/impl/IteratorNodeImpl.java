@@ -73,7 +73,12 @@ public class IteratorNodeImpl extends VariableNodeImpl implements IteratorNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitIteratorNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitIteratorNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

@@ -385,7 +385,12 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTcoreVisitor<?>)visitor).visitVariableAssignment(this);
+		try {
+			return (R) ((QVTcoreVisitor<?>)visitor).visitVariableAssignment(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //VariableAssignmentImpl

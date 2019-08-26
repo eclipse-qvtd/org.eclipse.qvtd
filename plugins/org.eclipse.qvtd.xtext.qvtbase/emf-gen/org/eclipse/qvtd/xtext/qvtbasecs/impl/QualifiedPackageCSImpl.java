@@ -224,7 +224,12 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTbaseCSVisitor<?>)visitor).visitQualifiedPackageCS(this);
+		try {
+			return (R) ((QVTbaseCSVisitor<?>)visitor).visitQualifiedPackageCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //QualifiedPackageCSImpl

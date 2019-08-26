@@ -160,7 +160,12 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGEcoreRealizedVariable(this);
+		try {
+			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGEcoreRealizedVariable(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

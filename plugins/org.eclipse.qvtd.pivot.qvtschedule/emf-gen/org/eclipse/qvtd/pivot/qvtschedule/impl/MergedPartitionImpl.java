@@ -203,7 +203,12 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitMergedPartition(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitMergedPartition(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 

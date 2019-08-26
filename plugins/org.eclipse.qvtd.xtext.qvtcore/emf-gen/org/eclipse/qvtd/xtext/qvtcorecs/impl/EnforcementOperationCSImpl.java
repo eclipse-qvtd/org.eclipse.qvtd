@@ -275,7 +275,12 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitEnforcementOperationCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitEnforcementOperationCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //EnforcementOperationCSImpl

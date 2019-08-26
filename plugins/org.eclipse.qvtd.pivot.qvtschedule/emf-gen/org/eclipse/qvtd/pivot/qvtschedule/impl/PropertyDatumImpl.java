@@ -449,7 +449,12 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitPropertyDatum(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitPropertyDatum(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

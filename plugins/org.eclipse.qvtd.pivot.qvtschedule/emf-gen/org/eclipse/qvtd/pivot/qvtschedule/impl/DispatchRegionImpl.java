@@ -197,7 +197,12 @@ public class DispatchRegionImpl extends RuleRegionImpl implements DispatchRegion
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitDispatchRegion(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitDispatchRegion(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //DispatchRegionImpl

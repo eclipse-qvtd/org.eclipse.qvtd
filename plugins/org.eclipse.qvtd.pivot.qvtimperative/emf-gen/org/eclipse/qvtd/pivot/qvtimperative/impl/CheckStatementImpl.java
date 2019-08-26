@@ -297,7 +297,12 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitCheckStatement(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitCheckStatement(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //CheckStatementImpl

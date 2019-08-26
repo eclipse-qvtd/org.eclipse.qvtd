@@ -397,7 +397,12 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitPredicateOrAssignmentCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitPredicateOrAssignmentCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //PredicateOrAssignmentCSImpl

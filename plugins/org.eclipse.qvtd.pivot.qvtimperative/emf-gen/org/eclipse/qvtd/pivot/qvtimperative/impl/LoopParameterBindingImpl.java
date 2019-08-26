@@ -257,7 +257,12 @@ public class LoopParameterBindingImpl extends MappingParameterBindingImpl implem
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitLoopParameterBinding(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitLoopParameterBinding(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //LoopParameterBindingImpl

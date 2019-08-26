@@ -244,6 +244,11 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitCollectionTemplateCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitCollectionTemplateCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //CollectionTemplateCSImpl

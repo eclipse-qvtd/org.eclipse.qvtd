@@ -390,6 +390,11 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTrelationVisitor<?>)visitor).visitSharedVariable(this);
+		try {
+			return (R) ((QVTrelationVisitor<?>)visitor).visitSharedVariable(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //SharedVariableImpl

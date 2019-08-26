@@ -490,7 +490,12 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTcoreVisitor<?>)visitor).visitBottomPattern(this);
+		try {
+			return (R) ((QVTcoreVisitor<?>)visitor).visitBottomPattern(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //BottomPatternImpl

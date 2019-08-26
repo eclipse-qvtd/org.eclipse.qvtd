@@ -202,7 +202,12 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitEntryPointCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitEntryPointCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //EntryPointCSImpl

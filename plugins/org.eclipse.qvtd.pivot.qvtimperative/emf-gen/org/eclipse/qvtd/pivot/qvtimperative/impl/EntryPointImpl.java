@@ -212,7 +212,12 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitEntryPoint(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitEntryPoint(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //EntryPointImpl

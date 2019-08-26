@@ -450,6 +450,11 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitMappingCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitMappingCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //MappingCSImpl

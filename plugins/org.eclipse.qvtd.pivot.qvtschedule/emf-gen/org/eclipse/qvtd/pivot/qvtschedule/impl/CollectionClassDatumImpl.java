@@ -201,7 +201,12 @@ public class CollectionClassDatumImpl extends ClassDatumImpl implements Collecti
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitCollectionClassDatum(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitCollectionClassDatum(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //CollectionClassDatumImpl

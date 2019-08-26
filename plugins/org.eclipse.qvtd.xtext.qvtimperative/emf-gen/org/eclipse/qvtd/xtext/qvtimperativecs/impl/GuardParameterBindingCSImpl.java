@@ -311,7 +311,12 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitGuardParameterBindingCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitGuardParameterBindingCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //GuardParameterBindingCSImpl

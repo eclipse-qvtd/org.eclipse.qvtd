@@ -180,6 +180,11 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitElementTemplateCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitElementTemplateCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //ElementTemplateCSImpl

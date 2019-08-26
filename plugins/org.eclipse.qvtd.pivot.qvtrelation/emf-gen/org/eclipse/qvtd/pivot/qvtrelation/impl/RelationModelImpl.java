@@ -70,7 +70,12 @@ public class RelationModelImpl extends BaseModelImpl implements RelationModel {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTrelationVisitor<?>)visitor).visitRelationModel(this);
+		try {
+			return (R) ((QVTrelationVisitor<?>)visitor).visitRelationModel(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //RelationModelImpl

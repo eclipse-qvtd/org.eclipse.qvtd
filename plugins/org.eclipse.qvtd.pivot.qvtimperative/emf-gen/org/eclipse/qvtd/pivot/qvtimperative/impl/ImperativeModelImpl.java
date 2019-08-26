@@ -70,6 +70,11 @@ public class ImperativeModelImpl extends BaseModelImpl implements ImperativeMode
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitImperativeModel(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitImperativeModel(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //ImperativeModelImpl

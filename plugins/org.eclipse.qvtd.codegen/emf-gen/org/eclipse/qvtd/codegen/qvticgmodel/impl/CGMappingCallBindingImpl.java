@@ -287,7 +287,12 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMappingCallBinding(this);
+		try {
+			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMappingCallBinding(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

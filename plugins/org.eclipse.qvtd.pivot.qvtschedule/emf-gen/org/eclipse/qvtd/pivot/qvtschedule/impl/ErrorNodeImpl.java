@@ -75,7 +75,12 @@ public class ErrorNodeImpl extends MappingNodeImpl implements ErrorNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitErrorNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitErrorNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

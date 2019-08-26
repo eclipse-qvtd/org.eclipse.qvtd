@@ -727,6 +727,11 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTrelationVisitor<?>)visitor).visitRelationCallExp(this);
+		try {
+			return (R) ((QVTrelationVisitor<?>)visitor).visitRelationCallExp(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //RelationCallExpImpl

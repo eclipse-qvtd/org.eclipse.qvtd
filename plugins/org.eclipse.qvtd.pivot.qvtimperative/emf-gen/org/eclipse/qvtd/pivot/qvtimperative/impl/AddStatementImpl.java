@@ -522,7 +522,12 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitAddStatement(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitAddStatement(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //AddStatementImpl

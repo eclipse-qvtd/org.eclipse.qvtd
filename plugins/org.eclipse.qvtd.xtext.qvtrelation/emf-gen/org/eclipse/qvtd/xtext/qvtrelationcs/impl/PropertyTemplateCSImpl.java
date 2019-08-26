@@ -421,6 +421,11 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitPropertyTemplateCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitPropertyTemplateCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //PropertyTemplateCSImpl

@@ -73,6 +73,11 @@ public class CollectionRangeNodeImpl extends OperationNodeImpl implements Collec
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitCollectionRangeNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitCollectionRangeNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //CollectionRangeNodeImpl

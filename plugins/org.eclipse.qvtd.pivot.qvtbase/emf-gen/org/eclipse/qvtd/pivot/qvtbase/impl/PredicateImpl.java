@@ -384,6 +384,11 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTbaseVisitor<?>)visitor).visitPredicate(this);
+		try {
+			return (R) ((QVTbaseVisitor<?>)visitor).visitPredicate(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //PredicateImpl

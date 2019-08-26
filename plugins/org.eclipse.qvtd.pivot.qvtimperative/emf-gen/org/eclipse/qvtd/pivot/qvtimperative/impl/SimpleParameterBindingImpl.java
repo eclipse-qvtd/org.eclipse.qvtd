@@ -477,7 +477,12 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitSimpleParameterBinding(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitSimpleParameterBinding(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //SimpleParameterBindingImpl

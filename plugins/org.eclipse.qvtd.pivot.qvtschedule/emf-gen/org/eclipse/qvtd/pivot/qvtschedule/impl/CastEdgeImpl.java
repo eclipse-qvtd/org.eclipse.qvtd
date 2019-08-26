@@ -194,7 +194,12 @@ public class CastEdgeImpl extends EdgeImpl implements CastEdge {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitCastEdge(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitCastEdge(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

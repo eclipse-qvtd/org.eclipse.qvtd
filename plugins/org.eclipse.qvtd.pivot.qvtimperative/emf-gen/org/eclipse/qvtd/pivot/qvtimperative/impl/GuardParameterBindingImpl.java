@@ -257,7 +257,12 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitGuardParameterBinding(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitGuardParameterBinding(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //GuardParameterBindingImpl

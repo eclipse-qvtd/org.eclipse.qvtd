@@ -194,7 +194,12 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitDirectionCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitDirectionCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //DirectionCSImpl

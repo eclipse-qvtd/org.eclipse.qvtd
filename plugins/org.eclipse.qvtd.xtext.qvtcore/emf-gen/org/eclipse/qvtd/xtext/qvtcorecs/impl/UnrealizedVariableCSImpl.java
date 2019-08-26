@@ -209,7 +209,12 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitUnrealizedVariableCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitUnrealizedVariableCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //UnrealizedVariableCSImpl

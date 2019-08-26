@@ -170,6 +170,11 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitPrimitiveTypeDomainCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitPrimitiveTypeDomainCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //PrimitiveTypeDomainCSImpl

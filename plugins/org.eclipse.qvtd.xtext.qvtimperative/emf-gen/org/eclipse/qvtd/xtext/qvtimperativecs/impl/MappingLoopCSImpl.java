@@ -383,7 +383,12 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitMappingLoopCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitMappingLoopCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //MappingLoopCSImpl

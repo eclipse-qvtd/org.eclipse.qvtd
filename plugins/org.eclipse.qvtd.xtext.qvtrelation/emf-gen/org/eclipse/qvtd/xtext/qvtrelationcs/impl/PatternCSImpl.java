@@ -171,6 +171,11 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitPatternCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitPatternCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //PatternCSImpl

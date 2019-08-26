@@ -162,7 +162,12 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGFunctionCallExp(this);
+		try {
+			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGFunctionCallExp(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

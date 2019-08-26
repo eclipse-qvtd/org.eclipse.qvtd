@@ -423,6 +423,11 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitMappingCallCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitMappingCallCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //MappingCallCSImpl

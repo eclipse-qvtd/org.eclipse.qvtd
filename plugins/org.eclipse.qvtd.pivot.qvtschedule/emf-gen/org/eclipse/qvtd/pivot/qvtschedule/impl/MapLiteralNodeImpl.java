@@ -73,6 +73,11 @@ public class MapLiteralNodeImpl extends OperationNodeImpl implements MapLiteralN
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitMapLiteralNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitMapLiteralNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //MapLiteralNodeImpl

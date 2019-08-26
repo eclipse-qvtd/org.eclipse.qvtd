@@ -72,6 +72,11 @@ public class MapPartNodeImpl extends OperationNodeImpl implements MapPartNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitMapPartNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitMapPartNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //MapPartNodeImpl

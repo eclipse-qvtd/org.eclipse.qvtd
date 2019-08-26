@@ -76,7 +76,12 @@ public class IncludesEdgeImpl extends ExpressionEdgeImpl implements IncludesEdge
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitIncludesEdge(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitIncludesEdge(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //IncludesEdgeImpl

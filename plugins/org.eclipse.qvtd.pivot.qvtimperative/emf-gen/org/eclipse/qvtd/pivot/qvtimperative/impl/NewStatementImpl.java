@@ -595,7 +595,12 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitNewStatement(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitNewStatement(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

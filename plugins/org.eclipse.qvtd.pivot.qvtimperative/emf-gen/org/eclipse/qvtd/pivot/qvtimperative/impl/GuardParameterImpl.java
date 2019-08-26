@@ -256,7 +256,12 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitGuardParameter(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitGuardParameter(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //GuardParameterImpl

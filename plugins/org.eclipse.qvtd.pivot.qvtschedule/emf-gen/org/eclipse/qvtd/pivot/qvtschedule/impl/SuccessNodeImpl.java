@@ -76,7 +76,12 @@ public class SuccessNodeImpl extends MappingNodeImpl implements SuccessNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitSuccessNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitSuccessNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

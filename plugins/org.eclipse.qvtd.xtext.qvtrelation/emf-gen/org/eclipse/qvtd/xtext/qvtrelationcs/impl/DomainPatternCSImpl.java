@@ -198,6 +198,11 @@ public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPat
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitDomainPatternCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitDomainPatternCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //DomainPatternCSImpl

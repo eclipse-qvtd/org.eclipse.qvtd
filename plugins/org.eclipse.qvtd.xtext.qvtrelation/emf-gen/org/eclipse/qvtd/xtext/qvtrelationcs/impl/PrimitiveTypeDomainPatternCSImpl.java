@@ -68,7 +68,12 @@ public class PrimitiveTypeDomainPatternCSImpl extends TemplateVariableCSImpl imp
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitPrimitiveTypeDomainPatternCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitPrimitiveTypeDomainPatternCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //PrimitiveTypeDomainPatternCSImpl

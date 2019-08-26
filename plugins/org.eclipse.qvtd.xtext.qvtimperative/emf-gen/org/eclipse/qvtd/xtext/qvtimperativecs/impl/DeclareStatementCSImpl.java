@@ -356,7 +356,12 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitDeclareStatementCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitDeclareStatementCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //PredicateVariableCSImpl

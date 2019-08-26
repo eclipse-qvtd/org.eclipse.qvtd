@@ -236,6 +236,11 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTbaseVisitor<?>)visitor).visitPattern(this);
+		try {
+			return (R) ((QVTbaseVisitor<?>)visitor).visitPattern(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //PatternImpl

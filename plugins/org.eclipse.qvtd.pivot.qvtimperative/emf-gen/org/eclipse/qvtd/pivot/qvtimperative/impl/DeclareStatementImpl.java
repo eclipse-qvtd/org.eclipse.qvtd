@@ -470,7 +470,12 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitDeclareStatement(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitDeclareStatement(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //PredicateVariableImpl

@@ -191,7 +191,12 @@ public class AppendParameterBindingImpl extends MappingParameterBindingImpl impl
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitAppendParameterBinding(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitAppendParameterBinding(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //AppendParameterBindingImpl

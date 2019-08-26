@@ -74,7 +74,12 @@ public class DependencyNodeImpl extends NodeImpl implements DependencyNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitDependencyNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitDependencyNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

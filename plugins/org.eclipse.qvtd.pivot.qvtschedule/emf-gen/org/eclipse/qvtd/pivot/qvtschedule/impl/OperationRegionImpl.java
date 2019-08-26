@@ -435,7 +435,12 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationRegion(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationRegion(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

@@ -193,7 +193,12 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitBooleanLiteralNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitBooleanLiteralNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

@@ -508,7 +508,12 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitQueryCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitQueryCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //QueryCSImpl

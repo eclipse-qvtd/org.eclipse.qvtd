@@ -64,7 +64,12 @@ public class CGConnectionVariableImpl extends CGGuardVariableImpl implements CGC
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGConnectionVariable(this);
+		try {
+			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGConnectionVariable(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //CGConnectionVariableImpl

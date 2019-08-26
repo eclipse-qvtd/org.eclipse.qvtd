@@ -815,7 +815,12 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitBasicPartition(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitBasicPartition(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

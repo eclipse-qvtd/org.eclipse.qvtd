@@ -231,7 +231,12 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitLoopVariable(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitLoopVariable(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //LoopVariableImpl

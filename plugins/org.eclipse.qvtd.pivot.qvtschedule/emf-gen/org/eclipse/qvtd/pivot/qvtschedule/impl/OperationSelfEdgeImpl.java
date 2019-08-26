@@ -198,7 +198,12 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationSelfEdge(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationSelfEdge(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

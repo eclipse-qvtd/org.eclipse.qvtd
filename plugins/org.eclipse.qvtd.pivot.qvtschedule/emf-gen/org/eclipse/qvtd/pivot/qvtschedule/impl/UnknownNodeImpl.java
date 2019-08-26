@@ -73,7 +73,12 @@ public class UnknownNodeImpl extends MappingNodeImpl implements UnknownNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitUnknownNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitUnknownNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

@@ -682,6 +682,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitMapping(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitMapping(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //MappingImpl

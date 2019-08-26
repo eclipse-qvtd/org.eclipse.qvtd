@@ -311,7 +311,12 @@ public class LoopParameterBindingCSImpl extends MappingParameterBindingCSImpl im
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitLoopParameterBindingCS(this);
+		try {
+			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitLoopParameterBindingCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //LoopParameterBindingCSImpl

@@ -571,7 +571,12 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitDomainCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitDomainCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

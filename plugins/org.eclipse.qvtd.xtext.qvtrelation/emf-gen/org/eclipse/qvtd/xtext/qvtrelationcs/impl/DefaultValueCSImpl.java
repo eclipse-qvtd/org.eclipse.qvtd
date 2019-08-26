@@ -263,6 +263,11 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitDefaultValueCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitDefaultValueCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //DefaultValueCSImpl

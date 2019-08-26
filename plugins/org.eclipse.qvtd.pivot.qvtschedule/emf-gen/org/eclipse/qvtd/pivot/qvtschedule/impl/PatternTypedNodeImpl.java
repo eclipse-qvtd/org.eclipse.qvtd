@@ -80,7 +80,12 @@ public class PatternTypedNodeImpl extends MappingNodeImpl implements PatternType
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitPatternTypedNode(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitPatternTypedNode(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	@Override

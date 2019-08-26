@@ -389,6 +389,11 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTrelationVisitor<?>)visitor).visitRelationDomain(this);
+		try {
+			return (R) ((QVTrelationVisitor<?>)visitor).visitRelationDomain(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //RelationDomainImpl

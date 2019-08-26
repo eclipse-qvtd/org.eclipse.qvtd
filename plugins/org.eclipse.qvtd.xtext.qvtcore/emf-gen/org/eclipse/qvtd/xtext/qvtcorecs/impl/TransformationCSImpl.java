@@ -201,7 +201,12 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTcoreCSVisitor<?>)visitor).visitTransformationCS(this);
+		try {
+			return (R) ((QVTcoreCSVisitor<?>)visitor).visitTransformationCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //TransformationCSImpl

@@ -194,7 +194,12 @@ public class BottomVariableImpl extends VariableImpl implements BottomVariable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTcoreVisitor<?>)visitor).visitBottomVariable(this);
+		try {
+			return (R) ((QVTcoreVisitor<?>)visitor).visitBottomVariable(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //BottomVariableImpl

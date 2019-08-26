@@ -827,7 +827,12 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitMappingCall(this);
+		try {
+			return (R) ((QVTimperativeVisitor<?>)visitor).visitMappingCall(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

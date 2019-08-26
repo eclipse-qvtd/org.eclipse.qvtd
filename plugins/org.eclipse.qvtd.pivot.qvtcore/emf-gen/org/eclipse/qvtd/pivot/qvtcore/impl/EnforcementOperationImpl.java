@@ -375,7 +375,12 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTcoreVisitor<?>)visitor).visitEnforcementOperation(this);
+		try {
+			return (R) ((QVTcoreVisitor<?>)visitor).visitEnforcementOperation(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //EnforcementOperationImpl

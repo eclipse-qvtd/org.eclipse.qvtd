@@ -173,6 +173,11 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTrelationCSVisitor<?>)visitor).visitTopLevelCS(this);
+		try {
+			return (R) ((QVTrelationCSVisitor<?>)visitor).visitTopLevelCS(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 } //TopLevelCSImpl

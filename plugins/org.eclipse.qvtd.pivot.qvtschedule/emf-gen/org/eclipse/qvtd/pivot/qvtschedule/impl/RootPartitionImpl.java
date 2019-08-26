@@ -296,7 +296,12 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitRootPartition(this);
+		try {
+			return (R) ((QVTscheduleVisitor<?>)visitor).visitRootPartition(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //RootPartitionImpl

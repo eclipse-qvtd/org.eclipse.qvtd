@@ -714,7 +714,12 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTcoreVisitor<?>)visitor).visitOppositePropertyAssignment(this);
+		try {
+			return (R) ((QVTcoreVisitor<?>)visitor).visitOppositePropertyAssignment(this);
+		}
+		catch (ClassCastException e) {
+			return super.accept(visitor);
+		}
 	}
 
 } //OppositePropertyAssignmentImpl
