@@ -149,7 +149,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					throwCompilerChainExceptionForErrors();
 					saveResource(qvtsResource);
 				}
-				catch (CompilerChainException e) {
+				catch (CompilerChainException|AssertionError e) {
 					//
 					//	Save trace for debugging. Normally trace saved as part of GenModel creation.
 					//

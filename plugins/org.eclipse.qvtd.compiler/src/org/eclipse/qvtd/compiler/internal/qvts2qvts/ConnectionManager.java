@@ -448,9 +448,11 @@ public class ConnectionManager
 			else {
 				NodeConnection headConnection = createHeadConnection(s, rootRegion, region, headNode);
 				if (headConnection == null) {
-					CompilerUtil.addRegionError(getProblemHandler(), region, "No incoming connections for " + headNode.getName());
-					headConnection = createHeadConnection(s, rootRegion, region, headNode);	// FIXME debugging
-					return null;										//  so matching only fails for unmatchable real heads
+					if (!headNode.isThis()) {
+						CompilerUtil.addRegionError(getProblemHandler(), region, "No incoming connections for " + headNode.getName());
+						headConnection = createHeadConnection(s, rootRegion, region, headNode);	// FIXME debugging
+						return null;										//  so matching only fails for unmatchable real heads
+					}
 				}
 				else {
 					if (headConnections == null) {

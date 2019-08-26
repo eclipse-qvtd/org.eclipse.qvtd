@@ -66,6 +66,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -110,6 +111,8 @@ public class RelationAnalysis extends RuleAnalysis
 	//	private final @NonNull Set<@NonNull Predicate> complexPredicates = new HashSet<>();
 
 	//	private @Nullable Node traceNode = null;
+
+	private @Nullable Node thisNode = null;
 
 	/**
 	 * The variable initializers, simple predicate reference expression and variable assignment values that define a value for each variable.
@@ -700,12 +703,16 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 			if (node == null) {
 				node = createOldNode(variableDeclaration);
+				if (node.isThis()) {
+					setThisNode(node);
+				}
 			}
 		}
 		assert node != null : "No variable2simpleNode entry for " + variableDeclaration;
 		assert node == region.getNode(variableDeclaration);
 		return node;
 	}
+
 	private @Nullable Node getReferenceNodeForSharedVariable(@NonNull SharedVariable variable, @Nullable OCLExpression predicatedInit /*, @NonNull List<@NonNull OCLExpression> expressions*/) {
 		//
 		//	Use something hard to compute as the initializer that creates an initNode in the hope that other
@@ -955,6 +962,11 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	} */
 
+	private void setThisNode(@NonNull Node node) {
+		assert thisNode == null;
+		this.thisNode  = node;
+	}
+
 	public void synthesizeCollectionTemplate(@NonNull CollectionTemplateExp collectionTemplateExp) {
 		boolean isOutput = scheduleManager.isOutput(scheduleManager.getDomainUsage(collectionTemplateExp));
 		if (isOutput) {
@@ -1015,6 +1027,9 @@ public class RelationAnalysis extends RuleAnalysis
 		region.getHeadNodes().clear();
 		region.getHeadNodes().add(headNode);
 		headNode.setHead();
+		if (thisNode != null) {
+			region.getHeadNodes().add(thisNode);
+		}
 		return dispatchNode;
 	}
 
@@ -1402,7 +1417,7 @@ public class RelationAnalysis extends RuleAnalysis
 			return;
 		}
 		Node resultNode = predicateExpression.accept(expressionSynthesizer); //.getConditionalExpressionSynthesizer());	// See Bug 547263
-		if (resultNode != null) {
+		if ((resultNode != null) && (!resultNode.isRequired() || !(resultNode instanceof BooleanLiteralNode))) {
 			Node trueNode = createBooleanLiteralNode(true);
 			createPredicateEdge(resultNode, null, trueNode);
 		}
@@ -1689,6 +1704,9 @@ public class RelationAnalysis extends RuleAnalysis
 			region.getHeadNodes().clear();
 			region.getHeadNodes().add(traceNode);
 			traceNode.setHead();
+			if (thisNode != null) {
+				region.getHeadNodes().add(thisNode);
+			}
 			//			}
 			//			else {
 			//				traceNode = createRealizedStepNode(traceVariable);

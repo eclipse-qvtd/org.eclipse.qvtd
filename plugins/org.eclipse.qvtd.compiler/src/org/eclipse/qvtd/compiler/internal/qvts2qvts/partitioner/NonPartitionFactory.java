@@ -85,6 +85,10 @@ public class NonPartitionFactory extends AbstractSimplePartitionFactory
 		//	The zero-cost nodes are the head nodes ...
 		//
 		List<@NonNull Node> zeroCostNodes = Lists.newArrayList(QVTscheduleUtil.getHeadNodes(region));
+		Node thisNode = mappingPartitioner.getThisNode();
+		if (thisNode != null) {
+			assert zeroCostNodes.contains(thisNode);
+		}
 		//
 		//	... and the no-input constant nodes
 		//

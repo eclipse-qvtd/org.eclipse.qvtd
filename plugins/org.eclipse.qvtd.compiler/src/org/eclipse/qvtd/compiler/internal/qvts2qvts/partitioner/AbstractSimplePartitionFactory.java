@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -190,7 +191,13 @@ public abstract class AbstractSimplePartitionFactory extends AbstractPartitionFa
 	protected @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
 		Iterable<@NonNull Node> traceNodes = mappingPartitioner.getTraceNodes();
 		Iterable<@NonNull Node> constantInputNodes = mappingPartitioner.getConstantInputNodes();
-		return Iterables.concat(traceNodes, constantInputNodes);
+		Node thisNode = mappingPartitioner.getThisNode();
+		if (thisNode != null) {
+			return Iterables.concat(traceNodes, Collections.singletonList(thisNode), constantInputNodes);
+		}
+		else {
+			return Iterables.concat(traceNodes, constantInputNodes);
+		}
 	}
 
 

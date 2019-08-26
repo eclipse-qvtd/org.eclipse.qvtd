@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
@@ -486,14 +487,25 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	}
 
 	public @NonNull VariableNode createOldNode(@NonNull VariableDeclaration variable) {
+		ClassDatum classDatum = scheduleManager.getClassDatum(variable);
+		boolean isThis = QVTbaseUtil.isThis(variable);
+		if (isThis) {
+			Transformation transformation = QVTbaseUtil.getContainingTransformation(variable);
+			Type type = variable.getType();
+			assert type == transformation;
+			classDatum = scheduleManager.getTransformationTraceClassDatum(transformation);
+		}
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(variable);
-		boolean isEnforceable = scheduleManager.isOutput(domainUsage) || domainUsage.isMiddle();
-		Role phase = isEnforceable ? Role.PREDICATED : Role.LOADED;
-		Role nodeRole = phase;
+		boolean isEnforceable = !isThis && (scheduleManager.isOutput(domainUsage) || domainUsage.isMiddle());
+		Role nodeRole = isEnforceable ? Role.PREDICATED : Role.LOADED;
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
-		node.initialize(nodeRole, region, getName(variable), scheduleManager.getClassDatum(variable));
+		node.initialize(nodeRole, region, getName(variable), classDatum);
 		node.initializeVariable(region, variable);
 		node.setMatched(variable.isIsRequired());
+		if (isThis) {
+			node.setThis();
+			node.setHead();
+		}
 		return node;
 	}
 

@@ -44,6 +44,7 @@ public class RelationalTransformation2TracePackage extends Transformation2TraceP
 
 	public RelationalTransformation2TracePackage(@NonNull QVTrelationMultipleScheduleManager scheduleManager, @NonNull RelationalTransformation transformation) {
 		super(scheduleManager, transformation);
+		getTransformationTraceClass().getSuperClasses().add(getExecutionClass());
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getDispatchClass() {

@@ -18,10 +18,10 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
@@ -47,11 +47,12 @@ public abstract class Transformation2TracePackage
 	protected final @NonNull NameGenerator nameGenerator;
 	protected final @NonNull Transformation transformation;
 	private final org.eclipse.ocl.pivot.@NonNull Package tracePackage;
+	private org.eclipse.ocl.pivot.@Nullable Class transformationTraceClass;
 
 	/**
 	 * Name to corresponding trace class
 	 */
-	protected final @NonNull Map<@NonNull String, @NonNull Rule2MiddleType> name2rule2middleType = new HashMap<>();
+	protected final @NonNull Map<@NonNull String, @NonNull Nameable> name2rule2middleType = new HashMap<>();
 
 	/**
 	 * Map of relation to trace classes.
@@ -94,6 +95,7 @@ public abstract class Transformation2TracePackage
 		this.transformation = transformation;
 		this.tracePackage = createTracePackage();
 		assert scheduleManager.getMultipleScheduleManager() == scheduleManager;
+		getTransformationTraceClass();
 	}
 
 	public void addDirectedRule(@NonNull Rule rule, @NonNull Rule2TraceGroup relation2traceGroup) {
@@ -124,6 +126,16 @@ public abstract class Transformation2TracePackage
 		//		String name = QVTrelationUtil.getName(rVariable);
 		//		CompleteClass completeClass = getCompleteClass(aClass);
 		//		return completeClass.getProperty(name);
+	}
+
+	public org.eclipse.ocl.pivot.@NonNull Class createClass(@NonNull Transformation transformation, @NonNull String className) {
+		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = QVTbaseUtil.Internal.getOwnedClassesList(tracePackage);
+		String uniqueName = NameGenerator.getUniqueName(name2rule2middleType, className, transformation);
+		org.eclipse.ocl.pivot.Class traceClass = PivotUtil.createClass(uniqueName);
+		traceClasses.add(traceClass);
+		//		middleClass2rule2middleType.put(traceClass, rule2middleType);
+		name2rule2middleType.put(uniqueName, transformation);
+		return traceClass;
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class createClass(@NonNull Rule2MiddleType rule2middleType, @NonNull String className) {
@@ -310,14 +322,30 @@ public abstract class Transformation2TracePackage
 
 	protected org.eclipse.ocl.pivot.@NonNull Package createTracePackage() {
 		org.eclipse.ocl.pivot.Package rPackage = transformation.getOwningPackage();
-		org.eclipse.ocl.pivot.Package tracePackage = PivotFactory.eINSTANCE.createPackage();
-		tracePackage.setName("trace_" + transformation.getName());
-		tracePackage.setNsPrefix("P" + transformation.getName());
-		StringBuilder sURI = new StringBuilder();
-		getURI(rPackage, sURI);
-		tracePackage.setURI(sURI.toString() + "/" + transformation.getName());
-		//		qvtr2qvtc.putTracePackage(transformation, tracePackage);
-		return tracePackage;
+		String txName = transformation.getName();
+		String traceTxName = "trace_" + txName;
+		String traceTxNsPrefix = "P" + txName;
+		StringBuilder s = new StringBuilder();
+		getURI(rPackage, s);
+		s.append("/" + txName);
+		return PivotUtil.createPackage(traceTxName, traceTxNsPrefix, s.toString(), null);
+	}
+
+	public org.eclipse.ocl.pivot.@NonNull Class createTransformationTraceClass() {
+		org.eclipse.ocl.pivot.Class transformationTraceClass = createClass(transformation, "Tx" + transformation.getName());
+		for (@NonNull Property contextualProperty : PivotUtil.getOwnedProperties(transformation)) {
+			if ((contextualProperty.getOpposite() == null) && !contextualProperty.isIsDerived() && !contextualProperty.isIsTransient() && !contextualProperty.isIsVolatile()) {
+				String name = PivotUtil.getName(contextualProperty);
+				Type type = PivotUtil.getType(contextualProperty);
+				assert contextualProperty.getOpposite() == null;
+				assert !contextualProperty.isIsMany();
+				Property contextualTraceProperty = PivotUtil.createProperty(name, type);
+				contextualTraceProperty.setIsRequired(contextualProperty.isIsRequired());
+				transformationTraceClass.getOwnedProperties().add(contextualTraceProperty);
+			}
+		}
+		this.transformationTraceClass = transformationTraceClass;
+		return transformationTraceClass;
 	}
 
 	/*	protected @NonNull WhenInvocation2TraceClass createWhenInvocation2TraceClass(@NonNull RelationCallExp rInvocation, @NonNull Relation invokedRelation) {
@@ -433,6 +461,14 @@ public abstract class Transformation2TracePackage
 	//	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
 	//		return transformationAnalysis;
 	//	}
+
+	public org.eclipse.ocl.pivot.@NonNull Class getTransformationTraceClass() {
+		org.eclipse.ocl.pivot.Class transformationTraceClass2 = transformationTraceClass;
+		if (transformationTraceClass2 == null) {
+			transformationTraceClass = transformationTraceClass2 = createTransformationTraceClass();
+		}
+		return transformationTraceClass2;
+	}
 
 	private String getURI(org.eclipse.ocl.pivot.Package rPackage, @NonNull StringBuilder s) {
 		if (rPackage == null) {

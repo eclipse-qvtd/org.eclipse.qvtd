@@ -49,6 +49,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
@@ -879,6 +880,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	//		}
 	//		return transformationAnalysis2tracePackage;
 	//	}
+
+	@Override
+	public @NonNull ClassDatum getTransformationTraceClassDatum(@NonNull Transformation transformation) {
+		Transformation2TracePackage transformation2TracePackage = getTransformation2TracePackage(transformation);
+		org.eclipse.ocl.pivot.@NonNull Class transformationTraceClass = transformation2TracePackage.getTransformationTraceClass();
+		TypedModel traceTypedModel = getDomainUsageAnalysis().getTraceTypedModel();
+		return getClassDatum(traceTypedModel, transformationTraceClass);
+	}
 
 	@Override
 	public boolean isDirty(@NonNull Property property) {

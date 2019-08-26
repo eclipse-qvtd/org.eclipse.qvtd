@@ -298,6 +298,11 @@ public class MappingPartitioner implements Nameable
 		return alreadyRealizedEdges.keySet();
 	}
 
+	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> getClassAnalysis(@NonNull Node traceNode) {
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(traceNode);
+		return transformationAnalysis.getClassAnalysis(classDatum);
+	}
+
 	public @NonNull Iterable<@NonNull Node> getConstantInputNodes() {
 		return regionAnalysis.getConstantInputNodes();
 	}
@@ -312,6 +317,10 @@ public class MappingPartitioner implements Nameable
 
 	public @Nullable Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> getConsumedPropertyAnalyses() {
 		return regionAnalysis.getConsumedPropertyAnalyses();
+	}
+
+	public @Nullable List<@NonNull Region> getCorollaryOf(@NonNull NavigationEdge edge) {
+		return transformationAnalysis.getCorollaryOf(edge);
 	}
 
 	public @NonNull Iterable<@NonNull Node> getExecutionNodes() {
@@ -465,9 +474,8 @@ public class MappingPartitioner implements Nameable
 	//		return regionAnalysis.getSuperProducedClassAnalyses();
 	//	}
 
-	public @NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> getClassAnalysis(@NonNull Node traceNode) {
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(traceNode);
-		return transformationAnalysis.getClassAnalysis(classDatum);
+	public @Nullable Node getThisNode() {
+		return regionAnalysis.getThisNode();
 	}
 
 	public @Nullable Edge getTraceEdge(@NonNull Node node) {
@@ -510,10 +518,6 @@ public class MappingPartitioner implements Nameable
 
 	public boolean hasRealizedNode(@NonNull Node node) {
 		return alreadyRealizedNodes.contains(node);
-	}
-
-	public @Nullable List<@NonNull Region> getCorollaryOf(@NonNull NavigationEdge edge) {
-		return transformationAnalysis.getCorollaryOf(edge);
 	}
 
 	public boolean isCyclic(@NonNull Node traceNode) {

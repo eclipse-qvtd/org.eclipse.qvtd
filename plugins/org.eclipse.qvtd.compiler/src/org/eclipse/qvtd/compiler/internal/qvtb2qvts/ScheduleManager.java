@@ -142,6 +142,7 @@ public interface ScheduleManager
 	@NonNull Iterable<@NonNull AbstractTransformationAnalysis> getTransformationAnalyses();
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull RootRegion rootRegion);
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
+	@NonNull ClassDatum getTransformationTraceClassDatum(@NonNull Transformation transformation);
 	@NonNull Transformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation);
 
 	/**

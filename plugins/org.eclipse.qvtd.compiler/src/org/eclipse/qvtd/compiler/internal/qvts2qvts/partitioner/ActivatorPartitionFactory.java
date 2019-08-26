@@ -103,6 +103,10 @@ public class ActivatorPartitionFactory extends AbstractSimplePartitionFactory
 	protected @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
 		Iterable<@NonNull Node> traceNodes = mappingPartitioner.getTraceNodes();
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion());
+		Node thisNode = mappingPartitioner.getThisNode();
+		if (thisNode != null) {
+			assert Iterables.contains(headNodes, thisNode);
+		}
 		return Iterables.concat(traceNodes, headNodes);
 	}
 

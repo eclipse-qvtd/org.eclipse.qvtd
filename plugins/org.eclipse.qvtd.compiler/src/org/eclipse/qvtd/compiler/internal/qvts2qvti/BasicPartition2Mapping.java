@@ -248,8 +248,18 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					}
 				}
 			}
-
-
+			//
+			//	An unreachable constant may be an outright suppression.
+			//
+			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(partition.getRegion())) {
+				Role role = partition.getRole(node);
+				if ((role != null) && role.isConstant()) {
+					if (node.getIncomingEdges().isEmpty() && node.getOutgoingEdges().isEmpty()) {
+						OCLExpression exp = createVariableExp(node);
+						createCheckStatement(exp);
+					}
+				}
+			}
 			Set<@NonNull CheckedCondition> checkedConditions = checkedConditionAnalysis.computeCheckedConditions();
 			int checkableSize = checkedConditions.size();
 			//			if (checkableSize > 0) {
@@ -751,6 +761,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				if (variable != null) {
 					assert !node.isNullLiteral();								// null should not be cached in a variable
 					return PivotUtil.createVariableExp(variable);
+				}
+				if (node.isThis()) {
+					VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(context.getStandardLibrary(), context.getTransformation());
+					return PivotUtil.createVariableExp(contextVariable);
 				}
 				if (node.isOperation()) {
 					if (node instanceof BooleanLiteralNode) {
@@ -1602,7 +1616,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		//			headCallingRegions.add(region);
 		//		}
 		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(partition)) {		// FIXME Move best bead selection to QVTs2QVTs so that diagrams show best head
-			if (!headNode.isDependency()) {
+			if (!headNode.isDependency() && !headNode.isThis()) {
 				Node bestHeadNode = null;
 				Iterable<@NonNull Node> callingSources = connectionManager.getPassedBindingSources(headNode);
 				if (!Iterables.isEmpty(callingSources)) {
@@ -1905,6 +1919,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 
 	public @NonNull QVTruntimeLibraryHelper getQVTruntimeLibraryHelper() {
 		return scheduleManager.getQVTruntimeLibraryHelper();
+	}
+
+	public @NonNull StandardLibrary getStandardLibrary() {
+		return scheduleManager.getStandardLibrary();
 	}
 
 	private @NonNull VariableDeclaration getSubexpressionDeclaration(@NonNull Node node) {

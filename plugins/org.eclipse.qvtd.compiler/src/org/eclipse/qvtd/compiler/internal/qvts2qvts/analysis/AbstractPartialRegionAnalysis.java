@@ -68,6 +68,11 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private @Nullable Node dispatchNode = null;
 
 	/**
+	 * The transformation context node if used.
+	 */
+	private @Nullable Node thisNode = null;
+
+	/**
 	 * The trace node(s).
 	 */
 	private final @NonNull List<@NonNull Node> traceNodes = new ArrayList<>();
@@ -297,7 +302,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 						else if (isRealized(navigationEdge)) {
 							addProductionOfMiddleEdge(navigationEdge);
 						}
-						else {
+						else if (!isLoaded(navigationEdge)){
 							throw new IllegalStateException("middle edge must be predicated or realized : " + navigationEdge);
 						}
 					}
@@ -337,6 +342,11 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 			boolean isIterator = node.isIterator();
 			if (!isOperation && !isPattern && !isIterator) {
 				throw new IllegalStateException("unsupported analyzeNode : " + node);
+			}
+			if (node.isThis()) {
+				assert node.isLoaded();
+				assert thisNode == null;
+				thisNode = node;
 			}
 			boolean isMiddle = scheduleManager.isMiddle(node);
 			if (isMiddle && !isOperation) {
@@ -555,6 +565,10 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 			}
 		}
 		return superProducedClassAnalyses;
+	}
+
+	public @Nullable Node getThisNode() {
+		return thisNode;
 	}
 
 	@Override
