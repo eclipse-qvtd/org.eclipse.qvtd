@@ -66,8 +66,6 @@ import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSFactory;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.RoundBracketedClauseCS;
-import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -318,11 +316,6 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	}
 
 	@Override
-	public ElementCS visitBaseModel(@NonNull BaseModel object) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public ElementCS visitCollectionTemplateExp(@NonNull CollectionTemplateExp asCollectionTemplateExp) {
 		Variable bindsTo = asCollectionTemplateExp.getBindsTo();
 		CollectionTemplateCS csCollectionTemplate = context.refreshNamedElement(CollectionTemplateCS.class, QVTrelationCSPackage.Literals.COLLECTION_TEMPLATE_CS, asCollectionTemplateExp, bindsTo.isIsImplicit() ? null : bindsTo.getName());
@@ -356,11 +349,6 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		}
 		csCollectionTemplate.setOwnedGuardExpression(context.visitDeclaration(ExpCS.class, asCollectionTemplateExp.getWhere()));
 		return csCollectionTemplate;
-	}
-
-	@Override
-	public ElementCS visitDomain(@NonNull Domain object) {
-		return visiting(object);
 	}
 
 	@Override
@@ -660,11 +648,6 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	@Override
 	public ElementCS visitTemplateVariable(@NonNull TemplateVariable object) {
 		return visitVariable(object);
-	}
-
-	@Override
-	public ElementCS visitTransformation(@NonNull Transformation object) {
-		return visiting(object);
 	}
 
 	@Override

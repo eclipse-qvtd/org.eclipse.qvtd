@@ -52,11 +52,8 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
-import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
-import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -318,11 +315,6 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 	}
 
 	@Override
-	public ElementCS visitBaseModel(@NonNull BaseModel object) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public ElementCS visitBottomPattern(@NonNull BottomPattern asBottomPattern) {
 		BottomPatternCS csBottomPattern = context.refreshElement(BottomPatternCS.class, QVTcoreCSPackage.Literals.BOTTOM_PATTERN_CS, asBottomPattern);
 		csBottomPattern.setPivot(asBottomPattern);
@@ -400,11 +392,6 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 
 	@Override
 	public ElementCS visitCorePattern(@NonNull CorePattern object) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public ElementCS visitDomain(@NonNull Domain object) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -502,11 +489,6 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 	}
 
 	@Override
-	public ElementCS visitPattern(@NonNull Pattern object) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public ElementCS visitPredicate(@NonNull Predicate asPredicate) {
 		if (asPredicate.eContainer() instanceof GuardPattern) {
 			PredicateCS csPredicate = context.refreshElement(PredicateCS.class, QVTcoreCSPackage.Literals.PREDICATE_CS, asPredicate);
@@ -552,7 +534,6 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		//			context.refreshPathName(csPathName, owningPackage, null);
 		//		}
 		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
-
 		return csTransformation;
 	}
 

@@ -59,13 +59,8 @@ import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
-import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
-import org.eclipse.qvtd.pivot.qvtbase.Pattern;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -392,11 +387,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitBaseModel(@NonNull BaseModel object) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public ElementCS visitBufferStatement(@NonNull BufferStatement asVariable) {
 		BufferStatementCS csVariable = context.refreshTypedElement(BufferStatementCS.class, QVTimperativeCSPackage.Literals.BUFFER_STATEMENT_CS, asVariable);
 		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
@@ -428,11 +418,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csVariable.setIsCheck(asVariable.isIsCheck());
 		refreshObservedProperties(asVariable, csVariable.getObservedProperties(), ClassUtil.nullFree(asVariable.getObservedProperties()));
 		return csVariable;
-	}
-
-	@Override
-	public ElementCS visitDomain(@NonNull Domain object) {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -692,21 +677,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitPattern(@NonNull Pattern object) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public ElementCS visitPredicate(@NonNull Predicate asPredicate) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public ElementCS visitRule(@NonNull Rule object) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public ElementCS visitSetStatement(@NonNull SetStatement asSetStatement) {
 		SetStatementCS csStatement = context.refreshElement(SetStatementCS.class, QVTimperativeCSPackage.Literals.SET_STATEMENT_CS, asSetStatement);
 		csStatement.setReferredVariable(asSetStatement.getTargetVariable());
@@ -744,11 +714,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitTransformation(@NonNull Transformation object) {
-		return visiting(object);
-	}
-
-	@Override
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
 		if (asTypedModel.isIsPrimitive()) {
 			return null;
@@ -761,6 +726,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
 		return csDirection;
 	}
+
 
 	@Override
 	public ElementCS visitVariable(@NonNull Variable asVariable) {

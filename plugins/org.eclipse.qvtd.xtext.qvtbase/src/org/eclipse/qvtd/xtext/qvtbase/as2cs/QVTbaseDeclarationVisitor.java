@@ -35,6 +35,14 @@ import org.eclipse.ocl.xtext.basecs.TemplateSignatureCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 
 public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationVisitor implements QVTbaseVisitor<ElementCS>
@@ -63,6 +71,26 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 		return csTypedElement;
 	}
 
+	@Override
+	public ElementCS visitBaseModel(@NonNull BaseModel object) {
+		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitDomain(@NonNull Domain object) {
+		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitFunction(@NonNull Function object) {
+		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitFunctionParameter(@NonNull FunctionParameter object) {
+		return visiting(object);
+	}
+
 	@Override // FIXME Re-implemented to workaround Bug 496148
 	public ElementCS visitOperation(@NonNull Operation object) {
 		OperationCS csElement = refreshTypedElement(OperationCS.class, BaseCSPackage.Literals.OPERATION_CS, object);
@@ -82,5 +110,25 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	public ElementCS visitParameter(@NonNull Parameter object) { // FIXME Re-implemented to workaround Bug 496148
 		ParameterCS csElement = refreshTypedElement(ParameterCS.class, BaseCSPackage.Literals.PARAMETER_CS, object);
 		return csElement;
+	}
+
+	@Override
+	public ElementCS visitPattern(@NonNull Pattern object) {
+		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitPredicate(@NonNull Predicate object) {
+		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitRule(@NonNull Rule object) {
+		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitTransformation(@NonNull Transformation object) {
+		return visiting(object);
 	}
 }
