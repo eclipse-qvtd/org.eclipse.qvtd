@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Families:FamilyRegister
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Families="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/Families"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/Families ../Families.ecore">
+  <families
+      name="Flanders">
+    <sons
+        name="Rod"/>
+  </families>
+  <families
+      name="Simpson">
+    <sons
+        name="Homer"/>
+  </families>
+  <families
+      name="Simpson">
+    <sons
+        name="Bart"/>
+  </families>
+  <families
+      name="Simpson">
+    <daughters
+        name="Marge"/>
+  </families>
+  <families
+      name="Simpson">
+    <daughters
+        name="Lisa"/>
+  </families>
+  <families
+      name="Simpson">
+    <daughters
+        name="Maggie"/>
+  </families>
+</Families:FamilyRegister>

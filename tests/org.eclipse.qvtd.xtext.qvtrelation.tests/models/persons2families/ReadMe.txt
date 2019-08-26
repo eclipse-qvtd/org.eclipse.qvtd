@@ -1,0 +1,1 @@
+This is a more focussed variant of the Benchmarx example supporting just the vety challenging Persons2Families
