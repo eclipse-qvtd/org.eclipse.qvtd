@@ -281,7 +281,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	 */
 	protected final @NonNull Map<@NonNull Operation, DomainUsageAnalysis.@NonNull Internal> operation2analysis = new HashMap<>();
 
-	private final @NonNull TypedModel primitiveTypeModel;
+	private final @NonNull TypedModel primitiveTypedModel;
 
 	private @Nullable TypedModel traceTypedModel = null;
 
@@ -308,11 +308,11 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			transformation.getModelParameter().add(0, primitiveTypedModel);
 			QVTruntimeUtil.errPrintln("Missing primitive TypedModel fixed up for " + transformation);
 		}
-		this.primitiveTypeModel = primitiveTypedModel;
-		add(primitiveTypeModel);
+		this.primitiveTypedModel = primitiveTypedModel;
+		add(primitiveTypedModel);
 		addValidUsage(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
 		addValidUsage(PRIMITIVE_USAGE_BIT_MASK, getConstantUsage(PRIMITIVE_USAGE_BIT_MASK));
-		setUsage(primitiveTypeModel, getPrimitiveUsage());
+		setUsage(primitiveTypedModel, getPrimitiveUsage());
 	}
 
 	protected int add(@NonNull TypedModel typedModel) {
@@ -620,8 +620,8 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		return oclAnyNotEqualsOperationId2;
 	}
 
-	public @NonNull TypedModel getPrimitiveTypeModel() {
-		return primitiveTypeModel;
+	public @NonNull TypedModel getPrimitiveTypedModel() {
+		return primitiveTypedModel;
 	}
 
 	public @NonNull DomainUsageConstant getPrimitiveUsage() {

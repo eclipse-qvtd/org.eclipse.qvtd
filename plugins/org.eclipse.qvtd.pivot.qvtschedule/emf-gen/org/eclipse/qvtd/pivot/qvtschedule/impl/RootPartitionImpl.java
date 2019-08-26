@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -187,7 +188,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
+			return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -232,7 +233,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 				return getOwningRootRegion();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getLoadingPartition();
-				return basicGetLoadingPartition();
+			return basicGetLoadingPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -247,10 +248,10 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningRootRegion((RootRegion)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setLoadingPartition((LoadingPartition)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -265,10 +266,10 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningRootRegion((RootRegion)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setLoadingPartition((LoadingPartition)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -302,6 +303,11 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 		catch (ClassCastException e) {
 			return super.accept(visitor);
 		}
+	}
+
+	@Override
+	public Region getRegion() {
+		throw new UnsupportedOperationException();		// FIXME
 	}
 
 } //RootPartitionImpl

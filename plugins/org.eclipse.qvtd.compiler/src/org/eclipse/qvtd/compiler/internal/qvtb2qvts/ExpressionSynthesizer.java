@@ -1181,7 +1181,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	@Override
 	public @NonNull Node visitElement(@NonNull Element element) {
 		Class oclInvalidType = scheduleManager.getStandardLibrary().getOclInvalidType();
-		ClassDatum classDatum = scheduleManager.getClassDatum(scheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel(), oclInvalidType);
+		ClassDatum classDatum = scheduleManager.getClassDatum(scheduleManager.getDomainUsageAnalysis().getPrimitiveTypedModel(), oclInvalidType);
 		Node errorNode = createErrorNode("«error»", classDatum);
 		int parameterIndex =  0;
 		for (EObject eObject : element.eContents()) {

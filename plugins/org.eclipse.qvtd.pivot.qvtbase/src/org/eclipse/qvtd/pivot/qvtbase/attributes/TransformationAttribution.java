@@ -29,6 +29,7 @@ public class TransformationAttribution extends ClassAttribution
 		environmentView.addNamedElement(QVTbaseUtil.getContextVariable(environmentView.getStandardLibrary(), transformation));
 		environmentView.addNamedElements(transformation.getModelParameter());
 		PivotUtil.addAllNamedElements(environmentView, transformation.getOwnedOperations());
+		PivotUtil.addAllNamedElements(environmentView, transformation.getOwnedProperties());
 		environmentView.addNamedElements(transformation.getRule());
 		return super.computeLookup(target, environmentView, scopeView);
 	}

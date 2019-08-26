@@ -566,6 +566,11 @@ public class QVTbaseUtil extends PivotUtil
 		return false;
 	}
 
+	public static boolean isThis(@NonNull VariableDeclaration variable) {
+		Transformation transformation = QVTbaseUtil.getContainingTransformation(variable);
+		return variable == transformation.getOwnedContext();
+	}
+
 	@Deprecated /* @deprecated use TypedModel.isIsTrace() */
 	public static boolean isTrace(@NonNull TypedModel typedModel) {
 		// FIXME BUG 517524 exploit rather than check TypedModel.isImplicit.

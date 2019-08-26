@@ -500,6 +500,12 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	boolean isSuccess();
 
 	/**
+	 * Return true if this is a "this" node.
+	 *
+	 */
+	boolean isThis();
+
+	/**
 	 * Return true if this is a/the trace for a region.
 	 *
 	 * TBD. Multiple traces are allowed after region merging?
@@ -540,6 +546,11 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * Register variable as non-null.
 	 */
 	void setRequired();
+
+	/**
+	 * Redesignate a guard node as a "this" head.
+	 */
+	void setThis();
 
 	void setUtility(@NonNull Utility utility);
 } // Node

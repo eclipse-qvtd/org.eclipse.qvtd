@@ -492,13 +492,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getClassDatum();
-				return basicGetClassDatum();
+			return basicGetClassDatum();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getCluster();
-				return basicGetCluster();
+			return basicGetCluster();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getIncomingConnection();
-				return basicGetIncomingConnection();
+			return basicGetIncomingConnection();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return getIncomingEdges();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
@@ -526,34 +526,34 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setCluster((Cluster)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setIncomingConnection((NodeConnection)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				getIncomingEdges().clear();
-				getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setName((String)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setNodeRole((Role)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				getOutgoingConnections().clear();
-				getOutgoingConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getOutgoingConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				getOutgoingEdges().clear();
-				getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOwningRegion((Region)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -568,31 +568,31 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setCluster((Cluster)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setIncomingConnection((NodeConnection)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				getIncomingEdges().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setName(NAME_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setNodeRole(NODE_ROLE_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				getOutgoingConnections().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				getOutgoingEdges().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOwningRegion((Region)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -653,7 +653,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (cluster != null)
 					msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Cluster.class, msgs);
-				return basicSetCluster((Cluster)otherEnd, msgs);
+			return basicSetCluster((Cluster)otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
@@ -661,7 +661,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningRegion((Region)otherEnd, msgs);
+			return basicSetOwningRegion((Region)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -689,6 +689,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	private boolean isDataType;
 	private boolean isHead = false;
 	private boolean isContained = false;
+	private boolean isThis = false;
 
 	private /*@LazyNonNull*/ Utility utility = null;		// Set by post region build analysis
 
@@ -1056,6 +1057,11 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
+	public boolean isThis() {
+		return isThis;
+	}
+
+	@Override
 	public boolean isTrace() {
 		return getUtility() == Utility.TRACE;
 	}
@@ -1124,6 +1130,11 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void setRequired() {
 		throw new UnsupportedOperationException();		// Should be MappingNode
+	}
+
+	@Override
+	public void setThis() {
+		this.isThis = true;
 	}
 
 	@Override

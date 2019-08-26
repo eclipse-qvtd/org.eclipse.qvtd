@@ -119,7 +119,7 @@ public class DatumCaches
 	public void analyzeCompletePackage(@NonNull TypedModel typedModel, @NonNull CompletePackage completePackage) {
 		for (@NonNull CompleteClass completeClass : PivotUtil.getOwnedCompleteClasses(completePackage)) {
 			org.eclipse.ocl.pivot.Class asClass = completeClass.getPrimaryClass();
-			TypedModel containingTypedModel = asClass instanceof DataType ? domainUsageAnalysis.getPrimitiveTypeModel() : typedModel;
+			TypedModel containingTypedModel = asClass instanceof DataType ? domainUsageAnalysis.getPrimitiveTypedModel() : typedModel;
 			ClassDatum classDatum = getClassDatum(containingTypedModel, asClass);
 			for (@NonNull Property property : PivotUtil.getOwnedProperties(asClass)) {
 				if (property != oclContainerProperty) {
@@ -134,12 +134,12 @@ public class DatumCaches
 		org.eclipse.ocl.pivot.@NonNull Class aType = completeClass.getPrimaryClass();
 		Type elementType = QVTbaseUtil.getElementalType(aType);
 		if (elementType instanceof DataType) {
-			//	assert typedModel == domainUsageAnalysis.getPrimitiveTypeModel();
+			//	assert typedModel == domainUsageAnalysis.getPrimitiveTypedModel();
 		}
 		else {
 			assert typedModel != null;
 			/* FIXME waiting for BUG 485647
-			if (typedModel != domainUsageAnalysis.getPrimitiveTypeModel()) {			// Un'used' packages are primitive
+			if (typedModel != domainUsageAnalysis.getPrimitiveTypedModel()) {			// Un'used' packages are primitive
 				Set<org.eclipse.ocl.pivot.Package> allUsedPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
 				org.eclipse.ocl.pivot.Package containingPackage = PivotUtil.getContainingPackage(elementType);
 				assert containingPackage != null;

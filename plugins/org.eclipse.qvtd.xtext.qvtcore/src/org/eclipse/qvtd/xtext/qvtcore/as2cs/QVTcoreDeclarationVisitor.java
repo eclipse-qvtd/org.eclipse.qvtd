@@ -50,6 +50,7 @@ import org.eclipse.ocl.xtext.basecs.PathElementCS;
 import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
+import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -534,6 +535,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		//			context.refreshPathName(csPathName, owningPackage, null);
 		//		}
 		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
+		context.refreshList(csTransformation.getOwnedProperties(), context.visitDeclarations(StructuralFeatureCS.class, asTransformation.getOwnedProperties(), null));
 		return csTransformation;
 	}
 

@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -380,6 +381,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		context.refreshPivotList(TypedModel.class, newModelParameters, csElement.getOwnedDirections());
 		newModelParameters.add(0, getHelper().createPrimitiveTypedModel());
 		PivotUtilInternal.refreshList(asTransformation.getModelParameter(), newModelParameters);
+		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
 		return null;
 	}

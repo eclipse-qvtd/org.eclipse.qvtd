@@ -56,7 +56,7 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 		super(directedScheduleManager, transformation, rootRegion);
 		this.helper = new QVTrelationHelper(directedScheduleManager.getEnvironmentFactory());
 		QVTbaseUtil.getPrimitiveTypedModel(transformation);		// FIXME debugging the must-exist side effect
-		//		transformation.getModelParameter().add(0, directedScheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel());		// FIXME move to source
+		//		transformation.getModelParameter().add(0, directedScheduleManager.getDomainUsageAnalysis().getPrimitiveTypedModel());		// FIXME move to source
 	}
 
 	protected void analyzeKey(@NonNull Key key) {

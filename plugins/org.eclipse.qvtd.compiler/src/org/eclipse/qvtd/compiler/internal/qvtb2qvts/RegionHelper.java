@@ -557,7 +557,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
 		assert type != null;
 		Type elementType = PivotUtil.getElementalType(type);
-		TypedModel typedModel = elementType instanceof DataType ? scheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatum().getReferredTypedModel();
+		TypedModel typedModel = elementType instanceof DataType ? scheduleManager.getDomainUsageAnalysis().getPrimitiveTypedModel() : sourceNode.getClassDatum().getReferredTypedModel();
 		assert typedModel != null;
 		ClassDatum classDatum = scheduleManager.getClassDatum(typedModel, type);
 		String name = source2targetProperty.getName();

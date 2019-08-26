@@ -103,9 +103,9 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 	public @NonNull ClassDatum getBooleanClassDatum() {
 		ClassDatum booleanClassDatum2 = booleanClassDatum;
 		if (booleanClassDatum2 == null) {
-			TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
+			TypedModel primitiveTypedModel = domainUsageAnalysis.getPrimitiveTypedModel();
 			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-			booleanClassDatum = booleanClassDatum2 = getClassDatum(primitiveTypeModel, standardLibrary.getBooleanType());
+			booleanClassDatum = booleanClassDatum2 = getClassDatum(primitiveTypedModel, standardLibrary.getBooleanType());
 		}
 		return booleanClassDatum2;
 	}
@@ -133,7 +133,7 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 		Type elementType = PivotUtil.getElementalType(asType);
 		TypedModel typedModel;
 		if (elementType instanceof DataType) {
-			typedModel = getDomainUsageAnalysis().getPrimitiveTypeModel();
+			typedModel = getDomainUsageAnalysis().getPrimitiveTypedModel();
 		}
 		else {
 			DomainUsage domainUsage = getDomainUsage(asTypedElement);
@@ -183,9 +183,9 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 	public @NonNull ClassDatum getOclVoidClassDatum() {
 		ClassDatum oclVoidClassDatum2 = oclVoidClassDatum;
 		if (oclVoidClassDatum2 == null) {
-			TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
+			TypedModel primitiveTypedModel = domainUsageAnalysis.getPrimitiveTypedModel();
 			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-			oclVoidClassDatum = oclVoidClassDatum2 = getClassDatum(primitiveTypeModel, standardLibrary.getOclVoidType());
+			oclVoidClassDatum = oclVoidClassDatum2 = getClassDatum(primitiveTypedModel, standardLibrary.getOclVoidType());
 		}
 		return oclVoidClassDatum2;
 	}
