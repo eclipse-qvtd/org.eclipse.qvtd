@@ -16,6 +16,7 @@ package org.eclipse.qvtd.xtext.qvtcorecs;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 
 /**
@@ -29,6 +30,7 @@ import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.TransformationCS#getPackage <em>Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.TransformationCS#getOwnedDirections <em>Owned Directions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.TransformationCS#getOwnedProperties <em>Owned Properties</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage#getTransformationCS()
@@ -66,5 +68,21 @@ public interface TransformationCS extends AbstractTransformationCS {
 	 * @generated
 	 */
 	EList<DirectionCS> getOwnedDirections();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.StructuralFeatureCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Properties</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Properties</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage#getTransformationCS_OwnedProperties()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<StructuralFeatureCS> getOwnedProperties();
 
 } // TransformationCS

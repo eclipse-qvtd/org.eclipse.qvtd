@@ -1297,7 +1297,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//{MappingCallCS}
 		public Action getMappingCallCSAction_0() { return cMappingCallCSAction_0; }
 
-		//'call' | isInstall?='install' | isInvoke?='invoke'
+		//('call' | isInstall?='install' | isInvoke?='invoke')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'call'
@@ -1733,7 +1733,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//URI
 		public RuleCall getNsURIURIParserRuleCall_4_1_0() { return cNsURIURIParserRuleCall_4_1_0; }
 
-		//'{' (ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))* '}' | ';'
+		//('{' (ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))* '}' | ';')
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
 		//'{' (ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))* '}'
@@ -1874,7 +1874,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_8_0() { return cOwnedTypeTypeExpCSParserRuleCall_8_0; }
 
-		//';' | '{' ownedExpression=ExpCS '}' | 'implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';'
+		//(';' | '{' ownedExpression=ExpCS '}' | 'implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';')
 		public Alternatives getAlternatives_9() { return cAlternatives_9; }
 
 		//';'
@@ -2048,7 +2048,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getReferredPropertyPropertyUnrestrictedNameParserRuleCall_5_0_1() { return cReferredPropertyPropertyUnrestrictedNameParserRuleCall_5_0_1; }
 
-		//':=' | isPartial?='+='
+		//(':=' | isPartial?='+=')
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 
 		//':='
@@ -3010,6 +3010,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getTypedMultiplicityRefCSAccess().getRule();
 	}
 
+	//TypedRefCS base::TypedRefCS:
+	//	TypeLiteralCS | TypedTypeRefCS;
+	public QVTbaseGrammarAccess.TypedRefCSElements getTypedRefCSAccess() {
+		return gaQVTbase.getTypedRefCSAccess();
+	}
+
+	public ParserRule getTypedRefCSRule() {
+		return getTypedRefCSAccess().getRule();
+	}
+
 	//StructuralFeatureCS base::StructuralFeatureCS:
 	//	AttributeCS | ReferenceCS;
 	public QVTbaseGrammarAccess.StructuralFeatureCSElements getStructuralFeatureCSAccess() {
@@ -3893,7 +3903,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypeParameterCS:
-	//	name=super::UnrestrictedName ('extends' ownedExtends+=TypedRefCS ('&&' ownedExtends+=TypedRefCS)*)?;
+	//	name=super::UnrestrictedName ('extends' ownedExtends+=super::TypedRefCS ('&&' ownedExtends+=super::TypedRefCS)*)?;
 	public BaseGrammarAccess.TypeParameterCSElements getTypeParameterCSAccess() {
 		return gaBase.getTypeParameterCSAccess();
 	}
@@ -3903,23 +3913,13 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypeRefCS:
-	//	TypedRefCS | WildcardTypeRefCS;
+	//	super::TypedRefCS | WildcardTypeRefCS;
 	public BaseGrammarAccess.TypeRefCSElements getTypeRefCSAccess() {
 		return gaBase.getTypeRefCSAccess();
 	}
 
 	public ParserRule getTypeRefCSRule() {
 		return getTypeRefCSAccess().getRule();
-	}
-
-	//TypedRefCS:
-	//	TypedTypeRefCS;
-	public BaseGrammarAccess.TypedRefCSElements getTypedRefCSAccess() {
-		return gaBase.getTypedRefCSAccess();
-	}
-
-	public ParserRule getTypedRefCSRule() {
-		return getTypedRefCSAccess().getRule();
 	}
 
 	//TypedTypeRefCS:
@@ -3933,7 +3933,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//WildcardTypeRefCS:
-	//	{WildcardTypeRefCS} '?' ('extends' ownedExtends=TypedRefCS)?;
+	//	{WildcardTypeRefCS} '?' ('extends' ownedExtends=super::TypedRefCS)?;
 	public BaseGrammarAccess.WildcardTypeRefCSElements getWildcardTypeRefCSAccess() {
 		return gaBase.getWildcardTypeRefCSAccess();
 	}

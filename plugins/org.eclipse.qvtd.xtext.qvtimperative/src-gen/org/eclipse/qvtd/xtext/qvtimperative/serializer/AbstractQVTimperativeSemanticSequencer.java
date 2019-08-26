@@ -200,9 +200,11 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				}
 				else break;
 			case BaseCSPackage.PRIMITIVE_TYPE_REF_CS:
-				if (rule == grammarAccess.getPrimitiveTypeCSRule()
+				if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getPrimitiveTypeCSRule()
 						|| rule == grammarAccess.getTypeLiteralCSRule()
-						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()) {
 					sequence_PrimitiveTypeCS(context, (PrimitiveTypeRefCS) semanticObject);
 					return;
 				}
@@ -212,6 +214,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				}
 				else if (rule == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_PrimitiveTypeCS_TypeLiteralWithMultiplicityCS(context, (PrimitiveTypeRefCS) semanticObject);
+					return;
+				}
+				else if (rule == grammarAccess.getTypedMultiplicityRefCSRule()) {
+					sequence_PrimitiveTypeCS_TypedMultiplicityRefCS(context, (PrimitiveTypeRefCS) semanticObject);
 					return;
 				}
 				else break;
@@ -234,9 +240,11 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				sequence_TuplePartCS(context, (TuplePartCS) semanticObject);
 				return;
 			case BaseCSPackage.TUPLE_TYPE_CS:
-				if (rule == grammarAccess.getTupleTypeCSRule()
+				if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getTupleTypeCSRule()
 						|| rule == grammarAccess.getTypeLiteralCSRule()
-						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()) {
 					sequence_TupleTypeCS(context, (TupleTypeCS) semanticObject);
 					return;
 				}
@@ -248,6 +256,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 					sequence_TupleTypeCS_TypeLiteralWithMultiplicityCS(context, (TupleTypeCS) semanticObject);
 					return;
 				}
+				else if (rule == grammarAccess.getTypedMultiplicityRefCSRule()) {
+					sequence_TupleTypeCS_TypedMultiplicityRefCS(context, (TupleTypeCS) semanticObject);
+					return;
+				}
 				else break;
 			case BaseCSPackage.TYPE_PARAMETER_CS:
 				sequence_TypeParameterCS(context, (TypeParameterCS) semanticObject);
@@ -257,8 +269,8 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 					sequence_TypedMultiplicityRefCS_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject);
 					return;
 				}
-				else if (rule == grammarAccess.getTypeRefCSRule()
-						|| rule == grammarAccess.getTypedRefCSRule()
+				else if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()
 						|| rule == grammarAccess.getTypedTypeRefCSRule()) {
 					sequence_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject);
 					return;
@@ -291,9 +303,11 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				}
 				else break;
 			case EssentialOCLCSPackage.COLLECTION_TYPE_CS:
-				if (rule == grammarAccess.getCollectionTypeCSRule()
+				if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getCollectionTypeCSRule()
 						|| rule == grammarAccess.getTypeLiteralCSRule()
-						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()) {
 					sequence_CollectionTypeCS(context, (CollectionTypeCS) semanticObject);
 					return;
 				}
@@ -303,6 +317,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				}
 				else if (rule == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_CollectionTypeCS_TypeLiteralWithMultiplicityCS(context, (CollectionTypeCS) semanticObject);
+					return;
+				}
+				else if (rule == grammarAccess.getTypedMultiplicityRefCSRule()) {
+					sequence_CollectionTypeCS_TypedMultiplicityRefCS(context, (CollectionTypeCS) semanticObject);
 					return;
 				}
 				else break;
@@ -343,9 +361,11 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				sequence_MapLiteralPartCS(context, (MapLiteralPartCS) semanticObject);
 				return;
 			case EssentialOCLCSPackage.MAP_TYPE_CS:
-				if (rule == grammarAccess.getMapTypeCSRule()
+				if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getMapTypeCSRule()
 						|| rule == grammarAccess.getTypeLiteralCSRule()
-						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()) {
 					sequence_MapTypeCS(context, (MapTypeCS) semanticObject);
 					return;
 				}
@@ -355,6 +375,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				}
 				else if (rule == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_MapTypeCS_TypeLiteralWithMultiplicityCS(context, (MapTypeCS) semanticObject);
+					return;
+				}
+				else if (rule == grammarAccess.getTypedMultiplicityRefCSRule()) {
+					sequence_MapTypeCS_TypedMultiplicityRefCS(context, (MapTypeCS) semanticObject);
 					return;
 				}
 				else break;

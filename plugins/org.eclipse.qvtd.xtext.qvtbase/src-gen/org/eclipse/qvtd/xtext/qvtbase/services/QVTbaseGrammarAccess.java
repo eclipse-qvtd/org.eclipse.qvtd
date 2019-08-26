@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 Willink Transformations and others.
+ * Copyright (c) 2011, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -212,10 +212,10 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//qualifiers+='!unsettable' | qualifiers+='volatile' | qualifiers+='!volatile') ','?)+
 		public Group getGroup_5_1() { return cGroup_5_1; }
 
-		//qualifiers+='derived' | qualifiers+='!derived' | qualifiers+='id' | qualifiers+='!id' | qualifiers+='ordered' |
+		//(qualifiers+='derived' | qualifiers+='!derived' | qualifiers+='id' | qualifiers+='!id' | qualifiers+='ordered' |
 		//qualifiers+='!ordered' | qualifiers+='readonly' | qualifiers+='!readonly' | qualifiers+='transient' |
 		//qualifiers+='!transient' | qualifiers+='unique' | qualifiers+='!unique' | qualifiers+='unsettable' |
-		//qualifiers+='!unsettable' | qualifiers+='volatile' | qualifiers+='!volatile'
+		//qualifiers+='!unsettable' | qualifiers+='volatile' | qualifiers+='!volatile')
 		public Alternatives getAlternatives_5_1_0() { return cAlternatives_5_1_0; }
 
 		//qualifiers+='derived'
@@ -320,8 +320,8 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5_2() { return cRightCurlyBracketKeyword_5_2; }
 
-		//'{' ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation' UnrestrictedName? ':'
-		//ownedDefaultExpressions+=SpecificationCS? ';')* '}' | ';'
+		//('{' ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation' UnrestrictedName? ':'
+		//ownedDefaultExpressions+=SpecificationCS? ';')* '}' | ';')
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 
 		//'{' ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation' UnrestrictedName? ':'
@@ -504,8 +504,8 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5_2() { return cRightCurlyBracketKeyword_5_2; }
 
-		//'{' /*(ownedAnnotations+=AnnotationElementCS
-		//	        | ownedConstraints+=InvariantConstraintCS)* */ '}' | ';'
+		//('{' /*(ownedAnnotations+=AnnotationElementCS
+		//	        | ownedConstraints+=InvariantConstraintCS)* */ '}' | ';')
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 
 		//'{' /*(ownedAnnotations+=AnnotationElementCS
@@ -609,7 +609,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4_2() { return cRightCurlyBracketKeyword_4_2; }
 
-		//'{' ownedLiterals+=EnumerationLiteralCS /*| ownedConstraints+=InvariantConstraintCS*/* '}' | ';'
+		//('{' ownedLiterals+=EnumerationLiteralCS /*| ownedConstraints+=InvariantConstraintCS*/* '}' | ';')
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
 		//'{' ownedLiterals+=EnumerationLiteralCS /*| ownedConstraints+=InvariantConstraintCS*/* '}'
@@ -660,7 +660,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		///*ownedAnnotations+=AnnotationElementCS* */ '}' | ';')
 		public Group getGroup() { return cGroup; }
 
-		//'literal' name=UnrestrictedName | name=EnumerationLiteralName
+		//('literal' name=UnrestrictedName | name=EnumerationLiteralName)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//'literal' name=UnrestrictedName
@@ -693,7 +693,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//SIGNED
 		public RuleCall getValueSIGNEDParserRuleCall_1_1_0() { return cValueSIGNEDParserRuleCall_1_1_0; }
 
-		//'{' /*ownedAnnotations+=AnnotationElementCS* */ '}' | ';'
+		//('{' /*ownedAnnotations+=AnnotationElementCS* */ '}' | ';')
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//'{' /*ownedAnnotations+=AnnotationElementCS* */ '}'
@@ -919,8 +919,8 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//| qualifiers+='!unique') ','?)+
 		public Group getGroup_9_1() { return cGroup_9_1; }
 
-		//qualifiers+='derived' | qualifiers+='!derived' | qualifiers+='ordered' | qualifiers+='!ordered' | qualifiers+='unique' |
-		//qualifiers+='!unique'
+		//(qualifiers+='derived' | qualifiers+='!derived' | qualifiers+='ordered' | qualifiers+='!ordered' | qualifiers+='unique'
+		//| qualifiers+='!unique')
 		public Alternatives getAlternatives_9_1_0() { return cAlternatives_9_1_0; }
 
 		//qualifiers+='derived'
@@ -965,7 +965,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_9_2() { return cRightCurlyBracketKeyword_9_2; }
 
-		//'{' ('body' UnrestrictedName? ':' ownedBodyExpressions+=SpecificationCS? ';')* '}' | ';'
+		//('{' ('body' UnrestrictedName? ':' ownedBodyExpressions+=SpecificationCS? ';')* '}' | ';')
 		public Alternatives getAlternatives_10() { return cAlternatives_10; }
 
 		//'{' ('body' UnrestrictedName? ':' ownedBodyExpressions+=SpecificationCS? ';')* '}'
@@ -1065,7 +1065,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//((qualifiers+='ordered' | qualifiers+='!ordered' | qualifiers+='unique' | qualifiers+='!unique') ','?)+
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//qualifiers+='ordered' | qualifiers+='!ordered' | qualifiers+='unique' | qualifiers+='!unique'
+		//(qualifiers+='ordered' | qualifiers+='!ordered' | qualifiers+='unique' | qualifiers+='!unique')
 		public Alternatives getAlternatives_2_1_0() { return cAlternatives_2_1_0; }
 
 		//qualifiers+='ordered'
@@ -1322,11 +1322,11 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//qualifiers+='volatile' | qualifiers+='!volatile') ','?)+
 		public Group getGroup_6_1() { return cGroup_6_1; }
 
-		//qualifiers+='composes' | qualifiers+='!composes' | qualifiers+='derived' | qualifiers+='!derived' |
+		//(qualifiers+='composes' | qualifiers+='!composes' | qualifiers+='derived' | qualifiers+='!derived' |
 		//qualifiers+='ordered' | qualifiers+='!ordered' | qualifiers+='readonly' | qualifiers+='!readonly' |
 		//qualifiers+='resolve' | qualifiers+='!resolve' | qualifiers+='transient' | qualifiers+='!transient' |
 		//qualifiers+='unique' | qualifiers+='!unique' | qualifiers+='unsettable' | qualifiers+='!unsettable' |
-		//qualifiers+='volatile' | qualifiers+='!volatile'
+		//qualifiers+='volatile' | qualifiers+='!volatile')
 		public Alternatives getAlternatives_6_1_0() { return cAlternatives_6_1_0; }
 
 		//qualifiers+='composes'
@@ -1443,8 +1443,8 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6_2() { return cRightCurlyBracketKeyword_6_2; }
 
-		//'{' ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation' UnrestrictedName? ':'
-		//ownedDefaultExpressions+=SpecificationCS? ';')* '}' | ';'
+		//('{' ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation' UnrestrictedName? ':'
+		//ownedDefaultExpressions+=SpecificationCS? ';')* '}' | ';')
 		public Alternatives getAlternatives_7() { return cAlternatives_7; }
 
 		//'{' ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation' UnrestrictedName? ':'
@@ -1661,8 +1661,8 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6_2() { return cRightCurlyBracketKeyword_6_2; }
 
-		//'{' (ownedOperations+=OperationCS | ownedProperties+=StructuralFeatureCS /*| ownedConstraints+=InvariantConstraintCS*/)*
-		//'}' | ';'
+		//('{' (ownedOperations+=OperationCS | ownedProperties+=StructuralFeatureCS
+		///*| ownedConstraints+=InvariantConstraintCS*/)* '}' | ';')
 		public Alternatives getAlternatives_7() { return cAlternatives_7; }
 
 		//'{' (ownedOperations+=OperationCS | ownedProperties+=StructuralFeatureCS /*| ownedConstraints+=InvariantConstraintCS*/)*
@@ -1717,6 +1717,26 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 		//MultiplicityCS
 		public RuleCall getOwnedMultiplicityMultiplicityCSParserRuleCall_1_0() { return cOwnedMultiplicityMultiplicityCSParserRuleCall_1_0; }
+	}
+
+	public class TypedRefCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedRefCS");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cTypeLiteralCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cTypedTypeRefCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+
+		//TypedRefCS base::TypedRefCS:
+		//	TypeLiteralCS | TypedTypeRefCS;
+		@Override public ParserRule getRule() { return rule; }
+
+		//TypeLiteralCS | TypedTypeRefCS
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//TypeLiteralCS
+		public RuleCall getTypeLiteralCSParserRuleCall_0() { return cTypeLiteralCSParserRuleCall_0; }
+
+		//TypedTypeRefCS
+		public RuleCall getTypedTypeRefCSParserRuleCall_1() { return cTypedTypeRefCSParserRuleCall_1; }
 	}
 
 	public class StructuralFeatureCSElements extends AbstractParserRuleElementFinder {
@@ -1922,6 +1942,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private final SpecificationCSElements pSpecificationCS;
 	private final StructuredClassCSElements pStructuredClassCS;
 	private final TypedMultiplicityRefCSElements pTypedMultiplicityRefCS;
+	private final TypedRefCSElements pTypedRefCS;
 	private final StructuralFeatureCSElements pStructuralFeatureCS;
 	private final EnumerationLiteralNameElements pEnumerationLiteralName;
 	private final QVTbaseUnrestrictedNameElements pQVTbaseUnrestrictedName;
@@ -1952,6 +1973,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		this.pSpecificationCS = new SpecificationCSElements();
 		this.pStructuredClassCS = new StructuredClassCSElements();
 		this.pTypedMultiplicityRefCS = new TypedMultiplicityRefCSElements();
+		this.pTypedRefCS = new TypedRefCSElements();
 		this.pStructuralFeatureCS = new StructuralFeatureCSElements();
 		this.pEnumerationLiteralName = new EnumerationLiteralNameElements();
 		this.pQVTbaseUnrestrictedName = new QVTbaseUnrestrictedNameElements();
@@ -2128,6 +2150,16 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	public ParserRule getTypedMultiplicityRefCSRule() {
 		return getTypedMultiplicityRefCSAccess().getRule();
+	}
+
+	//TypedRefCS base::TypedRefCS:
+	//	TypeLiteralCS | TypedTypeRefCS;
+	public TypedRefCSElements getTypedRefCSAccess() {
+		return pTypedRefCS;
+	}
+
+	public ParserRule getTypedRefCSRule() {
+		return getTypedRefCSAccess().getRule();
 	}
 
 	//StructuralFeatureCS base::StructuralFeatureCS:
@@ -3023,7 +3055,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypeParameterCS:
-	//	name=super::UnrestrictedName ('extends' ownedExtends+=TypedRefCS ('&&' ownedExtends+=TypedRefCS)*)?;
+	//	name=super::UnrestrictedName ('extends' ownedExtends+=super::TypedRefCS ('&&' ownedExtends+=super::TypedRefCS)*)?;
 	public BaseGrammarAccess.TypeParameterCSElements getTypeParameterCSAccess() {
 		return gaBase.getTypeParameterCSAccess();
 	}
@@ -3033,23 +3065,13 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypeRefCS:
-	//	TypedRefCS | WildcardTypeRefCS;
+	//	super::TypedRefCS | WildcardTypeRefCS;
 	public BaseGrammarAccess.TypeRefCSElements getTypeRefCSAccess() {
 		return gaBase.getTypeRefCSAccess();
 	}
 
 	public ParserRule getTypeRefCSRule() {
 		return getTypeRefCSAccess().getRule();
-	}
-
-	//TypedRefCS:
-	//	TypedTypeRefCS;
-	public BaseGrammarAccess.TypedRefCSElements getTypedRefCSAccess() {
-		return gaBase.getTypedRefCSAccess();
-	}
-
-	public ParserRule getTypedRefCSRule() {
-		return getTypedRefCSAccess().getRule();
 	}
 
 	//TypedTypeRefCS:
@@ -3063,7 +3085,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//WildcardTypeRefCS:
-	//	{WildcardTypeRefCS} '?' ('extends' ownedExtends=TypedRefCS)?;
+	//	{WildcardTypeRefCS} '?' ('extends' ownedExtends=super::TypedRefCS)?;
 	public BaseGrammarAccess.WildcardTypeRefCSElements getWildcardTypeRefCSAccess() {
 		return gaBase.getWildcardTypeRefCSAccess();
 	}

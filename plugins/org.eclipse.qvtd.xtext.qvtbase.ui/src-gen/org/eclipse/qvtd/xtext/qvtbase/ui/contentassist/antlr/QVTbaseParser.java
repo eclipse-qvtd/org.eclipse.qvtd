@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 Willink Transformations and others.
+ * Copyright (c) 2011, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -66,6 +66,7 @@ public class QVTbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSpecificationCSAccess().getAlternatives(), "rule__SpecificationCS__Alternatives");
 					put(grammarAccess.getStructuredClassCSAccess().getAlternatives_7(), "rule__StructuredClassCS__Alternatives_7");
 					put(grammarAccess.getStructuredClassCSAccess().getAlternatives_7_0_1(), "rule__StructuredClassCS__Alternatives_7_0_1");
+					put(grammarAccess.getTypedRefCSAccess().getAlternatives(), "rule__TypedRefCS__Alternatives");
 					put(grammarAccess.getStructuralFeatureCSAccess().getAlternatives(), "rule__StructuralFeatureCS__Alternatives");
 					put(grammarAccess.getQVTbaseUnrestrictedNameAccess().getAlternatives(), "rule__QVTbaseUnrestrictedName__Alternatives");
 					put(grammarAccess.getEssentialOCLReservedKeywordAccess().getAlternatives(), "rule__EssentialOCLReservedKeyword__Alternatives");

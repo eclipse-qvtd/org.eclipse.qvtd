@@ -144,7 +144,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//URI
 		public RuleCall getNsURIURIParserRuleCall_4_1_0() { return cNsURIURIParserRuleCall_4_1_0; }
 
-		//'{' (ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))* '}' | ';'
+		//('{' (ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))* '}' | ';')
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
 		//'{' (ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))* '}'
@@ -547,7 +547,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//propertyIds+=[pivot::Property|UnrestrictedName] | 'opposite' '(' ownedOppositePropertyIds+=PathNameCS ')'
+		//(propertyIds+=[pivot::Property|UnrestrictedName] | 'opposite' '(' ownedOppositePropertyIds+=PathNameCS ')')
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//propertyIds+=[pivot::Property|UnrestrictedName]
@@ -583,7 +583,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//','
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
-		//propertyIds+=[pivot::Property|UnrestrictedName] | 'opposite' '(' ownedOppositePropertyIds+=PathNameCS ')'
+		//(propertyIds+=[pivot::Property|UnrestrictedName] | 'opposite' '(' ownedOppositePropertyIds+=PathNameCS ')')
 		public Alternatives getAlternatives_4_1() { return cAlternatives_4_1; }
 
 		//propertyIds+=[pivot::Property|UnrestrictedName]
@@ -672,8 +672,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//metamodelIds+=[pivot::Namespace|UnrestrictedName] | '{' metamodelIds+=[pivot::Namespace|UnrestrictedName] (','
-		//metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}'
+		//(metamodelIds+=[pivot::Namespace|UnrestrictedName] | '{' metamodelIds+=[pivot::Namespace|UnrestrictedName] (','
+		//metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//metamodelIds+=[pivot::Namespace|UnrestrictedName]
@@ -986,7 +986,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//ownedExpression=ExpCSOrTemplateCS
 		public Group getGroup() { return cGroup; }
 
-		//propertyId=[pivot::Property|UnrestrictedName] | 'opposite' '(' ownedOppositePropertyId=PathNameCS ')'
+		//(propertyId=[pivot::Property|UnrestrictedName] | 'opposite' '(' ownedOppositePropertyId=PathNameCS ')')
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//propertyId=[pivot::Property|UnrestrictedName]
@@ -1122,7 +1122,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_7_0() { return cOwnedTypeTypeExpCSParserRuleCall_7_0; }
 
-		//';' | '{' ownedExpression=ExpCS '}' | 'implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';'
+		//(';' | '{' ownedExpression=ExpCS '}' | 'implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';')
 		public Alternatives getAlternatives_8() { return cAlternatives_8; }
 
 		//';'
@@ -1337,7 +1337,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//(CollectionTemplateCS | ObjectTemplateCS) ('{' ownedGuardExpression=ExpCS '}')?
 		public Group getGroup() { return cGroup; }
 
-		//CollectionTemplateCS | ObjectTemplateCS
+		//(CollectionTemplateCS | ObjectTemplateCS)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//CollectionTemplateCS

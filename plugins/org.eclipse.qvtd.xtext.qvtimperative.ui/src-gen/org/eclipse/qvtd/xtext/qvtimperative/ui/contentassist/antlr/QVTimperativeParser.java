@@ -82,6 +82,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSpecificationCSAccess().getAlternatives(), "rule__SpecificationCS__Alternatives");
 					put(grammarAccess.getStructuredClassCSAccess().getAlternatives_7(), "rule__StructuredClassCS__Alternatives_7");
 					put(grammarAccess.getStructuredClassCSAccess().getAlternatives_7_0_1(), "rule__StructuredClassCS__Alternatives_7_0_1");
+					put(grammarAccess.getTypedRefCSAccess().getAlternatives(), "rule__TypedRefCS__Alternatives");
 					put(grammarAccess.getStructuralFeatureCSAccess().getAlternatives(), "rule__StructuralFeatureCS__Alternatives");
 					put(grammarAccess.getQVTbaseUnrestrictedNameAccess().getAlternatives(), "rule__QVTbaseUnrestrictedName__Alternatives");
 					put(grammarAccess.getEssentialOCLReservedKeywordAccess().getAlternatives(), "rule__EssentialOCLReservedKeyword__Alternatives");

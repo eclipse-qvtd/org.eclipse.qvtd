@@ -787,6 +787,17 @@ public interface QVTcoreCSPackage extends EPackage {
 	EReference getTransformationCS_OwnedDirections();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TransformationCS#getOwnedProperties <em>Owned Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Properties</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.TransformationCS#getOwnedProperties()
+	 * @see #getTransformationCS()
+	 * @generated
+	 */
+	EReference getTransformationCS_OwnedProperties();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecs.UnrealizedVariableCS <em>Unrealized Variable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1268,6 +1279,14 @@ public interface QVTcoreCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSFORMATION_CS__OWNED_DIRECTIONS = eINSTANCE.getTransformationCS_OwnedDirections();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION_CS__OWNED_PROPERTIES = eINSTANCE.getTransformationCS_OwnedProperties();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.UnrealizedVariableCSImpl <em>Unrealized Variable CS</em>}' class.

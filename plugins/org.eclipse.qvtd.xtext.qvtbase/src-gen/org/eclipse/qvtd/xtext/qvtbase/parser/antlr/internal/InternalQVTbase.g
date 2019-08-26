@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 Willink Transformations and others.
+ * Copyright (c) 2011, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -1169,7 +1169,7 @@ ruleOperationCS returns [EObject current=null]
        			$current,
        			"ownedExceptions",
         		lv_ownedExceptions_15_0,
-        		"org.eclipse.ocl.xtext.base.Base.TypedRefCS");
+        		"org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1191,7 +1191,7 @@ ruleOperationCS returns [EObject current=null]
        			$current,
        			"ownedExceptions",
         		lv_ownedExceptions_17_0,
-        		"org.eclipse.ocl.xtext.base.Base.TypedRefCS");
+        		"org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2217,7 +2217,7 @@ ruleStructuredClassCS returns [EObject current=null]
        			$current,
        			"ownedSuperTypes",
         		lv_ownedSuperTypes_5_0,
-        		"org.eclipse.ocl.xtext.base.Base.TypedRefCS");
+        		"org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2239,7 +2239,7 @@ ruleStructuredClassCS returns [EObject current=null]
        			$current,
        			"ownedSuperTypes",
         		lv_ownedSuperTypes_7_0,
-        		"org.eclipse.ocl.xtext.base.Base.TypedRefCS");
+        		"org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2391,6 +2391,52 @@ ruleTypedMultiplicityRefCS returns [EObject current=null]
 
 )
 )?)
+;
+
+
+
+
+
+// Entry rule entryRuleTypedRefCS
+entryRuleTypedRefCS returns [EObject current=null]
+	:
+	{ newCompositeNode(grammarAccess.getTypedRefCSRule()); }
+	 iv_ruleTypedRefCS=ruleTypedRefCS
+	 { $current=$iv_ruleTypedRefCS.current; }
+	 EOF
+;
+
+// Rule TypedRefCS
+ruleTypedRefCS returns [EObject current=null]
+    @init { enterRule();
+    }
+    @after { leaveRule(); }:
+(
+	{
+	  /* */
+	}
+    {
+        newCompositeNode(grammarAccess.getTypedRefCSAccess().getTypeLiteralCSParserRuleCall_0());
+    }
+    this_TypeLiteralCS_0=ruleTypeLiteralCS
+    {
+        $current = $this_TypeLiteralCS_0.current;
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+	{
+	  /* */
+	}
+    {
+        newCompositeNode(grammarAccess.getTypedRefCSAccess().getTypedTypeRefCSParserRuleCall_1());
+    }
+    this_TypedTypeRefCS_1=ruleTypedTypeRefCS
+    {
+        $current = $this_TypedTypeRefCS_1.current;
+        afterParserOrEnumRuleCall();
+    }
+)
 ;
 
 
@@ -7610,7 +7656,7 @@ ruleTypeParameterCS returns [EObject current=null]
        			$current,
        			"ownedExtends",
         		lv_ownedExtends_2_0,
-        		"org.eclipse.ocl.xtext.base.Base.TypedRefCS");
+        		"org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -7632,7 +7678,7 @@ ruleTypeParameterCS returns [EObject current=null]
        			$current,
        			"ownedExtends",
         		lv_ownedExtends_4_0,
-        		"org.eclipse.ocl.xtext.base.Base.TypedRefCS");
+        		"org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -7684,39 +7730,6 @@ ruleTypeRefCS returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 )
-;
-
-
-
-
-
-// Entry rule entryRuleTypedRefCS
-entryRuleTypedRefCS returns [EObject current=null]
-	:
-	{ newCompositeNode(grammarAccess.getTypedRefCSRule()); }
-	 iv_ruleTypedRefCS=ruleTypedRefCS
-	 { $current=$iv_ruleTypedRefCS.current; }
-	 EOF
-;
-
-// Rule TypedRefCS
-ruleTypedRefCS returns [EObject current=null]
-    @init { enterRule();
-    }
-    @after { leaveRule(); }:
-
-	{
-	  /* */
-	}
-    {
-        newCompositeNode(grammarAccess.getTypedRefCSAccess().getTypedTypeRefCSParserRuleCall());
-    }
-    this_TypedTypeRefCS_0=ruleTypedTypeRefCS
-    {
-        $current = $this_TypedTypeRefCS_0.current;
-        afterParserOrEnumRuleCall();
-    }
-
 ;
 
 
@@ -7832,7 +7845,7 @@ ruleWildcardTypeRefCS returns [EObject current=null]
        			$current,
        			"ownedExtends",
         		lv_ownedExtends_3_0,
-        		"org.eclipse.ocl.xtext.base.Base.TypedRefCS");
+        		"org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 

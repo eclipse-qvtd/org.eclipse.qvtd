@@ -155,8 +155,8 @@ public class QVTcoreFormatter extends AbstractEssentialOCLFormatter
 
 	protected void configureTransformationCS(FormattingConfig c, TransformationCSElements a) {
 		c.setLinewrap(2).before(a.getGroup());
-		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
-		setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
+		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_6());
+		setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_6());
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_4_1());
 	}
 	@Override

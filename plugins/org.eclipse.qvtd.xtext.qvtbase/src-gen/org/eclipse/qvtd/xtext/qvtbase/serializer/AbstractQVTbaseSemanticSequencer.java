@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 Willink Transformations and others.
+ * Copyright (c) 2011, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -165,9 +165,11 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				}
 				else break;
 			case BaseCSPackage.PRIMITIVE_TYPE_REF_CS:
-				if (rule == grammarAccess.getPrimitiveTypeCSRule()
+				if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getPrimitiveTypeCSRule()
 						|| rule == grammarAccess.getTypeLiteralCSRule()
-						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()) {
 					sequence_PrimitiveTypeCS(context, (PrimitiveTypeRefCS) semanticObject);
 					return;
 				}
@@ -177,6 +179,10 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				}
 				else if (rule == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_PrimitiveTypeCS_TypeLiteralWithMultiplicityCS(context, (PrimitiveTypeRefCS) semanticObject);
+					return;
+				}
+				else if (rule == grammarAccess.getTypedMultiplicityRefCSRule()) {
+					sequence_PrimitiveTypeCS_TypedMultiplicityRefCS(context, (PrimitiveTypeRefCS) semanticObject);
 					return;
 				}
 				else break;
@@ -199,9 +205,11 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				sequence_TuplePartCS(context, (TuplePartCS) semanticObject);
 				return;
 			case BaseCSPackage.TUPLE_TYPE_CS:
-				if (rule == grammarAccess.getTupleTypeCSRule()
+				if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getTupleTypeCSRule()
 						|| rule == grammarAccess.getTypeLiteralCSRule()
-						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()) {
 					sequence_TupleTypeCS(context, (TupleTypeCS) semanticObject);
 					return;
 				}
@@ -213,6 +221,10 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 					sequence_TupleTypeCS_TypeLiteralWithMultiplicityCS(context, (TupleTypeCS) semanticObject);
 					return;
 				}
+				else if (rule == grammarAccess.getTypedMultiplicityRefCSRule()) {
+					sequence_TupleTypeCS_TypedMultiplicityRefCS(context, (TupleTypeCS) semanticObject);
+					return;
+				}
 				else break;
 			case BaseCSPackage.TYPE_PARAMETER_CS:
 				sequence_TypeParameterCS(context, (TypeParameterCS) semanticObject);
@@ -222,8 +234,8 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 					sequence_TypedMultiplicityRefCS_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject);
 					return;
 				}
-				else if (rule == grammarAccess.getTypeRefCSRule()
-						|| rule == grammarAccess.getTypedRefCSRule()
+				else if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()
 						|| rule == grammarAccess.getTypedTypeRefCSRule()) {
 					sequence_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject);
 					return;
@@ -256,9 +268,11 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				}
 				else break;
 			case EssentialOCLCSPackage.COLLECTION_TYPE_CS:
-				if (rule == grammarAccess.getCollectionTypeCSRule()
+				if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getCollectionTypeCSRule()
 						|| rule == grammarAccess.getTypeLiteralCSRule()
-						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()) {
 					sequence_CollectionTypeCS(context, (CollectionTypeCS) semanticObject);
 					return;
 				}
@@ -268,6 +282,10 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				}
 				else if (rule == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_CollectionTypeCS_TypeLiteralWithMultiplicityCS(context, (CollectionTypeCS) semanticObject);
+					return;
+				}
+				else if (rule == grammarAccess.getTypedMultiplicityRefCSRule()) {
+					sequence_CollectionTypeCS_TypedMultiplicityRefCS(context, (CollectionTypeCS) semanticObject);
 					return;
 				}
 				else break;
@@ -308,9 +326,11 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				sequence_MapLiteralPartCS(context, (MapLiteralPartCS) semanticObject);
 				return;
 			case EssentialOCLCSPackage.MAP_TYPE_CS:
-				if (rule == grammarAccess.getMapTypeCSRule()
+				if (rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getMapTypeCSRule()
 						|| rule == grammarAccess.getTypeLiteralCSRule()
-						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()
+						|| rule == grammarAccess.getTypeRefCSRule()) {
 					sequence_MapTypeCS(context, (MapTypeCS) semanticObject);
 					return;
 				}
@@ -320,6 +340,10 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				}
 				else if (rule == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_MapTypeCS_TypeLiteralWithMultiplicityCS(context, (MapTypeCS) semanticObject);
+					return;
+				}
+				else if (rule == grammarAccess.getTypedMultiplicityRefCSRule()) {
+					sequence_MapTypeCS_TypedMultiplicityRefCS(context, (MapTypeCS) semanticObject);
 					return;
 				}
 				else break;
@@ -458,6 +482,22 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 	/**
 	 * Contexts:
+	 *     TypedMultiplicityRefCS returns CollectionTypeCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         name=CollectionTypeIdentifier
+	 *         (ownedType=TypeExpWithoutMultiplicityCS ownedCollectionMultiplicity=MultiplicityCS?)?
+	 *         ownedMultiplicity=MultiplicityCS?
+	 *     )
+	 */
+	protected void sequence_CollectionTypeCS_TypedMultiplicityRefCS(ISerializationContext context, CollectionTypeCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+
+
+	/**
+	 * Contexts:
 	 *     ClassCS returns DataTypeCS
 	 *     DataTypeCS returns DataTypeCS
 	 *
@@ -508,6 +548,18 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 	/**
 	 * Contexts:
+	 *     TypedMultiplicityRefCS returns MapTypeCS
+	 *
+	 * Constraint:
+	 *     (name='Map' (ownedKeyType=TypeExpCS ownedValueType=TypeExpCS)? ownedMultiplicity=MultiplicityCS?)
+	 */
+	protected void sequence_MapTypeCS_TypedMultiplicityRefCS(ISerializationContext context, MapTypeCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+
+
+	/**
+	 * Contexts:
 	 *     OperationCS returns OperationCS
 	 *
 	 * Constraint:
@@ -546,6 +598,18 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *     )
 	 */
 	protected void sequence_ParameterCS(ISerializationContext context, ParameterCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+
+
+	/**
+	 * Contexts:
+	 *     TypedMultiplicityRefCS returns PrimitiveTypeRefCS
+	 *
+	 * Constraint:
+	 *     (name=PrimitiveTypeIdentifier ownedMultiplicity=MultiplicityCS?)
+	 */
+	protected void sequence_PrimitiveTypeCS_TypedMultiplicityRefCS(ISerializationContext context, PrimitiveTypeRefCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 
@@ -620,6 +684,18 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *     )
 	 */
 	protected void sequence_StructuredClassCS(ISerializationContext context, StructuredClassCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+
+
+	/**
+	 * Contexts:
+	 *     TypedMultiplicityRefCS returns TupleTypeCS
+	 *
+	 * Constraint:
+	 *     (name='Tuple' (ownedParts+=TuplePartCS ownedParts+=TuplePartCS*)? ownedMultiplicity=MultiplicityCS?)
+	 */
+	protected void sequence_TupleTypeCS_TypedMultiplicityRefCS(ISerializationContext context, TupleTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 
