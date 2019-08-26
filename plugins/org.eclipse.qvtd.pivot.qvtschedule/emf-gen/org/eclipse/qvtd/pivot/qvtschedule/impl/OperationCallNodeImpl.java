@@ -197,10 +197,10 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTscheduleVisitor) {
 			return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationCallNode(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

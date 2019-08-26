@@ -63,10 +63,10 @@ public class CGMappingLoopImpl extends CGIterationCallExpImpl implements CGMappi
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTiCGModelVisitor) {
 			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMappingLoop(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

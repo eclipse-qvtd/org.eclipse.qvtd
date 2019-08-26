@@ -78,10 +78,10 @@ public class TemplateVariableImpl extends VariableImpl implements TemplateVariab
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTrelationVisitor) {
 			return (R) ((QVTrelationVisitor<?>)visitor).visitTemplateVariable(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

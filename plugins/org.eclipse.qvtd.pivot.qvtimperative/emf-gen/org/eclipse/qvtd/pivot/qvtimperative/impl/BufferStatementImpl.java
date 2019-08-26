@@ -634,10 +634,10 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTimperativeVisitor) {
 			return (R) ((QVTimperativeVisitor<?>)visitor).visitBufferStatement(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

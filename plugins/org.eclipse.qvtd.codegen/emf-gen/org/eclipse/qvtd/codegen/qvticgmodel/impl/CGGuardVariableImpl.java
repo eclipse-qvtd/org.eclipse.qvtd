@@ -265,10 +265,10 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTiCGModelVisitor) {
 			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGGuardVariable(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

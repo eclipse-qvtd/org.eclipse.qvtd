@@ -421,10 +421,10 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTscheduleVisitor) {
 			return (R) ((QVTscheduleVisitor<?>)visitor).visitClassDatum(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

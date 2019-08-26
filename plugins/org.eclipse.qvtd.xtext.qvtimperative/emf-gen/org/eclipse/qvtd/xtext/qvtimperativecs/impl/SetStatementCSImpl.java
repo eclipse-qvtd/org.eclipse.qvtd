@@ -447,10 +447,10 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTimperativeCSVisitor) {
 			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitSetStatementCS(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

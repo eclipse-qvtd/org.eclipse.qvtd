@@ -531,10 +531,10 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTrelationCSVisitor) {
 			return (R) ((QVTrelationCSVisitor<?>)visitor).visitRelationCS(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

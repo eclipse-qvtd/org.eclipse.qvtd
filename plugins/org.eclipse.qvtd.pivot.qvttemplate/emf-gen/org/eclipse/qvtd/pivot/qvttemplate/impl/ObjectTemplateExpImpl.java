@@ -433,10 +433,10 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTtemplateVisitor) {
 			return (R) ((QVTtemplateVisitor<?>)visitor).visitObjectTemplateExp(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

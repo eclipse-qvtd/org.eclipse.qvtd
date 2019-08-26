@@ -210,10 +210,10 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTcoreCSVisitor) {
 			return (R) ((QVTcoreCSVisitor<?>)visitor).visitPredicateCS(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

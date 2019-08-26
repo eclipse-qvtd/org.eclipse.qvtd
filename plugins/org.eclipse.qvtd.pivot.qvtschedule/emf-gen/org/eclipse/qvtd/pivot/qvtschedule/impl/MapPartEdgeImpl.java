@@ -199,10 +199,10 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTscheduleVisitor) {
 			return (R) ((QVTscheduleVisitor<?>)visitor).visitMapPartEdge(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

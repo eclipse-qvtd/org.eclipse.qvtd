@@ -199,10 +199,10 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTscheduleVisitor) {
 			return (R) ((QVTscheduleVisitor<?>)visitor).visitKeyedValueNode(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

@@ -72,10 +72,10 @@ public class InputNodeImpl extends NodeImpl implements InputNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTscheduleVisitor) {
 			return (R) ((QVTscheduleVisitor<?>)visitor).visitInputNode(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

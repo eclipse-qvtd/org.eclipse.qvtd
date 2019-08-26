@@ -339,10 +339,10 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTiCGModelVisitor) {
 			return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGConnectionAssignment(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

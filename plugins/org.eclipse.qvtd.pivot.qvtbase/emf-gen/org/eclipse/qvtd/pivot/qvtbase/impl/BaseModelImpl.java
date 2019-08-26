@@ -70,10 +70,10 @@ public class BaseModelImpl extends ModelImpl implements BaseModel {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTbaseVisitor) {
 			return (R) ((QVTbaseVisitor<?>)visitor).visitBaseModel(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

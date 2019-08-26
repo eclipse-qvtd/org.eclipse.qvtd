@@ -1207,10 +1207,10 @@ public class KeyImpl extends ElementImpl implements Key {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTrelationVisitor) {
 			return (R) ((QVTrelationVisitor<?>)visitor).visitKey(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

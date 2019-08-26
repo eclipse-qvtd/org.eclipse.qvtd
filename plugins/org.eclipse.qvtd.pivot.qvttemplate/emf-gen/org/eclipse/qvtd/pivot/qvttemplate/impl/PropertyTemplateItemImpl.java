@@ -1197,10 +1197,10 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTtemplateVisitor) {
 			return (R) ((QVTtemplateVisitor<?>)visitor).visitPropertyTemplateItem(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

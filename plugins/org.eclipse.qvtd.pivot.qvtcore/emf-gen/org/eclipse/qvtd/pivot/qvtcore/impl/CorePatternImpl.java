@@ -218,10 +218,10 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTcoreVisitor) {
 			return (R) ((QVTcoreVisitor<?>)visitor).visitCorePattern(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

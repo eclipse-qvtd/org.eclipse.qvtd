@@ -156,10 +156,10 @@ public class GuardVariableImpl extends VariableImpl implements GuardVariable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTcoreVisitor) {
 			return (R) ((QVTcoreVisitor<?>)visitor).visitGuardVariable(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

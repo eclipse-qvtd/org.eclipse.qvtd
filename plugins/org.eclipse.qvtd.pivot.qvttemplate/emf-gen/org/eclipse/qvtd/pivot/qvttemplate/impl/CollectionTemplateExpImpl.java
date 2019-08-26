@@ -603,10 +603,10 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTtemplateVisitor) {
 			return (R) ((QVTtemplateVisitor<?>)visitor).visitCollectionTemplateExp(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

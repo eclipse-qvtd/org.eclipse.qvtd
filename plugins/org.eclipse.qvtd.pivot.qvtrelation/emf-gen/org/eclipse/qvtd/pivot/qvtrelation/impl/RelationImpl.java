@@ -718,10 +718,10 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTrelationVisitor) {
 			return (R) ((QVTrelationVisitor<?>)visitor).visitRelation(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

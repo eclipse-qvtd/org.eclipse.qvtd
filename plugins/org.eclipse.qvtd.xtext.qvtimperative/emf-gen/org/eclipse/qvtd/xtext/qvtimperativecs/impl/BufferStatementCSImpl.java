@@ -369,10 +369,10 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTimperativeCSVisitor) {
 			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitBufferStatementCS(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

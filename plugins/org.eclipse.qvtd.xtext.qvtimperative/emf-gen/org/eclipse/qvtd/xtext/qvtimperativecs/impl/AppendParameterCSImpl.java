@@ -64,10 +64,10 @@ public class AppendParameterCSImpl extends MappingParameterCSImpl implements App
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTimperativeCSVisitor) {
 			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitAppendParameterCS(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

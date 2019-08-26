@@ -330,10 +330,10 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTimperativeCSVisitor) {
 			return (R) ((QVTimperativeCSVisitor<?>)visitor).visitSimpleParameterBindingCS(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}

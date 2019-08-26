@@ -384,10 +384,10 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		try {
+		if (visitor instanceof QVTbaseVisitor) {
 			return (R) ((QVTbaseVisitor<?>)visitor).visitPredicate(this);
 		}
-		catch (ClassCastException e) {
+		else {
 			return super.accept(visitor);
 		}
 	}
