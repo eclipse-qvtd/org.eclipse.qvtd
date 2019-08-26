@@ -152,6 +152,10 @@ TypedMultiplicityRefCS returns base::TypedRefCS:
 ;
 
 
+TypedRefCS returns base::TypedRefCS:
+	TypeLiteralCS | TypedTypeRefCS
+;
+
 StructuralFeatureCS returns base::StructuralFeatureCS:
 	AttributeCS | ReferenceCS
 ;

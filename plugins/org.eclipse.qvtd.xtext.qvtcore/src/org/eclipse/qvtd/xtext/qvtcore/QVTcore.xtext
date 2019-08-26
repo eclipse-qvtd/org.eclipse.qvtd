@@ -39,7 +39,7 @@ BottomPatternCS:		// Bug 466385 explains the redundancy below
 	)
 ;
 	
-DirectionCS: {DirectionCS} name=UnrestrictedName?
+DirectionCS: {DirectionCS} name=Identifier?
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
 	('uses' uses+=[qvtbase::TypedModel|UnrestrictedName] (',' uses+=[qvtbase::TypedModel|UnrestrictedName])*)?
 ;
@@ -102,7 +102,7 @@ ScopeNameCS returns base::PathNameCS:
 	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
 
 TransformationCS:
-	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';
+	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* ownedProperties+=StructuralFeatureCS* '}';
 	
 //Variable := VariableName �:� TypeDeclaration
 UnrealizedVariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedInitExpression=ExpCS)?;

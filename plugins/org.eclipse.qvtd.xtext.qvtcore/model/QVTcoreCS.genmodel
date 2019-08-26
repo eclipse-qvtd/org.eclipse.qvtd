@@ -80,6 +80,7 @@
     <genClasses ecoreClass="QVTcoreCS.ecore#//TransformationCS">
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TransformationCS/package"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TransformationCS/ownedDirections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TransformationCS/ownedProperties"/>
     </genClasses>
     <genClasses ecoreClass="QVTcoreCS.ecore#//UnrealizedVariableCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//UnrealizedVariableCS/ownedInitExpression"/>
