@@ -7,7 +7,7 @@
   </eAnnotations>
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
-    <details key="qvtb" value="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#P-qvtbase"/>
+    <details key="qvtb" value="platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#P-qvtbase"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="AddStatement" eSuperTypes="#//MappingStatement #//ObservableStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -165,6 +165,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An ImperativeTransfornmation distinguishes a QVTi transformation from other transformations."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextType" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Optionally distinct type for the implementation of the context type."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImperativeTypedModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

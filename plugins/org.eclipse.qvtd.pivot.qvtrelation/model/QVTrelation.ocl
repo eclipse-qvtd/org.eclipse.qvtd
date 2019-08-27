@@ -69,6 +69,9 @@ context RelationalTransformation
 --inv KeysAreUnique:
 --	ownedKey->isUnique(identifies)
 
+inv ContextTypeIsThisTransformation:
+	ownedContext <> null implies ownedContext.type = self
+
 inv RulesAreRelations:
 	rule->forAll(oclIsKindOf(Relation))
 

@@ -40,7 +40,7 @@ inv OverridingRuleOverridesAllDomains:
 
 context Transformation
 inv ContextTypeIsTransformation:
-	ownedContext <> null implies ownedContext.type = self
+	ownedContext <> null implies ownedContext.type.oclIsKindOf(Transformation)
 
 inv ExtendedTypedModelIsExtended:
 	_extends <> null implies

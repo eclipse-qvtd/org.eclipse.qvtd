@@ -127,6 +127,7 @@
     <genClasses ecoreClass="QVTimperativeCS.ecore#//TransformationCS">
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TransformationCS/package"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TransformationCS/ownedDirections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TransformationCS/ownedContextType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

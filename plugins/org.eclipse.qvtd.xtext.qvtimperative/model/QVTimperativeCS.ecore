@@ -193,5 +193,7 @@
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDirections" upperBound="-1"
         eType="#//DirectionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedContextType" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedRefCS"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

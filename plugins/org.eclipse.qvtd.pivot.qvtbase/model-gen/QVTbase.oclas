@@ -55,7 +55,7 @@
     </ownedClasses>
     <ownedClasses xmi:id="AjDLV" name="Transformation" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#pDcbe">
       <ownedInvariants xmi:id="0YsQy" isCallable="true" name="ContextTypeIsTransformation">
-        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;ownedContext &lt;> null implies ownedContext.type = self&#xA;&#xA;"/>
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;ownedContext &lt;> null implies ownedContext.type.oclIsKindOf(Transformation)&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedInvariants xmi:id="TG1RG" isCallable="true" name="ExtendedTypedModelIsExtended">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;_extends &lt;> null implies&#xA;&#x9;_extends.modelParameter->forAll(etm |&#xA;&#x9;&#x9;self.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)&#xA;&#x9;)&#xA;&#x9;&#xA;"/>

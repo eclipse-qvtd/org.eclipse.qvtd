@@ -362,6 +362,21 @@
       eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-BaseModel"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtrelation-RelationalTransformation"
       name="RelationalTransformation" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Transformation">
+    <eOperations name="validateContextTypeIsThisTransformation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="ContextTypeIsThisTransformation"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;ownedContext &lt;> null implies ownedContext.type = self&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eOperations name="validateRulesAreRelations" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="RulesAreRelations"/>
