@@ -32,8 +32,10 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformati
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 
@@ -138,6 +140,19 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull RelationalTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @NonNull ClassDatum getTransformationTraceClassDatum(@NonNull Transformation transformation) {
+		RelationalTransformation2TracePackage transformation2TracePackage = getTransformation2TracePackage(transformation);
+		org.eclipse.ocl.pivot.@NonNull Class transformationTraceClass = transformation2TracePackage.getTransformationTraceClass();
+		TypedModel traceTypedModel = getDomainUsageAnalysis().getTraceTypedModel();
+		return getClassDatum(traceTypedModel, transformationTraceClass);
+	}
+
+	@Override
+	public @NonNull RelationalTransformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation) {
+		return (RelationalTransformation2TracePackage)super.getTransformation2TracePackage(transformation);
 	}
 
 	@Override

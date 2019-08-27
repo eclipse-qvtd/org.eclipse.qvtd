@@ -58,7 +58,6 @@ import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -347,11 +346,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return compilerOptions;
 	}
 
-	public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
+	public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull ImperativeTransformation iTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
 		ResourceSet resourceSet = getResourceSet();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 		loadGenModels(genModelFiles);
-		QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), asTransformation);
+		QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), iTransformation);
 		QVTiCodeGenOptions options = cg.getOptions();
 		options.setUseNullAnnotations(true);
 		setPackagePrefixOption(options);

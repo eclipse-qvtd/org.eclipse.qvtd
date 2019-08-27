@@ -160,7 +160,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, JAVA_STEP);
 		}
 
-		protected @NonNull JavaResult execute(@NonNull URI txURI, @NonNull Transformation asTransformation, @NonNull String ... genModelFiles) throws Exception {
+		protected @NonNull JavaResult execute(@NonNull URI txURI, @NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
 			ResourceSet resourceSet = environmentFactory.getResourceSet();
 			URI javaFileURI = compilerChain.getURI(JAVA_STEP, URI_KEY);
 			URI classFileURI = compilerChain.getURI(CLASS_STEP, URI_KEY);
@@ -177,7 +177,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				loadGenModel(resolvedURI);
 
 			}
-			QVTiCodeGenerator cg = new QVTiCodeGenerator(environmentFactory, asTransformation);
+			QVTiCodeGenerator cg = new QVTiCodeGenerator(environmentFactory, iTransformation);
 			QVTiCodeGenOptions options = cg.getOptions();
 			options.setUseNullAnnotations(true);
 			String javaExtraPrefix = compilerChain.basicGetOption(JAVA_STEP, JAVA_EXTRA_PREFIX_KEY);
@@ -557,8 +557,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return qvtu2qvtmCompilerStep.execute(uResource);
 	}
 
-	protected @NonNull JavaResult qvti2java(@NonNull Transformation asTransformation, @NonNull String ... genModelFiles) throws Exception {
-		return qvti2javaCompilerStep.execute(txURI, asTransformation, genModelFiles);
+	protected @NonNull JavaResult qvti2java(@NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
+		return qvti2javaCompilerStep.execute(txURI, iTransformation, genModelFiles);
 	}
 
 	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull Resource pResource) throws IOException {

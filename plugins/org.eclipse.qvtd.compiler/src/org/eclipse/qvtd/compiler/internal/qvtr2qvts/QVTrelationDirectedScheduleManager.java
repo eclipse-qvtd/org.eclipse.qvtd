@@ -29,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -156,6 +157,11 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull RelationalTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
 		return (RelationalTransformationAnalysis) super.getTransformationAnalysis(transformation);
+	}
+
+	@Override
+	public @NonNull ClassDatum getTransformationTraceClassDatum(@NonNull Transformation transformation) {
+		return multipleScheduleManager.getTransformationTraceClassDatum(transformation);
 	}
 
 	@Override

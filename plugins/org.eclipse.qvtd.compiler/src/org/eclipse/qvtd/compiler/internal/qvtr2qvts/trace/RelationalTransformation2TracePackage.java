@@ -15,7 +15,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationMultipleScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
@@ -42,9 +45,28 @@ public class RelationalTransformation2TracePackage extends Transformation2TraceP
 	 */
 	private org.eclipse.ocl.pivot.@Nullable Class executionClass = null;
 
+	private final org.eclipse.ocl.pivot.@NonNull Class transformationTraceClass;
+
 	public RelationalTransformation2TracePackage(@NonNull QVTrelationMultipleScheduleManager scheduleManager, @NonNull RelationalTransformation transformation) {
 		super(scheduleManager, transformation);
+		this.transformationTraceClass = createTransformationTraceClass();
 		getTransformationTraceClass().getSuperClasses().add(getExecutionClass());
+	}
+
+	public org.eclipse.ocl.pivot.@NonNull Class createTransformationTraceClass() {
+		org.eclipse.ocl.pivot.Class transformationTraceClass = createClass(transformation, "Tx" + transformation.getName());
+		for (@NonNull Property contextualProperty : PivotUtil.getOwnedProperties(transformation)) {
+			if ((contextualProperty.getOpposite() == null) && !contextualProperty.isIsDerived() && !contextualProperty.isIsTransient() && !contextualProperty.isIsVolatile()) {
+				String name = PivotUtil.getName(contextualProperty);
+				Type type = PivotUtil.getType(contextualProperty);
+				assert contextualProperty.getOpposite() == null;
+				assert !contextualProperty.isIsMany();
+				Property contextualTraceProperty = PivotUtil.createProperty(name, type);
+				contextualTraceProperty.setIsRequired(contextualProperty.isIsRequired());
+				transformationTraceClass.getOwnedProperties().add(contextualTraceProperty);
+			}
+		}
+		return transformationTraceClass;
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getDispatchClass() {
@@ -87,5 +109,10 @@ public class RelationalTransformation2TracePackage extends Transformation2TraceP
 			this.traceEPackage = traceEPackage2;
 		}
 		return traceEPackage2;
+	}
+
+	@Override
+	public org.eclipse.ocl.pivot.@NonNull Class getTransformationTraceClass() {
+		return transformationTraceClass;
 	}
 }

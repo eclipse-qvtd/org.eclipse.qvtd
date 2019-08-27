@@ -251,7 +251,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			//
 			//	An unreachable constant may be an outright suppression.
 			//
-			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(partition.getRegion())) {
+			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(QVTscheduleUtil.getRegion(partition))) {
 				Role role = partition.getRole(node);
 				if ((role != null) && role.isConstant()) {
 					if (node.getIncomingEdges().isEmpty() && node.getOutgoingEdges().isEmpty()) {
@@ -729,9 +729,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				}
 			}
 			if ((sourceExp == null) && (referredOperation instanceof Function)) {
-				StandardLibrary standardLibrary = helper.getEnvironmentFactory().getStandardLibrary();
-				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, context.getTransformation());
-				sourceExp = PivotUtil.createVariableExp(thisVariable);
+				sourceExp = context.createContextVariableExp();
 			}
 			//	if (referredOperation instanceof Function) {
 			//		return helper.createFunctionCallExp(sourceExp, referredOperation, ClassUtil.nullFree(argExps));
@@ -763,8 +761,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					return PivotUtil.createVariableExp(variable);
 				}
 				if (node.isThis()) {
-					VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(context.getStandardLibrary(), context.getTransformation());
-					return PivotUtil.createVariableExp(contextVariable);
+					return context.createContextVariableExp();
 				}
 				if (node.isOperation()) {
 					if (node instanceof BooleanLiteralNode) {
@@ -974,9 +971,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			Operation referredOperation = context.createOperation(QVTrelationUtil.getReferredOperation(pOperationCallExp));
 			assert referredOperation != null;
 			if ((iSource == null) && (referredOperation instanceof Function)) {
-				StandardLibrary standardLibrary = helper.getEnvironmentFactory().getStandardLibrary();
-				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, context.getTransformation());
-				iSource = PivotUtil.createVariableExp(thisVariable);
+				iSource = context.createContextVariableExp();
 			}
 			return helper.createOperationCallExp(iSource, referredOperation, iArguments);
 		}
@@ -1046,8 +1041,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				Transformation pTransformation = QVTbaseUtil.getContainingTransformation(pVariableExp);
 				Variable pThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, pTransformation);
 				if (pVariableExp.getReferredVariable() == pThisVariable) {
-					VariableDeclaration iThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, context.getTransformation());
-					return PivotUtil.createVariableExp(iThisVariable);
+					return context.createContextVariableExp();
 				}
 			}
 			if (node != null) {
@@ -1537,6 +1531,14 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 	}
 
+	private @NonNull VariableExp createContextVariableExp() {
+		StandardLibrary standardLibrary = getStandardLibrary();
+		Transformation iTransformation = visitor.getImperativeTransformation();
+		Transformation asTransformation = visitor.getOriginalTransformation();
+		VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, iTransformation, asTransformation);
+		return helper.createVariableExp(contextVariable);
+	}
+
 	private @NonNull DeclareStatement createDeclareStatement(@NonNull Node node, @NonNull OCLExpression initExpression) {
 		Type variableType = node.getClassDatum().getPrimaryClass();
 		assert variableType != null;
@@ -1830,7 +1832,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						ClassDatum classDatum = keyedValueNode.getClassDatumValue();
 						assert classDatum != null;
 						Function function = visitor.getKeyFunction(classDatum);
-						VariableExp thisExp = helper.createVariableExp(QVTimperativeUtil.getContextVariable(scheduleManager.getStandardLibrary(), getTransformation()));
+						VariableExp thisExp = createContextVariableExp();
 						Map<@NonNull PropertyDatum, @NonNull VariableExp> propertyDatum2expression = new HashMap<>();
 						for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 							if (edge instanceof KeyPartEdge) {
@@ -1941,9 +1943,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		return helper.createVariableExp(getSubexpressionDeclaration(node));
 	}
 
-	public @NonNull Transformation getTransformation() {
-		return visitor.getTransformation();
-	}
+	//	public @NonNull Transformation getTransformation() {
+	//		return visitor.getTransformation();
+	//	}
 
 	protected @NonNull VariableDeclaration getVariable(@NonNull Node node) {
 		return getSubexpressionDeclaration(node);

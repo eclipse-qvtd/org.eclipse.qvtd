@@ -50,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 //import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -101,7 +102,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	protected final @NonNull Transformation asTransformation;
 	protected final @NonNull SymbolNameReservation symbolNameReservation;
 
-	protected final @NonNull Transformation iTransformation;
+	protected final @NonNull ImperativeTransformation iTransformation;
 	protected final @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> asTypedModel2iTypedModel;
 	protected final @NonNull List<@NonNull TypedModel> checkableTypedModels = new ArrayList<>();
 	protected final @NonNull List<@NonNull TypedModel> checkableAndEnforceableTypedModels = new ArrayList<>();
@@ -355,6 +356,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
 	}
 
+	public @NonNull ImperativeTransformation getImperativeTransformation() {
+		return iTransformation;
+	}
+
 	public @NonNull Function getKeyFunction(@NonNull ClassDatum classDatum) {
 		return ClassUtil.nonNullState(classDatum2keyFunction.get(classDatum));
 	}
@@ -372,12 +377,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
 	}
 
-	public @Nullable TypedModel getQVTiTypedModel(@Nullable TypedModel asTypedModel) {
-		if (asTypedModel == null) {
-			assert iMiddleTypedModel != null;
-			return iMiddleTypedModel;
-		}
-		return asTypedModel2iTypedModel.get(asTypedModel);
+	public @NonNull Transformation getOriginalTransformation() {
+		return asTransformation;
 	}
 
 	public @NonNull AbstractPartition2Mapping getPartition2Mapping(@NonNull Partition partition) {
@@ -389,6 +390,14 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	public @NonNull ProblemHandler getProblemHandler() {
 		return qvts2qvti.getProblemHandler();
+	}
+
+	public @Nullable TypedModel getQVTiTypedModel(@Nullable TypedModel asTypedModel) {
+		if (asTypedModel == null) {
+			assert iMiddleTypedModel != null;
+			return iMiddleTypedModel;
+		}
+		return asTypedModel2iTypedModel.get(asTypedModel);
 	}
 
 	public @NonNull Set<@NonNull String> getReservedNames() {
@@ -418,10 +427,6 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return environmentFactory.getStandardLibrary();
-	}
-
-	public @NonNull Transformation getTransformation() {
-		return iTransformation;
 	}
 
 	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object object) {

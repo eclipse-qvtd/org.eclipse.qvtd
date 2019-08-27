@@ -68,9 +68,9 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -176,8 +176,8 @@ public class QVTiCompilerTests extends LoadTestCase
 			return asResource;
 		}
 
-		protected @NonNull Class<? extends Transformer> generateCode(@NonNull Transformation asTransformation, boolean isIncremental) throws Exception {
-			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), asTransformation);
+		protected @NonNull Class<? extends Transformer> generateCode(@NonNull ImperativeTransformation iTransformation, boolean isIncremental) throws Exception {
+			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), iTransformation);
 			QVTiCodeGenOptions options = cg.getOptions();
 			options.setIsIncremental(isIncremental);
 			options.setUseNullAnnotations(true);
@@ -366,7 +366,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			return inputResource;
 		}
 
-		public @NonNull Transformation loadTransformation(@NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
+		public @NonNull ImperativeTransformation loadTransformation(@NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
 			OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
 			ResourceSet resourceSet = getResourceSet();
 			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
@@ -385,8 +385,8 @@ public class QVTiCompilerTests extends LoadTestCase
 				if (eObject instanceof ImperativeModel) {
 					for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
 						for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
-							if (asClass instanceof Transformation) {
-								return (Transformation)asClass;
+							if (asClass instanceof ImperativeTransformation) {
+								return (ImperativeTransformation)asClass;
 							}
 						}
 					}
@@ -472,8 +472,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getTestURI("HSLNode.xmi");
 		//
 		MyQVT myQVT = createQVT();
-		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "hsv", inputModelURI);
 		myQVT.execute(tx);
@@ -486,8 +486,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI genModelURI = getModelsURI("ClassesCS2AS/ClassesCS2AS.genmodel");
 		//
 		MyQVT myQVT = createQVT();
-		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		myQVT.generateCode(asTransformation, false);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		myQVT.generateCode(iTransformation, false);
 		myQVT.dispose();
 	}
 
@@ -502,8 +502,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getTestURI("example_output.xmi");
 		//
 		MyQVT myQVT = createQVT();
-		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "leftCS", inputModelURI);
 		myQVT.execute(tx);
@@ -521,8 +521,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getTestURI("ManualRDBMSPeople.xmi");
 		//
 		MyQVT myQVT = createQVT();
-		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "uml", inputModelURI);
 		myQVT.execute(tx);
@@ -540,8 +540,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getTestURI("SimpleRDBMSPeople.xmi");
 		//
 		MyQVT myQVT = createQVT();
-		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "uml", inputModelURI);
 		myQVT.execute(tx);
@@ -562,8 +562,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getTestURI("Tree2TallTree.xmi");
 		//
 		MyQVT myQVT = createQVT();
-		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "tree", inputModelURI);
 		myQVT.execute(tx);
@@ -586,8 +586,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI changedOutputModelURI = getTestURI("samples/Tree2TallTreeChanged.xmi");
 		//
 		MyQVT myQVT = createQVT();
-		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, true);
 		Transformer tx = myQVT.createTransformer(txClass);
 		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
 		myQVT.execute(tx);
@@ -630,8 +630,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI copiedOutputModelURI = getTestURI("Tree2TallTreeCopied.xmi");
 		//
 		MyQVT myQVT = createQVT();
-		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, true);
 		Transformer tx = myQVT.createTransformer(txClass);
 		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
 		myQVT.execute(tx);
@@ -677,8 +677,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI deletedOutputModelURI = getTestURI("Tree2TallTreeDeleted.xmi");
 		//
 		MyQVT myQVT = createQVT();
-		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
+		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, true);
 		Transformer tx = myQVT.createTransformer(txClass);
 		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
 		myQVT.execute(tx);

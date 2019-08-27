@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -144,6 +145,14 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)typedElement.getType());
 	}
 
+	public static org.eclipse.ocl.pivot.@NonNull Class getCompileTimeContextClass(@NonNull ImperativeTransformation iTransformation) {
+		VariableDeclaration ownedContext = iTransformation.getOwnedContext();
+		if (ownedContext != null) {
+			return PivotUtil.getClass(ownedContext);
+		}
+		return iTransformation;
+	}
+
 	public static @NonNull Mapping getContainingMapping(@Nullable EObject eObject) {
 		return ClassUtil.nonNullState(basicGetContainingMapping(eObject));
 	}
@@ -240,6 +249,18 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull SimpleParameter asSimpleParameter) {
 		return ClassUtil.nonNullState(asSimpleParameter.getReferredTypedModel());
+	}
+
+	public static org.eclipse.ocl.pivot.@NonNull Class getRuntimeContextClass(@NonNull ImperativeTransformation iTransformation) {
+		org.eclipse.ocl.pivot.Class contextClass = iTransformation.getContextType();
+		if (contextClass != null) {
+			return contextClass;
+		}
+		VariableDeclaration ownedContext = iTransformation.getOwnedContext();
+		if (ownedContext != null) {
+			return PivotUtil.getClass(ownedContext);
+		}
+		return iTransformation;
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {

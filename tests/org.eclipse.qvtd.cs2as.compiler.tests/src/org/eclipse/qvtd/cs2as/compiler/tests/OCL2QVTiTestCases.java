@@ -252,7 +252,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		MyQVT myQVT = createQVT("Source2Target", getModelsURI("Source2Target/Source2Target.ocl"), "samples");
 		myQVT.loadGenModels(getModelsURI("Source2Target/SourceMM1.genmodel"), getModelsURI("Source2Target/TargetMM1.genmodel"));
 		myQVT.loadEcoreFile(getModelsURI("Source2Target/EnvExample1.ecore"), example1.target.lookup.EnvironmentPackage.eINSTANCE);
-		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2Target.ocl");
+		ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2Target.ocl");
 		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 23 : 19);
 		//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
 		//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
@@ -345,7 +345,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		try {
 			myQVT.loadGenModels(getModelsURI("SimpleClasses/ClassesCS.genmodel"), getModelsURI("SimpleClasses/Classes.genmodel"));
 			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/EnvExample2.ecore"), example2.classes.lookup.EnvironmentPackage.eINSTANCE);
-			Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("classescs2as.ocl");
+			ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("classescs2as.ocl");
 			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 3);
 			//			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
 			//			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 1);
@@ -420,7 +420,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		MyQVT myQVT = createQVT("StructuredClasses", getModelsURI("StructuredClasses/classescs2asV2.ocl"), "samples");
 		try {
 			myQVT.loadGenModels(getModelsURI("SimpleClasses/ClassesCS.genmodel"), getModelsURI("SimpleClasses/Classes.genmodel"));
-			Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("classescs2asV2.ocl");
+			ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("classescs2asV2.ocl");
 			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 30 : 15);
 			//			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 5);
 			//			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 2);
@@ -530,7 +530,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		QVTiProductionConsumption.SUMMARY.setState(true);
 		MyQVT myQVT = createQVT("KiamaRewrite", getModelsURI("KiamaRewrite/KiamaRewrite.ocl"), "samples");
 		myQVT.loadGenModels(getModelsURI("KiamaRewrite/KiamaAS.genmodel"), getModelsURI("KiamaRewrite/KiamaCS.genmodel"));
-		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
+		ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
 		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 11 : 6);
 		//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 1);
 		//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 1);
@@ -590,7 +590,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		QVTiProductionConsumption.SUMMARY.setState(true);
 		MyQVT myQVT = createQVT("SimplerKiama", getModelsURI("SimplerKiama/SimplerKiama.ocl"), "samples");
 		myQVT.loadGenModels(getModelsURI("SimplerKiama/SimplerKiamaAS.genmodel"), getModelsURI("SimplerKiama/SimplerKiamaCS.genmodel"));
-		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("SimplerKiama.ocl");
+		ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("SimplerKiama.ocl");
 		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 7);
 		//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 1);
 		//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
@@ -631,7 +631,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	public void testOCL2QVTi_BaseAndDerived_CG() throws Exception {
 		MyQVT myQVT = createQVT("BaseAndDerived", getModelsURI("BaseAndDerived/Source2TargetBase.ocl"), "samples");
 		myQVT.loadGenModels(getModelsURI("BaseAndDerived/SourceBaseMM.genmodel"), getModelsURI("BaseAndDerived/TargetBaseMM.genmodel"));
-		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
+		ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
 		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 5);
 		//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
 		//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);

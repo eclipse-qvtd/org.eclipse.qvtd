@@ -389,7 +389,10 @@ public class QVTbaseUtil extends PivotUtil
 	 * Return the context variable for a Transformation, creating it if not yet available.
 	 */
 	public static @NonNull Variable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation transformation) {
-		Variable ownedContext = transformation.getOwnedContext();
+		return getContextVariable(standardLibrary, transformation, transformation);
+	}
+	public static @NonNull Variable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
+		Variable ownedContext = owningTransformation.getOwnedContext();
 		if (ownedContext == null) {
 			//			org.eclipse.ocl.pivot.Class transformationType = ((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation");
 			//        	if (transformationType == null) {	// FIXME BUG 487123
@@ -397,13 +400,13 @@ public class QVTbaseUtil extends PivotUtil
 			//        	}
 			ownedContext = PivotFactory.eINSTANCE.createParameterVariable();
 			ownedContext.setName("this");
-			ownedContext.setType(transformation);		// FIXME promote API
+			ownedContext.setType(typeTransformation);		// FIXME promote API
 			//			ownedContext.setTypeValue(transformation);
 			ownedContext.setIsRequired(true);
-			transformation.setOwnedContext(ownedContext);
+			owningTransformation.setOwnedContext(ownedContext);
 		}
 		else {
-			ownedContext.setTypeValue(transformation);		// FIXME BUG 484723 find a better solution for the transient declaration
+			ownedContext.setTypeValue(typeTransformation);		// FIXME BUG 484723 find a better solution for the transient declaration
 		}
 		return ownedContext;
 	}

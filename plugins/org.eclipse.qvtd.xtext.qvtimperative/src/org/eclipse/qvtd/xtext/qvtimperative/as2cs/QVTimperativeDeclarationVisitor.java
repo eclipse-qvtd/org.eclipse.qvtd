@@ -521,12 +521,18 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTimperativeCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
 		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
+		TypedRefCS contextType = null;
+		Type contentType = asTransformation.getContextType();
+		if (contentType != null) {
+			contextType = createTypeRefCS(contentType, null); //getScope(asVariable)));
+		}
+		csTransformation.setOwnedContextType(contextType);
 		return csTransformation;
 	}
 
 	@Override
 	public ElementCS visitImperativeTypedModel(@NonNull ImperativeTypedModel asTypedModel) {
-		if (asTypedModel.isIsPrimitive()) {
+		if (asTypedModel.isIsPrimitive() || QVTbaseUtil.isThis(asTypedModel)) {
 			return null;
 		}
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTimperativeCSPackage.Literals.DIRECTION_CS, asTypedModel, null);
@@ -715,7 +721,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
-		if (asTypedModel.isIsPrimitive()) {
+		if (asTypedModel.isIsPrimitive() || QVTbaseUtil.isThis(asTypedModel)) {
 			return null;
 		}
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTimperativeCSPackage.Literals.DIRECTION_CS, asTypedModel, null);

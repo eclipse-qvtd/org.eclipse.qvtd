@@ -60,7 +60,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -141,14 +141,14 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 			});
 		}
 
-		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull QVTimperative qvt, @NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
+		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull QVTimperative qvt, @NonNull ImperativeTransformation iTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
 			ResourceSet resourceSet = qvt.getResourceSet();
 			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 			for (String genModelFile : genModelFiles) {
 				URI genModelURI = URI.createURI(genModelFile).resolve(txURI);
 				loadGenModel(getEnvironmentFactory(), genModelURI);
 			}
-			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), asTransformation);
+			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), iTransformation);
 			QVTiCodeGenOptions options = cg.getOptions();
 			options.setUseNullAnnotations(true);
 			options.setPackagePrefix("cg");

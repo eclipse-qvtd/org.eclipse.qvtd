@@ -47,7 +47,6 @@ public abstract class Transformation2TracePackage
 	protected final @NonNull NameGenerator nameGenerator;
 	protected final @NonNull Transformation transformation;
 	private final org.eclipse.ocl.pivot.@NonNull Package tracePackage;
-	private org.eclipse.ocl.pivot.@Nullable Class transformationTraceClass;
 
 	/**
 	 * Name to corresponding trace class
@@ -331,23 +330,6 @@ public abstract class Transformation2TracePackage
 		return PivotUtil.createPackage(traceTxName, traceTxNsPrefix, s.toString(), null);
 	}
 
-	public org.eclipse.ocl.pivot.@NonNull Class createTransformationTraceClass() {
-		org.eclipse.ocl.pivot.Class transformationTraceClass = createClass(transformation, "Tx" + transformation.getName());
-		for (@NonNull Property contextualProperty : PivotUtil.getOwnedProperties(transformation)) {
-			if ((contextualProperty.getOpposite() == null) && !contextualProperty.isIsDerived() && !contextualProperty.isIsTransient() && !contextualProperty.isIsVolatile()) {
-				String name = PivotUtil.getName(contextualProperty);
-				Type type = PivotUtil.getType(contextualProperty);
-				assert contextualProperty.getOpposite() == null;
-				assert !contextualProperty.isIsMany();
-				Property contextualTraceProperty = PivotUtil.createProperty(name, type);
-				contextualTraceProperty.setIsRequired(contextualProperty.isIsRequired());
-				transformationTraceClass.getOwnedProperties().add(contextualTraceProperty);
-			}
-		}
-		this.transformationTraceClass = transformationTraceClass;
-		return transformationTraceClass;
-	}
-
 	/*	protected @NonNull WhenInvocation2TraceClass createWhenInvocation2TraceClass(@NonNull RelationCallExp rInvocation, @NonNull Relation invokedRelation) {
 		//		Relation invokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
 		Relation invokingRelation = QVTrelationUtil.getContainingRelation(rInvocation);
@@ -462,13 +444,7 @@ public abstract class Transformation2TracePackage
 	//		return transformationAnalysis;
 	//	}
 
-	public org.eclipse.ocl.pivot.@NonNull Class getTransformationTraceClass() {
-		org.eclipse.ocl.pivot.Class transformationTraceClass2 = transformationTraceClass;
-		if (transformationTraceClass2 == null) {
-			transformationTraceClass = transformationTraceClass2 = createTransformationTraceClass();
-		}
-		return transformationTraceClass2;
-	}
+	public abstract org.eclipse.ocl.pivot.@Nullable Class getTransformationTraceClass();
 
 	private String getURI(org.eclipse.ocl.pivot.Package rPackage, @NonNull StringBuilder s) {
 		if (rPackage == null) {

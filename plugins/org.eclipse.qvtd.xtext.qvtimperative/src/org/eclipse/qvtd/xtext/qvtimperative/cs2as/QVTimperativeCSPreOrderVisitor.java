@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -233,6 +234,26 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			SimpleParameter pivotElement = PivotUtil.getPivot(SimpleParameter.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
+			}
+			return null;
+		}
+	}
+
+	public static class TransformationCompletion extends SingleContinuation<@NonNull TransformationCS>
+	{
+		public TransformationCompletion(@NonNull CS2ASConversion context, @NonNull TransformationCS csElement) {
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedContextType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			ImperativeTransformation pivotElement = PivotUtil.getPivot(ImperativeTransformation.class, csElement);
+			if (pivotElement != null) {
+				TypedRefCS csContextType = csElement.getOwnedContextType();
+				if (csContextType != null) {
+					org.eclipse.ocl.pivot.Class pivotType = PivotUtil.getPivot(org.eclipse.ocl.pivot.Class.class, csContextType);
+					pivotElement.setContextType(pivotType);
+				}
 			}
 			return null;
 		}
@@ -436,6 +457,6 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 				pivotElement.getSuperClasses().add(oclElementType);
 			}
 		}
-		return null;
+		return new TransformationCompletion(context, csElement);
 	}
 }

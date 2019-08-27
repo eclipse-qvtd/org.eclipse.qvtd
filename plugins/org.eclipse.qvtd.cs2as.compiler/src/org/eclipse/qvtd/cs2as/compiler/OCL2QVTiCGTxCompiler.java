@@ -25,8 +25,8 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
@@ -53,7 +53,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, rSet);
 		try {
-			Transformation qvtiTransf = executeOCL2QVTi_CompilerChain(qvt, tracePropertyName, oclDocURI, extendedOCLDocURIs);
+			ImperativeTransformation qvtiTransf = executeOCL2QVTi_CompilerChain(qvt, tracePropertyName, oclDocURI, extendedOCLDocURIs);
 			CS2ASJavaCompilerImpl compiler = createCompiler();
 			compiler.setLog(log);
 			return compiler.compileTransformation(qvt, qvtiTransf, params);
@@ -66,7 +66,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		return new CS2ASJavaCompilerImpl();
 	}
 
-	protected @NonNull Transformation executeOCL2QVTi_CompilerChain(@NonNull QVTimperative qvt, String tracePropName, @NonNull URI oclDocURI, @NonNull URI... extendedOCLDocURIs) throws Exception {
+	protected @NonNull ImperativeTransformation executeOCL2QVTi_CompilerChain(@NonNull QVTimperative qvt, String tracePropName, @NonNull URI oclDocURI, @NonNull URI... extendedOCLDocURIs) throws Exception {
 
 		CompilerOptions options = new AbstractCompilerOptions() {};
 		// OCL2QVTm options

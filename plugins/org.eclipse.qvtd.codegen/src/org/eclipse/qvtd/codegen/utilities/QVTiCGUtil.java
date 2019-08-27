@@ -20,8 +20,10 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -94,6 +96,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull ImperativeTypedModel getAST(@NonNull CGTypedModel cgTypedModel) {
 		return ClassUtil.nonNullState((ImperativeTypedModel)cgTypedModel.getAst());
+	}
+
+	public static @NonNull VariableExp getAST(@NonNull CGVariableExp cgVariableExp) {
+		return ClassUtil.nonNullState((VariableExp)cgVariableExp.getAst());
 	}
 
 	public static @NonNull CGValuedElement getBody(@NonNull CGMappingLoop cgMappingLoop) {

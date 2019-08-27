@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
@@ -101,6 +102,9 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		if ((iTransformation == null) || !(iTransformation instanceof ImperativeTransformation)) {
 			iTransformation = createTransformation(name);
 			iClasses.add(iTransformation);
+			Transformation2TracePackage transformation2TracePackage = scheduleManager.getTransformation2TracePackage(asTransformation);
+			org.eclipse.ocl.pivot.Class transformationTraceClass = transformation2TracePackage.getTransformationTraceClass();
+			((ImperativeTransformation)iTransformation).setContextType(transformationTraceClass);
 			for (@NonNull TypedModel qvtmTypedModel : QVTbaseUtil.getModelParameters(asTransformation)) {
 				ImperativeTypedModel qvtiTypedModel = createTypedModel(PivotUtil.getName(qvtmTypedModel));
 				qvtiTypedModel.getUsedPackage().addAll(qvtmTypedModel.getUsedPackage());

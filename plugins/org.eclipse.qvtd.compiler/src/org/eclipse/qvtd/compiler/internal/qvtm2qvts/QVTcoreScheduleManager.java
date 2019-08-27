@@ -26,6 +26,8 @@ import org.eclipse.qvtd.compiler.internal.usage.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -71,7 +73,19 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 
 	@Override
 	public @NonNull Transformation2TracePackage createTransformation2TracePackage(@NonNull Transformation transformation) {
-		return new Transformation2TracePackage(this, transformation) {};
+		return new Transformation2TracePackage(this, transformation)
+		{
+			@Override
+			public org.eclipse.ocl.pivot.@Nullable Class getTransformationTraceClass() {
+				return null;
+			}
+		};
+	}
+
+	@Override
+	public @NonNull ClassDatum getTransformationTraceClassDatum(@NonNull Transformation transformation) {
+		TypedModel traceTypedModel = getDomainUsageAnalysis().getTraceTypedModel();
+		return getClassDatum(traceTypedModel, transformation);
 	}
 
 	@Override

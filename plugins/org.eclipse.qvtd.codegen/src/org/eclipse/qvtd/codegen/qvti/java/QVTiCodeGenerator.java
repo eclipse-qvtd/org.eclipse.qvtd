@@ -50,7 +50,6 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -62,18 +61,27 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
  */
 public class QVTiCodeGenerator extends JavaCodeGenerator
 {
+	protected final @NonNull ImperativeTransformation transformation;
 	protected final @NonNull QVTiAnalyzer cgAnalyzer;
-	protected final @NonNull Transformation transformation;
+	protected final @NonNull QVTiGlobalContext globalContext;
+	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
-	protected final @NonNull QVTiGlobalContext globalContext = new QVTiGlobalContext(this);
-	protected final @NonNull Map<@NonNull Transformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 
-	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
 		super(environmentFactory);
 		QVTiCG2StringVisitor.FACTORY.getClass();
-		cgAnalyzer = new QVTiAnalyzer(this);
 		this.transformation = transformation;
+		this.cgAnalyzer = new QVTiAnalyzer(this);
+		this.globalContext = new QVTiGlobalContext(this);
+	}
+
+	private void appendSegmentName(@NonNull StringBuilder s, CGPackage sPackage) {
+		String pName = sPackage.getName();
+		if (pName != null && pName.length() > 0) {
+			s.append(pName);
+			s.append('.');
+		}
 	}
 
 	protected @NonNull QVTiAS2CGVisitor createAS2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext gContext) {
@@ -229,6 +237,17 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return cgAnalyzer;
 	}
 
+	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
+		//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
+		EntryPointsAnalysis entryPointsAnalysis = transformation2analysis.get(transformation);
+		if (entryPointsAnalysis == null) {
+			entryPointsAnalysis = new EntryPointsAnalysis(getEnvironmentFactory(), transformation);
+			entryPointsAnalysis.analyzeTransformation();
+			transformation2analysis.put(transformation, entryPointsAnalysis);
+		}
+		return entryPointsAnalysis;
+	}
+
 	@Override
 	public @NonNull QVTiGlobalContext getGlobalContext() {
 		return globalContext;
@@ -251,23 +270,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return s.toString();
 	}
 
-	private void appendSegmentName(@NonNull StringBuilder s, CGPackage sPackage) {
-		String pName = sPackage.getName();
-		if (pName != null && pName.length() > 0) {
-			s.append(pName);
-			s.append('.');
-		}
-	}
-
-	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
-		//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
-		EntryPointsAnalysis entryPointsAnalysis = transformation2analysis.get(transformation);
-		if (entryPointsAnalysis == null) {
-			entryPointsAnalysis = new EntryPointsAnalysis(getEnvironmentFactory(), transformation);
-			entryPointsAnalysis.analyzeTransformation();
-			transformation2analysis.put(transformation, entryPointsAnalysis);
-		}
-		return entryPointsAnalysis;
+	public @NonNull ImperativeTransformation getTransformation() {
+		return transformation;
 	}
 
 	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {

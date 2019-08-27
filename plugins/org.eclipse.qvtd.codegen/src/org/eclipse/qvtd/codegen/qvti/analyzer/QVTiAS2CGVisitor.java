@@ -33,7 +33,9 @@ import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
@@ -46,6 +48,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
@@ -63,6 +66,7 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -539,6 +543,64 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgPropertyCallExp.setSource(cgSource);
 			return cgPropertyCallExp;
 		}
+	}
+
+	@Override
+	protected @NonNull CGValuedElement generatePropertyCallExp(@NonNull CGValuedElement cgSource, @NonNull PropertyCallExp element) {
+		Property asProperty = ClassUtil.nonNullModel(element.getReferredProperty());
+		boolean isRequired = asProperty.isIsRequired();
+		org.eclipse.ocl.pivot.Class asSourceClass = asProperty.getOwningClass();
+		boolean isThis = false;
+		if (asSourceClass instanceof Transformation) {
+			ImperativeTransformation iTransformation = getAnalyzer().getCodeGenerator().getTransformation();
+			org.eclipse.ocl.pivot.Class compileTimeContextClass = QVTimperativeUtil.getCompileTimeContextClass(iTransformation);
+			if (iTransformation != compileTimeContextClass) {
+				org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
+				if (runtimeContextClass != compileTimeContextClass) {
+					Property iProperty = NameUtil.getNameable(runtimeContextClass.getOwnedProperties(), asProperty.getName());
+					assert iProperty != null;
+					asProperty = iProperty;
+					isThis = true;
+				}
+			}
+		}
+		if (isThis) {
+			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
+			if (eStructuralFeature != null) {
+				CGPropertyCallExp cgPropertyCallExp = null;
+				try {
+					genModelHelper.getGetAccessor(eStructuralFeature);
+					CGEcorePropertyCallExp cgEcorePropertyCallExp = CGModelFactory.eINSTANCE.createCGEcorePropertyCallExp();
+					cgEcorePropertyCallExp.setEStructuralFeature(eStructuralFeature);
+					//					Boolean ecoreIsRequired = codeGenerator.isNonNull(asProperty);
+					//					if (ecoreIsRequired != null) {
+					//						isRequired = ecoreIsRequired;
+					//					}
+					isRequired = asProperty.isIsRequired();
+					cgPropertyCallExp = cgEcorePropertyCallExp;
+				} catch (GenModelException e) {
+					codeGenerator.addProblem(e);		// FIXME drop through to better default
+				}
+				if (cgPropertyCallExp == null) {
+					CGExecutorPropertyCallExp cgExecutorPropertyCallExp = CGModelFactory.eINSTANCE.createCGExecutorPropertyCallExp();
+					CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(asProperty);
+					cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
+					cgExecutorPropertyCallExp.getOwns().add(cgExecutorProperty);
+					cgPropertyCallExp = cgExecutorPropertyCallExp;
+				}
+				cgPropertyCallExp.setReferredProperty(asProperty);
+				setAst(cgPropertyCallExp, element);
+				cgPropertyCallExp.setRequired(isRequired || codeGenerator.isPrimitive(cgPropertyCallExp));
+				cgPropertyCallExp.setSource(cgSource);
+				return cgPropertyCallExp;
+			}
+		}
+		return super.generatePropertyCallExp(cgSource, element);
+	}
+
+	@Override
+	public @NonNull QVTiAnalyzer getAnalyzer() {
+		return (QVTiAnalyzer) context;
 	}
 
 	private @NonNull PredicateTreeBuilder getBodyBuilder() {
