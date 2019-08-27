@@ -16,6 +16,7 @@ package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -23,11 +24,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
 import org.eclipse.qvtd.xtext.qvtbasecs.impl.AbstractTransformationCSImpl;
@@ -48,6 +51,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TransformationCSImpl#getPackage <em>Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TransformationCSImpl#getOwnedDirections <em>Owned Directions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TransformationCSImpl#getOwnedContextType <em>Owned Context Type</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,7 +64,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TRANSFORMATION_CS_FEATURE_COUNT = AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2;
+	public static final int TRANSFORMATION_CS_FEATURE_COUNT = AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 3;
 	/**
 	 * The cached value of the '{@link #getOwnedDirections() <em>Owned Directions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -70,6 +74,16 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	 * @ordered
 	 */
 	protected EList<DirectionCS> ownedDirections;
+
+	/**
+	 * The cached value of the '{@link #getOwnedContextType() <em>Owned Context Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedContextType()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypedRefCS ownedContextType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,10 +136,57 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	 * @generated
 	 */
 	@Override
+	public TypedRefCS getOwnedContextType() {
+		return ownedContextType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedContextType(TypedRefCS newOwnedContextType, NotificationChain msgs) {
+		TypedRefCS oldOwnedContextType = ownedContextType;
+		ownedContextType = newOwnedContextType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2, oldOwnedContextType, newOwnedContextType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedContextType(TypedRefCS newOwnedContextType) {
+		if (newOwnedContextType != ownedContextType) {
+			NotificationChain msgs = null;
+			if (ownedContextType != null)
+				msgs = ((InternalEObject)ownedContextType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2), null, msgs);
+			if (newOwnedContextType != null)
+				msgs = ((InternalEObject)newOwnedContextType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2), null, msgs);
+			msgs = basicSetOwnedContextType(newOwnedContextType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2, newOwnedContextType, newOwnedContextType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedDirections()).basicRemove(otherEnd, msgs);
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
+				return basicSetOwnedContextType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -142,6 +203,8 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 				return getPackage();
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				return getOwnedDirections();
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
+				return getOwnedContextType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,6 +222,9 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 				getOwnedDirections().clear();
 				getOwnedDirections().addAll((Collection<? extends DirectionCS>)newValue);
 				return;
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
+				setOwnedContextType((TypedRefCS)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -173,6 +239,9 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 		switch (featureID) {
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				getOwnedDirections().clear();
+				return;
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
+				setOwnedContextType((TypedRefCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -190,6 +259,8 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 				return getPackage() != null;
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				return ownedDirections != null && !ownedDirections.isEmpty();
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
+				return ownedContextType != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -18,10 +18,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.jdt.annotation.Nullable;
@@ -53,6 +56,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Imperative Transformation</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTransformationImpl#getContextType <em>Context Type</em>}</li>
+ * </ul>
  *
  * @generated
  */
@@ -64,7 +73,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	public static final int IMPERATIVE_TRANSFORMATION_FEATURE_COUNT = TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0;
+	public static final int IMPERATIVE_TRANSFORMATION_FEATURE_COUNT = TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 1;
 	/**
 	 * The number of operations of the '<em>Imperative Transformation</em>' class.
 	 * <!-- begin-user-doc -->
@@ -73,6 +82,16 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 	 * @ordered
 	 */
 	public static final int IMPERATIVE_TRANSFORMATION_OPERATION_COUNT = TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 1;
+
+	/**
+	 * The cached value of the '{@link #getContextType() <em>Context Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContextType()
+	 * @generated
+	 * @ordered
+	 */
+	protected org.eclipse.ocl.pivot.Class contextType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,6 +110,46 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public org.eclipse.ocl.pivot.Class getContextType() {
+		if (contextType != null && contextType.eIsProxy()) {
+			InternalEObject oldContextType = (InternalEObject)contextType;
+			contextType = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldContextType);
+			if (contextType != oldContextType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0, oldContextType, contextType));
+			}
+		}
+		return contextType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.eclipse.ocl.pivot.Class basicGetContextType() {
+		return contextType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setContextType(org.eclipse.ocl.pivot.Class newContextType) {
+		org.eclipse.ocl.pivot.Class oldContextType = contextType;
+		contextType = newContextType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0, oldContextType, contextType));
 	}
 
 	/**
@@ -177,6 +236,65 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
+				if (resolve) return getContextType();
+				return basicGetContextType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
+				setContextType((org.eclipse.ocl.pivot.Class)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
+				setContextType((org.eclipse.ocl.pivot.Class)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
+				return contextType != null;
+		}
+		return super.eIsSet(featureID);
 	}
 
 	/**

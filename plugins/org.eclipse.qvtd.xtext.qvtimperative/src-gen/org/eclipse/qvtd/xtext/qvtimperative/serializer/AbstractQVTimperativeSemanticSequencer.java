@@ -666,11 +666,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     DirectionCS returns DirectionCS
 	 *
 	 * Constraint:
-	 *     (
-	 *         (isChecked?='check' | isEnforced?='enforce')?
-	 *         name=UnrestrictedName?
-	 *         (imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)?
-	 *     )
+	 *     ((isChecked?='check' | isEnforced?='enforce')? name=Identifier? (imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)?)
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -997,7 +993,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     TransformationCS returns TransformationCS
 	 *
 	 * Constraint:
-	 *     (ownedPathName=ScopeNameCS? name=UnreservedName ownedDirections+=DirectionCS*)
+	 *     (ownedPathName=ScopeNameCS? name=UnreservedName ownedContextType=TypeExpCS? ownedDirections+=DirectionCS*)
 	 */
 	protected void sequence_TransformationCS(ISerializationContext context, TransformationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

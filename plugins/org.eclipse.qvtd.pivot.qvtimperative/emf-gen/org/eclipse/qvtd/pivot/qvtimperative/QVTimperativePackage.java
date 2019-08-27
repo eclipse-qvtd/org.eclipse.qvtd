@@ -435,6 +435,17 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getImperativeTransformation();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#getContextType <em>Context Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Context Type</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#getContextType()
+	 * @see #getImperativeTransformation()
+	 * @generated
+	 */
+	EReference getImperativeTransformation_ContextType();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#validateallRulesAreMappings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validateall Rules Are Mappings</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1510,6 +1521,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EClass IMPERATIVE_TRANSFORMATION = eINSTANCE.getImperativeTransformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Context Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMPERATIVE_TRANSFORMATION__CONTEXT_TYPE = eINSTANCE.getImperativeTransformation_ContextType();
 
 		/**
 		 * The meta object literal for the '<em><b>Validateall Rules Are Mappings</b></em>' operation.

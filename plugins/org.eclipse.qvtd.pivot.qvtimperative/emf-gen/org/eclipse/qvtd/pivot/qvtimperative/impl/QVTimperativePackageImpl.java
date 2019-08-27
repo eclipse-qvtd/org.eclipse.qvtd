@@ -674,6 +674,16 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EReference getImperativeTransformation_ContextType() {
+		return (EReference)imperativeTransformationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EOperation getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map() {
 		return imperativeTransformationEClass.getEOperations().get(0);
 	}
@@ -1471,6 +1481,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		imperativeModelEClass = createEClass(10);
 
 		imperativeTransformationEClass = createEClass(11);
+		createEReference(imperativeTransformationEClass, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0);
 		createEOperation(imperativeTransformationEClass, TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 0);
 
 		imperativeTypedModelEClass = createEClass(12);
@@ -1709,6 +1720,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(imperativeTransformationEClass, ImperativeTransformation.class, "ImperativeTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImperativeTransformation_ContextType(), thePivotPackage.getClass_(), null, "contextType", null, 0, 1, ImperativeTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateallRulesAreMappings", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);

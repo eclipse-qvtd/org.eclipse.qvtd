@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
 import org.eclipse.ocl.pivot.library.collection.CollectionExcludesOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesAllOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
@@ -517,12 +518,14 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			 *     if severity <= 0
 			 *     then true
 			 *     else
-			 *       let result : Boolean[?] = ownedContext <> null implies ownedContext.type = self
+			 *       let result : Boolean[?] = ownedContext <> null implies
+			 *         ownedContext.type.oclIsKindOf(Transformation)
 			 *       in
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
 			try {
 				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
@@ -546,12 +549,13 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 					final /*@NonInvalid*/ boolean ne = ownedContext != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation_0 = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
 						if (ownedContext == null) {
 							throw new InvalidValueException("Null source for \'TypedElement::type\'");
 						}
 						final /*@Thrown*/ @Nullable Type type = ownedContext.getType();
-						final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == this.getTypeId()) : false;
-						result = eq;
+						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_qvtbase_c_c_Transformation_0).booleanValue();
+						result = oclIsKindOf;
 					}
 					else {
 						result = ValueUtil.TRUE_VALUE;

@@ -612,6 +612,8 @@ public class QVTimperativeTables
 		public static final @NonNull ExecutorProperty _GuardParameterBinding__isCheck = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__IS_CHECK, Types._GuardParameterBinding, 0);
 		public static final @NonNull ExecutorProperty _GuardParameterBinding__value = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__VALUE, Types._GuardParameterBinding, 1);
 
+		public static final @NonNull ExecutorProperty _ImperativeTransformation__contextType = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION__CONTEXT_TYPE, Types._ImperativeTransformation, 0);
+
 		public static final @NonNull ExecutorProperty _ImperativeTypedModel__allUsedPackages = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES, Types._ImperativeTypedModel, 0);
 		public static final @NonNull ExecutorProperty _ImperativeTypedModel__isChecked = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL__IS_CHECKED, Types._ImperativeTypedModel, 1);
 		public static final @NonNull ExecutorProperty _ImperativeTypedModel__isEnforced = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL__IS_ENFORCED, Types._ImperativeTypedModel, 2);
@@ -2444,7 +2446,9 @@ public class QVTimperativeTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ImperativeModel = {};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ImperativeTransformation = {};
+		private static final @NonNull ExecutorProperty @NonNull [] _ImperativeTransformation = {
+			QVTimperativeTables.Properties._ImperativeTransformation__contextType
+		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ImperativeTypedModel = {
 			QVTimperativeTables.Properties._ImperativeTypedModel__allUsedPackages,

@@ -183,12 +183,20 @@ public class QVTrelationValidator extends EObjectValidator {
 	public static final int RELATION_DOMAIN_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 16;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Context Type Is This Transformation' of 'Relational Transformation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_CONTEXT_TYPE_IS_THIS_TRANSFORMATION = 17;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Rules Are Relations' of 'Relational Transformation'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 17;
+	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 18;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Initializer' of 'Shared Variable'.
@@ -196,7 +204,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER = 18;
+	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER = 19;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Nullity For Initializer' of 'Shared Variable'.
@@ -204,7 +212,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER = 19;
+	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER = 20;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -212,7 +220,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 19;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 20;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -617,8 +625,19 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateExtendedTypedModelIsExtended(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateModelParameterIsUnique(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateNoExtendsCycle(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationalTransformation_validateContextTypeIsThisTransformation(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationalTransformation_validateRulesAreRelations(relationalTransformation, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateContextTypeIsThisTransformation constraint of '<em>Relational Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelationalTransformation_validateContextTypeIsThisTransformation(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relationalTransformation.validateContextTypeIsThisTransformation(diagnostics, context);
 	}
 
 	/**

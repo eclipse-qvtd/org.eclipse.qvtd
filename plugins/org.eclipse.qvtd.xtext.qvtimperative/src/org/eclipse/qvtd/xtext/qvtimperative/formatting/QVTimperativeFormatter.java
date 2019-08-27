@@ -244,9 +244,9 @@ public class QVTimperativeFormatter extends QVTbaseFormatter
 		{
 			TransformationCSElements a = f.getTransformationCSAccess();
 			c.setLinewrap(2).before(a.getGroup());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
-			setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4_1());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
+			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1());
 		}
 	}
 

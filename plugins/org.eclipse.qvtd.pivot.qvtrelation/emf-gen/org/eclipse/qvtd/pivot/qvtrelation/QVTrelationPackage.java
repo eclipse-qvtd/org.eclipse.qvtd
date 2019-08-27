@@ -578,6 +578,16 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getRelationalTransformation_OwnedKey();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateContextTypeIsThisTransformation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Context Type Is This Transformation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Context Type Is This Transformation</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateContextTypeIsThisTransformation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelationalTransformation__ValidateContextTypeIsThisTransformation__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateRulesAreRelations(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Rules Are Relations</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1061,6 +1071,14 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATIONAL_TRANSFORMATION__OWNED_KEY = eINSTANCE.getRelationalTransformation_OwnedKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Context Type Is This Transformation</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATIONAL_TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_THIS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationalTransformation__ValidateContextTypeIsThisTransformation__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Rules Are Relations</b></em>' operation.

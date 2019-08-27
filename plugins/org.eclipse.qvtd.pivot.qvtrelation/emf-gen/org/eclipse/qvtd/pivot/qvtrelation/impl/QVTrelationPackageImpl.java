@@ -691,8 +691,18 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EOperation getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map() {
+	public EOperation getRelationalTransformation__ValidateContextTypeIsThisTransformation__DiagnosticChain_Map() {
 		return relationalTransformationEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map() {
+		return relationalTransformationEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -831,6 +841,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		relationalTransformationEClass = createEClass(8);
 		createEReference(relationalTransformationEClass, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0);
 		createEOperation(relationalTransformationEClass, TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 0);
+		createEOperation(relationalTransformationEClass, TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 1);
 
 		sharedVariableEClass = createEClass(9);
 		createEReference(sharedVariableEClass, VariableImpl.VARIABLE_FEATURE_COUNT + 0);
@@ -1071,6 +1082,15 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEClass(relationalTransformationEClass, RelationalTransformation.class, "RelationalTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationalTransformation_OwnedKey(), this.getKey(), this.getKey_Transformation(), "ownedKey", null, 0, -1, RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
+		op = initEOperation(getRelationalTransformation__ValidateContextTypeIsThisTransformation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateContextTypeIsThisTransformation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = initEOperation(getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRulesAreRelations", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
@@ -1301,6 +1321,12 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 			   "originalName", "CompatibleTypeForValue"
 		   });
 		addAnnotation
+		  (getRelationalTransformation__ValidateContextTypeIsThisTransformation__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ContextTypeIsThisTransformation"
+		   });
+		addAnnotation
 		  (getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
@@ -1423,6 +1449,12 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		   source,
 		   new String[] {
 			   "body", "\n\tvalueExp.type?.conformsTo(variable.type)\n\n"
+		   });
+		addAnnotation
+		  (getRelationalTransformation__ValidateContextTypeIsThisTransformation__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\townedContext <> null implies ownedContext.type = self\n\n"
 		   });
 		addAnnotation
 		  (getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(),

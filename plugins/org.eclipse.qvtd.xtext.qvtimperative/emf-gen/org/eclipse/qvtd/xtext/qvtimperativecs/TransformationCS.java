@@ -16,6 +16,7 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 
 /**
@@ -29,6 +30,7 @@ import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getPackage <em>Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedDirections <em>Owned Directions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedContextType <em>Owned Context Type</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTransformationCS()
@@ -66,5 +68,31 @@ public interface TransformationCS extends AbstractTransformationCS {
 	 * @generated
 	 */
 	EList<DirectionCS> getOwnedDirections();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Context Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Context Type</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Context Type</em>' containment reference.
+	 * @see #setOwnedContextType(TypedRefCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTransformationCS_OwnedContextType()
+	 * @model containment="true"
+	 * @generated
+	 */
+	TypedRefCS getOwnedContextType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedContextType <em>Owned Context Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Context Type</em>' containment reference.
+	 * @see #getOwnedContextType()
+	 * @generated
+	 */
+	void setOwnedContextType(TypedRefCS value);
 
 } // TransformationCS

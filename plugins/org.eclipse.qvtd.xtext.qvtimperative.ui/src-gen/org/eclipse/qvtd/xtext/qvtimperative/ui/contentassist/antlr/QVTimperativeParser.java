@@ -184,7 +184,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSimpleParameterBindingCSAccess().getGroup(), "rule__SimpleParameterBindingCS__Group__0");
 					put(grammarAccess.getSimpleParameterCSAccess().getGroup(), "rule__SimpleParameterCS__Group__0");
 					put(grammarAccess.getTransformationCSAccess().getGroup(), "rule__TransformationCS__Group__0");
-					put(grammarAccess.getTransformationCSAccess().getGroup_4(), "rule__TransformationCS__Group_4__0");
+					put(grammarAccess.getTransformationCSAccess().getGroup_3(), "rule__TransformationCS__Group_3__0");
+					put(grammarAccess.getTransformationCSAccess().getGroup_5(), "rule__TransformationCS__Group_5__0");
 					put(grammarAccess.getAttributeCSAccess().getGroup(), "rule__AttributeCS__Group__0");
 					put(grammarAccess.getAttributeCSAccess().getGroup_0_0(), "rule__AttributeCS__Group_0_0__0");
 					put(grammarAccess.getAttributeCSAccess().getGroup_0_1(), "rule__AttributeCS__Group_0_1__0");
@@ -466,7 +467,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSimpleParameterCSAccess().getOwnedTypeAssignment_5(), "rule__SimpleParameterCS__OwnedTypeAssignment_5");
 					put(grammarAccess.getTransformationCSAccess().getOwnedPathNameAssignment_1(), "rule__TransformationCS__OwnedPathNameAssignment_1");
 					put(grammarAccess.getTransformationCSAccess().getNameAssignment_2(), "rule__TransformationCS__NameAssignment_2");
-					put(grammarAccess.getTransformationCSAccess().getOwnedDirectionsAssignment_4_0(), "rule__TransformationCS__OwnedDirectionsAssignment_4_0");
+					put(grammarAccess.getTransformationCSAccess().getOwnedContextTypeAssignment_3_1(), "rule__TransformationCS__OwnedContextTypeAssignment_3_1");
+					put(grammarAccess.getTransformationCSAccess().getOwnedDirectionsAssignment_5_0(), "rule__TransformationCS__OwnedDirectionsAssignment_5_0");
 					put(grammarAccess.getAttributeCSAccess().getQualifiersAssignment_0_0_0(), "rule__AttributeCS__QualifiersAssignment_0_0_0");
 					put(grammarAccess.getAttributeCSAccess().getQualifiersAssignment_0_0_1(), "rule__AttributeCS__QualifiersAssignment_0_0_1");
 					put(grammarAccess.getAttributeCSAccess().getQualifiersAssignment_0_1_0(), "rule__AttributeCS__QualifiersAssignment_0_1_0");

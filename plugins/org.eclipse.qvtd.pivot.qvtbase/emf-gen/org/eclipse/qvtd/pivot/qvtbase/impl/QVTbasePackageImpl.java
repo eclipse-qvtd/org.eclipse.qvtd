@@ -1148,7 +1148,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		  (getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\townedContext <> null implies ownedContext.type = self\n\n"
+			   "body", "\n\townedContext <> null implies ownedContext.type.oclIsKindOf(Transformation)\n\n"
 		   });
 		addAnnotation
 		  (getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(),

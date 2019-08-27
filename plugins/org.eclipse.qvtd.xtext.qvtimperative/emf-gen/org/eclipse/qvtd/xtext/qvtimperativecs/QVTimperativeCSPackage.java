@@ -1295,6 +1295,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getTransformationCS_OwnedDirections();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedContextType <em>Owned Context Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Context Type</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedContextType()
+	 * @see #getTransformationCS()
+	 * @generated
+	 */
+	EReference getTransformationCS_OwnedContextType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2081,6 +2092,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSFORMATION_CS__OWNED_DIRECTIONS = eINSTANCE.getTransformationCS_OwnedDirections();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Context Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION_CS__OWNED_CONTEXT_TYPE = eINSTANCE.getTransformationCS_OwnedContextType();
 
 	}
 
