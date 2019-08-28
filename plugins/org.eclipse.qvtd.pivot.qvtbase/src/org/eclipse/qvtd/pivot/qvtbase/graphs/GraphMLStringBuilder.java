@@ -162,9 +162,6 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		s.appendElement("fontSize", "16");
 		s.appendElement("modelName", "sides");
 		s.appendElement("modelPosition", "n");
-		if (label == null) {
-			getClass();
-		}
 		s.appendTextEnd(label);
 		//				appendShape(shapeName);
 		s.popTag();

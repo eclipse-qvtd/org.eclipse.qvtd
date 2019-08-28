@@ -143,10 +143,6 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 				createVariableDeclaration2TraceProperty(node, rootVariables, allHeadGroupNodes, manyTracesPerHead);
 			}
 			else if (/*node.isPattern() &&*/ node.isMatched() && !node.isConstant()) {
-				String name = node.getName();
-				if ("atlHelper".equals(name)) {
-					getClass();
-				}
 				createVariableDeclaration2TraceProperty(node, rootVariables, allHeadGroupNodes, manyTracesPerHead);
 			}
 		}

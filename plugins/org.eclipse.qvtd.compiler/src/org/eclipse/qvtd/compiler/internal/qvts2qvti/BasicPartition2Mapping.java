@@ -1649,10 +1649,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	private void createObservedProperties() {
-		String name = getPartition().getName();
-		if ("complexAttributePrimitiveAttributes«local»".equals(name)) {
-			getClass();
-		}
 		Set<@NonNull Property> allCheckedProperties = checkedConditionAnalysis.getAllCheckedProperties();
 		if (!allCheckedProperties.isEmpty()) {
 			//

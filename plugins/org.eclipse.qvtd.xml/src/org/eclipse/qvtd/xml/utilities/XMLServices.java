@@ -207,11 +207,7 @@ public class XMLServices
 						EReference eReference = (EReference)eFeature;
 						EReference eOpposite = eReference.getEOpposite();
 						if (eOpposite != null) {
-							String string = eOpposite.getName();
-							if (string.endsWith("appliedProperty")) {
-								getClass();
-							}
-							return string;
+							return eOpposite.getName();
 						}
 					}
 				}
