@@ -13,6 +13,8 @@ package org.eclipse.qvtd.runtime.internal.evaluation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
@@ -275,6 +277,11 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	@Override
+	public @Nullable EObject getTransformationInstance() {
+		return null;
+	}
+
+	@Override
 	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName) {
 		return modelsManager.getTypedModelInstance(modelName);
 	}
@@ -362,7 +369,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		return interval != null ? interval : createInterval(intervalIndex);
 	}
 
-	private boolean hasPreExecuted = false;
+	//	private boolean hasPreExecuted = false;
 
 	@Override
 	public void analyzeInputResources() {

@@ -2264,22 +2264,22 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				String javaClass = genModelHelper.getEcoreInterfaceClassifierName(eClass);
 				js.append("private ");
 				js.appendClassReference(false, javaClass);
-				js.append(" txThis = null;\n");
+				js.append(" transformationInstance = null;\n");
 				js.append("\n");
 				js.append("public ");
 				js.appendClassReference(true, javaClass);
-				js.append(" getThis() {\n");
+				js.append(" getTransformationInstance() {\n");
 				js.pushIndentation(null);
-				js.append("if (txThis == null) {\n");
+				js.append("if (transformationInstance == null) {\n");
 				js.pushIndentation(null);
-				js.append("txThis = ");
+				js.append("transformationInstance = ");
 				js.appendClassReference(null, javaFactory);
 				js.append(".eINSTANCE.");
 				js.append(createMethodName);
 				js.append("();\n");
 				js.popIndentation();
 				js.append("}\n");
-				js.append("return txThis;\n");
+				js.append("return transformationInstance;\n");
 				js.popIndentation();
 				js.append("}\n");
 				js.append("\n");
@@ -2641,12 +2641,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		ImperativeTransformation iTransformation = getAnalyzer().getCodeGenerator().getTransformation();
 		org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
 		TypeId runtimeContextTypeId = runtimeContextClass.getTypeId();
-		if (sourceTypeId == runtimeContextTypeId) {		// FIXME make txThis regular - cloned from appendCGEcorePropertyCallExp
+		if (sourceTypeId == runtimeContextTypeId) {		// FIXME make transformationInstance regular - cloned from appendCGEcorePropertyCallExp
 			Property asProperty = ClassUtil.nonNullState(cgPropertyCallExp.getReferredProperty());
 			EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(getESObject(asProperty));
 			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
 			js.appendDeclaration(cgPropertyCallExp);
-			js.append(" = getThis().");
+			js.append(" = getTransformationInstance().");
 			js.append(getAccessor);
 			js.append("();\n");
 			return true;

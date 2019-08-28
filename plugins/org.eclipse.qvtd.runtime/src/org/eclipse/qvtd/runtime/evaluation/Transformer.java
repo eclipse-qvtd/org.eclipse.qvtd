@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
 
 /**
@@ -44,6 +46,7 @@ public interface Transformer extends ExecutionVisitable
 	@NonNull InvocationManager getInvocationManager();
 	@NonNull ModelsManager getModelsManager();
 	@NonNull ObjectManager getObjectManager();
+	@Nullable EObject getTransformationInstance();
 	int getTypedModelIndex(@NonNull String targetModelName);
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
 	boolean run() throws Exception;
