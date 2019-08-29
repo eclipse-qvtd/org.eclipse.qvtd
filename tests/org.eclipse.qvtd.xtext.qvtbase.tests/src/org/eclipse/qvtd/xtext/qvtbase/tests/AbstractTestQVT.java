@@ -680,6 +680,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
+	public void removeResources() {
+		getExecutor().getModelsManager().removeResources();
+	}
+
 	public void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
 		getExecutor().getModelsManager().saveModels(saveOptions);
 	}

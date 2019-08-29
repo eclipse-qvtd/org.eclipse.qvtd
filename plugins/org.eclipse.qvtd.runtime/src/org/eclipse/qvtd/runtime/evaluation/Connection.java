@@ -87,6 +87,8 @@ public interface Connection extends ExecutionVisitable, Nameable
 	 */
 	@NonNull Object appendElement(@NonNull Object anElement);
 
+	void clear();
+
 	int debugGetSize();
 
 	int getCapacity();

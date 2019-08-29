@@ -24,5 +24,6 @@ public interface ModelsManager
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
 	@NonNull Iterable<? extends @NonNull TypedModelInstance> getTypedModelInstances();
 	@NonNull EReference @NonNull [] getPropertyIndex2eReference();
+	void removeResources();
 	void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException;
 }

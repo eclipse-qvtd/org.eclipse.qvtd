@@ -481,6 +481,32 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 	}
 
 	@Override
+	public void removeInputResources() {
+		if (inputResources != null) {
+			inputResources.clear();
+		}
+		rootObjects.clear();
+		if (classIndex2connection != null) {
+			for (@NonNull Connection connection : classIndex2connection) {
+				connection.clear();
+			}
+		}
+	}
+
+	@Override
+	public void removeOutputResources() {
+		isContainedCount = 0;
+		isNotContainedCount = 0;
+		if (outputResources != null) {
+			outputResources.clear();
+		}
+		if (potentialOrphanObjects != null) {
+			potentialOrphanObjects.clear();
+		}
+		rootObjects.clear();
+	}
+
+	@Override
 	public void saveResources(@Nullable Map<?, ?> saveOptions) throws IOException {
 		List<@NonNull Resource> outputResources2 = outputResources;
 		if (outputResources2 != null) {

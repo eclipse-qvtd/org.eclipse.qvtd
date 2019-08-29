@@ -135,6 +135,11 @@ public abstract class AbstractIncrementalConnectionInternal extends AbstractConn
 	}
 
 	@Override
+	public void clear() {
+		listOfValueAndConsumingInvocations.clear();
+	}
+
+	@Override
 	public void consume(int elementIndex, @NonNull Invocation invocation) {
 		List<@NonNull Object> valueAndConsumingInvocations = listOfValueAndConsumingInvocations.get(elementIndex);
 		assert valueAndConsumingInvocations != null;

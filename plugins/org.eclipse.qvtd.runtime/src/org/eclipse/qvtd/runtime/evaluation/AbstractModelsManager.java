@@ -113,6 +113,14 @@ public abstract class AbstractModelsManager implements ModelsManager
 	}
 
 	@Override
+	public void removeResources() {
+		for (@NonNull TypedModelInstance typedModelInstance : getTypedModelInstances()) {
+			typedModelInstance.removeInputResources();
+			typedModelInstance.removeOutputResources();
+		}
+	}
+
+	@Override
 	public void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
 		analyzeOutputResources();
 		for (@NonNull TypedModelInstance typedModelInstance : getTypedModelInstances()) {

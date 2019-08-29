@@ -1500,35 +1500,19 @@ public class QVTrCompilerTests extends LoadTestCase
 			EStructuralFeature eStructuralFeature = txEClass.getEStructuralFeature("PREFER_CREATING_PARENT_TO_CHILD");
 			txInstance.eSet(eStructuralFeature, Boolean.FALSE);
 			myQVT2.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
-			myQVT2.executeTransformation();
+			txExecutor.execute(null);
 			myQVT2.addOutputURI("family", getTestURI("MultiFamiliesChildren-CG.xmi"));
-			myQVT2.saveModels(null);
+			txExecutor.getModelsManager().saveModels(null);
 			myQVT2.checkOutput(getTestURI("MultiFamiliesChildren-CG.xmi"), getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"), Persons2FamiliesNormalizer.INSTANCE);
-		}
-		finally {
-			myQVT2.dispose();
-		}
-		MyQVT myQVT3 = createQVT("Persons2Families", getModelsURI("persons2families/Persons2Families.qvtr"));
-		try {
-			//			myQVT2.loadEPackage(txClass, "javammsi.javammsiPackage");
-			//			myQVT2.loadEPackage(txClass, "umlmmmi.umlmmmiPackage");
-			//			myQVT2.loadEPackage(txClass, "trace_MiToSiSimple.trace_MiToSiSimplePackage");
-			//
-			Map<String, Object> extensionToFactoryMap = myQVT3.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
-			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
-			//
-			QVTiTransformationExecutor txExecutor = myQVT3.createGeneratedExecutor(txClass);
-			Transformer tx = txExecutor.getTransformer();
-			EObject txInstance = tx.getTransformationInstance();
-			assert txInstance != null;
-			EClass txEClass = txInstance.eClass();
-			EStructuralFeature eStructuralFeature = txEClass.getEStructuralFeature("PREFER_CREATING_PARENT_TO_CHILD");
+
+			myQVT2.removeResources();
+
 			txInstance.eSet(eStructuralFeature, Boolean.TRUE);
-			myQVT3.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
-			myQVT3.executeTransformation();
-			myQVT3.addOutputURI("family", getTestURI("MultiFamiliesParents-CG.xmi"));
-			myQVT3.saveModels(null);
-			myQVT3.checkOutput(getTestURI("MultiFamiliesParents-CG.xmi"), getModelsURI("persons2families/samples/MultiFamiliesParents.xmi"), Persons2FamiliesNormalizer.INSTANCE);
+			myQVT2.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
+			txExecutor.execute(null);
+			myQVT2.addOutputURI("family", getTestURI("MultiFamiliesParents-CG.xmi"));
+			txExecutor.getModelsManager().saveModels(null);
+			myQVT2.checkOutput(getTestURI("MultiFamiliesParents-CG.xmi"), getModelsURI("persons2families/samples/MultiFamiliesParents.xmi"), Persons2FamiliesNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT2.dispose();

@@ -123,5 +123,15 @@ public interface TypedModelInstance
 
 	<K,V> void initExtent(int extentClassIndex, @Nullable Map<K, V> extentOpposites);
 
+	/**
+	 * Remove all input resources preparatoryto a fresh use of the executor.
+	 */
+	void removeInputResources();
+
+	/**
+	 * Remove all output resources preparatoryto a fresh use of the executor.
+	 */
+	void removeOutputResources();
+
 	void saveResources(@Nullable Map<?, ?> saveOptions) throws IOException;
 }

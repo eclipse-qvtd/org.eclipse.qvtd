@@ -75,7 +75,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 	/**
 	 * The run-time instance of each TypedModel.
 	 *
-	 * More than four typedModelInstances is very unlikley so use of a Map to accelerate lookup is unjustified.
+	 * More than four typedModelInstances is very unlikely so use of a Map to accelerate lookup is unjustified.
 	 */
 	private @NonNull List<@NonNull QVTiTypedModelInstance> typedModelInstances = new ArrayList<>();
 
