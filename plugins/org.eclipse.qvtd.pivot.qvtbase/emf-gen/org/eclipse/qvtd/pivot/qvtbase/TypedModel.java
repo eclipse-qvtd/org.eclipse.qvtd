@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -29,6 +31,7 @@ import org.eclipse.ocl.pivot.Variable;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getDependsOn <em>Depends On</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getOwnedContext <em>Owned Context</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsPrimitive <em>Is Primitive</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsThis <em>Is This</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsTrace <em>Is Trace</em>}</li>
  * </ul>
  *
@@ -151,6 +154,32 @@ public interface TypedModel extends NamedElement {
 	void setIsPrimitive(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Is This</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The TypedModel is for the transformation instance trace. It may be added automatically.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is This</em>' attribute.
+	 * @see #setIsThis(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_IsThis()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isIsThis();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsThis <em>Is This</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is This</em>' attribute.
+	 * @see #isIsThis()
+	 * @generated
+	 */
+	void setIsThis(boolean value);
+
+	/**
 	 * Returns the value of the '<em><b>Is Trace</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -175,5 +204,14 @@ public interface TypedModel extends NamedElement {
 	 * @generated
 	 */
 	void setIsTrace(boolean value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='ExclusivePrimitiveThisTrace'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tif isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif &lt;= 1 \n\n'"
+	 * @generated
+	 */
+	boolean validateExclusivePrimitiveThisTrace(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TypedModel

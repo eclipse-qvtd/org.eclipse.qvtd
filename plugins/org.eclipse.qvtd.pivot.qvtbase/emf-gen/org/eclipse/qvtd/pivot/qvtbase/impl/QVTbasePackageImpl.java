@@ -658,8 +658,28 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getTypedModel_IsTrace() {
+	public EAttribute getTypedModel_IsThis() {
 		return (EAttribute)typedModelEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTypedModel_IsTrace() {
+		return (EAttribute)typedModelEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map() {
+		return typedModelEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -747,6 +767,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 		createEAttribute(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 		createEAttribute(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
+		createEAttribute(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
+		createEOperation(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
 	}
 
 	/**
@@ -947,7 +969,17 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getTypedModel_DependsOn(), this.getTypedModel(), null, "dependsOn", null, 0, -1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTypedModel_OwnedContext(), thePivotPackage.getVariable(), null, "ownedContext", null, 0, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypedModel_IsPrimitive(), ecorePackage.getEBoolean(), "isPrimitive", "false", 1, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTypedModel_IsThis(), ecorePackage.getEBoolean(), "isThis", "false", 1, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypedModel_IsTrace(), ecorePackage.getEBoolean(), "isTrace", "false", 1, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = initEOperation(getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateExclusivePrimitiveThisTrace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1086,6 +1118,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		   new String[] {
 			   "originalName", "NoExtendsCycle"
 		   });
+		addAnnotation
+		  (getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ExclusivePrimitiveThisTrace"
+		   });
 	}
 
 	/**
@@ -1167,6 +1205,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		   source,
 		   new String[] {
 			   "body", "\n\t_extends->closure(_extends)->excludes(self)\n\n"
+		   });
+		addAnnotation
+		  (getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tif isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1 \n\n"
 		   });
 	}
 

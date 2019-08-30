@@ -568,6 +568,17 @@ public interface QVTbasePackage extends EPackage {
 	EAttribute getTypedModel_IsPrimitive();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsThis <em>Is This</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is This</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsThis()
+	 * @see #getTypedModel()
+	 * @generated
+	 */
+	EAttribute getTypedModel_IsThis();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsTrace <em>Is Trace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -577,6 +588,16 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTypedModel_IsTrace();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#validateExclusivePrimitiveThisTrace(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Exclusive Primitive This Trace</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Exclusive Primitive This Trace</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.TypedModel#validateExclusivePrimitiveThisTrace(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -995,12 +1016,28 @@ public interface QVTbasePackage extends EPackage {
 		EAttribute TYPED_MODEL__IS_PRIMITIVE = eINSTANCE.getTypedModel_IsPrimitive();
 
 		/**
+		 * The meta object literal for the '<em><b>Is This</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPED_MODEL__IS_THIS = eINSTANCE.getTypedModel_IsThis();
+
+		/**
 		 * The meta object literal for the '<em><b>Is Trace</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute TYPED_MODEL__IS_TRACE = eINSTANCE.getTypedModel_IsTrace();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Exclusive Primitive This Trace</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TYPED_MODEL___VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map();
 
 	}
 

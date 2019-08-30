@@ -155,12 +155,20 @@ public class QVTbaseValidator extends EObjectValidator {
 	public static final int TRANSFORMATION__VALIDATE_NO_EXTENDS_CYCLE = 12;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Exclusive Primitive This Trace' of 'Typed Model'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TYPED_MODEL__VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE = 13;
+
+	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 12;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 13;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -508,7 +516,27 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTypedModel(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(typedModel, diagnostics, context);
+		if (!validate_NoCircularContainment(typedModel, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(typedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTypedModel_validateExclusivePrimitiveThisTrace(typedModel, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateExclusivePrimitiveThisTrace constraint of '<em>Typed Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTypedModel_validateExclusivePrimitiveThisTrace(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return typedModel.validateExclusivePrimitiveThisTrace(diagnostics, context);
 	}
 
 	/**

@@ -171,6 +171,16 @@ public interface QVTtracePackage extends EPackage {
 	EAttribute getTraceModel_Name();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.runtime.qvttrace.TransformationExecution <em>Transformation Execution</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Transformation Execution</em>'.
+	 * @see org.eclipse.qvtd.runtime.qvttrace.TransformationExecution
+	 * @generated
+	 */
+	EClass getTransformationExecution();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -274,6 +284,16 @@ public interface QVTtracePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TRACE_MODEL__NAME = eINSTANCE.getTraceModel_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.runtime.qvttrace.impl.TransformationExecutionImpl <em>Transformation Execution</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.runtime.qvttrace.impl.TransformationExecutionImpl
+		 * @see org.eclipse.qvtd.runtime.qvttrace.impl.QVTtracePackageImpl#getTransformationExecution()
+		 * @generated
+		 */
+		EClass TRANSFORMATION_EXECUTION = eINSTANCE.getTransformationExecution();
 
 	}
 

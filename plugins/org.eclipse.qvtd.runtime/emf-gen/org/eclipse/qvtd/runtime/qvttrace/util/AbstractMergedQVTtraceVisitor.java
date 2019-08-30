@@ -57,4 +57,9 @@ public abstract class AbstractMergedQVTtraceVisitor<R, C>
 	public R visitTraceModel(org.eclipse.qvtd.runtime.qvttrace.@NonNull TraceModel object) {
 		return visiting(object);
 	}
+
+	@Override
+	public R visitTransformationExecution(org.eclipse.qvtd.runtime.qvttrace.@NonNull TransformationExecution object) {
+		return visiting(object);
+	}
 }

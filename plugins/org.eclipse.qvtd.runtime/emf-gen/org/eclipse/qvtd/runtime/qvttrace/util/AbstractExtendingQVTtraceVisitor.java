@@ -65,4 +65,9 @@ public abstract class AbstractExtendingQVTtraceVisitor<R, C>
 	public R visitTraceModel(org.eclipse.qvtd.runtime.qvttrace.@NonNull TraceModel object) {
 		return visitTraceElement(object);
 	}
+
+	@Override
+	public R visitTransformationExecution(org.eclipse.qvtd.runtime.qvttrace.@NonNull TransformationExecution object) {
+		return visitExecution(object);
+	}
 }

@@ -116,6 +116,15 @@ public class QVTtraceSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case 5: {
+				TransformationExecution transformationExecution = (TransformationExecution)theEObject;
+				T result = caseTransformationExecution(transformationExecution);
+				if (result == null) result = caseExecution(transformationExecution);
+				if (result == null) result = caseTraceInstance(transformationExecution);
+				if (result == null) result = caseTraceElement(transformationExecution);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -192,6 +201,21 @@ public class QVTtraceSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTraceModel(TraceModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Transformation Execution</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Transformation Execution</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTransformationExecution(TransformationExecution object) {
 		return null;
 	}
 

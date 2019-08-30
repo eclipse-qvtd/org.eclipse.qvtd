@@ -693,6 +693,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(imperativeTypedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateTypedModel_validateExclusivePrimitiveThisTrace(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validateImperativeTypedModel_validateNameIsNotNull(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validateImperativeTypedModel_validateNotBothCheckedAndEnforced(imperativeTypedModel, diagnostics, context);
 		return result;

@@ -29,6 +29,7 @@ import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
 import org.eclipse.qvtd.runtime.qvttrace.TraceElement;
 import org.eclipse.qvtd.runtime.qvttrace.TraceInstance;
 import org.eclipse.qvtd.runtime.qvttrace.TraceModel;
+import org.eclipse.qvtd.runtime.qvttrace.TransformationExecution;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,6 +72,13 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 	 * @generated
 	 */
 	private EClass traceModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass transformationExecutionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -229,6 +237,16 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 	 * @generated
 	 */
 	@Override
+	public EClass getTransformationExecution() {
+		return transformationExecutionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public QVTtraceFactory getQVTtraceFactory() {
 		return (QVTtraceFactory)getEFactoryInstance();
 	}
@@ -265,6 +283,8 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 		traceModelEClass = createEClass(4);
 		createEReference(traceModelEClass, 0);
 		createEAttribute(traceModelEClass, 1);
+
+		transformationExecutionEClass = createEClass(5);
 	}
 
 	/**
@@ -299,6 +319,7 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 		executionEClass.getESuperTypes().add(this.getTraceInstance());
 		traceInstanceEClass.getESuperTypes().add(this.getTraceElement());
 		traceModelEClass.getESuperTypes().add(this.getTraceElement());
+		transformationExecutionEClass.getESuperTypes().add(this.getExecution());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(dispatchEClass, Dispatch.class, "Dispatch", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -314,6 +335,8 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 		initEClass(traceModelEClass, TraceModel.class, "TraceModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTraceModel_OwnedTraces(), this.getTraceInstance(), this.getTraceInstance_OwningModel(), "ownedTraces", null, 0, -1, TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTraceModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(transformationExecutionEClass, TransformationExecution.class, "TransformationExecution", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -50,4 +50,5 @@ public interface QVTtraceVisitor<R>
 	R visitTraceElement(org.eclipse.qvtd.runtime.qvttrace.@NonNull TraceElement object);
 	R visitTraceInstance(org.eclipse.qvtd.runtime.qvttrace.@NonNull TraceInstance object);
 	R visitTraceModel(org.eclipse.qvtd.runtime.qvttrace.@NonNull TraceModel object);
+	R visitTransformationExecution(org.eclipse.qvtd.runtime.qvttrace.@NonNull TransformationExecution object);
 }

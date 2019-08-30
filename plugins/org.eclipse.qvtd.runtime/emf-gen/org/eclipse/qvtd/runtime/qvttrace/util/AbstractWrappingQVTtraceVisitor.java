@@ -144,4 +144,16 @@ public abstract class AbstractWrappingQVTtraceVisitor<R, C, @NonNull D extends Q
 			return badVisit(object, prologue, e);
 		}
 	}
+
+	@Override
+	public R visitTransformationExecution(org.eclipse.qvtd.runtime.qvttrace.@NonNull TransformationExecution object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitTransformationExecution(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
 }

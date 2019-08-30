@@ -537,6 +537,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Transformation_extendedBy_extends = createProperty("extendedBy", _Transformation);
 		private final @NonNull Property pr_TypedModel_dependsOn = createProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON, _Set_TypedModel_NullFree);
 		private final @NonNull Property pr_TypedModel_isPrimitive = createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_PRIMITIVE, _Boolean);
+		private final @NonNull Property pr_TypedModel_isThis = createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_THIS, _Boolean);
 		private final @NonNull Property pr_TypedModel_isTrace = createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_TRACE, _Boolean);
 		private final @NonNull Property pr_TypedModel_ownedContext = createProperty(QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT, _Variable);
 		private final @NonNull Property pr_TypedModel_transformation = createProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, _Transformation);
@@ -686,6 +687,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedProperties.add(property = pr_TypedModel_isPrimitive);
 			property.setIsResolveProxies(true);
 			property.setDefaultValueString("false");
+			ownedProperties.add(property = pr_TypedModel_isThis);
+			property.setIsResolveProxies(true);
+			property.setDefaultValueString("false");
 			ownedProperties.add(property = pr_TypedModel_isTrace);
 			property.setIsResolveProxies(true);
 			property.setDefaultValueString("false");
@@ -747,6 +751,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		
 		private void installComments() {
 			installComment(pr_TypedModel_isPrimitive, "The TypedModel is for a primitive domain. It may be added automatically.");
+			installComment(pr_TypedModel_isThis, "The TypedModel is for the transformation instance trace. It may be added automatically.");
 			installComment(pr_TypedModel_isTrace, "The TypedModel is for the execution trace. It may be added automatically.");
 		}
 	}
