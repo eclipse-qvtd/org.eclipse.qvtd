@@ -532,7 +532,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitImperativeTypedModel(@NonNull ImperativeTypedModel asTypedModel) {
-		if (asTypedModel.isIsPrimitive() || QVTbaseUtil.isThis(asTypedModel)) {
+		if (asTypedModel.isIsPrimitive() || asTypedModel.isIsThis()) {
 			return null;
 		}
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTimperativeCSPackage.Literals.DIRECTION_CS, asTypedModel, null);
@@ -721,7 +721,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
-		if (asTypedModel.isIsPrimitive() || QVTbaseUtil.isThis(asTypedModel)) {
+		if (asTypedModel.isIsPrimitive() || asTypedModel.isIsThis()) {
 			return null;
 		}
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTimperativeCSPackage.Literals.DIRECTION_CS, asTypedModel, null);

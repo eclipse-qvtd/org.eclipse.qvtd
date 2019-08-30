@@ -29,6 +29,9 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	public static final @NonNull String INVOCATION_HASH_CODE_NAME = "invocationHashCode";
 	public static final @NonNull String OBJECT_MANAGER_NAME = "objectManager";
 	public static final @NonNull String MODELS_NAME = "models";
+	public static final @NonNull String TRANSFORMATION_EXECUTION_NAME = "transformationExecution";
+
+	public static final @NonNull String GET_TRANSFORMATION_EXECUTION_NAME = "getTransformationExecution";
 
 	/**
 	 * Map from an oppositeProperty that requites a cache to the global name of that cache.
@@ -43,6 +46,8 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 		nameManager.reserveName(INVOCATION_HASH_CODE_NAME, null);
 		nameManager.reserveName(MODELS_NAME, null);
 		nameManager.reserveName(OBJECT_MANAGER_NAME, null);
+		nameManager.reserveName(TRANSFORMATION_EXECUTION_NAME, null);
+		nameManager.reserveName(GET_TRANSFORMATION_EXECUTION_NAME, null);
 	}
 
 	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {

@@ -14,7 +14,6 @@ package org.eclipse.qvtd.runtime.internal.evaluation;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
@@ -42,6 +41,7 @@ import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
+import org.eclipse.qvtd.runtime.qvttrace.TransformationExecution;
 
 /**
  * The abstract implementation of an auto-generated transformation provides the shared infrastructure for maintaining
@@ -277,7 +277,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	@Override
-	public @Nullable EObject getTransformationInstance() {
+	public @Nullable TransformationExecution getTransformationExecution() {
 		return null;
 	}
 

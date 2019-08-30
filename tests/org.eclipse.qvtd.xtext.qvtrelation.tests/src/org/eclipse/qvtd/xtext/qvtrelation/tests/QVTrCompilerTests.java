@@ -18,7 +18,6 @@ import java.util.Map;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -67,6 +66,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.qvttrace.TransformationExecution;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
@@ -1494,11 +1494,11 @@ public class QVTrCompilerTests extends LoadTestCase
 			//
 			QVTiTransformationExecutor txExecutor = myQVT2.createGeneratedExecutor(txClass);
 			Transformer tx = txExecutor.getTransformer();
-			EObject txInstance = tx.getTransformationInstance();
-			assert txInstance != null;
-			EClass txEClass = txInstance.eClass();
-			EStructuralFeature eStructuralFeature = txEClass.getEStructuralFeature("PREFER_CREATING_PARENT_TO_CHILD");
-			txInstance.eSet(eStructuralFeature, Boolean.FALSE);
+			TransformationExecution transformationExecution = tx.getTransformationExecution();
+			assert transformationExecution != null;
+			EClass transformationExecutionEClass = transformationExecution.eClass();
+			EStructuralFeature eStructuralFeature = transformationExecutionEClass.getEStructuralFeature("PREFER_CREATING_PARENT_TO_CHILD");
+			transformationExecution.eSet(eStructuralFeature, Boolean.FALSE);
 			myQVT2.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
 			txExecutor.execute(null);
 			myQVT2.addOutputURI("family", getTestURI("MultiFamiliesChildren-CG.xmi"));
@@ -1507,7 +1507,7 @@ public class QVTrCompilerTests extends LoadTestCase
 
 			myQVT2.removeResources();
 
-			txInstance.eSet(eStructuralFeature, Boolean.TRUE);
+			transformationExecution.eSet(eStructuralFeature, Boolean.TRUE);
 			myQVT2.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
 			txExecutor.execute(null);
 			myQVT2.addOutputURI("family", getTestURI("MultiFamiliesParents-CG.xmi"));

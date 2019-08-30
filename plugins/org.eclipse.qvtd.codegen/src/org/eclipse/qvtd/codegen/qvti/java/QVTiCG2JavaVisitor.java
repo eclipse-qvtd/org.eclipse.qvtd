@@ -2251,7 +2251,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("}\n");
 	}
 
-	protected void doThis(@NonNull CGTransformation cgTransformation) {
+	protected void doTransformationExecution(@NonNull CGTransformation cgTransformation) {
 		ImperativeTransformation iTransformation = QVTiCGUtil.getAST(cgTransformation);
 		Type contextType = iTransformation.getContextType();
 		if (contextType != null) {
@@ -2264,22 +2264,22 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				String javaClass = genModelHelper.getEcoreInterfaceClassifierName(eClass);
 				js.append("private ");
 				js.appendClassReference(false, javaClass);
-				js.append(" transformationInstance = null;\n");
+				js.append(" " + QVTiGlobalContext.TRANSFORMATION_EXECUTION_NAME + " = null;\n");
 				js.append("\n");
 				js.append("public ");
 				js.appendClassReference(true, javaClass);
-				js.append(" getTransformationInstance() {\n");
+				js.append(" " + QVTiGlobalContext.GET_TRANSFORMATION_EXECUTION_NAME + "() {\n");
 				js.pushIndentation(null);
-				js.append("if (transformationInstance == null) {\n");
+				js.append("if (" + QVTiGlobalContext.TRANSFORMATION_EXECUTION_NAME + " == null) {\n");
 				js.pushIndentation(null);
-				js.append("transformationInstance = ");
+				js.append(QVTiGlobalContext.TRANSFORMATION_EXECUTION_NAME + " = ");
 				js.appendClassReference(null, javaFactory);
 				js.append(".eINSTANCE.");
 				js.append(createMethodName);
 				js.append("();\n");
 				js.popIndentation();
 				js.append("}\n");
-				js.append("return transformationInstance;\n");
+				js.append("return " + QVTiGlobalContext.TRANSFORMATION_EXECUTION_NAME + ";\n");
 				js.popIndentation();
 				js.append("}\n");
 				js.append("\n");
@@ -2646,7 +2646,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(getESObject(asProperty));
 			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
 			js.appendDeclaration(cgPropertyCallExp);
-			js.append(" = getTransformationInstance().");
+			js.append(" = " + QVTiGlobalContext.GET_TRANSFORMATION_EXECUTION_NAME + "().");
 			js.append(getAccessor);
 			js.append("();\n");
 			return true;
@@ -3318,7 +3318,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			} */
 		/*	doCreateInterval(cgTransformation);
 			js.append("\n"); */
-		doThis(cgTransformation);
+		doTransformationExecution(cgTransformation);
 		doRun(cgTransformation, allInstancesAnalyses);
 		//			break;
 		//		}

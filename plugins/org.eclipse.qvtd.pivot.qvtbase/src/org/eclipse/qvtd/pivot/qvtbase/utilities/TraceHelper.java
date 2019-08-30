@@ -91,4 +91,11 @@ public class TraceHelper
 		}
 		return tracePackage2;
 	}
+
+	public org.eclipse.ocl.pivot.@NonNull Class getTransformationExecutionClass() {
+		// No cache - probably only accessed once.
+		String className = QVTtracePackage.Literals.TRANSFORMATION_EXECUTION.getName();
+		Iterable<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = PivotUtil.getOwnedClasses(getTracePackage());
+		return ClassUtil.nonNullState(NameUtil.getNameable(ownedClasses, className));
+	}
 }

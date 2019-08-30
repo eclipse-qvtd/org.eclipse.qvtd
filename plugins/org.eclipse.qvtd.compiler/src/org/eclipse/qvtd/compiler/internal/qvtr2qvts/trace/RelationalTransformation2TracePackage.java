@@ -50,7 +50,6 @@ public class RelationalTransformation2TracePackage extends Transformation2TraceP
 	public RelationalTransformation2TracePackage(@NonNull QVTrelationMultipleScheduleManager scheduleManager, @NonNull RelationalTransformation transformation) {
 		super(scheduleManager, transformation);
 		this.transformationTraceClass = createTransformationTraceClass();
-		getTransformationTraceClass().getSuperClasses().add(getExecutionClass());
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class createTransformationTraceClass() {
@@ -66,6 +65,8 @@ public class RelationalTransformation2TracePackage extends Transformation2TraceP
 				transformationTraceClass.getOwnedProperties().add(contextualTraceProperty);
 			}
 		}
+		TraceHelper traceHelper = scheduleManager.getTraceHelper();
+		transformationTraceClass.getSuperClasses().add(traceHelper.getTransformationExecutionClass());
 		return transformationTraceClass;
 	}
 

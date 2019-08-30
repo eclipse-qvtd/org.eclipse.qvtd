@@ -354,6 +354,7 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 			tmOut.setName(name);
 			tmOut.getUsedPackage().addAll(tmIn.getUsedPackage());
 			tmOut.setIsPrimitive(tmIn.isIsPrimitive());
+			tmOut.setIsThis(tmIn.isIsThis());
 			tmOut.setIsTrace(tmIn.isIsTrace());
 			createAll(tmIn.getOwnedComments(), tmOut.getOwnedComments());
 			return tmOut;

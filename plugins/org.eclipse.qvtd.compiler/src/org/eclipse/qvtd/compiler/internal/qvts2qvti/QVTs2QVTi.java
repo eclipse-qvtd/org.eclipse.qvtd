@@ -109,6 +109,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 				ImperativeTypedModel qvtiTypedModel = createTypedModel(PivotUtil.getName(qvtmTypedModel));
 				qvtiTypedModel.getUsedPackage().addAll(qvtmTypedModel.getUsedPackage());
 				qvtiTypedModel.setIsPrimitive(qvtmTypedModel.isIsPrimitive());
+				qvtiTypedModel.setIsThis(qvtmTypedModel.isIsThis());
 				qvtiTypedModel.setIsTrace(qvtmTypedModel.isIsTrace());
 			}
 		}
@@ -121,6 +122,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 			iTypedModel = createTypedModel(PivotUtil.getName(asTypedModel));
 			iTypedModel.getUsedPackage().addAll(asTypedModel.getUsedPackage());
 			iTypedModel.setIsPrimitive(asTypedModel.isIsPrimitive());
+			iTypedModel.setIsThis(asTypedModel.isIsThis());
 			iTypedModel.setIsTrace(asTypedModel.isIsTrace());
 			iTransformation.getModelParameter().add(iTypedModel);
 		}

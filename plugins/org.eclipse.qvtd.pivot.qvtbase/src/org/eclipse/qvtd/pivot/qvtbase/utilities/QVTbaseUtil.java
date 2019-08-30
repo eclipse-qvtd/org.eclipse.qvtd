@@ -225,7 +225,7 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @Nullable TypedModel basicGetThisTypedModel(@NonNull Iterable<@NonNull TypedModel> modelParameters) {
 		for (@NonNull TypedModel typedModel : modelParameters) {
-			if (THIS_TYPED_MODEL_NAME.equals(typedModel.getName())) {
+			if (typedModel.isIsThis()) {
 				return typedModel;
 			}
 		}
@@ -581,11 +581,6 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		return false;
-	}
-
-	public static boolean isThis(@NonNull TypedModel typedModel) {
-		String name = typedModel.getName();
-		return THIS_TYPED_MODEL_NAME.equals(name);
 	}
 
 	public static boolean isThis(@NonNull VariableDeclaration variable) {

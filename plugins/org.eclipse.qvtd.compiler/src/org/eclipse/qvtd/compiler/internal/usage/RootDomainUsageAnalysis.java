@@ -412,7 +412,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation() {
 		for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(transformation)) {
-			if (!typedModel.isIsPrimitive() && !QVTbaseUtil.isThis(typedModel)) {
+			if (!typedModel.isIsPrimitive() && !typedModel.isIsThis()) {
 				int nextBit = add(typedModel);
 				int bitMask = 1 << nextBit;
 				@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);

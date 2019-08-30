@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
@@ -183,7 +182,7 @@ public abstract class HeadNodeGroup implements Nameable
 		for (@NonNull Node headNode : headGroupNodes) {
 			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(headNode);
 			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
-			if (QVTbaseUtil.isThis(typedModel)) {
+			if (typedModel.isIsThis()) {
 				return true;
 			}
 		}

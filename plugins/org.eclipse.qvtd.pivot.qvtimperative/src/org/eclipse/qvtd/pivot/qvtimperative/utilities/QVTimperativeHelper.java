@@ -210,6 +210,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 	public @NonNull TypedModel createThisTypedModel() {
 		TypedModel asTypedModel = QVTimperativeFactory.eINSTANCE.createImperativeTypedModel();
 		asTypedModel.setName(QVTimperativeUtil.THIS_TYPED_MODEL_NAME);
+		asTypedModel.setIsThis(true);
 		return asTypedModel;
 	}
 
