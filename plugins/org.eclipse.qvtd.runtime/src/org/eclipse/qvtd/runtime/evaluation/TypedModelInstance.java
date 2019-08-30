@@ -124,13 +124,15 @@ public interface TypedModelInstance
 	<K,V> void initExtent(int extentClassIndex, @Nullable Map<K, V> extentOpposites);
 
 	/**
-	 * Remove all input resources preparatoryto a fresh use of the executor.
+	 * Remove all input resources preparatory to a fresh use of the executor.
 	 */
+	@Deprecated /* @deprecated removing resources is a dubious experimental capability */
 	void removeInputResources();
 
 	/**
-	 * Remove all output resources preparatoryto a fresh use of the executor.
+	 * Remove all output resources preparatory to a fresh use of the executor.
 	 */
+	@Deprecated /* @deprecated removing resources is a dubious experimental capability */
 	void removeOutputResources();
 
 	void saveResources(@Nullable Map<?, ?> saveOptions) throws IOException;

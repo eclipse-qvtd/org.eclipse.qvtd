@@ -10,9 +10,16 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
@@ -20,10 +27,13 @@ import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorManager;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal;
+import org.eclipse.qvtd.runtime.qvttrace.TransformationExecution;
 
 public abstract class AbstractTransformationExecutor extends ExecutorManager implements TransformationExecutor
 {
@@ -59,6 +69,31 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	protected AbstractTransformationExecutor(@NonNull EnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass)
 			throws ReflectiveOperationException {
 		this(environmentFactory, ClassUtil.nonNullState(txClass.getConstructor(TransformationExecutor.class)));
+	}
+
+	@Override
+	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
+		ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in exteranl RespurcSet
+		PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
+		Resource inputResource = ClassUtil.nonNullState(resourceSet.getResource(modelURI, true));
+		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
+		typedModelInstance.addInputResource(inputResource);
+		return inputResource;
+	}
+
+	@Override
+	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
+		ResourceSet resourceSet;
+		if (PivotUtilInternal.isASURI(modelURI)) {
+			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
+		}
+		else {
+			resourceSet = environmentFactory.getResourceSet();
+		}
+		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
+		Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(modelURI));
+		typedModelInstance.addOutputResource(outputResource);
+		return outputResource;
 	}
 
 	@Override
@@ -117,6 +152,30 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	@Override
 	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName) {
 		return transformer.getTypedModelInstance(modelName);
+	}
+
+	@Override
+	public @Nullable TransformationExecution getTransformationExecution() {
+		return transformer.getTransformationExecution();
+	}
+
+	@Override
+	public void saveModels(@Nullable Map<?, ?> saveOptions)throws IOException {
+		getModelsManager().saveModels(saveOptions);
+	}
+
+	@Override
+	public void setContextualProperty(@NonNull String propertyName, Object value) {
+		TransformationExecution txInstance = getTransformationExecution();
+		if (txInstance == null) {
+			throw new IllegalArgumentException("No contextual instance available");
+		}
+		EClass txEClass = txInstance.eClass();
+		EStructuralFeature eStructuralFeature = txEClass.getEStructuralFeature(propertyName);
+		if (eStructuralFeature == null) {
+			throw new IllegalArgumentException("No '" + propertyName + "' contextual property in '" + txEClass.getName());
+		}
+		txInstance.eSet(eStructuralFeature, value);
 	}
 
 	@Override

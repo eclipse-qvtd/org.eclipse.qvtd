@@ -316,6 +316,12 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 
 	@Override
 	public @Nullable Object internalExecuteNavigationCallExp(@NonNull NavigationCallExp navigationCallExp, @NonNull Property referredProperty, @Nullable Object sourceValue) {
+		if (sourceValue == transformationExecution) {
+			Property transformationExecutionProperty = getTransformationExecutionProperty(referredProperty);
+			if (transformationExecutionProperty != null) {
+				referredProperty = transformationExecutionProperty;
+			}
+		}
 		if (referredProperty.isIsImplicit()) {
 			QVTiModelsManager modelManager = getModelsManager();
 			Integer cacheIndex = entryPointAnalysis.getCacheIndex((OppositePropertyCallExp) navigationCallExp);

@@ -480,6 +480,7 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 		}
 	}
 
+	@Deprecated /* @deprecated removing resources is a dubious experimental capability */
 	@Override
 	public void removeInputResources() {
 		if (inputResources != null) {
@@ -493,6 +494,7 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 		}
 	}
 
+	@Deprecated /* @deprecated removing resources is a dubious experimental capability */
 	@Override
 	public void removeOutputResources() {
 		isContainedCount = 0;

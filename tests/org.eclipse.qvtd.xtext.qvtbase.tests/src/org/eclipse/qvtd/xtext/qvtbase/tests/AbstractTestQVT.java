@@ -48,7 +48,6 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
@@ -76,7 +75,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
-import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -203,15 +201,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
-		ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in exteranl RespurcSet
-		PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
-		Resource inputResource = ClassUtil.nonNullState(resourceSet.getResource(modelURI, true));
-		TypedModelInstance typedModelInstance = executor.getTypedModelInstance(modelName);
-		typedModelInstance.addInputResource(inputResource);
-		return inputResource;
+		return executor.addInputURI(modelName, modelURI);
 	}
 
+
 	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
+		return executor.addOutputURI(modelName, modelURI);
+	}
+	/*	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
 		ResourceSet resourceSet;
 		if (PivotUtilInternal.isASURI(modelURI)) {
 			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
@@ -223,7 +220,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(modelURI));
 		typedModelInstance.addOutputResource(outputResource);
 		return outputResource;
-	}
+	} */
 
 	public void addRegisteredPackage(@NonNull String ePackageClassName) throws Exception {
 		Class<?> ePackageClass = Class.forName(ePackageClassName);
@@ -680,6 +677,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
+	@Deprecated /* @deprecated removing resources is a dubious experimental capability */
 	public void removeResources() {
 		getExecutor().getModelsManager().removeResources();
 	}

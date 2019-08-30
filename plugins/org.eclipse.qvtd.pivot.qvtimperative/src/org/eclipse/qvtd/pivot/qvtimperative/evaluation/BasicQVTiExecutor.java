@@ -20,9 +20,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -45,6 +48,7 @@ import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -107,10 +111,12 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	protected final @NonNull EntryPointAnalysis entryPointAnalysis;
 	protected final @NonNull ModeFactory modeFactory;
 	protected final @NonNull QVTiModelsManager modelsManager;
+	protected @Nullable EObject transformationExecution = null;
 	private @Nullable WrappedModelManager wrappedModelManager = null;
 	protected final boolean debugExceptions = AbstractTransformer.EXCEPTIONS.isActive();
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
-	private final @NonNull Map<@NonNull Mapping, @NonNull Interval> mapping2interval = new HashMap<>();;
+	private final @NonNull Map<@NonNull Mapping, @NonNull Interval> mapping2interval = new HashMap<>();
+	private @Nullable Map<@NonNull Property, @Nullable Property> compileTimeProperty2runtimeProperty = null;
 
 	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) {
 		super(environmentFactory);
@@ -125,6 +131,29 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			QVTiTypedModelInstance typedModelInstance = createTypedModelInstance((ImperativeTypedModel)typedModel);
 			modelsManager.initTypedModelInstance(typedModelInstance);
 		}
+	}
+
+	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
+		ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in exteranl RespurcSet
+		PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
+		Resource inputResource = ClassUtil.nonNullState(resourceSet.getResource(modelURI, true));
+		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
+		typedModelInstance.addInputResource(inputResource);
+		return inputResource;
+	}
+
+	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
+		ResourceSet resourceSet;
+		if (PivotUtilInternal.isASURI(modelURI)) {
+			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
+		}
+		else {
+			resourceSet = environmentFactory.getResourceSet();
+		}
+		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
+		Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(modelURI));
+		typedModelInstance.addOutputResource(outputResource);
+		return outputResource;
 	}
 
 	@Override
@@ -193,7 +222,8 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		getRootEvaluationEnvironment();
 		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
 		Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
-		add(ownedContext, modelsManager.getTransformationInstance(transformation));
+		//		add(ownedContext, modelsManager.getTransformationInstance(transformation));
+		add(ownedContext, getTransformationExecution());
 		for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
 			ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
 			add(ownedContext, modelsManager.getTypedModelInstance(typedModel));
@@ -252,8 +282,34 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	//		return modelsManager.getRootEObjects(getTypedModel(name));
 	//	}
 
-	public @NonNull Transformation getTransformation() {
+	public @NonNull ImperativeTransformation getTransformation() {
 		return transformation;
+	}
+
+	@Override
+	public @Nullable EObject getTransformationExecution() {
+		if (transformationExecution == null) {
+			org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(transformation);
+			EObject contextEObject = runtimeContextClass.getESObject();
+			if (contextEObject instanceof EClass) {
+				EClass contextEClass = (EClass) contextEObject;
+				EFactory eFactory = contextEClass.getEPackage().getEFactoryInstance();
+				transformationExecution = eFactory.create(contextEClass);
+			}
+			Map<@NonNull Property, @Nullable Property> compileTimeProperty2runtimeProperty2 = compileTimeProperty2runtimeProperty = new HashMap<>();
+			org.eclipse.ocl.pivot.Class compileTimeContextClass = QVTimperativeUtil.getCompileTimeContextClass(transformation);
+			for (@NonNull Property compileTimeProperty : PivotUtil.getOwnedProperties(compileTimeContextClass)) {
+				if (!compileTimeProperty.isIsDerived() && !compileTimeProperty.isIsTransient() && !compileTimeProperty.isIsVolatile() && (compileTimeProperty.getOpposite() == null)) {
+					Property runtimeProperty = NameUtil.getNameable(runtimeContextClass.getOwnedProperties(), compileTimeProperty.getName());
+					compileTimeProperty2runtimeProperty2.put(compileTimeProperty, runtimeProperty);
+				}
+			}
+		}
+		return transformationExecution;
+	}
+
+	protected @Nullable Property getTransformationExecutionProperty(@NonNull Property compileTimeProperty) {
+		return compileTimeProperty2runtimeProperty != null ? compileTimeProperty2runtimeProperty.get(compileTimeProperty) : null;
 	}
 
 	public @NonNull ImperativeTypedModel getTypedModel(@NonNull String name) {
@@ -554,6 +610,20 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		}
 		((ASResource)resource).setSaveable(true);
 		resource.save(options);
+	}
+
+	@Override
+	public void setContextualProperty(@NonNull String propertyName, Object value) {
+		EObject transformationExecution = getTransformationExecution();
+		if (transformationExecution == null) {
+			throw new IllegalArgumentException("No contextual instance available");
+		}
+		EClass txEClass = transformationExecution.eClass();
+		EStructuralFeature eStructuralFeature = txEClass.getEStructuralFeature(propertyName);
+		if (eStructuralFeature == null) {
+			throw new IllegalArgumentException("No '" + propertyName + "' contextual property in '" + txEClass.getName());
+		}
+		transformationExecution.eSet(eStructuralFeature, value);
 	}
 
 	public void setExternalURI(@NonNull String name, @NonNull URI modelURI) throws IOException {

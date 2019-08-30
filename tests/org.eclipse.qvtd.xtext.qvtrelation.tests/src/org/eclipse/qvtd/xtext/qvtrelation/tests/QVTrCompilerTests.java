@@ -17,9 +17,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -57,7 +55,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
@@ -65,8 +62,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
-import org.eclipse.qvtd.runtime.qvttrace.TransformationExecution;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
@@ -1463,59 +1460,74 @@ public class QVTrCompilerTests extends LoadTestCase
 	@Test
 	public void testQVTrCompiler_Persons2Families_CG() throws Exception {
 		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
-		//		Splitter.GROUPS.setState(true);
-		//		Splitter.RESULT.setState(true);
-		//		Splitter.STAGES.setState(true);
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
-		//   	QVTm2QVTp.PARTITIONING.setState(true);
-		//		QVTr2QVTc.SYNTHESIS.setState(true);
 		Class<? extends Transformer> txClass;
 		MyQVT myQVT1 = createQVT("Persons2Families", getModelsURI("persons2families/Persons2Families.qvtr"));
 		try {
 			txClass = myQVT1.buildTransformation("family", false);
-			//
-			//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
-			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
 		}
 		finally {
 			myQVT1.dispose();
 		}
 		MyQVT myQVT2 = createQVT("Persons2Families", getModelsURI("persons2families/Persons2Families.qvtr"));
 		try {
-			//			myQVT2.loadEPackage(txClass, "javammsi.javammsiPackage");
-			//			myQVT2.loadEPackage(txClass, "umlmmmi.umlmmmiPackage");
-			//			myQVT2.loadEPackage(txClass, "trace_MiToSiSimple.trace_MiToSiSimplePackage");
-			//
 			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
-			QVTiTransformationExecutor txExecutor = myQVT2.createGeneratedExecutor(txClass);
-			Transformer tx = txExecutor.getTransformer();
-			TransformationExecution transformationExecution = tx.getTransformationExecution();
-			assert transformationExecution != null;
-			EClass transformationExecutionEClass = transformationExecution.eClass();
-			EStructuralFeature eStructuralFeature = transformationExecutionEClass.getEStructuralFeature("PREFER_CREATING_PARENT_TO_CHILD");
-			transformationExecution.eSet(eStructuralFeature, Boolean.FALSE);
-			myQVT2.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
-			txExecutor.execute(null);
-			myQVT2.addOutputURI("family", getTestURI("MultiFamiliesChildren-CG.xmi"));
-			txExecutor.getModelsManager().saveModels(null);
+			TransformationExecutor txExecutor1 = myQVT2.createGeneratedExecutor(txClass);
+			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
+			txExecutor1.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
+			txExecutor1.execute(null);
+			txExecutor1.addOutputURI("family", getTestURI("MultiFamiliesChildren-CG.xmi"));
+			txExecutor1.saveModels(null);
 			myQVT2.checkOutput(getTestURI("MultiFamiliesChildren-CG.xmi"), getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"), Persons2FamiliesNormalizer.INSTANCE);
 
-			myQVT2.removeResources();
+			//	myQVT2.removeResources();  -- re-using an executor is very dubious until  we reliably support update executions for which
+			//  we surely update rather than clean and re-use?
 
-			transformationExecution.eSet(eStructuralFeature, Boolean.TRUE);
-			myQVT2.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
-			txExecutor.execute(null);
-			myQVT2.addOutputURI("family", getTestURI("MultiFamiliesParents-CG.xmi"));
-			txExecutor.getModelsManager().saveModels(null);
+			TransformationExecutor txExecutor2 = myQVT2.createGeneratedExecutor(txClass);
+			txExecutor2.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.TRUE);
+			txExecutor2.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
+			txExecutor2.execute(null);
+			txExecutor2.addOutputURI("family", getTestURI("MultiFamiliesParents-CG.xmi"));
+			txExecutor2.saveModels(null);
 			myQVT2.checkOutput(getTestURI("MultiFamiliesParents-CG.xmi"), getModelsURI("persons2families/samples/MultiFamiliesParents.xmi"), Persons2FamiliesNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT2.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTrCompiler_Persons2Families() throws Exception {
+		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
+		ImperativeTransformation asTransformation;
+		MyQVT myQVT = createQVT("Persons2Families", getModelsURI("persons2families/Persons2Families.qvtr"));
+		try {
+			asTransformation = myQVT.compileTransformation("family");
+			Map<String, Object> extensionToFactoryMap = myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
+			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
+			//
+			TransformationExecutor txExecutor1 = myQVT.createInterpretedExecutor(QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
+			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
+			txExecutor1.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
+			txExecutor1.execute(null);
+			txExecutor1.addOutputURI("family", getTestURI("MultiFamiliesChildren-Int.xmi"));
+			txExecutor1.saveModels(null);
+			myQVT.checkOutput(getTestURI("MultiFamiliesChildren-Int.xmi"), getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"), Persons2FamiliesNormalizer.INSTANCE);
+
+			//	myQVT2.removeResources();  -- re-using an executor is very dubious until  we reliably support update executions for which
+			//  we surely update rather than clean and re-use?
+
+			TransformationExecutor txExecutor2 = myQVT.createInterpretedExecutor(QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
+			txExecutor2.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.TRUE);
+			txExecutor2.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
+			txExecutor2.execute(null);
+			txExecutor2.addOutputURI("family", getTestURI("MultiFamiliesParents-Int.xmi"));
+			txExecutor2.saveModels(null);
+			myQVT.checkOutput(getTestURI("MultiFamiliesParents-Int.xmi"), getModelsURI("persons2families/samples/MultiFamiliesParents.xmi"), Persons2FamiliesNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT.dispose();
 		}
 	}
 

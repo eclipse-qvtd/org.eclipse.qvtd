@@ -112,6 +112,7 @@ public abstract class AbstractModelsManager implements ModelsManager
 		}
 	}
 
+	@Deprecated /* @deprecated removing resources is a dubious experimental capability */
 	@Override
 	public void removeResources() {
 		for (@NonNull TypedModelInstance typedModelInstance : getTypedModelInstances()) {

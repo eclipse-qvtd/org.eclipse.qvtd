@@ -30,7 +30,6 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.DefaultInterval;
-import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
@@ -47,7 +46,7 @@ import org.eclipse.qvtd.runtime.qvttrace.TransformationExecution;
  * The abstract implementation of an auto-generated transformation provides the shared infrastructure for maintaining
  * models and deferring invocation of not-ready mapping invocations.
  */
-public abstract class AbstractTransformerInternal /*extends AbstractModelManager*/ implements Transformer, ExecutionVisitable
+public abstract class AbstractTransformerInternal /*extends AbstractModelManager*/ implements Transformer
 {
 	public static abstract class Incremental extends AbstractTransformerInternal
 	{
