@@ -80,9 +80,15 @@
       <ownedProperties xmi:id="3n7zQ" isImplicit="true" isRequired="false" name="extendedBy" opposite="#xL9bQ" type="#AjDLV"/>
     </ownedClasses>
     <ownedClasses xmi:id="WqJYx" name="TypedModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0kVqz">
+      <ownedInvariants xmi:id="U2pQC" isCallable="true" name="ExclusivePrimitiveThisTrace">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif &lt;= 1 &#xA;&#xA;"/>
+      </ownedInvariants>
       <ownedProperties xmi:id="cy5DZ" name="dependsOn" type="#,klFp"/>
       <ownedProperties xmi:id="z+SD0" defaultValueString="false" name="isPrimitive" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
         <ownedComments body="The TypedModel is for a primitive domain. It may be added automatically."/>
+      </ownedProperties>
+      <ownedProperties xmi:id="+ug1U" defaultValueString="false" name="isThis" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+        <ownedComments body="The TypedModel is for the transformation instance trace. It may be added automatically."/>
       </ownedProperties>
       <ownedProperties xmi:id="R8XrW" defaultValueString="false" name="isTrace" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
         <ownedComments body="The TypedModel is for the execution trace. It may be added automatically."/>

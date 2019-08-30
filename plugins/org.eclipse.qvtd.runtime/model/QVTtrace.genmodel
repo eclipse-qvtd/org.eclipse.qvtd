@@ -36,5 +36,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTtrace.ecore#//TraceModel/ownedTraces"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTtrace.ecore#//TraceModel/name"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="QVTtrace.ecore#//TransformationExecution"/>
   </genPackages>
 </genmodel:GenModel>
