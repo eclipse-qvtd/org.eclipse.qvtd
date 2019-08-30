@@ -257,12 +257,17 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(".");
 			js.append(getAccessor);
 			js.append("().");
-			js.append(isPartial ? "add" : "addAll");		// FIXME may need to loop addAll manually
-			js.append("(");
-			if (instanceClassName != null) {
-				js.appendEcoreValue(instanceClassName, cgInit);
+			if (isPartial) {
+				js.append("add(");
+				if (instanceClassName != null) {
+					js.appendEcoreValue(instanceClassName, cgInit);
+				}
+				else {
+					js.appendAtomicReferenceTo(cgInit);
+				}
 			}
 			else {
+				js.append( "addAll(");		// FIXME may need to loop addAll manually
 				js.appendAtomicReferenceTo(cgInit);
 			}
 			js.append(");\n");
