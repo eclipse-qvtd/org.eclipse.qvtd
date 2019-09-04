@@ -24,6 +24,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeAS2XMIidVisitor;
 
 @SuppressWarnings("deprecation")
@@ -95,6 +96,11 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 		}
 		//		}
 		return super.visitNewStatement(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitNewStatementPart(@NonNull NewStatementPart object) {
+		return visiting(object);
 	}
 
 	@Override

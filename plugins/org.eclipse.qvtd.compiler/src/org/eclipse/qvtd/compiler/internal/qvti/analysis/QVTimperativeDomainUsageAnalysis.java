@@ -40,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
@@ -208,6 +209,11 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	@Override
 	public @NonNull DomainUsage visitNewStatement(@NonNull NewStatement object) {
 		return getUsage(QVTimperativeUtil.getReferredTypedModel(object));
+	}
+
+	@Override
+	public @NonNull DomainUsage visitNewStatementPart(@NonNull NewStatementPart object) {
+		return getUsage(QVTimperativeUtil.getReferredProperty(object));
 	}
 
 	@Override

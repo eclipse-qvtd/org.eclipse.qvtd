@@ -500,6 +500,11 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	boolean isSuccess();
 
 	/**
+	 * Return true if this is realized node needs explicit enforcement of uniqueness.
+	 */
+	boolean isStrict();
+
+	/**
 	 * Return true if this is a "this" node.
 	 *
 	 */
@@ -546,6 +551,11 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * Register variable as non-null.
 	 */
 	void setRequired();
+
+	/**
+	 * Set isStrict true if this node is the realized node for a unique mapping invocation.
+	 */
+	void setStrict(boolean isStrict);
 
 	/**
 	 * Redesignate a guard node as a "this" head.

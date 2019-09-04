@@ -26,6 +26,7 @@ import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.ShadowPartCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -36,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
@@ -52,7 +54,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
@@ -294,11 +295,6 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS object) {
-		return null;
-	}
-
-	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
 		Function pFunction = PivotUtil.getPivot(Function.class, csElement);
 		if (pFunction != null) {
@@ -328,6 +324,24 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			//				pAssignments.add(assignment);
 		}
 		return null;
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitShadowPartCS(@NonNull ShadowPartCS csShadowPart) {
+		if (QVTimperativeCS2AS.isNewStatementPartCS(csShadowPart)) {
+			NewStatementPart pivotElement = PivotUtil.getPivot(NewStatementPart.class, csShadowPart);
+			if (pivotElement != null) {
+				Property property = csShadowPart.getReferredProperty();
+				pivotElement.setReferredProperty(property);
+				ExpCS csInitExpression = csShadowPart.getOwnedInitExpression();
+				if (csInitExpression != null) {
+					OCLExpression initExpression = context.visitLeft2Right(OCLExpression.class, csInitExpression);
+					pivotElement.setOwnedExpression(initExpression);
+				}
+			}
+			return null;
+		}
+		return super.visitShadowPartCS(csShadowPart);
 	}
 
 	@Override

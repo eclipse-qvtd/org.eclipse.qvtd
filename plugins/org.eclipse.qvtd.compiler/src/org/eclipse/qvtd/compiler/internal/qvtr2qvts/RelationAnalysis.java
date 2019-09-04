@@ -42,6 +42,7 @@ import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.VariableDeclaration2TraceProperty;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.DispatchClass2TraceProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2ResultProperty;
@@ -71,6 +72,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -238,6 +240,22 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	}
 
+	private void addIncomingWhenRelation(@NonNull RelationCallExp relationInvocation) {
+		List<@NonNull RelationCallExp> incomingWhenInvocations2 = incomingWhenInvocations;
+		if (incomingWhenInvocations2 == null) {
+			incomingWhenInvocations = incomingWhenInvocations2 = new ArrayList<>();
+		}
+		incomingWhenInvocations2.add(relationInvocation);
+	}
+
+	private void addIncomingWhereRelation(@NonNull RelationCallExp relationInvocation) {
+		List<@NonNull RelationCallExp> incomingWhereInvocations2 = incomingWhereInvocations;
+		if (incomingWhereInvocations2 == null) {
+			incomingWhereInvocations = incomingWhereInvocations2 = new ArrayList<>();
+		}
+		incomingWhereInvocations2.add(relationInvocation);
+	}
+
 	private void addOutgoingInvocationAnalysis(@NonNull InvocationAnalysis invocationAnalysis) {
 		boolean isWhen = invocationAnalysis.isWhen();
 		if (isWhen) {
@@ -255,6 +273,30 @@ public class RelationAnalysis extends RuleAnalysis
 			outgoingWhereInvocationAnalyses2.add(invocationAnalysis);
 		}
 	}
+
+	/*	private void addOutgoingRelation(@NonNull RelationCallExp relationInvocation) {
+		List<@NonNull RelationCallExp> outgoingInvocations2 = outgoingInvocations;
+		if (outgoingInvocations2 == null) {
+			outgoingInvocations = outgoingInvocations2 = new ArrayList<>();
+		}
+		outgoingInvocations2.add(relationInvocation);
+	} */
+
+	/*	private void addOutgoingWhenRelation(@NonNull RelationCallExp relationInvocation) {
+		List<@NonNull RelationCallExp> outgoingWhenInvocations2 = outgoingWhenInvocations;
+		if (outgoingWhenInvocations2 == null) {
+			outgoingWhenInvocations = outgoingWhenInvocations2 = new ArrayList<>();
+		}
+		outgoingWhenInvocations2.add(relationInvocation);
+	} */
+
+	/*	private void addOutgoingWhereRelation(@NonNull RelationCallExp relationInvocation) {
+		List<@NonNull RelationCallExp> outgoingWhereInvocations2 = outgoingWhereInvocations;
+		if (outgoingWhereInvocations2 == null) {
+			outgoingWhereInvocations = outgoingWhereInvocations2 = new ArrayList<>();
+		}
+		outgoingWhereInvocations2.add(relationInvocation);
+	} */
 
 	protected void analyzeContainments() {
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
@@ -319,46 +361,6 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	}
 
-	private void addIncomingWhenRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> incomingWhenInvocations2 = incomingWhenInvocations;
-		if (incomingWhenInvocations2 == null) {
-			incomingWhenInvocations = incomingWhenInvocations2 = new ArrayList<>();
-		}
-		incomingWhenInvocations2.add(relationInvocation);
-	}
-
-	private void addIncomingWhereRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> incomingWhereInvocations2 = incomingWhereInvocations;
-		if (incomingWhereInvocations2 == null) {
-			incomingWhereInvocations = incomingWhereInvocations2 = new ArrayList<>();
-		}
-		incomingWhereInvocations2.add(relationInvocation);
-	}
-
-	/*	private void addOutgoingRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> outgoingInvocations2 = outgoingInvocations;
-		if (outgoingInvocations2 == null) {
-			outgoingInvocations = outgoingInvocations2 = new ArrayList<>();
-		}
-		outgoingInvocations2.add(relationInvocation);
-	} */
-
-	/*	private void addOutgoingWhenRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> outgoingWhenInvocations2 = outgoingWhenInvocations;
-		if (outgoingWhenInvocations2 == null) {
-			outgoingWhenInvocations = outgoingWhenInvocations2 = new ArrayList<>();
-		}
-		outgoingWhenInvocations2.add(relationInvocation);
-	} */
-
-	/*	private void addOutgoingWhereRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> outgoingWhereInvocations2 = outgoingWhereInvocations;
-		if (outgoingWhereInvocations2 == null) {
-			outgoingWhereInvocations = outgoingWhereInvocations2 = new ArrayList<>();
-		}
-		outgoingWhereInvocations2.add(relationInvocation);
-	} */
-
 	@Override
 	public void analyzeMappingRegion() {
 		rewriteCastEdges();
@@ -418,6 +420,7 @@ public class RelationAnalysis extends RuleAnalysis
 		headNodesList.clear();
 		Iterables.addAll(headNodesList, headNodes);
 		UtilityAnalysis.assignUtilities(scheduleManager, region);
+		analyzeStrictness();
 	}
 
 	protected void analyzeRealizedOutputVariables(@NonNull RelationDomain relationDomain, @NonNull Set<@NonNull VariableDeclaration> realizedOutputVariables) {
@@ -431,6 +434,71 @@ public class RelationAnalysis extends RuleAnalysis
 					TemplateExp templateExp = (TemplateExp)eObject;
 					TemplateVariable templateVariable = (TemplateVariable) QVTrelationUtil.getBindsTo(templateExp);
 					realizedOutputVariables.add(templateVariable);
+				}
+			}
+		}
+	}
+
+	public void analyzeStrictness() {
+		List<@NonNull InvocationAnalysis> outgoingInvocationAnalyses = null;
+		if (outgoingWhenInvocationAnalyses != null) {
+			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingWhenInvocationAnalyses) {
+				if (!invocationAnalysis.isTop() && invocationAnalysis.isRealized()) {
+					if (outgoingInvocationAnalyses == null) {
+						outgoingInvocationAnalyses = new ArrayList<>();
+					}
+					outgoingInvocationAnalyses.add(invocationAnalysis);
+				}
+			}
+		}
+		if (outgoingWhereInvocationAnalyses != null) {
+			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingWhereInvocationAnalyses) {
+				if (!invocationAnalysis.isTop() && invocationAnalysis.isRealized()) {
+					if (outgoingInvocationAnalyses == null) {
+						outgoingInvocationAnalyses = new ArrayList<>();
+					}
+					outgoingInvocationAnalyses.add(invocationAnalysis);
+				}
+			}
+		}
+		if (outgoingInvocationAnalyses != null) {
+			ReachabilityForest reachabilityForest = null;
+			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingInvocationAnalyses) {
+				RelationAnalysis invokedRelationAnalysis = invocationAnalysis.getInvokedRelationAnalysis();
+				Iterable<@NonNull InvocationAnalysis> whenInvocationAnalyses = invokedRelationAnalysis.basicGetIncomingWhenInvocationAnalyses();
+				Iterable<@NonNull InvocationAnalysis> whereInvocationAnalyses = invokedRelationAnalysis.basicGetIncomingWhereInvocationAnalyses();
+				int incomingWhenInvocationAnalysisCount = (whenInvocationAnalyses != null ? Iterables.size(whenInvocationAnalyses) : 0) + (whereInvocationAnalyses != null ? Iterables.size(whereInvocationAnalyses) : 0);
+				if (incomingWhenInvocationAnalysisCount > 1) {
+					invocationAnalysis.setStrict(true);
+					break;
+				}
+				for (@NonNull Node argumentNode : invocationAnalysis.getArgumentNodes()) {
+					if (argumentNode.isDataType()) {
+						invocationAnalysis.setStrict(true);
+						break;
+					}
+					if (reachabilityForest == null) {
+						Iterable<@NonNull Node> rootNodes = QVTscheduleUtil.getHeadNodes(region);
+						List<@NonNull NavigableEdge> navigableEdges = new ArrayList<>();
+						for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+							if (edge.isNavigation() /*&& edge.isOld()*/) {
+								NavigationEdge navigationEdge = (NavigationEdge)edge;
+								Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+								if (!property.isIsMany()) {
+									Property oppositeProperty = property.getOpposite();
+									if ((oppositeProperty != null) && !oppositeProperty.isIsMany()) {
+										navigableEdges.add(navigationEdge);
+									}
+								}
+							}
+						}
+						reachabilityForest = new ReachabilityForest(rootNodes, navigableEdges);
+					}
+					Integer cost = reachabilityForest.getCost(argumentNode);
+					if (cost == null) {
+						invocationAnalysis.setStrict(true);
+						break;
+					}
 				}
 			}
 		}
@@ -616,7 +684,9 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 		addOutgoingInvocationAnalysis(invocationAnalysis);
 		invokedRelationAnalysis.addIncomingInvocationAnalysis(invocationAnalysis);
-		invokedBaseRelationAnalysis.addIncomingInvocationAnalysis(invocationAnalysis);
+		if (invokedBaseRelationAnalysis != invokedRelationAnalysis) {
+			invokedBaseRelationAnalysis.addIncomingInvocationAnalysis(invocationAnalysis);
+		}
 		return invocationAnalysis;
 	}
 

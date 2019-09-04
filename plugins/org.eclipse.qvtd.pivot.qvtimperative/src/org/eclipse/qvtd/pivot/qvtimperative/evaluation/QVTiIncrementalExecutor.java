@@ -202,6 +202,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		assert string != null;
 		return string;
 	}
+
 	@Override
 	public @NonNull InvocationConstructor getInvocationConstructor(@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping asMapping = ClassUtil.nonNullState(mappingCall.getReferredMapping());

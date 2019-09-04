@@ -44,12 +44,14 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
+import org.eclipse.ocl.pivot.library.AbstractOperation;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -73,6 +75,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -88,6 +91,41 @@ import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
 public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor, TransformationExecutor
 {
+	protected class NewStatementOperation extends AbstractOperation
+	{
+		private final boolean isContained;
+
+		public NewStatementOperation(boolean isContained) {
+			this.isContained = isContained;
+		}
+
+		@Override
+		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+			NewStatement iNewStatement = (NewStatement) caller;
+			@SuppressWarnings("null")
+			org.eclipse.ocl.pivot.@NonNull Class iClass = (org.eclipse.ocl.pivot.@NonNull Class)sourceAndArgumentValues[0];
+			EObject element = iClass.createInstance();
+			List<NewStatementPart> iNewStatementParts = iNewStatement.getOwnedParts();
+			for (int i = 0; i < iNewStatementParts.size(); i++) {
+				NewStatementPart iNewStatementPart = iNewStatementParts.get(i);
+				Property iProperty = iNewStatementPart.getReferredProperty();
+				Object value = sourceAndArgumentValues[i+1];
+				EStructuralFeature eFeature = (EStructuralFeature)iProperty.getESObject();
+				element.eSet(eFeature, value);
+			}
+			ImperativeTypedModel typedModel = iNewStatement.getReferredTypedModel();
+			assert typedModel != null;
+			QVTiTypedModelInstance typedModelInstance = modelsManager.getTypedModelInstance(typedModel);
+			typedModelInstance.add(element, isContained);
+			return element;
+		}
+
+		@Override
+		public @Nullable Object dispatch(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue) {
+			throw new UnsupportedOperationException();
+		}
+	}
+
 	/**
 	 * WrappedModelManager enables the unhelpful model access API to be observed without infecting the
 	 * more streamlined QVTi accesses.
@@ -117,6 +155,8 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 	private final @NonNull Map<@NonNull Mapping, @NonNull Interval> mapping2interval = new HashMap<>();
 	private @Nullable Map<@NonNull Property, @Nullable Property> compileTimeProperty2runtimeProperty = null;
+	private @Nullable NewStatementOperation containedNewStatementOperation = null;
+	private @Nullable NewStatementOperation notContainedNewStatementOperation = null;
 
 	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) {
 		super(environmentFactory);
@@ -133,6 +173,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		}
 	}
 
+	@Override
 	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
 		ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in exteranl RespurcSet
 		PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
@@ -142,6 +183,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		return inputResource;
 	}
 
+	@Override
 	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
 		ResourceSet resourceSet;
 		if (PivotUtilInternal.isASURI(modelURI)) {
@@ -183,6 +225,37 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			//	        ((QVTiTracingEvaluationVisitor)visitor).setVerboseLevel(QVTiTracingEvaluationVisitor.VERBOSE_LEVEL_HIGH);
 		}
 		return visitor;
+	}
+
+	/**
+	 * Return (and if necessary create) the cached NewStatement creation.
+	 * @param isContained
+	 */
+	protected @NonNull EObject createInstance(@NonNull NewStatement iNewStatement, @NonNull EvaluationVisitor undecoratedVisitor, boolean isContained) {
+		NewStatementOperation newStatementOperation;
+		if (isContained) {
+			newStatementOperation = containedNewStatementOperation;
+			if (newStatementOperation == null) {
+				newStatementOperation = containedNewStatementOperation = new NewStatementOperation(true);
+			}
+		}
+		else {
+			newStatementOperation = notContainedNewStatementOperation;
+			if (newStatementOperation == null) {
+				newStatementOperation = notContainedNewStatementOperation = new NewStatementOperation(false);
+			}
+		}
+		List<NewStatementPart> iNewStatementParts = iNewStatement.getOwnedParts();
+		int iMax = iNewStatementParts.size();
+		@Nullable Object @NonNull [] sourceAndArgumentValues = new @Nullable Object[iMax+1];
+		sourceAndArgumentValues[0] = iNewStatement.getType();
+		for (int i = 0 ; i < iMax; i++) {
+			NewStatementPart iNewStatementPart = iNewStatementParts.get(i);
+			assert iNewStatementPart != null;
+			sourceAndArgumentValues[i+1] = iNewStatementPart.getOwnedExpression().accept(undecoratedVisitor);
+		}
+		@NonNull EObject element = (@NonNull EObject) getCachedEvaluationResult(newStatementOperation, iNewStatement, sourceAndArgumentValues);
+		return element;
 	}
 
 	@Override
@@ -467,14 +540,16 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	}
 
 	@Override
-	public @Nullable Object internalExecuteNewStatement(@NonNull NewStatement newStatement, @NonNull EvaluationVisitor undecoratedVisitor) {
+	public @Nullable Object internalExecuteNewStatement(@NonNull NewStatement iNewStatement, @NonNull EvaluationVisitor undecoratedVisitor) {
 		boolean isContained = false;		// FIXME compute containment guarantee
-		OCLExpression ownedExpression = newStatement.getOwnedExpression();
+		OCLExpression ownedExpression = iNewStatement.getOwnedExpression();
+		List<NewStatementPart> ownedParts = iNewStatement.getOwnedParts();
 		if (ownedExpression != null) {
+			assert ownedParts.isEmpty();
 			Object initValue = ownedExpression.accept(undecoratedVisitor);
-			getEvaluationEnvironment().add(newStatement, initValue);
-			replace(newStatement, initValue);
-			ImperativeTypedModel typedModel = newStatement.getReferredTypedModel();
+			getEvaluationEnvironment().add(iNewStatement, initValue);
+			replace(iNewStatement, initValue);
+			ImperativeTypedModel typedModel = iNewStatement.getReferredTypedModel();
 			assert typedModel != null;
 			EObject ecoreValue = (EObject) getIdResolver().ecoreValueOf(null, initValue);
 			assert ecoreValue != null;
@@ -485,23 +560,30 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			// Realized variables are in the mapping's target bottom pattern
 			// and create elements in the target model. The realized variables
 			// are being visited for each binding of variable in the mapping.
-			Type type = newStatement.getType();
+			Type type = iNewStatement.getType();
 			if (!(type instanceof org.eclipse.ocl.pivot.Class)) {
 				return null;
 			}
-			ImperativeTypedModel typedModel = newStatement.getReferredTypedModel();
+			ImperativeTypedModel typedModel = iNewStatement.getReferredTypedModel();
 			assert typedModel != null;
-			org.eclipse.ocl.pivot.Class asClass = (org.eclipse.ocl.pivot.Class)type;
-			if (asClass.isIsAbstract()) {
-				Mapping asMapping = QVTimperativeUtil.getContainingMapping(newStatement);
-				throw new IllegalStateException("Attempted to create instance of abstract '" + asClass.getName() + "' in " + asMapping.getName());
+			org.eclipse.ocl.pivot.Class iClass = (org.eclipse.ocl.pivot.Class)type;
+			if (iClass.isIsAbstract()) {
+				Mapping asMapping = QVTimperativeUtil.getContainingMapping(iNewStatement);
+				throw new IllegalStateException("Attempted to create instance of abstract '" + iClass.getName() + "' in " + asMapping.getName());
 			}
-			EObject element = asClass.createInstance();
+			EObject element;
+			if (ownedParts.isEmpty()) {
+				element = iClass.createInstance();
+				QVTiTypedModelInstance typedModelInstance = modelsManager.getTypedModelInstance(typedModel);
+				typedModelInstance.add(element, isContained);
+			}
+			else {
+				element = createInstance(iNewStatement, undecoratedVisitor, isContained);
+			}
 			// Add the realize variable binding to the environment
-			if (!replace(newStatement, element, false)) {
+			if (!replace(iNewStatement, element, false)) {
 				return null;
 			}
-			modelsManager.getTypedModelInstance(typedModel).add(element, isContained);
 			return element;
 		}
 	}

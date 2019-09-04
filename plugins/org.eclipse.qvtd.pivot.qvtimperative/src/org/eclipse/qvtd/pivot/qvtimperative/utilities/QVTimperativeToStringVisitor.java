@@ -39,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -307,11 +308,31 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 			append(" : ");
 			appendElementType(newStatement);
 		}
+		if (newStatement.eIsSet(QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_PARTS)) {
+			append(" {");
+			boolean isFirst = true;
+			for (NewStatementPart part : newStatement.getOwnedParts()) {
+				if (!isFirst) {
+					append(", ");
+				}
+				safeVisit(part);
+				isFirst = false;
+			}
+			append("}");
+		}
 		OCLExpression initExpression = newStatement.getOwnedExpression();
-		if (initExpression != null) {
+		if (initExpression != null) {				// Should be exclusive, but this is a debug toString.
 			append(" = ");
 			safeVisit(initExpression);
 		}
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitNewStatementPart(@NonNull NewStatementPart newStatementPart) {
+		appendName(newStatementPart.getReferredProperty());
+		append(" = ");
+		safeVisit(newStatementPart.getOwnedExpression());
 		return null;
 	}
 

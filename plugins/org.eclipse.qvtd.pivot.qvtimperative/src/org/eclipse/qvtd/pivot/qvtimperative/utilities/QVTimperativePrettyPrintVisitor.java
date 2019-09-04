@@ -41,7 +41,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
@@ -352,12 +354,34 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			//			context.appendQualifiedType(type);
 			context.appendTypedMultiplicity(asNewStatement);
 		}
-		OCLExpression initExpression = asNewStatement.getOwnedExpression();
-		if (initExpression != null) {
-			context.append(" = ");
-			safeVisit(initExpression);
+		if (asNewStatement.eIsSet(QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_PARTS)) {
+			context.append(" {");
+			boolean isFirst = true;
+			for (NewStatementPart part : asNewStatement.getOwnedParts()) {
+				if (!isFirst) {
+					context.append(", ");
+				}
+				safeVisit(part);
+				isFirst = false;
+			}
+			context.append("}\n");
 		}
-		context.append(";\n");
+		else {
+			OCLExpression initExpression = asNewStatement.getOwnedExpression();
+			if (initExpression != null) {
+				context.append(" = ");
+				safeVisit(initExpression);
+			}
+			context.append(";\n");
+		}
+		return null;
+	}
+
+	@Override
+	public Object visitNewStatementPart(@NonNull NewStatementPart asNewStatementPart) {
+		context.appendElement(asNewStatementPart.getReferredProperty());
+		context.append(" = ");
+		safeVisit(asNewStatementPart.getOwnedExpression());
 		return null;
 	}
 

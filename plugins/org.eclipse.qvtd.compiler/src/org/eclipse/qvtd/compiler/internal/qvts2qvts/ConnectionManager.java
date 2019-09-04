@@ -109,6 +109,43 @@ public class ConnectionManager
 	}
 
 	/**
+	 * Return the connections that need to have uniqueness enforced explicitly.
+	 */
+	public @NonNull Iterable<@NonNull NodeConnection> analyzeStrictness() {
+		List<@NonNull NodeConnection> strictConnections = new ArrayList<>();
+		for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleManager.getScheduleModel())) {
+			for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(rootRegion)) {
+				if (connection instanceof NodeConnection) {		// EdgeConnections are not passed so need no enforcement
+					//	boolean isDead = false;
+					NodeConnection nodeConnection = (NodeConnection)connection;
+					List<Node> passedTargetNodes = nodeConnection.getPassedTargetNodes();
+					if (passedTargetNodes.size() > 0) {			// unpassed NodeConnections need no enforcement
+						boolean isImplicitlyUnique = true;
+						Iterable<Node> sourceNodes = nodeConnection.getSourceNodes();
+						int size = Iterables.size(sourceNodes);
+						if (size == 0) {
+							//	isDead = true;
+						}
+						else if (size > 1) {					// multiple source need enforcement
+							isImplicitlyUnique = false;
+						}
+						else {
+							ClassDatum classDatum = nodeConnection.getClassDatum();
+							if (classDatum.isDataType()) {		// DataTypes need enforcement
+								isImplicitlyUnique = false;
+							}
+						}
+						if (!isImplicitlyUnique) {
+							strictConnections .add(nodeConnection);
+						}
+					}
+				}
+			}
+		}
+		return strictConnections;
+	}
+
+	/**
 	 * Create the Passed and Used Connections between all introducers and their corresponding consuming nodes.
 	 */
 	public void createConnections(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull Concurrency> partitionSchedule) {

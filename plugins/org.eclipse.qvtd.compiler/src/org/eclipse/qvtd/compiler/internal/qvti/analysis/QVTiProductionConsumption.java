@@ -53,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -711,6 +712,21 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 
 	@Override
 	public @Nullable Object visitNewStatement(@NonNull NewStatement newStatement) {
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitNewStatementPart(@NonNull NewStatementPart newStatementPart) {
+		NewStatement newStatement = QVTimperativeUtil.getOwningNewStatement(newStatementPart);
+		Property setProperty = QVTimperativeUtil.getReferredProperty(newStatementPart);
+		BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(setProperty);
+		CompleteClass sourceClass = getCompleteClass(QVTimperativeUtil.getType(newStatement));
+		CompleteClass targetClass = getCompleteClass(QVTimperativeUtil.getOwnedExpression(newStatementPart));
+		//		if (!newStatementPart.isIsPartial() && setProperty.isIsMany()) {
+		//			CollectionType collectionType = (CollectionType)targetClass.getPrimaryClass();
+		//			targetClass = getCompleteClass(PivotUtil.getElementType(collectionType));
+		//		}
+		basePropertyAnalysis.addProducer(newStatementPart, sourceClass, setProperty, targetClass);
 		return null;
 	}
 

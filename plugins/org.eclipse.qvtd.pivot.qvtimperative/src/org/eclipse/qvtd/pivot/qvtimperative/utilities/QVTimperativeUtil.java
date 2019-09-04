@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
@@ -195,6 +196,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return ClassUtil.nullFree(observableStatement.getObservedProperties());
 	}
 
+	public static @NonNull OCLExpression getOwnedExpression(@NonNull NewStatementPart asNewStatementPart) {
+		return ClassUtil.nonNullState(asNewStatementPart.getOwnedExpression());
+	}
+
 	public static @NonNull OCLExpression getOwnedExpression(@NonNull SetStatement asSetStatement) {
 		return ClassUtil.nonNullState(asSetStatement.getOwnedExpression());
 	}
@@ -235,8 +240,16 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return ClassUtil.nonNullState(mappingParameterBinding.getOwningMappingCall());
 	}
 
+	public static @NonNull NewStatement getOwningNewStatement(@NonNull NewStatementPart newStatementPart) {
+		return ClassUtil.nonNullState(newStatementPart.getOwningNewStatement());
+	}
+
 	public static @NonNull Mapping getReferredMapping(MappingCall asMappingCall) {
 		return ClassUtil.nonNullState(asMappingCall.getReferredMapping());
+	}
+
+	public static @NonNull Property getReferredProperty(@NonNull NewStatementPart asNewStatementPart) {
+		return ClassUtil.nonNullState(asNewStatementPart.getReferredProperty());
 	}
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull GuardParameter asGuardParameter) {

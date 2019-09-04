@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
@@ -170,6 +171,14 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		newStatement.setType(type);
 		newStatement.setIsRequired(true);
 		return newStatement;
+	}
+
+	public @NonNull NewStatementPart createNewStatementPart(@NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
+		NewStatementPart newStatementPart = QVTimperativeFactory.eINSTANCE.createNewStatementPart();
+		assert !asProperty.isIsImplicit();
+		newStatementPart.setReferredProperty(asProperty);
+		newStatementPart.setOwnedExpression(asValueExpression);
+		return newStatementPart;
 	}
 
 	@Override

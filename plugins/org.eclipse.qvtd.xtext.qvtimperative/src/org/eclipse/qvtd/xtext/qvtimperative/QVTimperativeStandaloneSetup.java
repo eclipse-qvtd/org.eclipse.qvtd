@@ -11,18 +11,19 @@
 package org.eclipse.qvtd.xtext.qvtimperative;
 
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtimperative.attributes.QVTimperativeScoping;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
 import com.google.inject.Injector;
 
 /**
- * Initialization support for running Xtext languages 
+ * Initialization support for running Xtext languages
  * without equinox extension registry
  */
 public class QVTimperativeStandaloneSetup extends QVTimperativeStandaloneSetupGenerated
 {
 	private static Injector injector = null;
-	
+
 	public static void doSetup() {
 		if (injector == null) {
 			injector = new QVTimperativeStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -32,9 +33,10 @@ public class QVTimperativeStandaloneSetup extends QVTimperativeStandaloneSetupGe
 	public static void init() {
 		QVTimperativePivotStandaloneSetup.doSetup();
 		QVTimperativeCSPackage.eINSTANCE.getName();
-//		QVTimperativeCS2MonikerVisitor.FACTORY.getClass();
+		QVTimperativeScoping.init();
+		//		QVTimperativeCS2MonikerVisitor.FACTORY.getClass();
 	}
-	
+
 	/**
 	 * Return the Injector for this plugin.
 	 */

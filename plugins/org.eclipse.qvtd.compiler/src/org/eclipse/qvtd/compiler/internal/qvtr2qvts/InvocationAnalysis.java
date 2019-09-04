@@ -20,8 +20,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 public interface InvocationAnalysis
 {
 	void addBinding(@NonNull VariableDeclaration rootVariable, @NonNull Node argumentNode);
+	@NonNull Iterable<@NonNull Node> getArgumentNodes();
 	@NonNull RelationAnalysis getInvokedRelationAnalysis();
 	@NonNull RelationAnalysis getInvokingRelationAnalysis();
+	boolean isRealized();
 
 	/**
 	 * Return true if the invoked relation is a top relation.
@@ -37,5 +39,11 @@ public interface InvocationAnalysis
 	 * Return true if a trace property is needed for the invocation.
 	 */
 	boolean needsInvocationTraceProperty();
+
+	/**
+	 * Set isStrict true if this invocation's uniqueness must be explicitly enforced at run-time.
+	 */
+	void setStrict(boolean isStrict);
+
 	void synthesizeInvocationNodes(@NonNull Node traceNode);
 }

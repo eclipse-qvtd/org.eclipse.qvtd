@@ -21,6 +21,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.attributes.GuardParameterBindingAttr
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.LoopParameterBindingAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingLoopAttribution;
+import org.eclipse.qvtd.pivot.qvtimperative.attributes.NewStatementAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.SetStatementAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.SimpleParameterAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.SimpleParameterBindingAttribution;
@@ -35,6 +36,7 @@ public class QVTimperativePivotScoping
 		registry.put(QVTimperativePackage.Literals.LOOP_PARAMETER_BINDING, LoopParameterBindingAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING, MappingAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING_LOOP, MappingLoopAttribution.INSTANCE);
+		registry.put(QVTimperativePackage.Literals.NEW_STATEMENT, NewStatementAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.SET_STATEMENT, SetStatementAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.SIMPLE_PARAMETER, SimpleParameterAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING, SimpleParameterBindingAttribution.INSTANCE);

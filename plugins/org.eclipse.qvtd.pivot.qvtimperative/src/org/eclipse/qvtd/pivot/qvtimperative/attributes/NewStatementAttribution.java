@@ -13,11 +13,11 @@ package org.eclipse.qvtd.pivot.qvtimperative.attributes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.scoping.EmptyAttribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 
 public class NewStatementAttribution extends EmptyAttribution
@@ -27,10 +27,10 @@ public class NewStatementAttribution extends EmptyAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		NewStatement asNewStatement = (NewStatement)target;
-		if (environmentView.getRequiredType() == PivotPackage.Literals.TYPE) {		// FIXME should be detecting ancestor
-			ImperativeTypedModel asTypedModel = asNewStatement.getReferredTypedModel();
-			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asTypedModel.getUsedPackage())) {
-				environmentView.addAllTypes(asPackage);
+		if (environmentView.getRequiredType() == PivotPackage.Literals.PROPERTY) {		// FIXME should be detecting ancestor
+			Type asType = asNewStatement.getType();
+			if (asType instanceof org.eclipse.ocl.pivot.Class) {
+				environmentView.addAllProperties((org.eclipse.ocl.pivot.Class)asType, FeatureFilter.SELECT_NON_STATIC);
 			}
 			return null;
 		}

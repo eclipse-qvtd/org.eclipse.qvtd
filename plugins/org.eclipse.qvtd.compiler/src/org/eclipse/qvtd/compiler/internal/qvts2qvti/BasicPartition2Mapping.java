@@ -93,6 +93,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
@@ -1303,33 +1304,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 	}
 
-	/*	private @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
-		//
-		//	The zero-cost nodes are the head nodes ...
-		//
-		List<@NonNull Node> zeroCostNodes = Lists.newArrayList(partition.getHeadNodes());
-		//
-		//	... and the no-input constant nodes
-		//
-		for (@NonNull Node node : partition.getPartialNodes()) {
-			if (node.isOperation()) {
-				if (node.isConstant()) {
-					boolean hasNoComputationInputs = true;
-					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-						if (edge.isComputation()) {
-							hasNoComputationInputs = false;
-							break;
-						}
-					}
-					if (hasNoComputationInputs) {
-						zeroCostNodes.add(node);
-					}
-				}
-			}
-		}
-		return zeroCostNodes;
-	} */
-
 	/**
 	 * Return the navigable edges that may be used by to locate nodes by this partition.
 	 * The default implementation returns all old primary navigable edges
@@ -1355,8 +1329,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				}
 			}
 		}
-		//		List<@NonNull Edge> sortedEdges = new ArrayList<>(oldEdges);
-		//		Collections.sort(sortedEdges, reachabilityForest.getEdgeCostComparator());
 		return oldEdges;
 	}
 
@@ -1523,8 +1495,18 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				targetVariableExp = createVariableExp(targetNode);
 				isPartial = edge.isPartial();
 			}
-			setStatement = helper.createSetStatement(slotVariable, setProperty, targetVariableExp, isPartial, isNotify);
-			mapping.getOwnedStatements().add(setStatement);
+			if (!sourceNode.isStrict()) {
+				setStatement = helper.createSetStatement(slotVariable, setProperty, targetVariableExp, isPartial, isNotify);
+				mapping.getOwnedStatements().add(setStatement);
+			}
+			else {
+				assert !property.isIsImplicit();
+				assert !isPartial;
+				assert !isNotify;
+				NewStatement newStatement = (NewStatement)slotVariable;
+				NewStatementPart newStatementPart = helper.createNewStatementPart(setProperty, targetVariableExp);
+				newStatement.getOwnedParts().add(newStatementPart);
+			}
 		}
 		else {
 			// SharedEdge
@@ -1637,11 +1619,27 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 		guardNodes.addAll(headNodes);
 		Collections.sort(guardNodes, NameUtil.NAMEABLE_COMPARATOR);
+		//
+		//	Set Mapping useClassMappings if consumes are not inherently unique.
+		//		DataTypes are difficuilt to prove uniqueness.
+		boolean isStrict = false;
 		for (@NonNull Node guardNode : guardNodes) {
 			if (!guardNode.isDependency()) {
 				createGuardParameter(guardNode);
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(guardNode)) {
+					if (!edge.isSuccess()) {
+						Role role = partition.getRole(edge);
+						if ((role != null) && role.isOld()) {
+							Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+							if (targetNode.isDataType()) {
+								isStrict = true;
+							}
+						}
+					}
+				}
 			}
 		}
+		mapping.setIsStrict(isStrict);
 		//
 		//	Create any connectionVariable guards
 		//
@@ -1734,9 +1732,19 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					}
 					if (valueExp != null) {
 						boolean isNotify = connectionManager.isHazardousWrite(s, navigationEdge);
-						SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, edge.isPartial(), isNotify);
-						//					addObservedProperties(setStatement);
-						mapping.getOwnedStatements().add(setStatement);
+						boolean isPartial = edge.isPartial();
+						if (!sourceNode.isStrict()) {
+							SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, isPartial, isNotify);
+							//					addObservedProperties(setStatement);
+							mapping.getOwnedStatements().add(setStatement);
+						}
+						else {
+							assert !isPartial;
+							assert !isNotify;
+							NewStatement newStatement = (NewStatement)asVariable;
+							NewStatementPart newStatementPart = helper.createNewStatementPart(property, valueExp);
+							newStatement.getOwnedParts().add(newStatementPart);
+						}
 					}
 					else {
 						QVTruntimeUtil.errPrintln("No assignment in " + this + " to " + asVariable + "." + property);

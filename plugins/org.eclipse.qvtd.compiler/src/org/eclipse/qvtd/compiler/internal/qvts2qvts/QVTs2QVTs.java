@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -42,6 +43,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -53,6 +56,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
  * QVTs2QVTi supervises the serialization of a QVTs schedule as a QVTi transformation.
@@ -628,6 +632,24 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		UtilityAnalysis.assignUtilities(directedScheduleManager, loadingRegion);
 		directedScheduleManager.writeDebugGraphs("4-pre-partition", true, true, false);
 		directedScheduleManager.throwCompilerChainExceptionForErrors();
+		//
+		Set<@NonNull NodeConnection> explicitlyUniqueConnections = Sets.newHashSet(connectionManager.analyzeStrictness());
+		List<@NonNull Region> explicitlyUniqueRegions = new ArrayList<>();
+		for (@NonNull RootRegion rootRegion : rootRegions) {
+			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
+				boolean isImplicitStrict = true;
+				for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
+					NodeConnection incomingConnection = headNode.getIncomingConnection();
+					if (explicitlyUniqueConnections.contains(incomingConnection)) {
+						isImplicitStrict = false;
+						break;
+					}
+				}
+				if (!isImplicitStrict) {
+					explicitlyUniqueRegions.add(region);
+				}
+			}
+		}
 		//
 		for (@NonNull RootRegion rootRegion : rootRegions) {
 			Iterable<@NonNull Region> activeRegions2 = QVTscheduleUtil.getActiveRegions(rootRegion);

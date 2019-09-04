@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Invocation2TraceProperty;
@@ -40,6 +41,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	protected final @NonNull RelationAnalysis invokedRelationAnalysis;
 	protected final @NonNull QVTrelationScheduleManager scheduleManager;
 	protected final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode = new HashMap<>();
+	private @Nullable Node invokedNode = null;
 
 	public AbstractInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
 		this.invokingRelationAnalysis = invokingRelationAnalysis;
@@ -97,6 +99,11 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	 * Create the invocation edge for an output domain of the invoked relation.
 	 */
 	protected abstract @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode);
+
+	@Override
+	public @NonNull Iterable<@NonNull Node> getArgumentNodes() {
+		return rootVariable2argumentNode.values();
+	}
 
 	protected @NonNull Relation getBaseInvokedRelation() {
 		return QVTrelationUtil.getBaseRelation(invokedRelationAnalysis.getRule());
@@ -158,27 +165,40 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	}
 
 	@Override
+	public boolean isRealized() {
+		assert invokedNode != null;
+		return invokedNode.isRealized();
+	}
+
+	@Override
 	public boolean needsInvocationTraceProperty() {
 		return true;
 	}
 
 	@Override
+	public void setStrict(boolean isStrict) {
+		assert invokedNode != null;
+		invokedNode.setStrict(isStrict);
+	}
+
+	@Override
 	public void synthesizeInvocationNodes(@NonNull Node invokingTraceNode) {
+		assert invokedNode == null;
 		//
 		//	Create the invokedNode that causes the invocation.
 		//
-		Node invokedNode = createInvocationNode(invokingTraceNode);
+		Node invokedNode2 = this.invokedNode = createInvocationNode(invokingTraceNode);
 		//
 		//	Integrate the invokedNode with the invokingTraceNode.
 		//
-		createInvokingTraceEdge(invokedNode, invokingTraceNode);
+		createInvokingTraceEdge(invokedNode2, invokingTraceNode);
 		//
 		//	Create a global success status if appropriate.
 		//
-		createGlobalSuccessNodeAndEdge(invokedNode);
+		createGlobalSuccessNodeAndEdge(invokedNode2);
 		//
 		//	Join the invokedNode to the argument nodes that bind it.
 		//
-		createInvocationEdges(invokedNode);
+		createInvocationEdges(invokedNode2);
 	}
 }

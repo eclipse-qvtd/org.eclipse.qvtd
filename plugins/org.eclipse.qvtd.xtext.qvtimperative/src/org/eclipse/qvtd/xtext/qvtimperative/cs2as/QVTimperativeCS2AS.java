@@ -21,11 +21,15 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCS2AS;
+import org.eclipse.ocl.xtext.essentialoclcs.CurlyBracketedClauseCS;
+import org.eclipse.ocl.xtext.essentialoclcs.ShadowPartCS;
+import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 
 public class QVTimperativeCS2AS extends EssentialOCLCS2AS
 {
@@ -43,6 +47,18 @@ public class QVTimperativeCS2AS extends EssentialOCLCS2AS
 						}
 					}
 				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean isNewStatementPartCS(@NonNull ShadowPartCS csElement) {
+		CurlyBracketedClauseCS csCurlyBracketedClause = csElement.getOwningCurlyBracketClause();
+		EObject eContainerContainer = csCurlyBracketedClause.eContainer();
+		if (eContainerContainer instanceof TypeNameExpCS) {
+			EObject eContainerContainerContainer = eContainerContainer.eContainer();
+			if (eContainerContainerContainer instanceof NewStatementCS) {
+				return true;
 			}
 		}
 		return false;

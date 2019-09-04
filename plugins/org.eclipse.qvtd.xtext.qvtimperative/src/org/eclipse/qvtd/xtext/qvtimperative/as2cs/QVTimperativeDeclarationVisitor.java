@@ -56,8 +56,12 @@ import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
+import org.eclipse.ocl.xtext.essentialoclcs.CurlyBracketedClauseCS;
+import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSFactory;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.ShadowPartCS;
+import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -86,6 +90,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
@@ -150,6 +155,14 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		public QVTimperativeAliasAnalysis(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
 			super(resource, environmentFactory);
 		}
+	}
+
+	protected static @NonNull CurlyBracketedClauseCS createCurlyBracketedClauseCS(@NonNull Iterable<? extends @NonNull ShadowPartCS> csParts) {
+		CurlyBracketedClauseCS csCurlyBracketedClause = EssentialOCLCSFactory.eINSTANCE.createCurlyBracketedClauseCS();
+		for (@NonNull ShadowPartCS csPart : csParts) {
+			csCurlyBracketedClause.getOwnedParts().add(csPart);
+		}
+		return csCurlyBracketedClause;
 	}
 
 	public static @Nullable PathNameCS createPathNameCS(@Nullable List<? extends @NonNull NamedElement> csPath) {
@@ -664,9 +677,25 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitNewStatement(@NonNull NewStatement asNewStatement) {
 		NewStatementCS csNewStatement = context.refreshTypedElement(NewStatementCS.class, QVTimperativeCSPackage.Literals.NEW_STATEMENT_CS, asNewStatement);
 		csNewStatement.setReferredTypedModel(asNewStatement.getReferredTypedModel());
+		List<NewStatementPart> asParts = asNewStatement.getOwnedParts();
+		if (asParts.size() > 0) {
+			List<@NonNull ShadowPartCS> csParts = new ArrayList<>();
+			context.refreshList(csParts, context.visitDeclarations(ShadowPartCS.class, asParts, null));
+			CurlyBracketedClauseCS csCurlyBracketedClause = createCurlyBracketedClauseCS(csParts);
+			((TypeNameExpCS)csNewStatement.getOwnedType()).setOwnedCurlyBracketedClause(csCurlyBracketedClause);
+		}
 		csNewStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asNewStatement.getOwnedExpression()));
 		refreshObservedProperties(asNewStatement, csNewStatement.getObservedProperties(), ClassUtil.nullFree(asNewStatement.getObservedProperties()));
 		return csNewStatement;
+	}
+
+	@Override
+	public ElementCS visitNewStatementPart(@NonNull NewStatementPart asNewStatementPart) {
+		ShadowPartCS csShadowPart = EssentialOCLCSFactory.eINSTANCE.createShadowPartCS();
+		csShadowPart.setPivot(asNewStatementPart);
+		csShadowPart.setOwnedInitExpression(createExpCS(asNewStatementPart.getOwnedExpression()));
+		csShadowPart.setReferredProperty(asNewStatementPart.getReferredProperty());
+		return csShadowPart;
 	}
 
 	@Override

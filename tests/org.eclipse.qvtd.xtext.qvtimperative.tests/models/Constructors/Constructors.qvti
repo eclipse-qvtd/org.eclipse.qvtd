@@ -10,9 +10,13 @@ query Constructors::createEPackage(name2 : String) : ecore::EPackage {
 	ecore::EPackage{name = name2}
 }
 
-map ep2ep in Constructors {
+/*map ep2ep in Constructors {
 	in:source epIn:EPackage;
 	new:target epOut1 : EPackage := this.createEPackage(epIn.name);
 	new:target epOut2 : EPackage;
     set epOut2.name := epIn.name;
+} */
+
+map singleton in Constructors {
+	new:target epOut1 : EPackage { name = 'this', nsPrefix = 'that' };
 }

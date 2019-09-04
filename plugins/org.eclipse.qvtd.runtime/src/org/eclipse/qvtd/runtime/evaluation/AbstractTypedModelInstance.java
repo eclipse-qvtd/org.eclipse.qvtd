@@ -136,9 +136,7 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 			if (potentialOrphanObjects2 == null) {
 				potentialOrphanObjects = potentialOrphanObjects2 = new ArrayList<>();
 			}
-			else {
-				assert !potentialOrphanObjects2.contains(eObject);
-			}
+			assert !potentialOrphanObjects2.contains(eObject);
 			potentialOrphanObjects2.add(eObject);
 		}
 		if (classIndex2classId != null) {
