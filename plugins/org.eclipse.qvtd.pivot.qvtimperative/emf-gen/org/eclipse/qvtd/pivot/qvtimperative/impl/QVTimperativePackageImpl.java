@@ -50,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -220,6 +221,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass newStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass newStatementPartEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1144,6 +1152,16 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EReference getNewStatement_OwnedParts() {
+		return (EReference)newStatementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EOperation getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map() {
 		return newStatementEClass.getEOperations().get(0);
 	}
@@ -1156,6 +1174,46 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EOperation getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map() {
 		return newStatementEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getNewStatementPart() {
+		return newStatementPartEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNewStatementPart_ReferredProperty() {
+		return (EReference)newStatementPartEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNewStatementPart_OwnedExpression() {
+		return (EReference)newStatementPartEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNewStatementPart_OwningNewStatement() {
+		return (EReference)newStatementPartEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1538,13 +1596,19 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEAttribute(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
 		createEReference(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2);
 		createEReference(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3);
+		createEReference(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4);
 		createEOperation(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 1);
 		createEOperation(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 2);
 
-		observableStatementEClass = createEClass(22);
+		newStatementPartEClass = createEClass(22);
+		createEReference(newStatementPartEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(newStatementPartEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(newStatementPartEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+
+		observableStatementEClass = createEClass(23);
 		createEReference(observableStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 
-		setStatementEClass = createEClass(23);
+		setStatementEClass = createEClass(24);
 		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
@@ -1558,19 +1622,19 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4);
 		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 5);
 
-		simpleParameterEClass = createEClass(24);
+		simpleParameterEClass = createEClass(25);
 		createEReference(simpleParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
 
-		simpleParameterBindingEClass = createEClass(25);
+		simpleParameterBindingEClass = createEClass(26);
 		createEReference(simpleParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(simpleParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
 
-		statementEClass = createEClass(26);
+		statementEClass = createEClass(27);
 		createEOperation(statementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
 
-		variableStatementEClass = createEClass(27);
+		variableStatementEClass = createEClass(28);
 	}
 
 	/**
@@ -1635,6 +1699,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingStatementEClass.getESuperTypes().add(this.getStatement());
 		newStatementEClass.getESuperTypes().add(this.getVariableStatement());
 		newStatementEClass.getESuperTypes().add(this.getObservableStatement());
+		newStatementPartEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		observableStatementEClass.getESuperTypes().add(this.getStatement());
 		setStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		simpleParameterEClass.getESuperTypes().add(this.getMappingParameter());
@@ -1857,6 +1922,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEAttribute(getNewStatement_IsContained(), ecorePackage.getEBoolean(), "isContained", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatement_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 0, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNewStatement_OwnedParts(), this.getNewStatementPart(), this.getNewStatementPart_OwningNewStatement(), "ownedParts", null, 0, -1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		op = initEOperation(getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1875,6 +1941,11 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(newStatementPartEClass, NewStatementPart.class, "NewStatementPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNewStatementPart_ReferredProperty(), thePivotPackage.getProperty(), null, "referredProperty", null, 1, 1, NewStatementPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNewStatementPart_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, NewStatementPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNewStatementPart_OwningNewStatement(), this.getNewStatement(), this.getNewStatement_OwnedParts(), "owningNewStatement", null, 1, 1, NewStatementPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(observableStatementEClass, ObservableStatement.class, "ObservableStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getObservableStatement_ObservedProperties(), thePivotPackage.getProperty(), null, "observedProperties", null, 0, -1, ObservableStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -1975,6 +2046,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createUMLAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
 		createPivotAnnotations();
+		// http://www.eclipse.org/OCL/Collection
+		createCollectionAnnotations();
 	}
 
 	/**
@@ -2291,6 +2364,22 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		   source,
 		   new String[] {
 			   "body", "\'{\' + names/*->sortedBy(n | n)*/->iterate(n; s : String = \'\' | if s = \'\' then n else s + \';\' + n endif) + \'}\'\n\n\n"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Collection</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createCollectionAnnotations() {
+		String source = "http://www.eclipse.org/OCL/Collection";
+		addAnnotation
+		  (getNewStatement_OwnedParts(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
 		   });
 	}
 

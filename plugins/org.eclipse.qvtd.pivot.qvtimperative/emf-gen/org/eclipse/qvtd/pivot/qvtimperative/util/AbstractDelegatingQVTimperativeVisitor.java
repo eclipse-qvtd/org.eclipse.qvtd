@@ -146,6 +146,11 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, @NonNull D ex
 	}
 
 	@Override
+	public R visitNewStatementPart(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatementPart object) {
+		return delegate.visitNewStatementPart(object);
+	}
+
+	@Override
 	public R visitObservableStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ObservableStatement object) {
 		return delegate.visitObservableStatement(object);
 	}

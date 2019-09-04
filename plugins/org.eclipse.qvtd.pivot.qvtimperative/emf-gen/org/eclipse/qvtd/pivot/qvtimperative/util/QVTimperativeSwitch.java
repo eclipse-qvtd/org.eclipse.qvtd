@@ -341,6 +341,14 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 22: {
+				NewStatementPart newStatementPart = (NewStatementPart)theEObject;
+				T result = caseNewStatementPart(newStatementPart);
+				if (result == null) result = caseNamedElement(newStatementPart);
+				if (result == null) result = caseElement(newStatementPart);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 23: {
 				ObservableStatement observableStatement = (ObservableStatement)theEObject;
 				T result = caseObservableStatement(observableStatement);
 				if (result == null) result = caseStatement(observableStatement);
@@ -349,7 +357,7 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 23: {
+			case 24: {
 				SetStatement setStatement = (SetStatement)theEObject;
 				T result = caseSetStatement(setStatement);
 				if (result == null) result = caseObservableStatement(setStatement);
@@ -359,7 +367,7 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 24: {
+			case 25: {
 				SimpleParameter simpleParameter = (SimpleParameter)theEObject;
 				T result = caseSimpleParameter(simpleParameter);
 				if (result == null) result = caseMappingParameter(simpleParameter);
@@ -370,7 +378,7 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 25: {
+			case 26: {
 				SimpleParameterBinding simpleParameterBinding = (SimpleParameterBinding)theEObject;
 				T result = caseSimpleParameterBinding(simpleParameterBinding);
 				if (result == null) result = caseMappingParameterBinding(simpleParameterBinding);
@@ -378,7 +386,7 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 26: {
+			case 27: {
 				Statement statement = (Statement)theEObject;
 				T result = caseStatement(statement);
 				if (result == null) result = caseNamedElement(statement);
@@ -386,7 +394,7 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 27: {
+			case 28: {
 				VariableStatement variableStatement = (VariableStatement)theEObject;
 				T result = caseVariableStatement(variableStatement);
 				if (result == null) result = caseVariableDeclaration(variableStatement);
@@ -728,6 +736,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNewStatement(NewStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>New Statement Part</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>New Statement Part</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNewStatementPart(NewStatementPart object) {
 		return null;
 	}
 

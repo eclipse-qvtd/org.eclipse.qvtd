@@ -932,6 +932,17 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getNewStatement_OwnedExpression();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#getOwnedParts <em>Owned Parts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Parts</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatement#getOwnedParts()
+	 * @see #getNewStatement()
+	 * @generated
+	 */
+	EReference getNewStatement_OwnedParts();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -950,6 +961,49 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart <em>New Statement Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>New Statement Part</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart
+	 * @generated
+	 */
+	EClass getNewStatementPart();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart#getReferredProperty <em>Referred Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart#getReferredProperty()
+	 * @see #getNewStatementPart()
+	 * @generated
+	 */
+	EReference getNewStatementPart_ReferredProperty();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart#getOwnedExpression <em>Owned Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Expression</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart#getOwnedExpression()
+	 * @see #getNewStatementPart()
+	 * @generated
+	 */
+	EReference getNewStatementPart_OwnedExpression();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart#getOwningNewStatement <em>Owning New Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning New Statement</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart#getOwningNewStatement()
+	 * @see #getNewStatementPart()
+	 * @generated
+	 */
+	EReference getNewStatementPart_OwningNewStatement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement <em>Observable Statement</em>}'.
@@ -1919,6 +1973,14 @@ public interface QVTimperativePackage extends EPackage {
 		EReference NEW_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getNewStatement_OwnedExpression();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Parts</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NEW_STATEMENT__OWNED_PARTS = eINSTANCE.getNewStatement_OwnedParts();
+
+		/**
 		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1933,6 +1995,40 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation NEW_STATEMENT___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementPartImpl <em>New Statement Part</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementPartImpl
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getNewStatementPart()
+		 * @generated
+		 */
+		EClass NEW_STATEMENT_PART = eINSTANCE.getNewStatementPart();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NEW_STATEMENT_PART__REFERRED_PROPERTY = eINSTANCE.getNewStatementPart_ReferredProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NEW_STATEMENT_PART__OWNED_EXPRESSION = eINSTANCE.getNewStatementPart_OwnedExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning New Statement</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NEW_STATEMENT_PART__OWNING_NEW_STATEMENT = eINSTANCE.getNewStatementPart_OwningNewStatement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ObservableStatementImpl <em>Observable Statement</em>}' class.

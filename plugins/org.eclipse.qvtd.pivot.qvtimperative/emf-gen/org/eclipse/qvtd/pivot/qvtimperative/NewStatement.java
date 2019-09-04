@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtimperative;
 
 import java.util.Map;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
@@ -29,7 +30,12 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * syntax: oclText[new:typedModel name : type := expression;]
  * 
  * If expression is omitted, a new instance if the tyope is created. If expression is provided, it
- * computes the 'new' object, typically a singlton supervisor fpr a QVTr key.
+ * computes the 'new' object, typically a singleton supervisor fpr a QVTr key.
+ * 
+ * syntax: oclText[new:typedModel name : type { name1 = init1, name2 = init2 }]
+ * 
+ * If constructor parts are provided, a unique instance of the parameterized property names is shared
+ * by all identical constructions.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -39,6 +45,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#isIsContained <em>Is Contained</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#getOwnedParts <em>Owned Parts</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getNewStatement()
@@ -125,6 +132,22 @@ public interface NewStatement extends VariableStatement, ObservableStatement {
 	 * @generated
 	 */
 	void setOwnedExpression(OCLExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Parts</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart#getOwningNewStatement <em>Owning New Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The parts that parameterize a unique shared construction.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Parts</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getNewStatement_OwnedParts()
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart#getOwningNewStatement
+	 * @generated
+	 */
+	EList<NewStatementPart> getOwnedParts();
 
 	/**
 	 * <!-- begin-user-doc -->

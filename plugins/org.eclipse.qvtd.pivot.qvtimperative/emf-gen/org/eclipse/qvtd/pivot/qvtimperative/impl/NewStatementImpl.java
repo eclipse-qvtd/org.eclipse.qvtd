@@ -25,7 +25,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -49,6 +51,7 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
@@ -66,6 +69,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#isIsContained <em>Is Contained</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#getOwnedParts <em>Owned Parts</em>}</li>
  * </ul>
  *
  * @generated
@@ -78,7 +82,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NEW_STATEMENT_FEATURE_COUNT = VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 4;
+	public static final int NEW_STATEMENT_FEATURE_COUNT = VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>New Statement</em>' class.
@@ -138,6 +142,16 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @ordered
 	 */
 	protected OCLExpression ownedExpression;
+
+	/**
+	 * The cached value of the '{@link #getOwnedParts() <em>Owned Parts</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedParts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<NewStatementPart> ownedParts;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -282,6 +296,19 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<NewStatementPart> getOwnedParts() {
+		if (ownedParts == null) {
+			ownedParts = new EObjectContainmentWithInverseEList<NewStatementPart>(NewStatementPart.class, this, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		}
+		return ownedParts;
 	}
 
 	/**
@@ -439,11 +466,28 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedParts()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				return basicSetOwnedExpression(null, msgs);
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
+				return ((InternalEList<?>)getOwnedParts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -465,6 +509,8 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 				return basicGetReferredTypedModel();
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				return getOwnedExpression();
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
+				return getOwnedParts();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -491,6 +537,10 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
+				getOwnedParts().clear();
+				getOwnedParts().addAll((Collection<? extends NewStatementPart>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -515,6 +565,9 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
 				return;
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
+				getOwnedParts().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -535,6 +588,8 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 				return referredTypedModel != null;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				return ownedExpression != null;
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
+				return ownedParts != null && !ownedParts.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

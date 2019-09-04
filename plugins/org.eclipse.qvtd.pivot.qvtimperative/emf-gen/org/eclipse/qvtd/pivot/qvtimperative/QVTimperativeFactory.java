@@ -193,6 +193,15 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull NewStatement createNewStatement();
 
 	/**
+	 * Returns a new object of class '<em>New Statement Part</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>New Statement Part</em>'.
+	 * @generated
+	 */
+	NewStatementPart createNewStatementPart();
+
+	/**
 	 * Returns a new object of class '<em>Set Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

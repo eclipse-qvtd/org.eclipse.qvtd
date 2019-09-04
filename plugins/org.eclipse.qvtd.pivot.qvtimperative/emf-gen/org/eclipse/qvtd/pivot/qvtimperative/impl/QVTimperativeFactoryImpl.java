@@ -100,9 +100,10 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case 16: return createMappingCall();
 			case 17: return createMappingLoop();
 			case 21: return createNewStatement();
-			case 23: return createSetStatement();
-			case 24: return createSimpleParameter();
-			case 25: return createSimpleParameterBinding();
+			case 22: return createNewStatementPart();
+			case 24: return createSetStatement();
+			case 25: return createSimpleParameter();
+			case 26: return createSimpleParameterBinding();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -304,6 +305,17 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull NewStatement createNewStatement() {
 		NewStatementImpl newStatement = new NewStatementImpl();
 		return newStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NewStatementPart createNewStatementPart() {
+		NewStatementPartImpl newStatementPart = new NewStatementPartImpl();
+		return newStatementPart;
 	}
 
 	/**

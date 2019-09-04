@@ -371,16 +371,18 @@ public class QVTimperativeValidator extends EObjectValidator {
 			case 21:
 				return validateNewStatement((NewStatement)value, diagnostics, context);
 			case 22:
-				return validateObservableStatement((ObservableStatement)value, diagnostics, context);
+				return validateNewStatementPart((NewStatementPart)value, diagnostics, context);
 			case 23:
-				return validateSetStatement((SetStatement)value, diagnostics, context);
+				return validateObservableStatement((ObservableStatement)value, diagnostics, context);
 			case 24:
-				return validateSimpleParameter((SimpleParameter)value, diagnostics, context);
+				return validateSetStatement((SetStatement)value, diagnostics, context);
 			case 25:
-				return validateSimpleParameterBinding((SimpleParameterBinding)value, diagnostics, context);
+				return validateSimpleParameter((SimpleParameter)value, diagnostics, context);
 			case 26:
-				return validateStatement((Statement)value, diagnostics, context);
+				return validateSimpleParameterBinding((SimpleParameterBinding)value, diagnostics, context);
 			case 27:
+				return validateStatement((Statement)value, diagnostics, context);
+			case 28:
 				return validateVariableStatement((VariableStatement)value, diagnostics, context);
 			default:
 				return true;
@@ -973,6 +975,15 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 */
 	public boolean validateNewStatement_validateNonDataTypeForType(NewStatement newStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return newStatement.validateNonDataTypeForType(diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNewStatementPart(NewStatementPart newStatementPart, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(newStatementPart, diagnostics, context);
 	}
 
 	/**

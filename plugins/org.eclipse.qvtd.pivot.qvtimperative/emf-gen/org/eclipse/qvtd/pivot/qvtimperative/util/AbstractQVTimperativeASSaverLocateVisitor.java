@@ -154,6 +154,11 @@ public abstract class AbstractQVTimperativeASSaverLocateVisitor
 	}
 
 	@Override
+	public @Nullable Object visitNewStatementPart(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatementPart object) {
+		return visitNamedElement(object);
+	}
+
+	@Override
 	public @Nullable Object visitObservableStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ObservableStatement object) {
 		return visitStatement(object);
 	}

@@ -111,6 +111,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("MappingParameterBinding", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("MappingStatement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NewStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("NewStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NewStatementPart = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("NewStatementPart", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTimperativeTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = QVTimperativeTables.PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Package = QVTimperativeTables.PACKid_$metamodel$.getClassId("Package", 0);
@@ -159,6 +160,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_VariableStatement = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_VariableStatement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_MappingParameter = TypeId.SEQUENCE.getSpecializedId(QVTimperativeTables.CLSSid_MappingParameter);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_MappingParameter = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_MappingParameter);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_NewStatementPart = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_NewStatementPart);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_OCLExpression);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_OclElement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_Package);
@@ -218,6 +220,7 @@ public class QVTimperativeTables
 		public static final @NonNull EcoreExecutorType _MappingParameterBinding = new EcoreExecutorType(QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _MappingStatement = new EcoreExecutorType(QVTimperativePackage.Literals.MAPPING_STATEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _NewStatement = new EcoreExecutorType(QVTimperativePackage.Literals.NEW_STATEMENT, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _NewStatementPart = new EcoreExecutorType(QVTimperativePackage.Literals.NEW_STATEMENT_PART, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ObservableStatement = new EcoreExecutorType(QVTimperativePackage.Literals.OBSERVABLE_STATEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _SetStatement = new EcoreExecutorType(QVTimperativePackage.Literals.SET_STATEMENT, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _SimpleParameter = new EcoreExecutorType(QVTimperativePackage.Literals.SIMPLE_PARAMETER, PACKAGE, 0);
@@ -248,6 +251,7 @@ public class QVTimperativeTables
 			_MappingParameterBinding,
 			_MappingStatement,
 			_NewStatement,
+			_NewStatementPart,
 			_ObservableStatement,
 			_SetStatement,
 			_SimpleParameter,
@@ -464,6 +468,12 @@ public class QVTimperativeTables
 		private static final @NonNull ExecutorFragment _NewStatement__VariableDeclaration = new ExecutorFragment(Types._NewStatement, PivotTables.Types._VariableDeclaration);
 		private static final @NonNull ExecutorFragment _NewStatement__VariableStatement = new ExecutorFragment(Types._NewStatement, QVTimperativeTables.Types._VariableStatement);
 
+		private static final @NonNull ExecutorFragment _NewStatementPart__Element = new ExecutorFragment(Types._NewStatementPart, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _NewStatementPart__NamedElement = new ExecutorFragment(Types._NewStatementPart, PivotTables.Types._NamedElement);
+		private static final @NonNull ExecutorFragment _NewStatementPart__NewStatementPart = new ExecutorFragment(Types._NewStatementPart, QVTimperativeTables.Types._NewStatementPart);
+		private static final @NonNull ExecutorFragment _NewStatementPart__OclAny = new ExecutorFragment(Types._NewStatementPart, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _NewStatementPart__OclElement = new ExecutorFragment(Types._NewStatementPart, OCLstdlibTables.Types._OclElement);
+
 		private static final @NonNull ExecutorFragment _ObservableStatement__Element = new ExecutorFragment(Types._ObservableStatement, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _ObservableStatement__NamedElement = new ExecutorFragment(Types._ObservableStatement, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _ObservableStatement__ObservableStatement = new ExecutorFragment(Types._ObservableStatement, QVTimperativeTables.Types._ObservableStatement);
@@ -655,7 +665,12 @@ public class QVTimperativeTables
 
 		public static final @NonNull ExecutorProperty _NewStatement__isContained = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__IS_CONTAINED, Types._NewStatement, 0);
 		public static final @NonNull ExecutorProperty _NewStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_EXPRESSION, Types._NewStatement, 1);
-		public static final @NonNull ExecutorProperty _NewStatement__referredTypedModel = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__REFERRED_TYPED_MODEL, Types._NewStatement, 2);
+		public static final @NonNull ExecutorProperty _NewStatement__ownedParts = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_PARTS, Types._NewStatement, 2);
+		public static final @NonNull ExecutorProperty _NewStatement__referredTypedModel = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__REFERRED_TYPED_MODEL, Types._NewStatement, 3);
+
+		public static final @NonNull ExecutorProperty _NewStatementPart__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT_PART__OWNED_EXPRESSION, Types._NewStatementPart, 0);
+		public static final @NonNull ExecutorProperty _NewStatementPart__owningNewStatement = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT_PART__OWNING_NEW_STATEMENT, Types._NewStatementPart, 1);
+		public static final @NonNull ExecutorProperty _NewStatementPart__referredProperty = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT_PART__REFERRED_PROPERTY, Types._NewStatementPart, 2);
 
 		public static final @NonNull ExecutorProperty _ObservableStatement__observedProperties = new EcoreExecutorProperty(QVTimperativePackage.Literals.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES, Types._ObservableStatement, 0);
 
@@ -965,6 +980,16 @@ public class QVTimperativeTables
 			};
 		private static final int @NonNull [] __NewStatement = { 1,1,1,1,2,2,1,1 };
 
+		private static final @NonNull ExecutorFragment @NonNull [] _NewStatementPart =
+			{
+				Fragments._NewStatementPart__OclAny /* 0 */,
+				Fragments._NewStatementPart__OclElement /* 1 */,
+				Fragments._NewStatementPart__Element /* 2 */,
+				Fragments._NewStatementPart__NamedElement /* 3 */,
+				Fragments._NewStatementPart__NewStatementPart /* 4 */
+			};
+		private static final int @NonNull [] __NewStatementPart = { 1,1,1,1,1 };
+
 		private static final @NonNull ExecutorFragment @NonNull [] _ObservableStatement =
 			{
 				Fragments._ObservableStatement__OclAny /* 0 */,
@@ -1060,6 +1085,7 @@ public class QVTimperativeTables
 			Types._MappingParameterBinding.initFragments(_MappingParameterBinding, __MappingParameterBinding);
 			Types._MappingStatement.initFragments(_MappingStatement, __MappingStatement);
 			Types._NewStatement.initFragments(_NewStatement, __NewStatement);
+			Types._NewStatementPart.initFragments(_NewStatementPart, __NewStatementPart);
 			Types._ObservableStatement.initFragments(_ObservableStatement, __ObservableStatement);
 			Types._SetStatement.initFragments(_SetStatement, __SetStatement);
 			Types._SimpleParameter.initFragments(_SimpleParameter, __SimpleParameter);
@@ -1909,6 +1935,39 @@ public class QVTimperativeTables
 		private static final @NonNull ExecutorOperation @NonNull [] _NewStatement__VariableDeclaration = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _NewStatement__VariableStatement = {};
 
+		private static final @NonNull ExecutorOperation @NonNull [] _NewStatementPart__NewStatementPart = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _NewStatementPart__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _NewStatementPart__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _NewStatementPart__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _NewStatementPart__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+
 		private static final @NonNull ExecutorOperation @NonNull [] _ObservableStatement__ObservableStatement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _ObservableStatement__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
@@ -2317,6 +2376,12 @@ public class QVTimperativeTables
 			Fragments._NewStatement__VariableDeclaration.initOperations(_NewStatement__VariableDeclaration);
 			Fragments._NewStatement__VariableStatement.initOperations(_NewStatement__VariableStatement);
 
+			Fragments._NewStatementPart__Element.initOperations(_NewStatementPart__Element);
+			Fragments._NewStatementPart__NamedElement.initOperations(_NewStatementPart__NamedElement);
+			Fragments._NewStatementPart__NewStatementPart.initOperations(_NewStatementPart__NewStatementPart);
+			Fragments._NewStatementPart__OclAny.initOperations(_NewStatementPart__OclAny);
+			Fragments._NewStatementPart__OclElement.initOperations(_NewStatementPart__OclElement);
+
 			Fragments._ObservableStatement__Element.initOperations(_ObservableStatement__Element);
 			Fragments._ObservableStatement__NamedElement.initOperations(_ObservableStatement__NamedElement);
 			Fragments._ObservableStatement__ObservableStatement.initOperations(_ObservableStatement__ObservableStatement);
@@ -2506,7 +2571,14 @@ public class QVTimperativeTables
 			QVTimperativeTables.Properties._NewStatement__isContained,
 			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
 			QVTimperativeTables.Properties._NewStatement__ownedExpression,
+			QVTimperativeTables.Properties._NewStatement__ownedParts,
 			QVTimperativeTables.Properties._NewStatement__referredTypedModel
+		};
+
+		private static final @NonNull ExecutorProperty @NonNull [] _NewStatementPart = {
+			QVTimperativeTables.Properties._NewStatementPart__ownedExpression,
+			QVTimperativeTables.Properties._NewStatementPart__owningNewStatement,
+			QVTimperativeTables.Properties._NewStatementPart__referredProperty
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ObservableStatement = {
@@ -2566,6 +2638,7 @@ public class QVTimperativeTables
 			Fragments._MappingParameterBinding__MappingParameterBinding.initProperties(_MappingParameterBinding);
 			Fragments._MappingStatement__MappingStatement.initProperties(_MappingStatement);
 			Fragments._NewStatement__NewStatement.initProperties(_NewStatement);
+			Fragments._NewStatementPart__NewStatementPart.initProperties(_NewStatementPart);
 			Fragments._ObservableStatement__ObservableStatement.initProperties(_ObservableStatement);
 			Fragments._SetStatement__SetStatement.initProperties(_SetStatement);
 			Fragments._SimpleParameter__SimpleParameter.initProperties(_SimpleParameter);

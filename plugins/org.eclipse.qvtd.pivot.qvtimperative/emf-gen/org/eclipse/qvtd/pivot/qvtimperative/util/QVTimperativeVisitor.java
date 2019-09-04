@@ -46,6 +46,7 @@ public interface QVTimperativeVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.
 	R visitMappingParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameterBinding object);
 	R visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object);
 	R visitNewStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatement object);
+	R visitNewStatementPart(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatementPart object);
 	R visitObservableStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ObservableStatement object);
 	R visitSetStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SetStatement object);
 	R visitSimpleParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SimpleParameter object);

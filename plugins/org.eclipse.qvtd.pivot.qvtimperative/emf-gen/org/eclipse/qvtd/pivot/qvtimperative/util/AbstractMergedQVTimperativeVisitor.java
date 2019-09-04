@@ -144,6 +144,11 @@ public abstract class AbstractMergedQVTimperativeVisitor<R, C>
 	}
 
 	@Override
+	public R visitNewStatementPart(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatementPart object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitObservableStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ObservableStatement object) {
 		return visiting(object);
 	}
