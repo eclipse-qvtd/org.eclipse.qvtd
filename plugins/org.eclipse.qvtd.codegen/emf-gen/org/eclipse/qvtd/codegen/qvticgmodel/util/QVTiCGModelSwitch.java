@@ -289,6 +289,16 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 18: {
+				CGRealizedVariablePart cgRealizedVariablePart = (CGRealizedVariablePart)theEObject;
+				T result = caseCGRealizedVariablePart(cgRealizedVariablePart);
+				if (result == null) result = caseCGValuedElement(cgRealizedVariablePart);
+				if (result == null) result = caseCGTypedElement(cgRealizedVariablePart);
+				if (result == null) result = caseCGNamedElement(cgRealizedVariablePart);
+				if (result == null) result = caseCGElement(cgRealizedVariablePart);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 19: {
 				CGSequence cgSequence = (CGSequence)theEObject;
 				T result = caseCGSequence(cgSequence);
 				if (result == null) result = caseCGValuedElement(cgSequence);
@@ -298,7 +308,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 19: {
+			case 20: {
 				CGTransformation cgTransformation = (CGTransformation)theEObject;
 				T result = caseCGTransformation(cgTransformation);
 				if (result == null) result = caseCGClass(cgTransformation);
@@ -307,7 +317,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 20: {
+			case 21: {
 				CGTypedModel cgTypedModel = (CGTypedModel)theEObject;
 				T result = caseCGTypedModel(cgTypedModel);
 				if (result == null) result = caseCGNamedElement(cgTypedModel);
@@ -616,6 +626,21 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGRealizedVariable(CGRealizedVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Realized Variable Part</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Realized Variable Part</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGRealizedVariablePart(CGRealizedVariablePart object) {
 		return null;
 	}
 

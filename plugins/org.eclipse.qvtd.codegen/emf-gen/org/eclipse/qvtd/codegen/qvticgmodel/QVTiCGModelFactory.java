@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -210,6 +210,15 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGRealizedVariable createCGRealizedVariable();
+
+	/**
+	 * Returns a new object of class '<em>CG Realized Variable Part</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Realized Variable Part</em>'.
+	 * @generated
+	 */
+	@NonNull CGRealizedVariablePart createCGRealizedVariablePart();
 
 	/**
 	 * Returns a new object of class '<em>CG Sequence</em>'.

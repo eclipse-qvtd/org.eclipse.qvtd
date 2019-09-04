@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -39,6 +40,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
@@ -53,6 +55,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 
 public class QVTiCGUtil extends CGUtil
@@ -64,6 +67,10 @@ public class QVTiCGUtil extends CGUtil
 			}
 		}
 		return null;
+	}
+
+	public static @NonNull Property getAST(@NonNull CGExecutorProperty cgProperty) {
+		return ClassUtil.nonNullState((Property)cgProperty.getAst());
 	}
 
 	public static @NonNull Function getAST(@NonNull CGFunction cgFunction) {
@@ -88,6 +95,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull NewStatement getAST(@NonNull CGRealizedVariable cgRealizedVariable) {
 		return ClassUtil.nonNullState((NewStatement)cgRealizedVariable.getAst());
+	}
+
+	public static @NonNull NewStatementPart getAST(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {
+		return ClassUtil.nonNullState((NewStatementPart)cgRealizedVariablePart.getAst());
 	}
 
 	public static @NonNull ImperativeTransformation getAST(@NonNull CGTransformation cgTransformation) {

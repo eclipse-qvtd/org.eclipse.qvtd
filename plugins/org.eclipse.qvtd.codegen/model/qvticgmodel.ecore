@@ -121,6 +121,22 @@
         eType="#//CGMapping" resolveProxies="false" eOpposite="#//CGMapping/ownedRealizedVariables"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
         eType="#//CGTypedModel" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParts" upperBound="-1"
+        eType="#//CGRealizedVariablePart" containment="true" resolveProxies="false"
+        eOpposite="#//CGRealizedVariablePart/owningRealizedVariable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGRealizedVariablePart" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningRealizedVariable"
+        lowerBound="1" eType="#//CGRealizedVariable" resolveProxies="false" eOpposite="#//CGRealizedVariable/ownedParts"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="init" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executorProperty" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGExecutorProperty"
+        resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The shared type."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGSequence" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"

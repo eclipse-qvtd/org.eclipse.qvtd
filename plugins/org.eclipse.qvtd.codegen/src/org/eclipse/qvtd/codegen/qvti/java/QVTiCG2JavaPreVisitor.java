@@ -35,6 +35,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
@@ -155,6 +156,20 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 	@Override
 	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
 		return visitCGVariable(cgRealizedVariable);
+	}
+
+	@Override
+	public @Nullable Object visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {
+		/*		CGExecutorShadowPart cgExecutorConstructorPart = cgRealizedVariablePart.getExecutorPart();
+		cgExecutorConstructorPart.accept(this);
+		TypeId javaPropertyTypeId = JavaConstants.PROPERTY_TYPE_ID;
+		cgExecutorConstructorPart.setTypeId(analyzer.getTypeId(javaPropertyTypeId));
+		//		localContext.addLocalVariable(cgExecutorConstructorPart);
+		installIdResolverVariable(cgExecutorConstructorPart);
+		cgRealizedVariablePart.getOwns().add(cgExecutorConstructorPart);
+		cgRealizedVariablePart.getDependsOn().add(cgExecutorConstructorPart);
+		//		cgShadowPart.getDependsOn().add(cgShadowPart.getShadowExp()); */
+		return visitCGValuedElement(cgRealizedVariablePart);
 	}
 
 	@Override

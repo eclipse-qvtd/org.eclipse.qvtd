@@ -92,7 +92,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 		EClassifier oldEClassifier = eClassifier;
 		eClassifier = newEClassifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3, oldEClassifier, eClassifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 4, oldEClassifier, eClassifier));
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 4:
 				return getEClassifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -117,7 +117,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 4:
 				setEClassifier((EClassifier)newValue);
 				return;
 		}
@@ -132,7 +132,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 4:
 				setEClassifier((EClassifier)null);
 				return;
 		}
@@ -147,7 +147,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 4:
 				return eClassifier != null;
 		}
 		return super.eIsSet(featureID);

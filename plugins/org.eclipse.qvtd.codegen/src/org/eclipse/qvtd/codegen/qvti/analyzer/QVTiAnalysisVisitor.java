@@ -34,6 +34,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
@@ -151,6 +152,11 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 			localContext.setNames(cgRealizedVariable, cgRealizedVariable);
 		}
 		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart object) {
+		return visitCGValuedElement(object);
 	}
 
 	@Override

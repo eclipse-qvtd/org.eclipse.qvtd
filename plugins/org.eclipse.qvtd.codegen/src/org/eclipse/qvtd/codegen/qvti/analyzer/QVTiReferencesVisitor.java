@@ -20,6 +20,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -125,6 +126,11 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 	@Override
 	public @NonNull List<@Nullable Object> visitCGRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariable object) {
 		return visitCGVariable(object);
+	}
+
+	@Override
+	public @NonNull List<@Nullable Object> visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart object) {
+		return visitCGValuedElement(object);
 	}
 
 	@Override

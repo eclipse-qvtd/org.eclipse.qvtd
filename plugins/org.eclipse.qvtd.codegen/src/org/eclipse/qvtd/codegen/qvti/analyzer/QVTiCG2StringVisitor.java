@@ -35,12 +35,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 
 public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGModelVisitor<String>
 {
@@ -217,6 +219,14 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	@Override
 	public @Nullable String visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 		return visitCGVariable(object);
+	}
+
+	@Override
+	public @Nullable String visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {
+		appendName(((NewStatementPart)cgRealizedVariablePart.getAst()).getReferredProperty());
+		append(" <- ");
+		safeVisit(cgRealizedVariablePart.getInit());
+		return null;
 	}
 
 	@Override

@@ -636,6 +636,60 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGRealizedVariable_TypedModel();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getOwnedParts <em>Owned Parts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Parts</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getOwnedParts()
+	 * @see #getCGRealizedVariable()
+	 * @generated
+	 */
+	EReference getCGRealizedVariable_OwnedParts();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart <em>CG Realized Variable Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Realized Variable Part</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart
+	 * @generated
+	 */
+	EClass getCGRealizedVariablePart();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getOwningRealizedVariable <em>Owning Realized Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Realized Variable</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getOwningRealizedVariable()
+	 * @see #getCGRealizedVariablePart()
+	 * @generated
+	 */
+	EReference getCGRealizedVariablePart_OwningRealizedVariable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getInit <em>Init</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Init</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getInit()
+	 * @see #getCGRealizedVariablePart()
+	 * @generated
+	 */
+	EReference getCGRealizedVariablePart_Init();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getExecutorProperty <em>Executor Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Executor Property</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getExecutorProperty()
+	 * @see #getCGRealizedVariablePart()
+	 * @generated
+	 */
+	EReference getCGRealizedVariablePart_ExecutorProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence <em>CG Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1156,6 +1210,48 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_REALIZED_VARIABLE__TYPED_MODEL = eINSTANCE.getCGRealizedVariable_TypedModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Parts</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_REALIZED_VARIABLE__OWNED_PARTS = eINSTANCE.getCGRealizedVariable_OwnedParts();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariablePartImpl <em>CG Realized Variable Part</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariablePartImpl
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGRealizedVariablePart()
+		 * @generated
+		 */
+		EClass CG_REALIZED_VARIABLE_PART = eINSTANCE.getCGRealizedVariablePart();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Realized Variable</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_REALIZED_VARIABLE_PART__OWNING_REALIZED_VARIABLE = eINSTANCE.getCGRealizedVariablePart_OwningRealizedVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Init</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_REALIZED_VARIABLE_PART__INIT = eINSTANCE.getCGRealizedVariablePart_Init();
+
+		/**
+		 * The meta object literal for the '<em><b>Executor Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_REALIZED_VARIABLE_PART__EXECUTOR_PROPERTY = eINSTANCE.getCGRealizedVariablePart_ExecutorProperty();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl <em>CG Sequence</em>}' class.

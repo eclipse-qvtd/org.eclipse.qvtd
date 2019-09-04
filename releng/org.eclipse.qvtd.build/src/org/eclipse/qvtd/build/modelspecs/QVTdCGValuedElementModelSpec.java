@@ -32,6 +32,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
 
@@ -89,6 +90,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 			new QVTdCGValuedElementModelSpec(CGConnectionVariable.class, null,					Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,					Box.UNBOX, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGEcoreRealizedVariable.class, null,				null     , null     , null     , Nul.ASSRT, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGRealizedVariablePart.class, null,				Box.BOX  , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , Com.FALSE, null     , EQ_EQUIV);
 
 			new QVTdCGValuedElementModelSpec(CGFunctionCallExp.class, null,						Box.BOX,   null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGFunctionParameter.class, null,					Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );

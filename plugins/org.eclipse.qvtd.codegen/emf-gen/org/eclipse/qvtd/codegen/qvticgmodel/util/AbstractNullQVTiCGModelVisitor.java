@@ -130,6 +130,11 @@ public abstract class AbstractNullQVTiCGModelVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitCGRealizedVariablePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariablePart object) {
+		return null;
+	}
+
+	@Override
 	public R visitCGSequence(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSequence object) {
 		return null;
 	}

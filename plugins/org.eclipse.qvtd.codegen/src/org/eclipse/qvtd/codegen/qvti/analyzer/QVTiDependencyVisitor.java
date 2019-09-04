@@ -33,6 +33,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
@@ -132,6 +133,12 @@ public class QVTiDependencyVisitor extends JavaDependencyVisitor implements QVTi
 	@Override
 	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 		return visitCGVariable(object);
+	}
+
+	@Override
+	public @Nullable Object visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {
+		addDependency(cgRealizedVariablePart, cgRealizedVariablePart.getInit());
+		return visitCGValuedElement(cgRealizedVariablePart);
 	}
 
 	@Override

@@ -10,21 +10,28 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 
+import java.util.Collection;
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
@@ -40,6 +47,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl#getExecutorType <em>Executor Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl#getTypedModel <em>Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl#getOwnedParts <em>Owned Parts</em>}</li>
  * </ul>
  *
  * @generated
@@ -52,7 +60,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CG_REALIZED_VARIABLE_FEATURE_COUNT = CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3;
+	public static final int CG_REALIZED_VARIABLE_FEATURE_COUNT = CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The cached value of the '{@link #getExecutorType() <em>Executor Type</em>}' reference.
@@ -73,6 +81,16 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * @ordered
 	 */
 	protected CGTypedModel typedModel;
+
+	/**
+	 * The cached value of the '{@link #getOwnedParts() <em>Owned Parts</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedParts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGRealizedVariablePart> ownedParts;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,12 +140,28 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * @generated
 	 */
 	@Override
+	public List<CGRealizedVariablePart> getOwnedParts() {
+		if (ownedParts == null) {
+			ownedParts = new EObjectContainmentWithInverseEList<CGRealizedVariablePart>(CGRealizedVariablePart.class, this, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
+		}
+		return ownedParts;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMapping((CGMapping)otherEnd, msgs);
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedParts()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -142,6 +176,8 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 		switch (featureID) {
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				return basicSetOwningMapping(null, msgs);
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+				return ((InternalEList<?>)getOwnedParts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -240,6 +276,8 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 				return getOwningMapping();
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				return getTypedModel();
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+				return getOwnedParts();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -249,6 +287,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -260,6 +299,10 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 				return;
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				setTypedModel((CGTypedModel)newValue);
+				return;
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+				getOwnedParts().clear();
+				getOwnedParts().addAll((Collection<? extends CGRealizedVariablePart>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -282,6 +325,9 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				setTypedModel((CGTypedModel)null);
 				return;
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+				getOwnedParts().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -300,6 +346,8 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 				return getOwningMapping() != null;
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				return typedModel != null;
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
+				return ownedParts != null && !ownedParts.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

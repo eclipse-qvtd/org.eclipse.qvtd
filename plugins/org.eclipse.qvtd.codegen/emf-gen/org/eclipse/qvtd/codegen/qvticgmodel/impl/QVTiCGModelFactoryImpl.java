@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -98,9 +98,10 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			case 15: return createCGMiddlePropertyCallExp();
 			case 16: return createCGPropertyAssignment();
 			case 17: return createCGRealizedVariable();
-			case 18: return createCGSequence();
-			case 19: return createCGTransformation();
-			case 20: return createCGTypedModel();
+			case 18: return createCGRealizedVariablePart();
+			case 19: return createCGSequence();
+			case 20: return createCGTransformation();
+			case 21: return createCGTypedModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -302,6 +303,17 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGRealizedVariable createCGRealizedVariable() {
 		CGRealizedVariableImpl cgRealizedVariable = new CGRealizedVariableImpl();
 		return cgRealizedVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGRealizedVariablePart createCGRealizedVariablePart() {
+		CGRealizedVariablePartImpl cgRealizedVariablePart = new CGRealizedVariablePartImpl();
+		return cgRealizedVariablePart;
 	}
 
 	/**

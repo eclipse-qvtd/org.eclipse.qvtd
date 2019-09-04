@@ -99,6 +99,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
@@ -136,6 +137,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
@@ -219,10 +221,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgMappingExp.getOwnedAccumulators().add(cgAccumulator);
 		}
 
-		public void addRealizedVariable(@NonNull NewStatement asNewStatement) {
+		public @NonNull CGRealizedVariable addRealizedVariable(@NonNull NewStatement asNewStatement) {
 			List<@NonNull CGRealizedVariable> cgRealizedVariables = ClassUtil.nullFree(cgMapping.getOwnedRealizedVariables());
 			CGRealizedVariable cgVariable = getRealizedVariable(asNewStatement);
 			cgRealizedVariables.add(cgVariable);
+			return cgVariable;
 		}
 
 		/**
@@ -391,14 +394,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		this.standardLibrary = environmentFactory.getStandardLibrary();
 	}
 
-	private @NonNull Set<@NonNull Mapping> computeUseClasses(@NonNull ImperativeTransformation asTransformation) {
+	private @NonNull Set<@NonNull Mapping> computeUseClasses(@NonNull ImperativeTransformation iTransformation) {
+		Iterable<@NonNull Mapping> iMappings = QVTimperativeUtil.getOwnedMappings(iTransformation);
 		//
 		//	Compute the intervalIndex of each Mapping.
 		//
 		Map<@NonNull Mapping, @NonNull Integer> mapping2intervalIndex = new HashMap<>();
 		{
 			int intervalIndex = 0;
-			for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+			for (@NonNull Mapping asMapping : iMappings) {
 				mapping2intervalIndex.put(asMapping, intervalIndex++);
 			}
 		}
@@ -406,8 +410,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		//	Compute the latestIntervalIndex of each ConnectionVariable.
 		//
 		Map<@NonNull ConnectionVariable, @NonNull Integer> connectionValue2latestIntervalIndex = new HashMap<>();
-		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
-			for (@NonNull EObject eObject : new TreeIterable(asMapping, false)) {
+		for (@NonNull Mapping iMapping : iMappings) {
+			for (@NonNull EObject eObject : new TreeIterable(iMapping, false)) {
 				if (eObject instanceof AppendParameterBinding) {
 					AppendParameterBinding appendParameterBinding = (AppendParameterBinding)eObject;
 					MappingCall mappingCall = QVTimperativeUtil.getOwningMappingCall(appendParameterBinding);
@@ -424,11 +428,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			}
 		}
 		//
-		//	Set Mapping isRecursive if consume may preceded append.
+		//	Set Mapping useClassMappings if consume may preceded append.
 		//
 		Set<@NonNull Mapping> useClassMappings = new HashSet<>();
-		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
-			for (@NonNull EObject eObject : new TreeIterable(asMapping, false)) {
+		for (@NonNull Mapping iMapping : iMappings) {
+			for (@NonNull EObject eObject : new TreeIterable(iMapping, false)) {
 				if (eObject instanceof GuardParameterBinding) {
 					GuardParameterBinding guardParameterBinding = (GuardParameterBinding)eObject;
 					MappingCall mappingCall = QVTimperativeUtil.getOwningMappingCall(guardParameterBinding);
@@ -451,16 +455,16 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		//
 		//
 		//
-		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
-			if (asMapping.isIsStrict()) {
-				useClassMappings.add(asMapping);
+		for (@NonNull Mapping iMapping : iMappings) {
+			if (iMapping.isIsStrict()) {
+				useClassMappings.add(iMapping);
 			}
-			else if (QVTimperativeUtil.isObserver(asMapping)) {
-				useClassMappings.add(asMapping);
+			else if (QVTimperativeUtil.isObserver(iMapping)) {
+				useClassMappings.add(iMapping);
 			}
 		}
 		if (useClassMappings.size() > 0) {
-			for (@NonNull EntryPoint iEntryPoint : QVTimperativeUtil.computeEntryPoints(asTransformation)) {
+			for (@NonNull EntryPoint iEntryPoint : QVTimperativeUtil.computeEntryPoints(iTransformation)) {
 				useClassMappings.add(iEntryPoint);
 			}
 		}
@@ -1236,12 +1240,35 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitNewStatement(@NonNull NewStatement asNewStatement) {
 		OCLExpression asInit = asNewStatement.getOwnedExpression();
 		if (asInit == null) {
-			getBodyBuilder().addRealizedVariable(asNewStatement);
+			CGRealizedVariable CGRealizedVariable = getBodyBuilder().addRealizedVariable(asNewStatement);
+			CGExecutorType cgExecutorType = context.createExecutorType(ClassUtil.nonNullState(asNewStatement.getType()));
+			CGRealizedVariable.setExecutorType(cgExecutorType);
+			cgExecutorType.setTypeId(codeGenerator.getAnalyzer().getTypeId(asNewStatement.getTypeId()));			// FIXME promote
+			List<@NonNull NewStatementPart> asParts = new ArrayList<>(ClassUtil.nullFree(asNewStatement.getOwnedParts()));
+			Collections.sort(asParts, NameUtil.NAMEABLE_COMPARATOR);
+			List<@NonNull CGRealizedVariablePart> cgParts = ClassUtil.nullFree(CGRealizedVariable.getOwnedParts());		// Ensure deterministic CGShadowPart order
+			for (@NonNull NewStatementPart asPart : asParts) {
+				cgParts.add(doVisit(CGRealizedVariablePart.class, asPart));
+			}
 		}
 		else {
 			getBodyBuilder().appendCheckedLetVariable(asNewStatement, asInit);
 		}
 		return null;
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitNewStatementPart(@NonNull NewStatementPart element) {
+		CGRealizedVariablePart cgRealizedVariablePart = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariablePart();
+		setAst(cgRealizedVariablePart, element);
+		cgRealizedVariablePart.setInit(doVisit(CGValuedElement.class, element.getOwnedExpression()));
+		Property asProperty = element.getReferredProperty();
+		if (asProperty != null) {
+			CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(asProperty);
+			cgRealizedVariablePart.setExecutorProperty(cgExecutorProperty);
+			cgExecutorProperty.setTypeId(codeGenerator.getAnalyzer().getTypeId(asProperty.getTypeId()));			// FIXME promote
+		}
+		return cgRealizedVariablePart;
 	}
 
 	@Override

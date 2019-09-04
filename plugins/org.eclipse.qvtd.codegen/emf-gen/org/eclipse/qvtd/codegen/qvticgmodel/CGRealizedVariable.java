@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
+import java.util.List;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 
@@ -25,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getExecutorType <em>Executor Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getTypedModel <em>Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getOwnedParts <em>Owned Parts</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGRealizedVariable()
@@ -58,6 +60,24 @@ public interface CGRealizedVariable extends CGVariable {
 	 * @generated
 	 */
 	void setTypedModel(CGTypedModel value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Parts</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getOwningRealizedVariable <em>Owning Realized Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Parts</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Parts</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGRealizedVariable_OwnedParts()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getOwningRealizedVariable
+	 * @model opposite="owningRealizedVariable" containment="true"
+	 * @generated
+	 */
+	List<CGRealizedVariablePart> getOwnedParts();
 
 	/**
 	 * Returns the value of the '<em><b>Executor Type</b></em>' reference.

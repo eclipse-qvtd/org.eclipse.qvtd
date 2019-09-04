@@ -35,6 +35,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
@@ -136,6 +137,11 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		@Override
 		public @Nullable Set<@NonNull CGVariable> visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 			return visitCGVariable(object);
+		}
+
+		@Override
+		public @Nullable Set<@NonNull CGVariable> visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart object) {
+			return visitCGValuedElement(object);
 		}
 
 		@Override
@@ -260,6 +266,11 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		@Override
 		public @NonNull Boolean visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 			return visitCGVariable(object);
+		}
+
+		@Override
+		public @NonNull Boolean visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart object) {
+			return visitCGValuedElement(object);
 		}
 
 		@Override

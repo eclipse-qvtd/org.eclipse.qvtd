@@ -160,6 +160,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGRealizedVariableAdapter();
 			}
 			@Override
+			public Adapter caseCGRealizedVariablePart(CGRealizedVariablePart object) {
+				return createCGRealizedVariablePartAdapter();
+			}
+			@Override
 			public Adapter caseCGSequence(CGSequence object) {
 				return createCGSequenceAdapter();
 			}
@@ -524,6 +528,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGRealizedVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart <em>CG Realized Variable Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart
+	 * @generated
+	 */
+	public Adapter createCGRealizedVariablePartAdapter() {
 		return null;
 	}
 
