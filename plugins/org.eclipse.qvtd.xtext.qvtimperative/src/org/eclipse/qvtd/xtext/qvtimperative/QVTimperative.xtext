@@ -96,9 +96,10 @@ MappingParameterBindingCS: AppendParameterBindingCS | GuardParameterBindingCS | 
 MappingParameterCS: AppendParameterCS | GuardParameterCS | SimpleParameterCS;
 
 NewStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
-	isContained?='contained'? 'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';'
+	isContained?='contained'? 'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
+	(':=' ownedExpression=ExpCS)? ';'
 ;
-	
+
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 
 QualifiedPackageCS returns qvtbasecs::QualifiedPackageCS:

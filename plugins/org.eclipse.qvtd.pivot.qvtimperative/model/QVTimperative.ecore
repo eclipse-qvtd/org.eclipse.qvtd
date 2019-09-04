@@ -607,7 +607,7 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtimperative-NewStatement" name="NewStatement"
       eSuperTypes="#T-qvtimperative-VariableStatement #T-qvtimperative-ObservableStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A NewStatement creates an instance of a class and binds a name to it.&#xA;&#xA;syntax: oclText[new:typedModel name : type := expression;]&#xA;&#xA;If expression is omitted, a new instance if the tyope is created. If expression is provided, it&#xA;computes the 'new' object, typically a singlton supervisor fpr a QVTr key."/>
+      <details key="documentation" value="A NewStatement creates an instance of a class and binds a name to it.&#xA;&#xA;syntax: oclText[new:typedModel name : type := expression;]&#xA;&#xA;If expression is omitted, a new instance if the tyope is created. If expression is provided, it&#xA;computes the 'new' object, typically a singleton supervisor fpr a QVTr key.&#xA;&#xA;syntax: oclText[new:typedModel name : type { name1 = init1, name2 = init2 }]&#xA;&#xA;If constructor parts are provided, a unique instance of the parameterized property names is shared&#xA;by all identical constructions."/>
     </eAnnotations>
     <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
@@ -656,6 +656,42 @@
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Optional expression that constructs the new object."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-NewStatement-ownedParts"
+        name="ownedParts" ordered="false" upperBound="-1" eType="#T-qvtimperative-NewStatementPart"
+        containment="true" eOpposite="#F-qvtimperative-NewStatementPart-owningNewStatement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The parts that parameterize a unique shared construction."/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtimperative-NewStatementPart"
+      name="NewStatementPart" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A NewStatementPart declares the initialization of one part of a unique shared object for a NewStatement.."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-NewStatementPart-referredProperty"
+        name="referredProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The property identifying the part to be initialized."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-NewStatementPart-ownedExpression"
+        name="ownedExpression" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The expression computing the part's value."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-NewStatementPart-owningNewStatement"
+        name="owningNewStatement" lowerBound="1" eType="#T-qvtimperative-NewStatement"
+        eOpposite="#F-qvtimperative-NewStatement-ownedParts">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The expression computing the part's value."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
