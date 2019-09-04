@@ -292,7 +292,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 			lineType = LineType.dashed;
 		}
 		else if (style.indexOf("dotted") >= 0) {
-			lineType = LineType.dotted;
+			lineType = LineType.dashed_dotted;
 		}
 		if ("rectangle".equals(shape) && (style.indexOf("rounded") >= 0)) {
 			shape = ShapeType.roundrectangle.toString();

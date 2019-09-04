@@ -157,7 +157,7 @@ public class GraphMLBuilder implements GraphBuilder
 	}
 
 	public enum LineType {
-		line, dashed, dotted
+		line, dashed, dashed_dotted		// dotted doesn't work in 3.19 on my laptop but ok on my tower
 	}
 
 	public enum ShapeType {
