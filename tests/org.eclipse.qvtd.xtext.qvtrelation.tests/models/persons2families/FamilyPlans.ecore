@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="FamilyPlans" nsURI="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans"
+    nsPrefix="FamilyPlans">
+  <eClassifiers xsi:type="ecore:EClass" name="FamilyPlanning">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="surnamePlans" upperBound="-1"
+        eType="#//SurnamePlan" containment="true" eOpposite="#//SurnamePlan/familyPlanning"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debugNames" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SurnamePlan">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="familyPlans" upperBound="-1"
+        eType="#//FamilyPlan" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="familyPlanning" lowerBound="1"
+        eType="#//FamilyPlanning" eOpposite="#//FamilyPlanning/surnamePlans"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FamilyPlan">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="surnamePlan" lowerBound="1"
+        eType="#//SurnamePlan"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,60 @@
+import FamiliesMM : 'Families.ecore#/';
+import FamilyPlansMM : 'FamilyPlans.ecore#/';
+import PersonsMM : 'Persons.ecore#/';
+
+package org::eclipse::qvtd::xtext::qvtrelation::tests::persons2families
+{
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+--	This is a side model-to-model transformation to plan the Persons to Families transformation
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------					
+
+transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan:FamilyPlansMM) {
+
+	attribute PREFER_EXISTING_FAMILY_TO_NEW : Boolean[1] = 'true';
+	attribute PREFER_CREATING_PARENT_TO_CHILD : Boolean[1] = 'true';
+	
+	query getSurname(person : PersonsMM::Person[1]) : String[1] {
+		let safeName = '' + person.name							-- workaround Bug 550602
+		in let index = safeName.indexOf(', ')
+		in safeName.substring(1, index-1)
+	}
+	
+	top relation PersonRegister2FamilyPlanning
+	{		
+	  	checkonly domain person pr : PersonRegister;
+--	  	checkonly domain family fr : FamilyRegister;	    
+		enforce domain plan fp : FamilyPlanning;
+	}
+	
+	top relation Person2FamilyPlanning
+	{		
+--		allSurname1 = pr.persons->collect(p | getSurname(p));	-- workaround Bug 550603
+--		allSurnames : OrderedSet(String) = allSurname1->asOrderedSet();
+	  	checkonly domain person pr : PersonRegister {
+	  		persons = p : Person
+	  	};
+--	  	checkonly domain family fr : FamilyRegister;	    
+		enforce domain plan fp : FamilyPlanning {
+--			debugNames = allSurnames
+		};
+		when {
+			PersonRegister2FamilyPlanning(pr, fp);
+		}
+		where {
+			Surname2SurnamePlan(getSurname(p), fp);
+		}
+	}
+	
+	relation Surname2SurnamePlan
+	{		
+	  	primitive domain surname : String[1];
+	  	enforce domain plan fp : FamilyPlanning {
+	  		surnamePlans = sp : SurnamePlan {
+				name = surname
+			}
+		};
+	}
+}	
+}

@@ -250,16 +250,16 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG() throws Exception {
-		/*	//		Splitter.GROUPS.setState(true);
+		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		AbstractTransformer.ASSIGNMENTS.setState(true);
 		//		AbstractTransformer.CREATIONS.setState(true);
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.GETTINGS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
 		//		QVTm2QVTp.PARTITIONING.setState(true);
-		//		AbstractMerger.EARLY.setState(true);
+		/*	//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
 		//		AbstractQVTb2QVTs.REGION_ORDER.setState(true);
@@ -1525,6 +1525,62 @@ public class QVTrCompilerTests extends LoadTestCase
 			txExecutor2.addOutputURI("family", getTestURI("MultiFamiliesParents-Int.xmi"));
 			txExecutor2.saveModels(null);
 			myQVT.checkOutput(getTestURI("MultiFamiliesParents-Int.xmi"), getModelsURI("persons2families/samples/MultiFamiliesParents.xmi"), Persons2FamiliesNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTrCompiler_Persons2FamilyPlans_CG() throws Exception {
+		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
+		Class<? extends Transformer> txClass;
+		MyQVT myQVT1 = createQVT("Persons2FamilyPlans", getModelsURI("persons2families/Persons2FamilyPlans.qvtr"));
+		try {
+			txClass = myQVT1.buildTransformation("plan", false);
+		}
+		finally {
+			myQVT1.dispose();
+		}
+		MyQVT myQVT2 = createQVT("Persons2FamilyPlans", getModelsURI("persons2families/Persons2FamilyPlans.qvtr"));
+		try {
+			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
+			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
+			//
+			TransformationExecutor txExecutor1 = myQVT2.createGeneratedExecutor(txClass);
+			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
+			txExecutor1.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
+			//			txExecutor1.addInputURI("family", getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"));
+			txExecutor1.execute(null);
+			txExecutor1.addOutputURI("plan", getTestURI("MultiFamiliesChildrenPlan-CG.xmi"));
+			txExecutor1.saveModels(null);
+			myQVT2.checkOutput(getTestURI("MultiFamiliesChildrenPlan-CG.xmi"), getModelsURI("persons2families/samples/MultiFamiliesChildrenPlan.xmi"), null); //Persons2FamiliesNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT2.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTrCompiler_Persons2FamilyPlans() throws Exception {
+		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
+		ImperativeTransformation asTransformation;
+		MyQVT myQVT = createQVT("Persons2FamilyPlans", getModelsURI("persons2families/Persons2FamilyPlans.qvtr"));
+		try {
+			asTransformation = myQVT.compileTransformation("plan");
+			Map<String, Object> extensionToFactoryMap = myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
+			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
+			//
+			TransformationExecutor txExecutor1 = myQVT.createInterpretedExecutor(QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
+			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
+			txExecutor1.addInputURI("person", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
+			//			txExecutor1.addInputURI("family", getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"));
+			txExecutor1.execute(null);
+			txExecutor1.addOutputURI("plan", getTestURI("MultiFamiliesChildrenPlan-Int.xmi"));
+			txExecutor1.saveModels(null);
+			myQVT.checkOutput(getTestURI("MultiFamiliesChildrenPlan-Int.xmi"), getModelsURI("persons2families/samples/MultiFamiliesChildrenPlan.xmi"), null); //Persons2FamiliesNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();

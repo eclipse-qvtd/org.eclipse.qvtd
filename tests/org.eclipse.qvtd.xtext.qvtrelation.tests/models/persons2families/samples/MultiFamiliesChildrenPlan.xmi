@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FamilyPlans:FamilyPlanning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:FamilyPlans="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans" xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans ../org.eclipse.qvtd.xtext.qvtrelation.tests/models/persons2families/FamilyPlans.ecore">
+  <surnamePlans name="Flanders"/>
+  <surnamePlans name="Simpson"/>
+</FamilyPlans:FamilyPlanning>
