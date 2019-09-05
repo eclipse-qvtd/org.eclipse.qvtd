@@ -1,26 +1,37 @@
 The Tycho build automatically promotes downloads and updates, so no cron job help is necessary.
+The Tycho build minimises the need for shell activity by auto-registering in P2 repos including the latest.
 
-The updates can be checked by looking for the new entry on http://www.eclipse.org/mmt/downloads/?project=qvtd
+The qvtd.aggrcon file is in the ssh://'committer-name'@git.eclipse.org:29418/simrel/org.eclipse.simrel.build.git repo.
+
+The updates can be checked by looking for the new entry on https://www.eclipse.org/mmt/downloads/?project=qvtd
 or installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/milestones/0.20.0/S201408191819
+or installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/releases/0.20.0
 
-However operations on composite repositories are not automated, partly because they are sufficiently important to deserve manual attention. 
-
-A new milestone build can be added to the composite repository by:
+A new milestone build was formerly manually added to the composite repository by:
 
 logon to build.eclipse.org
 cd ~/downloads/mmt/qvtd/updates/milestones/0.20.0
 ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=S201408191819 -Dcomposite.name="QVTd 0.20.0 milestones"
 
-(This can be checked by installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/milestones/0.20.0)
-
 The SimRel aggregator is configured by GIT\org.eclipse.simrel.build\qvtd.aggrcon to use an explicit milestone entry
 
 So edit qvtd.aggrcon to update 
-location="http://download.eclipse.org/mmt/qvtd/updates/milestones/0.20.0/S201408191819"
-push first to Getrrit refs/for/master and if successful to refs/head/master and start a new build at https://ci.eclipse.org/simrel/job/simrel.photon.runaggregator/
+location="https://download.eclipse.org/mmt/qvtd/updates/milestones/0.20.0/S201408191819"
+commit with a comment such as [qvtd] 3.10.0M1 for 2019-09 and Push to Gerrit (refs/for/master)
+The Push dialog identifies a Gerrit such as https://git.eclipse.org/r/149210
+Open the Gerrit, Open the Buld job and its console
+When the build succeeds, refresh the Gerrit, Click CodeReview+2, Click Submit.
+Refresh 
 
-Once a release has been promoted update qvtd.aggrcon to the final release
-location="http://download.eclipse.org/mmt/qvtd/updates/releases/0.20.0"
+RC builds are just aliases for regular S builds.
+The final R build rebuilds the final RC build and is built as late as possible for contribution to the final SimRel build.
+For the R  build update qvtd.aggrcon to
+location="http://download.eclipse.org/mmt/qvto/updates/releases/3.10.0"
+
+After a few hours the mirrors can be checked by:
+https://www.eclipse.org/downloads/download.php?file=/mmt/qvtd/updates/releases/0.20.0&format=xml
+
+Disable the Promoter job until GIT has been updated for the next release number.
 
 After each first repo contribution, remember to update the aggregates e.g.
 cd ~/downloads/mmt/qvtd/updates/milestones
@@ -34,45 +45,26 @@ cd /home/data/httpd/archive.eclipse.org/mmt/qvtd/downloads/drops
 cd /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases
 
 --------
+Jenkins config:
 
+Restrict where this project can run: migration
 GIT repo: git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git
 
+Build periodically: H 4 * * 0
 Poll SCM schedule: 0 */6 * * *
 
 Run XVNC during build
+Create a dedicated Xauthority file per build?
 
-Pre Buckminster shell:
+Build:
 
-# window manager for UI tests
-icewm --replace --sm-disable &
+apache-maven-latest
+--show-version clean verify -P$BUILD_TYPE -Psign
+releng/org.eclipse.qvtd.releng.tycho/pom.xml
+BUILD_TYPE=$BUILD_TYPE
+BUILD_ALIAS=$BUILD_ALIAS
 
-chmod +x ${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-pre-buckminster.sh
-${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-pre-buckminster.sh
-# NB: This script contains some shell commands which prepare the build.properties file used by buckminster.
-# It will be called before buckminster commands execution. You may check its content at the following URL:
-# https://ci.eclipse.org/ocl/job/qvtd-master/ws/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-pre-buckminster.sh/*view*/
+Publish JUnit test report: tests/*.test*/target/surefire-reports/*.xml,tests/*.test*/target/surefire-reports/*/*.xml
 
-Buckminster job (4.5):
-
-${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-buckminster.script
-
-Advanced change workspace: ${WORKSPACE}/buildroot/buckminster.workspace
-
-Advanced JVM arguments:
-
--Dcheckout.location=${WORKSPACE}
--Dreference.repository=https://ci.eclipse.org/ocl/job/${JOB_NAME}/lastSuccessfulBuild/artifact/QVTd.p2.repository/
--Xmx2g
--noverify
-
-Post Buckminster shell:
-
-chmod +x ${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-post-buckminster.sh
-${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-post-buckminster.sh
-# NB: This script contains some shell commands which will be extecuted prior to archive artifacts.
-# It will be called after buckminster commands execution. You may check its content at the following URL:
-# https://ci.eclipse.org/ocl/job/qvtd-master/ws/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-post-buckminster.sh/*view*/
-
-Publish JUnit test report: QVTd.test.results/**
-
-Archive the artefacts: QVTd.*/**, publishroot/**, promote.properties
+Archive the artefacts: releng/org.eclipse.qvtd.releng.build-site/target/*.zip,releng/org.eclipse.qvtd.releng.build-site/target/publisher.properties,releng/org.eclipse.qvtd.releng.build-site/target/downloads.sh,releng/org.eclipse.qvtd.releng.build-site/target/updates.sh
+Trigger Promoter when stable using releng/org.eclipse.qvtd.releng.build-site/target/publisher.properties

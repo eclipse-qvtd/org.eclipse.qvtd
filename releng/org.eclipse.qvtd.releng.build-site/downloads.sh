@@ -14,7 +14,7 @@
 #
 #    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/ocl/job/qvtd-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
 #    -v PUBLISH__VERSION        Unqualified version e.g. 0.16.0
-#    -t PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
+#    -t PUBLISH__BUILD_T        Build type N/I/S/R, blank suppresses promotion
 #    -q PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
 #    -a PUBLISH__ALIAS          Non blank to use alias as part of final name
 #

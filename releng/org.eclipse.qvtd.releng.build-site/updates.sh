@@ -14,7 +14,7 @@
 #
 #    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/ocl/job/qvtd-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
 #    -v PUBLISH__VERSION        Unqualified version e.g. 0.16.0
-#    -t PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
+#    -t PUBLISH__BUILD_T        Build type N/I/S/R, blank suppresses promotion
 #    -q PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
 #
 updatesFolder="/home/data/httpd/download.eclipse.org/mmt/qvtd/updates/"
@@ -43,20 +43,25 @@ then
   then
     buildFolder="${updatesFolder}nightly"
     buildRepoName="Nightly"
-    externalFolder="${externalUpdatesFolder}nightly/${PUBLISH__VERSION}"
+    latestRelativeReference="../${PUBLISH__VERSION}"
   elif [ "${PUBLISH__BUILD_T}" = "I" ]
   then
     buildFolder="${updatesFolder}interim"
     buildRepoName="Interim"
-    externalFolder="${externalUpdatesFolder}interim/${PUBLISH__VERSION}"
+    latestRelativeReference="../${PUBLISH__VERSION}"
   elif [ "${PUBLISH__BUILD_T}" = "S" ]
   then
     buildFolder="${updatesFolder}milestones"
     buildRepoName="Milestones"
-    externalFolder="${externalUpdatesFolder}milestones/${PUBLISH__VERSION}/${tQualifier}"
+    latestRelativeReference="../${PUBLISH__VERSION}/${tQualifier}"
+  elif [ "${PUBLISH__BUILD_T}" = "R" ]
+  then
+    buildFolder="${updatesFolder}releases"
+    buildRepoName="Releases"
+    latestRelativeReference="../${PUBLISH__VERSION}"
   else
     buildFolder="${updatesFolder}other"
-    externalFolder="${externalUpdatesFolder}other/${PUBLISH__VERSION}"
+    latestRelativeReference="../${PUBLISH__VERSION}"
     buildRepoName="Other"
   fi
 
@@ -109,12 +114,21 @@ then
         chmod -R g+w ${tQualifier}
         ${manageComposite} add -Dchild.repository=${tQualifier} -Dcomposite.name="${projectRepoName} ${PUBLISH__VERSION} ${buildRepoName} Repository"
       popd
+    elif [ "${PUBLISH__BUILD_T}" = "R" ]
+    then
+      curl -s -k ${PUBLISH__URL} > ${localZip}
+      unzip -ou ${localZip} -d new${PUBLISH__VERSION}
+      chgrp -R ${group} new${PUBLISH__VERSION}
+      chmod -R g+w new${PUBLISH__VERSION}
+      mv ${PUBLISH__VERSION} old${PUBLISH__VERSION}
+      mv new${PUBLISH__VERSION} ${PUBLISH__VERSION}
+      rm -rf old${PUBLISH__VERSION} ${localZip}
 
     fi
 
     mkdir ${buildFolder}/newlatest
     pushd ${buildFolder}/newlatest
-      ${manageComposite} add -Dchild.repository=${externalFolder} -Dcomposite.name="${projectRepoName} Latest ${PUBLISH__VERSION} ${buildRepoName} Repository"
+      ${manageComposite} add -Dchild.repository=${latestRelativeReference} -Dcomposite.name="${projectRepoName} Latest ${PUBLISH__VERSION} ${buildRepoName} Repository"
     popd
     if [ -d "latest" ]
     then
