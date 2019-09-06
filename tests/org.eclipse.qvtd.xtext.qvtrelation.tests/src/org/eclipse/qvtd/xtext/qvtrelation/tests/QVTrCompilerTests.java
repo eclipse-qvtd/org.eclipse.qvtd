@@ -1531,7 +1531,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	@Test
+	/*	@Test
 	public void testQVTrCompiler_Persons2FamilyPlans_CG() throws Exception {
 		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
 		AbstractTransformer.EXCEPTIONS.setState(true);
@@ -1561,9 +1561,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT2.dispose();
 		}
-	}
+	} */
 
-	@Test
+	/*	@Test
 	public void testQVTrCompiler_Persons2FamilyPlans() throws Exception {
 		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
 		ImperativeTransformation asTransformation;
@@ -1585,7 +1585,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT.dispose();
 		}
-	}
+	} */
 
 	@Test
 	public void testQVTrCompiler_SeqToStm() throws Exception {

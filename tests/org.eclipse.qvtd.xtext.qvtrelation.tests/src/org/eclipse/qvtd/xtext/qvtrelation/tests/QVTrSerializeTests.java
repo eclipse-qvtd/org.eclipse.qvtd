@@ -179,6 +179,10 @@ public class QVTrSerializeTests extends LoadTestCase
 		doSerializeRoundTripFromCS(getModelsURI("misc/Packages.qvtr"), null);
 	}
 
+	public void testQVTrSerialize_Persons2FamilyPlans_qvtr() throws Exception {
+		doSerializeRoundTripFromCS(getModelsURI("persons2families/Persons2FamilyPlans.qvtr"), null);
+	}
+
 	public void testQVTrSerialize_PetriNet2StateChart() throws Exception {
 		doSerializeRoundTripFromCS(getModelsURI("pn2sc/PetriNet2StateChart.qvtr"), null);
 	}

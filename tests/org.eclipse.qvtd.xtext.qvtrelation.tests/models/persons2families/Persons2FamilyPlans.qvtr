@@ -32,28 +32,26 @@ transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan
 	{		
 --		allSurname1 = pr.persons->collect(p | getSurname(p));	-- workaround Bug 550603
 --		allSurnames : OrderedSet(String) = allSurname1->asOrderedSet();
+	  	sp : FamilyPlansMM::SurnamePlan;
 	  	checkonly domain person pr : PersonRegister {
 	  		persons = p : Person
 	  	};
 --	  	checkonly domain family fr : FamilyRegister;	    
 		enforce domain plan fp : FamilyPlanning {
+	  		surnamePlans = sp
 --			debugNames = allSurnames
 		};
 		when {
 			PersonRegister2FamilyPlanning(pr, fp);
-		}
-		where {
-			Surname2SurnamePlan(getSurname(p), fp);
+			Surname2SurnamePlan(getSurname(p), sp);
 		}
 	}
 	
 	relation Surname2SurnamePlan
 	{		
 	  	primitive domain surname : String[1];
-	  	enforce domain plan fp : FamilyPlanning {
-	  		surnamePlans = sp : SurnamePlan {
-				name = surname
-			}
+	  	enforce domain plan sp : SurnamePlan {
+			name = surname
 		};
 	}
 }	
