@@ -42,6 +42,11 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 
 	@Override
 	public Object visitDomainPattern(@NonNull DomainPattern object) {
+
+		TemplateExp templateExpression = object.getTemplateExpression();
+		if (templateExpression != null) {
+			return templateExpression.accept(this);
+		}
 		return super.visitPattern(object);
 	}
 
