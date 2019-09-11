@@ -14,6 +14,10 @@
         eType="#//FamilyPlan" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="familyPlanning" lowerBound="1"
         eType="#//FamilyPlanning" eOpposite="#//FamilyPlanning/surnamePlans"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="males" upperBound="-1"
+        eType="ecore:EClass Persons.ecore#//Male"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="females" upperBound="-1"
+        eType="ecore:EClass Persons.ecore#//Female"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FamilyPlan">
     <eStructuralFeatures xsi:type="ecore:EReference" name="surnamePlan" lowerBound="1"
