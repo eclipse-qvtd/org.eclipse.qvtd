@@ -2,4 +2,3 @@
 /.antlr-generator-3.2.0-patch.jar
 /target/
 /test-bin/
-/.polyglot.build.properties
