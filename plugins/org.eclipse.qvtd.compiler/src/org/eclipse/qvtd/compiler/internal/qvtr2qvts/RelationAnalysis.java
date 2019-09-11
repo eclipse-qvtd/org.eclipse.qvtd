@@ -427,8 +427,9 @@ public class RelationAnalysis extends RuleAnalysis
 		for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(relationDomain)) {
 			TemplateExp templateExpression = QVTrelationUtil.getOwnedTemplateExpression(domainPattern);
 			boolean isTopLevel = ((Relation)rule).isIsTopLevel();
-			boolean isWhenInvoked = (incomingWhenInvocationAnalyses != null) && !incomingWhenInvocationAnalyses.isEmpty();
-			boolean rootIsRealized = isTopLevel || isWhenInvoked;
+			boolean hasWhenInvocations = (incomingWhenInvocations != null) && !incomingWhenInvocations.isEmpty();
+			//			boolean isWhenInvoked = (incomingWhenInvocationAnalyses != null) && !incomingWhenInvocationAnalyses.isEmpty();
+			boolean rootIsRealized = isTopLevel || hasWhenInvocations;
 			for (@NonNull EObject eObject : new TreeIterable(templateExpression, rootIsRealized)) {
 				if (eObject instanceof TemplateExp) {
 					TemplateExp templateExp = (TemplateExp)eObject;
