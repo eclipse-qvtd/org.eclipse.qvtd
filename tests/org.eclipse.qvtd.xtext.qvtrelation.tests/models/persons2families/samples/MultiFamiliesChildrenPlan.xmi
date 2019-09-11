@@ -2,13 +2,19 @@
 <FamilyPlans:FamilyPlanning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:FamilyPlans="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans" xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans ../org.eclipse.qvtd.xtext.qvtrelation.tests/models/persons2families/FamilyPlans.ecore">
   <surnamePlans name="Flanders">
+    <families href="MultiFamiliesChildren.xmi#//@families.0"/>
     <males href="PersonsMulti.xmi#//@persons.0"/>
   </surnamePlans>
   <surnamePlans name="Simpson">
-    <males href="PersonsMulti.xmi#//@persons.1"/>
-    <males href="PersonsMulti.xmi#//@persons.3"/>
+    <families href="MultiFamiliesChildren.xmi#//@families.1"/>
+    <families href="MultiFamiliesChildren.xmi#//@families.2"/>
+    <families href="MultiFamiliesChildren.xmi#//@families.3"/>
+    <families href="MultiFamiliesChildren.xmi#//@families.4"/>
+    <families href="MultiFamiliesChildren.xmi#//@families.5"/>
     <females href="PersonsMulti.xmi#//@persons.2"/>
     <females href="PersonsMulti.xmi#//@persons.4"/>
     <females href="PersonsMulti.xmi#//@persons.5"/>
+    <males href="PersonsMulti.xmi#//@persons.1"/>
+    <males href="PersonsMulti.xmi#//@persons.3"/>
   </surnamePlans>
 </FamilyPlans:FamilyPlanning>

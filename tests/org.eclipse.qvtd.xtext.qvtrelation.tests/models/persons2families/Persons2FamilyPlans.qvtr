@@ -10,7 +10,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::persons2families
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------					
 
-transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan:FamilyPlansMM) { 
+transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:FamilyPlansMM) { 
 
 	attribute PREFER_EXISTING_FAMILY_TO_NEW : Boolean[1] = 'true';
 	attribute PREFER_CREATING_PARENT_TO_CHILD : Boolean[1] = 'true';
@@ -24,7 +24,7 @@ transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan
 	top relation PersonRegister2FamilyPlanning
 	{		
 	  	checkonly domain person pr : PersonRegister;
---	  	checkonly domain family fr : FamilyRegister;	    
+	  	checkonly domain family fr : FamilyRegister;	    
 		enforce domain plan fp : FamilyPlanning;
 	}
 	
@@ -36,13 +36,13 @@ transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan
 	  	checkonly domain person pr : PersonRegister {
 	  		persons = p : Person
 	  	};
---	  	checkonly domain family fr : FamilyRegister;	    
+	  	checkonly domain family fr : FamilyRegister;	    
 		enforce domain plan fp : FamilyPlanning {
 	  		surnamePlans = sp
 --			debugNames = allSurnames
 		};
 		when {
-			PersonRegister2FamilyPlanning(pr, fp);
+			PersonRegister2FamilyPlanning(pr, fr, fp);
 			Surname2SurnamePlan(getSurname(p), sp);
 		}
 		where {
@@ -50,9 +50,34 @@ transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan
 		}
 	}
 	
+	top relation Family2FamilyPlanning
+	{		
+--		allSurname1 = pr.persons->collect(p | getSurname(p));	-- workaround Bug 550603
+--		allSurnames : OrderedSet(String) = allSurname1->asOrderedSet();
+	  	sp : FamilyPlansMM::SurnamePlan[?];
+--	  	surname : String[?];
+	  	checkonly domain person pr : PersonRegister;
+	  	checkonly domain family fr : FamilyRegister {
+	  		families = f : Family {
+--	  			name = surname
+	  		}
+	  	};    
+		enforce domain plan fp : FamilyPlanning {
+	  		surnamePlans = sp
+--			debugNames = allSurnames
+		};
+		when {
+			PersonRegister2FamilyPlanning(pr, fr, fp);
+			Surname2SurnamePlan(f.name, sp);
+		}
+		where {
+			Family2SurnamePlan(f, sp);
+		}
+	}
+	
 	relation Surname2SurnamePlan
 	{		
-	  	primitive domain surname : String[1];
+	  	primitive domain surname : String[?];
 	  	enforce domain plan sp : SurnamePlan {
 			name = surname
 		};
@@ -64,7 +89,15 @@ transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan
 	  	enforce domain plan sp : SurnamePlan;
 	}
 	
-	relation FeMale2SurnamePlan overrides Person2SurnamePlan
+	relation Family2SurnamePlan
+	{		
+	  	checkonly domain family f : Family[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		families = f
+	  	};
+	}
+	
+	relation Female2SurnamePlan overrides Person2SurnamePlan
 	{		
 	  	checkonly domain person p : Female[1];
 	  	enforce domain plan sp : SurnamePlan {
