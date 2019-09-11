@@ -277,7 +277,9 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 	@NonNull Set<@NonNull Integer> getClassIndexes(@NonNull EClass eClass) {
 		ClassId classId = IdManager.getClassId(eClass);
 		Map<@NonNull ClassId, @NonNull Set<@NonNull Integer>> classId2classIndexes2 = classId2classIndexes;
-		assert classId2classIndexes2 != null;
+		if (classId2classIndexes2 == null) {
+			classId2classIndexes2 = classId2classIndexes = new HashMap<>();
+		}
 		Set<@NonNull Integer> classIndexes = classId2classIndexes2.get(classId);
 		if (classIndexes == null) {
 			classIndexes = new HashSet<>();

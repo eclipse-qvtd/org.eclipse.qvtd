@@ -120,7 +120,12 @@ public abstract class AbstractConnection implements Connection
 		//		s.append(" : ");
 		//		s.append(typeId);
 		s.append("[");
-		s.append(getCapacity());
+		try {
+			s.append(getCapacity());
+		}
+		catch (Throwable e) {		// if invoked by debugger during construction
+			s.append("?");
+		}
 		s.append("]");
 		return s.toString();
 	}
