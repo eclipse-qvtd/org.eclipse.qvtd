@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.all.tests;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,13 +43,6 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
  */
 public class XMLmodelTests extends XtextTestCase
 {
-	public static @NonNull TestFile copyFile(@NonNull TestProject testProject, @NonNull URIConverter uriConverter, @NonNull URI sourceURI) throws IOException {
-		InputStream inputStream = uriConverter.createInputStream(sourceURI);
-		String lastSegment = sourceURI.lastSegment();
-		assert lastSegment != null;
-		return testProject.getOutputFile(lastSegment, inputStream);
-	}
-
 	protected @NonNull Resource doXMLtest(URI inURI, boolean doCompare, boolean ignoreEcore) throws Exception {
 		String testExtension = inURI.fileExtension();
 		String testFileName = inURI.trimFileExtension().lastSegment();
@@ -120,7 +112,7 @@ public class XMLmodelTests extends XtextTestCase
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
 		TestProject testProject = getTestProject();
-		TestFile inFile = copyFile(testProject, uriConverter, getModelsURI("Families2Persons.qvtras.xmi"));
+		TestFile inFile = testProject.copyFile(uriConverter, null, getModelsURI("Families2Persons.qvtras.xmi"));
 		QVTrelationPackage.eINSTANCE.getClass();
 		URI inURI = inFile.getURI(); //URI.createPlatformResourceURI(inPath, true);
 		@SuppressWarnings("unused")

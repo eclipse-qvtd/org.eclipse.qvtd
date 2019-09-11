@@ -10,7 +10,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::persons2families
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------					
 
-transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan:FamilyPlansMM) {
+transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan:FamilyPlansMM) { 
 
 	attribute PREFER_EXISTING_FAMILY_TO_NEW : Boolean[1] = 'true';
 	attribute PREFER_CREATING_PARENT_TO_CHILD : Boolean[1] = 'true';
@@ -45,6 +45,9 @@ transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan
 			PersonRegister2FamilyPlanning(pr, fp);
 			Surname2SurnamePlan(getSurname(p), sp);
 		}
+		where {
+			Person2SurnamePlan(p, sp);
+		}
 	}
 	
 	relation Surname2SurnamePlan
@@ -53,6 +56,28 @@ transformation Persons2FamilyPlans(person:PersonsMM, /*family:FamiliesMM,*/ plan
 	  	enforce domain plan sp : SurnamePlan {
 			name = surname
 		};
+	}
+	
+	abstract relation Person2SurnamePlan
+	{		
+	  	checkonly domain person p : Person[1];
+	  	enforce domain plan sp : SurnamePlan;
+	}
+	
+	relation FeMale2SurnamePlan overrides Person2SurnamePlan
+	{		
+	  	checkonly domain person p : Female[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		females = p
+	  	};
+	}
+	
+	relation Male2SurnamePlan overrides Person2SurnamePlan
+	{		
+	  	checkonly domain person p : Male[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		males = p
+	  	};
 	}
 }	
 }
