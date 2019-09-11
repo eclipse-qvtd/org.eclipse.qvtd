@@ -34,6 +34,24 @@ import com.google.common.collect.Sets;
  */
 public class RuleHeadAnalysis extends HeadAnalysis
 {
+	protected static final class RuleHeadNodeGroup extends HeadNodeGroup
+	{
+		protected RuleHeadNodeGroup(@NonNull List<@NonNull Node> headGroupNodes) {
+			super(headGroupNodes);
+		}
+
+		@Override
+		protected boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge) {
+			boolean isOldSource = sourceNode.isOld();
+			return isOldSource ? source2targetEdge.isOld() : true; //source2targetEdge.isNew();	// nonTopWhen my be REALIZED sourceNode and PREDICATED source2targetEdge
+		}
+
+		@Override
+		public String getName() {
+			return getHeadNodes().iterator().next().getName();
+		}
+	}
+
 	public static final @NonNull TracingOption RULE_HEAD_NODE_GROUPS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/headNodeGroups");
 
 	/**
@@ -108,7 +126,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 		return headNodes;
 	}
 
-	//
+	/*
 	//	Compute the Set of all source nodes from which each target can be reached by transitive to-one new navigation.
 	//
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeNewTargetFromSources(@NonNull Iterable<@NonNull Node> realizedMiddleNodes) {
@@ -125,7 +143,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 			}
 		}
 		return targetFromSources;
-	}
+	} */
 
 	//
 	//	Compute the Set of all source nodes from which each target can be reached by a direct to-one old navigation.
@@ -157,19 +175,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 
 	@Override
 	protected @NonNull HeadNodeGroup createHeadNodeGroup(@NonNull List<@NonNull Node> headNodeGroup) {
-		return new HeadNodeGroup(headNodeGroup)
-		{
-			@Override
-			protected boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge) {
-				boolean isOldSource = sourceNode.isOld();
-				return isOldSource ? source2targetEdge.isOld() : source2targetEdge.isNew();
-			}
-
-			@Override
-			public String getName() {
-				return headNodeGroup.get(0).getName();
-			}
-		};
+		return new RuleHeadNodeGroup(headNodeGroup);
 	}
 
 	private void setHeadNodes(@NonNull Set<@NonNull Node> reachableNodes, @NonNull List<@NonNull Node> headNodes) {

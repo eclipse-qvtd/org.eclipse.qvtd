@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
@@ -107,6 +108,16 @@ public abstract class HeadNodeGroup implements Nameable
 				}
 				gotOne = true;
 			}
+			if (sourceNode.isDataType() && target2sourceEdge.isRealized()) {
+				Node targetNode = QVTscheduleUtil.getSourceNode(target2sourceEdge);
+				if (isNonTopWhen(targetNode)) {
+					uniqueNodes.add(targetNode);
+					if (targetNode.isMatched()) {
+						workList.add(targetNode);
+					}
+					gotOne = true;
+				}
+			}
 		}
 		return gotOne;
 	}
@@ -173,6 +184,20 @@ public abstract class HeadNodeGroup implements Nameable
 	 */
 	public boolean isDeriveableFrom(@NonNull HeadNodeGroup thatHeadNodeGroup) {
 		return thatHeadNodeGroup.getToOneSet().containsAll(headGroupNodes);
+	}
+
+	protected boolean isNonTopWhen(Node sourceNode) {
+		if (sourceNode.isNew() && sourceNode.getClassDatum().getReferredTypedModel().isIsTrace()) {
+			for (@NonNull Edge edge2 : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+				if (edge2.isSuccess() && edge2.isPredicated()) {
+					Node targetNode2 = edge2.getEdgeTarget();
+					if (targetNode2.isConstant() && (targetNode2 instanceof BooleanLiteralNode) && ((BooleanLiteralNode)targetNode2).isBooleanValue()) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
