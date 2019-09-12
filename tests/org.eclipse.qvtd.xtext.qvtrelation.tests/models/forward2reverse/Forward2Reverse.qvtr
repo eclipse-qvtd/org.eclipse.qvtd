@@ -38,16 +38,18 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse {
 		}
 	
 		/**
-		 *  Map each element to an element with reversed source/target linkage.
+		 * Map each element to an element with reversed source/target linkage.
+		 * 
+		 * The root variables are optional allowing a when-invocation to exploit a null-to-null 'match'.
 		 */
 		top relation element2element {
 			elementName : String;
-			domain forward forwardElement : Element {
+			domain forward forwardElement : Element[?] {
 				list = forwardList : DoublyLinkedList{},
 				name = elementName,
 				target = forwardTarget : Element{}
 			};
-			enforce domain reverse reverseElement : Element {
+			enforce domain reverse reverseElement : Element[?] {
 				list = reverseList : DoublyLinkedList{},
 				name = elementName,
 				source = reverseSource : Element{}

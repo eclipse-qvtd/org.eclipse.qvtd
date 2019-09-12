@@ -29,7 +29,7 @@ public abstract class VariableDeclaration2TraceProperty extends Element2MiddlePr
 	protected final @NonNull VariableDeclaration variable;
 
 	protected VariableDeclaration2TraceProperty(@NonNull Rule2MiddleType relation2middleType, @NonNull String nameHint, @NonNull VariableDeclaration variable) {
-		super(relation2middleType, nameHint, QVTrelationUtil.getClass(variable), variable.isIsRequired());
+		super(relation2middleType, nameHint, QVTrelationUtil.getClass(variable), QVTrelationUtil.isRequired(variable));
 		this.variable = variable;
 	}
 

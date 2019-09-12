@@ -151,16 +151,9 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	}
 
 	/**
-	 * Return true unless some argumentNode is not matched.
+	 * Return true unless a derived analysis permits an optional match.
 	 */
 	protected boolean isMatched() {
-		for (@NonNull VariableDeclaration rootVariable : rootVariable2argumentNode.keySet()) {
-			Node argumentNode = rootVariable2argumentNode.get(rootVariable);
-			assert argumentNode != null;
-			if (!argumentNode.isMatched()) {
-				return false;
-			}
-		}
 		return true;
 	}
 

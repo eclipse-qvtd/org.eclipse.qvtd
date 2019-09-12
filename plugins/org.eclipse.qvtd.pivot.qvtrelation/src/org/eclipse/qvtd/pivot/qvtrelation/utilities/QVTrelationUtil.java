@@ -386,6 +386,27 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	//		return ClassUtil.nonNullState(rRelation.getWhere());
 	//	}
 
+	/**
+	 * Return true if variable must be non-null while executing a rule.
+	 *
+	 * This helper suppresses the may-be null that indicates that the rule invocation is optional. (See Bug 499432)
+	 */
+	public static boolean isRequired(@NonNull VariableDeclaration variable) {
+		if (variable.isIsRequired()) {
+			return true;
+		}
+		Rule rule = getContainingRule(variable);
+		if (!(rule instanceof Relation)) {
+			return false;
+		}
+		for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables((Relation) rule)) {
+			if (rootVariable == variable) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static boolean isTraceClassVariable(@NonNull VariableDeclaration variable) {
 		return TRACE_CLASS_NAME.equals(variable.getName()) && (variable instanceof SharedVariable) && ((SharedVariable)variable).isIsImplicit();
 	}
