@@ -2474,10 +2474,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				CGTypedModel cgTypedModel = null;
 				for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getCheckedTypedModels(asEntryPoint)) {
 					if (asTypedModel.getUsedPackage().contains(asPackage)) {
+						assert cgTypedModel == null;
 						cgTypedModel = asTypedModel2cgTypedModel.get(asTypedModel);
-						if (cgTypedModel != null) {
-							break;
-						}
+						assert cgTypedModel != null;
 					}
 				}
 				if (cgTypedModel != null) {

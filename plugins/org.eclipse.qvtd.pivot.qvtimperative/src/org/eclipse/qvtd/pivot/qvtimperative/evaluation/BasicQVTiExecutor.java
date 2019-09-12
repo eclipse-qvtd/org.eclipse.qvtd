@@ -615,18 +615,26 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		try {
 			Interval rootInterval = getInvocationManager().getRootInterval();
 			mapping2interval.put(entryPoint, rootInterval);
-			TypedModelInstance modelInstance = null;
-			for (@NonNull TypedModel typedModel : QVTimperativeUtil.getCheckedTypedModels(entryPoint)) {
-				modelInstance = getModelsManager().getTypedModelInstance(typedModel);
-			}
-			assert modelInstance != null;
+			Iterable<@NonNull TypedModel> checkedTypedModels = QVTimperativeUtil.getCheckedTypedModels(entryPoint);
 			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(entryPoint)) {
 				if (mappingParameter instanceof AppendParameter) {
 					org.eclipse.ocl.pivot.Class type = QVTimperativeUtil.getClassType(mappingParameter);
+					org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
+					assert asPackage != null;
+					TypedModelInstance modelInstance = null;
+					for (@NonNull TypedModel asTypedModel : checkedTypedModels) {
+						if (asTypedModel.getUsedPackage().contains(asPackage)) {
+							assert modelInstance == null;
+							modelInstance = modelsManager.getTypedModelInstance(asTypedModel);
+							assert modelInstance != null;
+						}
+					}
 					Connection connection = rootInterval.createConnection(QVTimperativeUtil.getName(mappingParameter), type.getTypeId(), false, ModeFactory.NON_INCREMENTAL);
-					Iterable<@NonNull ? extends Object> objectsOfKind = modelInstance.getObjectsOfKind(type);
-					for (@NonNull Object object : objectsOfKind) {
-						connection.appendElement(object);
+					if (modelInstance != null) {
+						Iterable<@NonNull ? extends Object> objectsOfKind = modelInstance.getObjectsOfKind(type);
+						for (@NonNull Object object : objectsOfKind) {
+							connection.appendElement(object);
+						}
 					}
 					getEvaluationEnvironment().add(mappingParameter, connection);
 				}
