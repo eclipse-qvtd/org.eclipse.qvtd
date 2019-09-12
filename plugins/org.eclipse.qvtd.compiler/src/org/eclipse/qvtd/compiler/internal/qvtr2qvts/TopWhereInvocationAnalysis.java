@@ -42,6 +42,14 @@ public class TopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 		throw new UnsupportedOperationException();	// Cannot happen synthesizeInvocationNodes is empty.
 	}
 
+	/**
+	 * Return false since a where match is always optional.
+	 */
+	@Override
+	protected boolean isMatched() {
+		return false;
+	}
+
 	@Override
 	public boolean isTop() {
 		return true;
