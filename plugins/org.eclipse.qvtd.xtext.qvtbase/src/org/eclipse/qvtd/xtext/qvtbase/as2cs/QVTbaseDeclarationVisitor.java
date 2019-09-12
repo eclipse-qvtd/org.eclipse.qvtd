@@ -28,6 +28,7 @@ import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityBoundsCS;
+import org.eclipse.ocl.xtext.basecs.MultiplicityStringCS;
 import org.eclipse.ocl.xtext.basecs.OperationCS;
 import org.eclipse.ocl.xtext.basecs.ParameterCS;
 import org.eclipse.ocl.xtext.basecs.SpecificationCS;
@@ -52,12 +53,24 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	}
 
 	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement) {	// FIXME Bug 496810 promote to OCL
+		return createTypeRefCS(asTypedElement, false);
+	}
+
+	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement, boolean defaultIsRequired) {	// FIXME Bug 496810 promote to OCL
+		boolean isRequired = asTypedElement.isIsRequired();
 		Type asType = asTypedElement.getType();
 		TypedRefCS csTypeRef = createTypeRefCS(asType);
-		if ((csTypeRef != null) && asTypedElement.isIsRequired()) {
-			MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();	// FIXME MultiplicityStringCS would be nicer but "1" is the default which confuses Xtext serialization
-			csMultiplicity.setLowerBound(1);
-			csTypeRef.setOwnedMultiplicity(csMultiplicity);
+		if ((csTypeRef != null) && (isRequired != defaultIsRequired)) {
+			if (!isRequired) {
+				MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();	// FIXME MultiplicityStringCS would be nicer but "1" is the default which confuses Xtext serialization
+				csMultiplicity.setStringBounds("?");
+				csTypeRef.setOwnedMultiplicity(csMultiplicity);
+			}
+			else {
+				MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();	// FIXME MultiplicityStringCS would be nicer but "1" is the default which confuses Xtext serialization
+				csMultiplicity.setLowerBound(1);
+				csTypeRef.setOwnedMultiplicity(csMultiplicity);
+			}
 		}
 		return csTypeRef;
 	}
