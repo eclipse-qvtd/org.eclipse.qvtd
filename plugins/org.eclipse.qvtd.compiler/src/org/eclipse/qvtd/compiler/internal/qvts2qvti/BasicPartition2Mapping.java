@@ -1686,17 +1686,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	 * Determine a traversal order for the old edges then synthesize the patttern matching statements.
 	 */
 	private void createPatternMatch() {
-		if (mapping.isIsAbstract()) {
-			//			mapping.getOwnedStatements().add(createCheckStatement(helper.createBooleanLiteralExp(false)));	// FIXME add a message
-			OldEdgeSchedule oldSchedule = new OldEdgeSchedule();
-			Iterable<@NonNull CheckedCondition> checkedConditions = oldSchedule.analyze();
-			oldSchedule.synthesize(checkedConditions);
-		}
-		else {
-			OldEdgeSchedule oldSchedule = new OldEdgeSchedule();
-			Iterable<@NonNull CheckedCondition> checkedConditions = oldSchedule.analyze();
-			oldSchedule.synthesize(checkedConditions);
-		}
+		OldEdgeSchedule oldSchedule = new OldEdgeSchedule();
+		Iterable<@NonNull CheckedCondition> checkedConditions = oldSchedule.analyze();
+		oldSchedule.synthesize(checkedConditions);
 	}
 
 	private void createPropertyAssignments() {

@@ -148,7 +148,8 @@ public class QVTrLoadTests extends LoadTestCase
 			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::Type {EMOF::NamedElement::name}'",
 			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name}'",
 			"The 'Key::NoSuperKeys' constraint is violated for 'key QVTBase::Transformation {EMOF::NamedElement::name}'",
-			"The 'RelationCallExp::WhereInvocationIsANonTopRelation' constraint is violated for 'RelationalTransformationToMappingTransformation(rt, mt)'"
+			"The 'RelationCallExp::WhereInvocationIsANonTopRelation' constraint is violated for 'RelationalTransformationToMappingTransformation(rt, mt)'",
+			"The 'Rule::AbstractRuleIsOverridden' constraint is violated for 'relation RExpToMExp'"
 		});
 	}
 
