@@ -135,9 +135,9 @@ public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 
 	protected String text(Relation ele) {
 		StringBuilder s = new StringBuilder();
-		if (ele.isIsTopLevel()) {
-			s.append("«top» ");
-		}
+		//		if (ele.isIsTopLevel()) {
+		//			s.append("«top» ");
+		//		}
 		appendName(s, ele);
 		return s.toString();
 	}

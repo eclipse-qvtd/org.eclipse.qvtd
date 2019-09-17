@@ -40,7 +40,7 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 /**
  * customization of the default outline structure
- * 
+ *
  */
 public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 {
@@ -66,7 +66,7 @@ public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	protected void _createChildren(IOutlineNode parentNode, Pattern ele) {
 		EStructuralFeature eContainingFeature = ele.eContainingFeature();
 		if ((eContainingFeature == QVTrelationPackage.Literals.RELATION__WHEN)
-		 || (eContainingFeature == QVTrelationPackage.Literals.RELATION__WHERE)) {
+				|| (eContainingFeature == QVTrelationPackage.Literals.RELATION__WHERE)) {
 			for (Predicate asPredicate : ele.getPredicate()) {
 				createChildren(parentNode, asPredicate);
 			}
@@ -112,7 +112,9 @@ public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 
 	protected void _createChildren(IOutlineNode parentNode, RelationalTransformation ele) {
 		for (TypedModel asTypedModel : ele.getModelParameter()) {
-			createNode(parentNode, asTypedModel);
+			if (!asTypedModel.isIsPrimitive() && !asTypedModel.isIsThis()) {
+				createNode(parentNode, asTypedModel);
+			}
 		}
 		for (Key asKey : ele.getOwnedKey()) {
 			createNode(parentNode, asKey);
