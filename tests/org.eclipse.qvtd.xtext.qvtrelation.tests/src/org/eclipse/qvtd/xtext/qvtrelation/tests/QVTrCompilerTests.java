@@ -1539,8 +1539,8 @@ public class QVTrCompilerTests extends LoadTestCase
 	@Test
 	public void testQVTrCompiler_Persons2FamilyPlans_CG() throws Exception {
 		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getTestProjectManager().initializeResourceSet(resourceSet);
 		URIConverter uriConverter = resourceSet.getURIConverter();
