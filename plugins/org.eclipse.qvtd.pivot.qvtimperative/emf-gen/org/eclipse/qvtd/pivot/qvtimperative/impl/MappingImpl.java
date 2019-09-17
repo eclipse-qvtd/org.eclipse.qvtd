@@ -587,21 +587,21 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsStrict((Boolean)newValue);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOwnedMappingParameters().clear();
-				getOwnedMappingParameters().addAll((Collection<? extends MappingParameter>)newValue);
-				return;
+			getOwnedMappingParameters().addAll((Collection<? extends MappingParameter>)newValue);
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getOwnedStatements().clear();
-				getOwnedStatements().addAll((Collection<? extends Statement>)newValue);
-				return;
+			getOwnedStatements().addAll((Collection<? extends Statement>)newValue);
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setFirstPass((Integer)newValue);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setLastPass((Integer)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -616,19 +616,19 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsStrict(IS_STRICT_EDEFAULT);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOwnedMappingParameters().clear();
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getOwnedStatements().clear();
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setFirstPass(FIRST_PASS_EDEFAULT);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setLastPass(LAST_PASS_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -688,5 +688,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		else {
 			return super.accept(visitor);
 		}
+	}
+
+	@Override
+	public void setIsAbstract(boolean newIsAbstract) {
+		assert !newIsAbstract;								// QVTi does not use abstract mappings
+		super.setIsAbstract(newIsAbstract);
 	}
 } //MappingImpl

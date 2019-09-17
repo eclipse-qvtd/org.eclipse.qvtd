@@ -51,11 +51,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public abstract class AbstractPartition2Mapping
@@ -103,10 +101,6 @@ public abstract class AbstractPartition2Mapping
 		assert mappingName != null;
 		this.mapping = mapping; //helper.createMapping(mappingName);
 		this.mappingName = mappingName;
-		Region originalRegion = partition.getRegion();
-		if (originalRegion instanceof RuleRegion) {
-			this.mapping.setIsAbstract(((RuleRegion)originalRegion).getReferredRule().isIsAbstract());
-		}
 		int firstPass = partition.getFirstPass();
 		int lastPass = partition.getLastPass();
 		this.mapping.setFirstPass(firstPass);
