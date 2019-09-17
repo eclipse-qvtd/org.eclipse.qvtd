@@ -1547,8 +1547,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		TestProject testProject = getTestProject();
 		TestFolder testFolder = testProject.getOutputFolder("samples");
 		TestFile personFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/PersonsMulti.xmi"));
-		TestFile familyFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"));
-		TestFile refFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/MultiFamiliesChildrenPlan.xmi"));
+		/* TestFile familyFile = */ testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"));
+		TestFile familyFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/FamiliesWithChildrenOnly.xmi"));
+		TestFile refFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/FamiliesWithChildrenOnlyPlan.xmi"));
 		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("persons2families/Persons2FamilyPlans.qvtr"));
 		testProject.copyFile(uriConverter, null, getModelsURI("persons2families/Families.ecore"));
 		testProject.copyFile(uriConverter, null, getModelsURI("persons2families/FamilyPlans.ecore"));
@@ -1575,7 +1576,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			txExecutor1.execute(null);
 			txExecutor1.addOutputURI("plan", outURI);
 			txExecutor1.saveModels(null);
-			myQVT2.checkOutput(outURI, refFile.getURI(), null); //Persons2FamiliesNormalizer.INSTANCE);
+			myQVT2.checkOutput(outURI, refFile.getURI(), FamilyPlansNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT2.dispose();
@@ -1613,7 +1614,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			txExecutor1.execute(null);
 			txExecutor1.addOutputURI("plan", outURI);
 			txExecutor1.saveModels(null);
-			myQVT.checkOutput(outURI, refFile.getURI(), null); //Persons2FamiliesNormalizer.INSTANCE);
+			myQVT.checkOutput(outURI, refFile.getURI(), FamilyPlansNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
