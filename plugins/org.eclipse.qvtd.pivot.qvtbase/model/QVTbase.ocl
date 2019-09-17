@@ -34,6 +34,9 @@ inv NoOverridesCycle:
 --	let extendedRules = transformation->closure(_extends)->excluding(transformation)?->collect(rule)
 --	in extendedRules->includes(overrides)
 
+inv AbstractRuleIsOverridden:
+	isAbstract implies overrides->notEmpty()
+
 inv OverridingRuleOverridesAllDomains:
 	overridden <> null implies
 	overridden.domain->forAll(od | self.domain.name->includes(od.name))
