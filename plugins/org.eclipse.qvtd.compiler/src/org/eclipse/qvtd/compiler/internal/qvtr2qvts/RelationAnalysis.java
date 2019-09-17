@@ -1634,7 +1634,7 @@ public class RelationAnalysis extends RuleAnalysis
 			boolean hasPredicatedTrace = traceNode.isPredicated(); // || traceNode.isSpeculated();
 			List<@NonNull ? extends VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(relation);
 			Iterable<@NonNull VariableDeclaration2TraceProperty> variableDeclaration2TraceProperties = null;
-			if (!relation.isIsAbstract()) {
+			if (!QVTrelationUtil.isAbstract(relation)) {
 				Relation2TraceClass rule2traceClass = getRule2TraceGroup().getRule2TraceClass();
 				variableDeclaration2TraceProperties = rule2traceClass.getVariableDeclaration2TraceProperties();
 			}
