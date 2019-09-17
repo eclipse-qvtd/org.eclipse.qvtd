@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,9 +24,10 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OriginalContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * CollationManager supervises the collation of elements in ordered slots.
@@ -42,8 +44,8 @@ public class CollationManager
 		this.originalContentsAnalysis = scheduleManager.getOriginalContentsAnalysis();
 	}
 
-	public void createCollations(StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region) {
-		List<@NonNull PropertyDatum> collations = new ArrayList<>();
+	public @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull Node>> createCollations(StringBuilder s, @NonNull RootRegion rootRegion) {
+		Map<@NonNull PropertyDatum, @NonNull List<@NonNull Node>> collations = new HashMap<>();
 		Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> basePropertyDatum2newEdges = originalContentsAnalysis.getBasePropertyDatum2newEdges();
 		for (@NonNull PropertyDatum basePropertyDatum : basePropertyDatum2newEdges.keySet()) {
 			Property baseProperty = basePropertyDatum.getReferredProperty();
@@ -56,9 +58,14 @@ public class CollationManager
 						List<@NonNull NavigableEdge> newEdges = basePropertyDatum2newEdges.get(basePropertyDatum);
 						assert newEdges != null;
 						for (@NonNull NavigableEdge navigableEdge : newEdges) {
-							if (navigableEdge.isPartial()) {
-								collations.add(basePropertyDatum);
-								break;
+							Node targetNode = QVTscheduleUtil.getTargetNode(navigableEdge);
+							if (/*targetNode.isNew() &&*/ navigableEdge.isPartial()) {
+								List<@NonNull Node> nodes = collations.get(basePropertyDatum);
+								if (nodes == null) {
+									nodes = new ArrayList<>();
+									collations.put(basePropertyDatum, nodes);
+								}
+								nodes.add(targetNode);
 							}
 						}
 					}
@@ -66,5 +73,6 @@ public class CollationManager
 			}
 		}
 		System.out.println("Collations: " + collations);
+		return collations;
 	}
 }

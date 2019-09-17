@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
@@ -625,11 +626,19 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			for (@NonNull Region region : activeRegions2) {
 				if (!(region instanceof LoadingRegion)) {
 					connectionManager.createIncomingConnections(s, rootRegion, region);
-					collationManager.createCollations(s, rootRegion, region);
 				}
 			}
 			if (s != null) {
 				QVTscheduleConstants.CONNECTION_CREATION.println(s.toString());;
+			}
+			Map<@NonNull PropertyDatum, @NonNull List<@NonNull Node>> collations = collationManager.createCollations(s, rootRegion);
+			for (@NonNull Iterable<@NonNull Node> collatedNodes : collations.values()) {
+				for (@NonNull Node collatedNode : collatedNodes) {
+					for (@NonNull NodeConnection collatedConnection : QVTscheduleUtil.getOutgoingConnections(collatedNode)) {
+						//	collatedConnection.setIsCollated(true);
+						System.out.println("Collating: " + collatedConnection);
+					}
+				}
 			}
 		}
 		UtilityAnalysis.assignUtilities(directedScheduleManager, loadingRegion);
