@@ -387,6 +387,14 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	//	}
 
 	/**
+	 * Return true if rRelation can be treated as abastract. i.e. if it is abastract and it has overrides.
+	 * THis avoids a crash for non-overridden abstarct relation bugs;
+	 */
+	public static boolean isAbstract(@NonNull Relation rRelation) {
+		return rRelation.isIsAbstract() && hasOverrides(rRelation);
+	}
+
+	/**
 	 * Return true if variable must be non-null while executing a rule.
 	 *
 	 * This helper suppresses the may-be null that indicates that the rule invocation is optional. (See Bug 499432)

@@ -114,7 +114,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	/**
-	 * Return the base rule iff this rule participtaes in an override hierarchy.
+	 * Return the base rule iff this rule participates in an override hierarchy.
 	 * Returns null for a non-heirarchy participant.
 	 */
 	public static @Nullable Rule basicGetBaseRule(@NonNull Rule rule) {

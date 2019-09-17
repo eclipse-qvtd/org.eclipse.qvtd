@@ -53,7 +53,7 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 		Rule baseRelation = QVTrelationUtil.basicGetBaseRule(relation);
 		this.baseRelation2traceGroup = (baseRelation != null) && (baseRelation != relation) ? (Relation2TraceGroup) transformation2tracePackage.getRule2TraceGroup(baseRelation) : this;
 		boolean hasOverrides = QVTrelationUtil.hasOverrides(relation);
-		boolean isAbstract = relation.isIsAbstract();
+		boolean isAbstract = QVTrelationUtil.isAbstract(relation);
 		boolean topLevel = relation.isIsTopLevel();
 		if (!isAbstract) {
 			traceClassName = nameGenerator.createTraceClassName(relation);
