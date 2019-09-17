@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FamilyPlans:FamilyPlanning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:FamilyPlans="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans" xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans ../org.eclipse.qvtd.xtext.qvtrelation.tests/models/persons2families/FamilyPlans.ecore">
+    xmlns:FamilyPlans="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans" xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans ../FamilyPlans.ecore">
   <surnamePlans name="Flanders">
+    <familyPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
+        <familyMember href="MultiFamiliesChildren.xmi#//@families.0/@sons.0"/>
+      </familyMemberPlans>
+    </familyPlans>
     <families href="MultiFamiliesChildren.xmi#//@families.0"/>
     <males href="PersonsMulti.xmi#//@persons.0"/>
   </surnamePlans>
   <surnamePlans name="Simpson">
+    <familyPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
+        <familyMember href="MultiFamiliesChildren.xmi#//@families.1/@sons.0"/>
+      </familyMemberPlans>
+    </familyPlans>
+    <familyPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
+        <familyMember href="MultiFamiliesChildren.xmi#//@families.2/@sons.0"/>
+      </familyMemberPlans>
+    </familyPlans>
+    <familyPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan">
+        <familyMember href="MultiFamiliesChildren.xmi#//@families.3/@daughters.0"/>
+      </familyMemberPlans>
+    </familyPlans>
+    <familyPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan">
+        <familyMember href="MultiFamiliesChildren.xmi#//@families.4/@daughters.0"/>
+      </familyMemberPlans>
+    </familyPlans>
+    <familyPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan">
+        <familyMember href="MultiFamiliesChildren.xmi#//@families.5/@daughters.0"/>
+      </familyMemberPlans>
+    </familyPlans>
     <families href="MultiFamiliesChildren.xmi#//@families.1"/>
     <families href="MultiFamiliesChildren.xmi#//@families.2"/>
     <families href="MultiFamiliesChildren.xmi#//@families.3"/>

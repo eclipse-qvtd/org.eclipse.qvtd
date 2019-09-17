@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FamilyPlans:FamilyPlanning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:FamilyPlans="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans" xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans java://org.eclipse.qvtd.xtext.qvtrelation.tests.FamilyPlans.FamilyPlansPackage">
+  <surnamePlans name="Flanders">
+    <familyPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
+        <familyMember href="FamiliesWithChildrenOnly.xmi#//@families.0/@sons.0"/>
+      </familyMemberPlans>
+    </familyPlans>
+    <families href="FamiliesWithChildrenOnly.xmi#//@families.0"/>
+    <males href="PersonsMulti.xmi#//@persons.0"/>
+  </surnamePlans>
+  <surnamePlans name="Simpson">
+    <familyPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan">
+        <familyMember href="FamiliesWithChildrenOnly.xmi#//@families.1/@daughters.0"/>
+      </familyMemberPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan">
+        <familyMember href="FamiliesWithChildrenOnly.xmi#//@families.1/@daughters.1"/>
+      </familyMemberPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan">
+        <familyMember href="FamiliesWithChildrenOnly.xmi#//@families.1/@daughters.2"/>
+      </familyMemberPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
+        <familyMember href="FamiliesWithChildrenOnly.xmi#//@families.1/@sons.0"/>
+      </familyMemberPlans>
+      <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
+        <familyMember href="FamiliesWithChildrenOnly.xmi#//@families.1/@sons.1"/>
+      </familyMemberPlans>
+    </familyPlans>
+    <families href="FamiliesWithChildrenOnly.xmi#//@families.1"/>
+    <females href="PersonsMulti.xmi#//@persons.2"/>
+    <females href="PersonsMulti.xmi#//@persons.4"/>
+    <females href="PersonsMulti.xmi#//@persons.5"/>
+    <males href="PersonsMulti.xmi#//@persons.1"/>
+    <males href="PersonsMulti.xmi#//@persons.3"/>
+  </surnamePlans>
+</FamilyPlans:FamilyPlanning>

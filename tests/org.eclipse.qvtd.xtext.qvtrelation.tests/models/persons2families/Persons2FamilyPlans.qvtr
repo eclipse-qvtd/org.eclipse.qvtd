@@ -91,10 +91,81 @@ transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:Fam
 	
 	relation Family2SurnamePlan
 	{		
-	  	checkonly domain family f : Family[1];
+	  	checkonly domain family f : Family[1] ;
 	  	enforce domain plan sp : SurnamePlan {
 	  		families = f
 	  	};
+	}
+	
+	top relation Daughter2DaughterPlan
+	{		
+	  	checkonly domain family p : FamilyMember[1] {
+	  		daughtersInverse = fy : Family
+	  	};
+	  	enforce domain plan fp : FamilyPlan {
+	  		familyMemberPlans = dp : DaughterPlan {
+	  			familyMember = p
+	  		}
+	  	};
+	  	when {
+	  		Family2FamilyPlan(fy, fp);
+	  	}
+	}
+		
+	top relation Father2FatherPlan
+	{		
+	  	checkonly domain family p : FamilyMember[1] {
+	  		fatherInverse = fy : Family
+	  	};
+	  	enforce domain plan fp : FamilyPlan {
+	  		familyMemberPlans = sp : FatherPlan {
+	  			familyMember = p
+	  		}
+	  	};
+	  	when {
+	  		Family2FamilyPlan(fy, fp);
+	  	}
+	}
+		
+	top relation Mother2MotherPlan
+	{		
+	  	checkonly domain family p : FamilyMember[1] {
+	  		motherInverse = fy : Family
+	  	};
+	  	enforce domain  plan fp : FamilyPlan {
+	  		familyMemberPlans = sp : MotherPlan {
+	  			familyMember = p
+	  		}
+	  	};
+	  	when {
+	  		Family2FamilyPlan(fy, fp);
+	  	}
+	}
+		
+	top relation Son2SonPlan
+	{		
+	  	checkonly domain family p : FamilyMember[1] {
+	  		sonsInverse = fy : Family
+	  	};
+	  	enforce domain  plan fp : FamilyPlan {
+	  		familyMemberPlans = sp : SonPlan {
+	  			familyMember = p
+	  		}
+	  	};
+	  	when {
+	  		Family2FamilyPlan(fy, fp);
+	  	}
+	}
+		
+	top relation Family2FamilyPlan
+	{		
+	  	checkonly domain family fy : Family;
+	  	enforce domain plan fp : FamilyPlan {
+	  		surnamePlan = sp : SurnamePlan
+	  	};
+	  	when {
+	  		Family2SurnamePlan(fy, sp);
+	  	}
 	}
 	
 	relation Female2SurnamePlan overrides Person2SurnamePlan
