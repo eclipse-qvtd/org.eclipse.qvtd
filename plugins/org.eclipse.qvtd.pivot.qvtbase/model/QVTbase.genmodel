@@ -70,6 +70,10 @@
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateNoOverridesCycle/diagnostics"/>
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateNoOverridesCycle/context"/>
       </genOperations>
+      <genOperations ecoreOperation="QVTbase.ecore#//Rule/validateAbstractRuleIsOverridden">
+        <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateAbstractRuleIsOverridden/diagnostics"/>
+        <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateAbstractRuleIsOverridden/context"/>
+      </genOperations>
       <genOperations ecoreOperation="QVTbase.ecore#//Rule/validateOverridingRuleOverridesAllDomains">
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateOverridingRuleOverridesAllDomains/diagnostics"/>
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateOverridingRuleOverridesAllDomains/context"/>
