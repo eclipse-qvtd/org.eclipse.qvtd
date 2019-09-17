@@ -368,6 +368,16 @@ public interface QVTbasePackage extends EPackage {
 	EOperation getRule__ValidateNoOverridesCycle__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateAbstractRuleIsOverridden(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Abstract Rule Is Overridden</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Abstract Rule Is Overridden</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateAbstractRuleIsOverridden(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRule__ValidateAbstractRuleIsOverridden__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridingRuleOverridesAllDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Overriding Rule Overrides All Domains</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -858,6 +868,14 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateNoOverridesCycle__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Abstract Rule Is Overridden</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RULE___VALIDATE_ABSTRACT_RULE_IS_OVERRIDDEN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateAbstractRuleIsOverridden__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Overriding Rule Overrides All Domains</b></em>' operation.

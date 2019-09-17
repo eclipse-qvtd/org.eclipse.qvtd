@@ -176,6 +176,15 @@ public interface Rule extends NamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='AbstractRuleIsOverridden'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tisAbstract implies overrides-&gt;notEmpty()\n\n'"
+	 * @generated
+	 */
+	boolean validateAbstractRuleIsOverridden(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='OverridingRuleOverridesAllDomains'"
 	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\toverridden &lt;&gt; null implies\n\toverridden.domain-&gt;forAll(od | self.domain.name-&gt;includes(od.name))\n\n'"
 	 * @generated

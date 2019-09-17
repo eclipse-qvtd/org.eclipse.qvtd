@@ -589,6 +589,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(entryPoint, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(entryPoint, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateNoOverridesCycle(entryPoint, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateAbstractRuleIsOverridden(entryPoint, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridingRuleOverridesAllDomains(entryPoint, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateNameIsNotNull(entryPoint, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateMappingParameterNamesAreUnique(entryPoint, diagnostics, context);
@@ -778,6 +779,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateNoOverridesCycle(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateAbstractRuleIsOverridden(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridingRuleOverridesAllDomains(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateNameIsNotNull(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateMappingParameterNamesAreUnique(mapping, diagnostics, context);

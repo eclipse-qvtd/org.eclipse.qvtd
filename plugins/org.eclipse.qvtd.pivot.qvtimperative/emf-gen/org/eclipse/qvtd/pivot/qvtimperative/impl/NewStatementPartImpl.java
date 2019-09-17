@@ -251,7 +251,7 @@ public class NewStatementPartImpl extends NamedElementImpl implements NewStateme
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningNewStatement((NewStatement)otherEnd, msgs);
+				return basicSetOwningNewStatement((NewStatement)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -296,7 +296,7 @@ public class NewStatementPartImpl extends NamedElementImpl implements NewStateme
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getReferredProperty();
-			return basicGetReferredProperty();
+				return basicGetReferredProperty();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwnedExpression();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
@@ -315,13 +315,13 @@ public class NewStatementPartImpl extends NamedElementImpl implements NewStateme
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setReferredProperty((Property)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedExpression((OCLExpression)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOwningNewStatement((NewStatement)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -336,13 +336,13 @@ public class NewStatementPartImpl extends NamedElementImpl implements NewStateme
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setReferredProperty((Property)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedExpression((OCLExpression)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOwningNewStatement((NewStatement)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

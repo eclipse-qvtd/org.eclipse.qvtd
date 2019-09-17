@@ -468,8 +468,18 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map() {
+	public EOperation getRule__ValidateAbstractRuleIsOverridden__DiagnosticChain_Map() {
 		return ruleEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map() {
+		return ruleEClass.getEOperations().get(3);
 	}
 
 	/**
@@ -746,6 +756,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2);
+		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3);
 
 		transformationEClass = createEClass(7);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 0);
@@ -897,6 +908,15 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getRule__ValidateNoOverridesCycle__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNoOverridesCycle", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getRule__ValidateAbstractRuleIsOverridden__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateAbstractRuleIsOverridden", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1089,6 +1109,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 			   "originalName", "NoOverridesCycle"
 		   });
 		addAnnotation
+		  (getRule__ValidateAbstractRuleIsOverridden__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "AbstractRuleIsOverridden"
+		   });
+		addAnnotation
 		  (getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
@@ -1175,6 +1201,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		   source,
 		   new String[] {
 			   "body", "\n\toverridden->closure(overridden)->excludes(self)\n\n"
+		   });
+		addAnnotation
+		  (getRule__ValidateAbstractRuleIsOverridden__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tisAbstract implies overrides->notEmpty()\n\n"
 		   });
 		addAnnotation
 		  (getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map(),
