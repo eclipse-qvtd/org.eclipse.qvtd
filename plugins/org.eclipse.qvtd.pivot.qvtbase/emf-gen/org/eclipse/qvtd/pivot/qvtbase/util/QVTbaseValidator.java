@@ -115,12 +115,20 @@ public class QVTbaseValidator extends EObjectValidator {
 	public static final int RULE__VALIDATE_NO_OVERRIDES_CYCLE = 7;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Abstract Rule Is Overridden' of 'Rule'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int RULE__VALIDATE_ABSTRACT_RULE_IS_OVERRIDDEN = 8;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Overriding Rule Overrides All Domains' of 'Rule'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RULE__VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS = 8;
+	public static final int RULE__VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS = 9;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Context Type Is Transformation' of 'Transformation'.
@@ -128,7 +136,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TRANSFORMATION__VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION = 9;
+	public static final int TRANSFORMATION__VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION = 10;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Extended Typed Model Is Extended' of 'Transformation'.
@@ -136,7 +144,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TRANSFORMATION__VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED = 10;
+	public static final int TRANSFORMATION__VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED = 11;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Model Parameter Is Unique' of 'Transformation'.
@@ -144,7 +152,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TRANSFORMATION__VALIDATE_MODEL_PARAMETER_IS_UNIQUE = 11;
+	public static final int TRANSFORMATION__VALIDATE_MODEL_PARAMETER_IS_UNIQUE = 12;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate No Extends Cycle' of 'Transformation'.
@@ -152,7 +160,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TRANSFORMATION__VALIDATE_NO_EXTENDS_CYCLE = 12;
+	public static final int TRANSFORMATION__VALIDATE_NO_EXTENDS_CYCLE = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Exclusive Primitive This Trace' of 'Typed Model'.
@@ -160,7 +168,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TYPED_MODEL__VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE = 13;
+	public static final int TYPED_MODEL__VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE = 14;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -168,7 +176,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 13;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 14;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -412,6 +420,7 @@ public class QVTbaseValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRule_validateDomainNameIsUnique(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRule_validateNoOverridesCycle(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRule_validateAbstractRuleIsOverridden(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRule_validateOverridingRuleOverridesAllDomains(rule, diagnostics, context);
 		return result;
 	}
@@ -434,6 +443,16 @@ public class QVTbaseValidator extends EObjectValidator {
 	 */
 	public boolean validateRule_validateNoOverridesCycle(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return rule.validateNoOverridesCycle(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateAbstractRuleIsOverridden constraint of '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRule_validateAbstractRuleIsOverridden(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return rule.validateAbstractRuleIsOverridden(diagnostics, context);
 	}
 
 	/**

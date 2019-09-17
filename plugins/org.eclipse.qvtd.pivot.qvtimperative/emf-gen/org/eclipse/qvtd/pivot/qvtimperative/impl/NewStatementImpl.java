@@ -506,7 +506,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 				return isIsContained();
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				if (resolve) return getReferredTypedModel();
-			return basicGetReferredTypedModel();
+				return basicGetReferredTypedModel();
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				return getOwnedExpression();
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
@@ -526,21 +526,21 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-			getObservedProperties().addAll((Collection<? extends Property>)newValue);
-			return;
+				getObservedProperties().addAll((Collection<? extends Property>)newValue);
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setIsContained((Boolean)newValue);
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
 				getOwnedParts().clear();
-			getOwnedParts().addAll((Collection<? extends NewStatementPart>)newValue);
-			return;
+				getOwnedParts().addAll((Collection<? extends NewStatementPart>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -555,19 +555,19 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setIsContained(IS_CONTAINED_EDEFAULT);
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setReferredTypedModel((ImperativeTypedModel)null);
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
-			return;
+				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
 				getOwnedParts().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

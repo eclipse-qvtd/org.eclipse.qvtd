@@ -43,6 +43,9 @@
       <ownedInvariants xmi:id=",MTyQ" isCallable="true" name="NoOverridesCycle">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;overridden->closure(overridden)->excludes(self)&#xA;&#xA;"/>
       </ownedInvariants>
+      <ownedInvariants xmi:id="7PjOU" isCallable="true" name="AbstractRuleIsOverridden">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;isAbstract implies overrides->notEmpty()&#xA;&#xA;"/>
+      </ownedInvariants>
       <ownedInvariants xmi:id="PB949" isCallable="true" name="OverridingRuleOverridesAllDomains">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;overridden &lt;> null implies&#xA;&#x9;overridden.domain->forAll(od | self.domain.name->includes(od.name))&#xA;&#xA;"/>
       </ownedInvariants>

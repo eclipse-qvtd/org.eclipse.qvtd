@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
 import org.eclipse.ocl.pivot.library.collection.CollectionExcludesOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
+import org.eclipse.ocl.pivot.library.collection.CollectionNotEmptyOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -94,7 +95,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RULE_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3;
+	public static final int RULE_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' containment reference list.
@@ -496,6 +497,69 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 */
 	@Override
+	public boolean validateAbstractRuleIsOverridden(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "Rule::AbstractRuleIsOverridden";
+		try {
+			/**
+			 *
+			 * inv AbstractRuleIsOverridden:
+			 *   let severity : Integer[1] = constraintName.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[?] = isAbstract implies overrides->notEmpty()
+			 *       in
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_ABSTRACT_RULE_IS_OVERRIDDEN__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTbaseTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				final /*@NonInvalid*/ boolean isAbstract = this.isIsAbstract();
+				/*@NonInvalid*/ boolean result;
+				if (isAbstract) {
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ @NonNull List<Rule> overrides = this.getOverrides();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_overrides = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Rule, overrides);
+					final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_overrides).booleanValue();
+					result = notEmpty;
+				}
+				else {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, QVTbaseTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
+			}
+			return Boolean.TRUE == symbol_0;
+		}
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean validateOverridingRuleOverridesAllDomains(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		final @NonNull String constraintName = "Rule::OverridingRuleOverridesAllDomains";
 		try {
@@ -812,6 +876,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1:
 				return validateNoOverridesCycle((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2:
+				return validateAbstractRuleIsOverridden((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3:
 				return validateOverridingRuleOverridesAllDomains((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);
