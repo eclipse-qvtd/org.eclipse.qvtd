@@ -103,7 +103,7 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		Relation invokedRelation = QVTrelationUtil.getReferredRelation(relationCallExp);
 		RelationAnalysis invokedRelationAnalysis = (RelationAnalysis) context.getTransformationAnalysis().getRuleAnalysis(invokedRelation);
 		//
-		InvocationAnalysis invocationAnalysis = relationAnalysis.createInvocationAnalysis(invokedRelationAnalysis, relationCallExp, isWhen);
+		InvocationAnalysis invocationAnalysis = relationAnalysis.getOutgoingInvocationAnalysis(invokedRelationAnalysis, relationCallExp, isWhen);
 		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(invokedRelation);
 		List<@NonNull OCLExpression> ownedArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(relationCallExp);
 		int size = rootVariables.size();

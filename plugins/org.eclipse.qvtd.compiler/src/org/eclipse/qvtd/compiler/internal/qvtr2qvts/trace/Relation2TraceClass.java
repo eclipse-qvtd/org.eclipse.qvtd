@@ -207,9 +207,10 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 		//
 		//	Create an incoming invocation property for each where invocation.
 		//
-		Iterable<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses = ((RelationAnalysis)ruleAnalysis).basicGetOutgoingWhereInvocationAnalyses();
+		Iterable<@Nullable InvocationAnalysis> outgoingWhereInvocationAnalyses = ((RelationAnalysis)ruleAnalysis).basicGetOutgoingWhereInvocationAnalyses();
 		if (outgoingWhereInvocationAnalyses != null) {
-			for (@NonNull InvocationAnalysis outgoingWhereInvocationAnalysis : outgoingWhereInvocationAnalyses) {
+			for (@Nullable InvocationAnalysis outgoingWhereInvocationAnalysis : outgoingWhereInvocationAnalyses) {
+				assert outgoingWhereInvocationAnalysis != null;
 				if (outgoingWhereInvocationAnalysis.needsInvocationTraceProperty()) {
 					createInvocation2TraceProperty(outgoingWhereInvocationAnalysis);
 				}
@@ -219,9 +220,10 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 		//	Create an outgoing invocation property for each when invocation.
 		//
 		//	if (relation.isIsTopLevel()) {
-		Iterable<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses = ((RelationAnalysis)ruleAnalysis).basicGetOutgoingWhenInvocationAnalyses();
+		Iterable<@Nullable InvocationAnalysis> outgoingWhenInvocationAnalyses = ((RelationAnalysis)ruleAnalysis).basicGetOutgoingWhenInvocationAnalyses();
 		if (outgoingWhenInvocationAnalyses != null) {
-			for (@NonNull InvocationAnalysis outgoingWhenInvocationAnalysis : outgoingWhenInvocationAnalyses) {
+			for (@Nullable InvocationAnalysis outgoingWhenInvocationAnalysis : outgoingWhenInvocationAnalyses) {
+				assert outgoingWhenInvocationAnalysis != null;
 				if (outgoingWhenInvocationAnalysis.needsInvocationTraceProperty()) {
 					createInvocation2TraceProperty(outgoingWhenInvocationAnalysis);
 				}
@@ -269,7 +271,7 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 			return;					// FIXME Bug 540797 - this is used by e.g. mapBooleanExp in ATL2QVTr
 		}
 
-		boolean hasWhenInvocation = relationAnalysis.hasIncomingWhenInvocationAnalyses();
+		boolean hasWhenInvocation = relationAnalysis.hasIncomingWhenInvocations();
 		if (hasWhenInvocation) {
 			relation2traceGroup.addTracingStrategy(AbstractTracingStrategy.HasWhenInvocationTracingStrategy.INSTANCE);
 		}

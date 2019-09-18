@@ -123,39 +123,24 @@ public class RelationAnalysis extends RuleAnalysis
 	private @NonNull Map<@NonNull VariableDeclaration, @NonNull List<@NonNull OCLExpression>> variable2expressions = new HashMap<>();
 
 	/**
-	 * The implicit/when expressions that call this relation.
+	 * The expressions that call this relation from a when clause. The corresponding InvocationAnalysis is created lazily.
 	 */
-	private @Nullable List<@NonNull RelationCallExp> incomingWhenInvocations = null;
+	private @Nullable Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> incomingWhenInvocation2invocationAnalysis = null;
 
 	/**
-	 * The where expressions that call this relation.
+	 * The expressions that call this relation from a where clause. The corresponding InvocationAnalysis is created lazily.
 	 */
-	private @Nullable List<@NonNull RelationCallExp> incomingWhereInvocations = null;
+	private @Nullable Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> incomingWhereInvocation2invocationAnalysis = null;
 
 	/**
-	 * The expressions that call this relation from a when clause.
+	 * The expressions that call relations from a when clause in this relation. The corresponding InvocationAnalysis is created lazily.
 	 */
-	private @Nullable List<@NonNull InvocationAnalysis> incomingWhenInvocationAnalyses = null;
+	private @Nullable Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingWhenInvocation2invocationAnalysis = null;
 
 	/**
-	 * The expressions that call this relation from a where clause.
+	 * The expressions that call relations from a where clause in this relation. The corresponding InvocationAnalysis is created lazily.
 	 */
-	private @Nullable List<@NonNull InvocationAnalysis> incomingWhereInvocationAnalyses = null;
-
-	/**
-	 * The expressions that call relations with this relation.
-	 */
-	//	private @Nullable List<@NonNull RelationCallExp> outgoingInvocations = null;
-
-	/**
-	 * The expressions that call relations with this relation's when clause.
-	 */
-	private @Nullable List<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses = null;
-
-	/**
-	 * The expressions that call relations with this relation's where clause.
-	 */
-	private @Nullable List<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses = null;
+	private @Nullable Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingWhereInvocation2invocationAnalysis = null;
 
 	/**
 	 * Closure of all overriding relations or null if not overridden.
@@ -222,81 +207,57 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	}
 
-	private void addIncomingInvocationAnalysis(@NonNull InvocationAnalysis invocationAnalysis) {
+	private void addIncomingInvocationAnalysis(@NonNull RelationCallExp invocation, @NonNull InvocationAnalysis invocationAnalysis) {
 		boolean isWhen = invocationAnalysis.isWhen();
-		if (isWhen) {
-			List<@NonNull InvocationAnalysis> incomingWhenInvocationAnalyses2 = incomingWhenInvocationAnalyses;
-			if (incomingWhenInvocationAnalyses2 == null) {
-				incomingWhenInvocationAnalyses = incomingWhenInvocationAnalyses2 = new ArrayList<>();
-			}
-			incomingWhenInvocationAnalyses2.add(invocationAnalysis);
-		}
-		else {
-			List<@NonNull InvocationAnalysis> incomingWhereInvocationAnalyses2 = incomingWhereInvocationAnalyses;
-			if (incomingWhereInvocationAnalyses2 == null) {
-				incomingWhereInvocationAnalyses = incomingWhereInvocationAnalyses2 = new ArrayList<>();
-			}
-			incomingWhereInvocationAnalyses2.add(invocationAnalysis);
-		}
+		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> invocationAnalyses = isWhen ? incomingWhenInvocation2invocationAnalysis : incomingWhereInvocation2invocationAnalysis;
+		assert invocationAnalyses != null;
+		InvocationAnalysis old = invocationAnalyses.put(invocation, invocationAnalysis);
+		assert old == null;
 	}
 
-	private void addIncomingWhenRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> incomingWhenInvocations2 = incomingWhenInvocations;
-		if (incomingWhenInvocations2 == null) {
-			incomingWhenInvocations = incomingWhenInvocations2 = new ArrayList<>();
+	private void addIncomingWhenInvocation(@NonNull RelationCallExp invocation) {
+		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> incomingWhenInvocation2invocationAnalysis2 = incomingWhenInvocation2invocationAnalysis;
+		if (incomingWhenInvocation2invocationAnalysis2 == null) {
+			incomingWhenInvocation2invocationAnalysis = incomingWhenInvocation2invocationAnalysis2 = new HashMap<>();
 		}
-		incomingWhenInvocations2.add(relationInvocation);
+		assert !incomingWhenInvocation2invocationAnalysis2.containsKey(invocation);
+		incomingWhenInvocation2invocationAnalysis2.put(invocation, null);
 	}
 
-	private void addIncomingWhereRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> incomingWhereInvocations2 = incomingWhereInvocations;
-		if (incomingWhereInvocations2 == null) {
-			incomingWhereInvocations = incomingWhereInvocations2 = new ArrayList<>();
+	private void addIncomingWhereInvocation(@NonNull RelationCallExp invocation) {
+		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> incomingWhereInvocation2invocationAnalysis2 = incomingWhereInvocation2invocationAnalysis;
+		if (incomingWhereInvocation2invocationAnalysis2 == null) {
+			incomingWhereInvocation2invocationAnalysis = incomingWhereInvocation2invocationAnalysis2 = new HashMap<>();
 		}
-		incomingWhereInvocations2.add(relationInvocation);
+		assert !incomingWhereInvocation2invocationAnalysis2.containsKey(invocation);
+		incomingWhereInvocation2invocationAnalysis2.put(invocation, null);
 	}
 
-	private void addOutgoingInvocationAnalysis(@NonNull InvocationAnalysis invocationAnalysis) {
+	private void addOutgoingInvocationAnalysis(@NonNull RelationCallExp invocation, @NonNull InvocationAnalysis invocationAnalysis) {
 		boolean isWhen = invocationAnalysis.isWhen();
-		if (isWhen) {
-			List<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses2 = outgoingWhenInvocationAnalyses;
-			if (outgoingWhenInvocationAnalyses2 == null) {
-				outgoingWhenInvocationAnalyses = outgoingWhenInvocationAnalyses2 = new ArrayList<>();
-			}
-			outgoingWhenInvocationAnalyses2.add(invocationAnalysis);
-		}
-		else {
-			List<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses2 = outgoingWhereInvocationAnalyses;
-			if (outgoingWhereInvocationAnalyses2 == null) {
-				outgoingWhereInvocationAnalyses = outgoingWhereInvocationAnalyses2 = new ArrayList<>();
-			}
-			outgoingWhereInvocationAnalyses2.add(invocationAnalysis);
-		}
+		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> invocationAnalyses = isWhen ? outgoingWhenInvocation2invocationAnalysis : outgoingWhereInvocation2invocationAnalysis;
+		assert invocationAnalyses != null;
+		InvocationAnalysis old = invocationAnalyses.put(invocation, invocationAnalysis);
+		assert old == null;
 	}
 
-	/*	private void addOutgoingRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> outgoingInvocations2 = outgoingInvocations;
-		if (outgoingInvocations2 == null) {
-			outgoingInvocations = outgoingInvocations2 = new ArrayList<>();
+	private void addOutgoingWhenInvocation(@NonNull RelationCallExp relationInvocation) {
+		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingWhenInvocation2invocationAnalysis2 = outgoingWhenInvocation2invocationAnalysis;
+		if (outgoingWhenInvocation2invocationAnalysis2 == null) {
+			outgoingWhenInvocation2invocationAnalysis2 = outgoingWhenInvocation2invocationAnalysis = new HashMap<>();
 		}
-		outgoingInvocations2.add(relationInvocation);
-	} */
+		assert !outgoingWhenInvocation2invocationAnalysis2.containsKey(relationInvocation);
+		outgoingWhenInvocation2invocationAnalysis2.put(relationInvocation, null);
+	}
 
-	/*	private void addOutgoingWhenRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> outgoingWhenInvocations2 = outgoingWhenInvocations;
-		if (outgoingWhenInvocations2 == null) {
-			outgoingWhenInvocations = outgoingWhenInvocations2 = new ArrayList<>();
+	private void addOutgoingWhereInvocation(@NonNull RelationCallExp relationInvocation) {
+		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingWhereInvocation2invocationAnalysis2 = outgoingWhereInvocation2invocationAnalysis;
+		if (outgoingWhereInvocation2invocationAnalysis2 == null) {
+			outgoingWhereInvocation2invocationAnalysis2 = outgoingWhereInvocation2invocationAnalysis = new HashMap<>();
 		}
-		outgoingWhenInvocations2.add(relationInvocation);
-	} */
-
-	/*	private void addOutgoingWhereRelation(@NonNull RelationCallExp relationInvocation) {
-		List<@NonNull RelationCallExp> outgoingWhereInvocations2 = outgoingWhereInvocations;
-		if (outgoingWhereInvocations2 == null) {
-			outgoingWhereInvocations = outgoingWhereInvocations2 = new ArrayList<>();
-		}
-		outgoingWhereInvocations2.add(relationInvocation);
-	} */
+		assert !outgoingWhereInvocation2invocationAnalysis2.containsKey(relationInvocation);
+		outgoingWhereInvocation2invocationAnalysis2.put(relationInvocation, null);
+	}
 
 	protected void analyzeContainments() {
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
@@ -332,10 +293,16 @@ public class RelationAnalysis extends RuleAnalysis
 				//	String name= invokedRelationAnalysis.getName();
 				Pattern pattern = QVTrelationUtil.basicGetContainingPattern(eObject);
 				if ((pattern != null) && (pattern.eContainmentFeature() == QVTrelationPackage.Literals.RELATION__WHERE)) {
-					invokedRelationAnalysis.addIncomingWhereRelation(relationInvocation);
+					invokedRelationAnalysis.addIncomingWhereInvocation(relationInvocation);
+					addOutgoingWhereInvocation(relationInvocation);
 				}
 				else {
-					invokedRelationAnalysis.addIncomingWhenRelation(relationInvocation);
+					invokedRelationAnalysis.addIncomingWhenInvocation(relationInvocation);
+					RelationAnalysis invokedBaseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation((Relation) rule));	// FIXME invokedBaseRelationAnalysis not yet valid
+					if (invokedBaseRelationAnalysis != invokedRelationAnalysis) {
+						invokedBaseRelationAnalysis.addIncomingWhenInvocation(relationInvocation);
+					}
+					addOutgoingWhenInvocation(relationInvocation);
 				}
 			}
 		}
@@ -410,7 +377,8 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		}
 		Iterable<@NonNull Node> headNodes;
-		if (getBaseRelationAnalysis() != this) {
+		assert baseRelationAnalysis != null;
+		if (baseRelationAnalysis != this) {
 			headNodes = preferredHeadNodes;
 		}
 		else {
@@ -427,7 +395,7 @@ public class RelationAnalysis extends RuleAnalysis
 		for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(relationDomain)) {
 			TemplateExp templateExpression = QVTrelationUtil.getOwnedTemplateExpression(domainPattern);
 			boolean isTopLevel = ((Relation)rule).isIsTopLevel();
-			boolean hasWhenInvocations = (incomingWhenInvocations != null) && !incomingWhenInvocations.isEmpty();
+			boolean hasWhenInvocations = hasIncomingWhenInvocations();
 			//			boolean isWhenInvoked = (incomingWhenInvocationAnalyses != null) && !incomingWhenInvocationAnalyses.isEmpty();
 			boolean rootIsRealized = isTopLevel || hasWhenInvocations;
 			for (@NonNull EObject eObject : new TreeIterable(templateExpression, rootIsRealized)) {
@@ -442,8 +410,9 @@ public class RelationAnalysis extends RuleAnalysis
 
 	public void analyzeStrictness() {
 		List<@NonNull InvocationAnalysis> outgoingInvocationAnalyses = null;
-		if (outgoingWhenInvocationAnalyses != null) {
-			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingWhenInvocationAnalyses) {
+		if (outgoingWhenInvocation2invocationAnalysis != null) {
+			for (InvocationAnalysis invocationAnalysis : outgoingWhenInvocation2invocationAnalysis.values()) {
+				assert invocationAnalysis != null;
 				if (!invocationAnalysis.isTop() && invocationAnalysis.isRealized()) {
 					if (outgoingInvocationAnalyses == null) {
 						outgoingInvocationAnalyses = new ArrayList<>();
@@ -452,8 +421,9 @@ public class RelationAnalysis extends RuleAnalysis
 				}
 			}
 		}
-		if (outgoingWhereInvocationAnalyses != null) {
-			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingWhereInvocationAnalyses) {
+		if (outgoingWhereInvocation2invocationAnalysis != null) {
+			for (InvocationAnalysis invocationAnalysis : outgoingWhereInvocation2invocationAnalysis.values()) {
+				assert invocationAnalysis != null;
 				if (!invocationAnalysis.isTop() && invocationAnalysis.isRealized()) {
 					if (outgoingInvocationAnalyses == null) {
 						outgoingInvocationAnalyses = new ArrayList<>();
@@ -466,9 +436,9 @@ public class RelationAnalysis extends RuleAnalysis
 			ReachabilityForest reachabilityForest = null;
 			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingInvocationAnalyses) {
 				RelationAnalysis invokedRelationAnalysis = invocationAnalysis.getInvokedRelationAnalysis();
-				Iterable<@NonNull InvocationAnalysis> whenInvocationAnalyses = invokedRelationAnalysis.basicGetIncomingWhenInvocationAnalyses();
-				Iterable<@NonNull InvocationAnalysis> whereInvocationAnalyses = invokedRelationAnalysis.basicGetIncomingWhereInvocationAnalyses();
-				int incomingWhenInvocationAnalysisCount = (whenInvocationAnalyses != null ? Iterables.size(whenInvocationAnalyses) : 0) + (whereInvocationAnalyses != null ? Iterables.size(whereInvocationAnalyses) : 0);
+				int incomingWhenInvocationCount = invokedRelationAnalysis.getIncomingWhenInvocationCount();
+				int incomingWhereInvocationCount = invokedRelationAnalysis.getIncomingWhereInvocationCount();
+				int incomingWhenInvocationAnalysisCount = incomingWhenInvocationCount + incomingWhereInvocationCount;
 				if (incomingWhenInvocationAnalysisCount > 1) {
 					invocationAnalysis.setStrict(true);
 					break;
@@ -506,9 +476,14 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	@Override
-	public void analyzeSourceModel() {
+	public void analyzeOverrides() {
 		Relation relation = getRule();
 		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
+	}
+
+	@Override
+	public void analyzeSourceModel() {
+		Relation relation = getRule();
 		variable2templateExp = analyzeVariable2TemplateExp();
 		Set<@NonNull VariableDeclaration> topWhenedOutputVariables2 = topWhenedOutputVariables = new HashSet<>();
 		Set<@NonNull VariableDeclaration> nonTopWhenedOutputVariables2 = nonTopWhenedOutputVariables = new HashSet<>();
@@ -610,20 +585,12 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	}
 
-	public @Nullable Iterable<@NonNull InvocationAnalysis> basicGetIncomingWhenInvocationAnalyses() {
-		return incomingWhenInvocationAnalyses;
+	public @Nullable Iterable<@Nullable InvocationAnalysis> basicGetOutgoingWhenInvocationAnalyses() {
+		return outgoingWhenInvocation2invocationAnalysis != null ? outgoingWhenInvocation2invocationAnalysis.values() : null;
 	}
 
-	public @Nullable Iterable<@NonNull InvocationAnalysis> basicGetIncomingWhereInvocationAnalyses() {
-		return incomingWhereInvocationAnalyses;
-	}
-
-	public @Nullable Iterable<@NonNull InvocationAnalysis> basicGetOutgoingWhenInvocationAnalyses() {
-		return outgoingWhenInvocationAnalyses;
-	}
-
-	public @Nullable Iterable<@NonNull InvocationAnalysis> basicGetOutgoingWhereInvocationAnalyses() {
-		return outgoingWhereInvocationAnalyses;
+	public @Nullable Iterable<@Nullable InvocationAnalysis> basicGetOutgoingWhereInvocationAnalyses() {
+		return outgoingWhereInvocation2invocationAnalysis != null ? outgoingWhereInvocation2invocationAnalysis.values() : null;
 	}
 
 	@Override
@@ -651,7 +618,7 @@ public class RelationAnalysis extends RuleAnalysis
 		return new RelationDispatchAnalysis(this, dispatchRegion);
 	}
 
-	public @NonNull InvocationAnalysis createInvocationAnalysis(@NonNull RelationAnalysis invokedRelationAnalysis, @NonNull RelationCallExp relationCallExp, boolean isWhen) {
+	protected @NonNull InvocationAnalysis createOutgoingInvocationAnalysis(@NonNull RelationAnalysis invokedRelationAnalysis, @NonNull RelationCallExp relationCallExp, boolean isWhen) {
 		RelationAnalysis invokedBaseRelationAnalysis = invokedRelationAnalysis.getBaseRelationAnalysis();
 		InvocationAnalysis invocationAnalysis;
 		if (invokedBaseRelationAnalysis.getRule().isIsTopLevel()) {
@@ -663,8 +630,8 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		}
 		else {
-			boolean hasWhenInvocations = (invokedRelationAnalysis.incomingWhenInvocations != null) && !invokedRelationAnalysis.incomingWhenInvocations.isEmpty();
-			boolean hasWhereInvocations = (invokedRelationAnalysis.incomingWhereInvocations != null) && !invokedRelationAnalysis.incomingWhereInvocations.isEmpty();
+			boolean hasWhenInvocations = invokedRelationAnalysis.hasIncomingWhenInvocations();
+			boolean hasWhereInvocations = invokedRelationAnalysis.hasIncomingWhereInvocations();
 			boolean hasWhenAndWhereInvocations = hasWhenInvocations && hasWhereInvocations;
 			if (isWhen) {
 				if (hasWhenAndWhereInvocations) {
@@ -683,10 +650,10 @@ public class RelationAnalysis extends RuleAnalysis
 				}
 			}
 		}
-		addOutgoingInvocationAnalysis(invocationAnalysis);
-		invokedRelationAnalysis.addIncomingInvocationAnalysis(invocationAnalysis);
+		addOutgoingInvocationAnalysis(relationCallExp, invocationAnalysis);
+		invokedRelationAnalysis.addIncomingInvocationAnalysis(relationCallExp, invocationAnalysis);
 		if (invokedBaseRelationAnalysis != invokedRelationAnalysis) {
-			invokedBaseRelationAnalysis.addIncomingInvocationAnalysis(invocationAnalysis);
+			invokedBaseRelationAnalysis.addIncomingInvocationAnalysis(relationCallExp, invocationAnalysis);
 		}
 		return invocationAnalysis;
 	}
@@ -752,6 +719,14 @@ public class RelationAnalysis extends RuleAnalysis
 		return ClassUtil.nonNullState(baseRelationAnalysis);
 	}
 
+	public int getIncomingWhenInvocationCount() {
+		return incomingWhenInvocation2invocationAnalysis != null ? incomingWhenInvocation2invocationAnalysis.size() : 0;
+	}
+
+	public int getIncomingWhereInvocationCount() {
+		return incomingWhereInvocation2invocationAnalysis != null ? incomingWhereInvocation2invocationAnalysis.size() : 0;
+	}
+
 	protected @NonNull Set<@NonNull VariableDeclaration> getKeyedOutputVariables() {
 		return ClassUtil.nonNullState(keyedOutputVariables);
 	}
@@ -759,6 +734,17 @@ public class RelationAnalysis extends RuleAnalysis
 	@Override
 	public @NonNull QVTrelationNameGenerator getNameGenerator() {
 		return (QVTrelationNameGenerator) super.getNameGenerator();
+	}
+
+	public @NonNull InvocationAnalysis getOutgoingInvocationAnalysis(@NonNull RelationAnalysis invokedRelationAnalysis, @NonNull RelationCallExp invocation, boolean isWhen) {
+		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingInvocationAnalyses = isWhen ? outgoingWhenInvocation2invocationAnalysis : outgoingWhereInvocation2invocationAnalysis;
+		if (outgoingInvocationAnalyses != null) {
+			InvocationAnalysis invocationAnalysis = outgoingInvocationAnalyses.get(invocation);
+			if (invocationAnalysis != null) {
+				return invocationAnalysis;
+			}
+		}
+		return createOutgoingInvocationAnalysis(invokedRelationAnalysis, invocation, isWhen);
 	}
 
 	protected @NonNull Set<@NonNull VariableDeclaration> getRealizedOutputVariables() {
@@ -896,23 +882,6 @@ public class RelationAnalysis extends RuleAnalysis
 		return (RelationalTransformation2TracePackage) super.getTransformation2TracePackage();
 	}
 
-	//	@Override
-	//	public @NonNull String getUniqueVariableName(@NonNull Element2MiddleProperty element2traceProperty, @NonNull String name) {
-	//		return QVTrelationNameGenerator.getUniqueName(name2element2traceProperty, name, element2traceProperty);
-	//	}
-
-	/*	@Override
-	public void initializeHeadNodes() {
-		//		Node traceNode2 = traceNode;
-		//		assert traceNode2 != null;
-		//		if (getRule().isIsTopLevel()) {
-		mappingRegionAnalysis.initHeadNodes(null);
-		//		}
-		//		else {
-		//			region.getHeadNodes().add(traceNode);
-		//		}
-	} */
-
 	protected @NonNull Set<@NonNull VariableDeclaration> getNonTopWhenedOutputVariables() {
 		return ClassUtil.nonNullState(nonTopWhenedOutputVariables);
 	}
@@ -921,12 +890,20 @@ public class RelationAnalysis extends RuleAnalysis
 		return ClassUtil.nonNullState(topWhenedOutputVariables);
 	}
 
-	public boolean hasIncomingWhenInvocationAnalyses() {
-		return getBaseRelationAnalysis().basicGetIncomingWhenInvocationAnalyses() != null;
+	public boolean hasIncomingWhenInvocations() {
+		assert baseRelationAnalysis != null;
+		if (baseRelationAnalysis != this) {
+			return baseRelationAnalysis.hasIncomingWhenInvocations();
+		}
+		return (incomingWhenInvocation2invocationAnalysis != null) && !incomingWhenInvocation2invocationAnalysis.isEmpty();
 	}
 
-	public boolean hasIncomingWhereInvocationAnalyses() {
-		return getBaseRelationAnalysis().basicGetIncomingWhereInvocationAnalyses() != null;
+	public boolean hasIncomingWhereInvocations() {
+		assert baseRelationAnalysis != null;
+		if (baseRelationAnalysis != this) {
+			return baseRelationAnalysis.hasIncomingWhereInvocations();
+		}
+		return (incomingWhereInvocation2invocationAnalysis != null) && !incomingWhereInvocation2invocationAnalysis.isEmpty();
 	}
 
 	public boolean isKeyedRealization(@NonNull VariableDeclaration variableDeclaration) {
@@ -1323,9 +1300,10 @@ public class RelationAnalysis extends RuleAnalysis
 	 *	Create the nodes for when invocations
 	 */
 	protected void synthesizeOutgoingWhenInvocations(@NonNull Node traceNode) {
-		List<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses2 = outgoingWhenInvocationAnalyses;
-		if (outgoingWhenInvocationAnalyses2 != null) {
-			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingWhenInvocationAnalyses2) {
+		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingWhenInvocation2invocationAnalysis2 = outgoingWhenInvocation2invocationAnalysis;
+		if (outgoingWhenInvocation2invocationAnalysis2 != null) {
+			for (InvocationAnalysis invocationAnalysis : outgoingWhenInvocation2invocationAnalysis2.values()) {
+				assert invocationAnalysis != null;
 				invocationAnalysis.synthesizeInvocationNodes(traceNode);
 			}
 		}
@@ -1335,9 +1313,10 @@ public class RelationAnalysis extends RuleAnalysis
 	 *	Create the nodes for where invocations
 	 */
 	protected void synthesizeOutgoingWhereInvocations(@NonNull Node traceNode) {
-		List<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses2 = outgoingWhereInvocationAnalyses;
-		if (outgoingWhereInvocationAnalyses2 != null) {
-			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingWhereInvocationAnalyses2) {
+		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingWhereInvocation2invocationAnalysis2 = outgoingWhereInvocation2invocationAnalysis;
+		if (outgoingWhereInvocation2invocationAnalysis2 != null) {
+			for (InvocationAnalysis invocationAnalysis : outgoingWhereInvocation2invocationAnalysis2.values()) {
+				assert invocationAnalysis != null;
 				invocationAnalysis.synthesizeInvocationNodes(traceNode);
 			}
 		}
@@ -1384,11 +1363,8 @@ public class RelationAnalysis extends RuleAnalysis
 			for (@NonNull Relation overridingRelation : overridingRelations) {
 				RelationAnalysis overridingRelationAnalysis = scheduleManager2.getRuleAnalysis(overridingRelation);
 				RelationAnalysis overriddenRelationAnalysis = overridingRelationAnalysis.getBaseRelationAnalysis();
-				//				Relation overriddenRelation = overriddenRelationAnalysis.getRule();
-				boolean isWhere = overriddenRelationAnalysis.hasIncomingWhereInvocationAnalyses();
-				//				relation2traceGroup overriddenrelation2traceGroup = overriddenRelationAnalysis.getRule2TraceGroup();
+				boolean isWhere = overriddenRelationAnalysis.hasIncomingWhereInvocations();
 				Relation2TraceGroup overridingrelation2traceGroup = overridingRelationAnalysis.getRule2TraceGroup();
-				//				Relation2MiddleType overriddenRelation2TraceInterface = overriddenrelation2traceGroup.getRule2TraceInterface();
 				Relation2MiddleType overridingRelation2TraceInterface = overridingrelation2traceGroup.getRule2TraceInterface();
 				Relation2MiddleType overridingRelation2TraceClass = overridingrelation2traceGroup.getRule2TraceClass();
 				ClassDatum overridingClassDatum = scheduleManager2.getClassDatum(traceTypedModel, overridingRelation2TraceInterface.getMiddleClass());
@@ -1795,7 +1771,7 @@ public class RelationAnalysis extends RuleAnalysis
 >>>>>>> 5716624 bad wip success checks ***/
 		}
 		else {
-			boolean hasPredicatedTrace = (incomingWhereInvocationAnalyses != null) && !hasOverrides;
+			boolean hasPredicatedTrace = (incomingWhereInvocation2invocationAnalysis != null) && !hasOverrides;
 			traceNode = hasPredicatedTrace ? createOldNode(traceVariable) : createRealizedStepNode(traceVariable);
 			if (!getRule().isIsTopLevel()) {
 				region.getHeadNodes().clear();
@@ -1831,7 +1807,7 @@ public class RelationAnalysis extends RuleAnalysis
 			createOldNode(variableDeclaration);		// when output is created by the invoked when
 			//			createRealizedStepNode(variableDeclaration);		// when output is created by the invoker
 		}
-		else if (hasIncomingWhereInvocationAnalyses() && Iterables.contains(QVTrelationUtil.getRootVariables(getRule()), variableDeclaration)) {
+		else if (hasIncomingWhereInvocations() && Iterables.contains(QVTrelationUtil.getRootVariables(getRule()), variableDeclaration)) {
 			createOldNode(variableDeclaration);		// where 'output' is created by invoker
 		}
 		else if (getRealizedOutputVariables().contains(variableDeclaration)) {

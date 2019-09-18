@@ -146,6 +146,10 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	 * Determine the TypedModel usage of each model element.
 	 */
 	public void analyzeSourceModel() {
+		Iterable<@NonNull RuleAnalysis> ruleAnalyses = rule2ruleAnalysis.values();
+		for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
+			ruleAnalysis.analyzeOverrides();
+		}
 		for (@NonNull RuleAnalysis ruleAnalysis : rule2ruleAnalysis.values()) {
 			ruleAnalysis.analyzeInvocations();
 		}

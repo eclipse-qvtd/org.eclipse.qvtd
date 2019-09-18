@@ -82,6 +82,8 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 
 	public abstract void analyzeMappingRegion();
 
+	public void analyzeOverrides() {}
+
 	public void analyzeSourceModel() {}
 
 	public @NonNull Node createDependencyHead(@NonNull ClassDatum classDatum) {

@@ -35,7 +35,8 @@ public class Relation2InvocationClass extends AbstractRelation2MiddleType
 		//
 		// If there is an invocation interface, then it is a superclass
 		//
-		Relation2TraceGroup baseRelation2traceGroup = ((RelationAnalysis)ruleAnalysis).getRule2TraceGroup().getBaseRelation2TraceGroup();
+		RelationAnalysis relationAnalysis = (RelationAnalysis)ruleAnalysis;
+		Relation2TraceGroup baseRelation2traceGroup = relationAnalysis.getRule2TraceGroup().getBaseRelation2TraceGroup();
 		Relation2DispatchClass baseRelation2invocationInterface = baseRelation2traceGroup.basicGetRule2InvocationInterface();
 		if (baseRelation2invocationInterface != null) {
 			middleClass.getSuperClasses().add(baseRelation2invocationInterface.getMiddleClass());
@@ -47,7 +48,7 @@ public class Relation2InvocationClass extends AbstractRelation2MiddleType
 		//
 		// If there is no invocation interface for a when invoked realtion there is an invocation class result
 		//
-		if ((baseRelation2invocationInterface == null) && ((RelationAnalysis)ruleAnalysis).hasIncomingWhenInvocationAnalyses()) {
+		if ((baseRelation2invocationInterface == null) && relationAnalysis.hasIncomingWhenInvocations()) {
 			createRelation2ResultProperty(relation2traceGroup.getNameGenerator().createDispatchClassResultPropertyName());
 		}
 		//
