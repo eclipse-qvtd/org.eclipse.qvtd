@@ -127,7 +127,15 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			}
 			else  {
 				QVTruntimeUtil.errPrintln("Assuming !usage.isOutput()"); */
-				usage = intersection(usage, actualSourceUsage);
+				if (!usage.isPrimitive()) {
+					DomainUsage newUsage = intersection(usage, actualSourceUsage);		// This may help narrow a multi-TypedModel endogeneous call to one side or the other.
+					if (!newUsage.isNone()) {
+						//	if (!newUsage.equals(usage)) {
+						//		QVTruntimeUtil.errPrintln(usage + " intersection " + actualSourceUsage + " is " + newUsage + " for " + property + " in " + object);
+						//	}
+						usage = newUsage;
+					}
+				}
 			}
 		}
 		return usage;
@@ -304,13 +312,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		}
 		DomainUsage usage = element2usage.get(element);
 		if (usage == null) {
-			//			if ("s : StmcMM::StateMachine[1]".equals(element.toString())) {
-			//				element.toString();
-			//			}
 			usage = element.accept(this);
-			//			if (usage == null) {						// FIXME debugging
-			//				usage = element.accept(this);
-			//			}
 			assert usage != null : "null usage for " + element.eClass().getName() + " " + element;
 			setUsage(element, usage);
 		}
