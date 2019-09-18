@@ -75,24 +75,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
-	public class EarliestPartitionComparator implements Comparator<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>
+	public static class EarliestPartitionComparator implements Comparator<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>
 	{
-		public @NonNull List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> sort(@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses) {
-			List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> sortedPartitionAnalyses = new ArrayList<>();
-			Iterables.addAll(sortedPartitionAnalyses, partitionAnalyses);
-			Collections.sort(sortedPartitionAnalyses, this);
-			return sortedPartitionAnalyses;
-		}
+		public static final @NonNull EarliestPartitionComparator INSTANCE = new EarliestPartitionComparator();
 
 		@Override
 		public int compare(@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> o1, @NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> o2) {
 			int i1 = o1.getPartition().getFirstPass();
 			int i2 = o2.getPartition().getFirstPass();
-			return i1 - i2;
+			if (i1 != i2) {
+				return i1 - i2;
+			}
+			String n1 = o1.getName();
+			String n2 = o2.getName();
+			return ClassUtil.safeCompareTo(n1, n2);
 		}
 	}
 
@@ -532,7 +532,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> allPartitionAnalyses = CompilerUtil.gatherPartitionAnalyses(rootPartitionAnalysis, new ArrayList<>());
 		//	assert Iterables.contains(partitions, scheduleManager.wipGetPartition(QVTscheduleUtil.getOwnedLoadingRegion(rootRegion)));
 
-		List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> sortedPartitionAnalyses = new EarliestPartitionComparator().sort(allPartitionAnalyses);
+		List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> sortedPartitionAnalyses = Lists.newArrayList(allPartitionAnalyses);
+		Collections.sort(sortedPartitionAnalyses, EarliestPartitionComparator.INSTANCE);
 		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = gatherKeyCalls(sortedPartitionAnalyses);
 		createKeyFunctions(keyedClassDatum2propertyDatums);
 		for (@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis : sortedPartitionAnalyses) {

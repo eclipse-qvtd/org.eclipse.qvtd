@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -47,6 +49,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 {
+	public static class EarliestPartitionComparator implements Comparator<@NonNull Partition>
+	{
+		public static final @NonNull EarliestPartitionComparator INSTANCE = new EarliestPartitionComparator();
+
+		@Override
+		public int compare(@NonNull Partition o1, @NonNull Partition o2) {
+			int i1 = o1.getFirstPass();
+			int i2 = o2.getFirstPass();
+			if (i1 != i2) {
+				return i1 - i2;
+			}
+			String n1 = o1.getName();
+			String n2 = o2.getName();
+			return ClassUtil.safeCompareTo(n1, n2);
+		}
+	}
+
 	/**
 	 * Mapping from the type to allInstances variable.
 	 */
@@ -247,7 +266,9 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 				}
 			} */
 		List<Statement> ownedStatements = mapping.getOwnedStatements();
-		for (@NonNull Partition callablePartition : connectionManager.getCallableChildren(partition)) {
+		List<@NonNull Partition> callableChildren = new  ArrayList<>(connectionManager.getCallableChildren(partition));
+		Collections.sort(callableChildren, EarliestPartitionComparator.INSTANCE);
+		for (@NonNull Partition callablePartition : callableChildren) {
 			if (!CompilerUtil.isAbstract(callablePartition)) {
 				if (isInstall(callablePartition)) {
 					ownedStatements.add(createInstall(callablePartition));

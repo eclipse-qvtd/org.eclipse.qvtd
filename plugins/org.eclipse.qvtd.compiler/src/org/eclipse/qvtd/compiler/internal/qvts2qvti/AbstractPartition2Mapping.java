@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -148,6 +150,10 @@ public abstract class AbstractPartition2Mapping
 	protected void createAppendParameters() {
 		List<@NonNull NodeConnection> intermediateConnections = QVTscheduleUtil.getIntermediateConnections(partition);
 		if (intermediateConnections.size() > 0) {
+			if (intermediateConnections.size() > 1) {
+				intermediateConnections = new ArrayList<>(intermediateConnections);
+				Collections.sort(intermediateConnections, NameUtil.NAMEABLE_COMPARATOR);
+			}
 			connection2variable = new HashMap<>();
 			for (@NonNull NodeConnection connection : intermediateConnections) {
 				AppendParameter connectionVariable = createAppendParameter(connection);
