@@ -73,6 +73,7 @@ public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 
 	@Override
 	public void configure(@NonNull ResourceSet resourceSet) {
+		super.configure(resourceSet);
 		Resource.Factory.Registry resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
 		resourceFactoryRegistry.getExtensionToFactoryMap().put(FILE_EXTENSION, this);
 	}

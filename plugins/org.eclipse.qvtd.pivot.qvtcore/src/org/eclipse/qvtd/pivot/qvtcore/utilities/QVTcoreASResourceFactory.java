@@ -12,9 +12,12 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -23,6 +26,7 @@ import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisit
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.LUSSIDs;
@@ -30,6 +34,7 @@ import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
@@ -38,7 +43,6 @@ import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.NotXMLContentHandlerImpl;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 
@@ -82,6 +86,14 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	}
 
 	/**
+	 * The private URIConverter avoids installing the (Standalone)PlatformURIHandlerImpl in a global URIConverter.
+	 *
+	 * This functionality might be resolveable via the URIMap if the ResourceFactory had access to the caller's
+	 * ResourceSet and so the caller's URIMap.
+	 */
+	private @NonNull URIConverter uriConverter = new ExtensibleURIConverterImpl();
+
+	/**
 	 * Creates an instance of the resource factory.
 	 */
 	public QVTcoreASResourceFactory() {
@@ -90,6 +102,7 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 
 	@Override
 	public void configure(@NonNull ResourceSet resourceSet) {
+		super.configure(resourceSet);
 		Resource.Factory.Registry resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
 		resourceFactoryRegistry.getExtensionToFactoryMap().put(FILE_EXTENSION, this);
 	}
@@ -132,6 +145,47 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull PrettyPrintVisitor createPrettyPrintVisitor(@NonNull PrettyPrinter printer) {
 		return new QVTcorePrettyPrintVisitor(printer);
+	}
+
+	@Override
+	public Resource createResource(URI uri) {
+		/*		URI nonASuri = uri.trimFileExtension().appendFileExtension("qvtc");
+		String nonASuriString = nonASuri.toString();
+		assert nonASuriString != null;
+		String xxxasExtension = nonASuri.fileExtension();
+		ASResourceFactory asResourceFactory = ASResourceFactoryRegistry.INSTANCE.getASResourceFactoryForExtension(xxxasExtension);
+		//		String fileExtension = uri.fileExtension();
+		//		if (fileExtension == null) {			// Must be an Ecore Package registration
+		//			return EcoreASResourceFactory.INSTANCE.createResource(uri);
+		//		}
+		//		if (/ *(asResourceFactory == null) &&* / !"http".equals(uri.scheme())) { //|| !nonASuri.isFile()) {					// If it's not a known double extension
+		if (uri.isPlatform() || uri.isFile() || uri.isArchive()) { // not http:
+			//
+			//	If *.xxxas exists use it.
+			//
+			if (uriConverter.exists(uri, null)) {	// NB this expects a (Standalone)PlatformURIHandlerImpl to be installed
+				return super.createResource(uri);
+			}
+		}
+		//
+		//	Otherwise create a *.xxxas by converting the trimmed resource to XXX AS.
+		//
+		if (asResourceFactory == null) {			// Must be an Ecore Package registration possibly with a confusing 'extension'
+			asResourceFactory = EcoreASResourceFactory.getInstance();
+		}
+		assert !(asResourceFactory instanceof OCLASResourceFactory);
+		//		return asResourceFactory.createResource(uri);
+		 */
+		assert uri != null;
+		ASResource result = new ASResourceImpl(uri, this);
+		configureResource(result);
+		return result;
+
+
+
+
+		// TODO Auto-generated method stub
+		//		return super.createResource(uri);
 	}
 
 	@Override
