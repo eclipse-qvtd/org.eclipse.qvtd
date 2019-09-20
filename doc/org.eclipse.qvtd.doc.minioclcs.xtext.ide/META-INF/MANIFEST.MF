@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.21.0.qualifier
 Bundle-SymbolicName: org.eclipse.qvtd.doc.minioclcs.xtext.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.qvtd.doc.minioclcs.xtext;bundle-version="[0.20.0,1.0.0)",
