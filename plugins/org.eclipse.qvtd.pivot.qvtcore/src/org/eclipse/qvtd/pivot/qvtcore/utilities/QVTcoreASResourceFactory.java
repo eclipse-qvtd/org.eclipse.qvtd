@@ -16,8 +16,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -86,14 +84,6 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	}
 
 	/**
-	 * The private URIConverter avoids installing the (Standalone)PlatformURIHandlerImpl in a global URIConverter.
-	 *
-	 * This functionality might be resolveable via the URIMap if the ResourceFactory had access to the caller's
-	 * ResourceSet and so the caller's URIMap.
-	 */
-	private @NonNull URIConverter uriConverter = new ExtensibleURIConverterImpl();
-
-	/**
 	 * Creates an instance of the resource factory.
 	 */
 	public QVTcoreASResourceFactory() {
@@ -101,9 +91,9 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	}
 
 	@Override
-	public void configure(@NonNull ResourceSet resourceSet) {
-		super.configure(resourceSet);
-		Resource.Factory.Registry resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
+	public void configure(@Nullable ResourceSet asResourceSet, @NonNull ResourceSet csResourceSet) {
+		super.configure(asResourceSet, csResourceSet);
+		Resource.Factory.Registry resourceFactoryRegistry = csResourceSet.getResourceFactoryRegistry();
 		resourceFactoryRegistry.getExtensionToFactoryMap().put(FILE_EXTENSION, this);
 	}
 

@@ -84,9 +84,9 @@ public class QVTimperativeASResourceFactory extends AbstractASResourceFactory
 	}
 
 	@Override
-	public void configure(@NonNull ResourceSet resourceSet) {
-		super.configure(resourceSet);
-		Resource.Factory.Registry resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
+	public void configure(@Nullable ResourceSet asResourceSet, @NonNull ResourceSet csResourceSet) {
+		super.configure(asResourceSet, csResourceSet);
+		Resource.Factory.Registry resourceFactoryRegistry = csResourceSet.getResourceFactoryRegistry();
 		resourceFactoryRegistry.getExtensionToFactoryMap().put(FILE_EXTENSION, this);
 	}
 
