@@ -58,13 +58,8 @@ public abstract class AbstractCompilerStep implements CompilerStep
 		compilerChain.compiled(stepName, object);
 	}
 
-	protected @NonNull Resource createResource() throws IOException {
-		return compilerChain.createResource(getURI());
-	}
-
-	@Deprecated // should be using getURI() regularly
-	protected @NonNull Resource createResource(@NonNull URI uri) throws IOException {
-		return compilerChain.createResource(uri);
+	protected @NonNull Resource createResource(@NonNull String contentType) throws IOException {
+		return compilerChain.createResource(getURI(), contentType);
 	}
 
 	/*	public @NonNull CompilerProblems getCompilerProblems() {
@@ -97,13 +92,6 @@ public abstract class AbstractCompilerStep implements CompilerStep
 	protected @NonNull Resource saveResource(@NonNull Resource asResource) throws IOException {
 		compilerChain.saveResource(asResource, stepName);
 		compiled(asResource);
-		return asResource;
-	}
-
-	@Deprecated // should be using getName() regularly
-	protected @NonNull Resource saveResource(@NonNull Resource asResource, @NonNull String stepName) throws IOException {
-		compilerChain.saveResource(asResource, stepName);
-		compiled(stepName, asResource);
 		return asResource;
 	}
 

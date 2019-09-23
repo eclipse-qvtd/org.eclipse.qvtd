@@ -14,7 +14,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -48,14 +47,14 @@ import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 @SuppressWarnings("deprecation")
 public class QVTrelationASResourceFactory extends AbstractASResourceFactory
 {
-	public static final @NonNull String FILE_EXTENSION = "qvtras";
+	public static final @NonNull String AS_FILE_EXTENSION = "qvtras";
 
 	private static @Nullable QVTrelationASResourceFactory INSTANCE = null;
 
 	public static synchronized @NonNull QVTrelationASResourceFactory getInstance() {
 		if (INSTANCE == null) {
 			Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-			Object object = extensionToFactoryMap.get(FILE_EXTENSION);
+			Object object = extensionToFactoryMap.get(AS_FILE_EXTENSION);
 			if (object instanceof Resource.Factory.Descriptor) {
 				INSTANCE = (QVTrelationASResourceFactory) ((Resource.Factory.Descriptor)object).createFactory();	// Create the registered singleton
 			}
@@ -70,7 +69,7 @@ public class QVTrelationASResourceFactory extends AbstractASResourceFactory
 	}
 
 	private static final @NonNull ContentHandler AS_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
-		QVTrelationPackage.eCONTENT_TYPE, new String[]{FILE_EXTENSION},
+		QVTrelationPackage.eCONTENT_TYPE, new String[]{AS_FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, QVTrelationPackage.eNS_URI, null);
 
 	private static final @NonNull ContentHandler CS_CONTENT_HANDLER =
@@ -85,14 +84,7 @@ public class QVTrelationASResourceFactory extends AbstractASResourceFactory
 	 * Creates an instance of the resource factory.
 	 */
 	public QVTrelationASResourceFactory() {
-		super(QVTrelationPackage.eCONTENT_TYPE);
-	}
-
-	@Override
-	public void configure(@Nullable ResourceSet asResourceSet, @NonNull ResourceSet csResourceSet) {
-		super.configure(asResourceSet, csResourceSet);
-		Resource.Factory.Registry resourceFactoryRegistry = csResourceSet.getResourceFactoryRegistry();
-		resourceFactoryRegistry.getExtensionToFactoryMap().put(FILE_EXTENSION, this);
+		super(QVTrelationPackage.eCONTENT_TYPE, AS_FILE_EXTENSION, "qvtr");
 	}
 
 	@Override

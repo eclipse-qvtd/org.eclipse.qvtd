@@ -85,7 +85,7 @@ public interface CompilerChain
 	@NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull Iterable<@NonNull String>> outputNamesList) throws IOException;
 	void compiled(@NonNull String stepKey, @NonNull Object object);
 	//	@NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource resource, QVTuConfiguration.Mode mode, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException;
-	@NonNull Resource createResource(@NonNull URI uri) throws IOException;
+	@NonNull Resource createResource(@NonNull URI uri, @NonNull String contentType) throws IOException;
 	void dispose();
 	@NonNull QVTbaseEnvironmentFactory getEnvironmentFactory();
 	//	@Nullable File getTraceClassesFolder();

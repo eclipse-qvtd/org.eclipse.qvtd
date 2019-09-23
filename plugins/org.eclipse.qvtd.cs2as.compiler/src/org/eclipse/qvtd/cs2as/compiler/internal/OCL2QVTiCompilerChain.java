@@ -89,7 +89,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 					qvtmModels.add(ocl2qvtm(extendedQVTpModel));
 				}
 				QVTmModelsMerger.merge(environmentFactory , mModel, qvtmModels);
-				saveResource(mModel, QVTM_STEP);
+				saveResource(mModel);
 				for(Resource qvtmModel : qvtmModels) {	// unload unnecessary qvtmModels
 					qvtmModel.unload();
 				}

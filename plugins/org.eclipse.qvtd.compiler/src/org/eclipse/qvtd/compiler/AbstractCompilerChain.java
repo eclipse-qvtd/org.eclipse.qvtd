@@ -54,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
@@ -63,6 +64,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -143,7 +145,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			try {
 				//				QVTuConfiguration qvtuConfiguration = compilerChain.getOption(QVTU_STEP, QVTU_CONFIGURATION_KEY);
 				//				assert qvtuConfiguration != null;
-				Resource uResource = createResource();
+				Resource uResource = createResource(QVTcorePackage.eCONTENT_TYPE);
 				QVTc2QVTu tx = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
 				tx.transform(cResource, uResource);
 				return saveResource(uResource);
@@ -228,7 +230,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull ScheduleManager execute(@NonNull Resource pResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				Resource sResource = createResource();
+				Resource sResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
 				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, schedulerOptions);
@@ -261,7 +263,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 		public @NonNull ImperativeTransformation execute(@NonNull ScheduleManager scheduleManager) throws IOException {
 			// Default QVTi strategy ok.
-			Resource iResource = createResource();
+			Resource iResource = createResource(QVTimperativePackage.eCONTENT_TYPE);
 			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
 			ImperativeModel model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
 			iResource.getContents().add(model);
@@ -296,7 +298,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull Resource execute(@NonNull Resource uResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				Resource mResource = createResource();
+				Resource mResource = createResource(QVTcorePackage.eCONTENT_TYPE);
 				QVTu2QVTm tx = new QVTu2QVTm(environmentFactory);
 				tx.transform(uResource, mResource);
 				return saveResource(mResource);
@@ -500,8 +502,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	@Override
-	public @NonNull Resource createResource(@NonNull URI uri) throws IOException {
-		Resource resource = asResourceSet.createResource(uri);
+	public @NonNull Resource createResource(@NonNull URI uri, @NonNull String contentType) throws IOException {
+		Resource resource = asResourceSet.createResource(uri, contentType);
 		if (resource == null) {
 			throw new IOException("Failed to create " + uri);
 		}

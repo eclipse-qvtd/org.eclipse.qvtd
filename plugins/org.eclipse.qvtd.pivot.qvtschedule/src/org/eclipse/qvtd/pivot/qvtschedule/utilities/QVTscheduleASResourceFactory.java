@@ -14,7 +14,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -35,14 +34,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 @SuppressWarnings("deprecation")
 public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 {
-	public static final @NonNull String FILE_EXTENSION = "qvtsas";
+	public static final @NonNull String AS_FILE_EXTENSION = "qvtsas";
 
 	private static @Nullable QVTscheduleASResourceFactory INSTANCE = null;
 
 	public static synchronized @NonNull QVTscheduleASResourceFactory getInstance() {
 		if (INSTANCE == null) {
 			Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-			Object object = extensionToFactoryMap.get(FILE_EXTENSION);
+			Object object = extensionToFactoryMap.get(AS_FILE_EXTENSION);
 			if (object instanceof Resource.Factory.Descriptor) {
 				INSTANCE = (QVTscheduleASResourceFactory) ((Resource.Factory.Descriptor)object).createFactory();	// Create the registered singleton
 			}
@@ -57,7 +56,7 @@ public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 	}
 
 	private static final @NonNull ContentHandler CONTENT_HANDLER = new RootXMLContentHandlerImpl(
-		QVTschedulePackage.eCONTENT_TYPE, new String[]{FILE_EXTENSION},
+		QVTschedulePackage.eCONTENT_TYPE, new String[]{AS_FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, QVTschedulePackage.eNS_URI, null);
 
 	static {
@@ -68,14 +67,7 @@ public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 	 * Creates an instance of the resource factory.
 	 */
 	public QVTscheduleASResourceFactory() {
-		super(QVTschedulePackage.eCONTENT_TYPE);
-	}
-
-	@Override
-	public void configure(@Nullable ResourceSet asResourceSet, @NonNull ResourceSet csResourceSet) {
-		super.configure(asResourceSet, csResourceSet);
-		Resource.Factory.Registry resourceFactoryRegistry = csResourceSet.getResourceFactoryRegistry();
-		resourceFactoryRegistry.getExtensionToFactoryMap().put(FILE_EXTENSION, this);
+		super(QVTschedulePackage.eCONTENT_TYPE, AS_FILE_EXTENSION, null);
 	}
 
 	/*	@Override

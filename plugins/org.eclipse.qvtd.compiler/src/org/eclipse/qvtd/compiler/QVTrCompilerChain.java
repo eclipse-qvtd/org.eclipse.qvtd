@@ -27,6 +27,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -70,6 +71,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -116,7 +118,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull QVTuConfiguration> qvtuConfigurations) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
-			Resource qvtsResource = createResource();
+			Resource qvtsResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 			ScheduleModel scheduleModel = QVTscheduleFactory.eINSTANCE.createScheduleModel();
 			qvtsResource.getContents().add(scheduleModel);
 			CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
@@ -433,7 +435,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNamesList) throws IOException {
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
 		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
-		Resource traceResource = createResource(traceURI);
+		Resource traceResource = createResource(traceURI, EcorePackage.eCONTENT_TYPE);
 		List<@NonNull QVTuConfiguration> qvtuConfigurations = new ArrayList<>();
 		for (@NonNull Iterable<@NonNull String> enforcedOutputNames : enforcedOutputNamesList) {
 			qvtuConfigurations.add(createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNames));

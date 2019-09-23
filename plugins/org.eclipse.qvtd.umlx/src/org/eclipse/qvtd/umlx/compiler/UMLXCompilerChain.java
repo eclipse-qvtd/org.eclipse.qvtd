@@ -22,6 +22,7 @@ import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
 
@@ -45,7 +46,7 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 				if (umlxResource == null) {
 					throw new CompilerChainException("Failed to load " + umlxURI);
 				}
-				Resource qvtrResource = createResource();
+				Resource qvtrResource = createResource(QVTrelationPackage.eCONTENT_TYPE);
 				UMLX2QVTr umlx2qvtr = new UMLX2QVTr(environmentFactory, umlxResource, qvtrResource);
 				umlx2qvtr.transform();
 				saveResource(qvtrResource);
