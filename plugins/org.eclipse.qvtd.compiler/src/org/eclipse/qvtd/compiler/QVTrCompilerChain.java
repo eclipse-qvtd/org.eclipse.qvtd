@@ -27,7 +27,6 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -41,6 +40,7 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
@@ -435,7 +435,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNamesList) throws IOException {
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
 		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
-		Resource traceResource = createResource(traceURI, EcorePackage.eCONTENT_TYPE);
+		Resource traceResource = createResource(traceURI, PivotPackage.eCONTENT_TYPE);
 		List<@NonNull QVTuConfiguration> qvtuConfigurations = new ArrayList<>();
 		for (@NonNull Iterable<@NonNull String> enforcedOutputNames : enforcedOutputNamesList) {
 			qvtuConfigurations.add(createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNames));
