@@ -30,7 +30,7 @@
       <!-- @generated QVTschedule -->
       <content-type
             base-type="org.eclipse.emf.ecore.xmi"
-            file-extensions="qvtschedule"
+            file-extensions="qvtsas"
             id="org.eclipse.qvtd.qvtschedule"
             name="%_UI_QVTschedule_content_type"
             priority="normal">
