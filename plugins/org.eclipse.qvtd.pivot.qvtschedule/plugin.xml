@@ -19,10 +19,11 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTschedule -->
-      <parser
-            contentTypeIdentifier="org.eclipse.qvtd.qvtschedule"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+      <!-- @generated QVTschedule NOT -->
+      <!--parser contentTypeIdentifier="org.eclipse.qvtd.qvtschedule"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
+      <parser contentTypeIdentifier="org.eclipse.qvtd.qvtschedule"
+            class="org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleASResourceFactory"/>
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">
