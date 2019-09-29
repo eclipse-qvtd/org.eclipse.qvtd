@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -23,9 +24,8 @@ import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisit
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
-import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
-import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
+import org.eclipse.ocl.pivot.internal.resource.ResourceSetAwareASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.LUSSIDs;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
@@ -41,37 +41,28 @@ import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 
 /**
  * QVTcoreASResourceFactory supports creation of a QVTcore AS resource and associated artefacts.
  */
 @SuppressWarnings("deprecation")
-public class QVTcoreASResourceFactory extends AbstractASResourceFactory
+public class QVTcoreASResourceFactory extends ResourceSetAwareASResourceFactory
 {
-	public static final @NonNull String AS_FILE_EXTENSION = "qvtcas";
-
-	private static @Nullable QVTcoreASResourceFactory INSTANCE = null;
+	private static @Nullable QVTcoreASResourceFactory CONTENT_TYPE_INSTANCE = null;
 
 	public static synchronized @NonNull QVTcoreASResourceFactory getInstance() {
-		if (INSTANCE == null) {
-			Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-			Object object = extensionToFactoryMap.get(AS_FILE_EXTENSION);
-			if (object instanceof Resource.Factory.Descriptor) {
-				INSTANCE = (QVTcoreASResourceFactory) ((Resource.Factory.Descriptor)object).createFactory();	// Create the registered singleton
-			}
-			else {
-				INSTANCE = new QVTcoreASResourceFactory();														// Create our own singleton
-			}
-			assert INSTANCE != null;
-			INSTANCE.install("qvtc",  null);
+		QVTcoreASResourceFactory contentTypeInstance = CONTENT_TYPE_INSTANCE;
+		if (contentTypeInstance == null) {
+			CONTENT_TYPE_INSTANCE = contentTypeInstance = getInstances(QVTcorePackage.eCONTENT_TYPE, QVTcoreUtil.QVTCAS_FILE_EXTENSION, QVTbaseUtil.QVTC_FILE_EXTENSION,
+				QVTcoreASResourceFactory.class);
 		}
-		assert INSTANCE != null;
-		return INSTANCE;
+		return contentTypeInstance;
 	}
 
 	private static final @NonNull ContentHandler AS_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
-		QVTcorePackage.eCONTENT_TYPE, new String[]{AS_FILE_EXTENSION},
+		QVTcorePackage.eCONTENT_TYPE, new String[]{QVTcoreUtil.QVTCAS_FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, QVTcorePackage.eNS_URI, null);
 
 	private static final @NonNull ContentHandler CS_CONTENT_HANDLER =
@@ -83,10 +74,30 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	}
 
 	/**
-	 * Creates an instance of the resource factory.
+	 * The ResourceSetAware variant of the ASResourceFactory provides the local extension registration that
+	 * creates the required resource unless an existing AS or CS resource is available to be opened
+	 * re-using the parsing infrastructure for an earlier resource in the CSResourceSet.
 	 */
+	public static class ResourceSetAware extends QVTcoreASResourceFactory
+	{
+		public ResourceSetAware(@NonNull ResourceSet csResourceSet) {
+			super(csResourceSet);
+		}
+
+		@Override
+		public Resource createResource(URI uri) {
+			assert resourceSet != null;
+			assert uri != null;
+			return createResource(resourceSet, uri);
+		}
+	}
+
 	public QVTcoreASResourceFactory() {
-		super(QVTcorePackage.eCONTENT_TYPE, AS_FILE_EXTENSION, "qvtc");
+		this(null);
+	}
+
+	protected QVTcoreASResourceFactory(@Nullable ResourceSet csResourceSet) {
+		super(QVTcorePackage.eCONTENT_TYPE, QVTcoreUtil.QVTCAS_FILE_EXTENSION, csResourceSet);
 	}
 
 	@Override
@@ -130,44 +141,8 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	}
 
 	@Override
-	public Resource createResource(URI uri) {
-		/*		URI nonASuri = uri.trimFileExtension().appendFileExtension("qvtc");
-		String nonASuriString = nonASuri.toString();
-		assert nonASuriString != null;
-		String xxxasExtension = nonASuri.fileExtension();
-		ASResourceFactory asResourceFactory = ASResourceFactoryRegistry.INSTANCE.getASResourceFactoryForExtension(xxxasExtension);
-		//		String fileExtension = uri.fileExtension();
-		//		if (fileExtension == null) {			// Must be an Ecore Package registration
-		//			return EcoreASResourceFactory.INSTANCE.createResource(uri);
-		//		}
-		//		if (/ *(asResourceFactory == null) &&* / !"http".equals(uri.scheme())) { //|| !nonASuri.isFile()) {					// If it's not a known double extension
-		if (uri.isPlatform() || uri.isFile() || uri.isArchive()) { // not http:
-			//
-			//	If *.xxxas exists use it.
-			//
-			if (uriConverter.exists(uri, null)) {	// NB this expects a (Standalone)PlatformURIHandlerImpl to be installed
-				return super.createResource(uri);
-			}
-		}
-		//
-		//	Otherwise create a *.xxxas by converting the trimmed resource to XXX AS.
-		//
-		if (asResourceFactory == null) {			// Must be an Ecore Package registration possibly with a confusing 'extension'
-			asResourceFactory = EcoreASResourceFactory.getInstance();
-		}
-		assert !(asResourceFactory instanceof OCLASResourceFactory);
-		//		return asResourceFactory.createResource(uri);
-		 */
-		assert uri != null;
-		ASResource result = new ASResourceImpl(uri, this);
-		configureResource(result);
-		return result;
-
-
-
-
-		// TODO Auto-generated method stub
-		//		return super.createResource(uri);
+	protected @Nullable ASResourceFactory createResourceSetAwareASResourceFactory(@NonNull ResourceSet resourceSet) {
+		return new ResourceSetAware(resourceSet);
 	}
 
 	@Override
@@ -184,5 +159,10 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ASResourceFactory getASResourceFactory() {
 		return getInstance();
+	}
+
+	@Override
+	protected @NonNull URI getCSuri(@NonNull URI uri) {
+		return uri.trimFileExtension().appendFileExtension(QVTcoreUtil.QVTC_FILE_EXTENSION);
 	}
 }

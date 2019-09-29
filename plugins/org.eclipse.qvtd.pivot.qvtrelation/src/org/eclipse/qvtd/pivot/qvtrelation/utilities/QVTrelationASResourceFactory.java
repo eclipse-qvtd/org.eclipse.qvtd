@@ -12,8 +12,10 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -23,7 +25,7 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
-import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
+import org.eclipse.ocl.pivot.internal.resource.ResourceSetAwareASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.LUSSIDs;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
@@ -45,31 +47,21 @@ import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
  * QVTrelationASResourceFactory supports creation of a QVTrelation AS resource and associated artefacts.
  */
 @SuppressWarnings("deprecation")
-public class QVTrelationASResourceFactory extends AbstractASResourceFactory
+public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFactory
 {
-	public static final @NonNull String AS_FILE_EXTENSION = "qvtras";
-
-	private static @Nullable QVTrelationASResourceFactory INSTANCE = null;
+	private static @Nullable QVTrelationASResourceFactory CONTENT_TYPE_INSTANCE = null;
 
 	public static synchronized @NonNull QVTrelationASResourceFactory getInstance() {
-		if (INSTANCE == null) {
-			Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-			Object object = extensionToFactoryMap.get(AS_FILE_EXTENSION);
-			if (object instanceof Resource.Factory.Descriptor) {
-				INSTANCE = (QVTrelationASResourceFactory) ((Resource.Factory.Descriptor)object).createFactory();	// Create the registered singleton
-			}
-			else {
-				INSTANCE = new QVTrelationASResourceFactory();														// Create our own singleton
-			}
-			assert INSTANCE != null;
-			INSTANCE.install("qvtr", null);
+		QVTrelationASResourceFactory contentTypeInstance = CONTENT_TYPE_INSTANCE;
+		if (contentTypeInstance == null) {
+			CONTENT_TYPE_INSTANCE = contentTypeInstance = getInstances(QVTrelationPackage.eCONTENT_TYPE, QVTrelationUtil.QVTRAS_FILE_EXTENSION, QVTrelationUtil.QVTR_FILE_EXTENSION,
+				QVTrelationASResourceFactory.class);
 		}
-		assert INSTANCE != null;
-		return INSTANCE;
+		return contentTypeInstance;
 	}
 
 	private static final @NonNull ContentHandler AS_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
-		QVTrelationPackage.eCONTENT_TYPE, new String[]{AS_FILE_EXTENSION},
+		QVTrelationPackage.eCONTENT_TYPE, new String[]{QVTrelationUtil.QVTRAS_FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, QVTrelationPackage.eNS_URI, null);
 
 	private static final @NonNull ContentHandler CS_CONTENT_HANDLER =
@@ -81,11 +73,32 @@ public class QVTrelationASResourceFactory extends AbstractASResourceFactory
 	}
 
 	/**
-	 * Creates an instance of the resource factory.
+	 * The ResourceSetAware variant of the ASResourceFactory provides the local extension registration that
+	 * creates the required resource unless an existing AS or CS resource is available to be opened
+	 * re-using the parsing infrastructure for an earlier resource in the CSResourceSet.
 	 */
-	public QVTrelationASResourceFactory() {
-		super(QVTrelationPackage.eCONTENT_TYPE, AS_FILE_EXTENSION, "qvtr");
+	public static class ResourceSetAware extends QVTrelationASResourceFactory
+	{
+		public ResourceSetAware(@NonNull ResourceSet csResourceSet) {
+			super(csResourceSet);
+		}
+
+		@Override
+		public Resource createResource(URI uri) {
+			assert resourceSet != null;
+			assert uri != null;
+			return createResource(resourceSet, uri);
+		}
 	}
+
+	public QVTrelationASResourceFactory() {
+		this(null);
+	}
+
+	protected QVTrelationASResourceFactory(@Nullable ResourceSet csResourceSet) {
+		super(QVTrelationPackage.eCONTENT_TYPE, QVTrelationUtil.QVTRAS_FILE_EXTENSION, csResourceSet);
+	}
+
 
 	@Override
 	public @NonNull AS2MonikerVisitor createAS2MonikerVisitor( @NonNull AS2Moniker as2moniker) {
@@ -128,6 +141,11 @@ public class QVTrelationASResourceFactory extends AbstractASResourceFactory
 	}
 
 	@Override
+	protected @Nullable ASResourceFactory createResourceSetAwareASResourceFactory(@NonNull ResourceSet resourceSet) {
+		return new ResourceSetAware(resourceSet);
+	}
+
+	@Override
 	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
 			@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 		return new QVTrelationTemplateParameterSubstitutionVisitor((EnvironmentFactoryInternal) environmentFactory, selfType, selfTypeValue);
@@ -141,5 +159,10 @@ public class QVTrelationASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ASResourceFactory getASResourceFactory() {
 		return getInstance();
+	}
+
+	@Override
+	protected @NonNull URI getCSuri(@NonNull URI uri) {
+		return uri.trimFileExtension().appendFileExtension(QVTrelationUtil.QVTR_FILE_EXTENSION);
 	}
 }

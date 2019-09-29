@@ -10,10 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.resource.ContentHandler;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -26,6 +23,7 @@ import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 
 /**
@@ -34,29 +32,19 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 @SuppressWarnings("deprecation")
 public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 {
-	public static final @NonNull String AS_FILE_EXTENSION = "qvtsas";
-
-	private static @Nullable QVTscheduleASResourceFactory INSTANCE = null;
+	private static @Nullable QVTscheduleASResourceFactory CONTENT_TYPE_INSTANCE = null;
 
 	public static synchronized @NonNull QVTscheduleASResourceFactory getInstance() {
-		if (INSTANCE == null) {
-			Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-			Object object = extensionToFactoryMap.get(AS_FILE_EXTENSION);
-			if (object instanceof Resource.Factory.Descriptor) {
-				INSTANCE = (QVTscheduleASResourceFactory) ((Resource.Factory.Descriptor)object).createFactory();	// Create the registered singleton
-			}
-			else {
-				INSTANCE = new QVTscheduleASResourceFactory();														// Create our own singleton
-			}
-			assert INSTANCE != null;
-			INSTANCE.install(null, null);
+		QVTscheduleASResourceFactory contentTypeInstance = CONTENT_TYPE_INSTANCE;
+		if (contentTypeInstance == null) {
+			CONTENT_TYPE_INSTANCE = contentTypeInstance = getInstances(QVTschedulePackage.eCONTENT_TYPE, QVTbaseUtil.QVTSAS_FILE_EXTENSION, null,
+				QVTscheduleASResourceFactory.class);
 		}
-		assert INSTANCE != null;
-		return INSTANCE;
+		return contentTypeInstance;
 	}
 
 	private static final @NonNull ContentHandler CONTENT_HANDLER = new RootXMLContentHandlerImpl(
-		QVTschedulePackage.eCONTENT_TYPE, new String[]{AS_FILE_EXTENSION},
+		QVTschedulePackage.eCONTENT_TYPE, new String[]{QVTbaseUtil.QVTSAS_FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, QVTschedulePackage.eNS_URI, null);
 
 	static {
@@ -67,7 +55,7 @@ public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 	 * Creates an instance of the resource factory.
 	 */
 	public QVTscheduleASResourceFactory() {
-		super(QVTschedulePackage.eCONTENT_TYPE, AS_FILE_EXTENSION, null);
+		super(QVTschedulePackage.eCONTENT_TYPE, QVTbaseUtil.QVTSAS_FILE_EXTENSION);
 	}
 
 	/*	@Override
