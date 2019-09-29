@@ -10,6 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.tests;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
@@ -65,5 +70,21 @@ public class QVTcLoadTests extends LoadTestCase
 
 	public void testQVTcLoad_Class2RDBMS_qvtc() throws Exception {
 		doLoad_Concrete(getModelsURI("Class2RDBMS/Class2RDBMS.qvtc"), NO_MESSAGES);
+	}
+
+	/*
+	 * Check that e.g. the Sample Ecore Model Editor can open the transitove qvtcas reference.
+	 */
+	public void testQVTcLoad_HSV2HSL_qvtias() throws Exception {
+		XtextCompilerUtil.doQVTimperativeSetup();
+		// hsv2hsl/HSV2HSL.qvtias is copied from the testQVTcCompiler_HSVToHSL_CG results
+		ResourceSet resourceSet = new ResourceSetImpl();
+		getTestProjectManager().initializeResourceSet(resourceSet);
+		URI uri = getModelsURI("hsv2hsl/HSV2HSL.qvtias");
+		Resource resource = resourceSet.getResource(uri, true);
+		assert resource != null;
+		assertNoResourceErrors("Load", resource);
+		EcoreUtil.resolveAll(resource);
+		assertNoUnresolvedProxies("Resolve", resource);;
 	}
 }
