@@ -76,6 +76,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
@@ -146,7 +147,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 		public @NonNull Resource doLoad_ConcreteWithOCL(@NonNull URI inputURI) throws Exception {
 			URI cstURI = testProject.getOutputFile(ClassUtil.nonNullState(inputURI.appendFileExtension("xmi").lastSegment())).getURI();//TestUtil.getFileURI(getClass(), cstName);
-			URI pivotURI = testProject.getOutputFile(ClassUtil.nonNullState(inputURI.appendFileExtension("qvtias").lastSegment())).getURI();//TestUtil.getFileURI(getClass(), pivotName);
+			URI pivotURI = testProject.getOutputFile(ClassUtil.nonNullState(inputURI.appendFileExtension(QVTimperativeUtil.QVTIAS_FILE_EXTENSION).lastSegment())).getURI();//TestUtil.getFileURI(getClass(), pivotName);
 			BaseCSResource xtextResource = (BaseCSResource) getResourceSet().getResource(inputURI, true);
 			assert xtextResource != null;
 			assertNoResourceErrors("Load failed", xtextResource);

@@ -66,6 +66,11 @@ public class QVTbaseUtil extends PivotUtil
 	public static final @NonNull String QVTR_FILE_EXTENSION = "qvtr";
 	public static final @NonNull String UMLX_FILE_EXTENSION = "umlx";
 
+	public static final @NonNull String QVTCAS_FILE_EXTENSION = "qvtcas";
+	public static final @NonNull String QVTIAS_FILE_EXTENSION = "qvtias";
+	public static final @NonNull String QVTRAS_FILE_EXTENSION = "qvtras";
+	public static final @NonNull String QVTSAS_FILE_EXTENSION = "qvtsas";
+
 	// Smallest first Collection size sort
 	public static final class CollectionSizeComparator implements Comparator<@NonNull Collection<?>>
 	{

@@ -36,6 +36,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
@@ -128,7 +129,7 @@ public class ATLExampleTests extends LoadTestCase
 			atlXmiResource.save(XMIUtil.createSaveOptions());
 			contents.addAll(atlXmiResource.getContents());
 			String name = atlURI.trimFileExtension().lastSegment();
-			URI outputURI = getTestURIWithExtension(atlURI.trimSegments(1).appendSegment(name + "_CG.qvtras"), "qvtras");
+			URI outputURI = getTestURIWithExtension(atlURI.trimSegments(1).appendSegment(name + "_CG.qvtras"), QVTrelationUtil.QVTRAS_FILE_EXTENSION);
 			try {
 				myQVT.executeTransformation();
 				myQVT.addOutputURI("qvtr", outputURI);

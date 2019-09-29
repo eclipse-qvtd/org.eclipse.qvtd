@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -57,7 +58,7 @@ public class QVTrSerializeTests extends LoadTestCase
 	}
 
 	protected void doSerializeRoundTripFromCS(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
-		URI pivotURI = getTestURIWithExtension(inputURI, "qvtras");
+		URI pivotURI = getTestURIWithExtension(inputURI, QVTrelationUtil.QVTRAS_FILE_EXTENSION);
 		URI referenceURI = getTestURIWithExtension(inputURI, "ref.qvtras");
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvtr");
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");
@@ -77,7 +78,7 @@ public class QVTrSerializeTests extends LoadTestCase
 
 	// FIXME workaround for Bug 510503
 	protected void doSerializeRoundTripFromCS_usingOCL1(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
-		URI pivotURI = getTestURIWithExtension(inputURI, "qvtras");
+		URI pivotURI = getTestURIWithExtension(inputURI, QVTrelationUtil.QVTRAS_FILE_EXTENSION);
 		URI referenceURI = getTestURIWithExtension(inputURI, "ref.qvtras");
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvtr");
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");
@@ -97,7 +98,7 @@ public class QVTrSerializeTests extends LoadTestCase
 
 	// FIXME workaround for Bug 510503
 	protected void doSerializeRoundTripFromCS_usingOCL2(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
-		URI pivotURI = getTestURIWithExtension(inputURI, "qvtras");
+		URI pivotURI = getTestURIWithExtension(inputURI, QVTrelationUtil.QVTRAS_FILE_EXTENSION);
 		URI referenceURI = getTestURIWithExtension(inputURI, "ref.qvtras");
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvtr");
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");

@@ -76,15 +76,15 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 {
 	private static final @NonNull Map<@NonNull String, @NonNull String> step2fileExtension = new HashMap<>();
 	static {
-		step2fileExtension.put(UMLX_STEP, "umlx");
-		step2fileExtension.put(QVTR_STEP, "qvtras");
+		step2fileExtension.put(UMLX_STEP, QVTbaseUtil.UMLX_FILE_EXTENSION);
+		step2fileExtension.put(QVTR_STEP, QVTbaseUtil.QVTRAS_FILE_EXTENSION);
 		step2fileExtension.put(TRACE_STEP, "trace.ecore");
 		step2fileExtension.put(GENMODEL_STEP, "genmodel");
-		step2fileExtension.put(QVTC_STEP, "qvtcas");
+		step2fileExtension.put(QVTC_STEP, QVTbaseUtil.QVTCAS_FILE_EXTENSION);
 		step2fileExtension.put(QVTU_STEP, "qvtu.qvtcas");
 		step2fileExtension.put(QVTM_STEP, "qvtm.qvtcas");
 		step2fileExtension.put(QVTS_STEP, "qvtsas");
-		step2fileExtension.put(QVTI_STEP, "qvtias");
+		step2fileExtension.put(QVTI_STEP, QVTbaseUtil.QVTIAS_FILE_EXTENSION);
 		step2fileExtension.put(JAVA_STEP, "java");
 		step2fileExtension.put(CLASS_STEP, "class");
 	}
@@ -143,8 +143,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull Resource execute(@NonNull Resource cResource, @NonNull QVTuConfiguration qvtuConfiguration) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				//				QVTuConfiguration qvtuConfiguration = compilerChain.getOption(QVTU_STEP, QVTU_CONFIGURATION_KEY);
-				//				assert qvtuConfiguration != null;
 				Resource uResource = createResource(QVTcorePackage.eCONTENT_TYPE);
 				QVTc2QVTu tx = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
 				tx.transform(cResource, uResource);

@@ -51,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 public class QVTmModelsMerger {
 
@@ -205,7 +206,7 @@ public class QVTmModelsMerger {
 
 	private static boolean assertCorrectQVTmModelFileExtenion(URI qvtmModelURI ) {
 
-		assert qvtmModelURI.fileExtension().equals("qvtcas");
+		assert qvtmModelURI.fileExtension().equals(QVTcoreUtil.QVTCAS_FILE_EXTENSION);
 		assert qvtmModelURI.trimFileExtension().fileExtension().equals("qvtm");
 		return true;
 	}

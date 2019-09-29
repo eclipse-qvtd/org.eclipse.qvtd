@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.debug.launching.QVTrLaunchConstants;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
 
@@ -54,7 +55,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		URI stem = txFile.getURI().trimFileExtension();
 		URI stemStem = stem.trimSegments(1);
 		Map<String,String> intermediateKeys = new HashMap<>();
-		intermediateKeys.put(CompilerChain.QVTI_STEP, stem.appendFileExtension("qvtias").toString());
+		intermediateKeys.put(CompilerChain.QVTI_STEP, stem.appendFileExtension(QVTimperativeUtil.QVTIAS_FILE_EXTENSION).toString());
 		if (!interpreted) {
 			intermediateKeys.put(CompilerChain.GENMODEL_STEP, stem.appendFileExtension("genmodel").toString());
 			intermediateKeys.put(CompilerChain.JAVA_STEP, stemStem.appendSegment("test-src").toString());

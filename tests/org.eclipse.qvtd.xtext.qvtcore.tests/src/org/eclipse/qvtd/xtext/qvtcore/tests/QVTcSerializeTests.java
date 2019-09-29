@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -62,7 +63,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		doSerializeRoundTripFromCS(inputURI, getURIWithExtension(inputURI, "ref.qvtcas"));
 	}
 	protected void doSerializeRoundTripFromCS(@NonNull URI inputURI, @NonNull URI referenceURI) throws Exception {
-		URI pivotURI = getTestURIWithExtension(inputURI, "qvtcas");
+		URI pivotURI = getTestURIWithExtension(inputURI, QVTcoreUtil.QVTCAS_FILE_EXTENSION);
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvtc");
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtcas");
 		ProjectManager projectManager = getTestProjectManager();
