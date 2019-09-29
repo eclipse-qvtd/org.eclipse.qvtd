@@ -73,11 +73,12 @@ public class QVTcLoadTests extends LoadTestCase
 	}
 
 	/*
-	 * Check that e.g. the Sample Ecore Model Editor can open the transitove qvtcas reference.
+	 * Check that e.g. the Sample Ecore Model Editor can open the transitive qvtcas reference.
 	 */
 	public void testQVTcLoad_HSV2HSL_qvtias() throws Exception {
 		XtextCompilerUtil.doQVTimperativeSetup();
-		// hsv2hsl/HSV2HSL.qvtias is copied from the testQVTcCompiler_HSVToHSL_CG results
+		// hsv2hsl/HSV2HSL.qvtias is copied from the testQVTcCompiler_HSVToHSL_CG results with ../xxpaths stripped
+		// hsv2hsl/HSV2HSL.qvtm.qvtcas is copied from the testQVTcCompiler_HSVToHSL_CG results
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getTestProjectManager().initializeResourceSet(resourceSet);
 		URI uri = getModelsURI("hsv2hsl/HSV2HSL.qvtias");
@@ -86,5 +87,24 @@ public class QVTcLoadTests extends LoadTestCase
 		assertNoResourceErrors("Load", resource);
 		EcoreUtil.resolveAll(resource);
 		assertNoUnresolvedProxies("Resolve", resource);;
+		assertNoValidationErrors("Validate", resource);;
+	}
+
+	/*
+	 * Check that e.g. the Sample Ecore Model Editor can open a qvtsas reference.
+	 */
+	public void testQVTcLoad_HSV2HSL_qvtsas() throws Exception {
+		XtextCompilerUtil.doQVTimperativeSetup();
+		XtextCompilerUtil.doQVTscheduleSetup();
+		// hsv2hsl/HSV2HSL.qvtsas is copied from the testQVTcCompiler_HSVToHSL_CG results with ../xxpaths stripped
+		ResourceSet resourceSet = new ResourceSetImpl();
+		getTestProjectManager().initializeResourceSet(resourceSet);
+		URI uri = getModelsURI("hsv2hsl/HSV2HSL.qvtsas");
+		Resource resource = resourceSet.getResource(uri, true);
+		assert resource != null;
+		assertNoResourceErrors("Load", resource);
+		EcoreUtil.resolveAll(resource);
+		assertNoUnresolvedProxies("Resolve", resource);;
+		assertNoValidationErrors("Validate", resource);;
 	}
 }

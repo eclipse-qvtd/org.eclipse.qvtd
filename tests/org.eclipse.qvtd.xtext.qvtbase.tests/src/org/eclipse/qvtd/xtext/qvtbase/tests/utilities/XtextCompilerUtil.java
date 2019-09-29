@@ -160,6 +160,17 @@ public class XtextCompilerUtil extends CompilerUtil
 		}
 	}
 
+	/**
+	 * Perform the appropriate initialization to support QVTrelation parsing and editing using Xtext.
+	 * NB. This must be called before setUp() creates a GlobalStateMemento if the aggressive DEBUG_GC
+	 * garbage collection is enabled.
+	 */
+	public static void doQVTscheduleSetup() {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			QVTschedulePivotStandaloneSetup.doSetup();
+		}
+	}
+
 	private static XtextResource doSerialize(@NonNull ProjectManager projectManager, @NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//

@@ -11,12 +11,25 @@
 package	org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractQVTscheduleASSaverResolveVisitor;
 
 public class QVTscheduleASSaverResolveVisitor extends AbstractQVTscheduleASSaverResolveVisitor
 {
 	public QVTscheduleASSaverResolveVisitor(@NonNull ASSaver context) {
 		super(context);
+	}
+
+	@Override
+	public @Nullable Object visitClassDatum(@NonNull ClassDatum object) {
+		org.eclipse.ocl.pivot.Class referredClass = ClassUtil.nonNullState(object.getReferredClass());
+		org.eclipse.ocl.pivot.Class resolvedClass = context.resolveType(referredClass);
+		if (resolvedClass != referredClass) {
+			object.setReferredClass(resolvedClass);
+		}
+		return null;
 	}
 }
