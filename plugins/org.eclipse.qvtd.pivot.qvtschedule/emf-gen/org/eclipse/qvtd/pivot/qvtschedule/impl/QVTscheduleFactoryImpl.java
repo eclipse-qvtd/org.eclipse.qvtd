@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.*;
 
 /**
@@ -863,10 +864,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public Number createNumberFromString(EDataType eDataType, String initialValue) {
-		return (Number)super.createFromString(eDataType, initialValue);
+	public Number createNumberFromString(EDataType eDataType, String aValue) {
+		try {
+			assert aValue != null;
+			return StringUtil.createNumberFromString(aValue);
+		}
+		catch (NumberFormatException e) {
+			//			return throwInvalidValueException(e, EvaluatorMessages.InvalidInteger, aValue);
+		}
+		return (Number)super.createFromString(eDataType, aValue);
 	}
 
 	/**
