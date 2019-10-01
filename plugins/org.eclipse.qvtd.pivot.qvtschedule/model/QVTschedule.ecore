@@ -79,8 +79,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ClassDatum identifies a Class-typed object produced by one or more regions and consumed by one or more usually other regions. The object is passed by reference, possibly within a Connection."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="completeClasses" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CompleteClass"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="completeClasses" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CompleteClass"
         transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPropertyDatums" upperBound="-1"
         eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/owningClassDatum"/>
@@ -115,8 +115,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A CollectionClassDatum identifies a Collection of Class-typed objects produced by one or more regions and consumed by one or more usually other regions. The collection is passed by reference, possibly within a Connection."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elementalClassDatum" lowerBound="1"
-        eType="#//ClassDatum" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementalClassDatum" eType="#//ClassDatum"
+        transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -332,10 +332,8 @@
         eType="#//CompositePartition" eOpposite="#//CompositePartition/ownedMappingPartitions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referedMappingRegion" eType="#//MappingRegion"
         eOpposite="#//MappingRegion/mappingPartitions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
-        eType="#//Region" changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rootPartition" lowerBound="1"
-        eType="#//RootPartition" changeable="false" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="region" eType="#//Region"
+        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="explicitSuccessors" ordered="false"
         upperBound="-1" eType="#//BasicPartition" eOpposite="#//BasicPartition/explicitPredecessors"/>
   </eClassifiers>
@@ -381,8 +379,8 @@
         <details key="documentation" value="True if this edge is a partial many-to-one relationship."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"
+        transient="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The property to navigate from source to target."/>
       </eAnnotations>
@@ -552,8 +550,8 @@
         <details key="documentation" value="The parent ClassDatum for which this PropertyDatum defines a slot."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"
+        transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superPropertyDatums" upperBound="-1"
         eType="#//PropertyDatum"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -671,8 +669,8 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Symbolable" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -703,8 +701,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnknownNode" eSuperTypes="#//MappingNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="VariableNode" abstract="true" eSuperTypes="#//MappingNode">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredVariable" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredVariable" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VerdictRegion" eSuperTypes="#//RuleRegion">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
