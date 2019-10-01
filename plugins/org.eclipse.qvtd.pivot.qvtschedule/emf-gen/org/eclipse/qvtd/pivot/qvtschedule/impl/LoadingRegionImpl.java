@@ -145,9 +145,9 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 		if (newLoadingPartition != loadingPartition) {
 			NotificationChain msgs = null;
 			if (loadingPartition != null)
-				msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, LoadingPartition.class, msgs);
+				msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, LoadingPartition.class, msgs);
 			if (newLoadingPartition != null)
-				msgs = ((InternalEObject)newLoadingPartition).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, LoadingPartition.class, msgs);
+				msgs = ((InternalEObject)newLoadingPartition).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, LoadingPartition.class, msgs);
 			msgs = basicSetLoadingPartition(newLoadingPartition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -208,7 +208,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (loadingPartition != null)
-					msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, LoadingPartition.class, msgs);
+					msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, LoadingPartition.class, msgs);
 				return basicSetLoadingPartition((LoadingPartition)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				if (eInternalContainer() != null)

@@ -44,7 +44,7 @@ public interface Symbolable extends EObject {
 	 * @return the value of the '<em>Symbol Name</em>' attribute.
 	 * @see #setSymbolName(String)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getSymbolable_SymbolName()
-	 * @model required="true"
+	 * @model transient="true"
 	 * @generated
 	 */
 	String getSymbolName();

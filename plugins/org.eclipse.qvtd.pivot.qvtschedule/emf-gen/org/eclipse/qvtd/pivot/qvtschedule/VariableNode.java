@@ -47,7 +47,7 @@ public interface VariableNode extends MappingNode {
 	 * @return the value of the '<em>Referred Variable</em>' reference.
 	 * @see #setReferredVariable(VariableDeclaration)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getVariableNode_ReferredVariable()
-	 * @model required="true"
+	 * @model transient="true"
 	 * @generated
 	 */
 	VariableDeclaration getReferredVariable();

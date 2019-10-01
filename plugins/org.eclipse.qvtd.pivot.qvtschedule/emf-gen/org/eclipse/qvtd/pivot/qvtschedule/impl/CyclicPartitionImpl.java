@@ -37,7 +37,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -51,7 +50,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl#getOwningCompositePartition <em>Owning Composite Partition</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl#getReferedMappingRegion <em>Refered Mapping Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl#getRegion <em>Region</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl#getRootPartition <em>Root Partition</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl#getExplicitSuccessors <em>Explicit Successors</em>}</li>
  * </ul>
  *
@@ -65,7 +63,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CYCLIC_PARTITION_FEATURE_COUNT = CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 5;
+	public static final int CYCLIC_PARTITION_FEATURE_COUNT = CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4;
 	/**
 	 * The number of operations of the '<em>Cyclic Partition</em>' class.
 	 * <!-- begin-user-doc -->
@@ -83,16 +81,6 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	 * @ordered
 	 */
 	protected MappingRegion referedMappingRegion;
-	/**
-	 * The cached value of the '{@link #getRootPartition() <em>Root Partition</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRootPartition()
-	 * @generated
-	 * @ordered
-	 */
-	protected RootPartition rootPartition;
-
 	/**
 	 * The cached value of the '{@link #getExplicitSuccessors() <em>Explicit Successors</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -244,36 +232,9 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	 * @generated
 	 */
 	@Override
-	public RootPartition getRootPartition() {
-		if (rootPartition != null && rootPartition.eIsProxy()) {
-			InternalEObject oldRootPartition = (InternalEObject)rootPartition;
-			rootPartition = (RootPartition)eResolveProxy(oldRootPartition);
-			if (rootPartition != oldRootPartition) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, oldRootPartition, rootPartition));
-			}
-		}
-		return rootPartition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RootPartition basicGetRootPartition() {
-		return rootPartition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public List<BasicPartition> getExplicitSuccessors() {
 		if (explicitSuccessors == null) {
-			explicitSuccessors = new EObjectWithInverseResolvingEList.ManyInverse<BasicPartition>(BasicPartition.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12);
+			explicitSuccessors = new EObjectWithInverseResolvingEList.ManyInverse<BasicPartition>(BasicPartition.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 11);
 		}
 		return explicitSuccessors;
 	}
@@ -295,7 +256,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				if (referedMappingRegion != null)
 					msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, MappingRegion.class, msgs);
 				return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitSuccessors()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -313,7 +274,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				return basicSetOwningCompositePartition(null, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return basicSetReferedMappingRegion(null, msgs);
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return ((InternalEList<?>)getExplicitSuccessors()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -350,9 +311,6 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				if (resolve) return getRegion();
 				return basicGetRegion();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
-				if (resolve) return getRootPartition();
-				return basicGetRootPartition();
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return getExplicitSuccessors();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -373,7 +331,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferedMappingRegion((MappingRegion)newValue);
 				return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				getExplicitSuccessors().clear();
 				getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
 				return;
@@ -395,7 +353,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferedMappingRegion((MappingRegion)null);
 				return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				getExplicitSuccessors().clear();
 				return;
 		}
@@ -417,8 +375,6 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return basicGetRegion() != null;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
-				return rootPartition != null;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return explicitSuccessors != null && !explicitSuccessors.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -437,7 +393,6 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4;
 				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5;
 				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6;
-				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7;
 				default: return -1;
 			}
 		}
@@ -457,7 +412,6 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5;
 				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6;
 				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7;
-				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8;
 				default: return -1;
 			}
 		}

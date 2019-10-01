@@ -28,7 +28,6 @@ import java.util.List;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getOwningCompositePartition <em>Owning Composite Partition</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getReferedMappingRegion <em>Refered Mapping Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRegion <em>Region</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRootPartition <em>Root Partition</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getExplicitSuccessors <em>Explicit Successors</em>}</li>
  * </ul>
  *
@@ -104,26 +103,11 @@ public interface MappingPartition extends Partition {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Region</em>' reference.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingPartition_Region()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	@Override
 	Region getRegion();
-
-	/**
-	 * Returns the value of the '<em><b>Root Partition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Root Partition</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Root Partition</em>' reference.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingPartition_RootPartition()
-	 * @model required="true" transient="true" changeable="false" derived="true"
-	 * @generated
-	 */
-	RootPartition getRootPartition();
 
 	/**
 	 * Returns the value of the '<em><b>Explicit Successors</b></em>' reference list.

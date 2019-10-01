@@ -104,7 +104,7 @@ public interface NavigationEdge extends NavigableEdge {
 	 * @return the value of the '<em>Referred Property</em>' reference.
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge_ReferredProperty()
-	 * @model required="true"
+	 * @model transient="true"
 	 * @generated
 	 */
 	Property getReferredProperty();

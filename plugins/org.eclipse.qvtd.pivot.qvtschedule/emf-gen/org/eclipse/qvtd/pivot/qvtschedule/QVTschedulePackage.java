@@ -1427,17 +1427,6 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getMappingPartition_Region();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRootPartition <em>Root Partition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Root Partition</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRootPartition()
-	 * @see #getMappingPartition()
-	 * @generated
-	 */
-	EReference getMappingPartition_RootPartition();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getExplicitSuccessors <em>Explicit Successors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3441,14 +3430,6 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_PARTITION__REGION = eINSTANCE.getMappingPartition_Region();
-
-		/**
-		 * The meta object literal for the '<em><b>Root Partition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_PARTITION__ROOT_PARTITION = eINSTANCE.getMappingPartition_RootPartition();
 
 		/**
 		 * The meta object literal for the '<em><b>Explicit Successors</b></em>' reference list feature.

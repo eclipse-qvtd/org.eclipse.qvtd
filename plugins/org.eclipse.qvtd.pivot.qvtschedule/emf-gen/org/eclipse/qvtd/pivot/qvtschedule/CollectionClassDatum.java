@@ -47,7 +47,7 @@ public interface CollectionClassDatum extends ClassDatum {
 	 * @return the value of the '<em>Elemental Class Datum</em>' reference.
 	 * @see #setElementalClassDatum(ClassDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCollectionClassDatum_ElementalClassDatum()
-	 * @model required="true" transient="true" derived="true"
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
 	ClassDatum getElementalClassDatum();

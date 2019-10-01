@@ -108,7 +108,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @return the value of the '<em>Referred Property</em>' reference.
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_ReferredProperty()
-	 * @model required="true"
+	 * @model transient="true"
 	 * @generated
 	 */
 	Property getReferredProperty();

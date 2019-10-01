@@ -1163,7 +1163,6 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _MappingPartition__owningCompositePartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION, Types._MappingPartition, 1);
 		public static final @NonNull ExecutorProperty _MappingPartition__referedMappingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__REFERED_MAPPING_REGION, Types._MappingPartition, 2);
 		public static final @NonNull ExecutorProperty _MappingPartition__region = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__REGION, Types._MappingPartition, 3);
-		public static final @NonNull ExecutorProperty _MappingPartition__rootPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__ROOT_PARTITION, Types._MappingPartition, 4);
 
 		public static final @NonNull ExecutorProperty _MappingRegion__headNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES, Types._MappingRegion, 0);
 		public static final @NonNull ExecutorProperty _MappingRegion__mappingPartitions = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_REGION__MAPPING_PARTITIONS, Types._MappingRegion, 1);
@@ -1258,7 +1257,6 @@ public class QVTscheduleTables
 
 		public static final @NonNull ExecutorProperty _RootPartition__loadingPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_PARTITION__LOADING_PARTITION, Types._RootPartition, 0);
 		public static final @NonNull ExecutorProperty _RootPartition__owningRootRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_PARTITION__OWNING_ROOT_REGION, Types._RootPartition, 1);
-		public static final @NonNull ExecutorProperty _RootPartition__MappingPartition__rootPartition = new ExecutorPropertyWithImplementation("MappingPartition", Types._RootPartition, 2, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__ROOT_PARTITION));
 
 		public static final @NonNull ExecutorProperty _RootRegion__activeRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_REGION__ACTIVE_REGIONS, Types._RootRegion, 0);
 		public static final @NonNull ExecutorProperty _RootRegion__ownedConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_CONNECTIONS, Types._RootRegion, 1);
@@ -5709,7 +5707,6 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
 			QVTscheduleTables.Properties._MappingPartition__region,
 			QVTscheduleTables.Properties._Partition__rootConnections,
-			QVTscheduleTables.Properties._MappingPartition__rootPartition,
 			QVTscheduleTables.Properties._BasicPartition__speculatedEdges,
 			QVTscheduleTables.Properties._BasicPartition__speculatedNodes,
 			QVTscheduleTables.Properties._BasicPartition__speculationNodes
@@ -5857,8 +5854,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Partition__passes,
 			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
 			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections,
-			QVTscheduleTables.Properties._MappingPartition__rootPartition
+			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _DependencyEdge = {
@@ -6042,8 +6038,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
 			QVTscheduleTables.Properties._LoadingPartition__referredLoadingRegion,
 			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections,
-			QVTscheduleTables.Properties._MappingPartition__rootPartition
+			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LoadingRegion = {
@@ -6112,8 +6107,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Partition__passes,
 			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
 			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections,
-			QVTscheduleTables.Properties._MappingPartition__rootPartition
+			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MappingRegion = {
@@ -6149,7 +6143,6 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
 			QVTscheduleTables.Properties._MappingPartition__region,
 			QVTscheduleTables.Properties._Partition__rootConnections,
-			QVTscheduleTables.Properties._MappingPartition__rootPartition,
 			QVTscheduleTables.Properties._BasicPartition__speculatedEdges,
 			QVTscheduleTables.Properties._BasicPartition__speculatedNodes,
 			QVTscheduleTables.Properties._BasicPartition__speculationNodes
@@ -6214,8 +6207,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Partition__passes,
 			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
 			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections,
-			QVTscheduleTables.Properties._MappingPartition__rootPartition
+			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NullLiteralNode = {

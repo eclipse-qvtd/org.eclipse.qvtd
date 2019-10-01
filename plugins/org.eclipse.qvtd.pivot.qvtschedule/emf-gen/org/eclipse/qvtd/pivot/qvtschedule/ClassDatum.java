@@ -55,7 +55,7 @@ public interface ClassDatum extends AbstractDatum {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Complete Classes</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_CompleteClasses()
-	 * @model required="true" transient="true" derived="true"
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
 	List<CompleteClass> getCompleteClasses();

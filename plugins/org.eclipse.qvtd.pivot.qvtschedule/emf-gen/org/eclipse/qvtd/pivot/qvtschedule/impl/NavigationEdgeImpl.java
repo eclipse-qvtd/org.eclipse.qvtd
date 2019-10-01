@@ -291,12 +291,12 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				if (resolve) return getOppositeEdge();
-			return basicGetOppositeEdge();
+				return basicGetOppositeEdge();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return isPartial();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getReferredProperty();
-			return basicGetReferredProperty();
+				return basicGetReferredProperty();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				return isSecondary();
 		}
@@ -313,16 +313,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOppositeEdge((NavigationEdge)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setPartial((Boolean)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredProperty((Property)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setSecondary((Boolean)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -337,16 +337,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOppositeEdge((NavigationEdge)null);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setPartial(PARTIAL_EDEFAULT);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredProperty((Property)null);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setSecondary(SECONDARY_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
