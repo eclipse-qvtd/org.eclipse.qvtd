@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
@@ -58,6 +59,7 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -420,8 +422,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		ImperativeTransformation asTransformation = compilerChain.compile(outputNamesList);
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
-			URI serializedURI = asURI.trimFileExtension().appendFileExtension("serialized.qvti");
-			doSerialize(asURI, serializedURI);
+			URI asURIstem = asURI.trimFileExtension();
+			doSerialize(asURI, asURIstem.appendFileExtension("serialized.qvti"));
 		}
 		return compilerChain.generate(asTransformation, genModelFiles);
 	}
@@ -433,10 +435,23 @@ public abstract class AbstractTestQVT extends QVTimperative
 		URI txASURI = transformation.eResource().getURI();
 		if (txASURI != null) {
 			URI inputURI = txASURI;
-			URI serializedURI = txASURI.trimFileExtension().appendFileExtension("serialized.qvti");
+			URI asURIstem = txASURI.trimFileExtension();
+			URI serializedURI = asURIstem.appendFileExtension("serialized.qvti");
 			doSerialize(inputURI, serializedURI);
+			doScheduleLoadCheck(asURIstem.appendFileExtension(QVTbaseUtil.QVTSAS_FILE_EXTENSION));
 		}
 		return transformation;
+	}
+
+	private void doScheduleLoadCheck(@NonNull URI uri) throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		getTestProjectManager().initializeResourceSet(resourceSet);
+		Resource resource = resourceSet.getResource(uri, true);
+		assert resource != null;
+		PivotTestCase.assertNoResourceErrors("Load", resource);
+		EcoreUtil.resolveAll(resource);
+		PivotTestCase.assertNoUnresolvedProxies("Resolve", resource);;
+		PivotTestCase.assertNoValidationErrors("Validate", resource);;
 	}
 
 	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
