@@ -78,17 +78,17 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		for (TransformationCS csTransformation : ele.getOwnedTransformations()) {
 			createNode(parentNode, csTransformation);
 		}
-		for (QueryCS csQuery : ele.getOwnedQueries()) {
-			createNode(parentNode, csQuery);
-		}
-		for (MappingCS csMapping : ele.getOwnedMappings()) {
-			createNode(parentNode, csMapping);
-		}
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, TransformationCS ele) {
 		for (DirectionCS csDirection : ele.getOwnedDirections()) {
 			createNode(parentNode, csDirection);
+		}
+		for (QueryCS csQuery : ele.getOwnedQueries()) {
+			createNode(parentNode, csQuery);
+		}
+		for (MappingCS csMapping : ele.getOwnedMappings()) {
+			createNode(parentNode, csMapping);
 		}
 	}
 

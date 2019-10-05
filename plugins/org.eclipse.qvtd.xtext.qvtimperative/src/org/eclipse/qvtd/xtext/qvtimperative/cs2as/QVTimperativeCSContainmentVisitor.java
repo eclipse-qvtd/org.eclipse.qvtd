@@ -10,11 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -42,8 +38,6 @@ import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
@@ -165,65 +159,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	public QVTimperativeCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
-	}
-
-	protected void resolveTransformationMappings(@NonNull Iterable<? extends @NonNull MappingCS> csMappings) {
-		Map<@NonNull Transformation, List<@NonNull Mapping>> tx2mappings = new HashMap<@NonNull Transformation, List<@NonNull Mapping>>();
-		for (@NonNull MappingCS csMapping : csMappings) {
-			PathNameCS csInPathName = csMapping.getOwnedInPathName();
-			if (csInPathName != null) {
-				Transformation asTransformation = lookupTransformation(csMapping, csInPathName, null);
-				if (asTransformation != null) {
-					Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
-					if (asMapping != null) {
-						List<@NonNull Mapping> asMappings = tx2mappings.get(asTransformation);
-						if (asMappings == null) {
-							asMappings = new ArrayList<@NonNull Mapping>();
-							tx2mappings.put(asTransformation, asMappings);
-						}
-						asMappings.add(asMapping);
-					}
-				}
-			}
-		}
-		for (@NonNull Transformation asTransformation : tx2mappings.keySet()) {
-			List<@NonNull Mapping> asMappings = tx2mappings.get(asTransformation);
-			List<Rule> asRules = asTransformation.getRule();
-			if (asMappings != null) {
-				PivotUtilInternal.refreshList(asRules, asMappings);
-			}
-			else {
-				asRules.clear();
-			}
-		}
-	}
-
-	protected void resolveTransformationQueries(@NonNull Iterable<@NonNull QueryCS> csQueries) {
-		Map<@NonNull Transformation, List<@NonNull Function>> tx2qMap = new HashMap<@NonNull Transformation, List<@NonNull Function>>();
-		for (@NonNull QueryCS csQuery : csQueries) {
-			Transformation asTransformation = csQuery.getTransformation();
-			if (asTransformation != null) {
-				Function asQuery = PivotUtil.getPivot(Function.class,  csQuery);
-				if (asQuery != null) {
-					List<@NonNull Function> asQueries = tx2qMap.get(asTransformation);
-					if (asQueries == null) {
-						asQueries = new ArrayList<@NonNull Function>();
-						tx2qMap.put(asTransformation, asQueries);
-					}
-					asQueries.add(asQuery);
-				}
-			}
-		}
-		for (Transformation asTransformation : tx2qMap.keySet()) {
-			List<@NonNull Function> asQueries = tx2qMap.get(asTransformation);
-			List<Operation> asOperations = asTransformation.getOwnedOperations();
-			if (asQueries != null) {
-				PivotUtilInternal.refreshList(asOperations, asQueries);
-			}
-			else {
-				asOperations.clear();
-			}
-		}
 	}
 
 	@Override
@@ -371,10 +306,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
-		PathNameCS pathName = csElement.getOwnedPathName();
-		if (pathName != null) {
-			CS2AS.setElementType(pathName, QVTbasePackage.Literals.TRANSFORMATION, csElement, null);
-		}
 		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
 		//		pivotElement.setIsStatic(true);
 		pivotElement.setIsTransient(csElement.isIsTransient());
@@ -427,12 +358,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			context.installRootElement((BaseCSResource)eResource, asModel);		// Ensure containment viable for imported library type references
 			//			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
-		//
-		resolveTransformationMappings(ClassUtil.nullFree(csElement.getOwnedMappings()));
-		resolveTransformationQueries(ClassUtil.nullFree(csElement.getOwnedQueries()));
-		//		context.addMappings(ClassUtil.nullFree(csElement.getOwnedMappings()));
-		//		context.addQueries(ClassUtil.nullFree(csElement.getOwnedQueries()));
-		//		context.installTransformationStructure();
 		return null;
 	}
 
@@ -447,6 +372,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		refreshClassifier(asTransformation, csElement);
 		context.refreshPivotList(ImperativeTypedModel.class, asTransformation.getModelParameter(), csElement.getOwnedDirections());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
+		context.refreshPivotList(Mapping.class, asTransformation.getRule(), csElement.getOwnedMappings());
+		context.refreshPivotList(Operation.class, asTransformation.getOwnedOperations(), csElement.getOwnedQueries());
 		return null;
 	}
 

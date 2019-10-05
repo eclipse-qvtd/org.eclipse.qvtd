@@ -30,7 +30,6 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -130,6 +129,8 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
+
+import com.google.common.collect.Iterables;
 
 public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor implements QVTimperativeVisitor<ElementCS>
 {
@@ -259,17 +260,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		}
 	}
 
-	protected void gatherTransformations(@NonNull List<@NonNull ImperativeTransformation> asTransformations, @NonNull List<Package> ownedPackages) {
-		for (org.eclipse.ocl.pivot.Package asPackage : ownedPackages) {
-			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
-				if (asClass instanceof ImperativeTransformation) {
-					asTransformations.add((ImperativeTransformation) asClass);
-				}
-			}
-			gatherTransformations(asTransformations, asPackage.getOwnedPackages());
-		}
-	}
-
 	/**
 	 * Return true if a QualifiedPackageCS is needed to avoid information loss when serializing asPackage.
 	 */
@@ -325,27 +315,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 			context.refreshPathName(csPathName, asProperty, PivotUtil.getContainingNamespace(asStatement));
 		}
 		context.refreshList(csPathNames, pathNames);
-	}
-
-	protected void refreshOwnedInTransformation(@NonNull MappingCS csMapping, @NonNull Mapping asMapping) {
-		Transformation asTransformation = asMapping.getTransformation();
-		if (asTransformation != null) {
-			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-			csMapping.setOwnedInPathName(csPathName);
-			org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
-			String asPackageName = asPackage != null ? asPackage.getName() : null;
-			if ((asPackageName == null) || "".equals(asPackageName)) {
-				PathElementCS csPathElement = BaseCSFactory.eINSTANCE.createPathElementCS();
-				csPathName.getOwnedPathElements().add(csPathElement);
-				csPathElement.setReferredElement(asTransformation);
-			}
-			else {
-				context.refreshPathName(csPathName, asTransformation, null);
-			}
-		}
-		else {
-			csMapping.setOwnedInPathName(null);
-		}
 	}
 
 	protected void refreshReferredMapping(@NonNull MappingCallCS csMappingCall, @NonNull MappingCall asMappingCall) {
@@ -437,7 +406,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitEntryPoint(@NonNull EntryPoint asEntryPoint) {
 		EntryPointCS csEntryPoint = context.refreshNamedElement(EntryPointCS.class, QVTimperativeCSPackage.Literals.ENTRY_POINT_CS, asEntryPoint);
 		csEntryPoint.setPivot(asEntryPoint);
-		refreshOwnedInTransformation(csEntryPoint, asEntryPoint);
 		context.refreshList(csEntryPoint.getOwnedParameters(), context.visitDeclarations(MappingParameterCS.class, asEntryPoint.getOwnedMappingParameters(), null));
 		context.refreshList(csEntryPoint.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asEntryPoint.getOwnedStatements(), null));
 		context.refreshList(csEntryPoint.getCheckedTypedModels(), asEntryPoint.getCheckedTypedModels());
@@ -451,7 +419,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitFunction(@NonNull Function asFunction) {
 		QueryCS csQuery = refreshTypedElement(QueryCS.class, QVTimperativeCSPackage.Literals.QUERY_CS, asFunction);
-		csQuery.setOwnedPathName(createPathNameCS(asFunction.getOwningClass()));
 		context.refreshList(csQuery.getOwnedParameters(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
 		csQuery.setOwnedExpression(createExpCS(asFunction.getQueryExpression()));
 		csQuery.setIsTransient(asFunction.isIsTransient());
@@ -466,7 +433,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitGuardParameter(@NonNull GuardParameter asGuardParameter) {
-		//	Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asGuardParameter);
 		GuardParameterCS csGuardParameter = context.refreshNamedElement(GuardParameterCS.class, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS, asGuardParameter);
 		csGuardParameter.setPivot(asGuardParameter);
 		csGuardParameter.setReferredTypedModel(asGuardParameter.getReferredTypedModel());
@@ -493,40 +459,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getOwnedImports(), null));
 
 		buildModel(csDocument, asModel);
-
-		List<@NonNull Mapping> asMappings = null;
-		List<@NonNull Function> asQueries = null;
-		List<@NonNull ImperativeTransformation> asTransformations = new ArrayList<>();
-		gatherTransformations(asTransformations, asModel.getOwnedPackages());
-		for (@NonNull ImperativeTransformation asTransformation : asTransformations) {
-			for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
-				if (asMappings == null) {
-					asMappings = new ArrayList<>();
-				}
-				asMappings.add(asMapping);
-			}
-			for (Operation asOperation : asTransformation.getOwnedOperations()) {
-				if (asOperation instanceof Function) {
-					if (asQueries == null) {
-						asQueries = new ArrayList<>();
-					}
-					asQueries.add((Function) asOperation);
-				}
-			}
-		}
-		//		context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
-		if (asMappings != null) {
-			context.refreshList(csDocument.getOwnedMappings(), context.visitDeclarations(MappingCS.class, asMappings, null));
-		}
-		else {
-			csDocument.getOwnedMappings().clear();
-		}
-		if (asQueries != null) {
-			context.refreshList(csDocument.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asQueries, null));
-		}
-		else {
-			csDocument.getOwnedQueries().clear();
-		}
 		return csDocument;
 	}
 
@@ -540,6 +472,28 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 			contextType = createTypeRefCS(contentType, null); //getScope(asVariable)));
 		}
 		csTransformation.setOwnedContextType(contextType);
+		Iterable<@NonNull Mapping> asMappings = QVTimperativeUtil.getOwnedMappings(asTransformation);
+		if (Iterables.size(asMappings) > 0) {
+			context.refreshList(csTransformation.getOwnedMappings(), context.visitDeclarations(MappingCS.class, asMappings, null));
+		}
+		else {
+			csTransformation.getOwnedMappings().clear();
+		}
+		List<@NonNull Function> asQueries = null;
+		for (Operation asOperation : asTransformation.getOwnedOperations()) {
+			if (asOperation instanceof Function) {
+				if (asQueries == null) {
+					asQueries = new ArrayList<>();
+				}
+				asQueries.add((Function) asOperation);
+			}
+		}
+		if (asQueries != null) {
+			context.refreshList(csTransformation.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asQueries, null));
+		}
+		else {
+			csTransformation.getOwnedQueries().clear();
+		}
 		return csTransformation;
 	}
 
@@ -627,7 +581,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);
-		refreshOwnedInTransformation(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedParameters(), context.visitDeclarations(MappingParameterCS.class, asMapping.getOwnedMappingParameters(), null));
 		context.refreshList(csMapping.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asMapping.getOwnedStatements(), null));
 		csMapping.setFirstPass(asMapping.getFirstPass());
