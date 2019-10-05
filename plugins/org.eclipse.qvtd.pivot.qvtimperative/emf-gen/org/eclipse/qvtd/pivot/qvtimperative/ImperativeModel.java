@@ -10,7 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameAdapter;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,4 +29,7 @@ import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
  * @generated
  */
 public interface ImperativeModel extends BaseModel {
+
+	@NonNull SymbolNameAdapter getSymbolNameAdapter();						// FIXME promote to Model/ModelImpl
+	@NonNull String reserveSymbolName(@NonNull SymbolNameBuilder s, @NonNull Object object);
 } // ImperativeModel

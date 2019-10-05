@@ -49,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
 /**
@@ -208,7 +209,16 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		Collections.sort(sortedImportedNamespaces, NameUtil.NAMEABLE_COMPARATOR);
 		List<Import> ownedImports = model.getOwnedImports();
 		for (@NonNull Namespace importedNamespace : sortedImportedNamespaces) {
-			ownedImports.add(createImport(/*null*/ "mm_" +importedNamespace.getName() + "MM" , importedNamespace));	// FIXME BUG 530025 bad aliases
+			SymbolNameBuilder s = new SymbolNameBuilder();
+			s.appendString("mm_");
+			//			for (@NonNull String partialName : partialNames) {
+			//				s.appendString("_");
+			//				s.appendName(partialName);
+			//			}
+			s.appendName(importedNamespace.getName());
+			s.appendName("MM");
+			String name = model.reserveSymbolName(s, importedNamespace);
+			ownedImports.add(createImport(name, importedNamespace));	// FIXME BUG 530025 bad aliases
 		}
 	}
 

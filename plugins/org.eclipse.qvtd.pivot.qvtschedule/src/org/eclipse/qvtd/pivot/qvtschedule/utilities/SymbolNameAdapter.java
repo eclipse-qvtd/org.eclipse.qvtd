@@ -14,32 +14,32 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 
 /**
  * A SymbolNameAdapter ensures unique CG-friendly symbol names.
  */
 public class SymbolNameAdapter extends SymbolNameReservation implements Adapter	// FIXME change to Visitor to absorb code
 {
-	public static @NonNull SymbolNameAdapter get(@NonNull ScheduleModel scheduleModel) {
-		SymbolNameAdapter adapter = ClassUtil.getAdapter(SymbolNameAdapter.class, scheduleModel);
+	public static @NonNull SymbolNameAdapter get(@NonNull Model model) {
+		SymbolNameAdapter adapter = ClassUtil.getAdapter(SymbolNameAdapter.class, model);
 		if (adapter == null) {
-			adapter = new SymbolNameAdapter(scheduleModel);
+			adapter = new SymbolNameAdapter(model);
 		}
 		return adapter;
 	}
 
-	protected final @NonNull ScheduleModel scheduleModel;
+	protected final @NonNull Model model;
 
-	public SymbolNameAdapter(@NonNull ScheduleModel scheduleModel) {
-		scheduleModel.eAdapters().add(this);
-		this.scheduleModel = scheduleModel;
+	public SymbolNameAdapter(@NonNull Model model) {
+		model.eAdapters().add(this);
+		this.model = model;
 	}
 
 	@Override
 	public Notifier getTarget() {
-		return scheduleModel;
+		return model;
 	}
 
 	@Override

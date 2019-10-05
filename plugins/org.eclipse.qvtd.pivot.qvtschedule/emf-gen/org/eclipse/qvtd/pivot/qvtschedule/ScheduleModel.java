@@ -89,6 +89,7 @@ public interface ScheduleModel extends Model
 	 * @generated
 	 */
 	List<MappingRegion> getOwnedMappingRegions();
-	@NonNull SymbolNameAdapter getSymbolNameAdapter();
+
+	@NonNull SymbolNameAdapter getSymbolNameAdapter();					// FIXME promote to Model/ModelImpl
 	@NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object object);
 }

@@ -12,11 +12,14 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.BaseModelImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameAdapter;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 /**
  * <!-- begin-user-doc -->
@@ -76,5 +79,24 @@ public class ImperativeModelImpl extends BaseModelImpl implements ImperativeMode
 		else {
 			return super.accept(visitor);
 		}
+	}
+
+	/**
+	 * Map reserving a unique symbol name per region or connection.
+	 */
+	private @Nullable SymbolNameAdapter symbolNameAdapter = null;	// FIXME promote to Model/ModelImpl
+
+	@Override
+	public @NonNull SymbolNameAdapter getSymbolNameAdapter() {
+		SymbolNameAdapter symbolNameAdapter2 = symbolNameAdapter;
+		if (symbolNameAdapter2 == null) {
+			symbolNameAdapter = symbolNameAdapter2 = SymbolNameAdapter.get(this);
+		}
+		return symbolNameAdapter2;
+	}
+
+	@Override
+	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object object) {
+		return getSymbolNameAdapter().reserveSymbolName(symbolNameBuilder, object);
 	}
 } //ImperativeModelImpl
