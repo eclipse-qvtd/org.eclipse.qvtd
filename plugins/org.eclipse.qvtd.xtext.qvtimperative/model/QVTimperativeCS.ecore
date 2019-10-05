@@ -78,8 +78,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="MappingCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStrict" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameters" upperBound="-1"
         eType="#//MappingParameterCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"
@@ -142,10 +140,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParamDeclarationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="QueryCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS ../../org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.ecore#//JavaImplementationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Transformation"
-        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameters" upperBound="-1"
         eType="#//ParamDeclarationCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
@@ -181,10 +175,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatementCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//RootPackageCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappings" upperBound="-1"
-        eType="#//MappingCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedQueries" upperBound="-1"
-        eType="#//QueryCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTransformations" upperBound="-1"
         eType="#//TransformationCS" containment="true"/>
   </eClassifiers>
@@ -193,6 +183,10 @@
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDirections" upperBound="-1"
         eType="#//DirectionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappings" upperBound="-1"
+        eType="#//MappingCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedQueries" upperBound="-1"
+        eType="#//QueryCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedContextType" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedRefCS"
         containment="true"/>
   </eClassifiers>
