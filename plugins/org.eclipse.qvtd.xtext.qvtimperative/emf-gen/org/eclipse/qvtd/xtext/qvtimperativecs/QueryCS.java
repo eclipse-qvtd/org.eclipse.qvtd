@@ -16,12 +16,10 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 
 /**
@@ -33,8 +31,6 @@ import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getOwnedPathName <em>Owned Path Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#isIsTransient <em>Is Transient</em>}</li>
@@ -45,47 +41,6 @@ import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
  * @generated
  */
 public interface QueryCS extends TypedElementCS, JavaImplementationCS {
-	/**
-	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Path Name</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Path Name</em>' containment reference.
-	 * @see #setOwnedPathName(PathNameCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getQueryCS_OwnedPathName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	PathNameCS getOwnedPathName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getOwnedPathName <em>Owned Path Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Path Name</em>' containment reference.
-	 * @see #getOwnedPathName()
-	 * @generated
-	 */
-	void setOwnedPathName(PathNameCS value);
-
-	/**
-	 * Returns the value of the '<em><b>Transformation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Transformation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transformation</em>' reference.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getQueryCS_Transformation()
-	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	Transformation getTransformation();
-
 	/**
 	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS}.

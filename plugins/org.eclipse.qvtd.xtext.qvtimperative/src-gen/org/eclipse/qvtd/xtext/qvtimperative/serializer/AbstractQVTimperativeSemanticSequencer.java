@@ -684,7 +684,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         name=UnrestrictedName
 	 *         (checkedTypedModels+=[TypedModel|UnrestrictedName] checkedTypedModels+=[TypedModel|UnrestrictedName]*)?
 	 *         (enforcedTypedModels+=[TypedModel|UnrestrictedName] enforcedTypedModels+=[TypedModel|UnrestrictedName]*)?
-	 *         ownedInPathName=PathNameCS?
 	 *         ownedParameters+=MappingParameterCS*
 	 *         ownedStatements+=GuardStatementCS*
 	 *         ownedStatements+=CommitStatementCS*
@@ -761,7 +760,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         isStrict?='strict'?
 	 *         (firstPass=LOWER lastPass=LOWER?)?
 	 *         name=UnrestrictedName
-	 *         ownedInPathName=PathNameCS?
 	 *         ownedParameters+=MappingParameterCS*
 	 *         ownedStatements+=GuardStatementCS*
 	 *         ownedStatements+=CommitStatementCS*
@@ -882,7 +880,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 * Constraint:
 	 *     (
 	 *         isTransient?='transient'?
-	 *         ownedPathName=ScopeNameCS
 	 *         name=UnrestrictedName
 	 *         (ownedParameters+=ParamDeclarationCS ownedParameters+=ParamDeclarationCS*)?
 	 *         ownedType=TypeExpCS
@@ -969,19 +966,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     TopLevelCS returns TopLevelCS
 	 *
 	 * Constraint:
-	 *     (
-	 *         ownedImports+=ImportCS+ |
-	 *         (
-	 *             ownedImports+=ImportCS+
-	 *             (
-	 *                 ownedPackages+=QualifiedPackageCS |
-	 *                 ownedTransformations+=TransformationCS |
-	 *                 ownedMappings+=EntryPointCS |
-	 *                 ownedMappings+=MappingCS |
-	 *                 ownedQueries+=QueryCS
-	 *             )+
-	 *         )
-	 *     )?
+	 *     (ownedImports+=ImportCS+ | (ownedImports+=ImportCS+ (ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS)+))?
 	 */
 	protected void sequence_TopLevelCS(ISerializationContext context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -993,7 +978,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     TransformationCS returns TransformationCS
 	 *
 	 * Constraint:
-	 *     (ownedPathName=ScopeNameCS? name=UnreservedName ownedContextType=TypeExpCS? ownedDirections+=DirectionCS*)
+	 *     (
+	 *         ownedPathName=ScopeNameCS?
+	 *         name=UnreservedName
+	 *         ownedContextType=TypeExpCS?
+	 *         ownedDirections+=DirectionCS*
+	 *         (ownedMappings+=EntryPointCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
+	 *     )
 	 */
 	protected void sequence_TransformationCS(ISerializationContext context, TransformationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

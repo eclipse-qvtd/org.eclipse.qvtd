@@ -698,7 +698,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedInPathName() {
+	public EReference getMappingCS_OwnedParameters() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -708,7 +708,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedParameters() {
+	public EReference getMappingCS_OwnedStatements() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -718,18 +718,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedStatements() {
-		return (EReference)mappingCSEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getMappingCS_FirstPass() {
-		return (EAttribute)mappingCSEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)mappingCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -739,7 +729,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 */
 	@Override
 	public EAttribute getMappingCS_LastPass() {
-		return (EAttribute)mappingCSEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)mappingCSEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -908,7 +898,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getQueryCS_OwnedPathName() {
+	public EReference getQueryCS_OwnedParameters() {
 		return (EReference)queryCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -918,7 +908,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getQueryCS_Transformation() {
+	public EReference getQueryCS_OwnedExpression() {
 		return (EReference)queryCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -928,28 +918,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getQueryCS_OwnedParameters() {
-		return (EReference)queryCSEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getQueryCS_OwnedExpression() {
-		return (EReference)queryCSEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getQueryCS_IsTransient() {
-		return (EAttribute)queryCSEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)queryCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1158,28 +1128,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_OwnedMappings() {
-		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTopLevelCS_OwnedQueries() {
-		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getTopLevelCS_OwnedTransformations() {
-		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1218,8 +1168,28 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformationCS_OwnedContextType() {
+	public EReference getTransformationCS_OwnedMappings() {
 		return (EReference)transformationCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTransformationCS_OwnedQueries() {
+		return (EReference)transformationCSEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTransformationCS_OwnedContextType() {
+		return (EReference)transformationCSEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1280,8 +1250,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(directionCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
 
 		entryPointCSEClass = createEClass(7);
+		createEReference(entryPointCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5);
 		createEReference(entryPointCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6);
-		createEReference(entryPointCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7);
 
 		guardParameterBindingCSEClass = createEClass(8);
 		createEReference(guardParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1);
@@ -1301,9 +1271,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
 		createEReference(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 		createEReference(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
-		createEReference(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3);
+		createEAttribute(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3);
 		createEAttribute(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4);
-		createEAttribute(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5);
 
 		mappingCallCSEClass = createEClass(12);
 		createEAttribute(mappingCallCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
@@ -1337,9 +1306,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		queryCSEClass = createEClass(20);
 		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1);
 		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2);
-		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3);
-		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4);
-		createEAttribute(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5);
+		createEAttribute(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3);
 
 		setStatementCSEClass = createEClass(21);
 		createEReference(setStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
@@ -1360,13 +1327,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		topLevelCSEClass = createEClass(25);
 		createEReference(topLevelCSEClass, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0);
-		createEReference(topLevelCSEClass, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 1);
-		createEReference(topLevelCSEClass, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 2);
 
 		transformationCSEClass = createEClass(26);
 		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0);
 		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1);
 		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2);
+		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 3);
+		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4);
 	}
 
 	/**
@@ -1490,7 +1457,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMappingCS_IsStrict(), ecorePackage.getEBoolean(), "isStrict", "false", 1, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCS_OwnedInPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedInPathName", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedParameters(), this.getMappingParameterCS(), null, "ownedParameters", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedStatements(), this.getStatementCS(), null, "ownedStatements", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingCS_FirstPass(), ecorePackage.getEIntegerObject(), "firstPass", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1526,8 +1492,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEClass(paramDeclarationCSEClass, ParamDeclarationCS.class, "ParamDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(queryCSEClass, QueryCS.class, "QueryCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getQueryCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getQueryCS_Transformation(), theQVTbasePackage.getTransformation(), null, "transformation", null, 0, 1, QueryCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getQueryCS_OwnedParameters(), this.getParamDeclarationCS(), null, "ownedParameters", null, 0, -1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQueryCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getQueryCS_IsTransient(), ecorePackage.getEBoolean(), "isTransient", "false", 1, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1550,13 +1514,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEClass(statementCSEClass, StatementCS.class, "StatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(topLevelCSEClass, TopLevelCS.class, "TopLevelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTopLevelCS_OwnedMappings(), this.getMappingCS(), null, "ownedMappings", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopLevelCS_OwnedQueries(), this.getQueryCS(), null, "ownedQueries", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopLevelCS_OwnedTransformations(), this.getTransformationCS(), null, "ownedTransformations", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transformationCSEClass, TransformationCS.class, "TransformationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransformationCS_Package(), thePivotPackage.getPackage(), null, "package", null, 0, 1, TransformationCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_OwnedDirections(), this.getDirectionCS(), null, "ownedDirections", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransformationCS_OwnedMappings(), this.getMappingCS(), null, "ownedMappings", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransformationCS_OwnedQueries(), this.getQueryCS(), null, "ownedQueries", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_OwnedContextType(), theBaseCSPackage.getTypedRefCS(), null, "ownedContextType", null, 0, 1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

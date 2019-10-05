@@ -106,7 +106,7 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	@Override
 	public EList<TypedModel> getCheckedTypedModels() {
 		if (checkedTypedModels == null) {
-			checkedTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6);
+			checkedTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5);
 		}
 		return checkedTypedModels;
 	}
@@ -119,7 +119,7 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	@Override
 	public EList<TypedModel> getEnforcedTypedModels() {
 		if (enforcedTypedModels == null) {
-			enforcedTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7);
+			enforcedTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6);
 		}
 		return enforcedTypedModels;
 	}
@@ -132,9 +132,9 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				return getCheckedTypedModels();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
 				return getEnforcedTypedModels();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -149,11 +149,11 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				getCheckedTypedModels().clear();
 				getCheckedTypedModels().addAll((Collection<? extends TypedModel>)newValue);
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
 				getEnforcedTypedModels().clear();
 				getEnforcedTypedModels().addAll((Collection<? extends TypedModel>)newValue);
 				return;
@@ -169,10 +169,10 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				getCheckedTypedModels().clear();
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
 				getEnforcedTypedModels().clear();
 				return;
 		}
@@ -187,9 +187,9 @@ public class EntryPointCSImpl extends MappingCSImpl implements EntryPointCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				return checkedTypedModels != null && !checkedTypedModels.isEmpty();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6:
 				return enforcedTypedModels != null && !enforcedTypedModels.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -738,17 +738,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EAttribute getMappingCS_IsStrict();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned In Path Name</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName()
-	 * @see #getMappingCS()
-	 * @generated
-	 */
-	EReference getMappingCS_OwnedInPathName();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedParameters <em>Owned Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -960,28 +949,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getQueryCS();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getOwnedPathName <em>Owned Path Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Path Name</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getOwnedPathName()
-	 * @see #getQueryCS()
-	 * @generated
-	 */
-	EReference getQueryCS_OwnedPathName();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getTransformation <em>Transformation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Transformation</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getTransformation()
-	 * @see #getQueryCS()
-	 * @generated
-	 */
-	EReference getQueryCS_Transformation();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS#getOwnedParameters <em>Owned Parameters</em>}'.
@@ -1230,28 +1197,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getTopLevelCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedMappings <em>Owned Mappings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Mappings</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedMappings()
-	 * @see #getTopLevelCS()
-	 * @generated
-	 */
-	EReference getTopLevelCS_OwnedMappings();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedQueries <em>Owned Queries</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Queries</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedQueries()
-	 * @see #getTopLevelCS()
-	 * @generated
-	 */
-	EReference getTopLevelCS_OwnedQueries();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedTransformations <em>Owned Transformations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1293,6 +1238,28 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransformationCS_OwnedDirections();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedMappings <em>Owned Mappings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Mappings</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedMappings()
+	 * @see #getTransformationCS()
+	 * @generated
+	 */
+	EReference getTransformationCS_OwnedMappings();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedQueries <em>Owned Queries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Queries</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedQueries()
+	 * @see #getTransformationCS()
+	 * @generated
+	 */
+	EReference getTransformationCS_OwnedQueries();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedContextType <em>Owned Context Type</em>}'.
@@ -1648,14 +1615,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EAttribute MAPPING_CS__IS_STRICT = eINSTANCE.getMappingCS_IsStrict();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned In Path Name</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_CS__OWNED_IN_PATH_NAME = eINSTANCE.getMappingCS_OwnedInPathName();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1828,22 +1787,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass QUERY_CS = eINSTANCE.getQueryCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Path Name</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference QUERY_CS__OWNED_PATH_NAME = eINSTANCE.getQueryCS_OwnedPathName();
-
-		/**
-		 * The meta object literal for the '<em><b>Transformation</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference QUERY_CS__TRANSFORMATION = eINSTANCE.getQueryCS_Transformation();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Parameters</b></em>' containment reference list feature.
@@ -2044,22 +1987,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass TOP_LEVEL_CS = eINSTANCE.getTopLevelCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Mappings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOP_LEVEL_CS__OWNED_MAPPINGS = eINSTANCE.getTopLevelCS_OwnedMappings();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Queries</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOP_LEVEL_CS__OWNED_QUERIES = eINSTANCE.getTopLevelCS_OwnedQueries();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Transformations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2092,6 +2019,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSFORMATION_CS__OWNED_DIRECTIONS = eINSTANCE.getTransformationCS_OwnedDirections();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Mappings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION_CS__OWNED_MAPPINGS = eINSTANCE.getTransformationCS_OwnedMappings();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Queries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION_CS__OWNED_QUERIES = eINSTANCE.getTransformationCS_OwnedQueries();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Context Type</b></em>' containment reference feature.

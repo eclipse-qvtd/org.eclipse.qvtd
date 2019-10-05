@@ -68,7 +68,7 @@
 'check'=24
 'class'=51
 'composes'=52
-'consumes'=118
+'consumes'=117
 'contained'=25
 'datatype'=53
 'definition'=54
@@ -83,14 +83,14 @@
 'extends'=58
 'false'=152
 'for'=28
-'guard'=119
+'guard'=118
 'id'=59
 'if'=133
 'implementedby'=29
 'implies'=89
-'import'=120
+'import'=119
 'imports'=30
-'in'=117
+'in'=120
 'initial'=60
 'install'=31
 'interface'=61

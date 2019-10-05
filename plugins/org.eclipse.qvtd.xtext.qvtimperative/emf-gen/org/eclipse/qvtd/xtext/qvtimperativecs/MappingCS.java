@@ -12,7 +12,6 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +23,6 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#isIsStrict <em>Is Strict</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedStatements <em>Owned Statements</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getFirstPass <em>First Pass</em>}</li>
@@ -62,32 +60,6 @@ public interface MappingCS extends NamedElementCS {
 	 * @generated
 	 */
 	void setIsStrict(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Owned In Path Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned In Path Name</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned In Path Name</em>' containment reference.
-	 * @see #setOwnedInPathName(PathNameCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedInPathName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	PathNameCS getOwnedInPathName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned In Path Name</em>' containment reference.
-	 * @see #getOwnedInPathName()
-	 * @generated
-	 */
-	void setOwnedInPathName(PathNameCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.

@@ -30,6 +30,8 @@ import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getPackage <em>Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedDirections <em>Owned Directions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedMappings <em>Owned Mappings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedQueries <em>Owned Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedContextType <em>Owned Context Type</em>}</li>
  * </ul>
  *
@@ -68,6 +70,38 @@ public interface TransformationCS extends AbstractTransformationCS {
 	 * @generated
 	 */
 	EList<DirectionCS> getOwnedDirections();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Mappings</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Mappings</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Mappings</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTransformationCS_OwnedMappings()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<MappingCS> getOwnedMappings();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Queries</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Queries</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Queries</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTransformationCS_OwnedQueries()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<QueryCS> getOwnedQueries();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Context Type</b></em>' containment reference.

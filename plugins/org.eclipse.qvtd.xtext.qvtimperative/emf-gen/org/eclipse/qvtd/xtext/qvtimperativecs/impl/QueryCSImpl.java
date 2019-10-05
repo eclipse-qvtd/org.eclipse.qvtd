@@ -31,16 +31,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
-
 import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
@@ -59,8 +55,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#getImplementation <em>Implementation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#getOwnedPathName <em>Owned Path Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#isIsTransient <em>Is Transient</em>}</li>
@@ -76,7 +70,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int QUERY_CS_FEATURE_COUNT = TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 6;
+	public static final int QUERY_CS_FEATURE_COUNT = TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The cached value of the '{@link #getImplementation() <em>Implementation</em>}' reference.
@@ -87,16 +81,6 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @ordered
 	 */
 	protected JavaClassCS implementation;
-
-	/**
-	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedPathName()
-	 * @generated
-	 * @ordered
-	 */
-	protected PathNameCS ownedPathName;
 
 	/**
 	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
@@ -203,67 +187,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public PathNameCS getOwnedPathName() {
-		return ownedPathName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwnedPathName(PathNameCS newOwnedPathName, NotificationChain msgs) {
-		PathNameCS oldOwnedPathName = ownedPathName;
-		ownedPathName = newOwnedPathName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedPathName, newOwnedPathName);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedPathName(PathNameCS newOwnedPathName) {
-		if (newOwnedPathName != ownedPathName) {
-			NotificationChain msgs = null;
-			if (ownedPathName != null)
-				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
-			if (newOwnedPathName != null)
-				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
-			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedPathName, newOwnedPathName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public Transformation getTransformation() {
-		if (ownedPathName == null) {
-			return null;
-		}
-		return (Transformation) ownedPathName.getReferredElement();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<ParamDeclarationCS> getOwnedParameters() {
 		if (ownedParameters == null) {
-			ownedParameters = new EObjectContainmentEList<ParamDeclarationCS>(ParamDeclarationCS.class, this, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3);
+			ownedParameters = new EObjectContainmentEList<ParamDeclarationCS>(ParamDeclarationCS.class, this, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1);
 		}
 		return ownedParameters;
 	}
@@ -287,7 +213,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -303,14 +229,14 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4), null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4), null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -333,7 +259,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		boolean oldIsTransient = isTransient;
 		isTransient = newIsTransient;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5, oldIsTransient, isTransient));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3, oldIsTransient, isTransient));
 	}
 
 	/**
@@ -355,10 +281,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return basicSetOwnedPathName(null, msgs);
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -374,16 +298,12 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				if (resolve) return getImplementation();
-				return basicGetImplementation();
+			return basicGetImplementation();
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return getOwnedPathName();
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
-				return getTransformation();
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getOwnedParameters();
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedExpression();
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return isIsTransient();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -400,20 +320,17 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setImplementation((JavaClassCS)newValue);
-				return;
+			return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
-				setOwnedPathName((PathNameCS)newValue);
-				return;
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedParameters().clear();
-				getOwnedParameters().addAll((Collection<? extends ParamDeclarationCS>)newValue);
-				return;
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
+			getOwnedParameters().addAll((Collection<? extends ParamDeclarationCS>)newValue);
+			return;
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setOwnedExpression((ExpCS)newValue);
-				return;
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5:
+			return;
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setIsTransient((Boolean)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -428,19 +345,16 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setImplementation((JavaClassCS)null);
-				return;
+			return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
-				setOwnedPathName((PathNameCS)null);
-				return;
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedParameters().clear();
-				return;
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
+			return;
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setOwnedExpression((ExpCS)null);
-				return;
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5:
+			return;
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setIsTransient(IS_TRANSIENT_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -456,14 +370,10 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return implementation != null;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return ownedPathName != null;
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
-				return getTransformation() != null;
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ownedParameters != null && !ownedParameters.isEmpty();
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ownedExpression != null;
-			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return isTransient != IS_TRANSIENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

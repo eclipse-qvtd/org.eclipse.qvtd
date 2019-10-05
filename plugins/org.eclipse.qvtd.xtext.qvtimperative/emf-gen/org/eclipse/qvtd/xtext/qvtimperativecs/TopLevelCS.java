@@ -22,8 +22,6 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedMappings <em>Owned Mappings</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedQueries <em>Owned Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedTransformations <em>Owned Transformations</em>}</li>
  * </ul>
  *
@@ -32,38 +30,6 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
  * @generated
  */
 public interface TopLevelCS extends RootPackageCS {
-	/**
-	 * Returns the value of the '<em><b>Owned Mappings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Mappings</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Mappings</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS_OwnedMappings()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<MappingCS> getOwnedMappings();
-
-	/**
-	 * Returns the value of the '<em><b>Owned Queries</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Queries</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Queries</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS_OwnedQueries()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<QueryCS> getOwnedQueries();
-
 	/**
 	 * Returns the value of the '<em><b>Owned Transformations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS}.

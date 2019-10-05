@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -39,7 +38,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#isIsStrict <em>Is Strict</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getFirstPass <em>First Pass</em>}</li>
@@ -56,7 +54,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MAPPING_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6;
+	public static final int MAPPING_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
 	/**
 	 * The default value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -75,15 +73,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @ordered
 	 */
 	protected boolean isStrict = IS_STRICT_EDEFAULT;
-	/**
-	 * The cached value of the '{@link #getOwnedInPathName() <em>Owned In Path Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedInPathName()
-	 * @generated
-	 * @ordered
-	 */
-	protected PathNameCS ownedInPathName;
 	/**
 	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -186,54 +175,9 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
-	public PathNameCS getOwnedInPathName() {
-		return ownedInPathName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwnedInPathName(PathNameCS newOwnedInPathName, NotificationChain msgs) {
-		PathNameCS oldOwnedInPathName = ownedInPathName;
-		ownedInPathName = newOwnedInPathName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedInPathName, newOwnedInPathName);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedInPathName(PathNameCS newOwnedInPathName) {
-		if (newOwnedInPathName != ownedInPathName) {
-			NotificationChain msgs = null;
-			if (ownedInPathName != null)
-				msgs = ((InternalEObject)ownedInPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
-			if (newOwnedInPathName != null)
-				msgs = ((InternalEObject)newOwnedInPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
-			msgs = basicSetOwnedInPathName(newOwnedInPathName, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedInPathName, newOwnedInPathName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<MappingParameterCS> getOwnedParameters() {
 		if (ownedParameters == null) {
-			ownedParameters = new EObjectContainmentEList<MappingParameterCS>(MappingParameterCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
+			ownedParameters = new EObjectContainmentEList<MappingParameterCS>(MappingParameterCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 		}
 		return ownedParameters;
 	}
@@ -246,7 +190,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public EList<StatementCS> getOwnedStatements() {
 		if (ownedStatements == null) {
-			ownedStatements = new EObjectContainmentEList<StatementCS>(StatementCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3);
+			ownedStatements = new EObjectContainmentEList<StatementCS>(StatementCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
 		}
 		return ownedStatements;
 	}
@@ -271,7 +215,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		Integer oldFirstPass = firstPass;
 		firstPass = newFirstPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4, oldFirstPass, firstPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3, oldFirstPass, firstPass));
 	}
 
 	/**
@@ -294,7 +238,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		Integer oldLastPass = lastPass;
 		lastPass = newLastPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5, oldLastPass, lastPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4, oldLastPass, lastPass));
 	}
 
 	/**
@@ -316,10 +260,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return basicSetOwnedInPathName(null, msgs);
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -336,14 +278,12 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isIsStrict();
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return getOwnedInPathName();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedParameters();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedStatements();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getFirstPass();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -362,20 +302,17 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				setIsStrict((Boolean)newValue);
 				return;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				setOwnedInPathName((PathNameCS)newValue);
-				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedParameters().clear();
 				getOwnedParameters().addAll((Collection<? extends MappingParameterCS>)newValue);
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends StatementCS>)newValue);
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setFirstPass((Integer)newValue);
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setLastPass((Integer)newValue);
 				return;
 		}
@@ -394,18 +331,15 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				setIsStrict(IS_STRICT_EDEFAULT);
 				return;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				setOwnedInPathName((PathNameCS)null);
-				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedParameters().clear();
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedStatements().clear();
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setFirstPass(FIRST_PASS_EDEFAULT);
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setLastPass(LAST_PASS_EDEFAULT);
 				return;
 		}
@@ -423,14 +357,12 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isStrict != IS_STRICT_EDEFAULT;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return ownedInPathName != null;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ownedParameters != null && !ownedParameters.isEmpty();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ownedStatements != null && !ownedStatements.isEmpty();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);
