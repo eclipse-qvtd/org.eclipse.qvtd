@@ -259,7 +259,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		vmThread.stepInto();
 		TestUIUtil.waitForSuspended(vmThread);
 		//
-		checkPosition(vmThread, 21, 1055, 1063);
+		checkPosition(vmThread, 20, 1023, 1031);
 		checkVariables(vmThread, VMVirtualMachine.PC_NAME, "nodes");
 		checkVariable(vmThread, VMVirtualMachine.PC_NAME, QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
 		//

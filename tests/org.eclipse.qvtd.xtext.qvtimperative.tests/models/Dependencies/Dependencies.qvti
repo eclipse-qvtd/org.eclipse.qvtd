@@ -4,17 +4,17 @@ transformation Dependencies {
 	check source imports ecore;
 	enforce target imports ecore;
 	middle imports ecore;
-}
 
-map dependenciesLM in Dependencies {
-    in:source dummy:EPackage;
-    call dependenciesMR {
-    	binaryPrecedence uses (1 + 2) * (3*5 + 4);
-    	unaryPrecedence uses -1 * - -1;
-    }
-}
-
-map dependenciesMR in Dependencies /*uses ecore::EPackage, ocl::Integer*/ {
-	in:middle binaryPrecedence:OclAny;
-	in:middle unaryPrecedence:OclAny;
+	map dependenciesLM {
+	    in:source dummy:EPackage;
+	    call dependenciesMR {
+	    	binaryPrecedence uses (1 + 2) * (3*5 + 4);
+	    	unaryPrecedence uses -1 * - -1;
+	    }
+	}
+	
+	map dependenciesMR /*uses ecore::EPackage, ocl::Integer*/ {
+		in:middle binaryPrecedence:OclAny;
+		in:middle unaryPrecedence:OclAny;
+	}
 }

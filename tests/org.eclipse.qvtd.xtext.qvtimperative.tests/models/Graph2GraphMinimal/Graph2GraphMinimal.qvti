@@ -5,29 +5,29 @@ transformation CopyGraphMinimal {
 	upperGraph imports SimpleGraph;
 	lowerGraph imports SimpleGraph;
 	middle imports SimpleGraph2Graph;
-}
 
-map graph2graphLM in CopyGraphMinimal {
-	guard:upperGraph g1:Graph;
-	new:middle g2g:Graph2Graph;
-    set g2g.graph1 := g1;
-    set g2g.name := g1.name;
-    call graph2graphMR {
-    	g2gout uses g2g;
-    }
-}
-
-map graph2graphMR in CopyGraphMinimal {
-	in:middle g2gout:Graph2Graph;
-    new:lowerGraph g2:Graph;
-    set g2gout.graph2 := g2;
-    set g2.name := g2gout.name;
-}
-
-entry __root__ check upperGraph enforce lowerGraph in CopyGraphMinimal {
-    for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
-        call graph2graphLM {
-            g1 iterates g1;
-        }
-    }
+	map graph2graphLM {
+		guard:upperGraph g1:Graph;
+		new:middle g2g:Graph2Graph;
+	    set g2g.graph1 := g1;
+	    set g2g.name := g1.name;
+	    call graph2graphMR {
+	    	g2gout uses g2g;
+	    }
+	}
+	
+	map graph2graphMR {
+		in:middle g2gout:Graph2Graph;
+	    new:lowerGraph g2:Graph;
+	    set g2gout.graph2 := g2;
+	    set g2.name := g2gout.name;
+	}
+	
+	entry __root__ check upperGraph enforce lowerGraph {
+	    for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
+	        call graph2graphLM {
+	            g1 iterates g1;
+	        }
+	    }
+	}
 }

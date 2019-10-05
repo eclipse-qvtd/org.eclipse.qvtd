@@ -6,23 +6,23 @@ transformation classescs2as
 {
 	leftCS imports classescs;
 	rightAS imports classes;
-}
-
-map createPackage in classescs2as
-{
-	guard:leftCS packageCS : PackageCS;
-	new:rightAS _'package' : Package;
-	set _'package'.name := if packageCS.hasName()
-						then packageCS.name
-						else 'unnamed'
-						endif;
-}
-
-entry __root__ check leftCS enforce rightAS in classescs2as
-{
-	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
-		call createPackage {
-			packageCS iterates packageCS;
+	
+	map createPackage
+	{
+		guard:leftCS packageCS : PackageCS;
+		new:rightAS _'package' : Package;
+		set _'package'.name := if packageCS.hasName()
+							then packageCS.name
+							else 'unnamed'
+							endif;
+	}
+	
+	entry __root__ check leftCS enforce rightAS
+	{
+		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+			call createPackage {
+				packageCS iterates packageCS;
+			}
 		}
 	}
 }

@@ -5,132 +5,132 @@ transformation KiamaRewrite_qvtp_qvtcas
 {
 	check leftCS imports kiamacs;
 	enforce rightAS imports kiamaas;
-}
 
-map r___root__ in KiamaRewrite_qvtp_qvtcas
-{
-	var _'«NumCS»' : Set(kiamacs::NumCS) := leftCS.objectsOfKind(kiamacs::NumCS);
-	buffer ji_NumCS : kiamacs::NumCS := _'«NumCS»';
-	var _'«PlusCS»' : Set(kiamacs::PlusCS) := leftCS.objectsOfKind(kiamacs::PlusCS);
-	buffer ji_PlusCS : kiamacs::PlusCS := _'«PlusCS»';
-	var _'«TopCS»' : Set(kiamacs::TopCS) := leftCS.objectsOfKind(kiamacs::TopCS);
-	buffer ji_TopCS : kiamacs::TopCS := _'«TopCS»';
-	install m_Num_height_value_e {
-		lNumCS consumes ji_NumCS;
+	map r___root__
+	{
+		var _'«NumCS»' : Set(kiamacs::NumCS) := leftCS.objectsOfKind(kiamacs::NumCS);
+		buffer ji_NumCS : kiamacs::NumCS := _'«NumCS»';
+		var _'«PlusCS»' : Set(kiamacs::PlusCS) := leftCS.objectsOfKind(kiamacs::PlusCS);
+		buffer ji_PlusCS : kiamacs::PlusCS := _'«PlusCS»';
+		var _'«TopCS»' : Set(kiamacs::TopCS) := leftCS.objectsOfKind(kiamacs::TopCS);
+		buffer ji_TopCS : kiamacs::TopCS := _'«TopCS»';
+		install m_Num_height_value_e {
+			lNumCS consumes ji_NumCS;
+		}
+		install m_Plus__ast {
+			lPlusCS consumes ji_PlusCS;
+		}
+		install m_Top__ast {
+			lTopCS consumes ji_TopCS;
+		}
+		install m_Node__Plus_Plus_left_right_lc {
+			lPlusCS consumes ji_PlusCS;
+		}
+		install m_Node__Top_node {
+			lTopCS consumes ji_TopCS;
+		}
+		install m_Node__depth_1 {
+			lPlusCS consumes ji_PlusCS;
+		}
+		install m_Node__depth {
+			lNumCS consumes ji_NumCS;
+		}
+		install m_Node__height_1 {
+			lPlusCS consumes ji_PlusCS;
+		}
 	}
-	install m_Plus__ast {
-		lPlusCS consumes ji_PlusCS;
+	
+	map m_Num_height_value_e
+	{
+		guard:leftCS lNumCS : kiamacs::NumCS;
+		var value : ecore::EInt := lNumCS.value;
+		new:rightAS rNum : kiamaas::Num;
+		notify set rNum.height := 0;
+		set lNumCS.ast := rNum;
+		set rNum.value := value;
 	}
-	install m_Top__ast {
-		lTopCS consumes ji_TopCS;
+	
+	map m_Plus__ast
+	{
+		guard:leftCS lPlusCS : kiamacs::PlusCS;
+		new:rightAS rPlus : kiamaas::Plus;
+		set lPlusCS.ast := rPlus;
 	}
-	install m_Node__Plus_Plus_left_right_lc {
-		lPlusCS consumes ji_PlusCS;
+	
+	map m_Top__ast
+	{
+		guard:leftCS lTopCS : kiamacs::TopCS;
+		new:rightAS rTop : kiamaas::Top;
+		set lTopCS.ast := rTop;
 	}
-	install m_Node__Top_node {
-		lTopCS consumes ji_TopCS;
+	
+	map m_Node__Plus_Plus_left_right_lc
+	{
+		guard:leftCS lPlusCS : kiamacs::PlusCS;
+		var ast : kiamaas::Node[1] := lPlusCS.ast;
+		var ast3 : kiamaas::Node[1] := lPlusCS.ast;
+		var left : kiamacs::NodeCS := lPlusCS.left;
+		var right : kiamacs::NodeCS := lPlusCS.right;
+		var aPlus : kiamaas::Plus[1] := ast.oclAsType(kiamaas::Plus);
+		var ast1 : kiamaas::Node := left.ast;
+		var ast2 : kiamaas::Node := right.ast;
+		check ast3 = lPlusCS.ast;
+		set aPlus.left := ast1;
+		set aPlus.right := ast2;
+	
 	}
-	install m_Node__depth_1 {
-		lPlusCS consumes ji_PlusCS;
+	
+	map m_Node__Top_node
+	{
+		guard:leftCS lTopCS : kiamacs::TopCS;
+		var ast : kiamaas::Node[1] := lTopCS.ast;
+		var node : kiamacs::NodeCS[1] := lTopCS.node;
+		var aTop : kiamaas::Top[1] := ast.oclAsType(kiamaas::Top);
+		var ast1 : kiamaas::Node := node.ast;
+		set aTop.node := ast1;
 	}
-	install m_Node__depth {
-		lNumCS consumes ji_NumCS;
+	
+	map m_Node__depth_1
+	{
+		guard:leftCS lPlusCS : kiamacs::PlusCS;
+		var ast : kiamaas::Node[1] := lPlusCS.ast;
+		var aPlus : kiamaas::Plus[1] := ast.oclAsType(kiamaas::Plus);
+		var oclContainer : ocl::OclElement := aPlus.oclContainer;
+		var _'oclIsKindOf\nkiamaas::Top' : Boolean[1] := oclContainer.oclIsKindOf(kiamaas::Top);
+		observe kiamaas::Node::depth var _'if' : Integer[1] := if _'oclIsKindOf\nkiamaas::Top'
+		then 0
+		else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
+		notify set aPlus.depth := _'if';
+	
 	}
-	install m_Node__height_1 {
-		lPlusCS consumes ji_PlusCS;
+	
+	map m_Node__depth
+	{
+		guard:leftCS lNumCS : kiamacs::NumCS;
+		var ast : kiamaas::Node[1] := lNumCS.ast;
+		var aNum : kiamaas::Num[1] := ast.oclAsType(kiamaas::Num);
+		var oclContainer : ocl::OclElement := aNum.oclContainer;
+		var _'oclIsKindOf\nkiamaas::Top' : Boolean[1] := oclContainer.oclIsKindOf(kiamaas::Top);
+		var _'if' : Integer[1] := if _'oclIsKindOf\nkiamaas::Top'
+		then 0
+		else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
+		set aNum.depth := _'if';
+	
 	}
-}
-
-map m_Num_height_value_e in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lNumCS : kiamacs::NumCS;
-	var value : ecore::EInt := lNumCS.value;
-	new:rightAS rNum : kiamaas::Num;
-	notify set rNum.height := 0;
-	set lNumCS.ast := rNum;
-	set rNum.value := value;
-}
-
-map m_Plus__ast in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lPlusCS : kiamacs::PlusCS;
-	new:rightAS rPlus : kiamaas::Plus;
-	set lPlusCS.ast := rPlus;
-}
-
-map m_Top__ast in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lTopCS : kiamacs::TopCS;
-	new:rightAS rTop : kiamaas::Top;
-	set lTopCS.ast := rTop;
-}
-
-map m_Node__Plus_Plus_left_right_lc in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lPlusCS : kiamacs::PlusCS;
-	var ast : kiamaas::Node[1] := lPlusCS.ast;
-	var ast3 : kiamaas::Node[1] := lPlusCS.ast;
-	var left : kiamacs::NodeCS := lPlusCS.left;
-	var right : kiamacs::NodeCS := lPlusCS.right;
-	var aPlus : kiamaas::Plus[1] := ast.oclAsType(kiamaas::Plus);
-	var ast1 : kiamaas::Node := left.ast;
-	var ast2 : kiamaas::Node := right.ast;
-	check ast3 = lPlusCS.ast;
-	set aPlus.left := ast1;
-	set aPlus.right := ast2;
-
-}
-
-map m_Node__Top_node in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lTopCS : kiamacs::TopCS;
-	var ast : kiamaas::Node[1] := lTopCS.ast;
-	var node : kiamacs::NodeCS[1] := lTopCS.node;
-	var aTop : kiamaas::Top[1] := ast.oclAsType(kiamaas::Top);
-	var ast1 : kiamaas::Node := node.ast;
-	set aTop.node := ast1;
-}
-
-map m_Node__depth_1 in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lPlusCS : kiamacs::PlusCS;
-	var ast : kiamaas::Node[1] := lPlusCS.ast;
-	var aPlus : kiamaas::Plus[1] := ast.oclAsType(kiamaas::Plus);
-	var oclContainer : ocl::OclElement := aPlus.oclContainer;
-	var _'oclIsKindOf\nkiamaas::Top' : Boolean[1] := oclContainer.oclIsKindOf(kiamaas::Top);
-	observe kiamaas::Node::depth var _'if' : Integer[1] := if _'oclIsKindOf\nkiamaas::Top'
-	then 0
-	else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
-	notify set aPlus.depth := _'if';
-
-}
-
-map m_Node__depth in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lNumCS : kiamacs::NumCS;
-	var ast : kiamaas::Node[1] := lNumCS.ast;
-	var aNum : kiamaas::Num[1] := ast.oclAsType(kiamaas::Num);
-	var oclContainer : ocl::OclElement := aNum.oclContainer;
-	var _'oclIsKindOf\nkiamaas::Top' : Boolean[1] := oclContainer.oclIsKindOf(kiamaas::Top);
-	var _'if' : Integer[1] := if _'oclIsKindOf\nkiamaas::Top'
-	then 0
-	else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
-	set aNum.depth := _'if';
-
-}
-
-map m_Node__height_1 in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lPlusCS : kiamacs::PlusCS;
-	var ast : kiamaas::Node[1] := lPlusCS.ast;
-	var aPlus : kiamaas::Plus[1] := ast.oclAsType(kiamaas::Plus);
-	var left : kiamaas::Node := aPlus.left;
-	var right : kiamaas::Node := aPlus.right;
-	observe kiamaas::Node::height var height : ecore::EIntegerObject := right.height;
-	observe kiamaas::Node::height var height1 : ecore::EIntegerObject := left.height;
-	var oclAsSet : Set(ecore::EIntegerObject) := height1.oclAsSet();
-	var including : Set(ecore::EIntegerObject) := oclAsSet->including(height);
-	var max : ecore::EIntegerObject[1] := including->max();
-	var _'+' : Integer[1] := max + 1;
-	notify set aPlus.height := _'+';
+	
+	map m_Node__height_1
+	{
+		guard:leftCS lPlusCS : kiamacs::PlusCS;
+		var ast : kiamaas::Node[1] := lPlusCS.ast;
+		var aPlus : kiamaas::Plus[1] := ast.oclAsType(kiamaas::Plus);
+		var left : kiamaas::Node := aPlus.left;
+		var right : kiamaas::Node := aPlus.right;
+		observe kiamaas::Node::height var height : ecore::EIntegerObject := right.height;
+		observe kiamaas::Node::height var height1 : ecore::EIntegerObject := left.height;
+		var oclAsSet : Set(ecore::EIntegerObject) := height1.oclAsSet();
+		var including : Set(ecore::EIntegerObject) := oclAsSet->including(height);
+		var max : ecore::EIntegerObject[1] := including->max();
+		var _'+' : Integer[1] := max + 1;
+		notify set aPlus.height := _'+';
+	}
 }

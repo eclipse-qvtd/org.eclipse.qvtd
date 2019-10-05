@@ -7,145 +7,145 @@ transformation classescs2as
 	leftCS imports classescs;
 	rightAS imports classes;
 	middle imports classescstraces;
-}
-
-map mClassCS2Class_LM in classescs2as
-{
-	guard:leftCS classCS : ClassCS;
-	new:middle c2c : ClassCS2Class;
-	set c2c.classCS := classCS;
-}
-
-map mRootCS2Root_LM in classescs2as
-{
-	guard:leftCS rootCS : RootCS;
-	new:middle r2r : RootCS2Root;
-	set r2r.rootCS := rootCS;
-}
-
-map mPackageCS2Package_LM in classescs2as
-{
-	guard:leftCS packageCS : PackageCS;
-	new:middle p2p : PackageCS2Package;
-	set p2p.packageCS := packageCS;
-}
-
-map mClassCS2Class_MR in classescs2as
-{
-	guard:middle c2c : ClassCS2Class;
-	new:rightAS _'class' : Class;
-	set c2c._'class' := _'class';
-}
-
-map mRootCS2Root_MR in classescs2as
-{
-	guard:middle r2r : RootCS2Root;
-	new:rightAS root : Root;
-	set r2r.root := root;
-}
-
-map mPackageCS2Package_MR in classescs2as
-{
-	guard:middle p2p : PackageCS2Package;
-	new:rightAS _'package' : Package;
-	set p2p._'package' := _'package';
-}
-
-map uClass_name in classescs2as
-{
-	guard:rightAS _'class' : Class;
-	guard:leftCS classCS : ClassCS;
-	check classCS.ClassCS2Class._'class' = _'class';
-	set _'class'.name := classCS.name;
-}
-
-map uRoot_ownedPackages in classescs2as
-{
-	guard:rightAS root : Root;
-	guard:leftCS rootCS : RootCS;
-	check rootCS.RootCS2Root.root = root;
-	var ownedPackages := rootCS.ownedPackages.PackageCS2Package._'package'->asOrderedSet();
-	set root.ownedPackages := ownedPackages;
-}
-
-map uPackage_name in classescs2as
-{
-	guard:rightAS _'package' : Package;
-	guard:leftCS packageCS : PackageCS;
-	check packageCS.PackageCS2Package._'package' = _'package';
-	set	_'package'.name := packageCS.name;
-}
-
-map uPackage_ownedClasses in classescs2as
-{
-	guard:rightAS _'package' : Package;
-	guard:leftCS packageCS : PackageCS;
-	check packageCS.PackageCS2Package._'package' = _'package';
-	var ownedClasses := packageCS.ownedClasses.ClassCS2Class._'class'->asOrderedSet();
-	set	_'package'.ownedClasses := ownedClasses;
-}
-
-entry __root__ check leftCS enforce rightAS in classescs2as
-{
-	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
-		call mPackageCS2Package_LM {
-			packageCS iterates packageCS;
-		}
+	
+	map mClassCS2Class_LM
+	{
+		guard:leftCS classCS : ClassCS;
+		new:middle c2c : ClassCS2Class;
+		set c2c.classCS := classCS;
 	}
-	for p2p : classescstraces::PackageCS2Package in classescstraces::PackageCS2Package.allInstances() {
-		call mPackageCS2Package_MR {
-			p2p iterates p2p;
-		}
+	
+	map mRootCS2Root_LM
+	{
+		guard:leftCS rootCS : RootCS;
+		new:middle r2r : RootCS2Root;
+		set r2r.rootCS := rootCS;
 	}
-	for _'package' : classes::Package in classes::Package.allInstances() {
+	
+	map mPackageCS2Package_LM
+	{
+		guard:leftCS packageCS : PackageCS;
+		new:middle p2p : PackageCS2Package;
+		set p2p.packageCS := packageCS;
+	}
+	
+	map mClassCS2Class_MR
+	{
+		guard:middle c2c : ClassCS2Class;
+		new:rightAS _'class' : Class;
+		set c2c._'class' := _'class';
+	}
+	
+	map mRootCS2Root_MR
+	{
+		guard:middle r2r : RootCS2Root;
+		new:rightAS root : Root;
+		set r2r.root := root;
+	}
+	
+	map mPackageCS2Package_MR
+	{
+		guard:middle p2p : PackageCS2Package;
+		new:rightAS _'package' : Package;
+		set p2p._'package' := _'package';
+	}
+	
+	map uClass_name
+	{
+		guard:rightAS _'class' : Class;
+		guard:leftCS classCS : ClassCS;
+		check classCS.ClassCS2Class._'class' = _'class';
+		set _'class'.name := classCS.name;
+	}
+	
+	map uRoot_ownedPackages
+	{
+		guard:rightAS root : Root;
+		guard:leftCS rootCS : RootCS;
+		check rootCS.RootCS2Root.root = root;
+		var ownedPackages := rootCS.ownedPackages.PackageCS2Package._'package'->asOrderedSet();
+		set root.ownedPackages := ownedPackages;
+	}
+	
+	map uPackage_name
+	{
+		guard:rightAS _'package' : Package;
+		guard:leftCS packageCS : PackageCS;
+		check packageCS.PackageCS2Package._'package' = _'package';
+		set	_'package'.name := packageCS.name;
+	}
+	
+	map uPackage_ownedClasses
+	{
+		guard:rightAS _'package' : Package;
+		guard:leftCS packageCS : PackageCS;
+		check packageCS.PackageCS2Package._'package' = _'package';
+		var ownedClasses := packageCS.ownedClasses.ClassCS2Class._'class'->asOrderedSet();
+		set	_'package'.ownedClasses := ownedClasses;
+	}
+	
+	entry __root__ check leftCS enforce rightAS
+	{
 		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
-			call uPackage_name {
+			call mPackageCS2Package_LM {
 				packageCS iterates packageCS;
-				_'package' iterates _'package';
 			}
 		}
-	}
-	for _'package' : classes::Package in classes::Package.allInstances() {
-		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
-			call uPackage_ownedClasses {
-				packageCS iterates packageCS;
-				_'package' iterates _'package';
+		for p2p : classescstraces::PackageCS2Package in classescstraces::PackageCS2Package.allInstances() {
+			call mPackageCS2Package_MR {
+				p2p iterates p2p;
 			}
 		}
-	}
-	for classCS : classescs::ClassCS in classescs::ClassCS.allInstances() {
-		call mClassCS2Class_LM {
-			classCS iterates classCS;
+		for _'package' : classes::Package in classes::Package.allInstances() {
+			for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+				call uPackage_name {
+					packageCS iterates packageCS;
+					_'package' iterates _'package';
+				}
+			}
 		}
-	}
-	for c2c : classescstraces::ClassCS2Class in classescstraces::ClassCS2Class.allInstances() {
-		call mClassCS2Class_MR {
-			c2c iterates c2c;
+		for _'package' : classes::Package in classes::Package.allInstances() {
+			for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+				call uPackage_ownedClasses {
+					packageCS iterates packageCS;
+					_'package' iterates _'package';
+				}
+			}
 		}
-	}
-	for classCS : classescs::ClassCS in classescs::ClassCS.allInstances() {
-		for _'class' : classes::Class in classes::Class.allInstances() {
-			call uClass_name {
-				_'class' iterates _'class';
+		for classCS : classescs::ClassCS in classescs::ClassCS.allInstances() {
+			call mClassCS2Class_LM {
 				classCS iterates classCS;
 			}
 		}
-	}
-	for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
-		call mRootCS2Root_LM {
-			rootCS iterates rootCS;
+		for c2c : classescstraces::ClassCS2Class in classescstraces::ClassCS2Class.allInstances() {
+			call mClassCS2Class_MR {
+				c2c iterates c2c;
+			}
 		}
-	}
-	for r2r : classescstraces::RootCS2Root in classescstraces::RootCS2Root.allInstances() {
-		call mRootCS2Root_MR {
-			r2r iterates r2r;
+		for classCS : classescs::ClassCS in classescs::ClassCS.allInstances() {
+			for _'class' : classes::Class in classes::Class.allInstances() {
+				call uClass_name {
+					_'class' iterates _'class';
+					classCS iterates classCS;
+				}
+			}
 		}
-	}
-	for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
-		for root : classes::Root in classes::Root.allInstances() {
-			call uRoot_ownedPackages {
-				root iterates root;
+		for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
+			call mRootCS2Root_LM {
 				rootCS iterates rootCS;
+			}
+		}
+		for r2r : classescstraces::RootCS2Root in classescstraces::RootCS2Root.allInstances() {
+			call mRootCS2Root_MR {
+				r2r iterates r2r;
+			}
+		}
+		for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
+			for root : classes::Root in classes::Root.allInstances() {
+				call uRoot_ownedPackages {
+					root iterates root;
+					rootCS iterates rootCS;
+				}
 			}
 		}
 	}

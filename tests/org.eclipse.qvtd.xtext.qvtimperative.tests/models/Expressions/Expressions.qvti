@@ -4,50 +4,50 @@ transformation Expressions {
 	check source imports ecore;
 	enforce target imports ecore;
 	middle imports ecore;
-}
 
-map expressionsLM in Expressions {
-	in:source dummy:EPackage;
-    call expressionsMR {
-    	binaryPrecedence uses (1 + 2) * (3*5 + 4);
-    	unaryPrecedence uses -1 * - -1;
-    	notPrecedence uses not not (4 = 5);
-    }
-}
+	map expressionsLM {
+		in:source dummy:EPackage;
+	    call expressionsMR {
+	    	binaryPrecedence uses (1 + 2) * (3*5 + 4);
+	    	unaryPrecedence uses -1 * - -1;
+	    	notPrecedence uses not not (4 = 5);
+	    }
+	}
+	
+	map expressionsMR {
+		in:middle binaryPrecedence:OclAny;
+		in:middle unaryPrecedence:OclAny;
+		in:middle notPrecedence:OclAny;
+	}
 
-map expressionsMR in Expressions {
-	in:middle binaryPrecedence:OclAny;
-	in:middle unaryPrecedence:OclAny;
-	in:middle notPrecedence:OclAny;
-}
-
-map expressionsDomains in Expressions {
-	var s : Integer := 0;
-	var t : Integer := 0;
-	var m : Integer := 0;
-	var s_1 : Integer := m;
-	var s_2 : Integer := t;
-	var t_1 : Integer := s;
-	var t_2 : Integer := m;
-	var m_1 : Integer := s;
-	var m_2 : Integer := t;
-}
-
-map expressionsMaps in Expressions {
---	var s1 : Boolean := Map{}->forAll(key <- value : String | key.toString().toUpper() = value);
-	var s2 : Boolean := Map{1 <- '1'}->forAll(key <- value | key.toString().toUpper() = value);
-	var s2a : Boolean := Map(Integer[1],String[1]){1 <- '1'}->forAll(key <- value | key.toString().toUpper() = value);
-	var s2b : Boolean := Map(Integer[1],String[?]){1 <- '1'}->forAll(key <- value | key.toString().toUpper() = value);
-	var s2c : Boolean := Map(Integer[?],String[1]){1 <- '1'}->forAll(key <- value | key.toString().toUpper() = value);
-	var s2d : Boolean := Map(Integer[?],String[?]){1 <- '1'}->forAll(key1 <- value1, key2 <- value2 | key1.toString().toUpper() = value2);
---	var s3 : Boolean := Map{1 <- '1', true <- 'TRUE', false <- 'FALSE'}->forAll(key : OclAny <- value : String | key.toString().toUpper() = value);
-}
-
-map expressionsCasts in Expressions {
-	var s1 : Boolean := true.oclAsType(Boolean);
-	var s2 : Set(Boolean) := null.oclAsType(Set(Boolean));
-	var s3 : Set(Set(Integer[2..5|?])[3..4|1]) := null.oclAsType(Set(Set(Integer[2..5|?])[3..4|1]));
---	var s3 : Set(Integer[2..5|?])[3..4] := null;--.oclAsType(Set(Integer[2..5|?]));
-	var s4 : Map(String[?], Integer[1]) := null.oclAsType(Map(String[?], Integer[1]));
-	var s5 : Tuple(s:String[?], i:Integer[1]) := null.oclAsType(Tuple(s:String[?], i:Integer[1]));
+	map expressionsDomains {
+		var s : Integer := 0;
+		var t : Integer := 0;
+		var m : Integer := 0;
+		var s_1 : Integer := m;
+		var s_2 : Integer := t;
+		var t_1 : Integer := s;
+		var t_2 : Integer := m;
+		var m_1 : Integer := s;
+		var m_2 : Integer := t;
+	}
+	
+	map expressionsMaps {
+	--	var s1 : Boolean := Map{}->forAll(key <- value : String | key.toString().toUpper() = value);
+		var s2 : Boolean := Map{1 <- '1'}->forAll(key <- value | key.toString().toUpper() = value);
+		var s2a : Boolean := Map(Integer[1],String[1]){1 <- '1'}->forAll(key <- value | key.toString().toUpper() = value);
+		var s2b : Boolean := Map(Integer[1],String[?]){1 <- '1'}->forAll(key <- value | key.toString().toUpper() = value);
+		var s2c : Boolean := Map(Integer[?],String[1]){1 <- '1'}->forAll(key <- value | key.toString().toUpper() = value);
+		var s2d : Boolean := Map(Integer[?],String[?]){1 <- '1'}->forAll(key1 <- value1, key2 <- value2 | key1.toString().toUpper() = value2);
+	--	var s3 : Boolean := Map{1 <- '1', true <- 'TRUE', false <- 'FALSE'}->forAll(key : OclAny <- value : String | key.toString().toUpper() = value);
+	}
+	
+	map expressionsCasts {
+		var s1 : Boolean := true.oclAsType(Boolean);
+		var s2 : Set(Boolean) := null.oclAsType(Set(Boolean));
+		var s3 : Set(Set(Integer[2..5|?])[3..4|1]) := null.oclAsType(Set(Set(Integer[2..5|?])[3..4|1]));
+	--	var s3 : Set(Integer[2..5|?])[3..4] := null;--.oclAsType(Set(Integer[2..5|?]));
+		var s4 : Map(String[?], Integer[1]) := null.oclAsType(Map(String[?], Integer[1]));
+		var s5 : Tuple(s:String[?], i:Integer[1]) := null.oclAsType(Tuple(s:String[?], i:Integer[1]));
+	}
 }
