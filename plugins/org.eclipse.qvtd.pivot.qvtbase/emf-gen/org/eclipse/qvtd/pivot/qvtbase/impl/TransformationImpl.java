@@ -29,9 +29,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -151,7 +151,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable ownedContext;
+	protected Parameter ownedContext;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,7 +261,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 */
 	@Override
-	public Variable getOwnedContext() {
+	public Parameter getOwnedContext() {
 		return ownedContext;
 	}
 
@@ -270,8 +270,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwnedContext(Variable newOwnedContext, NotificationChain msgs) {
-		Variable oldOwnedContext = ownedContext;
+	public NotificationChain basicSetOwnedContext(Parameter newOwnedContext, NotificationChain msgs) {
+		Parameter oldOwnedContext = ownedContext;
 		ownedContext = newOwnedContext;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassImpl.CLASS_FEATURE_COUNT + 4, oldOwnedContext, newOwnedContext);
@@ -286,7 +286,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 */
 	@Override
-	public void setOwnedContext(Variable newOwnedContext) {
+	public void setOwnedContext(Parameter newOwnedContext) {
 		if (newOwnedContext != ownedContext) {
 			NotificationChain msgs = null;
 			if (ownedContext != null)
@@ -395,7 +395,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				setExtends((Transformation)newValue);
 				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
-				setOwnedContext((Variable)newValue);
+				setOwnedContext((Parameter)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -422,7 +422,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				setExtends((Transformation)null);
 				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
-				setOwnedContext((Variable)null);
+				setOwnedContext((Parameter)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -545,7 +545,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ @Nullable Variable ownedContext = this.getOwnedContext();
+					final /*@NonInvalid*/ @Nullable Parameter ownedContext = this.getOwnedContext();
 					final /*@NonInvalid*/ boolean ne = ownedContext != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {

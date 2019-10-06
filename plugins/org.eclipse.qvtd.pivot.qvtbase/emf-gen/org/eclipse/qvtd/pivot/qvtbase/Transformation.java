@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Annotation;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.Parameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -125,12 +125,12 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Context</em>' containment reference.
-	 * @see #setOwnedContext(Variable)
+	 * @see #setOwnedContext(Parameter)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation_OwnedContext()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Variable getOwnedContext();
+	Parameter getOwnedContext();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedContext <em>Owned Context</em>}' containment reference.
@@ -140,7 +140,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @see #getOwnedContext()
 	 * @generated
 	 */
-	void setOwnedContext(Variable value);
+	void setOwnedContext(Parameter value);
 
 	/**
 	 * <!-- begin-user-doc -->

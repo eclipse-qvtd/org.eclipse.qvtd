@@ -29,8 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import org.eclipse.ocl.pivot.Variable;
-
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
@@ -79,7 +78,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Variable> variable;
+	protected EList<VariableDeclaration> variable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,9 +105,9 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 * @generated
 	 */
 	@Override
-	public EList<Variable> getVariable() {
+	public EList<VariableDeclaration> getVariable() {
 		if (variable == null) {
-			variable = new EObjectContainmentEList<Variable>(Variable.class, this, PatternImpl.PATTERN_FEATURE_COUNT + 0);
+			variable = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, PatternImpl.PATTERN_FEATURE_COUNT + 0);
 		}
 		return variable;
 	}
@@ -162,7 +161,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 		switch (featureID) {
 			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				getVariable().clear();
-				getVariable().addAll((Collection<? extends Variable>)newValue);
+				getVariable().addAll((Collection<? extends VariableDeclaration>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

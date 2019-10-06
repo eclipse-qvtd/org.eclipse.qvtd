@@ -16,8 +16,7 @@ package org.eclipse.qvtd.pivot.qvtcore;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.ocl.pivot.Variable;
-
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 
 /**
@@ -39,7 +38,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 public interface CorePattern extends Pattern {
 	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.pivot.Variable}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.VariableDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variable</em>' containment reference list isn't clear,
@@ -51,7 +50,7 @@ public interface CorePattern extends Pattern {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Variable> getVariable();
+	EList<VariableDeclaration> getVariable();
 
 	/**
 	 * <!-- begin-user-doc -->

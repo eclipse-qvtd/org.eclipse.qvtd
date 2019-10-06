@@ -16,7 +16,7 @@ package org.eclipse.qvtd.pivot.qvtcore;
 
 import java.util.Map;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,13 +44,13 @@ public interface VariableAssignment extends Assignment {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target Variable</em>' reference.
-	 * @see #setTargetVariable(Variable)
+	 * @see #setTargetVariable(VariableDeclaration)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getVariableAssignment_TargetVariable()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='assignment'"
 	 * @generated
 	 */
-	Variable getTargetVariable();
+	VariableDeclaration getTargetVariable();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtcore.VariableAssignment#getTargetVariable <em>Target Variable</em>}' reference.
@@ -60,7 +60,7 @@ public interface VariableAssignment extends Assignment {
 	 * @see #getTargetVariable()
 	 * @generated
 	 */
-	void setTargetVariable(Variable value);
+	void setTargetVariable(VariableDeclaration value);
 
 	/**
 	 * <!-- begin-user-doc -->

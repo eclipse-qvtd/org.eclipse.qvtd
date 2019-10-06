@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
@@ -96,7 +96,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable variable;
+	protected VariableDeclaration variable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -211,10 +211,10 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * @generated
 	 */
 	@Override
-	public Variable getVariable() {
+	public VariableDeclaration getVariable() {
 		if (variable != null && variable.eIsProxy()) {
 			InternalEObject oldVariable = (InternalEObject)variable;
-			variable = (Variable)eResolveProxy(oldVariable);
+			variable = (VariableDeclaration)eResolveProxy(oldVariable);
 			if (variable != oldVariable) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldVariable, variable));
@@ -228,7 +228,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetVariable() {
+	public VariableDeclaration basicGetVariable() {
 		return variable;
 	}
 
@@ -238,8 +238,8 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * @generated
 	 */
 	@Override
-	public void setVariable(Variable newVariable) {
-		Variable oldVariable = variable;
+	public void setVariable(VariableDeclaration newVariable) {
+		VariableDeclaration oldVariable = variable;
 		variable = newVariable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldVariable, variable));
@@ -298,7 +298,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 					}
 					else {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Variable variable = this.getVariable();
+						final /*@NonInvalid*/ @NonNull VariableDeclaration variable = this.getVariable();
 						final /*@NonInvalid*/ @Nullable Type type_0 = variable.getType();
 						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						safe_conformsTo_source = conformsTo_0;
@@ -398,7 +398,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 				setValueExp((OCLExpression)newValue);
 				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
-				setVariable((Variable)newValue);
+				setVariable((VariableDeclaration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -419,7 +419,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 				setValueExp((OCLExpression)null);
 				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
-				setVariable((Variable)null);
+				setVariable((VariableDeclaration)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -88,6 +88,7 @@ public class QVTrelationTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = QVTrelationTables.PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Operation = QVTrelationTables.PACKid_$metamodel$.getClassId("Operation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Package = QVTrelationTables.PACKid_$metamodel$.getClassId("Package", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Parameter = QVTrelationTables.PACKid_$metamodel$.getClassId("Parameter", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Pattern = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Pattern", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTrelationTables.PACKid_$metamodel$.getClassId("Property", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Relation = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("Relation", 0);
@@ -103,6 +104,7 @@ public class QVTrelationTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTrelationTables.PACKid_$metamodel$.getClassId("Type", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTrelationTables.PACKid_$metamodel$.getClassId("Variable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTrelationTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Class = TypeId.BAG.getSpecializedId(QVTrelationTables.CLSSid_Class);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Property = TypeId.BAG.getSpecializedId(QVTrelationTables.CLSSid_Property);

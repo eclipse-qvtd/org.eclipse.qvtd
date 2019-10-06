@@ -14,7 +14,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -99,13 +99,13 @@ public interface RelationDomainAssignment extends Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variable</em>' reference.
-	 * @see #setVariable(Variable)
+	 * @see #setVariable(VariableDeclaration)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomainAssignment_Variable()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='domainAssignment'"
 	 * @generated
 	 */
-	Variable getVariable();
+	VariableDeclaration getVariable();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getVariable <em>Variable</em>}' reference.
@@ -115,7 +115,7 @@ public interface RelationDomainAssignment extends Element {
 	 * @see #getVariable()
 	 * @generated
 	 */
-	void setVariable(Variable value);
+	void setVariable(VariableDeclaration value);
 
 	/**
 	 * <!-- begin-user-doc -->

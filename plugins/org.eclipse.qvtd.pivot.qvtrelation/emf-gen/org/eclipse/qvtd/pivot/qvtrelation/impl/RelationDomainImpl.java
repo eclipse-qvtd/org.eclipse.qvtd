@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -231,7 +232,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 					 * variable
 					 */
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Variable variable = _1.getVariable();
+					final /*@NonInvalid*/ @NonNull VariableDeclaration variable = _1.getVariable();
 					//
 					if (accumulator.includes(variable) == ValueUtil.TRUE_VALUE) {
 						result = ValueUtil.FALSE_VALUE;			// Abort after second find

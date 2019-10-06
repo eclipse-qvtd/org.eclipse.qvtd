@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.Parameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -110,12 +110,12 @@ public interface TypedModel extends NamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Context</em>' containment reference.
-	 * @see #setOwnedContext(Variable)
+	 * @see #setOwnedContext(Parameter)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_OwnedContext()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Variable getOwnedContext();
+	Parameter getOwnedContext();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getOwnedContext <em>Owned Context</em>}' containment reference.
@@ -125,7 +125,7 @@ public interface TypedModel extends NamedElement {
 	 * @see #getOwnedContext()
 	 * @generated
 	 */
-	void setOwnedContext(Variable value);
+	void setOwnedContext(Parameter value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Primitive</b></em>' attribute.

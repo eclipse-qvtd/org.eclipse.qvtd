@@ -30,8 +30,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
-
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
@@ -92,7 +91,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable targetVariable;
+	protected VariableDeclaration targetVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,10 +118,10 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	 * @generated
 	 */
 	@Override
-	public Variable getTargetVariable() {
+	public VariableDeclaration getTargetVariable() {
 		if (targetVariable != null && targetVariable.eIsProxy()) {
 			InternalEObject oldTargetVariable = (InternalEObject)targetVariable;
-			targetVariable = (Variable)eResolveProxy(oldTargetVariable);
+			targetVariable = (VariableDeclaration)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 4, oldTargetVariable, targetVariable));
@@ -136,7 +135,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetTargetVariable() {
+	public VariableDeclaration basicGetTargetVariable() {
 		return targetVariable;
 	}
 
@@ -146,8 +145,8 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	 * @generated
 	 */
 	@Override
-	public void setTargetVariable(Variable newTargetVariable) {
-		Variable oldTargetVariable = targetVariable;
+	public void setTargetVariable(VariableDeclaration newTargetVariable) {
+		VariableDeclaration oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 4, oldTargetVariable, targetVariable));
@@ -208,7 +207,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 					/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Variable targetVariable = this.getTargetVariable();
+						final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable = this.getTargetVariable();
 						final /*@NonInvalid*/ @Nullable Type type = targetVariable.getType();
 						final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
 						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
@@ -239,7 +238,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 						}
 						else {
 							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull Variable targetVariable_0 = this.getTargetVariable();
+							final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable_0 = this.getTargetVariable();
 							final /*@NonInvalid*/ @Nullable Type type_2 = targetVariable_0.getType();
 							final /*@Thrown*/ boolean conformsTo_2 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_1, type_2).booleanValue();
 							safe_conformsTo_source_0 = conformsTo_2;
@@ -272,7 +271,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32, safe_name_source);
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Variable targetVariable_1 = this.getTargetVariable();
+						final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable_1 = this.getTargetVariable();
 						final /*@NonInvalid*/ @Nullable Type type_4 = targetVariable_1.getType();
 						final /*@NonInvalid*/ @NonNull Object name_1 = type_4 == null;
 						/*@Thrown*/ @Nullable String safe_name_source_0;
@@ -328,7 +327,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
-				setTargetVariable((Variable)newValue);
+				setTargetVariable((VariableDeclaration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -343,7 +342,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
-				setTargetVariable((Variable)null);
+				setTargetVariable((VariableDeclaration)null);
 				return;
 		}
 		super.eUnset(featureID);

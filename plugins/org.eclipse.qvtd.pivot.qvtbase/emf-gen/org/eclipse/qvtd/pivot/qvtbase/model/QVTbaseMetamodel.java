@@ -285,6 +285,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Class _Annotation = createClass("Annotation");
 		private final @NonNull Class _OCLExpression = createClass("OCLExpression");
 		private final @NonNull Class _Package = createClass("Package");
+		private final @NonNull Class _Parameter = createClass("Parameter");
 		private final @NonNull Class _Variable = createClass("Variable");
 		
 		private final @NonNull Class _BaseModel = createClass(QVTbasePackage.Literals.BASE_MODEL);
@@ -341,6 +342,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Package);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Parameter);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Variable);
@@ -511,9 +515,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_OCLExpression_Function_queryExpression = createProperty("Function", _Function);
 		private final @NonNull Property pr_OCLExpression_predicate_conditionExpression = createProperty("predicate", _Predicate);
 		private final @NonNull Property pr_Package_TypedModel_usedPackage = createProperty("TypedModel", _Bag_TypedModel);
+		private final @NonNull Property pr_Parameter_Transformation_ownedContext = createProperty("Transformation", _Transformation);
+		private final @NonNull Property pr_Parameter_TypedModel_ownedContext = createProperty("TypedModel", _TypedModel);
 		private final @NonNull Property pr_Variable_Pattern_bindsTo = createProperty("Pattern", _Bag_Pattern);
-		private final @NonNull Property pr_Variable_Transformation_ownedContext = createProperty("Transformation", _Transformation);
-		private final @NonNull Property pr_Variable_TypedModel_ownedContext = createProperty("TypedModel", _TypedModel);
 		
 		private final @NonNull Property pr_Domain_isCheckable = createProperty(QVTbasePackage.Literals.DOMAIN__IS_CHECKABLE, _Boolean);
 		private final @NonNull Property pr_Domain_isEnforceable = createProperty(QVTbasePackage.Literals.DOMAIN__IS_ENFORCEABLE, _Boolean);
@@ -531,7 +535,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Rule_transformation = createProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, _Transformation);
 		private final @NonNull Property pr_Transformation_extends = createProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS, _Transformation);
 		private final @NonNull Property pr_Transformation_modelParameter = createProperty(QVTbasePackage.Literals.TRANSFORMATION__MODEL_PARAMETER, _OrderedSet_TypedModel_NullFree);
-		private final @NonNull Property pr_Transformation_ownedContext = createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT, _Variable);
+		private final @NonNull Property pr_Transformation_ownedContext = createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT, _Parameter);
 		private final @NonNull Property pr_Transformation_ownedTag = createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TAG, _Set_Annotation_NullFree);
 		private final @NonNull Property pr_Transformation_rule = createProperty(QVTbasePackage.Literals.TRANSFORMATION__RULE, _Set_Rule_NullFree);
 		private final @NonNull Property pr_Transformation_extendedBy_extends = createProperty("extendedBy", _Transformation);
@@ -539,7 +543,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_TypedModel_isPrimitive = createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_PRIMITIVE, _Boolean);
 		private final @NonNull Property pr_TypedModel_isThis = createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_THIS, _Boolean);
 		private final @NonNull Property pr_TypedModel_isTrace = createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_TRACE, _Boolean);
-		private final @NonNull Property pr_TypedModel_ownedContext = createProperty(QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT, _Variable);
+		private final @NonNull Property pr_TypedModel_ownedContext = createProperty(QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT, _Parameter);
 		private final @NonNull Property pr_TypedModel_transformation = createProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, _Transformation);
 		private final @NonNull Property pr_TypedModel_usedPackage = createProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, _Set_Package_NullFree);
 		private final @NonNull Property pr_TypedModel_Domain_typedModel = createProperty("Domain", _Bag_Domain);
@@ -574,21 +578,23 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TypedModel_usedPackage);
 		
+			ownedProperties = _Parameter.getOwnedProperties();
+			ownedProperties.add(property = pr_Parameter_Transformation_ownedContext);
+			property.setIsImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transformation_ownedContext);
+			ownedProperties.add(property = pr_Parameter_TypedModel_ownedContext);
+			property.setIsImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_TypedModel_ownedContext);
+		
 			ownedProperties = _Variable.getOwnedProperties();
 			ownedProperties.add(property = pr_Variable_Pattern_bindsTo);
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Pattern_bindsTo);
-			ownedProperties.add(property = pr_Variable_Transformation_ownedContext);
-			property.setIsImplicit(true);
-			property.setIsRequired(false);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Transformation_ownedContext);
-			ownedProperties.add(property = pr_Variable_TypedModel_ownedContext);
-			property.setIsImplicit(true);
-			property.setIsRequired(false);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_TypedModel_ownedContext);
 		
 			ownedProperties = _Domain.getOwnedProperties();
 			ownedProperties.add(property = pr_Domain_isCheckable);
@@ -665,7 +671,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsComposite(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Variable_Transformation_ownedContext);
+			property.setOpposite(pr_Parameter_Transformation_ownedContext);
 			ownedProperties.add(property = pr_Transformation_ownedTag);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
@@ -697,7 +703,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsComposite(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Variable_TypedModel_ownedContext);
+			property.setOpposite(pr_Parameter_TypedModel_ownedContext);
 			ownedProperties.add(property = pr_TypedModel_transformation);
 			property.setIsResolveProxies(true);
 			property.setIsTransient(true);

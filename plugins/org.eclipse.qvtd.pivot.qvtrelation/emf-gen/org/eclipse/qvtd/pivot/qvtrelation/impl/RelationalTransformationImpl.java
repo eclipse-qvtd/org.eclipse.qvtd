@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -164,7 +164,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ @Nullable Variable ownedContext = this.getOwnedContext();
+					final /*@NonInvalid*/ @Nullable Parameter ownedContext = this.getOwnedContext();
 					final /*@NonInvalid*/ boolean ne = ownedContext != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {

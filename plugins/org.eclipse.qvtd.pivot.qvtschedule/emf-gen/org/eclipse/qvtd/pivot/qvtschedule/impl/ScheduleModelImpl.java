@@ -249,20 +249,20 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 		switch (featureID) {
 			case ModelImpl.MODEL_FEATURE_COUNT + 0:
 				getOwnedClassDatums().clear();
-			getOwnedClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
-			return;
+				getOwnedClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
+				return;
 			case ModelImpl.MODEL_FEATURE_COUNT + 1:
 				getOwnedMappingRegions().clear();
-			getOwnedMappingRegions().addAll((Collection<? extends MappingRegion>)newValue);
-			return;
+				getOwnedMappingRegions().addAll((Collection<? extends MappingRegion>)newValue);
+				return;
 			case ModelImpl.MODEL_FEATURE_COUNT + 2:
 				getOwnedOperationRegions().clear();
-			getOwnedOperationRegions().addAll((Collection<? extends OperationRegion>)newValue);
-			return;
+				getOwnedOperationRegions().addAll((Collection<? extends OperationRegion>)newValue);
+				return;
 			case ModelImpl.MODEL_FEATURE_COUNT + 3:
 				getOwnedRootRegions().clear();
-			getOwnedRootRegions().addAll((Collection<? extends RootRegion>)newValue);
-			return;
+				getOwnedRootRegions().addAll((Collection<? extends RootRegion>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -277,16 +277,16 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 		switch (featureID) {
 			case ModelImpl.MODEL_FEATURE_COUNT + 0:
 				getOwnedClassDatums().clear();
-			return;
+				return;
 			case ModelImpl.MODEL_FEATURE_COUNT + 1:
 				getOwnedMappingRegions().clear();
-			return;
+				return;
 			case ModelImpl.MODEL_FEATURE_COUNT + 2:
 				getOwnedOperationRegions().clear();
-			return;
+				return;
 			case ModelImpl.MODEL_FEATURE_COUNT + 3:
 				getOwnedRootRegions().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

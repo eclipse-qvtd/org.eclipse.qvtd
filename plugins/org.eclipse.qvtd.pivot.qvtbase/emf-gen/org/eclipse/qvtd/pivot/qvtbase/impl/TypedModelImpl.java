@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ClassImpl;
@@ -111,7 +111,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable ownedContext;
+	protected Parameter ownedContext;
 
 	/**
 	 * The default value of the '{@link #isIsPrimitive() <em>Is Primitive</em>}' attribute.
@@ -269,7 +269,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 */
 	@Override
-	public Variable getOwnedContext() {
+	public Parameter getOwnedContext() {
 		return ownedContext;
 	}
 
@@ -278,8 +278,8 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwnedContext(Variable newOwnedContext, NotificationChain msgs) {
-		Variable oldOwnedContext = ownedContext;
+	public NotificationChain basicSetOwnedContext(Parameter newOwnedContext, NotificationChain msgs) {
+		Parameter oldOwnedContext = ownedContext;
 		ownedContext = newOwnedContext;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldOwnedContext, newOwnedContext);
@@ -294,7 +294,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 */
 	@Override
-	public void setOwnedContext(Variable newOwnedContext) {
+	public void setOwnedContext(Parameter newOwnedContext) {
 		if (newOwnedContext != ownedContext) {
 			NotificationChain msgs = null;
 			if (ownedContext != null)
@@ -559,7 +559,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				getDependsOn().addAll((Collection<? extends TypedModel>)newValue);
 				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
-				setOwnedContext((Variable)newValue);
+				setOwnedContext((Parameter)newValue);
 				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsPrimitive((Boolean)newValue);
@@ -592,7 +592,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				getDependsOn().clear();
 				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
-				setOwnedContext((Variable)null);
+				setOwnedContext((Parameter)null);
 				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsPrimitive(IS_PRIMITIVE_EDEFAULT);
