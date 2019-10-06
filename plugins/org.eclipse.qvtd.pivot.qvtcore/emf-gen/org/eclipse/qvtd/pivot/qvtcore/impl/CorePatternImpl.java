@@ -48,7 +48,7 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.CorePatternImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.CorePatternImpl#getOwnedVariables <em>Owned Variables</em>}</li>
  * </ul>
  *
  * @generated
@@ -71,15 +71,14 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 */
 	public static final int CORE_PATTERN_OPERATION_COUNT = PatternImpl.PATTERN_OPERATION_COUNT + 1;
 	/**
-	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedVariables() <em>Owned Variables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariable()
+	 * @see #getOwnedVariables()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VariableDeclaration> variable;
-
+	protected EList<VariableDeclaration> ownedVariables;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -105,11 +104,11 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 * @generated
 	 */
 	@Override
-	public EList<VariableDeclaration> getVariable() {
-		if (variable == null) {
-			variable = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, PatternImpl.PATTERN_FEATURE_COUNT + 0);
+	public EList<VariableDeclaration> getOwnedVariables() {
+		if (ownedVariables == null) {
+			ownedVariables = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, PatternImpl.PATTERN_FEATURE_COUNT + 0);
 		}
-		return variable;
+		return ownedVariables;
 	}
 
 	/**
@@ -131,7 +130,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
-				return ((InternalEList<?>)getVariable()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOwnedVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -145,7 +144,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
-				return getVariable();
+				return getOwnedVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -160,8 +159,8 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
-				getVariable().clear();
-				getVariable().addAll((Collection<? extends VariableDeclaration>)newValue);
+				getOwnedVariables().clear();
+				getOwnedVariables().addAll((Collection<? extends VariableDeclaration>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -176,7 +175,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
-				getVariable().clear();
+				getOwnedVariables().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -191,7 +190,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
-				return variable != null && !variable.isEmpty();
+				return ownedVariables != null && !ownedVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

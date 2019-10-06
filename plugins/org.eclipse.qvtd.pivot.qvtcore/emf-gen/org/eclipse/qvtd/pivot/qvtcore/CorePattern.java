@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.CorePattern#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.CorePattern#getOwnedVariables <em>Owned Variables</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getCorePattern()
@@ -37,20 +37,20 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
  */
 public interface CorePattern extends Pattern {
 	/**
-	 * Returns the value of the '<em><b>Variable</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Variables</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.pivot.VariableDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Variable</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Variables</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variable</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getCorePattern_Variable()
+	 * @return the value of the '<em>Owned Variables</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getCorePattern_OwnedVariables()
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<VariableDeclaration> getVariable();
+	EList<VariableDeclaration> getOwnedVariables();
 
 	/**
 	 * <!-- begin-user-doc -->

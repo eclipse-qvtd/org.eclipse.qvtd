@@ -430,7 +430,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getCorePattern_Variable() {
+	public EReference getCorePattern_OwnedVariables() {
 		return (EReference)corePatternEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1035,7 +1035,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		initEClass(coreModelEClass, CoreModel.class, "CoreModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(corePatternEClass, CorePattern.class, "CorePattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCorePattern_Variable(), thePivotPackage.getVariableDeclaration(), null, "variable", null, 0, -1, CorePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getCorePattern_OwnedVariables(), thePivotPackage.getVariableDeclaration(), null, "ownedVariables", null, 0, -1, CorePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEOperation(getCorePattern__GetArea(), this.getArea(), "getArea", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1406,7 +1406,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getBottomPattern__ValidateVariablesAreBottomVariables__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tvariable->forAll(oclIsKindOf(BottomVariable))\n\n"
+			   "body", "\n\townedVariables->forAll(oclIsKindOf(BottomVariable))\n\n"
 		   });
 		addAnnotation
 		  (getBottomVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(),
@@ -1418,7 +1418,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tvariable->forAll(oclIsKindOf(GuardVariable))\n\n"
+			   "body", "\n\townedVariables->forAll(oclIsKindOf(GuardVariable))\n\n"
 		   });
 		addAnnotation
 		  (getGuardVariable__ValidateNoInitializer__DiagnosticChain_Map(),

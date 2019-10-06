@@ -276,15 +276,15 @@ public interface QVTcorePackage extends EPackage {
 	EClass getCorePattern();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtcore.CorePattern#getVariable <em>Variable</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtcore.CorePattern#getOwnedVariables <em>Owned Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variable</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtcore.CorePattern#getVariable()
+	 * @return the meta object for the containment reference list '<em>Owned Variables</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.CorePattern#getOwnedVariables()
 	 * @see #getCorePattern()
 	 * @generated
 	 */
-	EReference getCorePattern_Variable();
+	EReference getCorePattern_OwnedVariables();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.CorePattern#getArea() <em>Get Area</em>}' operation.
@@ -887,12 +887,12 @@ public interface QVTcorePackage extends EPackage {
 		EClass CORE_PATTERN = eINSTANCE.getCorePattern();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Variables</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CORE_PATTERN__VARIABLE = eINSTANCE.getCorePattern_Variable();
+		EReference CORE_PATTERN__OWNED_VARIABLES = eINSTANCE.getCorePattern_OwnedVariables();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Area</b></em>' operation.

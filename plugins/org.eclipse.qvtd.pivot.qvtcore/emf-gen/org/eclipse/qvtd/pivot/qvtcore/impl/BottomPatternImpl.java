@@ -251,7 +251,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : Boolean[?] = variable->forAll(
+			 *         result : Boolean[?] = ownedVariables->forAll(
 			 *           oclIsKindOf(BottomVariable))
 			 *       in
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
@@ -277,10 +277,10 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<VariableDeclaration> variable = this.getVariable();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_VariableDeclaration, variable);
+				final /*@NonInvalid*/ @NonNull List<VariableDeclaration> ownedVariables = this.getOwnedVariables();
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedVariables = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_VariableDeclaration, ownedVariables);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_variable.iterator();
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedVariables.iterator();
 				/*@NonInvalid*/ @Nullable Boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {

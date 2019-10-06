@@ -123,7 +123,7 @@ public interface BottomPattern extends CorePattern {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='VariablesAreBottomVariables'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tvariable-&gt;forAll(oclIsKindOf(BottomVariable))\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\townedVariables-&gt;forAll(oclIsKindOf(BottomVariable))\n\n'"
 	 * @generated
 	 */
 	boolean validateVariablesAreBottomVariables(DiagnosticChain diagnostics, Map<Object, Object> context);

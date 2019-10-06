@@ -428,7 +428,7 @@ public class QVTcoreTables
 		public static final @NonNull ExecutorProperty _BottomPattern__enforcementOperation = new EcoreExecutorProperty(QVTcorePackage.Literals.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, Types._BottomPattern, 2);
 		public static final @NonNull ExecutorProperty _BottomPattern__realizedVariable = new EcoreExecutorProperty(QVTcorePackage.Literals.BOTTOM_PATTERN__REALIZED_VARIABLE, Types._BottomPattern, 3);
 
-		public static final @NonNull ExecutorProperty _CorePattern__variable = new EcoreExecutorProperty(QVTcorePackage.Literals.CORE_PATTERN__VARIABLE, Types._CorePattern, 0);
+		public static final @NonNull ExecutorProperty _CorePattern__ownedVariables = new EcoreExecutorProperty(QVTcorePackage.Literals.CORE_PATTERN__OWNED_VARIABLES, Types._CorePattern, 0);
 
 		public static final @NonNull ExecutorProperty _EnforcementOperation__bottomPattern = new EcoreExecutorProperty(QVTcorePackage.Literals.ENFORCEMENT_OPERATION__BOTTOM_PATTERN, Types._EnforcementOperation, 0);
 		public static final @NonNull ExecutorProperty _EnforcementOperation__enforcementMode = new EcoreExecutorProperty(QVTcorePackage.Literals.ENFORCEMENT_OPERATION__ENFORCEMENT_MODE, Types._EnforcementOperation, 1);
@@ -1453,8 +1453,8 @@ public class QVTcoreTables
 			QVTcoreTables.Properties._BottomPattern__area,
 			QVTcoreTables.Properties._BottomPattern__assignment,
 			QVTcoreTables.Properties._BottomPattern__enforcementOperation,
-			QVTcoreTables.Properties._BottomPattern__realizedVariable,
-			QVTcoreTables.Properties._CorePattern__variable
+			QVTcoreTables.Properties._CorePattern__ownedVariables,
+			QVTcoreTables.Properties._BottomPattern__realizedVariable
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _BottomVariable = {};
@@ -1467,7 +1467,7 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorProperty @NonNull [] _CoreModel = {};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CorePattern = {
-			QVTcoreTables.Properties._CorePattern__variable
+			QVTcoreTables.Properties._CorePattern__ownedVariables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _EnforcementMode = {};
@@ -1480,7 +1480,7 @@ public class QVTcoreTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _GuardPattern = {
 			QVTcoreTables.Properties._GuardPattern__area,
-			QVTcoreTables.Properties._CorePattern__variable
+			QVTcoreTables.Properties._CorePattern__ownedVariables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _GuardVariable = {};
