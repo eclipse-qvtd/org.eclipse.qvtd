@@ -17,7 +17,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
@@ -105,8 +105,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 		}
 
 		@Override
-		protected @NonNull Set<@NonNull Variable> getEnforcedBottomDomainVariables() { // FIXME unify with Invoked
-			Set<@NonNull Variable> rEnforcedBottomDomainVariables = new HashSet<>(rEnforcedReferredVariables);
+		protected @NonNull Set<@NonNull VariableDeclaration> getEnforcedBottomDomainVariables() { // FIXME unify with Invoked
+			Set<@NonNull VariableDeclaration> rEnforcedBottomDomainVariables = new HashSet<>(rEnforcedReferredVariables);
 			rEnforcedBottomDomainVariables.removeAll(rWhenVariable2rTypedModel.keySet());
 			rEnforcedBottomDomainVariables.removeAll(rSharedVariables);
 			return rEnforcedBottomDomainVariables;

@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -66,13 +65,13 @@ public class Relation2InvocationInterface extends AbstractRelation2MiddleType
 			return null;
 		}
 		RelationDomain rootVariableDomain = QVTrelationUtil.getRootVariableDomain(variable);
-		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(rootVariableDomain);
+		List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(rootVariableDomain);
 		int rootVariableIndex = rootVariables.indexOf(variable);
 		if (rootVariableIndex < 0) {
 			return null;
 		}
 		RelationDomain overriddenRelationDomain = QVTrelationUtil.getRelationDomain(overriddenRelation, QVTrelationUtil.getTypedModel(rootVariableDomain));
-		List<@NonNull Variable> overriddenRootVariables = QVTrelationUtil.getRootVariables(overriddenRelationDomain);
+		List<@NonNull VariableDeclaration> overriddenRootVariables = QVTrelationUtil.getRootVariables(overriddenRelationDomain);
 		if (rootVariableIndex >= overriddenRootVariables.size()) {
 			return null;
 		}

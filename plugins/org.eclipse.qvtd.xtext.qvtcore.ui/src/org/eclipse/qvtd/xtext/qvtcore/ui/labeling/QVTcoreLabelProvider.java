@@ -16,7 +16,7 @@ import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -165,7 +165,7 @@ public class QVTcoreLabelProvider extends QVTbaseLabelProvider
 			return "";
 		}
 		StringBuilder s = new StringBuilder();
-		Variable targetVariable = ele.getTargetVariable();
+		VariableDeclaration targetVariable = ele.getTargetVariable();
 		if (targetVariable != null) {
 			s.append(PrettyPrinter.printName(targetVariable, namespace));
 		}

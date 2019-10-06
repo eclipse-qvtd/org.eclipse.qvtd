@@ -214,7 +214,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			for (Assignment aIn : aIns) {
 				if (aIn instanceof VariableAssignment) {
 					VariableAssignment vaIn = (VariableAssignment)aIn;
-					Variable vIn = vaIn.getTargetVariable();
+					VariableDeclaration vIn = vaIn.getTargetVariable();
 					String name = vIn.getName();
 					assert name != null;
 					MergedVariable mergedVariable = getMergedVariable(name);
@@ -252,7 +252,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 		}
 
-		private <T extends Variable> void gatherVariables(@NonNull Iterable</*@NonNull*/ ? extends T> vIns, boolean isGuard) {
+		private <T extends VariableDeclaration> void gatherVariables(@NonNull Iterable</*@NonNull*/ ? extends T> vIns, boolean isGuard) {
 			for (T vIn : vIns) {
 				if (vIn != null) {
 					String name = vIn.getName();
@@ -644,7 +644,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		private boolean isRealized = false;
 		private @Nullable CompleteClass mergedType = null;
 		private boolean isRequired = false;
-		private @Nullable List<@NonNull Variable> variables = null;
+		private @Nullable List<@NonNull VariableDeclaration> variables = null;
 		private @Nullable List<@NonNull VariableAssignment> assignments = null;
 
 		protected MergedVariable(@NonNull MergedArea mergedArea, @NonNull String name) {
@@ -661,7 +661,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			assignments2.add(variableAssignment);
 		}
 
-		public void addVariable(@NonNull Variable variable, boolean isGuard) {
+		public void addVariable(@NonNull VariableDeclaration variable, boolean isGuard) {
 			if (isGuard) {
 				this.isGuard = true;
 			}
@@ -671,9 +671,9 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			if (variable.isIsRequired()) {
 				this.isRequired = true;
 			}
-			List<@NonNull Variable> variables2 = variables;
+			List<@NonNull VariableDeclaration> variables2 = variables;
 			if (variables2 == null) {
-				variables = variables2 = new ArrayList<@NonNull Variable>();
+				variables = variables2 = new ArrayList<>();
 			}
 			assert !variables2.contains(variable);
 			variables2.add(variable);
@@ -695,7 +695,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 
 		public void synthesize(@NonNull Mapping mMapping, @NonNull Area mArea) {
 			List<@NonNull VariableAssignment> assignments2 = assignments;
-			List<@NonNull Variable> variables2 = variables;
+			List<@NonNull VariableDeclaration> variables2 = variables;
 			if (variables2 != null) {
 				Variable mVariable = QVTcoreFactory.eINSTANCE.createRealizedVariable();
 				if (isRealized) {
@@ -718,7 +718,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 					mVariable.setType(mergedType.getPrimaryClass());
 				}
 				mVariable.setIsRequired(isRequired);
-				for (@NonNull Variable uVariable : variables2) {
+				for (@NonNull VariableDeclaration uVariable : variables2) {
 					createVisitor.getContext().addTrace(uVariable, mVariable);
 					createVisitor.createAll(uVariable.getOwnedComments(), mVariable.getOwnedComments());
 				}
@@ -856,11 +856,11 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 			s.appendString(PivotUtil.getName(uNamedMapping));
 			List<@NonNull String> guardVariableNames = new ArrayList<@NonNull String>();
-			for (@NonNull Variable guardVariable : ClassUtil.nullFree(uMapping.getGuardPattern().getVariable())) {
+			for (@NonNull VariableDeclaration guardVariable : ClassUtil.nullFree(uMapping.getGuardPattern().getVariable())) {
 				guardVariableNames.add(PivotUtil.getName(guardVariable));
 			}
 			for (@NonNull Domain uDomain : ClassUtil.nullFree(uMapping.getDomain())) {
-				for (@NonNull Variable guardVariable : ClassUtil.nullFree(((CoreDomain)uDomain).getGuardPattern().getVariable())) {
+				for (@NonNull VariableDeclaration guardVariable : ClassUtil.nullFree(((CoreDomain)uDomain).getGuardPattern().getVariable())) {
 					guardVariableNames.add(PivotUtil.getName(guardVariable));
 				}
 			}

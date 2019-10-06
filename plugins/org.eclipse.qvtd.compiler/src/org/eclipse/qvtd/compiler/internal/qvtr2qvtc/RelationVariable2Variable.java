@@ -23,7 +23,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.osgi.util.NLS;
@@ -53,9 +53,9 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 	/**
 	 * The corresponding synthesized core variable.
 	 */
-	private @Nullable Variable cVariable;
+	private @Nullable VariableDeclaration cVariable;
 
-	public RelationVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull Variable rVariable) {
+	public RelationVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull VariableDeclaration rVariable) {
 		super(variablesAnalysis, QVTrelationUtil.getName(rVariable));
 		this.variableAnalysis = new RelationVariableAnalysis(variablesAnalysis, rVariable);
 	}
@@ -77,7 +77,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 				return;
 			}
 		}
-		Variable cVariable2 = getCoreVariable();
+		VariableDeclaration cVariable2 = getCoreVariable();
 		List<@NonNull Assignment> cMiddleBottomAssignments = QVTcoreUtil.Internal.getOwnedAssignmentsList(variablesAnalysis.getMiddleBottomPattern());
 		if (isPartial == null) {
 			isPartial = targetProperty.isIsMany() && !(cExpression.getType() instanceof CollectionType);
@@ -106,7 +106,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 		return (RealizedVariable)cVariable;
 	}
 
-	public @Nullable Variable basicGetCoreVariable() {
+	public @Nullable VariableDeclaration basicGetCoreVariable() {
 		return cVariable;
 	}
 
@@ -191,8 +191,8 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 	}
 
 	@Override
-	public @NonNull Variable getCoreVariable() {
-		Variable cVariable2 = cVariable;
+	public @NonNull VariableDeclaration getCoreVariable() {
+		VariableDeclaration cVariable2 = cVariable;
 		if (cVariable2 == null) {
 			cVariable2 = synthesize();
 		}
@@ -224,7 +224,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 	}
 
 	@Override
-	public @Nullable Variable getRelationVariable() {
+	public @Nullable VariableDeclaration getRelationVariable() {
 		return variableAnalysis.getRelationVariable();
 	}
 
@@ -233,7 +233,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 		return variableAnalysis.hasWhenDomain();
 	}
 
-	private void initializeKeyedVariable(@NonNull Variable cKeyedVariable) {
+	private void initializeKeyedVariable(@NonNull VariableDeclaration cKeyedVariable) {
 		TypedModel rEnforcedTypedModel2 = ClassUtil.nonNull(variableAnalysis.getrEnforcedTypedModel());
 		Key rKey2 = ClassUtil.nonNull(variableAnalysis.getrKey());
 		Function function = variablesAnalysis.getRelationAnalysis().getTransformationAnalysis().getKeyFunction(rEnforcedTypedModel2, rKey2);
@@ -244,13 +244,13 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 			for (@NonNull Parameter keyParameter : ClassUtil.nullFree(function.getOwnedParameters())) {
 				OCLExpression parameterExp = variablesAnalysis.getTemplateExp(objectTemplateExp, keyParameter);
 				if (parameterExp instanceof TemplateExp) {
-					Variable rVariable = ClassUtil.nonNullState(((TemplateExp)parameterExp).getBindsTo());
-					Variable cVariable = variablesAnalysis.getCoreVariable(rVariable);
+					VariableDeclaration rVariable = ClassUtil.nonNullState(((TemplateExp)parameterExp).getBindsTo());
+					VariableDeclaration cVariable = variablesAnalysis.getCoreVariable(rVariable);
 					asArguments.add(variablesAnalysis.createVariableExp(cVariable));
 				}
 				else if (parameterExp instanceof VariableExp) {
-					Variable rVariable = (Variable) ClassUtil.nonNullState(((VariableExp)parameterExp).getReferredVariable());
-					Variable cVariable = variablesAnalysis.getCoreVariable(rVariable);
+					VariableDeclaration rVariable = ClassUtil.nonNullState(((VariableExp)parameterExp).getReferredVariable());
+					VariableDeclaration cVariable = variablesAnalysis.getCoreVariable(rVariable);
 					asArguments.add(variablesAnalysis.createVariableExp(cVariable));
 				}
 				else {
@@ -259,7 +259,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 				}
 			}
 		}
-		Variable cThisVariable = variablesAnalysis.getCoreThisVariable();
+		VariableDeclaration cThisVariable = variablesAnalysis.getCoreThisVariable();
 		OCLExpression asConstructor = variablesAnalysis.createOperationCallExp(variablesAnalysis.createVariableExp(cThisVariable), function, asArguments);
 		//			addConditionPredicate(cMiddleBottomPattern, createVariableExp(cKeyedVariable), asConstructor);
 		@NonNull VariableAssignment cVariableAssignment = variablesAnalysis.createVariableAssignment(cKeyedVariable, asConstructor);
@@ -311,11 +311,11 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 		variableAnalysis.setWhere(rWhereTypedModel);
 	}
 
-	protected @NonNull Variable synthesize() {
-		Variable cVariable2 = cVariable;
+	protected @NonNull VariableDeclaration synthesize() {
+		VariableDeclaration cVariable2 = cVariable;
 		if (cVariable2 == null) {
 			Strategy strategy = variableAnalysis.getStrategy();
-			Variable rVariable = variableAnalysis.getRelationVariable();
+			VariableDeclaration rVariable = variableAnalysis.getRelationVariable();
 			Type type = QVTrelationUtil.getType(rVariable);
 			switch (strategy) {
 				case ENFORCED_BOTTOM: {

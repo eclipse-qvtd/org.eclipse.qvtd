@@ -670,12 +670,12 @@ public class QVTr2UMLX
 			Relation qvtrReferredRelation = QVTrelationUtil.getReferredRelation(qvtrRelationCallExp);
 			RelDiagram relReferredDiagram = context.getUMLXElement(RelDiagram.class, qvtrReferredRelation);
 			relInvocationNode.setReferredRelDiagram(relReferredDiagram);
-			Iterable<@NonNull Variable> qvtrRootVariables = QVTrelationUtil.getRootVariables(qvtrReferredRelation);
+			Iterable<@NonNull VariableDeclaration> qvtrRootVariables = QVTrelationUtil.getRootVariables(qvtrReferredRelation);
 			Iterable<@NonNull OCLExpression> qvtrArguments = QVTrelationUtil.getOwnedArguments(qvtrRelationCallExp);
-			Iterator<@NonNull Variable> itRootVariables = qvtrRootVariables.iterator();
+			Iterator<@NonNull VariableDeclaration> itRootVariables = qvtrRootVariables.iterator();
 			Iterator<@NonNull OCLExpression> itArguments = qvtrArguments.iterator();
 			while (itRootVariables.hasNext() && itArguments.hasNext()) {
-				Variable qvtrRootVariable = itRootVariables.next();
+				VariableDeclaration qvtrRootVariable = itRootVariables.next();
 				OCLExpression qvtrArgument = itArguments.next();
 				RelPatternNode umlxRootVariable = context.getUMLXElement(RelPatternNode.class, qvtrRootVariable);
 				RelPatternNode relArgumentNode = create(qvtrArgument);

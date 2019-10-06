@@ -57,6 +57,7 @@ import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -266,7 +267,7 @@ public class OCL2QVTm {
 			mapping.getDomain().add(leftDomain);
 			mapping.getDomain().add(rightDomain);
 
-			Variable leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+			VariableDeclaration leftVar = leftDomain.getGuardPattern().getVariable().get(0);
 
 			GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 			BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
@@ -316,7 +317,7 @@ public class OCL2QVTm {
 			mapping.getDomain().add(leftDomain);
 			mapping.getDomain().add(rightDomain);
 
-			Variable leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+			VariableDeclaration leftVar = leftDomain.getGuardPattern().getVariable().get(0);
 
 			VariableExp varExp = PivotFactory.eINSTANCE.createVariableExp();
 			varExp.setReferredVariable(leftVar);
@@ -380,7 +381,7 @@ public class OCL2QVTm {
 			mapping.getDomain().add(leftDomain);
 			mapping.getDomain().add(rightDomain);
 
-			Variable leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+			VariableDeclaration leftVar = leftDomain.getGuardPattern().getVariable().get(0);
 
 			GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 			BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
@@ -476,7 +477,7 @@ public class OCL2QVTm {
 		return createLeftDomain(operation.getOwningClass());
 	}
 
-	private OCLExpression createPropertyAssignmentValue(OCLExpression exp, Variable leftVar) {
+	private OCLExpression createPropertyAssignmentValue(OCLExpression exp, VariableDeclaration leftVar) {
 
 		// FIXME what happens with synthetised types ????
 		OCLExpression newInitExp = EcoreUtil.copy(exp);
@@ -484,7 +485,7 @@ public class OCL2QVTm {
 		return doReplacements(newInitExp, leftVar);
 	}
 
-	private OCLExpression doReplacements(OCLExpression oclExp, Variable leftVar) {
+	private OCLExpression doReplacements(OCLExpression oclExp, VariableDeclaration leftVar) {
 
 		List<OCLExpression> result = new ArrayList<OCLExpression>();// Simple work aroound to the forEach constraint ;
 		result.add(oclExp);
@@ -534,7 +535,7 @@ public class OCL2QVTm {
 	 * Function which takes into account that the shadow is embedded inside of an IfExp
 	 * so that the guard pattern have the proper guards associated to the the IfExp
 	 */
-	private void updateGuardPattern(ShadowExp shadowExp, GuardPattern guardPattern, Variable leftVar) {
+	private void updateGuardPattern(ShadowExp shadowExp, GuardPattern guardPattern, VariableDeclaration leftVar) {
 
 		EObject container = shadowExp.eContainer();
 
@@ -701,7 +702,7 @@ public class OCL2QVTm {
 		PivotMetamodelManager mm = (PivotMetamodelManager) envFact.getMetamodelManager();
 		if (!mm.getFinalAnalysis().isFinal(op)) {
 			GuardPattern guard = mapping.getGuardPattern();
-			Variable leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+			VariableDeclaration leftVar = leftDomain.getGuardPattern().getVariable().get(0);
 
 			org.eclipse.qvtd.pivot.qvtbase.Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
 			PivotHelper helper = new PivotHelper(envFact);

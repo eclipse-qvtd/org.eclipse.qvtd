@@ -1302,7 +1302,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		OCLExpression ownedSource = operationCallExp.getOwnedSource();
 		if (ownedSource instanceof VariableExp) {
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
-			Variable thisVariable = QVTbaseUtil.getContextVariable(scheduleManager.getStandardLibrary(), transformation);
+			VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(scheduleManager.getStandardLibrary(), transformation);
 			if (((VariableExp)ownedSource).getReferredVariable() == thisVariable) {
 				ownedSource = null;
 			}

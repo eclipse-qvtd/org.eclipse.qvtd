@@ -40,7 +40,7 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
@@ -294,7 +294,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		initializeEvaluationEnvironment(transformation);
 		getRootEvaluationEnvironment();
 		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
-		Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
+		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
 		//		add(ownedContext, modelsManager.getTransformationInstance(transformation));
 		add(ownedContext, getTransformationExecution());
 		for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {

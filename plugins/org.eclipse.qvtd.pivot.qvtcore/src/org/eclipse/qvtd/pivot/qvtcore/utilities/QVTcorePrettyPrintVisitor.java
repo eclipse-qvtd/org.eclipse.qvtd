@@ -13,7 +13,7 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -62,7 +62,7 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 		for (RealizedVariable pRealizedVariable : pBottomPattern.getRealizedVariable()) {
 			safeVisit(pRealizedVariable);
 		}
-		for (Variable pVariable : pBottomPattern.getVariable()) {
+		for (VariableDeclaration pVariable : pBottomPattern.getVariable()) {
 			safeVisit(pVariable);
 		}
 		context.append(" |");
@@ -114,7 +114,7 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 
 	@Override
 	public Object visitGuardPattern(@NonNull GuardPattern pGuardPattern) {
-		for (Variable pVariable : pGuardPattern.getVariable()) {
+		for (VariableDeclaration pVariable : pGuardPattern.getVariable()) {
 			safeVisit(pVariable);
 		}
 		context.append(" |");

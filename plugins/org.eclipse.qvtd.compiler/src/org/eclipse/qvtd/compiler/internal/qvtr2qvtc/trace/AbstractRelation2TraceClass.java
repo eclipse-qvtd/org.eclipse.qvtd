@@ -238,7 +238,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleType i
 					}
 					else if (valueExpression instanceof VariableExp) {
 						VariableExp variableExpression = (VariableExp)valueExpression;
-						Variable itemVariable = QVTrelationUtil.getReferredVariable(variableExpression);
+						VariableDeclaration itemVariable = QVTrelationUtil.getReferredVariable(variableExpression);
 						getVariableDeclaration2TraceProperty(null, itemVariable, isNestedOneToOne);
 					}
 				}
@@ -254,7 +254,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleType i
 					}
 					else if (memberExpression instanceof VariableExp) {
 						VariableExp variableExpression = (VariableExp)memberExpression;
-						Variable itemVariable = QVTrelationUtil.getReferredVariable(variableExpression);
+						VariableDeclaration itemVariable = QVTrelationUtil.getReferredVariable(variableExpression);
 						getVariableDeclaration2TraceProperty(null, itemVariable, false);
 					}
 				}

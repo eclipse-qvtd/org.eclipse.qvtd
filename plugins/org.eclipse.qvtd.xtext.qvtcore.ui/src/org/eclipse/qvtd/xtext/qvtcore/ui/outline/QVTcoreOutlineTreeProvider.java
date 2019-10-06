@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtcore.ui.outline;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -42,7 +43,7 @@ public class QVTcoreOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		for (Variable asVariable : ele.getRealizedVariable()) {
 			createNode(parentNode, asVariable);
 		}
-		for (Variable asVariable : ele.getVariable()) {
+		for (VariableDeclaration asVariable : ele.getVariable()) {
 			createNode(parentNode, asVariable);
 		}
 		for (Predicate asPredicate : ele.getPredicate()) {
@@ -54,7 +55,7 @@ public class QVTcoreOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, GuardPattern ele) {
-		for (Variable asVariable : ele.getVariable()) {
+		for (VariableDeclaration asVariable : ele.getVariable()) {
 			createNode(parentNode, asVariable);
 		}
 		for (Predicate asPredicate : ele.getPredicate()) {

@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc.RelationComparator;
@@ -126,8 +126,8 @@ public class RelationalTransformation2CoreTransformation extends QVTcoreHelper
 		Transformation cTransformation = getCoreTransformation();
 		List<@NonNull Relation> rRelations = Lists.newArrayList(QVTrelationUtil.getOwnedRelations(rTransformation));
 		Collections.sort(rRelations, new RelationComparator());
-		Variable cThis = QVTbaseUtil.getContextVariable(standardLibrary, cTransformation);
-		Variable rThis = QVTbaseUtil.getContextVariable(standardLibrary, rTransformation);
+		VariableDeclaration cThis = QVTbaseUtil.getContextVariable(standardLibrary, cTransformation);
+		VariableDeclaration rThis = QVTbaseUtil.getContextVariable(standardLibrary, rTransformation);
 		//			putGlobalTrace(cThis, rThis);
 		qvtr2qvtc.addTrace(rThis, cThis);
 		//		UniqueArrayList<@NonNull TypedModel> rEnforceableTypedModels = new UniqueArrayList<>();		// FIXME not used

@@ -1040,7 +1040,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			if (node == null) {
 				StandardLibrary standardLibrary = helper.getEnvironmentFactory().getStandardLibrary();
 				Transformation pTransformation = QVTbaseUtil.getContainingTransformation(pVariableExp);
-				Variable pThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, pTransformation);
+				VariableDeclaration pThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, pTransformation);
 				if (pVariableExp.getReferredVariable() == pThisVariable) {
 					return context.createContextVariableExp();
 				}

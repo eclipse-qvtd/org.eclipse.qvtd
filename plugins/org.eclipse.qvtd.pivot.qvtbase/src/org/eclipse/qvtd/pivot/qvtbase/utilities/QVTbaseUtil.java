@@ -28,10 +28,10 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
@@ -57,6 +57,7 @@ import com.google.common.collect.Iterables;
 public class QVTbaseUtil extends PivotUtil
 {
 	public static final @NonNull String PRIMITIVE_TYPED_MODEL_NAME = "$primitive$";
+	public static final @NonNull String THIS_NAME = "this";
 	public static final @NonNull String THIS_TYPED_MODEL_NAME = "$this$";
 	public static final @NonNull String TRACE_CLASS_NAME = "trace";
 	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "middle"; //"$trace$";
@@ -393,18 +394,18 @@ public class QVTbaseUtil extends PivotUtil
 	/**
 	 * Return the context variable for a Transformation, creating it if not yet available.
 	 */
-	public static @NonNull Variable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation transformation) {
+	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation transformation) {
 		return getContextVariable(standardLibrary, transformation, transformation);
 	}
-	public static @NonNull Variable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
-		Variable ownedContext = owningTransformation.getOwnedContext();
+	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
+		Parameter ownedContext = owningTransformation.getOwnedContext();
 		if (ownedContext == null) {
 			//			org.eclipse.ocl.pivot.Class transformationType = ((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation");
 			//        	if (transformationType == null) {	// FIXME BUG 487123
 			//        		throw new IllegalLibraryException("No Transformation type in standard library.");		// FIXME need to be using a derived EnvironmentFactory
 			//        	}
-			ownedContext = PivotFactory.eINSTANCE.createParameterVariable();
-			ownedContext.setName("this");
+			ownedContext = PivotFactory.eINSTANCE.createParameter();
+			ownedContext.setName(QVTbaseUtil.THIS_NAME);
 			ownedContext.setType(typeTransformation);		// FIXME promote API
 			//			ownedContext.setTypeValue(transformation);
 			ownedContext.setIsRequired(true);
@@ -419,10 +420,10 @@ public class QVTbaseUtil extends PivotUtil
 	/**
 	 * Return the context variable for a TypedModel, creating it if not yet available.
 	 */
-	public static @NonNull Variable getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull TypedModel typedModel) {
-		Variable ownedContext = typedModel.getOwnedContext();
+	public static @NonNull Parameter getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull TypedModel typedModel) {
+		Parameter ownedContext = typedModel.getOwnedContext();
 		if (ownedContext == null) {
-			ownedContext = PivotFactory.eINSTANCE.createParameterVariable();
+			ownedContext = PivotFactory.eINSTANCE.createParameter();
 			ownedContext.setName(typedModel.getName());
 			ownedContext.setType(standardLibrary.getLibraryType("Model"));
 			//        	ownedContext.setTypeValue(typedModel);
@@ -529,8 +530,8 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	// Overrides to return Variable rather than VariableDeclaration. Is this sound? It is certainly helpful to guarantee an ownedInit.
-	public static @NonNull Variable getReferredVariable(@NonNull VariableExp asVariableExp) {
-		return (Variable) ClassUtil.nonNullState(asVariableExp.getReferredVariable());
+	public static @NonNull VariableDeclaration getReferredVariable(@NonNull VariableExp asVariableExp) {
+		return ClassUtil.nonNullState(asVariableExp.getReferredVariable());
 	}
 
 	public static @NonNull List<@NonNull Rule> getRule(@NonNull Transformation asTransformation) {

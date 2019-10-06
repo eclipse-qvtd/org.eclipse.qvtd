@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -36,7 +36,7 @@ public abstract class AbstractVariable2Variable implements Variable2Variable
 		this.name = variablesAnalysis.getUniqueVariableName(name, this);
 	}
 
-	protected AbstractVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull Variable rVariable) {
+	protected AbstractVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull VariableDeclaration rVariable) {
 		this.variablesAnalysis = variablesAnalysis;
 		this.name = QVTrelationUtil.getName(rVariable);
 	}

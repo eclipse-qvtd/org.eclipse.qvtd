@@ -23,7 +23,7 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -91,7 +91,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 				if (csParent instanceof MappingCS) {
 					Mapping asContext = PivotUtil.getPivot(Mapping.class, (MappingCS)csParent);
 					if (asContext != null) {
-						Variable asVariable = asContext.getTransformation().getOwnedContext();
+						VariableDeclaration asVariable = asContext.getTransformation().getOwnedContext();
 						if (asVariable != null) {
 							setNext(asVariable);
 						}
@@ -164,11 +164,11 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 	@Override
 	protected Element resolveSimpleNameExp(@NonNull NameExpCS csNameExp, @NonNull Element element) {
 		if (element instanceof Transformation) {
-			Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (Transformation) element);
+			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (Transformation) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		else if (element instanceof ImperativeTypedModel) {
-			Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (ImperativeTypedModel) element);
+			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (ImperativeTypedModel) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		return super.resolveSimpleNameExp(csNameExp, element);

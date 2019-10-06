@@ -67,16 +67,16 @@ public class QVTcoreUtil extends QVTbaseUtil
 		}
 	}
 
-	protected static class PatternVariableComparator implements Comparator<@NonNull Variable>
+	protected static class PatternVariableComparator implements Comparator<@NonNull VariableDeclaration>
 	{
-		private final @NonNull Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs;
+		private final @NonNull Map<@NonNull VariableDeclaration, @Nullable List<@NonNull VariableDeclaration>> def2refs;
 
-		protected PatternVariableComparator(@NonNull Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs) {
+		protected PatternVariableComparator(@NonNull Map<@NonNull VariableDeclaration, @Nullable List<@NonNull VariableDeclaration>> def2refs) {
 			this.def2refs = def2refs;
 		}
 
 		@Override
-		public int compare(@NonNull Variable o1, @NonNull Variable o2) {
+		public int compare(@NonNull VariableDeclaration o1, @NonNull VariableDeclaration o2) {
 			List<@NonNull VariableDeclaration> l1 = def2refs.get(o1);
 			List<@NonNull VariableDeclaration> l2 = def2refs.get(o2);
 			int s1 = l1 != null ? l1.size() : 0;
@@ -180,7 +180,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 		return ClassUtil.nullFree(bottomPattern.getRealizedVariable());
 	}
 
-	public static @NonNull Iterable<@NonNull Variable> getOwnedVariables(@NonNull CorePattern corePattern) {
+	public static @NonNull Iterable<@NonNull VariableDeclaration> getOwnedVariables(@NonNull CorePattern corePattern) {
 		return ClassUtil.nullFree(corePattern.getVariable());
 	}
 
@@ -202,7 +202,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 		throw new UnsupportedOperationException("Unsupported " + asNavigationAssignment.eClass().getName());
 	}
 
-	public static @NonNull Variable getTargetVariable(@NonNull VariableAssignment variableAssignment) {
+	public static @NonNull VariableDeclaration getTargetVariable(@NonNull VariableAssignment variableAssignment) {
 		return ClassUtil.nonNullState(variableAssignment.getTargetVariable());
 	}
 
@@ -271,33 +271,35 @@ public class QVTcoreUtil extends QVTbaseUtil
 	/**
 	 * Sort the pattern variables into a least referenced first then alphabetical order.
 	 */
-	public static void sortPatternVariables(@NonNull List<@NonNull Variable> variables) {
+	public static void sortPatternVariables(@NonNull List<@NonNull VariableDeclaration> variables) {
 		if (variables.size() > 1) {
-			final Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs = new HashMap<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>>();
+			final Map<@NonNull VariableDeclaration, @Nullable List<@NonNull VariableDeclaration>> def2refs = new HashMap<>();
 			//
 			// Initialize the def2refs.keySet as a fast is-a-pattern-variable lookup.
 			//
-			for (@NonNull Variable variable : variables) {
+			for (@NonNull VariableDeclaration variable : variables) {
 				def2refs.put(variable, null);
 			}
 			//
 			// Initialize the def2refs.values with the directly referenced pattern variables.
 			//
-			for (@NonNull Variable variable : variables) {
-				List<@NonNull VariableDeclaration> refs = null;
-				OCLExpression initExpression = variable.getOwnedInit();
-				if (initExpression != null) {
-					for (@NonNull EObject eObject : new TreeIterable(initExpression, true)) {
-						if (eObject instanceof VariableExp) {
-							VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
-							assert referredVariable != null;
-							if (def2refs.containsKey(referredVariable)) {
-								if (refs == null) {
-									refs = new ArrayList<@NonNull VariableDeclaration>();
-									def2refs.put(variable, refs);
-								}
-								if (!refs.contains(referredVariable)) {
-									refs.add(referredVariable);
+			for (@NonNull VariableDeclaration variable : variables) {
+				if (variable instanceof Variable) {
+					List<@NonNull VariableDeclaration> refs = null;
+					OCLExpression initExpression = ((Variable)variable).getOwnedInit();
+					if (initExpression != null) {
+						for (@NonNull EObject eObject : new TreeIterable(initExpression, true)) {
+							if (eObject instanceof VariableExp) {
+								VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
+								assert referredVariable != null;
+								if (def2refs.containsKey(referredVariable)) {
+									if (refs == null) {
+										refs = new ArrayList<@NonNull VariableDeclaration>();
+										def2refs.put(variable, refs);
+									}
+									if (!refs.contains(referredVariable)) {
+										refs.add(referredVariable);
+									}
 								}
 							}
 						}
@@ -310,7 +312,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 			boolean changed = true;
 			while (changed) {
 				changed = false;
-				for (@NonNull Variable variable : def2refs.keySet()) {
+				for (@NonNull VariableDeclaration variable : def2refs.keySet()) {
 					List<@NonNull VariableDeclaration> refs = def2refs.get(variable);
 					if (refs != null) {
 						for (int i = 0; i < refs.size(); i++) {

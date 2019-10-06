@@ -26,8 +26,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -216,14 +216,14 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return ClassUtil.nonNullState(rKey.getIdentifies());
 	}
 
-	public static @NonNull Variable getOverriddenVariable(@NonNull Relation overriddenRelation, @NonNull VariableDeclaration overridingRootVariable) {
+	public static @NonNull VariableDeclaration getOverriddenVariable(@NonNull Relation overriddenRelation, @NonNull VariableDeclaration overridingRootVariable) {
 		RelationDomain overridingDomain = QVTrelationUtil.getRootVariableDomain(overridingRootVariable);
-		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(overridingDomain);
+		List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(overridingDomain);
 		int rootVariableIndex = rootVariables.indexOf(overridingRootVariable);
 		assert rootVariableIndex >= 0;
 		TypedModel typedModel = overridingDomain.getTypedModel();
 		RelationDomain overriddenRelationDomain = QVTrelationUtil.getRelationDomain(overriddenRelation, typedModel);
-		List<@NonNull Variable> overriddenRootVariables = QVTrelationUtil.getRootVariables(overriddenRelationDomain);
+		List<@NonNull VariableDeclaration> overriddenRootVariables = QVTrelationUtil.getRootVariables(overriddenRelationDomain);
 		assert rootVariableIndex < overriddenRootVariables.size();
 		return overriddenRootVariables.get(rootVariableIndex);
 	}
@@ -328,12 +328,12 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	/**
 	 * Return all the root variables of relation in RelationCallExp order.
 	 */
-	public static @NonNull List<@NonNull Variable> getRootVariables(@NonNull Relation relation) {
-		List<@NonNull Variable> rootVariables = new ArrayList<@NonNull Variable>();
+	public static @NonNull List<@NonNull VariableDeclaration> getRootVariables(@NonNull Relation relation) {
+		List<@NonNull VariableDeclaration> rootVariables = new ArrayList<>();
 		for (@NonNull Domain domain : ClassUtil.nullFree(relation.getDomain())) {
 			for (@NonNull DomainPattern domainPattern : ClassUtil.nullFree(((RelationDomain)domain).getPattern())) {
 				TemplateExp templateExpression = domainPattern.getTemplateExpression();
-				Variable rootVariable = templateExpression.getBindsTo();
+				VariableDeclaration rootVariable = templateExpression.getBindsTo();
 				assert rootVariable != null;
 				rootVariables.add(rootVariable);
 			}
@@ -344,11 +344,11 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	/**
 	 * Return all the root variables of relationDomain (in partial RelationCallExp order).
 	 */
-	public static @NonNull List<@NonNull Variable> getRootVariables(@NonNull RelationDomain relationDomain) {
-		List<@NonNull Variable> rootVariables = new ArrayList<>();
+	public static @NonNull List<@NonNull VariableDeclaration> getRootVariables(@NonNull RelationDomain relationDomain) {
+		List<@NonNull VariableDeclaration> rootVariables = new ArrayList<>();
 		for (@NonNull DomainPattern domainPattern : ClassUtil.nullFree(relationDomain.getPattern())) {
 			TemplateExp templateExpression = domainPattern.getTemplateExpression();
-			Variable rootVariable = templateExpression.getBindsTo();
+			VariableDeclaration rootVariable = templateExpression.getBindsTo();
 			assert rootVariable != null;
 			rootVariables.add(rootVariable);
 		}
@@ -367,7 +367,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return ClassUtil.nonNullState(relationDomainAssignment.getValueExp());
 	}
 
-	public static @NonNull Variable getVariable(@NonNull RelationDomainAssignment relationDomainAssignment) {
+	public static @NonNull VariableDeclaration getVariable(@NonNull RelationDomainAssignment relationDomainAssignment) {
 		return ClassUtil.nonNullState(relationDomainAssignment.getVariable());
 	}
 

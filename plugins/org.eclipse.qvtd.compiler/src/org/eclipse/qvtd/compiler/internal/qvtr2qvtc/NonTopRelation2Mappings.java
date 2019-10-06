@@ -19,7 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
@@ -64,8 +64,8 @@ import com.google.common.collect.Iterables;
 		}
 
 		@Override
-		protected @NonNull Set<@NonNull Variable> getEnforcedBottomDomainVariables() { // FIXME unify with TopLevel
-			Set<@NonNull Variable> rEnforcedBottomDomainVariables = new HashSet<@NonNull Variable>(rEnforcedReferredVariables);
+		protected @NonNull Set<@NonNull VariableDeclaration> getEnforcedBottomDomainVariables() { // FIXME unify with TopLevel
+			Set<@NonNull VariableDeclaration> rEnforcedBottomDomainVariables = new HashSet<>(rEnforcedReferredVariables);
 			rEnforcedBottomDomainVariables.removeAll(rWhenVariable2rTypedModel.keySet());
 			rEnforcedBottomDomainVariables.removeAll(rSharedVariables);
 			rEnforcedBottomDomainVariables.removeAll(rEnforcedRootVariables);
@@ -238,13 +238,13 @@ import com.google.common.collect.Iterables;
 				Relation2TraceClass relation2traceClass = relationalTransformation2tracePackage.getRelation2TraceClass(rBaseRelation);
 				Relation2MiddleType relation2InvocationInterface = relation2traceClass.getRelation2InvocationInterface();
 				if (relation2InvocationInterface != relation2traceClass) {
-					Variable cInvocationVariable = variablesAnalysis.addCoreGuardVariable("invocation", relation2InvocationInterface.getMiddleClass());
+					VariableDeclaration cInvocationVariable = variablesAnalysis.addCoreGuardVariable("invocation", relation2InvocationInterface.getMiddleClass());
 					Variable2Variable cInvocationVariableAnalysis = variablesAnalysis.getCoreVariableAnalysis(cInvocationVariable);
 					//					variablesAnalysis.addTraceNavigationAssignment(rVariable, isOptional);
 
-					for (@NonNull Variable rRootVariable : QVTrelationUtil.getRootVariables(rRelation)) {
-						Variable rOverriddenRootVariable = QVTrelationUtil.getOverriddenVariable(rBaseRelation, rRootVariable);
-						Variable cRootVariable = variablesAnalysis.getCoreVariable(rRootVariable);
+					for (@NonNull VariableDeclaration rRootVariable : QVTrelationUtil.getRootVariables(rRelation)) {
+						VariableDeclaration rOverriddenRootVariable = QVTrelationUtil.getOverriddenVariable(rBaseRelation, rRootVariable);
+						VariableDeclaration cRootVariable = variablesAnalysis.getCoreVariable(rRootVariable);
 						Property cProperty = relation2InvocationInterface.getTraceProperty(rOverriddenRootVariable);
 						NavigationCallExp cNavigationExp = createNavigationCallExp(createVariableExp(cInvocationVariable), cProperty);
 						variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, createVariableExp(cRootVariable), cNavigationExp);

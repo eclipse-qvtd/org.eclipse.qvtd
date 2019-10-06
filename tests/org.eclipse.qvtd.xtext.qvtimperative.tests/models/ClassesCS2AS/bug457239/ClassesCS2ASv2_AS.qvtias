@@ -9,10 +9,10 @@
   <ownedPackages xmi:id="6Fh3I" name="">
     <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="ll3DG" name="classescs2as" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR">
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="IsZt9" name="leftCS" usedPackage="../ClassesCS.ecore.oclas#QSeUI">
-        <ownedContext xsi:type="pivot:ParameterVariable" name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#qeoBC"/>
+        <ownedContext xsi:type="pivot:Parameter" name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#qeoBC"/>
       </modelParameter>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="fuoOH" name="rightAS" usedPackage="../Classes.ecore.oclas#gm0v7">
-        <ownedContext xsi:type="pivot:ParameterVariable" name="rightAS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#qeoBC"/>
+        <ownedContext xsi:type="pivot:Parameter" name="rightAS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#qeoBC"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="nJ3jC" name="createPackage">
         <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="AYM4v" name="packageCS" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#rYaOy"
@@ -45,7 +45,7 @@
           </ownedExpression>
         </ownedStatements>
       </rule>
-      <ownedContext xsi:type="pivot:ParameterVariable" name="this" type="#ll3DG"/>
+      <ownedContext xsi:type="pivot:Parameter" name="this" type="#ll3DG"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">

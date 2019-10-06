@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.VariableAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
@@ -46,7 +46,7 @@ public interface Variable2Variable extends VariableAnalysis
 	/**
 	 * The core variable for this analysis.
 	 */
-	@NonNull Variable getCoreVariable();
+	@NonNull VariableDeclaration getCoreVariable();
 
 	/**
 	 * Return true if this variable is realized in an enforced domain.

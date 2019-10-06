@@ -66,7 +66,7 @@ public class AssignmentSorter
 	/**
 	 * Nested Map for each known VariableAssignment from each Variable to the VariableAssignment.
 	 */
-	protected final @NonNull Map<@NonNull Variable, @NonNull VariableAssignment> variable2variableAssignment = new HashMap<>();
+	protected final @NonNull Map<@NonNull VariableDeclaration, @NonNull VariableAssignment> variable2variableAssignment = new HashMap<>();
 
 	/**
 	 * FIXME List of too-complex assignments that OCL2QVTm produces; just tack them on at the end.
@@ -80,7 +80,7 @@ public class AssignmentSorter
 		for (@NonNull Assignment assignment : assignments) {
 			if (assignment instanceof VariableAssignment) {
 				VariableAssignment variableAssignment = (VariableAssignment) assignment;
-				Variable targetVariable = variableAssignment.getTargetVariable();
+				VariableDeclaration targetVariable = variableAssignment.getTargetVariable();
 				if (targetVariable != null) {
 					VariableAssignment oldAssignment = variable2variableAssignment.put(targetVariable, variableAssignment);
 					assert oldAssignment == null;

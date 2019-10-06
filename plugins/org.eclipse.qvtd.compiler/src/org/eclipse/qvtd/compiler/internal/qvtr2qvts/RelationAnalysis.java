@@ -367,7 +367,7 @@ public class RelationAnalysis extends RuleAnalysis
 			// Prefer the root nodes of input domains as head nodes.
 			for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
 				if (scheduleManager.isInput(relationDomain)) {
-					for (@NonNull Variable rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
+					for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
 						Node rootNode = region.getNode(rootVariable);
 						if (rootNode != null) {
 							preferredHeadNodes.add(rootNode);
@@ -1026,7 +1026,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	public void synthesizeDefaultValue(@NonNull RelationDomainAssignment relationDomainAssignment) {
-		Variable variable = QVTrelationUtil.getVariable(relationDomainAssignment);
+		VariableDeclaration variable = QVTrelationUtil.getVariable(relationDomainAssignment);
 		OCLExpression valueExp = QVTrelationUtil.getValueExp(relationDomainAssignment);
 		Node variableNode = region.getNode(variable);
 		if (variableNode != null) {
@@ -1035,7 +1035,7 @@ public class RelationAnalysis extends RuleAnalysis
 		else if (!(variable instanceof SharedVariable)) {
 			CompilerUtil.addRegionError(getProblemHandler(), region, "Non-SharedVariable for " + relationDomainAssignment);
 		}
-		else if (variable.getOwnedInit() != null) {
+		else if ((variable instanceof Variable) && (((Variable)variable).getOwnedInit() != null)) {
 			CompilerUtil.addRegionError(getProblemHandler(), region, "Default assignment for initialized variable: " + relationDomainAssignment);
 		}
 		else {

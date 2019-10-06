@@ -1280,7 +1280,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <ownedContext xsi:type="pivot:ParameterVariable" name="this" type="#53,W7"/>
+      <ownedContext xsi:type="pivot:Parameter" name="this" type="#53,W7"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">

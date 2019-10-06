@@ -346,7 +346,7 @@
           <realizedVariable xmi:id="qV..Upper2Lower.edge2edge.bottom.e2e" name="e2e" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Edge2Edge"/>
         </bottomPattern>
       </rule>
-      <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..Upper2Lower.this" name="this" type="#T..Upper2Lower"/>
+      <ownedContext xsi:type="pivot:Parameter" xmi:id="qV..Upper2Lower.this" name="this" type="#T..Upper2Lower"/>
     </ownedClasses>
   </ownedPackages>
 </qvtc:CoreModel>

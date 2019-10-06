@@ -18,7 +18,6 @@ import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -104,7 +103,7 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		RelationAnalysis invokedRelationAnalysis = (RelationAnalysis) context.getTransformationAnalysis().getRuleAnalysis(invokedRelation);
 		//
 		InvocationAnalysis invocationAnalysis = relationAnalysis.getOutgoingInvocationAnalysis(invokedRelationAnalysis, relationCallExp, isWhen);
-		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(invokedRelation);
+		List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(invokedRelation);
 		List<@NonNull OCLExpression> ownedArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(relationCallExp);
 		int size = rootVariables.size();
 		assert size == ownedArguments.size();

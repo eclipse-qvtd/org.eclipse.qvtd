@@ -23,7 +23,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
@@ -167,7 +166,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 				@NonNull RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csNameExp);
 				relationCallExp.setReferredRelation(relation);
 				helper.setType(relationCallExp, standardLibrary.getBooleanType(), true);
-				List<Variable> rootVariables = QVTrelationUtil.getRootVariables(relation);
+				List<VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(relation);
 				resolveRelationArgumentTypes(rootVariables, csRoundBracketedClause);
 				resolveRelationArguments(csRoundBracketedClause, null, relation, relationCallExp);
 				return relationCallExp;
@@ -238,7 +237,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 		helper.refreshList(relationCallExp.getArgument(), pivotArguments);
 	}
 
-	protected void resolveRelationArgumentTypes(@Nullable List<Variable> rootVariables, @NonNull RoundBracketedClauseCS csRoundBracketedClause) {
+	protected void resolveRelationArgumentTypes(@Nullable List<VariableDeclaration> rootVariables, @NonNull RoundBracketedClauseCS csRoundBracketedClause) {
 		int argIndex = 0;
 		for (NavigatingArgCS csArgument : csRoundBracketedClause.getOwnedArguments()) {
 			if (csArgument.getRole() == NavigationRole.ITERATOR) {
@@ -254,7 +253,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 					boolean isType = false;
 					if (csName instanceof NameExpCS) {
 						if ((rootVariables != null) && argIndex < rootVariables.size()) {
-							Variable rootVariable = rootVariables.get(argIndex);
+							VariableDeclaration rootVariable = rootVariables.get(argIndex);
 							if (/*rootVariable.isTypeof() ||*/ (rootVariable.getTypeId() == standardLibrary.getOclTypeType().getTypeId())) {
 								isType = true;
 								NameExpCS csNameExp = (NameExpCS)csName;

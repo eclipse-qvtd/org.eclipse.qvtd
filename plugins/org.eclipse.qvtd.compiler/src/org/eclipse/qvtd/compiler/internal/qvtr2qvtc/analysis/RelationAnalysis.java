@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
@@ -51,7 +51,7 @@ public class RelationAnalysis extends QVTrelationHelper
 	/**
 	 * The root variables (in relation call order).
 	 */
-	private @NonNull List<@NonNull Variable> rootVariables = new ArrayList<>();
+	private @NonNull List<@NonNull VariableDeclaration> rootVariables = new ArrayList<>();
 
 	/**
 	 * The expressions that call this relation.
@@ -260,7 +260,7 @@ public class RelationAnalysis extends QVTrelationHelper
 		return transformationAnalysis.getRelationalTransformation2TracePackage();
 	}
 
-	public @NonNull List<@NonNull Variable> getRootVariables() {
+	public @NonNull List<@NonNull VariableDeclaration> getRootVariables() {
 		return rootVariables;
 	}
 

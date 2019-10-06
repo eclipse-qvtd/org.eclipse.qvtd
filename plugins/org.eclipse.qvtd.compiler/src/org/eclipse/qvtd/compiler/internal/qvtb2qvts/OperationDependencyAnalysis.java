@@ -1299,7 +1299,7 @@ public class OperationDependencyAnalysis
 			if (operation instanceof Function) {
 				Function function  = (Function)operation;
 				Transformation transformation = QVTbaseUtil.getContainingTransformation(function);
-				Variable thisVariable = QVTbaseUtil.getContextVariable(operationDependencyAnalysis.metamodelManager.getStandardLibrary(), transformation);
+				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(operationDependencyAnalysis.metamodelManager.getStandardLibrary(), transformation);
 				visitor.addVariable(thisVariable, ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
 				ownedParameters = function.getOwnedParameters();
 				ownedBody = function.getQueryExpression();

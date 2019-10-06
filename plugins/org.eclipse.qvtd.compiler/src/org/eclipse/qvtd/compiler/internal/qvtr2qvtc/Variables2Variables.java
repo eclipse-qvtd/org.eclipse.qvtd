@@ -77,11 +77,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	/**
 	 * Return a Map from each bound variable to the TemplateExp for which it is the TempateExp.getBindsTo().
 	 */
-	public static @NonNull Map<@NonNull Variable, @NonNull TemplateExp> gatherBoundVariables(@NonNull Element asRoot) {
-		Map<@NonNull Variable, @NonNull TemplateExp> boundVariables = new HashMap<>();
+	public static @NonNull Map<@NonNull VariableDeclaration, @NonNull TemplateExp> gatherBoundVariables(@NonNull Element asRoot) {
+		Map<@NonNull VariableDeclaration, @NonNull TemplateExp> boundVariables = new HashMap<>();
 		for (EObject eObject : new TreeIterable(asRoot, true)) {
 			if (eObject instanceof TemplateExp) {
-				Variable bindsTo = QVTrelationUtil.getBindsTo((TemplateExp)eObject);
+				VariableDeclaration bindsTo = QVTrelationUtil.getBindsTo((TemplateExp)eObject);
 				TemplateExp oldTemplateExp = boundVariables.put(bindsTo, (TemplateExp)eObject);
 				assert oldTemplateExp == null;
 			}
@@ -92,14 +92,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	/**
 	 * Return a Map from each member variable to the CollectionTemplateExp's for which it is a CollectionTempateExp.member.referredVariable.
 	 */
-	public static @Nullable Map<@NonNull Variable, @NonNull List<@NonNull CollectionTemplateExp>> gatherMemberVariables(@NonNull Element asRoot) {
-		Map<@NonNull Variable, @NonNull List<@NonNull CollectionTemplateExp>> memberVariable2collectionTemplateExps = null;
+	public static @Nullable Map<@NonNull VariableDeclaration, @NonNull List<@NonNull CollectionTemplateExp>> gatherMemberVariables(@NonNull Element asRoot) {
+		Map<@NonNull VariableDeclaration, @NonNull List<@NonNull CollectionTemplateExp>> memberVariable2collectionTemplateExps = null;
 		for (EObject eObject : new TreeIterable(asRoot, true)) {
 			if (eObject instanceof CollectionTemplateExp) {
 				CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)eObject;
 				for (@NonNull OCLExpression member : QVTrelationUtil.getOwnedMembers(collectionTemplateExp)) {
 					if (member instanceof VariableExp) {
-						Variable memberVariable = QVTrelationUtil.getReferredVariable((VariableExp)member);
+						VariableDeclaration memberVariable = QVTrelationUtil.getReferredVariable((VariableExp)member);
 						if (memberVariable2collectionTemplateExps == null) {
 							memberVariable2collectionTemplateExps = new HashMap<>();
 						}
@@ -121,77 +121,73 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	/**
 	 * Return all variables referenced within the composition tree of each of asRoots.
 	 */
-	public static void gatherReferredVariables(@NonNull Set<@NonNull Variable> referredVariables, @NonNull Iterable<@NonNull ? extends Element> asRoots) {
+	public static void gatherReferredVariables(@NonNull Set<@NonNull VariableDeclaration> referredVariables, @NonNull Iterable<@NonNull ? extends Element> asRoots) {
 		for (@NonNull Element asRoot : asRoots) {
 			gatherReferredVariables(referredVariables, asRoot);
 		}
 	}
-	public static void gatherReferredVariables(@NonNull Set<@NonNull Variable> referredVariables, @NonNull Element asRoot) {
+	public static void gatherReferredVariables(@NonNull Set<@NonNull VariableDeclaration> referredVariables, @NonNull Element asRoot) {
 		for (@NonNull EObject eObject : new TreeIterable(asRoot, true)) {
 			if (eObject instanceof VariableExp) {
 				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
-				if (referredVariable instanceof Variable) {
-					referredVariables.add((Variable)referredVariable);
-				}
+				referredVariables.add(referredVariable);
 			}
-			else if (eObject instanceof Variable) {
-				referredVariables.add((Variable)eObject);
+			else if (eObject instanceof VariableDeclaration) {
+				referredVariables.add((VariableDeclaration)eObject);
 			}
 			else if (eObject instanceof TemplateExp) {
-				Variable bindsTo = ((TemplateExp)eObject).getBindsTo();
+				VariableDeclaration bindsTo = ((TemplateExp)eObject).getBindsTo();
 				if (bindsTo != null) {
 					referredVariables.add(bindsTo);
 				}
 				if (eObject instanceof CollectionTemplateExp) {				// Member variable are contained VariableExp's
-					Variable rest = ((CollectionTemplateExp)eObject).getRest();
-					if ((rest != null) && !rest.isIsImplicit()) {
+					VariableDeclaration rest = ((CollectionTemplateExp)eObject).getRest();
+					if ((rest instanceof Variable) && !((Variable)rest).isIsImplicit()) {
 						referredVariables.add(rest);
 					}
 				}
 			}
 		}
 	}
-	public static void gatherReferredVariablesWithTypedModels(@NonNull Map<@NonNull Variable, @Nullable TypedModel> referredVariable2typedModel, @NonNull Element asRoot) {
+	public static void gatherReferredVariablesWithTypedModels(@NonNull Map<@NonNull VariableDeclaration, @Nullable TypedModel> referredVariable2typedModel, @NonNull Element asRoot) {
 		for (EObject eObject : new TreeIterable(asRoot, true)) {
 			if (eObject instanceof VariableExp) {
 				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
-				if (referredVariable instanceof Variable) {
-					EObject eContainer = eObject.eContainer();
-					if (eContainer instanceof RelationCallExp) {
-						RelationCallExp relationCallExp = (RelationCallExp)eContainer;
-						int argument = relationCallExp.getArgument().indexOf(eObject);
-						assert argument >= 0;
-						Relation referredRelation = ClassUtil.nonNullState(relationCallExp.getReferredRelation());
-						List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(referredRelation);
-						assert argument < rootVariables.size();
-						Variable rootVariable = rootVariables.get(argument);
-						RelationDomain relationDomain = QVTrelationUtil.getRootVariableDomain(rootVariable);
-						gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, (Variable)referredVariable, relationDomain.getTypedModel());
-					}
-					else {
-						gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, (Variable)referredVariable, null);
-					}
+				EObject eContainer = eObject.eContainer();
+				if (eContainer instanceof RelationCallExp) {
+					RelationCallExp relationCallExp = (RelationCallExp)eContainer;
+					int argument = relationCallExp.getArgument().indexOf(eObject);
+					assert argument >= 0;
+					Relation referredRelation = ClassUtil.nonNullState(relationCallExp.getReferredRelation());
+					List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(referredRelation);
+					assert argument < rootVariables.size();
+					VariableDeclaration rootVariable = rootVariables.get(argument);
+					RelationDomain relationDomain = QVTrelationUtil.getRootVariableDomain(rootVariable);
+					gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, referredVariable, relationDomain.getTypedModel());
+				}
+				else {
+					gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, referredVariable, null);
 				}
 			}
-			else if (eObject instanceof Variable) {
-				gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, (Variable)eObject, null);
+			else if (eObject instanceof VariableDeclaration) {
+				gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, (VariableDeclaration)eObject, null);
 			}
 			else if (eObject instanceof TemplateExp) {
-				Variable bindsTo = ((TemplateExp)eObject).getBindsTo();
+				VariableDeclaration bindsTo = ((TemplateExp)eObject).getBindsTo();
 				if (bindsTo != null) {
 					gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, bindsTo, null);
 				}
 				if (eObject instanceof CollectionTemplateExp) {
-					Variable rest = ((CollectionTemplateExp)eObject).getRest();
-					if ((rest != null) && !rest.isIsImplicit()) {
+					VariableDeclaration rest = ((CollectionTemplateExp)eObject).getRest();
+					if ((rest instanceof Variable) && !((Variable)rest).isIsImplicit()) {
 						gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, rest, null);
 					}
 				}
 			}
 		}
 	}
-	private static void gatherReferredVariablesWithTypedModelsAdd(@NonNull Map<@NonNull Variable, @Nullable TypedModel> referredVariable2typedModel,
-			@NonNull Variable variable, @Nullable TypedModel rTypedModel) {
+	private static void gatherReferredVariablesWithTypedModelsAdd(@NonNull Map<@NonNull VariableDeclaration, @Nullable TypedModel> referredVariable2typedModel,
+			@NonNull VariableDeclaration variable, @Nullable TypedModel rTypedModel) {
 		if (rTypedModel != null) {
 			TypedModel oldTypedModel = referredVariable2typedModel.put(variable, rTypedModel);
 			assert (oldTypedModel == rTypedModel) || (oldTypedModel == null);
@@ -204,12 +200,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	/**
 	 * Return a Map from each rest variable to the CollectionTemplateExp for which it is a CollectionTempateExp.rest.
 	 */
-	public static @Nullable Map<@NonNull Variable, @NonNull CollectionTemplateExp> gatherRestVariables(@NonNull Element asRoot) {
-		Map<@NonNull Variable, @NonNull CollectionTemplateExp> restVariable2collectionTemplateExp = null;
+	public static @Nullable Map<@NonNull VariableDeclaration, @NonNull CollectionTemplateExp> gatherRestVariables(@NonNull Element asRoot) {
+		Map<@NonNull VariableDeclaration, @NonNull CollectionTemplateExp> restVariable2collectionTemplateExp = null;
 		for (EObject eObject : new TreeIterable(asRoot, true)) {
 			if (eObject instanceof CollectionTemplateExp) {
 				CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)eObject;
-				Variable rest = collectionTemplateExp.getRest();
+				VariableDeclaration rest = collectionTemplateExp.getRest();
 				if (rest != null) {
 					if (restVariable2collectionTemplateExp == null) {
 						restVariable2collectionTemplateExp = new HashMap<>();
@@ -226,13 +222,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	/**
 	 * Return the variables that are used by more than one domain of the relation and so must be middle variables.
 	 */
-	public static @NonNull Set<@NonNull Variable> getMiddleDomainVariables(@NonNull Relation rRelation) {
-		Set<@NonNull Variable> rSomeDomainVariables = new HashSet<>();
-		Set<@NonNull Variable> rMiddleDomainVariables = new HashSet<>();
+	public static @NonNull Set<@NonNull VariableDeclaration> getMiddleDomainVariables(@NonNull Relation rRelation) {
+		Set<@NonNull VariableDeclaration> rSomeDomainVariables = new HashSet<>();
+		Set<@NonNull VariableDeclaration> rMiddleDomainVariables = new HashSet<>();
 		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
-			Set<@NonNull Variable> rThisDomainVariables = new HashSet<>();
+			Set<@NonNull VariableDeclaration> rThisDomainVariables = new HashSet<>();
 			Variables2Variables.gatherReferredVariables(rThisDomainVariables, rDomain);
-			for (@NonNull Variable rVariable : rThisDomainVariables) {
+			for (@NonNull VariableDeclaration rVariable : rThisDomainVariables) {
 				if (!rSomeDomainVariables.add(rVariable)) {
 					rMiddleDomainVariables.add(rVariable);				// Accumulate second (and higher) usages
 				}
@@ -249,8 +245,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected final @NonNull BottomPattern cMiddleBottomPattern;
 	protected final @NonNull GuardPattern cMiddleGuardPattern;
 	protected final @Nullable VariableDeclaration cMiddleVariable;		// tcv: The trace class variable (the middle variable identifying the middle object)
-	protected final @NonNull Variable rThisVariable;
-	protected final @NonNull Variable cThisVariable;
+	protected final @NonNull VariableDeclaration rThisVariable;
+	protected final @NonNull VariableDeclaration cThisVariable;
 
 	/**
 	 * Map from the each core variable name in use to an originating object, typically the VariableAnalysis of a relation variable,
@@ -301,9 +297,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 * Create a core Variable with a name and type in the middle guard pattern. The variable has no corresponding relation variable.
 	 * @throws CompilerChainException
 	 */
-	public @NonNull Variable addCoreGuardVariable(@NonNull String name, @NonNull Type type) throws CompilerChainException {
+	public @NonNull VariableDeclaration addCoreGuardVariable(@NonNull String name, @NonNull Type type) throws CompilerChainException {
 		CoreVariable2Variable analysis = new CoreVariable2Variable(this, name, type, null);
-		Variable cVariable = analysis.getCoreVariable();
+		VariableDeclaration cVariable = analysis.getCoreVariable();
 		addVariableAnalysis(analysis);
 		cMiddleGuardPattern.getVariable().add(cVariable);
 		return cVariable;
@@ -321,20 +317,20 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cVariable;
 	}
 
-	public @NonNull Variable addCoreVariable(@NonNull String name, @NonNull OCLExpression mMember) throws CompilerChainException {
+	public @NonNull VariableDeclaration addCoreVariable(@NonNull String name, @NonNull OCLExpression mMember) throws CompilerChainException {
 		CoreVariable2Variable analysis = new CoreVariable2Variable(this, name, ClassUtil.nonNullState(mMember.getType()), mMember);
-		Variable cVariable = analysis.getCoreVariable();
+		VariableDeclaration cVariable = analysis.getCoreVariable();
 		addVariableAnalysis(analysis);
 		cMiddleGuardPattern.getVariable().add(cVariable);
 		return cVariable;
 	}
 
-	public void addNavigationAssignment(@NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException {
+	public void addNavigationAssignment(@NonNull VariableDeclaration rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException {
 		getVariableAnalysis(rTargetVariable).addNavigationAssignment(targetProperty, cExpression, isPartial);
 	}
 
-	public void addNavigationPredicate(@NonNull CorePattern cCorePattern, @NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression) throws CompilerChainException {
-		Variable cTargetVariable = getCoreVariable(rTargetVariable);
+	public void addNavigationPredicate(@NonNull CorePattern cCorePattern, @NonNull VariableDeclaration rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression) throws CompilerChainException {
+		VariableDeclaration cTargetVariable = getCoreVariable(rTargetVariable);
 		NavigationCallExp cNavigationExp = createNavigationCallExp(createVariableExp(cTargetVariable), targetProperty);
 		if (cExpression instanceof VariableExp) {
 			addConditionPredicate(cCorePattern, cExpression, cNavigationExp);
@@ -347,12 +343,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected void addPredicate(@NonNull CorePattern cExpectedCorePattern, @NonNull OCLExpression cExpression) throws CompilerChainException {
 		assert cMapping == QVTcoreUtil.getContainingMapping(cExpectedCorePattern);
 		QVTr2QVTc.SYNTHESIS.println("  addPredicate " + cExpression);
-		Set<@NonNull Variable> cReferredVariables = new HashSet<>();
+		Set<@NonNull VariableDeclaration> cReferredVariables = new HashSet<>();
 		gatherReferredVariables(cReferredVariables, cExpression);
 		boolean isGuard = true;
 		boolean isMiddle = false;
 		CorePattern cReferredPattern = null;
-		for (@NonNull Variable cReferredVariable : cReferredVariables) {
+		for (@NonNull VariableDeclaration cReferredVariable : cReferredVariables) {
 			Variable2Variable analysis = cVariable2analysis.get(cReferredVariable);
 			if (analysis == null) {
 				isGuard = false;
@@ -392,12 +388,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 *
 	 * Returns the core variant of the relation variable.
 	 */
-	public @NonNull Variable addTraceNavigationAssignment(@NonNull Variable rVariable, boolean isOptional) throws CompilerChainException {
+	public @NonNull VariableDeclaration addTraceNavigationAssignment(@NonNull VariableDeclaration rVariable, boolean isOptional) throws CompilerChainException {
 		@SuppressWarnings("unused")
 		boolean traceIsRealized = getRelationAnalysis().traceIsRealized();
 		//		assert traceIsRealized;
 		VariableDeclaration cMiddleRealizedVariable2 = getMiddleVariable();
-		Variable cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
+		VariableDeclaration cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
 		Property cTargetProperty = relationalTransformation2tracePackage.basicGetTraceProperty(QVTrelationUtil.getType(cMiddleRealizedVariable2), rVariable);
 		if (!isOptional && (cTargetProperty == null)) {		// FIXME debugging
 			cTargetProperty = relationalTransformation2tracePackage.basicGetTraceProperty(QVTrelationUtil.getType(cMiddleRealizedVariable2), rVariable);
@@ -415,7 +411,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cVariable;
 	}
 
-	public @NonNull Variable addTraceNavigationAssignment(@NonNull Property cTargetProperty, @NonNull Variable cVariable) throws CompilerChainException {
+	public @NonNull VariableDeclaration addTraceNavigationAssignment(@NonNull Property cTargetProperty, @NonNull VariableDeclaration cVariable) throws CompilerChainException {
 		@SuppressWarnings("unused")
 		boolean traceIsRealized = getRelationAnalysis().traceIsRealized();
 		//		assert traceIsRealized;
@@ -435,9 +431,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 *
 	 * Returns the core variant of the relation variable.
 	 */
-	public @NonNull Variable addTraceNavigationPredicate(@NonNull Variable rVariable) throws CompilerChainException {
+	public @NonNull VariableDeclaration addTraceNavigationPredicate(@NonNull VariableDeclaration rVariable) throws CompilerChainException {
 		VariableDeclaration cMiddleRealizedVariable2 = getMiddleVariable();
-		Variable cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
+		VariableDeclaration cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
 		Property cTargetProperty = relationalTransformation2tracePackage.basicGetTraceProperty(QVTrelationUtil.getType(cMiddleRealizedVariable2), rVariable);
 		assert cTargetProperty != null;
 		assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));
@@ -450,7 +446,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	public void addVariableAnalysis(@NonNull Variable2Variable analysis) {
-		Variable cVariable = analysis.getCoreVariable();
+		VariableDeclaration cVariable = analysis.getCoreVariable();
 		cVariable2analysis.put(cVariable, analysis);
 		VariableDeclaration rVariable = analysis.getRelationVariable();
 		if (rVariable != null) {
@@ -477,7 +473,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 
-	protected @Nullable Variable2Variable basicGetVariableAnalysis(@NonNull Variable relationVariable) {
+	protected @Nullable Variable2Variable basicGetVariableAnalysis(@NonNull VariableDeclaration relationVariable) {
 		return rVariable2analysis.get(relationVariable);
 	}
 
@@ -496,11 +492,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return QVTcoreUtil.getDomain(cMapping, cTypedModel);
 	}
 
-	public @NonNull Variable getCoreThisVariable() {
+	public @NonNull VariableDeclaration getCoreThisVariable() {
 		return cThisVariable;
 	}
 
-	public @NonNull Variable getCoreVariable(@NonNull Variable rVariable) {			// doRVarToMVar
+	public @NonNull VariableDeclaration getCoreVariable(@NonNull VariableDeclaration rVariable) {			// doRVarToMVar
 		return getVariableAnalysis(rVariable).getCoreVariable();
 	}
 
@@ -560,7 +556,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return name;
 	}
 
-	protected @NonNull Variable2Variable getVariableAnalysis(@NonNull Variable relationVariable) {
+	protected @NonNull Variable2Variable getVariableAnalysis(@NonNull VariableDeclaration relationVariable) {
 		Variable2Variable analysis = rVariable2analysis.get(relationVariable);
 		if (analysis == null) {
 			assert QVTbaseUtil.basicGetContainingTransformation(relationVariable) instanceof RelationalTransformation;

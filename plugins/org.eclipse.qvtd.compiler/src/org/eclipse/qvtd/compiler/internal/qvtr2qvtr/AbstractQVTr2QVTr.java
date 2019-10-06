@@ -227,6 +227,15 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 		}
 
 		@Override
+		public @NonNull Parameter visitParameter(@NonNull Parameter vIn) {
+			Parameter vOut = PivotFactory.eINSTANCE.createParameter();
+			context.addTrace(vIn, vOut);
+			vOut.setName(vIn.getName());
+			createAll(vIn.getOwnedComments(), vOut.getOwnedComments());
+			return vOut;
+		}
+
+		@Override
 		public @NonNull ParameterVariable visitParameterVariable(@NonNull ParameterVariable vIn) {
 			ParameterVariable vOut = PivotFactory.eINSTANCE.createParameterVariable();
 			context.addTrace(vIn, vOut);
@@ -552,9 +561,14 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 			Parameter pIn = context.equivalentSource(pOut);
 			pOut.setName(pIn.getName());
 			pOut.setIsRequired(pIn.isIsRequired());
-			Type tVar = pIn.getType();
+			//			Type tVar = pIn.getType();
+			//			pOut.setType(tVar);
+			//			pOut.setTypeValue(pIn.getTypeValue());
+			Type tIn = pIn.getType();
+			Type tVar = tIn != null ? context.equivalentTarget(tIn) : null;
 			pOut.setType(tVar);
-			pOut.setTypeValue(pIn.getTypeValue());
+			Type tvIn = pIn.getTypeValue();
+			pOut.setTypeValue(tvIn != null ? context.equivalentTarget(tvIn) : null);
 			return pIn;
 		}
 

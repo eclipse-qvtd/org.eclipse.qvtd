@@ -4,12 +4,13 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.ParameterVariable;
 
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -166,7 +167,7 @@ public interface TmapModule extends Execution {
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	ParameterVariable getT2_5();
+	Parameter getT2_5();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_5 <em>T2 5</em>}' reference.
@@ -176,7 +177,7 @@ public interface TmapModule extends Execution {
 	 * @see #getT2_5()
 	 * @generated
 	 */
-	void setT2_5(ParameterVariable value);
+	void setT2_5(Parameter value);
 
 	/**
 	 * Returns the value of the '<em><b>T2 6</b></em>' reference.

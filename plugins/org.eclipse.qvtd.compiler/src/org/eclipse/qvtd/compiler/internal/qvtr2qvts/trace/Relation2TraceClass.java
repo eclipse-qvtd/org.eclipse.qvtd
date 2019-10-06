@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -134,7 +133,7 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 		for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {
 			Iterables.addAll(allHeadGroupNodes, headNodeGroup.getHeadNodes());
 		}
-		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(relation);
+		List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(relation);
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(relationAnalysis.getRegion())) {
 			if (node.isThis()) {
 				;						// Do not trace this
@@ -449,7 +448,7 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 		return getTransformation2TracePackage().getNameGenerator().createTraceClassPropertyName(typedModel, variable);
 	}
 
-	protected void createVariableDeclaration2TraceProperty(@NonNull Node node, @NonNull List<@NonNull Variable> rootVariables,
+	protected void createVariableDeclaration2TraceProperty(@NonNull Node node, @NonNull List<@NonNull VariableDeclaration> rootVariables,
 			@NonNull Set<@NonNull Node> allHeadGroupNodes, boolean manyTracesPerHead) {
 		boolean unitOpposite = allHeadGroupNodes.contains(node) && !manyTracesPerHead;
 		TypedModel typedModel = QVTscheduleUtil.getTypedModel(node);

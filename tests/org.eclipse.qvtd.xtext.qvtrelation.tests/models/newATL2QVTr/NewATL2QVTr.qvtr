@@ -300,7 +300,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 --						name = null
 					}
 				},
-				ownedContext = : pivotMM::ParameterVariable {
+				ownedContext = : pivotMM::Parameter {
 					name = 'this',
 					type = qvtrTransformation,
 					isRequired = true

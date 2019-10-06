@@ -304,7 +304,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 --						name = null
 					}
 				},
-				ownedContext = : pivotMM::ParameterVariable {
+				ownedContext = : pivotMM::Parameter {
 					name = 'this',
 					type = qvtrTransformation,
 					isRequired = true

@@ -35,7 +35,7 @@ import org.eclipse.ocl.pivot.TemplateParameter;
 import org.eclipse.ocl.pivot.TemplateSignature;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -418,7 +418,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 				@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
 				addValidUsage(bitMask, typedModelUsage);
 				setUsage(typedModel, typedModelUsage);
-				Variable ownedContext = typedModel.getOwnedContext();
+				VariableDeclaration ownedContext = typedModel.getOwnedContext();
 				if (ownedContext != null) {
 					setUsage(ownedContext, typedModelUsage);
 				}
@@ -435,7 +435,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		}
 		analyzeProperties();
 		type2usage.put(((StandardLibraryInternal)standardLibrary).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
-		Variable ownedContext = transformation.getOwnedContext();
+		VariableDeclaration ownedContext = transformation.getOwnedContext();
 		if (ownedContext != null) {
 			setUsage(ownedContext, getThisUsage());
 		}

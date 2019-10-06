@@ -493,7 +493,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		//
 		@Override
 		public @Nullable Element visitVariableAssignment(@NonNull VariableAssignment vaIn) {
-			Variable targetVariable = vaIn.getTargetVariable();
+			VariableDeclaration targetVariable = vaIn.getTargetVariable();
 			OCLExpression value = vaIn.getValue();
 			assert (targetVariable != null) && (value != null);
 			Area targetArea = getContainingArea(targetVariable);

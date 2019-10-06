@@ -52,7 +52,7 @@ import org.eclipse.ocl.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.ParameterVariable;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -60,7 +60,6 @@ import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.StringLiteralExp;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
@@ -2815,7 +2814,7 @@ public class ATL2QVTr extends AbstractTransformer
 		if (debugCreations) {
 			AbstractTransformer.CREATIONS.println("created " + toDebugString(_4));
 		}
-		final @NonNull ParameterVariable _5 = PivotFactory.eINSTANCE.createParameterVariable();
+		final @NonNull Parameter _5 = PivotFactory.eINSTANCE.createParameter();
 		models[1/*qvtr*/].add(_5, false);
 		if (debugCreations) {
 			AbstractTransformer.CREATIONS.println("created " + toDebugString(_5));
@@ -8572,7 +8571,7 @@ public class ATL2QVTr extends AbstractTransformer
 					}
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull RelationalTransformation t2qvtrTransformation = wmapModule.getT2qvtrTransformation();
-					final /*@Thrown*/ @Nullable Variable ownedContext = t2qvtrTransformation.getOwnedContext();
+					final /*@Thrown*/org.eclipse.ocl.pivot.VariableDeclaration ownedContext = t2qvtrTransformation.getOwnedContext();
 					final /*@NonInvalid*/ boolean symbol_1 = ownedContext instanceof org.eclipse.ocl.pivot.VariableDeclaration;
 					/*@Thrown*/ @Nullable Boolean symbol_7;
 					if (symbol_1) {
@@ -9089,7 +9088,7 @@ public class ATL2QVTr extends AbstractTransformer
 					}
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull RelationalTransformation t2qvtrTransformation = wmapModule.getT2qvtrTransformation();
-					final /*@Thrown*/ @Nullable Variable ownedContext = t2qvtrTransformation.getOwnedContext();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.VariableDeclaration ownedContext = t2qvtrTransformation.getOwnedContext();
 					final /*@NonInvalid*/ boolean symbol_1 = ownedContext instanceof org.eclipse.ocl.pivot.VariableDeclaration;
 					/*@Thrown*/ @Nullable Boolean symbol_7;
 					if (symbol_1) {

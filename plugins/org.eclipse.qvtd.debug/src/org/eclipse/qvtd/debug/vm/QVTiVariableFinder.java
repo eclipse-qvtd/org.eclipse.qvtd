@@ -19,7 +19,7 @@ import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.data.VMVariableData;
 import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -42,7 +42,7 @@ public class QVTiVariableFinder extends VariableFinder
 			QVTiTransformationInstance transformationInstance = (QVTiTransformationInstance)valueObject;
 			ImperativeTransformation transformation = transformationInstance.getTransformation();
 			for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
-				Variable variable = typedModel.getOwnedContext();
+				VariableDeclaration variable = typedModel.getOwnedContext();
 				String varName = typedModel.getName();
 				assert varName != null;
 				childPath[childPath.length - 1] = varName;

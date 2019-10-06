@@ -12,7 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
@@ -23,10 +23,10 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  */
 public class ThisVariable2Variable extends AbstractVariable2Variable
 {
-	private @NonNull Variable rThisVariable;
-	private @NonNull Variable cThisVariable;
+	private @NonNull VariableDeclaration rThisVariable;
+	private @NonNull VariableDeclaration cThisVariable;
 
-	public ThisVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull Variable rThisVariable, @NonNull Variable cThisVariable) {
+	public ThisVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull VariableDeclaration rThisVariable, @NonNull VariableDeclaration cThisVariable) {
 		super(variablesAnalysis, rThisVariable);
 		assert rThisVariable.eContainer() instanceof RelationalTransformation;
 		this.rThisVariable = rThisVariable;
@@ -39,12 +39,12 @@ public class ThisVariable2Variable extends AbstractVariable2Variable
 	}
 
 	@Override
-	public @NonNull Variable getCoreVariable() {
+	public @NonNull VariableDeclaration getCoreVariable() {
 		return cThisVariable;
 	}
 
 	@Override
-	public @NonNull Variable getRelationVariable() {
+	public @NonNull VariableDeclaration getRelationVariable() {
 		return rThisVariable;
 	}
 

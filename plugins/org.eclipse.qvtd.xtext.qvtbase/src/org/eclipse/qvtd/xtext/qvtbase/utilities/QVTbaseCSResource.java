@@ -11,7 +11,11 @@
 package org.eclipse.qvtd.xtext.qvtbase.utilities;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 
@@ -21,6 +25,16 @@ public abstract class QVTbaseCSResource extends EssentialOCLCSResource
 	public @NonNull URI getASURI(@NonNull URI csURI) {
 		assert !PivotUtilInternal.isASURI(csURI);
 		return PivotUtilInternal.appendASExtensionSuffix(csURI);
+	}
+
+	@Override
+	public @Nullable NamedElement isPathable(@NonNull EObject element) {
+		if (element instanceof Parameter) {		// Paramter / FunctionParamter promote to Pivot
+			return (Parameter)element;
+		}
+		else {
+			return super.isPathable(element);
+		}
 	}
 
 	@Override

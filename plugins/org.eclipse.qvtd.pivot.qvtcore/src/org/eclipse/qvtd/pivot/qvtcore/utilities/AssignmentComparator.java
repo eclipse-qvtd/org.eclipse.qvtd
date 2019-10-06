@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 public class AssignmentComparator implements Comparator<@NonNull Assignment>
 {
 	private final @NonNull List<@NonNull Assignment> assignments;
-	private @Nullable Map<@NonNull Variable, @NonNull Set<@NonNull Variable>> variable2referencedVariables = null;
+	private @Nullable Map<@NonNull VariableDeclaration, @NonNull Set<@NonNull Variable>> variable2referencedVariables = null;
 
 	public AssignmentComparator(@NonNull List<@NonNull Assignment> assignments) {
 		this.assignments = assignments;
@@ -68,12 +68,12 @@ public class AssignmentComparator implements Comparator<@NonNull Assignment>
 				return -1;
 			}
 			else if (o2 instanceof VariableAssignment) {
-				Map<@NonNull Variable, @NonNull Set<@NonNull Variable>> variable2referencedVariables2 = variable2referencedVariables;
+				Map<@NonNull VariableDeclaration, @NonNull Set<@NonNull Variable>> variable2referencedVariables2 = variable2referencedVariables;
 				if (variable2referencedVariables2 == null) {
 					variable2referencedVariables2 = variable2referencedVariables = computeReferencedVariableClosure();
 				}
-				Variable v1 = ((VariableAssignment)o1).getTargetVariable();
-				Variable v2 = ((VariableAssignment)o2).getTargetVariable();
+				VariableDeclaration v1 = ((VariableAssignment)o1).getTargetVariable();
+				VariableDeclaration v2 = ((VariableAssignment)o2).getTargetVariable();
 				Set<@NonNull Variable> r1 = variable2referencedVariables2.get(v1);
 				Set<@NonNull Variable> r2 = variable2referencedVariables2.get(v2);
 				assert (r1 != null) && (r2 != null);
@@ -89,16 +89,15 @@ public class AssignmentComparator implements Comparator<@NonNull Assignment>
 		return 0;
 	}
 
-	private @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull Variable>> computeReferencedVariableClosure() {
-		Map<@NonNull Variable, @NonNull Set<@NonNull Variable>> variable2referencedVariables2;
-		variable2referencedVariables2 = new HashMap<@NonNull Variable, @NonNull Set<@NonNull Variable>>();
+	private @NonNull Map<@NonNull VariableDeclaration, @NonNull Set<@NonNull Variable>> computeReferencedVariableClosure() {
+		Map<@NonNull VariableDeclaration, @NonNull Set<@NonNull Variable>> variable2referencedVariables2 = new HashMap<>();
 		//
 		//	Compute the direct references of each variable
 		//
 		for (@NonNull Assignment assignment : assignments) {
 			if (assignment instanceof VariableAssignment) {
 				VariableAssignment variableAssignment = (VariableAssignment)assignment;
-				Variable variable = ClassUtil.nonNullState(variableAssignment.getTargetVariable());
+				VariableDeclaration variable = ClassUtil.nonNullState(variableAssignment.getTargetVariable());
 				Set<@NonNull Variable> referencedVariables = new HashSet<@NonNull Variable>();
 				for (EObject eObject : new TreeIterable(ClassUtil.nonNullState(variableAssignment.getValue()), true)) {
 					if (eObject instanceof VariableExp) {
@@ -119,7 +118,7 @@ public class AssignmentComparator implements Comparator<@NonNull Assignment>
 		//
 		while (true) {
 			boolean more = false;
-			for (@NonNull Variable variable : variable2referencedVariables2.keySet()) {
+			for (@NonNull VariableDeclaration variable : variable2referencedVariables2.keySet()) {
 				Set<@NonNull Variable> referencedVariables = variable2referencedVariables2.get(variable);
 				assert referencedVariables != null;
 				for (@NonNull Variable referencedVariable : new ArrayList<@NonNull Variable>(referencedVariables)) {

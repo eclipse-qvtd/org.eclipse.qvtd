@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.IteratorVariable;
 import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -37,7 +38,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	/**
 	 * The original relation variable.
 	 */
-	protected final @NonNull Variable rVariable;
+	protected final @NonNull VariableDeclaration rVariable;
 	// Analysis contributions
 	/**
 	 * The enforced TypedModel of a TemplateExp.bindsTo that this variable, set by setIsEnforcedBound.
@@ -90,7 +91,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	 */
 	private @Nullable Strategy strategy = null;
 
-	public RelationVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull Variable rVariable) {
+	public RelationVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull VariableDeclaration rVariable) {
 		super(variablesAnalysis/*, ClassUtil.nonNullState(rVariable.getName())*/);
 		assert !"this".equals(rVariable.getName());
 		this.rVariable = rVariable;
@@ -138,7 +139,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			//			assert cWhereDomain == null;
 			return Strategy.ENFORCED_GUARD;
 		}
-		else if (rVariable.getOwnedInit() != null) {
+		else if ((rVariable instanceof Variable) && (((Variable)rVariable).getOwnedInit() != null)) {
 			//			assert rEnforcedTypedModel == null;
 			//			assert rKey == null;
 			//			assert rTemplateExp == null;
@@ -248,7 +249,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	}
 
 	@Override
-	public @NonNull Variable getRelationVariable() {
+	public @NonNull VariableDeclaration getRelationVariable() {
 		return rVariable;
 	}
 

@@ -19,7 +19,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 
@@ -52,7 +52,7 @@ public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerato
 			CGVariable cgVariable = ((CGVariableExp)cgElement).getReferredVariable();
 			if (cgVariable != null) {
 				Element asVariable = cgVariable.getAst();
-				if (asVariable instanceof Variable) {
+				if (asVariable instanceof Parameter) {
 					EObject asContainer = asVariable.eContainer();
 					if (asContainer instanceof ImperativeTypedModel) {
 						Transformation asTransformation = ((ImperativeTypedModel)asContainer).getTransformation();

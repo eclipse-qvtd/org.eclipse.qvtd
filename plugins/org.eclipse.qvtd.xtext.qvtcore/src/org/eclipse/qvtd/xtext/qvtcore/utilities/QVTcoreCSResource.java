@@ -25,9 +25,6 @@ import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
@@ -76,19 +73,10 @@ public class QVTcoreCSResource extends QVTbaseCSResource
 
 	@Override
 	public @Nullable NamedElement isPathable(@NonNull EObject element) {
-		if (element instanceof FunctionParameter) {
-			return (FunctionParameter)element;
-		}
-		else if (element instanceof RealizedVariable) {
+		if (element instanceof RealizedVariable) {
 			return (RealizedVariable)element;
 		}
 		else if ((element instanceof Variable) && (element.eContainer() instanceof CorePattern)) {
-			return (Variable)element;
-		}
-		else if ((element instanceof Variable) && (element.eContainer() instanceof Transformation)) {
-			return (Variable)element;
-		}
-		else if ((element instanceof Variable) && (element.eContainer() instanceof TypedModel)) {
 			return (Variable)element;
 		}
 		else {

@@ -16,7 +16,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -95,7 +95,7 @@ public class QVTcoreHelper extends QVTbaseHelper
 		return realizedVariable;
 	}
 
-	public @NonNull VariableAssignment createVariableAssignment(@NonNull Variable asVariable, @NonNull OCLExpression asValueExpression) {
+	public @NonNull VariableAssignment createVariableAssignment(@NonNull VariableDeclaration asVariable, @NonNull OCLExpression asValueExpression) {
 		VariableAssignment asVariableAssignment = QVTcoreFactory.eINSTANCE.createVariableAssignment();
 		asVariableAssignment.setTargetVariable(asVariable);
 		asVariableAssignment.setValue(asValueExpression);

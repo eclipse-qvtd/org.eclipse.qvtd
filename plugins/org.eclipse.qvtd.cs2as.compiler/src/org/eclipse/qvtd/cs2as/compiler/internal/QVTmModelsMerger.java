@@ -37,7 +37,7 @@ import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -86,7 +86,7 @@ public class QVTmModelsMerger {
 		Transformation tx = (Transformation) _package.getOwnedClasses().get(0);
 		for (Rule rule : tx.getRule()) {
 			Mapping mapping = (Mapping) rule;
-			Variable inputVar = getInputVariable(mapping);
+			VariableDeclaration inputVar = getInputVariable(mapping);
 			Class refiningType = (Class)inputVar.getType();
 			List<Mapping> refiningMappings = result.get(refiningType);
 			if (refiningMappings == null) {
@@ -219,7 +219,7 @@ public class QVTmModelsMerger {
 			domain.setTypedModel(tmName2newTypedModel.get(domain.getTypedModel().getName()));
 		}
 
-		Variable inputVar = getInputVariable(mappingToRefactor);
+		VariableDeclaration inputVar = getInputVariable(mappingToRefactor);
 		Type refinedType = inputVar.getType();
 		for (Entry<Class, List<Mapping>> mEntry : inputType2extendingMapping.entrySet()) {
 			Class refiningType = mEntry.getKey();
@@ -251,7 +251,7 @@ public class QVTmModelsMerger {
 		}
 	}
 
-	private static void doMappingRefactoring(EnvironmentFactory envF, Mapping mappingToRefactor, Mapping refiningMapping, Variable inputVar, Class refiningType) {
+	private static void doMappingRefactoring(EnvironmentFactory envF, Mapping mappingToRefactor, Mapping refiningMapping, VariableDeclaration inputVar, Class refiningType) {
 
 		// We add the guard
 		Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
@@ -261,7 +261,7 @@ public class QVTmModelsMerger {
 		refiningMapping.setOverridden(mappingToRefactor);
 	}
 
-	private static Variable getInputVariable(Mapping mapping) {
+	private static VariableDeclaration getInputVariable(Mapping mapping) {
 		// In OCL2QVTm the first one is always the input domain with a unique input variable
 		CoreDomain inputDomain = (CoreDomain) mapping.getDomain().get(0);
 		return inputDomain.getGuardPattern().getVariable().get(0);
@@ -276,7 +276,7 @@ public class QVTmModelsMerger {
 		}
 	}
 
-	private static OCLExpression createOclIsKindOfOperationCall(EnvironmentFactory envF, Variable inputVar, Class refiningType) {
+	private static OCLExpression createOclIsKindOfOperationCall(EnvironmentFactory envF, VariableDeclaration inputVar, Class refiningType) {
 
 		// oclIsKindOf OperationCallExp
 		OperationCallExp opCallExp = PivotFactory.eINSTANCE.createOperationCallExp();

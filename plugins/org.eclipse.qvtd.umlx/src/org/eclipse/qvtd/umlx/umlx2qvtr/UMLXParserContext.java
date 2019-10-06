@@ -19,7 +19,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.InvalidType;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
@@ -107,7 +107,7 @@ class UMLXParserContext extends AbstractExtendedParserContext
 	}
 
 	protected final @NonNull EObject contextElement;
-	protected final @NonNull Variable contextVariable;
+	protected final @NonNull VariableDeclaration contextVariable;
 
 	public UMLXParserContext(@NonNull EnvironmentFactory environmentFactory, @NonNull EObject contextElement) {
 		super(environmentFactory, null); //ClassUtil.nonNullEMF(URI.createURI(EcoreUtil.generateUUID() + ".qvtr")));

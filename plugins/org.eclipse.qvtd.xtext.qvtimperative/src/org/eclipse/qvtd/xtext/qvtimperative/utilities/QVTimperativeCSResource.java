@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -25,9 +24,6 @@ import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
@@ -78,10 +74,7 @@ public class QVTimperativeCSResource extends QVTbaseCSResource
 
 	@Override
 	public @Nullable NamedElement isPathable(@NonNull EObject element) {
-		if (element instanceof FunctionParameter) {
-			return (FunctionParameter)element;
-		}
-		else if (element instanceof Mapping) {
+		if (element instanceof Mapping) {
 			return (Mapping)element;
 		}
 		else if (element instanceof VariableStatement) {	// NewStatement, PredicateVariable, OutConnectionVariable
@@ -92,12 +85,6 @@ public class QVTimperativeCSResource extends QVTbaseCSResource
 		}
 		else if (element instanceof LoopVariable) {
 			return (LoopVariable)element;
-		}
-		else if ((element instanceof Variable) && (element.eContainer() instanceof Transformation)) {
-			return (Variable)element;
-		}
-		else if ((element instanceof Variable) && (element.eContainer() instanceof ImperativeTypedModel)) {
-			return (Variable)element;
 		}
 		else {
 			return super.isPathable(element);

@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -136,7 +137,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		for (Domain domain : rule.getDomain()) {
 			if (domain instanceof CoreDomain) {
 				DomainUsage usage = visit(domain.getTypedModel());
-				for (Variable variable : ((CoreDomain)domain).getGuardPattern().getVariable()) {
+				for (VariableDeclaration variable : ((CoreDomain)domain).getGuardPattern().getVariable()) {
 					if (variable != null) {
 						DomainUsage variableUsage = visit(variable.getType());
 						if (variableUsage != primitiveUsage) {
@@ -150,7 +151,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		}
 		if (rule instanceof Mapping) {
 			DomainUsage middleUsage = getRootAnalysis().getMiddleUsage();
-			for (Variable variable : ((Mapping)rule).getGuardPattern().getVariable()) {
+			for (VariableDeclaration variable : ((Mapping)rule).getGuardPattern().getVariable()) {
 				if (variable != null) {
 					DomainUsage variableUsage = visit(variable.getType());
 					if (variableUsage.isMiddle()) {
@@ -178,7 +179,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 
 	@Override
 	public @NonNull DomainUsage visitBottomPattern(@NonNull BottomPattern object) {
-		for (Variable variable : object.getVariable()) {
+		for (VariableDeclaration variable : object.getVariable()) {
 			visit(variable);
 		}
 		for (RealizedVariable variable : object.getRealizedVariable()) {
@@ -286,7 +287,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		//			visit(typedModel);
 		//		}
 		//		System.out.println("  " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " : " + object);
-		Variable ownedContext = QVTbaseUtil.getContextVariable(getEnvironmentFactory().getStandardLibrary(), object);
+		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(getEnvironmentFactory().getStandardLibrary(), object);
 		setUsage(ownedContext, getRootAnalysis().getNoneUsage());
 		//
 		//	Ensure all operations are analyzed even if not used.

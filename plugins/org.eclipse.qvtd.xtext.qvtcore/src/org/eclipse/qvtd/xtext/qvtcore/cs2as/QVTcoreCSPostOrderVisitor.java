@@ -84,7 +84,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull PredicateOrAssignmentCS csConstraint) {
 		VariableAssignment variableAssignment = PivotUtil.getPivot(VariableAssignment.class, csConstraint);
 		if (variableAssignment != null) {
-			variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
+			variableAssignment.setTargetVariable(variableExp.getReferredVariable());
 		}
 		return variableAssignment;
 	}

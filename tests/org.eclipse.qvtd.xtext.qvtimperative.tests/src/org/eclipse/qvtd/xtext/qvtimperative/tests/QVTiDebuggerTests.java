@@ -41,7 +41,7 @@ import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUIUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.ui.model.BaseEditorCallback;
@@ -49,6 +49,7 @@ import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMRootEvaluationEnvironment;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -237,10 +238,10 @@ public class QVTiDebuggerTests extends XtextTestCase
 		ImperativeTypedModel inTypedModel = QVTimperativeUtil.getOwnedTypedModel(asTransformation, inName);
 		ImperativeTypedModel middleTypedModel = QVTimperativeUtil.getOwnedTypedModel(asTransformation, middleName);
 		ImperativeTypedModel outTypedModel = QVTimperativeUtil.getOwnedTypedModel(asTransformation, outName);
-		Variable asTransformationVariable = asTransformation.getOwnedContext();
-		Variable asInVariable = inTypedModel.getOwnedContext();
-		Variable asMiddleVariable = middleTypedModel.getOwnedContext();
-		Variable asOutVariable = outTypedModel.getOwnedContext();
+		VariableDeclaration asTransformationVariable = asTransformation.getOwnedContext();
+		VariableDeclaration asInVariable = inTypedModel.getOwnedContext();
+		VariableDeclaration asMiddleVariable = middleTypedModel.getOwnedContext();
+		VariableDeclaration asOutVariable = outTypedModel.getOwnedContext();
 		assert (asTransformationVariable != null) && (asInVariable != null) && (asMiddleVariable != null) && (asOutVariable != null);
 
 		IThread vmThread = debugTarget.getThreads()[0];
@@ -249,9 +250,9 @@ public class QVTiDebuggerTests extends XtextTestCase
 		TestUIUtil.waitForNotStepping(vmThread);
 		//
 		checkPosition(vmThread, 8, 448, 455);		// Values with OCL BaseLocationInFileProvider fix for Bug 495979
-		checkVariables(vmThread, VMVirtualMachine.PC_NAME, "this", outName, inName, middleName);
+		checkVariables(vmThread, VMVirtualMachine.PC_NAME, QVTbaseUtil.THIS_NAME, outName, inName, middleName);
 		checkVariable(vmThread, VMVirtualMachine.PC_NAME, asTransformation);
-		checkVariable(vmThread, "this", vmRootEvaluationEnvironment.getValueOf(asTransformationVariable));
+		checkVariable(vmThread, QVTbaseUtil.THIS_NAME, vmRootEvaluationEnvironment.getValueOf(asTransformationVariable));
 		checkVariable(vmThread, outName, vmRootEvaluationEnvironment.getValueOf(asOutVariable));
 		checkVariable(vmThread, inName, vmRootEvaluationEnvironment.getValueOf(asInVariable));
 		checkVariable(vmThread, middleName, vmRootEvaluationEnvironment.getValueOf(asMiddleVariable));

@@ -111,24 +111,24 @@ import com.google.common.collect.Sets;
 			 *  Mapping from each bound variable in the not-enforced relation domain to the TemplateExp that bindsTo it.
 			 *  Excludes CollectionTemplateExp.member, CollectionTemplateExp.rest.
 			 */
-			protected final @NonNull Map<@NonNull Variable, @NonNull TemplateExp> rOtherBoundVariables;
+			protected final @NonNull Map<@NonNull VariableDeclaration, @NonNull TemplateExp> rOtherBoundVariables;
 			/**
 			 *  Mapping from each member variable in the not-enforced relation domain to each CollectionTemplateExp that
 			 *  has a  VariableExp member that refers to it.
 			 */
-			protected final @Nullable Map<@NonNull Variable, @NonNull List<@NonNull CollectionTemplateExp>> rOtherMemberVariables;
+			protected final @Nullable Map<@NonNull VariableDeclaration, @NonNull List<@NonNull CollectionTemplateExp>> rOtherMemberVariables;
 			/**
 			 *  Mapping from each rest variable in the not-enforced relation domain to its CollectionTemplateExp.
 			 */
-			protected final @Nullable Map<@NonNull Variable, @NonNull CollectionTemplateExp> rOtherRestVariables;
+			protected final @Nullable Map<@NonNull VariableDeclaration, @NonNull CollectionTemplateExp> rOtherRestVariables;
 			/**
 			 *  All variables defined or referenced in this other domain
 			 */
-			protected final @NonNull Set<@NonNull Variable> rOtherReferredVariables;
+			protected final @NonNull Set<@NonNull VariableDeclaration> rOtherReferredVariables;
 			/**
 			 *  The template expression variables (the root variables of this other domain pattern)
 			 */
-			protected final @NonNull List<@NonNull Variable> rOtherRootVariables;
+			protected final @NonNull List<@NonNull VariableDeclaration> rOtherRootVariables;
 			// core
 			/**
 			 * The corresponding core TypedModel of the not-enforced domain: cOtherDomain.getTypedModel()
@@ -165,39 +165,39 @@ import com.google.common.collect.Sets;
 				this.cOtherGuardPattern = ClassUtil.nonNullState(cOtherDomain.getGuardPattern());
 				this.cOtherBottomPattern = ClassUtil.nonNullState(cOtherDomain.getBottomPattern());
 				//
-				for (@NonNull Variable rVariable : rOtherBoundVariables.keySet()) {
+				for (@NonNull VariableDeclaration rVariable : rOtherBoundVariables.keySet()) {
 					variablesAnalysis.getVariableAnalysis(rVariable).setOtherBound(rOtherTypedModel);
 				}
-				for (@NonNull Variable rVariable : rOtherReferredVariables) {
+				for (@NonNull VariableDeclaration rVariable : rOtherReferredVariables) {
 					variablesAnalysis.getVariableAnalysis(rVariable).setOtherReferred(rOtherTypedModel);
 				}
-				for (@NonNull Variable rVariable : rOtherRootVariables) {
+				for (@NonNull VariableDeclaration rVariable : rOtherRootVariables) {
 					variablesAnalysis.getVariableAnalysis(rVariable).setIsRoot();
 				}
 			}
 
 			// new
 			private void mapOtherCollectionTemplateExpression(@NonNull CollectionTemplateExp cte) throws CompilerChainException {
-				Variable vcte = QVTrelationUtil.getBindsTo(cte);
-				Variable mvcte = variablesAnalysis.getCoreVariable(vcte);
+				VariableDeclaration vcte = QVTrelationUtil.getBindsTo(cte);
+				VariableDeclaration mvcte = variablesAnalysis.getCoreVariable(vcte);
 				/**
 				 * Each CollectionTemplateExp member that is not a variable
 				 * converts to a VariableAssignment of a new variable the member expression.
 				 *
 				 * ve1:T1{tp = ve2:Collection{a++b}}		=>   a := a;
 				 */
-				Map<@NonNull OCLExpression, @NonNull Variable> rMember2mVariable = new HashMap<>();
+				Map<@NonNull OCLExpression, @NonNull VariableDeclaration> rMember2mVariable = new HashMap<>();
 				List<@NonNull OCLExpression> rMembers = QVTrelationUtil.Internal.getOwnedMembersList(cte);
 				for (@NonNull OCLExpression rMember : rMembers) {
-					Variable mVariable;
+					VariableDeclaration mVariable;
 					if (rMember instanceof TemplateExp) {
 						TemplateExp rTemplateExp = (TemplateExp)rMember;
 						mapOtherTemplateExpression(rTemplateExp);
-						Variable rVariable = QVTrelationUtil.getBindsTo(rTemplateExp);
+						VariableDeclaration rVariable = QVTrelationUtil.getBindsTo(rTemplateExp);
 						mVariable = variablesAnalysis.getCoreVariable(rVariable);
 					}
 					else if (rMember instanceof VariableExp) {
-						Variable rVariable = QVTrelationUtil.getReferredVariable((VariableExp)rMember);
+						VariableDeclaration rVariable = QVTrelationUtil.getReferredVariable((VariableExp)rMember);
 						mVariable = variablesAnalysis.getCoreVariable(rVariable);
 					}
 					else {
@@ -216,7 +216,7 @@ import com.google.common.collect.Sets;
 
 				CollectionType collectionType = QVTrelationUtil.getReferredCollectionType(cte);
 				int size = rMembers.size();
-				Variable rRest = cte.getRest();
+				VariableDeclaration rRest = cte.getRest();
 				if (rRest == null) {
 					/**
 					 * The predicate for a CollectionTemplateExp without a rest variable is a total comparison.
@@ -225,7 +225,7 @@ import com.google.common.collect.Sets;
 					 */
 					List<@NonNull CollectionLiteralPart> mParts = new ArrayList<>();
 					for (@NonNull OCLExpression rMember : rMembers) {
-						Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+						VariableDeclaration mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
 						CollectionLiteralPart mItem = createCollectionItem(createVariableExp(mVariable));
 						mParts.add(mItem);
 					}
@@ -261,16 +261,16 @@ import com.google.common.collect.Sets;
 					}
 				} */
 				else {
-					if (!rRest.isIsImplicit()) {
+					if (!((Variable)rRest).isIsImplicit()) {
 						/**
 						 * The assignment for an unordered CollectionTemplateExp rest variable is a cumulative exclusion.
 						 *
 						 * ve1:T1{tp = ve2:Collection{a,b++c}}		=>   c := ve2->excluding(a)->excluding(b);
 						 */
-						Variable mRest = variablesAnalysis.getCoreVariable(rRest);
+						VariableDeclaration mRest = variablesAnalysis.getCoreVariable(rRest);
 						OCLExpression exclusions = createVariableExp(mvcte);
 						for (@NonNull OCLExpression rMember : rMembers) {
-							Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+							VariableDeclaration mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
 							exclusions = createOperationCallExp(exclusions, "excluding", createVariableExp(mVariable));
 						}
 						VariableAssignment aRest = createVariableAssignment(mRest, exclusions);
@@ -285,11 +285,11 @@ import com.google.common.collect.Sets;
 						@NonNull OCLExpression eTerm = createVariableExp(mvcte);
 						for (int j = 0; j < i; j++) {
 							OCLExpression rMember = rMembers.get(j);
-							Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+							VariableDeclaration mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
 							eTerm = createOperationCallExp(eTerm, "excluding", createVariableExp(mVariable));
 						}
 						OCLExpression rMember = rMembers.get(i);
-						Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+						VariableDeclaration mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
 						eTerm = createOperationCallExp(eTerm, "includes", createVariableExp(mVariable));
 						variablesAnalysis.addPredicate(cMiddleBottomPattern, eTerm);
 					}
@@ -298,10 +298,10 @@ import com.google.common.collect.Sets;
 
 			// loop body of RDomainPatternToMDBottomPatternComposite
 			private void mapOtherObjectTemplateExpression(@NonNull ObjectTemplateExp rTemplateExpression) throws CompilerChainException {
-				Variable rTemplateVariable = QVTrelationUtil.getBindsTo(rTemplateExpression);
+				VariableDeclaration rTemplateVariable = QVTrelationUtil.getBindsTo(rTemplateExpression);
 				for (@NonNull PropertyTemplateItem propertyTemplateItem : QVTrelationUtil.getOwnedParts(rTemplateExpression)) {
 					Property partProperty = QVTrelationUtil.getReferredProperty(propertyTemplateItem);
-					Variable cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
+					VariableDeclaration cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
 					OCLExpression propertyTemplateValue = QVTrelationUtil.getOwnedValue(propertyTemplateItem);
 					if (propertyTemplateValue instanceof VariableExp) {
 						// body of RDomainPatternToMDBottomPatternSimpleSharedVarExpr and RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr
@@ -311,8 +311,8 @@ import com.google.common.collect.Sets;
 						 *
 						 * ve1:T{tp = ve2}   =>   ve1.tp := ve2;
 						 */
-						Variable rVariable/*vpte*/ = QVTrelationUtil.getReferredVariable((VariableExp)propertyTemplateValue);
-						Variable cVariable/*mvpte*/ = variablesAnalysis.getCoreVariable(rVariable);
+						VariableDeclaration rVariable/*vpte*/ = QVTrelationUtil.getReferredVariable((VariableExp)propertyTemplateValue);
+						VariableDeclaration cVariable/*mvpte*/ = variablesAnalysis.getCoreVariable(rVariable);
 						//				BottomPattern cBottomPattern = rSharedVariables.contains(rVariable) ? cMiddleBottomPattern : cEnforcedBottomPattern;
 						variablesAnalysis.addNavigationPredicate(cOtherBottomPattern, rTemplateVariable, partProperty, createVariableExp(cVariable));
 					}
@@ -324,8 +324,8 @@ import com.google.common.collect.Sets;
 						 * ve1:T1{tp = ve2:Collection{a++b}}		=>   ve2 := ve1.tp;
 						 */
 						CollectionTemplateExp cte = (CollectionTemplateExp)propertyTemplateValue;
-						Variable vcte = QVTrelationUtil.getBindsTo(cte);
-						Variable mvcte = variablesAnalysis.getCoreVariable(vcte);
+						VariableDeclaration vcte = QVTrelationUtil.getBindsTo(cte);
+						VariableDeclaration mvcte = variablesAnalysis.getCoreVariable(vcte);
 						NavigationCallExp pce =  createNavigationCallExp(createVariableExp(cTemplateVariable), partProperty);
 						VariableAssignment a = createVariableAssignment(mvcte, pce);
 						cMiddleBottomPattern.getAssignment().add(a);
@@ -340,8 +340,8 @@ import com.google.common.collect.Sets;
 							 * ve1:T1{tp = ve2:T2{...}}   =>   ve1.tp := ve2;
 							 */
 							ObjectTemplateExp pte = (ObjectTemplateExp)propertyTemplateValue;
-							Variable vpte = QVTrelationUtil.getBindsTo(pte);
-							Variable mvpte = variablesAnalysis.getCoreVariable(vpte);
+							VariableDeclaration vpte = QVTrelationUtil.getBindsTo(pte);
+							VariableDeclaration mvpte = variablesAnalysis.getCoreVariable(vpte);
 							NavigationCallExp cNavigationExp = createNavigationCallExp(createVariableExp(cTemplateVariable), partProperty);
 							OperationCallExp eTerm = createOperationCallExp(cNavigationExp, "includes", createVariableExp(mvpte));
 							variablesAnalysis.addPredicate(cOtherBottomPattern, eTerm);
@@ -355,8 +355,8 @@ import com.google.common.collect.Sets;
 							 * ve1:T1{tp = ve2:T2{...}}   =>   ve1.tp := ve2;
 							 */
 							ObjectTemplateExp pte = (ObjectTemplateExp)propertyTemplateValue;
-							Variable vpte = QVTrelationUtil.getBindsTo(pte);
-							Variable mvpte = variablesAnalysis.getCoreVariable(vpte);
+							VariableDeclaration vpte = QVTrelationUtil.getBindsTo(pte);
+							VariableDeclaration mvpte = variablesAnalysis.getCoreVariable(vpte);
 							variablesAnalysis.addNavigationPredicate(cOtherBottomPattern, rTemplateVariable, partProperty, createVariableExp(mvpte));
 							mapOtherTemplateExpression(pte);
 						}
@@ -392,12 +392,12 @@ import com.google.common.collect.Sets;
 				Relation2TraceClass relation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(rRelation);
 				Relation2TraceClass overridingRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(overridingRelation);
 				Property statusProperty = relation2TraceClass.getStatusTraceProperty();
-				List<@NonNull Variable> overridingRootVariables = QVTrelationUtil.getRootVariables(QVTrelationUtil.getRelationDomain(overridingRelation, rOtherTypedModel));
-				Variable firstRootVariable = rOtherRootVariables.get(0);
-				Variable firstOverridingRootVariable = overridingRootVariables.get(0);
+				List<@NonNull VariableDeclaration> overridingRootVariables = QVTrelationUtil.getRootVariables(QVTrelationUtil.getRelationDomain(overridingRelation, rOtherTypedModel));
+				VariableDeclaration firstRootVariable = rOtherRootVariables.get(0);
+				VariableDeclaration firstOverridingRootVariable = overridingRootVariables.get(0);
 				org.eclipse.ocl.pivot.Class firstRootType = QVTrelationUtil.getClass(firstRootVariable);
 				org.eclipse.ocl.pivot.Class firstOverridingRootType = QVTrelationUtil.getClass(firstOverridingRootVariable);
-				Variable cFirstRootVariable = variablesAnalysis.getCoreVariable(firstRootVariable);
+				VariableDeclaration cFirstRootVariable = variablesAnalysis.getCoreVariable(firstRootVariable);
 				if (firstOverridingRootType.conformsTo(standardLibrary, firstRootType)) {									// If override can override at all
 					OCLExpression predicateBody = null;
 					Property traceProperty = relation2TraceClass.getTraceProperty(firstRootVariable);
@@ -415,11 +415,11 @@ import com.google.common.collect.Sets;
 							@NonNull IteratorVariable iteratorVariable1 = createIteratorVariable("it1", relation2TraceClass.getTraceInterface(), true);
 							iteratorVariable1.setIsImplicit(true);
 							for (int i = 1; i < iSize; i++) {
-								Variable nextRootVariable = rOtherRootVariables.get(i);
+								VariableDeclaration nextRootVariable = rOtherRootVariables.get(i);
 								//							Variable nextOverridingRootVariable = overridingRootVariables.get(i);
 								//							org.eclipse.ocl.pivot.Class nextRootType = QVTrelationUtil.getClass(nextRootVariable);
 								//							org.eclipse.ocl.pivot.Class nextOverridingRootType = QVTrelationUtil.getClass(firstOverridingRootVariable);
-								Variable cNextRootVariable = variablesAnalysis.getCoreVariable(nextRootVariable);
+								VariableDeclaration cNextRootVariable = variablesAnalysis.getCoreVariable(nextRootVariable);
 								Property nextTraceProperty = relation2TraceClass.getTraceProperty(nextRootVariable);
 								OCLExpression derivedTerm = createNavigationCallExp(createVariableExp(iteratorVariable1), nextTraceProperty);
 								OCLExpression selectTerm = createOperationCallExp(derivedTerm, "=", createVariableExp(cNextRootVariable));
@@ -448,10 +448,10 @@ import com.google.common.collect.Sets;
 						//	not root1.oclIsKindOf(overrdingRoot1Type) and not root2.oclIsKindOf(overrdingRoot2Type) and not ...
 						//
 						for (int i = 0; i < iSize; i++) {
-							Variable rootVariable = rOtherRootVariables.get(i);
-							Variable overridingRootVariable = overridingRootVariables.get(i);
+							VariableDeclaration rootVariable = rOtherRootVariables.get(i);
+							VariableDeclaration overridingRootVariable = overridingRootVariables.get(i);
 							org.eclipse.ocl.pivot.Class overridingRootType = QVTrelationUtil.getClass(overridingRootVariable);
-							Variable cRootVariable = variablesAnalysis.getCoreVariable(rootVariable);
+							VariableDeclaration cRootVariable = variablesAnalysis.getCoreVariable(rootVariable);
 							OCLExpression overrideIsConformantExp = createOperationCallExp(createVariableExp(cRootVariable), "oclIsKindOf", createTypeExp(overridingRootType));
 							OCLExpression predicateTerm = createOperationCallExp(overrideIsConformantExp, "not");
 							if (predicateBody != null) {
@@ -535,12 +535,12 @@ import com.google.common.collect.Sets;
 			public EObject copy(EObject oIn) {
 				try {
 					if (oIn instanceof IteratorVariable) {
-						Variable coreVariable = variablesAnalysis.getCoreVariable((IteratorVariable)oIn);
+						VariableDeclaration coreVariable = variablesAnalysis.getCoreVariable((IteratorVariable)oIn);
 						putTrace(coreVariable, (IteratorVariable)oIn);
 						return coreVariable;
 					}
 					else if (oIn instanceof LetVariable) {
-						Variable coreVariable = variablesAnalysis.getCoreVariable((LetVariable)oIn);
+						VariableDeclaration coreVariable = variablesAnalysis.getCoreVariable((LetVariable)oIn);
 						putTrace(coreVariable, (LetVariable)oIn);
 						return coreVariable;
 					}
@@ -569,20 +569,20 @@ import com.google.common.collect.Sets;
 		 *  Mapping from each bound variable in the enforced relation domain to the TemplateExp that bindsTo it.
 		 *  Excludes CollectionTemplateExp.member, CollectionTemplateExp.rest.
 		 */
-		protected final @NonNull Map<@NonNull Variable, @NonNull TemplateExp> rEnforcedBoundVariables;
+		protected final @NonNull Map<@NonNull VariableDeclaration, @NonNull TemplateExp> rEnforcedBoundVariables;
 		/**
 		 *  Mapping from each member variable in the enforced relation domain to each CollectionTemplateExp that
 		 *  has a  VariableExp member that refers to it.
 		 */
-		protected final @Nullable Map<@NonNull Variable, @NonNull List<@NonNull CollectionTemplateExp>> rEnforcedMemberVariables;
+		protected final @Nullable Map<@NonNull VariableDeclaration, @NonNull List<@NonNull CollectionTemplateExp>> rEnforcedMemberVariables;
 		/**
 		 *  Mapping from each rest variable in the enforced relation domain to its CollectionTemplateExp.
 		 */
-		protected final @Nullable Map<@NonNull Variable, @NonNull CollectionTemplateExp> rEnforcedRestVariables;
+		protected final @Nullable Map<@NonNull VariableDeclaration, @NonNull CollectionTemplateExp> rEnforcedRestVariables;
 		/**
 		 *  All variables defined or referenced in the enforced relation domain
 		 */
-		protected final @NonNull Set<@NonNull Variable> rEnforcedReferredVariables;
+		protected final @NonNull Set<@NonNull VariableDeclaration> rEnforcedReferredVariables;
 		/**
 		 *  te: The template expressions defining the roots of the enforced domain pattern
 		 */
@@ -590,7 +590,7 @@ import com.google.common.collect.Sets;
 		/**
 		 *  tev: The template expression root variables (the root variables of the enforced domain pattern)
 		 */
-		protected final @NonNull List<@NonNull Variable> rEnforcedRootVariables;
+		protected final @NonNull List<@NonNull VariableDeclaration> rEnforcedRootVariables;
 		/**
 		 * The conversion for each other domains sharing the parent of this domain
 		 */
@@ -598,11 +598,11 @@ import com.google.common.collect.Sets;
 		/**
 		 *  All variables defined in other domains
 		 */
-		protected final @NonNull Set<@NonNull Variable> rAllOtherBoundVariables;
+		protected final @NonNull Set<@NonNull VariableDeclaration> rAllOtherBoundVariables;
 		/**
 		 *  All variables defined or referenced in other domains
 		 */
-		protected final @NonNull Set<@NonNull Variable> rAllOtherReferredVariables;
+		protected final @NonNull Set<@NonNull VariableDeclaration> rAllOtherReferredVariables;
 		// Core
 		/**
 		 *  m: The resultant mapping
@@ -683,45 +683,47 @@ import com.google.common.collect.Sets;
 					otherDomain2coreDomains.add(createOtherDomain2CoreDomain(rRelationDomain));
 				}
 			}
-			Set<@NonNull Variable> rUnsharedEnforcedDomainVariables = new HashSet<>(rEnforcedReferredVariables);
+			Set<@NonNull VariableDeclaration> rUnsharedEnforcedDomainVariables = new HashSet<>(rEnforcedReferredVariables);
 			rUnsharedEnforcedDomainVariables.removeAll(rSharedVariables);
 			this.rAllOtherReferredVariables = new HashSet<>(rAllVariables);
 			rAllOtherReferredVariables.removeAll(rUnsharedEnforcedDomainVariables);
 			//
-			for (Map.Entry<@NonNull Variable, @Nullable TypedModel> entry : rWhenVariable2rTypedModel.entrySet()) {
+			for (Map.Entry<@NonNull VariableDeclaration, @Nullable TypedModel> entry : rWhenVariable2rTypedModel.entrySet()) {
 				TypedModel rWhenTypedModel = entry.getValue();
 				if (rWhenTypedModel != null) {
 					variablesAnalysis.getVariableAnalysis(entry.getKey()).setWhen(rWhenTypedModel);
 				}
 			}
-			for (Map.Entry<@NonNull Variable, @Nullable TypedModel> entry : rWhereVariable2rTypedModel.entrySet()) {
+			for (Map.Entry<@NonNull VariableDeclaration, @Nullable TypedModel> entry : rWhereVariable2rTypedModel.entrySet()) {
 				TypedModel rWhereTypedModel = entry.getValue();
 				if (rWhereTypedModel != null) {
 					variablesAnalysis.getVariableAnalysis(entry.getKey()).setWhere(rWhereTypedModel);
 				}
 			}
-			for (@NonNull Variable rVariable : rEnforcedBoundVariables.keySet()) {
+			for (@NonNull VariableDeclaration rVariable : rEnforcedBoundVariables.keySet()) {
 
 				Key rKey = transformationAnalysis.getKeyForType(QVTrelationUtil.getType(rVariable));
 
 				variablesAnalysis.getVariableAnalysis(rVariable).setIsEnforcedBound(rEnforcedBoundVariables.get(rVariable), rEnforcedTypedModel, rKey);
 			}
-			for (@NonNull Variable rVariable : rEnforcedReferredVariables) {
+			for (@NonNull VariableDeclaration rVariable : rEnforcedReferredVariables) {
 				variablesAnalysis.getVariableAnalysis(rVariable).setIsEnforcedReferred();
 			}
-			for (@NonNull Variable rVariable : rEnforcedRootVariables) {
+			for (@NonNull VariableDeclaration rVariable : rEnforcedRootVariables) {
 				variablesAnalysis.getVariableAnalysis(rVariable).setIsRoot();
 			}
 			//
-			for (@NonNull Variable rVariable : rAllVariables) {
-				OCLExpression ownedInit = rVariable.getOwnedInit();
-				if (ownedInit != null) {
-					DomainUsageAnalysis domainUsageAnalysis = transformationAnalysis.getDomainUsageAnalysis();
-					DomainUsage usage = domainUsageAnalysis.getUsage(rVariable);
-					TypedModel rTypedModel = usage.getTypedModel(rVariable);
-					if (rTypedModel != null) {
-						VariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rVariable);
-						variableAnalysis.setPredicate(rTypedModel);
+			for (@NonNull VariableDeclaration rVariable : rAllVariables) {
+				if (rVariable instanceof Variable) {
+					OCLExpression ownedInit = ((Variable)rVariable).getOwnedInit();
+					if (ownedInit != null) {
+						DomainUsageAnalysis domainUsageAnalysis = transformationAnalysis.getDomainUsageAnalysis();
+						DomainUsage usage = domainUsageAnalysis.getUsage(rVariable);
+						TypedModel rTypedModel = usage.getTypedModel(rVariable);
+						if (rTypedModel != null) {
+							VariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rVariable);
+							variableAnalysis.setPredicate(rTypedModel);
+						}
 					}
 				}
 			}
@@ -730,7 +732,7 @@ import com.google.common.collect.Sets;
 			for (@NonNull Variable2Variable analysis : variablesAnalysis.getAnalyses()) {
 				VariableDeclaration rVariable = analysis.getRelationVariable();
 				if ((rVariable != null) && !(rRelation.isIsAbstract() && analysis.isRealized())) {
-					Variable cVariable = analysis.getCoreVariable();
+					VariableDeclaration cVariable = analysis.getCoreVariable();
 					putTrace(cVariable, rVariable);		// FIXME redundant / later
 				}
 			}
@@ -742,9 +744,9 @@ import com.google.common.collect.Sets;
 					if (rVariable instanceof Variable) {
 						OCLExpression rOwnedInit = ((Variable)rVariable).getOwnedInit();
 						if (rOwnedInit != null) {
-							Variable cVariable = analysis.getCoreVariable();
+							VariableDeclaration cVariable = analysis.getCoreVariable();
 							assert cVariable instanceof BottomVariable;
-							cVariable.setOwnedInit(mapExpression(rOwnedInit));
+							((BottomVariable)cVariable).setOwnedInit(mapExpression(rOwnedInit));
 						}
 					}
 				}
@@ -755,22 +757,22 @@ import com.google.common.collect.Sets;
 		}
 
 		// Quad call of RDomainPatternExprToMappingXXXX
-		private void addPropertyAssignmentToMiddleBottomPattern(@NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression rExpression) throws CompilerChainException {
-			Variable cTargetVariable = null;
+		private void addPropertyAssignmentToMiddleBottomPattern(@NonNull VariableDeclaration rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression rExpression) throws CompilerChainException {
+			VariableDeclaration cTargetVariable = null;
 			OCLExpression cExpression = null;
 			if (rExpression instanceof ObjectTemplateExp) {
 				// body of RDomainPatternExprToMappingDomainTemplateVarAssignment
-				Variable rBoundVariable = ClassUtil.nonNullState(((ObjectTemplateExp)rExpression).getBindsTo());
+				VariableDeclaration rBoundVariable = ClassUtil.nonNullState(((ObjectTemplateExp)rExpression).getBindsTo());
 				if (!rSharedVariables.contains(rBoundVariable)) {
-					Variable cBoundVariable = variablesAnalysis.getCoreVariable(rBoundVariable);  // FIXME whenVariable(cMiddleBottomPattern, rBoundVariable);
+					VariableDeclaration cBoundVariable = variablesAnalysis.getCoreVariable(rBoundVariable);  // FIXME whenVariable(cMiddleBottomPattern, rBoundVariable);
 					cExpression = createVariableExp(cBoundVariable);
 					cTargetVariable = variablesAnalysis.addTraceNavigationAssignment(rBoundVariable, false);
 				}
 			}
 			else if (rExpression instanceof VariableExp) {
 				cTargetVariable = variablesAnalysis.getCoreVariable(rTargetVariable);		// getCoreVariable should do and be uniform
-				Variable rReferredVariable = ClassUtil.nonNullState((Variable) ((VariableExp)rExpression).getReferredVariable());
-				Variable cReferredVariable = variablesAnalysis.getCoreVariable(rReferredVariable);
+				VariableDeclaration rReferredVariable = ClassUtil.nonNullState(((VariableExp)rExpression).getReferredVariable());
+				VariableDeclaration cReferredVariable = variablesAnalysis.getCoreVariable(rReferredVariable);
 				if (rSharedVariables.contains(rReferredVariable) ) {
 					// body of RDomainPatternExprToMappingBottomVarAssignment
 				}
@@ -836,7 +838,7 @@ import com.google.common.collect.Sets;
 			return ClassUtil.nonNullState(null);
 		}
 
-		protected abstract @NonNull Set<@NonNull Variable> getEnforcedBottomDomainVariables();
+		protected abstract @NonNull Set<@NonNull VariableDeclaration> getEnforcedBottomDomainVariables();
 
 		//		protected abstract @NonNull Set<@NonNull Variable> getEnforcedDomainGuardVariables(@NonNull Set<@NonNull Variable> rEnforcedBottomDomainVariables);
 
@@ -862,11 +864,11 @@ import com.google.common.collect.Sets;
 		 * is bound to the variable of some ObjectTemplateExp other than referencingTemplateExpression's within the hierrachy
 		 * of searchTemplateExpression.
 		 */
-		private boolean isReferencedVarBoundWithTemplateExpressionHierarchy(@NonNull Variable referencedVariable, @NonNull ObjectTemplateExp referencingTemplateExpression, @NonNull TemplateExp searchTemplateExpression) {
+		private boolean isReferencedVarBoundWithTemplateExpressionHierarchy(@NonNull VariableDeclaration referencedVariable, @NonNull ObjectTemplateExp referencingTemplateExpression, @NonNull TemplateExp searchTemplateExpression) {
 			if (searchTemplateExpression == referencingTemplateExpression) {
 				return false;
 			}
-			Variable boundVariable = searchTemplateExpression.getBindsTo();
+			VariableDeclaration boundVariable = searchTemplateExpression.getBindsTo();
 			if (boundVariable.equals(referencedVariable)) {
 				return true;
 			}
@@ -902,8 +904,8 @@ import com.google.common.collect.Sets;
 			 *
 			 * ve1:T1{tp = ve2:Collection{a++b}}		=>   ve2 := ve1.tp;
 			 */
-			Variable vcte = QVTrelationUtil.getBindsTo(cte);
-			Variable mvcte = variablesAnalysis.getCoreVariable(vcte);
+			VariableDeclaration vcte = QVTrelationUtil.getBindsTo(cte);
+			VariableDeclaration mvcte = variablesAnalysis.getCoreVariable(vcte);
 			/*			NavigationCallExp pce =  createNavigationCallExp(createVariableExp(cTemplateVariable), partProperty);
 			VariableAssignment a = createVariableAssignment(mvcte, pce);
 			cMiddleBottomPattern.getAssignment().add(a);
@@ -913,18 +915,18 @@ import com.google.common.collect.Sets;
 			 *
 			 * ve1:T1{tp = ve2:Collection{a++b}}		=>   a := a;
 			 */
-			Map<@NonNull OCLExpression, @NonNull Variable> rMember2mVariable = new HashMap<>();
+			Map<@NonNull OCLExpression, @NonNull VariableDeclaration> rMember2mVariable = new HashMap<>();
 			List<@NonNull OCLExpression> rMembers = QVTrelationUtil.Internal.getOwnedMembersList(cte);
 			for (@NonNull OCLExpression rMember : rMembers) {
-				Variable mVariable;
+				VariableDeclaration mVariable;
 				if (rMember instanceof TemplateExp) {
 					TemplateExp rTemplateExp = (TemplateExp)rMember;
 					mapEnforcedTemplateExpression(rTemplateExp);
-					Variable rVariable = QVTrelationUtil.getBindsTo(rTemplateExp);
+					VariableDeclaration rVariable = QVTrelationUtil.getBindsTo(rTemplateExp);
 					mVariable = variablesAnalysis.getCoreVariable(rVariable);
 				}
 				else if (rMember instanceof VariableExp) {
-					Variable rVariable = QVTrelationUtil.getReferredVariable((VariableExp)rMember);
+					VariableDeclaration rVariable = QVTrelationUtil.getReferredVariable((VariableExp)rMember);
 					mVariable = variablesAnalysis.getCoreVariable(rVariable);
 				}
 				else {
@@ -941,7 +943,7 @@ import com.google.common.collect.Sets;
 			//				mb.getAssignment().add(a);
 
 			CollectionType collectionType = QVTrelationUtil.getReferredCollectionType(cte);
-			Variable rRest = cte.getRest();
+			VariableDeclaration rRest = cte.getRest();
 			if (rRest == null) {
 				/**
 				 * The predicate for a CollectionTemplateExp without a rest variable is a total comparison.
@@ -950,7 +952,7 @@ import com.google.common.collect.Sets;
 				 */
 				List<@NonNull CollectionLiteralPart> mParts = new ArrayList<>();
 				for (@NonNull OCLExpression rMember : rMembers) {
-					Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+					VariableDeclaration mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
 					CollectionLiteralPart mItem = createCollectionItem(createVariableExp(mVariable));
 					mParts.add(mItem);
 				}
@@ -985,19 +987,19 @@ import com.google.common.collect.Sets;
 					variablesAnalysis.addConditionPredicate(cMiddleBottomPattern, createVariableExp(mVariable), vElement);
 				}
 			} */
-			else if (rRest.isIsImplicit()) {
+			else if (((Variable)rRest).isIsImplicit()) {
 				PropertyTemplateItem rPropertyTemplateItem = (PropertyTemplateItem) cte.eContainer();
 				assert rPropertyTemplateItem != null;
 				ObjectTemplateExp rObjectTemplateExp = QVTrelationUtil.getOwningObjectTemplateExp(rPropertyTemplateItem);
-				Variable vote = QVTrelationUtil.getBindsTo(rObjectTemplateExp);
-				Variable cvote = variablesAnalysis.getCoreVariable(vote);
+				VariableDeclaration vote = QVTrelationUtil.getBindsTo(rObjectTemplateExp);
+				VariableDeclaration cvote = variablesAnalysis.getCoreVariable(vote);
 				/**
 				 * The assignment for a CollectionTemplateExp variable is a literal for the members and an addition of the rest.
 				 *
 				 * ve1:T1{tp = ve2:Collection{a,b++_}}		=>   ve1.tp += a; ve1.tp += b;
 				 */
 				for (@NonNull OCLExpression rMember : rMembers) {
-					Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+					VariableDeclaration mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
 					NavigationAssignment aRest = createNavigationAssignment(createVariableExp(cvote), QVTrelationUtil.getReferredProperty(rPropertyTemplateItem), createVariableExp(mVariable), true);
 					cMiddleBottomPattern.getAssignment().add(aRest);
 				}
@@ -1010,11 +1012,11 @@ import com.google.common.collect.Sets;
 				 */
 				List<@NonNull CollectionLiteralPart> ownedParts = new ArrayList<>();
 				for (@NonNull OCLExpression rMember : rMembers) {
-					Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+					VariableDeclaration mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
 					ownedParts.add(createCollectionItem(createVariableExp(mVariable)));
 				}
 				OCLExpression cExpression = createCollectionLiteralExp(collectionType, ownedParts);
-				Variable mRest = variablesAnalysis.getCoreVariable(rRest);
+				VariableDeclaration mRest = variablesAnalysis.getCoreVariable(rRest);
 				cExpression = createOperationCallExp(cExpression, "includingAll", createVariableExp(mRest));
 				VariableAssignment aRest = createVariableAssignment(mvcte, cExpression);
 				cMiddleBottomPattern.getAssignment().add(aRest);
@@ -1029,7 +1031,7 @@ import com.google.common.collect.Sets;
 		}
 
 		protected void mapEnforcedObjectTemplateExpression(@NonNull ObjectTemplateExp rEnforcedObjectTemplateExpression, @Nullable Key key) throws CompilerChainException {
-			Variable rTemplateVariable/*v*/ = QVTrelationUtil.getBindsTo(rEnforcedObjectTemplateExpression);
+			VariableDeclaration rTemplateVariable/*v*/ = QVTrelationUtil.getBindsTo(rEnforcedObjectTemplateExpression);
 			for (@NonNull PropertyTemplateItem pt : QVTrelationUtil.getOwnedParts(rEnforcedObjectTemplateExpression)) {
 				Property partProperty = QVTrelationUtil.getReferredProperty(pt);
 				OCLExpression rPartValue/*pte*/ = QVTrelationUtil.getOwnedValue(pt);
@@ -1046,9 +1048,9 @@ import com.google.common.collect.Sets;
 					 *
 					 * ve1:T1{tp = ve2:Collection{a++b}}		=>   ve2 := ve1.tp;
 					 */
-					/*Realized*/Variable cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
-					Variable vcte = QVTrelationUtil.getBindsTo(cte);
-					Variable mvcte = variablesAnalysis.getCoreVariable(vcte);
+					/*Realized*/VariableDeclaration cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
+					VariableDeclaration vcte = QVTrelationUtil.getBindsTo(cte);
+					VariableDeclaration mvcte = variablesAnalysis.getCoreVariable(vcte);
 					NavigationCallExp pce =  createNavigationCallExp(createVariableExp(cTemplateVariable), partProperty);
 					VariableAssignment a = createVariableAssignment(mvcte, pce);
 					cMiddleBottomPattern.getAssignment().add(a);
@@ -1057,8 +1059,8 @@ import com.google.common.collect.Sets;
 				else if (rPartValue instanceof ObjectTemplateExp) {
 					// body of RDomainToMDBottomForEnforcementOfNonIdentityPropObject
 					ObjectTemplateExp ote = (ObjectTemplateExp)rPartValue;
-					Variable pv = ClassUtil.nonNullState(ote.getBindsTo());
-					/*Realized*/Variable cTargetVariable/*mpv*/ = variablesAnalysis.getCoreVariable(pv); //rWhenVariables.contains(pv) ? getCoreVariable(pv) : whenRealizedVariable(cEnforcedBottomPattern, pv);
+					VariableDeclaration pv = ClassUtil.nonNullState(ote.getBindsTo());
+					/*Realized*/VariableDeclaration cTargetVariable/*mpv*/ = variablesAnalysis.getCoreVariable(pv); //rWhenVariables.contains(pv) ? getCoreVariable(pv) : whenRealizedVariable(cEnforcedBottomPattern, pv);
 					//					Variable cTemplateVariable/*mv*/ = variablesAnalysis.getCoreVariable(rTemplateVariable);
 					variablesAnalysis.addNavigationAssignment(rTemplateVariable, partProperty, createVariableExp(cTargetVariable), null);
 					mapEnforcedTemplateExpression(ote);
@@ -1069,7 +1071,7 @@ import com.google.common.collect.Sets;
 					// body of RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
 					//					Variable cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
 					//RDomainToMComposedMappingGuardrEnforcedDomain
-					Variable rPartVariable = QVTrelationUtil.getReferredVariable((VariableExp)rPartValue);
+					VariableDeclaration rPartVariable = QVTrelationUtil.getReferredVariable((VariableExp)rPartValue);
 					boolean isLocallyResolved = false;		// FIXME this seems a heavyweight potential duplication
 					for (@NonNull TemplateExp rTemplateExpression : rEnforcedRootTemplateExpressions) {
 						//						if (rTemplateExpression instanceof TemplateExp) {
@@ -1101,7 +1103,7 @@ import com.google.common.collect.Sets;
 
 		// RDomainToMDBottomForEnforcement
 		private void mapEnforcedTemplateExpression(@NonNull TemplateExp rEnforcedTemplateExpression/*te*/) throws CompilerChainException {
-			Variable rTemplateVariable/*v*/ = QVTrelationUtil.getBindsTo(rEnforcedTemplateExpression);
+			VariableDeclaration rTemplateVariable/*v*/ = QVTrelationUtil.getBindsTo(rEnforcedTemplateExpression);
 			Type rTemplateVariableType/*c*/ = QVTrelationUtil.getType(rTemplateVariable);
 			Key key = transformationAnalysis.getKeyForType(rTemplateVariableType);
 			Variable2Variable variableAnalysis = variablesAnalysis.getVariableAnalysis(rTemplateVariable);
@@ -1185,7 +1187,7 @@ import com.google.common.collect.Sets;
 						//						throw new UnsupportedOperationException("Missing RelationCallExp support");
 						try {
 							RelationCallExp rInvocation = (RelationCallExp) oIn;
-							Variable cCalledVariable = mapRelationCallExp(rInvocation);
+							VariableDeclaration cCalledVariable = mapRelationCallExp(rInvocation);
 							Relation2TraceClass relation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(QVTrelationUtil.getReferredRelation(rInvocation));
 							Property statusProperty = relation2TraceClass.getStatusTraceProperty();
 							return createNavigationCallExp(createVariableExp(cCalledVariable), statusProperty);
@@ -1222,8 +1224,8 @@ import com.google.common.collect.Sets;
 		}
 
 		// ROppositeDomainVarsToTraceClassProps
-		protected void mapOtherDomainVariables(@NonNull Set<@NonNull Variable> rDomainVariables) throws CompilerChainException {
-			for (@NonNull Variable rDomainVariable : rDomainVariables) {
+		protected void mapOtherDomainVariables(@NonNull Set<@NonNull VariableDeclaration> rDomainVariables) throws CompilerChainException {
+			for (@NonNull VariableDeclaration rDomainVariable : rDomainVariables) {
 				//				VariableAnalysis analysis = getVariableAnalysis(rDomainVariable);
 				//				TemplateExp rTemplateExp = analysis.getTemplateExp();
 				//				if (dvte instanceof ObjectTemplateExp) {
@@ -1267,25 +1269,25 @@ import com.google.common.collect.Sets;
 		//			return whenRealizedVariable(cEnforcedBottomPattern, rVariable);
 		//		}
 
-		protected @NonNull Variable mapRelationCallExp(@NonNull RelationCallExp rInvocation) throws CompilerChainException {
+		protected @NonNull VariableDeclaration mapRelationCallExp(@NonNull RelationCallExp rInvocation) throws CompilerChainException {
 			Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
 			RelationAnalysis rInvokedRelationAnalysis = transformationAnalysis.getRelationAnalysis(rInvokedRelation);
 			List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
-			List<@NonNull Variable> rParameters = rInvokedRelationAnalysis.getRootVariables();
+			List<@NonNull VariableDeclaration> rParameters = rInvokedRelationAnalysis.getRootVariables();
 			int iSize = rArguments.size();
 			assert iSize == rParameters.size();
 			//						if (rInvokedRelation.isIsTopLevel()) {
 			Type invokedTraceClass/*tc*/ = relationalTransformation2tracePackage.getRelation2TraceClass(rInvokedRelation).getTraceInterface();
 			//
 			String invokedName = "when_" + invokedTraceClass.getName()/* + vdId*/;
-			Variable cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(invokedName, invokedTraceClass);	// FIXME
+			VariableDeclaration cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(invokedName, invokedTraceClass);	// FIXME
 			for (int i = 0; i < iSize; i++) {
 				OCLExpression rArgument/*ve*/ = rArguments.get(i);
 				OCLExpression cReferenceValue;
 				if (rArgument instanceof VariableExp) {
 					//RWhenRelCallArgToMGuardPredicate
-					Variable rArgumentVariable/*v*/ = QVTbaseUtil.getReferredVariable((VariableExp)rArgument);
-					Variable cArgumentVariable/*mv*/ = variablesAnalysis.getCoreVariable(rArgumentVariable);
+					VariableDeclaration rArgumentVariable/*v*/ = QVTbaseUtil.getReferredVariable((VariableExp)rArgument);
+					VariableDeclaration cArgumentVariable/*mv*/ = variablesAnalysis.getCoreVariable(rArgumentVariable);
 					cReferenceValue = createVariableExp(cArgumentVariable);
 				}
 				else {
@@ -1294,7 +1296,7 @@ import com.google.common.collect.Sets;
 					//					variablesAnalysis.addConditionPredicate(cMiddleBottomPattern, createVariableExp(cArgumentVariable),  cArgument); //createVariableExp(cArgumentVariable));
 					cReferenceValue = cArgument; //createVariableExp(cArgumentVariable);
 				}
-				Variable rParameter/*dv*/ = rParameters.get(i);
+				VariableDeclaration rParameter/*dv*/ = rParameters.get(i);
 				Property cCalledProperty/*pep*/ = relationalTransformation2tracePackage.getTraceProperty(QVTrelationUtil.getType(cCalledVariable), rParameter);
 				NavigationCallExp cCalledValue/*pe*/ = createNavigationCallExp(createVariableExp(cCalledVariable), cCalledProperty);
 				variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cCalledValue, cReferenceValue); //createVariableExp(cArgumentVariable));
@@ -1324,7 +1326,7 @@ import com.google.common.collect.Sets;
 		protected void mapWhenPattern() throws CompilerChainException {
 			Pattern rWhenPattern = rRelation.getWhen();
 			if (rWhenPattern != null) {
-				Set<@NonNull Variable> rMiddleGuardDomainVariables = new HashSet<>(rWhenVariable2rTypedModel.keySet());
+				Set<@NonNull VariableDeclaration> rMiddleGuardDomainVariables = new HashSet<>(rWhenVariable2rTypedModel.keySet());
 				rMiddleGuardDomainVariables.removeAll(rAllVariables);
 				//
 				for (@NonNull Predicate rWhenPredicate : QVTrelationUtil.getOwnedPredicates(rWhenPattern)) {
@@ -1394,9 +1396,9 @@ import com.google.common.collect.Sets;
 		}
 
 		// RDomainToMDBottomForEnforcement (first half)
-		protected void mapWhereGuardPredicates(@NonNull Set<@NonNull Predicate> rWhereGuardPredicates,  @NonNull Set<@NonNull Variable> rEnforcedBottomDomainVariables) throws CompilerChainException
+		protected void mapWhereGuardPredicates(@NonNull Set<@NonNull Predicate> rWhereGuardPredicates,  @NonNull Set<@NonNull VariableDeclaration> rEnforcedBottomDomainVariables) throws CompilerChainException
 		{
-			Set<@NonNull Variable> nonRootEnforcedBottomDomainVariables = new HashSet<>(rEnforcedBottomDomainVariables);
+			Set<@NonNull VariableDeclaration> nonRootEnforcedBottomDomainVariables = new HashSet<>(rEnforcedBottomDomainVariables);
 			nonRootEnforcedBottomDomainVariables.removeAll(rEnforcedRootVariables);
 			//
 			Set<@NonNull Predicate> wherePredicatesWithVarBindings = selectPredicatesThatReferToVariables(rWhereGuardPredicates, nonRootEnforcedBottomDomainVariables);
@@ -1428,18 +1430,18 @@ import com.google.common.collect.Sets;
 							Type invocationClass/*tc*/ = invokedRelation2TraceClass.getInvocationClass();
 							List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
 							String invokedName = "where_" + invocationClass.getName()/* + vdId*/;
-							Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreRealizedVariable(invokedName, invocationClass);	// FIXME
+							VariableDeclaration cInvocationVariable/*vd*/ = variablesAnalysis.addCoreRealizedVariable(invokedName, invocationClass);	// FIXME
 							//						Property cInvocationProperty2/*pep*/ = relationalTransformation2tracePackage.getTraceProperty(rInvocation);
 							Property cInvocationProperty/*pep*/ = invokingRelation2TraceClass.getInvocation2TraceProperty(rInvocation).getTraceProperty();
 							variablesAnalysis.addTraceNavigationAssignment(cInvocationProperty, cInvocationVariable);
 							Variable2Variable invocationVariableAnalysis = variablesAnalysis.getCoreVariableAnalysis(cInvocationVariable);
-							List<@NonNull Variable> rParameters = rInvokedRelationAnalysis.getRootVariables();
+							List<@NonNull VariableDeclaration> rParameters = rInvokedRelationAnalysis.getRootVariables();
 							int iSize = rArguments.size();
 							assert iSize == rParameters.size();
 							for (int i = 0; i < iSize; i++) {
 								VariableExp rArgument = (VariableExp) rArguments.get(i);
-								Variable rParameter = rParameters.get(i);
-								Variable cArgumentVariable = variablesAnalysis.getCoreVariable(QVTbaseUtil.getReferredVariable(rArgument));
+								VariableDeclaration rParameter = rParameters.get(i);
+								VariableDeclaration cArgumentVariable = variablesAnalysis.getCoreVariable(QVTbaseUtil.getReferredVariable(rArgument));
 								Property cCalledProperty = invokedRelation2InvocationClass.getTraceProperty(rParameter);
 								invocationVariableAnalysis.addNavigationAssignment(cCalledProperty, createVariableExp(cArgumentVariable), false);
 							}
@@ -1471,12 +1473,12 @@ import com.google.common.collect.Sets;
 			}
 		}
 
-		protected @NonNull Set<@NonNull Predicate> selectPredicatesThatReferToVariables(@NonNull Set<@NonNull Predicate> rPredicates, @NonNull Set<@NonNull Variable> rVariables) {
+		protected @NonNull Set<@NonNull Predicate> selectPredicatesThatReferToVariables(@NonNull Set<@NonNull Predicate> rPredicates, @NonNull Set<@NonNull VariableDeclaration> rVariables) {
 			Set<@NonNull Predicate> rPredicatesThatReferToVariables = new HashSet<>();
 			for (@NonNull Predicate rPredicate : rPredicates) {
 				//				OCLExpression conditionExpression = rPredicate.getConditionExpression();
 				//				assert conditionExpression != null;
-				Set<@NonNull Variable> rPredicateVariables = new HashSet<>();
+				Set<@NonNull VariableDeclaration> rPredicateVariables = new HashSet<>();
 				Variables2Variables.gatherReferredVariables(rPredicateVariables, rPredicate);
 				rPredicateVariables.retainAll(rVariables);
 				if (rPredicateVariables.isEmpty()) {		// FIXME smelly polarity
@@ -1491,7 +1493,7 @@ import com.google.common.collect.Sets;
 		 * @throws CompilerChainException
 		 */
 		protected void synthesize() throws CompilerChainException {
-			Set<@NonNull Variable> rEnforcedBottomDomainVariables = getEnforcedBottomDomainVariables();
+			Set<@NonNull VariableDeclaration> rEnforcedBottomDomainVariables = getEnforcedBottomDomainVariables();
 			//
 			Set<@NonNull Predicate> rWhereBottomPredicates = selectPredicatesThatReferToVariables(rWherePredicates, rEnforcedBottomDomainVariables);
 			Set<@NonNull Predicate> rWhereGuardPredicates = new HashSet<>(rWherePredicates);
@@ -1513,7 +1515,7 @@ import com.google.common.collect.Sets;
 			}
 			mapWherePattern();
 			if (rEnforcedMemberVariables != null) {	// FIXME mapOtherDomainVariables duplication/irregularity
-				for (@NonNull Variable rMemberVariable : rEnforcedMemberVariables.keySet()) {
+				for (@NonNull VariableDeclaration rMemberVariable : rEnforcedMemberVariables.keySet()) {
 					variablesAnalysis.addTraceNavigationAssignment(rMemberVariable, true);
 				}
 			}
@@ -1537,17 +1539,17 @@ import com.google.common.collect.Sets;
 	 *  All variables that are defined or referenced in any way within the relation's containment tree.
 	 *  Includes CollectionTemplateExp member/rest, Let/Iterator variables.
 	 */
-	protected final @NonNull Set<@NonNull Variable> rAllVariables;
+	protected final @NonNull Set<@NonNull VariableDeclaration> rAllVariables;
 
 	/**
 	 * Mapping from each variable used as a when RelationCallExp argument to the typedModel of its corresponding argument.
 	 */
-	protected final @NonNull Map<@NonNull Variable, @Nullable TypedModel> rWhenVariable2rTypedModel;
+	protected final @NonNull Map<@NonNull VariableDeclaration, @Nullable TypedModel> rWhenVariable2rTypedModel;
 
 	/**
 	 * Mapping from each variable used as a where RelationCallExp argument to the typedModel of its corresponding argument.
 	 */
-	protected final @NonNull Map<@NonNull Variable, @Nullable TypedModel> rWhereVariable2rTypedModel;
+	protected final @NonNull Map<@NonNull VariableDeclaration, @Nullable TypedModel> rWhereVariable2rTypedModel;
 
 	/**
 	 * All when predicates that are not RelationCallExp
@@ -1562,7 +1564,7 @@ import com.google.common.collect.Sets;
 	/**
 	 *  All variables defined/referenced by more than one domain. i.e. primitives
 	 */
-	protected final @NonNull Set<@NonNull Variable> rSharedVariables;
+	protected final @NonNull Set<@NonNull VariableDeclaration> rSharedVariables;
 
 	/**
 	 *  All relations, including this one, that this relation overrides.
@@ -1611,16 +1613,18 @@ import com.google.common.collect.Sets;
 		if (rWherePattern != null) {
 			Variables2Variables.gatherReferredVariables(rAllVariables, rWherePattern);
 		}
-		List<@NonNull Variable> allVariablesList = new ArrayList<>(rAllVariables);
+		List<@NonNull VariableDeclaration> allVariablesList = new ArrayList<>(rAllVariables);
 		for (int i = 0; i < allVariablesList.size(); i++) {
-			Variable variable = allVariablesList.get(i);
-			OCLExpression ownedInit = variable.getOwnedInit();
-			if (ownedInit != null) {
-				Set<@NonNull Variable> moreVariables = new HashSet<>();
-				Variables2Variables.gatherReferredVariables(moreVariables, ownedInit);
-				for (@NonNull Variable moreVariable : moreVariables) {
-					if (rAllVariables.add(moreVariable)) {
-						allVariablesList.add(moreVariable);
+			VariableDeclaration variable = allVariablesList.get(i);
+			if (variable instanceof Variable) {
+				OCLExpression ownedInit = ((Variable)variable).getOwnedInit();
+				if (ownedInit != null) {
+					Set<@NonNull VariableDeclaration> moreVariables = new HashSet<>();
+					Variables2Variables.gatherReferredVariables(moreVariables, ownedInit);
+					for (@NonNull VariableDeclaration moreVariable : moreVariables) {
+						if (rAllVariables.add(moreVariable)) {
+							allVariablesList.add(moreVariable);
+						}
 					}
 				}
 			}

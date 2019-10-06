@@ -626,6 +626,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return null;
 	}
 
+	protected @NonNull String getFunctionInstanceName(@NonNull CGFunction cgFunction) {
+		JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
+		Object instanceKey = cgFunction.getBody();
+		if (instanceKey == null) {
+			instanceKey = QVTiCGUtil.getAST(cgFunction).getImplementationClass();
+		}
+		return functionContext.getNameManagerContext().getSymbolName(instanceKey, "instance");
+	}
+
 	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
 		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)getVariablesStack().getParameter(asFunctionParameter);
 		if (cgFunctionParameter == null) {
@@ -921,15 +930,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitEntryPoint(@NonNull EntryPoint pEntryPoint) {
 		return visitMapping(pEntryPoint);
-	}
-
-	protected @NonNull String getFunctionInstanceName(@NonNull CGFunction cgFunction) {
-		JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
-		Object instanceKey = cgFunction.getBody();
-		if (instanceKey == null) {
-			instanceKey = QVTiCGUtil.getAST(cgFunction).getImplementationClass();
-		}
-		return functionContext.getNameManagerContext().getSymbolName(instanceKey, "instance");
 	}
 
 	@Override

@@ -31,6 +31,8 @@ import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -432,6 +434,38 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 	}
 
 	@Override
+	public @Nullable ElementCS visitImport(@NonNull Import asUnit) {
+		BaseCSResource csResource = context.getCSResource();
+		Namespace asNamespace = asUnit.getImportedNamespace();
+		EObject eObject = asNamespace.getESObject();
+		String importURI = null;
+		if (eObject instanceof EPackage) {
+			EPackage ePackage = (EPackage)eObject;
+			Resource resource = ePackage.eResource();
+			if (ClassUtil.isRegistered(resource)) {
+				importURI = ePackage.getNsURI();
+			}
+		}
+		if ((importURI == null) && (csResource != null)) {
+			URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : asNamespace);
+			URI csURI = csResource.getURI();
+			URI deresolvedURI = URIUtil.deresolve(fullURI, csURI, true, true, false);
+			importURI = deresolvedURI.toString();
+		}
+		ImportCS csImport = context.refreshElement(ImportCS.class, BaseCSPackage.Literals.IMPORT_CS, asUnit);
+		csImport.setPivot(asUnit);
+		csImport.setName(asUnit.getName());
+		PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+		List<PathElementCS> csPath = csPathName.getOwnedPathElements();
+		PathElementWithURICS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementWithURICS();
+		csSimpleRef.setReferredElement(asNamespace);
+		csSimpleRef.setUri(importURI);
+		csPath.add(csSimpleRef);
+		csImport.setOwnedPathName(csPathName);
+		return csImport;
+	}
+
+	@Override
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
 		String defaultName = asMapping.getContext() != null ? null : "«null»";
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTcoreCSPackage.Literals.MAPPING_CS, asMapping, defaultName);
@@ -554,38 +588,6 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 	}
 
 	@Override
-	public @Nullable ElementCS visitImport(@NonNull Import asUnit) {
-		BaseCSResource csResource = context.getCSResource();
-		Namespace asNamespace = asUnit.getImportedNamespace();
-		EObject eObject = asNamespace.getESObject();
-		String importURI = null;
-		if (eObject instanceof EPackage) {
-			EPackage ePackage = (EPackage)eObject;
-			Resource resource = ePackage.eResource();
-			if (ClassUtil.isRegistered(resource)) {
-				importURI = ePackage.getNsURI();
-			}
-		}
-		if ((importURI == null) && (csResource != null)) {
-			URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : asNamespace);
-			URI csURI = csResource.getURI();
-			URI deresolvedURI = URIUtil.deresolve(fullURI, csURI, true, true, false);
-			importURI = deresolvedURI.toString();
-		}
-		ImportCS csImport = context.refreshElement(ImportCS.class, BaseCSPackage.Literals.IMPORT_CS, asUnit);
-		csImport.setPivot(asUnit);
-		csImport.setName(asUnit.getName());
-		PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-		List<PathElementCS> csPath = csPathName.getOwnedPathElements();
-		PathElementWithURICS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementWithURICS();
-		csSimpleRef.setReferredElement(asNamespace);
-		csSimpleRef.setUri(importURI);
-		csPath.add(csSimpleRef);
-		csImport.setOwnedPathName(csPathName);
-		return csImport;
-	}
-
-	@Override
 	public ElementCS visitVariable(@NonNull Variable asVariable) {
 		if (asVariable.eContainer() instanceof CorePattern) {
 			UnrealizedVariableCS csUnrealizedVariable = refreshTypedElement(UnrealizedVariableCS.class, QVTcoreCSPackage.Literals.UNREALIZED_VARIABLE_CS, asVariable);
@@ -600,7 +602,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 	@Override
 	public ElementCS visitVariableAssignment(@NonNull VariableAssignment asVariableAssignment) {
 		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asVariableAssignment);
-		Variable asVariable = asVariableAssignment.getTargetVariable();
+		VariableDeclaration asVariable = asVariableAssignment.getTargetVariable();
 		if (asVariable != null) {
 			csAssignment.setOwnedTarget(createNameExpCS(asVariable));
 		}
@@ -608,6 +610,24 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		csAssignment.setIsDefault(asVariableAssignment.isIsDefault());
 		csAssignment.setIsPartial(asVariableAssignment.isIsPartial());
 		return csAssignment;
+	}
+
+	@Override
+	public ElementCS visitVariableDeclaration(@NonNull VariableDeclaration object) {
+		String name = object.getName();
+		if ("this".equals(name)) {
+			getClass();
+		}
+		return super.visitVariableDeclaration(object);
+	}
+
+	@Override
+	public @Nullable ElementCS visitVariableExp(@NonNull VariableExp asVariableExp) {
+		String name = asVariableExp.getName();
+		if ("this".equals(name)) {
+			getClass();
+		}
+		return super.visitVariableExp(asVariableExp);
 	}
 
 }
