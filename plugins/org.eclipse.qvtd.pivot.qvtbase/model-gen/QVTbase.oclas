@@ -77,7 +77,7 @@
       </ownedOperations>
       <ownedProperties xmi:id="xL9bQ" isRequired="false" name="extends" type="#AjDLV"/>
       <ownedProperties xmi:id="YTQDv" isComposite="true" name="modelParameter" opposite="#fPfk3" type="#SncSN"/>
-      <ownedProperties xmi:id="iWDDR" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
+      <ownedProperties xmi:id="iWDDR" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#as9eG"/>
       <ownedProperties xmi:id="NUcXB" isComposite="true" name="ownedTag" type="#5bIlO"/>
       <ownedProperties xmi:id="UVEee" isComposite="true" name="rule" opposite="#Img5I" type="#U1psM"/>
       <ownedProperties xmi:id="3n7zQ" isImplicit="true" isRequired="false" name="extendedBy" opposite="#xL9bQ" type="#AjDLV"/>
@@ -96,7 +96,7 @@
       <ownedProperties xmi:id="R8XrW" defaultValueString="false" name="isTrace" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
         <ownedComments body="The TypedModel is for the execution trace. It may be added automatically."/>
       </ownedProperties>
-      <ownedProperties xmi:id="ggm9N" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
+      <ownedProperties xmi:id="ggm9N" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#as9eG"/>
       <ownedProperties xmi:id="fPfk3" isTransient="true" name="transformation" opposite="#YTQDv" type="#AjDLV"/>
       <ownedProperties xmi:id="fK4wq" name="usedPackage" type="#4WjM+"/>
       <ownedProperties xmi:id="TPm6," isImplicit="true" name="Domain" opposite="#GoV0K" type="#9+o+H"/>
@@ -114,10 +114,12 @@
     <ownedClasses xmi:id="3ONqN" name="Package">
       <ownedProperties xmi:id="xb2NR" isImplicit="true" name="TypedModel" opposite="#fK4wq" type="#gkhFp"/>
     </ownedClasses>
+    <ownedClasses xmi:id="as9eG" name="Parameter">
+      <ownedProperties xmi:id="5F8CN" isImplicit="true" isRequired="false" name="Transformation" opposite="#iWDDR" type="#AjDLV"/>
+      <ownedProperties xmi:id="PNCQp" isImplicit="true" isRequired="false" name="TypedModel" opposite="#ggm9N" type="#WqJYx"/>
+    </ownedClasses>
     <ownedClasses xmi:id="t4j6T" name="Variable">
       <ownedProperties xmi:id="YwYCh" isImplicit="true" name="Pattern" opposite="#056L0" type="#pJjNZ"/>
-      <ownedProperties xmi:id="AROTe" isImplicit="true" isRequired="false" name="Transformation" opposite="#iWDDR" type="#AjDLV"/>
-      <ownedProperties xmi:id="WYUg6" isImplicit="true" isRequired="false" name="TypedModel" opposite="#ggm9N" type="#WqJYx"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
