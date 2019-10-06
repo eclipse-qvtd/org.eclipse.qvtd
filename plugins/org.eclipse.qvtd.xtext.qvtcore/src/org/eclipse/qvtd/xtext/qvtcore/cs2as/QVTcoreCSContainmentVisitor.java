@@ -210,7 +210,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
 		BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTcorePackage.Literals.BOTTOM_PATTERN, csElement);
 		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getOwnedRealizedVariables());
-		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
+		context.refreshPivotList(Variable.class, pBottomPattern.getOwnedVariables(), csElement.getOwnedUnrealizedVariables());
 		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getOwnedEnforcementOperations());
 		context.refreshPivotList(Assignment.class, pBottomPattern.getAssignment(), Iterables.filter(csElement.getOwnedConstraints(), IsAssignmentPredicate.INSTANCE));
 		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getOwnedConstraints(), IsPredicatePredicate.INSTANCE));
@@ -251,7 +251,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcorePackage.Literals.GUARD_PATTERN, csElement);
-		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
+		context.refreshPivotList(Variable.class, pGuardPattern.getOwnedVariables(), csElement.getOwnedUnrealizedVariables());
 		context.refreshPivotList(Predicate.class, pGuardPattern.getPredicate(), csElement.getOwnedPredicates());
 		context.refreshComments(pGuardPattern, csElement);
 		return null;
@@ -284,7 +284,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 				bottomPattern.getEnforcementOperation().clear();
 				bottomPattern.getPredicate().clear();
 				bottomPattern.getRealizedVariable().clear();
-				bottomPattern.getVariable().clear();
+				bottomPattern.getOwnedVariables().clear();
 				pivotElement.setBottomPattern(bottomPattern);
 			}
 			GuardPattern guardPattern = pivotElement.getGuardPattern();
@@ -292,7 +292,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 				guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 				guardPattern.getBindsTo().clear();
 				guardPattern.getPredicate().clear();
-				guardPattern.getVariable().clear();
+				guardPattern.getOwnedVariables().clear();
 				pivotElement.setGuardPattern(guardPattern);
 			}
 		}

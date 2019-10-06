@@ -43,7 +43,7 @@ public class QVTcoreOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		for (Variable asVariable : ele.getRealizedVariable()) {
 			createNode(parentNode, asVariable);
 		}
-		for (VariableDeclaration asVariable : ele.getVariable()) {
+		for (VariableDeclaration asVariable : ele.getOwnedVariables()) {
 			createNode(parentNode, asVariable);
 		}
 		for (Predicate asPredicate : ele.getPredicate()) {
@@ -55,7 +55,7 @@ public class QVTcoreOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, GuardPattern ele) {
-		for (VariableDeclaration asVariable : ele.getVariable()) {
+		for (VariableDeclaration asVariable : ele.getOwnedVariables()) {
 			createNode(parentNode, asVariable);
 		}
 		for (Predicate asPredicate : ele.getPredicate()) {

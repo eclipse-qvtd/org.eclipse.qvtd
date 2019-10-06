@@ -320,28 +320,28 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 			switch (strategy) {
 				case ENFORCED_BOTTOM: {
 					cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
-					variablesAnalysis.cEnforcedDomain.getBottomPattern().getVariable().add(cVariable2);
+					variablesAnalysis.cEnforcedDomain.getBottomPattern().getOwnedVariables().add(cVariable2);
 					break;
 				}
 				case ENFORCED_GUARD: {
 					cVariable2 = variablesAnalysis.createGuardVariable(name, type, rVariable.isIsRequired(), null);
-					variablesAnalysis.cEnforcedDomain.getGuardPattern().getVariable().add(cVariable2);
+					variablesAnalysis.cEnforcedDomain.getGuardPattern().getOwnedVariables().add(cVariable2);
 					break;
 				}
 				case KEYED: {
 					cVariable2 = variablesAnalysis.createBottomVariable(name, type, true, null);
 					initializeKeyedVariable(cVariable2);			// FIXME can recurse - is stability guaranteed?
-					variablesAnalysis.cEnforcedDomain.getBottomPattern().getVariable().add(cVariable2);
+					variablesAnalysis.cEnforcedDomain.getBottomPattern().getOwnedVariables().add(cVariable2);
 					break;
 				}
 				case OTHER_BOTTOM: {
 					cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
-					variablesAnalysis.getCoreDomain(getOtherTypedModel()).getBottomPattern().getVariable().add(cVariable2);
+					variablesAnalysis.getCoreDomain(getOtherTypedModel()).getBottomPattern().getOwnedVariables().add(cVariable2);
 					break;
 				}
 				case OTHER_GUARD: {
 					cVariable2 = variablesAnalysis.createGuardVariable(name, type, rVariable.isIsRequired(), null);
-					variablesAnalysis.getCoreDomain(getOtherTypedModel()).getGuardPattern().getVariable().add(cVariable2);
+					variablesAnalysis.getCoreDomain(getOtherTypedModel()).getGuardPattern().getOwnedVariables().add(cVariable2);
 					break;
 				}
 				case REALIZED_BOTTOM: {
@@ -350,7 +350,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 					}
 					else if ((type instanceof CollectionType)) {
 						cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
-						variablesAnalysis.cEnforcedDomain.getBottomPattern().getVariable().add(cVariable2);
+						variablesAnalysis.cEnforcedDomain.getBottomPattern().getOwnedVariables().add(cVariable2);
 					}
 					else {
 						RealizedVariable cRealizedVariable = variablesAnalysis.createRealizedVariable(name, type);
@@ -361,7 +361,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 				}
 				case SHARED_BOTTOM: {
 					cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
-					variablesAnalysis.cMiddleBottomPattern.getVariable().add(cVariable2);
+					variablesAnalysis.cMiddleBottomPattern.getOwnedVariables().add(cVariable2);
 					break;
 				}
 				default: {

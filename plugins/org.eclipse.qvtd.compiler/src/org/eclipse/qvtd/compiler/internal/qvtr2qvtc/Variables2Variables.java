@@ -301,7 +301,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		CoreVariable2Variable analysis = new CoreVariable2Variable(this, name, type, null);
 		VariableDeclaration cVariable = analysis.getCoreVariable();
 		addVariableAnalysis(analysis);
-		cMiddleGuardPattern.getVariable().add(cVariable);
+		cMiddleGuardPattern.getOwnedVariables().add(cVariable);
 		return cVariable;
 	}
 
@@ -321,7 +321,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		CoreVariable2Variable analysis = new CoreVariable2Variable(this, name, ClassUtil.nonNullState(mMember.getType()), mMember);
 		VariableDeclaration cVariable = analysis.getCoreVariable();
 		addVariableAnalysis(analysis);
-		cMiddleGuardPattern.getVariable().add(cVariable);
+		cMiddleGuardPattern.getOwnedVariables().add(cVariable);
 		return cVariable;
 	}
 

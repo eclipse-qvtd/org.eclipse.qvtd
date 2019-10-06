@@ -306,7 +306,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 					bOut.getRealizedVariable().add((RealizedVariable) vOut);
 				}
 				else {
-					gOut.getVariable().add(vOut);
+					gOut.getOwnedVariables().add(vOut);
 				}
 			}
 		}

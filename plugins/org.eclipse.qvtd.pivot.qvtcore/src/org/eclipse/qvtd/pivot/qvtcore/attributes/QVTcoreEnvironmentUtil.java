@@ -42,12 +42,12 @@ public class QVTcoreEnvironmentUtil
 			BottomPattern bottomPattern = mapping.getBottomPattern();
 			if (bottomPattern != null) {
 				environmentView.addNamedElements(bottomPattern.getRealizedVariable());
-				environmentView.addNamedElements(bottomPattern.getVariable());
+				environmentView.addNamedElements(bottomPattern.getOwnedVariables());
 			}
 		}
 		GuardPattern guardPattern = mapping.getGuardPattern();
 		if (guardPattern != null) {
-			environmentView.addNamedElements(guardPattern.getVariable());
+			environmentView.addNamedElements(guardPattern.getOwnedVariables());
 		}
 		for (Domain aDomain : mapping.getDomain()) {
 			if (aDomain instanceof CoreDomain) {
@@ -56,12 +56,12 @@ public class QVTcoreEnvironmentUtil
 					BottomPattern bottomPattern = domain.getBottomPattern();
 					if (bottomPattern != null) {
 						environmentView.addNamedElements(bottomPattern.getRealizedVariable());
-						environmentView.addNamedElements(bottomPattern.getVariable());
+						environmentView.addNamedElements(bottomPattern.getOwnedVariables());
 					}
 				}
 				guardPattern = domain.getGuardPattern();
 				if (guardPattern != null) {
-					environmentView.addNamedElements(guardPattern.getVariable());
+					environmentView.addNamedElements(guardPattern.getOwnedVariables());
 				}
 			}
 		}
@@ -94,12 +94,12 @@ public class QVTcoreEnvironmentUtil
 						BottomPattern bottomPattern = domain.getBottomPattern();
 						if (bottomPattern != null) {
 							environmentView.addNamedElements(bottomPattern.getRealizedVariable());
-							environmentView.addNamedElements(bottomPattern.getVariable());
+							environmentView.addNamedElements(bottomPattern.getOwnedVariables());
 						}
 					}
 					GuardPattern guardPattern = domain.getGuardPattern();
 					if (guardPattern != null) {
-						environmentView.addNamedElements(guardPattern.getVariable());
+						environmentView.addNamedElements(guardPattern.getOwnedVariables());
 					}
 					break;
 				}

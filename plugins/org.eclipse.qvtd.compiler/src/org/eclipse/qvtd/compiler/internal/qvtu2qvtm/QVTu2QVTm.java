@@ -706,11 +706,11 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				else {
 					if (isGuard) {
 						mVariable = QVTcoreFactory.eINSTANCE.createGuardVariable();
-						mArea.getGuardPattern().getVariable().add(mVariable);
+						mArea.getGuardPattern().getOwnedVariables().add(mVariable);
 					}
 					else {
 						mVariable = QVTcoreFactory.eINSTANCE.createBottomVariable();
-						mArea.getBottomPattern().getVariable().add(mVariable);
+						mArea.getBottomPattern().getOwnedVariables().add(mVariable);
 					}
 				}
 				mVariable.setName(name);
@@ -797,7 +797,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		}
 		assert mapping.getSpecification().isEmpty() : " Local mappings cannot be a refinement.";
 		GuardPattern guardPattern = mapping.getGuardPattern();
-		if (guardPattern.getVariable().size() > 0) {
+		if (guardPattern.getOwnedVariables().size() > 0) {
 			return false;
 		}
 		if (guardPattern.getPredicate().size() > 0) {
@@ -806,7 +806,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		for (Domain d : mapping.getDomain()) {
 			CoreDomain cd = (CoreDomain)d;
 			guardPattern = cd.getGuardPattern();
-			if (guardPattern.getVariable().size() > 0) {
+			if (guardPattern.getOwnedVariables().size() > 0) {
 				return false;
 			}
 			if (guardPattern.getPredicate().size() > 0) {
@@ -856,11 +856,11 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 			s.appendString(PivotUtil.getName(uNamedMapping));
 			List<@NonNull String> guardVariableNames = new ArrayList<@NonNull String>();
-			for (@NonNull VariableDeclaration guardVariable : ClassUtil.nullFree(uMapping.getGuardPattern().getVariable())) {
+			for (@NonNull VariableDeclaration guardVariable : ClassUtil.nullFree(uMapping.getGuardPattern().getOwnedVariables())) {
 				guardVariableNames.add(PivotUtil.getName(guardVariable));
 			}
 			for (@NonNull Domain uDomain : ClassUtil.nullFree(uMapping.getDomain())) {
-				for (@NonNull VariableDeclaration guardVariable : ClassUtil.nullFree(((CoreDomain)uDomain).getGuardPattern().getVariable())) {
+				for (@NonNull VariableDeclaration guardVariable : ClassUtil.nullFree(((CoreDomain)uDomain).getGuardPattern().getOwnedVariables())) {
 					guardVariableNames.add(PivotUtil.getName(guardVariable));
 				}
 			}
@@ -878,8 +878,8 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 	}
 
 	private boolean hasVariables(Area a) {
-		return !(a.getGuardPattern().getVariable().isEmpty() ||
-				a.getBottomPattern().getVariable().isEmpty() ||
+		return !(a.getGuardPattern().getOwnedVariables().isEmpty() ||
+				a.getBottomPattern().getOwnedVariables().isEmpty() ||
 				a.getBottomPattern().getRealizedVariable().isEmpty());
 	}
 

@@ -181,7 +181,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull Iterable<@NonNull VariableDeclaration> getOwnedVariables(@NonNull CorePattern corePattern) {
-		return ClassUtil.nullFree(corePattern.getVariable());
+		return ClassUtil.nullFree(corePattern.getOwnedVariables());
 	}
 
 	public static @NonNull OCLExpression getSlotExpression(@NonNull NavigationAssignment asNavigationAssignment) {

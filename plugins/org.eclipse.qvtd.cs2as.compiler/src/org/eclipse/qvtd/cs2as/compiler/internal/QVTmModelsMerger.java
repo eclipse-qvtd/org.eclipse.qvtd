@@ -264,7 +264,7 @@ public class QVTmModelsMerger {
 	private static VariableDeclaration getInputVariable(Mapping mapping) {
 		// In OCL2QVTm the first one is always the input domain with a unique input variable
 		CoreDomain inputDomain = (CoreDomain) mapping.getDomain().get(0);
-		return inputDomain.getGuardPattern().getVariable().get(0);
+		return inputDomain.getGuardPattern().getOwnedVariables().get(0);
 	}
 	private static void computeAllSuperClasses(Class aClass, List<Class> allSuperClasses) {
 

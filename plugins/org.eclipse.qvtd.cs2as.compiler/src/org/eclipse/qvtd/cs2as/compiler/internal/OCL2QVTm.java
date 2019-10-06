@@ -267,7 +267,7 @@ public class OCL2QVTm {
 			mapping.getDomain().add(leftDomain);
 			mapping.getDomain().add(rightDomain);
 
-			VariableDeclaration leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+			VariableDeclaration leftVar = leftDomain.getGuardPattern().getOwnedVariables().get(0);
 
 			GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 			BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
@@ -317,7 +317,7 @@ public class OCL2QVTm {
 			mapping.getDomain().add(leftDomain);
 			mapping.getDomain().add(rightDomain);
 
-			VariableDeclaration leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+			VariableDeclaration leftVar = leftDomain.getGuardPattern().getOwnedVariables().get(0);
 
 			VariableExp varExp = PivotFactory.eINSTANCE.createVariableExp();
 			varExp.setReferredVariable(leftVar);
@@ -381,7 +381,7 @@ public class OCL2QVTm {
 			mapping.getDomain().add(leftDomain);
 			mapping.getDomain().add(rightDomain);
 
-			VariableDeclaration leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+			VariableDeclaration leftVar = leftDomain.getGuardPattern().getOwnedVariables().get(0);
 
 			GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 			BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
@@ -427,7 +427,7 @@ public class OCL2QVTm {
 		variable.setName("l"+firstToUpperCase().apply(type.getName()));
 		variable.setType(type);
 
-		domain.getGuardPattern().getVariable().add(variable);
+		domain.getGuardPattern().getOwnedVariables().add(variable);
 		return domain;
 	}
 
@@ -702,7 +702,7 @@ public class OCL2QVTm {
 		PivotMetamodelManager mm = (PivotMetamodelManager) envFact.getMetamodelManager();
 		if (!mm.getFinalAnalysis().isFinal(op)) {
 			GuardPattern guard = mapping.getGuardPattern();
-			VariableDeclaration leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+			VariableDeclaration leftVar = leftDomain.getGuardPattern().getOwnedVariables().get(0);
 
 			org.eclipse.qvtd.pivot.qvtbase.Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
 			PivotHelper helper = new PivotHelper(envFact);

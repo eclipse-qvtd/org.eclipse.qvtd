@@ -62,7 +62,7 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 		for (RealizedVariable pRealizedVariable : pBottomPattern.getRealizedVariable()) {
 			safeVisit(pRealizedVariable);
 		}
-		for (VariableDeclaration pVariable : pBottomPattern.getVariable()) {
+		for (VariableDeclaration pVariable : pBottomPattern.getOwnedVariables()) {
 			safeVisit(pVariable);
 		}
 		context.append(" |");
@@ -114,7 +114,7 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 
 	@Override
 	public Object visitGuardPattern(@NonNull GuardPattern pGuardPattern) {
-		for (VariableDeclaration pVariable : pGuardPattern.getVariable()) {
+		for (VariableDeclaration pVariable : pGuardPattern.getOwnedVariables()) {
 			safeVisit(pVariable);
 		}
 		context.append(" |");

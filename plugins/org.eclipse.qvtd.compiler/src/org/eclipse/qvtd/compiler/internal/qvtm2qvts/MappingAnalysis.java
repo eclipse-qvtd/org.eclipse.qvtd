@@ -405,7 +405,7 @@ public class MappingAnalysis extends RuleAnalysis
 	 */
 	protected void analyzeGuardVariables() {
 		for (@NonNull GuardPattern guardPattern : guardPatterns) {
-			for (@NonNull VariableDeclaration guardVariable : ClassUtil.nullFree(guardPattern.getVariable())) {
+			for (@NonNull VariableDeclaration guardVariable : ClassUtil.nullFree(guardPattern.getOwnedVariables())) {
 				Node guardNode = region.getNode(guardVariable);
 				assert guardNode == null;
 				guardNode = createOldNode(guardVariable);

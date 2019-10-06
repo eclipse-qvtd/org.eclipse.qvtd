@@ -55,7 +55,7 @@ public class QVTcoreASSaverNormalizeVisitor extends AbstractQVTcoreASSaverNormal
 	@Override
 	public @Nullable Object visitCorePattern(@NonNull CorePattern object) {
 		ClassUtil.sort(ClassUtil.nullFree(object.getPredicate()), PredicateComparator.INSTANCE);
-		QVTcoreUtil.sortPatternVariables(ClassUtil.nullFree(object.getVariable()));
+		QVTcoreUtil.sortPatternVariables(ClassUtil.nullFree(object.getOwnedVariables()));
 		return super.visitPattern(object);
 	}
 }

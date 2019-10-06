@@ -16,7 +16,7 @@
         <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#p9V2R">
           <guardPattern/>
           <bottomPattern>
-            <variable xsi:type="qvtc:BottomVariable" xmi:id="oP0wD" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w"/>
+            <ownedVariables xsi:type="qvtc:BottomVariable" xmi:id="oP0wD" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w"/>
           </bottomPattern>
         </domain>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#rSQTY">
@@ -75,7 +75,7 @@
         <ownedComments body="-- Primitive data type marshaling&#xA;class PrimitiveToName {&#xA;owner : PackageToSchema opposites primitivesToNames;&#xA;name : String;&#xA;-- uml&#xA;primitive : PrimitiveDataType;&#xA;-- rdbms&#xA;typeName : String;&#xA;}"/>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#p9V2R">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="lmkCU" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="lmkCU" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -88,13 +88,13 @@
                 <ownedArguments xsi:type="pivot:VariableExp" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w" referredVariable="#lmkCU"/>
               </conditionExpression>
             </predicate>
-            <variable xsi:type="qvtc:BottomVariable" xmi:id="1nPKR" name="prim" type="pivot:Class SimpleUML.ecore.oclas#cqzmV"/>
+            <ownedVariables xsi:type="qvtc:BottomVariable" xmi:id="1nPKR" name="prim" type="pivot:Class SimpleUML.ecore.oclas#cqzmV"/>
           </bottomPattern>
         </domain>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#rSQTY">
           <guardPattern/>
           <bottomPattern>
-            <variable xsi:type="qvtc:BottomVariable" xmi:id="JDSAS" name="sqlType" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
+            <ownedVariables xsi:type="qvtc:BottomVariable" xmi:id="JDSAS" name="sqlType" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
           </bottomPattern>
         </domain>
         <guardPattern>
@@ -107,7 +107,7 @@
               <ownedArguments xsi:type="pivot:VariableExp" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w" referredVariable="#lmkCU"/>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="2m4,k" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#H4NDI"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="2m4,k" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#H4NDI"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#VIS56">
@@ -294,7 +294,7 @@
         <ownedComments body="-- Class and Table mapping&#xA;class ClassToTable extends FromAttributeOwner, ToColumn {&#xA;owner : PackageToSchema opposites classesToTables;&#xA;composite associationToForeignKeys :&#xA;OrderedSet(AssociationToForeignKey) opposites owner;&#xA;name : String;&#xA;-- uml&#xA;umlClass : Class;&#xA;-- rdbms&#xA;table : Table;&#xA;primaryKey : Key;&#xA;}"/>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#p9V2R">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="rouCB" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="rouCB" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w"/>
           </guardPattern>
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="SimpleUML.ecore.oclas#kzceH">
@@ -311,7 +311,7 @@
         </domain>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#rSQTY">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="AmYv3" name="s" type="pivot:Class SimpleRDBMS.ecore.oclas#s8qOW"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="AmYv3" name="s" type="pivot:Class SimpleRDBMS.ecore.oclas#s8qOW"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -356,7 +356,7 @@
               <ownedArguments xsi:type="pivot:VariableExp" name="s" type="pivot:Class SimpleRDBMS.ecore.oclas#s8qOW" referredVariable="#AmYv3"/>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="0w,l2" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#H4NDI"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="0w,l2" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#H4NDI"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#r8++x">
@@ -500,9 +500,9 @@
                 <ownedArguments xsi:type="pivot:VariableExp" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w" referredVariable="#HnuI9"/>
               </conditionExpression>
             </predicate>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="HnuI9" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="nevI9" name="sc" type="pivot:Class SimpleUML.ecore.oclas#JwQpB"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="WXvI9" name="dc" type="pivot:Class SimpleUML.ecore.oclas#JwQpB"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="HnuI9" name="p" type="pivot:Class SimpleUML.ecore.oclas#X7B4w"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="nevI9" name="sc" type="pivot:Class SimpleUML.ecore.oclas#JwQpB"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="WXvI9" name="dc" type="pivot:Class SimpleUML.ecore.oclas#JwQpB"/>
           </guardPattern>
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="true" isPartial="false" targetProperty="SimpleUML.ecore.oclas#9No82">
@@ -551,10 +551,10 @@
                     stringSymbol="primary"/>
               </conditionExpression>
             </predicate>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="ckY1z" name="s" type="pivot:Class SimpleRDBMS.ecore.oclas#s8qOW"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="KcZ1z" name="st" type="pivot:Class SimpleRDBMS.ecore.oclas#ZkdwH"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="5UZ1z" name="dt" type="pivot:Class SimpleRDBMS.ecore.oclas#ZkdwH"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="ibZ1z" name="rk" type="pivot:Class SimpleRDBMS.ecore.oclas#qOb9C"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="ckY1z" name="s" type="pivot:Class SimpleRDBMS.ecore.oclas#s8qOW"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="KcZ1z" name="st" type="pivot:Class SimpleRDBMS.ecore.oclas#ZkdwH"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="5UZ1z" name="dt" type="pivot:Class SimpleRDBMS.ecore.oclas#ZkdwH"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="ibZ1z" name="rk" type="pivot:Class SimpleRDBMS.ecore.oclas#qOb9C"/>
           </guardPattern>
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="SimpleRDBMS.ecore.oclas#pfNXM">
@@ -649,9 +649,9 @@
               <ownedArguments xsi:type="pivot:VariableExp" name="dc" type="pivot:Class SimpleUML.ecore.oclas#JwQpB" referredVariable="#WXvI9"/>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="Ac7My" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#H4NDI"/>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="hz8Zy" name="sc2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#gl0yk"/>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="QtPYy" name="dc2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#gl0yk"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="Ac7My" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#H4NDI"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="hz8Zy" name="sc2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#gl0yk"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="QtPYy" name="dc2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#gl0yk"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#nW3Pg">
@@ -888,7 +888,7 @@
         <ownedComments body="-- attribute mapping&#xA;abstract class FromAttributeOwner {&#xA;composite fromAttributes : Set(FromAttribute) opposites owner;&#xA;}&#xA;abstract class FromAttribute {&#xA;name : String;&#xA;kind : String;&#xA;owner : FromAttributeOwner opposites fromAttributes;&#xA;leafs : Set(AttributeToColumn);&#xA;-- uml&#xA;attribute : Attribute;&#xA;}&#xA;abstract class ToColumn {&#xA;-- rdbms&#xA;column : Column;&#xA;}&#xA;class NonLeafAttribute extends FromAttributeOwner, FromAttribute {&#xA;leafs := fromAttributes.leafs;&#xA;}&#xA;class AttributeToColumn extends FromAttribute, ToColumn {&#xA;type : PrimitiveToName;&#xA;}"/>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#p9V2R">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="q3nVD" name="c" type="pivot:Class SimpleUML.ecore.oclas#JwQpB"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="q3nVD" name="c" type="pivot:Class SimpleUML.ecore.oclas#JwQpB"/>
           </guardPattern>
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="true" isPartial="false" targetProperty="SimpleUML.ecore.oclas#EfKuB">
@@ -899,7 +899,7 @@
           </bottomPattern>
         </domain>
         <guardPattern>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="TsP,R" name="fao" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#mOJCp"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="TsP,R" name="fao" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#mOJCp"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#PYRm7">
@@ -944,7 +944,7 @@
               <ownedArguments xsi:type="pivot:VariableExp" name="c" type="pivot:Class SimpleUML.ecore.oclas#JwQpB" referredVariable="#q3nVD"/>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="rd00c" name="fao" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#gl0yk"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="rd00c" name="fao" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#gl0yk"/>
         </guardPattern>
         <bottomPattern/>
         <local xmi:id="HtFeZ">
@@ -970,7 +970,7 @@
       <rule xsi:type="qvtc:Mapping" xmi:id="25SeL" name="primitiveAttribute" refinement="#HYL4+ #zsMTb" specification="#YZYHX">
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#p9V2R">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="RrGuX" name="t" type="pivot:Class SimpleUML.ecore.oclas#cqzmV"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="RrGuX" name="t" type="pivot:Class SimpleUML.ecore.oclas#cqzmV"/>
           </guardPattern>
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="SimpleUML.ecore.oclas#LR0m7">
@@ -989,7 +989,7 @@
               <ownedArguments xsi:type="pivot:VariableExp" name="t" type="pivot:Class SimpleUML.ecore.oclas#cqzmV" referredVariable="#RrGuX"/>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="5PzUT" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#SsnaL"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="5PzUT" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#SsnaL"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#cOeOu">
@@ -1024,7 +1024,7 @@
                 <ownedArguments xsi:type="pivot:VariableExp" name="c" type="pivot:Class SimpleUML.ecore.oclas#JwQpB" referredVariable="#q3nVD"/>
               </conditionExpression>
             </predicate>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="Bkxp4" name="ca" type="pivot:Class SimpleUML.ecore.oclas#t0B,1"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="Bkxp4" name="ca" type="pivot:Class SimpleUML.ecore.oclas#t0B,1"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
@@ -1039,7 +1039,7 @@
               <ownedArguments xsi:type="pivot:VariableExp" name="ca" type="pivot:Class SimpleUML.ecore.oclas#t0B,1" referredVariable="#Bkxp4"/>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="ft9tO" name="fao" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#27BWs"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="ft9tO" name="fao" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#27BWs"/>
         </guardPattern>
         <bottomPattern/>
         <local xmi:id="L9Cn4">
@@ -1070,7 +1070,7 @@
       <rule xsi:type="qvtc:Mapping" xmi:id="NjIEt" name="complexAttribute" refinement="#QCGTL #8C90r" specification="#YZYHX">
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="false" typedModel="#p9V2R">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="kep7V" name="t" type="pivot:Class SimpleUML.ecore.oclas#JwQpB"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="kep7V" name="t" type="pivot:Class SimpleUML.ecore.oclas#JwQpB"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -1130,7 +1130,7 @@
         <ownedComments body="-- column mapping"/>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#rSQTY">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id=",FJKx" name="t" type="pivot:Class SimpleRDBMS.ecore.oclas#ZkdwH"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id=",FJKx" name="t" type="pivot:Class SimpleRDBMS.ecore.oclas#ZkdwH"/>
           </guardPattern>
           <bottomPattern>
             <predicate>
@@ -1177,7 +1177,7 @@
               <ownedArguments xsi:type="pivot:VariableExp" name="t" type="pivot:Class SimpleRDBMS.ecore.oclas#ZkdwH" referredVariable="#,FJKx"/>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="+CJ0Z" name="c2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#gl0yk"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="+CJ0Z" name="c2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#gl0yk"/>
         </guardPattern>
         <bottomPattern>
           <predicate>
@@ -1209,10 +1209,10 @@
         </bottomPattern>
         <local xmi:id="xUnRt">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="MiSmw" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#SsnaL"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="MiSmw" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#SsnaL"/>
           </guardPattern>
           <bottomPattern>
-            <variable xsi:type="qvtc:BottomVariable" xmi:id="rgZgt" name="ct" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
+            <ownedVariables xsi:type="qvtc:BottomVariable" xmi:id="rgZgt" name="ct" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#cOeOu">
               <value xsi:type="pivot:VariableExp" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#SsnaL" referredVariable="#MiSmw"/>
               <slotExpression xsi:type="pivot:VariableExp" name="a2c" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#SQcpc" referredVariable="#LLu96"/>

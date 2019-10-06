@@ -714,7 +714,7 @@
                 </ownedSource>
               </conditionExpression>
             </predicate>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="0hKWA" name="hsvRoot" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="0hKWA" name="hsvRoot" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
           </guardPattern>
         </domain>
         <guardPattern/>
@@ -774,7 +774,7 @@
             <realizedVariable xmi:id="M16Qg" name="hslNode" type="pivot:Class HSLTree.ecore.oclas#9roFA"/>
           </bottomPattern>
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="UohZ8" name="hslParent" type="pivot:Class HSLTree.ecore.oclas#9roFA"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="UohZ8" name="hslParent" type="pivot:Class HSLTree.ecore.oclas#9roFA"/>
           </guardPattern>
         </domain>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="false" name="hsv" typedModel="#4h0Qn">
@@ -790,8 +790,8 @@
             </predicate>
           </bottomPattern>
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="Q8USA" name="hsvNode" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="4r3AO" name="hsvParent" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="Q8USA" name="hsvNode" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="4r3AO" name="hsvParent" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
           </guardPattern>
         </domain>
         <guardPattern>
@@ -813,7 +813,7 @@
               </ownedSource>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="PvM9n" name="middleParent" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="PvM9n" name="middleParent" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
         </guardPattern>
       </rule>
     </ownedClasses>

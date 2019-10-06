@@ -88,7 +88,7 @@
       <rule xsi:type="qvtc:Mapping" xmi:id="m..Upper2Lower.node2node" name="node2node">
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..Upper2Lower.upperGraph">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.node2node.upperGraph.guard.g1" name="g1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.node2node.upperGraph.guard.g1" name="g1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
           </guardPattern>
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
@@ -100,7 +100,7 @@
         </domain>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..Upper2Lower.lowerGraph">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.node2node.lowerGraph.guard.g2" name="g2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.node2node.lowerGraph.guard.g2" name="g2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
           </guardPattern>
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
@@ -131,7 +131,7 @@
               <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.node2node.lowerGraph.guard.g2"/>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.node2node.guard.g2g" name="g2g" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.node2node.guard.g2g" name="g2g" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
@@ -198,9 +198,9 @@
       <rule xsi:type="qvtc:Mapping" xmi:id="m..Upper2Lower.edge2edge" name="edge2edge">
         <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..Upper2Lower.upperGraph">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.upperGraph.guard.g1" name="g1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.upperGraph.guard.sn1" name="sn1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.upperGraph.guard.tn1" name="tn1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.upperGraph.guard.g1" name="g1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.upperGraph.guard.sn1" name="sn1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.upperGraph.guard.tn1" name="tn1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
           </guardPattern>
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
@@ -220,9 +220,9 @@
         </domain>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..Upper2Lower.lowerGraph">
           <guardPattern>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.guard.g2" name="g2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.guard.sn2" name="sn2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
-            <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.guard.tn2" name="tn2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.guard.g2" name="g2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.guard.sn2" name="sn2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.guard.tn2" name="tn2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
           </guardPattern>
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
@@ -313,9 +313,9 @@
               <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.guard.tn2"/>
             </conditionExpression>
           </predicate>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.guard.g2g" name="g2g" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.guard.sn2n" name="sn2n" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
-          <variable xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.guard.tn2n" name="tn2n" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.guard.g2g" name="g2g" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.guard.sn2n" name="sn2n" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.guard.tn2n" name="tn2n" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">

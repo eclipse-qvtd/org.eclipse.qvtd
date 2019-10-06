@@ -176,7 +176,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			doAssignments(bIn, bOut);
 			createAll(bIn.getPredicate(), bOut.getPredicate());
 			doRealizedVariables(bIn, bOut);
-			createAll(bIn.getVariable(), bOut.getVariable());
+			createAll(bIn.getOwnedVariables(), bOut.getOwnedVariables());
 			createAll(bIn.getOwnedComments(), bOut.getOwnedComments());
 			return bOut;
 		}
@@ -256,7 +256,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			GuardPattern gOut = QVTcoreFactory.eINSTANCE.createGuardPattern();
 			context.addTrace(gIn, gOut);
 			createAll(gIn.getPredicate(), gOut.getPredicate());
-			createAll(gIn.getVariable(), gOut.getVariable());
+			createAll(gIn.getOwnedVariables(), gOut.getOwnedVariables());
 			createAll(gIn.getOwnedComments(), gOut.getOwnedComments());
 			return gOut;
 		}
@@ -570,7 +570,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			updateAllChildren(bOut.getAssignment());
 			updateAllChildren(bOut.getPredicate());
 			updateAllChildren(bOut.getRealizedVariable());
-			updateAllChildren(bOut.getVariable());
+			updateAllChildren(bOut.getOwnedVariables());
 			return null;
 		}
 
@@ -624,8 +624,8 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		@Override
 		public @Nullable Object visitGuardPattern(@NonNull GuardPattern gOut) {
 			updateAllChildren(gOut.getPredicate());
-			updateAllChildren(gOut.getVariable());
-			for (VariableDeclaration vOut : gOut.getVariable()) {
+			updateAllChildren(gOut.getOwnedVariables());
+			for (VariableDeclaration vOut : gOut.getOwnedVariables()) {
 				assert !(vOut instanceof RealizedVariable);
 			}
 			return null;

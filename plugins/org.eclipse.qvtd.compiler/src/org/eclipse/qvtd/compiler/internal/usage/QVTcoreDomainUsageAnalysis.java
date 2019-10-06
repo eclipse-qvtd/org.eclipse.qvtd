@@ -137,7 +137,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		for (Domain domain : rule.getDomain()) {
 			if (domain instanceof CoreDomain) {
 				DomainUsage usage = visit(domain.getTypedModel());
-				for (VariableDeclaration variable : ((CoreDomain)domain).getGuardPattern().getVariable()) {
+				for (VariableDeclaration variable : ((CoreDomain)domain).getGuardPattern().getOwnedVariables()) {
 					if (variable != null) {
 						DomainUsage variableUsage = visit(variable.getType());
 						if (variableUsage != primitiveUsage) {
@@ -151,7 +151,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		}
 		if (rule instanceof Mapping) {
 			DomainUsage middleUsage = getRootAnalysis().getMiddleUsage();
-			for (VariableDeclaration variable : ((Mapping)rule).getGuardPattern().getVariable()) {
+			for (VariableDeclaration variable : ((Mapping)rule).getGuardPattern().getOwnedVariables()) {
 				if (variable != null) {
 					DomainUsage variableUsage = visit(variable.getType());
 					if (variableUsage.isMiddle()) {
@@ -179,7 +179,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 
 	@Override
 	public @NonNull DomainUsage visitBottomPattern(@NonNull BottomPattern object) {
-		for (VariableDeclaration variable : object.getVariable()) {
+		for (VariableDeclaration variable : object.getOwnedVariables()) {
 			visit(variable);
 		}
 		for (RealizedVariable variable : object.getRealizedVariable()) {
