@@ -50,7 +50,7 @@
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-CoreDomain"/>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-CoreModel"/>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-CorePattern">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-CorePattern-variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-CorePattern-ownedVariables"/>
       <genOperations ecoreOperation="QVTcore.ecore#//CorePattern/getArea"/>
     </genClasses>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-EnforcementOperation">

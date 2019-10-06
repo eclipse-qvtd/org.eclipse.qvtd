@@ -37,7 +37,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="CoreModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-BaseModel"/>
   <eClassifiers xsi:type="ecore:EClass" name="CorePattern" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Pattern">
     <eOperations name="getArea" lowerBound="1" eType="#//Area"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedVariables" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"
         containment="true"/>
   </eClassifiers>

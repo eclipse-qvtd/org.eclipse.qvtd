@@ -42,7 +42,7 @@
         <details key="originalName" value="VariablesAreBottomVariables"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;variable->forAll(oclIsKindOf(BottomVariable))&#xA;&#xA;"/>
+        <details key="body" value="&#xA;&#x9;ownedVariables->forAll(oclIsKindOf(BottomVariable))&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -89,8 +89,8 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-CorePattern" name="CorePattern"
       eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Pattern">
     <eOperations name="getArea" lowerBound="1" eType="#T-qvtcore-Area"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-CorePattern-variable"
-        name="variable" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-CorePattern-ownedVariables"
+        name="ownedVariables" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-EnforcementOperation" name="EnforcementOperation"
@@ -110,7 +110,7 @@
         <details key="originalName" value="VariablesAreGuardVariables"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;variable->forAll(oclIsKindOf(GuardVariable))&#xA;&#xA;"/>
+        <details key="body" value="&#xA;&#x9;ownedVariables->forAll(oclIsKindOf(GuardVariable))&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

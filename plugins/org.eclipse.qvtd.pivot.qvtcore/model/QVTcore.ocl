@@ -4,7 +4,7 @@ package qvtcore
 
 context BottomPattern
 inv VariablesAreBottomVariables:
-	variable->forAll(oclIsKindOf(BottomVariable))
+	ownedVariables->forAll(oclIsKindOf(BottomVariable))
 
 context BottomVariable
 /** The type of a Let variable initializer expression conforms to the type of the Let variable. */
@@ -14,7 +14,7 @@ inv CompatibleTypeForInitializer: ownedInit <> null implies ownedInit.type?.conf
 
 context GuardPattern
 inv VariablesAreGuardVariables:
-	variable->forAll(oclIsKindOf(GuardVariable))
+	ownedVariables->forAll(oclIsKindOf(GuardVariable))
 
 context GuardVariable
 /** A GuardVariable cannot have an initializer. Use a predicate. */
