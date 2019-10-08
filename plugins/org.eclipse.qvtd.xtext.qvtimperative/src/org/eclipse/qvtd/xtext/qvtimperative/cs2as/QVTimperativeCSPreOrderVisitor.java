@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
@@ -31,6 +32,7 @@ import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
+import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -181,11 +183,37 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
+
 		@Override
 		public BasicContinuation<?> execute() {
 			NewStatement pivotElement = PivotUtil.getPivot(NewStatement.class, csElement);
 			if (pivotElement != null) {
-				context.refreshRequiredType(pivotElement, csElement);
+				TypedRefCS csType = csElement.getOwnedType();
+				if (csType instanceof TypeNameExpCS) {
+					Type asType = ((TypeNameExpCS)csType).getElement();
+					Boolean isRequired = context.getConverter().isRequired(csType);
+					context.getHelper().setType(pivotElement, asType, isRequired == Boolean.TRUE);
+				}
+			}
+			return null;
+		}
+	}
+
+	protected static class NewStatementTypeNameExpContinuation extends SingleContinuation<TypeNameExpCS>
+	{
+		protected final @NonNull NewStatementCS csNewStatement;
+
+		public NewStatementTypeNameExpContinuation(@NonNull CS2ASConversion context, @NonNull TypeNameExpCS csElement, @NonNull NewStatementCS csNewStatement) {
+			super(context, null, null, csElement, context.getOperatorsHavePrecedenceInterDependency(), new PivotDependency(csNewStatement));
+			this.csNewStatement = csNewStatement;
+			assert csElement.getOwnedCurlyBracketedClause() != null;
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			NewStatement pivotElement = PivotUtil.getPivot(NewStatement.class, csNewStatement);
+			if (pivotElement != null) {
+				context.installPivotUsage(csElement, pivotElement);
 			}
 			return null;
 		}
@@ -458,5 +486,15 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			}
 		}
 		return new TransformationCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitTypeNameExpCS(@NonNull TypeNameExpCS csTypeNameExp) {
+		EObject eContainer = csTypeNameExp.eContainer();
+		// Perhaps there should be a distinct CS class for this variant
+		if ((eContainer instanceof NewStatementCS) && (csTypeNameExp.getOwnedCurlyBracketedClause() != null)) {
+			return new NewStatementTypeNameExpContinuation(context, csTypeNameExp, (NewStatementCS)eContainer);
+		}
+		return super.visitTypeNameExpCS(csTypeNameExp);
 	}
 }
