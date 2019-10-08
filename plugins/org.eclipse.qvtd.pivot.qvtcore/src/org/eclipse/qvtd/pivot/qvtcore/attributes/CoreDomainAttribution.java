@@ -35,14 +35,14 @@ public class CoreDomainAttribution extends AbstractAttribution
 				PivotUtil.addAllClasses(environmentView, pPackage);
 			}
 		}
-		for (EObject eContainer = targetElement.eContainer(); eContainer != null; eContainer = eContainer.eContainer()) {
-			if (eContainer instanceof Transformation) {
-				Transformation transformation = (Transformation) eContainer;
-				environmentView.addNamedElements(transformation.getModelParameter());
-				PivotUtil.addAllNamedElements(environmentView, transformation.getOwnedOperations());
-				break;
+		for (ScopeView parentScopeView = scopeView.getParent(); true; parentScopeView  = parentScopeView.getParent()) {
+			EObject parentTarget = parentScopeView.getTarget();
+			if (parentTarget == null) {
+				return null;					// No parent transformation should be impossible - avoid a crash
+			}
+			if (parentTarget instanceof Transformation) {
+				return parentScopeView;			// Continue search in the transformation skipping the mapping
 			}
 		}
-		return null;
 	}
 }
