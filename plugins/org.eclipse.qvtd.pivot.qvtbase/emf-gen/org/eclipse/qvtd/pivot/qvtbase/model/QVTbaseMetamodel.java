@@ -291,6 +291,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Class _BaseModel = createClass(QVTbasePackage.Literals.BASE_MODEL);
 		private final @NonNull Class _Domain = createClass(QVTbasePackage.Literals.DOMAIN);
 		private final @NonNull Class _Function = createClass(QVTbasePackage.Literals.FUNCTION);
+		private final @NonNull Class _FunctionBody = createClass(QVTbasePackage.Literals.FUNCTION_BODY);
 		private final @NonNull Class _FunctionParameter = createClass(QVTbasePackage.Literals.FUNCTION_PARAMETER);
 		private final @NonNull Class _Pattern = createClass(QVTbasePackage.Literals.PATTERN);
 		private final @NonNull Class _Predicate = createClass(QVTbasePackage.Literals.PREDICATE);
@@ -299,10 +300,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Class _TypedModel = createClass(QVTbasePackage.Literals.TYPED_MODEL);
 		
 		private final @NonNull BagType _Bag_Domain = createBagType(_Bag);
+		private final @NonNull BagType _Bag_Function = createBagType(_Bag);
 		private final @NonNull BagType _Bag_Pattern = createBagType(_Bag);
 		private final @NonNull BagType _Bag_TypedModel = createBagType(_Bag);
 		private final @NonNull CollectionType _Collection_Annotation = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Domain = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_Function = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Package = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Pattern = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Predicate = createCollectionType(_Collection);
@@ -362,6 +365,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _Function);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+			ownedClasses.add(type = _FunctionBody);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
 			ownedClasses.add(type = _FunctionParameter);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
@@ -392,6 +398,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _Bag_Domain);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Domain);
+			ownedClasses.add(type = _Bag_Function);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_Function);
 			ownedClasses.add(type = _Bag_Pattern);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Pattern);
@@ -402,6 +411,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Collection_Domain);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_Function);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Collection_Package);
@@ -512,7 +524,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 		
 		private final @NonNull Property pr_Annotation_Transformation_ownedTag = createProperty("Transformation", _Transformation);
-		private final @NonNull Property pr_OCLExpression_Function_queryExpression = createProperty("Function", _Function);
+		private final @NonNull Property pr_OCLExpression_Function_queryExpression = createProperty("Function", _Bag_Function);
 		private final @NonNull Property pr_OCLExpression_predicate_conditionExpression = createProperty("predicate", _Predicate);
 		private final @NonNull Property pr_Package_TypedModel_usedPackage = createProperty("TypedModel", _Bag_TypedModel);
 		private final @NonNull Property pr_Parameter_Transformation_ownedContext = createProperty("Transformation", _Transformation);
@@ -563,7 +575,6 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedProperties = _OCLExpression.getOwnedProperties();
 			ownedProperties.add(property = pr_OCLExpression_Function_queryExpression);
 			property.setIsImplicit(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Function_queryExpression);
 			ownedProperties.add(property = pr_OCLExpression_predicate_conditionExpression);
@@ -614,9 +625,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		
 			ownedProperties = _Function.getOwnedProperties();
 			ownedProperties.add(property = pr_Function_queryExpression);
-			property.setIsComposite(true);
+			property.setIsDerived(true);
 			property.setIsRequired(false);
-			property.setIsResolveProxies(true);
+			property.setIsTransient(true);
+			property.setIsVolatile(true);
 			property.setOpposite(pr_OCLExpression_Function_queryExpression);
 		
 			ownedProperties = _Pattern.getOwnedProperties();
@@ -724,10 +736,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		
 		private void installTemplateBindings() {
 			addBinding(_Bag_Domain, _Domain);
+			addBinding(_Bag_Function, _Function);
 			addBinding(_Bag_Pattern, _Pattern);
 			addBinding(_Bag_TypedModel, _TypedModel);
 			addBinding(_Collection_Annotation, _Annotation);
 			addBinding(_Collection_Domain, _Domain);
+			addBinding(_Collection_Function, _Function);
 			addBinding(_Collection_Package, _Package);
 			addBinding(_Collection_Pattern, _Pattern);
 			addBinding(_Collection_Predicate, _Predicate);
@@ -756,6 +770,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 		
 		private void installComments() {
+			installComment(_FunctionBody, "FunctionBody refines ExpressionInOCL to avoid the inconvenience of a timely setType() by deriving the type from the bodyExpression.");
 			installComment(pr_TypedModel_isPrimitive, "The TypedModel is for a primitive domain. It may be added automatically.");
 			installComment(pr_TypedModel_isThis, "The TypedModel is for the transformation instance trace. It may be added automatically.");
 			installComment(pr_TypedModel_isTrace, "The TypedModel is for the execution trace. It may be added automatically.");

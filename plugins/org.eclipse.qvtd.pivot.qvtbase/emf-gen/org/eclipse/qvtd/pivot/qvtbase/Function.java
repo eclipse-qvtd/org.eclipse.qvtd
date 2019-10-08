@@ -33,26 +33,26 @@ import org.eclipse.ocl.pivot.Operation;
  */
 public interface Function extends Operation {
 	/**
-	 * Returns the value of the '<em><b>Query Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Query Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Query Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Query Expression</em>' containment reference.
+	 * @return the value of the '<em>Query Expression</em>' reference.
 	 * @see #setQueryExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getFunction_QueryExpression()
-	 * @model containment="true"
+	 * @model resolveProxies="false" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	OCLExpression getQueryExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Function#getQueryExpression <em>Query Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Function#getQueryExpression <em>Query Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Query Expression</em>' containment reference.
+	 * @param value the new value of the '<em>Query Expression</em>' reference.
 	 * @see #getQueryExpression()
 	 * @generated
 	 */

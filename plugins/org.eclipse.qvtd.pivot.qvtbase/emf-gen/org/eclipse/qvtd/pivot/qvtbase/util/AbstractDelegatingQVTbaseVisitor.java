@@ -51,6 +51,11 @@ public abstract class AbstractDelegatingQVTbaseVisitor<R, C, @NonNull D extends 
 	}
 
 	@Override
+	public R visitFunctionBody(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionBody object) {
+		return delegate.visitFunctionBody(object);
+	}
+
+	@Override
 	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return delegate.visitFunctionParameter(object);
 	}

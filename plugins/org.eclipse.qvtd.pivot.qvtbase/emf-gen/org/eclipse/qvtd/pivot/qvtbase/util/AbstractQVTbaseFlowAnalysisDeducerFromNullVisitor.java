@@ -61,6 +61,11 @@ public abstract class AbstractQVTbaseFlowAnalysisDeducerFromNullVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitFunctionBody(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionBody object) {
+		return visitExpressionInOCL(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return visitParameter(object);
 	}

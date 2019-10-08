@@ -55,6 +55,11 @@ public abstract class AbstractNullQVTbaseVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitFunctionBody(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionBody object) {
+		return null;
+	}
+
+	@Override
 	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return null;
 	}

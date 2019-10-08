@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtbase.*;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -72,11 +73,12 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 		switch (eClass.getClassifierID()) {
 			case 0: return createBaseModel();
 			case 2: return createFunction();
-			case 3: return createFunctionParameter();
-			case 4: return createPattern();
-			case 5: return createPredicate();
-			case 7: return createTransformation();
-			case 8: return createTypedModel();
+			case 3: return createFunctionBody();
+			case 4: return createFunctionParameter();
+			case 5: return createPattern();
+			case 6: return createPredicate();
+			case 8: return createTransformation();
+			case 9: return createTypedModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -102,6 +104,17 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	public @NonNull Function createFunction() {
 		FunctionImpl function = new FunctionImpl();
 		return function;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public FunctionBody createFunctionBody() {
+		FunctionBodyImpl functionBody = new FunctionBodyImpl();
+		return functionBody;
 	}
 
 	/**

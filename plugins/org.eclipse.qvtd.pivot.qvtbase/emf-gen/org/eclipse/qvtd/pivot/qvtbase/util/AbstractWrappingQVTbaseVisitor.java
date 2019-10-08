@@ -68,6 +68,18 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, @NonNull D extends QV
 	}
 
 	@Override
+	public R visitFunctionBody(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionBody object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitFunctionBody(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		@Nullable P prologue = preVisit(object);
 		try {

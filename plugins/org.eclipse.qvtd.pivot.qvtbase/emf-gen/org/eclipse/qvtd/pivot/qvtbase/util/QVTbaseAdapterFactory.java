@@ -16,7 +16,9 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Feature;
+import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
@@ -26,7 +28,9 @@ import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.ValueSpecification;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.qvtd.pivot.qvtbase.*;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -107,6 +111,10 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 				return createFunctionAdapter();
 			}
 			@Override
+			public Adapter caseFunctionBody(FunctionBody object) {
+				return createFunctionBodyAdapter();
+			}
+			@Override
 			public Adapter caseFunctionParameter(FunctionParameter object) {
 				return createFunctionParameterAdapter();
 			}
@@ -165,6 +173,18 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseOperation(Operation object) {
 				return createOperationAdapter();
+			}
+			@Override
+			public Adapter caseValueSpecification(ValueSpecification object) {
+				return createValueSpecificationAdapter();
+			}
+			@Override
+			public Adapter caseLanguageExpression(LanguageExpression object) {
+				return createLanguageExpressionAdapter();
+			}
+			@Override
+			public Adapter caseExpressionInOCL(ExpressionInOCL object) {
+				return createExpressionInOCLAdapter();
 			}
 			@Override
 			public Adapter caseVariableDeclaration(VariableDeclaration object) {
@@ -241,6 +261,20 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFunctionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtbase.FunctionBody <em>Function Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.FunctionBody
+	 * @generated
+	 */
+	public Adapter createFunctionBodyAdapter() {
 		return null;
 	}
 
@@ -451,6 +485,48 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.ValueSpecification <em>Value Specification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.pivot.ValueSpecification
+	 * @generated
+	 */
+	public Adapter createValueSpecificationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.LanguageExpression <em>Language Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.pivot.LanguageExpression
+	 * @generated
+	 */
+	public Adapter createLanguageExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.ExpressionInOCL <em>Expression In OCL</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.pivot.ExpressionInOCL
+	 * @generated
+	 */
+	public Adapter createExpressionInOCLAdapter() {
 		return null;
 	}
 

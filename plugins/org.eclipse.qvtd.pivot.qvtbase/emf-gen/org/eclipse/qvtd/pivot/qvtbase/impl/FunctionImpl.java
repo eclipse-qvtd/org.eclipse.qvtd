@@ -15,13 +15,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteInheritance;
@@ -84,16 +80,6 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 */
 	public static final int FUNCTION_OPERATION_COUNT = OperationImpl.OPERATION_OPERATION_COUNT + 2;
 	/**
-	 * The cached value of the '{@link #getQueryExpression() <em>Query Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getQueryExpression()
-	 * @generated
-	 * @ordered
-	 */
-	protected OCLExpression queryExpression;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -119,22 +105,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 */
 	@Override
 	public OCLExpression getQueryExpression() {
-		return queryExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetQueryExpression(OCLExpression newQueryExpression, NotificationChain msgs) {
-		OCLExpression oldQueryExpression = queryExpression;
-		queryExpression = newQueryExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperationImpl.OPERATION_FEATURE_COUNT + 0, oldQueryExpression, newQueryExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Function!queryExpression
 	}
 
 	/**
@@ -144,17 +115,9 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 */
 	@Override
 	public void setQueryExpression(OCLExpression newQueryExpression) {
-		if (newQueryExpression != queryExpression) {
-			NotificationChain msgs = null;
-			if (queryExpression != null)
-				msgs = ((InternalEObject)queryExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (OperationImpl.OPERATION_FEATURE_COUNT + 0), null, msgs);
-			if (newQueryExpression != null)
-				msgs = ((InternalEObject)newQueryExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (OperationImpl.OPERATION_FEATURE_COUNT + 0), null, msgs);
-			msgs = basicSetQueryExpression(newQueryExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationImpl.OPERATION_FEATURE_COUNT + 0, newQueryExpression, newQueryExpression));
+		// TODO: implement this method to set the 'Query Expression' reference
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -338,20 +301,6 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
-				return basicSetQueryExpression(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
@@ -399,7 +348,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
-				return queryExpression != null;
+				return getQueryExpression() != null;
 		}
 		return super.eIsSet(featureID);
 	}

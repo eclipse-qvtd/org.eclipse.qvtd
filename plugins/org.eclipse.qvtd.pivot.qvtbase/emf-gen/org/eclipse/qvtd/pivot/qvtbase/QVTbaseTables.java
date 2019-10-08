@@ -141,6 +141,7 @@ public class QVTbaseTables
 		public static final @NonNull EcoreExecutorType _BaseModel = new EcoreExecutorType(QVTbasePackage.Literals.BASE_MODEL, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Domain = new EcoreExecutorType(QVTbasePackage.Literals.DOMAIN, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _Function = new EcoreExecutorType(QVTbasePackage.Literals.FUNCTION, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _FunctionBody = new EcoreExecutorType(QVTbasePackage.Literals.FUNCTION_BODY, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _FunctionParameter = new EcoreExecutorType(QVTbasePackage.Literals.FUNCTION_PARAMETER, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Pattern = new EcoreExecutorType(QVTbasePackage.Literals.PATTERN, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Predicate = new EcoreExecutorType(QVTbasePackage.Literals.PREDICATE, PACKAGE, 0);
@@ -152,6 +153,7 @@ public class QVTbaseTables
 			_BaseModel,
 			_Domain,
 			_Function,
+			_FunctionBody,
 			_FunctionParameter,
 			_Pattern,
 			_Predicate,
@@ -208,6 +210,16 @@ public class QVTbaseTables
 		private static final @NonNull ExecutorFragment _Function__Operation = new ExecutorFragment(Types._Function, PivotTables.Types._Operation);
 		private static final @NonNull ExecutorFragment _Function__TemplateableElement = new ExecutorFragment(Types._Function, PivotTables.Types._TemplateableElement);
 		private static final @NonNull ExecutorFragment _Function__TypedElement = new ExecutorFragment(Types._Function, PivotTables.Types._TypedElement);
+
+		private static final @NonNull ExecutorFragment _FunctionBody__Element = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _FunctionBody__ExpressionInOCL = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._ExpressionInOCL);
+		private static final @NonNull ExecutorFragment _FunctionBody__FunctionBody = new ExecutorFragment(Types._FunctionBody, QVTbaseTables.Types._FunctionBody);
+		private static final @NonNull ExecutorFragment _FunctionBody__LanguageExpression = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._LanguageExpression);
+		private static final @NonNull ExecutorFragment _FunctionBody__NamedElement = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._NamedElement);
+		private static final @NonNull ExecutorFragment _FunctionBody__OclAny = new ExecutorFragment(Types._FunctionBody, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _FunctionBody__OclElement = new ExecutorFragment(Types._FunctionBody, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _FunctionBody__TypedElement = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._TypedElement);
+		private static final @NonNull ExecutorFragment _FunctionBody__ValueSpecification = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._ValueSpecification);
 
 		private static final @NonNull ExecutorFragment _FunctionParameter__Element = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _FunctionParameter__FunctionParameter = new ExecutorFragment(Types._FunctionParameter, QVTbaseTables.Types._FunctionParameter);
@@ -420,6 +432,20 @@ public class QVTbaseTables
 			};
 		private static final int @NonNull [] __Function = { 1,1,1,2,2,1,1,1 };
 
+		private static final @NonNull ExecutorFragment @NonNull [] _FunctionBody =
+			{
+				Fragments._FunctionBody__OclAny /* 0 */,
+				Fragments._FunctionBody__OclElement /* 1 */,
+				Fragments._FunctionBody__Element /* 2 */,
+				Fragments._FunctionBody__NamedElement /* 3 */,
+				Fragments._FunctionBody__TypedElement /* 4 */,
+				Fragments._FunctionBody__ValueSpecification /* 5 */,
+				Fragments._FunctionBody__LanguageExpression /* 6 */,
+				Fragments._FunctionBody__ExpressionInOCL /* 7 */,
+				Fragments._FunctionBody__FunctionBody /* 8 */
+			};
+		private static final int @NonNull [] __FunctionBody = { 1,1,1,1,1,1,1,1,1 };
+
 		private static final @NonNull ExecutorFragment @NonNull [] _FunctionParameter =
 			{
 				Fragments._FunctionParameter__OclAny /* 0 */,
@@ -493,6 +519,7 @@ public class QVTbaseTables
 			Types._BaseModel.initFragments(_BaseModel, __BaseModel);
 			Types._Domain.initFragments(_Domain, __Domain);
 			Types._Function.initFragments(_Function, __Function);
+			Types._FunctionBody.initFragments(_FunctionBody, __FunctionBody);
 			Types._FunctionParameter.initFragments(_FunctionParameter, __FunctionParameter);
 			Types._Pattern.initFragments(_Pattern, __Pattern);
 			Types._Predicate.initFragments(_Predicate, __Predicate);
@@ -627,6 +654,52 @@ public class QVTbaseTables
 		private static final @NonNull ExecutorOperation @NonNull [] _Function__TemplateableElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Function__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
+		};
+
+		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__FunctionBody = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__ExpressionInOCL = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__LanguageExpression = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__TypedElement = {
+			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__ValueSpecification = {
+			PivotTables.Operations._ValueSpecification__booleanValue /* booleanValue() */,
+			PivotTables.Operations._ValueSpecification__integerValue /* integerValue() */,
+			PivotTables.Operations._ValueSpecification__isComputable /* isComputable() */,
+			PivotTables.Operations._ValueSpecification__isNull /* isNull() */,
+			PivotTables.Operations._ValueSpecification__stringValue /* stringValue() */,
+			PivotTables.Operations._ValueSpecification__unlimitedValue /* unlimitedValue() */
 		};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__FunctionParameter = {};
@@ -876,6 +949,16 @@ public class QVTbaseTables
 			Fragments._Function__TemplateableElement.initOperations(_Function__TemplateableElement);
 			Fragments._Function__TypedElement.initOperations(_Function__TypedElement);
 
+			Fragments._FunctionBody__Element.initOperations(_FunctionBody__Element);
+			Fragments._FunctionBody__ExpressionInOCL.initOperations(_FunctionBody__ExpressionInOCL);
+			Fragments._FunctionBody__FunctionBody.initOperations(_FunctionBody__FunctionBody);
+			Fragments._FunctionBody__LanguageExpression.initOperations(_FunctionBody__LanguageExpression);
+			Fragments._FunctionBody__NamedElement.initOperations(_FunctionBody__NamedElement);
+			Fragments._FunctionBody__OclAny.initOperations(_FunctionBody__OclAny);
+			Fragments._FunctionBody__OclElement.initOperations(_FunctionBody__OclElement);
+			Fragments._FunctionBody__TypedElement.initOperations(_FunctionBody__TypedElement);
+			Fragments._FunctionBody__ValueSpecification.initOperations(_FunctionBody__ValueSpecification);
+
 			Fragments._FunctionParameter__Element.initOperations(_FunctionParameter__Element);
 			Fragments._FunctionParameter__FunctionParameter.initOperations(_FunctionParameter__FunctionParameter);
 			Fragments._FunctionParameter__NamedElement.initOperations(_FunctionParameter__NamedElement);
@@ -949,6 +1032,8 @@ public class QVTbaseTables
 			QVTbaseTables.Properties._Function__queryExpression
 		};
 
+		private static final @NonNull ExecutorProperty @NonNull [] _FunctionBody = {};
+
 		private static final @NonNull ExecutorProperty @NonNull [] _FunctionParameter = {};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Pattern = {
@@ -994,6 +1079,7 @@ public class QVTbaseTables
 			Fragments._BaseModel__BaseModel.initProperties(_BaseModel);
 			Fragments._Domain__Domain.initProperties(_Domain);
 			Fragments._Function__Function.initProperties(_Function);
+			Fragments._FunctionBody__FunctionBody.initProperties(_FunctionBody);
 			Fragments._FunctionParameter__FunctionParameter.initProperties(_FunctionParameter);
 			Fragments._Pattern__Pattern.initProperties(_Pattern);
 			Fragments._Predicate__Predicate.initProperties(_Predicate);

@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.pivot.util.PivotValidator;
+import org.eclipse.qvtd.pivot.qvtbase.*;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -232,16 +233,18 @@ public class QVTbaseValidator extends EObjectValidator {
 			case 2:
 				return validateFunction((Function)value, diagnostics, context);
 			case 3:
-				return validateFunctionParameter((FunctionParameter)value, diagnostics, context);
+				return validateFunctionBody((FunctionBody)value, diagnostics, context);
 			case 4:
-				return validatePattern((Pattern)value, diagnostics, context);
+				return validateFunctionParameter((FunctionParameter)value, diagnostics, context);
 			case 5:
-				return validatePredicate((Predicate)value, diagnostics, context);
+				return validatePattern((Pattern)value, diagnostics, context);
 			case 6:
-				return validateRule((Rule)value, diagnostics, context);
+				return validatePredicate((Predicate)value, diagnostics, context);
 			case 7:
-				return validateTransformation((Transformation)value, diagnostics, context);
+				return validateRule((Rule)value, diagnostics, context);
 			case 8:
+				return validateTransformation((Transformation)value, diagnostics, context);
+			case 9:
 				return validateTypedModel((TypedModel)value, diagnostics, context);
 			default:
 				return true;
@@ -342,6 +345,15 @@ public class QVTbaseValidator extends EObjectValidator {
 	 */
 	public boolean validateFunction_validateReturnTypeIsQueryType(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return function.validateReturnTypeIsQueryType(diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFunctionBody(FunctionBody functionBody, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(functionBody, diagnostics, context);
 	}
 
 	/**

@@ -49,6 +49,11 @@ public abstract class AbstractMergedQVTbaseVisitor<R, C>
 	}
 
 	@Override
+	public R visitFunctionBody(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionBody object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return visiting(object);
 	}

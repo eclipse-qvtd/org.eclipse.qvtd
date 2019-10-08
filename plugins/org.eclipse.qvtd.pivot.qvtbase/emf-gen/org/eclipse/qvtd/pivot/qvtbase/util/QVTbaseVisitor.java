@@ -27,6 +27,7 @@ public interface QVTbaseVisitor<R> extends org.eclipse.ocl.pivot.util.Visitor<R>
 	R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object);
 	R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object);
 	R visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object);
+	R visitFunctionBody(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionBody object);
 	R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object);
 	R visitPattern(org.eclipse.qvtd.pivot.qvtbase.@NonNull Pattern object);
 	R visitPredicate(org.eclipse.qvtd.pivot.qvtbase.@NonNull Predicate object);

@@ -49,6 +49,15 @@ public interface QVTbaseFactory extends EFactory {
 	@NonNull Function createFunction();
 
 	/**
+	 * Returns a new object of class '<em>Function Body</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Function Body</em>'.
+	 * @generated
+	 */
+	FunctionBody createFunctionBody();
+
+	/**
 	 * Returns a new object of class '<em>Function Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

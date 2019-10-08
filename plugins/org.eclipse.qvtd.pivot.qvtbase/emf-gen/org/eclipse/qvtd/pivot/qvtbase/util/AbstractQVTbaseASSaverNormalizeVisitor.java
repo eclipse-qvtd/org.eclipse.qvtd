@@ -61,6 +61,11 @@ public abstract class AbstractQVTbaseASSaverNormalizeVisitor
 	}
 
 	@Override
+	public @Nullable Object visitFunctionBody(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionBody object) {
+		return visitExpressionInOCL(object);
+	}
+
+	@Override
 	public @Nullable Object visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return visitParameter(object);
 	}

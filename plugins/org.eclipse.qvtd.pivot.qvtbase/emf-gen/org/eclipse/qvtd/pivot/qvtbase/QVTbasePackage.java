@@ -168,10 +168,10 @@ public interface QVTbasePackage extends EPackage {
 	EClass getFunction();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtbase.Function#getQueryExpression <em>Query Expression</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtbase.Function#getQueryExpression <em>Query Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Query Expression</em>'.
+	 * @return the meta object for the reference '<em>Query Expression</em>'.
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Function#getQueryExpression()
 	 * @see #getFunction()
 	 * @generated
@@ -197,6 +197,16 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.FunctionBody <em>Function Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Function Body</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.FunctionBody
+	 * @generated
+	 */
+	EClass getFunctionBody();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.FunctionParameter <em>Function Parameter</em>}'.
@@ -710,7 +720,7 @@ public interface QVTbasePackage extends EPackage {
 		EClass FUNCTION = eINSTANCE.getFunction();
 
 		/**
-		 * The meta object literal for the '<em><b>Query Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Query Expression</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -732,6 +742,16 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionBodyImpl <em>Function Body</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.FunctionBodyImpl
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getFunctionBody()
+		 * @generated
+		 */
+		EClass FUNCTION_BODY = eINSTANCE.getFunctionBody();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl <em>Function Parameter</em>}' class.

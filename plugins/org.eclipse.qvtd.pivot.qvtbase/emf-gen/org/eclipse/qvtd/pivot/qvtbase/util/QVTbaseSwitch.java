@@ -15,7 +15,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Feature;
+import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
@@ -25,7 +27,9 @@ import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.ValueSpecification;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.qvtd.pivot.qvtbase.*;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -127,6 +131,18 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 3: {
+				FunctionBody functionBody = (FunctionBody)theEObject;
+				T result = caseFunctionBody(functionBody);
+				if (result == null) result = caseExpressionInOCL(functionBody);
+				if (result == null) result = caseLanguageExpression(functionBody);
+				if (result == null) result = caseValueSpecification(functionBody);
+				if (result == null) result = caseTypedElement(functionBody);
+				if (result == null) result = caseNamedElement(functionBody);
+				if (result == null) result = caseElement(functionBody);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 4: {
 				FunctionParameter functionParameter = (FunctionParameter)theEObject;
 				T result = caseFunctionParameter(functionParameter);
 				if (result == null) result = caseParameter(functionParameter);
@@ -137,21 +153,21 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 4: {
+			case 5: {
 				Pattern pattern = (Pattern)theEObject;
 				T result = casePattern(pattern);
 				if (result == null) result = caseElement(pattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 5: {
+			case 6: {
 				Predicate predicate = (Predicate)theEObject;
 				T result = casePredicate(predicate);
 				if (result == null) result = caseElement(predicate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 6: {
+			case 7: {
 				Rule rule = (Rule)theEObject;
 				T result = caseRule(rule);
 				if (result == null) result = caseNamedElement(rule);
@@ -159,7 +175,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 7: {
+			case 8: {
 				Transformation transformation = (Transformation)theEObject;
 				T result = caseTransformation(transformation);
 				if (result == null) result = caseClass(transformation);
@@ -171,7 +187,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 8: {
+			case 9: {
 				TypedModel typedModel = (TypedModel)theEObject;
 				T result = caseTypedModel(typedModel);
 				if (result == null) result = caseNamedElement(typedModel);
@@ -225,6 +241,21 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFunction(Function object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Function Body</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Function Body</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFunctionBody(FunctionBody object) {
 		return null;
 	}
 
@@ -450,6 +481,51 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOperation(Operation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Value Specification</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Value Specification</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseValueSpecification(ValueSpecification object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Language Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Language Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLanguageExpression(LanguageExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression In OCL</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression In OCL</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpressionInOCL(ExpressionInOCL object) {
 		return null;
 	}
 

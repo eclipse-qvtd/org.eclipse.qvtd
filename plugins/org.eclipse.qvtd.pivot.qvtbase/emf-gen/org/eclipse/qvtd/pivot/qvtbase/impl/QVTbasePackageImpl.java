@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -65,6 +66,13 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	private EClass functionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass functionBodyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -300,6 +308,16 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	@Override
 	public EOperation getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map() {
 		return functionEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getFunctionBody() {
+		return functionBodyEClass;
 	}
 
 	/**
@@ -736,18 +754,20 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEOperation(functionEClass, OperationImpl.OPERATION_OPERATION_COUNT + 0);
 		createEOperation(functionEClass, OperationImpl.OPERATION_OPERATION_COUNT + 1);
 
-		functionParameterEClass = createEClass(3);
+		functionBodyEClass = createEClass(3);
 
-		patternEClass = createEClass(4);
+		functionParameterEClass = createEClass(4);
+
+		patternEClass = createEClass(5);
 		createEReference(patternEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		createEReference(patternEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 
-		predicateEClass = createEClass(5);
+		predicateEClass = createEClass(6);
 		createEReference(predicateEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		createEReference(predicateEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		createEOperation(predicateEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 
-		ruleEClass = createEClass(6);
+		ruleEClass = createEClass(7);
 		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEAttribute(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
@@ -758,7 +778,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2);
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3);
 
-		transformationEClass = createEClass(7);
+		transformationEClass = createEClass(8);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 0);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 1);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 2);
@@ -771,7 +791,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 4);
 		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 5);
 
-		typedModelEClass = createEClass(8);
+		typedModelEClass = createEClass(9);
 		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
@@ -817,6 +837,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		domainEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		domainEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		functionEClass.getESuperTypes().add(thePivotPackage.getOperation());
+		functionBodyEClass.getESuperTypes().add(thePivotPackage.getExpressionInOCL());
 		functionParameterEClass.getESuperTypes().add(thePivotPackage.getParameter());
 		patternEClass.getESuperTypes().add(thePivotPackage.getElement());
 		predicateEClass.getESuperTypes().add(thePivotPackage.getElement());
@@ -852,7 +873,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunction_QueryExpression(), thePivotPackage.getOCLExpression(), null, "queryExpression", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunction_QueryExpression(), thePivotPackage.getOCLExpression(), null, "queryExpression", null, 0, 1, Function.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateParametersAreFunctionParameter", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -871,6 +892,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(functionBodyEClass, FunctionBody.class, "FunctionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(functionParameterEClass, FunctionParameter.class, "FunctionParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
