@@ -28,6 +28,7 @@ public class ObjectTemplateExpAttribution extends TemplateExpAttribution
 		org.eclipse.ocl.pivot.Class referredClass = targetElement.getReferredClass();
 		if ((referredClass != null) && (environmentView.getRequiredType() == PivotPackage.Literals.PROPERTY)) {		// FIXME this is a pragmatic filtering to suppress resolution within PropertyTemplateItem values
 			environmentView.addAllProperties(referredClass, FeatureFilter.SELECT_NON_STATIC);
+			return null;
 		}
 		return super.computeLookup(target, environmentView, scopeView);
 	}
