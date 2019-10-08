@@ -22,7 +22,11 @@
       <ownedInvariants xmi:id="5hGIF" isCallable="true" name="ReturnTypeIsQueryType">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;queryExpression &lt;> null implies queryExpression.type?.conformsTo(type)&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="r1ilM" isComposite="true" isRequired="false" name="queryExpression" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
+      <ownedProperties xmi:id="r1ilM" isDerived="true" isRequired="false" isResolveProxies="false" isTransient="true" isVolatile="true"
+          name="queryExpression" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="RNSrx" name="FunctionBody" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#sFfJa">
+      <ownedComments body="FunctionBody refines ExpressionInOCL to avoid the inconvenience of a timely setType() by deriving the type from the bodyExpression. See Bug 481664."/>
     </ownedClasses>
     <ownedClasses xmi:id="owsj9" name="FunctionParameter" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#as9eG"/>
     <ownedClasses xmi:id="H0dko" name="Pattern" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa">
@@ -108,7 +112,7 @@
       <ownedProperties xmi:id="UougY" isImplicit="true" isRequired="false" name="Transformation" opposite="#NUcXB" type="#AjDLV"/>
     </ownedClasses>
     <ownedClasses xmi:id="BFtK4" name="OCLExpression">
-      <ownedProperties xmi:id="N9fOm" isImplicit="true" isRequired="false" name="Function" opposite="#r1ilM" type="#PGjqK"/>
+      <ownedProperties xmi:id="N9fOm" isImplicit="true" name="Function" opposite="#r1ilM" type="#xW5qz"/>
       <ownedProperties xmi:id="R0cad" isImplicit="true" isRequired="false" name="predicate" opposite="#h0xFs" type="#uMSmb"/>
     </ownedClasses>
     <ownedClasses xmi:id="3ONqN" name="Package">
@@ -126,6 +130,11 @@
     <ownedClasses xsi:type="pivot:BagType" xmi:id="9+o+H" name="Bag" superClasses="#TaRAX">
       <ownedBindings>
         <ownedSubstitutions actual="#7pR2u" formal="http://www.eclipse.org/ocl/2015/Library.oclas#k2OA6"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:BagType" xmi:id="xW5qz" name="Bag" superClasses="#HyhsC">
+      <ownedBindings>
+        <ownedSubstitutions actual="#PGjqK" formal="http://www.eclipse.org/ocl/2015/Library.oclas#k2OA6"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:BagType" xmi:id="pJjNZ" name="Bag" superClasses="#,kLPo">
@@ -156,6 +165,11 @@
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id="TaRAX" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
         <ownedSubstitutions actual="#7pR2u" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="HyhsC" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+      <ownedBindings>
+        <ownedSubstitutions actual="#PGjqK" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id=",kLPo" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">

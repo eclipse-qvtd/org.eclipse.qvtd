@@ -43,6 +43,7 @@
         <genParameters ecoreParameter="QVTbase.ecore#//Function/validateReturnTypeIsQueryType/context"/>
       </genOperations>
     </genClasses>
+    <genClasses ecoreClass="QVTbase.ecore#T-qvtbase-FunctionBody"/>
     <genClasses ecoreClass="QVTbase.ecore#T-qvtbase-FunctionParameter"/>
     <genClasses ecoreClass="QVTbase.ecore#T-qvtbase-Pattern">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Pattern-predicate"/>

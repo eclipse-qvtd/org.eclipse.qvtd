@@ -86,7 +86,13 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Function-queryExpression"
         name="queryExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
-        containment="true"/>
+        volatile="true" transient="true" derived="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-FunctionBody" name="FunctionBody"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ExpressionInOCL">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="FunctionBody refines ExpressionInOCL to avoid the inconvenience of a timely setType() by deriving the type from the bodyExpression. See Bug 481664."/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-FunctionParameter" name="FunctionParameter"
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Parameter"/>
