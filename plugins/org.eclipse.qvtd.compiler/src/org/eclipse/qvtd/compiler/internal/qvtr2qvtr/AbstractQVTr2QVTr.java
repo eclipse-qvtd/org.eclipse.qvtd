@@ -513,7 +513,7 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 		public @Nullable Element visitFunction(@NonNull Function fOut) {
 			context.pushScope(fOut);
 			Function fIn = context.equivalentSource(fOut);
-			fOut.setQueryExpression(copy(fIn.getQueryExpression()));
+			fOut.setBodyExpression(copy(fIn.getBodyExpression()));
 			fOut.setType(fIn.getType());
 			//			fOut.setTypeValue(fIn.getTypeValue());
 			updateAllChildren(fOut.getOwnedParameters());

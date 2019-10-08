@@ -108,6 +108,7 @@ import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -1058,6 +1059,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		}
 		analyzer.addFunction(asFunction, cgFunction);
 		return cgFunction;
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitFunctionBody(@NonNull FunctionBody object) {
+		return super.visitExpressionInOCL(object);
 	}
 
 	@Override

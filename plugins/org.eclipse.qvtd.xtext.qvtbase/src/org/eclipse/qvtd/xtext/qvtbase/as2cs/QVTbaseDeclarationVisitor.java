@@ -39,6 +39,7 @@ import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -97,6 +98,11 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	@Override
 	public ElementCS visitFunction(@NonNull Function object) {
 		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitFunctionBody(@NonNull FunctionBody object) {
+		return super.visitExpressionInOCL(object);
 	}
 
 	@Override

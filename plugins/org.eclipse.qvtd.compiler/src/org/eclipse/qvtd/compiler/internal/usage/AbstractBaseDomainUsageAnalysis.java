@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -71,6 +72,11 @@ public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsag
 		else {
 			return visit(object.getType());
 		}
+	}
+
+	@Override
+	public @NonNull DomainUsage visitFunctionBody(@NonNull FunctionBody object) {
+		return visitExpressionInOCL(object);
 	}
 
 	@Override

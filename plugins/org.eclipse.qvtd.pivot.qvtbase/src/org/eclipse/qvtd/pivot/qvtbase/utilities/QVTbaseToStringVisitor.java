@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -76,6 +77,11 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	@Override
 	public String visitFunction(@NonNull Function object) {
 		return visitOperation(object);
+	}
+
+	@Override
+	public String visitFunctionBody(@NonNull FunctionBody object) {
+		return super.visitExpressionInOCL(object);
 	}
 
 	@Override

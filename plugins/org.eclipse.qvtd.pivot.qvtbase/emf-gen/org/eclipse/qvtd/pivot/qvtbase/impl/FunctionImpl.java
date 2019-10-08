@@ -21,15 +21,16 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteInheritance;
-import org.eclipse.ocl.pivot.LanguageExpression;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.ExpressionInOCLImpl;
 import org.eclipse.ocl.pivot.internal.OperationImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
@@ -44,9 +45,13 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,28 +101,6 @@ public class FunctionImpl extends OperationImpl implements Function {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTbasePackage.Literals.FUNCTION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public OCLExpression getQueryExpression() {
-		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Function!queryExpression
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setQueryExpression(OCLExpression newQueryExpression) {
-		// TODO: implement this method to set the 'Query Expression' reference
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -391,29 +374,50 @@ public class FunctionImpl extends OperationImpl implements Function {
 		return null;
 	}
 
-	private final class Function_Body_481664 extends ExpressionInOCLImpl			// FIXME Bug 481664 workaround
-	{
-		@Override
-		public OCLExpression getOwnedBody() {
-			return getQueryExpression();
+	/**
+	 * Return the query expression from the underlying Operation.ownedBody. See Bug 481664.
+	 *
+	 * @generated NOT
+	 */
+	@Override
+	public OCLExpression getQueryExpression() {
+		if (bodyExpression == null) {
+			return null;
 		}
-
-		@Override
-		public Type getType() {
-			OCLExpression queryExpression = getQueryExpression();
-			return queryExpression != null ? queryExpression.getType() : null;
-		}
+		return ((ExpressionInOCL)bodyExpression).getOwnedBody();
 	}
 
+	/**
+	 * Set the query expression in the underlying Operation.ownedBody. See Bug 481664.
+	 *
+	 * @generated NOT
+	 */
 	@Override
-	public LanguageExpression getBodyExpression() {			// FIXME Bug 481664 workaround
-		return new Function_Body_481664();
-	}
-
-	@Override
-	public void setBodyExpression(LanguageExpression newBodyExpression) {		// FIXME Bug 481664 workaround
-		if (newBodyExpression.getClass() != Function_Body_481664.class) {
-			throw new UnsupportedOperationException();
+	public void setQueryExpression(OCLExpression newQueryExpression) {
+		if (newQueryExpression != null) {
+			Transformation asTransformation = QVTbaseUtil.getContainingTransformation(this);
+			Parameter asContextParameter = asTransformation.getOwnedContext();
+			assert asContextParameter != null;		// Caller must create asTransformation.getOwnedContext()
+			assert ownedParameters != null;			// Caller must create this.getOwnedParameters()
+			ParameterVariable asContextVariable = QVTbaseUtil.createParameterVariable(asContextParameter);
+			int size = ownedParameters.size();
+			ParameterVariable[] asParameterVariables = new ParameterVariable[size];
+			for (int i = 0; i < size; i++) {
+				Parameter asParameter = ownedParameters.get(i);
+				assert asParameter != null;
+				asParameterVariables[i] = QVTbaseUtil.createParameterVariable(asParameter);
+			}
+			FunctionBody asFunctionBody = QVTbaseFactory.eINSTANCE.createFunctionBody();
+			asFunctionBody.setOwnedContext(asContextVariable);
+			for (Variable asParameterVariable : asParameterVariables) {
+				asFunctionBody.getOwnedParameters().add(asParameterVariable);
+			}
+			asFunctionBody.setOwnedBody(newQueryExpression);
+			asFunctionBody.setIsRequired(newQueryExpression.isIsRequired());
+			super.setBodyExpression(asFunctionBody);
+		}
+		else {
+			super.setBodyExpression(null);
 		}
 	}
 } //FunctionImpl

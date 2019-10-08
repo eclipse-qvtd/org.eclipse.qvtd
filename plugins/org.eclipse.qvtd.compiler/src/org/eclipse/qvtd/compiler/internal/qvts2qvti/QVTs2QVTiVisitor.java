@@ -74,7 +74,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisit
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
-
 import com.google.common.collect.Lists;
 
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
@@ -253,10 +252,11 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 					}
 				}
 			} */
+			QVTbaseUtil.getContextVariable(getStandardLibrary(), iTransformation, asTransformation);
 			Function asFunction = qvts2qvti.createFunction(functionName, primaryClass, true, asParameters);
+			iTransformation.getOwnedOperations().add(asFunction);
 			OCLExpression asShadowExp = qvts2qvti.createShadowExp(primaryClass, asShadowParts);
 			asFunction.setQueryExpression(asShadowExp);
-			iTransformation.getOwnedOperations().add(asFunction);
 			classDatum2keyFunction.put(classDatum, asFunction);
 		}
 	}

@@ -605,7 +605,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		public @Nullable Element visitFunction(@NonNull Function fOut) {
 			context.pushScope(fOut);
 			Function fIn = context.equivalentSource(fOut);
-			fOut.setQueryExpression(copy(fIn.getQueryExpression()));
+			fOut.setBodyExpression(copy(fIn.getBodyExpression()));
 			fOut.setType(fIn.getType());
 			//			fOut.setTypeValue(fIn.getTypeValue());
 			updateAllChildren(fOut.getOwnedParameters());

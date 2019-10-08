@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
@@ -269,6 +270,16 @@ public class QVTbaseUtil extends PivotUtil
 		return false;
 	}
 
+	// Promote to PivotUtil
+	public static @NonNull ParameterVariable createParameterVariable(@NonNull Parameter asParameter) {
+		ParameterVariable asParameterVariable = PivotFactory.eINSTANCE.createParameterVariable();
+		asParameterVariable.setName(asParameter.getName());
+		asParameterVariable.setType(asParameter.getType());
+		asParameterVariable.setIsRequired(asParameter.isIsRequired());
+		asParameterVariable.setRepresentedParameter(asParameter);
+		return asParameterVariable;
+	}
+
 	/**
 	 * Return all transformations in asModel.
 	 */
@@ -499,6 +510,10 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull OCLExpression getOwnedConditionExpression(@NonNull Predicate asPredicate) {
 		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
+	}
+
+	public static @NonNull Parameter getOwnedContext(@NonNull Transformation asTransformation) {
+		return ClassUtil.nonNullState(asTransformation.getOwnedContext());
 	}
 
 	public static @NonNull Iterable<@NonNull Domain> getOwnedDomains(@NonNull Rule asRule) {

@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.ocl.pivot.utilities.PivotAS2XMIidVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 
 /**
  * An AbstractQVTbaseAS2XMIidVisitor provides a default implementation for each
@@ -57,6 +58,11 @@ implements QVTbaseVisitor<Boolean>
 	@Override
 	public @Nullable Boolean visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object) {
 		return visitOperation(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitFunctionBody(@NonNull FunctionBody object) {
+		return visitExpressionInOCL(object);
 	}
 
 	@Override

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -12,6 +12,7 @@ package	org.eclipse.qvtd.debug.stepper;
 
 import org.eclipse.ocl.examples.debug.stepper.OCLStepperVisitor;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -24,17 +25,17 @@ import org.eclipse.jdt.annotation.Nullable;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTbaseStepperVisitor
-	extends OCLStepperVisitor
-	implements QVTbaseVisitor<IStepper>
+extends OCLStepperVisitor
+implements QVTbaseVisitor<IStepper>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTbaseStepperVisitor(@NonNull Object context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable IStepper visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object) {
@@ -49,6 +50,11 @@ public abstract class AbstractQVTbaseStepperVisitor
 	@Override
 	public @Nullable IStepper visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object) {
 		return visitOperation(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitFunctionBody(@NonNull FunctionBody object) {
+		return super.visitExpressionInOCL(object);
 	}
 
 	@Override
