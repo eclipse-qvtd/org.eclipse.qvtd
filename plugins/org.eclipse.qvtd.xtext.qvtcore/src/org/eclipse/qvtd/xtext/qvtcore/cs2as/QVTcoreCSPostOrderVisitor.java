@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcore.cs2as;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -28,6 +29,8 @@ import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -232,7 +235,14 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 	}
 
 	@Override
-	public Continuation<?> visitTransformationCS(@NonNull TransformationCS object) {
+	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
+		Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csElement);
+		if (asTransformation != null) {
+			TypedModel thisTypedModel = QVTbaseUtil.basicGetThisTypedModel(asTransformation);
+			if (thisTypedModel != null) {
+				context.refreshList(thisTypedModel.getUsedPackage(), Collections.singletonList(asTransformation.getOwningPackage()));
+			}
+		}
 		return null;
 	}
 

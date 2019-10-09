@@ -380,6 +380,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		List<TypedModel> newModelParameters = new ArrayList<>();
 		context.refreshPivotList(TypedModel.class, newModelParameters, csElement.getOwnedDirections());
 		newModelParameters.add(0, getHelper().createPrimitiveTypedModel());
+		newModelParameters.add(1, getHelper().createThisTypedModel());
 		PivotUtilInternal.refreshList(asTransformation.getModelParameter(), newModelParameters);
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);

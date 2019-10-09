@@ -281,14 +281,14 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 	public @NonNull DomainUsage visitTransformation(@NonNull Transformation object) {
 		RootDomainUsageAnalysis rootAnalysis = getRootAnalysis();
 		if (rootAnalysis != this) {
-			return rootAnalysis.getNoneUsage();
+			return rootAnalysis.getThisUsage();
 		}
 		//		for (TypedModel typedModel : object.getModelParameter()) {			-- done in analyzeTransformation
 		//			visit(typedModel);
 		//		}
 		//		System.out.println("  " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " : " + object);
 		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(getEnvironmentFactory().getStandardLibrary(), object);
-		setUsage(ownedContext, getRootAnalysis().getNoneUsage());
+		setUsage(ownedContext, getRootAnalysis().getThisUsage());
 		//
 		//	Ensure all operations are analyzed even if not used.
 		//
@@ -311,7 +311,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		for (Rule rule : object.getRule()) {
 			visit(rule);
 		}
-		return getRootAnalysis().getNoneUsage();
+		return getRootAnalysis().getThisUsage();
 	}
 
 	@Override

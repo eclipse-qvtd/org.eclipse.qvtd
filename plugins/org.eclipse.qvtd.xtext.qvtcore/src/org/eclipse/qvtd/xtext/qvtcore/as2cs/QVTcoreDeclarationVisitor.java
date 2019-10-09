@@ -575,7 +575,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 
 	@Override
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
-		if (asTypedModel.isIsPrimitive()) {
+		if (asTypedModel.isIsPrimitive() || asTypedModel.isIsThis()) {
 			return null;
 		}
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTcoreCSPackage.Literals.DIRECTION_CS, asTypedModel, null);

@@ -96,6 +96,10 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 
 		@Override
 		public EObject get(Object oIn) {
+			if (oIn instanceof Transformation) {
+				getClass();
+				return (EObject) oIn;
+			}
 			EObject eOut = super.get(oIn);
 			if (eOut == null) {
 				eOut = context.equivalentTarget((Element)oIn);
@@ -736,7 +740,16 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			vOut.setIsImplicit(vIn.isIsImplicit());
 			vOut.setIsRequired(vIn.isIsRequired());
 			Type tIn = vIn.getType();
-			Type tVar = tIn != null ? context.equivalentTarget(tIn) : null;
+			Type tVar;
+			if (vOut.eContainer() instanceof Transformation) {
+				tVar = tIn;
+			}
+			else if (tIn != null) {
+				tVar = context.equivalentTarget(tIn);
+			}
+			else {
+				tVar = null;
+			}
 			vOut.setType(tVar);
 			Type tvIn = vIn.getTypeValue();
 			vOut.setTypeValue(tvIn != null ? context.equivalentTarget(tvIn) : null);
@@ -804,6 +817,9 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 	 * @param context the context in which the trace is valid
 	 */
 	public void addTrace(@NonNull Element source, @NonNull Element target) {
+		if (source instanceof Transformation) {
+			getClass();
+		}
 		target2source.put(target, source);
 		//
 		NamedElement scope = scopeStack.peek();

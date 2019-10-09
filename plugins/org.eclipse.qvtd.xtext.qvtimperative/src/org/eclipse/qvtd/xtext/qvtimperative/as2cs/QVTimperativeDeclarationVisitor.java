@@ -452,13 +452,12 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitImperativeModel(@NonNull ImperativeModel asModel) {
-		assert asModel.eContainer() == null;
-		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTimperativeCSPackage.Literals.TOP_LEVEL_CS, asModel);
-		csDocument.setPivot(asModel);
-		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getOwnedImports(), null));
-
-		buildModel(csDocument, asModel);
+	public ElementCS visitImperativeModel(@NonNull ImperativeModel iModel) {
+		assert iModel.eContainer() == null;
+		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTimperativeCSPackage.Literals.TOP_LEVEL_CS, iModel);
+		csDocument.setPivot(iModel);
+		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, iModel.getOwnedImports(), null));
+		buildModel(csDocument, iModel);
 		return csDocument;
 	}
 
