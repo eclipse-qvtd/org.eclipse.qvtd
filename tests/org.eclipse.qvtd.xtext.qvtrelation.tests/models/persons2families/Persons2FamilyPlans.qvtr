@@ -21,61 +21,14 @@ transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:Fam
 		in safeName.substring(1, index-1)
 	}
 	
-	top relation PersonRegister2FamilyPlanning
+	top relation R_PersonRegister2FamilyPlanning
 	{		
 	  	checkonly domain person pr : PersonRegister;
 	  	checkonly domain family fr : FamilyRegister;	    
 		enforce domain plan fp : FamilyPlanning;
 	}
 	
-	top relation Person2FamilyPlanning
-	{		
---		allSurname1 = pr.persons->collect(p | getSurname(p));	-- workaround Bug 550603
---		allSurnames : OrderedSet(String) = allSurname1->asOrderedSet();
-	  	sp : FamilyPlansMM::SurnamePlan;
-	  	checkonly domain person pr : PersonRegister {
-	  		persons = p : Person
-	  	};
-	  	checkonly domain family fr : FamilyRegister;	    
-		enforce domain plan fp : FamilyPlanning {
-	  		surnamePlans = sp
---			debugNames = allSurnames
-		};
-		when {
-			PersonRegister2FamilyPlanning(pr, fr, fp);
-			Surname2SurnamePlan(getSurname(p), sp);
-		}
-		where {
-			Person2SurnamePlan(p, sp);
-		}
-	}
-	
-	top relation Family2FamilyPlanning
-	{		
---		allSurname1 = pr.persons->collect(p | getSurname(p));	-- workaround Bug 550603
---		allSurnames : OrderedSet(String) = allSurname1->asOrderedSet();
-	  	sp : FamilyPlansMM::SurnamePlan[?];
---	  	surname : String[?];
-	  	checkonly domain person pr : PersonRegister;
-	  	checkonly domain family fr : FamilyRegister {
-	  		families = f : Family {
---	  			name = surname
-	  		}
-	  	};    
-		enforce domain plan fp : FamilyPlanning {
-	  		surnamePlans = sp
---			debugNames = allSurnames
-		};
-		when {
-			PersonRegister2FamilyPlanning(pr, fr, fp);
-			Surname2SurnamePlan(f.name, sp);
-		}
-		where {
-			Family2SurnamePlan(f, sp);
-		}
-	}
-	
-	relation Surname2SurnamePlan
+	relation P0_Surname2SurnamePlan
 	{		
 	  	primitive domain surname : String[?];
 	  	enforce domain plan sp : SurnamePlan {
@@ -83,21 +36,97 @@ transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:Fam
 		};
 	}
 	
-	abstract relation Person2SurnamePlan
+	top relation P1_Person2FamilyPlanning
+	{		
+	  	sp : FamilyPlansMM::SurnamePlan;
+	  	checkonly domain person pr : PersonRegister {
+	  		persons = p : Person
+	  	};
+	  	checkonly domain family fr : FamilyRegister;	    
+		enforce domain plan fp : FamilyPlanning {
+	  		surnamePlans = sp
+		};
+		when {
+			R_PersonRegister2FamilyPlanning(pr, fr, fp);
+			P0_Surname2SurnamePlan(getSurname(p), sp);
+		}
+		where {
+			P2_Person2SurnamePlan(p, sp);
+		}
+	}
+	
+	abstract relation P2_Person2SurnamePlan
 	{		
 	  	checkonly domain person p : Person[1];
 	  	enforce domain plan sp : SurnamePlan;
 	}
 	
-	relation Family2SurnamePlan
+	relation P2_Female2SurnamePlan overrides P2_Person2SurnamePlan
+	{		
+	  	checkonly domain person p : Female[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		females = p
+	  	};
+	}
+	
+	relation P2_Male2SurnamePlan overrides P2_Person2SurnamePlan
+	{		
+	  	checkonly domain person p : Male[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		males = p
+	  	};
+	}
+	
+/* 	relation P3_Male2MaleFatherPlan overrides P2_Person2SurnamePlan
+	{		
+	  	checkonly domain person p : Male[1];
+	  	enforce domain plan mfp : MaleFatherPlan {
+	  		males = p
+	  	};
+	  	when {
+	  		P2_Male2SurnamePlan(p, sp);
+	  	}
+	} */
+	
+	relation F0_Family2SurnamePlan
 	{		
 	  	checkonly domain family f : Family[1] ;
 	  	enforce domain plan sp : SurnamePlan {
 	  		families = f
 	  	};
 	}
+		
+	top relation F1_Family2FamilyPlan
+	{		
+	  	checkonly domain family fy : Family;
+	  	enforce domain plan fp : FamilyPlan {
+	  		surnamePlan = sp : SurnamePlan
+	  	};
+	  	when {
+	  		F0_Family2SurnamePlan(fy, sp);
+	  	}
+	}
 	
-	top relation Daughter2DaughterPlan
+	top relation F1_Family2SurnamePlanContainment
+	{		
+	  	sp : FamilyPlansMM::SurnamePlan[?];
+	  	checkonly domain person pr : PersonRegister;
+	  	checkonly domain family fr : FamilyRegister {
+	  		families = f : Family
+	  	};    
+		enforce domain plan fp : FamilyPlanning {
+	  		surnamePlans = sp
+		};
+		when {
+			R_PersonRegister2FamilyPlanning(pr, fr, fp);
+			P0_Surname2SurnamePlan(f.name, sp);
+		}
+		where {
+			F0_Family2SurnamePlan(f, sp);
+		}
+	}
+	
+	top relation F2_Daughter2DaughterPlan
 	{		
 	  	checkonly domain family p : FamilyMember[1] {
 	  		daughtersInverse = fy : Family
@@ -108,11 +137,11 @@ transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:Fam
 	  		}
 	  	};
 	  	when {
-	  		Family2FamilyPlan(fy, fp);
+	  		F1_Family2FamilyPlan(fy, fp);
 	  	}
 	}
 		
-	top relation Father2FatherPlan
+	top relation F2_Father2FatherPlan
 	{		
 	  	checkonly domain family p : FamilyMember[1] {
 	  		fatherInverse = fy : Family
@@ -123,11 +152,11 @@ transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:Fam
 	  		}
 	  	};
 	  	when {
-	  		Family2FamilyPlan(fy, fp);
+	  		F1_Family2FamilyPlan(fy, fp);
 	  	}
 	}
 		
-	top relation Mother2MotherPlan
+	top relation F2_Mother2MotherPlan
 	{		
 	  	checkonly domain family p : FamilyMember[1] {
 	  		motherInverse = fy : Family
@@ -138,11 +167,11 @@ transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:Fam
 	  		}
 	  	};
 	  	when {
-	  		Family2FamilyPlan(fy, fp);
+	  		F1_Family2FamilyPlan(fy, fp);
 	  	}
 	}
 		
-	top relation Son2SonPlan
+	top relation F2_Son2SonPlan
 	{		
 	  	checkonly domain family p : FamilyMember[1] {
 	  		sonsInverse = fy : Family
@@ -153,35 +182,8 @@ transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:Fam
 	  		}
 	  	};
 	  	when {
-	  		Family2FamilyPlan(fy, fp);
+	  		F1_Family2FamilyPlan(fy, fp);
 	  	}
-	}
-		
-	top relation Family2FamilyPlan
-	{		
-	  	checkonly domain family fy : Family;
-	  	enforce domain plan fp : FamilyPlan {
-	  		surnamePlan = sp : SurnamePlan
-	  	};
-	  	when {
-	  		Family2SurnamePlan(fy, sp);
-	  	}
-	}
-	
-	relation Female2SurnamePlan overrides Person2SurnamePlan
-	{		
-	  	checkonly domain person p : Female[1];
-	  	enforce domain plan sp : SurnamePlan {
-	  		females = p
-	  	};
-	}
-	
-	relation Male2SurnamePlan overrides Person2SurnamePlan
-	{		
-	  	checkonly domain person p : Male[1];
-	  	enforce domain plan sp : SurnamePlan {
-	  		males = p
-	  	};
 	}
 }	
 }

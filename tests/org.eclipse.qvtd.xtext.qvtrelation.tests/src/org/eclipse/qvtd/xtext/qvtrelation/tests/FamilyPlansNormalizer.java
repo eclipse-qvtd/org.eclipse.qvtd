@@ -86,7 +86,7 @@ public class FamilyPlansNormalizer implements ModelNormalizer
 		assert familyPlanningClass != null;
 		EClass surnamePlanClass = (EClass) familyPlanPackage.getEClassifier("SurnamePlan");
 		assert surnamePlanClass != null;
-		EClass familyMemberPlanClass = (EClass) familyPlanPackage.getEClassifier("FamilyMemberPlan");
+		EClass familyMemberPlanClass = (EClass) familyPlanPackage.getEClassifier("FamilyFamilyMemberPlan");
 		assert familyMemberPlanClass != null;
 
 		EReference familyMemberPlan_familyMember = (EReference) familyMemberPlanClass.getEStructuralFeature("familyMember");
