@@ -499,6 +499,24 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 				Parameter parameter = QVTbaseUtil.getOwnedParameter(referredOperation, i);
 				nestedAnalyzer.createOperationParameterEdge(argNodes[i], parameter, -1, operationNode);
 			}
+
+			if (referredOperation.getBodyExpression() != null) {
+				//					QVTm2QVTs qvtm2qvts = (QVTm2QVTs) scheduleManager;		// FIXME cast
+				OperationRegion operationRegion = scheduleManager.analyzeOperation(operationCallExp);
+				Iterable<@NonNull Node> referenceNodes = QVTscheduleUtil.getDependencyNodes(operationRegion);
+				for (@NonNull Node referenceNode : referenceNodes) {
+					ClassDatum classDatum = QVTscheduleUtil.getClassDatum(referenceNode);
+					Node dependencyHead = context.getDependencyHead(classDatum);
+					if (dependencyHead == null) {
+						dependencyHead = context.createDependencyHead(classDatum);
+						createDependencyEdge(dependencyHead, QVTscheduleUtil.getName(dependencyHead), operationNode);
+					}
+					instantiate(dependencyHead, referenceNode);
+				}
+			}
+
+
+
 			return operationNode;
 		}
 		assert ownedSource != null;
