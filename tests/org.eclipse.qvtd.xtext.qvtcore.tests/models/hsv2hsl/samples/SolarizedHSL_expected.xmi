@@ -4,7 +4,7 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:pfx="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HSL/1.0/HSLTree"
-    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HSL/1.0/HSLTree ../HLSTree.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HSL/1.0/HSLTree ../HSLTree.ecore"
     hsl="192,100,11" name="base03">
   <children hsl="192,81,14" name="base02"/>
   <children hsl="194,14,40" name="base01">

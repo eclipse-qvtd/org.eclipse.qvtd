@@ -15,11 +15,14 @@ import java.io.IOException;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
+import org.eclipse.ocl.examples.xtext.tests.TestFolder;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -47,7 +50,7 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPa
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2Persons.Families2PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSLTree.HSLTreePackage;
-import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSV2HSL.HSV2HSLPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSV2HLS.HSV2HSLPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSVTree.HSVTreePackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage;
@@ -167,22 +170,34 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTcCompiler_Families2Persons() throws Exception {
+		Registry registry = EPackage.Registry.INSTANCE;
+		registry.remove(FamiliesPackage.eNS_URI);
+		registry.remove(Families2PersonsPackage.eNS_URI);
+		registry.remove(PersonsPackage.eNS_URI);
 		//		AbstractTransformer.APPENDS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons.qvtc"));
-		myQVT.loadEcoreFile(getModelsURI("families2persons/Families.ecore"), FamiliesPackage.eINSTANCE);
-		myQVT.loadEcoreFile(getModelsURI("families2persons/Families2Persons.ecore"), Families2PersonsPackage.eINSTANCE);
-		myQVT.loadEcoreFile(getModelsURI("families2persons/Persons.ecore"), PersonsPackage.eINSTANCE);
+		ProjectManager testProjectManager = getTestProjectManager();
+		TestProject testProject = getTestProject();
+		TestFolder outputFolder = testProject.getOutputFolder("samples");
+		URI modelsURI = getModelsURI("families2persons/samples");
+		TestFile txFile = testProject.copyFiles(testProjectManager, null, getModelsURI("families2persons"), "Families2Persons.qvtc", "Families.ecore", "Persons.ecore", "Families2Persons.ecore"); //, "Families2Persons.genmodel");
+		TestFile inFile = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "Families.xmi");
+		URI outURI = getTestURI("Persons_Interpreted.xmi");
+		TestFile refFile = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "Persons_expected.xmi");
+		MyQVT myQVT = createQVT("Families2Persons", txFile.getURI());
+		//		myQVT.loadEcoreFile(getModelsURI("families2persons/Families.ecore"), FamiliesPackage.eINSTANCE);
+		//		myQVT.loadEcoreFile(getModelsURI("families2persons/Families2Persons.ecore"), Families2PersonsPackage.eINSTANCE);
+		//		myQVT.loadEcoreFile(getModelsURI("families2persons/Persons.ecore"), PersonsPackage.eINSTANCE);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("person");
 			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
 			myQVT.createInterpretedExecutor(iEntryPoint);
-			myQVT.addInputURI("family", getModelsURI("families2persons/samples/Families.xmi"));
+			myQVT.addInputURI("family", inFile.getURI());
 			myQVT.executeTransformation();
-			myQVT.addOutputURI("person", getTestURI("Persons_Interpreted.xmi"));
+			myQVT.addOutputURI("person", outURI);
 			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("Persons_Interpreted.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
+			myQVT.checkOutput(outURI, refFile.getURI(), Families2PersonsNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
@@ -206,7 +221,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		Scheduler.REGION_DEPTH.setState(true);
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
-		MyQVT myQVT = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons.qvtc"));
+		TestFile txFile = getTestProject().copyFiles(getTestProjectManager(), null, getModelsURI("families2persons"), "Families2Persons.qvtc", "Families.ecore", "Persons.ecore", "Families2Persons.ecore", "Families2Persons.genmodel");
+		MyQVT myQVT = createQVT("Families2Persons", txFile.getURI());
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation_486938("person", false, "Families2Persons.genmodel"); // FIXME BUG 486938
@@ -236,42 +252,62 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTcCompiler_Forward2Reverse() throws Exception {
+		Registry registry = EPackage.Registry.INSTANCE;
+		registry.remove(DoublylinkedlistPackage.eNS_URI);
+		registry.remove(List2listPackage.eNS_URI);
 		//    	QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
-		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtc"));
-		myQVT.loadEcoreFile(getModelsURI("forward2reverse/DoublyLinkedList.ecore"), DoublylinkedlistPackage.eINSTANCE);
-		myQVT.loadEcoreFile(getModelsURI("forward2reverse/List2List.ecore"), List2listPackage.eINSTANCE);
+		ProjectManager testProjectManager = getTestProjectManager();
+		TestProject testProject = getTestProject();
+		TestFolder outputFolder = testProject.getOutputFolder("samples");
+		URI modelsURI = getModelsURI("forward2reverse/samples");
+		TestFile txFile = testProject.copyFiles(testProjectManager, null, getModelsURI("forward2reverse"), "Forward2Reverse.qvtc", "DoublyLinkedList.ecore", "List2List.ecore"); //, "List2List.genmodel");
+		TestFile inFile0 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "EmptyList.xmi");
+		TestFile inFile1 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "OneElementList.xmi");
+		TestFile inFile2 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "TwoElementList.xmi");
+		TestFile inFile3 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "ThreeElementList.xmi");
+		URI outURI0 = getTestURI("EmptyList_Interpreted.xmi");
+		URI outURI1 = getTestURI("OneElementList_Interpreted.xmi");
+		URI outURI2 = getTestURI("TwoElementList_Interpreted.xmi");
+		URI outURI3 = getTestURI("ThreeElementList_Interpreted.xmi");
+		TestFile refFile0 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "EmptyList_expected.xmi");
+		TestFile refFile1 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "OneElementList_expected.xmi");
+		TestFile refFile2 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "TwoElementList_expected.xmi");
+		TestFile refFile3 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "ThreeElementList_expected.xmi");
+		MyQVT myQVT = createQVT("Forward2Reverse", txFile.getURI());
+		//		myQVT.loadEcoreFile(getModelsURI("forward2reverse/DoublyLinkedList.ecore"), DoublylinkedlistPackage.eINSTANCE);
+		//		myQVT.loadEcoreFile(getModelsURI("forward2reverse/List2List.ecore"), List2listPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("reverse");
 			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
 			//
 			myQVT.createInterpretedExecutor(iEntryPoint);
-			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
+			myQVT.addInputURI("forward", inFile0.getURI());
 			myQVT.executeTransformation();
-			myQVT.addOutputURI("reverse", getTestURI("EmptyList_Interpreted.xmi"));
+			myQVT.addOutputURI("reverse", outURI0);
 			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("EmptyList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/EmptyList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			myQVT.checkOutput(outURI0, refFile0.getURI(), Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT.createInterpretedExecutor(iEntryPoint);
-			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
+			myQVT.addInputURI("forward", inFile1.getURI());
 			myQVT.executeTransformation();
-			myQVT.addOutputURI("reverse", getTestURI("OneElementList_Interpreted.xmi"));
+			myQVT.addOutputURI("reverse", outURI1);
 			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("OneElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			myQVT.checkOutput(outURI1, refFile1.getURI(), Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT.createInterpretedExecutor(iEntryPoint);
-			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
+			myQVT.addInputURI("forward", inFile2.getURI());
 			myQVT.executeTransformation();
-			myQVT.addOutputURI("reverse", getTestURI("TwoElementList_Interpreted.xmi"));
+			myQVT.addOutputURI("reverse", outURI2);
 			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("TwoElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			myQVT.checkOutput(outURI2, refFile2.getURI(), Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT.createInterpretedExecutor(iEntryPoint);
-			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
+			myQVT.addInputURI("forward", inFile3.getURI());
 			myQVT.executeTransformation();
-			myQVT.addOutputURI("reverse", getTestURI("ThreeElementList_Interpreted.xmi"));
+			myQVT.addOutputURI("reverse", outURI3);
 			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("ThreeElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			myQVT.checkOutput(outURI3, refFile3.getURI(), Forward2ReverseNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
@@ -288,7 +324,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	Scheduler.REGION_ORDER.setState(true);
 		//    	Scheduler.REGION_STACK.setState(true);
 		//    	Scheduler.REGION_TRAVERSAL.setState(true);
-		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtc"));
+		TestFile txFile = getTestProject().copyFiles(getTestProjectManager(), null, getModelsURI("forward2reverse"), "Forward2Reverse.qvtc", "DoublyLinkedList.ecore", "List2List.ecore", "List2List.genmodel");
+		MyQVT myQVT = createQVT("Forward2Reverse", txFile.getURI());
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Class<? extends Transformer> txClassReverse = myQVT.buildTransformation("forward", false, "List2List.genmodel");
@@ -342,22 +379,30 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTcCompiler_HSVToHSL() throws Exception {
+		Registry registry = EPackage.Registry.INSTANCE;
+		registry.remove(HSV2HSLPackage.eNS_URI);
+		registry.remove(HSVTreePackage.eNS_URI);
+		registry.remove(HSLTreePackage.eNS_URI);
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = createQVT("HSV2HSL", getModelsURI("hsv2hsl/HSV2HSL.qvtc"));
-		myQVT.loadEcoreFile(getModelsURI("hsv2hsl/HSV2HSL.ecore"), HSV2HSLPackage.eINSTANCE);
-		myQVT.loadEcoreFile(getModelsURI("hsv2hsl/HSVTree.ecore"), HSVTreePackage.eINSTANCE);
-		myQVT.loadEcoreFile(getModelsURI("hsv2hsl/HSLTree.ecore"), HSLTreePackage.eINSTANCE);
+		TestFile txFile = getTestProject().copyFiles(getTestProjectManager(), null, getModelsURI("hsv2hsl"), "HSV2HSL.qvtc", "HSLTree.ecore", "HSV2HSL.ecore", "HSVTree.ecore");// "HSV2HSL.genmodel");
+		TestFile inFile = getTestProject().copyFiles(getTestProjectManager(), getTestProject().getOutputFolder("samples"), getModelsURI("hsv2hsl/samples"), "SolarizedHSV.xmi");
+		URI outURI = getTestURI("SolarizedHSL_Interpreted.xmi");
+		TestFile refFile = getTestProject().copyFiles(getTestProjectManager(), getTestProject().getOutputFolder("samples"), getModelsURI("hsv2hsl/samples"), "SolarizedHSL_expected.xmi");
+		MyQVT myQVT = createQVT("HSV2HSL", txFile.getURI());
+		//		myQVT.loadEcoreFile(getTestFileURI("HSV2HSL.ecore"), HSV2HSLPackage.eINSTANCE);
+		//		myQVT.loadEcoreFile(getTestFileURI("HSVTree.ecore"), HSVTreePackage.eINSTANCE);
+		//		myQVT.loadEcoreFile(getTestFileURI("HSLTree.ecore"), HSLTreePackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("hsl");
 			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
 			myQVT.createInterpretedExecutor(iEntryPoint);
-			myQVT.addInputURI("hsv", getModelsURI("hsv2hsl/samples/SolarizedHSV.xmi"));
+			myQVT.addInputURI("hsv", inFile.getURI());
 			myQVT.executeTransformation();
-			myQVT.addOutputURI("hsl", getTestURI("SolarizedHSL_Interpreted.xmi"));
+			myQVT.addOutputURI("hsl", outURI);
 			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("SolarizedHSL_Interpreted.xmi"), getModelsURI("hsv2hsl/samples/SolarizedHSL_expected.xmi"), HSV2HSLNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
+			myQVT.checkOutput(outURI, refFile.getURI(), HSV2HSLNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
 		}
 		finally {
 			myQVT.dispose();
@@ -376,7 +421,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
-		MyQVT myQVT = createQVT("HSV2HSL", getModelsURI("hsv2hsl/HSV2HSL.qvtc"));
+		TestFile txFile = getTestProject().copyFiles(getTestProjectManager(), null, getModelsURI("hsv2hsl"), "HSV2HSL.qvtc", "HSLTree.ecore", "HSV2HSL.ecore", "HSVTree.ecore", "HSV2HSL.genmodel");
+		MyQVT myQVT = createQVT("HSV2HSL", txFile.getURI());
 		try {
 			//			myQVT.createGeneratedExecutor(hsv2hsl.class);
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("hsl", false, "HSV2HSL.genmodel");
@@ -532,9 +578,18 @@ public class QVTcCompilerTests extends LoadTestCase
 		Splitter.RESULT.setState(true);
 		Splitter.STAGES.setState(true);
 		Splitter.RESULT.setState(true);
+		ProjectManager testProjectManager = getTestProjectManager();
+		TestProject testProject = getTestProject();
+		TestFolder outputFolder = testProject.getOutputFolder("samples");
 		String exampleProjectName = "org.eclipse.qvtd.examples.qvtcore.uml2rdbms";
-		URI txURI = URI.createPlatformResourceURI("/" + exampleProjectName + "/model/SimpleUML2RDBMS.qvtc", true);
-		MyQVT myQVT = createQVT("SimpleUML2RDBMS", txURI);
+		URI modelsURI = URI.createPlatformResourceURI("/" + exampleProjectName + "/model", true);
+		URI modelsInURI = modelsURI.appendSegment("in");
+		URI modelsOutURI = modelsURI.appendSegment("out");
+		TestFile txFile = testProject.copyFiles(testProjectManager, null, modelsURI, "SimpleUML2RDBMS.qvtc", "SimpleRDBMS.ecore", "SimpleUML.ecore", "SimpleUML2RDBMS.ecore", "SimpleUML2RDBMS.genmodel");
+		TestFile inFile = testProject.copyFiles(testProjectManager, outputFolder, modelsInURI, "SimpleUMLPeople.xmi");
+		URI outURI = getTestURI("SimpleRDBMSPeople_CG.xmi");
+		TestFile refFile = testProject.copyFiles(testProjectManager, outputFolder, modelsOutURI, "SimpleRDBMSPeople_expected.xmi");
+		MyQVT myQVT = createQVT("SimpleUML2RDBMS", txFile.getURI());
 		JavaClasspath classpath = myQVT.getClasspath();
 		classpath.addClass(org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.UmlToRdbmsModelElement.class);
 		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
@@ -545,15 +600,12 @@ public class QVTcCompilerTests extends LoadTestCase
 			//			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			//			myQVT.assertRegionCount(MicroMappingRegionImpl.class, NO_MERGES ? 9 : 3);
 			//
-			URI inURI = URI.createPlatformResourceURI("/" + exampleProjectName + "/model/in/SimpleUMLPeople.xmi", true);
-			URI outURI = getTestURI("SimpleRDBMSPeople_CG.xmi");
-			URI expectedURI = URI.createPlatformResourceURI("/" + exampleProjectName + "/model/out/SimpleRDBMSPeople_expected.xmi", true);
 			myQVT.createGeneratedExecutor(txClass);
-			myQVT.addInputURI("uml", inURI);
+			myQVT.addInputURI("uml", inFile.getURI());
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("rdbms", outURI);
 			myQVT.saveModels(null);
-			myQVT.checkOutput(outURI, expectedURI, SimpleRDBMSNormalizer.INSTANCE);
+			myQVT.checkOutput(outURI, refFile.getURI(), SimpleRDBMSNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
