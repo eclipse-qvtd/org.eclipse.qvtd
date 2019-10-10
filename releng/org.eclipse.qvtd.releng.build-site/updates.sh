@@ -10,9 +10,8 @@
 #     E.D.Willink - initial API and implementation
 #*******************************************************************************
 #
-#    Promote the PUBLISH__URL to an updates repository.
+#    Promote ~/publish.zip to an updates repository.
 #
-#    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/ocl/job/qvtd-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
 #    -v PUBLISH__VERSION        Unqualified version e.g. 0.16.0
 #    -t PUBLISH__BUILD_T        Build type N/I/S/R, blank suppresses promotion
 #    -q PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
@@ -28,7 +27,6 @@ while getopts u:v:t:q: option
 do
 case "${option}"
 in
-u) PUBLISH__URL=${OPTARG};;
 v) PUBLISH__VERSION=${OPTARG};;
 t) PUBLISH__BUILD_T=${OPTARG};;
 q) PUBLISH__QUALIFIER=${OPTARG};;
@@ -80,7 +78,7 @@ then
 
     if [ "${PUBLISH__BUILD_T}" = "N" ]
     then
-      curl -s -k ${PUBLISH__URL} > ${localZip}
+      cp ~/publish.zip ${localZip}
       unzip -ou ${localZip} -d new${PUBLISH__VERSION}
       chgrp -R ${group} new${PUBLISH__VERSION}
       chmod -R g+w new${PUBLISH__VERSION}
@@ -89,7 +87,7 @@ then
       rm -rf old${PUBLISH__VERSION} ${localZip}
     elif [ "${PUBLISH__BUILD_T}" = "I" ]
     then
-      curl -s -k ${PUBLISH__URL} > ${localZip}
+      cp ~/publish.zip ${localZip}
       unzip -ou ${localZip} -d new${PUBLISH__VERSION}
       chgrp -R ${group} new${PUBLISH__VERSION}
       chmod -R g+w new${PUBLISH__VERSION}
@@ -106,7 +104,7 @@ then
           mkdir ${tQualifier}
         fi
 
-        curl -s -k ${PUBLISH__URL} > ${localZip}
+        cp ~/publish.zip ${localZip}
         unzip ${localZip} -d ${tQualifier}
         rm ${localZip}
 
@@ -116,7 +114,7 @@ then
       popd
     elif [ "${PUBLISH__BUILD_T}" = "R" ]
     then
-      curl -s -k ${PUBLISH__URL} > ${localZip}
+      cp ~/publish.zip ${localZip}
       unzip -ou ${localZip} -d new${PUBLISH__VERSION}
       chgrp -R ${group} new${PUBLISH__VERSION}
       chmod -R g+w new${PUBLISH__VERSION}

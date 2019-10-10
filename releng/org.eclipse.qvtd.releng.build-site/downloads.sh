@@ -10,9 +10,8 @@
 #     E.D.Willink - initial API and implementation
 #*******************************************************************************
 #
-#	Promote the PUBLISH__URL to the downloads 'page'.
+#	Promote ~/publish.zip to the downloads 'page'.
 #
-#    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/ocl/job/qvtd-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
 #    -v PUBLISH__VERSION        Unqualified version e.g. 0.16.0
 #    -t PUBLISH__BUILD_T        Build type N/I/S/R, blank suppresses promotion
 #    -q PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
@@ -22,11 +21,10 @@ dropsFolder="/home/data/httpd/download.eclipse.org/mmt/qvtd/downloads/drops/"
 group="modeling.mmt.qvtd"
 zipPrefix="qvtd-incubation-Update-"
 
-while getopts u:v:t:q:a: option
+while getopts v:t:q:a: option
 do
 case "${option}"
 in
-u) PUBLISH__URL=${OPTARG};;
 v) PUBLISH__VERSION=${OPTARG};;
 t) PUBLISH__BUILD_T=${OPTARG};;
 q) PUBLISH__QUALIFIER=${OPTARG};;
@@ -52,7 +50,7 @@ then
   zipFile="${zipPrefix}${fileStem}.zip"
 
   pushd ${versionFolder}
-    curl -s -k ${PUBLISH__URL} > ${zipFile}
+    cp ~/publish.zip ${zipFile}
     md5sum -b ${zipFile} > ${zipFile}.md5
     sha512sum -b ${zipFile} > ${zipFile}.sha1
     # make sure permissions are for the intended group
