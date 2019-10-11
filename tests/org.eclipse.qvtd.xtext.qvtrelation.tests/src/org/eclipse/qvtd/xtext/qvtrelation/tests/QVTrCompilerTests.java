@@ -1553,9 +1553,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		TestProject testProject = getTestProject();
 		TestFolder testFolder = testProject.getOutputFolder("samples");
 		TestFile personFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/PersonsMulti.xmi"));
-		/* TestFile familyFile = */ testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"));
-		TestFile familyFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/FamiliesWithChildrenOnly.xmi"));
-		TestFile refFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/FamiliesWithChildrenOnlyPlan.xmi"));
+		TestFile familyFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"));
+		//		TestFile familyFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/FamiliesWithChildrenOnly.xmi"));
+		TestFile refFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/MultiFamiliesChildrenPlan.xmi"));
+		//		TestFile refFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("persons2families/samples/FamiliesWithChildrenOnlyPlan.xmi"));
 		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("persons2families/Persons2FamilyPlans.qvtr"));
 		testProject.copyFile(uriConverter, null, getModelsURI("persons2families/Families.ecore"));
 		testProject.copyFile(uriConverter, null, getModelsURI("persons2families/FamilyPlans.ecore"));
@@ -1584,6 +1585,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			//
 			TransformationExecutor txExecutor1 = myQVT2.createGeneratedExecutor(txClass);
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
+			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.addInputURI("person", personFile.getURI());
 			txExecutor1.addInputURI("family", familyFile.getURI());
 			txExecutor1.execute(null);
@@ -1611,7 +1613,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		testProject.copyFile(uriConverter, null, getModelsURI("persons2families/Families.ecore"));
 		testProject.copyFile(uriConverter, null, getModelsURI("persons2families/FamilyPlans.ecore"));
 		testProject.copyFile(uriConverter, null, getModelsURI("persons2families/Persons.ecore"));
-		URI outURI = getTestURI("samples/MultiFamiliesChildrenPlan-CG.xmi");
+		URI outURI = getTestURI("samples/MultiFamiliesChildrenPlan-Int.xmi");
 		//
 		MyQVT myQVT = createQVT("Persons2FamilyPlans", txFile.getURI());
 		ImperativeTransformation asTransformation;
@@ -1623,6 +1625,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
 			TransformationExecutor txExecutor1 = myQVT.createInterpretedExecutor(QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
+			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.addInputURI("person", personFile.getURI());
 			txExecutor1.addInputURI("family", familyFile.getURI());

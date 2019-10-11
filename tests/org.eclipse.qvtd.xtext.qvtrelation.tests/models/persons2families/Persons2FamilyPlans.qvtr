@@ -67,6 +67,9 @@ transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:Fam
 	  	enforce domain plan sp : SurnamePlan {
 	  		females = p
 	  	};
+	  	where {
+	  		P3_Female2FamilyPlan(p, sp);
+	  	}
 	}
 	
 	relation P2_Male2SurnamePlan overrides P2_Person2SurnamePlan
@@ -75,18 +78,84 @@ transformation Persons2FamilyPlans(person:PersonsMM, family:FamiliesMM, plan:Fam
 	  	enforce domain plan sp : SurnamePlan {
 	  		males = p
 	  	};
+	  	where {
+	  		P3_Male2FamilyPlan(p, sp);
+	  	}
 	}
 	
-/* 	relation P3_Male2MaleFatherPlan overrides P2_Person2SurnamePlan
+ 	abstract relation P3_Female2FamilyPlan
 	{		
-	  	checkonly domain person p : Male[1];
-	  	enforce domain plan mfp : MaleFatherPlan {
-	  		males = p
+	  	checkonly domain person p : Female[1];
+	  	enforce domain plan sp : SurnamePlan;
+	}
+	
+ 	relation P3_Mother2NewFamilyPlan overrides P3_Female2FamilyPlan
+	{		
+	  	checkonly domain person p : Female[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		familyPlans = fp : FamilyPlan {
+	  			familyMemberPlans = sonPlan : FemaleMotherPlan {
+	  				person = p
+	  			}
+	  		}
 	  	};
 	  	when {
-	  		P2_Male2SurnamePlan(p, sp);
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		this.PREFER_CREATING_PARENT_TO_CHILD;
 	  	}
-	} */
+	}
+ 	relation P3_Daughter2NewFamilyPlan overrides P3_Female2FamilyPlan
+	{		
+	  	checkonly domain person p : Female[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		familyPlans = fp : FamilyPlan {
+	  			familyMemberPlans = sonPlan : FemaleDaughterPlan {
+	  				person = p
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		not this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+	
+ 	abstract relation P3_Male2FamilyPlan
+	{		
+	  	checkonly domain person p : Male[1];
+	  	enforce domain plan sp : SurnamePlan;
+	}
+	
+ 	relation P3_Father2NewFamilyPlan overrides P3_Male2FamilyPlan
+	{		
+	  	checkonly domain person p : Male[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		familyPlans = fp : FamilyPlan {
+	  			familyMemberPlans = sonPlan : MaleFatherPlan {
+	  				person = p
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+ 	relation P3_Son2NewFamilyPlan overrides P3_Male2FamilyPlan
+	{		
+	  	checkonly domain person p : Male[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		familyPlans = fp : FamilyPlan {
+	  			familyMemberPlans = sonPlan : MaleSonPlan {
+	  				person = p
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		not this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
 	
 	relation F0_Family2SurnamePlan
 	{		
