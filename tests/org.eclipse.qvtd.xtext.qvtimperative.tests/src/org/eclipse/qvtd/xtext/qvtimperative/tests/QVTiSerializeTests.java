@@ -24,7 +24,6 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -110,7 +109,7 @@ public class QVTiSerializeTests extends LoadTestCase
 
 	@Override
 	public void setUp() throws Exception {
-		BaseLinkingService.DEBUG_RETRY.setState(true);
+		//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		TestUtil.doCompleteOCLSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();
 		super.setUp();

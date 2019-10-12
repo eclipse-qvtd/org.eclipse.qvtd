@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -170,7 +169,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		BaseLinkingService.DEBUG_RETRY.setState(true);
+		//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		XtextCompilerUtil.doQVTimperativeSetup();
 		super.setUp();
 	}

@@ -60,7 +60,6 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
-import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -456,7 +455,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	@Override
 	protected void setUp() throws Exception {
-		BaseLinkingService.DEBUG_RETRY.setState(true);
+		//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		//		JavaFileUtil.CLASS_PATH.setState(true);
 		TestUtil.doCompleteOCLSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();

@@ -230,7 +230,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//	StandaloneProjectMap.addTrace("http://www.eclipse.org/qvt/2016/QVTimperative", ~0);
 		//	StandaloneProjectMap.addTrace("http://www.eclipse.org/qvt/2018/QVTtrace", ~0);
 		//	StandaloneProjectMap.addTrace("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", ~0);
-		BaseLinkingService.DEBUG_RETRY.setState(true);
+		//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		QVTm2QVTs.DEBUG_GRAPHS.setState(true);;
 		super.setUp();
 		OCLstdlib.install();

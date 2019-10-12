@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -350,7 +349,7 @@ public class UMLXSerializeTests extends LoadTestCase
 	}
 
 	public void testUMLXRoundtrip_SeqToStm_qvtr() throws Exception {
-		BaseLinkingService.DEBUG_RETRY.setState(true);
+//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		doRoundTripTest("org.eclipse.qvtd.xtext.qvtrelation.tests/models/seq2stm/", "SeqToStm", true);
 	}
 

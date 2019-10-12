@@ -298,7 +298,13 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Exception {
-		return doCompile(txURI, intermediateFileNamePrefixURI, outputName, createCompilerChainOptions());
+		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+		typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
+		return compileTransformation(typedModelsConfigurations);
+	}
+
+	public @NonNull ImperativeTransformation compileTransformation(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws Exception {
+		return doCompile(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, createCompilerChainOptions());
 	}
 
 	protected @NonNull CompilerOptions createBuildCompilerChainOptions(boolean isIncremental) throws IOException {
@@ -424,10 +430,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return compilerChain.generate(asTransformation, genModelFiles);
 	}
 
-	protected @NonNull ImperativeTransformation doCompile(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull String outputName,
-			@NonNull CompilerOptions options) throws Exception {
-		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-		typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
+	protected @NonNull ImperativeTransformation doCompile(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
+			@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations, @NonNull CompilerOptions options) throws Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation transformation = compilerChain.compile(typedModelsConfigurations);
 		URI txASURI = transformation.eResource().getURI();
