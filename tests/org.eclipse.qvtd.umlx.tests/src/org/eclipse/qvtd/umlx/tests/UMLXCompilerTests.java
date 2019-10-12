@@ -28,8 +28,8 @@ import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -65,8 +65,8 @@ public class UMLXCompilerTests extends LoadTestCase
 				return new QVTr2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull QVTuConfiguration> qvtuConfigurations) throws IOException {
-						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, qvtuConfigurations);
+					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, typedModelsConfigurations);
 						instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}

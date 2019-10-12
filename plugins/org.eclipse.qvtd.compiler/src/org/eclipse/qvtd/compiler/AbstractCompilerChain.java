@@ -39,9 +39,9 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTiProductionConsumption;
 import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTimperativeDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
@@ -49,14 +49,11 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -69,8 +66,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
-
-import com.google.common.collect.Iterables;
 
 public abstract class AbstractCompilerChain extends CompilerUtil implements CompilerChain
 {
@@ -140,11 +135,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, QVTU_STEP);
 		}
 
-		public @NonNull Resource execute(@NonNull Resource cResource, @NonNull QVTuConfiguration qvtuConfiguration) throws IOException {
+		public @NonNull Resource execute(@NonNull Resource cResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource uResource = createResource(QVTcorePackage.eCONTENT_TYPE);
-				QVTc2QVTu tx = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
+				QVTc2QVTu tx = new QVTc2QVTu(environmentFactory, typedModelsConfiguration);
 				tx.transform(cResource, uResource);
 				return saveResource(uResource);
 			}
@@ -230,7 +225,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			try {
 				Resource sResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
-				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
+				Transformation asTransformation = QVTbaseUtil.getTransformation(pResource);
 				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, schedulerOptions);
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
@@ -273,7 +268,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			QVTs2QVTi tx = new QVTs2QVTi(scheduleManager, this, environmentFactory);
 			tx.resolveImports(model);
 			saveResource(iResource);
-			ImperativeTransformation iTransformation = (ImperativeTransformation) getTransformation(iResource);
+			ImperativeTransformation iTransformation = (ImperativeTransformation) QVTbaseUtil.getTransformation(iResource);
 			throwCompilerChainExceptionForErrors();
 			QVTimperativeDomainUsageAnalysis domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory, iTransformation);
 			domainUsageAnalysis.analyzeTransformation();
@@ -326,24 +321,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	public static @Nullable String getDefaultFileExtension(@NonNull String key) {
 		return step2fileExtension.get(key);
-	}
-
-	public static @NonNull Transformation getTransformation(Resource resource) throws IOException {
-		List<@NonNull Transformation> asTransformations = new ArrayList<>();
-		for (EObject eContent : resource.getContents()) {
-			if (eContent instanceof BaseModel) {
-				QVTbaseUtil.getAllTransformations(ClassUtil.nullFree(((BaseModel)eContent).getOwnedPackages()), asTransformations);
-			}
-		}
-		if (asTransformations.size() == 1) {
-			return asTransformations.get(0);
-		}
-		else if (asTransformations.size() == 1) {
-			throw new IOException("No Transformation element in " + resource.getURI());
-		}
-		else {
-			throw new IOException("Multiple Transformation elements in " + resource.getURI());
-		}
 	}
 
 	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
@@ -423,9 +400,17 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return generate(asTransformation, genModelFiles);
 	}
 
+	//	@Override
+	//	public @NonNull Class<? extends Transformer> build(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception {
+	//		ImperativeTransformation asTransformation = compile(typedModelsConfigurations);
+	//		return generate(asTransformation, genModelFiles);
+	//	}
+
 	@Override
 	public final @NonNull ImperativeTransformation compile(@NonNull String outputName) throws IOException {
-		return compile(Collections.singletonList(Collections.singletonList(outputName)));
+		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+		typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
+		return compile(typedModelsConfigurations);
 	}
 
 	@Override
@@ -460,43 +445,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	protected @NonNull QVTu2QVTmCompilerStep createQVTu2QVTmCompilerStep() {
 		return new QVTu2QVTmCompilerStep(this);
-	}
-
-	protected @NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource cResource, QVTuConfiguration.Mode mode, @NonNull String enforcedOutputName) throws IOException {
-		return createQVTuConfiguration(cResource, mode, Collections.singletonList(enforcedOutputName));
-	}
-
-	protected @NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource cResource, QVTuConfiguration.Mode mode, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
-		Transformation transformation = getTransformation(cResource);
-		List<@NonNull TypedModel> inputTypedModels = new ArrayList<>();
-		List<@NonNull TypedModel> outputTypedModels = new ArrayList<>();
-		List<@NonNull TypedModel> intermediateTypedModels = new ArrayList<>();
-		for (@NonNull TypedModel typedModel : QVTcoreUtil.getModelParameters(transformation)) {
-			if (!typedModel.isIsTrace()) {
-				String modelName = typedModel.getName();
-				if (Iterables.contains(enforcedOutputNames, modelName)) {
-					if (outputTypedModels.size() > 1) {
-						//	throw new CompilerChainException("Ambiguous output domain(s) ''{0}''", enforcedOutputNames);
-						System.out.println("Ambiguous output domain(s) " + enforcedOutputNames);
-					}
-					outputTypedModels.add(typedModel);
-				}
-				else {
-					//					inputNames.add(modelName);
-					inputTypedModels.add(typedModel);
-				}
-				for (@NonNull TypedModel dependsOn : QVTcoreUtil.getDependsOns(typedModel)) {
-					if (!intermediateTypedModels.contains(dependsOn)) {
-						intermediateTypedModels.add(dependsOn);
-					}
-				}
-			}
-		}
-		if (outputTypedModels.isEmpty()) {
-			throw new CompilerChainException("Unknown output domain(s) ''{0}''", enforcedOutputNames);
-		}
-		inputTypedModels.removeAll(intermediateTypedModels);
-		return new QVTuConfiguration(QVTuConfiguration.Mode.ENFORCE, inputTypedModels, intermediateTypedModels, outputTypedModels);
 	}
 
 	@Override
@@ -552,8 +500,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return java2classCompilerStep.execute(txURI, javaResult);
 	}
 
-	protected @NonNull Resource qvtc2qvtm(@NonNull Resource cResource, @NonNull QVTuConfiguration qvtuConfiguration) throws IOException {
-		Resource uResource = qvtc2qvtuCompilerStep.execute(cResource, qvtuConfiguration);
+	protected @NonNull Resource qvtc2qvtm(@NonNull Resource cResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+		Resource uResource = qvtc2qvtuCompilerStep.execute(cResource, typedModelsConfiguration);
 		return qvtu2qvtmCompilerStep.execute(uResource);
 	}
 

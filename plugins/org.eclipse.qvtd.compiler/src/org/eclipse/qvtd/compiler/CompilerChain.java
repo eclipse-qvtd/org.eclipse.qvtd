@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -81,8 +82,9 @@ public interface CompilerChain
 	CompilerOptions.@Nullable StepOptions basicGetOptions(@NonNull String stepKey);
 	@Nullable URI basicGetURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey);
 	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;
+	//	@NonNull Class<? extends Transformer> build(@NonNull Iterable<@NonNull QVTuConfiguration> qvtuConfigurations, @NonNull String ... genModelFiles) throws Exception;
 	@NonNull ImperativeTransformation compile(@NonNull String outputName) throws IOException;
-	@NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull Iterable<@NonNull String>> outputNamesList) throws IOException;
+	@NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException;
 	void compiled(@NonNull String stepKey, @NonNull Object object);
 	//	@NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource resource, QVTuConfiguration.Mode mode, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException;
 	@NonNull Resource createResource(@NonNull URI uri, @NonNull String contentType) throws IOException;

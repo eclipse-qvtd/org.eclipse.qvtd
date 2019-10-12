@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -48,7 +49,7 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull Iterable<@NonNull String>> unusedEnforcedOutputNames) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
 		return xtext2qvtiCompilerStep.execute(txURI);
 	}
 

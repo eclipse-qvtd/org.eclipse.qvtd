@@ -29,6 +29,7 @@ import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -125,7 +126,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNames) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
 		return qvtm2qvti(ocl2qvtmCompilerStep.execute());
 	}
 

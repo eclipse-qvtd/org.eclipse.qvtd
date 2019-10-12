@@ -37,8 +37,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.VariableDeclaration2TraceProperty;
@@ -189,11 +189,11 @@ public class RelationAnalysis extends RuleAnalysis
 	 */
 	private @Nullable Set<@NonNull VariableDeclaration> nonTopWhenedOutputVariables = null;
 
-	public RelationAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull QVTuConfiguration qvtuConfiguration, @NonNull RuleRegion ruleRegion) {
+	public RelationAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull RuleRegion ruleRegion) {
 		super(transformationAnalysis, ruleRegion);
-		dispatchAnalysis = createDispatchAnalysis(qvtuConfiguration);
-		verdictAnalysis = createVerdictAnalysis(qvtuConfiguration);
-		targetTypedModel = qvtuConfiguration.getTargetTypedModel();
+		dispatchAnalysis = createDispatchAnalysis(typedModelsConfiguration);
+		verdictAnalysis = createVerdictAnalysis(typedModelsConfiguration);
+		targetTypedModel = typedModelsConfiguration.getTargetTypedModel();
 	}
 
 	protected void addExpression(@NonNull VariableDeclaration variable, @NonNull OCLExpression expression) {
@@ -602,7 +602,7 @@ public class RelationAnalysis extends RuleAnalysis
 		return ClassUtil.nonNullState(variable2templateExp).get(variable);
 	}
 
-	protected @Nullable RelationDispatchAnalysis createDispatchAnalysis(@NonNull QVTuConfiguration qvtuConfiguration) {
+	protected @Nullable RelationDispatchAnalysis createDispatchAnalysis(@NonNull TypedModelsConfiguration typedModelsConfiguration) {
 		Relation relation = getRule();
 		if (!QVTrelationUtil.hasOverrides(relation)) {
 			return null;
@@ -614,7 +614,7 @@ public class RelationAnalysis extends RuleAnalysis
 		dispatchRegion.setOwningScheduleModel(scheduleManager.getScheduleModel());
 		dispatchRegion.setReferredRule(relation);
 		dispatchRegion.setReferredRuleRegion(getRegion());
-		dispatchRegion.setName(getNameGenerator().createMappingName(relation, "dispatch", qvtuConfiguration));
+		dispatchRegion.setName(getNameGenerator().createMappingName(relation, "dispatch", typedModelsConfiguration));
 		return new RelationDispatchAnalysis(this, dispatchRegion);
 	}
 
@@ -688,7 +688,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 	 * @param invokedRuleAnalysis */
 
-	protected @Nullable RelationVerdictAnalysis createVerdictAnalysis(@NonNull QVTuConfiguration qvtuConfiguration) {
+	protected @Nullable RelationVerdictAnalysis createVerdictAnalysis(@NonNull TypedModelsConfiguration typedModelsConfiguration) {
 		Relation relation = getRule();
 		if (!QVTrelationUtil.hasOverrides(relation)) {
 			return null;
@@ -700,7 +700,7 @@ public class RelationAnalysis extends RuleAnalysis
 		verdictRegion.setOwningScheduleModel(scheduleManager.getScheduleModel());
 		verdictRegion.setReferredRule(relation);
 		verdictRegion.setReferredRuleRegion(getRegion());
-		verdictRegion.setName(getNameGenerator().createMappingName(relation, "verdict", qvtuConfiguration));
+		verdictRegion.setName(getNameGenerator().createMappingName(relation, "verdict", typedModelsConfiguration));
 		return new RelationVerdictAnalysis(this, verdictRegion);
 	}
 

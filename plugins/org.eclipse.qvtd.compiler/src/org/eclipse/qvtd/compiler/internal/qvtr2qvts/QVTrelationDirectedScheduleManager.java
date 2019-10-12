@@ -17,11 +17,11 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.BasicScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -41,15 +41,15 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 public class QVTrelationDirectedScheduleManager extends BasicScheduleManager implements QVTrelationScheduleManager
 {
 	protected final @NonNull QVTrelationMultipleScheduleManager multipleScheduleManager;
-	protected final @NonNull QVTuConfiguration qvtuConfiguration;
+	protected final @NonNull TypedModelsConfiguration typedModelsConfiguration;
 
 	public QVTrelationDirectedScheduleManager(@NonNull QVTrelationMultipleScheduleManager multipleScheduleManager, @NonNull Transformation transformation,
-			@NonNull QVTuConfiguration qvtuConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
+			@NonNull TypedModelsConfiguration typedModelsConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		super(multipleScheduleManager.getScheduleModel(), multipleScheduleManager.getEnvironmentFactory(), transformation,
 			multipleScheduleManager.getProblemHandler(), schedulerOptions,
 			multipleScheduleManager.getNameGenerator(), multipleScheduleManager.getDatumCaches(), multipleScheduleManager.getDomainUsageAnalysis());
 		this.multipleScheduleManager = multipleScheduleManager;
-		this.qvtuConfiguration = qvtuConfiguration;
+		this.typedModelsConfiguration = typedModelsConfiguration;
 	}
 
 	/*	@Override
@@ -97,8 +97,8 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
 		ruleRegion.setOwningScheduleModel(scheduleModel);
 		ruleRegion.setReferredRule(asRule);
-		ruleRegion.setName(getNameGenerator().createMappingName((Relation) asRule, null, qvtuConfiguration));
-		return new RelationAnalysis(transformationAnalysis, qvtuConfiguration, ruleRegion);
+		ruleRegion.setName(getNameGenerator().createMappingName((Relation) asRule, null, typedModelsConfiguration));
+		return new RelationAnalysis(transformationAnalysis, typedModelsConfiguration, ruleRegion);
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 		StringBuilder s = new StringBuilder();
 		s.append(QVTbaseUtil.getName(asTransformation));
 		s.append("_");
-		s.append(PivotUtil.getName(qvtuConfiguration.getTargetTypedModel()));
+		s.append(PivotUtil.getName(typedModelsConfiguration.getTargetTypedModel()));
 		return s.toString();
 	}
 
@@ -140,8 +140,8 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	protected @NonNull QVTuConfiguration getQVTuConfiguration() {
-		return qvtuConfiguration;
+	protected @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
+		return typedModelsConfiguration;
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 
 	@Override
 	public @NonNull TypedModel getTargetTypedModel() {
-		return qvtuConfiguration.getTargetTypedModel();
+		return typedModelsConfiguration.getTargetTypedModel();
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 
 	@Override
 	public @NonNull String toString() {
-		return qvtuConfiguration.toString();
+		return typedModelsConfiguration.toString();
 	}
 
 	@Override

@@ -15,8 +15,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -105,7 +105,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 		return QVTbaseUtil.getName(identifiedVariable) + "_key";
 	}
 
-	public @NonNull String createMappingName(@NonNull Relation rule, @Nullable String role, @NonNull QVTuConfiguration qvtuConfiguration) {
+	public @NonNull String createMappingName(@NonNull Relation rule, @Nullable String role, @NonNull TypedModelsConfiguration typedModelsConfiguration) {
 		StringBuilder s = new StringBuilder();
 		s.append(PivotUtil.getName(rule));
 		if (role != null) {
@@ -114,7 +114,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 		}
 		for (@NonNull RelationDomain domain : QVTrelationUtil.getOwnedDomains(rule)) {
 			TypedModel typedModel = domain.getTypedModel();
-			if ((typedModel != null) && qvtuConfiguration.isOutput(typedModel)) {
+			if ((typedModel != null) && typedModelsConfiguration.isOutput(typedModel)) {
 				s.append("_");
 				s.append(PivotUtil.getName(typedModel));
 			}

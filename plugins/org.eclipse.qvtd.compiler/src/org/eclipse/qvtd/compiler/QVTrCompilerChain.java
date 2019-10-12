@@ -53,9 +53,9 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc.GenPackageComparator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTr2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationDirectedScheduleManager;
@@ -116,19 +116,19 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			AbstractQVTb2QVTs.DEBUG_GRAPHS.setState(basicGetOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull QVTuConfiguration> qvtuConfigurations) throws IOException {
+		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			Resource qvtsResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 			ScheduleModel scheduleModel = QVTscheduleFactory.eINSTANCE.createScheduleModel();
 			qvtsResource.getContents().add(scheduleModel);
 			CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
-			RelationalTransformation asTransformation = (RelationalTransformation) AbstractCompilerChain.getTransformation(qvtrResource);
+			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
 			QVTrelationMultipleScheduleManager multipleScheduleManager = new QVTrelationMultipleScheduleManager(environmentFactory, asTransformation, this, scheduleModel, schedulerOptions);
 			try {
 				multipleScheduleManager.getDomainUsageAnalysis().analyzeTransformation();
 				try {
-					for (@NonNull QVTuConfiguration qvtuConfiguration : qvtuConfigurations) {
-						QVTrelationDirectedScheduleManager directedScheduleManager = multipleScheduleManager.createDirectedScheduleManager(qvtuConfiguration);
+					for (@NonNull TypedModelsConfiguration typedModelsConfiguration : typedModelsConfigurations) {
+						QVTrelationDirectedScheduleManager directedScheduleManager = multipleScheduleManager.createDirectedScheduleManager(typedModelsConfiguration);
 						QVTr2QVTs qvtr2qvts = new QVTr2QVTs(directedScheduleManager, this);
 						directedScheduleManager.addTransformation(asTransformation);
 						//
@@ -427,20 +427,23 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNamesList) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
 		Resource qvtrResource = xtext2qvtrCompilerStep.execute(txURI);
-		return qvtr2qvti(qvtrResource, enforcedOutputNamesList);
+		return qvtr2qvti(qvtrResource, typedModelsConfigurations);
 	}
 
-	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNamesList) throws IOException {
+	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
 		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
 		Resource traceResource = createResource(traceURI, PivotPackage.eCONTENT_TYPE);
-		List<@NonNull QVTuConfiguration> qvtuConfigurations = new ArrayList<>();
-		for (@NonNull Iterable<@NonNull String> enforcedOutputNames : enforcedOutputNamesList) {
-			qvtuConfigurations.add(createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNames));
+		RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
+		//		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+		for (@NonNull TypedModelsConfiguration typedModelsConfiguration : typedModelsConfigurations) {
+			//			TypedModelsConfiguration typedModelsConfiguration = new TypedModelsConfiguration(TypedModelsConfiguration.Mode.ENFORCE, enforcedOutputNames);
+			typedModelsConfiguration.init(asTransformation);
+			//			typedModelsConfigurations.add(typedModelsConfiguration);
 		}
-		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, qvtuConfigurations);
+		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, typedModelsConfigurations);
 		//	ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
 		createGenModelCompilerStep.execute(traceResource);
 		//	CompilerOptions.StepOptions schedulerOptions = basicGetOptions(CompilerChain.QVTS_STEP);

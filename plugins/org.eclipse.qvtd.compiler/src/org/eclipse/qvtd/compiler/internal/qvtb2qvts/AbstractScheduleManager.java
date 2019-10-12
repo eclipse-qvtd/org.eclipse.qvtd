@@ -48,8 +48,8 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
@@ -324,8 +324,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public void analyzeSourceModel() {
 		//		domainUsageAnalysis.analyzeTransformation();	// FIXME just once
-		QVTuConfiguration qvtuConfiguration = getQVTuConfiguration();
-		Iterable<@NonNull TypedModel> outputTypedModels = qvtuConfiguration != null ? qvtuConfiguration.getOutputTypedModels() : null;
+		TypedModelsConfiguration typedModelsConfiguration = getTypedModelsConfiguration();
+		Iterable<@NonNull TypedModel> outputTypedModels = typedModelsConfiguration != null ? typedModelsConfiguration.getOutputTypedModels() : null;
 		directedDomainUsageAnalysis.analyzeTransformation(outputTypedModels);
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
 			transformationAnalysis.analyzeSourceModel();
@@ -759,10 +759,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return qvtruntimeLibraryHelper;
 	}
 
-	protected @Nullable QVTuConfiguration getQVTuConfiguration() {		// FIXME Eliminate me
-		return null;
-	}
-
 	@Override
 	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
 		Transformation transformation;
@@ -879,6 +875,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	//		}
 	//		return transformationAnalysis2tracePackage;
 	//	}
+
+	protected @Nullable TypedModelsConfiguration getTypedModelsConfiguration() {		// FIXME Eliminate me
+		return null;
+	}
 
 	@Override
 	public boolean isDirty(@NonNull Property property) {

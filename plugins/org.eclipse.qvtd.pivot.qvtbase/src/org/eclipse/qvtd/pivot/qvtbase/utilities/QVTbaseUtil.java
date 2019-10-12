@@ -558,6 +558,24 @@ public class QVTbaseUtil extends PivotUtil
 		return name != null ? name : TRACE_TYPED_MODEL_NAME;
 	}
 
+	public static @NonNull Transformation getTransformation(@NonNull Resource resource) throws IOException {
+		List<@NonNull Transformation> asTransformations = new ArrayList<>();
+		for (EObject eContent : resource.getContents()) {
+			if (eContent instanceof BaseModel) {
+				QVTbaseUtil.getAllTransformations(ClassUtil.nullFree(((BaseModel)eContent).getOwnedPackages()), asTransformations);
+			}
+		}
+		if (asTransformations.size() == 1) {
+			return asTransformations.get(0);
+		}
+		else if (asTransformations.size() == 1) {
+			throw new IOException("No Transformation element in " + resource.getURI());
+		}
+		else {
+			throw new IOException("Multiple Transformation elements in " + resource.getURI());
+		}
+	}
+
 	public static @NonNull TypedModel getTypedModel(@NonNull Domain asDomain) {
 		return ClassUtil.nonNullState(asDomain.getTypedModel());
 	}

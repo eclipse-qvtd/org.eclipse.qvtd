@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -56,6 +55,7 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
@@ -250,27 +250,22 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String outputName,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
-		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
-		return doBuild(txURI, intermediateFileNamePrefixURI, Collections.singletonList(Collections.singletonList(outputName)), options, genModelFiles);
+		Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
+		return buildTransformation(typedModelsConfigurations, isIncremental, genModelFiles);
 	}
 
-	/*	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull Iterable<@NonNull String> outputNames,
+	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
-		return doBuild(txURI, intermediateFileNamePrefixURI, Collections.singletonList(outputNames), options, genModelFiles);
-	} */
-
-	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull Iterable<@NonNull Iterable<@NonNull String>> outputNamesList,
-			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
-		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
-		return doBuild(txURI, intermediateFileNamePrefixURI, outputNamesList, options, genModelFiles);
+		return doBuild(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, options, genModelFiles);
 	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation_486938(@NonNull String outputName,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		options.setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
-		return doBuild(txURI, intermediateFileNamePrefixURI, Collections.singletonList(Collections.singletonList(outputName)), options, genModelFiles);
+		Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
+		return doBuild(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, options, genModelFiles);
 	}
 
 	protected void checkOutput(@NonNull Resource outputResource, @NonNull URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
@@ -416,10 +411,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
-	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull Iterable<@NonNull Iterable<@NonNull String>> outputNamesList,
+	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations,
 			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws IOException, Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
-		ImperativeTransformation asTransformation = compilerChain.compile(outputNamesList);
+		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
 			URI asURIstem = asURI.trimFileExtension();

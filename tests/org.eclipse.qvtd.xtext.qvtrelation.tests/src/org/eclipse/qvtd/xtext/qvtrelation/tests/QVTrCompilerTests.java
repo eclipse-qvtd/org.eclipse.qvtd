@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +53,9 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
@@ -76,8 +77,6 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.google.common.collect.Lists;
 
 /**
  * Tests that QVTc files can be compiled and executed.
@@ -113,8 +112,8 @@ public class QVTrCompilerTests extends LoadTestCase
 				return new QVTr2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull QVTuConfiguration> qvtuConfigurations) throws IOException {
-						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, qvtuConfigurations);
+					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, typedModelsConfigurations);
 						instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}
@@ -122,9 +121,9 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 
 			@Override
-			public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull Iterable<@NonNull String>> enforcedOutputNames) throws IOException {
+			public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
 				assertNoValidationErrors("QVTr validation", qvtrResource);
-				return super.qvtr2qvti(qvtrResource, enforcedOutputNames);
+				return super.qvtr2qvti(qvtrResource, typedModelsConfigurations);
 			}
 		}
 
@@ -555,8 +554,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		//		Class<? extends Transformer> txClass1 = org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr.class;
+		Class<?> txClass0 = Class.forName("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr");
 		@SuppressWarnings("unchecked")
-		Class<? extends Transformer> txClass1 = (Class<? extends Transformer>) Class.forName("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr");
+		Class<Transformer> txClass1 = (Class<Transformer>)txClass0;
 		//		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 
 		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
@@ -1040,9 +1040,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass;
 		MyQVT myQVT1 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		try {
-			Iterable<@NonNull String> forwardOutputNames = Collections.singletonList("forward");
-			Iterable<@NonNull String> reverseOutputNames = Collections.singletonList("reverse");
-			txClass = myQVT1.buildTransformation(Lists.newArrayList(reverseOutputNames, forwardOutputNames), false);//,
+			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+			typedModelsConfigurations.add(new TypedModelsConfiguration("forward"));
+			typedModelsConfigurations.add(new TypedModelsConfiguration("reverse"));
+			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);//,
 			//			txClass = myQVT1.buildTransformation(Collections.singletonList(reverseOutputNames), false);//,
 			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
 			//			myQVT1.assertRegionCount(ActivatorRegionImpl.class, 2);
@@ -1300,7 +1301,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ProjectManager projectMap = myQVT1.getProjectManager();
 			projectMap.configure(myQVT1.getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-			txClass = myQVT1.buildTransformation(Collections.singletonList(Lists.newArrayList("to", "via")), false);
+			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+			typedModelsConfigurations.add(new TypedModelsConfiguration("to", "via"));
+			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);
 		}
 		finally {
 			myQVT1.dispose();

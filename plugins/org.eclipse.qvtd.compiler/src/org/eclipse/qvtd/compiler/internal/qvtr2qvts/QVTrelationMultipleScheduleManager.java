@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.BasicScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.DatumCaches;
@@ -25,7 +26,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformation2TracePackage;
@@ -74,8 +74,8 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 		return null;
 	} */
 
-	public @NonNull QVTrelationDirectedScheduleManager createDirectedScheduleManager(@NonNull QVTuConfiguration qvtuConfiguration) {
-		return new QVTrelationDirectedScheduleManager(this, transformation, qvtuConfiguration, schedulerOptions);
+	public @NonNull QVTrelationDirectedScheduleManager createDirectedScheduleManager(@NonNull TypedModelsConfiguration typedModelsConfiguration) {
+		return new QVTrelationDirectedScheduleManager(this, transformation, typedModelsConfiguration, schedulerOptions);
 	}
 
 	@Override

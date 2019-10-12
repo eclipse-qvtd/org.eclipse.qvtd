@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -286,7 +287,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 					? (NavigationAssignment) super.visitOppositePropertyAssignment((@NonNull OppositePropertyAssignment) paIn)
 						: (NavigationAssignment) super.visitPropertyAssignment((@NonNull PropertyAssignment) paIn);
 					assert paOut != null;
-					if (qvtuConfiguration.isCheckMode() && paIn.isIsDefault() && isOutputDomain(paIn.getBottomPattern().getArea())) {
+					if (!typedModelsConfiguration.hasTargetTypedModel() && paIn.isIsDefault() && isOutputDomain(paIn.getBottomPattern().getArea())) {
 						// Default assignments
 						paOut.setIsDefault(false);
 					}
@@ -368,13 +369,13 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			TypedModel typedModel = QVTcoreUtil.getTypedModel(dIn);
 			String name = typedModel.getName();
 			dOut.setName(name);			// Redundant replication of Epsilon prototype functionality
-			if (qvtuConfiguration.isInput(typedModel)) {
+			if (typedModelsConfiguration.isInput(typedModel)) {
 				dOut.setIsEnforceable(false);
 				dOut.setIsCheckable(true);
 			} else {
-				if (qvtuConfiguration.isCheckMode()) {
+				if (!typedModelsConfiguration.hasTargetTypedModel()) {
 					dOut.setIsEnforceable(false);
-				} else if (qvtuConfiguration.isEnforceMode()) {
+				} else /*if (typedModelsConfiguration.isEnforceMode())*/ {
 					dOut.setIsCheckable(false);
 				}
 			}
@@ -586,7 +587,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 	}
 
-	private final @NonNull QVTuConfiguration qvtuConfiguration;
+	private final @NonNull TypedModelsConfiguration typedModelsConfiguration;
 
 	/**
 	 * Cached INPUT/MIDDLE/OUTPUT state of each Area, aggregating refined and/or local states.
@@ -598,9 +599,9 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 	 */
 	private final @NonNull Map<@NonNull Mapping, @NonNull MappingMode> mapping2mode = new HashMap<@NonNull Mapping, @NonNull MappingMode>();
 
-	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull QVTuConfiguration qvtuConfiguration) {
+	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull TypedModelsConfiguration typedModelsConfiguration) {
 		super(environmentFactory);
-		this.qvtuConfiguration = qvtuConfiguration;
+		this.typedModelsConfiguration = typedModelsConfiguration;
 	}
 
 	@Override
@@ -618,11 +619,11 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		for (@NonNull Domain domain: ClassUtil.nullFree(mapping.getDomain())) {
 			TypedModel typedModel = QVTcoreUtil.getTypedModel(domain);
 			//			String name = PivotUtil.getName(typedModel);
-			if (qvtuConfiguration.isInput(typedModel)) {
+			if (typedModelsConfiguration.isInput(typedModel)) {
 				mergedMode = mergedMode.asInput();
 				domain2mode.put((CoreDomain)domain, DomainMode.INPUT);
 			}
-			else if (qvtuConfiguration.isIntermediate(typedModel) || qvtuConfiguration.isOutput(typedModel)) {
+			else if (typedModelsConfiguration.isIntermediate(typedModel) || typedModelsConfiguration.isOutput(typedModel)) {
 				if (!domain.isIsEnforceable()) {
 					return null;
 				}
