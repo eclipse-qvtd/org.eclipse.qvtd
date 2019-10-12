@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.launching;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
@@ -22,6 +24,7 @@ import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.evaluator.BasicQVTrExecutor;
@@ -67,6 +70,8 @@ public class QVTrLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 			QVTiDebugPlugin.throwCoreExceptionError("No output direction for '" + txURI + "'", null);
 			return false;
 		}
+		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+		typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
 		boolean interpreted = configuration.getAttribute(INTERPRETED_KEY, true);
 		boolean dotGraphs = configuration.getAttribute(DOT_GRAPHS_KEY, true);
 		boolean yedGraphs = configuration.getAttribute(YED_GRAPHS_KEY, true);
@@ -93,10 +98,10 @@ public class QVTrLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 		CompilerChain compilerChain = new QVTrCompilerChain(environmentFactory, txURI, txURI, compilerOptions);
 		try {
 			if (interpreted) {
-				compilerChain.compile(outputName);
+				compilerChain.compile(typedModelsConfigurations);
 			}
 			else {
-				txClass = compilerChain.build(outputName);
+				txClass = compilerChain.build(typedModelsConfigurations);
 			}
 		} catch (Exception e) {
 			QVTiDebugPlugin.throwCoreExceptionError("Failed to compile transformation '" + txURI + "'", e);

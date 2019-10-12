@@ -1562,7 +1562,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Persons2FamilyPlans", txFile.getURI());
 		Class<? extends Transformer> txClass;
 		try {
-			txClass = myQVT1.buildTransformation("plan", false);
+			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+			typedModelsConfigurations.add(new TypedModelsConfiguration("plan"));
+			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);
 		}
 		finally {
 			myQVT1.dispose();
@@ -1606,7 +1608,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = createQVT("Persons2FamilyPlans", txFile.getURI());
 		ImperativeTransformation asTransformation;
 		try {
-			asTransformation = myQVT.compileTransformation("plan");
+			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+			typedModelsConfigurations.add(new TypedModelsConfiguration("plan"));
+			asTransformation = myQVT.compileTransformation(typedModelsConfigurations);
 			Map<String, Object> extensionToFactoryMap = myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//

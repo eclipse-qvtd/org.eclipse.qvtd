@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -425,8 +426,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected @NonNull ImperativeTransformation doCompile(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull String outputName,
 			@NonNull CompilerOptions options) throws Exception {
+		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+		typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
-		ImperativeTransformation transformation = compilerChain.compile(outputName);
+		ImperativeTransformation transformation = compilerChain.compile(typedModelsConfigurations);
 		URI txASURI = transformation.eResource().getURI();
 		if (txASURI != null) {
 			URI inputURI = txASURI;

@@ -81,12 +81,9 @@ public interface CompilerChain
 	<T> @Nullable T basicGetOption(@NonNull String stepKey, CompilerOptions.@NonNull Key<T> optionKey);
 	CompilerOptions.@Nullable StepOptions basicGetOptions(@NonNull String stepKey);
 	@Nullable URI basicGetURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey);
-	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;
-	//	@NonNull Class<? extends Transformer> build(@NonNull Iterable<@NonNull QVTuConfiguration> qvtuConfigurations, @NonNull String ... genModelFiles) throws Exception;
-	@NonNull ImperativeTransformation compile(@NonNull String outputName) throws IOException;
+	@NonNull Class<? extends Transformer> build(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception;
 	@NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException;
 	void compiled(@NonNull String stepKey, @NonNull Object object);
-	//	@NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource resource, QVTuConfiguration.Mode mode, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException;
 	@NonNull Resource createResource(@NonNull URI uri, @NonNull String contentType) throws IOException;
 	void dispose();
 	@NonNull QVTbaseEnvironmentFactory getEnvironmentFactory();

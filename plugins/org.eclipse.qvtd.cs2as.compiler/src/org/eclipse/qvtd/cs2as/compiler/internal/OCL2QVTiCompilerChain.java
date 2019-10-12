@@ -62,7 +62,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 				this.extendedASUris.add(ClassUtil.nonNullState(asResource.getURI())); // We add the AS URI
 			}
 			StringBuilder s = null;
-			for (@NonNull Resource resource : externalResourceSet.getResources()) {
+			for (/*@NonNull*/ Resource resource : externalResourceSet.getResources()) {
 				if (resource.getErrors().size() > 0) {
 					if (s == null) {
 						s = new StringBuilder();
@@ -131,7 +131,9 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	}
 
 	public @NonNull ImperativeTransformation compile() throws IOException {
-		return compile("");
+		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+		typedModelsConfigurations.add(new TypedModelsConfiguration(""));
+		return compile(typedModelsConfigurations);
 	}
 
 	@Override

@@ -394,9 +394,15 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return basicGetOption(stepKey, URI_KEY);
 	}
 
+	//	@Override
+	//	public @NonNull Class<? extends Transformer> build(@NonNull String enforcedOutputName, @NonNull String ... genModelFiles) throws Exception {
+	//		ImperativeTransformation asTransformation = compile(enforcedOutputName);
+	//		return generate(asTransformation, genModelFiles);
+	//	}
+
 	@Override
-	public @NonNull Class<? extends Transformer> build(@NonNull String enforcedOutputName, @NonNull String ... genModelFiles) throws Exception {
-		ImperativeTransformation asTransformation = compile(enforcedOutputName);
+	public @NonNull Class<? extends Transformer> build(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception {
+		ImperativeTransformation asTransformation = compile(typedModelsConfigurations);
 		return generate(asTransformation, genModelFiles);
 	}
 
@@ -406,12 +412,12 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	//		return generate(asTransformation, genModelFiles);
 	//	}
 
-	@Override
-	public final @NonNull ImperativeTransformation compile(@NonNull String outputName) throws IOException {
-		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-		typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
-		return compile(typedModelsConfigurations);
-	}
+	//	@Override
+	//	public final @NonNull ImperativeTransformation compile(@NonNull String outputName) throws IOException {
+	//		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+	//		typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
+	//		return compile(typedModelsConfigurations);
+	//	}
 
 	@Override
 	public void compiled(@NonNull String stepKey, @NonNull Object object) {
