@@ -137,6 +137,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 		public @NonNull Resource execute(@NonNull Resource cResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+			Transformation transformation = QVTbaseUtil.getTransformation(cResource);
+			String s = typedModelsConfiguration.reconcile(transformation);
+			if (s != null) {
+				CompilerUtil.addTranformationError(this, transformation, "Inconsistent configuration\n" + s);
+			}
 			try {
 				Resource uResource = createResource(QVTcorePackage.eCONTENT_TYPE);
 				QVTc2QVTu tx = new QVTc2QVTu(environmentFactory, this, typedModelsConfiguration);

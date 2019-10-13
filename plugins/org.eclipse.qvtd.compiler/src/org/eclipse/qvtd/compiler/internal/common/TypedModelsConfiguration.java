@@ -106,7 +106,25 @@ public class TypedModelsConfiguration
 		return outputTypedModels.size() > 0;
 	}
 
-	public @Nullable String init(@NonNull Transformation transformation) {
+	public boolean isInput(@NonNull TypedModel typedModel) {
+		return inputTypedModels.contains(typedModel);
+	}
+
+	public boolean isIntermediate(@NonNull TypedModel typedModel) {
+		return intermediateTypedModels.contains(typedModel);
+	}
+
+	public boolean isOutput(@NonNull TypedModel typedModel) {
+		return outputTypedModels.contains(typedModel);
+	}
+
+	/**
+	 * Locate the TypedModel corresponding to each configured name and create default configurations
+	 * for all unconfigured domains.
+	 *
+	 * Returns null if successful, or a new-line-separated concatenation of explanatory error messages if not.
+	 */
+	public @Nullable String reconcile(@NonNull Transformation transformation) {
 		Iterable<@NonNull TypedModel> typedModels = QVTbaseUtil.getModelParameters(transformation);
 		for (@NonNull TypedModel typedModel : typedModels) {
 			String name = typedModel.getName();
@@ -116,7 +134,7 @@ public class TypedModelsConfiguration
 		}
 		StringBuilder s = null;
 		for (@NonNull TypedModelConfiguration typedModelConfiguration : name2typedModelConfigurations.values()) {
-			String s2 = typedModelConfiguration.init(typedModels);
+			String s2 = typedModelConfiguration.reconcile(typedModels);
 			if (s2 != null) {
 				if (s == null) {
 					s = new StringBuilder();
@@ -137,18 +155,6 @@ public class TypedModelsConfiguration
 			}
 		}
 		return s != null ? s.toString() : null;
-	}
-
-	public boolean isInput(@NonNull TypedModel typedModel) {
-		return inputTypedModels.contains(typedModel);
-	}
-
-	public boolean isIntermediate(@NonNull TypedModel typedModel) {
-		return intermediateTypedModels.contains(typedModel);
-	}
-
-	public boolean isOutput(@NonNull TypedModel typedModel) {
-		return outputTypedModels.contains(typedModel);
 	}
 
 	@Override

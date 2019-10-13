@@ -118,11 +118,18 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
+			for (@NonNull TypedModelsConfiguration typedModelsConfiguration : typedModelsConfigurations) {
+				String s = typedModelsConfiguration.reconcile(asTransformation);
+				if (s != null) {
+					CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent configuration\n" + s);
+				}
+			}
 			Resource qvtsResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 			ScheduleModel scheduleModel = QVTscheduleFactory.eINSTANCE.createScheduleModel();
 			qvtsResource.getContents().add(scheduleModel);
 			CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
-			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
+			//			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
 			QVTrelationMultipleScheduleManager multipleScheduleManager = new QVTrelationMultipleScheduleManager(environmentFactory, asTransformation, this, scheduleModel, schedulerOptions);
 			try {
 				multipleScheduleManager.getDomainUsageAnalysis().analyzeTransformation();
@@ -436,13 +443,6 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
 		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
 		Resource traceResource = createResource(traceURI, PivotPackage.eCONTENT_TYPE);
-		RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
-		//		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-		for (@NonNull TypedModelsConfiguration typedModelsConfiguration : typedModelsConfigurations) {
-			//			TypedModelsConfiguration typedModelsConfiguration = new TypedModelsConfiguration(TypedModelsConfiguration.Mode.ENFORCE, enforcedOutputNames);
-			typedModelsConfiguration.init(asTransformation);
-			//			typedModelsConfigurations.add(typedModelsConfiguration);
-		}
 		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, typedModelsConfigurations);
 		//	ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
 		createGenModelCompilerStep.execute(traceResource);

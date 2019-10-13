@@ -18,10 +18,12 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * A TypedModelConfiguration specifies how a particular TypedModel is to be used during execution.
+ *
+ * Initial construction associates a node with a TypedModel name. reconcile() locates the actual TypedModel.
  */
 public class TypedModelConfiguration //implements Nameable
 {
-	public enum Mode {
+	public enum Mode {		// TODO this probably needs elaboration for IN-PLACE etc
 		CHECK,					// Used as input only
 		ENFORCE,				// Used as output only
 		INTERNAL,				// Used to connect internal productions to internal consumptions
@@ -45,12 +47,6 @@ public class TypedModelConfiguration //implements Nameable
 		return ClassUtil.nonNullState(typedModel);
 	}
 
-	public @Nullable String init(@NonNull Iterable<@NonNull TypedModel> typedModels) {
-		assert typedModel == null;
-		typedModel = NameUtil.getNameable(typedModels, name);
-		return typedModel != null ? null : "No '" + name + " TypedModel in " + typedModels.iterator().next().getTransformation();
-	}
-
 	public boolean isInput() {
 		return (mode == Mode.CHECK) || (mode == Mode.INTERNAL) || (mode == Mode.REPLACE);
 	}
@@ -61,6 +57,17 @@ public class TypedModelConfiguration //implements Nameable
 
 	public boolean isOutput() {
 		return (mode == Mode.ENFORCE) || (mode == Mode.INTERNAL) || (mode == Mode.REPLACE);
+	}
+
+	/**
+	 * Locate the TypedModel corresponding to the configured name.
+	 *
+	 * Returns null if successful, or an explanatory error message if not.
+	 */
+	public @Nullable String reconcile(@NonNull Iterable<@NonNull TypedModel> typedModels) {
+		assert typedModel == null;
+		typedModel = NameUtil.getNameable(typedModels, name);
+		return typedModel != null ? null : "No '" + name + " TypedModel in " + typedModels.iterator().next().getTransformation();
 	}
 
 	@Override
