@@ -2430,8 +2430,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			public int compare(@NonNull CGMapping o1, @NonNull CGMapping o2) {
 				EntryPoint asEntryPoint1 = (EntryPoint) QVTiCGUtil.getAST(o1);
 				EntryPoint asEntryPoint2 = (EntryPoint) QVTiCGUtil.getAST(o2);
-				TypedModel asTypedModel1 = asEntryPoint1.getEnforcedTypedModels().get(0);
-				TypedModel asTypedModel2 = asEntryPoint2.getEnforcedTypedModels().get(0);
+				List<TypedModel> asEnforcedTypedModels1 = asEntryPoint1.getEnforcedTypedModels();
+				List<TypedModel> asEnforcedTypedModels2 = asEntryPoint2.getEnforcedTypedModels();
+				TypedModel asTypedModel1 = asEnforcedTypedModels1.size() > 0 ? asEnforcedTypedModels1.get(0) : null;
+				TypedModel asTypedModel2 = asEnforcedTypedModels2.size() > 0 ? asEnforcedTypedModels2.get(0) : null;
 				int index1 = asTypedModels.indexOf(asTypedModel1);
 				int index2 = asTypedModels.indexOf(asTypedModel2);
 				return index1 - index2;
@@ -2451,11 +2453,17 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		for (@NonNull CGMapping cgRootMapping : cgRootMappings) {
 			EntryPoint asEntryPoint = (EntryPoint) QVTiCGUtil.getAST(cgRootMapping);
 			if (isMultiDirectional) {
-				js.append("case ");
-				TypedModel asTargetTypedModel = asEntryPoint.getEnforcedTypedModels().get(0);
-				js.appendIntegerString(asTypedModels.indexOf(asTargetTypedModel));
-				js.append(": { /* " + asTargetTypedModel.getName() + " */\n");
-				js.pushIndentation(null);
+				List<TypedModel> asEnforcedTypedModels = asEntryPoint.getEnforcedTypedModels();
+				if (asEnforcedTypedModels.size() > 0) {
+					js.append("case ");
+					TypedModel asTargetTypedModel = asEnforcedTypedModels.get(0);
+					js.appendIntegerString(asTypedModels.indexOf(asTargetTypedModel));
+					js.append(": { /* " + asTargetTypedModel.getName() + " */\n");
+					js.pushIndentation(null);
+				}
+				else {
+					continue;		// Avoid generating code for not-enforceable TypedModel
+				}
 			}
 			for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgRootMapping)) {
 				//			js.appendDeclaration(cgGuardVariable);
@@ -2521,7 +2529,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 		}
 		if (isMultiDirectional) {
-			js.append("default: return false;\n");
+			js.append("default: {\n");
+			js.pushIndentation(null);
+			js.append("throwInvalidEvaluationException(\"Unsupported target direction {0} - \'\'{1}\'\'\"");
+			js.append(", targetTypedModelIndex");
+			js.append(", " + QVTiGlobalContext.MODELS_NAME + "[targetTypedModelIndex].getName()");
+			js.append(");\n");
+			js.append("return false;\n");
+			js.popIndentation();
+			js.append("}\n");
 			js.popIndentation();
 			js.append("}\n");
 		}
