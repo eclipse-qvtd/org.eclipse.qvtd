@@ -67,6 +67,10 @@
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateDomainNameIsUnique/diagnostics"/>
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateDomainNameIsUnique/context"/>
       </genOperations>
+      <genOperations ecoreOperation="QVTbase.ecore#//Rule/validateAtLeastOneDomainIsCheckableOrEnforceable">
+        <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateAtLeastOneDomainIsCheckableOrEnforceable/diagnostics"/>
+        <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateAtLeastOneDomainIsCheckableOrEnforceable/context"/>
+      </genOperations>
       <genOperations ecoreOperation="QVTbase.ecore#//Rule/validateNoOverridesCycle">
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateNoOverridesCycle/diagnostics"/>
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateNoOverridesCycle/context"/>

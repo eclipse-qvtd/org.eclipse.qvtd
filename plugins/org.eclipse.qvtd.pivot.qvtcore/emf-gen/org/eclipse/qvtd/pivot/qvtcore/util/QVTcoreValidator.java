@@ -498,6 +498,7 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateAtLeastOneDomainIsCheckableOrEnforceable(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateNoOverridesCycle(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateAbstractRuleIsOverridden(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridingRuleOverridesAllDomains(mapping, diagnostics, context);

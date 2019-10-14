@@ -25,6 +25,9 @@ conditionExpression.type = Boolean
 context Rule
 inv DomainNameIsUnique:
 	domain->isUnique(name)
+	
+inv AtLeastOneDomainIsCheckableOrEnforceable:
+	domain->notEmpty() implies domain->exists(isCheckable or isEnforceable)
 
 inv NoOverridesCycle:
 	overridden->closure(overridden)->excludes(self)

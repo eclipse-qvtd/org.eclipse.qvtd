@@ -95,7 +95,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RULE_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4;
+	public static final int RULE_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' containment reference list.
@@ -395,6 +395,109 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
+			}
+			return Boolean.TRUE == symbol_0;
+		}
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateAtLeastOneDomainIsCheckableOrEnforceable(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "Rule::AtLeastOneDomainIsCheckableOrEnforceable";
+		try {
+			/**
+			 *
+			 * inv AtLeastOneDomainIsCheckableOrEnforceable:
+			 *   let severity : Integer[1] = constraintName.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let
+			 *         result : Boolean[?] = domain->notEmpty() implies
+			 *         domain->exists(isCheckable or isEnforceable)
+			 *       in
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_AT_LEAST_ONE_DOMAIN_IS_CHECKABLE_OR_ENFORCEABLE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTbaseTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
+				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
+				final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_domain_0).booleanValue();
+				/*@NonInvalid*/ @Nullable Boolean result;
+				if (notEmpty) {
+					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.FALSE_VALUE;
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain_0.iterator();
+					/*@NonInvalid*/ @Nullable Boolean exists;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							if (accumulator == ValueUtil.FALSE_VALUE) {
+								exists = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								throw (InvalidValueException)accumulator;
+							}
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
+						/**
+						 * isCheckable or isEnforceable
+						 */
+						final /*@NonInvalid*/ boolean isCheckable = _1.isIsCheckable();
+						/*@NonInvalid*/ boolean or;
+						if (isCheckable) {
+							or = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							final /*@NonInvalid*/ boolean isEnforceable = _1.isIsEnforceable();
+							or = isEnforceable;
+						}
+						//
+						if (or == ValueUtil.TRUE_VALUE) {					// Normal successful body evaluation result
+							exists = ValueUtil.TRUE_VALUE;
+							break;														// Stop immediately
+						}
+						else if (or == ValueUtil.FALSE_VALUE) {				// Normal unsuccessful body evaluation result
+							;															// Carry on
+						}
+						else {															// Impossible badly typed result
+							accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "exists");
+						}
+					}
+					result = exists;
+				}
+				else {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, QVTbaseTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
@@ -874,10 +977,12 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0:
 				return validateDomainNameIsUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1:
-				return validateNoOverridesCycle((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+				return validateAtLeastOneDomainIsCheckableOrEnforceable((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2:
-				return validateAbstractRuleIsOverridden((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+				return validateNoOverridesCycle((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3:
+				return validateAbstractRuleIsOverridden((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4:
 				return validateOverridingRuleOverridesAllDomains((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

@@ -22,7 +22,7 @@ map packageToSchema in umlRdbms {
     uml () {
         p:Package |
     }
-    rdbms () {
+    check enforce rdbms () {
         s:Schema |
     }
     where () {

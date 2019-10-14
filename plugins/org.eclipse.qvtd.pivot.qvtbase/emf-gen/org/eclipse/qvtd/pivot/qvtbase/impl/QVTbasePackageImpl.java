@@ -476,7 +476,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRule__ValidateNoOverridesCycle__DiagnosticChain_Map() {
+	public EOperation getRule__ValidateAtLeastOneDomainIsCheckableOrEnforceable__DiagnosticChain_Map() {
 		return ruleEClass.getEOperations().get(1);
 	}
 
@@ -486,7 +486,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRule__ValidateAbstractRuleIsOverridden__DiagnosticChain_Map() {
+	public EOperation getRule__ValidateNoOverridesCycle__DiagnosticChain_Map() {
 		return ruleEClass.getEOperations().get(2);
 	}
 
@@ -496,8 +496,18 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map() {
+	public EOperation getRule__ValidateAbstractRuleIsOverridden__DiagnosticChain_Map() {
 		return ruleEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map() {
+		return ruleEClass.getEOperations().get(4);
 	}
 
 	/**
@@ -777,6 +787,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2);
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3);
+		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4);
 
 		transformationEClass = createEClass(8);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 0);
@@ -922,6 +933,15 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getRule_Transformation(), this.getTransformation(), this.getTransformation_Rule(), "transformation", null, 0, 1, Rule.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateDomainNameIsUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getRule__ValidateAtLeastOneDomainIsCheckableOrEnforceable__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateAtLeastOneDomainIsCheckableOrEnforceable", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1126,6 +1146,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 			   "originalName", "DomainNameIsUnique"
 		   });
 		addAnnotation
+		  (getRule__ValidateAtLeastOneDomainIsCheckableOrEnforceable__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "AtLeastOneDomainIsCheckableOrEnforceable"
+		   });
+		addAnnotation
 		  (getRule__ValidateNoOverridesCycle__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
@@ -1217,7 +1243,13 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		  (getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tdomain->isUnique(name)\n\n"
+			   "body", "\n\tdomain->isUnique(name)\n\t\n"
+		   });
+		addAnnotation
+		  (getRule__ValidateAtLeastOneDomainIsCheckableOrEnforceable__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tdomain->notEmpty() implies domain->exists(isCheckable or isEnforceable)\n\n"
 		   });
 		addAnnotation
 		  (getRule__ValidateNoOverridesCycle__DiagnosticChain_Map(),

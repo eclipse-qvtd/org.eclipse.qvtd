@@ -43,6 +43,9 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A checkable domain may be selected as the target of a transformation in check mode. An enforceable domain is always checkable. A not-checkable domain cannot be selected as the target of a transformation. See Bug 549776.See Bug 549776.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Checkable</em>' attribute.
 	 * @see #isSetIsCheckable()
 	 * @see #unsetIsCheckable()
@@ -96,6 +99,9 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An enforceable domain may be selected as the target of a transformation in check or enforce mode. An enforceable domain is always checkable. A not-checkable domain cannot be selected as the target of a transformation. See Bug 549776.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Enforceable</em>' attribute.
 	 * @see #isSetIsEnforceable()
 	 * @see #unsetIsEnforceable()

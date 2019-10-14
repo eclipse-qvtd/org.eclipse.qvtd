@@ -368,6 +368,16 @@ public interface QVTbasePackage extends EPackage {
 	EOperation getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateAtLeastOneDomainIsCheckableOrEnforceable(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate At Least One Domain Is Checkable Or Enforceable</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate At Least One Domain Is Checkable Or Enforceable</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateAtLeastOneDomainIsCheckableOrEnforceable(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRule__ValidateAtLeastOneDomainIsCheckableOrEnforceable__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateNoOverridesCycle(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate No Overrides Cycle</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -880,6 +890,14 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate At Least One Domain Is Checkable Or Enforceable</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RULE___VALIDATE_AT_LEAST_ONE_DOMAIN_IS_CHECKABLE_OR_ENFORCEABLE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateAtLeastOneDomainIsCheckableOrEnforceable__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate No Overrides Cycle</b></em>' operation.
