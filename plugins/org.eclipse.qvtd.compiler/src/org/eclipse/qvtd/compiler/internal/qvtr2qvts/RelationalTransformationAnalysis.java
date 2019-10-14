@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -19,9 +21,12 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformation2TracePackage;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -53,8 +58,25 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 	 */
 	private final @NonNull Map<@NonNull CompleteClass, @Nullable Key> completeClass2key  = new HashMap<>();
 
+	private static @NonNull Iterable<@NonNull Rule> computeRules(@NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull Transformation transformation) {
+		@NonNull List<@NonNull Rule> rules = new ArrayList<>();
+		for (@NonNull Rule asRule : QVTbaseUtil.getOwnedRules(transformation)) {
+			boolean isExecutable = true;
+			for (@NonNull TypedModel typedModel : typedModelsConfiguration.getOutputTypedModels()) {
+				Domain domain = QVTrelationUtil.basicGetDomain(asRule, typedModel);
+				if ((domain != null) && !domain.isIsEnforceable()) {
+					isExecutable = false;
+				}
+			}
+			if (isExecutable) {
+				rules.add(asRule);
+			}
+		}
+		return rules;
+	}
+
 	public RelationalTransformationAnalysis(@NonNull QVTrelationDirectedScheduleManager directedScheduleManager, @NonNull RelationalTransformation transformation, @NonNull RootRegion rootRegion) {
-		super(directedScheduleManager, transformation, rootRegion);
+		super(directedScheduleManager, transformation, computeRules(directedScheduleManager.getTypedModelsConfiguration(), transformation), rootRegion);
 		this.helper = new QVTrelationHelper(directedScheduleManager.getEnvironmentFactory());
 		QVTbaseUtil.getPrimitiveTypedModel(transformation);		// FIXME debugging the must-exist side effect
 		//		transformation.getModelParameter().add(0, directedScheduleManager.getDomainUsageAnalysis().getPrimitiveTypedModel());		// FIXME move to source

@@ -92,12 +92,12 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 
 	private @Nullable RootPartitionAnalysis rootPartitionAnalysis = null;
 
-	protected AbstractTransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull RootRegion rootRegion) {
+	protected AbstractTransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull Iterable<@NonNull Rule> rules, @NonNull RootRegion rootRegion) {
 		super(scheduleManager);
 		this.transformation = transformation;
 		this.rootRegion = rootRegion;
 		this.oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
-		for (@NonNull Rule asRule : QVTbaseUtil.getOwnedRules(transformation)) {
+		for (@NonNull Rule asRule : rules) {
 			RuleAnalysis ruleAnalysis = scheduleManager.createRuleAnalysis(this, asRule);
 			rule2ruleAnalysis.put(asRule, ruleAnalysis);
 		}

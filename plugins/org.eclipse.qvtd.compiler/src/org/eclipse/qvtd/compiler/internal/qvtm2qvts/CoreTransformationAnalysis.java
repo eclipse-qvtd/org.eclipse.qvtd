@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 /**
@@ -22,6 +23,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 public class CoreTransformationAnalysis extends AbstractTransformationAnalysis
 {
 	public CoreTransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull RootRegion rootRegion) {
-		super(scheduleManager, transformation, rootRegion);
+		super(scheduleManager, transformation, QVTbaseUtil.getOwnedRules(transformation), rootRegion);
 	}
 }
