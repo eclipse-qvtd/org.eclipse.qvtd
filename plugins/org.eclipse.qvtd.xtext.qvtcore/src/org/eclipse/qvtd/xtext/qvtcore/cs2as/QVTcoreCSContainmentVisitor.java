@@ -234,7 +234,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			return null;
 		}
 		CoreDomain pivotElement = context.refreshModelElement(CoreDomain.class, QVTcorePackage.Literals.CORE_DOMAIN, csElement);
-		pivotElement.setIsCheckable(csElement.isIsCheck());
+		pivotElement.setIsCheckable(csElement.isIsCheck() || csElement.isIsEnforce());
 		pivotElement.setIsEnforceable(csElement.isIsEnforce());
 		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getOwnedBottomPattern()));
 		pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csElement.getOwnedGuardPattern()));

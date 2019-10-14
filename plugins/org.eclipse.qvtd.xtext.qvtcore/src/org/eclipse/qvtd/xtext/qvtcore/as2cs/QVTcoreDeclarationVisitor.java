@@ -340,8 +340,11 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		csDomain.setPivot(asCoreDomain);
 		csDomain.setOwnedBottomPattern(context.visitDeclaration(BottomPatternCS.class, asCoreDomain.getBottomPattern()));
 		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asCoreDomain.getGuardPattern()));
-		csDomain.setIsCheck(asCoreDomain.isIsCheckable());
 		csDomain.setDirection(asCoreDomain.getTypedModel());
+		boolean isCheckable = asCoreDomain.isIsCheckable();
+		boolean isEnforceable = asCoreDomain.isIsEnforceable();
+		csDomain.setIsCheck(isCheckable && !isEnforceable);		// Avoid two bits being set; only one allowed in CST
+		csDomain.setIsEnforce(isEnforceable);
 		csDomain.setIsEnforce(asCoreDomain.isIsEnforceable());
 		return csDomain;
 	}

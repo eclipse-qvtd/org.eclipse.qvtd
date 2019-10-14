@@ -485,26 +485,15 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitRelationCS(@NonNull RelationCS csElement) {
 		@NonNull Relation pivotElement = refreshNamedElement(Relation.class, QVTrelationPackage.Literals.RELATION, csElement);
 		context.refreshPivotList(Domain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
-		boolean explicitCheckonly = false;
-		boolean explicitEnforce = false;
-		for (AbstractDomainCS abstractDomainCS : csElement.getOwnedDomains()) {
-			if (abstractDomainCS instanceof DomainCS) {
-				DomainCS domainCS = (DomainCS) abstractDomainCS;
-				if (domainCS.isIsCheckonly())
-					explicitCheckonly = true;
-				if (domainCS.isIsEnforce())
-					explicitEnforce = true;
-			}
-		}
 		for (@NonNull AbstractDomainCS abstractDomainCS : ClassUtil.nullFree(csElement.getOwnedDomains())) {
 			Domain domain = PivotUtil.getPivot(Domain.class, abstractDomainCS);
 			if (domain != null) {
-				boolean isCheckable = true;
-				boolean isEnforceable = true;
+				boolean isCheckable = false;
+				boolean isEnforceable = false;
 				if (abstractDomainCS instanceof DomainCS) {
 					DomainCS domainCS = (DomainCS) abstractDomainCS;
-					isCheckable = !explicitCheckonly || !explicitEnforce || domainCS.isIsCheckonly();
-					isEnforceable = !explicitCheckonly ||!explicitEnforce ||  domainCS.isIsEnforce();
+					isEnforceable = domainCS.isIsEnforce();
+					isCheckable = domainCS.isIsCheckonly() || isEnforceable;
 				}
 				domain.setIsCheckable(isCheckable);
 				domain.setIsEnforceable(isEnforceable);
