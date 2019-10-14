@@ -68,7 +68,7 @@ public interface ScheduleManager
 	/**
 	 * Perform the pre-analysis that relies solely on traversal of the QVTr source model.
 	 */
-	void analyzeSourceModel();
+	void analyzeSourceModel(@NonNull ProblemHandler problemHandler);
 
 	/**
 	 * Perform the late analysis of a synthesized trace Package.

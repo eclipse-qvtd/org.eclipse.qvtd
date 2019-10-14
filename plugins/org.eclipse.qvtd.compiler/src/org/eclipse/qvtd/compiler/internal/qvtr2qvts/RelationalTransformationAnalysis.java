@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -78,11 +79,11 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 	}
 
 	@Override
-	public void analyzeSourceModel() {
+	public void analyzeSourceModel(@NonNull ProblemHandler problemHandler) {
 		for (@NonNull Key key : QVTrelationUtil.getOwnedKey(getTransformation())) {
 			analyzeKey(key);
 		}
-		super.analyzeSourceModel();
+		super.analyzeSourceModel(problemHandler);
 	}
 
 	/**

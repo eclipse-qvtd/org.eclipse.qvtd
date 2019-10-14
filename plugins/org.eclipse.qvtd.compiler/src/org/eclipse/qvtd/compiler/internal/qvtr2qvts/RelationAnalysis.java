@@ -37,6 +37,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2TraceGroup;
@@ -285,7 +286,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	@Override
-	public void analyzeInvocations() {
+	public void analyzeInvocations(@NonNull ProblemHandler problemHandler) {
 		for (@NonNull EObject eObject : new TreeIterable(rule, false)) {
 			if (eObject instanceof RelationCallExp) {
 				RelationCallExp relationInvocation = (RelationCallExp) eObject;
@@ -476,13 +477,19 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	@Override
-	public void analyzeOverrides() {
+	public void analyzeOverrides(@NonNull ProblemHandler problemHandler) {
 		Relation relation = getRule();
 		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
+		for (@NonNull TypedModel typedModel : getScheduleManager().getTypedModelsConfiguration().getOutputTypedModels()) {
+			Domain domain = QVTrelationUtil.basicGetDomain(relation, typedModel);
+			if ((domain != null) && !domain.isIsEnforceable()) {
+				CompilerUtil.addRuleError(problemHandler, relation, "domain ''{0}'' cannot be an output", typedModel.getName());
+			}
+		}
 	}
 
 	@Override
-	public void analyzeSourceModel() {
+	public void analyzeSourceModel(@NonNull ProblemHandler problemHandler) {
 		Relation relation = getRule();
 		variable2templateExp = analyzeVariable2TemplateExp();
 		Set<@NonNull VariableDeclaration> topWhenedOutputVariables2 = topWhenedOutputVariables = new HashSet<>();
@@ -856,8 +863,8 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	@Override
-	public @NonNull QVTrelationScheduleManager getScheduleManager() {
-		return (QVTrelationScheduleManager)scheduleManager;
+	public @NonNull QVTrelationDirectedScheduleManager getScheduleManager() {
+		return (QVTrelationDirectedScheduleManager)scheduleManager;
 	}
 
 	//	protected @NonNull TemplateExp getTemplateExp(@NonNull VariableDeclaration variable) {

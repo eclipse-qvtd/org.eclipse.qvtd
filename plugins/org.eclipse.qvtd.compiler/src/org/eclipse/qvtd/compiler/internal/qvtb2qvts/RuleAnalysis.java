@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
@@ -78,13 +79,13 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		//		assert !rule.isIsAbstract() == scheduleManager.getScheduleModel().getOwnedMappingRegions().contains(ruleRegion);
 	}
 
-	public void analyzeInvocations() {}
+	public void analyzeInvocations(@NonNull ProblemHandler problemHandler) {}
 
 	public abstract void analyzeMappingRegion();
 
-	public void analyzeOverrides() {}
+	public void analyzeOverrides(@NonNull ProblemHandler problemHandler) {}
 
-	public void analyzeSourceModel() {}
+	public void analyzeSourceModel(@NonNull ProblemHandler problemHandler) {}
 
 	public @NonNull Node createDependencyHead(@NonNull ClassDatum classDatum) {
 		if (dependencyHeadNodes == null) {

@@ -567,7 +567,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		//	- Establish which domain each element is part of
 		//	- Establish which output variables are reachable by composition from their root
 		//
-		directedScheduleManager.analyzeSourceModel();
+		directedScheduleManager.analyzeSourceModel(problemHandler);
 		//
 		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = directedScheduleManager.getOrderedTransformationAnalyses();
 		Map<@NonNull AbstractTransformationAnalysis, @NonNull RelationalTransformation2TracePackage> transformationAnalysis2transformation2tracePackages = new HashMap<>();

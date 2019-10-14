@@ -35,8 +35,10 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -369,6 +371,13 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			TypedModel typedModel = QVTcoreUtil.getTypedModel(dIn);
 			String name = typedModel.getName();
 			dOut.setName(name);			// Redundant replication of Epsilon prototype functionality
+
+			if (typedModelsConfiguration.isOutput(typedModel)) {
+				if (!dIn.isIsEnforceable()) {
+					CompilerUtil.addRuleError(problemHandler, QVTcoreUtil.getContainingRule(dIn), "domain ''{0}'' cannot be an output", typedModel.getName());
+				}
+			}
+
 			if (typedModelsConfiguration.isInput(typedModel)) {
 				dOut.setIsEnforceable(false);
 				dOut.setIsCheckable(true);
@@ -587,6 +596,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 	}
 
+	private final @NonNull ProblemHandler problemHandler;
 	private final @NonNull TypedModelsConfiguration typedModelsConfiguration;
 
 	/**
@@ -599,8 +609,9 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 	 */
 	private final @NonNull Map<@NonNull Mapping, @NonNull MappingMode> mapping2mode = new HashMap<@NonNull Mapping, @NonNull MappingMode>();
 
-	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull TypedModelsConfiguration typedModelsConfiguration) {
+	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler, @NonNull TypedModelsConfiguration typedModelsConfiguration) {
 		super(environmentFactory);
+		this.problemHandler = problemHandler;
 		this.typedModelsConfiguration = typedModelsConfiguration;
 	}
 

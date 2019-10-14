@@ -36,7 +36,7 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 
 	public @NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {
 		scheduleManager.getDomainUsageAnalysis().analyzeTransformation();
-		scheduleManager.analyzeSourceModel();
+		scheduleManager.analyzeSourceModel(problemHandler);
 		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager.getOrderedTransformationAnalyses();
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
 			transformationAnalysis.analyzeMappingRegions();

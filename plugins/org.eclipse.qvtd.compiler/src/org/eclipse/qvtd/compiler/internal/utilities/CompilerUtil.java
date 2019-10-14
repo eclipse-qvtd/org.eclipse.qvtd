@@ -63,6 +63,7 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectionProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.PartitionProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionProblem;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleProblem;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
@@ -70,6 +71,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionProper
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CompositePartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
@@ -129,6 +131,16 @@ public class CompilerUtil extends QVTscheduleUtil
 	public static void addRegionWarning(@NonNull ProblemHandler problemHandler, @NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
 		String boundMessage = StringUtil.bind(messageTemplate, bindings);
 		problemHandler.addProblem(new RegionProblem(CompilerProblem.Severity.WARNING, region, boundMessage));
+	}
+
+	public static void addRuleError(@NonNull ProblemHandler problemHandler, @NonNull Rule rule, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		problemHandler.addProblem(new RuleProblem(CompilerProblem.Severity.ERROR, rule, boundMessage));
+	}
+
+	public static void addRuleWarning(@NonNull ProblemHandler problemHandler, @NonNull Rule rule, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		problemHandler.addProblem(new RuleProblem(CompilerProblem.Severity.WARNING, rule, boundMessage));
 	}
 
 	/**
