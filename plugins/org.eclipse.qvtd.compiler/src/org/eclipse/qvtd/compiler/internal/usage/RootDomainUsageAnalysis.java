@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -503,7 +504,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		return usage;
 	}
 
-	public abstract @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis();
+	public abstract @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis(@NonNull TypedModelsConfiguration typedModelsConfiguration);
 
 	protected @NonNull OperationUsageAnalysis createOperationUsageAnalysis() {
 		return new OperationUsageAnalysis(this);

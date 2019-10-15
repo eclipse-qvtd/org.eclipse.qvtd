@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -53,10 +54,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
  */
 public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<@NonNull DomainUsage>
 {
-	protected static class QVTcoreDirectedDomainUsageAnalysis extends DirectedDomainUsageAnalysis
+	public static class QVTcoreDirectedDomainUsageAnalysis extends DirectedDomainUsageAnalysis
 	{
-		public QVTcoreDirectedDomainUsageAnalysis(@NonNull QVTcoreDomainUsageAnalysis domainUsageAnalysis) {
-			super(domainUsageAnalysis);
+		public QVTcoreDirectedDomainUsageAnalysis(@NonNull QVTcoreDomainUsageAnalysis domainUsageAnalysis, @NonNull TypedModelsConfiguration typedModelsConfiguration) {
+			super(domainUsageAnalysis, typedModelsConfiguration);
 		}
 
 		@Override
@@ -83,8 +84,8 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 	}
 
 	@Override
-	public @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis() {
-		return new QVTcoreDirectedDomainUsageAnalysis(this);
+	public @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis(@NonNull TypedModelsConfiguration typedModelsConfiguration) {
+		return new QVTcoreDirectedDomainUsageAnalysis(this, typedModelsConfiguration);
 	}
 
 	protected @NonNull DomainUsage doNavigationAssignment(@NonNull Property property, @NonNull NavigationAssignment object) {

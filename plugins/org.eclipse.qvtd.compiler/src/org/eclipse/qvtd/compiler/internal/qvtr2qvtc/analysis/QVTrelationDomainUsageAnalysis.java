@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.DomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
@@ -49,8 +50,8 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 {
 	protected static class QVTrelationDirectedDomainUsageAnalysis extends DirectedDomainUsageAnalysis
 	{
-		public QVTrelationDirectedDomainUsageAnalysis(@NonNull QVTrelationDomainUsageAnalysis domainUsageAnalysis) {
-			super(domainUsageAnalysis);
+		public QVTrelationDirectedDomainUsageAnalysis(@NonNull QVTrelationDomainUsageAnalysis domainUsageAnalysis, @NonNull TypedModelsConfiguration typedModelsConfiguration) {
+			super(domainUsageAnalysis, typedModelsConfiguration);
 		}
 	}
 
@@ -69,8 +70,8 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 	}
 
 	@Override
-	public @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis() {
-		return new QVTrelationDirectedDomainUsageAnalysis(this);
+	public @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis(@NonNull TypedModelsConfiguration typedModelsConfiguration) {
+		return new QVTrelationDirectedDomainUsageAnalysis(this, typedModelsConfiguration);
 	}
 
 	@Override

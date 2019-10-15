@@ -17,6 +17,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -29,9 +30,12 @@ import com.google.common.collect.Lists;
 
 public class QVTm2QVTs extends AbstractQVTb2QVTs
 {
+	protected final @NonNull TypedModelsConfiguration typedModelsConfiguration;
+
 	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory,
-			@NonNull Transformation transformation, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(new QVTcoreScheduleManager(environmentFactory, transformation, problemHandler, schedulerOptions), problemHandler);
+			@NonNull Transformation transformation, @NonNull TypedModelsConfiguration typedModelsConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
+		super(new QVTcoreScheduleManager(environmentFactory, transformation, typedModelsConfiguration, problemHandler, schedulerOptions), problemHandler);
+		this.typedModelsConfiguration = typedModelsConfiguration;
 	}
 
 	public @NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {

@@ -17,11 +17,13 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.BasicScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingAnalysis.QVTcoreExpressionSynthesizer;
+import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -34,8 +36,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 public class QVTcoreScheduleManager extends BasicScheduleManager
 {
-	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
+	protected final @NonNull TypedModelsConfiguration typedModelsConfiguration;
+
+	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, transformation, problemHandler, schedulerOptions);
+		this.typedModelsConfiguration = typedModelsConfiguration;
+	}
+
+	@Override
+	protected @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis() {
+		return new QVTcoreDomainUsageAnalysis.QVTcoreDirectedDomainUsageAnalysis((QVTcoreDomainUsageAnalysis)domainUsageAnalysis, typedModelsConfiguration);
 	}
 
 	@Override

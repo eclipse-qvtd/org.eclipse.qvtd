@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.DomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
@@ -53,7 +54,7 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 
 		public void checkAnalysis(@NonNull Transformation asTransformation, @NonNull RootDomainUsageAnalysis domainAnalysis, boolean showAnalysis) {
 			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation();
-			DirectedDomainUsageAnalysis directedDomainUsageAnalysis = domainAnalysis.createDirectedDomainUsageAnalysis();
+			DirectedDomainUsageAnalysis directedDomainUsageAnalysis = domainAnalysis.createDirectedDomainUsageAnalysis(new TypedModelsConfiguration());	// FIXME proper config
 			directedDomainUsageAnalysis.analyzeTransformation(null);
 			Map<@NonNull DomainUsage, @NonNull List<@NonNull Element>> usage2elements = new HashMap<>();
 			List<@NonNull Operation> operations = new ArrayList<>();

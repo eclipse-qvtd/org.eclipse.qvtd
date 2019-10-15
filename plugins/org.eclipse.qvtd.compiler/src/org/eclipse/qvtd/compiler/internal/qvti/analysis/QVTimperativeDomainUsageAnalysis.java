@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvti.analysis;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -58,8 +59,8 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 {
 	protected static class QVTimperativeDirectedDomainUsageAnalysis extends DirectedDomainUsageAnalysis
 	{
-		public QVTimperativeDirectedDomainUsageAnalysis(@NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis) {
-			super(domainUsageAnalysis);
+		public QVTimperativeDirectedDomainUsageAnalysis(@NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis, @NonNull TypedModelsConfiguration typedModelsConfiguration) {
+			super(domainUsageAnalysis, typedModelsConfiguration);
 		}
 
 		public void analyzeTransformation() {
@@ -97,8 +98,8 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
-	public @NonNull QVTimperativeDirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis() {
-		return new QVTimperativeDirectedDomainUsageAnalysis(this);
+	public @NonNull QVTimperativeDirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis(@NonNull TypedModelsConfiguration typedModelsConfiguration) {
+		return new QVTimperativeDirectedDomainUsageAnalysis(this, typedModelsConfiguration);
 	}
 
 	@Override

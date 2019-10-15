@@ -22,6 +22,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalys
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.BasicScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
+import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -81,6 +82,11 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 		}
 		return null;
 	} */
+
+	@Override
+	protected @NonNull DirectedDomainUsageAnalysis createDirectedDomainUsageAnalysis() {
+		return domainUsageAnalysis.createDirectedDomainUsageAnalysis(typedModelsConfiguration);
+	}
 
 	@Override
 	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {

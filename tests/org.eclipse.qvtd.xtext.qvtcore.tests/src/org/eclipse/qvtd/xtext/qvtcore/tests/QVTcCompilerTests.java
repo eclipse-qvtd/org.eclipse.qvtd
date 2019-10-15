@@ -32,6 +32,7 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
@@ -80,8 +81,8 @@ public class QVTcCompilerTests extends LoadTestCase
 				return new QVTm2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduleManager execute(@NonNull Resource pResource) throws IOException {
-						ScheduleManager scheduleManager = super.execute(pResource);
+					public @NonNull ScheduleManager execute(@NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+						ScheduleManager scheduleManager = super.execute(pResource, typedModelsConfiguration);
 						instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}

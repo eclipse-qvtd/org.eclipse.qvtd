@@ -220,13 +220,13 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			//			QVTm2QVTs.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull ScheduleManager execute(@NonNull Resource pResource) throws IOException {
+		public @NonNull ScheduleManager execute(@NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource sResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
 				Transformation asTransformation = QVTbaseUtil.getTransformation(pResource);
-				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, schedulerOptions);
+				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, typedModelsConfiguration, schedulerOptions);
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
 				scheduleManager.addTransformation(asTransformation);
@@ -515,8 +515,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return qvti2javaCompilerStep.execute(txURI, iTransformation, genModelFiles);
 	}
 
-	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull Resource pResource) throws IOException {
-		ScheduleManager scheduleManager = qvtm2qvtsCompilerStep.execute(pResource);
+	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+		ScheduleManager scheduleManager = qvtm2qvtsCompilerStep.execute(pResource, typedModelsConfiguration);
 		return qvts2qvtiCompilerStep.execute(scheduleManager);
 	}
 

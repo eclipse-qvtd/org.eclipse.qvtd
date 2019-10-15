@@ -70,7 +70,7 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 		typedModelsConfiguration.init(transformation);
 		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, typedModelsConfiguration);
 		Resource pResource = qvtc2qvtm(cResource, typedModelsConfiguration);
-		return qvtm2qvti(pResource);
+		return qvtm2qvti(pResource, typedModelsConfiguration);
 	}
 
 	protected @NonNull Xtext2QVTcCompilerStep createXtext2QVTcCompilerStep() {

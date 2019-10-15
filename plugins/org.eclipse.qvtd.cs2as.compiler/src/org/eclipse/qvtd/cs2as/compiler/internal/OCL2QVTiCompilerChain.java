@@ -127,7 +127,8 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
-		return qvtm2qvti(ocl2qvtmCompilerStep.execute());
+		TypedModelsConfiguration typedModelsConfiguration = typedModelsConfigurations.iterator().next();
+		return qvtm2qvti(ocl2qvtmCompilerStep.execute(), typedModelsConfiguration);
 	}
 
 	public @NonNull ImperativeTransformation compile() throws IOException {
@@ -137,9 +138,9 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	}
 
 	@Override
-	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull Resource pResource) throws IOException {
+	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
 		rewriteSafeNavigations(pResource);
-		return super.qvtm2qvti(pResource);
+		return super.qvtm2qvti(pResource, typedModelsConfiguration);
 	}
 
 	// FIXME this workaround produces a new traversal of the resource

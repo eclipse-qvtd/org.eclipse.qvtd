@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis.DomainUsageConstant;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -35,6 +36,7 @@ import com.google.common.collect.Iterables;
 public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 {
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
+	protected final @NonNull TypedModelsConfiguration typedModelsConfiguration;
 
 	/**
 	 * The properties of the input models that are assigned by mappings and which cannot therefore
@@ -53,8 +55,9 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 	 */
 	private DomainUsageConstant outputUsage = null;
 
-	public DirectedDomainUsageAnalysis(@NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
+	public DirectedDomainUsageAnalysis(@NonNull RootDomainUsageAnalysis domainUsageAnalysis, @NonNull TypedModelsConfiguration typedModelsConfiguration) {
 		this.domainUsageAnalysis = domainUsageAnalysis;
+		this.typedModelsConfiguration = typedModelsConfiguration;
 	}
 
 	protected void addDirtyProperty(@NonNull Property property) {
