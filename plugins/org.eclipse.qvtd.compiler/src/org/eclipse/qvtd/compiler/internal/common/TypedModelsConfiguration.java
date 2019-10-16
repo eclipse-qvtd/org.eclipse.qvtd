@@ -9,6 +9,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelConfiguration.Mode;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -86,8 +87,16 @@ public class TypedModelsConfiguration
 
 	public void addTypedModelConfiguration(@NonNull TypedModelConfiguration typedModelConfiguration) {
 		String name = typedModelConfiguration.getName();
-		TypedModelConfiguration oldTypedModel = this.name2typedModelConfigurations.put(name, typedModelConfiguration);
+		TypedModelConfiguration oldTypedModel = name2typedModelConfigurations.put(name, typedModelConfiguration);
 		assert oldTypedModel == null;
+	}
+
+	public @NonNull Iterable<@NonNull TypedModel> getInputTypedModels() {
+		return inputTypedModels;
+	}
+
+	public @NonNull Iterable<@NonNull TypedModel> getIntermediateTypedModels() {
+		return intermediateTypedModels;
 	}
 
 	public @NonNull Iterable<@NonNull TypedModel> getOutputTypedModels() {
@@ -125,11 +134,16 @@ public class TypedModelsConfiguration
 	 * Returns null if successful, or a new-line-separated concatenation of explanatory error messages if not.
 	 */
 	public @Nullable String reconcile(@NonNull Transformation transformation) {
+		inputTypedModels.clear();			// Allow re-reconcilaiation of QVTc as QVTm
+		intermediateTypedModels.clear();
+		outputTypedModels.clear();
 		Iterable<@NonNull TypedModel> typedModels = QVTbaseUtil.getModelParameters(transformation);
 		for (@NonNull TypedModel typedModel : typedModels) {
 			String name = typedModel.getName();
 			if (!name2typedModelConfigurations.containsKey(name)) {
-				addTypedModelConfiguration(new TypedModelConfiguration(name, TypedModelConfiguration.Mode.CHECK));
+				Mode mode = typedModel.isIsPrimitive() || typedModel.isIsThis() || typedModel.isIsTrace()? TypedModelConfiguration.Mode.INTERMEDIATE : TypedModelConfiguration.Mode.INPUT;
+				TypedModelConfiguration typedModelConfiguration = new TypedModelConfiguration(name, mode);
+				addTypedModelConfiguration(typedModelConfiguration);
 			}
 		}
 		StringBuilder s = null;
@@ -145,10 +159,16 @@ public class TypedModelsConfiguration
 				s.append(s2);
 			}
 			if (typedModelConfiguration.isInput()) {
-				inputTypedModels.add(typedModelConfiguration.getTypedModel());
+				TypedModel typedModel = typedModelConfiguration.basicGetTypedModel();
+				if (typedModel != null) {
+					inputTypedModels.add(typedModel);
+				}
 			}
 			if (typedModelConfiguration.isIntermediate()) {
-				intermediateTypedModels.add(typedModelConfiguration.getTypedModel());
+				TypedModel typedModel = typedModelConfiguration.basicGetTypedModel();
+				if (typedModel != null) {			// Skip QVTc null wrt QVTm middle
+					intermediateTypedModels.add(typedModel);
+				}
 			}
 			if (typedModelConfiguration.isOutput()) {
 				outputTypedModels.add(typedModelConfiguration.getTypedModel());

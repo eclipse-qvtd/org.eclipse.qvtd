@@ -24,9 +24,9 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 public class TypedModelConfiguration //implements Nameable
 {
 	public enum Mode {		// TODO this probably needs elaboration for IN-PLACE etc
-		CHECK,					// Used as input only
+		INPUT,					// Used as input only
 		ENFORCE,				// Used as output only
-		INTERNAL,				// Used to connect internal productions to internal consumptions
+		INTERMEDIATE,			// Used to connect internal productions to internal consumptions
 		REPLACE,				// Used as input to compute a replacement output
 		UPDATE					// Used as input to compute an updated output
 	}
@@ -39,6 +39,10 @@ public class TypedModelConfiguration //implements Nameable
 		this.mode = mode;
 	}
 
+	public @Nullable TypedModel basicGetTypedModel() {
+		return typedModel;
+	}
+
 	public @Nullable String getName() {
 		return name;
 	}
@@ -48,15 +52,15 @@ public class TypedModelConfiguration //implements Nameable
 	}
 
 	public boolean isInput() {
-		return (mode == Mode.CHECK) || (mode == Mode.INTERNAL) || (mode == Mode.REPLACE);
+		return (mode == Mode.INPUT) || /*(mode == Mode.INTERMEDIATE) ||*/ (mode == Mode.REPLACE);
 	}
 
 	public boolean isIntermediate() {
-		return mode == Mode.INTERNAL;
+		return mode == Mode.INTERMEDIATE;
 	}
 
 	public boolean isOutput() {
-		return (mode == Mode.ENFORCE) || (mode == Mode.INTERNAL) || (mode == Mode.REPLACE);
+		return (mode == Mode.ENFORCE) || /*(mode == Mode.INTERMEDIATE) ||*/ (mode == Mode.REPLACE);
 	}
 
 	/**
@@ -65,13 +69,13 @@ public class TypedModelConfiguration //implements Nameable
 	 * Returns null if successful, or an explanatory error message if not.
 	 */
 	public @Nullable String reconcile(@NonNull Iterable<@NonNull TypedModel> typedModels) {
-		assert typedModel == null;
+		//	assert typedModel == null;		// Allow re-reconcilaiation of QVTc as QVTm
 		typedModel = NameUtil.getNameable(typedModels, name);
 		return typedModel != null ? null : "No '" + name + " TypedModel in " + typedModels.iterator().next().getTransformation();
 	}
 
 	@Override
 	public String toString() {
-		return typedModel != null ? typedModel.getName() : name;
+		return "«" + mode + "»" + (typedModel != null ? typedModel.getName() : name);
 	}
 }
