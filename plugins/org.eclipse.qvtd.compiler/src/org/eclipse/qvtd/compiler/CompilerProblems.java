@@ -60,7 +60,11 @@ public class CompilerProblems
 
 	public void throwCompilerChainExceptionForErrors() throws CompilerChainException {
 		if (errors != null) {
-			throw new CompilerChainException("{0}", String.valueOf(errors));
+			StringBuilder s = new StringBuilder();
+			for (@NonNull CompilerProblem error : errors) {
+				s.append("\n" + error);
+			}
+			throw new CompilerChainException("{0}", s.toString());
 		}
 		if (warnings != null) {
 			for (CompilerProblem warning : warnings) {

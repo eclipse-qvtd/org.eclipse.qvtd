@@ -568,7 +568,7 @@ public class QVTbaseUtil extends PivotUtil
 		if (asTransformations.size() == 1) {
 			return asTransformations.get(0);
 		}
-		else if (asTransformations.size() == 1) {
+		else if (asTransformations.size() == 0) {
 			throw new IOException("No Transformation element in " + resource.getURI());
 		}
 		else {

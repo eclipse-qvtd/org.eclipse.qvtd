@@ -79,6 +79,8 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
+import com.google.common.collect.Iterables;
+
 /**
  * The QVTcCompilerChain supports generation of a QVTi Transformation from a QVTc Transformation.
  */
@@ -119,10 +121,15 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
-			for (@NonNull TypedModelsConfiguration typedModelsConfiguration : typedModelsConfigurations) {
-				String s = typedModelsConfiguration.reconcile(asTransformation);
-				if (s != null) {
-					CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent configuration\n" + s);
+			if (Iterables.isEmpty(typedModelsConfigurations)) {
+				CompilerUtil.addTranformationError(this, asTransformation, "No TypedModels configurations");
+			}
+			else {
+				for (@NonNull TypedModelsConfiguration typedModelsConfiguration : typedModelsConfigurations) {
+					String s = typedModelsConfiguration.reconcile(asTransformation);
+					if (s != null) {
+						CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent TypedModels configuration\n" + s);
+					}
 				}
 			}
 			Resource qvtsResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
