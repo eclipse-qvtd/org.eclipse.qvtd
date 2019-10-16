@@ -166,7 +166,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 					};
 				}
 			};
-			ImperativeTransformation qvtiTransf = compiler.compile();
+			ImperativeTransformation qvtiTransf = compiler.compile(OCL2QVTm.RIGHT_MODEL_TYPE_NAME);
 			URI txURI = qvtiTransf.eResource().getURI();
 			if (txURI != null) {
 				URI inputURI = txURI;

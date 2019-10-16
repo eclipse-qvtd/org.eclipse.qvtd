@@ -131,9 +131,9 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 		return qvtm2qvti(ocl2qvtmCompilerStep.execute(), typedModelsConfiguration);
 	}
 
-	public @NonNull ImperativeTransformation compile() throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull String enforcedModelName) throws IOException {
 		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-		typedModelsConfigurations.add(new TypedModelsConfiguration(""));
+		typedModelsConfigurations.add(new TypedModelsConfiguration(enforcedModelName));
 		return compile(typedModelsConfigurations);
 	}
 

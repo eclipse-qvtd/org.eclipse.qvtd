@@ -324,9 +324,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public void analyzeSourceModel(@NonNull ProblemHandler problemHandler) {
 		//		domainUsageAnalysis.analyzeTransformation();	// FIXME just once
-		TypedModelsConfiguration typedModelsConfiguration = getTypedModelsConfiguration();
-		Iterable<@NonNull TypedModel> outputTypedModels = typedModelsConfiguration != null ? typedModelsConfiguration.getOutputTypedModels() : null;
-		getDirectedDomainUsageAnalysis().analyzeTransformation(outputTypedModels);
+		getDirectedDomainUsageAnalysis().analyzeTransformation();
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
 			transformationAnalysis.analyzeSourceModel(problemHandler);
 		}

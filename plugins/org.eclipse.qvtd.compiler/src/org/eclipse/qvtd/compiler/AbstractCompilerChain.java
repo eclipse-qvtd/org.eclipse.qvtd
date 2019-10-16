@@ -231,6 +231,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				Resource sResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
 				Transformation asTransformation = QVTbaseUtil.getTransformation(pResource);
+				typedModelsConfiguration.reconcile(asTransformation);
 				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, typedModelsConfiguration, schedulerOptions);
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
 				sResource.getContents().add(scheduleManager.getScheduleModel());

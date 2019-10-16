@@ -21,17 +21,14 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis.DomainUsageConstant;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
-
-import com.google.common.collect.Iterables;
 
 public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 {
@@ -82,38 +79,25 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 		}
 	}
 
-	public void analyzeTransformation(@Nullable Iterable<@NonNull TypedModel> outputTypedModels) {
-		int unenforceableMask = 0;
-		int enforceableMask = 0;
+	public void analyzeTransformation() {
+		int inputMask = 0;
+		int outputMask = 0;
 		Transformation transformation = domainUsageAnalysis.getTransformation();
 		for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(transformation)) {
-			if (!typedModel.isIsPrimitive()) {
+			if (!typedModel.isIsPrimitive() && !typedModel.isIsThis() && !typedModel.isIsTrace()) {
 				DomainUsage domainUsage = domainUsageAnalysis.getUsage(typedModel);
 				int bitMask = domainUsage.getMask();
-				boolean isEnforceable = false;
-				boolean isUnenforceable = false;
-				for (@NonNull Rule rule : QVTbaseUtil.getRule(transformation)) {
-					for (@NonNull Domain domain : QVTbaseUtil.getOwnedDomains(rule)) {
-						if (domain.getTypedModel() == typedModel) {
-							if (domain.isIsEnforceable() && ((outputTypedModels == null) || Iterables.contains(outputTypedModels, typedModel))) {
-								isEnforceable = true;
-							}
-							else {
-								isUnenforceable = true;
-							}
-						}
-					}
+				TypedModelConfiguration typedModelConfiguration = typedModelsConfiguration.getTypedModelConfiguration(typedModel);
+				if (typedModelConfiguration.isInput()) {
+					inputMask |= bitMask;
 				}
-				if (isEnforceable) {
-					enforceableMask |= bitMask;
-				}
-				if (isUnenforceable) {
-					unenforceableMask |= bitMask;
+				if (typedModelConfiguration.isOutput()) {
+					outputMask |= bitMask;
 				}
 			}
 		}
-		setInputUsage(unenforceableMask);
-		setOutputUsage(enforceableMask);
+		setInputUsage(inputMask);
+		setOutputUsage(outputMask);
 		analyzePropertyAssignments(transformation);
 	}
 

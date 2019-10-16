@@ -52,10 +52,10 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 			super(environmentFactory);
 		}
 
-		public void checkAnalysis(@NonNull Transformation asTransformation, @NonNull RootDomainUsageAnalysis domainAnalysis, boolean showAnalysis) {
+		public void checkAnalysis(@NonNull Transformation asTransformation, @NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull RootDomainUsageAnalysis domainAnalysis, boolean showAnalysis) {
 			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation();
-			DirectedDomainUsageAnalysis directedDomainUsageAnalysis = domainAnalysis.createDirectedDomainUsageAnalysis(new TypedModelsConfiguration());	// FIXME proper config
-			directedDomainUsageAnalysis.analyzeTransformation(null);
+			DirectedDomainUsageAnalysis directedDomainUsageAnalysis = domainAnalysis.createDirectedDomainUsageAnalysis(typedModelsConfiguration);	// FIXME proper config
+			directedDomainUsageAnalysis.analyzeTransformation();
 			Map<@NonNull DomainUsage, @NonNull List<@NonNull Element>> usage2elements = new HashMap<>();
 			List<@NonNull Operation> operations = new ArrayList<>();
 			for (TreeIterator<EObject> tit = asTransformation.eAllContents(); tit.hasNext(); ) {

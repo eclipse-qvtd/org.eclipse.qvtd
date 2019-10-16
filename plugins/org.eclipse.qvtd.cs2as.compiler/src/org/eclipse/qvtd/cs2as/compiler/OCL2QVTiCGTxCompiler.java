@@ -25,6 +25,7 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
+import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTm;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -94,7 +95,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 				}
 			});
 		}
-		return compilerChain.compile();
+		return compilerChain.compile(OCL2QVTm.RIGHT_MODEL_TYPE_NAME);
 	}
 
 	public void setLog(@Nullable Log log) {

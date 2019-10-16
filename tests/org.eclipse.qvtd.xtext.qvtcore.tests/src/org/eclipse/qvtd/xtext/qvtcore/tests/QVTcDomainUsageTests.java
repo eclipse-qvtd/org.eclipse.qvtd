@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
@@ -34,10 +35,12 @@ public class QVTcDomainUsageTests extends AbstractDomainUsageTests
 		return new MyQVT(myEnvironmentFactory);
 	}
 
-	protected void doTest(@NonNull MyQVT myQVT, @NonNull URI transformURI) throws Exception {
+	protected void doTest(@NonNull MyQVT myQVT, @NonNull URI transformURI, @NonNull String enforcedOutputName) throws Exception {
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		QVTcoreDomainUsageAnalysis domainUsageAnalysis = new QVTcoreDomainUsageAnalysis(myQVT.getEnvironmentFactory(), asTransformation);
-		myQVT.checkAnalysis(asTransformation, domainUsageAnalysis, false);
+		TypedModelsConfiguration typedModelsConfiguration = new TypedModelsConfiguration(enforcedOutputName);
+		typedModelsConfiguration.reconcile(asTransformation);
+		myQVT.checkAnalysis(asTransformation, typedModelsConfiguration, domainUsageAnalysis, false);
 	}
 
 	@Override
@@ -50,7 +53,7 @@ public class QVTcDomainUsageTests extends AbstractDomainUsageTests
 	public void testQVTcDomainUsage_uml2rdbms_qvtu() throws Exception {
 		MyQVT myQVT = createQVT();
 		URI transformURI = getModelsURI("misc/uml2rdbms.qvtu.qvtc");
-		doTest(myQVT, transformURI);
+		doTest(myQVT, transformURI, "rdbms");
 		myQVT.dispose();
 	}
 }
