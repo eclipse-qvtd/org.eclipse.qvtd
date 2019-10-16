@@ -1487,6 +1487,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			txExecutor1.addOutputURI("family", getTestURI("MultiFamiliesChildren-CG.xmi"));
 			txExecutor1.saveModels(null);
 			myQVT2.checkOutput(getTestURI("MultiFamiliesChildren-CG.xmi"), getModelsURI("persons2families/samples/MultiFamiliesChildren.xmi"), Persons2FamiliesNormalizer.INSTANCE);
+			myQVT2.loadEPackage(txClass, "Families.FamiliesPackage");
+			myQVT2.loadEPackage(txClass, "Persons.PersonsPackage");
+			myQVT2.loadEPackage(txClass, "trace_Persons2Families.trace_Persons2FamiliesPackage");
+			//
 
 			//	myQVT2.removeResources();  -- re-using an executor is very dubious until  we reliably support update executions for which
 			//  we surely update rather than clean and re-use?
@@ -1572,6 +1576,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
+			//
+			myQVT2.loadEPackage(txClass, "Families.FamiliesPackage");
+			myQVT2.loadEPackage(txClass, "Persons.PersonsPackage");
+			myQVT2.loadEPackage(txClass, "FamilyPlans.FamilyPlansPackage");
+			myQVT2.loadEPackage(txClass, "trace_Persons2FamilyPlans.trace_Persons2FamilyPlansPackage");
 			//
 			TransformationExecutor txExecutor1 = myQVT2.createGeneratedExecutor(txClass);
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);

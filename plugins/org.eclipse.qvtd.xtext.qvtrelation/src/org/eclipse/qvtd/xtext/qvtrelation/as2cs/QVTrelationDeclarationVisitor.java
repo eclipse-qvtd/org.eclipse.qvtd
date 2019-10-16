@@ -356,19 +356,19 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	@Override
 	public ElementCS visitDomainPattern(@NonNull DomainPattern asDomainPattern) {
 		TypedModel asTypedModel = QVTrelationUtil.getContainingDomain(asDomainPattern).getTypedModel();
-		if (asTypedModel != null) {
-			DomainPatternCS csDomainPattern = context.refreshElement(DomainPatternCS.class, QVTrelationCSPackage.Literals.DOMAIN_PATTERN_CS, asDomainPattern);
-			csDomainPattern.setPivot(asDomainPattern);
-			csDomainPattern.setOwnedTemplate(context.visitDeclaration(TemplateCS.class, asDomainPattern.getTemplateExpression()));
-			return csDomainPattern;
-		}
-		else {
+		if ((asTypedModel == null) || asTypedModel.isIsPrimitive()) {
 			PrimitiveTypeDomainPatternCS csDomainPattern = context.refreshElement(PrimitiveTypeDomainPatternCS.class, QVTrelationCSPackage.Literals.PRIMITIVE_TYPE_DOMAIN_PATTERN_CS, asDomainPattern);
 			csDomainPattern.setPivot(asDomainPattern);
 			TemplateExp templateExpression = asDomainPattern.getTemplateExpression();
 			VariableDeclaration rootVariable = templateExpression.getBindsTo();
 			csDomainPattern.setName(rootVariable.getName());
 			csDomainPattern.setOwnedType(createTypeRefCS(rootVariable, true));
+			return csDomainPattern;
+		}
+		else {
+			DomainPatternCS csDomainPattern = context.refreshElement(DomainPatternCS.class, QVTrelationCSPackage.Literals.DOMAIN_PATTERN_CS, asDomainPattern);
+			csDomainPattern.setPivot(asDomainPattern);
+			csDomainPattern.setOwnedTemplate(context.visitDeclaration(TemplateCS.class, asDomainPattern.getTemplateExpression()));
 			return csDomainPattern;
 		}
 	}
@@ -579,7 +579,13 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	@Override
 	public ElementCS visitRelationDomain(@NonNull RelationDomain asRelationDomain) {
 		TypedModel asTypedModel = asRelationDomain.getTypedModel();
-		if (asTypedModel != null) {
+		if ((asTypedModel == null) || asTypedModel.isIsPrimitive()) {
+			PrimitiveTypeDomainCS csDomain = context.refreshElement(PrimitiveTypeDomainCS.class, QVTrelationCSPackage.Literals.PRIMITIVE_TYPE_DOMAIN_CS, asRelationDomain);
+			csDomain.setPivot(asRelationDomain);
+			context.refreshList(csDomain.getOwnedPatterns(), context.visitDeclarations(PrimitiveTypeDomainPatternCS.class, asRelationDomain.getPattern(), null));
+			return csDomain;
+		}
+		else {
 			DomainCS csDomain = context.refreshElement(DomainCS.class, QVTrelationCSPackage.Literals.DOMAIN_CS, asRelationDomain);
 			csDomain.setPivot(asRelationDomain);
 			csDomain.setModelId(asTypedModel);
@@ -590,12 +596,6 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 			context.refreshList(csDomain.getOwnedPatterns(), context.visitDeclarations(DomainPatternCS.class, asRelationDomain.getPattern(), null));
 			context.refreshList(csDomain.getOwnedDefaultValues(), context.visitDeclarations(DefaultValueCS.class, asRelationDomain.getDefaultAssignment(), null));
 			//		context.refreshList(csDomain.getOwnedImplementedBy(), context.visitDeclarations(ExpCS.class, asRelationDomain.getImplementedBy(), null));
-			return csDomain;
-		}
-		else {
-			PrimitiveTypeDomainCS csDomain = context.refreshElement(PrimitiveTypeDomainCS.class, QVTrelationCSPackage.Literals.PRIMITIVE_TYPE_DOMAIN_CS, asRelationDomain);
-			csDomain.setPivot(asRelationDomain);
-			context.refreshList(csDomain.getOwnedPatterns(), context.visitDeclarations(PrimitiveTypeDomainPatternCS.class, asRelationDomain.getPattern(), null));
 			return csDomain;
 		}
 	}
