@@ -727,4 +727,9 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	public Element getReferredElement() {
 		return getTypedModel();
 	}
+
+	@Override
+	public boolean isNotOutput() {
+		return !isCheckable && !isEnforceable;
+	}
 } //DomainImpl

@@ -123,11 +123,11 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 
 	@Override
 	public String visitRelationDomain(@NonNull RelationDomain object) {
-		if (object.isIsCheckable()) {
-			append("check ");
-		}
 		if (object.isIsEnforceable()) {
 			append("enforce ");
+		}
+		else if (object.isIsCheckable()) {
+			append("check ");
 		}
 		append("domain ");
 		appendName(object);

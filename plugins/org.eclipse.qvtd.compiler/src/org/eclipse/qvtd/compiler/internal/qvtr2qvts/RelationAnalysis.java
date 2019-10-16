@@ -482,7 +482,7 @@ public class RelationAnalysis extends RuleAnalysis
 		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
 		for (@NonNull TypedModel typedModel : getScheduleManager().getTypedModelsConfiguration().getOutputTypedModels()) {
 			Domain domain = QVTrelationUtil.basicGetDomain(relation, typedModel);
-			if ((domain != null) && !domain.isIsEnforceable()) {
+			if ((domain != null) && domain.isNotOutput()) {
 				CompilerUtil.addRuleError(problemHandler, relation, "domain ''{0}'' cannot be an output", typedModel.getName());
 			}
 		}

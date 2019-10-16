@@ -144,11 +144,11 @@ public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 
 	protected String text(RelationDomain ele) {
 		StringBuilder s = new StringBuilder();
-		if (ele.isIsCheckable()) {
-			s.append("«checkable» ");
-		}
 		if (ele.isIsEnforceable()) {
 			s.append("«enforceable» ");
+		}
+		else if (ele.isIsCheckable()) {
+			s.append("«checkable» ");
 		}
 		appendName(s, ele);
 		return s.toString();

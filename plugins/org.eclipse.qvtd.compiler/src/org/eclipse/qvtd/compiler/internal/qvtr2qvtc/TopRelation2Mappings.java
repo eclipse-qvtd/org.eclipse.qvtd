@@ -163,7 +163,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 	@Override
 	public void analyze() throws CompilerChainException {
 		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
-			if (rDomain.isIsEnforceable()) {
+			if (!rDomain.isNotOutput()) {
 				String coreMappingName = qvtr2qvtc.getNameGenerator().createMappingName(rDomain);
 				addTopRelationDomain2coreMapping(new TopEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 			}

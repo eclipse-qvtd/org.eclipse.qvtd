@@ -467,7 +467,7 @@ public class QVTbaseUtil extends PivotUtil
 			for (Domain domain : rule.getDomain()) {
 				TypedModel typedModel = domain.getTypedModel();
 				assert typedModel != null;
-				if (domain.isIsEnforceable()) {
+				if (domain.isNotOutput()) {
 					enforceableTypedModels.add(typedModel);
 				}
 				else {

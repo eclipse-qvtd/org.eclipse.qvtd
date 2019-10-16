@@ -373,7 +373,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			dOut.setName(name);			// Redundant replication of Epsilon prototype functionality
 
 			if (typedModelsConfiguration.isOutput(typedModel)) {
-				if (!dIn.isIsEnforceable()) {
+				if (dIn.isNotOutput()) {
 					CompilerUtil.addRuleError(problemHandler, QVTcoreUtil.getContainingRule(dIn), "domain ''{0}'' cannot be an output", typedModel.getName());
 				}
 			}
@@ -635,7 +635,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 				domain2mode.put((CoreDomain)domain, DomainMode.INPUT);
 			}
 			else if (typedModelsConfiguration.isIntermediate(typedModel) || typedModelsConfiguration.isOutput(typedModel)) {
-				if (!domain.isIsEnforceable()) {
+				if (domain.isNotOutput()) {
 					return null;
 				}
 				mergedMode = mergedMode.asOutput();

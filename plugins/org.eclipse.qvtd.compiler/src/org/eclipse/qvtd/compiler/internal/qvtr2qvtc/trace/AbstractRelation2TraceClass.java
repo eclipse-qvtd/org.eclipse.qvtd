@@ -370,7 +370,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleType i
 
 	private boolean hasMultiObjectMatches() {
 		for (RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-			if (!relationDomain.isIsEnforceable()) {
+			if (relationDomain.isNotOutput()) {
 				for (EObject eObject : new TreeIterable(relationDomain, true)) {
 					if (eObject instanceof PropertyTemplateItem) {
 						Property referredProperty = QVTrelationUtil.getReferredProperty((PropertyTemplateItem)eObject);

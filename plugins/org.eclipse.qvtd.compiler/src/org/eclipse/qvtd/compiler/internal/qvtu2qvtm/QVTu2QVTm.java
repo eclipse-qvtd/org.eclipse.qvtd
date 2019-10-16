@@ -478,7 +478,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				}
 			}
 			mDomain.setIsCheckable(isCheckable);
-			mDomain.setIsEnforceable(isEnforceable);
+			mDomain.setIsEnforceable(isEnforceable);		// FIXME || isCheckable
 			synthesize(mMapping, mDomain);
 			return mDomain;
 		}

@@ -219,4 +219,8 @@ public interface Domain extends NamedElement, ReferringElement {
 	 */
 	boolean validateTypedModelIsTransformationModelParameter(DiagnosticChain diagnostics, Map<Object, Object> context);
 
+	/**
+	 * Return true if this domain cannot be an output. i.e. it is not checkable and is not enforceable.
+	 */
+	boolean isNotOutput();
 } // Domain

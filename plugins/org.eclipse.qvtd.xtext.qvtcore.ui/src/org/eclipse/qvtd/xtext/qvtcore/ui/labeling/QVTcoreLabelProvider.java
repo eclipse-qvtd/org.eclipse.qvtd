@@ -109,11 +109,11 @@ public class QVTcoreLabelProvider extends QVTbaseLabelProvider
 
 	protected String text(CoreDomain ele) {
 		StringBuilder s = new StringBuilder();
-		if (ele.isIsCheckable()) {
-			s.append("«checkable» ");
-		}
 		if (ele.isIsEnforceable()) {
 			s.append("«enforceable» ");
+		}
+		else if (ele.isIsCheckable()) {
+			s.append("«checkable» ");
 		}
 		appendName(s, ele);
 		return s.toString();

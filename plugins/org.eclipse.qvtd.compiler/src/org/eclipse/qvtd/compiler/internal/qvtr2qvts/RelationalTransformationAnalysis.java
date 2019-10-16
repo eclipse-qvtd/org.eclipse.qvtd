@@ -64,7 +64,7 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 			boolean isExecutable = true;
 			for (@NonNull TypedModel typedModel : typedModelsConfiguration.getOutputTypedModels()) {
 				Domain domain = QVTrelationUtil.basicGetDomain(asRule, typedModel);
-				if ((domain != null) && !domain.isIsEnforceable()) {
+				if ((domain != null) && domain.isNotOutput()) {
 					isExecutable = false;
 				}
 			}

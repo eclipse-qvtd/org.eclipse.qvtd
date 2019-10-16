@@ -150,7 +150,7 @@ import com.google.common.collect.Iterables;
 		if (hasWhereInvocation) {
 			QVTr2QVTc.SYNTHESIS.println("invocation of where " + rRelation);
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
-				if (rDomain.isIsEnforceable()) {
+				if (!rDomain.isNotOutput()) {
 					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhereMappingClassName(rDomain, null);
 					addWhereRelationDomain2coreMapping(new WheredEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 				}
@@ -159,7 +159,7 @@ import com.google.common.collect.Iterables;
 		else if (hasWhenInvocation) {
 			QVTr2QVTc.SYNTHESIS.println("invocation of when " + rRelation);
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
-				if (rDomain.isIsEnforceable()) {
+				if (!rDomain.isNotOutput()) {
 					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhenMappingClassName(rDomain, null);
 					addWhenRelationDomain2coreMapping(new WhenedEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 				}

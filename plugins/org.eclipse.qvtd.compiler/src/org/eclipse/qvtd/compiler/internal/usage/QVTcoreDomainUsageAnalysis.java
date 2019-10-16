@@ -117,7 +117,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		else if (area instanceof Mapping) {
 			DomainUsage inputUsage = getNoneUsage();
 			for (Domain domain : ((Mapping)area).getDomain()) {
-				if (!domain.isIsEnforceable()) {
+				if (domain.isNotOutput()) {
 					inputUsage = union(inputUsage, getUsage(domain));
 				}
 			}
