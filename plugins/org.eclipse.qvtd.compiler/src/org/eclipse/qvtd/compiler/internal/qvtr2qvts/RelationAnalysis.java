@@ -78,7 +78,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -367,7 +366,7 @@ public class RelationAnalysis extends RuleAnalysis
 		else {
 			// Prefer the root nodes of input domains as head nodes.
 			for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-				if (scheduleManager.isInput(relationDomain)) {
+				if (getScheduleManager().isInputInRule(relation, relationDomain)) {
 					for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
 						Node rootNode = region.getNode(rootVariable);
 						if (rootNode != null) {
@@ -490,6 +489,7 @@ public class RelationAnalysis extends RuleAnalysis
 
 	@Override
 	public void analyzeSourceModel(@NonNull ProblemHandler problemHandler) {
+		QVTrelationDirectedScheduleManager scheduleManager = getScheduleManager();
 		Relation relation = getRule();
 		variable2templateExp = analyzeVariable2TemplateExp();
 		Set<@NonNull VariableDeclaration> topWhenedOutputVariables2 = topWhenedOutputVariables = new HashSet<>();
@@ -498,8 +498,7 @@ public class RelationAnalysis extends RuleAnalysis
 		Set<@NonNull VariableDeclaration> keyedOutputVariables = this.keyedOutputVariables = new HashSet<>();
 		Set<@NonNull VariableDeclaration> realizedOutputVariables = this.realizedOutputVariables = new HashSet<>();
 		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-			DomainUsage domainUsage = scheduleManager.getDomainUsage(relationDomain);
-			if (scheduleManager.isOutput(domainUsage)) {
+			if (scheduleManager.isOutputInRule(relation, relationDomain)) {
 				//	assert keyedOutputVariables == null;	-- The assumption of a single output domain does not seem to  be justified
 				analyzeKeyedOutputVariables(relationDomain, keyedOutputVariables);
 				//	assert realizedOutputVariables == null;	-- The assumption of a single output domain does not seem to  be justified
@@ -563,6 +562,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	protected void analyzeWhenedOutputVariables(@NonNull Set<@NonNull VariableDeclaration> topWhenedOutputVariables, @NonNull Set<@NonNull VariableDeclaration> nonTopWhenedOutputVariables) {
+		QVTrelationDirectedScheduleManager scheduleManager = getScheduleManager();
 		Relation relation = getRule();
 		Pattern whenPattern = relation.getWhen();
 		if (whenPattern != null) {
@@ -576,8 +576,7 @@ public class RelationAnalysis extends RuleAnalysis
 							int argumentIndex = invocation.getArgument().indexOf(variableExp);
 							assert argumentIndex >= 0;
 							RelationDomain domain = QVTrelationUtil.getRelationCallExpArgumentDomain(invocation, argumentIndex);
-							DomainUsage domainUsage = scheduleManager.getDomainUsage(domain);
-							if (scheduleManager.isOutput(domainUsage)) {
+							if (scheduleManager.isOutputInRule(QVTrelationUtil.getReferredRelation(invocation), domain)) {
 								if (invocation.getReferredRelation().isIsTopLevel()) {
 									topWhenedOutputVariables.add(QVTrelationUtil.getReferredVariable(variableExp));
 								}
@@ -1023,7 +1022,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	public void synthesizeCollectionTemplate(@NonNull CollectionTemplateExp collectionTemplateExp) {
-		boolean isOutput = scheduleManager.isOutput(scheduleManager.getDomainUsage(collectionTemplateExp));
+		boolean isOutput = scheduleManager.isOutputInRule(QVTrelationUtil.getContainingRule(collectionTemplateExp), collectionTemplateExp);
 		if (isOutput) {
 			synthesizeOutputCollectionTemplate(collectionTemplateExp);
 		}
@@ -1282,7 +1281,7 @@ public class RelationAnalysis extends RuleAnalysis
 			Node targetNode = region.getNode(targetVariable);
 			if (targetNode != null) {
 				boolean isPartial = scheduleManager.computeIsPartial(targetNode, source2targetProperty);
-				if (scheduleManager.isOutput(scheduleManager.getDomainUsage(sourceVariable)) /*&& !propertyTemplateItem.isCheckOnly()*/) {
+				if (scheduleManager.isOutputInRule(QVTrelationUtil.getContainingRule(propertyTemplateItem), sourceVariable) /*&& !propertyTemplateItem.isCheckOnly()*/) {
 					createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 				}
 				else {
@@ -1293,7 +1292,7 @@ public class RelationAnalysis extends RuleAnalysis
 		else {
 			Node targetNode = expressionSynthesizer.synthesize(targetExpression);
 			boolean isPartial = scheduleManager.computeIsPartial(targetNode, source2targetProperty);
-			if (scheduleManager.isOutput(scheduleManager.getDomainUsage(sourceVariable)) /*&& !propertyTemplateItem.isCheckOnly()*/) {
+			if (scheduleManager.isOutputInRule(QVTbaseUtil.getContainingRule(sourceVariable), sourceVariable) /*&& !propertyTemplateItem.isCheckOnly()*/) {
 				createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 			}
 			else {
@@ -1463,8 +1462,9 @@ public class RelationAnalysis extends RuleAnalysis
 	} */
 
 	protected void synthesizePredicate(@NonNull OCLExpression predicateExpression) {
+		QVTrelationDirectedScheduleManager scheduleManager = getScheduleManager();
 		Domain asDomain = QVTrelationUtil.basicGetContainingDomain(predicateExpression);
-		if ((asDomain != null) && scheduleManager.isOutput(asDomain)) {
+		if ((asDomain != null) && scheduleManager.isOutputInRule(QVTrelationUtil.getContainingRule(asDomain), asDomain)) {
 			return;
 		}
 		if (synthesizeEqualsPredicate(predicateExpression)) {
@@ -1580,7 +1580,7 @@ public class RelationAnalysis extends RuleAnalysis
 			//			Relation2TraceClass rule2traceClass = getRule2TraceGroup().getRule2TraceClass();
 			Relation baseRelation = baseRelation2traceGroup.getRule();
 			for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-				Boolean isInput = getScheduleManager().isInput(relationDomain) || !relation.isIsTopLevel();
+				Boolean isInput = getScheduleManager().isInputInRule(relation, relationDomain) || !relation.isIsTopLevel();
 				for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
 					VariableDeclaration baseRootVariable = QVTrelationUtil.getOverriddenVariable(baseRelation, rootVariable);
 					VariableDeclaration2TraceProperty overriddenVariableDeclaration2traceProperty = rule2dispatchClass.getVariableDeclaration2TraceProperty(baseRootVariable);

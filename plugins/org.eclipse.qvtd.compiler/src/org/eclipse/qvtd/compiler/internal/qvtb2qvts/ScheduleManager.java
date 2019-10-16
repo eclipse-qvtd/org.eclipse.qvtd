@@ -144,6 +144,7 @@ public interface ScheduleManager
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
 	@NonNull ClassDatum getTransformationTraceClassDatum(@NonNull Transformation transformation);
 	@NonNull Transformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation);
+	//	@NonNull TypedModelsConfiguration getTypedModelsConfiguration();
 
 	/**
 	 * Return true if a mapping may assign this property in an input model.
@@ -156,11 +157,24 @@ public interface ScheduleManager
 	boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge);
 
 	/**
-	 * Return true if domain is an input domain.
+	 * Return true if domainUsage's typed model is configured as an input (and possibly an input+output).
 	 */
 	boolean isInput(@NonNull DomainUsage domainUsage);
-	boolean isInput(@NonNull Element element);
+
+	/**
+	 * Return true if node is part of an input domain of its region.
+	 */
 	boolean isInput(@NonNull Node node);
+
+	/**
+	 * Return true if typedModel is configured as an input (and possibly an input+output).
+	 */
+	boolean isInput(@NonNull TypedModel typedModel);
+
+	/**
+	 * Return true if element is part of an input domain of rule.
+	 */
+	boolean isInputInRule(@NonNull Rule rule, @NonNull Element element);
 
 	/**
 	 * Return true if node is part of the middle (traced) domain.
@@ -171,11 +185,24 @@ public interface ScheduleManager
 	boolean isNoLateConsumerMerge();
 
 	/**
-	 * Return true if domain is an output domain.
+	 * Return true if domainUsage's typed model is configured as an output (and possibly an input+output).
 	 */
 	boolean isOutput(@NonNull DomainUsage domainUsage);
-	boolean isOutput(@NonNull Element element);
+
+	/**
+	 * Return true if node is part of an output domain of its region.
+	 */
 	boolean isOutput(@NonNull Node node);
+
+	/**
+	 * Return true if typedModel is configured as a output ( and possibly an input+output);.
+	 */
+	boolean isOutput(@NonNull TypedModel typedModel);
+
+	/**
+	 * Return true if element is part of an output domain of rule.
+	 */
+	boolean isOutputInRule(@NonNull Rule rule, @NonNull Element element);
 
 	/**
 	 * Return true if multiple trace class prodicers should be discrimated to enabale manually designed trace classes to

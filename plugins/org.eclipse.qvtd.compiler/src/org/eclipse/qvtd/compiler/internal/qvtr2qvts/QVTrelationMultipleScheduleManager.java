@@ -162,6 +162,11 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
+	protected @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public boolean needsDiscrimination() {
 		return false;			// FIXME Bug 488647 discriminate cyclic QVTr output classes too
 	}

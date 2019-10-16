@@ -42,6 +42,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
@@ -691,7 +692,7 @@ public class MappingAnalysis extends RuleAnalysis
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
 					DomainUsage domainUsage = scheduleManager.getDomainUsage(variable);
-					boolean isEnforceable = scheduleManager.isOutput(domainUsage) || domainUsage.isMiddle();
+					boolean isEnforceable = scheduleManager.isOutputInRule(QVTbaseUtil.getContainingRule(variable), variable) || domainUsage.isMiddle();
 					if (isEnforceable) {
 						//						assert variable instanceof RealizedVariable;
 						if (!(variable instanceof RealizedVariable)) {

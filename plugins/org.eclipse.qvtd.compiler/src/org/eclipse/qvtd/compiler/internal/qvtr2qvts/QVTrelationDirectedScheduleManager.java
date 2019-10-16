@@ -146,11 +146,6 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	protected @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
-		return typedModelsConfiguration;
-	}
-
-	@Override
 	public @NonNull RelationAnalysis getRuleAnalysis(@NonNull Rule relation) {
 		return (RelationAnalysis) super.getRuleAnalysis(relation);
 	}
@@ -173,6 +168,11 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull Transformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation) {
 		return multipleScheduleManager.getTransformation2TracePackage(transformation);
+	}
+
+	@Override
+	protected @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
+		return typedModelsConfiguration;
 	}
 
 	@Override

@@ -884,9 +884,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	//		return transformationAnalysis2tracePackage;
 	//	}
 
-	protected @Nullable TypedModelsConfiguration getTypedModelsConfiguration() {		// FIXME Eliminate me
-		return null;
-	}
+	protected abstract @NonNull TypedModelsConfiguration getTypedModelsConfiguration();		// FIXME Eliminate me
 
 	@Override
 	public boolean isDirty(@NonNull Property property) {
@@ -921,9 +919,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public boolean isInput(@NonNull Element element) {
-		DomainUsage domainUsage = getDomainUsage(element);
-		return getDirectedDomainUsageAnalysis().isInput(domainUsage);
+	public boolean isInput(@NonNull TypedModel typedModel) {
+		return getTypedModelsConfiguration().isInput(typedModel);
 	}
 
 	@Override
@@ -931,6 +928,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 		DomainUsage domainUsage = getDomainUsage(classDatum);
 		return getDirectedDomainUsageAnalysis().isOutput(domainUsage);
+	}
+
+	@Override
+	public boolean isInputInRule(@NonNull Rule rule, @NonNull Element element) {
+		return getDirectedDomainUsageAnalysis().isInputInRule(rule, element);
 	}
 
 	@Override
@@ -962,9 +964,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		if (sourceVariable.eContainer() == null) {		// Synthetic variable
 			return false;
 		}
-		DomainUsage usage = getDomainUsage(sourceVariable);
-		assert usage != null;
-		return !isOutput(usage);
+		//		DomainUsage usage = getDomainUsage(sourceVariable);
+		//		assert usage != null;
+		return !isOutputInRule(QVTbaseUtil.getContainingRule(sourceVariable), sourceVariable);
 	}
 
 	@Override
@@ -973,9 +975,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public boolean isOutput(@NonNull Element element) {
-		DomainUsage domainUsage = getDomainUsage(element);
-		return getDirectedDomainUsageAnalysis().isOutput(domainUsage);
+	public boolean isOutput(@NonNull TypedModel typedModel) {
+		return getTypedModelsConfiguration().isOutput(typedModel);
 	}
 
 	@Override
@@ -983,6 +984,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 		DomainUsage domainUsage = getDomainUsage(classDatum);
 		return getDirectedDomainUsageAnalysis().isOutput(domainUsage);
+	}
+
+	@Override
+	public boolean isOutputInRule(@NonNull Rule rule, @NonNull Element element) {
+		return getDirectedDomainUsageAnalysis().isOutputInRule(rule, element);
 	}
 
 	@Override

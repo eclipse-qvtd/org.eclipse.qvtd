@@ -486,11 +486,18 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	}
 
 	public @NonNull VariableNode createOldNode(@NonNull VariableDeclaration variable) {
-		ClassDatum classDatum = scheduleManager.getClassDatum(variable);
+		Role nodeRole;
 		boolean isThis = QVTbaseUtil.isThis(variable);
-		DomainUsage domainUsage = scheduleManager.getDomainUsage(variable);
-		boolean isEnforceable = !isThis && (scheduleManager.isOutput(domainUsage) || domainUsage.isMiddle());
-		Role nodeRole = isEnforceable ? Role.PREDICATED : Role.LOADED;
+		if (isThis) {
+			nodeRole = Role.LOADED;
+		}
+		else if (scheduleManager.isInput(scheduleManager.getDomainUsage(variable))) {
+			nodeRole = Role.LOADED;
+		}
+		else {
+			nodeRole = Role.PREDICATED;
+		}
+		ClassDatum classDatum = scheduleManager.getClassDatum(variable);
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(nodeRole, region, getName(variable), classDatum);
 		node.initializeVariable(region, variable);
@@ -704,7 +711,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 
 	public @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isMatched) {
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(callExp);
-		boolean isMiddleOrOutput = scheduleManager.isOutput(domainUsage) || domainUsage.isMiddle();
+		boolean isMiddleOrOutput = scheduleManager.isOutputInRule(QVTbaseUtil.getContainingRule(callExp), callExp) || domainUsage.isMiddle();
 		boolean isDirty = false;
 		if (callExp instanceof NavigationCallExp) {
 			Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);

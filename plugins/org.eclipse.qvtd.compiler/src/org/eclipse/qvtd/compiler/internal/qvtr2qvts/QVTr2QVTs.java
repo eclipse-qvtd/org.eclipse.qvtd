@@ -334,7 +334,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public Element visitRelationDomain(@NonNull RelationDomain rdIn) {
-			if (scheduleManager.isOutput(rdIn)) {
+			if (scheduleManager.isOutputInRule(QVTrelationUtil.getContainingRule(rdIn), rdIn)) {
 				acceptAll(QVTrelationUtil.getDefaultAssignments(rdIn));
 			}
 			acceptAll(QVTrelationUtil.getOwnedPatterns(rdIn));

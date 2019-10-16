@@ -104,7 +104,7 @@ public class RelationDispatchAnalysis extends RegionHelper<@NonNull RuleRegion>
 		Relation2TraceGroup rule2traceGroup = relationAnalysis.getRule2TraceGroup();
 		Relation2DispatchClass rule2dispatchClass = rule2traceGroup.getRule2DispatchClass();
 		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-			if (scheduleManager.isInput(relationDomain)) {
+			if (scheduleManager.isInputInRule(relation, relationDomain)) {
 				for (@NonNull VariableDeclaration variable : QVTrelationUtil.getRootVariables(relationDomain)) {
 					VariableDeclaration2TraceProperty variableDeclaration2traceClassProperty = rule2dispatchClass.getVariableDeclaration2TraceProperty(variable);
 					//						VariableDeclaration2TraceProperty variableDeclaration2traceInterfaceProperty = rule2traceInterface.getVariableDeclaration2TraceProperty(variable);

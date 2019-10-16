@@ -27,8 +27,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * An InvocationAnalysis identifies the invocation of one Relation from another.
@@ -70,9 +68,9 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 			assert argumentNode != null;
 			VariableDeclaration overriddenRootVariable = QVTrelationUtil.getOverriddenVariable(baseInvokedRelation, rootVariable);
 			Property invocationProperty = baseInvokedRule2MiddleType.getTraceProperty(overriddenRootVariable);
-			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(argumentNode);
-			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
-			if (scheduleManager.isOutput(domainUsage)) {
+			//			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(argumentNode);
+			//			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
+			if (scheduleManager.isOutput(argumentNode)) {
 				createOutputEdge(invokedNode, invocationProperty, argumentNode);
 			}
 			else {

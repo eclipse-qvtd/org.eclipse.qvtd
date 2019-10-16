@@ -163,6 +163,24 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		}
 	}
 
+	protected static class PrimitiveTypeDomainContentContinuation extends SingleContinuation<PrimitiveTypeDomainCS>
+	{
+		private PrimitiveTypeDomainContentContinuation(@NonNull CS2ASConversion context, @NonNull PrimitiveTypeDomainCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			RelationDomain asDomain = PivotUtil.getPivot(RelationDomain.class, csElement);
+			if (asDomain != null) {
+				RelationalTransformation asTransformation = QVTrelationUtil.getContainingTransformation(asDomain);
+				TypedModel asTypedModel = QVTbaseUtil.basicGetPrimitiveTypedModel(asTransformation);
+				asDomain.setTypedModel(asTypedModel);
+			}
+			return null;
+		}
+	}
+
 	/**
 	 * Return the name referenced by an element template, null for a dummy variable.
 	 */
@@ -442,7 +460,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		else {
 			pivotElement.getRootVariable().clear();
 		}
-		return null;
+		return new PrimitiveTypeDomainContentContinuation(context, csElement);
 	}
 
 	@Override

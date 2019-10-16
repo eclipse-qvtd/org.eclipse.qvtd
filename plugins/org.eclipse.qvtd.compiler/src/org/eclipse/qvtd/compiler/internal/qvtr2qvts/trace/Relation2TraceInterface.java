@@ -60,7 +60,7 @@ public class Relation2TraceInterface extends AbstractRelation2MiddleType
 		//
 		//	QVTrelationNameGenerator nameGenerator = relation2traceGroup.getNameGenerator();
 		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-			if (ruleAnalysis.getScheduleManager().isOutput(relationDomain)) {
+			if (ruleAnalysis.getScheduleManager().isOutputInRule(relation, relationDomain)) {
 				createRelation2GlobalSuccessProperty();//, nameGenerator.createTraceGlobalSuccessPropertyName(typedModel));
 			}
 		}
