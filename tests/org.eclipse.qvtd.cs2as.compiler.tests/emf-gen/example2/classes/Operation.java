@@ -44,7 +44,6 @@ public interface Operation extends NamedElement, TypedElement {
 	 * @return the value of the '<em>Owned Parameters</em>' containment reference list.
 	 * @see example2.classes.ClassesPackage#getOperation_OwnedParameters()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Operation!ownedParameters'"
 	 * @generated
 	 */
 	EList<Parameter> getOwnedParameters();
@@ -61,7 +60,6 @@ public interface Operation extends NamedElement, TypedElement {
 	 * @return the value of the '<em>Owned Expressions</em>' containment reference list.
 	 * @see example2.classes.ClassesPackage#getOperation_OwnedExpressions()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Operation!ownedExpressions'"
 	 * @generated
 	 */
 	EList<CallExp> getOwnedExpressions();

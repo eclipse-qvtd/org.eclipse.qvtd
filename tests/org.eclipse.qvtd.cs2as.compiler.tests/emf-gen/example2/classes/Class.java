@@ -44,7 +44,7 @@ public interface Class extends NamedElement {
 	 * @return the value of the '<em>Super Class</em>' reference.
 	 * @see #setSuperClass(Class)
 	 * @see example2.classes.ClassesPackage#getClass_SuperClass()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Class!superClass'"
+	 * @model
 	 * @generated
 	 */
 	Class getSuperClass();
@@ -71,7 +71,6 @@ public interface Class extends NamedElement {
 	 * @return the value of the '<em>Owned Operations</em>' containment reference list.
 	 * @see example2.classes.ClassesPackage#getClass_OwnedOperations()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Class!ownedOperations'"
 	 * @generated
 	 */
 	EList<Operation> getOwnedOperations();
@@ -88,7 +87,6 @@ public interface Class extends NamedElement {
 	 * @return the value of the '<em>Owned Properties</em>' containment reference list.
 	 * @see example2.classes.ClassesPackage#getClass_OwnedProperties()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Class!ownedProperties'"
 	 * @generated
 	 */
 	EList<Property> getOwnedProperties();

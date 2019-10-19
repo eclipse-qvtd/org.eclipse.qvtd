@@ -48,7 +48,6 @@ public interface D extends NamedElement {
 	 * @see example1.target.TargetPackage#getD_ToC()
 	 * @see example1.target.C#getOwnsD
 	 * @model opposite="ownsD" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example1/targetMM/1.0!D!toC'"
 	 * @generated
 	 */
 	C getToC();
@@ -77,7 +76,6 @@ public interface D extends NamedElement {
 	 * @see example1.target.TargetPackage#getD_ToB()
 	 * @see example1.target.B#getOwnsD
 	 * @model opposite="ownsD" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example1/targetMM/1.0!D!toB'"
 	 * @generated
 	 */
 	B getToB();
@@ -104,7 +102,6 @@ public interface D extends NamedElement {
 	 * @see #setToA(A)
 	 * @see example1.target.TargetPackage#getD_ToA()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example1/targetMM/1.0!D!toA'"
 	 * @generated
 	 */
 	A getToA();
@@ -130,7 +127,7 @@ public interface D extends NamedElement {
 	 * @return the value of the '<em>Refs B</em>' reference.
 	 * @see #setRefsB(B)
 	 * @see example1.target.TargetPackage#getD_RefsB()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example1/targetMM/1.0!D!refsB'"
+	 * @model
 	 * @generated
 	 */
 	B getRefsB();
@@ -156,7 +153,7 @@ public interface D extends NamedElement {
 	 * @return the value of the '<em>Refs C</em>' reference.
 	 * @see #setRefsC(C)
 	 * @see example1.target.TargetPackage#getD_RefsC()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example1/targetMM/1.0!D!refsC'"
+	 * @model
 	 * @generated
 	 */
 	C getRefsC();

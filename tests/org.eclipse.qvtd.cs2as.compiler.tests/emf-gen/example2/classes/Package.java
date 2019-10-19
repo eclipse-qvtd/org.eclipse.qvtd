@@ -44,7 +44,6 @@ public interface Package extends NamedElement, Namespace {
 	 * @return the value of the '<em>Owned Classes</em>' containment reference list.
 	 * @see example2.classes.ClassesPackage#getPackage_OwnedClasses()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Package!ownedClasses'"
 	 * @generated
 	 */
 	EList<example2.classes.Class> getOwnedClasses();
@@ -61,7 +60,6 @@ public interface Package extends NamedElement, Namespace {
 	 * @return the value of the '<em>Owned Packages</em>' containment reference list.
 	 * @see example2.classes.ClassesPackage#getPackage_OwnedPackages()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Package!ownedPackages'"
 	 * @generated
 	 */
 	EList<Package> getOwnedPackages();

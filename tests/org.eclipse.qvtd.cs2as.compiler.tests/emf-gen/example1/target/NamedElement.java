@@ -44,7 +44,7 @@ public interface NamedElement extends EObject, Visitable {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see example1.target.TargetPackage#getNamedElement_Name()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example1/targetMM/1.0!NamedElement!name'"
+	 * @model
 	 * @generated
 	 */
 	String getName();

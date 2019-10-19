@@ -46,7 +46,6 @@ public interface TRoot extends EObject, Visitable {
 	 * @return the value of the '<em>Owned A</em>' containment reference list.
 	 * @see example1.target.TargetPackage#getTRoot_OwnedA()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example1/targetMM/1.0!TRoot!ownedA'"
 	 * @generated
 	 */
 	EList<A> getOwnedA();

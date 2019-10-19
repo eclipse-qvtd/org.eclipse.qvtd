@@ -44,7 +44,6 @@ public interface OperationCallExp extends CallExp {
 	 * @return the value of the '<em>Owned Arguments</em>' containment reference list.
 	 * @see example2.classes.ClassesPackage#getOperationCallExp_OwnedArguments()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!OperationCallExp!ownedArguments'"
 	 * @generated
 	 */
 	EList<Argument> getOwnedArguments();
@@ -60,7 +59,7 @@ public interface OperationCallExp extends CallExp {
 	 * @return the value of the '<em>Referred Operation</em>' reference.
 	 * @see #setReferredOperation(Operation)
 	 * @see example2.classes.ClassesPackage#getOperationCallExp_ReferredOperation()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!OperationCallExp!referredOperation'"
+	 * @model
 	 * @generated
 	 */
 	Operation getReferredOperation();

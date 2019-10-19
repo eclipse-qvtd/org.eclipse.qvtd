@@ -45,7 +45,6 @@ public interface CallExp extends TypedElement {
 	 * @see example2.classes.ClassesPackage#getCallExp_OwnedCallExp()
 	 * @see example2.classes.CallExp#getOwningSource
 	 * @model opposite="owningSource" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!CallExp!ownedCallExp'"
 	 * @generated
 	 */
 	CallExp getOwnedCallExp();
@@ -74,7 +73,6 @@ public interface CallExp extends TypedElement {
 	 * @see example2.classes.ClassesPackage#getCallExp_OwningSource()
 	 * @see example2.classes.CallExp#getOwnedCallExp
 	 * @model opposite="ownedCallExp" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!CallExp!owningSource'"
 	 * @generated
 	 */
 	CallExp getOwningSource();
