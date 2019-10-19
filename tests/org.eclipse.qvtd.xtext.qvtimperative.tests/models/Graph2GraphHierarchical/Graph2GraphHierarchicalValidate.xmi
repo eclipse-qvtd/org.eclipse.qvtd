@@ -4,7 +4,7 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:simplegraph="http://www.eclipse.org/qvt/examples/0.1/SimpleGraph"
-    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/SimpleGraph SimpleGraph.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/SimpleGraph ../Graph2GraphMinimal/SimpleGraph.ecore"
     name="graphone">
   <element xsi:type="simplegraph:Node"
       label="york"/>

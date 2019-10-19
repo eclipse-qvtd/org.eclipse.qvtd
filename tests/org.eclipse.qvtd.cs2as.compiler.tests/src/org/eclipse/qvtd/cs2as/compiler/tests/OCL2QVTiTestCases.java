@@ -67,13 +67,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import example2.classes.ClassesPackage;
-import example2.classescs.ClassescsPackage;
-import example5.sbase.SbasePackage;
-import example5.sderived.SderivedPackage;
-import example5.tbase.TbasePackage;
-import example5.tderived.TderivedPackage;
-
 // Manual load tests rely on previous generation of the class to load. - testExample1_CGManual
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OCL2QVTiTestCases extends LoadTestCase
@@ -112,6 +105,11 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
 			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
 			return options;
+		}
+
+		@Override
+		protected @NonNull ResourceSet createTestResourceSet() {
+			return super.createTestResourceSet();
 		}
 
 		//
@@ -251,22 +249,26 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		OperationDependencyAnalysis.RETURN.setState(true);
 		//		OperationDependencyAnalysis.START.setState(true);
 		MyQVT myQVT = createQVT("Source2Target", getModelsURI("Source2Target/Source2Target.ocl"), "samples");
-		myQVT.loadGenModels(getModelsURI("Source2Target/SourceMM1.genmodel"), getModelsURI("Source2Target/TargetMM1.genmodel"));
-		myQVT.loadEcoreFile(getModelsURI("Source2Target/EnvExample1.ecore"), example1.target.lookup.EnvironmentPackage.eINSTANCE);
-		ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2Target.ocl");
-		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 23 : 19);
-		//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
-		//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
-		//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
-		CS2ASJavaCompilerParameters cgParams = createParameters("example1.target.lookup.util.TargetLookupSolver",
-				"example1.target.lookup.util.TargetLookupResult");
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
-		myQVT.executeModelsTX_CG(txClass, "model1");
-		myQVT.executeModelsTX_CG(txClass, "model2");
-		myQVT.executeModelsTX_CG(txClass, "model3");
-		myQVT.dispose();
-		EPackage.Registry.INSTANCE.remove(example1.source.SourcePackage.eNS_URI);
-		EPackage.Registry.INSTANCE.remove(example1.target.TargetPackage.eNS_URI);
+		try {
+			myQVT.loadGenModels(getModelsURI("Source2Target/SourceMM1.genmodel"), getModelsURI("Source2Target/TargetMM1.genmodel"));
+			myQVT.loadEcoreFile(getModelsURI("Source2Target/EnvExample1.ecore"), example1.target.lookup.EnvironmentPackage.eINSTANCE);
+			ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2Target.ocl");
+			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 23 : 19);
+			//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
+			//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
+			//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			CS2ASJavaCompilerParameters cgParams = createParameters("example1.target.lookup.util.TargetLookupSolver",
+					"example1.target.lookup.util.TargetLookupResult");
+			Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
+			myQVT.executeModelsTX_CG(txClass, "model1");
+			myQVT.executeModelsTX_CG(txClass, "model2");
+			myQVT.executeModelsTX_CG(txClass, "model3");
+		}
+		finally {
+			myQVT.dispose();
+			EPackage.Registry.INSTANCE.remove(example1.source.SourcePackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(example1.target.TargetPackage.eNS_URI);
+		}
 	}
 
 	/*	@Test
@@ -389,19 +391,27 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		URI txURI = qvtiTransf.eResource().getURI();
 
 		myQVT.dispose();
-		myQVT = createQVT("SimpleClasses", getModelsURI("SimpleClasses/classescs2as.ocl"), "samples");
-		myQVT.loadEcoreFile(getModelsURI("SimpleClasses/ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
-		myQVT.loadEcoreFile(getModelsURI("SimpleClasses/Classes.ecore"), ClassesPackage.eINSTANCE);
-		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
-		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		myQVT.executeModelsTX_Interpreted(tx, "model1");
-		myQVT.executeModelsTX_Interpreted(tx, "model2");
-		myQVT.executeModelsTX_Interpreted(tx, "model3");
-		//    	myQVT.executeModelsTX_Interpreted(tx, "model4");
-		//    	myQVT.executeModelsTX_Interpreted(tx, "model5");
-		//    	myQVT.executeModelsTX_Interpreted(tx, "model6");
-		//    	myQVT.executeModelsTX_Interpreted(tx, "model7");
-		myQVT.dispose();
+		try {
+			myQVT = createQVT("SimpleClasses", getModelsURI("SimpleClasses/classescs2as.ocl"), "samples");
+			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/Classes.ecore"), example2.classes.ClassesPackage.eINSTANCE);
+			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/ClassesCS.ecore"), example2.classescs.ClassescsPackage.eINSTANCE);
+			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/classescs2as.ecore"), example2.classescstraces.ClassescstracesPackage.eINSTANCE);
+			ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+			//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+			myQVT.executeModelsTX_Interpreted(tx, "model1");
+			myQVT.executeModelsTX_Interpreted(tx, "model2");
+			myQVT.executeModelsTX_Interpreted(tx, "model3");
+			//    	myQVT.executeModelsTX_Interpreted(tx, "model4");
+			//    	myQVT.executeModelsTX_Interpreted(tx, "model5");
+			//    	myQVT.executeModelsTX_Interpreted(tx, "model6");
+			//    	myQVT.executeModelsTX_Interpreted(tx, "model7");
+		}
+		finally {
+			myQVT.dispose();
+			EPackage.Registry.INSTANCE.remove(example2.classes.ClassesPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(example2.classescs.ClassescsPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(example2.classescstraces.ClassescstracesPackage.eNS_URI);
+		}
 	}
 
 	@Test
@@ -433,9 +443,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 			myQVT.dispose();
 			myQVT = createQVT("StructuredClasses", getModelsURI("StructuredClasses/classescs2asV2.ocl"), "samples");
-			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/ClassesCS.ecore"), example2.classescs.ClassescsPackage.eINSTANCE);
 			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/Classes.ecore"), example2.classes.ClassesPackage.eINSTANCE);
-
+			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/ClassesCS.ecore"), example2.classescs.ClassescsPackage.eINSTANCE);
+			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/classescs2as.ecore"), example2.classescstraces.ClassescstracesPackage.eINSTANCE);
 			myQVT.executeModelsTX_CG(txClass, "model1V2");
 			myQVT.executeModelsTX_CG(txClass, "model2V2");
 			myQVT.executeModelsTX_CG(txClass, "model3V2");
@@ -468,8 +478,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 			myQVT.dispose();
 			myQVT = createQVT("StructuredClasses", getModelsURI("StructuredClasses/classescs2asV2.ocl"), "samples");
-			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/ClassesCS.ecore"), example2.classescs.ClassescsPackage.eINSTANCE);
 			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/Classes.ecore"), example2.classes.ClassesPackage.eINSTANCE);
+			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/ClassesCS.ecore"), example2.classescs.ClassescsPackage.eINSTANCE);
+			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/classescs2as.ecore"), example2.classescstraces.ClassescstracesPackage.eINSTANCE);
 			ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
 			myQVT.executeModelsTX_Interpreted(tx, "model1V2");
 			myQVT.executeModelsTX_Interpreted(tx, "model2V2");
@@ -530,21 +541,25 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
 		//		QVTiProductionConsumption.SUMMARY.setState(true);
 		MyQVT myQVT = createQVT("KiamaRewrite", getModelsURI("KiamaRewrite/KiamaRewrite.ocl"), "samples");
-		myQVT.loadGenModels(getModelsURI("KiamaRewrite/KiamaAS.genmodel"), getModelsURI("KiamaRewrite/KiamaCS.genmodel"));
-		ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
-		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 11 : 6);
-		//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 1);
-		//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 1);
-		//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
-		CS2ASJavaCompilerParameters cgParams = createParameters("","");
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
-		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
-		//		executeModelsTX_CG(myQVT, txClass, testBaseURI, "model0");
-		myQVT.executeModelsTX_CG(txClass, "model1");
-		myQVT.dispose();
-		EPackage.Registry.INSTANCE.remove(example3.kiamaas.KiamaasPackage.eNS_URI);
-		EPackage.Registry.INSTANCE.remove(example3.kiamacs.KiamacsPackage.eNS_URI);
+		try {
+			myQVT.loadGenModels(getModelsURI("KiamaRewrite/KiamaAS.genmodel"), getModelsURI("KiamaRewrite/KiamaCS.genmodel"));
+			ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
+			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 11 : 6);
+			//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 1);
+			//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 1);
+			//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			CS2ASJavaCompilerParameters cgParams = createParameters("","");
+			Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
+			//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+			// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
+			//		executeModelsTX_CG(myQVT, txClass, testBaseURI, "model0");
+			myQVT.executeModelsTX_CG(txClass, "model1");
+		}
+		finally {
+			myQVT.dispose();
+			EPackage.Registry.INSTANCE.remove(example3.kiamaas.KiamaasPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(example3.kiamacs.KiamacsPackage.eNS_URI);
+		}
 	}
 
 	/*	@Test
@@ -590,23 +605,27 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
 		//		QVTiProductionConsumption.SUMMARY.setState(true);
 		MyQVT myQVT = createQVT("SimplerKiama", getModelsURI("SimplerKiama/SimplerKiama.ocl"), "samples");
-		myQVT.loadGenModels(getModelsURI("SimplerKiama/SimplerKiamaAS.genmodel"), getModelsURI("SimplerKiama/SimplerKiamaCS.genmodel"));
-		ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("SimplerKiama.ocl");
-		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 7);
-		//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 1);
-		//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
-		//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
-		CS2ASJavaCompilerParameters cgParams = createParameters("","");
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
-		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
-		//		executeModelsTX_CG(myQVT, txClass, testBaseURI, "model0");
-		myQVT.executeModelsTX_CG(txClass, "model1");
-		myQVT.executeModelsTX_CG(txClass, "model2");
-		myQVT.executeModelsTX_CG(txClass, "model3");
-		myQVT.dispose();
-		EPackage.Registry.INSTANCE.remove(example4.kiamacs.KiamacsPackage.eNS_URI);
-		EPackage.Registry.INSTANCE.remove(example4.kiamaas.KiamaasPackage.eNS_URI);
+		try {
+			myQVT.loadGenModels(getModelsURI("SimplerKiama/SimplerKiamaAS.genmodel"), getModelsURI("SimplerKiama/SimplerKiamaCS.genmodel"));
+			ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("SimplerKiama.ocl");
+			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 7);
+			//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 1);
+			//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
+			//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			CS2ASJavaCompilerParameters cgParams = createParameters("","");
+			Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
+			//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+			// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
+			//		executeModelsTX_CG(myQVT, txClass, testBaseURI, "model0");
+			myQVT.executeModelsTX_CG(txClass, "model1");
+			myQVT.executeModelsTX_CG(txClass, "model2");
+			myQVT.executeModelsTX_CG(txClass, "model3");
+		}
+		finally {
+			myQVT.dispose();
+			EPackage.Registry.INSTANCE.remove(example4.kiamacs.KiamacsPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(example4.kiamaas.KiamaasPackage.eNS_URI);
+		}
 	}
 
 	@Test
@@ -631,36 +650,40 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	@Test
 	public void testOCL2QVTi_BaseAndDerived_CG() throws Exception {
 		MyQVT myQVT = createQVT("BaseAndDerived", getModelsURI("BaseAndDerived/Source2TargetBase.ocl"), "samples");
-		myQVT.loadGenModels(getModelsURI("BaseAndDerived/SourceBaseMM.genmodel"), getModelsURI("BaseAndDerived/TargetBaseMM.genmodel"));
-		ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
-		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 5);
-		//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
-		//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
-		//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
-		CS2ASJavaCompilerParameters cgParams = createParameters("", "");
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
-				.compileTransformation(myQVT, qvtiTransf, cgParams);
+		try {
+			myQVT.loadGenModels(getModelsURI("BaseAndDerived/SourceBaseMM.genmodel"), getModelsURI("BaseAndDerived/TargetBaseMM.genmodel"));
+			ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
+			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 5);
+			//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
+			//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
+			//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			CS2ASJavaCompilerParameters cgParams = createParameters("", "");
+			Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
+					.compileTransformation(myQVT, qvtiTransf, cgParams);
 
-		// Execute CGed transformation
-		myQVT.executeModelsTX_CG(txClass, "model1");
+			// Execute CGed transformation
+			myQVT.executeModelsTX_CG(txClass, "model1");
 
-		myQVT.dispose();
-		myQVT = createQVT("BaseAndDerived", getModelsURI("BaseAndDerived/Source2TargetDerived.ocl"), "samples");
-		myQVT.loadGenModels(getModelsURI("BaseAndDerived/SourceBaseMM.genmodel"), getModelsURI("BaseAndDerived/TargetBaseMM.genmodel"),
-			getModelsURI("BaseAndDerived/SourceDerivedMM.genmodel"), getModelsURI("BaseAndDerived/TargetDerivedMM.genmodel"));
+			myQVT.dispose();
+			myQVT = createQVT("BaseAndDerived", getModelsURI("BaseAndDerived/Source2TargetDerived.ocl"), "samples");
+			myQVT.loadGenModels(getModelsURI("BaseAndDerived/SourceBaseMM.genmodel"), getModelsURI("BaseAndDerived/TargetBaseMM.genmodel"),
+				getModelsURI("BaseAndDerived/SourceDerivedMM.genmodel"), getModelsURI("BaseAndDerived/TargetDerivedMM.genmodel"));
 
-		qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetDerived.ocl",
-				"Source2TargetBase.ocl");
-		txClass = new CS2ASJavaCompilerImpl()
-				.compileTransformation(myQVT, qvtiTransf, cgParams);
+			qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetDerived.ocl",
+					"Source2TargetBase.ocl");
+			txClass = new CS2ASJavaCompilerImpl()
+					.compileTransformation(myQVT, qvtiTransf, cgParams);
 
-		// Execute CGed transformation
-		myQVT.executeModelsTX_CG(txClass, "model2");
-		myQVT.dispose();
-		EPackage.Registry.INSTANCE.remove(SbasePackage.eNS_URI);
-		EPackage.Registry.INSTANCE.remove(SderivedPackage.eNS_URI);
-		EPackage.Registry.INSTANCE.remove(TbasePackage.eNS_URI);
-		EPackage.Registry.INSTANCE.remove(TderivedPackage.eNS_URI);
+			// Execute CGed transformation
+			myQVT.executeModelsTX_CG(txClass, "model2");
+		}
+		finally {
+			myQVT.dispose();
+			EPackage.Registry.INSTANCE.remove(example5.sbase.SbasePackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(example5.sderived.SderivedPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(example5.tbase.TbasePackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(example5.tderived.TderivedPackage.eNS_URI);
+		}
 	}
 
 	@Test

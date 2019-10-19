@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -270,8 +269,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected void checkOutput(@NonNull Resource outputResource, @NonNull URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-		Resource referenceResource = outputResource.getResourceSet().getResource(referenceModelURI, true);
+		ResourceSet referenceResourceSet = createTestResourceSet();
+		Resource referenceResource = referenceResourceSet.getResource(referenceModelURI, true);
 		assert referenceResource != null;
+		EcoreUtil.resolveAll(referenceResourceSet);
 		if (normalizer != null) {
 			assert !referenceResource.getContents().isEmpty() : referenceResource.getURI() + " has no contents";
 			assert !outputResource.getContents().isEmpty() : outputResource.getURI() + " has no contents";
@@ -281,20 +282,41 @@ public abstract class AbstractTestQVT extends QVTimperative
 		LoadTestCase.assertSameModel(referenceResource, outputResource);
 	}
 
-	public @NonNull Resource checkOutput(@NonNull URI modelURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-		ResourceSet resourceSet;// = new ResourceSetImpl();//;		// FIXME new ResourceSet
-		//	environmentFactory.getProjectManager().initializeResourceSet(resourceSet);
-		if (PivotUtilInternal.isASURI(modelURI)) {
-			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
-		}
-		else {
-			resourceSet = getResourceSet();
-		}
-		Resource outputResource = ClassUtil.nonNullState(resourceSet.getResource(modelURI, true));
+	public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
+		ResourceSet actualResourceSet = createTestResourceSet();
+		//		if (PivotUtilInternal.isASURI(modelURI)) {
+		//			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
+		//		}
+		//		else {
+		//			resourceSet = getResourceSet();
+		//		}
+		Resource actualResource = ClassUtil.nonNullState(actualResourceSet.getResource(actualURI, true));
+		EcoreUtil.resolveAll(actualResourceSet);
 		if (expectedURI != null) {
-			checkOutput(outputResource, expectedURI, normalizer);
+			String actualFileStem = actualURI.trimFileExtension().lastSegment();
+			String expectedFileStem = expectedURI.trimFileExtension().lastSegment();
+			if ((actualFileStem != null) && (expectedFileStem != null) && !actualFileStem.equals(expectedFileStem) && actualFileStem.startsWith(expectedFileStem)) {
+				String suffix = actualFileStem.substring(expectedFileStem.length());
+				for (Resource resource : actualResourceSet.getResources()) {
+					URI resourceURI = resource.getURI();
+					String fileExtension = resourceURI.fileExtension();
+					URI trimmedURI = resourceURI.trimFileExtension();
+					String fileStem = trimmedURI.lastSegment();
+					if ((fileStem != null) && fileStem.endsWith(suffix) ) {
+						String trimmedFileStem = fileStem.substring(0, fileStem.length() - suffix.length());
+						resource.setURI(trimmedURI.trimSegments(1).appendSegment(trimmedFileStem).appendFileExtension(fileExtension));
+					}
+				}
+			}
+			checkOutput(actualResource, expectedURI, normalizer);
 		}
-		return outputResource;
+		return actualResource;
+	}
+
+	protected @NonNull ResourceSet createTestResourceSet() {
+		ResourceSet actualResourceSet = new ResourceSetImpl();
+		environmentFactory.getProjectManager().initializeResourceSet(actualResourceSet);
+		return actualResourceSet;
 	}
 
 	public @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Exception {
@@ -625,7 +647,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	public void loadEcoreFile(URI fileURI, EPackage ePackage) {
 		ResourceSet rSet = getResourceSet();
 		rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
-		rSet.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
+		EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
 	}
 
 	protected void loadGenModel(@NonNull URI genModelURI) {
