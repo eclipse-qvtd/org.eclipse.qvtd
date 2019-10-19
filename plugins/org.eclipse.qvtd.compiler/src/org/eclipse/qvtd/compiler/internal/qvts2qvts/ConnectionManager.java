@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OriginalContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
@@ -818,16 +819,14 @@ public class ConnectionManager
 		if (!scheduleManager.isInput(scheduleManager.getDomainUsage(classDatum))) {
 			return originalContentsAnalysis.getNewNodes(classDatum);	// FIXME also dependsOn ??
 		}
-		List<@NonNull Node> nodes = new ArrayList<>();
+		List<@NonNull Node> nodes = new UniqueList<>();
 		nodes.add(loadingRegionAnalysis.getIntroducerNode(headNode));
 		for (@NonNull TypedModel dependsOn : QVTbaseUtil.getDependsOns(QVTscheduleUtil.getTypedModel(classDatum))) {
 			ClassDatum classDatum2 = scheduleManager.getClassDatum(dependsOn, headNode.getCompleteClasses());
 			Iterable<@NonNull Node> newNodes = originalContentsAnalysis.getNewNodes(classDatum2);
 			if (newNodes != null) {
 				for (@NonNull Node newNode : newNodes) {
-					if (!nodes.contains(newNode)) {
-						nodes.add(newNode);
-					}
+					nodes.add(newNode);
 				}
 			}
 		}
