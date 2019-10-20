@@ -33,7 +33,7 @@
           </ownedExpression>
         </ownedStatements>
       </rule>
-      <rule xsi:type="qvti:EntryPoint" name="__root__" checkedTypedModels="#IsZt9" enforcedTypedModels="#fuoOH">
+      <rule xsi:type="qvti:EntryPoint" name="__root__" inputTypedModels="#IsZt9" outputTypedModels="#fuoOH">
         <ownedStatements xsi:type="qvti:MappingLoop">
           <ownedIterators xmi:id="GM8oC" name="packageCS" type="pivot:Class ../ClassesCS.ecore.oclas#rYaOy"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#nJ3jC">

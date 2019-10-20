@@ -23,7 +23,7 @@ transformation CopyGraphMinimal {
 	    set g2.name := g2gout.name;
 	}
 	
-	entry __root__ check upperGraph enforce lowerGraph {
+	entry __root__ input upperGraph output lowerGraph {
 	    for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
 	        call graph2graphLM {
 	            g1 iterates g1;

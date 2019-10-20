@@ -17,7 +17,7 @@ transformation hsv2hsl {
 	query rgb2hsl(color : HSV2HSL::RGB) : HSLTree::HSL;
 	query rgb2hsv(color : HSV2HSL::RGB) : HSVTree::HSV;
 	
-	entry __root__ check hsv enforce hsl {
+	entry __root__ input hsv output hsl {
 		append nodes : HSVTree::HSVNode;
 	    for hsvRoot : HSVTree::HSVNode in nodes {
 	        call HSV2MiddleRoot {

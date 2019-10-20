@@ -7,7 +7,7 @@ transformation ManualUML2RDBMS {
     rdbms imports RDBMS;
     middle imports UML2RDBMS;
 
-	entry __root__ check uml enforce rdbms {
+	entry __root__ input uml output rdbms {
 	    for p1 : UML::Package in UML::Package.allInstances() {
 	        call packageToSchemaLM {
 	            p iterates p1;

@@ -36,7 +36,7 @@ transformation classescs2as
 			rootCS.ownedPackages.ast.oclAsType(classes::Package)->asOrderedSet();
 	}
 	
-	entry __root__ check leftCS enforce rightAS
+	entry __root__ input leftCS output rightAS
 	{
 		for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
 			call mCreationRootCS2Root {

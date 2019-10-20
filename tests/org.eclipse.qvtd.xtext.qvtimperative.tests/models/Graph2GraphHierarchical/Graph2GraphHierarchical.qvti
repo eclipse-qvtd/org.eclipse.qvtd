@@ -6,7 +6,7 @@ transformation CopyGraph {
 	lowerGraph imports SimpleGraph;
 	middle imports SimpleGraph2Graph;
 
-	entry __root__ check upperGraph enforce lowerGraph {
+	entry __root__ input upperGraph output lowerGraph {
 	    
 	    for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
 	        call Graph2Middle {

@@ -318,7 +318,7 @@ package simpleUML2RDBMS = 'http://simpleUML2RDBMS'
 			set c.type := ct;
 		}
 		
-		entry __root__ check uml enforce rdbms
+		entry __root__ input uml output rdbms
 		{
 			for p : simpleuml::Package in uml.objectsOfKind(Package) {
 				call packageToSchema_LM {

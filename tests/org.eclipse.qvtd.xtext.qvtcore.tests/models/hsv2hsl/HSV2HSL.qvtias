@@ -643,7 +643,7 @@
         </bodyExpression>
         <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="Optl4" name="color" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,"/>
       </ownedOperations>
-      <rule xsi:type="qvti:EntryPoint" checkedTypedModels="#4h0Qn" enforcedTypedModels="#uh0Qn" firstPass="0" name="r_HSV2HSL__load__">
+      <rule xsi:type="qvti:EntryPoint" inputTypedModels="#4h0Qn" outputTypedModels="#uh0Qn" firstPass="0" name="r_HSV2HSL__load__">
         <ownedMappingParameters xsi:type="qvti:AppendParameter" xmi:id="oD4sk" name="ji_HSVNode" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
         <ownedStatements xsi:type="qvti:BufferStatement" xmi:id="LLp+C" firstPass="1" name="jm_HSVNode2HSLNode" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
         <ownedStatements xsi:type="qvti:MappingCall" isInstall="true" referredMapping="#PHHmK">

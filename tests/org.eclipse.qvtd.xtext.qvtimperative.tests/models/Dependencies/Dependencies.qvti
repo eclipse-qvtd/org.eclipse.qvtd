@@ -1,8 +1,8 @@
 import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
 
 transformation Dependencies {
-	check source imports ecore;
-	enforce target imports ecore;
+	input source imports ecore;
+	output target imports ecore;
 	middle imports ecore;
 
 	map dependenciesLM {

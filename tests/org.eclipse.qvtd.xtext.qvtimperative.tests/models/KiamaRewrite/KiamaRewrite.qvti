@@ -3,8 +3,8 @@ import 'KiamaCS.ecore#/';
 
 transformation KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS imports kiamacs;
-	enforce rightAS imports kiamaas;
+	input leftCS imports kiamacs;
+	output rightAS imports kiamaas;
 
 	map r___root__
 	{

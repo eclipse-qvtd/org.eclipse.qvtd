@@ -7,7 +7,7 @@ transformation Tree2TallTree {
 	talltree imports talltree;
 	tree2talltree imports tree2talltree;
 
-	entry __root__ check tree enforce talltree {
+	entry __root__ input tree output talltree {
 	    append nodes : tree::Node;
 	    buffer node2tallNodes : tree2talltree::Node2TallNode;
 	    install Node2MiddleNode {

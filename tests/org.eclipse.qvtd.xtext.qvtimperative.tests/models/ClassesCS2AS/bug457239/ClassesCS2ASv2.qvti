@@ -18,7 +18,7 @@ transformation classescs2as
 							endif;
 	}
 	
-	entry __root__ check leftCS enforce rightAS
+	entry __root__ input leftCS output rightAS
 	{
 		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 			call createPackage {
