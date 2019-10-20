@@ -461,12 +461,11 @@ public class DatumCaches
 			return cachedPropertyDatum;
 		}
 		// If not found we create it
-		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+		//	TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 		//	Iterable<@NonNull CompleteClass> targetCompleteClasses = QVTscheduleUtil.getCompleteClasses(classDatum);
 		//	org.eclipse.ocl.pivot.Class owningClass = QVTbaseUtil.getOwningClass(property);
 		//	Iterable<@NonNull CompleteClass> hostCompleteClasses = QVTscheduleUtil.getCompleteClasses(classDatum);// completeModel.getCompleteClass(owningClass);
 		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
-		propertyDatum.setReferredTypedModel(typedModel);
 		propertyDatum.setReferredProperty(property);
 		propertyDatum.setName(property.getName());
 		propertyDatum.setOwningClassDatum(classDatum);

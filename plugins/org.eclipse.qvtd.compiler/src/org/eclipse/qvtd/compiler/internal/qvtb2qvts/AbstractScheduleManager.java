@@ -620,7 +620,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		Property property = QVTscheduleUtil.getReferredProperty(propertyDatum);
 		property = QVTscheduleUtil.getPrimaryProperty(property);
 		org.eclipse.ocl.pivot.Class classType = QVTbaseUtil.getOwningClass(property);
-		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(propertyDatum);
+		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getOwningClassDatum(propertyDatum));
 		ClassDatum classDatum = getClassDatum(typedModel, classType);
 		return getPropertyDatum(classDatum, property);
 	}
