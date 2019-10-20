@@ -5,28 +5,28 @@
     name="HSV2HSL.qvtsas" xmiidVersion="1">
   <ownedClassDatums xmi:id="AFlEp" name="HSVNode" referredClass="HSVTree.ecore.oclas#pzNqy"
       referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn">
-    <ownedPropertyDatums xmi:id="AOoj4" name="parent" opposite="#VjdzW" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
-    <ownedPropertyDatums xmi:id="VjdzW" name="children" opposite="#AOoj4" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
-    <ownedPropertyDatums name="hsv" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
-    <ownedPropertyDatums name="name" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
-    <ownedPropertyDatums xmi:id="rRl2z" name="middle" opposite="#ukdal" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
+    <ownedPropertyDatums xmi:id="AOoj4" name="parent" opposite="#VjdzW"/>
+    <ownedPropertyDatums xmi:id="VjdzW" name="children" opposite="#AOoj4"/>
+    <ownedPropertyDatums name="hsv"/>
+    <ownedPropertyDatums name="name"/>
+    <ownedPropertyDatums xmi:id="rRl2z" name="middle" opposite="#ukdal"/>
   </ownedClassDatums>
   <ownedClassDatums xmi:id="RoHHm" name="HSVNode2HSLNode" referredClass="HSV2HSL.ecore.oclas#ndQkv"
       referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn">
-    <ownedPropertyDatums xmi:id="N00Eq" name="parent" opposite="#iJqUI" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-    <ownedPropertyDatums xmi:id="iJqUI" name="children" opposite="#N00Eq" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-    <ownedPropertyDatums name="hsv" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-    <ownedPropertyDatums name="hsl" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-    <ownedPropertyDatums name="rgb" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-    <ownedPropertyDatums name="name" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
+    <ownedPropertyDatums xmi:id="N00Eq" name="parent" opposite="#iJqUI"/>
+    <ownedPropertyDatums xmi:id="iJqUI" name="children" opposite="#N00Eq"/>
+    <ownedPropertyDatums name="hsv"/>
+    <ownedPropertyDatums name="hsl"/>
+    <ownedPropertyDatums name="rgb"/>
+    <ownedPropertyDatums name="name"/>
   </ownedClassDatums>
   <ownedClassDatums xmi:id="2YWho" name="HSLNode" referredClass="HSLTree.ecore.oclas#9roFA"
       referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn">
-    <ownedPropertyDatums xmi:id="eyRiG" name="parent" opposite="#zHHyk" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
-    <ownedPropertyDatums xmi:id="zHHyk" name="children" opposite="#eyRiG" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
-    <ownedPropertyDatums name="hsl" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
-    <ownedPropertyDatums name="name" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
-    <ownedPropertyDatums xmi:id="J2O1B" name="middle" opposite="#kkdal" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
+    <ownedPropertyDatums xmi:id="eyRiG" name="parent" opposite="#zHHyk"/>
+    <ownedPropertyDatums xmi:id="zHHyk" name="children" opposite="#eyRiG"/>
+    <ownedPropertyDatums name="hsl"/>
+    <ownedPropertyDatums name="name"/>
+    <ownedPropertyDatums xmi:id="J2O1B" name="middle" opposite="#kkdal"/>
   </ownedClassDatums>
   <ownedClassDatums xmi:id="fKS53" name="OclVoid" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#7u3MH" referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
   <ownedClassDatums xmi:id="fKS53A" name="OclVoid" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#7u3MH" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
@@ -51,11 +51,11 @@
   <ownedClassDatums name="OclComparable" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#BEwMu" referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
   <ownedClassDatums name="HSVNode2HSLNode" referredClass="HSV2HSL.ecore.oclas#ndQkv"
       referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn">
-    <ownedPropertyDatums xmi:id="kkdal" name="hsl" opposite="#J2O1B" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
+    <ownedPropertyDatums xmi:id="kkdal" name="hsl" opposite="#J2O1B"/>
   </ownedClassDatums>
   <ownedClassDatums name="HSVNode2HSLNode" referredClass="HSV2HSL.ecore.oclas#ndQkv"
       referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn">
-    <ownedPropertyDatums xmi:id="ukdal" name="hsv" opposite="#rRl2z" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
+    <ownedPropertyDatums xmi:id="ukdal" name="hsv" opposite="#rRl2z"/>
   </ownedClassDatums>
   <ownedClassDatums xsi:type="qvts:CollectionClassDatum" xmi:id="1g6z1" name="Set" referredClass="#agWNb" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
   <ownedMappingRegions xsi:type="qvts:RuleRegion" xmi:id="Kkhlu" headNodes="#egCj2" mappingPartitions="#r9Swk" name="HSV2HSLRoot" referredRule="qvtc:Mapping HSV2HSL.qvtm.qvtcas#1xML0">
