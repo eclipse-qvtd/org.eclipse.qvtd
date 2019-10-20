@@ -206,8 +206,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
 		ImperativeTypedModel asTypedModel = refreshNamedElement(ImperativeTypedModel.class, QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL, csElement);
 		Continuation<?> continuation = new DirectionContentContinuation(context, csElement);
-		asTypedModel.setIsChecked(csElement.isIsChecked());
-		asTypedModel.setIsEnforced(csElement.isIsEnforced());
+		asTypedModel.setIsInput(csElement.isIsInput());
+		asTypedModel.setIsOutput(csElement.isIsOutput());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTypedModel);
 		return continuation;
 	}

@@ -86,12 +86,12 @@ public class QVTiMainTab extends MainTab<Transformation> implements QVTiLaunchCo
 		super.updateGroups(transformation, oldInputsMap, newInputsMap, oldOutputsMap, newOutputsMap, intermediateMap);
 		for (TypedModel typedModel : transformation.getModelParameter()) {
 			ImperativeTypedModel imperativeTypedModel = (ImperativeTypedModel)typedModel;
-			if (imperativeTypedModel.isIsChecked()) {
+			if (imperativeTypedModel.isIsInput()) {
 				String name = imperativeTypedModel.getName();
 				assert name != null;
 				newInputsMap.put(name, null); //getDefaultPath(inputsGroup, name));
 			}
-			if (imperativeTypedModel.isIsEnforced()) {
+			if (imperativeTypedModel.isIsOutput()) {
 				String name = imperativeTypedModel.getName();
 				assert name != null;
 				newOutputsMap.put(name, null); //getDefaultPath(inputsGroup, name));

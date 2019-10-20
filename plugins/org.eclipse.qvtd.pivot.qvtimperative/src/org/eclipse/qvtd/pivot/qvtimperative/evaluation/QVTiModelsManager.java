@@ -112,7 +112,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 	 */
 	public @NonNull Set<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 		Set<@NonNull Object> elements = new HashSet<>();
-		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getCheckedTypedModels(entryPointAnalysis.getEntryPoint())) {
+		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getInputTypedModels(entryPointAnalysis.getEntryPoint())) {
 			TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
 			Iterables.addAll(elements, typedModelInstance.getObjectsOfKind(type));
 		}

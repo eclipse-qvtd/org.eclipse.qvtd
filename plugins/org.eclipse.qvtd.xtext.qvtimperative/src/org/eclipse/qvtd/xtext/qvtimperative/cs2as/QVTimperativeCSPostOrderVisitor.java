@@ -223,8 +223,8 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	public @Nullable Continuation<?> visitEntryPointCS(@NonNull EntryPointCS csElement) {
 		EntryPoint asEntryPoint = PivotUtil.getPivot(EntryPoint.class, csElement);
 		if (asEntryPoint != null) {
-			context.refreshList(asEntryPoint.getCheckedTypedModels(), csElement.getCheckedTypedModels());
-			context.refreshList(asEntryPoint.getEnforcedTypedModels(), csElement.getEnforcedTypedModels());
+			context.refreshList(asEntryPoint.getInputTypedModels(), csElement.getInputTypedModels());
+			context.refreshList(asEntryPoint.getOutputTypedModels(), csElement.getOutputTypedModels());
 		}
 		return null;
 	}

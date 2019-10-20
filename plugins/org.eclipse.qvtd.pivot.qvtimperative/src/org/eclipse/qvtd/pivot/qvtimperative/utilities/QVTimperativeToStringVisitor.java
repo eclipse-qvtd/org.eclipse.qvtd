@@ -205,11 +205,11 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 
 	@Override
 	public @Nullable String visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
-		if (object.isIsChecked()) {
-			append("check ");
+		if (object.isIsInput()) {
+			append("input ");
 		}
-		if (object.isIsEnforced()) {
-			append("enforce ");
+		if (object.isIsOutput()) {
+			append("output ");
 		}
 		return visitTypedModel(object);
 	}

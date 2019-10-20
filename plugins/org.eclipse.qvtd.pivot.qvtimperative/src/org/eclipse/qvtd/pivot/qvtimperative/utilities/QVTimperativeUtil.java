@@ -138,10 +138,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return mappings;
 	}
 
-	public static @NonNull Iterable<@NonNull TypedModel> getCheckedTypedModels(@NonNull EntryPoint entryPoint) {
-		return ClassUtil.nullFree(entryPoint.getCheckedTypedModels());
-	}
-
 	public static org.eclipse.ocl.pivot.@NonNull Class getClassType(@NonNull TypedElement typedElement) {
 		return ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)typedElement.getType());
 	}
@@ -180,8 +176,8 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return computeEntryPoints(iTransformation).iterator().next();
 	}
 
-	public static @NonNull Iterable<@NonNull TypedModel> getEnforcedTypedModels(@NonNull EntryPoint entryPoint) {
-		return ClassUtil.nullFree(entryPoint.getEnforcedTypedModels());
+	public static @NonNull Iterable<@NonNull TypedModel> getInputTypedModels(@NonNull EntryPoint entryPoint) {
+		return ClassUtil.nullFree(entryPoint.getInputTypedModels());
 	}
 
 	public static @NonNull String getName(@NonNull Mapping asMapping) {
@@ -194,6 +190,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	public static @NonNull Iterable<@NonNull Property> getObservedProperties(@NonNull ObservableStatement observableStatement) {
 		return ClassUtil.nullFree(observableStatement.getObservedProperties());
+	}
+
+	public static @NonNull Iterable<@NonNull TypedModel> getOutputTypedModels(@NonNull EntryPoint entryPoint) {
+		return ClassUtil.nullFree(entryPoint.getOutputTypedModels());
 	}
 
 	public static @NonNull OCLExpression getOwnedExpression(@NonNull NewStatementPart asNewStatementPart) {

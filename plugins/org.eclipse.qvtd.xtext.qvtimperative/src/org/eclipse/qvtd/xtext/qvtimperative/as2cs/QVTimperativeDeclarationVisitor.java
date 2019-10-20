@@ -408,8 +408,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csEntryPoint.setPivot(asEntryPoint);
 		context.refreshList(csEntryPoint.getOwnedParameters(), context.visitDeclarations(MappingParameterCS.class, asEntryPoint.getOwnedMappingParameters(), null));
 		context.refreshList(csEntryPoint.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asEntryPoint.getOwnedStatements(), null));
-		context.refreshList(csEntryPoint.getCheckedTypedModels(), asEntryPoint.getCheckedTypedModels());
-		context.refreshList(csEntryPoint.getEnforcedTypedModels(), asEntryPoint.getEnforcedTypedModels());
+		context.refreshList(csEntryPoint.getInputTypedModels(), asEntryPoint.getInputTypedModels());
+		context.refreshList(csEntryPoint.getOutputTypedModels(), asEntryPoint.getOutputTypedModels());
 		csEntryPoint.setFirstPass(asEntryPoint.getFirstPass());
 		csEntryPoint.setIsStrict(asEntryPoint.isIsStrict());
 		csEntryPoint.setLastPass(asEntryPoint.getLastPass());
@@ -505,8 +505,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		if ("".equals(asTypedModel.getName())) {
 			csDirection.setName(null);
 		}
-		csDirection.setIsChecked(asTypedModel.isIsChecked());
-		csDirection.setIsEnforced(asTypedModel.isIsEnforced());
+		csDirection.setIsInput(asTypedModel.isIsInput());
+		csDirection.setIsOutput(asTypedModel.isIsOutput());
 		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
 		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
 		return csDirection;

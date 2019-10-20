@@ -161,7 +161,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.append("entry ");
 		context.appendName(pEntryPoint);
 		boolean isFirst = true;
-		for (@NonNull TypedModel pTypedModel : QVTimperativeUtil.getCheckedTypedModels(pEntryPoint)) {
+		for (@NonNull TypedModel pTypedModel : QVTimperativeUtil.getInputTypedModels(pEntryPoint)) {
 			if (isFirst) {
 				context.append("check ");
 			}
@@ -171,7 +171,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			safeVisit(pTypedModel);
 		}
 		isFirst = true;
-		for (@NonNull TypedModel pTypedModel : QVTimperativeUtil.getEnforcedTypedModels(pEntryPoint)) {
+		for (@NonNull TypedModel pTypedModel : QVTimperativeUtil.getOutputTypedModels(pEntryPoint)) {
 			if (isFirst) {
 				context.append("enforce ");
 			}
@@ -239,11 +239,11 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 
 	@Override
 	public Object visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
-		if (object.isIsChecked()) {
-			context.append("check ");
+		if (object.isIsInput()) {
+			context.append("input ");
 		}
-		if (object.isIsEnforced()) {
-			context.append("enforce ");
+		if (object.isIsOutput()) {
+			context.append("output ");
 		}
 		return visitTypedModel(object);
 	}

@@ -617,14 +617,14 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		try {
 			Interval rootInterval = getInvocationManager().getRootInterval();
 			mapping2interval.put(entryPoint, rootInterval);
-			Iterable<@NonNull TypedModel> checkedTypedModels = QVTimperativeUtil.getCheckedTypedModels(entryPoint);
+			Iterable<@NonNull TypedModel> inputTypedModels = QVTimperativeUtil.getInputTypedModels(entryPoint);
 			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(entryPoint)) {
 				if (mappingParameter instanceof AppendParameter) {
 					org.eclipse.ocl.pivot.Class type = QVTimperativeUtil.getClassType(mappingParameter);
 					org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
 					assert asPackage != null;
 					TypedModelInstance modelInstance = null;
-					for (@NonNull TypedModel asTypedModel : checkedTypedModels) {
+					for (@NonNull TypedModel asTypedModel : inputTypedModels) {
 						if (asTypedModel.getUsedPackage().contains(asPackage)) {
 							assert modelInstance == null;
 							modelInstance = modelsManager.getTypedModelInstance(asTypedModel);

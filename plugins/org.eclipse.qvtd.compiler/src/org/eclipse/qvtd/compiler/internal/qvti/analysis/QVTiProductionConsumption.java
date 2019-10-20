@@ -580,13 +580,13 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		this.completeModel = environmentFactory.getCompleteModel();
 		this.mappings = QVTimperativeUtil.computeMappingClosure(iEntryPoint);
 		DomainUsage checkedUsage = domainUsageAnalysis.getNoneUsage();
-		for (@NonNull TypedModel checkedTypedModel : QVTimperativeUtil.getCheckedTypedModels(iEntryPoint)) {
-			checkedUsage = domainUsageAnalysis.union(checkedUsage, domainUsageAnalysis.getUsage(checkedTypedModel));
+		for (@NonNull TypedModel inputTypedModel : QVTimperativeUtil.getInputTypedModels(iEntryPoint)) {
+			checkedUsage = domainUsageAnalysis.union(checkedUsage, domainUsageAnalysis.getUsage(inputTypedModel));
 		}
 		this.checkedUsage = checkedUsage;
 		DomainUsage enforcedUsage = domainUsageAnalysis.getNoneUsage();
-		for (@NonNull TypedModel enforcedTypedModel : QVTimperativeUtil.getEnforcedTypedModels(iEntryPoint)) {
-			enforcedUsage = domainUsageAnalysis.union(enforcedUsage, domainUsageAnalysis.getUsage(enforcedTypedModel));
+		for (@NonNull TypedModel outputTypedModel : QVTimperativeUtil.getOutputTypedModels(iEntryPoint)) {
+			enforcedUsage = domainUsageAnalysis.union(enforcedUsage, domainUsageAnalysis.getUsage(outputTypedModel));
 		}
 		this.enforcedUsage = enforcedUsage;
 	}

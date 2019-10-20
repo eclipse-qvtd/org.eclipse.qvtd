@@ -63,32 +63,33 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 			super(domainUsageAnalysis, typedModelsConfiguration);
 		}
 
+		@Override
 		public void analyzeTransformation() {
-			int checkedMask = 0;
-			int enforcedMask = 0;
+			int inputMask = 0;
+			int outputMask = 0;
 			for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(domainUsageAnalysis.getTransformation())) {
 				if (!typedModel.isIsPrimitive() && !typedModel.isIsTrace()) {
-					boolean isEnforced = false;
-					boolean isChecked = false;
+					boolean isInput = false;
+					boolean isOutput = false;
 					ImperativeTypedModel imperativeTypedModel = (ImperativeTypedModel)typedModel;
-					if (imperativeTypedModel.isIsEnforced()) {
-						isEnforced = true;
+					if (imperativeTypedModel.isIsInput()) {
+						isInput = true;
 					}
-					else if (imperativeTypedModel.isIsChecked()) {
-						isChecked = true;
+					if (imperativeTypedModel.isIsOutput()) {
+						isOutput = true;
 					}
 					DomainUsage domainUsage = domainUsageAnalysis.getUsage(typedModel);
 					int bitMask = domainUsage.getMask();
-					if (isEnforced) {
-						enforcedMask |= bitMask;
+					if (isInput) {
+						inputMask |= bitMask;
 					}
-					if (isChecked) {
-						checkedMask |= bitMask;
+					if (isOutput) {
+						outputMask |= bitMask;
 					}
 				}
 			}
-			setInputUsage(checkedMask);
-			setOutputUsage(enforcedMask);
+			setInputUsage(inputMask);
+			setOutputUsage(outputMask);
 			analyzePropertyAssignments(domainUsageAnalysis.getTransformation());
 		}
 	}

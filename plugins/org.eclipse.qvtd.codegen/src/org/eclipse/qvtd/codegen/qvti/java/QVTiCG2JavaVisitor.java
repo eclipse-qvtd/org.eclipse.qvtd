@@ -1281,10 +1281,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				}
 			}
 			if (imperativeTypedModel != null) {
-				if (imperativeTypedModel.isIsEnforced()) {
+				if (imperativeTypedModel.isIsOutput()) {
 					bestOutputTypedModel = imperativeTypedModel;
 				}
-				else if (!imperativeTypedModel.isIsChecked()) {
+				else if (!imperativeTypedModel.isIsInput()) {
 					bestMiddleTypedModel = imperativeTypedModel;
 				}
 				else {
@@ -2430,10 +2430,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			public int compare(@NonNull CGMapping o1, @NonNull CGMapping o2) {
 				EntryPoint asEntryPoint1 = (EntryPoint) QVTiCGUtil.getAST(o1);
 				EntryPoint asEntryPoint2 = (EntryPoint) QVTiCGUtil.getAST(o2);
-				List<TypedModel> asEnforcedTypedModels1 = asEntryPoint1.getEnforcedTypedModels();
-				List<TypedModel> asEnforcedTypedModels2 = asEntryPoint2.getEnforcedTypedModels();
-				TypedModel asTypedModel1 = asEnforcedTypedModels1.size() > 0 ? asEnforcedTypedModels1.get(0) : null;
-				TypedModel asTypedModel2 = asEnforcedTypedModels2.size() > 0 ? asEnforcedTypedModels2.get(0) : null;
+				List<TypedModel> asOutputTypedModels1 = asEntryPoint1.getOutputTypedModels();
+				List<TypedModel> asOutputTypedModels2 = asEntryPoint2.getOutputTypedModels();
+				TypedModel asTypedModel1 = asOutputTypedModels1.size() > 0 ? asOutputTypedModels1.get(0) : null;
+				TypedModel asTypedModel2 = asOutputTypedModels2.size() > 0 ? asOutputTypedModels2.get(0) : null;
 				int index1 = asTypedModels.indexOf(asTypedModel1);
 				int index2 = asTypedModels.indexOf(asTypedModel2);
 				return index1 - index2;
@@ -2453,10 +2453,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		for (@NonNull CGMapping cgRootMapping : cgRootMappings) {
 			EntryPoint asEntryPoint = (EntryPoint) QVTiCGUtil.getAST(cgRootMapping);
 			if (isMultiDirectional) {
-				List<TypedModel> asEnforcedTypedModels = asEntryPoint.getEnforcedTypedModels();
-				if (asEnforcedTypedModels.size() > 0) {
+				List<TypedModel> asOutputTypedModels = asEntryPoint.getOutputTypedModels();
+				if (asOutputTypedModels.size() > 0) {
 					js.append("case ");
-					TypedModel asTargetTypedModel = asEnforcedTypedModels.get(0);
+					TypedModel asTargetTypedModel = asOutputTypedModels.get(0);
 					js.appendIntegerString(asTypedModels.indexOf(asTargetTypedModel));
 					js.append(": { /* " + asTargetTypedModel.getName() + " */\n");
 					js.pushIndentation(null);
@@ -2480,7 +2480,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				assert asPackage != null;
 				AllInstancesAnalysis allInstancesAnalysis = null;
 				CGTypedModel cgTypedModel = null;
-				for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getCheckedTypedModels(asEntryPoint)) {
+				for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getInputTypedModels(asEntryPoint)) {
 					if (asTypedModel.getUsedPackage().contains(asPackage)) {
 						assert cgTypedModel == null;
 						cgTypedModel = asTypedModel2cgTypedModel.get(asTypedModel);
