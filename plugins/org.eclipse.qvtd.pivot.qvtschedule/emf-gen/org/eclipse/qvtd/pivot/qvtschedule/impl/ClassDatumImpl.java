@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -57,6 +58,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getOwnedPropertyDatums <em>Owned Property Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getReferredClass <em>Referred Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getSuperClassDatums <em>Super Class Datums</em>}</li>
  * </ul>
  *
@@ -70,7 +72,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CLASS_DATUM_FEATURE_COUNT = AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 5;
+	public static final int CLASS_DATUM_FEATURE_COUNT = AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Class Datum</em>' class.
@@ -112,6 +114,16 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	protected org.eclipse.ocl.pivot.Class referredClass;
 
 	/**
+	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredTypedModel()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypedModel referredTypedModel;
+
+	/**
 	 * The cached value of the '{@link #getSuperClassDatums() <em>Super Class Datums</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,7 +160,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public List<CompleteClass> getCompleteClasses() {
 		if (completeClasses == null) {
-			completeClasses = new EObjectResolvingEList<CompleteClass>(CompleteClass.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+			completeClasses = new EObjectResolvingEList<CompleteClass>(CompleteClass.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		}
 		return completeClasses;
 	}
@@ -161,7 +173,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public List<PropertyDatum> getOwnedPropertyDatums() {
 		if (ownedPropertyDatums == null) {
-			ownedPropertyDatums = new EObjectContainmentWithInverseEList<PropertyDatum>(PropertyDatum.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+			ownedPropertyDatums = new EObjectContainmentWithInverseEList<PropertyDatum>(PropertyDatum.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		}
 		return ownedPropertyDatums;
 	}
@@ -173,7 +185,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 */
 	@Override
 	public ScheduleModel getOwningScheduleModel() {
-		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3)) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2)) return null;
 		return (ScheduleModel)eInternalContainer();
 	}
 
@@ -183,7 +195,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningScheduleModel(ScheduleModel newOwningScheduleModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, msgs);
 		return msgs;
 	}
 
@@ -194,7 +206,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 */
 	@Override
 	public void setOwningScheduleModel(ScheduleModel newOwningScheduleModel) {
-		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3) && newOwningScheduleModel != null)) {
+		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2) && newOwningScheduleModel != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningScheduleModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -206,7 +218,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, newOwningScheduleModel, newOwningScheduleModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, newOwningScheduleModel, newOwningScheduleModel));
 	}
 
 	/**
@@ -221,7 +233,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, oldReferredClass, referredClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldReferredClass, referredClass));
 			}
 		}
 		return referredClass;
@@ -246,7 +258,47 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
 		referredClass = newReferredClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, oldReferredClass, referredClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldReferredClass, referredClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TypedModel getReferredTypedModel() {
+		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
+			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
+			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
+			if (referredTypedModel != oldReferredTypedModel) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, oldReferredTypedModel, referredTypedModel));
+			}
+		}
+		return referredTypedModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypedModel basicGetReferredTypedModel() {
+		return referredTypedModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
+		TypedModel oldReferredTypedModel = referredTypedModel;
+		referredTypedModel = newReferredTypedModel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -271,9 +323,9 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyDatums()).basicAdd(otherEnd, msgs);
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
@@ -289,9 +341,9 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedPropertyDatums()).basicRemove(otherEnd, msgs);
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return basicSetOwningScheduleModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -305,7 +357,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return eInternalContainer().eInverseRemove(this, ModelImpl.MODEL_FEATURE_COUNT + 0, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -319,15 +371,18 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getCompleteClasses();
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwnedPropertyDatums();
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getOwningScheduleModel();
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				if (resolve) return getReferredClass();
 				return basicGetReferredClass();
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+				if (resolve) return getReferredTypedModel();
+				return basicGetReferredTypedModel();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getSuperClassDatums();
 		}
@@ -343,19 +398,22 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getCompleteClasses().clear();
 				getCompleteClasses().addAll((Collection<? extends CompleteClass>)newValue);
 				return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedPropertyDatums().clear();
 				getOwnedPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
 				return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOwningScheduleModel((ScheduleModel)newValue);
 				return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
+				return;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+				setReferredTypedModel((TypedModel)newValue);
 				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getSuperClassDatums().clear();
@@ -373,17 +431,20 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getCompleteClasses().clear();
 				return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedPropertyDatums().clear();
 				return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOwningScheduleModel((ScheduleModel)null);
 				return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setReferredClass((org.eclipse.ocl.pivot.Class)null);
+				return;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+				setReferredTypedModel((TypedModel)null);
 				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getSuperClassDatums().clear();
@@ -400,14 +461,16 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return completeClasses != null && !completeClasses.isEmpty();
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ownedPropertyDatums != null && !ownedPropertyDatums.isEmpty();
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getOwningScheduleModel() != null;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return referredClass != null;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+				return referredTypedModel != null;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return superClassDatums != null && !superClassDatums.isEmpty();
 		}

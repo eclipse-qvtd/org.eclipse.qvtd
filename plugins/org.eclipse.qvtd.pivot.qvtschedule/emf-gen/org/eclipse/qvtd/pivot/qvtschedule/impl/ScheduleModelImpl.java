@@ -133,7 +133,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public List<ClassDatum> getOwnedClassDatums() {
 		if (ownedClassDatums == null) {
-			ownedClassDatums = new EObjectContainmentWithInverseEList<ClassDatum>(ClassDatum.class, this, ModelImpl.MODEL_FEATURE_COUNT + 0, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
+			ownedClassDatums = new EObjectContainmentWithInverseEList<ClassDatum>(ClassDatum.class, this, ModelImpl.MODEL_FEATURE_COUNT + 0, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		}
 		return ownedClassDatums;
 	}

@@ -91,17 +91,6 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getAbstractDatum();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getReferredTypedModel <em>Referred Typed Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Typed Model</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getReferredTypedModel()
-	 * @see #getAbstractDatum()
-	 * @generated
-	 */
-	EReference getAbstractDatum_ReferredTypedModel();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ArgumentEdge <em>Argument Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -392,6 +381,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassDatum_ReferredClass();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getReferredTypedModel <em>Referred Typed Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Typed Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getReferredTypedModel()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_ReferredTypedModel();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuperClassDatums <em>Super Class Datums</em>}'.
@@ -2316,14 +2316,6 @@ public interface QVTschedulePackage extends EPackage {
 		EClass ABSTRACT_DATUM = eINSTANCE.getAbstractDatum();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Typed Model</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_DATUM__REFERRED_TYPED_MODEL = eINSTANCE.getAbstractDatum_ReferredTypedModel();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ArgumentEdgeImpl <em>Argument Edge</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2548,6 +2540,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_DATUM__REFERRED_CLASS = eINSTANCE.getClassDatum_ReferredClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Typed Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__REFERRED_TYPED_MODEL = eINSTANCE.getClassDatum_ReferredTypedModel();
 
 		/**
 		 * The meta object literal for the '<em><b>Super Class Datums</b></em>' reference list feature.

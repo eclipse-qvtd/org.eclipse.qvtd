@@ -13,7 +13,6 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,45 +24,11 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * Derived Datum classes provide the informaion type which in combination with the TypedModelfully identifies information in noth endogeneous and exogeneous transformations.
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getReferredTypedModel <em>Referred Typed Model</em>}</li>
- * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum()
  * @model abstract="true"
  * @generated
  */
 public interface AbstractDatum extends NamedElement {
-	/**
-	 * Returns the value of the '<em><b>Referred Typed Model</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Referred Typed Model</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The TypedModel for which this Datum provides an information element. For endogeneous transformations multiple Datums with distinct TypedModels may exist for the same Class.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Referred Typed Model</em>' reference.
-	 * @see #setReferredTypedModel(TypedModel)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum_ReferredTypedModel()
-	 * @model required="true"
-	 * @generated
-	 */
-	TypedModel getReferredTypedModel();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getReferredTypedModel <em>Referred Typed Model</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Typed Model</em>' reference.
-	 * @see #getReferredTypedModel()
-	 * @generated
-	 */
-	void setReferredTypedModel(TypedModel value);
 
 } // AbstractDatum

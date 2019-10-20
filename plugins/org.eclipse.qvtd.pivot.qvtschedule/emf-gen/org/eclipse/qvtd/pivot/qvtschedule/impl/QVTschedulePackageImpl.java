@@ -750,16 +750,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getAbstractDatum_ReferredTypedModel() {
-		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getArgumentEdge() {
 		return argumentEdgeEClass;
 	}
@@ -1030,8 +1020,18 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getClassDatum_SuperClassDatums() {
+	public EReference getClassDatum_ReferredTypedModel() {
 		return (EReference)classDatumEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getClassDatum_SuperClassDatums() {
+		return (EReference)classDatumEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2834,7 +2834,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		// Create classes and their features
 		abstractDatumEClass = createEClass(0);
-		createEReference(abstractDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 
 		argumentEdgeEClass = createEClass(1);
 
@@ -2863,6 +2862,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(castEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
 		classDatumEClass = createEClass(5);
+		createEReference(classDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(classDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(classDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEReference(classDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
@@ -3046,11 +3046,11 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		predicateEdgeEClass = createEClass(56);
 
 		propertyDatumEClass = createEClass(57);
+		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
-		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
-		createEAttribute(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
+		createEAttribute(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 
 		recursionEdgeEClass = createEClass(58);
 		createEAttribute(recursionEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
@@ -3236,7 +3236,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(abstractDatumEClass, AbstractDatum.class, "AbstractDatum", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractDatum_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(argumentEdgeEClass, ArgumentEdge.class, "ArgumentEdge", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3269,6 +3268,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getClassDatum_OwnedPropertyDatums(), this.getPropertyDatum(), this.getPropertyDatum_OwningClassDatum(), "ownedPropertyDatums", null, 0, -1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDatum_OwningScheduleModel(), this.getScheduleModel(), this.getScheduleModel_OwnedClassDatums(), "owningScheduleModel", null, 1, 1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDatum_ReferredClass(), thePivotPackage.getClass_(), null, "referredClass", null, 1, 1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassDatum_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDatum_SuperClassDatums(), this.getClassDatum(), null, "superClassDatums", null, 0, -1, ClassDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(clusterEClass, Cluster.class, "Cluster", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

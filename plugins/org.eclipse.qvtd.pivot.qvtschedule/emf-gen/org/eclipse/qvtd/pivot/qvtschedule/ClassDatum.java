@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +37,7 @@ import org.eclipse.ocl.pivot.Type;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwnedPropertyDatums <em>Owned Property Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getReferredClass <em>Referred Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuperClassDatums <em>Super Class Datums</em>}</li>
  * </ul>
  *
@@ -134,6 +136,31 @@ public interface ClassDatum extends AbstractDatum {
 	 * @generated
 	 */
 	void setReferredClass(org.eclipse.ocl.pivot.Class value);
+
+	/**
+	 * Returns the value of the '<em><b>Referred Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The TypedModel for which this Datum provides an information element. For endogeneous transformations multiple Datums with distinct TypedModels may exist for the same Class.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Referred Typed Model</em>' reference.
+	 * @see #setReferredTypedModel(TypedModel)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_ReferredTypedModel()
+	 * @model required="true"
+	 * @generated
+	 */
+	TypedModel getReferredTypedModel();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getReferredTypedModel <em>Referred Typed Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Typed Model</em>' reference.
+	 * @see #getReferredTypedModel()
+	 * @generated
+	 */
+	void setReferredTypedModel(TypedModel value);
 
 	/**
 	 * Returns the value of the '<em><b>Super Class Datums</b></em>' reference list.
