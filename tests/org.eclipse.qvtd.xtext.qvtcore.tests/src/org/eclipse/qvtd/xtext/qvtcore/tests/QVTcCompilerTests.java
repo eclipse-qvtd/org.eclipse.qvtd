@@ -201,9 +201,6 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
-			EPackage.Registry.INSTANCE.remove(FamiliesPackage.eNS_URI);
-			EPackage.Registry.INSTANCE.remove(Families2PersonsPackage.eNS_URI);
-			EPackage.Registry.INSTANCE.remove(PersonsPackage.eNS_URI);
 		}
 	}
 
@@ -274,6 +271,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		TestFile refFile2 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "TwoElementList_expected.xmi");
 		TestFile refFile3 = testProject.copyFiles(testProjectManager, outputFolder, modelsURI, "ThreeElementList_expected.xmi");
 		MyQVT myQVT = createQVT("Forward2Reverse", txFile.getURI());
+		//		DoublylinkedlistPackage.eINSTANCE.getClass();
+		//		List2listPackage.eINSTANCE.getClass();
 		//		myQVT.loadEcoreFile(getModelsURI("forward2reverse/DoublyLinkedList.ecore"), DoublylinkedlistPackage.eINSTANCE);
 		//		myQVT.loadEcoreFile(getModelsURI("forward2reverse/List2List.ecore"), List2listPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
@@ -311,8 +310,6 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
-			EPackage.Registry.INSTANCE.remove(DoublylinkedlistPackage.eNS_URI);
-			EPackage.Registry.INSTANCE.remove(List2listPackage.eNS_URI);
 		}
 	}
 
