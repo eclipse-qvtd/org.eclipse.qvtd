@@ -28,7 +28,7 @@ public class TypedModelsConfiguration
 		for (@NonNull Iterable<@NonNull String> outputNames : outputNamesList) {
 			TypedModelsConfiguration typedModelsConfiguration = new TypedModelsConfiguration();
 			for (@NonNull String outputName : outputNames) {
-				typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration(outputName, TypedModelConfiguration.Mode.ENFORCE));
+				typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration(outputName, TypedModelConfiguration.Mode.OUTPUT));
 			}
 			typedModelsConfigurations.add(typedModelsConfiguration);
 		}
@@ -75,12 +75,13 @@ public class TypedModelsConfiguration
 	private final @NonNull Map<@Nullable String, @NonNull TypedModelConfiguration> name2typedModelConfigurations = new HashMap<>();
 	private final @NonNull List<@NonNull TypedModel> inputTypedModels = new ArrayList<>();
 	private final @NonNull List<@NonNull TypedModel> intermediateTypedModels = new ArrayList<>();
+	private final @NonNull List<@NonNull TypedModel> outputOnlyTypedModels = new ArrayList<>();
 	private final @NonNull List<@NonNull TypedModel> outputTypedModels = new ArrayList<>();
 
 	public TypedModelsConfiguration(@NonNull String... enforcedOutputNames) {
 		if (enforcedOutputNames != null) {
 			for (@NonNull String enforcedOutputName : enforcedOutputNames) {
-				addTypedModelConfiguration(new TypedModelConfiguration(enforcedOutputName, TypedModelConfiguration.Mode.ENFORCE));
+				addTypedModelConfiguration(new TypedModelConfiguration(enforcedOutputName, TypedModelConfiguration.Mode.OUTPUT));
 			}
 		}
 	}
@@ -97,6 +98,10 @@ public class TypedModelsConfiguration
 
 	public @NonNull Iterable<@NonNull TypedModel> getIntermediateTypedModels() {
 		return intermediateTypedModels;
+	}
+
+	public @NonNull Iterable<@NonNull TypedModel> getOutputOnlyTypedModels() {
+		return outputOnlyTypedModels;
 	}
 
 	public @NonNull Iterable<@NonNull TypedModel> getOutputTypedModels() {
@@ -136,6 +141,7 @@ public class TypedModelsConfiguration
 	public @Nullable String reconcile(@NonNull Transformation transformation) {
 		inputTypedModels.clear();			// Allow re-reconcilaiation of QVTc as QVTm
 		intermediateTypedModels.clear();
+		outputOnlyTypedModels.clear();
 		outputTypedModels.clear();
 		Iterable<@NonNull TypedModel> typedModels = QVTbaseUtil.getModelParameters(transformation);
 		for (@NonNull TypedModel typedModel : typedModels) {
@@ -171,7 +177,11 @@ public class TypedModelsConfiguration
 				}
 			}
 			if (typedModelConfiguration.isOutput()) {
-				outputTypedModels.add(typedModelConfiguration.getTypedModel());
+				TypedModel typedModel = typedModelConfiguration.getTypedModel();
+				outputTypedModels.add(typedModel);
+				if (!typedModelConfiguration.isInput()) {
+					outputOnlyTypedModels.add(typedModel);
+				}
 			}
 		}
 		return s != null ? s.toString() : null;

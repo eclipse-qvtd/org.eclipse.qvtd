@@ -25,10 +25,8 @@ public class TypedModelConfiguration //implements Nameable
 {
 	public enum Mode {		// TODO this probably needs elaboration for IN-PLACE etc
 		INPUT,					// Used as input only
-		ENFORCE,				// Used as output only
 		INTERMEDIATE,			// Used to connect internal productions to internal consumptions
-		REPLACE,				// Used as input to compute a replacement output
-		UPDATE					// Used as input to compute an updated output
+		OUTPUT					// Used as output only
 	}
 	private final @NonNull Mode mode;
 	private final @Nullable String name;
@@ -52,7 +50,7 @@ public class TypedModelConfiguration //implements Nameable
 	}
 
 	public boolean isInput() {
-		return (mode == Mode.INPUT) || /*(mode == Mode.INTERMEDIATE) ||*/ (mode == Mode.REPLACE);
+		return mode == Mode.INPUT;
 	}
 
 	public boolean isIntermediate() {
@@ -60,7 +58,7 @@ public class TypedModelConfiguration //implements Nameable
 	}
 
 	public boolean isOutput() {
-		return (mode == Mode.ENFORCE) || /*(mode == Mode.INTERMEDIATE) ||*/ (mode == Mode.REPLACE);
+		return mode == Mode.OUTPUT;
 	}
 
 	/**

@@ -43,7 +43,7 @@ public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 		QVTrelationDomainUsageAnalysis domainUsageAnalysis = new QVTrelationDomainUsageAnalysis(myQVT.getEnvironmentFactory(), asTransformation);
 		TypedModelsConfiguration typedModelsConfiguration = new TypedModelsConfiguration();
 		if (enforcedOutputName != null) {
-			typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration(enforcedOutputName, TypedModelConfiguration.Mode.ENFORCE));
+			typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration(enforcedOutputName, TypedModelConfiguration.Mode.OUTPUT));
 		}
 		typedModelsConfiguration.reconcile(asTransformation);
 		myQVT.checkAnalysis(asTransformation, typedModelsConfiguration, domainUsageAnalysis, false);
