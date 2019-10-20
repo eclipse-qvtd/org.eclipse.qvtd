@@ -4,12 +4,12 @@
     xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans ../FamilyPlans.ecore http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/Persons ../Persons.ecore">
   <surnamePlans name="Flanders">
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:SonPlan" name="Rod">
         <familyMember href="MultiFamiliesChildren.xmi#//@families.0/@sons.0"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:MaleSonPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:MaleSonPlan" name="Rod">
         <person xsi:type="Persons:Male" href="PersonsMulti.xmi#//@persons.0"/>
       </familyMemberPlans>
     </familyPlans>
@@ -18,52 +18,52 @@
   </surnamePlans>
   <surnamePlans name="Simpson">
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:SonPlan" name="Homer">
         <familyMember href="MultiFamiliesChildren.xmi#//@families.1/@sons.0"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:SonPlan" name="Bart">
         <familyMember href="MultiFamiliesChildren.xmi#//@families.2/@sons.0"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan" name="Marge">
         <familyMember href="MultiFamiliesChildren.xmi#//@families.3/@daughters.0"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan" name="Lisa">
         <familyMember href="MultiFamiliesChildren.xmi#//@families.4/@daughters.0"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:DaughterPlan" name="Maggie">
         <familyMember href="MultiFamiliesChildren.xmi#//@families.5/@daughters.0"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:FemaleDaughterPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:FemaleDaughterPlan" name="Marge">
         <person xsi:type="Persons:Female" href="PersonsMulti.xmi#//@persons.2"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:FemaleDaughterPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:FemaleDaughterPlan" name="Lisa">
         <person xsi:type="Persons:Female" href="PersonsMulti.xmi#//@persons.4"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:FemaleDaughterPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:FemaleDaughterPlan" name="Maggie">
         <person xsi:type="Persons:Female" href="PersonsMulti.xmi#//@persons.5"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:MaleSonPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:MaleSonPlan" name="Homer">
         <person xsi:type="Persons:Male" href="PersonsMulti.xmi#//@persons.1"/>
       </familyMemberPlans>
     </familyPlans>
     <familyPlans>
-      <familyMemberPlans xsi:type="FamilyPlans:MaleSonPlan">
+      <familyMemberPlans xsi:type="FamilyPlans:MaleSonPlan" name="Bart">
         <person xsi:type="Persons:Male" href="PersonsMulti.xmi#//@persons.3"/>
       </familyMemberPlans>
     </familyPlans>

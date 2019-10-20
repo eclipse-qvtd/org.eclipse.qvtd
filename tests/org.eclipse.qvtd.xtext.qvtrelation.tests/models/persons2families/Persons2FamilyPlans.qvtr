@@ -10,22 +10,415 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::persons2families
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------					
 
-transformation Persons2FamilyPlans(person:PersonsMM, familyIn:FamiliesMM, plan:FamilyPlansMM, familyOut:FamiliesMM) { 
+transformation Persons2FamilyPlans(person:PersonsMM, familyRight:FamiliesMM, plan:FamilyPlansMM, familyLeft:FamiliesMM) { 
 
 	attribute PREFER_EXISTING_FAMILY_TO_NEW : Boolean[1] = 'true';
 	attribute PREFER_CREATING_PARENT_TO_CHILD : Boolean[1] = 'true';
 	
+	query getForename(person : PersonsMM::Person[1]) : String[1] {
+		let safeName = '' + person.name							-- workaround Bug 550602
+		in let index = safeName.indexOf(', ')
+		in safeName.substring(index+2, safeName.size())
+	}
+	
+	query getSurname(person : PersonsMM::Person[1]) : String[1] {
+		let safeName = '' + person.name							-- workaround Bug 550602
+		in let index = safeName.indexOf(', ')
+		in safeName.substring(1, index-1)
+	}
+	
 	top relation R_PersonRegister2FamilyPlanning
 	{		
 	  	domain person pr : PersonRegister;
-	  	domain familyIn fr : FamilyRegister;	    
+	  	domain familyRight fr : FamilyRegister;	    
 		enforce domain plan fp : FamilyPlanning;
 	}
 	
-	top relation Q0_FamilyPlanning2FamilyRegister
+	relation P0_Surname2SurnamePlan
+	{		
+	  	primitive domain surname : String[?];
+	  	enforce domain plan sp : SurnamePlan {
+			name = surname
+		};
+	}
+	
+	top relation P1_Person2FamilyPlanning
+	{		
+	  	sp : FamilyPlansMM::SurnamePlan;
+	  	domain person pr : PersonRegister {
+	  		persons = p : Person
+	  	};
+	  	domain familyRight fr : FamilyRegister;	    
+		enforce domain plan fp : FamilyPlanning {
+	  		surnamePlans = sp
+		};
+		when {
+			R_PersonRegister2FamilyPlanning(pr, fr, fp);
+			P0_Surname2SurnamePlan(getSurname(p), sp);
+		}
+		where {
+			P2_Person2SurnamePlan(p, sp);
+		}
+	}
+	
+	abstract relation P2_Person2SurnamePlan
+	{		
+	  	domain person p : Person[1];
+	  	enforce domain plan sp : SurnamePlan;
+	}
+	
+	relation P2_Female2SurnamePlan overrides P2_Person2SurnamePlan
+	{		
+	  	domain person p : Female[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		females = p
+	  	};
+	  	where {
+	  		P3_Female2FamilyPlan(p, sp);
+	  	}
+	}
+	
+	relation P2_Male2SurnamePlan overrides P2_Person2SurnamePlan
+	{		
+	  	domain person p : Male[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		males = p
+	  	};
+	  	where {
+	  		P3_Male2FamilyPlan(p, sp);
+	  	}
+	}
+	
+ 	abstract relation P3_Female2FamilyPlan
+	{		
+	  	domain person p : Female[1];
+	  	enforce domain plan sp : SurnamePlan;
+	}
+	
+ 	relation P3_Mother2NewFamilyPlan overrides P3_Female2FamilyPlan
+	{		
+	  	domain person p : Female[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		familyPlans = fp : FamilyPlan {
+	  			familyMemberPlans = sonPlan : FemaleMotherPlan {
+	  				person = p,
+	  				name = getForename(p)
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+ 	relation P3_Daughter2NewFamilyPlan overrides P3_Female2FamilyPlan
+	{		
+	  	domain person p : Female[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		familyPlans = fp : FamilyPlan {
+	  			familyMemberPlans = sonPlan : FemaleDaughterPlan {
+	  				person = p,
+	  				name = getForename(p)
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		not this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+	
+ 	abstract relation P3_Male2FamilyPlan
+	{		
+	  	domain person p : Male[1];
+	  	enforce domain plan sp : SurnamePlan;
+	}
+	
+ 	relation P3_Father2NewFamilyPlan overrides P3_Male2FamilyPlan
+	{		
+	  	domain person p : Male[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		familyPlans = fp : FamilyPlan {
+	  			familyMemberPlans = sonPlan : MaleFatherPlan {
+	  				person = p,
+	  				name = getForename(p)
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+ 	relation P3_Son2NewFamilyPlan overrides P3_Male2FamilyPlan
+	{		
+	  	domain person p : Male[1];
+	  	enforce domain plan sp : SurnamePlan {
+	  		familyPlans = fp : FamilyPlan {
+	  			familyMemberPlans = sonPlan : MaleSonPlan {
+	  				person = p,
+	  				name = getForename(p)
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		not this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+	
+	relation F0_Family2SurnamePlan
+	{		
+	  	domain familyRight f : Family[1] ;
+	  	enforce domain plan sp : SurnamePlan {
+	  		families = f
+	  	};
+	}
+		
+	top relation F1_Family2FamilyPlan
+	{		
+	  	domain familyRight fy : Family;
+	  	enforce domain plan fp : FamilyPlan {
+	  		surnamePlan = sp : SurnamePlan
+	  	};
+	  	when {
+	  		F0_Family2SurnamePlan(fy, sp);
+	  	}
+	}
+	
+	top relation F1_Family2SurnamePlanContainment
+	{		
+	  	sp : FamilyPlansMM::SurnamePlan[?];
+	  	domain person pr : PersonRegister;
+	  	domain familyRight fr : FamilyRegister {
+	  		families = f : Family
+	  	};    
+		enforce domain plan fp : FamilyPlanning {
+	  		surnamePlans = sp
+		};
+		when {
+			R_PersonRegister2FamilyPlanning(pr, fr, fp);
+			P0_Surname2SurnamePlan(f.name, sp);
+		}
+		where {
+			F0_Family2SurnamePlan(f, sp);
+		}
+	}
+	
+	top relation F2_Daughter2DaughterPlan
+	{		
+	  	domain familyRight p : FamilyMember[1] {
+	  		daughtersInverse = fy : Family
+	  	};
+	  	enforce domain plan fp : FamilyPlan {
+	  		familyMemberPlans = dp : DaughterPlan {
+	  			familyMember = p,
+	  			name = p.name
+	  		}
+	  	};
+	  	when {
+	  		F1_Family2FamilyPlan(fy, fp);
+	  	}
+	}
+		
+	top relation F2_Father2FatherPlan
+	{		
+	  	domain familyRight p : FamilyMember[1] {
+	  		fatherInverse = fy : Family
+	  	};
+	  	enforce domain plan fp : FamilyPlan {
+	  		familyMemberPlans = sp : FatherPlan {
+	  			familyMember = p,
+	  			name = p.name
+	  		}
+	  	};
+	  	when {
+	  		F1_Family2FamilyPlan(fy, fp);
+	  	}
+	}
+		
+	top relation F2_Mother2MotherPlan
+	{		
+	  	domain familyRight p : FamilyMember[1] {
+	  		motherInverse = fy : Family
+	  	};
+	  	enforce domain  plan fp : FamilyPlan {
+	  		familyMemberPlans = sp : MotherPlan {
+	  			familyMember = p,
+	  			name = p.name
+	  		}
+	  	};
+	  	when {
+	  		F1_Family2FamilyPlan(fy, fp);
+	  	}
+	}
+		
+	top relation F2_Son2SonPlan
+	{		
+	  	domain familyRight p : FamilyMember[1] {
+	  		sonsInverse = fy : Family
+	  	};
+	  	enforce domain  plan fp : FamilyPlan {
+	  		familyMemberPlans = sp : SonPlan {
+	  			familyMember = p,
+	  			name = p.name
+	  		}
+	  	};
+	  	when {
+	  		F1_Family2FamilyPlan(fy, fp);
+	  	}
+	}
+	
+	top relation Q1_FamilyPlanning2FamilyRegister
 	{		
 	  	domain plan fp : FamilyPlanning;
-	  	enforce domain familyOut fr : FamilyRegister;
+	  	enforce domain familyLeft fr : FamilyRegister;
+	}
+	
+	top relation Q1_FamilyPlan2Family
+	{	
+		name : String;
+	  	domain plan fp : FamilyPlan {
+	  		surnamePlan = sp : SurnamePlan {
+	  			familyPlanning = fpg : FamilyPlanning,
+	  			name = name
+	  		}
+	  	};
+	  	enforce domain familyLeft f : Family {
+	  		familiesInverse = fr : FamilyRegister,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyPlanning2FamilyRegister(fpg, fr);
+	  	}
+	}
+	
+	top relation Q1_DaughterPlan2Daughter
+	{	
+		name : String;
+	  	domain plan fmp : DaughterPlan {
+	  		familyPlan = fp : FamilyPlan,
+	  		name = name
+	  	};
+	  	enforce domain familyLeft p : FamilyMember {
+	  		daughtersInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyPlan2Family(fp, f);
+	  	}
+	}
+	
+	top relation Q1_FatherPlan2Father
+	{	
+		name : String;
+	  	domain plan fmp : FatherPlan {
+	  		familyPlan = fp : FamilyPlan,
+	  		name = name
+	  	};
+	  	enforce domain familyLeft p : FamilyMember {
+	  		fatherInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyPlan2Family(fp, f);
+	  	}
+	}
+	
+	top relation Q1_MotherPlan2Mother
+	{	
+		name : String;
+	  	domain plan fmp : MotherPlan {
+	  		familyPlan = fp : FamilyPlan,
+	  		name = name
+	  	};
+	  	enforce domain familyLeft p : FamilyMember {
+	  		motherInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyPlan2Family(fp, f);
+	  	}
+	}
+	
+	top relation Q1_SonPlan2Son
+	{	
+		name : String;
+	  	domain plan fmp : SonPlan {
+	  		familyPlan = fp : FamilyPlan,
+	  		name = name
+	  	};
+	  	enforce domain familyLeft p : FamilyMember {
+	  		sonsInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyPlan2Family(fp, f);
+	  	}
+	}
+	
+	top relation Q1_FemaleDaughterPlan2Daughter
+	{	
+		name : String;
+	  	domain plan fmp : FemaleDaughterPlan {
+	  		familyPlan = fp : FamilyPlan,
+	  		name = name
+	  	};
+	  	enforce domain familyLeft p : FamilyMember {
+	  		daughtersInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyPlan2Family(fp, f);
+	  	}
+	}
+	
+	top relation Q1_FemaleMotherPlan2Mother
+	{	
+		name : String;
+	  	domain plan fmp : FemaleMotherPlan {
+	  		familyPlan = fp : FamilyPlan,
+	  		name = name
+	  	};
+	  	enforce domain familyLeft p : FamilyMember {
+	  		motherInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyPlan2Family(fp, f);
+	  	}
+	}
+	
+	top relation Q1_MaleFatherPlan2Father
+	{	
+		name : String;
+	  	domain plan fmp : MaleFatherPlan {
+	  		familyPlan = fp : FamilyPlan,
+	  		name = name
+	  	};
+	  	enforce domain familyLeft p : FamilyMember {
+	  		fatherInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyPlan2Family(fp, f);
+	  	}
+	}
+	
+	top relation Q1_MaleSonPlan2Son
+	{	
+		name : String;
+	  	domain plan fmp : MaleSonPlan {
+	  		familyPlan = fp : FamilyPlan,
+	  		name = name
+	  	};
+	  	enforce domain familyLeft p : FamilyMember {
+	  		sonsInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyPlan2Family(fp, f);
+	  	}
 	}
 }	
 }

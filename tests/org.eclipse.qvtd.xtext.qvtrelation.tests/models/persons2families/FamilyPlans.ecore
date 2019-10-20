@@ -11,6 +11,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="FamilyMemberPlan" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="familyPlan" lowerBound="1"
         eType="#//FamilyPlan" eOpposite="#//FamilyPlan/familyMemberPlans"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FamilyPlan">
     <eStructuralFeatures xsi:type="ecore:EReference" name="family" eType="ecore:EClass Families.ecore#//Family"/>
