@@ -130,7 +130,7 @@ public class QVTimperativeFormatter extends QVTbaseFormatter
 		{
 			DirectionCSElements a = f.getDirectionCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
-			c.setNoSpace().before(a.getCommaKeyword_3_2_0());
+			c.setNoSpace().before(a.getCommaKeyword_2_2_0());
 		}
 		{
 			EntryPointCSElements a = f.getEntryPointCSAccess();

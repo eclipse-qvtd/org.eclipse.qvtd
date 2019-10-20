@@ -16,7 +16,7 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,12 +97,12 @@ public interface NewStatementCS extends TypedElementCS, ObservableStatementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Typed Model</em>' reference.
-	 * @see #setReferredTypedModel(ImperativeTypedModel)
+	 * @see #setReferredTypedModel(TypedModel)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getNewStatementCS_ReferredTypedModel()
 	 * @model required="true"
 	 * @generated
 	 */
-	ImperativeTypedModel getReferredTypedModel();
+	TypedModel getReferredTypedModel();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getReferredTypedModel <em>Referred Typed Model</em>}' reference.
@@ -112,6 +112,6 @@ public interface NewStatementCS extends TypedElementCS, ObservableStatementCS {
 	 * @see #getReferredTypedModel()
 	 * @generated
 	 */
-	void setReferredTypedModel(ImperativeTypedModel value);
+	void setReferredTypedModel(TypedModel value);
 
 } // NewStatementCS

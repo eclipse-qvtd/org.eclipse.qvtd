@@ -34,7 +34,6 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.Envir
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractModelsManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationInstance;
@@ -135,7 +134,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 	 * @return the resource
 	 */
 	// FIXME Change API for multiple extents
-	public Resource getModel(@NonNull ImperativeTypedModel typedModel) {
+	public Resource getModel(@NonNull TypedModel typedModel) {
 		QVTiTypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
 		return typedModelInstance.getModel();
 	}
@@ -236,10 +235,10 @@ public class QVTiModelsManager extends AbstractModelsManager
 	public static class QVTiTypedModelInstance extends AbstractTypedModelInstance	// FIXME reimplement using CG variant
 	{
 		protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
-		protected final @NonNull ImperativeTypedModel typedModel;
+		protected final @NonNull TypedModel typedModel;
 		private @Nullable EClass extentEClass = null;
 
-		public QVTiTypedModelInstance(@NonNull QVTiModelsManager modelsManager, @NonNull ImperativeTypedModel typedModel) {
+		public QVTiTypedModelInstance(@NonNull QVTiModelsManager modelsManager, @NonNull TypedModel typedModel) {
 			super(modelsManager, QVTimperativeUtil.getName(typedModel));
 			this.environmentFactory = modelsManager.environmentFactory;
 			this.typedModel = typedModel;
@@ -319,14 +318,14 @@ public class QVTiModelsManager extends AbstractModelsManager
 			return (QVTiModelsManager) modelsManager;
 		}
 
-		public @NonNull ImperativeTypedModel getTypedModel() {
+		public @NonNull TypedModel getTypedModel() {
 			return typedModel;
 		}
 
 		@Override
 		public <K,V> void initExtent(int extentClassIndex, @Nullable Map<K, V> extentOpposites) {
 			super.initExtent(extentClassIndex, extentOpposites);
-			ImperativeTypedModel typedModel = getTypedModel();
+			TypedModel typedModel = getTypedModel();
 			Set<org.eclipse.ocl.pivot.@NonNull Class> usedClasses = Sets.newHashSet(QVTimperativeUtil.getUsedClasses(typedModel));
 			ClassId[] classIndex2classId2 = classIndex2classId;
 			assert classIndex2classId2 != null;

@@ -456,69 +456,6 @@ public interface QVTimperativePackage extends EPackage {
 	EOperation getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel <em>Imperative Typed Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Imperative Typed Model</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel
-	 * @generated
-	 */
-	EClass getImperativeTypedModel();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsInput <em>Is Input</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Input</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsInput()
-	 * @see #getImperativeTypedModel()
-	 * @generated
-	 */
-	EAttribute getImperativeTypedModel_IsInput();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsOutput <em>Is Output</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Output</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsOutput()
-	 * @see #getImperativeTypedModel()
-	 * @generated
-	 */
-	EAttribute getImperativeTypedModel_IsOutput();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#getAllUsedPackages <em>All Used Packages</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>All Used Packages</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#getAllUsedPackages()
-	 * @see #getImperativeTypedModel()
-	 * @generated
-	 */
-	EReference getImperativeTypedModel_AllUsedPackages();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNameIsNotNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Not Null</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Name Is Not Null</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNameIsNotNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNotBothInputAndOutput(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Not Both Input And Output</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Not Both Input And Output</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNotBothInputAndOutput(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding <em>Loop Parameter Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1591,56 +1528,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation IMPERATIVE_TRANSFORMATION___VALIDATEALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl <em>Imperative Typed Model</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getImperativeTypedModel()
-		 * @generated
-		 */
-		EClass IMPERATIVE_TYPED_MODEL = eINSTANCE.getImperativeTypedModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Input</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPERATIVE_TYPED_MODEL__IS_INPUT = eINSTANCE.getImperativeTypedModel_IsInput();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Output</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPERATIVE_TYPED_MODEL__IS_OUTPUT = eINSTANCE.getImperativeTypedModel_IsOutput();
-
-		/**
-		 * The meta object literal for the '<em><b>All Used Packages</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES = eINSTANCE.getImperativeTypedModel_AllUsedPackages();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Name Is Not Null</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPERATIVE_TYPED_MODEL___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Not Both Input And Output</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_INPUT_AND_OUTPUT__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.LoopParameterBindingImpl <em>Loop Parameter Binding</em>}' class.

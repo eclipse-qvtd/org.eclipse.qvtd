@@ -107,11 +107,6 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
-	public @Nullable Object visitImperativeTypedModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeTypedModel object) {
-		return visitTypedModel(object);
-	}
-
-	@Override
 	public @Nullable Object visitLoopParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull LoopParameterBinding object) {
 		return visitMappingParameterBinding(object);
 	}

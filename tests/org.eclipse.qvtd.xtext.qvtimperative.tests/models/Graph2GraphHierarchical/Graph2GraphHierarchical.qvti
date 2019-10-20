@@ -14,7 +14,7 @@ transformation CopyGraph {
 	        }
 	    }
 	}
-	
+
 	map Graph2Middle {	        					-- L to M for G
 	    guard:upperGraph g1:Graph;
 	    new:middle middleG2G:Graph2Graph;

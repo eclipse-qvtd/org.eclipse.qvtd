@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -49,11 +51,11 @@ public interface SimpleParameter extends MappingParameter {
 	 * The TypedModel that contains the passed value.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Referred Typed Model</em>' reference.
-	 * @see #setReferredTypedModel(ImperativeTypedModel)
+	 * @see #setReferredTypedModel(TypedModel)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSimpleParameter_ReferredTypedModel()
 	 * @generated
 	 */
-	ImperativeTypedModel getReferredTypedModel();
+	TypedModel getReferredTypedModel();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter#getReferredTypedModel <em>Referred Typed Model</em>}' reference.
@@ -63,6 +65,6 @@ public interface SimpleParameter extends MappingParameter {
 	 * @see #getReferredTypedModel()
 	 * @generated
 	 */
-	void setReferredTypedModel(ImperativeTypedModel value);
+	void setReferredTypedModel(TypedModel value);
 
 } // SimpleParameter

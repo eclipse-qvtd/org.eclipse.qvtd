@@ -1,8 +1,8 @@
 import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
 
 transformation Expressions {
-	input source imports ecore;
-	output target imports ecore;
+	source imports ecore;
+	target imports ecore;
 	middle imports ecore;
 
 	map expressionsLM {

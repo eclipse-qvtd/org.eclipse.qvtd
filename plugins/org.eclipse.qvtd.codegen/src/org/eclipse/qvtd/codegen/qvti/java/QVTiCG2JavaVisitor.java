@@ -129,7 +129,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -1270,21 +1269,21 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(";\n");
 		//
 		EPackage ePackage = eClassifier.getEPackage();
-		ImperativeTypedModel bestOutputTypedModel = null;
-		ImperativeTypedModel bestMiddleTypedModel = null;
-		ImperativeTypedModel bestInputTypedModel = null;
-		for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(entryPointsAnalysis.getTransformation())) {
-			ImperativeTypedModel imperativeTypedModel = null;
+		TypedModel bestOutputTypedModel = null;
+		TypedModel bestMiddleTypedModel = null;
+		TypedModel bestInputTypedModel = null;
+		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(entryPointsAnalysis.getTransformation())) {
+			TypedModel imperativeTypedModel = null;
 			for (org.eclipse.ocl.pivot.Package usedPackage : typedModel.getUsedPackage()) {
 				if (usedPackage.getESObject() == ePackage) {
 					imperativeTypedModel = typedModel;
 				}
 			}
 			if (imperativeTypedModel != null) {
-				if (imperativeTypedModel.isIsOutput()) {
+				if (QVTimperativeUtil.isOutput(imperativeTypedModel)) {
 					bestOutputTypedModel = imperativeTypedModel;
 				}
-				else if (!imperativeTypedModel.isIsInput()) {
+				else if (!QVTimperativeUtil.isInput(imperativeTypedModel)) {
 					bestMiddleTypedModel = imperativeTypedModel;
 				}
 				else {
@@ -1292,7 +1291,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				}
 			}
 		}
-		ImperativeTypedModel asTypedModel = null;
+		TypedModel asTypedModel = null;
 		if (bestOutputTypedModel != null) {
 			asTypedModel = bestOutputTypedModel;
 		}
@@ -1581,7 +1580,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					}
 					Collections.sort(cgProperties, NameUtil.NAMEABLE_COMPARATOR);
 					NewStatement iNewStatement = QVTiCGUtil.getAST(cgRealizedVariable);
-					ImperativeTypedModel asTypedModel = ClassUtil.nonNullState(iNewStatement.getReferredTypedModel());
+					TypedModel asTypedModel = ClassUtil.nonNullState(iNewStatement.getReferredTypedModel());
 					CGTypedModel cgTypedModel = ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
 					int modelIndex = cgTypedModel.getModelIndex();
 					CachedInstance cachedInstance = cachedInstances.get(asClass);

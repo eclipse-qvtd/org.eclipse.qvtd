@@ -12,7 +12,7 @@ transformation classescs2as
 		new:rightAS root : Root;
 		set rootCS.ast := root;
 	}
-	
+
 	map mCreationPackageCS2Package
 	{
 		guard:leftCS packageCS : PackageCS;

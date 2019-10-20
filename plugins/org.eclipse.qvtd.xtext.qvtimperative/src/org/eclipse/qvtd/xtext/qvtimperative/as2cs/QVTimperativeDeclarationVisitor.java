@@ -79,7 +79,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -497,22 +496,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitImperativeTypedModel(@NonNull ImperativeTypedModel asTypedModel) {
-		if (asTypedModel.isIsPrimitive() || asTypedModel.isIsThis()) {
-			return null;
-		}
-		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTimperativeCSPackage.Literals.DIRECTION_CS, asTypedModel, null);
-		if ("".equals(asTypedModel.getName())) {
-			csDirection.setName(null);
-		}
-		csDirection.setIsInput(asTypedModel.isIsInput());
-		csDirection.setIsOutput(asTypedModel.isIsOutput());
-		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
-		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
-		return csDirection;
-	}
-
-	@Override
 	public @Nullable ElementCS visitImport(@NonNull Import asUnit) {
 		BaseCSResource csResource = context.getCSResource();
 		Namespace asNamespace = asUnit.getImportedNamespace();
@@ -713,7 +696,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
 		return csDirection;
 	}
-
 
 	@Override
 	public ElementCS visitVariable(@NonNull Variable asVariable) {

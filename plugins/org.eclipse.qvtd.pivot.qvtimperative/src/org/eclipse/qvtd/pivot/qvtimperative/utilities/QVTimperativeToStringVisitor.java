@@ -29,7 +29,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -201,17 +200,6 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	@Override
 	public @Nullable String visitImperativeTransformation(@NonNull ImperativeTransformation object) {
 		return visitTransformation(object);
-	}
-
-	@Override
-	public @Nullable String visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
-		if (object.isIsInput()) {
-			append("input ");
-		}
-		if (object.isIsOutput()) {
-			append("output ");
-		}
-		return visitTypedModel(object);
 	}
 
 	@Override

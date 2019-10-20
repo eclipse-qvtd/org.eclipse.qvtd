@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -211,6 +212,10 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		return null;
+	}
+
+	public static @Nullable TypedModel basicGetModelParameter(@NonNull Transformation transformation, @Nullable String name) {
+		return NameUtil.getNameable(getModelParameters(transformation), name);
 	}
 
 	public static @Nullable TypedModel basicGetPrimitiveTypedModel(@NonNull Transformation asTransformation) {
@@ -500,6 +505,10 @@ public class QVTbaseUtil extends PivotUtil
 		return externalVariables;
 	}
 
+	public static @NonNull TypedModel getModelParameter(@NonNull Transformation transformation, @Nullable String name) {
+		return ClassUtil.nonNullState(NameUtil.getNameable(transformation.getModelParameter(), name));
+	}
+
 	public static @NonNull Iterable<@NonNull TypedModel> getModelParameters(@NonNull Transformation asTransformation) {
 		return ClassUtil.nullFree(asTransformation.getModelParameter());
 	}
@@ -534,6 +543,10 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull Transformation getOwningTransformation(@NonNull Rule asRule) {
 		return ClassUtil.nonNullState(asRule.getTransformation());
+	}
+
+	public static @NonNull Transformation getOwningTransformation(@NonNull TypedModel asTypedModel) {
+		return ClassUtil.nonNullState(asTypedModel.getTransformation());
 	}
 
 	public static @NonNull TypedModel getPrimitiveTypedModel(@NonNull Transformation asTransformation) {

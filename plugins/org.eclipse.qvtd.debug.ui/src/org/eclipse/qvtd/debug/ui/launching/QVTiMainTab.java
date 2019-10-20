@@ -27,7 +27,6 @@ import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.swt.graphics.Image;
@@ -84,15 +83,14 @@ public class QVTiMainTab extends MainTab<Transformation> implements QVTiLaunchCo
 			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
 			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
 		super.updateGroups(transformation, oldInputsMap, newInputsMap, oldOutputsMap, newOutputsMap, intermediateMap);
-		for (TypedModel typedModel : transformation.getModelParameter()) {
-			ImperativeTypedModel imperativeTypedModel = (ImperativeTypedModel)typedModel;
-			if (imperativeTypedModel.isIsInput()) {
-				String name = imperativeTypedModel.getName();
+		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(transformation)) {
+			if (QVTimperativeUtil.isInput(typedModel)) {
+				String name = typedModel.getName();
 				assert name != null;
 				newInputsMap.put(name, null); //getDefaultPath(inputsGroup, name));
 			}
-			if (imperativeTypedModel.isIsOutput()) {
-				String name = imperativeTypedModel.getName();
+			if (QVTimperativeUtil.isOutput(typedModel)) {
+				String name = typedModel.getName();
 				assert name != null;
 				newOutputsMap.put(name, null); //getDefaultPath(inputsGroup, name));
 			}

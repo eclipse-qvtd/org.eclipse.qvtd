@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
@@ -56,7 +56,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	 * @generated
 	 * @ordered
 	 */
-	protected ImperativeTypedModel referredTypedModel;
+	protected TypedModel referredTypedModel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,10 +83,10 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	 * @generated
 	 */
 	@Override
-	public ImperativeTypedModel getReferredTypedModel() {
+	public TypedModel getReferredTypedModel() {
 		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
 			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
-			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
+			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
@@ -100,7 +100,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImperativeTypedModel basicGetReferredTypedModel() {
+	public TypedModel basicGetReferredTypedModel() {
 		return referredTypedModel;
 	}
 
@@ -110,8 +110,8 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	 * @generated
 	 */
 	@Override
-	public void setReferredTypedModel(ImperativeTypedModel newReferredTypedModel) {
-		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
+	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
+		TypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
@@ -141,7 +141,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
-				setReferredTypedModel((ImperativeTypedModel)newValue);
+				setReferredTypedModel((TypedModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -156,7 +156,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
-				setReferredTypedModel((ImperativeTypedModel)null);
+				setReferredTypedModel((TypedModel)null);
 				return;
 		}
 		super.eUnset(featureID);

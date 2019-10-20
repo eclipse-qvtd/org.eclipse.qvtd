@@ -45,9 +45,9 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
@@ -105,8 +105,8 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nonNullState((ImperativeTransformation)cgTransformation.getAst());
 	}
 
-	public static @NonNull ImperativeTypedModel getAST(@NonNull CGTypedModel cgTypedModel) {
-		return ClassUtil.nonNullState((ImperativeTypedModel)cgTypedModel.getAst());
+	public static @NonNull TypedModel getAST(@NonNull CGTypedModel cgTypedModel) {
+		return ClassUtil.nonNullState((TypedModel)cgTypedModel.getAst());
 	}
 
 	public static @NonNull VariableExp getAST(@NonNull CGVariableExp cgVariableExp) {

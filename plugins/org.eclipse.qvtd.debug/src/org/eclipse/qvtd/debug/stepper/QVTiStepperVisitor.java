@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -28,7 +29,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -114,11 +114,6 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	}
 
 	@Override
-	public @Nullable IStepper visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
-		return NonStepper.INSTANCE;
-	}
-
-	@Override
 	public IStepper visitLoopParameterBinding(@NonNull LoopParameterBinding object) {
 		return PreStepper.INSTANCE;
 	}
@@ -201,5 +196,10 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	@Override
 	public @Nullable IStepper visitTransformation(@NonNull Transformation object) {
 		return visiting(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitTypedModel(@NonNull TypedModel object) {
+		return NonStepper.INSTANCE;
 	}
 }

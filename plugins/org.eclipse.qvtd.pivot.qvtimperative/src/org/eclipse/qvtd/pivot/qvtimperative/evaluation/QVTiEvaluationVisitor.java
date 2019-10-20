@@ -50,7 +50,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -400,11 +399,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitImperativeTransformation(@NonNull ImperativeTransformation transformation) {
 		return executor.internalExecuteTransformation(transformation, undecoratedVisitor);
-	}
-
-	@Override
-	public @Nullable Object visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
-		return visiting(object);
 	}
 
 	@Override

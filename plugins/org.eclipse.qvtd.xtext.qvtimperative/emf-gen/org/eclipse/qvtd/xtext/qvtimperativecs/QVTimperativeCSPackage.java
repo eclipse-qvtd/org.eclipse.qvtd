@@ -545,28 +545,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getDirectionCS_Imports();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsInput <em>Is Input</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Input</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsInput()
-	 * @see #getDirectionCS()
-	 * @generated
-	 */
-	EAttribute getDirectionCS_IsInput();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsOutput <em>Is Output</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Output</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsOutput()
-	 * @see #getDirectionCS()
-	 * @generated
-	 */
-	EAttribute getDirectionCS_IsOutput();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS <em>Entry Point CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1459,22 +1437,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DIRECTION_CS__IMPORTS = eINSTANCE.getDirectionCS_Imports();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Input</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DIRECTION_CS__IS_INPUT = eINSTANCE.getDirectionCS_IsInput();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Output</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DIRECTION_CS__IS_OUTPUT = eINSTANCE.getDirectionCS_IsOutput();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl <em>Entry Point CS</em>}' class.

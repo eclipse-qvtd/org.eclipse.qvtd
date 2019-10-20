@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
@@ -39,7 +38,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -161,10 +159,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createImperativeTransformationAdapter();
 			}
 			@Override
-			public Adapter caseImperativeTypedModel(ImperativeTypedModel object) {
-				return createImperativeTypedModelAdapter();
-			}
-			@Override
 			public Adapter caseLoopParameterBinding(LoopParameterBinding object) {
 				return createLoopParameterBindingAdapter();
 			}
@@ -275,10 +269,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTransformation(Transformation object) {
 				return createTransformationAdapter();
-			}
-			@Override
-			public Adapter caseTypedModel(TypedModel object) {
-				return createTypedModelAdapter();
 			}
 			@Override
 			public Adapter caseReferringElement(ReferringElement object) {
@@ -469,20 +459,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImperativeTransformationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel <em>Imperative Typed Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel
-	 * @generated
-	 */
-	public Adapter createImperativeTypedModelAdapter() {
 		return null;
 	}
 
@@ -833,20 +809,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransformationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel <em>Typed Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtbase.TypedModel
-	 * @generated
-	 */
-	public Adapter createTypedModelAdapter() {
 		return null;
 	}
 

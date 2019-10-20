@@ -23,15 +23,13 @@
         <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="p0o..hsv2hsl.rgb2hsv..HSV2HSL.RGB" name="color" isRequired="false"
             type="pivot:DataType HSV2HSL.ecore.oclas#T.HSV2HSL.RGB"/>
       </ownedOperations>
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..hsv2hsl.hsv" name="hsv" usedPackage="HSVTree.ecore.oclas#P.HSVTree"
-          isInput="true">
+      <modelParameter xmi:id="qT..hsv2hsl.hsv" name="hsv" usedPackage="HSVTree.ecore.oclas#P.HSVTree">
         <ownedContext xsi:type="pivot:Parameter" xmi:id="qV..hsv2hsl.hsv.hsv" name="hsv" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtruntimelibrary.Model"/>
       </modelParameter>
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..hsv2hsl.hsl" name="hsl" usedPackage="HSLTree.ecore.oclas#P.HSLTree"
-          isOutput="true">
+      <modelParameter xmi:id="qT..hsv2hsl.hsl" name="hsl" usedPackage="HSLTree.ecore.oclas#P.HSLTree">
         <ownedContext xsi:type="pivot:Parameter" xmi:id="qV..hsv2hsl.hsl.hsl" name="hsl" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtruntimelibrary.Model"/>
       </modelParameter>
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..hsv2hsl.middle" name="middle" usedPackage="HSV2HSL.ecore.oclas#P.HSV2HSL">
+      <modelParameter xmi:id="qT..hsv2hsl.middle" name="middle" usedPackage="HSV2HSL.ecore.oclas#P.HSV2HSL">
         <ownedContext xsi:type="pivot:Parameter" xmi:id="qV..hsv2hsl.middle.middle" name="middle" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtruntimelibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hsl.__root__" name="__root__">

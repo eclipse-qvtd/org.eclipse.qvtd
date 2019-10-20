@@ -1,8 +1,8 @@
 import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
 
 transformation Constructors {
-	input source imports ecore;
-	output target imports ecore;
+	source imports ecore;
+	target imports ecore;
 	middle imports ecore;
 
 	query createEPackage(name2 : String) : ecore::EPackage {
@@ -15,7 +15,7 @@ transformation Constructors {
 		new:target epOut2 : EPackage;
 	    set epOut2.name := epIn.name;
 	} */
-	
+
 	map singleton {
 		new:target epOut1 : EPackage { name = 'this', nsPrefix = 'that' };
 	}

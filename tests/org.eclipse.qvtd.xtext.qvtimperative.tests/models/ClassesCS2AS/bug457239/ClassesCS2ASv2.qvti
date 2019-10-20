@@ -17,7 +17,7 @@ transformation classescs2as
 							else 'unexpected'
 							endif;
 	}
-	
+
 	entry __root__ input leftCS output rightAS
 	{
 		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {

@@ -27,8 +27,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -36,7 +36,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 {
 	private final @NonNull Map<@NonNull Function, @NonNull CGFunction> cgFunctions = new HashMap<>();
 	private final @NonNull Map<@NonNull Mapping, @NonNull CGMapping> cgMappings = new HashMap<>();
-	private final @NonNull Map<@NonNull ImperativeTypedModel, @NonNull CGTypedModel> cgTypedModels = new HashMap<>();
+	private final @NonNull Map<@NonNull TypedModel, @NonNull CGTypedModel> cgTypedModels = new HashMap<>();
 	private final @Nullable TypeId originalThisTypeId;
 	private final @NonNull TypeId runtimeThisTypeId;
 
@@ -62,7 +62,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		cgMappings.put(pMapping, cgMapping);
 	}
 
-	public void addTypedModel(@NonNull ImperativeTypedModel pTypedModel, @NonNull CGTypedModel cgTypedModel) {
+	public void addTypedModel(@NonNull TypedModel pTypedModel, @NonNull CGTypedModel cgTypedModel) {
 		cgTypedModels.put(pTypedModel, cgTypedModel);
 	}
 
@@ -98,7 +98,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		}
 	}
 
-	public @Nullable CGTypedModel getTypedModel(@NonNull ImperativeTypedModel pTypedModel) {
+	public @Nullable CGTypedModel getTypedModel(@NonNull TypedModel pTypedModel) {
 		return cgTypedModels.get(pTypedModel);
 	}
 }

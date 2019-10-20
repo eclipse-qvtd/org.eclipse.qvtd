@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -64,7 +64,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	 * @generated
 	 * @ordered
 	 */
-	protected ImperativeTypedModel referredTypedModel;
+	protected TypedModel referredTypedModel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,10 +91,10 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	 * @generated
 	 */
 	@Override
-	public ImperativeTypedModel getReferredTypedModel() {
+	public TypedModel getReferredTypedModel() {
 		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
 			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
-			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
+			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, oldReferredTypedModel, referredTypedModel));
@@ -108,7 +108,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImperativeTypedModel basicGetReferredTypedModel() {
+	public TypedModel basicGetReferredTypedModel() {
 		return referredTypedModel;
 	}
 
@@ -118,8 +118,8 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	 * @generated
 	 */
 	@Override
-	public void setReferredTypedModel(ImperativeTypedModel newReferredTypedModel) {
-		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
+	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
+		TypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, oldReferredTypedModel, referredTypedModel));
@@ -149,7 +149,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
-				setReferredTypedModel((ImperativeTypedModel)newValue);
+				setReferredTypedModel((TypedModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -164,7 +164,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
-				setReferredTypedModel((ImperativeTypedModel)null);
+				setReferredTypedModel((TypedModel)null);
 				return;
 		}
 		super.eUnset(featureID);

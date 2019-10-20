@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
-import org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -40,7 +39,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -151,13 +149,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass imperativeTransformationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass imperativeTypedModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -694,66 +685,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EOperation getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map() {
 		return imperativeTransformationEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getImperativeTypedModel() {
-		return imperativeTypedModelEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getImperativeTypedModel_IsInput() {
-		return (EAttribute)imperativeTypedModelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getImperativeTypedModel_IsOutput() {
-		return (EAttribute)imperativeTypedModelEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getImperativeTypedModel_AllUsedPackages() {
-		return (EReference)imperativeTypedModelEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map() {
-		return imperativeTypedModelEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map() {
-		return imperativeTypedModelEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -1542,21 +1473,14 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(imperativeTransformationEClass, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0);
 		createEOperation(imperativeTransformationEClass, TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 0);
 
-		imperativeTypedModelEClass = createEClass(12);
-		createEAttribute(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0);
-		createEAttribute(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1);
-		createEReference(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 2);
-		createEOperation(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 0);
-		createEOperation(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 1);
-
-		loopParameterBindingEClass = createEClass(13);
+		loopParameterBindingEClass = createEClass(12);
 		createEReference(loopParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(loopParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 
-		loopVariableEClass = createEClass(14);
+		loopVariableEClass = createEClass(13);
 		createEReference(loopVariableEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 
-		mappingEClass = createEClass(15);
+		mappingEClass = createEClass(14);
 		createEAttribute(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 0);
 		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 1);
 		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 2);
@@ -1566,7 +1490,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 1);
 		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 2);
 
-		mappingCallEClass = createEClass(16);
+		mappingCallEClass = createEClass(15);
 		createEReference(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEAttribute(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEAttribute(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
@@ -1577,22 +1501,22 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3);
 		createEOperation(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4);
 
-		mappingLoopEClass = createEClass(17);
+		mappingLoopEClass = createEClass(16);
 		createEReference(mappingLoopEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(mappingLoopEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEReference(mappingLoopEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 
-		mappingParameterEClass = createEClass(18);
+		mappingParameterEClass = createEClass(17);
 		createEReference(mappingParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 
-		mappingParameterBindingEClass = createEClass(19);
+		mappingParameterBindingEClass = createEClass(18);
 		createEReference(mappingParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		createEReference(mappingParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		createEOperation(mappingParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 
-		mappingStatementEClass = createEClass(20);
+		mappingStatementEClass = createEClass(19);
 
-		newStatementEClass = createEClass(21);
+		newStatementEClass = createEClass(20);
 		createEAttribute(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
 		createEReference(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2);
 		createEReference(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3);
@@ -1600,15 +1524,15 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 1);
 		createEOperation(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 2);
 
-		newStatementPartEClass = createEClass(22);
+		newStatementPartEClass = createEClass(21);
 		createEReference(newStatementPartEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(newStatementPartEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(newStatementPartEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 
-		observableStatementEClass = createEClass(23);
+		observableStatementEClass = createEClass(22);
 		createEReference(observableStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 
-		setStatementEClass = createEClass(24);
+		setStatementEClass = createEClass(23);
 		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
@@ -1622,19 +1546,19 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4);
 		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 5);
 
-		simpleParameterEClass = createEClass(25);
+		simpleParameterEClass = createEClass(24);
 		createEReference(simpleParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
 
-		simpleParameterBindingEClass = createEClass(26);
+		simpleParameterBindingEClass = createEClass(25);
 		createEReference(simpleParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 		createEAttribute(simpleParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
 
-		statementEClass = createEClass(27);
+		statementEClass = createEClass(26);
 		createEOperation(statementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
 
-		variableStatementEClass = createEClass(28);
+		variableStatementEClass = createEClass(27);
 	}
 
 	/**
@@ -1686,7 +1610,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		guardParameterBindingEClass.getESuperTypes().add(this.getMappingParameterBinding());
 		imperativeModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		imperativeTransformationEClass.getESuperTypes().add(theQVTbasePackage.getTransformation());
-		imperativeTypedModelEClass.getESuperTypes().add(theQVTbasePackage.getTypedModel());
 		loopParameterBindingEClass.getESuperTypes().add(this.getMappingParameterBinding());
 		loopVariableEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		mappingEClass.getESuperTypes().add(theQVTbasePackage.getRule());
@@ -1775,7 +1698,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getEntryPoint_OutputTypedModels(), theQVTbasePackage.getTypedModel(), null, "outputTypedModels", null, 0, -1, EntryPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardParameterEClass, GuardParameter.class, "GuardParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGuardParameter_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGuardParameter_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, GuardParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGuardParameter_SuccessProperty(), thePivotPackage.getProperty(), null, "successProperty", null, 0, 1, GuardParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardParameterBindingEClass, GuardParameterBinding.class, "GuardParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1788,29 +1711,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getImperativeTransformation_ContextType(), thePivotPackage.getClass_(), null, "contextType", null, 0, 1, ImperativeTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateallRulesAreMappings", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(imperativeTypedModelEClass, ImperativeTypedModel.class, "ImperativeTypedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImperativeTypedModel_IsInput(), ecorePackage.getEBoolean(), "isInput", "false", 1, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImperativeTypedModel_IsOutput(), ecorePackage.getEBoolean(), "isOutput", "false", 1, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImperativeTypedModel_AllUsedPackages(), thePivotPackage.getPackage(), null, "allUsedPackages", null, 0, -1, ImperativeTypedModel.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-
-		op = initEOperation(getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNameIsNotNull", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = initEOperation(getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNotBothInputAndOutput", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1920,7 +1820,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		initEClass(newStatementEClass, NewStatement.class, "NewStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNewStatement_IsContained(), ecorePackage.getEBoolean(), "isContained", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNewStatement_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNewStatement_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 0, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatement_OwnedParts(), this.getNewStatementPart(), this.getNewStatementPart_OwningNewStatement(), "ownedParts", null, 0, -1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
@@ -2005,7 +1905,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(simpleParameterEClass, SimpleParameter.class, "SimpleParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimpleParameter_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, SimpleParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimpleParameter_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, SimpleParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(simpleParameterBindingEClass, SimpleParameterBinding.class, "SimpleParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSimpleParameterBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, SimpleParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2102,18 +2002,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		   source,
 		   new String[] {
 			   "originalName", "allRulesAreMappings"
-		   });
-		addAnnotation
-		  (getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "NameIsNotNull"
-		   });
-		addAnnotation
-		  (getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "NotBothInputAndOutput"
 		   });
 		addAnnotation
 		  (getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(),
@@ -2250,18 +2138,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		   source,
 		   new String[] {
 			   "body", "rule->forAll(oclIsKindOf(Mapping))\n\n"
-		   });
-		addAnnotation
-		  (getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "name <> null\n"
-		   });
-		addAnnotation
-		  (getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "not (isInput and isOutput)\n\n"
 		   });
 		addAnnotation
 		  (getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(),

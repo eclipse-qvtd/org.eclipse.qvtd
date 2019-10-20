@@ -77,7 +77,7 @@
 'else'=148
 'elseif'=150
 'endif'=149
-'entry'=34
+'entry'=32
 'enum'=88
 'extends'=101
 'false'=138
@@ -88,10 +88,10 @@
 'implementedby'=58
 'implies'=115
 'import'=40
-'imports'=33
+'imports'=31
 'in'=49
 'initial'=82
-'input'=31
+'input'=33
 'install'=46
 'interface'=102
 'invalid'=139
@@ -108,7 +108,7 @@
 'operation'=90
 'or'=113
 'ordered'=71
-'output'=32
+'output'=34
 'package'=52
 'pre'=142
 'primitive'=84

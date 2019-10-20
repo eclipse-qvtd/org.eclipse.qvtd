@@ -539,86 +539,66 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.DirectionCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cDirectionCSAction_0 = (Action)cGroup.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment cIsInputAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final Keyword cIsInputInputKeyword_1_0_0 = (Keyword)cIsInputAssignment_1_0.eContents().get(0);
-		private final Assignment cIsOutputAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final Keyword cIsOutputOutputKeyword_1_1_0 = (Keyword)cIsOutputAssignment_1_1.eContents().get(0);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIdentifierParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cImportsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cImportsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final CrossReference cImportsPackageCrossReference_3_1_0 = (CrossReference)cImportsAssignment_3_1.eContents().get(0);
-		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_3_1_0_1 = (RuleCall)cImportsPackageCrossReference_3_1_0.eContents().get(1);
-		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
-		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
-		private final Assignment cImportsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
-		private final CrossReference cImportsPackageCrossReference_3_2_1_0 = (CrossReference)cImportsAssignment_3_2_1.eContents().get(0);
-		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_3_2_1_0_1 = (RuleCall)cImportsPackageCrossReference_3_2_1_0.eContents().get(1);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIdentifierParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cImportsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cImportsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final CrossReference cImportsPackageCrossReference_2_1_0 = (CrossReference)cImportsAssignment_2_1.eContents().get(0);
+		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_2_1_0_1 = (RuleCall)cImportsPackageCrossReference_2_1_0.eContents().get(1);
+		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cImportsAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final CrossReference cImportsPackageCrossReference_2_2_1_0 = (CrossReference)cImportsAssignment_2_2_1.eContents().get(0);
+		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1 = (RuleCall)cImportsPackageCrossReference_2_2_1_0.eContents().get(1);
 
 		//DirectionCS:
-		//	{DirectionCS} (isInput?='input' | isOutput?='output')? name=Identifier? ('imports'
-		//	imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?;
+		//	{DirectionCS} name=Identifier? ('imports' imports+=[pivot::Package|UnrestrictedName] (','
+		//	imports+=[pivot::Package|UnrestrictedName])*)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{DirectionCS} (isInput?='input' | isOutput?='output')? name=Identifier? ('imports'
-		//imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
+		//{DirectionCS} name=Identifier? ('imports' imports+=[pivot::Package|UnrestrictedName] (','
+		//imports+=[pivot::Package|UnrestrictedName])*)?
 		public Group getGroup() { return cGroup; }
 
 		//{DirectionCS}
 		public Action getDirectionCSAction_0() { return cDirectionCSAction_0; }
 
-		//(isInput?='input' | isOutput?='output')?
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-
-		//isInput?='input'
-		public Assignment getIsInputAssignment_1_0() { return cIsInputAssignment_1_0; }
-
-		//'input'
-		public Keyword getIsInputInputKeyword_1_0_0() { return cIsInputInputKeyword_1_0_0; }
-
-		//isOutput?='output'
-		public Assignment getIsOutputAssignment_1_1() { return cIsOutputAssignment_1_1; }
-
-		//'output'
-		public Keyword getIsOutputOutputKeyword_1_1_0() { return cIsOutputOutputKeyword_1_1_0; }
-
 		//name=Identifier?
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
 		//Identifier
-		public RuleCall getNameIdentifierParserRuleCall_2_0() { return cNameIdentifierParserRuleCall_2_0; }
+		public RuleCall getNameIdentifierParserRuleCall_1_0() { return cNameIdentifierParserRuleCall_1_0; }
 
 		//('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_2() { return cGroup_2; }
 
 		//'imports'
-		public Keyword getImportsKeyword_3_0() { return cImportsKeyword_3_0; }
+		public Keyword getImportsKeyword_2_0() { return cImportsKeyword_2_0; }
 
 		//imports+=[pivot::Package|UnrestrictedName]
-		public Assignment getImportsAssignment_3_1() { return cImportsAssignment_3_1; }
+		public Assignment getImportsAssignment_2_1() { return cImportsAssignment_2_1; }
 
 		//[pivot::Package|UnrestrictedName]
-		public CrossReference getImportsPackageCrossReference_3_1_0() { return cImportsPackageCrossReference_3_1_0; }
+		public CrossReference getImportsPackageCrossReference_2_1_0() { return cImportsPackageCrossReference_2_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_3_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_3_1_0_1; }
+		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_2_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_2_1_0_1; }
 
 		//(',' imports+=[pivot::Package|UnrestrictedName])*
-		public Group getGroup_3_2() { return cGroup_3_2; }
+		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//','
-		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
+		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
 
 		//imports+=[pivot::Package|UnrestrictedName]
-		public Assignment getImportsAssignment_3_2_1() { return cImportsAssignment_3_2_1; }
+		public Assignment getImportsAssignment_2_2_1() { return cImportsAssignment_2_2_1; }
 
 		//[pivot::Package|UnrestrictedName]
-		public CrossReference getImportsPackageCrossReference_3_2_1_0() { return cImportsPackageCrossReference_3_2_1_0; }
+		public CrossReference getImportsPackageCrossReference_2_2_1_0() { return cImportsPackageCrossReference_2_2_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_3_2_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_3_2_1_0_1; }
+		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1; }
 	}
 
 	public class EntryPointCSElements extends AbstractParserRuleElementFinder {
@@ -881,8 +861,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGuardKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cReferredTypedModelAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cReferredTypedModelImperativeTypedModelCrossReference_2_0 = (CrossReference)cReferredTypedModelAssignment_2.eContents().get(0);
-		private final RuleCall cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cReferredTypedModelImperativeTypedModelCrossReference_2_0.eContents().get(1);
+		private final CrossReference cReferredTypedModelTypedModelCrossReference_2_0 = (CrossReference)cReferredTypedModelAssignment_2.eContents().get(0);
+		private final RuleCall cReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cReferredTypedModelTypedModelCrossReference_2_0.eContents().get(1);
 		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
@@ -896,12 +876,12 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 
 		//GuardParameterCS:
-		//	'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//	ownedType=TypeExpCS ('success' successProperty=[pivot::Property|UnrestrictedName])? ';';
+		//	'guard' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
+		//	('success' successProperty=[pivot::Property|UnrestrictedName])? ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//ownedType=TypeExpCS ('success' successProperty=[pivot::Property|UnrestrictedName])? ';'
+		//'guard' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
+		//('success' successProperty=[pivot::Property|UnrestrictedName])? ';'
 		public Group getGroup() { return cGroup; }
 
 		//'guard'
@@ -910,14 +890,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
+		//referredTypedModel=[qvtbase::TypedModel|UnrestrictedName]
 		public Assignment getReferredTypedModelAssignment_2() { return cReferredTypedModelAssignment_2; }
 
-		//[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-		public CrossReference getReferredTypedModelImperativeTypedModelCrossReference_2_0() { return cReferredTypedModelImperativeTypedModelCrossReference_2_0; }
+		//[qvtbase::TypedModel|UnrestrictedName]
+		public CrossReference getReferredTypedModelTypedModelCrossReference_2_0() { return cReferredTypedModelTypedModelCrossReference_2_0; }
 
 		//UnrestrictedName
-		public RuleCall getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1() { return cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1; }
+		public RuleCall getReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_2_0_1() { return cReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_2_0_1; }
 
 		//name=UnrestrictedName
 		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
@@ -1463,8 +1443,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cNewKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cReferredTypedModelAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference cReferredTypedModelImperativeTypedModelCrossReference_4_0 = (CrossReference)cReferredTypedModelAssignment_4.eContents().get(0);
-		private final RuleCall cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_4_0_1 = (RuleCall)cReferredTypedModelImperativeTypedModelCrossReference_4_0.eContents().get(1);
+		private final CrossReference cReferredTypedModelTypedModelCrossReference_4_0 = (CrossReference)cReferredTypedModelAssignment_4.eContents().get(0);
+		private final RuleCall cReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_4_0_1 = (RuleCall)cReferredTypedModelTypedModelCrossReference_4_0.eContents().get(1);
 		private final Assignment cNameAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_5_0 = (RuleCall)cNameAssignment_5.eContents().get(0);
 		private final Keyword cColonKeyword_6 = (Keyword)cGroup.eContents().get(6);
@@ -1478,13 +1458,13 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 		//NewStatementCS:
 		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isContained?='contained'? 'new' ':'
-		//	referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//	ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';';
+		//	referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS (':='
+		//	ownedExpression=ExpCS)? ';';
 		@Override public ParserRule getRule() { return rule; }
 
 		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isContained?='contained'? 'new' ':'
-		//referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';'
+		//referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS (':='
+		//ownedExpression=ExpCS)? ';'
 		public Group getGroup() { return cGroup; }
 
 		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
@@ -1523,14 +1503,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
-		//referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
+		//referredTypedModel=[qvtbase::TypedModel|UnrestrictedName]
 		public Assignment getReferredTypedModelAssignment_4() { return cReferredTypedModelAssignment_4; }
 
-		//[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-		public CrossReference getReferredTypedModelImperativeTypedModelCrossReference_4_0() { return cReferredTypedModelImperativeTypedModelCrossReference_4_0; }
+		//[qvtbase::TypedModel|UnrestrictedName]
+		public CrossReference getReferredTypedModelTypedModelCrossReference_4_0() { return cReferredTypedModelTypedModelCrossReference_4_0; }
 
 		//UnrestrictedName
-		public RuleCall getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_4_0_1() { return cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_4_0_1; }
+		public RuleCall getReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_4_0_1() { return cReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_4_0_1; }
 
 		//name=UnrestrictedName
 		public Assignment getNameAssignment_5() { return cNameAssignment_5; }
@@ -2055,8 +2035,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cInKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cReferredTypedModelAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cReferredTypedModelImperativeTypedModelCrossReference_2_0 = (CrossReference)cReferredTypedModelAssignment_2.eContents().get(0);
-		private final RuleCall cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cReferredTypedModelImperativeTypedModelCrossReference_2_0.eContents().get(1);
+		private final CrossReference cReferredTypedModelTypedModelCrossReference_2_0 = (CrossReference)cReferredTypedModelAssignment_2.eContents().get(0);
+		private final RuleCall cReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cReferredTypedModelTypedModelCrossReference_2_0.eContents().get(1);
 		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
@@ -2065,12 +2045,10 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 
 		//SimpleParameterCS:
-		//	'in' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//	ownedType=TypeExpCS ';';
+		//	'in' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'in' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//ownedType=TypeExpCS ';'
+		//'in' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';'
 		public Group getGroup() { return cGroup; }
 
 		//'in'
@@ -2079,14 +2057,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
+		//referredTypedModel=[qvtbase::TypedModel|UnrestrictedName]
 		public Assignment getReferredTypedModelAssignment_2() { return cReferredTypedModelAssignment_2; }
 
-		//[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-		public CrossReference getReferredTypedModelImperativeTypedModelCrossReference_2_0() { return cReferredTypedModelImperativeTypedModelCrossReference_2_0; }
+		//[qvtbase::TypedModel|UnrestrictedName]
+		public CrossReference getReferredTypedModelTypedModelCrossReference_2_0() { return cReferredTypedModelTypedModelCrossReference_2_0; }
 
 		//UnrestrictedName
-		public RuleCall getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1() { return cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1; }
+		public RuleCall getReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_2_0_1() { return cReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_2_0_1; }
 
 		//name=UnrestrictedName
 		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
@@ -2584,8 +2562,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DirectionCS:
-	//	{DirectionCS} (isInput?='input' | isOutput?='output')? name=Identifier? ('imports'
-	//	imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?;
+	//	{DirectionCS} name=Identifier? ('imports' imports+=[pivot::Package|UnrestrictedName] (','
+	//	imports+=[pivot::Package|UnrestrictedName])*)?;
 	public DirectionCSElements getDirectionCSAccess() {
 		return pDirectionCS;
 	}
@@ -2621,8 +2599,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//GuardParameterCS:
-	//	'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-	//	ownedType=TypeExpCS ('success' successProperty=[pivot::Property|UnrestrictedName])? ';';
+	//	'guard' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
+	//	('success' successProperty=[pivot::Property|UnrestrictedName])? ';';
 	public GuardParameterCSElements getGuardParameterCSAccess() {
 		return pGuardParameterCS;
 	}
@@ -2728,8 +2706,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//NewStatementCS:
 	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isContained?='contained'? 'new' ':'
-	//	referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-	//	ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';';
+	//	referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS (':='
+	//	ownedExpression=ExpCS)? ';';
 	public NewStatementCSElements getNewStatementCSAccess() {
 		return pNewStatementCS;
 	}
@@ -2804,8 +2782,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SimpleParameterCS:
-	//	'in' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-	//	ownedType=TypeExpCS ';';
+	//	'in' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 	public SimpleParameterCSElements getSimpleParameterCSAccess() {
 		return pSimpleParameterCS;
 	}

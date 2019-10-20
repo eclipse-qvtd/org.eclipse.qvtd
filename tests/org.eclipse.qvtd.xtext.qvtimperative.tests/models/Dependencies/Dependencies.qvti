@@ -1,8 +1,8 @@
 import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
 
 transformation Dependencies {
-	input source imports ecore;
-	output target imports ecore;
+	source imports ecore;
+	target imports ecore;
 	middle imports ecore;
 
 	map dependenciesLM {
@@ -12,7 +12,7 @@ transformation Dependencies {
 	    	unaryPrecedence uses -1 * - -1;
 	    }
 	}
-	
+
 	map dependenciesMR /*uses ecore::EPackage, ocl::Integer*/ {
 		in:middle binaryPrecedence:OclAny;
 		in:middle unaryPrecedence:OclAny;

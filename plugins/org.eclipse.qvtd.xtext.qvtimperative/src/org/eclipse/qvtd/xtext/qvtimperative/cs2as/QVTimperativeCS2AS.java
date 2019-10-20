@@ -24,8 +24,8 @@ import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCS2AS;
 import org.eclipse.ocl.xtext.essentialoclcs.CurlyBracketedClauseCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ShadowPartCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -41,7 +41,7 @@ public class QVTimperativeCS2AS extends EssentialOCLCS2AS
 					Element mapping = ((MappingCS)eObject).getPivot();
 					ImperativeTransformation transformation = QVTimperativeUtil.basicGetContainingTransformation(mapping);
 					if (transformation != null) {
-						ImperativeTypedModel middleModel = QVTimperativeUtil.basicGetOwnedTypedModel(transformation, null);
+						TypedModel middleModel = QVTimperativeUtil.basicGetModelParameter(transformation, null);
 						if ((middleModel == null) || middleModel.getUsedPackage().contains(areaPackage)) {
 							return true;
 						}

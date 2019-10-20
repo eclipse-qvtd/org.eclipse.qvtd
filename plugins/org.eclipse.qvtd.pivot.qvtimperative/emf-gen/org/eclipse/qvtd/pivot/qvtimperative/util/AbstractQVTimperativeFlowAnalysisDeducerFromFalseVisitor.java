@@ -106,11 +106,6 @@ public abstract class AbstractQVTimperativeFlowAnalysisDeducerFromFalseVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitImperativeTypedModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeTypedModel object) {
-		return visitTypedModel(object);
-	}
-
-	@Override
 	public @Nullable Boolean visitLoopParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull LoopParameterBinding object) {
 		return visitMappingParameterBinding(object);
 	}

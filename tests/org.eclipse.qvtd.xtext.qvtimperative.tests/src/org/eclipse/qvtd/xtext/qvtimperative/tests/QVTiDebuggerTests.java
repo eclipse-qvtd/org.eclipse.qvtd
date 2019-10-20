@@ -49,9 +49,9 @@ import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMRootEvaluationEnvironment;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
@@ -235,9 +235,9 @@ public class QVTiDebuggerTests extends XtextTestCase
 		QVTiVMRootEvaluationEnvironment vmRootEvaluationEnvironment = (QVTiVMRootEvaluationEnvironment) vm.getEvaluationEnv();
 		assert vmRootEvaluationEnvironment != null;
 		ImperativeTransformation asTransformation = (ImperativeTransformation) vmRootEvaluationEnvironment.getDebuggableElement();
-		ImperativeTypedModel inTypedModel = QVTimperativeUtil.getOwnedTypedModel(asTransformation, inName);
-		ImperativeTypedModel middleTypedModel = QVTimperativeUtil.getOwnedTypedModel(asTransformation, middleName);
-		ImperativeTypedModel outTypedModel = QVTimperativeUtil.getOwnedTypedModel(asTransformation, outName);
+		TypedModel inTypedModel = QVTimperativeUtil.getModelParameter(asTransformation, inName);
+		TypedModel middleTypedModel = QVTimperativeUtil.getModelParameter(asTransformation, middleName);
+		TypedModel outTypedModel = QVTimperativeUtil.getModelParameter(asTransformation, outName);
 		VariableDeclaration asTransformationVariable = asTransformation.getOwnedContext();
 		VariableDeclaration asInVariable = inTypedModel.getOwnedContext();
 		VariableDeclaration asMiddleVariable = middleTypedModel.getOwnedContext();
@@ -260,7 +260,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		vmThread.stepInto();
 		TestUIUtil.waitForSuspended(vmThread);
 		//
-		checkPosition(vmThread, 20, 1023, 1031);
+		checkPosition(vmThread, 20, 1022, 1030);
 		checkVariables(vmThread, VMVirtualMachine.PC_NAME, "nodes");
 		checkVariable(vmThread, VMVirtualMachine.PC_NAME, QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
 		//

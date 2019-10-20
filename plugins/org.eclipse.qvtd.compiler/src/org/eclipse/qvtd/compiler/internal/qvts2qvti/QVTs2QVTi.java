@@ -44,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -107,7 +106,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 			org.eclipse.ocl.pivot.Class transformationTraceClass = transformation2TracePackage.getTransformationTraceClass();
 			((ImperativeTransformation)iTransformation).setContextType(transformationTraceClass);
 			for (@NonNull TypedModel qvtmTypedModel : QVTbaseUtil.getModelParameters(asTransformation)) {
-				ImperativeTypedModel qvtiTypedModel = createTypedModel(PivotUtil.getName(qvtmTypedModel));
+				TypedModel qvtiTypedModel = createTypedModel(PivotUtil.getName(qvtmTypedModel));
 				qvtiTypedModel.getUsedPackage().addAll(qvtmTypedModel.getUsedPackage());
 				qvtiTypedModel.setIsPrimitive(qvtmTypedModel.isIsPrimitive());
 				qvtiTypedModel.setIsThis(qvtmTypedModel.isIsThis());
@@ -142,8 +141,8 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	public void resolveImports(@NonNull ImperativeModel model) {
 		Set<@NonNull Namespace> importedNamespaces = new HashSet<@NonNull Namespace>();
 		for (EObject eObject : new TreeIterable(model, false)) {
-			if (eObject instanceof ImperativeTypedModel) {
-				for (Namespace importedNamespace : ClassUtil.nullFree(((ImperativeTypedModel)eObject).getUsedPackage())) {
+			if (eObject instanceof TypedModel) {
+				for (Namespace importedNamespace : ClassUtil.nullFree(((TypedModel)eObject).getUsedPackage())) {
 					if (!importedNamespaces.contains(importedNamespace)) {
 						importedNamespaces.add(importedNamespace);
 					}

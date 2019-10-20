@@ -14,7 +14,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,12 +42,12 @@ public interface SimpleParameterCS extends MappingParameterCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Typed Model</em>' reference.
-	 * @see #setReferredTypedModel(ImperativeTypedModel)
+	 * @see #setReferredTypedModel(TypedModel)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSimpleParameterCS_ReferredTypedModel()
 	 * @model required="true"
 	 * @generated
 	 */
-	ImperativeTypedModel getReferredTypedModel();
+	TypedModel getReferredTypedModel();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS#getReferredTypedModel <em>Referred Typed Model</em>}' reference.
@@ -57,6 +57,6 @@ public interface SimpleParameterCS extends MappingParameterCS {
 	 * @see #getReferredTypedModel()
 	 * @generated
 	 */
-	void setReferredTypedModel(ImperativeTypedModel value);
+	void setReferredTypedModel(TypedModel value);
 
 } // SimpleParameterCS

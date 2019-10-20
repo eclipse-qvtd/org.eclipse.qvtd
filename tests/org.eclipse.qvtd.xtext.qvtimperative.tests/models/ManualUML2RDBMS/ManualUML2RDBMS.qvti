@@ -14,7 +14,7 @@ transformation ManualUML2RDBMS {
 	        }
 	    }
 	}
-	
+
 	map packageToSchemaLM {
 	    guard:uml p:Package;
 	    new:middle p2s:PackageToSchema;

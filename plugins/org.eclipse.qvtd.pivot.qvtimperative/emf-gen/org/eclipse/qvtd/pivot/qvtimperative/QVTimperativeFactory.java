@@ -130,15 +130,6 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull ImperativeTransformation createImperativeTransformation();
 
 	/**
-	 * Returns a new object of class '<em>Imperative Typed Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Imperative Typed Model</em>'.
-	 * @generated
-	 */
-	@NonNull ImperativeTypedModel createImperativeTypedModel();
-
-	/**
 	 * Returns a new object of class '<em>Loop Parameter Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

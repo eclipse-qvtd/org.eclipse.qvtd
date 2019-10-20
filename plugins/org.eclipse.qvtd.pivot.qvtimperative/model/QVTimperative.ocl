@@ -26,10 +26,10 @@ inv CompatibleTypeForUncheckedValue: not isCheck implies ownedExpression.type?.c
 context ImperativeTransformation
 inv allRulesAreMappings: rule->forAll(oclIsKindOf(Mapping))
 
-context ImperativeTypedModel
-def: allUsedPackages : Set(ocl::Package) = usedPackage
-inv NameIsNotNull : name <> null
-inv NotBothInputAndOutput: not (isInput and isOutput)
+--context ImperativeTypedModel
+--def: allUsedPackages : Set(ocl::Package) = usedPackage
+--inv NameIsNotNull : name <> null
+--inv NotBothInputAndOutput: not (isInput and isOutput)
 
 context Mapping
 inv NameIsNotNull : name <> null

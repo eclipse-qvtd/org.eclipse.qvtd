@@ -33,6 +33,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
@@ -41,7 +43,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
@@ -53,6 +54,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+
+import com.google.common.collect.Iterables;
 
 public class QVTimperativeUtil extends QVTbaseUtil
 {
@@ -109,10 +112,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			}
 		}
 		return null;
-	}
-
-	public static @Nullable ImperativeTypedModel basicGetOwnedTypedModel(@NonNull ImperativeTransformation transformation, @Nullable String name) {
-		return NameUtil.getNameable(getOwnedTypedModels(transformation), name);
 	}
 
 	public static @NonNull Iterable<@NonNull EntryPoint> computeEntryPoints(@NonNull ImperativeTransformation iTransformation) {
@@ -226,15 +225,15 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return (@NonNull Iterable<@NonNull Mapping>)rule;
 	}
 
-	public static @NonNull ImperativeTypedModel getOwnedTypedModel(@NonNull ImperativeTransformation transformation, @Nullable String name) {
-		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedTypedModels(transformation), name));
-	}
+	//	public static @NonNull ImperativeTypedModel getOwnedTypedModel(@NonNull ImperativeTransformation transformation, @Nullable String name) {
+	//		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedTypedModels(transformation), name));
+	//	}
 
-	@SuppressWarnings("unchecked")
-	public static @NonNull Iterable<@NonNull ImperativeTypedModel> getOwnedTypedModels(@NonNull ImperativeTransformation transformation) {
-		Object modelParameter = transformation.getModelParameter();
-		return (@NonNull Iterable<@NonNull ImperativeTypedModel>)modelParameter;
-	}
+	//	@SuppressWarnings("unchecked")
+	//	public static @NonNull Iterable<@NonNull ImperativeTypedModel> getOwnedTypedModels(@NonNull ImperativeTransformation transformation) {
+	//		Object modelParameter = transformation.getModelParameter();
+	//		return (@NonNull Iterable<@NonNull ImperativeTypedModel>)modelParameter;
+	//	}
 
 	public static @NonNull MappingCall getOwningMappingCall(@NonNull MappingParameterBinding mappingParameterBinding) {
 		return ClassUtil.nonNullState(mappingParameterBinding.getOwningMappingCall());
@@ -302,6 +301,26 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			}
 		}
 		return isHazardous;
+	}
+
+	public static boolean isInput(@NonNull TypedModel typedModel) {
+		Transformation transformation = getOwningTransformation(typedModel);
+		for (@NonNull Rule rule : getRule(transformation)) {
+			if ((rule instanceof EntryPoint) && Iterables.contains(getInputTypedModels((EntryPoint)rule), typedModel)) {		// FIXME Eliminate need for potentially large search
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean isOutput(@NonNull TypedModel typedModel) {
+		Transformation transformation = getOwningTransformation(typedModel);
+		for (@NonNull Rule rule : getRule(transformation)) {
+			if ((rule instanceof EntryPoint) && Iterables.contains(getOutputTypedModels((EntryPoint)rule), typedModel)) {		// FIXME Eliminate need for potentially large search
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static boolean isPrimitiveVariable(@NonNull VariableDeclaration asVariable) {

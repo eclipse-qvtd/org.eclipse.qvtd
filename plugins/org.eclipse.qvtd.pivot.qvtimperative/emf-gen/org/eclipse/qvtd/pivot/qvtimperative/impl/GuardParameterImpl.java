@@ -22,8 +22,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -68,7 +68,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	 * @generated
 	 * @ordered
 	 */
-	protected ImperativeTypedModel referredTypedModel;
+	protected TypedModel referredTypedModel;
 
 	/**
 	 * The cached value of the '{@link #getSuccessProperty() <em>Success Property</em>}' reference.
@@ -105,10 +105,10 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	 * @generated
 	 */
 	@Override
-	public ImperativeTypedModel getReferredTypedModel() {
+	public TypedModel getReferredTypedModel() {
 		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
 			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
-			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
+			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, oldReferredTypedModel, referredTypedModel));
@@ -122,7 +122,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImperativeTypedModel basicGetReferredTypedModel() {
+	public TypedModel basicGetReferredTypedModel() {
 		return referredTypedModel;
 	}
 
@@ -132,8 +132,8 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	 * @generated
 	 */
 	@Override
-	public void setReferredTypedModel(ImperativeTypedModel newReferredTypedModel) {
-		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
+	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
+		TypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, oldReferredTypedModel, referredTypedModel));
@@ -206,7 +206,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
-				setReferredTypedModel((ImperativeTypedModel)newValue);
+				setReferredTypedModel((TypedModel)newValue);
 				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setSuccessProperty((Property)newValue);
@@ -224,7 +224,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
-				setReferredTypedModel((ImperativeTypedModel)null);
+				setReferredTypedModel((TypedModel)null);
 				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setSuccessProperty((Property)null);

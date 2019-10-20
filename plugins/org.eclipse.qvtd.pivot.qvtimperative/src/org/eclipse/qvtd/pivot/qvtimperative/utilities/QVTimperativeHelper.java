@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
@@ -34,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -112,7 +112,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 	public @NonNull GuardParameter createGuardParameter(@NonNull String name, @NonNull TypedModel typedModel, @NonNull Type type, boolean isRequired) {
 		GuardParameter asVariable = QVTimperativeFactory.eINSTANCE.createGuardParameter();
 		asVariable.setName(name);
-		asVariable.setReferredTypedModel((ImperativeTypedModel) typedModel);
+		asVariable.setReferredTypedModel(typedModel);
 		setType(asVariable, type, isRequired);
 		return asVariable;
 	}
@@ -167,7 +167,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 	public @NonNull NewStatement createNewStatement(@NonNull String name, @NonNull TypedModel typedModel, @NonNull Type type) {
 		NewStatement newStatement = QVTimperativeFactory.eINSTANCE.createNewStatement();
 		newStatement.setName(name);
-		newStatement.setReferredTypedModel((ImperativeTypedModel) typedModel);
+		newStatement.setReferredTypedModel(typedModel);
 		newStatement.setType(type);
 		newStatement.setIsRequired(true);
 		return newStatement;
@@ -183,7 +183,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 
 	@Override
 	public @NonNull TypedModel createPrimitiveTypedModel() {
-		TypedModel asTypedModel = QVTimperativeFactory.eINSTANCE.createImperativeTypedModel();
+		TypedModel asTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 		asTypedModel.setName(QVTimperativeUtil.PRIMITIVE_TYPED_MODEL_NAME);
 		asTypedModel.setIsPrimitive(true);
 		return asTypedModel;
@@ -217,7 +217,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 
 	@Override
 	public @NonNull TypedModel createThisTypedModel() {
-		TypedModel asTypedModel = QVTimperativeFactory.eINSTANCE.createImperativeTypedModel();
+		TypedModel asTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 		asTypedModel.setName(QVTimperativeUtil.THIS_TYPED_MODEL_NAME);
 		asTypedModel.setIsThis(true);
 		return asTypedModel;
@@ -230,8 +230,8 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return transformation;
 	}
 
-	public  @NonNull ImperativeTypedModel createTypedModel(@NonNull String name) {
-		ImperativeTypedModel typedModel = QVTimperativeFactory.eINSTANCE.createImperativeTypedModel();
+	public  @NonNull TypedModel createTypedModel(@NonNull String name) {
+		TypedModel typedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 		typedModel.setName(name);
 		return typedModel;
 	}

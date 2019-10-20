@@ -27,8 +27,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
@@ -66,7 +65,7 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	 * @generated
 	 * @ordered
 	 */
-	protected ImperativeTypedModel referredTypedModel;
+	protected TypedModel referredTypedModel;
 
 	/**
 	 * The cached value of the '{@link #getSuccessProperty() <em>Success Property</em>}' reference.
@@ -103,10 +102,10 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	 * @generated
 	 */
 	@Override
-	public ImperativeTypedModel getReferredTypedModel() {
+	public TypedModel getReferredTypedModel() {
 		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
 			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
-			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
+			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
@@ -120,7 +119,7 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImperativeTypedModel basicGetReferredTypedModel() {
+	public TypedModel basicGetReferredTypedModel() {
 		return referredTypedModel;
 	}
 
@@ -130,8 +129,8 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	 * @generated
 	 */
 	@Override
-	public void setReferredTypedModel(ImperativeTypedModel newReferredTypedModel) {
-		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
+	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
+		TypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
@@ -204,7 +203,7 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
-				setReferredTypedModel((ImperativeTypedModel)newValue);
+				setReferredTypedModel((TypedModel)newValue);
 				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setSuccessProperty((Property)newValue);
@@ -222,7 +221,7 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
-				setReferredTypedModel((ImperativeTypedModel)null);
+				setReferredTypedModel((TypedModel)null);
 				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setSuccessProperty((Property)null);

@@ -918,58 +918,27 @@ ruleDirectionCS returns [EObject current=null]
             grammarAccess.getDirectionCSAccess().getDirectionCSAction_0(),
             $current);
     }
-)((
-(
-		lv_isInput_1_0=	'input'
-    {
-        newLeafNode(lv_isInput_1_0, grammarAccess.getDirectionCSAccess().getIsInputInputKeyword_1_0_0());
-    }
-
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getDirectionCSRule());
-	        }
-       		setWithLastConsumed($current, "isInput", true, "input");
-	    }
-
-)
-)
-    |(
-(
-		lv_isOutput_2_0=	'output'
-    {
-        newLeafNode(lv_isOutput_2_0, grammarAccess.getDirectionCSAccess().getIsOutputOutputKeyword_1_1_0());
-    }
-
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getDirectionCSRule());
-	        }
-       		setWithLastConsumed($current, "isOutput", true, "output");
-	    }
-
-)
-))?(
+)(
 (
 		{
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getNameIdentifierParserRuleCall_2_0());
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getNameIdentifierParserRuleCall_1_0());
 	    }
-		lv_name_3_0=ruleIdentifier		{
+		lv_name_1_0=ruleIdentifier		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDirectionCSRule());
 	        }
        		set(
        			$current,
        			"name",
-        		lv_name_3_0,
+        		lv_name_1_0,
         		"org.eclipse.ocl.xtext.base.Base.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)?(	otherlv_4='imports'
+)?(	otherlv_2='imports'
     {
-    	newLeafNode(otherlv_4, grammarAccess.getDirectionCSAccess().getImportsKeyword_3_0());
+    	newLeafNode(otherlv_2, grammarAccess.getDirectionCSAccess().getImportsKeyword_2_0());
     }
 (
 (
@@ -982,16 +951,16 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_3_1_0());
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_2_1_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_6=','
+)(	otherlv_4=','
     {
-    	newLeafNode(otherlv_6, grammarAccess.getDirectionCSAccess().getCommaKeyword_3_2_0());
+    	newLeafNode(otherlv_4, grammarAccess.getDirectionCSAccess().getCommaKeyword_2_2_0());
     }
 (
 (
@@ -1004,7 +973,7 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_3_2_1_0());
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_2_2_1_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();
@@ -1410,7 +1379,7 @@ ruleGuardParameterCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getGuardParameterCSAccess().getReferredTypedModelImperativeTypedModelCrossReference_2_0());
+	        newCompositeNode(grammarAccess.getGuardParameterCSAccess().getReferredTypedModelTypedModelCrossReference_2_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();
@@ -2450,7 +2419,7 @@ ruleNewStatementCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getReferredTypedModelImperativeTypedModelCrossReference_4_0());
+	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getReferredTypedModelTypedModelCrossReference_4_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();
@@ -3292,7 +3261,7 @@ ruleSimpleParameterCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getSimpleParameterCSAccess().getReferredTypedModelImperativeTypedModelCrossReference_2_0());
+	        newCompositeNode(grammarAccess.getSimpleParameterCSAccess().getReferredTypedModelTypedModelCrossReference_2_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();

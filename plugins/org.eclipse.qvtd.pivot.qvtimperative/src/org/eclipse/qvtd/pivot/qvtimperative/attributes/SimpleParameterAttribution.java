@@ -17,7 +17,7 @@ import org.eclipse.ocl.pivot.internal.scoping.EmptyAttribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 
 public class SimpleParameterAttribution extends EmptyAttribution
@@ -28,7 +28,7 @@ public class SimpleParameterAttribution extends EmptyAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		SimpleParameter asSimpleParameter = (SimpleParameter)target;
 		if (environmentView.getRequiredType() == PivotPackage.Literals.TYPE) {		// FIXME should be detecting ancestor
-			ImperativeTypedModel asTypedModel = asSimpleParameter.getReferredTypedModel();
+			TypedModel asTypedModel = asSimpleParameter.getReferredTypedModel();
 			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asTypedModel.getUsedPackage())) {
 				environmentView.addAllTypes(asPackage);
 			}

@@ -49,7 +49,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
@@ -131,7 +131,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @generated
 	 * @ordered
 	 */
-	protected ImperativeTypedModel referredTypedModel;
+	protected TypedModel referredTypedModel;
 
 	/**
 	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
@@ -219,10 +219,10 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @generated
 	 */
 	@Override
-	public ImperativeTypedModel getReferredTypedModel() {
+	public TypedModel getReferredTypedModel() {
 		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
 			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
-			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
+			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2, oldReferredTypedModel, referredTypedModel));
@@ -236,7 +236,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImperativeTypedModel basicGetReferredTypedModel() {
+	public TypedModel basicGetReferredTypedModel() {
 		return referredTypedModel;
 	}
 
@@ -246,8 +246,8 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @generated
 	 */
 	@Override
-	public void setReferredTypedModel(ImperativeTypedModel newReferredTypedModel) {
-		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
+	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
+		TypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2, oldReferredTypedModel, referredTypedModel));
@@ -532,7 +532,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 				setIsContained((Boolean)newValue);
 				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
-				setReferredTypedModel((ImperativeTypedModel)newValue);
+				setReferredTypedModel((TypedModel)newValue);
 				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
@@ -560,7 +560,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 				setIsContained(IS_CONTAINED_EDEFAULT);
 				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
-				setReferredTypedModel((ImperativeTypedModel)null);
+				setReferredTypedModel((TypedModel)null);
 				return;
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);

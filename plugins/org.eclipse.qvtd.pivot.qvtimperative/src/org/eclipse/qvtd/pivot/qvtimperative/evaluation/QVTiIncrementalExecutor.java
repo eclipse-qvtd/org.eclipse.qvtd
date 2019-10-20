@@ -37,9 +37,9 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
@@ -174,7 +174,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		modelsManager.initOpposites(propertyIndex2propertyId);
 
 		for (@NonNull QVTiTypedModelInstance typedModelInstance : modelsManager.getTypedModelInstances()) {
-			ImperativeTypedModel typedModel = typedModelInstance.getTypedModel();
+			TypedModel typedModel = typedModelInstance.getTypedModel();
 			Set<@NonNull CompleteClass> usedCompleteClasses = new HashSet<>();
 			for (org.eclipse.ocl.pivot.@NonNull Class usedClass : QVTimperativeUtil.getUsedClasses(typedModel)) {
 				usedCompleteClasses.add(environmentFactory.getCompleteModel().getCompleteClass(usedClass));

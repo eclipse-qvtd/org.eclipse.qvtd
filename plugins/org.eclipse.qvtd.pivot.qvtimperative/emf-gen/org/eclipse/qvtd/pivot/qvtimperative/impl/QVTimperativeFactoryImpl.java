@@ -26,7 +26,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -93,17 +92,16 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case 9: return createGuardParameterBinding();
 			case 10: return createImperativeModel();
 			case 11: return createImperativeTransformation();
-			case 12: return createImperativeTypedModel();
-			case 13: return createLoopParameterBinding();
-			case 14: return createLoopVariable();
-			case 15: return createMapping();
-			case 16: return createMappingCall();
-			case 17: return createMappingLoop();
-			case 21: return createNewStatement();
-			case 22: return createNewStatementPart();
-			case 24: return createSetStatement();
-			case 25: return createSimpleParameter();
-			case 26: return createSimpleParameterBinding();
+			case 12: return createLoopParameterBinding();
+			case 13: return createLoopVariable();
+			case 14: return createMapping();
+			case 15: return createMappingCall();
+			case 16: return createMappingLoop();
+			case 20: return createNewStatement();
+			case 21: return createNewStatementPart();
+			case 23: return createSetStatement();
+			case 24: return createSimpleParameter();
+			case 25: return createSimpleParameterBinding();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -228,17 +226,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull ImperativeTransformation createImperativeTransformation() {
 		ImperativeTransformationImpl imperativeTransformation = new ImperativeTransformationImpl();
 		return imperativeTransformation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ImperativeTypedModel createImperativeTypedModel() {
-		ImperativeTypedModelImpl imperativeTypedModel = new ImperativeTypedModelImpl();
-		return imperativeTypedModel;
 	}
 
 	/**

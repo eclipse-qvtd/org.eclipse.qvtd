@@ -10,7 +10,7 @@
  *******************************************************************************/
 grammar org.eclipse.qvtd.xtext.qvtimperative.QVTimperative with org.eclipse.qvtd.xtext.qvtbase.QVTbase
 
-import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore 
 import "platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore" as pivot
 import "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore" as base
 import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore" as essentialocl
@@ -45,7 +45,7 @@ ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | 
 DeclareStatementCS:  ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
 	isCheck?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
 	
-DirectionCS: {DirectionCS} (isInput?='input'|isOutput?='output')? name=Identifier?
+DirectionCS: {DirectionCS} name=Identifier?
 	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
 ;
 
@@ -62,7 +62,7 @@ EntryPointCS: {EntryPointCS} isStrict?='strict'? 'entry' (':' firstPass=LOWER ('
 
 GuardParameterBindingCS: isCheck?='check'? referredVariable=[qvtimperative::GuardParameter|UnrestrictedName] 'consumes' value=[qvtimperative::ConnectionVariable|UnrestrictedName] ';';
 
-GuardParameterCS: 'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
+GuardParameterCS: 'guard' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
 	('success' successProperty=[pivot::Property|UnrestrictedName])? ';'
 ;
 
@@ -95,7 +95,7 @@ MappingParameterBindingCS: AppendParameterBindingCS | GuardParameterBindingCS | 
 MappingParameterCS: AppendParameterCS | GuardParameterCS | SimpleParameterCS;
 
 NewStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
-	isContained?='contained'? 'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
+	isContained?='contained'? 'new' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
 	(':=' ownedExpression=ExpCS)? ';'
 ;
 
@@ -124,7 +124,7 @@ SetStatementCS: ('observe' observedProperties+=PathNameCS (',' observedPropertie
 
 SimpleParameterBindingCS: isCheck?='check'? referredVariable=[qvtimperative::SimpleParameter|UnrestrictedName] 'uses' ownedValue=ExpCS ';';
 
-SimpleParameterCS: 'in' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
+SimpleParameterCS: 'in' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 	
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName (':' ownedContextType=TypeExpCS)?

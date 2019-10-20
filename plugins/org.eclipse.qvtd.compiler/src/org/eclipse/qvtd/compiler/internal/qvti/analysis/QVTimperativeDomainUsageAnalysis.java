@@ -31,7 +31,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -69,15 +68,8 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 			int outputMask = 0;
 			for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(domainUsageAnalysis.getTransformation())) {
 				if (!typedModel.isIsPrimitive() && !typedModel.isIsTrace()) {
-					boolean isInput = false;
-					boolean isOutput = false;
-					ImperativeTypedModel imperativeTypedModel = (ImperativeTypedModel)typedModel;
-					if (imperativeTypedModel.isIsInput()) {
-						isInput = true;
-					}
-					if (imperativeTypedModel.isIsOutput()) {
-						isOutput = true;
-					}
+					boolean isInput = QVTimperativeUtil.isInput(typedModel);
+					boolean isOutput = QVTimperativeUtil.isOutput(typedModel);
 					DomainUsage domainUsage = domainUsageAnalysis.getUsage(typedModel);
 					int bitMask = domainUsage.getMask();
 					if (isInput) {
@@ -164,11 +156,6 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
-	public @NonNull DomainUsage visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
-		return getNoneUsage();
-	}
-
-	@Override
 	public @NonNull DomainUsage visitLoopParameterBinding(@NonNull LoopParameterBinding object) {
 		return getNoneUsage();
 	}
@@ -240,6 +227,11 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @NonNull DomainUsage visitStatement(@NonNull Statement object) {
+		return getNoneUsage();
+	}
+
+	@Override
+	public @NonNull DomainUsage visitTypedModel(@NonNull TypedModel object) {
 		return getNoneUsage();
 	}
 

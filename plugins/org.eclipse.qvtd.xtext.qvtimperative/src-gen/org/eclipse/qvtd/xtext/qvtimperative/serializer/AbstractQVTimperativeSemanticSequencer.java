@@ -666,7 +666,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     DirectionCS returns DirectionCS
 	 *
 	 * Constraint:
-	 *     ((isInput?='input' | isOutput?='output')? name=Identifier? (imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)?)
+	 *     (name=Identifier? (imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)?)
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -714,12 +714,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     MappingParameterCS returns GuardParameterCS
 	 *
 	 * Constraint:
-	 *     (
-	 *         referredTypedModel=[ImperativeTypedModel|UnrestrictedName]
-	 *         name=UnrestrictedName
-	 *         ownedType=TypeExpCS
-	 *         successProperty=[Property|UnrestrictedName]?
-	 *     )
+	 *     (referredTypedModel=[TypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS successProperty=[Property|UnrestrictedName]?)
 	 */
 	protected void sequence_GuardParameterCS(ISerializationContext context, GuardParameterCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -823,7 +818,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     (
 	 *         (observedProperties+=PathNameCS observedProperties+=PathNameCS*)?
 	 *         isContained?='contained'?
-	 *         referredTypedModel=[ImperativeTypedModel|UnrestrictedName]
+	 *         referredTypedModel=[TypedModel|UnrestrictedName]
 	 *         name=UnrestrictedName
 	 *         ownedType=TypeExpCS
 	 *         ownedExpression=ExpCS?
@@ -942,7 +937,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     SimpleParameterCS returns SimpleParameterCS
 	 *
 	 * Constraint:
-	 *     (referredTypedModel=[ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS)
+	 *     (referredTypedModel=[TypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS)
 	 */
 	protected void sequence_SimpleParameterCS(ISerializationContext context, SimpleParameterCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -954,7 +949,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSimpleParameterCSAccess().getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1(), semanticObject.eGet(QVTimperativeCSPackage.Literals.SIMPLE_PARAMETER_CS__REFERRED_TYPED_MODEL, false));
+		feeder.accept(grammarAccess.getSimpleParameterCSAccess().getReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_2_0_1(), semanticObject.eGet(QVTimperativeCSPackage.Literals.SIMPLE_PARAMETER_CS__REFERRED_TYPED_MODEL, false));
 		feeder.accept(grammarAccess.getSimpleParameterCSAccess().getNameUnrestrictedNameParserRuleCall_3_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getSimpleParameterCSAccess().getOwnedTypeTypeExpCSParserRuleCall_5_0(), semanticObject.getOwnedType());
 		feeder.finish();

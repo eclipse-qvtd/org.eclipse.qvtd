@@ -37,8 +37,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#isIsInput <em>Is Input</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#isIsOutput <em>Is Output</em>}</li>
  * </ul>
  *
  * @generated
@@ -51,7 +49,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DIRECTION_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	public static final int DIRECTION_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The cached value of the '{@link #getImports() <em>Imports</em>}' reference list.
@@ -62,46 +60,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @ordered
 	 */
 	protected EList<org.eclipse.ocl.pivot.Package> imports;
-
-	/**
-	 * The default value of the '{@link #isIsInput() <em>Is Input</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsInput()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_INPUT_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsInput() <em>Is Input</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsInput()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isInput = IS_INPUT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isIsOutput() <em>Is Output</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsOutput()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_OUTPUT_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsOutput() <em>Is Output</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsOutput()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isOutput = IS_OUTPUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -138,52 +96,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsInput() {
-		return isInput;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsInput(boolean newIsInput) {
-		boolean oldIsInput = isInput;
-		isInput = newIsInput;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, oldIsInput, isInput));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsOutput() {
-		return isOutput;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsOutput(boolean newIsOutput) {
-		boolean oldIsOutput = isOutput;
-		isOutput = newIsOutput;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2, oldIsOutput, isOutput));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -201,10 +113,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 		switch (featureID) {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getImports();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return isIsInput();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
-				return isIsOutput();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -222,12 +130,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 				getImports().clear();
 				getImports().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				setIsInput((Boolean)newValue);
-				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
-				setIsOutput((Boolean)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -243,12 +145,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				getImports().clear();
 				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				setIsInput(IS_INPUT_EDEFAULT);
-				return;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
-				setIsOutput(IS_OUTPUT_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -263,10 +159,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 		switch (featureID) {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return imports != null && !imports.isEmpty();
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return isInput != IS_INPUT_EDEFAULT;
-			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
-				return isOutput != IS_OUTPUT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

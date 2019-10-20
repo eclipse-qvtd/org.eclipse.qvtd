@@ -20,8 +20,8 @@ import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 
 public class GuardParameterAttribution extends EmptyAttribution
 {
@@ -31,7 +31,7 @@ public class GuardParameterAttribution extends EmptyAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		GuardParameter asGuardParameter = (GuardParameter)target;
 		if (environmentView.getRequiredType() == PivotPackage.Literals.TYPE) {		// FIXME should be detecting ancestor
-			ImperativeTypedModel asTypedModel = asGuardParameter.getReferredTypedModel();
+			TypedModel asTypedModel = asGuardParameter.getReferredTypedModel();
 			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asTypedModel.getUsedPackage())) {
 				environmentView.addAllTypes(asPackage);
 			}

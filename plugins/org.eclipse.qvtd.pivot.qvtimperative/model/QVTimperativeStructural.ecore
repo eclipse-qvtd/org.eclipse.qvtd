@@ -129,7 +129,7 @@
       <details key="documentation" value="A GuardParameter of a Mapping defines a input at which a value is consumed from a connection.&#xA;&#xA;syntax: oclText[guard:typedModel name : type;]"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
-        eType="#//ImperativeTypedModel">
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModel that contains the passed value."/>
       </eAnnotations>
@@ -168,23 +168,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="contextType" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Optionally distinct type for the implementation of the context type."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImperativeTypedModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An ImperativeTypedModel defines an input,middle or output modek for the transformation."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInput" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True for an input model."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOutput" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True for an output model."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -335,7 +318,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
-        eType="#//ImperativeTypedModel">
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModel to which the new object is added."/>
       </eAnnotations>
@@ -423,7 +406,7 @@
       <details key="documentation" value="A SimpleParameter of a Mapping defines an input at which a value is passed to the mapping.&#xA;&#xA;syntax: oclText[in:typedModel name : type;]"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
-        eType="#//ImperativeTypedModel">
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModel that contains the passed value."/>
       </eAnnotations>

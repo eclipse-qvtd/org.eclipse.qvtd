@@ -3,10 +3,10 @@ import 'KiamaCS.ecore#/';
 
 transformation KiamaRewrite_qvtp_qvtcas
 {
-	input leftCS imports kiamacs;
-	output rightAS imports kiamaas;
+	leftCS imports kiamacs;
+	rightAS imports kiamaas;
 
-	map r___root__
+	entry r___root__ input leftCS output rightAS
 	{
 		var _'«NumCS»' : Set(kiamacs::NumCS) := leftCS.objectsOfKind(kiamacs::NumCS);
 		buffer ji_NumCS : kiamacs::NumCS := _'«NumCS»';
@@ -56,7 +56,7 @@ transformation KiamaRewrite_qvtp_qvtcas
 		new:rightAS rPlus : kiamaas::Plus;
 		set lPlusCS.ast := rPlus;
 	}
-	
+
 	map m_Top__ast
 	{
 		guard:leftCS lTopCS : kiamacs::TopCS;

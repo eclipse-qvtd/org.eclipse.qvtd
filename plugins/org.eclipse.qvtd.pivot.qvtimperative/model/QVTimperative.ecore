@@ -208,7 +208,7 @@
       <details key="documentation" value="A GuardParameter of a Mapping defines a input at which a value is consumed from a connection.&#xA;&#xA;syntax: oclText[guard:typedModel name : type;]"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-GuardParameter-referredTypedModel"
-        name="referredTypedModel" lowerBound="1" eType="#T-qvtimperative-ImperativeTypedModel">
+        name="referredTypedModel" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModel that contains the passed value."/>
       </eAnnotations>
@@ -269,63 +269,6 @@
         name="contextType" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Optionally distinct type for the implementation of the context type."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtimperative-ImperativeTypedModel"
-      name="ImperativeTypedModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An ImperativeTypedModel defines an input,middle or output modek for the transformation."/>
-    </eAnnotations>
-    <eOperations name="validateNameIsNotNull" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <details key="originalName" value="NameIsNotNull"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name &lt;> null&#xA;"/>
-      </eAnnotations>
-      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
-      <eParameters name="context">
-        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-        </eGenericType>
-      </eParameters>
-    </eOperations>
-    <eOperations name="validateNotBothInputAndOutput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <details key="originalName" value="NotBothInputAndOutput"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not (isInput and isOutput)&#xA;&#xA;"/>
-      </eAnnotations>
-      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
-      <eParameters name="context">
-        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-        </eGenericType>
-      </eParameters>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-ImperativeTypedModel-isInput"
-        name="isInput" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True for an input model."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-ImperativeTypedModel-isOutput"
-        name="isOutput" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True for an output model."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-ImperativeTypedModel-allUsedPackages"
-        name="allUsedPackages" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Package"
-        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="usedPackage&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -646,7 +589,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-NewStatement-referredTypedModel"
-        name="referredTypedModel" lowerBound="1" eType="#T-qvtimperative-ImperativeTypedModel">
+        name="referredTypedModel" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModel to which the new object is added."/>
       </eAnnotations>
@@ -825,7 +768,7 @@
       <details key="documentation" value="A SimpleParameter of a Mapping defines an input at which a value is passed to the mapping.&#xA;&#xA;syntax: oclText[in:typedModel name : type;]"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-SimpleParameter-referredTypedModel"
-        name="referredTypedModel" lowerBound="1" eType="#T-qvtimperative-ImperativeTypedModel">
+        name="referredTypedModel" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModel that contains the passed value."/>
       </eAnnotations>

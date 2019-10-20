@@ -14,11 +14,11 @@
   <ownedImports importedNamespace="pivot:Library http://www.eclipse.org/ocl/2015/Library.oclas#S673I" name="mm_oclMM" xmiidVersion="1"/>
   <ownedPackages xmi:id="6Fh3I" name="">
     <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="xreyG" name="hsv2hsl">
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" isPrimitive="true" name="$primitive$"/>
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" isThis="true" name="$this$"/>
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="4h0Qn" name="hsv" usedPackage="HSVTree.ecore.oclas#jRMJ8"/>
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="uh0Qn" name="hsl" usedPackage="HSLTree.ecore.oclas#Zl9l7"/>
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="C1IOn" isTrace="true" name="middle" usedPackage="HSV2HSL.ecore.oclas#U,KF8"/>
+      <modelParameter isPrimitive="true" name="$primitive$"/>
+      <modelParameter isThis="true" name="$this$"/>
+      <modelParameter xmi:id="4h0Qn" name="hsv" usedPackage="HSVTree.ecore.oclas#jRMJ8"/>
+      <modelParameter xmi:id="uh0Qn" name="hsl" usedPackage="HSLTree.ecore.oclas#Zl9l7"/>
+      <modelParameter xmi:id="C1IOn" isTrace="true" name="middle" usedPackage="HSV2HSL.ecore.oclas#U,KF8"/>
       <ownedContext xmi:id="feaPR" name="this" type="qvtb:Transformation HSV2HSL.qvtm.qvtcas#xreyG"/>
       <ownedOperations xsi:type="qvtb:Function" xmi:id="Nsy3r" name="hsv2rgb" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
         <bodyExpression xsi:type="pivot:ExpressionInOCL" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">

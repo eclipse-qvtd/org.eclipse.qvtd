@@ -15,7 +15,7 @@ transformation CopyGraphMinimal {
 	    	g2gout uses g2g;
 	    }
 	}
-	
+
 	map graph2graphMR {
 		in:middle g2gout:Graph2Graph;
 	    new:lowerGraph g2:Graph;

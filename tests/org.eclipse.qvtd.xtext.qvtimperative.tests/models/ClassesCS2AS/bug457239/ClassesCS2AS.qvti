@@ -16,7 +16,7 @@ transformation classescs2as
 							else 'unnamed'
 							endif;
 	}
-	
+
 	entry __root__ input leftCS output rightAS
 	{
 		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
