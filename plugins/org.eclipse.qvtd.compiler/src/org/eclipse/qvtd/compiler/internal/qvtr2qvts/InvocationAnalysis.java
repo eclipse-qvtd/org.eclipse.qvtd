@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
@@ -23,6 +24,12 @@ public interface InvocationAnalysis
 	@NonNull Iterable<@NonNull Node> getArgumentNodes();
 	@NonNull RelationAnalysis getInvokedRelationAnalysis();
 	@NonNull RelationAnalysis getInvokingRelationAnalysis();
+
+	/**
+	 * Return true if the argument node is to an output of the invoking rule, false if not, nullif not related to the invocation.
+	 */
+	@Nullable Boolean isOutput(@NonNull Node node);
+
 	boolean isRealized();
 
 	/**
@@ -45,5 +52,5 @@ public interface InvocationAnalysis
 	 */
 	void setStrict(boolean isStrict);
 
-	void synthesizeInvocationNodes(@NonNull Node traceNode);
+	@NonNull Node synthesizeInvocationNodes(@NonNull Node traceNode);
 }

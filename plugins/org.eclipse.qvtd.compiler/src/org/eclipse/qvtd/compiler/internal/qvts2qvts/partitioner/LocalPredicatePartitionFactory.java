@@ -17,7 +17,9 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.InvocationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -142,11 +144,13 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 		//
 		//	Predicate top-when calls output edges.
 		//
+		RuleAnalysis ruleAnalysis = mappingPartitioner.getRegionAnalysis().getRuleAnalysis();
 		for (@NonNull Node realizedWhenNode : realizedWhenNodes) {
 			addNode(partition, realizedWhenNode, Role.PREDICATED);
+			InvocationAnalysis invocationAnalysis = ruleAnalysis.getInvocationAnalysis(realizedWhenNode);
 			for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(realizedWhenNode)) {
 				Node argumentNode = QVTscheduleUtil.getSourceNode(incomingEdge);
-				if (scheduleManager.isOutput(argumentNode)) {
+				if (invocationAnalysis.isOutput(argumentNode) == Boolean.TRUE) {
 					addNode(partition, argumentNode); //, Role.SPECULATED);
 				}
 			}

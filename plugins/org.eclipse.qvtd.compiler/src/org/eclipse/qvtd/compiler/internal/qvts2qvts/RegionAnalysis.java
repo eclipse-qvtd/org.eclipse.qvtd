@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2TraceClass;
@@ -50,9 +51,12 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 	 */
 	private final @NonNull List<@NonNull Node> corollaryNodes = new ArrayList<>();
 
+	private final @Nullable RuleAnalysis ruleAnalysis;
+
 	public RegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Region region) {
 		super(transformationAnalysis);
 		this.region = region;
+		this.ruleAnalysis = region instanceof RuleRegion ? transformationAnalysis.getRuleAnalysis(QVTscheduleUtil.getReferredRule((RuleRegion)region)) : null;
 		// FIXME eliminate LoadingRegion, MicroMappingRegion	assert (region instanceof RuleRegion) || (region instanceof LoadingRegion);
 		if (!region.isLoadingRegion()) {
 			List<@NonNull Node> alreadyRealized = analyze();
@@ -155,6 +159,10 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 	@Override
 	public @NonNull Region getRegion() {
 		return region;
+	}
+
+	public @NonNull RuleAnalysis getRuleAnalysis() {
+		return ClassUtil.nonNullState(ruleAnalysis);
 	}
 
 	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {

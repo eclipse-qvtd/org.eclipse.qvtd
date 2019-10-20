@@ -61,7 +61,9 @@ public class TopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 	}
 
 	@Override
-	public void synthesizeInvocationNodes(@NonNull Node invokingTraceNode) {}
+	public @NonNull Node synthesizeInvocationNodes(@NonNull Node invokingTraceNode) {
+		throw new IllegalStateException();
+	}
 
 	@Override
 	public @NonNull String toString() {

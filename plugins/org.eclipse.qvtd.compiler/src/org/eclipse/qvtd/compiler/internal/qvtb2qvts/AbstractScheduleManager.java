@@ -924,13 +924,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public boolean isInput(@NonNull Node node) {
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
-		DomainUsage domainUsage = getDomainUsage(classDatum);
-		return getDirectedDomainUsageAnalysis().isOutput(domainUsage);
-	}
-
-	@Override
 	public boolean isInputInRule(@NonNull Rule rule, @NonNull Element element) {
 		return getDirectedDomainUsageAnalysis().isInputInRule(rule, element);
 	}
@@ -977,13 +970,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public boolean isOutput(@NonNull TypedModel typedModel) {
 		return getTypedModelsConfiguration().isOutput(typedModel);
-	}
-
-	@Override
-	public boolean isOutput(@NonNull Node node) {
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
-		DomainUsage domainUsage = getDomainUsage(classDatum);
-		return getDirectedDomainUsageAnalysis().isOutput(domainUsage);
 	}
 
 	@Override

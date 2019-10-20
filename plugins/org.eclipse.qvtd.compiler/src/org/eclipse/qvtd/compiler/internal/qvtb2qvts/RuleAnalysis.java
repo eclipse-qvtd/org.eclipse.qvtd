@@ -28,6 +28,7 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.InvocationAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -114,6 +115,10 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 			}
 		}
 		return null;
+	}
+
+	public @NonNull InvocationAnalysis getInvocationAnalysis(@NonNull Node invokingNode) {
+		throw new IllegalStateException();
 	}
 
 	public @NonNull NameGenerator getNameGenerator() {

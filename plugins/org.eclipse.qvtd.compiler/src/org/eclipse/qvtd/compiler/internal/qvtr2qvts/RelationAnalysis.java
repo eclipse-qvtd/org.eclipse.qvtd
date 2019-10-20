@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -189,6 +190,8 @@ public class RelationAnalysis extends RuleAnalysis
 	 */
 	private @Nullable Set<@NonNull VariableDeclaration> nonTopWhenedOutputVariables = null;
 
+	private @Nullable Map<@NonNull Node, @NonNull InvocationAnalysis> invokingNode2invocationAnalysis = null;
+
 	public RelationAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull RuleRegion ruleRegion) {
 		super(transformationAnalysis, ruleRegion);
 		dispatchAnalysis = createDispatchAnalysis(typedModelsConfiguration);
@@ -357,7 +360,8 @@ public class RelationAnalysis extends RuleAnalysis
 		if (!Iterables.isEmpty(tracedHeadNodes) && (!isTop || (hasOverrides && (baseRelation != relation)))) {
 			// Prefer the trace node that has been specified as the head for a dispatched/invoked relation.
 			for (@NonNull Node headNode : tracedHeadNodes) {
-				if (!scheduleManager.isOutput(headNode)) {
+				Element originatingElement = headNode.getOriginatingElement();
+				if (!scheduleManager.isOutputInRule(relation, originatingElement)) {
 					//	if (!headNode.isNew()) {
 					preferredHeadNodes.add(headNode);
 				}
@@ -402,6 +406,9 @@ public class RelationAnalysis extends RuleAnalysis
 				if (eObject instanceof TemplateExp) {
 					TemplateExp templateExp = (TemplateExp)eObject;
 					TemplateVariable templateVariable = (TemplateVariable) QVTrelationUtil.getBindsTo(templateExp);
+					if ("f".equals(templateVariable.getName())) {
+						getClass();
+					}
 					realizedOutputVariables.add(templateVariable);
 				}
 			}
@@ -479,7 +486,7 @@ public class RelationAnalysis extends RuleAnalysis
 	public void analyzeOverrides(@NonNull ProblemHandler problemHandler) {
 		Relation relation = getRule();
 		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
-		for (@NonNull TypedModel typedModel : getScheduleManager().getTypedModelsConfiguration().getOutputTypedModels()) {
+		for (@NonNull TypedModel typedModel : getScheduleManager().getTypedModelsConfiguration().getOutputOnlyTypedModels()) {
 			Domain domain = QVTrelationUtil.basicGetDomain(relation, typedModel);
 			if ((domain != null) && domain.isNotOutput()) {
 				CompilerUtil.addRuleError(problemHandler, relation, "domain ''{0}'' cannot be an output", typedModel.getName());
@@ -731,6 +738,12 @@ public class RelationAnalysis extends RuleAnalysis
 
 	public int getIncomingWhereInvocationCount() {
 		return incomingWhereInvocation2invocationAnalysis != null ? incomingWhereInvocation2invocationAnalysis.size() : 0;
+	}
+
+	@Override
+	public @NonNull InvocationAnalysis getInvocationAnalysis(@NonNull Node invokingNode) {
+		assert invokingNode2invocationAnalysis != null;
+		return ClassUtil.nonNullState(invokingNode2invocationAnalysis.get(invokingNode));
 	}
 
 	protected @NonNull Set<@NonNull VariableDeclaration> getKeyedOutputVariables() {
@@ -1310,7 +1323,13 @@ public class RelationAnalysis extends RuleAnalysis
 		if (outgoingWhenInvocation2invocationAnalysis2 != null) {
 			for (InvocationAnalysis invocationAnalysis : outgoingWhenInvocation2invocationAnalysis2.values()) {
 				assert invocationAnalysis != null;
-				invocationAnalysis.synthesizeInvocationNodes(traceNode);
+				Node invokingNode = invocationAnalysis.synthesizeInvocationNodes(traceNode);
+				Map<@NonNull Node, @NonNull InvocationAnalysis> invokingNode2invocationAnalysis2 = invokingNode2invocationAnalysis;
+				if (invokingNode2invocationAnalysis2 == null) {
+					invokingNode2invocationAnalysis = invokingNode2invocationAnalysis2 = new HashMap<>();
+				}
+				InvocationAnalysis oldInvocationAnalysis = invokingNode2invocationAnalysis2.put(invokingNode, invocationAnalysis);
+				assert oldInvocationAnalysis == null;
 			}
 		}
 	}
@@ -1573,6 +1592,10 @@ public class RelationAnalysis extends RuleAnalysis
 	 *	Create the trace node assignments to pattern nodes
 	 */
 	protected void synthesizeTraceEdges(@NonNull Node traceNode, @Nullable Node dispatchNode) {
+		String name = getName();
+		if ("F1_Family2SurnamePlanContainment_family".equals(name)) {
+			getClass();
+		}
 		Relation relation = getRule();
 		if (dispatchNode != null) {
 			Relation2TraceGroup baseRelation2traceGroup = getRule2TraceGroup().getBaseRelation2TraceGroup();

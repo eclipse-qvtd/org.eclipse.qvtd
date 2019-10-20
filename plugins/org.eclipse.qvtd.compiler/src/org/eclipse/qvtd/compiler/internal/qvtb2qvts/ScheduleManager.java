@@ -162,11 +162,6 @@ public interface ScheduleManager
 	boolean isInput(@NonNull DomainUsage domainUsage);
 
 	/**
-	 * Return true if node is part of an input domain of its region.
-	 */
-	boolean isInput(@NonNull Node node);
-
-	/**
 	 * Return true if typedModel is configured as an input (and possibly an input+output).
 	 */
 	boolean isInput(@NonNull TypedModel typedModel);
@@ -188,11 +183,6 @@ public interface ScheduleManager
 	 * Return true if domainUsage's typed model is configured as an output (and possibly an input+output).
 	 */
 	boolean isOutput(@NonNull DomainUsage domainUsage);
-
-	/**
-	 * Return true if node is part of an output domain of its region.
-	 */
-	boolean isOutput(@NonNull Node node);
 
 	/**
 	 * Return true if typedModel is configured as a output ( and possibly an input+output);.

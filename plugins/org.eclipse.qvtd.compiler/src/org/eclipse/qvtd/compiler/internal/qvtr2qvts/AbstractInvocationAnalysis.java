@@ -39,7 +39,8 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	protected final @NonNull RelationAnalysis invokedRelationAnalysis;
 	protected final @NonNull QVTrelationScheduleManager scheduleManager;
 	protected final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode = new HashMap<>();
-	private @Nullable Node invokedNode = null;
+	private @Nullable Node invokingNode = null;
+	private final @NonNull Map<@NonNull Node, @NonNull Boolean> argumentNode2isOutput = new HashMap<>();
 
 	public AbstractInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
 		this.invokingRelationAnalysis = invokingRelationAnalysis;
@@ -68,14 +69,14 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 			assert argumentNode != null;
 			VariableDeclaration overriddenRootVariable = QVTrelationUtil.getOverriddenVariable(baseInvokedRelation, rootVariable);
 			Property invocationProperty = baseInvokedRule2MiddleType.getTraceProperty(overriddenRootVariable);
-			//			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(argumentNode);
-			//			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
-			if (scheduleManager.isOutput(argumentNode)) {
+			boolean isOutput = scheduleManager.isOutputInRule(baseInvokedRelation, overriddenRootVariable);
+			if (isOutput) {
 				createOutputEdge(invokedNode, invocationProperty, argumentNode);
 			}
 			else {
 				createInputEdge(invokedNode, invocationProperty, argumentNode);
 			}
+			argumentNode2isOutput.put(argumentNode, isOutput);
 		}
 	}
 
@@ -156,9 +157,14 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	}
 
 	@Override
+	public @Nullable Boolean isOutput(@NonNull Node node) {
+		return argumentNode2isOutput.get(node);
+	}
+
+	@Override
 	public boolean isRealized() {
-		assert invokedNode != null;
-		return invokedNode.isRealized();
+		assert invokingNode != null;
+		return invokingNode.isRealized();
 	}
 
 	@Override
@@ -168,28 +174,29 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 
 	@Override
 	public void setStrict(boolean isStrict) {
-		assert invokedNode != null;
-		invokedNode.setStrict(isStrict);
+		assert invokingNode != null;
+		invokingNode.setStrict(isStrict);
 	}
 
 	@Override
-	public void synthesizeInvocationNodes(@NonNull Node invokingTraceNode) {
-		assert invokedNode == null;
+	public @NonNull Node synthesizeInvocationNodes(@NonNull Node invokingTraceNode) {
+		assert invokingNode == null;
 		//
 		//	Create the invokedNode that causes the invocation.
 		//
-		Node invokedNode2 = this.invokedNode = createInvocationNode(invokingTraceNode);
+		Node invokingNode2 = this.invokingNode = createInvocationNode(invokingTraceNode);
 		//
 		//	Integrate the invokedNode with the invokingTraceNode.
 		//
-		createInvokingTraceEdge(invokedNode2, invokingTraceNode);
+		createInvokingTraceEdge(invokingNode2, invokingTraceNode);
 		//
 		//	Create a global success status if appropriate.
 		//
-		createGlobalSuccessNodeAndEdge(invokedNode2);
+		createGlobalSuccessNodeAndEdge(invokingNode2);
 		//
 		//	Join the invokedNode to the argument nodes that bind it.
 		//
-		createInvocationEdges(invokedNode2);
+		createInvocationEdges(invokingNode2);
+		return invokingNode2;
 	}
 }
