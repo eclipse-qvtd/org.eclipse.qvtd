@@ -38,9 +38,7 @@
       <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Role/OTHER"/>
     </genEnums>
     <genDataTypes ecoreDataType="QVTschedule.ecore#//Number"/>
-    <genClasses image="false" ecoreClass="QVTschedule.ecore#//AbstractDatum">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//AbstractDatum/referredTypedModel"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="QVTschedule.ecore#//AbstractDatum"/>
     <genClasses ecoreClass="QVTschedule.ecore#//ArgumentEdge"/>
     <genClasses ecoreClass="QVTschedule.ecore#//BasicPartition">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//BasicPartition/constantEdges"/>
@@ -71,6 +69,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ClassDatum/ownedPropertyDatums"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//ClassDatum/owningScheduleModel"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ClassDatum/referredClass"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ClassDatum/referredTypedModel"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ClassDatum/superClassDatums"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//Cluster">

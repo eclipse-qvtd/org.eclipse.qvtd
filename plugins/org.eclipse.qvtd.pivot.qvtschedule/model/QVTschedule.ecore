@@ -11,12 +11,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An AbstractDatum identifies a typed information element produced by one or more regions and consumed by one or more usually other regions.&#xA;Derived Datum classes provide the informaion type which in combination with the TypedModelfully identifies information in noth endogeneous and exogeneous transformations."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The TypedModel for which this Datum provides an information element. For endogeneous transformations multiple Datums with distinct TypedModels may exist for the same Class."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArgumentEdge" abstract="true" eSuperTypes="#//ExpressionEdge">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -92,6 +86,12 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The TypedModel for which this Datum provides an information element. For endogeneous transformations multiple Datums with distinct TypedModels may exist for the same Class."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClassDatums" upperBound="-1"
         eType="#//ClassDatum" transient="true"/>
   </eClassifiers>
