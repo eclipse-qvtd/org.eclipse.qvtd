@@ -288,9 +288,12 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		}
 
 		@Override
-		public @NonNull MappingRegion visitRelation(@NonNull Relation rIn) {
+		public @Nullable MappingRegion visitRelation(@NonNull Relation rIn) {
 			RelationalTransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(QVTbaseUtil.getOwningTransformation(rIn));
-			RelationAnalysis relationAnalysis = this.relationAnalysis = transformationAnalysis.getRuleAnalysis(rIn);
+			RelationAnalysis relationAnalysis = this.relationAnalysis = transformationAnalysis.basicGetRuleAnalysis(rIn);
+			if (relationAnalysis == null) {
+				return null;
+			}
 			RuleRegion rOut = relationAnalysis.getRegion();
 			assert rOut.getReferredRule() == rIn;
 			context.pushScope(rOut);
@@ -377,7 +380,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			//			List<MappingRegion> ownedRegions = tOut.getMappingRegions();
 			//						createAll(tIn.getRule(), ownedRegions);
 			for (@NonNull Relation relation : QVTrelationUtil.getOwnedRelations(tIn)) {
-				@SuppressWarnings("unused")MappingRegion rOut = (MappingRegion) relation.accept(this);
+				relation.accept(this);
 			}
 			createAll(tIn.getOwnedComments(), tOut.getOwnedComments());
 			return tOut;
@@ -600,9 +603,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			assert transformation2tracePackage != null;
 			//			transformation2tracePackage.analyzeTraceElements(transformationAnalysis.getScheduleManager());
 			for (@NonNull Rule rule : QVTbaseUtil.getRule(transformationAnalysis.getTransformation())) {
-				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(rule);
-				Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
-				relation2traceGroup.analyzeTraceElements(relationAnalysis);
+				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
+				if (relationAnalysis != null) {
+					Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
+					relation2traceGroup.analyzeTraceElements(relationAnalysis);
+				}
 			}
 
 			//			public void analyzeTraceElements(@NonNull ScheduleManager scheduleManager) throws CompilerChainException {
@@ -621,14 +626,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			assert transformation2tracePackage != null;
 			//			transformation2tracePackage.synthesizeTraceElements();
 			for (@NonNull Rule rule : QVTbaseUtil.getRule(transformationAnalysis.getTransformation())) {
-				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(rule);
-				Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
-				relationAnalysis.synthesizeTraceElements((Relation2TraceGroup) relation2traceGroup);
-
-				//			public void synthesizeTraceElements() throws CompilerChainException {
-				//				for (@NonNull Rule2TraceGroup relation2traceGroup : getOrderedRule2TraceGroups()) {
-				//					relation2traceGroup.synthesizeTraceElements();
-				//				}
+				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
+				if (relationAnalysis != null) {
+					Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
+					relationAnalysis.synthesizeTraceElements((Relation2TraceGroup) relation2traceGroup);
+				}
 			}
 		}
 		/**
@@ -658,9 +660,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			//			org.eclipse.ocl.pivot.Package tracePackage = transformation2tracePackage.synthesizeTraceModel();
 
 			for (@NonNull Rule rule : QVTbaseUtil.getRule(transformationAnalysis.getTransformation())) {
-				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(rule);
-				Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
-				relation2traceGroup.synthesizeTraceModel(relationAnalysis);
+				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
+				if (relationAnalysis != null) {
+					Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
+					relation2traceGroup.synthesizeTraceModel(relationAnalysis);
+				}
 			}
 			org.eclipse.ocl.pivot.Package tracePackage = transformation2tracePackage.getTracePackage();
 			CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedClassesList(tracePackage));

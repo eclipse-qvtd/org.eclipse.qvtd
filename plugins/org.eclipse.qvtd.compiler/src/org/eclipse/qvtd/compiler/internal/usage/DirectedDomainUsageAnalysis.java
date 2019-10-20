@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -153,8 +154,10 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 						TypedModel typedModel = QVTbaseUtil.getTypedModel(domain);
 						Integer distance = typedModel2inputDistance.get(typedModel);
 						assert distance != null;
-						assert distance > 0;
 						assert distance < globalOutputDistance;
+						if (distance == 0) {
+							distance = globalOutputDistance;
+						}
 						Boolean isOutput = distance >= outputDistance;
 						domain2direction.put(domain, isOutput);
 					}
@@ -309,6 +312,9 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 	}
 
 	public boolean isInputInRule(@NonNull Rule rule, @NonNull Element element) {
+		if ((element instanceof Parameter) && QVTbaseUtil.isThis((Parameter)element)) {
+			return false;
+		}
 		assert rule == QVTbaseUtil.getContainingRule(element);
 		DomainUsage usage = getUsage(element);
 		TypedModel typedModel = usage.getTypedModel(element);
@@ -334,7 +340,10 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 	}
 
 	public boolean isOutputInRule(@NonNull Rule rule, @NonNull Element element) {
-		assert rule == QVTbaseUtil.getContainingRule(element);
+		if ((element instanceof Parameter) && QVTbaseUtil.isThis((Parameter)element)) {
+			return false;
+		}
+		assert rule == QVTbaseUtil.basicGetContainingRule(element);
 		DomainUsage usage = getUsage(element);
 		TypedModel typedModel = usage.getTypedModel(element);
 		assert typedModel != null;

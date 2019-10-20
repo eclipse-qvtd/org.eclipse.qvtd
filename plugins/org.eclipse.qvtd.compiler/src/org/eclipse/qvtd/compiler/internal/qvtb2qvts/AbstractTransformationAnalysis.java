@@ -130,8 +130,10 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	 */
 	public void analyzeMappingRegions() {
 		for (@NonNull Rule asRule : QVTbaseUtil.getOwnedRules(transformation)) {
-			RuleAnalysis ruleAnalysis = getRuleAnalysis(asRule);
-			ruleAnalysis.analyzeMappingRegion();
+			RuleAnalysis ruleAnalysis = basicGetRuleAnalysis(asRule);
+			if (ruleAnalysis != null) {
+				ruleAnalysis.analyzeMappingRegion();
+			}
 		}
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(transformation)) {
@@ -164,6 +166,10 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 
 	public @Nullable RootPartitionAnalysis basicGetRootPartitionAnalysis() {
 		return rootPartitionAnalysis;
+	}
+
+	public @Nullable RuleAnalysis basicGetRuleAnalysis(@NonNull Rule rule) {
+		return rule2ruleAnalysis.get(rule);
 	}
 
 	@Override

@@ -59,10 +59,11 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 	private final @NonNull Map<@NonNull CompleteClass, @Nullable Key> completeClass2key  = new HashMap<>();
 
 	private static @NonNull Iterable<@NonNull Rule> computeRules(@NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull Transformation transformation) {
-		@NonNull List<@NonNull Rule> rules = new ArrayList<>();
+		Iterable<@NonNull TypedModel> outputOnlyTypedModels = typedModelsConfiguration.getOutputOnlyTypedModels();
+		List<@NonNull Rule> rules = new ArrayList<>();
 		for (@NonNull Rule asRule : QVTbaseUtil.getOwnedRules(transformation)) {
 			boolean isExecutable = true;
-			for (@NonNull TypedModel typedModel : typedModelsConfiguration.getOutputTypedModels()) {
+			for (@NonNull TypedModel typedModel : outputOnlyTypedModels) {
 				Domain domain = QVTrelationUtil.basicGetDomain(asRule, typedModel);
 				if ((domain != null) && domain.isNotOutput()) {
 					isExecutable = false;
@@ -70,6 +71,9 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 			}
 			if (isExecutable) {
 				rules.add(asRule);
+			}
+			else {
+				System.out.println("Omitting dead rule '" + asRule.getName() + "'");
 			}
 		}
 		return rules;
@@ -106,6 +110,11 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 			analyzeKey(key);
 		}
 		super.analyzeSourceModel(problemHandler);
+	}
+
+	@Override
+	public @Nullable RelationAnalysis basicGetRuleAnalysis(@NonNull Rule rule) {
+		return (RelationAnalysis) super.basicGetRuleAnalysis(rule);
 	}
 
 	/**
