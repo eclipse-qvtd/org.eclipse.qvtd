@@ -45,14 +45,14 @@ ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | 
 DeclareStatementCS:  ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
 	isCheck?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
 	
-DirectionCS: {DirectionCS} (isChecked?='check'|isEnforced?='enforce')? name=Identifier?
+DirectionCS: {DirectionCS} (isInput?='input'|isOutput?='output')? name=Identifier?
 	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
 ;
 
 EntryPointCS: {EntryPointCS} isStrict?='strict'? 'entry' (':' firstPass=LOWER ('..' lastPass=LOWER)?)?
 	name=UnrestrictedName
-	('check' checkedTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (',' checkedTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)?
-	('enforce' enforcedTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (',' enforcedTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)?
+	('input' inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (',' inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)?
+	('output' outputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (',' outputTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)?
 	'{'
 	ownedParameters+=MappingParameterCS*
 	ownedStatements+=GuardStatementCS*
@@ -138,12 +138,12 @@ QVTimperativeUnrestrictedName:
 |	'call'
 |	'check'
 |	'contained'
-|	'enforce'
 |	'entry'
 |	'for'
 |	'implementedby'
 |	'imports'
 //|	'in'
+|	'input'
 |	'install'
 |	'invoke'
 |	'iterates'
@@ -151,6 +151,7 @@ QVTimperativeUnrestrictedName:
 |	'new'
 |	'notify'
 |	'observe'
+|	'output'
 |	'package'
 |	'query'
 |	'set'

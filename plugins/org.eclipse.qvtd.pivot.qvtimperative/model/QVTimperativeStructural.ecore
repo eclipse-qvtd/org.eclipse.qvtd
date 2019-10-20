@@ -111,13 +111,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An EntryPoint specifies a per-direction root Mapping."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="checkedTypedModels" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputTypedModels" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModels defining the inputs."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enforcedTypedModels" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputTypedModels" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModels defining the outputs."/>
@@ -175,13 +175,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An ImperativeTypedModel defines an input,middle or output modek for the transformation."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isChecked" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInput" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="True for an input model."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforced" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOutput" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="True for an output model."/>

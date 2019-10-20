@@ -29,7 +29,7 @@ inv allRulesAreMappings: rule->forAll(oclIsKindOf(Mapping))
 context ImperativeTypedModel
 def: allUsedPackages : Set(ocl::Package) = usedPackage
 inv NameIsNotNull : name <> null
-inv NotBothCheckedAndEnforced: not (isChecked and isEnforced)
+inv NotBothInputAndOutput: not (isInput and isOutput)
 
 context Mapping
 inv NameIsNotNull : name <> null

@@ -189,14 +189,14 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An EntryPoint specifies a per-direction root Mapping."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-EntryPoint-checkedTypedModels"
-        name="checkedTypedModels" upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-EntryPoint-inputTypedModels"
+        name="inputTypedModels" upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModels defining the inputs."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-EntryPoint-enforcedTypedModels"
-        name="enforcedTypedModels" upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-EntryPoint-outputTypedModels"
+        name="outputTypedModels" upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The TypedModels defining the outputs."/>
       </eAnnotations>
@@ -292,12 +292,12 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eOperations name="validateNotBothCheckedAndEnforced" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="validateNotBothInputAndOutput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <details key="originalName" value="NotBothCheckedAndEnforced"/>
+        <details key="originalName" value="NotBothInputAndOutput"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not (isChecked and isEnforced)&#xA;&#xA;"/>
+        <details key="body" value="not (isInput and isOutput)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -307,15 +307,15 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-ImperativeTypedModel-isChecked"
-        name="isChecked" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-ImperativeTypedModel-isInput"
+        name="isInput" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="True for an input model."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-ImperativeTypedModel-isEnforced"
-        name="isEnforced" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-ImperativeTypedModel-isOutput"
+        name="isOutput" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="True for an output model."/>

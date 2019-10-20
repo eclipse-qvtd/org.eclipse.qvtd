@@ -45,15 +45,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="DirectionCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Package"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isChecked" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInput" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforced" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOutput" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EntryPointCS" eSuperTypes="#//MappingCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="checkedTypedModels" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputTypedModels" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enforcedTypedModels" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputTypedModels" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GuardParameterBindingCS" eSuperTypes="#//MappingParameterBindingCS">

@@ -41,12 +41,12 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//DirectionCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DirectionCS/imports"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DirectionCS/isChecked"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DirectionCS/isEnforced"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DirectionCS/isInput"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DirectionCS/isOutput"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//EntryPointCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/checkedTypedModels"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/enforcedTypedModels"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/inputTypedModels"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/outputTypedModels"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardParameterBindingCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardParameterBindingCS/value"/>
