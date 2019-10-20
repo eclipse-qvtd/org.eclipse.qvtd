@@ -26,8 +26,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedTypedModels <em>Checked Typed Models</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedTypedModels <em>Enforced Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getInputTypedModels <em>Input Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getOutputTypedModels <em>Output Typed Models</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS()
@@ -36,35 +36,35 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public interface EntryPointCS extends MappingCS {
 	/**
-	 * Returns the value of the '<em><b>Checked Typed Models</b></em>' reference list.
+	 * Returns the value of the '<em><b>Input Typed Models</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.TypedModel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Checked Typed Models</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Input Typed Models</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Checked Typed Models</em>' reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS_CheckedTypedModels()
+	 * @return the value of the '<em>Input Typed Models</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS_InputTypedModels()
 	 * @model
 	 * @generated
 	 */
-	EList<TypedModel> getCheckedTypedModels();
+	EList<TypedModel> getInputTypedModels();
 
 	/**
-	 * Returns the value of the '<em><b>Enforced Typed Models</b></em>' reference list.
+	 * Returns the value of the '<em><b>Output Typed Models</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.TypedModel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Enforced Typed Models</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Output Typed Models</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Enforced Typed Models</em>' reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS_EnforcedTypedModels()
+	 * @return the value of the '<em>Output Typed Models</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getEntryPointCS_OutputTypedModels()
 	 * @model
 	 * @generated
 	 */
-	EList<TypedModel> getEnforcedTypedModels();
+	EList<TypedModel> getOutputTypedModels();
 
 } // EntryPointCS

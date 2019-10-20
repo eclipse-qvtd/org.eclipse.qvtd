@@ -32,8 +32,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsChecked <em>Is Checked</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsEnforced <em>Is Enforced</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsInput <em>Is Input</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsOutput <em>Is Output</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#getAllUsedPackages <em>All Used Packages</em>}</li>
  * </ul>
  *
@@ -42,62 +42,54 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public interface ImperativeTypedModel extends TypedModel {
 	/**
-	 * Returns the value of the '<em><b>Is Checked</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Input</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Checked</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * True for an input model.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Is Checked</em>' attribute.
-	 * @see #setIsChecked(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeTypedModel_IsChecked()
+	 * @return the value of the '<em>Is Input</em>' attribute.
+	 * @see #setIsInput(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeTypedModel_IsInput()
 	 * @generated
 	 */
-	boolean isIsChecked();
+	boolean isIsInput();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsChecked <em>Is Checked</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsInput <em>Is Input</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Checked</em>' attribute.
-	 * @see #isIsChecked()
+	 * @param value the new value of the '<em>Is Input</em>' attribute.
+	 * @see #isIsInput()
 	 * @generated
 	 */
-	void setIsChecked(boolean value);
+	void setIsInput(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Enforced</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Output</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Enforced</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * True for an output model.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Is Enforced</em>' attribute.
-	 * @see #setIsEnforced(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeTypedModel_IsEnforced()
+	 * @return the value of the '<em>Is Output</em>' attribute.
+	 * @see #setIsOutput(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeTypedModel_IsOutput()
 	 * @generated
 	 */
-	boolean isIsEnforced();
+	boolean isIsOutput();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsEnforced <em>Is Enforced</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsOutput <em>Is Output</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Enforced</em>' attribute.
-	 * @see #isIsEnforced()
+	 * @param value the new value of the '<em>Is Output</em>' attribute.
+	 * @see #isIsOutput()
 	 * @generated
 	 */
-	void setIsEnforced(boolean value);
+	void setIsOutput(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>All Used Packages</b></em>' reference list.
@@ -126,6 +118,6 @@ public interface ImperativeTypedModel extends TypedModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateNotBothCheckedAndEnforced(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateNotBothInputAndOutput(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // ImperativeTypedModel

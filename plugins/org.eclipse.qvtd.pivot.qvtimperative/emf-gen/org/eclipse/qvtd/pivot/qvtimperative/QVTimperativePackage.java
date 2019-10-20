@@ -329,26 +329,26 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getEntryPoint();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getCheckedTypedModels <em>Checked Typed Models</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getInputTypedModels <em>Input Typed Models</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Checked Typed Models</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getCheckedTypedModels()
+	 * @return the meta object for the reference list '<em>Input Typed Models</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getInputTypedModels()
 	 * @see #getEntryPoint()
 	 * @generated
 	 */
-	EReference getEntryPoint_CheckedTypedModels();
+	EReference getEntryPoint_InputTypedModels();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getEnforcedTypedModels <em>Enforced Typed Models</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getOutputTypedModels <em>Output Typed Models</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Enforced Typed Models</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getEnforcedTypedModels()
+	 * @return the meta object for the reference list '<em>Output Typed Models</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getOutputTypedModels()
 	 * @see #getEntryPoint()
 	 * @generated
 	 */
-	EReference getEntryPoint_EnforcedTypedModels();
+	EReference getEntryPoint_OutputTypedModels();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardParameter <em>Guard Parameter</em>}'.
@@ -466,26 +466,26 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getImperativeTypedModel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsChecked <em>Is Checked</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsInput <em>Is Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Checked</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsChecked()
+	 * @return the meta object for the attribute '<em>Is Input</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsInput()
 	 * @see #getImperativeTypedModel()
 	 * @generated
 	 */
-	EAttribute getImperativeTypedModel_IsChecked();
+	EAttribute getImperativeTypedModel_IsInput();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsEnforced <em>Is Enforced</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsOutput <em>Is Output</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Enforced</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsEnforced()
+	 * @return the meta object for the attribute '<em>Is Output</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsOutput()
 	 * @see #getImperativeTypedModel()
 	 * @generated
 	 */
-	EAttribute getImperativeTypedModel_IsEnforced();
+	EAttribute getImperativeTypedModel_IsOutput();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#getAllUsedPackages <em>All Used Packages</em>}'.
@@ -509,14 +509,14 @@ public interface QVTimperativePackage extends EPackage {
 	EOperation getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNotBothCheckedAndEnforced(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Not Both Checked And Enforced</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNotBothInputAndOutput(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Not Both Input And Output</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Not Both Checked And Enforced</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNotBothCheckedAndEnforced(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Not Both Input And Output</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNotBothInputAndOutput(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map();
+	EOperation getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding <em>Loop Parameter Binding</em>}'.
@@ -1489,20 +1489,20 @@ public interface QVTimperativePackage extends EPackage {
 		EClass ENTRY_POINT = eINSTANCE.getEntryPoint();
 
 		/**
-		 * The meta object literal for the '<em><b>Checked Typed Models</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Input Typed Models</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENTRY_POINT__CHECKED_TYPED_MODELS = eINSTANCE.getEntryPoint_CheckedTypedModels();
+		EReference ENTRY_POINT__INPUT_TYPED_MODELS = eINSTANCE.getEntryPoint_InputTypedModels();
 
 		/**
-		 * The meta object literal for the '<em><b>Enforced Typed Models</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Output Typed Models</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENTRY_POINT__ENFORCED_TYPED_MODELS = eINSTANCE.getEntryPoint_EnforcedTypedModels();
+		EReference ENTRY_POINT__OUTPUT_TYPED_MODELS = eINSTANCE.getEntryPoint_OutputTypedModels();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardParameterImpl <em>Guard Parameter</em>}' class.
@@ -1603,20 +1603,20 @@ public interface QVTimperativePackage extends EPackage {
 		EClass IMPERATIVE_TYPED_MODEL = eINSTANCE.getImperativeTypedModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Checked</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Input</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPERATIVE_TYPED_MODEL__IS_CHECKED = eINSTANCE.getImperativeTypedModel_IsChecked();
+		EAttribute IMPERATIVE_TYPED_MODEL__IS_INPUT = eINSTANCE.getImperativeTypedModel_IsInput();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Enforced</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Output</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPERATIVE_TYPED_MODEL__IS_ENFORCED = eINSTANCE.getImperativeTypedModel_IsEnforced();
+		EAttribute IMPERATIVE_TYPED_MODEL__IS_OUTPUT = eINSTANCE.getImperativeTypedModel_IsOutput();
 
 		/**
 		 * The meta object literal for the '<em><b>All Used Packages</b></em>' reference list feature.
@@ -1635,12 +1635,12 @@ public interface QVTimperativePackage extends EPackage {
 		EOperation IMPERATIVE_TYPED_MODEL___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Not Both Checked And Enforced</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Not Both Input And Output</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map();
+		EOperation IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_INPUT_AND_OUTPUT__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.LoopParameterBindingImpl <em>Loop Parameter Binding</em>}' class.

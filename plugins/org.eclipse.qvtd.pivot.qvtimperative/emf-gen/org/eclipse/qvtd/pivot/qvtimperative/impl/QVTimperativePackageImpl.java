@@ -582,7 +582,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getEntryPoint_CheckedTypedModels() {
+	public EReference getEntryPoint_InputTypedModels() {
 		return (EReference)entryPointEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -592,7 +592,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getEntryPoint_EnforcedTypedModels() {
+	public EReference getEntryPoint_OutputTypedModels() {
 		return (EReference)entryPointEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -712,7 +712,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getImperativeTypedModel_IsChecked() {
+	public EAttribute getImperativeTypedModel_IsInput() {
 		return (EAttribute)imperativeTypedModelEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -722,7 +722,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getImperativeTypedModel_IsEnforced() {
+	public EAttribute getImperativeTypedModel_IsOutput() {
 		return (EAttribute)imperativeTypedModelEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -752,7 +752,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EOperation getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map() {
+	public EOperation getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map() {
 		return imperativeTypedModelEClass.getEOperations().get(1);
 	}
 
@@ -1771,8 +1771,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(entryPointEClass, EntryPoint.class, "EntryPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEntryPoint_CheckedTypedModels(), theQVTbasePackage.getTypedModel(), null, "checkedTypedModels", null, 0, -1, EntryPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEntryPoint_EnforcedTypedModels(), theQVTbasePackage.getTypedModel(), null, "enforcedTypedModels", null, 0, -1, EntryPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEntryPoint_InputTypedModels(), theQVTbasePackage.getTypedModel(), null, "inputTypedModels", null, 0, -1, EntryPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEntryPoint_OutputTypedModels(), theQVTbasePackage.getTypedModel(), null, "outputTypedModels", null, 0, -1, EntryPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardParameterEClass, GuardParameter.class, "GuardParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardParameter_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1797,8 +1797,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(imperativeTypedModelEClass, ImperativeTypedModel.class, "ImperativeTypedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImperativeTypedModel_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 1, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImperativeTypedModel_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", "false", 1, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImperativeTypedModel_IsInput(), ecorePackage.getEBoolean(), "isInput", "false", 1, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImperativeTypedModel_IsOutput(), ecorePackage.getEBoolean(), "isOutput", "false", 1, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getImperativeTypedModel_AllUsedPackages(), thePivotPackage.getPackage(), null, "allUsedPackages", null, 0, -1, ImperativeTypedModel.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
 
 		op = initEOperation(getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNameIsNotNull", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1810,7 +1810,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNotBothCheckedAndEnforced", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNotBothInputAndOutput", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -2110,10 +2110,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 			   "originalName", "NameIsNotNull"
 		   });
 		addAnnotation
-		  (getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map(),
+		  (getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "originalName", "NotBothCheckedAndEnforced"
+			   "originalName", "NotBothInputAndOutput"
 		   });
 		addAnnotation
 		  (getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(),
@@ -2258,10 +2258,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 			   "body", "name <> null\n"
 		   });
 		addAnnotation
-		  (getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map(),
+		  (getImperativeTypedModel__ValidateNotBothInputAndOutput__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "not (isChecked and isEnforced)\n\n"
+			   "body", "not (isInput and isOutput)\n\n"
 		   });
 		addAnnotation
 		  (getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(),

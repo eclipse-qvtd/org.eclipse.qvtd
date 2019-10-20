@@ -545,26 +545,26 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getDirectionCS_Imports();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsChecked <em>Is Checked</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsInput <em>Is Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Checked</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsChecked()
+	 * @return the meta object for the attribute '<em>Is Input</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsInput()
 	 * @see #getDirectionCS()
 	 * @generated
 	 */
-	EAttribute getDirectionCS_IsChecked();
+	EAttribute getDirectionCS_IsInput();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsEnforced <em>Is Enforced</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsOutput <em>Is Output</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Enforced</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsEnforced()
+	 * @return the meta object for the attribute '<em>Is Output</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsOutput()
 	 * @see #getDirectionCS()
 	 * @generated
 	 */
-	EAttribute getDirectionCS_IsEnforced();
+	EAttribute getDirectionCS_IsOutput();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS <em>Entry Point CS</em>}'.
@@ -577,26 +577,26 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getEntryPointCS();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedTypedModels <em>Checked Typed Models</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getInputTypedModels <em>Input Typed Models</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Checked Typed Models</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getCheckedTypedModels()
+	 * @return the meta object for the reference list '<em>Input Typed Models</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getInputTypedModels()
 	 * @see #getEntryPointCS()
 	 * @generated
 	 */
-	EReference getEntryPointCS_CheckedTypedModels();
+	EReference getEntryPointCS_InputTypedModels();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedTypedModels <em>Enforced Typed Models</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getOutputTypedModels <em>Output Typed Models</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Enforced Typed Models</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getEnforcedTypedModels()
+	 * @return the meta object for the reference list '<em>Output Typed Models</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getOutputTypedModels()
 	 * @see #getEntryPointCS()
 	 * @generated
 	 */
-	EReference getEntryPointCS_EnforcedTypedModels();
+	EReference getEntryPointCS_OutputTypedModels();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS <em>Guard Parameter Binding CS</em>}'.
@@ -1461,20 +1461,20 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference DIRECTION_CS__IMPORTS = eINSTANCE.getDirectionCS_Imports();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Checked</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Input</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DIRECTION_CS__IS_CHECKED = eINSTANCE.getDirectionCS_IsChecked();
+		EAttribute DIRECTION_CS__IS_INPUT = eINSTANCE.getDirectionCS_IsInput();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Enforced</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Output</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DIRECTION_CS__IS_ENFORCED = eINSTANCE.getDirectionCS_IsEnforced();
+		EAttribute DIRECTION_CS__IS_OUTPUT = eINSTANCE.getDirectionCS_IsOutput();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EntryPointCSImpl <em>Entry Point CS</em>}' class.
@@ -1487,20 +1487,20 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass ENTRY_POINT_CS = eINSTANCE.getEntryPointCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Checked Typed Models</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Input Typed Models</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENTRY_POINT_CS__CHECKED_TYPED_MODELS = eINSTANCE.getEntryPointCS_CheckedTypedModels();
+		EReference ENTRY_POINT_CS__INPUT_TYPED_MODELS = eINSTANCE.getEntryPointCS_InputTypedModels();
 
 		/**
-		 * The meta object literal for the '<em><b>Enforced Typed Models</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Output Typed Models</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENTRY_POINT_CS__ENFORCED_TYPED_MODELS = eINSTANCE.getEntryPointCS_EnforcedTypedModels();
+		EReference ENTRY_POINT_CS__OUTPUT_TYPED_MODELS = eINSTANCE.getEntryPointCS_OutputTypedModels();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardParameterBindingCSImpl <em>Guard Parameter Binding CS</em>}' class.

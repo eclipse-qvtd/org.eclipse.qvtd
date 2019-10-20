@@ -298,7 +298,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				if (resolve) return getImplementation();
-			return basicGetImplementation();
+				return basicGetImplementation();
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedParameters();
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
@@ -320,17 +320,17 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setImplementation((JavaClassCS)newValue);
-			return;
+				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedParameters().clear();
-			getOwnedParameters().addAll((Collection<? extends ParamDeclarationCS>)newValue);
-			return;
+				getOwnedParameters().addAll((Collection<? extends ParamDeclarationCS>)newValue);
+				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setOwnedExpression((ExpCS)newValue);
-			return;
+				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setIsTransient((Boolean)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -345,16 +345,16 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setImplementation((JavaClassCS)null);
-			return;
+				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedParameters().clear();
-			return;
+				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setOwnedExpression((ExpCS)null);
-			return;
+				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setIsTransient(IS_TRANSIENT_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

@@ -27,8 +27,8 @@ import org.eclipse.ocl.xtext.basecs.NamedElementCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsChecked <em>Is Checked</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsEnforced <em>Is Enforced</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsInput <em>Is Input</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsOutput <em>Is Output</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDirectionCS()
@@ -53,55 +53,55 @@ public interface DirectionCS extends NamedElementCS {
 	EList<org.eclipse.ocl.pivot.Package> getImports();
 
 	/**
-	 * Returns the value of the '<em><b>Is Checked</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Input</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Checked</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Input</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Checked</em>' attribute.
-	 * @see #setIsChecked(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDirectionCS_IsChecked()
+	 * @return the value of the '<em>Is Input</em>' attribute.
+	 * @see #setIsInput(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDirectionCS_IsInput()
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean isIsChecked();
+	boolean isIsInput();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsChecked <em>Is Checked</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsInput <em>Is Input</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Checked</em>' attribute.
-	 * @see #isIsChecked()
+	 * @param value the new value of the '<em>Is Input</em>' attribute.
+	 * @see #isIsInput()
 	 * @generated
 	 */
-	void setIsChecked(boolean value);
+	void setIsInput(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Enforced</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Output</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Enforced</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Output</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Enforced</em>' attribute.
-	 * @see #setIsEnforced(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDirectionCS_IsEnforced()
+	 * @return the value of the '<em>Is Output</em>' attribute.
+	 * @see #setIsOutput(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDirectionCS_IsOutput()
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean isIsEnforced();
+	boolean isIsOutput();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsEnforced <em>Is Enforced</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsOutput <em>Is Output</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Enforced</em>' attribute.
-	 * @see #isIsEnforced()
+	 * @param value the new value of the '<em>Is Output</em>' attribute.
+	 * @see #isIsOutput()
 	 * @generated
 	 */
-	void setIsEnforced(boolean value);
+	void setIsOutput(boolean value);
 
 } // DirectionCS

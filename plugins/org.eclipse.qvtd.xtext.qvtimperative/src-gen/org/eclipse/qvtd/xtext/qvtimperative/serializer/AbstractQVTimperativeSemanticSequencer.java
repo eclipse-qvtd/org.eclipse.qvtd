@@ -666,7 +666,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     DirectionCS returns DirectionCS
 	 *
 	 * Constraint:
-	 *     ((isChecked?='check' | isEnforced?='enforce')? name=Identifier? (imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)?)
+	 *     ((isInput?='input' | isOutput?='output')? name=Identifier? (imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)?)
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -682,8 +682,8 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         isStrict?='strict'?
 	 *         (firstPass=LOWER lastPass=LOWER?)?
 	 *         name=UnrestrictedName
-	 *         (checkedTypedModels+=[TypedModel|UnrestrictedName] checkedTypedModels+=[TypedModel|UnrestrictedName]*)?
-	 *         (enforcedTypedModels+=[TypedModel|UnrestrictedName] enforcedTypedModels+=[TypedModel|UnrestrictedName]*)?
+	 *         (inputTypedModels+=[TypedModel|UnrestrictedName] inputTypedModels+=[TypedModel|UnrestrictedName]*)?
+	 *         (outputTypedModels+=[TypedModel|UnrestrictedName] outputTypedModels+=[TypedModel|UnrestrictedName]*)?
 	 *         ownedParameters+=MappingParameterCS*
 	 *         ownedStatements+=GuardStatementCS*
 	 *         ownedStatements+=CommitStatementCS*

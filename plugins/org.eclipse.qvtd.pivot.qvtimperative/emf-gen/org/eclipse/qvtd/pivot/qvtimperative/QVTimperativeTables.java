@@ -613,8 +613,8 @@ public class QVTimperativeTables
 		public static final @NonNull ExecutorProperty _DeclareStatement__isCheck = new EcoreExecutorProperty(QVTimperativePackage.Literals.DECLARE_STATEMENT__IS_CHECK, Types._DeclareStatement, 0);
 		public static final @NonNull ExecutorProperty _DeclareStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.DECLARE_STATEMENT__OWNED_EXPRESSION, Types._DeclareStatement, 1);
 
-		public static final @NonNull ExecutorProperty _EntryPoint__checkedTypedModels = new EcoreExecutorProperty(QVTimperativePackage.Literals.ENTRY_POINT__CHECKED_TYPED_MODELS, Types._EntryPoint, 0);
-		public static final @NonNull ExecutorProperty _EntryPoint__enforcedTypedModels = new EcoreExecutorProperty(QVTimperativePackage.Literals.ENTRY_POINT__ENFORCED_TYPED_MODELS, Types._EntryPoint, 1);
+		public static final @NonNull ExecutorProperty _EntryPoint__inputTypedModels = new EcoreExecutorProperty(QVTimperativePackage.Literals.ENTRY_POINT__INPUT_TYPED_MODELS, Types._EntryPoint, 0);
+		public static final @NonNull ExecutorProperty _EntryPoint__outputTypedModels = new EcoreExecutorProperty(QVTimperativePackage.Literals.ENTRY_POINT__OUTPUT_TYPED_MODELS, Types._EntryPoint, 1);
 
 		public static final @NonNull ExecutorProperty _GuardParameter__referredTypedModel = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__REFERRED_TYPED_MODEL, Types._GuardParameter, 0);
 		public static final @NonNull ExecutorProperty _GuardParameter__successProperty = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__SUCCESS_PROPERTY, Types._GuardParameter, 1);
@@ -625,8 +625,8 @@ public class QVTimperativeTables
 		public static final @NonNull ExecutorProperty _ImperativeTransformation__contextType = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION__CONTEXT_TYPE, Types._ImperativeTransformation, 0);
 
 		public static final @NonNull ExecutorProperty _ImperativeTypedModel__allUsedPackages = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES, Types._ImperativeTypedModel, 0);
-		public static final @NonNull ExecutorProperty _ImperativeTypedModel__isChecked = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL__IS_CHECKED, Types._ImperativeTypedModel, 1);
-		public static final @NonNull ExecutorProperty _ImperativeTypedModel__isEnforced = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL__IS_ENFORCED, Types._ImperativeTypedModel, 2);
+		public static final @NonNull ExecutorProperty _ImperativeTypedModel__isInput = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL__IS_INPUT, Types._ImperativeTypedModel, 1);
+		public static final @NonNull ExecutorProperty _ImperativeTypedModel__isOutput = new EcoreExecutorProperty(QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL__IS_OUTPUT, Types._ImperativeTypedModel, 2);
 		public static final @NonNull ExecutorProperty _ImperativeTypedModel__GuardParameter__referredTypedModel = new ExecutorPropertyWithImplementation("GuardParameter", Types._ImperativeTypedModel, 3, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__REFERRED_TYPED_MODEL));
 		public static final @NonNull ExecutorProperty _ImperativeTypedModel__NewStatement__referredTypedModel = new ExecutorPropertyWithImplementation("NewStatement", Types._ImperativeTypedModel, 4, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.NEW_STATEMENT__REFERRED_TYPED_MODEL));
 		public static final @NonNull ExecutorProperty _ImperativeTypedModel__SimpleParameter__referredTypedModel = new ExecutorPropertyWithImplementation("SimpleParameter", Types._ImperativeTypedModel, 5, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.SIMPLE_PARAMETER__REFERRED_TYPED_MODEL));
@@ -2487,11 +2487,11 @@ public class QVTimperativeTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _EntryPoint = {
-			QVTimperativeTables.Properties._EntryPoint__checkedTypedModels,
-			QVTimperativeTables.Properties._EntryPoint__enforcedTypedModels,
 			QVTimperativeTables.Properties._Mapping__firstPass,
+			QVTimperativeTables.Properties._EntryPoint__inputTypedModels,
 			QVTimperativeTables.Properties._Mapping__isStrict,
 			QVTimperativeTables.Properties._Mapping__lastPass,
+			QVTimperativeTables.Properties._EntryPoint__outputTypedModels,
 			QVTimperativeTables.Properties._Mapping__ownedMappingParameters,
 			QVTimperativeTables.Properties._Mapping__ownedStatements
 		};
@@ -2517,8 +2517,8 @@ public class QVTimperativeTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ImperativeTypedModel = {
 			QVTimperativeTables.Properties._ImperativeTypedModel__allUsedPackages,
-			QVTimperativeTables.Properties._ImperativeTypedModel__isChecked,
-			QVTimperativeTables.Properties._ImperativeTypedModel__isEnforced
+			QVTimperativeTables.Properties._ImperativeTypedModel__isInput,
+			QVTimperativeTables.Properties._ImperativeTypedModel__isOutput
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LoopParameterBinding = {

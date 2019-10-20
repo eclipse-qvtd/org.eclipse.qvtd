@@ -50,8 +50,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl#isIsChecked <em>Is Checked</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl#isIsEnforced <em>Is Enforced</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl#isIsInput <em>Is Input</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl#isIsOutput <em>Is Output</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl#getAllUsedPackages <em>All Used Packages</em>}</li>
  * </ul>
  *
@@ -77,44 +77,44 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	public static final int IMPERATIVE_TYPED_MODEL_OPERATION_COUNT = TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 2;
 
 	/**
-	 * The default value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
+	 * The default value of the '{@link #isIsInput() <em>Is Input</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsChecked()
+	 * @see #isIsInput()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_CHECKED_EDEFAULT = false;
+	protected static final boolean IS_INPUT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
+	 * The cached value of the '{@link #isIsInput() <em>Is Input</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsChecked()
+	 * @see #isIsInput()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isChecked = IS_CHECKED_EDEFAULT;
+	protected boolean isInput = IS_INPUT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIsEnforced() <em>Is Enforced</em>}' attribute.
+	 * The default value of the '{@link #isIsOutput() <em>Is Output</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsEnforced()
+	 * @see #isIsOutput()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_ENFORCED_EDEFAULT = false;
+	protected static final boolean IS_OUTPUT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsEnforced() <em>Is Enforced</em>}' attribute.
+	 * The cached value of the '{@link #isIsOutput() <em>Is Output</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsEnforced()
+	 * @see #isIsOutput()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isEnforced = IS_ENFORCED_EDEFAULT;
+	protected boolean isOutput = IS_OUTPUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -141,8 +141,8 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * @generated
 	 */
 	@Override
-	public boolean isIsChecked() {
-		return isChecked;
+	public boolean isIsInput() {
+		return isInput;
 	}
 
 	/**
@@ -151,11 +151,11 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * @generated
 	 */
 	@Override
-	public void setIsChecked(boolean newIsChecked) {
-		boolean oldIsChecked = isChecked;
-		isChecked = newIsChecked;
+	public void setIsInput(boolean newIsInput) {
+		boolean oldIsInput = isInput;
+		isInput = newIsInput;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0, oldIsChecked, isChecked));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0, oldIsInput, isInput));
 	}
 
 	/**
@@ -164,8 +164,8 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * @generated
 	 */
 	@Override
-	public boolean isIsEnforced() {
-		return isEnforced;
+	public boolean isIsOutput() {
+		return isOutput;
 	}
 
 	/**
@@ -174,11 +174,11 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * @generated
 	 */
 	@Override
-	public void setIsEnforced(boolean newIsEnforced) {
-		boolean oldIsEnforced = isEnforced;
-		isEnforced = newIsEnforced;
+	public void setIsOutput(boolean newIsOutput) {
+		boolean oldIsOutput = isOutput;
+		isOutput = newIsOutput;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1, oldIsEnforced, isEnforced));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1, oldIsOutput, isOutput));
 	}
 
 	/**
@@ -253,18 +253,18 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * @generated
 	 */
 	@Override
-	public boolean validateNotBothCheckedAndEnforced(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		final @NonNull String constraintName = "ImperativeTypedModel::NotBothCheckedAndEnforced";
+	public boolean validateNotBothInputAndOutput(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "ImperativeTypedModel::NotBothInputAndOutput";
 		try {
 			/**
 			 *
-			 * inv NotBothCheckedAndEnforced:
+			 * inv NotBothInputAndOutput:
 			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
-			 *       let result : Boolean[?] = not (isChecked and isEnforced)
+			 *       let result : Boolean[?] = not (isInput and isOutput)
 			 *       in
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
@@ -272,7 +272,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
 			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED__DIAGNOSTICCHAIN_MAP);
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_INPUT_AND_OUTPUT__DIAGNOSTICCHAIN_MAP);
 				CAUGHT_severity_0 = severity_0;
 			}
 			catch (Exception e) {
@@ -287,11 +287,11 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ boolean isChecked = this.isIsChecked();
+				final /*@NonInvalid*/ boolean isInput = this.isIsInput();
 				/*@NonInvalid*/ boolean and;
-				if (isChecked) {
-					final /*@NonInvalid*/ boolean isEnforced = this.isIsEnforced();
-					and = isEnforced;
+				if (isInput) {
+					final /*@NonInvalid*/ boolean isOutput = this.isIsOutput();
+					and = isOutput;
 				}
 				else {
 					and = ValueUtil.FALSE_VALUE;
@@ -326,9 +326,9 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0:
-				return isIsChecked();
+				return isIsInput();
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1:
-				return isIsEnforced();
+				return isIsOutput();
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 2:
 				return getAllUsedPackages();
 		}
@@ -344,10 +344,10 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0:
-				setIsChecked((Boolean)newValue);
+				setIsInput((Boolean)newValue);
 				return;
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1:
-				setIsEnforced((Boolean)newValue);
+				setIsOutput((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -362,10 +362,10 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0:
-				setIsChecked(IS_CHECKED_EDEFAULT);
+				setIsInput(IS_INPUT_EDEFAULT);
 				return;
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1:
-				setIsEnforced(IS_ENFORCED_EDEFAULT);
+				setIsOutput(IS_OUTPUT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -380,9 +380,9 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0:
-				return isChecked != IS_CHECKED_EDEFAULT;
+				return isInput != IS_INPUT_EDEFAULT;
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1:
-				return isEnforced != IS_ENFORCED_EDEFAULT;
+				return isOutput != IS_OUTPUT_EDEFAULT;
 			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 2:
 				return !getAllUsedPackages().isEmpty();
 		}
@@ -401,7 +401,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 			case TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 0:
 				return validateNameIsNotNull((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 1:
-				return validateNotBothCheckedAndEnforced((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+				return validateNotBothInputAndOutput((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

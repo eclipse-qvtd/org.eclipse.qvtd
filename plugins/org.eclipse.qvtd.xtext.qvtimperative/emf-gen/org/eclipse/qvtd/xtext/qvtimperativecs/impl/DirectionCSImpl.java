@@ -37,8 +37,8 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#isIsChecked <em>Is Checked</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#isIsEnforced <em>Is Enforced</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#isIsInput <em>Is Input</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#isIsOutput <em>Is Output</em>}</li>
  * </ul>
  *
  * @generated
@@ -64,44 +64,44 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	protected EList<org.eclipse.ocl.pivot.Package> imports;
 
 	/**
-	 * The default value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
+	 * The default value of the '{@link #isIsInput() <em>Is Input</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsChecked()
+	 * @see #isIsInput()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_CHECKED_EDEFAULT = false;
+	protected static final boolean IS_INPUT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
+	 * The cached value of the '{@link #isIsInput() <em>Is Input</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsChecked()
+	 * @see #isIsInput()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isChecked = IS_CHECKED_EDEFAULT;
+	protected boolean isInput = IS_INPUT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIsEnforced() <em>Is Enforced</em>}' attribute.
+	 * The default value of the '{@link #isIsOutput() <em>Is Output</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsEnforced()
+	 * @see #isIsOutput()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_ENFORCED_EDEFAULT = false;
+	protected static final boolean IS_OUTPUT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsEnforced() <em>Is Enforced</em>}' attribute.
+	 * The cached value of the '{@link #isIsOutput() <em>Is Output</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsEnforced()
+	 * @see #isIsOutput()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isEnforced = IS_ENFORCED_EDEFAULT;
+	protected boolean isOutput = IS_OUTPUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -141,8 +141,8 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isIsChecked() {
-		return isChecked;
+	public boolean isIsInput() {
+		return isInput;
 	}
 
 	/**
@@ -151,11 +151,11 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 */
 	@Override
-	public void setIsChecked(boolean newIsChecked) {
-		boolean oldIsChecked = isChecked;
-		isChecked = newIsChecked;
+	public void setIsInput(boolean newIsInput) {
+		boolean oldIsInput = isInput;
+		isInput = newIsInput;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, oldIsChecked, isChecked));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, oldIsInput, isInput));
 	}
 
 	/**
@@ -164,8 +164,8 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isIsEnforced() {
-		return isEnforced;
+	public boolean isIsOutput() {
+		return isOutput;
 	}
 
 	/**
@@ -174,11 +174,11 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 */
 	@Override
-	public void setIsEnforced(boolean newIsEnforced) {
-		boolean oldIsEnforced = isEnforced;
-		isEnforced = newIsEnforced;
+	public void setIsOutput(boolean newIsOutput) {
+		boolean oldIsOutput = isOutput;
+		isOutput = newIsOutput;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2, oldIsEnforced, isEnforced));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2, oldIsOutput, isOutput));
 	}
 
 	/**
@@ -202,9 +202,9 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getImports();
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return isIsChecked();
+				return isIsInput();
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
-				return isIsEnforced();
+				return isIsOutput();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -223,10 +223,10 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 				getImports().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
 				return;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				setIsChecked((Boolean)newValue);
+				setIsInput((Boolean)newValue);
 				return;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
-				setIsEnforced((Boolean)newValue);
+				setIsOutput((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -244,10 +244,10 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 				getImports().clear();
 				return;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				setIsChecked(IS_CHECKED_EDEFAULT);
+				setIsInput(IS_INPUT_EDEFAULT);
 				return;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
-				setIsEnforced(IS_ENFORCED_EDEFAULT);
+				setIsOutput(IS_OUTPUT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -264,9 +264,9 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return imports != null && !imports.isEmpty();
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
-				return isChecked != IS_CHECKED_EDEFAULT;
+				return isInput != IS_INPUT_EDEFAULT;
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
-				return isEnforced != IS_ENFORCED_EDEFAULT;
+				return isOutput != IS_OUTPUT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

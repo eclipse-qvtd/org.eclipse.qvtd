@@ -43,8 +43,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EntryPointImpl#getCheckedTypedModels <em>Checked Typed Models</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EntryPointImpl#getEnforcedTypedModels <em>Enforced Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EntryPointImpl#getInputTypedModels <em>Input Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EntryPointImpl#getOutputTypedModels <em>Output Typed Models</em>}</li>
  * </ul>
  *
  * @generated
@@ -70,24 +70,24 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 
 
 	/**
-	 * The cached value of the '{@link #getCheckedTypedModels() <em>Checked Typed Models</em>}' reference list.
+	 * The cached value of the '{@link #getInputTypedModels() <em>Input Typed Models</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCheckedTypedModels()
+	 * @see #getInputTypedModels()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypedModel> checkedTypedModels;
+	protected EList<TypedModel> inputTypedModels;
 
 	/**
-	 * The cached value of the '{@link #getEnforcedTypedModels() <em>Enforced Typed Models</em>}' reference list.
+	 * The cached value of the '{@link #getOutputTypedModels() <em>Output Typed Models</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEnforcedTypedModels()
+	 * @see #getOutputTypedModels()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypedModel> enforcedTypedModels;
+	protected EList<TypedModel> outputTypedModels;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,11 +114,11 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	 * @generated
 	 */
 	@Override
-	public EList<TypedModel> getCheckedTypedModels() {
-		if (checkedTypedModels == null) {
-			checkedTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, RuleImpl.RULE_FEATURE_COUNT + 5);
+	public EList<TypedModel> getInputTypedModels() {
+		if (inputTypedModels == null) {
+			inputTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, RuleImpl.RULE_FEATURE_COUNT + 5);
 		}
-		return checkedTypedModels;
+		return inputTypedModels;
 	}
 
 	/**
@@ -127,11 +127,11 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	 * @generated
 	 */
 	@Override
-	public EList<TypedModel> getEnforcedTypedModels() {
-		if (enforcedTypedModels == null) {
-			enforcedTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, RuleImpl.RULE_FEATURE_COUNT + 6);
+	public EList<TypedModel> getOutputTypedModels() {
+		if (outputTypedModels == null) {
+			outputTypedModels = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, RuleImpl.RULE_FEATURE_COUNT + 6);
 		}
-		return enforcedTypedModels;
+		return outputTypedModels;
 	}
 
 	/**
@@ -143,9 +143,9 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
-				return getCheckedTypedModels();
+				return getInputTypedModels();
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
-				return getEnforcedTypedModels();
+				return getOutputTypedModels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -160,12 +160,12 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
-				getCheckedTypedModels().clear();
-				getCheckedTypedModels().addAll((Collection<? extends TypedModel>)newValue);
+				getInputTypedModels().clear();
+				getInputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
 				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
-				getEnforcedTypedModels().clear();
-				getEnforcedTypedModels().addAll((Collection<? extends TypedModel>)newValue);
+				getOutputTypedModels().clear();
+				getOutputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,10 +180,10 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
-				getCheckedTypedModels().clear();
+				getInputTypedModels().clear();
 				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
-				getEnforcedTypedModels().clear();
+				getOutputTypedModels().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -198,9 +198,9 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
-				return checkedTypedModels != null && !checkedTypedModels.isEmpty();
+				return inputTypedModels != null && !inputTypedModels.isEmpty();
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
-				return enforcedTypedModels != null && !enforcedTypedModels.isEmpty();
+				return outputTypedModels != null && !outputTypedModels.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

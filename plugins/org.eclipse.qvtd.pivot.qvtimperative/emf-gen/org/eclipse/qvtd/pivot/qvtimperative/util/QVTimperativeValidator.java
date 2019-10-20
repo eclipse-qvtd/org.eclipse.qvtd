@@ -127,12 +127,12 @@ public class QVTimperativeValidator extends EObjectValidator {
 	public static final int IMPERATIVE_TYPED_MODEL__VALIDATE_NAME_IS_NOT_NULL = 6;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Not Both Checked And Enforced' of 'Imperative Typed Model'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Not Both Input And Output' of 'Imperative Typed Model'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int IMPERATIVE_TYPED_MODEL__VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED = 7;
+	public static final int IMPERATIVE_TYPED_MODEL__VALIDATE_NOT_BOTH_INPUT_AND_OUTPUT = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Not Null' of 'Mapping'.
@@ -699,7 +699,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTypedModel_validateExclusivePrimitiveThisTrace(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validateImperativeTypedModel_validateNameIsNotNull(imperativeTypedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validateImperativeTypedModel_validateNotBothCheckedAndEnforced(imperativeTypedModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validateImperativeTypedModel_validateNotBothInputAndOutput(imperativeTypedModel, diagnostics, context);
 		return result;
 	}
 
@@ -714,13 +714,13 @@ public class QVTimperativeValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the validateNotBothCheckedAndEnforced constraint of '<em>Imperative Typed Model</em>'.
+	 * Validates the validateNotBothInputAndOutput constraint of '<em>Imperative Typed Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateImperativeTypedModel_validateNotBothCheckedAndEnforced(ImperativeTypedModel imperativeTypedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return imperativeTypedModel.validateNotBothCheckedAndEnforced(diagnostics, context);
+	public boolean validateImperativeTypedModel_validateNotBothInputAndOutput(ImperativeTypedModel imperativeTypedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return imperativeTypedModel.validateNotBothInputAndOutput(diagnostics, context);
 	}
 
 	/**

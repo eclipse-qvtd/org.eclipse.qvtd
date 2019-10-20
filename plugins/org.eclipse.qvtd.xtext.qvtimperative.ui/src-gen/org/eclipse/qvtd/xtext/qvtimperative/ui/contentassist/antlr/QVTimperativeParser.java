@@ -373,8 +373,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDeclareStatementCSAccess().getNameAssignment_3(), "rule__DeclareStatementCS__NameAssignment_3");
 					put(grammarAccess.getDeclareStatementCSAccess().getOwnedTypeAssignment_4_1(), "rule__DeclareStatementCS__OwnedTypeAssignment_4_1");
 					put(grammarAccess.getDeclareStatementCSAccess().getOwnedExpressionAssignment_6(), "rule__DeclareStatementCS__OwnedExpressionAssignment_6");
-					put(grammarAccess.getDirectionCSAccess().getIsCheckedAssignment_1_0(), "rule__DirectionCS__IsCheckedAssignment_1_0");
-					put(grammarAccess.getDirectionCSAccess().getIsEnforcedAssignment_1_1(), "rule__DirectionCS__IsEnforcedAssignment_1_1");
+					put(grammarAccess.getDirectionCSAccess().getIsInputAssignment_1_0(), "rule__DirectionCS__IsInputAssignment_1_0");
+					put(grammarAccess.getDirectionCSAccess().getIsOutputAssignment_1_1(), "rule__DirectionCS__IsOutputAssignment_1_1");
 					put(grammarAccess.getDirectionCSAccess().getNameAssignment_2(), "rule__DirectionCS__NameAssignment_2");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_3_1(), "rule__DirectionCS__ImportsAssignment_3_1");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_3_2_1(), "rule__DirectionCS__ImportsAssignment_3_2_1");
@@ -382,10 +382,10 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEntryPointCSAccess().getFirstPassAssignment_3_1(), "rule__EntryPointCS__FirstPassAssignment_3_1");
 					put(grammarAccess.getEntryPointCSAccess().getLastPassAssignment_3_2_1(), "rule__EntryPointCS__LastPassAssignment_3_2_1");
 					put(grammarAccess.getEntryPointCSAccess().getNameAssignment_4(), "rule__EntryPointCS__NameAssignment_4");
-					put(grammarAccess.getEntryPointCSAccess().getCheckedTypedModelsAssignment_5_1(), "rule__EntryPointCS__CheckedTypedModelsAssignment_5_1");
-					put(grammarAccess.getEntryPointCSAccess().getCheckedTypedModelsAssignment_5_2_1(), "rule__EntryPointCS__CheckedTypedModelsAssignment_5_2_1");
-					put(grammarAccess.getEntryPointCSAccess().getEnforcedTypedModelsAssignment_6_1(), "rule__EntryPointCS__EnforcedTypedModelsAssignment_6_1");
-					put(grammarAccess.getEntryPointCSAccess().getEnforcedTypedModelsAssignment_6_2_1(), "rule__EntryPointCS__EnforcedTypedModelsAssignment_6_2_1");
+					put(grammarAccess.getEntryPointCSAccess().getInputTypedModelsAssignment_5_1(), "rule__EntryPointCS__InputTypedModelsAssignment_5_1");
+					put(grammarAccess.getEntryPointCSAccess().getInputTypedModelsAssignment_5_2_1(), "rule__EntryPointCS__InputTypedModelsAssignment_5_2_1");
+					put(grammarAccess.getEntryPointCSAccess().getOutputTypedModelsAssignment_6_1(), "rule__EntryPointCS__OutputTypedModelsAssignment_6_1");
+					put(grammarAccess.getEntryPointCSAccess().getOutputTypedModelsAssignment_6_2_1(), "rule__EntryPointCS__OutputTypedModelsAssignment_6_2_1");
 					put(grammarAccess.getEntryPointCSAccess().getOwnedParametersAssignment_8(), "rule__EntryPointCS__OwnedParametersAssignment_8");
 					put(grammarAccess.getEntryPointCSAccess().getOwnedStatementsAssignment_9(), "rule__EntryPointCS__OwnedStatementsAssignment_9");
 					put(grammarAccess.getEntryPointCSAccess().getOwnedStatementsAssignment_10(), "rule__EntryPointCS__OwnedStatementsAssignment_10");
