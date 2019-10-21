@@ -60,12 +60,19 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 
 	private static @NonNull Iterable<@NonNull Rule> computeRules(@NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull Transformation transformation) {
 		Iterable<@NonNull TypedModel> outputOnlyTypedModels = typedModelsConfiguration.getOutputOnlyTypedModels();
+		Iterable<@NonNull TypedModel> unusedTypedModels = typedModelsConfiguration.getUnusedTypedModels();
 		List<@NonNull Rule> rules = new ArrayList<>();
 		for (@NonNull Rule asRule : QVTbaseUtil.getOwnedRules(transformation)) {
 			boolean isExecutable = true;
 			for (@NonNull TypedModel typedModel : outputOnlyTypedModels) {
 				Domain domain = QVTrelationUtil.basicGetDomain(asRule, typedModel);
 				if ((domain != null) && domain.isNotOutput()) {
+					isExecutable = false;
+				}
+			}
+			for (@NonNull TypedModel typedModel : unusedTypedModels) {
+				Domain domain = QVTrelationUtil.basicGetDomain(asRule, typedModel);
+				if (domain != null) {
 					isExecutable = false;
 				}
 			}

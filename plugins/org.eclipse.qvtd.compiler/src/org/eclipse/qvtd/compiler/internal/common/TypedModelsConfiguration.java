@@ -77,6 +77,7 @@ public class TypedModelsConfiguration
 	private final @NonNull List<@NonNull TypedModel> intermediateTypedModels = new ArrayList<>();
 	private final @NonNull List<@NonNull TypedModel> outputOnlyTypedModels = new ArrayList<>();
 	private final @NonNull List<@NonNull TypedModel> outputTypedModels = new ArrayList<>();
+	private final @NonNull List<@NonNull TypedModel> unusedTypedModels = new ArrayList<>();
 
 	public TypedModelsConfiguration(@NonNull String... enforcedOutputNames) {
 		if (enforcedOutputNames != null) {
@@ -116,6 +117,10 @@ public class TypedModelsConfiguration
 		return ClassUtil.nonNullState(name2typedModelConfigurations.get(typedModel.getName()));
 	}
 
+	public @NonNull Iterable<@NonNull TypedModel> getUnusedTypedModels() {
+		return unusedTypedModels;
+	}
+
 	public boolean hasTargetTypedModel() {
 		return outputTypedModels.size() > 0;
 	}
@@ -143,6 +148,7 @@ public class TypedModelsConfiguration
 		intermediateTypedModels.clear();
 		outputOnlyTypedModels.clear();
 		outputTypedModels.clear();
+		unusedTypedModels.clear();
 		Iterable<@NonNull TypedModel> typedModels = QVTbaseUtil.getModelParameters(transformation);
 		for (@NonNull TypedModel typedModel : typedModels) {
 			String name = typedModel.getName();
@@ -181,6 +187,12 @@ public class TypedModelsConfiguration
 				outputTypedModels.add(typedModel);
 				if (!typedModelConfiguration.isInput()) {
 					outputOnlyTypedModels.add(typedModel);
+				}
+			}
+			if (typedModelConfiguration.isUnused()) {
+				TypedModel typedModel = typedModelConfiguration.basicGetTypedModel();
+				if (typedModel != null) {			// Skip QVTc null wrt QVTm middle
+					unusedTypedModels.add(typedModel);
 				}
 			}
 		}

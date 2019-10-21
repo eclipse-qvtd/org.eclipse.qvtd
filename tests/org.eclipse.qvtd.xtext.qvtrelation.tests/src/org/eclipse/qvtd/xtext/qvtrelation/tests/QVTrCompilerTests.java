@@ -1570,11 +1570,17 @@ public class QVTrCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass;
 		try {
 			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-			TypedModelsConfiguration typedModelsConfiguration = new TypedModelsConfiguration();
-			typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.OUTPUT));
-			typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.INTERMEDIATE));
-			typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
-			typedModelsConfigurations.add(typedModelsConfiguration);
+			TypedModelsConfiguration typedModelsConfiguration1 = new TypedModelsConfiguration();
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.OUTPUT));
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.INTERMEDIATE));
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
+			typedModelsConfigurations.add(typedModelsConfiguration1);
+			TypedModelsConfiguration typedModelsConfiguration2 = new TypedModelsConfiguration();
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("persons", TypedModelConfiguration.Mode.OUTPUT));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.INPUT));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.UNUSED));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.UNUSED));
+			typedModelsConfigurations.add(typedModelsConfiguration2);
 			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);
 		}
 		finally {
@@ -1595,7 +1601,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.addInputURI("persons", personFile.getURI());
 			txExecutor1.addInputURI("familiesRight", familyFile.getURI());
-			txExecutor1.execute(null);
+			txExecutor1.execute(txExecutor1.getTypedModelIndex("familiesLeft"));
 			txExecutor1.addOutputURI("names", namesOutURI);
 			txExecutor1.addOutputURI("familiesLeft", familiesOutURI);
 			txExecutor1.saveModels(null);
@@ -1630,11 +1636,17 @@ public class QVTrCompilerTests extends LoadTestCase
 		ImperativeTransformation asTransformation;
 		try {
 			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-			TypedModelsConfiguration typedModelsConfiguration = new TypedModelsConfiguration();
-			typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.OUTPUT));
-			typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.INTERMEDIATE));
-			typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
-			typedModelsConfigurations.add(typedModelsConfiguration);
+			TypedModelsConfiguration typedModelsConfiguration1 = new TypedModelsConfiguration();
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.OUTPUT));
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.INTERMEDIATE));
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
+			typedModelsConfigurations.add(typedModelsConfiguration1);
+			TypedModelsConfiguration typedModelsConfiguration2 = new TypedModelsConfiguration();
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("persons", TypedModelConfiguration.Mode.OUTPUT));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.INPUT));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.UNUSED));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.UNUSED));
+			typedModelsConfigurations.add(typedModelsConfiguration2);
 			asTransformation = myQVT.compileTransformation(typedModelsConfigurations);
 			Map<String, Object> extensionToFactoryMap = myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
@@ -1644,7 +1656,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.addInputURI("persons", personFile.getURI());
 			txExecutor1.addInputURI("familiesRight", familyFile.getURI());
-			txExecutor1.execute(null);
+			txExecutor1.execute(txExecutor1.getTypedModelIndex("familiesLeft"));
 			txExecutor1.addOutputURI("names", namesOutURI);
 			txExecutor1.addOutputURI("familiesLeft", familiesOutURI);
 			txExecutor1.saveModels(null);

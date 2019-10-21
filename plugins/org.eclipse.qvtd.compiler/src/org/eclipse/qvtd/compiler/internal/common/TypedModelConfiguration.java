@@ -26,7 +26,8 @@ public class TypedModelConfiguration //implements Nameable
 	public enum Mode {		// TODO this probably needs elaboration for IN-PLACE etc
 		INPUT,					// Used as input only
 		INTERMEDIATE,			// Used to connect internal productions to internal consumptions
-		OUTPUT					// Used as output only
+		OUTPUT,					// Used as output only
+		UNUSED					// Not used at all
 	}
 	private final @NonNull Mode mode;
 	private final @Nullable String name;
@@ -59,6 +60,10 @@ public class TypedModelConfiguration //implements Nameable
 
 	public boolean isOutput() {
 		return mode == Mode.OUTPUT;
+	}
+
+	public boolean isUnused() {
+		return mode == Mode.UNUSED;
 	}
 
 	/**
