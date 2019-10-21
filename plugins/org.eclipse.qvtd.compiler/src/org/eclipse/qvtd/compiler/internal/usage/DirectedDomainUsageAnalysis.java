@@ -114,36 +114,36 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 			boolean hasIntermediate = false;
 			for (@NonNull Domain domain : QVTbaseUtil.getOwnedDomains(rule)) {
 				TypedModel typedModel = QVTbaseUtil.getTypedModel(domain);
-				Boolean isOutput = null;
-
-
-				Integer distance = typedModel2inputDistance.get(typedModel);
-				assert distance != null;
-				if (distance >= globalOutputDistance) {
-					isOutput = Boolean.TRUE;							// A configured output-only TypedModel
-				}
-				else if (domain.isNotOutput()) {
-					isOutput = Boolean.FALSE;							// A programmed input-only Domain
-				}
-				else if (distance <= 0) {
-					if (!Iterables.contains(outputTypedModels, typedModel)) {
-						isOutput = Boolean.FALSE;						// A configured input-only TypedModel
+				if (!typedModel.isIsPrimitive() && !typedModel.isIsTrace() && !typedModel.isIsThis()) {
+					Boolean isOutput = null;
+					Integer distance = typedModel2inputDistance.get(typedModel);
+					assert distance != null;
+					if (distance >= globalOutputDistance) {
+						isOutput = Boolean.TRUE;							// A configured output-only TypedModel
 					}
-				}
-				// else A configured intermediate TypedModel or input_output TypedModel
-				if (isOutput == Boolean.TRUE) {
-					if ((minimumExplicitOutputDistance == null) || (distance <= minimumExplicitOutputDistance)) {
-						minimumExplicitOutputDistance = distance;
+					else if (domain.isNotOutput()) {
+						isOutput = Boolean.FALSE;							// A programmed input-only Domain
 					}
-				}
-				if (isOutput != null) {
-					domain2direction.put(domain, isOutput);
-				}
-				else {
-					hasIntermediate = true;
-				}
-				if ((maximumDistance == null) || (distance > maximumDistance)) {
-					maximumDistance = distance;
+					else if (distance <= 0) {
+						if (!Iterables.contains(outputTypedModels, typedModel)) {
+							isOutput = Boolean.FALSE;						// A configured input-only TypedModel
+						}
+					}
+					// else A configured intermediate TypedModel or input_output TypedModel
+					if (isOutput == Boolean.TRUE) {
+						if ((minimumExplicitOutputDistance == null) || (distance <= minimumExplicitOutputDistance)) {
+							minimumExplicitOutputDistance = distance;
+						}
+					}
+					if (isOutput != null) {
+						domain2direction.put(domain, isOutput);
+					}
+					else {
+						hasIntermediate = true;
+					}
+					if ((maximumDistance == null) || (distance > maximumDistance)) {
+						maximumDistance = distance;
+					}
 				}
 			}
 			if (hasIntermediate) {
@@ -152,14 +152,16 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 				for (@NonNull Domain domain : QVTbaseUtil.getOwnedDomains(rule)) {
 					if (!domain2direction.containsKey(domain)) {
 						TypedModel typedModel = QVTbaseUtil.getTypedModel(domain);
-						Integer distance = typedModel2inputDistance.get(typedModel);
-						assert distance != null;
-						assert distance < globalOutputDistance;
-						if (distance == 0) {
-							distance = globalOutputDistance;
+						if (!typedModel.isIsPrimitive() && !typedModel.isIsTrace() && !typedModel.isIsThis()) {
+							Integer distance = typedModel2inputDistance.get(typedModel);
+							assert distance != null;
+							assert distance < globalOutputDistance;
+							if (distance == 0) {
+								distance = globalOutputDistance;
+							}
+							Boolean isOutput = distance >= outputDistance;
+							domain2direction.put(domain, isOutput);
 						}
-						Boolean isOutput = distance >= outputDistance;
-						domain2direction.put(domain, isOutput);
 					}
 				}
 			}
