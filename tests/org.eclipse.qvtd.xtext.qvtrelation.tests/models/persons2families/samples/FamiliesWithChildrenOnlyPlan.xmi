@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<FamilyPlans:FamilyPlanning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:FamilyPlans="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans" xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/FamilyPlans java://org.eclipse.qvtd.xtext.qvtrelation.tests.FamilyPlans.FamilyPlansPackage">
+<FamilyPlans:NameRegister xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:FamilyPlans="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/Names" xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/Names java://org.eclipse.qvtd.xtext.qvtrelation.tests.FamilyPlans.FamilyPlansPackage">
   <surnamePlans name="Flanders">
     <familyPlans>
       <familyMemberPlans xsi:type="FamilyPlans:SonPlan">
@@ -35,4 +35,4 @@
     <males href="PersonsMulti.xmi#//@persons.1"/>
     <males href="PersonsMulti.xmi#//@persons.3"/>
   </surnamePlans>
-</FamilyPlans:FamilyPlanning>
+</FamilyPlans:NameRegister>

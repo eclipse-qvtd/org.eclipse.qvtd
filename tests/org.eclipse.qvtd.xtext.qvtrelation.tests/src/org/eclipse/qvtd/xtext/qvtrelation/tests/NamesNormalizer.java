@@ -31,14 +31,14 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 
 /**
- * Families2PersonsNormalizer normalises the results of the Families2Persons transformation.
+ * NamesNormalizer normalises the intermediates of the Persons2Names2Families transformation.
  *
  * Even though everything is ordered in the input/output model, the edges/incoming/outgoing lists can be independently ordered, and only
  * the edges order is preserved in the middle model.
  */
-public class FamilyPlansNormalizer implements ModelNormalizer
+public class NamesNormalizer implements ModelNormalizer
 {
-	public static final @NonNull FamilyPlansNormalizer INSTANCE = new FamilyPlansNormalizer();
+	public static final @NonNull NamesNormalizer INSTANCE = new NamesNormalizer();
 
 	protected static class SurnamePlanComparator implements Comparator<@NonNull EObject>
 	{
@@ -56,12 +56,12 @@ public class FamilyPlansNormalizer implements ModelNormalizer
 		}
 	}
 
-	protected static class FamilyMemberPlanComparator implements Comparator<@NonNull EObject>
+	protected static class ForenameComparator implements Comparator<@NonNull EObject>
 	{
 		private final @NonNull EReference familyMemberReference;
 		private final @NonNull EAttribute familyMember_nameAttribute;
 
-		public FamilyMemberPlanComparator(@NonNull EReference familyMemberReference, @NonNull EAttribute familyMember_nameAttribute) {
+		public ForenameComparator(@NonNull EReference familyMemberReference, @NonNull EAttribute familyMember_nameAttribute) {
 			this.familyMemberReference = familyMemberReference;
 			this.familyMember_nameAttribute = familyMember_nameAttribute;
 		}
@@ -79,40 +79,40 @@ public class FamilyPlansNormalizer implements ModelNormalizer
 	@Override
 	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
-		EPackage familyPlanPackage = eRoot.eClass().getEPackage();
-		EClass familyPlanClass = (EClass) familyPlanPackage.getEClassifier("FamilyPlan");
-		assert familyPlanClass != null;
-		EClass familyPlanningClass = (EClass) familyPlanPackage.getEClassifier("FamilyPlanning");
-		assert familyPlanningClass != null;
-		EClass surnamePlanClass = (EClass) familyPlanPackage.getEClassifier("SurnamePlan");
-		assert surnamePlanClass != null;
-		EClass familyMemberPlanClass = (EClass) familyPlanPackage.getEClassifier("FamilyFamilyMemberPlan");
-		assert familyMemberPlanClass != null;
+		EPackage namesPackage = eRoot.eClass().getEPackage();
+		EClass familyGroupClass = (EClass) namesPackage.getEClassifier("FamilyGroup");
+		assert familyGroupClass != null;
+		EClass namesRegisterClass = (EClass) namesPackage.getEClassifier("NameRegister");
+		assert namesRegisterClass != null;
+		EClass surnameClass = (EClass) namesPackage.getEClassifier("Surname");
+		assert surnameClass != null;
+		EClass familyMemberForenameClass = (EClass) namesPackage.getEClassifier("FamilyMemberForename");
+		assert familyMemberForenameClass != null;
 
-		EReference familyMemberPlan_familyMember = (EReference) familyMemberPlanClass.getEStructuralFeature("familyMember");
-		assert familyMemberPlan_familyMember != null;
-		EReference familyPlan_familyMemberPlans = (EReference) familyPlanClass.getEStructuralFeature("familyMemberPlans");
-		assert familyPlan_familyMemberPlans != null;
-		EReference familyPlanning_surnamePlans = (EReference) familyPlanningClass.getEStructuralFeature("surnamePlans");
-		assert familyPlanning_surnamePlans != null;
-		EAttribute surnamePlan_name = (EAttribute) surnamePlanClass.getEStructuralFeature("name");
-		assert surnamePlan_name != null;
+		EReference familyMemberForename_familyMember = (EReference) familyMemberForenameClass.getEStructuralFeature("familyMember");
+		assert familyMemberForename_familyMember != null;
+		EReference familyGroup_forenames = (EReference) familyGroupClass.getEStructuralFeature("forenames");
+		assert familyGroup_forenames != null;
+		EReference namesRegister_surnames = (EReference) namesRegisterClass.getEStructuralFeature("surnames");
+		assert namesRegister_surnames != null;
+		EAttribute surname_name = (EAttribute) surnameClass.getEStructuralFeature("name");
+		assert surname_name != null;
 
-		EClass familyMemberClass = familyMemberPlan_familyMember.getEReferenceType();
+		EClass familyMemberClass = familyMemberForename_familyMember.getEReferenceType();
 		assert familyMemberClass != null;
-		EAttribute familyMemberPlan_name = (EAttribute) familyMemberClass.getEStructuralFeature("name");
-		assert familyMemberPlan_name != null;
+		EAttribute familyMemberForename_name = (EAttribute) familyMemberClass.getEStructuralFeature("name");
+		assert familyMemberForename_name != null;
 
-		FamilyMemberPlanComparator familyMemberPlanComparator = new FamilyMemberPlanComparator(familyMemberPlan_familyMember, familyMemberPlan_name);
-		SurnamePlanComparator surnamePlanComparator = new SurnamePlanComparator(surnamePlan_name);
+		ForenameComparator forenameComparator = new ForenameComparator(familyMemberForename_familyMember, familyMemberForename_name);
+		SurnamePlanComparator surnameComparator = new SurnamePlanComparator(surname_name);
 
 		Map<@NonNull EList<EObject>, Comparator<@NonNull EObject>> eCollection2comparator = new HashMap<>();
 		for (EObject eObject : new TreeIterable(resource)) {
-			if (familyPlanningClass.isInstance(eObject)) {
-				eCollection2comparator.put((EList<EObject>)eObject.eGet(familyPlanning_surnamePlans), surnamePlanComparator);
+			if (namesRegisterClass.isInstance(eObject)) {
+				eCollection2comparator.put((EList<EObject>)eObject.eGet(namesRegister_surnames), surnameComparator);
 			}
-			else if (familyPlanClass.isInstance(eObject)) {
-				eCollection2comparator.put((EList<EObject>)eObject.eGet(familyPlan_familyMemberPlans), familyMemberPlanComparator);
+			else if (familyGroupClass.isInstance(eObject)) {
+				eCollection2comparator.put((EList<EObject>)eObject.eGet(familyGroup_forenames), forenameComparator);
 			}
 		}
 		for (EList<EObject> eCollection : eCollection2comparator.keySet()) {

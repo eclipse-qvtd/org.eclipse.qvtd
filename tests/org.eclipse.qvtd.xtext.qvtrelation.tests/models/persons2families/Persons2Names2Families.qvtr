@@ -1,0 +1,424 @@
+import FamiliesMM : 'Families.ecore#/';
+import NamesMM : 'Names.ecore#/';
+import PersonsMM : 'Persons.ecore#/';
+
+package org::eclipse::qvtd::xtext::qvtrelation::tests::persons2names2families 
+{
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+--	This is a side model-to-model transformation to plan the Persons to Families transformation
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------					
+
+transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesMM, names:NamesMM, familiesLeft:FamiliesMM) { 
+
+	attribute PREFER_EXISTING_FAMILY_TO_NEW : Boolean[1] = 'true';
+	attribute PREFER_CREATING_PARENT_TO_CHILD : Boolean[1] = 'true';
+	
+	query getForename(p : PersonsMM::Person[1]) : String[1] {
+		let safeName = '' + p.name							-- workaround Bug 550602
+		in let index = safeName.indexOf(', ')
+		in safeName.substring(index+2, safeName.size())
+	}
+	
+	query getSurname(p : PersonsMM::Person[1]) : String[1] {
+		let safeName = '' + p.name							-- workaround Bug 550602
+		in let index = safeName.indexOf(', ')
+		in safeName.substring(1, index-1)
+	}
+	
+	top relation R_PersonRegister2NamesRegister
+	{		
+	  	domain persons pr : PersonRegister;
+	  	domain familiesRight fr : FamilyRegister;	    
+		enforce domain names nr : NameRegister;
+	}
+	
+	relation P0_Surname2Surname
+	{		
+	  	primitive domain surname : String[?];
+	  	enforce domain names sn : Surname {
+			name = surname
+		};
+	}
+	
+	top relation P1_Person2NamesRegister
+	{		
+	  	sn : NamesMM::Surname;
+	  	domain persons pr : PersonRegister {
+	  		persons = p : Person
+	  	};
+	  	domain familiesRight fr : FamilyRegister;	    
+		enforce domain names nr : NameRegister {
+	  		surnames = sn
+		};
+		when {
+			R_PersonRegister2NamesRegister(pr, fr, nr);
+			P0_Surname2Surname(getSurname(p), sn);
+		}
+		where {
+			P2_Person2Surname(p, sn);
+		}
+	}
+	
+	abstract relation P2_Person2Surname
+	{		
+	  	domain persons p : Person[1];
+	  	enforce domain names sn : Surname;
+	}
+	
+	relation P2_Female2Surname overrides P2_Person2Surname
+	{		
+	  	domain persons p : Female[1];
+	  	enforce domain names sn : Surname {
+	  		females = p
+	  	};
+	  	where {
+	  		P3_Female2FamilyGroup(p, sn);
+	  	}
+	}
+	
+	relation P2_Male2Surname overrides P2_Person2Surname
+	{		
+	  	domain persons p : Male[1];
+	  	enforce domain names sn : Surname {
+	  		males = p
+	  	};
+	  	where {
+	  		P3_Male2FamilyGroup(p, sn);
+	  	}
+	}
+	
+ 	abstract relation P3_Female2FamilyGroup
+	{		
+	  	domain persons p : Female[1];
+	  	enforce domain names sn : Surname;
+	}
+	
+ 	relation P3_Mother2NewFamilyGroup overrides P3_Female2FamilyGroup
+	{		
+	  	domain persons p : Female[1];
+	  	enforce domain names sn : Surname {
+	  		familyGroups = fg : FamilyGroup {
+	  			forenames = sonPlan : FemaleMotherForename {
+	  				person = p,
+	  				name = getForename(p)
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+ 	relation P3_Daughter2NewFamilyGroup overrides P3_Female2FamilyGroup
+	{		
+	  	domain persons p : Female[1];
+	  	enforce domain names sn : Surname {
+	  		familyGroups = fg : FamilyGroup {
+	  			forenames = sonPlan : FemaleDaughterForename {
+	  				person = p,
+	  				name = getForename(p)
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		not this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+	
+ 	abstract relation P3_Male2FamilyGroup
+	{		
+	  	domain persons p : Male[1];
+	  	enforce domain names sn : Surname;
+	}
+	
+ 	relation P3_Father2NewFamilyGroup overrides P3_Male2FamilyGroup
+	{		
+	  	domain persons p : Male[1];
+	  	enforce domain names sn : Surname {
+	  		familyGroups = fg : FamilyGroup {
+	  			forenames = sonPlan : MaleFatherForename {
+	  				person = p,
+	  				name = getForename(p)
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+ 	relation P3_Son2NewFamilyGroup overrides P3_Male2FamilyGroup
+	{		
+	  	domain persons p : Male[1];
+	  	enforce domain names sn : Surname {
+	  		familyGroups = fg : FamilyGroup {
+	  			forenames = sonPlan : MaleSonForename {
+	  				person = p,
+	  				name = getForename(p)
+	  			}
+	  		}
+	  	};
+	  	when {
+	  		not this.PREFER_EXISTING_FAMILY_TO_NEW;
+	  		not this.PREFER_CREATING_PARENT_TO_CHILD;
+	  	}
+	}
+	
+	relation F0_Family2Surname
+	{		
+	  	domain familiesRight f : Family[1] ;
+	  	enforce domain names sn : Surname {
+	  		families = f
+	  	};
+	}
+		
+	top relation F1_Family2FamilyGroup
+	{		
+	  	domain familiesRight f : Family;
+	  	enforce domain names fg : FamilyGroup {
+	  		surname = sn : Surname
+	  	};
+	  	when {
+	  		F0_Family2Surname(f, sn);
+	  	}
+	}
+	
+	top relation F1_Family2SurnameContainment
+	{		
+	  	sp : NamesMM::Surname[?];
+	  	domain persons pr : PersonRegister;
+	  	domain familiesRight fr : FamilyRegister {
+	  		families = f : Family
+	  	};    
+		enforce domain names nr : NameRegister {
+	  		surnames = sp
+		};
+		when {
+			R_PersonRegister2NamesRegister(pr, fr, nr);
+			P0_Surname2Surname(f.name, sp);
+		}
+		where {
+			F0_Family2Surname(f, sp);
+		}
+	}
+	
+	top relation F2_Daughter2DaughterPlan
+	{		
+	  	domain familiesRight fm : FamilyMember[1] {
+	  		daughtersInverse = f : Family
+	  	};
+	  	enforce domain names fg : FamilyGroup {
+	  		forenames = fn : DaughterForename {
+	  			familyMember = fm,
+	  			name = fm.name
+	  		}
+	  	};
+	  	when {
+	  		F1_Family2FamilyGroup(f, fg);
+	  	}
+	}
+		
+	top relation F2_Father2FatherPlan
+	{		
+	  	domain familiesRight fm : FamilyMember[1] {
+	  		fatherInverse = f : Family
+	  	};
+	  	enforce domain names fg : FamilyGroup {
+	  		forenames = fn : FatherForename {
+	  			familyMember = fm,
+	  			name = fm.name
+	  		}
+	  	};
+	  	when {
+	  		F1_Family2FamilyGroup(f, fg);
+	  	}
+	}
+		
+	top relation F2_Mother2MotherPlan
+	{		
+	  	domain familiesRight fm : FamilyMember[1] {
+	  		motherInverse = f : Family
+	  	};
+	  	enforce domain names fg : FamilyGroup {
+	  		forenames = fn : MotherForename {
+	  			familyMember = fm,
+	  			name = fm.name
+	  		}
+	  	};
+	  	when {
+	  		F1_Family2FamilyGroup(f, fg);
+	  	}
+	}
+		
+	top relation F2_Son2SonPlan
+	{		
+	  	domain familiesRight fm : FamilyMember[1] {
+	  		sonsInverse = f : Family
+	  	};
+	  	enforce domain names fg : FamilyGroup {
+	  		forenames = fn : SonForename {
+	  			familyMember = fm,
+	  			name = fm.name
+	  		}
+	  	};
+	  	when {
+	  		F1_Family2FamilyGroup(f, fg);
+	  	}
+	}
+	
+	top relation Q1_NamesRegister2FamilyRegister
+	{		
+	  	domain names nr : NameRegister;
+	  	enforce domain familiesLeft fr : FamilyRegister;
+	}
+	
+	top relation Q1_FamilyGroup2Family
+	{	
+		name : String;
+	  	domain names fg : FamilyGroup {
+	  		surname = sn : Surname {
+	  			nameRegister = nr : NameRegister,
+	  			name = name
+	  		}
+	  	};
+	  	enforce domain familiesLeft f : Family {
+	  		familiesInverse = fr : FamilyRegister,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_NamesRegister2FamilyRegister(nr, fr);
+	  	}
+	}
+	
+	top relation Q1_DaughterPlan2Daughter
+	{	
+		name : String;
+	  	domain names fn : DaughterForename {
+	  		familyGroup = fg : FamilyGroup,
+	  		name = name
+	  	};
+	  	enforce domain familiesLeft fm : FamilyMember {
+	  		daughtersInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyGroup2Family(fg, f);
+	  	}
+	}
+	
+	top relation Q1_FatherPlan2Father
+	{	
+		name : String;
+	  	domain names fn : FatherForename {
+	  		familyGroup = fg : FamilyGroup,
+	  		name = name
+	  	};
+	  	enforce domain familiesLeft fm : FamilyMember {
+	  		fatherInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyGroup2Family(fg, f);
+	  	}
+	}
+	
+	top relation Q1_MotherPlan2Mother
+	{	
+		name : String;
+	  	domain names fn : MotherForename {
+	  		familyGroup = fg : FamilyGroup,
+	  		name = name
+	  	};
+	  	enforce domain familiesLeft fm : FamilyMember {
+	  		motherInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyGroup2Family(fg, f);
+	  	}
+	}
+	
+	top relation Q1_SonPlan2Son
+	{	
+		name : String;
+	  	domain names fn : SonForename{
+	  		familyGroup = fg : FamilyGroup,
+	  		name = name
+	  	};
+	  	enforce domain familiesLeft fm : FamilyMember {
+	  		sonsInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyGroup2Family(fg, f);
+	  	}
+	}
+	
+	top relation Q1_FemaleDaughterPlan2Daughter
+	{	
+		name : String;
+	  	domain names fn : FemaleDaughterForename {
+	  		familyGroup = fg : FamilyGroup,
+	  		name = name
+	  	};
+	  	enforce domain familiesLeft fm : FamilyMember {
+	  		daughtersInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyGroup2Family(fg, f);
+	  	}
+	}
+	
+	top relation Q1_FemaleMotherPlan2Mother
+	{	
+		name : String;
+	  	domain names fn : FemaleMotherForename {
+	  		familyGroup = fg : FamilyGroup,
+	  		name = name
+	  	};
+	  	enforce domain familiesLeft fm : FamilyMember {
+	  		motherInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyGroup2Family(fg, f);
+	  	}
+	}
+	
+	top relation Q1_MaleFatherPlan2Father
+	{	
+		name : String;
+	  	domain names fn : MaleFatherForename {
+	  		familyGroup = fg : FamilyGroup,
+	  		name = name
+	  	};
+	  	enforce domain familiesLeft fm : FamilyMember {
+	  		fatherInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyGroup2Family(fg, f);
+	  	}
+	}
+	
+	top relation Q1_MaleSonPlan2Son
+	{	
+		name : String;
+	  	domain names fn : MaleSonForename {
+	  		familyGroup = fg : FamilyGroup,
+	  		name = name
+	  	};
+	  	enforce domain familiesLeft fm : FamilyMember {
+	  		sonsInverse = f : Family,
+	  		name = name
+	  	};
+	  	when {
+	  		Q1_FamilyGroup2Family(fg, f);
+	  	}
+	}
+}	
+}

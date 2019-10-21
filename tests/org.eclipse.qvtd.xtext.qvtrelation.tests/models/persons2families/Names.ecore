@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Names" nsURI="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Persons2Families/1.0/Names"
+    nsPrefix="Names">
+  <eClassifiers xsi:type="ecore:EClass" name="DaughterForename" eSuperTypes="#//FamilyMemberForename"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FamilyMemberForename" abstract="true"
+      eSuperTypes="#//Forename">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="familyMember" lowerBound="1"
+        eType="ecore:EClass Families.ecore#//FamilyMember"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FamilyGroup">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="family" eType="ecore:EClass Families.ecore#//Family"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forenames" upperBound="-1"
+        eType="#//Forename" containment="true" eOpposite="#//Forename/familyGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="surname" lowerBound="1"
+        eType="#//Surname" eOpposite="#//Surname/familyGroups"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FatherForename" eSuperTypes="#//FamilyMemberForename"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FemaleDaughterForename" eSuperTypes="#//PersonForename"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FemaleMotherForename" eSuperTypes="#//PersonForename"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Forename" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="familyGroup" lowerBound="1"
+        eType="#//FamilyGroup" eOpposite="#//FamilyGroup/forenames"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MaleFatherForename" eSuperTypes="#//PersonForename"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MaleSonForename" eSuperTypes="#//PersonForename"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MotherForename" eSuperTypes="#//FamilyMemberForename"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NameRegister">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="surnames" upperBound="-1"
+        eType="#//Surname" containment="true" eOpposite="#//Surname/nameRegister"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debugNames" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PersonForename" abstract="true" eSuperTypes="#//Forename">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="person" lowerBound="1"
+        eType="ecore:EClass Persons.ecore#//Person"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SonForename" eSuperTypes="#//FamilyMemberForename"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Surname">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="familyGroups" upperBound="-1"
+        eType="#//FamilyGroup" containment="true" eOpposite="#//FamilyGroup/surname"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nameRegister" lowerBound="1"
+        eType="#//NameRegister" eOpposite="#//NameRegister/surnames"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="families" upperBound="-1"
+        eType="ecore:EClass Families.ecore#//Family"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="females" upperBound="-1"
+        eType="ecore:EClass Persons.ecore#//Female"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="males" upperBound="-1"
+        eType="ecore:EClass Persons.ecore#//Male"/>
+  </eClassifiers>
+</ecore:EPackage>
