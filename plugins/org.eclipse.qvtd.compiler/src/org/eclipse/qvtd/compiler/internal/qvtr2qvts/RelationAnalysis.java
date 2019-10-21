@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -92,6 +94,37 @@ import com.google.common.collect.Iterables;
  */
 public class RelationAnalysis extends RuleAnalysis
 {
+	public static class InvocationAnalysisComparator implements Comparator<@Nullable InvocationAnalysis>
+	{
+		@Override
+		public int compare(@Nullable InvocationAnalysis o1,@Nullable InvocationAnalysis o2) {
+			if (o1 == null) {
+				if (o2 == null) {
+					return 0;
+				}
+				else {
+					return 1;
+				}
+			}
+			else {
+				if (o2 == null) {
+					return -1;
+				}
+				else {
+					String n1 = o1.getInvokedRelationAnalysis().getName();
+					String n2 = o2.getInvokedRelationAnalysis().getName();
+					int diff = ClassUtil.safeCompareTo(n1, n2);
+					if (diff != 0) {
+						return diff;
+					}
+					return 0;		// FIXME compare arguments
+				}
+			}
+		}
+
+	}
+
+	private static @NonNull InvocationAnalysisComparator iNVOCATION_ANALYSIS_COMPARATOR = new InvocationAnalysisComparator();
 	/**
 	 * Synthesizer for the dispatch execution region of an override hierarchy.
 	 */
@@ -418,7 +451,9 @@ public class RelationAnalysis extends RuleAnalysis
 	public void analyzeStrictness() {
 		List<@NonNull InvocationAnalysis> outgoingInvocationAnalyses = null;
 		if (outgoingWhenInvocation2invocationAnalysis != null) {
-			for (InvocationAnalysis invocationAnalysis : outgoingWhenInvocation2invocationAnalysis.values()) {
+			List<@Nullable InvocationAnalysis> invocationAnalyses = new ArrayList<>(outgoingWhenInvocation2invocationAnalysis.values());
+			Collections.sort(invocationAnalyses, iNVOCATION_ANALYSIS_COMPARATOR);
+			for (InvocationAnalysis invocationAnalysis : invocationAnalyses) {
 				assert invocationAnalysis != null;
 				if (!invocationAnalysis.isTop() && invocationAnalysis.isRealized()) {
 					if (outgoingInvocationAnalyses == null) {
@@ -429,7 +464,9 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		}
 		if (outgoingWhereInvocation2invocationAnalysis != null) {
-			for (InvocationAnalysis invocationAnalysis : outgoingWhereInvocation2invocationAnalysis.values()) {
+			List<@Nullable InvocationAnalysis> invocationAnalyses = new ArrayList<>(outgoingWhereInvocation2invocationAnalysis.values());
+			Collections.sort(invocationAnalyses, iNVOCATION_ANALYSIS_COMPARATOR);
+			for (InvocationAnalysis invocationAnalysis : invocationAnalyses) {
 				assert invocationAnalysis != null;
 				if (!invocationAnalysis.isTop() && invocationAnalysis.isRealized()) {
 					if (outgoingInvocationAnalyses == null) {
@@ -1321,7 +1358,9 @@ public class RelationAnalysis extends RuleAnalysis
 	protected void synthesizeOutgoingWhenInvocations(@NonNull Node traceNode) {
 		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingWhenInvocation2invocationAnalysis2 = outgoingWhenInvocation2invocationAnalysis;
 		if (outgoingWhenInvocation2invocationAnalysis2 != null) {
-			for (InvocationAnalysis invocationAnalysis : outgoingWhenInvocation2invocationAnalysis2.values()) {
+			List<@Nullable InvocationAnalysis> invocationAnalyses = new ArrayList<>(outgoingWhenInvocation2invocationAnalysis2.values());
+			Collections.sort(invocationAnalyses, iNVOCATION_ANALYSIS_COMPARATOR);
+			for (InvocationAnalysis invocationAnalysis : invocationAnalyses) {
 				assert invocationAnalysis != null;
 				Node invokingNode = invocationAnalysis.synthesizeInvocationNodes(traceNode);
 				Map<@NonNull Node, @NonNull InvocationAnalysis> invokingNode2invocationAnalysis2 = invokingNode2invocationAnalysis;
@@ -1340,7 +1379,9 @@ public class RelationAnalysis extends RuleAnalysis
 	protected void synthesizeOutgoingWhereInvocations(@NonNull Node traceNode) {
 		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingWhereInvocation2invocationAnalysis2 = outgoingWhereInvocation2invocationAnalysis;
 		if (outgoingWhereInvocation2invocationAnalysis2 != null) {
-			for (InvocationAnalysis invocationAnalysis : outgoingWhereInvocation2invocationAnalysis2.values()) {
+			List<@Nullable InvocationAnalysis> invocationAnalyses = new ArrayList<>(outgoingWhereInvocation2invocationAnalysis2.values());
+			Collections.sort(invocationAnalyses, iNVOCATION_ANALYSIS_COMPARATOR);
+			for (InvocationAnalysis invocationAnalysis : invocationAnalyses) {
 				assert invocationAnalysis != null;
 				invocationAnalysis.synthesizeInvocationNodes(traceNode);
 			}

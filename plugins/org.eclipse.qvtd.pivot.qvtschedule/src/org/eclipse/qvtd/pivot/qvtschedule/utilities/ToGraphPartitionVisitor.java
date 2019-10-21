@@ -10,9 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
@@ -32,6 +36,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+
+import com.google.common.collect.Lists;
 
 /**
  * ToGraphPartitionVisitor refines ToGraphVisitor to display <<success>> nodes in the partition-specific form.
@@ -130,10 +136,14 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 			setScope(partition);
 			context.setLabel(partition.getGraphName());
 			context.pushCluster();
-			for (@NonNull Node node : partition.getPartialNodes()) {
+			List<@NonNull Node> nodesList = Lists.newArrayList(partition.getPartialNodes());
+			Collections.sort(nodesList, NODE_COMPARATOR);
+			for (@NonNull Node node : nodesList) {
 				node.accept(this);
 			}
-			for (@NonNull Edge edge : partition.getPartialEdges()) {
+			List<@NonNull Edge> edgesList = Lists.newArrayList(partition.getPartialEdges());
+			Collections.sort(edgesList, EDGE_COMPARATOR);
+			for (@NonNull Edge edge : edgesList) {
 				edge.accept(this);
 			}
 			context.popCluster();
@@ -145,10 +155,14 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 			context.setLabel(region.getGraphName());
 			context.pushCluster();
 			setScope(null);
-			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+			List<@NonNull Node> nodesList = Lists.newArrayList(QVTscheduleUtil.getOwnedNodes(region));
+			Collections.sort(nodesList, NODE_COMPARATOR);
+			for (@NonNull Node node : nodesList) {
 				node.accept(this);
 			}
-			for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+			List<@NonNull Edge> edgesList = Lists.newArrayList(QVTscheduleUtil.getOwnedEdges(region));
+			Collections.sort(edgesList, EDGE_COMPARATOR);
+			for (@NonNull Edge edge : edgesList) {
 				edge.accept(this);
 			}
 			context.popCluster();
@@ -432,13 +446,19 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 		//		loadingRegion.accept(this);
 		//	}
 		showRootRegionInternals(rootRegion);
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(rootRegion)) {
+		List<@NonNull Node> nodesList = Lists.newArrayList(QVTscheduleUtil.getOwnedNodes(rootRegion));
+		Collections.sort(nodesList, NODE_COMPARATOR);
+		for (@NonNull Node node : nodesList) {
 			appendNode(node);
 		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(rootRegion)) {
+		List<@NonNull Edge> edgesList = Lists.newArrayList(QVTscheduleUtil.getOwnedEdges(rootRegion));
+		Collections.sort(edgesList, EDGE_COMPARATOR);
+		for (@NonNull Edge edge : edgesList) {
 			appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(rootRegion)) {
+		List<@NonNull Connection> connectionsList = Lists.newArrayList(QVTscheduleUtil.getOwnedConnections(rootRegion));
+		Collections.sort(connectionsList, NameUtil.NAMEABLE_COMPARATOR);
+		for (@NonNull Connection connection : connectionsList) {
 			connection.accept(this);
 		}
 		context.popCluster();

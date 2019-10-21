@@ -307,10 +307,4 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		}
 		this.targetLabel = replace;
 	}
-
-	@Override
-	public @NonNull String toString() {
-		close();
-		return super.toString();
-	}
 }

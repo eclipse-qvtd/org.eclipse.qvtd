@@ -10,8 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -22,6 +26,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+
+import com.google.common.collect.Lists;
 
 /** This code is rescued but has never worked properly */
 public class ToGraphVisitor extends AbstractToGraphVisitor
@@ -138,11 +144,15 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 	public @Nullable String visitRegion(@NonNull Region region) {
 		context.setLabel(region.getName());
 		context.pushCluster();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+		List<@NonNull Node> nodesList = Lists.newArrayList(QVTscheduleUtil.getOwnedNodes(region));
+		Collections.sort(nodesList, NODE_COMPARATOR);
+		for (@NonNull Node node : nodesList) {
 			node.accept(this);
 			//			s.appendNode(node);
 		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+		List<@NonNull Edge> edgesList = Lists.newArrayList(QVTscheduleUtil.getOwnedEdges(region));
+		Collections.sort(edgesList, EDGE_COMPARATOR);
+		for (@NonNull Edge edge : edgesList) {
 			edge.accept(this);
 			//			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 		}
@@ -161,16 +171,24 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 		if (loadingRegion != null) {
 			loadingRegion.accept(this);
 		}
-		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
+		List<@NonNull Region> regionsList = Lists.newArrayList(QVTscheduleUtil.getActiveRegions(rootRegion));
+		Collections.sort(regionsList, NameUtil.NAMEABLE_COMPARATOR);
+		for (@NonNull Region region : regionsList) {
 			region.accept(this);
 		}
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(rootRegion)) {
+		List<@NonNull Node> nodesList = Lists.newArrayList(QVTscheduleUtil.getOwnedNodes(rootRegion));
+		Collections.sort(nodesList, NODE_COMPARATOR);
+		for (@NonNull Node node : nodesList) {
 			appendNode(node);
 		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(rootRegion)) {
+		List<@NonNull Edge> edgesList = Lists.newArrayList(QVTscheduleUtil.getOwnedEdges(rootRegion));
+		Collections.sort(edgesList, EDGE_COMPARATOR);
+		for (@NonNull Edge edge : edgesList) {
 			appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(rootRegion)) {
+		List<@NonNull Connection> connectionsList = Lists.newArrayList(QVTscheduleUtil.getOwnedConnections(rootRegion));
+		Collections.sort(connectionsList, NameUtil.NAMEABLE_COMPARATOR);
+		for (@NonNull Connection connection : connectionsList) {
 			connection.accept(this);
 		}
 		context.popCluster();

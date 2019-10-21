@@ -10,21 +10,93 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
+import java.util.Comparator;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
 /** This code is rescued but has never worked properly */
 public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable String, @NonNull GraphStringBuilder> implements ToGraphHelper
 {
+	public static class EdgeComparator implements Comparator<@NonNull Edge>
+	{
+		@Override
+		public int compare(@NonNull Edge e1, @NonNull Edge e2) {
+			int sec1 = 0;
+			int sec2 = 0;
+			if (e1.isSecondary()) {
+				sec1 = 1;
+				NavigationEdge o1 = ((NavigationEdge)e1).getOppositeEdge();
+				assert o1 != null;
+				e1 = o1;
+			}
+			if (e2.isSecondary()) {
+				sec2 = 1;
+				NavigationEdge o2 = ((NavigationEdge)e2).getOppositeEdge();
+				assert o2 != null;
+				e2 = o2;
+			}
+			int diff = sec1 - sec2;
+			if (diff != 0) {
+				return diff;
+			}
+			String n1 = e1.getName();
+			String n2 = e2.getName();
+			diff = ClassUtil.safeCompareTo(n1, n2);
+			if (diff != 0) {
+				return diff;
+			}
+			String s1 = e1.toString();
+			String s2 = e2.toString();
+			diff = ClassUtil.safeCompareTo(s1, s2);
+			if (diff != 0) {
+				return diff;
+			}
+			return 0;
+		}
+	}
+
+	public static class NodeComparator implements Comparator<@NonNull Node>
+	{
+		@Override
+		public int compare(@NonNull Node o1, @NonNull Node o2) {
+			String n1 = o1.getName();
+			String n2 = o2.getName();
+			int diff = ClassUtil.safeCompareTo(n1, n2);
+			if (diff != 0) {
+				return diff;
+			}
+			String s1 = o1.toString();
+			String s2 = o2.toString();
+			diff = ClassUtil.safeCompareTo(s1, s2);
+			if (diff != 0) {
+				return diff;
+			}
+			int i1 = o1.getOwningRegion().getOwnedNodes().indexOf(o1);
+			int i2 = o2.getOwningRegion().getOwnedNodes().indexOf(o2);
+			diff = i1 - i2;
+			if (diff != 0) {
+				return diff;
+			}
+			return 0;
+		}
+	}
+
+	protected static final EdgeComparator EDGE_COMPARATOR = new EdgeComparator();
+	protected static final NodeComparator NODE_COMPARATOR = new NodeComparator();
+
 	protected AbstractToGraphVisitor(@NonNull GraphStringBuilder context) {
 		super(context);
 	}
@@ -132,6 +204,11 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 		if (style != null) {
 			context.setStyle(style);
 		}
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return context.toString();
 	}
 
 	public void visit(@NonNull Graphable graphable) {

@@ -158,11 +158,15 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		public @Nullable String visitPartition(@NonNull Partition partition) {
 			context.setLabel(partition.getName());
 			context.pushCluster();
-			for (@NonNull Node node : partition.getPartialNodes()) {
+			List<@NonNull Node> nodesList = Lists.newArrayList(partition.getPartialNodes());
+			Collections.sort(nodesList, NameUtil.TO_STRING_COMPARATOR);
+			for (@NonNull Node node : nodesList) {
 				node.accept(this);
 				//			s.appendNode(node);
 			}
-			for (@NonNull Edge edge : partition.getPartialEdges()) {
+			List<@NonNull Edge> edgesList = Lists.newArrayList(partition.getPartialEdges());
+			Collections.sort(edgesList, NameUtil.TO_STRING_COMPARATOR);
+			for (@NonNull Edge edge : edgesList) {
 				edge.accept(this);
 				//			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 			}
@@ -1077,6 +1081,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), true);
 					visitor.visit(graphable);
 					outputStream.write(visitor.close().getBytes());
+					System.out.println(dotURI);
 				}
 				finally {
 					try {
@@ -1121,6 +1126,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), false);
 					visitor.visit(region);
 					outputStream.write(visitor.close().getBytes());
+					System.out.println(dotURI);
 				}
 				finally {
 					try {
