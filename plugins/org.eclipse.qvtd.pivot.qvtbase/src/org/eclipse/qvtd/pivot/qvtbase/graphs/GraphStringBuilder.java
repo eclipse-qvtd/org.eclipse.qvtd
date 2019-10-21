@@ -38,6 +38,7 @@ public interface GraphStringBuilder
 	//	void appendEdge(@NonNull GraphEdge edge);
 	void appendEdge(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target);
 	@NonNull String appendNode(@NonNull ToGraphHelper toGraphHelper,  @NonNull GraphNode node);
+	@NonNull String close();
 	void popCluster();
 	void pushCluster();
 	void setArrowhead(@NonNull String arrowhead);

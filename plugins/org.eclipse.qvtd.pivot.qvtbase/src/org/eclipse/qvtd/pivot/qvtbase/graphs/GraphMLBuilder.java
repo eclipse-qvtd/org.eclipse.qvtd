@@ -363,9 +363,10 @@ public class GraphMLBuilder implements GraphBuilder
 	}
 
 	@Override
-	public void close() {
+	public @NonNull String close() {
 		s.popTag();
 		s.popTag();
+		return s.toString();
 	}
 
 	@Override

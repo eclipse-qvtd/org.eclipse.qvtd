@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -21,6 +21,6 @@ public interface GraphBuilder {
 	void appendNode(@NonNull String id, @NonNull String shapeName,
 			@NonNull String fillColor, String label, @NonNull String labelColor);
 	void appendNode(/*@NonNull*/ String id, @NonNull String shapeName, @NonNull String fillColor, int height, int width, String label);
-	void close();
+	@NonNull String close();
 	void open();
 }

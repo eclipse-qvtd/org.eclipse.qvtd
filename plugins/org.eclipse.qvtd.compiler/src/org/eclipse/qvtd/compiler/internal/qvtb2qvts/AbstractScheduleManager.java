@@ -1076,7 +1076,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				try {
 					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), true);
 					visitor.visit(graphable);
-					outputStream.write(visitor.toString().getBytes());
+					outputStream.write(visitor.close().getBytes());
 				}
 				finally {
 					try {
@@ -1098,7 +1098,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				try {
 					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new GraphMLStringBuilder(), true);
 					visitor.visit(graphable);
-					outputStream.write(visitor.toString().getBytes());
+					outputStream.write(visitor.close().getBytes());
 				}
 				finally {
 					try {
@@ -1120,7 +1120,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				try {
 					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), false);
 					visitor.visit(region);
-					outputStream.write(visitor.toString().getBytes());
+					outputStream.write(visitor.close().getBytes());
 				}
 				finally {
 					try {
@@ -1147,7 +1147,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				try {
 					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new GraphMLStringBuilder(), false);
 					visitor.visit(region);
-					outputStream.write(visitor.toString().getBytes());
+					outputStream.write(visitor.close().getBytes());
 				}
 				finally {
 					try {

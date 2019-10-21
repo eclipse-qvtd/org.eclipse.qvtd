@@ -151,6 +151,16 @@ public class DOTStringBuilder implements GraphStringBuilder
 		return name;
 	}
 
+	@Override
+	public @NonNull String close() {
+		if (indents > 0) {
+			indents--;
+			append("}");
+			newLine();
+		}
+		return s.toString();
+	}
+
 	//	private @NonNull String getNodeName(@NonNull GraphNode node) {
 	//		return ClassUtil.nonNullState(node2name.get(node));
 	//	}
@@ -239,7 +249,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 	}
 
 	public void setLhead(/*@NonNull*/ String value) {
-		attributes.put("lhead",  value);
+		attributes.put("lhead", value);
 	}
 
 	public void setLtail(/*@NonNull*/ String value) {
@@ -277,11 +287,6 @@ public class DOTStringBuilder implements GraphStringBuilder
 
 	@Override
 	public @NonNull String toString() {
-		if (indents > 0) {
-			indents--;
-			append("}");
-			newLine();
-		}
 		return s.toString();
 	}
 }

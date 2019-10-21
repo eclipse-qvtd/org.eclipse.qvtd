@@ -37,6 +37,10 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 		return context.appendNode(this, node);
 	}
 
+	public @NonNull String close() {
+		return context.close();
+	}
+
 	protected @NonNull String getColor(@NonNull GraphElement element) {
 		return element.getColor();
 	}
@@ -128,11 +132,6 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 		if (style != null) {
 			context.setStyle(style);
 		}
-	}
-
-	@Override
-	public @NonNull String toString() {
-		return context.toString();
 	}
 
 	public void visit(@NonNull Graphable graphable) {
