@@ -52,6 +52,8 @@
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Namespace"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependsOn" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iterates" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectTemplateCS" eSuperTypes="#//TemplateCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPropertyTemplates"

@@ -51,6 +51,7 @@
     <genClasses ecoreClass="QVTrelationCS.ecore#//ModelDeclCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//ModelDeclCS/metamodelIds"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//ModelDeclCS/dependsOn"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//ModelDeclCS/iterates"/>
     </genClasses>
     <genClasses ecoreClass="QVTrelationCS.ecore#//ObjectTemplateCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//ObjectTemplateCS/ownedPropertyTemplates"/>
