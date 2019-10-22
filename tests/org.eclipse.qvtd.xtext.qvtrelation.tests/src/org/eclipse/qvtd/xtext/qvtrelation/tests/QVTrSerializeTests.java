@@ -162,6 +162,10 @@ public class QVTrSerializeTests extends LoadTestCase
 		doSerializeRoundTripFromCS(getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"), null);
 	}
 
+	public void testQVTrSerialize_Iterated2Iterated() throws Exception {
+		doSerializeRoundTripFromCS(getModelsURI("iterated2iterated/Iterated2Iterated.qvtr"), null);
+	}
+
 	public void testQVTrSerialize_Keys() throws Exception {
 		doSerializeRoundTripFromCS(getModelsURI("misc/Keys.qvtr"), new @NonNull String[] {
 			"The 'Key::IdentifiesIsUnique' constraint is violated for 'key QVTRelation::Key {QVTRelation::Key::identifies}'",

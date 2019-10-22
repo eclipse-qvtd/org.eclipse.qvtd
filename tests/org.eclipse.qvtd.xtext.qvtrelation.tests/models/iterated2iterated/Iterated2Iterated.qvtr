@@ -12,10 +12,10 @@ import itMM : 'Iterated.ecore'::iterated;
 
 package org::eclipse::qvtd::xtext::qvtrelation::tests::iterated2iterated {
 /**
- * Transform a Parent with an old count to another Parent with a new count by repeated counting until
- * the terminating condition is met.
+ * Denonstrate fixed point itetation by transforming a Parent with an old count to another Parent
+ * with a new count by repeated counting until the terminating condition is met.
  */
-	transformation Iterated2Iterated(from:itMM uses via, via:itMM, to:itMM)
+	transformation Iterated2Iterated(from:itMM iterates via, via:itMM, to:itMM)
 	{
 		top relation Parent2ParentCount {
 			vCurrent : ecore::EInt[1];

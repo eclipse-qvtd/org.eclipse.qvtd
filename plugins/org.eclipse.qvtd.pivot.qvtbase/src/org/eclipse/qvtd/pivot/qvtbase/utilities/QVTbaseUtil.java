@@ -319,9 +319,6 @@ public class QVTbaseUtil extends PivotUtil
 
 	private static void getAllTypedModelsInternal(@NonNull Set<TypedModel> allTypedModels, @NonNull TypedModel typedModel) {
 		if (allTypedModels.add(typedModel)) {
-			for (@SuppressWarnings("null")@NonNull TypedModel dependsOn : typedModel.getDependsOn()) {
-				getAllTypedModelsInternal(allTypedModels, dependsOn);
-			}
 			for (@SuppressWarnings("null")@NonNull TypedModel iterates : typedModel.getIterates()) {
 				getAllTypedModelsInternal(allTypedModels, iterates);
 			}
@@ -351,9 +348,6 @@ public class QVTbaseUtil extends PivotUtil
 	private static void getAllUsedPackagesInternal(@NonNull Set<org.eclipse.ocl.pivot.@NonNull Package> allUsedPackages,
 			@NonNull TypedModel typedModel) {
 		getAllUsedPackagesInternal(allUsedPackages, typedModel.getUsedPackage());
-		for (@SuppressWarnings("null")@NonNull TypedModel dependsOn : typedModel.getDependsOn()) {
-			getAllUsedPackagesInternal(allUsedPackages, dependsOn);
-		}
 		for (@SuppressWarnings("null")@NonNull TypedModel iterates : typedModel.getIterates()) {
 			getAllUsedPackagesInternal(allUsedPackages, iterates);
 		}
@@ -455,8 +449,8 @@ public class QVTbaseUtil extends PivotUtil
 		return ownedContext;
 	}
 
-	public static @NonNull Iterable<@NonNull TypedModel> getDependsOns(@NonNull TypedModel qvtrTypedModel) {
-		return ClassUtil.nullFree(qvtrTypedModel.getDependsOn());
+	public static @NonNull Iterable<@NonNull TypedModel> getDependsOns(@NonNull TypedModel asTypedModel) {
+		return ClassUtil.nullFree(asTypedModel.getDependsOn());
 	}
 
 	public static @NonNull Domain getDomain(@NonNull Rule rule, @NonNull TypedModel typedModel) {
@@ -511,8 +505,8 @@ public class QVTbaseUtil extends PivotUtil
 		return externalVariables;
 	}
 
-	public static @NonNull Iterable<@NonNull TypedModel> getIterates(@NonNull TypedModel qvtrTypedModel) {
-		return ClassUtil.nullFree(qvtrTypedModel.getIterates());
+	public static @NonNull Iterable<@NonNull TypedModel> getIterates(@NonNull TypedModel asTypedModel) {
+		return ClassUtil.nullFree(asTypedModel.getIterates());
 	}
 
 	public static @NonNull TypedModel getModelParameter(@NonNull Transformation transformation, @Nullable String name) {

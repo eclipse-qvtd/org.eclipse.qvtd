@@ -821,8 +821,8 @@ public class ConnectionManager
 		}
 		List<@NonNull Node> nodes = new UniqueList<>();
 		nodes.add(loadingRegionAnalysis.getIntroducerNode(headNode));
-		for (@NonNull TypedModel dependsOn : QVTbaseUtil.getDependsOns(QVTscheduleUtil.getTypedModel(classDatum))) {
-			ClassDatum classDatum2 = scheduleManager.getClassDatum(dependsOn, headNode.getCompleteClasses());
+		for (@NonNull TypedModel iterates : QVTbaseUtil.getIterates(QVTscheduleUtil.getTypedModel(classDatum))) {
+			ClassDatum classDatum2 = scheduleManager.getClassDatum(iterates, headNode.getCompleteClasses());
 			Iterable<@NonNull Node> newNodes = originalContentsAnalysis.getNewNodes(classDatum2);
 			if (newNodes != null) {
 				for (@NonNull Node newNode : newNodes) {
