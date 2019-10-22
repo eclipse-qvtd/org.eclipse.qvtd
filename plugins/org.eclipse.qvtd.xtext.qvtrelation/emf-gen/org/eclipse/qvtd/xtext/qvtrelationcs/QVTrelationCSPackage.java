@@ -602,6 +602,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getModelDeclCS_DependsOn();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getIterates <em>Iterates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Iterates</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getIterates()
+	 * @see #getModelDeclCS()
+	 * @generated
+	 */
+	EReference getModelDeclCS_Iterates();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS <em>Object Template CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1342,6 +1353,14 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_DECL_CS__DEPENDS_ON = eINSTANCE.getModelDeclCS_DependsOn();
+
+		/**
+		 * The meta object literal for the '<em><b>Iterates</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_DECL_CS__ITERATES = eINSTANCE.getModelDeclCS_Iterates();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ObjectTemplateCSImpl <em>Object Template CS</em>}' class.

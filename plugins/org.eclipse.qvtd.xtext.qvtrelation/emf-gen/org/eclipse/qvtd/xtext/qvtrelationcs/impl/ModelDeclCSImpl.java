@@ -34,6 +34,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ModelDeclCSImpl#getMetamodelIds <em>Metamodel Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ModelDeclCSImpl#getDependsOn <em>Depends On</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ModelDeclCSImpl#getIterates <em>Iterates</em>}</li>
  * </ul>
  *
  * @generated
@@ -46,7 +47,7 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MODEL_DECL_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	public static final int MODEL_DECL_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 	/**
 	 * The cached value of the '{@link #getMetamodelIds() <em>Metamodel Ids</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -65,6 +66,15 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	 * @ordered
 	 */
 	protected EList<TypedModel> dependsOn;
+	/**
+	 * The cached value of the '{@link #getIterates() <em>Iterates</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIterates()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypedModel> iterates;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,12 +126,27 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	 * @generated
 	 */
 	@Override
+	public EList<TypedModel> getIterates() {
+		if (iterates == null) {
+			iterates = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
+		}
+		return iterates;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getMetamodelIds();
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getDependsOn();
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
+				return getIterates();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -143,6 +168,10 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 				getDependsOn().clear();
 				getDependsOn().addAll((Collection<? extends TypedModel>)newValue);
 				return;
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
+				getIterates().clear();
+				getIterates().addAll((Collection<? extends TypedModel>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -161,6 +190,9 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getDependsOn().clear();
 				return;
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
+				getIterates().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -177,6 +209,8 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 				return metamodelIds != null && !metamodelIds.isEmpty();
 			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return dependsOn != null && !dependsOn.isEmpty();
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
+				return iterates != null && !iterates.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
