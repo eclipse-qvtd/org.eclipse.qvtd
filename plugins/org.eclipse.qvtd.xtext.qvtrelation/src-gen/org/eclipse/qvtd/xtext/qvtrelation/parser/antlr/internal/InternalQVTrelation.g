@@ -1070,9 +1070,54 @@ ruleModelDeclCS returns [EObject current=null]
     {
     	newLeafNode(otherlv_7, grammarAccess.getModelDeclCSAccess().getRightCurlyBracketKeyword_2_1_3());
     }
-))(	otherlv_8='uses'
+))(	otherlv_8='dependsOn'
     {
-    	newLeafNode(otherlv_8, grammarAccess.getModelDeclCSAccess().getUsesKeyword_3_0());
+    	newLeafNode(otherlv_8, grammarAccess.getModelDeclCSAccess().getDependsOnKeyword_3_0());
+    }
+((
+(
+		{
+		  /* */
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getModelDeclCSRule());
+	        }
+        }
+		{
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getDependsOnTypedModelCrossReference_3_1_0_0());
+	    }
+		ruleUnrestrictedName		{
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(	otherlv_10='{'
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getModelDeclCSAccess().getLeftCurlyBracketKeyword_3_1_1_0());
+    }
+((
+(
+		{
+		  /* */
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getModelDeclCSRule());
+	        }
+        }
+		{
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getDependsOnTypedModelCrossReference_3_1_1_1_0_0());
+	    }
+		ruleUnrestrictedName		{
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_12=','
+    {
+    	newLeafNode(otherlv_12, grammarAccess.getModelDeclCSAccess().getCommaKeyword_3_1_1_1_1_0());
     }
 (
 (
@@ -1085,16 +1130,65 @@ ruleModelDeclCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getDependsOnTypedModelCrossReference_3_1_0());
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getDependsOnTypedModelCrossReference_3_1_1_1_1_1_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_10=','
+))*)?	otherlv_14='}'
     {
-    	newLeafNode(otherlv_10, grammarAccess.getModelDeclCSAccess().getCommaKeyword_3_2_0());
+    	newLeafNode(otherlv_14, grammarAccess.getModelDeclCSAccess().getRightCurlyBracketKeyword_3_1_1_2());
+    }
+)))?(	otherlv_15='iterates'
+    {
+    	newLeafNode(otherlv_15, grammarAccess.getModelDeclCSAccess().getIteratesKeyword_4_0());
+    }
+((
+(
+		{
+		  /* */
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getModelDeclCSRule());
+	        }
+        }
+		{
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getIteratesTypedModelCrossReference_4_1_0_0());
+	    }
+		ruleUnrestrictedName		{
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(	otherlv_17='{'
+    {
+    	newLeafNode(otherlv_17, grammarAccess.getModelDeclCSAccess().getLeftCurlyBracketKeyword_4_1_1_0());
+    }
+((
+(
+		{
+		  /* */
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getModelDeclCSRule());
+	        }
+        }
+		{
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getIteratesTypedModelCrossReference_4_1_1_1_0_0());
+	    }
+		ruleUnrestrictedName		{
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_19=','
+    {
+    	newLeafNode(otherlv_19, grammarAccess.getModelDeclCSAccess().getCommaKeyword_4_1_1_1_1_0());
     }
 (
 (
@@ -1107,14 +1201,18 @@ ruleModelDeclCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getDependsOnTypedModelCrossReference_3_2_1_0());
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getIteratesTypedModelCrossReference_4_1_1_1_1_1_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*)?)
+))*)?	otherlv_21='}'
+    {
+    	newLeafNode(otherlv_21, grammarAccess.getModelDeclCSAccess().getRightCurlyBracketKeyword_4_1_1_2());
+    }
+)))?)
 ;
 
 
@@ -2900,136 +2998,143 @@ ruleQVTrelationUnrestrictedName returns [AntlrDatatypeRuleToken current=new Antl
     }
 
     |
+	kw='dependsOn'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getDependsOnKeyword_3());
+    }
+
+    |
 	kw='domain'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getDomainKeyword_3());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getDomainKeyword_4());
     }
 
     |
 	kw='enforce'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getEnforceKeyword_4());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getEnforceKeyword_5());
     }
 
     |
 	kw='extends'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getExtendsKeyword_5());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getExtendsKeyword_6());
     }
 
     |
 	kw='implementedby'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getImplementedbyKeyword_6());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getImplementedbyKeyword_7());
     }
 
     |
 	kw='import'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getImportKeyword_7());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getImportKeyword_8());
+    }
+
+    |
+	kw='iterates'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getIteratesKeyword_9());
     }
 
     |
 	kw='library'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getLibraryKeyword_8());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getLibraryKeyword_10());
     }
 
     |
 	kw='key'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getKeyKeyword_9());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getKeyKeyword_11());
     }
 
     |
 	kw='opposite'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getOppositeKeyword_10());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getOppositeKeyword_12());
     }
 
     |
 	kw='overrides'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getOverridesKeyword_11());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getOverridesKeyword_13());
     }
 
     |
 	kw='package'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getPackageKeyword_12());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getPackageKeyword_14());
     }
 
     |
 	kw='primitive'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getPrimitiveKeyword_13());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getPrimitiveKeyword_15());
     }
 
     |
 	kw='query'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getQueryKeyword_14());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getQueryKeyword_16());
     }
 
     |
 	kw='relation'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getRelationKeyword_15());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getRelationKeyword_17());
     }
 
     |
 	kw='replace'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getReplaceKeyword_16());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getReplaceKeyword_18());
     }
 
     |
 	kw='top'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getTopKeyword_17());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getTopKeyword_19());
     }
 
     |
 	kw='transformation'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getTransformationKeyword_18());
-    }
-
-    |
-	kw='uses'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getUsesKeyword_19());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getTransformationKeyword_20());
     }
 
     |
 	kw='when'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_20());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_21());
     }
 
     |
 	kw='where'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_21());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_22());
     }
 )
     ;

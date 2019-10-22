@@ -121,9 +121,14 @@ public class QVTrelationFormatter extends QVTbaseFormatter
 		{
 			ModelDeclCSElements a = f.getModelDeclCSAccess();
 			c.setNoSpace().after(a.getLeftCurlyBracketKeyword_2_1_0());
-			c.setNoSpace().before(a.getRightCurlyBracketKeyword_2_1_3());
 			c.setNoSpace().before(a.getCommaKeyword_2_1_2_0());
-			c.setNoSpace().before(a.getCommaKeyword_3_2_0());
+			c.setNoSpace().before(a.getRightCurlyBracketKeyword_2_1_3());
+			c.setNoSpace().after(a.getLeftCurlyBracketKeyword_3_1_1_0());
+			c.setNoSpace().before(a.getCommaKeyword_3_1_1_1_1_0());
+			c.setNoSpace().before(a.getRightCurlyBracketKeyword_3_1_1_2());
+			c.setNoSpace().after(a.getLeftCurlyBracketKeyword_4_1_1_0());
+			c.setNoSpace().before(a.getCommaKeyword_4_1_1_1_1_0());
+			c.setNoSpace().before(a.getRightCurlyBracketKeyword_4_1_1_2());
 		}
 		{
 			ObjectTemplateCSElements a = f.getObjectTemplateCSAccess();

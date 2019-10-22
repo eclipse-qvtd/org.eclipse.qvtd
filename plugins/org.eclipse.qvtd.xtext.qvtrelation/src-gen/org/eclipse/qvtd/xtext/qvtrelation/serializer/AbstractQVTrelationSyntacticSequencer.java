@@ -50,6 +50,8 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	protected AbstractElementAlias match_EnumerationCS_SemicolonKeyword_5_1_or___LeftCurlyBracketKeyword_5_0_0_RightCurlyBracketKeyword_5_0_2__;
 	protected AbstractElementAlias match_EnumerationCS___LeftCurlyBracketKeyword_4_0_SerializableKeyword_4_1_1_q_RightCurlyBracketKeyword_4_2__q;
 	protected AbstractElementAlias match_EnumerationLiteralCS_SemicolonKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_1__;
+	protected AbstractElementAlias match_ModelDeclCS___DependsOnKeyword_3_0_LeftCurlyBracketKeyword_3_1_1_0_RightCurlyBracketKeyword_3_1_1_2__q;
+	protected AbstractElementAlias match_ModelDeclCS___IteratesKeyword_4_0_LeftCurlyBracketKeyword_4_1_1_0_RightCurlyBracketKeyword_4_1_1_2__q;
 	protected AbstractElementAlias match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q;
 	protected AbstractElementAlias match_ObjectTemplateCS___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
 	protected AbstractElementAlias match_OperationCS_CommaKeyword_9_1_1_q;
@@ -103,6 +105,8 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 		match_EnumerationCS_SemicolonKeyword_5_1_or___LeftCurlyBracketKeyword_5_0_0_RightCurlyBracketKeyword_5_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEnumerationCSAccess().getLeftCurlyBracketKeyword_5_0_0()), new TokenAlias(false, false, grammarAccess.getEnumerationCSAccess().getRightCurlyBracketKeyword_5_0_2())), new TokenAlias(false, false, grammarAccess.getEnumerationCSAccess().getSemicolonKeyword_5_1()));
 		match_EnumerationCS___LeftCurlyBracketKeyword_4_0_SerializableKeyword_4_1_1_q_RightCurlyBracketKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEnumerationCSAccess().getLeftCurlyBracketKeyword_4_0()), new TokenAlias(false, true, grammarAccess.getEnumerationCSAccess().getSerializableKeyword_4_1_1()), new TokenAlias(false, false, grammarAccess.getEnumerationCSAccess().getRightCurlyBracketKeyword_4_2()));
 		match_EnumerationLiteralCS_SemicolonKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_1__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEnumerationLiteralCSAccess().getLeftCurlyBracketKeyword_2_0_0()), new TokenAlias(false, false, grammarAccess.getEnumerationLiteralCSAccess().getRightCurlyBracketKeyword_2_0_1())), new TokenAlias(false, false, grammarAccess.getEnumerationLiteralCSAccess().getSemicolonKeyword_2_1()));
+		match_ModelDeclCS___DependsOnKeyword_3_0_LeftCurlyBracketKeyword_3_1_1_0_RightCurlyBracketKeyword_3_1_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getModelDeclCSAccess().getDependsOnKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getModelDeclCSAccess().getLeftCurlyBracketKeyword_3_1_1_0()), new TokenAlias(false, false, grammarAccess.getModelDeclCSAccess().getRightCurlyBracketKeyword_3_1_1_2()));
+		match_ModelDeclCS___IteratesKeyword_4_0_LeftCurlyBracketKeyword_4_1_1_0_RightCurlyBracketKeyword_4_1_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getModelDeclCSAccess().getIteratesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getModelDeclCSAccess().getLeftCurlyBracketKeyword_4_1_1_0()), new TokenAlias(false, false, grammarAccess.getModelDeclCSAccess().getRightCurlyBracketKeyword_4_1_1_2()));
 		match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q = new TokenAlias(false, true, grammarAccess.getMultiplicityCSAccess().getVerticalLineQuestionMarkKeyword_2_0());
 		match_ObjectTemplateCS___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getObjectTemplateCSAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getObjectTemplateCSAccess().getRightCurlyBracketKeyword_3_2()));
 		match_OperationCS_CommaKeyword_9_1_1_q = new TokenAlias(false, true, grammarAccess.getOperationCSAccess().getCommaKeyword_9_1_1());
@@ -201,6 +205,10 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 				emit_EnumerationCS___LeftCurlyBracketKeyword_4_0_SerializableKeyword_4_1_1_q_RightCurlyBracketKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EnumerationLiteralCS_SemicolonKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_1__.equals(syntax))
 				emit_EnumerationLiteralCS_SemicolonKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_1__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ModelDeclCS___DependsOnKeyword_3_0_LeftCurlyBracketKeyword_3_1_1_0_RightCurlyBracketKeyword_3_1_1_2__q.equals(syntax))
+				emit_ModelDeclCS___DependsOnKeyword_3_0_LeftCurlyBracketKeyword_3_1_1_0_RightCurlyBracketKeyword_3_1_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ModelDeclCS___IteratesKeyword_4_0_LeftCurlyBracketKeyword_4_1_1_0_RightCurlyBracketKeyword_4_1_1_2__q.equals(syntax))
+				emit_ModelDeclCS___IteratesKeyword_4_0_LeftCurlyBracketKeyword_4_1_1_0_RightCurlyBracketKeyword_4_1_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q.equals(syntax))
 				emit_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ObjectTemplateCS___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q.equals(syntax))
@@ -1730,6 +1738,36 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     value=SIGNED (ambiguity) (rule end)
 	 */
 	protected void emit_EnumerationLiteralCS_SemicolonKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_1__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+
+	/**
+	 * Ambiguous syntax:
+	 *     ('dependsOn' '{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     metamodelIds+=[Namespace|UnrestrictedName] '}' (ambiguity) 'iterates' '{' iterates+=[TypedModel|UnrestrictedName]
+	 *     metamodelIds+=[Namespace|UnrestrictedName] '}' (ambiguity) 'iterates' iterates+=[TypedModel|UnrestrictedName]
+	 *     metamodelIds+=[Namespace|UnrestrictedName] '}' (ambiguity) ('iterates' '{' '}')? (rule end)
+	 *     metamodelIds+=[Namespace|UnrestrictedName] (ambiguity) 'iterates' '{' iterates+=[TypedModel|UnrestrictedName]
+	 *     metamodelIds+=[Namespace|UnrestrictedName] (ambiguity) 'iterates' iterates+=[TypedModel|UnrestrictedName]
+	 *     metamodelIds+=[Namespace|UnrestrictedName] (ambiguity) ('iterates' '{' '}')? (rule end)
+	 */
+	protected void emit_ModelDeclCS___DependsOnKeyword_3_0_LeftCurlyBracketKeyword_3_1_1_0_RightCurlyBracketKeyword_3_1_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+
+	/**
+	 * Ambiguous syntax:
+	 *     ('iterates' '{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     dependsOn+=[TypedModel|UnrestrictedName] '}' (ambiguity) (rule end)
+	 *     dependsOn+=[TypedModel|UnrestrictedName] (ambiguity) (rule end)
+	 *     metamodelIds+=[Namespace|UnrestrictedName] '}' ('dependsOn' '{' '}')? (ambiguity) (rule end)
+	 *     metamodelIds+=[Namespace|UnrestrictedName] ('dependsOn' '{' '}')? (ambiguity) (rule end)
+	 */
+	protected void emit_ModelDeclCS___IteratesKeyword_4_0_LeftCurlyBracketKeyword_4_1_1_0_RightCurlyBracketKeyword_4_1_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
