@@ -97,6 +97,7 @@ public class QVTbaseTables
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_1 = ValueUtil.integerValueOf("1");
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_PRIMid_String = TypeId.SEQUENCE.getSpecializedId(TypeId.STRING);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Domain = TypeId.BAG.getSpecializedId(QVTbaseTables.CLSSid_Domain);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_TypedModel = TypeId.BAG.getSpecializedId(QVTbaseTables.CLSSid_TypedModel);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Domain = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_Domain);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_Parameter);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Rule = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_Rule);
@@ -370,11 +371,13 @@ public class QVTbaseTables
 		public static final @NonNull ExecutorProperty _TypedModel__isPrimitive = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_PRIMITIVE, Types._TypedModel, 1);
 		public static final @NonNull ExecutorProperty _TypedModel__isThis = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_THIS, Types._TypedModel, 2);
 		public static final @NonNull ExecutorProperty _TypedModel__isTrace = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_TRACE, Types._TypedModel, 3);
-		public static final @NonNull ExecutorProperty _TypedModel__ownedContext = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT, Types._TypedModel, 4);
-		public static final @NonNull ExecutorProperty _TypedModel__transformation = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, Types._TypedModel, 5);
-		public static final @NonNull ExecutorProperty _TypedModel__usedPackage = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, Types._TypedModel, 6);
-		public static final @NonNull ExecutorProperty _TypedModel__Domain__typedModel = new ExecutorPropertyWithImplementation("Domain", Types._TypedModel, 7, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.DOMAIN__TYPED_MODEL));
-		public static final @NonNull ExecutorProperty _TypedModel__dependent__dependsOn = new ExecutorPropertyWithImplementation("dependent", Types._TypedModel, 8, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON));
+		public static final @NonNull ExecutorProperty _TypedModel__iterates = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__ITERATES, Types._TypedModel, 4);
+		public static final @NonNull ExecutorProperty _TypedModel__ownedContext = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT, Types._TypedModel, 5);
+		public static final @NonNull ExecutorProperty _TypedModel__transformation = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, Types._TypedModel, 6);
+		public static final @NonNull ExecutorProperty _TypedModel__usedPackage = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, Types._TypedModel, 7);
+		public static final @NonNull ExecutorProperty _TypedModel__Domain__typedModel = new ExecutorPropertyWithImplementation("Domain", Types._TypedModel, 8, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.DOMAIN__TYPED_MODEL));
+		public static final @NonNull ExecutorProperty _TypedModel__TypedModel__iterates = new ExecutorPropertyWithImplementation("TypedModel", Types._TypedModel, 9, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TYPED_MODEL__ITERATES));
+		public static final @NonNull ExecutorProperty _TypedModel__dependent__dependsOn = new ExecutorPropertyWithImplementation("dependent", Types._TypedModel, 10, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON));
 		static {
 			Init.initEnd();
 		}
@@ -1067,6 +1070,7 @@ public class QVTbaseTables
 			QVTbaseTables.Properties._TypedModel__isPrimitive,
 			QVTbaseTables.Properties._TypedModel__isThis,
 			QVTbaseTables.Properties._TypedModel__isTrace,
+			QVTbaseTables.Properties._TypedModel__iterates,
 			QVTbaseTables.Properties._TypedModel__ownedContext,
 			QVTbaseTables.Properties._TypedModel__transformation,
 			QVTbaseTables.Properties._TypedModel__usedPackage

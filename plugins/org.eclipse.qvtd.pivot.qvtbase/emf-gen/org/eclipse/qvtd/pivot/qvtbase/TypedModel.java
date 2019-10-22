@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.Parameter;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsPrimitive <em>Is Primitive</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsThis <em>Is This</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsTrace <em>Is Trace</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getIterates <em>Iterates</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel()
@@ -93,6 +94,9 @@ public interface TypedModel extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Depends On</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_DependsOn()
 	 * @model ordered="false"
@@ -204,6 +208,21 @@ public interface TypedModel extends NamedElement {
 	 * @generated
 	 */
 	void setIsTrace(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Iterates</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.TypedModel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Iterates</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_Iterates()
+	 * @model ordered="false"
+	 * @generated
+	 */
+	EList<TypedModel> getIterates();
 
 	/**
 	 * <!-- begin-user-doc -->

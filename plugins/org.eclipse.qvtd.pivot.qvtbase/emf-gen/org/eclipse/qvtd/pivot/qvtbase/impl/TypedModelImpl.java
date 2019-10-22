@@ -60,6 +60,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#isIsPrimitive <em>Is Primitive</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#isIsThis <em>Is This</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#isIsTrace <em>Is Trace</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#getIterates <em>Iterates</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,7 +73,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPED_MODEL_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7;
+	public static final int TYPED_MODEL_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of operations of the '<em>Typed Model</em>' class.
@@ -172,6 +173,16 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @ordered
 	 */
 	protected boolean isTrace = IS_TRACE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getIterates() <em>Iterates</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIterates()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypedModel> iterates;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -383,6 +394,19 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 */
 	@Override
+	public EList<TypedModel> getIterates() {
+		if (iterates == null) {
+			iterates = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
+		}
+		return iterates;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean validateExclusivePrimitiveThisTrace(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		final @NonNull String constraintName = "TypedModel::ExclusivePrimitiveThisTrace";
 		try {
@@ -534,6 +558,8 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				return isIsThis();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return isIsTrace();
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
+				return getIterates();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -570,6 +596,10 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setIsTrace((Boolean)newValue);
 				return;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
+				getIterates().clear();
+				getIterates().addAll((Collection<? extends TypedModel>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -603,6 +633,9 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setIsTrace(IS_TRACE_EDEFAULT);
 				return;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
+				getIterates().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -629,6 +662,8 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				return isThis != IS_THIS_EDEFAULT;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return isTrace != IS_TRACE_EDEFAULT;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
+				return iterates != null && !iterates.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

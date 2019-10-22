@@ -555,10 +555,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_TypedModel_isPrimitive = createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_PRIMITIVE, _Boolean);
 		private final @NonNull Property pr_TypedModel_isThis = createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_THIS, _Boolean);
 		private final @NonNull Property pr_TypedModel_isTrace = createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_TRACE, _Boolean);
+		private final @NonNull Property pr_TypedModel_iterates = createProperty(QVTbasePackage.Literals.TYPED_MODEL__ITERATES, _Set_TypedModel_NullFree);
 		private final @NonNull Property pr_TypedModel_ownedContext = createProperty(QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT, _Parameter);
 		private final @NonNull Property pr_TypedModel_transformation = createProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, _Transformation);
 		private final @NonNull Property pr_TypedModel_usedPackage = createProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, _Set_Package_NullFree);
 		private final @NonNull Property pr_TypedModel_Domain_typedModel = createProperty("Domain", _Bag_Domain);
+		private final @NonNull Property pr_TypedModel_TypedModel_iterates = createProperty("TypedModel", _Bag_TypedModel);
 		private final @NonNull Property pr_TypedModel_dependent_dependsOn = createProperty("dependent", _TypedModel);
 		
 		private void installProperties() {
@@ -711,6 +713,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedProperties.add(property = pr_TypedModel_isTrace);
 			property.setIsResolveProxies(true);
 			property.setDefaultValueString("false");
+			ownedProperties.add(property = pr_TypedModel_iterates);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_TypedModel_TypedModel_iterates);
 			ownedProperties.add(property = pr_TypedModel_ownedContext);
 			property.setIsComposite(true);
 			property.setIsRequired(false);
@@ -727,6 +732,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Domain_typedModel);
+			ownedProperties.add(property = pr_TypedModel_TypedModel_iterates);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_TypedModel_iterates);
 			ownedProperties.add(property = pr_TypedModel_dependent_dependsOn);
 			property.setIsImplicit(true);
 			property.setIsRequired(false);
@@ -773,9 +782,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			installComment(pr_Domain_isCheckable, "A checkable domain may be selected as the target of a transformation in check mode. An enforceable domain is always checkable. A not-checkable domain cannot be selected as the target of a transformation. See Bug 549776.See Bug 549776.");
 			installComment(pr_Domain_isEnforceable, "An enforceable domain may be selected as the target of a transformation in check or enforce mode. An enforceable domain is always checkable. A not-checkable domain cannot be selected as the target of a transformation. See Bug 549776.");
 			installComment(_FunctionBody, "FunctionBody refines ExpressionInOCL to avoid the inconvenience of a timely setType() by deriving the type from the bodyExpression. See Bug 481664.");
+			installComment(pr_TypedModel_dependsOn, "The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced.");
 			installComment(pr_TypedModel_isPrimitive, "The TypedModel is for a primitive domain. It may be added automatically.");
 			installComment(pr_TypedModel_isThis, "The TypedModel is for the transformation instance trace. It may be added automatically.");
 			installComment(pr_TypedModel_isTrace, "The TypedModel is for the execution trace. It may be added automatically.");
+			installComment(pr_TypedModel_iterates, "The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration.");
 		}
 	}
 }

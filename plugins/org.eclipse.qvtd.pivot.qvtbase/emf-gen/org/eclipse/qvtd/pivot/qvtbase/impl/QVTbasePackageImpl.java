@@ -716,6 +716,16 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getTypedModel_Iterates() {
+		return (EReference)typedModelEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EOperation getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map() {
 		return typedModelEClass.getEOperations().get(0);
 	}
@@ -810,6 +820,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEAttribute(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 		createEAttribute(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		createEAttribute(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
+		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
 		createEOperation(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
 	}
 
@@ -1034,6 +1045,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEAttribute(getTypedModel_IsPrimitive(), ecorePackage.getEBoolean(), "isPrimitive", "false", 1, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypedModel_IsThis(), ecorePackage.getEBoolean(), "isThis", "false", 1, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypedModel_IsTrace(), ecorePackage.getEBoolean(), "isTrace", "false", 1, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypedModel_Iterates(), this.getTypedModel(), null, "iterates", null, 0, -1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		op = initEOperation(getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateExclusivePrimitiveThisTrace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);

@@ -620,6 +620,17 @@ public interface QVTbasePackage extends EPackage {
 	EAttribute getTypedModel_IsTrace();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getIterates <em>Iterates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Iterates</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.TypedModel#getIterates()
+	 * @see #getTypedModel()
+	 * @generated
+	 */
+	EReference getTypedModel_Iterates();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#validateExclusivePrimitiveThisTrace(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Exclusive Primitive This Trace</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1086,6 +1097,14 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TYPED_MODEL__IS_TRACE = eINSTANCE.getTypedModel_IsTrace();
+
+		/**
+		 * The meta object literal for the '<em><b>Iterates</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPED_MODEL__ITERATES = eINSTANCE.getTypedModel_Iterates();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Exclusive Primitive This Trace</b></em>' operation.
