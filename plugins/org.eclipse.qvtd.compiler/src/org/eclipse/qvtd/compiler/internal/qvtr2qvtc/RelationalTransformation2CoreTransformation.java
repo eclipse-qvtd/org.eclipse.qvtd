@@ -114,6 +114,12 @@ public class RelationalTransformation2CoreTransformation extends QVTcoreHelper
 					coreTypedModel.getDependsOn().add(qvtr2qvtc.getCoreTypedModel(relationDependsOn));
 				}
 			}
+			if (relationTypedModel.getIterates().size() > 0) {
+				TypedModel coreTypedModel = qvtr2qvtc.getCoreTypedModel(relationTypedModel);
+				for (@NonNull TypedModel relationIterates : QVTrelationUtil.getIterates(relationTypedModel)) {
+					coreTypedModel.getIterates().add(qvtr2qvtc.getCoreTypedModel(relationIterates));
+				}
+			}
 		}
 		return coreTransformation2;
 	}

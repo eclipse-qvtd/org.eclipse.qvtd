@@ -587,6 +587,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		}
 		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
 		PivotUtilInternal.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
+		//	PivotUtilInternal.refreshList(csDirection.getUses(), asTypedModel.getIterates());
 		return csDirection;
 	}
 

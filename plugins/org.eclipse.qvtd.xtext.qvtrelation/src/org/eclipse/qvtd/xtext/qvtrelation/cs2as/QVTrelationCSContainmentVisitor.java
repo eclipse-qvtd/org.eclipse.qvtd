@@ -158,6 +158,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 				}
 				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), newUsedPackages);
 				PivotUtilInternal.refreshList(pTypedModel.getDependsOn(), csElement.getDependsOn());
+				PivotUtilInternal.refreshList(pTypedModel.getIterates(), csElement.getIterates());
 			}
 			return null;
 		}

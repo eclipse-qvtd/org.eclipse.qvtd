@@ -111,6 +111,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			if (pTypedModel != null) {
 				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
 				PivotUtilInternal.refreshList(pTypedModel.getDependsOn(), csElement.getUses());
+				//	PivotUtilInternal.refreshList(pTypedModel.getIterates(), csElement.getUses());
 			}
 			return null;
 		}

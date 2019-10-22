@@ -656,6 +656,7 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 		public @Nullable Object visitTypedModel(@NonNull TypedModel tmOut) {
 			TypedModel tmIn = context.equivalentSource(tmOut);
 			updateAllReferences(tmIn.getDependsOn(), tmOut.getDependsOn());
+			updateAllReferences(tmIn.getIterates(), tmOut.getIterates());
 			return null;
 		}
 
