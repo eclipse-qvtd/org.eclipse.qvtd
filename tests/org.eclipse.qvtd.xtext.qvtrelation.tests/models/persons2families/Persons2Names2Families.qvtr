@@ -6,11 +6,19 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::persons2names2families
 {
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
---	This is a side model-to-model transformation to plan the Persons to Families transformation
+--	This is a bidirectional implementation of Benchmarx' Families2Person transformation.
+--
+--  The hard (configurable forward) transformation from families+persons to families uses an intermediate names model to plan the family formation.
+--  The easy (reverse) transformation ffrom families to persons is direct.
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------					
 
-transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesMM, names:NamesMM, familiesLeft:FamiliesMM) { 
+transformation Persons2Names2Families(
+	persons:PersonsMM dependsOn familiesRight,			-- persons <= familiesRight
+	familiesRight:FamiliesMM dependsOn names,			-- persons+familiesLeft => names => familiesRight
+	names:NamesMM dependsOn {familiesLeft,persons},		-- persons+familiesLeft => names
+	familiesLeft:FamiliesMM dependsOn {}				-- illegal
+) { 
 
 	attribute PREFER_EXISTING_FAMILY_TO_NEW : Boolean[1] = 'true';
 	attribute PREFER_CREATING_PARENT_TO_CHILD : Boolean[1] = 'true';
@@ -30,7 +38,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	top relation FPtoN0_PersonRegister2NamesRegister
 	{		
 	  	domain persons pr : PersonRegister;
-	  	domain familiesRight fr : FamilyRegister;	    
+	  	domain familiesLeft fr : FamilyRegister;	    
 		enforce domain names nr : NameRegister;
 	}
 	
@@ -48,7 +56,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  	domain persons pr : PersonRegister {
 	  		persons = p : Person
 	  	};
-	  	domain familiesRight fr : FamilyRegister;	    
+	  	domain familiesLeft fr : FamilyRegister;	    
 		enforce domain names nr : NameRegister {
 	  		surnames = sn
 		};
@@ -169,7 +177,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	
 	relation FtoN0_Family2Surname
 	{		
-	  	domain familiesRight f : Family[1] ;
+	  	domain familiesLeft f : Family[1] ;
 	  	enforce domain names sn : Surname {
 	  		families = f
 	  	};
@@ -177,7 +185,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 		
 	top relation FtoN1_Family2FamilyGroup
 	{		
-	  	domain familiesRight f : Family;
+	  	domain familiesLeft f : Family;
 	  	enforce domain names fg : FamilyGroup {
 	  		surname = sn : Surname
 	  	};
@@ -190,7 +198,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	{		
 	  	sp : NamesMM::Surname[?];
 	  	domain persons pr : PersonRegister;
-	  	domain familiesRight fr : FamilyRegister {
+	  	domain familiesLeft fr : FamilyRegister {
 	  		families = f : Family
 	  	};    
 		enforce domain names nr : NameRegister {
@@ -207,7 +215,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	
 	top relation FtoN2_Daughter2DaughterPlan
 	{		
-	  	domain familiesRight fm : FamilyMember[1] {
+	  	domain familiesLeft fm : FamilyMember[1] {
 	  		daughtersInverse = f : Family
 	  	};
 	  	enforce domain names fg : FamilyGroup {
@@ -223,7 +231,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 		
 	top relation FtoN2_Father2FatherPlan
 	{		
-	  	domain familiesRight fm : FamilyMember[1] {
+	  	domain familiesLeft fm : FamilyMember[1] {
 	  		fatherInverse = f : Family
 	  	};
 	  	enforce domain names fg : FamilyGroup {
@@ -239,7 +247,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 		
 	top relation FtoN2_Mother2MotherPlan
 	{		
-	  	domain familiesRight fm : FamilyMember[1] {
+	  	domain familiesLeft fm : FamilyMember[1] {
 	  		motherInverse = f : Family
 	  	};
 	  	enforce domain names fg : FamilyGroup {
@@ -255,7 +263,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 		
 	top relation FtoN2_Son2SonPlan
 	{		
-	  	domain familiesRight fm : FamilyMember[1] {
+	  	domain familiesLeft fm : FamilyMember[1] {
 	  		sonsInverse = f : Family
 	  	};
 	  	enforce domain names fg : FamilyGroup {
@@ -272,7 +280,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	top relation NtoF1_NamesRegister2FamilyRegister
 	{		
 	  	domain names nr : NameRegister;
-	  	enforce domain familiesLeft fr : FamilyRegister;
+	  	enforce domain familiesRight fr : FamilyRegister;
 	}
 	
 	top relation NtoF1_FamilyGroup2Family
@@ -284,7 +292,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  			name = name
 	  		}
 	  	};
-	  	enforce domain familiesLeft f : Family {
+	  	enforce domain familiesRight f : Family {
 	  		familiesInverse = fr : FamilyRegister,
 	  		name = name
 	  	};
@@ -300,7 +308,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  		familyGroup = fg : FamilyGroup,
 	  		name = name
 	  	};
-	  	enforce domain familiesLeft fm : FamilyMember {
+	  	enforce domain familiesRight fm : FamilyMember {
 	  		daughtersInverse = f : Family,
 	  		name = name
 	  	};
@@ -316,7 +324,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  		familyGroup = fg : FamilyGroup,
 	  		name = name
 	  	};
-	  	enforce domain familiesLeft fm : FamilyMember {
+	  	enforce domain familiesRight fm : FamilyMember {
 	  		fatherInverse = f : Family,
 	  		name = name
 	  	};
@@ -332,7 +340,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  		familyGroup = fg : FamilyGroup,
 	  		name = name
 	  	};
-	  	enforce domain familiesLeft fm : FamilyMember {
+	  	enforce domain familiesRight fm : FamilyMember {
 	  		motherInverse = f : Family,
 	  		name = name
 	  	};
@@ -348,7 +356,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  		familyGroup = fg : FamilyGroup,
 	  		name = name
 	  	};
-	  	enforce domain familiesLeft fm : FamilyMember {
+	  	enforce domain familiesRight fm : FamilyMember {
 	  		sonsInverse = f : Family,
 	  		name = name
 	  	};
@@ -364,7 +372,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  		familyGroup = fg : FamilyGroup,
 	  		name = name
 	  	};
-	  	enforce domain familiesLeft fm : FamilyMember {
+	  	enforce domain familiesRight fm : FamilyMember {
 	  		daughtersInverse = f : Family,
 	  		name = name
 	  	};
@@ -380,7 +388,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  		familyGroup = fg : FamilyGroup,
 	  		name = name
 	  	};
-	  	enforce domain familiesLeft fm : FamilyMember {
+	  	enforce domain familiesRight fm : FamilyMember {
 	  		motherInverse = f : Family,
 	  		name = name
 	  	};
@@ -396,7 +404,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  		familyGroup = fg : FamilyGroup,
 	  		name = name
 	  	};
-	  	enforce domain familiesLeft fm : FamilyMember {
+	  	enforce domain familiesRight fm : FamilyMember {
 	  		fatherInverse = f : Family,
 	  		name = name
 	  	};
@@ -412,7 +420,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	  		familyGroup = fg : FamilyGroup,
 	  		name = name
 	  	};
-	  	enforce domain familiesLeft fm : FamilyMember {
+	  	enforce domain familiesRight fm : FamilyMember {
 	  		sonsInverse = f : Family,
 	  		name = name
 	  	};
@@ -423,7 +431,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	
 	
 	top relation FtoP0_FamilyRegister2PersonRegister {		
-		domain familiesLeft fr : FamilyRegister{};	  	
+		domain familiesRight fr : FamilyRegister{};	  	
 	  	enforce domain persons pr : PersonRegister{};	    
 	    where {
 	    	FtoP1_Father2Male(fr, pr);
@@ -438,7 +446,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	-- Transform Fathers to Males
 	--------------------------------------------------------------------------------------------------------------
 	relation FtoP1_Father2Male {
-		domain familiesLeft fr : FamilyRegister {
+		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
 				father = m : FamilyMember
 			}
@@ -456,7 +464,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	-- Transform Mothers to Females
 	--------------------------------------------------------------------------------------------------------------
 	relation FtoP1_Mother2Female {
-		domain familiesLeft fr : FamilyRegister {
+		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
 				mother = m : FamilyMember
 			}
@@ -473,7 +481,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	-- Transform Sons to Males
 	--------------------------------------------------------------------------------------------------------------
 	relation FtoP1_Son2Male {
-		domain familiesLeft fr : FamilyRegister {
+		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
 				sons = m : FamilyMember
 			}
@@ -490,7 +498,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 	-- Transform Daughters to Females
 	--------------------------------------------------------------------------------------------------------------
 	relation FtoP1_Daughter2Female {
-		domain familiesLeft fr : FamilyRegister {
+		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
 				daughters = m : FamilyMember
 			}
@@ -511,7 +519,7 @@ transformation Persons2Names2Families(persons:PersonsMM, familiesRight:FamiliesM
 		surname: String;
 		fullname: String;
 		index: Integer;
-		domain familiesLeft f : Family {
+		domain familiesRight f : Family {
 			name = surname
 	  	},
 		m : FamilyMember {

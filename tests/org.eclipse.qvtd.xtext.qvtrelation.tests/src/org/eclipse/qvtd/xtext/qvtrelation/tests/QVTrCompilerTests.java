@@ -1571,15 +1571,15 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
 			TypedModelsConfiguration typedModelsConfiguration1 = new TypedModelsConfiguration();
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.OUTPUT));
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.OUTPUT));
 			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.INTERMEDIATE));
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.INPUT));
 			typedModelsConfigurations.add(typedModelsConfiguration1);
 			TypedModelsConfiguration typedModelsConfiguration2 = new TypedModelsConfiguration();
 			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("persons", TypedModelConfiguration.Mode.OUTPUT));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.INPUT));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
 			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.UNUSED));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.UNUSED));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.UNUSED));
 			typedModelsConfigurations.add(typedModelsConfiguration2);
 			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);
 		}
@@ -1600,10 +1600,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.addInputURI("persons", personFile.getURI());
-			txExecutor1.addInputURI("familiesRight", familyFile.getURI());
-			txExecutor1.execute(txExecutor1.getTypedModelIndex("familiesLeft"));
+			txExecutor1.addInputURI("familiesLeft", familyFile.getURI());
+			txExecutor1.execute(txExecutor1.getTypedModelIndex("familiesRight"));
 			txExecutor1.addOutputURI("names", namesOutURI);
-			txExecutor1.addOutputURI("familiesLeft", familiesOutURI);
+			txExecutor1.addOutputURI("familiesRight", familiesOutURI);
 			txExecutor1.saveModels(null);
 			myQVT2.checkOutput(namesOutURI, refNamesFile.getURI(), NamesNormalizer.INSTANCE);
 			myQVT2.checkOutput(familiesOutURI, refFamilyFile.getURI(), null); //FamilyPlansNormalizer.INSTANCE);
@@ -1637,15 +1637,15 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
 			TypedModelsConfiguration typedModelsConfiguration1 = new TypedModelsConfiguration();
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.OUTPUT));
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.OUTPUT));
 			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.INTERMEDIATE));
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
+			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.INPUT));
 			typedModelsConfigurations.add(typedModelsConfiguration1);
 			TypedModelsConfiguration typedModelsConfiguration2 = new TypedModelsConfiguration();
 			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("persons", TypedModelConfiguration.Mode.OUTPUT));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.INPUT));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
 			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.UNUSED));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.UNUSED));
+			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.UNUSED));
 			typedModelsConfigurations.add(typedModelsConfiguration2);
 			asTransformation = myQVT.compileTransformation(typedModelsConfigurations);
 			Map<String, Object> extensionToFactoryMap = myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
@@ -1655,10 +1655,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.addInputURI("persons", personFile.getURI());
-			txExecutor1.addInputURI("familiesRight", familyFile.getURI());
-			txExecutor1.execute(txExecutor1.getTypedModelIndex("familiesLeft"));
+			txExecutor1.addInputURI("familiesLeft", familyFile.getURI());
+			txExecutor1.execute(txExecutor1.getTypedModelIndex("familiesRight"));
 			txExecutor1.addOutputURI("names", namesOutURI);
-			txExecutor1.addOutputURI("familiesLeft", familiesOutURI);
+			txExecutor1.addOutputURI("familiesRight", familiesOutURI);
 			txExecutor1.saveModels(null);
 			myQVT.checkOutput(namesOutURI, refNamesFile.getURI(), NamesNormalizer.INSTANCE);
 			myQVT.checkOutput(familiesOutURI, refFamilyFile.getURI(), null); //FamilyPlansNormalizer.INSTANCE);
