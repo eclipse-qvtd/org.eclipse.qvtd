@@ -40,6 +40,15 @@ public abstract class UMLXNamedElementImpl extends UMLXElementImpl implements UM
 	public static final int UMLX_NAMED_ELEMENT_FEATURE_COUNT = UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The number of operations of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UMLX_NAMED_ELEMENT_OPERATION_COUNT = UMLXElementImpl.UMLX_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -98,7 +107,7 @@ public abstract class UMLXNamedElementImpl extends UMLXElementImpl implements UM
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -125,7 +134,7 @@ public abstract class UMLXNamedElementImpl extends UMLXElementImpl implements UM
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0:
+			case 1:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -139,7 +148,7 @@ public abstract class UMLXNamedElementImpl extends UMLXElementImpl implements UM
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0:
+			case 1:
 				setName((String)newValue);
 				return;
 		}
@@ -154,7 +163,7 @@ public abstract class UMLXNamedElementImpl extends UMLXElementImpl implements UM
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -169,7 +178,7 @@ public abstract class UMLXNamedElementImpl extends UMLXElementImpl implements UM
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

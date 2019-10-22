@@ -134,6 +134,10 @@ public class UMLXUtil
 		return ClassUtil.nonNullState(relInvocationEdge.getInvokingRelPatternNode());
 	}
 
+	public static @NonNull Iterable<@NonNull TxTypedModelNode> getIterates(@NonNull TxTypedModelNode txTypedModelNode) {
+		return ClassUtil.nullFree(txTypedModelNode.getIterates());
+	}
+
 	public static @NonNull String getName(@NonNull UMLXNamedElement umlxElement) {
 		return ClassUtil.nonNullState(umlxElement.getName());
 	}

@@ -573,7 +573,7 @@ public class QVTr2UMLX
 				TxPackageNode txPackageNode = asPackage2txPackageNode.get(usedPackage);
 				txTypedModelNode.getUsedTxPackageNodes().add(txPackageNode);
 			}
-			if (qvtrTypedModel.getDependsOn().size() > 0) {
+			if ((qvtrTypedModel.getDependsOn().size() > 0) || (qvtrTypedModel.getIterates().size() > 0)) {
 				context.addReference(qvtrTypedModel);
 			}
 			return txTypedModelNode;

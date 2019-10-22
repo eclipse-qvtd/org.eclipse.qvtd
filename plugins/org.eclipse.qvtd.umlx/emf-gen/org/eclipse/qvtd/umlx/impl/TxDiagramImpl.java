@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import java.util.Iterator;
@@ -35,6 +36,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.umlx.RelDiagram;
@@ -74,6 +76,15 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * @ordered
 	 */
 	public static final int TX_DIAGRAM_FEATURE_COUNT = UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of operations of the '<em>Tx Diagram</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TX_DIAGRAM_OPERATION_COUNT = UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The cached value of the '{@link #getOwnedRelDiagrams() <em>Owned Rel Diagrams</em>}' containment reference list.
@@ -170,7 +181,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public EList<RelDiagram> getOwnedRelDiagrams() {
 		if (ownedRelDiagrams == null) {
-			ownedRelDiagrams = new EObjectContainmentWithInverseEList<RelDiagram>(RelDiagram.class, this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4);
+			ownedRelDiagrams = new EObjectContainmentWithInverseEList<RelDiagram>(RelDiagram.class, this, 2, 6);
 		}
 		return ownedRelDiagrams;
 	}
@@ -183,7 +194,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public EList<TxKeyNode> getOwnedTxKeyNodes() {
 		if (ownedTxKeyNodes == null) {
-			ownedTxKeyNodes = new EObjectContainmentWithInverseEList<TxKeyNode>(TxKeyNode.class, this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
+			ownedTxKeyNodes = new EObjectContainmentWithInverseEList<TxKeyNode>(TxKeyNode.class, this, 3, 2);
 		}
 		return ownedTxKeyNodes;
 	}
@@ -196,7 +207,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public EList<TxPackageNode> getOwnedTxPackageNodes() {
 		if (ownedTxPackageNodes == null) {
-			ownedTxPackageNodes = new EObjectContainmentWithInverseEList<TxPackageNode>(TxPackageNode.class, this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
+			ownedTxPackageNodes = new EObjectContainmentWithInverseEList<TxPackageNode>(TxPackageNode.class, this, 4, 2);
 		}
 		return ownedTxPackageNodes;
 	}
@@ -209,7 +220,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public EList<TxQueryNode> getOwnedTxQueryNodes() {
 		if (ownedTxQueryNodes == null) {
-			ownedTxQueryNodes = new EObjectContainmentWithInverseEList<TxQueryNode>(TxQueryNode.class, this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3, TxNodeImpl.TX_NODE_FEATURE_COUNT + 9);
+			ownedTxQueryNodes = new EObjectContainmentWithInverseEList<TxQueryNode>(TxQueryNode.class, this, 5, 10);
 		}
 		return ownedTxQueryNodes;
 	}
@@ -222,7 +233,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public EList<TxTypedModelNode> getOwnedTxTypedModelNodes() {
 		if (ownedTxTypedModelNodes == null) {
-			ownedTxTypedModelNodes = new EObjectContainmentWithInverseEList<TxTypedModelNode>(TxTypedModelNode.class, this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4, TxNodeImpl.TX_NODE_FEATURE_COUNT + 4);
+			ownedTxTypedModelNodes = new EObjectContainmentWithInverseEList<TxTypedModelNode>(TxTypedModelNode.class, this, 6, 6);
 		}
 		return ownedTxTypedModelNodes;
 	}
@@ -247,7 +258,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 		String oldPackage = package_;
 		package_ = newPackage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5, oldPackage, package_));
+			eNotify(new ENotificationImpl(this, Notification.SET, 7, oldPackage, package_));
 	}
 
 	/**
@@ -257,25 +268,35 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 */
 	@Override
 	public boolean validateTxQueryNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "TxDiagram::TxQueryNodeNamesAreUnique";
 		try {
 			/**
 			 *
 			 * inv TxQueryNodeNamesAreUnique:
-			 *   let
-			 *     severity : Integer[1] = 'TxDiagram::TxQueryNodeNamesAreUnique'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[1] = ownedTxQueryNodes->isUnique(name)
 			 *       in
-			 *         'TxDiagram::TxQueryNodeNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxDiagram_c_c_TxQueryNodeNamesAreUnique);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_DIAGRAM___VALIDATE_TX_QUERY_NODE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -314,13 +335,13 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxDiagram_c_c_TxQueryNodeNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("TxDiagram::TxQueryNodeNamesAreUnique", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -331,25 +352,35 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 */
 	@Override
 	public boolean validateRelDiagramNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "TxDiagram::RelDiagramNamesAreUnique";
 		try {
 			/**
 			 *
 			 * inv RelDiagramNamesAreUnique:
-			 *   let
-			 *     severity : Integer[1] = 'TxDiagram::RelDiagramNamesAreUnique'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[1] = ownedRelDiagrams->isUnique(name)
 			 *       in
-			 *         'TxDiagram::RelDiagramNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxDiagram_c_c_RelDiagramNamesAreUnique);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_DIAGRAM___VALIDATE_REL_DIAGRAM_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -388,13 +419,13 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxDiagram_c_c_RelDiagramNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("TxDiagram::RelDiagramNamesAreUnique", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -405,23 +436,34 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 */
 	@Override
 	public boolean validateNameIsRequired(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "TxDiagram::NameIsRequired";
 		try {
 			/**
 			 *
 			 * inv NameIsRequired:
-			 *   let severity : Integer[1] = 'TxDiagram::NameIsRequired'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[1] = name <> null
 			 *       in
-			 *         'TxDiagram::NameIsRequired'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxDiagram_c_c_NameIsRequired);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_DIAGRAM___VALIDATE_NAME_IS_REQUIRED__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -429,13 +471,13 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 			else {
 				final /*@NonInvalid*/ @Nullable String name = this.getName();
 				final /*@NonInvalid*/ boolean result = name != null;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxDiagram_c_c_NameIsRequired, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("TxDiagram::NameIsRequired", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -446,25 +488,35 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 */
 	@Override
 	public boolean validateTxTypedModelNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "TxDiagram::TxTypedModelNodeNamesAreUnique";
 		try {
 			/**
 			 *
 			 * inv TxTypedModelNodeNamesAreUnique:
-			 *   let
-			 *     severity : Integer[1] = 'TxDiagram::TxTypedModelNodeNamesAreUnique'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[1] = ownedTxTypedModelNodes->isUnique(name)
 			 *       in
-			 *         'TxDiagram::TxTypedModelNodeNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxDiagram_c_c_TxTypedModelNodeNamesAreUnique);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_DIAGRAM___VALIDATE_TX_TYPED_MODEL_NODE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -503,13 +555,13 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxDiagram_c_c_TxTypedModelNodeNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("TxDiagram::TxTypedModelNodeNamesAreUnique", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -538,15 +590,15 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelDiagrams()).basicAdd(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxKeyNodes()).basicAdd(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxPackageNodes()).basicAdd(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxQueryNodes()).basicAdd(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxTypedModelNodes()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -560,15 +612,15 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				return ((InternalEList<?>)getOwnedRelDiagrams()).basicRemove(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				return ((InternalEList<?>)getOwnedTxKeyNodes()).basicRemove(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				return ((InternalEList<?>)getOwnedTxPackageNodes()).basicRemove(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				return ((InternalEList<?>)getOwnedTxQueryNodes()).basicRemove(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				return ((InternalEList<?>)getOwnedTxTypedModelNodes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -582,17 +634,17 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				return getOwnedRelDiagrams();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				return getOwnedTxKeyNodes();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				return getOwnedTxPackageNodes();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				return getOwnedTxQueryNodes();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				return getOwnedTxTypedModelNodes();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5:
+			case 7:
 				return getPackage();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -607,27 +659,27 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				getOwnedRelDiagrams().clear();
 				getOwnedRelDiagrams().addAll((Collection<? extends RelDiagram>)newValue);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				getOwnedTxKeyNodes().clear();
 				getOwnedTxKeyNodes().addAll((Collection<? extends TxKeyNode>)newValue);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				getOwnedTxPackageNodes().clear();
 				getOwnedTxPackageNodes().addAll((Collection<? extends TxPackageNode>)newValue);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				getOwnedTxQueryNodes().clear();
 				getOwnedTxQueryNodes().addAll((Collection<? extends TxQueryNode>)newValue);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				getOwnedTxTypedModelNodes().clear();
 				getOwnedTxTypedModelNodes().addAll((Collection<? extends TxTypedModelNode>)newValue);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5:
+			case 7:
 				setPackage((String)newValue);
 				return;
 		}
@@ -642,22 +694,22 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				getOwnedRelDiagrams().clear();
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				getOwnedTxKeyNodes().clear();
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				getOwnedTxPackageNodes().clear();
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				getOwnedTxQueryNodes().clear();
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				getOwnedTxTypedModelNodes().clear();
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5:
+			case 7:
 				setPackage(PACKAGE_EDEFAULT);
 				return;
 		}
@@ -672,20 +724,41 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				return ownedRelDiagrams != null && !ownedRelDiagrams.isEmpty();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				return ownedTxKeyNodes != null && !ownedTxKeyNodes.isEmpty();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				return ownedTxPackageNodes != null && !ownedTxPackageNodes.isEmpty();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				return ownedTxQueryNodes != null && !ownedTxQueryNodes.isEmpty();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				return ownedTxTypedModelNodes != null && !ownedTxTypedModelNodes.isEmpty();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5:
+			case 7:
 				return PACKAGE_EDEFAULT == null ? package_ != null : !PACKAGE_EDEFAULT.equals(package_);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case 0:
+				return validateTxQueryNodeNamesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 1:
+				return validateRelDiagramNamesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 2:
+				return validateNameIsRequired((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 3:
+				return validateTxTypedModelNodeNamesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

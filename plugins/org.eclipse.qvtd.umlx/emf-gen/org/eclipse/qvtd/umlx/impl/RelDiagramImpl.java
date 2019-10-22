@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -82,6 +83,14 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	 * @ordered
 	 */
 	public static final int REL_DIAGRAM_FEATURE_COUNT = UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5;
+	/**
+	 * The number of operations of the '<em>Rel Diagram</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REL_DIAGRAM_OPERATION_COUNT = UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_OPERATION_COUNT + 2;
 	/**
 	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -176,7 +185,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 		boolean oldIsAbstract = isAbstract;
 		isAbstract = newIsAbstract;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0, oldIsAbstract, isAbstract));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldIsAbstract, isAbstract));
 	}
 
 	/**
@@ -199,7 +208,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 		boolean oldIsTop = isTop;
 		isTop = newIsTop;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1, oldIsTop, isTop));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldIsTop, isTop));
 	}
 
 	/**
@@ -210,7 +219,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public EList<RelDomainNode> getOwnedRelDomainNodes() {
 		if (ownedRelDomainNodes == null) {
-			ownedRelDomainNodes = new EObjectContainmentWithInverseEList<RelDomainNode>(RelDomainNode.class, this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2, RelNodeImpl.REL_NODE_FEATURE_COUNT + 3);
+			ownedRelDomainNodes = new EObjectContainmentWithInverseEList<RelDomainNode>(RelDomainNode.class, this, 4, 4);
 		}
 		return ownedRelDomainNodes;
 	}
@@ -223,7 +232,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public EList<RelInvocationNode> getOwnedRelInvocationNodes() {
 		if (ownedRelInvocationNodes == null) {
-			ownedRelInvocationNodes = new EObjectContainmentWithInverseEList<RelInvocationNode>(RelInvocationNode.class, this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1);
+			ownedRelInvocationNodes = new EObjectContainmentWithInverseEList<RelInvocationNode>(RelInvocationNode.class, this, 5, 2);
 		}
 		return ownedRelInvocationNodes;
 	}
@@ -235,7 +244,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	 */
 	@Override
 	public TxDiagram getOwningTxDiagram() {
-		if (eContainerFeatureID() != (UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4)) return null;
+		if (eContainerFeatureID() != (6)) return null;
 		return (TxDiagram)eInternalContainer();
 	}
 
@@ -245,7 +254,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTxDiagram(TxDiagram newOwningTxDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, 6, msgs);
 		return msgs;
 	}
 
@@ -256,19 +265,19 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	 */
 	@Override
 	public void setOwningTxDiagram(TxDiagram newOwningTxDiagram) {
-		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != (UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4) && newOwningTxDiagram != null)) {
+		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != (6) && newOwningTxDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTxDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTxDiagram != null)
-				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0, TxDiagram.class, msgs);
+				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, 2, TxDiagram.class, msgs);
 			msgs = basicSetOwningTxDiagram(newOwningTxDiagram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4, newOwningTxDiagram, newOwningTxDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, newOwningTxDiagram, newOwningTxDiagram));
 	}
 
 	/**
@@ -278,23 +287,34 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	 */
 	@Override
 	public boolean validateNameIsRequired(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelDiagram::NameIsRequired";
 		try {
 			/**
 			 *
 			 * inv NameIsRequired:
-			 *   let severity : Integer[1] = 'RelDiagram::NameIsRequired'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[1] = name <> null
 			 *       in
-			 *         'RelDiagram::NameIsRequired'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelDiagram_c_c_NameIsRequired);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_DIAGRAM___VALIDATE_NAME_IS_REQUIRED__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -302,13 +322,13 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 			else {
 				final /*@NonInvalid*/ @Nullable String name = this.getName();
 				final /*@NonInvalid*/ boolean result = name != null;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelDiagram_c_c_NameIsRequired, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelDiagram::NameIsRequired", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -319,12 +339,12 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	 */
 	@Override
 	public boolean validateRelPatternNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelDiagram::RelPatternNodeNamesAreUnique";
 		try {
 			/**
 			 *
 			 * inv RelPatternNodeNamesAreUnique:
-			 *   let
-			 *     severity : Integer[1] = 'RelDiagram::RelPatternNodeNamesAreUnique'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -350,13 +370,23 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 			 *               }
 			 *             endif
 			 *       in
-			 *         'RelDiagram::RelPatternNodeNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_DIAGRAM___VALIDATE_REL_PATTERN_NODE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ @NonNull Object symbol_2;
 			if (le) {
 				symbol_2 = ValueUtil.TRUE_VALUE;
@@ -526,13 +556,13 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 				catch (Exception e) {
 					CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_symbol_1, UMLXTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_2;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelDiagram::RelPatternNodeNamesAreUnique", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -544,15 +574,15 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				return isIsAbstract();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				return isIsTop();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				return getOwnedRelDomainNodes();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				return getOwnedRelInvocationNodes();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				return getOwningTxDiagram();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -567,21 +597,21 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				setIsAbstract((Boolean)newValue);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				setIsTop((Boolean)newValue);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				getOwnedRelDomainNodes().clear();
 				getOwnedRelDomainNodes().addAll((Collection<? extends RelDomainNode>)newValue);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				getOwnedRelInvocationNodes().clear();
 				getOwnedRelInvocationNodes().addAll((Collection<? extends RelInvocationNode>)newValue);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				setOwningTxDiagram((TxDiagram)newValue);
 				return;
 		}
@@ -596,19 +626,19 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				setIsTop(IS_TOP_EDEFAULT);
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				getOwnedRelDomainNodes().clear();
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				getOwnedRelInvocationNodes().clear();
 				return;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				setOwningTxDiagram((TxDiagram)null);
 				return;
 		}
@@ -623,18 +653,35 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case 2:
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case 3:
 				return isTop != IS_TOP_EDEFAULT;
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				return ownedRelDomainNodes != null && !ownedRelDomainNodes.isEmpty();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				return ownedRelInvocationNodes != null && !ownedRelInvocationNodes.isEmpty();
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				return getOwningTxDiagram() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case 0:
+				return validateNameIsRequired((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 1:
+				return validateRelPatternNodeNamesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -673,11 +720,11 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelDomainNodes()).basicAdd(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelInvocationNodes()).basicAdd(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTxDiagram((TxDiagram)otherEnd, msgs);
@@ -693,11 +740,11 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
+			case 4:
 				return ((InternalEList<?>)getOwnedRelDomainNodes()).basicRemove(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
+			case 5:
 				return ((InternalEList<?>)getOwnedRelInvocationNodes()).basicRemove(otherEnd, msgs);
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
+			case 6:
 				return basicSetOwningTxDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -711,8 +758,8 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
-				return eInternalContainer().eInverseRemove(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0, TxDiagram.class, msgs);
+			case 6:
+				return eInternalContainer().eInverseRemove(this, 2, TxDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

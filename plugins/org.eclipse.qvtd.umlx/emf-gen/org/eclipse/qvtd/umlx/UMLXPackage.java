@@ -12,6 +12,7 @@ package org.eclipse.qvtd.umlx;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -135,6 +136,26 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelDiagram_OwningTxDiagram();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelDiagram#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Required</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Name Is Required</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelDiagram#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelDiagram__ValidateNameIsRequired__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelDiagram#validateRelPatternNodeNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Rel Pattern Node Names Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Rel Pattern Node Names Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelDiagram#validateRelPatternNodeNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelDiagram__ValidateRelPatternNodeNamesAreUnique__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelDomainNode <em>Rel Domain Node</em>}'.
@@ -287,6 +308,16 @@ public interface UMLXPackage extends EPackage {
 	EReference getRelInvocationNode_ReferredRelDiagram();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelInvocationNode#validateCompatibleEdges(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Edges</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Edges</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelInvocationNode#validateCompatibleEdges(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelInvocationNode__ValidateCompatibleEdges__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelNode <em>Rel Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -384,6 +415,96 @@ public interface UMLXPackage extends EPackage {
 	EReference getRelPatternEdge_Target();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#validateSourceIsEClass(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Source Is EClass</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Source Is EClass</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#validateSourceIsEClass(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternEdge__ValidateSourceIsEClass__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#validateSourceIsClassNode(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Source Is Class Node</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Source Is Class Node</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#validateSourceIsClassNode(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternEdge__ValidateSourceIsClassNode__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleEAttributePropertyTarget(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible EAttribute Property Target</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible EAttribute Property Target</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleEAttributePropertyTarget(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternEdge__ValidateCompatibleEAttributePropertyTarget__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleSourceMultiplicity(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Source Multiplicity</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Source Multiplicity</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleSourceMultiplicity(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternEdge__ValidateCompatibleSourceMultiplicity__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleEReferencePropertyTarget(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible EReference Property Target</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible EReference Property Target</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleEReferencePropertyTarget(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternEdge__ValidateCompatibleEReferencePropertyTarget__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatiblePropertySource(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Property Source</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Property Source</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatiblePropertySource(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternEdge__ValidateCompatiblePropertySource__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleSourceIndex(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Source Index</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Source Index</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleSourceIndex(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternEdge__ValidateCompatibleSourceIndex__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleRestPropertyTarget(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Rest Property Target</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Rest Property Target</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleRestPropertyTarget(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternEdge__ValidateCompatibleRestPropertyTarget__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleMemberPropertyTarget(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Member Property Target</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Member Property Target</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#validateCompatibleMemberPropertyTarget(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternEdge__ValidateCompatibleMemberPropertyTarget__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelPatternNode <em>Rel Pattern Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -447,6 +568,46 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelPatternNode_OwningRelDomainNode();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternNode#isExpression() <em>Is Expression</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Expression</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternNode#isExpression()
+	 * @generated
+	 */
+	EOperation getRelPatternNode__IsExpression();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternNode#validateAnonIsUnnamed(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Anon Is Unnamed</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Anon Is Unnamed</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternNode#validateAnonIsUnnamed(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternNode__ValidateAnonIsUnnamed__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternNode#validateTypeIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Type Is Required</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Type Is Required</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternNode#validateTypeIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternNode__ValidateTypeIsRequired__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.RelPatternNode#validateEClassifierIsInTypedModel(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate EClassifier Is In Typed Model</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate EClassifier Is In Typed Model</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.RelPatternNode#validateEClassifierIsInTypedModel(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelPatternNode__ValidateEClassifierIsInTypedModel__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.umlx.RelPatternNode#getInvokingRelInvocationEdges <em>Invoking Rel Invocation Edges</em>}'.
@@ -547,6 +708,46 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getTxDiagram_Package();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxDiagram#validateTxQueryNodeNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Tx Query Node Names Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Tx Query Node Names Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#validateTxQueryNodeNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxDiagram__ValidateTxQueryNodeNamesAreUnique__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxDiagram#validateRelDiagramNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Rel Diagram Names Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Rel Diagram Names Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#validateRelDiagramNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxDiagram__ValidateRelDiagramNamesAreUnique__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxDiagram#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Required</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Name Is Required</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxDiagram__ValidateNameIsRequired__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxDiagram#validateTxTypedModelNodeNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Tx Typed Model Node Names Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Tx Typed Model Node Names Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#validateTxTypedModelNodeNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxDiagram__ValidateTxTypedModelNodeNamesAreUnique__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxKeyNode <em>Tx Key Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -588,6 +789,16 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTxKeyNode_ReferredEClass();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxKeyNode#validatePartsAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Parts Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Parts Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxKeyNode#validatePartsAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxKeyNode__ValidatePartsAreUnique__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxPartNode <em>Tx Part Node</em>}'.
@@ -633,6 +844,16 @@ public interface UMLXPackage extends EPackage {
 	EReference getTxPartNode_ReferredEStructuralFeature();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxPartNode#validatePartIsPropertyOfKey(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Part Is Property Of Key</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Part Is Property Of Key</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxPartNode#validatePartIsPropertyOfKey(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxPartNode__ValidatePartIsPropertyOfKey__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxQueryNode <em>Tx Query Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -674,6 +895,36 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTxQueryNode_OwningTxDiagram();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxQueryNode#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Required</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Name Is Required</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxQueryNode#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxQueryNode__ValidateNameIsRequired__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxQueryNode#validateTypeIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Type Is Required</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Type Is Required</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxQueryNode#validateTypeIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxQueryNode__ValidateTypeIsRequired__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxQueryNode#validateParametersAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Parameters Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Parameters Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxQueryNode#validateParametersAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxQueryNode__ValidateParametersAreUnique__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxNode <em>Tx Node</em>}'.
@@ -750,6 +1001,26 @@ public interface UMLXPackage extends EPackage {
 	EReference getTxParameterNode_OwningTxQueryNode();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxParameterNode#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Required</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Name Is Required</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxParameterNode#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxParameterNode__ValidateNameIsRequired__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxParameterNode#validateTypeIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Type Is Required</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Type Is Required</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxParameterNode#validateTypeIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxParameterNode__ValidateTypeIsRequired__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxTypedModelNode <em>Tx Typed Model Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -793,6 +1064,17 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getTxTypedModelNode_Enforce();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getIterates <em>Iterates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Iterates</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#getIterates()
+	 * @see #getTxTypedModelNode()
+	 * @generated
+	 */
+	EReference getTxTypedModelNode_Iterates();
+
+	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -813,6 +1095,26 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTxTypedModelNode_UsedTxPackageNodes();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#validateTxPackageNodePackagesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Tx Package Node Packages Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Tx Package Node Packages Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#validateTxPackageNodePackagesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxTypedModelNode__ValidateTxPackageNodePackagesAreUnique__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Required</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Name Is Required</em>' operation.
+	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#validateNameIsRequired(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTxTypedModelNode__ValidateNameIsRequired__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.UMLXElement <em>Element</em>}'.
@@ -1027,6 +1329,22 @@ public interface UMLXPackage extends EPackage {
 		EReference REL_DIAGRAM__OWNING_TX_DIAGRAM = eINSTANCE.getRelDiagram_OwningTxDiagram();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Name Is Required</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_DIAGRAM___VALIDATE_NAME_IS_REQUIRED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelDiagram__ValidateNameIsRequired__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Rel Pattern Node Names Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_DIAGRAM___VALIDATE_REL_PATTERN_NODE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelDiagram__ValidateRelPatternNodeNamesAreUnique__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl <em>Rel Domain Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1147,6 +1465,14 @@ public interface UMLXPackage extends EPackage {
 		EReference REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM = eINSTANCE.getRelInvocationNode_ReferredRelDiagram();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Edges</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_INVOCATION_NODE___VALIDATE_COMPATIBLE_EDGES__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelInvocationNode__ValidateCompatibleEdges__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelNodeImpl <em>Rel Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1223,6 +1549,78 @@ public interface UMLXPackage extends EPackage {
 		EReference REL_PATTERN_EDGE__TARGET = eINSTANCE.getRelPatternEdge_Target();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Source Is EClass</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_ECLASS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternEdge__ValidateSourceIsEClass__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Source Is Class Node</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_CLASS_NODE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternEdge__ValidateSourceIsClassNode__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible EAttribute Property Target</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EATTRIBUTE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternEdge__ValidateCompatibleEAttributePropertyTarget__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Source Multiplicity</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_MULTIPLICITY__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternEdge__ValidateCompatibleSourceMultiplicity__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible EReference Property Target</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EREFERENCE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternEdge__ValidateCompatibleEReferencePropertyTarget__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Property Source</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_PROPERTY_SOURCE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternEdge__ValidateCompatiblePropertySource__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Source Index</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_INDEX__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternEdge__ValidateCompatibleSourceIndex__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Rest Property Target</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_REST_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternEdge__ValidateCompatibleRestPropertyTarget__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Member Property Target</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_MEMBER_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternEdge__ValidateCompatibleMemberPropertyTarget__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl <em>Rel Pattern Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1271,6 +1669,38 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EReference REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE = eINSTANCE.getRelPatternNode_OwningRelDomainNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Expression</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_NODE___IS_EXPRESSION = eINSTANCE.getRelPatternNode__IsExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Anon Is Unnamed</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_NODE___VALIDATE_ANON_IS_UNNAMED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternNode__ValidateAnonIsUnnamed__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Type Is Required</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_NODE___VALIDATE_TYPE_IS_REQUIRED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternNode__ValidateTypeIsRequired__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate EClassifier Is In Typed Model</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REL_PATTERN_NODE___VALIDATE_ECLASSIFIER_IS_IN_TYPED_MODEL__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelPatternNode__ValidateEClassifierIsInTypedModel__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Invoking Rel Invocation Edges</b></em>' reference list feature.
@@ -1347,6 +1777,38 @@ public interface UMLXPackage extends EPackage {
 		EAttribute TX_DIAGRAM__PACKAGE = eINSTANCE.getTxDiagram_Package();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Tx Query Node Names Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_DIAGRAM___VALIDATE_TX_QUERY_NODE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxDiagram__ValidateTxQueryNodeNamesAreUnique__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Rel Diagram Names Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_DIAGRAM___VALIDATE_REL_DIAGRAM_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxDiagram__ValidateRelDiagramNamesAreUnique__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Name Is Required</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_DIAGRAM___VALIDATE_NAME_IS_REQUIRED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxDiagram__ValidateNameIsRequired__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Tx Typed Model Node Names Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_DIAGRAM___VALIDATE_TX_TYPED_MODEL_NODE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxDiagram__ValidateTxTypedModelNodeNamesAreUnique__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl <em>Tx Key Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1379,6 +1841,14 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TX_KEY_NODE__REFERRED_ECLASS = eINSTANCE.getTxKeyNode_ReferredEClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Parts Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_KEY_NODE___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxKeyNode__ValidatePartsAreUnique__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl <em>Tx Part Node</em>}' class.
@@ -1415,6 +1885,14 @@ public interface UMLXPackage extends EPackage {
 		EReference TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE = eINSTANCE.getTxPartNode_ReferredEStructuralFeature();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Part Is Property Of Key</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_PART_NODE___VALIDATE_PART_IS_PROPERTY_OF_KEY__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxPartNode__ValidatePartIsPropertyOfKey__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxQueryNodeImpl <em>Tx Query Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1447,6 +1925,30 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TX_QUERY_NODE__OWNING_TX_DIAGRAM = eINSTANCE.getTxQueryNode_OwningTxDiagram();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Name Is Required</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_QUERY_NODE___VALIDATE_NAME_IS_REQUIRED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxQueryNode__ValidateNameIsRequired__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Type Is Required</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_QUERY_NODE___VALIDATE_TYPE_IS_REQUIRED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxQueryNode__ValidateTypeIsRequired__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Parameters Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_QUERY_NODE___VALIDATE_PARAMETERS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxQueryNode__ValidateParametersAreUnique__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxNodeImpl <em>Tx Node</em>}' class.
@@ -1511,6 +2013,22 @@ public interface UMLXPackage extends EPackage {
 		EReference TX_PARAMETER_NODE__OWNING_TX_QUERY_NODE = eINSTANCE.getTxParameterNode_OwningTxQueryNode();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Name Is Required</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_PARAMETER_NODE___VALIDATE_NAME_IS_REQUIRED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxParameterNode__ValidateNameIsRequired__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Type Is Required</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_PARAMETER_NODE___VALIDATE_TYPE_IS_REQUIRED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxParameterNode__ValidateTypeIsRequired__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl <em>Tx Typed Model Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1545,6 +2063,14 @@ public interface UMLXPackage extends EPackage {
 		EAttribute TX_TYPED_MODEL_NODE__ENFORCE = eINSTANCE.getTxTypedModelNode_Enforce();
 
 		/**
+		 * The meta object literal for the '<em><b>Iterates</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_TYPED_MODEL_NODE__ITERATES = eINSTANCE.getTxTypedModelNode_Iterates();
+
+		/**
 		 * The meta object literal for the '<em><b>Owning Tx Diagram</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1559,6 +2085,22 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES = eINSTANCE.getTxTypedModelNode_UsedTxPackageNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Tx Package Node Packages Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_TYPED_MODEL_NODE___VALIDATE_TX_PACKAGE_NODE_PACKAGES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxTypedModelNode__ValidateTxPackageNodePackagesAreUnique__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Name Is Required</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TX_TYPED_MODEL_NODE___VALIDATE_NAME_IS_REQUIRED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTxTypedModelNode__ValidateNameIsRequired__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.UMLXElementImpl <em>Element</em>}' class.

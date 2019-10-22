@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -93,6 +94,14 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * @ordered
 	 */
 	public static final int REL_PATTERN_NODE_FEATURE_COUNT = RelNodeImpl.REL_NODE_FEATURE_COUNT + 14;
+	/**
+	 * The number of operations of the '<em>Rel Pattern Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REL_PATTERN_NODE_OPERATION_COUNT = RelNodeImpl.REL_NODE_OPERATION_COUNT + 4;
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -321,7 +330,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 0, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -344,7 +353,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		boolean oldIsMany = isMany;
 		isMany = newIsMany;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1, oldIsMany, isMany));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldIsMany, isMany));
 	}
 
 	/**
@@ -367,7 +376,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		boolean oldIsNullFree = isNullFree;
 		isNullFree = newIsNullFree;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2, oldIsNullFree, isNullFree));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldIsNullFree, isNullFree));
 	}
 
 	/**
@@ -390,7 +399,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		boolean oldIsOrdered = isOrdered;
 		isOrdered = newIsOrdered;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 3, oldIsOrdered, isOrdered));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldIsOrdered, isOrdered));
 	}
 
 	/**
@@ -413,7 +422,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		boolean oldIsRequired = isRequired;
 		isRequired = newIsRequired;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 4, oldIsRequired, isRequired));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldIsRequired, isRequired));
 	}
 
 	/**
@@ -436,7 +445,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		boolean oldIsUnique = isUnique;
 		isUnique = newIsUnique;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 5, oldIsUnique, isUnique));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, oldIsUnique, isUnique));
 	}
 
 	/**
@@ -451,7 +460,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 			referredEClassifier = (EClassifier)eResolveProxy(oldReferredEClassifier);
 			if (referredEClassifier != oldReferredEClassifier) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RelNodeImpl.REL_NODE_FEATURE_COUNT + 6, oldReferredEClassifier, referredEClassifier));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 7, oldReferredEClassifier, referredEClassifier));
 			}
 		}
 		return referredEClassifier;
@@ -476,7 +485,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		EClassifier oldReferredEClassifier = referredEClassifier;
 		referredEClassifier = newReferredEClassifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 6, oldReferredEClassifier, referredEClassifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, 7, oldReferredEClassifier, referredEClassifier));
 	}
 
 	/**
@@ -487,7 +496,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public EList<RelPatternEdge> getIncoming() {
 		if (incoming == null) {
-			incoming = new EObjectWithInverseResolvingEList<RelPatternEdge>(RelPatternEdge.class, this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 7, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4);
+			incoming = new EObjectWithInverseResolvingEList<RelPatternEdge>(RelPatternEdge.class, this, 8, 5);
 		}
 		return incoming;
 	}
@@ -500,7 +509,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public EList<String> getInitExpressionLines() {
 		if (initExpressionLines == null) {
-			initExpressionLines = new EDataTypeUniqueEList<String>(String.class, this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 8);
+			initExpressionLines = new EDataTypeUniqueEList<String>(String.class, this, 9);
 		}
 		return initExpressionLines;
 	}
@@ -525,7 +534,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		boolean oldIsRoot = isRoot;
 		isRoot = newIsRoot;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 11, oldIsRoot, isRoot));
+			eNotify(new ENotificationImpl(this, Notification.SET, 12, oldIsRoot, isRoot));
 	}
 
 	/**
@@ -536,7 +545,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public EList<RelPatternEdge> getOutgoing() {
 		if (outgoing == null) {
-			outgoing = new EObjectWithInverseResolvingEList<RelPatternEdge>(RelPatternEdge.class, this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 12, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2);
+			outgoing = new EObjectWithInverseResolvingEList<RelPatternEdge>(RelPatternEdge.class, this, 13, 3);
 		}
 		return outgoing;
 	}
@@ -548,7 +557,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 */
 	@Override
 	public RelDomainNode getOwningRelDomainNode() {
-		if (eContainerFeatureID() != (RelNodeImpl.REL_NODE_FEATURE_COUNT + 13)) return null;
+		if (eContainerFeatureID() != (14)) return null;
 		return (RelDomainNode)eInternalContainer();
 	}
 
@@ -558,7 +567,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRelDomainNode(RelDomainNode newOwningRelDomainNode, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRelDomainNode, RelNodeImpl.REL_NODE_FEATURE_COUNT + 13, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRelDomainNode, 14, msgs);
 		return msgs;
 	}
 
@@ -569,19 +578,19 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 */
 	@Override
 	public void setOwningRelDomainNode(RelDomainNode newOwningRelDomainNode) {
-		if (newOwningRelDomainNode != eInternalContainer() || (eContainerFeatureID() != (RelNodeImpl.REL_NODE_FEATURE_COUNT + 13) && newOwningRelDomainNode != null)) {
+		if (newOwningRelDomainNode != eInternalContainer() || (eContainerFeatureID() != (14) && newOwningRelDomainNode != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRelDomainNode))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRelDomainNode != null)
-				msgs = ((InternalEObject)newOwningRelDomainNode).eInverseAdd(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2, RelDomainNode.class, msgs);
+				msgs = ((InternalEObject)newOwningRelDomainNode).eInverseAdd(this, 3, RelDomainNode.class, msgs);
 			msgs = basicSetOwningRelDomainNode(newOwningRelDomainNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 13, newOwningRelDomainNode, newOwningRelDomainNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, 14, newOwningRelDomainNode, newOwningRelDomainNode));
 	}
 
 	/**
@@ -619,23 +628,34 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 */
 	@Override
 	public boolean validateAnonIsUnnamed(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternNode::AnonIsUnnamed";
 		try {
 			/**
 			 *
 			 * inv AnonIsUnnamed:
-			 *   let severity : Integer[1] = 'RelPatternNode::AnonIsUnnamed'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[?] = not isExpression() implies isAnon = name = ''
 			 *       in
-			 *         'RelPatternNode::AnonIsUnnamed'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternNode_c_c_AnonIsUnnamed);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_NODE___VALIDATE_ANON_IS_UNNAMED__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -655,13 +675,13 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternNode_c_c_AnonIsUnnamed, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternNode::AnonIsUnnamed", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -672,11 +692,12 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 */
 	@Override
 	public boolean validateTypeIsRequired(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternNode::TypeIsRequired";
 		try {
 			/**
 			 *
 			 * inv TypeIsRequired:
-			 *   let severity : Integer[1] = 'RelPatternNode::TypeIsRequired'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -684,12 +705,22 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 			 *       let
 			 *         result : Boolean[?] = not isExpression() implies referredEClassifier <> null
 			 *       in
-			 *         'RelPatternNode::TypeIsRequired'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternNode_c_c_TypeIsRequired);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_NODE___VALIDATE_TYPE_IS_REQUIRED__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -707,13 +738,13 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternNode_c_c_TypeIsRequired, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternNode::TypeIsRequired", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -724,12 +755,12 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 */
 	@Override
 	public boolean validateEClassifierIsInTypedModel(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternNode::EClassifierIsInTypedModel";
 		try {
 			/**
 			 *
 			 * inv EClassifierIsInTypedModel:
-			 *   let
-			 *     severity : Integer[1] = 'RelPatternNode::EClassifierIsInTypedModel'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -740,13 +771,23 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 			 *         in txTypedModelNode <> null implies
 			 *           txTypedModelNode.usedTxPackageNodes.referredEPackage.eClassifiers->includes(referredEClassifier)
 			 *       in
-			 *         'RelPatternNode::EClassifierIsInTypedModel'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternNode_c_c_EClassifierIsInTypedModel);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_NODE___VALIDATE_ECLASSIFIER_IS_IN_TYPED_MODEL__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -827,13 +868,13 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternNode_c_c_EClassifierIsInTypedModel, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternNode::EClassifierIsInTypedModel", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -845,7 +886,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public EList<RelInvocationEdge> getInvokingRelInvocationEdges() {
 		if (invokingRelInvocationEdges == null) {
-			invokingRelInvocationEdges = new EObjectWithInverseResolvingEList<RelInvocationEdge>(RelInvocationEdge.class, this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 9, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0);
+			invokingRelInvocationEdges = new EObjectWithInverseResolvingEList<RelInvocationEdge>(RelInvocationEdge.class, this, 10, 1);
 		}
 		return invokingRelInvocationEdges;
 	}
@@ -870,7 +911,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		boolean oldIsAnon = isAnon;
 		isAnon = newIsAnon;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 10, oldIsAnon, isAnon));
+			eNotify(new ENotificationImpl(this, Notification.SET, 11, oldIsAnon, isAnon));
 	}
 
 	/**
@@ -914,13 +955,13 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 7:
+			case 8:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncoming()).basicAdd(otherEnd, msgs);
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 9:
+			case 10:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInvokingRelInvocationEdges()).basicAdd(otherEnd, msgs);
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 12:
+			case 13:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 13:
+			case 14:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRelDomainNode((RelDomainNode)otherEnd, msgs);
@@ -936,13 +977,13 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 7:
+			case 8:
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 9:
+			case 10:
 				return ((InternalEList<?>)getInvokingRelInvocationEdges()).basicRemove(otherEnd, msgs);
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 12:
+			case 13:
 				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 13:
+			case 14:
 				return basicSetOwningRelDomainNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -956,8 +997,8 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 13:
-				return eInternalContainer().eInverseRemove(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2, RelDomainNode.class, msgs);
+			case 14:
+				return eInternalContainer().eInverseRemove(this, 3, RelDomainNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -970,34 +1011,34 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getName();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return isIsMany();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return isIsNullFree();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 3:
+			case 4:
 				return isIsOrdered();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 4:
+			case 5:
 				return isIsRequired();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 5:
+			case 6:
 				return isIsUnique();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 6:
+			case 7:
 				if (resolve) return getReferredEClassifier();
 				return basicGetReferredEClassifier();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 7:
+			case 8:
 				return getIncoming();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 8:
+			case 9:
 				return getInitExpressionLines();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 9:
+			case 10:
 				return getInvokingRelInvocationEdges();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 10:
+			case 11:
 				return isIsAnon();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 11:
+			case 12:
 				return isIsRoot();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 12:
+			case 13:
 				return getOutgoing();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 13:
+			case 14:
 				return getOwningRelDomainNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -1012,50 +1053,50 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 0:
+			case 1:
 				setName((String)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setIsMany((Boolean)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				setIsNullFree((Boolean)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 3:
+			case 4:
 				setIsOrdered((Boolean)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 4:
+			case 5:
 				setIsRequired((Boolean)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 5:
+			case 6:
 				setIsUnique((Boolean)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 6:
+			case 7:
 				setReferredEClassifier((EClassifier)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 7:
+			case 8:
 				getIncoming().clear();
 				getIncoming().addAll((Collection<? extends RelPatternEdge>)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 8:
+			case 9:
 				getInitExpressionLines().clear();
 				getInitExpressionLines().addAll((Collection<? extends String>)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 9:
+			case 10:
 				getInvokingRelInvocationEdges().clear();
 				getInvokingRelInvocationEdges().addAll((Collection<? extends RelInvocationEdge>)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 10:
+			case 11:
 				setIsAnon((Boolean)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 11:
+			case 12:
 				setIsRoot((Boolean)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 12:
+			case 13:
 				getOutgoing().clear();
 				getOutgoing().addAll((Collection<? extends RelPatternEdge>)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 13:
+			case 14:
 				setOwningRelDomainNode((RelDomainNode)newValue);
 				return;
 		}
@@ -1070,46 +1111,46 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 0:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setIsMany(IS_MANY_EDEFAULT);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				setIsNullFree(IS_NULL_FREE_EDEFAULT);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 3:
+			case 4:
 				setIsOrdered(IS_ORDERED_EDEFAULT);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 4:
+			case 5:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 5:
+			case 6:
 				setIsUnique(IS_UNIQUE_EDEFAULT);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 6:
+			case 7:
 				setReferredEClassifier((EClassifier)null);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 7:
+			case 8:
 				getIncoming().clear();
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 8:
+			case 9:
 				getInitExpressionLines().clear();
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 9:
+			case 10:
 				getInvokingRelInvocationEdges().clear();
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 10:
+			case 11:
 				setIsAnon(IS_ANON_EDEFAULT);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 11:
+			case 12:
 				setIsRoot(IS_ROOT_EDEFAULT);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 12:
+			case 13:
 				getOutgoing().clear();
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 13:
+			case 14:
 				setOwningRelDomainNode((RelDomainNode)null);
 				return;
 		}
@@ -1124,33 +1165,33 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return isMany != IS_MANY_EDEFAULT;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return isNullFree != IS_NULL_FREE_EDEFAULT;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 3:
+			case 4:
 				return isOrdered != IS_ORDERED_EDEFAULT;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 4:
+			case 5:
 				return isRequired != IS_REQUIRED_EDEFAULT;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 5:
+			case 6:
 				return isUnique != IS_UNIQUE_EDEFAULT;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 6:
+			case 7:
 				return referredEClassifier != null;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 7:
+			case 8:
 				return incoming != null && !incoming.isEmpty();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 8:
+			case 9:
 				return initExpressionLines != null && !initExpressionLines.isEmpty();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 9:
+			case 10:
 				return invokingRelInvocationEdges != null && !invokingRelInvocationEdges.isEmpty();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 10:
+			case 11:
 				return isAnon != IS_ANON_EDEFAULT;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 11:
+			case 12:
 				return isRoot != IS_ROOT_EDEFAULT;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 12:
+			case 13:
 				return outgoing != null && !outgoing.isEmpty();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 13:
+			case 14:
 				return getOwningRelDomainNode() != null;
 		}
 		return super.eIsSet(featureID);
@@ -1165,18 +1206,18 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == UMLXNamedElement.class) {
 			switch (derivedFeatureID) {
-				case RelNodeImpl.REL_NODE_FEATURE_COUNT + 0: return UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0;
+				case 1: return 1;
 				default: return -1;
 			}
 		}
 		if (baseClass == UMLXTypedElement.class) {
 			switch (derivedFeatureID) {
-				case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0;
-				case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1;
-				case RelNodeImpl.REL_NODE_FEATURE_COUNT + 3: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2;
-				case RelNodeImpl.REL_NODE_FEATURE_COUNT + 4: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3;
-				case RelNodeImpl.REL_NODE_FEATURE_COUNT + 5: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4;
-				case RelNodeImpl.REL_NODE_FEATURE_COUNT + 6: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5;
+				case 2: return 2;
+				case 3: return 3;
+				case 4: return 4;
+				case 5: return 5;
+				case 6: return 6;
+				case 7: return 7;
 				default: return -1;
 			}
 		}
@@ -1192,22 +1233,43 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == UMLXNamedElement.class) {
 			switch (baseFeatureID) {
-				case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0: return RelNodeImpl.REL_NODE_FEATURE_COUNT + 0;
+				case 1: return 1;
 				default: return -1;
 			}
 		}
 		if (baseClass == UMLXTypedElement.class) {
 			switch (baseFeatureID) {
-				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0: return RelNodeImpl.REL_NODE_FEATURE_COUNT + 1;
-				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1: return RelNodeImpl.REL_NODE_FEATURE_COUNT + 2;
-				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2: return RelNodeImpl.REL_NODE_FEATURE_COUNT + 3;
-				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3: return RelNodeImpl.REL_NODE_FEATURE_COUNT + 4;
-				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4: return RelNodeImpl.REL_NODE_FEATURE_COUNT + 5;
-				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5: return RelNodeImpl.REL_NODE_FEATURE_COUNT + 6;
+				case 2: return 2;
+				case 3: return 3;
+				case 4: return 4;
+				case 5: return 5;
+				case 6: return 6;
+				case 7: return 7;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case 0:
+				return isExpression();
+			case 1:
+				return validateAnonIsUnnamed((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 2:
+				return validateTypeIsRequired((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 3:
+				return validateEClassifierIsInTypedModel((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

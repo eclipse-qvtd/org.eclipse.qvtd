@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -38,6 +39,7 @@ import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SequenceValue.Accumulator;
@@ -77,6 +79,15 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 * @ordered
 	 */
 	public static final int REL_INVOCATION_NODE_FEATURE_COUNT = RelNodeImpl.REL_NODE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Rel Invocation Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REL_INVOCATION_NODE_OPERATION_COUNT = RelNodeImpl.REL_NODE_OPERATION_COUNT + 1;
 
 	/**
 	 * The default value of the '{@link #isIsThen() <em>Is Then</em>}' attribute.
@@ -157,7 +168,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 		boolean oldIsThen = isThen;
 		isThen = newIsThen;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 0, oldIsThen, isThen));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldIsThen, isThen));
 	}
 
 	/**
@@ -172,7 +183,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 			referredRelDiagram = (RelDiagram)eResolveProxy(oldReferredRelDiagram);
 			if (referredRelDiagram != oldReferredRelDiagram) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RelNodeImpl.REL_NODE_FEATURE_COUNT + 3, oldReferredRelDiagram, referredRelDiagram));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldReferredRelDiagram, referredRelDiagram));
 			}
 		}
 		return referredRelDiagram;
@@ -197,7 +208,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 		RelDiagram oldReferredRelDiagram = referredRelDiagram;
 		referredRelDiagram = newReferredRelDiagram;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 3, oldReferredRelDiagram, referredRelDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldReferredRelDiagram, referredRelDiagram));
 	}
 
 	/**
@@ -207,12 +218,12 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 */
 	@Override
 	public boolean validateCompatibleEdges(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelInvocationNode::CompatibleEdges";
 		try {
 			/**
 			 *
 			 * inv CompatibleEdges:
-			 *   let
-			 *     severity : Integer[1] = 'RelInvocationNode::CompatibleEdges'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -238,13 +249,23 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 			 *                 }
 			 *               endif
 			 *       in
-			 *         'RelInvocationNode::CompatibleEdges'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelInvocationNode_c_c_CompatibleEdges);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_INVOCATION_NODE___VALIDATE_COMPATIBLE_EDGES__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ @NonNull Object symbol_2;
 			if (le) {
 				symbol_2 = ValueUtil.TRUE_VALUE;
@@ -332,13 +353,13 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 					final /*@NonInvalid*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(UMLXTables.TUPLid_, sum_1, status);
 					symbol_1 = symbol_0;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelInvocationNode_c_c_CompatibleEdges, this, (Object)null, diagnostics, context, (Object)null, severity_0, symbol_1, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, symbol_1, UMLXTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_2;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelInvocationNode::CompatibleEdges", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -349,7 +370,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 */
 	@Override
 	public RelDiagram getOwningRelDiagram() {
-		if (eContainerFeatureID() != (RelNodeImpl.REL_NODE_FEATURE_COUNT + 1)) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (RelDiagram)eInternalContainer();
 	}
 
@@ -359,7 +380,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRelDiagram(RelDiagram newOwningRelDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRelDiagram, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRelDiagram, 2, msgs);
 		return msgs;
 	}
 
@@ -370,19 +391,19 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 */
 	@Override
 	public void setOwningRelDiagram(RelDiagram newOwningRelDiagram) {
-		if (newOwningRelDiagram != eInternalContainer() || (eContainerFeatureID() != (RelNodeImpl.REL_NODE_FEATURE_COUNT + 1) && newOwningRelDiagram != null)) {
+		if (newOwningRelDiagram != eInternalContainer() || (eContainerFeatureID() != (2) && newOwningRelDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRelDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRelDiagram != null)
-				msgs = ((InternalEObject)newOwningRelDiagram).eInverseAdd(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3, RelDiagram.class, msgs);
+				msgs = ((InternalEObject)newOwningRelDiagram).eInverseAdd(this, 5, RelDiagram.class, msgs);
 			msgs = basicSetOwningRelDiagram(newOwningRelDiagram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1, newOwningRelDiagram, newOwningRelDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwningRelDiagram, newOwningRelDiagram));
 	}
 
 	/**
@@ -393,7 +414,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	@Override
 	public EList<RelInvocationEdge> getOwnedRelInvocationEdges() {
 		if (ownedRelInvocationEdges == null) {
-			ownedRelInvocationEdges = new EObjectContainmentWithInverseEList<RelInvocationEdge>(RelInvocationEdge.class, this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1);
+			ownedRelInvocationEdges = new EObjectContainmentWithInverseEList<RelInvocationEdge>(RelInvocationEdge.class, this, 3, 2);
 		}
 		return ownedRelInvocationEdges;
 	}
@@ -406,13 +427,13 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return isIsThen();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getOwningRelDiagram();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return getOwnedRelInvocationEdges();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 3:
+			case 4:
 				if (resolve) return getReferredRelDiagram();
 				return basicGetReferredRelDiagram();
 		}
@@ -428,17 +449,17 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 0:
+			case 1:
 				setIsThen((Boolean)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setOwningRelDiagram((RelDiagram)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				getOwnedRelInvocationEdges().clear();
 				getOwnedRelInvocationEdges().addAll((Collection<? extends RelInvocationEdge>)newValue);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 3:
+			case 4:
 				setReferredRelDiagram((RelDiagram)newValue);
 				return;
 		}
@@ -453,16 +474,16 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 0:
+			case 1:
 				setIsThen(IS_THEN_EDEFAULT);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setOwningRelDiagram((RelDiagram)null);
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				getOwnedRelInvocationEdges().clear();
 				return;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 3:
+			case 4:
 				setReferredRelDiagram((RelDiagram)null);
 				return;
 		}
@@ -477,16 +498,31 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return isThen != IS_THEN_EDEFAULT;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getOwningRelDiagram() != null;
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return ownedRelInvocationEdges != null && !ownedRelInvocationEdges.isEmpty();
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 3:
+			case 4:
 				return referredRelDiagram != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case 0:
+				return validateCompatibleEdges((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -523,11 +559,11 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRelDiagram((RelDiagram)otherEnd, msgs);
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelInvocationEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -541,9 +577,9 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return basicSetOwningRelDiagram(null, msgs);
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return ((InternalEList<?>)getOwnedRelInvocationEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -557,8 +593,8 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RelNodeImpl.REL_NODE_FEATURE_COUNT + 1:
-				return eInternalContainer().eInverseRemove(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3, RelDiagram.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 5, RelDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

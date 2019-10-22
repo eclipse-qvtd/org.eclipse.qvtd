@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import java.util.Iterator;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.umlx.TxDiagram;
@@ -58,6 +60,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getDependsOns <em>Depends Ons</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#isEnforce <em>Enforce</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getIterates <em>Iterates</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getUsedTxPackageNodes <em>Used Tx Package Nodes</em>}</li>
  * </ul>
@@ -72,7 +75,16 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TX_TYPED_MODEL_NODE_FEATURE_COUNT = TxNodeImpl.TX_NODE_FEATURE_COUNT + 6;
+	public static final int TX_TYPED_MODEL_NODE_FEATURE_COUNT = TxNodeImpl.TX_NODE_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of operations of the '<em>Tx Typed Model Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TX_TYPED_MODEL_NODE_OPERATION_COUNT = TxNodeImpl.TX_NODE_OPERATION_COUNT + 2;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -145,6 +157,16 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	protected boolean enforce = ENFORCE_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getIterates() <em>Iterates</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIterates()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TxTypedModelNode> iterates;
+
+	/**
 	 * The cached value of the '{@link #getUsedTxPackageNodes() <em>Used Tx Package Nodes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -193,7 +215,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -216,7 +238,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 		boolean oldCheck = check;
 		check = newCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1, oldCheck, check));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldCheck, check));
 	}
 
 	/**
@@ -227,7 +249,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public EList<TxTypedModelNode> getDependsOns() {
 		if (dependsOns == null) {
-			dependsOns = new EObjectResolvingEList<TxTypedModelNode>(TxTypedModelNode.class, this, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2);
+			dependsOns = new EObjectResolvingEList<TxTypedModelNode>(TxTypedModelNode.class, this, 3);
 		}
 		return dependsOns;
 	}
@@ -252,7 +274,20 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 		boolean oldEnforce = enforce;
 		enforce = newEnforce;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 3, oldEnforce, enforce));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldEnforce, enforce));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<TxTypedModelNode> getIterates() {
+		if (iterates == null) {
+			iterates = new EObjectResolvingEList<TxTypedModelNode>(TxTypedModelNode.class, this, 5);
+		}
+		return iterates;
 	}
 
 	/**
@@ -262,7 +297,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 */
 	@Override
 	public TxDiagram getOwningTxDiagram() {
-		if (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 4)) return null;
+		if (eContainerFeatureID() != (6)) return null;
 		return (TxDiagram)eInternalContainer();
 	}
 
@@ -272,7 +307,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTxDiagram(TxDiagram newOwningTxDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, TxNodeImpl.TX_NODE_FEATURE_COUNT + 4, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, 6, msgs);
 		return msgs;
 	}
 
@@ -283,19 +318,19 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 */
 	@Override
 	public void setOwningTxDiagram(TxDiagram newOwningTxDiagram) {
-		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 4) && newOwningTxDiagram != null)) {
+		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != (6) && newOwningTxDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTxDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTxDiagram != null)
-				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4, TxDiagram.class, msgs);
+				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, 6, TxDiagram.class, msgs);
 			msgs = basicSetOwningTxDiagram(newOwningTxDiagram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 4, newOwningTxDiagram, newOwningTxDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, newOwningTxDiagram, newOwningTxDiagram));
 	}
 
 	/**
@@ -306,7 +341,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public EList<TxPackageNode> getUsedTxPackageNodes() {
 		if (usedTxPackageNodes == null) {
-			usedTxPackageNodes = new EObjectResolvingEList<TxPackageNode>(TxPackageNode.class, this, TxNodeImpl.TX_NODE_FEATURE_COUNT + 5);
+			usedTxPackageNodes = new EObjectResolvingEList<TxPackageNode>(TxPackageNode.class, this, 7);
 		}
 		return usedTxPackageNodes;
 	}
@@ -318,12 +353,12 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 */
 	@Override
 	public boolean validateTxPackageNodePackagesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "TxTypedModelNode::TxPackageNodePackagesAreUnique";
 		try {
 			/**
 			 *
 			 * inv TxPackageNodePackagesAreUnique:
-			 *   let
-			 *     severity : Integer[1] = 'TxTypedModelNode::TxPackageNodePackagesAreUnique'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -331,13 +366,23 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 			 *       let
 			 *         result : Boolean[1] = usedTxPackageNodes->isUnique(referredEPackage)
 			 *       in
-			 *         'TxTypedModelNode::TxPackageNodePackagesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxTypedModelNode_c_c_TxPackageNodePackagesAreUnique);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_TYPED_MODEL_NODE___VALIDATE_TX_PACKAGE_NODE_PACKAGES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -370,13 +415,13 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 						accumulator.add(referredEPackage);
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxTypedModelNode_c_c_TxPackageNodePackagesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("TxTypedModelNode::TxPackageNodePackagesAreUnique", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -387,23 +432,34 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 */
 	@Override
 	public boolean validateNameIsRequired(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "TxTypedModelNode::NameIsRequired";
 		try {
 			/**
 			 *
 			 * inv NameIsRequired:
-			 *   let severity : Integer[1] = 'TxTypedModelNode::NameIsRequired'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[1] = name <> null
 			 *       in
-			 *         'TxTypedModelNode::NameIsRequired'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxTypedModelNode_c_c_NameIsRequired);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_TYPED_MODEL_NODE___VALIDATE_NAME_IS_REQUIRED__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -411,13 +467,13 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 			else {
 				final /*@NonInvalid*/ @Nullable String name = this.getName();
 				final /*@NonInvalid*/ boolean result = name != null;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxTypedModelNode_c_c_NameIsRequired, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("TxTypedModelNode::NameIsRequired", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -429,7 +485,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
+			case 6:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTxDiagram((TxDiagram)otherEnd, msgs);
@@ -445,7 +501,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
+			case 6:
 				return basicSetOwningTxDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -459,8 +515,8 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
-				return eInternalContainer().eInverseRemove(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4, TxDiagram.class, msgs);
+			case 6:
+				return eInternalContainer().eInverseRemove(this, 6, TxDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -473,17 +529,19 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getName();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return isCheck();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return getDependsOns();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 3:
+			case 4:
 				return isEnforce();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
+			case 5:
+				return getIterates();
+			case 6:
 				return getOwningTxDiagram();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 5:
+			case 7:
 				return getUsedTxPackageNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -498,23 +556,27 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				setName((String)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setCheck((Boolean)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				getDependsOns().clear();
 				getDependsOns().addAll((Collection<? extends TxTypedModelNode>)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 3:
+			case 4:
 				setEnforce((Boolean)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
+			case 5:
+				getIterates().clear();
+				getIterates().addAll((Collection<? extends TxTypedModelNode>)newValue);
+				return;
+			case 6:
 				setOwningTxDiagram((TxDiagram)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 5:
+			case 7:
 				getUsedTxPackageNodes().clear();
 				getUsedTxPackageNodes().addAll((Collection<? extends TxPackageNode>)newValue);
 				return;
@@ -530,22 +592,25 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setCheck(CHECK_EDEFAULT);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				getDependsOns().clear();
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 3:
+			case 4:
 				setEnforce(ENFORCE_EDEFAULT);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
+			case 5:
+				getIterates().clear();
+				return;
+			case 6:
 				setOwningTxDiagram((TxDiagram)null);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 5:
+			case 7:
 				getUsedTxPackageNodes().clear();
 				return;
 		}
@@ -560,17 +625,19 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return check != CHECK_EDEFAULT;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return dependsOns != null && !dependsOns.isEmpty();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 3:
+			case 4:
 				return enforce != ENFORCE_EDEFAULT;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
+			case 5:
+				return iterates != null && !iterates.isEmpty();
+			case 6:
 				return getOwningTxDiagram() != null;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 5:
+			case 7:
 				return usedTxPackageNodes != null && !usedTxPackageNodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -585,7 +652,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == UMLXNamedElement.class) {
 			switch (derivedFeatureID) {
-				case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0: return UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0;
+				case 1: return 1;
 				default: return -1;
 			}
 		}
@@ -601,11 +668,28 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == UMLXNamedElement.class) {
 			switch (baseFeatureID) {
-				case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0: return TxNodeImpl.TX_NODE_FEATURE_COUNT + 0;
+				case 1: return 1;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case 0:
+				return validateTxPackageNodePackagesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 1:
+				return validateNameIsRequired((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

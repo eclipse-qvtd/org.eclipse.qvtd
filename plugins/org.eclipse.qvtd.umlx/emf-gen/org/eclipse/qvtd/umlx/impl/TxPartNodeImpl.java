@@ -10,11 +10,13 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -74,6 +76,15 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	public static final int TX_PART_NODE_FEATURE_COUNT = TxNodeImpl.TX_NODE_FEATURE_COUNT + 3;
 
 	/**
+	 * The number of operations of the '<em>Tx Part Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TX_PART_NODE_OPERATION_COUNT = TxNodeImpl.TX_NODE_OPERATION_COUNT + 1;
+
+	/**
 	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -129,7 +140,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 */
 	@Override
 	public TxKeyNode getOwningTxKeyNode() {
-		if (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (1)) return null;
 		return (TxKeyNode)eInternalContainer();
 	}
 
@@ -139,7 +150,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTxKeyNode(TxKeyNode newOwningTxKeyNode, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTxKeyNode, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxKeyNode, 1, msgs);
 		return msgs;
 	}
 
@@ -150,19 +161,19 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 */
 	@Override
 	public void setOwningTxKeyNode(TxKeyNode newOwningTxKeyNode) {
-		if (newOwningTxKeyNode != eInternalContainer() || (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 0) && newOwningTxKeyNode != null)) {
+		if (newOwningTxKeyNode != eInternalContainer() || (eContainerFeatureID() != (1) && newOwningTxKeyNode != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTxKeyNode))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTxKeyNode != null)
-				msgs = ((InternalEObject)newOwningTxKeyNode).eInverseAdd(this, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0, TxKeyNode.class, msgs);
+				msgs = ((InternalEObject)newOwningTxKeyNode).eInverseAdd(this, 1, TxKeyNode.class, msgs);
 			msgs = basicSetOwningTxKeyNode(newOwningTxKeyNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0, newOwningTxKeyNode, newOwningTxKeyNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newOwningTxKeyNode, newOwningTxKeyNode));
 	}
 
 	/**
@@ -185,7 +196,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 		boolean oldIsOpposite = isOpposite;
 		isOpposite = newIsOpposite;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1, oldIsOpposite, isOpposite));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldIsOpposite, isOpposite));
 	}
 
 	/**
@@ -200,7 +211,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 			referredEStructuralFeature = (EStructuralFeature)eResolveProxy(oldReferredEStructuralFeature);
 			if (referredEStructuralFeature != oldReferredEStructuralFeature) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2, oldReferredEStructuralFeature, referredEStructuralFeature));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldReferredEStructuralFeature, referredEStructuralFeature));
 			}
 		}
 		return referredEStructuralFeature;
@@ -225,7 +236,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 		EStructuralFeature oldReferredEStructuralFeature = referredEStructuralFeature;
 		referredEStructuralFeature = newReferredEStructuralFeature;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2, oldReferredEStructuralFeature, referredEStructuralFeature));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldReferredEStructuralFeature, referredEStructuralFeature));
 	}
 
 	/**
@@ -235,11 +246,12 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 */
 	@Override
 	public boolean validatePartIsPropertyOfKey(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "TxPartNode::PartIsPropertyOfKey";
 		try {
 			/**
 			 *
 			 * inv PartIsPropertyOfKey:
-			 *   let severity : Integer[1] = 'TxPartNode::PartIsPropertyOfKey'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -249,14 +261,24 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 			 *         ->closure(eSuperTypes)
 			 *         ->includes(referredEStructuralFeature.eContainingClass)
 			 *       in
-			 *         'TxPartNode::PartIsPropertyOfKey'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxPartNode_c_c_PartIsPropertyOfKey);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_PART_NODE___VALIDATE_PART_IS_PROPERTY_OF_KEY__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_1;
 			if (le) {
 				symbol_1 = ValueUtil.TRUE_VALUE;
@@ -306,13 +328,13 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxPartNode_c_c_PartIsPropertyOfKey, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_1 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_1;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("TxPartNode::PartIsPropertyOfKey", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -324,7 +346,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTxKeyNode((TxKeyNode)otherEnd, msgs);
@@ -340,7 +362,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return basicSetOwningTxKeyNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -354,8 +376,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0, TxKeyNode.class, msgs);
+			case 1:
+				return eInternalContainer().eInverseRemove(this, 1, TxKeyNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -368,11 +390,11 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getOwningTxKeyNode();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return isIsOpposite();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				if (resolve) return getReferredEStructuralFeature();
 				return basicGetReferredEStructuralFeature();
 		}
@@ -387,13 +409,13 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				setOwningTxKeyNode((TxKeyNode)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setIsOpposite((Boolean)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				setReferredEStructuralFeature((EStructuralFeature)newValue);
 				return;
 		}
@@ -408,13 +430,13 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				setOwningTxKeyNode((TxKeyNode)null);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setIsOpposite(IS_OPPOSITE_EDEFAULT);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				setReferredEStructuralFeature((EStructuralFeature)null);
 				return;
 		}
@@ -429,14 +451,29 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getOwningTxKeyNode() != null;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return isOpposite != IS_OPPOSITE_EDEFAULT;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return referredEStructuralFeature != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case 0:
+				return validatePartIsPropertyOfKey((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

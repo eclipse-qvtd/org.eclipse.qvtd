@@ -145,6 +145,10 @@ public class UMLX2QVTr extends QVTrelationHelper
 					TypedModel asDependsOn = context.getQVTrElement(TypedModel.class, txDependsOn);
 					asTypedModel.getDependsOn().add(asDependsOn);
 				}
+				for (@NonNull TxTypedModelNode txIterates : UMLXUtil.getIterates(txTypedModelNode)) {
+					TypedModel asIterates = context.getQVTrElement(TypedModel.class, txIterates);
+					asTypedModel.getIterates().add(asIterates);
+				}
 			}
 			//			Collections.sort(allRelationsList, NameUtil.NAMEABLE_COMPARATOR);
 			List<@NonNull Import> qvtrImports = QVTrelationUtil.Internal.getOwnedImportsList(qvtrModel);

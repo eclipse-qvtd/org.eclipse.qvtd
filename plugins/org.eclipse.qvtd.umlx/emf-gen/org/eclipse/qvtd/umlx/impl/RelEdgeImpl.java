@@ -32,6 +32,15 @@ public abstract class RelEdgeImpl extends UMLXElementImpl implements RelEdge {
 	public static final int REL_EDGE_FEATURE_COUNT = UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The number of operations of the '<em>Rel Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REL_EDGE_OPERATION_COUNT = UMLXElementImpl.UMLX_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

@@ -33,6 +33,15 @@ public abstract class RelNodeImpl extends UMLXElementImpl implements RelNode {
 	public static final int REL_NODE_FEATURE_COUNT = UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The number of operations of the '<em>Rel Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REL_NODE_OPERATION_COUNT = UMLXElementImpl.UMLX_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

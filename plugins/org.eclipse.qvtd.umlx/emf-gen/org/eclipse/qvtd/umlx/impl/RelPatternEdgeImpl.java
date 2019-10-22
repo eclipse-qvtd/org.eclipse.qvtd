@@ -10,12 +10,14 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -84,6 +86,15 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * @ordered
 	 */
 	public static final int REL_PATTERN_EDGE_FEATURE_COUNT = RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Rel Pattern Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REL_PATTERN_EDGE_OPERATION_COUNT = RelEdgeImpl.REL_EDGE_OPERATION_COUNT + 9;
 
 	/**
 	 * The cached value of the '{@link #getReferredEStructuralFeature() <em>Referred EStructural Feature</em>}' reference.
@@ -166,7 +177,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			source = (RelPatternNode)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldSource, source));
 			}
 		}
 		return source;
@@ -190,7 +201,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		RelPatternNode oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2, oldSource, newSource);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 3, oldSource, newSource);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -206,14 +217,14 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 12, RelPatternNode.class, msgs);
+				msgs = ((InternalEObject)source).eInverseRemove(this, 13, RelPatternNode.class, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 12, RelPatternNode.class, msgs);
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, 13, RelPatternNode.class, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2, newSource, newSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, newSource, newSource));
 	}
 
 	/**
@@ -236,7 +247,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		int oldSourceIndex = sourceIndex;
 		sourceIndex = newSourceIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 3, oldSourceIndex, sourceIndex));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldSourceIndex, sourceIndex));
 	}
 
 	/**
@@ -246,7 +257,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public RelDomainNode getOwningRelDomainNode() {
-		if (eContainerFeatureID() != (RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (1)) return null;
 		return (RelDomainNode)eInternalContainer();
 	}
 
@@ -256,7 +267,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRelDomainNode(RelDomainNode newOwningRelDomainNode, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRelDomainNode, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRelDomainNode, 1, msgs);
 		return msgs;
 	}
 
@@ -267,19 +278,19 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public void setOwningRelDomainNode(RelDomainNode newOwningRelDomainNode) {
-		if (newOwningRelDomainNode != eInternalContainer() || (eContainerFeatureID() != (RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0) && newOwningRelDomainNode != null)) {
+		if (newOwningRelDomainNode != eInternalContainer() || (eContainerFeatureID() != (1) && newOwningRelDomainNode != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRelDomainNode))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRelDomainNode != null)
-				msgs = ((InternalEObject)newOwningRelDomainNode).eInverseAdd(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1, RelDomainNode.class, msgs);
+				msgs = ((InternalEObject)newOwningRelDomainNode).eInverseAdd(this, 2, RelDomainNode.class, msgs);
 			msgs = basicSetOwningRelDomainNode(newOwningRelDomainNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0, newOwningRelDomainNode, newOwningRelDomainNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, newOwningRelDomainNode, newOwningRelDomainNode));
 	}
 
 	/**
@@ -294,7 +305,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			referredEStructuralFeature = (EStructuralFeature)eResolveProxy(oldReferredEStructuralFeature);
 			if (referredEStructuralFeature != oldReferredEStructuralFeature) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1, oldReferredEStructuralFeature, referredEStructuralFeature));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 2, oldReferredEStructuralFeature, referredEStructuralFeature));
 			}
 		}
 		return referredEStructuralFeature;
@@ -319,7 +330,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		EStructuralFeature oldReferredEStructuralFeature = referredEStructuralFeature;
 		referredEStructuralFeature = newReferredEStructuralFeature;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1, oldReferredEStructuralFeature, referredEStructuralFeature));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldReferredEStructuralFeature, referredEStructuralFeature));
 	}
 
 	/**
@@ -334,7 +345,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			target = (RelPatternNode)eResolveProxy(oldTarget);
 			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 5, oldTarget, target));
 			}
 		}
 		return target;
@@ -358,7 +369,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		RelPatternNode oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4, oldTarget, newTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, 5, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -374,14 +385,14 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 7, RelPatternNode.class, msgs);
+				msgs = ((InternalEObject)target).eInverseRemove(this, 8, RelPatternNode.class, msgs);
 			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 7, RelPatternNode.class, msgs);
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, 8, RelPatternNode.class, msgs);
 			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4, newTarget, newTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, newTarget, newTarget));
 	}
 
 	/**
@@ -391,11 +402,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public boolean validateSourceIsEClass(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternEdge::SourceIsEClass";
 		try {
 			/**
 			 *
 			 * inv SourceIsEClass:
-			 *   let severity : Integer[1] = 'RelPatternEdge::SourceIsEClass'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -404,13 +416,23 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *         result : Boolean[?] = not source.isExpression() implies
 			 *         source.referredEClassifier.oclIsKindOf(ecore::EClassifier)
 			 *       in
-			 *         'RelPatternEdge::SourceIsEClass'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_SourceIsEClass);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_ECLASS__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -438,13 +460,13 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_SourceIsEClass, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternEdge::SourceIsEClass", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -455,24 +477,34 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public boolean validateSourceIsClassNode(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternEdge::SourceIsClassNode";
 		try {
 			/**
 			 *
 			 * inv SourceIsClassNode:
-			 *   let
-			 *     severity : Integer[1] = 'RelPatternEdge::SourceIsClassNode'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[?] = not source.isExpression()
 			 *       in
-			 *         'RelPatternEdge::SourceIsClassNode'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_SourceIsClassNode);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_CLASS_NODE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -482,13 +514,13 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 				final /*@NonInvalid*/ boolean isExpression = source.isExpression();
 				final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(isExpression);
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_SourceIsClassNode, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternEdge::SourceIsClassNode", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -499,12 +531,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public boolean validateCompatibleEAttributePropertyTarget(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternEdge::CompatibleEAttributePropertyTarget";
 		try {
 			/**
 			 *
 			 * inv CompatibleEAttributePropertyTarget:
-			 *   let
-			 *     severity : Integer[1] = 'RelPatternEdge::CompatibleEAttributePropertyTarget'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -513,13 +545,23 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *         referredEStructuralFeature.oclIsKindOf(ecore::EAttribute) and
 			 *         not target.isExpression() implies referredEStructuralFeature.eType = target.referredEClassifier
 			 *       in
-			 *         'RelPatternEdge::CompatibleEAttributePropertyTarget'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatibleEAttributePropertyTarget);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EATTRIBUTE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -579,13 +621,13 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatibleEAttributePropertyTarget, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternEdge::CompatibleEAttributePropertyTarget", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -596,24 +638,34 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public boolean validateCompatibleSourceMultiplicity(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternEdge::CompatibleSourceMultiplicity";
 		try {
 			/**
 			 *
 			 * inv CompatibleSourceMultiplicity:
-			 *   let
-			 *     severity : Integer[1] = 'RelPatternEdge::CompatibleSourceMultiplicity'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[1] = referredEStructuralFeature = null = source.isMany
 			 *       in
-			 *         'RelPatternEdge::CompatibleSourceMultiplicity'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatibleSourceMultiplicity);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_MULTIPLICITY__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -625,13 +677,13 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 				final /*@NonInvalid*/ boolean isMany = source.isIsMany();
 				final /*@NonInvalid*/ boolean result = eq == isMany;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatibleSourceMultiplicity, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternEdge::CompatibleSourceMultiplicity", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -642,12 +694,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public boolean validateCompatibleEReferencePropertyTarget(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternEdge::CompatibleEReferencePropertyTarget";
 		try {
 			/**
 			 *
 			 * inv CompatibleEReferencePropertyTarget:
-			 *   let
-			 *     severity : Integer[1] = 'RelPatternEdge::CompatibleEReferencePropertyTarget'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -661,14 +713,24 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *           sourceEClass->closure(eSuperTypes)
 			 *           ->includes(referredEStructuralFeature.eType)
 			 *       in
-			 *         'RelPatternEdge::CompatibleEReferencePropertyTarget'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatibleEReferencePropertyTarget);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EREFERENCE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_1;
 			if (le) {
 				symbol_1 = ValueUtil.TRUE_VALUE;
@@ -757,13 +819,13 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatibleEReferencePropertyTarget, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_1 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_1;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternEdge::CompatibleEReferencePropertyTarget", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -774,12 +836,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public boolean validateCompatiblePropertySource(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternEdge::CompatiblePropertySource";
 		try {
 			/**
 			 *
 			 * inv CompatiblePropertySource:
-			 *   let
-			 *     severity : Integer[1] = 'RelPatternEdge::CompatiblePropertySource'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -789,14 +851,24 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *         ->closure(eSuperTypes)
 			 *         ->includes(referredEStructuralFeature.eContainingClass)
 			 *       in
-			 *         'RelPatternEdge::CompatiblePropertySource'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertySource);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_PROPERTY_SOURCE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_1;
 			if (le) {
 				symbol_1 = ValueUtil.TRUE_VALUE;
@@ -855,13 +927,13 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertySource, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_1 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_1;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternEdge::CompatiblePropertySource", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -872,24 +944,34 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public boolean validateCompatibleSourceIndex(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternEdge::CompatibleSourceIndex";
 		try {
 			/**
 			 *
 			 * inv CompatibleSourceIndex:
-			 *   let
-			 *     severity : Integer[1] = 'RelPatternEdge::CompatibleSourceIndex'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[1] = referredEStructuralFeature <> null = sourceIndex = 0
 			 *       in
-			 *         'RelPatternEdge::CompatibleSourceIndex'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatibleSourceIndex);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_INDEX__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -901,13 +983,13 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				final /*@NonInvalid*/ @NonNull IntegerValue BOXED_sourceIndex = ValueUtil.integerValueOf(sourceIndex);
 				final /*@NonInvalid*/ boolean eq = BOXED_sourceIndex.equals(UMLXTables.INT_0);
 				final /*@NonInvalid*/ boolean result = ne == eq;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatibleSourceIndex, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternEdge::CompatibleSourceIndex", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -918,12 +1000,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public boolean validateCompatibleRestPropertyTarget(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternEdge::CompatibleRestPropertyTarget";
 		try {
 			/**
 			 *
 			 * inv CompatibleRestPropertyTarget:
-			 *   let
-			 *     severity : Integer[1] = 'RelPatternEdge::CompatibleRestPropertyTarget'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -937,13 +1019,23 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *             targetEClass : ecore::EClass[1] = target.referredEClassifier.oclAsType(ecore::EClass)
 			 *           in sourceEClass = targetEClass and source.isMany = target.isMany and source.isNullFree = target.isNullFree and source.isOrdered = target.isOrdered and source.isUnique = target.isUnique
 			 *       in
-			 *         'RelPatternEdge::CompatibleRestPropertyTarget'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatibleRestPropertyTarget);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_REST_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -1068,13 +1160,13 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatibleRestPropertyTarget, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternEdge::CompatibleRestPropertyTarget", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -1085,12 +1177,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 */
 	@Override
 	public boolean validateCompatibleMemberPropertyTarget(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelPatternEdge::CompatibleMemberPropertyTarget";
 		try {
 			/**
 			 *
 			 * inv CompatibleMemberPropertyTarget:
-			 *   let
-			 *     severity : Integer[1] = 'RelPatternEdge::CompatibleMemberPropertyTarget'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -1108,14 +1200,24 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *             targetEClass->closure(eSuperTypes)
 			 *             ->includes(sourceEClass)
 			 *       in
-			 *         'RelPatternEdge::CompatibleMemberPropertyTarget'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatibleMemberPropertyTarget);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_MEMBER_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
 				symbol_2 = ValueUtil.TRUE_VALUE;
@@ -1266,13 +1368,13 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatibleMemberPropertyTarget, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_2;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelPatternEdge::CompatibleMemberPropertyTarget", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -1300,17 +1402,17 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
+			case 1:
 				return getOwningRelDomainNode();
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
+			case 2:
 				if (resolve) return getReferredEStructuralFeature();
 				return basicGetReferredEStructuralFeature();
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
+			case 3:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 3:
+			case 4:
 				return getSourceIndex();
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4:
+			case 5:
 				if (resolve) return getTarget();
 				return basicGetTarget();
 		}
@@ -1325,19 +1427,19 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
+			case 1:
 				setOwningRelDomainNode((RelDomainNode)newValue);
 				return;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
+			case 2:
 				setReferredEStructuralFeature((EStructuralFeature)newValue);
 				return;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
+			case 3:
 				setSource((RelPatternNode)newValue);
 				return;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 3:
+			case 4:
 				setSourceIndex((Integer)newValue);
 				return;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4:
+			case 5:
 				setTarget((RelPatternNode)newValue);
 				return;
 		}
@@ -1352,19 +1454,19 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
+			case 1:
 				setOwningRelDomainNode((RelDomainNode)null);
 				return;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
+			case 2:
 				setReferredEStructuralFeature((EStructuralFeature)null);
 				return;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
+			case 3:
 				setSource((RelPatternNode)null);
 				return;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 3:
+			case 4:
 				setSourceIndex(SOURCE_INDEX_EDEFAULT);
 				return;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4:
+			case 5:
 				setTarget((RelPatternNode)null);
 				return;
 		}
@@ -1379,18 +1481,49 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
+			case 1:
 				return getOwningRelDomainNode() != null;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
+			case 2:
 				return referredEStructuralFeature != null;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
+			case 3:
 				return source != null;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 3:
+			case 4:
 				return sourceIndex != SOURCE_INDEX_EDEFAULT;
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4:
+			case 5:
 				return target != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case 0:
+				return validateSourceIsEClass((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 1:
+				return validateSourceIsClassNode((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 2:
+				return validateCompatibleEAttributePropertyTarget((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 3:
+				return validateCompatibleSourceMultiplicity((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 4:
+				return validateCompatibleEReferencePropertyTarget((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 5:
+				return validateCompatiblePropertySource((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 6:
+				return validateCompatibleSourceIndex((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 7:
+				return validateCompatibleRestPropertyTarget((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case 8:
+				return validateCompatibleMemberPropertyTarget((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -1410,17 +1543,17 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
+			case 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRelDomainNode((RelDomainNode)otherEnd, msgs);
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
+			case 3:
 				if (source != null)
-					msgs = ((InternalEObject)source).eInverseRemove(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 12, RelPatternNode.class, msgs);
+					msgs = ((InternalEObject)source).eInverseRemove(this, 13, RelPatternNode.class, msgs);
 				return basicSetSource((RelPatternNode)otherEnd, msgs);
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4:
+			case 5:
 				if (target != null)
-					msgs = ((InternalEObject)target).eInverseRemove(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 7, RelPatternNode.class, msgs);
+					msgs = ((InternalEObject)target).eInverseRemove(this, 8, RelPatternNode.class, msgs);
 				return basicSetTarget((RelPatternNode)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -1434,11 +1567,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
+			case 1:
 				return basicSetOwningRelDomainNode(null, msgs);
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
+			case 3:
 				return basicSetSource(null, msgs);
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4:
+			case 5:
 				return basicSetTarget(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -1452,8 +1585,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1, RelDomainNode.class, msgs);
+			case 1:
+				return eInternalContainer().eInverseRemove(this, 2, RelDomainNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

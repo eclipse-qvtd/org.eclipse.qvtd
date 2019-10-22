@@ -51,6 +51,14 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 */
 	public static final int TX_PACKAGE_NODE_FEATURE_COUNT = TxNodeImpl.TX_NODE_FEATURE_COUNT + 3;
 	/**
+	 * The number of operations of the '<em>Tx Package Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TX_PACKAGE_NODE_OPERATION_COUNT = TxNodeImpl.TX_NODE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getImportAliases() <em>Import Aliases</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,7 +103,7 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public EList<String> getImportAliases() {
 		if (importAliases == null) {
-			importAliases = new EDataTypeUniqueEList<String>(String.class, this, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0);
+			importAliases = new EDataTypeUniqueEList<String>(String.class, this, 1);
 		}
 		return importAliases;
 	}
@@ -107,7 +115,7 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 */
 	@Override
 	public TxDiagram getOwningTxDiagram() {
-		if (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 1)) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (TxDiagram)eInternalContainer();
 	}
 
@@ -117,7 +125,7 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTxDiagram(TxDiagram newOwningTxDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, 2, msgs);
 		return msgs;
 	}
 
@@ -128,19 +136,19 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 */
 	@Override
 	public void setOwningTxDiagram(TxDiagram newOwningTxDiagram) {
-		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 1) && newOwningTxDiagram != null)) {
+		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != (2) && newOwningTxDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTxDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTxDiagram != null)
-				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2, TxDiagram.class, msgs);
+				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, 4, TxDiagram.class, msgs);
 			msgs = basicSetOwningTxDiagram(newOwningTxDiagram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1, newOwningTxDiagram, newOwningTxDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwningTxDiagram, newOwningTxDiagram));
 	}
 
 	/**
@@ -155,7 +163,7 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 			referredEPackage = (EPackage)eResolveProxy(oldReferredEPackage);
 			if (referredEPackage != oldReferredEPackage) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2, oldReferredEPackage, referredEPackage));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldReferredEPackage, referredEPackage));
 			}
 		}
 		return referredEPackage;
@@ -180,7 +188,7 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 		EPackage oldReferredEPackage = referredEPackage;
 		referredEPackage = newReferredEPackage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2, oldReferredEPackage, referredEPackage));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldReferredEPackage, referredEPackage));
 	}
 
 	/**
@@ -207,7 +215,7 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTxDiagram((TxDiagram)otherEnd, msgs);
@@ -223,7 +231,7 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return basicSetOwningTxDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -237,8 +245,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
-				return eInternalContainer().eInverseRemove(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2, TxDiagram.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 4, TxDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -251,11 +259,11 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getImportAliases();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getOwningTxDiagram();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				if (resolve) return getReferredEPackage();
 				return basicGetReferredEPackage();
 		}
@@ -271,14 +279,14 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				getImportAliases().clear();
 				getImportAliases().addAll((Collection<? extends String>)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setOwningTxDiagram((TxDiagram)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				setReferredEPackage((EPackage)newValue);
 				return;
 		}
@@ -293,13 +301,13 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				getImportAliases().clear();
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setOwningTxDiagram((TxDiagram)null);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				setReferredEPackage((EPackage)null);
 				return;
 		}
@@ -314,11 +322,11 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return importAliases != null && !importAliases.isEmpty();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getOwningTxDiagram() != null;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return referredEPackage != null;
 		}
 		return super.eIsSet(featureID);

@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getDependsOns <em>Depends Ons</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isEnforce <em>Enforce</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getIterates <em>Iterates</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getUsedTxPackageNodes <em>Used Tx Package Nodes</em>}</li>
  * </ul>
@@ -100,6 +101,21 @@ public interface TxTypedModelNode extends TxNode, UMLXNamedElement {
 	 * @generated
 	 */
 	void setEnforce(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Iterates</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxTypedModelNode}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Iterates</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Iterates</em>' reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_Iterates()
+	 * @generated
+	 */
+	EList<TxTypedModelNode> getIterates();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Tx Diagram</b></em>' container reference.

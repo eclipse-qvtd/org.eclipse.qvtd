@@ -326,6 +326,26 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getRelDiagram__ValidateNameIsRequired__DiagnosticChain_Map() {
+		return relDiagramEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelDiagram__ValidateRelPatternNodeNamesAreUnique__DiagnosticChain_Map() {
+		return relDiagramEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelDomainNode() {
 		return relDomainNodeEClass;
 	}
@@ -466,6 +486,16 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getRelInvocationNode__ValidateCompatibleEdges__DiagnosticChain_Map() {
+		return relInvocationNodeEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelNode() {
 		return relNodeEClass;
 	}
@@ -556,6 +586,96 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getRelPatternEdge__ValidateSourceIsEClass__DiagnosticChain_Map() {
+		return relPatternEdgeEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternEdge__ValidateSourceIsClassNode__DiagnosticChain_Map() {
+		return relPatternEdgeEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternEdge__ValidateCompatibleEAttributePropertyTarget__DiagnosticChain_Map() {
+		return relPatternEdgeEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternEdge__ValidateCompatibleSourceMultiplicity__DiagnosticChain_Map() {
+		return relPatternEdgeEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternEdge__ValidateCompatibleEReferencePropertyTarget__DiagnosticChain_Map() {
+		return relPatternEdgeEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternEdge__ValidateCompatiblePropertySource__DiagnosticChain_Map() {
+		return relPatternEdgeEClass.getEOperations().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternEdge__ValidateCompatibleSourceIndex__DiagnosticChain_Map() {
+		return relPatternEdgeEClass.getEOperations().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternEdge__ValidateCompatibleRestPropertyTarget__DiagnosticChain_Map() {
+		return relPatternEdgeEClass.getEOperations().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternEdge__ValidateCompatibleMemberPropertyTarget__DiagnosticChain_Map() {
+		return relPatternEdgeEClass.getEOperations().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelPatternNode() {
 		return relPatternNodeEClass;
 	}
@@ -608,6 +728,46 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	@Override
 	public EReference getRelPatternNode_OwningRelDomainNode() {
 		return (EReference)relPatternNodeEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternNode__IsExpression() {
+		return relPatternNodeEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternNode__ValidateAnonIsUnnamed__DiagnosticChain_Map() {
+		return relPatternNodeEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternNode__ValidateTypeIsRequired__DiagnosticChain_Map() {
+		return relPatternNodeEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelPatternNode__ValidateEClassifierIsInTypedModel__DiagnosticChain_Map() {
+		return relPatternNodeEClass.getEOperations().get(3);
 	}
 
 	/**
@@ -706,6 +866,46 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getTxDiagram__ValidateTxQueryNodeNamesAreUnique__DiagnosticChain_Map() {
+		return txDiagramEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxDiagram__ValidateRelDiagramNamesAreUnique__DiagnosticChain_Map() {
+		return txDiagramEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxDiagram__ValidateNameIsRequired__DiagnosticChain_Map() {
+		return txDiagramEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxDiagram__ValidateTxTypedModelNodeNamesAreUnique__DiagnosticChain_Map() {
+		return txDiagramEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTxKeyNode() {
 		return txKeyNodeEClass;
 	}
@@ -738,6 +938,16 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	@Override
 	public EReference getTxKeyNode_ReferredEClass() {
 		return (EReference)txKeyNodeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxKeyNode__ValidatePartsAreUnique__DiagnosticChain_Map() {
+		return txKeyNodeEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -786,6 +996,16 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getTxPartNode__ValidatePartIsPropertyOfKey__DiagnosticChain_Map() {
+		return txPartNodeEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTxQueryNode() {
 		return txQueryNodeEClass;
 	}
@@ -818,6 +1038,36 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	@Override
 	public EReference getTxQueryNode_OwningTxDiagram() {
 		return (EReference)txQueryNodeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxQueryNode__ValidateNameIsRequired__DiagnosticChain_Map() {
+		return txQueryNodeEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxQueryNode__ValidateTypeIsRequired__DiagnosticChain_Map() {
+		return txQueryNodeEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxQueryNode__ValidateParametersAreUnique__DiagnosticChain_Map() {
+		return txQueryNodeEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -896,6 +1146,26 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getTxParameterNode__ValidateNameIsRequired__DiagnosticChain_Map() {
+		return txParameterNodeEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxParameterNode__ValidateTypeIsRequired__DiagnosticChain_Map() {
+		return txParameterNodeEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTxTypedModelNode() {
 		return txTypedModelNodeEClass;
 	}
@@ -936,7 +1206,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTxTypedModelNode_OwningTxDiagram() {
+	public EReference getTxTypedModelNode_Iterates() {
 		return (EReference)txTypedModelNodeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -946,8 +1216,38 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTxTypedModelNode_UsedTxPackageNodes() {
+	public EReference getTxTypedModelNode_OwningTxDiagram() {
 		return (EReference)txTypedModelNodeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTxTypedModelNode_UsedTxPackageNodes() {
+		return (EReference)txTypedModelNodeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxTypedModelNode__ValidateTxPackageNodePackagesAreUnique__DiagnosticChain_Map() {
+		return txTypedModelNodeEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTxTypedModelNode__ValidateNameIsRequired__DiagnosticChain_Map() {
+		return txTypedModelNodeEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -1110,106 +1410,136 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 
 		// Create classes and their features
 		relDiagramEClass = createEClass(0);
-		createEAttribute(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0);
-		createEAttribute(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1);
-		createEReference(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2);
-		createEReference(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3);
-		createEReference(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEAttribute(relDiagramEClass, 2);
+		createEAttribute(relDiagramEClass, 3);
+		createEReference(relDiagramEClass, 4);
+		createEReference(relDiagramEClass, 5);
+		createEReference(relDiagramEClass, 6);
+		createEOperation(relDiagramEClass, 0);
+		createEOperation(relDiagramEClass, 1);
 
 		relDomainNodeEClass = createEClass(1);
-		createEAttribute(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 0);
-		createEReference(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1);
-		createEReference(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2);
-		createEReference(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 3);
-		createEReference(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 4);
+		createEAttribute(relDomainNodeEClass, 1);
+		createEReference(relDomainNodeEClass, 2);
+		createEReference(relDomainNodeEClass, 3);
+		createEReference(relDomainNodeEClass, 4);
+		createEReference(relDomainNodeEClass, 5);
 
 		relEdgeEClass = createEClass(2);
 
 		relInvocationEdgeEClass = createEClass(3);
-		createEReference(relInvocationEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0);
-		createEReference(relInvocationEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1);
-		createEReference(relInvocationEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2);
+		createEReference(relInvocationEdgeEClass, 1);
+		createEReference(relInvocationEdgeEClass, 2);
+		createEReference(relInvocationEdgeEClass, 3);
 
 		relInvocationNodeEClass = createEClass(4);
-		createEAttribute(relInvocationNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 0);
-		createEReference(relInvocationNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1);
-		createEReference(relInvocationNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2);
-		createEReference(relInvocationNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 3);
+		createEAttribute(relInvocationNodeEClass, 1);
+		createEReference(relInvocationNodeEClass, 2);
+		createEReference(relInvocationNodeEClass, 3);
+		createEReference(relInvocationNodeEClass, 4);
+		createEOperation(relInvocationNodeEClass, 0);
 
 		relNodeEClass = createEClass(5);
 
 		relPatternEdgeEClass = createEClass(6);
-		createEReference(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0);
-		createEReference(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1);
-		createEReference(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2);
-		createEAttribute(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 3);
-		createEReference(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4);
+		createEReference(relPatternEdgeEClass, 1);
+		createEReference(relPatternEdgeEClass, 2);
+		createEReference(relPatternEdgeEClass, 3);
+		createEAttribute(relPatternEdgeEClass, 4);
+		createEReference(relPatternEdgeEClass, 5);
+		createEOperation(relPatternEdgeEClass, 0);
+		createEOperation(relPatternEdgeEClass, 1);
+		createEOperation(relPatternEdgeEClass, 2);
+		createEOperation(relPatternEdgeEClass, 3);
+		createEOperation(relPatternEdgeEClass, 4);
+		createEOperation(relPatternEdgeEClass, 5);
+		createEOperation(relPatternEdgeEClass, 6);
+		createEOperation(relPatternEdgeEClass, 7);
+		createEOperation(relPatternEdgeEClass, 8);
 
 		relPatternNodeEClass = createEClass(7);
-		createEReference(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 7);
-		createEAttribute(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 8);
-		createEReference(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 9);
-		createEAttribute(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 10);
-		createEAttribute(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 11);
-		createEReference(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 12);
-		createEReference(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 13);
+		createEReference(relPatternNodeEClass, 8);
+		createEAttribute(relPatternNodeEClass, 9);
+		createEReference(relPatternNodeEClass, 10);
+		createEAttribute(relPatternNodeEClass, 11);
+		createEAttribute(relPatternNodeEClass, 12);
+		createEReference(relPatternNodeEClass, 13);
+		createEReference(relPatternNodeEClass, 14);
+		createEOperation(relPatternNodeEClass, 0);
+		createEOperation(relPatternNodeEClass, 1);
+		createEOperation(relPatternNodeEClass, 2);
+		createEOperation(relPatternNodeEClass, 3);
 
 		txDiagramEClass = createEClass(8);
-		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0);
-		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1);
-		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2);
-		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3);
-		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4);
-		createEAttribute(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5);
+		createEReference(txDiagramEClass, 2);
+		createEReference(txDiagramEClass, 3);
+		createEReference(txDiagramEClass, 4);
+		createEReference(txDiagramEClass, 5);
+		createEReference(txDiagramEClass, 6);
+		createEAttribute(txDiagramEClass, 7);
+		createEOperation(txDiagramEClass, 0);
+		createEOperation(txDiagramEClass, 1);
+		createEOperation(txDiagramEClass, 2);
+		createEOperation(txDiagramEClass, 3);
 
 		txKeyNodeEClass = createEClass(9);
-		createEReference(txKeyNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0);
-		createEReference(txKeyNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
-		createEReference(txKeyNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2);
+		createEReference(txKeyNodeEClass, 1);
+		createEReference(txKeyNodeEClass, 2);
+		createEReference(txKeyNodeEClass, 3);
+		createEOperation(txKeyNodeEClass, 0);
 
 		txNodeEClass = createEClass(10);
 
 		txPackageNodeEClass = createEClass(11);
-		createEAttribute(txPackageNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0);
-		createEReference(txPackageNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
-		createEReference(txPackageNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2);
+		createEAttribute(txPackageNodeEClass, 1);
+		createEReference(txPackageNodeEClass, 2);
+		createEReference(txPackageNodeEClass, 3);
 
 		txParameterNodeEClass = createEClass(12);
-		createEReference(txParameterNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 7);
+		createEReference(txParameterNodeEClass, 8);
+		createEOperation(txParameterNodeEClass, 0);
+		createEOperation(txParameterNodeEClass, 1);
 
 		txPartNodeEClass = createEClass(13);
-		createEReference(txPartNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0);
-		createEAttribute(txPartNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
-		createEReference(txPartNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2);
+		createEReference(txPartNodeEClass, 1);
+		createEAttribute(txPartNodeEClass, 2);
+		createEReference(txPartNodeEClass, 3);
+		createEOperation(txPartNodeEClass, 0);
 
 		txQueryNodeEClass = createEClass(14);
-		createEAttribute(txQueryNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 7);
-		createEReference(txQueryNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 8);
-		createEReference(txQueryNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 9);
+		createEAttribute(txQueryNodeEClass, 8);
+		createEReference(txQueryNodeEClass, 9);
+		createEReference(txQueryNodeEClass, 10);
+		createEOperation(txQueryNodeEClass, 0);
+		createEOperation(txQueryNodeEClass, 1);
+		createEOperation(txQueryNodeEClass, 2);
 
 		txTypedModelNodeEClass = createEClass(15);
-		createEAttribute(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
-		createEReference(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2);
-		createEAttribute(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 3);
-		createEReference(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 4);
-		createEReference(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 5);
+		createEAttribute(txTypedModelNodeEClass, 2);
+		createEReference(txTypedModelNodeEClass, 3);
+		createEAttribute(txTypedModelNodeEClass, 4);
+		createEReference(txTypedModelNodeEClass, 5);
+		createEReference(txTypedModelNodeEClass, 6);
+		createEReference(txTypedModelNodeEClass, 7);
+		createEOperation(txTypedModelNodeEClass, 0);
+		createEOperation(txTypedModelNodeEClass, 1);
 
 		umlxElementEClass = createEClass(16);
 		createEAttribute(umlxElementEClass, 0);
 
 		umlxModelEClass = createEClass(17);
-		createEReference(umlxModelEClass, UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(umlxModelEClass, 1);
 
 		umlxNamedElementEClass = createEClass(18);
-		createEAttribute(umlxNamedElementEClass, UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0);
+		createEAttribute(umlxNamedElementEClass, 1);
 
 		umlxTypedElementEClass = createEClass(19);
-		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0);
-		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1);
-		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2);
-		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3);
-		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4);
-		createEReference(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5);
+		createEAttribute(umlxTypedElementEClass, 2);
+		createEAttribute(umlxTypedElementEClass, 3);
+		createEAttribute(umlxTypedElementEClass, 4);
+		createEAttribute(umlxTypedElementEClass, 5);
+		createEAttribute(umlxTypedElementEClass, 6);
+		createEReference(umlxTypedElementEClass, 7);
 	}
 
 	/**
@@ -1264,7 +1594,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		umlxNamedElementEClass.getESuperTypes().add(this.getUMLXElement());
 		umlxTypedElementEClass.getESuperTypes().add(this.getUMLXNamedElement());
 
-		// Initialize classes and features; add operations and parameters
+		// Initialize classes, features, and operations; add parameters
 		initEClass(relDiagramEClass, RelDiagram.class, "RelDiagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRelDiagram_IsAbstract(), ecorePackage.getEBoolean(), "isAbstract", "false", 1, 1, RelDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRelDiagram_IsTop(), ecorePackage.getEBoolean(), "isTop", "false", 1, 1, RelDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1272,7 +1602,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEReference(getRelDiagram_OwnedRelInvocationNodes(), this.getRelInvocationNode(), this.getRelInvocationNode_OwningRelDiagram(), "ownedRelInvocationNodes", null, 0, -1, RelDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelDiagram_OwningTxDiagram(), this.getTxDiagram(), this.getTxDiagram_OwnedRelDiagrams(), "owningTxDiagram", null, 1, 1, RelDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(relDiagramEClass, ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getRelDiagram__ValidateNameIsRequired__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1281,7 +1611,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relDiagramEClass, ecorePackage.getEBoolean(), "validateRelPatternNodeNamesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelDiagram__ValidateRelPatternNodeNamesAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRelPatternNodeNamesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1310,7 +1640,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEReference(getRelInvocationNode_OwnedRelInvocationEdges(), this.getRelInvocationEdge(), this.getRelInvocationEdge_OwningRelInvocationNode(), "ownedRelInvocationEdges", null, 0, -1, RelInvocationNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelInvocationNode_ReferredRelDiagram(), this.getRelDiagram(), null, "referredRelDiagram", null, 1, 1, RelInvocationNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(relInvocationNodeEClass, ecorePackage.getEBoolean(), "validateCompatibleEdges", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelInvocationNode__ValidateCompatibleEdges__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleEdges", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1328,7 +1658,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEAttribute(getRelPatternEdge_SourceIndex(), ecorePackage.getEInt(), "sourceIndex", null, 1, 1, RelPatternEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelPatternEdge_Target(), this.getRelPatternNode(), this.getRelPatternNode_Incoming(), "target", null, 1, 1, RelPatternEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(relPatternEdgeEClass, ecorePackage.getEBoolean(), "validateSourceIsEClass", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternEdge__ValidateSourceIsEClass__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSourceIsEClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1337,7 +1667,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternEdgeEClass, ecorePackage.getEBoolean(), "validateSourceIsClassNode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternEdge__ValidateSourceIsClassNode__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSourceIsClassNode", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1346,7 +1676,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternEdgeEClass, ecorePackage.getEBoolean(), "validateCompatibleEAttributePropertyTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternEdge__ValidateCompatibleEAttributePropertyTarget__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleEAttributePropertyTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1355,7 +1685,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternEdgeEClass, ecorePackage.getEBoolean(), "validateCompatibleSourceMultiplicity", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternEdge__ValidateCompatibleSourceMultiplicity__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleSourceMultiplicity", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1364,7 +1694,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternEdgeEClass, ecorePackage.getEBoolean(), "validateCompatibleEReferencePropertyTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternEdge__ValidateCompatibleEReferencePropertyTarget__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleEReferencePropertyTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1373,7 +1703,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternEdgeEClass, ecorePackage.getEBoolean(), "validateCompatiblePropertySource", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternEdge__ValidateCompatiblePropertySource__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatiblePropertySource", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1382,7 +1712,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternEdgeEClass, ecorePackage.getEBoolean(), "validateCompatibleSourceIndex", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternEdge__ValidateCompatibleSourceIndex__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleSourceIndex", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1391,7 +1721,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternEdgeEClass, ecorePackage.getEBoolean(), "validateCompatibleRestPropertyTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternEdge__ValidateCompatibleRestPropertyTarget__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleRestPropertyTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1400,7 +1730,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternEdgeEClass, ecorePackage.getEBoolean(), "validateCompatibleMemberPropertyTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternEdge__ValidateCompatibleMemberPropertyTarget__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleMemberPropertyTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1418,9 +1748,9 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEReference(getRelPatternNode_Outgoing(), this.getRelPatternEdge(), this.getRelPatternEdge_Source(), "outgoing", null, 0, -1, RelPatternNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelPatternNode_OwningRelDomainNode(), this.getRelDomainNode(), this.getRelDomainNode_OwnedRelPatternNodes(), "owningRelDomainNode", null, 1, 1, RelPatternNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(relPatternNodeEClass, ecorePackage.getEBooleanObject(), "isExpression", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getRelPatternNode__IsExpression(), ecorePackage.getEBooleanObject(), "isExpression", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternNodeEClass, ecorePackage.getEBoolean(), "validateAnonIsUnnamed", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternNode__ValidateAnonIsUnnamed__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateAnonIsUnnamed", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1429,7 +1759,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternNodeEClass, ecorePackage.getEBoolean(), "validateTypeIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternNode__ValidateTypeIsRequired__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTypeIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1438,7 +1768,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(relPatternNodeEClass, ecorePackage.getEBoolean(), "validateEClassifierIsInTypedModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelPatternNode__ValidateEClassifierIsInTypedModel__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateEClassifierIsInTypedModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1455,7 +1785,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEReference(getTxDiagram_OwnedTxTypedModelNodes(), this.getTxTypedModelNode(), this.getTxTypedModelNode_OwningTxDiagram(), "ownedTxTypedModelNodes", null, 0, -1, TxDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTxDiagram_Package(), ecorePackage.getEString(), "package", null, 0, 1, TxDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(txDiagramEClass, ecorePackage.getEBoolean(), "validateTxQueryNodeNamesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxDiagram__ValidateTxQueryNodeNamesAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTxQueryNodeNamesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1464,7 +1794,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(txDiagramEClass, ecorePackage.getEBoolean(), "validateRelDiagramNamesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxDiagram__ValidateRelDiagramNamesAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRelDiagramNamesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1473,7 +1803,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(txDiagramEClass, ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxDiagram__ValidateNameIsRequired__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1482,7 +1812,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(txDiagramEClass, ecorePackage.getEBoolean(), "validateTxTypedModelNodeNamesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxDiagram__ValidateTxTypedModelNodeNamesAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTxTypedModelNodeNamesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1496,7 +1826,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEReference(getTxKeyNode_OwningTxDiagram(), this.getTxDiagram(), this.getTxDiagram_OwnedTxKeyNodes(), "owningTxDiagram", null, 1, 1, TxKeyNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxKeyNode_ReferredEClass(), ecorePackage.getEClass(), null, "referredEClass", null, 1, 1, TxKeyNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(txKeyNodeEClass, ecorePackage.getEBoolean(), "validatePartsAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxKeyNode__ValidatePartsAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validatePartsAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1515,7 +1845,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEClass(txParameterNodeEClass, TxParameterNode.class, "TxParameterNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTxParameterNode_OwningTxQueryNode(), this.getTxQueryNode(), this.getTxQueryNode_OwnedTxParameterNodes(), "owningTxQueryNode", null, 1, 1, TxParameterNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(txParameterNodeEClass, ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxParameterNode__ValidateNameIsRequired__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1524,7 +1854,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(txParameterNodeEClass, ecorePackage.getEBoolean(), "validateTypeIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxParameterNode__ValidateTypeIsRequired__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTypeIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1538,7 +1868,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEAttribute(getTxPartNode_IsOpposite(), ecorePackage.getEBoolean(), "isOpposite", "false", 1, 1, TxPartNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxPartNode_ReferredEStructuralFeature(), ecorePackage.getEStructuralFeature(), null, "referredEStructuralFeature", null, 1, 1, TxPartNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(txPartNodeEClass, ecorePackage.getEBoolean(), "validatePartIsPropertyOfKey", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxPartNode__ValidatePartIsPropertyOfKey__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validatePartIsPropertyOfKey", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1552,7 +1882,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEReference(getTxQueryNode_OwnedTxParameterNodes(), this.getTxParameterNode(), this.getTxParameterNode_OwningTxQueryNode(), "ownedTxParameterNodes", null, 1, -1, TxQueryNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxQueryNode_OwningTxDiagram(), this.getTxDiagram(), this.getTxDiagram_OwnedTxQueryNodes(), "owningTxDiagram", null, 1, 1, TxQueryNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(txQueryNodeEClass, ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxQueryNode__ValidateNameIsRequired__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1561,7 +1891,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(txQueryNodeEClass, ecorePackage.getEBoolean(), "validateTypeIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxQueryNode__ValidateTypeIsRequired__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTypeIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1570,7 +1900,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(txQueryNodeEClass, ecorePackage.getEBoolean(), "validateParametersAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxQueryNode__ValidateParametersAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateParametersAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1583,10 +1913,11 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEAttribute(getTxTypedModelNode_Check(), ecorePackage.getEBoolean(), "check", "false", 1, 1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxTypedModelNode_DependsOns(), this.getTxTypedModelNode(), null, "dependsOns", null, 0, -1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTxTypedModelNode_Enforce(), ecorePackage.getEBoolean(), "enforce", "false", 1, 1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTxTypedModelNode_Iterates(), this.getTxTypedModelNode(), null, "iterates", null, 0, -1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxTypedModelNode_OwningTxDiagram(), this.getTxDiagram(), this.getTxDiagram_OwnedTxTypedModelNodes(), "owningTxDiagram", null, 1, 1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxTypedModelNode_UsedTxPackageNodes(), this.getTxPackageNode(), null, "usedTxPackageNodes", null, 0, -1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(txTypedModelNodeEClass, ecorePackage.getEBoolean(), "validateTxPackageNodePackagesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxTypedModelNode__ValidateTxPackageNodePackagesAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTxPackageNodePackagesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1595,7 +1926,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(txTypedModelNodeEClass, ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTxTypedModelNode__ValidateNameIsRequired__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1717,169 +2048,169 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		  (relDiagramEClass.getEOperations().get(0),
+		  (getRelDiagram__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "NameIsRequired"
 		   });
 		addAnnotation
-		  (relDiagramEClass.getEOperations().get(1),
+		  (getRelDiagram__ValidateRelPatternNodeNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "RelPatternNodeNamesAreUnique"
 		   });
 		addAnnotation
-		  (relInvocationNodeEClass.getEOperations().get(0),
+		  (getRelInvocationNode__ValidateCompatibleEdges__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "CompatibleEdges"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(0),
+		  (getRelPatternEdge__ValidateSourceIsEClass__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "SourceIsEClass"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(1),
+		  (getRelPatternEdge__ValidateSourceIsClassNode__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "SourceIsClassNode"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(2),
+		  (getRelPatternEdge__ValidateCompatibleEAttributePropertyTarget__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "CompatibleEAttributePropertyTarget"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(3),
+		  (getRelPatternEdge__ValidateCompatibleSourceMultiplicity__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "CompatibleSourceMultiplicity"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(4),
+		  (getRelPatternEdge__ValidateCompatibleEReferencePropertyTarget__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "CompatibleEReferencePropertyTarget"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(5),
+		  (getRelPatternEdge__ValidateCompatiblePropertySource__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "CompatiblePropertySource"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(6),
+		  (getRelPatternEdge__ValidateCompatibleSourceIndex__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "CompatibleSourceIndex"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(7),
+		  (getRelPatternEdge__ValidateCompatibleRestPropertyTarget__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "CompatibleRestPropertyTarget"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(8),
+		  (getRelPatternEdge__ValidateCompatibleMemberPropertyTarget__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "CompatibleMemberPropertyTarget"
 		   });
 		addAnnotation
-		  (relPatternNodeEClass.getEOperations().get(1),
+		  (getRelPatternNode__ValidateAnonIsUnnamed__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "AnonIsUnnamed"
 		   });
 		addAnnotation
-		  (relPatternNodeEClass.getEOperations().get(2),
+		  (getRelPatternNode__ValidateTypeIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "TypeIsRequired"
 		   });
 		addAnnotation
-		  (relPatternNodeEClass.getEOperations().get(3),
+		  (getRelPatternNode__ValidateEClassifierIsInTypedModel__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "EClassifierIsInTypedModel"
 		   });
 		addAnnotation
-		  (txDiagramEClass.getEOperations().get(0),
+		  (getTxDiagram__ValidateTxQueryNodeNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "TxQueryNodeNamesAreUnique"
 		   });
 		addAnnotation
-		  (txDiagramEClass.getEOperations().get(1),
+		  (getTxDiagram__ValidateRelDiagramNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "RelDiagramNamesAreUnique"
 		   });
 		addAnnotation
-		  (txDiagramEClass.getEOperations().get(2),
+		  (getTxDiagram__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "NameIsRequired"
 		   });
 		addAnnotation
-		  (txDiagramEClass.getEOperations().get(3),
+		  (getTxDiagram__ValidateTxTypedModelNodeNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "TxTypedModelNodeNamesAreUnique"
 		   });
 		addAnnotation
-		  (txKeyNodeEClass.getEOperations().get(0),
+		  (getTxKeyNode__ValidatePartsAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "PartsAreUnique"
 		   });
 		addAnnotation
-		  (txParameterNodeEClass.getEOperations().get(0),
+		  (getTxParameterNode__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "NameIsRequired"
 		   });
 		addAnnotation
-		  (txParameterNodeEClass.getEOperations().get(1),
+		  (getTxParameterNode__ValidateTypeIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "TypeIsRequired"
 		   });
 		addAnnotation
-		  (txPartNodeEClass.getEOperations().get(0),
+		  (getTxPartNode__ValidatePartIsPropertyOfKey__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "PartIsPropertyOfKey"
 		   });
 		addAnnotation
-		  (txQueryNodeEClass.getEOperations().get(0),
+		  (getTxQueryNode__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "NameIsRequired"
 		   });
 		addAnnotation
-		  (txQueryNodeEClass.getEOperations().get(1),
+		  (getTxQueryNode__ValidateTypeIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "TypeIsRequired"
 		   });
 		addAnnotation
-		  (txQueryNodeEClass.getEOperations().get(2),
+		  (getTxQueryNode__ValidateParametersAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "ParametersAreUnique"
 		   });
 		addAnnotation
-		  (txTypedModelNodeEClass.getEOperations().get(0),
+		  (getTxTypedModelNode__ValidateTxPackageNodePackagesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "TxPackageNodePackagesAreUnique"
 		   });
 		addAnnotation
-		  (txTypedModelNodeEClass.getEOperations().get(1),
+		  (getTxTypedModelNode__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "originalName", "NameIsRequired"
@@ -1895,175 +2226,175 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	protected void createPivotAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
 		addAnnotation
-		  (relDiagramEClass.getEOperations().get(0),
+		  (getRelDiagram__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "name <> null"
 		   });
 		addAnnotation
-		  (relDiagramEClass.getEOperations().get(1),
+		  (getRelDiagram__ValidateRelPatternNodeNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "let allNames = ownedRelDomainNodes.ownedRelPatternNodes->select(not isExpression())->select(not isAnon).name in\n\t\tTuple{status : Boolean = allNames->isUnique(n | n),\n\t\t\tmessage : String = let repeatedNames = allNames->select(n | allNames->count(n) > 1)->asSet() in\n\t\t\trepeatedNames->iterate(n; acc:String = \'RelDiagram::RelPatternNodeNamesAreUnique:\' | acc + \' \\\'\' + n + \'\\\'\') + \' are not unique for \' + name\n\t\t}.status"
 		   });
 		addAnnotation
-		  (relInvocationNodeEClass.getEOperations().get(0),
+		  (getRelInvocationNode__ValidateCompatibleEdges__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\tlet expectedNodes = referredRelDiagram.ownedRelDomainNodes.ownedRelPatternNodes->select(isRoot)->asSet() in\n\t\t\tlet actualNodes = ownedRelInvocationEdges.referredRelPatternNode->asSet() in\t\t\n\t\t\tTuple{status : Boolean = expectedNodes = actualNodes,\n\t\t\t\tmessage : String = \'RelInvocationNode::CompatibleEdges \' + expectedNodes->size().toString() + \'/\' + expectedNodes->size().toString()\n\t\t\t}.status"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(0),
+		  (getRelPatternEdge__ValidateSourceIsEClass__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\tnot source.isExpression() implies\n\t\t\tsource.referredEClassifier.oclIsKindOf(ecore::EClassifier)"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(1),
+		  (getRelPatternEdge__ValidateSourceIsClassNode__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\tnot source.isExpression()"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(2),
+		  (getRelPatternEdge__ValidateCompatibleEAttributePropertyTarget__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\treferredEStructuralFeature <> null and\n\t\t\treferredEStructuralFeature.oclIsKindOf(ecore::EAttribute) and\n\t\t\tnot target.isExpression() implies\n\t\t\treferredEStructuralFeature.eType = target.referredEClassifier"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(3),
+		  (getRelPatternEdge__ValidateCompatibleSourceMultiplicity__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\t(referredEStructuralFeature = null) = source.isMany"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(4),
+		  (getRelPatternEdge__ValidateCompatibleEReferencePropertyTarget__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\treferredEStructuralFeature <> null and\n\t\t\treferredEStructuralFeature.oclIsKindOf(ecore::EReference) and\n\t\t\tnot target.isExpression() implies\n\t\t\tlet sourceEClass = target.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tsourceEClass->closure(eSuperTypes)->includes(referredEStructuralFeature.eType)"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(5),
+		  (getRelPatternEdge__ValidateCompatiblePropertySource__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\treferredEStructuralFeature <> null implies\n\t\t\tsource.referredEClassifier.oclAsType(ecore::EClass)->closure(eSuperTypes)->includes(referredEStructuralFeature.eContainingClass)"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(6),
+		  (getRelPatternEdge__ValidateCompatibleSourceIndex__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\t(referredEStructuralFeature <> null) = (sourceIndex = 0)"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(7),
+		  (getRelPatternEdge__ValidateCompatibleRestPropertyTarget__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\treferredEStructuralFeature = null and\n\t\t\tsourceIndex < 0 and\n\t\t\tnot target.isExpression() implies\n\t\t\tlet sourceEClass = source.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tlet targetEClass = target.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tsourceEClass = targetEClass and\n\t\t\tsource.isMany = target.isMany and\n\t\t\tsource.isNullFree = target.isNullFree and\n\t\t\tsource.isOrdered = target.isOrdered and\n\t\t\tsource.isUnique = target.isUnique"
 		   });
 		addAnnotation
-		  (relPatternEdgeEClass.getEOperations().get(8),
+		  (getRelPatternEdge__ValidateCompatibleMemberPropertyTarget__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\t\treferredEStructuralFeature = null and\n\t\t\tsourceIndex > 0 and\n\t\t\tnot target.isExpression() implies\n\t\t\tlet sourceEClass = source.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tlet targetEClass = target.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tsourceEClass->closure(eSuperTypes)->includes(targetEClass) or targetEClass->closure(eSuperTypes)->includes(sourceEClass)"
 		   });
 		addAnnotation
-		  (relPatternNodeEClass.getEOperations().get(0),
+		  (getRelPatternNode__IsExpression(),
 		   source,
 		   new String[] {
 			   "body", "name = null and initExpressionLines->notEmpty()"
 		   });
 		addAnnotation
-		  (relPatternNodeEClass.getEOperations().get(1),
+		  (getRelPatternNode__ValidateAnonIsUnnamed__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\tnot isExpression() implies\n\t\tisAnon = (name = \'\')"
 		   });
 		addAnnotation
-		  (relPatternNodeEClass.getEOperations().get(2),
+		  (getRelPatternNode__ValidateTypeIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\tnot isExpression() implies\n\t\treferredEClassifier <> null"
 		   });
 		addAnnotation
-		  (relPatternNodeEClass.getEOperations().get(3),
+		  (getRelPatternNode__ValidateEClassifierIsInTypedModel__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "\n\t\tnot isExpression() implies\n\t\tlet txTypedModelNode = owningRelDomainNode.referredTxTypedModelNode in\n\t\ttxTypedModelNode <> null implies\n\t\ttxTypedModelNode.usedTxPackageNodes.referredEPackage.eClassifiers->includes(referredEClassifier)"
 		   });
 		addAnnotation
-		  (txDiagramEClass.getEOperations().get(0),
+		  (getTxDiagram__ValidateTxQueryNodeNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "ownedTxQueryNodes->isUnique(name)"
 		   });
 		addAnnotation
-		  (txDiagramEClass.getEOperations().get(1),
+		  (getTxDiagram__ValidateRelDiagramNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "ownedRelDiagrams->isUnique(name)"
 		   });
 		addAnnotation
-		  (txDiagramEClass.getEOperations().get(2),
+		  (getTxDiagram__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "name <> null"
 		   });
 		addAnnotation
-		  (txDiagramEClass.getEOperations().get(3),
+		  (getTxDiagram__ValidateTxTypedModelNodeNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "ownedTxTypedModelNodes->isUnique(name)"
 		   });
 		addAnnotation
-		  (txKeyNodeEClass.getEOperations().get(0),
+		  (getTxKeyNode__ValidatePartsAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "ownedTxPartNodes->isUnique(referredEStructuralFeature)"
 		   });
 		addAnnotation
-		  (txParameterNodeEClass.getEOperations().get(0),
+		  (getTxParameterNode__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "name <> null"
 		   });
 		addAnnotation
-		  (txParameterNodeEClass.getEOperations().get(1),
+		  (getTxParameterNode__ValidateTypeIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "referredEClassifier <> null"
 		   });
 		addAnnotation
-		  (txPartNodeEClass.getEOperations().get(0),
+		  (getTxPartNode__ValidatePartIsPropertyOfKey__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "owningTxKeyNode.referredEClass.oclAsType(ecore::EClass)->closure(eSuperTypes)->includes(referredEStructuralFeature.eContainingClass)"
 		   });
 		addAnnotation
-		  (txQueryNodeEClass.getEOperations().get(0),
+		  (getTxQueryNode__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "name <> null"
 		   });
 		addAnnotation
-		  (txQueryNodeEClass.getEOperations().get(1),
+		  (getTxQueryNode__ValidateTypeIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "referredEClassifier <> null"
 		   });
 		addAnnotation
-		  (txQueryNodeEClass.getEOperations().get(2),
+		  (getTxQueryNode__ValidateParametersAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "ownedTxParameterNodes->isUnique(name)"
 		   });
 		addAnnotation
-		  (txTypedModelNodeEClass.getEOperations().get(0),
+		  (getTxTypedModelNode__ValidateTxPackageNodePackagesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "usedTxPackageNodes->isUnique(referredEPackage)"
 		   });
 		addAnnotation
-		  (txTypedModelNodeEClass.getEOperations().get(1),
+		  (getTxTypedModelNode__ValidateNameIsRequired__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
 			   "body", "name <> null"

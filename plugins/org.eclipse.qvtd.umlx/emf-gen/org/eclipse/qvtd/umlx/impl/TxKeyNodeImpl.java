@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import java.util.Iterator;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.umlx.TxDiagram;
@@ -69,6 +71,15 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * @ordered
 	 */
 	public static final int TX_KEY_NODE_FEATURE_COUNT = TxNodeImpl.TX_NODE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Tx Key Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TX_KEY_NODE_OPERATION_COUNT = TxNodeImpl.TX_NODE_OPERATION_COUNT + 1;
 
 	/**
 	 * The cached value of the '{@link #getOwnedTxPartNodes() <em>Owned Tx Part Nodes</em>}' containment reference list.
@@ -117,7 +128,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public EList<TxPartNode> getOwnedTxPartNodes() {
 		if (ownedTxPartNodes == null) {
-			ownedTxPartNodes = new EObjectContainmentWithInverseEList<TxPartNode>(TxPartNode.class, this, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0);
+			ownedTxPartNodes = new EObjectContainmentWithInverseEList<TxPartNode>(TxPartNode.class, this, 1, 1);
 		}
 		return ownedTxPartNodes;
 	}
@@ -129,7 +140,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 */
 	@Override
 	public TxDiagram getOwningTxDiagram() {
-		if (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 1)) return null;
+		if (eContainerFeatureID() != (2)) return null;
 		return (TxDiagram)eInternalContainer();
 	}
 
@@ -139,7 +150,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTxDiagram(TxDiagram newOwningTxDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, 2, msgs);
 		return msgs;
 	}
 
@@ -150,19 +161,19 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 */
 	@Override
 	public void setOwningTxDiagram(TxDiagram newOwningTxDiagram) {
-		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 1) && newOwningTxDiagram != null)) {
+		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != (2) && newOwningTxDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTxDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTxDiagram != null)
-				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1, TxDiagram.class, msgs);
+				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, 3, TxDiagram.class, msgs);
 			msgs = basicSetOwningTxDiagram(newOwningTxDiagram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1, newOwningTxDiagram, newOwningTxDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, newOwningTxDiagram, newOwningTxDiagram));
 	}
 
 	/**
@@ -177,7 +188,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 			referredEClass = (EClass)eResolveProxy(oldReferredEClass);
 			if (referredEClass != oldReferredEClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2, oldReferredEClass, referredEClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 3, oldReferredEClass, referredEClass));
 			}
 		}
 		return referredEClass;
@@ -202,7 +213,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 		EClass oldReferredEClass = referredEClass;
 		referredEClass = newReferredEClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2, oldReferredEClass, referredEClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldReferredEClass, referredEClass));
 	}
 
 	/**
@@ -212,11 +223,12 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 */
 	@Override
 	public boolean validatePartsAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "TxKeyNode::PartsAreUnique";
 		try {
 			/**
 			 *
 			 * inv PartsAreUnique:
-			 *   let severity : Integer[1] = 'TxKeyNode::PartsAreUnique'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -224,13 +236,23 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 			 *       let
 			 *         result : Boolean[1] = ownedTxPartNodes->isUnique(referredEStructuralFeature)
 			 *       in
-			 *         'TxKeyNode::PartsAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxKeyNode_c_c_PartsAreUnique);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_KEY_NODE___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -263,13 +285,13 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 						accumulator.add(referredEStructuralFeature);
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxKeyNode_c_c_PartsAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("TxKeyNode::PartsAreUnique", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -282,9 +304,9 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxPartNodes()).basicAdd(otherEnd, msgs);
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTxDiagram((TxDiagram)otherEnd, msgs);
@@ -300,9 +322,9 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return ((InternalEList<?>)getOwnedTxPartNodes()).basicRemove(otherEnd, msgs);
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return basicSetOwningTxDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -316,8 +338,8 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
-				return eInternalContainer().eInverseRemove(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1, TxDiagram.class, msgs);
+			case 2:
+				return eInternalContainer().eInverseRemove(this, 3, TxDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -330,11 +352,11 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getOwnedTxPartNodes();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getOwningTxDiagram();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				if (resolve) return getReferredEClass();
 				return basicGetReferredEClass();
 		}
@@ -350,14 +372,14 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				getOwnedTxPartNodes().clear();
 				getOwnedTxPartNodes().addAll((Collection<? extends TxPartNode>)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setOwningTxDiagram((TxDiagram)newValue);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				setReferredEClass((EClass)newValue);
 				return;
 		}
@@ -372,13 +394,13 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				getOwnedTxPartNodes().clear();
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				setOwningTxDiagram((TxDiagram)null);
 				return;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				setReferredEClass((EClass)null);
 				return;
 		}
@@ -393,14 +415,29 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
+			case 1:
 				return ownedTxPartNodes != null && !ownedTxPartNodes.isEmpty();
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getOwningTxDiagram() != null;
-			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
+			case 3:
 				return referredEClass != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case 0:
+				return validatePartsAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

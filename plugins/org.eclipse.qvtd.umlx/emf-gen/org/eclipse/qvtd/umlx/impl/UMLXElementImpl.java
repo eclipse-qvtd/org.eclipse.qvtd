@@ -45,6 +45,14 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	 */
 	public static final int UMLX_ELEMENT_FEATURE_COUNT = 1;
 	/**
+	 * The number of operations of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UMLX_ELEMENT_OPERATION_COUNT = 0;
+	/**
 	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

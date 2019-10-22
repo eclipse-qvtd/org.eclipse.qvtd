@@ -47,6 +47,14 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	 */
 	public static final int UMLX_MODEL_FEATURE_COUNT = UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 1;
 	/**
+	 * The number of operations of the '<em>Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UMLX_MODEL_OPERATION_COUNT = UMLXElementImpl.UMLX_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnedTxDiagrams() <em>Owned Tx Diagrams</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,7 +90,7 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public EList<TxDiagram> getOwnedTxDiagrams() {
 		if (ownedTxDiagrams == null) {
-			ownedTxDiagrams = new EObjectContainmentEList<TxDiagram>(TxDiagram.class, this, UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0);
+			ownedTxDiagrams = new EObjectContainmentEList<TxDiagram>(TxDiagram.class, this, 1);
 		}
 		return ownedTxDiagrams;
 	}
@@ -95,7 +103,7 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0:
+			case 1:
 				return ((InternalEList<?>)getOwnedTxDiagrams()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -109,7 +117,7 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0:
+			case 1:
 				return getOwnedTxDiagrams();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -124,7 +132,7 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0:
+			case 1:
 				getOwnedTxDiagrams().clear();
 				getOwnedTxDiagrams().addAll((Collection<? extends TxDiagram>)newValue);
 				return;
@@ -140,7 +148,7 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0:
+			case 1:
 				getOwnedTxDiagrams().clear();
 				return;
 		}
@@ -155,7 +163,7 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0:
+			case 1:
 				return ownedTxDiagrams != null && !ownedTxDiagrams.isEmpty();
 		}
 		return super.eIsSet(featureID);
