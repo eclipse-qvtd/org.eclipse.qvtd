@@ -61,9 +61,14 @@ KeyDeclCS: 'key' ownedPathName=PathNameCS '{'
 	)* '}' ';'
 ;
 	
-ModelDeclCS: name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|UnrestrictedName]
+ModelDeclCS: name=UnrestrictedName ':'
+	(metamodelIds+=[pivot::Namespace|UnrestrictedName]
 	| '{' metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')
-	('uses' dependsOn+=[qvtbase::TypedModel|UnrestrictedName] (',' dependsOn+=[qvtbase::TypedModel|UnrestrictedName])*)?;
+	('dependsOn' (dependsOn+=[qvtbase::TypedModel|UnrestrictedName]
+		| ('{' (dependsOn+=[qvtbase::TypedModel|UnrestrictedName] (',' dependsOn+=[qvtbase::TypedModel|UnrestrictedName])*)? '}')))?
+	('iterates' (iterates+=[qvtbase::TypedModel|UnrestrictedName]
+		| ('{' (iterates+=[qvtbase::TypedModel|UnrestrictedName] (',' iterates+=[qvtbase::TypedModel|UnrestrictedName])*)? '}')))?
+;
 
 ObjectTemplateCS: name=UnrestrictedName? ':' ownedType=TypedRefCS
 	('{' (ownedPropertyTemplates+=PropertyTemplateCS (',' ownedPropertyTemplates+=PropertyTemplateCS)*)? '}')?;
@@ -143,11 +148,13 @@ QVTrelationUnrestrictedName:
 	'abstract'
 |	'checkonly'
 |	'default_values'
+|	'dependsOn'
 |	'domain'
 |	'enforce'
 |	'extends'
 |	'implementedby'
 |	'import'
+|	'iterates'
 |	'library'
 |	'key'
 |	'opposite'
@@ -159,7 +166,6 @@ QVTrelationUnrestrictedName:
 |	'replace'
 |	'top'
 |	'transformation'
-|	'uses'
 |	'when'
 |	'where'
 ;
