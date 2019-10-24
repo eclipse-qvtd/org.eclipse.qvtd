@@ -45,6 +45,7 @@
     <genClasses ecoreClass="QVTimperativeCS.ecore#//EntryPointCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/inputTypedModels"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EntryPointCS/outputTypedModels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//EntryPointCS/targetName"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardParameterBindingCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardParameterBindingCS/value"/>

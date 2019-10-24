@@ -49,7 +49,7 @@ DirectionCS: {DirectionCS} name=Identifier?
 	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
 ;
 
-EntryPointCS: {EntryPointCS} isStrict?='strict'? 'entry' (':' firstPass=LOWER ('..' lastPass=LOWER)?)?
+EntryPointCS: {EntryPointCS} isStrict?='strict'? 'entry' (':' targetName=UnrestrictedName)?
 	name=UnrestrictedName
 	('input' inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (',' inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)?
 	('output' outputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (',' outputTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)?
@@ -157,10 +157,12 @@ QVTimperativeUnrestrictedName:
 |	'set'
 |	'strict'
 |	'success'
+|	'target'
 |	'transformation'
 |	'transient'
 |	'uses'
 |	'var'
+|	'via'
 ;
 			
 UnrestrictedName returns ecore::EString:

@@ -24,7 +24,8 @@ inv CompatibleTypeForUncheckedValue: not isCheck implies ownedExpression.type?.c
 --FIXME completeType inv TypedModelContainsType: referredTypedModel.allUsedPackages->includes(type.oclContainer())
 
 context ImperativeTransformation
-inv allRulesAreMappings: rule->forAll(oclIsKindOf(Mapping))
+inv AllRulesAreMappings: rule->forAll(oclIsKindOf(Mapping))
+inv UniqueTargetNames: rule->selectByKind(EntryPoint)->select(targetName <> null)->isUnique(targetName)
 
 --context ImperativeTypedModel
 --def: allUsedPackages : Set(ocl::Package) = usedPackage

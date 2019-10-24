@@ -145,6 +145,7 @@
     <genClasses ecoreClass="QVTschedule.ecore#//LoadingRegion">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//LoadingRegion/loadingPartition"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//LoadingRegion/owningRootRegion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//LoadingRegion/targetName"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//MapLiteralNode"/>
     <genClasses ecoreClass="QVTschedule.ecore#//MapPartEdge">
