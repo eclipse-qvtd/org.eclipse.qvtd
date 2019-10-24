@@ -52,7 +52,7 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
-import org.eclipse.qvtd.compiler.internal.common.TypedModelConfiguration;
+import org.eclipse.qvtd.compiler.internal.common.TargetConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
@@ -1569,19 +1569,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Persons2Names2Families", txFile.getURI());
 		Class<? extends Transformer> txClass;
 		try {
-			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-			TypedModelsConfiguration typedModelsConfiguration1 = new TypedModelsConfiguration();
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.OUTPUT));
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.INTERMEDIATE));
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.INPUT));
-			typedModelsConfigurations.add(typedModelsConfiguration1);
-			TypedModelsConfiguration typedModelsConfiguration2 = new TypedModelsConfiguration();
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("persons", TypedModelConfiguration.Mode.OUTPUT));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.UNUSED));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.UNUSED));
-			typedModelsConfigurations.add(typedModelsConfiguration2);
-			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);
+			txClass = myQVT1.buildTransformation(TargetConfiguration.createTargetConfigurations("families", "persons"), false);
 		}
 		finally {
 			myQVT1.dispose();
@@ -1633,21 +1621,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		URI familiesOutURI = getTestURI("samples/MultiFamiliesChildren-Int.xmi");
 		//
 		MyQVT myQVT = createQVT("Persons2Names2Families", txFile.getURI());
-		ImperativeTransformation asTransformation;
 		try {
-			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-			TypedModelsConfiguration typedModelsConfiguration1 = new TypedModelsConfiguration();
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.OUTPUT));
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.INTERMEDIATE));
-			typedModelsConfiguration1.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.INPUT));
-			typedModelsConfigurations.add(typedModelsConfiguration1);
-			TypedModelsConfiguration typedModelsConfiguration2 = new TypedModelsConfiguration();
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("persons", TypedModelConfiguration.Mode.OUTPUT));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesRight", TypedModelConfiguration.Mode.INPUT));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("names", TypedModelConfiguration.Mode.UNUSED));
-			typedModelsConfiguration2.addTypedModelConfiguration(new TypedModelConfiguration("familiesLeft", TypedModelConfiguration.Mode.UNUSED));
-			typedModelsConfigurations.add(typedModelsConfiguration2);
-			asTransformation = myQVT.compileTransformation(typedModelsConfigurations);
+			ImperativeTransformation asTransformation = myQVT.compileTransformation(TargetConfiguration.createTargetConfigurations("families", "persons"));
 			Map<String, Object> extensionToFactoryMap = myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//

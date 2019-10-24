@@ -14,11 +14,20 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::persons2names2families
 ------------------------------------------------------------------------------------------------------------------					
 
 transformation Persons2Names2Families(
-	persons:PersonsMM dependsOn familiesRight,			-- persons <= familiesRight
-	familiesRight:FamiliesMM dependsOn names,			-- persons+familiesLeft => names => familiesRight
-	names:NamesMM dependsOn {familiesLeft,persons},		-- persons+familiesLeft => names
-	familiesLeft:FamiliesMM dependsOn {}				-- illegal
+	persons:PersonsMM,
+	familiesRight:FamiliesMM,
+	names:NamesMM,
+	familiesLeft:FamiliesMM
 ) { 
+	target persons {				-- persons <= familiesRight
+		input familiesRight;
+		output persons;
+	}
+	target families {				-- persons+familiesLeft => names => familiesRight
+		{input familiesLeft; input persons;}
+		via names;
+		output familiesRight;
+	}
 
 	attribute PREFER_EXISTING_FAMILY_TO_NEW : Boolean[1] = 'true';
 	attribute PREFER_CREATING_PARENT_TO_CHILD : Boolean[1] = 'true';
