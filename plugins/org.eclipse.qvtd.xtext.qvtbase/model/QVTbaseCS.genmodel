@@ -25,6 +25,10 @@
       ecorePackage="QVTbaseCS.ecore#/">
     <genClasses image="false" ecoreClass="QVTbaseCS.ecore#//AbstractTransformationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//AbstractTransformationCS/ownedPathName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//AbstractTransformationCS/ownedTargets"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTbaseCS.ecore#//CompoundTargetElementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//CompoundTargetElementCS/ownedTargetElements"/>
     </genClasses>
     <genClasses ecoreClass="QVTbaseCS.ecore#//JavaClassCS"/>
     <genClasses image="false" ecoreClass="QVTbaseCS.ecore#//JavaImplementationCS">
@@ -33,5 +37,16 @@
     <genClasses ecoreClass="QVTbaseCS.ecore#//QualifiedPackageCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//QualifiedPackageCS/ownedPathName"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="QVTbaseCS.ecore#//SimpleTargetElementCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//SimpleTargetElementCS/typedModel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//SimpleTargetElementCS/iterates"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbaseCS.ecore#//SimpleTargetElementCS/input"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbaseCS.ecore#//SimpleTargetElementCS/output"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbaseCS.ecore#//SimpleTargetElementCS/via"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTbaseCS.ecore#//TargetCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//TargetCS/ownedTargetElements"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTbaseCS.ecore#//TargetElementCS"/>
   </genPackages>
 </genmodel:GenModel>

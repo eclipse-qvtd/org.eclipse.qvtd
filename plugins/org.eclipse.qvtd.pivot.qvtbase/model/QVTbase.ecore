@@ -9,6 +9,12 @@
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-BaseModel" name="BaseModel"
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Model"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-CompoundTargetElement" name="CompoundTargetElement"
+      eSuperTypes="#T-qvtbase-TargetElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-CompoundTargetElement-ownedTargetElements"
+        name="ownedTargetElements" lowerBound="2" upperBound="-1" eType="#T-qvtbase-SimpleTargetElement"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Domain" name="Domain" abstract="true"
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
     <eOperations name="validateNameIsTypedModelName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -231,6 +237,29 @@
         name="transformation" eType="#T-qvtbase-Transformation" transient="true" resolveProxies="false"
         eOpposite="#F-qvtbase-Transformation-rule"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-SimpleTargetElement" name="SimpleTargetElement"
+      eSuperTypes="#T-qvtbase-TargetElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-SimpleTargetElement-typedModel"
+        name="typedModel" lowerBound="1" eType="#T-qvtbase-TypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-SimpleTargetElement-iterates"
+        name="iterates" ordered="false" upperBound="-1" eType="#T-qvtbase-TypedModel">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-SimpleTargetElement-kind"
+        name="kind" lowerBound="1" eType="#T-qvtbase-TargetElementKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Target" name="Target" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Target-owningTransformation"
+        name="owningTransformation" lowerBound="1" eType="#T-qvtbase-Transformation"
+        transient="true" eOpposite="#F-qvtbase-Transformation-ownedTargets"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Target-ownedTargetElements"
+        name="ownedTargetElements" ordered="false" lowerBound="2" upperBound="-1"
+        eType="#T-qvtbase-TargetElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-TargetElement" name="TargetElement"
+      abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Transformation" name="Transformation"
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class">
     <eOperations name="getFunction" lowerBound="1" eType="#T-qvtbase-Function">
@@ -305,6 +334,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-modelParameter"
         name="modelParameter" upperBound="-1" eType="#T-qvtbase-TypedModel" containment="true"
         eOpposite="#F-qvtbase-TypedModel-transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-ownedTargets"
+        name="ownedTargets" ordered="false" upperBound="-1" eType="#T-qvtbase-Target"
+        containment="true" eOpposite="#F-qvtbase-Target-owningTransformation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-rule"
         name="rule" ordered="false" upperBound="-1" eType="#T-qvtbase-Rule" containment="true"
         eOpposite="#F-qvtbase-Rule-transformation"/>
@@ -379,5 +415,10 @@
         <details key="documentation" value="The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration."/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" xmi:id="T-qvtbase-TargetElementKind" name="TargetElementKind">
+    <eLiterals xmi:id="L-qvtbase-TargetElementKind-INPUT" name="INPUT"/>
+    <eLiterals xmi:id="L-qvtbase-TargetElementKind-VIA" name="VIA"/>
+    <eLiterals xmi:id="L-qvtbase-TargetElementKind-OUTPUT" name="OUTPUT"/>
   </eClassifiers>
 </ecore:EPackage>

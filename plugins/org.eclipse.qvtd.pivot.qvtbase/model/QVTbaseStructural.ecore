@@ -2,6 +2,10 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtbase" nsURI="http://www.eclipse.org/qvt/2015/QVTbase" nsPrefix="qvtb">
   <eClassifiers xsi:type="ecore:EClass" name="BaseModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundTargetElement" eSuperTypes="#//TargetElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTargetElements" lowerBound="2"
+        upperBound="-1" eType="#//SimpleTargetElement" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Domain" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         unsettable="true">
@@ -66,6 +70,24 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="#//Transformation"
         transient="true" resolveProxies="false" eOpposite="#//Transformation/rule"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleTargetElement" eSuperTypes="#//TargetElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" ordered="false"
+        lowerBound="1" eType="#//TypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iterates" ordered="false"
+        upperBound="-1" eType="#//TypedModel">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//TargetElementKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Target" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningTransformation" lowerBound="1"
+        eType="#//Transformation" transient="true" eOpposite="#//Transformation/ownedTargets"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTargetElements" ordered="false"
+        lowerBound="2" upperBound="-1" eType="#//TargetElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetElement" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>
   <eClassifiers xsi:type="ecore:EClass" name="Transformation" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class">
     <eOperations name="getFunction" lowerBound="1" eType="#//Function">
       <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -78,6 +100,15 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelParameter" upperBound="-1"
         eType="#//TypedModel" containment="true" eOpposite="#//TypedModel/transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTargets" ordered="false"
+        upperBound="-1" eType="#//Target" containment="true" eOpposite="#//Target/owningTransformation">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="dependent"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" ordered="false" upperBound="-1"
         eType="#//Rule" containment="true" eOpposite="#//Rule/transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//Transformation">
@@ -131,5 +162,10 @@
         <details key="documentation" value="The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration."/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TargetElementKind">
+    <eLiterals name="INPUT"/>
+    <eLiterals name="VIA"/>
+    <eLiterals name="OUTPUT"/>
   </eClassifiers>
 </ecore:EPackage>

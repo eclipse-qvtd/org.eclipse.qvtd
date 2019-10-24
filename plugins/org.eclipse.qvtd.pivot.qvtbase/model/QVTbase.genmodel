@@ -17,7 +17,15 @@
   <foreignModel>QVTbase.ecore</foreignModel>
   <genPackages prefix="QVTbase" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvtd.qvtbase" fileExtensions="qvtbas" ecorePackage="QVTbase.ecore#P-qvtbase">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTbase.ecore#T-qvtbase-TargetElementKind">
+      <genEnumLiterals ecoreEnumLiteral="QVTbase.ecore#L-qvtbase-TargetElementKind-INPUT"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTbase.ecore#L-qvtbase-TargetElementKind-VIA"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTbase.ecore#L-qvtbase-TargetElementKind-OUTPUT"/>
+    </genEnums>
     <genClasses ecoreClass="QVTbase.ecore#T-qvtbase-BaseModel"/>
+    <genClasses ecoreClass="QVTbase.ecore#T-qvtbase-CompoundTargetElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-CompoundTargetElement-ownedTargetElements"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTbase.ecore#T-qvtbase-Domain">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbase.ecore#F-qvtbase-Domain-isCheckable"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbase.ecore#F-qvtbase-Domain-isEnforceable"/>
@@ -84,9 +92,20 @@
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateOverridingRuleOverridesAllDomains/context"/>
       </genOperations>
     </genClasses>
+    <genClasses ecoreClass="QVTbase.ecore#T-qvtbase-SimpleTargetElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-SimpleTargetElement-typedModel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-SimpleTargetElement-iterates"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbase.ecore#F-qvtbase-SimpleTargetElement-kind"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTbase.ecore#T-qvtbase-Target">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Target-owningTransformation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Target-ownedTargetElements"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTbase.ecore#T-qvtbase-TargetElement"/>
     <genClasses ecoreClass="QVTbase.ecore#T-qvtbase-Transformation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Transformation-ownedTag"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Transformation-modelParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Transformation-ownedTargets"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Transformation-rule"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Transformation-extends"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Transformation-ownedContext"/>

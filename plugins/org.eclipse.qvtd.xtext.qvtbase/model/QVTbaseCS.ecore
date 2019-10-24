@@ -6,6 +6,12 @@
       eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ClassCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTargets" upperBound="-1"
+        eType="#//TargetCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundTargetElementCS" eSuperTypes="#//TargetElementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTargetElements" upperBound="-1"
+        eType="#//SimpleTargetElementCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavaClassCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="JavaImplementationCS" abstract="true"
@@ -16,4 +22,18 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleTargetElementCS" eSuperTypes="#//TargetElementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iterates" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="via" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTargetElements" upperBound="-1"
+        eType="#//TargetElementCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetElementCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS"/>
 </ecore:EPackage>

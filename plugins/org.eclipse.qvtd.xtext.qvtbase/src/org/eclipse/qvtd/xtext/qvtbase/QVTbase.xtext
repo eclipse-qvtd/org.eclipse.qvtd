@@ -43,6 +43,8 @@ ClassCS returns base::ClassCS:
 	StructuredClassCS | DataTypeCS | EnumerationCS
 ;
 
+CompoundTargetElementCS: '{' ownedTargetElements+=SimpleTargetElementCS* '}' ';'? ;
+
 DataTypeCS returns base::DataTypeCS:
 	isPrimitive ?= 'primitive'? 'datatype' name=UnrestrictedName
 	(ownedSignature=TemplateSignatureCS)?
@@ -127,6 +129,11 @@ ReferenceCS returns base::ReferenceCS:
 	)
 ;
 
+SimpleTargetElementCS: (input?='input'|output?='output'|via?='via') typedModel=[qvtbase::TypedModel|UnrestrictedName]
+	('iterates' (iterates+=[qvtbase::TypedModel|UnrestrictedName]
+		| ('{' (iterates+=[qvtbase::TypedModel|UnrestrictedName] (',' iterates+=[qvtbase::TypedModel|UnrestrictedName])*)? '}')))?
+';';
+
 SpecificationCS returns essentialocl::ExpSpecificationCS:
 	ownedExpression=ExpCS | exprString=UNQUOTED_STRING
 ;
@@ -146,6 +153,8 @@ StructuredClassCS returns base::StructuredClassCS:
 	|	';'
 	)
 ;
+
+TargetCS: 'target' name=UnrestrictedName '{' ownedTargetElements+=(SimpleTargetElementCS|CompoundTargetElementCS)* '}' ';'?;
 
 TypedMultiplicityRefCS returns base::TypedRefCS:
 	TypedRefCS (ownedMultiplicity=MultiplicityCS)?

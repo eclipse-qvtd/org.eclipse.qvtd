@@ -102,7 +102,7 @@ ScopeNameCS returns base::PathNameCS:
 	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
 
 TransformationCS:
-	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* ownedProperties+=StructuralFeatureCS* '}';
+	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* ownedTargets+=TargetCS* ownedProperties+=StructuralFeatureCS* '}';
 	
 //Variable := VariableName �:� TypeDeclaration
 UnrealizedVariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedInitExpression=ExpCS)?;
@@ -119,14 +119,19 @@ QVTcoreUnrestrictedName:
 |	'implementedby'
 |	'import'
 |	'imports'
+|	'input'
+|	'iterates'
 |	'map'
+|	'output'
 |	'package'
 |	'query'
 |	'realize'
 |	'refines'
+|	'target'
 |	'transformation'
 |	'transient'
 |	'uses'
+|	'via'
 //|	'where'
 ;
 //|	'creation'
