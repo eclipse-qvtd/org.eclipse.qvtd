@@ -59,6 +59,7 @@ import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.OrderedSetValue.Accumulator;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
@@ -77,6 +78,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedTag <em>Owned Tag</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getModelParameter <em>Model Parameter</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedTargets <em>Owned Targets</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getRule <em>Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedContext <em>Owned Context</em>}</li>
@@ -92,7 +94,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TRANSFORMATION_FEATURE_COUNT = ClassImpl.CLASS_FEATURE_COUNT + 5;
+	public static final int TRANSFORMATION_FEATURE_COUNT = ClassImpl.CLASS_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Transformation</em>' class.
@@ -122,6 +124,16 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @ordered
 	 */
 	protected EList<TypedModel> modelParameter;
+
+	/**
+	 * The cached value of the '{@link #getOwnedTargets() <em>Owned Targets</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedTargets()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Target> ownedTargets;
 
 	/**
 	 * The cached value of the '{@link #getRule() <em>Rule</em>}' containment reference list.
@@ -206,10 +218,23 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 */
 	@Override
+	public EList<Target> getOwnedTargets() {
+		if (ownedTargets == null) {
+			ownedTargets = new EObjectContainmentWithInverseEList<Target>(Target.class, this, ClassImpl.CLASS_FEATURE_COUNT + 2, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+		}
+		return ownedTargets;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<Rule> getRule() {
 		if (rule == null) {
-			rule = new EObjectContainmentWithInverseEList<Rule>(Rule.class, this, ClassImpl.CLASS_FEATURE_COUNT + 2, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
+			rule = new EObjectContainmentWithInverseEList<Rule>(Rule.class, this, ClassImpl.CLASS_FEATURE_COUNT + 3, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 		}
 		return rule;
 	}
@@ -227,7 +252,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			extends_ = (Transformation)eResolveProxy(oldExtends);
 			if (extends_ != oldExtends) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassImpl.CLASS_FEATURE_COUNT + 3, oldExtends, extends_));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassImpl.CLASS_FEATURE_COUNT + 4, oldExtends, extends_));
 			}
 		}
 		return extends_;
@@ -252,7 +277,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		Transformation oldExtends = extends_;
 		extends_ = newExtends;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassImpl.CLASS_FEATURE_COUNT + 3, oldExtends, extends_));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassImpl.CLASS_FEATURE_COUNT + 4, oldExtends, extends_));
 	}
 
 	/**
@@ -274,7 +299,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		Parameter oldOwnedContext = ownedContext;
 		ownedContext = newOwnedContext;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassImpl.CLASS_FEATURE_COUNT + 4, oldOwnedContext, newOwnedContext);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassImpl.CLASS_FEATURE_COUNT + 5, oldOwnedContext, newOwnedContext);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -290,14 +315,14 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		if (newOwnedContext != ownedContext) {
 			NotificationChain msgs = null;
 			if (ownedContext != null)
-				msgs = ((InternalEObject)ownedContext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ClassImpl.CLASS_FEATURE_COUNT + 4), null, msgs);
+				msgs = ((InternalEObject)ownedContext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ClassImpl.CLASS_FEATURE_COUNT + 5), null, msgs);
 			if (newOwnedContext != null)
-				msgs = ((InternalEObject)newOwnedContext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ClassImpl.CLASS_FEATURE_COUNT + 4), null, msgs);
+				msgs = ((InternalEObject)newOwnedContext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ClassImpl.CLASS_FEATURE_COUNT + 5), null, msgs);
 			msgs = basicSetOwnedContext(newOwnedContext, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassImpl.CLASS_FEATURE_COUNT + 4, newOwnedContext, newOwnedContext));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassImpl.CLASS_FEATURE_COUNT + 5, newOwnedContext, newOwnedContext));
 	}
 
 	/**
@@ -322,6 +347,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getModelParameter()).basicAdd(otherEnd, msgs);
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTargets()).basicAdd(otherEnd, msgs);
+			case ClassImpl.CLASS_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRule()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -340,8 +367,10 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getModelParameter()).basicRemove(otherEnd, msgs);
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
+				return ((InternalEList<?>)getOwnedTargets()).basicRemove(otherEnd, msgs);
+			case ClassImpl.CLASS_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getRule()).basicRemove(otherEnd, msgs);
-			case ClassImpl.CLASS_FEATURE_COUNT + 4:
+			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				return basicSetOwnedContext(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -360,11 +389,13 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				return getModelParameter();
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
-				return getRule();
+				return getOwnedTargets();
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
-				if (resolve) return getExtends();
-				return basicGetExtends();
+				return getRule();
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
+				if (resolve) return getExtends();
+			return basicGetExtends();
+			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				return getOwnedContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -381,22 +412,26 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case ClassImpl.CLASS_FEATURE_COUNT + 0:
 				getOwnedTag().clear();
-				getOwnedTag().addAll((Collection<? extends Annotation>)newValue);
-				return;
+			getOwnedTag().addAll((Collection<? extends Annotation>)newValue);
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				getModelParameter().clear();
-				getModelParameter().addAll((Collection<? extends TypedModel>)newValue);
-				return;
+			getModelParameter().addAll((Collection<? extends TypedModel>)newValue);
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
-				getRule().clear();
-				getRule().addAll((Collection<? extends Rule>)newValue);
-				return;
+				getOwnedTargets().clear();
+			getOwnedTargets().addAll((Collection<? extends Target>)newValue);
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
-				setExtends((Transformation)newValue);
-				return;
+				getRule().clear();
+			getRule().addAll((Collection<? extends Rule>)newValue);
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
+				setExtends((Transformation)newValue);
+			return;
+			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				setOwnedContext((Parameter)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -411,19 +446,22 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case ClassImpl.CLASS_FEATURE_COUNT + 0:
 				getOwnedTag().clear();
-				return;
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				getModelParameter().clear();
-				return;
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
-				getRule().clear();
-				return;
+				getOwnedTargets().clear();
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
-				setExtends((Transformation)null);
-				return;
+				getRule().clear();
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
+				setExtends((Transformation)null);
+			return;
+			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				setOwnedContext((Parameter)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -441,10 +479,12 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				return modelParameter != null && !modelParameter.isEmpty();
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
-				return rule != null && !rule.isEmpty();
+				return ownedTargets != null && !ownedTargets.isEmpty();
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
-				return extends_ != null;
+				return rule != null && !rule.isEmpty();
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
+				return extends_ != null;
+			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				return ownedContext != null;
 		}
 		return super.eIsSet(featureID);

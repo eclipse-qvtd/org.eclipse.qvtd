@@ -29,10 +29,13 @@ import org.eclipse.ocl.pivot.PivotTables;
 import org.eclipse.ocl.pivot.TemplateParameters;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.EnumerationId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorEnumeration;
+import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
@@ -79,6 +82,7 @@ public class QVTbaseTables
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Annotation = QVTbaseTables.PACKid_$metamodel$.getClassId("Annotation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTbaseTables.PACKid_$metamodel$.getClassId("Class", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CompoundTargetElement = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("CompoundTargetElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Domain", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Function = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Function", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_FunctionParameter = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("FunctionParameter", 0);
@@ -89,24 +93,32 @@ public class QVTbaseTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Pattern = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Pattern", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Predicate = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Predicate", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Rule", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SimpleTargetElement = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("SimpleTargetElement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Target = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Target", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TargetElement = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TargetElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Transformation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTbaseTables.PACKid_$metamodel$.getClassId("Type", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTbaseTables.PACKid_$metamodel$.getClassId("Variable", 0);
+	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_TargetElementKind = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getEnumerationId("TargetElementKind");
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_1 = ValueUtil.integerValueOf("1");
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_PRIMid_String = TypeId.SEQUENCE.getSpecializedId(TypeId.STRING);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Domain = TypeId.BAG.getSpecializedId(QVTbaseTables.CLSSid_Domain);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_SimpleTargetElement = TypeId.BAG.getSpecializedId(QVTbaseTables.CLSSid_SimpleTargetElement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_TypedModel = TypeId.BAG.getSpecializedId(QVTbaseTables.CLSSid_TypedModel);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Domain = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_Domain);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_Parameter);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Rule = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_Rule);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_SimpleTargetElement = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_SimpleTargetElement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TypedModel = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_TypedModel);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_Package = TypeId.SEQUENCE.getSpecializedId(QVTbaseTables.CLSSid_Package);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Annotation = TypeId.SET.getSpecializedId(QVTbaseTables.CLSSid_Annotation);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(QVTbaseTables.CLSSid_Package);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Predicate = TypeId.SET.getSpecializedId(QVTbaseTables.CLSSid_Predicate);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Rule = TypeId.SET.getSpecializedId(QVTbaseTables.CLSSid_Rule);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Target = TypeId.SET.getSpecializedId(QVTbaseTables.CLSSid_Target);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_TargetElement = TypeId.SET.getSpecializedId(QVTbaseTables.CLSSid_TargetElement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Transformation = TypeId.SET.getSpecializedId(QVTbaseTables.CLSSid_Transformation);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_TypedModel = TypeId.SET.getSpecializedId(QVTbaseTables.CLSSid_TypedModel);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Variable = TypeId.SET.getSpecializedId(QVTbaseTables.CLSSid_Variable);
@@ -140,6 +152,7 @@ public class QVTbaseTables
 		}
 
 		public static final @NonNull EcoreExecutorType _BaseModel = new EcoreExecutorType(QVTbasePackage.Literals.BASE_MODEL, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _CompoundTargetElement = new EcoreExecutorType(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Domain = new EcoreExecutorType(QVTbasePackage.Literals.DOMAIN, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _Function = new EcoreExecutorType(QVTbasePackage.Literals.FUNCTION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _FunctionBody = new EcoreExecutorType(QVTbasePackage.Literals.FUNCTION_BODY, PACKAGE, 0);
@@ -147,11 +160,16 @@ public class QVTbaseTables
 		public static final @NonNull EcoreExecutorType _Pattern = new EcoreExecutorType(QVTbasePackage.Literals.PATTERN, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Predicate = new EcoreExecutorType(QVTbasePackage.Literals.PREDICATE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Rule = new EcoreExecutorType(QVTbasePackage.Literals.RULE, PACKAGE, 0 | ExecutorType.ABSTRACT);
+		public static final @NonNull EcoreExecutorType _SimpleTargetElement = new EcoreExecutorType(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _Target = new EcoreExecutorType(QVTbasePackage.Literals.TARGET, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _TargetElement = new EcoreExecutorType(QVTbasePackage.Literals.TARGET_ELEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
+		public static final @NonNull EcoreExecutorEnumeration _TargetElementKind = new EcoreExecutorEnumeration(QVTbasePackage.Literals.TARGET_ELEMENT_KIND, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Transformation = new EcoreExecutorType(QVTbasePackage.Literals.TRANSFORMATION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _TypedModel = new EcoreExecutorType(QVTbasePackage.Literals.TYPED_MODEL, PACKAGE, 0);
 
 		private static final @NonNull EcoreExecutorType @NonNull [] types = {
 			_BaseModel,
+			_CompoundTargetElement,
 			_Domain,
 			_Function,
 			_FunctionBody,
@@ -159,6 +177,10 @@ public class QVTbaseTables
 			_Pattern,
 			_Predicate,
 			_Rule,
+			_SimpleTargetElement,
+			_Target,
+			_TargetElement,
+			_TargetElementKind,
 			_Transformation,
 			_TypedModel
 		};
@@ -193,6 +215,12 @@ public class QVTbaseTables
 		private static final @NonNull ExecutorFragment _BaseModel__Namespace = new ExecutorFragment(Types._BaseModel, PivotTables.Types._Namespace);
 		private static final @NonNull ExecutorFragment _BaseModel__OclAny = new ExecutorFragment(Types._BaseModel, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _BaseModel__OclElement = new ExecutorFragment(Types._BaseModel, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull ExecutorFragment _CompoundTargetElement__CompoundTargetElement = new ExecutorFragment(Types._CompoundTargetElement, QVTbaseTables.Types._CompoundTargetElement);
+		private static final @NonNull ExecutorFragment _CompoundTargetElement__Element = new ExecutorFragment(Types._CompoundTargetElement, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _CompoundTargetElement__OclAny = new ExecutorFragment(Types._CompoundTargetElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _CompoundTargetElement__OclElement = new ExecutorFragment(Types._CompoundTargetElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _CompoundTargetElement__TargetElement = new ExecutorFragment(Types._CompoundTargetElement, QVTbaseTables.Types._TargetElement);
 
 		private static final @NonNull ExecutorFragment _Domain__Domain = new ExecutorFragment(Types._Domain, QVTbaseTables.Types._Domain);
 		private static final @NonNull ExecutorFragment _Domain__Element = new ExecutorFragment(Types._Domain, PivotTables.Types._Element);
@@ -246,6 +274,29 @@ public class QVTbaseTables
 		private static final @NonNull ExecutorFragment _Rule__OclAny = new ExecutorFragment(Types._Rule, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Rule__OclElement = new ExecutorFragment(Types._Rule, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _Rule__Rule = new ExecutorFragment(Types._Rule, QVTbaseTables.Types._Rule);
+
+		private static final @NonNull ExecutorFragment _SimpleTargetElement__Element = new ExecutorFragment(Types._SimpleTargetElement, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _SimpleTargetElement__OclAny = new ExecutorFragment(Types._SimpleTargetElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _SimpleTargetElement__OclElement = new ExecutorFragment(Types._SimpleTargetElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _SimpleTargetElement__SimpleTargetElement = new ExecutorFragment(Types._SimpleTargetElement, QVTbaseTables.Types._SimpleTargetElement);
+		private static final @NonNull ExecutorFragment _SimpleTargetElement__TargetElement = new ExecutorFragment(Types._SimpleTargetElement, QVTbaseTables.Types._TargetElement);
+
+		private static final @NonNull ExecutorFragment _Target__Element = new ExecutorFragment(Types._Target, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _Target__NamedElement = new ExecutorFragment(Types._Target, PivotTables.Types._NamedElement);
+		private static final @NonNull ExecutorFragment _Target__OclAny = new ExecutorFragment(Types._Target, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _Target__OclElement = new ExecutorFragment(Types._Target, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _Target__Target = new ExecutorFragment(Types._Target, QVTbaseTables.Types._Target);
+
+		private static final @NonNull ExecutorFragment _TargetElement__Element = new ExecutorFragment(Types._TargetElement, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _TargetElement__OclAny = new ExecutorFragment(Types._TargetElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _TargetElement__OclElement = new ExecutorFragment(Types._TargetElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _TargetElement__TargetElement = new ExecutorFragment(Types._TargetElement, QVTbaseTables.Types._TargetElement);
+
+		private static final @NonNull ExecutorFragment _TargetElementKind__OclAny = new ExecutorFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _TargetElementKind__OclElement = new ExecutorFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _TargetElementKind__OclEnumeration = new ExecutorFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclEnumeration);
+		private static final @NonNull ExecutorFragment _TargetElementKind__OclType = new ExecutorFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclType);
+		private static final @NonNull ExecutorFragment _TargetElementKind__TargetElementKind = new ExecutorFragment(Types._TargetElementKind, QVTbaseTables.Types._TargetElementKind);
 
 		private static final @NonNull ExecutorFragment _Transformation__Class = new ExecutorFragment(Types._Transformation, PivotTables.Types._Class);
 		private static final @NonNull ExecutorFragment _Transformation__Element = new ExecutorFragment(Types._Transformation, PivotTables.Types._Element);
@@ -341,6 +392,8 @@ public class QVTbaseTables
 		}
 
 
+		public static final @NonNull ExecutorProperty _CompoundTargetElement__ownedTargetElements = new EcoreExecutorProperty(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS, Types._CompoundTargetElement, 0);
+
 		public static final @NonNull ExecutorProperty _Domain__isCheckable = new EcoreExecutorProperty(QVTbasePackage.Literals.DOMAIN__IS_CHECKABLE, Types._Domain, 0);
 		public static final @NonNull ExecutorProperty _Domain__isEnforceable = new EcoreExecutorProperty(QVTbasePackage.Literals.DOMAIN__IS_ENFORCEABLE, Types._Domain, 1);
 		public static final @NonNull ExecutorProperty _Domain__rule = new EcoreExecutorProperty(QVTbasePackage.Literals.DOMAIN__RULE, Types._Domain, 2);
@@ -360,12 +413,23 @@ public class QVTbaseTables
 		public static final @NonNull ExecutorProperty _Rule__overrides = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__OVERRIDES, Types._Rule, 3);
 		public static final @NonNull ExecutorProperty _Rule__transformation = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, Types._Rule, 4);
 
+		public static final @NonNull ExecutorProperty _SimpleTargetElement__iterates = new EcoreExecutorProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__ITERATES, Types._SimpleTargetElement, 0);
+		public static final @NonNull ExecutorProperty _SimpleTargetElement__kind = new EcoreExecutorProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__KIND, Types._SimpleTargetElement, 1);
+		public static final @NonNull ExecutorProperty _SimpleTargetElement__typedModel = new EcoreExecutorProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__TYPED_MODEL, Types._SimpleTargetElement, 2);
+		public static final @NonNull ExecutorProperty _SimpleTargetElement__CompoundTargetElement__ownedTargetElements = new ExecutorPropertyWithImplementation("CompoundTargetElement", Types._SimpleTargetElement, 3, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS));
+
+		public static final @NonNull ExecutorProperty _Target__ownedTargetElements = new EcoreExecutorProperty(QVTbasePackage.Literals.TARGET__OWNED_TARGET_ELEMENTS, Types._Target, 0);
+		public static final @NonNull ExecutorProperty _Target__owningTransformation = new EcoreExecutorProperty(QVTbasePackage.Literals.TARGET__OWNING_TRANSFORMATION, Types._Target, 1);
+
+		public static final @NonNull ExecutorProperty _TargetElement__Target__ownedTargetElements = new ExecutorPropertyWithImplementation("Target", Types._TargetElement, 0, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TARGET__OWNED_TARGET_ELEMENTS));
+
 		public static final @NonNull ExecutorProperty _Transformation__extends = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS, Types._Transformation, 0);
 		public static final @NonNull ExecutorProperty _Transformation__modelParameter = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__MODEL_PARAMETER, Types._Transformation, 1);
 		public static final @NonNull ExecutorProperty _Transformation__ownedContext = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT, Types._Transformation, 2);
 		public static final @NonNull ExecutorProperty _Transformation__ownedTag = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TAG, Types._Transformation, 3);
-		public static final @NonNull ExecutorProperty _Transformation__rule = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__RULE, Types._Transformation, 4);
-		public static final @NonNull ExecutorProperty _Transformation__extendedBy__extends = new ExecutorPropertyWithImplementation("extendedBy", Types._Transformation, 5, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS));
+		public static final @NonNull ExecutorProperty _Transformation__ownedTargets = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TARGETS, Types._Transformation, 4);
+		public static final @NonNull ExecutorProperty _Transformation__rule = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__RULE, Types._Transformation, 5);
+		public static final @NonNull ExecutorProperty _Transformation__extendedBy__extends = new ExecutorPropertyWithImplementation("extendedBy", Types._Transformation, 6, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS));
 
 		public static final @NonNull ExecutorProperty _TypedModel__dependsOn = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON, Types._TypedModel, 0);
 		public static final @NonNull ExecutorProperty _TypedModel__isPrimitive = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_PRIMITIVE, Types._TypedModel, 1);
@@ -376,8 +440,10 @@ public class QVTbaseTables
 		public static final @NonNull ExecutorProperty _TypedModel__transformation = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, Types._TypedModel, 6);
 		public static final @NonNull ExecutorProperty _TypedModel__usedPackage = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, Types._TypedModel, 7);
 		public static final @NonNull ExecutorProperty _TypedModel__Domain__typedModel = new ExecutorPropertyWithImplementation("Domain", Types._TypedModel, 8, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.DOMAIN__TYPED_MODEL));
-		public static final @NonNull ExecutorProperty _TypedModel__TypedModel__iterates = new ExecutorPropertyWithImplementation("TypedModel", Types._TypedModel, 9, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TYPED_MODEL__ITERATES));
-		public static final @NonNull ExecutorProperty _TypedModel__dependent__dependsOn = new ExecutorPropertyWithImplementation("dependent", Types._TypedModel, 10, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON));
+		public static final @NonNull ExecutorProperty _TypedModel__SimpleTargetElement__iterates = new ExecutorPropertyWithImplementation("SimpleTargetElement", Types._TypedModel, 9, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__ITERATES));
+		public static final @NonNull ExecutorProperty _TypedModel__SimpleTargetElement__typedModel = new ExecutorPropertyWithImplementation("SimpleTargetElement", Types._TypedModel, 10, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__TYPED_MODEL));
+		public static final @NonNull ExecutorProperty _TypedModel__TypedModel__iterates = new ExecutorPropertyWithImplementation("TypedModel", Types._TypedModel, 11, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TYPED_MODEL__ITERATES));
+		public static final @NonNull ExecutorProperty _TypedModel__dependent__dependsOn = new ExecutorPropertyWithImplementation("dependent", Types._TypedModel, 12, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON));
 		static {
 			Init.initEnd();
 		}
@@ -408,6 +474,16 @@ public class QVTbaseTables
 				Fragments._BaseModel__BaseModel /* 6 */
 			};
 		private static final int @NonNull [] __BaseModel = { 1,1,1,1,1,1,1 };
+
+		private static final @NonNull ExecutorFragment @NonNull [] _CompoundTargetElement =
+			{
+				Fragments._CompoundTargetElement__OclAny /* 0 */,
+				Fragments._CompoundTargetElement__OclElement /* 1 */,
+				Fragments._CompoundTargetElement__Element /* 2 */,
+				Fragments._CompoundTargetElement__TargetElement /* 3 */,
+				Fragments._CompoundTargetElement__CompoundTargetElement /* 4 */
+			};
+		private static final int @NonNull [] __CompoundTargetElement = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Domain =
 			{
@@ -490,6 +566,45 @@ public class QVTbaseTables
 			};
 		private static final int @NonNull [] __Rule = { 1,1,1,1,1 };
 
+		private static final @NonNull ExecutorFragment @NonNull [] _SimpleTargetElement =
+			{
+				Fragments._SimpleTargetElement__OclAny /* 0 */,
+				Fragments._SimpleTargetElement__OclElement /* 1 */,
+				Fragments._SimpleTargetElement__Element /* 2 */,
+				Fragments._SimpleTargetElement__TargetElement /* 3 */,
+				Fragments._SimpleTargetElement__SimpleTargetElement /* 4 */
+			};
+		private static final int @NonNull [] __SimpleTargetElement = { 1,1,1,1,1 };
+
+		private static final @NonNull ExecutorFragment @NonNull [] _Target =
+			{
+				Fragments._Target__OclAny /* 0 */,
+				Fragments._Target__OclElement /* 1 */,
+				Fragments._Target__Element /* 2 */,
+				Fragments._Target__NamedElement /* 3 */,
+				Fragments._Target__Target /* 4 */
+			};
+		private static final int @NonNull [] __Target = { 1,1,1,1,1 };
+
+		private static final @NonNull ExecutorFragment @NonNull [] _TargetElement =
+			{
+				Fragments._TargetElement__OclAny /* 0 */,
+				Fragments._TargetElement__OclElement /* 1 */,
+				Fragments._TargetElement__Element /* 2 */,
+				Fragments._TargetElement__TargetElement /* 3 */
+			};
+		private static final int @NonNull [] __TargetElement = { 1,1,1,1 };
+
+		private static final @NonNull ExecutorFragment @NonNull [] _TargetElementKind =
+			{
+				Fragments._TargetElementKind__OclAny /* 0 */,
+				Fragments._TargetElementKind__OclElement /* 1 */,
+				Fragments._TargetElementKind__OclType /* 2 */,
+				Fragments._TargetElementKind__OclEnumeration /* 3 */,
+				Fragments._TargetElementKind__TargetElementKind /* 4 */
+			};
+		private static final int @NonNull [] __TargetElementKind = { 1,1,1,1,1 };
+
 		private static final @NonNull ExecutorFragment @NonNull [] _Transformation =
 			{
 				Fragments._Transformation__OclAny /* 0 */,
@@ -520,6 +635,7 @@ public class QVTbaseTables
 		 */
 		static {
 			Types._BaseModel.initFragments(_BaseModel, __BaseModel);
+			Types._CompoundTargetElement.initFragments(_CompoundTargetElement, __CompoundTargetElement);
 			Types._Domain.initFragments(_Domain, __Domain);
 			Types._Function.initFragments(_Function, __Function);
 			Types._FunctionBody.initFragments(_FunctionBody, __FunctionBody);
@@ -527,6 +643,10 @@ public class QVTbaseTables
 			Types._Pattern.initFragments(_Pattern, __Pattern);
 			Types._Predicate.initFragments(_Predicate, __Predicate);
 			Types._Rule.initFragments(_Rule, __Rule);
+			Types._SimpleTargetElement.initFragments(_SimpleTargetElement, __SimpleTargetElement);
+			Types._Target.initFragments(_Target, __Target);
+			Types._TargetElement.initFragments(_TargetElement, __TargetElement);
+			Types._TargetElementKind.initFragments(_TargetElementKind, __TargetElementKind);
 			Types._Transformation.initFragments(_Transformation, __Transformation);
 			Types._TypedModel.initFragments(_TypedModel, __TypedModel);
 
@@ -582,6 +702,39 @@ public class QVTbaseTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
+
+		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__CompoundTargetElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__TargetElement = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Domain__Domain = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Domain__Element = {
@@ -840,6 +993,138 @@ public class QVTbaseTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
+		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__SimpleTargetElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__TargetElement = {};
+
+		private static final @NonNull ExecutorOperation @NonNull [] _Target__Target = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _Target__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _Target__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _Target__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _Target__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+
+		private static final @NonNull ExecutorOperation @NonNull [] _TargetElement__TargetElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _TargetElement__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _TargetElement__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _TargetElement__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+
+		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__TargetElementKind = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__OclElement = {
+			OCLstdlibTables.Operations._OclEnumeration__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__OclEnumeration = {
+			OCLstdlibTables.Operations._OclEnumeration__allInstances /* allInstances() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__OclType = {
+			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
+		};
+
 		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Transformation = {
 			QVTbaseTables.Operations._Transformation__getFunction /* getFunction(String[1]) */,
 			QVTbaseTables.Operations._Transformation__getModelParameter /* getModelParameter(String[1]) */
@@ -934,6 +1219,12 @@ public class QVTbaseTables
 			Fragments._BaseModel__OclAny.initOperations(_BaseModel__OclAny);
 			Fragments._BaseModel__OclElement.initOperations(_BaseModel__OclElement);
 
+			Fragments._CompoundTargetElement__CompoundTargetElement.initOperations(_CompoundTargetElement__CompoundTargetElement);
+			Fragments._CompoundTargetElement__Element.initOperations(_CompoundTargetElement__Element);
+			Fragments._CompoundTargetElement__OclAny.initOperations(_CompoundTargetElement__OclAny);
+			Fragments._CompoundTargetElement__OclElement.initOperations(_CompoundTargetElement__OclElement);
+			Fragments._CompoundTargetElement__TargetElement.initOperations(_CompoundTargetElement__TargetElement);
+
 			Fragments._Domain__Domain.initOperations(_Domain__Domain);
 			Fragments._Domain__Element.initOperations(_Domain__Element);
 			Fragments._Domain__NamedElement.initOperations(_Domain__NamedElement);
@@ -987,6 +1278,29 @@ public class QVTbaseTables
 			Fragments._Rule__OclElement.initOperations(_Rule__OclElement);
 			Fragments._Rule__Rule.initOperations(_Rule__Rule);
 
+			Fragments._SimpleTargetElement__Element.initOperations(_SimpleTargetElement__Element);
+			Fragments._SimpleTargetElement__OclAny.initOperations(_SimpleTargetElement__OclAny);
+			Fragments._SimpleTargetElement__OclElement.initOperations(_SimpleTargetElement__OclElement);
+			Fragments._SimpleTargetElement__SimpleTargetElement.initOperations(_SimpleTargetElement__SimpleTargetElement);
+			Fragments._SimpleTargetElement__TargetElement.initOperations(_SimpleTargetElement__TargetElement);
+
+			Fragments._Target__Element.initOperations(_Target__Element);
+			Fragments._Target__NamedElement.initOperations(_Target__NamedElement);
+			Fragments._Target__OclAny.initOperations(_Target__OclAny);
+			Fragments._Target__OclElement.initOperations(_Target__OclElement);
+			Fragments._Target__Target.initOperations(_Target__Target);
+
+			Fragments._TargetElement__Element.initOperations(_TargetElement__Element);
+			Fragments._TargetElement__OclAny.initOperations(_TargetElement__OclAny);
+			Fragments._TargetElement__OclElement.initOperations(_TargetElement__OclElement);
+			Fragments._TargetElement__TargetElement.initOperations(_TargetElement__TargetElement);
+
+			Fragments._TargetElementKind__OclAny.initOperations(_TargetElementKind__OclAny);
+			Fragments._TargetElementKind__OclElement.initOperations(_TargetElementKind__OclElement);
+			Fragments._TargetElementKind__OclEnumeration.initOperations(_TargetElementKind__OclEnumeration);
+			Fragments._TargetElementKind__OclType.initOperations(_TargetElementKind__OclType);
+			Fragments._TargetElementKind__TargetElementKind.initOperations(_TargetElementKind__TargetElementKind);
+
 			Fragments._Transformation__Class.initOperations(_Transformation__Class);
 			Fragments._Transformation__Element.initOperations(_Transformation__Element);
 			Fragments._Transformation__NamedElement.initOperations(_Transformation__NamedElement);
@@ -1024,6 +1338,10 @@ public class QVTbaseTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _BaseModel = {};
 
+		private static final @NonNull ExecutorProperty @NonNull [] _CompoundTargetElement = {
+			QVTbaseTables.Properties._CompoundTargetElement__ownedTargetElements
+		};
+
 		private static final @NonNull ExecutorProperty @NonNull [] _Domain = {
 			QVTbaseTables.Properties._Domain__isCheckable,
 			QVTbaseTables.Properties._Domain__isEnforceable,
@@ -1057,11 +1375,27 @@ public class QVTbaseTables
 			QVTbaseTables.Properties._Rule__transformation
 		};
 
+		private static final @NonNull ExecutorProperty @NonNull [] _SimpleTargetElement = {
+			QVTbaseTables.Properties._SimpleTargetElement__iterates,
+			QVTbaseTables.Properties._SimpleTargetElement__kind,
+			QVTbaseTables.Properties._SimpleTargetElement__typedModel
+		};
+
+		private static final @NonNull ExecutorProperty @NonNull [] _Target = {
+			QVTbaseTables.Properties._Target__ownedTargetElements,
+			QVTbaseTables.Properties._Target__owningTransformation
+		};
+
+		private static final @NonNull ExecutorProperty @NonNull [] _TargetElement = {};
+
+		private static final @NonNull ExecutorProperty @NonNull [] _TargetElementKind = {};
+
 		private static final @NonNull ExecutorProperty @NonNull [] _Transformation = {
 			QVTbaseTables.Properties._Transformation__extends,
 			QVTbaseTables.Properties._Transformation__modelParameter,
 			QVTbaseTables.Properties._Transformation__ownedContext,
 			QVTbaseTables.Properties._Transformation__ownedTag,
+			QVTbaseTables.Properties._Transformation__ownedTargets,
 			QVTbaseTables.Properties._Transformation__rule
 		};
 
@@ -1081,6 +1415,7 @@ public class QVTbaseTables
 		 */
 		static {
 			Fragments._BaseModel__BaseModel.initProperties(_BaseModel);
+			Fragments._CompoundTargetElement__CompoundTargetElement.initProperties(_CompoundTargetElement);
 			Fragments._Domain__Domain.initProperties(_Domain);
 			Fragments._Function__Function.initProperties(_Function);
 			Fragments._FunctionBody__FunctionBody.initProperties(_FunctionBody);
@@ -1088,6 +1423,10 @@ public class QVTbaseTables
 			Fragments._Pattern__Pattern.initProperties(_Pattern);
 			Fragments._Predicate__Predicate.initProperties(_Predicate);
 			Fragments._Rule__Rule.initProperties(_Rule);
+			Fragments._SimpleTargetElement__SimpleTargetElement.initProperties(_SimpleTargetElement);
+			Fragments._Target__Target.initProperties(_Target);
+			Fragments._TargetElement__TargetElement.initProperties(_TargetElement);
+			Fragments._TargetElementKind__TargetElementKind.initProperties(_TargetElementKind);
 			Fragments._Transformation__Transformation.initProperties(_Transformation);
 			Fragments._TypedModel__TypedModel.initProperties(_TypedModel);
 
@@ -1109,10 +1448,20 @@ public class QVTbaseTables
 			FragmentProperties.init();
 		}
 
+		public static final @NonNull EcoreExecutorEnumerationLiteral _TargetElementKind__INPUT = new EcoreExecutorEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("INPUT"), Types._TargetElementKind, 0);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _TargetElementKind__VIA = new EcoreExecutorEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("VIA"), Types._TargetElementKind, 1);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _TargetElementKind__OUTPUT = new EcoreExecutorEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("OUTPUT"), Types._TargetElementKind, 2);
+		private static final @NonNull EcoreExecutorEnumerationLiteral @NonNull [] _TargetElementKind = {
+			_TargetElementKind__INPUT,
+			_TargetElementKind__VIA,
+			_TargetElementKind__OUTPUT
+		};
+
 		/**
 		 *	Install the enumeration literals in the enumerations.
 		 */
 		static {
+			Types._TargetElementKind.initLiterals(_TargetElementKind);
 
 			Init.initEnd();
 		}

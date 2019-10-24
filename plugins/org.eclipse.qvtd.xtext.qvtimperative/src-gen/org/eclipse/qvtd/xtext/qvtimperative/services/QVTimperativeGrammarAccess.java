@@ -2852,6 +2852,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getClassCSAccess().getRule();
 	}
 
+	//CompoundTargetElementCS:
+	//	'{' ownedTargetElements+=SimpleTargetElementCS* '}' ';'?;
+	public QVTbaseGrammarAccess.CompoundTargetElementCSElements getCompoundTargetElementCSAccess() {
+		return gaQVTbase.getCompoundTargetElementCSAccess();
+	}
+
+	public ParserRule getCompoundTargetElementCSRule() {
+		return getCompoundTargetElementCSAccess().getRule();
+	}
+
 	//DataTypeCS base::DataTypeCS:
 	//	isPrimitive?='primitive'? 'datatype' name=super::UnrestrictedName ownedSignature=TemplateSignatureCS? (':'
 	//	instanceClassName=SINGLE_QUOTED_STRING)? ('{' (isSerializable?='serializable' | '!serializable')? '}')? ('{'
@@ -2934,6 +2944,19 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getReferenceCSAccess().getRule();
 	}
 
+	//SimpleTargetElementCS:
+	//	(input?='input' | output?='output' | via?='via') typedModel=[qvtbase::TypedModel|super::UnrestrictedName] ('iterates'
+	//	(iterates+=[qvtbase::TypedModel|super::UnrestrictedName] | '{'
+	//	(iterates+=[qvtbase::TypedModel|super::UnrestrictedName] (','
+	//	iterates+=[qvtbase::TypedModel|super::UnrestrictedName])*)? '}'))? ';';
+	public QVTbaseGrammarAccess.SimpleTargetElementCSElements getSimpleTargetElementCSAccess() {
+		return gaQVTbase.getSimpleTargetElementCSAccess();
+	}
+
+	public ParserRule getSimpleTargetElementCSRule() {
+		return getSimpleTargetElementCSAccess().getRule();
+	}
+
 	//SpecificationCS essentialocl::ExpSpecificationCS:
 	//	ownedExpression=ExpCS | exprString=UNQUOTED_STRING;
 	public QVTbaseGrammarAccess.SpecificationCSElements getSpecificationCSAccess() {
@@ -2955,6 +2978,17 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	public ParserRule getStructuredClassCSRule() {
 		return getStructuredClassCSAccess().getRule();
+	}
+
+	//TargetCS:
+	//	'target' name=super::UnrestrictedName '{' ownedTargetElements+=(SimpleTargetElementCS | CompoundTargetElementCS)* '}'
+	//	';'?;
+	public QVTbaseGrammarAccess.TargetCSElements getTargetCSAccess() {
+		return gaQVTbase.getTargetCSAccess();
+	}
+
+	public ParserRule getTargetCSRule() {
+		return getTargetCSAccess().getRule();
 	}
 
 	//TypedMultiplicityRefCS base::TypedRefCS:

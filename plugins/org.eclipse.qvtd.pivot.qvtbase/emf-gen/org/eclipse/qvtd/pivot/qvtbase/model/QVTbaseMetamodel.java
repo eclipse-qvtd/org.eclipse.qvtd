@@ -243,6 +243,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			((PivotObjectImpl)orphanage).setESObject(null);
 			installPackages();
 			installClassTypes();
+			installEnumerations();
 			installCollectionTypes();
 			installOperations();
 			installProperties();
@@ -261,6 +262,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull PrimitiveType _Integer = getPrimitiveType(_ocl, "Integer");
 		private final @NonNull AnyType _OclAny = getAnyType(_ocl, "OclAny");
 		private final @NonNull Class _OclElement = getClass(_ocl, "OclElement");
+		private final @NonNull Class _OclEnumeration = getClass(_ocl, "OclEnumeration");
 		private final @NonNull CollectionType _OrderedCollection = getCollectionType(_ocl, "OrderedCollection");
 		private final @NonNull OrderedSetType _OrderedSet = getOrderedSetType(_ocl, "OrderedSet");
 		private final @NonNull PrimitiveType _Real = getPrimitiveType(_ocl, "Real");
@@ -289,6 +291,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Class _Variable = createClass("Variable");
 		
 		private final @NonNull Class _BaseModel = createClass(QVTbasePackage.Literals.BASE_MODEL);
+		private final @NonNull Class _CompoundTargetElement = createClass(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT);
 		private final @NonNull Class _Domain = createClass(QVTbasePackage.Literals.DOMAIN);
 		private final @NonNull Class _Function = createClass(QVTbasePackage.Literals.FUNCTION);
 		private final @NonNull Class _FunctionBody = createClass(QVTbasePackage.Literals.FUNCTION_BODY);
@@ -296,12 +299,21 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Class _Pattern = createClass(QVTbasePackage.Literals.PATTERN);
 		private final @NonNull Class _Predicate = createClass(QVTbasePackage.Literals.PREDICATE);
 		private final @NonNull Class _Rule = createClass(QVTbasePackage.Literals.RULE);
+		private final @NonNull Class _SimpleTargetElement = createClass(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT);
+		private final @NonNull Class _Target = createClass(QVTbasePackage.Literals.TARGET);
+		private final @NonNull Class _TargetElement = createClass(QVTbasePackage.Literals.TARGET_ELEMENT);
 		private final @NonNull Class _Transformation = createClass(QVTbasePackage.Literals.TRANSFORMATION);
 		private final @NonNull Class _TypedModel = createClass(QVTbasePackage.Literals.TYPED_MODEL);
+		
+		private final @NonNull Enumeration _TargetElementKind = createEnumeration(QVTbasePackage.Literals.TARGET_ELEMENT_KIND);
+		private final @NonNull EnumerationLiteral el__TargetElementKind_INPUT = createEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("INPUT"));
+		private final @NonNull EnumerationLiteral el__TargetElementKind_VIA = createEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("VIA"));
+		private final @NonNull EnumerationLiteral el__TargetElementKind_OUTPUT = createEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("OUTPUT"));
 		
 		private final @NonNull BagType _Bag_Domain = createBagType(_Bag);
 		private final @NonNull BagType _Bag_Function = createBagType(_Bag);
 		private final @NonNull BagType _Bag_Pattern = createBagType(_Bag);
+		private final @NonNull BagType _Bag_SimpleTargetElement = createBagType(_Bag);
 		private final @NonNull BagType _Bag_TypedModel = createBagType(_Bag);
 		private final @NonNull CollectionType _Collection_Annotation = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Domain = createCollectionType(_Collection);
@@ -310,18 +322,25 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull CollectionType _Collection_Pattern = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Predicate = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Rule = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_SimpleTargetElement = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_Target = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_TargetElement = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_TypedModel = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Variable = createCollectionType(_Collection);
 		private final @NonNull CollectionType _OrderedCollection_Domain = createCollectionType(_OrderedCollection);
 		private final @NonNull CollectionType _OrderedCollection_Rule = createCollectionType(_OrderedCollection);
+		private final @NonNull CollectionType _OrderedCollection_SimpleTargetElement = createCollectionType(_OrderedCollection);
 		private final @NonNull CollectionType _OrderedCollection_TypedModel = createCollectionType(_OrderedCollection);
 		private final @NonNull OrderedSetType _OrderedSet_Domain_NullFree = createOrderedSetType(_OrderedSet);
 		private final @NonNull OrderedSetType _OrderedSet_Rule_NullFree = createOrderedSetType(_OrderedSet);
+		private final @NonNull OrderedSetType _OrderedSet_SimpleTargetElement_NullFree = createOrderedSetType(_OrderedSet);
 		private final @NonNull OrderedSetType _OrderedSet_TypedModel_NullFree = createOrderedSetType(_OrderedSet);
 		private final @NonNull SetType _Set_Annotation_NullFree = createSetType(_Set);
 		private final @NonNull SetType _Set_Package_NullFree = createSetType(_Set);
 		private final @NonNull SetType _Set_Predicate_NullFree = createSetType(_Set);
 		private final @NonNull SetType _Set_Rule_NullFree = createSetType(_Set);
+		private final @NonNull SetType _Set_Target_NullFree = createSetType(_Set);
+		private final @NonNull SetType _Set_TargetElement_NullFree = createSetType(_Set);
 		private final @NonNull SetType _Set_TypedModel_NullFree = createSetType(_Set);
 		private final @NonNull SetType _Set_Variable_NullFree = createSetType(_Set);
 		private final @NonNull CollectionType _UniqueCollection_Annotation = createCollectionType(_UniqueCollection);
@@ -329,6 +348,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull CollectionType _UniqueCollection_Package = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Predicate = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Rule = createCollectionType(_UniqueCollection);
+		private final @NonNull CollectionType _UniqueCollection_SimpleTargetElement = createCollectionType(_UniqueCollection);
+		private final @NonNull CollectionType _UniqueCollection_Target = createCollectionType(_UniqueCollection);
+		private final @NonNull CollectionType _UniqueCollection_TargetElement = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_TypedModel = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Variable = createCollectionType(_UniqueCollection);
 		
@@ -358,6 +380,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _BaseModel);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+			ownedClasses.add(type = _CompoundTargetElement);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_TargetElement);
 			ownedClasses.add(type = _Domain);
 			type.setIsAbstract(true);
 			superClasses = type.getSuperClasses();
@@ -381,12 +406,36 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			type.setIsAbstract(true);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+			ownedClasses.add(type = _SimpleTargetElement);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_TargetElement);
+			ownedClasses.add(type = _Target);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _TargetElement);
+			type.setIsAbstract(true);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Transformation);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _TypedModel);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+		}
+		
+		private void installEnumerations() {
+			List<Class> ownedClasses;
+			Enumeration type;
+			List<EnumerationLiteral> enumerationLiterals;
+		
+			ownedClasses = qvtbase.getOwnedClasses();
+			ownedClasses.add(type = _TargetElementKind);
+			enumerationLiterals = type.getOwnedLiterals();
+			enumerationLiterals.add(el__TargetElementKind_INPUT);
+			enumerationLiterals.add(el__TargetElementKind_VIA);
+			enumerationLiterals.add(el__TargetElementKind_OUTPUT);
+			type.getSuperClasses().add(_OclEnumeration);
 		}
 		
 		private void installCollectionTypes() {
@@ -404,6 +453,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _Bag_Pattern);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Pattern);
+			ownedClasses.add(type = _Bag_SimpleTargetElement);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_SimpleTargetElement);
 			ownedClasses.add(type = _Bag_TypedModel);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_TypedModel);
@@ -428,6 +480,15 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _Collection_Rule);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_SimpleTargetElement);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_Target);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_TargetElement);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Collection_TypedModel);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
@@ -440,6 +501,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _OrderedCollection_Rule);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Rule);
+			ownedClasses.add(type = _OrderedCollection_SimpleTargetElement);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_SimpleTargetElement);
 			ownedClasses.add(type = _OrderedCollection_TypedModel);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_TypedModel);
@@ -453,6 +517,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OrderedCollection_Rule);
 			superClasses.add(_UniqueCollection_Rule);
+			ownedClasses.add(type = _OrderedSet_SimpleTargetElement_NullFree);
+			type.setLower(2);
+			type.setIsNullFree(true);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OrderedCollection_SimpleTargetElement);
+			superClasses.add(_UniqueCollection_SimpleTargetElement);
 			ownedClasses.add(type = _OrderedSet_TypedModel_NullFree);
 			type.setIsNullFree(true);
 			superClasses = type.getSuperClasses();
@@ -474,6 +544,15 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			type.setIsNullFree(true);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_Rule);
+			ownedClasses.add(type = _Set_Target_NullFree);
+			type.setIsNullFree(true);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_UniqueCollection_Target);
+			ownedClasses.add(type = _Set_TargetElement_NullFree);
+			type.setLower(2);
+			type.setIsNullFree(true);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_UniqueCollection_TargetElement);
 			ownedClasses.add(type = _Set_TypedModel_NullFree);
 			type.setIsNullFree(true);
 			superClasses = type.getSuperClasses();
@@ -497,6 +576,15 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _UniqueCollection_Rule);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Rule);
+			ownedClasses.add(type = _UniqueCollection_SimpleTargetElement);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_SimpleTargetElement);
+			ownedClasses.add(type = _UniqueCollection_Target);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_Target);
+			ownedClasses.add(type = _UniqueCollection_TargetElement);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_TargetElement);
 			ownedClasses.add(type = _UniqueCollection_TypedModel);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_TypedModel);
@@ -531,6 +619,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Parameter_TypedModel_ownedContext = createProperty("TypedModel", _TypedModel);
 		private final @NonNull Property pr_Variable_Pattern_bindsTo = createProperty("Pattern", _Bag_Pattern);
 		
+		private final @NonNull Property pr_CompoundTargetElement_ownedTargetElements = createProperty(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS, _OrderedSet_SimpleTargetElement_NullFree);
 		private final @NonNull Property pr_Domain_isCheckable = createProperty(QVTbasePackage.Literals.DOMAIN__IS_CHECKABLE, _Boolean);
 		private final @NonNull Property pr_Domain_isEnforceable = createProperty(QVTbasePackage.Literals.DOMAIN__IS_ENFORCEABLE, _Boolean);
 		private final @NonNull Property pr_Domain_rule = createProperty(QVTbasePackage.Literals.DOMAIN__RULE, _Rule);
@@ -545,10 +634,18 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Rule_overridden = createProperty(QVTbasePackage.Literals.RULE__OVERRIDDEN, _Rule);
 		private final @NonNull Property pr_Rule_overrides = createProperty(QVTbasePackage.Literals.RULE__OVERRIDES, _OrderedSet_Rule_NullFree);
 		private final @NonNull Property pr_Rule_transformation = createProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, _Transformation);
+		private final @NonNull Property pr_SimpleTargetElement_iterates = createProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__ITERATES, _Set_TypedModel_NullFree);
+		private final @NonNull Property pr_SimpleTargetElement_kind = createProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__KIND, _TargetElementKind);
+		private final @NonNull Property pr_SimpleTargetElement_typedModel = createProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__TYPED_MODEL, _TypedModel);
+		private final @NonNull Property pr_SimpleTargetElement_CompoundTargetElement_ownedTargetElements = createProperty("CompoundTargetElement", _CompoundTargetElement);
+		private final @NonNull Property pr_Target_ownedTargetElements = createProperty(QVTbasePackage.Literals.TARGET__OWNED_TARGET_ELEMENTS, _Set_TargetElement_NullFree);
+		private final @NonNull Property pr_Target_owningTransformation = createProperty(QVTbasePackage.Literals.TARGET__OWNING_TRANSFORMATION, _Transformation);
+		private final @NonNull Property pr_TargetElement_Target_ownedTargetElements = createProperty("Target", _Target);
 		private final @NonNull Property pr_Transformation_extends = createProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS, _Transformation);
 		private final @NonNull Property pr_Transformation_modelParameter = createProperty(QVTbasePackage.Literals.TRANSFORMATION__MODEL_PARAMETER, _OrderedSet_TypedModel_NullFree);
 		private final @NonNull Property pr_Transformation_ownedContext = createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT, _Parameter);
 		private final @NonNull Property pr_Transformation_ownedTag = createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TAG, _Set_Annotation_NullFree);
+		private final @NonNull Property pr_Transformation_ownedTargets = createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TARGETS, _Set_Target_NullFree);
 		private final @NonNull Property pr_Transformation_rule = createProperty(QVTbasePackage.Literals.TRANSFORMATION__RULE, _Set_Rule_NullFree);
 		private final @NonNull Property pr_Transformation_extendedBy_extends = createProperty("extendedBy", _Transformation);
 		private final @NonNull Property pr_TypedModel_dependsOn = createProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON, _Set_TypedModel_NullFree);
@@ -560,6 +657,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_TypedModel_transformation = createProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, _Transformation);
 		private final @NonNull Property pr_TypedModel_usedPackage = createProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, _Set_Package_NullFree);
 		private final @NonNull Property pr_TypedModel_Domain_typedModel = createProperty("Domain", _Bag_Domain);
+		private final @NonNull Property pr_TypedModel_SimpleTargetElement_iterates = createProperty("SimpleTargetElement", _Bag_SimpleTargetElement);
+		private final @NonNull Property pr_TypedModel_SimpleTargetElement_typedModel = createProperty("SimpleTargetElement", _Bag_SimpleTargetElement);
 		private final @NonNull Property pr_TypedModel_TypedModel_iterates = createProperty("TypedModel", _Bag_TypedModel);
 		private final @NonNull Property pr_TypedModel_dependent_dependsOn = createProperty("dependent", _TypedModel);
 		
@@ -608,6 +707,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Pattern_bindsTo);
+		
+			ownedProperties = _CompoundTargetElement.getOwnedProperties();
+			ownedProperties.add(property = pr_CompoundTargetElement_ownedTargetElements);
+			property.setIsComposite(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_SimpleTargetElement_CompoundTargetElement_ownedTargetElements);
 		
 			ownedProperties = _Domain.getOwnedProperties();
 			ownedProperties.add(property = pr_Domain_isCheckable);
@@ -672,6 +777,38 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsTransient(true);
 			property.setOpposite(pr_Transformation_rule);
 		
+			ownedProperties = _SimpleTargetElement.getOwnedProperties();
+			ownedProperties.add(property = pr_SimpleTargetElement_iterates);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_TypedModel_SimpleTargetElement_iterates);
+			ownedProperties.add(property = pr_SimpleTargetElement_kind);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_SimpleTargetElement_typedModel);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_TypedModel_SimpleTargetElement_typedModel);
+			ownedProperties.add(property = pr_SimpleTargetElement_CompoundTargetElement_ownedTargetElements);
+			property.setIsImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_CompoundTargetElement_ownedTargetElements);
+		
+			ownedProperties = _Target.getOwnedProperties();
+			ownedProperties.add(property = pr_Target_ownedTargetElements);
+			property.setIsComposite(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_TargetElement_Target_ownedTargetElements);
+			ownedProperties.add(property = pr_Target_owningTransformation);
+			property.setIsResolveProxies(true);
+			property.setIsTransient(true);
+			property.setOpposite(pr_Transformation_ownedTargets);
+		
+			ownedProperties = _TargetElement.getOwnedProperties();
+			ownedProperties.add(property = pr_TargetElement_Target_ownedTargetElements);
+			property.setIsImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Target_ownedTargetElements);
+		
 			ownedProperties = _Transformation.getOwnedProperties();
 			ownedProperties.add(property = pr_Transformation_extends);
 			property.setIsRequired(false);
@@ -690,6 +827,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Annotation_Transformation_ownedTag);
+			ownedProperties.add(property = pr_Transformation_ownedTargets);
+			property.setIsComposite(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Target_owningTransformation);
 			ownedProperties.add(property = pr_Transformation_rule);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
@@ -732,6 +873,14 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Domain_typedModel);
+			ownedProperties.add(property = pr_TypedModel_SimpleTargetElement_iterates);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_SimpleTargetElement_iterates);
+			ownedProperties.add(property = pr_TypedModel_SimpleTargetElement_typedModel);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_SimpleTargetElement_typedModel);
 			ownedProperties.add(property = pr_TypedModel_TypedModel_iterates);
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);
@@ -747,6 +896,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			addBinding(_Bag_Domain, _Domain);
 			addBinding(_Bag_Function, _Function);
 			addBinding(_Bag_Pattern, _Pattern);
+			addBinding(_Bag_SimpleTargetElement, _SimpleTargetElement);
 			addBinding(_Bag_TypedModel, _TypedModel);
 			addBinding(_Collection_Annotation, _Annotation);
 			addBinding(_Collection_Domain, _Domain);
@@ -755,18 +905,25 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			addBinding(_Collection_Pattern, _Pattern);
 			addBinding(_Collection_Predicate, _Predicate);
 			addBinding(_Collection_Rule, _Rule);
+			addBinding(_Collection_SimpleTargetElement, _SimpleTargetElement);
+			addBinding(_Collection_Target, _Target);
+			addBinding(_Collection_TargetElement, _TargetElement);
 			addBinding(_Collection_TypedModel, _TypedModel);
 			addBinding(_Collection_Variable, _Variable);
 			addBinding(_OrderedCollection_Domain, _Domain);
 			addBinding(_OrderedCollection_Rule, _Rule);
+			addBinding(_OrderedCollection_SimpleTargetElement, _SimpleTargetElement);
 			addBinding(_OrderedCollection_TypedModel, _TypedModel);
 			addBinding(_OrderedSet_Domain_NullFree, _Domain);
 			addBinding(_OrderedSet_Rule_NullFree, _Rule);
+			addBinding(_OrderedSet_SimpleTargetElement_NullFree, _SimpleTargetElement);
 			addBinding(_OrderedSet_TypedModel_NullFree, _TypedModel);
 			addBinding(_Set_Annotation_NullFree, _Annotation);
 			addBinding(_Set_Package_NullFree, _Package);
 			addBinding(_Set_Predicate_NullFree, _Predicate);
 			addBinding(_Set_Rule_NullFree, _Rule);
+			addBinding(_Set_TargetElement_NullFree, _TargetElement);
+			addBinding(_Set_Target_NullFree, _Target);
 			addBinding(_Set_TypedModel_NullFree, _TypedModel);
 			addBinding(_Set_Variable_NullFree, _Variable);
 			addBinding(_UniqueCollection_Annotation, _Annotation);
@@ -774,6 +931,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			addBinding(_UniqueCollection_Package, _Package);
 			addBinding(_UniqueCollection_Predicate, _Predicate);
 			addBinding(_UniqueCollection_Rule, _Rule);
+			addBinding(_UniqueCollection_SimpleTargetElement, _SimpleTargetElement);
+			addBinding(_UniqueCollection_Target, _Target);
+			addBinding(_UniqueCollection_TargetElement, _TargetElement);
 			addBinding(_UniqueCollection_TypedModel, _TypedModel);
 			addBinding(_UniqueCollection_Variable, _Variable);
 		}
@@ -782,6 +942,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			installComment(pr_Domain_isCheckable, "A checkable domain may be selected as the target of a transformation in check mode. An enforceable domain is always checkable. A not-checkable domain cannot be selected as the target of a transformation. See Bug 549776.See Bug 549776.");
 			installComment(pr_Domain_isEnforceable, "An enforceable domain may be selected as the target of a transformation in check or enforce mode. An enforceable domain is always checkable. A not-checkable domain cannot be selected as the target of a transformation. See Bug 549776.");
 			installComment(_FunctionBody, "FunctionBody refines ExpressionInOCL to avoid the inconvenience of a timely setType() by deriving the type from the bodyExpression. See Bug 481664.");
+			installComment(pr_SimpleTargetElement_iterates, "The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration.");
+			installComment(pr_Transformation_ownedTargets, "The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced.");
 			installComment(pr_TypedModel_dependsOn, "The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced.");
 			installComment(pr_TypedModel_isPrimitive, "The TypedModel is for a primitive domain. It may be added automatically.");
 			installComment(pr_TypedModel_isThis, "The TypedModel is for the transformation instance trace. It may be added automatically.");

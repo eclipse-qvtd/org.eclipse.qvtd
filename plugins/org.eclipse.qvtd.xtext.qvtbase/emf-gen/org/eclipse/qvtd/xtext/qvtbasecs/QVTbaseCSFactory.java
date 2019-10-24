@@ -32,6 +32,15 @@ public interface QVTbaseCSFactory extends EFactory
 	QVTbaseCSFactory eINSTANCE = org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Compound Target Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Compound Target Element CS</em>'.
+	 * @generated
+	 */
+	CompoundTargetElementCS createCompoundTargetElementCS();
+
+	/**
 	 * Returns a new object of class '<em>Java Class CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -48,6 +57,24 @@ public interface QVTbaseCSFactory extends EFactory
 	 * @generated
 	 */
 	@NonNull QualifiedPackageCS createQualifiedPackageCS();
+
+	/**
+	 * Returns a new object of class '<em>Simple Target Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Target Element CS</em>'.
+	 * @generated
+	 */
+	SimpleTargetElementCS createSimpleTargetElementCS();
+
+	/**
+	 * Returns a new object of class '<em>Target CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Target CS</em>'.
+	 * @generated
+	 */
+	TargetCS createTargetCS();
 
 	/**
 	 * Returns the package supported by this factory.

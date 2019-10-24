@@ -41,6 +41,11 @@ public abstract class AbstractDelegatingQVTbaseVisitor<R, C, @NonNull D extends 
 	}
 
 	@Override
+	public R visitCompoundTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull CompoundTargetElement object) {
+		return delegate.visitCompoundTargetElement(object);
+	}
+
+	@Override
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return delegate.visitDomain(object);
 	}
@@ -73,6 +78,21 @@ public abstract class AbstractDelegatingQVTbaseVisitor<R, C, @NonNull D extends 
 	@Override
 	public R visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
 		return delegate.visitRule(object);
+	}
+
+	@Override
+	public R visitSimpleTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull SimpleTargetElement object) {
+		return delegate.visitSimpleTargetElement(object);
+	}
+
+	@Override
+	public R visitTarget(org.eclipse.qvtd.pivot.qvtbase.@NonNull Target object) {
+		return delegate.visitTarget(object);
+	}
+
+	@Override
+	public R visitTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull TargetElement object) {
+		return delegate.visitTargetElement(object);
 	}
 
 	@Override

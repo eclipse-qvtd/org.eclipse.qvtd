@@ -39,6 +39,11 @@ public abstract class AbstractMergedQVTbaseVisitor<R, C>
 	}
 
 	@Override
+	public R visitCompoundTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull CompoundTargetElement object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visiting(object);
 	}
@@ -70,6 +75,21 @@ public abstract class AbstractMergedQVTbaseVisitor<R, C>
 
 	@Override
 	public R visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitSimpleTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull SimpleTargetElement object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitTarget(org.eclipse.qvtd.pivot.qvtbase.@NonNull Target object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull TargetElement object) {
 		return visiting(object);
 	}
 

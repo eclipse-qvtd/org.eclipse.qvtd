@@ -43,6 +43,7 @@ public abstract class AbstractQVTbaseSyntacticSequencer extends AbstractSyntacti
 	protected AbstractElementAlias match_AttributeCS___SemicolonKeyword_6_0_1_0_4___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4__a_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2__p;
 	protected AbstractElementAlias match_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__a;
 	protected AbstractElementAlias match_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__p;
+	protected AbstractElementAlias match_CompoundTargetElementCS_SemicolonKeyword_3_q;
 	protected AbstractElementAlias match_DataTypeCS_SemicolonKeyword_6_1_or___LeftCurlyBracketKeyword_6_0_0_RightCurlyBracketKeyword_6_0_1__;
 	protected AbstractElementAlias match_DataTypeCS___LeftCurlyBracketKeyword_5_0_SerializableKeyword_5_1_1_q_RightCurlyBracketKeyword_5_2__q;
 	protected AbstractElementAlias match_EnumerationCS_SemicolonKeyword_5_1_or___LeftCurlyBracketKeyword_5_0_0_RightCurlyBracketKeyword_5_0_2__;
@@ -71,8 +72,10 @@ public abstract class AbstractQVTbaseSyntacticSequencer extends AbstractSyntacti
 	protected AbstractElementAlias match_ReferenceCS___SemicolonKeyword_7_0_1_0_4___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4__a_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2__p;
 	protected AbstractElementAlias match_ReferenceCS___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__a;
 	protected AbstractElementAlias match_ReferenceCS___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__p;
+	protected AbstractElementAlias match_SimpleTargetElementCS___IteratesKeyword_2_0_LeftCurlyBracketKeyword_2_1_1_0_RightCurlyBracketKeyword_2_1_1_2__q;
 	protected AbstractElementAlias match_StructuredClassCS_SemicolonKeyword_7_1_or___LeftCurlyBracketKeyword_7_0_0_RightCurlyBracketKeyword_7_0_2__;
 	protected AbstractElementAlias match_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q;
+	protected AbstractElementAlias match_TargetCS_SemicolonKeyword_5_q;
 	protected AbstractElementAlias match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q;
 
 	@Inject
@@ -92,6 +95,7 @@ public abstract class AbstractQVTbaseSyntacticSequencer extends AbstractSyntacti
 		match_AttributeCS___SemicolonKeyword_6_0_1_0_4___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4__a_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_0_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getDerivationKeyword_6_0_1_1_0()), new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_1_1()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_1_2()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_1_4())), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getInitialKeyword_6_0_1_0_0()), new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_0_1()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_0_2()));
 		match_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_1_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getInitialKeyword_6_0_1_0_0()), new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_0_1()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_0_2()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_0_4())), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getDerivationKeyword_6_0_1_1_0()), new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_1_1()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_1_2()));
 		match_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_1_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getInitialKeyword_6_0_1_0_0()), new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_0_1()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_0_2()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_0_4())), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getDerivationKeyword_6_0_1_1_0()), new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_1_1()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_1_2()));
+		match_CompoundTargetElementCS_SemicolonKeyword_3_q = new TokenAlias(false, true, grammarAccess.getCompoundTargetElementCSAccess().getSemicolonKeyword_3());
 		match_DataTypeCS_SemicolonKeyword_6_1_or___LeftCurlyBracketKeyword_6_0_0_RightCurlyBracketKeyword_6_0_1__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getDataTypeCSAccess().getLeftCurlyBracketKeyword_6_0_0()), new TokenAlias(false, false, grammarAccess.getDataTypeCSAccess().getRightCurlyBracketKeyword_6_0_1())), new TokenAlias(false, false, grammarAccess.getDataTypeCSAccess().getSemicolonKeyword_6_1()));
 		match_DataTypeCS___LeftCurlyBracketKeyword_5_0_SerializableKeyword_5_1_1_q_RightCurlyBracketKeyword_5_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataTypeCSAccess().getLeftCurlyBracketKeyword_5_0()), new TokenAlias(false, true, grammarAccess.getDataTypeCSAccess().getSerializableKeyword_5_1_1()), new TokenAlias(false, false, grammarAccess.getDataTypeCSAccess().getRightCurlyBracketKeyword_5_2()));
 		match_EnumerationCS_SemicolonKeyword_5_1_or___LeftCurlyBracketKeyword_5_0_0_RightCurlyBracketKeyword_5_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEnumerationCSAccess().getLeftCurlyBracketKeyword_5_0_0()), new TokenAlias(false, false, grammarAccess.getEnumerationCSAccess().getRightCurlyBracketKeyword_5_0_2())), new TokenAlias(false, false, grammarAccess.getEnumerationCSAccess().getSemicolonKeyword_5_1()));
@@ -120,8 +124,10 @@ public abstract class AbstractQVTbaseSyntacticSequencer extends AbstractSyntacti
 		match_ReferenceCS___SemicolonKeyword_7_0_1_0_4___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4__a_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getSemicolonKeyword_7_0_1_0_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getDerivationKeyword_7_0_1_1_0()), new TokenAlias(false, true, grammarAccess.getReferenceCSAccess().getUnrestrictedNameParserRuleCall_7_0_1_1_1()), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_1_2()), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getSemicolonKeyword_7_0_1_1_4())), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getInitialKeyword_7_0_1_0_0()), new TokenAlias(false, true, grammarAccess.getReferenceCSAccess().getUnrestrictedNameParserRuleCall_7_0_1_0_1()), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_0_2()));
 		match_ReferenceCS___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getSemicolonKeyword_7_0_1_1_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getInitialKeyword_7_0_1_0_0()), new TokenAlias(false, true, grammarAccess.getReferenceCSAccess().getUnrestrictedNameParserRuleCall_7_0_1_0_1()), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_0_2()), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getSemicolonKeyword_7_0_1_0_4())), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getDerivationKeyword_7_0_1_1_0()), new TokenAlias(false, true, grammarAccess.getReferenceCSAccess().getUnrestrictedNameParserRuleCall_7_0_1_1_1()), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_1_2()));
 		match_ReferenceCS___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getSemicolonKeyword_7_0_1_1_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getInitialKeyword_7_0_1_0_0()), new TokenAlias(false, true, grammarAccess.getReferenceCSAccess().getUnrestrictedNameParserRuleCall_7_0_1_0_1()), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_0_2()), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getSemicolonKeyword_7_0_1_0_4())), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getDerivationKeyword_7_0_1_1_0()), new TokenAlias(false, true, grammarAccess.getReferenceCSAccess().getUnrestrictedNameParserRuleCall_7_0_1_1_1()), new TokenAlias(false, false, grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_1_2()));
+		match_SimpleTargetElementCS___IteratesKeyword_2_0_LeftCurlyBracketKeyword_2_1_1_0_RightCurlyBracketKeyword_2_1_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getSimpleTargetElementCSAccess().getIteratesKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getSimpleTargetElementCSAccess().getLeftCurlyBracketKeyword_2_1_1_0()), new TokenAlias(false, false, grammarAccess.getSimpleTargetElementCSAccess().getRightCurlyBracketKeyword_2_1_1_2()));
 		match_StructuredClassCS_SemicolonKeyword_7_1_or___LeftCurlyBracketKeyword_7_0_0_RightCurlyBracketKeyword_7_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_7_0_0()), new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_7_0_2())), new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getSemicolonKeyword_7_1()));
 		match_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_6_2()));
+		match_TargetCS_SemicolonKeyword_5_q = new TokenAlias(false, true, grammarAccess.getTargetCSAccess().getSemicolonKeyword_5());
 		match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2()));
 	}
 
@@ -175,6 +181,8 @@ public abstract class AbstractQVTbaseSyntacticSequencer extends AbstractSyntacti
 				emit_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__p.equals(syntax))
 				emit_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_CompoundTargetElementCS_SemicolonKeyword_3_q.equals(syntax))
+				emit_CompoundTargetElementCS_SemicolonKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_DataTypeCS_SemicolonKeyword_6_1_or___LeftCurlyBracketKeyword_6_0_0_RightCurlyBracketKeyword_6_0_1__.equals(syntax))
 				emit_DataTypeCS_SemicolonKeyword_6_1_or___LeftCurlyBracketKeyword_6_0_0_RightCurlyBracketKeyword_6_0_1__(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_DataTypeCS___LeftCurlyBracketKeyword_5_0_SerializableKeyword_5_1_1_q_RightCurlyBracketKeyword_5_2__q.equals(syntax))
@@ -231,10 +239,14 @@ public abstract class AbstractQVTbaseSyntacticSequencer extends AbstractSyntacti
 				emit_ReferenceCS___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ReferenceCS___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__p.equals(syntax))
 				emit_ReferenceCS___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_SimpleTargetElementCS___IteratesKeyword_2_0_LeftCurlyBracketKeyword_2_1_1_0_RightCurlyBracketKeyword_2_1_1_2__q.equals(syntax))
+				emit_SimpleTargetElementCS___IteratesKeyword_2_0_LeftCurlyBracketKeyword_2_1_1_0_RightCurlyBracketKeyword_2_1_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_StructuredClassCS_SemicolonKeyword_7_1_or___LeftCurlyBracketKeyword_7_0_0_RightCurlyBracketKeyword_7_0_2__.equals(syntax))
 				emit_StructuredClassCS_SemicolonKeyword_7_1_or___LeftCurlyBracketKeyword_7_0_0_RightCurlyBracketKeyword_7_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q.equals(syntax))
 				emit_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TargetCS_SemicolonKeyword_5_q.equals(syntax))
+				emit_TargetCS_SemicolonKeyword_5_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
 				emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -1617,6 +1629,18 @@ public abstract class AbstractQVTbaseSyntacticSequencer extends AbstractSyntacti
 	 *     ownedDefaultExpressions+=SpecificationCS (ambiguity) ownedDefaultExpressions+=SpecificationCS
 	 */
 	protected void emit_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+
+	/**
+	 * Ambiguous syntax:
+	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '{' '}' (ambiguity) (rule start)
+	 *     ownedTargetElements+=SimpleTargetElementCS '}' (ambiguity) (rule end)
+	 */
+	protected void emit_CompoundTargetElementCS_SemicolonKeyword_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
@@ -3473,6 +3497,17 @@ public abstract class AbstractQVTbaseSyntacticSequencer extends AbstractSyntacti
 
 	/**
 	 * Ambiguous syntax:
+	 *     ('iterates' '{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     typedModel=[TypedModel|UnrestrictedName] (ambiguity) ';' (rule end)
+	 */
+	protected void emit_SimpleTargetElementCS___IteratesKeyword_2_0_LeftCurlyBracketKeyword_2_1_1_0_RightCurlyBracketKeyword_2_1_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+
+	/**
+	 * Ambiguous syntax:
 	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
@@ -3505,6 +3540,19 @@ public abstract class AbstractQVTbaseSyntacticSequencer extends AbstractSyntacti
 	 *     ownedSuperTypes+=TypedRefCS (ambiguity) (('{' '}') | ';') (rule end)
 	 */
 	protected void emit_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+
+	/**
+	 * Ambiguous syntax:
+	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=UnrestrictedName '{' '}' (ambiguity) (rule end)
+	 *     ownedTargetElements+=CompoundTargetElementCS '}' (ambiguity) (rule end)
+	 *     ownedTargetElements+=SimpleTargetElementCS '}' (ambiguity) (rule end)
+	 */
+	protected void emit_TargetCS_SemicolonKeyword_5_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 

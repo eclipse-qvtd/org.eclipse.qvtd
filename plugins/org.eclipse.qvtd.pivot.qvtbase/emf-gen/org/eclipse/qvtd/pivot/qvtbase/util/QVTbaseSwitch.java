@@ -109,6 +109,14 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 1: {
+				CompoundTargetElement compoundTargetElement = (CompoundTargetElement)theEObject;
+				T result = caseCompoundTargetElement(compoundTargetElement);
+				if (result == null) result = caseTargetElement(compoundTargetElement);
+				if (result == null) result = caseElement(compoundTargetElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 2: {
 				Domain domain = (Domain)theEObject;
 				T result = caseDomain(domain);
 				if (result == null) result = caseNamedElement(domain);
@@ -117,7 +125,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 2: {
+			case 3: {
 				Function function = (Function)theEObject;
 				T result = caseFunction(function);
 				if (result == null) result = caseOperation(function);
@@ -130,7 +138,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 3: {
+			case 4: {
 				FunctionBody functionBody = (FunctionBody)theEObject;
 				T result = caseFunctionBody(functionBody);
 				if (result == null) result = caseExpressionInOCL(functionBody);
@@ -142,7 +150,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 4: {
+			case 5: {
 				FunctionParameter functionParameter = (FunctionParameter)theEObject;
 				T result = caseFunctionParameter(functionParameter);
 				if (result == null) result = caseParameter(functionParameter);
@@ -153,21 +161,21 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 5: {
+			case 6: {
 				Pattern pattern = (Pattern)theEObject;
 				T result = casePattern(pattern);
 				if (result == null) result = caseElement(pattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 6: {
+			case 7: {
 				Predicate predicate = (Predicate)theEObject;
 				T result = casePredicate(predicate);
 				if (result == null) result = caseElement(predicate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 7: {
+			case 8: {
 				Rule rule = (Rule)theEObject;
 				T result = caseRule(rule);
 				if (result == null) result = caseNamedElement(rule);
@@ -175,7 +183,30 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 8: {
+			case 9: {
+				SimpleTargetElement simpleTargetElement = (SimpleTargetElement)theEObject;
+				T result = caseSimpleTargetElement(simpleTargetElement);
+				if (result == null) result = caseTargetElement(simpleTargetElement);
+				if (result == null) result = caseElement(simpleTargetElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 10: {
+				Target target = (Target)theEObject;
+				T result = caseTarget(target);
+				if (result == null) result = caseNamedElement(target);
+				if (result == null) result = caseElement(target);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 11: {
+				TargetElement targetElement = (TargetElement)theEObject;
+				T result = caseTargetElement(targetElement);
+				if (result == null) result = caseElement(targetElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 12: {
 				Transformation transformation = (Transformation)theEObject;
 				T result = caseTransformation(transformation);
 				if (result == null) result = caseClass(transformation);
@@ -187,7 +218,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 9: {
+			case 13: {
 				TypedModel typedModel = (TypedModel)theEObject;
 				T result = caseTypedModel(typedModel);
 				if (result == null) result = caseNamedElement(typedModel);
@@ -211,6 +242,21 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBaseModel(BaseModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Compound Target Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Compound Target Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompoundTargetElement(CompoundTargetElement object) {
 		return null;
 	}
 
@@ -316,6 +362,51 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRule(Rule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Target Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Target Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSimpleTargetElement(SimpleTargetElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Target</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Target</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTarget(Target object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Target Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Target Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTargetElement(TargetElement object) {
 		return null;
 	}
 

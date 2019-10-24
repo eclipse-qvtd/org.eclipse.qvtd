@@ -43,6 +43,11 @@ public abstract class AbstractNullQVTbaseCSVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitCompoundTargetElementCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull CompoundTargetElementCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitJavaClassCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaClassCS object) {
 		return null;
 	}
@@ -54,6 +59,21 @@ public abstract class AbstractNullQVTbaseCSVisitor<@Nullable R, C>
 
 	@Override
 	public R visitQualifiedPackageCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull QualifiedPackageCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitSimpleTargetElementCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull SimpleTargetElementCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitTargetCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull TargetCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitTargetElementCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull TargetElementCS object) {
 		return null;
 	}
 }

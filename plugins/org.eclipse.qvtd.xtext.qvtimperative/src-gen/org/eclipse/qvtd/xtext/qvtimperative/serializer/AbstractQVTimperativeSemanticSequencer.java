@@ -76,8 +76,11 @@ import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.xtext.qvtbase.serializer.QVTbaseSemanticSequencer;
+import org.eclipse.qvtd.xtext.qvtbasecs.CompoundTargetElementCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.SimpleTargetElementCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterBindingCS;
@@ -482,8 +485,17 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			}
 		else if (epackage == QVTbaseCSPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case QVTbaseCSPackage.COMPOUND_TARGET_ELEMENT_CS:
+				sequence_CompoundTargetElementCS(context, (CompoundTargetElementCS) semanticObject);
+				return;
 			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS:
 				sequence_QualifiedPackageCS(context, (QualifiedPackageCS) semanticObject);
+				return;
+			case QVTbaseCSPackage.SIMPLE_TARGET_ELEMENT_CS:
+				sequence_SimpleTargetElementCS(context, (SimpleTargetElementCS) semanticObject);
+				return;
+			case QVTbaseCSPackage.TARGET_CS:
+				sequence_TargetCS(context, (TargetCS) semanticObject);
 				return;
 			}
 		else if (epackage == QVTimperativeCSPackage.eINSTANCE)

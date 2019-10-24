@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtbasecs;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
@@ -23,6 +24,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS#getOwnedPathName <em>Owned Path Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS#getOwnedTargets <em>Owned Targets</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage#getAbstractTransformationCS()
@@ -56,5 +58,21 @@ public interface AbstractTransformationCS extends ClassCS
 	 * @generated
 	 */
 	void setOwnedPathName(PathNameCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Targets</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtbasecs.TargetCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Targets</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Targets</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage#getAbstractTransformationCS_OwnedTargets()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<TargetCS> getOwnedTargets();
 
 } // AbstractTransformationCS

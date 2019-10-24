@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -82,6 +83,27 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBaseModel();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement <em>Compound Target Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Compound Target Element</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement
+	 * @generated
+	 */
+	EClass getCompoundTargetElement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement#getOwnedTargetElements <em>Owned Target Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Target Elements</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement#getOwnedTargetElements()
+	 * @see #getCompoundTargetElement()
+	 * @generated
+	 */
+	EReference getCompoundTargetElement_OwnedTargetElements();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.Domain <em>Domain</em>}'.
@@ -408,6 +430,91 @@ public interface QVTbasePackage extends EPackage {
 	EOperation getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement <em>Simple Target Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Simple Target Element</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement
+	 * @generated
+	 */
+	EClass getSimpleTargetElement();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement#getTypedModel <em>Typed Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Typed Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement#getTypedModel()
+	 * @see #getSimpleTargetElement()
+	 * @generated
+	 */
+	EReference getSimpleTargetElement_TypedModel();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement#getIterates <em>Iterates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Iterates</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement#getIterates()
+	 * @see #getSimpleTargetElement()
+	 * @generated
+	 */
+	EReference getSimpleTargetElement_Iterates();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement#getKind <em>Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Kind</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement#getKind()
+	 * @see #getSimpleTargetElement()
+	 * @generated
+	 */
+	EAttribute getSimpleTargetElement_Kind();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.Target <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Target</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Target
+	 * @generated
+	 */
+	EClass getTarget();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtbase.Target#getOwningTransformation <em>Owning Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Transformation</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Target#getOwningTransformation()
+	 * @see #getTarget()
+	 * @generated
+	 */
+	EReference getTarget_OwningTransformation();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtbase.Target#getOwnedTargetElements <em>Owned Target Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Target Elements</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Target#getOwnedTargetElements()
+	 * @see #getTarget()
+	 * @generated
+	 */
+	EReference getTarget_OwnedTargetElements();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.TargetElement <em>Target Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Target Element</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.TargetElement
+	 * @generated
+	 */
+	EClass getTargetElement();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation <em>Transformation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -438,6 +545,17 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransformation_ModelParameter();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedTargets <em>Owned Targets</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Targets</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedTargets()
+	 * @see #getTransformation()
+	 * @generated
+	 */
+	EReference getTransformation_OwnedTargets();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getRule <em>Rule</em>}'.
@@ -641,6 +759,16 @@ public interface QVTbasePackage extends EPackage {
 	EOperation getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtbase.TargetElementKind <em>Target Element Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Target Element Kind</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.TargetElementKind
+	 * @generated
+	 */
+	EEnum getTargetElementKind();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -671,6 +799,24 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EClass BASE_MODEL = eINSTANCE.getBaseModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.CompoundTargetElementImpl <em>Compound Target Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.CompoundTargetElementImpl
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getCompoundTargetElement()
+		 * @generated
+		 */
+		EClass COMPOUND_TARGET_ELEMENT = eINSTANCE.getCompoundTargetElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Target Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS = eINSTANCE.getCompoundTargetElement_OwnedTargetElements();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl <em>Domain</em>}' class.
@@ -935,6 +1081,76 @@ public interface QVTbasePackage extends EPackage {
 		EOperation RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.SimpleTargetElementImpl <em>Simple Target Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.SimpleTargetElementImpl
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getSimpleTargetElement()
+		 * @generated
+		 */
+		EClass SIMPLE_TARGET_ELEMENT = eINSTANCE.getSimpleTargetElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Typed Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMPLE_TARGET_ELEMENT__TYPED_MODEL = eINSTANCE.getSimpleTargetElement_TypedModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Iterates</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMPLE_TARGET_ELEMENT__ITERATES = eINSTANCE.getSimpleTargetElement_Iterates();
+
+		/**
+		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMPLE_TARGET_ELEMENT__KIND = eINSTANCE.getSimpleTargetElement_Kind();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TargetImpl <em>Target</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.TargetImpl
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getTarget()
+		 * @generated
+		 */
+		EClass TARGET = eINSTANCE.getTarget();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Transformation</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TARGET__OWNING_TRANSFORMATION = eINSTANCE.getTarget_OwningTransformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Target Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TARGET__OWNED_TARGET_ELEMENTS = eINSTANCE.getTarget_OwnedTargetElements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TargetElementImpl <em>Target Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.TargetElementImpl
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getTargetElement()
+		 * @generated
+		 */
+		EClass TARGET_ELEMENT = eINSTANCE.getTargetElement();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl <em>Transformation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -959,6 +1175,14 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSFORMATION__MODEL_PARAMETER = eINSTANCE.getTransformation_ModelParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Targets</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION__OWNED_TARGETS = eINSTANCE.getTransformation_OwnedTargets();
 
 		/**
 		 * The meta object literal for the '<em><b>Rule</b></em>' containment reference list feature.
@@ -1113,6 +1337,16 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation TYPED_MODEL___VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.TargetElementKind <em>Target Element Kind</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtbase.TargetElementKind
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getTargetElementKind()
+		 * @generated
+		 */
+		EEnum TARGET_ELEMENT_KIND = eINSTANCE.getTargetElementKind();
 
 	}
 

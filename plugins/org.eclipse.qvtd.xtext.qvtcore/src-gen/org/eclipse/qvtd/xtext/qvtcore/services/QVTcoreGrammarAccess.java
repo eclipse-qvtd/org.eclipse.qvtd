@@ -1249,17 +1249,19 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedDirectionsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
 		private final RuleCall cOwnedDirectionsDirectionCSParserRuleCall_4_0_0 = (RuleCall)cOwnedDirectionsAssignment_4_0.eContents().get(0);
 		private final Keyword cSemicolonKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
-		private final Assignment cOwnedPropertiesAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cOwnedPropertiesStructuralFeatureCSParserRuleCall_5_0 = (RuleCall)cOwnedPropertiesAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cOwnedTargetsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cOwnedTargetsTargetCSParserRuleCall_5_0 = (RuleCall)cOwnedTargetsAssignment_5.eContents().get(0);
+		private final Assignment cOwnedPropertiesAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cOwnedPropertiesStructuralFeatureCSParserRuleCall_6_0 = (RuleCall)cOwnedPropertiesAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 
 		//TransformationCS:
 		//	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')*
-		//	ownedProperties+=StructuralFeatureCS* '}';
+		//	ownedTargets+=TargetCS* ownedProperties+=StructuralFeatureCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
 		//'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')*
-		//ownedProperties+=StructuralFeatureCS* '}'
+		//ownedTargets+=TargetCS* ownedProperties+=StructuralFeatureCS* '}'
 		public Group getGroup() { return cGroup; }
 
 		//'transformation'
@@ -1292,14 +1294,20 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_4_1() { return cSemicolonKeyword_4_1; }
 
+		//ownedTargets+=TargetCS*
+		public Assignment getOwnedTargetsAssignment_5() { return cOwnedTargetsAssignment_5; }
+
+		//TargetCS
+		public RuleCall getOwnedTargetsTargetCSParserRuleCall_5_0() { return cOwnedTargetsTargetCSParserRuleCall_5_0; }
+
 		//ownedProperties+=StructuralFeatureCS*
-		public Assignment getOwnedPropertiesAssignment_5() { return cOwnedPropertiesAssignment_5; }
+		public Assignment getOwnedPropertiesAssignment_6() { return cOwnedPropertiesAssignment_6; }
 
 		//StructuralFeatureCS
-		public RuleCall getOwnedPropertiesStructuralFeatureCSParserRuleCall_5_0() { return cOwnedPropertiesStructuralFeatureCSParserRuleCall_5_0; }
+		public RuleCall getOwnedPropertiesStructuralFeatureCSParserRuleCall_6_0() { return cOwnedPropertiesStructuralFeatureCSParserRuleCall_6_0; }
 
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 
 	public class UnrealizedVariableCSElements extends AbstractParserRuleElementFinder {
@@ -1433,23 +1441,29 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cImplementedbyKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cImportKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cImportsKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
-		private final Keyword cMapKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
-		private final Keyword cPackageKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
-		private final Keyword cQueryKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
-		private final Keyword cRealizeKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
-		private final Keyword cRefinesKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
-		private final Keyword cTransformationKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
-		private final Keyword cTransientKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
-		private final Keyword cUsesKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
+		private final Keyword cInputKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		private final Keyword cIteratesKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cMapKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cOutputKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cPackageKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cQueryKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cRealizeKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
+		private final Keyword cRefinesKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
+		private final Keyword cTargetKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
+		private final Keyword cTransformationKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
+		private final Keyword cTransientKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
+		private final Keyword cUsesKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
+		private final Keyword cViaKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
 
 		//QVTcoreUnrestrictedName:
-		//	'abstract' | 'check' | 'enforce' | 'implementedby' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' |
-		//	'refines' | 'transformation' | 'transient' | 'uses' //|	'where'
+		//	'abstract' | 'check' | 'enforce' | 'implementedby' | 'import' | 'imports' | 'input' | 'iterates' | 'map' | 'output' |
+		//	'package' | 'query' | 'realize' | 'refines' | 'target' | 'transformation' | 'transient' | 'uses' | 'via'
+		//	//|	'where'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 
-		//'abstract' | 'check' | 'enforce' | 'implementedby' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' |
-		//'refines' | 'transformation' | 'transient' | 'uses'
+		//'abstract' | 'check' | 'enforce' | 'implementedby' | 'import' | 'imports' | 'input' | 'iterates' | 'map' | 'output' |
+		//'package' | 'query' | 'realize' | 'refines' | 'target' | 'transformation' | 'transient' | 'uses' | 'via'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//'abstract'
@@ -1470,29 +1484,44 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//'imports'
 		public Keyword getImportsKeyword_5() { return cImportsKeyword_5; }
 
+		//'input'
+		public Keyword getInputKeyword_6() { return cInputKeyword_6; }
+
+		//'iterates'
+		public Keyword getIteratesKeyword_7() { return cIteratesKeyword_7; }
+
 		//'map'
-		public Keyword getMapKeyword_6() { return cMapKeyword_6; }
+		public Keyword getMapKeyword_8() { return cMapKeyword_8; }
+
+		//'output'
+		public Keyword getOutputKeyword_9() { return cOutputKeyword_9; }
 
 		//'package'
-		public Keyword getPackageKeyword_7() { return cPackageKeyword_7; }
+		public Keyword getPackageKeyword_10() { return cPackageKeyword_10; }
 
 		//'query'
-		public Keyword getQueryKeyword_8() { return cQueryKeyword_8; }
+		public Keyword getQueryKeyword_11() { return cQueryKeyword_11; }
 
 		//'realize'
-		public Keyword getRealizeKeyword_9() { return cRealizeKeyword_9; }
+		public Keyword getRealizeKeyword_12() { return cRealizeKeyword_12; }
 
 		//'refines'
-		public Keyword getRefinesKeyword_10() { return cRefinesKeyword_10; }
+		public Keyword getRefinesKeyword_13() { return cRefinesKeyword_13; }
+
+		//'target'
+		public Keyword getTargetKeyword_14() { return cTargetKeyword_14; }
 
 		//'transformation'
-		public Keyword getTransformationKeyword_11() { return cTransformationKeyword_11; }
+		public Keyword getTransformationKeyword_15() { return cTransformationKeyword_15; }
 
 		//'transient'
-		public Keyword getTransientKeyword_12() { return cTransientKeyword_12; }
+		public Keyword getTransientKeyword_16() { return cTransientKeyword_16; }
 
 		//'uses'
-		public Keyword getUsesKeyword_13() { return cUsesKeyword_13; }
+		public Keyword getUsesKeyword_17() { return cUsesKeyword_17; }
+
+		//'via'
+		public Keyword getViaKeyword_18() { return cViaKeyword_18; }
 	}
 
 	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
@@ -1788,7 +1817,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	//TransformationCS:
 	//	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')*
-	//	ownedProperties+=StructuralFeatureCS* '}';
+	//	ownedTargets+=TargetCS* ownedProperties+=StructuralFeatureCS* '}';
 	public TransformationCSElements getTransformationCSAccess() {
 		return pTransformationCS;
 	}
@@ -1830,8 +1859,9 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//QVTcoreUnrestrictedName:
-	//	'abstract' | 'check' | 'enforce' | 'implementedby' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' |
-	//	'refines' | 'transformation' | 'transient' | 'uses' //|	'where'
+	//	'abstract' | 'check' | 'enforce' | 'implementedby' | 'import' | 'imports' | 'input' | 'iterates' | 'map' | 'output' |
+	//	'package' | 'query' | 'realize' | 'refines' | 'target' | 'transformation' | 'transient' | 'uses' | 'via'
+	//	//|	'where'
 	//;
 	public QVTcoreUnrestrictedNameElements getQVTcoreUnrestrictedNameAccess() {
 		return pQVTcoreUnrestrictedName;
@@ -1880,6 +1910,16 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	public ParserRule getClassCSRule() {
 		return getClassCSAccess().getRule();
+	}
+
+	//CompoundTargetElementCS:
+	//	'{' ownedTargetElements+=SimpleTargetElementCS* '}' ';'?;
+	public QVTbaseGrammarAccess.CompoundTargetElementCSElements getCompoundTargetElementCSAccess() {
+		return gaQVTbase.getCompoundTargetElementCSAccess();
+	}
+
+	public ParserRule getCompoundTargetElementCSRule() {
+		return getCompoundTargetElementCSAccess().getRule();
 	}
 
 	//DataTypeCS base::DataTypeCS:
@@ -1964,6 +2004,19 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		return getReferenceCSAccess().getRule();
 	}
 
+	//SimpleTargetElementCS:
+	//	(input?='input' | output?='output' | via?='via') typedModel=[qvtbase::TypedModel|super::UnrestrictedName] ('iterates'
+	//	(iterates+=[qvtbase::TypedModel|super::UnrestrictedName] | '{'
+	//	(iterates+=[qvtbase::TypedModel|super::UnrestrictedName] (','
+	//	iterates+=[qvtbase::TypedModel|super::UnrestrictedName])*)? '}'))? ';';
+	public QVTbaseGrammarAccess.SimpleTargetElementCSElements getSimpleTargetElementCSAccess() {
+		return gaQVTbase.getSimpleTargetElementCSAccess();
+	}
+
+	public ParserRule getSimpleTargetElementCSRule() {
+		return getSimpleTargetElementCSAccess().getRule();
+	}
+
 	//SpecificationCS essentialocl::ExpSpecificationCS:
 	//	ownedExpression=ExpCS | exprString=UNQUOTED_STRING;
 	public QVTbaseGrammarAccess.SpecificationCSElements getSpecificationCSAccess() {
@@ -1985,6 +2038,17 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	public ParserRule getStructuredClassCSRule() {
 		return getStructuredClassCSAccess().getRule();
+	}
+
+	//TargetCS:
+	//	'target' name=super::UnrestrictedName '{' ownedTargetElements+=(SimpleTargetElementCS | CompoundTargetElementCS)* '}'
+	//	';'?;
+	public QVTbaseGrammarAccess.TargetCSElements getTargetCSAccess() {
+		return gaQVTbase.getTargetCSAccess();
+	}
+
+	public ParserRule getTargetCSRule() {
+		return getTargetCSAccess().getRule();
 	}
 
 	//TypedMultiplicityRefCS base::TypedRefCS:

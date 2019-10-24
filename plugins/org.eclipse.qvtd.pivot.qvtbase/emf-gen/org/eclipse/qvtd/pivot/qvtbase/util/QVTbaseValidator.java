@@ -237,23 +237,33 @@ public class QVTbaseValidator extends EObjectValidator {
 			case 0:
 				return validateBaseModel((BaseModel)value, diagnostics, context);
 			case 1:
-				return validateDomain((Domain)value, diagnostics, context);
+				return validateCompoundTargetElement((CompoundTargetElement)value, diagnostics, context);
 			case 2:
-				return validateFunction((Function)value, diagnostics, context);
+				return validateDomain((Domain)value, diagnostics, context);
 			case 3:
-				return validateFunctionBody((FunctionBody)value, diagnostics, context);
+				return validateFunction((Function)value, diagnostics, context);
 			case 4:
-				return validateFunctionParameter((FunctionParameter)value, diagnostics, context);
+				return validateFunctionBody((FunctionBody)value, diagnostics, context);
 			case 5:
-				return validatePattern((Pattern)value, diagnostics, context);
+				return validateFunctionParameter((FunctionParameter)value, diagnostics, context);
 			case 6:
-				return validatePredicate((Predicate)value, diagnostics, context);
+				return validatePattern((Pattern)value, diagnostics, context);
 			case 7:
-				return validateRule((Rule)value, diagnostics, context);
+				return validatePredicate((Predicate)value, diagnostics, context);
 			case 8:
-				return validateTransformation((Transformation)value, diagnostics, context);
+				return validateRule((Rule)value, diagnostics, context);
 			case 9:
+				return validateSimpleTargetElement((SimpleTargetElement)value, diagnostics, context);
+			case 10:
+				return validateTarget((Target)value, diagnostics, context);
+			case 11:
+				return validateTargetElement((TargetElement)value, diagnostics, context);
+			case 12:
+				return validateTransformation((Transformation)value, diagnostics, context);
+			case 13:
 				return validateTypedModel((TypedModel)value, diagnostics, context);
+			case 14:
+				return validateTargetElementKind((TargetElementKind)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -266,6 +276,15 @@ public class QVTbaseValidator extends EObjectValidator {
 	 */
 	public boolean validateBaseModel(BaseModel baseModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(baseModel, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCompoundTargetElement(CompoundTargetElement compoundTargetElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(compoundTargetElement, diagnostics, context);
 	}
 
 	/**
@@ -501,6 +520,33 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateSimpleTargetElement(SimpleTargetElement simpleTargetElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(simpleTargetElement, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTarget(Target target, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(target, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTargetElement(TargetElement targetElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(targetElement, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateTransformation(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment(transformation, diagnostics, context)) return false;
 		boolean result = validate_EveryMultiplicityConforms(transformation, diagnostics, context);
@@ -587,6 +633,15 @@ public class QVTbaseValidator extends EObjectValidator {
 	 */
 	public boolean validateTypedModel_validateExclusivePrimitiveThisTrace(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return typedModel.validateExclusivePrimitiveThisTrace(diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTargetElementKind(TargetElementKind targetElementKind, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
 	}
 
 	/**

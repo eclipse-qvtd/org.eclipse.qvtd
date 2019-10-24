@@ -52,6 +52,11 @@ public abstract class AbstractQVTbaseTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitCompoundTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull CompoundTargetElement object) {
+		return visitTargetElement(object);
+	}
+
+	@Override
 	public @Nullable Object visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visitNamedElement(object);
 	}
@@ -84,6 +89,21 @@ public abstract class AbstractQVTbaseTemplateParameterSubstitutionVisitor
 	@Override
 	public @Nullable Object visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
 		return visitNamedElement(object);
+	}
+
+	@Override
+	public @Nullable Object visitSimpleTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull SimpleTargetElement object) {
+		return visitTargetElement(object);
+	}
+
+	@Override
+	public @Nullable Object visitTarget(org.eclipse.qvtd.pivot.qvtbase.@NonNull Target object) {
+		return visitNamedElement(object);
+	}
+
+	@Override
+	public @Nullable Object visitTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull TargetElement object) {
+		return visitElement(object);
 	}
 
 	@Override

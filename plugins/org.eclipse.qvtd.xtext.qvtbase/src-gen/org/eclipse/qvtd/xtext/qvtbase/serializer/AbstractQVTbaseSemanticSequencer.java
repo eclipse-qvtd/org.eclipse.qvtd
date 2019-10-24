@@ -76,6 +76,10 @@ import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess;
+import org.eclipse.qvtd.xtext.qvtbasecs.CompoundTargetElementCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.SimpleTargetElementCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
@@ -438,6 +442,18 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				sequence_CoIteratorVariableCS(context, (VariableCS) semanticObject);
 				return;
 			}
+		else if (epackage == QVTbaseCSPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case QVTbaseCSPackage.COMPOUND_TARGET_ELEMENT_CS:
+				sequence_CompoundTargetElementCS(context, (CompoundTargetElementCS) semanticObject);
+				return;
+			case QVTbaseCSPackage.SIMPLE_TARGET_ELEMENT_CS:
+				sequence_SimpleTargetElementCS(context, (SimpleTargetElementCS) semanticObject);
+				return;
+			case QVTbaseCSPackage.TARGET_CS:
+				sequence_TargetCS(context, (TargetCS) semanticObject);
+				return;
+			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
@@ -492,6 +508,18 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *     )
 	 */
 	protected void sequence_CollectionTypeCS_TypedMultiplicityRefCS(ISerializationContext context, CollectionTypeCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+
+
+	/**
+	 * Contexts:
+	 *     CompoundTargetElementCS returns CompoundTargetElementCS
+	 *
+	 * Constraint:
+	 *     ownedTargetElements+=SimpleTargetElementCS+
+	 */
+	protected void sequence_CompoundTargetElementCS(ISerializationContext context, CompoundTargetElementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 
@@ -657,6 +685,22 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 	/**
 	 * Contexts:
+	 *     SimpleTargetElementCS returns SimpleTargetElementCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         (input?='input' | output?='output' | via?='via')
+	 *         typedModel=[TypedModel|UnrestrictedName]
+	 *         (iterates+=[TypedModel|UnrestrictedName] | (iterates+=[TypedModel|UnrestrictedName] iterates+=[TypedModel|UnrestrictedName]*))?
+	 *     )
+	 */
+	protected void sequence_SimpleTargetElementCS(ISerializationContext context, SimpleTargetElementCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+
+
+	/**
+	 * Contexts:
 	 *     SpecificationCS returns ExpSpecificationCS
 	 *
 	 * Constraint:
@@ -684,6 +728,18 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *     )
 	 */
 	protected void sequence_StructuredClassCS(ISerializationContext context, StructuredClassCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+
+
+	/**
+	 * Contexts:
+	 *     TargetCS returns TargetCS
+	 *
+	 * Constraint:
+	 *     (name=UnrestrictedName (ownedTargetElements+=SimpleTargetElementCS | ownedTargetElements+=CompoundTargetElementCS)*)
+	 */
+	protected void sequence_TargetCS(ISerializationContext context, TargetCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 

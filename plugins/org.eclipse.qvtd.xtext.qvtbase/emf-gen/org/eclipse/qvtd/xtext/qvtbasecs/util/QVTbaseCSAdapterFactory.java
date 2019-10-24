@@ -99,6 +99,11 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 				return createAbstractTransformationCSAdapter();
 			}
 			@Override
+			public Adapter caseCompoundTargetElementCS(CompoundTargetElementCS object)
+			{
+				return createCompoundTargetElementCSAdapter();
+			}
+			@Override
 			public Adapter caseJavaClassCS(JavaClassCS object)
 			{
 				return createJavaClassCSAdapter();
@@ -112,6 +117,21 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseQualifiedPackageCS(QualifiedPackageCS object)
 			{
 				return createQualifiedPackageCSAdapter();
+			}
+			@Override
+			public Adapter caseSimpleTargetElementCS(SimpleTargetElementCS object)
+			{
+				return createSimpleTargetElementCSAdapter();
+			}
+			@Override
+			public Adapter caseTargetCS(TargetCS object)
+			{
+				return createTargetCSAdapter();
+			}
+			@Override
+			public Adapter caseTargetElementCS(TargetElementCS object)
+			{
+				return createTargetElementCSAdapter();
 			}
 			@Override
 			public Adapter caseElementCS(ElementCS object)
@@ -201,6 +221,21 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.CompoundTargetElementCS <em>Compound Target Element CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.CompoundTargetElementCS
+	 * @generated
+	 */
+	public Adapter createCompoundTargetElementCSAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS <em>Java Class CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -241,6 +276,51 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createQualifiedPackageCSAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.SimpleTargetElementCS <em>Simple Target Element CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.SimpleTargetElementCS
+	 * @generated
+	 */
+	public Adapter createSimpleTargetElementCSAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.TargetCS <em>Target CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.TargetCS
+	 * @generated
+	 */
+	public Adapter createTargetCSAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.TargetElementCS <em>Target Element CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.TargetElementCS
+	 * @generated
+	 */
+	public Adapter createTargetElementCSAdapter()
 	{
 		return null;
 	}

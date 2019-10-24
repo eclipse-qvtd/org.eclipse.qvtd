@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtbasecs.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -18,14 +19,20 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.basecs.impl.ClassCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.PackageCSImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.CompoundTargetElementCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.SimpleTargetElementCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.TargetElementCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,6 +53,12 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass compoundTargetElementCSEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass javaClassCSEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
@@ -59,6 +72,24 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * @generated
 	 */
 	private EClass qualifiedPackageCSEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass simpleTargetElementCSEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass targetCSEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass targetElementCSEClass = null;
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
@@ -155,6 +186,39 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * @generated
 	 */
 	@Override
+	public EReference getAbstractTransformationCS_OwnedTargets()
+	{
+		return (EReference)abstractTransformationCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCompoundTargetElementCS()
+	{
+		return compoundTargetElementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCompoundTargetElementCS_OwnedTargetElements()
+	{
+		return (EReference)compoundTargetElementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getJavaClassCS()
 	{
 		return javaClassCSEClass;
@@ -210,6 +274,105 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * @generated
 	 */
 	@Override
+	public EClass getSimpleTargetElementCS()
+	{
+		return simpleTargetElementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSimpleTargetElementCS_TypedModel()
+	{
+		return (EReference)simpleTargetElementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSimpleTargetElementCS_Iterates()
+	{
+		return (EReference)simpleTargetElementCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSimpleTargetElementCS_Input()
+	{
+		return (EAttribute)simpleTargetElementCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSimpleTargetElementCS_Output()
+	{
+		return (EAttribute)simpleTargetElementCSEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSimpleTargetElementCS_Via()
+	{
+		return (EAttribute)simpleTargetElementCSEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTargetCS()
+	{
+		return targetCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTargetCS_OwnedTargetElements()
+	{
+		return (EReference)targetCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTargetElementCS()
+	{
+		return targetElementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public QVTbaseCSFactory getQVTbaseCSFactory()
 	{
 		return (QVTbaseCSFactory)getEFactoryInstance();
@@ -237,14 +400,30 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 		// Create classes and their features
 		abstractTransformationCSEClass = createEClass(0);
 		createEReference(abstractTransformationCSEClass, ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0);
+		createEReference(abstractTransformationCSEClass, ClassCSImpl.CLASS_CS_FEATURE_COUNT + 1);
 
-		javaClassCSEClass = createEClass(1);
+		compoundTargetElementCSEClass = createEClass(1);
+		createEReference(compoundTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		javaImplementationCSEClass = createEClass(2);
+		javaClassCSEClass = createEClass(2);
+
+		javaImplementationCSEClass = createEClass(3);
 		createEReference(javaImplementationCSEClass, ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 0);
 
-		qualifiedPackageCSEClass = createEClass(3);
+		qualifiedPackageCSEClass = createEClass(4);
 		createEReference(qualifiedPackageCSEClass, PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0);
+
+		simpleTargetElementCSEClass = createEClass(5);
+		createEReference(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEAttribute(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEAttribute(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
+		createEAttribute(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4);
+
+		targetCSEClass = createEClass(6);
+		createEReference(targetCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
+
+		targetElementCSEClass = createEClass(7);
 	}
 
 	/**
@@ -273,6 +452,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 
 		// Obtain other dependent packages
 		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
+		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -280,13 +460,21 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 
 		// Add supertypes to classes
 		abstractTransformationCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
+		compoundTargetElementCSEClass.getESuperTypes().add(this.getTargetElementCS());
 		javaClassCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		javaImplementationCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		qualifiedPackageCSEClass.getESuperTypes().add(theBaseCSPackage.getPackageCS());
+		simpleTargetElementCSEClass.getESuperTypes().add(this.getTargetElementCS());
+		targetCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
+		targetElementCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(abstractTransformationCSEClass, AbstractTransformationCS.class, "AbstractTransformationCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractTransformationCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, AbstractTransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractTransformationCS_OwnedTargets(), this.getTargetCS(), null, "ownedTargets", null, 0, -1, AbstractTransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(compoundTargetElementCSEClass, CompoundTargetElementCS.class, "CompoundTargetElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompoundTargetElementCS_OwnedTargetElements(), this.getSimpleTargetElementCS(), null, "ownedTargetElements", null, 0, -1, CompoundTargetElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(javaClassCSEClass, JavaClassCS.class, "JavaClassCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -295,6 +483,18 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 
 		initEClass(qualifiedPackageCSEClass, QualifiedPackageCS.class, "QualifiedPackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQualifiedPackageCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, QualifiedPackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(simpleTargetElementCSEClass, SimpleTargetElementCS.class, "SimpleTargetElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSimpleTargetElementCS_TypedModel(), theQVTbasePackage.getTypedModel(), null, "typedModel", null, 1, 1, SimpleTargetElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimpleTargetElementCS_Iterates(), theQVTbasePackage.getTypedModel(), null, "iterates", null, 0, -1, SimpleTargetElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimpleTargetElementCS_Input(), ecorePackage.getEBooleanObject(), "input", null, 0, 1, SimpleTargetElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimpleTargetElementCS_Output(), ecorePackage.getEBooleanObject(), "output", null, 0, 1, SimpleTargetElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimpleTargetElementCS_Via(), ecorePackage.getEBooleanObject(), "via", null, 0, 1, SimpleTargetElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(targetCSEClass, TargetCS.class, "TargetCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTargetCS_OwnedTargetElements(), this.getTargetElementCS(), null, "ownedTargetElements", null, 0, -1, TargetCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(targetElementCSEClass, TargetElementCS.class, "TargetElementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

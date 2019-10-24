@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -26,6 +27,7 @@ import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.OperationImpl;
 import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
@@ -35,6 +37,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElementKind;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseValidator;
@@ -52,6 +58,13 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	private EClass baseModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass compoundTargetElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -107,6 +120,27 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass simpleTargetElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass targetEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass targetElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass transformationEClass = null;
 
 	/**
@@ -115,6 +149,13 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	private EClass typedModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum targetElementKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -198,6 +239,26 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	@Override
 	public EClass getBaseModel() {
 		return baseModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCompoundTargetElement() {
+		return compoundTargetElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCompoundTargetElement_OwnedTargetElements() {
+		return (EReference)compoundTargetElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -516,6 +577,86 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getSimpleTargetElement() {
+		return simpleTargetElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSimpleTargetElement_TypedModel() {
+		return (EReference)simpleTargetElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSimpleTargetElement_Iterates() {
+		return (EReference)simpleTargetElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSimpleTargetElement_Kind() {
+		return (EAttribute)simpleTargetElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTarget() {
+		return targetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTarget_OwningTransformation() {
+		return (EReference)targetEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTarget_OwnedTargetElements() {
+		return (EReference)targetEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTargetElement() {
+		return targetElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTransformation() {
 		return transformationEClass;
 	}
@@ -546,7 +687,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformation_Rule() {
+	public EReference getTransformation_OwnedTargets() {
 		return (EReference)transformationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -556,7 +697,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformation_Extends() {
+	public EReference getTransformation_Rule() {
 		return (EReference)transformationEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -566,8 +707,18 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformation_OwnedContext() {
+	public EReference getTransformation_Extends() {
 		return (EReference)transformationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTransformation_OwnedContext() {
+		return (EReference)transformationEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -736,6 +887,16 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EEnum getTargetElementKind() {
+		return targetElementKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public QVTbaseFactory getQVTbaseFactory() {
 		return (QVTbaseFactory)getEFactoryInstance();
 	}
@@ -761,7 +922,10 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		// Create classes and their features
 		baseModelEClass = createEClass(0);
 
-		domainEClass = createEClass(1);
+		compoundTargetElementEClass = createEClass(1);
+		createEReference(compoundTargetElementEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+
+		domainEClass = createEClass(2);
 		createEAttribute(domainEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEAttribute(domainEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(domainEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
@@ -769,25 +933,25 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEOperation(domainEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(domainEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2);
 
-		functionEClass = createEClass(2);
+		functionEClass = createEClass(3);
 		createEReference(functionEClass, OperationImpl.OPERATION_FEATURE_COUNT + 0);
 		createEOperation(functionEClass, OperationImpl.OPERATION_OPERATION_COUNT + 0);
 		createEOperation(functionEClass, OperationImpl.OPERATION_OPERATION_COUNT + 1);
 
-		functionBodyEClass = createEClass(3);
+		functionBodyEClass = createEClass(4);
 
-		functionParameterEClass = createEClass(4);
+		functionParameterEClass = createEClass(5);
 
-		patternEClass = createEClass(5);
+		patternEClass = createEClass(6);
 		createEReference(patternEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		createEReference(patternEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 
-		predicateEClass = createEClass(6);
+		predicateEClass = createEClass(7);
 		createEReference(predicateEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		createEReference(predicateEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		createEOperation(predicateEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 
-		ruleEClass = createEClass(7);
+		ruleEClass = createEClass(8);
 		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEAttribute(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
@@ -799,12 +963,24 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3);
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4);
 
-		transformationEClass = createEClass(8);
+		simpleTargetElementEClass = createEClass(9);
+		createEReference(simpleTargetElementEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(simpleTargetElementEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEAttribute(simpleTargetElementEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+
+		targetEClass = createEClass(10);
+		createEReference(targetEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(targetEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+
+		targetElementEClass = createEClass(11);
+
+		transformationEClass = createEClass(12);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 0);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 1);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 2);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 3);
 		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 4);
+		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 5);
 		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 0);
 		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 1);
 		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 2);
@@ -812,7 +988,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 4);
 		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 5);
 
-		typedModelEClass = createEClass(9);
+		typedModelEClass = createEClass(13);
 		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
@@ -822,6 +998,9 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEAttribute(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
 		createEOperation(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
+
+		// Create enums
+		targetElementKindEEnum = createEEnum(14);
 	}
 
 	/**
@@ -856,6 +1035,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Add supertypes to classes
 		baseModelEClass.getESuperTypes().add(thePivotPackage.getModel());
+		compoundTargetElementEClass.getESuperTypes().add(this.getTargetElement());
 		domainEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		domainEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		functionEClass.getESuperTypes().add(thePivotPackage.getOperation());
@@ -864,11 +1044,17 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		patternEClass.getESuperTypes().add(thePivotPackage.getElement());
 		predicateEClass.getESuperTypes().add(thePivotPackage.getElement());
 		ruleEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
+		simpleTargetElementEClass.getESuperTypes().add(this.getTargetElement());
+		targetEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
+		targetElementEClass.getESuperTypes().add(thePivotPackage.getElement());
 		transformationEClass.getESuperTypes().add(thePivotPackage.getClass_());
 		typedModelEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(baseModelEClass, BaseModel.class, "BaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(compoundTargetElementEClass, CompoundTargetElement.class, "CompoundTargetElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompoundTargetElement_OwnedTargetElements(), this.getSimpleTargetElement(), null, "ownedTargetElements", null, 2, -1, CompoundTargetElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainEClass, Domain.class, "Domain", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomain_IsCheckable(), ecorePackage.getEBoolean(), "isCheckable", null, 1, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -988,9 +1174,21 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(simpleTargetElementEClass, SimpleTargetElement.class, "SimpleTargetElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSimpleTargetElement_TypedModel(), this.getTypedModel(), null, "typedModel", null, 1, 1, SimpleTargetElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimpleTargetElement_Iterates(), this.getTypedModel(), null, "iterates", null, 0, -1, SimpleTargetElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getSimpleTargetElement_Kind(), this.getTargetElementKind(), "kind", null, 1, 1, SimpleTargetElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(targetEClass, Target.class, "Target", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTarget_OwningTransformation(), this.getTransformation(), this.getTransformation_OwnedTargets(), "owningTransformation", null, 1, 1, Target.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTarget_OwnedTargetElements(), this.getTargetElement(), null, "ownedTargetElements", null, 2, -1, Target.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(targetElementEClass, TargetElement.class, "TargetElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(transformationEClass, Transformation.class, "Transformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransformation_OwnedTag(), thePivotPackage.getAnnotation(), null, "ownedTag", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransformation_ModelParameter(), this.getTypedModel(), this.getTypedModel_Transformation(), "modelParameter", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransformation_OwnedTargets(), this.getTarget(), this.getTarget_OwningTransformation(), "ownedTargets", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransformation_Rule(), this.getRule(), this.getRule_Transformation(), "rule", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransformation_Extends(), this.getTransformation(), null, "extends", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformation_OwnedContext(), thePivotPackage.getParameter(), null, "ownedContext", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1055,6 +1253,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(targetElementKindEEnum, TargetElementKind.class, "TargetElementKind");
+		addEEnumLiteral(targetElementKindEEnum, TargetElementKind.INPUT);
+		addEEnumLiteral(targetElementKindEEnum, TargetElementKind.VIA);
+		addEEnumLiteral(targetElementKindEEnum, TargetElementKind.OUTPUT);
 
 		// Create resource
 		createResource(eNS_URI);

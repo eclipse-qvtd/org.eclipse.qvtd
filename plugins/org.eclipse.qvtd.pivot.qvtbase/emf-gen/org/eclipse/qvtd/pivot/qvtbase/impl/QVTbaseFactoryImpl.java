@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
@@ -72,15 +73,48 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case 0: return createBaseModel();
-			case 2: return createFunction();
-			case 3: return createFunctionBody();
-			case 4: return createFunctionParameter();
-			case 5: return createPattern();
-			case 6: return createPredicate();
-			case 8: return createTransformation();
-			case 9: return createTypedModel();
+			case 1: return createCompoundTargetElement();
+			case 3: return createFunction();
+			case 4: return createFunctionBody();
+			case 5: return createFunctionParameter();
+			case 6: return createPattern();
+			case 7: return createPredicate();
+			case 9: return createSimpleTargetElement();
+			case 10: return createTarget();
+			case 12: return createTransformation();
+			case 13: return createTypedModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case 14:
+				return createTargetElementKindFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case 14:
+				return convertTargetElementKindToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -93,6 +127,17 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	public @NonNull BaseModel createBaseModel() {
 		BaseModelImpl baseModel = new BaseModelImpl();
 		return baseModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CompoundTargetElement createCompoundTargetElement() {
+		CompoundTargetElementImpl compoundTargetElement = new CompoundTargetElementImpl();
+		return compoundTargetElement;
 	}
 
 	/**
@@ -156,6 +201,28 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * @generated
 	 */
 	@Override
+	public SimpleTargetElement createSimpleTargetElement() {
+		SimpleTargetElementImpl simpleTargetElement = new SimpleTargetElementImpl();
+		return simpleTargetElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Target createTarget() {
+		TargetImpl target = new TargetImpl();
+		return target;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull Transformation createTransformation() {
 		TransformationImpl transformation = new TransformationImpl();
 		return transformation;
@@ -170,6 +237,26 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	public @NonNull TypedModel createTypedModel() {
 		TypedModelImpl typedModel = new TypedModelImpl();
 		return typedModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TargetElementKind createTargetElementKindFromString(EDataType eDataType, String initialValue) {
+		TargetElementKind result = TargetElementKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTargetElementKindToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

@@ -44,6 +44,18 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, @NonNull D extends QV
 	}
 
 	@Override
+	public R visitCompoundTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull CompoundTargetElement object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitCompoundTargetElement(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -120,6 +132,42 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, @NonNull D extends QV
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitRule(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitSimpleTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull SimpleTargetElement object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitSimpleTargetElement(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitTarget(org.eclipse.qvtd.pivot.qvtbase.@NonNull Target object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitTarget(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull TargetElement object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitTargetElement(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

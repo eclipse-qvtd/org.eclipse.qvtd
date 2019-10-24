@@ -103,6 +103,10 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 				return createBaseModelAdapter();
 			}
 			@Override
+			public Adapter caseCompoundTargetElement(CompoundTargetElement object) {
+				return createCompoundTargetElementAdapter();
+			}
+			@Override
 			public Adapter caseDomain(Domain object) {
 				return createDomainAdapter();
 			}
@@ -129,6 +133,18 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRule(Rule object) {
 				return createRuleAdapter();
+			}
+			@Override
+			public Adapter caseSimpleTargetElement(SimpleTargetElement object) {
+				return createSimpleTargetElementAdapter();
+			}
+			@Override
+			public Adapter caseTarget(Target object) {
+				return createTargetAdapter();
+			}
+			@Override
+			public Adapter caseTargetElement(TargetElement object) {
+				return createTargetElementAdapter();
 			}
 			@Override
 			public Adapter caseTransformation(Transformation object) {
@@ -237,6 +253,20 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement <em>Compound Target Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement
+	 * @generated
+	 */
+	public Adapter createCompoundTargetElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtbase.Domain <em>Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -331,6 +361,48 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement <em>Simple Target Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement
+	 * @generated
+	 */
+	public Adapter createSimpleTargetElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtbase.Target <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Target
+	 * @generated
+	 */
+	public Adapter createTargetAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtbase.TargetElement <em>Target Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.TargetElement
+	 * @generated
+	 */
+	public Adapter createTargetElementAdapter() {
 		return null;
 	}
 

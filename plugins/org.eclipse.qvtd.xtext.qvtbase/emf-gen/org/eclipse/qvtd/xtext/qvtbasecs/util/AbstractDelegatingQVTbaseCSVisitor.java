@@ -39,6 +39,11 @@ public abstract class AbstractDelegatingQVTbaseCSVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitCompoundTargetElementCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull CompoundTargetElementCS object) {
+		return delegate.visitCompoundTargetElementCS(object);
+	}
+
+	@Override
 	public R visitJavaClassCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaClassCS object) {
 		return delegate.visitJavaClassCS(object);
 	}
@@ -51,5 +56,20 @@ public abstract class AbstractDelegatingQVTbaseCSVisitor<R, C, @NonNull D extend
 	@Override
 	public R visitQualifiedPackageCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull QualifiedPackageCS object) {
 		return delegate.visitQualifiedPackageCS(object);
+	}
+
+	@Override
+	public R visitSimpleTargetElementCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull SimpleTargetElementCS object) {
+		return delegate.visitSimpleTargetElementCS(object);
+	}
+
+	@Override
+	public R visitTargetCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull TargetCS object) {
+		return delegate.visitTargetCS(object);
+	}
+
+	@Override
+	public R visitTargetElementCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull TargetElementCS object) {
+		return delegate.visitTargetElementCS(object);
 	}
 }

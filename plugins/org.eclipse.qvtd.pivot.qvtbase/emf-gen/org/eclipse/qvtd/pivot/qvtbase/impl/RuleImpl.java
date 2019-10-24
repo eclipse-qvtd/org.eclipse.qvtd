@@ -250,7 +250,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newTransformation != null)
-				msgs = ((InternalEObject)newTransformation).eInverseAdd(this, ClassImpl.CLASS_FEATURE_COUNT + 2, Transformation.class, msgs);
+				msgs = ((InternalEObject)newTransformation).eInverseAdd(this, ClassImpl.CLASS_FEATURE_COUNT + 3, Transformation.class, msgs);
 			msgs = basicSetTransformation(newTransformation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -858,7 +858,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
-				return eInternalContainer().eInverseRemove(this, ClassImpl.CLASS_FEATURE_COUNT + 2, Transformation.class, msgs);
+				return eInternalContainer().eInverseRemove(this, ClassImpl.CLASS_FEATURE_COUNT + 3, Transformation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

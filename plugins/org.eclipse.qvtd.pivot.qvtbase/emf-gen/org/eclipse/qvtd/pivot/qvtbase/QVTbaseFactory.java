@@ -40,6 +40,15 @@ public interface QVTbaseFactory extends EFactory {
 	@NonNull BaseModel createBaseModel();
 
 	/**
+	 * Returns a new object of class '<em>Compound Target Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Compound Target Element</em>'.
+	 * @generated
+	 */
+	CompoundTargetElement createCompoundTargetElement();
+
+	/**
 	 * Returns a new object of class '<em>Function</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +92,24 @@ public interface QVTbaseFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull Predicate createPredicate();
+
+	/**
+	 * Returns a new object of class '<em>Simple Target Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Target Element</em>'.
+	 * @generated
+	 */
+	SimpleTargetElement createSimpleTargetElement();
+
+	/**
+	 * Returns a new object of class '<em>Target</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Target</em>'.
+	 * @generated
+	 */
+	Target createTarget();
 
 	/**
 	 * Returns a new object of class '<em>Transformation</em>'.

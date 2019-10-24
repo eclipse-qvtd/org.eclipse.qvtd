@@ -51,6 +51,11 @@ public abstract class AbstractQVTbaseFlowAnalysisDeducerFromNullVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitCompoundTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull CompoundTargetElement object) {
+		return visitTargetElement(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visitNamedElement(object);
 	}
@@ -83,6 +88,21 @@ public abstract class AbstractQVTbaseFlowAnalysisDeducerFromNullVisitor
 	@Override
 	public @Nullable Boolean visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
 		return visitNamedElement(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitSimpleTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull SimpleTargetElement object) {
+		return visitTargetElement(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitTarget(org.eclipse.qvtd.pivot.qvtbase.@NonNull Target object) {
+		return visitNamedElement(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitTargetElement(org.eclipse.qvtd.pivot.qvtbase.@NonNull TargetElement object) {
+		return visitElement(object);
 	}
 
 	@Override

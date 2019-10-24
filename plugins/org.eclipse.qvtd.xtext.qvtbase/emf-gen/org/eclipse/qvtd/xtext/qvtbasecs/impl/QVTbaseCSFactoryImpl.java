@@ -72,11 +72,26 @@ public class QVTbaseCSFactoryImpl extends EFactoryImpl implements QVTbaseCSFacto
 	{
 		switch (eClass.getClassifierID())
 		{
-			case 1: return createJavaClassCS();
-			case 3: return createQualifiedPackageCS();
+			case 1: return createCompoundTargetElementCS();
+			case 2: return createJavaClassCS();
+			case 4: return createQualifiedPackageCS();
+			case 5: return createSimpleTargetElementCS();
+			case 6: return createTargetCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CompoundTargetElementCS createCompoundTargetElementCS()
+	{
+		CompoundTargetElementCSImpl compoundTargetElementCS = new CompoundTargetElementCSImpl();
+		return compoundTargetElementCS;
 	}
 
 	/**
@@ -101,6 +116,30 @@ public class QVTbaseCSFactoryImpl extends EFactoryImpl implements QVTbaseCSFacto
 	{
 		QualifiedPackageCSImpl qualifiedPackageCS = new QualifiedPackageCSImpl();
 		return qualifiedPackageCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SimpleTargetElementCS createSimpleTargetElementCS()
+	{
+		SimpleTargetElementCSImpl simpleTargetElementCS = new SimpleTargetElementCSImpl();
+		return simpleTargetElementCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TargetCS createTargetCS()
+	{
+		TargetCSImpl targetCS = new TargetCSImpl();
+		return targetCS;
 	}
 
 	/**

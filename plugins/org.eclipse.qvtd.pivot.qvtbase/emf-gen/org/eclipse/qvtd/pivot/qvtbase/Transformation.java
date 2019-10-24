@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.Parameter;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedTag <em>Owned Tag</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getModelParameter <em>Model Parameter</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedTargets <em>Owned Targets</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getRule <em>Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedContext <em>Owned Context</em>}</li>
@@ -71,6 +72,23 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @generated
 	 */
 	@NonNull EList<TypedModel> getModelParameter();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Targets</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.Target}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtbase.Target#getOwningTransformation <em>Owning Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Targets</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation_OwnedTargets()
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Target#getOwningTransformation
+	 * @model opposite="owningTransformation" containment="true" ordered="false"
+	 * @generated
+	 */
+	EList<Target> getOwnedTargets();
 
 	/**
 	 * Returns the value of the '<em><b>Rule</b></em>' containment reference list.

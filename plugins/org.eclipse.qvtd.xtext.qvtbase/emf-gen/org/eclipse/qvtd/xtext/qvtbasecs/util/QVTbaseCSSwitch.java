@@ -108,6 +108,17 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 			}
 			case 1:
 			{
+				CompoundTargetElementCS compoundTargetElementCS = (CompoundTargetElementCS)theEObject;
+				T result = caseCompoundTargetElementCS(compoundTargetElementCS);
+				if (result == null) result = caseTargetElementCS(compoundTargetElementCS);
+				if (result == null) result = caseModelElementCS(compoundTargetElementCS);
+				if (result == null) result = casePivotableElementCS(compoundTargetElementCS);
+				if (result == null) result = caseElementCS(compoundTargetElementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 2:
+			{
 				JavaClassCS javaClassCS = (JavaClassCS)theEObject;
 				T result = caseJavaClassCS(javaClassCS);
 				if (result == null) result = caseNamedElementCS(javaClassCS);
@@ -117,7 +128,7 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 2:
+			case 3:
 			{
 				JavaImplementationCS javaImplementationCS = (JavaImplementationCS)theEObject;
 				T result = caseJavaImplementationCS(javaImplementationCS);
@@ -125,7 +136,7 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 3:
+			case 4:
 			{
 				QualifiedPackageCS qualifiedPackageCS = (QualifiedPackageCS)theEObject;
 				T result = caseQualifiedPackageCS(qualifiedPackageCS);
@@ -136,6 +147,38 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = caseModelElementCS(qualifiedPackageCS);
 				if (result == null) result = casePivotableElementCS(qualifiedPackageCS);
 				if (result == null) result = caseElementCS(qualifiedPackageCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 5:
+			{
+				SimpleTargetElementCS simpleTargetElementCS = (SimpleTargetElementCS)theEObject;
+				T result = caseSimpleTargetElementCS(simpleTargetElementCS);
+				if (result == null) result = caseTargetElementCS(simpleTargetElementCS);
+				if (result == null) result = caseModelElementCS(simpleTargetElementCS);
+				if (result == null) result = casePivotableElementCS(simpleTargetElementCS);
+				if (result == null) result = caseElementCS(simpleTargetElementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 6:
+			{
+				TargetCS targetCS = (TargetCS)theEObject;
+				T result = caseTargetCS(targetCS);
+				if (result == null) result = caseNamedElementCS(targetCS);
+				if (result == null) result = caseModelElementCS(targetCS);
+				if (result == null) result = casePivotableElementCS(targetCS);
+				if (result == null) result = caseElementCS(targetCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 7:
+			{
+				TargetElementCS targetElementCS = (TargetElementCS)theEObject;
+				T result = caseTargetElementCS(targetElementCS);
+				if (result == null) result = caseModelElementCS(targetElementCS);
+				if (result == null) result = casePivotableElementCS(targetElementCS);
+				if (result == null) result = caseElementCS(targetElementCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -155,6 +198,22 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseAbstractTransformationCS(AbstractTransformationCS object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Compound Target Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Compound Target Element CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompoundTargetElementCS(CompoundTargetElementCS object)
 	{
 		return null;
 	}
@@ -203,6 +262,54 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseQualifiedPackageCS(QualifiedPackageCS object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Target Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Target Element CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSimpleTargetElementCS(SimpleTargetElementCS object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Target CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Target CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTargetCS(TargetCS object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Target Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Target Element CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTargetElementCS(TargetElementCS object)
 	{
 		return null;
 	}

@@ -23,6 +23,7 @@ public class AbstractQVTbaseJavaValidator extends org.eclipse.ocl.xtext.essentia
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/ocl/2015/BaseCS"));
+	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/ocl/2016/QVTbaseCS"));
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/ocl/2015/EssentialOCLCS"));
 		return result;
 	}
