@@ -2,7 +2,7 @@ import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
 
 transformation Dependencies {
 	source imports ecore;
-	target imports ecore;
+	_'target' imports ecore;
 	middle imports ecore;
 
 	map dependenciesLM {

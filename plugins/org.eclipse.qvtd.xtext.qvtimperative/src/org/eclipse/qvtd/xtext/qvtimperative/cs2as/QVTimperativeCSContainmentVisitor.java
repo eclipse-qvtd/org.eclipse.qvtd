@@ -215,9 +215,10 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		EntryPoint pivotElement = refreshNamedElement(EntryPoint.class, QVTimperativePackage.Literals.ENTRY_POINT, csElement);
 		context.refreshPivotList(MappingParameter.class, pivotElement.getOwnedMappingParameters(), csElement.getOwnedParameters());
 		context.refreshPivotList(Statement.class, pivotElement.getOwnedStatements(), csElement.getOwnedStatements());
-		pivotElement.setFirstPass(csElement.getFirstPass());
+		pivotElement.setFirstPass(0);
 		pivotElement.setIsStrict(csElement.isIsStrict());
-		pivotElement.setLastPass(csElement.getLastPass());
+		pivotElement.setLastPass(0);
+		pivotElement.setTargetName(csElement.getTargetName());
 		return null;
 	}
 

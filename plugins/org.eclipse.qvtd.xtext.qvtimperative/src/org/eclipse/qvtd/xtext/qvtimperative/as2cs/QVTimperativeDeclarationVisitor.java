@@ -409,9 +409,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		context.refreshList(csEntryPoint.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asEntryPoint.getOwnedStatements(), null));
 		context.refreshList(csEntryPoint.getInputTypedModels(), asEntryPoint.getInputTypedModels());
 		context.refreshList(csEntryPoint.getOutputTypedModels(), asEntryPoint.getOutputTypedModels());
-		csEntryPoint.setFirstPass(asEntryPoint.getFirstPass());
 		csEntryPoint.setIsStrict(asEntryPoint.isIsStrict());
-		csEntryPoint.setLastPass(asEntryPoint.getLastPass());
+		csEntryPoint.setTargetName(asEntryPoint.getTargetName());
 		return csEntryPoint;
 	}
 
