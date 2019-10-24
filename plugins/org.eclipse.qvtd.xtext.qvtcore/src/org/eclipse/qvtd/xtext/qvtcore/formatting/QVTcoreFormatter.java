@@ -155,8 +155,8 @@ public class QVTcoreFormatter extends QVTbaseFormatter
 
 	protected void configureTransformationCS(FormattingConfig c, TransformationCSElements a) {
 		c.setLinewrap(2).before(a.getGroup());
-		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_6());
-		setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_6());
+		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_7());
+		setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_7());
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_4_1());
 	}
 	@Override
@@ -168,6 +168,7 @@ public class QVTcoreFormatter extends QVTbaseFormatter
 		configureAttributeCS(c, f.getAttributeCSAccess());
 		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
 		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
+		configureCompoundTargetElementCS(c, f.getCompoundTargetElementCSAccess());
 		configureCurlyBracketedClauseCS(c, f.getCurlyBracketedClauseCSAccess());
 		configureDataTypeCS(c, f.getDataTypeCSAccess());
 		configureEnumerationCS(c, f.getEnumerationCSAccess());
@@ -192,7 +193,9 @@ public class QVTcoreFormatter extends QVTbaseFormatter
 		configureReferenceCS(c, f.getReferenceCSAccess());
 		configureRoundBracketedClauseCS(c, f.getRoundBracketedClauseCSAccess());
 		configureSquareBracketedClauseCS(c, f.getSquareBracketedClauseCSAccess());
+		configureSimpleTargetElementCS(c, f.getSimpleTargetElementCSAccess());
 		configureStructuredClassCS(c, f.getStructuredClassCSAccess());
+		configureTargetCS(c, f.getTargetCSAccess());
 		configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
 		configureTupleTypeCS(c, f.getTupleTypeCSAccess());
 		configureTypedTypeRefCS(c, f.getTypedTypeRefCSAccess());

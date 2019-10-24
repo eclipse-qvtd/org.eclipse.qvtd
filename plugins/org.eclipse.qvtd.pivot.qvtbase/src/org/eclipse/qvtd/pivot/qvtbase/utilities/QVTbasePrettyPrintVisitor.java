@@ -15,6 +15,9 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.internal.prettyprint.EssentialOCLPrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
@@ -22,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
@@ -35,6 +39,11 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 	@Override
 	public Object visitBaseModel(@NonNull BaseModel object) {
 		return super.visitModel(object);
+	}
+
+	@Override
+	public Object visitCompoundTargetElement(@NonNull CompoundTargetElement object) {
+		return null;
 	}
 
 	@Override
@@ -59,14 +68,18 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 	}
 
 	@Override
+	public Object visitImport(@NonNull Import object) {
+		context.appendName(object);
+		return null;
+	}
+
+	@Override
 	public Object visitPattern(@NonNull Pattern object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Object visitPredicate(@NonNull Predicate object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -77,18 +90,27 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 	}
 
 	@Override
+	public Object visitSimpleTargetElement(@NonNull SimpleTargetElement object) {
+		return null;
+	}
+
+	@Override
+	public Object visitTarget(@NonNull Target object) {
+		return null;
+	}
+
+	@Override
+	public Object visitTargetElement(@NonNull TargetElement object) {
+		return null;
+	}
+
+	@Override
 	public Object visitTransformation(@NonNull Transformation object) {
 		return super.visitClass(object);
 	}
 
 	@Override
 	public Object visitTypedModel(@NonNull TypedModel object) {
-		context.appendName(object);
-		return null;
-	}
-
-	@Override
-	public Object visitImport(@NonNull Import object) {
 		context.appendName(object);
 		return null;
 	}

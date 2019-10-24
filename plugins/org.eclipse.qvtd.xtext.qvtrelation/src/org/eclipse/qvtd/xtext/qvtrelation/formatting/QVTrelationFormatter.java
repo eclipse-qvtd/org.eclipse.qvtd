@@ -53,6 +53,7 @@ public class QVTrelationFormatter extends QVTbaseFormatter
 		configureAttributeCS(c, f.getAttributeCSAccess());
 		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
 		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
+		configureCompoundTargetElementCS(c, f.getCompoundTargetElementCSAccess());
 		configureCurlyBracketedClauseCS(c, f.getCurlyBracketedClauseCSAccess());
 		configureDataTypeCS(c, f.getDataTypeCSAccess());
 		configureEnumerationCS(c, f.getEnumerationCSAccess());
@@ -75,8 +76,10 @@ public class QVTrelationFormatter extends QVTbaseFormatter
 		configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());
 		configureReferenceCS(c, f.getReferenceCSAccess());
 		configureRoundBracketedClauseCS(c, f.getRoundBracketedClauseCSAccess());
+		configureSimpleTargetElementCS(c, f.getSimpleTargetElementCSAccess());
 		configureSquareBracketedClauseCS(c, f.getSquareBracketedClauseCSAccess());
 		configureStructuredClassCS(c, f.getStructuredClassCSAccess());
+		configureTargetCS(c, f.getTargetCSAccess());
 		configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
 		configureTupleTypeCS(c, f.getTupleTypeCSAccess());
 		//		configureTypedTypeRefCS(c, f.getTypedTypeRefCSAccess());
@@ -201,10 +204,14 @@ public class QVTrelationFormatter extends QVTbaseFormatter
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_3());
 			c.setNoSpace().before(a.getCommaKeyword_5_0());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_6());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_11());
-			setBraces(c, a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_11());
-			c.setLinewrap(2).between(a.getOwnedKeyDeclsAssignment_9(), a.getAlternatives_10());
-			c.setLinewrap(2).between(a.getAlternatives_10(), a.getAlternatives_10());
+			c.setLinewrap(1).before(a.getOwnedTargetsAssignment_9());
+			c.setNoSpace().before(a.getCommaKeyword_7_2_0());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_12());
+			setBraces(c, a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_12());
+			c.setLinewrap(2).between(a.getOwnedTargetsAssignment_9(), a.getOwnedKeyDeclsAssignment_10());
+			c.setLinewrap(2).between(a.getOwnedTargetsAssignment_9(), a.getAlternatives_11());
+			c.setLinewrap(2).between(a.getOwnedKeyDeclsAssignment_10(), a.getAlternatives_11());
+			c.setLinewrap(2).between(a.getAlternatives_11(), a.getAlternatives_11());
 			c.setIndentation(a.getLeftParenthesisKeyword_3(), a.getRightParenthesisKeyword_6());
 		}
 		{

@@ -106,6 +106,9 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
@@ -113,6 +116,7 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -817,6 +821,32 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return null;
 	}
 
+	/*	@Override
+	public @Nullable CGNamedElement visitCheckVariableStatement(@NonNull CheckVariableStatement asCheckVariableStatement) {
+		/*		VariableDeclaration asVariable = asCheckVariableStatement.getTargetVariable();
+		if (asVariable == null) {
+			return null;
+		}
+		CGVariable cgVariable = getVariable(asVariable);
+		OCLExpression asInitValue = asCheckVariableStatement.getOwnedExpression();
+		assert !(cgVariable instanceof CGConnectionVariable);
+		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
+		cgVariable.setInit(initValue);
+		cgVariable.setTypeId(initValue.getTypeId());
+		cgVariable.setRequired(initValue.isRequired());
+		return cgVariable; * /
+		VariableDeclaration asVariable = asCheckVariableStatement.getTargetVariable();
+		OCLExpression asInit = asCheckVariableStatement.getOwnedExpression();
+		assert (asVariable != null) && (asInit != null);
+		getBodyBuilder().appendCheckedLetVariable(asVariable, asInit);
+		return null;
+	} */
+
+	@Override
+	public @Nullable CGNamedElement visitCompoundTargetElement(@NonNull CompoundTargetElement object) {
+		return visiting(object);
+	}
+
 	@Override
 	public @Nullable CGNamedElement visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visiting(object);
@@ -1374,6 +1404,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
+	public @Nullable CGNamedElement visitSimpleTargetElement(@NonNull SimpleTargetElement object) {
+		return visiting(object);
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitSimpleParameter(@NonNull SimpleParameter object) {
 		return visiting(object);
 	}
@@ -1394,6 +1429,37 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public CGNamedElement visitStatement(@NonNull Statement object) {
+		return visiting(object);
+	}
+
+	/*	@Override
+	public @Nullable CGNamedElement visitCheckVariableStatement(@NonNull CheckVariableStatement asCheckVariableStatement) {
+		/*		VariableDeclaration asVariable = asCheckVariableStatement.getTargetVariable();
+		if (asVariable == null) {
+			return null;
+		}
+		CGVariable cgVariable = getVariable(asVariable);
+		OCLExpression asInitValue = asCheckVariableStatement.getOwnedExpression();
+		assert !(cgVariable instanceof CGConnectionVariable);
+		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
+		cgVariable.setInit(initValue);
+		cgVariable.setTypeId(initValue.getTypeId());
+		cgVariable.setRequired(initValue.isRequired());
+		return cgVariable; * /
+		VariableDeclaration asVariable = asCheckVariableStatement.getTargetVariable();
+		OCLExpression asInit = asCheckVariableStatement.getOwnedExpression();
+		assert (asVariable != null) && (asInit != null);
+		getBodyBuilder().appendCheckedLetVariable(asVariable, asInit);
+		return null;
+	} */
+
+	@Override
+	public @Nullable CGNamedElement visitTarget(@NonNull Target object) {
+		return visiting(object);
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitTargetElement(@NonNull TargetElement object) {
 		return visiting(object);
 	}
 

@@ -45,11 +45,15 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
@@ -545,6 +549,22 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(asTransformation.getRule());
 	}
 
+	public static @NonNull Target getOwnedTarget(@NonNull Transformation transformation, @NonNull String targetName) {
+		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedTargets(transformation), targetName));
+	}
+
+	public static @NonNull Iterable<@NonNull SimpleTargetElement> getOwnedTargetElements(@NonNull CompoundTargetElement asCompoundTargetElement) {
+		return ClassUtil.nullFree(asCompoundTargetElement.getOwnedTargetElements());
+	}
+
+	public static @NonNull Iterable<@NonNull TargetElement> getOwnedTargetElements(@NonNull Target asTarget) {
+		return ClassUtil.nullFree(asTarget.getOwnedTargetElements());
+	}
+
+	public static @NonNull Iterable<@NonNull Target> getOwnedTargets(@NonNull Transformation asTransformation) {
+		return ClassUtil.nullFree(asTransformation.getOwnedTargets());
+	}
+
 	public static @NonNull Transformation getOwningTransformation(@NonNull Rule asRule) {
 		return ClassUtil.nonNullState(asRule.getTransformation());
 	}
@@ -595,6 +615,10 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull TypedModel getTypedModel(@NonNull Domain asDomain) {
 		return ClassUtil.nonNullState(asDomain.getTypedModel());
+	}
+
+	public static @NonNull TypedModel getTypedModel(@NonNull SimpleTargetElement asSimpleTargetElement) {
+		return ClassUtil.nonNullState(asSimpleTargetElement.getTypedModel());
 	}
 
 	public static int getTypedModelIndex(@Nullable TypedModel typedModel) {

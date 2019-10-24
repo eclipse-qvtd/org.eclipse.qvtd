@@ -82,6 +82,7 @@ import org.eclipse.qvtd.xtext.qvtbase.as2cs.QVTbaseDeclarationVisitor;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.DomainCS;
@@ -573,6 +574,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		//		}
 		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
 		context.refreshList(csTransformation.getOwnedProperties(), context.visitDeclarations(StructuralFeatureCS.class, asTransformation.getOwnedProperties(), null));
+		context.refreshList(csTransformation.getOwnedTargets(), context.visitDeclarations(TargetCS.class, asTransformation.getOwnedTargets(), null));
 		return csTransformation;
 	}
 

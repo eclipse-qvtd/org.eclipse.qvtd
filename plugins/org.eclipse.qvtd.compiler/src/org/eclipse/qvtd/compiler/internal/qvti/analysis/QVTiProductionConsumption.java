@@ -424,11 +424,15 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			PassRange productionRange = connectionAnalysis != null ? connectionAnalysis.getProductionPassRange() : null;
 			for (@NonNull NavigationCallExp consumer : consumingAnalysis.consumers) {
 				if (productionRange == null) {
-					StringBuilder sProblem = initProblem("", consumer, " is not produced");
-					Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
-					compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
-					if (s != null) {
-						s.append("\n      BAD " + sProblem);
+					OCLExpression ownedSource = PivotUtil.getOwnedSource(consumer);
+					DomainUsage sourceUsage = domainUsageAnalysis.getUsage(ownedSource);
+					if (!sourceUsage.isThis()) {
+						StringBuilder sProblem = initProblem("", consumer, " is not produced");
+						Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
+						compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
+						if (s != null) {
+							s.append("\n      BAD " + sProblem);
+						}
 					}
 				}
 				else {

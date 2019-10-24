@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.TemplateSignature;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
@@ -37,6 +38,9 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
@@ -44,8 +48,14 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
+import org.eclipse.qvtd.xtext.qvtbasecs.CompoundTargetElementCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.SimpleTargetElementCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.TargetElementCS;
 
 public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationVisitor implements QVTbaseVisitor<ElementCS>
 {
@@ -88,6 +98,13 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	@Override
 	public ElementCS visitBaseModel(@NonNull BaseModel object) {
 		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitCompoundTargetElement(@NonNull CompoundTargetElement asCompoundTargetElement) {
+		CompoundTargetElementCS csCompoundTargetElement = context.refreshElement(CompoundTargetElementCS.class, QVTbaseCSPackage.Literals.COMPOUND_TARGET_ELEMENT_CS, asCompoundTargetElement);
+		context.refreshList(csCompoundTargetElement.getOwnedTargetElements(), context.visitDeclarations(SimpleTargetElementCS.class, asCompoundTargetElement.getOwnedTargetElements(), null));
+		return csCompoundTargetElement;
 	}
 
 	@Override
@@ -143,6 +160,31 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 
 	@Override
 	public ElementCS visitRule(@NonNull Rule object) {
+		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitSimpleTargetElement(@NonNull SimpleTargetElement asSimpleTargetElement) {
+		SimpleTargetElementCS csSimpleTargetElement = context.refreshElement(SimpleTargetElementCS.class, QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS, asSimpleTargetElement);
+		PivotUtilInternal.refreshList(csSimpleTargetElement.getIterates(), asSimpleTargetElement.getIterates());
+		csSimpleTargetElement.setTypedModel(asSimpleTargetElement.getTypedModel());
+		switch (asSimpleTargetElement.getKind()) {
+			case INPUT: csSimpleTargetElement.setInput(true); break;
+			case OUTPUT: csSimpleTargetElement.setOutput(true); break;
+			case VIA: csSimpleTargetElement.setVia(true); break;
+		}
+		return csSimpleTargetElement;
+	}
+
+	@Override
+	public ElementCS visitTarget(@NonNull Target asTarget) {
+		TargetCS csTarget = context.refreshNamedElement(TargetCS.class, QVTbaseCSPackage.Literals.TARGET_CS, asTarget, null);
+		context.refreshList(csTarget.getOwnedTargetElements(), context.visitDeclarations(TargetElementCS.class, asTarget.getOwnedTargetElements(), null));
+		return csTarget;
+	}
+
+	@Override
+	public ElementCS visitTargetElement(@NonNull TargetElement object) {
 		return visiting(object);
 	}
 

@@ -15,13 +15,16 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.ocl.xtext.essentialocl.formatting.AbstractEssentialOCLFormatter;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.AttributeCSElements;
+import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.CompoundTargetElementCSElements;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.DataTypeCSElements;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.EnumerationCSElements;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.EnumerationLiteralCSElements;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.OperationCSElements;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.ParameterCSElements;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.ReferenceCSElements;
+import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.SimpleTargetElementCSElements;
 import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.StructuredClassCSElements;
+import org.eclipse.qvtd.xtext.qvtbase.services.QVTbaseGrammarAccess.TargetCSElements;
 
 /**
  * This class contains custom formatting declarations.
@@ -47,6 +50,10 @@ public class QVTbaseFormatter extends AbstractEssentialOCLFormatter {
 		c.setSpace(" ").after(a.getColonKeyword_6_0_1_1_2());
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_6_0_1_1_4());
 		c.setIndentation(a.getColonKeyword_6_0_1_1_2(), a.getSemicolonKeyword_6_0_1_1_4());
+	}
+
+	protected void configureCompoundTargetElementCS(FormattingConfig c, CompoundTargetElementCSElements a) {
+		c.setNoSpace().before(a.getSemicolonKeyword_3());
 	}
 
 	protected void configureDataTypeCS(FormattingConfig c, DataTypeCSElements a) {
@@ -119,11 +126,23 @@ public class QVTbaseFormatter extends AbstractEssentialOCLFormatter {
 		//		setNoSpaceLineWrap(c, a.getSemicolonKeyword_7_0_1_4_1());
 	}
 
+	protected void configureSimpleTargetElementCS(FormattingConfig c, SimpleTargetElementCSElements a) {
+		c.setNoSpace().before(a.getCommaKeyword_2_1_1_1_1_0());
+		c.setNoSpace().before(a.getSemicolonKeyword_3());
+	}
+
 	protected void configureStructuredClassCS(FormattingConfig c, StructuredClassCSElements a) {
 		c.setNoSpace().around(a.getCommaKeyword_4_2_0());
 		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_6_0(), a.getRightCurlyBracketKeyword_6_2());
 		setBraces(c, a.getLeftCurlyBracketKeyword_7_0_0(), a.getRightCurlyBracketKeyword_7_0_2());
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_7_1());
+	}
+
+	protected void configureTargetCS(FormattingConfig c, TargetCSElements a) {
+		setAppendedBraces(c, a.getLeftCurlyBracketKeyword_2(), a.getRightCurlyBracketKeyword_4());
+		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_2(), a.getRightCurlyBracketKeyword_4());
+		c.setLinewrap(1).between(a.getOwnedTargetElementsAssignment_3(), a.getOwnedTargetElementsAssignment_3());
+		//	c.setIndentation(a.getGroup(), a.getGroup());
 	}
 
 	/*	protected void configureTemplateBindingCS(FormattingConfig c, TemplateBindingCSElements a) {

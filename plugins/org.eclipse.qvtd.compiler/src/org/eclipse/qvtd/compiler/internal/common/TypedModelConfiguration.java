@@ -38,6 +38,11 @@ public class TypedModelConfiguration //implements Nameable
 		this.mode = mode;
 	}
 
+	public TypedModelConfiguration(@NonNull TypedModel typedModel, @NonNull Mode mode) {
+		this(typedModel.getName(), mode);
+		this.typedModel = typedModel;
+	}
+
 	public @Nullable TypedModel basicGetTypedModel() {
 		return typedModel;
 	}

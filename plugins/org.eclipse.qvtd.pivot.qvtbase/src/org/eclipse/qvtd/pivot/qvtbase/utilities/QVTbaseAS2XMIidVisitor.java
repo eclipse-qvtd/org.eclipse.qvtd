@@ -17,10 +17,14 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseAS2XMIidVisitor;
@@ -40,6 +44,11 @@ public class QVTbaseAS2XMIidVisitor extends AbstractQVTbaseAS2XMIidVisitor
 
 	@Override
 	public @Nullable Boolean visitBaseModel(@NonNull BaseModel object) {
+		return null;
+	}
+
+	@Override
+	public @Nullable Boolean visitCompoundTargetElement(@NonNull CompoundTargetElement object) {
 		return null;
 	}
 
@@ -75,6 +84,21 @@ public class QVTbaseAS2XMIidVisitor extends AbstractQVTbaseAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitRule(@NonNull Rule object) {
 		return false;
+	}
+
+	@Override
+	public @Nullable Boolean visitSimpleTargetElement(@NonNull SimpleTargetElement object) {
+		return null;
+	}
+
+	@Override
+	public @Nullable Boolean visitTarget(@NonNull Target object) {
+		return null;
+	}
+
+	@Override
+	public @Nullable Boolean visitTargetElement(@NonNull TargetElement object) {
+		return null;
 	}
 
 	@Override

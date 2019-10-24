@@ -14,8 +14,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.stepper.NonStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
@@ -76,6 +80,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	@Override
 	public @Nullable IStepper visitCheckStatement(@NonNull CheckStatement object) {
 		return PreStepper.INSTANCE;
+	}
+
+	@Override
+	public IStepper visitCompoundTargetElement(@NonNull CompoundTargetElement object) {
+		return visiting(object);
 	}
 
 	@Override
@@ -179,6 +188,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	}
 
 	@Override
+	public IStepper visitSimpleTargetElement(@NonNull SimpleTargetElement object) {
+		return visiting(object);
+	}
+
+	@Override
 	public @Nullable IStepper visitSimpleParameter(@NonNull SimpleParameter asVariable) {
 		return NonStepper.INSTANCE;
 	}
@@ -190,6 +204,16 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitStatement(@NonNull Statement object) {
+		return visiting(object);
+	}
+
+	@Override
+	public IStepper visitTarget(@NonNull Target object) {
+		return visiting(object);
+	}
+
+	@Override
+	public IStepper visitTargetElement(@NonNull TargetElement object) {
 		return visiting(object);
 	}
 

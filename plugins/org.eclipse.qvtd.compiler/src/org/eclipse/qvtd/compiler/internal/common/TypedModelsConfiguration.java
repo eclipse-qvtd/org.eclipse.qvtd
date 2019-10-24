@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2019 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.common;
 
 import java.util.ArrayList;
@@ -91,6 +101,10 @@ public class TypedModelsConfiguration
 		String name = typedModelConfiguration.getName();
 		TypedModelConfiguration oldTypedModel = name2typedModelConfigurations.put(name, typedModelConfiguration);
 		assert oldTypedModel == null;
+	}
+
+	public @Nullable TypedModelConfiguration basicGetTypedModelConfiguration(@NonNull TypedModel typedModel) {
+		return name2typedModelConfigurations.get(typedModel.getName());
 	}
 
 	public @NonNull Iterable<@NonNull TypedModel> getInputTypedModels() {

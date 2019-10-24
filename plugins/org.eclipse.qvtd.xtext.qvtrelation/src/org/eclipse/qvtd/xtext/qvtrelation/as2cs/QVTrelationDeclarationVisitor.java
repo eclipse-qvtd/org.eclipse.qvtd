@@ -96,6 +96,7 @@ import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS;
@@ -644,6 +645,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		context.refreshList(csTransformation.getOwnedProperties(), context.visitDeclarations(StructuralFeatureCS.class, asTransformation.getOwnedProperties(), null));
 		context.refreshList(csTransformation.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asTransformation.getOwnedOperations(), null));
 		context.refreshList(csTransformation.getOwnedRelations(), context.visitDeclarations(RelationCS.class, asTransformation.getRule(), null));
+		context.refreshList(csTransformation.getOwnedTargets(), context.visitDeclarations(TargetCS.class, asTransformation.getOwnedTargets(), null));
 		return csTransformation;
 	}
 

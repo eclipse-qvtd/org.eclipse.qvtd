@@ -25,39 +25,49 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.ocl.xtext.basecs.PathElementCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElementKind;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.CompoundTargetElementCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.SimpleTargetElementCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.util.AbstractQVTbaseCSContainmentVisitor;
 
 public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVisitor
 {
 	private class PackagePlan
-	{		
+	{
 		/**
 		 * The AS root.
 		 */
 		private final @NonNull Model asModel;
-		
+
 		/**
 		 * The child packages of the model root.
 		 */
 		private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> asRootPackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
-		
+
 		/**
 		 * The nested child packages of each package.
 		 */
 		private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Package, @NonNull List<org.eclipse.ocl.pivot.@NonNull Package>> package2ownedPackages = new HashMap<org.eclipse.ocl.pivot.@NonNull Package, @NonNull List<org.eclipse.ocl.pivot.@NonNull Package>>();
-		
+
 		/**
 		 * The nested child classes of each package.
 		 */
@@ -147,7 +157,7 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 
 		/**
 		 * Install the plan, root packages in model, child packages within parents, child classes within parent.
-		 * @param csElement 
+		 * @param csElement
 		 */
 		public void installPackageStructure(@NonNull Iterable<@NonNull PackageCS> csPackages, @NonNull Iterable<? extends @NonNull AbstractTransformationCS> csTransformations) {
 			installPackageStructures(null, csPackages);
@@ -162,7 +172,7 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 				PivotUtilInternal.refreshList(asPackage.getOwnedClasses(), package2ownedClasses.get(asPackage));
 			}
 		}
-		
+
 		private void installPackageStructures(org.eclipse.ocl.pivot.@Nullable Package asContextPackage, @NonNull Iterable<@NonNull PackageCS> csPackages) {
 			for (@NonNull PackageCS csPackage : csPackages) {
 				org.eclipse.ocl.pivot.Package asPackage = installPackage(asContextPackage, csPackage);
@@ -235,16 +245,33 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 			return asTransformation;
 		}
 	}
-	
+
+	protected static class SimpleTargetElementContinuation extends SingleContinuation<SimpleTargetElementCS>
+	{
+		private SimpleTargetElementContinuation(@NonNull CS2ASConversion context, @NonNull SimpleTargetElementCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			SimpleTargetElement asSimpleTargetElement = PivotUtil.getPivot(SimpleTargetElement.class, csElement);
+			if (asSimpleTargetElement != null) {
+				asSimpleTargetElement.setTypedModel(csElement.getTypedModel());
+				PivotUtilInternal.refreshList(asSimpleTargetElement.getIterates(), csElement.getIterates());
+			}
+			return null;
+		}
+	}
+
 	public QVTbaseCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
-	}	
+	}
 
 	protected void installPackageStructure(@NonNull Model asModel, @NonNull Iterable<@NonNull PackageCS> csPackages, @NonNull Iterable<? extends @NonNull AbstractTransformationCS> csTransformations) {
 		PackagePlan packagePlan = new PackagePlan(asModel);
 		packagePlan.installPackageStructure(csPackages, csTransformations);
 	}
-	
+
 	protected @Nullable Transformation lookupTransformation(@NonNull ElementCS csElement, @NonNull PathNameCS csPathName, @Nullable ScopeFilter scopeFilter) {
 		CS2AS.setElementType(csPathName, QVTbasePackage.Literals.TRANSFORMATION, csElement, scopeFilter);
 		Element namedElement = csPathName.getReferredElement();
@@ -257,12 +284,41 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitCompoundTargetElementCS(@NonNull CompoundTargetElementCS csElement) {
+		CompoundTargetElement asTarget = context.refreshModelElement(CompoundTargetElement.class, QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT, csElement);
+		context.refreshPivotList(SimpleTargetElement.class, asTarget.getOwnedTargetElements(), csElement.getOwnedTargetElements());
+		return null;
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitQualifiedPackageCS(@NonNull QualifiedPackageCS csElement) {
 		PathNameCS pathName = csElement.getOwnedPathName();
 		if (pathName != null) {
 			CS2AS.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
 		}
 		refreshPackage(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, csElement);
+		return null;
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitSimpleTargetElementCS(@NonNull SimpleTargetElementCS csElement) {
+		SimpleTargetElement asTarget = context.refreshModelElement(SimpleTargetElement.class, QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT, csElement);
+		if (csElement.getInput() == Boolean.TRUE) {
+			asTarget.setKind(TargetElementKind.INPUT);
+		}
+		else if (csElement.getOutput() == Boolean.TRUE) {
+			asTarget.setKind(TargetElementKind.OUTPUT);
+		}
+		else {
+			asTarget.setKind(TargetElementKind.VIA);
+		}
+		return new SimpleTargetElementContinuation(context, csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitTargetCS(@NonNull TargetCS csElement) {
+		Target asTarget = refreshNamedElement(Target.class, QVTbasePackage.Literals.TARGET, csElement);
+		context.refreshPivotList(TargetElement.class, asTarget.getOwnedTargetElements(), csElement.getOwnedTargetElements());
 		return null;
 	}
 }

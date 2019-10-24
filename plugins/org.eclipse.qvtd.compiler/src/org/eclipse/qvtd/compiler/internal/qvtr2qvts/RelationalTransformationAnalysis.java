@@ -80,7 +80,7 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 				rules.add(asRule);
 			}
 			else {
-				System.out.println("Omitting dead rule '" + asRule.getName() + "'");
+				//	System.out.println("Omitting dead rule '" + asRule.getName() + "'");
 			}
 		}
 		return rules;

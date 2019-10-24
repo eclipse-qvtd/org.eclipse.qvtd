@@ -18,6 +18,9 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
@@ -25,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
@@ -53,6 +57,11 @@ public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsag
 	@Override
 	public @NonNull DomainUsage visitBaseModel(@NonNull BaseModel object) {
 		return visitModel(object);
+	}
+
+	@Override
+	public @NonNull DomainUsage visitCompoundTargetElement(@NonNull CompoundTargetElement object) {
+		return visitTargetElement(object);
 	}
 
 	@Override
@@ -100,6 +109,21 @@ public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsag
 			visit(domain);
 		}
 		return getRootAnalysis().getNoneUsage();
+	}
+
+	@Override
+	public @NonNull DomainUsage visitSimpleTargetElement(@NonNull SimpleTargetElement object) {
+		return visitTargetElement(object);
+	}
+
+	@Override
+	public @NonNull DomainUsage visitTarget(@NonNull Target object) {
+		return visitNamedElement(object);
+	}
+
+	@Override
+	public @NonNull DomainUsage visitTargetElement(@NonNull TargetElement object) {
+		return visitElement(object);
 	}
 
 	@Override

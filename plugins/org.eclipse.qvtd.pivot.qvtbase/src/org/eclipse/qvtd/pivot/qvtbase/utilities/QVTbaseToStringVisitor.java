@@ -18,6 +18,9 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
@@ -26,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
@@ -69,6 +73,17 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	}
 
 	@Override
+	public String visitCompoundTargetElement(@NonNull CompoundTargetElement object) {
+		append("{ ");
+		for (TargetElement targetElement : object.getOwnedTargetElements()) {
+			safeVisit(targetElement);
+			append("; ");
+		}
+		append("}");
+		return null;
+	}
+
+	@Override
 	public String visitDomain(@NonNull Domain object) {
 		appendQualifiedName(object);
 		return null;
@@ -87,6 +102,13 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	@Override
 	public String visitFunctionParameter(@NonNull FunctionParameter object) {
 		return visitParameter(object);
+	}
+
+	@Override
+	public String visitImport(@NonNull Import object) {
+		append("import ");
+		appendName(object);
+		return null;
 	}
 
 	@Override
@@ -134,6 +156,31 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	}
 
 	@Override
+	public String visitSimpleTargetElement(@NonNull SimpleTargetElement object) {
+		append(object.getKind().getName());
+		append(" ");
+		appendName(object.getTypedModel());
+		return null;
+	}
+
+	@Override
+	public String visitTarget(@NonNull Target object) {
+		appendName(object);
+		append("{ ");
+		for (TargetElement targetElement : object.getOwnedTargetElements()) {
+			safeVisit(targetElement);
+			append("; ");
+		}
+		append("}");
+		return null;
+	}
+
+	@Override
+	public String visitTargetElement(@NonNull TargetElement object) {
+		return null;
+	}
+
+	@Override
 	public String visitTransformation(@NonNull Transformation object) {
 		appendQualifiedName(object);
 		return null;
@@ -141,13 +188,6 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 
 	@Override
 	public String visitTypedModel(@NonNull TypedModel object) {
-		appendName(object);
-		return null;
-	}
-
-	@Override
-	public String visitImport(@NonNull Import object) {
-		append("import ");
 		appendName(object);
 		return null;
 	}

@@ -29,6 +29,9 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
+import org.eclipse.qvtd.pivot.qvtbase.TargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
@@ -36,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
@@ -327,6 +331,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
+	public Object visitCompoundTargetElement(@NonNull CompoundTargetElement object) {
+		return visiting(object);
+	}
+
+	@Override
 	public Object visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visiting(object);
 	}
@@ -566,6 +575,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
+	public Object visitSimpleTargetElement(@NonNull SimpleTargetElement object) {
+		return visiting(object);
+	}
+
+	@Override
 	public @Nullable Object visitSimpleParameter(@NonNull SimpleParameter object) {
 		return visiting(object);
 	}
@@ -577,6 +591,16 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitStatement(@NonNull Statement object) {
+		return visiting(object);
+	}
+
+	@Override
+	public Object visitTarget(@NonNull Target object) {
+		return visiting(object);
+	}
+
+	@Override
+	public Object visitTargetElement(@NonNull TargetElement object) {
 		return visiting(object);
 	}
 

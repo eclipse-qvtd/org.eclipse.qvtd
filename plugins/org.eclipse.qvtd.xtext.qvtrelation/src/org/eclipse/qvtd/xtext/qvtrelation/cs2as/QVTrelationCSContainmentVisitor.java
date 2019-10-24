@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.Target;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
@@ -638,6 +639,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		context.refreshPivotList(Relation.class, asTransformation.getRule(), csElement.getOwnedRelations());
 		context.refreshPivotList(Operation.class, asTransformation.getOwnedOperations(), csElement.getOwnedQueries());
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());
+		context.refreshPivotList(Target.class, asTransformation.getOwnedTargets(), csElement.getOwnedTargets());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
 		return null;
 	}

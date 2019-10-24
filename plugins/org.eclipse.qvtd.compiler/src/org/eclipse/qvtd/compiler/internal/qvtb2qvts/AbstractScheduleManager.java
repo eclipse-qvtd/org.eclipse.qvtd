@@ -1081,7 +1081,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), true);
 					visitor.visit(graphable);
 					outputStream.write(visitor.close().getBytes());
-					System.out.println(dotURI);
+					//	System.out.println(dotURI);
 				}
 				finally {
 					try {
@@ -1126,7 +1126,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), false);
 					visitor.visit(region);
 					outputStream.write(visitor.close().getBytes());
-					System.out.println(dotURI);
+					//	System.out.println(dotURI);
 				}
 				finally {
 					try {
