@@ -136,7 +136,6 @@ public class QVTimperativeFormatter extends QVTbaseFormatter
 			EntryPointCSElements a = f.getEntryPointCSAccess();
 			c.setLinewrap(2).before(a.getGroup());
 			c.setNoSpace().around(a.getColonKeyword_3_0());
-			c.setNoSpace().around(a.getFullStopFullStopKeyword_3_2_0());
 			c.setNoSpace().before(a.getCommaKeyword_5_2_0());
 			c.setNoSpace().before(a.getCommaKeyword_6_2_0());
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_12());

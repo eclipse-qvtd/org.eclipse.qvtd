@@ -174,7 +174,7 @@ public class TargetImpl extends NamedElementImpl implements Target {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningTransformation((Transformation)otherEnd, msgs);
+				return basicSetOwningTransformation((Transformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -236,11 +236,11 @@ public class TargetImpl extends NamedElementImpl implements Target {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setOwningTransformation((Transformation)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedTargetElements().clear();
-			getOwnedTargetElements().addAll((Collection<? extends TargetElement>)newValue);
-			return;
+				getOwnedTargetElements().addAll((Collection<? extends TargetElement>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -255,10 +255,10 @@ public class TargetImpl extends NamedElementImpl implements Target {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setOwningTransformation((Transformation)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedTargetElements().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

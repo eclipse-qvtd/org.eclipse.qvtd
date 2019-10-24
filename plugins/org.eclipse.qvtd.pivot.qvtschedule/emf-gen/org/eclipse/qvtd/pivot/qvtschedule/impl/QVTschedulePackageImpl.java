@@ -1910,6 +1910,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EAttribute getLoadingRegion_TargetName() {
+		return (EAttribute)loadingRegionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMapLiteralNode() {
 		return mapLiteralNodeEClass;
 	}
@@ -2956,6 +2966,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		loadingRegionEClass = createEClass(33);
 		createEReference(loadingRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		createEReference(loadingRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
+		createEAttribute(loadingRegionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
 
 		mapLiteralNodeEClass = createEClass(34);
 
@@ -3358,6 +3369,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(loadingRegionEClass, LoadingRegion.class, "LoadingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLoadingRegion_LoadingPartition(), this.getLoadingPartition(), this.getLoadingPartition_ReferredLoadingRegion(), "loadingPartition", null, 1, 1, LoadingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLoadingRegion_OwningRootRegion(), this.getRootRegion(), this.getRootRegion_OwnedLoadingRegion(), "owningRootRegion", null, 1, 1, LoadingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLoadingRegion_TargetName(), thePivotPackage.getString(), "targetName", null, 0, 1, LoadingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mapLiteralNodeEClass, MapLiteralNode.class, "MapLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

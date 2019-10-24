@@ -548,6 +548,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EAttribute getEntryPointCS_TargetName() {
+		return (EAttribute)entryPointCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getGuardParameterBindingCS() {
 		return guardParameterBindingCSEClass;
 	}
@@ -1230,6 +1240,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		entryPointCSEClass = createEClass(7);
 		createEReference(entryPointCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5);
 		createEReference(entryPointCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6);
+		createEAttribute(entryPointCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 7);
 
 		guardParameterBindingCSEClass = createEClass(8);
 		createEReference(guardParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1);
@@ -1416,6 +1427,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEClass(entryPointCSEClass, EntryPointCS.class, "EntryPointCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEntryPointCS_InputTypedModels(), theQVTbasePackage.getTypedModel(), null, "inputTypedModels", null, 0, -1, EntryPointCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEntryPointCS_OutputTypedModels(), theQVTbasePackage.getTypedModel(), null, "outputTypedModels", null, 0, -1, EntryPointCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEntryPointCS_TargetName(), thePivotPackage.getString(), "targetName", null, 0, 1, EntryPointCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardParameterBindingCSEClass, GuardParameterBindingCS.class, "GuardParameterBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardParameterBindingCS_Value(), theQVTimperativePackage.getConnectionVariable(), null, "value", null, 1, 1, GuardParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

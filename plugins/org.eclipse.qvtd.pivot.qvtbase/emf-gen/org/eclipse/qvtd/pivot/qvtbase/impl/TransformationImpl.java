@@ -394,7 +394,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return getRule();
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
 				if (resolve) return getExtends();
-			return basicGetExtends();
+				return basicGetExtends();
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				return getOwnedContext();
 		}
@@ -412,26 +412,26 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case ClassImpl.CLASS_FEATURE_COUNT + 0:
 				getOwnedTag().clear();
-			getOwnedTag().addAll((Collection<? extends Annotation>)newValue);
-			return;
+				getOwnedTag().addAll((Collection<? extends Annotation>)newValue);
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				getModelParameter().clear();
-			getModelParameter().addAll((Collection<? extends TypedModel>)newValue);
-			return;
+				getModelParameter().addAll((Collection<? extends TypedModel>)newValue);
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
 				getOwnedTargets().clear();
-			getOwnedTargets().addAll((Collection<? extends Target>)newValue);
-			return;
+				getOwnedTargets().addAll((Collection<? extends Target>)newValue);
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
 				getRule().clear();
-			getRule().addAll((Collection<? extends Rule>)newValue);
-			return;
+				getRule().addAll((Collection<? extends Rule>)newValue);
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
 				setExtends((Transformation)newValue);
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				setOwnedContext((Parameter)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -446,22 +446,22 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case ClassImpl.CLASS_FEATURE_COUNT + 0:
 				getOwnedTag().clear();
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				getModelParameter().clear();
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
 				getOwnedTargets().clear();
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
 				getRule().clear();
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
 				setExtends((Transformation)null);
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				setOwnedContext((Parameter)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

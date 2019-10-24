@@ -1322,6 +1322,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getLoadingRegion_OwningRootRegion();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getTargetName <em>Target Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Target Name</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getTargetName()
+	 * @see #getLoadingRegion()
+	 * @generated
+	 */
+	EAttribute getLoadingRegion_TargetName();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MapLiteralNode <em>Map Literal Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3340,6 +3351,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference LOADING_REGION__OWNING_ROOT_REGION = eINSTANCE.getLoadingRegion_OwningRootRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOADING_REGION__TARGET_NAME = eINSTANCE.getLoadingRegion_TargetName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MapLiteralNodeImpl <em>Map Literal Node</em>}' class.

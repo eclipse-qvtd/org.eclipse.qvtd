@@ -16,10 +16,12 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -45,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EntryPointImpl#getInputTypedModels <em>Input Typed Models</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EntryPointImpl#getOutputTypedModels <em>Output Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EntryPointImpl#getTargetName <em>Target Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,7 +60,7 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ENTRY_POINT_FEATURE_COUNT = MappingImpl.MAPPING_FEATURE_COUNT + 2;
+	public static final int ENTRY_POINT_FEATURE_COUNT = MappingImpl.MAPPING_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Entry Point</em>' class.
@@ -88,6 +91,26 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	 * @ordered
 	 */
 	protected EList<TypedModel> outputTypedModels;
+
+	/**
+	 * The default value of the '{@link #getTargetName() <em>Target Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTargetName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TARGET_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTargetName() <em>Target Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTargetName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String targetName = TARGET_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,12 +163,37 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	 * @generated
 	 */
 	@Override
+	public String getTargetName() {
+		return targetName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setTargetName(String newTargetName) {
+		String oldTargetName = targetName;
+		targetName = newTargetName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 7, oldTargetName, targetName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				return getInputTypedModels();
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
 				return getOutputTypedModels();
+			case RuleImpl.RULE_FEATURE_COUNT + 7:
+				return getTargetName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -167,6 +215,9 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 				getOutputTypedModels().clear();
 				getOutputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
 				return;
+			case RuleImpl.RULE_FEATURE_COUNT + 7:
+				setTargetName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -185,6 +236,9 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
 				getOutputTypedModels().clear();
 				return;
+			case RuleImpl.RULE_FEATURE_COUNT + 7:
+				setTargetName(TARGET_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -201,8 +255,26 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 				return inputTypedModels != null && !inputTypedModels.isEmpty();
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
 				return outputTypedModels != null && !outputTypedModels.isEmpty();
+			case RuleImpl.RULE_FEATURE_COUNT + 7:
+				return TARGET_NAME_EDEFAULT == null ? targetName != null : !TARGET_NAME_EDEFAULT.equals(targetName);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (targetName: ");
+		result.append(targetName);
+		result.append(')');
+		return result.toString();
 	}
 
 	/**

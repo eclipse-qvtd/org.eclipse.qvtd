@@ -98,6 +98,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ConnectionVariable = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("ConnectionVariable", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DataType = QVTimperativeTables.PACKid_$metamodel$.getClassId("DataType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DeclareStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("DeclareStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EntryPoint = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("EntryPoint", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("GuardParameterBinding", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ImperativeTransformation = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("ImperativeTransformation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LoopParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("LoopParameterBinding", 0);
@@ -152,6 +153,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TypedModel = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_TypedModel);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_VariableStatement = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_VariableStatement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_MappingParameter = TypeId.SEQUENCE.getSpecializedId(QVTimperativeTables.CLSSid_MappingParameter);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_EntryPoint = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_EntryPoint);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_MappingParameter = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_MappingParameter);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_NewStatementPart = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_NewStatementPart);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_OCLExpression);
@@ -598,6 +600,7 @@ public class QVTimperativeTables
 
 		public static final @NonNull ExecutorProperty _EntryPoint__inputTypedModels = new EcoreExecutorProperty(QVTimperativePackage.Literals.ENTRY_POINT__INPUT_TYPED_MODELS, Types._EntryPoint, 0);
 		public static final @NonNull ExecutorProperty _EntryPoint__outputTypedModels = new EcoreExecutorProperty(QVTimperativePackage.Literals.ENTRY_POINT__OUTPUT_TYPED_MODELS, Types._EntryPoint, 1);
+		public static final @NonNull ExecutorProperty _EntryPoint__targetName = new EcoreExecutorProperty(QVTimperativePackage.Literals.ENTRY_POINT__TARGET_NAME, Types._EntryPoint, 2);
 
 		public static final @NonNull ExecutorProperty _GuardParameter__referredTypedModel = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__REFERRED_TYPED_MODEL, Types._GuardParameter, 0);
 		public static final @NonNull ExecutorProperty _GuardParameter__successProperty = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__SUCCESS_PROPERTY, Types._GuardParameter, 1);
@@ -2416,7 +2419,8 @@ public class QVTimperativeTables
 			QVTimperativeTables.Properties._Mapping__lastPass,
 			QVTimperativeTables.Properties._EntryPoint__outputTypedModels,
 			QVTimperativeTables.Properties._Mapping__ownedMappingParameters,
-			QVTimperativeTables.Properties._Mapping__ownedStatements
+			QVTimperativeTables.Properties._Mapping__ownedStatements,
+			QVTimperativeTables.Properties._EntryPoint__targetName
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _GuardParameter = {

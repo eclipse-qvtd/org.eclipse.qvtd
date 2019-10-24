@@ -68,5 +68,12 @@ public interface ImperativeTransformation extends Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateallRulesAreMappings(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateAllRulesAreMappings(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateUniqueTargetNames(DiagnosticChain diagnostics, Map<Object, Object> context);
 } // ImperativeTransformation

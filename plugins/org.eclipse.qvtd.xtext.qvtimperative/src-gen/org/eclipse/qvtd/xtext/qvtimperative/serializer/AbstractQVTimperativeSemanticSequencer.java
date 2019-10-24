@@ -692,7 +692,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 * Constraint:
 	 *     (
 	 *         isStrict?='strict'?
-	 *         (firstPass=LOWER lastPass=LOWER?)?
+	 *         targetName=UnrestrictedName?
 	 *         name=UnrestrictedName
 	 *         (inputTypedModels+=[TypedModel|UnrestrictedName] inputTypedModels+=[TypedModel|UnrestrictedName]*)?
 	 *         (outputTypedModels+=[TypedModel|UnrestrictedName] outputTypedModels+=[TypedModel|UnrestrictedName]*)?

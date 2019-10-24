@@ -30,6 +30,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getLoadingPartition <em>Loading Partition</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningRootRegion <em>Owning Root Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getTargetName <em>Target Name</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingRegion()
@@ -93,4 +94,29 @@ public interface LoadingRegion extends Region {
 	 * @generated
 	 */
 	void setOwningRootRegion(RootRegion value);
+
+	/**
+	 * Returns the value of the '<em><b>Target Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The name of the NamedElement.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Target Name</em>' attribute.
+	 * @see #setTargetName(String)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingRegion_TargetName()
+	 * @model dataType="org.eclipse.ocl.pivot.String"
+	 * @generated
+	 */
+	String getTargetName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getTargetName <em>Target Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Name</em>' attribute.
+	 * @see #getTargetName()
+	 * @generated
+	 */
+	void setTargetName(String value);
 } // RootCompositionRegion

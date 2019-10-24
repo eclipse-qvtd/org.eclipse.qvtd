@@ -610,12 +610,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEntryKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cColonKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cFirstPassAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cFirstPassLOWERParserRuleCall_3_1_0 = (RuleCall)cFirstPassAssignment_3_1.eContents().get(0);
-		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
-		private final Keyword cFullStopFullStopKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
-		private final Assignment cLastPassAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
-		private final RuleCall cLastPassLOWERParserRuleCall_3_2_1_0 = (RuleCall)cLastPassAssignment_3_2_1.eContents().get(0);
+		private final Assignment cTargetNameAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cTargetNameUnrestrictedNameParserRuleCall_3_1_0 = (RuleCall)cTargetNameAssignment_3_1.eContents().get(0);
 		private final Assignment cNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_4_0 = (RuleCall)cNameAssignment_4.eContents().get(0);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
@@ -650,15 +646,15 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 
 		//EntryPointCS:
-		//	{EntryPointCS} isStrict?='strict'? 'entry' (':' firstPass=LOWER ('..' lastPass=LOWER)?)? name=UnrestrictedName
-		//	('input' inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (','
+		//	{EntryPointCS} isStrict?='strict'? 'entry' (':' targetName=UnrestrictedName)? name=UnrestrictedName ('input'
+		//	inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (','
 		//	inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)? ('output'
 		//	outputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (','
 		//	outputTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)? '{' ownedParameters+=MappingParameterCS*
 		//	ownedStatements+=GuardStatementCS* ownedStatements+=CommitStatementCS* ownedStatements+=ControlStatementCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{EntryPointCS} isStrict?='strict'? 'entry' (':' firstPass=LOWER ('..' lastPass=LOWER)?)? name=UnrestrictedName ('input'
+		//{EntryPointCS} isStrict?='strict'? 'entry' (':' targetName=UnrestrictedName)? name=UnrestrictedName ('input'
 		//inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (','
 		//inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)? ('output'
 		//outputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (','
@@ -678,29 +674,17 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//'entry'
 		public Keyword getEntryKeyword_2() { return cEntryKeyword_2; }
 
-		//(':' firstPass=LOWER ('..' lastPass=LOWER)?)?
+		//(':' targetName=UnrestrictedName)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//':'
 		public Keyword getColonKeyword_3_0() { return cColonKeyword_3_0; }
 
-		//firstPass=LOWER
-		public Assignment getFirstPassAssignment_3_1() { return cFirstPassAssignment_3_1; }
+		//targetName=UnrestrictedName
+		public Assignment getTargetNameAssignment_3_1() { return cTargetNameAssignment_3_1; }
 
-		//LOWER
-		public RuleCall getFirstPassLOWERParserRuleCall_3_1_0() { return cFirstPassLOWERParserRuleCall_3_1_0; }
-
-		//('..' lastPass=LOWER)?
-		public Group getGroup_3_2() { return cGroup_3_2; }
-
-		//'..'
-		public Keyword getFullStopFullStopKeyword_3_2_0() { return cFullStopFullStopKeyword_3_2_0; }
-
-		//lastPass=LOWER
-		public Assignment getLastPassAssignment_3_2_1() { return cLastPassAssignment_3_2_1; }
-
-		//LOWER
-		public RuleCall getLastPassLOWERParserRuleCall_3_2_1_0() { return cLastPassLOWERParserRuleCall_3_2_1_0; }
+		//UnrestrictedName
+		public RuleCall getTargetNameUnrestrictedNameParserRuleCall_3_1_0() { return cTargetNameUnrestrictedNameParserRuleCall_3_1_0; }
 
 		//name=UnrestrictedName
 		public Assignment getNameAssignment_4() { return cNameAssignment_4; }
@@ -2215,22 +2199,26 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSetKeyword_22 = (Keyword)cAlternatives.eContents().get(22);
 		private final Keyword cStrictKeyword_23 = (Keyword)cAlternatives.eContents().get(23);
 		private final Keyword cSuccessKeyword_24 = (Keyword)cAlternatives.eContents().get(24);
-		private final Keyword cTransformationKeyword_25 = (Keyword)cAlternatives.eContents().get(25);
-		private final Keyword cTransientKeyword_26 = (Keyword)cAlternatives.eContents().get(26);
-		private final Keyword cUsesKeyword_27 = (Keyword)cAlternatives.eContents().get(27);
-		private final Keyword cVarKeyword_28 = (Keyword)cAlternatives.eContents().get(28);
+		private final Keyword cTargetKeyword_25 = (Keyword)cAlternatives.eContents().get(25);
+		private final Keyword cTransformationKeyword_26 = (Keyword)cAlternatives.eContents().get(26);
+		private final Keyword cTransientKeyword_27 = (Keyword)cAlternatives.eContents().get(27);
+		private final Keyword cUsesKeyword_28 = (Keyword)cAlternatives.eContents().get(28);
+		private final Keyword cVarKeyword_29 = (Keyword)cAlternatives.eContents().get(29);
+		private final Keyword cViaKeyword_30 = (Keyword)cAlternatives.eContents().get(30);
 
 		//QVTimperativeUnrestrictedName:
 		//	'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'entry' | 'for' | 'implementedby' |
 		//	'imports' //|	'in'
 		// | 'input' | 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'output' |
-		//	'package' | 'query' | 'set' | 'strict' | 'success' | 'transformation' | 'transient' | 'uses' | 'var';
+		//	'package' | 'query' | 'set' | 'strict' | 'success' | 'target' | 'transformation' | 'transient' | 'uses' | 'var' |
+		//	'via';
 		@Override public ParserRule getRule() { return rule; }
 
 		//'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'entry' | 'for' | 'implementedby' |
 		//'imports' //|	'in'
 		// | 'input' | 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'output' |
-		//'package' | 'query' | 'set' | 'strict' | 'success' | 'transformation' | 'transient' | 'uses' | 'var'
+		//'package' | 'query' | 'set' | 'strict' | 'success' | 'target' | 'transformation' | 'transient' | 'uses' | 'var' |
+		//'via'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//'add'
@@ -2308,17 +2296,23 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//'success'
 		public Keyword getSuccessKeyword_24() { return cSuccessKeyword_24; }
 
+		//'target'
+		public Keyword getTargetKeyword_25() { return cTargetKeyword_25; }
+
 		//'transformation'
-		public Keyword getTransformationKeyword_25() { return cTransformationKeyword_25; }
+		public Keyword getTransformationKeyword_26() { return cTransformationKeyword_26; }
 
 		//'transient'
-		public Keyword getTransientKeyword_26() { return cTransientKeyword_26; }
+		public Keyword getTransientKeyword_27() { return cTransientKeyword_27; }
 
 		//'uses'
-		public Keyword getUsesKeyword_27() { return cUsesKeyword_27; }
+		public Keyword getUsesKeyword_28() { return cUsesKeyword_28; }
 
 		//'var'
-		public Keyword getVarKeyword_28() { return cVarKeyword_28; }
+		public Keyword getVarKeyword_29() { return cVarKeyword_29; }
+
+		//'via'
+		public Keyword getViaKeyword_30() { return cViaKeyword_30; }
 	}
 
 	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
@@ -2573,8 +2567,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EntryPointCS:
-	//	{EntryPointCS} isStrict?='strict'? 'entry' (':' firstPass=LOWER ('..' lastPass=LOWER)?)? name=UnrestrictedName
-	//	('input' inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (','
+	//	{EntryPointCS} isStrict?='strict'? 'entry' (':' targetName=UnrestrictedName)? name=UnrestrictedName ('input'
+	//	inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (','
 	//	inputTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)? ('output'
 	//	outputTypedModels+=[qvtbase::TypedModel|UnrestrictedName] (','
 	//	outputTypedModels+=[qvtbase::TypedModel|UnrestrictedName])*)? '{' ownedParameters+=MappingParameterCS*
@@ -2806,7 +2800,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	//	'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'entry' | 'for' | 'implementedby' |
 	//	'imports' //|	'in'
 	// | 'input' | 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'output' |
-	//	'package' | 'query' | 'set' | 'strict' | 'success' | 'transformation' | 'transient' | 'uses' | 'var';
+	//	'package' | 'query' | 'set' | 'strict' | 'success' | 'target' | 'transformation' | 'transient' | 'uses' | 'var' |
+	//	'via';
 	public QVTimperativeUnrestrictedNameElements getQVTimperativeUnrestrictedNameAccess() {
 		return pQVTimperativeUnrestrictedName;
 	}

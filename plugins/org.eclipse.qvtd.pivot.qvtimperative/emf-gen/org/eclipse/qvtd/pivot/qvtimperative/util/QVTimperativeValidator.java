@@ -110,12 +110,20 @@ public class QVTimperativeValidator extends EObjectValidator {
 	public static final int DECLARE_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE = 4;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validateall Rules Are Mappings' of 'Imperative Transformation'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate All Rules Are Mappings' of 'Imperative Transformation'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int IMPERATIVE_TRANSFORMATION__VALIDATEALL_RULES_ARE_MAPPINGS = 5;
+	public static final int IMPERATIVE_TRANSFORMATION__VALIDATE_ALL_RULES_ARE_MAPPINGS = 5;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Unique Target Names' of 'Imperative Transformation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int IMPERATIVE_TRANSFORMATION__VALIDATE_UNIQUE_TARGET_NAMES = 6;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Not Null' of 'Mapping'.
@@ -123,7 +131,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_NAME_IS_NOT_NULL = 6;
+	public static final int MAPPING__VALIDATE_NAME_IS_NOT_NULL = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Mapping Parameter Names Are Unique' of 'Mapping'.
@@ -131,7 +139,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE = 7;
+	public static final int MAPPING__VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE = 8;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Local Variable Names Are Unique' of 'Mapping'.
@@ -139,7 +147,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE = 8;
+	public static final int MAPPING__VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE = 9;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Matching Call Bindings' of 'Mapping Call'.
@@ -147,7 +155,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING_CALL__VALIDATE_MATCHING_CALL_BINDINGS = 9;
+	public static final int MAPPING_CALL__VALIDATE_MATCHING_CALL_BINDINGS = 10;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Not Both Install And Invoke' of 'Mapping Call'.
@@ -155,7 +163,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING_CALL__VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE = 10;
+	public static final int MAPPING_CALL__VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE = 11;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Unique Call Bindings' of 'Mapping Call'.
@@ -163,7 +171,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING_CALL__VALIDATE_UNIQUE_CALL_BINDINGS = 11;
+	public static final int MAPPING_CALL__VALIDATE_UNIQUE_CALL_BINDINGS = 12;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parameter Is Mapping Parameter' of 'Mapping Parameter Binding'.
@@ -171,7 +179,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING_PARAMETER_BINDING__VALIDATE_PARAMETER_IS_MAPPING_PARAMETER = 12;
+	public static final int MAPPING_PARAMETER_BINDING__VALIDATE_PARAMETER_IS_MAPPING_PARAMETER = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'New Statement'.
@@ -179,7 +187,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int NEW_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 13;
+	public static final int NEW_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 14;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Non Data Type For Type' of 'New Statement'.
@@ -187,7 +195,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int NEW_STATEMENT__VALIDATE_NON_DATA_TYPE_FOR_TYPE = 14;
+	public static final int NEW_STATEMENT__VALIDATE_NON_DATA_TYPE_FOR_TYPE = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Class For Property' of 'Set Statement'.
@@ -195,7 +203,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY = 15;
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY = 16;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Partial Value' of 'Set Statement'.
@@ -203,7 +211,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 16;
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 17;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Total Value' of 'Set Statement'.
@@ -211,7 +219,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 17;
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 18;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Value Does Not Navigate From Realized Variables' of 'Set Statement'.
@@ -219,7 +227,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES = 18;
+	public static final int SET_STATEMENT__VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES = 19;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Property Is Not Read Only' of 'Set Statement'.
@@ -227,7 +235,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY = 19;
+	public static final int SET_STATEMENT__VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY = 20;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Checked Value' of 'Simple Parameter Binding'.
@@ -235,7 +243,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE = 20;
+	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE = 21;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Unchecked Value' of 'Simple Parameter Binding'.
@@ -243,7 +251,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE = 21;
+	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE = 22;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -251,7 +259,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 21;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 22;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -649,18 +657,29 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateExtendedTypedModelIsExtended(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateModelParameterIsUnique(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateNoExtendsCycle(imperativeTransformation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateImperativeTransformation_validateallRulesAreMappings(imperativeTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateImperativeTransformation_validateAllRulesAreMappings(imperativeTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateImperativeTransformation_validateUniqueTargetNames(imperativeTransformation, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the validateallRulesAreMappings constraint of '<em>Imperative Transformation</em>'.
+	 * Validates the validateAllRulesAreMappings constraint of '<em>Imperative Transformation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateImperativeTransformation_validateallRulesAreMappings(ImperativeTransformation imperativeTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return imperativeTransformation.validateallRulesAreMappings(diagnostics, context);
+	public boolean validateImperativeTransformation_validateAllRulesAreMappings(ImperativeTransformation imperativeTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return imperativeTransformation.validateAllRulesAreMappings(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateUniqueTargetNames constraint of '<em>Imperative Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateImperativeTransformation_validateUniqueTargetNames(ImperativeTransformation imperativeTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return imperativeTransformation.validateUniqueTargetNames(diagnostics, context);
 	}
 
 	/**

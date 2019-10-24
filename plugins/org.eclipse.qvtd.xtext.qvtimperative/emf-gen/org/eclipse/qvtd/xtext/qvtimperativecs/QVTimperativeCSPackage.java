@@ -577,6 +577,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getEntryPointCS_OutputTypedModels();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getTargetName <em>Target Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Target Name</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EntryPointCS#getTargetName()
+	 * @see #getEntryPointCS()
+	 * @generated
+	 */
+	EAttribute getEntryPointCS_TargetName();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS <em>Guard Parameter Binding CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1463,6 +1474,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ENTRY_POINT_CS__OUTPUT_TYPED_MODELS = eINSTANCE.getEntryPointCS_OutputTypedModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENTRY_POINT_CS__TARGET_NAME = eINSTANCE.getEntryPointCS_TargetName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardParameterBindingCSImpl <em>Guard Parameter Binding CS</em>}' class.

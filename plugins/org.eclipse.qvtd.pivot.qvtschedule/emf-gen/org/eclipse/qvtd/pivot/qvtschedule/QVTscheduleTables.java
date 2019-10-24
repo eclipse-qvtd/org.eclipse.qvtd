@@ -1154,6 +1154,7 @@ public class QVTscheduleTables
 
 		public static final @NonNull ExecutorProperty _LoadingRegion__loadingPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.LOADING_REGION__LOADING_PARTITION, Types._LoadingRegion, 0);
 		public static final @NonNull ExecutorProperty _LoadingRegion__owningRootRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.LOADING_REGION__OWNING_ROOT_REGION, Types._LoadingRegion, 1);
+		public static final @NonNull ExecutorProperty _LoadingRegion__targetName = new EcoreExecutorProperty(QVTschedulePackage.Literals.LOADING_REGION__TARGET_NAME, Types._LoadingRegion, 2);
 
 		public static final @NonNull ExecutorProperty _MapPartEdge__referredPart = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAP_PART_EDGE__REFERRED_PART, Types._MapPartEdge, 0);
 
@@ -6046,7 +6047,8 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Region__ownedNodes,
 			QVTscheduleTables.Properties._LoadingRegion__owningRootRegion,
 			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			QVTscheduleTables.Properties._Symbolable__symbolName,
+			QVTscheduleTables.Properties._LoadingRegion__targetName
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MapLiteralNode = {

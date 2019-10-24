@@ -31,6 +31,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -43,9 +44,11 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
 
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 
@@ -81,7 +84,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	public static final int IMPERATIVE_TRANSFORMATION_OPERATION_COUNT = TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 1;
+	public static final int IMPERATIVE_TRANSFORMATION_OPERATION_COUNT = TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 2;
 
 	/**
 	 * The cached value of the '{@link #getContextType() <em>Context Type</em>}' reference.
@@ -158,12 +161,12 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 	 * @generated
 	 */
 	@Override
-	public boolean validateallRulesAreMappings(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		final @NonNull String constraintName = "ImperativeTransformation::allRulesAreMappings";
+	public boolean validateAllRulesAreMappings(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "ImperativeTransformation::AllRulesAreMappings";
 		try {
 			/**
 			 *
-			 * inv allRulesAreMappings:
+			 * inv AllRulesAreMappings:
 			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
@@ -179,7 +182,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
 			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION___VALIDATEALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP);
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION___VALIDATE_ALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP);
 				CAUGHT_severity_0 = severity_0;
 			}
 			catch (Exception e) {
@@ -229,6 +232,114 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 					}
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, QVTimperativeTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
+			}
+			return Boolean.TRUE == symbol_0;
+		}
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateUniqueTargetNames(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "ImperativeTransformation::UniqueTargetNames";
+		try {
+			/**
+			 *
+			 * inv UniqueTargetNames:
+			 *   let severity : Integer[1] = constraintName.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let
+			 *         result : Boolean[1] = rule->selectByKind(EntryPoint)
+			 *         ->select(targetName <> null)
+			 *         ->isUnique(targetName)
+			 *       in
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION___VALIDATE_UNIQUE_TARGET_NAMES__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTimperativeTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_EntryPoint = idResolver.getClass(QVTimperativeTables.CLSSid_EntryPoint, null);
+					final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
+					final /*@NonInvalid*/ @NonNull SetValue selectByKind = (@Nullable SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_rule, TYP_qvtimperative_c_c_EntryPoint);
+					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_EntryPoint);
+					@NonNull Iterator<Object> ITERATOR__1 = selectByKind.iterator();
+					/*@NonInvalid*/ @NonNull SetValue select;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							select = accumulator;
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ @NonNull EntryPoint _1 = (@NonNull EntryPoint)ITERATOR__1.next();
+						/**
+						 * targetName <> null
+						 */
+						final /*@NonInvalid*/ @Nullable String targetName = _1.getTargetName();
+						final /*@NonInvalid*/ boolean ne = targetName != null;
+						//
+						if (ne == ValueUtil.TRUE_VALUE) {
+							accumulator.add(_1);
+						}
+					}
+					/*@Thrown*/ @NonNull Accumulator accumulator_0 = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_EntryPoint);
+					@NonNull Iterator<Object> ITERATOR__1_0 = select.iterator();
+					/*@Thrown*/ boolean result;
+					while (true) {
+						if (!ITERATOR__1_0.hasNext()) {
+							result = ValueUtil.TRUE_VALUE;
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ @NonNull EntryPoint _1_0 = (@NonNull EntryPoint)ITERATOR__1_0.next();
+						/**
+						 * targetName
+						 */
+						final /*@NonInvalid*/ @Nullable String targetName_0 = _1_0.getTargetName();
+						//
+						if (accumulator_0.includes(targetName_0) == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.FALSE_VALUE;			// Abort after second find
+							break;
+						}
+						else {
+							accumulator_0.add(targetName_0);
+						}
+					}
+					CAUGHT_result = result;
+				}
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
@@ -307,7 +418,9 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 0:
-				return validateallRulesAreMappings((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+				return validateAllRulesAreMappings((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 1:
+				return validateUniqueTargetNames((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

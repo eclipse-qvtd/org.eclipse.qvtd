@@ -142,7 +142,6 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionCSAccess().getGroup_2_2(), "rule__DirectionCS__Group_2_2__0");
 					put(grammarAccess.getEntryPointCSAccess().getGroup(), "rule__EntryPointCS__Group__0");
 					put(grammarAccess.getEntryPointCSAccess().getGroup_3(), "rule__EntryPointCS__Group_3__0");
-					put(grammarAccess.getEntryPointCSAccess().getGroup_3_2(), "rule__EntryPointCS__Group_3_2__0");
 					put(grammarAccess.getEntryPointCSAccess().getGroup_5(), "rule__EntryPointCS__Group_5__0");
 					put(grammarAccess.getEntryPointCSAccess().getGroup_5_2(), "rule__EntryPointCS__Group_5_2__0");
 					put(grammarAccess.getEntryPointCSAccess().getGroup_6(), "rule__EntryPointCS__Group_6__0");
@@ -386,8 +385,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_2_1(), "rule__DirectionCS__ImportsAssignment_2_1");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_2_2_1(), "rule__DirectionCS__ImportsAssignment_2_2_1");
 					put(grammarAccess.getEntryPointCSAccess().getIsStrictAssignment_1(), "rule__EntryPointCS__IsStrictAssignment_1");
-					put(grammarAccess.getEntryPointCSAccess().getFirstPassAssignment_3_1(), "rule__EntryPointCS__FirstPassAssignment_3_1");
-					put(grammarAccess.getEntryPointCSAccess().getLastPassAssignment_3_2_1(), "rule__EntryPointCS__LastPassAssignment_3_2_1");
+					put(grammarAccess.getEntryPointCSAccess().getTargetNameAssignment_3_1(), "rule__EntryPointCS__TargetNameAssignment_3_1");
 					put(grammarAccess.getEntryPointCSAccess().getNameAssignment_4(), "rule__EntryPointCS__NameAssignment_4");
 					put(grammarAccess.getEntryPointCSAccess().getInputTypedModelsAssignment_5_1(), "rule__EntryPointCS__InputTypedModelsAssignment_5_1");
 					put(grammarAccess.getEntryPointCSAccess().getInputTypedModelsAssignment_5_2_1(), "rule__EntryPointCS__InputTypedModelsAssignment_5_2_1");

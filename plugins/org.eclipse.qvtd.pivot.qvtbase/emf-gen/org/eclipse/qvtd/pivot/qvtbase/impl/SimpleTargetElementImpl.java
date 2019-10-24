@@ -220,7 +220,7 @@ public class SimpleTargetElementImpl extends TargetElementImpl implements Simple
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getTypedModel();
-			return basicGetTypedModel();
+				return basicGetTypedModel();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getIterates();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
@@ -240,14 +240,14 @@ public class SimpleTargetElementImpl extends TargetElementImpl implements Simple
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setTypedModel((TypedModel)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getIterates().clear();
-			getIterates().addAll((Collection<? extends TypedModel>)newValue);
-			return;
+				getIterates().addAll((Collection<? extends TypedModel>)newValue);
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setKind((TargetElementKind)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -262,13 +262,13 @@ public class SimpleTargetElementImpl extends TargetElementImpl implements Simple
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setTypedModel((TypedModel)null);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getIterates().clear();
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setKind(KIND_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

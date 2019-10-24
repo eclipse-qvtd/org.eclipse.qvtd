@@ -33,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getInputTypedModels <em>Input Typed Models</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getOutputTypedModels <em>Output Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getTargetName <em>Target Name</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getEntryPoint()
@@ -66,5 +67,29 @@ public interface EntryPoint extends Mapping {
 	 * @generated
 	 */
 	EList<TypedModel> getOutputTypedModels();
+
+	/**
+	 * Returns the value of the '<em><b>Target Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The name of the NamedElement.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Target Name</em>' attribute.
+	 * @see #setTargetName(String)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getEntryPoint_TargetName()
+	 * @generated
+	 */
+	String getTargetName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getTargetName <em>Target Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Name</em>' attribute.
+	 * @see #getTargetName()
+	 * @generated
+	 */
+	void setTargetName(String value);
 
 } // EntryPoint

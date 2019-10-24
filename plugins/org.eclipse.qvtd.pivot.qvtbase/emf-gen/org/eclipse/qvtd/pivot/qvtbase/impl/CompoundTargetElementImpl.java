@@ -152,8 +152,8 @@ public class CompoundTargetElementImpl extends TargetElementImpl implements Comp
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				getOwnedTargetElements().clear();
-			getOwnedTargetElements().addAll((Collection<? extends SimpleTargetElement>)newValue);
-			return;
+				getOwnedTargetElements().addAll((Collection<? extends SimpleTargetElement>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -168,7 +168,7 @@ public class CompoundTargetElementImpl extends TargetElementImpl implements Comp
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				getOwnedTargetElements().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

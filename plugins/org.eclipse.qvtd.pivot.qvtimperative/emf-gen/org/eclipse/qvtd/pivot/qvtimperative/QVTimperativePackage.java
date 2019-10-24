@@ -351,6 +351,17 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getEntryPoint_OutputTypedModels();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getTargetName <em>Target Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Target Name</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.EntryPoint#getTargetName()
+	 * @see #getEntryPoint()
+	 * @generated
+	 */
+	EAttribute getEntryPoint_TargetName();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardParameter <em>Guard Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -446,14 +457,24 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getImperativeTransformation_ContextType();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#validateallRulesAreMappings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validateall Rules Are Mappings</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#validateAllRulesAreMappings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate All Rules Are Mappings</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validateall Rules Are Mappings</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#validateallRulesAreMappings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate All Rules Are Mappings</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#validateAllRulesAreMappings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map();
+	EOperation getImperativeTransformation__ValidateAllRulesAreMappings__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#validateUniqueTargetNames(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Unique Target Names</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Unique Target Names</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#validateUniqueTargetNames(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getImperativeTransformation__ValidateUniqueTargetNames__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding <em>Loop Parameter Binding</em>}'.
@@ -1442,6 +1463,14 @@ public interface QVTimperativePackage extends EPackage {
 		EReference ENTRY_POINT__OUTPUT_TYPED_MODELS = eINSTANCE.getEntryPoint_OutputTypedModels();
 
 		/**
+		 * The meta object literal for the '<em><b>Target Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENTRY_POINT__TARGET_NAME = eINSTANCE.getEntryPoint_TargetName();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardParameterImpl <em>Guard Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1522,12 +1551,20 @@ public interface QVTimperativePackage extends EPackage {
 		EReference IMPERATIVE_TRANSFORMATION__CONTEXT_TYPE = eINSTANCE.getImperativeTransformation_ContextType();
 
 		/**
-		 * The meta object literal for the '<em><b>Validateall Rules Are Mappings</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate All Rules Are Mappings</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation IMPERATIVE_TRANSFORMATION___VALIDATEALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map();
+		EOperation IMPERATIVE_TRANSFORMATION___VALIDATE_ALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTransformation__ValidateAllRulesAreMappings__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Unique Target Names</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation IMPERATIVE_TRANSFORMATION___VALIDATE_UNIQUE_TARGET_NAMES__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTransformation__ValidateUniqueTargetNames__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.LoopParameterBindingImpl <em>Loop Parameter Binding</em>}' class.
