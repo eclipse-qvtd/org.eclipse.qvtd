@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTiProductionConsumption;
@@ -407,13 +408,13 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	//	}
 
 	@Override
-	public @NonNull Class<? extends Transformer> build(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception {
+	public @NonNull Class<? extends Transformer> build(@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception {
 		ImperativeTransformation asTransformation = compile(typedModelsConfigurations);
 		return generate(asTransformation, genModelFiles);
 	}
 
 	//	@Override
-	//	public @NonNull Class<? extends Transformer> build(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception {
+	//	public @NonNull Class<? extends Transformer> build(@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception {
 	//		ImperativeTransformation asTransformation = compile(typedModelsConfigurations);
 	//		return generate(asTransformation, genModelFiles);
 	//	}

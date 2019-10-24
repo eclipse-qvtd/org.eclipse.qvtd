@@ -31,6 +31,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.UtilityAnalysis;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.ConcurrentPartitionMerger;
@@ -168,6 +169,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		SymbolNameBuilder s = new SymbolNameBuilder();
 		s.appendString("__load__"); //QVTscheduleUtil.ROOT_MAPPING_NAME);
 		loadingRegion.setSymbolName(directedScheduleManager.getScheduleModel().reserveSymbolName(s, loadingRegion));
+		TypedModelsConfiguration typedModelsConfiguration = directedScheduleManager.getTypedModelsConfiguration();
+		loadingRegion.setTargetName(typedModelsConfiguration.getTargetName());
 		return loadingRegion;
 	}
 

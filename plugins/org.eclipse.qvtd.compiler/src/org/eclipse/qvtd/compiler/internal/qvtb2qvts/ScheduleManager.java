@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
@@ -144,7 +145,7 @@ public interface ScheduleManager
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
 	@NonNull ClassDatum getTransformationTraceClassDatum(@NonNull Transformation transformation);
 	@NonNull Transformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation);
-	//	@NonNull TypedModelsConfiguration getTypedModelsConfiguration();
+	@NonNull TypedModelsConfiguration getTypedModelsConfiguration();
 
 	/**
 	 * Return true if a mapping may assign this property in an input model.

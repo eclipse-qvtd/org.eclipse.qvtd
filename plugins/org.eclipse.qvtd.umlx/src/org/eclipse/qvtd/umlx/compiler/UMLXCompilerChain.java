@@ -19,7 +19,7 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
-import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -67,7 +67,7 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		Resource rResource = umlx2qvtrCompilerStep.execute(txURI);
 		return qvtr2qvti(rResource, typedModelsConfigurations);
 	}

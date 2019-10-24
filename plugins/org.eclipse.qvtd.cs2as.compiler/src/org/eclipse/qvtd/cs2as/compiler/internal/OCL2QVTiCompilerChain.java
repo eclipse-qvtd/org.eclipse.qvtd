@@ -29,7 +29,9 @@ import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.internal.common.SimpleConfigurations;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -126,14 +128,13 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		TypedModelsConfiguration typedModelsConfiguration = typedModelsConfigurations.iterator().next();
 		return qvtm2qvti(ocl2qvtmCompilerStep.execute(), typedModelsConfiguration);
 	}
 
 	public @NonNull ImperativeTransformation compile(@NonNull String enforcedModelName) throws IOException {
-		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-		typedModelsConfigurations.add(new TypedModelsConfiguration(enforcedModelName));
+		SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(enforcedModelName);
 		return compile(typedModelsConfigurations);
 	}
 

@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -61,7 +62,7 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		Resource cResource = xtext2qvtcCompilerStep.execute(txURI);
 		TypedModelsConfiguration typedModelsConfiguration = typedModelsConfigurations.iterator().next();	// FIXME multi-direction
 		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, typedModelsConfiguration);

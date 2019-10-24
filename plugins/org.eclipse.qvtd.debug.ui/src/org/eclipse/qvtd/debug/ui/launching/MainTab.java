@@ -58,7 +58,7 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
-import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
+import org.eclipse.qvtd.compiler.internal.common.SimpleConfigurations;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -174,8 +174,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		}
 
 		protected void doRun() throws Exception {
-			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-			typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
+			SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
 			options.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
 			QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
 			CompilerChain compilerChain2 = createCompilerChain(qvt.getEnvironmentFactory(), txURI, options);

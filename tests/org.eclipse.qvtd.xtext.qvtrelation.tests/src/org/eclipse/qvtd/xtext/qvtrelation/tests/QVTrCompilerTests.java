@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -52,14 +51,16 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
+import org.eclipse.qvtd.compiler.internal.common.DefaultConfigurations;
 import org.eclipse.qvtd.compiler.internal.common.TargetConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
@@ -112,7 +113,7 @@ public class QVTrCompilerTests extends LoadTestCase
 				return new QVTr2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, typedModelsConfigurations);
 						instrumentPartition(scheduleManager);
 						return scheduleManager;
@@ -121,7 +122,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 
 			@Override
-			public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+			public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 				assertNoValidationErrors("QVTr validation", qvtrResource);
 				return super.qvtr2qvti(qvtrResource, typedModelsConfigurations);
 			}
@@ -797,7 +798,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("as");
 			//
-			myQVT.createInterpretedExecutor(QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
+			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.addInputURI("ecore", ecoreURI);
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("as", asURI2);
@@ -990,30 +991,29 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("reverse");
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", getTestURI("EmptyList_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("EmptyList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/EmptyList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", getTestURI("OneElementList_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("OneElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", getTestURI("TwoElementList_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("TwoElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", getTestURI("ThreeElementList_Interpreted.xmi"));
@@ -1040,10 +1040,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass;
 		MyQVT myQVT1 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		try {
-			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-			typedModelsConfigurations.add(new TypedModelsConfiguration("forward"));
-			typedModelsConfigurations.add(new TypedModelsConfiguration("reverse"));
-			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);//,
+			txClass = myQVT1.buildTransformation(new DefaultConfigurations(), false);//,
 			//			txClass = myQVT1.buildTransformation(Collections.singletonList(reverseOutputNames), false);//,
 			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
 			//			myQVT1.assertRegionCount(ActivatorRegionImpl.class, 2);
@@ -1108,23 +1105,22 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("flat");
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("hier", getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("flat", getTestURI("MiniModel_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("MiniModel_Interpreted.xmi"), getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("hier", getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("flat", getTestURI("SimpleModel_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("SimpleModel_Interpreted.xmi"), getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("hier", getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("flat", getTestURI("LargerModel_Interpreted.xmi"));
@@ -1301,7 +1297,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ProjectManager projectMap = myQVT1.getProjectManager();
 			projectMap.configure(myQVT1.getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-			List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+			TypedModelsConfigurations typedModelsConfigurations = new TypedModelsConfigurations();
 			typedModelsConfigurations.add(new TypedModelsConfiguration("to", "via"));
 			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);
 		}
@@ -1589,7 +1585,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.addInputURI("persons", personFile.getURI());
 			txExecutor1.addInputURI("familiesLeft", familyFile.getURI());
-			txExecutor1.execute(txExecutor1.getTypedModelIndex("familiesRight"));
+			txExecutor1.execute("families");
 			txExecutor1.addOutputURI("names", namesOutURI);
 			txExecutor1.addOutputURI("familiesRight", familiesOutURI);
 			txExecutor1.saveModels(null);
@@ -1626,12 +1622,13 @@ public class QVTrCompilerTests extends LoadTestCase
 			Map<String, Object> extensionToFactoryMap = myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
-			TransformationExecutor txExecutor1 = myQVT.createInterpretedExecutor(QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
+			BasicQVTiExecutor txExecutor1 = myQVT.createInterpretedExecutor(QVTimperativeUtil.getEntryPoint(asTransformation, "families"));
+			txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
 			txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.addInputURI("persons", personFile.getURI());
 			txExecutor1.addInputURI("familiesLeft", familyFile.getURI());
-			txExecutor1.execute(txExecutor1.getTypedModelIndex("familiesRight"));
+			txExecutor1.execute();
 			txExecutor1.addOutputURI("names", namesOutURI);
 			txExecutor1.addOutputURI("familiesRight", familiesOutURI);
 			txExecutor1.saveModels(null);
@@ -1651,7 +1648,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("stm");
-			myQVT.createInterpretedExecutor(QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
+			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.addInputURI("seqDgm", getModelsURI("seq2stm/samples/Seq.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("stm", getTestURI("Stmc_Interpreted.xmi"));

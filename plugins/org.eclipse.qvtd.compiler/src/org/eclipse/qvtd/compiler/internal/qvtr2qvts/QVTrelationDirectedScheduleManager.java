@@ -171,7 +171,7 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	protected @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
+	public @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
 		return typedModelsConfiguration;
 	}
 

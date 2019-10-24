@@ -10,9 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
@@ -28,8 +25,8 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
  */
 public class TargetConfiguration extends TypedModelsConfiguration
 {
-	public static @NonNull Iterable<@NonNull TypedModelsConfiguration> createTargetConfigurations(@NonNull String... targetNames) {
-		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+	public static @NonNull TypedModelsConfigurations createTargetConfigurations(@NonNull String... targetNames) {
+		TypedModelsConfigurations typedModelsConfigurations = new TypedModelsConfigurations();
 		for (@NonNull String targetName : targetNames) {
 			typedModelsConfigurations.add(new TargetConfiguration(targetName));
 		}
@@ -37,6 +34,7 @@ public class TargetConfiguration extends TypedModelsConfiguration
 	}
 
 	private final @NonNull String targetName;
+
 
 	public TargetConfiguration(@NonNull String targetName) {
 		this.targetName = targetName;
@@ -51,6 +49,11 @@ public class TargetConfiguration extends TypedModelsConfiguration
 			default: mode = TypedModelConfiguration.Mode.UNUSED; break;
 		}
 		addTypedModelConfiguration(new TypedModelConfiguration(QVTbaseUtil.getTypedModel(simpleTargetElement), mode));
+	}
+
+	@Override
+	public @NonNull String getTargetName() {
+		return targetName;
 	}
 
 	@Override

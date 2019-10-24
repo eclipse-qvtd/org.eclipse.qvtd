@@ -270,6 +270,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			String mappingName = partition.getSymbolName();
 			assert mappingName != null;
 			EntryPoint entryPoint = qvts2qvti.createEntryPoint(mappingName);
+			entryPoint.setTargetName(((LoadingPartition)partition).getReferredLoadingRegion().getTargetName());
 			for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(asTransformation)) {
 				if (scheduleManager.isInput(typedModel) && !typedModel.isIsPrimitive()) {
 					entryPoint.getInputTypedModels().add(asTypedModel2iTypedModel.get(typedModel));

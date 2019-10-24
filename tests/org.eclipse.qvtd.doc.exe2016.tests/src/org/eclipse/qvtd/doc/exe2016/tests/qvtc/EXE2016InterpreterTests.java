@@ -20,10 +20,8 @@ import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.DoublylinkedlistPackage;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.List2listPackage;
-import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
 import org.junit.Test;
 
@@ -46,10 +44,9 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("reverse");
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
 			int[] tests = /**new int[]{100000}; //*/PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
-				@SuppressWarnings("unused")BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(iEntryPoint);
+				myQVT.createInterpretedExecutor(iTransformation);
 				Resource inResource = myQVT.addInputURI("forward", getModelsURI("families2persons/samples/EmptyList.xmi"));
 				assert inResource != null;
 				inResource.getContents().clear();
@@ -70,7 +67,6 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 				inResource = null;
 				//				outResource = null;
 				rootEObjects = null;
-				interpretedExecutor = null;
 			}
 		}
 		finally {
@@ -91,9 +87,8 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("reverse");
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
 			int testSize = 100000;
-			BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(iEntryPoint);
+			BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", getModelsURI("families2persons/samples/EmptyList.xmi"));
 			Resource inResource = interpretedExecutor.getModel("forward");
 			assert inResource != null;

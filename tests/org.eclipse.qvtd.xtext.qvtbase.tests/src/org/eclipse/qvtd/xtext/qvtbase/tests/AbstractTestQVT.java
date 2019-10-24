@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,7 +54,9 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.compiler.internal.common.SimpleConfigurations;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
@@ -65,7 +66,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -250,11 +250,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String outputName,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
-		Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
+		TypedModelsConfigurations typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
 		return buildTransformation(typedModelsConfigurations, isIncremental, genModelFiles);
 	}
 
-	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations,
+	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		return doBuild(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, options, genModelFiles);
@@ -264,7 +264,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		options.setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
-		Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
+		TypedModelsConfigurations typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
 		return doBuild(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, options, genModelFiles);
 	}
 
@@ -320,12 +320,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Exception {
-		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
-		typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
+		SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
 		return compileTransformation(typedModelsConfigurations);
 	}
 
-	public @NonNull ImperativeTransformation compileTransformation(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws Exception {
+	public @NonNull ImperativeTransformation compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
 		return doCompile(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, createCompilerChainOptions());
 	}
 
@@ -407,14 +406,24 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return new QVTiTransformationExecutor(environmentFactory, txClass);
 	}
 
-	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull EntryPoint entryPoint) throws Exception {
-		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(getEnvironmentFactory(), entryPoint);
+	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull ImperativeTransformation transformation) throws Exception {
+		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(getEnvironmentFactory(), transformation);
 		this.executor = interpretedExecutor;
 		return interpretedExecutor;
 	}
 
-	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint) throws Exception {
-		return new QVTiIncrementalExecutor(environmentFactory, entryPoint, ModeFactory.LAZY);
+	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull EntryPoint entryPoint) throws Exception {
+		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY);
+		this.executor = interpretedExecutor;
+		return interpretedExecutor;
+	}
+
+	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
+		return new BasicQVTiExecutor(getEnvironmentFactory(), QVTimperativeUtil.getDefaultEntryPoint(transformation), ModeFactory.LAZY);
+	}
+
+	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) throws Exception {
+		return new BasicQVTiExecutor(environmentFactory, entryPoint, modeFactory);
 	}
 
 	@Override
@@ -440,7 +449,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
-	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations,
+	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull TypedModelsConfigurations typedModelsConfigurations,
 			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws IOException, Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
@@ -453,7 +462,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected @NonNull ImperativeTransformation doCompile(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
-			@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations, @NonNull CompilerOptions options) throws Exception {
+			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull CompilerOptions options) throws Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation transformation = compilerChain.compile(typedModelsConfigurations);
 		URI txASURI = transformation.eResource().getURI();
@@ -535,12 +544,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return success == Boolean.TRUE;
 	}
 
-	public boolean executeTransformation(@NonNull String targetModelName) throws Exception {
+	public boolean executeTransformation(@NonNull String targetName) throws Exception {
 		if (suppressFailureDiagnosis) {
 			executor.setSuppressFailureDiagnosis(true);
 		}
-		Integer typedModelIndex = executor.getTypedModelIndex(targetModelName);
-		Boolean success = executor.execute(typedModelIndex);
+		Boolean success = executor.execute(targetName);
 		return success == Boolean.TRUE;
 	}
 

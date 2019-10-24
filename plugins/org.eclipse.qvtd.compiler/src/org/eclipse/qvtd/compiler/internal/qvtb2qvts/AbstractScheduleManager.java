@@ -888,7 +888,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	//		return transformationAnalysis2tracePackage;
 	//	}
 
-	protected abstract @NonNull TypedModelsConfiguration getTypedModelsConfiguration();		// FIXME Eliminate me
+	@Override
+	public abstract @NonNull TypedModelsConfiguration getTypedModelsConfiguration();		// FIXME Eliminate me
 
 	@Override
 	public boolean isDirty(@NonNull Property property) {

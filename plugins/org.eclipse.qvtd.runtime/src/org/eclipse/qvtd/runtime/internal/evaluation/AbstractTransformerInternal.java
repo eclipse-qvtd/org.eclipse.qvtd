@@ -393,7 +393,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	@Override
-	public boolean run(int targetTypedModelIndex) throws Exception {
+	public boolean run(@NonNull String targetName) throws Exception {
 		return false;
 	}
 

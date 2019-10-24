@@ -37,10 +37,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
-import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
@@ -191,8 +189,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("person");
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("family", inFile.getURI());
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("person", outURI);
@@ -278,30 +275,29 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("reverse");
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", inFile0.getURI());
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", outURI0);
 			myQVT.saveModels(null);
 			myQVT.checkOutput(outURI0, refFile0.getURI(), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", inFile1.getURI());
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", outURI1);
 			myQVT.saveModels(null);
 			myQVT.checkOutput(outURI1, refFile1.getURI(), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", inFile2.getURI());
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", outURI2);
 			myQVT.saveModels(null);
 			myQVT.checkOutput(outURI2, refFile2.getURI(), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", inFile3.getURI());
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", outURI3);
@@ -393,8 +389,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("hsl");
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("hsv", inFile.getURI());
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("hsl", outURI);
@@ -450,22 +445,21 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("rdbms");
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("uml", getModelsURI("uml2rdbms/samples/SimplerUMLPeople.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("rdbms", getTestURI("SimplerRDBMSPeople_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("SimplerRDBMSPeople_Interpreted.xmi"), getModelsURI("uml2rdbms/samples/SimplerRDBMSPeople_expected.xmi"), SimpleRDBMSNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("uml", getModelsURI("uml2rdbms/samples/SimplerUMLPeople2.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("rdbms", getTestURI("SimplerRDBMSPeople2_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("SimplerRDBMSPeople2_Interpreted.xmi"), getModelsURI("uml2rdbms/samples/SimplerRDBMSPeople2_expected.xmi"), SimpleRDBMSNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("uml", getModelsURI("uml2rdbms/samples/SimpleUMLPeople.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("rdbms", getTestURI("SimpleRDBMSPeople_Interpreted.xmi"));
@@ -616,8 +610,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation iTransformation = myQVT.compileTransformation("lowerGraph");
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
-			myQVT.createInterpretedExecutor(iEntryPoint);
+			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("upperGraph", getModelsURI("upper2lower/samples/SimpleGraph.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("lowerGraph", getTestURI("SimpleGraphLower_Interpreted.xmi"));

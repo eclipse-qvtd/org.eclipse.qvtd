@@ -2441,12 +2441,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("@Override\n");
 		js.append("public boolean run(");
 		if (isMultiDirectional) {
-			js.append("int targetTypedModelIndex");
+			js.appendClassReference(true, String.class);
+			js.append(" targetName");
 		}
 		js.append(") {\n");
 		js.pushIndentation(null);
 		if (isMultiDirectional) {
-			js.append("switch (targetTypedModelIndex) {\n");
+			js.append("switch (targetName) {\n");
 			js.pushIndentation(null);
 		}
 		for (@NonNull CGMapping cgRootMapping : cgRootMappings) {
@@ -2454,10 +2455,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			if (isMultiDirectional) {
 				List<TypedModel> asOutputTypedModels = asEntryPoint.getOutputTypedModels();
 				if (asOutputTypedModels.size() > 0) {
-					js.append("case ");
-					TypedModel asTargetTypedModel = asOutputTypedModels.get(0);
-					js.appendIntegerString(asTypedModels.indexOf(asTargetTypedModel));
-					js.append(": { /* " + asTargetTypedModel.getName() + " */\n");
+					js.append("case \"");
+					js.append(asEntryPoint.getTargetName());
+					js.append("\": {\n");
 					js.pushIndentation(null);
 				}
 				else {
@@ -2530,10 +2530,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (isMultiDirectional) {
 			js.append("default: {\n");
 			js.pushIndentation(null);
-			js.append("throwInvalidEvaluationException(\"Unsupported target direction {0} - \'\'{1}\'\'\"");
-			js.append(", targetTypedModelIndex");
-			js.append(", " + QVTiGlobalContext.MODELS_NAME + "[targetTypedModelIndex].getName()");
-			js.append(");\n");
+			js.append("throwInvalidEvaluationException(\"Unsupported target name \'\'{0}\'\'\", targetName);\n");
 			js.append("return false;\n");
 			js.popIndentation();
 			js.append("}\n");

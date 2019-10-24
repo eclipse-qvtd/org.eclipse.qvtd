@@ -99,7 +99,7 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 	}
 
 	@Override
-	protected @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
+	public @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
 		return typedModelsConfiguration;
 	}
 

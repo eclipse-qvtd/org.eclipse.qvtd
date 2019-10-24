@@ -162,7 +162,7 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	protected @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
+	public @NonNull TypedModelsConfiguration getTypedModelsConfiguration() {
 		throw new UnsupportedOperationException();
 	}
 

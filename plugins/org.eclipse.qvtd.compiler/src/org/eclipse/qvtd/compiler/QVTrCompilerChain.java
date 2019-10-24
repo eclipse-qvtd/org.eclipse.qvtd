@@ -54,6 +54,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
+import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc.GenPackageComparator;
@@ -118,20 +119,22 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			AbstractQVTb2QVTs.DEBUG_GRAPHS.setState(basicGetOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
+			String s = typedModelsConfigurations.reconcile(asTransformation);
+			if (s != null) {
+				CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent configuration\n" + s);
+			}
 			if (Iterables.isEmpty(typedModelsConfigurations)) {
 				CompilerUtil.addTranformationError(this, asTransformation, "No TypedModels configurations");
 			}
-			else {
-				for (@NonNull TypedModelsConfiguration typedModelsConfiguration : typedModelsConfigurations) {
-					String s = typedModelsConfiguration.reconcile(asTransformation);
-					if (s != null) {
-						CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent TypedModels configuration\n" + s);
-					}
-				}
-			}
+			//			else {
+			//				String s = typedModelsConfigurations.reconcile(asTransformation);
+			//				if (s != null) {
+			//					CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent TypedModels configuration\n" + s);
+			//				}
+			//			}
 			Resource qvtsResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 			ScheduleModel scheduleModel = QVTscheduleFactory.eINSTANCE.createScheduleModel();
 			qvtsResource.getContents().add(scheduleModel);
@@ -441,12 +444,12 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		Resource qvtrResource = xtext2qvtrCompilerStep.execute(txURI);
 		return qvtr2qvti(qvtrResource, typedModelsConfigurations);
 	}
 
-	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull TypedModelsConfiguration> typedModelsConfigurations) throws IOException {
+	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
 		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
 		Resource traceResource = createResource(traceURI, PivotPackage.eCONTENT_TYPE);

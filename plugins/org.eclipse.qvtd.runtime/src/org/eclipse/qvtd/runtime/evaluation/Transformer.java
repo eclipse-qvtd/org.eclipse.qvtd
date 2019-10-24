@@ -50,5 +50,5 @@ public interface Transformer extends ExecutionVisitable
 	int getTypedModelIndex(@NonNull String targetModelName);
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
 	boolean run() throws Exception;
-	boolean run(int targetTypedModelIndex) throws Exception;
+	boolean run(@NonNull String targetName) throws Exception;
 }

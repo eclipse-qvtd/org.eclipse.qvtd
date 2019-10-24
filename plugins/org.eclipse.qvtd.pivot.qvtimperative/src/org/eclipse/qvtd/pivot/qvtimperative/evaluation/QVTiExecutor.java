@@ -33,7 +33,7 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 public interface QVTiExecutor extends ExecutorInternal
 {
 	void checkModels() throws CoreException;
-	Boolean execute(@Nullable Integer targetTypedModelIndex);
+	Boolean execute();
 	@Override
 	@NonNull QVTiEvaluationEnvironment getEvaluationEnvironment();
 	@NonNull Interval getInterval(@NonNull Mapping asMapping);

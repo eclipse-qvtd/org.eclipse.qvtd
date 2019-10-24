@@ -175,6 +175,15 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return computeEntryPoints(iTransformation).iterator().next();
 	}
 
+	public static @NonNull EntryPoint getEntryPoint(@NonNull ImperativeTransformation iTransformation, @NonNull String targetName) {
+		for (@NonNull Mapping iMapping : getOwnedMappings(iTransformation)) {
+			if ((iMapping instanceof EntryPoint) && targetName.equals(((EntryPoint)iMapping).getTargetName())) {
+				return (EntryPoint)iMapping;
+			}
+		}
+		throw new IllegalArgumentException("Unknown entry point target name '" + targetName + "'");
+	}
+
 	public static @NonNull Iterable<@NonNull TypedModel> getInputTypedModels(@NonNull EntryPoint entryPoint) {
 		return ClassUtil.nullFree(entryPoint.getInputTypedModels());
 	}

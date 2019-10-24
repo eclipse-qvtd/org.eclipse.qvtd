@@ -29,12 +29,12 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
  */
 public class TypedModelsConfiguration
 {
-	public static @NonNull Iterable<@NonNull TypedModelsConfiguration> createTypedModelsConfigurations(@NonNull String outputName) {
+	public static @NonNull TypedModelsConfigurations createTypedModelsConfigurations(@NonNull String outputName) {
 		return createTypedModelsConfigurations(Collections.singletonList(Collections.singletonList(outputName)));
 	}
 
-	public static @NonNull Iterable<@NonNull TypedModelsConfiguration> createTypedModelsConfigurations(@NonNull Iterable<@NonNull Iterable<@NonNull String>> outputNamesList) {
-		List<@NonNull TypedModelsConfiguration> typedModelsConfigurations = new ArrayList<>();
+	public static @NonNull TypedModelsConfigurations createTypedModelsConfigurations(@NonNull Iterable<@NonNull Iterable<@NonNull String>> outputNamesList) {
+		TypedModelsConfigurations typedModelsConfigurations = new TypedModelsConfigurations();
 		for (@NonNull Iterable<@NonNull String> outputNames : outputNamesList) {
 			TypedModelsConfiguration typedModelsConfiguration = new TypedModelsConfiguration();
 			for (@NonNull String outputName : outputNames) {
@@ -121,6 +121,10 @@ public class TypedModelsConfiguration
 
 	public @NonNull Iterable<@NonNull TypedModel> getOutputTypedModels() {
 		return outputTypedModels;
+	}
+
+	public @Nullable String getTargetName() {
+		return null;
 	}
 
 	public @NonNull TypedModel getTargetTypedModel() {

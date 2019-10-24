@@ -31,7 +31,7 @@ public interface TransformationExecutor extends ExecutorExtension
 	@NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI);
 	@Override
 	void dispose();
-	Boolean execute(@Nullable Integer targetTypedModelIndex) throws Exception;
+	Boolean execute(@Nullable String targetName) throws Exception;
 	@NonNull ModelsManager getModelsManager();
 	@Nullable EObject getTransformationExecution();
 	@NonNull Transformer getTransformer();

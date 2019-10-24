@@ -30,7 +30,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
@@ -71,8 +70,7 @@ public class QVTinterpretedJob extends QVTimperativeJob
 
 			//		QVTiExecutor executor2 = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 
-			EntryPoint iEntryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
-			QVTiExecutor executor = launchConfigurationDelegate.createExecutor(environmentFactory, iEntryPoint);
+			QVTiExecutor executor = launchConfigurationDelegate.createExecutor(environmentFactory, iTransformation);
 			QVTiModelsManager modelsManager = executor.getModelsManager();
 			for (@NonNull TypedModel typedModel : ClassUtil.nullFree(iTransformation.getModelParameter())) {
 				if (monitor.isCanceled()) {
@@ -107,7 +105,7 @@ public class QVTinterpretedJob extends QVTimperativeJob
 				throw new OperationCanceledException();
 			}
 			subMonitor.split(EXECUTING_TICKS, SubMonitor.SUPPRESS_NONE).beginTask("Executing '" + txURI + "'", EXECUTING_TICKS);
-			executor.execute(null);
+			executor.execute();
 			if (monitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}

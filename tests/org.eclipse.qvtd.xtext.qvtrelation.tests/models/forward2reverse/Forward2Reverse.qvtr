@@ -19,6 +19,9 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse {
  */
 	transformation Forward2Reverse(forward:listMM, reverse:listMM)
 	{
+	--	target forward { input reverse; output forward; }
+	--	target reverse { input forward; output reverse; }
+		
 		/**
 		 *  Map each list to a list
 		 */

@@ -26,13 +26,19 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractModelsManager;
@@ -47,13 +53,16 @@ import com.google.common.collect.Sets;
 
 /**
  * QVTiModelsManager manager the source, middle and target models during a QVTi transformation.
+ *
+ * FIXME The runtime ModelsManager is able to addInputURI without knowing the EntryPoint. It would be nice if this
+ * intrerpreted variant was the same.
  */
 public class QVTiModelsManager extends AbstractModelsManager
 {
 	@SuppressWarnings("null")
 	public static final @NonNull ClassId EXTENT_CLASSID = IdManager.getClassId(QVTruntimeLibraryPackage.Literals.EXTENT);
 
-	protected final @NonNull EntryPointAnalysis entryPointAnalysis;
+	protected final @NonNull EntryPoint entryPoint;
 	protected final @NonNull EntryPointsAnalysis entryPointsAnalysis;
 	protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
 
@@ -83,7 +92,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 	 * instances of the middle model and the middle model EFactory.
 	 */
 	public QVTiModelsManager(@NonNull EntryPointAnalysis entryPointAnalysis) {
-		this.entryPointAnalysis = entryPointAnalysis;
+		this.entryPoint = entryPointAnalysis.getEntryPoint();
 		this.entryPointsAnalysis = entryPointAnalysis.getEntryPointsAnalysis();
 		this.environmentFactory = (EnvironmentFactoryInternalExtension) entryPointsAnalysis.getEnvironmentFactory();
 		//	this.allInstancesClasses = entryPointsAnalysis.getAllInstancesClasses();
@@ -92,6 +101,58 @@ public class QVTiModelsManager extends AbstractModelsManager
 		for (int i = 0; i < cacheIndexes; i++) {
 			this.unnavigableOpposites[i] = new HashMap<>();
 		}
+		@NonNull PropertyId @NonNull [] propertyIndex2propertyId = entryPointsAnalysis.getPropertyIndex2propertyId();
+		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(entryPointsAnalysis.getTransformation())) {
+			QVTiTypedModelInstance typedModelInstance = createTypedModelInstance(typedModel);
+			initTypedModelInstance(typedModelInstance);
+		}
+		initOpposites(propertyIndex2propertyId);
+		Set<@NonNull CompleteClass> allInstancesCompleteClasses = entryPointAnalysis.getAllInstancesCompleteClasses();
+		for (@NonNull QVTiTypedModelInstance typedModelInstance : getTypedModelInstances()) {
+			TypedModel typedModel = typedModelInstance.getTypedModel();
+			Set<@NonNull CompleteClass> usedCompleteClasses = new HashSet<>();
+			for (org.eclipse.ocl.pivot.@NonNull Class usedClass : QVTimperativeUtil.getUsedClasses(typedModel)) {
+				usedCompleteClasses.add(environmentFactory.getCompleteModel().getCompleteClass(usedClass));
+			}
+			usedCompleteClasses.retainAll(allInstancesCompleteClasses);
+			TypedModelAnalysis typedModelAnalysis = new TypedModelAnalysis(entryPointsAnalysis, typedModel, usedCompleteClasses);
+			@NonNull ClassId @NonNull [] classIndex2classId = typedModelAnalysis.getClassIndex2ClassId();
+			int @Nullable [] @NonNull [] classIndex2allClassIndexes = typedModelAnalysis.getClassIndex2allClassIndexes();
+			typedModelInstance.initClassIds(classIndex2classId, classIndex2allClassIndexes);
+			int extentClassIndex = typedModelAnalysis.getExtentClassIndex();
+			if (extentClassIndex >= 0) {
+				Map<@NonNull Object, Object> extentOpposites = getExtentOpposites();
+				typedModelInstance.initExtent(extentClassIndex, extentOpposites);
+			}
+			//			typedModelAnalysis.toString();
+		}
+	}
+
+	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
+		ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in exteranl RespurcSet
+		PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
+		Resource inputResource = ClassUtil.nonNullState(resourceSet.getResource(modelURI, true));
+		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
+		typedModelInstance.addInputResource(inputResource);
+		return inputResource;
+	}
+
+	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
+		ResourceSet resourceSet;
+		if (PivotUtilInternal.isASURI(modelURI)) {
+			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
+		}
+		else {
+			resourceSet = environmentFactory.getResourceSet();
+		}
+		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
+		Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(modelURI));
+		typedModelInstance.addOutputResource(outputResource);
+		return outputResource;
+	}
+
+	protected @NonNull QVTiTypedModelInstance createTypedModelInstance(@NonNull TypedModel typedModel) {
+		return new QVTiTypedModelInstance(this, typedModel);
 	}
 
 	/**
@@ -111,12 +172,24 @@ public class QVTiModelsManager extends AbstractModelsManager
 	 */
 	public @NonNull Set<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 		Set<@NonNull Object> elements = new HashSet<>();
-		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getInputTypedModels(entryPointAnalysis.getEntryPoint())) {
+		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getInputTypedModels(entryPoint)) {
 			TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
 			Iterables.addAll(elements, typedModelInstance.getObjectsOfKind(type));
 		}
 		return elements;
 	}
+
+	//	private @NonNull EntryPoint getEntryPoint() {
+	//		return getEntryPointAnalysis().getEntryPoint();
+	//	}
+
+	//	public @NonNull EntryPointAnalysis getEntryPointAnalysis() {
+	//		if (entryPointAnalysis == null) {
+	//			ImperativeTransformation transformation = entryPointsAnalysis.getTransformation();
+	//			initEntryPoint(QVTimperativeUtil.getDefaultEntryPoint(transformation));
+	//		}
+	//		return ClassUtil.nonNullState(entryPointAnalysis);
+	//	}
 
 	public @Nullable Map<@NonNull Object, Object> getExtentOpposites() {
 		int propertyIndex = getOppositePropertyIndex(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS);
@@ -291,6 +364,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 		@Override
 		protected @Nullable Iterable<@NonNull EObject> getExtentElements(@NonNull EObject rootObject) {
 			EClass eClass = rootObject.eClass();
+			assert eClass != null;
 			TypeId classId = IdManager.getClassId(eClass);
 			if (classId != EXTENT_CLASSID) {
 				return null;

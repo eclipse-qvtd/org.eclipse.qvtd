@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
@@ -209,15 +209,15 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getInputTypedModels().clear();
-				getInputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
-				return;
+			getInputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
 				getOutputTypedModels().clear();
-				getOutputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
-				return;
+			getOutputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 7:
 				setTargetName((String)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -232,13 +232,13 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getInputTypedModels().clear();
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
 				getOutputTypedModels().clear();
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 7:
 				setTargetName(TARGET_NAME_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -264,17 +264,11 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (targetName: ");
-		result.append(targetName);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**

@@ -22,20 +22,20 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 
-public class QVTiVMExecutor extends QVTiIncrementalExecutor implements VMExecutor
+public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 {
 	protected final @NonNull IVMContext vmContext;
 	private boolean suspendOnStartup = false;
 	private long envId = 0;
 
 	public QVTiVMExecutor(@NonNull IVMContext vmContext, @NonNull URI transformationURI) throws IOException {
-		super((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), QVTimperativeUtil.getDefaultEntryPoint(QVTimperativeUtil.loadTransformation((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug())), ModeFactory.LAZY);
+		super((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), QVTimperativeUtil.loadTransformation((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()), ModeFactory.LAZY);
 		this.vmContext = vmContext;
 	}
 
@@ -56,10 +56,10 @@ public class QVTiVMExecutor extends QVTiIncrementalExecutor implements VMExecuto
 		return new QVTiVMRootEvaluationEnvironment(this, (Transformation)executableObject, ++envId);
 	}
 
-	@Override
-	public Boolean execute() {
-		return execute(null);
-	}
+	//	@Override
+	//	public Boolean execute() {
+	//		return execute(null);
+	//	}
 
 	@Override
 	protected Boolean executeInternal() {

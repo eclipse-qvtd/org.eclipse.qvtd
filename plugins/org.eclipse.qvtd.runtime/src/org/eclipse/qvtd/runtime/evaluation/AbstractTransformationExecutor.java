@@ -97,9 +97,9 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	}
 
 	@Override
-	public final Boolean execute(@Nullable Integer targetTypedModelIndex) throws Exception {
+	public final Boolean execute(@Nullable String targetName) throws Exception {
 		transformer.analyzeInputResources();
-		if (targetTypedModelIndex != null ? transformer.run(targetTypedModelIndex) : transformer.run()) {
+		if (targetName != null ? transformer.run(targetName) : transformer.run()) {
 			return Boolean.TRUE;
 		}
 		if (!suppressFailureDiagnosis) {						// FIXME BUG 511028
