@@ -566,7 +566,6 @@ public class IncrementalObjectManager extends AbstractObjectManager
 					aggregatorSlotState.assignedElement(eOpposite, eOppositeReference, eObject);
 				}
 			}
-			assigned(eObject, eFeature, ecoreValue);
 		}
 
 		@Override
