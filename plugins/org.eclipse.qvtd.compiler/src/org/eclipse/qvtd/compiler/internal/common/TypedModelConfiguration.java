@@ -79,7 +79,7 @@ public class TypedModelConfiguration //implements Nameable
 	public @Nullable String reconcile(@NonNull Iterable<@NonNull TypedModel> typedModels) {
 		//	assert typedModel == null;		// Allow re-reconcilaiation of QVTc as QVTm
 		typedModel = NameUtil.getNameable(typedModels, name);
-		return typedModel != null ? null : "No '" + name + " TypedModel in " + typedModels.iterator().next().getTransformation();
+		return typedModel != null ? null : "No '" + name + "' TypedModel in " + typedModels.iterator().next().getTransformation();
 	}
 
 	@Override

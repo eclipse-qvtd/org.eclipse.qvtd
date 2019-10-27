@@ -129,6 +129,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			if (Iterables.isEmpty(typedModelsConfigurations)) {
 				CompilerUtil.addTranformationError(this, asTransformation, "No TypedModels configurations");
 			}
+			throwCompilerChainExceptionForErrors();
 			//			else {
 			//				String s = typedModelsConfigurations.reconcile(asTransformation);
 			//				if (s != null) {

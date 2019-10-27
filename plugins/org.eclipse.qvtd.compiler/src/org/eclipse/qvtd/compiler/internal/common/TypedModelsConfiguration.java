@@ -188,29 +188,24 @@ public class TypedModelsConfiguration
 				}
 				s.append(s2);
 			}
-			if (typedModelConfiguration.isInput()) {
+			else {
 				TypedModel typedModel = typedModelConfiguration.basicGetTypedModel();
 				if (typedModel != null) {
-					inputTypedModels.add(typedModel);
-				}
-			}
-			if (typedModelConfiguration.isIntermediate()) {
-				TypedModel typedModel = typedModelConfiguration.basicGetTypedModel();
-				if (typedModel != null) {			// Skip QVTc null wrt QVTm middle
-					intermediateTypedModels.add(typedModel);
-				}
-			}
-			if (typedModelConfiguration.isOutput()) {
-				TypedModel typedModel = typedModelConfiguration.getTypedModel();
-				outputTypedModels.add(typedModel);
-				if (!typedModelConfiguration.isInput()) {
-					outputOnlyTypedModels.add(typedModel);
-				}
-			}
-			if (typedModelConfiguration.isUnused()) {
-				TypedModel typedModel = typedModelConfiguration.basicGetTypedModel();
-				if (typedModel != null) {			// Skip QVTc null wrt QVTm middle
-					unusedTypedModels.add(typedModel);
+					if (typedModelConfiguration.isInput()) {
+						inputTypedModels.add(typedModel);
+					}
+					if (typedModelConfiguration.isIntermediate()) {
+						intermediateTypedModels.add(typedModel);
+					}
+					if (typedModelConfiguration.isOutput()) {
+						outputTypedModels.add(typedModel);
+						if (!typedModelConfiguration.isInput()) {
+							outputOnlyTypedModels.add(typedModel);
+						}
+					}
+					if (typedModelConfiguration.isUnused()) {
+						unusedTypedModels.add(typedModel);
+					}
 				}
 			}
 		}
