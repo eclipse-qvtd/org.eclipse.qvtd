@@ -109,10 +109,14 @@ public class NamesNormalizer implements ModelNormalizer
 		Map<@NonNull EList<EObject>, Comparator<@NonNull EObject>> eCollection2comparator = new HashMap<>();
 		for (EObject eObject : new TreeIterable(resource)) {
 			if (namesRegisterClass.isInstance(eObject)) {
-				eCollection2comparator.put((EList<EObject>)eObject.eGet(namesRegister_surnames), surnameComparator);
+				@SuppressWarnings("unchecked")
+				@NonNull EList<@NonNull EObject> surnames = (@NonNull EList<@NonNull EObject>)eObject.eGet(namesRegister_surnames);
+				eCollection2comparator.put(surnames, surnameComparator);
 			}
 			else if (familyGroupClass.isInstance(eObject)) {
-				eCollection2comparator.put((EList<EObject>)eObject.eGet(familyGroup_forenames), forenameComparator);
+				@SuppressWarnings("unchecked")
+				@NonNull EList<@NonNull EObject> forenames = (@NonNull EList<@NonNull EObject>)eObject.eGet(familyGroup_forenames);
+				eCollection2comparator.put(forenames, forenameComparator);
 			}
 		}
 		for (EList<EObject> eCollection : eCollection2comparator.keySet()) {

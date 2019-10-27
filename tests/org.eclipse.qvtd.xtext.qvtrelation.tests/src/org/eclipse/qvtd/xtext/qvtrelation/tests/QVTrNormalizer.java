@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -62,7 +63,9 @@ public class QVTrNormalizer extends PivotNormalizer
 
 		@Override
 		public void normalize() {
-			ECollections.sort(asRelation.getDomain(), DomainComparator.INSTANCE);
+			@SuppressWarnings("null")
+			EList<@NonNull Domain> domains = (EList<@NonNull Domain>)asRelation.getDomain();
+			ECollections.sort(domains, DomainComparator.INSTANCE);
 			ECollections.sort(asRelation.getVariable(), NameUtil.NAMEABLE_COMPARATOR);
 		}
 	}

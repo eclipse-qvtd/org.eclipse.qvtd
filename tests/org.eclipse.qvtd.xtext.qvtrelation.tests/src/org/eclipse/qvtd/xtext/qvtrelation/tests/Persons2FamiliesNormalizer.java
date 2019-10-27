@@ -137,7 +137,9 @@ public class Persons2FamiliesNormalizer implements ModelNormalizer
 		assert familyMemberName != null;
 		FamilyComparator familyComparator = new FamilyComparator(familyClass, familyName, familyFather, familyMother, familySons, familyDaughters, familyMemberName);
 		for (EObject eObject : resource.getContents()) {
-			ECollections.sort((EList<EObject>)eObject.eGet(familyRegisterFamilies), familyComparator);
+			@SuppressWarnings("unchecked")
+			EList<@NonNull EObject> families = (EList<@NonNull EObject>)eObject.eGet(familyRegisterFamilies);
+			ECollections.sort(families, familyComparator);
 		}
 		List<@NonNull Normalizer> normalizers = new ArrayList<>();
 		return normalizers;
