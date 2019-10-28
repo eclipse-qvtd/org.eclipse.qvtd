@@ -312,6 +312,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		}
 		DomainUsage usage = element2usage.get(element);
 		if (usage == null) {
+			if ("getFatherlessFamilies(sn)".equals(element.toString())) {
+				getClass();
+			}
 			usage = element.accept(this);
 			assert usage != null : "null usage for " + element.eClass().getName() + " " + element;
 			setUsage(element, usage);
@@ -417,11 +420,14 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 				}
 			}
 		}
-		return visit(iteration.getType());
+		DomainUsage returnUsage = visit(object.getType());
+		DomainUsage possibleUsage = union(sourceUsage, bodyUsage);
+		return intersection(returnUsage, possibleUsage);
 	}
 
 	@Override
 	public @NonNull DomainUsage visitIteratorExp(@NonNull IteratorExp object) {
+
 		DomainUsage sourceUsage = visit(object.getOwnedSource());
 		for (Variable iterator : object.getOwnedIterators()) {
 			if (iterator != null) {
@@ -446,7 +452,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 				}
 			}
 		}
-		return visit(object.getType());
+		DomainUsage returnUsage = visit(object.getType());
+		DomainUsage possibleUsage = union(sourceUsage, bodyUsage);
+		return intersection(returnUsage, possibleUsage);
 	}
 
 	@Override
