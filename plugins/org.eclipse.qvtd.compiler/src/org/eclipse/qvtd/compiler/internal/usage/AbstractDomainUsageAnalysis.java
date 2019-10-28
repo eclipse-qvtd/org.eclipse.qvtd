@@ -71,6 +71,10 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis.DomainUsageConstant;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
@@ -197,9 +201,19 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		return usage;
 	}
 
+	/**
+	 * Return the DomainUsage corresponding to the intersection of the first and second usages.
+	 * The result is constant if either usage is constant, otherwise variable.
+	 *
+	 * An incoming variable usage is refined to the intersection.
+	 *
+	 * FIXME It is not clear how transitive intersection gives predictable/useful results.
+	 */
 	public @NonNull DomainUsage intersection(@NonNull DomainUsage firstUsage, @NonNull DomainUsage secondUsage) {
+		RootDomainUsageAnalysis rootAnalysis = getRootAnalysis();
 		int firstMask = firstUsage.getMask();
 		int secondMask = secondUsage.getMask();
+		int intersectionMask = firstMask & secondMask;
 		if (firstMask == secondMask) {
 			if (firstUsage != secondUsage) {
 				if (!firstUsage.isConstant()) {
@@ -213,9 +227,42 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			}
 			return firstUsage;
 		}
+		else if ((firstMask & intersectionMask) == (secondMask & intersectionMask)) {
+			DomainUsage intersectionUsage = null;
+			if ((firstMask == intersectionMask) && firstUsage.isConstant()) {
+				intersectionUsage = firstUsage;
+			}
+			else if ((secondMask == intersectionMask) && secondUsage.isConstant()) {
+				intersectionUsage = secondUsage;
+			}
+			else if (firstUsage.isConstant() || secondUsage.isConstant()) {
+				intersectionUsage = rootAnalysis.getValidUsage(intersectionMask);
+				if (intersectionUsage == null) {
+					intersectionUsage = rootAnalysis.getConstantUsage(intersectionMask);
+					rootAnalysis.addValidUsage(intersectionMask, (DomainUsageConstant) intersectionUsage);
+				}
+			}
+			else if (firstMask == intersectionMask) {
+				intersectionUsage = firstUsage;
+			}
+			else if (secondMask == intersectionMask) {
+				intersectionUsage = secondUsage;
+			}
+			else {
+				intersectionUsage = rootAnalysis.createVariableUsage(intersectionMask);
+			}
+			if (!firstUsage.isConstant()) {
+				replace((DomainUsage.Internal) firstUsage, intersectionUsage);
+				return secondUsage;
+			}
+			else if (!secondUsage.isConstant()) {
+				replace((DomainUsage.Internal) secondUsage, intersectionUsage);
+				return firstUsage;
+			}
+			return intersectionUsage;
+		}
 		else {
-			int intersectionMask = firstMask & secondMask;
-			DomainUsage usage = getRootAnalysis().getValidUsage(intersectionMask);
+			DomainUsage usage = rootAnalysis.getValidUsage(intersectionMask);
 			if (usage != null) {
 				if ((usage != firstUsage) && !firstUsage.isConstant()) {
 					replace((DomainUsage.Internal) firstUsage, usage);
@@ -226,7 +273,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 				return usage;
 			}
 			else {
-				usage = getRootAnalysis().createVariableUsage(intersectionMask);
+				usage = rootAnalysis.createVariableUsage(intersectionMask);
 				if (!firstUsage.isConstant()) {
 					replace((DomainUsage.Internal) firstUsage, usage);
 				}
@@ -263,6 +310,16 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 	}
 
 	protected void setUsage(@NonNull Element element, @NonNull DomainUsage newUsage) {
+		Rule rule = QVTbaseUtil.basicGetContainingRule(element);
+		if ((rule != null) && (rule != element)) {
+			DomainUsage ruleUsage = getUsage(rule);
+			assert ruleUsage != null;
+			DomainUsage intersectionUsage = intersection(newUsage, ruleUsage);
+			if (intersectionUsage.isNone() && !newUsage.isNone()) {
+				CompilerUtil.addRuleError(problemHandler, rule, "No useable domain in ''{0}'' for ''{1}''", rule.getName(), element);
+			}
+			newUsage = intersectionUsage;
+		}
 		element2usage.put(element, newUsage);
 		((DomainUsage.Internal)newUsage).addUsedBy(element);
 		//		System.out.println("        setUsage " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this))
@@ -582,6 +639,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			}
 			DomainUsageAnalysis analysis = rootAnalysis.getAnalysis(operation);
 			Map<DomainUsage, DomainUsage> referred2specialized = new HashMap<>();
+			//	DomainUsage possibleUsage = union(sourceUsage, union(rootAnalysis.getThisUsage(), rootAnalysis.getPrimitiveUsage()));
 			List<@NonNull Parameter> ownedParameters = ClassUtil.nullFree(operation.getOwnedParameters());
 			int iMax = Math.min(ownedParameters.size(), object.getOwnedArguments().size());
 			for (int i = 0; i < iMax; i++) {
@@ -600,16 +658,17 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 						referred2specialized.put(referredParameterUsage, specializedParameterUsage);
 					}
 				}
-				DomainUsage argumentUsage = visit(argument);
-				intersection(argumentUsage, specializedParameterUsage);
+				/* DomainUsage argumentUsage = */ visit(argument);
+				//	argumentUsage = intersection(argumentUsage, specializedParameterUsage);
+				//	possibleUsage = union(possibleUsage, argumentUsage);  -- the operationUsage is 'correct'; consideration of source/arguments cannot refine.
 			}
 			DomainUsage operationUsage = analysis.basicGetUsage(operation);
 			if ((operationUsage != null) && !operationUsage.isConstant()) {
-				//				operationUsage = new DomainUsageVariable(getRootAnalysis(), operationUsage.getMask());
 				operationUsage = ((DomainUsage.Internal)operationUsage).cloneVariable();
 			}
 			DomainUsage operationCallUsage = visit(object.getType());
-			return /*operationUsage != null ? intersection(operationUsage, operationCallUsage) :*/ operationCallUsage;
+			DomainUsage returnUsage = operationUsage != null ? intersection(operationUsage, operationCallUsage) : operationCallUsage;
+			return returnUsage;
 		}
 		finally {
 			popSelfUsage(savedUsage);
@@ -697,7 +756,13 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	@Override
 	public @NonNull DomainUsage visitTupleLiteralPart(@NonNull TupleLiteralPart object) {
-		return visit(object.getType());
+		DomainUsage typeUsage = visit(object.getType());
+		OCLExpression ownedInit = object.getOwnedInit();
+		if (ownedInit == null) {
+			return typeUsage;
+		}
+		DomainUsage initUsage = visit(ownedInit);
+		return intersection(typeUsage, initUsage);
 	}
 
 	@Override
@@ -733,14 +798,16 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		return visit(object.getType());
 	}
 
-	/*	@Override
+	@Override
 	public @NonNull DomainUsage visitVariable(@NonNull Variable object) {
+		DomainUsage typeUsage = visit(object.getType());
 		OCLExpression ownedInit = object.getOwnedInit();
-		if (ownedInit != null) {
-			return visit(ownedInit);
+		if (ownedInit == null) {
+			return typeUsage;
 		}
-		return visit(object.getType());
-	} */
+		DomainUsage initUsage = visit(ownedInit);
+		return intersection(typeUsage, initUsage);
+	}
 
 	@Override
 	public @NonNull DomainUsage visitVariableDeclaration(@NonNull VariableDeclaration object) {

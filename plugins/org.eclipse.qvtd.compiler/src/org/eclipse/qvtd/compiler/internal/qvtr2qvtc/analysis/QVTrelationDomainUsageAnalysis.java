@@ -132,14 +132,10 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 
 	@Override
 	public @NonNull DomainUsage visitRelation(@NonNull Relation object) {
-		DomainUsage usage = getRootAnalysis().getNoneUsage();
-		setUsage(object, usage);
+		DomainUsage ruleUsage = visitRule(object);
 		Variable traceClassVariable = NameUtil.getNameable(object.getVariable(), QVTbaseUtil.TRACE_CLASS_NAME);
 		if (traceClassVariable != null) {
 			setUsage(traceClassVariable, getMiddleUsage());
-		}
-		for (@NonNull Domain domain : QVTrelationUtil.getOwnedDomains(object)) {
-			visit(domain);
 		}
 		Pattern when = object.getWhen();
 		if (when != null) {
@@ -149,7 +145,7 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 		if (where != null) {
 			visit(where);
 		}
-		return usage;
+		return ruleUsage;
 	}
 
 	@Override
@@ -222,10 +218,6 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 
 	@Override
 	public @NonNull DomainUsage visitSharedVariable(@NonNull SharedVariable object) {
-		OCLExpression ownedInit = object.getOwnedInit();
-		if (ownedInit != null) {
-			visit(ownedInit);
-		}
 		return visitVariable(object);
 	}
 

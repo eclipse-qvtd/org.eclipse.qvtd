@@ -326,13 +326,10 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 		if (typedModel.isIsPrimitive() || typedModel.isIsThis() || typedModel.isIsTrace()) {
 			return false;
 		}
-		Domain domain2 = QVTbaseUtil.getDomain(rule, typedModel);
-		//		Boolean isOutput = domain2isOutput.get(element);
-		Boolean isOutput2 = domain2isOutput.get(domain2);
-		//		assert isOutput != null;
-		assert isOutput2 != null;
-		//		assert isOutput == isOutput2;
-		return !isOutput2;
+		Domain domain2 = QVTbaseUtil.basicGetDomain(rule, typedModel);
+		Boolean isInput2 = (domain2 != null) && (domain2isOutput.get(domain2) == Boolean.FALSE);
+		assert isInput2 != null;
+		return isInput2;
 	}
 
 	public boolean isIntermediate(@NonNull DomainUsage usage) {
@@ -354,12 +351,9 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 		if (typedModel.isIsPrimitive() || typedModel.isIsThis() || typedModel.isIsTrace()) {
 			return false;
 		}
-		Domain domain2 = QVTbaseUtil.getDomain(rule, typedModel);
-		//		Boolean isOutput = domain2isOutput.get(element);
-		Boolean isOutput2 = domain2isOutput.get(domain2);
-		//		assert isOutput != null;
+		Domain domain2 = QVTbaseUtil.basicGetDomain(rule, typedModel);
+		Boolean isOutput2 = (domain2 != null) && (domain2isOutput.get(domain2) == Boolean.TRUE);
 		assert isOutput2 != null;
-		//		assert isOutput == isOutput2;
 		return isOutput2;
 	}
 

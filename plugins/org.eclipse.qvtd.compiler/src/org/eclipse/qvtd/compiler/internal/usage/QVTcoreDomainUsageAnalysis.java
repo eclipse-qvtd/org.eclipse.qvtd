@@ -244,15 +244,19 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 
 	@Override
 	public @NonNull DomainUsage visitMapping(@NonNull Mapping object) {
-		DomainUsage usage = getRootAnalysis().getNoneUsage();
-		setUsage(object, usage);
-		visitRule(object);
+		DomainUsage ruleUsage = visitRule(object);
+		Mapping contextMapping = object.getContext();
+		if (contextMapping != null) {
+			DomainUsage contextUsage = getUsage(contextMapping);
+			ruleUsage = union(ruleUsage, contextUsage);
+			setUsage(object, ruleUsage);
+		}
 		visit(object.getGuardPattern());
 		visit(object.getBottomPattern());
 		for (Mapping local : object.getLocal()) {
 			visit(local);
 		}
-		return usage;
+		return ruleUsage;
 	}
 
 	@Override
@@ -318,17 +322,14 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 
 	@Override
 	public @NonNull DomainUsage visitVariable(@NonNull Variable object) {
-		OCLExpression ownedInit = object.getOwnedInit();
-		if (ownedInit != null) {
-			return visit(ownedInit);
-		}
 		Area area = QVTcoreUtil.getContainingArea(object);
-		if (area instanceof Domain) {
-			return visit(area);
+		DomainUsage typeUsage = area instanceof Domain ? visit(area) : visit(object.getType());
+		OCLExpression ownedInit = object.getOwnedInit();
+		if (ownedInit == null) {
+			return typeUsage;
 		}
-		else {
-			return visit(object.getType());
-		}
+		DomainUsage initUsage = visit(ownedInit);
+		return intersection(typeUsage, initUsage);
 	}
 
 	@Override
