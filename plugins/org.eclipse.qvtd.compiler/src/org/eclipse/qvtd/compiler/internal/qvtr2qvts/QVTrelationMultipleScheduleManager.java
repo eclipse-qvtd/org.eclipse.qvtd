@@ -86,7 +86,7 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 
 	@Override
 	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
-		return new QVTrelationDomainUsageAnalysis(environmentFactory, transformation);
+		return new QVTrelationDomainUsageAnalysis(environmentFactory, problemHandler, transformation);
 	}
 
 	@Override

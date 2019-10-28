@@ -50,7 +50,7 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 
 	@Override
 	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
-		return new QVTcoreDomainUsageAnalysis(environmentFactory, transformation);
+		return new QVTcoreDomainUsageAnalysis(environmentFactory, problemHandler, transformation);
 	}
 
 	@Override

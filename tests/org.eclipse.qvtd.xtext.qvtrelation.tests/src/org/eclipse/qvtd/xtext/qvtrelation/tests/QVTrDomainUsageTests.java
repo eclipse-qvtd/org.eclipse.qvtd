@@ -40,7 +40,7 @@ public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 
 	protected void doTest(@NonNull MyQVT myQVT, @NonNull URI transformURI, @Nullable String enforcedOutputName) throws Exception {
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		QVTrelationDomainUsageAnalysis domainUsageAnalysis = new QVTrelationDomainUsageAnalysis(myQVT.getEnvironmentFactory(), asTransformation);
+		QVTrelationDomainUsageAnalysis domainUsageAnalysis = new QVTrelationDomainUsageAnalysis(myQVT.getEnvironmentFactory(), new TestProblemHandler(), asTransformation);
 		TypedModelsConfiguration typedModelsConfiguration = new TypedModelsConfiguration();
 		if (enforcedOutputName != null) {
 			typedModelsConfiguration.addTypedModelConfiguration(new TypedModelConfiguration(enforcedOutputName, TypedModelConfiguration.Mode.OUTPUT));

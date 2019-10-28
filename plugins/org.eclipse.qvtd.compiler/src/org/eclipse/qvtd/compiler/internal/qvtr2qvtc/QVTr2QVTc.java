@@ -295,6 +295,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return oclContainerProperty2 ;
 	}
 
+	public @NonNull ProblemHandler getProblemHandler() {
+		throw new UnsupportedOperationException("This is a stub in stale code");
+	}
+
 	public @NonNull RelationalTransformation2CoreTransformation getRelationalTransformation2CoreTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
 		return ClassUtil.nonNullState(transformationAnalysis2relationalTransformation2coreTransformation.get(transformationAnalysis));
 	}

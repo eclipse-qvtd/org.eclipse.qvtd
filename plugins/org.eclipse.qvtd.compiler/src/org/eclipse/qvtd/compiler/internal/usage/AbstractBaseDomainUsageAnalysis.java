@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Target;
@@ -40,8 +41,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
  */
 public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsageAnalysis implements QVTbaseVisitor<@NonNull DomainUsage>
 {
-	protected AbstractBaseDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
-		super(environmentFactory);
+	protected AbstractBaseDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler) {
+		super(environmentFactory, problemHandler);
 	}
 
 	protected @NonNull DomainUsage getDomainUsage(@Nullable EObject object) {

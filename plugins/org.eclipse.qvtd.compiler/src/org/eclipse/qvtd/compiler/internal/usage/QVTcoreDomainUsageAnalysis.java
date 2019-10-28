@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -79,8 +80,8 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		}
 	}
 
-	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-		super(environmentFactory, transformation);
+	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler, @NonNull Transformation transformation) {
+		super(environmentFactory, problemHandler, transformation);
 	}
 
 	@Override

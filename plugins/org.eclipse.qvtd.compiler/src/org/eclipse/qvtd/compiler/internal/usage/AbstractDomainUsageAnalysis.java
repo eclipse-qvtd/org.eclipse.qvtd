@@ -70,6 +70,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
@@ -77,11 +78,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
  */
 public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivotVisitor<@NonNull DomainUsage, @NonNull EnvironmentFactory> implements DomainUsageAnalysis.Internal
 {
+	protected final @NonNull ProblemHandler problemHandler;
+
 	private DomainUsage selfUsage = null;
 	protected final @NonNull Map<@NonNull Element, DomainUsage> element2usage = new HashMap<>();
 
-	protected AbstractDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
+	protected AbstractDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler) {
 		super(environmentFactory);
+		this.problemHandler = problemHandler;
 	}
 
 	@Override
@@ -161,6 +165,10 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return context;
+	}
+
+	public @NonNull ProblemHandler getProblemHandler() {
+		return problemHandler;
 	}
 
 	protected abstract @NonNull RootDomainUsageAnalysis getRootAnalysis();
@@ -312,9 +320,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		}
 		DomainUsage usage = element2usage.get(element);
 		if (usage == null) {
-			if ("getFatherlessFamilies(sn)".equals(element.toString())) {
-				getClass();
-			}
 			usage = element.accept(this);
 			assert usage != null : "null usage for " + element.eClass().getName() + " " + element;
 			setUsage(element, usage);
@@ -427,7 +432,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	@Override
 	public @NonNull DomainUsage visitIteratorExp(@NonNull IteratorExp object) {
-
 		DomainUsage sourceUsage = visit(object.getOwnedSource());
 		for (Variable iterator : object.getOwnedIterators()) {
 			if (iterator != null) {

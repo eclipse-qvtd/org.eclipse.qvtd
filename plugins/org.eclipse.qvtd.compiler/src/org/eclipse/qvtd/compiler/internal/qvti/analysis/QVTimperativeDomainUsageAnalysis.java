@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvti.analysis;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
@@ -86,8 +87,8 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 		}
 	}
 
-	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-		super(environmentFactory, transformation);
+	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler, @NonNull Transformation transformation) {
+		super(environmentFactory, problemHandler, transformation);
 	}
 
 	@Override

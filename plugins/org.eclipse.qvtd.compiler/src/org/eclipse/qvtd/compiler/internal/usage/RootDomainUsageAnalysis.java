@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -309,8 +310,8 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	//	private final @NonNull Set<@NonNull Property> dirtyProperties = new HashSet<>();
 	//	private final @NonNull Set<@NonNull EReference> dirtyEReferences = new HashSet<>();
 
-	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-		super(environmentFactory);
+	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler, @NonNull Transformation transformation) {
+		super(environmentFactory, problemHandler);
 		this.transformation = transformation;
 		this.standardLibrary = context.getStandardLibrary();
 		addValidUsage(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));

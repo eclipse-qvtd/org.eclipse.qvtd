@@ -144,6 +144,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			QVTrelationMultipleScheduleManager multipleScheduleManager = new QVTrelationMultipleScheduleManager(environmentFactory, asTransformation, this, scheduleModel, schedulerOptions);
 			try {
 				multipleScheduleManager.getDomainUsageAnalysis().analyzeTransformation();
+				throwCompilerChainExceptionForErrors();
 				try {
 					for (@NonNull TypedModelsConfiguration typedModelsConfiguration : typedModelsConfigurations) {
 						QVTrelationDirectedScheduleManager directedScheduleManager = multipleScheduleManager.createDirectedScheduleManager(typedModelsConfiguration);

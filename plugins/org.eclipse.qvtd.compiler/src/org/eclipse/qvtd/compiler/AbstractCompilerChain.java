@@ -277,7 +277,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			saveResource(iResource);
 			ImperativeTransformation iTransformation = (ImperativeTransformation) QVTbaseUtil.getTransformation(iResource);
 			throwCompilerChainExceptionForErrors();
-			QVTimperativeDomainUsageAnalysis domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory, iTransformation);
+			QVTimperativeDomainUsageAnalysis domainUsageAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory, this, iTransformation);
 			domainUsageAnalysis.analyzeTransformation();
 			for (@NonNull EntryPoint iEntryPoint : QVTimperativeUtil.computeEntryPoints(iTransformation)) {
 				QVTiProductionConsumption qvtiProductionConsumption = new QVTiProductionConsumption(this, domainUsageAnalysis, iEntryPoint);

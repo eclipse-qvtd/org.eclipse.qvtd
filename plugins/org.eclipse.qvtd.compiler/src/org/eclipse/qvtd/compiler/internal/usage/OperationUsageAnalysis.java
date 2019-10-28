@@ -22,7 +22,7 @@ public class OperationUsageAnalysis extends AbstractBaseDomainUsageAnalysis
 	protected final @NonNull RootDomainUsageAnalysis rootAnalysis;
 
 	protected OperationUsageAnalysis(@NonNull RootDomainUsageAnalysis rootAnalysis) {
-		super(rootAnalysis.getEnvironmentFactory());
+		super(rootAnalysis.getEnvironmentFactory(), rootAnalysis.getProblemHandler());
 		this.rootAnalysis = rootAnalysis;
 	}
 

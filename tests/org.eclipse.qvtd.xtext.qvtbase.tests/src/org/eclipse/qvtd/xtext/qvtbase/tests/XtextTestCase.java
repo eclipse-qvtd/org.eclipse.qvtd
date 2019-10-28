@@ -57,6 +57,9 @@ import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.values.Bag;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
+import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 
 public class XtextTestCase extends PivotTestCase
 {
@@ -93,6 +96,20 @@ public class XtextTestCase extends PivotTestCase
 			rootLogger.removeAppender(this);
 			installed = false;
 		}
+	}
+
+	public static class TestProblemHandler implements ProblemHandler
+	{
+		@Override
+		public void addProblem(@NonNull CompilerProblem problem) {
+			throw new IllegalStateException(problem.toString());
+		}
+
+		@Override
+		public void throwCompilerChainExceptionForErrors() throws CompilerChainException {
+			throw new UnsupportedOperationException();
+		}
+
 	}
 
 	public static TestCaseAppender testCaseAppender = new TestCaseAppender();

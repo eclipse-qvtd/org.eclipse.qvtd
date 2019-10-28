@@ -98,7 +98,7 @@ public class TransformationAnalysis extends QVTrelationHelper implements Nameabl
 	public @NonNull DomainUsageAnalysis getDomainUsageAnalysis() {
 		QVTrelationDomainUsageAnalysis domainUsageAnalysis2 = domainUsageAnalysis;
 		if (domainUsageAnalysis2 == null) {
-			domainUsageAnalysis = domainUsageAnalysis2 = new QVTrelationDomainUsageAnalysis(environmentFactory, transformation);
+			domainUsageAnalysis = domainUsageAnalysis2 = new QVTrelationDomainUsageAnalysis(environmentFactory, qvtr2qvtc.getProblemHandler(), transformation);
 			domainUsageAnalysis2.analyzeTransformation();
 		}
 		return domainUsageAnalysis2;

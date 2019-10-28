@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.usage.DomainUsageAnalysis;
@@ -55,8 +56,8 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 		}
 	}
 
-	public QVTrelationDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-		super(environmentFactory, transformation);
+	public QVTrelationDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler, @NonNull Transformation transformation) {
+		super(environmentFactory, problemHandler, transformation);
 	}
 
 	@Override
