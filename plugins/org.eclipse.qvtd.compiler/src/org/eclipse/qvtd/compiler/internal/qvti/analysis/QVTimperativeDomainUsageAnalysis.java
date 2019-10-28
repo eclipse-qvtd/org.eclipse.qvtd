@@ -168,7 +168,8 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @NonNull DomainUsage visitMapping(@NonNull Mapping object) {
-		return getNoneUsage();
+		// QVTi has no domains for accurate usages
+		return getAnyUsage();
 	}
 
 	@Override

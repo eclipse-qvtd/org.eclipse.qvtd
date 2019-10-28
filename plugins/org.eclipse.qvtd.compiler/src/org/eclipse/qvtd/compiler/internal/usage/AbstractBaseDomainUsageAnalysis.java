@@ -106,10 +106,18 @@ public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsag
 
 	@Override
 	public @NonNull DomainUsage visitRule(@NonNull Rule object) {
+		RootDomainUsageAnalysis rootAnalysis = getRootAnalysis();
+		DomainUsage ruleUsage = union(rootAnalysis.getPrimitiveUsage(), rootAnalysis.getThisUsage());
+		ruleUsage = union(ruleUsage, rootAnalysis.getMiddleUsage());		// FIXME is this needed
+		for (Domain domain : QVTbaseUtil.getOwnedDomains(object)) {
+			DomainUsage domainUsage = visit(QVTbaseUtil.getTypedModel(domain));
+			ruleUsage = union(ruleUsage, domainUsage);
+		}
+		setUsage(object, ruleUsage);
 		for (Domain domain : object.getDomain()) {
 			visit(domain);
 		}
-		return getRootAnalysis().getNoneUsage();
+		return ruleUsage;
 	}
 
 	@Override
