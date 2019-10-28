@@ -573,8 +573,8 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	protected final @NonNull Map<@NonNull Property, @NonNull BasePropertyAnalysis> property2basePropertyAnalysis = new HashMap<>();
 	protected final @NonNull CompleteModel completeModel;
 	protected final @NonNull Iterable<@NonNull Mapping> mappings;
-	protected final @NonNull DomainUsage checkedUsage;
-	protected final @NonNull DomainUsage enforcedUsage;
+	protected final @NonNull DomainUsage inputUsage;
+	protected final @NonNull DomainUsage outputUsage;
 
 	public QVTiProductionConsumption(@NonNull CompilerStep compilerStep, @NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis, @NonNull EntryPoint iEntryPoint) throws IOException {
 		super(ClassUtil.nonNullState(iEntryPoint.eResource()));
@@ -583,16 +583,16 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		this.domainUsageAnalysis = domainUsageAnalysis;
 		this.completeModel = environmentFactory.getCompleteModel();
 		this.mappings = QVTimperativeUtil.computeMappingClosure(iEntryPoint);
-		DomainUsage checkedUsage = domainUsageAnalysis.getNoneUsage();
+		DomainUsage inputUsage = domainUsageAnalysis.getNoneUsage();
 		for (@NonNull TypedModel inputTypedModel : QVTimperativeUtil.getInputTypedModels(iEntryPoint)) {
-			checkedUsage = domainUsageAnalysis.union(checkedUsage, domainUsageAnalysis.getUsage(inputTypedModel));
+			inputUsage = domainUsageAnalysis.union(inputUsage, domainUsageAnalysis.getUsage(inputTypedModel));
 		}
-		this.checkedUsage = checkedUsage;
-		DomainUsage enforcedUsage = domainUsageAnalysis.getNoneUsage();
+		this.inputUsage = inputUsage;
+		DomainUsage outputUsage = domainUsageAnalysis.getNoneUsage();
 		for (@NonNull TypedModel outputTypedModel : QVTimperativeUtil.getOutputTypedModels(iEntryPoint)) {
-			enforcedUsage = domainUsageAnalysis.union(enforcedUsage, domainUsageAnalysis.getUsage(outputTypedModel));
+			outputUsage = domainUsageAnalysis.union(outputUsage, domainUsageAnalysis.getUsage(outputTypedModel));
 		}
-		this.enforcedUsage = enforcedUsage;
+		this.outputUsage = outputUsage;
 	}
 
 	public void analyze() {
@@ -649,7 +649,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	}
 
 	protected boolean isInput(@NonNull DomainUsage usage) {
-		return (checkedUsage.getMask() & usage.getMask()) != 0;
+		return (inputUsage.getMask() & usage.getMask()) != 0;
 	}
 
 	public void validate() {
