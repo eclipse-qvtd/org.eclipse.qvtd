@@ -124,10 +124,10 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
 			String s = typedModelsConfigurations.reconcile(asTransformation);
 			if (s != null) {
-				CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent configuration\n" + s);
+				CompilerUtil.addTransformationError(this, asTransformation, "Inconsistent configuration\n" + s);
 			}
 			if (Iterables.isEmpty(typedModelsConfigurations)) {
-				CompilerUtil.addTranformationError(this, asTransformation, "No TypedModels configurations");
+				CompilerUtil.addTransformationError(this, asTransformation, "No TypedModels configurations");
 			}
 			throwCompilerChainExceptionForErrors();
 			//			else {

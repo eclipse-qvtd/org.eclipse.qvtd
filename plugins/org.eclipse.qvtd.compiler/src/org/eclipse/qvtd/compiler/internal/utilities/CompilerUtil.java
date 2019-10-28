@@ -145,7 +145,7 @@ public class CompilerUtil extends QVTscheduleUtil
 		problemHandler.addProblem(new RuleProblem(CompilerProblem.Severity.WARNING, rule, boundMessage));
 	}
 
-	public static void addTranformationError(@NonNull ProblemHandler problemHandler, @NonNull Transformation transformation, @NonNull String messageTemplate, Object... bindings) {
+	public static void addTransformationError(@NonNull ProblemHandler problemHandler, @NonNull Transformation transformation, @NonNull String messageTemplate, Object... bindings) {
 		String boundMessage = StringUtil.bind(messageTemplate, bindings);
 		problemHandler.addProblem(new TransformationProblem(CompilerProblem.Severity.ERROR, transformation, boundMessage));
 	}

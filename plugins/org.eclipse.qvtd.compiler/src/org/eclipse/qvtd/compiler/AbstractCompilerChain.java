@@ -141,7 +141,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			Transformation transformation = QVTbaseUtil.getTransformation(cResource);
 			String s = typedModelsConfiguration.reconcile(transformation);
 			if (s != null) {
-				CompilerUtil.addTranformationError(this, transformation, "Inconsistent configuration\n" + s);
+				CompilerUtil.addTransformationError(this, transformation, "Inconsistent configuration\n" + s);
 			}
 			try {
 				Resource uResource = createResource(QVTcorePackage.eCONTENT_TYPE);
