@@ -78,8 +78,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
-			return QVTiInterpreterTests.this.getTestProjectManager();
+		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
+			return QVTiInterpreterTests.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
 		}
 
 		public @NonNull ImperativeTransformation loadTransformation() throws IOException {

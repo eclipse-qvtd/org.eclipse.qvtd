@@ -168,8 +168,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
-			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : QVTrCompilerTests.this.getTestProjectManager();
+		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
+			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : QVTrCompilerTests.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
 		}
 
 		protected void setKeepOldJavaFiles() {

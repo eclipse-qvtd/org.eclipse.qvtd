@@ -598,7 +598,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return testBundleURI.segment(1);
 	}
 
-	protected @NonNull ProjectManager getTestProjectManager() throws Exception {
+	protected final @NonNull ProjectManager getTestProjectManager() throws Exception {
+		return getTestProjectManager("");
+	}
+
+	protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
 		return ProjectManager.NO_PROJECTS;
 	}
 

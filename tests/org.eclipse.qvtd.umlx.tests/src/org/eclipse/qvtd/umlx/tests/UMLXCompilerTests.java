@@ -101,8 +101,8 @@ public class UMLXCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
-			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : UMLXCompilerTests.this.getTestProjectManager();
+		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
+			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : UMLXCompilerTests.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
 		}
 	}
 

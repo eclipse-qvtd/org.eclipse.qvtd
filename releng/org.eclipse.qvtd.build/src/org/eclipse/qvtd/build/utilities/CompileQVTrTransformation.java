@@ -83,7 +83,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		}
 
 		@Override
-		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
+		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
 			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : CompileQVTrTransformation.this.getTestProjectManager();
 		}
 	}
@@ -155,7 +155,11 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		}
 	}
 
-	protected @NonNull TestFileSystem getTestFileSystem() {
+	protected final @NonNull TestFileSystem getTestFileSystem() {
+		return getTestFileSystem("");
+	}
+
+	protected @NonNull TestFileSystem getTestFileSystem(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) {
 		TestFileSystem testFileSystem2 = testFileSystem;
 		if (testFileSystem2 == null) {
 			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -163,7 +167,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 				String absolutePath = testBundleFile.getAbsolutePath();
 				assert !testBundleFile.exists() : "Default working directory should be the workspace rather than a project: " + absolutePath;
 			}
-			testFileSystem = testFileSystem2 = TestFileSystem.create(getTestFileSystemHelper());
+			testFileSystem = testFileSystem2 = TestFileSystem.create(getTestFileSystemHelper(), pathFromCurrentWorkingDirectoryToFileSystem);
 		}
 		return testFileSystem2;
 	}

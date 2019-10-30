@@ -22,6 +22,8 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseTestFileSystemHelper;
 
 public class QVTrelationTestFileSystemHelper extends QVTbaseTestFileSystemHelper
 {
+	public QVTrelationTestFileSystemHelper() {
+	}
 
 	@Override
 	public @Nullable File createBuildDotProperties(@NonNull File projectFolder, @NonNull String projectName) {

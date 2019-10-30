@@ -178,8 +178,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
-			return OCL2QVTiTestCases.this.getTestProjectManager();
+		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
+			return OCL2QVTiTestCases.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
 		}
 	}
 
