@@ -27,6 +27,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OriginalContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.BasicPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -39,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.MergedPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -105,7 +107,9 @@ public class ConnectionManager
 	}
 
 	public void addCallToChild(@NonNull Partition parentPartition, @NonNull Partition childPartition) {
-		getCallableChildren(parentPartition).add(childPartition);
+		List<@NonNull Partition> callableChildren = getCallableChildren(parentPartition);
+		assert !callableChildren.contains(childPartition);
+		callableChildren.add(childPartition);
 		getCallableParents(childPartition).add(parentPartition);
 	}
 
@@ -1086,12 +1090,51 @@ public class ConnectionManager
 		return lastProduction >= firstConsumption;
 	}
 
-	public void removeCallToChild(@NonNull Partition parentPartition, @NonNull Partition childPartition) {
-		getCallableChildren(parentPartition).remove(childPartition);
-		getCallableParents(childPartition).remove(parentPartition);
+	public void mergePartitionsInto(@NonNull MergedPartition newPartition, @NonNull Iterable<@NonNull BasicPartitionAnalysis> oldPartitionAnalyses) {
+		List<@NonNull Partition> newCallableParents = getCallableParents(newPartition);
+		for (@NonNull BasicPartitionAnalysis oldPartitionAnalysis : oldPartitionAnalyses) {
+			Partition oldPartition = oldPartitionAnalysis.getPartition();
+			for (@NonNull NodeConnection connection : QVTscheduleUtil.getIntermediateConnections(oldPartition)) {
+				newPartition.getIntermediateConnections().add(connection);
+				List<@NonNull Partition> intermediatePartitions = QVTscheduleUtil.getIntermediatePartitions(connection);
+				boolean wasRemoved = intermediatePartitions.remove(oldPartition);
+				assert wasRemoved;
+				if (!intermediatePartitions.contains(newPartition)) {
+					intermediatePartitions.add(newPartition);
+				}
+			}
+			for (@NonNull NodeConnection connection : QVTscheduleUtil.getRootConnections(oldPartition)) {
+				newPartition.getRootConnections().add(connection);
+				//			Iterable<@NonNull Partition> sourcePartitions = connection.getSourcePartitions();
+				//			boolean wasRemoved = intermediatePartitions.remove(subPartition);
+				//			assert wasRemoved;
+				//			if (!intermediatePartitions.contains(mergedPartition)) {
+				//				intermediatePartitions.add(mergedPartition);
+				//			}
+			}
+			List<@NonNull Partition> oldCallableParents = getCallableParents(oldPartition);
+			for (@NonNull Partition parentPartition : oldCallableParents) {
+				List<@NonNull Partition> parentPartitionCallableChildren = getCallableChildren(parentPartition);
+				int oldIndex = parentPartitionCallableChildren.indexOf(oldPartition);
+				int newIndex = parentPartitionCallableChildren.indexOf(newPartition);
+				if (newIndex < 0) {
+					parentPartitionCallableChildren.add(oldIndex, newPartition);
+				}
+				parentPartitionCallableChildren.remove(oldPartition);
+				if (!newCallableParents.contains(parentPartition)) {
+					newCallableParents.add(parentPartition);
+				}
+			}
+			oldCallableParents.clear();
+		}
 	}
 
-	public void replaceCallToChild(@NonNull Partition parentPartition, @NonNull Partition oldPartition, @NonNull Partition newPartition) {
+	/*	public void removeCallToChild(@NonNull Partition parentPartition, @NonNull Partition childPartition) {
+		getCallableChildren(parentPartition).remove(childPartition);
+		getCallableParents(childPartition).remove(parentPartition);
+	} */
+
+	/*	public void replaceCallToChild(@NonNull Partition parentPartition, @NonNull Partition oldPartition, @NonNull Partition newPartition) {
 		List<@NonNull Partition> parentPartitionCallableChildren = getCallableChildren(parentPartition);
 		int index = parentPartitionCallableChildren.indexOf(oldPartition);
 		parentPartitionCallableChildren.remove(oldPartition);
@@ -1099,5 +1142,5 @@ public class ConnectionManager
 		List<@NonNull Partition> oldPartitionCallableParents = getCallableParents(oldPartition);
 		oldPartitionCallableParents.remove(parentPartition);
 		oldPartitionCallableParents.add(parentPartition);
-	}
+	} */
 }

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.merger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
@@ -71,6 +73,7 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 						List<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> partitionAnalyses = region2partitionAnalyses.get(region);
 						assert partitionAnalyses != null;
 						if (partitionAnalyses.size() > 1) {
+							Collections.sort(partitionAnalyses, NameUtil.NAMEABLE_COMPARATOR);	// Avoid indeterminacy
 							ConcurrentPartitionMerger concurrentMerger = new ConcurrentPartitionMerger(partitionedTransformationAnalysis, partitionAnalyses);
 							Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new = concurrentMerger.merge();
 							if (old2new != null) {

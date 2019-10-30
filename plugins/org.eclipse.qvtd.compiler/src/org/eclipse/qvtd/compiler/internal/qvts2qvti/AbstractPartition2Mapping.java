@@ -148,6 +148,10 @@ public abstract class AbstractPartition2Mapping
 	}
 
 	protected void createAppendParameters() {
+		//		String s = toString();
+		//		if ("PtoN3_Male2OldFamilyGroupNewFather«speculated,edge4-t5sn»".equals(toString())) {
+		//			getClass();
+		//		}
 		List<@NonNull NodeConnection> intermediateConnections = QVTscheduleUtil.getIntermediateConnections(partition);
 		if (intermediateConnections.size() > 0) {
 			if (intermediateConnections.size() > 1) {

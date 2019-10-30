@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -73,6 +74,7 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 
 	@Override
 	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 		BasicPartition partition = subPartitionAnalyses.iterator().next().getPartition();
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(partition);
 		MergedPartition mergedPartition = createMergedPartition(computeName(), headNodes);
@@ -83,6 +85,7 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 			mergedPartition.getExplicitPredecessors().addAll(subPartition.getExplicitPredecessors());
 			mergedPartition.getExplicitSuccessors().addAll(subPartition.getExplicitSuccessors());
 		}
+		connectionManager.mergePartitionsInto(mergedPartition, subPartitionAnalyses);
 		return createPartitionAnalysis(partitionedTransformationAnalysis, mergedPartition);
 	}
 

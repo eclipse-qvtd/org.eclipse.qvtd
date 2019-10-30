@@ -316,7 +316,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			assert ruleUsage != null;
 			DomainUsage intersectionUsage = intersection(newUsage, ruleUsage);
 			if (intersectionUsage.isNone() && !newUsage.isNone()) {
-				CompilerUtil.addRuleError(problemHandler, rule, "No useable domain in ''{0}'' for ''{1}''", rule.getName(), element);
+				CompilerUtil.addRuleError(problemHandler, rule, "No useable ''{0}''  domain in ''{1}'' for ''{2}''", newUsage, rule.getName(), element);
 			}
 			newUsage = intersectionUsage;
 		}
