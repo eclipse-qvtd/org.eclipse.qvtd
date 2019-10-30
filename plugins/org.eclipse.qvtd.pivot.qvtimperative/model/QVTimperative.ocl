@@ -40,8 +40,8 @@ inv LocalVariableNamesAreUnique: ownedMappingParameters->union(ownedStatements->
 
 context MappingCall
 def: referredNames : OrderedSet(String) = referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)
-def: referringNames : OrderedSet(String) = ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)
-inv MatchingCallBindings('MappingCall::MatchingCallBindings: ' + referredMapping.name + joinNames(referredNames) + ' <= ' + joinNames(referringNames)): referredNames = referringNames
+def: bindingNames : OrderedSet(String) = ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)
+inv MatchingCallBindings('MappingCall::MatchingCallBindings: ' + referredMapping.name + ' ' + joinNames(bindingNames) + ' <> ' + joinNames(referredNames)): referredNames = bindingNames
 inv NotBothInstallAndInvoke: not (isInstall and isInvoke)
 inv UniqueCallBindings: ownedMappingParameterBindings->isUnique(boundVariable)
 

@@ -407,7 +407,7 @@
         <details key="originalName" value="MatchingCallBindings"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'MappingCall::MatchingCallBindings: ' + referredMapping.name + joinNames(referredNames) + ' &lt;= ' + joinNames(referringNames),&#xA;&#x9;status : Boolean = referredNames = referringNames&#xA;&#xA;}.status"/>
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'MappingCall::MatchingCallBindings: ' + referredMapping.name + ' ' + joinNames(bindingNames) + ' &lt;> ' + joinNames(referredNames),&#xA;&#x9;status : Boolean = referredNames = bindingNames&#xA;&#xA;}.status"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -474,18 +474,18 @@
         <details key="documentation" value="The Mapping invoked by the MappingCall."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-MappingCall-bindingNames"
+        name="bindingNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-MappingCall-referredNames"
         name="referredNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="derivation" value="referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-MappingCall-referringNames"
-        name="referringNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" transient="true" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

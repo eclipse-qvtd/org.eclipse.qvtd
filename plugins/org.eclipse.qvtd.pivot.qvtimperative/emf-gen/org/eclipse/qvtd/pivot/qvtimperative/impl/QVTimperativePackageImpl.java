@@ -883,7 +883,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMappingCall_ReferredNames() {
+	public EAttribute getMappingCall_BindingNames() {
 		return (EAttribute)mappingCallEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -893,7 +893,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMappingCall_ReferringNames() {
+	public EAttribute getMappingCall_ReferredNames() {
 		return (EAttribute)mappingCallEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1797,8 +1797,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEAttribute(getMappingCall_IsInstall(), ecorePackage.getEBoolean(), "isInstall", "false", 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingCall_IsInvoke(), ecorePackage.getEBoolean(), "isInvoke", "false", 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCall_ReferredMapping(), this.getMapping(), null, "referredMapping", null, 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCall_BindingNames(), ecorePackage.getEString(), "bindingNames", null, 0, -1, MappingCall.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingCall_ReferredNames(), ecorePackage.getEString(), "referredNames", null, 0, -1, MappingCall.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMappingCall_ReferringNames(), ecorePackage.getEString(), "referringNames", null, 0, -1, MappingCall.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateMatchingCallBindings", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2205,7 +2205,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "Tuple {\n\tmessage : String = \'MappingCall::MatchingCallBindings: \' + referredMapping.name + joinNames(referredNames) + \' <= \' + joinNames(referringNames),\n\tstatus : Boolean = referredNames = referringNames\n\n}.status"
+			   "body", "Tuple {\n\tmessage : String = \'MappingCall::MatchingCallBindings: \' + referredMapping.name + \' \' + joinNames(bindingNames) + \' <> \' + joinNames(referredNames),\n\tstatus : Boolean = referredNames = bindingNames\n\n}.status"
 		   });
 		addAnnotation
 		  (getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map(),

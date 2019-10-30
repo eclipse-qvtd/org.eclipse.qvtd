@@ -77,8 +77,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#isIsInstall <em>Is Install</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getReferredMapping <em>Referred Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getBindingNames <em>Binding Names</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getReferredNames <em>Referred Names</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getReferringNames <em>Referring Names</em>}</li>
  * </ul>
  *
  * @generated
@@ -240,66 +240,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * @generated
 	 */
 	@Override
-	public EList<String> getReferredNames() {
-		/**
-		 * referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Mapping referredMapping = this.getReferredMapping();
-		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
-		final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
-		/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTimperativeTables.BAG_PRIMid_String);
-		@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
-		/*@Thrown*/ @NonNull BagValue collect;
-		while (true) {
-			if (!ITERATOR__1.hasNext()) {
-				collect = accumulator;
-				break;
-			}
-			@SuppressWarnings("null")
-			/*@NonInvalid*/ @NonNull MappingParameter _1 = (@NonNull MappingParameter)ITERATOR__1.next();
-			/**
-			 * name
-			 */
-			final /*@NonInvalid*/ @Nullable String name = _1.getName();
-			//
-			accumulator.add(name);
-		}
-		final /*@Thrown*/ @NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
-		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy_0 = executor.getStaticTypeOfValue(null, asSet);
-		final @NonNull LibraryIterationExtension IMPL_sortedBy_0 = (LibraryIterationExtension)TYPE_sortedBy_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
-		final @NonNull Object ACC_sortedBy_0 = IMPL_sortedBy_0.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
-		/**
-		 * Implementation of the iterator body.
-		 */
-		final @NonNull AbstractBinaryOperation BODY_sortedBy_0 = new AbstractBinaryOperation() {
-			/**
-			 * n
-			 */
-			@Override
-			public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asSet, final /*@NonInvalid*/ @Nullable Object n) {
-				final /*@NonInvalid*/ @Nullable String symbol_0 = (String)n;
-				return symbol_0;
-			}
-		};
-		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy_0, asSet, ACC_sortedBy_0);
-		@SuppressWarnings("null")
-		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy_0.evaluateIteration(MGR_sortedBy_0);
-		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = ((IdResolverExtension)idResolver).ecoreValueOfAll(String.class, sortedBy);
-		return (EList<String>)ECORE_sortedBy;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<String> getReferringNames() {
+	public EList<String> getBindingNames() {
 		/**
 		 * ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)
 		 */
@@ -374,6 +315,65 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * @generated
 	 */
 	@Override
+	public EList<String> getReferredNames() {
+		/**
+		 * referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)
+		 */
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
+		@SuppressWarnings("null")
+		final /*@NonInvalid*/ @NonNull Mapping referredMapping = this.getReferredMapping();
+		@SuppressWarnings("null")
+		final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
+		final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
+		/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTimperativeTables.BAG_PRIMid_String);
+		@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
+		/*@Thrown*/ @NonNull BagValue collect;
+		while (true) {
+			if (!ITERATOR__1.hasNext()) {
+				collect = accumulator;
+				break;
+			}
+			@SuppressWarnings("null")
+			/*@NonInvalid*/ @NonNull MappingParameter _1 = (@NonNull MappingParameter)ITERATOR__1.next();
+			/**
+			 * name
+			 */
+			final /*@NonInvalid*/ @Nullable String name = _1.getName();
+			//
+			accumulator.add(name);
+		}
+		final /*@Thrown*/ @NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
+		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy_0 = executor.getStaticTypeOfValue(null, asSet);
+		final @NonNull LibraryIterationExtension IMPL_sortedBy_0 = (LibraryIterationExtension)TYPE_sortedBy_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
+		final @NonNull Object ACC_sortedBy_0 = IMPL_sortedBy_0.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
+		/**
+		 * Implementation of the iterator body.
+		 */
+		final @NonNull AbstractBinaryOperation BODY_sortedBy_0 = new AbstractBinaryOperation() {
+			/**
+			 * n
+			 */
+			@Override
+			public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asSet, final /*@NonInvalid*/ @Nullable Object n) {
+				final /*@NonInvalid*/ @Nullable String symbol_0 = (String)n;
+				return symbol_0;
+			}
+		};
+		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy_0, asSet, ACC_sortedBy_0);
+		@SuppressWarnings("null")
+		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy_0.evaluateIteration(MGR_sortedBy_0);
+		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = ((IdResolverExtension)idResolver).ecoreValueOfAll(String.class, sortedBy);
+		return (EList<String>)ECORE_sortedBy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean validateMatchingCallBindings(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		final @NonNull String constraintName = "MappingCall::MatchingCallBindings";
 		try {
@@ -386,14 +386,14 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : OclAny[1] = let status : Boolean[1] = referredNames = referringNames
+			 *         result : OclAny[1] = let status : Boolean[1] = referredNames = bindingNames
 			 *         in
 			 *           if status = true
 			 *           then true
 			 *           else
-			 *             Tuple{message = 'MappingCall::MatchingCallBindings: ' + referredMapping.name +
-			 *               joinNames(referredNames) + ' <= ' +
-			 *               joinNames(referringNames), status = status
+			 *             Tuple{message = 'MappingCall::MatchingCallBindings: ' + referredMapping.name + ' ' +
+			 *               joinNames(bindingNames) + ' <> ' +
+			 *               joinNames(referredNames), status = status
 			 *             }
 			 *           endif
 			 *       in
@@ -421,10 +421,10 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<String> referredNames = this.getReferredNames();
+					final /*@NonInvalid*/ @NonNull List<String> bindingNames = this.getBindingNames();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<String> referringNames = this.getReferringNames();
-					final /*@NonInvalid*/ boolean status = referredNames.equals(referringNames);
+					final /*@NonInvalid*/ @NonNull List<String> referredNames = this.getReferredNames();
+					final /*@NonInvalid*/ boolean status = referredNames.equals(bindingNames);
 					/*@Thrown*/ @NonNull Object symbol_1;
 					if (status) {
 						symbol_1 = ValueUtil.TRUE_VALUE;
@@ -434,14 +434,15 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 						final /*@NonInvalid*/ @NonNull Mapping referredMapping = this.getReferredMapping();
 						final /*@NonInvalid*/ @Nullable String name = referredMapping.getName();
 						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_MappingCall_c_c_MatchingCallBindings_c_32, name);
+						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull String joinNames = this.joinNames((EList<String>)referredNames);
-						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, joinNames);
-						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTimperativeTables.STR__32_l_q_32);
+						final /*@NonInvalid*/ @NonNull String joinNames = this.joinNames((EList<String>)bindingNames);
+						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, joinNames);
+						final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__32_l_g_32);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull String joinNames_0 = this.joinNames((EList<String>)referringNames);
-						final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, joinNames_0);
-						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_2, status);
+						final /*@NonInvalid*/ @NonNull String joinNames_0 = this.joinNames((EList<String>)referredNames);
+						final /*@Thrown*/ @NonNull String sum_3 = StringConcatOperation.INSTANCE.evaluate(sum_2, joinNames_0);
+						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_3, status);
 						symbol_1 = symbol_0;
 					}
 					CAUGHT_symbol_1 = symbol_1;
@@ -701,9 +702,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				if (resolve) return getReferredMapping();
 				return basicGetReferredMapping();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
-				return getReferredNames();
+				return getBindingNames();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
-				return getReferringNames();
+				return getReferredNames();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -775,9 +776,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return referredMapping != null;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
-				return !getReferredNames().isEmpty();
+				return !getBindingNames().isEmpty();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
-				return !getReferringNames().isEmpty();
+				return !getReferredNames().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

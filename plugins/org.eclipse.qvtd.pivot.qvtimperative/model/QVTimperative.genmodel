@@ -114,8 +114,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-MappingCall-isInstall"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-MappingCall-isInvoke"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-MappingCall-referredMapping"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-MappingCall-bindingNames"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-MappingCall-referredNames"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-MappingCall-referringNames"/>
       <genOperations ecoreOperation="QVTimperative.ecore#//MappingCall/validateMatchingCallBindings">
         <genParameters ecoreParameter="QVTimperative.ecore#//MappingCall/validateMatchingCallBindings/diagnostics"/>
         <genParameters ecoreParameter="QVTimperative.ecore#//MappingCall/validateMatchingCallBindings/context"/>

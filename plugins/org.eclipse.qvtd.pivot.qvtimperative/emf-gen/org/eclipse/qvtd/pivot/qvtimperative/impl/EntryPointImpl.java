@@ -209,15 +209,15 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getInputTypedModels().clear();
-			getInputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
-			return;
+				getInputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
 				getOutputTypedModels().clear();
-			getOutputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
-			return;
+				getOutputTypedModels().addAll((Collection<? extends TypedModel>)newValue);
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 7:
 				setTargetName((String)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -232,13 +232,13 @@ public class EntryPointImpl extends MappingImpl implements EntryPoint {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getInputTypedModels().clear();
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 6:
 				getOutputTypedModels().clear();
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 7:
 				setTargetName(TARGET_NAME_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

@@ -34,8 +34,8 @@ import org.eclipse.ocl.pivot.ReferringElement;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInstall <em>Is Install</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredMapping <em>Referred Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBindingNames <em>Binding Names</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredNames <em>Referred Names</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferringNames <em>Referring Names</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall()
@@ -87,6 +87,21 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	void setReferredMapping(Mapping value);
 
 	/**
+	 * Returns the value of the '<em><b>Binding Names</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Binding Names</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Binding Names</em>' attribute list.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_BindingNames()
+	 * @generated
+	 */
+	EList<String> getBindingNames();
+
+	/**
 	 * Returns the value of the '<em><b>Referred Names</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
@@ -100,21 +115,6 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * @generated
 	 */
 	EList<String> getReferredNames();
-
-	/**
-	 * Returns the value of the '<em><b>Referring Names</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Referring Names</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referring Names</em>' attribute list.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_ReferringNames()
-	 * @generated
-	 */
-	EList<String> getReferringNames();
 
 	/**
 	 * <!-- begin-user-doc -->

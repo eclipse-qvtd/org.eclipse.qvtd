@@ -657,6 +657,17 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getMappingCall_ReferredMapping();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBindingNames <em>Binding Names</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Binding Names</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBindingNames()
+	 * @see #getMappingCall()
+	 * @generated
+	 */
+	EAttribute getMappingCall_BindingNames();
+
+	/**
 	 * Returns the meta object for the attribute list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredNames <em>Referred Names</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -666,17 +677,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMappingCall_ReferredNames();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferringNames <em>Referring Names</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Referring Names</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferringNames()
-	 * @see #getMappingCall()
-	 * @generated
-	 */
-	EAttribute getMappingCall_ReferringNames();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#validateMatchingCallBindings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Matching Call Bindings</em>}' operation.
@@ -1711,20 +1711,20 @@ public interface QVTimperativePackage extends EPackage {
 		EReference MAPPING_CALL__REFERRED_MAPPING = eINSTANCE.getMappingCall_ReferredMapping();
 
 		/**
+		 * The meta object literal for the '<em><b>Binding Names</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CALL__BINDING_NAMES = eINSTANCE.getMappingCall_BindingNames();
+
+		/**
 		 * The meta object literal for the '<em><b>Referred Names</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute MAPPING_CALL__REFERRED_NAMES = eINSTANCE.getMappingCall_ReferredNames();
-
-		/**
-		 * The meta object literal for the '<em><b>Referring Names</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MAPPING_CALL__REFERRING_NAMES = eINSTANCE.getMappingCall_ReferringNames();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Matching Call Bindings</b></em>' operation.
