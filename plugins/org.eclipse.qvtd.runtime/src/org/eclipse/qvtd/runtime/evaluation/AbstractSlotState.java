@@ -10,12 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * The abstract implementation of a SlotState provides the mandatory shared functionality for maintaining
@@ -23,6 +25,11 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public abstract class AbstractSlotState implements SlotState
 {
+	public enum SlotMode {
+		ASSIGNABLE,		// No assignment has been performed, object reads are blocked (collections reads may be unblocked)
+		ASSIGNED,		// Last assignment has been performed, reads are unblocked
+		REASSIGNABLE	// Incremental-only - No assignment has been performed by a re-execution, object reads are blocked (collections reads may be unblocked)
+	}
 
 	public abstract static class Incremental extends AbstractSlotState implements SlotState.Incremental
 	{
@@ -31,6 +38,10 @@ public abstract class AbstractSlotState implements SlotState
 
 		private Set<Invocation.@NonNull Incremental> sources = null;
 		private Set<Execution.@NonNull Incremental> targets = null;
+
+		protected Incremental(@NonNull SlotMode mode) {
+			super(mode);
+		}
 
 		@Override
 		public void addSourceInternal(Invocation.@NonNull Incremental invocation) {
@@ -66,8 +77,53 @@ public abstract class AbstractSlotState implements SlotState
 		}
 	}
 
+	protected @NonNull SlotMode mode;
+	private @Nullable Object blockedInvocations = null;
+
+	protected AbstractSlotState(@NonNull SlotMode mode) {
+		this.mode = mode;
+	}
+
 	@Override
 	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitSlotState(this);
+	}
+
+	@Override
+	public synchronized void block(@NonNull Invocation invocation) {
+		final Object blockedInvocations2 = blockedInvocations;
+		if (blockedInvocations2 == null) {
+			blockedInvocations = invocation;
+		}
+		else if (blockedInvocations2 instanceof Invocation) {
+			List<Invocation> blockedInvocationList = new ArrayList<Invocation>();
+			blockedInvocationList.add((Invocation) blockedInvocations2);
+			blockedInvocationList.add(invocation);
+			blockedInvocations = blockedInvocationList;
+		}
+		else {
+			@SuppressWarnings("unchecked")
+			List<Invocation> blockedInvocationList = (List<Invocation>)blockedInvocations2;
+			blockedInvocationList.add(invocation);
+		}
+	}
+
+	protected boolean isAssigned() {
+		return mode == SlotMode.ASSIGNED;
+	}
+
+	protected synchronized void unblock(@NonNull ObjectManager objectManager) {
+		final Object blockedInvocations2 = blockedInvocations;
+		if (blockedInvocations2 instanceof Invocation) {
+			((Invocation) blockedInvocations2).unblock();
+		}
+		else if (blockedInvocations2 != null) {
+			@SuppressWarnings("unchecked")
+			List<Invocation> blockedInvocationList = (List<Invocation>)blockedInvocations2;
+			for (@SuppressWarnings("null")@NonNull Invocation invocation : blockedInvocationList) {
+				invocation.unblock();
+			}
+		}
+		blockedInvocations = null;
 	}
 }
