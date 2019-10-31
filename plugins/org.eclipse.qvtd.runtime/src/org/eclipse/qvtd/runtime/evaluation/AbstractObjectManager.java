@@ -371,7 +371,8 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 
 	protected abstract @NonNull SS createSimpleSlotState(@NonNull Object eObject, @NonNull EAttribute eFeature, @Nullable Object ecoreValue);
 
-	protected @NonNull EReference getEOppositeReference(@NonNull EReference eReference) {
+	@Override
+	public @NonNull EReference getEOppositeReference(@NonNull EReference eReference) {
 		EReference eOppositeReference = eReference.getEOpposite();
 		if (eOppositeReference == null) {
 			EOppositeReferenceImpl eOppositeReference2 = eReference2eOppositeReference.get(eReference);

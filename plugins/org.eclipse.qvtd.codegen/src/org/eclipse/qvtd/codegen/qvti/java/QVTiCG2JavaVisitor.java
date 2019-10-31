@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -46,6 +47,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGShadowExp;
@@ -515,6 +517,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 	}
 
+	protected void appendQualifiedLiteralName(@NonNull EStructuralFeature eStructuralFeature) {
+		EClass eContainingClass = ClassUtil.nonNullState(eStructuralFeature.getEContainingClass());
+		EPackage ePackage = ClassUtil.nonNullState(eContainingClass.getEPackage());
+		js.appendClassReference(null, genModelHelper.getQualifiedPackageInterfaceName(ePackage));
+		js.append(".Literals.");
+		js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+	}
+
 	protected void appendThis(@NonNull CGElement cgElement) {
 		for (EObject eObject = cgElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof CGMapping) {
@@ -702,7 +712,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		EStructuralFeature eStructuralFeature = QVTiCGUtil.getEStructuralFeature(cgPropertyAssignment);
 		CGValuedElement cgSlot = getExpression(QVTiCGUtil.getOwnedSlotValue(cgPropertyAssignment));
 		CGValuedElement cgInit = getExpression(QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment));
-		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 		if (isIncremental || ((SetStatement)cgPropertyAssignment.getAst()).isIsNotify()) {
 			js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME);
 			js.append(".assigned(");
@@ -712,9 +721,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 			js.appendValueName(cgInit);
 			js.append(", ");
-			js.appendClassReference(null, genModelHelper.getQualifiedPackageInterfaceName(ePackage));
-			js.append(".Literals.");
-			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			appendQualifiedLiteralName(eStructuralFeature);
 			js.append(", ");
 			js.appendValueName(cgSlot);
 			js.append(");\n");
@@ -725,7 +732,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		EStructuralFeature eStructuralFeature = QVTiCGUtil.getEStructuralFeature(cgPropertyAssignment);
 		CGValuedElement cgSlot = getExpression(QVTiCGUtil.getOwnedSlotValue(cgPropertyAssignment));
 		CGValuedElement cgInit = getExpression(QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment));
-		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 		if (isIncremental || ((SetStatement)cgPropertyAssignment.getAst()).isIsNotify()) {
 			js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME);
 			js.append(".assigned(");
@@ -735,9 +741,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 			js.appendValueName(cgSlot);
 			js.append(", ");
-			js.appendClassReference(null, genModelHelper.getQualifiedPackageInterfaceName(ePackage));
-			js.append(".Literals.");
-			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			appendQualifiedLiteralName(eStructuralFeature);
 			js.append(", ");
 			js.appendValueName(cgInit);
 			js.append(");\n");
@@ -747,7 +751,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	private void doAssigned(@NonNull CGGuardVariable cgGuardVariable, @NonNull EStructuralFeature eStructuralFeature, CGValuedElement cgInit) {
 		CGValuedElement cgSlot = cgGuardVariable;
 		//		CGValuedElement cgInit = getExpression(QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment));
-		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 		//		if (isIncremental || ((SetStatement)cgGuardVariable.getAst()).isIsNotify()) {
 		js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME);
 		js.append(".assigned(");
@@ -757,9 +760,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 		js.appendValueName(cgSlot);
 		js.append(", ");
-		js.appendClassReference(null, genModelHelper.getQualifiedPackageInterfaceName(ePackage));
-		js.append(".Literals.");
-		js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+		appendQualifiedLiteralName(eStructuralFeature);
 		js.append(", ");
 		js.appendValueName(cgInit);
 		js.append(");\n");
@@ -1527,15 +1528,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			isHazardous = isHazardous2((NavigationCallExp) asPropertyCallExp);
 		}
 		if (isHazardous) {
-			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 			//
 			js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME);
 			js.append(".getting(");
 			js.appendValueName(source);
 			js.append(", ");
-			js.appendClassReference(null, genModelHelper.getQualifiedPackageInterfaceName(ePackage));
-			js.append(".Literals.");
-			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			appendQualifiedLiteralName(eStructuralFeature);
 			js.append(", ");
 			js.appendBooleanString(isOpposite);
 			js.append(");\n");
@@ -1544,7 +1542,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doGot(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull CGValuedElement source, @NonNull EStructuralFeature eStructuralFeature) {
 		if (useGot) {
-			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 			//
 			js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME);
 			js.append(".got(");
@@ -1556,9 +1553,21 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(", ");
 			js.appendValueName(source);
 			js.append(", ");
-			js.appendClassReference(null, genModelHelper.getQualifiedPackageInterfaceName(ePackage));
-			js.append(".Literals.");
-			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			if (!(cgPropertyCallExp instanceof CGOppositePropertyCallExp)) {
+				appendQualifiedLiteralName(eStructuralFeature);
+			}
+			else {
+				EReference eOpposite = ((EReference)eStructuralFeature).getEOpposite();
+				if (eOpposite != null) {
+					appendQualifiedLiteralName(eOpposite);
+				}
+				else {
+					js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME);
+					js.append(".getEOppositeReference(");
+					appendQualifiedLiteralName(eStructuralFeature);
+					js.append(")");
+				}
+			}
 			js.append(", ");
 			js.appendValueName(cgPropertyCallExp);
 			js.append(");\n");

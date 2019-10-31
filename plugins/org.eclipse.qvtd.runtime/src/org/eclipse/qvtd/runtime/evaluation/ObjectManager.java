@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -45,6 +46,12 @@ public interface ObjectManager extends ExecutionVisitable
 	void created(Invocation.@NonNull Incremental invocation, @NonNull Object eObject);
 
 	void destroyed(@NonNull Object eObject);
+
+	/**
+	 * Return the eReference's opposite EReference which may be an internal EOppositeReferenceImpl if the Ecore model
+	 * EReference is not bidirectional.
+	 */
+	@NonNull EReference getEOppositeReference(@NonNull EReference eReference);
 
 	@NonNull Iterable<@NonNull ? extends Object> getObjects();
 	@NonNull Iterable<@NonNull ? extends SlotState> getSlotStates(@NonNull Object object);
