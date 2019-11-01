@@ -18,6 +18,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractObjectState;
 
 /**
  * The abstract implementation of a SlotState provides the mandatory shared functionality for maintaining
@@ -39,8 +40,8 @@ public abstract class AbstractSlotState implements SlotState
 		private Set<Invocation.@NonNull Incremental> sources = null;
 		private Set<Execution.@NonNull Incremental> targets = null;
 
-		protected Incremental(@NonNull SlotMode mode) {
-			super(mode);
+		protected Incremental(@NonNull AbstractObjectState<?> objectState, @NonNull SlotMode mode) {
+			super(objectState, mode);
 		}
 
 		@Override
@@ -77,10 +78,12 @@ public abstract class AbstractSlotState implements SlotState
 		}
 	}
 
+	protected final @NonNull AbstractObjectState<?> objectState;
 	protected @NonNull SlotMode mode;
 	private @Nullable Object blockedInvocations = null;
 
-	protected AbstractSlotState(@NonNull SlotMode mode) {
+	protected AbstractSlotState(@NonNull AbstractObjectState<?> objectState, @NonNull SlotMode mode) {
+		this.objectState = objectState;
 		this.mode = mode;
 	}
 
@@ -89,6 +92,10 @@ public abstract class AbstractSlotState implements SlotState
 		return visitor.visitSlotState(this);
 	}
 
+	//	public void assignedElement(@NonNull Object eContainer, @NonNull EReference eReference, Object eObject) {
+	//		throw new UnsupportedOperationException();
+	//	}
+
 	@Override
 	public synchronized void block(@NonNull Invocation invocation) {
 		final Object blockedInvocations2 = blockedInvocations;
@@ -96,31 +103,33 @@ public abstract class AbstractSlotState implements SlotState
 			blockedInvocations = invocation;
 		}
 		else if (blockedInvocations2 instanceof Invocation) {
-			List<Invocation> blockedInvocationList = new ArrayList<Invocation>();
+			List<@NonNull Invocation> blockedInvocationList = new ArrayList<>();
 			blockedInvocationList.add((Invocation) blockedInvocations2);
 			blockedInvocationList.add(invocation);
 			blockedInvocations = blockedInvocationList;
 		}
 		else {
 			@SuppressWarnings("unchecked")
-			List<Invocation> blockedInvocationList = (List<Invocation>)blockedInvocations2;
+			List<Invocation> blockedInvocationList = (List<@NonNull Invocation>)blockedInvocations2;
 			blockedInvocationList.add(invocation);
 		}
 	}
+
+	protected abstract @NonNull AbstractObjectManager<@NonNull ? extends SlotState> getObjectManager();
 
 	protected boolean isAssigned() {
 		return mode == SlotMode.ASSIGNED;
 	}
 
-	protected synchronized void unblock(@NonNull ObjectManager objectManager) {
+	protected synchronized void unblock() {
 		final Object blockedInvocations2 = blockedInvocations;
 		if (blockedInvocations2 instanceof Invocation) {
 			((Invocation) blockedInvocations2).unblock();
 		}
 		else if (blockedInvocations2 != null) {
 			@SuppressWarnings("unchecked")
-			List<Invocation> blockedInvocationList = (List<Invocation>)blockedInvocations2;
-			for (@SuppressWarnings("null")@NonNull Invocation invocation : blockedInvocationList) {
+			List<@NonNull Invocation> blockedInvocationList = (List<@NonNull Invocation>)blockedInvocations2;
+			for (@NonNull Invocation invocation : blockedInvocationList) {
 				invocation.unblock();
 			}
 		}

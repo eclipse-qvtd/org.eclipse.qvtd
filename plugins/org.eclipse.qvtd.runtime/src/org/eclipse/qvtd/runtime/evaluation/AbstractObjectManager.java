@@ -19,24 +19,23 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.impl.EReferenceImpl;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.NumberValue;
 import org.eclipse.ocl.pivot.values.UnlimitedNaturalValue;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractObjectState;
+import org.eclipse.qvtd.runtime.internal.evaluation.EOppositeReferenceImpl;
 
 /**
  * AbstractObjectManager provides the mandatory shared functionality for an object state manager.
@@ -50,146 +49,6 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 	 */
 	public static @NonNull Object NOT_A_VALUE = AbstractObjectManager.class;
 
-	//	protected static interface ObjectState
-	//	{
-	//	}
-
-	/**
-	 * An BasicObjectState supports the slots of an EObject.
-	 *
-	 * FIXME A BasicObjectState has some duplication of EObject. In due course BasicObjectState should
-	 * fully replace intermediate EObjects and eventually all EObjects.
-	 *
-	 * FIXME The Map of feature to SlotState should be replaced by compile-time computed indexesinto and array
-	 * of SlotState (for singly inherited objects). A Map may be necessary for multiple inheritance.
-	 */
-	protected static abstract class AbstractObjectState<@NonNull SS extends SlotState> // implements ObjectState
-	{
-		protected final @NonNull Object eObject;
-		protected final boolean isLoaded;
-		protected @Nullable Map<@NonNull EStructuralFeature, SS> feature2featureState = null;
-
-		public AbstractObjectState(@NonNull Object eObject) {
-			this.eObject = eObject;
-			this.isLoaded = ((eObject instanceof EObject) && ((EObject)eObject).eResource() != null);
-		}
-
-		public @Nullable SS basicGetSlotState(@NonNull EStructuralFeature eFeature) {
-			return feature2featureState != null ? feature2featureState.get(eFeature) : null;
-		}
-
-		public @NonNull Iterable<@NonNull SS> getFeatures() {
-			return feature2featureState != null ? feature2featureState.values() : Collections.emptyList();
-		}
-
-		public @Nullable SS putSlotState(@NonNull EStructuralFeature eFeature, @NonNull SS slotState, @Nullable Object slotValue) {
-			Map<@NonNull EStructuralFeature, @NonNull SS> feature2featureState2 = feature2featureState;
-			if (feature2featureState2 == null) {
-				feature2featureState = feature2featureState2 = new HashMap<>();
-			}
-			@Nullable SS oldSlotState = feature2featureState2.put(eFeature, slotState);
-			if (isLoaded && (oldSlotState == null) && !(eFeature instanceof EOppositeReferenceImpl)) {
-				assert slotValue != NOT_A_VALUE;
-				slotState.assigned(eObject, eFeature, slotValue/*((EObject)eObject).eGet(eFeature)*/);
-			}
-			return oldSlotState;
-		}
-
-		@Override
-		public String toString() {
-			return eObject.toString();
-		}
-	}
-
-	/**
-	 * EOppositeReferenceImpl is used internally to reify the missing EReference.eOpposite and so satisfy the
-	 * invariant that all EReferemces have a useable eOpposite. The instances should not be used
-	 * externally since they violate many WFRs. Only getEOpposite() is useful (and getName()/toString() for debugging).
-	 */
-	protected static class EOppositeReferenceImpl extends EReferenceImpl
-	{
-		public EOppositeReferenceImpl(@NonNull EReference eReference) {
-			assert eOpposite == null;
-			setEOpposite(eReference);
-			assert eOpposite == eReference;
-		}
-
-		@Override
-		public EClass basicGetEReferenceType() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public EClassifier basicGetEType() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public EClass getEContainingClass() {
-			return eOpposite.getEReferenceType();
-		}
-
-		@Override
-		public EGenericType getEGenericType() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public EClass getEReferenceType() {
-			return eOpposite.getEContainingClass();
-		}
-
-		@Override
-		public EClassifier getEType() {
-			return eOpposite.getEContainingClass();
-		}
-
-		@Override
-		public String getName() {
-			return "«opposite»" + eOpposite.getName();
-		}
-
-		@Override
-		public String getNameGen() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean isChangeable() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean isContainer() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean isContainment() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean isDerived() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean isTransient() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean isVolatile() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public String toString() {
-			return getName();
-		}
-	}
-
 	protected final @NonNull InvocationManager invocationManager;
 	protected final boolean debugAssignments = AbstractTransformer.ASSIGNMENTS.isActive();
 	protected final boolean debugGettings = AbstractTransformer.GETTINGS.isActive();
@@ -199,12 +58,12 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 	 * This unpleasant Map of Maps is a pathfinder before embarking on slotted objects that merge user and overhead
 	 * in a single object. The first map is then a null lookup and the nested map is an index within the object.
 	 */
-	private @NonNull Map<@NonNull Object, @NonNull AbstractObjectState<@NonNull SS>> object2objectState = new HashMap<>();
+	private @NonNull Map<@NonNull Object, org.eclipse.qvtd.runtime.internal.evaluation.AbstractObjectState<@NonNull SS>> object2objectState = new HashMap<>();
 
 	/**
 	 * Map of helper objects to reify missing EReference::eOpposites. Only used as a semantically inverse handle on the available EReference.
 	 */
-	private @NonNull Map<@NonNull EReference, @NonNull EOppositeReferenceImpl> eReference2eOppositeReference = new HashMap<>();
+	private @NonNull Map<@NonNull EReference, org.eclipse.qvtd.runtime.internal.evaluation.EOppositeReferenceImpl> eReference2eOppositeReference = new HashMap<>();
 
 	protected AbstractObjectManager(@NonNull InvocationManager invocationManager) {
 		this.invocationManager = invocationManager;
@@ -213,18 +72,6 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 	@Override
 	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitObjectManager(this);
-	}
-
-	@Deprecated /* @deprecated childKey not used */
-	@Override
-	public synchronized void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey) {
-		assigned(eObject, eFeature, ecoreValue);
-	}
-
-	@Deprecated /* @deprecated childKey not used */
-	@Override
-	public void assigned(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey) {
-		assigned(invocation, eObject, eFeature, ecoreValue);
 	}
 
 	@Override
@@ -251,101 +98,7 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 			AbstractTransformer.ASSIGNMENTS.println(s.toString());
 		}
 		AbstractObjectState<@NonNull SS> objectState = getObjectState(eObject);
-		SS slotState = objectState.basicGetSlotState(eFeature);
-		if (slotState != null) {
-			slotState.assigned(eObject, eFeature, ecoreValue);
-		}
-		else {
-			if (eFeature instanceof EAttribute) {
-				slotState = createSimpleSlotState(eObject, (EAttribute)eFeature, ecoreValue);
-			}
-			else {
-				Object ecoreValue2 = ecoreValue;
-				EReference eReference = (EReference)eFeature;
-				EReference eOppositeReference = getEOppositeReference(eReference);
-				if (!(eOppositeReference instanceof EOppositeReferenceImpl)) {
-					//					if (ecoreValue2 != null) {
-					//						Map<EStructuralFeature, SlotState> oppositeObjectState = getObjectState((EObject) ecoreValue2);
-					//						SlotState oppositeSlotState = oppositeObjectState.get(eOppositeReference);
-					//					}
-					if (eReference.isMany()) {
-						assert ecoreValue2 != null;
-						if (eOppositeReference.isMany()) {
-							slotState = createManyToManySlotState(eObject, eReference, eOppositeReference);
-						}
-						else {
-							slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
-						}
-					}
-					else if (ecoreValue2 != null) {
-						if (eOppositeReference.isMany()) {
-							slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
-						}
-						//						else if (isIncremental) {
-						//							slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, ecoreValue2);
-						//						}
-						else {
-							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
-						}
-					}
-					else {
-						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
-					}
-				}
-				else if (eReference.isContainment()) {
-					assert ecoreValue2 != null;
-					eOppositeReference = OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER;
-					assert eOppositeReference != null;
-					if (eReference.isMany()) {
-						assert eOppositeReference != null;
-						slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
-					}
-					else {
-						AbstractObjectState<@NonNull SS> oppositeObjectState = getObjectState(ecoreValue2);
-						slotState = oppositeObjectState.basicGetSlotState(eOppositeReference);
-						if (slotState != null) {
-							assert eOppositeReference != null;
-							slotState.assigned(ecoreValue2, eOppositeReference, eObject);
-						}
-						else {
-							assert eOppositeReference != null;
-							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
-						}
-					}
-				}
-				//				else if (eReference == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
-				//					slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, (EObject)ecoreValue2);
-				//				}
-				else {						// Unidirectional non-containment EReference
-					if (ecoreValue2 != null) {
-						//						eOppositeReference = getEOppositeReference(eReference);
-						AbstractObjectState<@NonNull SS> oppositeObjectState = getObjectState(ecoreValue2);
-						slotState = oppositeObjectState.basicGetSlotState(eOppositeReference);
-						if (slotState == null) {
-							if (eOppositeReference.isMany()) {
-								slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
-							}
-							else if (eReference.isMany()) {
-								slotState = createOneToManyAggregatorSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue2);
-								oppositeObjectState.putSlotState(eOppositeReference, slotState, ecoreValue);
-							}
-							else {
-								slotState = createOneToOneSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue2);
-								oppositeObjectState.putSlotState(eOppositeReference, slotState, ecoreValue);
-							}
-						}
-						else {
-							slotState.assigned(ecoreValue2, eOppositeReference, eObject);
-						}
-					}
-					else {
-						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
-
-					}
-				}
-			}
-			objectState.putSlotState(eFeature, slotState, ecoreValue);
-		}
+		objectState.assigned(eFeature, ecoreValue);
 	}
 
 	public @Nullable AbstractObjectState<@NonNull SS> basicGetObjectState(@NonNull Object eObject) {
@@ -353,45 +106,23 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 	}
 
 	public @Nullable SS basicGetSlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
-		assert eFeature != null;
 		AbstractObjectState<@NonNull SS> objectState = basicGetObjectState(eObject);
-		if (objectState == null) {
-			return null;
-		}
-		return objectState.basicGetSlotState(eFeature);
+		return objectState != null ? objectState.basicGetSlotState(eFeature) : null;
 	}
 
-	protected abstract @NonNull SS createContainmentSlotState(@NonNull Object eObject, @NonNull EReference eReference);
+	public abstract @NonNull SS createManyToManySlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference);
 
-	protected @NonNull SS createManyToManySlotState(@NonNull Object eObject, @NonNull EReference eFeature, @NonNull EReference eOppositeFeature) {
-		throw new UnsupportedOperationException();
-	}
+	public abstract @NonNull AbstractObjectState<@NonNull SS> createObjectState(@NonNull Object eObject);
 
-	protected abstract @NonNull AbstractObjectState<@NonNull SS> createObjectState(@NonNull Object eObject);
+	public abstract @NonNull SS createOclContainerSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @NonNull Object ecoreValue);
 
-	protected abstract @NonNull SS createOclContainerSlotState(@NonNull Object eObject, @NonNull EReference eReference);
+	public abstract @NonNull SS createOneToManyAggregatorSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @NonNull Object ecoreValue);
 
-	protected abstract @NonNull SS createOneToManyAggregatorSlotState(@NonNull Object eObject, @NonNull EReference eFeature,
-			@NonNull EReference eOppositeFeature, @Nullable Object eContents);
+	public abstract @NonNull SS createOneToManyElementSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @NonNull Object eAggregator);
 
-	protected abstract @NonNull SS createOneToManyAggregatorSlotState(@NonNull Object eObject, @NonNull EReference eReference,
-			@NonNull Object ecoreValue);
+	public abstract @NonNull SS createOneToOneSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @Nullable Object ecoreValue);
 
-	protected abstract @NonNull SS createOneToManyElementSlotState(@NonNull Object eObject, @NonNull EReference eFeature,
-			@NonNull EReference eOppositeFeature, @NonNull Object eAggregator);
-
-	protected abstract @NonNull SS createOneToOneSlotState(@NonNull Object eObject, @NonNull EReference eFeature,
-			@NonNull EReference eOppositeFeature, @Nullable Object eOpposite);
-
-	protected abstract @NonNull SS createOneToOneSlotState(@NonNull Object eObject, @NonNull EReference eReference,
-			@NonNull Object ecoreValue);
-
-	protected abstract @NonNull SS createReferenceSlotState(@NonNull Object eObject, @NonNull EReference eReference,
-			@NonNull EReference eOppositeReference);
-
-	protected abstract @NonNull SS createSimpleSlotState(@NonNull Object eObject, @NonNull EAttribute eFeature);
-
-	protected abstract @NonNull SS createSimpleSlotState(@NonNull Object eObject, @NonNull EAttribute eFeature, @Nullable Object ecoreValue);
+	public abstract @NonNull SS createSimpleSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EAttribute eFeature, @Nullable Object ecoreValue);
 
 	@Override
 	public void destroyed(@NonNull Object eObject) {
@@ -454,38 +185,12 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 
 	@Override
 	public @NonNull Iterable<@NonNull Object> getObjects() {
-		return object2objectState.keySet();
+		return  ClassUtil.nullFree(object2objectState.keySet());
 	}
 
 	public synchronized @NonNull SS getSlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 		AbstractObjectState<@NonNull SS> objectState = getObjectState(eObject);
-		@Nullable SS slotState = objectState.basicGetSlotState(eFeature);
-		if (slotState == null) {
-			if (eFeature instanceof EAttribute) {
-				slotState = createSimpleSlotState(eObject, (EAttribute) eFeature);
-			}
-			else {
-				EReference eReference = (EReference)eFeature;
-				EReference eOppositeReference = getEOppositeReference(eReference);
-				if (eReference instanceof EOppositeReferenceImpl) {
-					slotState = createReferenceSlotState(eObject, eReference, eOppositeReference);
-				}
-				else if (!(eOppositeReference instanceof EOppositeReferenceImpl)) {
-					slotState = createReferenceSlotState(eObject, eReference, eOppositeReference);
-				}
-				else if (eReference.isContainment()) {
-					slotState = createContainmentSlotState(eObject, eReference);
-				}
-				else if (eReference == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
-					slotState = createOclContainerSlotState(eObject, eReference);
-				}
-				else {						// Unidirectional non-containment EReference
-					slotState = createReferenceSlotState(eObject, eReference, eOppositeReference);
-				}
-			}
-			objectState.putSlotState(eFeature, slotState, ecoreValue);
-		}
-		return slotState;
+		return objectState.getSlotState(eFeature, ecoreValue);
 	}
 
 	@Override

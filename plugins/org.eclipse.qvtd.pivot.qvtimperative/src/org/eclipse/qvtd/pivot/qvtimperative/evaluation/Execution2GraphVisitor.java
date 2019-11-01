@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractExecutionVisitor;
+import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.Computation;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Execution;
@@ -349,7 +350,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 	}
 
 	protected @NonNull GraphNode getSlotNode(SlotState.@NonNull Incremental object) {
-		if (object.getValue() != null) {
+		if (object.getValue() != AbstractObjectManager.NOT_A_VALUE) {
 			object = object.getPrimarySlotState();
 		}
 		GraphNode node = slot2node.get(object);

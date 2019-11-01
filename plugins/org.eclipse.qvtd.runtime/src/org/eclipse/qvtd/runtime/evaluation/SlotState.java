@@ -20,9 +20,13 @@ import org.eclipse.jdt.annotation.Nullable;
  *
  * Derived classes handle different usages:
  * A SimpleSlotState supports a unidirectional state such as an EAttribute.
- * A OneToOneSlotState supports both ends of a 1:1 EReference.
- * A OnetoManyElementSlotState and OneToManyAggregatorSlotState support the 1:N and N:1 ends of a 1:N EReference.
+ * An OneToOneSlotState supports both ends of a 1:1 EReference.
+ * An OnetoManyElementSlotState and OneToManyAggregatorSlotState support the 1:N and N:1 ends of a 1:N EReference.
+ * An OclContainerSlotState supports the variant OnetoManyElementSlotState for the eContainer(0 relationship.
  * A ManyToManySlotState supports one end of an M:N EReference.
+ *
+ * Note that by supporting both ends of a relationship, use of OneToOneSlotState may involve either the forward
+ * or reverse direction; a get may occur in the opposite direction to the assign.
  *
  * @noimplement clients should derive from AbstractSlotState
  */
@@ -33,6 +37,9 @@ public interface SlotState extends ExecutionVisitable
 	 */
 	void assigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue);
 
+	/**
+	 * Install this SlotState as a block on the progress of invocation.
+	 */
 	void block(@NonNull Invocation invocation);
 
 	void debugUnblock();
