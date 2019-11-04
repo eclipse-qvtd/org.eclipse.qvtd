@@ -75,11 +75,14 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 	}
 
 	@Override
-	public synchronized void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+	public synchronized void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
 		assert eFeature != null;
 		if (debugAssignments) {
 			boolean isOpposite = false;
 			StringBuilder s = new StringBuilder();
+			if (isPartial) {
+				s.append("partial-");
+			}
 			s.append("assigned ");
 			s.append(toDebugString(eObject));
 			s.append(".");
@@ -98,7 +101,7 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 			AbstractTransformer.ASSIGNMENTS.println(s.toString());
 		}
 		AbstractObjectState<@NonNull SS> objectState = getObjectState(eObject);
-		objectState.assigned(eFeature, ecoreValue);
+		objectState.assigned(eFeature, ecoreValue, isPartial);
 	}
 
 	public @Nullable AbstractObjectState<@NonNull SS> basicGetObjectState(@NonNull Object eObject) {
@@ -188,9 +191,9 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 		return  ClassUtil.nullFree(object2objectState.keySet());
 	}
 
-	public synchronized @NonNull SS getSlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+	public synchronized @NonNull SS getSlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
 		AbstractObjectState<@NonNull SS> objectState = getObjectState(eObject);
-		return objectState.getSlotState(eFeature, ecoreValue);
+		return objectState.getSlotState(eFeature, ecoreValue, isPartial);
 	}
 
 	@Override
@@ -213,7 +216,7 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 		if (isOpposite) {
 			eFeature = getEOppositeReference((EReference) eFeature);
 		}
-		SS slotState = getSlotState(eObject, eFeature, NOT_A_VALUE);
+		SS slotState = getSlotState(eObject, eFeature, NOT_A_VALUE, false);
 		slotState.getting(eObject, eFeature);
 	}
 

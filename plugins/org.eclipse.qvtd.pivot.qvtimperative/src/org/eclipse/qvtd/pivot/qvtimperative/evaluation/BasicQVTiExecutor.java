@@ -896,7 +896,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	@Override
 	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object sourceObject, @Nullable Object ecoreValue) {
 		Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
-		if (setStatement.isIsPartial()) {		// FIXME add Property.addValue() API
+		boolean isPartial = setStatement.isIsPartial();
+		if (isPartial) {		// FIXME add Property.addValue() API
 			//	assert ValueUtil.isEcore(ecoreValue);
 			EStructuralFeature eTarget = (EStructuralFeature)targetProperty.getESObject();
 			EStructuralFeature eFeature = eTarget;
@@ -914,7 +915,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			if (setStatement.isIsNotify()) {
 				assert targetProperty != null;
 				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
-				objectManager.assigned(sourceObject, eFeature, ecoreValue);
+				objectManager.assigned(sourceObject, eFeature, ecoreValue, isPartial);
 			}
 		}
 		else {
@@ -922,7 +923,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
 			Invocation.Incremental currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;
-			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue);
+			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue, isPartial);
 		}
 	}
 

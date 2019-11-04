@@ -728,7 +728,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 	}
 
-	protected void doAssigned(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
+	protected void doAssigned(@NonNull CGEcorePropertyAssignment cgPropertyAssignment, boolean isPartial) {
 		EStructuralFeature eStructuralFeature = QVTiCGUtil.getEStructuralFeature(cgPropertyAssignment);
 		CGValuedElement cgSlot = getExpression(QVTiCGUtil.getOwnedSlotValue(cgPropertyAssignment));
 		CGValuedElement cgInit = getExpression(QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment));
@@ -744,6 +744,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			appendQualifiedLiteralName(eStructuralFeature);
 			js.append(", ");
 			js.appendValueName(cgInit);
+			js.append(", ");
+			js.appendBooleanString(eStructuralFeature.isMany() && isPartial);
 			js.append(");\n");
 		}
 	}
@@ -2934,8 +2936,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (!js.appendLocalStatements(cgInit)) {
 			return false;
 		}
-		appendEcoreSet(cgSlot, eStructuralFeature, cgInit, asSetStatement.isIsPartial());
-		doAssigned(cgPropertyAssignment);
+		boolean isPartial = asSetStatement.isIsPartial();
+		appendEcoreSet(cgSlot, eStructuralFeature, cgInit, isPartial);
+		doAssigned(cgPropertyAssignment, isPartial);
 		return true;
 	}
 

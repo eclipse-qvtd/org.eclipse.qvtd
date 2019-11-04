@@ -28,13 +28,29 @@ public interface ObjectManager extends ExecutionVisitable
 {
 	/**
 	 * Mark the eFeature of eObject as assigned with an ecoreValue. Ordered child assignments may be ordered by the childKey.
+	 *
+	 * If !isPartial, ecoreValue is a total assignment, i.e. A collection if eFeature.isMany();
+	 * If isPartial, ecoreValue is a partial assignment, i.e. An element of the eFeature.isMany() collection;
 	 */
-	void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
+	void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial);
+
+	@Deprecated /* @deprecated supply isPartial argument */
+	default void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+		assigned(eObject, eFeature, ecoreValue, false);
+	}
 
 	/**
 	 * Mark the eFeature of eObject as assigned with an ecoreValue by an invocation. Ordered child assignments may be ordered by the childKey.
+	 *
+	 * If !isPartial, ecoreValue is a total assignment, i.e. A collection if eFeature.isMany();
+	 * If isPartial, ecoreValue is a partial assignment, i.e. An element of the eFeature.isMany() collection;
 	 */
-	void assigned(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
+	void assigned(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial);
+
+	@Deprecated /* @deprecated supply isPartial argument */
+	default void assigned(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+		assigned(invocation, eObject, eFeature, ecoreValue, false);
+	}
 
 	/**
 	 * Identify the creation of eObject by the current mapping invocation.

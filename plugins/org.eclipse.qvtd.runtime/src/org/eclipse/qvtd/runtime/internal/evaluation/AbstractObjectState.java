@@ -47,13 +47,13 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		this.isLoaded = ((eObject instanceof EObject) && ((EObject)eObject).eResource() != null);
 	}
 
-	public void assigned(@NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+	public void assigned(@NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
 		@Nullable SS slotState = basicGetSlotState(eFeature);
 		if (slotState != null) {
-			slotState.assigned(eObject, eFeature, ecoreValue);
+			slotState.assigned(eObject, eFeature, ecoreValue, isPartial);
 		}
 		else {
-			slotState = getSlotState(eFeature, ecoreValue);
+			slotState = getSlotState(eFeature, ecoreValue, isPartial);
 			assert basicGetSlotState(eFeature) == slotState;
 		}
 	}
@@ -76,12 +76,15 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		return objectManager;
 	}
 
-	public @NonNull SS getSlotState(@NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+	public @NonNull SS getSlotState(@NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
 		@Nullable SS slotState = basicGetSlotState(eFeature);
 		//
 		//	Already known
 		//
 		if (slotState != null) {
+			if (ecoreValue != AbstractObjectManager.NOT_A_VALUE) {
+				slotState.assigned(eObject, eFeature, ecoreValue, isPartial);
+			}
 			return slotState;
 		}
 		//

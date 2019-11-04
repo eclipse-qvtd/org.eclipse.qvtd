@@ -35,7 +35,7 @@ public interface SlotState extends ExecutionVisitable
 	/**
 	 * Update the SlotState as a result of an assignment of ecoreValue to the eFeature of eObject.
 	 */
-	void assigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue);
+	void assigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial);
 
 	/**
 	 * Install this SlotState as a block on the progress of invocation.
