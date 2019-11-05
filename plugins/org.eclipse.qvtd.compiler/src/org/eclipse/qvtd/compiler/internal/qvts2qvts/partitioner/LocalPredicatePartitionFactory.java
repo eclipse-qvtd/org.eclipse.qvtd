@@ -142,6 +142,10 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 			addNode(partition, dispatchNode2); //, Role.SPECULATED);
 		}
 		//
+		//	Add the outstanding predicates that can be checked by this partition.
+		//
+		resolveConstantInputNodes(partition/*isInfallible*/);
+		//
 		//	Predicate top-when calls output edges.
 		//
 		RuleAnalysis ruleAnalysis = mappingPartitioner.getRegionAnalysis().getRuleAnalysis();
@@ -242,6 +246,16 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 			}
 		}
 		return false;
+	}
+
+	protected void resolveConstantInputNodes(@NonNull BasicPartition partition/*boolean isInfallible*/) {
+		for (@NonNull Node constantInputNode : mappingPartitioner.getConstantInputNodes()) {
+			//	if ((fallibleNodes == null) || !Iterables.contains(fallibleNodes, constantOutputNode)) {
+			if (constantInputNode.getIncomingEdges().isEmpty() && !mappingPartitioner.hasCheckedNode(constantInputNode)) {
+				addNode(partition, constantInputNode);
+			}
+			//	}
+		}
 	}
 
 	@Override
