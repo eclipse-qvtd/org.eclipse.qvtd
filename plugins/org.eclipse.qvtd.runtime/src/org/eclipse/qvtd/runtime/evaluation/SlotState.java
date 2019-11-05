@@ -34,8 +34,15 @@ public interface SlotState extends ExecutionVisitable
 {
 	/**
 	 * Update the SlotState as a result of an assignment of ecoreValue to the eFeature of eObject.
+	 *
+	 * If isPartial, then eFeature.isMany() and ecoreValue is one rather than all of the many collection elements.
 	 */
 	void assigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial);
+
+	/**
+	 * Internal method to mark this slot as assigned without updating the remote slot state.
+	 */
+	void assignedSlot();
 
 	/**
 	 * Install this SlotState as a block on the progress of invocation.

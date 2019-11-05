@@ -35,7 +35,7 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 {
 	protected final @NonNull AbstractObjectManager<@NonNull SS> objectManager;
 	protected final @NonNull Object eObject;
-	protected final boolean isLoaded;
+	//	protected final boolean isLoaded;
 	/**	 * FIXME The Map of feature to SlotState should be replaced by compile-time computed indexes into an array
 	 * of SlotState (for singly inherited objects). A Map may be necessary for multiple inheritance.
 	 */
@@ -44,7 +44,7 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 	public AbstractObjectState(@NonNull AbstractObjectManager<SS> objectManager, @NonNull Object eObject) {
 		this.objectManager = objectManager;
 		this.eObject = eObject;
-		this.isLoaded = ((eObject instanceof EObject) && ((EObject)eObject).eResource() != null);
+		//		this.isLoaded = ((eObject instanceof EObject) && ((EObject)eObject).eResource() != null);
 	}
 
 	public void assigned(@NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
@@ -99,24 +99,54 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		EReference eOppositeReference = objectManager.getEOppositeReference(eReference);
 		Object eOpposite = ecoreValue != null ? ecoreValue : AbstractObjectManager.NOT_A_VALUE;
 		//
-		//	1:N contained, N:M, 1:N not-contained, N:1
+		//	1:N contained
 		//
 		if (eReference == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
 			slotState = objectManager.createOclContainerSlotState(this, eReference, eOpposite);
+			putSlotState(eReference, slotState);
+			return slotState;
 		}
-		else if (eOppositeReference.isMany()) {
+		//
+		//	N:M, 1:N not-contained
+		//
+		if (eOppositeReference.isMany()) {
 			if (eReference.isMany()) {
 				slotState = objectManager.createManyToManySlotState(this, eReference);
+				putSlotState(eReference, slotState);
+			}
+			else if (ecoreValue == null) {
+				slotState = objectManager.createOneToManyElementSlotState(this, eReference, eOppositeReference, AbstractObjectManager.NOT_A_VALUE);
+				putSlotState(eReference, slotState);
 			}
 			else {
-				slotState = objectManager.createOneToManyElementSlotState(this, eReference, eOpposite);
+				AbstractObjectState<@NonNull SS> aggregatorState = objectManager.getObjectState(ecoreValue);
+				slotState = objectManager.createOneToManyElementSlotState(this, eReference, eOppositeReference, ecoreValue);
+				putSlotState(eReference, slotState);
+				SS aggregatorSlotState = aggregatorState.getSlotState(eOppositeReference, eObject, true);
+				//				aggregatorSlotState.assignedSlot();
 			}
+			return slotState;
 		}
-		else if (eReference.isMany()) {
-			slotState = objectManager.createOneToManyAggregatorSlotState(this, eReference, eOpposite);
-		}
-		if (slotState != null) {
+		//
+		//	N:1
+		//
+		if (eReference.isMany()) {
+			slotState = objectManager.createOneToManyAggregatorSlotState(this, eReference, AbstractObjectManager.NOT_A_VALUE);
 			putSlotState(eReference, slotState);
+			if (isPartial) {
+				AbstractObjectState<@NonNull SS> elementObjectState = objectManager.getObjectState(eOpposite);
+				elementObjectState.getSlotState(eOppositeReference, eObject, false);					// assignedSlot is a side effect
+			}
+			else if ((ecoreValue != null) && (ecoreValue != AbstractObjectManager.NOT_A_VALUE)) {
+				@SuppressWarnings("unchecked")
+				Iterable<? extends EObject> ecoreValues = (Iterable<? extends EObject>)ecoreValue;
+				for (EObject element : ecoreValues) {
+					if (element != null) {
+						AbstractObjectState<@NonNull SS> elementObjectState = objectManager.getObjectState(element);
+						elementObjectState.getSlotState(eOppositeReference, eObject, false);			// assignedSlot is a side effect
+					}
+				}
+			}
 			return slotState;
 		}
 		//

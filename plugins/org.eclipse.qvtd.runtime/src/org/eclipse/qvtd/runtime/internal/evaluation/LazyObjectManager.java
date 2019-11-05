@@ -51,27 +51,18 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 		protected LazySlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 			super(objectState, ecoreValue != NOT_A_VALUE ? SlotMode.ASSIGNED : SlotMode.ASSIGNABLE);
 			this.debug_eFeature = eFeature;
-			//			assert !(eFeature instanceof EOppositeReferenceImpl);
 		}
 
 		@Override
 		public synchronized void assigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
-			switch (mode) {
-				case ASSIGNABLE:
-					mode = SlotMode.ASSIGNED;
-					unblock();
-					break;
-				case ASSIGNED:
-					if (!(eFeature instanceof EOppositeReferenceImpl)) {
-						QVTruntimeUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
-					}
-					break;
-				case REASSIGNABLE:
-					throw new IllegalStateException("Only the IncrementalObjectManager supports REASSIGNABLE slots.");
+			if (isAssigned() && !(eFeature instanceof EOppositeReferenceImpl)) {
+				QVTruntimeUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
 			}
+			assignedSlot();
 		}
 
-		protected final void assignedElement() {
+		@Override
+		public final void assignedSlot() {
 			switch (mode) {
 				case ASSIGNABLE:
 					mode = SlotMode.ASSIGNED;
@@ -185,7 +176,7 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 					elementObjectState.putSlotState(eOppositeReference, this);
 				}
 			}
-			assignedElement();
+			assignedSlot();
 		}
 	}
 
@@ -219,12 +210,12 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 	 */
 	static class OneToManyAggregatorSlotState extends LazySlotState
 	{
-		private OneToManyAggregatorSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EStructuralFeature eFeature, @Nullable Object eContents) {
-			super(objectState, eFeature, eContents);
-			assert eFeature.isMany();
+		private OneToManyAggregatorSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @Nullable Object eContents) {
+			super(objectState, eReference, eContents);
+			assert eReference.isMany();
 			//			assert eFeature.getEOpposite() != null;
 			//			assert eFeature.getEOpposite().isMany();
-			assert (eContents == NOT_A_VALUE) || ((EObject)objectState.getObject()).eGet(eFeature).equals(eContents);
+			assert (eContents == NOT_A_VALUE) || ((EObject)objectState.getObject()).eGet(eReference).equals(eContents);
 		}
 
 		@Override
@@ -234,7 +225,7 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 			EReference eOppositeReference = objectManager.getEOppositeReference(((EReference)eFeature));
 			if (isPartial) {
 				AbstractObjectState<@NonNull LazySlotState> elementObjectState = objectManager.getObjectState(ecoreValue);
-				elementObjectState.getSlotState(eOppositeReference, eObject, false);					// assignedElement is a side effect
+				elementObjectState.getSlotState(eOppositeReference, eObject, false);					// assignedSlot is a side effect
 			}
 			else {
 				@SuppressWarnings("unchecked")
@@ -242,16 +233,16 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 				for (EObject element : ecoreValues) {
 					if (element != null) {
 						AbstractObjectState<@NonNull LazySlotState> elementObjectState = objectManager.getObjectState(element);
-						elementObjectState.getSlotState(eOppositeReference, eObject, false);			// assignedElement is a side effect
+						elementObjectState.getSlotState(eOppositeReference, eObject, false);			// assignedSlot is a side effect
 					}
 				}
 			}
-			assignedElement();
+			assignedSlot();
 		}
 
 		@Override
 		public synchronized void getting(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
-			assignedElement();
+			assignedSlot();
 		}
 	}
 
@@ -276,18 +267,12 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 	 */
 	static class OneToManyElementSlotState extends LazySlotState
 	{
-		public OneToManyElementSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @NonNull Object eAggregator) {
+		public OneToManyElementSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @NonNull EReference eOppositeReference, @NonNull Object eAggregator) {
 			super(objectState, eReference, eAggregator);
-			LazyObjectManager objectManager = getObjectManager();
-			EReference eOppositeReference = objectManager.getEOppositeReference(eReference);
 			assert !eReference.isMany();
 			assert eOppositeReference.isMany();
 			assert eReference != OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER;
 			assert (eAggregator == NOT_A_VALUE) || (eReference instanceof EOppositeReferenceImpl) || (((EObject)objectState.getObject()).eGet(eReference) == eAggregator);
-			if (eAggregator != AbstractObjectManager.NOT_A_VALUE) {
-				OneToManyAggregatorSlotState aggregatorSlotState = (OneToManyAggregatorSlotState)objectManager.getSlotState(eAggregator, eOppositeReference, AbstractObjectManager.NOT_A_VALUE, false);
-				aggregatorSlotState.assignedElement();
-			}
 		}
 
 		@Override
@@ -298,7 +283,7 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 				EReference eOppositeReference = objectManager.getEOppositeReference(((EReference)eFeature));
 				assert eOppositeReference != null;
 				OneToManyAggregatorSlotState aggregatorSlotState = (OneToManyAggregatorSlotState) objectManager.getSlotState(eOpposite, eOppositeReference, ecoreValue, isPartial);
-				aggregatorSlotState.assignedElement();
+				aggregatorSlotState.assignedSlot();
 			}
 			super.assigned(eObject, eFeature, ecoreValue, isPartial);
 		}
@@ -428,13 +413,13 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 	}
 
 	@Override
-	public @NonNull LazySlotState createOneToManyAggregatorSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @NonNull Object eContainer) {
-		return new OneToManyAggregatorSlotState(objectState, eReference, eContainer);
+	public @NonNull LazySlotState createOneToManyAggregatorSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @NonNull Object eContents) {
+		return new OneToManyAggregatorSlotState(objectState, eReference, eContents);
 	}
 
 	@Override
-	public @NonNull OneToManyElementSlotState createOneToManyElementSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @NonNull Object eAggregator) {
-		return new OneToManyElementSlotState(objectState, eReference, eAggregator);
+	public @NonNull OneToManyElementSlotState createOneToManyElementSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @NonNull EReference eOppositeReference, @NonNull Object eAggregator) {
+		return new OneToManyElementSlotState(objectState, eReference, eOppositeReference, eAggregator);
 	}
 
 	@Override

@@ -121,7 +121,7 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 
 	public abstract @NonNull SS createOneToManyAggregatorSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @NonNull Object ecoreValue);
 
-	public abstract @NonNull SS createOneToManyElementSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @NonNull Object eAggregator);
+	public abstract @NonNull SS createOneToManyElementSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @NonNull EReference eOppositeReference, @NonNull Object eAggregator);
 
 	public abstract @NonNull SS createOneToOneSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @Nullable Object ecoreValue);
 
