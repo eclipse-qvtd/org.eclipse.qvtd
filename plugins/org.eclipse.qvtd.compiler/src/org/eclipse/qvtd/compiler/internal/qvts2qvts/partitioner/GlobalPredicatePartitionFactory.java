@@ -18,7 +18,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -86,9 +91,26 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 		//	navigations are retained as is.
 		//
 		if (hasSynthesizedTrace) {
+			Rule rule = region.getReferredRule();
 			for (@NonNull Node whenNode : mappingPartitioner.getPredicatedWhenNodes()) {
 				if (!mappingPartitioner.hasCheckedNode(whenNode)) {
 					addNode(partition, whenNode); //, Role.SPECULATED);
+				}
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(whenNode)) {
+					//	if (!edge.isSuccess()) {
+					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+					if (!mappingPartitioner.hasCheckedNode(targetNode)) {
+						ClassDatum classDatum = QVTscheduleUtil.getClassDatum(targetNode);
+						TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+						Domain domain = QVTrelationUtil.basicGetDomain(rule, typedModel);
+						if (domain != null) {
+							boolean isInput = scheduleManager.isInputInRule(rule, domain);
+							if (isInput) {
+								addNode(partition, targetNode);
+							}
+						}
+						//	}
+					}
 				}
 			}
 		}
@@ -116,7 +138,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 		//
 		//		resolveDisambiguations();
 		//
-		//	Join up the edges.
+		//	Join up the edges to satisfy reachability.
 		//
 		resolveEdges(partitionAnalysis);
 	}

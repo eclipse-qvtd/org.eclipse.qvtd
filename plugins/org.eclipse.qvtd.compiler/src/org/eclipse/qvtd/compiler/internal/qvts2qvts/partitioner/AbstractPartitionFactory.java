@@ -68,6 +68,7 @@ public abstract class AbstractPartitionFactory<R extends Region> extends RegionH
 	 * The default implementation accepts all edges just changing REALIZED to PREDICATED for already realized edges.
 	 */
 	protected abstract @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole);
+
 	/**
 	 * Resolve all the original region edges by adding to the partition provided the nodes at each end have already been added.
 	 * The addition is mediated by resolveEdgeRole that may adjust the edgeRole or suppress the addition.
