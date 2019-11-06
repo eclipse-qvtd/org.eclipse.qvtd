@@ -105,9 +105,9 @@ public class CyclicPartitionsAnalysis extends AbstractCyclicPartialRegionsAnalys
 	 */
 	protected final @NonNull Map<@NonNull PartialRegionClassAnalysis<@NonNull PartitionsAnalysis>, @NonNull CyclicPartition> classAnalysis2cyclicPartition = new HashMap<>();
 
-	public CyclicPartitionsAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> leafPartitions) {
+	public CyclicPartitionsAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> leafPartitionAnalyses) {
 		this.transformationPartitioner = transformationPartitioner;
-		this.leafPartitionAnalyses = leafPartitions;
+		this.leafPartitionAnalyses = leafPartitionAnalyses;
 	}
 
 	/**

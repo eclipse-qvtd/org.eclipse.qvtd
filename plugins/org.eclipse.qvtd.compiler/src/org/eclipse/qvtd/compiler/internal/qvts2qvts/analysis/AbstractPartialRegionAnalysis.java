@@ -92,9 +92,9 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private final @NonNull List<@NonNull NavigableEdge> predicatedOutputEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedOutputNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull NavigableEdge> realizedMiddleEdges = new ArrayList<>();
-	private final @NonNull List<@NonNull Node> realizedMiddleNodes = new ArrayList<>();
+	private final @NonNull List<@NonNull Node> newMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull NavigableEdge> realizedOutputEdges = new ArrayList<>();
-	private final @NonNull List<@NonNull Node> realizedOutputNodes = new ArrayList<>();
+	private final @NonNull List<@NonNull Node> newOutputNodes = new ArrayList<>();
 
 	/**
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
@@ -239,8 +239,8 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	}
 
 	private void addProductionOfMiddleNode(@NonNull Node node) {
-		if (isRealized(node) && !realizedMiddleNodes.contains(node)) {
-			realizedMiddleNodes.add(node);
+		if (isNew(node) && !newMiddleNodes.contains(node)) {
+			newMiddleNodes.add(node);
 			addProductionOfNode(node);
 		}
 	}
@@ -265,8 +265,8 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	}
 
 	private void addProductionOfOutputNode(@NonNull Node node) {
-		if (isRealized(node) && !realizedOutputNodes.contains(node)) {
-			realizedOutputNodes.add(node);
+		if (isNew(node) && !newOutputNodes.contains(node)) {
+			newOutputNodes.add(node);
 			addProductionOfNode(node);
 		}
 	}
@@ -381,7 +381,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 					addConsumptionOfMiddleNode(node);
 				}
 			}
-			else if (isSpeculation(node) || isRealized(node)) {
+			else if (isNew(node)) {
 				if (!isOperation) {
 					if (isMiddle) {
 						addProductionOfMiddleNode(node);
@@ -409,7 +409,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 				}
 				else if (isRealized(node)) {
 					// FIXME addProductionOfOutputNode(node);
-					//	realizedOutputNodes.add(node);
+					//	newOutputNodes.add(node);
 				}
 			}
 			else if (node.isPattern()) {
@@ -533,7 +533,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	}
 
 	public @NonNull Iterable<@NonNull Node> getRealizedMiddleNodes() {
-		return realizedMiddleNodes;
+		return newMiddleNodes;
 	}
 
 	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedOutputEdges() {
@@ -541,7 +541,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	}
 
 	public @NonNull Iterable<@NonNull Node> getRealizedOutputNodes() {
-		return realizedOutputNodes;
+		return newOutputNodes;
 	}
 
 	public @NonNull ScheduleManager getScheduleManager() {
