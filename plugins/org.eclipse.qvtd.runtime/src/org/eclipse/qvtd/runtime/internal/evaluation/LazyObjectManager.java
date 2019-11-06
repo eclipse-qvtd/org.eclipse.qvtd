@@ -42,6 +42,36 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 		public LazyObjectState(@NonNull LazyObjectManager objectManager, @NonNull Object eObject) {
 			super(objectManager, eObject);
 		}
+
+		@Override
+		protected @NonNull ManyToManySlotState createManyToManySlotState(@NonNull EReference eReference) {
+			return new ManyToManySlotState(this, eReference);
+		}
+
+		@Override
+		protected @NonNull LazySlotState createOclContainerSlotState(@NonNull EReference eReference, @NonNull Object eContainer) {
+			return new OclContainerSlotState(this, eReference, eContainer);
+		}
+
+		@Override
+		protected @NonNull LazySlotState createOneToManyAggregatorSlotState(@NonNull EReference eReference, @NonNull Object eContents) {
+			return new OneToManyAggregatorSlotState(this, eReference, eContents);
+		}
+
+		@Override
+		protected @NonNull OneToManyElementSlotState createOneToManyElementSlotState(@NonNull EReference eReference, @NonNull EReference eOppositeReference, @NonNull Object eAggregator) {
+			return new OneToManyElementSlotState(this, eReference, eOppositeReference, eAggregator);
+		}
+
+		@Override
+		protected @NonNull LazySlotState createOneToOneSlotState(@NonNull EReference eReference, @Nullable Object ecoreValue) {
+			return new OneToOneSlotState(this, eReference, ecoreValue);
+		}
+
+		@Override
+		protected @NonNull SimpleSlotState createSimpleSlotState(@NonNull EAttribute eFeature, @Nullable Object ecoreValue) {
+			return new SimpleSlotState(this, eFeature, ecoreValue);
+		}
 	}
 
 	public static abstract class LazySlotState extends AbstractSlotState
@@ -225,7 +255,8 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 			EReference eOppositeReference = objectManager.getEOppositeReference(((EReference)eFeature));
 			if (isPartial) {
 				AbstractObjectState<@NonNull LazySlotState> elementObjectState = objectManager.getObjectState(ecoreValue);
-				elementObjectState.getSlotState(eOppositeReference, eObject, false);					// assignedSlot is a side effect
+				//	elementObjectState.updateSlotState(eOppositeReference, eObject, false);
+				elementObjectState.gotSlotState(eOppositeReference, eObject);
 			}
 			else {
 				@SuppressWarnings("unchecked")
@@ -233,7 +264,8 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 				for (EObject element : ecoreValues) {
 					if (element != null) {
 						AbstractObjectState<@NonNull LazySlotState> elementObjectState = objectManager.getObjectState(element);
-						elementObjectState.getSlotState(eOppositeReference, eObject, false);			// assignedSlot is a side effect
+						//	elementObjectState.updateSlotState(eOppositeReference, eObject, false);
+						elementObjectState.gotSlotState(eOppositeReference, eObject);
 					}
 				}
 			}
@@ -282,7 +314,7 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 				EObject eOpposite = (EObject) ecoreValue;
 				EReference eOppositeReference = objectManager.getEOppositeReference(((EReference)eFeature));
 				assert eOppositeReference != null;
-				OneToManyAggregatorSlotState aggregatorSlotState = (OneToManyAggregatorSlotState) objectManager.getSlotState(eOpposite, eOppositeReference, ecoreValue, isPartial);
+				OneToManyAggregatorSlotState aggregatorSlotState = (OneToManyAggregatorSlotState) objectManager.updateSlotState(eOpposite, eOppositeReference, ecoreValue, isPartial);
 				aggregatorSlotState.assignedSlot();
 			}
 			super.assigned(eObject, eFeature, ecoreValue, isPartial);
@@ -308,7 +340,7 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 				EReference eOppositeReference = objectManager.getEOppositeReference(((EReference)eFeature));
 				eOppositeReference = ((EObject)eObject).eContainmentFeature();
 				assert eOppositeReference != null;
-				SlotState aggregatorSlotState = objectManager.getSlotState(eOpposite, eOppositeReference, eContainer, isPartial);
+				SlotState aggregatorSlotState = objectManager.updateSlotState(eOpposite, eOppositeReference, eContainer, isPartial);
 				aggregatorSlotState.assigned(eOpposite, eOppositeReference, eObject, isPartial);
 			}
 			super.assigned(eObject, eFeature, eContainer, isPartial);
@@ -397,39 +429,8 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 	}
 
 	@Override
-	public @NonNull ManyToManySlotState createManyToManySlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference) {
-		return new ManyToManySlotState(objectState, eReference);
-	}
-
-	@Override
 	public @NonNull LazyObjectState createObjectState(@NonNull Object eObject) {
 		return new LazyObjectState(this, eObject);
-	}
-
-	@Override
-	public @NonNull LazySlotState createOclContainerSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference,
-			@NonNull Object eContainer) {
-		return new OclContainerSlotState(objectState, eReference, eContainer);
-	}
-
-	@Override
-	public @NonNull LazySlotState createOneToManyAggregatorSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @NonNull Object eContents) {
-		return new OneToManyAggregatorSlotState(objectState, eReference, eContents);
-	}
-
-	@Override
-	public @NonNull OneToManyElementSlotState createOneToManyElementSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @NonNull EReference eOppositeReference, @NonNull Object eAggregator) {
-		return new OneToManyElementSlotState(objectState, eReference, eOppositeReference, eAggregator);
-	}
-
-	@Override
-	public @NonNull LazySlotState createOneToOneSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eReference, @Nullable Object ecoreValue) {
-		return new OneToOneSlotState(objectState, eReference, ecoreValue);
-	}
-
-	@Override
-	public @NonNull SimpleSlotState createSimpleSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EAttribute eFeature, @Nullable Object ecoreValue) {
-		return new SimpleSlotState(objectState, eFeature, ecoreValue);
 	}
 
 	@Override

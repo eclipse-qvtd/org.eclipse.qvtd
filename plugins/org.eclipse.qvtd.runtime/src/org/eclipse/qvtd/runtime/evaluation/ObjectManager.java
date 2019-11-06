@@ -76,6 +76,10 @@ public interface ObjectManager extends ExecutionVisitable
 
 	/**
 	 * Identify that the read of eFeature of eObject returns ecoreValue.
+
+	/**
+	 * Update the eFeature SlotState of eObject with an ecoreValue as a consequence of ecoreValue being obtained by an eGet().
+	 * Register the update with invocation so that any blockage can be removed.
 	 */
 	void got(Execution.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
 }

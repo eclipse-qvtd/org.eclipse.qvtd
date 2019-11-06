@@ -17,7 +17,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -113,19 +112,7 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 		return objectState != null ? objectState.basicGetSlotState(eFeature) : null;
 	}
 
-	public abstract @NonNull SS createManyToManySlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference);
-
 	public abstract @NonNull AbstractObjectState<@NonNull SS> createObjectState(@NonNull Object eObject);
-
-	public abstract @NonNull SS createOclContainerSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @NonNull Object ecoreValue);
-
-	public abstract @NonNull SS createOneToManyAggregatorSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @NonNull Object ecoreValue);
-
-	public abstract @NonNull SS createOneToManyElementSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @NonNull EReference eOppositeReference, @NonNull Object eAggregator);
-
-	public abstract @NonNull SS createOneToOneSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EReference eReference, @Nullable Object ecoreValue);
-
-	public abstract @NonNull SS createSimpleSlotState(@NonNull AbstractObjectState<@NonNull SS> objectState, @NonNull EAttribute eFeature, @Nullable Object ecoreValue);
 
 	@Override
 	public void destroyed(@NonNull Object eObject) {
@@ -191,11 +178,6 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 		return  ClassUtil.nullFree(object2objectState.keySet());
 	}
 
-	public synchronized @NonNull SS getSlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
-		AbstractObjectState<@NonNull SS> objectState = getObjectState(eObject);
-		return objectState.getSlotState(eFeature, ecoreValue, isPartial);
-	}
-
 	@Override
 	public @NonNull Iterable<@NonNull SS> getSlotStates(@NonNull Object object) {
 		AbstractObjectState<@NonNull SS> objectState = object2objectState.get(object);
@@ -216,8 +198,17 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 		if (isOpposite) {
 			eFeature = getEOppositeReference((EReference) eFeature);
 		}
-		SS slotState = getSlotState(eObject, eFeature, NOT_A_VALUE, false);
+		SS slotState = updateSlotState(eObject, eFeature, NOT_A_VALUE, false);
 		slotState.getting(eObject, eFeature);
+	}
+
+	/**
+	 * Update the eFeature SlotState of eObject with an ecoreValue as a consequence of ecoreValue being
+	 * obtained by an eGet().
+	 */
+	public synchronized @NonNull SS gotSlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+		AbstractObjectState<@NonNull SS> objectState = getObjectState(eObject);
+		return objectState.gotSlotState(eFeature, ecoreValue);
 	}
 
 	/**
@@ -248,5 +239,10 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 		s.append("@");
 		s.append(Integer.toHexString(System.identityHashCode(object)));
 		return s.toString();
+	}
+
+	public synchronized @NonNull SS updateSlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
+		AbstractObjectState<@NonNull SS> objectState = getObjectState(eObject);
+		return objectState.updateSlotState(eFeature, ecoreValue, isPartial);
 	}
 }

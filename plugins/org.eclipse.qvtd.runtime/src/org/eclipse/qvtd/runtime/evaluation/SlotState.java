@@ -56,6 +56,8 @@ public interface SlotState extends ExecutionVisitable
 	 */
 	void getting(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) throws InvocationFailedException;
 
+	boolean isAssigned();
+
 	public interface Incremental extends SlotState
 	{
 		void addSourceInternal(Invocation.@NonNull Incremental invocation);

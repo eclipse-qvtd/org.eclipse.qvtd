@@ -117,7 +117,8 @@ public abstract class AbstractSlotState implements SlotState
 
 	protected abstract @NonNull AbstractObjectManager<@NonNull ? extends SlotState> getObjectManager();
 
-	protected boolean isAssigned() {
+	@Override
+	public boolean isAssigned() {
 		return mode == SlotMode.ASSIGNED;
 	}
 

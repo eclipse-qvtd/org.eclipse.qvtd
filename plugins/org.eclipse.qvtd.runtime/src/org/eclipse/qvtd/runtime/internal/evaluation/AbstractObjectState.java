@@ -53,7 +53,7 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 			slotState.assigned(eObject, eFeature, ecoreValue, isPartial);
 		}
 		else {
-			slotState = getSlotState(eFeature, ecoreValue, isPartial);
+			slotState = updateSlotState(eFeature, ecoreValue, isPartial);
 			assert basicGetSlotState(eFeature) == slotState;
 		}
 	}
@@ -61,6 +61,18 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 	public @Nullable SS basicGetSlotState(@NonNull EStructuralFeature eFeature) {
 		return feature2slotState != null ? feature2slotState.get(eFeature) : null;
 	}
+
+	protected abstract @NonNull SS createManyToManySlotState(@NonNull EReference eReference);
+
+	protected abstract @NonNull SS createOclContainerSlotState(@NonNull EReference eReference, @NonNull Object ecoreValue);
+
+	protected abstract @NonNull SS createOneToManyAggregatorSlotState(@NonNull EReference eReference, @NonNull Object ecoreValue);
+
+	protected abstract @NonNull SS createOneToManyElementSlotState(@NonNull EReference eReference, @NonNull EReference eOppositeReference, @NonNull Object eAggregator);
+
+	protected abstract @NonNull SS createOneToOneSlotState(@NonNull EReference eReference, @Nullable Object ecoreValue);
+
+	protected abstract @NonNull SS createSimpleSlotState(@NonNull EAttribute eFeature, @Nullable Object ecoreValue);
 
 	public @NonNull Iterable<@NonNull SS> getFeatures() {
 		return feature2slotState != null ? ClassUtil.nullFree(feature2slotState.values()) : Collections.emptyList();
@@ -76,7 +88,41 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		return objectManager;
 	}
 
-	public @NonNull SS getSlotState(@NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
+	/**
+	 * Update the eFeature SlotState of this ObjectState with an ecoreValue as a consequence of ecoreValue being
+	 * obtained by an eGet().
+	 */
+	public @NonNull SS gotSlotState(@NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+		assert ecoreValue != AbstractObjectManager.NOT_A_VALUE;
+		@Nullable SS slotState = basicGetSlotState(eFeature);
+		if (slotState == null) {
+			slotState = updateSlotState(eFeature, ecoreValue, false);
+		}
+		else if (!slotState.isAssigned() && !eFeature.isMany()) {
+			slotState.assigned(eObject, eFeature, ecoreValue, false);
+		}
+		return slotState;
+	}
+
+	protected void putSlotState(@NonNull EStructuralFeature eFeature, @NonNull SS slotState) {
+		Map<@NonNull EStructuralFeature, @NonNull SS> feature2slotState2 = feature2slotState;
+		if (feature2slotState2 == null) {
+			feature2slotState = feature2slotState2 = new HashMap<>();
+		}
+		/*@Nullable SS oldSlotState =*/ feature2slotState2.put(eFeature, slotState);
+		// assert oldSlotState == null; FIXME testQVTcCompiler_SimpleUML2RDBMS_CG changes for one-to-many
+	}
+
+	@Override
+	public String toString() {
+		return eObject.toString();
+	}
+
+	/**
+	 * Assign or create the eFeature SlotState of this ObjectState with an ecoreValue as a consequence of ecoreValue being
+	 * assigned by an eSet() / eGet().add().
+	 */
+	public @NonNull SS updateSlotState(@NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
 		@Nullable SS slotState = basicGetSlotState(eFeature);
 		//
 		//	Already known
@@ -91,7 +137,7 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		//	1:1 unidirectional
 		//
 		if (eFeature instanceof EAttribute) {
-			slotState = objectManager.createSimpleSlotState(this, (EAttribute)eFeature, ecoreValue);
+			slotState = createSimpleSlotState((EAttribute)eFeature, ecoreValue);
 			putSlotState(eFeature, slotState);
 			return slotState;
 		}
@@ -102,40 +148,37 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		//	1:N contained
 		//
 		if (eReference == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
-			slotState = objectManager.createOclContainerSlotState(this, eReference, eOpposite);
+			slotState = createOclContainerSlotState(eReference, eOpposite);
 			putSlotState(eReference, slotState);
 			return slotState;
 		}
-		//
-		//	N:M, 1:N not-contained
-		//
 		if (eOppositeReference.isMany()) {
+			//
+			//	N:M
+			//
 			if (eReference.isMany()) {
-				slotState = objectManager.createManyToManySlotState(this, eReference);
+				slotState = createManyToManySlotState(eReference);
 				putSlotState(eReference, slotState);
+				return slotState;
 			}
-			else if (ecoreValue == null) {
-				slotState = objectManager.createOneToManyElementSlotState(this, eReference, eOppositeReference, AbstractObjectManager.NOT_A_VALUE);
-				putSlotState(eReference, slotState);
-			}
+			//
+			//	1:N not-contained
+			//
 			else {
-				AbstractObjectState<@NonNull SS> aggregatorState = objectManager.getObjectState(ecoreValue);
-				slotState = objectManager.createOneToManyElementSlotState(this, eReference, eOppositeReference, ecoreValue);
+				slotState = createOneToManyElementSlotState(eReference, eOppositeReference, eOpposite);
 				putSlotState(eReference, slotState);
-				SS aggregatorSlotState = aggregatorState.getSlotState(eOppositeReference, eObject, true);
-				//				aggregatorSlotState.assignedSlot();
+				return slotState;
 			}
-			return slotState;
 		}
 		//
 		//	N:1
 		//
 		if (eReference.isMany()) {
-			slotState = objectManager.createOneToManyAggregatorSlotState(this, eReference, AbstractObjectManager.NOT_A_VALUE);
+			slotState = createOneToManyAggregatorSlotState(eReference, AbstractObjectManager.NOT_A_VALUE);
 			putSlotState(eReference, slotState);
 			if (isPartial) {
 				AbstractObjectState<@NonNull SS> elementObjectState = objectManager.getObjectState(eOpposite);
-				elementObjectState.getSlotState(eOppositeReference, eObject, false);					// assignedSlot is a side effect
+				elementObjectState.updateSlotState(eOppositeReference, eObject, false);					// assignedSlot is a side effect
 			}
 			else if ((ecoreValue != null) && (ecoreValue != AbstractObjectManager.NOT_A_VALUE)) {
 				@SuppressWarnings("unchecked")
@@ -143,7 +186,7 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 				for (EObject element : ecoreValues) {
 					if (element != null) {
 						AbstractObjectState<@NonNull SS> elementObjectState = objectManager.getObjectState(element);
-						elementObjectState.getSlotState(eOppositeReference, eObject, false);			// assignedSlot is a side effect
+						elementObjectState.updateSlotState(eOppositeReference, eObject, false);			// assignedSlot is a side effect
 					}
 				}
 			}
@@ -165,32 +208,22 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		//	1:1 bidirectional new
 		//
 		if (!(eReference instanceof EOppositeReferenceImpl) || (ecoreValue == AbstractObjectManager.NOT_A_VALUE)) {
-			slotState = objectManager.createOneToOneSlotState(this, eReference, ecoreValue);
+			slotState = createOneToOneSlotState(eReference, ecoreValue);
 			if (oppositeObjectState != null) {
 				oppositeObjectState.putSlotState(eOppositeReference, slotState);
 			}
+			putSlotState(eReference, slotState);
 		}
+		//
+		//	1:1 bidirectional inverse
+		//
 		else {
 			assert ecoreValue != null;
 			assert oppositeObjectState != null;
-			slotState = objectManager.createOneToOneSlotState(oppositeObjectState, eOppositeReference, eObject);
+			slotState = oppositeObjectState.createOneToOneSlotState(eOppositeReference, eObject);
 			oppositeObjectState.putSlotState(eOppositeReference, slotState);
+			putSlotState(eReference, slotState);
 		}
-		putSlotState(eReference, slotState);
 		return slotState;
-	}
-
-	protected void putSlotState(@NonNull EStructuralFeature eFeature, @NonNull SS slotState) {
-		Map<@NonNull EStructuralFeature, @NonNull SS> feature2slotState2 = feature2slotState;
-		if (feature2slotState2 == null) {
-			feature2slotState = feature2slotState2 = new HashMap<>();
-		}
-		/*@Nullable SS oldSlotState =*/ feature2slotState2.put(eFeature, slotState);
-		// assert oldSlotState == null; FIXME testQVTcCompiler_SimpleUML2RDBMS_CG changes for one-to-many
-	}
-
-	@Override
-	public String toString() {
-		return eObject.toString();
 	}
 }
