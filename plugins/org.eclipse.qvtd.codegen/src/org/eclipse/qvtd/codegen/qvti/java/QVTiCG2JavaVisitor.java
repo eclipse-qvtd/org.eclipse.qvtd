@@ -724,7 +724,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			appendQualifiedLiteralName(eStructuralFeature);
 			js.append(", ");
 			js.appendValueName(cgSlot);
-			js.append(");\n");
+			js.append(", false);\n");
 		}
 	}
 
@@ -765,7 +765,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		appendQualifiedLiteralName(eStructuralFeature);
 		js.append(", ");
 		js.appendValueName(cgInit);
-		js.append(");\n");
+		js.append(", false);\n");
 		//		}
 	}
 
