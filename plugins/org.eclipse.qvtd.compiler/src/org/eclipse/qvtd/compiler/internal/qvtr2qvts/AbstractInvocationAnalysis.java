@@ -83,7 +83,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	/**
 	 * Create the invocation trace node for the invoked relation.
 	 */
-	protected abstract @NonNull Node createInvocationNode(@NonNull Node invokingTraceNode);
+	protected abstract @NonNull Node createInvocationNode();
 
 	protected void createInvokingTraceEdge(@NonNull Node invokedNode, @NonNull Node invokingTraceNode) {
 		Relation2TraceGroup invokingRule2TraceGroup = invokingRelationAnalysis.getRule2TraceGroup();
@@ -145,6 +145,15 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	}
 
 	@Override
+	public @NonNull Node getInvokingNode() {
+		Node invokingNode2 = this.invokingNode;
+		if (invokingNode2 == null) {
+			this.invokingNode = invokingNode2 = createInvocationNode();
+		}
+		return invokingNode2;
+	}
+
+	@Override
 	public @NonNull RelationAnalysis getInvokingRelationAnalysis() {
 		return invokingRelationAnalysis;
 	}
@@ -180,23 +189,19 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 
 	@Override
 	public @NonNull Node synthesizeInvocationNodes(@NonNull Node invokingTraceNode) {
-		assert invokingNode == null;
-		//
-		//	Create the invokedNode that causes the invocation.
-		//
-		Node invokingNode2 = this.invokingNode = createInvocationNode(invokingTraceNode);
+		Node invokingNode = getInvokingNode();
 		//
 		//	Integrate the invokedNode with the invokingTraceNode.
 		//
-		createInvokingTraceEdge(invokingNode2, invokingTraceNode);
+		createInvokingTraceEdge(invokingNode, invokingTraceNode);
 		//
 		//	Create a global success status if appropriate.
 		//
-		createGlobalSuccessNodeAndEdge(invokingNode2);
+		createGlobalSuccessNodeAndEdge(invokingNode);
 		//
 		//	Join the invokedNode to the argument nodes that bind it.
 		//
-		createInvocationEdges(invokingNode2);
-		return invokingNode2;
+		createInvocationEdges(invokingNode);
+		return invokingNode;
 	}
 }

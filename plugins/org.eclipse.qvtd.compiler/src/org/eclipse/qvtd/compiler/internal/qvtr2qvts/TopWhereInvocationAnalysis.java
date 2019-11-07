@@ -33,7 +33,7 @@ public class TopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 	}
 
 	@Override
-	protected @NonNull Node createInvocationNode(@NonNull Node invokingTraceNode) {
+	protected @NonNull Node createInvocationNode() {
 		throw new UnsupportedOperationException();	// Cannot happen synthesizeInvocationNodes is empty.
 	}
 

@@ -34,7 +34,7 @@ public class NonTopWhereOnlyInvocationAnalysis extends AbstractInvocationAnalysi
 	}
 
 	@Override
-	protected @NonNull Node createInvocationNode(@NonNull Node invokingTraceNode) {
+	protected @NonNull Node createInvocationNode() {
 		QVTrelationNameGenerator nameGenerator = scheduleManager.getNameGenerator();	// FIXME unique names
 		Relation invokedRelation = invokedRelationAnalysis.getRule();
 		String name = nameGenerator.createWhereInvocationPropertyName(invokedRelation);

@@ -22,6 +22,7 @@ public interface InvocationAnalysis
 {
 	void addBinding(@NonNull VariableDeclaration rootVariable, @NonNull Node argumentNode);
 	@NonNull Iterable<@NonNull Node> getArgumentNodes();
+	@NonNull Node getInvokingNode();
 	@NonNull RelationAnalysis getInvokedRelationAnalysis();
 	@NonNull RelationAnalysis getInvokingRelationAnalysis();
 

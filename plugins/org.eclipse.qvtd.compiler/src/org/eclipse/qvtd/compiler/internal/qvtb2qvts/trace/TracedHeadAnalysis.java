@@ -24,7 +24,9 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -100,27 +102,31 @@ public class TracedHeadAnalysis extends HeadAnalysis
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
 		for (@NonNull Node targetNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
 			if (targetNode.isMatched() && !targetNode.isConstant()) {
-				Set<@NonNull Node> sources = targetFromSources.get(targetNode);
-				if (sources == null) {
-					sources = Sets.newHashSet(targetNode);
-					targetFromSources.put(targetNode, sources);
-				}
-				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-					Node sourceNode = edge.getEdgeSource();
-					if (sourceNode.isMatched() && !sourceNode.isConstant()) {
-						if (edge instanceof NavigationEdge) {
-							if (!((NavigationEdge)edge).isPartial()) {
+				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(targetNode);
+				TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+				if (!typedModel.isIsTrace()) {		// when/where invocation nodes are not part of the multi-sided trace
+					Set<@NonNull Node> sources = targetFromSources.get(targetNode);
+					if (sources == null) {
+						sources = Sets.newHashSet(targetNode);
+						targetFromSources.put(targetNode, sources);
+					}
+					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+						Node sourceNode = edge.getEdgeSource();
+						if (sourceNode.isMatched() && !sourceNode.isConstant()) {
+							if (edge instanceof NavigationEdge) {
+								if (!((NavigationEdge)edge).isPartial()) {
+									sources.add(sourceNode);
+								}
+							}
+							else if (edge instanceof CastEdge) {
 								sources.add(sourceNode);
 							}
-						}
-						else if (edge instanceof CastEdge) {
-							sources.add(sourceNode);
-						}
-						else if (edge instanceof KeyPartEdge) {
-							sources.add(sourceNode);
-						}
-						else if (edge instanceof PredicateEdge) {
-							sources.add(sourceNode);
+							else if (edge instanceof KeyPartEdge) {
+								sources.add(sourceNode);
+							}
+							else if (edge instanceof PredicateEdge) {
+								sources.add(sourceNode);
+							}
 						}
 					}
 				}
