@@ -1725,10 +1725,6 @@ public class RelationAnalysis extends RuleAnalysis
 		//	Correct type of the trace variable
 		//
 		Relation relation = getRule();
-		String name = relation.getName();
-		if ("PtoN3_Male2OldFamilyGroupOldSon".equals(name)) {
-			getClass();
-		}
 		if (!relation.isIsAbstract()) {
 			Relation2TraceClass rule2traceClass = relation2traceGroup.getRule2TraceClass();
 			VariableDeclaration traceVariable = QVTrelationUtil.getTraceVariable(relation);
