@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2MiddleType;
@@ -19,24 +20,17 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 
 /**
  * An AbstractWhenInvocationAnalysis identifies the invocation of one Relation from the when clause of another.
  */
 public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationAnalysis
 {
+	private @Nullable SuccessEdge globalSuccessEdge = null;
+
 	public AbstractWhenInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
 		super(invokingRelationAnalysis, invokedRelationAnalysis);
-	}
-
-	@Override
-	protected void createGlobalSuccessNodeAndEdge(@NonNull Node invokedNode) {
-		Relation2MiddleType invokedRelation2InvocationInterface = getInvokedRelation2InvocationInterface();
-		Element2MiddleProperty relation2globalSuccessProperty = invokedRelation2InvocationInterface.basicGetRelation2GlobalSuccessProperty();
-		if (relation2globalSuccessProperty != null) {
-			Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
-			invokingRelationAnalysis.createPredicatedSuccess(invokedNode, globalSuccessProperty, true);
-		}
 	}
 
 	@Override
@@ -64,6 +58,21 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 	@Override
 	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
 		return invokingRelationAnalysis.createNavigationEdge(Role.PREDICATED, invokedNode, invocationProperty, argumentNode, false);
+	}
+
+	@Override
+	public @Nullable SuccessEdge getGlobalSuccessEdge() {
+		SuccessEdge globalSuccessEdge2 = globalSuccessEdge;
+		if (globalSuccessEdge2 == null) {
+			Node invokingNode = getInvokingNode();
+			Relation2MiddleType invokedRelation2InvocationInterface = getInvokedRelation2InvocationInterface();
+			Element2MiddleProperty relation2globalSuccessProperty = invokedRelation2InvocationInterface.basicGetRelation2GlobalSuccessProperty();
+			if (relation2globalSuccessProperty != null) {
+				Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
+				globalSuccessEdge = globalSuccessEdge2 = invokingRelationAnalysis.createPredicatedSuccess(invokingNode, globalSuccessProperty, true);
+			}
+		}
+		return globalSuccessEdge2;
 	}
 
 	@Override

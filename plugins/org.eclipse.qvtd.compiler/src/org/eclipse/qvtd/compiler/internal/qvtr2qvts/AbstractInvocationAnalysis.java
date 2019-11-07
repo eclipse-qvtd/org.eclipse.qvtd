@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 
 /**
  * An InvocationAnalysis identifies the invocation of one Relation from another.
@@ -53,8 +54,6 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		Node oldNode = rootVariable2argumentNode.put(rootVariable, argumentNode);
 		assert oldNode == null;
 	}
-
-	protected void createGlobalSuccessNodeAndEdge(@NonNull Node invokedNode) {}
 
 	/**
 	 * Create the invocation edge for an input domain of the invoked relation.
@@ -158,6 +157,11 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		return invokingRelationAnalysis;
 	}
 
+	@Override
+	public @Nullable SuccessEdge getGlobalSuccessEdge() {
+		return null;
+	}
+
 	/**
 	 * Return true unless a derived analysis permits an optional match.
 	 */
@@ -197,7 +201,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		//
 		//	Create a global success status if appropriate.
 		//
-		createGlobalSuccessNodeAndEdge(invokingNode);
+		getGlobalSuccessEdge();
 		//
 		//	Join the invokedNode to the argument nodes that bind it.
 		//

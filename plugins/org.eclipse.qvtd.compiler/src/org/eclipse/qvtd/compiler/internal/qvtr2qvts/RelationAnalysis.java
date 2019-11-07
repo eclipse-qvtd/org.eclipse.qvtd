@@ -1531,9 +1531,29 @@ public class RelationAnalysis extends RuleAnalysis
 			return;
 		}
 		Node resultNode = predicateExpression.accept(expressionSynthesizer); //.getConditionalExpressionSynthesizer());	// See Bug 547263
-		if ((resultNode != null) && (!resultNode.isRequired() || !(resultNode instanceof BooleanLiteralNode))) {
-			Node trueNode = createBooleanLiteralNode(true);
-			createPredicateEdge(resultNode, null, trueNode);
+		/*		if (resultNode != null) {
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(resultNode);
+			if (!resultNode.isRequired() || (classDatum != scheduleManager.getBooleanClassDatum())) {
+				//	if (!resultNode.isRequired() || !(resultNode instanceof BooleanLiteralNode)) {
+				Node trueNode = createBooleanLiteralNode(true);
+				createPredicateEdge(resultNode, null, trueNode);
+			}
+		} */
+		if (resultNode != null) {
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(resultNode);
+			//			if (!resultNode.isRequired() || (classDatum != scheduleManager.getBooleanClassDatum())) {
+			if (!resultNode.isRequired()) {
+				Node trueNode = createBooleanLiteralNode(true);
+				createPredicateEdge(resultNode, null, trueNode);
+			}
+			//	else if (classDatum != scheduleManager.getBooleanClassDatum()) {
+			//		Node trueNode = createBooleanLiteralNode(true);
+			//		createPredicateEdge(resultNode, null, trueNode);
+			//	}
+			else if (!(resultNode instanceof BooleanLiteralNode)) {
+				Node trueNode = createBooleanLiteralNode(true);
+				createPredicateEdge(resultNode, null, trueNode);
+			}
 		}
 	}
 

@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 
 /**
  * An InvocationAnalysis identifies the invocation of one Relation from another.
@@ -22,6 +23,7 @@ public interface InvocationAnalysis
 {
 	void addBinding(@NonNull VariableDeclaration rootVariable, @NonNull Node argumentNode);
 	@NonNull Iterable<@NonNull Node> getArgumentNodes();
+	@Nullable SuccessEdge getGlobalSuccessEdge();
 	@NonNull Node getInvokingNode();
 	@NonNull RelationAnalysis getInvokedRelationAnalysis();
 	@NonNull RelationAnalysis getInvokingRelationAnalysis();

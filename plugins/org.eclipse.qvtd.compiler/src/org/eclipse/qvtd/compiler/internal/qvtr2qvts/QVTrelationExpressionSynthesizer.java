@@ -25,6 +25,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpressionSynthesizer
@@ -116,6 +118,9 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		}
 		//		for ()
 		//		if (referredRule2TraceClass.getStatusInterfaceProperty())
+		invocationAnalysis.getInvokingNode();
+		SuccessEdge globalSuccessEdge = invocationAnalysis.getGlobalSuccessEdge();
+//		return globalSuccessEdge != null ? QVTscheduleUtil.getTargetNode(globalSuccessEdge) : null;
 		return null;
 	}
 
