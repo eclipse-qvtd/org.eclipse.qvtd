@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.EnumerationLiteral;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.MapLiteralPart;
@@ -27,6 +28,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -44,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.EnumLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
@@ -61,6 +64,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 
@@ -296,6 +300,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull ClassDatum getElementalClassDatum(@NonNull CollectionClassDatum collectionClassDatum) {
 		return ClassUtil.nonNullState(collectionClassDatum.getElementalClassDatum());
+	}
+
+	public static @NonNull EnumerationLiteral getEnumValue(@NonNull EnumLiteralNode node) {
+		return ClassUtil.nonNullState(node.getEnumValue());
 	}
 
 	public static @NonNull Iterable<? extends @NonNull Partition> getExplicitPredecessors(@NonNull BasicPartition partition) {
@@ -580,6 +588,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull PropertyDatum getReferredPart(@NonNull KeyPartEdge keyPartEdge) {
 		return ClassUtil.nonNullState(keyPartEdge.getReferredPart());
+	}
+
+	public static @NonNull ShadowPart getReferredPart(@NonNull ShadowPartEdge shadowPartEdge) {
+		return ClassUtil.nonNullState(shadowPartEdge.getReferredPart());
 	}
 
 	public static @NonNull Property getReferredProperty(@NonNull PropertyDatum propertyDatum) {

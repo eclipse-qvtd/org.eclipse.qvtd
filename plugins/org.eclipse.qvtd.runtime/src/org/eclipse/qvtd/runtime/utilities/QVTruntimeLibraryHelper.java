@@ -22,6 +22,7 @@ import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 public class QVTruntimeLibraryHelper
 {
 	private final @NonNull Operation collectionOperation;
+	//	private final @NonNull Parameter collectionItemsParameter;		-- CollectionPartEdge distinguishes
 	private final @NonNull Operation errorOperation;
 	private final @NonNull Parameter errorElementsParameter;
 	private final @NonNull Operation ifOperation;
@@ -49,6 +50,7 @@ public class QVTruntimeLibraryHelper
 		org.eclipse.ocl.pivot.Class libClass = ClassUtil.nonNullState(NameUtil.getNameable(libPackage.getOwnedClasses(), "PseudoOperations"));
 		Iterable<@NonNull Operation> ownedOperations = PivotUtil.getOwnedOperations(libClass);
 		this.collectionOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "collection"));
+		//	this.collectionItemsParameter = PivotUtil.getOwnedParameter(collectionOperation, 0);
 		this.errorOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "error"));
 		this.errorElementsParameter = PivotUtil.getOwnedParameter(errorOperation, 0);
 		this.ifOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "if"));
@@ -70,6 +72,10 @@ public class QVTruntimeLibraryHelper
 		this.tupleOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "tuple"));
 		this.typeOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "type"));
 	}
+
+	//	public @NonNull Parameter getCollectionItemsParameter() {
+	//		return collectionItemsParameter;
+	//	}
 
 	public @NonNull Operation getCollectionOperation() {
 		return collectionOperation;
