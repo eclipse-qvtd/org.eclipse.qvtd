@@ -96,7 +96,7 @@ public abstract class AbstractPartition2Mapping
 		this.scheduleManager = visitor.getScheduleManager();
 		this.connectionManager = scheduleManager.getConnectionManager();
 		this.environmentFactory = scheduleManager.getEnvironmentFactory();
-		this.helper = new QVTimperativeHelper(environmentFactory);
+		this.helper = visitor.getHelper();
 		this.partition = partition;
 		this.regionName = partition.getName();
 		String mappingName = partition.getSymbolName();

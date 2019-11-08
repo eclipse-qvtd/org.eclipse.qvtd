@@ -53,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 //import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -76,6 +77,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 import com.google.common.collect.Lists;
 
+/**
+ * QVTs2QVTiVisitor provides the major Model/Region conversions from QVTs to VQTi.
+ */
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
 	public static class EarliestPartitionComparator implements Comparator<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>
@@ -98,6 +102,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull QVTs2QVTi qvts2qvti;
 	protected final @NonNull EnvironmentFactory environmentFactory;
+	protected final @NonNull QVTimperativeHelper helper;
 	protected final @NonNull Transformation asTransformation;
 	protected final @NonNull SymbolNameReservation symbolNameReservation;
 
@@ -121,6 +126,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		this.scheduleManager = qvts2qvti.getScheduleManager();
 		this.qvts2qvti = qvts2qvti;
 		this.environmentFactory = qvts2qvti.getEnvironmentFactory();
+		this.helper = new QVTimperativeHelper(environmentFactory);
 		this.asTransformation = QVTbaseUtil.getContainingTransformation(asTypedModel2iTypedModel.keySet().iterator().next());
 		this.symbolNameReservation = symbolNameReservation;
 		this.iTransformation = QVTimperativeUtil.getContainingTransformation(asTypedModel2iTypedModel.values().iterator().next());
@@ -355,6 +361,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		assert operation1 != null;
 		OperationId oclAnyEqualsId = operation1.getOperationId();
 		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
+	}
+
+	public @NonNull QVTimperativeHelper getHelper() {
+		return helper;
 	}
 
 	public @NonNull ImperativeTransformation getImperativeTransformation() {
