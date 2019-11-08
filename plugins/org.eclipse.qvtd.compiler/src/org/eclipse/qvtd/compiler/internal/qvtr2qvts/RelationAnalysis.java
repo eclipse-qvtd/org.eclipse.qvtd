@@ -439,9 +439,6 @@ public class RelationAnalysis extends RuleAnalysis
 				if (eObject instanceof TemplateExp) {
 					TemplateExp templateExp = (TemplateExp)eObject;
 					TemplateVariable templateVariable = (TemplateVariable) QVTrelationUtil.getBindsTo(templateExp);
-					if ("f".equals(templateVariable.getName())) {
-						getClass();
-					}
 					realizedOutputVariables.add(templateVariable);
 				}
 			}
@@ -1653,10 +1650,6 @@ public class RelationAnalysis extends RuleAnalysis
 	 *	Create the trace node assignments to pattern nodes
 	 */
 	protected void synthesizeTraceEdges(@NonNull Node traceNode, @Nullable Node dispatchNode) {
-		String name = getName();
-		if ("F1_Family2SurnamePlanContainment_family".equals(name)) {
-			getClass();
-		}
 		Relation relation = getRule();
 		if (dispatchNode != null) {
 			Relation2TraceGroup baseRelation2traceGroup = getRule2TraceGroup().getBaseRelation2TraceGroup();

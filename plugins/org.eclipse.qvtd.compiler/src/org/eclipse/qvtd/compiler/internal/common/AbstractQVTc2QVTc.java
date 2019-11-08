@@ -818,9 +818,6 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 	 * @param context the context in which the trace is valid
 	 */
 	public void addTrace(@NonNull Element source, @NonNull Element target) {
-		if (source instanceof Transformation) {
-			getClass();
-		}
 		target2source.put(target, source);
 		//
 		NamedElement scope = scopeStack.peek();

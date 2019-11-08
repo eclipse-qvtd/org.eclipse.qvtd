@@ -128,10 +128,6 @@ public abstract class AbstractRootRegion2Mapping extends AbstractPartition2Mappi
 		//		Iterable<Connection> connectionRegions = getConnectionRegions(calledRegion);
 		//		assert !calledRegion.isConnectionRegion();
 		AbstractPartition2Mapping calledRegion2Mapping = visitor.getPartition2Mapping(calledPartition);
-		//		String s = calledRegion2Mapping.toString();
-		//		if ("PtoN3_Male2OldFamilyGroupNewFather«edge4-t5sn,speculated»".equals(s)) {
-		//			getClass();
-		//		}
 		//		Mapping calledMapping = calledRegion2Mapping.getMapping();
 		List<@NonNull MappingParameterBinding> mappingParameterBindings = new ArrayList<>();
 		for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
