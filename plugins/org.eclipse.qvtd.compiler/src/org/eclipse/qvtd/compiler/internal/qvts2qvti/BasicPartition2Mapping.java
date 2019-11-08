@@ -95,6 +95,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EnumLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IfNode;
+import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -104,7 +105,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
-import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
@@ -117,6 +117,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -186,14 +187,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		private void addNode(@NonNull Node targetNode) {
 			assert partition.getRole(targetNode) != null;
 			if (scheduledNodes.add(targetNode)) {
-				Subexpression subexpression = node2subexpression.get(targetNode);
-				if (subexpression != null) {
-					for (@NonNull Node inputNode : subexpression.unconditionalInputNodes) {
-						addNode(inputNode);
-					}
-					targetNode = subexpression.resultNode;
-					addNode(targetNode);
-				}
 				Integer targetCost = reachabilityForest.getCost(targetNode);
 				assert targetCost != null;
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
@@ -276,12 +269,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			//			}
 			List<@NonNull Edge> residualEdges = null;
 			for (@NonNull Edge edge : checkedConditionAnalysis.getOldUnconditionalEdges()) {
-				if (!edge2subexpression.containsKey(edge)) {
-					if (residualEdges == null) {
-						residualEdges = new ArrayList<>();
-					}
-					residualEdges.add(edge);
+				if (residualEdges == null) {
+					residualEdges = new ArrayList<>();
 				}
+				residualEdges.add(edge);
 			}
 			if (residualEdges != null) {
 				Collections.sort(residualEdges, reachabilityForest.getEdgeCostComparator());
@@ -416,14 +407,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					}
 				}
 			}
-			List<@NonNull Subexpression> subexpressions = new ArrayList<>(resultNode2subexpression.values());
-			Collections.sort(subexpressions);
-			for (@NonNull Subexpression subexpression : subexpressions) {
-				Role resultNodeRole = partition.getRole(subexpression.resultNode);
-				if ((resultNodeRole != null) && !resultNodeRole.isNew() && subexpression.resultNode.isUnconditional()) {
-					getSubexpressionDeclaration(subexpression.resultNode);
-				}
-			}
 		}
 
 		@Override
@@ -528,7 +511,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			assert bodyExp != null;
 			//
 			//	Remove iterator variables from context.
-			//
+			/*
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (edge instanceof OperationParameterEdge) {
 					OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
@@ -538,7 +521,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						context.removeVariable(expNode);
 					}
 				}
-			}
+			} */
 			return helper.createIteratorExp(sourceExp, referredIteration, variables, bodyExp);		// FIXME Bug 552827 IterateExp
 		}
 
@@ -757,6 +740,24 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 
 		@Override
+		public @Nullable TypedElement visitIteratorNode(@NonNull IteratorNode node) {
+			Parameter loopIteratorsParameter = qvtruntimeLibraryHelper.getLoopIteratorsParameter();
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
+				if (edge instanceof OperationParameterEdge) {
+					OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
+					Parameter referredParameter = operationParameterEdge.getReferredParameter();
+					if (referredParameter == loopIteratorsParameter) {
+						int index = operationParameterEdge.getParameterIndex();
+						Node expNode = operationParameterEdge.getEdgeTarget();
+						getExpression(expNode);
+					}
+				}
+			}
+			VariableDeclaration variable = context.getVariable(node);
+			return PivotUtil.createVariableExp(variable);
+		}
+
+		@Override
 		public @NonNull NullLiteralExp visitNullLiteralNode(@NonNull NullLiteralNode node) {
 			return helper.createNullLiteralExp();
 		}
@@ -776,22 +777,16 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		public @Nullable CallExp visitOperationCallNode(@NonNull OperationCallNode node) {
 			Operation asOperation = node.getReferredOperation();
 			if (asOperation instanceof Iteration) {
-				LoopExp asIterationCallExp = doIterationCallNode(node);
-				return asIterationCallExp;
+				return doIterationCallNode(node);
 			}
-			else if (asOperation instanceof Function) {
-				OperationCallExp asOperationCallExp = doOperationCallNode(node);
-				if (asOperationCallExp != null) {
-					Operation iOperation = context.createOperation(asOperation);
-					if (iOperation != asOperation) {
-						asOperationCallExp.setReferredOperation(iOperation);
-					}
+			OperationCallExp asOperationCallExp = doOperationCallNode(node);
+			if ((asOperation instanceof Function) && (asOperationCallExp != null)) {
+				Operation iOperation = context.createOperation(asOperation);		// Is this really necessary - keep the QVTr reference
+				if (iOperation != asOperation) {
+					asOperationCallExp.setReferredOperation(iOperation);
 				}
-				return asOperationCallExp;
 			}
-			else {
-				return doOperationCallNode(node);
-			}
+			return asOperationCallExp;
 		}
 
 		@Override
@@ -826,123 +821,13 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 
 		@Override
+		public @Nullable TypedElement visitSuccessNode(@NonNull SuccessNode node) {
+			return doPatternNode(node);
+		}
+
+		@Override
 		public @NonNull OCLExpression visitTypeLiteralNode(@NonNull TypeLiteralNode node) {
 			return helper.createTypeExp(ClassUtil.nonNullState(node.getTypeValue()));
-		}
-	}
-
-	private class Subexpression implements Comparable<@NonNull Subexpression>
-	{
-		/**
-		 * The subexpression result
-		 */
-		private final @NonNull OperationNode resultNode;
-
-		/**
-		 * External nodes used within the subexpression
-		 */
-		private final @NonNull Set<@NonNull Node> inputNodes = new HashSet<>();
-
-		/**
-		 * External nodes used within the subexpression
-		 */
-		private final @NonNull Set<@NonNull Node> unconditionalInputNodes = new HashSet<>();
-
-		/**
-		 * Nodes within the subexpression
-		 */
-		private final @NonNull Set<@NonNull Node> contentNodes = new HashSet<>();
-
-		private @Nullable Integer cost = null;
-
-		public Subexpression(@NonNull OperationNode resultNode) {
-			this.resultNode = resultNode;
-			assert resultNode.isUnconditional();
-		}
-
-		public void analyze(@NonNull Set<@NonNull OperationNode> subexpressionResults) {
-			computeSubexpressionContent(resultNode, subexpressionResults);
-		}
-
-		@Override
-		public int compareTo(@NonNull Subexpression e2) {
-			Subexpression e1 = this;
-			int d1 = e1.getCost();
-			int d2 = e2.getCost();
-			if (d1 != d2) {
-				return d1 - d2;
-			}
-			return ClassUtil.safeCompareTo(e1.resultNode.getDisplayName(), e2.resultNode.getDisplayName());
-		}
-
-		private void computeSubexpressionContent(@NonNull Node node, @NonNull Set<@NonNull OperationNode> subexpressionResults) {
-			if (contentNodes.add(node)) {
-				Role resultNodeRole = partition.getRole(resultNode);
-				assert resultNodeRole != null;
-				node2subexpression.put(node, this);
-				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-					Role edgeRole = partition.getRole(edge);
-					if (edgeRole != null) {
-						//					if (edge.isUnconditional()) {
-						Node sourceNode = edge.getEdgeSource();
-						Role sourceNodeRole = partition.getRole(sourceNode);
-						if (sourceNodeRole != null) {
-							if (subexpressionResults.contains(sourceNode)) {
-								if (sourceNodeRole.isOld() || (!edge.isSecondary() && resultNodeRole.isNew())) {
-									inputNodes.add(sourceNode);
-									if (edge.isUnconditional() && sourceNode.isUnconditional()) {
-										unconditionalInputNodes.add(sourceNode);
-									}
-									//							edge2subexpression.put(edge, this);
-								}
-							}
-							else if (sourceNode.isExpression()) {
-								node2subexpression.put(sourceNode, this);
-								edge2subexpression.put(edge, this);
-								computeSubexpressionContent(sourceNode, subexpressionResults);
-							}
-							else if (!sourceNode.isUnconditional()) {
-								node2subexpression.put(sourceNode, this);
-								edge2subexpression.put(edge, this);
-								computeSubexpressionContent(sourceNode, subexpressionResults);
-							}
-							else {
-								if (sourceNodeRole.isOld() || resultNodeRole.isNew()) {
-									inputNodes.add(sourceNode);
-									if (edge.isUnconditional() && sourceNode.isUnconditional()) {
-										unconditionalInputNodes.add(sourceNode);
-									}
-									//							edge2subexpression.put(edge, this);
-								}
-							}
-						}
-						//					}
-					}
-				}
-			}
-		}
-
-		public int getCost() {
-			Integer cost2 = cost;
-			if (cost2 == null) {
-				cost2 = reachabilityForest.getCost(resultNode);
-				if (cost2 == null) {			// Can happen for REALIZED results
-					int inputCost = 0;
-					for (@NonNull Node inputNode : inputNodes) {
-						Subexpression inputSubexpression = resultNode2subexpression.get(inputNode);
-						if (inputSubexpression != null) {
-							inputCost = Math.max(inputCost, inputSubexpression.getCost()+1);
-						}
-					}
-					cost2 = inputCost;
-				}
-				cost = cost2;
-			}
-			return cost2;
-		}
-		@Override
-		public @NonNull String toString() {
-			return String.valueOf(resultNode);
 		}
 	}
 
@@ -952,21 +837,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	 * Lazily computed closure of all preceding nodes, icluding the final node, of each node.
 	 */
 	private @Nullable Map<@NonNull Node, @NonNull Set<@NonNull Node>> node2precedingNodeClosure = null;
-
-	/**
-	 * Map from each subexpression result node to its contents.
-	 */
-	private final @NonNull Map<@NonNull OperationNode, @NonNull Subexpression> resultNode2subexpression;
-
-	/**
-	 * Map from each subexpression node to its contents.
-	 */
-	private final @NonNull Map<@NonNull Node, @NonNull Subexpression> node2subexpression = new HashMap<>();
-
-	/**
-	 * Map from each subexpression edge to its contents.
-	 */
-	private final @NonNull Map<@NonNull Edge, @NonNull Subexpression> edge2subexpression = new HashMap<>();
 
 	/**
 	 * The selected head from each head group that is actually passed. Other heads are computed.
@@ -1006,14 +876,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		if (s != null) {
 			TransformationPartitioner.PROPERTY_OBSERVE.println(s.toString());
 		}
-		this.resultNode2subexpression = computeSubexpressions();
-		//
-		//	Gather the subexpression contents.
-		//
-		Set<@NonNull OperationNode> subexpressionResults = resultNode2subexpression.keySet();
-		for (@NonNull Subexpression subexpression : resultNode2subexpression.values()) {
-			subexpression.analyze(subexpressionResults);
-		}
 	}
 
 	public void addVariable(@NonNull Node node, @NonNull VariableDeclaration variableDeclaration) {
@@ -1024,58 +886,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 
 	public @Nullable VariableDeclaration basicGetVariable(@NonNull Node node) {
 		return node2variable.get(node);
-	}
-
-	/**
-	 * Return all subexpressions and their content. A subexpression is an OperationNode whose value is consumed by
-	 * one (or more) PatternNodes or by two (or more) OperationNodes.
-	 */
-	private @NonNull Map<@NonNull OperationNode, @NonNull Subexpression> computeSubexpressions() {
-		Map<@NonNull OperationNode, @NonNull Subexpression> resultNode2subexpression = new HashMap<>();
-		//
-		//	Identify the subexpression result nodes
-		//
-		for (@NonNull Node node : partition.getPartialNodes()) {
-			Role nodeRole = partition.getRole(node);
-			if (nodeRole != null) {
-				if (node.isOperation() && node.isUnconditional() && !node.isPrimitive()) {
-					OperationNode resultNode = (OperationNode) node;
-					Edge firstEdge = null;
-					boolean isSubexpression = false;
-					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-						Role edgeRole = partition.getRole(edge);
-						if ((edgeRole != null) && edgeRole.isNew() && !edge.isSecondary()) {
-							Node edgeSource = edge.getSourceNode();
-							if (edgeSource.isPattern()) {
-								resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
-								isSubexpression = true;
-								break;
-							}
-						}
-					}
-					if (!isSubexpression) {
-						for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
-							Role edgeRole = partition.getRole(edge);
-							if (edgeRole != null) {
-								Node edgeTarget = edge.getTargetNode();
-								if (edgeTarget.isPattern() /*|| edgeTarget.isTrue()*/) {
-									resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
-									break;
-								}
-								if (firstEdge == null) {
-									firstEdge = edge;
-								}
-								else {
-									resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
-									break;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		return resultNode2subexpression;
 	}
 
 	/**
@@ -1216,7 +1026,15 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 		String safeName = getSafeName(node);
 		DeclareStatement newVariable = helper.createDeclareStatement(safeName, variableType, isRequired, initExpression);
-		mapping.getOwnedStatements().add(newVariable);
+		List<Statement> ownedStatements = mapping.getOwnedStatements();
+		int i = ownedStatements.size();
+		while (--i >= 0) {
+			Statement statement = ownedStatements.get(i);
+			if (!(statement instanceof SetStatement) && !(statement instanceof NewStatement)) {
+				break;
+			}
+		}
+		ownedStatements.add(i+1, newVariable);
 		VariableDeclaration oldVariable = node2variable.put(node, newVariable);
 		assert oldVariable == null;
 		return newVariable;
@@ -1392,6 +1210,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				}
 			}
 		}
+		Node2ExpressionCreator expressionCreator = new Node2ExpressionCreator(this);
 		Iterable<@NonNull NavigableEdge> sortedEdges = NavigationEdgeSorter.getSortedAssignments(navigableEdges);
 		for (@NonNull NavigableEdge edge : sortedEdges) {
 			if (edge instanceof NavigationEdge) {
@@ -1402,11 +1221,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				else if (targetNode.isDataType()) {
 					VariableDeclaration asVariable = getVariable(sourceNode);
 					Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
-					Node2ExpressionCreator expressionCreator = new Node2ExpressionCreator(this);
 					OCLExpression valueExp = expressionCreator.getExpression(targetNode);
 					if (valueExp == null) {
-						Node2ExpressionCreator expressionCreator2 = new Node2ExpressionCreator(this);
-						valueExp = expressionCreator2.getExpression(targetNode);		// FIXME debugging
+						valueExp = expressionCreator.getExpression(targetNode);		// FIXME debugging
 					}
 					if (valueExp != null) {
 						boolean isNotify = connectionManager.isHazardousWrite(s, navigationEdge);
