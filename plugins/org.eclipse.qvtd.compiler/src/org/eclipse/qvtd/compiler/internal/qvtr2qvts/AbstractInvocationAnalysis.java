@@ -158,7 +158,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	}
 
 	@Override
-	public @Nullable SuccessEdge getGlobalSuccessEdge() {
+	public @Nullable SuccessEdge getGlobalSuccessEdge(@Nullable Boolean successStatus) {
 		return null;
 	}
 
@@ -201,7 +201,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		//
 		//	Create a global success status if appropriate.
 		//
-		getGlobalSuccessEdge();
+		getGlobalSuccessEdge(Boolean.TRUE);
 		//
 		//	Join the invokedNode to the argument nodes that bind it.
 		//

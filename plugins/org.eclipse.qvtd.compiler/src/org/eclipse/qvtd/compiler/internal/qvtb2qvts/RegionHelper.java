@@ -612,8 +612,14 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	/**
 	 * Create a predicated source2targetProperty success edge from sourceNode to a true/false BooleanValueNode.
 	 */
-	public @NonNull SuccessEdge createPredicatedSuccess(@NonNull Node sourceNode, @NonNull Property source2targetProperty, boolean isSuccess) {
-		BooleanLiteralNode successNode = createBooleanLiteralNode(isSuccess);
+	public @NonNull SuccessEdge createPredicatedSuccess(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @Nullable Boolean isSuccess) {
+		Node successNode;
+		if (isSuccess != null) {
+			successNode = createBooleanLiteralNode(isSuccess);
+		}
+		else {
+			successNode = createPredicatedNode("matches", scheduleManager.getBooleanClassDatum(), false);		// FIXME isMatched
+		}
 		SuccessEdge edge = QVTscheduleFactory.eINSTANCE.createSuccessEdge();
 		edge.initialize(Role.PREDICATED, sourceNode, source2targetProperty.getName(), successNode);
 		edge.initializeProperty(source2targetProperty, false);

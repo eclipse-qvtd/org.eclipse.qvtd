@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -21,6 +22,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -119,9 +121,13 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		//		for ()
 		//		if (referredRule2TraceClass.getStatusInterfaceProperty())
 		invocationAnalysis.getInvokingNode();
-		SuccessEdge globalSuccessEdge = invocationAnalysis.getGlobalSuccessEdge();
-//		return globalSuccessEdge != null ? QVTscheduleUtil.getTargetNode(globalSuccessEdge) : null;
-		return null;
+		EObject eContainer = relationCallExp.eContainer();
+		boolean isDirectCall = eContainer instanceof Predicate;
+		if (!isDirectCall) {
+			getClass();
+		}
+		SuccessEdge globalSuccessEdge = invocationAnalysis.getGlobalSuccessEdge(isDirectCall ? Boolean.TRUE : null);
+		return globalSuccessEdge != null ? QVTscheduleUtil.getTargetNode(globalSuccessEdge) : isDirectCall ? null : relationAnalysis.createBooleanLiteralNode(true);
 	}
 
 	@Override

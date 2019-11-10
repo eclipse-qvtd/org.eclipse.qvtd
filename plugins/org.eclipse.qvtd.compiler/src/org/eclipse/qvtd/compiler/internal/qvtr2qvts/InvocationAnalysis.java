@@ -23,7 +23,7 @@ public interface InvocationAnalysis
 {
 	void addBinding(@NonNull VariableDeclaration rootVariable, @NonNull Node argumentNode);
 	@NonNull Iterable<@NonNull Node> getArgumentNodes();
-	@Nullable SuccessEdge getGlobalSuccessEdge();
+	@Nullable SuccessEdge getGlobalSuccessEdge(@Nullable Boolean successStatus);
 	@NonNull Node getInvokingNode();
 	@NonNull RelationAnalysis getInvokedRelationAnalysis();
 	@NonNull RelationAnalysis getInvokingRelationAnalysis();

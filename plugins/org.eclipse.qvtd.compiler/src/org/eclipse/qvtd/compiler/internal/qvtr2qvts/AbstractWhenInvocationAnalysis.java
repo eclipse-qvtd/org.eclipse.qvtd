@@ -61,14 +61,14 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 	}
 
 	@Override
-	public @Nullable SuccessEdge getGlobalSuccessEdge() {
+	public @Nullable SuccessEdge getGlobalSuccessEdge(@Nullable Boolean successStatus) {
 		SuccessEdge globalSuccessEdge2 = globalSuccessEdge;
 		if (globalSuccessEdge2 == null) {
 			Node invokingNode = getInvokingNode();
 			Relation2MiddleType invokedRelation2InvocationInterface = getInvokedRelation2InvocationInterface();
 			Element2MiddleProperty relation2globalSuccessProperty = invokedRelation2InvocationInterface.getRelation2GlobalSuccessProperty();
 			Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
-			globalSuccessEdge = globalSuccessEdge2 = invokingRelationAnalysis.createPredicatedSuccess(invokingNode, globalSuccessProperty, true);
+			globalSuccessEdge = globalSuccessEdge2 = invokingRelationAnalysis.createPredicatedSuccess(invokingNode, globalSuccessProperty, successStatus);
 		}
 		return globalSuccessEdge2;
 	}
