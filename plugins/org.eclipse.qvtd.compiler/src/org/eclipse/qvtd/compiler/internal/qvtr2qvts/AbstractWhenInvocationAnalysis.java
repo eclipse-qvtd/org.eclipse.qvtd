@@ -66,11 +66,11 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 		if (globalSuccessEdge2 == null) {
 			Node invokingNode = getInvokingNode();
 			Relation2MiddleType invokedRelation2InvocationInterface = getInvokedRelation2InvocationInterface();
-			Element2MiddleProperty relation2globalSuccessProperty = invokedRelation2InvocationInterface.basicGetRelation2GlobalSuccessProperty();
-			if (relation2globalSuccessProperty != null) {
-				Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
-				globalSuccessEdge = globalSuccessEdge2 = invokingRelationAnalysis.createPredicatedSuccess(invokingNode, globalSuccessProperty, true);
-			}
+			Element2MiddleProperty relation2globalSuccessProperty = invokedRelation2InvocationInterface.getRelation2GlobalSuccessProperty();
+			//	if (relation2globalSuccessProperty != null) {
+			Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
+			globalSuccessEdge = globalSuccessEdge2 = invokingRelationAnalysis.createPredicatedSuccess(invokingNode, globalSuccessProperty, true);
+			//	}
 		}
 		return globalSuccessEdge2;
 	}

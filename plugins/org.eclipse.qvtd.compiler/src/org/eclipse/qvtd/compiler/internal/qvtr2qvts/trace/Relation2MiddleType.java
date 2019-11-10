@@ -29,6 +29,7 @@ public interface Relation2MiddleType extends Rule2MiddleType
 	@Nullable Element2MiddleProperty basicGetRelation2LocalSuccessProperty();
 	@Nullable Relation2ResultProperty basicGetRelation2ResultProperty();
 	@Nullable VariableDeclaration2TraceProperty basicGetVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable);
+	@NonNull Element2MiddleProperty getRelation2GlobalSuccessProperty();
 	void getRootVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration rVariable, boolean manyTraces);
 	@Override
 	@NonNull Relation getRule();
