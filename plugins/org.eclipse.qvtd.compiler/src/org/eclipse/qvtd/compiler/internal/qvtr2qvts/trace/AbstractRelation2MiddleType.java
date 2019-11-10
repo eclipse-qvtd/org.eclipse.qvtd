@@ -70,13 +70,14 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	/**
 	 * The future Property that provides the global success/failure/not-ready state of the traced mapping.
 	 */
-	private @Nullable Element2MiddleProperty relation2globalSuccessProperty = null;
+	private @Nullable Relation2SuccessProperty relation2globalSuccessProperty = null;
 	private boolean frozenRelation2globalSuccessProperty = false;			// True once the presence/absence has been tested
 
 	/**
 	 * The future Property that provides the local success/failure/not-ready state of the traced mapping.
 	 */
-	private @Nullable Element2MiddleProperty relation2localSuccessProperty = null;
+	private @Nullable Relation2SuccessProperty relation2localSuccessProperty = null;
+	private boolean frozenRelation2localSuccessProperty = false;			// True once the presence/absence has been tested
 
 	/**
 	 * The future Property that provides the result of the invoked mapping.
@@ -147,6 +148,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 
 	@Override
 	public @Nullable Element2MiddleProperty basicGetRelation2LocalSuccessProperty() {
+		frozenRelation2localSuccessProperty = true;
 		return relation2localSuccessProperty;
 	}
 
@@ -192,17 +194,11 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		return relation2globalSuccessProperty;
 	} */
 
-	public @NonNull Element2MiddleProperty createRelation2LocalSuccessProperty(@NonNull String nameHint) {
-		assert relation2localSuccessProperty == null;
-		relation2localSuccessProperty = new Relation2SuccessProperty(this, nameHint);
-		return relation2localSuccessProperty;
-	}
-
-	public @NonNull Element2MiddleProperty createRelation2LocalSuccessProperty(@NonNull Property property) {
+	/*	public @NonNull Element2MiddleProperty createRelation2LocalSuccessProperty(@NonNull Property property) {
 		assert relation2localSuccessProperty == null;
 		relation2localSuccessProperty = new Relation2InheritedProperty(this, property);
 		return relation2localSuccessProperty;
-	}
+	} */
 
 	protected abstract @NonNull String createTracePropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable);
 
@@ -249,8 +245,8 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	}
 
 	@Override
-	public @NonNull Element2MiddleProperty getRelation2GlobalSuccessProperty() {
-		Element2MiddleProperty relation2globalSuccessProperty2 = relation2globalSuccessProperty;
+	public @NonNull Relation2SuccessProperty getRelation2GlobalSuccessProperty() {
+		Relation2SuccessProperty relation2globalSuccessProperty2 = relation2globalSuccessProperty;
 		if (relation2globalSuccessProperty2 == null) {
 			assert !frozenRelation2globalSuccessProperty;
 			QVTrelationNameGenerator nameGenerator = relation2traceGroup.getNameGenerator();
@@ -260,8 +256,16 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		return relation2globalSuccessProperty2;
 	}
 
-	public @NonNull Element2MiddleProperty getRelation2LocalSuccessProperty() {
-		return ClassUtil.nonNullState(relation2localSuccessProperty);
+	@Override
+	public @NonNull Relation2SuccessProperty getRelation2LocalSuccessProperty() {
+		Relation2SuccessProperty relation2localSuccessProperty2 = relation2localSuccessProperty;
+		if (relation2localSuccessProperty2 == null) {
+			assert !frozenRelation2localSuccessProperty;
+			QVTrelationNameGenerator nameGenerator = relation2traceGroup.getNameGenerator();
+			String localSuccessPropertyName = nameGenerator.createTraceLocalSuccessPropertyName();
+			relation2localSuccessProperty = relation2localSuccessProperty2 = new Relation2SuccessProperty(this, localSuccessPropertyName);
+		}
+		return relation2localSuccessProperty2;
 	}
 
 	@Override

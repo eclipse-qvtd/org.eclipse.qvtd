@@ -106,14 +106,8 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		Rule referredRule = QVTscheduleUtil.getReferredRule((RuleRegion)region);
 		RelationAnalysis relationAnalysis = (RelationAnalysis)transformationAnalysis.getRuleAnalysis(referredRule);
 		Relation2TraceGroup relation2traceGroup = relationAnalysis.getRule2TraceGroup();
-		//			relationAnalysis.synthesizeTraceLocalSuccessAssignment(relation2traceGroup, getTraceNode());
 		Relation2TraceClass relation2TraceClass = relation2traceGroup.getRule2TraceClass();
-		Element2MiddleProperty relation2localSuccessProperty = relation2traceGroup.basicGetRelation2LocalSuccessProperty();
-		//		Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(traceNode);
-		if (relation2localSuccessProperty == null) {
-			String localSuccessPropertyName = relation2traceGroup.getNameGenerator().createTraceLocalSuccessPropertyName();
-			relation2localSuccessProperty = relation2TraceClass.createRelation2LocalSuccessProperty(localSuccessPropertyName);
-		}
+		Element2MiddleProperty relation2localSuccessProperty = relation2TraceClass.getRelation2LocalSuccessProperty();
 		Property localSuccessProperty = relation2localSuccessProperty.getTraceProperty();
 		SuccessEdge localSuccessEdge = relationAnalysis.createRealizedSuccess(traceNode, localSuccessProperty, null);
 		QVTscheduleUtil.getTargetNode(localSuccessEdge).setUtility(Utility.STRONGLY_MATCHED);
