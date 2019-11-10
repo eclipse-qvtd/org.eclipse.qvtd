@@ -87,7 +87,7 @@ public class Relation2DispatchClass extends AbstractRelation2MiddleType
 		// There is always an invocation interface result
 		//
 		//		if (getRuleAnalysis().hasIncomingWhenInvocationAnalyses()) {
-		createRelation2ResultProperty(relation2traceGroup.getNameGenerator().createDispatchClassResultPropertyName());
+		getRelation2ResultProperty();
 		//		}
 		//
 		//	One trace property per root variable.

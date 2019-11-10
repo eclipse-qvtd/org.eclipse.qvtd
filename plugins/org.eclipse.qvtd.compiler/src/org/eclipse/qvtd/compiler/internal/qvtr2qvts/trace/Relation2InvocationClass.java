@@ -49,7 +49,7 @@ public class Relation2InvocationClass extends AbstractRelation2MiddleType
 		// If there is no invocation interface for a when invoked realtion there is an invocation class result
 		//
 		if ((baseRelation2invocationInterface == null) && relationAnalysis.hasIncomingWhenInvocations()) {
-			createRelation2ResultProperty(relation2traceGroup.getNameGenerator().createDispatchClassResultPropertyName());
+			getRelation2ResultProperty();
 		}
 		//
 		//	If there is no invocation interface, one trace property per root variable.

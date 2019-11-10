@@ -13,7 +13,6 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2MiddleType;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -24,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  */
 public interface Relation2MiddleType extends Rule2MiddleType
 {
-	@Nullable Element2MiddleProperty basicGetRelation2DispatchSuccessProperty();
+	@Nullable Relation2InheritedProperty basicGetRelation2DispatchSuccessProperty();
 	@Nullable Relation2SuccessProperty basicGetRelation2GlobalSuccessProperty();
 	@Nullable Relation2SuccessProperty basicGetRelation2LocalSuccessProperty();
 	@Nullable Relation2ResultProperty basicGetRelation2ResultProperty();
@@ -36,8 +35,6 @@ public interface Relation2MiddleType extends Rule2MiddleType
 	@NonNull Relation getRule();
 	@Override
 	@NonNull Relation2TraceGroup getRule2TraceGroup();
-	//	@Override
-	//	@NonNull RelationAnalysis getRuleAnalysis();
 	@Override
 	@NonNull RelationalTransformation2TracePackage getTransformation2TracePackage();
 }

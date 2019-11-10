@@ -24,7 +24,6 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2MiddleType;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
@@ -85,6 +84,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	 * The future Property that provides the result of the invoked mapping.
 	 */
 	private @Nullable Relation2ResultProperty relation2resultProperty = null;
+	private boolean frozenRelation2resultProperty = false;					// True once the presence/absence has been tested
 
 	protected AbstractRelation2MiddleType(@NonNull Relation2TraceGroup relation2traceGroup, @NonNull String middleClassName) {
 		this.relation2traceGroup = relation2traceGroup;
@@ -138,7 +138,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	}
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2DispatchSuccessProperty() {
+	public @Nullable Relation2InheritedProperty basicGetRelation2DispatchSuccessProperty() {
 		frozenRelation2dispatchSuccessProperty = true;
 		return relation2dispatchSuccessProperty;
 	}
@@ -157,6 +157,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 
 	@Override
 	public @Nullable Relation2ResultProperty basicGetRelation2ResultProperty() {
+		frozenRelation2resultProperty = true;
 		return relation2resultProperty;
 	}
 
@@ -177,11 +178,6 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	@Override
 	public int compareTo(@NonNull Rule2MiddleType that) {
 		return ClassUtil.safeCompareTo(this.middleClass.getName(), that.getMiddleClass().getName());
-	}
-
-	public void createRelation2ResultProperty(@NonNull String nameHint) {
-		assert relation2resultProperty == null;
-		relation2resultProperty = new Relation2ResultProperty(this, nameHint, getRule2TraceGroup().getTraceInterface());
 	}
 
 	protected abstract @NonNull String createTracePropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable);
@@ -215,16 +211,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		return QVTrelationUtil.getName(relation);
 	}
 
-	public @NonNull Relation2ResultProperty getRelation2ResultProperty() {
-		//		Relation2ResultProperty relation2resultProperty2 = relation2resultProperty;
-		//		if (relation2resultProperty2 == null) {
-		//			relation2resultProperty = relation2resultProperty2 = new Relation2ResultProperty(this, relation2traceGroup.getTraceInterface());
-		//		}
-		//		return relation2resultProperty2;
-		return ClassUtil.nonNullState(relation2resultProperty);
-	}
-
-	public @NonNull Element2MiddleProperty getRelation2DispatchSuccessProperty() {
+	public @NonNull Relation2InheritedProperty getRelation2DispatchSuccessProperty() {
 		Relation2InheritedProperty relation2dispatchSuccessProperty2 = relation2dispatchSuccessProperty;
 		if (relation2dispatchSuccessProperty2 == null) {
 			assert !frozenRelation2dispatchSuccessProperty;
@@ -258,6 +245,17 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 			relation2localSuccessProperty = relation2localSuccessProperty2 = new Relation2SuccessProperty(this, localSuccessPropertyName);
 		}
 		return relation2localSuccessProperty2;
+	}
+
+	public @NonNull Relation2ResultProperty getRelation2ResultProperty() {
+		Relation2ResultProperty relation2resultProperty2 = relation2resultProperty;
+		if (relation2resultProperty2 == null) {
+			assert !frozenRelation2resultProperty;
+			QVTrelationNameGenerator nameGenerator = relation2traceGroup.getNameGenerator();
+			String resultPropertyName = nameGenerator.createDispatchClassResultPropertyName();
+			relation2resultProperty = relation2resultProperty2 = new Relation2ResultProperty(this, resultPropertyName, relation2traceGroup.getTraceInterface());
+		}
+		return relation2resultProperty2;
 	}
 
 	@Override
