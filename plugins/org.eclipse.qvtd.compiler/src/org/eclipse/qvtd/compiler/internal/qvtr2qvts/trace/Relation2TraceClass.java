@@ -319,8 +319,8 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 	} */
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
-		Element2MiddleProperty relation2SuccessProperty = super.basicGetRelation2GlobalSuccessProperty();
+	public @Nullable Relation2SuccessProperty basicGetRelation2GlobalSuccessProperty() {
+		Relation2SuccessProperty relation2SuccessProperty = super.basicGetRelation2GlobalSuccessProperty();
 		if (relation2SuccessProperty != null) {
 			return relation2SuccessProperty;
 		}
@@ -328,6 +328,20 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 		Relation2TraceInterface baseRelation2traceInterface = baseRelation2traceGroup.basicGetRule2TraceInterface();
 		if (baseRelation2traceInterface != null) {
 			return baseRelation2traceInterface.basicGetRelation2GlobalSuccessProperty();
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Relation2SuccessProperty basicGetRelation2LocalSuccessProperty() {
+		Relation2SuccessProperty relation2SuccessProperty = super.basicGetRelation2LocalSuccessProperty();
+		if (relation2SuccessProperty != null) {
+			return relation2SuccessProperty;
+		}
+		Relation2TraceGroup baseRelation2traceGroup = getRule2TraceGroup().getBaseRelation2TraceGroup();
+		Relation2TraceInterface baseRelation2traceInterface = baseRelation2traceGroup.basicGetRule2TraceInterface();
+		if (baseRelation2traceInterface != null) {
+			return baseRelation2traceInterface.basicGetRelation2LocalSuccessProperty();
 		}
 		return null;
 	}

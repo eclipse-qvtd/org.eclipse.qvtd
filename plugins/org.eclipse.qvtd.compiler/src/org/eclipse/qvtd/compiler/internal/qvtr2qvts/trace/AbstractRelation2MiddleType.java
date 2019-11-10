@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
@@ -65,7 +66,8 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	/**
 	 * The future Property that provides the dispatch success/failure/not-ready state of the traced mapping.
 	 */
-	private @Nullable Element2MiddleProperty relation2dispatchSuccessProperty = null;
+	private @Nullable Relation2InheritedProperty relation2dispatchSuccessProperty = null;
+	private boolean frozenRelation2dispatchSuccessProperty = false;			// True once the presence/absence has been tested
 
 	/**
 	 * The future Property that provides the global success/failure/not-ready state of the traced mapping.
@@ -137,17 +139,18 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 
 	@Override
 	public @Nullable Element2MiddleProperty basicGetRelation2DispatchSuccessProperty() {
+		frozenRelation2dispatchSuccessProperty = true;
 		return relation2dispatchSuccessProperty;
 	}
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
+	public @Nullable Relation2SuccessProperty basicGetRelation2GlobalSuccessProperty() {
 		frozenRelation2globalSuccessProperty = true;
 		return relation2globalSuccessProperty;
 	}
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2LocalSuccessProperty() {
+	public @Nullable Relation2SuccessProperty basicGetRelation2LocalSuccessProperty() {
 		frozenRelation2localSuccessProperty = true;
 		return relation2localSuccessProperty;
 	}
@@ -181,25 +184,6 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		relation2resultProperty = new Relation2ResultProperty(this, nameHint, getRule2TraceGroup().getTraceInterface());
 	}
 
-	public @NonNull Element2MiddleProperty createRelation2DispatchSuccessProperty(@NonNull Property property) {
-		assert relation2dispatchSuccessProperty == null;
-		relation2dispatchSuccessProperty = new Relation2InheritedProperty(this, property);
-		return relation2dispatchSuccessProperty;
-	}
-
-	/*	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty(@NonNull TypedModel targetTypedModel, @NonNull Property property) {
-		assert relation2globalSuccessProperty == null;
-		Element2MiddleProperty relation2globalSuccessProperty = new Relation2InheritedProperty(this, property);
-		name2relation2globalSuccessProperty.put();
-		return relation2globalSuccessProperty;
-	} */
-
-	/*	public @NonNull Element2MiddleProperty createRelation2LocalSuccessProperty(@NonNull Property property) {
-		assert relation2localSuccessProperty == null;
-		relation2localSuccessProperty = new Relation2InheritedProperty(this, property);
-		return relation2localSuccessProperty;
-	} */
-
 	protected abstract @NonNull String createTracePropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable);
 
 	@Override
@@ -212,12 +196,12 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	}
 
 	@Override
-	public @NonNull Property getDispatchSuccessProperty() {
+	public @NonNull Property getDispatchSuccessProperty() {		// FIXME the resolution in super classes requires an earlier getRelation2DispatchSuccessProperty
 		return ClassUtil.nonNullState(basicGetRelation2DispatchSuccessProperty()).getTraceProperty();
 	}
 
 	@Override
-	public @NonNull Property getGlobalSuccessProperty() {
+	public @NonNull Property getGlobalSuccessProperty() {		// FIXME the resolution in super classes requires an earlier getRelation2GlobalSuccessProperty
 		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty()).getTraceProperty();
 	}
 
@@ -241,7 +225,15 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	}
 
 	public @NonNull Element2MiddleProperty getRelation2DispatchSuccessProperty() {
-		return ClassUtil.nonNullState(relation2dispatchSuccessProperty);
+		Relation2InheritedProperty relation2dispatchSuccessProperty2 = relation2dispatchSuccessProperty;
+		if (relation2dispatchSuccessProperty2 == null) {
+			assert !frozenRelation2dispatchSuccessProperty;
+			org.eclipse.ocl.pivot.Class dispatchClass = getTransformation2TracePackage().getDispatchClass();
+			Property dispatchSuccessProperty = NameUtil.getNameable(QVTbaseUtil.getOwnedProperties(dispatchClass), QVTrelationNameGenerator.TRACE_DISPATCH_SUCCESS_PROPERTY_NAME);
+			assert dispatchSuccessProperty != null;
+			relation2dispatchSuccessProperty = relation2dispatchSuccessProperty2 = new Relation2InheritedProperty(this, dispatchSuccessProperty);
+		}
+		return relation2dispatchSuccessProperty2;
 	}
 
 	@Override
