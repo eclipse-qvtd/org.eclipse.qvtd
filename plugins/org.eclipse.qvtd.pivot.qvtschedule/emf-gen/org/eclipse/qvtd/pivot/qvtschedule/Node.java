@@ -247,19 +247,31 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 
 	/**
 	 * The prioritized immutable utility of each node.
+	 *
+	 * FIXME Change STRONGLY_MATCHED/WEAKLY_MATCHED to EXACTLY_ONE_MATCH/ZEROO_OR_ONE_MATCH/ONE_OR_MANY_MATCHES/SOME_OR_MANY__MATCH
+	 * so that the optionality of Node.isMatched() is redundnt wrt getUtility().isXXXX.
 	 */
 	public enum Utility {
-		DISPATCH,						// The predicated dispatcher of an overriding rule (the overridden dispatcher is a TRACE).
-		TRACE,							// The predicated/realized trace node
-		STRONGLY_MATCHED,				// Reachable by to-1 navigation from a head node, or by to-? to an ExplicitNull
-		WEAKLY_MATCHED,					// else unconditionally used in a computation or navigation
+		/** The predicated dispatcher of an overriding rule (the overridden dispatcher is a TRACE).*/
+		DISPATCH,
+		/** The predicated/realized trace node.*/
+		TRACE,
+		/** Reachable by to-1 navigation from a head node, or by to-? to an ExplicitNull.*/
+		STRONGLY_MATCHED,
+		/** Unconditionally used in a computation or navigation, but not a dispatcher/trace node,
+		 * not reachable by to-1 navigation from a head node, not an ExplicitNull reachable by to-?.*/
+		WEAKLY_MATCHED,
 		//		UNCONDITIONALLY_PREDICATING,	// else always computable as part of a predicate
 		//		CONDITIONALLY_PREDICATING,		// else selectively computable as part of a predicate depending on if conditions
 		//		UNCONDITIONALLY_COMPUTED,		// else always computable
-		CONDITIONAL,					// else selectively computable depending on if conditions / loops
-		DEPENDENCY,						// else solely used to establish a dependency
-		COMPOSED,						// else solely used to characterize a LoadingRegion node
-		DEAD							// else never used
+		/** A selectively computable element depending on if conditions / loops. Not matched.*/
+		CONDITIONAL,
+		/** A dependency that must be satisfied to validate the region's execution.*/
+		DEPENDENCY,
+		/** A LoadingRegion element.*/
+		COMPOSED,
+		/** Never used */
+		DEAD;
 	}
 
 	/**
@@ -474,7 +486,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	boolean isRealized();
 
 	/**
-	 * Return true if this is a required element, i.e. it has a TypedElement with a non-zetro lowrr bound.
+	 * Return true if this is a required element, i.e. it has a TypedElement with a non-zero lower bound.
 	 */
 	boolean isRequired();
 
@@ -523,7 +535,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	//	boolean isTrue();
 
 	/**
-	 * Return true if this node is unconditionally used in a computation of navigation. .e it does not form
+	 * Return true if this node is unconditionally used in a computation of navigation. i.e it does not form
 	 * part of a loop or a then/else arm.
 	 */
 	boolean isUnconditional();

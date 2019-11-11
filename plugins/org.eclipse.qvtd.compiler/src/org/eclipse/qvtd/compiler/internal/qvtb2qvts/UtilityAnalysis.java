@@ -36,6 +36,10 @@ import com.google.common.collect.Sets;
  * UtilityAnalysis is a helper that assigns a Utility value to each Region node.
  *
  * FIXME a QVTrelationUtilityAnalysis might be simpler than this QVTc chain version.
+ *
+ * FIXME For QVTr at least, it should be possible to assign the correct Utility during Node construction
+ * obviating the need for a later assignUtilities and the inconvenience of not being able to use the utility
+ * beteem construction and assignUtilities.
  */
 public class UtilityAnalysis
 {
