@@ -251,7 +251,7 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 	protected void resolveConstantInputNodes(@NonNull BasicPartition partition/*boolean isInfallible*/) {
 		for (@NonNull Node constantInputNode : mappingPartitioner.getConstantInputNodes()) {
 			//	if ((fallibleNodes == null) || !Iterables.contains(fallibleNodes, constantOutputNode)) {
-			if (constantInputNode.getIncomingEdges().isEmpty() && !mappingPartitioner.hasCheckedNode(constantInputNode)) {
+			if (constantInputNode.getIncomingEdges().isEmpty() && constantInputNode.getOutgoingEdges().isEmpty() && !mappingPartitioner.hasCheckedNode(constantInputNode)) {
 				addNode(partition, constantInputNode);
 			}
 			//	}
