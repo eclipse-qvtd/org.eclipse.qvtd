@@ -850,10 +850,7 @@ public class RelationAnalysis extends RuleAnalysis
 				return null;
 			}
 		}
-		ExpressionSynthesizer expressionSynthesizer2 = expressionSynthesizer;
-		if (variable.isIsRequired()) {
-			expressionSynthesizer2 = expressionSynthesizer.getRequiredExpressionSynthesizer();
-		}
+		ExpressionSynthesizer expressionSynthesizer2 = unconditionalExpressionSynthesizer.getExpressionSynthesizer(variable.isIsRequired());
 		Node bestInitNode = bestInitExpression.accept(expressionSynthesizer2);
 		assert bestInitNode != null;
 		if (variable.isIsRequired()) {
@@ -1245,13 +1242,13 @@ public class RelationAnalysis extends RuleAnalysis
 
 	public @NonNull Node synthesizeKeyTemplatePart(@NonNull PropertyTemplateItem propertyTemplateItem) {
 		OCLExpression targetExpression = QVTrelationUtil.getOwnedValue(propertyTemplateItem);
-		Node partNode = targetExpression.accept(expressionSynthesizer);
+		Node partNode = targetExpression.accept(unconditionalExpressionSynthesizer);
 		assert partNode != null;
 		return partNode;
 	}
 
 	protected void synthesizeMultipleInputCollectionTemplate(@NonNull CollectionTemplateExp collectionTemplateExp) {
-		Node residueNode = collectionTemplateExp.accept(expressionSynthesizer);
+		Node residueNode = collectionTemplateExp.accept(unconditionalExpressionSynthesizer);
 		assert residueNode != null;
 
 		/*		EObject eContainer = collectionTemplateExp.eContainer();
@@ -1278,7 +1275,7 @@ public class RelationAnalysis extends RuleAnalysis
 				createOperationSelfEdge(selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
 				createOperationParameterEdge(memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
 			}
-			memberNode = member.accept(expressionSynthesizer);
+			memberNode = member.accept(unconditionalExpressionSynthesizer);
 			assert memberNode != null;
 			//			memberNodes.add(memberNode);
 			//			createPredicateEdge(collectionNode, "head-" + i++, memberNode);
@@ -1293,7 +1290,7 @@ public class RelationAnalysis extends RuleAnalysis
 				createOperationSelfEdge(selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
 				createOperationParameterEdge(memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
 			}
-			Node restNode = rest.accept(expressionSynthesizer);
+			Node restNode = rest.accept(unconditionalExpressionSynthesizer);
 			assert restNode != null;
 			createEqualsEdge(residueNode, restNode);
 		}
@@ -1305,10 +1302,10 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	protected boolean synthesizeNavigationCallEqualsPredicate(@NonNull NavigationCallExp navExpression, @NonNull OCLExpression valueExpression) {
-		Node valueNode = valueExpression.accept(expressionSynthesizer);
+		Node valueNode = valueExpression.accept(unconditionalExpressionSynthesizer);
 		assert valueNode != null;
 		OCLExpression sourceExpression = QVTbaseUtil.getOwnedSource(navExpression);
-		Node sourceNode = sourceExpression.accept(expressionSynthesizer);
+		Node sourceNode = sourceExpression.accept(unconditionalExpressionSynthesizer);
 		assert sourceNode != null;
 		Property source2targetProperty = QVTbaseUtil.getReferredProperty(navExpression);
 		createNavigationEdge(sourceNode, source2targetProperty, valueNode, false);
@@ -1337,7 +1334,7 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		}
 		else {
-			Node targetNode = expressionSynthesizer.synthesize(targetExpression);
+			Node targetNode = unconditionalExpressionSynthesizer.getExpressionSynthesizer(source2targetProperty.isIsRequired()).synthesize(targetExpression);
 			boolean isPartial = scheduleManager.computeIsPartial(targetNode, source2targetProperty);
 			if (scheduleManager.isOutputInRule(QVTbaseUtil.getContainingRule(sourceVariable), sourceVariable) /*&& !propertyTemplateItem.isCheckOnly()*/) {
 				createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
@@ -1392,20 +1389,20 @@ public class RelationAnalysis extends RuleAnalysis
 			PropertyTemplateItem propertyTemplateItem = (PropertyTemplateItem)eContainer;
 			Property source2target = QVTrelationUtil.getReferredProperty(propertyTemplateItem);
 			ObjectTemplateExp objectTemplateExp = QVTrelationUtil.getOwningObjectTemplateExp(propertyTemplateItem);
-			Node sourceNode = objectTemplateExp.accept(expressionSynthesizer);
+			Node sourceNode = objectTemplateExp.accept(unconditionalExpressionSynthesizer);
 			assert sourceNode != null;
 			for (@NonNull OCLExpression member : QVTrelationUtil.getOwnedMembers(collectionTemplateExp)) {
-				Node memberNode = member.accept(expressionSynthesizer);
+				Node memberNode = member.accept(unconditionalExpressionSynthesizer);
 				assert memberNode != null;
 				createRealizedNavigationEdge(sourceNode, source2target, memberNode, true);
 			}
 		}
 		else {
 			// FIXME can this ever happen ?
-			Node collectionNode = collectionTemplateExp.accept(expressionSynthesizer);
+			Node collectionNode = collectionTemplateExp.accept(unconditionalExpressionSynthesizer);
 			assert collectionNode != null;
 			for (@NonNull OCLExpression member : QVTrelationUtil.getOwnedMembers(collectionTemplateExp)) {
-				Node memberNode = member.accept(expressionSynthesizer);
+				Node memberNode = member.accept(unconditionalExpressionSynthesizer);
 				assert memberNode != null;
 				//			memberNodes.add(memberNode);
 				//			createPredicateEdge(collectionNode, "head-" + i++, memberNode);
@@ -1527,7 +1524,7 @@ public class RelationAnalysis extends RuleAnalysis
 		if (synthesizeEqualsPredicate(predicateExpression)) {
 			return;
 		}
-		Node resultNode = predicateExpression.accept(expressionSynthesizer); //.getConditionalExpressionSynthesizer());	// See Bug 547263
+		Node resultNode = predicateExpression.accept(unconditionalExpressionSynthesizer); //.getConditionalExpressionSynthesizer());	// See Bug 547263
 		/*		if (resultNode != null) {
 			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(resultNode);
 			if (!resultNode.isRequired() || (classDatum != scheduleManager.getBooleanClassDatum())) {
@@ -1537,7 +1534,7 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		} */
 		if (resultNode != null) {
-			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(resultNode);
+			//			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(resultNode);
 			//			if (!resultNode.isRequired() || (classDatum != scheduleManager.getBooleanClassDatum())) {
 			if (!resultNode.isRequired()) {
 				Node trueNode = createBooleanLiteralNode(true);
@@ -1638,9 +1635,9 @@ public class RelationAnalysis extends RuleAnalysis
 		PropertyTemplateItem propertyTemplateItem = (PropertyTemplateItem)eContainer;
 		Property source2target = QVTrelationUtil.getReferredProperty(propertyTemplateItem);
 		ObjectTemplateExp objectTemplateExp = QVTrelationUtil.getOwningObjectTemplateExp(propertyTemplateItem);
-		Node sourceNode = objectTemplateExp.accept(expressionSynthesizer);
+		Node sourceNode = objectTemplateExp.accept(unconditionalExpressionSynthesizer);
 		assert sourceNode != null;
-		Node memberNode = members.get(0).accept(expressionSynthesizer);
+		Node memberNode = members.get(0).accept(unconditionalExpressionSynthesizer);
 		assert memberNode != null;
 		createNavigationEdge(sourceNode, source2target, memberNode, true);
 		return true;
@@ -1932,8 +1929,8 @@ public class RelationAnalysis extends RuleAnalysis
 				return true;
 			}
 		}
-		variableNode = variable.accept(expressionSynthesizer);
-		Node expressionNode = valueExp.accept(expressionSynthesizer);
+		variableNode = variable.accept(unconditionalExpressionSynthesizer);
+		Node expressionNode = valueExp.accept(unconditionalExpressionSynthesizer);
 		assert (variableNode != null) && (expressionNode != null);
 		createEqualsEdge(expressionNode, variableNode);
 		return true;

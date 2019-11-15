@@ -15,10 +15,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -33,54 +31,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpressionSynthesizer
 {
-	public static class ConditionalExpressionSynthesizer extends QVTrelationExpressionSynthesizer
-	{
-		protected ConditionalExpressionSynthesizer(@NonNull RelationAnalysis context) {
-			super(context);
-		}
-
-		@Override
-		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			return context.createStepNode(name, callExp, sourceNode, false);
-		}
-
-		@Override
-		protected boolean isUnconditional() {
-			return false;
-		}
-	}
-
-	public static class RequiredExpressionSynthesizer extends QVTrelationExpressionSynthesizer
-	{
-		protected RequiredExpressionSynthesizer(@NonNull RelationAnalysis context) {
-			super(context);
-		}
-
-		@Override
-		protected @NonNull Node createOperationCallNode(@NonNull CallExp callExp, @NonNull Operation operation,@NonNull Node @NonNull [] sourceAndArgumentNodes) {
-			Node operationCallNode = super.createOperationCallNode(callExp, operation, sourceAndArgumentNodes);
-			operationCallNode.setRequired();
-			return operationCallNode;
-		}
-
-		@Override
-		protected boolean isRequired() {
-			return true;
-		}
-	}
-
-	protected QVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context) {
-		super(context);
+	protected QVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable QVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer) {
+		super(context, unconditionalExpressionSynthesizer);
 	}
 
 	@Override
 	protected @NonNull ExpressionSynthesizer createConditionalExpressionSynthesizer() {
-		return new ConditionalExpressionSynthesizer(getRelationAnalysis());
-	}
-
-	@Override
-	protected @NonNull ExpressionSynthesizer createRequiredExpressionSynthesizer() {
-		return new RequiredExpressionSynthesizer(getRelationAnalysis());
+		return new QVTrelationExpressionSynthesizer(getRelationAnalysis(), this);
 	}
 
 	public @NonNull RelationAnalysis getRelationAnalysis() {
@@ -123,9 +80,6 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		invocationAnalysis.getInvokingNode();
 		EObject eContainer = relationCallExp.eContainer();
 		boolean isDirectCall = eContainer instanceof Predicate;
-		if (!isDirectCall) {
-			getClass();
-		}
 		SuccessEdge globalSuccessEdge = invocationAnalysis.getGlobalSuccessEdge(isDirectCall ? Boolean.TRUE : null);
 		return globalSuccessEdge != null ? QVTscheduleUtil.getTargetNode(globalSuccessEdge) : isDirectCall ? null : relationAnalysis.createBooleanLiteralNode(true);
 	}

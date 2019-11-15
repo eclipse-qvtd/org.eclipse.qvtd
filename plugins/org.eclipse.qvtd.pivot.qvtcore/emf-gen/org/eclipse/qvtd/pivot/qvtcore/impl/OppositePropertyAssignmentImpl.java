@@ -722,4 +722,9 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		}
 	}
 
+	@Override
+	public boolean isIsRequired() {
+		return true;
+	}
+
 } //OppositePropertyAssignmentImpl

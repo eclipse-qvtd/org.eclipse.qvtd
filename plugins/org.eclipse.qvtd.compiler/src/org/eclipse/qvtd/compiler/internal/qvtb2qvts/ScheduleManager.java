@@ -92,10 +92,10 @@ public interface ScheduleManager
 	 */
 	boolean computeIsPartial(@NonNull Node targetNode, @NonNull Property property);
 	@NonNull ConnectionManager createConnectionManager(@NonNull ProblemHandler problemHandler, @NonNull LoadingRegionAnalysis loadingRegionAnalysis);
-	@NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis);
 	@NonNull RuleAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule);
 	@NonNull Rule2TraceGroup createRule2TraceGroup(@NonNull Transformation2TracePackage transformation2TracePackage, @NonNull Rule rule);
 	@NonNull Transformation2TracePackage createTransformation2TracePackage(@NonNull Transformation transformation);
+	@NonNull ExpressionSynthesizer createUnconditionalExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis);
 	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions();
 	@NonNull PropertyDatum getBasePropertyDatum(@NonNull PropertyDatum propertyDatum);

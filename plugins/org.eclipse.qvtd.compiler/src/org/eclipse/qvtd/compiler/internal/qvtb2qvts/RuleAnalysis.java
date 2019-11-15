@@ -63,7 +63,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull Rule rule;
-	protected final @NonNull ExpressionSynthesizer expressionSynthesizer;
+	protected final @NonNull ExpressionSynthesizer unconditionalExpressionSynthesizer;
 
 	private @Nullable Rule2TraceGroup relation2traceGroup = null;
 
@@ -76,7 +76,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		super(transformationAnalysis.getScheduleManager(), ruleRegion);
 		this.rule = QVTscheduleUtil.getReferredRule(ruleRegion);
 		this.transformationAnalysis = transformationAnalysis;
-		this.expressionSynthesizer = scheduleManager.createExpressionSynthesizer(this);
+		this.unconditionalExpressionSynthesizer = scheduleManager.createUnconditionalExpressionSynthesizer(this);
 		//		assert !rule.isIsAbstract() == scheduleManager.getScheduleModel().getOwnedMappingRegions().contains(ruleRegion);
 	}
 
@@ -208,7 +208,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 				}
 				else {
 					assert !edge.isMatched();
-					expressionSynthesizer.rewriteCastEdgeAsOclAsType((CastEdge)edge);
+					unconditionalExpressionSynthesizer.getExpressionSynthesizer(false).rewriteCastEdgeAsOclAsType((CastEdge)edge);
 				}
 				assert edge.eContainer() == null;
 				assert edge.getSourceNode() == null;

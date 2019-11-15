@@ -90,11 +90,6 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	public @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
-		return new QVTrelationExpressionSynthesizer((RelationAnalysis) ruleAnalysis);
-	}
-
-	@Override
 	public @NonNull Rule2TraceGroup createRule2TraceGroup(@NonNull Transformation2TracePackage transformation2TracePackage, @NonNull Rule rule) {
 		return new Relation2TraceGroup(transformation2TracePackage, (Relation)rule);
 	}
@@ -112,6 +107,11 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull Transformation2TracePackage createTransformation2TracePackage(@NonNull Transformation transformation) {
 		return new RelationalTransformation2TracePackage(this, (RelationalTransformation)transformation);
+	}
+
+	@Override
+	public @NonNull ExpressionSynthesizer createUnconditionalExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
+		return new QVTrelationExpressionSynthesizer((RelationAnalysis) ruleAnalysis, null);
 	}
 
 	protected @NonNull DatumCaches getDatumCaches() {

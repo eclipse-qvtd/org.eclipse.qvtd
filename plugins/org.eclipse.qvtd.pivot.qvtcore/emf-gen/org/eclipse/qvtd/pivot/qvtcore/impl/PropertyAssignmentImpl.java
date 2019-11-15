@@ -719,4 +719,8 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 		}
 	}
 
+	@Override
+	public boolean isIsRequired() {
+		return targetProperty != null && targetProperty.isIsRequired();
+	}
 } //PropertyAssignmentImpl

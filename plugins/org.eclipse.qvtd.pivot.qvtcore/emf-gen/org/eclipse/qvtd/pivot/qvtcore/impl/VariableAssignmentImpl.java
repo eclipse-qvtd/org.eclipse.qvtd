@@ -392,4 +392,8 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 		}
 	}
 
+	@Override
+	public boolean isIsRequired() {
+		return targetVariable != null && targetVariable.isIsRequired();
+	}
 } //VariableAssignmentImpl

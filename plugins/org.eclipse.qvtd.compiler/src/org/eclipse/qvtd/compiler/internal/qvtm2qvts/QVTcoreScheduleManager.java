@@ -54,11 +54,6 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 	}
 
 	@Override
-	public @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
-		return new QVTcoreExpressionSynthesizer(ruleAnalysis);
-	}
-
-	@Override
 	public @NonNull MappingAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule) {
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
 		ruleRegion.setOwningScheduleModel(scheduleModel);
@@ -90,6 +85,11 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 				return null;
 			}
 		};
+	}
+
+	@Override
+	public @NonNull ExpressionSynthesizer createUnconditionalExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
+		return new QVTcoreExpressionSynthesizer(ruleAnalysis, null);
 	}
 
 	@Override

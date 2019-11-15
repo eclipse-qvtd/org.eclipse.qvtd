@@ -19,13 +19,11 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
@@ -74,8 +72,8 @@ public class MappingAnalysis extends RuleAnalysis
 {
 	public static abstract class AbstractQVTcoreExpressionSynthesizer extends ExpressionSynthesizer implements QVTcoreVisitor<@Nullable Node>
 	{
-		protected AbstractQVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context) {
-			super(context);
+		protected AbstractQVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context, @Nullable AbstractQVTcoreExpressionSynthesizer unconditionalExpressionSynthesizer) {
+			super(context, unconditionalExpressionSynthesizer);
 		}
 
 		@Override
@@ -156,18 +154,13 @@ public class MappingAnalysis extends RuleAnalysis
 
 	public static class QVTcoreExpressionSynthesizer extends AbstractQVTcoreExpressionSynthesizer
 	{
-		protected QVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context) {
-			super(context);
+		protected QVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context, @Nullable QVTcoreExpressionSynthesizer unconditionalExpressionSynthesizer) {
+			super(context, unconditionalExpressionSynthesizer);
 		}
 
 		@Override
 		protected @NonNull ExpressionSynthesizer createConditionalExpressionSynthesizer() {
-			return new ConditionalExpressionSynthesizer(context);
-		}
-
-		@Override
-		protected @NonNull ExpressionSynthesizer createRequiredExpressionSynthesizer() {
-			return new RequiredExpressionSynthesizer(context);
+			return new QVTcoreExpressionSynthesizer(context, this);
 		}
 
 		@Override
@@ -211,42 +204,6 @@ public class MappingAnalysis extends RuleAnalysis
 		@Override
 		public @Nullable Node visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
 			return null;
-		}
-	}
-
-	public static class ConditionalExpressionSynthesizer extends QVTcoreExpressionSynthesizer
-	{
-		protected ConditionalExpressionSynthesizer(@NonNull RuleAnalysis context) {
-			super(context);
-		}
-
-		@Override
-		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			return context.createStepNode(name, callExp, sourceNode, false);
-		}
-
-		@Override
-		protected boolean isUnconditional() {
-			return false;
-		}
-	}
-
-	public static class RequiredExpressionSynthesizer extends QVTcoreExpressionSynthesizer
-	{
-		protected RequiredExpressionSynthesizer(@NonNull RuleAnalysis context) {
-			super(context);
-		}
-
-		@Override
-		protected @NonNull Node createOperationCallNode(@NonNull CallExp callExp, @NonNull Operation operation,@NonNull Node @NonNull [] sourceAndArgumentNodes) {
-			Node operationCallNode = super.createOperationCallNode(callExp, operation, sourceAndArgumentNodes);
-			operationCallNode.setRequired();
-			return operationCallNode;
-		}
-
-		@Override
-		protected boolean isRequired() {
-			return true;
 		}
 	}
 
@@ -331,7 +288,7 @@ public class MappingAnalysis extends RuleAnalysis
 			assignmentSorter.addAll(ClassUtil.nullFree(bottomPattern.getAssignment()));
 		}
 		for (@NonNull Assignment assignment : assignmentSorter.getSortedAssignments()) {
-			assignment.accept(expressionSynthesizer);
+			assignment.accept(unconditionalExpressionSynthesizer.getExpressionSynthesizer(assignment.isIsRequired()));
 		}
 	}
 
@@ -370,7 +327,7 @@ public class MappingAnalysis extends RuleAnalysis
 				}
 			}
 			else { */
-			Node resultNode = conditionExpression.accept(expressionSynthesizer);
+			Node resultNode = conditionExpression.accept(unconditionalExpressionSynthesizer);
 			if (resultNode != null)  {
 				Node trueNode = createBooleanLiteralNode(true);
 				createPredicateEdge(resultNode, null, trueNode);
@@ -569,7 +526,7 @@ public class MappingAnalysis extends RuleAnalysis
 		if (bestInitExpression == null) {
 			return null;
 		}
-		Node bestInitNode = bestInitExpression.accept(expressionSynthesizer);
+		Node bestInitNode = bestInitExpression.accept(unconditionalExpressionSynthesizer.getExpressionSynthesizer(variable.isIsRequired()));
 		assert bestInitNode != null;
 		/*		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
@@ -593,7 +550,7 @@ public class MappingAnalysis extends RuleAnalysis
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
 		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableClassDatum)) {
 			Node castNode = createOldNode(variable);
-			expressionSynthesizer.createCastEdge(bestInitNode, variableClassDatum, castNode);
+			unconditionalExpressionSynthesizer.createCastEdge(bestInitNode, variableClassDatum, castNode);
 			bestInitNode = castNode;
 		}
 		//		if (Iterables.isEmpty(bestInitNode.getTypedElements())) {
@@ -603,7 +560,7 @@ public class MappingAnalysis extends RuleAnalysis
 		for (@NonNull OCLExpression initExpression : expressions) {
 			if (initExpression != bestInitExpression) {
 				// FIXME if the extra init is a navigation we can add a navigation to the bestInitNode
-				Node initNode = bestInitExpression.accept(expressionSynthesizer);
+				Node initNode = bestInitExpression.accept(unconditionalExpressionSynthesizer);
 				assert initNode != null;
 				createEqualsEdge(bestInitNode, initNode);
 			}
@@ -728,7 +685,7 @@ public class MappingAnalysis extends RuleAnalysis
 			for (@NonNull NavigationAssignment navigationAssignment : navigationAssignments) {
 				Property navigationProperty = QVTcoreUtil.getTargetProperty(navigationAssignment);
 				if (source2targetProperty == navigationProperty) {		// ??? opposites ??? do they even exist ???
-					Node slotNode = expressionSynthesizer.synthesize(navigationAssignment.getSlotExpression());
+					Node slotNode = unconditionalExpressionSynthesizer.synthesize(navigationAssignment.getSlotExpression());
 					if (slotNode == sourceNode) {
 						return true;
 					}
