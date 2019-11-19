@@ -85,7 +85,7 @@ public class CheckedConditionAnalysis
 			}
 			for (@NonNull Node node : partition.getPartialNodes()) {
 				Role nodeRole = partition.getRole(node);
-				if ((nodeRole != null) && nodeRole.isOld() && node.isUnconditional()) {
+				if ((nodeRole != null) && nodeRole.isOld() && !node.isConditional() && !node.isDependency()) {
 					node.accept(this);
 				}
 			}
@@ -387,7 +387,7 @@ public class CheckedConditionAnalysis
 		List<@NonNull Edge> oldEdges = new ArrayList<>();
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
 			Role edgeRole = partition.getRole(edge);
-			if ((edgeRole != null) && edgeRole.isOld() && edge.isUnconditional()) {
+			if ((edgeRole != null) && edgeRole.isOld() && !edge.isConditional()) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 				Role sourceNodeRole = partition.getRole(sourceNode);
 				if ((sourceNodeRole != null) && sourceNodeRole.isOld()) {

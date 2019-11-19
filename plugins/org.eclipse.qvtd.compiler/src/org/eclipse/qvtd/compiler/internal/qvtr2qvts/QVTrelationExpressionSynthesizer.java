@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -26,18 +28,19 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpressionSynthesizer
 {
-	protected QVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable QVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer) {
-		super(context, unconditionalExpressionSynthesizer);
+	protected QVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable QVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer, @NonNull InitUtility initUtility) {
+		super(context, unconditionalExpressionSynthesizer, initUtility);
 	}
 
 	@Override
-	protected @NonNull ExpressionSynthesizer createConditionalExpressionSynthesizer() {
-		return new QVTrelationExpressionSynthesizer(getRelationAnalysis(), this);
+	protected @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull InitUtility initUtility) {
+		return new QVTrelationExpressionSynthesizer(getRelationAnalysis(), this, initUtility);
 	}
 
 	public @NonNull RelationAnalysis getRelationAnalysis() {
@@ -63,7 +66,7 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		Relation invokedRelation = QVTrelationUtil.getReferredRelation(relationCallExp);
 		RelationAnalysis invokedRelationAnalysis = (RelationAnalysis) context.getTransformationAnalysis().getRuleAnalysis(invokedRelation);
 		//
-		InvocationAnalysis invocationAnalysis = relationAnalysis.getOutgoingInvocationAnalysis(invokedRelationAnalysis, relationCallExp, isWhen);
+		Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode = new HashMap<>();
 		List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(invokedRelation);
 		List<@NonNull OCLExpression> ownedArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(relationCallExp);
 		int size = rootVariables.size();
@@ -73,15 +76,19 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 			OCLExpression ownedArgument = ownedArguments.get(i);
 			Node argumentNode = ownedArgument.accept(this);
 			assert argumentNode != null;
-			invocationAnalysis.addBinding(rootVariable, argumentNode);
+			rootVariable2argumentNode.put(rootVariable, argumentNode);
 		}
+		InvocationAnalysis invocationAnalysis = relationAnalysis.getOutgoingInvocationAnalysis(invokedRelationAnalysis, relationCallExp, isWhen, getRequiredInitUtility(true), rootVariable2argumentNode);
 		//		for ()
 		//		if (referredRule2TraceClass.getStatusInterfaceProperty())
 		invocationAnalysis.getInvokingNode();
 		EObject eContainer = relationCallExp.eContainer();
 		boolean isDirectCall = eContainer instanceof Predicate;
+		//	if (!isDirectCall) {
+		//		getClass();
+		//	}
 		SuccessEdge globalSuccessEdge = invocationAnalysis.getGlobalSuccessEdge(isDirectCall ? Boolean.TRUE : null);
-		return globalSuccessEdge != null ? QVTscheduleUtil.getTargetNode(globalSuccessEdge) : isDirectCall ? null : relationAnalysis.createBooleanLiteralNode(true);
+		return globalSuccessEdge != null ? QVTscheduleUtil.getTargetNode(globalSuccessEdge) : isDirectCall ? null : relationAnalysis.createBooleanLiteralNode(getNonNullUtility(), true);
 	}
 
 	@Override

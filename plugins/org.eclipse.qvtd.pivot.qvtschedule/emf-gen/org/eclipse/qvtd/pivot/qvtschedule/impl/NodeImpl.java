@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -51,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -492,13 +492,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getClassDatum();
-				return basicGetClassDatum();
+			return basicGetClassDatum();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getCluster();
-				return basicGetCluster();
+			return basicGetCluster();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getIncomingConnection();
-				return basicGetIncomingConnection();
+			return basicGetIncomingConnection();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return getIncomingEdges();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
@@ -526,34 +526,34 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setCluster((Cluster)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setIncomingConnection((NodeConnection)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				getIncomingEdges().clear();
-				getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setName((String)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setNodeRole((Role)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				getOutgoingConnections().clear();
-				getOutgoingConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getOutgoingConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				getOutgoingEdges().clear();
-				getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOwningRegion((Region)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -568,31 +568,31 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setCluster((Cluster)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setIncomingConnection((NodeConnection)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				getIncomingEdges().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setName(NAME_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setNodeRole(NODE_ROLE_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				getOutgoingConnections().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				getOutgoingEdges().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOwningRegion((Region)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -653,7 +653,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (cluster != null)
 					msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Cluster.class, msgs);
-				return basicSetCluster((Cluster)otherEnd, msgs);
+			return basicSetCluster((Cluster)otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
@@ -661,7 +661,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningRegion((Region)otherEnd, msgs);
+			return basicSetOwningRegion((Region)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -690,8 +690,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	private boolean isHead = false;
 	private boolean isContained = false;
 	private boolean isThis = false;
-
-	private /*@LazyNonNull*/ Utility utility = null;		// Set by post region build analysis
+	private @NonNull InitUtility initUtility = InitUtility.NOT_KNOWN;
 
 	@Override
 	public void addOriginatingElement(@NonNull Element originatingElement) {
@@ -710,9 +709,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		toGraphHelper.setLabel(this);
 		toGraphHelper.setShapeAndStyle(this);
 		toGraphHelper.setColor(this);
-		if ((utility != null) && !isUnconditional()) {
-			s.setFillColor(getFillColor());
-		}
+		//	if ((utility != null) && !isUnconditional()) {
+		//		s.setFillColor(getFillColor());
+		//	}
 		toGraphHelper.setPenwidth(this);
 		s.appendAttributedNode(nodeName);
 		//		if (isHead) {
@@ -731,14 +730,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @Nullable Utility basicGetUtility() {
-		return utility;
-	}
-
-	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
 		NodeImpl node = (NodeImpl)QVTscheduleFactory.eINSTANCE.create(eClass());
-		node.initialize(nodeRole, region, name, classDatum);
+		node.initialize(nodeRole, region, initUtility, name, classDatum);
 		return node;
 	}
 
@@ -769,7 +763,15 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public @NonNull String getColor() {
 		assert nodeRole != null;
-		return QVTscheduleUtil.getColor(nodeRole);
+		switch (initUtility) {
+			case NON_NULL_CONDITIONAL:
+			case NON_NULL_MATCHED:
+			case NULLABLE_CONDITIONAL:
+			case NULLABLE_MATCHED:
+				return QVTscheduleUtil.getColor(nodeRole);
+			default:
+				return QVTscheduleUtil.ERROR_COLOR;
+		}
 	}
 
 	@Override
@@ -872,46 +874,56 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return null;
 	}
 
-
 	@Override
 	public @Nullable String getShape() {
 		return null;
 	}
 
 	@Override
-	public @Nullable String getStyle() {
+	public final @Nullable String getStyle() {
 		StringBuilder s = new StringBuilder();
 		if (isDataType()) {
 			s.append("rounded");
 		}
-		if (!isMatched()) {
-			if (s.length() > 0) {
-				s.append(",");
+		switch (initUtility) {
+			case NULLABLE_CONDITIONAL:
+			case NULLABLE_MATCHED: {
+				if (s.length() > 0) {
+					s.append(",");
+				}
+				s.append("dashed");
+				break;
 			}
-			s.append("dashed");
+			case NON_NULL_CONDITIONAL:
+			case NON_NULL_MATCHED:
+				break;
+			default:
+				break;
 		}
-		if ((utility != null) && !isUnconditional()) {
+		/*	if ((utility != null) && !isUnconditional()) {
+			assert / *isComposed() ||* / !isMatched();
 			if (s.length() > 0) {
 				s.append(",");
 			}
 			s.append("filled");
-		}
+		} */
 		return "\"" + s.toString() + "\"";
 	}
 
 	@Override
-	public @NonNull Utility getUtility() {
-		return ClassUtil.nonNullState(utility);
+	public @NonNull InitUtility getInitUtility() {
+		return initUtility;
 	}
 
 	@Override
-	public void initialize(@NonNull Role nodeRole, @NonNull Region region, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum) {
+	public void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull InitUtility initUtility, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum) {
 		assert name != null;
 		assert classDatum != null;
 		setNodeRole(nodeRole);
 		setOwningRegion(region);
 		setName(name);
 		setClassDatum(classDatum);
+		this.initUtility = initUtility;
 		this.isDataType = classDatum.isDataType();
 	}
 
@@ -929,6 +941,11 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean isComposed() {
 		return false;
+	}
+
+	@Override
+	public final boolean isConditional() {
+		return initUtility.isConditional();
 	}
 
 	@Override
@@ -954,7 +971,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public boolean isDispatch() {
-		return getUtility() == Utility.DISPATCH;
+		return initUtility == InitUtility.DISPATCH;
 	}
 
 	@Override
@@ -981,11 +998,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	public boolean isLoaded() {
 		assert nodeRole != null;
 		return nodeRole == Role.LOADED;
-	}
-
-	@Override
-	public boolean isMatched() {
-		return false;
 	}
 
 	@Override
@@ -1035,8 +1047,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public boolean isRequired() {
-		throw new UnsupportedOperationException();		// Should be MappingNode
+	public /* final */ boolean isRequired() {
+		return !initUtility.isNullable();
 	}
 
 	@Override
@@ -1063,12 +1075,12 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public boolean isTrace() {
-		return getUtility() == Utility.TRACE;
+		return initUtility == InitUtility.TRACE;
 	}
 
 	@Override
-	public boolean isUnconditional() {
-		return QVTscheduleUtil.isUnconditional(getUtility());
+	public final boolean isUnconditional() {
+		return initUtility.isUnconditional();
 	}
 
 	/*	@Override
@@ -1141,19 +1153,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public void setRequired() {
-		throw new UnsupportedOperationException();		// Should be MappingNode
-	}
-
-	@Override
 	public void setThis() {
 		this.isThis = true;
-	}
-
-	@Override
-	public void setUtility(@NonNull Utility utility) {
-		assert (this.utility == null) || (this.utility == utility);
-		this.utility = utility;
 	}
 
 	@Override

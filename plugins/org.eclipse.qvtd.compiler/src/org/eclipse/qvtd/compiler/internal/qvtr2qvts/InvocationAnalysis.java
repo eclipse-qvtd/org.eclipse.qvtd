@@ -12,7 +12,6 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 
@@ -21,12 +20,17 @@ import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
  */
 public interface InvocationAnalysis
 {
-	void addBinding(@NonNull VariableDeclaration rootVariable, @NonNull Node argumentNode);
 	@NonNull Iterable<@NonNull Node> getArgumentNodes();
 	@Nullable SuccessEdge getGlobalSuccessEdge(@Nullable Boolean successStatus);
-	@NonNull Node getInvokingNode();
 	@NonNull RelationAnalysis getInvokedRelationAnalysis();
+	@NonNull Node getInvokingNode();
 	@NonNull RelationAnalysis getInvokingRelationAnalysis();
+
+	/**
+	 * Return false unless a derived analysis permits an optional match.
+	 * Return false if this invocation is guaranteed to occur. i.e. a not-optional when..
+	 */
+	boolean isOptional();
 
 	/**
 	 * Return true if the argument node is to an output of the invoking rule, false if not, nullif not related to the invocation.

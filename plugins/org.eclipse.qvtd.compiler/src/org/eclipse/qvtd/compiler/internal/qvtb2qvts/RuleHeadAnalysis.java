@@ -151,7 +151,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeOldTargetFromSources() {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
 		for (@NonNull Node targetNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (targetNode.isMatched() && !targetNode.isConstant() && !targetNode.isOperation()) {		// Operations are traversed by derived head group analysis
+			if (targetNode.isUnconditional() && !targetNode.isConstant() && !targetNode.isOperation()) {		// Operations are traversed by derived head group analysis
 				if (targetNode.isLoaded() || targetNode.isChecked()) {
 					Set<@NonNull Node> sources = Sets.newHashSet(targetNode);
 					targetFromSources.put(targetNode, sources);
@@ -159,7 +159,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 						if (edge instanceof NavigationEdge) {
 							if (!edge.isRealized() && !((NavigationEdge)edge).isPartial()) {
 								Node sourceNode = edge.getEdgeSource();
-								if (sourceNode.isMatched() && !sourceNode.isConstant() && !sourceNode.isOperation()) {
+								if (sourceNode.isUnconditional() && !sourceNode.isConstant() && !sourceNode.isOperation()) {
 									if (sourceNode.isLoaded() || sourceNode.isChecked()) {
 										sources.add(sourceNode);
 									}

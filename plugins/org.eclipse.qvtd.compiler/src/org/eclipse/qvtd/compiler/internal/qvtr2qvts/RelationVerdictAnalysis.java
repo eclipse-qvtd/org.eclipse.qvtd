@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.UtilityAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.DispatchClass2TraceProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2DispatchClass;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2MiddleType;
@@ -28,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * A RelationVerdictAnalysis assists in the synthesis of the base region that assigns the false success once all overrides have failed.
@@ -57,17 +57,17 @@ public class RelationVerdictAnalysis extends RegionHelper<@NonNull RuleRegion>
 			Relation2MiddleType relation2TraceInterface = relationAnalysis.getRule2TraceGroup().getBaseRelation2TraceGroup().getRule2TraceInterface();
 			TypedModel traceTypedModel = relationAnalysis.getTraceTypedModel();
 			ClassDatum dispatchedClassDatum = scheduleManager.getClassDatum(traceTypedModel, relation2TraceClass.getMiddleClass());
-			Node dispatchedNode = createPredicatedNode(getName(relation), dispatchedClassDatum, true);
+			Node dispatchedNode = createPredicatedNode(InitUtility.NON_NULL_MATCHED, getName(relation), dispatchedClassDatum);
 			//
 			//	Reached by the appropriate dispatch navigation.
 			//
 			DispatchClass2TraceProperty dispatchClass2traceProperty = relation2dispatchClass.getDispatchClass2TraceProperty(relation);
-			createNavigationEdge(traceNode, dispatchClass2traceProperty.getTraceProperty(), dispatchedNode, false);
+			createNavigationEdge(InitUtility.NON_NULL_MATCHED, traceNode, dispatchClass2traceProperty.getTraceProperty(), dispatchedNode, false);
 			//
 			//	Require the overriding relation to have failed.
 			//
 			Property successProperty = relation2TraceInterface.getGlobalSuccessProperty();
-			createPredicatedSuccess(dispatchedNode, successProperty, false);
+			createPredicatedSuccess(InitUtility.NON_NULL_MATCHED, dispatchedNode, successProperty, false);
 		}
 		for (@NonNull Relation overridingRelation : QVTrelationUtil.getOverrides(relation)) {
 			synthesizeDispatchHierarchy(traceNode, relation2dispatchClass, overridingRelation);
@@ -89,8 +89,6 @@ public class RelationVerdictAnalysis extends RegionHelper<@NonNull RuleRegion>
 		//	Create the trace node assignments to pattern nodes
 		//
 		synthesizeDispatchHierarchy(traceNode, relation2dispatchClass, relation);
-		//
-		UtilityAnalysis.assignUtilities(scheduleManager, region);
 	}
 
 	/**
@@ -100,12 +98,12 @@ public class RelationVerdictAnalysis extends RegionHelper<@NonNull RuleRegion>
 		QVTrelationScheduleManager scheduleManager =(QVTrelationScheduleManager)getScheduleManager();
 		TypedModel traceTypedModel = scheduleManager.getTraceTypedModel();
 		ClassDatum dispatchedClassDatum = scheduleManager.getClassDatum(traceTypedModel, relation2dispatchClass.getMiddleClass());
-		Node traceNode = createPredicatedNode(getName(relation), dispatchedClassDatum, true);
+		Node traceNode = createPredicatedNode(InitUtility.NON_NULL_MATCHED, getName(relation), dispatchedClassDatum);
 		region.getHeadNodes().add(traceNode);
 		traceNode.setHead();
 
 		Property successProperty = relation2dispatchClass.getDispatchSuccessProperty();
-		createRealizedSuccess(traceNode, successProperty, false);
+		createRealizedSuccess(InitUtility.NON_NULL_MATCHED, traceNode, successProperty, false);
 
 		return traceNode;
 	}

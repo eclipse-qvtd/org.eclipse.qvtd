@@ -10,12 +10,16 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * A NonTopWhenOnlyInvocationAnalysis identifies the invocation of a non-top Relation by a when clause in another.
@@ -23,18 +27,19 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
  */
 public class NonTopWhenOnlyInvocationAnalysis extends AbstractWhenInvocationAnalysis
 {
-	public NonTopWhenOnlyInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
-		super(invokingRelationAnalysis, invokedRelationAnalysis);
+	public NonTopWhenOnlyInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
+			@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
 	}
 
 	@Override
 	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, false);
+		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, initUtility, invokedNode, invocationProperty, argumentNode, false);
 	}
 
 	@Override
-	protected @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched) {
-		return invokingRelationAnalysis.createRealizedNode(name, classDatum, isMatched);
+	protected @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum) {
+		return invokingRelationAnalysis.createRealizedNode(initUtility, name, classDatum);
 	}
 
 	@Override

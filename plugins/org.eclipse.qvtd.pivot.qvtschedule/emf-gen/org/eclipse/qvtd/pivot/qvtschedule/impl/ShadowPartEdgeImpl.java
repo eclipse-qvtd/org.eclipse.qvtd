@@ -32,8 +32,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
-
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -144,7 +144,7 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getReferredPart();
-				return basicGetReferredPart();
+			return basicGetReferredPart();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,7 +159,7 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredPart((ShadowPart)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -174,7 +174,7 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredPart((ShadowPart)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -209,8 +209,8 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
-		ShadowPartEdge newEdge = (ShadowPartEdge) super.createEdge(edgeRole, sourceNode, targetNode);
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		ShadowPartEdge newEdge = (ShadowPartEdge) super.createEdge(edgeRole, utility, sourceNode, targetNode);
 		newEdge.setReferredPart(getReferredPart());
 		return newEdge;
 	}

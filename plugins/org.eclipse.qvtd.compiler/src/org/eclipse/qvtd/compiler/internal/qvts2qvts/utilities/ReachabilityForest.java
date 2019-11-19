@@ -145,7 +145,7 @@ public class ReachabilityForest
 									NavigationEdge oppositeEdge = navigationEdge.getOppositeEdge();
 									if (forwardEdges.contains(oppositeEdge)) {
 										boolean isImplicit = QVTscheduleUtil.getReferredProperty(oppositeEdge).isIsImplicit();
-										int nextCost = thisCost + (isImplicit ? INVERSE_NAVIGATION_COST : FORWARD_NAVIGATION_COST);
+										int nextCost = thisCost + (isImplicit ? INVERSE_NAVIGATION_COST : FORWARD_NAVIGATION_COST);		// FIXME FORWARD_NAVIGATION_COST used for some actual opposites
 										if ((targetCost == null) || (nextCost < targetCost)) {
 											node2cost.put(targetNode, nextCost);
 											node2reachingEdge.put(targetNode, oppositeEdge);

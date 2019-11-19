@@ -28,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -138,7 +139,7 @@ public class CastEdgeImpl extends EdgeImpl implements CastEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getReferredClassDatum();
-				return basicGetReferredClassDatum();
+			return basicGetReferredClassDatum();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -153,7 +154,7 @@ public class CastEdgeImpl extends EdgeImpl implements CastEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredClassDatum((ClassDatum)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -168,7 +169,7 @@ public class CastEdgeImpl extends EdgeImpl implements CastEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredClassDatum((ClassDatum)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -208,8 +209,8 @@ public class CastEdgeImpl extends EdgeImpl implements CastEdge {
 	}
 
 	@Override
-	public void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode) {
-		super.initialize(edgeRole, sourceNode, classDatum.getName(), targetNode);
+	public void initialize(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode) {
+		super.initialize(edgeRole, utility, sourceNode, classDatum.getName(), targetNode);
 		setReferredClassDatum(classDatum);
 	}
 

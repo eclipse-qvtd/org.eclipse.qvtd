@@ -149,6 +149,19 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 		return style;
 	}
 
+	protected boolean isConditional(GraphNode graphNode) {
+		boolean isConditional = false;
+		if (graphNode instanceof Node) {
+			Node node = (Node) graphNode;
+			isConditional = node.getInitUtility().isConditional();
+		}
+		else if (graphNode instanceof Edge) {
+			Edge edge = (Edge) graphNode;
+			isConditional = edge.getInitUtility().isConditional();
+		}
+		return isConditional;
+	}
+
 	protected boolean isExpression(GraphNode graphNode) {
 		boolean isExpression = false;
 		if (graphNode instanceof Node) {
@@ -190,7 +203,7 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 	@Override
 	public void setPenwidth(@NonNull GraphNode graphNode) {
 		boolean isHead = isHead(graphNode);
-		boolean isExpression = isExpression(graphNode);
+		boolean isExpression = /*isExpression*/isConditional(graphNode);
 		context.setPenwidth(isHead ? QVTscheduleConstants.HEAD_WIDTH : !isExpression ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH);
 	}
 

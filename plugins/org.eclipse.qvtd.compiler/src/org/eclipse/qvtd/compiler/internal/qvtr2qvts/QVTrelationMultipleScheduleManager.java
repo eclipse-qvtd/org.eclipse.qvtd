@@ -39,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * A QVTrelationMultipleScheduleManager supervises and proviides the shared functionality for a distinct
@@ -87,6 +88,11 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
+	public @NonNull ExpressionSynthesizer createRootExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
+		return new QVTrelationExpressionSynthesizer((RelationAnalysis) ruleAnalysis, null, InitUtility.NON_NULL_MATCHED);
+	}
+
+	@Override
 	public @NonNull Rule2TraceGroup createRule2TraceGroup(@NonNull Transformation2TracePackage transformation2TracePackage, @NonNull Rule rule) {
 		return new Relation2TraceGroup(transformation2TracePackage, (Relation)rule);
 	}
@@ -104,11 +110,6 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull Transformation2TracePackage createTransformation2TracePackage(@NonNull Transformation transformation) {
 		return new RelationalTransformation2TracePackage(this, (RelationalTransformation)transformation);
-	}
-
-	@Override
-	public @NonNull ExpressionSynthesizer createUnconditionalExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
-		return new QVTrelationExpressionSynthesizer((RelationAnalysis) ruleAnalysis, null);
 	}
 
 	protected @NonNull DatumCaches getDatumCaches() {

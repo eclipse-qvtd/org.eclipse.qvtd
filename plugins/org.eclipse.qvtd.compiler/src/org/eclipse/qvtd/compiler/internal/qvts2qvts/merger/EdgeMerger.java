@@ -60,7 +60,7 @@ class EdgeMerger
 		Edge mergedEdge2 = mergedEdge;
 		assert mergedEdge2 == null;
 		for (@NonNull Edge originalEdge : originalEdges) {
-			mergedEdge2 = mergedEdge = originalEdge.createEdge(edgeRole, sourceNodeMerger, targetNodeMerger);
+			mergedEdge2 = mergedEdge = originalEdge.createEdge(edgeRole, originalEdge.getInitUtility(), sourceNodeMerger, targetNodeMerger);
 			break;
 		}
 		if (mergedEdge2 == null) {
@@ -139,9 +139,9 @@ class EdgeMerger
 		return getPrimaryEdge().isOld();		// FIXME check all original edges
 	}
 
-	public boolean isUnconditional() {
-		return getPrimaryEdge().isUnconditional();		// FIXME check all original edges
-	}
+	//	public boolean isUnconditional() {
+	//		return getPrimaryEdge().isUnconditional();		// FIXME check all original edges
+	//	}
 
 	/**
 	 * Return an originalEdge that is the same as mergedEdge or null if none.

@@ -58,7 +58,6 @@ public interface MappingNode extends Node {
 	 * @model default="false" required="true"
 	 * @generated
 	 */
-	@Override
 	boolean isMatched();
 
 	/**

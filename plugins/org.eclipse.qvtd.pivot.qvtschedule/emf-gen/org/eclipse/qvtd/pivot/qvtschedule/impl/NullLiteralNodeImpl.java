@@ -97,11 +97,6 @@ public class NullLiteralNodeImpl extends OperationNodeImpl implements NullLitera
 	}
 
 	@Override
-	public @Nullable String getStyle() {
-		return "rounded";
-	}
-
-	@Override
 	public boolean isNullLiteral() {
 		return true;
 	}

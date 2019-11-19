@@ -10,9 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2MiddleType;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -21,6 +24,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * An AbstractWhenInvocationAnalysis identifies the invocation of one Relation from the when clause of another.
@@ -29,13 +33,14 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 {
 	private @Nullable SuccessEdge globalSuccessEdge = null;
 
-	public AbstractWhenInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
-		super(invokingRelationAnalysis, invokedRelationAnalysis);
+	public AbstractWhenInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
+			@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
 	}
 
 	@Override
 	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(Role.PREDICATED, invokedNode, invocationProperty, argumentNode, false);
+		return invokingRelationAnalysis.createNavigationEdge(Role.PREDICATED, initUtility, invokedNode, invocationProperty, argumentNode, false);
 	}
 
 	@Override
@@ -44,9 +49,10 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 		Relation invokedRelation = invokedRelationAnalysis.getRule();
 		String name = nameGenerator.createWhenInvocationPropertyName(invokedRelation);
 		ClassDatum classDatum = getInvokedClassDatum();
-		boolean isMatched = isMatched();
-		return createInvocationNode(name, classDatum, isMatched);
+		return createInvocationNode(name, classDatum);
 	}
+
+	protected abstract @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum);
 
 	@Override
 	protected void createInvokingTraceEdge(@NonNull Node invokedNode, @NonNull Node invokingTraceNode) {
@@ -57,7 +63,7 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 
 	@Override
 	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(Role.PREDICATED, invokedNode, invocationProperty, argumentNode, false);
+		return invokingRelationAnalysis.createNavigationEdge(Role.PREDICATED, initUtility, invokedNode, invocationProperty, argumentNode, false);
 	}
 
 	@Override
@@ -68,7 +74,7 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 			Relation2MiddleType invokedRelation2InvocationInterface = getInvokedRelation2InvocationInterface();
 			Element2MiddleProperty relation2globalSuccessProperty = invokedRelation2InvocationInterface.getRelation2GlobalSuccessProperty();
 			Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
-			globalSuccessEdge = globalSuccessEdge2 = invokingRelationAnalysis.createPredicatedSuccess(invokingNode, globalSuccessProperty, successStatus);
+			globalSuccessEdge = globalSuccessEdge2 = invokingRelationAnalysis.createPredicatedSuccess(initUtility, invokingNode, globalSuccessProperty, successStatus);
 		}
 		return globalSuccessEdge2;
 	}
@@ -79,14 +85,12 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 	}
 
 	@Override
-	public @NonNull String toString() {
-		return invokingRelationAnalysis.getRule().getName() + "==when==top==>" + invokedRelationAnalysis.getRule().getName();
-	}
-
-	protected abstract @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched);
-
-	@Override
 	public final boolean isWhen() {
 		return true;
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return invokingRelationAnalysis.getRule().getName() + "==when==top==>" + invokedRelationAnalysis.getRule().getName();
 	}
 }

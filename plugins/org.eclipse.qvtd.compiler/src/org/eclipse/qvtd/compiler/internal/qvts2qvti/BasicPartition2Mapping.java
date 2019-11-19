@@ -156,11 +156,11 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				assert targetCost != null;
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 					Role edgeRole = partition.getRole(edge);
-					if ((edgeRole != null) && edgeRole.isOld() && edge.isUnconditional()) {
+					if ((edgeRole != null) && edgeRole.isOld() && !edge.isConditional()) {
 						Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 						Integer sourceCost = reachabilityForest.getCost(sourceNode);
 						assert sourceCost != null;
-						if (sourceCost < targetCost) {
+						if (sourceCost < targetCost) {			// Is targetCost <= sourceCost possible ? ?? an assert error
 							addEdge(edge);
 						}
 					}
@@ -275,13 +275,13 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		public void synthesize(@NonNull Iterable<@NonNull CheckedCondition> checkedConditions) {
 			for (@NonNull Edge edge : edgeSchedule) {
 				assert partition.getRole(edge) != null;;
-				assert edge.isUnconditional();
+				assert !edge.isConditional();
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-				assert sourceNode.isUnconditional();
+				assert !sourceNode.isConditional();
 				Role sourceNodeRole = partition.getRole(sourceNode);
 				if (sourceNodeRole != null) {
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-					assert targetNode.isUnconditional();
+					assert !targetNode.isConditional();
 					Role targetNodeRole = partition.getRole(targetNode);
 					if (targetNodeRole != null) {
 						if (edge.isNavigation()) {
@@ -578,7 +578,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private @NonNull DeclareStatement createDeclareStatement(@NonNull Node node, @NonNull OCLExpression initExpression) {
 		Type variableType = node.getClassDatum().getPrimaryClass();
 		assert variableType != null;
-		boolean isRequired = node.isMatched() && node.isRequired();
+		boolean isRequired = !node.isConditional() && node.isRequired();
 		if (initExpression.isIsRequired()) {
 			isRequired = true;
 		}
@@ -789,7 +789,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						}
 						else {
 							assert !isPartial;
-							assert !isNotify;
+							//	assert !isNotify;
 							NewStatement newStatement = (NewStatement)asVariable;
 							NewStatementPart newStatementPart = helper.createNewStatementPart(property, valueExp);
 							newStatement.getOwnedParts().add(newStatementPart);

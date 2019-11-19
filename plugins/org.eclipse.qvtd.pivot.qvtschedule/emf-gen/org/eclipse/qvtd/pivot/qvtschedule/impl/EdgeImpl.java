@@ -33,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -448,19 +449,19 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (cluster != null)
 					msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Cluster.class, msgs);
-				return basicSetCluster((Cluster)otherEnd, msgs);
+			return basicSetCluster((Cluster)otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningRegion((Region)otherEnd, msgs);
+			return basicSetOwningRegion((Region)otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				if (sourceNode != null)
 					msgs = ((InternalEObject)sourceNode).eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 7, Node.class, msgs);
-				return basicSetSourceNode((Node)otherEnd, msgs);
+			return basicSetSourceNode((Node)otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				if (targetNode != null)
 					msgs = ((InternalEObject)targetNode).eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 3, Node.class, msgs);
-				return basicSetTargetNode((Node)otherEnd, msgs);
+			return basicSetTargetNode((Node)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -509,7 +510,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getCluster();
-				return basicGetCluster();
+			return basicGetCluster();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getEdgeRole();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
@@ -518,10 +519,10 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 				return getOwningRegion();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getSourceNode();
-				return basicGetSourceNode();
+			return basicGetSourceNode();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getTargetNode();
-				return basicGetTargetNode();
+			return basicGetTargetNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -536,22 +537,22 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setCluster((Cluster)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setEdgeRole((Role)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setName((String)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setOwningRegion((Region)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setSourceNode((Node)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setTargetNode((Node)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -566,22 +567,22 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setCluster((Cluster)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setEdgeRole(EDGE_ROLE_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setName(NAME_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setOwningRegion((Region)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setSourceNode((Node)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setTargetNode((Node)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -671,9 +672,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		EdgeImpl edge = (EdgeImpl)QVTscheduleFactory.eINSTANCE.create(eClass());
-		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		edge.initialize(edgeRole, utility, sourceNode, name, targetNode);
 		return edge;
 	}
 
@@ -715,7 +716,15 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public @NonNull String getColor() {
 		assert edgeRole != null;
-		return QVTscheduleUtil.getColor(edgeRole);
+		switch (initUtility) {
+			case NON_NULL_CONDITIONAL:
+			case NON_NULL_MATCHED:
+			case NULLABLE_CONDITIONAL:
+			case NULLABLE_MATCHED:
+				return QVTscheduleUtil.getColor(edgeRole);
+			default:
+				return QVTscheduleUtil.ERROR_COLOR;
+		}
 	}
 
 	@Override
@@ -739,20 +748,47 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	public @NonNull Integer getPenwidth() {
-		return (isCast() || isNavigation()) ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH;
+		switch (initUtility) {
+			case NULLABLE_MATCHED:
+			case NON_NULL_MATCHED:
+				return 2*QVTscheduleConstants.LINE_WIDTH;
+			case NON_NULL_CONDITIONAL:
+			case NULLABLE_CONDITIONAL:
+				return 1*QVTscheduleConstants.LINE_WIDTH;
+			default:
+				return 4*QVTscheduleConstants.LINE_WIDTH;
+		}
+		//		return (isCast() || isNavigation()) ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH;
 	}
 
 	public @Nullable String getStyle() {
-		return isMatched() ? null : "dashed";
+		switch (initUtility) {
+			case NON_NULL_CONDITIONAL:
+			case NON_NULL_MATCHED:
+				return null;
+			case NULLABLE_CONDITIONAL:
+			case NULLABLE_MATCHED:
+				return "dashed";
+			default:
+				return "dotted";
+		}
+	}
+
+	private @NonNull InitUtility initUtility = InitUtility.NOT_KNOWN;
+
+	@Override
+	public @NonNull InitUtility getInitUtility() {
+		return initUtility;
 	}
 
 	@Override
-	public void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	public void initialize(@NonNull Role edgeRole, @NonNull InitUtility initUtility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		setOwningRegion(QVTscheduleUtil.getOwningRegion(sourceNode));
 		setEdgeRole(edgeRole);
 		setName(name);
 		setSource(sourceNode);
 		setTarget(targetNode);
+		this.initUtility = initUtility;
 	}
 
 	@Override
@@ -769,6 +805,11 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public boolean isComputation() {
 		return false;
+	}
+
+	@Override
+	public boolean isConditional() {
+		return initUtility.isConditional();
 	}
 
 	@Override
@@ -791,11 +832,6 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	public boolean isLoaded() {
 		assert edgeRole != null;
 		return edgeRole == Role.LOADED;
-	}
-
-	@Override
-	public final boolean isMatched() {
-		return QVTscheduleUtil.getSourceNode(this).isMatched() && QVTscheduleUtil.getTargetNode(this).isMatched();
 	}
 
 	@Override
@@ -864,8 +900,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
-	public boolean isUnconditional() {
-		return QVTscheduleUtil.getSourceNode(this).isUnconditional() && QVTscheduleUtil.getTargetNode(this).isUnconditional();
+	public final boolean isUnconditional() {
+		return initUtility.isUnconditional();
 	}
 
 	protected void mergeRole(@NonNull Role edgeRole) {

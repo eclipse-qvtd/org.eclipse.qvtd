@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -142,7 +143,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getReferredType();
-				return basicGetReferredType();
+			return basicGetReferredType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,7 +158,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredType((Type)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -172,7 +173,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredType((Type)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -207,8 +208,8 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
-		OperationSelfEdge newEdge = (OperationSelfEdge) super.createEdge(edgeRole, sourceNode, targetNode);
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		OperationSelfEdge newEdge = (OperationSelfEdge) super.createEdge(edgeRole, utility, sourceNode, targetNode);
 		newEdge.setReferredType(getReferredType());
 		return newEdge;
 	}

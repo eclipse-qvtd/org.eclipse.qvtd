@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
@@ -110,11 +109,12 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
+	@Deprecated /* @deprecated use initUtility */
 	@Override
-	public boolean isMatched() {
-		return matched;
+	public final boolean isMatched() {
+		return !getInitUtility().isConditional();
 	}
 
 	/**
@@ -154,7 +154,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setMatched((Boolean)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -169,7 +169,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setMatched(MATCHED_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -188,7 +188,6 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 		return super.eIsSet(featureID);
 	}
 
-	private boolean isRequired = true;
 	private final @NonNull List<@NonNull Element> originatingElements = new ArrayList<>();
 	private @Nullable VariableDeclaration originatingVariable = null;
 
@@ -197,7 +196,6 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 		assert getOwningRegion() != null; //instanceof MappingRegion;
 		assert originatingElements.size() > 0;					// Should have used setOriginatingElement
 		assert !(originatingElement instanceof Variable);		// Should have used setOriginatingVariable
-		assert isRequired == !(originatingElement instanceof TypedElement) || ((TypedElement)originatingElement).isIsRequired();
 		if (!originatingElements.contains(originatingElement)) {
 			originatingElements.add(originatingElement);
 		}
@@ -216,12 +214,10 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
 		MappingNodeImpl node = (MappingNodeImpl)super.createNode(nodeRole, region);
-		node.isRequired = isRequired;
 		node.originatingVariable = originatingVariable;
 		for (@NonNull Element typedElement : originatingElements) {
 			node.originatingElements.add(typedElement);
 		}
-		node.setMatched(matched);
 		return node;
 	}
 
@@ -237,17 +233,11 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	}
 
 	@Override
-	public boolean isRequired() {
-		return isRequired;
-	}
-
-	@Override
 	public void setOriginatingElement(@NonNull Element originatingElement) {
 		assert getOwningRegion() != null; //instanceof MappingRegion;
 		assert originatingElements.size() == 0;					// Should have used addOriginatingElement
 		assert !(originatingElement instanceof Variable);		// Should have used setOriginatingVariable
 		originatingElements.add(originatingElement);
-		isRequired = !(originatingElement instanceof TypedElement) || ((TypedElement)originatingElement).isIsRequired();
 	}
 
 	@Override
@@ -257,12 +247,10 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 			assert originatingVariable == variable;
 			assert originatingElements.size() == 1;
 			assert originatingElements.contains(variable);
-			assert isRequired == variable.isIsRequired();
 		}
 		else if (originatingElements.size() == 0) {			// Normal initialization of variable
 			originatingVariable = variable;
 			originatingElements.add(variable);
-			isRequired = variable.isIsRequired();
 		}
 		else {												// Binding of a variable to its initializer
 			assert !originatingElements.contains(variable);
@@ -270,11 +258,6 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 			originatingVariable = variable;
 			originatingElements.add(variable);
 		}
-	}
-
-	@Override
-	public void setRequired() {
-		isRequired = true;
 	}
 
 	@Override

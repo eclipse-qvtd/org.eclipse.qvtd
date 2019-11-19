@@ -96,6 +96,11 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
+	public @NonNull ExpressionSynthesizer createRootExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
+		return multipleScheduleManager.createRootExpressionSynthesizer(ruleAnalysis);
+	}
+
+	@Override
 	public @NonNull RelationAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule) {
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
 		ruleRegion.setOwningScheduleModel(scheduleModel);
@@ -122,11 +127,6 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	@Override
 	public @NonNull Transformation2TracePackage createTransformation2TracePackage(@NonNull Transformation transformation) {
 		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @NonNull ExpressionSynthesizer createUnconditionalExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
-		return multipleScheduleManager.createUnconditionalExpressionSynthesizer(ruleAnalysis);
 	}
 
 	public @NonNull String getDirectedName(@NonNull Transformation asTransformation) {

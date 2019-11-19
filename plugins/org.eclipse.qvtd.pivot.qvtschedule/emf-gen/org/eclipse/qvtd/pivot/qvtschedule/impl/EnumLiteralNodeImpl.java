@@ -143,7 +143,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getEnumValue();
-				return basicGetEnumValue();
+			return basicGetEnumValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,7 +158,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setEnumValue((EnumerationLiteral)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -173,7 +173,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setEnumValue((EnumerationLiteral)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -217,11 +217,6 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 	@Override
 	public @Nullable String getShape() {
 		return null;		// rectangle
-	}
-
-	@Override
-	public @Nullable String getStyle() {
-		return "rounded";
 	}
 
 	@Override

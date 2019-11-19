@@ -52,7 +52,7 @@ class SplitterAnalysis
 		//
 		List<@NonNull Node> headNodes = new ArrayList<>();
 		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
-			if (headNode.isMatched()) {			// Ignore extra heads
+			if (!headNode.isConditional()) {			// Ignore extra heads
 				headNodes.add(headNode);
 			}
 		}

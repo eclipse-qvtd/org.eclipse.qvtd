@@ -289,7 +289,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 					else {
 						oldPrimaryNavigableEdges.add(navigationEdge);
 					}
-					if (!isRealized(navigationEdge) && navigationEdge.isMatched()) {  // FIXME is this totally obsolete
+					if (!isRealized(navigationEdge) && !navigationEdge.isConditional()) {  // FIXME is this totally obsolete
 						assert !navigationEdge.isExpression();
 						assert !navigationEdge.isComputation();
 					}

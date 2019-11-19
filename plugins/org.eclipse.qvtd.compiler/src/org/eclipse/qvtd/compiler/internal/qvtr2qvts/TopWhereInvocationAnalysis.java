@@ -10,10 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * A TopWhereInvocationAnalysis identifies the invocation of a top Relation by a where clause in another.
@@ -23,8 +27,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
  */
 public class TopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 {
-	public TopWhereInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
-		super(invokingRelationAnalysis, invokedRelationAnalysis);
+	public TopWhereInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
+			@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
 	}
 
 	@Override
@@ -40,14 +45,6 @@ public class TopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 	@Override
 	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
 		throw new UnsupportedOperationException();	// Cannot happen synthesizeInvocationNodes is empty.
-	}
-
-	/**
-	 * Return false since a where match is always optional.
-	 */
-	@Override
-	protected boolean isMatched() {
-		return false;
 	}
 
 	@Override

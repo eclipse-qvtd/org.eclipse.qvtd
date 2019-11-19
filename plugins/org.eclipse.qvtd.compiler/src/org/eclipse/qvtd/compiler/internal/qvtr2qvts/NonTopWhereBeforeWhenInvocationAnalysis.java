@@ -10,13 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * A NonTopWhereOnlyInvocationAnalysis identifies the invocation of a non-top Relation by a where clause in another.
@@ -24,13 +28,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
  */
 public class NonTopWhereBeforeWhenInvocationAnalysis extends AbstractInvocationAnalysis
 {
-	public NonTopWhereBeforeWhenInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
-		super(invokingRelationAnalysis, invokedRelationAnalysis);
+	public NonTopWhereBeforeWhenInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
+			@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
 	}
 
 	@Override
 	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, false);
+		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, initUtility, invokedNode, invocationProperty, argumentNode, false);
 	}
 
 	@Override
@@ -39,12 +44,12 @@ public class NonTopWhereBeforeWhenInvocationAnalysis extends AbstractInvocationA
 		Relation invokedRelation = invokedRelationAnalysis.getRule();
 		String name = nameGenerator.createWhereInvocationPropertyName(invokedRelation);
 		ClassDatum classDatum = getInvokedClassDatum();
-		return invokingRelationAnalysis.createRealizedNode(name, classDatum, true);
+		return invokingRelationAnalysis.createRealizedNode(initUtility, name, classDatum);
 	}
 
 	@Override
 	protected @NonNull NavigableEdge createOutputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, invokedNode, invocationProperty, argumentNode, false);
+		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, initUtility, invokedNode, invocationProperty, argumentNode, false);
 	}
 
 	/*	@Override

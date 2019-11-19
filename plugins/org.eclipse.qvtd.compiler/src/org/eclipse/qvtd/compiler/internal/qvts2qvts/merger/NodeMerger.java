@@ -35,7 +35,7 @@ class NodeMerger
 	protected final @NonNull RegionMerger regionMerger;
 	protected final @NonNull List<@NonNull Node> originalNodes = new ArrayList<>();
 	private @NonNull Role nodeRole;
-	private Node.@NonNull Utility nodeUtility;
+	//	private Node.@NonNull Utility nodeUtility;
 	private @NonNull Map<@NonNull NodeMerger, @NonNull List<@NonNull EdgeMerger>> sourceNodeMerger2edgeMergers = new HashMap<>();
 	private @NonNull Map<@NonNull NodeMerger, @NonNull List<@NonNull EdgeMerger>> targetNodeMerger2edgeMergers = new HashMap<>();
 	private @Nullable Node mergedNode = null;
@@ -44,7 +44,7 @@ class NodeMerger
 		this.regionMerger = regionMerger;
 		originalNodes.add(originalNode);
 		nodeRole = QVTscheduleUtil.getNodeRole(originalNode);
-		nodeUtility = originalNode.getUtility();
+		//	nodeUtility = originalNode.getUtility();
 		regionMerger.mapOriginalNode(originalNode, this);
 	}
 
@@ -64,7 +64,7 @@ class NodeMerger
 		assert !originalNodes.contains(originalNode);
 		originalNodes.add(originalNode);
 		nodeRole = QVTscheduleUtil.mergeToMoreKnownPhase(nodeRole, QVTscheduleUtil.getNodeRole(originalNode));
-		nodeUtility = QVTscheduleUtil.mergeToStrongerUtility(nodeUtility, originalNode.getUtility());
+		//	nodeUtility = QVTscheduleUtil.mergeToStrongerUtility(nodeUtility, originalNode.getUtility());
 		regionMerger.mapOriginalNode(originalNode, this);
 	}
 
@@ -77,7 +77,6 @@ class NodeMerger
 				mergedNode2.setHead();
 				mergedRegion.getHeadNodes().add(mergedNode2);
 			}
-			mergedNode2.setUtility(nodeUtility);
 			break;
 		}
 		if (mergedNode2 == null) {
@@ -174,6 +173,10 @@ class NodeMerger
 		return originalNodes.get(0);
 	}
 
+	//	public boolean isConditional() {
+	//		return getPrimaryNode().isConditional();		// FIXME check all original nodes
+	//	}
+
 	public boolean isConstant() {
 		return getPrimaryNode().isConstant();		// FIXME check all original nodes
 	}
@@ -200,10 +203,6 @@ class NodeMerger
 
 	public boolean isRequired() {
 		return getPrimaryNode().isRequired();		// FIXME check all original nodes
-	}
-
-	public boolean isUnconditional() {
-		return getPrimaryNode().isUnconditional();		// FIXME check all original nodes
 	}
 
 	public void removeIncomingEdgeMerger(@NonNull EdgeMerger edgeMerger, @NonNull NodeMerger sourceNodeMerger) {

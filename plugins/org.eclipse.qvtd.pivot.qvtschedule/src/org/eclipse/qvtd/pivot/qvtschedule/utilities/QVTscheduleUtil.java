@@ -17,19 +17,13 @@ import java.util.function.BinaryOperator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
-import org.eclipse.ocl.pivot.IfExp;
-import org.eclipse.ocl.pivot.LoopExp;
-import org.eclipse.ocl.pivot.MapLiteralPart;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowPart;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -67,7 +61,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 
 public class QVTscheduleUtil extends QVTscheduleConstants
 {
@@ -734,30 +727,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return false;
 	}
 
-	public static boolean isMatched(@NonNull Element element) {
-		if (element instanceof MapLiteralPart) {
-			MapLiteralPart mapLiteralPart = (MapLiteralPart)element;
-			OCLExpression key = QVTbaseUtil.getOwnedKey(mapLiteralPart);
-			OCLExpression value = QVTbaseUtil.getOwnedValue(mapLiteralPart);
-			return isMatched(key) && isMatched(value);
-		}
-		else if (element instanceof TypedElement) {
-			TypedElement typedElement = (TypedElement)element;
-			Type type = typedElement.getType();
-			if (type instanceof CollectionType) {
-				//			IntegerValue lowerValue = ((CollectionType)type).getLowerValue();
-				//			if (lowerValue.signum() > 0) {
-				assert typedElement.isIsRequired();
-				//			}
-			}
-			else if (!typedElement.isIsRequired()) {
-				return false;
-			}
-			return isUnconditional(typedElement);
-		}
-		throw new UnsupportedOperationException();
-	}
-
 	/*	public static boolean isRealizedIncludes(@NonNull Edge edge) {	// FIXME includes should be a pseudo-navigation edge
 		if (!edge.isRealized()) {
 			return false;
@@ -767,30 +736,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 		return "«includes»".equals(edge.getName()) || "«includesAll»".equals(edge.getName());
 	} */
-
-	public static boolean isUnconditional(@NonNull TypedElement typedElement) {
-		EObject eContainer = typedElement.eContainer();
-		if (eContainer instanceof IfExp) {
-			IfExp ifExp = (IfExp)eContainer;
-			if ((typedElement == ifExp.getOwnedThen()) || (typedElement == ifExp.getOwnedElse())) {
-				return false;
-			}
-		}
-		else if (eContainer instanceof LoopExp) {
-			LoopExp loopExp = (LoopExp)eContainer;
-			if (typedElement == loopExp.getOwnedBody()) {
-				return false;
-			}
-		}
-		if (eContainer instanceof TypedElement) {
-			return isUnconditional((TypedElement) eContainer);
-		}
-		return true;
-	}
-
-	public static boolean isUnconditional(@Nullable Utility utility) {
-		return (utility == Utility.DISPATCH) || (utility == Utility.TRACE) || (utility == Utility.STRONGLY_MATCHED) || (utility == Utility.WEAKLY_MATCHED);
-	}
 
 	public static @NonNull Role mergeToLessKnownPhase(Role firstRole, Role secondRole) {
 		if (firstRole == Role.REALIZED) {
@@ -866,7 +811,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		throw new UnsupportedOperationException();
 	}
 
-	public static Node.@NonNull Utility mergeToStrongerUtility(Node.@NonNull Utility nodeUtility1, Node.@NonNull Utility nodeUtility2) {
+	/*	public static Node.@NonNull Utility mergeToStrongerUtility(Node.@NonNull Utility nodeUtility1, Node.@NonNull Utility nodeUtility2) {
 		if (nodeUtility1 == Node.Utility.DISPATCH) {
 			assert (nodeUtility2 == Node.Utility.DISPATCH);
 			return Node.Utility.DISPATCH;
@@ -890,7 +835,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		else {
 			return Node.Utility.DEAD;
 		}
-	}
+	} */
 
 	public static @NonNull BinaryOperator<@NonNull String> stringJoin(@NonNull String delimiter) {
 		return (a, b) -> String.valueOf(a) + delimiter + String.valueOf(b);

@@ -40,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -291,12 +292,12 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				if (resolve) return getOppositeEdge();
-				return basicGetOppositeEdge();
+			return basicGetOppositeEdge();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return isPartial();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getReferredProperty();
-				return basicGetReferredProperty();
+			return basicGetReferredProperty();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				return isSecondary();
 		}
@@ -313,16 +314,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOppositeEdge((NavigationEdge)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setPartial((Boolean)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredProperty((Property)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setSecondary((Boolean)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -337,16 +338,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOppositeEdge((NavigationEdge)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setPartial(PARTIAL_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredProperty((Property)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setSecondary(SECONDARY_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -468,9 +469,9 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	}
 
 	@Override
-	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
-		NavigationEdge edge = (NavigationEdge)super.createEdge(edgeRole, sourceNode, targetNode);
-		edge.initializeProperty(QVTscheduleUtil.getReferredProperty(this), isPartial());
+	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		NavigationEdge edge = (NavigationEdge)super.createEdge(edgeRole, utility, sourceNode, targetNode);
+		edge.initializeProperty(QVTscheduleUtil.getReferredProperty(this), utility, isPartial());
 		return edge;
 	}
 
@@ -562,7 +563,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	}
 
 	@Override
-	public void initializeProperty(@NonNull Property property, boolean isPartial) {
+	public void initializeProperty(@NonNull Property property, @NonNull InitUtility utility, boolean isPartial) {
 		setReferredProperty(property);
 		setPartial(isPartial);
 		Property target2sourceProperty = property.getOpposite();
@@ -578,7 +579,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 					Node sourceNode2 = sourceNode;
 					assert (edgeRole2 != null) && (sourceNode2 != null);
 					NavigationEdge reverseEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
-					reverseEdge.initialize(edgeRole2, targetNode2, target2sourceProperty.getName(), sourceNode2);
+					reverseEdge.initialize(edgeRole2, utility, targetNode2, target2sourceProperty.getName(), sourceNode2);
 					reverseEdge.setReferredProperty(target2sourceProperty);
 					reverseEdge.setPartial(false /*isPartial()*/);			// FIXWE assert false not isPartial()
 					initializeOpposite(reverseEdge);

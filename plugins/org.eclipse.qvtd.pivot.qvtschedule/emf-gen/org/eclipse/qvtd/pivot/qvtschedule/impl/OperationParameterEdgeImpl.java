@@ -33,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -189,7 +190,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getReferredParameter();
-				return basicGetReferredParameter();
+			return basicGetReferredParameter();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return getParameterIndex();
 		}
@@ -206,10 +207,10 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredParameter((Parameter)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setParameterIndex((Integer)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -224,10 +225,10 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredParameter((Parameter)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setParameterIndex(PARAMETER_INDEX_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -264,8 +265,8 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
-		OperationParameterEdge newEdge = (OperationParameterEdge) super.createEdge(edgeRole, sourceNode, targetNode);
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		OperationParameterEdge newEdge = (OperationParameterEdge) super.createEdge(edgeRole, utility, sourceNode, targetNode);
 		newEdge.setParameterIndex(getParameterIndex());
 		newEdge.setReferredParameter(getReferredParameter());
 		return newEdge;

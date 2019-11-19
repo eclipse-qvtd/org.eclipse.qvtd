@@ -57,11 +57,11 @@ public abstract class HeadNodeGroup implements Nameable
 
 	private boolean accumulateReachableTargets(@NonNull Deque<@NonNull Node> workList) {
 		Node sourceNode = workList.removeFirst();
-		assert sourceNode.isMatched();
+		assert sourceNode.isUnconditional();
 		boolean gotOne = false;
 		for (@NonNull Edge source2targetEdge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 			Node targetNode = QVTscheduleUtil.getTargetNode(source2targetEdge);
-			if (targetNode.isMatched() && canBeSameGroup(sourceNode, source2targetEdge) && !uniqueNodes.contains(targetNode)) {
+			if (targetNode.isUnconditional() && canBeSameGroup(sourceNode, source2targetEdge) && !uniqueNodes.contains(targetNode)) {
 				if (source2targetEdge.isCast()) {				// Can happen when analyzing traced heads
 					uniqueNodes.add(targetNode);
 					workList.add(targetNode);
@@ -83,7 +83,7 @@ public abstract class HeadNodeGroup implements Nameable
 					for (@NonNull Edge argumentEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 						if ((argumentEdge != source2targetEdge) && argumentEdge.isComputation()) {
 							Node argumentNode = QVTscheduleUtil.getSourceNode(argumentEdge);
-							if (argumentNode.isMatched()) {
+							if (argumentNode.isUnconditional()) {
 								if (!argumentNode.isConstant() && !uniqueNodes.contains(argumentNode)) {
 									allArgumentsReachable = false;
 									break;
@@ -103,7 +103,7 @@ public abstract class HeadNodeGroup implements Nameable
 			if (target2sourceEdge instanceof KeyPartEdge) {		// FIXME KeyPartEdge is bidirectional
 				Node targetNode = QVTscheduleUtil.getSourceNode(target2sourceEdge);
 				uniqueNodes.add(targetNode);
-				if (targetNode.isMatched()) {
+				if (targetNode.isUnconditional()) {
 					workList.add(targetNode);
 				}
 				gotOne = true;
@@ -112,7 +112,7 @@ public abstract class HeadNodeGroup implements Nameable
 				Node targetNode = QVTscheduleUtil.getSourceNode(target2sourceEdge);
 				if (isNonTopWhen(targetNode)) {
 					uniqueNodes.add(targetNode);
-					if (targetNode.isMatched()) {
+					if (targetNode.isUnconditional()) {
 						workList.add(targetNode);
 					}
 					gotOne = true;

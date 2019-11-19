@@ -108,8 +108,6 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 					/*				if (!(region instanceof DispatchRegion) && !(region instanceof VerdictRegion)) {
 						RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, (MappingRegion)region);
 						successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);		// FIXME This creates a premature success in a speculation
-						Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
-						successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
 					} */
 				}
 			}
@@ -132,8 +130,6 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 					/*				if (!(region instanceof DispatchRegion) && !(region instanceof VerdictRegion)) {
 						RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, (MappingRegion)region);
 						successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);		// FIXME This creates a premature success in a speculation
-						Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
-						successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
 					} */
 				}
 			}

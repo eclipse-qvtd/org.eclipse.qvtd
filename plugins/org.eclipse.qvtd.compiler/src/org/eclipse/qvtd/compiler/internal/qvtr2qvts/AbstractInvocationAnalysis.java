@@ -28,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * An InvocationAnalysis identifies the invocation of one Relation from another.
@@ -39,20 +40,18 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	protected final @NonNull RelationAnalysis invokingRelationAnalysis;
 	protected final @NonNull RelationAnalysis invokedRelationAnalysis;
 	protected final @NonNull QVTrelationScheduleManager scheduleManager;
-	protected final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode = new HashMap<>();
+	protected final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode;
+	protected final @NonNull InitUtility initUtility;
 	private @Nullable Node invokingNode = null;
 	private final @NonNull Map<@NonNull Node, @NonNull Boolean> argumentNode2isOutput = new HashMap<>();
 
-	public AbstractInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis) {
+	public AbstractInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis, @NonNull InitUtility initUtility,
+			@NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		this.invokingRelationAnalysis = invokingRelationAnalysis;
 		this.invokedRelationAnalysis = invokedRelationAnalysis;
 		this.scheduleManager = invokedRelationAnalysis.getScheduleManager();
-	}
-
-	@Override
-	public void addBinding(@NonNull VariableDeclaration rootVariable, @NonNull Node argumentNode) {
-		Node oldNode = rootVariable2argumentNode.put(rootVariable, argumentNode);
-		assert oldNode == null;
+		this.rootVariable2argumentNode = rootVariable2argumentNode;
+		this.initUtility = initUtility;
 	}
 
 	/**
@@ -90,7 +89,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		Invocation2TraceProperty invokingInvocation2TraceProperty = invokingRule2TraceClass.getInvocation2TraceProperty(this);
 		Property invocationTraceProperty = invokingInvocation2TraceProperty.getTraceProperty();
 		boolean isPartial = scheduleManager.computeIsPartial(invokedNode, invocationTraceProperty);
-		invokingRelationAnalysis.createRealizedNavigationEdge(invokingTraceNode, invocationTraceProperty, invokedNode, isPartial);
+		invokingRelationAnalysis.createRealizedNavigationEdge(initUtility, invokingTraceNode, invocationTraceProperty, invokedNode, isPartial);
 	}
 
 	/**
@@ -163,10 +162,11 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	}
 
 	/**
-	 * Return true unless a derived analysis permits an optional match.
+	 * Return false since all where and many when matches are optional.
 	 */
-	protected boolean isMatched() {
-		return true;
+	@Override
+	public final boolean isOptional() {
+		return initUtility.isNullable();
 	}
 
 	@Override
@@ -179,6 +179,11 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		assert invokingNode != null;
 		return invokingNode.isRealized();
 	}
+
+	//	@Override
+	//	public boolean isRequired() {
+	//		return false;
+	//	}
 
 	@Override
 	public boolean needsInvocationTraceProperty() {

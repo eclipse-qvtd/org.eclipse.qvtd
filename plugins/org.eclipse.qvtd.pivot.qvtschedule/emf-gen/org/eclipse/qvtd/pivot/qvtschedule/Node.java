@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -248,7 +249,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	/**
 	 * The prioritized immutable utility of each node.
 	 *
-	 * FIXME Change STRONGLY_MATCHED/WEAKLY_MATCHED to EXACTLY_ONE_MATCH/ZEROO_OR_ONE_MATCH/ONE_OR_MANY_MATCHES/SOME_OR_MANY__MATCH
+	 * FIXME Change STRONGLY_MATCHED/WEAKLY_MATCHED to EXACTLY_ONE_MATCH/ZERO_OR_ONE_MATCH/ONE_OR_MANY_MATCHES/SOME_OR_MANY__MATCH
 	 * so that the optionality of Node.isMatched() is redundnt wrt getUtility().isXXXX.
 	 */
 	public enum Utility {
@@ -256,10 +257,10 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 		DISPATCH,
 		/** The predicated/realized trace node.*/
 		TRACE,
-		/** Reachable by to-1 navigation from a head node, or by to-? to an ExplicitNull.*/
+		/** Reachable by to-1 navigation from the (?? a) trace node, or by to-? to an ExplicitNull.*/
 		STRONGLY_MATCHED,
 		/** Unconditionally used in a computation or navigation, but not a dispatcher/trace node,
-		 * not reachable by to-1 navigation from a head node, not an ExplicitNull reachable by to-?.*/
+		 * not reachable by to-1 navigation from the (?? a) trace node, not an ExplicitNull reachable by to-?.*/
 		WEAKLY_MATCHED,
 		//		UNCONDITIONALLY_PREDICATING,	// else always computable as part of a predicate
 		//		CONDITIONALLY_PREDICATING,		// else selectively computable as part of a predicate depending on if conditions
@@ -271,7 +272,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 		/** A LoadingRegion element.*/
 		COMPOSED,
 		/** Never used */
-		DEAD;
+		DEAD
 	}
 
 	/**
@@ -290,7 +291,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * Return a variable that shares the value of the element from which this node originated. May be null.
 	 */
 	@Nullable VariableDeclaration basicGetOriginatingVariable();
-	@Nullable Utility basicGetUtility();
 
 	/**
 	 * Create a new nodeRole node in region with the saem name, type etc as this node.
@@ -363,9 +363,9 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	//	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
 	@Nullable String getShape();
 	@Nullable String getStyle();
-	@NonNull Utility getUtility();
+	//	@NonNull Utility getUtility();
 
-	void initialize(@NonNull Role nodeRole, @NonNull Region region, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum);
+	void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull InitUtility utility, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum);
 
 	/**
 	 * Return true if this node is checked; i.e. isPredicated() or isSpeculated().
@@ -378,6 +378,11 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	boolean isClass();
 
 	boolean isComposed();
+
+	/**
+	 * Return true if this node is a conditional part of a pattern.
+	 */
+	boolean isConditional();
 
 	/**
 	 * Return true if this node is a constant that can be computed at compile time.
@@ -437,15 +442,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * isLoaded() is exclusive to isConstant()/isPredicated()/isSpeculation()/isSpeculated()/isRealized()
 	 */
 	boolean isLoaded();
-
-	/**
-	 * Return true if after execution this node exactly corresponds to a non-null object or to a non-null value or to an explicit null.
-	 * Conversely return false if this node is optionally null or part of a conditional expression evaluation.
-	 * Collections are never null-valued, not even empty collections.
-	 *
-	 * *deprecated try to use isUnconditional or getUtility
-	 */
-	boolean isMatched();
 
 	/**
 	 * Return true if this node is for a speculation/realized element.
@@ -535,8 +531,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	//	boolean isTrue();
 
 	/**
-	 * Return true if this node is unconditionally used in a computation of navigation. i.e it does not form
-	 * part of a loop or a then/else arm.
+	 * Return true if this node is an unconditional part of a pattern.
 	 */
 	boolean isUnconditional();
 
@@ -560,11 +555,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	void setOriginatingVariable(@NonNull VariableDeclaration variable);
 
 	/**
-	 * Register variable as non-null.
-	 */
-	void setRequired();
-
-	/**
 	 * Set isStrict true if this node is the realized node for a unique mapping invocation.
 	 */
 	void setStrict(boolean isStrict);
@@ -574,5 +564,5 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 */
 	void setThis();
 
-	void setUtility(@NonNull Utility utility);
+	@NonNull InitUtility getInitUtility();
 } // Node

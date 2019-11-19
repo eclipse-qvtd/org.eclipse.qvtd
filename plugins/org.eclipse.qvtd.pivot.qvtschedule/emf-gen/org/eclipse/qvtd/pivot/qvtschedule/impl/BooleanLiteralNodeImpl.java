@@ -24,7 +24,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
-
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -32,7 +31,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -152,7 +150,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setBooleanValue((Boolean)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -167,7 +165,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setBooleanValue(BOOLEAN_VALUE_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -215,11 +213,6 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	}
 
 	@Override
-	public @Nullable String getStyle() {
-		return "rounded";
-	}
-
-	@Override
 	public boolean isPrimitive() {
 		return true;
 	}
@@ -228,12 +221,6 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	public void setIncomingConnection(NodeConnection newIncomingConnection) {
 		assert (incomingConnection == null) || (newIncomingConnection == null);
 		super.setIncomingConnection(newIncomingConnection);
-	}
-
-	@Override
-	public void setUtility(@NonNull Utility utility) {
-		assert QVTscheduleUtil.isUnconditional(utility);
-		super.setUtility(utility);
 	}
 
 	@Override

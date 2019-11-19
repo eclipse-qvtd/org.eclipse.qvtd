@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,5 +66,5 @@ public interface CastEdge extends Edge
 	 */
 	void setReferredClassDatum(ClassDatum value);
 
-	void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode);
+	void initialize(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode);
 } // CastEdge

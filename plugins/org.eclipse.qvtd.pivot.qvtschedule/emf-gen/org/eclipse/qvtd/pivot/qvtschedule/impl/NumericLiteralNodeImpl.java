@@ -148,7 +148,7 @@ public class NumericLiteralNodeImpl extends OperationNodeImpl implements Numeric
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setNumericValue((Number)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -163,7 +163,7 @@ public class NumericLiteralNodeImpl extends OperationNodeImpl implements Numeric
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setNumericValue(NUMERIC_VALUE_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -208,11 +208,6 @@ public class NumericLiteralNodeImpl extends OperationNodeImpl implements Numeric
 	@Override
 	public @Nullable String getShape() {
 		return null;		// rectangle
-	}
-
-	@Override
-	public @Nullable String getStyle() {
-		return "rounded";
 	}
 
 	@Override

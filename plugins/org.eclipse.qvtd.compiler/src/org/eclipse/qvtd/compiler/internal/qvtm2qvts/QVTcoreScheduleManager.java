@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 public class QVTcoreScheduleManager extends BasicScheduleManager
@@ -53,6 +54,11 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 	@Override
 	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
 		return new QVTcoreDomainUsageAnalysis(environmentFactory, problemHandler, transformation);
+	}
+
+	@Override
+	public @NonNull ExpressionSynthesizer createRootExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
+		return new QVTcoreExpressionSynthesizer(ruleAnalysis, null, InitUtility.NON_NULL_MATCHED);
 	}
 
 	@Override
@@ -87,11 +93,6 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 				return null;
 			}
 		};
-	}
-
-	@Override
-	public @NonNull ExpressionSynthesizer createUnconditionalExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
-		return new QVTcoreExpressionSynthesizer(ruleAnalysis, null);
 	}
 
 	@Override

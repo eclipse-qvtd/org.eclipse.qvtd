@@ -181,7 +181,7 @@ public class SpeculatedPartitionFactory extends AbstractSimplePartitionFactory
 		}*/
 
 	protected void resolveTraceNodes(@NonNull BasicPartition partition, @NonNull Node traceNode) {
-		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
+		assert !traceNode.isConditional() && traceNode.isClass() && traceNode.isPattern();
 		addNode(partition, traceNode, Role.PREDICATED);
 		if (scheduleManager.useActivators()) {
 			Node localSuccessNode = mappingPartitioner.basicGetLocalSuccessNode(traceNode);

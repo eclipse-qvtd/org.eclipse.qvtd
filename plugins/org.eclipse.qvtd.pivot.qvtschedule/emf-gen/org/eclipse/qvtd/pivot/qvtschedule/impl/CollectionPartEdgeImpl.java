@@ -33,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -142,7 +143,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getReferredPart();
-				return basicGetReferredPart();
+			return basicGetReferredPart();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,7 +158,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredPart((CollectionLiteralPart)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -172,7 +173,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredPart((CollectionLiteralPart)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -207,8 +208,8 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
-		CollectionPartEdge newEdge = (CollectionPartEdge) super.createEdge(edgeRole, sourceNode, targetNode);
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		CollectionPartEdge newEdge = (CollectionPartEdge) super.createEdge(edgeRole, utility, sourceNode, targetNode);
 		newEdge.setReferredPart(getReferredPart());
 		return newEdge;
 	}

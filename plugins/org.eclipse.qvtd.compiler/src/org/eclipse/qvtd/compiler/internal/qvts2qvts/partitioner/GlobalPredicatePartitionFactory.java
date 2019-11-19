@@ -257,7 +257,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 
 	protected void resolvePredicatedMiddleNodes(@NonNull BasicPartition partition) {
 		for (@NonNull Node node : mappingPartitioner.getPredicatedMiddleNodes()) {
-			if (!partition.hasNode(node) && node.isMatched()) { // && mappingPartitioner.isCyclic(node)) {
+			if (!partition.hasNode(node) && !node.isConditional()) { // && mappingPartitioner.isCyclic(node)) {
 				Role nodeRole = QVTscheduleUtil.getNodeRole(node);
 				//				if (node.isPattern() && node.isClass()) {
 				//					nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);

@@ -195,7 +195,7 @@ class CompoundGroup extends AbstractGroup
 				if (edge.isNavigation()) {
 					NavigationEdge navigationEdge = (NavigationEdge)edge;
 					assert edge.getEdgeSource() == nonOverlapNode;
-					if (!edge.isRealized() && edge.isMatched()) {
+					if (!edge.isRealized() && edge.isUnconditional()) {
 						Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
 						Property opposite = property.getOpposite();
 						if ((opposite != null) && opposite.isIsMany()) {

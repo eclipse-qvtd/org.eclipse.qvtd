@@ -37,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Lists;
@@ -63,7 +64,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull Rule rule;
-	protected final @NonNull ExpressionSynthesizer unconditionalExpressionSynthesizer;
+	protected final @NonNull ExpressionSynthesizer rootExpressionSynthesizer;
 
 	private @Nullable Rule2TraceGroup relation2traceGroup = null;
 
@@ -76,7 +77,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		super(transformationAnalysis.getScheduleManager(), ruleRegion);
 		this.rule = QVTscheduleUtil.getReferredRule(ruleRegion);
 		this.transformationAnalysis = transformationAnalysis;
-		this.unconditionalExpressionSynthesizer = scheduleManager.createUnconditionalExpressionSynthesizer(this);
+		this.rootExpressionSynthesizer = scheduleManager.createRootExpressionSynthesizer(this);
 		//		assert !rule.isIsAbstract() == scheduleManager.getScheduleModel().getOwnedMappingRegions().contains(ruleRegion);
 	}
 
@@ -92,7 +93,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		if (dependencyHeadNodes == null) {
 			dependencyHeadNodes = new ArrayList<>();
 		}
-		Node dependencyHeadNode = createDependencyNode("«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatum);
+		Node dependencyHeadNode = createDependencyNode(InitUtility.DEPENDENCY, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatum);
 		dependencyHeadNode.setHead();
 		dependencyHeadNodes.add(dependencyHeadNode);
 		return dependencyHeadNode;
@@ -176,11 +177,11 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 				//
 				boolean allMatched = false;				// True if all outgoing edges of sourceNode are matched.
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-				if (sourceNode.isMatched()) {
+				if (!sourceNode.isConditional()) {
 					allMatched = true;
 					for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 						Node targetNode = QVTscheduleUtil.getTargetNode(outgoingEdge);
-						if (!targetNode.isMatched()) {
+						if (targetNode.isConditional()) {
 							allMatched = false;
 							break;
 						}
@@ -207,8 +208,8 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 					rewriteCastEdgeAsMergedMultiCompleteClass(sourceNode, allCompleteClasses);
 				}
 				else {
-					assert !edge.isMatched();
-					unconditionalExpressionSynthesizer.getExpressionSynthesizer(false).rewriteCastEdgeAsOclAsType((CastEdge)edge);
+					assert !edge.isUnconditional();
+					rootExpressionSynthesizer.getExpressionSynthesizer(/*Node.Utility.CONDITIONAL*/edge.getInitUtility()).rewriteCastEdgeAsOclAsType((CastEdge)edge);
 				}
 				assert edge.eContainer() == null;
 				assert edge.getSourceNode() == null;
@@ -238,7 +239,9 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		ClassDatum mergedClassDatum = scheduleManager.getClassDatum(typedModel, newCompleteClasses);
 		sourceNode.setClassDatum(mergedClassDatum);
 		for (@NonNull Edge sourceOutgoingEdge : Lists.newArrayList(QVTscheduleUtil.getOutgoingEdges(sourceNode))) {
-			CompilerUtil.migrateCastEdgeTargetContents((CastEdge)sourceOutgoingEdge, sourceNode);
+			if (sourceOutgoingEdge instanceof CastEdge) {
+				CompilerUtil.migrateCastEdgeTargetContents((CastEdge)sourceOutgoingEdge, sourceNode);
+			}
 		}
 	}
 

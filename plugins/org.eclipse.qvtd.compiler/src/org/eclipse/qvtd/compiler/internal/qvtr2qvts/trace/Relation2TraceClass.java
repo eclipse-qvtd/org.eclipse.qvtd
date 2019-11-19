@@ -138,10 +138,10 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 			if (node.isThis()) {
 				;						// Do not trace this
 			}
-			else if (node.isPattern() && node.isMatched()) {
+			else if (node.isPattern() && !node.isConditional()) {
 				createVariableDeclaration2TraceProperty(node, rootVariables, allHeadGroupNodes, manyTracesPerHead);
 			}
-			else if (/*node.isPattern() &&*/ node.isMatched() && !node.isConstant()) {
+			else if (/*node.isPattern() &&*/ !node.isConditional() && !node.isConstant()) {
 				createVariableDeclaration2TraceProperty(node, rootVariables, allHeadGroupNodes, manyTracesPerHead);
 			}
 		}
@@ -442,7 +442,9 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 		}
 		Relation2TraceGroup invokedRule2TraceGroup = invocationAnalysis.getInvokedRelationAnalysis().getRule2TraceGroup().getBaseRelation2TraceGroup();
 		String nameHint = relation2traceGroup.getNameGenerator().createInvocationTraceProperty(invokedRule2TraceGroup.getRule());
-		Invocation2TraceProperty relation2traceProperty = new Invocation2TraceProperty(this, nameHint, invokedRule2TraceGroup.getInvocationClass(), invocationAnalysis.isWhen() && !invocationAnalysis.isTop());
+		boolean isRequired = !invocationAnalysis.isOptional();
+		org.eclipse.ocl.pivot.Class invocationClass = invokedRule2TraceGroup.getInvocationClass();
+		Invocation2TraceProperty relation2traceProperty = new Invocation2TraceProperty(this, nameHint, invocationClass, isRequired);
 		Invocation2TraceProperty oldRelation2traceProperty = invocationAnalysis2relation2traceProperty2.put(invocationAnalysis, relation2traceProperty);
 		assert oldRelation2traceProperty == null;
 		return relation2traceProperty;

@@ -25,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
@@ -60,7 +61,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 	public @NonNull Node createComposingNode(@NonNull String name, @NonNull ClassDatum classDatum) {
 		Role nodeRole = Role.LOADED;
 		ComposedNode node = QVTscheduleFactory.eINSTANCE.createComposedNode();
-		node.initialize(nodeRole, region, name, classDatum);
+		node.initialize(nodeRole, region, InitUtility.COMPOSED, name, classDatum);
 		return node;
 	}
 
@@ -117,7 +118,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 			if (introducedNode == null) {
 				introducedNode = createComposingNode("«" + elementType.getName() + "-null»", childrenClassDatum);
 				property2node.put(null, introducedNode);
-				createNavigationEdge(getNullNode(), parent2childProperty, introducedNode, false);
+				createNavigationEdge(InitUtility.COMPOSED, getNullNode(), parent2childProperty, introducedNode, false);
 			}
 		}
 		else if (containingClassDatum != null) {								// Non-root oclContainer ownership
@@ -131,7 +132,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 				introducedNode = createComposingNode("«" + elementType.getName() + "-oclContents»", childrenClassDatum);
 				type2node.put(containingClassDatum, introducedNode);
 				Node containerNode = createComposingNode("«" + containingClassDatum.getName() + "-oclContainer»", containingClassDatum);
-				createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
+				createNavigationEdge(InitUtility.COMPOSED, containerNode, parent2childProperty, introducedNode, false);
 			}
 		}
 		else {																			// Knonw distinctive containment
@@ -148,7 +149,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 				assert owningClass != null;
 				containingClassDatum = scheduleManager.getClassDatum(typedModel, owningClass);
 				Node containerNode = createComposingNode("«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatum);
-				createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
+				createNavigationEdge(InitUtility.COMPOSED, containerNode, parent2childProperty, introducedNode, false);
 			}
 		}
 		return introducedNode;
@@ -157,7 +158,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 	protected @NonNull Node getNullNode() {
 		Node nullNode2 = nullNode;
 		if (nullNode2 == null) {
-			nullNode = nullNode2 = createNullLiteralNode(true, null);
+			nullNode = nullNode2 = createNullLiteralNode(InitUtility.COMPOSED, null);
 		}
 		return nullNode2;
 	}

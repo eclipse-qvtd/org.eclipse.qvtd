@@ -141,7 +141,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getReferredOperation();
-				return basicGetReferredOperation();
+			return basicGetReferredOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,7 +156,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredOperation((Operation)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -171,7 +171,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredOperation((Operation)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}

@@ -149,7 +149,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setStringValue((String)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -164,7 +164,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setStringValue(STRING_VALUE_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -209,11 +209,6 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@Override
 	public @Nullable String getShape() {
 		return null;		// rectangle
-	}
-
-	@Override
-	public @Nullable String getStyle() {
-		return "rounded";
 	}
 
 	@Override

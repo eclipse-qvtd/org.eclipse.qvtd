@@ -101,7 +101,7 @@ public class TracedHeadAnalysis extends HeadAnalysis
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeTracedTargetFromSources() {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
 		for (@NonNull Node targetNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (targetNode.isMatched() && !targetNode.isConstant()) {
+			if (!targetNode.isConditional() && !targetNode.isConstant()) {
 				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(targetNode);
 				TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 				if (!typedModel.isIsTrace()) {		// when/where invocation nodes are not part of the multi-sided trace
@@ -112,7 +112,7 @@ public class TracedHeadAnalysis extends HeadAnalysis
 					}
 					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 						Node sourceNode = edge.getEdgeSource();
-						if (sourceNode.isMatched() && !sourceNode.isConstant()) {
+						if (!sourceNode.isConditional() && !sourceNode.isConstant()) {
 							if (edge instanceof NavigationEdge) {
 								if (!((NavigationEdge)edge).isPartial()) {
 									sources.add(sourceNode);

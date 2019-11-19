@@ -279,6 +279,19 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 	@Override
 	protected @NonNull String getColor(@NonNull GraphElement element) {
+		InitUtility initUtility = null;
+		if (element instanceof Node) {
+			initUtility = ((Node)element).getInitUtility();
+		}
+		else if (element instanceof Edge) {
+			initUtility = ((Edge)element).getInitUtility();
+		}
+		else {
+			initUtility = InitUtility.NOT_KNOWN;
+		}
+		if (initUtility == InitUtility.NOT_KNOWN) {
+			return QVTscheduleUtil.ERROR_COLOR;
+		}
 		Role role = getGraphRole(element);
 		if (role != null) {
 			return QVTscheduleUtil.getColor(role);
@@ -307,24 +320,6 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 			return "  true  \nBoolean";
 		}
 		return super.getLabel(graphNode);
-	}
-
-	@Override
-	protected @Nullable String getShape(@NonNull GraphNode graphNode) {
-		Role role = getGraphRole(graphNode);
-		if ((role == Role.CONSTANT_SUCCESS_FALSE) || (role == Role.CONSTANT_SUCCESS_TRUE)) {
-			return null;		// rectangle
-		}
-		return super.getShape(graphNode);
-	}
-
-	@Override
-	protected @Nullable String getStyle(@NonNull GraphNode graphNode) {
-		Role role = getGraphRole(graphNode);
-		if ((role == Role.CONSTANT_SUCCESS_FALSE) || (role == Role.CONSTANT_SUCCESS_TRUE)) {
-			return "rounded";
-		}
-		return super.getStyle(graphNode);
 	}
 
 	@Override

@@ -15,11 +15,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 public abstract class AbstractQVTrelationExpressionSynthesizer extends ExpressionSynthesizer implements QVTrelationVisitor<@Nullable Node>
 {
-	protected AbstractQVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable AbstractQVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer) {
-		super(context, unconditionalExpressionSynthesizer);
+	protected AbstractQVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable AbstractQVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer, @NonNull InitUtility initUtility) {
+		super(context, unconditionalExpressionSynthesizer, initUtility);
 	}
 
 	@Override

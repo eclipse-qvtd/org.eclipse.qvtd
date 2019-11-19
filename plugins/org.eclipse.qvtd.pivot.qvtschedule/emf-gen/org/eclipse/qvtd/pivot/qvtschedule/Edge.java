@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -218,7 +219,7 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	/**
 	 * Create an edgeRole edge from sourceNode to targetNode with the same name as this edge.
 	 */
-	@NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode);
+	@NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility initUtility, @NonNull Node sourceNode, @NonNull Node targetNode);
 
 	void destroy();
 
@@ -262,7 +263,7 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 */
 	@Nullable String getLabel();
 
-	void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
+	void initialize(@NonNull Role edgeRole, @NonNull InitUtility initUtility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
 
 	/**
 	 * Return true if this edge is for an oclAsType cast.
@@ -278,6 +279,11 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * Return true if this node is part of the computation functionality of the region.
 	 */
 	boolean isComputation();
+
+	/**
+	 * Return true is this edge is a conditional part of a pattern.
+	 */
+	boolean isConditional();
 
 	/**
 	 * Return true if this edge conveys a compile-time constant.
@@ -299,15 +305,6 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * Return true if this edge conveys a value that is loadable from an input model.
 	 */
 	boolean isLoaded();
-
-	/**
-	 * Return true if after execution this edge exactly corresponds to a relationship between its matching ends.
-	 * Conversely return false if this edge is a conditional execution path or its ends my be optional nulls.
-	 * Collections are never null-valued, not even empty collections.
-	 *
-	 * *deprecated try to use isUnconditional or getUtility
-	 */
-	boolean isMatched();
 
 	/**
 	 * Return true if this edge is for a speculation/realized relationship.
@@ -370,12 +367,15 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	boolean isSuccess();
 
 	/**
-	 * Return true is this edge is used as part of an unconditional navigation or computation.
-	 * i.e. it is not part of a loop or dependent upon if conditions.
+	 * Return true if after execution this edge exactly corresponds to a relationship between its matching ends.
+	 * Conversely return false if this edge is a conditional execution path or its ends my be optional nulls.
+	 * Collections are never null-valued, not even empty collections.
 	 */
 	boolean isUnconditional();
 
 	void setSource(@NonNull Node sourceNode);
 
 	void setTarget(@NonNull Node targetNode);
+
+	@NonNull InitUtility getInitUtility();
 } // Edge
