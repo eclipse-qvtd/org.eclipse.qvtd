@@ -63,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -480,6 +481,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Region getOwningRegion(@NonNull Node node) {
 		return ClassUtil.nonNullState(node.getOwningRegion());
+	}
+
+	public static RootRegion getOwningRootRegion(@NonNull RootPartition rootPartition) {
+		return ClassUtil.nonNullState(rootPartition.getOwningRootRegion());
 	}
 
 	public static @NonNull ScheduleModel getOwningScheduleModel(@NonNull RootRegion rootRegion) {

@@ -209,5 +209,6 @@ public interface ScheduleManager
 	 */
 	boolean useActivators();
 	void writeDebugGraphs(@NonNull Graphable graphable, @Nullable String context);
-	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
+	//	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
+	void writeDebugGraphs(@NonNull String context, @NonNull RootRegion rootRegion, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
 }

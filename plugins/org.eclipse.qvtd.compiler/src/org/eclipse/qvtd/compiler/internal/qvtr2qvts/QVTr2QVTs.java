@@ -686,7 +686,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			directedScheduleManager.writeDebugGraphs(ruleRegion, null);
 		}
 		directedScheduleManager.analyzeOriginalContents();
-		directedScheduleManager.writeDebugGraphs("0-init", true, true, false);
+		//	directedScheduleManager.writeDebugGraphs("0-init", true, true, false);   -- nothing much to draw
 		//
 		//	Debug code to confirm that every output object is traceable to some input object.
 		//

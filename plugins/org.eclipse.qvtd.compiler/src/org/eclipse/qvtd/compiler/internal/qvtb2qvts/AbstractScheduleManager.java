@@ -1042,24 +1042,31 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return s.toString();
 	}
 
+	//	@Override
+	//	public void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
+	//		if (doDotGraphs || doYedGraphs) {
+	//			for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {	// FIXME too soon ??
+	//				writeDebugGraphs(context, rootRegion, doNodesGraph, doRegionGraph, doCallGraph);
+	//			}
+	//		}
+	//	}
+
 	@Override
-	public void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
+	public void writeDebugGraphs(@NonNull String context, @NonNull RootRegion rootRegion, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
 		if (doDotGraphs || doYedGraphs) {
-			for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {
-				if (doNodesGraph) {
-					writeDebugGraphs(rootRegion, context);
-				}
-				if (doRegionGraph) {
-					String suffix = "-r-" + context;
-					writeRegionDOTfile(rootRegion, suffix);
-					writeRegionGraphMLfile(rootRegion, suffix);
-				}
-				/*	if (doCallGraph) {
+			if (doNodesGraph) {
+				writeDebugGraphs(rootRegion, context);
+			}
+			if (doRegionGraph) {
+				String suffix = "-r-" + context;
+				writeRegionDOTfile(rootRegion, suffix);
+				writeRegionGraphMLfile(rootRegion, suffix);
+			}
+			/*	if (doCallGraph) {
 					String suffix = "-c-" + context;
 					writeCallDOTfile(rootRegion, suffix);
 					writeCallGraphMLfile(rootRegion, suffix);
 				} */
-			}
 		}
 	}
 

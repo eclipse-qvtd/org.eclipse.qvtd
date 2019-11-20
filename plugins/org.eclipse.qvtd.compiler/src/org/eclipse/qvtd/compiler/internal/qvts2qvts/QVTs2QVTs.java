@@ -522,7 +522,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		// Remove the used connections whose consumers are necessarily after their last producer.
 		//
 		pruneRedundantConnections(connectionManager, rootRegion);
-		directedScheduleManager.writeDebugGraphs("8-pruned", true, true, false);
+		directedScheduleManager.writeDebugGraphs("8-pruned", rootRegion, true, true, false);
 
 		/*	boolean noLateConsumerMerge = scheduleManager.isNoLateConsumerMerge();
 		if (!noLateConsumerMerge) {
@@ -633,12 +633,13 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			}
 		}
 		UtilityAnalysis.assignUtilities(directedScheduleManager, loadingRegion);
-		directedScheduleManager.writeDebugGraphs("4-pre-partition", true, true, false);
+		RootRegion rootRegion4 = loadingRegion.getRootRegion();
+		directedScheduleManager.writeDebugGraphs("4-pre-partition", rootRegion4, true, true, false);
 		directedScheduleManager.throwCompilerChainExceptionForErrors();
 		//
 		Set<@NonNull NodeConnection> explicitlyUniqueConnections = Sets.newHashSet(connectionManager.analyzeStrictness());
 		List<@NonNull Region> explicitlyUniqueRegions = new ArrayList<>();
-		for (@NonNull RootRegion rootRegion : rootRegions) {
+		for (@NonNull RootRegion rootRegion : root Regions) {
 			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
 				boolean isImplicitStrict = true;
 				for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
@@ -663,13 +664,13 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			}
 		}
 		//		getRegionAnalysis(loadingRegion).setPartitions(Collections.singletonList(new NonPartition(loadingRegion));
-		directedScheduleManager.writeDebugGraphs("5-post-partition", true, true, false);
+		directedScheduleManager.writeDebugGraphs("5-post-partition", rootRegion4, true, true, false);
 		directedScheduleManager.throwCompilerChainExceptionForErrors();
 		//
 		for (@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis : partitionedTransformationAnalyses) {
 			schedule(partitionedTransformationAnalysis);
 		}
-		directedScheduleManager.writeDebugGraphs("9-final", true, true, false);
+		directedScheduleManager.writeDebugGraphs("9-final", rootRegion4, true, true, false);
 		return rootRegions;
 	}
 }

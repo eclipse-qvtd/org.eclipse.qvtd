@@ -30,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -474,6 +475,7 @@ public class ScheduleAnalysis
 	}
 
 	public void schedule(@NonNull RootPartition rootPartition, @NonNull List<@NonNull Concurrency> partitionSchedule) {
+		RootRegion rootRegion = QVTscheduleUtil.getOwningRootRegion(rootPartition);
 		int passNumber = 0;
 		int cycleDepth = 0;
 		int cycleStart = 0;
@@ -512,7 +514,7 @@ public class ScheduleAnalysis
 			passNumber++;
 		}
 		assert cycleDepth == 0;
-		scheduleManager.writeDebugGraphs("6-pass", false, true, false);
+		scheduleManager.writeDebugGraphs("6-pass", rootRegion, false, true, false);
 		/**
 		 * Ensure connection responds to all sources.
 		 */
@@ -537,7 +539,7 @@ public class ScheduleAnalysis
 			}
 			changedConnections.clear();
 		}
-		scheduleManager.writeDebugGraphs("7-passes", false, true, false);
+		scheduleManager.writeDebugGraphs("7-passes", rootPartition.getOwningRootRegion(), false, true, false);
 		for (@NonNull Connection connection : getConnections()) {
 			checkPassNumbers(connection);
 		}
