@@ -43,7 +43,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
@@ -51,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -603,74 +603,61 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	}
 
-	public @NonNull Iterable<@NonNull RootRegion> transform(@NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions) throws CompilerChainException {
+	public @NonNull RootRegion transform(@NonNull Iterable<@NonNull RuleRegion> activeRegions) throws CompilerChainException {
+		RootRegion rootRegion = directedScheduleManager.getRootRegion();
 		ConnectionManager connectionManager = directedScheduleManager.getConnectionManager();
 		LoadingRegion loadingRegion = loadingRegionAnalysis.getRegion();
-		Iterable<@NonNull RootRegion> rootRegions = rootRegion2activeRegions.keySet();
 		List<@NonNull PartitionedTransformationAnalysis> partitionedTransformationAnalyses = new ArrayList<>();
-		for (@NonNull RootRegion rootRegion : rootRegions) {
-			assert rootRegion.getActiveRegions().isEmpty();
-			Iterable<? extends @NonNull MappingRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
-			assert activeRegions != null;
-			List<@NonNull Region> activeRegions2 = new ArrayList<>();
-			activeRegions2.add(loadingRegion);
-			Iterables.addAll(activeRegions2, activeRegions);
-			Collections.sort(activeRegions2, NameUtil.NAMEABLE_COMPARATOR);
-			rootRegion.getActiveRegions().addAll(activeRegions2);
-			//			RootPartition rootPartition = partition(scheduleManager, rootRegion, activeRegions2);
-			//			rootPartitions.add(rootPartition);
-			//
-			//	Create a connection between each consumer and the corresponding introducer/producer.
-			//
-			StringBuilder s = QVTscheduleConstants.CONNECTION_CREATION.isActive() ? new StringBuilder() : null;
-			for (@NonNull Region region : activeRegions2) {
-				if (!(region instanceof LoadingRegion)) {
-					connectionManager.createIncomingConnections(s, rootRegion, region);
-				}
-			}
-			if (s != null) {
-				QVTscheduleConstants.CONNECTION_CREATION.println(s.toString());;
+		assert rootRegion.getActiveRegions().isEmpty();
+		List<@NonNull Region> activeRegions3 = new ArrayList<>();
+		activeRegions3.add(loadingRegion);
+		Iterables.addAll(activeRegions3, activeRegions);
+		Collections.sort(activeRegions3, NameUtil.NAMEABLE_COMPARATOR);
+		rootRegion.getActiveRegions().addAll(activeRegions3);
+		//
+		//	Create a connection between each consumer and the corresponding introducer/producer.
+		//
+		StringBuilder s = QVTscheduleConstants.CONNECTION_CREATION.isActive() ? new StringBuilder() : null;
+		for (@NonNull Region region : activeRegions3) {
+			if (!(region instanceof LoadingRegion)) {
+				connectionManager.createIncomingConnections(s, rootRegion, region);
 			}
 		}
+		if (s != null) {
+			QVTscheduleConstants.CONNECTION_CREATION.println(s.toString());;
+		}
 		UtilityAnalysis.assignUtilities(directedScheduleManager, loadingRegion);
-		RootRegion rootRegion4 = loadingRegion.getRootRegion();
-		directedScheduleManager.writeDebugGraphs("4-pre-partition", rootRegion4, true, true, false);
+		directedScheduleManager.writeDebugGraphs("4-pre-partition", rootRegion, true, true, false);
 		directedScheduleManager.throwCompilerChainExceptionForErrors();
 		//
 		Set<@NonNull NodeConnection> explicitlyUniqueConnections = Sets.newHashSet(connectionManager.analyzeStrictness());
 		List<@NonNull Region> explicitlyUniqueRegions = new ArrayList<>();
-		for (@NonNull RootRegion rootRegion : root Regions) {
-			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
-				boolean isImplicitStrict = true;
-				for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
-					NodeConnection incomingConnection = headNode.getIncomingConnection();
-					if (explicitlyUniqueConnections.contains(incomingConnection)) {
-						isImplicitStrict = false;
-						break;
-					}
-				}
-				if (!isImplicitStrict) {
-					explicitlyUniqueRegions.add(region);
+		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
+			boolean isImplicitStrict = true;
+			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
+				NodeConnection incomingConnection = headNode.getIncomingConnection();
+				if (explicitlyUniqueConnections.contains(incomingConnection)) {
+					isImplicitStrict = false;
+					break;
 				}
 			}
-		}
-		//
-		for (@NonNull RootRegion rootRegion : rootRegions) {
-			Iterable<@NonNull Region> activeRegions2 = QVTscheduleUtil.getActiveRegions(rootRegion);
-			PartitionedTransformationAnalysis partitionedTransformationAnalysis = partition(directedScheduleManager, rootRegion, activeRegions2);
-			partitionedTransformationAnalyses.add(partitionedTransformationAnalysis);
-			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
-				connectionManager.createPartitionConnections(rootRegion, region);
+			if (!isImplicitStrict) {
+				explicitlyUniqueRegions.add(region);
 			}
 		}
-		//		getRegionAnalysis(loadingRegion).setPartitions(Collections.singletonList(new NonPartition(loadingRegion));
-		directedScheduleManager.writeDebugGraphs("5-post-partition", rootRegion4, true, true, false);
+		Iterable<@NonNull Region> activeRegions2 = QVTscheduleUtil.getActiveRegions(rootRegion);
+		PartitionedTransformationAnalysis partitionedTransformationAnalysis = partition(directedScheduleManager, rootRegion, activeRegions2);
+		partitionedTransformationAnalyses.add(partitionedTransformationAnalysis);
+		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
+			connectionManager.createPartitionConnections(rootRegion, region);
+		}
+		directedScheduleManager.writeDebugGraphs("5-post-partition", rootRegion, true, true, false);
 		directedScheduleManager.throwCompilerChainExceptionForErrors();
 		//
-		for (@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis : partitionedTransformationAnalyses) {
-			schedule(partitionedTransformationAnalysis);
+		for (@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis2 : partitionedTransformationAnalyses) {
+			schedule(partitionedTransformationAnalysis2);
 		}
-		directedScheduleManager.writeDebugGraphs("9-final", rootRegion4, true, true, false);
-		return rootRegions;
+		directedScheduleManager.writeDebugGraphs("9-final", rootRegion, true, true, false);
+		return rootRegion;
 	}
 }

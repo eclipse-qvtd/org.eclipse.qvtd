@@ -11,9 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -23,10 +20,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalys
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
-import com.google.common.collect.Lists;
 
 public class QVTm2QVTs extends AbstractQVTb2QVTs
 {
@@ -38,19 +32,17 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 		this.typedModelsConfiguration = typedModelsConfiguration;
 	}
 
-	public @NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {
+	public @NonNull Iterable<@NonNull RuleRegion> transform() throws IOException {
 		scheduleManager.getDomainUsageAnalysis().analyzeTransformation();
 		scheduleManager.analyzeSourceModel(problemHandler);
-		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager.getOrderedTransformationAnalyses();
-		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
-			transformationAnalysis.analyzeMappingRegions();
-		}
+		AbstractTransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis();
+		transformationAnalysis.analyzeMappingRegions();
 		scheduleManager.analyzeOriginalContents();		// FIXME Should treat LoadingRegion uniformly
-		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> rootRegion2activeRegions = scheduleManager.analyzeTransformations();
-		for (@NonNull RuleRegion ruleRegion : scheduleManager.gatherRuleRegions()) {
+		scheduleManager.analyzeTransformation();
+		for (@NonNull RuleRegion ruleRegion : transformationAnalysis.gatherRuleRegions()) {
 			scheduleManager.writeDebugGraphs(ruleRegion, null);
 		}
-		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> rootRegion2mergedRegions = new HashMap<>();
+		//s	Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> rootRegion2mergedRegions = new HashMap<>();
 		/*		if (!scheduleManager.isNoEarlyMerge()) {
 			for (@NonNull RootRegion rootRegion : rootRegion2activeRegions.keySet()) {
 				Iterable<@NonNull RuleRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
@@ -60,12 +52,7 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 			}
 		}
 		else { */
-		for (@NonNull RootRegion rootRegion : rootRegion2activeRegions.keySet()) {
-			Iterable<@NonNull RuleRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
-			assert activeRegions != null;
-			rootRegion2mergedRegions.put(rootRegion, Lists.newArrayList(activeRegions));
-		}
+		return transformationAnalysis.gatherRuleRegions();
 		//		}
-		return rootRegion2mergedRegions;
 	}
 }

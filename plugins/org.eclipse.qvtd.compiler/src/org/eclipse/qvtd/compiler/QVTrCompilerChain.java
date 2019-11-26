@@ -70,10 +70,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -146,26 +145,33 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				multipleScheduleManager.getDomainUsageAnalysis().analyzeTransformation();
 				throwCompilerChainExceptionForErrors();
 				try {
+					// FIXME the following lines should go obsolete
+					List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, qvtsResource);
+					if (missingOperationCallSources != null) {
+						QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + qvtsResource.getURI() + "'");
+					}
+					boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, qvtrResource);
+					if (missingTraceArtefacts) {
+						QVTruntimeUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + qvtsResource.getURI() + "'");
+					}
+					Map<@NonNull String, @Nullable String> traceOptions = compilerChain.basicGetOption(TRACE_STEP, TRACE_OPTIONS_KEY);
+					String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
 					for (@NonNull TypedModelsConfiguration typedModelsConfiguration : typedModelsConfigurations) {
 						QVTrelationDirectedScheduleManager directedScheduleManager = multipleScheduleManager.createDirectedScheduleManager(typedModelsConfiguration);
 						QVTr2QVTs qvtr2qvts = new QVTr2QVTs(directedScheduleManager, this);
-						directedScheduleManager.addTransformation(asTransformation);
 						//
 						//	QVTr to QVTs and trace
 						//
-						Map<@NonNull String, @Nullable String> traceOptions = compilerChain.basicGetOption(TRACE_STEP, TRACE_OPTIONS_KEY);
-						String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
 						//				if (traceNsURI != null) {
 						//					t.setTraceNsURI(traceNsURI);
 						//				}
-						Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions = qvtr2qvts.transform(qvtrResource, qvtsResource, traceNsURI, traceResource);
-						multipleScheduleManager.addDirectedRootRegions(directedScheduleManager, rootRegion2activeRegions.keySet());
+						Iterable<@NonNull RuleRegion> activeRegions = qvtr2qvts.transform(qvtrResource, qvtsResource, traceNsURI, traceResource);
 						//
 						//	QVTs optimization
 						//
 						String directedName = directedScheduleManager.getDirectedName(asTransformation);
 						QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, directedScheduleManager, directedName);
-						qvts2qvts.transform(rootRegion2activeRegions);
+						qvts2qvts.transform(activeRegions);
 					}
 					throwCompilerChainExceptionForErrors();
 					saveResource(qvtsResource);

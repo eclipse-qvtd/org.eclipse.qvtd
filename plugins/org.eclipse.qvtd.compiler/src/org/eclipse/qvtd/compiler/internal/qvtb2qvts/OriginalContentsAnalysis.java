@@ -35,8 +35,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-import com.google.common.collect.Iterables;
-
 /**
  * An OriginalContentsAnalysis provides an original, prior to partitioning, analysis of many (all) regions to facilitate lookup of all producers consumers of particular types and properties.
  *
@@ -93,9 +91,7 @@ public class OriginalContentsAnalysis
 	public OriginalContentsAnalysis(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
 		this.oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
-		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager.getTransformationAnalyses();
-		assert Iterables.size(transformationAnalyses) == 1;
-		this.transformationAnalysis = transformationAnalyses.iterator().next();
+		this.transformationAnalysis = scheduleManager.getTransformationAnalysis();
 	}
 
 	private void addNewEdge(@NonNull RuleRegion region, @NonNull NavigableEdge newEdge) {

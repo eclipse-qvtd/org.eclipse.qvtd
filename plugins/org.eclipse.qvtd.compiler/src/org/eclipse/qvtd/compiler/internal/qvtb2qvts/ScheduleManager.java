@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -57,11 +55,6 @@ public interface ScheduleManager
 {
 	void addMappingRegion(@NonNull MappingRegion mappingRegion);
 	void addProblem(@NonNull CompilerProblem problem);
-
-	/**
-	 * Define an additional/only Transformation to be scheduled by the subsequent anayses and syntheses.
-	 */
-	@NonNull AbstractTransformationAnalysis addTransformation(@NonNull Transformation asTransformation);
 	void analyzeCompletePackage(@NonNull TypedModel typedModel, @NonNull CompletePackage completePackage);
 	@NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp);
 	@NonNull OriginalContentsAnalysis analyzeOriginalContents();
@@ -79,7 +72,7 @@ public interface ScheduleManager
 	/**
 	 * Perform the interdependent global analysis of each Rule within its Transformation.
 	 */
-	@NonNull Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations();
+	@NonNull AbstractTransformationAnalysis analyzeTransformation();
 
 	@Nullable ConnectionManager basicGetConnectionManager();
 	//	@Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node);
@@ -117,11 +110,6 @@ public interface ScheduleManager
 	@NonNull ClassDatum getOclVoidClassDatum();
 
 	/**
-	 * Return a determinstic alphabetical ordereding of the TransformationAnalysis instances.
-	 */
-	@NonNull Iterable<@NonNull AbstractTransformationAnalysis> getOrderedTransformationAnalyses();
-
-	/**
 	 * Return the analysis of the pre-partitioned regions consumptions and productions.
 	 */
 	@NonNull OriginalContentsAnalysis getOriginalContentsAnalysis();
@@ -132,6 +120,7 @@ public interface ScheduleManager
 	@NonNull QVTruntimeLibraryHelper getQVTruntimeLibraryHelper();
 	@NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region);
 	@NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull RootRegion rootRegion);
+	@NonNull RootRegion getRootRegion();
 	@NonNull ScheduleModel getScheduleModel();
 	@NonNull StandardLibrary getStandardLibrary();
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();
@@ -140,9 +129,8 @@ public interface ScheduleManager
 	@NonNull TypedModel getTargetTypedModel();
 	@NonNull TraceHelper getTraceHelper();
 	@NonNull TypedModel getTraceTypedModel();
-	@NonNull Iterable<@NonNull AbstractTransformationAnalysis> getTransformationAnalyses();
+	@NonNull AbstractTransformationAnalysis getTransformationAnalysis();
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull RootRegion rootRegion);
-	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
 	@NonNull ClassDatum getTransformationTraceClassDatum(@NonNull Transformation transformation);
 	@NonNull Transformation2TracePackage getTransformation2TracePackage(@NonNull Transformation transformation);
 	@NonNull TypedModelsConfiguration getTypedModelsConfiguration();

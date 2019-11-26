@@ -28,7 +28,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
@@ -43,6 +42,7 @@ import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2TraceGroup;
@@ -51,6 +51,7 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -71,9 +72,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
-
-import com.google.common.collect.Lists;
 
 public class QVTr2QVTs extends AbstractQVTb2QVTs
 {
@@ -289,7 +287,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public @Nullable MappingRegion visitRelation(@NonNull Relation rIn) {
-			RelationalTransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(QVTbaseUtil.getOwningTransformation(rIn));
+			RelationalTransformationAnalysis transformationAnalysis = (RelationalTransformationAnalysis) scheduleManager.getTransformationAnalysis();
 			RelationAnalysis relationAnalysis = this.relationAnalysis = transformationAnalysis.basicGetRuleAnalysis(rIn);
 			if (relationAnalysis == null) {
 				return null;
@@ -372,7 +370,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public @NonNull RootRegion visitRelationalTransformation(@NonNull RelationalTransformation tIn) {
-			RootRegion tOut = scheduleManager.getTransformationAnalysis(tIn).getRootRegion();
+			RootRegion tOut = scheduleManager.getTransformationAnalysis().getRootRegion();
 			context.addTrace(tIn, tOut);
 			//			tOut.setOwnedContext(create(tIn.getOwnedContext()));
 			//			createAll(tIn.getOwnedOperations(), tOut.getOwnedOperations());
@@ -551,18 +549,8 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	//		this.debugSource =  debugSource;
 	//	}
 
-	public @NonNull Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
-		// FIXME the following lines should go obsolete
-		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
-		if (missingOperationCallSources != null) {
-			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
-		}
-		boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, source);
-		if (missingTraceArtefacts) {
-			QVTruntimeUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + target.getURI() + "'");
-		}
-		//
-		QVTrelationDirectedScheduleManager directedScheduleManager = getScheduleManager();
+	public @NonNull Iterable<@NonNull RuleRegion> transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
+		ScheduleManager directedScheduleManager = getScheduleManager();
 		debugSource = source;
 		debugTarget = target;
 		//
@@ -572,22 +560,17 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		//
 		directedScheduleManager.analyzeSourceModel(problemHandler);
 		//
-		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = directedScheduleManager.getOrderedTransformationAnalyses();
 		Map<@NonNull AbstractTransformationAnalysis, @NonNull RelationalTransformation2TracePackage> transformationAnalysis2transformation2tracePackages = new HashMap<>();
-		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
-			transformationAnalysis2transformation2tracePackages.put(transformationAnalysis, (RelationalTransformation2TracePackage) transformationAnalysis.getTransformation2TracePackage());
-		}
+		AbstractTransformationAnalysis transformationAnalysis = directedScheduleManager.getTransformationAnalysis();
+		transformationAnalysis2transformation2tracePackages.put(transformationAnalysis, (RelationalTransformation2TracePackage) transformationAnalysis.getTransformation2TracePackage());
+		Transformation transformation = transformationAnalysis.getTransformation();
 		//
 		//	Create a trace group to supervise the trace synthesis of each relation.
 		//
-		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalysis2transformation2tracePackages.keySet()) {
-			Transformation2TracePackage transformation2tracePackage = transformationAnalysis2transformation2tracePackages.get(transformationAnalysis);
-			assert transformation2tracePackage != null;
-			//			transformationAnalysis2tracePackage.createRule2TraceGroups();
-			for (@NonNull Rule rule : QVTbaseUtil.getOwnedRules(transformationAnalysis.getTransformation())) {
-				//	RuleAnalysis ruleAnalysis = transformationAnalysis.getRuleAnalysis(rule);
-				transformation2tracePackage.getRule2TraceGroup(rule);
-			}
+		Transformation2TracePackage transformation2tracePackage = transformationAnalysis2transformation2tracePackages.get(transformationAnalysis);
+		assert transformation2tracePackage != null;
+		for (@NonNull Rule rule : QVTbaseUtil.getOwnedRules(transformation)) {
+			transformation2tracePackage.getRule2TraceGroup(rule);
 		}
 		//
 		//	Use the QVTr2QVTsVisitor in a tree descent to synthesize the QVTs elements that correspond directly to QVTr elements.
@@ -598,50 +581,29 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		//
 		//	Analyze the trace classes and interfaces to determine their inheritance and properties
 		//
-		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalysis2transformation2tracePackages.keySet()) {
-			RelationalTransformation2TracePackage transformation2tracePackage = transformationAnalysis2transformation2tracePackages.get(transformationAnalysis);
-			assert transformation2tracePackage != null;
-			//			transformation2tracePackage.analyzeTraceElements(transformationAnalysis.getScheduleManager());
-			for (@NonNull Rule rule : QVTbaseUtil.getRule(transformationAnalysis.getTransformation())) {
-				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
-				if (relationAnalysis != null) {
-					Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
-					relation2traceGroup.analyzeTraceElements(relationAnalysis);
-				}
+		Iterable<@NonNull Rule> rules = QVTbaseUtil.getRule(transformation);
+		for (@NonNull Rule rule : rules) {
+			RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
+			if (relationAnalysis != null) {
+				Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
+				relation2traceGroup.analyzeTraceElements(relationAnalysis);
 			}
-
-			//			public void analyzeTraceElements(@NonNull ScheduleManager scheduleManager) throws CompilerChainException {
-			//			for (@NonNull Rule2TraceGroup relation2traceGroup : getOrderedRule2TraceGroups()) {
-			//				relation2traceGroup.analyzeTraceElements(scheduleManager);
-			//			}
-			//			}
-
-
 		}
 		//
 		//	Synthesize the trace nodes and edges to add support for overrides/when/where invocations.
 		//
-		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalysis2transformation2tracePackages.keySet()) {
-			Transformation2TracePackage transformation2tracePackage = transformationAnalysis2transformation2tracePackages.get(transformationAnalysis);
-			assert transformation2tracePackage != null;
-			//			transformation2tracePackage.synthesizeTraceElements();
-			for (@NonNull Rule rule : QVTbaseUtil.getRule(transformationAnalysis.getTransformation())) {
-				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
-				if (relationAnalysis != null) {
-					Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
-					relationAnalysis.synthesizeTraceElements((Relation2TraceGroup) relation2traceGroup);
-				}
+		for (@NonNull Rule rule : rules) {
+			RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
+			if (relationAnalysis != null) {
+				Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
+				relationAnalysis.synthesizeTraceElements((Relation2TraceGroup) relation2traceGroup);
 			}
 		}
+		//		}
 		/**
 		 * Perform the independent local analysis of each Rule.
 		 */
-		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
-			transformationAnalysis.analyzeMappingRegions();
-		}
-		//	for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
-		//		scheduleManager.writeDebugGraphs(mappingRegion, null);
-		//	}
+		transformationAnalysis.analyzeMappingRegions();
 		//
 		//	Create trace Model/Package/Class/Property instances
 		//
@@ -654,34 +616,26 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			traceModel.setExternalURI(traceResource.getURI().toString());
 			traceResource.getContents().add(traceModel);
 		}
-		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalysis2transformation2tracePackages.keySet()) {
-			Transformation2TracePackage transformation2tracePackage = transformationAnalysis2transformation2tracePackages.get(transformationAnalysis);
-			assert transformation2tracePackage != null;
-			//			org.eclipse.ocl.pivot.Package tracePackage = transformation2tracePackage.synthesizeTraceModel();
-
-			for (@NonNull Rule rule : QVTbaseUtil.getRule(transformationAnalysis.getTransformation())) {
-				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
-				if (relationAnalysis != null) {
-					Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
-					relation2traceGroup.synthesizeTraceModel(relationAnalysis);
-				}
+		for (@NonNull Rule rule : rules) {
+			RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
+			if (relationAnalysis != null) {
+				Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
+				relation2traceGroup.synthesizeTraceModel(relationAnalysis);
 			}
-			org.eclipse.ocl.pivot.Package tracePackage = transformation2tracePackage.getTracePackage();
-			CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedClassesList(tracePackage));
-			for (org.eclipse.ocl.pivot.@NonNull Class traceClass : QVTbaseUtil.getOwnedClasses(tracePackage)) {
-				CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedPropertiesList(traceClass));
-			}
-
-
-
-
-			TypedModel traceTypedModel = directedScheduleManager.getTraceTypedModel();
-			if (!traceModel.getOwnedPackages().contains(tracePackage)) {
-				traceModel.getOwnedPackages().add(tracePackage);
-				traceTypedModel.getUsedPackage().add(tracePackage);
-			}
-			directedScheduleManager.analyzeTracePackage(traceTypedModel, tracePackage);
 		}
+		org.eclipse.ocl.pivot.Package tracePackage = transformation2tracePackage.getTracePackage();
+		CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedClassesList(tracePackage));
+		for (org.eclipse.ocl.pivot.@NonNull Class traceClass : QVTbaseUtil.getOwnedClasses(tracePackage)) {
+			CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedPropertiesList(traceClass));
+		}
+
+		TypedModel traceTypedModel = directedScheduleManager.getTraceTypedModel();
+		if (!traceModel.getOwnedPackages().contains(tracePackage)) {
+			traceModel.getOwnedPackages().add(tracePackage);
+			traceTypedModel.getUsedPackage().add(tracePackage);
+		}
+		directedScheduleManager.analyzeTracePackage(traceTypedModel, tracePackage);
+		//		}
 		for (@NonNull RuleRegion ruleRegion : directedScheduleManager.gatherRuleRegions()) {
 			directedScheduleManager.writeDebugGraphs(ruleRegion, null);
 		}
@@ -699,7 +653,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			}
 		}
 
-		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> rootRegion2activeRegions = directedScheduleManager.analyzeTransformations();
+		directedScheduleManager.analyzeTransformation();
 		//
 		//		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		//		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
@@ -709,7 +663,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		//			orderedRegions.add(ruleRegion);
 		//			mappingRegion.resolveRecursion();
 		//		}
-		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> rootRegion2mergedRegions = new HashMap<>();
+		//	Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> rootRegion2mergedRegions = new HashMap<>();
 		/*		if (!scheduleManager.isNoEarlyMerge()) {
 			for (@NonNull RootRegion rootRegion : rootRegion2activeRegions.keySet()) {
 				Iterable<@NonNull RuleRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
@@ -719,12 +673,6 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			}
 		}
 		else { */
-		for (@NonNull RootRegion rootRegion : rootRegion2activeRegions.keySet()) {
-			Iterable<@NonNull RuleRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
-			assert activeRegions != null;
-			rootRegion2mergedRegions.put(rootRegion, Lists.newArrayList(activeRegions));
-		}
-		//		}
-		return rootRegion2mergedRegions;
+		return transformationAnalysis.gatherRuleRegions();
 	}
 }

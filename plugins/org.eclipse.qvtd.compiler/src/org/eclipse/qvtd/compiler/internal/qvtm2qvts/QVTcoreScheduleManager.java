@@ -37,10 +37,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 public class QVTcoreScheduleManager extends BasicScheduleManager
 {
 	protected final @NonNull TypedModelsConfiguration typedModelsConfiguration;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
 	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, transformation, problemHandler, schedulerOptions);
 		this.typedModelsConfiguration = typedModelsConfiguration;
+		this.transformationAnalysis = createTransformationAnalysis(transformation);
 	}
 
 	@Override
@@ -90,6 +92,11 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 	@Override
 	public @NonNull ExpressionSynthesizer createUnconditionalExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
 		return new QVTcoreExpressionSynthesizer(ruleAnalysis, null);
+	}
+
+	@Override
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
+		return transformationAnalysis;
 	}
 
 	@Override

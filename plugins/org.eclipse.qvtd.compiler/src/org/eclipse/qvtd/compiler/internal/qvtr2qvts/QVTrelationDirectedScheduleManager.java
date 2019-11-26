@@ -43,6 +43,7 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 {
 	protected final @NonNull QVTrelationMultipleScheduleManager multipleScheduleManager;
 	protected final @NonNull TypedModelsConfiguration typedModelsConfiguration;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
 	public QVTrelationDirectedScheduleManager(@NonNull QVTrelationMultipleScheduleManager multipleScheduleManager, @NonNull Transformation transformation,
 			@NonNull TypedModelsConfiguration typedModelsConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
@@ -51,6 +52,7 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 			multipleScheduleManager.getNameGenerator(), multipleScheduleManager.getDatumCaches(), multipleScheduleManager.getDomainUsageAnalysis());
 		this.multipleScheduleManager = multipleScheduleManager;
 		this.typedModelsConfiguration = typedModelsConfiguration;
+		this.transformationAnalysis = createTransformationAnalysis(transformation);
 	}
 
 	/*	@Override
@@ -156,8 +158,8 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	public @NonNull RelationalTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
-		return (RelationalTransformationAnalysis) super.getTransformationAnalysis(transformation);
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
+		return transformationAnalysis;
 	}
 
 	@Override

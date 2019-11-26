@@ -53,13 +53,6 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 		super(scheduleModel, environmentFactory, transformation, problemHandler, schedulerOptions, new QVTrelationNameGenerator(), null, null);
 	}
 
-	public void addDirectedRootRegions(@NonNull QVTrelationDirectedScheduleManager directedScheduleManager, @NonNull Iterable<@NonNull RootRegion> rootRegions) {
-		for (@NonNull RootRegion rootRegion : rootRegions) {
-			QVTrelationDirectedScheduleManager oldDirectedScheduleManager = rootRegion2directedScheduleManager.put(rootRegion, directedScheduleManager);
-			assert oldDirectedScheduleManager == null;
-		}
-	}
-
 	/*	@Override
 	public @Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node) {
 		if (!isMiddle(node)) {
@@ -76,7 +69,11 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	} */
 
 	public @NonNull QVTrelationDirectedScheduleManager createDirectedScheduleManager(@NonNull TypedModelsConfiguration typedModelsConfiguration) {
-		return new QVTrelationDirectedScheduleManager(this, transformation, typedModelsConfiguration, schedulerOptions);
+		QVTrelationDirectedScheduleManager directedScheduleManager = new QVTrelationDirectedScheduleManager(this, transformation, typedModelsConfiguration, schedulerOptions);
+		RootRegion rootRegion = directedScheduleManager.getRootRegion();
+		QVTrelationDirectedScheduleManager oldDirectedScheduleManager = rootRegion2directedScheduleManager.put(rootRegion, directedScheduleManager);
+		assert oldDirectedScheduleManager == null;
+		return directedScheduleManager;
 	}
 
 	@Override
@@ -134,17 +131,12 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull AbstractTransformationAnalysis> getOrderedTransformationAnalyses() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public @NonNull RelationAnalysis getRuleAnalysis(@NonNull Rule relation) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public @NonNull RelationalTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
 		throw new UnsupportedOperationException();
 	}
 
