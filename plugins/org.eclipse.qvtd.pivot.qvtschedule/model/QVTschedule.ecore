@@ -218,6 +218,8 @@
         eType="#//Node" eOpposite="#//Node/outgoingEdges"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetNode" lowerBound="1"
         eType="#//Node" eOpposite="#//Node/incomingEdges"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="utility" lowerBound="1"
+        eType="#//Utility" defaultValueLiteral="NOT_KNOWN"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EdgeConnection" eSuperTypes="#//Connection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -329,8 +331,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingNode may contribute to a MappingRegion in a QBTs graph."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingPartition" abstract="true" eSuperTypes="#//Partition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningCompositePartition"
@@ -421,6 +421,8 @@
         eType="#//Edge" eOpposite="#//Edge/sourceNode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningRegion" lowerBound="1"
         eType="#//Region" eOpposite="#//Region/ownedNodes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="utility" lowerBound="1"
+        eType="#//Utility" defaultValueLiteral="NOT_KNOWN"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeConnection" eSuperTypes="#//Connection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -804,6 +806,61 @@
     <eLiterals name="OTHER" value="8">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Not known, nothing to do with mapping execution"/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Utility">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The utility of the model element for the overall match."/>
+    </eAnnotations>
+    <eLiterals name="DISPATCH">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The predicated dispatcher of an overriding rule (the overridden dispatcher is a TRACE)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="TRACE">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The predicated/realized trace node."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="SUCCESS">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The success node to which the match/not-match verdict is assigned."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="DEPENDENCY">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A dependency that must be satisfied to validate the region's execution."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="COMPOSED">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A LoadingRegion element."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="NON_NULL_MATCHED">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Non-null value reachable by to-1 navigation from the (?? a) trace node, or by to-? to an ExplicitNull."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="NULLABLE_MATCHED">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Maybe-null value reachable by to-1 navigation from the (?? a) trace node, or by to-? to an ExplicitNull."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="NON_NULL_CONDITIONAL">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A non-null selectively computable element depending on if conditions / loops. Not matched."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="NULLABLE_CONDITIONAL">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An uninitialized / erroneous / undefined utility."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="NOT_KNOWN">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The predicated dispatcher of an overriding rule (the overridden dispatcher is a TRACE)."/>
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
