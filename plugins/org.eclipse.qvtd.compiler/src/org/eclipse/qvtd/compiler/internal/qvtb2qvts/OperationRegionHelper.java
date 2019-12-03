@@ -17,7 +17,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 public class OperationRegionHelper extends RegionHelper<@NonNull OperationRegion>
 {
@@ -25,14 +25,14 @@ public class OperationRegionHelper extends RegionHelper<@NonNull OperationRegion
 		super(scheduleManager, region);
 	}
 
-	public @NonNull Node createOperationElementNode(@NonNull InitUtility initUtility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
+	public @NonNull Node createOperationElementNode(@NonNull Utility initUtility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
 		Role nodeRole = getNodeRole(sourceNode);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(nodeRole, region, initUtility, name, classDatum);
 		return node;
 	}
 
-	public @NonNull Node createOperationParameterNode(@NonNull InitUtility initUtility, @NonNull String name, @NonNull ClassDatum classDatum) {
+	public @NonNull Node createOperationParameterNode(@NonNull Utility initUtility, @NonNull String name, @NonNull ClassDatum classDatum) {
 		Role nodeRole = Role.PREDICATED;
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(nodeRole, region, initUtility, name, classDatum);
@@ -40,7 +40,7 @@ public class OperationRegionHelper extends RegionHelper<@NonNull OperationRegion
 		return node;
 	}
 
-	public @NonNull Node createOperationResultNode(@NonNull InitUtility initUtility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
+	public @NonNull Node createOperationResultNode(@NonNull Utility initUtility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
 		Role nodeRole = getNodeRole(sourceNode);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(nodeRole, region, initUtility, name, classDatum);

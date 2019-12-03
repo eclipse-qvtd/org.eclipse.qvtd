@@ -57,13 +57,13 @@ import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -79,7 +79,7 @@ public class MappingAnalysis extends RuleAnalysis
 	{
 		protected AbstractQVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context,
 				@Nullable AbstractQVTcoreExpressionSynthesizer unconditionalExpressionSynthesizer,
-				@NonNull InitUtility initUtility) {
+				@NonNull Utility initUtility) {
 			super(context, unconditionalExpressionSynthesizer, initUtility);
 		}
 
@@ -164,12 +164,12 @@ public class MappingAnalysis extends RuleAnalysis
 	{
 		protected QVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context,
 				@Nullable QVTcoreExpressionSynthesizer unconditionalExpressionSynthesizer,
-				@NonNull InitUtility initUtility) {
+				@NonNull Utility initUtility) {
 			super(context, unconditionalExpressionSynthesizer, initUtility);
 		}
 
 		@Override
-		protected @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull InitUtility initUtility) {
+		protected @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull Utility initUtility) {
 			return new QVTcoreExpressionSynthesizer(context, this, initUtility);
 		}
 
@@ -342,8 +342,8 @@ public class MappingAnalysis extends RuleAnalysis
 			 */
 			Node resultNode = conditionExpression.accept(rootExpressionSynthesizer);
 			if (resultNode != null) {
-				Node trueNode = createBooleanLiteralNode(InitUtility.NON_NULL_MATCHED, true);
-				createPredicateEdge(InitUtility.NON_NULL_MATCHED, resultNode, null, trueNode);
+				Node trueNode = createBooleanLiteralNode(Utility.NON_NULL_MATCHED, true);
+				createPredicateEdge(Utility.NON_NULL_MATCHED, resultNode, null, trueNode);
 			}
 			// FIXME ?? do includes() here explicitly
 		}
@@ -379,7 +379,7 @@ public class MappingAnalysis extends RuleAnalysis
 			for (@NonNull VariableDeclaration guardVariable : ClassUtil.nullFree(guardPattern.getOwnedVariables())) {
 				Node guardNode = region.getNode(guardVariable);
 				assert guardNode == null;
-				guardNode = createOldNode(InitUtility.NON_NULL_MATCHED, guardVariable);
+				guardNode = createOldNode(Utility.NON_NULL_MATCHED, guardVariable);
 				assert guardNode == region.getNode(guardVariable);
 			}
 		}
@@ -440,7 +440,7 @@ public class MappingAnalysis extends RuleAnalysis
 				assert realizedNode == null;
 				ClassDatum classDatum = scheduleManager.getClassDatum(realizedVariable);
 				boolean isTrace = classDatum.getReferredTypedModel().isIsTrace();
-				realizedNode = createRealizedStepNode(isTrace ? InitUtility.TRACE : InitUtility.NON_NULL_MATCHED, realizedVariable);
+				realizedNode = createRealizedStepNode(isTrace ? Utility.TRACE : Utility.NON_NULL_MATCHED, realizedVariable);
 				assert realizedNode == region.getNode(realizedVariable);
 			}
 		}
@@ -507,14 +507,14 @@ public class MappingAnalysis extends RuleAnalysis
 				// assert guardVariables.contains(targetVariable);
 				// assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
-				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : createNullLiteralNode(InitUtility.NON_NULL_MATCHED, null);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : createNullLiteralNode(Utility.NON_NULL_MATCHED, null);
 				// assert sourceNode.isGuard();
 				// assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getOutgoingPredicateEdge(referredProperty);
 					if (predicateEdge == null) {
-						createNavigationEdge(InitUtility.NON_NULL_MATCHED, sourceNode, referredProperty, targetNode, false);
+						createNavigationEdge(Utility.NON_NULL_MATCHED, sourceNode, referredProperty, targetNode, false);
 					} else {
 						assert predicateEdge.getEdgeTarget() == targetNode;
 					}
@@ -572,7 +572,7 @@ public class MappingAnalysis extends RuleAnalysis
 		ClassDatum initClassDatum = QVTscheduleUtil.getClassDatum(bestInitNode);
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
 		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableClassDatum)) {
-			Node castNode = createOldNode(InitUtility.getRequiredInitUtility(variable), variable);
+			Node castNode = createOldNode(Utility.getRequiredInitUtility(variable), variable);
 			rootExpressionSynthesizer.createCastEdge(bestInitNode, variableClassDatum, castNode);
 			bestInitNode = castNode;
 		}
@@ -683,9 +683,9 @@ public class MappingAnalysis extends RuleAnalysis
 								"Enforceable variable ''{0}'' has not been realized in ''{1}''",
 								variable, region);
 						}
-						node = createRealizedStepNode(InitUtility.getRequiredInitUtility(variable), variable);
+						node = createRealizedStepNode(Utility.getRequiredInitUtility(variable), variable);
 					} else {
-						node = createLoadedStepNode(InitUtility.getRequiredInitUtility(variable), variable); // FIXME Predicated ??
+						node = createLoadedStepNode(Utility.getRequiredInitUtility(variable), variable); // FIXME Predicated ??
 					}
 				}
 			}

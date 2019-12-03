@@ -26,8 +26,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 /**
@@ -200,7 +200,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		RecursionEdgeImpl edge = (RecursionEdgeImpl) super.createEdge(edgeRole, utility, sourceNode, targetNode);
 		edge.setPrimary(primary);
 		return edge;

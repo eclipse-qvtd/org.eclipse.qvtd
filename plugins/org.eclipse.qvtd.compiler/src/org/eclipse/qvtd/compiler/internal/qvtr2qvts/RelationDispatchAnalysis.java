@@ -29,8 +29,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * A RelationDispatchAnalysis assists in the synthesis of the dispatch for an override hierarchy.
@@ -56,9 +56,9 @@ public class RelationDispatchAnalysis extends RegionHelper<@NonNull RuleRegion>
 			Relation2TraceClass relation2TraceClass = scheduleManager.getRuleAnalysis(relation).getRule2TraceGroup().getRule2TraceClass();
 			TypedModel traceTypedModel = relationAnalysis.getTraceTypedModel();
 			ClassDatum dispatchedClassDatum = scheduleManager.getClassDatum(traceTypedModel, relation2TraceClass.getMiddleClass());
-			Node dispatchedNode = createRealizedNode(InitUtility.NON_NULL_MATCHED, getName(relation), dispatchedClassDatum);
+			Node dispatchedNode = createRealizedNode(Utility.NON_NULL_MATCHED, getName(relation), dispatchedClassDatum);
 			DispatchClass2TraceProperty dispatchClass2traceProperty = relation2dispatchClass.getDispatchClass2TraceProperty(relation);
-			createRealizedNavigationEdge(InitUtility.NON_NULL_MATCHED, traceNode, dispatchClass2traceProperty.getTraceProperty(), dispatchedNode, false);
+			createRealizedNavigationEdge(Utility.NON_NULL_MATCHED, traceNode, dispatchClass2traceProperty.getTraceProperty(), dispatchedNode, false);
 		}
 		for (@NonNull Relation overridingRelation : QVTrelationUtil.getOverrides(relation)) {
 			synthesizeDispatchHierarchy(traceNode, relation2dispatchClass, overridingRelation);
@@ -101,7 +101,7 @@ public class RelationDispatchAnalysis extends RegionHelper<@NonNull RuleRegion>
 					//						VariableDeclaration2TraceProperty variableDeclaration2traceInterfaceProperty = rule2traceInterface.getVariableDeclaration2TraceProperty(variable);
 					Property traceClassProperty = variableDeclaration2traceClassProperty.getTraceProperty();
 					//						Property traceInterfaceProperty = variableDeclaration2traceInterfaceProperty.getTraceProperty();
-					Node targetNode = createOldNode(InitUtility.getRequiredInitUtility(variable), variable);
+					Node targetNode = createOldNode(Utility.getRequiredInitUtility(variable), variable);
 					boolean isPartial = scheduleManager.computeIsPartial(targetNode, traceClassProperty);
 					createNavigationEdge(targetNode.getInitUtility(), traceNode, traceClassProperty, targetNode, isPartial);
 					if (isTopLevel) {
@@ -131,11 +131,11 @@ public class RelationDispatchAnalysis extends RegionHelper<@NonNull RuleRegion>
 		TypedModel traceTypedModel = relationAnalysis.getTraceTypedModel();
 		ClassDatum dispatchedClassDatum = scheduleManager.getClassDatum(traceTypedModel, relation2dispatchClass.getMiddleClass());
 		if (relation.isIsTopLevel()) {
-			VariableNode realizedDispatchNode = createRealizedNode(InitUtility.DISPATCH, QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME, dispatchedClassDatum);
+			VariableNode realizedDispatchNode = createRealizedNode(Utility.DISPATCH, QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME, dispatchedClassDatum);
 			return realizedDispatchNode;
 		}
 		else {
-			Node predicatedDispatchNode = createPredicatedNode(InitUtility.TRACE, QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME, dispatchedClassDatum);
+			Node predicatedDispatchNode = createPredicatedNode(Utility.TRACE, QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME, dispatchedClassDatum);
 			region.getHeadNodes().add(predicatedDispatchNode);
 			predicatedDispatchNode.setHead();
 			return predicatedDispatchNode;

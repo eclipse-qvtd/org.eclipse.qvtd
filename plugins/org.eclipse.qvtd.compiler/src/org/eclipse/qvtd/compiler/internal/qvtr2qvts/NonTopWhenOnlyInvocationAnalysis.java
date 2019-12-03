@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 /**
  * A NonTopWhenOnlyInvocationAnalysis identifies the invocation of a non-top Relation by a when clause in another.
@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 public class NonTopWhenOnlyInvocationAnalysis extends AbstractWhenInvocationAnalysis
 {
 	public NonTopWhenOnlyInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
-			@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
 	}
 

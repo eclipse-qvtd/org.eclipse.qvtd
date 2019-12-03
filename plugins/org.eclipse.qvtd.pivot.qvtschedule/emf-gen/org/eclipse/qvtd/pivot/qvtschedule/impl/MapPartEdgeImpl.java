@@ -32,8 +32,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -209,7 +209,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		MapPartEdge newEdge = (MapPartEdge) super.createEdge(edgeRole, utility, sourceNode, targetNode);
 		newEdge.setReferredPart(getReferredPart());
 		return newEdge;

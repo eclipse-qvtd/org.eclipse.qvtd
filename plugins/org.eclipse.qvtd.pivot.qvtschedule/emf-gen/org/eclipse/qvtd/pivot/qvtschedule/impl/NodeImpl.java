@@ -50,7 +50,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -690,7 +690,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	private boolean isHead = false;
 	private boolean isContained = false;
 	private boolean isThis = false;
-	private @NonNull InitUtility initUtility = InitUtility.NOT_KNOWN;
+	private @NonNull Utility initUtility = Utility.NOT_KNOWN;
 
 	@Override
 	public void addOriginatingElement(@NonNull Element originatingElement) {
@@ -911,12 +911,12 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @NonNull InitUtility getInitUtility() {
+	public @NonNull Utility getInitUtility() {
 		return initUtility;
 	}
 
 	@Override
-	public void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull InitUtility initUtility, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum) {
+	public void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull Utility initUtility, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum) {
 		assert name != null;
 		assert classDatum != null;
 		setNodeRole(nodeRole);
@@ -971,7 +971,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public boolean isDispatch() {
-		return initUtility == InitUtility.DISPATCH;
+		return initUtility == Utility.DISPATCH;
 	}
 
 	@Override
@@ -1075,7 +1075,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public boolean isTrace() {
-		return initUtility == InitUtility.TRACE;
+		return initUtility == Utility.TRACE;
 	}
 
 	@Override

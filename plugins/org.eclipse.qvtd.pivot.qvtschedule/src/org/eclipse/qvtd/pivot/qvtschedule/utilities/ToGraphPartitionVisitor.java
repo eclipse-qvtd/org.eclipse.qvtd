@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 import com.google.common.collect.Lists;
 
@@ -279,7 +280,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 	@Override
 	protected @NonNull String getColor(@NonNull GraphElement element) {
-		InitUtility initUtility = null;
+		Utility initUtility = null;
 		if (element instanceof Node) {
 			initUtility = ((Node)element).getInitUtility();
 		}
@@ -287,9 +288,9 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 			initUtility = ((Edge)element).getInitUtility();
 		}
 		else {
-			initUtility = InitUtility.NOT_KNOWN;
+			initUtility = Utility.NOT_KNOWN;
 		}
-		if (initUtility == InitUtility.NOT_KNOWN) {
+		if (initUtility == Utility.NOT_KNOWN) {
 			return QVTscheduleUtil.ERROR_COLOR;
 		}
 		Role role = getGraphRole(element);

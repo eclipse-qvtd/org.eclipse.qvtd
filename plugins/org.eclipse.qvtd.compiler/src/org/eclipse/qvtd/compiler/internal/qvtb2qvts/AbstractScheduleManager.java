@@ -85,10 +85,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.AbstractToGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphPartitionVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
@@ -423,13 +423,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		TypedModel typedModel = getDomainUsage(expression).getTypedModel(expression);
 		assert typedModel != null;
 		ClassDatum classDatum = getClassDatum(typedModel, type);
-		Node parameterNode = regionHelper.createOperationParameterNode(InitUtility.getRequiredInitUtility(variable), name, classDatum);
+		Node parameterNode = regionHelper.createOperationParameterNode(Utility.getRequiredInitUtility(variable), name, classDatum);
 		//		addVariableNode(variable, parameterNode);
 		regionHelper.getRegion().addHeadNode(parameterNode);
 		return parameterNode;
 	}
 
-	private @NonNull Node createOperationParameterNode(@NonNull OperationRegionHelper regionHelper, @NonNull InitUtility initUtility, @NonNull ClassDatum classDatum, @NonNull String name) {
+	private @NonNull Node createOperationParameterNode(@NonNull OperationRegionHelper regionHelper, @NonNull Utility initUtility, @NonNull ClassDatum classDatum, @NonNull String name) {
 		Node parameterNode = regionHelper.createOperationParameterNode(initUtility, name, classDatum);
 		//		addVariableNode(variable, parameterNode);
 		regionHelper.getRegion().addHeadNode(parameterNode);
@@ -454,7 +454,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		Node dependencyNode;
 		dependencyNode = selfNode;
 		//
-		InitUtility initUtility = InitUtility.getRequiredInitUtility(operationCallExp);
+		Utility initUtility = Utility.getRequiredInitUtility(operationCallExp);
 		Node resultNode = regionHelper.createStepNode(initUtility, "result", operationCallExp, dependencyNode);	// FIXME do not use a MappingNode
 		operationRegion.setResultNode(resultNode);
 		regionHelper.createEqualsEdge(initUtility, dependencyNode, resultNode);
@@ -511,7 +511,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 							dependencyNode2 = classDatum2node.get(classDatum);
 							if (dependencyNode2 == null) {
 								assert !"OclVoid".equals(stepType.getName());
-								dependencyNode2 = createOperationParameterNode(regionHelper, InitUtility.NON_NULL_MATCHED, classDatum, "extra2_" + stepType.getName());
+								dependencyNode2 = createOperationParameterNode(regionHelper, Utility.NON_NULL_MATCHED, classDatum, "extra2_" + stepType.getName());
 								classDatum2node.put(classDatum, dependencyNode2);
 								operationRegion.addDependencyNode(dependencyNode2);
 							}
@@ -534,9 +534,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 								Type elementType = PivotUtil.getElementType((CollectionType)primaryClass);
 								TypedModel typedModel2 = QVTscheduleUtil.getTypedModel(classDatum);
 								ClassDatum elementClassDatum = scheduleManager.getClassDatum(typedModel2, (org.eclipse.ocl.pivot.Class) elementType);
-								Node elementNode = regionHelper.createOperationElementNode(InitUtility.NON_NULL_MATCHED, operationName, elementClassDatum, dependencyNode2);
+								Node elementNode = regionHelper.createOperationElementNode(Utility.NON_NULL_MATCHED, operationName, elementClassDatum, dependencyNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, dependencyNode2);
-								regionHelper.createNavigationEdge(InitUtility.NON_NULL_MATCHED, dependencyNode2, iterateProperty, elementNode, false);
+								regionHelper.createNavigationEdge(Utility.NON_NULL_MATCHED, dependencyNode2, iterateProperty, elementNode, false);
 								dependencyNode2 = elementNode;
 							}
 							//							assert !dependencyNode2.isMatched();
@@ -546,12 +546,12 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 								if (name == null) {
 									name = QVTscheduleUtil.getName(PivotUtil.getReferredProperty((NavigationCallExp)callExp));
 								}
-								nextNode = regionHelper.createDataTypeNode(InitUtility.getRequiredInitUtility(callExp), name, dependencyNode2, (NavigationCallExp)callExp);
+								nextNode = regionHelper.createDataTypeNode(Utility.getRequiredInitUtility(callExp), name, dependencyNode2, (NavigationCallExp)callExp);
 							}
 							else {
-								nextNode = regionHelper.createDataTypeNode(InitUtility.getRequiredInitUtility(property), dependencyNode2, property);
+								nextNode = regionHelper.createDataTypeNode(Utility.getRequiredInitUtility(property), dependencyNode2, property);
 							}
-							regionHelper.createNavigationEdge(InitUtility.getRequiredInitUtility(property), dependencyNode2, property, nextNode, false);
+							regionHelper.createNavigationEdge(Utility.getRequiredInitUtility(property), dependencyNode2, property, nextNode, false);
 							dependencyNode2 = nextNode;
 						}
 					}

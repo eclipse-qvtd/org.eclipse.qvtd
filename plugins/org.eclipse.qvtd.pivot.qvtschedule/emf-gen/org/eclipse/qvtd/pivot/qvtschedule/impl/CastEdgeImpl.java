@@ -27,8 +27,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -209,7 +209,7 @@ public class CastEdgeImpl extends EdgeImpl implements CastEdge {
 	}
 
 	@Override
-	public void initialize(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode) {
+	public void initialize(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode) {
 		super.initialize(edgeRole, utility, sourceNode, classDatum.getName(), targetNode);
 		setReferredClassDatum(classDatum);
 	}

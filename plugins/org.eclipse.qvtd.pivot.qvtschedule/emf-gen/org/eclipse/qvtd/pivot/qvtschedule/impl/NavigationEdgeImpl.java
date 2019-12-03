@@ -39,8 +39,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -469,7 +469,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	}
 
 	@Override
-	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		NavigationEdge edge = (NavigationEdge)super.createEdge(edgeRole, utility, sourceNode, targetNode);
 		edge.initializeProperty(QVTscheduleUtil.getReferredProperty(this), utility, isPartial());
 		return edge;
@@ -563,7 +563,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	}
 
 	@Override
-	public void initializeProperty(@NonNull Property property, @NonNull InitUtility utility, boolean isPartial) {
+	public void initializeProperty(@NonNull Property property, @NonNull Utility utility, boolean isPartial) {
 		setReferredProperty(property);
 		setPartial(isPartial);
 		Property target2sourceProperty = property.getOpposite();

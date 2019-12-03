@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 /**
  * An AbstractWhenInvocationAnalysis identifies the invocation of one Relation from the when clause of another.
@@ -34,7 +34,7 @@ public abstract class AbstractWhenInvocationAnalysis extends AbstractInvocationA
 	private @Nullable SuccessEdge globalSuccessEdge = null;
 
 	public AbstractWhenInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
-			@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
 	}
 

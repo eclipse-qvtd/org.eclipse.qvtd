@@ -12,12 +12,12 @@
  *
  * </copyright>
  */
-package org.eclipse.qvtd.pivot.qvtschedule.utilities;
+package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.TypedElement;
 
-public enum InitUtility {
+public enum Utility {
 	/** The predicated dispatcher of an overriding rule (the overridden dispatcher is a TRACE).*/
 	DISPATCH,
 	/** The predicated/realized trace node.*/
@@ -38,11 +38,11 @@ public enum InitUtility {
 	NULLABLE_CONDITIONAL,
 	NOT_KNOWN;
 
-	public static @NonNull InitUtility getRequiredInitUtility(@NonNull TypedElement typedElement) {
-		return typedElement.isIsRequired() ? InitUtility.NON_NULL_MATCHED : InitUtility.NULLABLE_MATCHED;
+	public static @NonNull Utility getRequiredInitUtility(@NonNull TypedElement typedElement) {
+		return typedElement.isIsRequired() ? Utility.NON_NULL_MATCHED : Utility.NULLABLE_MATCHED;
 	}
 
-	public @NonNull InitUtility getConditionalUtility() {
+	public @NonNull Utility getConditionalUtility() {
 		switch(this) {
 			case NON_NULL_CONDITIONAL: return NON_NULL_CONDITIONAL;
 			case NON_NULL_MATCHED: return NON_NULL_CONDITIONAL;
@@ -52,7 +52,7 @@ public enum InitUtility {
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull InitUtility getNullableUtility() {
+	public @NonNull Utility getNullableUtility() {
 		switch(this) {
 			case NON_NULL_CONDITIONAL: return NULLABLE_CONDITIONAL;
 			case NON_NULL_MATCHED: return NULLABLE_MATCHED;
@@ -73,13 +73,13 @@ public enum InitUtility {
 	 * Return true for a nullable pattern usage.
 	 */
 	public boolean isNullable() {
-		return (this == InitUtility.NULLABLE_MATCHED) || (this == NULLABLE_CONDITIONAL);
+		return (this == Utility.NULLABLE_MATCHED) || (this == NULLABLE_CONDITIONAL);
 	}
 
 	/**
 	 * Return true for an unconditioknal pattern usage.
 	 */
 	public boolean isUnconditional() {
-		return (this == InitUtility.NON_NULL_MATCHED) || (this == InitUtility.NULLABLE_MATCHED) || (this == TRACE) || (this == DISPATCH);
+		return (this == Utility.NON_NULL_MATCHED) || (this == Utility.NULLABLE_MATCHED) || (this == TRACE) || (this == DISPATCH);
 	}
 }

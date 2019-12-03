@@ -17,7 +17,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 /**
  * A NonTopWhenAfterWhereInvocationAnalysis identifies the invocation of a non-top Relation by a when clause in another.
@@ -26,7 +26,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 public class NonTopWhenAfterWhereInvocationAnalysis extends AbstractWhenInvocationAnalysis
 {
 	public NonTopWhenAfterWhereInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
-			@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
 	}
 

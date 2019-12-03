@@ -22,7 +22,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -247,35 +246,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	void setOwningRegion(Region value);
 
 	/**
-	 * The prioritized immutable utility of each node.
-	 *
-	 * FIXME Change STRONGLY_MATCHED/WEAKLY_MATCHED to EXACTLY_ONE_MATCH/ZERO_OR_ONE_MATCH/ONE_OR_MANY_MATCHES/SOME_OR_MANY__MATCH
-	 * so that the optionality of Node.isMatched() is redundnt wrt getUtility().isXXXX.
-	 */
-	public enum Utility {
-		/** The predicated dispatcher of an overriding rule (the overridden dispatcher is a TRACE).*/
-		DISPATCH,
-		/** The predicated/realized trace node.*/
-		TRACE,
-		/** Reachable by to-1 navigation from the (?? a) trace node, or by to-? to an ExplicitNull.*/
-		STRONGLY_MATCHED,
-		/** Unconditionally used in a computation or navigation, but not a dispatcher/trace node,
-		 * not reachable by to-1 navigation from the (?? a) trace node, not an ExplicitNull reachable by to-?.*/
-		WEAKLY_MATCHED,
-		//		UNCONDITIONALLY_PREDICATING,	// else always computable as part of a predicate
-		//		CONDITIONALLY_PREDICATING,		// else selectively computable as part of a predicate depending on if conditions
-		//		UNCONDITIONALLY_COMPUTED,		// else always computable
-		/** A selectively computable element depending on if conditions / loops. Not matched.*/
-		CONDITIONAL,
-		/** A dependency that must be satisfied to validate the region's execution.*/
-		DEPENDENCY,
-		/** A LoadingRegion element.*/
-		COMPOSED,
-		/** Never used */
-		DEAD
-	}
-
-	/**
 	 * Register element as a further expression that shares the value of the originating element of this node.
 	 */
 	void addOriginatingElement(@NonNull Element element);
@@ -365,7 +335,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	@Nullable String getStyle();
 	//	@NonNull Utility getUtility();
 
-	void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull InitUtility utility, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum);
+	void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull Utility utility, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum);
 
 	/**
 	 * Return true if this node is checked; i.e. isPredicated() or isSpeculated().
@@ -564,5 +534,5 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 */
 	void setThis();
 
-	@NonNull InitUtility getInitUtility();
+	@NonNull Utility getInitUtility();
 } // Node

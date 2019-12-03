@@ -32,8 +32,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -208,7 +208,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		CollectionPartEdge newEdge = (CollectionPartEdge) super.createEdge(edgeRole, utility, sourceNode, targetNode);
 		newEdge.setReferredPart(getReferredPart());
 		return newEdge;

@@ -17,7 +17,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 /**
  * A TopWhenInvocationAnalysis identifies the invocation of a top Relation by a when clause in another.
@@ -28,7 +28,7 @@ public class TopWhenInvocationAnalysis extends AbstractWhenInvocationAnalysis
 	 * Return true unless a non-match is permitted and used for null input to null output. (See Bug 499432)
 	 */
 	//	@Override
-	private static @NonNull InitUtility resolveInitUtility(@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+	private static @NonNull Utility resolveInitUtility(@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		boolean anyRequired = false;
 		boolean anyOmitted = false;
 		for (@NonNull VariableDeclaration rootVariable : rootVariable2argumentNode.keySet()) {
@@ -47,11 +47,11 @@ public class TopWhenInvocationAnalysis extends AbstractWhenInvocationAnalysis
 		if (!anyOmitted) {				// If nothing omitted
 			return initUtility;				//  a match is required
 		}
-		return initUtility.isConditional() ? InitUtility.NULLABLE_CONDITIONAL: InitUtility.NULLABLE_MATCHED;					// Match can be omitted
+		return initUtility.isConditional() ? Utility.NULLABLE_CONDITIONAL: Utility.NULLABLE_MATCHED;					// Match can be omitted
 	}
 
 	public TopWhenInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
-			@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		super(invokingRelationAnalysis, invokedRelationAnalysis, resolveInitUtility(initUtility, rootVariable2argumentNode), rootVariable2argumentNode);
 	}
 

@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 /**
  * An InvocationAnalysis identifies the invocation of one Relation from another.
@@ -41,11 +41,11 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	protected final @NonNull RelationAnalysis invokedRelationAnalysis;
 	protected final @NonNull QVTrelationScheduleManager scheduleManager;
 	protected final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode;
-	protected final @NonNull InitUtility initUtility;
+	protected final @NonNull Utility initUtility;
 	private @Nullable Node invokingNode = null;
 	private final @NonNull Map<@NonNull Node, @NonNull Boolean> argumentNode2isOutput = new HashMap<>();
 
-	public AbstractInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis, @NonNull InitUtility initUtility,
+	public AbstractInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis, @NonNull Utility initUtility,
 			@NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		this.invokingRelationAnalysis = invokingRelationAnalysis;
 		this.invokedRelationAnalysis = invokedRelationAnalysis;

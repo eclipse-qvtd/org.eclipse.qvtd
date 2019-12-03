@@ -101,9 +101,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.TupleLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
@@ -136,7 +136,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return basicPartition;
 	}
 
-	public @NonNull BooleanLiteralNode createBooleanLiteralNode(@NonNull InitUtility utility, boolean isTrue) {
+	public @NonNull BooleanLiteralNode createBooleanLiteralNode(@NonNull Utility utility, boolean isTrue) {
 		ClassDatum classDatum = scheduleManager.getBooleanClassDatum();
 		BooleanLiteralNode booleanLiteralNode = QVTscheduleFactory.eINSTANCE.createBooleanLiteralNode();
 		booleanLiteralNode.initialize(Role.CONSTANT, region, utility, Boolean.toString(isTrue), classDatum);
@@ -144,7 +144,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return booleanLiteralNode;
 	}
 
-	public @NonNull BooleanLiteralNode createBooleanLiteralNode(@NonNull InitUtility utility, boolean booleanValue, @Nullable BooleanLiteralExp booleanLiteralExp) {
+	public @NonNull BooleanLiteralNode createBooleanLiteralNode(@NonNull Utility utility, boolean booleanValue, @Nullable BooleanLiteralExp booleanLiteralExp) {
 		Role nodeRole = getOperationNodePhase(region, booleanLiteralExp);
 		ClassDatum classDatum = scheduleManager.getBooleanClassDatum();
 		BooleanLiteralNode booleanLiteralNode = QVTscheduleFactory.eINSTANCE.createBooleanLiteralNode();
@@ -156,7 +156,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return booleanLiteralNode;
 	}
 
-	public @NonNull CastEdge createCastEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode) {
+	public @NonNull CastEdge createCastEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull ClassDatum classDatum, @NonNull Node targetNode) {
 		Role phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode));
 		Role edgeRole = phase;
 		CastEdge castEdge = QVTscheduleFactory.eINSTANCE.createCastEdge();
@@ -164,7 +164,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return castEdge;
 	}
 
-	public @NonNull CollectionLiteralNode createCollectionLiteralNode(@NonNull InitUtility utility, @NonNull String name, @NonNull CollectionLiteralExp collectionLiteralExp, @NonNull Node @NonNull [] partNodes) {
+	public @NonNull CollectionLiteralNode createCollectionLiteralNode(@NonNull Utility utility, @NonNull String name, @NonNull CollectionLiteralExp collectionLiteralExp, @NonNull Node @NonNull [] partNodes) {
 		Role nodeRole = getOperationNodePhase(region, collectionLiteralExp, partNodes);
 		CollectionLiteralNode node = QVTscheduleFactory.eINSTANCE.createCollectionLiteralNode();
 		node.initialize(nodeRole, region, utility, name, scheduleManager.getClassDatum(collectionLiteralExp));
@@ -172,7 +172,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createCollectionPartEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull CollectionLiteralPart collectionPart, @NonNull Node targetNode) {
+	public @NonNull Edge createCollectionPartEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull CollectionLiteralPart collectionPart, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		CollectionPartEdge edge = QVTscheduleFactory.eINSTANCE.createCollectionPartEdge();
 		edge.setReferredPart(collectionPart);
@@ -182,7 +182,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull CollectionRangeNode createCollectionRangeNode(@NonNull InitUtility utility, @NonNull String name, @NonNull CollectionRange collectionRange, @NonNull Node @NonNull [] argNodes) {
+	public @NonNull CollectionRangeNode createCollectionRangeNode(@NonNull Utility utility, @NonNull String name, @NonNull CollectionRange collectionRange, @NonNull Node @NonNull [] argNodes) {
 		Role nodeRole = getOperationNodePhase(region, collectionRange, argNodes);
 		CollectionRangeNode node = QVTscheduleFactory.eINSTANCE.createCollectionRangeNode();
 		node.initialize(nodeRole, region, utility, name, scheduleManager.getClassDatum(collectionRange));
@@ -199,7 +199,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return cyclicPartition;
 	}
 
-	public @NonNull Node createDataTypeNode(@NonNull InitUtility utility, @NonNull String name, @NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
+	public @NonNull Node createDataTypeNode(@NonNull Utility utility, @NonNull String name, @NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
 		Property property = PivotUtil.getReferredProperty(navigationCallExp);
 		Role nodeRole = getPatternNodeRole(sourceNode, property);
 		assert sourceNode.isClass() || (property.getOpposite() != null);	// FIXME review is this relevant?
@@ -211,7 +211,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Node createDataTypeNode(@NonNull InitUtility utility, @NonNull Node targetNode, @NonNull NavigationAssignment navigationAssignment) {
+	public @NonNull Node createDataTypeNode(@NonNull Utility utility, @NonNull Node targetNode, @NonNull NavigationAssignment navigationAssignment) {
 		Role nodeRole = getNodeRole(targetNode);
 		Property property = QVTcoreUtil.getTargetProperty(navigationAssignment);
 		//		PatternNodeRole nodeRole = PatternNodeRole.getDataTypeNodeRole(targetNode, property);
@@ -228,12 +228,12 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Node createDataTypeNode(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Property property) {
+	public @NonNull Node createDataTypeNode(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Property property) {
 		Role nodeRole = getPatternNodeRole(sourceNode, property);
 		return createPatternNode(nodeRole, utility, sourceNode, property);
 	}
 
-	public @NonNull Node createDependencyClassNode(@NonNull InitUtility utility, @NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
+	public @NonNull Node createDependencyClassNode(@NonNull Utility utility, @NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
 		assert parentNode.isClass();
 		Property property = QVTcoreUtil.getTargetProperty(navigationAssignment);
 		assert property != null;
@@ -247,14 +247,14 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return createDependencyNode(utility, name, classDatum);
 	}
 
-	public @NonNull Edge createDependencyEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
+	public @NonNull Edge createDependencyEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		DependencyEdge edge = QVTscheduleFactory.eINSTANCE.createDependencyEdge();
 		edge.initialize(edgeRole, utility, sourceNode, name, targetNode);
 		return edge;
 	}
 
-	public @NonNull Node createDependencyNode(@NonNull InitUtility utility, @NonNull String name, @NonNull ClassDatum classDatum) {
+	public @NonNull Node createDependencyNode(@NonNull Utility utility, @NonNull String name, @NonNull ClassDatum classDatum) {
 		Role nodeRole = Role.PREDICATED;
 		DependencyNode node = QVTscheduleFactory.eINSTANCE.createDependencyNode();
 		node.initialize(nodeRole, region, utility, name, classDatum);
@@ -273,7 +273,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return castEdge;
 	} */
 
-	public @NonNull EnumLiteralNode createEnumLiteralNode(@NonNull InitUtility utility, @NonNull EnumerationLiteral enumValue, @NonNull EnumLiteralExp enumLiteralExp) {
+	public @NonNull EnumLiteralNode createEnumLiteralNode(@NonNull Utility utility, @NonNull EnumerationLiteral enumValue, @NonNull EnumLiteralExp enumLiteralExp) {
 		ClassDatum classDatum = scheduleManager.getClassDatum(enumLiteralExp);
 		String typeName = PrettyPrinter.printType(enumValue);
 		Role nodeRole = getOperationNodePhase(region, enumLiteralExp);
@@ -292,7 +292,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	//	and/or multiple predicates, in which case a hard initializer such as an operation call is preferred,
 	//	and then other initializers are checked as predicates using equals edges.
 	//
-	public @NonNull Edge createEqualsEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createEqualsEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		if (!region.isOperationRegion()) {
 			QVTruntimeUtil.errPrintln("Unexpected " + EQUALS_NAME + " edge in " + region + " from " + sourceNode + " to " + targetNode);
 		}
@@ -306,38 +306,38 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	public @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatum classDatum) {
 		Role nodeRole = Role.OTHER;
 		ErrorNode node = QVTscheduleFactory.eINSTANCE.createErrorNode();
-		node.initialize(nodeRole, region, InitUtility.NOT_KNOWN, name, classDatum);
+		node.initialize(nodeRole, region, Utility.NOT_KNOWN, name, classDatum);
 		return node;
 	}
 
-	public @NonNull IfNode createIfNode(@NonNull InitUtility utility, @NonNull String name, @NonNull IfExp ifExp, @NonNull Node @NonNull [] argNodes) {
+	public @NonNull IfNode createIfNode(@NonNull Utility utility, @NonNull String name, @NonNull IfExp ifExp, @NonNull Node @NonNull [] argNodes) {
 		Role nodeRole = getOperationNodePhase(region, ifExp, argNodes);
 		IfNode node = QVTscheduleFactory.eINSTANCE.createIfNode();
 		node.initialize(nodeRole, region, utility, name, scheduleManager.getClassDatum(ifExp));
 		node.setOriginatingElement(ifExp);
 		return node;
 	}
-	public @NonNull IfNode createIfNode2(@NonNull InitUtility utility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node @NonNull [] argNodes) {
+	public @NonNull IfNode createIfNode2(@NonNull Utility utility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node @NonNull [] argNodes) {
 		Role nodeRole = getOperationNodePhase(region, null, argNodes);
 		IfNode node = QVTscheduleFactory.eINSTANCE.createIfNode();
 		node.initialize(nodeRole, region, utility, name, classDatum);
 		return node;
 	}
 
-	public @NonNull Node createInputNode(@NonNull InitUtility utility, @NonNull Role nodeRole, @NonNull String name, @NonNull ClassDatum classDatum) {
+	public @NonNull Node createInputNode(@NonNull Utility utility, @NonNull Role nodeRole, @NonNull String name, @NonNull ClassDatum classDatum) {
 		InputNode node = QVTscheduleFactory.eINSTANCE.createInputNode();
 		node.initialize(nodeRole, region, utility, name, classDatum);
 		return node;
 	}
 
-	public @NonNull Edge createIteratedEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createIteratedEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		IteratedEdge edge = QVTscheduleFactory.eINSTANCE.createIteratedEdge();
 		edge.initialize(edgeRole, utility, sourceNode, LOOP_ITERATOR_NAME, targetNode);
 		return edge;
 	}
 
-	public @NonNull VariableNode createIteratorNode(@NonNull InitUtility utility, @NonNull VariableDeclaration iterator, @NonNull Node sourceNode) {
+	public @NonNull VariableNode createIteratorNode(@NonNull Utility utility, @NonNull VariableDeclaration iterator, @NonNull Node sourceNode) {
 		Role nodeRole = getNodeRole(sourceNode);
 		IteratorNode node = QVTscheduleFactory.eINSTANCE.createIteratorNode();
 		node.initialize(nodeRole, region, utility, getName(iterator), scheduleManager.getClassDatum(iterator));
@@ -345,7 +345,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createKeyPartEdge(@NonNull InitUtility initUtility, @NonNull Node sourceNode, @NonNull PropertyDatum propertyDatum, @NonNull Node targetNode) {
+	public @NonNull Edge createKeyPartEdge(@NonNull Utility initUtility, @NonNull Node sourceNode, @NonNull PropertyDatum propertyDatum, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		KeyPartEdge edge = QVTscheduleFactory.eINSTANCE.createKeyPartEdge();
 		edge.setReferredPart(propertyDatum);
@@ -355,7 +355,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull Node createKeyedNode(@NonNull InitUtility utility, @NonNull String name, @NonNull VariableDeclaration templateVariable) {
+	public @NonNull Node createKeyedNode(@NonNull Utility utility, @NonNull String name, @NonNull VariableDeclaration templateVariable) {
 		ClassDatum classDatum = scheduleManager.getClassDatum(templateVariable);
 		KeyedValueNode node = QVTscheduleFactory.eINSTANCE.createKeyedValueNode();
 		node.setClassDatumValue(classDatum);
@@ -365,7 +365,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull VariableNode createLetVariableNode(@NonNull InitUtility utility, @NonNull VariableDeclaration letVariable, @NonNull Node inNode) {
+	public @NonNull VariableNode createLetVariableNode(@NonNull Utility utility, @NonNull VariableDeclaration letVariable, @NonNull Node inNode) {
 		Role nodeRole = getNodeRole(inNode);
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(nodeRole, region, utility, getName(letVariable), scheduleManager.getClassDatum(letVariable));
@@ -373,7 +373,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull VariableNode createLoadedStepNode(@NonNull InitUtility utility, @NonNull VariableDeclaration stepVariable) {
+	public @NonNull VariableNode createLoadedStepNode(@NonNull Utility utility, @NonNull VariableDeclaration stepVariable) {
 		Role nodeRole = Role.LOADED;
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(nodeRole, region, utility, getName(stepVariable), scheduleManager.getClassDatum(stepVariable));
@@ -390,7 +390,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return loadingPartition;
 	}
 
-	public @NonNull MapLiteralNode createMapLiteralNode(@NonNull InitUtility utility, @NonNull String name, @NonNull MapLiteralExp mapLiteralExp, @NonNull Node @NonNull [] partNodes) {
+	public @NonNull MapLiteralNode createMapLiteralNode(@NonNull Utility utility, @NonNull String name, @NonNull MapLiteralExp mapLiteralExp, @NonNull Node @NonNull [] partNodes) {
 		Role nodeRole = getOperationNodePhase(region, mapLiteralExp, partNodes);
 		MapLiteralNode node = QVTscheduleFactory.eINSTANCE.createMapLiteralNode();
 		node.initialize(nodeRole, region, utility, name, scheduleManager.getClassDatum(mapLiteralExp));
@@ -398,7 +398,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createMapPartEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull MapLiteralPart mapPart, @NonNull Node targetNode) {
+	public @NonNull Edge createMapPartEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull MapLiteralPart mapPart, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		MapPartEdge edge = QVTscheduleFactory.eINSTANCE.createMapPartEdge();
 		edge.setReferredPart(mapPart);
@@ -407,7 +407,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull Node createMapPartNode(@NonNull InitUtility utility, @NonNull String name, @NonNull MapLiteralPart mapLiteralPart, @NonNull Node @NonNull [] argNodes) {
+	public @NonNull Node createMapPartNode(@NonNull Utility utility, @NonNull String name, @NonNull MapLiteralPart mapLiteralPart, @NonNull Node @NonNull [] argNodes) {
 		TypedElement typedElement = QVTbaseUtil.getOwnedValue(mapLiteralPart);		// FIXME delete this
 		Role nodeRole = getOperationNodePhase(region, typedElement, argNodes);
 		MapPartNode node = QVTscheduleFactory.eINSTANCE.createMapPartNode();
@@ -425,12 +425,12 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return mergedPartition;
 	}
 
-	public @NonNull NavigableEdge createNavigationEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
+	public @NonNull NavigableEdge createNavigationEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
 		Role phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode));
 		return createNavigationEdge(phase, utility, sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
-	public @NonNull NavigableEdge createNavigationEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
+	public @NonNull NavigableEdge createNavigationEdge(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
 		NavigationEdge edge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 		edge.initialize(edgeRole, utility, sourceNode, source2targetProperty.getName(), targetNode);
 		edge.initializeProperty(source2targetProperty, utility, isPartial);
@@ -446,7 +446,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return nonPartition;
 	}
 
-	public @NonNull Node createNullLiteralNode(@NonNull InitUtility utility, @Nullable NullLiteralExp nullLiteralExp) {
+	public @NonNull Node createNullLiteralNode(@NonNull Utility utility, @Nullable NullLiteralExp nullLiteralExp) {
 		Role nodeRole = Role.CONSTANT;
 		ClassDatum classDatum;
 		if (nullLiteralExp != null) {
@@ -463,7 +463,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull NumericLiteralNode createNumericLiteralNode(@NonNull InitUtility utility, @NonNull Number numericValue, @NonNull NumericLiteralExp numericLiteralExp) {
+	public @NonNull NumericLiteralNode createNumericLiteralNode(@NonNull Utility utility, @NonNull Number numericValue, @NonNull NumericLiteralExp numericLiteralExp) {
 		Role nodeRole = getOperationNodePhase(region, numericLiteralExp);
 		NumericLiteralNode node = QVTscheduleFactory.eINSTANCE.createNumericLiteralNode();
 		node.initialize(nodeRole, region, utility, numericValue.toString(), scheduleManager.getClassDatum(numericLiteralExp));
@@ -472,7 +472,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull VariableNode createOldNode(@NonNull InitUtility utility, @NonNull VariableDeclaration variable) {
+	public @NonNull VariableNode createOldNode(@NonNull Utility utility, @NonNull VariableDeclaration variable) {
 		Role nodeRole;
 		boolean isThis = QVTbaseUtil.isThis(variable);
 		if (isThis) {
@@ -496,7 +496,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull OperationCallNode createOperationCallNode(@NonNull InitUtility utility, @Nullable String nameHint, @NonNull Operation operation, @NonNull TypedElement callExpOrCollectionTemplateExp, @NonNull Node ... argNodes) {
+	public @NonNull OperationCallNode createOperationCallNode(@NonNull Utility utility, @Nullable String nameHint, @NonNull Operation operation, @NonNull TypedElement callExpOrCollectionTemplateExp, @NonNull Node ... argNodes) {
 		String name = nameHint;
 		if (name == null) {
 			name = QVTbaseUtil.getName(operation);
@@ -508,7 +508,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		node.setReferredOperation(operation);
 		return node;
 	}
-	public @NonNull OperationCallNode createOperationCallNode2(@NonNull Role nodeRole, @NonNull InitUtility utility, @Nullable String nameHint, @NonNull Operation operation, @NonNull ClassDatum classDatum, @NonNull Node ... argNodes) {
+	public @NonNull OperationCallNode createOperationCallNode2(@NonNull Role nodeRole, @NonNull Utility utility, @Nullable String nameHint, @NonNull Operation operation, @NonNull ClassDatum classDatum, @NonNull Node ... argNodes) {
 		String name = nameHint;
 		if (name == null) {
 			name = QVTbaseUtil.getName(operation);
@@ -520,7 +520,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createOperationParameterEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Parameter parameter, int parameterIndex, @NonNull Node targetNode) {
+	public @NonNull Edge createOperationParameterEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Parameter parameter, int parameterIndex, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		String name;
 		OperationParameterEdge edge = QVTscheduleFactory.eINSTANCE.createOperationParameterEdge();
@@ -539,7 +539,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull Edge createOperationSelfEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Type type, @NonNull Node targetNode) {
+	public @NonNull Edge createOperationSelfEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Type type, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		OperationSelfEdge edge = QVTscheduleFactory.eINSTANCE.createOperationSelfEdge();
 		edge.setReferredType(type);
@@ -549,7 +549,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull Node createPatternNode(@NonNull Role nodeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+	public @NonNull Node createPatternNode(@NonNull Role nodeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty) {
 		assert sourceNode.isClass();
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
 		assert type != null;
@@ -564,7 +564,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createPredicateEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	public @NonNull Edge createPredicateEdge(@NonNull Utility utility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		PredicateEdge edge = QVTscheduleFactory.eINSTANCE.createPredicateEdge();
 		edge.initialize(edgeRole, utility, sourceNode, name, targetNode);
@@ -580,13 +580,13 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return forwardEdge;
 	} */
 
-	public @NonNull Node createPredicatedNode(@NonNull InitUtility utility, @NonNull String name, @NonNull ClassDatum classDatum) {
+	public @NonNull Node createPredicatedNode(@NonNull Utility utility, @NonNull String name, @NonNull ClassDatum classDatum) {
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(Role.PREDICATED, region, utility, name, classDatum);
 		return node;
 	}
 
-	public @NonNull Node createPredicatedStepNode(@NonNull InitUtility utility, @NonNull Node typedNode) {
+	public @NonNull Node createPredicatedStepNode(@NonNull Utility utility, @NonNull Node typedNode) {
 		String name = getName(typedNode);
 		ClassDatum classDatum = getClassDatum(typedNode);
 		return createPredicatedNode(utility, name, classDatum);
@@ -595,7 +595,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	/**
 	 * Create a predicated source2targetProperty success edge from sourceNode to a true/false BooleanValueNode.
 	 */
-	public @NonNull SuccessEdge createPredicatedSuccess(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @Nullable Boolean isSuccess) {
+	public @NonNull SuccessEdge createPredicatedSuccess(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @Nullable Boolean isSuccess) {
 		Node successNode;
 		if (isSuccess != null) {
 			successNode = createBooleanLiteralNode(utility, isSuccess, null);
@@ -609,19 +609,19 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull Node createRealizedDataTypeNode(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+	public @NonNull Node createRealizedDataTypeNode(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty) {
 		Role nodeRole = Role.REALIZED;
 		return createPatternNode(nodeRole, utility, sourceNode, source2targetProperty);
 	}
 
-	public @NonNull Edge createRealizedIncludesEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createRealizedIncludesEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		Role edgeRole = Role.REALIZED;
 		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createIncludesEdge();
 		edge.initialize(edgeRole, utility, sourceNode, INCLUDES_NAME, targetNode);
 		return edge;
 	}
 
-	public @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
+	public @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isPartial) {
 		Role edgeRole = Role.REALIZED;
 		NavigationEdge forwardEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 		forwardEdge.initialize(edgeRole, utility, sourceNode, source2targetProperty.getName(), targetNode);
@@ -629,13 +629,13 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return forwardEdge;
 	}
 
-	public @NonNull VariableNode createRealizedNode(@NonNull InitUtility utility, @NonNull String name, @NonNull ClassDatum classDatum) {
+	public @NonNull VariableNode createRealizedNode(@NonNull Utility utility, @NonNull String name, @NonNull ClassDatum classDatum) {
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(Role.REALIZED, region, utility, name, classDatum);
 		return node;
 	}
 
-	public @NonNull VariableNode createRealizedStepNode(@NonNull InitUtility initUtility, @NonNull VariableDeclaration stepVariable) {
+	public @NonNull VariableNode createRealizedStepNode(@NonNull Utility initUtility, @NonNull VariableDeclaration stepVariable) {
 		VariableNode node = createRealizedNode(initUtility, getName(stepVariable), scheduleManager.getClassDatum(stepVariable));
 		node.initializeVariable(region, stepVariable);
 		return node;
@@ -645,7 +645,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	 * Create a realized source2targetProperty success edge from sourceNode to a true/false BooleanValueNode if isSuccesss is  non-null,
 	 * else to a SuccessNode.
 	 */
-	public @NonNull SuccessEdge createRealizedSuccess(@NonNull InitUtility initUtility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @Nullable Boolean isSuccess) {
+	public @NonNull SuccessEdge createRealizedSuccess(@NonNull Utility initUtility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @Nullable Boolean isSuccess) {
 		ClassDatum classDatum = scheduleManager.getBooleanClassDatum();
 		Node node;
 		if (isSuccess != null) {
@@ -653,7 +653,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		}
 		else {
 			SuccessNode successNode = QVTscheduleFactory.eINSTANCE.createSuccessNode();
-			successNode.initialize(Role.REALIZED, region, InitUtility.SUCCESS, "«success»", classDatum);
+			successNode.initialize(Role.REALIZED, region, Utility.SUCCESS, "«success»", classDatum);
 			node = successNode;
 		}
 		SuccessEdge edge = QVTscheduleFactory.eINSTANCE.createSuccessEdge();
@@ -679,7 +679,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	} */
 
-	public @NonNull ShadowNode createShadowNode(@NonNull InitUtility utility, @NonNull String name, @NonNull ShadowExp shadowExp, @NonNull Node @NonNull [] partNodes) {
+	public @NonNull ShadowNode createShadowNode(@NonNull Utility utility, @NonNull String name, @NonNull ShadowExp shadowExp, @NonNull Node @NonNull [] partNodes) {
 		Role nodeRole = getOperationNodePhase(region, shadowExp, partNodes);
 		ShadowNode node = QVTscheduleFactory.eINSTANCE.createShadowNode();
 		node.initialize(nodeRole, region, utility, name, scheduleManager.getClassDatum(shadowExp));
@@ -687,7 +687,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createShadowPartEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull ShadowPart shadowPart, @NonNull Node targetNode) {
+	public @NonNull Edge createShadowPartEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull ShadowPart shadowPart, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		ShadowPartEdge edge = QVTscheduleFactory.eINSTANCE.createShadowPartEdge();
 		edge.setReferredPart(shadowPart);
@@ -696,7 +696,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull Node createStepNode(@NonNull InitUtility utility, @NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
+	public @NonNull Node createStepNode(@NonNull Utility utility, @NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(callExp);
 		boolean isMiddleOrOutput = scheduleManager.isOutputInRule(QVTbaseUtil.getContainingRule(callExp), callExp) || domainUsage.isMiddle();
 		boolean isDirty = false;
@@ -720,7 +720,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	} */
 
-	public @NonNull StringLiteralNode createStringLiteralNode(@NonNull InitUtility utility, @NonNull String stringValue, @NonNull StringLiteralExp stringLiteralExp) {
+	public @NonNull StringLiteralNode createStringLiteralNode(@NonNull Utility utility, @NonNull String stringValue, @NonNull StringLiteralExp stringLiteralExp) {
 		Role nodeRole = getOperationNodePhase(region, stringLiteralExp);
 		StringLiteralNode node = QVTscheduleFactory.eINSTANCE.createStringLiteralNode();
 		node.initialize(nodeRole, region, utility, stringValue, scheduleManager.getClassDatum(stringLiteralExp));
@@ -729,7 +729,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull TupleLiteralNode createTupleLiteralNode(@NonNull InitUtility utility, @NonNull String name, @NonNull TupleLiteralExp tupleLiteralExp, @NonNull Node @NonNull [] partNodes) {
+	public @NonNull TupleLiteralNode createTupleLiteralNode(@NonNull Utility utility, @NonNull String name, @NonNull TupleLiteralExp tupleLiteralExp, @NonNull Node @NonNull [] partNodes) {
 		Role nodeRole = getOperationNodePhase(region, tupleLiteralExp, partNodes);
 		TupleLiteralNode node = QVTscheduleFactory.eINSTANCE.createTupleLiteralNode();
 		node.initialize(nodeRole, region, utility, name, scheduleManager.getClassDatum(tupleLiteralExp));
@@ -737,7 +737,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createTuplePartEdge(@NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull TupleLiteralPart tuplePart, @NonNull Node targetNode) {
+	public @NonNull Edge createTuplePartEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull TupleLiteralPart tuplePart, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		TuplePartEdge edge = QVTscheduleFactory.eINSTANCE.createTuplePartEdge();
 		edge.setReferredPart(tuplePart);
@@ -746,7 +746,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull TypeLiteralNode createTypeLiteralNode(@NonNull InitUtility utility, @NonNull Type typeValue, @NonNull TypeExp typeExp) {
+	public @NonNull TypeLiteralNode createTypeLiteralNode(@NonNull Utility utility, @NonNull Type typeValue, @NonNull TypeExp typeExp) {
 		ClassDatum classDatum = scheduleManager.getClassDatum(typeExp);
 		//		String typeName = PrettyPrinter.printType(QVTscheduleUtil.getCompleteClass(classDatum));
 		Role nodeRole = getOperationNodePhase(region, typeExp);
@@ -760,7 +760,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	public @NonNull Node createUnknownNode(@NonNull String name, @NonNull TypedElement typedElement) {
 		Role nodeRole = Role.OTHER;
 		UnknownNode node = QVTscheduleFactory.eINSTANCE.createUnknownNode();
-		node.initialize(nodeRole, region, InitUtility.NOT_KNOWN, name, scheduleManager.getClassDatum(typedElement));
+		node.initialize(nodeRole, region, Utility.NOT_KNOWN, name, scheduleManager.getClassDatum(typedElement));
 		return node;
 	}
 

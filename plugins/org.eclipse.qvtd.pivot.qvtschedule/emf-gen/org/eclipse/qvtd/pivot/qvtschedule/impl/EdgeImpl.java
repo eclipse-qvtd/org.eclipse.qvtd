@@ -33,7 +33,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -672,7 +672,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull InitUtility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		EdgeImpl edge = (EdgeImpl)QVTscheduleFactory.eINSTANCE.create(eClass());
 		edge.initialize(edgeRole, utility, sourceNode, name, targetNode);
 		return edge;
@@ -774,15 +774,15 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		}
 	}
 
-	private @NonNull InitUtility initUtility = InitUtility.NOT_KNOWN;
+	private @NonNull Utility initUtility = Utility.NOT_KNOWN;
 
 	@Override
-	public @NonNull InitUtility getInitUtility() {
+	public @NonNull Utility getInitUtility() {
 		return initUtility;
 	}
 
 	@Override
-	public void initialize(@NonNull Role edgeRole, @NonNull InitUtility initUtility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	public void initialize(@NonNull Role edgeRole, @NonNull Utility initUtility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		setOwningRegion(QVTscheduleUtil.getOwningRegion(sourceNode));
 		setEdgeRole(edgeRole);
 		setName(name);

@@ -17,7 +17,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 /**
  * A TopWhereInvocationAnalysis identifies the invocation of a top Relation by a where clause in another.
@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 public class TopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 {
 	public TopWhereInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
-			@NonNull InitUtility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
 	}
 

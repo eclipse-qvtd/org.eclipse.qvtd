@@ -28,18 +28,18 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpressionSynthesizer
 {
-	protected QVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable QVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer, @NonNull InitUtility initUtility) {
+	protected QVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable QVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer, @NonNull Utility initUtility) {
 		super(context, unconditionalExpressionSynthesizer, initUtility);
 	}
 
 	@Override
-	protected @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull InitUtility initUtility) {
+	protected @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull Utility initUtility) {
 		return new QVTrelationExpressionSynthesizer(getRelationAnalysis(), this, initUtility);
 	}
 

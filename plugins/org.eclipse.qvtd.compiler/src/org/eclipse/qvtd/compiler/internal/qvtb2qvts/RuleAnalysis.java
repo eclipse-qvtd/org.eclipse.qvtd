@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Lists;
@@ -93,7 +93,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		if (dependencyHeadNodes == null) {
 			dependencyHeadNodes = new ArrayList<>();
 		}
-		Node dependencyHeadNode = createDependencyNode(InitUtility.DEPENDENCY, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatum);
+		Node dependencyHeadNode = createDependencyNode(Utility.DEPENDENCY, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatum);
 		dependencyHeadNode.setHead();
 		dependencyHeadNodes.add(dependencyHeadNode);
 		return dependencyHeadNode;

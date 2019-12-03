@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class RegionAnalysis extends AbstractRegionAnalysis
@@ -108,7 +108,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		Relation2TraceClass relation2TraceClass = relation2traceGroup.getRule2TraceClass();
 		Element2MiddleProperty relation2localSuccessProperty = relation2TraceClass.getRelation2LocalSuccessProperty();
 		Property localSuccessProperty = relation2localSuccessProperty.getTraceProperty();
-		relationAnalysis.createRealizedSuccess(InitUtility.NON_NULL_MATCHED, traceNode, localSuccessProperty, null);
+		relationAnalysis.createRealizedSuccess(Utility.NON_NULL_MATCHED, traceNode, localSuccessProperty, null);
 		analyzeLocalSuccessEdge(traceNode);
 	}
 

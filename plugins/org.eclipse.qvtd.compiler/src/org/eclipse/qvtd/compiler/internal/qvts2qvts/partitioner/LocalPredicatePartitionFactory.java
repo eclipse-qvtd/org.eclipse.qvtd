@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -182,8 +182,8 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 				//			boolean isPredicated = node.isPredicated();
 				//			boolean isMatched = node.isMatched();
 				//			boolean isUnconditional = node.isUnconditional();
-				InitUtility initUtility = node.getInitUtility();
-				boolean isWeaklyMatched = initUtility == InitUtility.NULLABLE_MATCHED; // Utility.WEAKLY_MATCHED;
+				Utility initUtility = node.getInitUtility();
+				boolean isWeaklyMatched = initUtility == Utility.NULLABLE_MATCHED; // Utility.WEAKLY_MATCHED;
 				boolean isTraced = isTraced(node, executionNodes);
 				if (!isCyclicCorollary && (isTraced || isWeaklyMatched)) {
 					addNode(partition, node);

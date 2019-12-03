@@ -24,8 +24,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,7 +93,7 @@ public class DependencyNodeImpl extends NodeImpl implements DependencyNode {
 
 	@Override
 	public void initialize(@NonNull Role nodeRole, @NonNull Region region,
-			@NonNull InitUtility initUtility, String name,
+			@NonNull Utility initUtility, String name,
 			ClassDatum classDatum) {
 		// TODO Auto-generated method stub
 		super.initialize(nodeRole, region, initUtility, name, classDatum);

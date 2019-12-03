@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.InitUtility;
+import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 /**
  * A QVTrelationMultipleScheduleManager supervises and proviides the shared functionality for a distinct
@@ -89,7 +89,7 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 
 	@Override
 	public @NonNull ExpressionSynthesizer createRootExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
-		return new QVTrelationExpressionSynthesizer((RelationAnalysis) ruleAnalysis, null, InitUtility.NON_NULL_MATCHED);
+		return new QVTrelationExpressionSynthesizer((RelationAnalysis) ruleAnalysis, null, Utility.NON_NULL_MATCHED);
 	}
 
 	@Override
