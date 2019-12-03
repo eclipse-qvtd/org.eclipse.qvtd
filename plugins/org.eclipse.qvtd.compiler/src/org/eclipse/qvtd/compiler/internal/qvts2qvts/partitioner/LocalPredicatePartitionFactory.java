@@ -182,7 +182,7 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 				//			boolean isPredicated = node.isPredicated();
 				//			boolean isMatched = node.isMatched();
 				//			boolean isUnconditional = node.isUnconditional();
-				Utility initUtility = node.getInitUtility();
+				Utility initUtility = node.getUtility();
 				boolean isWeaklyMatched = initUtility == Utility.NULLABLE_MATCHED; // Utility.WEAKLY_MATCHED;
 				boolean isTraced = isTraced(node, executionNodes);
 				if (!isCyclicCorollary && (isTraced || isWeaklyMatched)) {

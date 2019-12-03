@@ -40,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getOwningRegion <em>Owning Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode <em>Source Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getTargetNode <em>Target Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getUtility <em>Utility</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge()
@@ -89,9 +90,9 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * @see #setEdgeRole(Role)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_EdgeRole()
 	 * @model required="true"
-	 * @generated
+	 * @generated NOT
 	 */
-	Role getEdgeRole();
+	@NonNull Role getEdgeRole();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}' attribute.
@@ -214,6 +215,36 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 * @generated
 	 */
 	void setTargetNode(Node value);
+
+	/**
+	 * Returns the value of the '<em><b>Utility</b></em>' attribute.
+	 * The default value is <code>"NOT_KNOWN"</code>.
+	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.Utility}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Utility</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Utility</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Utility
+	 * @see #setUtility(Utility)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_Utility()
+	 * @model default="NOT_KNOWN" required="true"
+	 * @generated NOT
+	 */
+	@NonNull Utility getUtility();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getUtility <em>Utility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Utility</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Utility
+	 * @see #getUtility()
+	 * @generated
+	 */
+	void setUtility(Utility value);
 
 	/**
 	 * Create an edgeRole edge from sourceNode to targetNode with the same name as this edge.
@@ -375,6 +406,4 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	void setSource(@NonNull Node sourceNode);
 
 	void setTarget(@NonNull Node targetNode);
-
-	@NonNull Utility getInitUtility();
 } // Edge

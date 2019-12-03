@@ -118,7 +118,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 		boolean oldPrimary = primary;
 		primary = newPrimary;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldPrimary, primary));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldPrimary, primary));
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return isPrimary();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -143,9 +143,9 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setPrimary((Boolean)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -158,9 +158,9 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setPrimary(PRIMARY_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -173,7 +173,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return primary != PRIMARY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

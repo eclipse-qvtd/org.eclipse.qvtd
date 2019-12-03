@@ -282,10 +282,10 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 	protected @NonNull String getColor(@NonNull GraphElement element) {
 		Utility initUtility = null;
 		if (element instanceof Node) {
-			initUtility = ((Node)element).getInitUtility();
+			initUtility = ((Node)element).getUtility();
 		}
 		else if (element instanceof Edge) {
-			initUtility = ((Edge)element).getInitUtility();
+			initUtility = ((Edge)element).getUtility();
 		}
 		else {
 			initUtility = Utility.NOT_KNOWN;

@@ -129,7 +129,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 			referredParameter = (Parameter)eResolveProxy(oldReferredParameter);
 			if (referredParameter != oldReferredParameter) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredParameter, referredParameter));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldReferredParameter, referredParameter));
 			}
 		}
 		return referredParameter;
@@ -154,7 +154,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 		Parameter oldReferredParameter = referredParameter;
 		referredParameter = newReferredParameter;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredParameter, referredParameter));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldReferredParameter, referredParameter));
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 		int oldParameterIndex = parameterIndex;
 		parameterIndex = newParameterIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldParameterIndex, parameterIndex));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 8, oldParameterIndex, parameterIndex));
 	}
 
 	/**
@@ -188,10 +188,10 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
-				if (resolve) return getReferredParameter();
-			return basicGetReferredParameter();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+				if (resolve) return getReferredParameter();
+				return basicGetReferredParameter();
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getParameterIndex();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -205,12 +205,12 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
-				setReferredParameter((Parameter)newValue);
-			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+				setReferredParameter((Parameter)newValue);
+				return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setParameterIndex((Integer)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -223,12 +223,12 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
-				setReferredParameter((Parameter)null);
-			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+				setReferredParameter((Parameter)null);
+				return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setParameterIndex(PARAMETER_INDEX_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -241,9 +241,9 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
-				return referredParameter != null;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+				return referredParameter != null;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return parameterIndex != PARAMETER_INDEX_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

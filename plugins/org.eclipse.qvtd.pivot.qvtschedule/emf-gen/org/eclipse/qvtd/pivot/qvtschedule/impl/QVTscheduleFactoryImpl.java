@@ -147,6 +147,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case 77:
 				return createRoleFromString(eDataType, initialValue);
 			case 78:
+				return createUtilityFromString(eDataType, initialValue);
+			case 79:
 				return createNumberFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -166,6 +168,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case 77:
 				return convertRoleToString(eDataType, instanceValue);
 			case 78:
+				return convertUtilityToString(eDataType, instanceValue);
+			case 79:
 				return convertNumberToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -858,6 +862,26 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	public String convertRoleToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Utility createUtilityFromString(EDataType eDataType, String initialValue) {
+		Utility result = Utility.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUtilityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

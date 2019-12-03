@@ -586,7 +586,7 @@ public class MappingAnalysis extends RuleAnalysis
 				// navigation to the bestInitNode
 				Node initNode = bestInitExpression.accept(rootExpressionSynthesizer);
 				assert initNode != null;
-				createEqualsEdge(initNode.getInitUtility(), bestInitNode, initNode);
+				createEqualsEdge(initNode.getUtility(), bestInitNode, initNode);
 			}
 		}
 		return bestInitNode;

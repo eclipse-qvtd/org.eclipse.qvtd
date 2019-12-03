@@ -48,6 +48,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingConnections <em>Outgoing Connections</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingEdges <em>Outgoing Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOwningRegion <em>Owning Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getUtility <em>Utility</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode()
@@ -167,9 +168,9 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @see #setNodeRole(Role)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_NodeRole()
 	 * @model required="true"
-	 * @generated
+	 * @generated NOT
 	 */
-	Role getNodeRole();
+	@NonNull Role getNodeRole();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}' attribute.
@@ -244,6 +245,36 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @generated
 	 */
 	void setOwningRegion(Region value);
+
+	/**
+	 * Returns the value of the '<em><b>Utility</b></em>' attribute.
+	 * The default value is <code>"NOT_KNOWN"</code>.
+	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.Utility}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Utility</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Utility</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Utility
+	 * @see #setUtility(Utility)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_Utility()
+	 * @model default="NOT_KNOWN" required="true"
+	 * @generated NOT
+	 */
+	@NonNull Utility getUtility();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getUtility <em>Utility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Utility</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Utility
+	 * @see #getUtility()
+	 * @generated
+	 */
+	void setUtility(Utility value);
 
 	/**
 	 * Register element as a further expression that shares the value of the originating element of this node.
@@ -533,6 +564,4 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * Redesignate a guard node as a "this" head.
 	 */
 	void setThis();
-
-	@NonNull Utility getInitUtility();
 } // Node

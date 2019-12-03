@@ -105,7 +105,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 			referredType = (Type)eResolveProxy(oldReferredType);
 			if (referredType != oldReferredType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredType, referredType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldReferredType, referredType));
 			}
 		}
 		return referredType;
@@ -130,7 +130,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 		Type oldReferredType = referredType;
 		referredType = newReferredType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredType, referredType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldReferredType, referredType));
 	}
 
 	/**
@@ -141,9 +141,9 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getReferredType();
-			return basicGetReferredType();
+				return basicGetReferredType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,9 +156,9 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setReferredType((Type)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -171,9 +171,9 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setReferredType((Type)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -186,7 +186,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return referredType != null;
 		}
 		return super.eIsSet(featureID);

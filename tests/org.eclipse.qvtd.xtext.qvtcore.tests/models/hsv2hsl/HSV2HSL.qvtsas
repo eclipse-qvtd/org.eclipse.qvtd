@@ -81,21 +81,21 @@
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="k5T+z" edgeRole="REALIZED" name="hsl" sourceNode="#ggCj2" targetNode="#ngCj2"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="l5T+z" edgeRole="REALIZED" name="name" sourceNode="#ggCj2" targetNode="#jgCj2"/>
     <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="egCj2" classDatum="#AFlEp" incomingConnection="#66KzN" incomingEdges="#b5T+z"
-        matched="true" name="hsvRoot" nodeRole="LOADED" outgoingEdges="#X5T+z #c5T+z #d5T+z #g5T+z"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="fgCj2" classDatum="#RoHHm" incomingEdges="#a5T+z #c5T+z" matched="true" name="middleRoot"
+        utility="NON_NULL_MATCHED" name="hsvRoot" nodeRole="LOADED" outgoingEdges="#X5T+z #c5T+z #d5T+z #g5T+z"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="fgCj2" classDatum="#RoHHm" incomingEdges="#a5T+z #c5T+z" utility="NON_NULL_MATCHED" name="middleRoot"
         nodeRole="REALIZED" outgoingEdges="#Z5T+z #b5T+z #e5T+z #f5T+z #i5T+z"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="ggCj2" classDatum="#2YWho" incomingEdges="#Z5T+z" matched="true" name="hslRoot"
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="ggCj2" classDatum="#2YWho" incomingEdges="#Z5T+z" utility="NON_NULL_MATCHED" name="hslRoot"
         nodeRole="REALIZED" outgoingEdges="#Y5T+z #a5T+z #k5T+z #l5T+z"/>
-    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="hgCj2" classDatum="#fKS53" incomingEdges="#X5T+z" matched="true" name="«null»"/>
-    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="igCj2" classDatum="#fKS53A" incomingEdges="#Y5T+z" matched="true" name="«null»"/>
-    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="jgCj2" classDatum="#kALCK" incomingEdges="#d5T+z #e5T+z #l5T+z" matched="true"
+    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="hgCj2" classDatum="#fKS53" incomingEdges="#X5T+z" utility="NON_NULL_MATCHED" name="«null»"/>
+    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="igCj2" classDatum="#fKS53A" incomingEdges="#Y5T+z" utility="NON_NULL_MATCHED" name="«null»"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="jgCj2" classDatum="#kALCK" incomingEdges="#d5T+z #e5T+z #l5T+z" utility="NON_NULL_MATCHED"
         name="name" nodeRole="LOADED"/>
-    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="kgCj2" classDatum="#fKS53B" incomingEdges="#f5T+z" matched="true" name="«null»"/>
-    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="lgCj2" classDatum="#ey3z1" incomingEdges="#g5T+z" matched="true" name="hsv" nodeRole="LOADED"
+    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="kgCj2" classDatum="#fKS53B" incomingEdges="#f5T+z" utility="NON_NULL_MATCHED" name="«null»"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="lgCj2" classDatum="#ey3z1" incomingEdges="#g5T+z" utility="NON_NULL_MATCHED" name="hsv" nodeRole="LOADED"
         outgoingEdges="#h5T+z"/>
-    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="mgCj2" classDatum="#gC6z1" incomingEdges="#h5T+z #i5T+z" matched="true" name="hsv2rgb"
+    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="mgCj2" classDatum="#gC6z1" incomingEdges="#h5T+z #i5T+z" utility="NON_NULL_MATCHED" name="hsv2rgb"
         nodeRole="LOADED" outgoingEdges="#j5T+z"/>
-    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="ngCj2" classDatum="#Uy3z1" incomingEdges="#j5T+z #k5T+z" matched="true" name="rgb2hsl"
+    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="ngCj2" classDatum="#Uy3z1" incomingEdges="#j5T+z #k5T+z" utility="NON_NULL_MATCHED" name="rgb2hsl"
         nodeRole="LOADED"/>
   </ownedMappingRegions>
   <ownedMappingRegions xsi:type="qvts:RuleRegion" xmi:id="Wzq3K" headNodes="#8yZAE" mappingPartitions="#CUllQ #kWYUh #DBNYy #H47eO" name="HSV2HSLRecursion"
@@ -129,25 +129,25 @@
         sourceNode="#CzZAE" targetNode="#DzZAE"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="EMrbB" edgeRole="REALIZED" name="hsl" sourceNode="#,yZAE" targetNode="#DzZAE"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="FMrbB" edgeRole="REALIZED" name="name" sourceNode="#,yZAE" targetNode="#AzZAE"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="6yZAE" classDatum="#RoHHm" incomingEdges="#0LrbB #2LrbB #,LrbB" matched="true"
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="6yZAE" classDatum="#RoHHm" incomingEdges="#0LrbB #2LrbB #,LrbB" utility="NON_NULL_MATCHED"
         name="middleParent" nodeRole="PREDICATED" outgoingEdges="#zLrbB #1LrbB"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="7yZAE" classDatum="#2YWho" incomingEdges="#zLrbB #4LrbB" matched="true" name="hslParent"
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="7yZAE" classDatum="#2YWho" incomingEdges="#zLrbB #4LrbB" utility="NON_NULL_MATCHED" name="hslParent"
         nodeRole="PREDICATED" outgoingEdges="#0LrbB"/>
     <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="8yZAE" classDatum="#AFlEp" incomingConnection="#66KzN" incomingEdges="#7LrbB"
-        matched="true" name="hsvNode" nodeRole="LOADED" outgoingEdges="#3LrbB #8LrbB #9LrbB #AMrbB"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="9yZAE" classDatum="#AFlEp" incomingEdges="#1LrbB #3LrbB" matched="true" name="hsvParent"
+        utility="NON_NULL_MATCHED" name="hsvNode" nodeRole="LOADED" outgoingEdges="#3LrbB #8LrbB #9LrbB #AMrbB"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="9yZAE" classDatum="#AFlEp" incomingEdges="#1LrbB #3LrbB" utility="NON_NULL_MATCHED" name="hsvParent"
         nodeRole="LOADED" outgoingEdges="#2LrbB"/>
     <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="+yZAE" classDatum="#RoHHm" incomingConnection="#76KzN" incomingEdges="#6LrbB #8LrbB"
-        matched="true" name="middleNode" nodeRole="REALIZED" outgoingConnections="#76KzN" outgoingEdges="#5LrbB #7LrbB #+LrbB #,LrbB #CMrbB"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id=",yZAE" classDatum="#2YWho" incomingEdges="#5LrbB" matched="true" name="hslNode"
+        utility="NON_NULL_MATCHED" name="middleNode" nodeRole="REALIZED" outgoingConnections="#76KzN" outgoingEdges="#5LrbB #7LrbB #+LrbB #,LrbB #CMrbB"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id=",yZAE" classDatum="#2YWho" incomingEdges="#5LrbB" utility="NON_NULL_MATCHED" name="hslNode"
         nodeRole="REALIZED" outgoingEdges="#4LrbB #6LrbB #EMrbB #FMrbB"/>
-    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="AzZAE" classDatum="#kALCK" incomingEdges="#9LrbB #+LrbB #FMrbB" matched="true"
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="AzZAE" classDatum="#kALCK" incomingEdges="#9LrbB #+LrbB #FMrbB" utility="NON_NULL_MATCHED"
         name="name" nodeRole="LOADED"/>
-    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="BzZAE" classDatum="#ey3z1" incomingEdges="#AMrbB" matched="true" name="hsv" nodeRole="LOADED"
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="BzZAE" classDatum="#ey3z1" incomingEdges="#AMrbB" utility="NON_NULL_MATCHED" name="hsv" nodeRole="LOADED"
         outgoingEdges="#BMrbB"/>
-    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="CzZAE" classDatum="#gC6z1" incomingEdges="#BMrbB #CMrbB" matched="true" name="hsv2rgb"
+    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="CzZAE" classDatum="#gC6z1" incomingEdges="#BMrbB #CMrbB" utility="NON_NULL_MATCHED" name="hsv2rgb"
         nodeRole="LOADED" outgoingEdges="#DMrbB"/>
-    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="DzZAE" classDatum="#Uy3z1" incomingEdges="#DMrbB #EMrbB" matched="true" name="rgb2hsl"
+    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="DzZAE" classDatum="#Uy3z1" incomingEdges="#DMrbB #EMrbB" utility="NON_NULL_MATCHED" name="rgb2hsl"
         nodeRole="LOADED"/>
   </ownedMappingRegions>
   <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">

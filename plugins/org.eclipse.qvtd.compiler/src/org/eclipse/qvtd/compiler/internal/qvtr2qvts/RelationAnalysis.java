@@ -1256,7 +1256,7 @@ public class RelationAnalysis extends RuleAnalysis
 			Node node = property2node.get(property);
 			assert node != null;
 			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, property);
-			createKeyPartEdge(keyNode.getInitUtility(), node, propertyDatum, keyNode);
+			createKeyPartEdge(keyNode.getUtility(), node, propertyDatum, keyNode);
 		}
 		return null;
 	}
@@ -1293,8 +1293,8 @@ public class RelationAnalysis extends RuleAnalysis
 				Node selfNode = residueNode;
 				assert selfNode != null;
 				residueNode = createOperationCallNode(Utility.NON_NULL_MATCHED, null, collectionExcludingOperation, collectionTemplateExp, residueNode, memberNode);
-				createOperationSelfEdge(selfNode.getInitUtility(), selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
-				createOperationParameterEdge(memberNode.getInitUtility(), memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
+				createOperationSelfEdge(selfNode.getUtility(), selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
+				createOperationParameterEdge(memberNode.getUtility(), memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
 			}
 			memberNode = member.accept(rootExpressionSynthesizer);
 			assert memberNode != null;
@@ -1308,8 +1308,8 @@ public class RelationAnalysis extends RuleAnalysis
 				Node selfNode = residueNode;
 				assert selfNode != null;
 				residueNode = createOperationCallNode(Utility.NON_NULL_MATCHED, null, collectionExcludingOperation, collectionTemplateExp, residueNode, memberNode);
-				createOperationSelfEdge(selfNode.getInitUtility(), selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
-				createOperationParameterEdge(memberNode.getInitUtility(), memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
+				createOperationSelfEdge(selfNode.getUtility(), selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
+				createOperationParameterEdge(memberNode.getUtility(), memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
 			}
 			Node restNode = rest.accept(rootExpressionSynthesizer);
 			assert restNode != null;
@@ -1427,7 +1427,7 @@ public class RelationAnalysis extends RuleAnalysis
 				assert memberNode != null;
 				//			memberNodes.add(memberNode);
 				//			createPredicateEdge(collectionNode, "head-" + i++, memberNode);
-				createRealizedIncludesEdge(memberNode.getInitUtility(), collectionNode, memberNode);
+				createRealizedIncludesEdge(memberNode.getUtility(), collectionNode, memberNode);
 			}
 		}
 	}
@@ -1464,7 +1464,7 @@ public class RelationAnalysis extends RuleAnalysis
 						VariableDeclaration overridingRootVariable = QVTrelationUtil.getOverriddenVariable(overridingRelation, rootVariable);
 						Property invocationProperty = overridingRelation2TraceInterface.getTraceProperty(overridingRootVariable);
 						boolean isPartial = scheduleManager.computeIsPartial(rootVariableNode, invocationProperty);
-						createNavigationEdge(rootVariableNode.getInitUtility(), guardNode, invocationProperty, rootVariableNode, isPartial);
+						createNavigationEdge(rootVariableNode.getUtility(), guardNode, invocationProperty, rootVariableNode, isPartial);
 					}
 				}
 			}
@@ -1558,16 +1558,16 @@ public class RelationAnalysis extends RuleAnalysis
 			//			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(resultNode);
 			//			if (!resultNode.isRequired() || (classDatum != scheduleManager.getBooleanClassDatum())) {
 			if (!resultNode.isRequired()) {
-				Node trueNode = createBooleanLiteralNode(resultNode.getInitUtility(), true);
-				createPredicateEdge(resultNode.getInitUtility(), resultNode, null, trueNode);
+				Node trueNode = createBooleanLiteralNode(resultNode.getUtility(), true);
+				createPredicateEdge(resultNode.getUtility(), resultNode, null, trueNode);
 			}
 			//	else if (classDatum != scheduleManager.getBooleanClassDatum()) {
 			//		Node trueNode = createBooleanLiteralNode(true);
 			//		createPredicateEdge(resultNode, null, trueNode);
 			//	}
 			else if (!(resultNode instanceof BooleanLiteralNode)) {
-				Node trueNode = createBooleanLiteralNode(resultNode.getInitUtility(), true);
-				createPredicateEdge(resultNode.getInitUtility(), resultNode, null, trueNode);
+				Node trueNode = createBooleanLiteralNode(resultNode.getUtility(), true);
+				createPredicateEdge(resultNode.getUtility(), resultNode, null, trueNode);
 			}
 		}
 	}
@@ -1686,10 +1686,10 @@ public class RelationAnalysis extends RuleAnalysis
 					assert targetNode != null;
 					boolean isPartial = scheduleManager.computeIsPartial(dispatchNode, traceProperty);
 					if (isInput) {
-						createNavigationEdge(targetNode.getInitUtility(), dispatchNode, traceProperty, targetNode, isPartial);
+						createNavigationEdge(targetNode.getUtility(), dispatchNode, traceProperty, targetNode, isPartial);
 					}
 					else {
-						createRealizedNavigationEdge(targetNode.getInitUtility(), dispatchNode, traceProperty, targetNode, isPartial);
+						createRealizedNavigationEdge(targetNode.getUtility(), dispatchNode, traceProperty, targetNode, isPartial);
 					}
 				}
 			}
@@ -1704,7 +1704,7 @@ public class RelationAnalysis extends RuleAnalysis
 				assert targetNode != null;
 				if (!rootVariables.contains(tracedVariable)) {
 					boolean isPartial = scheduleManager.computeIsPartial(targetNode, traceProperty);
-					createRealizedNavigationEdge(targetNode.getInitUtility(), traceNode, traceProperty, targetNode, isPartial);
+					createRealizedNavigationEdge(targetNode.getUtility(), traceNode, traceProperty, targetNode, isPartial);
 				}
 			}
 		}

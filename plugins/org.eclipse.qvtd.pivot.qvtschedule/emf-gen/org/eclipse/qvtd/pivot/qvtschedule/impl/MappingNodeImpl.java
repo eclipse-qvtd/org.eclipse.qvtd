@@ -17,17 +17,13 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -39,12 +35,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Mapping Node</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingNodeImpl#isMatched <em>Matched</em>}</li>
- * </ul>
  *
  * @generated
  */
@@ -56,7 +46,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MAPPING_NODE_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 1;
+	public static final int MAPPING_NODE_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Mapping Node</em>' class.
@@ -66,26 +56,6 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	 * @ordered
 	 */
 	public static final int MAPPING_NODE_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
-
-	/**
-	 * The default value of the '{@link #isMatched() <em>Matched</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isMatched()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean MATCHED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isMatched() <em>Matched</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isMatched()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean matched = MATCHED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,88 +74,6 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.MAPPING_NODE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Deprecated /* @deprecated use initUtility */
-	@Override
-	public final boolean isMatched() {
-		return !getInitUtility().isConditional();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMatched(boolean newMatched) {
-		boolean oldMatched = matched;
-		matched = newMatched;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 9, oldMatched, matched));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				return isMatched();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				setMatched((Boolean)newValue);
-			return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				setMatched(MATCHED_EDEFAULT);
-			return;
-		}
-		super.eUnset(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
-				return matched != MATCHED_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
 	}
 
 	private final @NonNull List<@NonNull Element> originatingElements = new ArrayList<>();

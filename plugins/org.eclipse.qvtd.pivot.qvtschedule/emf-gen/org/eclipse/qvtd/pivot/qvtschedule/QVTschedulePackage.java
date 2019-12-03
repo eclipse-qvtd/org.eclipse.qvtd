@@ -808,6 +808,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getEdge_TargetNode();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getUtility <em>Utility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Utility</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getUtility()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EAttribute getEdge_Utility();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection <em>Edge Connection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -880,6 +891,16 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getRole();
+
+	/**
+	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtschedule.Utility <em>Utility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Utility</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Utility
+	 * @generated
+	 */
+	EEnum getUtility();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.Number <em>Number</em>}'.
@@ -1384,17 +1405,6 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getMappingNode();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingNode#isMatched <em>Matched</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Matched</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingNode#isMatched()
-	 * @see #getMappingNode()
-	 * @generated
-	 */
-	EAttribute getMappingNode_Matched();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition <em>Mapping Partition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1706,6 +1716,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNode_OwningRegion();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getUtility <em>Utility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Utility</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getUtility()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EAttribute getNode_Utility();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection <em>Node Connection</em>}'.
@@ -2903,6 +2924,14 @@ public interface QVTschedulePackage extends EPackage {
 		EReference EDGE__TARGET_NODE = eINSTANCE.getEdge_TargetNode();
 
 		/**
+		 * The meta object literal for the '<em><b>Utility</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EDGE__UTILITY = eINSTANCE.getEdge_Utility();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeConnectionImpl <em>Edge Connection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2963,6 +2992,16 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum ROLE = eINSTANCE.getRole();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Utility <em>Utility</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.Utility
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getUtility()
+		 * @generated
+		 */
+		EEnum UTILITY = eINSTANCE.getUtility();
 
 		/**
 		 * The meta object literal for the '<em>Number</em>' data type.
@@ -3409,14 +3448,6 @@ public interface QVTschedulePackage extends EPackage {
 		EClass MAPPING_NODE = eINSTANCE.getMappingNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Matched</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MAPPING_NODE__MATCHED = eINSTANCE.getMappingNode_Matched();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingPartitionImpl <em>Mapping Partition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3659,6 +3690,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference NODE__OWNING_REGION = eINSTANCE.getNode_OwningRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Utility</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE__UTILITY = eINSTANCE.getNode_Utility();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl <em>Node Connection</em>}' class.

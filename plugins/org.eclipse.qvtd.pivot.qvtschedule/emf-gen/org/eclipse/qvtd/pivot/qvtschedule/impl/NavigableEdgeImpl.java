@@ -112,7 +112,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			incomingConnection = (EdgeConnection)eResolveProxy(oldIncomingConnection);
 			if (incomingConnection != oldIncomingConnection) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldIncomingConnection, incomingConnection));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldIncomingConnection, incomingConnection));
 			}
 		}
 		return incomingConnection;
@@ -137,7 +137,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		EdgeConnection oldIncomingConnection = incomingConnection;
 		incomingConnection = newIncomingConnection;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldIncomingConnection, incomingConnection));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldIncomingConnection, incomingConnection));
 	}
 
 	/**
@@ -148,7 +148,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public List<EdgeConnection> getOutgoingConnections() {
 		if (outgoingConnections == null) {
-			outgoingConnections = new EObjectResolvingEList<EdgeConnection>(EdgeConnection.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
+			outgoingConnections = new EObjectResolvingEList<EdgeConnection>(EdgeConnection.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
 		}
 		return outgoingConnections;
 	}
@@ -161,10 +161,10 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getIncomingConnection();
 				return basicGetIncomingConnection();
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getOutgoingConnections();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -179,10 +179,10 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setIncomingConnection((EdgeConnection)newValue);
 				return;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getOutgoingConnections().clear();
 				getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
 				return;
@@ -198,10 +198,10 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setIncomingConnection((EdgeConnection)null);
 				return;
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getOutgoingConnections().clear();
 				return;
 		}
@@ -216,9 +216,9 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
-				return incomingConnection != null;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+				return incomingConnection != null;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return outgoingConnections != null && !outgoingConnections.isEmpty();
 		}
 		return super.eIsSet(featureID);

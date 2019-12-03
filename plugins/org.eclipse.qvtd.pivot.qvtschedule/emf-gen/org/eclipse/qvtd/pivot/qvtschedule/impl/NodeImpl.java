@@ -70,6 +70,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOutgoingConnections <em>Outgoing Connections</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOutgoingEdges <em>Outgoing Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOwningRegion <em>Owning Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getUtility <em>Utility</em>}</li>
  * </ul>
  *
  * @generated
@@ -82,7 +83,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NODE_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 9;
+	public static final int NODE_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of operations of the '<em>Node</em>' class.
@@ -158,20 +159,20 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNodeRole()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final Role NODE_ROLE_EDEFAULT = Role.CONSTANT;
+	protected static final @NonNull Role NODE_ROLE_EDEFAULT = Role.CONSTANT;
 
 	/**
 	 * The cached value of the '{@link #getNodeRole() <em>Node Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNodeRole()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected Role nodeRole = NODE_ROLE_EDEFAULT;
+	protected @NonNull Role nodeRole = NODE_ROLE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOutgoingConnections() <em>Outgoing Connections</em>}' reference list.
@@ -192,6 +193,26 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @ordered
 	 */
 	protected EList<Edge> outgoingEdges;
+
+	/**
+	 * The default value of the '{@link #getUtility() <em>Utility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUtility()
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected static final @NonNull Utility UTILITY_EDEFAULT = Utility.NOT_KNOWN;
+
+	/**
+	 * The cached value of the '{@link #getUtility() <em>Utility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUtility()
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected @NonNull Utility utility = UTILITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -357,10 +378,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
-	public Role getNodeRole() {
+	public @NonNull Role getNodeRole() {
 		return nodeRole;
 	}
 
@@ -485,6 +506,29 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public @NonNull Utility getUtility() {
+		return utility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setUtility(Utility newUtility) {
+		Utility oldUtility = utility;
+		utility = newUtility == null ? UTILITY_EDEFAULT : newUtility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 9, oldUtility, utility));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -492,13 +536,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getClassDatum();
-			return basicGetClassDatum();
+				return basicGetClassDatum();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getCluster();
-			return basicGetCluster();
+				return basicGetCluster();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getIncomingConnection();
-			return basicGetIncomingConnection();
+				return basicGetIncomingConnection();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return getIncomingEdges();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
@@ -511,6 +555,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return getOutgoingEdges();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getOwningRegion();
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
+				return getUtility();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -526,34 +572,37 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setCluster((Cluster)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setIncomingConnection((NodeConnection)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				getIncomingEdges().clear();
-			getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
-			return;
+				getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setName((String)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setNodeRole((Role)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				getOutgoingConnections().clear();
-			getOutgoingConnections().addAll((Collection<? extends NodeConnection>)newValue);
-			return;
+				getOutgoingConnections().addAll((Collection<? extends NodeConnection>)newValue);
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				getOutgoingEdges().clear();
-			getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
-			return;
+				getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOwningRegion((Region)newValue);
-			return;
+				return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
+				setUtility((Utility)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -568,31 +617,34 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)null);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setCluster((Cluster)null);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setIncomingConnection((NodeConnection)null);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				getIncomingEdges().clear();
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setName(NAME_EDEFAULT);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setNodeRole(NODE_ROLE_EDEFAULT);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				getOutgoingConnections().clear();
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				getOutgoingEdges().clear();
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOwningRegion((Region)null);
-			return;
+				return;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
+				setUtility(UTILITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -623,6 +675,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return outgoingEdges != null && !outgoingEdges.isEmpty();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getOwningRegion() != null;
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
+				return utility != UTILITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -653,7 +707,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (cluster != null)
 					msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Cluster.class, msgs);
-			return basicSetCluster((Cluster)otherEnd, msgs);
+				return basicSetCluster((Cluster)otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
@@ -661,7 +715,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningRegion((Region)otherEnd, msgs);
+				return basicSetOwningRegion((Region)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -690,7 +744,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	private boolean isHead = false;
 	private boolean isContained = false;
 	private boolean isThis = false;
-	private @NonNull Utility initUtility = Utility.NOT_KNOWN;
 
 	@Override
 	public void addOriginatingElement(@NonNull Element originatingElement) {
@@ -732,7 +785,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
 		NodeImpl node = (NodeImpl)QVTscheduleFactory.eINSTANCE.create(eClass());
-		node.initialize(nodeRole, region, initUtility, name, classDatum);
+		node.initialize(nodeRole, region, utility, name, classDatum);
 		return node;
 	}
 
@@ -763,7 +816,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public @NonNull String getColor() {
 		assert nodeRole != null;
-		switch (initUtility) {
+		switch (utility) {
 			case NON_NULL_CONDITIONAL:
 			case NON_NULL_MATCHED:
 			case NULLABLE_CONDITIONAL:
@@ -885,7 +938,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		if (isDataType()) {
 			s.append("rounded");
 		}
-		switch (initUtility) {
+		switch (utility) {
 			case NULLABLE_CONDITIONAL:
 			case NULLABLE_MATCHED: {
 				if (s.length() > 0) {
@@ -911,19 +964,14 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @NonNull Utility getInitUtility() {
-		return initUtility;
-	}
-
-	@Override
-	public void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull Utility initUtility, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum) {
+	public void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull Utility utility, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum) {
 		assert name != null;
 		assert classDatum != null;
 		setNodeRole(nodeRole);
 		setOwningRegion(region);
 		setName(name);
 		setClassDatum(classDatum);
-		this.initUtility = initUtility;
+		setUtility(utility);
 		this.isDataType = classDatum.isDataType();
 	}
 
@@ -945,7 +993,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final boolean isConditional() {
-		return initUtility.isConditional();
+		return utility.isConditional();
 	}
 
 	@Override
@@ -971,7 +1019,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public boolean isDispatch() {
-		return initUtility == Utility.DISPATCH;
+		return utility == Utility.DISPATCH;
 	}
 
 	@Override
@@ -1048,7 +1096,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public /* final */ boolean isRequired() {
-		return !initUtility.isNullable();
+		return !utility.isNullable();
 	}
 
 	@Override
@@ -1075,12 +1123,12 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public boolean isTrace() {
-		return initUtility == Utility.TRACE;
+		return utility == Utility.TRACE;
 	}
 
 	@Override
 	public final boolean isUnconditional() {
-		return initUtility.isUnconditional();
+		return utility.isUnconditional();
 	}
 
 	/*	@Override

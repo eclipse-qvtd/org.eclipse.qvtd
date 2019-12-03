@@ -103,7 +103,7 @@ public class RelationDispatchAnalysis extends RegionHelper<@NonNull RuleRegion>
 					//						Property traceInterfaceProperty = variableDeclaration2traceInterfaceProperty.getTraceProperty();
 					Node targetNode = createOldNode(Utility.getRequiredInitUtility(variable), variable);
 					boolean isPartial = scheduleManager.computeIsPartial(targetNode, traceClassProperty);
-					createNavigationEdge(targetNode.getInitUtility(), traceNode, traceClassProperty, targetNode, isPartial);
+					createNavigationEdge(targetNode.getUtility(), traceNode, traceClassProperty, targetNode, isPartial);
 					if (isTopLevel) {
 						region.getHeadNodes().add(targetNode);
 						targetNode.setHead();

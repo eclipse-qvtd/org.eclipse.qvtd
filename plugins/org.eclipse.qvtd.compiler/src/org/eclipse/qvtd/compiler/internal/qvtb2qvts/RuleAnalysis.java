@@ -209,7 +209,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 				}
 				else {
 					assert !edge.isUnconditional();
-					rootExpressionSynthesizer.getExpressionSynthesizer(/*Node.Utility.CONDITIONAL*/edge.getInitUtility()).rewriteCastEdgeAsOclAsType((CastEdge)edge);
+					rootExpressionSynthesizer.getExpressionSynthesizer(/*Node.Utility.CONDITIONAL*/edge.getUtility()).rewriteCastEdgeAsOclAsType((CastEdge)edge);
 				}
 				assert edge.eContainer() == null;
 				assert edge.getSourceNode() == null;

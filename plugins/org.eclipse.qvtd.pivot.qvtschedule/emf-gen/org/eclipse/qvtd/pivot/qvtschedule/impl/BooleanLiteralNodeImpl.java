@@ -150,7 +150,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setBooleanValue((Boolean)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -165,7 +165,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setBooleanValue(BOOLEAN_VALUE_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

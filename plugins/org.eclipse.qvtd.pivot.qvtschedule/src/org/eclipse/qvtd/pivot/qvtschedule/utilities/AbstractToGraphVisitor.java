@@ -153,11 +153,11 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 		boolean isConditional = false;
 		if (graphNode instanceof Node) {
 			Node node = (Node) graphNode;
-			isConditional = node.getInitUtility().isConditional();
+			isConditional = node.getUtility().isConditional();
 		}
 		else if (graphNode instanceof Edge) {
 			Edge edge = (Edge) graphNode;
-			isConditional = edge.getInitUtility().isConditional();
+			isConditional = edge.getUtility().isConditional();
 		}
 		return isConditional;
 	}

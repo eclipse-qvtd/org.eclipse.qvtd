@@ -17,11 +17,8 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -86,13 +83,6 @@ public class PatternVariableNodeImpl extends VariableNodeImpl implements Pattern
 		else {
 			return super.accept(visitor);
 		}
-	}
-
-	@Override
-	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		PatternVariableNodeImpl node = (PatternVariableNodeImpl)super.createNode(nodeRole, region);
-		node.setMatched(matched);
-		return node;
 	}
 
 	@Override
