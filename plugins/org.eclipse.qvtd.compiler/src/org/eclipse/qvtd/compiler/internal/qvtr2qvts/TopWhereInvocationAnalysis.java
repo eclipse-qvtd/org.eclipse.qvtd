@@ -28,8 +28,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 public class TopWhereInvocationAnalysis extends AbstractInvocationAnalysis
 {
 	public TopWhereInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
-			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
-		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
+			@NonNull Utility utility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+		super(invokingRelationAnalysis, invokedRelationAnalysis, utility, rootVariable2argumentNode);
 	}
 
 	@Override

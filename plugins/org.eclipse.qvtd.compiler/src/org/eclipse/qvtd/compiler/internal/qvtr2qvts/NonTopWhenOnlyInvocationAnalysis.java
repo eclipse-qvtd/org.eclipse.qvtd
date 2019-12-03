@@ -28,18 +28,18 @@ import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 public class NonTopWhenOnlyInvocationAnalysis extends AbstractWhenInvocationAnalysis
 {
 	public NonTopWhenOnlyInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
-			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
-		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
+			@NonNull Utility utility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+		super(invokingRelationAnalysis, invokedRelationAnalysis, utility, rootVariable2argumentNode);
 	}
 
 	@Override
 	protected @NonNull NavigableEdge createInputEdge(@NonNull Node invokedNode, @NonNull Property invocationProperty, @NonNull Node argumentNode) {
-		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, initUtility, invokedNode, invocationProperty, argumentNode, false);
+		return invokingRelationAnalysis.createNavigationEdge(Role.REALIZED, utility, invokedNode, invocationProperty, argumentNode, false);
 	}
 
 	@Override
 	protected @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum) {
-		return invokingRelationAnalysis.createRealizedNode(initUtility, name, classDatum);
+		return invokingRelationAnalysis.createRealizedNode(utility, name, classDatum);
 	}
 
 	@Override

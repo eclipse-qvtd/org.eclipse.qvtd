@@ -345,13 +345,13 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createKeyPartEdge(@NonNull Utility initUtility, @NonNull Node sourceNode, @NonNull PropertyDatum propertyDatum, @NonNull Node targetNode) {
+	public @NonNull Edge createKeyPartEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull PropertyDatum propertyDatum, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		KeyPartEdge edge = QVTscheduleFactory.eINSTANCE.createKeyPartEdge();
 		edge.setReferredPart(propertyDatum);
 		Property referredProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
 		String name = "«" + QVTrelationUtil.getName(referredProperty) + "»";
-		edge.initialize(edgeRole, initUtility, sourceNode, name, targetNode);
+		edge.initialize(edgeRole, utility, sourceNode, name, targetNode);
 		return edge;
 	}
 
@@ -635,8 +635,8 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull VariableNode createRealizedStepNode(@NonNull Utility initUtility, @NonNull VariableDeclaration stepVariable) {
-		VariableNode node = createRealizedNode(initUtility, getName(stepVariable), scheduleManager.getClassDatum(stepVariable));
+	public @NonNull VariableNode createRealizedStepNode(@NonNull Utility utility, @NonNull VariableDeclaration stepVariable) {
+		VariableNode node = createRealizedNode(utility, getName(stepVariable), scheduleManager.getClassDatum(stepVariable));
 		node.initializeVariable(region, stepVariable);
 		return node;
 	}
@@ -645,11 +645,11 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	 * Create a realized source2targetProperty success edge from sourceNode to a true/false BooleanValueNode if isSuccesss is  non-null,
 	 * else to a SuccessNode.
 	 */
-	public @NonNull SuccessEdge createRealizedSuccess(@NonNull Utility initUtility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @Nullable Boolean isSuccess) {
+	public @NonNull SuccessEdge createRealizedSuccess(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @Nullable Boolean isSuccess) {
 		ClassDatum classDatum = scheduleManager.getBooleanClassDatum();
 		Node node;
 		if (isSuccess != null) {
-			node = createBooleanLiteralNode(initUtility, isSuccess, null);
+			node = createBooleanLiteralNode(utility, isSuccess, null);
 		}
 		else {
 			SuccessNode successNode = QVTscheduleFactory.eINSTANCE.createSuccessNode();
@@ -657,8 +657,8 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 			node = successNode;
 		}
 		SuccessEdge edge = QVTscheduleFactory.eINSTANCE.createSuccessEdge();
-		edge.initialize(Role.REALIZED, initUtility, sourceNode, source2targetProperty.getName(), node);
-		edge.initializeProperty(source2targetProperty, initUtility, false);
+		edge.initialize(Role.REALIZED, utility, sourceNode, source2targetProperty.getName(), node);
+		edge.initializeProperty(source2targetProperty, utility, false);
 		return edge;
 	}
 

@@ -101,7 +101,7 @@ public class RelationDispatchAnalysis extends RegionHelper<@NonNull RuleRegion>
 					//						VariableDeclaration2TraceProperty variableDeclaration2traceInterfaceProperty = rule2traceInterface.getVariableDeclaration2TraceProperty(variable);
 					Property traceClassProperty = variableDeclaration2traceClassProperty.getTraceProperty();
 					//						Property traceInterfaceProperty = variableDeclaration2traceInterfaceProperty.getTraceProperty();
-					Node targetNode = createOldNode(Utility.getRequiredInitUtility(variable), variable);
+					Node targetNode = createOldNode(Utility.getRequiredUtility(variable), variable);
 					boolean isPartial = scheduleManager.computeIsPartial(targetNode, traceClassProperty);
 					createNavigationEdge(targetNode.getUtility(), traceNode, traceClassProperty, targetNode, isPartial);
 					if (isTopLevel) {

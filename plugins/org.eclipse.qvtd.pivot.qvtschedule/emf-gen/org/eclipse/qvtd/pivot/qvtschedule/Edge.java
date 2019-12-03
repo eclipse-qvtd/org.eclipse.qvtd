@@ -249,7 +249,7 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	/**
 	 * Create an edgeRole edge from sourceNode to targetNode with the same name as this edge.
 	 */
-	@NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Utility initUtility, @NonNull Node sourceNode, @NonNull Node targetNode);
+	@NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode);
 
 	void destroy();
 
@@ -293,7 +293,7 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	 */
 	@Nullable String getLabel();
 
-	void initialize(@NonNull Role edgeRole, @NonNull Utility initUtility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
+	void initialize(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
 
 	/**
 	 * Return true if this edge is for an oclAsType cast.

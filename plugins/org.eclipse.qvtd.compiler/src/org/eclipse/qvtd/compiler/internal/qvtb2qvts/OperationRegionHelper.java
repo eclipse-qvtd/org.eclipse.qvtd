@@ -25,25 +25,25 @@ public class OperationRegionHelper extends RegionHelper<@NonNull OperationRegion
 		super(scheduleManager, region);
 	}
 
-	public @NonNull Node createOperationElementNode(@NonNull Utility initUtility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
+	public @NonNull Node createOperationElementNode(@NonNull Utility utility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
 		Role nodeRole = getNodeRole(sourceNode);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
-		node.initialize(nodeRole, region, initUtility, name, classDatum);
+		node.initialize(nodeRole, region, utility, name, classDatum);
 		return node;
 	}
 
-	public @NonNull Node createOperationParameterNode(@NonNull Utility initUtility, @NonNull String name, @NonNull ClassDatum classDatum) {
+	public @NonNull Node createOperationParameterNode(@NonNull Utility utility, @NonNull String name, @NonNull ClassDatum classDatum) {
 		Role nodeRole = Role.PREDICATED;
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
-		node.initialize(nodeRole, region, initUtility, name, classDatum);
+		node.initialize(nodeRole, region, utility, name, classDatum);
 		node.setHead();
 		return node;
 	}
 
-	public @NonNull Node createOperationResultNode(@NonNull Utility initUtility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
+	public @NonNull Node createOperationResultNode(@NonNull Utility utility, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
 		Role nodeRole = getNodeRole(sourceNode);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
-		node.initialize(nodeRole, region, initUtility, name, classDatum);
+		node.initialize(nodeRole, region, utility, name, classDatum);
 		return node;
 	}
 }

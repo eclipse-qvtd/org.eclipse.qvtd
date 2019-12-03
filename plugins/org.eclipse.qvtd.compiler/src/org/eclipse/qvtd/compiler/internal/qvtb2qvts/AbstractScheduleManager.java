@@ -423,14 +423,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		TypedModel typedModel = getDomainUsage(expression).getTypedModel(expression);
 		assert typedModel != null;
 		ClassDatum classDatum = getClassDatum(typedModel, type);
-		Node parameterNode = regionHelper.createOperationParameterNode(Utility.getRequiredInitUtility(variable), name, classDatum);
+		Node parameterNode = regionHelper.createOperationParameterNode(Utility.getRequiredUtility(variable), name, classDatum);
 		//		addVariableNode(variable, parameterNode);
 		regionHelper.getRegion().addHeadNode(parameterNode);
 		return parameterNode;
 	}
 
-	private @NonNull Node createOperationParameterNode(@NonNull OperationRegionHelper regionHelper, @NonNull Utility initUtility, @NonNull ClassDatum classDatum, @NonNull String name) {
-		Node parameterNode = regionHelper.createOperationParameterNode(initUtility, name, classDatum);
+	private @NonNull Node createOperationParameterNode(@NonNull OperationRegionHelper regionHelper, @NonNull Utility utility, @NonNull ClassDatum classDatum, @NonNull String name) {
+		Node parameterNode = regionHelper.createOperationParameterNode(utility, name, classDatum);
 		//		addVariableNode(variable, parameterNode);
 		regionHelper.getRegion().addHeadNode(parameterNode);
 		return parameterNode;
@@ -454,10 +454,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		Node dependencyNode;
 		dependencyNode = selfNode;
 		//
-		Utility initUtility = Utility.getRequiredInitUtility(operationCallExp);
-		Node resultNode = regionHelper.createStepNode(initUtility, "result", operationCallExp, dependencyNode);	// FIXME do not use a MappingNode
+		Utility utility = Utility.getRequiredUtility(operationCallExp);
+		Node resultNode = regionHelper.createStepNode(utility, "result", operationCallExp, dependencyNode);	// FIXME do not use a MappingNode
 		operationRegion.setResultNode(resultNode);
-		regionHelper.createEqualsEdge(initUtility, dependencyNode, resultNode);
+		regionHelper.createEqualsEdge(utility, dependencyNode, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
@@ -546,12 +546,12 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 								if (name == null) {
 									name = QVTscheduleUtil.getName(PivotUtil.getReferredProperty((NavigationCallExp)callExp));
 								}
-								nextNode = regionHelper.createDataTypeNode(Utility.getRequiredInitUtility(callExp), name, dependencyNode2, (NavigationCallExp)callExp);
+								nextNode = regionHelper.createDataTypeNode(Utility.getRequiredUtility(callExp), name, dependencyNode2, (NavigationCallExp)callExp);
 							}
 							else {
-								nextNode = regionHelper.createDataTypeNode(Utility.getRequiredInitUtility(property), dependencyNode2, property);
+								nextNode = regionHelper.createDataTypeNode(Utility.getRequiredUtility(property), dependencyNode2, property);
 							}
-							regionHelper.createNavigationEdge(Utility.getRequiredInitUtility(property), dependencyNode2, property, nextNode, false);
+							regionHelper.createNavigationEdge(Utility.getRequiredUtility(property), dependencyNode2, property, nextNode, false);
 							dependencyNode2 = nextNode;
 						}
 					}

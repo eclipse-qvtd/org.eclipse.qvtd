@@ -664,15 +664,15 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	protected @NonNull InvocationAnalysis createOutgoingInvocationAnalysis(@NonNull RelationAnalysis invokedRelationAnalysis, @NonNull RelationCallExp relationCallExp, boolean isWhen,
-			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+			@NonNull Utility utility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		RelationAnalysis invokedBaseRelationAnalysis = invokedRelationAnalysis.getBaseRelationAnalysis();
 		InvocationAnalysis invocationAnalysis;
 		if (invokedBaseRelationAnalysis.getRule().isIsTopLevel()) {
 			if (isWhen) {
-				invocationAnalysis = new TopWhenInvocationAnalysis(this, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
+				invocationAnalysis = new TopWhenInvocationAnalysis(this, invokedRelationAnalysis, utility, rootVariable2argumentNode);
 			}
 			else {
-				invocationAnalysis = new TopWhereInvocationAnalysis(this, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
+				invocationAnalysis = new TopWhereInvocationAnalysis(this, invokedRelationAnalysis, utility, rootVariable2argumentNode);
 			}
 		}
 		else {
@@ -681,18 +681,18 @@ public class RelationAnalysis extends RuleAnalysis
 			boolean hasWhenAndWhereInvocations = hasWhenInvocations && hasWhereInvocations;
 			if (isWhen) {
 				if (hasWhenAndWhereInvocations) {
-					invocationAnalysis = new NonTopWhenAfterWhereInvocationAnalysis(this, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
+					invocationAnalysis = new NonTopWhenAfterWhereInvocationAnalysis(this, invokedRelationAnalysis, utility, rootVariable2argumentNode);
 				}
 				else {
-					invocationAnalysis = new NonTopWhenOnlyInvocationAnalysis(this, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
+					invocationAnalysis = new NonTopWhenOnlyInvocationAnalysis(this, invokedRelationAnalysis, utility, rootVariable2argumentNode);
 				}
 			}
 			else {
 				if (hasWhenAndWhereInvocations) {
-					invocationAnalysis = new NonTopWhereBeforeWhenInvocationAnalysis(this, invokedRelationAnalysis, initUtility.getNullableUtility(), rootVariable2argumentNode);
+					invocationAnalysis = new NonTopWhereBeforeWhenInvocationAnalysis(this, invokedRelationAnalysis, utility.getNullableUtility(), rootVariable2argumentNode);
 				}
 				else {
-					invocationAnalysis = new NonTopWhereOnlyInvocationAnalysis(this, invokedRelationAnalysis, initUtility.getNullableUtility(), rootVariable2argumentNode);
+					invocationAnalysis = new NonTopWhereOnlyInvocationAnalysis(this, invokedRelationAnalysis, utility.getNullableUtility(), rootVariable2argumentNode);
 				}
 			}
 		}
@@ -791,7 +791,7 @@ public class RelationAnalysis extends RuleAnalysis
 	 * Return the utility for a give variableDeclaration adjusting the optional multiplicity of the heads an optional
 	 * when invocation to non-optional. (See Bug 499432)
 	 */
-	private @NonNull Utility getOptionallyMatchAtRootUtility(@NonNull VariableDeclaration variableDeclaration) {
+	private @NonNull Utility getOptionalMatchAtRootUtility(@NonNull VariableDeclaration variableDeclaration) {
 		boolean anyRequired = false;
 		boolean isRootVariable = false;
 		for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(getRule())) {
@@ -803,15 +803,15 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		}
 		if (!isRootVariable) {						// Non-root is not
-			return Utility.getRequiredInitUtility(variableDeclaration);							//  a root match
+			return Utility.getRequiredUtility(variableDeclaration);							//  a root match
 		}
 		if (anyRequired) {							// If any root cannot be null
-			return Utility.getRequiredInitUtility(variableDeclaration);							//  a match is required
+			return Utility.getRequiredUtility(variableDeclaration);							//  a match is required
 		}
 		return Utility.NON_NULL_MATCHED;								// Match can be omitted
 	}
 
-	public @NonNull InvocationAnalysis getOutgoingInvocationAnalysis(@NonNull RelationAnalysis invokedRelationAnalysis, @NonNull RelationCallExp invocation, boolean isWhen, @NonNull Utility initUtility,
+	public @NonNull InvocationAnalysis getOutgoingInvocationAnalysis(@NonNull RelationAnalysis invokedRelationAnalysis, @NonNull RelationCallExp invocation, boolean isWhen, @NonNull Utility utility,
 			@NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		Map<@NonNull RelationCallExp, @Nullable InvocationAnalysis> outgoingInvocationAnalyses = isWhen ? outgoingWhenInvocation2invocationAnalysis : outgoingWhereInvocation2invocationAnalysis;
 		if (outgoingInvocationAnalyses != null) {
@@ -820,7 +820,7 @@ public class RelationAnalysis extends RuleAnalysis
 				return invocationAnalysis;
 			}
 		}
-		return createOutgoingInvocationAnalysis(invokedRelationAnalysis, invocation, isWhen, initUtility, rootVariable2argumentNode);
+		return createOutgoingInvocationAnalysis(invokedRelationAnalysis, invocation, isWhen, utility, rootVariable2argumentNode);
 	}
 
 	protected @NonNull Set<@NonNull VariableDeclaration> getRealizedOutputVariables() {
@@ -835,7 +835,7 @@ public class RelationAnalysis extends RuleAnalysis
 				node = getReferenceNodeForSharedVariable((SharedVariable)variableDeclaration, null);
 			}
 			if (node == null) {
-				node = createOldNode(Utility.getRequiredInitUtility(variableDeclaration), variableDeclaration);
+				node = createOldNode(Utility.getRequiredUtility(variableDeclaration), variableDeclaration);
 				if (node.isThis()) {
 					setThisNode(node);
 				}
@@ -901,7 +901,7 @@ public class RelationAnalysis extends RuleAnalysis
 		ClassDatum initClassDatum = QVTscheduleUtil.getClassDatum(bestInitNode);
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
 		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableClassDatum)) {
-			Node castNode = createOldNode(Utility.getRequiredInitUtility(variable), variable);
+			Node castNode = createOldNode(Utility.getRequiredUtility(variable), variable);
 			expressionSynthesizer2.createCastEdge(bestInitNode, variableClassDatum, castNode);
 			bestInitNode = castNode;
 		}
@@ -1727,10 +1727,10 @@ public class RelationAnalysis extends RuleAnalysis
 				assert targetNode != null;
 				boolean isPartial = scheduleManager.computeIsPartial(traceNode, traceProperty);
 				if (hasPredicatedTrace && rootVariables.contains(tracedVariable)) {
-					createNavigationEdge(Utility.getRequiredInitUtility(traceProperty), traceNode, traceProperty, targetNode, isPartial);
+					createNavigationEdge(Utility.getRequiredUtility(traceProperty), traceNode, traceProperty, targetNode, isPartial);
 				}
 				else {
-					createRealizedNavigationEdge(Utility.getRequiredInitUtility(traceProperty), traceNode, traceProperty, targetNode, isPartial);
+					createRealizedNavigationEdge(Utility.getRequiredUtility(traceProperty), traceNode, traceProperty, targetNode, isPartial);
 				}
 			}
 		}
@@ -1897,22 +1897,20 @@ public class RelationAnalysis extends RuleAnalysis
 			return; // implicit CollectionTemplateExp rest nodes are not needed
 		}
 		else if (getKeyedOutputVariables().contains(variableDeclaration)) {
-			boolean isUnconditional = true;
 			createKeyedNode(Utility.NON_NULL_MATCHED, QVTrelationUtil.getName(variableDeclaration), variableDeclaration);
-			return; // keyed object created by synthesizeKeyedObject
 		}
 		else if (getTopWhenedOutputVariables().contains(variableDeclaration)) {
-			createOldNode(Utility.getRequiredInitUtility(variableDeclaration), variableDeclaration);		// when output is created by the invoked when
+			createOldNode(Utility.getRequiredUtility(variableDeclaration), variableDeclaration);		// when output is created by the invoked when
 		}
 		else if (getNonTopWhenedOutputVariables().contains(variableDeclaration)) {
-			createOldNode(Utility.getRequiredInitUtility(variableDeclaration), variableDeclaration);		// when output is created by the invoked when
+			createOldNode(Utility.getRequiredUtility(variableDeclaration), variableDeclaration);		// when output is created by the invoked when
 			//			createRealizedStepNode(variableDeclaration);		// when output is created by the invoker
 		}
 		else if (hasIncomingWhereInvocations() && Iterables.contains(QVTrelationUtil.getRootVariables(getRule()), variableDeclaration)) {
-			createOldNode(Utility.getRequiredInitUtility(variableDeclaration), variableDeclaration);		// where 'output' is created by invoker
+			createOldNode(Utility.getRequiredUtility(variableDeclaration), variableDeclaration);		// where 'output' is created by invoker
 		}
 		else if (getRealizedOutputVariables().contains(variableDeclaration)) {
-			Utility utility = getOptionallyMatchAtRootUtility(variableDeclaration);
+			Utility utility = getOptionalMatchAtRootUtility(variableDeclaration);
 			createRealizedStepNode(utility, variableDeclaration);
 		}
 		else {
@@ -1923,7 +1921,7 @@ public class RelationAnalysis extends RuleAnalysis
 					return; 	// CollectionTemplateExp variables would be bloat
 					//					}
 				}
-				Utility utility = getOptionallyMatchAtRootUtility(variableDeclaration);
+				Utility utility = getOptionalMatchAtRootUtility(variableDeclaration);
 				createOldNode(utility, variableDeclaration);
 			}
 			else if (variableDeclaration instanceof SharedVariable) {
@@ -1936,7 +1934,7 @@ public class RelationAnalysis extends RuleAnalysis
 				}
 			}
 			else {
-				Utility utility = getOptionallyMatchAtRootUtility(variableDeclaration);
+				Utility utility = getOptionalMatchAtRootUtility(variableDeclaration);
 				createOldNode(utility, variableDeclaration);		// Never happens
 			}
 		}

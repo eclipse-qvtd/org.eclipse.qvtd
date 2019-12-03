@@ -19,8 +19,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 
 public abstract class AbstractQVTrelationExpressionSynthesizer extends ExpressionSynthesizer implements QVTrelationVisitor<@Nullable Node>
 {
-	protected AbstractQVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable AbstractQVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer, @NonNull Utility initUtility) {
-		super(context, unconditionalExpressionSynthesizer, initUtility);
+	protected AbstractQVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable AbstractQVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer, @NonNull Utility utility) {
+		super(context, unconditionalExpressionSynthesizer, utility);
 	}
 
 	@Override

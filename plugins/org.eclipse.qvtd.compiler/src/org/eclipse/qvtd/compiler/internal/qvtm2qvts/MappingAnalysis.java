@@ -79,8 +79,8 @@ public class MappingAnalysis extends RuleAnalysis
 	{
 		protected AbstractQVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context,
 				@Nullable AbstractQVTcoreExpressionSynthesizer unconditionalExpressionSynthesizer,
-				@NonNull Utility initUtility) {
-			super(context, unconditionalExpressionSynthesizer, initUtility);
+				@NonNull Utility utility) {
+			super(context, unconditionalExpressionSynthesizer, utility);
 		}
 
 		@Override
@@ -164,13 +164,13 @@ public class MappingAnalysis extends RuleAnalysis
 	{
 		protected QVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context,
 				@Nullable QVTcoreExpressionSynthesizer unconditionalExpressionSynthesizer,
-				@NonNull Utility initUtility) {
-			super(context, unconditionalExpressionSynthesizer, initUtility);
+				@NonNull Utility utility) {
+			super(context, unconditionalExpressionSynthesizer, utility);
 		}
 
 		@Override
-		protected @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull Utility initUtility) {
-			return new QVTcoreExpressionSynthesizer(context, this, initUtility);
+		protected @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull Utility utility) {
+			return new QVTcoreExpressionSynthesizer(context, this, utility);
 		}
 
 		@Override
@@ -572,7 +572,7 @@ public class MappingAnalysis extends RuleAnalysis
 		ClassDatum initClassDatum = QVTscheduleUtil.getClassDatum(bestInitNode);
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
 		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableClassDatum)) {
-			Node castNode = createOldNode(Utility.getRequiredInitUtility(variable), variable);
+			Node castNode = createOldNode(Utility.getRequiredUtility(variable), variable);
 			rootExpressionSynthesizer.createCastEdge(bestInitNode, variableClassDatum, castNode);
 			bestInitNode = castNode;
 		}
@@ -683,9 +683,9 @@ public class MappingAnalysis extends RuleAnalysis
 								"Enforceable variable ''{0}'' has not been realized in ''{1}''",
 								variable, region);
 						}
-						node = createRealizedStepNode(Utility.getRequiredInitUtility(variable), variable);
+						node = createRealizedStepNode(Utility.getRequiredUtility(variable), variable);
 					} else {
-						node = createLoadedStepNode(Utility.getRequiredInitUtility(variable), variable); // FIXME Predicated ??
+						node = createLoadedStepNode(Utility.getRequiredUtility(variable), variable); // FIXME Predicated ??
 					}
 				}
 			}

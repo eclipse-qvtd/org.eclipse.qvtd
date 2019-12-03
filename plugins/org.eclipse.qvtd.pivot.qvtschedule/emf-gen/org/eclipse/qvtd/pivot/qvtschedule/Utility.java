@@ -459,7 +459,7 @@ public enum Utility implements Enumerator {
 	}
 
 
-	public static @NonNull Utility getRequiredInitUtility(@NonNull TypedElement typedElement) {
+	public static @NonNull Utility getRequiredUtility(@NonNull TypedElement typedElement) {
 		return typedElement.isIsRequired() ? Utility.NON_NULL_MATCHED : Utility.NULLABLE_MATCHED;
 	}
 

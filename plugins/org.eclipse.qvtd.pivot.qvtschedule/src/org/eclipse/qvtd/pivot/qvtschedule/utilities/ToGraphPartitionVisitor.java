@@ -280,17 +280,17 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 	@Override
 	protected @NonNull String getColor(@NonNull GraphElement element) {
-		Utility initUtility = null;
+		Utility utility = null;
 		if (element instanceof Node) {
-			initUtility = ((Node)element).getUtility();
+			utility = ((Node)element).getUtility();
 		}
 		else if (element instanceof Edge) {
-			initUtility = ((Edge)element).getUtility();
+			utility = ((Edge)element).getUtility();
 		}
 		else {
-			initUtility = Utility.NOT_KNOWN;
+			utility = Utility.NOT_KNOWN;
 		}
-		if (initUtility == Utility.NOT_KNOWN) {
+		if (utility == Utility.NOT_KNOWN) {
 			return QVTscheduleUtil.ERROR_COLOR;
 		}
 		Role role = getGraphRole(element);

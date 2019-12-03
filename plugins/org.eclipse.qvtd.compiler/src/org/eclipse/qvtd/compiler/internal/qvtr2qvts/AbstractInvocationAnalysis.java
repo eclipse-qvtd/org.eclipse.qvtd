@@ -41,17 +41,17 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	protected final @NonNull RelationAnalysis invokedRelationAnalysis;
 	protected final @NonNull QVTrelationScheduleManager scheduleManager;
 	protected final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode;
-	protected final @NonNull Utility initUtility;
+	protected final @NonNull Utility utility;
 	private @Nullable Node invokingNode = null;
 	private final @NonNull Map<@NonNull Node, @NonNull Boolean> argumentNode2isOutput = new HashMap<>();
 
-	public AbstractInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis, @NonNull Utility initUtility,
+	public AbstractInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis, @NonNull Utility utility,
 			@NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		this.invokingRelationAnalysis = invokingRelationAnalysis;
 		this.invokedRelationAnalysis = invokedRelationAnalysis;
 		this.scheduleManager = invokedRelationAnalysis.getScheduleManager();
 		this.rootVariable2argumentNode = rootVariable2argumentNode;
-		this.initUtility = initUtility;
+		this.utility = utility;
 	}
 
 	/**
@@ -89,7 +89,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		Invocation2TraceProperty invokingInvocation2TraceProperty = invokingRule2TraceClass.getInvocation2TraceProperty(this);
 		Property invocationTraceProperty = invokingInvocation2TraceProperty.getTraceProperty();
 		boolean isPartial = scheduleManager.computeIsPartial(invokedNode, invocationTraceProperty);
-		invokingRelationAnalysis.createRealizedNavigationEdge(initUtility, invokingTraceNode, invocationTraceProperty, invokedNode, isPartial);
+		invokingRelationAnalysis.createRealizedNavigationEdge(utility, invokingTraceNode, invocationTraceProperty, invokedNode, isPartial);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 	 */
 	@Override
 	public final boolean isOptional() {
-		return initUtility.isNullable();
+		return utility.isNullable();
 	}
 
 	@Override

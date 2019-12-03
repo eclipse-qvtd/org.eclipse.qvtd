@@ -34,13 +34,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpressionSynthesizer
 {
-	protected QVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable QVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer, @NonNull Utility initUtility) {
-		super(context, unconditionalExpressionSynthesizer, initUtility);
+	protected QVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context, @Nullable QVTrelationExpressionSynthesizer unconditionalExpressionSynthesizer, @NonNull Utility utility) {
+		super(context, unconditionalExpressionSynthesizer, utility);
 	}
 
 	@Override
-	protected @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull Utility initUtility) {
-		return new QVTrelationExpressionSynthesizer(getRelationAnalysis(), this, initUtility);
+	protected @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull Utility utility) {
+		return new QVTrelationExpressionSynthesizer(getRelationAnalysis(), this, utility);
 	}
 
 	public @NonNull RelationAnalysis getRelationAnalysis() {
@@ -78,7 +78,7 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 			assert argumentNode != null;
 			rootVariable2argumentNode.put(rootVariable, argumentNode);
 		}
-		InvocationAnalysis invocationAnalysis = relationAnalysis.getOutgoingInvocationAnalysis(invokedRelationAnalysis, relationCallExp, isWhen, getRequiredInitUtility(true), rootVariable2argumentNode);
+		InvocationAnalysis invocationAnalysis = relationAnalysis.getOutgoingInvocationAnalysis(invokedRelationAnalysis, relationCallExp, isWhen, getRequiredUtility(true), rootVariable2argumentNode);
 		//		for ()
 		//		if (referredRule2TraceClass.getStatusInterfaceProperty())
 		invocationAnalysis.getInvokingNode();

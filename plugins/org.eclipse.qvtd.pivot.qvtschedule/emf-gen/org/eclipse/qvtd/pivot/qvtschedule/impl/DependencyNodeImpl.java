@@ -93,9 +93,9 @@ public class DependencyNodeImpl extends NodeImpl implements DependencyNode {
 
 	@Override
 	public void initialize(@NonNull Role nodeRole, @NonNull Region region,
-			@NonNull Utility initUtility, String name,
+			@NonNull Utility utility, String name,
 			ClassDatum classDatum) {
 		// TODO Auto-generated method stub
-		super.initialize(nodeRole, region, initUtility, name, classDatum);
+		super.initialize(nodeRole, region, utility, name, classDatum);
 	}
 } //DependencyNodeImpl

@@ -26,13 +26,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 public class NonTopWhenAfterWhereInvocationAnalysis extends AbstractWhenInvocationAnalysis
 {
 	public NonTopWhenAfterWhereInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
-			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
-		super(invokingRelationAnalysis, invokedRelationAnalysis, initUtility, rootVariable2argumentNode);
+			@NonNull Utility utility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+		super(invokingRelationAnalysis, invokedRelationAnalysis, utility, rootVariable2argumentNode);
 	}
 
 	@Override
 	protected @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum) {
-		return invokingRelationAnalysis.createPredicatedNode(initUtility, name, classDatum);
+		return invokingRelationAnalysis.createPredicatedNode(utility, name, classDatum);
 	}
 
 	@Override

@@ -25,10 +25,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 public class TopWhenInvocationAnalysis extends AbstractWhenInvocationAnalysis
 {
 	/**
-	 * Return true unless a non-match is permitted and used for null input to null output. (See Bug 499432)
+	 * Return the utility of a top-when invocation. (See Bug 499432)
 	 */
-	//	@Override
-	private static @NonNull Utility resolveInitUtility(@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+	private static @NonNull Utility resolveUtility(@NonNull Utility utility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
 		boolean anyRequired = false;
 		boolean anyOmitted = false;
 		for (@NonNull VariableDeclaration rootVariable : rootVariable2argumentNode.keySet()) {
@@ -42,22 +41,22 @@ public class TopWhenInvocationAnalysis extends AbstractWhenInvocationAnalysis
 			}
 		}
 		if (anyRequired) {				// If any root cannot be null
-			return initUtility;				//  a match is required
+			return utility;				//  a match is required
 		}
 		if (!anyOmitted) {				// If nothing omitted
-			return initUtility;				//  a match is required
+			return utility;				//  a match is required
 		}
-		return initUtility.isConditional() ? Utility.NULLABLE_CONDITIONAL: Utility.NULLABLE_MATCHED;					// Match can be omitted
+		return utility.isConditional() ? Utility.NULLABLE_CONDITIONAL: Utility.NULLABLE_MATCHED;					// Match can be omitted
 	}
 
 	public TopWhenInvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RelationAnalysis invokedRelationAnalysis,
-			@NonNull Utility initUtility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
-		super(invokingRelationAnalysis, invokedRelationAnalysis, resolveInitUtility(initUtility, rootVariable2argumentNode), rootVariable2argumentNode);
+			@NonNull Utility utility, @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode) {
+		super(invokingRelationAnalysis, invokedRelationAnalysis, resolveUtility(utility, rootVariable2argumentNode), rootVariable2argumentNode);
 	}
 
 	@Override
 	protected @NonNull Node createInvocationNode(@NonNull String name, @NonNull ClassDatum classDatum) {
-		return invokingRelationAnalysis.createPredicatedNode(initUtility, name, classDatum);
+		return invokingRelationAnalysis.createPredicatedNode(utility, name, classDatum);
 	}
 
 	@Override
