@@ -317,6 +317,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							createConstantCheck(edge, source2targetExp);
 						}
 						else if (nodeVariable == null) {
+							QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(BasicPartition2Mapping.this);
 							OCLExpression targetExpression = expressionCreator.getExpression(targetNode);
 							createCheckStatement(source2targetExp, "=", targetExpression);
 						}
@@ -388,7 +389,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	protected final @NonNull RegionAnalysis regionAnalysis;
-	protected final @NonNull QVTs2QVTiNodeVisitor expressionCreator;
 
 	/**
 	 * Lazily computed closure of all preceding nodes, icluding the final node, of each node.
@@ -424,7 +424,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		super(visitor, mapping, partitionAnalysis.getPartition());
 		this.regionAnalysis = scheduleManager.getRegionAnalysis(QVTscheduleUtil.getRegion(partition));
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
-		this.expressionCreator = new QVTs2QVTiNodeVisitor(this);
 		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partitionAnalysis, scheduleManager);
 		StringBuilder s = TransformationPartitioner.PROPERTY_OBSERVE.isActive() ? new StringBuilder() : null;
 		if (s != null) {
@@ -778,6 +777,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				else if (targetNode.isDataType()) {
 					VariableDeclaration asVariable = getVariable(sourceNode);
 					Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+					QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(this);
 					OCLExpression valueExp = expressionCreator.basicGetExpression(targetNode);
 					if (valueExp != null) {					// FIXME Bug 552853
 						boolean isNotify = connectionManager.isHazardousWrite(s, navigationEdge);
@@ -907,6 +907,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						constructor = helper.createOperationCallExp(thisExp, function, asArguments);
 					}
 					if (constructor == null) {
+						QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(this);
 						constructor = (OCLExpression) ((OperationCallExp)node.getOriginatingElement()).accept(expressionCreator);
 					}
 				}
@@ -1010,6 +1011,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private @NonNull VariableDeclaration getSubexpressionDeclaration(@NonNull Node node) {
 		VariableDeclaration variable = node2variable.get(node);
 		if (variable == null) {
+			QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(this);
 			OCLExpression targetExpression = expressionCreator.getExpression(node);
 			variable = createDeclareStatement(node, targetExpression);
 		}

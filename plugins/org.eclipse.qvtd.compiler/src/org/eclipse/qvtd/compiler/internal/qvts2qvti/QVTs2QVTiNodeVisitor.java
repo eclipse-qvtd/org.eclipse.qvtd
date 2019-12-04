@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -83,6 +85,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 
 	protected final @NonNull QVTimperativeHelper helper;
 	protected final @NonNull QVTruntimeLibraryHelper qvtruntimeLibraryHelper;
+	protected final @NonNull Set<@NonNull Edge>  resultEdges = new HashSet<>();
 
 	public QVTs2QVTiNodeVisitor(@NonNull BasicPartition2Mapping context) {
 		super(context);
@@ -203,17 +206,36 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 			if (edge.isExpression() && (edge instanceof OperationSelfEdge)) {
 				OperationSelfEdge operationSelfEdge = (OperationSelfEdge)edge;
 				Node expNode = operationSelfEdge.getEdgeSource();
-				sourceExp = getExpression(expNode);
+				//	try {
+				QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(context);
+				sourceExp = expressionCreator.getExpression(expNode);
+				//	}
+				//	catch (IllegalStateException e) {			// FIXME debugging
+				//		QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(context);
+				//		sourceExp = expressionCreator.getExpression(expNode);
+				//	}
 			}
 			else if (edge instanceof OperationParameterEdge) {
 				OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
 				Node expNode = operationParameterEdge.getEdgeSource();
-				OCLExpression nestedExp = getExpression(expNode);
+				//	try {
+				QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(context);
+				OCLExpression nestedExp = expressionCreator.getExpression(expNode);
 				int index = parameters.indexOf(operationParameterEdge.getReferredParameter());
 				if (0 <= index) {
 					OCLExpression oldExpression = argExps.set(index, nestedExp);
 					assert oldExpression == null;
 				}
+				//	}
+				//	catch (IllegalStateException e) {			// FIXME debugging
+				//		QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(context);
+				//		OCLExpression nestedExp = expressionCreator.getExpression(expNode);
+				//		int index = parameters.indexOf(operationParameterEdge.getReferredParameter());
+				//		if (0 <= index) {
+				//			OCLExpression oldExpression = argExps.set(index, nestedExp);
+				//			assert oldExpression == null;
+				//		}
+				//	}
 			}
 		}
 		for (OCLExpression exp : argExps) {
@@ -234,7 +256,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 
 	protected @Nullable TypedElement doPatternNode(@NonNull Node node) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isExpression()) {
+			if (edge.isExpression() && resultEdges.add(edge)) {
 				Node expNode = edge.getEdgeSource();
 				OCLExpression clonedElement = getExpression(expNode);
 				if (clonedElement instanceof VariableExp) {
@@ -248,16 +270,19 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			assert !edge.isCast();
-			if (edge.isNavigation()) {
+			if (edge.isNavigation() && resultEdges.add(edge)) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
-				Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
-				if (edgeRole == Role.LOADED) {
-					OCLExpression source = getExpression(edge.getEdgeSource());
-					return helper.createNavigationCallExp(source, QVTscheduleUtil.getReferredProperty(navigationEdge));
-				}
-				else if (edgeRole == Role.PREDICATED) {
-					OCLExpression source = getExpression(edge.getEdgeSource());
-					return helper.createNavigationCallExp(source, QVTscheduleUtil.getReferredProperty(navigationEdge));
+				NavigationEdge oppositeEdge = navigationEdge.getOppositeEdge();
+				if ((oppositeEdge == null) || resultEdges.add(oppositeEdge)) {
+					Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
+					if (edgeRole == Role.LOADED) {
+						OCLExpression source = getExpression(edge.getEdgeSource());
+						return helper.createNavigationCallExp(source, QVTscheduleUtil.getReferredProperty(navigationEdge));
+					}
+					else if (edgeRole == Role.PREDICATED) {
+						OCLExpression source = getExpression(edge.getEdgeSource());
+						return helper.createNavigationCallExp(source, QVTscheduleUtil.getReferredProperty(navigationEdge));
+					}
 				}
 			}
 			else {
