@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -22,7 +22,7 @@ public class XMLStringBuilder
 	private @Nullable String currentTag = null;
 
 	public XMLStringBuilder() {}
-	
+
 	public void appendElement(@NonNull String element, /*@NonNull*/ String value) {
 		s.append(" ");
 		s.append(element);
@@ -54,23 +54,31 @@ public class XMLStringBuilder
 
 	public void appendTextEnd(/*@NonNull*/ String text) {
 		s.append(">");
-		s.append(text);
+		appendTextBody(text);
 		s.append("</");
 		s.append(tagStack.pop());
 		s.append(">\n");
 		currentTag = null;
 	}
-	
+
 	// Append value always pops!
 	public void appendValueAndPopTag(@Nullable String value) {
 		if (currentTag != null) {
 			s.append(">");
 			currentTag = null;
 		}
-		if (value == null)
-			value = "";
-		for (int i = 0; i < value.length(); i++) {
-			char c = value.charAt(i);
+		appendTextBody(value);
+		String topTag = tagStack.pop();
+		s.append("</");
+		s.append(topTag);
+		s.append(">\n");
+	}
+
+	protected void appendTextBody(String text) {
+		if (text == null)
+			text = "";
+		for (int i = 0; i < text.length(); i++) {
+			char c = text.charAt(i);
 			if (c == '\'') { s.append("&apos;"); }
 			else if (c == '"') { s.append("&quot;"); }
 			else if (c == '&') { s.append("&amp;"); }
@@ -79,10 +87,6 @@ public class XMLStringBuilder
 			else if (c == '\n') { s.append("&#xA;"); }
 			else { s.append(c); }
 		}
-		String topTag = tagStack.pop();
-		s.append("</");
-		s.append(topTag);
-		s.append(">\n");
 	}
 
 	public void popTag() {
