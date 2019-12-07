@@ -158,10 +158,13 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		s.pushTag("y:ShapeNode");
 		//				appendGeometry(height, width, null, null);
 		appendFill("#ffffff");
+		String lineColor = color;
+		Double width = Double.valueOf(penwidth);
+		appendBorder(new BorderStyle(lineColor, lineType, width));
 		s.appendTextBegin("y:NodeLabel");
 		s.appendElement("fontSize", "16");
-		s.appendElement("modelName", "sides");
-		s.appendElement("modelPosition", "n");
+		s.appendElement("modelName", "internal");
+		s.appendElement("modelPosition", "t");
 		s.appendTextEnd(label);
 		//				appendShape(shapeName);
 		s.popTag();
