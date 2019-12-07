@@ -29,6 +29,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
@@ -42,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor2;
 
 /**
  * <!-- begin-user-doc -->
@@ -283,7 +285,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				return getOwnedClusters();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getRootRegion();
-				return basicGetRootRegion();
+			return basicGetRootRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -299,22 +301,22 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName((String)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedNodes().clear();
-				getOwnedNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getOwnedNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedEdges().clear();
-				getOwnedEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getOwnedEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedClusters().clear();
-				getOwnedClusters().addAll((Collection<? extends Cluster>)newValue);
-				return;
+			getOwnedClusters().addAll((Collection<? extends Cluster>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setRootRegion((RootRegion)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -329,19 +331,19 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName(SYMBOL_NAME_EDEFAULT);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedEdges().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedClusters().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setRootRegion((RootRegion)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -402,6 +404,11 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
+
+	@Override
+	public void acceptGraphVisitor(@NonNull ToGraphVisitor2 toGraphVisitor) {
+		accept((Visitor<?>)toGraphVisitor);
+	}
 
 	@Override
 	public void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node) {}
@@ -657,7 +664,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (rootRegion != null)
 					msgs = ((InternalEObject)rootRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, RootRegion.class, msgs);
-				return basicSetRootRegion((RootRegion)otherEnd, msgs);
+			return basicSetRootRegion((RootRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}

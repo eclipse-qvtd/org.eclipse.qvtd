@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -349,11 +350,11 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 		RootPartition rootPartition = rootRegion.getOwnedRootPartition();
 		if (rootPartition == null) {
 			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
-				region.accept(this);
+				region.accept((Visitor<?>)this);
 			}
 		}
 		else {
-			rootPartition.accept(this);
+			rootPartition.accept((Visitor<?>)this);
 		}
 	}
 
@@ -369,7 +370,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 	public @Nullable String visitCyclicPartition(@NonNull CyclicPartition cyclicPartition) {
 		for (@NonNull MappingPartition partition : QVTscheduleUtil.getOwnedMappingPartitions(cyclicPartition)) {
 			setScope(partition);
-			partition.accept(this);
+			partition.accept((Visitor<?>)this);
 		}
 		return null;
 	}
@@ -420,7 +421,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 	public @Nullable String visitRootPartition(@NonNull RootPartition rootPartition) {
 		for (@NonNull MappingPartition partition : QVTscheduleUtil.getOwnedMappingPartitions(rootPartition)) {
 			setScope(partition);
-			partition.accept(this);
+			partition.accept((Visitor<?>)this);
 		}
 		return null;
 	}
@@ -441,7 +442,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 		context.setColor(QVTscheduleConstants.REGION_COLOR);
 		context.pushCluster();
 		for (@NonNull OperationRegion region : QVTscheduleUtil.getOwnedOperationRegions(QVTscheduleUtil.getOwningScheduleModel(rootRegion))) {
-			region.accept(this);
+			region.accept((Visitor<?>)this);
 		}
 		//	LoadingRegion loadingRegion = rootRegion.getOwnedLoadingRegion();
 		//	if (loadingRegion != null) {

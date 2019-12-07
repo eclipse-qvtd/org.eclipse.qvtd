@@ -14,7 +14,6 @@ import java.util.Comparator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -28,7 +27,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
 /** This code is rescued but has never worked properly */
-public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable String, @NonNull GraphStringBuilder> implements ToGraphHelper
+public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable String, @NonNull GraphStringBuilder> implements ToGraphHelper, ToGraphVisitor2
 {
 	public static class EdgeComparator implements Comparator<@NonNull Edge>
 	{
@@ -115,6 +114,11 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 
 	protected @NonNull String getColor(@NonNull GraphElement element) {
 		return element.getColor();
+	}
+
+	@Override
+	public @NonNull GraphStringBuilder getContext() {
+		return context;
 	}
 
 	@Override
@@ -225,7 +229,7 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 	}
 
 	public void visit(@NonNull Graphable graphable) {
-		((Element)graphable).accept(this);
+		graphable.acceptGraphVisitor(this);
 	}
 
 	@Override

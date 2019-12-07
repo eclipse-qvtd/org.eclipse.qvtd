@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
@@ -165,16 +166,16 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 		context.setLabel(rootRegion.getName());
 		context.pushCluster();
 		for (@NonNull OperationRegion region : QVTscheduleUtil.getOwnedOperationRegions(QVTscheduleUtil.getOwningScheduleModel(rootRegion))) {
-			region.accept(this);
+			region.accept((Visitor<?>)this);
 		}
 		LoadingRegion loadingRegion = rootRegion.getOwnedLoadingRegion();
 		if (loadingRegion != null) {
-			loadingRegion.accept(this);
+			loadingRegion.accept((Visitor<?>)this);
 		}
 		List<@NonNull Region> regionsList = Lists.newArrayList(QVTscheduleUtil.getActiveRegions(rootRegion));
 		Collections.sort(regionsList, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull Region region : regionsList) {
-			region.accept(this);
+			region.accept((Visitor<?>)this);
 		}
 		List<@NonNull Node> nodesList = Lists.newArrayList(QVTscheduleUtil.getOwnedNodes(rootRegion));
 		Collections.sort(nodesList, NODE_COMPARATOR);
