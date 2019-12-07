@@ -280,6 +280,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				QVTiProductionConsumption qvtiProductionConsumption = new QVTiProductionConsumption(this, domainUsageAnalysis, iEntryPoint);
 				qvtiProductionConsumption.analyze();
 				qvtiProductionConsumption.validate();
+				scheduleManager.writeDebugGraphs(qvtiProductionConsumption, "design-check");
 			}
 			throwCompilerChainExceptionForErrors();
 			return iTransformation;

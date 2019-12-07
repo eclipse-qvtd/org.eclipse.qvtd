@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvti.analysis;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.NavigationCallExp;
@@ -47,6 +49,11 @@ import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.CompilerStep;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.MappingProblem;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
@@ -60,15 +67,60 @@ import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor2;
 
 /**
  * QVTiProductionConsumption supports a design rule check on the QVTi model to verify that consumed edges are produced and that notify/observe annotations ensure
- * that not-necessaryily-ready consumptions wait for their corresponding productions.
+ * that not-necessarily-ready consumptions wait for their corresponding productions.
  */
-public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVisitor<@Nullable Object, @NonNull Resource>
+public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVisitor<@Nullable Object, @NonNull Resource> implements Graphable
 {
 	public static final @NonNull TracingOption SUMMARY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvti/check/summary");
+
+	protected static final class DirectedEdge implements GraphEdge
+	{
+		private final @NonNull GraphNode targetNode;
+		private final @NonNull GraphNode sourceNode;
+
+		protected DirectedEdge(@NonNull GraphNode sourceNode, @NonNull GraphNode targetNode) {
+			this.sourceNode = sourceNode;
+			this.targetNode = targetNode;
+		}
+
+		@Override
+		public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
+			GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+			s.setColor("orange");
+			//	String style = getStyle();
+			//	if (style != null) {
+			//		s.setStyle(style);
+			//	}
+			//	String arrowhead = getArrowhead();
+			//	if (arrowhead != null) {
+			//		s.setArrowhead(arrowhead);
+			//	}
+			s.setPenwidth(2);
+			s.appendAttributedEdge(sourceName, this, targetName);
+		}
+
+		@Override
+		public @NonNull String getColor() {
+			return "red";
+		}
+
+		@Override
+		public @NonNull GraphNode getEdgeSource() {
+			return sourceNode;
+		}
+
+		@Override
+		public @NonNull GraphNode getEdgeTarget() {
+			return targetNode;
+		}
+	}
 
 	/**
 	 * PassRange captures a first..last range of passes.
@@ -94,12 +146,14 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		private final int last;
 
 		public PassRange() {
-			this(Integer.MAX_VALUE, Integer.MIN_VALUE);
+			this.first = Integer.MAX_VALUE;
+			this.last = Integer.MIN_VALUE;
 		}
 
 		public PassRange(int first, int last) {
 			this.first = first;
 			this.last = last;
+			assert first <= last;
 		}
 
 		@Override
@@ -133,14 +187,45 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	/**
 	 * BasePropertyAnalysis aggregates the AccessAnalysis for each access using a Property or its opposite.
 	 */
-	private class BasePropertyAnalysis implements Nameable
+	private class BasePropertyAnalysis implements Nameable, GraphNode
 	{
+		/**
+		 * The base/normalized/primary property for the edge production/consumption.
+		 */
 		protected final @NonNull Property baseProperty;
+
+		/**
+		 * Name of the base/normalized/primary property.
+		 */
+		protected final @NonNull String baseName;
+
+		/**
+		 * Name of the base/normalized/primary property and its opposite.
+		 */
 		protected final @NonNull String name;
+
+		/**
+		 * The various accesses that conform to the baseProperty.
+		 */
 		protected final @NonNull Map<@NonNull CompleteClass, @NonNull Map<@NonNull CompleteClass, @NonNull AccessAnalysis>> sourceClass2targetClass2accessAnalysis = new HashMap<>();
-		protected final @NonNull Map<@NonNull Set<@NonNull AccessAnalysis>, @NonNull ConnectionAnalysis> producingAnalyses2connectionAnalysis = new HashMap<>();
-		protected final @NonNull Map<@NonNull AccessAnalysis, @Nullable List<@NonNull ConnectionAnalysis>> producingAnalysis2connectionAnalyses = new HashMap<>();
+
+		/**
+		 * The 'connection' that produces each consumed access.
+		 * A BasePropertyAnalysis 'references' a ConnectionAnalysis.
+		 */
 		protected final @NonNull Map<@NonNull AccessAnalysis, @Nullable ConnectionAnalysis> consumingAnalysis2connectionAnalysis = new HashMap<>();
+
+		/**
+		 * The 'connection's that consume each produced access.
+		 * A BasePropertyAnalysis 'references' many ConnectionAnalysis.
+		 */
+		protected final @NonNull Map<@NonNull AccessAnalysis, @Nullable List<@NonNull ConnectionAnalysis>> producingAnalysis2connectionAnalyses = new HashMap<>();
+
+		/**
+		 * The 'connection' that aggregates a set of productions that conform to a consumption.
+		 * A BasePropertyAnalysis 'composes' a ConnectionAnalysis.
+		 */
+		protected final @NonNull Map<@NonNull Set<@NonNull AccessAnalysis>, @NonNull ConnectionAnalysis> producingAnalyses2connectionAnalysis = new HashMap<>();
 
 		public BasePropertyAnalysis(@NonNull Property baseProperty) {
 			this.baseProperty = baseProperty;
@@ -154,6 +239,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			else {
 				s.append(baseProperty.isIsRequired() ? "[1]" : "[?]");
 			}
+			this.baseName = s.toString();
 			Property oppositeProperty = baseProperty.getOpposite();
 			if (oppositeProperty != null) {
 				s.append(" <=> ");
@@ -171,6 +257,10 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			assert baseProperty == QVTscheduleUtil.getPrimaryProperty(baseProperty);
 		}
 
+		/**
+		 * Add all the accesses of basePropertyAnalysis to this BasePropertyAnalysis. This is used to create the
+		 * pseudo-Property oclContainer from the actual containment properties.
+		 */
 		public void accumulate(@NonNull BasePropertyAnalysis basePropertyAnalysis) {
 			for (@NonNull AccessAnalysis producingAnalysis : basePropertyAnalysis.producingAnalysis2connectionAnalyses.keySet()) {
 				for (@NonNull NamedElement producer : producingAnalysis.producers) {
@@ -450,12 +540,64 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				}
 			}
 		}
+
+		@Override
+		public @NonNull String getColor() {
+			return "blue";
+		}
+
+		@Override
+		public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+			/*	GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+			s.setLabel(getName());
+			s.setShape("rectangle");
+			s.setStyle("solid");
+			s.setColor("blue");
+			s.setPenwidth(1);
+			s.appendAttributedNode(nodeName); */
+		}
+	}
+
+	private class MappingNode implements Nameable, GraphNode
+	{
+		protected final @NonNull Mapping mapping;
+
+		protected MappingNode(@NonNull Mapping mapping) {
+			this.mapping = mapping;
+		}
+
+		@Override
+		public @NonNull String getColor() {
+			return "brown";
+		}
+
+		@Override
+		public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+			GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+			String name = getName();
+			if (name.startsWith(QVTscheduleConstants.REGION_SYMBOL_NAME_PREFIX)) {
+				name = name.substring(QVTscheduleConstants.REGION_SYMBOL_NAME_PREFIX.length());
+			}
+			s.setLabel(getName() + "\n" + PassRange.create(mapping));
+			s.setShape("rectangle");
+			s.setStyle("solid");
+			s.setColor("brown");
+			s.setPenwidth(2);
+			s.appendAttributedNode(nodeName);
+		}
+
+		@Override
+		public String getName() {
+			return mapping.getName();
+		}
+
 	}
 
 	/**
 	 * AccessAnalysis aggregates the producer/consumer analysis of a source-CompleteClass via property to target-CompleteClass slot value.
+	 * Distinct accesses are kept separate. RElated accesses such as opposites and deriveds are aggregated by a BasePropertyAnalysis.
 	 */
-	private class AccessAnalysis implements Nameable
+	private class AccessAnalysis implements Nameable, GraphNode
 	{
 		//	protected final @NonNull BasePropertyAnalysis basePropertyAnalysis;
 		protected final @NonNull CompleteClass sourceClass;
@@ -477,7 +619,16 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			s.append("::");
 			s.append(property.getName());
 			s.append(" : ");
-			s.append(targetClass.getName());
+			s.append(property.getType().getName());
+			Property opposite = property.getOpposite();
+			if (opposite != null) {
+				s.append("\n");
+				s.append(targetClass.getName());
+				s.append("::");
+				s.append(opposite.getName());
+				s.append(" : ");
+				s.append(opposite.getType().getName());
+			}
 			this.name = s.toString();
 		}
 
@@ -516,12 +667,28 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		public @NonNull String toString() {
 			return name;
 		}
+
+		@Override
+		public @NonNull String getColor() {
+			return "blue";
+		}
+
+		@Override
+		public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+			GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+			s.setLabel(getName() + "\n" + getProductionPassRange() /* + " => " + getConsumptionPassRange()*/);
+			s.setShape("rectangle");
+			s.setStyle(property.getType() instanceof DataType ? "rounded" : "solid");
+			s.setColor("green");
+			s.setPenwidth(2);
+			s.appendAttributedNode(nodeName);
+		}
 	}
 
 	/**
 	 * ConnectionAnalysis matches the conforming production and consumption analyses that correspond to a connection.
 	 */
-	private class ConnectionAnalysis //implements Nameable
+	private class ConnectionAnalysis implements Nameable, GraphNode
 	{
 		protected final @NonNull BasePropertyAnalysis basePropertyAnalysis;
 		protected final @NonNull Set<@NonNull AccessAnalysis> producingAnalyses;
@@ -565,10 +732,87 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		public @NonNull String toString() {
 			return basePropertyAnalysis.toString() + " " + productionPassRange + " " + consumptionPassRange;
 		}
+
+		@Override
+		public @NonNull String getColor() {
+			// TODO Auto-generated method stub
+			return "orange";
+		}
+
+		@Override
+		public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+			GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+			s.setLabel(basePropertyAnalysis.baseName + "\n" + /*productionPassRange + " => " +*/ consumptionPassRange);
+			s.setShape("ellipse");
+			s.setStyle("solid");
+			s.setColor("cyan");
+			s.setPenwidth(2);
+			s.appendAttributedNode(nodeName);
+		}
+
+		@Override
+		public String getName() {
+			return basePropertyAnalysis.getName();
+		}
+	}
+
+	protected class ToGraph implements ToGraphHelper
+	{
+		protected final @NonNull GraphStringBuilder context;
+
+		protected ToGraph(@NonNull GraphStringBuilder context) {
+			this.context = context;
+		}
+
+		@Override
+		public @NonNull GraphStringBuilder getGraphStringBuilder() {
+			return context;
+		}
+
+		protected @NonNull String getLabel(@NonNull GraphNode graphNode) {
+			String label = "";
+			if (graphNode instanceof BasePropertyAnalysis) {
+				BasePropertyAnalysis node = (BasePropertyAnalysis)graphNode;
+				label = node.getName();
+			}
+			return label;
+		}
+
+		@Override
+		public void setColor(@NonNull GraphElement element) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void setHead(@NonNull GraphNode node) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void setLabel(@NonNull GraphNode node) {
+			String label = getLabel(node);
+			context.setLabel(label);
+		}
+
+		@Override
+		public void setPenwidth(@NonNull GraphNode node) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void setShapeAndStyle(@NonNull GraphNode node) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull CompilerStep compilerStep;
+	protected final @NonNull String name;
 	protected final @NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull Map<@NonNull Property, @NonNull BasePropertyAnalysis> property2basePropertyAnalysis = new HashMap<>();
 	protected final @NonNull CompleteModel completeModel;
@@ -580,6 +824,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		super(ClassUtil.nonNullState(iEntryPoint.eResource()));
 		this.environmentFactory = compilerStep.getEnvironmentFactory();
 		this.compilerStep = compilerStep;
+		this.name = PivotUtil.getName(iEntryPoint);
 		this.domainUsageAnalysis = domainUsageAnalysis;
 		this.completeModel = environmentFactory.getCompleteModel();
 		this.mappings = QVTimperativeUtil.computeMappingClosure(iEntryPoint);
@@ -593,6 +838,101 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			outputUsage = domainUsageAnalysis.union(outputUsage, domainUsageAnalysis.getUsage(outputTypedModel));
 		}
 		this.outputUsage = outputUsage;
+	}
+
+	@Override
+	public void acceptGraphVisitor(@NonNull ToGraphVisitor2 toGraphVisitor) {
+		GraphStringBuilder context = toGraphVisitor.getContext();
+		ToGraph toGraph = new ToGraph(context);
+		context.setLabel(getGraphName());
+		context.setColor("black");
+		context.pushCluster();
+		Map<@NonNull Mapping, @NonNull MappingNode> mapping2mappingNode = new HashMap<>();
+		for (@NonNull BasePropertyAnalysis basePropertyAnalysis : property2basePropertyAnalysis.values()) {
+			context.setLabel(basePropertyAnalysis.baseName);
+			Collection<@NonNull Map<@NonNull CompleteClass, @NonNull AccessAnalysis>> values = basePropertyAnalysis.sourceClass2targetClass2accessAnalysis.values();
+			//	if (values.size() > 1) {
+			context.setColor("blue");
+			context.setStyle(basePropertyAnalysis.baseProperty.getType() instanceof DataType ? "rounded" : "solid");
+			context.setPenwidth(2);
+			context.pushCluster();
+			//	}
+			for (@NonNull ConnectionAnalysis connectionAnalysis : basePropertyAnalysis.producingAnalyses2connectionAnalysis.values()) {
+				context.appendNode(toGraph, connectionAnalysis);
+			}
+			for (@NonNull Map<@NonNull CompleteClass, @NonNull AccessAnalysis> targetClass2accessAnalysis : values) {
+				for (@NonNull AccessAnalysis accessAnalysis : targetClass2accessAnalysis.values()) {
+					context.appendNode(toGraph, accessAnalysis);
+				}
+			}
+			//	if (values.size() > 1) {
+			context.popCluster();
+			//	}
+			for (@NonNull ConnectionAnalysis connectionAnalysis : basePropertyAnalysis.producingAnalyses2connectionAnalysis.values()) {
+				for (@NonNull AccessAnalysis accessAnalysis : connectionAnalysis.consumingAnalyses) {
+					for (@NonNull NamedElement consumer : accessAnalysis.consumers) {
+						MappingNode mappingNode = getMappingNode(mapping2mappingNode, consumer);
+						context.appendEdge(toGraph, connectionAnalysis, new DirectedEdge(connectionAnalysis, mappingNode), mappingNode);
+					}
+				}
+				for (@NonNull AccessAnalysis accessAnalysis : connectionAnalysis.producingAnalyses) {
+					context.appendEdge(toGraph, accessAnalysis, new DirectedEdge(accessAnalysis, connectionAnalysis), connectionAnalysis);
+				}
+			}
+			for (@NonNull Map<@NonNull CompleteClass, @NonNull AccessAnalysis> targetClass2accessAnalysis : values) {
+				for (@NonNull AccessAnalysis accessAnalysis : targetClass2accessAnalysis.values()) {
+					for (@NonNull NamedElement producer : accessAnalysis.producers) {
+						MappingNode mappingNode = getMappingNode(mapping2mappingNode, producer);
+						context.appendEdge(toGraph, mappingNode, new DirectedEdge(mappingNode, accessAnalysis), accessAnalysis);
+					}
+					//	for (@NonNull NamedElement consumer : accessAnalysis.consumers) {
+					//		MappingNode mappingNode = getMappingNode(mapping2mappingNode, consumer);
+					//		context.appendEdge(toGraph, accessAnalysis, new DirectedEdge(accessAnalysis, mappingNode), mappingNode);
+					//	}
+				}
+			}
+			/*		for (List<@NonNull ConnectionAnalysis> connectionAnalyses : basePropertyAnalysis.producingAnalysis2connectionAnalyses.values()) {
+				if (connectionAnalyses != null) {
+					for (@NonNull ConnectionAnalysis connectionAnalysis : connectionAnalyses) {
+						context.appendNode(toGraph, connectionAnalysis);
+						for (@NonNull AccessAnalysis accessAnalysis : connectionAnalysis.producingAnalyses) {
+							//appingNode mappingNode = getMappingNode(mapping2mappingNode, producer);
+							context.appendEdge(toGraph, connectionAnalysis, new DirectedEdge(connectionAnalysis, accessAnalysis), accessAnalysis);
+						}
+						for (@NonNull AccessAnalysis accessAnalysis : connectionAnalysis.consumingAnalyses) {
+							//appingNode mappingNode = getMappingNode(mapping2mappingNode, consumer);
+							context.appendEdge(toGraph, accessAnalysis, new DirectedEdge(accessAnalysis, connectionAnalysis), connectionAnalysis);
+						}
+					}
+				}
+			} */
+		}
+		/*	for (@NonNull Mapping mapping : mappings) {
+		//	context.setLabel(mapping.name);
+		//	context.pushCluster();
+			String nodeId = context.appendNode(toGraph, mapping);
+			//	node2id.put(basePropertyAnalysis, nodeId);
+		//	for (@NonNull Map<@NonNull CompleteClass, @NonNull AccessAnalysis> targetClass2accessAnalysis : basePropertyAnalysis.sourceClass2targetClass2accessAnalysis.values()) {
+		//		for (@NonNull AccessAnalysis accessAnalysis : targetClass2accessAnalysis.values()) {
+		//			String accessAnalysisId = context.appendNode(toGraph, accessAnalysis);
+		//			//			node2id.put(accessAnalysis, accessAnalysisId);
+		//		}
+		//	}
+			context.popCluster();
+		} */
+
+		context.popCluster();
+	}
+
+	protected @NonNull MappingNode getMappingNode(@NonNull Map<@NonNull Mapping, @NonNull MappingNode> mapping2mappingNode, @NonNull NamedElement element) {
+		Mapping mapping = QVTimperativeUtil.getContainingMapping(element);
+		assert mapping != null;
+		MappingNode mappingNode = mapping2mappingNode.get(mapping);
+		if (mappingNode == null) {
+			mappingNode = new MappingNode(mapping);
+			mapping2mappingNode.put(mapping, mappingNode);
+		}
+		return mappingNode;
 	}
 
 	public void analyze() {
@@ -646,6 +986,11 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 
 	protected @NonNull CompleteClass getCompleteClass(@NonNull TypedElement typedElement) {
 		return getCompleteClass(QVTimperativeUtil.getType(typedElement));
+	}
+
+	@Override
+	public @NonNull String getGraphName() {
+		return name;
 	}
 
 	protected boolean isInput(@NonNull DomainUsage usage) {
@@ -746,6 +1091,12 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 		basePropertyAnalysis.addProducer(setStatement, sourceClass, setProperty, targetClass);
 		return null;
+	}
+
+	@Override
+	public void toGraph(@NonNull GraphStringBuilder s) {
+		// TODO Auto-generated method stub
+
 	}
 
 	//	@Override
