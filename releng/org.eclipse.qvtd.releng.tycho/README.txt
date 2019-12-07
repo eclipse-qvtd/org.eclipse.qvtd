@@ -26,7 +26,7 @@ Refresh
 RC builds are just aliases for regular S builds.
 The final R build rebuilds the final RC build and is built as late as possible for contribution to the final SimRel build.
 For the R  build update qvtd.aggrcon to
-location="http://download.eclipse.org/mmt/qvto/updates/releases/3.10.0"
+location="http://download.eclipse.org/mmt/qvtd/updates/releases/3.10.0"
 
 After a few hours the mirrors can be checked by:
 https://www.eclipse.org/downloads/download.php?file=/mmt/qvtd/updates/releases/0.20.0&format=xml
@@ -68,3 +68,32 @@ Publish JUnit test report: tests/*.test*/target/surefire-reports/*.xml,tests/*.t
 
 Archive the artefacts: releng/org.eclipse.qvtd.releng.build-site/target/*.zip,releng/org.eclipse.qvtd.releng.build-site/target/publisher.properties,releng/org.eclipse.qvtd.releng.build-site/target/downloads.sh,releng/org.eclipse.qvtd.releng.build-site/target/updates.sh
 Trigger Promoter when stable using releng/org.eclipse.qvtd.releng.build-site/target/publisher.properties
+
+
+
+
+-- Drops maintenance
+ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/download.eclipse.org/mmt/qvtd/downloads/drops/0.20.0
+ssh genie.qvtd@projects-storage.eclipse.org rm -rf  /home/data/httpd/download.eclipse.org/mmt/qvtd/downloads/drops/0.20.0/N201909*
+
+-- Updates maintenance
+ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases
+ssh genie.qvtd@projects-storage.eclipse.org pwd ; cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; pwd ; ls -la
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.14.0
+ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases/0.14.0
+
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/nightly ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
+ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/nightly/0.20.0
+
+
+-- Drops archiving ---- and edit GIT\mmt\downloads\extras-qvto.php
+ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/archive.eclipse.org/mmt/qvtd/downloads/drops
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/downloads/drops ; mv 0.14.0 /home/data/httpd/archive.eclipse.org/mmt/qvtd/downloads/drops
+
+-- Updates archiving
+ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases
+ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases/zz*
+
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.14.0
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; mv 0.14.0 /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases ; ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=0.14.0
