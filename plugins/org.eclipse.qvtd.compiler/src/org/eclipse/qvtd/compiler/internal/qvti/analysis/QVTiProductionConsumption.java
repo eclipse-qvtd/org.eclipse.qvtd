@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -499,23 +500,6 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			return name;
 		}
 
-		private @NonNull StringBuilder initProblem(@Nullable String prefix, @NonNull NamedElement element, @Nullable String suffix) {
-			StringBuilder s = new StringBuilder();
-			if (prefix != null) {
-				s.append(prefix);
-			}
-			Mapping mapping = QVTimperativeUtil.getContainingMapping(element);
-			s.append(mapping.getName());
-			s.append(" ");
-			s.append(PassRange.create(mapping));
-			s.append(" ");
-			s.append(element);
-			if (suffix != null) {
-				s.append(suffix);
-			}
-			return s;
-		}
-
 		private boolean isConforming(@NonNull CompleteClass producingSourceClass, @NonNull Property producingProperty, @NonNull CompleteClass producingTargetClass,
 				@NonNull CompleteClass consumingSourceClass, @NonNull Property consumingProperty, @NonNull CompleteClass consumingTargetClass) {
 			boolean conformingSource = QVTscheduleUtil.conformsToClassOrBehavioralClass(producingSourceClass, consumingSourceClass)
@@ -641,17 +625,32 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		private void validateNotifies(@Nullable StringBuilder s, @NonNull AccessAnalysis producingAnalysis) {
 			List<@NonNull ConnectionAnalysis> connectionAnalyses = producingAnalysis2connectionAnalyses.get(producingAnalysis);
 			if (connectionAnalyses != null) {				// consumption is optional (may be produced only for output)
-				boolean needsNotify = false;
+				PassRange productionPassRange = new PassRange();
+				PassRange consumptionPassRange = new PassRange();
 				for (@NonNull ConnectionAnalysis connectionAnalysis : connectionAnalyses) {
-					if (connectionAnalysis.needsNotify()) {
-						needsNotify = true;
-					}
+					productionPassRange = productionPassRange.max(connectionAnalysis.getProductionPassRange());
+					consumptionPassRange = consumptionPassRange.max(connectionAnalysis.getConsumptionPassRange());
 				}
+				//
+				//	NB. If any consumption observes, all productions must notify.
+				//
+				boolean needsNotify = !productionPassRange.precedes(consumptionPassRange);
 				for (@NonNull NamedElement producer : producingAnalysis.producers) {
 					if (!(producer instanceof GuardParameter)) {			// GuardParameter are implicitly notified; no need to check
 						boolean isNotify = isNotify(producer);
 						if (isNotify != needsNotify) {
-							StringBuilder sProblem = initProblem("", producer, isNotify ? " should not be notified" : " should be notified");
+							Property property = producingAnalysis.property;
+							StringBuilder sProblem = new StringBuilder();
+							sProblem.append("The production of: ");
+							sProblem.append(PrettyPrinter.print(property));
+							sProblem.append("\n\tat ");
+							sProblem.append(productionPassRange);
+							sProblem.append(" should");
+							if (isNotify) {
+								sProblem.append(" not");
+							}
+							sProblem.append(" be notified for use at ");
+							sProblem.append(consumptionPassRange);
 							Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
 							compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
 							if (s != null) {
@@ -671,7 +670,16 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 					OCLExpression ownedSource = PivotUtil.getOwnedSource(consumer);
 					DomainUsage sourceUsage = domainUsageAnalysis.getUsage(ownedSource);
 					if (!sourceUsage.isThis()) {
-						StringBuilder sProblem = initProblem("", consumer, " is not produced");
+						Property property = consumingAnalysis.property;
+						StringBuilder sProblem = new StringBuilder();
+						sProblem.append("No possible producer of: ");
+						sProblem.append(PrettyPrinter.print(property));
+						sProblem.append("\n\tcan satisfy expression: ");
+						sProblem.append(PrettyPrinter.print(consumer));
+						sProblem.append("\n\tnavigation source type: ");
+						sProblem.append(PrettyPrinter.print(consumingAnalysis.sourceClass.getPrimaryClass()));
+						sProblem.append("\n\tnavigation target type: ");
+						sProblem.append(PrettyPrinter.print(consumingAnalysis.targetClass.getPrimaryClass()));
 						Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
 						compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
 						if (s != null) {
@@ -684,7 +692,20 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 					boolean needsObserve = !productionRange.precedes(consumerPassRange);
 					boolean isObserve = isObserve(consumer);
 					if (isObserve != needsObserve) {
-						StringBuilder sProblem = initProblem("", consumer, isObserve ? " should not be observed" : " should be observed");
+						Property property = consumingAnalysis.property;
+						StringBuilder sProblem = new StringBuilder();
+						sProblem.append("The production of: ");
+						sProblem.append(PrettyPrinter.print(property));
+						sProblem.append("\n\tfor expression: ");
+						sProblem.append(PrettyPrinter.print(consumer));
+						sProblem.append("\n\tat ");
+						sProblem.append(productionRange);
+						sProblem.append(" should");
+						if (isObserve) {
+							sProblem.append(" not");
+						}
+						sProblem.append(" be observed at ");
+						sProblem.append(consumerPassRange);
 						Mapping mapping = QVTimperativeUtil.getContainingMapping(consumer);
 						compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
 						if (s != null) {
@@ -737,15 +758,11 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			sLabel.append("::");
 			sLabel.append(property.getName());
 			sLabel.append("\n: ");
+			sLabel.append(accessAnalysis.targetClass.getName());
 			if (property.isIsMany()) {
-				sLabel.append(type.getName());
-				sLabel.append("(");
-				sLabel.append(((CollectionType)type).getElementType().getName());
-				sLabel.append(")");
-				//	sLabel.append(/*property.isIsRequired() ? "[+]" :*/ "[*]");
+				sLabel.append(/*property.isIsRequired() ? "[+]" :*/ "[*]");
 			}
 			else {
-				sLabel.append(type.getName());
 				sLabel.append(property.isIsRequired() ? "[1]" : "[?]");
 			}
 			sLabel.append("\n");
@@ -894,9 +911,9 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			this.productionPassRange = productionPassRange;
 		}
 
-		//	public @NonNull PassRange getConsumptionPassRange() {
-		//		return consumptionPassRange;
-		//	}
+		public @NonNull PassRange getConsumptionPassRange() {
+			return consumptionPassRange;
+		}
 
 		public @NonNull PassRange getProductionPassRange() {
 			return productionPassRange;
