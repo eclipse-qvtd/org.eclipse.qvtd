@@ -214,7 +214,15 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 
 		@Override
 		public @NonNull String toString() {
-			return first <= last ? "[" + first + ".." + last + "]" : "[]";
+			if (first < last) {
+				return "[" + first + ".." + last + "]" ;
+			}
+			else if (first == last) {
+				return "[" + first + "]" ;
+			}
+			else {
+				return "[]";
+			}
 		}
 	}
 
