@@ -584,8 +584,8 @@ public class ConnectionManager
 	private @NonNull NodeConnection createNodeConnection(@NonNull RootRegion rootRegion, @NonNull Set<@NonNull Node> sourceSet, @NonNull ClassDatum classDatum, @NonNull SymbolNameBuilder s) {
 		NodeConnection connection = QVTscheduleFactory.eINSTANCE.createNodeConnection();
 		connection.setOwningRootRegion(rootRegion);
-		QVTscheduleUtil.getSourceEnds(connection).addAll(sourceSet);
 		connection.setName(scheduleManager.getScheduleModel().reserveSymbolName(s, connection));
+		QVTscheduleUtil.getSourceEnds(connection).addAll(sourceSet);
 		connection.setClassDatum(classDatum);
 		for (@NonNull Node sourceNode : sourceSet) {
 			//			assert !sourceNode.isConstant();
