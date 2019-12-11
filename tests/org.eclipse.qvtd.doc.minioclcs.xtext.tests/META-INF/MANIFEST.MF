@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-Version: 0.21.0.qualifier
+Bundle-Version: 0.22.0.qualifier
 Bundle-SymbolicName: org.eclipse.qvtd.doc.minioclcs.xtext.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Comment: javax.annotation is a workaround to Bug 539038

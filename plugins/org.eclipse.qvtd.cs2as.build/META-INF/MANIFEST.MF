@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.cs2as.build;singleton:=true
-Bundle-Version: 0.21.0.qualifier
+Bundle-Version: 0.22.0.qualifier
 Export-Package: org.eclipse.qvtd.cs2as.build.modelspecs,
  org.eclipse.qvtd.cs2as.build.mwe,
  org.eclipse.qvtd.cs2as.build.utilities
