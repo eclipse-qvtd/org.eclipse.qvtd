@@ -111,7 +111,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 			if (node.isThis()) {			// ?? distinctive Node
 				return context.createContextVariableExp();
 			}
-			return node.accept(this);
+			return node.accept(this);		// FIXME do depth-first creation of let's rather than breadth-first recursions
 		}
 		finally {
 			--depth;
