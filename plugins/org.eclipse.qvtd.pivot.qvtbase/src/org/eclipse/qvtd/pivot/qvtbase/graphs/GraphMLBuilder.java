@@ -228,7 +228,7 @@ public class GraphMLBuilder implements GraphBuilder
 		s.pushTag("y:PolyLineEdge");
 		appendLineStyle(new LineStyle(lineColor, LineType.valueOf(lineType)));
 		appendArrows(sourceArrowType, targetArrowType);
-		appendEdgeLabel(label, lineColor, null);
+		appendEdgeLabel(lineColor, label, null, null);
 		s.popTag();
 		s.popTag();
 		s.popTag();
@@ -263,13 +263,20 @@ public class GraphMLBuilder implements GraphBuilder
 		s.popTag();
 	}
 
-	protected void appendEdgeLabel(@Nullable String sourceLabel, String labelColor, @Nullable String targetLabel) {
+	protected void appendEdgeLabel(String labelColor, @Nullable String sourceLabel, @Nullable String midLabel, @Nullable String targetLabel) {
 		if (sourceLabel !=  null) {
 			s.pushTag("y:EdgeLabel");
 			s.appendElement("textColor", labelColor);
 			s.appendElement("modelName", "six_pos");
 			s.appendElement("modelPosition", "thead");
 			s.appendValueAndPopTag(sourceLabel);
+		}
+		if (midLabel !=  null) {
+			s.pushTag("y:EdgeLabel");
+			s.appendElement("textColor", labelColor);
+			s.appendElement("modelName", "six_pos");
+			s.appendElement("modelPosition", "head");
+			s.appendValueAndPopTag(midLabel);
 		}
 		if (targetLabel !=  null) {
 			s.pushTag("y:EdgeLabel");

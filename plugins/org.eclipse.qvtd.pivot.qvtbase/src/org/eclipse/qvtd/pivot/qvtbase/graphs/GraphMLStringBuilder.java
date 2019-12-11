@@ -78,7 +78,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		s.pushTag("y:PolyLineEdge");
 		appendLineStyle(new LineStyle(lineColor, lineType, width));
 		appendArrows(sourceArrowType != null ? sourceArrowType.name() : ArrowType.none.name(), targetArrowType != null ? targetArrowType.name() : ArrowType.delta.name());
-		appendEdgeLabel(sourceLabel, labelColor, targetLabel);
+		appendEdgeLabel(labelColor, sourceLabel, label, targetLabel);
 		s.popTag();
 		s.popTag();
 		s.popTag();
