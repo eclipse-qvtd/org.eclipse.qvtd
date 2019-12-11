@@ -1140,7 +1140,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	public @Nullable Object visitGuardParameter(@NonNull GuardParameter guardParameter) {
 		Property successProperty = guardParameter.getSuccessProperty();
 		if (successProperty != null) {
-			CompleteClass sourceClass = getCompleteClass(QVTimperativeUtil.getOwningClass(successProperty));
+			CompleteClass sourceClass = getCompleteClass(QVTimperativeUtil.getType(guardParameter));
 			CompleteClass targetClass = getCompleteClass(successProperty);
 			BasePropertyAnalysis basePropertyAnalysis = getBasePropertyAnalysis(successProperty);
 			basePropertyAnalysis.addProducer(guardParameter, sourceClass, successProperty, targetClass);
