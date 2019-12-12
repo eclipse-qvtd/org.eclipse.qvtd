@@ -904,7 +904,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					}
 					if (constructor == null) {
 						QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(this);
-						constructor = (OCLExpression) ((OperationCallExp)node.getOriginatingElement()).accept(expressionCreator);
+						constructor = ((OperationCallExp)node.getOriginatingElement()).accept(expressionCreator);
 					}
 				}
 				ClassDatum classDatum = node.getClassDatum();

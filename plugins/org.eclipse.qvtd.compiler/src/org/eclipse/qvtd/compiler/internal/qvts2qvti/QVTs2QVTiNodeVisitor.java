@@ -64,6 +64,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -79,7 +80,7 @@ import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
 /**
  * QVTs2QVTiNodeVisitor provides the minor Node conversions from QVTs to VQTi.
  */
-public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable TypedElement, @NonNull BasicPartition2Mapping>
+public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@NonNull OCLExpression, @NonNull BasicPartition2Mapping>
 {
 	private static int depth = 0;
 
@@ -93,32 +94,30 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		this.qvtruntimeLibraryHelper = context.getQVTruntimeLibraryHelper();
 	}
 
-	@Deprecated /* @deprecated non-null return should not happen */
-	protected @Nullable OCLExpression basicGetExpression(@NonNull Node node) {	// FIXME Bug 552853
-		return (OCLExpression)basicGetTypedElement(node);
+	protected @NonNull CollectionRange doCollectionRangeNode(@NonNull CollectionRangeNode node) {
+		Parameter rangeFirstParameter = qvtruntimeLibraryHelper.getRangeFirstParameter();
+		Parameter rangeLastParameter = qvtruntimeLibraryHelper.getRangeLastParameter();
+		OCLExpression asFirst = null;
+		OCLExpression asLast = null;
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+			if (edge instanceof OperationParameterEdge) {
+				OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
+				Parameter referredParameter = operationParameterEdge.getReferredParameter();
+				if (referredParameter == rangeFirstParameter) {
+					Node expNode = operationParameterEdge.getEdgeSource();
+					asFirst = getExpressionInternal(expNode);
+				}
+				else if (referredParameter == rangeLastParameter) {
+					Node expNode = operationParameterEdge.getEdgeSource();
+					asLast = getExpressionInternal(expNode);
+				}
+			}
+		}
+		assert (asFirst != null) && (asLast != null);
+		return helper.createCollectionRange(asFirst, asLast);
 	}
 
-	protected @Nullable TypedElement basicGetTypedElement(@NonNull Node node) {
-		if (++depth > 50) {
-			throw new IllegalStateException();								// Crash before a StackOverflow obscures the cause
-		}
-		try {
-			VariableDeclaration variable = context.basicGetVariable(node);
-			if (variable != null) {
-				assert !node.isNullLiteral();								// null should not be cached in a variable
-				return PivotUtil.createVariableExp(variable);
-			}
-			if (node.isThis()) {			// ?? distinctive Node
-				return context.createContextVariableExp();
-			}
-			return node.accept(this);		// FIXME do depth-first creation of let's rather than breadth-first recursions
-		}
-		finally {
-			--depth;
-		}
-	}
-
-	protected @Nullable LoopExp doIterationCallNode(@NonNull OperationCallNode node) {
+	protected @NonNull LoopExp doIterationCallNode(@NonNull OperationCallNode node) {
 		Parameter loopSourceParameter = qvtruntimeLibraryHelper.getLoopSourceParameter();
 		Parameter loopBodyParameter = qvtruntimeLibraryHelper.getLoopBodyParameter();
 		Parameter loopIteratorsParameter = qvtruntimeLibraryHelper.getLoopIteratorsParameter();
@@ -135,7 +134,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				Parameter referredParameter = operationParameterEdge.getReferredParameter();
 				if (referredParameter == loopSourceParameter) {
 					Node expNode = operationParameterEdge.getEdgeSource();
-					sourceExp = getExpression(expNode);
+					sourceExp = getExpressionInternal(expNode);
 				}
 			}
 		}
@@ -173,7 +172,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				Parameter referredParameter = operationParameterEdge.getReferredParameter();
 				if (referredParameter == loopBodyParameter) {
 					Node expNode = operationParameterEdge.getEdgeSource();
-					bodyExp = getExpression(expNode);
+					bodyExp = getExpressionInternal(expNode);
 				}
 			}
 		}
@@ -194,7 +193,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		return helper.createIteratorExp(sourceExp, referredIteration, variables, bodyExp);		// FIXME Bug 552827 IterateExp
 	}
 
-	protected @Nullable OperationCallExp doOperationCallNode(@NonNull OperationCallNode node) {
+	protected @NonNull OperationCallExp doOperationCallNode(@NonNull OperationCallNode node) {
 		Operation referredOperation = QVTscheduleUtil.getReferredOperation(node);
 		OCLExpression sourceExp = null;
 		List<@NonNull Parameter> parameters = QVTbaseUtil.Internal.getOwnedParametersList(referredOperation);
@@ -206,42 +205,23 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 			if (edge.isExpression() && (edge instanceof OperationSelfEdge)) {
 				OperationSelfEdge operationSelfEdge = (OperationSelfEdge)edge;
 				Node expNode = operationSelfEdge.getEdgeSource();
-				//	try {
 				QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(context);
-				sourceExp = expressionCreator.getExpression(expNode);
-				//	}
-				//	catch (IllegalStateException e) {			// FIXME debugging
-				//		QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(context);
-				//		sourceExp = expressionCreator.getExpression(expNode);
-				//	}
+				sourceExp = expressionCreator.getExpressionInternal(expNode);
 			}
 			else if (edge instanceof OperationParameterEdge) {
 				OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
 				Node expNode = operationParameterEdge.getEdgeSource();
-				//	try {
 				QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(context);
-				OCLExpression nestedExp = expressionCreator.getExpression(expNode);
+				OCLExpression nestedExp = expressionCreator.getExpressionInternal(expNode);
 				int index = parameters.indexOf(operationParameterEdge.getReferredParameter());
 				if (0 <= index) {
 					OCLExpression oldExpression = argExps.set(index, nestedExp);
 					assert oldExpression == null;
 				}
-				//	}
-				//	catch (IllegalStateException e) {			// FIXME debugging
-				//		QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(context);
-				//		OCLExpression nestedExp = expressionCreator.getExpression(expNode);
-				//		int index = parameters.indexOf(operationParameterEdge.getReferredParameter());
-				//		if (0 <= index) {
-				//			OCLExpression oldExpression = argExps.set(index, nestedExp);
-				//			assert oldExpression == null;
-				//		}
-				//	}
 			}
 		}
 		for (OCLExpression exp : argExps) {
-			if (exp == null) {
-				return null;
-			}
+			assert exp != null;
 		}
 		if ((sourceExp == null) && (referredOperation instanceof Function)) {
 			sourceExp = context.createContextVariableExp();
@@ -254,11 +234,14 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		//	}
 	}
 
-	protected @Nullable TypedElement doPatternNode(@NonNull Node node) {
+	protected @NonNull OCLExpression doPatternNode(@NonNull Node node) {
+		Partition partition = context.getPartition();
+		Role nodeRole = partition.getRole(node);
+		assert nodeRole != null;
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			if (edge.isExpression() && resultEdges.add(edge)) {
 				Node expNode = edge.getEdgeSource();
-				OCLExpression clonedElement = getExpression(expNode);
+				OCLExpression clonedElement = getExpressionInternal(expNode);
 				if (clonedElement instanceof VariableExp) {
 					VariableDeclaration referredVariable = ((VariableExp)clonedElement).getReferredVariable();
 					if (referredVariable instanceof Variable) {
@@ -274,32 +257,61 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
 				NavigationEdge oppositeEdge = navigationEdge.getOppositeEdge();
 				if ((oppositeEdge == null) || resultEdges.add(oppositeEdge)) {
-					Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
-					if (edgeRole == Role.LOADED) {
-						OCLExpression source = getExpression(edge.getEdgeSource());
-						return helper.createNavigationCallExp(source, QVTscheduleUtil.getReferredProperty(navigationEdge));
-					}
-					else if (edgeRole == Role.PREDICATED) {
-						OCLExpression source = getExpression(edge.getEdgeSource());
-						return helper.createNavigationCallExp(source, QVTscheduleUtil.getReferredProperty(navigationEdge));
+					Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+					Role edgeRole = partition.getRole(edge);
+					if (property.isIsMany() || (edgeRole == Role.LOADED) || (edgeRole == Role.PREDICATED) || (edgeRole == Role.SPECULATED)) {
+						OCLExpression source = getExpressionInternal(edge.getEdgeSource());
+						return helper.createNavigationCallExp(source, property);
 					}
 				}
-			}
-			else {
-				// SharedEdge
 			}
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			if (edge.isExpression()) {
-				OCLExpression source = getExpression(edge.getEdgeSource());
+				OCLExpression source = getExpressionInternal(edge.getEdgeSource());
 				return source;
 			}
 		}
-		return null;
+		StringBuilder s = new StringBuilder();
+		s.append("Unsupported pattern node without useable input edges");
+		s.append("\n\tcontext: " + context);
+		s.append("\n\tpartition: " + partition);
+		s.append("\n\tnode: " + node);
+		s.append("\n\tnodeRole: " + nodeRole);
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+			s.append("\n\tincomingEdge: " + edge);
+		}
+		for (@NonNull Edge edge : resultEdges) {
+			s.append("\n\tresultEdge: " + edge);
+		}
+		throw new IllegalStateException(s.toString());
 	}
 
 	public @NonNull OCLExpression getExpression(@NonNull Node node) {
-		return ClassUtil.nonNullState((OCLExpression) basicGetTypedElement(node));
+		assert resultEdges.isEmpty();
+		OCLExpression expression = getExpressionInternal(node);
+		resultEdges.clear();
+		return expression;
+	}
+
+	private @NonNull OCLExpression getExpressionInternal(@NonNull Node node) {
+		if (++depth > 50) {
+			throw new IllegalStateException();								// Crash before a StackOverflow obscures the cause
+		}
+		try {
+			VariableDeclaration variable = context.basicGetVariable(node);
+			if (variable != null) {
+				assert !node.isNullLiteral();								// null should not be cached in a variable
+				return PivotUtil.createVariableExp(variable);
+			}
+			if (node.isThis()) {			// ?? distinctive Node
+				return context.createContextVariableExp();
+			}
+			return node.accept(this);
+		}
+		finally {
+			--depth;
+		}
 	}
 
 	@Override
@@ -323,7 +335,13 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				CollectionLiteralExp oldCollectionLiteralExp = (CollectionLiteralExp) oldCollectionLiteralPart.eContainer();
 				int index = oldCollectionLiteralExp.getOwnedParts().indexOf(oldCollectionLiteralPart);
 				Node expNode = collectionPartEdge.getEdgeSource();
-				TypedElement typedElement = ClassUtil.nonNullState(basicGetTypedElement(expNode));
+				TypedElement typedElement;
+				if (expNode instanceof CollectionRangeNode) {
+					typedElement = doCollectionRangeNode((CollectionRangeNode)expNode);
+				}
+				else {
+					typedElement = getExpressionInternal(expNode);
+				}
 				CollectionLiteralPart collectionLiteralPart = null;
 				if (typedElement instanceof CollectionLiteralPart) {
 					collectionLiteralPart = (CollectionLiteralPart)typedElement;
@@ -348,36 +366,17 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 	}
 
 	@Override
-	public @NonNull CollectionRange visitCollectionRangeNode(@NonNull CollectionRangeNode node) {
-		Parameter rangeFirstParameter = qvtruntimeLibraryHelper.getRangeFirstParameter();
-		Parameter rangeLastParameter = qvtruntimeLibraryHelper.getRangeLastParameter();
-		OCLExpression asFirst = null;
-		OCLExpression asLast = null;
-		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge instanceof OperationParameterEdge) {
-				OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
-				Parameter referredParameter = operationParameterEdge.getReferredParameter();
-				if (referredParameter == rangeFirstParameter) {
-					Node expNode = operationParameterEdge.getEdgeSource();
-					asFirst = getExpression(expNode);
-				}
-				else if (referredParameter == rangeLastParameter) {
-					Node expNode = operationParameterEdge.getEdgeSource();
-					asLast = getExpression(expNode);
-				}
-			}
-		}
-		assert (asFirst != null) && (asLast != null);
-		return helper.createCollectionRange(asFirst, asLast);
+	public @NonNull OCLExpression visitCollectionRangeNode(@NonNull CollectionRangeNode node) {
+		throw new IllegalStateException("CollectionRangeNode must be handled by caller");
 	}
 
 	@Override
-	public @Nullable OCLExpression visitEnumLiteralNode(@NonNull EnumLiteralNode node) {
+	public @NonNull OCLExpression visitEnumLiteralNode(@NonNull EnumLiteralNode node) {
 		return helper.createEnumLiteralExp(QVTscheduleUtil.getEnumValue(node));
 	}
 
 	@Override
-	public @Nullable IfExp visitIfNode(@NonNull IfNode node) {
+	public @NonNull IfExp visitIfNode(@NonNull IfNode node) {
 		OCLExpression conditionExp = null;
 		OCLExpression thenExp = null;
 		OCLExpression elseExp = null;
@@ -388,7 +387,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 			if (edge.isExpression() && (edge instanceof OperationParameterEdge)) {
 				OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
 				Node expNode = operationParameterEdge.getEdgeSource();
-				OCLExpression nestedExp = getExpression(expNode);
+				OCLExpression nestedExp = getExpressionInternal(expNode);
 				Parameter parameter = operationParameterEdge.getReferredParameter();
 				if (parameter == conditionParameter) {
 					conditionExp = nestedExp;
@@ -401,14 +400,12 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				}
 			}
 		}
-		if ((conditionExp != null) && (thenExp != null) && (elseExp != null)) {
-			return helper.createIfExp(conditionExp, thenExp, elseExp);
-		}
-		return null;
+		assert (conditionExp != null) && (thenExp != null) && (elseExp != null);
+		return helper.createIfExp(conditionExp, thenExp, elseExp);
 	}
 
 	@Override
-	public @Nullable TypedElement visitIteratorNode(@NonNull IteratorNode node) {
+	public @NonNull VariableExp visitIteratorNode(@NonNull IteratorNode node) {
 		Parameter loopIteratorsParameter = qvtruntimeLibraryHelper.getLoopIteratorsParameter();
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
 			if (edge instanceof OperationParameterEdge) {
@@ -416,7 +413,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				Parameter referredParameter = operationParameterEdge.getReferredParameter();
 				if (referredParameter == loopIteratorsParameter) {
 					Node expNode = operationParameterEdge.getEdgeTarget();
-					getExpression(expNode);
+					getExpressionInternal(expNode);
 				}
 			}
 		}
@@ -441,13 +438,13 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 	}
 
 	@Override
-	public @Nullable CallExp visitOperationCallNode(@NonNull OperationCallNode node) {
+	public @NonNull CallExp visitOperationCallNode(@NonNull OperationCallNode node) {
 		Operation asOperation = node.getReferredOperation();
 		if (asOperation instanceof Iteration) {
 			return doIterationCallNode(node);
 		}
 		OperationCallExp asOperationCallExp = doOperationCallNode(node);
-		if ((asOperation instanceof Function) && (asOperationCallExp != null)) {
+		if (asOperation instanceof Function) {
 			Operation iOperation = context.createOperation(asOperation);		// Is this really necessary - keep the QVTr reference
 			if (iOperation != asOperation) {
 				asOperationCallExp.setReferredOperation(iOperation);
@@ -457,17 +454,17 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 	}
 
 	@Override
-	public @Nullable TypedElement visitPatternTypedNode(@NonNull PatternTypedNode node) {
+	public @NonNull OCLExpression visitPatternTypedNode(@NonNull PatternTypedNode node) {
 		return doPatternNode(node);
 	}
 
 	@Override
-	public @Nullable TypedElement visitPatternVariableNode(@NonNull PatternVariableNode node) {
+	public @NonNull OCLExpression visitPatternVariableNode(@NonNull PatternVariableNode node) {
 		return doPatternNode(node);
 	}
 
 	@Override
-	public @Nullable TypedElement visitShadowNode(@NonNull ShadowNode node) {
+	public @NonNull OCLExpression visitShadowNode(@NonNull ShadowNode node) {
 		List<@NonNull ShadowPart> asParts =new ArrayList<>();
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			if (edge instanceof ShadowPartEdge) {
@@ -475,7 +472,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				ShadowPart referredPart = QVTscheduleUtil.getReferredPart(shadowPartEdge);
 				Property referredProperty = PivotUtil.getReferredProperty(referredPart);
 				Node sourceNode = QVTscheduleUtil.getSourceNode(shadowPartEdge);
-				asParts.add(helper.createShadowPart(referredProperty, getExpression(sourceNode)));
+				asParts.add(helper.createShadowPart(referredProperty, getExpressionInternal(sourceNode)));
 			}
 		};
 		org.eclipse.ocl.pivot.@NonNull Class asClass = node.getClassDatum().getPrimaryClass();
@@ -488,7 +485,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 	}
 
 	@Override
-	public @Nullable TypedElement visitSuccessNode(@NonNull SuccessNode node) {
+	public @NonNull OCLExpression visitSuccessNode(@NonNull SuccessNode node) {
 		return doPatternNode(node);
 	}
 
