@@ -22,7 +22,10 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.InvocationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.Utility;
@@ -177,7 +180,20 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 			}
 		}
 		for (@NonNull Node node : checkableOldNodes) {
-			if (hasSynthesizedTrace) {
+			boolean isMandatory = false;
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+				assert !edge.isCast();
+				EdgeConnection connection = ((NavigationEdge)edge).getIncomingConnection();
+				if (connection != null) {
+					ConnectionRole connectionRole = connection.getTargetRole((NavigationEdge)edge);
+					if ((connectionRole != null) && connectionRole.isMandatory()) {
+						isMandatory = true;
+					}
+				}
+			}
+			if (isMandatory) {
+			}
+			else if (hasSynthesizedTrace) {
 				boolean isCyclicCorollary = transformationAnalysis.isCorollary(node) && mappingPartitioner.isCyclic(node);  // waiting for a cyclic corollary could deadlock
 				//			boolean isPredicated = node.isPredicated();
 				//			boolean isMatched = node.isMatched();
