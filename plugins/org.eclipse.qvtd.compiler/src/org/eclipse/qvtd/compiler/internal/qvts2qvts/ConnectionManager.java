@@ -187,48 +187,37 @@ public class ConnectionManager
 				assert !predicatedEdge.isCast();
 				Property predicatedProperty = QVTscheduleUtil.getReferredProperty(predicatedNavigationEdge);
 				assert !predicatedProperty.isIsImplicit();
-				boolean isDataType = classDatum.isDataType();
-				assert isDataType;
+				assert classDatum.isDataType();
 				Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge, classDatum);
 				if (realizedEdges != null) {
 					ClassDatum predicatedSourceClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(predicatedEdge));
 					ClassDatum predicatedTargetClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(predicatedEdge));
 					Property oppositeProperty = predicatedProperty.getOpposite();
-					Boolean isOneToMany = predicatedProperty.isIsMany();// && ((oppositeProperty != null) && !oppositeProperty.isIsMany());
-					if (isOneToMany) {
-						if ((oppositeProperty != null) && !oppositeProperty.isIsMany()) {
-							//	Type type = predicatedTargetClassDatum.getPrimaryClass();
-							//	Type elementType = QVTbaseUtil.getElementType(((CollectionType)type));
-							//	predicatedTargetClassDatum = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
-							predicatedTargetClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)predicatedTargetClassDatum);
-						}
-						else {
-							predicatedTargetClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)predicatedTargetClassDatum);
-						}
+					if (predicatedProperty.isIsMany()) {
+						predicatedTargetClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)predicatedTargetClassDatum);
 					}
 					for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 						if (realizedEdge.isNavigation()) {
 							NavigationEdge predicatedRealizedEdge = (NavigationEdge)realizedEdge;
 							Property realizedProperty = QVTscheduleUtil.getReferredProperty(predicatedRealizedEdge);
 							ClassDatum firstClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(realizedEdge));
-							ClassDatum secondTargetClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(realizedEdge));
+							ClassDatum secondClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(realizedEdge));
 							if (realizedProperty.isIsMany()) {
-								secondTargetClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum) secondTargetClassDatum);
+								secondClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum) secondClassDatum);
 							}
 							ClassDatum realizedSourceClassDatum;
 							ClassDatum realizedTargetClassDatum;
 							if (realizedProperty == predicatedProperty) {
 								realizedSourceClassDatum = firstClassDatum;
-								realizedTargetClassDatum = secondTargetClassDatum;
+								realizedTargetClassDatum = secondClassDatum;
 							}
 							else {
 								assert realizedProperty == oppositeProperty;
-								realizedSourceClassDatum = secondTargetClassDatum;
+								realizedSourceClassDatum = secondClassDatum;
 								realizedTargetClassDatum = firstClassDatum;
 							}
 							boolean conformingSources = QVTscheduleUtil.conformantWith(predicatedSourceClassDatum, realizedSourceClassDatum);
 							boolean conformingTargets;
-							//	if (isOneToMany) {
 							conformingTargets = QVTscheduleUtil.conformantWith(predicatedTargetClassDatum, realizedTargetClassDatum);
 							if (conformingSources && conformingTargets) {
 								if (attributeConnectionSourceEdges == null) {
@@ -236,27 +225,7 @@ public class ConnectionManager
 								}
 								attributeConnectionSourceEdges.add(realizedEdge);
 							}
-							else {
-								//	assert false;
-							}
 						}
-						else {
-							// SharedEdge
-						}
-						/*	}
-					else {
-						conformingTargets = areConforming(predicatedTargetCompleteClass, realizedTargetCompleteClass);
-						if (scheduleManager.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
-							assert conformingSources && conformingTargets;
-							if (attributeConnectionSourceEdges == null) {
-								attributeConnectionSourceEdges = new ArrayList<>();
-							}
-							attributeConnectionSourceEdges.add(realizedEdge);
-						}
-						else {
-							assert !conformingSources || !conformingTargets;
-						}
-					} */
 					}
 					Node sourceNode = QVTscheduleUtil.getSourceNode(predicatedEdge);
 					ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(sourceNode);
@@ -289,9 +258,6 @@ public class ConnectionManager
 						//					}
 					}
 				}
-			}
-			else {
-				// Shared Edge
 			}
 		}
 	}

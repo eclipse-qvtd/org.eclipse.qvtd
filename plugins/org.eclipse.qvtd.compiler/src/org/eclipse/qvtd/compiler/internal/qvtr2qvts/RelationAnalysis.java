@@ -426,6 +426,18 @@ public class RelationAnalysis extends RuleAnalysis
 		analyzeStrictness();
 	}
 
+	@Override
+	public void analyzeOverrides(@NonNull ProblemHandler problemHandler) {
+		Relation relation = getRule();
+		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
+		for (@NonNull TypedModel typedModel : getScheduleManager().getTypedModelsConfiguration().getOutputOnlyTypedModels()) {
+			Domain domain = QVTrelationUtil.basicGetDomain(relation, typedModel);
+			if ((domain != null) && domain.isNotOutput()) {
+				CompilerUtil.addRuleError(problemHandler, relation, "domain ''{0}'' cannot be an output", typedModel.getName());
+			}
+		}
+	}
+
 	protected void analyzeRealizedOutputVariables(@NonNull RelationDomain relationDomain, @NonNull Set<@NonNull VariableDeclaration> realizedOutputVariables) {
 		for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(relationDomain)) {
 			TemplateExp templateExpression = QVTrelationUtil.getOwnedTemplateExpression(domainPattern);
@@ -510,18 +522,6 @@ public class RelationAnalysis extends RuleAnalysis
 						break;
 					}
 				}
-			}
-		}
-	}
-
-	@Override
-	public void analyzeOverrides(@NonNull ProblemHandler problemHandler) {
-		Relation relation = getRule();
-		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
-		for (@NonNull TypedModel typedModel : getScheduleManager().getTypedModelsConfiguration().getOutputOnlyTypedModels()) {
-			Domain domain = QVTrelationUtil.basicGetDomain(relation, typedModel);
-			if ((domain != null) && domain.isNotOutput()) {
-				CompilerUtil.addRuleError(problemHandler, relation, "domain ''{0}'' cannot be an output", typedModel.getName());
 			}
 		}
 	}

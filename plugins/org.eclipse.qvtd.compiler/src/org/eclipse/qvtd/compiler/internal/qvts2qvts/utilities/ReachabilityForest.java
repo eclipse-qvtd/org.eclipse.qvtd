@@ -271,6 +271,12 @@ public class ReachabilityForest
 		return nodeCostComparator2;
 	}
 
+	public @NonNull List<@NonNull Node> getMostReachableFirstNodes() {
+		List<@NonNull Node> nodes = new ArrayList<>(node2cost.keySet());
+		Collections.sort(nodes, getNodeCostComparator());
+		return nodes;
+	}
+
 	public @NonNull Iterable<@NonNull Node> getNodes() {
 		return node2reachingEdge.keySet();
 	}
@@ -330,10 +336,8 @@ public class ReachabilityForest
 
 	@Override
 	public @NonNull String toString() {
-		Comparator<@NonNull Node> nodeComparator = getNodeCostComparator();
 		StringBuilder s = new StringBuilder();
-		List<@NonNull Node> nodes = new ArrayList<>(node2cost.keySet());
-		Collections.sort(nodes, nodeComparator);
+		List<@NonNull Node> nodes = getMostReachableFirstNodes();
 		for (@NonNull Node node : nodes) {
 			if (s.length() > 0) {
 				s.append("\n");

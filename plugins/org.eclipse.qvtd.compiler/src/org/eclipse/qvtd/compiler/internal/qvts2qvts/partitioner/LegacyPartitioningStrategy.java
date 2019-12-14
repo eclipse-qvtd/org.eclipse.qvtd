@@ -29,7 +29,7 @@ public class LegacyPartitioningStrategy extends AbstractPartitioningStrategy
 	public @NonNull Iterable<@NonNull PartitionAnalysis> partition() {
 		Iterable<@NonNull Node> predicatedMiddleNodes = mappingPartitioner.getPredicatedMiddleNodes();
 		boolean hasPredication = !Iterables.isEmpty(predicatedMiddleNodes);
-		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
+		boolean isCyclic = transformationAnalysis.basicGetCyclicRegionAnalysis(regionAnalysis) != null;
 		boolean needsSpeculation = isCyclic && hasPredication; //(dispatchedTraceNodes2.isEmpty() ? !predicatedMiddleNodes.isEmpty() : !predicatedMiddleNodes.containsAll(dispatchedTraceNodes2));
 		//
 		//	Create the partitioned regions

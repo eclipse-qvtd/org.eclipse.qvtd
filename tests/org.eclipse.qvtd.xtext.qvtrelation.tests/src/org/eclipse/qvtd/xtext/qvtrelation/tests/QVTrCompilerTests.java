@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -58,6 +57,7 @@ import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -1037,6 +1037,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTp2QVTs.REGION_ORDER.setState(true);
 		//		QVTr2QVTc.SYNTHESIS.setState(true);
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
+		TransformationPartitioner.REGION_IMMEDIATE_PREDECESSORS.setState(true);
+		TransformationPartitioner.REGION_TRANSITIVE_PREDECESSORS.setState(true);
+		TransformationPartitioner.REGION_TRANSITIVE_SUCCESSORS.setState(true);
+		TransformationPartitioner.REGION_CYCLES.setState(true);
 		Class<? extends Transformer> txClass;
 		MyQVT myQVT1 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		try {
@@ -1331,6 +1335,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.SYNTHESIS.setState(true);
+		TransformationPartitioner.REGION_CYCLES.setState(true);
+
 		Class<? extends Transformer> txClass;
 		MyQVT myQVT1 = createQVT("MiToSiSimple", getModelsURI("mitosi/MiToSiSimple.qvtr"));
 		try {

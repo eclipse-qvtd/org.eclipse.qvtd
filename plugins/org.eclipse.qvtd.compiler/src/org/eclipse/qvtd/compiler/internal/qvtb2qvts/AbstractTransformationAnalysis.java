@@ -31,6 +31,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.AbstractPartialRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.ActualPartialRegionPropertyAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
@@ -172,6 +173,11 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 		return rule2ruleAnalysis.get(rule);
 	}
 
+	public @Nullable CyclicRegionAnalysis basicGetCyclicRegionAnalysis(@NonNull RegionAnalysis regionAnalysis) {
+		assert cyclesRegionAnalysis != null;
+		return cyclesRegionAnalysis.basicGetCyclicRegionAnalysis(regionAnalysis);
+	}
+
 	@Override
 	public @Nullable ActualPartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> basicGetPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
@@ -308,11 +314,6 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	public boolean isCyclic(@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis> classAnalysis) {
 		assert cyclesRegionAnalysis != null;
 		return cyclesRegionAnalysis.isCyclic(classAnalysis);
-	}
-
-	public boolean isCyclic(@NonNull RegionAnalysis regionAnalysis) {
-		assert cyclesRegionAnalysis != null;
-		return cyclesRegionAnalysis.isCyclic(regionAnalysis);
 	}
 
 	public boolean isCyclic(@NonNull ClassDatum classDatum) {

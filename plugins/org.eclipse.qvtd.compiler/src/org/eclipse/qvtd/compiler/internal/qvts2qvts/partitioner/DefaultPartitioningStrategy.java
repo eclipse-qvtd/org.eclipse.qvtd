@@ -38,7 +38,7 @@ public class DefaultPartitioningStrategy extends AbstractPartitioningStrategy
 		createActivatorPartition();
 		createWhenPartitions();
 		//
-		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
+		boolean isCyclic = transformationAnalysis.basicGetCyclicRegionAnalysis(regionAnalysis) != null;
 		boolean hasPredication = (predicatedWhenNodes.size() > 0) || (realizedWhenNodes.size() > 0);
 		boolean needsSpeculation = isCyclic && hasPredication; //(dispatchedTraceNodes2.isEmpty() ? !predicatedMiddleNodes.isEmpty() : !predicatedMiddleNodes.containsAll(dispatchedTraceNodes2));
 		if (!needsSpeculation) {
