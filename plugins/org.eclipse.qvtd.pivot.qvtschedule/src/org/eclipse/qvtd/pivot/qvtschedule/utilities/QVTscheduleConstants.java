@@ -61,6 +61,7 @@ public class QVTscheduleConstants
 	public static final @NonNull String OPERATION_COLOR = "magenta";
 	public static final @NonNull String ORDERING_COLOR = "brown";
 	public static final @NonNull String OTHER_COLOR = "grey";
+	public static final @NonNull String PARTITION_COLOR = "brown";
 	public static final @NonNull String PREDICATED_COLOR = "cyan";
 	public static final @NonNull String REALIZED_COLOR = "green3";
 	public static final @NonNull String RECURSION_COLOR = "brown";

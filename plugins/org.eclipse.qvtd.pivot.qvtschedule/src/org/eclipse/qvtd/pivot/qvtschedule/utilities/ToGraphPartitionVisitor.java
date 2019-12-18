@@ -408,7 +408,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 			//		label = label + "\\n " + passesText;
 			//	}
 			//	context.setLabel(label);
-			context.setColor(QVTscheduleConstants.REGION_COLOR);
+			context.setColor(QVTscheduleConstants.PARTITION_COLOR);
 			showPartitionInternals(partition);
 			return null;
 		}
@@ -429,7 +429,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 	@Override
 	public @Nullable String visitRegion(@NonNull Region region) {
 		context.setLabel(region.getName());
-		context.setColor(QVTscheduleConstants.REGION_COLOR);
+		context.setColor(QVTscheduleConstants.PARTITION_COLOR);
 		showRegionInternals(region);
 		return null;
 	}
@@ -439,7 +439,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 		RootPartition rootPartition = rootRegion.getOwnedRootPartition();
 		hasPartitions = rootPartition != null;
 		context.setLabel(rootRegion.getName());
-		context.setColor(QVTscheduleConstants.REGION_COLOR);
+		context.setColor(QVTscheduleConstants.PARTITION_COLOR);
 		context.pushCluster();
 		for (@NonNull OperationRegion region : QVTscheduleUtil.getOwnedOperationRegions(QVTscheduleUtil.getOwningScheduleModel(rootRegion))) {
 			region.accept((Visitor<?>)this);
