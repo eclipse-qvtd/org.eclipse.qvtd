@@ -897,7 +897,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			return isNullable ? Utility.NULLABLE_CONDITIONAL : Utility.NON_NULL_CONDITIONAL;
 		}
 		else {
-			isNullable = isNullable && this.utility.isNullable();
+			isNullable = isNullable || this.utility.isNullable();
 			return isNullable ? Utility.NULLABLE_MATCHED : Utility.NON_NULL_MATCHED;
 		}
 	}
