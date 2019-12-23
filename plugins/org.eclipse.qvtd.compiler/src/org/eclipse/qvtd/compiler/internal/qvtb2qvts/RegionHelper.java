@@ -342,7 +342,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	}
 
 	public @NonNull Edge createKeyPartEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull PropertyDatum propertyDatum, @NonNull Node targetNode) {
-		Role edgeRole = getNodeRole(sourceNode);
+		Role edgeRole = getNodeRole(targetNode);
 		KeyPartEdge edge = QVTscheduleFactory.eINSTANCE.createKeyPartEdge();
 		edge.setReferredPart(propertyDatum);
 		Property referredProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
