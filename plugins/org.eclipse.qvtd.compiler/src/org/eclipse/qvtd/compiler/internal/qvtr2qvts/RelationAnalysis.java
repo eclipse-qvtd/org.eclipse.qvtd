@@ -1300,7 +1300,7 @@ public class RelationAnalysis extends RuleAnalysis
 			assert memberNode != null;
 			//			memberNodes.add(memberNode);
 			//			createPredicateEdge(collectionNode, "head-" + i++, memberNode);
-			createPredicateEdge(Utility.NON_NULL_MATCHED, residueNode, INCLUDES_NAME, memberNode);
+			createPredicateEdge(Utility.NON_NULL_MATCHED, residueNode, memberNode, true);
 		}
 		Variable rest = collectionTemplateExp.getRest();
 		if ((rest != null) && !rest.isIsImplicit()) {
@@ -1567,7 +1567,7 @@ public class RelationAnalysis extends RuleAnalysis
 			//	}
 			else if (!(resultNode instanceof BooleanLiteralNode)) {
 				Node trueNode = createBooleanLiteralNode(resultNode.getUtility(), true);
-				createPredicateEdge(resultNode.getUtility(), resultNode, null, trueNode);
+				createPredicateEdge(resultNode.getUtility(), resultNode, trueNode, false);
 			}
 		}
 	}

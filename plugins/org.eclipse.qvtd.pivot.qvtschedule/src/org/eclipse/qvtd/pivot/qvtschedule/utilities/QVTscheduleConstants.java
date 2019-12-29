@@ -35,8 +35,11 @@ public class QVTscheduleConstants
 	public static final @NonNull TracingOption CONNECTION_CREATION = new TracingOption(PLUGIN_ID, "qvtm2qvts/connectionCreation");	// FIXME
 	public static final @NonNull TracingOption CONNECTION_ROUTING = new TracingOption(PLUGIN_ID, "qvtm2qvts/connectionRouting");
 
+	public static final @NonNull String EQUALS_NAME = "«equals»";
 	public static final @NonNull String GLABAL_MAPPING_NAME = "«global»";
+	public static final @NonNull String INCLUDES_NAME = "«includes»";
 	public static final @NonNull String LOAD_MAPPING_NAME = "«load»";
+	public static final @NonNull String LOOP_ITERATOR_NAME = "«iterator»";
 	public static final @NonNull String ROOT_MAPPING_NAME = "«root»";
 	public static final @NonNull String MIDDLE_DOMAIN_NAME = QVTbaseUtil.TRACE_TYPED_MODEL_NAME; //"middle";
 

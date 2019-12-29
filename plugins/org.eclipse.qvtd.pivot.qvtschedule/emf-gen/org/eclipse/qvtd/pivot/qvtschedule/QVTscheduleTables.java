@@ -1248,6 +1248,8 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _Partition__Connection__commonPartition = new ExecutorPropertyWithImplementation("Connection", Types._Partition, 3, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION));
 		public static final @NonNull ExecutorProperty _Partition__Connection__intermediatePartitions = new ExecutorPropertyWithImplementation("Connection", Types._Partition, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS));
 
+		public static final @NonNull ExecutorProperty _PredicateEdge__partial = new EcoreExecutorProperty(QVTschedulePackage.Literals.PREDICATE_EDGE__PARTIAL, Types._PredicateEdge, 0);
+
 		public static final @NonNull ExecutorProperty _PropertyDatum__key = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__KEY, Types._PropertyDatum, 0);
 		public static final @NonNull ExecutorProperty _PropertyDatum__opposite = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE, Types._PropertyDatum, 1);
 		public static final @NonNull ExecutorProperty _PropertyDatum__owningClassDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OWNING_CLASS_DATUM, Types._PropertyDatum, 2);
@@ -6416,6 +6418,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Edge__edgeRole,
 			QVTscheduleTables.Properties._Edge__name,
 			QVTscheduleTables.Properties._Edge__owningRegion,
+			QVTscheduleTables.Properties._PredicateEdge__partial,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode,
 			QVTscheduleTables.Properties._Edge__utility

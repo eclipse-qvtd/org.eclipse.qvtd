@@ -545,7 +545,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PatternTypedNode" eSuperTypes="#//MappingNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="PatternVariableNode" eSuperTypes="#//VariableNode"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PredicateEdge" eSuperTypes="#//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PredicateEdge" eSuperTypes="#//Edge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A not-partial PredicateEdge requires source and target nodes to have the same identity/value. A partial PredicateEdge requires target node identity/value to be one of the source node identity/values."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="partial" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if this edge is a partial many-to-one relationship."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A PropertyDatum identifies a DataType value produced by one or more regions and consumed by one or more usually other regions. The DataType value is passsed within an Object Slot."/>

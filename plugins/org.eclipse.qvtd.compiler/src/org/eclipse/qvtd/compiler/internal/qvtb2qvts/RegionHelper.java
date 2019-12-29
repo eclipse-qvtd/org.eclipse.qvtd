@@ -115,10 +115,6 @@ import com.google.common.collect.Iterables;
  */
 public class RegionHelper<R extends Region> extends QVTscheduleUtil implements Nameable
 {
-	public static final @NonNull String EQUALS_NAME = "«equals»";
-	public static final @NonNull String INCLUDES_NAME = "«includes»";
-	public static final @NonNull String LOOP_ITERATOR_NAME = "«iterator»";
-
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull R region;
 
@@ -300,7 +296,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		//		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createEqualsEdge();
 		//		edge.initialize(edgeRole, sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
 		//		return edge;
-		return createPredicateEdge(utility, sourceNode, EQUALS_NAME, targetNode);
+		return createPredicateEdge(utility, sourceNode, targetNode, false);
 	}
 
 	public @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatum classDatum) {
@@ -564,10 +560,10 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createPredicateEdge(@NonNull Utility utility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	public @NonNull Edge createPredicateEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode, boolean isPartial) {
 		Role edgeRole = getNodeRole(sourceNode);
 		PredicateEdge edge = QVTscheduleFactory.eINSTANCE.createPredicateEdge();
-		edge.initialize(edgeRole, utility, sourceNode, name, targetNode);
+		edge.initialize(edgeRole, utility, sourceNode, targetNode, isPartial);
 		return edge;
 	}
 

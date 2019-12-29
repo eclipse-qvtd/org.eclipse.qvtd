@@ -2046,6 +2046,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getPredicateEdge();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge#isPartial <em>Partial</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Partial</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge#isPartial()
+	 * @see #getPredicateEdge()
+	 * @generated
+	 */
+	EAttribute getPredicateEdge_Partial();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum <em>Property Datum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3964,6 +3975,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass PREDICATE_EDGE = eINSTANCE.getPredicateEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Partial</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREDICATE_EDGE__PARTIAL = eINSTANCE.getPredicateEdge_Partial();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.

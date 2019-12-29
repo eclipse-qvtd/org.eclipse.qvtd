@@ -359,8 +359,8 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		return context.createOperationSelfEdge(utility, sourceNode, type, targetNode);
 	}
 
-	protected @NonNull Edge createPredicateEdge(@NonNull Utility utility, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return context.createPredicateEdge(utility, sourceNode, name, targetNode);
+	protected @NonNull Edge createPredicateEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode, boolean isPartial) {
+		return context.createPredicateEdge(utility, sourceNode, targetNode, isPartial);
 	}
 
 	//	protected @NonNull Node createPredicatedClassNode(@NonNull Utility utility, @NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
@@ -1053,8 +1053,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	private @Nullable Node synthesizeOperationCallExp_includes(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
 		Node targetNode = synthesize(operationCallExp.getOwnedArguments().get(0));
-		String name = operationCallExp.getReferredOperation().getName();
-		createPredicateEdge(utility, sourceNode, "«" + name + "»", targetNode);
+		createPredicateEdge(utility, sourceNode, targetNode, true);
 		if (sourceNode.isDataType()) {		// expecting a CollectionType
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(sourceNode)) {
 				if (edge instanceof NavigationEdge) {

@@ -343,7 +343,7 @@ public class MappingAnalysis extends RuleAnalysis
 			Node resultNode = conditionExpression.accept(rootExpressionSynthesizer);
 			if (resultNode != null) {
 				Node trueNode = createBooleanLiteralNode(Utility.NON_NULL_MATCHED, true);
-				createPredicateEdge(Utility.NON_NULL_MATCHED, resultNode, null, trueNode);
+				createPredicateEdge(Utility.NON_NULL_MATCHED, resultNode, trueNode, false);
 			}
 			// FIXME ?? do includes() here explicitly
 		}
