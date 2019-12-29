@@ -68,8 +68,10 @@ public abstract class HeadNodeGroup implements Nameable
 					gotOne = true;
 				}
 				else if (source2targetEdge.isPredicate()) {
-					uniqueNodes.add(targetNode);
-					gotOne = true;
+					if (!source2targetEdge.isPartial()) {
+						uniqueNodes.add(targetNode);
+						gotOne = true;
+					}
 				}
 				else if (source2targetEdge.isNavigation()) {
 					if (!source2targetEdge.isPartial()) {

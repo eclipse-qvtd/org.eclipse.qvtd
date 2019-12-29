@@ -531,12 +531,7 @@ public class MappingPartitioner implements Nameable
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			assert !edge.isCast();
-			if (edge.isNavigation()) {
-				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeSource())) {
-					return false;
-				}
-			}
-			else if (edge.isPredicate()) {
+			if (edge.isNavigation() || (edge.isPredicate() && !edge.isPartial())) {
 				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeSource())) {
 					return false;
 				}

@@ -21,7 +21,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
  */
 public class PredicateEdgeCheckedCondition extends CheckedCondition
 {
-	protected final @NonNull PredicateEdge predicateEdge;
+	protected final @NonNull PredicateEdge predicateEdge;		// FIXME ?? distinct isPartial
 
 	public PredicateEdgeCheckedCondition(@NonNull PredicateEdge predicateEdge) {
 		this.predicateEdge = predicateEdge;

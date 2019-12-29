@@ -57,6 +57,7 @@ public class TracedHeadAnalysis extends HeadAnalysis
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = mappingRegionAnalysis.computeTracedTargetFromSources();
 		if (TRACED_HEAD_IMMEDIATE_SOURCES.isActive()) {
 			StringBuilder s = new StringBuilder();
+			s.append(mappingRegion.getName());
 			List<@NonNull Node> targets = new ArrayList<>(targetFromSources.keySet());
 			Collections.sort(targets, NameUtil.NAMEABLE_COMPARATOR);
 			for (@NonNull Node target : targets) {
@@ -125,7 +126,9 @@ public class TracedHeadAnalysis extends HeadAnalysis
 								sources.add(sourceNode);
 							}
 							else if (edge instanceof PredicateEdge) {
-								sources.add(sourceNode);
+								if (!((PredicateEdge)edge).isPartial()) {
+									sources.add(sourceNode);
+								}
 							}
 						}
 					}

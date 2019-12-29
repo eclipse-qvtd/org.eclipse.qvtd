@@ -343,6 +343,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							}
 						}
 						else if (edge instanceof PredicateEdge) {
+							// FIXME	assert !((PredicateEdge)edge).isPartial();
 							VariableExp sourceVariableExp = getSubexpressionVariableExp(sourceNode);
 							if (!(targetNode instanceof BooleanLiteralNode)) {
 								String edgeName = ClassUtil.nonNullState(edge.getName()).trim();
@@ -778,25 +779,20 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					VariableDeclaration asVariable = getVariable(sourceNode);
 					Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
 					QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(this);
-					OCLExpression valueExp = expressionCreator.basicGetExpression(targetNode);
-					if (valueExp != null) {					// FIXME Bug 552853
-						boolean isNotify = connectionManager.isHazardousWrite(s, navigationEdge);
-						boolean isPartial = edge.isPartial();
-						if (!sourceNode.isStrict()) {
-							SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, isPartial, isNotify);
-							//					addObservedProperties(setStatement);
-							mapping.getOwnedStatements().add(setStatement);
-						}
-						else {
-							assert !isPartial;
-							//	assert !isNotify;
-							NewStatement newStatement = (NewStatement)asVariable;
-							NewStatementPart newStatementPart = helper.createNewStatementPart(property, valueExp);
-							newStatement.getOwnedParts().add(newStatementPart);
-						}
+					OCLExpression valueExp = expressionCreator.getExpression(targetNode);
+					boolean isNotify = connectionManager.isHazardousWrite(s, navigationEdge);
+					boolean isPartial = edge.isPartial();
+					if (!sourceNode.isStrict()) {
+						SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, isPartial, isNotify);
+						//					addObservedProperties(setStatement);
+						mapping.getOwnedStatements().add(setStatement);
 					}
 					else {
-						QVTruntimeUtil.errPrintln("No assignment in " + this + " to " + asVariable + "." + property);
+						assert !isPartial;
+						//	assert !isNotify;
+						NewStatement newStatement = (NewStatement)asVariable;
+						NewStatementPart newStatementPart = helper.createNewStatementPart(property, valueExp);
+						newStatement.getOwnedParts().add(newStatementPart);
 					}
 				}
 				else {

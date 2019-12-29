@@ -1557,7 +1557,7 @@ public class RelationAnalysis extends RuleAnalysis
 		if (resultNode != null) {
 			//			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(resultNode);
 			//			if (!resultNode.isRequired() || (classDatum != scheduleManager.getBooleanClassDatum())) {
-			if (!resultNode.isRequired()) {
+			/*if (!resultNode.isRequired()) {
 				Node trueNode = createBooleanLiteralNode(resultNode.getUtility(), true);
 				createPredicateEdge(resultNode.getUtility(), resultNode, null, trueNode);
 			}
@@ -1565,7 +1565,7 @@ public class RelationAnalysis extends RuleAnalysis
 			//		Node trueNode = createBooleanLiteralNode(true);
 			//		createPredicateEdge(resultNode, null, trueNode);
 			//	}
-			else if (!(resultNode instanceof BooleanLiteralNode)) {
+			else*/ if (!(resultNode instanceof BooleanLiteralNode)) {
 				Node trueNode = createBooleanLiteralNode(resultNode.getUtility(), true);
 				createPredicateEdge(resultNode.getUtility(), resultNode, trueNode, false);
 			}

@@ -283,30 +283,22 @@ public class ReachabilityForest
 	}
 	private void getPredecessors(@NonNull Set<@NonNull Node> precedingNodes, @NonNull Node targetNode) {
 		if (precedingNodes.add(targetNode)) {
-			Edge parentEdge = null;
-			if (targetNode.isOperation()) {
-				Edge reachingEdge = getReachingEdge(targetNode);
-				if ((reachingEdge != null) && reachingEdge.isNavigation()) {
-					parentEdge = reachingEdge;
-				}
-				else {
-					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-						assert !edge.isCast();
-						if (edge.isComputation() || (edge.isNavigation() && !edge.isRealized())) {
-							getPredecessors(precedingNodes, edge.getEdgeSource());
-						}
-					}
-				}
-			}
-			else {
-				parentEdge = getReachingEdge(targetNode);
-			}
-			if (parentEdge != null) {
-				Node sourceNode = parentEdge.getEdgeSource();
+			Edge reachingEdge = getReachingEdge(targetNode);
+			if ((reachingEdge != null) && (reachingEdge.isNavigation() || reachingEdge.isPredicate())) {
+				assert !reachingEdge.isPartial();
+				Node sourceNode = reachingEdge.getEdgeSource();
 				if (sourceNode == targetNode) {		// invert a backward edge
-					sourceNode = parentEdge.getEdgeTarget();
+					sourceNode = reachingEdge.getEdgeTarget();
 				}
 				getPredecessors(precedingNodes, sourceNode);
+			}
+			else if (targetNode.isOperation()) {
+				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+					assert !edge.isCast();
+					if (edge.isComputation()) { // || (edge.isNavigation() && !edge.isRealized())) {
+						getPredecessors(precedingNodes, edge.getEdgeSource());
+					}
+				}
 			}
 		}
 	}
