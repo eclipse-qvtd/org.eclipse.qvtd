@@ -187,7 +187,7 @@ public class PredicateEdgeImpl extends EdgeImpl implements PredicateEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setPartial((Boolean)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -202,7 +202,7 @@ public class PredicateEdgeImpl extends EdgeImpl implements PredicateEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setPartial(PARTIAL_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
