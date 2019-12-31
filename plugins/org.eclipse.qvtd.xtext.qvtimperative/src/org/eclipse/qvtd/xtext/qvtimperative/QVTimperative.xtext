@@ -66,7 +66,7 @@ GuardParameterCS: 'guard' ':' referredTypedModel=[qvtbase::TypedModel|Unrestrict
 	('success' successProperty=[pivot::Property|UnrestrictedName])? ';'
 ;
 
-GuardStatementCS returns StatementCS: BufferStatementCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS;
+GuardStatementCS returns StatementCS: BufferStatementCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS | SpeculateStatementCS;
 
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
@@ -126,6 +126,8 @@ SimpleParameterBindingCS: isCheck?='check'? referredVariable=[qvtimperative::Sim
 
 SimpleParameterCS: 'in' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 	
+SpeculateStatementCS: 'speculate' ownedConditions+=ExpCS (',' ownedConditions+=ExpCS)* ';';
+	
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName (':' ownedContextType=TypeExpCS)?
 	'{' (ownedDirections+=DirectionCS ';')* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS)* '}';
@@ -155,6 +157,7 @@ QVTimperativeUnrestrictedName:
 |	'package'
 |	'query'
 |	'set'
+|	'speculate'
 |	'strict'
 |	'success'
 |	'target'
