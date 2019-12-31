@@ -22,6 +22,32 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseAS2XMIidVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
+import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 
 /**
  * An AbstractQVTimperativeAS2XMIidVisitor provides a default implementation for each
@@ -45,132 +71,132 @@ implements QVTimperativeVisitor<Boolean>
 	}
 
 	@Override
-	public @Nullable Boolean visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {
+	public @Nullable Boolean visitAddStatement(@NonNull AddStatement object) {
 		return visitMappingStatement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitAppendParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AppendParameter object) {
+	public @Nullable Boolean visitAppendParameter(@NonNull AppendParameter object) {
 		return visitConnectionVariable(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitAppendParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AppendParameterBinding object) {
+	public @Nullable Boolean visitAppendParameterBinding(@NonNull AppendParameterBinding object) {
 		return visitMappingParameterBinding(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitBufferStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BufferStatement object) {
+	public @Nullable Boolean visitBufferStatement(@NonNull BufferStatement object) {
 		return visitConnectionVariable(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitCheckStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CheckStatement object) {
+	public @Nullable Boolean visitCheckStatement(@NonNull CheckStatement object) {
 		return visitObservableStatement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
+	public @Nullable Boolean visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visitVariableDeclaration(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitDeclareStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull DeclareStatement object) {
+	public @Nullable Boolean visitDeclareStatement(@NonNull DeclareStatement object) {
 		return visitVariableStatement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitGuardParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardParameter object) {
+	public @Nullable Boolean visitGuardParameter(@NonNull GuardParameter object) {
 		return visitMappingParameter(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitGuardParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardParameterBinding object) {
+	public @Nullable Boolean visitGuardParameterBinding(@NonNull GuardParameterBinding object) {
 		return visitMappingParameterBinding(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
+	public @Nullable Boolean visitImperativeModel(@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitImperativeTransformation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeTransformation object) {
+	public @Nullable Boolean visitImperativeTransformation(@NonNull ImperativeTransformation object) {
 		return visitTransformation(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitLoopParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull LoopParameterBinding object) {
+	public @Nullable Boolean visitLoopParameterBinding(@NonNull LoopParameterBinding object) {
 		return visitMappingParameterBinding(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitLoopVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull LoopVariable object) {
+	public @Nullable Boolean visitLoopVariable(@NonNull LoopVariable object) {
 		return visitVariableDeclaration(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitMapping(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping object) {
+	public @Nullable Boolean visitMapping(@NonNull Mapping object) {
 		return visitRule(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCall object) {
+	public @Nullable Boolean visitMappingCall(@NonNull MappingCall object) {
 		return visitMappingStatement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
+	public @Nullable Boolean visitMappingLoop(@NonNull MappingLoop object) {
 		return visitMappingStatement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitMappingParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter object) {
+	public @Nullable Boolean visitMappingParameter(@NonNull MappingParameter object) {
 		return visitVariableDeclaration(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitMappingParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameterBinding object) {
+	public @Nullable Boolean visitMappingParameterBinding(@NonNull MappingParameterBinding object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
+	public @Nullable Boolean visitMappingStatement(@NonNull MappingStatement object) {
 		return visitStatement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitNewStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatement object) {
+	public @Nullable Boolean visitNewStatement(@NonNull NewStatement object) {
 		return visitVariableStatement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitObservableStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ObservableStatement object) {
+	public @Nullable Boolean visitObservableStatement(@NonNull ObservableStatement object) {
 		return visitStatement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitSetStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SetStatement object) {
+	public @Nullable Boolean visitSetStatement(@NonNull SetStatement object) {
 		return visitObservableStatement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitSimpleParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SimpleParameter object) {
+	public @Nullable Boolean visitSimpleParameter(@NonNull SimpleParameter object) {
 		return visitMappingParameter(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitSimpleParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SimpleParameterBinding object) {
+	public @Nullable Boolean visitSimpleParameterBinding(@NonNull SimpleParameterBinding object) {
 		return visitMappingParameterBinding(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
+	public @Nullable Boolean visitStatement(@NonNull Statement object) {
 		return visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitVariableStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableStatement object) {
+	public @Nullable Boolean visitVariableStatement(@NonNull VariableStatement object) {
 		return visitVariableDeclaration(object);
 	}
 }

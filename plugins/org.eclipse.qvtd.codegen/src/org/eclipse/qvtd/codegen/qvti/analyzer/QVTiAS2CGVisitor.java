@@ -146,6 +146,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
@@ -1425,6 +1426,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
 		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 		return cgMappingCallBinding;
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitSpeculateStatement(@NonNull SpeculateStatement asSpeculateStatement) {
+		return visiting(asSpeculateStatement);		// FIXME
 	}
 
 	@Override

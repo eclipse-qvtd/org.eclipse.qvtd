@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -19,6 +20,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
@@ -41,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
@@ -58,6 +61,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSPostOrderVisitor;
@@ -356,6 +360,22 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	@Override
 	public Continuation<?> visitSimpleParameterBindingCS(@NonNull SimpleParameterBindingCS csElement) {
 		return new SimpleParameterBindingCSCompletion(context, csElement);		// Must wait till MappingLoop iterators initialized
+	}
+
+	@Override
+	public Continuation<?> visitSpeculateStatementCS(@NonNull SpeculateStatementCS csElement) {
+		SpeculateStatement asSpeculateStatement = PivotUtil.getPivot(SpeculateStatement.class, csElement);
+		if (asSpeculateStatement != null) {
+			List<@NonNull OCLExpression> asExpressions = new ArrayList<>();
+			for (@NonNull ExpCS csExp : ClassUtil.nullFree(csElement.getOwnedConditions())) {
+				OCLExpression asExpression = context.visitLeft2Right(OCLExpression.class, csExp);
+				if (asExpression != null) {
+					asExpressions.add(asExpression);
+				}
+			}
+			context.refreshList(asSpeculateStatement.getOwnedExpressions(), asExpressions);
+		}
+		return null;
 	}
 
 	@Override

@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -224,6 +225,11 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @NonNull DomainUsage visitSimpleParameterBinding(@NonNull SimpleParameterBinding object) {
+		return getNoneUsage();
+	}
+
+	@Override
+	public @NonNull DomainUsage visitSpeculateStatement(@NonNull SpeculateStatement object) {
 		return getNoneUsage();
 	}
 

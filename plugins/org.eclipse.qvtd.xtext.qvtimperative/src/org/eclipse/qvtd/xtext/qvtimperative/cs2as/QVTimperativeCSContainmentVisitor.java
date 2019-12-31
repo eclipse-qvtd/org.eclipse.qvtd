@@ -65,6 +65,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
@@ -87,6 +88,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSContainmentVisitor;
@@ -343,6 +345,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitSimpleParameterCS(@NonNull SimpleParameterCS csElement) {
 		refreshNamedElement(SimpleParameter.class, QVTimperativePackage.Literals.SIMPLE_PARAMETER, csElement);
 		return new SimpleParameterCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitSpeculateStatementCS(@NonNull SpeculateStatementCS csElement) {
+		context.refreshModelElement(SpeculateStatement.class, QVTimperativePackage.Literals.SPECULATE_STATEMENT, csElement);
+		return null;
 	}
 
 	@Override

@@ -34,6 +34,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SetStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SimpleParameterBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SimpleParameterCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SpeculateStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.TransformationCSElements;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
@@ -233,6 +234,13 @@ public class QVTimperativeFormatter extends QVTbaseFormatter
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().around(a.getColonKeyword_1());
 			c.setNoSpace().before(a.getSemicolonKeyword_6());
+		}
+		{
+			SpeculateStatementCSElements a = f.getSpeculateStatementCSAccess();
+			c.setLinewrap(1).before(a.getGroup());
+			c.setNoSpace().before(a.getCommaKeyword_2_0());
+			c.setNoSpace().before(a.getSemicolonKeyword_3());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 		}
 		//	    {
 		//	    	TopLevelCSElements a = f.getTopLevelCSAccess();

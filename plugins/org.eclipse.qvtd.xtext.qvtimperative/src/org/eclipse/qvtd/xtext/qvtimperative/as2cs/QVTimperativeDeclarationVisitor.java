@@ -93,6 +93,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -125,6 +126,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
@@ -675,6 +677,15 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csMappingParameterBinding.setOwnedValue(createExpCS(asMappingParameterBinding.getValue()));
 		csMappingParameterBinding.setIsCheck(asMappingParameterBinding.isIsCheck());
 		return csMappingParameterBinding;
+	}
+
+	@Override
+	public ElementCS visitSpeculateStatement(@NonNull SpeculateStatement asSpeculateStatement) {
+		assert asSpeculateStatement.eContainer() instanceof Mapping;
+		SpeculateStatementCS csSpeculateStatement = context.refreshElement(SpeculateStatementCS.class, QVTimperativeCSPackage.Literals.SPECULATE_STATEMENT_CS, asSpeculateStatement);
+		csSpeculateStatement.setPivot(asSpeculateStatement);
+		context.refreshList(csSpeculateStatement.getOwnedConditions(), context.visitDeclarations(ExpCS.class, asSpeculateStatement.getOwnedExpressions(), null));
+		return csSpeculateStatement;
 	}
 
 	@Override

@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 
 public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
@@ -199,6 +200,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public IStepper visitSimpleParameterBinding(@NonNull SimpleParameterBinding object) {
+		return PreStepper.INSTANCE;
+	}
+
+	@Override
+	public IStepper visitSpeculateStatement(@NonNull SpeculateStatement object) {
 		return PreStepper.INSTANCE;
 	}
 

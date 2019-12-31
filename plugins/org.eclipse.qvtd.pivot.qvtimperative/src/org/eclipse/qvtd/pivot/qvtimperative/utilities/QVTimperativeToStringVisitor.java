@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -366,6 +367,20 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		appendName(object.getBoundVariable());
 		append(" uses ");
 		safeVisit(object.getValue());
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitSpeculateStatement(@NonNull SpeculateStatement object) {
+		append("speculate ");
+		boolean isFirst = true;
+		for (@NonNull OCLExpression expression : QVTimperativeUtil.getOwnedExpressions(object)) {
+			if (!isFirst) {
+				append(", ");
+			}
+			safeVisit(expression);
+			isFirst = false;
+		}
 		return null;
 	}
 

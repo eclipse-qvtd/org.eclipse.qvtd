@@ -52,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
@@ -212,20 +213,20 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return ClassUtil.nonNullState(asSetStatement.getOwnedExpression());
 	}
 
+	public static @NonNull Iterable<@NonNull OCLExpression> getOwnedExpressions(@NonNull SpeculateStatement speculateStatement) {
+		return ClassUtil.nullFree(speculateStatement.getOwnedExpressions());
+	}
+
 	public static @NonNull Mapping getOwnedMapping(@NonNull ImperativeTransformation transformation, @Nullable String name) {
 		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedMappings(transformation), name));
 	}
 
-	@SuppressWarnings("unchecked")
 	public static @NonNull Iterable<@NonNull MappingParameterBinding> getOwnedMappingParameterBindings(@NonNull MappingCall mappingCall) {
-		Object ownedParameters = mappingCall.getOwnedMappingParameterBindings();
-		return (@NonNull Iterable<@NonNull MappingParameterBinding>)ownedParameters;
+		return ClassUtil.nullFree(mappingCall.getOwnedMappingParameterBindings());
 	}
 
-	@SuppressWarnings("unchecked")
 	public static @NonNull Iterable<@NonNull MappingParameter> getOwnedMappingParameters(@NonNull Mapping mapping) {
-		Object ownedParameters = mapping.getOwnedMappingParameters();
-		return (@NonNull Iterable<@NonNull MappingParameter>)ownedParameters;
+		return ClassUtil.nullFree(mapping.getOwnedMappingParameters());
 	}
 
 	@SuppressWarnings("unchecked")

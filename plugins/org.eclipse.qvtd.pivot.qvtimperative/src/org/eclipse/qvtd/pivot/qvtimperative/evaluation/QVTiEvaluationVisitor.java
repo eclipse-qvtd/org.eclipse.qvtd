@@ -71,6 +71,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -612,6 +613,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public Object visitSimpleParameterBinding(@NonNull SimpleParameterBinding object) {
 		return visiting(object);	// FIXME
+	}
+
+	@Override
+	public @Nullable Object visitSpeculateStatement(@NonNull SpeculateStatement speculateStatement) {
+		return visiting(speculateStatement);	// FIXME
 	}
 
 	@Override
