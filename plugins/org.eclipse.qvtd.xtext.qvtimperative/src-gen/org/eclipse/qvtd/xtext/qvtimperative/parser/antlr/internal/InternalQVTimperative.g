@@ -1502,6 +1502,19 @@ ruleGuardStatementCS returns [EObject current=null]
         $current = $this_CheckStatementCS_3.current;
         afterParserOrEnumRuleCall();
     }
+
+    |
+	{
+	  /* */
+	}
+    {
+        newCompositeNode(grammarAccess.getGuardStatementCSAccess().getSpeculateStatementCSParserRuleCall_4());
+    }
+    this_SpeculateStatementCS_4=ruleSpeculateStatementCS
+    {
+        $current = $this_SpeculateStatementCS_4.current;
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -3297,6 +3310,75 @@ ruleSimpleParameterCS returns [EObject current=null]
 
 
 
+// Entry rule entryRuleSpeculateStatementCS
+entryRuleSpeculateStatementCS returns [EObject current=null]
+	:
+	{ newCompositeNode(grammarAccess.getSpeculateStatementCSRule()); }
+	 iv_ruleSpeculateStatementCS=ruleSpeculateStatementCS
+	 { $current=$iv_ruleSpeculateStatementCS.current; }
+	 EOF
+;
+
+// Rule SpeculateStatementCS
+ruleSpeculateStatementCS returns [EObject current=null]
+    @init { enterRule();
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='speculate'
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getSpeculateStatementCSAccess().getSpeculateKeyword_0());
+    }
+(
+(
+		{
+	        newCompositeNode(grammarAccess.getSpeculateStatementCSAccess().getOwnedConditionsExpCSParserRuleCall_1_0());
+	    }
+		lv_ownedConditions_1_0=ruleExpCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSpeculateStatementCSRule());
+	        }
+       		add(
+       			$current,
+       			"ownedConditions",
+        		lv_ownedConditions_1_0,
+        		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_2=','
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getSpeculateStatementCSAccess().getCommaKeyword_2_0());
+    }
+(
+(
+		{
+	        newCompositeNode(grammarAccess.getSpeculateStatementCSAccess().getOwnedConditionsExpCSParserRuleCall_2_1_0());
+	    }
+		lv_ownedConditions_3_0=ruleExpCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSpeculateStatementCSRule());
+	        }
+       		add(
+       			$current,
+       			"ownedConditions",
+        		lv_ownedConditions_3_0,
+        		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_4=';'
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getSpeculateStatementCSAccess().getSemicolonKeyword_3());
+    }
+)
+;
+
+
+
+
+
 // Entry rule entryRuleTransformationCS
 entryRuleTransformationCS returns [EObject current=null]
 	:
@@ -3641,59 +3723,66 @@ ruleQVTimperativeUnrestrictedName returns [AntlrDatatypeRuleToken current=new An
     }
 
     |
+	kw='speculate'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getSpeculateKeyword_23());
+    }
+
+    |
 	kw='strict'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getStrictKeyword_23());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getStrictKeyword_24());
     }
 
     |
 	kw='success'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getSuccessKeyword_24());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getSuccessKeyword_25());
     }
 
     |
 	kw='target'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTargetKeyword_25());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTargetKeyword_26());
     }
 
     |
 	kw='transformation'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransformationKeyword_26());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransformationKeyword_27());
     }
 
     |
 	kw='transient'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransientKeyword_27());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransientKeyword_28());
     }
 
     |
 	kw='uses'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getUsesKeyword_28());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getUsesKeyword_29());
     }
 
     |
 	kw='var'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getVarKeyword_29());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getVarKeyword_30());
     }
 
     |
 	kw='via'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getViaKeyword_30());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getViaKeyword_31());
     }
 )
     ;

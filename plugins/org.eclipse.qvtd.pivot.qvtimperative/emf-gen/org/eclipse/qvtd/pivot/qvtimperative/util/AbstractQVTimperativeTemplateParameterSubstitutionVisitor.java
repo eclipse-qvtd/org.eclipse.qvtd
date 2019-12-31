@@ -177,6 +177,11 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitSpeculateStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SpeculateStatement object) {
+		return visitStatement(object);
+	}
+
+	@Override
 	public @Nullable Object visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
 		return visitNamedElement(object);
 	}

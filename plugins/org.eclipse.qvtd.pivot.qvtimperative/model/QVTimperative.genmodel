@@ -212,6 +212,9 @@
         <genParameters ecoreParameter="QVTimperative.ecore#//SimpleParameterBinding/validateCompatibleTypeForUncheckedValue/context"/>
       </genOperations>
     </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-SpeculateStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-SpeculateStatement-ownedExpressions"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#T-qvtimperative-Statement">
       <genOperations ecoreOperation="QVTimperative.ecore#//Statement/joinNames">
         <genParameters ecoreParameter="QVTimperative.ecore#//Statement/joinNames/names"/>

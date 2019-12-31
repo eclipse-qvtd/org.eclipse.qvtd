@@ -183,6 +183,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSetStatementCSAccess().getGroup_0_2(), "rule__SetStatementCS__Group_0_2__0");
 					put(grammarAccess.getSimpleParameterBindingCSAccess().getGroup(), "rule__SimpleParameterBindingCS__Group__0");
 					put(grammarAccess.getSimpleParameterCSAccess().getGroup(), "rule__SimpleParameterCS__Group__0");
+					put(grammarAccess.getSpeculateStatementCSAccess().getGroup(), "rule__SpeculateStatementCS__Group__0");
+					put(grammarAccess.getSpeculateStatementCSAccess().getGroup_2(), "rule__SpeculateStatementCS__Group_2__0");
 					put(grammarAccess.getTransformationCSAccess().getGroup(), "rule__TransformationCS__Group__0");
 					put(grammarAccess.getTransformationCSAccess().getGroup_3(), "rule__TransformationCS__Group_3__0");
 					put(grammarAccess.getTransformationCSAccess().getGroup_5(), "rule__TransformationCS__Group_5__0");
@@ -464,6 +466,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSimpleParameterCSAccess().getReferredTypedModelAssignment_2(), "rule__SimpleParameterCS__ReferredTypedModelAssignment_2");
 					put(grammarAccess.getSimpleParameterCSAccess().getNameAssignment_3(), "rule__SimpleParameterCS__NameAssignment_3");
 					put(grammarAccess.getSimpleParameterCSAccess().getOwnedTypeAssignment_5(), "rule__SimpleParameterCS__OwnedTypeAssignment_5");
+					put(grammarAccess.getSpeculateStatementCSAccess().getOwnedConditionsAssignment_1(), "rule__SpeculateStatementCS__OwnedConditionsAssignment_1");
+					put(grammarAccess.getSpeculateStatementCSAccess().getOwnedConditionsAssignment_2_1(), "rule__SpeculateStatementCS__OwnedConditionsAssignment_2_1");
 					put(grammarAccess.getTransformationCSAccess().getOwnedPathNameAssignment_1(), "rule__TransformationCS__OwnedPathNameAssignment_1");
 					put(grammarAccess.getTransformationCSAccess().getNameAssignment_2(), "rule__TransformationCS__NameAssignment_2");
 					put(grammarAccess.getTransformationCSAccess().getOwnedContextTypeAssignment_3_1(), "rule__TransformationCS__OwnedContextTypeAssignment_3_1");

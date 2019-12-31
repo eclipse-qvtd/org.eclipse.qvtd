@@ -220,6 +220,15 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull SimpleParameterBinding createSimpleParameterBinding();
 
 	/**
+	 * Returns a new object of class '<em>Speculate Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Speculate Statement</em>'.
+	 * @generated
+	 */
+	@NonNull SpeculateStatement createSpeculateStatement();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

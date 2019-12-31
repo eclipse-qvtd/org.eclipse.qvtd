@@ -358,6 +358,16 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 24: {
+				SpeculateStatementCS speculateStatementCS = (SpeculateStatementCS)theEObject;
+				T result = caseSpeculateStatementCS(speculateStatementCS);
+				if (result == null) result = caseStatementCS(speculateStatementCS);
+				if (result == null) result = caseModelElementCS(speculateStatementCS);
+				if (result == null) result = casePivotableElementCS(speculateStatementCS);
+				if (result == null) result = caseElementCS(speculateStatementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 25: {
 				StatementCS statementCS = (StatementCS)theEObject;
 				T result = caseStatementCS(statementCS);
 				if (result == null) result = caseModelElementCS(statementCS);
@@ -366,7 +376,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 25: {
+			case 26: {
 				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
 				T result = caseTopLevelCS(topLevelCS);
 				if (result == null) result = caseRootPackageCS(topLevelCS);
@@ -378,7 +388,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 26: {
+			case 27: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
 				if (result == null) result = caseAbstractTransformationCS(transformationCS);
@@ -753,6 +763,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSimpleParameterCS(SimpleParameterCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Speculate Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Speculate Statement CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSpeculateStatementCS(SpeculateStatementCS object) {
 		return null;
 	}
 

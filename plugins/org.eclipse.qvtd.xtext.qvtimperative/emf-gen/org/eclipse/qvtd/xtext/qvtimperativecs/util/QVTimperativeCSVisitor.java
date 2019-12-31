@@ -48,6 +48,7 @@ public interface QVTimperativeCSVisitor<R> extends org.eclipse.qvtd.xtext.qvtbas
 	R visitSetStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SetStatementCS object);
 	R visitSimpleParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SimpleParameterBindingCS object);
 	R visitSimpleParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SimpleParameterCS object);
+	R visitSpeculateStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SpeculateStatementCS object);
 	R visitStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull StatementCS object);
 	R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull TopLevelCS object);
 	R visitTransformationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull TransformationCS object);

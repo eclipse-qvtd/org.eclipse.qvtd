@@ -370,8 +370,10 @@ public class QVTimperativeValidator extends EObjectValidator {
 			case 25:
 				return validateSimpleParameterBinding((SimpleParameterBinding)value, diagnostics, context);
 			case 26:
-				return validateStatement((Statement)value, diagnostics, context);
+				return validateSpeculateStatement((SpeculateStatement)value, diagnostics, context);
 			case 27:
+				return validateStatement((Statement)value, diagnostics, context);
+			case 28:
 				return validateVariableStatement((VariableStatement)value, diagnostics, context);
 			default:
 				return true;
@@ -1091,6 +1093,15 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 */
 	public boolean validateSimpleParameterBinding_validateCompatibleTypeForUncheckedValue(SimpleParameterBinding simpleParameterBinding, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return simpleParameterBinding.validateCompatibleTypeForUncheckedValue(diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSpeculateStatement(SpeculateStatement speculateStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(speculateStatement, diagnostics, context);
 	}
 
 	/**

@@ -176,6 +176,11 @@ public abstract class AbstractQVTimperativeFlowAnalysisDeducerFromNullVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitSpeculateStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SpeculateStatement object) {
+		return visitStatement(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
 		return visitNamedElement(object);
 	}

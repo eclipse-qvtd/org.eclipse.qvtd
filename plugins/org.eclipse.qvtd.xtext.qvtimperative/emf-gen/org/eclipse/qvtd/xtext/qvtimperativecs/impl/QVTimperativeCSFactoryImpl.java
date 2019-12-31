@@ -104,8 +104,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case 21: return createSetStatementCS();
 			case 22: return createSimpleParameterBindingCS();
 			case 23: return createSimpleParameterCS();
-			case 25: return createTopLevelCS();
-			case 26: return createTransformationCS();
+			case 24: return createSpeculateStatementCS();
+			case 26: return createTopLevelCS();
+			case 27: return createTransformationCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -329,6 +330,17 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull SimpleParameterCS createSimpleParameterCS() {
 		SimpleParameterCSImpl simpleParameterCS = new SimpleParameterCSImpl();
 		return simpleParameterCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SpeculateStatementCS createSpeculateStatementCS() {
+		SpeculateStatementCSImpl speculateStatementCS = new SpeculateStatementCSImpl();
+		return speculateStatementCS;
 	}
 
 	/**

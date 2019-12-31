@@ -150,6 +150,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_LoopVariable = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_LoopVariable);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_MappingParameterBinding = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_MappingParameterBinding);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_MappingStatement = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_MappingStatement);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_OCLExpression = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_OCLExpression);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Statement = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_Statement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TypedModel = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_TypedModel);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_VariableStatement = TypeId.ORDERED_SET.getSpecializedId(QVTimperativeTables.CLSSid_VariableStatement);
@@ -219,6 +220,7 @@ public class QVTimperativeTables
 		public static final @NonNull EcoreExecutorType _SetStatement = new EcoreExecutorType(QVTimperativePackage.Literals.SET_STATEMENT, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _SimpleParameter = new EcoreExecutorType(QVTimperativePackage.Literals.SIMPLE_PARAMETER, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _SimpleParameterBinding = new EcoreExecutorType(QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _SpeculateStatement = new EcoreExecutorType(QVTimperativePackage.Literals.SPECULATE_STATEMENT, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Statement = new EcoreExecutorType(QVTimperativePackage.Literals.STATEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _VariableStatement = new EcoreExecutorType(QVTimperativePackage.Literals.VARIABLE_STATEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
 
@@ -249,6 +251,7 @@ public class QVTimperativeTables
 			_SetStatement,
 			_SimpleParameter,
 			_SimpleParameterBinding,
+			_SpeculateStatement,
 			_Statement,
 			_VariableStatement
 		};
@@ -490,6 +493,13 @@ public class QVTimperativeTables
 		private static final @NonNull ExecutorFragment _SimpleParameterBinding__OclElement = new ExecutorFragment(Types._SimpleParameterBinding, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _SimpleParameterBinding__SimpleParameterBinding = new ExecutorFragment(Types._SimpleParameterBinding, QVTimperativeTables.Types._SimpleParameterBinding);
 
+		private static final @NonNull ExecutorFragment _SpeculateStatement__Element = new ExecutorFragment(Types._SpeculateStatement, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _SpeculateStatement__NamedElement = new ExecutorFragment(Types._SpeculateStatement, PivotTables.Types._NamedElement);
+		private static final @NonNull ExecutorFragment _SpeculateStatement__OclAny = new ExecutorFragment(Types._SpeculateStatement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _SpeculateStatement__OclElement = new ExecutorFragment(Types._SpeculateStatement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _SpeculateStatement__SpeculateStatement = new ExecutorFragment(Types._SpeculateStatement, QVTimperativeTables.Types._SpeculateStatement);
+		private static final @NonNull ExecutorFragment _SpeculateStatement__Statement = new ExecutorFragment(Types._SpeculateStatement, QVTimperativeTables.Types._Statement);
+
 		private static final @NonNull ExecutorFragment _Statement__Element = new ExecutorFragment(Types._Statement, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _Statement__NamedElement = new ExecutorFragment(Types._Statement, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _Statement__OclAny = new ExecutorFragment(Types._Statement, OCLstdlibTables.Types._OclAny);
@@ -666,6 +676,8 @@ public class QVTimperativeTables
 
 		public static final @NonNull ExecutorProperty _SimpleParameterBinding__isCheck = new EcoreExecutorProperty(QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING__IS_CHECK, Types._SimpleParameterBinding, 0);
 		public static final @NonNull ExecutorProperty _SimpleParameterBinding__value = new EcoreExecutorProperty(QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING__VALUE, Types._SimpleParameterBinding, 1);
+
+		public static final @NonNull ExecutorProperty _SpeculateStatement__ownedExpressions = new EcoreExecutorProperty(QVTimperativePackage.Literals.SPECULATE_STATEMENT__OWNED_EXPRESSIONS, Types._SpeculateStatement, 0);
 
 		public static final @NonNull ExecutorProperty _Statement__Mapping__ownedStatements = new ExecutorPropertyWithImplementation("Mapping", Types._Statement, 0, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS));
 		static {
@@ -1005,6 +1017,17 @@ public class QVTimperativeTables
 			};
 		private static final int @NonNull [] __SimpleParameterBinding = { 1,1,1,1,1 };
 
+		private static final @NonNull ExecutorFragment @NonNull [] _SpeculateStatement =
+			{
+				Fragments._SpeculateStatement__OclAny /* 0 */,
+				Fragments._SpeculateStatement__OclElement /* 1 */,
+				Fragments._SpeculateStatement__Element /* 2 */,
+				Fragments._SpeculateStatement__NamedElement /* 3 */,
+				Fragments._SpeculateStatement__Statement /* 4 */,
+				Fragments._SpeculateStatement__SpeculateStatement /* 5 */
+			};
+		private static final int @NonNull [] __SpeculateStatement = { 1,1,1,1,1,1 };
+
 		private static final @NonNull ExecutorFragment @NonNull [] _Statement =
 			{
 				Fragments._Statement__OclAny /* 0 */,
@@ -1058,6 +1081,7 @@ public class QVTimperativeTables
 			Types._SetStatement.initFragments(_SetStatement, __SetStatement);
 			Types._SimpleParameter.initFragments(_SimpleParameter, __SimpleParameter);
 			Types._SimpleParameterBinding.initFragments(_SimpleParameterBinding, __SimpleParameterBinding);
+			Types._SpeculateStatement.initFragments(_SpeculateStatement, __SpeculateStatement);
 			Types._Statement.initFragments(_Statement, __Statement);
 			Types._VariableStatement.initFragments(_VariableStatement, __VariableStatement);
 
@@ -2046,6 +2070,42 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
+		private static final @NonNull ExecutorOperation @NonNull [] _SpeculateStatement__SpeculateStatement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _SpeculateStatement__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _SpeculateStatement__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _SpeculateStatement__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _SpeculateStatement__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _SpeculateStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
+
 		private static final @NonNull ExecutorOperation @NonNull [] _Statement__Statement = {
 			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
@@ -2339,6 +2399,13 @@ public class QVTimperativeTables
 			Fragments._SimpleParameterBinding__OclElement.initOperations(_SimpleParameterBinding__OclElement);
 			Fragments._SimpleParameterBinding__SimpleParameterBinding.initOperations(_SimpleParameterBinding__SimpleParameterBinding);
 
+			Fragments._SpeculateStatement__Element.initOperations(_SpeculateStatement__Element);
+			Fragments._SpeculateStatement__NamedElement.initOperations(_SpeculateStatement__NamedElement);
+			Fragments._SpeculateStatement__OclAny.initOperations(_SpeculateStatement__OclAny);
+			Fragments._SpeculateStatement__OclElement.initOperations(_SpeculateStatement__OclElement);
+			Fragments._SpeculateStatement__SpeculateStatement.initOperations(_SpeculateStatement__SpeculateStatement);
+			Fragments._SpeculateStatement__Statement.initOperations(_SpeculateStatement__Statement);
+
 			Fragments._Statement__Element.initOperations(_Statement__Element);
 			Fragments._Statement__NamedElement.initOperations(_Statement__NamedElement);
 			Fragments._Statement__OclAny.initOperations(_Statement__OclAny);
@@ -2530,6 +2597,10 @@ public class QVTimperativeTables
 			QVTimperativeTables.Properties._SimpleParameterBinding__value
 		};
 
+		private static final @NonNull ExecutorProperty @NonNull [] _SpeculateStatement = {
+			QVTimperativeTables.Properties._SpeculateStatement__ownedExpressions
+		};
+
 		private static final @NonNull ExecutorProperty @NonNull [] _Statement = {};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _VariableStatement = {};
@@ -2564,6 +2635,7 @@ public class QVTimperativeTables
 			Fragments._SetStatement__SetStatement.initProperties(_SetStatement);
 			Fragments._SimpleParameter__SimpleParameter.initProperties(_SimpleParameter);
 			Fragments._SimpleParameterBinding__SimpleParameterBinding.initProperties(_SimpleParameterBinding);
+			Fragments._SpeculateStatement__SpeculateStatement.initProperties(_SpeculateStatement);
 			Fragments._Statement__Statement.initProperties(_Statement);
 			Fragments._VariableStatement__VariableStatement.initProperties(_VariableStatement);
 

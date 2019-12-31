@@ -170,6 +170,11 @@ public abstract class AbstractNullQVTimperativeVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitSpeculateStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SpeculateStatement object) {
+		return null;
+	}
+
+	@Override
 	public R visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
 		return null;
 	}

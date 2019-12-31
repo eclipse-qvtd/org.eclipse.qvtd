@@ -53,6 +53,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
@@ -231,6 +232,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass simpleParameterCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass speculateStatementCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1098,6 +1106,26 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EClass getSpeculateStatementCS() {
+		return speculateStatementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSpeculateStatementCS_OwnedConditions() {
+		return (EReference)speculateStatementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getStatementCS() {
 		return statementCSEClass;
 	}
@@ -1312,12 +1340,15 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		simpleParameterCSEClass = createEClass(23);
 		createEReference(simpleParameterCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		statementCSEClass = createEClass(24);
+		speculateStatementCSEClass = createEClass(24);
+		createEReference(speculateStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		topLevelCSEClass = createEClass(25);
+		statementCSEClass = createEClass(25);
+
+		topLevelCSEClass = createEClass(26);
 		createEReference(topLevelCSEClass, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0);
 
-		transformationCSEClass = createEClass(26);
+		transformationCSEClass = createEClass(27);
 		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0);
 		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1);
 		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2);
@@ -1393,6 +1424,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		setStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		simpleParameterBindingCSEClass.getESuperTypes().add(this.getMappingParameterBindingCS());
 		simpleParameterCSEClass.getESuperTypes().add(this.getMappingParameterCS());
+		speculateStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		statementCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
 		transformationCSEClass.getESuperTypes().add(theQVTbaseCSPackage.getAbstractTransformationCS());
@@ -1498,6 +1530,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(simpleParameterCSEClass, SimpleParameterCS.class, "SimpleParameterCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSimpleParameterCS_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, SimpleParameterCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(speculateStatementCSEClass, SpeculateStatementCS.class, "SpeculateStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSpeculateStatementCS_OwnedConditions(), theEssentialOCLCSPackage.getExpCS(), null, "ownedConditions", null, 1, -1, SpeculateStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementCSEClass, StatementCS.class, "StatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

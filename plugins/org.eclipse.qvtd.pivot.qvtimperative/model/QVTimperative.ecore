@@ -845,6 +845,15 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtimperative-SpeculateStatement"
+      name="SpeculateStatement" eSuperTypes="#T-qvtimperative-Statement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A CheckStatement evaluates a predicate. If the evaluation is false, the mapping execution&#xA;terminates fails and does nothing.&#xA;&#xA;syntax: oclText[check expression;]"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-SpeculateStatement-ownedExpressions"
+        name="ownedExpressions" lowerBound="1" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtimperative-Statement" name="Statement"
       abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -1195,6 +1195,27 @@ public interface QVTimperativePackage extends EPackage {
 	EOperation getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement <em>Speculate Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Speculate Statement</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement
+	 * @generated
+	 */
+	EClass getSpeculateStatement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement#getOwnedExpressions <em>Owned Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Expressions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement#getOwnedExpressions()
+	 * @see #getSpeculateStatement()
+	 * @generated
+	 */
+	EReference getSpeculateStatement_OwnedExpressions();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.Statement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2137,6 +2158,24 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SpeculateStatementImpl <em>Speculate Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.SpeculateStatementImpl
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getSpeculateStatement()
+		 * @generated
+		 */
+		EClass SPECULATE_STATEMENT = eINSTANCE.getSpeculateStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Expressions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SPECULATE_STATEMENT__OWNED_EXPRESSIONS = eINSTANCE.getSpeculateStatement_OwnedExpressions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.StatementImpl <em>Statement</em>}' class.

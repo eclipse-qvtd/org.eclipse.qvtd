@@ -114,6 +114,9 @@
     <genClasses ecoreClass="QVTimperativeCS.ecore#//SimpleParameterCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SimpleParameterCS/referredTypedModel"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//SpeculateStatementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SpeculateStatementCS/ownedConditions"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//StatementCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//TopLevelCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedTransformations"/>

@@ -164,6 +164,11 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	@Override
+	public @Nullable Element visitSpeculateStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SpeculateStatementCS csElement) {
+		return visitStatementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Element visitStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull StatementCS csElement) {
 		return visitModelElementCS(csElement);
 	}

@@ -103,6 +103,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.xtext.Action;
@@ -560,6 +561,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			case QVTimperativeCSPackage.SIMPLE_PARAMETER_CS:
 				sequence_SimpleParameterCS(context, (SimpleParameterCS) semanticObject);
 				return;
+			case QVTimperativeCSPackage.SPECULATE_STATEMENT_CS:
+				sequence_SpeculateStatementCS(context, (SpeculateStatementCS) semanticObject);
+				return;
 			case QVTimperativeCSPackage.TOP_LEVEL_CS:
 				sequence_TopLevelCS(context, (TopLevelCS) semanticObject);
 				return;
@@ -965,6 +969,19 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 		feeder.accept(grammarAccess.getSimpleParameterCSAccess().getNameUnrestrictedNameParserRuleCall_3_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getSimpleParameterCSAccess().getOwnedTypeTypeExpCSParserRuleCall_5_0(), semanticObject.getOwnedType());
 		feeder.finish();
+	}
+
+
+	/**
+	 * Contexts:
+	 *     GuardStatementCS returns SpeculateStatementCS
+	 *     SpeculateStatementCS returns SpeculateStatementCS
+	 *
+	 * Constraint:
+	 *     (ownedConditions+=ExpCS ownedConditions+=ExpCS*)
+	 */
+	protected void sequence_SpeculateStatementCS(ISerializationContext context, SpeculateStatementCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 
 

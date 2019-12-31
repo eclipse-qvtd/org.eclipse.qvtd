@@ -80,7 +80,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getStatementCS()
 	 * @generated
 	 */
-	int STATEMENT_CS = 24;
+	int STATEMENT_CS = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl <em>Mapping CS</em>}' class.
@@ -140,7 +140,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTopLevelCS()
 	 * @generated
 	 */
-	int TOP_LEVEL_CS = 25;
+	int TOP_LEVEL_CS = 26;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.AddStatementCSImpl <em>Add Statement CS</em>}' class.
@@ -333,6 +333,16 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int SIMPLE_PARAMETER_CS = 23;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SpeculateStatementCSImpl <em>Speculate Statement CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.SpeculateStatementCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getSpeculateStatementCS()
+	 * @generated
+	 */
+	int SPECULATE_STATEMENT_CS = 24;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TransformationCSImpl <em>Transformation CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -340,7 +350,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTransformationCS()
 	 * @generated
 	 */
-	int TRANSFORMATION_CS = 26;
+	int TRANSFORMATION_CS = 27;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS <em>Add Statement CS</em>}'.
@@ -1166,6 +1176,27 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getSimpleParameterCS_ReferredTypedModel();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS <em>Speculate Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Speculate Statement CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS
+	 * @generated
+	 */
+	EClass getSpeculateStatementCS();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS#getOwnedConditions <em>Owned Conditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Conditions</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS#getOwnedConditions()
+	 * @see #getSpeculateStatementCS()
+	 * @generated
+	 */
+	EReference getSpeculateStatementCS_OwnedConditions();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS <em>Statement CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1946,6 +1977,24 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SIMPLE_PARAMETER_CS__REFERRED_TYPED_MODEL = eINSTANCE.getSimpleParameterCS_ReferredTypedModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SpeculateStatementCSImpl <em>Speculate Statement CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.SpeculateStatementCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getSpeculateStatementCS()
+		 * @generated
+		 */
+		EClass SPECULATE_STATEMENT_CS = eINSTANCE.getSpeculateStatementCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Conditions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SPECULATE_STATEMENT_CS__OWNED_CONDITIONS = eINSTANCE.getSpeculateStatementCS_OwnedConditions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.StatementCSImpl <em>Statement CS</em>}' class.

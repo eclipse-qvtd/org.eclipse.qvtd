@@ -376,6 +376,15 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 26: {
+				SpeculateStatement speculateStatement = (SpeculateStatement)theEObject;
+				T result = caseSpeculateStatement(speculateStatement);
+				if (result == null) result = caseStatement(speculateStatement);
+				if (result == null) result = caseNamedElement(speculateStatement);
+				if (result == null) result = caseElement(speculateStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 27: {
 				Statement statement = (Statement)theEObject;
 				T result = caseStatement(statement);
 				if (result == null) result = caseNamedElement(statement);
@@ -383,7 +392,7 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 27: {
+			case 28: {
 				VariableStatement variableStatement = (VariableStatement)theEObject;
 				T result = caseVariableStatement(variableStatement);
 				if (result == null) result = caseVariableDeclaration(variableStatement);
@@ -785,6 +794,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSimpleParameterBinding(SimpleParameterBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Speculate Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Speculate Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSpeculateStatement(SpeculateStatement object) {
 		return null;
 	}
 

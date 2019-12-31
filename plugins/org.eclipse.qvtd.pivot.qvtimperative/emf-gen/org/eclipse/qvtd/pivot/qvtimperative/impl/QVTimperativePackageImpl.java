@@ -55,6 +55,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeValidator;
@@ -247,6 +248,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass simpleParameterBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass speculateStatementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1393,6 +1401,26 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EClass getSpeculateStatement() {
+		return speculateStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSpeculateStatement_OwnedExpressions() {
+		return (EReference)speculateStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getStatement() {
 		return statementEClass;
 	}
@@ -1577,10 +1605,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
 
-		statementEClass = createEClass(26);
+		speculateStatementEClass = createEClass(26);
+		createEReference(speculateStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+
+		statementEClass = createEClass(27);
 		createEOperation(statementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
 
-		variableStatementEClass = createEClass(27);
+		variableStatementEClass = createEClass(28);
 	}
 
 	/**
@@ -1649,6 +1680,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		setStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		simpleParameterEClass.getESuperTypes().add(this.getMappingParameter());
 		simpleParameterBindingEClass.getESuperTypes().add(this.getMappingParameterBinding());
+		speculateStatementEClass.getESuperTypes().add(this.getStatement());
 		statementEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		variableStatementEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		variableStatementEClass.getESuperTypes().add(this.getStatement());
@@ -1960,6 +1992,9 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(speculateStatementEClass, SpeculateStatement.class, "SpeculateStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSpeculateStatement_OwnedExpressions(), thePivotPackage.getOCLExpression(), null, "ownedExpressions", null, 1, -1, SpeculateStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

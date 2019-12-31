@@ -184,6 +184,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createSimpleParameterCSAdapter();
 			}
 			@Override
+			public Adapter caseSpeculateStatementCS(SpeculateStatementCS object) {
+				return createSpeculateStatementCSAdapter();
+			}
+			@Override
 			public Adapter caseStatementCS(StatementCS object) {
 				return createStatementCSAdapter();
 			}
@@ -730,6 +734,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSimpleParameterCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS <em>Speculate Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.SpeculateStatementCS
+	 * @generated
+	 */
+	public Adapter createSpeculateStatementCSAdapter() {
 		return null;
 	}
 

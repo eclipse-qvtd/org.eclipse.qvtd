@@ -211,6 +211,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull SimpleParameterCS createSimpleParameterCS();
 
 	/**
+	 * Returns a new object of class '<em>Speculate Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Speculate Statement CS</em>'.
+	 * @generated
+	 */
+	SpeculateStatementCS createSpeculateStatementCS();
+
+	/**
 	 * Returns a new object of class '<em>Top Level CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

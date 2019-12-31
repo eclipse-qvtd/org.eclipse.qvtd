@@ -102,6 +102,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case 23: return createSetStatement();
 			case 24: return createSimpleParameter();
 			case 25: return createSimpleParameterBinding();
+			case 26: return createSpeculateStatement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -336,6 +337,17 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull SimpleParameterBinding createSimpleParameterBinding() {
 		SimpleParameterBindingImpl simpleParameterBinding = new SimpleParameterBindingImpl();
 		return simpleParameterBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull SpeculateStatement createSpeculateStatement() {
+		SpeculateStatementImpl speculateStatement = new SpeculateStatementImpl();
+		return speculateStatement;
 	}
 
 	/**

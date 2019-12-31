@@ -164,6 +164,11 @@ public abstract class AbstractQVTimperativeCSPreOrderVisitor
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitSpeculateStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SpeculateStatementCS csElement) {
+		return visitStatementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull StatementCS csElement) {
 		return visitModelElementCS(csElement);
 	}
