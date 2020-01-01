@@ -31,13 +31,13 @@ import com.google.common.collect.Lists;
 
 /**
  * The ReachabilityForest comprises a tree of preferred edge paths from each head/leaf-constant root node to the
- * nodes that can be reached from them. It answers the question: what preceding nodes are necessary to ensure
- * that a given node is reachable.
+ * nodes that can be reached from them by to-one navigation. It answers the question: what preceding nodes are necessary
+ *  to ensure that a given node is reachable by to-one navigation.
  */
 public class ReachabilityForest
 {
 	private static final int FORWARD_NAVIGATION_COST = 1;
-	private static final int INVERSE_MANY_NAVIGATION_COST = 5;
+	//	private static final int INVERSE_MANY_NAVIGATION_COST = 5;
 	private static final int INVERSE_NAVIGATION_COST = 3;
 	private static final int ITERATOR_COST = 1;
 	private static final int OPERATION_COST = 10;
@@ -51,10 +51,11 @@ public class ReachabilityForest
 	/**
 	 * Edges that have no opposite.
 	 */
-	private final @NonNull Set<@NonNull Edge> manyToOneEdges = new HashSet<>();
+	//	private final @NonNull Set<@NonNull Edge> manyToOneEdges = new HashSet<>(); -- removed: there is only to-one reachability
 
 	/**
 	 * The incoming edge for each node in the traversal forest, null at a root.
+	 * Each node2reachingEdge reachingEdge value's target is the node2reachingEdge key.
 	 */
 	private final @NonNull Map<@NonNull Node, @Nullable Edge> node2reachingEdge = new HashMap<>();
 
@@ -65,15 +66,14 @@ public class ReachabilityForest
 	private @NonNull Map<@NonNull Node, @NonNull Integer> node2cost = new HashMap<>();
 
 	/**
-	 * Lazily created compartor to order nodes lowest cost first.
+	 * Lazily created comparator to order nodes lowest cost first.
 	 */
 	private @Nullable Comparator<@NonNull Edge> edgeCostComparator = null;
 
 	/**
-	 * Lazily created compartor to order nodes lowest cost first.
+	 * Lazily created comparator to order nodes lowest cost first.
 	 */
 	private @Nullable Comparator<@NonNull Node> nodeCostComparator = null;
-
 
 	/**
 	 * Construct the Reachability forest for the specified rootNodes using the availableNavigableEdges to locate
@@ -97,9 +97,9 @@ public class ReachabilityForest
 			NavigationEdge navigationEdge = (NavigationEdge)edge;
 			if (!navigationEdge.isSecondary()) {
 				forwardEdges.add(navigationEdge);
-				if ((navigationEdge.getEdgeSource().isClass()) && (navigationEdge.getOppositeEdge() == null)) {
-					manyToOneEdges.add(navigationEdge);
-				}
+				//	if ((navigationEdge.getEdgeSource().isClass()) && (navigationEdge.getOppositeEdge() == null)) {
+				//		manyToOneEdges.add(navigationEdge);
+				//	}
 			}
 		}
 	}
@@ -136,29 +136,25 @@ public class ReachabilityForest
 								if (forwardEdges.contains(navigationEdge)) {
 									int nextCost = thisCost + FORWARD_NAVIGATION_COST;
 									if ((targetCost == null) || (nextCost < targetCost)) {
-										node2cost.put(targetNode, nextCost);
-										node2reachingEdge.put(targetNode, edge);
-										putCosts(costs2nodes, nextCost, targetNode);
+										putCosts(costs2nodes, nextCost, targetNode, edge);
 									}
 								}
 								else {
 									NavigationEdge oppositeEdge = navigationEdge.getOppositeEdge();
-									if (forwardEdges.contains(oppositeEdge)) {
-										boolean isImplicit = QVTscheduleUtil.getReferredProperty(oppositeEdge).isIsImplicit();
-										int nextCost = thisCost + (isImplicit ? INVERSE_NAVIGATION_COST : FORWARD_NAVIGATION_COST);		// FIXME FORWARD_NAVIGATION_COST used for some actual opposites
-										if ((targetCost == null) || (nextCost < targetCost)) {
-											node2cost.put(targetNode, nextCost);
-											node2reachingEdge.put(targetNode, oppositeEdge);
-											putCosts(costs2nodes, nextCost, targetNode);
+									if (oppositeEdge != null) {
+										if (forwardEdges.contains(oppositeEdge)) {
+											boolean isImplicit = QVTscheduleUtil.getReferredProperty(navigationEdge).isIsImplicit();
+											int nextCost = thisCost + (isImplicit ? INVERSE_NAVIGATION_COST : FORWARD_NAVIGATION_COST);
+											if ((targetCost == null) || (nextCost < targetCost)) {
+												putCosts(costs2nodes, nextCost, targetNode, navigationEdge);
+											}
 										}
-									}
-									else if (manyToOneEdges.contains(oppositeEdge)) {
-										int nextCost = thisCost + INVERSE_MANY_NAVIGATION_COST;
-										if ((targetCost == null) || (nextCost < targetCost)) {
-											node2cost.put(targetNode, nextCost);
-											node2reachingEdge.put(targetNode, oppositeEdge);
-											putCosts(costs2nodes, nextCost, targetNode);
-										}
+										//	else if (manyToOneEdges.contains(oppositeEdge)) {
+										//		int nextCost = thisCost + INVERSE_MANY_NAVIGATION_COST;
+										//		if ((targetCost == null) || (nextCost < targetCost)) {
+										//			putCosts(costs2nodes, nextCost, targetNode, oppositeEdge);
+										//		}
+										//	}
 									}
 								}
 							}
@@ -184,9 +180,7 @@ public class ReachabilityForest
 								}
 								if (nextCost > 0) {
 									if ((targetCost == null) || (nextCost < targetCost)) {
-										node2cost.put(targetNode, nextCost);
-										node2reachingEdge.put(targetNode, edge);
-										putCosts(costs2nodes, nextCost, targetNode);
+										putCosts(costs2nodes, nextCost, targetNode, edge);
 									}
 								}
 							}
@@ -282,7 +276,7 @@ public class ReachabilityForest
 	}
 
 	public @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
-		Set<@NonNull Node> precedingNodes = new HashSet<@NonNull Node>();
+		Set<@NonNull Node> precedingNodes = new HashSet<>();
 		getPredecessors(precedingNodes, targetNode);
 		precedingNodes.remove(targetNode);
 		return precedingNodes;
@@ -318,13 +312,17 @@ public class ReachabilityForest
 	}
 
 	/**
-	 * Return the edge from the preceding reachable node to the given reachable node. Null if none.
+	 * Return the navigation or compuation or predicate edge from the preceding reachable node to the given reachable node.
+	 * Null if none, else node is the target of the returned edge.
 	 */
 	public @Nullable Edge getReachingEdge(@NonNull Node node) {
 		return node2reachingEdge.get(node);
 	}
 
-	private void putCosts(@NonNull List<@Nullable List<@NonNull Node>> costs2nodes, int cost, @NonNull Node node) {
+	private void putCosts(@NonNull List<@Nullable List<@NonNull Node>> costs2nodes, int cost, @NonNull Node targetNode, @NonNull Edge reachingEdge) {
+		assert targetNode == reachingEdge.getTargetNode();
+		node2cost.put(targetNode, cost);
+		node2reachingEdge.put(targetNode, reachingEdge);
 		while (costs2nodes.size() <= cost) {
 			costs2nodes.add(null);
 		}
@@ -333,8 +331,8 @@ public class ReachabilityForest
 			nodes = new ArrayList<>();
 			costs2nodes.set(cost, nodes);
 		}
-		if (!nodes.contains(node)) {
-			nodes.add(node);
+		if (!nodes.contains(targetNode)) {
+			nodes.add(targetNode);
 		}
 	}
 
