@@ -270,7 +270,7 @@ public abstract class AbstractSimplePartitionFactory extends AbstractPartitionFa
 			boolean hasSourceNode = (sourceNode != null) && partition.hasNode(sourceNode);
 			if ((traceEdge == null) || !mappingPartitioner.hasRealizedEdge(traceEdge) || !hasSourceNode) {
 				boolean gotOne = false;
-				for (@NonNull Node precedingNode : partitionAnalysis.getPredecessors(node)) {
+				for (@NonNull Node precedingNode : partitionAnalysis.getPredecessorsClosure(node)) {
 					gotOne = true;
 					if (!partition.hasNode(precedingNode)) {
 						addNode(partition, precedingNode, mappingPartitioner.hasRealizedNode(precedingNode) ? Role.PREDICATED : QVTscheduleUtil.getNodeRole(precedingNode));

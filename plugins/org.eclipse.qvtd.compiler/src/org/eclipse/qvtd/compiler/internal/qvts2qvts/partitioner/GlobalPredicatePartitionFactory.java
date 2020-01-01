@@ -91,7 +91,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 		//	navigations are retained as is.
 		//
 		if (hasSynthesizedTrace) {
-			Rule rule = region.getReferredRule();
+			Rule rule = QVTscheduleUtil.getReferredRule(region);
 			for (@NonNull Node whenNode : mappingPartitioner.getPredicatedWhenNodes()) {
 				if (!mappingPartitioner.hasCheckedNode(whenNode)) {
 					addNode(partition, whenNode); //, Role.SPECULATED);
@@ -162,7 +162,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 				return false;
 			}
 		}
-		for (@NonNull Node precedingNode : partitionAnalysis.getPredecessors(node)) {
+		for (@NonNull Node precedingNode : partitionAnalysis.getPredecessorsClosure(node)) {
 			if (!isDownstreamFromCorollary(partitionAnalysis, precedingNode)) {
 				return false;
 			}

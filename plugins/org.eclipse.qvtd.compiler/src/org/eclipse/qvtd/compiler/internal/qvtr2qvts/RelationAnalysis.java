@@ -516,7 +516,7 @@ public class RelationAnalysis extends RuleAnalysis
 						}
 						reachabilityForest = new ReachabilityForest(rootNodes, navigableEdges);
 					}
-					Integer cost = reachabilityForest.getCost(argumentNode);
+					Integer cost = reachabilityForest.basicGetCost(argumentNode);
 					if (cost == null) {
 						invocationAnalysis.setStrict(true);
 						break;

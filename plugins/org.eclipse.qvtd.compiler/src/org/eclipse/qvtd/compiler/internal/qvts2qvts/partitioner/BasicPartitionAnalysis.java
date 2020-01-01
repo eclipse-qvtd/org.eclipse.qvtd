@@ -77,8 +77,8 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<@NonNull Ba
 		return explicitPredecessors;
 	}
 
-	protected @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
-		return reachabilityForest.getPredecessors(targetNode);
+	protected @NonNull Iterable<@NonNull Node> getPredecessorsClosure(@NonNull Node targetNode) {
+		return reachabilityForest.getPredecessorsClosure(targetNode);
 	}
 
 	//	@Override

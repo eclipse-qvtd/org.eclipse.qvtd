@@ -179,7 +179,7 @@ public class CheckedConditionAnalysis
 					Node targetNode = QVTscheduleUtil.getTargetNode(checkedEdge);
 					Integer sourceCost = reachabilityForest.getCost(sourceNode);
 					Integer targetCost = reachabilityForest.getCost(targetNode);
-					if ((sourceCost != null) && (targetCost != null) && (0 < targetCost) &&  (targetCost < sourceCost)) {
+					if ((0 < targetCost) &&  (targetCost < sourceCost)) {
 						checkedEdge = oppositeEdge;
 					}
 				}
@@ -206,7 +206,6 @@ public class CheckedConditionAnalysis
 				Node sourceNode = QVTscheduleUtil.getSourceNode(navigationEdge);
 				Integer sourceCost = reachabilityForest.getCost(sourceNode);
 				Integer targetCost = reachabilityForest.getCost(targetNode);
-				assert (sourceCost != null) && (targetCost != null);
 				if (sourceCost < targetCost) {
 					ClassDatum targetNodeClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
 					if (!QVTscheduleUtil.conformsTo(edgeTargetCompleteClass, targetNodeClassDatum)) {
@@ -221,14 +220,12 @@ public class CheckedConditionAnalysis
 		@Override
 		public Object visitNode(@NonNull Node node) {
 			Integer targetCost = reachabilityForest.getCost(node);
-			assert targetCost != null;
 			Edge firstEdge = null;
 			MultipleEdgeCheckedCondition checkedCondition = null;
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				Role edgeRole = partition.getRole(edge);
 				if ((edgeRole != null) && edgeRole.isOld() && !edge.isExpression()) {		// FIXME why exclude expression?
 					Integer sourceCost = reachabilityForest.getCost(QVTscheduleUtil.getSourceNode(edge));
-					assert sourceCost != null;
 					if (sourceCost <= targetCost) {
 						if (firstEdge == null) {
 							firstEdge = edge;

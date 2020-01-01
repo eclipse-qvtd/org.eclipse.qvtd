@@ -81,8 +81,7 @@ public abstract class AbstractPartitionFactory<R extends Region> extends RegionH
 		//	Add all the edges necessary to reach each node.
 		//
 		for (@NonNull Node node : partition.getPartialNodes()) {
-			Edge reachingEdge = reachabilityForest.getReachingEdge(node);
-			if (reachingEdge != null) {
+			for (Edge reachingEdge : reachabilityForest.getReachingEdges(node)) {
 				reachingEdges.add(reachingEdge);
 				if (!partition.hasEdge(reachingEdge)) {
 					Role sourceNodeRole = partition.getRole(reachingEdge.getEdgeSource());
@@ -105,7 +104,7 @@ public abstract class AbstractPartitionFactory<R extends Region> extends RegionH
 		}
 		//
 		//	Add all the edges necessary to reach each node.
-		//
+		/*
 		for (@NonNull Node node : partition.getPartialNodes()) {
 			if (node.isOperation()) {
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
@@ -129,27 +128,27 @@ public abstract class AbstractPartitionFactory<R extends Region> extends RegionH
 				}
 			}
 			else {
-				Edge edge = reachabilityForest.getReachingEdge(node);
-				if ((edge != null) && !partition.hasEdge(edge)) {
-					assert /*!edge.isSecondary() &&*/ !partition.hasEdge(edge);
-					Role sourceNodeRole = partition.getRole(edge.getEdgeSource());
-					if (sourceNodeRole != null) {
-						Role targetNodeRole = partition.getRole(edge.getEdgeTarget());
-						if (targetNodeRole != null) {
-							Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
-							if (edgeRole != null) {
-								if (edgeRole == Role.REALIZED) {
-									edgeRole = resolveReachingEdgeRole(partition, reachingEdges, edge, edgeRole);
-								}
+				for (@NonNull Edge edge : reachabilityForest.getReachingEdges(node)) {
+					if (!partition.hasEdge(edge)) {
+						Role sourceNodeRole = partition.getRole(edge.getEdgeSource());
+						if (sourceNodeRole != null) {
+							Role targetNodeRole = partition.getRole(edge.getEdgeTarget());
+							if (targetNodeRole != null) {
+								Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
 								if (edgeRole != null) {
-									addEdge(partition, edge, edgeRole);
+									if (edgeRole == Role.REALIZED) {
+										edgeRole = resolveReachingEdgeRole(partition, reachingEdges, edge, edgeRole);
+									}
+									if (edgeRole != null) {
+										addEdge(partition, edge, edgeRole);
+									}
 								}
 							}
 						}
 					}
 				}
 			}
-		}
+		} */
 		//
 		//	Add all the other edges whose redundancy must be checked, unless they have already been checked.
 		//

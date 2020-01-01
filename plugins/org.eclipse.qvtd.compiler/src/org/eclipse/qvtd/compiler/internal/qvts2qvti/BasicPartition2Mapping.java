@@ -138,9 +138,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 					Role targetNodeRole = partition.getRole(targetNode);
 					if ((targetNodeRole != null) && !targetNode.isDependency()) {
-						Integer sourceCost = reachabilityForest.getCost(sourceNode);
-						Integer targetCost = reachabilityForest.getCost(targetNode);
-						assert (sourceCost != null) && (targetCost != null);// && ((targetCost <= 0) || (sourceCost <= targetCost));
+						//	Integer sourceCost = reachabilityForest.getCost(sourceNode);
+						//	Integer targetCost = reachabilityForest.getCost(targetNode);
+						//	assert (sourceCost != null) && (targetCost != null);// && ((targetCost <= 0) || (sourceCost <= targetCost));
 						addNode(sourceNode);
 						addNode(targetNode);
 						edgeSchedule.add(edge);
@@ -152,17 +152,11 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		private void addNode(@NonNull Node targetNode) {
 			assert partition.getRole(targetNode) != null;
 			if (scheduledNodes.add(targetNode)) {
-				Integer targetCost = reachabilityForest.getCost(targetNode);
-				assert targetCost != null;
-				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-					Role edgeRole = partition.getRole(edge);
-					if ((edgeRole != null) && edgeRole.isOld() && !edge.isConditional()) {
-						Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-						Integer sourceCost = reachabilityForest.getCost(sourceNode);
-						assert sourceCost != null;
-						if (sourceCost < targetCost) {			// Is targetCost <= sourceCost possible ? ?? an assert error
-							addEdge(edge);
-						}
+				//	Integer targetCost = reachabilityForest.getCost(targetNode);
+				for (Edge edge : reachabilityForest.getReachingEdges(targetNode)) {
+					assert !edge.isPartial();
+					if (!edge.isConditional()) {
+						addEdge(edge);
 					}
 				}
 			}
@@ -748,6 +742,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	 * Determine a traversal order for the old edges then synthesize the patttern matching statements.
 	 */
 	private void createPatternMatch() {
+		if ("associationToForeignKey«speculated»".equals(partition.getName())) {
+			getClass();
+		}
 		OldEdgeSchedule oldSchedule = new OldEdgeSchedule();
 		Iterable<@NonNull CheckedCondition> checkedConditions = oldSchedule.analyze();
 		oldSchedule.synthesize(checkedConditions);
@@ -988,7 +985,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			precedingNodes = new HashSet<>();
 			node2precedingNodeClosure2.put(targetNode, precedingNodes);
 			precedingNodes.add(targetNode);
-			for (@NonNull Node sourceNode : reachabilityForest.getPredecessors(targetNode)) {
+			for (@NonNull Node sourceNode : reachabilityForest.getPredecessorsClosure(targetNode)) {
 				precedingNodes.addAll(getPrecedingNodes(sourceNode));
 			}
 		}

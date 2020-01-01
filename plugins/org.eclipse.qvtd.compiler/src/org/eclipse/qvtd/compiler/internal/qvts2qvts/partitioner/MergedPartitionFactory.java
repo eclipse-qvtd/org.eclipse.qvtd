@@ -131,7 +131,7 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 		for (@NonNull BasicPartitionAnalysis subPartitionAnalysis : subPartitionAnalyses) {
 			ReachabilityForest reachabilityForest = subPartitionAnalysis.getReachabilityForest();
 			for (@NonNull Node node : reachabilityForest.getNodes()) {
-				if (reachabilityForest.getCost(node) == 0) {
+				if (reachabilityForest.basicGetCost(node) == 0) {
 					rootNodes.add(node);
 				}
 			}

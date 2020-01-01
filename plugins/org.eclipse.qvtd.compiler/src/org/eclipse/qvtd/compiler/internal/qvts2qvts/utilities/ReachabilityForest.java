@@ -21,27 +21,328 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.MapLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
+import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Lists;
 
 /**
  * The ReachabilityForest comprises a tree of preferred edge paths from each head/leaf-constant root node to the
  * nodes that can be reached from them by to-one navigation. It answers the question: what preceding nodes are necessary
- *  to ensure that a given node is reachable by to-one navigation.
+ * to ensure that a given node is reachable by to-one navigation.
+ *
+ * Since the reachability is in access order, conditionality is completely ignored; callers should filter
+ * conditional retirns from getReachingEdges() as appropriate. Iterations are similarly ignored being largely
+ * treated as a single access, albeit with a slight cost penalty to discourage premature iteration evaluation.s
  */
 public class ReachabilityForest
 {
+	private static final int COLLECTION_COST = 10;
 	private static final int FORWARD_NAVIGATION_COST = 1;
 	//	private static final int INVERSE_MANY_NAVIGATION_COST = 5;
 	private static final int INVERSE_NAVIGATION_COST = 3;
 	private static final int ITERATOR_COST = 1;
+	private static final int KEY_COST = 15;
+	private static final int MAP_COST = 12;
 	private static final int OPERATION_COST = 10;
-	private static final int RESULT_COST = 1;
+	private static final int PREDICATE_COST = 1;
+	private static final int SHADOW_COST = 15;
+
+	private class EdgeVisitor extends AbstractExtendingQVTscheduleVisitor<Object, @NonNull ReachabilityForest>
+	{
+		protected final @NonNull List<@Nullable List<@NonNull Node>> costs2nodes = new ArrayList<>();
+		private @NonNull Node targetNode;
+		private int thisCost;
+		private Integer targetCost;
+
+		protected EdgeVisitor(@NonNull ReachabilityForest context, @NonNull Iterable<@NonNull Node> rootNodes) {
+			super(context);
+			List<@NonNull Node> rootNodesList = Lists.newArrayList(rootNodes);
+			this.targetNode = rootNodesList.get(0);		// A convenient non-null value.
+			costs2nodes.add(rootNodesList);				// Index 0 => rootNodes
+		}
+
+		private Object doOperationParameterEdge(@NonNull Edge object) {
+			int nextCost = thisCost + OPERATION_COST;
+			assert targetNode.isOperation();
+			List<@NonNull Edge> edges = null;
+			for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+				if ((incomingEdge instanceof OperationParameterEdge) || (incomingEdge instanceof OperationSelfEdge)) { //incomingEdge.isOld() && incomingEdge.isComputation()) {
+					Node node = QVTscheduleUtil.getSourceNode(incomingEdge);
+					Integer cost = node2cost.get(node);
+					if ((cost == null) || (cost > thisCost)) {
+						return null;
+					}
+					if (edges == null) {
+						edges = new ArrayList<>();
+					}
+					edges.add(incomingEdge);
+				}
+			}
+			if (edges != null) {
+				if ((targetCost == null) || (nextCost < targetCost)) {
+					putCosts(costs2nodes, nextCost, targetNode, edges);
+				}
+			}
+			return null;
+		}
+
+		private void putCosts(@NonNull List<@Nullable List<@NonNull Node>> costs2nodes, int cost, @NonNull Node targetNode, @NonNull Object reachingEdgeOrEdges) {
+			assert (targetCost == null) || (cost < targetCost);
+			List<@NonNull Edge> reachingEdges;
+			if (reachingEdgeOrEdges instanceof Edge) {
+				Edge edge = (Edge)reachingEdgeOrEdges;
+				assert !edge.isPartial();
+				assert (edge instanceof IteratedEdge) || (edge instanceof NavigationEdge) || (edge instanceof PredicateEdge);
+				assert edge.getTargetNode() == targetNode;
+				reachingEdges = Collections.singletonList(edge);
+			}
+			else {
+				@SuppressWarnings("unchecked")
+				List<@NonNull Edge> reachingEdges2 = (List<@NonNull Edge>)reachingEdgeOrEdges;
+				reachingEdges = reachingEdges2;
+				for (@NonNull Edge edge : reachingEdges) {
+					assert !edge.isPartial();
+					assert (edge instanceof CollectionPartEdge) || (edge instanceof KeyPartEdge) || (edge instanceof MapPartEdge) || (edge instanceof OperationParameterEdge) || (edge instanceof OperationSelfEdge) || (edge instanceof ShadowPartEdge);
+					assert edge.getTargetNode() == targetNode;
+				}
+			}
+			node2cost.put(targetNode, cost);
+			node2reachingEdges.put(targetNode, reachingEdges);
+			while (costs2nodes.size() <= cost) {
+				costs2nodes.add(null);
+			}
+			List<@NonNull Node> nodes = costs2nodes.get(cost);
+			if (nodes == null) {
+				nodes = new ArrayList<>();
+				costs2nodes.set(cost, nodes);
+			}
+			if (!nodes.contains(targetNode)) {
+				nodes.add(targetNode);
+			}
+		}
+
+		public void visitAll() {
+			//
+			//	Advance breadth first, one cost at a time, accumulating all edges that make one stage of progress.
+			//
+			for (thisCost = 0; thisCost < costs2nodes.size(); thisCost++) {
+				List<@NonNull Node> thisCostNodes = costs2nodes.get(thisCost);
+				if (thisCostNodes != null) {
+					//
+					//	Add the forward edges that make progress to moreMoreNodes and remember the
+					//	backward and inverse edges in case forward egdes alone are inadequate.
+					//
+					for (@NonNull Node sourceNode : thisCostNodes) {
+						assert node2cost.get(sourceNode) == thisCost;
+						for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
+							assert !edge.isCast();
+							if (!edge.isPartial()) {
+								targetNode = edge.getEdgeTarget();
+								if (!node2reachingEdges.containsKey(targetNode)) {
+									targetCost = node2cost.get(targetNode);
+									assert (targetCost == null) || (thisCost < targetCost);
+									edge.accept(this);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		@Override
+		public Object visitCastEdge(@NonNull CastEdge object) {
+			return visiting(object);		// Doesn't happen - CastEdges have been rewritten
+		}
+
+		@Override
+		public Object visitCollectionPartEdge(@NonNull CollectionPartEdge edge) {
+			int nextCost = thisCost + COLLECTION_COST;
+			assert targetNode instanceof CollectionLiteralNode;
+			List<@NonNull Edge> edges = null;
+			for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+				if (incomingEdge instanceof CollectionPartEdge) {
+					Node node = QVTscheduleUtil.getSourceNode(incomingEdge);
+					Integer cost = node2cost.get(node);
+					if ((cost == null) || (cost > thisCost)) {
+						return null;
+					}
+					if (edges == null) {
+						edges = new ArrayList<>();
+					}
+					edges.add(incomingEdge);
+				}
+			}
+			if (edges != null) {
+				if ((targetCost == null) || (nextCost < targetCost)) {
+					putCosts(costs2nodes, nextCost, targetNode, edges);
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public Object visitDependencyEdge(@NonNull DependencyEdge object) {
+			return null;
+		}
+
+		@Override
+		public Object visitIteratedEdge(@NonNull IteratedEdge edge) {
+			int nextCost = thisCost + ITERATOR_COST;
+			assert targetNode.isIterator();
+			putCosts(costs2nodes, nextCost, targetNode, edge);
+			return null;
+		}
+
+		@Override
+		public Object visitKeyPartEdge(@NonNull KeyPartEdge edge) {
+			int nextCost = thisCost + KEY_COST;
+			assert targetNode instanceof KeyedValueNode;
+			List<@NonNull Edge> edges = null;
+			for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+				if (incomingEdge instanceof KeyPartEdge) {
+					Node node = QVTscheduleUtil.getSourceNode(incomingEdge);
+					Integer cost = node2cost.get(node);
+					if ((cost == null) || (cost > thisCost)) {
+						return null;
+					}
+					if (edges == null) {
+						edges = new ArrayList<>();
+					}
+					edges.add(incomingEdge);
+				}
+			}
+			if (edges != null) {
+				if ((targetCost == null) || (nextCost < targetCost)) {
+					putCosts(costs2nodes, nextCost, targetNode, edges);
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public Object visitMapPartEdge(@NonNull MapPartEdge edge) {
+			int nextCost = thisCost + MAP_COST;
+			assert targetNode instanceof MapLiteralNode;
+			List<@NonNull Edge> edges = null;
+			for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+				if (incomingEdge instanceof MapPartEdge) {
+					Node node = QVTscheduleUtil.getSourceNode(incomingEdge);
+					Integer cost = node2cost.get(node);
+					if ((cost == null) || (cost > thisCost)) {
+						return null;
+					}
+					if (edges == null) {
+						edges = new ArrayList<>();
+					}
+					edges.add(incomingEdge);
+				}
+			}
+			if (edges != null) {
+				if ((targetCost == null) || (nextCost < targetCost)) {
+					putCosts(costs2nodes, nextCost, targetNode, edges);
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public Object visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
+			if (forwardEdges.contains(navigationEdge)) {
+				int nextCost = thisCost + FORWARD_NAVIGATION_COST;
+				if ((targetCost == null) || (nextCost < targetCost)) {
+					putCosts(costs2nodes, nextCost, targetNode, navigationEdge);
+				}
+			}
+			else {
+				NavigationEdge oppositeEdge = navigationEdge.getOppositeEdge();
+				if (oppositeEdge != null) {
+					if (forwardEdges.contains(oppositeEdge)) {
+						boolean isImplicit = QVTscheduleUtil.getReferredProperty(navigationEdge).isIsImplicit();
+						int nextCost = thisCost + (isImplicit ? INVERSE_NAVIGATION_COST : FORWARD_NAVIGATION_COST);
+						if ((targetCost == null) || (nextCost < targetCost)) {
+							putCosts(costs2nodes, nextCost, targetNode, navigationEdge);
+						}
+					}
+					//	else if (manyToOneEdges.contains(oppositeEdge)) {
+					//		int nextCost = thisCost + INVERSE_MANY_NAVIGATION_COST;
+					//		if ((targetCost == null) || (nextCost < targetCost)) {
+					//			putCosts(costs2nodes, nextCost, targetNode, oppositeEdge);
+					//		}
+					//	}
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public Object visitOperationParameterEdge(@NonNull OperationParameterEdge edge) {
+			return doOperationParameterEdge(edge);
+		}
+
+		@Override
+		public Object visitOperationSelfEdge(@NonNull OperationSelfEdge edge) {
+			return doOperationParameterEdge(edge);
+		}
+
+		@Override
+		public Object visitPredicateEdge(@NonNull PredicateEdge edge) {
+			int nextCost = thisCost + PREDICATE_COST;
+			putCosts(costs2nodes, nextCost, targetNode, edge);
+			return null;
+		}
+
+		@Override
+		public Object visitShadowPartEdge(@NonNull ShadowPartEdge edge) {
+			int nextCost = thisCost + SHADOW_COST;
+			assert targetNode instanceof ShadowNode;
+			List<@NonNull Edge> edges = null;
+			for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+				if (incomingEdge instanceof ShadowPartEdge) {
+					Node node = QVTscheduleUtil.getSourceNode(incomingEdge);
+					Integer cost = node2cost.get(node);
+					if ((cost == null) || (cost > thisCost)) {
+						return null;
+					}
+					if (edges == null) {
+						edges = new ArrayList<>();
+					}
+					edges.add(incomingEdge);
+				}
+			}
+			if (edges != null) {
+				if ((targetCost == null) || (nextCost < targetCost)) {
+					putCosts(costs2nodes, nextCost, targetNode, edges);
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public Object visiting(@NonNull Visitable visitable) {
+			throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
+		}
+	}
 
 	/**
 	 * The preferred non-secondary edges to be used in the tree.
@@ -54,10 +355,12 @@ public class ReachabilityForest
 	//	private final @NonNull Set<@NonNull Edge> manyToOneEdges = new HashSet<>(); -- removed: there is only to-one reachability
 
 	/**
-	 * The incoming edge for each node in the traversal forest, null at a root.
-	 * Each node2reachingEdge reachingEdge value's target is the node2reachingEdge key.
+	 * The incoming non-partial Predicate/Navigation edge or Parameter edges for each node in the traversal forest, null at a root.
+	 * Each node2reachingEdgeOrEdges value's target is the node2reachingEdgeOrEdges key.
+	 *
+	 * The value is null, or a PredicateEdge/NavigationEdge, or a List<ParameterEdge>.
 	 */
-	private final @NonNull Map<@NonNull Node, @Nullable Edge> node2reachingEdge = new HashMap<>();
+	private final @NonNull Map<@NonNull Node, @Nullable List<@NonNull Edge>> node2reachingEdges = new HashMap<>();
 
 	/**
 	 * The cost for each node from the root in the traversal forest, 0 at a root. The cost is equal
@@ -81,7 +384,7 @@ public class ReachabilityForest
 	 */
 	public ReachabilityForest(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigableEdge> availableNavigableEdges) {
 		for (@NonNull Node rootNode : rootNodes) {
-			node2reachingEdge.put(rootNode, null);
+			node2reachingEdges.put(rootNode, null);
 		}
 		for (@NonNull NavigableEdge edge : availableNavigableEdges) {
 			addEdge(edge);
@@ -89,7 +392,7 @@ public class ReachabilityForest
 		//
 		//	Analyze the descendants of the roots to identify the most simply navigated forest.
 		//
-		analyze(node2reachingEdge.keySet());
+		analyze();
 	}
 
 	protected void addEdge(@NonNull NavigableEdge edge) {
@@ -107,92 +410,21 @@ public class ReachabilityForest
 	/**
 	 * Identify the forest from the given roots.
 	 */
-	protected void analyze(@NonNull Iterable<@NonNull Node> rootNodes) {
-		List<@Nullable List<@NonNull Node>> costs2nodes = new ArrayList<>();
+	protected void analyze() {
+		Iterable<@NonNull Node> rootNodes = node2reachingEdges.keySet();
 		for (@NonNull Node rootNode : rootNodes) {
 			node2cost.put(rootNode, 0);
 		}
-		costs2nodes.add(Lists.newArrayList(rootNodes));
-		//
-		//	Advance breadth first, one cost at a time, accumulating all edges that make one stage of progress.
-		//
-		for (int thisCost = 0; thisCost < costs2nodes.size(); thisCost++) {
-			List<@NonNull Node> thisCostNodes = costs2nodes.get(thisCost);
-			if (thisCostNodes != null) {
-				//
-				//	Add the forward edges that make progress to moreMoreNodes and remember the
-				//	backward and inverse edges in case forward egdes alone are inadequate.
-				//
-				for (@NonNull Node sourceNode : thisCostNodes) {
-					assert node2cost.get(sourceNode) == thisCost;
-					for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
-						assert !edge.isCast();
-						Node targetNode = edge.getEdgeTarget();
-						if (!node2reachingEdge.containsKey(targetNode)) {
-							Integer targetCost = node2cost.get(targetNode);
-							assert (targetCost == null) || (thisCost < targetCost);
-							if (edge.isNavigation()) {
-								NavigationEdge navigationEdge = (NavigationEdge) edge;
-								if (forwardEdges.contains(navigationEdge)) {
-									int nextCost = thisCost + FORWARD_NAVIGATION_COST;
-									if ((targetCost == null) || (nextCost < targetCost)) {
-										putCosts(costs2nodes, nextCost, targetNode, edge);
-									}
-								}
-								else {
-									NavigationEdge oppositeEdge = navigationEdge.getOppositeEdge();
-									if (oppositeEdge != null) {
-										if (forwardEdges.contains(oppositeEdge)) {
-											boolean isImplicit = QVTscheduleUtil.getReferredProperty(navigationEdge).isIsImplicit();
-											int nextCost = thisCost + (isImplicit ? INVERSE_NAVIGATION_COST : FORWARD_NAVIGATION_COST);
-											if ((targetCost == null) || (nextCost < targetCost)) {
-												putCosts(costs2nodes, nextCost, targetNode, navigationEdge);
-											}
-										}
-										//	else if (manyToOneEdges.contains(oppositeEdge)) {
-										//		int nextCost = thisCost + INVERSE_MANY_NAVIGATION_COST;
-										//		if ((targetCost == null) || (nextCost < targetCost)) {
-										//			putCosts(costs2nodes, nextCost, targetNode, oppositeEdge);
-										//		}
-										//	}
-									}
-								}
-							}
-							else if (edge.isComputation() /*&& edge.isUnconditional()*/) {
-								int nextCost = thisCost + OPERATION_COST;
-								if (targetNode.isOperation()) {
-									for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-										if (incomingEdge.isOld() && incomingEdge.isComputation()) {
-											Node node = QVTscheduleUtil.getSourceNode(incomingEdge);
-											Integer cost = node2cost.get(node);
-											if ((cost == null) || (cost > thisCost)) {
-												nextCost = -1;
-												break;
-											}
-										}
-									}
-								}
-								else if (targetNode.isIterator()) {
-									nextCost = thisCost + ITERATOR_COST;
-								}
-								else {
-									nextCost = thisCost + RESULT_COST;
-								}
-								if (nextCost > 0) {
-									if ((targetCost == null) || (nextCost < targetCost)) {
-										putCosts(costs2nodes, nextCost, targetNode, edge);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+		EdgeVisitor edgeVisitor = new EdgeVisitor(this, rootNodes);
+		edgeVisitor.visitAll();
 	}
 
-	public @Nullable Integer getCost(@NonNull Node node) {
+	public @Nullable Integer basicGetCost(@NonNull Node node) {
 		return node2cost.get(node);
+	}
+
+	public @NonNull Integer getCost(@NonNull Node node) {
+		return ClassUtil.nonNullState(node2cost.get(node));
 	}
 
 	/**
@@ -259,7 +491,8 @@ public class ReachabilityForest
 				public int compare(@NonNull Node o1, @NonNull Node o2) {
 					Integer c1 = node2cost.get(o1);
 					Integer c2 = node2cost.get(o2);
-					assert (c1 != null) && (c2 != null);
+					assert c1 != null : o1 + " is not reachable within " + o1.getOwningRegion();		// FIXME change to PartitionProblem
+					assert c2 != null : o2 + " is not reachable within " + o2.getOwningRegion();
 					int diff = c1 - c2;
 					if (diff != 0) {
 						return diff;
@@ -271,67 +504,53 @@ public class ReachabilityForest
 		return nodeCostComparator2;
 	}
 
+	/**
+	 * Return the reachable nodes in lowest reaching cost first order.
+	 */
 	public @NonNull List<@NonNull Node> getMostReachableFirstNodes() {
 		List<@NonNull Node> nodes = new ArrayList<>(node2cost.keySet());
 		Collections.sort(nodes, getNodeCostComparator());
 		return nodes;
 	}
 
+	/**
+	 * Return all reachable nodes.
+	 */
 	public @NonNull Iterable<@NonNull Node> getNodes() {
-		return node2reachingEdge.keySet();
+		return node2reachingEdges.keySet();
 	}
 
-	public @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
+	/**
+	 * Return the closure of the reachingEdges source nodes.
+	 */
+	public @NonNull Iterable<@NonNull Node> getPredecessorsClosure(@NonNull Node targetNode) {
 		Set<@NonNull Node> precedingNodes = new HashSet<>();
-		getPredecessors(precedingNodes, targetNode);
+		getPredecessorsClosure(precedingNodes, targetNode);
 		precedingNodes.remove(targetNode);
 		return precedingNodes;
 	}
-	private void getPredecessors(@NonNull Set<@NonNull Node> precedingNodes, @NonNull Node targetNode) {
+	private void getPredecessorsClosure(@NonNull Set<@NonNull Node> precedingNodes, @NonNull Node targetNode) {
 		if (precedingNodes.add(targetNode)) {
-			Edge reachingEdge = getReachingEdge(targetNode);
-			if ((reachingEdge != null) && (reachingEdge.isNavigation() || reachingEdge.isPredicate())) {
+			for (@NonNull Edge reachingEdge : getReachingEdges(targetNode)) {
 				assert !reachingEdge.isPartial();
 				Node sourceNode = reachingEdge.getEdgeSource();
-				if (sourceNode == targetNode) {		// invert a backward edge
-					sourceNode = reachingEdge.getEdgeTarget();
-				}
-				getPredecessors(precedingNodes, sourceNode);
-			}
-			else if (targetNode.isOperation()) {
-				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-					assert !edge.isCast();
-					if (edge.isComputation()) { // || (edge.isNavigation() && !edge.isRealized())) {
-						getPredecessors(precedingNodes, edge.getEdgeSource());
-					}
-				}
+				getPredecessorsClosure(precedingNodes, sourceNode);
 			}
 		}
 	}
 
 	/**
-	 * Return the navigation or compuation or predicate edge from the preceding reachable node to the given reachable node.
-	 * Null if none, else node is the target of the returned edge.
+	 * Return the navigation or predicate or iterated edge from the preceding reachable node to the given
+	 * reachable node. Else return the computation edges needed to compute the given reachable node.
+	 * Node is the target of each returned edge which may be noone for a root/head node.
 	 */
-	public @Nullable Edge getReachingEdge(@NonNull Node node) {
-		return node2reachingEdge.get(node);
-	}
-
-	private void putCosts(@NonNull List<@Nullable List<@NonNull Node>> costs2nodes, int cost, @NonNull Node targetNode, @NonNull Edge reachingEdge) {
-		assert targetNode == reachingEdge.getTargetNode();
-		node2cost.put(targetNode, cost);
-		node2reachingEdge.put(targetNode, reachingEdge);
-		while (costs2nodes.size() <= cost) {
-			costs2nodes.add(null);
+	public @NonNull Iterable<@NonNull Edge> getReachingEdges(@NonNull Node node) {
+		List<@NonNull Edge> edges = node2reachingEdges.get(node);
+		if (edges == null) {
+			edges = Collections.emptyList();
+			node2reachingEdges.put(node, edges);
 		}
-		List<@NonNull Node> nodes = costs2nodes.get(cost);
-		if (nodes == null) {
-			nodes = new ArrayList<>();
-			costs2nodes.set(cost, nodes);
-		}
-		if (!nodes.contains(targetNode)) {
-			nodes.add(targetNode);
-		}
+		return edges;
 	}
 
 	@Override
@@ -345,8 +564,13 @@ public class ReachabilityForest
 			s.append(node2cost.get(node));
 			s.append(": ");
 			s.append(node.getName());
-			s.append(" : ");
-			s.append(node2reachingEdge.get(node));
+			s.append(" :");
+			List<@NonNull Edge> edges = node2reachingEdges.get(node);
+			assert edges != null;
+			for (@NonNull Edge edge : edges) {
+				s.append(" ");
+				s.append(edge);
+			}
 		}
 		return s.toString();
 	}
