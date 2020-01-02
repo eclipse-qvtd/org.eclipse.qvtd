@@ -33,8 +33,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.ConcurrentPartitionMerger;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.SequentialPartitionMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
@@ -498,8 +496,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//	partitionedTransformationAnalysis.analyzePartitionEdges(partitionSchedule);
 		List<Region> activeRegions = rootRegion.getActiveRegions();
 		activeRegions.clear();
-		List<@NonNull Concurrency> partitionSchedule1 = ConcurrentPartitionMerger.merge(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
-		List<@NonNull Concurrency> partitionSchedule2 = SequentialPartitionMerger.merge(partitionedTransformationAnalysis, partitionSchedule1);
+		List<@NonNull Concurrency> partitionSchedule1 = rootPartitionAnalysis.getPartitionSchedule(); //ConcurrentPartitionMerger.merge(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
+		List<@NonNull Concurrency> partitionSchedule2 = partitionSchedule1; //SequentialPartitionMerger.merge(partitionedTransformationAnalysis, partitionSchedule1);
 		@SuppressWarnings("unused") List<@NonNull Concurrency> mergedPartitionSchedule = partitionSchedule2;
 		//
 		//	Identify the input models.
