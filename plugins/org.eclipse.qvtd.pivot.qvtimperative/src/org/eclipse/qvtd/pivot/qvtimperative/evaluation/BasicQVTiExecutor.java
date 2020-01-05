@@ -131,13 +131,23 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 
 	public static class InterpretedInvocationConstructor extends AbstractInvocationConstructor.Incremental
 	{
+		private static @NonNull Interval createInterval(@NonNull InvocationManager invocationManager, Mapping asMapping) {
+			Integer firstPass = asMapping.getFirstPass();
+			if (firstPass != null) {
+				return invocationManager.lazyCreateInterval(firstPass);
+			}
+			else {
+				return invocationManager.createInterval();			// Legacy no-pass-numbers support
+			}
+		}
+
 		protected final @NonNull BasicQVTiExecutor executor;
 		protected final @NonNull MappingCall mappingCall;
 		protected final @NonNull EvaluationVisitor undecoratedVisitor;
 
 		public InterpretedInvocationConstructor(@NonNull BasicQVTiExecutor executor, @NonNull Mapping asMapping,
 				@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
-			super(executor.getInvocationManager(), QVTimperativeUtil.getName(asMapping), executor.getInvocationManager().createInterval());
+			super(executor.getInvocationManager(), QVTimperativeUtil.getName(asMapping), createInterval(executor.getInvocationManager(), asMapping));
 			this.executor = executor;
 			this.mappingCall = mappingCall;
 			this.undecoratedVisitor = undecoratedVisitor;
