@@ -69,4 +69,25 @@ public interface SlotState extends ExecutionVisitable
 		@NonNull Iterable<Execution.@NonNull Incremental> getTargets();
 		void revokeAssigned();
 	}
+
+	/**
+	 * A Speculating SlotState maintains the local relationships between the input speculations that must be satisfied and
+	 * this output speculation.
+	 */
+	public interface Speculating extends SlotState
+	{
+		/**
+		 * Specify that slotState is a required speculation input of this Speculating SlotState output.
+		 */
+		void addInput(@NonNull Speculating slotState);
+
+		/**
+		 * Rerturn the speculation inputs that must be satisfied for this speculation output to be satisfied.
+		 */
+		@NonNull Iterable<? extends @NonNull Speculating> getInputs();
+
+		@Nullable Boolean getStatus();
+
+		void setStatus(@NonNull Boolean successStatus);
+	}
 }

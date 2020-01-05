@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractSlotState;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -72,6 +73,11 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 		@Override
 		protected @NonNull SimpleSlotState createSimpleSlotState(@NonNull EAttribute eFeature, @Nullable Object ecoreValue) {
 			return new SimpleSlotState(this, eFeature, ecoreValue);
+		}
+
+		@Override
+		protected @NonNull SpeculatingSlotState createSpeculatingSlotState(@NonNull EAttribute eFeature) {
+			return new SpeculatingSlotState(this, eFeature);
 		}
 	}
 
@@ -184,7 +190,7 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 			switch (mode) {
 				case ASSIGNABLE:
 				case REASSIGNABLE:
-					throw new InvocationFailedException(this);
+					throw new InvocationFailedException(this, false);
 				case ASSIGNED:
 					break;
 			}
@@ -473,6 +479,41 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 	{
 		public SimpleSlotState(@NonNull AbstractObjectState<@NonNull IncrementalSlotState> objectState, @NonNull EAttribute eFeature, @Nullable Object ecoreValue) {
 			super(objectState, eFeature, ecoreValue);
+		}
+	}
+
+	/**
+	 * SlotState describing a Speculatable Boolean result.
+	 */
+	static class SpeculatingSlotState extends IncrementalSlotState implements SlotState.Speculating
+	{
+		private final @NonNull UniqueList<@NonNull SpeculatingSlotState> inputSpeculatables = new UniqueList<>();
+		private @Nullable Boolean status = null;
+
+		public SpeculatingSlotState(@NonNull AbstractObjectState<@NonNull IncrementalSlotState> objectState, @NonNull EAttribute eFeature) {
+			super(objectState, eFeature, NOT_A_VALUE);
+		}
+
+		@Override
+		public void addInput(@NonNull Speculating inputSpeculatable) {
+			inputSpeculatables.add((SpeculatingSlotState)inputSpeculatable);
+		}
+
+		@Override
+		public @NonNull Iterable<? extends @NonNull Speculating> getInputs() {
+			return inputSpeculatables;
+		}
+
+		@Override
+		public @Nullable Boolean getStatus() {
+			return status;
+		}
+
+		@Override
+		public void setStatus(@NonNull Boolean successStatus) {
+			this.status = successStatus;
+			//	mode = SlotMode.ASSIGNED;
+			assignedSlot();
 		}
 	}
 

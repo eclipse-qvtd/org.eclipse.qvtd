@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
+import org.eclipse.qvtd.runtime.evaluation.SlotState.Speculating;
 
 /**
  * An AbstractObjectState supports the slot states of an EObject.
@@ -74,6 +75,8 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 
 	protected abstract @NonNull SS createSimpleSlotState(@NonNull EAttribute eFeature, @Nullable Object ecoreValue);
 
+	protected abstract @NonNull Speculating createSpeculatingSlotState(@NonNull EAttribute eFeature);
+
 	public @NonNull Iterable<@NonNull SS> getFeatures() {
 		return feature2slotState != null ? ClassUtil.nullFree(feature2slotState.values()) : Collections.emptyList();
 	}
@@ -86,6 +89,18 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 
 	public @NonNull AbstractObjectManager<@NonNull SS> getObjectManager() {
 		return objectManager;
+	}
+
+	public @NonNull Speculating getSpeculatingSlotState(@NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState) {
+		@Nullable SS slotState = basicGetSlotState(successAttribute);
+		if (slotState == null) {
+			slotState = (SS) createSpeculatingSlotState(successAttribute);
+			putSlotState(successAttribute, slotState);
+		}
+		if (outputSpeculatingSlotState != null) {
+			outputSpeculatingSlotState.addInput((Speculating)slotState);
+		}
+		return (Speculating) slotState;
 	}
 
 	/**

@@ -25,7 +25,7 @@ public abstract class AbstractInvocationInternal implements Invocation
 
 	@NonNull AbstractInvocationInternal prev = this;
 	@NonNull AbstractInvocationInternal next = this;
-	public @Nullable SlotState debug_blockedBy = null;
+	@Nullable SlotState blockedBy = null;
 
 	protected AbstractInvocationInternal(@NonNull Interval interval) {
 		this.interval = interval;

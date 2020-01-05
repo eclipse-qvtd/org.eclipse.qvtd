@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -33,6 +34,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.NumberValue;
 import org.eclipse.ocl.pivot.values.UnlimitedNaturalValue;
+import org.eclipse.qvtd.runtime.evaluation.SlotState.Speculating;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractObjectState;
 import org.eclipse.qvtd.runtime.internal.evaluation.EOppositeReferenceImpl;
 
@@ -187,6 +189,12 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 		else {
 			return (Iterable<@NonNull SS>)EMPTY_SLOT_STATE_LIST;
 		}
+	}
+
+	@Override
+	public SlotState.@NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState) {
+		AbstractObjectState<@NonNull SS> objectState = getObjectState(object);
+		return objectState.getSpeculatingSlotState(successAttribute, outputSpeculatingSlotState);
 	}
 
 	@Override

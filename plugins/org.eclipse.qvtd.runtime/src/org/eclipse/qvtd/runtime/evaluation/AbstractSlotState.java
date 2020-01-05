@@ -30,6 +30,7 @@ public abstract class AbstractSlotState implements SlotState
 		ASSIGNABLE,		// No assignment has been performed, object reads are blocked (collections reads may be unblocked)
 		ASSIGNED,		// Last assignment has been performed, reads are unblocked
 		REASSIGNABLE	// Incremental-only - No assignment has been performed by a re-execution, object reads are blocked (collections reads may be unblocked)
+		//	SPECULATING		// Awaiting resolution of global speculation to determine (Boolean) value
 	}
 
 	public abstract static class Incremental extends AbstractSlotState implements SlotState.Incremental

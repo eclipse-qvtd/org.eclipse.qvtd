@@ -22,10 +22,12 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 public class InvocationFailedException extends InvalidValueException
 {
 	public final @NonNull SlotState slotState;
+	public final boolean isSpeculation;
 
-	public InvocationFailedException(@NonNull SlotState slotState) {
-		super("not-ready");
+	public InvocationFailedException(@NonNull SlotState slotState, boolean isSpeculation) {
+		super(isSpeculation ? "speculating" : "not-ready");
 		this.slotState = slotState;
+		this.isSpeculation = isSpeculation;
 	}
 
 	@Override

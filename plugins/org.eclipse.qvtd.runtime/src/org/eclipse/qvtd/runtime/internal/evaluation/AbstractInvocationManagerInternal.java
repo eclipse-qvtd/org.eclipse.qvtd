@@ -12,7 +12,6 @@ package org.eclipse.qvtd.runtime.internal.evaluation;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -22,7 +21,6 @@ import org.eclipse.qvtd.runtime.evaluation.DefaultInterval;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -104,9 +102,9 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 	public boolean flush() {
 		for (int index = nextIndex; index < intervals.size(); index = nextIndex) {
 			nextIndex = index+1;
-			Interval nextInterval = intervals.get(index);
+			Interval currentInterval = intervals.get(index);
 			AbstractTransformer.INVOCATIONS.println("--------" + index + "--------");
-			nextInterval.flush();				// May set nextIndex back to 'same' or even earlier
+			currentInterval.flush();				// May set nextIndex back to 'same' or even earlier
 		}
 		for (@NonNull Interval interval : intervals) {
 			if (!interval.isFlushed()) {
@@ -120,6 +118,14 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 	public @NonNull Executor getExecutor() {
 		return executor;
 	}
+
+	/*	@Override  -- use lazyCreateInterval
+	public @NonNull Interval getInterval(int intervalIndex) {
+		while (intervals.size() <= intervalIndex) {
+			createInterval();
+		}
+		return intervals.get(intervalIndex);
+	} */
 
 	@Override
 	public @NonNull Iterable<@NonNull Interval> getIntervals() {
@@ -150,7 +156,7 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 			return createInterval();
 		}
 		while (intervals.size() <= intervalIndex) {
-			new DefaultInterval(this, intervals.size());
+			createInterval();
 		}
 		return intervals.get(intervalIndex);
 	}

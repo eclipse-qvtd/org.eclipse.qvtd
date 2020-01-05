@@ -114,7 +114,7 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 	 */
 	private @Nullable EClassAnalysis eClassAnalysisListHeads @Nullable [];
 
-	protected AbstractTypedModelInstance(@NonNull ModelsManager modelsManager, @NonNull String name) {
+	protected AbstractTypedModelInstance(@NonNull ModelsManager modelsManager, @NonNull String name) {		// FIXME Should have input/input-output/output/trace to allow initConnections suppression for outputs
 		this.modelsManager = modelsManager;
 		this.name = name;
 		this.eClassAnalysisListHeads = null;
@@ -454,7 +454,7 @@ public abstract class AbstractTypedModelInstance implements TypedModelInstance
 	}
 
 	@Override
-	public void initConnections(@NonNull Interval rootInterval, @NonNull ModeFactory modeFactory) {
+	public void initConnections(@NonNull Interval rootInterval, @NonNull ModeFactory modeFactory) {	// FIXME Should not occur for outputs
 		@NonNull ClassId[] classIndex2classId2 = classIndex2classId;
 		if (classIndex2classId2 != null) {
 			@NonNull Connection [] classIndex2connection = this.classIndex2connection = new @NonNull Connection[classIndex2classId2.length];

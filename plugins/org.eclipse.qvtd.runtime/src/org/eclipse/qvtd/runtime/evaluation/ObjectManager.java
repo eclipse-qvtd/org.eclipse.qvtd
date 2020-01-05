@@ -10,10 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.runtime.evaluation.SlotState.Speculating;
 
 /**
  * An ObjectManager supervises the state of relevant properties in objects used by a mapping invocation.
@@ -67,6 +69,8 @@ public interface ObjectManager extends ExecutionVisitable
 
 	@NonNull Iterable<@NonNull ? extends Object> getObjects();
 	@NonNull Iterable<@NonNull ? extends SlotState> getSlotStates(@NonNull Object object);
+
+	SlotState.@NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState);
 
 	/**
 	 * Throw an InvocationFailedException if the eFeature of eObject has not yet been assigned.

@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
@@ -39,6 +40,7 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -82,6 +84,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager.QVTiTypedModelInstance;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -92,11 +95,12 @@ import org.eclipse.qvtd.runtime.evaluation.Computation;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
-import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
+import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
+import org.eclipse.qvtd.runtime.evaluation.SlotState;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
@@ -728,6 +732,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	@Override
 	public @Nullable Object internalExecuteMapping(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
 		boolean success = false;
+		boolean isSpeculation = false;
 		try {
 			for (Statement statement : mapping.getOwnedStatements()) {
 				Object result = statement.accept(undecoratedVisitor);
@@ -739,6 +744,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			return success;
 		}
 		catch (InvocationFailedException e) {
+			isSpeculation = e.isSpeculation;
 			throw e;
 		}
 		catch (Throwable e) {
@@ -750,13 +756,15 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			//			return success;
 		}
 		finally {
-			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(mapping)) {
-				if (mappingParameter instanceof GuardParameter) {
-					Property successProperty = ((GuardParameter)mappingParameter).getSuccessProperty();
-					if (successProperty != null) {
-						Object guardVariable = getValueOf(mappingParameter);
-						if (guardVariable != null) {
-							successProperty.initValue(guardVariable, success);
+			if (!isSpeculation) {
+				for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(mapping)) {
+					if (mappingParameter instanceof GuardParameter) {
+						Property successProperty = ((GuardParameter)mappingParameter).getSuccessProperty();
+						if (successProperty != null) {
+							Object guardVariable = getValueOf(mappingParameter);
+							if (guardVariable != null) {
+								successProperty.initValue(guardVariable, success);
+							}
 						}
 					}
 				}
@@ -924,6 +932,53 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			assert currentInvocation2 != null;
 			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue, isPartial);
 		}
+	}
+
+	@Override
+	public @Nullable Boolean internalExecuteSpeculateStatement(@NonNull SpeculateStatement speculateStatement) {
+		Mapping iMapping = QVTimperativeUtil.getContainingMapping(speculateStatement);
+		for (@NonNull MappingParameter iMappingParameter : QVTimperativeUtil.getOwnedMappingParameters(iMapping)) {
+			if (iMappingParameter instanceof GuardParameter) {
+				Object thisParameter = getValueOf(iMappingParameter);
+				assert thisParameter != null;
+				Property successProperty = ((GuardParameter)iMappingParameter).getSuccessProperty();
+				if (successProperty != null) {	// Should be exactly one, but may be nested loop handles a trace merge
+					EAttribute eAttribute = (EAttribute) successProperty.getESObject();
+					SlotState.Speculating outputSpeculatingSlotState = objectManager.getSpeculatingSlotState(thisParameter, eAttribute, null);
+					Boolean status = outputSpeculatingSlotState.getStatus();
+					if (status != null) {
+						return status;
+					}
+					boolean needsSpeculation = false;
+					for (@NonNull OCLExpression iExpression : QVTimperativeUtil.getOwnedExpressions(speculateStatement)) {
+						if (iExpression instanceof PropertyCallExp) {
+							PropertyCallExp iCallExpression = (PropertyCallExp)iExpression;
+							OCLExpression sourceExpression = QVTimperativeUtil.getOwnedSource(iCallExpression);
+							Object sourceObject = evaluate(sourceExpression);
+							if (sourceObject != null) {
+								Property accessProperty = QVTimperativeUtil.getReferredProperty(iCallExpression);
+								EAttribute accessAttribute = (EAttribute) accessProperty.getESObject();
+								SlotState.Speculating inputSpeculatingSlotState = objectManager.getSpeculatingSlotState(sourceObject, accessAttribute, outputSpeculatingSlotState);
+								if (inputSpeculatingSlotState != outputSpeculatingSlotState) {			// Bypass the depends-on-self unit cycle
+									needsSpeculation = true;
+								}
+							}
+							else if (sourceExpression.isIsRequired()) {
+								throw new InvalidValueException("null expression for speculated property source");
+							}
+						}
+					}
+					if (needsSpeculation) {
+						throw new InvocationFailedException(outputSpeculatingSlotState, true);
+					}
+					//	else {
+					outputSpeculatingSlotState.setStatus(Boolean.TRUE);	// redundant ??
+					outputSpeculatingSlotState.assigned(thisParameter, eAttribute, Boolean.TRUE, false);
+					//	}
+				}
+			}
+		}
+		return Boolean.TRUE;
 	}
 
 	@Override

@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -77,10 +76,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
-import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
+import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -619,8 +617,8 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
-	public @Nullable Object visitSpeculateStatement(@NonNull SpeculateStatement speculateStatement) {
-		return visiting(speculateStatement);	// FIXME
+	public @Nullable Boolean visitSpeculateStatement(@NonNull SpeculateStatement speculateStatement) {
+		return executor.internalExecuteSpeculateStatement(speculateStatement);
 	}
 
 	@Override

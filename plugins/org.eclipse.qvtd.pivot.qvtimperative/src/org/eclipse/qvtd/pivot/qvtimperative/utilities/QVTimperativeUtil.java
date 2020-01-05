@@ -285,6 +285,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return iTransformation;
 	}
 
+	public static @NonNull Property getSuccessProperty(@NonNull GuardParameter asMappingParameter) {
+		return ClassUtil.nonNullState(asMappingParameter.getSuccessProperty());
+	}
+
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {
 		Property referredProperty = ClassUtil.nonNullState(asSetStatement.getTargetProperty());
 		if (asSetStatement.isIsOpposite()) {
