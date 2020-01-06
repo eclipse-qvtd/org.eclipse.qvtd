@@ -90,6 +90,14 @@
     <genClasses ecoreClass="qvticgmodel.ecore#//CGSequence">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGSequence/ownedStatements"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="qvticgmodel.ecore#//CGSpeculateExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGSpeculateExp/parts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGSpeculateExp/speculated"/>
+    </genClasses>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGSpeculatePart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGSpeculatePart/objectExp"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGSpeculatePart/eStructuralFeature"/>
+    </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGTransformation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGTransformation/ownedMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGTransformation/ownedTypedModels"/>
