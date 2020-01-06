@@ -63,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -695,7 +696,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 						}
 					}
 				}
-				else {
+				else if (!(consumer.eContainer() instanceof SpeculateStatement)) {
 					PassRange consumerPassRange = PassRange.create(consumer);
 					boolean needsObserve = !productionRange.precedes(consumerPassRange);
 					boolean isObserve = isObserve(consumer);
