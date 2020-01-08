@@ -279,6 +279,14 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	}
 
 	/**
+	 * Return true if navigationEdge is a corollary of some mapping.
+	 */
+	public boolean isCorollary(@NonNull NavigationEdge navigationEdge) {
+		List<@NonNull Region> corollaryOf = getCorollaryOf(navigationEdge);
+		return (corollaryOf != null);
+	}
+
+	/**
 	 * Return true if node is a corollary of some mapping.
 	 */
 	public boolean isCorollary(@NonNull Node node) {
