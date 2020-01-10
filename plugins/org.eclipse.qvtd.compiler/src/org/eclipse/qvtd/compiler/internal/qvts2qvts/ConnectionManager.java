@@ -354,7 +354,7 @@ public class ConnectionManager
 	}
 
 	private @NonNull EdgeConnection createEdgeConnection(@NonNull RootRegion rootRegion, @NonNull  Set<@NonNull NavigableEdge> sourceSet, @NonNull Property property, @NonNull SymbolNameBuilder s) {
-		assert !property.isIsImplicit();
+		//	assert !property.isIsImplicit();				implicit opposite of a 1:N is the connected property
 		EdgeConnection edgeConnection = QVTscheduleFactory.eINSTANCE.createEdgeConnection();
 
 		//		protected ConnectionImpl(@NonNull RootRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull String name) {
