@@ -361,8 +361,8 @@ public abstract class AbstractIntervalInternal implements Interval
 		int i = 0;
 		for (AbstractConnection aConnection = headConnection; aConnection != null; aConnection = aConnection.getNextConnection()) {
 			i++;
-			if (i > 100) {
-				i = 999999;
+			if (++i >= 100) {
+				s.append(">=");
 				break;
 			}
 		}
@@ -373,8 +373,8 @@ public abstract class AbstractIntervalInternal implements Interval
 		if (blockedInvocation != null) {
 			j++;
 			while ((blockedInvocation = blockedInvocation.next) != blockedInvocations) {
-				if (++j > 100) {
-					j = 999999;
+				if (++j >= 100) {
+					s.append(">=");
 					break;
 				}
 			}
@@ -386,8 +386,8 @@ public abstract class AbstractIntervalInternal implements Interval
 		if (waitingInvocation != null) {
 			k++;
 			while ((waitingInvocation = waitingInvocation.next) != waitingInvocations) {
-				if (++k > 100) {
-					k = 999999;
+				if (++k >= 100) {
+					s.append(">=");
 					break;
 				}
 			}
