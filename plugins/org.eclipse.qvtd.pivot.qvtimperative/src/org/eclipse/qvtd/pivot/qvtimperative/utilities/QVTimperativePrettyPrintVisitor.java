@@ -115,7 +115,23 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		if (pBuffer.isIsStrict()) {
 			context.append("strict ");
 		}
-		return visitVariableDeclaration(pBuffer);
+		context.append("buffer");
+		Integer firstPass = pBuffer.getFirstPass();
+		if (firstPass != null) {
+			context.append(":");
+			context.append(firstPass);
+			Integer lastPass = pBuffer.getLastPass();
+			if (lastPass != null) {
+				context.append("..");
+				context.append(lastPass);
+			}
+		}
+		context.append(" ");
+		context.appendName(pBuffer);
+		context.append(" : ");
+		context.appendTypedMultiplicity(pBuffer);
+		context.append(";\n");
+		return null;
 	}
 
 	@Override
@@ -163,7 +179,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		boolean isFirst = true;
 		for (@NonNull TypedModel pTypedModel : QVTimperativeUtil.getInputTypedModels(pEntryPoint)) {
 			if (isFirst) {
-				context.append("check ");
+				context.append("input ");
 			}
 			else {
 				context.append(", ");
@@ -173,7 +189,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		isFirst = true;
 		for (@NonNull TypedModel pTypedModel : QVTimperativeUtil.getOutputTypedModels(pEntryPoint)) {
 			if (isFirst) {
-				context.append("enforce ");
+				context.append("output ");
 			}
 			else {
 				context.append(", ");
@@ -265,7 +281,18 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		if (pMapping.isIsStrict()) {
 			context.append("strict ");
 		}
-		context.append("map ");
+		context.append("map");
+		Integer firstPass = pMapping.getFirstPass();
+		if (firstPass != null) {
+			context.append(":");
+			context.append(firstPass);
+			Integer lastPass = pMapping.getLastPass();
+			if (lastPass != null) {
+				context.append("..");
+				context.append(lastPass);
+			}
+		}
+		context.append(" ");
 		context.appendName(pMapping);
 		context.append(" in ");
 		context.appendName(pMapping.getTransformation());
