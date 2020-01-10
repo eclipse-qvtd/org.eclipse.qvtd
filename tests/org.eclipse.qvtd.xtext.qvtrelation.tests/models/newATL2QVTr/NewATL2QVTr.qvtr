@@ -257,7 +257,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				isAbstract = matchedRule.isAbstract,
 				isTopLevel = true,
 				transformation = qvtrTransformation,
-				variable = :SharedVariable {
+				variable = qvtrContext:SharedVariable {
 					name = 'trace',
 					isImplicit = true,
 					type = qvttraceMM::TraceElement

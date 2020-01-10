@@ -581,7 +581,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 					NavigationEdge reverseEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 					reverseEdge.initialize(edgeRole2, utility, targetNode2, target2sourceProperty.getName(), sourceNode2);
 					reverseEdge.setReferredProperty(target2sourceProperty);
-					reverseEdge.setPartial(false /*isPartial()*/);			// FIXWE assert false not isPartial()
+					reverseEdge.setPartial(false /*isPartial()*/);			// FIXME assert false not isPartial()
 					initializeOpposite(reverseEdge);
 				}
 			}
