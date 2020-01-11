@@ -446,10 +446,15 @@ public class RelationAnalysis extends RuleAnalysis
 			//			boolean isWhenInvoked = (incomingWhenInvocationAnalyses != null) && !incomingWhenInvocationAnalyses.isEmpty();
 			boolean rootIsRealized = isTopLevel || hasWhenInvocations;
 			for (@NonNull EObject eObject : new TreeIterable(templateExpression, rootIsRealized)) {
-				if (eObject instanceof TemplateExp) {
-					TemplateExp templateExp = (TemplateExp)eObject;
+				if (eObject instanceof ObjectTemplateExp) {		// CollectType's are not realized
+					ObjectTemplateExp templateExp = (ObjectTemplateExp)eObject;
 					TemplateVariable templateVariable = (TemplateVariable) QVTrelationUtil.getBindsTo(templateExp);
 					realizedOutputVariables.add(templateVariable);
+				}
+				else if (eObject instanceof CollectionTemplateExp) {
+					//	CollectionTemplateExp templateExp = (CollectionTemplateExp)eObject;
+					//	TemplateVariable templateVariable = (TemplateVariable) QVTrelationUtil.getBindsTo(templateExp);
+					//	predicatedOutputVariables.add(templateVariable);
 				}
 			}
 		}
