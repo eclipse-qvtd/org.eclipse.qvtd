@@ -1738,6 +1738,72 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
+	@Test
+	public void testQVTrCompiler_TinyIsomorph_CG() throws Exception {
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		Scheduler.DEBUG_GRAPHS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		QVTr2QVTc.VARIABLES.setState(true);
+		//		QVTp2QVTs.REGION_ORDER.setState(true);
+		//		QVTr2QVTc.SYNTHESIS.setState(true);
+		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
+		Class<? extends Transformer> txClass;
+		MyQVT myQVT1 = createQVT("TinyIsomorph", getModelsURI("tinyisomorph/TinyIsomorph.qvtr"));
+		try {
+			txClass = myQVT1.buildTransformation(new DefaultConfigurations(), false);//,
+			//			txClass = myQVT1.buildTransformation(Collections.singletonList(reverseOutputNames), false);//,
+			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
+			//			myQVT1.assertRegionCount(ActivatorRegionImpl.class, 2);
+			//	myQVT1.assertRegionCount(RuleRegionImpl.class, 1);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 7);
+		}
+		finally {
+			myQVT1.dispose();
+		}
+		MyQVT myQVT2 = createQVT("TinyIsomorph", getModelsURI("tinyisomorph/TinyIsomorph.qvtr"));
+		try {
+			myQVT2.loadEPackage(txClass, "mma.mmaPackage");
+			myQVT2.loadEPackage(txClass, "trace_TinyIsomorph.trace_TinyIsomorphPackage");
+			myQVT2.loadEPackage(txClass, "mmb.mmbPackage");
+			//
+			myQVT2.createGeneratedExecutor(txClass);
+			myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/Zero.xmi"));
+			myQVT2.executeTransformation("mmb");
+			myQVT2.addOutputURI("mmb", getTestURI("Zero_CG.xmi"));
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(getTestURI("Zero_CG.xmi"), getModelsURI("tinyisomorph/samples/Zero_expected.xmi"), null);
+			//
+			myQVT2.createGeneratedExecutor(txClass);
+			myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/One.xmi"));
+			myQVT2.executeTransformation("mmb");
+			myQVT2.addOutputURI("mmb", getTestURI("One_CG.xmi"));
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(getTestURI("One_CG.xmi"), getModelsURI("tinyisomorph/samples/One_expected.xmi"), null);
+			//
+			myQVT2.createGeneratedExecutor(txClass);
+			myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/Two.xmi"));
+			myQVT2.executeTransformation("mmb");
+			myQVT2.addOutputURI("mmb", getTestURI("Two_CG.xmi"));
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(getTestURI("Two_CG.xmi"), getModelsURI("tinyisomorph/samples/Two_expected.xmi"), null);
+			//
+			myQVT2.createGeneratedExecutor(txClass);
+			myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/Three.xmi"));
+			myQVT2.executeTransformation("mmb");
+			myQVT2.addOutputURI("mmb", getTestURI("Three_CG.xmi"));
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(getTestURI("Three_CG.xmi"), getModelsURI("tinyisomorph/samples/Three_expected.xmi"), null);
+		}
+		finally {
+			myQVT2.dispose();
+		}
+	}
+
 	/*	@Test
 	public void testQVTrCompiler_SeqToStm_iCG2() throws Exception {
 		//		Splitter.GROUPS.setState(true);

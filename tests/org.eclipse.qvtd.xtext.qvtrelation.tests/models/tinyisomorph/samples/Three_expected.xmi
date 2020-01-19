@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mmb="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/tinyisomorph/1.0/MMb"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/tinyisomorph/1.0/MMb java://org.eclipse.qvtd.xtext.qvtrelation.tests.mmb.mmbPackage">
+  <mmb:B b="/1"/>
+  <mmb:B b="/2"/>
+  <mmb:B b="/0"/>
+</xmi:XMI>

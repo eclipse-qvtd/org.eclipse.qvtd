@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mma="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/tinyisomorph/1.0/MMa"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/tinyisomorph/1.0/MMa ../MMa.ecore">
+  <mma:A a="/1"/>
+  <mma:A a="/2"/>
+  <mma:A a="/0"/>
+</xmi:XMI>

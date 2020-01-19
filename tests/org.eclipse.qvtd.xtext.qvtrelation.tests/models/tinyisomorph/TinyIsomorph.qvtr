@@ -1,0 +1,38 @@
+/*******************************************************************************
+ * Copyright (c) 2020 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *******************************************************************************/
+import MMa : 'MMa.ecore#/'; 
+import MMb : 'MMb.ecore#/'; 
+
+package org::eclipse::qvtd::xtext::qvtrelation::tests::tinyisomorph {
+/**
+ * Perform an isomophic copy of a trivial model. Used for ECMFA 2020 CyclicScheduling paper.
+ */
+	transformation TinyIsomorph(mma:MMa, mmb:MMb)
+	{
+	--	target mma { input mmb; output mma; }
+	--	target mmb { input mma; output mmb; }
+		
+		/**
+		 *  Map each instance to an isomorphic instance
+		 */
+		top relation a2b {
+			enforce domain mma a0 : A {
+				a = a1 : A
+			};
+			enforce domain mmb b0 : B {
+				b = b1 : B
+			};
+			when {
+				a2b(a1, b1);
+			}
+		}
+	}
+}
