@@ -14,7 +14,7 @@ import java.util.Collections;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 
 /**
@@ -22,16 +22,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
  */
 public class ConstantTargetCheckedCondition extends CheckedCondition
 {
-	protected final @NonNull NavigableEdge predicateEdge;
+	protected final @NonNull NavigationEdge navigationEdge;
 	protected final @NonNull CheckPriority checkPriority;
 
-	public ConstantTargetCheckedCondition(@NonNull NavigableEdge predicateEdge) {
-		this.predicateEdge = predicateEdge;
+	public ConstantTargetCheckedCondition(@NonNull NavigationEdge navigationEdge) {
+		this.navigationEdge = navigationEdge;
 		checkPriority = CheckPriority.CONSTANT_TARGET;
 	}
 
 	public ConstantTargetCheckedCondition(@NonNull SuccessEdge successEdge, boolean isLocalSuccess) {
-		this.predicateEdge = successEdge;
+		this.navigationEdge = successEdge;
 		checkPriority = isLocalSuccess ? CheckPriority.LOCAL_SUCCESS_EDGE : CheckPriority.GLOBAL_SUCCESS_EDGE;
 	}
 
@@ -49,7 +49,7 @@ public class ConstantTargetCheckedCondition extends CheckedCondition
 			return false;
 		}
 		ConstantTargetCheckedCondition that = (ConstantTargetCheckedCondition)obj;
-		return (predicateEdge == that.predicateEdge) && (checkPriority == that.checkPriority);
+		return (navigationEdge == that.navigationEdge) && (checkPriority == that.checkPriority);
 	}
 
 	@Override
@@ -59,15 +59,15 @@ public class ConstantTargetCheckedCondition extends CheckedCondition
 
 	@Override
 	public @NonNull Iterable<@NonNull Edge> getEdges() {
-		return Collections.singletonList(predicateEdge);
+		return Collections.singletonList(navigationEdge);
 	}
 
-	public @NonNull NavigableEdge getPredicateEdge() {
-		return predicateEdge;
+	public @NonNull NavigationEdge getNavigationEdge() {
+		return navigationEdge;
 	}
 
 	@Override
 	public int hashCode() {
-		return getClass().hashCode() + checkPriority.ordinal() + System.identityHashCode(predicateEdge);
+		return getClass().hashCode() + checkPriority.ordinal() + System.identityHashCode(navigationEdge);
 	}
 }

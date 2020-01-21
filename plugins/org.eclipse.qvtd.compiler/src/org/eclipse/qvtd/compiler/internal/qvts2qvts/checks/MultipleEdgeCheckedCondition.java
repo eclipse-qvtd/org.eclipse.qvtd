@@ -19,7 +19,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 /**
- * A MultipleEdgeCheckedCondition identifies the failure when two or more alternate navigation paths yield inconsistent results.
+ * A MultipleEdgeCheckedCondition identifies the failure when two or more alternate navigation paths to
+ * a common node yield inconsistent results.
  */
 public class MultipleEdgeCheckedCondition extends CheckedCondition
 {

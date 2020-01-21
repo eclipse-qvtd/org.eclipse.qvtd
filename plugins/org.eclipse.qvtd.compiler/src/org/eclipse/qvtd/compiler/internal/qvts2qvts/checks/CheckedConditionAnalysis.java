@@ -166,7 +166,7 @@ public class CheckedConditionAnalysis
 		@Override
 		public Object visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
 			if (isCheckedNavigation(navigationEdge)) {		// FIXME Why is this irregularity needed ?
-				context.add(new PredicateNavigationEdgeCheckedCondition(navigationEdge));
+				context.add(new ConstantTargetCheckedCondition(navigationEdge));
 				return null;
 			}
 			else {

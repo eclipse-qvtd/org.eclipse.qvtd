@@ -19,6 +19,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 /**
  * A NavigableEdgeCheckedCondition identifies the temporary failure that arises when
  * observing a property access to a not-yet assigned slot.
+ *
+ * FIXME Rename as NotReadyCheckedCondition
  */
 public class NavigableEdgeCheckedCondition extends CheckedCondition
 {

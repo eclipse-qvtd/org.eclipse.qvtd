@@ -95,7 +95,7 @@ public abstract class CheckedCondition implements Comparable<@NonNull CheckedCon
 		s.append(getClass().getSimpleName());
 		s.append("(");
 		boolean isFirst = true;
-		Iterable<@NonNull Edge> edges = getEdges();
+		Iterable<@NonNull ? extends Edge> edges = getEdges();
 		if (edges != null) {
 			for (@NonNull Edge edge : edges) {
 				if (!isFirst) {

@@ -23,7 +23,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.MultipleEdgeCheckedCo
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NavigableEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NonNullInitializerCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateEdgeCheckedCondition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateNavigationEdgeCheckedCondition;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -78,11 +77,6 @@ public abstract class AbstractFallibilityAnalysis implements FallibilityAnalysis
 
 		@Override
 		public @NonNull Boolean visitPredicateEdgeCheckedCondition(@NonNull PredicateEdgeCheckedCondition predicateEdgeCheckedCondition) {
-			return false;
-		}
-
-		@Override
-		public @NonNull Boolean visitPredicateNavigationEdgeCheckedCondition(@NonNull PredicateNavigationEdgeCheckedCondition predicateNavigationEdgeCheckedCondition) {
 			return false;
 		}
 	}

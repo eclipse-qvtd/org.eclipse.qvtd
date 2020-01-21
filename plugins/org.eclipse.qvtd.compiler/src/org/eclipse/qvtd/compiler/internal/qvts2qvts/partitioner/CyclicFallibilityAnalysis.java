@@ -24,7 +24,7 @@ public class CyclicFallibilityAnalysis extends AbstractFallibilityAnalysis
 	{
 		@Override
 		public @NonNull Boolean visitConstantTargetCheckedCondition(@NonNull ConstantTargetCheckedCondition constantTargetCheckedCondition) {
-			NavigableEdge predicateEdge = constantTargetCheckedCondition.getPredicateEdge();
+			NavigableEdge predicateEdge = constantTargetCheckedCondition.getNavigationEdge();
 			if (!(predicateEdge instanceof SuccessEdge)) {
 				return false;
 			}

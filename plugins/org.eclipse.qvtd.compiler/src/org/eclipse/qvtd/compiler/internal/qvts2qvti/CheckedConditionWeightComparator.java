@@ -26,7 +26,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.MultipleEdgeCheckedCo
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NavigableEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NonNullInitializerCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateEdgeCheckedCondition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateNavigationEdgeCheckedCondition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -91,7 +90,7 @@ public class CheckedConditionWeightComparator implements CheckedConditionVisitor
 	@Override
 	public @NonNull Integer visitConstantTargetCheckedCondition(@NonNull ConstantTargetCheckedCondition constantTargetCheckedCondition) {
 		Set<@NonNull Node> requiredNodes = new HashSet<>();
-		requiredNodes.addAll(region2mapping.getPrecedingNodes(QVTscheduleUtil.getSourceNode(constantTargetCheckedCondition.getPredicateEdge())));
+		requiredNodes.addAll(region2mapping.getPrecedingNodes(QVTscheduleUtil.getSourceNode(constantTargetCheckedCondition.getNavigationEdge())));
 		return requiredNodes.size();
 	}
 
@@ -122,13 +121,6 @@ public class CheckedConditionWeightComparator implements CheckedConditionVisitor
 	public @NonNull Integer visitPredicateEdgeCheckedCondition(@NonNull PredicateEdgeCheckedCondition predicateEdgeCheckedCondition) {
 		Set<@NonNull Node> requiredNodes = new HashSet<>();
 		accumulateNodes(requiredNodes, predicateEdgeCheckedCondition.getPredicateEdge());
-		return requiredNodes.size();
-	}
-
-	@Override
-	public @NonNull Integer visitPredicateNavigationEdgeCheckedCondition(@NonNull PredicateNavigationEdgeCheckedCondition predicateNavigationEdgeCheckedCondition) {
-		Set<@NonNull Node> requiredNodes = new HashSet<>();
-		accumulateNodes(requiredNodes, predicateNavigationEdgeCheckedCondition.getNavigationEdge());
 		return requiredNodes.size();
 	}
 }
