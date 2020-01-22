@@ -997,15 +997,28 @@ public class ConnectionManager
 		int firstProduction = Integer.MAX_VALUE;
 		int lastConsumption = partition.getLastPass();
 		int lastProduction = -1;
-		Connection connection = edge.getIncomingConnection();
-		if (connection != null) {
-			int firstWrite = connection.getFirstPass();
+		Connection edgeConnection = edge.getIncomingConnection();
+		if (edgeConnection != null) {
+			int firstWrite = edgeConnection.getFirstPass();
 			if (firstWrite < firstProduction) {
 				firstProduction = firstWrite;
 			}
-			int lastWrite = connection.getLastPass();
+			int lastWrite = edgeConnection.getLastPass();
 			if (lastWrite > lastProduction) {
 				lastProduction = lastWrite;
+			}
+		}
+		else {
+			Connection nodeConnection = QVTscheduleUtil.getTargetNode(edge).getIncomingConnection();
+			if (nodeConnection != null) {
+				int firstWrite = nodeConnection.getFirstPass();
+				if (firstWrite < firstProduction) {
+					firstProduction = firstWrite;
+				}
+				int lastWrite = nodeConnection.getLastPass();
+				if (lastWrite > lastProduction) {
+					lastProduction = lastWrite;
+				}
 			}
 		}
 		if (s != null) {
