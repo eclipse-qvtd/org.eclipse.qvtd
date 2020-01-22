@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -30,6 +31,7 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.NumberValue;
@@ -38,19 +40,22 @@ import org.eclipse.qvtd.runtime.evaluation.SlotState.Speculating;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractObjectState;
 import org.eclipse.qvtd.runtime.internal.evaluation.EOppositeReferenceImpl;
 
+import com.google.common.collect.Iterables;
+
 /**
  * AbstractObjectManager provides the mandatory shared functionality for an object state manager.
  */
 public abstract class AbstractObjectManager<SS extends SlotState> implements ObjectManager
 {
-	protected static final @NonNull List<@NonNull SlotState> EMPTY_SLOT_STATE_LIST = Collections.emptyList();
+	private static class NotAValue {};
 
 	/**
 	 * Distinctive value indicating that no value is available to be placed in a slot.
 	 */
-	public static @NonNull Object NOT_A_VALUE = AbstractObjectManager.class;
+	public static @NonNull Object NOT_A_VALUE = NotAValue.class;	// More debuggable than AbstractObjectManager.class
 
 	protected final @NonNull InvocationManager invocationManager;
+	protected final @NonNull List<@NonNull SS> EMPTY_SLOT_STATE_LIST = Collections.emptyList();
 	protected final boolean debugAssignments = AbstractTransformer.ASSIGNMENTS.isActive();
 	protected final boolean debugGettings = AbstractTransformer.GETTINGS.isActive();
 	//	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
@@ -66,6 +71,12 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 	 */
 	private @NonNull Map<@NonNull EReference, org.eclipse.qvtd.runtime.internal.evaluation.EOppositeReferenceImpl> eReference2eOppositeReference = new HashMap<>();
 
+	/**
+	 * The success status attributes that may be speculated and which must be constructed with additional
+	 * speculation maina=enance state.
+	 */
+	private @Nullable UniqueList<@NonNull EAttribute> speculatedEAttributes = null;
+
 	protected AbstractObjectManager(@NonNull InvocationManager invocationManager) {
 		this.invocationManager = invocationManager;
 	}
@@ -73,6 +84,15 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 	@Override
 	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitObjectManager(this);
+	}
+
+	@Override
+	public void addSpeculatedEAttributes(@NonNull Iterable<@NonNull EAttribute> eAttributes) {
+		UniqueList<@NonNull EAttribute> speculatedEAttributes2 = speculatedEAttributes;
+		if (speculatedEAttributes2 == null) {
+			speculatedEAttributes = speculatedEAttributes2 = new UniqueList<>();
+		}
+		Iterables.addAll(speculatedEAttributes2, eAttributes);
 	}
 
 	@Override
@@ -187,14 +207,16 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 			return objectState.getFeatures();
 		}
 		else {
-			return (Iterable<@NonNull SS>)EMPTY_SLOT_STATE_LIST;
+			return EMPTY_SLOT_STATE_LIST;
 		}
 	}
 
 	@Override
-	public SlotState.@NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState) {
+	public @NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState) {
+		assert (speculatedEAttributes != null) && speculatedEAttributes.contains(successAttribute);
 		AbstractObjectState<@NonNull SS> objectState = getObjectState(object);
-		return objectState.getSpeculatingSlotState(successAttribute, outputSpeculatingSlotState);
+		@NonNull Speculating speculatingSlotState = objectState.getSpeculatingSlotState(successAttribute, outputSpeculatingSlotState);
+		return speculatingSlotState;
 	}
 
 	@Override
@@ -217,6 +239,11 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 	public synchronized @NonNull SS gotSlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 		AbstractObjectState<@NonNull SS> objectState = getObjectState(eObject);
 		return objectState.gotSlotState(eFeature, ecoreValue);
+	}
+
+	public boolean maybeSpeculated(@NonNull EAttribute eAttribute) {
+		assert eAttribute.getEType() == EcorePackage.Literals.EBOOLEAN_OBJECT;
+		return (speculatedEAttributes != null) && speculatedEAttributes.contains(eAttribute);
 	}
 
 	/**

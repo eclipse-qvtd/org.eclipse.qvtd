@@ -31,6 +31,11 @@ public interface ObjectManager/*<SS extends SlotState>*/ extends ExecutionVisita
 // active ObjectManager, the parameter just migrates the gratuitous inherently safe casts.
 {
 	/**
+	 * Register eAttributes as a Boolean[?] status aattributes that may be used by speculations.
+	 */
+	void addSpeculatedEAttributes(@NonNull Iterable<@NonNull EAttribute> eAttributes);
+
+	/**
 	 * Mark the eFeature of eObject as assigned with an ecoreValue. Ordered child assignments may be ordered by the childKey.
 	 *
 	 * If !isPartial, ecoreValue is a total assignment, i.e. A collection if eFeature.isMany();
@@ -88,4 +93,5 @@ public interface ObjectManager/*<SS extends SlotState>*/ extends ExecutionVisita
 	 * Register the update with invocation so that any blockage can be removed.
 	 */
 	void got(Execution.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
+
 }

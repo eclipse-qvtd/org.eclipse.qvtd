@@ -12,8 +12,10 @@ package org.eclipse.qvtd.runtime.internal.evaluation;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
@@ -345,6 +347,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		for (@NonNull TypedModelInstance model : models) {
 			model.initConnections(rootInterval, modeFactory);
 		}
+	}
+
+	protected void initSpeculatedEAttributes(/*@NonNull*/ EAttribute ... eAttributes) {
+		objectManager.addSpeculatedEAttributes(Arrays.asList(eAttributes));
 	}
 
 	protected RuntimeModelsManager.@NonNull Model initModel(int i, @NonNull String modelName) {
