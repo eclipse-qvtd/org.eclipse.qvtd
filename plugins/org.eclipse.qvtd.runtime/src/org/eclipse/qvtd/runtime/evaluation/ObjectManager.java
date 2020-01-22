@@ -26,7 +26,9 @@ import org.eclipse.qvtd.runtime.evaluation.SlotState.Speculating;
  *
  * @noimplement clients should derive from AbstractObjectManager
  */
-public interface ObjectManager extends ExecutionVisitable
+public interface ObjectManager/*<SS extends SlotState>*/ extends ExecutionVisitable
+// It is tempting to use an SS parameter to capture the Incremental/LazySlotState diversity, but with only one
+// active ObjectManager, the parameter just migrates the gratuitous inherently safe casts.
 {
 	/**
 	 * Mark the eFeature of eObject as assigned with an ecoreValue. Ordered child assignments may be ordered by the childKey.
@@ -70,7 +72,7 @@ public interface ObjectManager extends ExecutionVisitable
 	@NonNull Iterable<@NonNull ? extends Object> getObjects();
 	@NonNull Iterable<@NonNull ? extends SlotState> getSlotStates(@NonNull Object object);
 
-	SlotState.@NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState);
+	@NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState);
 
 	/**
 	 * Throw an InvocationFailedException if the eFeature of eObject has not yet been assigned.

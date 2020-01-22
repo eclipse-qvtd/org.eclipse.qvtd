@@ -82,10 +82,13 @@ public interface SlotState extends ExecutionVisitable
 		void addInput(@NonNull Speculating slotState);
 
 		/**
-		 * Rerturn the speculation inputs that must be satisfied for this speculation output to be satisfied.
+		 * Return the speculation inputs that must be satisfied for this speculation output to be satisfied.
 		 */
-		@NonNull Iterable<? extends @NonNull Speculating> getInputs();
+		@NonNull Iterable<@NonNull Speculating> getInputs();
 
+		/**
+		 * Get the status of a Speculating SlotState.
+		 */
 		@Nullable Boolean getStatus();
 
 		void setStatus(@NonNull Boolean successStatus);

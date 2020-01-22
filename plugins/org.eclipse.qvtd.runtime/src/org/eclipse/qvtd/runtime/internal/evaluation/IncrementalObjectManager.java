@@ -487,8 +487,8 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 	 */
 	static class SpeculatingSlotState extends IncrementalSlotState implements SlotState.Speculating
 	{
-		private final @NonNull UniqueList<@NonNull SpeculatingSlotState> inputSpeculatables = new UniqueList<>();
-		private @Nullable Boolean status = null;
+		private final @NonNull UniqueList<@NonNull Speculating> inputSpeculatables = new UniqueList<>();
+		private @Nullable Boolean status;
 
 		public SpeculatingSlotState(@NonNull AbstractObjectState<@NonNull IncrementalSlotState> objectState, @NonNull EAttribute eFeature) {
 			super(objectState, eFeature, NOT_A_VALUE);
@@ -496,11 +496,11 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 
 		@Override
 		public void addInput(@NonNull Speculating inputSpeculatable) {
-			inputSpeculatables.add((SpeculatingSlotState)inputSpeculatable);
+			inputSpeculatables.add(inputSpeculatable);
 		}
 
 		@Override
-		public @NonNull Iterable<? extends @NonNull Speculating> getInputs() {
+		public @NonNull Iterable<@NonNull Speculating> getInputs() {
 			return inputSpeculatables;
 		}
 
@@ -512,8 +512,8 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 		@Override
 		public void setStatus(@NonNull Boolean successStatus) {
 			this.status = successStatus;
-			//	mode = SlotMode.ASSIGNED;
-			assignedSlot();
+			// Boolean.TRUE/FALSE slot value is assigned as part of the re-execution of the speculating partition.
+			assignedSlot();			//	mode = SlotMode.ASSIGNED;
 		}
 	}
 

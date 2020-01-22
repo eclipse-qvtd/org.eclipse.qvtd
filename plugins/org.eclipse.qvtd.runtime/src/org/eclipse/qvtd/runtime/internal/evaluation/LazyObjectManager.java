@@ -377,6 +377,7 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 	{
 		private OneToOneSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EReference eFeature, @Nullable Object eOpposite) {
 			super(objectState, eFeature, eOpposite);
+			assert eOpposite != null;		// FIXME if really null exploit, but isn't null valid until we have a OneToZeroOrOneSlotState ??
 			assert !eFeature.isMany();
 			Object eObject = objectState.getObject();
 			LazyObjectManager objectManager = getObjectManager();
@@ -406,7 +407,7 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 			else if (eFeature.isContainment()) {
 				//				assert eOpposite != null;
 				//				assert eObject == ((EObject)eOpposite).eContainer();
-				assert (eOpposite == null) || (eObject == ((EObject)eOpposite).eContainer());
+				assert /*(eOpposite == null) ||*/ (eOpposite == NOT_A_VALUE) || (eObject == ((EObject)eOpposite).eContainer());
 			}
 			else {
 				assert !objectManager.getEOppositeReference(eFeature).isMany();
@@ -430,9 +431,8 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 	 */
 	static class SpeculatingSlotState extends LazySlotState implements SlotState.Speculating
 	{
-		private final @NonNull UniqueList<@NonNull SpeculatingSlotState> inputSpeculatables = new UniqueList<>();
-
-		private @Nullable Boolean status = null;
+		private final @NonNull UniqueList<@NonNull Speculating> inputSpeculatables = new UniqueList<>();
+		private @Nullable Boolean status;
 
 		public SpeculatingSlotState(@NonNull AbstractObjectState<@NonNull LazySlotState> objectState, @NonNull EAttribute eFeature) {
 			super(objectState, eFeature, NOT_A_VALUE);
@@ -440,11 +440,17 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 
 		@Override
 		public void addInput(@NonNull Speculating inputSpeculatable) {
-			inputSpeculatables.add((SpeculatingSlotState)inputSpeculatable);
+			inputSpeculatables.add(inputSpeculatable);
 		}
 
 		@Override
-		public @NonNull Iterable<? extends @NonNull Speculating> getInputs() {
+		public synchronized void assigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
+			//			status = (Boolean)ecoreValue;
+			super.assigned(eObject, eFeature, ecoreValue, isPartial);
+		}
+
+		@Override
+		public @NonNull Iterable<@NonNull Speculating> getInputs() {
 			return inputSpeculatables;
 		}
 
@@ -456,8 +462,8 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 		@Override
 		public void setStatus(@NonNull Boolean successStatus) {
 			this.status = successStatus;
-			//	mode = SlotMode.ASSIGNED;
-			assignedSlot();
+			// Boolean.TRUE/FALSE slot value is assigned as part of the re-execution of the speculating partition.
+			assignedSlot();			//	mode = SlotMode.ASSIGNED;
 		}
 	}
 
