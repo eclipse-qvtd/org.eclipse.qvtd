@@ -12,8 +12,10 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -24,6 +26,8 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.BasePartialRegionPr
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionPropertyAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -41,6 +45,7 @@ public class CyclicRegionAnalysis implements Comparable<@NonNull CyclicRegionAna
 	private final @NonNull Set<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> producedPropertyAnalyses = new HashSet<>();
 	private final @NonNull Set<@NonNull PartialRegionClassAnalysis<@NonNull RegionsAnalysis>> cyclicClassAnalyses = new HashSet<>();
 	private final @NonNull Set<@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> cyclicPropertyAnalyses = new HashSet<>();
+	private final @NonNull Map<@NonNull PropertyDatum, @NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis>> propertyDatum2cyclicPropertyAnalysis = new HashMap<>();
 
 	public CyclicRegionAnalysis(@NonNull Set<@NonNull PartialRegionAnalysis<@NonNull RegionsAnalysis>> regionAnalyses) {
 		this.regionAnalyses = regionAnalyses;
@@ -87,6 +92,10 @@ public class CyclicRegionAnalysis implements Comparable<@NonNull CyclicRegionAna
 		cyclicPropertyAnalyses.retainAll(producedPropertyAnalyses);
 		consumedPropertyAnalyses.removeAll(cyclicPropertyAnalyses);
 		producedPropertyAnalyses.removeAll(cyclicPropertyAnalyses);
+		for (@NonNull PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> cyclicPropertyAnalysis : cyclicPropertyAnalyses) {
+			PropertyDatum propertyDatum = cyclicPropertyAnalysis.getPropertyDatum();		// ?? all supers ??
+			propertyDatum2cyclicPropertyAnalysis.put(propertyDatum, cyclicPropertyAnalysis);
+		}
 	}
 
 	@Override
@@ -97,6 +106,11 @@ public class CyclicRegionAnalysis implements Comparable<@NonNull CyclicRegionAna
 		//		return s2 - s1;
 		//	}
 		return name.compareTo(that.name);	// Since the name is a concatenation, a nested cycle is shorter and so first.
+	}
+
+	public boolean isCyclic(@NonNull PropertyDatum propertyDatum) {
+		PartialRegionPropertyAnalysis<@NonNull RegionsAnalysis> cyclicPropertyAnalysis = propertyDatum2cyclicPropertyAnalysis.get(propertyDatum);
+		return cyclicPropertyAnalysis != null;
 	}
 
 	protected void showCycle(@NonNull TracingOption cyclesTracingOption) {
