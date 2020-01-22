@@ -48,6 +48,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
+
+import com.google.common.collect.Iterables;
 
 /**
  * QVTimperativeHelper provides helper routines to assist creation of QVTimperative model elements.
@@ -213,6 +216,12 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		mappingParameterBinding.setValue(value);
 		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.nonNullState(variable.getType())));
 		return mappingParameterBinding;
+	}
+
+	public @NonNull SpeculateStatement createSpeculateStatement(@NonNull Iterable<@NonNull OCLExpression> speculateExpressions) {
+		SpeculateStatement asSpeculateStatement = QVTimperativeFactory.eINSTANCE.createSpeculateStatement();
+		Iterables.addAll(QVTimperativeUtil.Internal.getOwnedExpressionsList(asSpeculateStatement), speculateExpressions);
+		return asSpeculateStatement;
 	}
 
 	@Override
