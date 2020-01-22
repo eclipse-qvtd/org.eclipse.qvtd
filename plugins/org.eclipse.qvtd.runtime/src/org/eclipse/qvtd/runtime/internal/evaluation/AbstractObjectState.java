@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
@@ -92,15 +93,22 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 	}
 
 	public @NonNull Speculating getSpeculatingSlotState(@NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState) {
+		assert successAttribute.getEType() == EcorePackage.Literals.EBOOLEAN_OBJECT;
 		@Nullable SS slotState = basicGetSlotState(successAttribute);
+		@Nullable Speculating speculatingSlotState;
 		if (slotState == null) {
-			slotState = (SS) createSpeculatingSlotState(successAttribute);
-			putSlotState(successAttribute, slotState);
+			speculatingSlotState = createSpeculatingSlotState(successAttribute);
+			@SuppressWarnings("unchecked")
+			SS castSlotState = (SS)speculatingSlotState;
+			putSlotState(successAttribute, castSlotState);
+		}
+		else {
+			speculatingSlotState = (Speculating)slotState;
 		}
 		if (outputSpeculatingSlotState != null) {
-			outputSpeculatingSlotState.addInput((Speculating)slotState);
+			outputSpeculatingSlotState.addInput(speculatingSlotState);
 		}
-		return (Speculating) slotState;
+		return speculatingSlotState;
 	}
 
 	/**
@@ -152,7 +160,21 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		//	1:1 unidirectional
 		//
 		if (eFeature instanceof EAttribute) {
-			slotState = createSimpleSlotState((EAttribute)eFeature, ecoreValue);
+			EAttribute eAttribute = (EAttribute)eFeature;
+			if ((eFeature.getEType() == EcorePackage.Literals.EBOOLEAN_OBJECT) && objectManager.maybeSpeculated(eAttribute)) {
+				//	assert ecoreValue == AbstractObjectManager.NOT_A_VALUE;
+				assert ecoreValue != null;
+				Speculating speculatingSlotState = createSpeculatingSlotState(eAttribute);
+				if (ecoreValue != AbstractObjectManager.NOT_A_VALUE) {
+					speculatingSlotState.setStatus((Boolean)ecoreValue);
+				}
+				@SuppressWarnings("unchecked")
+				SS castSpeculatingSlotState = (@NonNull SS) speculatingSlotState;
+				slotState = castSpeculatingSlotState;
+			}
+			else {
+				slotState = createSimpleSlotState(eAttribute, ecoreValue);
+			}
 			putSlotState(eFeature, slotState);
 			return slotState;
 		}
