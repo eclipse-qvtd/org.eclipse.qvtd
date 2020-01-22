@@ -536,7 +536,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 22:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningMergedPartition((MergedPartition)otherEnd, msgs);
+			return basicSetOwningMergedPartition((MergedPartition)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -639,67 +639,67 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				getConstantEdges().clear();
-				getConstantEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getConstantEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getConstantNodes().clear();
-				getConstantNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getConstantNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				getConstantSuccessFalseNodes().clear();
-				getConstantSuccessFalseNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getConstantSuccessFalseNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				getConstantSuccessTrueNodes().clear();
-				getConstantSuccessTrueNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getConstantSuccessTrueNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 11:
 				getExplicitPredecessors().clear();
-				getExplicitPredecessors().addAll((Collection<? extends MappingPartition>)newValue);
-				return;
+			getExplicitPredecessors().addAll((Collection<? extends MappingPartition>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12:
 				getHeadNodes().clear();
-				getHeadNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getHeadNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 13:
 				getLoadedEdges().clear();
-				getLoadedEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getLoadedEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 14:
 				getLoadedNodes().clear();
-				getLoadedNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getLoadedNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 15:
 				getPredicatedEdges().clear();
-				getPredicatedEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getPredicatedEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 16:
 				getPredicatedNodes().clear();
-				getPredicatedNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getPredicatedNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 17:
 				getRealizedEdges().clear();
-				getRealizedEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getRealizedEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 18:
 				getRealizedNodes().clear();
-				getRealizedNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getRealizedNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 19:
 				getSpeculatedEdges().clear();
-				getSpeculatedEdges().addAll((Collection<? extends Edge>)newValue);
-				return;
+			getSpeculatedEdges().addAll((Collection<? extends Edge>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 20:
 				getSpeculatedNodes().clear();
-				getSpeculatedNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getSpeculatedNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 21:
 				getSpeculationNodes().clear();
-				getSpeculationNodes().addAll((Collection<? extends Node>)newValue);
-				return;
+			getSpeculationNodes().addAll((Collection<? extends Node>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 22:
 				setOwningMergedPartition((MergedPartition)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -714,52 +714,52 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				getConstantEdges().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getConstantNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				getConstantSuccessFalseNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				getConstantSuccessTrueNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 11:
 				getExplicitPredecessors().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12:
 				getHeadNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 13:
 				getLoadedEdges().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 14:
 				getLoadedNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 15:
 				getPredicatedEdges().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 16:
 				getPredicatedNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 17:
 				getRealizedEdges().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 18:
 				getRealizedNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 19:
 				getSpeculatedEdges().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 20:
 				getSpeculatedNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 21:
 				getSpeculationNodes().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 22:
 				setOwningMergedPartition((MergedPartition)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -978,6 +978,8 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 
 	@Override
 	public @Nullable Role putEdgeRole(@NonNull Edge edge, @NonNull Role newEdgeRole) {
+		assert node2nodeRole.get(edge.getSourceNode()) != null;
+		assert node2nodeRole.get(edge.getTargetNode()) != null;
 		Role oldEdgeRole = edge2edgeRole.get(edge);
 		switch (newEdgeRole) {
 			case CONSTANT: getConstantEdges().add(edge); break;
