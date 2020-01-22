@@ -37,23 +37,29 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.EnumLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ErrorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.InputNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -106,10 +112,10 @@ public class CheckedConditionAnalysis
 			throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
 		}
 
-		//		@Override
-		//		public Object visitBooleanValueNode(@NonNull BooleanValueNode object) {
-		//			return super.visitBooleanValueNode(object);
-		//		}
+		@Override
+		public Object visitBooleanLiteralNode(@NonNull BooleanLiteralNode object) {
+			return null;
+		}
 
 		@Override
 		public Object visitCastEdge(@NonNull CastEdge castEdge) {
@@ -130,6 +136,11 @@ public class CheckedConditionAnalysis
 
 		@Override
 		public Object visitEdge(@NonNull Edge edge) {
+			return null;
+		}
+
+		@Override
+		public Object visitEnumLiteralNode(@NonNull EnumLiteralNode object) {
 			return null;
 		}
 
@@ -243,10 +254,15 @@ public class CheckedConditionAnalysis
 			return null;
 		}
 
-		//		@Override
-		//		public Object visitNullNode(@NonNull NullNode object) {
-		//			return super.visitNullNode(object);
-		//		}
+		@Override
+		public Object visitNullLiteralNode(@NonNull NullLiteralNode object) {
+			return null;
+		}
+
+		@Override
+		public Object visitNumericLiteralNode(@NonNull NumericLiteralNode object) {
+			return null;
+		}
 
 		@Override
 		public Object visitOperationNode(@NonNull OperationNode operationNode) {
@@ -288,6 +304,11 @@ public class CheckedConditionAnalysis
 		}
 
 		@Override
+		public Object visitStringLiteralNode(@NonNull StringLiteralNode object) {
+			return null;
+		}
+
+		@Override
 		public Object visitSuccessEdge(@NonNull SuccessEdge successEdge) {
 			assert isCheckedNavigation(successEdge);
 			RuleRegion ruleRegion = (RuleRegion)partitionAnalysis.getRegion();
@@ -309,6 +330,11 @@ public class CheckedConditionAnalysis
 		//		public Object visitSuccessNode(@NonNull SuccessNode object) {
 		//			return super.visitSuccessNode(object);
 		//		}
+
+		@Override
+		public Object visitTypeLiteralNode(@NonNull TypeLiteralNode object) {
+			return null;
+		}
 
 		@Override
 		public Object visitUnknownNode(@NonNull UnknownNode object) {
