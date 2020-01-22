@@ -22,6 +22,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
@@ -136,6 +138,18 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 	@Override
 	public @NonNull List<@Nullable Object> visitCGSequence(@NonNull CGSequence object) {
 		return visitCGValuedElement(object);
+	}
+
+	@Override
+	public @NonNull List<@Nullable Object> visitCGSpeculateExp(@NonNull CGSpeculateExp object) {
+		return visitCGValuedElement(object);
+	}
+
+	@Override
+	public @NonNull List<@Nullable Object> visitCGSpeculatePart(@NonNull CGSpeculatePart cgElement) {
+		List<@Nullable Object> elements = super.visitCGValuedElement(cgElement);
+		elements.add(cgElement.getObjectExp());
+		return elements;
 	}
 
 	@Override

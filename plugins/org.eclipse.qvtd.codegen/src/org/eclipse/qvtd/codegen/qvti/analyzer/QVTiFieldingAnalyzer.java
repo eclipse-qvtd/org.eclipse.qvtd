@@ -37,6 +37,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
@@ -146,6 +148,16 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 
 		@Override
 		public @Nullable Set<@NonNull CGVariable> visitCGSequence(@NonNull CGSequence object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable Set<@NonNull CGVariable> visitCGSpeculateExp(@NonNull CGSpeculateExp object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable Set<@NonNull CGVariable> visitCGSpeculatePart(@NonNull CGSpeculatePart object) {
 			return visitCGValuedElement(object);
 		}
 
@@ -275,6 +287,16 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 
 		@Override
 		public @NonNull Boolean visitCGSequence(@NonNull CGSequence object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @NonNull Boolean visitCGSpeculateExp(@NonNull CGSpeculateExp object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @NonNull Boolean visitCGSpeculatePart(@NonNull CGSpeculatePart object) {
 			return visitCGValuedElement(object);
 		}
 

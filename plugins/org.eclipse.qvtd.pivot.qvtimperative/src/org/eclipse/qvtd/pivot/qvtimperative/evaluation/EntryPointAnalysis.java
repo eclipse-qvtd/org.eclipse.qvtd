@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +19,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -35,11 +38,17 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
@@ -86,6 +95,16 @@ public class EntryPointAnalysis
 	 */
 	private final @NonNull Map<@NonNull Type, @NonNull List<@NonNull Type>> parentClass2childClasses = new HashMap<>();
 
+	/**
+	 * The SetStatements to each Property.
+	 */
+	private final @NonNull List<@NonNull SpeculateStatement> speculateStatements = new ArrayList<>();
+
+	/**
+	 * The Boolean[?] status attributes that may be used by soeculations.
+	 */
+	private @Nullable UniqueList<@NonNull EAttribute> speculatedEAttributes = null;
+
 	public EntryPointAnalysis(@NonNull EntryPointsAnalysis entryPointsAnalysis, @NonNull EntryPoint entryPoint) {
 		this.entryPointsAnalysis = entryPointsAnalysis;
 		this.entryPoint = entryPoint;
@@ -129,6 +148,9 @@ public class EntryPointAnalysis
 				}
 				else if (eObject instanceof SetStatement) {
 					setStatements.add((SetStatement)eObject);
+				}
+				else if (eObject instanceof SpeculateStatement) {
+					speculateStatements.add((SpeculateStatement)eObject);
 				}
 				else if (eObject instanceof AppendParameter) {
 					Mapping mapping = QVTimperativeUtil.getContainingMapping(eObject);
@@ -301,6 +323,41 @@ public class EntryPointAnalysis
 
 	public @NonNull List<@NonNull Mapping> getMappings() {
 		return mappings;
+	}
+
+	public @NonNull Iterable<@NonNull EAttribute> getSpeculatedEAttributes() {
+		UniqueList<@NonNull EAttribute> speculatedEAttributes2 = speculatedEAttributes;
+		if (speculatedEAttributes2 == null) {
+			speculatedEAttributes = speculatedEAttributes2 = new UniqueList<>();
+			for (@NonNull SpeculateStatement speculateStatement : speculateStatements) {
+				Mapping asMapping = QVTimperativeUtil.getContainingMapping(speculateStatement);
+				for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(asMapping)) {
+					if (mappingParameter instanceof GuardParameter) {
+						Property successProperty = ((GuardParameter)mappingParameter).getSuccessProperty();
+						if (successProperty != null) {
+							EObject eStructuralFeature = successProperty.getESObject();
+							EAttribute eAttribute = (EAttribute)eStructuralFeature;
+							assert (eStructuralFeature instanceof EAttribute) && (eAttribute.getEType() == EcorePackage.Literals.EBOOLEAN_OBJECT);
+							speculatedEAttributes2.add((EAttribute)eStructuralFeature);
+						}
+					}
+				}
+				for (@NonNull OCLExpression speculateExpression : QVTimperativeUtil.getOwnedExpressions(speculateStatement)) {
+					for (@NonNull EObject speculateEObject : new TreeIterable(speculateExpression, true)) {
+						if (speculateEObject instanceof NavigationCallExp) {
+							Property speculateProperty = PivotUtil.getReferredProperty((NavigationCallExp)speculateEObject);
+							EObject eStructuralFeature = speculateProperty.getESObject();
+							EAttribute eAttribute = (EAttribute)eStructuralFeature;
+							if ((eStructuralFeature instanceof EAttribute) && (eAttribute.getEType() == EcorePackage.Literals.EBOOLEAN_OBJECT)) {
+								speculatedEAttributes2.add((EAttribute)eStructuralFeature);
+							}
+						}
+					}
+				}
+			}
+			Collections.sort(speculatedEAttributes2, NameUtil.TO_STRING_COMPARATOR);
+		}
+		return speculatedEAttributes2;
 	}
 
 	public boolean isHazardous(@NonNull Mapping mapping) {

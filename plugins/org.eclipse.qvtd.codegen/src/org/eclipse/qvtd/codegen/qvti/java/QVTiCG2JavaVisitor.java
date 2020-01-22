@@ -23,6 +23,7 @@ import java.util.Set;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -118,6 +119,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
@@ -140,6 +143,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.TypedModelAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -151,7 +155,9 @@ import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
+import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
+import org.eclipse.qvtd.runtime.evaluation.SlotState;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
@@ -818,6 +824,20 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			modelNumber++;
 		}
 		js.append("initConnections();\n");
+		/*		ImperativeTransformation transformation = QVTiCGUtil.getAST(cgTransformation);
+		EntryPointsAnalysis entryPointsAnalysis = context.getEntryPointsAnalysis(transformation);
+		for (@NonNull EntryPointAnalysis entryPointAnalysis : entryPointsAnalysis.getEntryPointAnalyses()) {
+			Iterable<@NonNull EAttribute> eAttributes = entryPointAnalysis.getSpeculatedEAttributes();
+			if ((eAttributes != null) && !Iterables.isEmpty(eAttributes)) {
+				js.append("initSpeculatedEAttributes(");
+				js.appendString(entryPointAnalysis.getEntryPoint().getName());
+				for (@NonNull EAttribute eAttribute : eAttributes) {
+					js.append(", ");
+					appendQualifiedLiteralName(eAttribute);
+				}
+				js.append(");\n");
+			}
+		} */
 		//		doMappingConstructorInitializers(cgTransformation);
 		//		doFunctionConstructorInitializers(cgTransformation);
 		js.popIndentation();
@@ -1029,7 +1049,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 
 
-		String createMethodName = "createFromString";
+		String createMethodName = QVTiGlobalContext.CREATE_FROM_STRING_NAME;
 		boolean doSetNonNull = false;
 		//		String javaClass2;
 		//		Class<?> factoryClass2 = genModelHelper.getEcoreFactoryClass(ePackage);
@@ -1116,10 +1136,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					TypeDescriptor javaTypeDescriptor = context.getUnboxedDescriptor(elementId);
 					js.appendClassReference(null, javaTypeDescriptor);
 				}
-				js.append(" emptyList = ");
+				js.append(" " + QVTiGlobalContext.EMPTY_LIST_NAME + " = ");
 				js.appendClassReference(null, Collections.class);
-				js.append(".emptyList();\n");
-				js.append("return emptyList;\n");
+				js.append("." + QVTiGlobalContext.EMPTY_LIST_NAME + "();\n");
+				js.append("return " + QVTiGlobalContext.EMPTY_LIST_NAME + ";\n");
 			}
 			else {			// FIXME Fudge for body-less functions
 				js.append("return \"\";\n");
@@ -1195,11 +1215,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					TypeDescriptor javaTypeDescriptor = context.getUnboxedDescriptor(elementId);
 					js.appendClassReference(null, javaTypeDescriptor);
 				}
-				js.append(" emptyList = ");
+				js.append(" " + QVTiGlobalContext.EMPTY_LIST_NAME + " = ");
 				js.appendClassReference(null, Collections.class);
-				js.append(".emptyList();\n");
+				js.append("." + QVTiGlobalContext.EMPTY_LIST_NAME + "();\n");
 				js.appendThis(functionName);
-				js.append("." + instanceName + " = emptyList;\n");
+				js.append("." + instanceName + " = " + QVTiGlobalContext.EMPTY_LIST_NAME + ";\n");
 			}
 			else {			// FIXME Fudge for body-less functions
 				js.appendThis(functionName);
@@ -2475,6 +2495,24 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					continue;		// Avoid generating code for not-enforceable TypedModel
 				}
 			}
+			ImperativeTransformation transformation = QVTiCGUtil.getAST(cgTransformation);
+			EntryPointsAnalysis entryPointsAnalysis = context.getEntryPointsAnalysis(transformation);
+			EntryPointAnalysis entryPointAnalysis = entryPointsAnalysis.getEntryPointAnalysis(asEntryPoint);
+			Iterable<@NonNull EAttribute> eAttributes = entryPointAnalysis.getSpeculatedEAttributes();
+			if ((eAttributes != null) && !Iterables.isEmpty(eAttributes)) {
+				js.append("initSpeculatedEAttributes(");
+				boolean isFirst = true;
+				for (@NonNull EAttribute eAttribute : eAttributes) {
+					if (!isFirst) {
+						js.append(",\n\t\t\t\t\t\t");
+					}
+					else {
+						isFirst = false;
+					}
+					appendQualifiedLiteralName(eAttribute);
+				}
+				js.append(");\n");
+			}
 			for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgRootMapping)) {
 				//			js.appendDeclaration(cgGuardVariable);
 				js.append("final ");
@@ -3574,6 +3612,130 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		for (@NonNull CGValuedElement cgStatement : ClassUtil.nullFree(cgSequence.getOwnedStatements())) {
 			cgStatement.accept(this);
 		}
+		return true;
+	}
+
+	@Override
+	public @NonNull Boolean visitCGSpeculateExp(@NonNull CGSpeculateExp cgSpeculateExp) {
+		CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgSpeculateExp);
+		for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgMapping)) {
+			VariableDeclaration asGuardVariable = QVTiCGUtil.getAST(cgGuardVariable);
+			if (asGuardVariable instanceof GuardParameter) {
+				GuardParameter asGuardParameter = (GuardParameter)asGuardVariable;
+				Property successProperty = asGuardParameter.getSuccessProperty();
+				if (successProperty != null) {
+					EStructuralFeature eStructuralFeature = ClassUtil.nonNullState((EStructuralFeature) successProperty.getESObject());
+					String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
+					//
+					js.appendClassReference(true, SlotState.Speculating.class);
+					js.append(" " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + " = ");
+					js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME + "." + QVTiGlobalContext.GET_SPECULATING_SLOT_STATE_NAME + "(");
+					js.appendValueName(cgGuardVariable);
+					js.append(", ");
+					appendQualifiedLiteralName(eStructuralFeature);
+					js.append(", null);\n");
+					//
+					js.appendClassReference(null, Boolean.class);
+					js.append(" " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATUS_NAME + " = " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + "." + QVTiGlobalContext.GET_STATUS_NAME + "();\n");
+					//
+					js.append("if (" + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATUS_NAME + " == ");
+					js.appendClassReference(null, ValueUtil.class);
+					js.append(".FALSE_VALUE) {\n");
+					js.pushIndentation(null);
+					js.appendValueName(cgGuardVariable);
+					js.append(".");
+					js.append(setAccessor);
+					js.append("(");
+					js.append(QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATUS_NAME);
+					js.append(");\n");
+					//	doAssigned(cgGuardVariable, eStructuralFeature, outputSpeculatingSlotStatus);
+					js.append("return ");
+					js.appendClassReference(null, ValueUtil.class);
+					js.append(".FALSE_VALUE;\n");
+					js.popIndentation();
+					js.append("}\n");
+					//
+					js.append("if (" + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATUS_NAME + " == null) {\n");
+					js.pushIndentation(null);
+					//
+					js.append("boolean " + QVTiGlobalContext.NEEDS_SPECULATION_NAME + " = false;\n");
+					for (CGSpeculatePart cgSpeculatePart : cgSpeculateExp.getParts()) {
+						//	if (cgInput instanceof CGEcorePropertyCallExp) {cgInput;
+						CGValuedElement cgInputObject = cgSpeculatePart.getObjectExp();
+						//	boolean isRequired = cgInputObject.isRequired();
+						boolean isNonNull = cgInputObject.isNonNull();
+						if (isNonNull) {
+							js.append("if (");
+							js.appendValueName(cgInputObject);
+							js.append(" == null) {\n");
+							js.pushIndentation(null);
+							js.append("throw new ");
+							js.appendClassReference(null, InvalidEvaluationException.class);
+							js.append("(");
+							js.appendString("Null " + cgInputObject/*.getMessage()*/ + " speculation source");
+							js.append(");\n");
+							js.popIndentation();
+							js.append("}\n");
+						}
+						else {
+							js.append("if (");
+							js.appendValueName(cgInputObject);
+							js.append(" != null) {\n");
+							js.pushIndentation(null);
+						}
+						EStructuralFeature inputAttribute = cgSpeculatePart.getEStructuralFeature();
+						js.append("if (");
+						js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME + "." + QVTiGlobalContext.GET_SPECULATING_SLOT_STATE_NAME + "(");
+						js.appendValueName(cgInputObject);
+						js.append(", ");
+						appendQualifiedLiteralName(inputAttribute);
+						js.append(", " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + ") != " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + ") {\n");
+						js.pushIndentation(null);
+						js.append(QVTiGlobalContext.NEEDS_SPECULATION_NAME + " = true;\n");
+						js.popIndentation();
+						js.append("}\n");
+						//
+						if (!isNonNull) {
+							js.popIndentation();
+							js.append("}\n");
+						}
+						//	if (Telement2element != null) {
+						//		SlotState.Speculating inputSpeculatingSlotState = objectManager.getSpeculatingSlotState(Telement2element, trace_Forward2ReversePackage.Literals.TELEMENT2ELEMENT__S0GLOBAL, outputSpeculatingSlotState);
+						//		if (inputSpeculatingSlotState != outputSpeculatingSlotState) {			// Bypass the depends-on-self unit cycle
+						//			needsSpeculation = true;
+						//		}
+						//	}
+					}
+					js.append("if (" + QVTiGlobalContext.NEEDS_SPECULATION_NAME + ") {\n");
+					js.pushIndentation(null);
+					js.append("throw new ");
+					js.appendClassReference(null, InvocationFailedException.class);
+					js.append("(" + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + ", true);\n");
+					js.popIndentation();
+					js.append("}\n");
+					js.popIndentation();
+					js.append("}\n");
+					break;		// Only one trace
+				}
+			}
+		}
+
+		js.append("boolean ");
+		js.appendValueName(cgSpeculateExp);
+		js.append(" = true;\n");
+
+		CGValuedElement cgSpeculated = cgSpeculateExp.getSpeculated();
+		if (cgSpeculated != null) {
+			if (!js.appendLocalStatements(cgSpeculated)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public @NonNull Boolean visitCGSpeculatePart(@NonNull CGSpeculatePart object) {
+		// TODO Auto-generated method stub
 		return true;
 	}
 

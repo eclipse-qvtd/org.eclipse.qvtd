@@ -37,6 +37,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
@@ -174,6 +176,16 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 
 	@Override
 	public Object visitCGSequence(@NonNull CGSequence object) {
+		return visitCGValuedElement(object);
+	}
+
+	@Override
+	public Object visitCGSpeculateExp(@NonNull CGSpeculateExp object) {
+		return visitCGValuedElement(object);
+	}
+
+	@Override
+	public Object visitCGSpeculatePart(@NonNull CGSpeculatePart object) {
 		return visitCGValuedElement(object);
 	}
 

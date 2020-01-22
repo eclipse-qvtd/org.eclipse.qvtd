@@ -101,6 +101,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
@@ -355,6 +357,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			}
 			else if (cgLeafExp instanceof CGIfExp) {
 				((CGIfExp)cgLeafExp).setThenExpression(cgElementRoot);
+			}
+			else if (cgLeafExp instanceof CGSpeculateExp) {
+				((CGSpeculateExp)cgLeafExp).setSpeculated(cgElementRoot);
 			}
 			else {
 				assert cgLeafExp == null;
@@ -1430,7 +1435,17 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitSpeculateStatement(@NonNull SpeculateStatement asSpeculateStatement) {
-		return visiting(asSpeculateStatement);		// FIXME
+		CGSpeculateExp cgSpeculateExp = QVTiCGModelFactory.eINSTANCE.createCGSpeculateExp();
+		setAst(cgSpeculateExp, asSpeculateStatement);
+		for (@NonNull OCLExpression asExpression : ClassUtil.nullFree(asSpeculateStatement.getOwnedExpressions())) {
+			CGEcorePropertyCallExp cgArgument = doVisit(CGEcorePropertyCallExp.class, asExpression);
+			CGSpeculatePart cgSpeculatePart = QVTiCGModelFactory.eINSTANCE.createCGSpeculatePart();
+			cgSpeculatePart.setObjectExp(cgArgument.getSource());
+			cgSpeculatePart.setEStructuralFeature(cgArgument.getEStructuralFeature());
+			cgSpeculateExp.getParts().add(cgSpeculatePart);
+		}
+		getBodyBuilder().appendSubTree(cgSpeculateExp);
+		return null;
 	}
 
 	@Override
