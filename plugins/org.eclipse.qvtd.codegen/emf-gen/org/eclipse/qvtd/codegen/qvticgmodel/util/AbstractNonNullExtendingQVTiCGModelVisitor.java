@@ -144,6 +144,16 @@ public abstract class AbstractNonNullExtendingQVTiCGModelVisitor<R, C>
 	}
 
 	@Override
+	public @NonNull R visitCGSpeculateExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSpeculateExp object) {
+		return visitCGValuedElement(object);
+	}
+
+	@Override
+	public @NonNull R visitCGSpeculatePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSpeculatePart object) {
+		return visitCGValuedElement(object);
+	}
+
+	@Override
 	public @NonNull R visitCGTransformation(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTransformation object) {
 		return visitCGClass(object);
 	}

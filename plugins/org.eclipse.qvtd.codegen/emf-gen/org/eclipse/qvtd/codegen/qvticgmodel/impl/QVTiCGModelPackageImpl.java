@@ -42,6 +42,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
@@ -193,6 +195,20 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	private EClass cgSequenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgSpeculateExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgSpeculatePartEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -808,6 +824,66 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	@Override
+	public EClass getCGSpeculateExp() {
+		return cgSpeculateExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGSpeculateExp_Parts() {
+		return (EReference)cgSpeculateExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGSpeculateExp_Speculated() {
+		return (EReference)cgSpeculateExpEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCGSpeculatePart() {
+		return cgSpeculatePartEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGSpeculatePart_ObjectExp() {
+		return (EReference)cgSpeculatePartEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGSpeculatePart_EStructuralFeature() {
+		return (EReference)cgSpeculatePartEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getCGRealizedVariable_ExecutorType() {
 		return (EReference)cgRealizedVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -986,11 +1062,19 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgSequenceEClass = createEClass(19);
 		createEReference(cgSequenceEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 
-		cgTransformationEClass = createEClass(20);
+		cgSpeculateExpEClass = createEClass(20);
+		createEReference(cgSpeculateExpEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgSpeculateExpEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
+
+		cgSpeculatePartEClass = createEClass(21);
+		createEReference(cgSpeculatePartEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgSpeculatePartEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
+
+		cgTransformationEClass = createEClass(22);
 		createEReference(cgTransformationEClass, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0);
 		createEReference(cgTransformationEClass, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1);
 
-		cgTypedModelEClass = createEClass(21);
+		cgTypedModelEClass = createEClass(23);
 		createEAttribute(cgTypedModelEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(cgTypedModelEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1);
 	}
@@ -1046,6 +1130,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgRealizedVariableEClass.getESuperTypes().add(theCGModelPackage.getCGVariable());
 		cgRealizedVariablePartEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgSequenceEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
+		cgSpeculateExpEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
+		cgSpeculatePartEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgTransformationEClass.getESuperTypes().add(theCGModelPackage.getCGClass());
 		cgTypedModelEClass.getESuperTypes().add(theCGModelPackage.getCGNamedElement());
 
@@ -1124,6 +1210,14 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 
 		initEClass(cgSequenceEClass, CGSequence.class, "CGSequence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGSequence_OwnedStatements(), theCGModelPackage.getCGValuedElement(), null, "ownedStatements", null, 0, -1, CGSequence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cgSpeculateExpEClass, CGSpeculateExp.class, "CGSpeculateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGSpeculateExp_Parts(), this.getCGSpeculatePart(), null, "parts", null, 1, -1, CGSpeculateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGSpeculateExp_Speculated(), theCGModelPackage.getCGValuedElement(), null, "speculated", null, 1, 1, CGSpeculateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cgSpeculatePartEClass, CGSpeculatePart.class, "CGSpeculatePart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGSpeculatePart_ObjectExp(), theCGModelPackage.getCGValuedElement(), null, "objectExp", null, 1, 1, CGSpeculatePart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGSpeculatePart_EStructuralFeature(), ecorePackage.getEStructuralFeature(), null, "eStructuralFeature", null, 1, 1, CGSpeculatePart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgTransformationEClass, CGTransformation.class, "CGTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGTransformation_OwnedMappings(), this.getCGMapping(), this.getCGMapping_OwningTransformation(), "ownedMappings", null, 1, -1, CGTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

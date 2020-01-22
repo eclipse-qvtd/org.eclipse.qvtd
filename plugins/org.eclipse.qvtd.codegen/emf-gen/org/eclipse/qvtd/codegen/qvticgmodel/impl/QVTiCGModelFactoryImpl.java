@@ -100,8 +100,10 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			case 17: return createCGRealizedVariable();
 			case 18: return createCGRealizedVariablePart();
 			case 19: return createCGSequence();
-			case 20: return createCGTransformation();
-			case 21: return createCGTypedModel();
+			case 20: return createCGSpeculateExp();
+			case 21: return createCGSpeculatePart();
+			case 22: return createCGTransformation();
+			case 23: return createCGTypedModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -325,6 +327,28 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGSequence createCGSequence() {
 		CGSequenceImpl cgSequence = new CGSequenceImpl();
 		return cgSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CGSpeculateExp createCGSpeculateExp() {
+		CGSpeculateExpImpl cgSpeculateExp = new CGSpeculateExpImpl();
+		return cgSpeculateExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CGSpeculatePart createCGSpeculatePart() {
+		CGSpeculatePartImpl cgSpeculatePart = new CGSpeculatePartImpl();
+		return cgSpeculatePart;
 	}
 
 	/**

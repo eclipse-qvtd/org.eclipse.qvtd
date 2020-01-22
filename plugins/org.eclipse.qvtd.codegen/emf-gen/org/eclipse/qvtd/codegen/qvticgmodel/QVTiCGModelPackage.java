@@ -711,6 +711,70 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGSequence_OwnedStatements();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp <em>CG Speculate Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Speculate Exp</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp
+	 * @generated
+	 */
+	EClass getCGSpeculateExp();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp#getParts <em>Parts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parts</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp#getParts()
+	 * @see #getCGSpeculateExp()
+	 * @generated
+	 */
+	EReference getCGSpeculateExp_Parts();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp#getSpeculated <em>Speculated</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Speculated</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp#getSpeculated()
+	 * @see #getCGSpeculateExp()
+	 * @generated
+	 */
+	EReference getCGSpeculateExp_Speculated();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart <em>CG Speculate Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Speculate Part</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart
+	 * @generated
+	 */
+	EClass getCGSpeculatePart();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart#getObjectExp <em>Object Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Object Exp</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart#getObjectExp()
+	 * @see #getCGSpeculatePart()
+	 * @generated
+	 */
+	EReference getCGSpeculatePart_ObjectExp();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart#getEStructuralFeature <em>EStructural Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EStructural Feature</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart#getEStructuralFeature()
+	 * @see #getCGSpeculatePart()
+	 * @generated
+	 */
+	EReference getCGSpeculatePart_EStructuralFeature();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getExecutorType <em>Executor Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1270,6 +1334,58 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_SEQUENCE__OWNED_STATEMENTS = eINSTANCE.getCGSequence_OwnedStatements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSpeculateExpImpl <em>CG Speculate Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSpeculateExpImpl
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGSpeculateExp()
+		 * @generated
+		 */
+		EClass CG_SPECULATE_EXP = eINSTANCE.getCGSpeculateExp();
+
+		/**
+		 * The meta object literal for the '<em><b>Parts</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_SPECULATE_EXP__PARTS = eINSTANCE.getCGSpeculateExp_Parts();
+
+		/**
+		 * The meta object literal for the '<em><b>Speculated</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_SPECULATE_EXP__SPECULATED = eINSTANCE.getCGSpeculateExp_Speculated();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSpeculatePartImpl <em>CG Speculate Part</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSpeculatePartImpl
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGSpeculatePart()
+		 * @generated
+		 */
+		EClass CG_SPECULATE_PART = eINSTANCE.getCGSpeculatePart();
+
+		/**
+		 * The meta object literal for the '<em><b>Object Exp</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_SPECULATE_PART__OBJECT_EXP = eINSTANCE.getCGSpeculatePart_ObjectExp();
+
+		/**
+		 * The meta object literal for the '<em><b>EStructural Feature</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_SPECULATE_PART__ESTRUCTURAL_FEATURE = eINSTANCE.getCGSpeculatePart_EStructuralFeature();
 
 		/**
 		 * The meta object literal for the '<em><b>Executor Type</b></em>' reference feature.

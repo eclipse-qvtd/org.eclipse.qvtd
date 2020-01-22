@@ -309,6 +309,26 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 20: {
+				CGSpeculateExp cgSpeculateExp = (CGSpeculateExp)theEObject;
+				T result = caseCGSpeculateExp(cgSpeculateExp);
+				if (result == null) result = caseCGValuedElement(cgSpeculateExp);
+				if (result == null) result = caseCGTypedElement(cgSpeculateExp);
+				if (result == null) result = caseCGNamedElement(cgSpeculateExp);
+				if (result == null) result = caseCGElement(cgSpeculateExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 21: {
+				CGSpeculatePart cgSpeculatePart = (CGSpeculatePart)theEObject;
+				T result = caseCGSpeculatePart(cgSpeculatePart);
+				if (result == null) result = caseCGValuedElement(cgSpeculatePart);
+				if (result == null) result = caseCGTypedElement(cgSpeculatePart);
+				if (result == null) result = caseCGNamedElement(cgSpeculatePart);
+				if (result == null) result = caseCGElement(cgSpeculatePart);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 22: {
 				CGTransformation cgTransformation = (CGTransformation)theEObject;
 				T result = caseCGTransformation(cgTransformation);
 				if (result == null) result = caseCGClass(cgTransformation);
@@ -317,7 +337,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 21: {
+			case 23: {
 				CGTypedModel cgTypedModel = (CGTypedModel)theEObject;
 				T result = caseCGTypedModel(cgTypedModel);
 				if (result == null) result = caseCGNamedElement(cgTypedModel);
@@ -656,6 +676,36 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGSequence(CGSequence object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Speculate Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Speculate Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGSpeculateExp(CGSpeculateExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Speculate Part</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Speculate Part</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGSpeculatePart(CGSpeculatePart object) {
 		return null;
 	}
 

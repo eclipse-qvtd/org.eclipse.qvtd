@@ -44,6 +44,8 @@ public interface QVTiCGModelVisitor<R> extends org.eclipse.ocl.examples.codegen.
 	R visitCGRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariable object);
 	R visitCGRealizedVariablePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariablePart object);
 	R visitCGSequence(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSequence object);
+	R visitCGSpeculateExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSpeculateExp object);
+	R visitCGSpeculatePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSpeculatePart object);
 	R visitCGTransformation(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTransformation object);
 	R visitCGTypedModel(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTypedModel object);
 }

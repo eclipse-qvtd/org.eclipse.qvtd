@@ -230,6 +230,24 @@ public interface QVTiCGModelFactory extends EFactory {
 	@NonNull CGSequence createCGSequence();
 
 	/**
+	 * Returns a new object of class '<em>CG Speculate Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Speculate Exp</em>'.
+	 * @generated
+	 */
+	CGSpeculateExp createCGSpeculateExp();
+
+	/**
+	 * Returns a new object of class '<em>CG Speculate Part</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Speculate Part</em>'.
+	 * @generated
+	 */
+	CGSpeculatePart createCGSpeculatePart();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

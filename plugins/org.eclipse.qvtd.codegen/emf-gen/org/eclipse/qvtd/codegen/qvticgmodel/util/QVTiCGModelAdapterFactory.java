@@ -168,6 +168,14 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGSequenceAdapter();
 			}
 			@Override
+			public Adapter caseCGSpeculateExp(CGSpeculateExp object) {
+				return createCGSpeculateExpAdapter();
+			}
+			@Override
+			public Adapter caseCGSpeculatePart(CGSpeculatePart object) {
+				return createCGSpeculatePartAdapter();
+			}
+			@Override
 			public Adapter caseCGTransformation(CGTransformation object) {
 				return createCGTransformationAdapter();
 			}
@@ -556,6 +564,34 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGSequenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp <em>CG Speculate Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp
+	 * @generated
+	 */
+	public Adapter createCGSpeculateExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart <em>CG Speculate Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart
+	 * @generated
+	 */
+	public Adapter createCGSpeculatePartAdapter() {
 		return null;
 	}
 
