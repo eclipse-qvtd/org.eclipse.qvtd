@@ -18,7 +18,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
- * AbstractInvocation provides the mandatory shared functionality of the intrusive blocked/waiting linked list functionality.
+ * AbstractComputation provides the mandatory shared functionality of the intrusive blocked/waiting linked list functionality.
  */
 public abstract class AbstractComputation implements Computation
 {
