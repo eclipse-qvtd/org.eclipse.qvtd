@@ -26,4 +26,5 @@ public interface CheckedConditionVisitor<R>
 	R visitNavigableEdgeCheckedCondition(@NonNull NavigableEdgeCheckedCondition navigableEdgeCheckedCondition);
 	R visitNonNullInitializerCheckedCondition(@NonNull NonNullInitializerCheckedCondition nonNullInitializerCheckedCondition);
 	R visitPredicateEdgeCheckedCondition(@NonNull PredicateEdgeCheckedCondition predicateEdgeCheckedCondition);
+	R visitSpeculationCheckedCondition(@NonNull SpeculationCheckedCondition speculationCheckedCondition);
 }

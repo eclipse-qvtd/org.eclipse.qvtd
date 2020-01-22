@@ -26,6 +26,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.MultipleEdgeCheckedCo
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NavigableEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NonNullInitializerCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateEdgeCheckedCondition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.SpeculationCheckedCondition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -122,5 +123,10 @@ public class CheckedConditionWeightComparator implements CheckedConditionVisitor
 		Set<@NonNull Node> requiredNodes = new HashSet<>();
 		accumulateNodes(requiredNodes, predicateEdgeCheckedCondition.getPredicateEdge());
 		return requiredNodes.size();
+	}
+
+	@Override
+	public @NonNull Integer visitSpeculationCheckedCondition(@NonNull SpeculationCheckedCondition speculationCheckedCondition) {
+		return 0;		// The (only) SpeculationCheckedCondition is checked before everything else
 	}
 }
