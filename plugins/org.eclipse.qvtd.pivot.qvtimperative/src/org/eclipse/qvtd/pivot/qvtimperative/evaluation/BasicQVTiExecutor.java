@@ -101,6 +101,7 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
+import org.eclipse.qvtd.runtime.evaluation.SlotState.Speculating;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
@@ -308,6 +309,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			this.invocationManager = new IncrementalInvocationManager(this);
 			this.objectManager = new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
 		}
+		objectManager.addSpeculatedEAttributes(entryPointAnalysis.getSpeculatedEAttributes());
 		this.modelsManager = environmentFactory.createModelsManager(entryPointAnalysis);
 		Interval rootInterval = invocationManager.getRootInterval();
 		//		ModeFactory modeFactory = ModeFactory.NON_INCREMENTAL;// getModeFactory();
@@ -944,36 +946,43 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 				Property successProperty = ((GuardParameter)iMappingParameter).getSuccessProperty();
 				if (successProperty != null) {	// Should be exactly one, but may be nested loop handles a trace merge
 					EAttribute eAttribute = (EAttribute) successProperty.getESObject();
-					SlotState.Speculating outputSpeculatingSlotState = objectManager.getSpeculatingSlotState(thisParameter, eAttribute, null);
+					assert eAttribute != null;
+					Speculating outputSpeculatingSlotState = objectManager.getSpeculatingSlotState(thisParameter, eAttribute, null);
 					Boolean status = outputSpeculatingSlotState.getStatus();
-					if (status != null) {
-						return status;
+					if (status == Boolean.FALSE) {
+						outputSpeculatingSlotState.setStatus(Boolean.FALSE);
+						//	outputSpeculatingSlotState.assigned(thisParameter, eAttribute, Boolean.FALSE, false);
+						return Boolean.FALSE;
 					}
-					boolean needsSpeculation = false;
-					for (@NonNull OCLExpression iExpression : QVTimperativeUtil.getOwnedExpressions(speculateStatement)) {
-						if (iExpression instanceof PropertyCallExp) {
-							PropertyCallExp iCallExpression = (PropertyCallExp)iExpression;
-							OCLExpression sourceExpression = QVTimperativeUtil.getOwnedSource(iCallExpression);
-							Object sourceObject = evaluate(sourceExpression);
-							if (sourceObject != null) {
-								Property accessProperty = QVTimperativeUtil.getReferredProperty(iCallExpression);
-								EAttribute accessAttribute = (EAttribute) accessProperty.getESObject();
-								SlotState.Speculating inputSpeculatingSlotState = objectManager.getSpeculatingSlotState(sourceObject, accessAttribute, outputSpeculatingSlotState);
-								if (inputSpeculatingSlotState != outputSpeculatingSlotState) {			// Bypass the depends-on-self unit cycle
-									needsSpeculation = true;
+					if (status == null) {
+						boolean needsSpeculation = false;
+						for (@NonNull OCLExpression iExpression : QVTimperativeUtil.getOwnedExpressions(speculateStatement)) {
+							if (iExpression instanceof PropertyCallExp) {
+								PropertyCallExp iCallExpression = (PropertyCallExp)iExpression;
+								OCLExpression sourceExpression = QVTimperativeUtil.getOwnedSource(iCallExpression);
+								Object sourceObject = evaluate(sourceExpression);
+								if (sourceObject != null) {
+									Property accessProperty = QVTimperativeUtil.getReferredProperty(iCallExpression);
+									EAttribute accessAttribute = (EAttribute) accessProperty.getESObject();
+									assert accessAttribute != null;
+									//									SlotState.Speculating inputSpeculatingSlotState = getSpeculatingSlotState(objectManager, outputSpeculatingSlotState, sourceObject, accessAttribute);
+									SlotState.Speculating inputSpeculatingSlotState = objectManager.getSpeculatingSlotState(sourceObject, accessAttribute, outputSpeculatingSlotState);
+									if (inputSpeculatingSlotState != outputSpeculatingSlotState) {			// Bypass the depends-on-self unit cycle
+										needsSpeculation = true;
+									}
+								}
+								else if (sourceExpression.isIsRequired()) {
+									throw new InvalidValueException("null expression for speculated property source");
 								}
 							}
-							else if (sourceExpression.isIsRequired()) {
-								throw new InvalidValueException("null expression for speculated property source");
-							}
+						}
+						if (needsSpeculation) {
+							throw new InvocationFailedException(outputSpeculatingSlotState, true);
 						}
 					}
-					if (needsSpeculation) {
-						throw new InvocationFailedException(outputSpeculatingSlotState, true);
-					}
 					//	else {
-					outputSpeculatingSlotState.setStatus(Boolean.TRUE);	// redundant ??
-					outputSpeculatingSlotState.assigned(thisParameter, eAttribute, Boolean.TRUE, false);
+					//	outputSpeculatingSlotState.setStatus(Boolean.TRUE);	// redundant ??
+					//	outputSpeculatingSlotState.assigned(thisParameter, eAttribute, Boolean.TRUE, false);
 					//	}
 				}
 			}
