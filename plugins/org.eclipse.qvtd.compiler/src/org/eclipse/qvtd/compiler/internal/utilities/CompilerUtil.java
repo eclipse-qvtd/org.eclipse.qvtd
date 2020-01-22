@@ -102,7 +102,6 @@ public class CompilerUtil extends QVTscheduleUtil
 		defaultSavingOptions.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 		defaultSavingOptions.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 		defaultSavingOptions.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
-
 	}
 
 	public static void addConnectionError(@NonNull ProblemHandler problemHandler, @NonNull Connection connection, @NonNull String messageTemplate, Object... bindings) {
