@@ -898,6 +898,11 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
+	public boolean isNullable() {
+		return utility.isNullable();
+	}
+
+	@Override
 	public boolean isOld() {
 		assert edgeRole != null;
 		return edgeRole.isOld();

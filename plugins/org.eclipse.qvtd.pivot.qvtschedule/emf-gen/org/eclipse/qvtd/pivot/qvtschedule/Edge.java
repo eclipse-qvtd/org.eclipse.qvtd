@@ -342,6 +342,11 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	boolean isNew();
 
 	/**
+	 * Return true for a nullable pattern usage.
+	 */
+	boolean isNullable();
+
+	/**
 	 * Return true if this edge is for a constant/loaded/predicated/speculated relationship.
 	 */
 	boolean isOld();
