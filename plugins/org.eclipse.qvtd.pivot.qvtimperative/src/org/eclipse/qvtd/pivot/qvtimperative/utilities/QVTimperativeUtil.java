@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -60,6 +61,13 @@ import com.google.common.collect.Iterables;
 
 public class QVTimperativeUtil extends QVTbaseUtil
 {
+	public static class Internal extends QVTbaseUtil.Internal
+	{
+		public static @NonNull List<@NonNull OCLExpression> getOwnedExpressionsList(@NonNull SpeculateStatement asSpeculateStatement) {
+			return ClassUtil.nullFree(asSpeculateStatement.getOwnedExpressions());
+		}
+	}
+
 	public static final class MappingParameterBindingComparator implements Comparator<@NonNull MappingParameterBinding>
 	{
 		public static final @NonNull MappingParameterBindingComparator INSTANCE = new MappingParameterBindingComparator();
