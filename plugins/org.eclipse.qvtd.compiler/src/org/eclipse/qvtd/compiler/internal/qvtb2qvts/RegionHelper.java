@@ -123,7 +123,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		this.region = region;
 	}
 
-	public @NonNull BasicPartition createBasicPartition(@NonNull String name, @NonNull Iterable<@NonNull Node> headNodes) {
+	public @NonNull BasicPartition createBasicPartition(@NonNull String name, @NonNull Iterable<@NonNull ? extends Node> headNodes) {
 		BasicPartition basicPartition = QVTscheduleFactory.eINSTANCE.createBasicPartition();
 		basicPartition.setName(name);
 		//	basicPartition.setRegion(region);
