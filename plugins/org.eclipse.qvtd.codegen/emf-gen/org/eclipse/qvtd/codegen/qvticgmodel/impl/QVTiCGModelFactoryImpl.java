@@ -335,7 +335,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * @generated
 	 */
 	@Override
-	public CGSpeculateExp createCGSpeculateExp() {
+	public @NonNull CGSpeculateExp createCGSpeculateExp() {
 		CGSpeculateExpImpl cgSpeculateExp = new CGSpeculateExpImpl();
 		return cgSpeculateExp;
 	}
@@ -346,7 +346,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * @generated
 	 */
 	@Override
-	public CGSpeculatePart createCGSpeculatePart() {
+	public @NonNull CGSpeculatePart createCGSpeculatePart() {
 		CGSpeculatePartImpl cgSpeculatePart = new CGSpeculatePartImpl();
 		return cgSpeculatePart;
 	}

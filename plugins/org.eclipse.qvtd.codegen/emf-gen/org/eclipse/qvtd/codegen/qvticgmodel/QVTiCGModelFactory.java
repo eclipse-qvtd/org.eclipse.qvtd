@@ -236,7 +236,7 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Speculate Exp</em>'.
 	 * @generated
 	 */
-	CGSpeculateExp createCGSpeculateExp();
+	@NonNull CGSpeculateExp createCGSpeculateExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Speculate Part</em>'.
@@ -245,7 +245,7 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Speculate Part</em>'.
 	 * @generated
 	 */
-	CGSpeculatePart createCGSpeculatePart();
+	@NonNull CGSpeculatePart createCGSpeculatePart();
 
 	/**
 	 * Returns the package supported by this factory.

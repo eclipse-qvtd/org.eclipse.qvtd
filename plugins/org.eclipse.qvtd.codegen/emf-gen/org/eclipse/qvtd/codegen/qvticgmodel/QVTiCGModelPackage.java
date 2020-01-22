@@ -29,12 +29,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * </ul>
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * The CGModel provides a Code Generation friendly form of the OCL Pivot model, with distinct classes
- * such as LibraryPropertyCallExp and EcorePropertyCallExp for distinct purposes. Additional classes
- * such as BoxExpr, CatchExpr and CastParameter support rewrite optimizations.
- * <p>
- * References to the Pivot model are expressed as attributes with datatype values in order to avoid
- * confusion as to whether the new or old pivot mosdel is in use while code generating the pivot model.
+ * The QVTiCGModel exends the Code Generation friendly form of the OCL Pivot model with QVTi-specific constructs.
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory
  * @model kind="package"
