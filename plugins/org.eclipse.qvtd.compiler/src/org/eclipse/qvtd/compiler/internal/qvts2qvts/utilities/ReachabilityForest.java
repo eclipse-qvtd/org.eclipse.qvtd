@@ -150,7 +150,7 @@ public class ReachabilityForest
 				if (thisCostNodes != null) {
 					//
 					//	Add the forward edges that make progress to moreMoreNodes and remember the
-					//	backward and inverse edges in case forward egdes alone are inadequate.
+					//	backward and inverse edges in case forward edges alone are inadequate.
 					//
 					for (@NonNull Node sourceNode : thisCostNodes) {
 						assert node2cost.get(sourceNode) == thisCost;
@@ -345,6 +345,11 @@ public class ReachabilityForest
 	}
 
 	/**
+	 * Context for diagnostic messages.
+	 */
+	protected final @Nullable String disambiguator;
+
+	/**
 	 * The preferred non-secondary edges to be used in the tree.
 	 */
 	private final @NonNull Set<@NonNull NavigableEdge> forwardEdges = new HashSet<>();
@@ -382,7 +387,8 @@ public class ReachabilityForest
 	 * Construct the Reachability forest for the specified rootNodes using the availableNavigableEdges to locate
 	 * paths to further nodes and also any old computation edges.
 	 */
-	public ReachabilityForest(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigableEdge> availableNavigableEdges) {
+	public ReachabilityForest(@Nullable String disambiguator, @NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigableEdge> availableNavigableEdges) {
+		this.disambiguator = disambiguator;
 		for (@NonNull Node rootNode : rootNodes) {
 			node2reachingEdges.put(rootNode, null);
 		}
@@ -427,6 +433,10 @@ public class ReachabilityForest
 		return ClassUtil.nonNullState(node2cost.get(node));
 	}
 
+	public @Nullable String getDisambiguator() {
+		return disambiguator;
+	}
+
 	/**
 	 * Return a comparator to sort edges source cost first then target cost then alphabetically.
 	 */
@@ -445,10 +455,10 @@ public class ReachabilityForest
 					Integer d1t = node2cost.get(t1);
 					Integer d2s = node2cost.get(s2);
 					Integer d2t = node2cost.get(t2);
-					assert d1s != null : s1 + " is not reachable within " + s1.getOwningRegion();		// FIXME change to PartitionProblem
-					assert d1t != null : t1 + " is not reachable within " + t1.getOwningRegion();
-					assert d2s != null : s2 + " is not reachable within " + s2.getOwningRegion();
-					assert d2t != null : t2 + " is not reachable within " + t2.getOwningRegion();
+					assert d1s != null : s1 + " is not reachable within " + s1.getOwningRegion() + getContext();		// FIXME change to PartitionProblem
+					assert d1t != null : t1 + " is not reachable within " + t1.getOwningRegion() + getContext();
+					assert d2s != null : s2 + " is not reachable within " + s2.getOwningRegion() + getContext();
+					assert d2t != null : t2 + " is not reachable within " + t2.getOwningRegion() + getContext();
 					int d1 = Math.max(d1s,  d1t);
 					int d2 = Math.max(d2s,  d2t);
 					if (d1 != d2) {
@@ -474,6 +484,10 @@ public class ReachabilityForest
 					d = ClassUtil.safeCompareTo(n1, n2);
 					return d;
 				}
+
+				private @NonNull String getContext() {
+					return disambiguator != null ? ("«" + disambiguator + "»") : "";
+				}
 			};
 		}
 		return edgeCostComparator2;
@@ -491,13 +505,17 @@ public class ReachabilityForest
 				public int compare(@NonNull Node o1, @NonNull Node o2) {
 					Integer c1 = node2cost.get(o1);
 					Integer c2 = node2cost.get(o2);
-					assert c1 != null : o1 + " is not reachable within " + o1.getOwningRegion();		// FIXME change to PartitionProblem
-					assert c2 != null : o2 + " is not reachable within " + o2.getOwningRegion();
+					assert c1 != null : o1 + " is not reachable within " + o1.getOwningRegion() + getContext();		// FIXME change to PartitionProblem
+					assert c2 != null : o2 + " is not reachable within " + o2.getOwningRegion() + getContext();
 					int diff = c1 - c2;
 					if (diff != 0) {
 						return diff;
 					}
 					return ClassUtil.safeCompareTo(o1.getName(), o2.getName());
+				}
+
+				private @NonNull String getContext() {
+					return disambiguator != null ? ("«" + disambiguator + "»") : "";
 				}
 			};
 		}
@@ -566,10 +584,11 @@ public class ReachabilityForest
 			s.append(node.getName());
 			s.append(" :");
 			List<@NonNull Edge> edges = node2reachingEdges.get(node);
-			assert edges != null;
-			for (@NonNull Edge edge : edges) {
-				s.append(" ");
-				s.append(edge);
+			if (edges != null) {
+				for (@NonNull Edge edge : edges) {
+					s.append(" ");
+					s.append(edge);
+				}
 			}
 		}
 		return s.toString();

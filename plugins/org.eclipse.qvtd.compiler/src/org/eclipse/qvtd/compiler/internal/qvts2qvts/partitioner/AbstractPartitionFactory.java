@@ -50,7 +50,7 @@ public abstract class AbstractPartitionFactory<R extends Region> extends RegionH
 	}
 
 	protected @NonNull ReachabilityForest createReachabilityForest() {
-		return new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		return new ReachabilityForest(null, getReachabilityRootNodes(), getAvailableNavigableEdges());
 	}
 
 	protected abstract @NonNull Iterable<@NonNull NavigableEdge> getAvailableNavigableEdges();
