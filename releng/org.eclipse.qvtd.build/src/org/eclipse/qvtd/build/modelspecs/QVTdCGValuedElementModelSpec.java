@@ -34,6 +34,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
 
 /**
@@ -107,6 +109,9 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 
 			new QVTdCGValuedElementModelSpec(CGMappingCall.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 			new QVTdCGValuedElementModelSpec(CGMappingLoop.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
+
+			new QVTdCGValuedElementModelSpec(CGSpeculateExp.class, null,						Box.ALL  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
+			new QVTdCGValuedElementModelSpec(CGSpeculatePart.class, null,						Box.ALL  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 		}
 	}
 
