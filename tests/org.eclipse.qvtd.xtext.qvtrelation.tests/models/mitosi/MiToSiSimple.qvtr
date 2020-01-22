@@ -25,7 +25,7 @@ transformation MiToSiSimple(uml:{umlmmmi,ecoreMM}, java:javammsi)
 	/**
 	 * Return true if this class or a transitive super-class is marked as DomainRoot. 
 	 */
-	 query isClass(c : umlmmmi::Class) : Boolean {
+	 query isClass(c : umlmmmi::Class[1]) : Boolean[1] {
 		c.oclAsSet()->closure(supers)->exists(v : umlmmmi::Class[1] | v.type = 'DomainRoot')		
 	}
 
