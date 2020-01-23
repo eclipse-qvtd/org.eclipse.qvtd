@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -98,7 +99,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		return partitionAnalyses;
 	}
 
-	public void createLocalSuccess() {
+	public @NonNull SuccessEdge createLocalSuccess() {
 		List<@NonNull Node> traceNodes = getTraceNodes();
 		assert traceNodes.size() == 1;
 		Node traceNode = ClassUtil.nonNullState(traceNodes.get(0));
@@ -108,8 +109,9 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		Relation2TraceClass relation2TraceClass = relation2traceGroup.getRule2TraceClass();
 		Element2MiddleProperty relation2localSuccessProperty = relation2TraceClass.getRelation2LocalSuccessProperty();
 		Property localSuccessProperty = relation2localSuccessProperty.getTraceProperty();
-		relationAnalysis.createRealizedSuccess(Utility.NON_NULL_MATCHED, traceNode, localSuccessProperty, null);
+		SuccessEdge localSuccessEdge = relationAnalysis.createRealizedSuccess(Utility.NON_NULL_MATCHED, traceNode, localSuccessProperty, null);
 		analyzeLocalSuccessEdge(traceNode);
+		return localSuccessEdge;
 	}
 
 	public @NonNull Iterable<@NonNull NavigableEdge> getCorollaryEdges() {
