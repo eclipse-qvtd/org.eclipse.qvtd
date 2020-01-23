@@ -227,11 +227,16 @@ public abstract class AbstractIntervalInternal implements Interval
 					try {
 						boolean success = invocation.execute();
 						if (debugInvocations) {
-							AbstractTransformer.INVOCATIONS.println((success ? "done "  : "fail ") + invocation);
+							AbstractTransformer.INVOCATIONS.println((success ? "done "  : "fail-clean ") + invocation);
 						}
 					}
 					catch (InvocationFailedException e) {
 						block(invocation, e.slotState);
+					}
+					catch (Exception e) {
+						if (debugInvocations) {
+							AbstractTransformer.INVOCATIONS.println(("fail-dirty ") + invocation);
+						}
 					}
 				}
 			}
