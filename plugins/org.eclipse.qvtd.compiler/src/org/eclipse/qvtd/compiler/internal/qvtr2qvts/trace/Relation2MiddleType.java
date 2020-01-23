@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  */
 public interface Relation2MiddleType extends Rule2MiddleType
 {
-	@Nullable Relation2InheritedProperty basicGetRelation2DispatchSuccessProperty();
+	@Nullable Relation2SuccessProperty basicGetRelation2DispatchSuccessProperty();
 	@Nullable Relation2SuccessProperty basicGetRelation2GlobalSuccessProperty();
 	@Nullable Relation2SuccessProperty basicGetRelation2LocalSuccessProperty();
 	@Nullable Relation2ResultProperty basicGetRelation2ResultProperty();

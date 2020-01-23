@@ -19,7 +19,6 @@ import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
@@ -65,7 +64,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	/**
 	 * The future Property that provides the dispatch success/failure/not-ready state of the traced mapping.
 	 */
-	private @Nullable Relation2InheritedProperty relation2dispatchSuccessProperty = null;
+	private @Nullable Relation2SuccessProperty relation2dispatchSuccessProperty = null;
 	private boolean frozenRelation2dispatchSuccessProperty = false;			// True once the presence/absence has been tested
 
 	/**
@@ -138,7 +137,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	}
 
 	@Override
-	public @Nullable Relation2InheritedProperty basicGetRelation2DispatchSuccessProperty() {
+	public @Nullable Relation2SuccessProperty basicGetRelation2DispatchSuccessProperty() {
 		frozenRelation2dispatchSuccessProperty = true;
 		return relation2dispatchSuccessProperty;
 	}
@@ -211,14 +210,15 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		return QVTrelationUtil.getName(relation);
 	}
 
-	public @NonNull Relation2InheritedProperty getRelation2DispatchSuccessProperty() {
-		Relation2InheritedProperty relation2dispatchSuccessProperty2 = relation2dispatchSuccessProperty;
+	public @NonNull Relation2SuccessProperty getRelation2DispatchSuccessProperty() {
+		Relation2SuccessProperty relation2dispatchSuccessProperty2 = relation2dispatchSuccessProperty;
 		if (relation2dispatchSuccessProperty2 == null) {
 			assert !frozenRelation2dispatchSuccessProperty;
-			org.eclipse.ocl.pivot.Class dispatchClass = getTransformation2TracePackage().getDispatchClass();
-			Property dispatchSuccessProperty = NameUtil.getNameable(QVTbaseUtil.getOwnedProperties(dispatchClass), QVTrelationNameGenerator.TRACE_DISPATCH_SUCCESS_PROPERTY_NAME);
-			assert dispatchSuccessProperty != null;
-			relation2dispatchSuccessProperty = relation2dispatchSuccessProperty2 = new Relation2InheritedProperty(this, dispatchSuccessProperty);
+			//	org.eclipse.ocl.pivot.Class dispatchClass = getTransformation2TracePackage().getDispatchClass();
+			//	Property dispatchSuccessProperty = NameUtil.getNameable(QVTbaseUtil.getOwnedProperties(dispatchClass), QVTrelationNameGenerator.TRACE_DISPATCH_SUCCESS_PROPERTY_NAME);
+			//	assert dispatchSuccessProperty != null;
+			//	relation2dispatchSuccessProperty = relation2dispatchSuccessProperty2 = new Relation2InheritedProperty(this, dispatchSuccessProperty);
+			relation2dispatchSuccessProperty = relation2dispatchSuccessProperty2 = getRelation2GlobalSuccessProperty();
 		}
 		return relation2dispatchSuccessProperty2;
 	}
