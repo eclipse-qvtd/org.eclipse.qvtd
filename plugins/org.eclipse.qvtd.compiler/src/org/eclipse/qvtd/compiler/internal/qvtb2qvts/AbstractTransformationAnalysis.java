@@ -109,6 +109,7 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	 */
 	public void addCorollary(@NonNull NavigationEdge edge) {
 		assert edge.isRealized();
+		assert !edge.isNullable();
 		//	Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 		Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 		//	assert sourceNode.isRealized();		-- may be a loaded input of a realized where invocation

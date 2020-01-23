@@ -75,7 +75,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		for (int i = 0; i < alreadyRealizedNodes.size(); i++) {
 			Node alreadyRealizedNode = alreadyRealizedNodes.get(i);
 			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(alreadyRealizedNode)) {
-				if (edge.isRealized() && edge.isNavigation()) {
+				if (edge.isRealized() && edge.isNavigation() && !edge.isNullable()) {
 					NavigationEdge navigationEdge = (NavigationEdge)edge;
 					Node targetNode = QVTscheduleUtil.getTargetNode(navigationEdge);
 					if (targetNode.isRealized() && !targetNode.isSuccess()) {
