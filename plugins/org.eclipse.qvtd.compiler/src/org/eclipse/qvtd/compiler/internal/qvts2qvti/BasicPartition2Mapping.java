@@ -547,7 +547,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			else {
 				assert !property.isIsImplicit();
 				assert !isPartial;
-				assert !isNotify;
+				//	assert !isNotify;
 				NewStatement newStatement = (NewStatement)slotVariable;
 				NewStatementPart newStatementPart = helper.createNewStatementPart(setProperty, targetVariableExp);
 				newStatement.getOwnedParts().add(newStatementPart);
