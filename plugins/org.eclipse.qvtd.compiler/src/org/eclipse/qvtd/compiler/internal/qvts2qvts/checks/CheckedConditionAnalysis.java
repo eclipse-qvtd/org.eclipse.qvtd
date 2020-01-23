@@ -85,26 +85,19 @@ public class CheckedConditionAnalysis
 		}
 
 		public void analyze() {
+			if (speculatedEdges != null) {
+				context.add(new SpeculationCheckedCondition(speculatedEdges));
+			}
 			for (@NonNull Edge edge : oldUnconditionalEdges) {
 				//				assert edge.isOld() && edge.isUnconditional();
 				edge.accept(this);
 			}
 			for (@NonNull Node node : partition.getPartialNodes()) {
 				Role nodeRole = partition.getRole(node);
-				if ((nodeRole != null) && nodeRole.isOld() && !node.isConditional() && !node.isDependency()) {
+				if ((nodeRole != null) && nodeRole.isOld() && !node.isConditional() && !node.isDependency() && (nodeRole != Role.CONSTANT_SUCCESS_TRUE)) {	// FIXME move to visitSuccessNode
 					node.accept(this);
 				}
 			}
-		}
-
-		private boolean isCheckedNavigation(@NonNull NavigationEdge edge) {
-			Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-			Role sourceNodeRole = partition.getRole(sourceNode);
-			assert sourceNodeRole != null;
-			Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-			Role targetNodeRole = partition.getRole(targetNode);
-			assert targetNodeRole != null;
-			return targetNodeRole.isConstant() && !sourceNodeRole.isNew();
 		}
 
 		@Override
@@ -176,73 +169,78 @@ public class CheckedConditionAnalysis
 
 		@Override
 		public Object visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
-			if (isCheckedNavigation(navigationEdge)) {		// FIXME Why is this irregularity needed ?
+			Role sourceNodeRole1 = partition.getRole(QVTscheduleUtil.getSourceNode(navigationEdge));
+			assert sourceNodeRole1 != null;
+			Role targetNodeRole1 = partition.getRole(QVTscheduleUtil.getTargetNode(navigationEdge));
+			assert targetNodeRole1 != null;
+			if (targetNodeRole1.isConstant() && !sourceNodeRole1.isNew()) {		// FIXME Is this first check needed ?
 				context.add(new ConstantTargetCheckedCondition(navigationEdge));
 				return null;
 			}
-			else {
-				Role navigableEdgeRole = partition.getRole(navigationEdge);
-				assert navigableEdgeRole != null;
-				NavigationEdge checkedEdge = QVTscheduleUtil.getPrimaryEdge(navigationEdge);
-				NavigationEdge oppositeEdge = checkedEdge.getOppositeEdge();
+			Role navigableEdgeRole = partition.getRole(navigationEdge);
+			assert navigableEdgeRole != null;
+			NavigationEdge primaryEdge = QVTscheduleUtil.getPrimaryEdge(navigationEdge);
+			{
+				NavigationEdge oppositeEdge = primaryEdge.getOppositeEdge();
 				if (oppositeEdge != null) {
-					Node sourceNode = QVTscheduleUtil.getSourceNode(checkedEdge);
-					Node targetNode = QVTscheduleUtil.getTargetNode(checkedEdge);
+					Node sourceNode = QVTscheduleUtil.getSourceNode(primaryEdge);
+					Node targetNode = QVTscheduleUtil.getTargetNode(primaryEdge);
 					Integer sourceCost = reachabilityForest.getCost(sourceNode);
 					Integer targetCost = reachabilityForest.getCost(targetNode);
 					if ((0 < targetCost) &&  (targetCost < sourceCost)) {
-						checkedEdge = oppositeEdge;
+						primaryEdge = oppositeEdge;
 					}
 				}
-				Property checkedProperty = QVTscheduleUtil.getReferredProperty(checkedEdge);
-				Set<@NonNull Property> allCheckedProperties2 = computeCheckedProperties(null);
-				if (allCheckedProperties2.contains(checkedProperty)) {
-					if (checkedNavigableEdges == null) {
-						checkedNavigableEdges = new HashSet<>();
-					}
-					if (checkedNavigableEdges.add(checkedEdge)) {
-						context.add(new NavigableEdgeCheckedCondition(checkedEdge));
-						//					return null;
-					}
-				}
-				Node targetNode = QVTscheduleUtil.getTargetNode(navigationEdge);
-				if (navigableEdgeRole.isPredicated() && targetNode.isConstant()) {
-					context.add(new ConstantTargetCheckedCondition(navigationEdge));
-					//				return null;
-				}
-				//			assert navigableEdge.isOld();
-				Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
-				//	ClassDatum edgeTargetClassDatum = completeModel.getClassDatum(QVTrelationUtil.getType(property));
-				CompleteClass edgeTargetCompleteClass = completeModel.getCompleteClass(QVTrelationUtil.getType(property));
-				Node sourceNode = QVTscheduleUtil.getSourceNode(navigationEdge);
-				Integer sourceCost = reachabilityForest.getCost(sourceNode);
-				Integer targetCost = reachabilityForest.getCost(targetNode);
-				if (sourceCost < targetCost) {
-					ClassDatum targetNodeClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-					if (!QVTscheduleUtil.conformsTo(edgeTargetCompleteClass, targetNodeClassDatum)) {
-						context.add(new CastEdgeCheckedCondition(navigationEdge));
-						//					return null;
-					}
-				}
-				return null;
 			}
+			Property checkedProperty = QVTscheduleUtil.getReferredProperty(primaryEdge);
+			Set<@NonNull Property> allCheckedProperties2 = computeCheckedProperties(null);
+			if (allCheckedProperties2.contains(checkedProperty)) {
+				if (checkedNavigableEdges == null) {
+					checkedNavigableEdges = new HashSet<>();
+				}
+				if (checkedNavigableEdges.add(primaryEdge)) {
+					context.add(new NavigableEdgeCheckedCondition(primaryEdge));
+					//					return null;
+				}
+			}
+			Node targetNode = QVTscheduleUtil.getTargetNode(navigationEdge);
+			if (navigableEdgeRole.isPredicated() && targetNode.isConstant()) {
+				context.add(new ConstantTargetCheckedCondition(navigationEdge));
+				//				return null;
+			}
+			//			assert navigableEdge.isOld();
+			Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+			//	ClassDatum edgeTargetClassDatum = completeModel.getClassDatum(QVTrelationUtil.getType(property));
+			CompleteClass edgeTargetCompleteClass = completeModel.getCompleteClass(QVTrelationUtil.getType(property));
+			Node sourceNode = QVTscheduleUtil.getSourceNode(navigationEdge);
+			Integer sourceCost = reachabilityForest.getCost(sourceNode);
+			Integer targetCost = reachabilityForest.getCost(targetNode);
+			if (sourceCost < targetCost) {
+				ClassDatum targetNodeClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+				if (!QVTscheduleUtil.conformsTo(edgeTargetCompleteClass, targetNodeClassDatum)) {
+					context.add(new CastEdgeCheckedCondition(navigationEdge));
+					//					return null;
+				}
+			}
+			return null;
 		}
 
 		@Override
-		public Object visitNode(@NonNull Node node) {
-			Integer targetCost = reachabilityForest.getCost(node);
+		public Object visitNode(@NonNull Node targetNode) {
+			Integer targetCost = reachabilityForest.getCost(targetNode);
 			Edge firstEdge = null;
 			MultipleEdgeCheckedCondition checkedCondition = null;
-			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 				Role edgeRole = partition.getRole(edge);
 				if ((edgeRole != null) && edgeRole.isOld() && !edge.isExpression()) {		// FIXME why exclude expression?
-					Integer sourceCost = reachabilityForest.getCost(QVTscheduleUtil.getSourceNode(edge));
+					Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+					Integer sourceCost = reachabilityForest.getCost(sourceNode);
 					if (sourceCost <= targetCost) {
 						if (firstEdge == null) {
 							firstEdge = edge;
 						}
 						else if (checkedCondition == null){
-							checkedCondition = new MultipleEdgeCheckedCondition(node, firstEdge, edge);
+							checkedCondition = new MultipleEdgeCheckedCondition(targetNode, firstEdge, edge);
 							context.add(checkedCondition);
 						}
 						else {
@@ -310,9 +308,21 @@ public class CheckedConditionAnalysis
 
 		@Override
 		public Object visitSuccessEdge(@NonNull SuccessEdge successEdge) {
-			if (!isCheckedNavigation(successEdge)) {				// Part of a computed success
-				return super.visitSuccessEdge(successEdge);
+			//	if (!isCheckedNavigation(successEdge)) {				// Part of a computed success
+			//		return super.visitSuccessEdge(successEdge);
+			//	}
+			Role role = partition.getRole(successEdge);
+			assert role != null;
+			if (role.isSpeculated()) {
+				assert (speculatedEdges != null) && speculatedEdges.contains(successEdge);
+				return null;
 			}
+			Role sourceNodeRole = partition.getRole(QVTscheduleUtil.getSourceNode(successEdge));
+			assert sourceNodeRole != null;
+			assert !sourceNodeRole.isNew();
+			Role targetNodeRole = partition.getRole(QVTscheduleUtil.getTargetNode(successEdge));
+			assert targetNodeRole != null;
+			assert targetNodeRole.isConstant();
 			RuleRegion ruleRegion = (RuleRegion)partitionAnalysis.getRegion();
 			Rule rule = QVTscheduleUtil.getReferredRule(ruleRegion);
 			AbstractTransformationAnalysis transformationAnalysis = partitionAnalysis.getPartitionedTransformationAnalysis().getTransformationAnalysis();
@@ -359,14 +369,52 @@ public class CheckedConditionAnalysis
 	 * Once cost sorted the list is a sensible residual scheduling order after higher priority checked edges.
 	 * Conditional edges should be scheduled as a consequence of an invoking unconditional edge/node.
 	 */
-	private final @NonNull List<@NonNull Edge> oldUnconditionalEdges;
+	private final @NonNull List<@NonNull Edge> oldUnconditionalEdges = new ArrayList<>();
+
+	/**
+	 * The edges that must be speculated as successful to allow this partition to be successful.
+	 */
+	private final @Nullable List<@NonNull SuccessEdge> speculatedEdges;
 
 	public CheckedConditionAnalysis(@NonNull MappingPartitionAnalysis<?> partitionAnalysis, @NonNull ScheduleManager scheduleManager) {
 		this.partitionAnalysis = partitionAnalysis;
 		this.partition = partitionAnalysis.getPartition();
 		this.scheduleManager = scheduleManager;
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
-		this.oldUnconditionalEdges = computeOldUnconditionalEdges();
+		this.speculatedEdges = analyzeEdges();
+	}
+
+	private @Nullable List<@NonNull SuccessEdge> analyzeEdges() {
+		List<@NonNull SuccessEdge> speculatedEdges = null;
+		for (@NonNull Edge edge : partition.getPartialEdges()) {
+			Role edgeRole = partition.getRole(edge);
+			if (edgeRole != null) {
+				if (edgeRole.isSpeculated()) {
+					if (speculatedEdges == null) {
+						speculatedEdges = new ArrayList<>();
+					}
+					speculatedEdges.add((SuccessEdge) edge);
+				}
+				else if (edgeRole.isOld() && !edge.isConditional()) {
+					Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+					Role sourceNodeRole = partition.getRole(sourceNode);
+					if ((sourceNodeRole != null) && sourceNodeRole.isOld()) {
+						Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+						Role targetNodeRole = partition.getRole(targetNode);
+						if ((targetNodeRole != null) && targetNodeRole.isOld()) {
+							oldUnconditionalEdges.add(edge);
+						}
+					}
+				}
+			}
+		}
+		if (oldUnconditionalEdges.size() > 1) {
+			Collections.sort(oldUnconditionalEdges, reachabilityForest.getEdgeCostComparator());
+		}
+		if ((speculatedEdges != null) && (speculatedEdges.size() > 1)) {
+			Collections.sort(speculatedEdges, reachabilityForest.getEdgeCostComparator());
+		}
+		return speculatedEdges;
 	}
 
 	/**
@@ -408,31 +456,20 @@ public class CheckedConditionAnalysis
 		return allCheckedProperties;
 	}
 
-	private @NonNull List<@NonNull Edge> computeOldUnconditionalEdges() {
-		List<@NonNull Edge> oldEdges = new ArrayList<>();
-		for (@NonNull Edge edge : partition.getPartialEdges()) {
-			Role edgeRole = partition.getRole(edge);
-			if ((edgeRole != null) && edgeRole.isOld() && !edge.isConditional()) {
-				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-				Role sourceNodeRole = partition.getRole(sourceNode);
-				if ((sourceNodeRole != null) && sourceNodeRole.isOld()) {
-					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-					Role targetNodeRole = partition.getRole(targetNode);
-					if ((targetNodeRole != null) && targetNodeRole.isOld()) {
-						oldEdges.add(edge);
-					}
-				}
-			}
-		}
-		Collections.sort(oldEdges, reachabilityForest.getEdgeCostComparator());
-		return oldEdges;
-	}
-
 	public @NonNull Set<@NonNull Property> getAllCheckedProperties() {
 		return computeCheckedProperties(null);
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getOldUnconditionalEdges() {
 		return oldUnconditionalEdges;
+	}
+
+	public @Nullable Iterable<@NonNull SuccessEdge> getSpeculatedEdges() {
+		return speculatedEdges;
+	}
+
+	@Override
+	public String toString() {
+		return partition.toString();
 	}
 }

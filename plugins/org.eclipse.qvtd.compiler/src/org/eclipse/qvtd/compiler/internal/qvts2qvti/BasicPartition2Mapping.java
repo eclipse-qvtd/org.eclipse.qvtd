@@ -66,6 +66,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -86,6 +87,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
@@ -190,6 +192,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 
 		public @NonNull Iterable<@NonNull CheckedCondition> analyze() {
+			if (checkedConditionAnalysis.getSpeculatedEdges() != null) {
+				getClass();
+			}
 			//
 			//	A dispatch input node must be checked to confirm the correct derivation.
 			//
@@ -231,6 +236,18 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						OCLExpression exp = createVariableExp(node);
 						createCheckStatement(exp);
 					}
+				}
+			}
+			//
+			//	Speculated edges must participate in a global decision before anything else is done.
+			//
+			Iterable<@NonNull SuccessEdge> speculatedEdges = checkedConditionAnalysis.getSpeculatedEdges();
+			if (speculatedEdges != null) {
+				for (@NonNull SuccessEdge speculatedEdge : speculatedEdges) {		// Ensure that all speculated objects are located
+					addNode(QVTscheduleUtil.getSourceNode(speculatedEdge));
+				}
+				for (@NonNull SuccessEdge speculatedEdge : speculatedEdges) {		// then traverse the speculated properties all in sequence
+					addEdge(speculatedEdge);
 				}
 			}
 			Set<@NonNull CheckedCondition> checkedConditions = checkedConditionAnalysis.computeCheckedConditions();
@@ -294,7 +311,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 
 		public void synthesize(@NonNull Iterable<@NonNull CheckedCondition> checkedConditions) {
-			assert mapping.getOwnedStatements().isEmpty();
+			assert mapping.getOwnedStatements().isEmpty();			// Enforce analyze then synthesize design policy
+			List<@NonNull OCLExpression> speculatedExpressions = null;
 			for (@NonNull Edge edge : edgeSchedule) {
 				assert !edge.isConditional();
 				Role edgeRole = partition.getRole(edge);
@@ -307,87 +325,115 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				assert !targetNode.isConditional();
 				Role targetNodeRole = partition.getRole(targetNode);
 				assert targetNodeRole != null;
-				if (edge.isNavigation()) {
-					NavigationEdge navigationEdge = (NavigationEdge)edge;
-					Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+				if (edgeRole.isSpeculated()) {
+					if (speculatedExpressions == null) {
+						speculatedExpressions = new ArrayList<>();
+					}
+					else {
+						assert !speculatedExpressions.isEmpty() : "Speculated edges must be scheduled in sequence";
+					}
+					SuccessEdge speculatedEdge = (SuccessEdge)edge;
 					OCLExpression sourceExp = createVariableExp(sourceNode);
-					Type sourceType = sourceExp.getType();
-					Type requiredType = property.getOwningClass();
-					if ((requiredType != null) && !sourceType.conformsTo(getMetamodelManager().getStandardLibrary(), requiredType)) {
-						String castName = "cast_" + sourceNode.getName(); // FIXME BUG 530033 in a closed world this is always a fail
-						DeclareStatement castStatement = createCheckedDeclareStatement(castName, sourceExp, requiredType);
-						sourceExp = helper.createVariableExp(castStatement);
-					}
-					OCLExpression source2targetExp = createCallExp(sourceExp, property);
-					if (targetNode.isNullLiteral()) {
-						createCheckStatement(source2targetExp, "=", helper.createNullLiteralExp());
-					}
-					else if (targetNodeRole.isConstant() && !sourceNodeRole.isNew()) {
-						//						createCheckStatement(source2targetExp);
-						VariableDeclaration nodeVariable = node2variable.get(targetNode);
-						/*if (nodeVariable == null) {
-							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-							createCheckStatement(targetVariableExp, "=", source2targetExp);
-						}
-						else*/ if (navigationEdge.isPartial()) {
-							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-							createCheckStatement(source2targetExp, "includes", targetVariableExp);
-						}
-						else if ((targetNode instanceof BooleanLiteralNode) && ((BooleanLiteralNode)targetNode).isBooleanValue()) {
-							createConstantCheck(edge, source2targetExp);
-						}
-						else if (targetNodeRole == Role.CONSTANT_SUCCESS_TRUE) {
-							createConstantCheck(edge, source2targetExp);
-						}
-						else if (nodeVariable == null) {
-							QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(BasicPartition2Mapping.this);
-							OCLExpression targetExpression = expressionCreator.getExpression(targetNode);
-							createCheckStatement(source2targetExp, "=", targetExpression);
-						}
-						else {
-							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-							createCheckStatement(source2targetExp, "=", targetVariableExp);
+					Property successProperty = QVTscheduleUtil.getReferredProperty(speculatedEdge);
+					OCLExpression propertyCallExp = helper.createPropertyCallExp(sourceExp, successProperty);
+					if (targetNode instanceof BooleanLiteralNode) {
+						if (!((BooleanLiteralNode)targetNode).isBooleanValue()) {
+							propertyCallExp = helper.createOperationCallExp(propertyCallExp, "not");
 						}
 					}
 					else {
-						VariableDeclaration nodeVariable = node2variable.get(targetNode);
-						if (nodeVariable == null) {
-							createDeclareStatement(targetNode, source2targetExp);
-							//	createCastPredicates(targetNode, declareStatement);
+						OCLExpression valueExp = createVariableExp(targetNode);
+						propertyCallExp = helper.createOperationCallExp(propertyCallExp, "=", valueExp);
+					}
+					speculatedExpressions.add(propertyCallExp);
+				}
+				else {
+					if ((speculatedExpressions != null) && !speculatedExpressions.isEmpty()) {
+						createSpeculateStatement(speculatedExpressions);
+						speculatedExpressions = Collections.emptyList();		// Prime assertion bomb for disjoint soeculations
+					}
+					if (edge.isNavigation()) {
+						NavigationEdge navigationEdge = (NavigationEdge)edge;
+						Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+						OCLExpression sourceExp = createVariableExp(sourceNode);
+						Type sourceType = sourceExp.getType();
+						Type requiredType = property.getOwningClass();
+						if ((requiredType != null) && !sourceType.conformsTo(getMetamodelManager().getStandardLibrary(), requiredType)) {
+							String castName = "cast_" + sourceNode.getName(); // FIXME BUG 530033 in a closed world this is always a fail
+							DeclareStatement castStatement = createCheckedDeclareStatement(castName, sourceExp, requiredType);
+							sourceExp = helper.createVariableExp(castStatement);
 						}
-						else if (navigationEdge.isPartial()) {
-							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-							createCheckStatement(source2targetExp, "includes", targetVariableExp);
+						OCLExpression source2targetExp = createCallExp(sourceExp, property);
+						if (targetNode.isNullLiteral()) {
+							createCheckStatement(source2targetExp, "=", helper.createNullLiteralExp());
+						}
+						else if (targetNodeRole.isConstant() && !sourceNodeRole.isNew()) {
+							//						createCheckStatement(source2targetExp);
+							VariableDeclaration nodeVariable = node2variable.get(targetNode);
+							/*if (nodeVariable == null) {
+								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
+								createCheckStatement(targetVariableExp, "=", source2targetExp);
+							}
+							else*/ if (navigationEdge.isPartial()) {
+								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
+								createCheckStatement(source2targetExp, "includes", targetVariableExp);
+							}
+							else if ((targetNode instanceof BooleanLiteralNode) && ((BooleanLiteralNode)targetNode).isBooleanValue()) {
+								createConstantCheck(edge, source2targetExp);
+							}
+							else if (targetNodeRole == Role.CONSTANT_SUCCESS_TRUE) {
+								createConstantCheck(edge, source2targetExp);
+							}
+							else if (nodeVariable == null) {
+								QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(BasicPartition2Mapping.this);
+								OCLExpression targetExpression = expressionCreator.getExpression(targetNode);
+								createCheckStatement(source2targetExp, "=", targetExpression);
+							}
+							else {
+								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
+								createCheckStatement(source2targetExp, "=", targetVariableExp);
+							}
 						}
 						else {
+							VariableDeclaration nodeVariable = node2variable.get(targetNode);
+							if (nodeVariable == null) {
+								createDeclareStatement(targetNode, source2targetExp);
+								//	createCastPredicates(targetNode, declareStatement);
+							}
+							else if (navigationEdge.isPartial()) {
+								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
+								createCheckStatement(source2targetExp, "includes", targetVariableExp);
+							}
+							else if (!edge.isNew()) {		// No need to check predication of a realized edge
+								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
+								createCheckStatement(targetVariableExp, "=", source2targetExp);
+							}
+						}
+					}
+					else if (edge instanceof PredicateEdge) {
+						// FIXME	assert !((PredicateEdge)edge).isPartial();
+						VariableExp sourceVariableExp = getSubexpressionVariableExp(sourceNode);
+						if (!(targetNode instanceof BooleanLiteralNode)) {
+							String edgeName = ClassUtil.nonNullState(edge.getName()).trim();
+							if (edgeName.length() >= 2) {
+								edgeName = edgeName.substring(1, edgeName.length()-1);		// Lose guillemets
+							}
+							if ("equals".equals(edgeName)) {
+								edgeName = "=";								// FIXME regularize
+							}
 							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-							createCheckStatement(targetVariableExp, "=", source2targetExp);
+							createCheckStatement(sourceVariableExp, edgeName, targetVariableExp);
+						}
+						else if (((BooleanLiteralNode)targetNode).isBooleanValue()) {
+							createConstantCheck(edge, sourceVariableExp);
+						}
+						else {
+							createCheckStatement(sourceVariableExp, "=", helper.createBooleanLiteralExp(false));
 						}
 					}
-				}
-				else if (edge instanceof PredicateEdge) {
-					// FIXME	assert !((PredicateEdge)edge).isPartial();
-					VariableExp sourceVariableExp = getSubexpressionVariableExp(sourceNode);
-					if (!(targetNode instanceof BooleanLiteralNode)) {
-						String edgeName = ClassUtil.nonNullState(edge.getName()).trim();
-						if (edgeName.length() >= 2) {
-							edgeName = edgeName.substring(1, edgeName.length()-1);		// Lose guillemets
-						}
-						if ("equals".equals(edgeName)) {
-							edgeName = "=";								// FIXME regularize
-						}
-						VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-						createCheckStatement(sourceVariableExp, edgeName, targetVariableExp);
+					else if (edge instanceof ExpressionEdge) {
+						getSubexpressionDeclaration(targetNode);
 					}
-					else if (((BooleanLiteralNode)targetNode).isBooleanValue()) {
-						createConstantCheck(edge, sourceVariableExp);
-					}
-					else {
-						createCheckStatement(sourceVariableExp, "=", helper.createBooleanLiteralExp(false));
-					}
-				}
-				else if (edge instanceof ExpressionEdge) {
-					getSubexpressionDeclaration(targetNode);
 				}
 			}
 		}
@@ -783,6 +829,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	private void createPropertyAssignments() {
+		if ("mapIntegerExp_qvtr«init»".equals(partition.getName())) {
+			getClass();
+		}
 		StringBuilder s = TransformationPartitioner.PROPERTY_NOTIFY.isActive() ? new StringBuilder() : null;
 		if (s != null) {
 			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
@@ -947,6 +996,12 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				assert oldVariable == null;
 			}
 		}
+	}
+
+	private @NonNull SpeculateStatement createSpeculateStatement(@NonNull Iterable<@NonNull OCLExpression> speculateExpressions) {
+		SpeculateStatement speculateStatement = helper.createSpeculateStatement(speculateExpressions);
+		mapping.getOwnedStatements().add(speculateStatement);
+		return speculateStatement;
 	}
 
 	private @NonNull OCLExpression createVariableExp(@NonNull Node node) {
@@ -1160,6 +1215,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	@Override
 	public void synthesizeLocalStatements() {
 		@SuppressWarnings("unused") String name = partition.getName();
+		if ("list2list_forward«loop»".equals(name)) {
+			getClass();
+		}
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
 		createPatternMatch();						// BLUE/CYAN nodes and edges
 		createRealizedVariables();					// GREEN nodes
