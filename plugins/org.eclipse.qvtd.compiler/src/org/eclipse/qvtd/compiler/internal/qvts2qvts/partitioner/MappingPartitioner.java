@@ -286,8 +286,16 @@ public class MappingPartitioner implements Nameable
 
 	private @NonNull PartitioningStrategy createPartitioningStrategy(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		boolean useActivators = scheduleManager.useActivators();
-		if (useActivators) { 		// New QVTr-style spportg without activators
+		if (useActivators) { 		// New QVTr-style support without activators
 			return new DefaultPartitioningStrategy(partitionedTransformationAnalysis, this);
+			/*	Element2MiddleProperty relation2GlobalSuccessProperty = regionAnalysis.getRuleAnalysis().getRule2TraceGroup().basicGetRelation2GlobalSuccessProperty();
+			if (relation2GlobalSuccessProperty == null) {
+				//	return new DefaultPartitioningStrategy(partitionedTransformationAnalysis, this);
+				return new NonPartitioningStrategy(partitionedTransformationAnalysis, this);
+			}
+			else {
+				return new ReachabilityPartitioningStrategy(partitionedTransformationAnalysis, this);
+			} */
 		}
 		else {			// Obsolete QVTc-sty;e spportg without activators
 			return new LegacyPartitioningStrategy(partitionedTransformationAnalysis, this);
