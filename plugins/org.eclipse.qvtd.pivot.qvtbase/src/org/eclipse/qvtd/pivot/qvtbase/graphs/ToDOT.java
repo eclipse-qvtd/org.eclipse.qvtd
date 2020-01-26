@@ -15,7 +15,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * Debug assist. An instance of ToDOT may be used to provide a debugger facility to serialize a
  * DOT image description of a ToDOTable as a string when the the instance is selected. The string may then be pasted
- * to a *.dot file for display in an Eclipse GraphViz (TextUML) Image Viewer. 
+ * to a *.dot file for display in an Eclipse GraphViz (TextUML) Image Viewer.
  */
 public class ToDOT
 {
@@ -23,17 +23,18 @@ public class ToDOT
 	{
 		void toGraph(@NonNull GraphStringBuilder s);
 	}
-	
+
 	private final @NonNull ToDOTable toDot;
-	
+
 	public ToDOT(@NonNull ToDOTable toDot) {
 		this.toDot = toDot;
 	}
-	
+
 	@Override
 	public @NonNull String toString() {
 		DOTStringBuilder s = new DOTStringBuilder();
 		toDot.toGraph(s);
+		s.close();
 		return s.toString();
 	}
 }
