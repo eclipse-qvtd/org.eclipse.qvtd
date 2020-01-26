@@ -15,11 +15,13 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OperationDependencyAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.BasicScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContainmentAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.usage.DirectedDomainUsageAnalysis;
@@ -93,6 +95,11 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	@Override
 	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	protected @NonNull OperationDependencyAnalysis createOperationDependencyAnalysis(@NonNull ContainmentAnalysis containmentAnalysis, @NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
+		return new OperationOrRelationDependencyAnalysis(containmentAnalysis, domainUsageAnalysis);
 	}
 
 	@Override

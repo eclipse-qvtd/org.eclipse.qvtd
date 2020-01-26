@@ -417,6 +417,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return new OperationDatum(this, operationName, classDatums);
 	}
 
+	protected @NonNull OperationDependencyAnalysis createOperationDependencyAnalysis(@NonNull ContainmentAnalysis containmentAnalysis, @NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
+		return new OperationDependencyAnalysis(containmentAnalysis, domainUsageAnalysis);
+	}
+
 	private @NonNull Node createOperationParameterNode(@NonNull OperationRegionHelper regionHelper, @NonNull Variable variable, @NonNull String name, @NonNull OCLExpression expression) {
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)expression.getType();
 		assert type != null;
@@ -708,7 +712,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public @NonNull OperationDependencyAnalysis getOperationDependencyAnalysis() {
 		OperationDependencyAnalysis operationDependencyAnalysis2 = operationDependencyAnalysis;
 		if (operationDependencyAnalysis2 == null) {
-			operationDependencyAnalysis = operationDependencyAnalysis2 = new OperationDependencyAnalysis(getContainmentAnalysis(), getDomainUsageAnalysis());
+			operationDependencyAnalysis = operationDependencyAnalysis2 = createOperationDependencyAnalysis(getContainmentAnalysis(), getDomainUsageAnalysis());
 		}
 		return operationDependencyAnalysis2;
 	}

@@ -765,6 +765,10 @@ public class OperationDependencyAnalysis
 			return finalAnalysis.getOverrides(referredOperation, selfClass);
 		}
 
+		//		public @Nullable DependencyAnalyzerVisitor getParent() {
+		//			return parent;
+		//		}
+
 		protected @Nullable List<@NonNull BasicDependencyPaths> getResultPaths(@NonNull OperationCallExp operationCallExp) {
 			List<@NonNull BasicDependencyPaths> resultPaths = new ArrayList<>();
 			BasicDependencyPaths sourcePaths = analyze(operationCallExp.getOwnedSource());
@@ -801,6 +805,10 @@ public class OperationDependencyAnalysis
 				}
 			}
 		}
+
+		//		public @NonNull Iterable<@NonNull VariableDeclaration> getVariables() {
+		//			return variable2dependencies.keySet();
+		//		}
 
 		@Override
 		public @Nullable BasicDependencyPaths visiting(@NonNull Visitable visitable) {
@@ -844,7 +852,7 @@ public class OperationDependencyAnalysis
 			if (initResult == null) {
 				return null;
 			}
-			DependencyAnalyzerVisitor nestedAnalyzer = new DependencyAnalyzerVisitor(this);
+			DependencyAnalyzerVisitor nestedAnalyzer = createDependencyAnalyzerVisitor(this);
 			nestedAnalyzer.addVariable(ownedVariable, initResult);
 			BasicDependencyPaths inResult = nestedAnalyzer.analyze(letExp.getOwnedIn());
 			if (inResult == null) {
@@ -865,7 +873,7 @@ public class OperationDependencyAnalysis
 			if (sourcePaths == null) {
 				return null;
 			}
-			DependencyAnalyzerVisitor nestedAnalyzer = new DependencyAnalyzerVisitor(this);
+			DependencyAnalyzerVisitor nestedAnalyzer = createDependencyAnalyzerVisitor(this);
 			for (@SuppressWarnings("null")@NonNull Variable iterator : loopExp.getOwnedIterators()) {
 				nestedAnalyzer.addVariable(iterator, sourcePaths);
 			}
@@ -1391,12 +1399,12 @@ public class OperationDependencyAnalysis
 
 	private final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
 	private final @NonNull MetamodelManager metamodelManager;
-	private final @NonNull CompleteModel completeModel;
+	protected final @NonNull CompleteModel completeModel;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	//	protected final @NonNull ScheduleModel scheduler;
 	private final @NonNull Map<@NonNull List<@Nullable Object>, @NonNull BasicDependencyPaths> content2path = new HashMap<>();
-	private final @NonNull BasicDependencyPaths emptyDependencyPaths = createDependencyPaths(null, null);
+	protected final @NonNull BasicDependencyPaths emptyDependencyPaths = createDependencyPaths(null, null);
 	private final @NonNull Map<@NonNull OperationId, @NonNull Map<@NonNull List<@NonNull BasicDependencyPaths>, @NonNull OperationAnalysis>> operation2paths2analysis = new HashMap<>();
 	private final @NonNull Map<org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage, @NonNull DependencyStepFactory> usage2factory = new HashMap<>();
 	private final @NonNull ContainmentAnalysis containmentAnalysis;
@@ -1504,6 +1512,10 @@ public class OperationDependencyAnalysis
 
 	protected @NonNull DependencyAnalyzerVisitor createDependencyAnalyzerVisitor(@NonNull AbstractOperationAnalysis operationAnalysis, boolean exactResult) {
 		return new DependencyAnalyzerVisitor(operationAnalysis, exactResult);
+	}
+
+	protected @NonNull DependencyAnalyzerVisitor createDependencyAnalyzerVisitor(@NonNull DependencyAnalyzerVisitor parent) {
+		return new DependencyAnalyzerVisitor(parent);
 	}
 
 	public @NonNull BasicDependencyPaths createDependencyPaths(@NonNull TypedElement typedElement) {

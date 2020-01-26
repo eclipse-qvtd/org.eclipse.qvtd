@@ -21,8 +21,10 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.BasicScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContainmentAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.DatumCaches;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OperationDependencyAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Rule2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
@@ -85,6 +87,11 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	@Override
 	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
 		return new QVTrelationDomainUsageAnalysis(environmentFactory, problemHandler, transformation);
+	}
+
+	@Override
+	protected @NonNull OperationDependencyAnalysis createOperationDependencyAnalysis(@NonNull ContainmentAnalysis containmentAnalysis, @NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
+		return new OperationOrRelationDependencyAnalysis(containmentAnalysis, domainUsageAnalysis);
 	}
 
 	@Override
