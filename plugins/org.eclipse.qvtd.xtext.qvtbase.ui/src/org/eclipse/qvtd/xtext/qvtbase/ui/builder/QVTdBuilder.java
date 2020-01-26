@@ -12,7 +12,8 @@ package org.eclipse.qvtd.xtext.qvtbase.ui.builder;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -61,7 +62,7 @@ public class QVTdBuilder extends AbstractValidatingBuilder
 		}
 	}
 
-	private static final Logger log = Logger.getLogger(QVTdBuilder.class);
+	private static final Logger log = LoggerFactory.getLogger(QVTdBuilder.class);
 	public static final String BUILDER_ID = QVTdProjectHelper.BUILDER_ID;
 
 	public static void deleteMarkers(@NonNull IProject project, @Nullable Map<String, String> arguments) throws CoreException {

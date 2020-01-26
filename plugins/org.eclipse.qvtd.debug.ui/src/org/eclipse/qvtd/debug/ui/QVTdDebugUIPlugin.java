@@ -13,7 +13,8 @@ package org.eclipse.qvtd.debug.ui;
 import java.net.URL;
 import java.util.Collections;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
@@ -51,7 +52,7 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static QVTdDebugUIPlugin plugin;
 
-	private static final Logger logger = Logger.getLogger(QVTdDebugUIPlugin.class);
+	private static final Logger logger = LoggerFactory.getLogger(QVTdDebugUIPlugin.class);
 
 	protected ImageRegistry imageDescriptorRegistry;
 

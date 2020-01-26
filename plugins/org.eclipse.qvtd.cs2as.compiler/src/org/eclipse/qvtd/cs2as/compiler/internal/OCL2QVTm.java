@@ -80,7 +80,7 @@ import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 
 public class OCL2QVTm {
 
-	//	private @NonNull Logger logger = Logger.getLogger(getClass().getName());
+	//	private @NonNull Logger logger = LoggerFactory.getLogger(getClass().getName());
 	private @NonNull EnvironmentFactory envFact;
 	private @NonNull String traceabilityPropName;
 	//	private @Nullable Map<?,?> saveOptions;

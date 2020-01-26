@@ -19,4 +19,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Automatic-Module-Name: org.eclipse.qvtd.cs2as.build
 Import-Package: org.apache.commons.logging,
- org.apache.log4j
+ org.slf4j;version="[1.7.2,2.0.0)"

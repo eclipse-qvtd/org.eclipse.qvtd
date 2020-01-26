@@ -11,18 +11,19 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.actions;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.swt.graphics.Image;
 
 public class QVTiDebugImages
 {
-	private static final Logger logger = Logger.getLogger(QVTiDebugImages.class);
+	private static final Logger logger = LoggerFactory.getLogger(QVTiDebugImages.class);
 
 	public static final String TRANSFORMATION = "Transformation"; //$NON-NLS-1$
 	public static final String MAPPING = "Mapping"; //$NON-NLS-1$
-	
+
 	private static ImageRegistry fgImageRegistry = QVTdDebugUIPlugin.getDefault().getImageRegistry();
 
 	protected QVTiDebugImages() {

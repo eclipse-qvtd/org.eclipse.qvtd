@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -125,7 +126,7 @@ import com.google.common.collect.Lists;
 
 public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor implements QVTrelationVisitor<ElementCS>
 {
-	private static final Logger logger = Logger.getLogger(QVTrelationDeclarationVisitor.class);
+	private static final Logger logger = LoggerFactory.getLogger(QVTrelationDeclarationVisitor.class);
 
 	public static @Nullable PathNameCS createPathNameCS(@Nullable List<? extends @NonNull NamedElement> csPath) {
 		PathNameCS csPathName = null;

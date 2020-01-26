@@ -13,7 +13,8 @@ package org.eclipse.qvtd.xtext.qvtbase.ui.internal;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
@@ -32,7 +33,7 @@ public class QVTbaseActivator extends AbstractUIPlugin {
 
 	public static final String ORG_ECLIPSE_QVTD_XTEXT_QVTBASE_QVTBASE = "org.eclipse.qvtd.xtext.qvtbase.QVTbase";
 
-	private static final Logger logger = Logger.getLogger(QVTbaseActivator.class);
+	private static final Logger logger = LoggerFactory.getLogger(QVTbaseActivator.class);
 
 	private static QVTbaseActivator INSTANCE;
 

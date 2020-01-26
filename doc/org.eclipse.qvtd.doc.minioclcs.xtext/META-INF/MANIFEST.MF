@@ -32,5 +32,5 @@ Export-Package: org.eclipse.qvtd.doc,
  org.eclipse.qvtd.doc.serializer,
  org.eclipse.qvtd.doc.services,
  org.eclipse.qvtd.doc.validation
-Import-Package: org.apache.log4j
+Import-Package: org.slf4j;version="[1.7.2,2.0.0)"
 Automatic-Module-Name: org.eclipse.qvtd.doc.minioclcs.xtext

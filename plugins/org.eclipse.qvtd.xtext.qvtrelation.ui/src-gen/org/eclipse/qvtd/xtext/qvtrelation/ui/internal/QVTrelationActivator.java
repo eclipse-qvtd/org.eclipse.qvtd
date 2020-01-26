@@ -13,7 +13,8 @@ package org.eclipse.qvtd.xtext.qvtrelation.ui.internal;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
@@ -32,7 +33,7 @@ public class QVTrelationActivator extends AbstractUIPlugin {
 
 	public static final String ORG_ECLIPSE_QVTD_XTEXT_QVTRELATION_QVTRELATION = "org.eclipse.qvtd.xtext.qvtrelation.QVTrelation";
 
-	private static final Logger logger = Logger.getLogger(QVTrelationActivator.class);
+	private static final Logger logger = LoggerFactory.getLogger(QVTrelationActivator.class);
 
 	private static QVTrelationActivator INSTANCE;
 

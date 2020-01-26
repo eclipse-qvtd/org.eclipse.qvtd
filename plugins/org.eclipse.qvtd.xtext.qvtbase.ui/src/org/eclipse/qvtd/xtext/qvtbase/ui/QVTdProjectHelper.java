@@ -10,7 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtbase.ui;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -22,7 +23,7 @@ public class QVTdProjectHelper {
 	public static final String NATURE_ID = "org.eclipse.qvtd.xtext.qvtbase.ui.qvtdnature"; //$NON-NLS-1$
 	public static final String BUILDER_ID = "org.eclipse.qvtd.xtext.qvtbase.ui.qvtdbuilder"; //$NON-NLS-1$
 
-	private static final Logger log = Logger.getLogger(QVTdProjectHelper.class);
+	private static final Logger log = LoggerFactory.getLogger(QVTdProjectHelper.class);
 
 	public static boolean hasNature(IProject project) {
 		try {

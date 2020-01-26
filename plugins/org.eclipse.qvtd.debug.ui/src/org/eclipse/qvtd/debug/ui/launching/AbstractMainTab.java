@@ -11,7 +11,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.launching;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -34,10 +35,10 @@ import org.eclipse.ui.part.FileEditorInput;
 
 public abstract class AbstractMainTab extends AbstractLaunchConfigurationTab
 {
-	private static final Logger logger = Logger.getLogger(AbstractMainTab.class);
+	private static final Logger logger = LoggerFactory.getLogger(AbstractMainTab.class);
 
 	protected @Nullable OCLInternal ocl;		// FIXME Add a dispose() when not visible for a long time
-	
+
 	@Override
 	public void dispose() {
 		OCL ocl2 = ocl;

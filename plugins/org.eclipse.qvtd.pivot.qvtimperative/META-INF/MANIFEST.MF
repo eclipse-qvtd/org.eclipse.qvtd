@@ -25,5 +25,5 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="[3.5.0,4.0.0)",
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.inject,
  com.google.common.collect,
- org.apache.log4j;version="1.2.15"
+ org.slf4j;version="[1.7.2,2.0.0)"
 Automatic-Module-Name: org.eclipse.qvtd.pivot.qvtimperative

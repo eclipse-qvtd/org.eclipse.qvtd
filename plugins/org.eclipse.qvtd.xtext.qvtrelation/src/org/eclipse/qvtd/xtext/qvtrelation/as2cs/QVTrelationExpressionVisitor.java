@@ -13,7 +13,8 @@ package org.eclipse.qvtd.xtext.qvtrelation.as2cs;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Namespace;
@@ -34,7 +35,7 @@ import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLExpressionVisitor;
 
 public class QVTrelationExpressionVisitor extends EssentialOCLExpressionVisitor
 {
-	public static final Logger logger = Logger.getLogger(QVTrelationExpressionVisitor.class);
+	public static final Logger logger = LoggerFactory.getLogger(QVTrelationExpressionVisitor.class);
 
 	public QVTrelationExpressionVisitor(@NonNull AS2CSConversion context, @Nullable Namespace scope) {
 		super(context, scope);

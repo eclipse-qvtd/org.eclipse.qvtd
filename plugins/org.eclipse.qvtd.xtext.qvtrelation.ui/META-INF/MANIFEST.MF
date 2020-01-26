@@ -18,7 +18,7 @@ Export-Package: org.eclipse.qvtd.xtext.qvtrelation.ui,
 Require-Bundle: org.eclipse.xtext.builder;bundle-version="[2.10.0,3.0.0)",
  org.eclipse.qvtd.xtext.qvtbase.ui;bundle-version="[0.20.0,1.0.0)";visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtrelation;bundle-version="[0.20.0,1.0.0)";visibility:=reexport
-Import-Package: org.apache.log4j
+Import-Package: org.slf4j;version="[1.7.2,2.0.0)"
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator
 Bundle-Vendor: %providerName
 Automatic-Module-Name: org.eclipse.qvtd.xtext.qvtrelation.ui

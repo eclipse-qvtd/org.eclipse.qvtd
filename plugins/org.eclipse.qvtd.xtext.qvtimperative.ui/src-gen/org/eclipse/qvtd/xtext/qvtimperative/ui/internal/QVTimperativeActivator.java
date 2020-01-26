@@ -13,7 +13,8 @@ package org.eclipse.qvtd.xtext.qvtimperative.ui.internal;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
@@ -32,7 +33,7 @@ public class QVTimperativeActivator extends AbstractUIPlugin {
 
 	public static final String ORG_ECLIPSE_QVTD_XTEXT_QVTIMPERATIVE_QVTIMPERATIVE = "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative";
 
-	private static final Logger logger = Logger.getLogger(QVTimperativeActivator.class);
+	private static final Logger logger = LoggerFactory.getLogger(QVTimperativeActivator.class);
 
 	private static QVTimperativeActivator INSTANCE;
 

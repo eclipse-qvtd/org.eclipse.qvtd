@@ -23,6 +23,6 @@ Export-Package: org.eclipse.qvtd.xtext.qvtbase.ui,
  org.eclipse.qvtd.xtext.qvtbase.ui.outline,
  org.eclipse.qvtd.xtext.qvtbase.ui.quickfix
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.slf4j;version="[1.7.2,2.0.0)"
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtbase.ui.internal.QVTbaseActivator
 Automatic-Module-Name: org.eclipse.qvtd.xtext.qvtbase.ui
