@@ -805,7 +805,7 @@ public class ConnectionManager
 		if (!scheduleManager.isInput(scheduleManager.getDomainUsage(classDatum))) {
 			return originalContentsAnalysis.getNewNodes(classDatum);	// FIXME also dependsOn ??
 		}
-		List<@NonNull Node> nodes = new UniqueList<>();
+		Set<@NonNull Node> nodes = new UniqueList<>();
 		nodes.add(loadingRegionAnalysis.getIntroducerNode(headNode));
 		for (@NonNull TypedModel iterates : QVTbaseUtil.getIterates(QVTscheduleUtil.getTypedModel(classDatum))) {
 			ClassDatum classDatum2 = scheduleManager.getClassDatum(iterates, headNode.getCompleteClasses());

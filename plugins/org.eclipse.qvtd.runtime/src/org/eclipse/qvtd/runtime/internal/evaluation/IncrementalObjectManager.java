@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.runtime.internal.evaluation;
 
 import java.util.List;
+import java.util.Set;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -487,7 +489,7 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 	 */
 	static class SpeculatingSlotState extends IncrementalSlotState implements SlotState.Speculating
 	{
-		private final @NonNull UniqueList<@NonNull Speculating> inputSpeculatables = new UniqueList<>();
+		private final @NonNull Set<@NonNull Speculating> inputSpeculatables = new UniqueList<>();
 		private @Nullable Boolean status;
 
 		public SpeculatingSlotState(@NonNull AbstractObjectState<@NonNull IncrementalSlotState> objectState, @NonNull EAttribute eFeature) {

@@ -223,7 +223,7 @@ public class OCL2QVTm {
 	private void accumulateUsedPackages(@NonNull Set<@NonNull CompletePackage> allUsedCompletePackages,
 			@NonNull Set<@NonNull CompleteClass> allUsedCompleteClasses, @NonNull CompletePackage completePackage) {
 		if (allUsedCompletePackages.add(completePackage)) {
-			UniqueList<@NonNull CompletePackage> moreCompletePackages = new UniqueList<>();
+			Set<@NonNull CompletePackage> moreCompletePackages = new UniqueList<>();
 			for (@NonNull CompleteClass completeClass : PivotUtil.getOwnedCompleteClasses(completePackage)) {
 				if (allUsedCompleteClasses.add(completeClass)) {
 					for (@NonNull CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {

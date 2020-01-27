@@ -10,12 +10,15 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace;
 
+import java.util.Set;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -35,7 +38,7 @@ public abstract class Rule2TraceGroup
 		assert scheduleManager.getMultipleScheduleManager() == scheduleManager;
 	}
 
-	public abstract void analyzeTraceElements(@NonNull RuleAnalysis ruleAnalysis) throws CompilerChainException;
+	public abstract void analyzeTraceElements(@NonNull RuleAnalysis ruleAnalysis, @NonNull Set<@NonNull Node> excludedNodes) throws CompilerChainException;
 
 	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
 		return null;

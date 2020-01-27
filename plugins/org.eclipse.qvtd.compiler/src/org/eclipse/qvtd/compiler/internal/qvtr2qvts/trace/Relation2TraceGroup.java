@@ -12,6 +12,8 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
@@ -28,6 +30,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 /**
  * A Relation2TraceGroup manages the mapping between the analysis of a single rule and the one to four
@@ -107,12 +110,12 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 	}
 
 	@Override
-	public void analyzeTraceElements(@NonNull RuleAnalysis ruleAnalysis) throws CompilerChainException {
+	public void analyzeTraceElements(@NonNull RuleAnalysis ruleAnalysis, @NonNull Set<@NonNull Node> excludedNodes) throws CompilerChainException {
 		RelationAnalysis relationAnalysis = (RelationAnalysis)ruleAnalysis;
 		//
 		//	Determine a head node for the minimum number of sub-regions that have a to-one path from the head.
 		//
-		List<@NonNull HeadNodeGroup> headNodeGroups = TracedHeadAnalysis.computeTraceHeadGroupNodes(relationAnalysis.getRegion());
+		List<@NonNull HeadNodeGroup> headNodeGroups = TracedHeadAnalysis.computeTraceHeadGroupNodes(relationAnalysis.getRegion(), excludedNodes);
 		Relation2TraceInterface relation2traceInterface2 = relation2traceInterface;
 		if (relation2traceInterface2 != null) {
 			relation2traceInterface2.analyzeTraceElements(headNodeGroups, relationAnalysis);

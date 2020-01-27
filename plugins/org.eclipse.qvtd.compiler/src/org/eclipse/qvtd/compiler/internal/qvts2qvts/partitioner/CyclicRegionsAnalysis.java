@@ -20,7 +20,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
@@ -40,7 +39,7 @@ public class CyclicRegionsAnalysis extends AbstractCyclicPartialRegionsAnalysis<
 	 * Each set of RegionAnalysis whose transitive consumption are also transitively produced.
 	 */
 	@SuppressWarnings("unused")
-	private @Nullable UniqueList<@NonNull CyclicRegionAnalysis> cyclicRegionsAnalyses = null;
+	private @Nullable Set<@NonNull CyclicRegionAnalysis> cyclicRegionsAnalyses = null;
 
 	/**
 	 * Mapping to the cycle analysis that identifies the cycle involving each trace class analysis.

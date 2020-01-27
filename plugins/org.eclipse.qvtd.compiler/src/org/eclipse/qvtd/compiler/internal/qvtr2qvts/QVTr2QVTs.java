@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -287,6 +288,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public @Nullable MappingRegion visitRelation(@NonNull Relation rIn) {
+			if ("mapOperationCallExp_Helper".equals(rIn.getName())) {
+				getClass();
+			}
 			RelationalTransformationAnalysis transformationAnalysis = (RelationalTransformationAnalysis) scheduleManager.getTransformationAnalysis();
 			RelationAnalysis relationAnalysis = this.relationAnalysis = transformationAnalysis.basicGetRuleAnalysis(rIn);
 			if (relationAnalysis == null) {
@@ -579,6 +583,14 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		QVTr2QVTsVisitor qvtr2qvtsVisitor = new QVTr2QVTsVisitor(this);
 		qvtr2qvtsVisitor.transform(source, target);
 		try {
+			//	At this point, for simple mapings, we have a distinct pattern for each domain. Each pattern can be analyzed to identify
+			//	its heads and then support synthesis of a directionally neutral trace class and edges.
+			//
+			//	Unfortunately for non-trivial mapping, we also have invoked trace nodes and their success edges and success computations,
+			//	but without the invocation edges. The partial trace invalidates some of the closure assumptions. Eliminating the invoked trace
+			//	is hard, so let's try tohave an ex liusion list of trace nodes that are not there. Yhjis may allow the invoked edges to be created
+			//	in a more rational way.
+			//
 			//
 			//	Analyze the trace classes and interfaces to determine their inheritance and properties
 			//
@@ -586,8 +598,12 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			for (@NonNull Rule rule : rules) {
 				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
 				if (relationAnalysis != null) {
+					if ("mapOperationCallExp_Helper".equals(rule.getName())) {
+						getClass();
+					}
+					Set<@NonNull Node> excludedNodes = relationAnalysis.computeTraceAndTraceComputationNodes();
 					Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
-					relation2traceGroup.analyzeTraceElements(relationAnalysis);
+					relation2traceGroup.analyzeTraceElements(relationAnalysis, excludedNodes);
 				}
 			}
 			//
@@ -677,5 +693,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		}
 		else { */
 		return transformationAnalysis.gatherRuleRegions();
+	}
+
+	private Set<@NonNull Node> computeTraceAndTraceComputationNodes(
+			RelationAnalysis relationAnalysis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

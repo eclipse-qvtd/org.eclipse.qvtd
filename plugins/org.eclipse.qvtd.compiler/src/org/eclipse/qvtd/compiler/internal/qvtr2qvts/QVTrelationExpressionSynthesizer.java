@@ -58,7 +58,7 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		Relation relation = relationAnalysis.getRule();
 		boolean isWhen = false;
 		Pattern containingPattern = QVTrelationUtil.basicGetContainingPattern(relationCallExp);
-		if (containingPattern !=null) {
+		if (containingPattern != null) {
 			if (relation.getWhen() == containingPattern) {
 				isWhen = true;
 			}
@@ -81,12 +81,14 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		InvocationAnalysis invocationAnalysis = relationAnalysis.getOutgoingInvocationAnalysis(invokedRelationAnalysis, relationCallExp, isWhen, getRequiredUtility(true), rootVariable2argumentNode);
 		//		for ()
 		//		if (referredRule2TraceClass.getStatusInterfaceProperty())
-		invocationAnalysis.getInvokingNode();
+		Node traceNode = invocationAnalysis.getInvokingNode();
+		//	Node invokingNode = invocationAnalysis.createInvocationEdges(traceNode);
 		EObject eContainer = relationCallExp.eContainer();
 		boolean isDirectCall = eContainer instanceof Predicate;
 		//	if (!isDirectCall) {
 		//		getClass();
 		//	}
+		// FIXME connect up arguments
 		SuccessEdge globalSuccessEdge = invocationAnalysis.getGlobalSuccessEdge(isDirectCall ? Boolean.TRUE : null);
 		return globalSuccessEdge != null ? QVTscheduleUtil.getTargetNode(globalSuccessEdge) : isDirectCall ? null : relationAnalysis.createBooleanLiteralNode(getNonNullUtility(), true);
 	}

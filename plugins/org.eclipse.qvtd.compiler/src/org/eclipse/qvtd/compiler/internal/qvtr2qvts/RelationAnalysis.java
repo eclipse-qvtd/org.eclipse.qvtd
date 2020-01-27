@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
@@ -650,6 +651,47 @@ public class RelationAnalysis extends RuleAnalysis
 
 	protected @Nullable TemplateExp basicGetTemplateExp(@NonNull VariableDeclaration variable) {
 		return ClassUtil.nonNullState(variable2templateExp).get(variable);
+	}
+
+	public @NonNull Set<@NonNull Node> computeTraceAndTraceComputationNodes() {
+		Set<@NonNull Node> traceAndTraceComputationNodes = new UniqueList<>();
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+			if (node.getClassDatum().getReferredTypedModel().isIsTrace()) {
+				traceAndTraceComputationNodes.add(node);
+				for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
+					if (outgoingEdge.isSuccess()) {
+						Node targetNode = QVTscheduleUtil.getTargetNode(outgoingEdge);
+						if (traceAndTraceComputationNodes.add(targetNode)) {
+							computeTraceAndTraceComputationNodes(traceAndTraceComputationNodes, targetNode);
+						}
+					}
+				}
+			}
+			if (node.isSuccess()) {
+				if (traceAndTraceComputationNodes.add(node)) {
+					computeTraceAndTraceComputationNodes(traceAndTraceComputationNodes, node);
+				}
+			}
+		}
+		return traceAndTraceComputationNodes;
+	}
+	private void computeTraceAndTraceComputationNodes(@NonNull Set<@NonNull Node> traceAndTraceComputationNodes, @NonNull Node node) {
+		for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
+			if (outgoingEdge.isComputation()) {
+				Node targetNode = QVTscheduleUtil.getTargetNode(outgoingEdge);
+				if (traceAndTraceComputationNodes.add(targetNode)) {
+					computeTraceAndTraceComputationNodes(traceAndTraceComputationNodes, targetNode);
+				}
+			}
+		}
+		for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(node)) {
+			if (incomingEdge.isComputation()) {
+				Node sourceNode = QVTscheduleUtil.getTargetNode(incomingEdge);
+				if (traceAndTraceComputationNodes.add(sourceNode)) {
+					computeTraceAndTraceComputationNodes(traceAndTraceComputationNodes, sourceNode);
+				}
+			}
+		}
 	}
 
 	protected @Nullable RelationDispatchAnalysis createDispatchAnalysis(@NonNull TypedModelsConfiguration typedModelsConfiguration) {

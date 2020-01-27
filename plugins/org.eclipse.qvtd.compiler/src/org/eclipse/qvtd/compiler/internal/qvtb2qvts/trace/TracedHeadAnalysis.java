@@ -51,10 +51,10 @@ public class TracedHeadAnalysis extends HeadAnalysis
 	 *
 	 * This computation has no side effects.
 	 */
-	public static @NonNull List<@NonNull HeadNodeGroup> computeTraceHeadGroupNodes(@NonNull MappingRegion mappingRegion) {
+	public static @NonNull List<@NonNull HeadNodeGroup> computeTraceHeadGroupNodes(@NonNull MappingRegion mappingRegion, @NonNull Set<@NonNull Node> excludedNodes) {
 		//	String name = mappingRegion.getName();
 		TracedHeadAnalysis mappingRegionAnalysis = new TracedHeadAnalysis(mappingRegion);
-		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = mappingRegionAnalysis.computeTracedTargetFromSources();
+		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = mappingRegionAnalysis.computeTracedTargetFromSources(excludedNodes);
 		if (TRACED_HEAD_IMMEDIATE_SOURCES.isActive()) {
 			StringBuilder s = new StringBuilder();
 			s.append(mappingRegion.getName());
@@ -99,10 +99,10 @@ public class TracedHeadAnalysis extends HeadAnalysis
 		super(mappingRegion);
 	}
 
-	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeTracedTargetFromSources() {
+	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeTracedTargetFromSources(@NonNull Set<@NonNull Node> excludedNodes) {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
 		for (@NonNull Node targetNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (!targetNode.isConditional() && !targetNode.isConstant()) {
+			if (!excludedNodes.contains(targetNode) && !targetNode.isConditional() && !targetNode.isConstant()) {
 				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(targetNode);
 				TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 				if (!typedModel.isIsTrace()) {		// when/where invocation nodes are not part of the multi-sided trace
@@ -113,7 +113,7 @@ public class TracedHeadAnalysis extends HeadAnalysis
 					}
 					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 						Node sourceNode = edge.getEdgeSource();
-						if (!sourceNode.isConditional() && !sourceNode.isConstant()) {
+						if (!excludedNodes.contains(sourceNode) && !sourceNode.isConditional() && !sourceNode.isConstant()) {
 							if (edge instanceof NavigationEdge) {
 								if (!((NavigationEdge)edge).isPartial()) {
 									sources.add(sourceNode);
