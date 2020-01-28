@@ -13,7 +13,7 @@ map Member2Male in Families2Persons
 {
 	check family(s : Member[1]
 	|
-		isFemale(s).not2();) {}
+		not2 isFemale(s);) {}
 
 	enforce person() {
 		realize t : Male
@@ -63,15 +63,15 @@ map Member2Female in Families2Persons
 
 query Families2Persons::familyName(member : fMM::Member[1]) : String[1]
 {
-	if member.familyFather.oclIsUndefined().not2() then member.familyFather.lastName else if
-			member.familyMother.oclIsUndefined().not2() then member.familyMother.lastName else if member.familySon.oclIsUndefined().not2()
+	if not2 member.familyFather.oclIsUndefined() then member.familyFather.lastName else if
+		not2 member.familyMother.oclIsUndefined() then member.familyMother.lastName else if not2 member.familySon.oclIsUndefined()
 			then member.familySon.lastName else member.familyDaughter.lastName endif endif endif
 }
 
 query Families2Persons::isFemale(member : fMM::Member[1]) : Boolean[1]
 {
-	if member.familyMother.oclIsUndefined().not2() then true
-	else if member.familyDaughter.oclIsUndefined().not2() then true
+	if not2 member.familyMother.oclIsUndefined() then true
+	else if not2 member.familyDaughter.oclIsUndefined() then true
 		else false
 		endif endif
 }
