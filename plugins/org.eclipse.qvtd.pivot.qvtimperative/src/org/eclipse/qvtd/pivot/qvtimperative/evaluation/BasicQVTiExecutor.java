@@ -565,7 +565,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		return modelsManager.getTypedModelInstance(modelName);
 	}
 
-	protected @Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
+	@Override
+	public @Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
 			@NonNull Function asFunction, @Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
 		Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor2 = operation2computationConstructor;
 		if (operation2computationConstructor2 == null) {
@@ -813,18 +814,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	protected @Nullable Object internalExecuteNavigationCallExpInternal(@NonNull NavigationCallExp navigationCallExp,
 			@NonNull Property referredProperty, @Nullable Object sourceValue) {
 		return super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
-	}
-
-	@Override
-	public @Nullable Object internalExecuteOperationCallExp(@NonNull OperationCallExp operationCallExp,
-			@Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
-		Operation referredOperation = operationCallExp.getReferredOperation();
-		if (referredOperation instanceof Function) {
-			return internalExecuteFunctionCallExp(operationCallExp, (Function)referredOperation, boxedSourceAndArgumentValues);
-		}
-		else {
-			return super.internalExecuteOperationCallExp(operationCallExp, boxedSourceAndArgumentValues);
-		}
 	}
 
 	@Override

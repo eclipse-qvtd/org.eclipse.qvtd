@@ -18,9 +18,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.evaluation.ExecutorInternal;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -41,6 +43,8 @@ public interface QVTiExecutor extends ExecutorInternal
 	@NonNull InvocationManager getInvocationManager();
 	@Nullable Resource getModel(@NonNull String name);
 	@NonNull QVTiModelsManager getModelsManager();
+	@Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
+			@NonNull Function asFunction, @Nullable Object @NonNull [] boxedSourceAndArgumentValues);
 	@Nullable Object internalExecuteMapping(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor);
 	@Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor);
 	@Nullable Object internalExecuteNewStatement(@NonNull NewStatement newStatement, @NonNull EvaluationVisitor undecoratedVisitor);

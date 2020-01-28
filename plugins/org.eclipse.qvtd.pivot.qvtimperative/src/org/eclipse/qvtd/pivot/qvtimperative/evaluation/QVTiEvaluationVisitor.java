@@ -17,9 +17,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -498,6 +501,28 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitObservableStatement(@NonNull ObservableStatement object) {
 		return visiting(object);
+	}
+
+	@Override
+	public Object visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
+		Operation apparentOperation = operationCallExp.getReferredOperation();
+		if (!(apparentOperation instanceof Function)) {
+			return super.visitOperationCallExp(operationCallExp);
+		}
+		if (isCanceled()) {
+			throw new EvaluationHaltedException("Canceled");
+		}
+		OCLExpression source = operationCallExp.getOwnedSource();
+		assert source != null;
+
+		List<@NonNull OCLExpression> arguments = ClassUtil.nullFree(operationCallExp.getOwnedArguments());
+		@Nullable Object[] sourceAndArgumentValues = new @Nullable Object[1+arguments.size()];
+		int argumentIndex = 0;
+		sourceAndArgumentValues[argumentIndex++] = executor.evaluate(source);
+		for (@NonNull OCLExpression argument : arguments) {
+			sourceAndArgumentValues[argumentIndex++] = executor.evaluate(argument);
+		}
+		return executor.internalExecuteFunctionCallExp(operationCallExp, (Function)apparentOperation, sourceAndArgumentValues);
 	}
 
 	/*	@Override
