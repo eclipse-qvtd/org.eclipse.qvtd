@@ -154,10 +154,36 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			assert partition.getRole(targetNode) != null;
 			if (scheduledNodes.add(targetNode)) {
 				//	Integer targetCost = reachabilityForest.getCost(targetNode);
-				for (Edge edge : reachabilityForest.getReachingEdges(targetNode)) {
-					assert !edge.isPartial();
-					if (!edge.isConditional()) {
-						addEdge(edge);
+				Iterable<@NonNull Edge> reachingEdges = reachabilityForest.getReachingEdges(targetNode);
+				int size = Iterables.size(reachingEdges);
+				if (size > 0) {
+					if (size == 1) {
+						Edge edge = reachingEdges.iterator().next();
+						assert !edge.isPartial();
+						if (!edge.isConditional()) {
+							addEdge(edge);
+						}
+					}
+					else {
+						List<@NonNull Node> sourceNodes = new ArrayList<>();
+						for (Edge edge : reachingEdges) {		// FIXME lowest cost first
+							assert !edge.isPartial();
+							if (!edge.isConditional()) {
+								sourceNodes.add(QVTscheduleUtil.getSourceNode(edge));
+							}
+						}
+						if (sourceNodes.size() > 1) {
+							Collections.sort(sourceNodes, reachabilityForest.getNodeCostComparator());
+						}
+						for (Node sourceNode : sourceNodes) {
+							addNode(sourceNode);
+						}
+						for (Edge edge : reachingEdges) {
+							assert !edge.isPartial();
+							if (!edge.isConditional()) {
+								addEdge(edge);
+							}
+						}
 					}
 				}
 			}
@@ -214,7 +240,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			if (checkableSize > 1) {
 				Collections.sort(sortedCheckedConditions, new CheckedConditionWeightComparator(BasicPartition2Mapping.this));
 			}
-			for (@NonNull CheckedCondition checkedCondition : sortedCheckedConditions) {
+			for (@NonNull CheckedCondition checkedCondition : sortedCheckedConditions) {		// ?? speculated edges first
 				Iterable<@NonNull Edge> edges = checkedCondition.getEdges();
 				if (edges != null) {
 					for (@NonNull Edge edge : edges) {
@@ -748,7 +774,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	 * Determine a traversal order for the old edges then synthesize the patttern matching statements.
 	 */
 	private void createPatternMatch() {
-		if ("associationToForeignKey«speculated»".equals(partition.getName())) {
+		if ("mapOperationCallExp_Helper_qvtr«global»".equals(partition.getName())) {
 			getClass();
 		}
 		OldEdgeSchedule oldSchedule = new OldEdgeSchedule();

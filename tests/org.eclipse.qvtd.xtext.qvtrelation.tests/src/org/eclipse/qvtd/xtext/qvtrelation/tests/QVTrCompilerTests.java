@@ -56,6 +56,7 @@ import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TracedHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -290,7 +291,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTiProductionConsumption.SUMMARY.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		//	TracedHeadAnalysis.TRACED_HEAD_NODE_GROUPS.setState(true);
-		//	TracedHeadAnalysis.TRACED_HEAD_IMMEDIATE_SOURCES.setState(true);
+		TracedHeadAnalysis.TRACED_HEAD_IMMEDIATE_SOURCES.setState(true);
 		//	RuleHeadAnalysis.RULE_HEAD_NODE_GROUPS.setState(true);
 		//	TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);
 		//	TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);

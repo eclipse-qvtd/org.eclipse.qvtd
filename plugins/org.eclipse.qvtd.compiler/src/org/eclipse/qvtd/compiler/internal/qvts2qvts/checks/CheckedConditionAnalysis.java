@@ -310,7 +310,9 @@ public class CheckedConditionAnalysis
 
 		@Override
 		public Object visitSuccessEdge(@NonNull SuccessEdge successEdge) {
-			assert isCheckedNavigation(successEdge);
+			if (!isCheckedNavigation(successEdge)) {				// Part of a computed success
+				return super.visitSuccessEdge(successEdge);
+			}
 			RuleRegion ruleRegion = (RuleRegion)partitionAnalysis.getRegion();
 			Rule rule = QVTscheduleUtil.getReferredRule(ruleRegion);
 			AbstractTransformationAnalysis transformationAnalysis = partitionAnalysis.getPartitionedTransformationAnalysis().getTransformationAnalysis();
