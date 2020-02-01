@@ -43,9 +43,6 @@ import org.eclipse.ocl.pivot.library.collection.CollectionAsOrderedSetOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionFirstOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
@@ -224,18 +221,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -298,10 +285,10 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -345,18 +332,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -381,6 +358,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 							 */
 							@Override
 							public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asOrderedSet, final /*@NonInvalid*/ @Nullable Object e_0) {
+								if (e_0 == null) {
+									throw new InvalidValueException("Null \'\'OclElement\'\' rather than \'\'OclVoid\'\' value required");
+								}
 								final /*@Thrown*/ @Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, e_0);
 								return oclContainer;
 							}
@@ -415,6 +395,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 							 */
 							@Override
 							public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asOrderedSet_0, final /*@NonInvalid*/ @Nullable Object e_1) {
+								if (e_1 == null) {
+									throw new InvalidValueException("Null \'\'OclElement\'\' rather than \'\'OclVoid\'\' value required");
+								}
 								final /*@Thrown*/ @Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, e_1);
 								return oclContainer_0;
 							}
@@ -447,20 +430,50 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					catch (Exception e) {
 						CAUGHT_eq = ValueUtil.createInvalidValue(e);
 					}
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Relation referredRelation = this.getReferredRelation();
-					final /*@NonInvalid*/ boolean isTopLevel = referredRelation.isIsTopLevel();
-					final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isTopLevel);
-					final /*@Thrown*/ @Nullable Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_eq, not);
+					final /*@Thrown*/ @Nullable Boolean implies;
+					if (CAUGHT_eq == ValueUtil.FALSE_VALUE) {
+						implies = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull Relation referredRelation = this.getReferredRelation();
+						final /*@NonInvalid*/ boolean isTopLevel = referredRelation.isIsTopLevel();
+						final /*@NonInvalid*/ @Nullable Boolean not;
+						if (!isTopLevel) {
+							not = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (isTopLevel) {
+								not = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								not = null;
+							}
+						}
+						if (not == ValueUtil.TRUE_VALUE) {
+							implies = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_eq instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_eq;
+							}
+							if (not == null) {
+								implies = null;
+							}
+							else {
+								implies = ValueUtil.FALSE_VALUE;
+							}
+						}
+					}
 					CAUGHT_implies = implies;
 				}
 				catch (Exception e) {
 					CAUGHT_implies = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_implies, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_implies, QVTrelationTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -494,18 +507,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -553,18 +556,61 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 								catch (Exception e) {
 									CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
 								}
-								/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf_0;
-								try {
-									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTrelationTables.CLSSid_CollectionType, null);
-									final /*@NonInvalid*/ @Nullable Type type_0 = _1.getType();
-									final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType).booleanValue();
-									CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
+								final /*@Thrown*/ @Nullable Boolean and;
+								if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {
+									and = ValueUtil.FALSE_VALUE;
 								}
-								catch (Exception e) {
-									CAUGHT_oclIsKindOf_0 = ValueUtil.createInvalidValue(e);
+								else {
+									/*@Caught*/ @Nullable Object CAUGHT_not;
+									try {
+										/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf_0;
+										try {
+											final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTrelationTables.CLSSid_CollectionType, null);
+											final /*@NonInvalid*/ @Nullable Type type_0 = _1.getType();
+											final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType).booleanValue();
+											CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
+										}
+										catch (Exception e) {
+											CAUGHT_oclIsKindOf_0 = ValueUtil.createInvalidValue(e);
+										}
+										if (CAUGHT_oclIsKindOf_0 instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_oclIsKindOf_0;
+										}
+										final /*@Thrown*/ @Nullable Boolean not;
+										if (CAUGHT_oclIsKindOf_0 == ValueUtil.FALSE_VALUE) {
+											not = ValueUtil.TRUE_VALUE;
+										}
+										else {
+											if (CAUGHT_oclIsKindOf_0 == ValueUtil.TRUE_VALUE) {
+												not = ValueUtil.FALSE_VALUE;
+											}
+											else {
+												not = null;
+											}
+										}
+										CAUGHT_not = not;
+									}
+									catch (Exception e) {
+										CAUGHT_not = ValueUtil.createInvalidValue(e);
+									}
+									if (CAUGHT_not == ValueUtil.FALSE_VALUE) {
+										and = ValueUtil.FALSE_VALUE;
+									}
+									else {
+										if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_oclIsKindOf;
+										}
+										if (CAUGHT_not instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_not;
+										}
+										if (CAUGHT_not == null) {
+											and = null;
+										}
+										else {
+											and = ValueUtil.TRUE_VALUE;
+										}
+									}
 								}
-								final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf_0);
-								final /*@Thrown*/ @Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, not);
 								CAUGHT_and = and;
 							}
 							catch (Exception e) {
@@ -595,20 +641,50 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					catch (Exception e) {
 						CAUGHT_exists = ValueUtil.createInvalidValue(e);
 					}
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Relation referredRelation = this.getReferredRelation();
-					final /*@NonInvalid*/ boolean isTopLevel = referredRelation.isIsTopLevel();
-					final /*@NonInvalid*/ @Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(isTopLevel);
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_exists, not_0);
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (CAUGHT_exists == ValueUtil.FALSE_VALUE) {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull Relation referredRelation = this.getReferredRelation();
+						final /*@NonInvalid*/ boolean isTopLevel = referredRelation.isIsTopLevel();
+						final /*@NonInvalid*/ @Nullable Boolean not_0;
+						if (!isTopLevel) {
+							not_0 = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (isTopLevel) {
+								not_0 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								not_0 = null;
+							}
+						}
+						if (not_0 == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_exists instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_exists;
+							}
+							if ((CAUGHT_exists == null) || (not_0 == null)) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
+					}
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

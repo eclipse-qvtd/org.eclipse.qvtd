@@ -32,8 +32,6 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -379,49 +377,54 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ @Nullable TypedModel typedModel = this.getTypedModel();
 					final /*@NonInvalid*/ boolean ne = typedModel != null;
-					/*@Thrown*/ boolean result;
-					if (ne) {
-						final /*@NonInvalid*/ @Nullable String name = this.getName();
-						if (typedModel == null) {
-							throw new InvalidValueException("Null source for \'NamedElement::name\'");
-						}
-						final /*@Thrown*/ @Nullable String name_0 = typedModel.getName();
-						final /*@Thrown*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
-						result = eq;
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (!ne) {
+						result = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						result = ValueUtil.TRUE_VALUE;
+						/*@Caught*/ @NonNull Object CAUGHT_eq;
+						try {
+							final /*@NonInvalid*/ @Nullable String name = this.getName();
+							if (typedModel == null) {
+								throw new InvalidValueException("Null source for \'NamedElement::name\'");
+							}
+							final /*@Thrown*/ @Nullable String name_0 = typedModel.getName();
+							final /*@Thrown*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
+							CAUGHT_eq = eq;
+						}
+						catch (Exception e) {
+							CAUGHT_eq = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_eq == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_eq instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_eq;
+							}
+							result = ValueUtil.FALSE_VALUE;
+						}
 					}
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -457,18 +460,8 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -488,39 +481,75 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 						catch (Exception e) {
 							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
 						}
-						final /*@NonInvalid*/ @Nullable TypedModel typedModel = this.getTypedModel();
-						final /*@NonInvalid*/ boolean ne = typedModel != null;
-						final /*@Thrown*/ @Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, ne);
+						final /*@Thrown*/ @Nullable Boolean and;
+						if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {
+							and = ValueUtil.FALSE_VALUE;
+						}
+						else {
+							final /*@NonInvalid*/ @Nullable TypedModel typedModel = this.getTypedModel();
+							final /*@NonInvalid*/ boolean ne = typedModel != null;
+							if (!ne) {
+								and = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_oclIsKindOf;
+								}
+								and = ValueUtil.TRUE_VALUE;
+							}
+						}
 						CAUGHT_and = and;
 					}
 					catch (Exception e) {
 						CAUGHT_and = ValueUtil.createInvalidValue(e);
 					}
-					/*@Caught*/ @NonNull Object CAUGHT_includes;
-					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation_0 = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
-						final /*@NonInvalid*/ @Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull Transformation oclAsType = (@NonNull Transformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_qvtbase_c_c_Transformation_0);
-						final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
-						final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
-						final /*@NonInvalid*/ @Nullable TypedModel typedModel_0 = this.getTypedModel();
-						final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, typedModel_0).booleanValue();
-						CAUGHT_includes = includes;
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (CAUGHT_and == ValueUtil.FALSE_VALUE) {
+						result = ValueUtil.TRUE_VALUE;
 					}
-					catch (Exception e) {
-						CAUGHT_includes = ValueUtil.createInvalidValue(e);
+					else {
+						/*@Caught*/ @NonNull Object CAUGHT_includes;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation_0 = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
+							final /*@NonInvalid*/ @Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull Transformation oclAsType = (@NonNull Transformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_qvtbase_c_c_Transformation_0);
+							final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
+							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
+							final /*@NonInvalid*/ @Nullable TypedModel typedModel_0 = this.getTypedModel();
+							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, typedModel_0).booleanValue();
+							CAUGHT_includes = includes;
+						}
+						catch (Exception e) {
+							CAUGHT_includes = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_includes == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_and instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_and;
+							}
+							if (CAUGHT_includes instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_includes;
+							}
+							if (CAUGHT_and == null) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
 					}
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_includes);
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

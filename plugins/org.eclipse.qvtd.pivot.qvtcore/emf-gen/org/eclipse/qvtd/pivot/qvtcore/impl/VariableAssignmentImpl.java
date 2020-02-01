@@ -35,7 +35,6 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanOrOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
@@ -185,19 +184,9 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTcoreTables.INT_0).booleanValue();
-			/*@NonInvalid*/ @NonNull Object symbol_2;
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
 				symbol_2 = ValueUtil.TRUE_VALUE;
 			}
@@ -215,6 +204,9 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 							safe_conformsTo_source = null;
 						}
 						else {
+							if (type == null) {
+								throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+							}
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
 							final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
@@ -226,29 +218,54 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 					catch (Exception e) {
 						CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 					}
-					/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source_0;
-					try {
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_1 = value_0.getType();
-						final /*@NonInvalid*/ @NonNull Object conformsTo_1 = type_1 == null;
-						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source_0;
-						if (conformsTo_1 == Boolean.TRUE) {
-							safe_conformsTo_source_0 = null;
+					final /*@Thrown*/ @Nullable Boolean status;
+					if (CAUGHT_safe_conformsTo_source == ValueUtil.TRUE_VALUE) {
+						status = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source_0;
+						try {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
+							final /*@NonInvalid*/ @Nullable Type type_1 = value_0.getType();
+							final /*@NonInvalid*/ @NonNull Object conformsTo_1 = type_1 == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source_0;
+							if (conformsTo_1 == Boolean.TRUE) {
+								safe_conformsTo_source_0 = null;
+							}
+							else {
+								if (type_1 == null) {
+									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+								}
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable_0 = this.getTargetVariable();
+								final /*@NonInvalid*/ @Nullable Type type_2 = targetVariable_0.getType();
+								final /*@Thrown*/ boolean conformsTo_2 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_1, type_2).booleanValue();
+								safe_conformsTo_source_0 = conformsTo_2;
+							}
+							CAUGHT_safe_conformsTo_source_0 = safe_conformsTo_source_0;
+						}
+						catch (Exception e) {
+							CAUGHT_safe_conformsTo_source_0 = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_safe_conformsTo_source_0 == ValueUtil.TRUE_VALUE) {
+							status = ValueUtil.TRUE_VALUE;
 						}
 						else {
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable_0 = this.getTargetVariable();
-							final /*@NonInvalid*/ @Nullable Type type_2 = targetVariable_0.getType();
-							final /*@Thrown*/ boolean conformsTo_2 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_1, type_2).booleanValue();
-							safe_conformsTo_source_0 = conformsTo_2;
+							if (CAUGHT_safe_conformsTo_source instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_safe_conformsTo_source;
+							}
+							if (CAUGHT_safe_conformsTo_source_0 instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_safe_conformsTo_source_0;
+							}
+							if ((CAUGHT_safe_conformsTo_source == null) || (CAUGHT_safe_conformsTo_source_0 == null)) {
+								status = null;
+							}
+							else {
+								status = ValueUtil.FALSE_VALUE;
+							}
 						}
-						CAUGHT_safe_conformsTo_source_0 = safe_conformsTo_source_0;
 					}
-					catch (Exception e) {
-						CAUGHT_safe_conformsTo_source_0 = ValueUtil.createInvalidValue(e);
-					}
-					final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_safe_conformsTo_source, CAUGHT_safe_conformsTo_source_0);
 					final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
 					/*@Thrown*/ @NonNull Object symbol_1;
 					if (eq) {
@@ -293,10 +310,10 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 				catch (Exception e) {
 					CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_symbol_1, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, QVTcoreTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_2;
+			return symbol_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

@@ -344,18 +344,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -394,10 +384,10 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -430,77 +420,107 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_AT_LEAST_ONE_DOMAIN_IS_CHECKABLE_OR_ENFORCEABLE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_AT_LEAST_ONE_DOMAIN_IS_CHECKABLE_OR_ENFORCEABLE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
-				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
-				final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_domain_0).booleanValue();
-				/*@NonInvalid*/ @Nullable Boolean result;
-				if (notEmpty) {
-					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.FALSE_VALUE;
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain_0.iterator();
-					/*@NonInvalid*/ @Nullable Boolean exists;
-					while (true) {
-						if (!ITERATOR__1.hasNext()) {
-							if (accumulator == ValueUtil.FALSE_VALUE) {
-								exists = ValueUtil.FALSE_VALUE;
+				/*@Caught*/ @Nullable Object CAUGHT_result;
+				try {
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
+					final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_domain).booleanValue();
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (!notEmpty) {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						/*@Caught*/ @Nullable Object CAUGHT_exists;
+						try {
+							/*@Thrown*/ @Nullable Object accumulator = ValueUtil.FALSE_VALUE;
+							@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+							/*@Thrown*/ @Nullable Boolean exists;
+							while (true) {
+								if (!ITERATOR__1.hasNext()) {
+									if (accumulator == null) {
+										exists = null;
+									}
+									else if (accumulator == ValueUtil.FALSE_VALUE) {
+										exists = ValueUtil.FALSE_VALUE;
+									}
+									else {
+										throw (InvalidValueException)accumulator;
+									}
+									break;
+								}
+								@SuppressWarnings("null")
+								/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
+								/**
+								 * isCheckable or isEnforceable
+								 */
+								final /*@NonInvalid*/ boolean isCheckable = _1.isIsCheckable();
+								final /*@NonInvalid*/ @Nullable Boolean or;
+								if (isCheckable) {
+									or = ValueUtil.TRUE_VALUE;
+								}
+								else {
+									final /*@NonInvalid*/ boolean isEnforceable = _1.isIsEnforceable();
+									if (isEnforceable) {
+										or = ValueUtil.TRUE_VALUE;
+									}
+									else {
+										or = ValueUtil.FALSE_VALUE;
+									}
+								}
+								//
+								if (or == ValueUtil.TRUE_VALUE) {					// Normal successful body evaluation result
+									exists = ValueUtil.TRUE_VALUE;
+									break;														// Stop immediately
+								}
+								else if (or == ValueUtil.FALSE_VALUE) {				// Normal unsuccessful body evaluation result
+									;															// Carry on
+								}
+								else if (or == null) {								// Abnormal null body evaluation result
+									if (accumulator == ValueUtil.FALSE_VALUE) {
+										accumulator = null;										// Cache a null failure
+									}
+								}
+								else {															// Impossible badly typed result
+									accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "exists");
+								}
 							}
-							else {
-								throw (InvalidValueException)accumulator;
-							}
-							break;
+							CAUGHT_exists = exists;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
-						/**
-						 * isCheckable or isEnforceable
-						 */
-						final /*@NonInvalid*/ boolean isCheckable = _1.isIsCheckable();
-						/*@NonInvalid*/ boolean or;
-						if (isCheckable) {
-							or = ValueUtil.TRUE_VALUE;
+						catch (Exception e) {
+							CAUGHT_exists = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_exists == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
 						}
 						else {
-							final /*@NonInvalid*/ boolean isEnforceable = _1.isIsEnforceable();
-							or = isEnforceable;
-						}
-						//
-						if (or == ValueUtil.TRUE_VALUE) {					// Normal successful body evaluation result
-							exists = ValueUtil.TRUE_VALUE;
-							break;														// Stop immediately
-						}
-						else if (or == ValueUtil.FALSE_VALUE) {				// Normal unsuccessful body evaluation result
-							;															// Carry on
-						}
-						else {															// Impossible badly typed result
-							accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "exists");
+							if (CAUGHT_exists instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_exists;
+							}
+							if (CAUGHT_exists == null) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
 						}
 					}
-					result = exists;
+					CAUGHT_result = result;
 				}
-				else {
-					result = ValueUtil.TRUE_VALUE;
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -534,18 +554,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_1;
 			if (le) {
 				symbol_1 = ValueUtil.TRUE_VALUE;
@@ -584,10 +594,10 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 				symbol_1 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_1;
+			return symbol_1;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -618,39 +628,34 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_ABSTRACT_RULE_IS_OVERRIDDEN__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_ABSTRACT_RULE_IS_OVERRIDDEN__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ boolean isAbstract = this.isIsAbstract();
-				/*@NonInvalid*/ boolean result;
-				if (isAbstract) {
+				final /*@NonInvalid*/ @Nullable Boolean result;
+				if (!isAbstract) {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				else {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull List<Rule> overrides = this.getOverrides();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_overrides = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Rule, overrides);
 					final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_overrides).booleanValue();
-					result = notEmpty;
+					if (notEmpty) {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						result = ValueUtil.FALSE_VALUE;
+					}
 				}
-				else {
-					result = ValueUtil.TRUE_VALUE;
-				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTbaseTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -683,18 +688,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -704,90 +699,110 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				try {
 					final /*@NonInvalid*/ @Nullable Rule overridden = this.getOverridden();
 					final /*@NonInvalid*/ boolean ne = overridden != null;
-					/*@Thrown*/ @Nullable Boolean result;
-					if (ne) {
-						if (overridden == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::domain\'");
-						}
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull List<Domain> domain = overridden.getDomain();
-						final /*@Thrown*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
-						/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-						@NonNull Iterator<Object> ITERATOR_od = BOXED_domain.iterator();
-						/*@Thrown*/ @Nullable Boolean forAll;
-						while (true) {
-							if (!ITERATOR_od.hasNext()) {
-								if (accumulator == ValueUtil.TRUE_VALUE) {
-									forAll = ValueUtil.TRUE_VALUE;
-								}
-								else {
-									throw (InvalidValueException)accumulator;
-								}
-								break;
-							}
-							@SuppressWarnings("null")
-							/*@NonInvalid*/ @NonNull Domain od = (@NonNull Domain)ITERATOR_od.next();
-							/**
-							 * self.domain.name->includes(od.name)
-							 */
-							/*@Caught*/ @NonNull Object CAUGHT_includes;
-							try {
-								@SuppressWarnings("null")
-								final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
-								final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
-								/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_PRIMid_String);
-								@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain_0.iterator();
-								/*@Thrown*/ @NonNull SequenceValue collect;
-								while (true) {
-									if (!ITERATOR__1.hasNext()) {
-										collect = accumulator_0;
-										break;
-									}
-									@SuppressWarnings("null")
-									/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
-									/**
-									 * name
-									 */
-									final /*@NonInvalid*/ @Nullable String name = _1.getName();
-									//
-									accumulator_0.add(name);
-								}
-								final /*@NonInvalid*/ @Nullable String name_0 = od.getName();
-								final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, name_0).booleanValue();
-								CAUGHT_includes = includes;
-							}
-							catch (Exception e) {
-								CAUGHT_includes = ValueUtil.createInvalidValue(e);
-							}
-							//
-							if (CAUGHT_includes == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-								forAll = ValueUtil.FALSE_VALUE;
-								break;														// Stop immediately
-							}
-							else if (CAUGHT_includes == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
-								;															// Carry on
-							}
-							else if (CAUGHT_includes instanceof InvalidValueException) {		// Abnormal exception evaluation result
-								accumulator = CAUGHT_includes;									// Cache an exception failure
-							}
-							else {															// Impossible badly typed result
-								accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-							}
-						}
-						result = forAll;
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (!ne) {
+						result = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						result = ValueUtil.TRUE_VALUE;
+						/*@Caught*/ @Nullable Object CAUGHT_forAll;
+						try {
+							if (overridden == null) {
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::domain\'");
+							}
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull List<Domain> domain = overridden.getDomain();
+							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
+							/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+							@NonNull Iterator<Object> ITERATOR_od = BOXED_domain.iterator();
+							/*@Thrown*/ @Nullable Boolean forAll;
+							while (true) {
+								if (!ITERATOR_od.hasNext()) {
+									if (accumulator == ValueUtil.TRUE_VALUE) {
+										forAll = ValueUtil.TRUE_VALUE;
+									}
+									else {
+										throw (InvalidValueException)accumulator;
+									}
+									break;
+								}
+								@SuppressWarnings("null")
+								/*@NonInvalid*/ @NonNull Domain od = (@NonNull Domain)ITERATOR_od.next();
+								/**
+								 * self.domain.name->includes(od.name)
+								 */
+								/*@Caught*/ @NonNull Object CAUGHT_includes;
+								try {
+									@SuppressWarnings("null")
+									final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
+									final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
+									/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_PRIMid_String);
+									@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain_0.iterator();
+									/*@Thrown*/ @NonNull SequenceValue collect;
+									while (true) {
+										if (!ITERATOR__1.hasNext()) {
+											collect = accumulator_0;
+											break;
+										}
+										@SuppressWarnings("null")
+										/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
+										/**
+										 * name
+										 */
+										final /*@NonInvalid*/ @Nullable String name = _1.getName();
+										//
+										accumulator_0.add(name);
+									}
+									final /*@NonInvalid*/ @Nullable String name_0 = od.getName();
+									final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, name_0).booleanValue();
+									CAUGHT_includes = includes;
+								}
+								catch (Exception e) {
+									CAUGHT_includes = ValueUtil.createInvalidValue(e);
+								}
+								//
+								if (CAUGHT_includes == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+									forAll = ValueUtil.FALSE_VALUE;
+									break;														// Stop immediately
+								}
+								else if (CAUGHT_includes == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+									;															// Carry on
+								}
+								else if (CAUGHT_includes instanceof InvalidValueException) {		// Abnormal exception evaluation result
+									accumulator = CAUGHT_includes;									// Cache an exception failure
+								}
+								else {															// Impossible badly typed result
+									accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+								}
+							}
+							CAUGHT_forAll = forAll;
+						}
+						catch (Exception e) {
+							CAUGHT_forAll = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_forAll == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_forAll instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_forAll;
+							}
+							if (CAUGHT_forAll == null) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
 					}
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

@@ -38,8 +38,6 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanOrOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -217,19 +215,9 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTcoreTables.INT_0).booleanValue();
-			/*@NonInvalid*/ @NonNull Object symbol_2;
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
 				symbol_2 = ValueUtil.TRUE_VALUE;
 			}
@@ -265,6 +253,9 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 								safe_conformsTo_source = null;
 							}
 							else {
+								if (valueType == null) {
+									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+								}
 								if (CAUGHT_propertyType instanceof InvalidValueException) {
 									throw (InvalidValueException)CAUGHT_propertyType;
 								}
@@ -276,18 +267,40 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 						catch (Exception e) {
 							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 						}
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo_1;
-						try {
-							if (CAUGHT_propertyType instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_propertyType;
+						final /*@Thrown*/ @Nullable Boolean status;
+						if (CAUGHT_safe_conformsTo_source == ValueUtil.TRUE_VALUE) {
+							status = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							/*@Caught*/ @NonNull Object CAUGHT_conformsTo_1;
+							try {
+								if (CAUGHT_propertyType instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_propertyType;
+								}
+								final /*@Thrown*/ boolean conformsTo_1 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, valueType).booleanValue();
+								CAUGHT_conformsTo_1 = conformsTo_1;
 							}
-							final /*@Thrown*/ boolean conformsTo_1 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, valueType).booleanValue();
-							CAUGHT_conformsTo_1 = conformsTo_1;
+							catch (Exception e) {
+								CAUGHT_conformsTo_1 = ValueUtil.createInvalidValue(e);
+							}
+							if (CAUGHT_conformsTo_1 == ValueUtil.TRUE_VALUE) {
+								status = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								if (CAUGHT_safe_conformsTo_source instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_safe_conformsTo_source;
+								}
+								if (CAUGHT_conformsTo_1 instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_conformsTo_1;
+								}
+								if (CAUGHT_safe_conformsTo_source == null) {
+									status = null;
+								}
+								else {
+									status = ValueUtil.FALSE_VALUE;
+								}
+							}
 						}
-						catch (Exception e) {
-							CAUGHT_conformsTo_1 = ValueUtil.createInvalidValue(e);
-						}
-						final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_safe_conformsTo_source, CAUGHT_conformsTo_1);
 						final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
 						/*@Thrown*/ @NonNull Object symbol_1;
 						if (eq) {
@@ -325,10 +338,10 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_2;
+			return symbol_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -376,19 +389,9 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTcoreTables.INT_0).booleanValue();
-			/*@NonInvalid*/ @NonNull Object symbol_2;
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
 				symbol_2 = ValueUtil.TRUE_VALUE;
 			}
@@ -396,7 +399,18 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
-					final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isPartial);
+					final /*@NonInvalid*/ @Nullable Boolean not;
+					if (!isPartial) {
+						not = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						if (isPartial) {
+							not = ValueUtil.FALSE_VALUE;
+						}
+						else {
+							not = null;
+						}
+					}
 					if (not == null) {
 						throw new InvalidValueException("Null if condition");
 					}
@@ -416,6 +430,9 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 								safe_conformsTo_source = null;
 							}
 							else {
+								if (valueType == null) {
+									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+								}
 								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, propertyType).booleanValue();
 								safe_conformsTo_source = conformsTo_0;
 							}
@@ -424,23 +441,48 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 						catch (Exception e) {
 							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 						}
-						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source_0;
-						try {
-							final /*@NonInvalid*/ @NonNull Object conformsTo_1 = propertyType == null;
-							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source_0;
-							if (conformsTo_1 == Boolean.TRUE) {
-								safe_conformsTo_source_0 = null;
+						final /*@Thrown*/ @Nullable Boolean status;
+						if (CAUGHT_safe_conformsTo_source == ValueUtil.TRUE_VALUE) {
+							status = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source_0;
+							try {
+								final /*@NonInvalid*/ @NonNull Object conformsTo_1 = propertyType == null;
+								/*@Thrown*/ @Nullable Boolean safe_conformsTo_source_0;
+								if (conformsTo_1 == Boolean.TRUE) {
+									safe_conformsTo_source_0 = null;
+								}
+								else {
+									if (propertyType == null) {
+										throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+									}
+									final /*@Thrown*/ boolean conformsTo_2 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, propertyType, valueType).booleanValue();
+									safe_conformsTo_source_0 = conformsTo_2;
+								}
+								CAUGHT_safe_conformsTo_source_0 = safe_conformsTo_source_0;
+							}
+							catch (Exception e) {
+								CAUGHT_safe_conformsTo_source_0 = ValueUtil.createInvalidValue(e);
+							}
+							if (CAUGHT_safe_conformsTo_source_0 == ValueUtil.TRUE_VALUE) {
+								status = ValueUtil.TRUE_VALUE;
 							}
 							else {
-								final /*@Thrown*/ boolean conformsTo_2 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, propertyType, valueType).booleanValue();
-								safe_conformsTo_source_0 = conformsTo_2;
+								if (CAUGHT_safe_conformsTo_source instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_safe_conformsTo_source;
+								}
+								if (CAUGHT_safe_conformsTo_source_0 instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_safe_conformsTo_source_0;
+								}
+								if ((CAUGHT_safe_conformsTo_source == null) || (CAUGHT_safe_conformsTo_source_0 == null)) {
+									status = null;
+								}
+								else {
+									status = ValueUtil.FALSE_VALUE;
+								}
 							}
-							CAUGHT_safe_conformsTo_source_0 = safe_conformsTo_source_0;
 						}
-						catch (Exception e) {
-							CAUGHT_safe_conformsTo_source_0 = ValueUtil.createInvalidValue(e);
-						}
-						final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_safe_conformsTo_source, CAUGHT_safe_conformsTo_source_0);
 						final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
 						/*@Thrown*/ @NonNull Object symbol_1;
 						if (eq) {
@@ -484,10 +526,10 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_2;
+			return symbol_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -517,18 +559,8 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -537,11 +569,22 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull Property targetProperty = this.getTargetProperty();
 				final /*@NonInvalid*/ boolean isImplicit = targetProperty.isIsImplicit();
-				final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(isImplicit);
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ @Nullable Boolean result;
+				if (!isImplicit) {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					if (isImplicit) {
+						result = ValueUtil.FALSE_VALUE;
+					}
+					else {
+						result = null;
+					}
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -573,18 +616,8 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPERTY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPERTY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -601,6 +634,9 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 						safe_conformsTo_source = null;
 					}
 					else {
+						if (type == null) {
+							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+						}
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = getReferredTargetProperty.getOwningClass();
@@ -612,10 +648,10 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 				catch (Exception e) {
 					CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_safe_conformsTo_source, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_safe_conformsTo_source, QVTcoreTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

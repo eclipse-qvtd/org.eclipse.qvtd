@@ -31,8 +31,6 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
@@ -221,18 +219,8 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -241,37 +229,60 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
-					/*@Thrown*/ @Nullable Boolean result;
-					if (isCheck) {
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
-						final /*@NonInvalid*/ @Nullable Type type = boundVariable.getType();
-						final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
-						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
-						if (conformsTo == Boolean.TRUE) {
-							safe_conformsTo_source = null;
-						}
-						else {
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-							final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
-							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-							safe_conformsTo_source = conformsTo_0;
-						}
-						result = safe_conformsTo_source;
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (!isCheck) {
+						result = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						result = ValueUtil.TRUE_VALUE;
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
+						try {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
+							final /*@NonInvalid*/ @Nullable Type type = boundVariable.getType();
+							final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+							if (conformsTo == Boolean.TRUE) {
+								safe_conformsTo_source = null;
+							}
+							else {
+								if (type == null) {
+									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+								}
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+								final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+								safe_conformsTo_source = conformsTo_0;
+							}
+							CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
+						}
+						catch (Exception e) {
+							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_safe_conformsTo_source == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_safe_conformsTo_source instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_safe_conformsTo_source;
+							}
+							if (CAUGHT_safe_conformsTo_source == null) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
 					}
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -302,18 +313,8 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -322,39 +323,72 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
-					final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
-					/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
-					try {
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type = value.getType();
-						final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
-						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
-						if (conformsTo == Boolean.TRUE) {
-							safe_conformsTo_source = null;
+					final /*@NonInvalid*/ @Nullable Boolean not;
+					if (!isCheck) {
+						not = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						if (isCheck) {
+							not = ValueUtil.FALSE_VALUE;
 						}
 						else {
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
-							final /*@NonInvalid*/ @Nullable Type type_0 = boundVariable.getType();
-							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-							safe_conformsTo_source = conformsTo_0;
+							not = null;
 						}
-						CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 					}
-					catch (Exception e) {
-						CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (not == ValueUtil.FALSE_VALUE) {
+						result = ValueUtil.TRUE_VALUE;
 					}
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_safe_conformsTo_source);
+					else {
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
+						try {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+							final /*@NonInvalid*/ @Nullable Type type = value.getType();
+							final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+							if (conformsTo == Boolean.TRUE) {
+								safe_conformsTo_source = null;
+							}
+							else {
+								if (type == null) {
+									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+								}
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
+								final /*@NonInvalid*/ @Nullable Type type_0 = boundVariable.getType();
+								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+								safe_conformsTo_source = conformsTo_0;
+							}
+							CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
+						}
+						catch (Exception e) {
+							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_safe_conformsTo_source == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_safe_conformsTo_source instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_safe_conformsTo_source;
+							}
+							if ((not == null) || (CAUGHT_safe_conformsTo_source == null)) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
+					}
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
