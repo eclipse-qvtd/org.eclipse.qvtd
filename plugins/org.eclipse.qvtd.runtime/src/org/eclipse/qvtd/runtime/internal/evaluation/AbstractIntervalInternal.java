@@ -31,8 +31,6 @@ import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
 import org.eclipse.qvtd.runtime.evaluation.SlotState.Speculating;
 
-import com.google.common.collect.Iterables;
-
 /**
  * AbstractIntervalInternal provides the shared implementation of the intrusive blocked/waiting linked list functionality.
  */
@@ -60,10 +58,14 @@ public abstract class AbstractIntervalInternal implements Interval
 	private @NonNull List<@NonNull Connection> connections = new ArrayList<>();
 
 	/**
+	 * Head of doubly linked list of speculatable invocations.
+	 */
+	private @Nullable AbstractInvocationInternal speculatableInvocations = null;
+
+	/**
 	 * Head of doubly linked list of blocked invocations.
 	 */
 	private @Nullable AbstractInvocationInternal blockedInvocations = null;
-
 	/**
 	 * Head of doubly linked list of unblocked invocations waiting for an execution attempt.
 	 */
@@ -81,10 +83,12 @@ public abstract class AbstractIntervalInternal implements Interval
 	}
 
 	private synchronized void block(@NonNull Invocation invocation, @NonNull SlotState slotState) {
+		assert !(slotState instanceof SlotState.Speculating);			// FIXME is this too strong, do we need to handle blocked specyulatables ??
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
 		assert castInvocation.blockedBy == null;
 		assert castInvocation.next == castInvocation;
 		assert castInvocation.prev == castInvocation;
+		assert speculatableInvocations != castInvocation;
 		assert blockedInvocations != castInvocation;
 		assert waitingInvocations != castInvocation;
 		castInvocation.blockedBy = slotState;
@@ -126,6 +130,7 @@ public abstract class AbstractIntervalInternal implements Interval
 			AbstractTransformer.INVOCATIONS.println("destroy " + invocation);
 		}
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
+		assert speculatableInvocations != castInvocation;
 		assert blockedInvocations != castInvocation;
 		if (waitingInvocations == castInvocation) {
 			waitingInvocations = castInvocation.next;
@@ -153,6 +158,17 @@ public abstract class AbstractIntervalInternal implements Interval
 			}
 			blocked = blocked.next;
 			if (blocked == blockedInvocations) {
+				break;
+			}
+		}
+		for (AbstractInvocationInternal speculatable = speculatableInvocations; speculatable != null; ) {
+			SlotState blockedBy = speculatable.blockedBy;
+			s.append("\n" + intervalIndex + ": " + speculatable + "\n\tspeculating " + blockedBy);
+			if (blockedBy != null) {
+				//	blockedBy.debugUnblock();
+			}
+			speculatable = speculatable.next;
+			if (speculatable == speculatableInvocations) {
 				break;
 			}
 		}
@@ -219,13 +235,32 @@ public abstract class AbstractIntervalInternal implements Interval
 					}
 				}
 			}
-			AbstractInvocationInternal blockedInvocation = blockedInvocations;
-			if (blockedInvocation == null) {
-				return true;
+			while (speculatableInvocations != null) {							// Inner 'loop' converts a speculation to normal work
+				AbstractInvocationInternal speculatableInvocation = null;
+				synchronized (this) {
+					AbstractInvocationInternal speculatableInvocations2 = speculatableInvocations;
+					if (speculatableInvocations2 != null) {
+						speculatableInvocation = speculatableInvocations2;
+						speculatableInvocations = speculatableInvocations2.next;
+						if (speculatableInvocations == speculatableInvocation) {
+							speculatableInvocations = null;
+						}
+						speculatableInvocation.remove();
+					}
+				}
+				if (speculatableInvocation != null) {
+					if (debugInvocations) {
+						AbstractTransformer.INVOCATIONS.println("speculate " + speculatableInvocation);
+					}
+					Speculating blockedBy = (Speculating) speculatableInvocation.blockedBy;
+					assert blockedBy != null;
+					if (speculate(blockedBy)) {
+						assert waitingInvocations != null;
+						break;		// To execute the now-waiting invocation
+					}
+					// ?? set speculation failed
+				}
 			}
-			Speculating blockedBy = (Speculating) blockedInvocation.blockedBy;
-			assert blockedBy != null;
-			speculate(blockedBy);		// FIXME loop if return false
 		}
 		AbstractInvocationInternal blockedInvocation = blockedInvocations;
 		if (blockedInvocation == null) {
@@ -237,7 +272,7 @@ public abstract class AbstractIntervalInternal implements Interval
 			}
 			blockedInvocation = blockedInvocation.next;
 		}
-		while (blockedInvocation != blockedInvocations);
+		while ((blockedInvocation != blockedInvocations) && (blockedInvocation != speculatableInvocations));
 		return false;
 	}
 
@@ -268,6 +303,9 @@ public abstract class AbstractIntervalInternal implements Interval
 		}
 		// assert each connection fully propagatred
 		if (blockedInvocations != null) {
+			return false;
+		}
+		if (speculatableInvocations != null) {
 			return false;
 		}
 		if (waitingInvocations != null) {
@@ -308,6 +346,7 @@ public abstract class AbstractIntervalInternal implements Interval
 		}
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
 		assert castInvocation.blockedBy == null;
+		assert speculatableInvocations != castInvocation;
 		assert blockedInvocations != castInvocation;
 		AbstractInvocationInternal waitingInvocations2 = waitingInvocations;
 		if (waitingInvocations2 == null) {
@@ -319,11 +358,33 @@ public abstract class AbstractIntervalInternal implements Interval
 		queue();
 	}
 
+	/*	private synchronized void speculate(@NonNull Invocation invocation, SlotState.@NonNull Speculating slotState) {
+		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
+		assert castInvocation.blockedBy == null;
+		assert castInvocation.next == castInvocation;
+		assert castInvocation.prev == castInvocation;
+		assert speculatableInvocations != castInvocation;
+		assert blockedInvocations != castInvocation;
+		assert waitingInvocations != castInvocation;
+		castInvocation.blockedBy = slotState;
+		AbstractInvocationInternal blockedInvocations2 = speculatableInvocations;
+		if (blockedInvocations2 == null) {
+			speculatableInvocations = castInvocation;
+		}
+		else {
+			castInvocation.insertAfter(blockedInvocations2.prev);
+		}
+		slotState.block(invocation);
+		if (debugInvocations) {
+			AbstractTransformer.BLOCKS.println("speculate " + invocation + " for " + slotState);
+		}
+	} */
+
 	/**
 	 * Assess the speculation hypothesis that this speculatable can be satisfied.
 	 * Return null, if it cannot. Return a Set of all the speculatables that can be jointly
 	 * satisfied concurrently with this speculatable.
-	 */
+	 *
 	public boolean speculate(SlotState.@NonNull Speculating aSpeculatable) {
 		Set<SlotState.@NonNull Speculating> inputSpeculatablesClosure = new HashSet<>();
 		if (!speculate(aSpeculatable, inputSpeculatablesClosure)) {
@@ -350,7 +411,56 @@ public abstract class AbstractIntervalInternal implements Interval
 			}
 		}
 		return true;
+	} */
+
+	/**
+	 * Pursue the speculation hypothesis that aSpeculatable can be satisfied.
+	 * Return true if it can after setting the input dependencies successful.
+	 * Return false if it cannot.
+	 */
+	public boolean speculate(SlotState.@NonNull Speculating aSpeculatable) {
+		Set<SlotState.@NonNull Speculating> inputSpeculatablesClosure = new HashSet<>();
+		Boolean status = speculate(aSpeculatable, inputSpeculatablesClosure);
+		if (status != null) {
+			aSpeculatable.setStatus(status.booleanValue());
+			//	aSpeculatable.assigned(null, null, Boolean.FALSE, false);
+			return status.booleanValue();
+		}
+		for (SlotState.@NonNull Speculating speculatable : inputSpeculatablesClosure) {
+			speculatable.setStatus(Boolean.TRUE);
+			//	speculatable.assigned(null, null, Boolean.TRUE, false);
+		}
+		return true;
 	}
+	/**
+	 * Gather the set of indeterminate speculatables that must all be true to successfully speculate aSpeculatable.
+	 *
+	 * Return true, if speculation is (already) successful; all transitive speculatables have true success. Never happens.
+	 * Return false if speculation cannot succeed; a transitive speculatable's status is false.
+	 * Return null if speculation is feasible; all transitive speculatiables are null/true.
+	 */
+	private @Nullable Boolean speculate(SlotState.@NonNull Speculating aSpeculatable, @NonNull Set<SlotState.@NonNull Speculating> inputSpeculatablesClosure) {
+		Boolean status = aSpeculatable.getStatus();
+		if (status == null) {
+			status = Boolean.TRUE;
+			if (inputSpeculatablesClosure.add(aSpeculatable)) {
+				for (SlotState.@NonNull Speculating inputSpeculatable : aSpeculatable.getInputs()) {
+					Boolean inputStatus = speculate(inputSpeculatable, inputSpeculatablesClosure);
+					if (inputStatus == Boolean.FALSE) {
+						return Boolean.FALSE;
+					}
+					else if (inputStatus != Boolean.TRUE) {
+						// returnStatus may continue to be TRUE
+					}
+					else {
+						status =  null;
+					}
+				}
+			}
+		}
+		return status;
+	}
+
 
 	@Override
 	public String toString() {
@@ -368,19 +478,6 @@ public abstract class AbstractIntervalInternal implements Interval
 		}
 		s.append(i);
 		s.append(" connections, ");
-		int j = 0;
-		AbstractInvocationInternal blockedInvocation = blockedInvocations;
-		if (blockedInvocation != null) {
-			j++;
-			while ((blockedInvocation = blockedInvocation.next) != blockedInvocations) {
-				if (++j >= 100) {
-					s.append(">=");
-					break;
-				}
-			}
-		}
-		s.append(j);
-		s.append(" blocked, ");
 		int k = 0;
 		AbstractInvocationInternal waitingInvocation = waitingInvocations;
 		if (waitingInvocation != null) {
@@ -394,6 +491,32 @@ public abstract class AbstractIntervalInternal implements Interval
 		}
 		s.append(k);
 		s.append(" waiting");
+		int m = 0;
+		AbstractInvocationInternal unspeculatedInvocation = speculatableInvocations;
+		if (unspeculatedInvocation != null) {
+			m++;
+			while ((unspeculatedInvocation = unspeculatedInvocation.next) != speculatableInvocations) {
+				if (++m >= 100) {
+					s.append(">=");
+					break;
+				}
+			}
+		}
+		s.append(m);
+		s.append(" speculatable, ");
+		int j = 0;
+		AbstractInvocationInternal blockedInvocation = blockedInvocations;
+		if (blockedInvocation != null) {
+			j++;
+			while ((blockedInvocation = blockedInvocation.next) != blockedInvocations) {
+				if (++j >= 100) {
+					s.append(">=");
+					break;
+				}
+			}
+		}
+		s.append(j);
+		s.append(" blocked, ");
 		return s.toString();
 	}
 
@@ -405,10 +528,20 @@ public abstract class AbstractIntervalInternal implements Interval
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
 		assert castInvocation.blockedBy != null;
 		castInvocation.blockedBy = null;
-		if (blockedInvocations == castInvocation) {
-			blockedInvocations = castInvocation.next;
+		if (castInvocation.blockedBy instanceof SlotState.Speculating) {		// FIXME ?? speculating may just be blocked ??
+			if (speculatableInvocations == castInvocation) {
+				speculatableInvocations = castInvocation.next;
+				if (speculatableInvocations == castInvocation) {
+					speculatableInvocations = null;
+				}
+			}
+		}
+		else {
 			if (blockedInvocations == castInvocation) {
-				blockedInvocations = null;
+				blockedInvocations = castInvocation.next;
+				if (blockedInvocations == castInvocation) {
+					blockedInvocations = null;
+				}
 			}
 		}
 		castInvocation.remove();
