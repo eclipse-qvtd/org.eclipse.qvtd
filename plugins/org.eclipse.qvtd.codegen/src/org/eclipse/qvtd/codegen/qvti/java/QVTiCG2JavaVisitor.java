@@ -3312,7 +3312,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.append(" ");
 				js.appendValueName(cgAccumulator);
 				js.append(" = ");
-				js.append(rootIntervalName);
+				if ((ast instanceof BufferStatement) && (((BufferStatement)ast).getFirstPass() != null)) {
+					js.append("lazyCreateInterval(");
+					js.appendIntegerString(((BufferStatement)ast).getFirstPass());
+					js.append(")");
+				}
+				else {
+					js.append(rootIntervalName);
+				}
 				js.append(".createConnection(");
 				js.appendString(QVTiCGUtil.getName(cgAccumulator));
 				js.append(", ");
