@@ -441,6 +441,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		}
 
 		public @NonNull AccessAnalysis getAccessAnalysis(@NonNull CompleteClass sourceClass, @NonNull Property property, @NonNull CompleteClass targetClass) {
+			assert !PivotUtil.isDataType(sourceClass);
 			Map<@NonNull CompleteClass, @NonNull AccessAnalysis> targetClass2accessAnalysis = sourceClass2targetClass2accessAnalysis.get(sourceClass);
 			if (targetClass2accessAnalysis == null) {
 				targetClass2accessAnalysis = new HashMap<>();

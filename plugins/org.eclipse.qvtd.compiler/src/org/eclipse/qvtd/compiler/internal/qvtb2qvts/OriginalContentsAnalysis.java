@@ -274,6 +274,7 @@ public class OriginalContentsAnalysis
 	 * Return the regions that consume precisely classDatum.
 	 */
 	public @NonNull Iterable<@NonNull RuleRegion> getDirectlyConsumingRegions(@NonNull ClassDatum classDatum) {
+		assert !classDatum.isDataType() : "DataTypes can only be consumed by a PropertyDatum";
 		Set<@NonNull RuleRegion> consumingRegions = classDatum2consumingRegions.get(classDatum);
 		if (consumingRegions == null) {
 			PartialRegionClassAnalysis<@NonNull RegionsAnalysis> classAnalysis = transformationAnalysis.basicGetClassAnalysis(classDatum);
@@ -311,6 +312,7 @@ public class OriginalContentsAnalysis
 	 * Return the regions that produce classDatum or one of its subClassDatums.
 	 */
 	public @NonNull Iterable<@NonNull RuleRegion> getIndirectlyProducingRegions(@NonNull ClassDatum classDatum) {
+		assert !classDatum.isDataType() : "DataTypes can only be produced by a PropertyDatum";
 		Set<@NonNull RuleRegion> producingRegions = classDatum2producingRegions.get(classDatum);
 		if (producingRegions == null) {
 			PartialRegionClassAnalysis<@NonNull RegionsAnalysis> classAnalysis = transformationAnalysis.basicGetClassAnalysis(classDatum);

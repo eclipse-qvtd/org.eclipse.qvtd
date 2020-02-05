@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
@@ -39,8 +40,10 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 
 	/**
 	 * The ClassAnalysis instances that are consumed by this MappingPartitioner.
+	 *
+	 * NB. This excludes DataTypes that may only be consumed by their edges/properties.
 	 */
-	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> consumedClassAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> externallyConsumedClassAnalyses = null;
 
 	/**
 	 * The PropertyAnalysis instances that are consumed by this MappingPartitioner.
@@ -49,8 +52,10 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 
 	/**
 	 * The ClassAnalysis instances that are produced by this MappingPartitioner.
+	 *
+	 * NB. This excludes DataTypes that may only be produced by their edges/properties.
 	 */
-	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> producedClassAnalyses = null;
+	private @Nullable List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> externallyProducedClassAnalyses = null;
 
 	/**
 	 * The PropertyAnalysis instances that are produced by this MappingPartitioner.
@@ -146,7 +151,9 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private void addConsumptionOfInputNode(@NonNull Node node) {
 		if (node.isClass() && !loadedInputNodes.contains(node)) {		// DataTypes are consumed by their edge
 			loadedInputNodes.add(node);
-			addConsumptionOfNode(node);
+			if (!node.isDataType()) {
+				addConsumptionOfNode(node);
+			}
 		}
 	}
 
@@ -160,18 +167,24 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private void addConsumptionOfMiddleNode(@NonNull Node node) {
 		if (!predicatedMiddleNodes.contains(node)) {
 			predicatedMiddleNodes.add(node);
-			addConsumptionOfNode(node);
+			if (!node.isDataType()) {
+				addConsumptionOfNode(node);
+			}
 		}
 	}
 
 	private void addConsumptionOfNode(@NonNull Node node) {
-		PartialRegionClassAnalysis<@NonNull PRA> consumedTraceAnalysis = partialRegionsAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(node), this);
-		List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> consumedClassAnalyses2 = consumedClassAnalyses;
-		if (consumedClassAnalyses2 == null) {
-			consumedClassAnalyses = consumedClassAnalyses2 = new ArrayList<>();
+		if ("mapBooleanExp_qvtr".equals(getName()) || "mapStringExp_qvtr".equals(getName())) {
+			CompilerUtil.class.getName();
 		}
-		if (!consumedClassAnalyses2.contains(consumedTraceAnalysis)) {
-			consumedClassAnalyses2.add(consumedTraceAnalysis);
+		assert !node.isDataType();
+		PartialRegionClassAnalysis<@NonNull PRA> consumedTraceAnalysis = partialRegionsAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(node), this);
+		List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> externallyConsumedClassAnalyses2 = externallyConsumedClassAnalyses;
+		if (externallyConsumedClassAnalyses2 == null) {
+			externallyConsumedClassAnalyses = externallyConsumedClassAnalyses2 = new ArrayList<>();
+		}
+		if (!externallyConsumedClassAnalyses2.contains(consumedTraceAnalysis)) {
+			externallyConsumedClassAnalyses2.add(consumedTraceAnalysis);
 		}
 	}
 
@@ -185,7 +198,9 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private void addConsumptionOfOutputNode(@NonNull Node node) {
 		if (!predicatedOutputNodes.contains(node)) {
 			predicatedOutputNodes.add(node);
-			addConsumptionOfNode(node);
+			if (!node.isDataType()) {
+				addConsumptionOfNode(node);
+			}
 		}
 	}
 
@@ -241,19 +256,22 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private void addProductionOfMiddleNode(@NonNull Node node) {
 		if (isNew(node) && !newMiddleNodes.contains(node)) {
 			newMiddleNodes.add(node);
-			addProductionOfNode(node);
+			if (!node.isDataType()) {
+				addProductionOfNode(node);
+			}
 		}
 	}
 
 	private void addProductionOfNode(@NonNull Node node) {
 		assert isNew(node);
+		assert !node.isDataType();
 		PartialRegionClassAnalysis<@NonNull PRA> consumedTraceAnalysis = partialRegionsAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
-		List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> producedClassAnalyses2 = producedClassAnalyses;
-		if (producedClassAnalyses2 == null) {
-			producedClassAnalyses = producedClassAnalyses2 = new ArrayList<>();
+		List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> externallyProducedClassAnalyses2 = externallyProducedClassAnalyses;
+		if (externallyProducedClassAnalyses2 == null) {
+			externallyProducedClassAnalyses = externallyProducedClassAnalyses2 = new ArrayList<>();
 		}
-		if (!producedClassAnalyses2.contains(consumedTraceAnalysis)) {
-			producedClassAnalyses2.add(consumedTraceAnalysis);
+		if (!externallyProducedClassAnalyses2.contains(consumedTraceAnalysis)) {
+			externallyProducedClassAnalyses2.add(consumedTraceAnalysis);
 		}
 	}
 
@@ -267,7 +285,9 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private void addProductionOfOutputNode(@NonNull Node node) {
 		if (isNew(node) && !newOutputNodes.contains(node)) {
 			newOutputNodes.add(node);
-			addProductionOfNode(node);
+			if (!node.isDataType()) {
+				addProductionOfNode(node);
+			}
 		}
 	}
 
@@ -360,7 +380,10 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 					traceNodes.add(node);
 				}
 			}
-			if (isConstant(node)) {
+			/*if (node.isDataType()) {
+				;
+			}
+			else*/ if (isConstant(node)) {
 				if (isOperation) {
 					addConstantNode(node);
 				}
@@ -369,11 +392,16 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 				addConsumptionOfInputNode(node);
 			}
 			else if (isPredicated(node)) {
-				if (isMiddle) {
-					addConsumptionOfMiddleNode(node);
+				if (!node.isDataType()) {
+					if (isMiddle) {
+						addConsumptionOfMiddleNode(node);
+					}
+					else {
+						addConsumptionOfOutputNode(node);
+					}
 				}
 				else {
-					addConsumptionOfOutputNode(node);
+					getClass();
 				}
 			}
 			else if (isSpeculated(node) && isMiddle && !isOperation) {	// middle/operation drop through to throw
@@ -481,7 +509,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 
 	@Override
 	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getConsumedClassAnalyses() {
-		return consumedClassAnalyses;
+		return externallyConsumedClassAnalyses;
 	}
 
 	@Override
@@ -508,7 +536,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 
 	@Override
 	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getProducedClassAnalyses() {
-		return producedClassAnalyses;
+		return externallyProducedClassAnalyses;
 	}
 
 	@Override
@@ -554,7 +582,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 
 	@Override
 	public @Nullable Iterable<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> getSuperProducedClassAnalyses() {
-		List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> producedClassAnalyses2 = producedClassAnalyses;
+		List<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> producedClassAnalyses2 = externallyProducedClassAnalyses;
 		if (producedClassAnalyses2 != null) {
 			Set<@NonNull PartialRegionClassAnalysis<@NonNull PRA>> superProducedClassAnalyses2 = superProducedClassAnalyses;
 			if (superProducedClassAnalyses2 == null) {

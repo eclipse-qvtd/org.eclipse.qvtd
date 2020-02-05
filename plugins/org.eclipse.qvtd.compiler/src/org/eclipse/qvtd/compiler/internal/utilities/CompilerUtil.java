@@ -308,6 +308,9 @@ public class CompilerUtil extends QVTscheduleUtil
 			consumer2producers.put(partialRegionAnalysis, new HashSet<>());
 		}
 		for (@NonNull PartialRegionAnalysis<@NonNull PRA> consumer : partialRegionAnalyses) {
+			if ("mapBooleanExp_qvtr".equals(consumer.getName()) || "mapStringExp_qvtr".equals(consumer.getName())) {
+				CompilerUtil.class.getName();
+			}
 			Map<@NonNull Object, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> consumedElement2producers = new HashMap<>();
 			consumer2consumedElement2producers.put(consumer, consumedElement2producers);
 			Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> explicitPredecessors = consumer.getExplicitPredecessors();		// Used by no-success QVTc trace

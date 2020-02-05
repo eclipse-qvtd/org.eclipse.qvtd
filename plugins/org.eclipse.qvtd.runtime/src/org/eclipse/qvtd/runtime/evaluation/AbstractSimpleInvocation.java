@@ -15,7 +15,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationInternal;
 
 /**
- * Derivced AbstractSimpleInvocation instnaces support the non-failing pass functionality for mappings implemented by
+ * Derived AbstractSimpleInvocation instances support the non-failing pass functionality for mappings implemented by
  * a stateless function rather than a stateful object.
  */
 public abstract class AbstractSimpleInvocation extends AbstractInvocationInternal

@@ -83,7 +83,6 @@ public abstract class AbstractIntervalInternal implements Interval
 	}
 
 	private synchronized void block(@NonNull Invocation invocation, @NonNull SlotState slotState) {
-		assert !(slotState instanceof SlotState.Speculating);			// FIXME is this too strong, do we need to handle blocked specyulatables ??
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
 		assert castInvocation.blockedBy == null;
 		assert castInvocation.next == castInvocation;

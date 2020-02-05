@@ -26,9 +26,7 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -125,6 +123,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 
 		private void addEdge(@NonNull Edge edge) {
+			assert !edge.isConditional();
 			assert partition.getRole(edge) != null;
 			if (scheduledEdges.add(edge)) {
 				NavigationEdge oppositeEdge = null;
@@ -338,14 +337,17 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					OCLExpression propertyCallExp = helper.createPropertyCallExp(sourceExp, successProperty);
 					if (targetNode instanceof BooleanLiteralNode) {
 						if (!((BooleanLiteralNode)targetNode).isBooleanValue()) {
-							propertyCallExp = helper.createOperationCallExp(propertyCallExp, "not");
+							//	propertyCallExp = helper.createOperationCallExp(propertyCallExp, "not");	// FIXME can we do better than ignoring awkward speculations
+						}
+						else {
+							speculatedExpressions.add(propertyCallExp);
 						}
 					}
 					else {
 						OCLExpression valueExp = createVariableExp(targetNode);
 						propertyCallExp = helper.createOperationCallExp(propertyCallExp, "=", valueExp);
+						speculatedExpressions.add(propertyCallExp);
 					}
-					speculatedExpressions.add(propertyCallExp);
 				}
 				else {
 					if ((speculatedExpressions != null) && !speculatedExpressions.isEmpty()) {
@@ -494,7 +496,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		if (s != null) {
 			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
 		}
-		checkedConditionAnalysis.computeCheckedProperties(s);
+		checkedConditionAnalysis.computeCheckedPropertyDatums(s);
 		if (s != null) {
 			TransformationPartitioner.PROPERTY_OBSERVE.println(s.toString());
 		}
@@ -781,8 +783,12 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	private void createObservedProperties() {
-		Set<@NonNull Property> allCheckedProperties = checkedConditionAnalysis.getAllCheckedProperties();
-		if (!allCheckedProperties.isEmpty()) {
+		Set<@NonNull PropertyDatum> allCheckedPropertyDatums = checkedConditionAnalysis.getAllCheckedPropertyDatums();
+		if (!allCheckedPropertyDatums.isEmpty()) {		// FIXME Use PropertyDatum to handle derived accesses
+			Set<@NonNull Property> allCheckedProperties = new HashSet<>();
+			for (@NonNull PropertyDatum propertyDatum : allCheckedPropertyDatums) {
+				allCheckedProperties.add(QVTscheduleUtil.getReferredProperty(propertyDatum));
+			}
 			//
 			// Ideally we could install each observed property as it is actually used. But
 			// this needs to be coded in many places.
@@ -791,18 +797,21 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				if (asStatement instanceof ObservableStatement) {
 					List<Property> observedProperties = ((ObservableStatement)asStatement).getObservedProperties();
 					for (EObject eObject : new TreeIterable(asStatement, false)) {
-						if (eObject instanceof PropertyCallExp) {
-							Property property = PivotUtil.getReferredProperty((PropertyCallExp) eObject);
+						if (eObject instanceof NavigationCallExp) {
+							NavigationCallExp navigationCallExp = (NavigationCallExp) eObject;
+							Property property = PivotUtil.getReferredProperty(navigationCallExp);
+							//	ClassDatum classDatum = scheduleManager.getClassDatum(navigationCallExp.getOwnedSource());
+							//	PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, property);
 							if (allCheckedProperties.contains(property) && !observedProperties.contains(property)) {
 								observedProperties.add(property);
 							}
 						}
-						else if (eObject instanceof OppositePropertyCallExp) {
+						/*	else if (eObject instanceof OppositePropertyCallExp) {
 							Property property = PivotUtil.getReferredProperty((NavigationCallExp) eObject).getOpposite();
 							if (allCheckedProperties.contains(property) && !observedProperties.contains(property)) {
 								observedProperties.add(property);
 							}
-						}
+						} */
 					}
 				}
 			}

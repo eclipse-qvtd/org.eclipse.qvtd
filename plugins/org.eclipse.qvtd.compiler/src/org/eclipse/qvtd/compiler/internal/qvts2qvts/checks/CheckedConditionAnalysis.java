@@ -54,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -193,15 +194,18 @@ public class CheckedConditionAnalysis
 				}
 			}
 			Property checkedProperty = QVTscheduleUtil.getReferredProperty(primaryEdge);
-			Set<@NonNull Property> allCheckedProperties2 = computeCheckedProperties(null);
-			if (allCheckedProperties2.contains(checkedProperty)) {
-				if (checkedNavigableEdges == null) {
-					checkedNavigableEdges = new HashSet<>();
+			if (checkedProperty == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
+				Node targetNode = QVTscheduleUtil.getSourceNode(primaryEdge);
+				Node castTarget = targetNode;
+				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
+				for (@NonNull PropertyDatum checkedPropertyDatum : scheduleManager.getOclContainerPropertyDatums(classDatum)) {
+					addCheckedPropertyDatum(primaryEdge, checkedPropertyDatum);
 				}
-				if (checkedNavigableEdges.add(primaryEdge)) {
-					context.add(new NavigableEdgeCheckedCondition(primaryEdge));
-					//					return null;
-				}
+			}
+			else {
+				PropertyDatum checkedPropertyDatum = scheduleManager.getPropertyDatum(primaryEdge);
+				assert checkedProperty == checkedPropertyDatum.getReferredProperty();
+				addCheckedPropertyDatum(primaryEdge, checkedPropertyDatum);
 			}
 			Node targetNode = QVTscheduleUtil.getTargetNode(navigationEdge);
 			if (navigableEdgeRole.isPredicated() && targetNode.isConstant()) {
@@ -223,6 +227,17 @@ public class CheckedConditionAnalysis
 				}
 			}
 			return null;
+		}
+
+		private void addCheckedPropertyDatum(NavigationEdge primaryEdge, PropertyDatum checkedPropertyDatum) {
+			if (getAllCheckedPropertyDatums().contains(checkedPropertyDatum)) {
+				if (checkedNavigableEdges == null) {
+					checkedNavigableEdges = new HashSet<>();
+				}
+				if (checkedNavigableEdges.add(primaryEdge)) {
+					context.add(new NavigableEdgeCheckedCondition(primaryEdge));
+				}
+			}
 		}
 
 		@Override
@@ -362,7 +377,7 @@ public class CheckedConditionAnalysis
 	/**
 	 * All properties (and their opposites) that need to be checked for readiness before access.
 	 */
-	private @Nullable Set<@NonNull Property> allCheckedProperties;
+	private @Nullable Set<@NonNull PropertyDatum> allCheckedPropertyDatums;
 
 	/**
 	 * The unconditional old edges provide the pattern matching workload.
@@ -387,22 +402,24 @@ public class CheckedConditionAnalysis
 	private @Nullable List<@NonNull SuccessEdge> analyzeEdges() {
 		List<@NonNull SuccessEdge> speculatedEdges = null;
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
-			Role edgeRole = partition.getRole(edge);
-			if (edgeRole != null) {
-				if (edgeRole.isSpeculated()) {
-					if (speculatedEdges == null) {
-						speculatedEdges = new ArrayList<>();
+			if (!edge.isConditional()) {			// FIXME Can we do better than ignoring awkward edges ??
+				Role edgeRole = partition.getRole(edge);
+				if (edgeRole != null) {
+					if (edgeRole.isSpeculated()) {
+						if (speculatedEdges == null) {
+							speculatedEdges = new ArrayList<>();
+						}
+						speculatedEdges.add((SuccessEdge) edge);
 					}
-					speculatedEdges.add((SuccessEdge) edge);
-				}
-				else if (edgeRole.isOld() && !edge.isConditional()) {
-					Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-					Role sourceNodeRole = partition.getRole(sourceNode);
-					if ((sourceNodeRole != null) && sourceNodeRole.isOld()) {
-						Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-						Role targetNodeRole = partition.getRole(targetNode);
-						if ((targetNodeRole != null) && targetNodeRole.isOld()) {
-							oldUnconditionalEdges.add(edge);
+					else if (edgeRole.isOld() && !edge.isConditional()) {
+						Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+						Role sourceNodeRole = partition.getRole(sourceNode);
+						if ((sourceNodeRole != null) && sourceNodeRole.isOld()) {
+							Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+							Role targetNodeRole = partition.getRole(targetNode);
+							if ((targetNodeRole != null) && targetNodeRole.isOld()) {
+								oldUnconditionalEdges.add(edge);
+							}
 						}
 					}
 				}
@@ -430,34 +447,38 @@ public class CheckedConditionAnalysis
 	/**
 	 * Return all properties (and their opposites) that need checking for readiness prior to access.
 	 */
-	public @NonNull Set<@NonNull Property> computeCheckedProperties(@Nullable StringBuilder s) {
-		if (allCheckedProperties != null) {
-			return allCheckedProperties;
+	public @NonNull Set<@NonNull PropertyDatum> computeCheckedPropertyDatums(@Nullable StringBuilder s) {
+		if (allCheckedPropertyDatums != null) {
+			return allCheckedPropertyDatums;
 		}
 		@NonNull ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 		//
 		// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous
 		// mappings, but that incurs many typedModel accuracy issues.
 		//
-		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
+		Set<@NonNull PropertyDatum> allCheckedPropertyDatums = new HashSet<>();
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
 			if ((edge instanceof NavigationEdge) && partitionAnalysis.isChecked(edge)) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
 				if (connectionManager.isHazardousRead(s, partition, navigationEdge)) {
-					Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
-					allCheckedProperties.add(property);
-					Property oppositeProperty = property.getOpposite();
-					if (oppositeProperty != null) {
-						allCheckedProperties.add(oppositeProperty);
+					PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(navigationEdge);
+					allCheckedPropertyDatums.add(propertyDatum);
+					PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
+					if (oppositePropertyDatum == null) {
+						NavigationEdge oppositeEdge = navigationEdge.getOppositeEdge();
+						if (oppositeEdge != null) {
+							oppositePropertyDatum = scheduleManager.getPropertyDatum(oppositeEdge);
+							allCheckedPropertyDatums.add(oppositePropertyDatum);
+						}
 					}
 				}
 			}
 		}
-		return allCheckedProperties;
+		return allCheckedPropertyDatums;
 	}
 
-	public @NonNull Set<@NonNull Property> getAllCheckedProperties() {
-		return computeCheckedProperties(null);
+	public @NonNull Set<@NonNull PropertyDatum> getAllCheckedPropertyDatums() {
+		return allCheckedPropertyDatums != null ? allCheckedPropertyDatums : computeCheckedPropertyDatums(null);
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getOldUnconditionalEdges() {

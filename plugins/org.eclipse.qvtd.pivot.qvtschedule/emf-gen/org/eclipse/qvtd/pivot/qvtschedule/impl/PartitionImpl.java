@@ -205,16 +205,16 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				getPasses().addAll((Collection<? extends Integer>)newValue);
-				return;
+			getPasses().addAll((Collection<? extends Integer>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -229,13 +229,13 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -638,6 +638,9 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 
 	@Override
 	public void setPass(int pass) {
+		if ("mapBooleanExp_qvtr".equals(name) || "mapStringExp_qvtr".equals(name)) {
+			getClass();
+		}
 		assert ClassUtil.nullFree(getPasses()).isEmpty();
 		addPass(pass);
 	}

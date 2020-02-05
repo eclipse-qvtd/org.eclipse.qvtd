@@ -58,6 +58,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TracedHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -255,16 +256,17 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG() throws Exception {
+		TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);;
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		AbstractTransformer.ASSIGNMENTS.setState(true);
-		//		AbstractTransformer.CREATIONS.setState(true);
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
-		//		AbstractTransformer.GETTINGS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
+		AbstractTransformer.CREATIONS.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.GETTINGS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
 		//		QVTm2QVTp.PARTITIONING.setState(true);
-		/*	//		AbstractMerger.EARLY.setState(true);
+		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
 		//		AbstractQVTb2QVTs.REGION_ORDER.setState(true);
@@ -275,6 +277,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		TransformationPartitioner.REGION_CYCLES.setState(true);;
 		TransformationPartitioner.PARTITION_CYCLES.setState(true);;
 		//		TransformationPartitioner.DISCRIMINATION.setState(true);;
+		TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);;
 		TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);;
 		TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);;
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);;
@@ -283,7 +286,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
-		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true); */
+		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		//		TransformationPartitioner.PARALLEL_SCHEDULE.setState(true);
 		//		TransformationPartitioner.PROPERTY_NOTIFY.setState(true);
 		//		TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
@@ -340,15 +343,15 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
 			myQVT2.createGeneratedExecutor(txClass1);
-			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-				EMFTCSInjector.class.getName();				// Hidden ATL dependency
-				AtlParser.class.getName();					// Hidden ATL dependency
-				myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-				myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl"));
-			}
-			else {
-				myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
-			}
+			//	if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			EMFTCSInjector.class.getName();				// Hidden ATL dependency
+			AtlParser.class.getName();					// Hidden ATL dependency
+			myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+			myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons2.atl"));
+			//	}
+			//	else {
+			//		myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
+			//	}
 			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
 			myQVT2.executeTransformation();
 			myQVT2.addOutputURI("qvtr", txURI2);

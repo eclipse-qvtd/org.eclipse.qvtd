@@ -95,7 +95,7 @@ public abstract class AbstractConnection implements Connection
 	public final void queue() {
 		if (!isQueued) {
 			isQueued = true;
-			interval.queue(this);
+			interval.queue(this); // FIXME Use earliest consuming interval; typically one later
 		}
 	}
 

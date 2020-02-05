@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -328,7 +329,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
+			return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -379,10 +380,10 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 				return getOwningScheduleModel();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				if (resolve) return getReferredClass();
-				return basicGetReferredClass();
+			return basicGetReferredClass();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getReferredTypedModel();
-				return basicGetReferredTypedModel();
+			return basicGetReferredTypedModel();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getSuperClassDatums();
 		}
@@ -400,25 +401,25 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getCompleteClasses().clear();
-				getCompleteClasses().addAll((Collection<? extends CompleteClass>)newValue);
-				return;
+			getCompleteClasses().addAll((Collection<? extends CompleteClass>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedPropertyDatums().clear();
-				getOwnedPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
-				return;
+			getOwnedPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOwningScheduleModel((ScheduleModel)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setReferredTypedModel((TypedModel)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getSuperClassDatums().clear();
-				getSuperClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
-				return;
+			getSuperClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -433,22 +434,22 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getCompleteClasses().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedPropertyDatums().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOwningScheduleModel((ScheduleModel)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setReferredClass((org.eclipse.ocl.pivot.Class)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setReferredTypedModel((TypedModel)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getSuperClassDatums().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -548,8 +549,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		List<CompleteClass> completeClasses2 = completeClasses;
 		if (completeClasses2 != null) {
 			for (CompleteClass completeClass : completeClasses2) {
-				org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
-				if (primaryClass instanceof DataType) {
+				assert completeClass != null;
+				if (PivotUtil.isDataType(completeClass)) {
 					return true;
 				}
 			}

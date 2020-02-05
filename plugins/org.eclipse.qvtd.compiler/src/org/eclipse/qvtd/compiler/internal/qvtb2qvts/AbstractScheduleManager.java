@@ -246,7 +246,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		for (@NonNull ClassDatum classDatum : QVTscheduleUtil.getOwnedClassDatums(scheduleModel)) {
 			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 			DomainUsage usage = domainUsageAnalysis.getUsage(typedModel);
-			if (usage.isMiddle()) {
+			if (usage.isMiddle() && !classDatum.isDataType()) {
 				middleClassDatums.add(classDatum);
 				Iterable<@NonNull RuleRegion> consumingRegions = originalContentsAnalysis.getDirectlyConsumingRegions(classDatum);
 				Iterable<@NonNull RuleRegion> producingRegions = originalContentsAnalysis.getIndirectlyProducingRegions(classDatum);
