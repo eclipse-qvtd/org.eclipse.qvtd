@@ -411,6 +411,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			else if (QVTimperativeUtil.isObserver(iMapping)) {	// ?? redundant
 				useClassMappings.add(iMapping);
 			}
+			for (@NonNull Statement iStatement : QVTimperativeUtil.getOwnedStatements(iMapping)) {
+				if (iStatement instanceof SpeculateStatement) {
+					useClassMappings.add(iMapping);
+				}
+			}
 		}
 		if (useClassMappings.size() > 0) {
 			for (@NonNull EntryPoint iEntryPoint : QVTimperativeUtil.computeEntryPoints(iTransformation)) {
