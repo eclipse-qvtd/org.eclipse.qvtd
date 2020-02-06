@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -39,12 +40,15 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -91,6 +95,11 @@ public abstract class AbstractPartition2Mapping
 	 */
 	protected Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = null;
 
+	/**
+	 * Reverse traceability from a QVTi element to one (not List) or many(List) QVTs elements.
+	 */
+	private final @NonNull Map<@NonNull Element, @NonNull Object> i2sOrSes = new HashMap<>();
+
 	public AbstractPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Mapping mapping, @NonNull Partition partition) {
 		this.visitor = visitor;
 		this.scheduleManager = visitor.getScheduleManager();
@@ -118,9 +127,42 @@ public abstract class AbstractPartition2Mapping
 		}
 	}
 
-	protected void createAddStatement(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
+	protected void addTrace(@NonNull Element iElement, @NonNull GraphElement graphElement) {
+		Object sOrSes = i2sOrSes.get(iElement);
+		if (sOrSes == null) {
+			i2sOrSes.put(iElement, graphElement);
+		}
+		else if (sOrSes instanceof List) {
+			@SuppressWarnings("unchecked")
+			List<@NonNull GraphElement> ses = (List<@NonNull GraphElement>)sOrSes;
+			if (!ses.contains(graphElement)) {
+				ses.add(graphElement);
+			}
+		}
+		else if (sOrSes != graphElement) {
+			List<@NonNull GraphElement> ses = new ArrayList<>();
+			ses.add((GraphElement) sOrSes);
+			ses.add(graphElement);
+			i2sOrSes.put(iElement, ses);
+		}
+	}
+
+	protected void checkTrace() {
+		for (@NonNull EObject iObject : new TreeIterable(mapping, true)) {
+			if ((iObject instanceof Element) && !(iObject instanceof VariableExp)) {
+				Element iElement = (Element)iObject;
+				Object g = i2sOrSes.get(iElement);
+				if (g == null) {
+					System.out.println("No trace for " + iObject.getClass().getName() + " : " + PrettyPrinter.print(iElement));
+				}
+			}
+		}
+	}
+
+	protected @NonNull AddStatement createAddStatement(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
 		AddStatement addStatement = helper.createAddStatement(connectionVariable, childrenExpression);
 		mapping.getOwnedStatements().add(addStatement);
+		return addStatement;
 	}
 
 	protected @NonNull AppendParameter createAppendParameter(@NonNull NodeConnection connection) {
@@ -156,9 +198,10 @@ public abstract class AbstractPartition2Mapping
 			}
 			connection2variable = new HashMap<>();
 			for (@NonNull NodeConnection connection : intermediateConnections) {
-				AppendParameter connectionVariable = createAppendParameter(connection);
-				connection2variable.put(connection, connectionVariable);
-				mapping.getOwnedMappingParameters().add(connectionVariable);
+				AppendParameter appendParameter = createAppendParameter(connection);
+				connection2variable.put(connection, appendParameter);
+				mapping.getOwnedMappingParameters().add(appendParameter);
+				addTrace(appendParameter, connection.getSource(partition));
 			}
 		}
 	}
@@ -294,6 +337,10 @@ public abstract class AbstractPartition2Mapping
 		assert selectByKindOperation != null;
 		return selectByKindOperation;
 	}
+
+	//	protected @Nullable GraphElement getTrace(@NonNull Element iElement) {
+	//		return i2s.get(iElement);
+	//	}
 
 	public abstract void synthesizeCallStatements();
 	public abstract void synthesizeLocalStatements();

@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.NavigationCallExp;
+import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -49,7 +50,9 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
@@ -233,7 +236,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				if ((role != null) && role.isConstant()) {
 					if (node.getIncomingEdges().isEmpty() && node.getOutgoingEdges().isEmpty()) {
 						OCLExpression exp = createVariableExp(node);
-						createCheckStatement(exp);
+						CheckStatement checkStatement = createCheckStatement(exp);
+						addTrace(checkStatement, node);
 					}
 				}
 			}
@@ -298,20 +302,23 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					// Speculation code can be omitted.
 				}
 				else if (isTerminating) {		// If cycles are guaranteed to terminate (e.g. ATL2QVTr containment ascent)
-					createCheckStatement(checkExpression);
+					CheckStatement checkStatement = createCheckStatement(checkExpression);
+					addTrace(checkStatement, edge);
 				}
 				else {
 					QVTruntimeUtil.errPrintln("Speculation code omitted for " + partition);
 				}
 			}
 			else {
-				createCheckStatement(checkExpression);
+				CheckStatement checkStatement = createCheckStatement(checkExpression);
+				addTrace(checkStatement, edge);
 			}
 		}
 
 		public void synthesize(@NonNull Iterable<@NonNull CheckedCondition> checkedConditions) {
 			assert mapping.getOwnedStatements().isEmpty();			// Enforce analyze then synthesize design policy
 			List<@NonNull OCLExpression> speculatedExpressions = null;
+			List<@NonNull Edge> speculatedEdges = null;
 			for (@NonNull Edge edge : edgeSchedule) {
 				assert !edge.isConditional();
 				Role edgeRole = partition.getRole(edge);
@@ -327,14 +334,18 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				if (edgeRole.isSpeculated()) {
 					if (speculatedExpressions == null) {
 						speculatedExpressions = new ArrayList<>();
+						speculatedEdges = new ArrayList<>();
 					}
 					else {
 						assert !speculatedExpressions.isEmpty() : "Speculated edges must be scheduled in sequence";
 					}
 					SuccessEdge speculatedEdge = (SuccessEdge)edge;
+					assert speculatedEdges != null;
+					speculatedEdges.add(speculatedEdge);
 					OCLExpression sourceExp = createVariableExp(sourceNode);
 					Property successProperty = QVTscheduleUtil.getReferredProperty(speculatedEdge);
 					OCLExpression propertyCallExp = helper.createPropertyCallExp(sourceExp, successProperty);
+					addTrace(propertyCallExp, edge);
 					if (targetNode instanceof BooleanLiteralNode) {
 						if (!((BooleanLiteralNode)targetNode).isBooleanValue()) {
 							//	propertyCallExp = helper.createOperationCallExp(propertyCallExp, "not");	// FIXME can we do better than ignoring awkward speculations
@@ -351,8 +362,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				}
 				else {
 					if ((speculatedExpressions != null) && !speculatedExpressions.isEmpty()) {
-						createSpeculateStatement(speculatedExpressions);
+						assert speculatedEdges != null;
+						createSpeculateStatement(speculatedExpressions, speculatedEdges);
 						speculatedExpressions = Collections.emptyList();		// Prime assertion bomb for disjoint soeculations
+						speculatedEdges = Collections.emptyList();
 					}
 					if (edge.isNavigation()) {
 						NavigationEdge navigationEdge = (NavigationEdge)edge;
@@ -366,8 +379,11 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							sourceExp = helper.createVariableExp(castStatement);
 						}
 						OCLExpression source2targetExp = createCallExp(sourceExp, property);
+						addTrace(source2targetExp, edge);
 						if (targetNode.isNullLiteral()) {
-							createCheckStatement(source2targetExp, "=", helper.createNullLiteralExp());
+							NullLiteralExp nullLiteralExp = helper.createNullLiteralExp();
+							addTrace(nullLiteralExp, targetNode);
+							createCheckStatement(source2targetExp, "=", nullLiteralExp, edge);
 						}
 						else if (targetNodeRole.isConstant() && !sourceNodeRole.isNew()) {
 							//						createCheckStatement(source2targetExp);
@@ -378,7 +394,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							}
 							else*/ if (navigationEdge.isPartial()) {
 								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-								createCheckStatement(source2targetExp, "includes", targetVariableExp);
+								createCheckStatement(source2targetExp, "includes", targetVariableExp, edge);
 							}
 							else if ((targetNode instanceof BooleanLiteralNode) && ((BooleanLiteralNode)targetNode).isBooleanValue()) {
 								createConstantCheck(edge, source2targetExp);
@@ -389,11 +405,11 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							else if (nodeVariable == null) {
 								QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(BasicPartition2Mapping.this);
 								OCLExpression targetExpression = expressionCreator.getExpression(targetNode);
-								createCheckStatement(source2targetExp, "=", targetExpression);
+								createCheckStatement(source2targetExp, "=", targetExpression, edge);
 							}
 							else {
 								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-								createCheckStatement(source2targetExp, "=", targetVariableExp);
+								createCheckStatement(source2targetExp, "=", targetVariableExp, edge);
 							}
 						}
 						else {
@@ -404,11 +420,11 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							}
 							else if (navigationEdge.isPartial()) {
 								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-								createCheckStatement(source2targetExp, "includes", targetVariableExp);
+								createCheckStatement(source2targetExp, "includes", targetVariableExp, edge);
 							}
 							else if (!edge.isNew()) {		// No need to check predication of a realized edge
 								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-								createCheckStatement(targetVariableExp, "=", source2targetExp);
+								createCheckStatement(targetVariableExp, "=", source2targetExp, edge);
 							}
 						}
 					}
@@ -424,13 +440,13 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 								edgeName = "=";								// FIXME regularize
 							}
 							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-							createCheckStatement(sourceVariableExp, edgeName, targetVariableExp);
+							createCheckStatement(sourceVariableExp, edgeName, targetVariableExp, edge);
 						}
 						else if (((BooleanLiteralNode)targetNode).isBooleanValue()) {
 							createConstantCheck(edge, sourceVariableExp);
 						}
 						else {
-							createCheckStatement(sourceVariableExp, "=", helper.createBooleanLiteralExp(false));
+							createCheckStatement(sourceVariableExp, "=", helper.createBooleanLiteralExp(false), edge);
 						}
 					}
 					else if (edge instanceof ExpressionEdge) {
@@ -492,6 +508,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		this.regionAnalysis = scheduleManager.getRegionAnalysis(QVTscheduleUtil.getRegion(partition));
 		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
 		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partitionAnalysis, scheduleManager);
+		addTrace(mapping, partition);
 		StringBuilder s = TransformationPartitioner.PROPERTY_OBSERVE.isActive() ? new StringBuilder() : null;
 		if (s != null) {
 			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
@@ -503,9 +520,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	public void addVariable(@NonNull Node node, @NonNull VariableDeclaration variableDeclaration) {
-		@SuppressWarnings("unused")
 		VariableDeclaration oldVariableDeclaration = node2variable.put(node, variableDeclaration);
-		// assert oldVariableDeclaration == null;   -- FIXME QVTc test overwrites
+		assert oldVariableDeclaration == null;
+		addTrace(variableDeclaration, node);
 	}
 
 	public @Nullable VariableDeclaration basicGetVariable(@NonNull Node node) {
@@ -524,7 +541,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				OCLExpression variableExpression = createVariableExp(sourceNode);
 				ConnectionVariable connectionVariable = connection2variable.get(connection);
 				assert connectionVariable != null;
-				createAddStatement(connectionVariable, variableExpression);
+				AddStatement addStatement = createAddStatement(connectionVariable, variableExpression);
+				addTrace(addStatement, sourceNode);
 			}
 		}
 	}
@@ -578,10 +596,11 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		return checkStatement;
 	}
 
-	private @NonNull CheckStatement createCheckStatement(@NonNull OCLExpression firstExpression, @NonNull String operatorName, @NonNull OCLExpression secondExpression) {
+	private void createCheckStatement(@NonNull OCLExpression firstExpression, @NonNull String operatorName, @NonNull OCLExpression secondExpression, @NonNull GraphElement graphElement) {
 		OCLExpression booleanExpression = helper.createOperationCallExp(firstExpression, operatorName, secondExpression);
+		addTrace(booleanExpression, graphElement);
 		CheckStatement checkStatement = createCheckStatement(booleanExpression);
-		return checkStatement;
+		addTrace(checkStatement, graphElement);
 	}
 
 	private @NonNull DeclareStatement createCheckedDeclareStatement(@NonNull String name, @NonNull OCLExpression sourceExp, @NonNull Type requiredType) {
@@ -618,6 +637,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			if (!sourceNode.isStrict()) {
 				setStatement = helper.createSetStatement(slotVariable, setProperty, targetVariableExp, isPartial, isNotify);
 				mapping.getOwnedStatements().add(setStatement);
+				addTrace(setStatement, edge);
 			}
 			else {
 				assert !property.isIsImplicit();
@@ -626,6 +646,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				NewStatement newStatement = (NewStatement)slotVariable;
 				NewStatementPart newStatementPart = helper.createNewStatementPart(setProperty, targetVariableExp);
 				newStatement.getOwnedParts().add(newStatementPart);
+				addTrace(newStatementPart, edge);
 			}
 		}
 		else {
@@ -659,8 +680,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			}
 		}
 		ownedStatements.add(i+1, newVariable);
-		VariableDeclaration oldVariable = node2variable.put(node, newVariable);
-		assert oldVariable == null;
+		addVariable(node, newVariable);
 		return newVariable;
 	}
 
@@ -713,8 +733,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			guardParameter.setSuccessProperty(successProperty);
 		}
 		mapping.getOwnedMappingParameters().add(guardParameter);
-		VariableDeclaration oldVariable = node2variable.put(guardNode, guardParameter);
-		assert oldVariable == null;
+		addVariable(guardNode, guardParameter);
 		return guardParameter;
 	}
 
@@ -873,6 +892,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, isPartial, isNotify);
 						//					addObservedProperties(setStatement);
 						mapping.getOwnedStatements().add(setStatement);
+						addTrace(setStatement, edge);
 					}
 					else {
 						assert !isPartial;
@@ -880,6 +900,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						NewStatement newStatement = (NewStatement)asVariable;
 						NewStatementPart newStatementPart = helper.createNewStatementPart(property, valueExp);
 						newStatement.getOwnedParts().add(newStatementPart);
+						addTrace(newStatement, edge);
 					}
 				}
 				else {
@@ -988,10 +1009,12 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							}
 						}
 						constructor = helper.createOperationCallExp(thisExp, function, asArguments);
+						addTrace(constructor, node);
 					}
 					if (constructor == null) {
 						QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(this);
 						constructor = ((OperationCallExp)node.getOriginatingElement()).accept(expressionCreator);
+						addTrace(constructor, node);
 					}
 				}
 				ClassDatum classDatum = node.getClassDatum();
@@ -1001,15 +1024,17 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				newStatement.setOwnedExpression(constructor);
 				newStatement.setIsContained(node.isContained());
 				mapping.getOwnedStatements().add(newStatement);
-				VariableDeclaration oldVariable = node2variable.put(node, newStatement);
-				assert oldVariable == null;
+				addVariable(node, newStatement);
 			}
 		}
 	}
 
-	private @NonNull SpeculateStatement createSpeculateStatement(@NonNull Iterable<@NonNull OCLExpression> speculateExpressions) {
+	private @NonNull SpeculateStatement createSpeculateStatement(@NonNull Iterable<@NonNull OCLExpression> speculateExpressions, @NonNull Iterable<@NonNull Edge> speculatedEdges) {
 		SpeculateStatement speculateStatement = helper.createSpeculateStatement(speculateExpressions);
 		mapping.getOwnedStatements().add(speculateStatement);
+		for (@NonNull Edge speculatedEdge : speculatedEdges) {
+			addTrace(speculateStatement, speculatedEdge);
+		}
 		return speculateStatement;
 	}
 
@@ -1233,6 +1258,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		createPropertyAssignments();				// GREEN edges
 		createAddStatements();						// export to append nodes
 		//	createRealizedIncludesAssignments();
+		checkTrace();
 		createObservedProperties();					// wrap observable clauses around hazardous accesses
 	}
 

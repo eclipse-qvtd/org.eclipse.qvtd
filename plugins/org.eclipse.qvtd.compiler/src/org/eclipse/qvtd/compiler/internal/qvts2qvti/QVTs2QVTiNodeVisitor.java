@@ -230,7 +230,9 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		//		return helper.createFunctionCallExp(sourceExp, referredOperation, ClassUtil.nullFree(argExps));
 		//	}
 		//	else {
-		return helper.createOperationCallExp(sourceExp, referredOperation, ClassUtil.nullFree(argExps));
+		OperationCallExp operationCallExp = helper.createOperationCallExp(sourceExp, referredOperation, ClassUtil.nullFree(argExps));
+		context.addTrace(operationCallExp, node);
+		return operationCallExp;
 		//	}
 	}
 
@@ -307,7 +309,10 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 			if (node.isThis()) {			// ?? distinctive Node
 				return context.createContextVariableExp();
 			}
-			return node.accept(this);
+			//	GraphElement prevExpression = context.getTrace(node);
+			OCLExpression expression = node.accept(this);
+			context.addTrace(expression, node);
+			return expression;
 		}
 		finally {
 			--depth;
