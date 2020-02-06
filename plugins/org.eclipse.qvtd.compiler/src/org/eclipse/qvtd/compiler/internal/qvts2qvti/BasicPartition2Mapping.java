@@ -829,8 +829,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 									}
 								}
 							}
-							boolean allCheckedPropertiesContainsProperty = allCheckedProperties.contains(property);
-							if (allCheckedPropertiesContainsProperty && !allCheckedPropertyDatumsContainsPropertyDatum) {
+							//	boolean allCheckedPropertiesContainsProperty = allCheckedProperties.contains(property);
+							/*	if (allCheckedPropertiesContainsProperty && !allCheckedPropertyDatumsContainsPropertyDatum) {
 								getClass();
 								for (@NonNull GraphElement graphElement : getTrace(navigationCallExp)) {			// Only one in parctice
 									if (graphElement instanceof NavigationEdge) {					// Always NavigationEdge
@@ -841,8 +841,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 										}
 									}
 								}
-							}
-							if (allCheckedPropertiesContainsProperty && !observedProperties.contains(property)) {
+							} */
+							if (allCheckedPropertyDatumsContainsPropertyDatum && !observedProperties.contains(property)) {
 								observedProperties.add(property);
 							}
 						}

@@ -214,6 +214,7 @@ public abstract class AbstractIntervalInternal implements Interval
 						if (debugInvocations) {
 							AbstractTransformer.INVOCATIONS.println(("fail-dirty ") + invocation);
 						}
+						throw e;
 					}
 				}
 			}
@@ -360,7 +361,7 @@ public abstract class AbstractIntervalInternal implements Interval
 			}
 			slotState.block(invocation);
 			if (debugInvocations) {
-				AbstractTransformer.BLOCKS.println("speculate " + invocation + " for " + slotState);
+				AbstractTransformer.BLOCKS.println("block-speculate " + invocation + " for " + slotState);
 			}
 		}
 		else {
@@ -373,7 +374,7 @@ public abstract class AbstractIntervalInternal implements Interval
 			}
 			slotState.block(invocation);
 			if (debugInvocations) {
-				AbstractTransformer.BLOCKS.println("block " + invocation + " for " + slotState);
+				AbstractTransformer.BLOCKS.println("block-not-ready " + invocation + " for " + slotState);
 			}
 		}
 	}

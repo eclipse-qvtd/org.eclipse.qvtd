@@ -347,7 +347,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			EMFTCSInjector.class.getName();				// Hidden ATL dependency
 			AtlParser.class.getName();					// Hidden ATL dependency
 			myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-			myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons2.atl"));
+			myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl"));
 			//	}
 			//	else {
 			//		myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
