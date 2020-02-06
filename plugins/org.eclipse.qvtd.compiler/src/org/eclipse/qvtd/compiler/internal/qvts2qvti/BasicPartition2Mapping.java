@@ -817,11 +817,32 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					List<Property> observedProperties = ((ObservableStatement)asStatement).getObservedProperties();
 					for (EObject eObject : new TreeIterable(asStatement, false)) {
 						if (eObject instanceof NavigationCallExp) {
+							boolean allCheckedPropertyDatumsContainsPropertyDatum = false;
 							NavigationCallExp navigationCallExp = (NavigationCallExp) eObject;
 							Property property = PivotUtil.getReferredProperty(navigationCallExp);
-							//	ClassDatum classDatum = scheduleManager.getClassDatum(navigationCallExp.getOwnedSource());
-							//	PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, property);
-							if (allCheckedProperties.contains(property) && !observedProperties.contains(property)) {
+							for (@NonNull GraphElement graphElement : getTrace(navigationCallExp)) {			// Only one in parctice
+								if (graphElement instanceof NavigationEdge) {					// Always NavigationEdge
+									for (@NonNull PropertyDatum propertyDatum : scheduleManager.getPropertyDatums((NavigationEdge)graphElement)) {
+										if (allCheckedPropertyDatums.contains(propertyDatum)) {
+											allCheckedPropertyDatumsContainsPropertyDatum = true;
+										}
+									}
+								}
+							}
+							boolean allCheckedPropertiesContainsProperty = allCheckedProperties.contains(property);
+							if (allCheckedPropertiesContainsProperty && !allCheckedPropertyDatumsContainsPropertyDatum) {
+								getClass();
+								for (@NonNull GraphElement graphElement : getTrace(navigationCallExp)) {			// Only one in parctice
+									if (graphElement instanceof NavigationEdge) {					// Always NavigationEdge
+										for (@NonNull PropertyDatum propertyDatum : scheduleManager.getPropertyDatums((NavigationEdge)graphElement)) {
+											if (allCheckedPropertyDatums.contains(propertyDatum)) {
+												allCheckedPropertyDatumsContainsPropertyDatum = true;
+											}
+										}
+									}
+								}
+							}
+							if (allCheckedPropertiesContainsProperty && !observedProperties.contains(property)) {
 								observedProperties.add(property);
 							}
 						}

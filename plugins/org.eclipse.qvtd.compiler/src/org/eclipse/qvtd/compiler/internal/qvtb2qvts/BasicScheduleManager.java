@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -35,9 +36,12 @@ import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -174,10 +178,10 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 		return nameGenerator;
 	}
 
-	@Override
-	public @NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum classDatum) {
-		return datumCaches.getOclContainerPropertyDatums(classDatum);
-	}
+	//	@Override
+	//	public @NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum classDatum) {
+	//		return datumCaches.getOclContainerPropertyDatums(classDatum);
+	//	}
 
 	@Override
 	public @NonNull ClassDatum getOclVoidClassDatum() {
@@ -193,6 +197,20 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 	@Override
 	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
 		return datumCaches.getPropertyDatum(classDatum, property);
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull PropertyDatum> getPropertyDatums(@NonNull NavigationEdge navigationEdge) {
+		Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
+		if (property == standardLibraryHelper.getOclContainerProperty()) {
+			Node targetNode = QVTscheduleUtil.getSourceNode(navigationEdge);
+			Node castTarget = targetNode;
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
+			return datumCaches.getOclContainerPropertyDatums(classDatum);
+		}
+		else {
+			return Collections.singletonList(getPropertyDatum(navigationEdge));
+		}
 	}
 
 	@Override

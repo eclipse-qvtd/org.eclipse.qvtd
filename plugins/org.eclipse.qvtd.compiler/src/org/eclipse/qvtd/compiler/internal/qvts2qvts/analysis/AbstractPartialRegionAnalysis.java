@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -129,17 +128,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 	private void addConsumptionOfEdge(@NonNull NavigableEdge edge) {
 		if (edge.isNavigation()) {
 			NavigationEdge navigationEdge = (NavigationEdge)edge;
-			Property property = QVTscheduleUtil.getReferredProperty(navigationEdge);
-			if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
-				Node targetNode = QVTscheduleUtil.getSourceNode(edge);
-				Node castTarget = targetNode;
-				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
-				for (@NonNull PropertyDatum propertyDatum : scheduleManager.getOclContainerPropertyDatums(classDatum)) {
-					addConsumptionOfPropertyDatum(propertyDatum);
-				}
-			}
-			else {
-				PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(navigationEdge);
+			for (@NonNull PropertyDatum propertyDatum : scheduleManager.getPropertyDatums(navigationEdge)) {
 				addConsumptionOfPropertyDatum(propertyDatum);
 			}
 		}

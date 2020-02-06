@@ -193,19 +193,16 @@ public class CheckedConditionAnalysis
 					}
 				}
 			}
-			Property checkedProperty = QVTscheduleUtil.getReferredProperty(primaryEdge);
-			if (checkedProperty == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
-				Node targetNode = QVTscheduleUtil.getSourceNode(primaryEdge);
-				Node castTarget = targetNode;
-				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
-				for (@NonNull PropertyDatum checkedPropertyDatum : scheduleManager.getOclContainerPropertyDatums(classDatum)) {
-					addCheckedPropertyDatum(primaryEdge, checkedPropertyDatum);
+			Set<@NonNull PropertyDatum> allCheckedPropertyDatums2 = getAllCheckedPropertyDatums();
+			for (@NonNull PropertyDatum checkedPropertyDatum : scheduleManager.getPropertyDatums(primaryEdge)) {
+				if (allCheckedPropertyDatums2.contains(checkedPropertyDatum)) {
+					if (checkedNavigableEdges == null) {
+						checkedNavigableEdges = new HashSet<>();
+					}
+					if (checkedNavigableEdges.add(primaryEdge)) {
+						context.add(new NavigableEdgeCheckedCondition(primaryEdge));
+					}
 				}
-			}
-			else {
-				PropertyDatum checkedPropertyDatum = scheduleManager.getPropertyDatum(primaryEdge);
-				assert checkedProperty == checkedPropertyDatum.getReferredProperty();
-				addCheckedPropertyDatum(primaryEdge, checkedPropertyDatum);
 			}
 			Node targetNode = QVTscheduleUtil.getTargetNode(navigationEdge);
 			if (navigableEdgeRole.isPredicated() && targetNode.isConstant()) {
@@ -227,17 +224,6 @@ public class CheckedConditionAnalysis
 				}
 			}
 			return null;
-		}
-
-		private void addCheckedPropertyDatum(NavigationEdge primaryEdge, PropertyDatum checkedPropertyDatum) {
-			if (getAllCheckedPropertyDatums().contains(checkedPropertyDatum)) {
-				if (checkedNavigableEdges == null) {
-					checkedNavigableEdges = new HashSet<>();
-				}
-				if (checkedNavigableEdges.add(primaryEdge)) {
-					context.add(new NavigableEdgeCheckedCondition(primaryEdge));
-				}
-			}
 		}
 
 		@Override

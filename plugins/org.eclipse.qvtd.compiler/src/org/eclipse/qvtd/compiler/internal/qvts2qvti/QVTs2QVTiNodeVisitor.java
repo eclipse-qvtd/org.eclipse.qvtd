@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.LoopExp;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.NumericLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -263,7 +264,9 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 					Role edgeRole = partition.getRole(edge);
 					if (property.isIsMany() || (edgeRole == Role.LOADED) || (edgeRole == Role.PREDICATED) || (edgeRole == Role.SPECULATED)) {
 						OCLExpression source = getExpressionInternal(edge.getEdgeSource());
-						return helper.createNavigationCallExp(source, property);
+						NavigationCallExp navigationCallExp = helper.createNavigationCallExp(source, property);
+						context.addTrace(navigationCallExp, navigationEdge);
+						return navigationCallExp;
 					}
 				}
 			}
@@ -309,7 +312,6 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 			if (node.isThis()) {			// ?? distinctive Node
 				return context.createContextVariableExp();
 			}
-			//	GraphElement prevExpression = context.getTrace(node);
 			OCLExpression expression = node.accept(this);
 			context.addTrace(expression, node);
 			return expression;
@@ -470,14 +472,16 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 
 	@Override
 	public @NonNull OCLExpression visitShadowNode(@NonNull ShadowNode node) {
-		List<@NonNull ShadowPart> asParts =new ArrayList<>();
+		List<@NonNull ShadowPart> asParts = new ArrayList<>();
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			if (edge instanceof ShadowPartEdge) {
 				ShadowPartEdge shadowPartEdge = (ShadowPartEdge)edge;
 				ShadowPart referredPart = QVTscheduleUtil.getReferredPart(shadowPartEdge);
 				Property referredProperty = PivotUtil.getReferredProperty(referredPart);
 				Node sourceNode = QVTscheduleUtil.getSourceNode(shadowPartEdge);
-				asParts.add(helper.createShadowPart(referredProperty, getExpressionInternal(sourceNode)));
+				ShadowPart shadowPart = helper.createShadowPart(referredProperty, getExpressionInternal(sourceNode));
+				asParts.add(shadowPart);
+				context.addTrace(shadowPart, shadowPartEdge);
 			}
 		};
 		org.eclipse.ocl.pivot.@NonNull Class asClass = node.getClassDatum().getPrimaryClass();

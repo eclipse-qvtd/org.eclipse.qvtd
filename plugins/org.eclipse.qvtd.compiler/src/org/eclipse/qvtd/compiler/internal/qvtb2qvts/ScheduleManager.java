@@ -106,7 +106,7 @@ public interface ScheduleManager
 	@NonNull EnvironmentFactory getEnvironmentFactory();
 	@NonNull ScheduleManager getMultipleScheduleManager();
 	@NonNull NameGenerator getNameGenerator();
-	@NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum classDatum);
+	//	@NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull ClassDatum getOclVoidClassDatum();
 
 	/**
@@ -116,7 +116,17 @@ public interface ScheduleManager
 
 	@NonNull ProblemHandler getProblemHandler();
 	@NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property);
-	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge edge);
+
+	/**
+	 * Return the PropertyDatum for the navigationEdge, which must not be a containment.
+	 */
+	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge navigationEdge);
+
+	/**
+	 * Return the PropertyDatum for the navigationEdge, if it is not be a containment,
+	 * or the PropertyDatums for the navigationEdge, if it is a containment.
+	 */
+	@NonNull Iterable<@NonNull PropertyDatum> getPropertyDatums(@NonNull NavigationEdge navigationEdge);
 	@NonNull QVTruntimeLibraryHelper getQVTruntimeLibraryHelper();
 	@NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region);
 	@NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull RootRegion rootRegion);

@@ -130,6 +130,7 @@ public abstract class AbstractPartition2Mapping
 	protected void addTrace(@NonNull Element iElement, @NonNull GraphElement graphElement) {
 		Object sOrSes = i2sOrSes.get(iElement);
 		if (sOrSes == null) {
+			assert !(iElement instanceof NavigationCallExp) || !(graphElement instanceof Node);
 			i2sOrSes.put(iElement, graphElement);
 		}
 		else if (sOrSes instanceof List) {
@@ -338,9 +339,18 @@ public abstract class AbstractPartition2Mapping
 		return selectByKindOperation;
 	}
 
-	//	protected @Nullable GraphElement getTrace(@NonNull Element iElement) {
-	//		return i2s.get(iElement);
-	//	}
+	protected @NonNull Iterable<@NonNull GraphElement> getTrace(@NonNull Element iElement) {
+		Object sOrSes = i2sOrSes.get(iElement);
+		if (sOrSes == null) {
+			throw new IllegalStateException("No qvti2qvts trace for " + iElement);
+		}
+		else if (sOrSes instanceof GraphElement) {
+			return Collections.singletonList((GraphElement)sOrSes);
+		}
+		else {
+			return (Iterable<@NonNull GraphElement>)sOrSes;
+		}
+	}
 
 	public abstract void synthesizeCallStatements();
 	public abstract void synthesizeLocalStatements();
