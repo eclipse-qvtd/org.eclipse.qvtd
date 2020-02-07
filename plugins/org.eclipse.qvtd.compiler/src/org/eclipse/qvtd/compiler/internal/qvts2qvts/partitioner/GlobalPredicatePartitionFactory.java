@@ -225,7 +225,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 		else if (edgeRole == Role.PREDICATED) {
 			if (edge instanceof SuccessEdge) {
 				boolean hasRealizedEdge = mappingPartitioner.hasRealizedEdge(edge);
-				if (!hasRealizedEdge) {
+				if (!hasRealizedEdge && !edge.isConditional()) {
 					//	Role nodeRole = getRole(QVTscheduleUtil.getTargetNode(edge));
 					//	if ((nodeRole != null) && nodeRole.isRealized()) {
 					edgeRole = Role.SPECULATED;
