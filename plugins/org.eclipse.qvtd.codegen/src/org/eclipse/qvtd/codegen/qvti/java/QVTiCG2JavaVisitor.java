@@ -3640,11 +3640,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.appendValueName(cgGuardVariable);
 					js.append(", ");
 					appendQualifiedLiteralName(eStructuralFeature);
-					js.append(", null);\n");
+					js.append(");\n");
 					//
 					js.appendClassReference(null, Boolean.class);
 					js.append(" " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATUS_NAME + " = " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + "." + QVTiGlobalContext.GET_STATUS_NAME + "();\n");
 					//
+					js.append("if (" + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATUS_NAME + " != ");
+					js.appendClassReference(null, ValueUtil.class);
+					js.append(".TRUE_VALUE) {\n");
+					js.pushIndentation(null);
 					js.append("if (" + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATUS_NAME + " == ");
 					js.appendClassReference(null, ValueUtil.class);
 					js.append(".FALSE_VALUE) {\n");
@@ -3653,8 +3657,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append(".");
 					js.append(setAccessor);
 					js.append("(");
-					js.append(QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATUS_NAME);
-					js.append(");\n");
+					js.appendClassReference(null, ValueUtil.class);
+					js.append(".FALSE_VALUE);\n");
 					//	doAssigned(cgGuardVariable, eStructuralFeature, outputSpeculatingSlotStatus);
 					js.append("return ");
 					js.appendClassReference(null, ValueUtil.class);
@@ -3662,9 +3666,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.popIndentation();
 					js.append("}\n");
 					//
-					js.append("if (" + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATUS_NAME + " == null) {\n");
-					js.pushIndentation(null);
-					//
+					js.appendClassReference(true, SlotState.Speculating.class);
+					js.append(" " + QVTiGlobalContext.INPUT_SPECULATING_SLOT_STATE_NAME + ";\n");
+					js.appendClassReference(null, Boolean.class);
+					js.append(" " + QVTiGlobalContext.INPUT_SPECULATING_SLOT_STATUS_NAME + ";\n");
 					js.append("boolean " + QVTiGlobalContext.NEEDS_SPECULATION_NAME + " = false;\n");
 					for (CGSpeculatePart cgSpeculatePart : cgSpeculateExp.getParts()) {
 						//	if (cgInput instanceof CGEcorePropertyCallExp) {cgInput;
@@ -3691,14 +3696,47 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 							js.pushIndentation(null);
 						}
 						EStructuralFeature inputAttribute = cgSpeculatePart.getEStructuralFeature();
-						js.append("if (");
+						//
+						js.append(QVTiGlobalContext.INPUT_SPECULATING_SLOT_STATE_NAME + " = ");
 						js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME + "." + QVTiGlobalContext.GET_SPECULATING_SLOT_STATE_NAME + "(");
-						js.appendValueName(cgInputObject);
+						js.appendValueName(cgGuardVariable);
 						js.append(", ");
-						appendQualifiedLiteralName(inputAttribute);
-						js.append(", " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + ") != " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + ") {\n");
+						appendQualifiedLiteralName(eStructuralFeature);
+						js.append(");\n");
+						js.append(QVTiGlobalContext.INPUT_SPECULATING_SLOT_STATUS_NAME + " = " + QVTiGlobalContext.INPUT_SPECULATING_SLOT_STATE_NAME + "." + QVTiGlobalContext.GET_STATUS_NAME + "();\n");
+						//
+						js.append("if (" + QVTiGlobalContext.INPUT_SPECULATING_SLOT_STATUS_NAME + " != ");
+						js.appendClassReference(null, ValueUtil.class);
+						js.append(".TRUE_VALUE) {\n");
 						js.pushIndentation(null);
-						js.append(QVTiGlobalContext.NEEDS_SPECULATION_NAME + " = true;\n");
+						js.append("if (" + QVTiGlobalContext.INPUT_SPECULATING_SLOT_STATUS_NAME + " == ");
+						js.appendClassReference(null, ValueUtil.class);
+						js.append(".FALSE_VALUE) {\n");
+						js.pushIndentation(null);
+						js.appendValueName(cgGuardVariable);
+						js.append(".");
+						js.append(setAccessor);
+						js.append("(");
+						js.appendClassReference(null, ValueUtil.class);
+						js.append(".FALSE_VALUE);\n");
+						//	doAssigned(cgGuardVariable, eStructuralFeature, outputSpeculatingSlotStatus);
+						js.append("return ");
+						js.appendClassReference(null, ValueUtil.class);
+						js.append(".FALSE_VALUE;\n");
+						js.popIndentation();
+						js.append("}\n");
+
+						js.append(QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + ".addInput(" + QVTiGlobalContext.INPUT_SPECULATING_SLOT_STATE_NAME + ");\n");
+						//
+						//	js.append("if (");
+						//	js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME + "." + QVTiGlobalContext.GET_SPECULATING_SLOT_STATE_NAME + "(");
+						//	js.appendValueName(cgInputObject);
+						//	js.append(", ");
+						//	appendQualifiedLiteralName(inputAttribute);
+						//	js.append(") != " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + ") {\n");
+						//					//	js.append(", " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + ") != " + QVTiGlobalContext.OUTPUT_SPECULATING_SLOT_STATE_NAME + ") {\n");
+						//	js.pushIndentation(null);
+						//	js.append(QVTiGlobalContext.NEEDS_SPECULATION_NAME + " = true;\n");
 						js.popIndentation();
 						js.append("}\n");
 						//

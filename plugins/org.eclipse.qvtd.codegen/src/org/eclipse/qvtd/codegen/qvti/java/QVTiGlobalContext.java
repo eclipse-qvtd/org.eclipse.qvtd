@@ -31,6 +31,8 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	public static final @NonNull String GET_SPECULATING_SLOT_STATE_NAME = "getSpeculatingSlotState";
 	public static final @NonNull String GET_STATUS_NAME = "getStatus";
 	public static final @NonNull String GET_TRANSFORMATION_EXECUTION_NAME = "getTransformationExecution";
+	public static final @NonNull String INPUT_SPECULATING_SLOT_STATE_NAME = "inputSpeculatingSlotState";
+	public static final @NonNull String INPUT_SPECULATING_SLOT_STATUS_NAME = "inputSpeculatingSlotStatus";
 	public static final @NonNull String INVOCATION_HASH_CODE_NAME = "invocationHashCode";
 	public static final @NonNull String MODELS_NAME = "models";
 	public static final @NonNull String NEEDS_SPECULATION_NAME = "needsSpeculation";
@@ -54,6 +56,8 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 		nameManager.reserveName(GET_SPECULATING_SLOT_STATE_NAME, null);
 		nameManager.reserveName(GET_STATUS_NAME, null);
 		nameManager.reserveName(GET_TRANSFORMATION_EXECUTION_NAME, null);
+		nameManager.reserveName(INPUT_SPECULATING_SLOT_STATE_NAME, null);
+		nameManager.reserveName(INPUT_SPECULATING_SLOT_STATUS_NAME, null);
 		nameManager.reserveName(INVOCATION_HASH_CODE_NAME, null);
 		nameManager.reserveName(MODELS_NAME, null);
 		nameManager.reserveName(NEEDS_SPECULATION_NAME, null);

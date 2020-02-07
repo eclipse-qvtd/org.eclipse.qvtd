@@ -212,11 +212,10 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 	}
 
 	@Override
-	public @NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState) {
+	public @NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute) { //, @Nullable Speculating outputSpeculatingSlotState) {
 		assert (speculatedEAttributes != null) && speculatedEAttributes.contains(successAttribute);
 		AbstractObjectState<@NonNull SS> objectState = getObjectState(object);
-		@NonNull Speculating speculatingSlotState = objectState.getSpeculatingSlotState(successAttribute, outputSpeculatingSlotState);
-		return speculatingSlotState;
+		return objectState.getSpeculatingSlotState(successAttribute);
 	}
 
 	@Override

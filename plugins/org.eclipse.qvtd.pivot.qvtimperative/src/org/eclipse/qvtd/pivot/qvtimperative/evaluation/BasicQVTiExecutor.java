@@ -947,14 +947,14 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 				if (successProperty != null) {	// Should be exactly one, but may be nested loop handles a trace merge
 					EAttribute eAttribute = (EAttribute) successProperty.getESObject();
 					assert eAttribute != null;
-					Speculating outputSpeculatingSlotState = objectManager.getSpeculatingSlotState(thisParameter, eAttribute, null);
-					Boolean status = outputSpeculatingSlotState.getStatus();
-					if (status == Boolean.FALSE) {
-						outputSpeculatingSlotState.setStatus(Boolean.FALSE);
-						//	outputSpeculatingSlotState.assigned(thisParameter, eAttribute, Boolean.FALSE, false);
-						return Boolean.FALSE;
-					}
-					if (status == null) {
+					Speculating outputSpeculatingSlotState = objectManager.getSpeculatingSlotState(thisParameter, eAttribute);
+					Boolean outputStatus = outputSpeculatingSlotState.getStatus();
+					if (outputStatus != Boolean.TRUE) {
+						if (outputStatus == Boolean.FALSE) {
+							outputSpeculatingSlotState.setStatus(Boolean.FALSE);
+							//	outputSpeculatingSlotState.assigned(thisParameter, eAttribute, Boolean.FALSE, false);
+							return Boolean.FALSE;
+						}
 						boolean needsSpeculation = false;
 						for (@NonNull OCLExpression iExpression : QVTimperativeUtil.getOwnedExpressions(speculateStatement)) {
 							if (iExpression instanceof PropertyCallExp) {
@@ -966,9 +966,16 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 									EAttribute accessAttribute = (EAttribute) accessProperty.getESObject();
 									assert accessAttribute != null;
 									//									SlotState.Speculating inputSpeculatingSlotState = getSpeculatingSlotState(objectManager, outputSpeculatingSlotState, sourceObject, accessAttribute);
-									SlotState.Speculating inputSpeculatingSlotState = objectManager.getSpeculatingSlotState(sourceObject, accessAttribute, outputSpeculatingSlotState);
-									if (inputSpeculatingSlotState != outputSpeculatingSlotState) {			// Bypass the depends-on-self unit cycle
+									SlotState.Speculating inputSpeculatingSlotState = objectManager.getSpeculatingSlotState(sourceObject, accessAttribute);
+									Boolean inputStatus = inputSpeculatingSlotState.getStatus();
+									if (inputStatus != Boolean.TRUE) {
+										if (inputStatus == Boolean.FALSE) {
+											outputSpeculatingSlotState.setStatus(Boolean.FALSE);
+											//	outputSpeculatingSlotState.assigned(thisParameter, eAttribute, Boolean.FALSE, false);
+											return Boolean.FALSE;
+										}
 										needsSpeculation = true;
+										outputSpeculatingSlotState.addInput(inputSpeculatingSlotState);
 									}
 								}
 								else if (sourceExpression.isIsRequired()) {

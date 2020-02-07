@@ -77,8 +77,7 @@ public interface ObjectManager/*<SS extends SlotState>*/ extends ExecutionVisita
 	@NonNull Iterable<@NonNull ? extends Object> getObjects();
 	@NonNull Iterable<@NonNull ? extends SlotState> getSlotStates(@NonNull Object object);
 
-	@NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState);
-
+	@NonNull Speculating getSpeculatingSlotState(@NonNull Object object, @NonNull EAttribute successAttribute);
 	/**
 	 * Throw an InvocationFailedException if the eFeature of eObject has not yet been assigned.
 	 * If isOpposite, the eFeature's opposite is to be be assessed.

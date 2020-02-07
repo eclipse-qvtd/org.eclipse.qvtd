@@ -92,7 +92,7 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		return objectManager;
 	}
 
-	public @NonNull Speculating getSpeculatingSlotState(@NonNull EAttribute successAttribute, @Nullable Speculating outputSpeculatingSlotState) {
+	public @NonNull Speculating getSpeculatingSlotState(@NonNull EAttribute successAttribute) { //, @Nullable Speculating outputSpeculatingSlotState) {
 		assert successAttribute.getEType() == EcorePackage.Literals.EBOOLEAN_OBJECT;
 		@Nullable SS slotState = basicGetSlotState(successAttribute);
 		@Nullable Speculating speculatingSlotState;
@@ -104,9 +104,6 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		}
 		else {
 			speculatingSlotState = (Speculating)slotState;
-		}
-		if (outputSpeculatingSlotState != null) {
-			outputSpeculatingSlotState.addInput(speculatingSlotState);
 		}
 		return speculatingSlotState;
 	}
