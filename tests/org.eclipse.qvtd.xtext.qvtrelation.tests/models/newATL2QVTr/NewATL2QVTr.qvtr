@@ -561,8 +561,10 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			};
 			when {
 				mapModule(atlModule, qvtrTransformation);
-				atlAttributes->notEmpty();
-				mapHelper_Attribute(atlAttributes->any(true)._definition?.Helper, qvtrOperation);
+				if atlAttributes->notEmpty()
+				then mapHelper_Attribute(atlAttributes->any(true)._definition?.Helper, qvtrOperation)
+				else false
+				endif;
 				mapOclExpression(atlSource, qvtrSourceArgument);
 			}
 		}
