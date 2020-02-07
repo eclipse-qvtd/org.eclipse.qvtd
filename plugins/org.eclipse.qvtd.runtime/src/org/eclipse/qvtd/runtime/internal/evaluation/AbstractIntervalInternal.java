@@ -448,7 +448,8 @@ public abstract class AbstractIntervalInternal implements Interval
 			return status.booleanValue();
 		}
 		for (SlotState.@NonNull Speculating speculatable : inputSpeculatablesClosure) {
-			speculatable.setStatus(Boolean.TRUE);
+			speculatable.unblock();
+			//	speculatable.setStatus(Boolean.TRUE);
 			//	speculatable.assigned(null, null, Boolean.TRUE, false);
 		}
 		return true;

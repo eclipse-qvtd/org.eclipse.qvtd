@@ -467,6 +467,11 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 			// Boolean.TRUE/FALSE slot value is assigned as part of the re-execution of the speculating partition.
 			assignedSlot();			//	mode = SlotMode.ASSIGNED;
 		}
+
+		@Override
+		public synchronized void unblock() {
+			super.unblock();
+		}
 	}
 
 	public LazyObjectManager(@NonNull LazyInvocationManager invocationManager) {

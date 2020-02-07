@@ -517,6 +517,11 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 			// Boolean.TRUE/FALSE slot value is assigned as part of the re-execution of the speculating partition.
 			assignedSlot();			//	mode = SlotMode.ASSIGNED;
 		}
+
+		@Override
+		public synchronized void unblock() {
+			super.unblock();
+		}
 	}
 
 	public IncrementalObjectManager(@NonNull IncrementalInvocationManager invocationManager) {

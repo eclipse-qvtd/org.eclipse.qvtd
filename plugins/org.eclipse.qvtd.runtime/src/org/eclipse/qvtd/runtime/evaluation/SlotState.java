@@ -92,5 +92,7 @@ public interface SlotState extends ExecutionVisitable
 		@Nullable Boolean getStatus();
 
 		void setStatus(@NonNull Boolean successStatus);
+
+		void unblock();
 	}
 }
