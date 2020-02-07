@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2018, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.runtime.qvttrace;
@@ -85,17 +85,6 @@ public interface QVTtracePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDispatch();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.runtime.qvttrace.Dispatch#getSuccess <em>Success</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Success</em>'.
-	 * @see org.eclipse.qvtd.runtime.qvttrace.Dispatch#getSuccess()
-	 * @see #getDispatch()
-	 * @generated
-	 */
-	EAttribute getDispatch_Success();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.runtime.qvttrace.Execution <em>Execution</em>}'.
@@ -214,14 +203,6 @@ public interface QVTtracePackage extends EPackage {
 		EClass DISPATCH = eINSTANCE.getDispatch();
 
 		/**
-		 * The meta object literal for the '<em><b>Success</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DISPATCH__SUCCESS = eINSTANCE.getDispatch_Success();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl <em>Execution</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -294,6 +275,9 @@ public interface QVTtracePackage extends EPackage {
 		 * @generated
 		 */
 		EClass TRANSFORMATION_EXECUTION = eINSTANCE.getTransformationExecution();
+
+		@Deprecated /* avoid obsolete undefined symbols */
+		EAttribute DISPATCH__SUCCESS = null;
 
 	}
 

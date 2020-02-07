@@ -157,16 +157,6 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDispatch_Success() {
-		return (EAttribute)dispatchEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getExecution() {
 		return executionEClass;
 	}
@@ -271,7 +261,6 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 
 		// Create classes and their features
 		dispatchEClass = createEClass(0);
-		createEAttribute(dispatchEClass, 1);
 
 		executionEClass = createEClass(1);
 
@@ -323,7 +312,6 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(dispatchEClass, Dispatch.class, "Dispatch", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDispatch_Success(), ecorePackage.getEBooleanObject(), "success", null, 0, 1, Dispatch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionEClass, Execution.class, "Execution", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

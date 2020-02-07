@@ -24,9 +24,7 @@
   <foreignModel>QVTtrace.ecore</foreignModel>
   <genPackages prefix="QVTtrace" basePackage="org.eclipse.qvtd.runtime" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvtd.qvttrace" ecorePackage="QVTtrace.ecore#/">
-    <genClasses image="false" ecoreClass="QVTtrace.ecore#//Dispatch">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTtrace.ecore#//Dispatch/success"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="QVTtrace.ecore#//Dispatch"/>
     <genClasses image="false" ecoreClass="QVTtrace.ecore#//Execution"/>
     <genClasses image="false" ecoreClass="QVTtrace.ecore#//TraceElement"/>
     <genClasses image="false" ecoreClass="QVTtrace.ecore#//TraceInstance">
