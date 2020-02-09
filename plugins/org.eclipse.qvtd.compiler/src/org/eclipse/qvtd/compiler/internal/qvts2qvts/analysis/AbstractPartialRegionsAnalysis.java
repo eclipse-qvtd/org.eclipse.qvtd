@@ -138,10 +138,12 @@ public abstract class AbstractPartialRegionsAnalysis<@NonNull PRA extends Partia
 		PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
 		BasePartialRegionPropertyAnalysis<@NonNull PRA> basePropertyAnalysis = propertyDatum2basePropertyAnalysis.get(basePropertyDatum);
 		if (basePropertyAnalysis == null) {
-			basePropertyAnalysis = new BasePartialRegionPropertyAnalysis<@NonNull PRA>(this, classAnalysis, basePropertyDatum);
+			ClassDatum baseClassDatum = QVTscheduleUtil.getOwningClassDatum(basePropertyDatum);
+			PartialRegionClassAnalysis<@NonNull PRA> baseClassAnalysis = lazyCreateClassAnalysis(baseClassDatum);
+			basePropertyAnalysis = new BasePartialRegionPropertyAnalysis<@NonNull PRA>(this, baseClassAnalysis, basePropertyDatum);
 			propertyDatum2basePropertyAnalysis.put(basePropertyDatum, basePropertyAnalysis);
 		}
-		propertyAnalysis = basePropertyAnalysis.createPropertyAnalysis(propertyDatum);
+		propertyAnalysis = basePropertyAnalysis.createPropertyAnalysis(classAnalysis, propertyDatum);
 		propertyDatum2actualPropertyAnalysis.put(propertyDatum, propertyAnalysis);
 		return propertyAnalysis;
 	}

@@ -948,10 +948,10 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 					EAttribute eAttribute = (EAttribute) successProperty.getESObject();
 					assert eAttribute != null;
 					Speculating outputSpeculatingSlotState = objectManager.getSpeculatingSlotState(thisParameter, eAttribute);
-					Boolean outputStatus = outputSpeculatingSlotState.getStatus();
+					Boolean outputStatus = outputSpeculatingSlotState.getSpeculationStatus();
 					if (outputStatus != Boolean.TRUE) {
 						if (outputStatus == Boolean.FALSE) {
-							outputSpeculatingSlotState.setStatus(Boolean.FALSE);
+							outputSpeculatingSlotState.setSpeculated(false);
 							//	outputSpeculatingSlotState.assigned(thisParameter, eAttribute, Boolean.FALSE, false);
 							return Boolean.FALSE;
 						}
@@ -967,10 +967,10 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 									assert accessAttribute != null;
 									//									SlotState.Speculating inputSpeculatingSlotState = getSpeculatingSlotState(objectManager, outputSpeculatingSlotState, sourceObject, accessAttribute);
 									SlotState.Speculating inputSpeculatingSlotState = objectManager.getSpeculatingSlotState(sourceObject, accessAttribute);
-									Boolean inputStatus = inputSpeculatingSlotState.getStatus();
+									Boolean inputStatus = inputSpeculatingSlotState.getSpeculationStatus();
 									if (inputStatus != Boolean.TRUE) {
 										if (inputStatus == Boolean.FALSE) {
-											outputSpeculatingSlotState.setStatus(Boolean.FALSE);
+											outputSpeculatingSlotState.setSpeculated(false);
 											//	outputSpeculatingSlotState.assigned(thisParameter, eAttribute, Boolean.FALSE, false);
 											return Boolean.FALSE;
 										}

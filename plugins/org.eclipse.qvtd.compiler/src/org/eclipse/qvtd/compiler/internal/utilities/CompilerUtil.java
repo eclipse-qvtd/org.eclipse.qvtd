@@ -308,16 +308,16 @@ public class CompilerUtil extends QVTscheduleUtil
 			consumer2producers.put(partialRegionAnalysis, new HashSet<>());
 		}
 		for (@NonNull PartialRegionAnalysis<@NonNull PRA> consumer : partialRegionAnalyses) {
-			if ("mapBooleanExp_qvtr".equals(consumer.getName()) || "mapStringExp_qvtr".equals(consumer.getName())) {
+			if ("mapBooleanExp_qvtr«rest»".equals(consumer.getName())) { // || "mapBooleanExp_qvtr".equals(consumer.getName())) {
 				CompilerUtil.class.getName();
 			}
+			Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
+			assert producers != null;
 			Map<@NonNull Object, @NonNull Set<@NonNull PartialRegionAnalysis<@NonNull PRA>>> consumedElement2producers = new HashMap<>();
 			consumer2consumedElement2producers.put(consumer, consumedElement2producers);
 			Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> explicitPredecessors = consumer.getExplicitPredecessors();		// Used by no-success QVTc trace
 			if (explicitPredecessors != null) {
 				for (@NonNull PartialRegionAnalysis<@NonNull PRA> explicitPredecessor : explicitPredecessors) {
-					Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
-					assert producers != null;
 					producers.add(explicitPredecessor);
 				}
 			}
@@ -326,8 +326,6 @@ public class CompilerUtil extends QVTscheduleUtil
 				for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> consumedClassAnalysis : consumedClassAnalyses) {
 					for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> subConsumedClass : consumedClassAnalysis.getSubClassAnalyses()) {
 						for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : subConsumedClass.getExactProducers()) {
-							Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
-							assert producers != null;
 							producers.add(producer);
 							if ((consumedElement2producers != null) && Iterables.contains(partialRegionAnalyses, producer)) {
 								Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers2 = consumedElement2producers.get(subConsumedClass);
@@ -345,8 +343,6 @@ public class CompilerUtil extends QVTscheduleUtil
 			if (consumedPropertyAnalyses != null) {
 				for (@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> consumedPropertyAnalysis : consumedPropertyAnalyses) {
 					for (@NonNull PartialRegionAnalysis<@NonNull PRA> producer : consumedPropertyAnalysis.getCompatibleProducers()) {
-						Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers = consumer2producers.get(consumer);
-						assert producers != null;
 						producers.add(producer);
 						if ((consumedElement2producers != null) && Iterables.contains(partialRegionAnalyses, producer)) {
 							Set<@NonNull PartialRegionAnalysis<@NonNull PRA>> producers2 = consumedElement2producers.get(consumedPropertyAnalysis);

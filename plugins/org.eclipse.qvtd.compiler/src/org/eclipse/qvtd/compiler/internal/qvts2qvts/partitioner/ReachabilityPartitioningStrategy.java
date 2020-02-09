@@ -465,7 +465,6 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 	public ReachabilityPartitioningStrategy(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull MappingPartitioner mappingPartitioner) {
 		super(partitionedTransformationAnalysis, mappingPartitioner);
 		assert scheduleManager.useActivators();
-		assert false;
 		this.region = regionAnalysis.getRegion();
 		this.originalNodes = Lists.newArrayList(QVTscheduleUtil.getOwnedNodes(region));
 		this.originalEdges = Lists.newArrayList(QVTscheduleUtil.getOwnedEdges(region));

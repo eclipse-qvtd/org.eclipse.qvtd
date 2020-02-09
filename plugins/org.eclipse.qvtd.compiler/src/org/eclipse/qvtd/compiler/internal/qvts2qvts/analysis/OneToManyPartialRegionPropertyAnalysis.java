@@ -18,7 +18,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
  */
 public class OneToManyPartialRegionPropertyAnalysis<@NonNull PRA extends PartialRegionsAnalysis<@NonNull PRA>> extends ActualPartialRegionPropertyAnalysis<@NonNull PRA>
 {
-	public OneToManyPartialRegionPropertyAnalysis(@NonNull BasePartialRegionPropertyAnalysis<PRA> basePropertyAnalysis, @NonNull PropertyDatum propertyDatum) {
-		super(basePropertyAnalysis, propertyDatum);
+	public OneToManyPartialRegionPropertyAnalysis(@NonNull BasePartialRegionPropertyAnalysis<PRA> basePropertyAnalysis, @NonNull PartialRegionClassAnalysis<@NonNull PRA> classAnalysis, @NonNull PropertyDatum propertyDatum) {
+		super(basePropertyAnalysis, classAnalysis, propertyDatum);
 	}
 }

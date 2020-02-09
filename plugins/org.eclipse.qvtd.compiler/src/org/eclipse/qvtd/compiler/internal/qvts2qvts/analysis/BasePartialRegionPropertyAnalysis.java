@@ -29,33 +29,33 @@ public class BasePartialRegionPropertyAnalysis<@NonNull PRA extends PartialRegio
 		super(partialRegionsAnalysis, classAnalysis, propertyDatum);
 	}
 
-	public @NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> createPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+	public @NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> createPropertyAnalysis(@NonNull PartialRegionClassAnalysis<@NonNull PRA> classAnalysis, @NonNull PropertyDatum propertyDatum) {
 		assert !propertyDatum2propertyAnalysis.containsKey(propertyDatum);
 		Property property = QVTscheduleUtil.getReferredProperty(propertyDatum);
 		Property oppositeProperty = property.getOpposite();
 		ActualPartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis;
 		if (oppositeProperty == null) {
 			if (property.isIsMany()) {
-				propertyAnalysis = new OneToManyPartialRegionPropertyAnalysis<@NonNull PRA>(this, propertyDatum);
+				propertyAnalysis = new OneToManyPartialRegionPropertyAnalysis<@NonNull PRA>(this, classAnalysis, propertyDatum);
 			}
 			else {
-				propertyAnalysis = new OneToOnePartialRegionPropertyAnalysis<@NonNull PRA>(this, propertyDatum);
+				propertyAnalysis = new OneToOnePartialRegionPropertyAnalysis<@NonNull PRA>(this, classAnalysis, propertyDatum);
 			}
 		}
 		else if (oppositeProperty.isIsMany()) {
 			if (property.isIsMany()) {
-				propertyAnalysis = new OneOfManyToManyPartialRegionPropertyAnalysis<@NonNull PRA>(this, propertyDatum);
+				propertyAnalysis = new OneOfManyToManyPartialRegionPropertyAnalysis<@NonNull PRA>(this, classAnalysis, propertyDatum);
 			}
 			else {
-				propertyAnalysis = new OneOfManyToOnePartialRegionPropertyAnalysis<@NonNull PRA>(this, propertyDatum);
+				propertyAnalysis = new OneOfManyToOnePartialRegionPropertyAnalysis<@NonNull PRA>(this, classAnalysis, propertyDatum);
 			}
 		}
 		else {
 			if (property.isIsMany()) {
-				propertyAnalysis = new OneToManyPartialRegionPropertyAnalysis<@NonNull PRA>(this, propertyDatum);
+				propertyAnalysis = new OneToManyPartialRegionPropertyAnalysis<@NonNull PRA>(this, classAnalysis, propertyDatum);
 			}
 			else {
-				propertyAnalysis = new OneToOnePartialRegionPropertyAnalysis<@NonNull PRA>(this, propertyDatum);
+				propertyAnalysis = new OneToOnePartialRegionPropertyAnalysis<@NonNull PRA>(this, classAnalysis, propertyDatum);
 			}
 		}
 		propertyDatum2propertyAnalysis.put(propertyDatum, propertyAnalysis);

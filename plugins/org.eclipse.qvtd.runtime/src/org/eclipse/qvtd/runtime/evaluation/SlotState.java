@@ -87,12 +87,23 @@ public interface SlotState extends ExecutionVisitable
 		@NonNull Iterable<@NonNull Speculating> getInputs();
 
 		/**
+		 * Get the status of a speculation; null for pending, true for success, false for failure.
+		 */
+		@Nullable Boolean getSpeculationStatus();
+
+		/**
 		 * Get the status of a Speculating SlotState.
 		 */
-		@Nullable Boolean getStatus();
+		@Deprecated
+		default @Nullable Boolean getStatus() { return getSpeculationStatus(); }
 
-		void setStatus(@NonNull Boolean successStatus);
+		/**
+		 * Mark the pending speculation as successful or unsuccessful.
+		 */
+		void setSpeculated(boolean success);
+		@Deprecated
+		default void setStatus(@NonNull Boolean successStatus) { throw new UnsupportedOperationException(); }
 
-		void unblock();
+		//	void unblock();
 	}
 }

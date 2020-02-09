@@ -443,6 +443,36 @@ public class DatumCaches
 		return result;
 	}
 
+	/**
+	 * Lazily create the opposite of a propertyDatum.
+	 *
+	 * Not fully debugged. Problme is that PropertyDatum.opposite is not a unique bidirectional pair.
+	 * We may need to generalize a derived PD as derived-source-ClassDatum, base-property, derived-target-Classdatum.
+	public @NonNull PropertyDatum getOppositePropertyDatum(@NonNull PropertyDatum propertyDatum) {
+		PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
+		if (oppositePropertyDatum == null) {
+			ClassDatum owningClassDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
+			Property property = propertyDatum.getReferredProperty();
+			Property oppositeProperty = property.getOpposite();
+			assert oppositeProperty != null : "No oppositePropertyDatum for opposite-less" + property;
+			ClassDatum oppositeClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(owningClassDatum), PivotUtil.getOwningClass(oppositeProperty));
+			Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum = getProperty2propertyDatum(oppositeClassDatum);
+			oppositePropertyDatum = property2propertyDatum.get(oppositeProperty);
+			//	assert oppositePropertyDatum == null : "premature oppositePropertyDatum";
+			if (oppositePropertyDatum == null) {
+				oppositePropertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
+				oppositePropertyDatum.setReferredProperty(oppositeProperty);
+				oppositePropertyDatum.setName(oppositeProperty.getName());
+				oppositePropertyDatum.setOwningClassDatum(oppositeClassDatum);
+				property2propertyDatum.put(oppositeProperty, oppositePropertyDatum);
+			}
+			oppositePropertyDatum.setOpposite(propertyDatum);
+			propertyDatum.setOpposite(oppositePropertyDatum);
+			//	assert property != oclContainerProperty;			// Use getOclContainerPropertyDatums() to return multiple candidates
+		}
+		return oppositePropertyDatum;
+	} */
+
 	protected @NonNull PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context, @NonNull Property property) {
 		CompleteClass completeClass = completeModel.getCompleteClass(context);
 		return getPropertyDatum(typedModel, completeClass, property);

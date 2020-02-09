@@ -76,7 +76,7 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 
 	protected abstract @NonNull SS createSimpleSlotState(@NonNull EAttribute eFeature, @Nullable Object ecoreValue);
 
-	protected abstract @NonNull Speculating createSpeculatingSlotState(@NonNull EAttribute eFeature);
+	protected abstract @NonNull Speculating createSpeculatableSlotState(@NonNull EAttribute eFeature, @Nullable Boolean speculationStatus);
 
 	public @NonNull Iterable<@NonNull SS> getFeatures() {
 		return feature2slotState != null ? ClassUtil.nullFree(feature2slotState.values()) : Collections.emptyList();
@@ -97,7 +97,7 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 		@Nullable SS slotState = basicGetSlotState(successAttribute);
 		@Nullable Speculating speculatingSlotState;
 		if (slotState == null) {
-			speculatingSlotState = createSpeculatingSlotState(successAttribute);
+			speculatingSlotState = createSpeculatableSlotState(successAttribute, null); //AbstractObjectManager.NOT_A_VALUE);
 			@SuppressWarnings("unchecked")
 			SS castSlotState = (SS)speculatingSlotState;
 			putSlotState(successAttribute, castSlotState);
@@ -161,10 +161,11 @@ public abstract class AbstractObjectState<@NonNull SS extends SlotState> impleme
 			if ((eFeature.getEType() == EcorePackage.Literals.EBOOLEAN_OBJECT) && objectManager.maybeSpeculated(eAttribute)) {
 				//	assert ecoreValue == AbstractObjectManager.NOT_A_VALUE;
 				assert ecoreValue != null;
-				Speculating speculatingSlotState = createSpeculatingSlotState(eAttribute);
-				if (ecoreValue != AbstractObjectManager.NOT_A_VALUE) {
-					speculatingSlotState.setStatus((Boolean)ecoreValue);
-				}
+				//	assert ecoreValue != AbstractObjectManager.NOT_A_VALUE;
+				Speculating speculatingSlotState = createSpeculatableSlotState(eAttribute, ecoreValue != AbstractObjectManager.NOT_A_VALUE ? (Boolean)ecoreValue : null); //AbstractObjectManager.NOT_A_VALUE);
+				//	if (ecoreValue != AbstractObjectManager.NOT_A_VALUE) {
+				//		speculatingSlotState.setStatus((Boolean)ecoreValue);
+				//	}
 				@SuppressWarnings("unchecked")
 				SS castSpeculatingSlotState = (@NonNull SS) speculatingSlotState;
 				slotState = castSpeculatingSlotState;

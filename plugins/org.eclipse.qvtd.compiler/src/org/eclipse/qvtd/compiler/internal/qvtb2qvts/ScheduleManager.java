@@ -110,6 +110,11 @@ public interface ScheduleManager
 	@NonNull ClassDatum getOclVoidClassDatum();
 
 	/**
+	 * Lazily create the opposite of a propertyDatum.
+	 *
+	@NonNull PropertyDatum getOppositePropertyDatum(@NonNull PropertyDatum propertyDatum); */
+
+	/**
 	 * Return the analysis of the pre-partitioned regions consumptions and productions.
 	 */
 	@NonNull OriginalContentsAnalysis getOriginalContentsAnalysis();

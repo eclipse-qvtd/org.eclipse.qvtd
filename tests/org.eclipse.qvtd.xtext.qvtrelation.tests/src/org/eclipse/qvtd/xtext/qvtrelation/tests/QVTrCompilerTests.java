@@ -56,7 +56,7 @@ import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TracedHeadAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTiProductionConsumption;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -260,12 +260,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
-		//		AbstractTransformer.ASSIGNMENTS.setState(true);
-		AbstractTransformer.CREATIONS.setState(true);
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.GETTINGS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
-		//		QVTm2QVTp.PARTITIONING.setState(true);
+		//	AbstractTransformer.ASSIGNMENTS.setState(true);
+		//	AbstractTransformer.CREATIONS.setState(true);
+		//	AbstractTransformer.EXCEPTIONS.setState(true);
+		//	AbstractTransformer.GETTINGS.setState(true);
+		//	AbstractTransformer.INVOCATIONS.setState(true);
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
@@ -274,27 +273,27 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTscheduleConstants.POLLED_PROPERTIES.setState(true);
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
 		//		FallibilityAnalysis.LOCAL.setState(true);;
-		TransformationPartitioner.REGION_CYCLES.setState(true);;
+		//	TransformationPartitioner.REGION_CYCLES.setState(true);;
 		TransformationPartitioner.PARTITION_CYCLES.setState(true);;
 		//		TransformationPartitioner.DISCRIMINATION.setState(true);;
-		TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);;
-		TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);;
-		TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);;
+		//	TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);;
+		//	TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);;
+		//	TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);;
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);;
 		//		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
-		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
-		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
+		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
+		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		//		TransformationPartitioner.PARALLEL_SCHEDULE.setState(true);
 		//		TransformationPartitioner.PROPERTY_NOTIFY.setState(true);
 		//		TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
 		//	TransformationPartitioner.MERGE_SEQUENTIAL.setState(true);
-		//		QVTiProductionConsumption.SUMMARY.setState(true);
+		QVTiProductionConsumption.SUMMARY.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		//	TracedHeadAnalysis.TRACED_HEAD_NODE_GROUPS.setState(true);
-		TracedHeadAnalysis.TRACED_HEAD_IMMEDIATE_SOURCES.setState(true);
+		//	TracedHeadAnalysis.TRACED_HEAD_IMMEDIATE_SOURCES.setState(true);
 		//	RuleHeadAnalysis.RULE_HEAD_NODE_GROUPS.setState(true);
 		//	TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);
 		//	TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);
@@ -347,7 +346,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			EMFTCSInjector.class.getName();				// Hidden ATL dependency
 			AtlParser.class.getName();					// Hidden ATL dependency
 			myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-			myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl"));
+			myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons3.atl"));
 			//	}
 			//	else {
 			//		myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
@@ -1044,6 +1043,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		try {
 			txClass = myQVT1.buildTransformation(new DefaultConfigurations(), false);//,
+			//	txClass = myQVT1.buildTransformation(new SimpleConfigurations("reverse"), false);//,
 			//			txClass = myQVT1.buildTransformation(Collections.singletonList(reverseOutputNames), false);//,
 			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
 			//			myQVT1.assertRegionCount(ActivatorRegionImpl.class, 2);

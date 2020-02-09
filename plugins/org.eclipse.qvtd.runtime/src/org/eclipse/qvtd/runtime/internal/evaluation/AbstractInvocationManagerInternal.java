@@ -101,6 +101,10 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 	@Override
 	public boolean flush() {
 		for (int index = nextIndex; index < intervals.size(); index = nextIndex) {
+			for (int testIndex = 0; testIndex < index; testIndex++) {
+				Interval currentInterval = intervals.get(testIndex);
+				assert currentInterval.isFlushed();
+			}
 			nextIndex = index+1;
 			Interval currentInterval = intervals.get(index);
 			AbstractTransformer.INVOCATIONS.println("--------" + index + "--------");

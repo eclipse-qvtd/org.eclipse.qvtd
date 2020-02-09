@@ -10,12 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -36,6 +33,39 @@ public abstract class AbstractPartialRegionPropertyAnalysis<@NonNull PRA extends
 		//	assert propertyDatum.getReferredTypedModel() == partialRegionsAnalysis.getScheduleManager().getTraceTypedModel();
 		//		ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
 		//	assert partialRegionsAnalysis.getClassAnalysis(QVTscheduleUtil.getOwningClassDatum(propertyDatum)) == classAnalysis;
+		assert classAnalysis.getClassDatum() == propertyDatum.getOwningClassDatum();
+	}
+
+	public @NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> basicGetSuperPropertyAnalyses() {
+		UniqueList<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> propertyAnalyses = new UniqueList<>();
+		Property property = propertyDatum.getReferredProperty();
+		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> superClassAnalysis : classAnalysis.getSuperClassAnalyses()) {
+			ClassDatum superClassDatum = superClassAnalysis.getClassDatum();
+			for (@NonNull PropertyDatum propertyDatum : QVTscheduleUtil.getOwnedPropertyDatums(superClassDatum)) {
+				if (propertyDatum.getReferredProperty() == property) {
+					PartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis = partialRegionsAnalysis.basicGetPropertyAnalysis(propertyDatum);	// Missing is too-super / just not used
+					if (propertyAnalysis != null) {
+						propertyAnalyses.add(propertyAnalysis);
+					}
+				}
+			}
+		}
+		if (!propertyAnalyses.contains(this)) {
+			propertyAnalyses.clear();
+			for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> superClassAnalysis : classAnalysis.getSuperClassAnalyses()) {
+				ClassDatum superClassDatum = superClassAnalysis.getClassDatum();
+				for (@NonNull PropertyDatum propertyDatum : QVTscheduleUtil.getOwnedPropertyDatums(superClassDatum)) {
+					if (propertyDatum.getReferredProperty() == property) {
+						PartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis = partialRegionsAnalysis.basicGetPropertyAnalysis(propertyDatum);	// Missing is too-super / just not used
+						if (propertyAnalysis != null) {
+							propertyAnalyses.add(propertyAnalysis);
+						}
+					}
+				}
+			}
+		}
+		assert propertyAnalyses.contains(this);
+		return propertyAnalyses;
 	}
 
 	public @NonNull PartialRegionClassAnalysis<PRA> getClassAnalysis() {
@@ -54,24 +84,6 @@ public abstract class AbstractPartialRegionPropertyAnalysis<@NonNull PRA extends
 	@Override
 	public @NonNull PropertyDatum getPropertyDatum() {
 		return propertyDatum;
-	}
-
-	public @NonNull Iterable<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> getSuperPropertyAnalyses() {
-		List<@NonNull PartialRegionPropertyAnalysis<@NonNull PRA>> propertyAnalyses = new ArrayList<>();
-		//		ClassDatum classDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
-		//		ClassAnalysis<@NonNull RA> classAnalysis = regionsAnalysis.getClassAnalysis(classDatum);
-		for (@NonNull PartialRegionClassAnalysis<@NonNull PRA> superClassAnalysis : classAnalysis.getSuperClassAnalyses()) {
-			ClassDatum superClassDatum = superClassAnalysis.getClassDatum();
-			PropertyDatum propertyDatum = NameUtil.getNameable(superClassDatum.getOwnedPropertyDatums(), getName());		// FIXME avoid 'name' usage - use propertyDatum(.referredProperty)
-			if (propertyDatum != null) {
-				PartialRegionPropertyAnalysis<@NonNull PRA> propertyAnalysis = partialRegionsAnalysis.basicGetPropertyAnalysis(propertyDatum);	// FIXME is missing acceptable
-				if ((propertyAnalysis != null) && !propertyAnalyses.contains(propertyAnalysis)) {
-					propertyAnalyses.add(propertyAnalysis);
-				}
-			}
-		}
-		assert propertyAnalyses.contains(this);
-		return propertyAnalyses;
 	}
 
 	@Override

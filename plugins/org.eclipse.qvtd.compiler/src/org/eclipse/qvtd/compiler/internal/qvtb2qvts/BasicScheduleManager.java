@@ -194,6 +194,11 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 		return oclVoidClassDatum2;
 	}
 
+	//	@Override
+	//	public @NonNull PropertyDatum getOppositePropertyDatum(@NonNull PropertyDatum propertyDatum) {
+	//		return datumCaches.getOppositePropertyDatum(propertyDatum);
+	//	}
+
 	@Override
 	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
 		return datumCaches.getPropertyDatum(classDatum, property);

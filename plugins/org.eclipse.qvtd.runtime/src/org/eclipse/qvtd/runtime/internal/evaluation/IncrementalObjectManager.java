@@ -78,8 +78,8 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 		}
 
 		@Override
-		protected @NonNull SpeculatingSlotState createSpeculatingSlotState(@NonNull EAttribute eFeature) {
-			return new SpeculatingSlotState(this, eFeature);
+		protected @NonNull SpeculatingSlotState createSpeculatableSlotState(@NonNull EAttribute eFeature, @Nullable Boolean speculationStatus) {
+			return new SpeculatingSlotState(this, eFeature, speculationStatus);
 		}
 	}
 
@@ -489,38 +489,57 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 	 */
 	static class SpeculatingSlotState extends IncrementalSlotState implements SlotState.Speculating
 	{
+		/**
+		 * The immediate speculatables that must be satisfied for this speculatable to be satisfied.
+		 */
 		private final @NonNull Set<@NonNull Speculating> inputSpeculatables = new UniqueList<>();
-		private @Nullable Boolean status;
 
-		public SpeculatingSlotState(@NonNull AbstractObjectState<@NonNull IncrementalSlotState> objectState, @NonNull EAttribute eFeature) {
-			super(objectState, eFeature, NOT_A_VALUE);
+		/**
+		 * The outcome of the speculation of this speculatable.
+		 *
+		 * null => pending. false => failure. true => success.
+		 *
+		 * NB. success indicates that speculation has succeeded and that the speculatables are no longer
+		 * speculating. It does not indicate that the mapping that provoked speculation has re-executed.
+		 * The speculatable remains ASSIGNABLE until the re-execution makes it ASSIGNED.
+		 */
+		private @Nullable Boolean speculationStatus;
+
+		public SpeculatingSlotState(@NonNull AbstractObjectState<@NonNull IncrementalSlotState> objectState, @NonNull EAttribute eFeature, @Nullable Boolean speculationStatus) {
+			super(objectState, eFeature, speculationStatus != null ? speculationStatus : AbstractObjectManager.NOT_A_VALUE);
+			assert speculationStatus != AbstractObjectManager.NOT_A_VALUE;
+			this.speculationStatus = speculationStatus;
 		}
 
 		@Override
 		public void addInput(@NonNull Speculating inputSpeculatable) {
+			assert speculationStatus == null;
 			inputSpeculatables.add(inputSpeculatable);
 		}
 
 		@Override
 		public @NonNull Iterable<@NonNull Speculating> getInputs() {
+			assert speculationStatus == null;
 			return inputSpeculatables;
 		}
 
 		@Override
-		public @Nullable Boolean getStatus() {
-			return status;
+		public @Nullable Boolean getSpeculationStatus() {
+			return speculationStatus;
 		}
 
 		@Override
-		public void setStatus(@NonNull Boolean successStatus) {
-			this.status = successStatus;
-			// Boolean.TRUE/FALSE slot value is assigned as part of the re-execution of the speculating partition.
-			assignedSlot();			//	mode = SlotMode.ASSIGNED;
-		}
-
-		@Override
-		public synchronized void unblock() {
-			super.unblock();
+		public void setSpeculated(boolean success) {
+			assert speculationStatus == null;
+			speculationStatus  = success;
+			if (!success) {
+				//				this.status = false;
+				// Boolean.TRUE/FALSE slot value is assigned as part of the re-execution of the speculating partition.
+				assignedSlot();			//	mode = SlotMode.ASSIGNED;
+			}
+			else {
+				unblock();
+			}
 		}
 	}
 

@@ -1270,7 +1270,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	@Override
 	public void synthesizeLocalStatements() {
 		@SuppressWarnings("unused") String name = partition.getName();
-		if ("list2list_forward«loop»".equals(name)) {
+		if ("mapNavigationOrAttributeCallExp_Helper_qvtr«global»".equals(name)) {
 			getClass();
 		}
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes

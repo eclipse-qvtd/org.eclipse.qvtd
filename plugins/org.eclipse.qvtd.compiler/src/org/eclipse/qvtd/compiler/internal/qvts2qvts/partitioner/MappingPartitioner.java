@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
@@ -287,15 +288,15 @@ public class MappingPartitioner implements Nameable
 	private @NonNull PartitioningStrategy createPartitioningStrategy(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		boolean useActivators = scheduleManager.useActivators();
 		if (useActivators) { 		// New QVTr-style support without activators
-			return new DefaultPartitioningStrategy(partitionedTransformationAnalysis, this);
-			/*	Element2MiddleProperty relation2GlobalSuccessProperty = regionAnalysis.getRuleAnalysis().getRule2TraceGroup().basicGetRelation2GlobalSuccessProperty();
+			//	return new DefaultPartitioningStrategy(partitionedTransformationAnalysis, this);
+			Element2MiddleProperty relation2GlobalSuccessProperty = regionAnalysis.getRuleAnalysis().getRule2TraceGroup().basicGetRelation2GlobalSuccessProperty();
 			if (relation2GlobalSuccessProperty == null) {
 				//	return new DefaultPartitioningStrategy(partitionedTransformationAnalysis, this);
 				return new NonPartitioningStrategy(partitionedTransformationAnalysis, this);
 			}
 			else {
 				return new ReachabilityPartitioningStrategy(partitionedTransformationAnalysis, this);
-			} */
+			}
 		}
 		else {			// Obsolete QVTc-sty;e spportg without activators
 			return new LegacyPartitioningStrategy(partitionedTransformationAnalysis, this);

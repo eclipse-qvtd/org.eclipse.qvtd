@@ -443,15 +443,21 @@ public abstract class AbstractIntervalInternal implements Interval
 		Set<SlotState.@NonNull Speculating> inputSpeculatablesClosure = new HashSet<>();
 		Boolean status = speculate(aSpeculatable, inputSpeculatablesClosure);
 		if (status != null) {
-			aSpeculatable.setStatus(status.booleanValue());
+			if (status == Boolean.FALSE) {
+				aSpeculatable.setSpeculated(false);
+			}
+			else {
+				//	aSpeculatable.unblock();
+			}
 			//	aSpeculatable.assigned(null, null, Boolean.FALSE, false);
 			return status.booleanValue();
 		}
 		for (SlotState.@NonNull Speculating speculatable : inputSpeculatablesClosure) {
-			speculatable.unblock();
+			speculatable.setSpeculated(true);
 			//	speculatable.setStatus(Boolean.TRUE);
 			//	speculatable.assigned(null, null, Boolean.TRUE, false);
 		}
+		//	aSpeculatable.setStatus(Boolean.TRUE);	// Only assign one, since we must re-execute to do assigns
 		return true;
 	}
 	/**
@@ -462,25 +468,24 @@ public abstract class AbstractIntervalInternal implements Interval
 	 * Return null if speculation is feasible; all transitive speculatiables are null/true.
 	 */
 	private @Nullable Boolean speculate(SlotState.@NonNull Speculating aSpeculatable, @NonNull Set<SlotState.@NonNull Speculating> inputSpeculatablesClosure) {
-		Boolean status = aSpeculatable.getStatus();
-		if (status == null) {
-			status = Boolean.TRUE;
-			if (inputSpeculatablesClosure.add(aSpeculatable)) {
-				for (SlotState.@NonNull Speculating inputSpeculatable : aSpeculatable.getInputs()) {
-					Boolean inputStatus = speculate(inputSpeculatable, inputSpeculatablesClosure);
-					if (inputStatus == Boolean.FALSE) {
-						return Boolean.FALSE;
-					}
-					else if (inputStatus != Boolean.TRUE) {
-						// returnStatus may continue to be TRUE
-					}
-					else {
-						status =  null;
-					}
+		Boolean status = aSpeculatable.getSpeculationStatus();
+		if (status != null) {			// Already determined?
+			return status;
+		}
+		if (!inputSpeculatablesClosure.add(aSpeculatable)) {
+			return null;
+		}
+		boolean alreadySuccessful = true;
+		for (SlotState.@NonNull Speculating inputSpeculatable : aSpeculatable.getInputs()) {
+			Boolean inputStatus = speculate(inputSpeculatable, inputSpeculatablesClosure);
+			if (inputStatus != Boolean.TRUE) {
+				if (inputStatus == Boolean.FALSE) {
+					return Boolean.FALSE;
 				}
+				alreadySuccessful = false;
 			}
 		}
-		return status;
+		return alreadySuccessful ? Boolean.TRUE : null;
 	}
 
 
@@ -550,20 +555,16 @@ public abstract class AbstractIntervalInternal implements Interval
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
 		assert castInvocation.blockedBy != null;
 		castInvocation.blockedBy = null;
-		if (castInvocation.blockedBy instanceof SlotState.Speculating) {		// FIXME ?? speculating may just be blocked ??
-			if (speculatableInvocations == castInvocation) {
-				speculatableInvocations = castInvocation.next;
-				if (speculatableInvocations == castInvocation) {
-					speculatableInvocations = null;
-				}
+		if (blockedInvocations == castInvocation) {
+			blockedInvocations = castInvocation.next;
+			if (blockedInvocations == castInvocation) {
+				blockedInvocations = null;
 			}
 		}
-		else {
-			if (blockedInvocations == castInvocation) {
-				blockedInvocations = castInvocation.next;
-				if (blockedInvocations == castInvocation) {
-					blockedInvocations = null;
-				}
+		else if (speculatableInvocations == castInvocation) {
+			speculatableInvocations = castInvocation.next;
+			if (speculatableInvocations == castInvocation) {
+				speculatableInvocations = null;
 			}
 		}
 		castInvocation.remove();

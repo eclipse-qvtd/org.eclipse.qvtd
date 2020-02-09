@@ -10,11 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -26,8 +24,8 @@ public abstract class ActualPartialRegionPropertyAnalysis<@NonNull PRA extends P
 {
 	protected final @NonNull BasePartialRegionPropertyAnalysis<@NonNull PRA> basePropertyAnalysis;
 
-	protected ActualPartialRegionPropertyAnalysis(@NonNull BasePartialRegionPropertyAnalysis<PRA> basePropertyAnalysis, @NonNull PropertyDatum propertyDatum) {
-		super(basePropertyAnalysis.partialRegionsAnalysis, basePropertyAnalysis.classAnalysis, propertyDatum);
+	protected ActualPartialRegionPropertyAnalysis(@NonNull BasePartialRegionPropertyAnalysis<PRA> basePropertyAnalysis, @NonNull PartialRegionClassAnalysis<@NonNull PRA> classAnalysis, @NonNull PropertyDatum propertyDatum) {
+		super(basePropertyAnalysis.partialRegionsAnalysis, classAnalysis, propertyDatum);
 		this.basePropertyAnalysis = basePropertyAnalysis;
 	}
 
@@ -38,28 +36,35 @@ public abstract class ActualPartialRegionPropertyAnalysis<@NonNull PRA extends P
 
 	@Override
 	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getCompatibleProducers() {
-		List<@NonNull PartialRegionAnalysis<@NonNull PRA>> compatibleProducers = new ArrayList<>();
-		Property compatibleProperty = propertyDatum.getReferredProperty();
+		UniqueList<@NonNull PartialRegionAnalysis<@NonNull PRA>> compatibleProducers = new UniqueList<>();
 		ClassDatum owningClassDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
-		Property compatibleOppositeProperty = compatibleProperty.getOpposite();
+		Property referredProperty = propertyDatum.getReferredProperty();
+		Property oppositeProperty = referredProperty.getOpposite();
+		// Many oppositePropertyDatum do not exist - too lazy / problematic symmetry
+		//	PropertyDatum oppositePropertyDatum = oppositeProperty != null ? scheduleManager.getOppositePropertyDatum(propertyDatum) : null;
 		for (@NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> actualPropertyAnalysis : basePropertyAnalysis.propertyDatum2propertyAnalysis.values()) {
-			for (@NonNull PartialRegionAnalysis<@NonNull PRA> actualProducer : actualPropertyAnalysis.getExactProducers()) {
-				boolean isCompatible = false;
-				PropertyDatum actualPropertyDatum = actualPropertyAnalysis.getPropertyDatum();
-				Property actualProperty = actualPropertyDatum.getReferredProperty();
-				if (actualProperty == compatibleOppositeProperty) {
-					isCompatible = true;
-				}
-				else {
-					assert actualProperty == compatibleProperty;
-					ClassDatum actualOwningClassDatum = QVTscheduleUtil.getOwningClassDatum(actualPropertyDatum);
-					if (QVTscheduleUtil.conformsTo(actualOwningClassDatum, owningClassDatum) || QVTscheduleUtil.conformsTo(owningClassDatum, actualOwningClassDatum)) {
-						isCompatible = true;
-					}
-				}
-				if (isCompatible && !compatibleProducers.contains(actualProducer)) {
+			PropertyDatum actualPropertyDatum = actualPropertyAnalysis.getPropertyDatum();
+			ClassDatum actualOwningClassDatum = QVTscheduleUtil.getOwningClassDatum(actualPropertyDatum);
+			Property actualProperty = actualPropertyDatum.getReferredProperty();
+			//
+			//	There is a distinct PropertyDatum for each direction of a bidirectional navigation,
+			//	but there is only one PropertyAnalysis which might be 'backward'.
+			//
+			boolean isCompatible;
+			if (actualProperty == oppositeProperty) {
+				isCompatible = QVTscheduleUtil.conformsTo(owningClassDatum, actualOwningClassDatum);
+			}
+			else {
+				assert actualProperty == referredProperty : "Inconsistent producer property " + actualProperty;
+				isCompatible = QVTscheduleUtil.conformsTo(actualOwningClassDatum, owningClassDatum);
+			}
+			if (isCompatible) {
+				//	for (@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> actualSuperPropertyAnalysis : actualPropertyAnalysis.basicGetSuperPropertyAnalyses()) {
+				@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> actualSuperPropertyAnalysis = actualPropertyAnalysis;
+				for (@NonNull PartialRegionAnalysis<@NonNull PRA> actualProducer : actualSuperPropertyAnalysis.getExactProducers()) {
 					compatibleProducers.add(actualProducer);
 				}
+				//	}
 			}
 		}
 		assert compatibleProducers.containsAll(producers);
