@@ -101,12 +101,12 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 		assert typedModel != null;
 		ClassDatum classDatum = scheduleManager.getClassDatum(typedModel, keyedClass);
 		for (@NonNull Property part : QVTrelationUtil.getOwnedParts(key)) {
-			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, part);
+			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, part, null);
 			propertyDatum.setKey(true);
 		}
 		for (@NonNull Property oppositePart : QVTrelationUtil.getOwnedOppositeParts(key)) {
 			Property part = QVTrelationUtil.getOpposite(oppositePart);
-			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, part);
+			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, part, null);
 			propertyDatum.setKey(true);
 		}
 	}

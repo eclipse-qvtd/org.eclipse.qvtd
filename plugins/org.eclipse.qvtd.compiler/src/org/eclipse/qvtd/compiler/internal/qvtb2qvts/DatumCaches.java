@@ -74,19 +74,24 @@ public class DatumCaches
 	/**
 	 * The per-TypedModel mappings from a CompleteClass to its corresponding ClassDatum in that TypedModel.
 	 */
-	private @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull CompleteClass, @NonNull ClassDatum>> typedModel2completeClass2classDatum = new HashMap<>();
-	private @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Set<@NonNull CompleteClass>, @NonNull ClassDatum>> typedModel2completeClasses2classDatum = new HashMap<>();
+	private final @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull CompleteClass, @NonNull ClassDatum>> typedModel2completeClass2classDatum = new HashMap<>();
+	private final @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Set<@NonNull CompleteClass>, @NonNull ClassDatum>> typedModel2completeClasses2classDatum = new HashMap<>();
 
 	/**
-	 * The per-ClassDatum mapping from a Property to its corresponding PropertyDatum.
+	 * The per-source ClassDatum mapping from a Property to its corresponding PropertyDatum and default target-ClassDatum.
 	 * FIXME to what extent are inherited properties entered?
 	 */
-	private @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>> classDatum2property2propertyDatum = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>> sourceClassDatum2property2propertyDatum = new HashMap<>();
+
+	/**
+	 * The per-source ClassDatum mapping from a Property to its corresponding PropertyDatum and per=derived target-ClassDatum.
+	 */
+	private @Nullable Map<@NonNull ClassDatum, @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>>> sourceClassDatum2targetClassDatum2property2propertyDatum = null;
 
 	/**
 	 * The per-ClassDatum mapping from the oclContainer Property to all possible containing PropertyDatums.
 	 */
-	private @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull PropertyDatum>> classDatum2oclContainerPropertyDatums = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull PropertyDatum>> classDatum2oclContainerPropertyDatums = new HashMap<>();
 
 	protected DatumCaches(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
@@ -110,7 +115,6 @@ public class DatumCaches
 					}
 				}
 			}
-
 		}
 		return result;
 
@@ -124,7 +128,7 @@ public class DatumCaches
 			for (@NonNull Property property : PivotUtil.getOwnedProperties(asClass)) {
 				if (property != oclContainerProperty) {
 					@SuppressWarnings("unused")
-					PropertyDatum propertyDatumDatum = getPropertyDatum(classDatum, property);
+					PropertyDatum propertyDatumDatum = getPropertyDatum(classDatum, property, null);
 				}
 			}
 		}
@@ -203,8 +207,8 @@ public class DatumCaches
 
 	// Property datum analysis
 
-	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class asClass) {
-		CompleteClass completeClass = completeModel.getCompleteClass(asClass);
+	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Type asType) {
+		CompleteClass completeClass = completeModel.getCompleteClass(asType);
 		return getClassDatum(typedModel, completeClass);
 	}
 
@@ -364,7 +368,7 @@ public class DatumCaches
 				for (@NonNull Property containmentProperty : containmentProperties) {
 					//	CompleteClass containingCompleteClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(PivotUtil.getOwningClass(containmentProperty));
 					ClassDatum containingClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(containedClassDatum), PivotUtil.getOwningClass(containmentProperty));
-					oclContainerPropertyDatums.add(getPropertyDatum(containingClassDatum, containmentProperty));
+					oclContainerPropertyDatums.add(getPropertyDatum(containingClassDatum, containmentProperty, null));
 				}
 			}
 		}
@@ -480,12 +484,15 @@ public class DatumCaches
 
 	protected @NonNull PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass, @NonNull Property property) {
 		ClassDatum classDatum = getClassDatum(typedModel, completeClass);
-		return getPropertyDatum(classDatum, property);
+		return getPropertyDatum(classDatum, property, null);
 	}
 
-	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
+	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum sourceClassDatum, @NonNull Property property, @Nullable ClassDatum targetClassDatum) {
+		if ((targetClassDatum != null) && targetClassDatum.getCompleteClasses().contains(completeModel.getCompleteClass(QVTbaseUtil.getType(property)))) {
+			targetClassDatum = null;
+		}
 		assert property != oclContainerProperty;			// Use getOclContainerPropertyDatums() to return multiple candidates
-		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum = getProperty2propertyDatum(classDatum);
+		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum = getProperty2propertyDatum(sourceClassDatum, targetClassDatum);
 		PropertyDatum cachedPropertyDatum = property2propertyDatum.get(property);
 		if (cachedPropertyDatum != null) {
 			return cachedPropertyDatum;
@@ -498,7 +505,8 @@ public class DatumCaches
 		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setReferredProperty(property);
 		propertyDatum.setName(property.getName());
-		propertyDatum.setOwningClassDatum(classDatum);
+		propertyDatum.setOwningClassDatum(sourceClassDatum);
+		propertyDatum.setTargetClassDatum(targetClassDatum);
 		//	assert targetClassDatum.conformsTo(hostClassDatum);
 		PropertyDatum oldPropertyDatum = property2propertyDatum.put(property, propertyDatum);
 		assert oldPropertyDatum == null;
@@ -512,8 +520,8 @@ public class DatumCaches
 		Property oppositeProperty = property.getOpposite();
 		if (oppositeProperty != null) {
 			//	assert oppositeProperty != oclContainerProperty;
-			ClassDatum oppositeClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(classDatum), PivotUtil.getOwningClass(oppositeProperty));
-			Map<@NonNull Property, @NonNull PropertyDatum> oppositeProperty2propertyDatum = getProperty2propertyDatum(oppositeClassDatum);
+			ClassDatum oppositeClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(sourceClassDatum), PivotUtil.getOwningClass(oppositeProperty));
+			Map<@NonNull Property, @NonNull PropertyDatum> oppositeProperty2propertyDatum = getProperty2propertyDatum(oppositeClassDatum, null);
 			PropertyDatum oppositePropertyDatum = oppositeProperty2propertyDatum.get(oppositeProperty);
 			if (oppositePropertyDatum != null) {
 				propertyDatum.setOpposite(oppositePropertyDatum);
@@ -523,11 +531,30 @@ public class DatumCaches
 		return propertyDatum;
 	}
 
-	private @NonNull Map<@NonNull Property, @NonNull PropertyDatum> getProperty2propertyDatum(@NonNull ClassDatum classDatum) {
-		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum = classDatum2property2propertyDatum.get(classDatum);
-		if (property2propertyDatum == null) {
-			property2propertyDatum = new HashMap<>();
-			classDatum2property2propertyDatum.put(classDatum, property2propertyDatum);
+	private @NonNull Map<@NonNull Property, @NonNull PropertyDatum> getProperty2propertyDatum(@NonNull ClassDatum sourceClassDatum, @Nullable ClassDatum targetClassDatum) {
+		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum;
+		if (targetClassDatum == null) {
+			property2propertyDatum = sourceClassDatum2property2propertyDatum.get(sourceClassDatum);
+			if (property2propertyDatum == null) {
+				property2propertyDatum = new HashMap<>();
+				sourceClassDatum2property2propertyDatum.put(sourceClassDatum, property2propertyDatum);
+			}
+		}
+		else {
+			Map<@NonNull ClassDatum, @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>>> sourceClassDatum2targetClassDatum2property2propertyDatum2 = sourceClassDatum2targetClassDatum2property2propertyDatum;
+			if (sourceClassDatum2targetClassDatum2property2propertyDatum2 == null) {
+				sourceClassDatum2targetClassDatum2property2propertyDatum = sourceClassDatum2targetClassDatum2property2propertyDatum2 = new HashMap<>();
+			}
+			Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>> targetClassDatum2property2propertyDatum = sourceClassDatum2targetClassDatum2property2propertyDatum2.get(sourceClassDatum);
+			if (targetClassDatum2property2propertyDatum == null) {
+				targetClassDatum2property2propertyDatum = new HashMap<>();
+				sourceClassDatum2targetClassDatum2property2propertyDatum2.put(sourceClassDatum, targetClassDatum2property2propertyDatum);
+			}
+			property2propertyDatum = targetClassDatum2property2propertyDatum.get(targetClassDatum);
+			if (property2propertyDatum == null) {
+				property2propertyDatum = new HashMap<>();
+				targetClassDatum2property2propertyDatum.put(targetClassDatum, property2propertyDatum);
+			}
 		}
 		return property2propertyDatum;
 	}

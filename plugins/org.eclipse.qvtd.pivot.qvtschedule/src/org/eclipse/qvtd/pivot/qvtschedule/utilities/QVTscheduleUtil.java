@@ -150,6 +150,9 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	 * that conforms to each of thatClassDatum's CompleteClasses.
 	 */
 	public static boolean conformsTo(@NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
+		if (thisClassDatum == thatClassDatum) {
+			return true;
+		}
 		List<@NonNull CompleteClass> thoseCompleteClasses = thatClassDatum.basicGetCompleteClasses();
 		if (thoseCompleteClasses == null) {
 			return false;

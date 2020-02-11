@@ -1302,7 +1302,7 @@ public class RelationAnalysis extends RuleAnalysis
 		for (@NonNull Property property : property2node.keySet()) {
 			Node node = property2node.get(property);
 			assert node != null;
-			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, property);
+			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, property, node.getClassDatum());
 			createKeyPartEdge(keyNode.getUtility(), node, propertyDatum, keyNode);
 		}
 		return null;

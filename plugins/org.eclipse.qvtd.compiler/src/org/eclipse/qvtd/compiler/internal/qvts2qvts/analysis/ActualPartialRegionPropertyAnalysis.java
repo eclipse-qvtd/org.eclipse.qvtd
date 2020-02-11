@@ -38,6 +38,7 @@ public abstract class ActualPartialRegionPropertyAnalysis<@NonNull PRA extends P
 	public @NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PRA>> getCompatibleProducers() {
 		UniqueList<@NonNull PartialRegionAnalysis<@NonNull PRA>> compatibleProducers = new UniqueList<>();
 		ClassDatum owningClassDatum = QVTscheduleUtil.getOwningClassDatum(propertyDatum);
+		ClassDatum targetClassDatum = propertyDatum.getTargetClassDatum();
 		Property referredProperty = propertyDatum.getReferredProperty();
 		Property oppositeProperty = referredProperty.getOpposite();
 		// Many oppositePropertyDatum do not exist - too lazy / problematic symmetry
@@ -45,18 +46,21 @@ public abstract class ActualPartialRegionPropertyAnalysis<@NonNull PRA extends P
 		for (@NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> actualPropertyAnalysis : basePropertyAnalysis.propertyDatum2propertyAnalysis.values()) {
 			PropertyDatum actualPropertyDatum = actualPropertyAnalysis.getPropertyDatum();
 			ClassDatum actualOwningClassDatum = QVTscheduleUtil.getOwningClassDatum(actualPropertyDatum);
+			ClassDatum actualTargetClassDatum = actualPropertyDatum.getTargetClassDatum();
 			Property actualProperty = actualPropertyDatum.getReferredProperty();
 			//
 			//	There is a distinct PropertyDatum for each direction of a bidirectional navigation,
 			//	but there is only one PropertyAnalysis which might be 'backward'.
 			//
-			boolean isCompatible;
+			boolean isCompatible = false;
 			if (actualProperty == oppositeProperty) {
-				isCompatible = QVTscheduleUtil.conformsTo(owningClassDatum, actualOwningClassDatum);
+				isCompatible = QVTscheduleUtil.conformsTo(owningClassDatum, actualOwningClassDatum);		// FIXME target
 			}
 			else {
 				assert actualProperty == referredProperty : "Inconsistent producer property " + actualProperty;
-				isCompatible = QVTscheduleUtil.conformsTo(actualOwningClassDatum, owningClassDatum);
+				if (QVTscheduleUtil.conformsTo(actualOwningClassDatum, owningClassDatum)) {
+					isCompatible = (targetClassDatum == null) || (actualTargetClassDatum == null) || QVTscheduleUtil.conformsTo(actualTargetClassDatum, targetClassDatum);
+				}
 			}
 			if (isCompatible) {
 				//	for (@NonNull PartialRegionPropertyAnalysis<@NonNull PRA> actualSuperPropertyAnalysis : actualPropertyAnalysis.basicGetSuperPropertyAnalyses()) {

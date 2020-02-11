@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -94,7 +95,7 @@ public interface ScheduleManager
 	@NonNull PropertyDatum getBasePropertyDatum(@NonNull PropertyDatum propertyDatum);
 	@NonNull ClassDatum getBooleanClassDatum();
 	@NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement);
-	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class asType);
+	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull Type asType);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull Iterable<@NonNull CompleteClass> completeClasses);
 	@NonNull Iterable<@NonNull ClassDatum> getClassDatums();
@@ -120,7 +121,7 @@ public interface ScheduleManager
 	@NonNull OriginalContentsAnalysis getOriginalContentsAnalysis();
 
 	@NonNull ProblemHandler getProblemHandler();
-	@NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property);
+	@NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum sourceClassDatum, @NonNull Property property, @Nullable ClassDatum targetClassDatum);
 
 	/**
 	 * Return the PropertyDatum for the navigationEdge, which must not be a containment.

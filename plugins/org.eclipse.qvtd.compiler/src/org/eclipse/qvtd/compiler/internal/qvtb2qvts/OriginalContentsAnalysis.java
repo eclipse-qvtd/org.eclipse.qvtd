@@ -463,9 +463,11 @@ public class OriginalContentsAnalysis
 	private @NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
 		Property forwardProperty = QVTscheduleUtil.getReferredProperty(producedEdge);
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeSource());
-		ClassDatum forwardClassDatum = scheduleManager.getElementalClassDatum(classDatum);
-		return scheduleManager.getPropertyDatum(forwardClassDatum, forwardProperty);
+		ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeSource());
+		ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeTarget());
+		ClassDatum forwardClassDatum = scheduleManager.getElementalClassDatum(sourceClassDatum);
+		ClassDatum reverseClassDatum = scheduleManager.getElementalClassDatum(targetClassDatum);
+		return scheduleManager.getPropertyDatum(forwardClassDatum, forwardProperty, reverseClassDatum);
 	}
 
 	/**

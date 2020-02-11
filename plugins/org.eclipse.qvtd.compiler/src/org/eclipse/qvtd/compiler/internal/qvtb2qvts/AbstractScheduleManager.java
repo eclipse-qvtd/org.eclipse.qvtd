@@ -537,7 +537,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 								Property iterateProperty = scheduleManager.getIterateProperty(primaryClass);
 								Type elementType = PivotUtil.getElementType((CollectionType)primaryClass);
 								TypedModel typedModel2 = QVTscheduleUtil.getTypedModel(classDatum);
-								ClassDatum elementClassDatum = scheduleManager.getClassDatum(typedModel2, (org.eclipse.ocl.pivot.Class) elementType);
+								ClassDatum elementClassDatum = scheduleManager.getClassDatum(typedModel2, elementType);
 								Node elementNode = regionHelper.createOperationElementNode(Utility.NON_NULL_MATCHED, operationName, elementClassDatum, dependencyNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, dependencyNode2);
 								regionHelper.createNavigationEdge(Utility.NON_NULL_MATCHED, dependencyNode2, iterateProperty, elementNode, false);
@@ -604,10 +604,12 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public @NonNull PropertyDatum getBasePropertyDatum(@NonNull PropertyDatum propertyDatum) {
 		Property property = QVTscheduleUtil.getReferredProperty(propertyDatum);
 		property = QVTscheduleUtil.getPrimaryProperty(property);
-		org.eclipse.ocl.pivot.Class classType = QVTbaseUtil.getOwningClass(property);
+		org.eclipse.ocl.pivot.Class sourceClassType = QVTbaseUtil.getOwningClass(property);
+		Type targetClassType = QVTbaseUtil.getType(property);
 		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getOwningClassDatum(propertyDatum));
-		ClassDatum classDatum = getClassDatum(typedModel, classType);
-		return getPropertyDatum(classDatum, property);
+		ClassDatum sourceClassDatum = getClassDatum(typedModel, sourceClassType);
+		ClassDatum targetClassDatum = getClassDatum(typedModel, targetClassType);
+		return getPropertyDatum(sourceClassDatum, property, targetClassDatum);
 	}
 
 	/*	@Override
@@ -683,7 +685,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 		else {
 			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
-			return getClassDatum(typedModel, (org.eclipse.ocl.pivot.Class)elementType);
+			return getClassDatum(typedModel, elementType);
 		}
 	}
 
@@ -731,8 +733,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public @NonNull PropertyDatum getPropertyDatum(@NonNull NavigationEdge edge) {
 		Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 		Property property = QVTscheduleUtil.getReferredProperty(edge);
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(sourceNode);
-		return getPropertyDatum(classDatum, property);
+		Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+		ClassDatum sourceClassDatum = QVTscheduleUtil.getClassDatum(sourceNode);
+		ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+		return getPropertyDatum(sourceClassDatum, property, targetClassDatum);
 	}
 
 	@Override

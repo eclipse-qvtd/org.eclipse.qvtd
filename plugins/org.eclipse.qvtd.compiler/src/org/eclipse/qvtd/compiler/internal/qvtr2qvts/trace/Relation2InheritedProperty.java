@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 
@@ -29,8 +30,9 @@ public class Relation2InheritedProperty extends Element2MiddleProperty
 		super(relation2middleType, QVTbaseUtil.getName(property), relation2middleType.getTransformation2TracePackage().getBooleanType(), false);
 		this.property = property;
 		ScheduleManager scheduleManager = relation2middleType.getScheduleManager();
-		ClassDatum classDatum = scheduleManager.getClassDatum(scheduleManager.getTraceTypedModel(), QVTbaseUtil.getOwningClass(property));
-		scheduleManager.getPropertyDatum(classDatum, property);		// FIXME why is this remedial installatioin needed?
+		TypedModel traceTypedModel = scheduleManager.getTraceTypedModel();
+		ClassDatum sourceClassDatum = scheduleManager.getClassDatum(traceTypedModel, QVTbaseUtil.getOwningClass(property));
+		scheduleManager.getPropertyDatum(sourceClassDatum, property, null);		// FIXME why is this remedial installation needed?
 	}
 
 	@Override
