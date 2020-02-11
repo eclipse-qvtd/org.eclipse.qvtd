@@ -2122,6 +2122,17 @@ public interface QVTschedulePackage extends EPackage {
 	EAttribute getPropertyDatum_Key();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getTargetClassDatum <em>Target Class Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Class Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getTargetClassDatum()
+	 * @see #getPropertyDatum()
+	 * @generated
+	 */
+	EReference getPropertyDatum_TargetClassDatum();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge <em>Recursion Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4033,6 +4044,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY_DATUM__KEY = eINSTANCE.getPropertyDatum_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Class Datum</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_DATUM__TARGET_CLASS_DATUM = eINSTANCE.getPropertyDatum_TargetClassDatum();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl <em>Recursion Edge</em>}' class.

@@ -2668,6 +2668,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EReference getPropertyDatum_TargetClassDatum() {
+		return (EReference)propertyDatumEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRecursionEdge() {
 		return recursionEdgeEClass;
 	}
@@ -3102,6 +3112,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 		createEAttribute(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEReference(propertyDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 
 		recursionEdgeEClass = createEClass(58);
 		createEAttribute(recursionEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
@@ -3508,6 +3519,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getPropertyDatum_ReferredProperty(), thePivotPackage.getProperty(), null, "referredProperty", null, 0, 1, PropertyDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyDatum_SuperPropertyDatums(), this.getPropertyDatum(), null, "superPropertyDatums", null, 0, -1, PropertyDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPropertyDatum_Key(), ecorePackage.getEBoolean(), "key", null, 0, 1, PropertyDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyDatum_TargetClassDatum(), this.getClassDatum(), null, "targetClassDatum", null, 0, 1, PropertyDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(recursionEdgeEClass, RecursionEdge.class, "RecursionEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRecursionEdge_Primary(), ecorePackage.getEBoolean(), "primary", "false", 1, 1, RecursionEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

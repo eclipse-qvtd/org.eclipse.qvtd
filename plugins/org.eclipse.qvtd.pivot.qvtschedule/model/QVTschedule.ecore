@@ -576,6 +576,11 @@
         <details key="documentation" value="Set true if this PropertyDatum forms part of a key for the containing ClassDatum."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetClassDatum" eType="#//ClassDatum">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The ClassDatum that this PropertyDatum's slot references. if it is more derived than the referencedProperty.type."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RecursionEdge" eSuperTypes="#//Edge">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" lowerBound="1"

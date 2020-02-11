@@ -247,6 +247,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/referredProperty"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/superPropertyDatums"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//PropertyDatum/key"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/targetClassDatum"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//RecursionEdge">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//RecursionEdge/primary"/>

@@ -52,7 +52,7 @@ public interface DeclareStatement extends VariableStatement, ObservableStatement
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * True if the initial expression's type must be  checked for conformance with the variable's type.
-	 * A non-conforming vlaue is a predicate failure causing the mapping to fail without doing anything.
+	 * A non-conforming value is a predicate failure causing the mapping to fail without doing anything.
 	 * This is a derivation of not ownedInit.type.conformsTo(self.type).
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Check</em>' attribute.

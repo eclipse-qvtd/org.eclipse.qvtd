@@ -1107,6 +1107,7 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _ClassDatum__KeyedValueNode__classDatumValue = new ExecutorPropertyWithImplementation("KeyedValueNode", Types._ClassDatum, 9, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE));
 		public static final @NonNull ExecutorProperty _ClassDatum__Node__classDatum = new ExecutorPropertyWithImplementation("Node", Types._ClassDatum, 10, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__CLASS_DATUM));
 		public static final @NonNull ExecutorProperty _ClassDatum__NodeConnection__classDatum = new ExecutorPropertyWithImplementation("NodeConnection", Types._ClassDatum, 11, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM));
+		public static final @NonNull ExecutorProperty _ClassDatum__PropertyDatum__targetClassDatum = new ExecutorPropertyWithImplementation("PropertyDatum", Types._ClassDatum, 12, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM));
 
 		public static final @NonNull ExecutorProperty _Cluster__depth = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__DEPTH, Types._Cluster, 0);
 		public static final @NonNull ExecutorProperty _Cluster__memberEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__MEMBER_EDGES, Types._Cluster, 1);
@@ -1255,9 +1256,10 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _PropertyDatum__owningClassDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OWNING_CLASS_DATUM, Types._PropertyDatum, 2);
 		public static final @NonNull ExecutorProperty _PropertyDatum__referredProperty = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__REFERRED_PROPERTY, Types._PropertyDatum, 3);
 		public static final @NonNull ExecutorProperty _PropertyDatum__superPropertyDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS, Types._PropertyDatum, 4);
-		public static final @NonNull ExecutorProperty _PropertyDatum__KeyPartEdge__referredPart = new ExecutorPropertyWithImplementation("KeyPartEdge", Types._PropertyDatum, 5, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART));
-		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__opposite = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 6, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE));
-		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__superPropertyDatums = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 7, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS));
+		public static final @NonNull ExecutorProperty _PropertyDatum__targetClassDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM, Types._PropertyDatum, 5);
+		public static final @NonNull ExecutorProperty _PropertyDatum__KeyPartEdge__referredPart = new ExecutorPropertyWithImplementation("KeyPartEdge", Types._PropertyDatum, 6, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART));
+		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__opposite = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 7, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE));
+		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__superPropertyDatums = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 8, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS));
 
 		public static final @NonNull ExecutorProperty _RecursionEdge__primary = new EcoreExecutorProperty(QVTschedulePackage.Literals.RECURSION_EDGE__PRIMARY, Types._RecursionEdge, 0);
 
@@ -6429,7 +6431,8 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._PropertyDatum__opposite,
 			QVTscheduleTables.Properties._PropertyDatum__owningClassDatum,
 			QVTscheduleTables.Properties._PropertyDatum__referredProperty,
-			QVTscheduleTables.Properties._PropertyDatum__superPropertyDatums
+			QVTscheduleTables.Properties._PropertyDatum__superPropertyDatums,
+			QVTscheduleTables.Properties._PropertyDatum__targetClassDatum
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _RecursionEdge = {

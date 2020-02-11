@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.Property;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getSuperPropertyDatums <em>Super Property Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#isKey <em>Key</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getTargetClassDatum <em>Target Class Datum</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum()
@@ -165,5 +166,30 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @generated
 	 */
 	void setKey(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Target Class Datum</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The ClassDatum that this PropertyDatum's slot references. if it is more derived than the referencedProperty.type.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Target Class Datum</em>' reference.
+	 * @see #setTargetClassDatum(ClassDatum)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_TargetClassDatum()
+	 * @model
+	 * @generated
+	 */
+	ClassDatum getTargetClassDatum();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getTargetClassDatum <em>Target Class Datum</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Class Datum</em>' reference.
+	 * @see #getTargetClassDatum()
+	 * @generated
+	 */
+	void setTargetClassDatum(ClassDatum value);
 
 } // PropertyDatum

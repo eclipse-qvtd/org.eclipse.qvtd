@@ -45,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl#getSuperPropertyDatums <em>Super Property Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl#isKey <em>Key</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl#getTargetClassDatum <em>Target Class Datum</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,7 +58,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PROPERTY_DATUM_FEATURE_COUNT = AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 5;
+	public static final int PROPERTY_DATUM_FEATURE_COUNT = AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Property Datum</em>' class.
@@ -117,6 +118,16 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @ordered
 	 */
 	protected boolean key = KEY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTargetClassDatum() <em>Target Class Datum</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTargetClassDatum()
+	 * @generated
+	 * @ordered
+	 */
+	protected ClassDatum targetClassDatum;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -302,6 +313,46 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 */
 	@Override
+	public ClassDatum getTargetClassDatum() {
+		if (targetClassDatum != null && targetClassDatum.eIsProxy()) {
+			InternalEObject oldTargetClassDatum = (InternalEObject)targetClassDatum;
+			targetClassDatum = (ClassDatum)eResolveProxy(oldTargetClassDatum);
+			if (targetClassDatum != oldTargetClassDatum) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldTargetClassDatum, targetClassDatum));
+			}
+		}
+		return targetClassDatum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDatum basicGetTargetClassDatum() {
+		return targetClassDatum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setTargetClassDatum(ClassDatum newTargetClassDatum) {
+		ClassDatum oldTargetClassDatum = targetClassDatum;
+		targetClassDatum = newTargetClassDatum;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldTargetClassDatum, targetClassDatum));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
@@ -360,6 +411,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return getSuperPropertyDatums();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return isKey();
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
+				if (resolve) return getTargetClassDatum();
+				return basicGetTargetClassDatum();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -389,6 +443,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setKey((Boolean)newValue);
 				return;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
+				setTargetClassDatum((ClassDatum)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -416,6 +473,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setKey(KEY_EDEFAULT);
 				return;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
+				setTargetClassDatum((ClassDatum)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -438,6 +498,8 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return superPropertyDatums != null && !superPropertyDatums.isEmpty();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return key != KEY_EDEFAULT;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
+				return targetClassDatum != null;
 		}
 		return super.eIsSet(featureID);
 	}
