@@ -51,7 +51,7 @@ import com.google.common.collect.Lists;
  * to ensure that a given node is reachable by to-one navigation.
  *
  * Since the reachability is in access order, conditionality is completely ignored; callers should filter
- * conditional retirns from getReachingEdges() as appropriate. Iterations are similarly ignored being largely
+ * conditional returns from getReachingEdges() as appropriate. Iterations are similarly ignored being largely
  * treated as a single access, albeit with a slight cost penalty to discourage premature iteration evaluation.s
  */
 public class ReachabilityForest
@@ -387,12 +387,12 @@ public class ReachabilityForest
 	 * Construct the Reachability forest for the specified rootNodes using the availableNavigableEdges to locate
 	 * paths to further nodes and also any old computation edges.
 	 */
-	public ReachabilityForest(@Nullable String disambiguator, @NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigableEdge> availableNavigableEdges) {
+	public ReachabilityForest(@Nullable String disambiguator, @NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull ? extends Edge> availableNavigableEdges) {
 		this.disambiguator = disambiguator;
 		for (@NonNull Node rootNode : rootNodes) {
 			node2reachingEdges.put(rootNode, null);
 		}
-		for (@NonNull NavigableEdge edge : availableNavigableEdges) {
+		for (@NonNull Edge edge : availableNavigableEdges) {
 			addEdge(edge);
 		}
 		//
@@ -401,7 +401,7 @@ public class ReachabilityForest
 		analyze();
 	}
 
-	protected void addEdge(@NonNull NavigableEdge edge) {
+	protected void addEdge(@NonNull Edge edge) {
 		if (edge instanceof NavigationEdge) {
 			NavigationEdge navigationEdge = (NavigationEdge)edge;
 			if (!navigationEdge.isSecondary()) {

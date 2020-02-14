@@ -264,7 +264,12 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				Iterable<@NonNull Edge> edges = checkedCondition.getEdges();
 				if (edges != null) {
 					for (@NonNull Edge edge : edges) {
-						addEdge(edge);
+						if (!edge.isConditional()) {
+							addEdge(edge);
+						}
+						else {
+							getClass();
+						}
 					}
 				}
 				Node node = checkedCondition.getNode();

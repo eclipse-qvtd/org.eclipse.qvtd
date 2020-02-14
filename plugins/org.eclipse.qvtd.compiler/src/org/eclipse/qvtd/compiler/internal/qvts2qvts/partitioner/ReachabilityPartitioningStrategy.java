@@ -588,7 +588,8 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//	Gather the acyclic edges and remember if there is a cyclic edge.
 		//
 		boolean hasCyclicEdge = false;
-		List<@NonNull NavigableEdge> reachingInitEdges = new ArrayList<>();
+		List<@NonNull NavigableEdge> reachingInitEdges1 = new ArrayList<>();
+		List<@NonNull Edge> reachingInitEdges2 = new ArrayList<>();
 		//	Set<@NonNull Node> oldNodes1 = new HashSet<>();
 		for (@NonNull Edge edge : originalEdges) {
 			boolean isReaching = false;
@@ -612,8 +613,11 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 					}
 				}
 				if (isReaching) {
-					reachingInitEdges.add(navigationEdge);
+					reachingInitEdges1.add(navigationEdge);
 				}
+			}
+			if (!edge.isRealized() && !edge.getSourceNode().isRealized() && !edge.getTargetNode().isRealized()) {
+				reachingInitEdges2.add(edge);
 			}
 			//	else {//if (edge.isOld() && !edge.isSecondary()) {
 			//		isReaching = true;
@@ -638,11 +642,12 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//		assert navigableInitEdges1.equals(navigableInitEdges2);
 
 		//	strategy.regionAnalysis.createLocalSuccess();
-		ReachabilityForest initReachabilityForest = new ReachabilityForest("init", thisAndTraceAndConstantSourceNodes, reachingInitEdges);
+		ReachabilityForest initReachabilityForest1 = new ReachabilityForest("init", thisAndTraceAndConstantSourceNodes, reachingInitEdges1);
+		//		ReachabilityForest initReachabilityForest2 = new ReachabilityForest("init", thisAndTraceAndConstantSourceNodes, reachingInitEdges2);
 		//	Set<@NonNull Node> oldNodes2 = Sets.newHashSet(initReachabilityForest.getMostReachableFirstNodes());
 		//				assert oldNodes1.equals(oldNodes2);
 		List<@NonNull Node> novelInitNodes1 = null;
-		for (@NonNull Node node : initReachabilityForest.getMostReachableFirstNodes()) {
+		for (@NonNull Node node : initReachabilityForest1.getMostReachableFirstNodes()) {
 			if ((basicGetPartitionFactory(node) == null) && !Iterables.contains(thisAndTraceNodes, node)) {
 				if (novelInitNodes1 == null) {
 					novelInitNodes1 = new ArrayList<>();
@@ -675,7 +680,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 			if (!novelInitNodes1.contains(globalSuccessNode)) {
 				novelInitNodes1.add(getLocalSuccessNode());
 			}
-			new InitPartitionFactory(this, initReachabilityForest, thisAndTraceNodes, novelInitNodes1);
+			new InitPartitionFactory(this, initReachabilityForest1, thisAndTraceNodes, novelInitNodes1);
 		}
 	}
 
@@ -819,7 +824,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 	@Override
 	public @NonNull Iterable<@NonNull PartitionAnalysis> partition() {
 		String name = regionAnalysis.getName();
-		if ("mapVariable_qvtr".equals(name)) {
+		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(name)) {
 			getClass();
 		}
 		//
