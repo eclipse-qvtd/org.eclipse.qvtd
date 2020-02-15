@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,13 +22,19 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
+import org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -106,6 +113,43 @@ public abstract class AbstractSimplePartitionFactory extends AbstractPartitionFa
 		mappingPartitioner.addEdge(edge, newEdgeRole, partition);
 	}
 
+	/**
+	 * The original ReachabilityForest functiomality considered only available navigation edges, but evolved to consider downstream
+	 * using compitation edges. This undermines the API, which is being changed to available edges.
+	 *
+	 * This function naively converts the old available navigation edges into the avilable edges for the new API.
+	 *
+	 * @deprecated since caller should be revised.
+	 */
+	@Deprecated
+	private @NonNull Iterable<@NonNull Edge> addLegacyEdges(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigableEdge> availableNavigableEdges) {
+		Set<@NonNull Edge> allAvailableEdges = new HashSet<>();
+		for (@NonNull Node rootNode : rootNodes) {
+			addLegacyEdges(allAvailableEdges, rootNode);
+		}
+		for (@NonNull NavigableEdge navigableEdge : availableNavigableEdges) {
+			allAvailableEdges.add(navigableEdge);
+			addLegacyEdges(allAvailableEdges, QVTscheduleUtil.getSourceNode(navigableEdge));
+			addLegacyEdges(allAvailableEdges, QVTscheduleUtil.getTargetNode(navigableEdge));
+		}
+		return allAvailableEdges;
+	}
+	@Deprecated
+	private void addLegacyEdges(@NonNull Set<@NonNull Edge> allAvailableEdges, @NonNull Node node) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
+			if ((edge.isOld() || (edge instanceof CollectionPartEdge) || (edge instanceof KeyPartEdge) || (edge instanceof MapPartEdge) || (edge instanceof ShadowPartEdge) || (edge instanceof TuplePartEdge)) && allAvailableEdges.add(edge)) {
+				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+				addLegacyEdges(allAvailableEdges, targetNode);
+			}
+		}
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+			if (edge.isOld() && allAvailableEdges.add(edge)) {
+				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+				addLegacyEdges(allAvailableEdges, sourceNode);
+			}
+		}
+	}
+
 	protected void addNode(@NonNull BasicPartition partition, @NonNull Node node) {
 		Role oldNodeRole = QVTscheduleUtil.getNodeRole(node);
 		addNode(partition, node, oldNodeRole);
@@ -169,6 +213,13 @@ public abstract class AbstractSimplePartitionFactory extends AbstractPartitionFa
 
 	protected @NonNull String computeName(@NonNull String suffix){
 		return QVTscheduleUtil.getName(region) + "«" + suffix + "»";
+	}
+
+	@Override
+	protected @NonNull ReachabilityForest createReachabilityForest() {
+		Iterable<@NonNull Node> reachabilityRootNodes = getReachabilityRootNodes();
+		Iterable<@NonNull NavigableEdge> availableNavigableEdges = getAvailableNavigableEdges();
+		return new ReachabilityForest(null, reachabilityRootNodes, addLegacyEdges(reachabilityRootNodes, availableNavigableEdges));
 	}
 
 	/**

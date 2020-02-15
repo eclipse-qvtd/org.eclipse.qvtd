@@ -114,12 +114,14 @@ public class ReachabilityForest
 				assert !edge.isPartial();
 				assert (edge instanceof IteratedEdge) || (edge instanceof NavigationEdge) || (edge instanceof PredicateEdge);
 				assert edge.getTargetNode() == targetNode;
+				assert availableEdges.contains(edge);
 				reachingEdges = Collections.singletonList(edge);
 			}
 			else {
 				@SuppressWarnings("unchecked")
 				List<@NonNull Edge> reachingEdges2 = (List<@NonNull Edge>)reachingEdgeOrEdges;
 				reachingEdges = reachingEdges2;
+				assert availableEdges.containsAll(reachingEdges);
 				for (@NonNull Edge edge : reachingEdges) {
 					assert !edge.isPartial();
 					assert (edge instanceof CollectionPartEdge) || (edge instanceof KeyPartEdge) || (edge instanceof MapPartEdge) || (edge instanceof OperationParameterEdge) || (edge instanceof OperationSelfEdge) || (edge instanceof ShadowPartEdge);
@@ -350,6 +352,11 @@ public class ReachabilityForest
 	protected final @Nullable String disambiguator;
 
 	/**
+	 * The edges that may be used in the tree.
+	 */
+	private final @NonNull Set<@NonNull Edge> availableEdges = new HashSet<>();
+
+	/**
 	 * The preferred non-secondary edges to be used in the tree.
 	 */
 	private final @NonNull Set<@NonNull NavigableEdge> forwardEdges = new HashSet<>();
@@ -387,12 +394,12 @@ public class ReachabilityForest
 	 * Construct the Reachability forest for the specified rootNodes using the availableNavigableEdges to locate
 	 * paths to further nodes and also any old computation edges.
 	 */
-	public ReachabilityForest(@Nullable String disambiguator, @NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull ? extends Edge> availableNavigableEdges) {
+	public ReachabilityForest(@Nullable String disambiguator, @NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull ? extends Edge> availableEdges) {
 		this.disambiguator = disambiguator;
 		for (@NonNull Node rootNode : rootNodes) {
 			node2reachingEdges.put(rootNode, null);
 		}
-		for (@NonNull Edge edge : availableNavigableEdges) {
+		for (@NonNull Edge edge : availableEdges) {
 			addEdge(edge);
 		}
 		//
@@ -402,6 +409,7 @@ public class ReachabilityForest
 	}
 
 	protected void addEdge(@NonNull Edge edge) {
+		this.availableEdges.add(edge);
 		if (edge instanceof NavigationEdge) {
 			NavigationEdge navigationEdge = (NavigationEdge)edge;
 			if (!navigationEdge.isSecondary()) {
