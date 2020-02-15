@@ -86,16 +86,18 @@ public class ReachabilityForest
 			assert targetNode.isOperation();
 			List<@NonNull Edge> edges = null;
 			for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-				if ((incomingEdge instanceof OperationParameterEdge) || (incomingEdge instanceof OperationSelfEdge)) { //incomingEdge.isOld() && incomingEdge.isComputation()) {
-					Node node = QVTscheduleUtil.getSourceNode(incomingEdge);
-					Integer cost = node2cost.get(node);
-					if ((cost == null) || (cost > thisCost)) {
-						return null;
+				if (availableEdges.contains(incomingEdge)) {
+					if ((incomingEdge instanceof OperationParameterEdge) || (incomingEdge instanceof OperationSelfEdge)) { //incomingEdge.isOld() && incomingEdge.isComputation()) {
+						Node node = QVTscheduleUtil.getSourceNode(incomingEdge);
+						Integer cost = node2cost.get(node);
+						if ((cost == null) || (cost > thisCost)) {
+							return null;
+						}
+						if (edges == null) {
+							edges = new ArrayList<>();
+						}
+						edges.add(incomingEdge);
 					}
-					if (edges == null) {
-						edges = new ArrayList<>();
-					}
-					edges.add(incomingEdge);
 				}
 			}
 			if (edges != null) {
@@ -158,7 +160,7 @@ public class ReachabilityForest
 						assert node2cost.get(sourceNode) == thisCost;
 						for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 							assert !edge.isCast();
-							if (!edge.isPartial()) {
+							if (availableEdges.contains(edge) && !edge.isPartial()) {
 								targetNode = edge.getEdgeTarget();
 								if (!node2reachingEdges.containsKey(targetNode)) {
 									targetCost = node2cost.get(targetNode);
