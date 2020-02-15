@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -181,6 +182,9 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 					Iterable<@NonNull MappingPartition> partitions = null;
 					if (sourceRegion instanceof MappingRegion) {
 						partitions = QVTscheduleUtil.getMappingPartitions(((MappingRegion)sourceRegion));
+					}
+					else if (sourceRegion instanceof LoadingRegion) {
+						partitions = Collections.singletonList(QVTscheduleUtil.getLoadingPartition(((LoadingRegion)sourceRegion)));
 					}
 					if (partitions != null) {
 						for (@NonNull Partition sourcePartition : partitions) {
