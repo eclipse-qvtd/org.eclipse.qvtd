@@ -588,44 +588,21 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//	Gather the acyclic edges and remember if there is a cyclic edge.
 		//
 		boolean hasCyclicEdge = false;
-		List<@NonNull NavigableEdge> reachingInitEdges1 = new ArrayList<>();
-		List<@NonNull Edge> reachingInitEdges2 = new ArrayList<>();
-		//	Set<@NonNull Node> oldNodes1 = new HashSet<>();
+		List<@NonNull Edge> reachingInitEdges = new ArrayList<>();
 		for (@NonNull Edge edge : originalEdges) {
-			boolean isReaching = false;
-			if (edge.isNavigable()) {
-				NavigationEdge navigationEdge = (NavigationEdge) edge;
-				if (basicGetPartitionFactory(edge) != null) {
-					isReaching = true;
-				}
-				if (edge.isOld() && !edge.isSecondary()) {
-					if (cyclicRegionAnalysis != null) {
-						PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(navigationEdge);
-						if (cyclicRegionAnalysis.isCyclic(propertyDatum)) {
-							hasCyclicEdge = true;
-						}
-						else {
-							isReaching = true;
-						}
-					}
-					else {
-						isReaching = true;
+			if (((basicGetPartitionFactory(edge) != null) || edge.isOld())) { // && !edge.isSecondary()) {
+				boolean isCyclic = false;
+				if (edge.isSuccess() && cyclicRegionAnalysis != null) {
+					PropertyDatum propertyDatum = scheduleManager.getPropertyDatum((SuccessEdge) edge);
+					if (cyclicRegionAnalysis.isCyclic(propertyDatum)) {
+						hasCyclicEdge = true;
+						isCyclic = true;
 					}
 				}
-				if (isReaching) {
-					reachingInitEdges1.add(navigationEdge);
+				if (!isCyclic) {
+					reachingInitEdges.add(edge);
 				}
 			}
-			if (!edge.isRealized() && !edge.getSourceNode().isRealized() && !edge.getTargetNode().isRealized()) {
-				reachingInitEdges2.add(edge);
-			}
-			//	else {//if (edge.isOld() && !edge.isSecondary()) {
-			//		isReaching = true;
-			//	}
-			//	if (isReaching) {
-			//		oldNodes1.add(QVTscheduleUtil.getSourceNode(edge));
-			//		oldNodes1.add(QVTscheduleUtil.getTargetNode(edge));
-			//	}
 		}
 		/*		Set<@NonNull Node> oldNodes1 = new HashSet<>();
 		for (@NonNull Node node : allNodes) {
@@ -642,10 +619,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//		assert navigableInitEdges1.equals(navigableInitEdges2);
 
 		//	strategy.regionAnalysis.createLocalSuccess();
-		ReachabilityForest initReachabilityForest1 = new ReachabilityForest("init", thisAndTraceAndConstantSourceNodes, reachingInitEdges1);
-		//		ReachabilityForest initReachabilityForest2 = new ReachabilityForest("init", thisAndTraceAndConstantSourceNodes, reachingInitEdges2);
-		//	Set<@NonNull Node> oldNodes2 = Sets.newHashSet(initReachabilityForest.getMostReachableFirstNodes());
-		//				assert oldNodes1.equals(oldNodes2);
+		ReachabilityForest initReachabilityForest1 = new ReachabilityForest("init", thisAndTraceAndConstantSourceNodes, reachingInitEdges);
 		List<@NonNull Node> novelInitNodes1 = null;
 		for (@NonNull Node node : initReachabilityForest1.getMostReachableFirstNodes()) {
 			if ((basicGetPartitionFactory(node) == null) && !Iterables.contains(thisAndTraceNodes, node)) {
@@ -688,10 +662,10 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//
 		//	Determine the reaching edges for the LoopPartitionFactory.
 		//
-		List<@NonNull NavigableEdge> reachingLoopEdges = new ArrayList<>();
+		List<@NonNull Edge> reachingLoopEdges = new ArrayList<>();
 		for (@NonNull Edge edge : originalEdges) {
+			boolean isReaching = false;
 			if (edge.isNavigable()) {
-				boolean isReaching = false;
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
 				if (basicGetPartitionFactory(edge) != null) {
 					isReaching = true;		// Gather all already predicated/realized edges.
@@ -699,9 +673,12 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 				else if (edge.isOld() && !edge.isSecondary() && !transformationAnalysis.isCorollary(navigationEdge)) {
 					isReaching = true;		// Gather all predicated edges that cannot be deferred to the rest partition as corrolaries.
 				}
-				if (isReaching) {
-					reachingLoopEdges.add(navigationEdge);
-				}
+			}
+			else {
+				isReaching = true;
+			}
+			if (isReaching) {
+				reachingLoopEdges.add(edge);
 			}
 		}
 		if (localSuccessEdge != null) {
