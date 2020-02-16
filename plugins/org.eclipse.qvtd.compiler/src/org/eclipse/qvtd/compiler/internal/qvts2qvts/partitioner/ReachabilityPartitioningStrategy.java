@@ -590,10 +590,13 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		boolean hasCyclicEdge = false;
 		List<@NonNull Edge> reachingInitEdges = new ArrayList<>();
 		for (@NonNull Edge edge : originalEdges) {
-			if (((basicGetPartitionFactory(edge) != null) || edge.isOld())) { // && !edge.isSecondary()) {
+			if (basicGetPartitionFactory(edge) != null) {
+				reachingInitEdges.add(edge);
+			}
+			else if (edge.isOld()) { // && !edge.isSecondary()) {
 				boolean isCyclic = false;
-				if (edge.isSuccess() && cyclicRegionAnalysis != null) {
-					PropertyDatum propertyDatum = scheduleManager.getPropertyDatum((SuccessEdge) edge);
+				if (edge.isNavigable() && cyclicRegionAnalysis != null) {
+					PropertyDatum propertyDatum = scheduleManager.getPropertyDatum((NavigationEdge) edge);
 					if (cyclicRegionAnalysis.isCyclic(propertyDatum)) {
 						hasCyclicEdge = true;
 						isCyclic = true;
@@ -664,21 +667,11 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//
 		List<@NonNull Edge> reachingLoopEdges = new ArrayList<>();
 		for (@NonNull Edge edge : originalEdges) {
-			boolean isReaching = false;
-			if (edge.isNavigable()) {
-				NavigationEdge navigationEdge = (NavigationEdge)edge;
-				if (basicGetPartitionFactory(edge) != null) {
-					isReaching = true;		// Gather all already predicated/realized edges.
-				}
-				else if (edge.isOld() && !edge.isSecondary() && !transformationAnalysis.isCorollary(navigationEdge)) {
-					isReaching = true;		// Gather all predicated edges that cannot be deferred to the rest partition as corrolaries.
-				}
-			}
-			else {
-				isReaching = true;
-			}
-			if (isReaching) {
+			if (basicGetPartitionFactory(edge) != null) {
 				reachingLoopEdges.add(edge);
+			}
+			else if (edge.isOld() && (!edge.isNavigable() || !transformationAnalysis.isCorollary((NavigationEdge) edge))) {
+				reachingLoopEdges.add(edge);		// Gather all predicated edges that cannot be deferred to the rest partition as corrolaries.
 			}
 		}
 		if (localSuccessEdge != null) {
