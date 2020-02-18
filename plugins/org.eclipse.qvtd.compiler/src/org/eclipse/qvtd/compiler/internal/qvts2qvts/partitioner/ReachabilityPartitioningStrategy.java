@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -587,8 +589,8 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//
 		//	Gather the acyclic edges and remember if there is a cyclic edge.
 		//
-		boolean hasCyclicEdge = false;
 		List<@NonNull Edge> reachingInitEdges = new ArrayList<>();
+		UniqueList<@NonNull Edge> cyclicInitEdges = null;
 		for (@NonNull Edge edge : originalEdges) {
 			if (basicGetPartitionFactory(edge) != null) {
 				reachingInitEdges.add(edge);
@@ -598,14 +600,30 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 				if (edge.isNavigable() && cyclicRegionAnalysis != null) {
 					PropertyDatum propertyDatum = scheduleManager.getPropertyDatum((NavigationEdge) edge);
 					if (cyclicRegionAnalysis.isCyclic(propertyDatum)) {
-						hasCyclicEdge = true;
 						isCyclic = true;
+						if (cyclicInitEdges == null) {
+							cyclicInitEdges = new UniqueList<>();
+						}
+						cyclicInitEdges.add(edge);
 					}
 				}
 				if (!isCyclic) {
 					reachingInitEdges.add(edge);
 				}
 			}
+		}
+		UniqueList<@NonNull Node> cyclicInitNodes = null;
+		UniqueList<@NonNull Node> reachingInitNodes = null;
+		if (cyclicInitEdges != null) {
+			reachingInitNodes = new UniqueList<>(thisAndTraceAndConstantSourceNodes);
+			cyclicInitNodes = new UniqueList<>();
+			int iMax = cyclicInitEdges.size();
+			for (int i = 0; i < iMax; i++) {			// Domain grows but extra entries are processed recursively within loop.
+				Edge cyclicEdge = cyclicInitEdges.get(i);
+				pruneInitCyclicEdge(cyclicInitNodes, cyclicInitEdges, cyclicEdge);
+			}
+			reachingInitEdges.removeAll(cyclicInitEdges);
+			reachingInitNodes.removeAll(cyclicInitNodes);
 		}
 		/*		Set<@NonNull Node> oldNodes1 = new HashSet<>();
 		for (@NonNull Node node : allNodes) {
@@ -622,7 +640,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//		assert navigableInitEdges1.equals(navigableInitEdges2);
 
 		//	strategy.regionAnalysis.createLocalSuccess();
-		ReachabilityForest initReachabilityForest1 = new ReachabilityForest("init", thisAndTraceAndConstantSourceNodes, reachingInitEdges);
+		ReachabilityForest initReachabilityForest1 = new ReachabilityForest("init", reachingInitNodes != null ? reachingInitNodes : thisAndTraceAndConstantSourceNodes, reachingInitEdges);
 		List<@NonNull Node> novelInitNodes1 = null;
 		for (@NonNull Node node : initReachabilityForest1.getMostReachableFirstNodes()) {
 			if ((basicGetPartitionFactory(node) == null) && !Iterables.contains(thisAndTraceNodes, node)) {
@@ -644,7 +662,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		} */
 		if (novelInitNodes1 != null) {
 			//	assert novelInitNodes1.equals(novelInitNodes2);  -- not even close
-			if (!hasCyclicEdge) {			// Acyclic - can do realizes now
+			if (cyclicInitEdges == null) {			// Acyclic - can do realizes now
 				for (@NonNull Node node : originalNodes) {
 					if (node.isRealized() && !novelInitNodes1.contains(node) && (basicGetPartitionFactory(node) == null)) {
 						ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
@@ -658,6 +676,91 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 				novelInitNodes1.add(getLocalSuccessNode());
 			}
 			new InitPartitionFactory(this, initReachabilityForest1, thisAndTraceNodes, novelInitNodes1);
+		}
+	}
+
+	/**
+	 * Grow the cyclicNodes/cyclicEdges area to include all nodes/edges that should be omitted from the init partition as a consequence
+	 * of omitting the cyclicEdge.
+	 */
+	private void pruneInitCyclicEdge(@NonNull Set<@NonNull Node> cyclicNodes, @NonNull Set<@NonNull Edge> cyclicEdges, @NonNull Edge cyclicEdge) {
+		Node targetNode = QVTscheduleUtil.getTargetNode(cyclicEdge);
+		pruneInitCyclicTargetNode(cyclicNodes, cyclicEdges, targetNode);
+		/*		if (cyclicNodes.add(targetNode)) {
+			if (cyclicEdge.isComputation()) {
+				cyclicEdges.add(cyclicEdge);
+				Node sourceNode = QVTscheduleUtil.getSourceNode(cyclicEdge);
+				if (cyclicEdges.containsAll(sourceNode.getOutgoingEdges())) {
+					//	if (cyclicNodes.add(sourceNode)) {
+					for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
+						pruneInitCyclicEdge(cyclicNodes, cyclicEdges, incomingEdge);
+					}
+					//	}
+				}
+			}
+			else if (cyclicEdges.containsAll(targetNode.getIncomingEdges())) {
+				for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(targetNode)) {
+					pruneInitCyclicEdge(cyclicNodes, cyclicEdges, outgoingEdge);
+				}
+			}
+		} */
+	}
+	/*	private void pruneInitCyclicSourceNode(@NonNull Set<@NonNull Node> cyclicNodes, @NonNull Set<@NonNull Edge> cyclicEdges, @NonNull Node cyclicNode) {
+		if (cyclicNodes.add(cyclicNode)) {
+			if (cyclicEdges.containsAll(cyclicNode.getIncomingEdges())) {		// Follow irrevocably cyclic nodes towards their targets
+				for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(cyclicNode)) {
+					cyclicEdges.add(outgoingEdge);
+					pruneInitCyclicNode(cyclicNodes, cyclicEdges, QVTscheduleUtil.getTargetNode(outgoingEdge));
+				}
+			}
+			if (cyclicNode.isExpression()) {		// Follow orphan expressions towards their sources
+				boolean hasNavigation = false;
+				for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(cyclicNode)) {
+					if (incomingEdge.isNavigation()) {
+						hasNavigation = true;
+						break;
+					}
+				}
+				if (!hasNavigation) {
+					for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(cyclicNode)) {
+						cyclicEdges.add(incomingEdge);
+						pruneInitCyclicNode(cyclicNodes, cyclicEdges, QVTscheduleUtil.getSourceNode(incomingEdge));
+					}
+				}
+			}
+		}
+	} */
+	private void pruneInitCyclicTargetNode(@NonNull Set<@NonNull Node> cyclicNodes, @NonNull Set<@NonNull Edge> cyclicEdges, @NonNull Node cyclicNode) {
+		assert !cyclicNodes.contains(cyclicNode);
+		if (cyclicEdges.containsAll(cyclicNode.getIncomingEdges())) {		// Follow irrevocably cyclic nodes towards their targets
+			cyclicNodes.add(cyclicNode);
+			for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(cyclicNode)) {
+				cyclicEdges.add(outgoingEdge);
+				Node targetNode = QVTscheduleUtil.getTargetNode(outgoingEdge);
+				if (!cyclicNodes.contains(targetNode)) {
+					pruneInitCyclicTargetNode(cyclicNodes, cyclicEdges, targetNode);
+				}
+			}
+		}
+		if (cyclicNode.isExpression()) {		// Follow orphan expressions towards their sources
+			boolean hasNavigation = false;
+			Iterable<@NonNull Edge> incomingEdges = QVTscheduleUtil.getIncomingEdges(cyclicNode);
+			for (@NonNull Edge incomingEdge : incomingEdges) {
+				if (incomingEdge.isNavigation()) {
+					hasNavigation = true;
+					break;
+				}
+			}
+			if (!hasNavigation) {
+				cyclicNodes.add(cyclicNode);
+				for (@NonNull Edge incomingEdge : incomingEdges) {
+					cyclicEdges.add(incomingEdge);
+					Node sourceNode = QVTscheduleUtil.getSourceNode(incomingEdge);
+					if (!cyclicNodes.contains(sourceNode)) {
+						pruneInitCyclicTargetNode(cyclicNodes, cyclicEdges, sourceNode);
+					}
+				}
+			}
 		}
 	}
 
