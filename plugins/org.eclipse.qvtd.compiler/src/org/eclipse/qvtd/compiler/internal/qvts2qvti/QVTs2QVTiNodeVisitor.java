@@ -47,6 +47,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
@@ -244,6 +245,16 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			if (edge.isExpression() && resultEdges.add(edge)) {
 				Node expNode = edge.getEdgeSource();
+				if (edge.isNavigable()) {
+					Node sourceNode = expNode;
+					Node targetNode = edge.getEdgeTarget();
+					ReachabilityForest reachabilityForest = context.getReachabilityForest();
+					int sourceCost = reachabilityForest.getCost(sourceNode);
+					int targetCost = reachabilityForest.getCost(targetNode);
+					if (targetCost < sourceCost) {
+						expNode = targetNode;
+					}
+				}
 				OCLExpression clonedElement = getExpressionInternal(expNode);
 				if (clonedElement instanceof VariableExp) {
 					VariableDeclaration referredVariable = ((VariableExp)clonedElement).getReferredVariable();
@@ -412,7 +423,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 	}
 
 	@Override
-	public @NonNull VariableExp visitIteratorNode(@NonNull IteratorNode node) {
+	public @NonNull OCLExpression visitIteratorNode(@NonNull IteratorNode node) {
 		Parameter loopIteratorsParameter = qvtruntimeLibraryHelper.getLoopIteratorsParameter();
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
 			if (edge instanceof OperationParameterEdge) {
@@ -424,8 +435,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				}
 			}
 		}
-		VariableDeclaration variable = context.getVariable(node);
-		return PivotUtil.createVariableExp(variable);
+		return context.getExpression(node);
 	}
 
 	@Override
