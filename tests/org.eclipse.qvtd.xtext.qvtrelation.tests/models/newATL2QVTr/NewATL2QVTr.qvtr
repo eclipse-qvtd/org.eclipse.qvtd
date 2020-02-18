@@ -561,10 +561,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			};
 			when {
 				mapModule(atlModule, qvtrTransformation);
-				if atlAttributes->notEmpty()
-				then mapHelper_Attribute(atlAttributes->any(true)._definition?.Helper, qvtrOperation)
-				else false
-				endif;
+			--	atlAttributes->notEmpty();
+				mapHelper_Attribute(if atlAttributes->notEmpty() then atlAttributes->any(true)._definition?.Helper else null endif, qvtrOperation);
 				mapOclExpression(atlSource, qvtrSourceArgument);
 			}
 		}
@@ -634,10 +632,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			};
 			when {
 				mapModule(atlModule, qvtrTransformation);
-				if atlOperations->notEmpty()
-				then mapHelper_Operation(atlOperations->any(true)._definition?.Helper, qvtrOperation)
-				else false
-				endif;
+			--	atlOperations->notEmpty();
+				mapHelper_Operation(if atlOperations->notEmpty() then atlOperations->any(true)._definition?.Helper else null endif, qvtrOperation);
 				mapOclExpression(atlSource, qvtrSourceArgument);
 			}
 		}
