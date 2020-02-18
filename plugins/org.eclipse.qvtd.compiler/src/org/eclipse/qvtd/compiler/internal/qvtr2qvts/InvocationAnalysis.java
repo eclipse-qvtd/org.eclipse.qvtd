@@ -28,7 +28,7 @@ public interface InvocationAnalysis
 
 	/**
 	 * Return false unless a derived analysis permits an optional match.
-	 * Return false if this invocation is guaranteed to occur. i.e. a not-optional when..
+	 * Return true if this invocation is guaranteed to occur. i.e. a not-nullable, not-conditional when..
 	 */
 	boolean isOptional();
 

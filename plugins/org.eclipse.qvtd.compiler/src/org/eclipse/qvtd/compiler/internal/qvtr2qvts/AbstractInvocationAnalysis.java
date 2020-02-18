@@ -161,12 +161,9 @@ public abstract class AbstractInvocationAnalysis implements InvocationAnalysis
 		return null;
 	}
 
-	/**
-	 * Return false since all where and many when matches are optional.
-	 */
 	@Override
 	public final boolean isOptional() {
-		return utility.isNullable();
+		return utility.isNullable() || utility.isConditional();
 	}
 
 	@Override
