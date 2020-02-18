@@ -592,6 +592,19 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		mapping.getOwnedStatements().addAll(mappingStatements);
 	}
 
+	private void createAssignedValues(@NonNull Iterable<@NonNull NavigableEdge> sortedRealizedEdges) {
+		for (@NonNull NavigableEdge edge : sortedRealizedEdges) {
+			Node sourceNode = edge.getEdgeSource();
+			Node targetNode = edge.getEdgeTarget();
+			if (sourceNode.isOld() && !sourceNode.isConstant()) {
+				getVariableDeclaration(sourceNode);
+			}
+			if (targetNode.isOld() && !targetNode.isConstant()) {
+				getVariableDeclaration(targetNode);
+			}
+		}
+	}
+
 	private @NonNull CheckStatement createCheckStatement(@NonNull OCLExpression booleanExpression) {
 		CheckStatement checkStatement = helper.createCheckStatement(booleanExpression);
 		mapping.getOwnedStatements().add(checkStatement);
@@ -879,7 +892,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		oldSchedule.synthesize(checkedConditions);
 	}
 
-	private void createPropertyAssignments() {
+	private void createPropertyAssignments(@NonNull Iterable<@NonNull NavigableEdge> sortedRealizedEdges) {
 		if ("mapIntegerExp_qvtr«init»".equals(partition.getName())) {
 			getClass();
 		}
@@ -888,17 +901,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
 		}
 		Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments = null;
-		List<@NonNull NavigableEdge> navigableEdges = new ArrayList<>();
-		for (@NonNull Edge edge : partition.getPartialEdges()) {
-			if (edge.isNavigation()) {
-				Role edgeRole = partition.getRole(edge);
-				if ((edgeRole != null) && edgeRole.isRealized()) {
-					navigableEdges.add((NavigableEdge)edge);
-				}
-			}
-		}
-		Iterable<@NonNull NavigableEdge> sortedEdges = NavigationEdgeSorter.getSortedAssignments(navigableEdges);
-		for (@NonNull NavigableEdge edge : sortedEdges) {
+		for (@NonNull NavigableEdge edge : sortedRealizedEdges) {
 			if (edge instanceof NavigationEdge) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
 				Node sourceNode = edge.getEdgeSource();
@@ -948,7 +951,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			for (@NonNull List<@NonNull NavigationEdge> values : classAssignments.values()) {
 				classAssignmentEdges.addAll(values);
 			}
-			for (@NonNull NavigableEdge edge : sortedEdges) {
+			for (@NonNull NavigableEdge edge : sortedRealizedEdges) {
 				if (classAssignmentEdges.contains(edge)) {
 					createClassSetStatement(s, edge);
 				}
@@ -1158,6 +1161,19 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		return reachabilityForest;
 	}
 
+	protected @NonNull Iterable<@NonNull NavigableEdge> getSortedAssignments() {
+		List<@NonNull NavigableEdge> navigableEdges = new ArrayList<>();
+		for (@NonNull Edge edge : partition.getPartialEdges()) {
+			if (edge.isNavigation()) {
+				Role edgeRole = partition.getRole(edge);
+				if ((edgeRole != null) && edgeRole.isRealized()) {
+					navigableEdges.add((NavigableEdge)edge);
+				}
+			}
+		}
+		return NavigationEdgeSorter.getSortedAssignments(navigableEdges);
+	}
+
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return scheduleManager.getStandardLibrary();
 	}
@@ -1290,14 +1306,16 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		if ("mapNavigationOrAttributeCallExp_Helper_qvtr«init»".equals(name)) {
 			getClass();
 		}
-		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
-		createPatternMatch();						// BLUE/CYAN nodes and edges
-		createRealizedVariables();					// GREEN nodes
-		createPropertyAssignments();				// GREEN edges
-		createAddStatements();						// export to append nodes
+		createHeadAndGuardNodeVariables();				// BLUE/CYAN guard/append nodes
+		createPatternMatch();							// BLUE/CYAN nodes and edges
+		Iterable<@NonNull NavigableEdge> sortedRealizedEdges = getSortedAssignments();
+		createAssignedValues(sortedRealizedEdges);		// Reify Variables for ends of GREEN edges
+		createRealizedVariables();						// GREEN nodes
+		createPropertyAssignments(sortedRealizedEdges);	// GREEN edges
+		createAddStatements();							// export to append nodes
 		//	createRealizedIncludesAssignments();
 		checkTrace();
-		createObservedProperties();					// wrap observable clauses around hazardous accesses
+		createObservedProperties();						// wrap observable clauses around hazardous accesses
 	}
 
 	@Override

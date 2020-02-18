@@ -51,7 +51,7 @@ public class NavigationEdgeSorter
 		}
 	}
 
-	public static Iterable<@NonNull NavigableEdge> getSortedAssignments(@NonNull Iterable<@NonNull NavigableEdge> realizedNavigationEdges) {
+	public static @NonNull Iterable<@NonNull NavigableEdge> getSortedAssignments(@NonNull Iterable<@NonNull NavigableEdge> realizedNavigationEdges) {
 		NavigationEdgeSorter assignmentSorter = new NavigationEdgeSorter();
 		for (@NonNull NavigableEdge edge : realizedNavigationEdges) {
 			if (!edge.isSecondary()) {
