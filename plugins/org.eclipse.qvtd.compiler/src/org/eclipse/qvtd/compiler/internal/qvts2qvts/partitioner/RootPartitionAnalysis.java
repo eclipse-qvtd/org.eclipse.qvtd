@@ -53,7 +53,7 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<@N
 		if (TransformationPartitioner.ROOT_SCHEDULE.isActive()) {
 			CompilerUtil.traceSchedule(TransformationPartitioner.ROOT_SCHEDULE, getName(), parallelSchedule);
 		}
-		for (@NonNull Iterable<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>> concurrency : parallelSchedule) {
+		for (@NonNull Concurrency concurrency : parallelSchedule) {
 			appendConcurrency(flatPartitionSchedule, concurrency);
 		}
 		if (TransformationPartitioner.PARALLEL_SCHEDULE.isActive()) {
