@@ -591,6 +591,8 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//
 		List<@NonNull Edge> reachingInitEdges = new ArrayList<>();
 		UniqueList<@NonNull Edge> cyclicInitEdges = null;
+		List<@NonNull Edge> coCyclicInitEdges = null;
+		UniqueList<@NonNull Node> coCyclicInitNodes = null;
 		for (@NonNull Edge edge : originalEdges) {
 			if (basicGetPartitionFactory(edge) != null) {
 				reachingInitEdges.add(edge);
@@ -605,12 +607,39 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 							cyclicInitEdges = new UniqueList<>();
 						}
 						cyclicInitEdges.add(edge);
+						if (edge.isSuccess()) {		// FIXME and TRUE
+							Node invokedNode = QVTscheduleUtil.getSourceNode(edge);
+							for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(invokedNode)) {
+								if ((outgoingEdge != edge) && outgoingEdge.isPredicated() && outgoingEdge.isNavigable()) {
+									List<@NonNull Region> corollaryOf = transformationAnalysis.getCorollaryOf((NavigationEdge) outgoingEdge);
+									if (corollaryOf != null) {
+										if (coCyclicInitEdges == null) {
+											coCyclicInitEdges = new ArrayList<>();
+										}
+										assert !coCyclicInitEdges.contains(outgoingEdge);
+										coCyclicInitEdges.add(outgoingEdge);
+										//	NavigationEdge oppositeEdge = ((NavigationEdge)outgoingEdge).getOppositeEdge();
+										//	assert (oppositeEdge != null) && !coCyclicInitEdges.contains(oppositeEdge);
+										//	coCyclicInitEdges.add(oppositeEdge);
+										Node corollaryNode = QVTscheduleUtil.getTargetNode(outgoingEdge);
+										if (coCyclicInitNodes == null) {
+											coCyclicInitNodes = new UniqueList<>();
+										}
+										assert !coCyclicInitNodes.contains(corollaryNode);
+										coCyclicInitNodes.add(corollaryNode);
+									}
+								}
+							}
+						}
 					}
 				}
 				if (!isCyclic) {
 					reachingInitEdges.add(edge);
 				}
 			}
+		}
+		if (coCyclicInitEdges != null) {
+			reachingInitEdges.removeAll(coCyclicInitEdges);
 		}
 		UniqueList<@NonNull Node> cyclicInitNodes = null;
 		UniqueList<@NonNull Node> reachingInitNodes = null;
@@ -643,7 +672,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		ReachabilityForest initReachabilityForest1 = new ReachabilityForest("init", reachingInitNodes != null ? reachingInitNodes : thisAndTraceAndConstantSourceNodes, reachingInitEdges);
 		List<@NonNull Node> novelInitNodes1 = null;
 		for (@NonNull Node node : initReachabilityForest1.getMostReachableFirstNodes()) {
-			if ((basicGetPartitionFactory(node) == null) && !Iterables.contains(thisAndTraceNodes, node)) {
+			if ((basicGetPartitionFactory(node) == null) && !Iterables.contains(thisAndTraceNodes, node) && ((coCyclicInitNodes == null) || !coCyclicInitNodes.contains(node))) {
 				if (novelInitNodes1 == null) {
 					novelInitNodes1 = new ArrayList<>();
 				}
