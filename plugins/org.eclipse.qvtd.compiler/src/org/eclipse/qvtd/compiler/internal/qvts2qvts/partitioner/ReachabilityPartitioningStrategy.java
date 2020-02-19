@@ -401,6 +401,23 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		}
 	}
 
+	protected static class XtraPartitionFactory extends AbstractReachabilityPartitionFactory
+	{
+		protected XtraPartitionFactory(@NonNull ReachabilityPartitioningStrategy strategy, @NonNull ReachabilityForest reachabilityForest,
+				@NonNull Iterable<@NonNull ? extends Node> headNodes, @NonNull Iterable<@NonNull ? extends Node> novelNodes, @NonNull Iterable<@NonNull ? extends Edge> novelEdges) {
+			super(strategy, reachabilityForest, headNodes, novelNodes, novelEdges);
+			initPartitionFactory();
+		}
+
+		@Override
+		protected @NonNull Role resolveNodeRole(@NonNull Node node) {
+			if (node instanceof SuccessNode) {
+				return Role.CONSTANT_SUCCESS_TRUE;
+			}
+			return super.resolveNodeRole(node);
+		}
+	}
+
 	/**
 	 * The region to be partitioned,
 	 */
@@ -577,7 +594,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		}
 	}
 
-	private void createInitPartitionFactory() {
+	private @Nullable Set<@NonNull Node> createInitPartitionFactory() {
 		//
 		//	Create the InitPartitionFactory for acyclic elements that precede the cycle.
 		//
@@ -706,6 +723,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 			}
 			new InitPartitionFactory(this, initReachabilityForest1, thisAndTraceNodes, novelInitNodes1);
 		}
+		return coCyclicInitNodes;
 	}
 
 	/**
@@ -856,22 +874,39 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		newPartitionAnalyses.add(new NonPartitionFactory(mappingPartitioner).createPartitionAnalysis(partitionedTransformationAnalysis));
 	}
 
-	private void createRestPartitionFactory() {
-		if ("FtoN1_Family2SurnameContainment".equals(region.getName())) {
+	private @Nullable Iterable<@NonNull Node> createRestPartitionFactory(@Nullable Set<@NonNull Node> coCyclicInitNodes) {
+		if ("mapIfExp_qvtr".equals(region.getName())) {
 			getClass();
 		}
 		//
 		//	Create RestPartitionFactory to progress the remaining realized edges.
 		//
 		List<@NonNull Edge> novelRestEdges = null;
+		List<@NonNull Node> extraRestNodes = null;
 		for (@NonNull Edge edge : originalEdges) {
 			if (edge.isNavigable()) {
 				NavigationEdge navigationEdge = (NavigationEdge) edge;
 				if (edge.isRealized() && (basicGetPartitionFactory(edge) == null)) {
-					if (novelRestEdges == null) {
-						novelRestEdges = new ArrayList<>();
+					boolean assignIt = false;
+					Node realizedTarget = QVTscheduleUtil.getTargetNode(navigationEdge);
+					if (!realizedTarget.isPredicated() || (basicGetPartitionFactory(realizedTarget) != null)) {
+						assignIt = true;
 					}
-					novelRestEdges.add(navigationEdge);
+					else if ((coCyclicInitNodes != null) && coCyclicInitNodes.contains(realizedTarget)) {
+						assignIt = true;
+					}
+					else {
+						if (extraRestNodes == null) {
+							extraRestNodes = new ArrayList<>();
+						}
+						extraRestNodes.add(realizedTarget);
+					}
+					if (assignIt) {
+						if (novelRestEdges == null) {
+							novelRestEdges = new ArrayList<>();
+						}
+						novelRestEdges.add(navigationEdge);
+					}
 				}
 			}
 		}
@@ -894,6 +929,37 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 			ReachabilityForest restReachabilityForest = new ReachabilityForest("rest", thisAndTraceAndConstantSourceNodes, reachingRestEdges);
 			new RestPartitionFactory(this, restReachabilityForest, thisAndTraceNodes, novelRestNodes, novelRestEdges);
 		}
+		return extraRestNodes;
+	}
+
+	private void createXtraPartitionFactory(@NonNull Iterable<@NonNull Node> xtraRestNodes) {
+		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(region.getName())) {
+			getClass();
+		}
+		//
+		//	Create XtraPartitionFactory to progress the remaining realized edges.
+		//
+		List<@NonNull Edge> novelXtraEdges = new ArrayList<>();
+		List<@NonNull Edge> reachingXtraEdges = new ArrayList<>();
+		for (@NonNull Edge edge : originalEdges) {
+			if (basicGetPartitionFactory(edge) == null) {
+				novelXtraEdges.add(edge);
+				if (edge.isOld()) {
+					reachingXtraEdges.add(edge);
+				}
+			}
+			else {
+				reachingXtraEdges.add(edge);
+			}
+		}
+		List<@NonNull Node> novelXtraNodes = new ArrayList<>();
+		for (@NonNull Node node : originalNodes) {
+			if (basicGetPartitionFactory(node) == null) {
+				novelXtraNodes.add(node);
+			}
+		}
+		ReachabilityForest xtraReachabilityForest = new ReachabilityForest("xtra", thisAndTraceAndConstantSourceNodes, reachingXtraEdges);
+		new XtraPartitionFactory(this, xtraReachabilityForest, thisAndTraceNodes, novelXtraNodes, novelXtraEdges);
 	}
 
 	private @NonNull SuccessNode getLocalSuccessNode() {
@@ -926,16 +992,19 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 	@Override
 	public @NonNull Iterable<@NonNull PartitionAnalysis> partition() {
 		String name = regionAnalysis.getName();
-		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(name)) {
+		if ("mapHelper_Attribute_qvtr".equals(name)) {
 			getClass();
 		}
 		//
 		//	Create the PartitionFactories.
 		//
 		createCtorPartitionFactory();
-		createInitPartitionFactory();
+		@Nullable Set<@NonNull Node> coCyclicInitNodes = createInitPartitionFactory();
 		createLoopPartitionFactory();
-		createRestPartitionFactory();
+		@Nullable Iterable<@NonNull Node> extraRestNodes = createRestPartitionFactory(coCyclicInitNodes);
+		if (extraRestNodes != null) {
+			createXtraPartitionFactory(extraRestNodes);
+		}
 		//
 		//	Create the partitions.
 		//
