@@ -137,6 +137,16 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 			return true;
 		}
 
+		private void addReachableEdgeAndOpposite(@NonNull Edge reachingEdge) {
+			addReachableEdge(reachingEdge);
+			if (reachingEdge.isNavigable()) {
+				Edge oppositeEdge = ((NavigationEdge)reachingEdge).getOppositeEdge();
+				if (oppositeEdge != null) {
+					addReachableEdge(oppositeEdge);
+				}
+			}
+		}
+
 		/**
 		 * Add node and all transitively preceding nodes to the partition.
 		 *
@@ -154,10 +164,9 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 			return true;
 		}
 
-		public boolean containsNode(@NonNull Node node) {
-			return reachableNodes.contains(node);
-		}
-
+		/**
+		 * Create the partition and populate it with the edges and nodes identified by the reaachableEdges and reachableNodes.
+		 */
 		@Override
 		public @NonNull PartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 			//	Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
@@ -214,6 +223,27 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 							addPredecessor(sourcePartitionFactory);
 						}
 					}
+				}
+			}
+		}
+
+		protected void initPartitionFactoryAsJustReachables() {
+			//
+			//	Grow the edges to include all necessary reaching edges.
+			//
+			for (int i = 0; i < reachableNodes.size(); i++) {
+				Node node = reachableNodes.get(i);
+				for (@NonNull Edge reachingEdge : reachabilityForest.getReachingEdges(node)) {
+					addReachableEdgeAndOpposite(reachingEdge);
+				}
+			}
+			for (int i = 0; i < reachableEdges.size(); i++) {
+				Edge edge = reachableEdges.get(i);
+				for (@NonNull Edge reachingEdge : reachabilityForest.getReachingEdges(QVTscheduleUtil.getSourceNode(edge))) {
+					addReachableEdgeAndOpposite(reachingEdge);
+				}
+				for (@NonNull Edge reachingEdge : reachabilityForest.getReachingEdges(QVTscheduleUtil.getTargetNode(edge))) {
+					addReachableEdgeAndOpposite(reachingEdge);
 				}
 			}
 		}
@@ -393,6 +423,11 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		}
 
 		@Override
+		protected void initPartitionFactory() {
+			initPartitionFactoryAsJustReachables();
+		}
+
+		@Override
 		protected @NonNull Role resolveNodeRole(@NonNull Node node) {
 			if (node instanceof SuccessNode) {
 				return Role.CONSTANT_SUCCESS_TRUE;
@@ -407,6 +442,11 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 				@NonNull Iterable<@NonNull ? extends Node> headNodes, @NonNull Iterable<@NonNull ? extends Node> novelNodes, @NonNull Iterable<@NonNull ? extends Edge> novelEdges) {
 			super(strategy, reachabilityForest, headNodes, novelNodes, novelEdges);
 			initPartitionFactory();
+		}
+
+		@Override
+		protected void initPartitionFactory() {
+			initPartitionFactoryAsJustReachables();
 		}
 
 		@Override
@@ -992,7 +1032,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 	@Override
 	public @NonNull Iterable<@NonNull PartitionAnalysis> partition() {
 		String name = regionAnalysis.getName();
-		if ("mapHelper_Attribute_qvtr".equals(name)) {
+		if ("mapIfExp_qvtr".equals(name)) {
 			getClass();
 		}
 		//

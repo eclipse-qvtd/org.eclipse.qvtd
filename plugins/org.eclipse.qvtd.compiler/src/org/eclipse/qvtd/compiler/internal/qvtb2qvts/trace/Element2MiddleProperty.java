@@ -60,9 +60,6 @@ public abstract class Element2MiddleProperty implements Nameable
 		this.nameHint = nameHint;
 		this.type = type;
 		this.isRequired = isRequired;
-		if ("welement2element".equals(nameHint)) {
-			getClass();
-		}
 	}
 
 	protected abstract @NonNull Property createTraceProperty();

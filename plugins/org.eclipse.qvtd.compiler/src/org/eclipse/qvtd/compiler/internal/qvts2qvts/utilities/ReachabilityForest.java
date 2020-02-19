@@ -549,7 +549,7 @@ public class ReachabilityForest
 	}
 
 	/**
-	 * Return the closure of the reachingEdges source nodes.
+	 * Return the closure of the reachingEdges source nodes in no particular order, excluyding the targetNode.
 	 */
 	public @NonNull Iterable<@NonNull Node> getPredecessorsClosure(@NonNull Node targetNode) {
 		Set<@NonNull Node> precedingNodes = new HashSet<>();
