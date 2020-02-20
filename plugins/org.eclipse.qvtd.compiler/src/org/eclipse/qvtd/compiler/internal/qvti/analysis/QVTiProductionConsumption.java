@@ -635,16 +635,22 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		private void validateNotifies(@Nullable StringBuilder s, @NonNull AccessAnalysis producingAnalysis) {
 			List<@NonNull ConnectionAnalysis> connectionAnalyses = producingAnalysis2connectionAnalyses.get(producingAnalysis);
 			if (connectionAnalyses != null) {				// consumption is optional (may be produced only for output)
-				PassRange productionPassRange = new PassRange();
-				PassRange consumptionPassRange = new PassRange();
+				PassRange overallProductionPassRange = new PassRange();
+				PassRange overallConsumptionPassRange = new PassRange();
+				boolean needsNotify = false;
 				for (@NonNull ConnectionAnalysis connectionAnalysis : connectionAnalyses) {
-					productionPassRange = productionPassRange.max(connectionAnalysis.getProductionPassRange());
-					consumptionPassRange = consumptionPassRange.max(connectionAnalysis.getConsumptionPassRange());
+					PassRange productionPassRange = connectionAnalysis.getProductionPassRange();
+					PassRange consumptionPassRange = connectionAnalysis.getConsumptionPassRange();
+					if (!productionPassRange.precedes(consumptionPassRange)) {
+						needsNotify = true;
+					}
+					overallProductionPassRange = overallProductionPassRange.max(productionPassRange);
+					overallConsumptionPassRange = overallConsumptionPassRange.max(consumptionPassRange);
 				}
 				//
 				//	NB. If any consumption observes, all productions must notify.
 				//
-				boolean needsNotify = !productionPassRange.precedes(consumptionPassRange);
+				//	boolean needsNotify = !productionPassRange.precedes(consumptionPassRange);
 				for (@NonNull NamedElement producer : producingAnalysis.producers) {
 					if (!(producer instanceof GuardParameter)) {			// GuardParameter are implicitly notified; no need to check
 						boolean isNotify = isNotify(producer);
@@ -654,13 +660,13 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 							sProblem.append("The production of: ");
 							sProblem.append(PrettyPrinter.print(property));
 							sProblem.append("\n\tat ");
-							sProblem.append(productionPassRange);
+							sProblem.append(overallProductionPassRange);
 							sProblem.append(" should");
 							if (isNotify) {
 								sProblem.append(" not");
 							}
 							sProblem.append(" be notified for use at ");
-							sProblem.append(consumptionPassRange);
+							sProblem.append(overallConsumptionPassRange);
 							Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
 							compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
 							if (s != null) {
