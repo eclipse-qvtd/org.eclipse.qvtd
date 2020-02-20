@@ -515,6 +515,11 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 	private @Nullable SuccessEdge localSuccessEdge = null;
 	private @Nullable SuccessNode localSuccessNode = null;
 
+	/**
+	 * The realized success of the dispatch node, if any.
+	 */
+	private @Nullable Edge dispatchSuccessEdge = null;
+
 	//	private @Nullable List<@NonNull Node> constantSourceNodes;
 
 	private @NonNull List<@NonNull Node> thisAndTraceAndConstantSourceNodes = new ArrayList<>();
@@ -530,6 +535,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		SuccessNode globalSuccessNode = null;
 		Node thisNode = null;
 		Node traceNode = null;
+		Node dispatchNode = null;
 		for (@NonNull Node node : originalNodes) {
 			if (node.isThis()) {
 				assert thisNode == null : "Only one this node permitted in " + region.getName();
@@ -540,6 +546,10 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 				assert traceNode == null : "Only one trace node permitted in " + region.getName();
 				traceNode = node;
 				thisAndTraceAndConstantSourceNodes.add(node);
+			}
+			else if (node.isDispatch()) {
+				assert dispatchNode == null : "Only one dispatch node permitted in " + region.getName();
+				dispatchNode = node;
 			}
 			else if (node.isSuccess()) {
 				assert globalSuccessNode == null : "Only one success node permitted in " + region.getName();
@@ -555,6 +565,13 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		assert traceNode != null : "No trace node in " + region.getName();
 		//	this.traceNode = traceNode;
 		this.thisAndTraceNodes = thisNode != null ? Lists.newArrayList(thisNode, traceNode) : Collections.singletonList(traceNode);
+		if (dispatchNode != null) {
+			for (@NonNull Edge edge : dispatchNode.getOutgoingEdges()) {
+				if (edge.isSuccess() && edge.isRealized()) {
+					this.dispatchSuccessEdge = edge;
+				}
+			}
+		}
 	}
 
 	private void addEdge(@NonNull AbstractReachabilityPartitionFactory partitionFactory, @NonNull Edge edge) {
@@ -866,6 +883,9 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		}
 		if (localSuccessEdge != null) {
 			reachingLoopEdges.add(localSuccessEdge);
+			if (dispatchSuccessEdge != null) {
+				reachingLoopEdges.add(dispatchSuccessEdge);
+			}
 		}
 		//
 		//	Determine the novel nodes for the LoopPartitionFactory.
