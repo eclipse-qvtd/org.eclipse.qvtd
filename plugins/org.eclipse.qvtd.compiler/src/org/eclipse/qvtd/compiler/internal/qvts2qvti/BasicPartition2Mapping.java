@@ -240,7 +240,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			}
 			//
 			//	Speculated edges must participate in a global decision before anything else is done.
-			//
+			/*
 			Iterable<@NonNull SuccessEdge> speculatedEdges = checkedConditionAnalysis.getSpeculatedEdges();
 			if (speculatedEdges != null) {
 				for (@NonNull SuccessEdge speculatedEdge : speculatedEdges) {		// Ensure that all speculated objects are located
@@ -249,7 +249,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				for (@NonNull SuccessEdge speculatedEdge : speculatedEdges) {		// then traverse the speculated properties all in sequence
 					addEdge(speculatedEdge);
 				}
-			}
+			} */
 			Set<@NonNull CheckedCondition> checkedConditions = checkedConditionAnalysis.computeCheckedConditions();
 			int checkableSize = checkedConditions.size();
 			//			if (checkableSize > 0) {
@@ -275,6 +275,19 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				}
 			}
 			//			}
+			//
+			//	Speculated edges must participate in a global decision before anything else is done.
+			//
+			Iterable<@NonNull SuccessEdge> speculatedEdges = checkedConditionAnalysis.getSpeculatedEdges();
+			if (speculatedEdges != null) {
+				for (@NonNull SuccessEdge speculatedEdge : speculatedEdges) {		// Ensure that all speculated objects are located
+					addNode(QVTscheduleUtil.getSourceNode(speculatedEdge));
+				}
+				for (@NonNull SuccessEdge speculatedEdge : speculatedEdges) {		// then traverse the speculated properties all in sequence
+					addEdge(speculatedEdge);
+				}
+			}
+			//
 			List<@NonNull Edge> residualEdges = null;
 			for (@NonNull Edge edge : checkedConditionAnalysis.getOldUnconditionalEdges()) {
 				if (residualEdges == null) {
@@ -515,6 +528,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		if (s != null) {
 			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
 		}
+		if ("mapOperationCallExp_Helper_qvtr«init»".equals(partition.getName())) {
+			getClass();
+		}
 		checkedConditionAnalysis.computeCheckedPropertyDatums(s);
 		if (s != null) {
 			TransformationPartitioner.PROPERTY_OBSERVE.println(s.toString());
@@ -659,7 +675,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				assert !isPartial;
 				//	assert !isNotify;
 				NewStatement newStatement = (NewStatement)slotVariable;
-				NewStatementPart newStatementPart = helper.createNewStatementPart(setProperty, valueExpression);
+				NewStatementPart newStatementPart = helper.createNewStatementPart(setProperty, valueExpression); //, isNotify);
 				newStatement.getOwnedParts().add(newStatementPart);
 				addTrace(newStatementPart, edge);
 			}
@@ -817,12 +833,15 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	private void createObservedProperties() {
+		if ("mapOperationCallExp_Helper_qvtr«init»".equals(partition.getName())) {
+			getClass();
+		}
 		Set<@NonNull PropertyDatum> allCheckedPropertyDatums = checkedConditionAnalysis.getAllCheckedPropertyDatums();
 		if (!allCheckedPropertyDatums.isEmpty()) {		// FIXME Use PropertyDatum to handle derived accesses
-			Set<@NonNull Property> allCheckedProperties = new HashSet<>();
-			for (@NonNull PropertyDatum propertyDatum : allCheckedPropertyDatums) {
-				allCheckedProperties.add(QVTscheduleUtil.getReferredProperty(propertyDatum));
-			}
+			//	Set<@NonNull Property> allCheckedProperties = new HashSet<>();
+			//	for (@NonNull PropertyDatum propertyDatum : allCheckedPropertyDatums) {
+			//		allCheckedProperties.add(QVTscheduleUtil.getReferredProperty(propertyDatum));
+			//	}
 			//
 			// Ideally we could install each observed property as it is actually used. But
 			// this needs to be coded in many places.
@@ -835,11 +854,14 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 							boolean allCheckedPropertyDatumsContainsPropertyDatum = false;
 							NavigationCallExp navigationCallExp = (NavigationCallExp) eObject;
 							Property property = PivotUtil.getReferredProperty(navigationCallExp);
-							for (@NonNull GraphElement graphElement : getTrace(navigationCallExp)) {			// Only one in parctice
+							for (@NonNull GraphElement graphElement : getTrace(navigationCallExp)) {			// Only one in practice
 								if (graphElement instanceof NavigationEdge) {					// Always NavigationEdge
 									for (@NonNull PropertyDatum propertyDatum : scheduleManager.getPropertyDatums((NavigationEdge)graphElement)) {
 										if (allCheckedPropertyDatums.contains(propertyDatum)) {
 											allCheckedPropertyDatumsContainsPropertyDatum = true;
+											// FIXME check timing
+											int earliestConsumption = mapping.getFirstPass();
+											//											connectionManager.get
 										}
 									}
 								}
