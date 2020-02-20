@@ -1013,6 +1013,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 			}
 		}
 		List<@NonNull Node> novelXtraNodes = new ArrayList<>();
+		novelXtraNodes.add(globalSuccessNode);
 		for (@NonNull Node node : originalNodes) {
 			if (basicGetPartitionFactory(node) == null) {
 				novelXtraNodes.add(node);
