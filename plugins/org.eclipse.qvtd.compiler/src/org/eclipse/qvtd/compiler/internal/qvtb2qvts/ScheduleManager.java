@@ -104,6 +104,7 @@ public interface ScheduleManager
 	@NonNull RootDomainUsageAnalysis getDomainUsageAnalysis();
 	@NonNull DomainUsage getDomainUsage(@NonNull Element element);
 	@NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatum classDatum);
+	@NonNull ClassDatum getElementalTargetClassDatum(@NonNull PropertyDatum propertyDatum);
 	@NonNull EnvironmentFactory getEnvironmentFactory();
 	@NonNull ScheduleManager getMultipleScheduleManager();
 	@NonNull NameGenerator getNameGenerator();

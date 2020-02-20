@@ -27,7 +27,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -244,7 +243,7 @@ public class OriginalContentsAnalysis
 	 * FIXME In the event that the ends of the realized edges are realized variables, we do know the precise
 	 * type and could filter accordingly; a not-yet-exploited optimisation.
 	 */
-	private @Nullable Iterable<@NonNull NavigableEdge> getCompositeNewEdges(@NonNull NavigableEdge predicatedEdge) {
+	private @Nullable Iterable<@NonNull NavigableEdge> getCompositeNewEdges() {
 		Set<@NonNull NavigableEdge> realizedEdges = null;
 		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> entry : basePropertyDatum2newEdges.entrySet()) {
 			Property property = entry.getKey().getReferredProperty();
@@ -348,64 +347,70 @@ public class OriginalContentsAnalysis
 		return newNodes;
 	}
 
-	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
+	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge) {
 		if (edge instanceof NavigationEdge) {
 			Property property = QVTscheduleUtil.getReferredProperty((NavigationEdge)edge);
 			if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
 				return null;
 			}
 			if (property == oclContainerProperty) {
-				return getCompositeNewEdges(edge);
+				return getCompositeNewEdges();
 			}
-			Iterable<@NonNull NavigableEdge> realizedEdges = null;
 			PropertyDatum propertyDatum = getPropertyDatum((NavigationEdge) edge);
-			PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
-			//		if (propertyDatum == null) {
-			//			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
-			//		}
-			//		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
-			//			return null;
-			//		}
-			realizedEdges = basePropertyDatum2newEdges.get(basePropertyDatum);
-			if (realizedEdges == null) {
-				return null;
-			}
-			List<@NonNull NavigableEdge> conformantRealizedEdges = null;
-			for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-				boolean matches = false;
-				if (realizedEdge.isNavigation()) {
-					NavigationEdge realizedNavigationEdge = (NavigationEdge)realizedEdge;
-					Property realizedProperty = QVTscheduleUtil.getReferredProperty(realizedNavigationEdge);
-					if (realizedProperty != property) {
-						assert realizedProperty.getOpposite() == property;
-						matches = true;
-					}
-					else {
-						Node targetNode = realizedEdge.getEdgeTarget();
-						ClassDatum realizedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, requiredClassDatum)) {
-							matches = true;
-						}
-						else if (requiredClassDatum.isCollectionType()) {
-							if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, QVTscheduleUtil.getElementalClassDatum(((CollectionClassDatum)requiredClassDatum)))) {
-								matches = true;
-							}
-						}
-					}
-					if (matches) {
-						if (conformantRealizedEdges == null) {
-							conformantRealizedEdges = new ArrayList<>();
-						}
-						conformantRealizedEdges.add(realizedEdge);
-					}
-				}
-			}
-			return conformantRealizedEdges;
+			return getNewEdges(propertyDatum);
 		}
 		else {
 			// FIXME SharedEdge
 			return null;
 		}
+	}
+
+	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull PropertyDatum propertyDatum) {
+		ClassDatum elementalTargetClassDatum = scheduleManager.getElementalTargetClassDatum(propertyDatum);
+		Property property = propertyDatum.getReferredProperty();
+		Iterable<@NonNull NavigableEdge> realizedEdges;
+		PropertyDatum basePropertyDatum = scheduleManager.getBasePropertyDatum(propertyDatum);
+		//		if (propertyDatum == null) {
+		//			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
+		//		}
+		//		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
+		//			return null;
+		//		}
+		realizedEdges = basePropertyDatum2newEdges.get(basePropertyDatum);
+		if (realizedEdges == null) {
+			return null;
+		}
+		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
+		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
+			boolean matches = false;
+			if (realizedEdge.isNavigation()) {
+				NavigationEdge realizedNavigationEdge = (NavigationEdge)realizedEdge;
+				Property realizedProperty = QVTscheduleUtil.getReferredProperty(realizedNavigationEdge);
+				if (realizedProperty != property) {
+					assert realizedProperty.getOpposite() == property;
+					matches = true;
+				}
+				else {
+					Node targetNode = realizedEdge.getEdgeTarget();
+					ClassDatum realizedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
+					if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, elementalTargetClassDatum)) {
+						matches = true;
+					}
+					//	else if (requiredClassDatum.isCollectionType()) {
+					//		if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, QVTscheduleUtil.getElementalClassDatum(((CollectionClassDatum)requiredClassDatum)))) {
+					//			matches = true;
+					//		}
+					//	}
+				}
+				if (matches) {
+					if (conformantRealizedEdges == null) {
+						conformantRealizedEdges = new ArrayList<>();
+					}
+					conformantRealizedEdges.add(realizedEdge);
+				}
+			}
+		}
+		return conformantRealizedEdges;
 	}
 
 	/*	public @Nullable Iterable<@NonNull NavigableEdge> getNewInverseEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {

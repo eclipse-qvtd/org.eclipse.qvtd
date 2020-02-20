@@ -188,7 +188,7 @@ public class ConnectionManager
 				Property predicatedProperty = QVTscheduleUtil.getReferredProperty(predicatedNavigationEdge);
 				assert !predicatedProperty.isIsImplicit();
 				assert classDatum.isDataType();
-				Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge, classDatum);
+				Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge);
 				if (realizedEdges != null) {
 					ClassDatum predicatedSourceClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getSourceNode(predicatedEdge));
 					ClassDatum predicatedTargetClassDatum = QVTscheduleUtil.getClassDatum(QVTscheduleUtil.getTargetNode(predicatedEdge));
@@ -279,8 +279,7 @@ public class ConnectionManager
 			boolean isDataType = classDatum.isDataType();
 			assert !isDataType;
 			Iterable<@NonNull Node> sourceNodes = getNewNodes(classDatum);
-			//			if (sourceNodes != null) {
-			Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge, classDatum);
+			Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge);
 			if (realizedEdges != null) {
 				Set<@NonNull Region> edgeSourceRegions = new HashSet<>();
 				Set<@NonNull Region> nodeSourceRegions = new HashSet<>();
@@ -847,9 +846,13 @@ public class ConnectionManager
 		return loopingConnections;
 	}
 
-	private @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
-		return originalContentsAnalysis.getNewEdges(edge, requiredClassDatum);
+	private @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge) {
+		return originalContentsAnalysis.getNewEdges(edge);
 	}
+
+	//	private @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull PropertyDatum propertyDatum) {
+	//		return originalContentsAnalysis.getNewEdges(propertyDatum);
+	//	}
 
 	//	private @Nullable Iterable<@NonNull NavigableEdge> getNewInverseEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
 	//		return originalContentsAnalysis.getNewInverseEdges(edge, requiredClassDatum);

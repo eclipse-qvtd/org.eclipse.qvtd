@@ -164,6 +164,11 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
+	public @NonNull ClassDatum getElementalTargetClassDatum(@NonNull PropertyDatum propertyDatum) {
+		return datumCaches.getElementalTargetClassDatum(propertyDatum);
+	}
+
+	@Override
 	public @NonNull Property getIterateProperty(@NonNull Type type) {
 		Property iterateProperty = type2iterateProperty.get(type);
 		if (iterateProperty == null) {

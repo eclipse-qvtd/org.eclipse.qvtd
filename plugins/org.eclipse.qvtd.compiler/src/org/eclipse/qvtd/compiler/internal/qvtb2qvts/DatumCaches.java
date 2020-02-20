@@ -358,6 +358,24 @@ public class DatumCaches
 		return completeModel.getCompleteClass(type);
 	}
 
+	public @NonNull ClassDatum getElementalTargetClassDatum(@NonNull PropertyDatum propertyDatum) {		// FIXME This recovery of the pragmatically null PropertyDatum::targetClassDatum could be redundangt
+		ClassDatum targetClassDatum = propertyDatum.getTargetClassDatum();
+		if (targetClassDatum == null) {
+			Property property = QVTscheduleUtil.getReferredProperty(propertyDatum);
+			Type type = QVTbaseUtil.getType(property);
+			if (property.isIsMany()) {
+				//	CollectionTypeParameters<@NonNull Type> typeParameters = TypeUtil.createCollectionTypeParameters(type, isNullFree, property.get, upper);
+				//	return completeClass.getCollectionType(typeParameters);
+				getClass();
+			}
+			TypedModel typedModel = domainUsageAnalysis.getUsage(property).getTypedModel(propertyDatum);
+			assert typedModel != null;
+			CompleteClass completeClass = completeModel.getCompleteClass(type);
+			targetClassDatum = getClassDatum(typedModel, completeClass);
+		}
+		return targetClassDatum;
+	}
+
 	public @NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum containedClassDatum) {
 		List<@NonNull PropertyDatum> oclContainerPropertyDatums = classDatum2oclContainerPropertyDatums.get(containedClassDatum);
 		if (oclContainerPropertyDatums == null) {
