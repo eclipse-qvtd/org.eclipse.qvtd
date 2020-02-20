@@ -1041,7 +1041,7 @@ public class ConnectionManager
 				s.append(" <=> " + oppositeProperty.getOwningClass().getName() + "::" + oppositeProperty.getName());
 			}
 		}
-		return lastProduction >= firstConsumption;
+		return (lastProduction >= 0) && (lastProduction >= firstConsumption);
 	}
 
 	public boolean isHazardousWrite(@Nullable StringBuilder s, @NonNull NavigationEdge edge) {
@@ -1086,7 +1086,7 @@ public class ConnectionManager
 				s.append(" <=> " + oppositeProperty.getOwningClass().getName() + "::" + oppositeProperty.getName());
 			}
 		}
-		return lastProduction >= firstConsumption;
+		return (lastProduction >= 0) && (lastProduction >= firstConsumption);
 	}
 
 	public void mergePartitionsInto(@NonNull MergedPartition newPartition, @NonNull Iterable<@NonNull BasicPartitionAnalysis> oldPartitionAnalyses) {
