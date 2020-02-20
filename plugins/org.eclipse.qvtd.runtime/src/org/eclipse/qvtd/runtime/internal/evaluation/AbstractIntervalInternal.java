@@ -31,6 +31,8 @@ import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
 import org.eclipse.qvtd.runtime.evaluation.SlotState.Speculating;
 
+import com.google.common.collect.Iterables;
+
 /**
  * AbstractIntervalInternal provides the shared implementation of the intrusive blocked/waiting linked list functionality.
  */
@@ -167,23 +169,23 @@ public abstract class AbstractIntervalInternal implements Interval
 
 	@Override
 	public boolean flush() {
-		while (headConnection != null) {
-			AbstractConnection nextConnection2;
-			synchronized(this) {
-				nextConnection2 = headConnection;
-				if (nextConnection2 != null) {
-					headConnection = nextConnection2.getNextConnection();
-					if (headConnection == null) {
-						tailConnection = null;
+		do {
+			while (headConnection != null) {
+				AbstractConnection nextConnection2;
+				synchronized(this) {
+					nextConnection2 = headConnection;
+					if (nextConnection2 != null) {
+						headConnection = nextConnection2.getNextConnection();
+						if (headConnection == null) {
+							tailConnection = null;
+						}
+						nextConnection2.resetQueued();
 					}
-					nextConnection2.resetQueued();
+				}
+				if (nextConnection2 != null) {
+					nextConnection2.propagate();
 				}
 			}
-			if (nextConnection2 != null) {
-				nextConnection2.propagate();
-			}
-		}
-		while (waitingInvocations != null) {								// Outer loop resumes after speculations
 			while (waitingInvocations != null) {							// Inner loop does the normal work
 				AbstractInvocationInternal invocation = null;
 				synchronized (this) {
@@ -218,7 +220,7 @@ public abstract class AbstractIntervalInternal implements Interval
 					}
 				}
 			}
-			while (speculatableInvocations != null) {							// Inner 'loop' converts a speculation to normal work
+			if ((headConnection == null) && (speculatableInvocations != null)) {
 				AbstractInvocationInternal speculatableInvocation = null;
 				synchronized (this) {
 					AbstractInvocationInternal speculatableInvocations2 = speculatableInvocations;
@@ -239,12 +241,12 @@ public abstract class AbstractIntervalInternal implements Interval
 					assert blockedBy != null;
 					if (speculate(blockedBy)) {
 						assert waitingInvocations != null;
-						break;		// To execute the now-waiting invocation
+						//	break;		// To execute the now-waiting invocation
 					}
 					// ?? set speculation failed
 				}
 			}
-		}
+		} while ((headConnection != null) || (waitingInvocations != null) || (speculatableInvocations != null));
 		AbstractInvocationInternal blockedInvocation = blockedInvocations;
 		if (blockedInvocation == null) {
 			return true;
@@ -447,7 +449,8 @@ public abstract class AbstractIntervalInternal implements Interval
 				aSpeculatable.setSpeculated(false);
 			}
 			else {
-				//	aSpeculatable.unblock();
+				aSpeculatable.setSpeculated(true);
+				//	aSpeculatable.unblock2();
 			}
 			//	aSpeculatable.assigned(null, null, Boolean.FALSE, false);
 			return status.booleanValue();
@@ -475,8 +478,12 @@ public abstract class AbstractIntervalInternal implements Interval
 		if (!inputSpeculatablesClosure.add(aSpeculatable)) {
 			return null;
 		}
+		Iterable<@NonNull Speculating> inputs = aSpeculatable.getInputs();
+		if (Iterables.isEmpty(inputs)) {
+			return null;
+		}
 		boolean alreadySuccessful = true;
-		for (SlotState.@NonNull Speculating inputSpeculatable : aSpeculatable.getInputs()) {
+		for (SlotState.@NonNull Speculating inputSpeculatable : inputs) {
 			Boolean inputStatus = speculate(inputSpeculatable, inputSpeculatablesClosure);
 			if (inputStatus != Boolean.TRUE) {
 				if (inputStatus == Boolean.FALSE) {
