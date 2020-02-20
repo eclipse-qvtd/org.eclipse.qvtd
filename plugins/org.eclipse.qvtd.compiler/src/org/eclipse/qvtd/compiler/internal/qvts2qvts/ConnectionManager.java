@@ -294,37 +294,37 @@ public class ConnectionManager
 				//
 				// Create an EdgeConnection for the edge realizations unless all edges are sources by node sources.
 				//
-				if (!nodeSourceRegions.containsAll(edgeSourceRegions)) {	// If edges are assigned independently of their targets.
-					Set<@NonNull Region> conformantEdgeSourceRegions = null;
-					List<@NonNull NavigableEdge> thoseEdges = null;
-					for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-						if (scheduleManager.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
-							if (thoseEdges == null) {
-								thoseEdges = new ArrayList<>();
-								conformantEdgeSourceRegions = new HashSet<>();
-							}
-							if (!thoseEdges.contains(realizedEdge)) {
-								thoseEdges.add(realizedEdge);
-								assert conformantEdgeSourceRegions != null;
-								conformantEdgeSourceRegions.add(QVTscheduleUtil.getOwningRegion(realizedEdge));
-							}
+				//	if (!nodeSourceRegions.containsAll(edgeSourceRegions)) {	// If edges are assigned independently of their targets.
+				Set<@NonNull Region> conformantEdgeSourceRegions = null;
+				List<@NonNull NavigableEdge> thoseEdges = null;
+				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
+					if (scheduleManager.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
+						if (thoseEdges == null) {
+							thoseEdges = new ArrayList<>();
+							conformantEdgeSourceRegions = new HashSet<>();
+						}
+						if (!thoseEdges.contains(realizedEdge)) {
+							thoseEdges.add(realizedEdge);
+							assert conformantEdgeSourceRegions != null;
+							conformantEdgeSourceRegions.add(QVTscheduleUtil.getOwningRegion(realizedEdge));
 						}
 					}
-					if ((thoseEdges != null) && !nodeSourceRegions.containsAll(conformantEdgeSourceRegions)) {
-						EdgeConnection edgeConnection = getEdgeConnection(invokingRegion2, thoseEdges, predicatedProperty);
+				}
+				if (thoseEdges != null) { //&& !nodeSourceRegions.containsAll(conformantEdgeSourceRegions)) {
+					EdgeConnection edgeConnection = getEdgeConnection(invokingRegion2, thoseEdges, predicatedProperty);
+					if (s != null) {
+						s.append("\n    EdgeConnection \"" + edgeConnection + "\" to " + predicatedEdge);
+					}
+					if (!Iterables.contains(edgeConnection.getTargetEdges(), predicatedEdge)) {
+						edgeConnection.addUsedTargetEdge(predicatedEdge, false);
 						if (s != null) {
-							s.append("\n    EdgeConnection \"" + edgeConnection + "\" to " + predicatedEdge);
-						}
-						if (!Iterables.contains(edgeConnection.getTargetEdges(), predicatedEdge)) {
-							edgeConnection.addUsedTargetEdge(predicatedEdge, false);
-							if (s != null) {
-								for (@NonNull NavigableEdge thatEdge : thoseEdges) {
-									s.append("\n      from " + thatEdge.getOwningRegion() + "  : " + thatEdge);
-								}
+							for (@NonNull NavigableEdge thatEdge : thoseEdges) {
+								s.append("\n      from " + thatEdge.getOwningRegion() + "  : " + thatEdge);
 							}
 						}
 					}
 				}
+				//	}
 				//
 				// Create a NodeConnection for the node realizations.
 				//
@@ -1011,7 +1011,7 @@ public class ConnectionManager
 				lastProduction = lastWrite;
 			}
 		}
-		else {
+		/*	else {
 			Connection nodeConnection = QVTscheduleUtil.getTargetNode(edge).getIncomingConnection();
 			if (nodeConnection != null) {
 				int firstWrite = nodeConnection.getFirstPass();
@@ -1023,7 +1023,8 @@ public class ConnectionManager
 					lastProduction = lastWrite;
 				}
 			}
-		}
+			throw new UnsupportedOperationException("WIP missing edgeConnection");
+		} */
 		if (s != null) {
 			if (lastProduction < 0) {
 				s.append("\n  unconnected");
