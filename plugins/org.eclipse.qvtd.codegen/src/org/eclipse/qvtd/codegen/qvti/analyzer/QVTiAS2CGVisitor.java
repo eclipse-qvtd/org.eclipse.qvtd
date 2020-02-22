@@ -14,10 +14,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -79,7 +77,6 @@ import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -406,70 +403,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	private @NonNull Set<@NonNull Mapping> computeUseClasses(@NonNull ImperativeTransformation iTransformation) {
 		Iterable<@NonNull Mapping> iMappings = QVTimperativeUtil.getOwnedMappings(iTransformation);
-		//
-		//	Compute the intervalIndex of each Mapping.
-		//
-		Map<@NonNull Mapping, @NonNull Integer> mapping2intervalIndex = new HashMap<>();
-		{
-			int intervalIndex = 0;
-			for (@NonNull Mapping asMapping : iMappings) {
-				mapping2intervalIndex.put(asMapping, intervalIndex++);
-			}
-		}
-		//
-		//	Compute the latestIntervalIndex of each ConnectionVariable.
-		//
-		Map<@NonNull ConnectionVariable, @NonNull Integer> connectionValue2latestIntervalIndex = new HashMap<>();
-		for (@NonNull Mapping iMapping : iMappings) {
-			for (@NonNull EObject eObject : new TreeIterable(iMapping, false)) {
-				if (eObject instanceof AppendParameterBinding) {
-					AppendParameterBinding appendParameterBinding = (AppendParameterBinding)eObject;
-					MappingCall mappingCall = QVTimperativeUtil.getOwningMappingCall(appendParameterBinding);
-					Mapping referredMapping = mappingCall.getReferredMapping();
-					Integer appendingIntervalIndex = mapping2intervalIndex.get(referredMapping);
-					assert appendingIntervalIndex != null;
-					ConnectionVariable connectionValue = appendParameterBinding.getValue();
-					assert connectionValue != null;
-					Integer latestIntervalIndex = connectionValue2latestIntervalIndex.get(connectionValue);
-					if ((latestIntervalIndex == null) || (latestIntervalIndex < appendingIntervalIndex)) {
-						connectionValue2latestIntervalIndex.put(connectionValue, appendingIntervalIndex);
-					}
-				}
-			}
-		}
-		//
-		//	Set Mapping useClassMappings if consume may preceded append.
-		//
 		Set<@NonNull Mapping> useClassMappings = new HashSet<>();
-		for (@NonNull Mapping iMapping : iMappings) {
-			for (@NonNull EObject eObject : new TreeIterable(iMapping, false)) {
-				if (eObject instanceof GuardParameterBinding) {
-					GuardParameterBinding guardParameterBinding = (GuardParameterBinding)eObject;
-					MappingCall mappingCall = QVTimperativeUtil.getOwningMappingCall(guardParameterBinding);
-					Mapping referredMapping = mappingCall.getReferredMapping();
-					assert referredMapping != null;
-					Integer consumingIntervalIndex = mapping2intervalIndex.get(referredMapping);
-					assert consumingIntervalIndex != null;
-					ConnectionVariable connectionValue = guardParameterBinding.getValue();
-					assert connectionValue != null;
-					Integer latestIntervalIndex = connectionValue2latestIntervalIndex.get(connectionValue);
-					if (latestIntervalIndex == null) {
-						latestIntervalIndex = 0;			// root connections are not 'appended'
-					}
-					if (latestIntervalIndex >= consumingIntervalIndex) {
-						useClassMappings.add(referredMapping);
-					}
-				}
-			}
-		}
-		//
-		//
-		//
 		for (@NonNull Mapping iMapping : iMappings) {
 			if (iMapping.isIsStrict()) {
 				useClassMappings.add(iMapping);
 			}
-			else if (QVTimperativeUtil.isObserver(iMapping)) {
+			else if (QVTimperativeUtil.isObserver(iMapping)) {	// ?? redundant
 				useClassMappings.add(iMapping);
 			}
 		}

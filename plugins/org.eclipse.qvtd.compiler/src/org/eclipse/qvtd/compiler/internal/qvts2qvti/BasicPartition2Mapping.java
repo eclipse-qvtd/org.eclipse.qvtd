@@ -72,6 +72,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
@@ -688,6 +689,14 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 								isStrict = true;
 							}
 						}
+					}
+				}
+				Connection connection = guardNode.getIncomingConnection();
+				if (connection != null) {
+					int lastProducer = connection.getLastPass();
+					int lastConsumer = partition.getLastPass();
+					if (lastConsumer <= lastProducer) {
+						isStrict = true;		// ?? do we need a separate isCyclic
 					}
 				}
 			}
