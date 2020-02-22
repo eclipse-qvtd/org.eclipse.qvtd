@@ -905,7 +905,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 				novelLoopNodes.add(localSuccessNode);
 			}
 			for (@NonNull Node node : originalNodes) {
-				if (node.isRealized() && !novelLoopNodes.contains(node) && (basicGetPartitionFactory(node) == null)) {
+				if (!node.isPredicated() && !novelLoopNodes.contains(node) && (basicGetPartitionFactory(node) == null)) {
 					ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 					if (!classDatum.isCollectionType()) {		// Collection DataTypes are non 1:1 edge ends
 						novelLoopNodes.add(node);
@@ -1053,7 +1053,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 	@Override
 	public @NonNull Iterable<@NonNull PartitionAnalysis> partition() {
 		String name = regionAnalysis.getName();
-		if ("mapIfExp_qvtr".equals(name)) {
+		if ("mapHelper_Context_qvtr".equals(name)) {
 			getClass();
 		}
 		//
