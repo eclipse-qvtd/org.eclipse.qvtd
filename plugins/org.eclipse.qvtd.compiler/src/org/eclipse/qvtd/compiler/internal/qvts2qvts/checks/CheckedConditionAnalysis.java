@@ -180,6 +180,11 @@ public class CheckedConditionAnalysis
 			}
 			Role navigableEdgeRole = partition.getRole(navigationEdge);
 			assert navigableEdgeRole != null;
+
+			if (navigationEdge.isRealized() && !navigableEdgeRole.isRealized()) {
+				return null;		// No need to re-check
+			}
+
 			NavigationEdge primaryEdge = QVTscheduleUtil.getPrimaryEdge(navigationEdge);
 			{
 				NavigationEdge oppositeEdge = primaryEdge.getOppositeEdge();
@@ -436,6 +441,10 @@ public class CheckedConditionAnalysis
 	public @NonNull Set<@NonNull PropertyDatum> computeCheckedPropertyDatums(@Nullable StringBuilder s) {
 		if (allCheckedPropertyDatums != null) {
 			return allCheckedPropertyDatums;
+		}
+		String name = partition.getName();
+		if ("mapHelper_Context_qvtr«loop»".equals(name)) {
+			getClass();
 		}
 		@NonNull ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 		//

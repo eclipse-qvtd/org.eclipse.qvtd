@@ -346,7 +346,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			EMFTCSInjector.class.getName();				// Hidden ATL dependency
 			AtlParser.class.getName();					// Hidden ATL dependency
 			myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-			myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons3.atl"));
+			myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl"));
 			//	}
 			//	else {
 			//		myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
@@ -1290,8 +1290,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
+		AbstractTransformer.ASSIGNMENTS.setState(true);
+		AbstractTransformer.CREATIONS.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.GETTINGS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTp2QVTs.REGION_ORDER.setState(true);
 		Class<? extends Transformer> txClass;

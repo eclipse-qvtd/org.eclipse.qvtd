@@ -35,6 +35,8 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -54,6 +56,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
@@ -575,6 +578,26 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			return false;
 		}
 
+		private boolean isTraceSlot(@NonNull NavigationCallExp consumer) {
+			EObject eContainer = consumer.eContainer();
+			if (!(eContainer instanceof DeclareStatement)) {
+				return false;
+			}
+			OCLExpression ownedSource = QVTbaseUtil.getOwnedSource(consumer);
+			if (!(ownedSource instanceof VariableExp)) {
+				return false;
+			}
+			VariableDeclaration referredVariable = QVTbaseUtil.getReferredVariable((VariableExp) ownedSource);
+			if (!(referredVariable instanceof GuardParameter)) {
+				return false;
+			}
+			Property successProperty = ((GuardParameter) referredVariable).getSuccessProperty();
+			if (successProperty == null) {
+				return false;
+			}
+			return true;
+		}
+
 		@Override
 		public @NonNull String toString() {
 			return name;
@@ -705,7 +728,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				}
 				else if (!(consumer.eContainer() instanceof SpeculateStatement)) {
 					PassRange consumerPassRange = PassRange.create(consumer);
-					boolean needsObserve = !productionRange.precedes(consumerPassRange);
+					boolean needsObserve = !productionRange.precedes(consumerPassRange) && !isTraceSlot(consumer);
 					boolean isObserve = isObserve(consumer);
 					if (isObserve != needsObserve) {
 						Property property = consumingAnalysis.property;
