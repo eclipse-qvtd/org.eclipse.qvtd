@@ -745,24 +745,46 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//	strategy.regionAnalysis.createLocalSuccess();
 		ReachabilityForest initReachabilityForest1 = new ReachabilityForest("init", reachingInitNodes != null ? reachingInitNodes : thisAndTraceAndConstantSourceNodes, reachingInitEdges);
 		List<@NonNull Node> novelInitNodes1 = null;
+		//
+		//	All reachable nodes not roots or in a previous partition are novel, unless they are
+		//	corrolaries of a cycle.
+		//
 		for (@NonNull Node node : initReachabilityForest1.getMostReachableFirstNodes()) {
-			if ((basicGetPartitionFactory(node) == null) && !Iterables.contains(thisAndTraceNodes, node) && ((coCyclicInitNodes == null) || !coCyclicInitNodes.contains(node))) {
-				if (novelInitNodes1 == null) {
-					novelInitNodes1 = new ArrayList<>();
+			if ((basicGetPartitionFactory(node) == null) && !Iterables.contains(thisAndTraceNodes, node)) {
+				if ((coCyclicInitNodes == null) || !coCyclicInitNodes.contains(node)) {
+					if (novelInitNodes1 == null) {
+						novelInitNodes1 = new ArrayList<>();
+					}
+					novelInitNodes1.add(node);
 				}
-				novelInitNodes1.add(node);
 			}
 		}
-		/*	List<@NonNull Node> novelInitNodes2 = null;
-		for (@NonNull Node node : allNodes) { //initReachabilityForest.getMostReachableFirstNodes()) {
-			AbstractReachabilityPartitionFactory partitionFactory = basicGetPartitionFactory(node);
-			if (partitionFactory == null) {
-				if (novelInitNodes2 == null) {
-					novelInitNodes2 = new ArrayList<>();
+		//
+		//	Add all non-top when invocations; realized middle nodes with a predicated global status and one or more
+		//	predicates when invocation results.
+		//
+		for (@NonNull Node node : originalNodes) {
+			if ((basicGetPartitionFactory(node) == null) && !Iterables.contains(thisAndTraceNodes, node)) {
+				if (node.isRealized() && node.getClassDatum().getReferredTypedModel().isIsTrace()) {
+					boolean hasSuccess = false;
+					boolean hasPredicatedEdge = false;
+					for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
+						if (outgoingEdge.isPredicated()) {
+							hasPredicatedEdge = true;
+						}
+						if (outgoingEdge.isSuccess()) {		// ?? stronger test for global success
+							hasSuccess = true;
+						}
+					}
+					if (hasSuccess && hasPredicatedEdge) {
+						if (novelInitNodes1 == null) {
+							novelInitNodes1 = new ArrayList<>();
+						}
+						novelInitNodes1.add(node);
+					}
 				}
-				novelInitNodes2.add(node);
 			}
-		} */
+		}
 		if (novelInitNodes1 != null) {
 			//	assert novelInitNodes1.equals(novelInitNodes2);  -- not even close
 			if (cyclicInitEdges == null) {			// Acyclic - can do realizes now
