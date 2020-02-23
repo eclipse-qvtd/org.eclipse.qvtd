@@ -40,6 +40,8 @@ import com.google.common.collect.Iterables;
  */
 public abstract class HeadNodeGroup implements Nameable
 {
+	protected final @NonNull HeadAnalysis headAnalysis;
+
 	/**
 	 * The mutually to-one navigable nodes that define the head group.
 	 */
@@ -50,8 +52,9 @@ public abstract class HeadNodeGroup implements Nameable
 	 */
 	private Set<@NonNull Node> uniqueNodes = null;
 
-	public HeadNodeGroup(@NonNull List<@NonNull Node> headGroupNodes) {
+	public HeadNodeGroup(@NonNull HeadAnalysis headAnalysis, @NonNull List<@NonNull Node> headGroupNodes) {
 		assert !headGroupNodes.isEmpty();
+		this.headAnalysis = headAnalysis;
 		this.headGroupNodes = headGroupNodes;
 	}
 
@@ -61,7 +64,7 @@ public abstract class HeadNodeGroup implements Nameable
 		boolean gotOne = false;
 		for (@NonNull Edge source2targetEdge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 			Node targetNode = QVTscheduleUtil.getTargetNode(source2targetEdge);
-			if (targetNode.isUnconditional() && canBeSameGroup(sourceNode, source2targetEdge) && !uniqueNodes.contains(targetNode)) {
+			if (targetNode.isUnconditional() && headAnalysis.canBeSameGroup(source2targetEdge) && !uniqueNodes.contains(targetNode)) {
 				if (source2targetEdge.isCast()) {				// Can happen when analyzing traced heads
 					uniqueNodes.add(targetNode);
 					workList.add(targetNode);
@@ -154,8 +157,6 @@ public abstract class HeadNodeGroup implements Nameable
 		}
 	}
 
-	protected abstract boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge);
-
 	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
 		return headGroupNodes;
 	}
@@ -179,6 +180,10 @@ public abstract class HeadNodeGroup implements Nameable
 			assert toOneSet2 != null;
 		}
 		return toOneSet2;
+	}
+
+	public @Nullable Iterable<@NonNull Node> getUniqueNodes() {
+		return uniqueNodes != null ? uniqueNodes : getToOneSet();
 	}
 
 	/**

@@ -127,13 +127,34 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 	} */
 
 	protected void analyzePatternNodes(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups, @NonNull RelationAnalysis relationAnalysis) {
-		//	String name = relation.getName();
+		String name = relation.getName();
+		if ("FtoN2_Daughter2DaughterPlan".equals(name)) {
+			getClass();
+		}
 		boolean manyTracesPerHead = headNodeGroups.size() > 2;
 		Set<@NonNull Node> allHeadGroupNodes = new HashSet<>();
 		for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {
 			Iterables.addAll(allHeadGroupNodes, headNodeGroup.getHeadNodes());
 		}
+		boolean compatibleRootVariable = true;
 		List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(relation);
+		for (@NonNull VariableDeclaration rootVariable : rootVariables) {
+			boolean foundHeadGroup = false;
+			Node rootNode = relationAnalysis.getReferenceNode(rootVariable);
+			for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {
+				if (Iterables.contains(headNodeGroup.getHeadNodes(), rootNode)) {
+					foundHeadGroup = true;
+				}
+				else {
+					Iterable<@NonNull Node> uniqueNodes = headNodeGroup.getUniqueNodes();
+					if ((uniqueNodes != null) && Iterables.contains(uniqueNodes, rootNode)) {
+						foundHeadGroup = true;
+						compatibleRootVariable = false;
+					}
+				}
+			}
+			assert foundHeadGroup;
+		}
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(relationAnalysis.getRegion())) {
 			if (node.isThis()) {
 				;						// Do not trace this

@@ -99,6 +99,17 @@ public class TracedHeadAnalysis extends HeadAnalysis
 		super(mappingRegion);
 	}
 
+	@Override
+	protected boolean canBeSameGroup(@NonNull Edge source2targetEdge) {
+		Node sourceNode = QVTscheduleUtil.getSourceNode(source2targetEdge);
+		Node targetNode = source2targetEdge.getEdgeTarget();
+		TypedModel sourceTypedModel = QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getClassDatum(sourceNode));
+		//	assert (typedModel == sourceTypedModel) || sourceTypedModel.isIsPrimitive();
+		TypedModel targetTypedModel = QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getClassDatum(targetNode));
+		//		return (typedModel == targetTypedModel) || targetTypedModel.isIsPrimitive();
+		return sourceTypedModel.isIsPrimitive() || targetTypedModel.isIsPrimitive() || (sourceTypedModel== targetTypedModel);
+	}
+
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeTracedTargetFromSources(@NonNull Set<@NonNull Node> excludedNodes) {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
 		for (@NonNull Node targetNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
@@ -113,7 +124,7 @@ public class TracedHeadAnalysis extends HeadAnalysis
 					}
 					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 						Node sourceNode = edge.getEdgeSource();
-						if (!excludedNodes.contains(sourceNode) && !sourceNode.isConditional() && !sourceNode.isConstant()) {
+						if (!excludedNodes.contains(sourceNode) && !sourceNode.isConditional() && !sourceNode.isConstant() && canBeSameGroup(edge)) {
 							if (edge instanceof NavigationEdge) {
 								if (!((NavigationEdge)edge).isPartial()) {
 									sources.add(sourceNode);
@@ -140,6 +151,6 @@ public class TracedHeadAnalysis extends HeadAnalysis
 
 	@Override
 	protected @NonNull HeadNodeGroup createHeadNodeGroup(@NonNull List<@NonNull Node> headNodeGroup) {
-		return new TracedHeadNodeGroup(headNodeGroup);
+		return new TracedHeadNodeGroup(this, headNodeGroup);
 	}
 }

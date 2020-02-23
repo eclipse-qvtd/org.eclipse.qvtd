@@ -30,20 +30,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Sets;
 
 /**
- * RuleHeadAnalysis is a helper class to compute the head nodes of a region.
+ * RuleHeadAnalysis is a helper class to compute the head nodes of a region after synthesisfor a chosen direction.
  */
 public class RuleHeadAnalysis extends HeadAnalysis
 {
 	protected static final class RuleHeadNodeGroup extends HeadNodeGroup
 	{
-		protected RuleHeadNodeGroup(@NonNull List<@NonNull Node> headGroupNodes) {
-			super(headGroupNodes);
-		}
-
-		@Override
-		protected boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge) {
-			boolean isOldSource = sourceNode.isOld();
-			return isOldSource ? source2targetEdge.isOld() : true; //source2targetEdge.isNew();	// nonTopWhen my be REALIZED sourceNode and PREDICATED source2targetEdge
+		protected RuleHeadNodeGroup(@NonNull RuleHeadAnalysis ruleHeadAnalysis, @NonNull List<@NonNull Node> headGroupNodes) {
+			super(ruleHeadAnalysis, headGroupNodes);
 		}
 
 		@Override
@@ -83,6 +77,13 @@ public class RuleHeadAnalysis extends HeadAnalysis
 				headNodes.add(node);
 			}
 		}
+	}
+
+	@Override
+	protected boolean canBeSameGroup(@NonNull Edge source2targetEdge) {
+		Node sourceNode = QVTscheduleUtil.getSourceNode(source2targetEdge);
+		boolean isOldSource = sourceNode.isOld();
+		return isOldSource ? source2targetEdge.isOld() : true; //source2targetEdge.isNew();	// nonTopWhen my be REALIZED sourceNode and PREDICATED source2targetEdge
 	}
 
 	private void checkHeadNodeConsistency(@NonNull Iterable<@NonNull Node> headNodes) {
@@ -175,7 +176,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 
 	@Override
 	protected @NonNull HeadNodeGroup createHeadNodeGroup(@NonNull List<@NonNull Node> headNodeGroup) {
-		return new RuleHeadNodeGroup(headNodeGroup);
+		return new RuleHeadNodeGroup(this, headNodeGroup);
 	}
 
 	private void setHeadNodes(@NonNull Set<@NonNull Node> reachableNodes, @NonNull List<@NonNull Node> headNodes) {

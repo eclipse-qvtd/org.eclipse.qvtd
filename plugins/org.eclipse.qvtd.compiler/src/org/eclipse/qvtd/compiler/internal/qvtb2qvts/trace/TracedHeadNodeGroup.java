@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -28,8 +27,8 @@ public class TracedHeadNodeGroup extends HeadNodeGroup
 {
 	protected final @NonNull TypedModel typedModel;
 
-	public TracedHeadNodeGroup(@NonNull List<@NonNull Node> headGroupNodes) {
-		super(headGroupNodes);
+	public TracedHeadNodeGroup(@NonNull TracedHeadAnalysis tracedHeadAnalysis, @NonNull List<@NonNull Node> headGroupNodes) {
+		super(tracedHeadAnalysis, headGroupNodes);
 		typedModel = QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getClassDatum(headGroupNodes.get(0)));
 		for (@NonNull Node headGroupNode : headGroupNodes) {
 			assert typedModel == QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getClassDatum(headGroupNode));
@@ -41,15 +40,6 @@ public class TracedHeadNodeGroup extends HeadNodeGroup
 		s.append(typedModel.getName());
 		s.append(" ");
 		super.appendTo(s);
-	}
-
-	@Override
-	protected boolean canBeSameGroup(@NonNull Node sourceNode, @NonNull Edge source2targetEdge) {
-		Node targetNode = source2targetEdge.getEdgeTarget();
-		TypedModel sourceTypedModel = QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getClassDatum(sourceNode));
-		assert (typedModel == sourceTypedModel) || sourceTypedModel.isIsPrimitive();
-		TypedModel targetTypedModel = QVTscheduleUtil.getReferredTypedModel(QVTscheduleUtil.getClassDatum(targetNode));
-		return (typedModel == targetTypedModel) || targetTypedModel.isIsPrimitive();
 	}
 
 	@Override

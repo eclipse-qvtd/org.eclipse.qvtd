@@ -176,6 +176,8 @@ public abstract class HeadAnalysis
 		this.mappingRegion = mappingRegion;;
 	}
 
+	protected abstract boolean canBeSameGroup(@NonNull Edge source2targetEdge);
+
 	protected @NonNull List<@NonNull HeadNodeGroup> computeHeadNodeGroups(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourcesClosure,
 			@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> sourceToTargetsClosure,
 			@Nullable List<@NonNull Node> preferredHeadNodes) {

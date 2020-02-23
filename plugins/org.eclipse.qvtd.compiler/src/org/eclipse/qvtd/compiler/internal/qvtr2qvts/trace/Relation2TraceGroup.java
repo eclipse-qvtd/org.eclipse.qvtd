@@ -112,6 +112,10 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 	@Override
 	public void analyzeTraceElements(@NonNull RuleAnalysis ruleAnalysis, @NonNull Set<@NonNull Node> excludedNodes) throws CompilerChainException {
 		RelationAnalysis relationAnalysis = (RelationAnalysis)ruleAnalysis;
+		String name = relationAnalysis.getName();
+		if ("ClassToClass_java".equals(name)) {
+			getClass();
+		}
 		//
 		//	Determine a head node for the minimum number of sub-regions that have a to-one path from the head.
 		//
