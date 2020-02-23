@@ -924,7 +924,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 		Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments = null;
 		for (@NonNull NavigableEdge edge : sortedRealizedEdges) {
-			if (edge instanceof NavigationEdge) {
+			if ((edge instanceof NavigationEdge) && !(edge instanceof KeyPartEdge)) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
 				Node sourceNode = edge.getEdgeSource();
 				Node targetNode = edge.getEdgeTarget();

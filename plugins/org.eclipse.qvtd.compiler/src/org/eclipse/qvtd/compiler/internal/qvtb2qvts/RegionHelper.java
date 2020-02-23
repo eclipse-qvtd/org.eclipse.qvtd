@@ -47,7 +47,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
@@ -343,11 +342,11 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 
 	public @NonNull Edge createKeyPartEdge(@NonNull Utility utility, @NonNull Node sourceNode, @NonNull PropertyDatum propertyDatum, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(targetNode);
+		Property source2targetProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
 		KeyPartEdge edge = QVTscheduleFactory.eINSTANCE.createKeyPartEdge();
+		edge.initialize(edgeRole, utility, sourceNode, source2targetProperty.getName(), targetNode);
+		edge.initializeProperty(source2targetProperty, utility, false);
 		edge.setReferredPart(propertyDatum);
-		Property referredProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
-		String name = "«" + QVTrelationUtil.getName(referredProperty) + "»";
-		edge.initialize(edgeRole, utility, sourceNode, name, targetNode);
 		return edge;
 	}
 
