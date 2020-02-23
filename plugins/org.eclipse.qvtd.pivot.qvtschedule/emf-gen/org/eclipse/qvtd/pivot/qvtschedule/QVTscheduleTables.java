@@ -622,11 +622,12 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorFragment _IteratorNode__OclElement = new ExecutorFragment(Types._IteratorNode, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _IteratorNode__VariableNode = new ExecutorFragment(Types._IteratorNode, QVTscheduleTables.Types._VariableNode);
 
-		private static final @NonNull ExecutorFragment _KeyPartEdge__ArgumentEdge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._ArgumentEdge);
+		private static final @NonNull ExecutorFragment _KeyPartEdge__ConnectionEnd = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._ConnectionEnd);
 		private static final @NonNull ExecutorFragment _KeyPartEdge__Edge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._Edge);
 		private static final @NonNull ExecutorFragment _KeyPartEdge__Element = new ExecutorFragment(Types._KeyPartEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _KeyPartEdge__ExpressionEdge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._ExpressionEdge);
 		private static final @NonNull ExecutorFragment _KeyPartEdge__KeyPartEdge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._KeyPartEdge);
+		private static final @NonNull ExecutorFragment _KeyPartEdge__NavigableEdge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._NavigableEdge);
+		private static final @NonNull ExecutorFragment _KeyPartEdge__NavigationEdge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._NavigationEdge);
 		private static final @NonNull ExecutorFragment _KeyPartEdge__OclAny = new ExecutorFragment(Types._KeyPartEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _KeyPartEdge__OclElement = new ExecutorFragment(Types._KeyPartEdge, OCLstdlibTables.Types._OclElement);
 
@@ -1676,13 +1677,14 @@ public class QVTscheduleTables
 			{
 				Fragments._KeyPartEdge__OclAny /* 0 */,
 				Fragments._KeyPartEdge__OclElement /* 1 */,
+				Fragments._KeyPartEdge__ConnectionEnd /* 2 */,
 				Fragments._KeyPartEdge__Element /* 2 */,
 				Fragments._KeyPartEdge__Edge /* 3 */,
-				Fragments._KeyPartEdge__ExpressionEdge /* 4 */,
-				Fragments._KeyPartEdge__ArgumentEdge /* 5 */,
+				Fragments._KeyPartEdge__NavigableEdge /* 4 */,
+				Fragments._KeyPartEdge__NavigationEdge /* 5 */,
 				Fragments._KeyPartEdge__KeyPartEdge /* 6 */
 			};
-		private static final int @NonNull [] __KeyPartEdge = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __KeyPartEdge = { 1,1,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _KeyedValueNode =
 			{
@@ -3416,13 +3418,14 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorOperation @NonNull [] _IteratorNode__VariableNode = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__KeyPartEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__ArgumentEdge = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__ConnectionEnd = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__Edge = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__ExpressionEdge = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__NavigableEdge = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__NavigationEdge = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[1]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[1]) */,
@@ -5339,11 +5342,12 @@ public class QVTscheduleTables
 			Fragments._IteratorNode__OclElement.initOperations(_IteratorNode__OclElement);
 			Fragments._IteratorNode__VariableNode.initOperations(_IteratorNode__VariableNode);
 
-			Fragments._KeyPartEdge__ArgumentEdge.initOperations(_KeyPartEdge__ArgumentEdge);
+			Fragments._KeyPartEdge__ConnectionEnd.initOperations(_KeyPartEdge__ConnectionEnd);
 			Fragments._KeyPartEdge__Edge.initOperations(_KeyPartEdge__Edge);
 			Fragments._KeyPartEdge__Element.initOperations(_KeyPartEdge__Element);
-			Fragments._KeyPartEdge__ExpressionEdge.initOperations(_KeyPartEdge__ExpressionEdge);
 			Fragments._KeyPartEdge__KeyPartEdge.initOperations(_KeyPartEdge__KeyPartEdge);
+			Fragments._KeyPartEdge__NavigableEdge.initOperations(_KeyPartEdge__NavigableEdge);
+			Fragments._KeyPartEdge__NavigationEdge.initOperations(_KeyPartEdge__NavigationEdge);
 			Fragments._KeyPartEdge__OclAny.initOperations(_KeyPartEdge__OclAny);
 			Fragments._KeyPartEdge__OclElement.initOperations(_KeyPartEdge__OclElement);
 
@@ -6083,9 +6087,15 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorProperty @NonNull [] _KeyPartEdge = {
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
+			QVTscheduleTables.Properties._NavigableEdge__incomingConnection,
 			QVTscheduleTables.Properties._Edge__name,
+			QVTscheduleTables.Properties._NavigationEdge__oppositeEdge,
+			QVTscheduleTables.Properties._NavigableEdge__outgoingConnections,
 			QVTscheduleTables.Properties._Edge__owningRegion,
+			QVTscheduleTables.Properties._NavigationEdge__partial,
 			QVTscheduleTables.Properties._KeyPartEdge__referredPart,
+			QVTscheduleTables.Properties._NavigationEdge__referredProperty,
+			QVTscheduleTables.Properties._NavigationEdge__secondary,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode,
 			QVTscheduleTables.Properties._Edge__utility

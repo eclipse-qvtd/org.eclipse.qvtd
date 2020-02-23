@@ -25,8 +25,8 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -47,7 +47,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *
  * @generated
  */
-public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
+public class KeyPartEdgeImpl extends NavigationEdgeImpl implements KeyPartEdge {
 	/**
 	 * The number of structural features of the '<em>Key Part Edge</em>' class.
 	 * <!-- begin-user-doc -->
@@ -55,7 +55,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int KEY_PART_EDGE_FEATURE_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1;
+	public static final int KEY_PART_EDGE_FEATURE_COUNT = NavigationEdgeImpl.NAVIGATION_EDGE_FEATURE_COUNT + 1;
 	/**
 	 * The number of operations of the '<em>Key Part Edge</em>' class.
 	 * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int KEY_PART_EDGE_OPERATION_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_OPERATION_COUNT + 0;
+	public static final int KEY_PART_EDGE_OPERATION_COUNT = NavigationEdgeImpl.NAVIGATION_EDGE_OPERATION_COUNT + 0;
 	/**
 	 * The cached value of the '{@link #getReferredPart() <em>Referred Part</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -105,7 +105,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 			referredPart = (PropertyDatum)eResolveProxy(oldReferredPart);
 			if (referredPart != oldReferredPart) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldReferredPart, referredPart));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 13, oldReferredPart, referredPart));
 			}
 		}
 		return referredPart;
@@ -130,7 +130,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 		PropertyDatum oldReferredPart = referredPart;
 		referredPart = newReferredPart;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldReferredPart, referredPart));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 13, oldReferredPart, referredPart));
 	}
 
 	/**
@@ -141,9 +141,9 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 13:
 				if (resolve) return getReferredPart();
-				return basicGetReferredPart();
+			return basicGetReferredPart();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,9 +156,9 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 13:
 				setReferredPart((PropertyDatum)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -171,9 +171,9 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 13:
 				setReferredPart((PropertyDatum)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -186,7 +186,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 13:
 				return referredPart != null;
 		}
 		return super.eIsSet(featureID);
@@ -208,7 +208,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Utility utility, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		KeyPartEdge newEdge = (KeyPartEdge) super.createEdge(edgeRole, utility, sourceNode, targetNode);
 		newEdge.setReferredPart(getReferredPart());
 		return newEdge;

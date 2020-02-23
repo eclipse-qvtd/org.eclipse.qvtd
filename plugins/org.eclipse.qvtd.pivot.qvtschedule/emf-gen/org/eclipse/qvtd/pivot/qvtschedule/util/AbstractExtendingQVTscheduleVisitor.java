@@ -188,7 +188,7 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 
 	@Override
 	public R visitKeyPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyPartEdge object) {
-		return visitArgumentEdge(object);
+		return visitNavigationEdge(object);
 	}
 
 	@Override

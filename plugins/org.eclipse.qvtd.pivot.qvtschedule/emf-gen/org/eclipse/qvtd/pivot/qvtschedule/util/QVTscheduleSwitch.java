@@ -366,9 +366,10 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 			case 30: {
 				KeyPartEdge keyPartEdge = (KeyPartEdge)theEObject;
 				T result = caseKeyPartEdge(keyPartEdge);
-				if (result == null) result = caseArgumentEdge(keyPartEdge);
-				if (result == null) result = caseExpressionEdge(keyPartEdge);
+				if (result == null) result = caseNavigationEdge(keyPartEdge);
+				if (result == null) result = caseNavigableEdge(keyPartEdge);
 				if (result == null) result = caseEdge(keyPartEdge);
+				if (result == null) result = caseConnectionEnd(keyPartEdge);
 				if (result == null) result = caseElement(keyPartEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

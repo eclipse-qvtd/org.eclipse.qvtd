@@ -194,7 +194,7 @@ implements QVTscheduleVisitor<Boolean>
 
 	@Override
 	public @Nullable Boolean visitKeyPartEdge(@NonNull KeyPartEdge object) {
-		return visitArgumentEdge(object);
+		return visitNavigationEdge(object);
 	}
 
 	@Override

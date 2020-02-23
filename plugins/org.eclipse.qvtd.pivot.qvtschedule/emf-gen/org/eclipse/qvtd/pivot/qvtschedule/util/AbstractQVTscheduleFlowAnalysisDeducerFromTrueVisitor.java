@@ -192,7 +192,7 @@ public abstract class AbstractQVTscheduleFlowAnalysisDeducerFromTrueVisitor
 
 	@Override
 	public @Nullable Boolean visitKeyPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyPartEdge object) {
-		return visitArgumentEdge(object);
+		return visitNavigationEdge(object);
 	}
 
 	@Override

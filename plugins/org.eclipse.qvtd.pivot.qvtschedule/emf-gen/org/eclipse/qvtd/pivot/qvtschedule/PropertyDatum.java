@@ -172,7 +172,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The ClassDatum that this PropertyDatum's slot references. if it is more derived than the referencedProperty.type.
+	 * The elemental ClassDatum that this PropertyDatum's slot references. if it is more derived than the referencedProperty.type.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Target Class Datum</em>' reference.
 	 * @see #setTargetClassDatum(ClassDatum)

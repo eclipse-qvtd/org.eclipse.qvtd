@@ -193,7 +193,7 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 
 	@Override
 	public @Nullable Object visitKeyPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyPartEdge object) {
-		return visitArgumentEdge(object);
+		return visitNavigationEdge(object);
 	}
 
 	@Override

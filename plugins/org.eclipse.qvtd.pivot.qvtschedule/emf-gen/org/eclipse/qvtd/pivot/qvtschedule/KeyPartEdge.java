@@ -35,7 +35,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * @model
  * @generated
  */
-public interface KeyPartEdge extends ArgumentEdge {
+public interface KeyPartEdge extends NavigationEdge {
 	/**
 	 * Returns the value of the '<em><b>Referred Part</b></em>' reference.
 	 * <!-- begin-user-doc -->

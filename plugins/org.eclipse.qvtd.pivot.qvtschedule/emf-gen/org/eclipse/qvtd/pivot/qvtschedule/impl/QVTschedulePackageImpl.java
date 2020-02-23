@@ -3004,7 +3004,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		iteratorNodeEClass = createEClass(29);
 
 		keyPartEdgeEClass = createEClass(30);
-		createEReference(keyPartEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
+		createEReference(keyPartEdgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 13);
 
 		keyedValueNodeEClass = createEClass(31);
 		createEReference(keyedValueNodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 10);
@@ -3248,7 +3248,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		inputNodeEClass.getESuperTypes().add(this.getNode());
 		iteratedEdgeEClass.getESuperTypes().add(this.getEdge());
 		iteratorNodeEClass.getESuperTypes().add(this.getVariableNode());
-		keyPartEdgeEClass.getESuperTypes().add(this.getArgumentEdge());
+		keyPartEdgeEClass.getESuperTypes().add(this.getNavigationEdge());
 		keyedValueNodeEClass.getESuperTypes().add(this.getOperationNode());
 		loadingPartitionEClass.getESuperTypes().add(this.getMappingPartition());
 		loadingRegionEClass.getESuperTypes().add(this.getRegion());
