@@ -266,7 +266,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="InputNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="IteratedEdge" eSuperTypes="#//Edge"/>
   <eClassifiers xsi:type="ecore:EClass" name="IteratorNode" eSuperTypes="#//VariableNode"/>
-  <eClassifiers xsi:type="ecore:EClass" name="KeyPartEdge" eSuperTypes="#//ArgumentEdge">
+  <eClassifiers xsi:type="ecore:EClass" name="KeyPartEdge" eSuperTypes="#//NavigationEdge">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A KeyPartEdge conveys a key part key and value to a keyed value construction node."/>
     </eAnnotations>
