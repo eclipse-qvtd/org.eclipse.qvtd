@@ -45,6 +45,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 	public static final @NonNull String TRACE_INVOCATION_CLASS_NAME_PREFIX = "C";
 	public static final @NonNull String TRACE_INTERFACE_CLASS_NAME_PREFIX = "I";
 	public static final @NonNull String TRACE_TRACE_CLASS_NAME_PREFIX = "T";
+	public static final @NonNull String TRACE_WRAPPER_CLASS_NAME_PREFIX = "W";
 
 	public static final @NonNull String TRACE_DISPATCH_CLASS_DISPATCH_PROPERTY_NAME_PREFIX = "do";
 	public static final @NonNull String TRACE_DISPATCH_PROPERTY_NAME_PREFIX = "d";
@@ -53,6 +54,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 	public static final @NonNull String TRACE_INVOCATION_TRACE_PROPERTY_NAME_PREFIX = "w";
 	public static final @NonNull String TRACE_SUCCESS_PROPERTY_NAME_PREFIX = "s";
 	public static final @NonNull String TRACE_TRACE_PROPERTY_NAME_PREFIX = "t";
+	public static final @NonNull String TRACE_WRAPPER_CLASS_PROPERTY_NAME_PREFIX = "ts";
 	public static final @NonNull String TRACE_WHEN_PROPERTY_NAME_PREFIX = "when_";
 	public static final @NonNull String TRACE_WHERE_PROPERTY_NAME_PREFIX = "where_";
 
@@ -197,5 +199,15 @@ public class QVTrelationNameGenerator extends NameGenerator
 
 	public @NonNull String createWhereInvocationPropertyName(@NonNull Rule rule) {
 		return TRACE_WHERE_PROPERTY_NAME_PREFIX + QVTbaseUtil.getName(rule);
+	}
+
+	public @NonNull String createWrapperClassPropertyName(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable) {
+		int index = QVTbaseUtil.getTypedModelIndex(typedModel);
+		String name = QVTrelationUtil.getName(variable);
+		return TRACE_WRAPPER_CLASS_PROPERTY_NAME_PREFIX + index + name;
+	}
+
+	public @NonNull String createWrapperClassName(@NonNull Rule rule) {
+		return TRACE_WRAPPER_CLASS_NAME_PREFIX + QVTbaseUtil.getName(rule);
 	}
 }

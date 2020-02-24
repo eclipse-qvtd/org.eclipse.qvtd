@@ -11,12 +11,15 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
@@ -31,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import com.google.common.collect.Iterables;
 
 /**
  * A Relation2TraceGroup manages the mapping between the analysis of a single rule and the one to four
@@ -43,6 +47,7 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 	protected final @Nullable Relation2TraceInterface relation2traceInterface;
 	protected final @Nullable Relation2InvocationClass relation2invocationClass;
 	protected final @Nullable Relation2DispatchClass relation2dispatchClass;
+	private @Nullable Relation2WrapperClass relation2wrapperClass = null;
 
 	private final @NonNull List<@NonNull TracingStrategy> tracingStrategies = new ArrayList<>();
 
@@ -116,6 +121,14 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 		//	Determine a head node for the minimum number of sub-regions that have a to-one path from the head.
 		//
 		List<@NonNull HeadNodeGroup> headNodeGroups = TracedHeadAnalysis.computeTraceHeadGroupNodes(relationAnalysis.getRegion(), excludedNodes);
+		Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2headNode = analyzeWrapper(relationAnalysis, headNodeGroups);
+		if (rootVariable2headNode != null) {
+			assert relation2wrapperClass == null;
+			QVTrelationNameGenerator nameGenerator = getNameGenerator();
+			String wrapperClassName = nameGenerator.createWrapperClassName(relationAnalysis.getRule());
+			relation2wrapperClass = new Relation2WrapperClass(this, wrapperClassName, rootVariable2headNode);
+			relation2wrapperClass.analyzeTraceElements(headNodeGroups, relationAnalysis);
+		}
 		Relation2TraceInterface relation2traceInterface2 = relation2traceInterface;
 		if (relation2traceInterface2 != null) {
 			relation2traceInterface2.analyzeTraceElements(headNodeGroups, relationAnalysis);
@@ -132,6 +145,55 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 		if (relation2invocationClass2 != null) {
 			relation2invocationClass2.analyzeTraceElements(headNodeGroups, relationAnalysis);
 		}
+	}
+
+	protected @Nullable Map<@NonNull VariableDeclaration, @NonNull Node> analyzeWrapper(@NonNull RelationAnalysis relationAnalysis, @NonNull List<@NonNull HeadNodeGroup> headNodeGroups) {//, @NonNull RelationAnalysis relationAnalysis) {
+		Relation relation = relationAnalysis.getRule();
+		String name = relationAnalysis.getName();
+		if ("FtoP1_Daughter2Female".equals(name)) {
+			getClass();
+		}
+		boolean compatibleRootVariables = true;
+		Iterable<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(relation);
+		for (@NonNull VariableDeclaration rootVariable : rootVariables) {
+			boolean foundHeadGroup = false;
+			Node rootNode = relationAnalysis.getReferenceNode(rootVariable);
+			for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {
+				if (Iterables.contains(headNodeGroup.getHeadNodes(), rootNode)) {
+					foundHeadGroup = true;
+				}
+				else {
+					Iterable<@NonNull Node> uniqueNodes = headNodeGroup.getUniqueNodes();
+					if ((uniqueNodes != null) && Iterables.contains(uniqueNodes, rootNode)) {
+						foundHeadGroup = true;
+						compatibleRootVariables = false;
+					}
+				}
+			}
+			assert foundHeadGroup;
+		}
+		if (compatibleRootVariables) {
+			return null;
+		}
+		Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2headNode = new HashMap<>();
+		for (@NonNull VariableDeclaration rootVariable : rootVariables) {
+			Node rootNode = relationAnalysis.getReferenceNode(rootVariable);
+			Node preferredHeadNode = null;
+			for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {
+				Iterable<@NonNull Node> headNodes = headNodeGroup.getHeadNodes();
+				if (!Iterables.contains(headNodes, rootNode)) {
+					Iterable<@NonNull Node> uniqueNodes = headNodeGroup.getUniqueNodes();
+					if ((uniqueNodes == null) || !Iterables.contains(uniqueNodes, rootNode)) {
+						continue;
+					}
+				}
+				assert preferredHeadNode == null;
+				preferredHeadNode = headNodeGroup.getPreferredHeadNode(headNodes);
+			}
+			assert preferredHeadNode != null;
+			rootVariable2headNode.put(rootVariable, preferredHeadNode);
+		}
+		return rootVariable2headNode;
 	}
 
 	@Override
@@ -244,6 +306,9 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 		}
 		if (relation2invocationClass != null) {
 			relation2invocationClass.synthesizeTraceModel(ruleAnalysis);
+		}
+		if (relation2wrapperClass != null) {
+			relation2wrapperClass.synthesizeTraceModel(ruleAnalysis);
 		}
 	}
 
