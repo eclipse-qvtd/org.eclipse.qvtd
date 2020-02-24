@@ -23,16 +23,10 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::tinyisomorph {
 		/**
 		 *  Map each instance to an isomorphic instance
 		 */
-		top relation a2b {
-			enforce domain mma a0 : A {
-				a = a1 : A
-			};
-			enforce domain mmb b0 : B {
-				b = b1 : B
-			};
-			when {
-				a2b(a1, b1);
-			}
+		top relation A2B {
+			enforce domain mma a0 : A { a = a1 : A };
+			enforce domain mmb b0 : B { b = b1 : B };
+			when { A2B(a1, b1); }
 		}
 	}
 }
