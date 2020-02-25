@@ -948,7 +948,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						NewStatement newStatement = (NewStatement)asVariable;
 						NewStatementPart newStatementPart = helper.createNewStatementPart(property, valueExp);
 						newStatement.getOwnedParts().add(newStatementPart);
-						addTrace(newStatement, edge);
+						addTrace(newStatementPart, edge);
 					}
 				}
 				else {
