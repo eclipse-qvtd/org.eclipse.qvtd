@@ -56,7 +56,6 @@ import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvti.analysis.QVTiProductionConsumption;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -256,16 +255,16 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG() throws Exception {
-		TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);;
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
-		//	AbstractTransformer.ASSIGNMENTS.setState(true);
-		//	AbstractTransformer.CREATIONS.setState(true);
-		//	AbstractTransformer.EXCEPTIONS.setState(true);
-		//	AbstractTransformer.GETTINGS.setState(true);
-		//	AbstractTransformer.INVOCATIONS.setState(true);
-		//		AbstractMerger.EARLY.setState(true);
+		//		AbstractTransformer.ASSIGNMENTS.setState(true);
+		//		AbstractTransformer.CREATIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.GETTINGS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//		QVTm2QVTp.PARTITIONING.setState(true);
+		/*	//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
 		//		AbstractQVTb2QVTs.REGION_ORDER.setState(true);
@@ -273,24 +272,23 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTscheduleConstants.POLLED_PROPERTIES.setState(true);
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
 		//		FallibilityAnalysis.LOCAL.setState(true);;
-		//	TransformationPartitioner.REGION_CYCLES.setState(true);;
+		TransformationPartitioner.REGION_CYCLES.setState(true);;
 		TransformationPartitioner.PARTITION_CYCLES.setState(true);;
 		//		TransformationPartitioner.DISCRIMINATION.setState(true);;
-		//	TransformationPartitioner.PARTITION_IMMEDIATE_PREDECESSORS.setState(true);;
-		//	TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);;
-		//	TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);;
+		TransformationPartitioner.PARTITION_TRANSITIVE_PREDECESSORS.setState(true);;
+		TransformationPartitioner.PARTITION_TRANSITIVE_SUCCESSORS.setState(true);;
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);;
 		//		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
-		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
-		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true); */
 		//		TransformationPartitioner.PARALLEL_SCHEDULE.setState(true);
 		//		TransformationPartitioner.PROPERTY_NOTIFY.setState(true);
 		//		TransformationPartitioner.PROPERTY_OBSERVE.setState(true);
 		//	TransformationPartitioner.MERGE_SEQUENTIAL.setState(true);
-		QVTiProductionConsumption.SUMMARY.setState(true);
+		//		QVTiProductionConsumption.SUMMARY.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		//	TracedHeadAnalysis.TRACED_HEAD_NODE_GROUPS.setState(true);
 		//	TracedHeadAnalysis.TRACED_HEAD_IMMEDIATE_SOURCES.setState(true);
@@ -1290,11 +1288,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
-		AbstractTransformer.ASSIGNMENTS.setState(true);
-		AbstractTransformer.CREATIONS.setState(true);
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.GETTINGS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTp2QVTs.REGION_ORDER.setState(true);
 		Class<? extends Transformer> txClass;
