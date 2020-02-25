@@ -442,10 +442,6 @@ public class CheckedConditionAnalysis
 		if (allCheckedPropertyDatums != null) {
 			return allCheckedPropertyDatums;
 		}
-		String name = partition.getName();
-		if ("mapHelper_Context_qvtr«loop»".equals(name)) {
-			getClass();
-		}
 		@NonNull ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 		//
 		// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous

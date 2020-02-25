@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -617,23 +616,4 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		csAssignment.setIsPartial(asVariableAssignment.isIsPartial());
 		return csAssignment;
 	}
-
-	@Override
-	public ElementCS visitVariableDeclaration(@NonNull VariableDeclaration object) {
-		String name = object.getName();
-		if ("this".equals(name)) {
-			getClass();
-		}
-		return super.visitVariableDeclaration(object);
-	}
-
-	@Override
-	public @Nullable ElementCS visitVariableExp(@NonNull VariableExp asVariableExp) {
-		String name = asVariableExp.getName();
-		if ("this".equals(name)) {
-			getClass();
-		}
-		return super.visitVariableExp(asVariableExp);
-	}
-
 }

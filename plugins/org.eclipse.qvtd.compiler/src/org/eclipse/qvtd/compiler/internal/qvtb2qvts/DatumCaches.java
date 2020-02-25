@@ -363,11 +363,11 @@ public class DatumCaches
 		if (targetClassDatum == null) {
 			Property property = QVTscheduleUtil.getReferredProperty(propertyDatum);
 			Type type = QVTbaseUtil.getType(property);
-			if (property.isIsMany()) {
-				//	CollectionTypeParameters<@NonNull Type> typeParameters = TypeUtil.createCollectionTypeParameters(type, isNullFree, property.get, upper);
-				//	return completeClass.getCollectionType(typeParameters);
-				getClass();
-			}
+			//	if (property.isIsMany()) {
+			//	CollectionTypeParameters<@NonNull Type> typeParameters = TypeUtil.createCollectionTypeParameters(type, isNullFree, property.get, upper);
+			//	return completeClass.getCollectionType(typeParameters);
+			//		getClass();
+			//	}
 			TypedModel typedModel = domainUsageAnalysis.getUsage(property).getTypedModel(propertyDatum);
 			assert typedModel != null;
 			CompleteClass completeClass = completeModel.getCompleteClass(type);

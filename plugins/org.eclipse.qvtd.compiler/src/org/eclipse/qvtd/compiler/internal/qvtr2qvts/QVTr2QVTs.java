@@ -288,9 +288,6 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public @Nullable MappingRegion visitRelation(@NonNull Relation rIn) {
-			if ("mapOperationCallExp_Helper".equals(rIn.getName())) {
-				getClass();
-			}
 			RelationalTransformationAnalysis transformationAnalysis = (RelationalTransformationAnalysis) scheduleManager.getTransformationAnalysis();
 			RelationAnalysis relationAnalysis = this.relationAnalysis = transformationAnalysis.basicGetRuleAnalysis(rIn);
 			if (relationAnalysis == null) {
@@ -598,9 +595,6 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			for (@NonNull Rule rule : rules) {
 				RelationAnalysis relationAnalysis = (RelationAnalysis) transformationAnalysis.basicGetRuleAnalysis(rule);
 				if (relationAnalysis != null) {
-					if ("mapOperationCallExp_Helper".equals(rule.getName())) {
-						getClass();
-					}
 					Set<@NonNull Node> excludedNodes = relationAnalysis.computeTraceAndTraceComputationNodes();
 					Rule2TraceGroup relation2traceGroup = transformation2tracePackage.getRule2TraceGroup(rule);
 					relation2traceGroup.analyzeTraceElements(relationAnalysis, excludedNodes);
@@ -693,11 +687,5 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		}
 		else { */
 		return transformationAnalysis.gatherRuleRegions();
-	}
-
-	private Set<@NonNull Node> computeTraceAndTraceComputationNodes(
-			RelationAnalysis relationAnalysis) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

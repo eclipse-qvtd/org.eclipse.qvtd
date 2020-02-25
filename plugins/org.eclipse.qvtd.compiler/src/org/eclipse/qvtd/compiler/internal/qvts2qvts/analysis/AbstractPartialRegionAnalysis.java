@@ -389,9 +389,6 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull PRA extends Partial
 						addConsumptionOfOutputNode(node);
 					}
 				}
-				else {
-					getClass();
-				}
 			}
 			else if (isSpeculated(node) && isMiddle && !isOperation) {	// middle/operation drop through to throw
 				if (!node.isHead()) {		// Don't create a self-consumption cycle

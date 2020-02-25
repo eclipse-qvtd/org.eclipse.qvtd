@@ -127,10 +127,6 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 	} */
 
 	protected void analyzePatternNodes(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups, @NonNull RelationAnalysis relationAnalysis) {
-		String name = relation.getName();
-		if ("FtoN2_Daughter2DaughterPlan".equals(name)) {
-			getClass();
-		}
 		boolean manyTracesPerHead = headNodeGroups.size() > 2;
 		Set<@NonNull Node> allHeadGroupNodes = new HashSet<>();
 		for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {

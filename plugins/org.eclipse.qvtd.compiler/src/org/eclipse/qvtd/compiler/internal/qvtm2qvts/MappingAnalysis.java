@@ -448,10 +448,6 @@ public class MappingAnalysis extends RuleAnalysis
 
 	@Override
 	public void analyzeMappingRegion() {
-		String name = region.getName();
-		if ("associationToForeignKey".equals(name)) {
-			getClass();
-		}
 		//
 		// Create the BLUE/CYAN guard nodes.
 		//

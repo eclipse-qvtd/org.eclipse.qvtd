@@ -566,7 +566,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 		//	this.traceNode = traceNode;
 		this.thisAndTraceNodes = thisNode != null ? Lists.newArrayList(thisNode, traceNode) : Collections.singletonList(traceNode);
 		if (dispatchNode != null) {
-			for (@NonNull Edge edge : dispatchNode.getOutgoingEdges()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(dispatchNode)) {
 				if (edge.isSuccess() && edge.isRealized()) {
 					this.dispatchSuccessEdge = edge;
 				}
@@ -957,9 +957,6 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 	}
 
 	private @Nullable Iterable<@NonNull Node> createRestPartitionFactory(@Nullable Set<@NonNull Node> coCyclicInitNodes) {
-		if ("mapIfExp_qvtr".equals(region.getName())) {
-			getClass();
-		}
 		//
 		//	Create RestPartitionFactory to progress the remaining realized edges.
 		//
@@ -1015,9 +1012,6 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 	}
 
 	private void createXtraPartitionFactory(@NonNull Iterable<@NonNull Node> xtraRestNodes) {
-		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(region.getName())) {
-			getClass();
-		}
 		//
 		//	Create XtraPartitionFactory to progress the remaining realized edges.
 		//
@@ -1074,10 +1068,6 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 
 	@Override
 	public @NonNull Iterable<@NonNull PartitionAnalysis> partition() {
-		String name = regionAnalysis.getName();
-		if ("mapHelper_Context_qvtr".equals(name)) {
-			getClass();
-		}
 		//
 		//	Create the PartitionFactories.
 		//

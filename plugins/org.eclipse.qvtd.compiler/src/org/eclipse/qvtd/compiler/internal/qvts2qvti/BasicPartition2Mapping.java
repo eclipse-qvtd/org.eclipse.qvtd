@@ -264,9 +264,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						if (!edge.isConditional()) {
 							addEdge(edge);
 						}
-						else {
-							getClass();
-						}
 					}
 				}
 				Node node = checkedCondition.getNode();
@@ -527,9 +524,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		StringBuilder s = TransformationPartitioner.PROPERTY_OBSERVE.isActive() ? new StringBuilder() : null;
 		if (s != null) {
 			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
-		}
-		if ("mapOperationCallExp_Helper_qvtr«init»".equals(partition.getName())) {
-			getClass();
 		}
 		checkedConditionAnalysis.computeCheckedPropertyDatums(s);
 		if (s != null) {
@@ -833,9 +827,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	}
 
 	private void createObservedProperties() {
-		if ("mapOperationCallExp_Helper_qvtr«init»".equals(partition.getName())) {
-			getClass();
-		}
 		Set<@NonNull PropertyDatum> allCheckedPropertyDatums = checkedConditionAnalysis.getAllCheckedPropertyDatums();
 		if (!allCheckedPropertyDatums.isEmpty()) {		// FIXME Use PropertyDatum to handle derived accesses
 			//	Set<@NonNull Property> allCheckedProperties = new HashSet<>();
@@ -906,18 +897,12 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	 * Determine a traversal order for the old edges then synthesize the patttern matching statements.
 	 */
 	private void createPatternMatch() {
-		if ("mapOperationCallExp_Helper_qvtr«global»".equals(partition.getName())) {
-			getClass();
-		}
 		OldEdgeSchedule oldSchedule = new OldEdgeSchedule();
 		Iterable<@NonNull CheckedCondition> checkedConditions = oldSchedule.analyze();
 		oldSchedule.synthesize(checkedConditions);
 	}
 
 	private void createPropertyAssignments(@NonNull Iterable<@NonNull NavigableEdge> sortedRealizedEdges) {
-		if ("mapIntegerExp_qvtr«init»".equals(partition.getName())) {
-			getClass();
-		}
 		StringBuilder s = TransformationPartitioner.PROPERTY_NOTIFY.isActive() ? new StringBuilder() : null;
 		if (s != null) {
 			s.append("[" + partition.getPassRangeText() + "] " + partition.getName());
@@ -1326,10 +1311,6 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	 */
 	@Override
 	public void synthesizeLocalStatements() {
-		@SuppressWarnings("unused") String name = partition.getName();
-		if ("mapNavigationOrAttributeCallExp_Helper_qvtr«init»".equals(name)) {
-			getClass();
-		}
 		createHeadAndGuardNodeVariables();				// BLUE/CYAN guard/append nodes
 		createPatternMatch();							// BLUE/CYAN nodes and edges
 		Iterable<@NonNull NavigableEdge> sortedRealizedEdges = getSortedAssignments();

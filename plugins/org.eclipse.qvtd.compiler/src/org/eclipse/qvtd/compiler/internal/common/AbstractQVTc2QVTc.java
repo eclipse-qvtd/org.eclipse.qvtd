@@ -97,7 +97,6 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		@Override
 		public EObject get(Object oIn) {
 			if (oIn instanceof Transformation) {
-				getClass();
 				return (EObject) oIn;
 			}
 			EObject eOut = super.get(oIn);
