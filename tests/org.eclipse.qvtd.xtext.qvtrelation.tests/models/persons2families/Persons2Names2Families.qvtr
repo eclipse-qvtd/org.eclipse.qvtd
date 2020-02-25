@@ -439,7 +439,7 @@ transformation Persons2Names2Families(
 	}
 	
 	
-	top relation FtoP0_FamilyRegister2PersonRegister {		
+/*	top relation FtoP0_FamilyRegister2PersonRegister {		
 		domain familiesRight fr : FamilyRegister{};	  	
 	  	enforce domain persons pr : PersonRegister{};	    
 	    where {
@@ -448,13 +448,13 @@ transformation Persons2Names2Families(
 	    	FtoP1_Son2Male(fr, pr);
 	    	FtoP1_Daughter2Female(fr, pr);
 	    }
-	}
+	} */
 	
 	
 	--------------------------------------------------------------------------------------------------------------
 	-- Transform Fathers to Males
 	--------------------------------------------------------------------------------------------------------------
-	relation FtoP1_Father2Male {
+	top relation FtoP1_Father2Male {
 		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
 				father = m : FamilyMember
@@ -472,7 +472,7 @@ transformation Persons2Names2Families(
 	--------------------------------------------------------------------------------------------------------------
 	-- Transform Mothers to Females
 	--------------------------------------------------------------------------------------------------------------
-	relation FtoP1_Mother2Female {
+	top relation FtoP1_Mother2Female {
 		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
 				mother = m : FamilyMember
@@ -489,7 +489,7 @@ transformation Persons2Names2Families(
 	--------------------------------------------------------------------------------------------------------------
 	-- Transform Sons to Males
 	--------------------------------------------------------------------------------------------------------------
-	relation FtoP1_Son2Male {
+	top relation FtoP1_Son2Male {
 		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
 				sons = m : FamilyMember
@@ -506,7 +506,7 @@ transformation Persons2Names2Families(
 	--------------------------------------------------------------------------------------------------------------
 	-- Transform Daughters to Females
 	--------------------------------------------------------------------------------------------------------------
-	relation FtoP1_Daughter2Female {
+	top relation FtoP1_Daughter2Female {
 		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
 				daughters = m : FamilyMember
