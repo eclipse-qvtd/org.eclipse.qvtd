@@ -27,6 +27,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionClassAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -396,11 +397,11 @@ public class OriginalContentsAnalysis
 					if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, elementalTargetClassDatum)) {
 						matches = true;
 					}
-					//	else if (requiredClassDatum.isCollectionType()) {
-					//		if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, QVTscheduleUtil.getElementalClassDatum(((CollectionClassDatum)requiredClassDatum)))) {
-					//			matches = true;
-					//		}
-					//	}
+					else if (realizedClassDatum.isCollectionType()) {
+						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)realizedClassDatum), elementalTargetClassDatum)) {
+							matches = true;
+						}
+					}
 				}
 				if (matches) {
 					if (conformantRealizedEdges == null) {
