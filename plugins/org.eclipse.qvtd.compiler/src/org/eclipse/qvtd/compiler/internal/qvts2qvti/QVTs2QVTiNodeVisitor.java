@@ -368,6 +368,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 					collectionLiteralPart = helper.createCollectionItem((OCLExpression) typedElement);
 				}
 				part2index.put(collectionLiteralPart, index);
+				context.addTrace(collectionLiteralPart, expNode);
 			}
 		}
 		List<@NonNull CollectionLiteralPart> asParts = new ArrayList<>(part2index.keySet());

@@ -1090,7 +1090,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private @NonNull OCLExpression createVariableExp(@NonNull Node node) {
 		//	assert !node.isConditional();  -- permitted to avoid Set value expression hazards
 		if (node.isNullLiteral()) {
-			return helper.createNullLiteralExp();
+			NullLiteralExp nullLiteralExp = helper.createNullLiteralExp();
+			addTrace(nullLiteralExp, node);
+			return nullLiteralExp;
 		}
 		VariableDeclaration variable = getVariableDeclaration(node);
 		return PivotUtil.createVariableExp(variable);
