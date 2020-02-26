@@ -33,6 +33,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalys
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
@@ -99,11 +100,17 @@ public class ConnectionManager
 	 */
 	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Partition>> partition2children = new HashMap<>();
 
+	private final @NonNull Property oclContainerProperty;
+	private final @NonNull Property oclContentsProperty;
+
 	public ConnectionManager(@NonNull ProblemHandler problemHandler, @NonNull ScheduleManager scheduleManager, @NonNull LoadingRegionAnalysis loadingRegionAnalysis) {
 		//	super(qvtm2qvts.getEnvironmentFactory());
 		this.scheduleManager = scheduleManager;
 		this.loadingRegionAnalysis = loadingRegionAnalysis;
 		this.originalContentsAnalysis = scheduleManager.getOriginalContentsAnalysis();
+		StandardLibraryHelper standardLibraryHelper = scheduleManager.getStandardLibraryHelper();
+		this.oclContainerProperty = standardLibraryHelper.getOclContainerProperty();
+		this.oclContentsProperty = standardLibraryHelper.getOclContentsProperty();
 	}
 
 	public void addCallToChild(@NonNull Partition parentPartition, @NonNull Partition childPartition) {
@@ -265,58 +272,75 @@ public class ConnectionManager
 	/**
 	 * Create an EdgeConnection for the predicatedEdges and/or their target Class node.
 	 */
-	private void createClassEdgeConnection(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
+	private void createClassEdgeConnection(@Nullable StringBuilder s, @NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> consumedEdges) {
 		RootRegion invokingRegion2 = rootRegion;
 		assert invokingRegion2 != null;
 		Node castTarget = castTargetNode;
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
-		for (@NonNull NavigableEdge predicatedEdge : predicatedEdges) {
-			assert predicatedEdge.isNavigation();
-			assert predicatedEdge.getIncomingConnection() == null;
-			assert !predicatedEdge.isCast();
-			Property predicatedProperty = QVTscheduleUtil.getReferredProperty((NavigationEdge)predicatedEdge);
-			assert !predicatedProperty.isIsImplicit();
+		for (@NonNull NavigableEdge consumedEdge : consumedEdges) {
+			assert consumedEdge.isNavigation();
+			assert consumedEdge.getIncomingConnection() == null;
+			assert !consumedEdge.isCast();
+			Property consumedProperty = QVTscheduleUtil.getReferredProperty((NavigationEdge)consumedEdge);
+			assert !consumedProperty.isIsImplicit();
 			boolean isDataType = classDatum.isDataType();
 			assert !isDataType;
 			Iterable<@NonNull Node> sourceNodes = getNewNodes(classDatum);
-			Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge);
-			if (realizedEdges != null) {
-				Set<@NonNull Region> edgeSourceRegions = new HashSet<>();
-				Set<@NonNull Region> nodeSourceRegions = new HashSet<>();
-				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-					edgeSourceRegions.add(QVTscheduleUtil.getOwningRegion(realizedEdge));
-				}
-				if (sourceNodes != null) {
-					for (@NonNull Node sourceNode : sourceNodes) {
-						nodeSourceRegions.add(QVTscheduleUtil.getOwningRegion(sourceNode));
-					}
+			Iterable<@NonNull NavigableEdge> producedEdges = getNewEdges(consumedEdge);
+			if (producedEdges != null) {
+				UniqueList<@NonNull Region> edgeSourceRegions = new UniqueList<>();
+				for (@NonNull NavigableEdge producedEdge : producedEdges) {
+					edgeSourceRegions.add(QVTscheduleUtil.getOwningRegion(producedEdge));
 				}
 				//
-				// Create an EdgeConnection for the edge realizations unless all edges are sources by node sources.
+				// Create an EdgeConnection for the edge realizations.
 				//
-				//	if (!nodeSourceRegions.containsAll(edgeSourceRegions)) {	// If edges are assigned independently of their targets.
-				Set<@NonNull Region> conformantEdgeSourceRegions = null;
-				List<@NonNull NavigableEdge> thoseEdges = null;
-				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-					if (scheduleManager.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
-						if (thoseEdges == null) {
-							thoseEdges = new ArrayList<>();
-							conformantEdgeSourceRegions = new HashSet<>();
-						}
-						if (!thoseEdges.contains(realizedEdge)) {
-							thoseEdges.add(realizedEdge);
-							assert conformantEdgeSourceRegions != null;
-							conformantEdgeSourceRegions.add(QVTscheduleUtil.getOwningRegion(realizedEdge));
+				UniqueList<@NonNull NavigableEdge> thoseEdges = null;
+				for (@NonNull NavigableEdge producedEdge : producedEdges) {
+					Node producedSource = QVTscheduleUtil.getSourceNode(producedEdge);
+					Node producedTarget = QVTscheduleUtil.getTargetNode(producedEdge);
+					Property producedProperty = QVTscheduleUtil.getReferredProperty((NavigationEdge)producedEdge);
+					Node consumedSource;
+					Node consumedTarget;
+					// FIXME Workingaround Bug 560541 - should be able to exploit oclContainer/oclContents isComposite
+					boolean producedContainer = (producedProperty == oclContainerProperty) || ((producedProperty.getOpposite() != null) && producedProperty.getOpposite().isIsComposite());
+					boolean producedContainment = (producedProperty == oclContentsProperty) || producedProperty.isIsComposite();
+					boolean consumedContainer = (consumedProperty == oclContainerProperty) || ((consumedProperty.getOpposite() != null) && consumedProperty.getOpposite().isIsComposite());
+					boolean consumedContainment = (consumedProperty == oclContentsProperty) || consumedProperty.isIsComposite();
+					if ((producedProperty == consumedProperty) || ((producedContainer == consumedContainer) && (producedContainment == consumedContainment))) {	// Normalize consumed direction to produced direction
+						consumedSource = QVTscheduleUtil.getSourceNode(consumedEdge);
+						consumedTarget = QVTscheduleUtil.getTargetNode(consumedEdge);
+					}
+					else {
+						assert (producedProperty == consumedProperty.getOpposite()) || ((producedContainer == consumedContainment) && (producedContainment == consumedContainer));
+						consumedSource = QVTscheduleUtil.getTargetNode(consumedEdge);
+						consumedTarget = QVTscheduleUtil.getSourceNode(consumedEdge);
+					}
+					ClassDatum producedSourceClassDatum = QVTscheduleUtil.getClassDatum(producedSource);
+					ClassDatum consumedSourceClassDatum = QVTscheduleUtil.getClassDatum(consumedSource);
+					ClassDatum producedElementalClassDatum = scheduleManager.getElementalClassDatum(producedSourceClassDatum);
+					ClassDatum consumedElementalClassDatum = scheduleManager.getElementalClassDatum(consumedSourceClassDatum);
+					// FIXME why is this so complicated irregular ? testOCL2QVTi_Source2Target_CG is a demanding test
+					if (QVTscheduleUtil.conformsTo(producedElementalClassDatum, consumedElementalClassDatum)
+							|| (!producedSource.isRealized() && QVTscheduleUtil.conformsTo(consumedElementalClassDatum, producedElementalClassDatum))) {
+						ClassDatum producedTargetClassDatum = QVTscheduleUtil.getClassDatum(producedTarget);
+						ClassDatum consumedTargetClassDatum = QVTscheduleUtil.getClassDatum(consumedTarget);
+						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(producedTargetClassDatum, consumedTargetClassDatum)
+								|| (!producedTarget.isRealized() && QVTscheduleUtil.conformsToClassOrBehavioralClass(consumedTargetClassDatum, producedTargetClassDatum))) {
+							if (thoseEdges == null) {
+								thoseEdges = new UniqueList<>();
+							}
+							thoseEdges.add(producedEdge);
 						}
 					}
 				}
-				if (thoseEdges != null) { //&& !nodeSourceRegions.containsAll(conformantEdgeSourceRegions)) {
-					EdgeConnection edgeConnection = getEdgeConnection(invokingRegion2, thoseEdges, predicatedProperty);
+				if (thoseEdges != null) {
+					EdgeConnection edgeConnection = getEdgeConnection(invokingRegion2, thoseEdges, consumedProperty);
 					if (s != null) {
-						s.append("\n    EdgeConnection \"" + edgeConnection + "\" to " + predicatedEdge);
+						s.append("\n    EdgeConnection \"" + edgeConnection + "\" to " + consumedEdge);
 					}
-					if (!Iterables.contains(edgeConnection.getTargetEdges(), predicatedEdge)) {
-						edgeConnection.addUsedTargetEdge(predicatedEdge, false);
+					if (!Iterables.contains(edgeConnection.getTargetEdges(), consumedEdge)) {
+						edgeConnection.addUsedTargetEdge(consumedEdge, false);
 						if (s != null) {
 							for (@NonNull NavigableEdge thatEdge : thoseEdges) {
 								s.append("\n      from " + thatEdge.getOwningRegion() + "  : " + thatEdge);
@@ -324,7 +348,6 @@ public class ConnectionManager
 						}
 					}
 				}
-				//	}
 				//
 				// Create a NodeConnection for the node realizations.
 				//
@@ -335,13 +358,13 @@ public class ConnectionManager
 						&& !castTarget.isOperation()
 						&& (castTarget.getIncomingConnection() == null)
 						//			 && !castTarget.isAttributeNode()
-						//			 && !rootRootRegion.isOnlyCastOrRecursed(predicatedNode)
-						//			 && !hasEdgeConnection(predicatedNode)
+						//			 && !rootRootRegion.isOnlyCastOrRecursed(consumedNode)
+						//			 && !hasEdgeConnection(consumedNode)
 						) {
-					NodeConnection predicatedConnection = getNodeConnection(invokingRegion2, sourceNodes, classDatum, scheduleManager.getDomainUsage(classDatum));
-					predicatedConnection.addUsedTargetNode(castTarget, false);
+					NodeConnection nodeConnection = getNodeConnection(invokingRegion2, sourceNodes, classDatum, scheduleManager.getDomainUsage(classDatum));
+					nodeConnection.addUsedTargetNode(castTarget, false);
 					if (s != null) {
-						s.append("\n    NodeConnection \"" + predicatedConnection + "\" to " + castTarget);
+						s.append("\n    NodeConnection \"" + nodeConnection + "\" to " + castTarget);
 						for (@NonNull Node sourceNode : sourceNodes) {
 							s.append("\n      from " + sourceNode.getOwningRegion() + " : " + sourceNode);
 						}

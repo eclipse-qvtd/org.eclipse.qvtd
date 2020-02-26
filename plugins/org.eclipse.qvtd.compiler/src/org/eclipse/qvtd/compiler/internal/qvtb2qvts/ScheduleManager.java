@@ -39,7 +39,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
@@ -156,11 +155,6 @@ public interface ScheduleManager
 	 * Return true if a mapping may assign this property in an input model.
 	 */
 	boolean isDirty(@NonNull Property property);
-
-	/**
-	 * Return true if the elemental source type of thatEdge is compatible with the source type of thisEdge.
-	 */
-	boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge);
 
 	/**
 	 * Return true if domainUsage's typed model is configured as an input (and possibly an input+output).

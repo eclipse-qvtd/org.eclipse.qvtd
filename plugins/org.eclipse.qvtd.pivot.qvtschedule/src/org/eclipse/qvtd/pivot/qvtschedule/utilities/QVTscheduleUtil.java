@@ -710,26 +710,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return false;
 	}
 
-	/**
-	 * Return true if the target of thatEdge is compatible with the target of thisEdge.
-	 */
-	public static boolean isConformantTarget(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
-		Node thatTarget = thatEdge.getEdgeTarget();
-		Node thisTarget = thisEdge.getEdgeTarget();
-		ClassDatum thatType = getClassDatum(thatTarget);
-		ClassDatum thisType = getClassDatum(thisTarget);
-		if (conformsToClassOrBehavioralClass(thatType, thisType)) {
-			return true;
-		}
-		if (thatTarget.isRealized()) {
-			return false;
-		}
-		if (conformsToClassOrBehavioralClass(thisType, thatType)) {
-			return true;
-		}
-		return false;
-	}
-
 	/*	public static boolean isRealizedIncludes(@NonNull Edge edge) {	// FIXME includes should be a pseudo-navigation edge
 		if (!edge.isRealized()) {
 			return false;

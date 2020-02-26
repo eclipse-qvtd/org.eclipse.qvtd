@@ -865,28 +865,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
-		Node thatSource = thatEdge.getEdgeSource();
-		Node thisSource = thisEdge.getEdgeSource();
-		ClassDatum thatClassDatum = QVTscheduleUtil.getClassDatum(thatSource);
-		ClassDatum thisClassDatum = QVTscheduleUtil.getClassDatum(thisSource);
-		ClassDatum thatElementalClassDatum = getElementalClassDatum(thatClassDatum);
-		ClassDatum thisElementalClassDatum = getElementalClassDatum(thisClassDatum);
-		//	CompleteClass thatType = ClassUtil.nonNullState(thatElementalClassDatum.getCompleteClass());
-		//	CompleteClass thisType = ClassUtil.nonNullState(thisElementalClassDatum.getCompleteClass());
-		if (QVTscheduleUtil.conformsTo(thatElementalClassDatum, thisElementalClassDatum)) {
-			return true;
-		}
-		if (thatSource.isRealized()) {
-			return false;
-		}
-		if (QVTscheduleUtil.conformsTo(thisElementalClassDatum, thatElementalClassDatum)) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
 	public boolean isInput(@NonNull DomainUsage domainUsage) {
 		return getDirectedDomainUsageAnalysis().isInput(domainUsage);
 	}
