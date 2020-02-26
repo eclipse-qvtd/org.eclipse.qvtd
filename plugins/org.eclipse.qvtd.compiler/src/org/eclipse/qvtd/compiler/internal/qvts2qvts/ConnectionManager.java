@@ -318,15 +318,17 @@ public class ConnectionManager
 					}
 					ClassDatum producedSourceClassDatum = QVTscheduleUtil.getClassDatum(producedSource);
 					ClassDatum consumedSourceClassDatum = QVTscheduleUtil.getClassDatum(consumedSource);
-					ClassDatum producedElementalClassDatum = scheduleManager.getElementalClassDatum(producedSourceClassDatum);
-					ClassDatum consumedElementalClassDatum = scheduleManager.getElementalClassDatum(consumedSourceClassDatum);
-					// FIXME why is this so complicated irregular ? testOCL2QVTi_Source2Target_CG is a demanding test
-					if (QVTscheduleUtil.conformsTo(producedElementalClassDatum, consumedElementalClassDatum)
-							|| (!producedSource.isRealized() && QVTscheduleUtil.conformsTo(consumedElementalClassDatum, producedElementalClassDatum))) {
+					ClassDatum producedElementalSourceClassDatum = scheduleManager.getElementalClassDatum(producedSourceClassDatum);
+					ClassDatum consumedElementalSourceClassDatum = scheduleManager.getElementalClassDatum(consumedSourceClassDatum);
+					// FIXME This was irregular. Was changing to elemental throughout ok ? testOCL2QVTi_Source2Target_CG is a demanding test
+					if (QVTscheduleUtil.conformsTo(producedElementalSourceClassDatum, consumedElementalSourceClassDatum)
+							|| (!producedSource.isRealized() && QVTscheduleUtil.conformsTo(consumedElementalSourceClassDatum, producedElementalSourceClassDatum))) {
 						ClassDatum producedTargetClassDatum = QVTscheduleUtil.getClassDatum(producedTarget);
 						ClassDatum consumedTargetClassDatum = QVTscheduleUtil.getClassDatum(consumedTarget);
-						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(producedTargetClassDatum, consumedTargetClassDatum)
-								|| (!producedTarget.isRealized() && QVTscheduleUtil.conformsToClassOrBehavioralClass(consumedTargetClassDatum, producedTargetClassDatum))) {
+						ClassDatum producedElementalTargetClassDatum = scheduleManager.getElementalClassDatum(producedTargetClassDatum);
+						ClassDatum consumedElementalTargetClassDatum = scheduleManager.getElementalClassDatum(consumedTargetClassDatum);
+						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(producedElementalTargetClassDatum, consumedElementalTargetClassDatum)
+								|| (!producedTarget.isRealized() && QVTscheduleUtil.conformsToClassOrBehavioralClass(consumedElementalTargetClassDatum, producedElementalTargetClassDatum))) {
 							if (thoseEdges == null) {
 								thoseEdges = new UniqueList<>();
 							}
