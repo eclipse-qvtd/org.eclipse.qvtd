@@ -1017,20 +1017,20 @@ public class ConnectionManager
 	}
 
 	public boolean isHazardousRead(@Nullable StringBuilder s, @NonNull Partition partition, @NonNull NavigationEdge edge) {
-		//	if (edge.isRealized()) {
-		Role edgeRole = partition.getRole(edge);
-		assert edgeRole != null;
-		if (!edgeRole.isRealized()) {
-			Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-			if (sourceNode.isTrace()) {
-				return false;		// Trace edges are not hazardous - defined by caller / realizer
-			}
-			Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-			if (targetNode.isTrace()) {
-				return false;		// Tolerate the opposite
+		if (!edge.isSuccess()) {
+			Role edgeRole = partition.getRole(edge);
+			assert edgeRole != null;
+			if (!edgeRole.isRealized()) {
+				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+				if (sourceNode.isTrace()) {
+					return false;		// Trace edges are not hazardous - defined by caller / realizer
+				}
+				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+				if (targetNode.isTrace()) {
+					return false;		// Tolerate the opposite
+				}
 			}
 		}
-		//	}
 		Property property = QVTscheduleUtil.getReferredProperty(edge);
 		@SuppressWarnings("unused") String name = property.getName();
 		Property oppositeProperty = property.getOpposite();
