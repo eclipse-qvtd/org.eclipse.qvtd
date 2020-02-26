@@ -660,12 +660,12 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 			if (connectionAnalyses != null) {				// consumption is optional (may be produced only for output)
 				PassRange overallProductionPassRange = new PassRange();
 				PassRange overallConsumptionPassRange = new PassRange();
-				boolean needsNotify = false;
+				boolean passRangeNeedsNotify = false;
 				for (@NonNull ConnectionAnalysis connectionAnalysis : connectionAnalyses) {
 					PassRange productionPassRange = connectionAnalysis.getProductionPassRange();
 					PassRange consumptionPassRange = connectionAnalysis.getConsumptionPassRange();
 					if (!productionPassRange.precedes(consumptionPassRange)) {
-						needsNotify = true;
+						passRangeNeedsNotify = true;
 					}
 					overallProductionPassRange = overallProductionPassRange.max(productionPassRange);
 					overallConsumptionPassRange = overallConsumptionPassRange.max(consumptionPassRange);
@@ -675,26 +675,34 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 				//
 				//	boolean needsNotify = !productionPassRange.precedes(consumptionPassRange);
 				for (@NonNull NamedElement producer : producingAnalysis.producers) {
-					if (!(producer instanceof GuardParameter)) {			// GuardParameter are implicitly notified; no need to check
-						boolean isNotify = isNotify(producer);
-						if (isNotify != needsNotify) {
-							Property property = producingAnalysis.property;
-							StringBuilder sProblem = new StringBuilder();
-							sProblem.append("The production of: ");
-							sProblem.append(PrettyPrinter.print(property));
-							sProblem.append("\n\tat ");
-							sProblem.append(overallProductionPassRange);
-							sProblem.append(" should");
-							if (isNotify) {
-								sProblem.append(" not");
-							}
-							sProblem.append(" be notified for use at ");
-							sProblem.append(overallConsumptionPassRange);
-							Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
-							compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
-							if (s != null) {
-								s.append("\n      BAD " + sProblem);
-							}
+					boolean needsNotify;
+					if (producer instanceof GuardParameter) {
+						needsNotify = false;							// GuardParameter are implicitly notified; no need to check
+					}
+					else if (producer instanceof NewStatementPart) {
+						needsNotify = false;							// NewStatementPart are assigned on construction no need to check
+					}
+					else {
+						needsNotify = passRangeNeedsNotify;
+					}
+					boolean isNotify = isNotify(producer);
+					if (isNotify != needsNotify) {
+						Property property = producingAnalysis.property;
+						StringBuilder sProblem = new StringBuilder();
+						sProblem.append("The production of: ");
+						sProblem.append(PrettyPrinter.print(property));
+						sProblem.append("\n\tat ");
+						sProblem.append(overallProductionPassRange);
+						sProblem.append(" should");
+						if (isNotify) {
+							sProblem.append(" not");
+						}
+						sProblem.append(" be notified for use at ");
+						sProblem.append(overallConsumptionPassRange);
+						Mapping mapping = QVTimperativeUtil.getContainingMapping(producer);
+						compilerStep.addProblem(new MappingProblem(CompilerProblem.Severity.WARNING, mapping, sProblem.toString()));
+						if (s != null) {
+							s.append("\n      BAD " + sProblem);
 						}
 					}
 				}
