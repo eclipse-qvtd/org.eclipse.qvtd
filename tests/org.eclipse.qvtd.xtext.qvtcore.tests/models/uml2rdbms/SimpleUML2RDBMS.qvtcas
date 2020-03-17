@@ -1182,7 +1182,7 @@
         <bottomPattern>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="includes" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BKNJO">
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#JdFNc">
               <ownedSource xsi:type="pivot:IteratorExp" name="collect" type="#BUYI0" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#cs1Yj">
                 <ownedSource xsi:type="pivot:PropertyCallExp" name="fromAttributes" type="#4+DOW" referredProperty="SimpleUML2RDBMS.ecore.oclas#HZsNT">
                   <ownedSource xsi:type="pivot:VariableExp" name="c2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#gl0yk" referredVariable="#+CJ0Z"/>
