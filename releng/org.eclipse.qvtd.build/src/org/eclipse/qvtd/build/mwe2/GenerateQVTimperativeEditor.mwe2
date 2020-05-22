@@ -169,6 +169,9 @@ Workflow {
 		javaPackageName = "${QVTimperativeProjectName}"
 		grammarFileStem = "QVTimperative"
 	}
+	component = InjectCompatibilityAbstractInternalAntlrParser {
+		fileName = "${QVTimperativeRuntimeProject}/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperativeParser.java"
+	}
 	component = ConvertToUnixLineEndings {
 		directory = "${QVTimperativeRuntimeProject}/src-gen"
 	}
