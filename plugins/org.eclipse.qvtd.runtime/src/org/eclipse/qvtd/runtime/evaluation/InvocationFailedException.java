@@ -31,7 +31,7 @@ public class InvocationFailedException extends InvalidValueException
 	}
 
 	@Override
-	public String toString() {
-		return slotState.toString();
+	public @NonNull String toString() {
+		return String.valueOf(slotState);
 	}
 }
