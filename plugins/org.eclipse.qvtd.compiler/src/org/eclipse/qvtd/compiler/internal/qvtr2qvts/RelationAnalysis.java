@@ -1917,7 +1917,7 @@ public class RelationAnalysis extends RuleAnalysis
 			else {
 				traceNode = createRealizedStepNode(traceVariable);
 			}
->>>>>>> 5716624 bad wip success checks ***/
+			 ***/
 		}
 		else {
 			boolean hasPredicatedTrace = (incomingWhereInvocation2invocationAnalysis != null) && !hasOverrides;
