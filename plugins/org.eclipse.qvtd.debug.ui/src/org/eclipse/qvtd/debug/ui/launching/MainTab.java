@@ -1085,11 +1085,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 	}
 
 	/*	protected void refreshParametersGroup(@NonNull Group group, int style, @NonNull Map<String, String> map, @Nullable Comparator<ParameterRow> keyComparator) {
-<<<<<<< Upstream, based on ewillink/510348
 		List<String> keys = new ArrayList<>(map.keySet());
-=======
-		List<String> keys = new ArrayList<String>(map.keySet());
->>>>>>> 21d359e [495621] Add UMLX launch, CGed UMLX test
 		Collections.sort(keys);
 		Control[] children = group.getChildren();
 		for (int i = 0; i < children.length; i++) {
