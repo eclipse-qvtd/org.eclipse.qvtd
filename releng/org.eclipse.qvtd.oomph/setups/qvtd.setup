@@ -5,20 +5,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
-    xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
     name="qvtd"
     label="QVTd">
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Mars"
+      defaultValue="2020-03"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="git:GitCloneTask"
@@ -67,29 +66,142 @@
         <requirement
             name="org.eclipse.sdk.feature.group"/>
         <requirement
+            name="org.eclipse.emf.examples.library"/>
+        <requirement
             name="org.eclipse.emf.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.uml2.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.ocl.examples.feature.group"/>
         <requirement
             name="org.eclipse.emf.validation.feature.group"/>
         <requirement
+            name="org.eclipse.uml2.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.ocl.examples.xtext.tests"/>
+        <requirement
             name="org.eclipse.xtext.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.m2m.atl.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.epsilon.core.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.epsilon.emf.feature.feature.group"/>
+        <repositoryList
+            name="Latest">
+          <repository
+              url="http://download.eclipse.org/releases/latest"/>
+          <repository
+              url="https://download.eclipse.org/modeling/emf/emf/builds/release/latest"/>
+          <repository
+              url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/latest"/>
+          <repository
+              url="https://download.eclipse.org/tools/orbit/downloads/latest-R"/>
+          <repository
+              url="http://download.eclipse.org/epsilon/updates/2.0"/>
+        </repositoryList>
+        <repositoryList
+            name="2020-06">
+          <repository
+              url="http://download.eclipse.org/releases/2020-06"/>
+          <repository
+              url="https://download.eclipse.org/modeling/emf/emf/builds/release/2.22"/>
+          <repository
+              url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.12.0"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20200529191137/repository/"/>
+          <repository
+              url="https://download.eclipse.org/epsilon/updates/1.5"/>
+        </repositoryList>
+        <repositoryList
+            name="2020-03">
+          <repository
+              url="http://download.eclipse.org/releases/2020-03"/>
+          <repository
+              url="https://download.eclipse.org/modeling/emf/emf/builds/release/2.21"/>
+          <repository
+              url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.11.0"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20200224183213/repository/"/>
+          <repository
+              url="http://download.eclipse.org/epsilon/updates/1.5"/>
+        </repositoryList>
+        <repositoryList
+            name="2019-12">
+          <repository
+              url="http://download.eclipse.org/releases/2019-12"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20191126223242/repository/"/>
+        </repositoryList>
+        <repositoryList
+            name="2019-09">
+          <repository
+              url="http://download.eclipse.org/releases/2019-09"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20190827152740/repository/"/>
+        </repositoryList>
+        <repositoryList
+            name="2019-06">
+          <repository
+              url="http://download.eclipse.org/releases/2019-06"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20190602212107/repository/"/>
+        </repositoryList>
+        <repositoryList
+            name="2019-03">
+          <repository
+              url="http://download.eclipse.org/releases/2019-03"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20190226160451/repository/"/>
+        </repositoryList>
+        <repositoryList
+            name="2018-12">
+          <repository
+              url="http://download.eclipse.org/releases/2018-12"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20181128170323/repository/"/>
+        </repositoryList>
+        <repositoryList
+            name="2018-09">
+          <repository
+              url="http://download.eclipse.org/releases/2018-09"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20181128170323/repository/"/>
+        </repositoryList>
+        <repositoryList
+            name="Photon">
+          <repository
+              url="http://download.eclipse.org/releases/photon"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository/"/>
+        </repositoryList>
+        <repositoryList
+            name="Oxygen">
+          <repository
+              url="http://download.eclipse.org/releases/oxygen"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20180330011457/repository/"/>
+        </repositoryList>
         <repositoryList
             name="Neon">
           <repository
               url="http://download.eclipse.org/releases/neon"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/R-builds/R20170307180635/repository/"/>
         </repositoryList>
         <repositoryList
             name="Mars">
           <repository
               url="http://download.eclipse.org/releases/mars"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/"/>
         </repositoryList>
         <repositoryList
             name="Luna">
           <repository
               url="http://download.eclipse.org/releases/luna"/>
+          <repository
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20150124073747/repository/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/luna"/>
         </repositoryList>
       </targlet>
     </setupTask>
@@ -98,8 +210,6 @@
         label="Developer IDE ">
       <requirement
           name="org.eclipse.emf.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.ecoretools.sdk.feature.group"/>
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"/>
       <requirement
@@ -110,84 +220,7 @@
           name="org.eclipse.ocl.examples.feature.group"/>
       <requirement
           name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.qvtd.master.feature.group"/>
-      <description>
-        Mandatory IDE for QVTd Developers
-
-        Note: Eclipse project repository is temporarily included due to Bug 455557. Remove after Mars M5
-      </description>
-    </setupTask>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:CompoundTask"
-      name="Mylin IDE">
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        label="Mylyn Tools">
-      <requirement
-          name="org.eclipse.mylyn.ide_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.java_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.pde_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.team_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.gerrit.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.git.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.hudson.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.wikitext_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.egit.mylyn.feature.group"/>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynQueriesTask"
-        repositoryURL="https://bugs.eclipse.org/bugs"
-        userID="${bugzilla.id}"
-        password="${eclipse.user.password}">
-      <query
-          summary="QVTd New/Open"
-          url="https://bugs.eclipse.org/bugs/buglist.cgi?bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;classification=Modeling&amp;list_id=8653934&amp;product=QVTd&amp;query_format=advanced"/>
-      <query
-          summary="QVTd Resolved"
-          url="https://bugs.eclipse.org/bugs/buglist.cgi?bug_status=RESOLVED&amp;classification=Modeling&amp;list_id=8654045&amp;product=QVTd&amp;query_format=advanced"/>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynQueriesTask"
-        connectorKind="org.eclipse.mylyn.gerrit"
-        repositoryURL="https://git.eclipse.org/r"
-        userID="${bugzilla.id}"
-        password="${eclipse.user.password}">
-      <query
-          summary="QVTd Gerrit Reviews">
-        <attribute
-            key="gerrit query type"
-            value="custom"/>
-        <attribute
-            key="gerrit query project"
-            value="mmt/org.eclipse.qvtd"/>
-        <attribute
-            key="gerrit query string"
-            value="project:mmt/org.eclipse.qvtd status:open branch:master"/>
-      </query>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynBuildsTask"
-        serverURL="https://ci.eclipse.org/ocl/"
-        userID="${bugzilla.id}"
-        password="${eclipse.user.password}">
-      <buildPlan
-          name="qvtd-mars-master"/>
-      <buildPlan
-          name="qvtd-branch-tests"/>
+      <description>Mandatory IDE for QVTd Developers</description>
     </setupTask>
   </setupTask>
   <setupTask
@@ -201,12 +234,64 @@
   <project name="dev"
       label="Development">
     <setupTask
+        xsi:type="git:GitCloneTask"
+        id="ocl.git.clone"
+        remoteURI="ocl/org.eclipse.ocl"
+        checkoutBranch="${ocl.branch}">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>eclipse.git.gerrit.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>OCL Git or Gerrit Repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <description>OCL Git repository clone</description>
+    </setupTask>
+    <setupTask
         xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${ocl.git.clone.location/examples}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.autogen"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.build"/>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${ocl.git.clone.location/plugins}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.pivot"/>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${qvtd.git.clone.location/doc}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NotPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern="org.eclipse.qvtd.doc.*.ide"/>
+        </predicate>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${qvtd.git.clone.location/examples}"
+          locateNestedProjects="true"/>
       <sourceLocator
           rootFolder="${qvtd.git.clone.location/plugins}"
           locateNestedProjects="true"/>
       <sourceLocator
-          rootFolder="${qvtd.git.clone.location/features}"
+          rootFolder="${qvtd.git.clone.location/releng}"
           locateNestedProjects="true"/>
       <sourceLocator
           rootFolder="${qvtd.git.clone.location/tests}"
@@ -215,68 +300,92 @@
             xsi:type="predicates:NotPredicate">
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.qvtd.doc.*.tests"/>
+              pattern="org.eclipse.qvtd.doc.*.ui.tests"/>
         </predicate>
       </sourceLocator>
-      <sourceLocator
-          rootFolder="${qvtd.git.clone.location/examples}"
-          locateNestedProjects="true"/>
-      <sourceLocator
-          rootFolder="${qvtd.git.clone.location/doc}"
-          locateNestedProjects="true"/>
       <description>Development Projects</description>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="QVTd Plugins + Tests">
+          name="QVTd Plugins">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvt"/>
+            pattern="org.eclipse.ocl.examples.autogen"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.xtext.*"/>
+            pattern="org.eclipse.ocl.examples.build"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.cs2as.*"/>
+            pattern="org.eclipse.ocl.pivot"/>
         <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.atl"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.build.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.codegen"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.compiler"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.debug.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.pivot.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.runtime.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.umlx"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.umlx.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.*.tests"/>
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern="org.eclipse.qvtd.*"/>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.doc.*"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.*.tests"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.examples.*"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.*.ide"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.releng.*"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.oomph"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.*.design"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.*-feature"/>
+          </operand>
+        </predicate>
       </workingSet>
       <workingSet
           name="QVTd Examples">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.qvtd.examples.*"/>
+              xsi:type="predicates:OrPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvt"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.examples.*"/>
+          </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
@@ -286,10 +395,132 @@
         </predicate>
       </workingSet>
       <workingSet
-          name="QVTd Features + Doc">
+          name="QVTd Tests">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc"/>
+            pattern="org.eclipse.qvtd.*.tests"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.doc.miniocl.*"/>
+      </workingSet>
+      <workingSet
+          name="QVTd Sirius Designs">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.*.design"/>
+      </workingSet>
+    </setupTask>
+    <stream
+        name="master"
+        label="Master (Latest)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="master"/>
+    </stream>
+    <stream
+        name="0.23.0"
+        label="0.23.0 (2020-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.12.0"/>
+    </stream>
+    <stream
+        name="0.22.0"
+        label="0.22.0 (2020-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.11.0"/>
+    </stream>
+    <stream
+        name="0.21.0"
+        label="0.21.0 (2019-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.10.0"/>
+    </stream>
+    <stream
+        name="0.20.0"
+        label="0.20.0 (2019-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.9.0"/>
+    </stream>
+    <stream
+        name="0.19.0"
+        label="0.19.0 (2019-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.8.0"/>
+    </stream>
+    <stream
+        name="0.18.0"
+        label="0.18.0 (2019-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.7.0"/>
+    </stream>
+    <stream
+        name="0.17.0"
+        label="0.17.0 (2018-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.6.0"/>
+    </stream>
+    <stream
+        name="0.16.0"
+        label="0.16.0 (2018-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.5.0"/>
+    </stream>
+    <stream
+        name="0.15.0"
+        label="0.15.0 (Photon)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.4.0"/>
+    </stream>
+    <stream
+        name="0.14.0"
+        label="0.14.0 (Oxygen)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.3.0"/>
+    </stream>
+    <description>The development environment for the QVTd project</description>
+  </project>
+  <project name="Releng">
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Releng Tools">
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${qvtd.git.clone.location/features}"
+          locateNestedProjects="true"/>
+      <sourceLocator
+          rootFolder="${qvtd.git.clone.location/releng}"
+          locateNestedProjects="true"/>
+      <description>Releng projects</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="QVTd Features">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
@@ -303,83 +534,52 @@
           </operand>
         </predicate>
       </workingSet>
-    </setupTask>
-    <stream
-        name="master"
-        label="Master (Neon)"/>
-    <description>The development environment for the QVTd project</description>
-  </project>
-  <project name="Releng">
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        label="Releng Tools">
-      <requirement
-          name="org.eclipse.buckminster.core.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.buckminster.git.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.buckminster.pde.feature.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/tools/buckminster/updates-4.5"/>
-    </setupTask>
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="simrel.git.clone"
-        remoteURI="simrel/org.eclipse.simrel.build"
-        checkoutBranch="${simrel.branch}">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/InducedChoices">
-        <detail
-            key="inherit">
-          <value>eclipse.git.remoteURIs</value>
-        </detail>
-        <detail
-            key="label">
-          <value>SimRel Git or Gerrit Repository</value>
-        </detail>
-        <detail
-            key="target">
-          <value>remoteURI</value>
-        </detail>
-      </annotation>
-      <description>Simultaneous Release Git repository</description>
-    </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${qvtd.git.clone.location/releng}"
-          locateNestedProjects="true"/>
-      <sourceLocator
-          rootFolder="${simrel.git.clone.location}"
-          locateNestedProjects="true"/>
-      <description>Releng projects</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="QVTd Releng">
+          name="QVTd Releng + Doc">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.doc"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.qvtd.oomph"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.qvtd.releng.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.*build-feature"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.simrel.build"/>
       </workingSet>
     </setupTask>
     <stream
         name="master"
-        label="Master (Neon)">
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="simrel.branch"
-          value="master"/>
-    </stream>
+        label="Master (Latest)"/>
+    <stream
+        name="0.23.0"
+        label="0.23.0 (2020-06)"/>
+    <stream
+        name="0.22.0"
+        label="0.22.0 (2020-03)"/>
+    <stream
+        name="0.21.0"
+        label="0.21.0 (2019-12)"/>
+    <stream
+        name="0.20.0"
+        label="0.20.0 (2019-09)"/>
+    <stream
+        name="0.19.0"
+        label="0.19.0 (2019-06)"/>
+    <stream
+        name="0.18.0"
+        label="0.18.0 (2019-03)"/>
+    <stream
+        name="0.17.0"
+        label="0.17.0 (2018-12)"/>
+    <stream
+        name="0.16.0"
+        label="0.16.0 (2018-09)"/>
+    <stream
+        name="0.15.0"
+        label="0.15.0 (Photon)"/>
+    <stream
+        name="0.14.0"
+        label="0.14.0 (Oxygen)"/>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"

@@ -8,12 +8,3 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.qvtd.runtime
 Automatic-Module-Name: org.eclipse.qvtd.examples.qvtrelation.hstm2fstm
-Export-Package: org.eclipse.qvtd.examples.qvtrelation.hstm2fstm.models.FlatStateMachine,
- org.eclipse.qvtd.examples.qvtrelation.hstm2fstm.models.FlatStateMachine.impl,
- org.eclipse.qvtd.examples.qvtrelation.hstm2fstm.models.FlatStateMachine.util,
- org.eclipse.qvtd.examples.qvtrelation.hstm2fstm.models.HierarchicalStateMachine,
- org.eclipse.qvtd.examples.qvtrelation.hstm2fstm.models.HierarchicalStateMachine.impl,
- org.eclipse.qvtd.examples.qvtrelation.hstm2fstm.models.HierarchicalStateMachine.util,
- org.eclipse.qvtd.examples.qvtrelation.hstm2fstm.models.trace_HierarchicalStateMachine2FlatStateMachine,
- org.eclipse.qvtd.examples.qvtrelation.hstm2fstm.models.trace_HierarchicalStateMachine2FlatStateMachine.impl,
- org.eclipse.qvtd.examples.qvtrelation.hstm2fstm.models.trace_HierarchicalStateMachine2FlatStateMachine.util
