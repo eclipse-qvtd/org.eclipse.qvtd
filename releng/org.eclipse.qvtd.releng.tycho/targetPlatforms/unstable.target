@@ -25,7 +25,7 @@
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.epsilon.core.feature.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.epsilon.emf.feature.feature.group" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/epsilon/updates"/>
+    <repository location="https://download.eclipse.org/epsilon/updates/1.5"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.ocl.examples.tests.feature.group" version="0.0.0"/>
