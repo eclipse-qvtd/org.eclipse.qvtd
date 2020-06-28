@@ -63,12 +63,12 @@ public abstract class QVTDirectionalMainTab<TX extends Transformation> extends D
 		Iterable<@NonNull TypedModel> modelParameters = QVTbaseUtil.getModelParameters(transformation);
 		TypedModel traceModel = QVTbaseUtil.basicGetTraceTypedModel(modelParameters);
 		for (@NonNull TypedModel typedModel : modelParameters) {
-			if ((typedModel != traceModel) && ClassUtil.safeEquals(typedModel.getName(), directionName)) {
+			if (!typedModel.isIsPrimitive() && !typedModel.isIsThis() && !typedModel.isIsTrace() && (typedModel != traceModel) && ClassUtil.safeEquals(typedModel.getName(), directionName)) {
 				gatherOutputModels(outputModels, typedModel);
 			}
 		}
 		for (@NonNull TypedModel typedModel : modelParameters) {
-			if ((typedModel != traceModel) && !outputModels.contains(typedModel)) {
+			if (!typedModel.isIsPrimitive() && !typedModel.isIsThis() && !typedModel.isIsTrace() && (typedModel != traceModel) && !outputModels.contains(typedModel)) {
 				inputModels.add(typedModel);
 			}
 		}
