@@ -5,22 +5,23 @@
     <unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.atl.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-    <unit id="org.eclipse.ocl.master.feature.group" version="0.0.0"/>
+    <unit id="org.eclipse.ocl.all.sdk.feature.group" version="0.0.0"/>
+    <unit id="org.eclipse.ocl.examples.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.qvt.oml.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.uml2.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.sirius.specifier.feature.group" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/releases/latest"/>
-    <repository location="https://download.eclipse.org/mmt/atl/updates/milestones/4.0"/>
-    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/milestones"/>
-    <repository location="https://download.eclipse.org/mmt/qvto/updates/milestones"/>
-    <!--repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/milestones"/-->
+    <repository location="https://download.eclipse.org/releases/2020-06"/>
+    <!--repository location="https://download.eclipse.org/mmt/atl/updates/milestones/4.0"/>
+    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.22"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.12.0"/>
+    <repository location="https://download.eclipse.org/mmt/qvto/updates/releases/3.10.2"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/milestones"/-->
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.emf.examples.library" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.14"/>
-    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
+    <!--repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.22"/ see Bug 565198 -->
+    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/latest"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.epsilon.core.feature.feature.group" version="0.0.0"/>
@@ -28,6 +29,7 @@
     <repository location="https://download.eclipse.org/epsilon/updates/1.5"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+    <unit id="org.eclipse.ocl.master.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.ocl.examples.tests.feature.group" version="0.0.0"/>
     <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.12.0"/>
   </location>
@@ -37,8 +39,7 @@
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="com.google.guava" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-S"/>
-    <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-R"/>
+    <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20200529191137/repository"/>
   </location>
 </locations>
 </target>
