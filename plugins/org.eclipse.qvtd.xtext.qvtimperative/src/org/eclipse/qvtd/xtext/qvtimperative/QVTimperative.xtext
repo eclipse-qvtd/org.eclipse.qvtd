@@ -10,7 +10,7 @@
  *******************************************************************************/
 grammar org.eclipse.qvtd.xtext.qvtimperative.QVTimperative with org.eclipse.qvtd.xtext.qvtbase.QVTbase
 
-import "http://www.eclipse.org/emf/2002/Ecore" as ecore 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore" as pivot
 import "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore" as base
 import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore" as essentialocl
@@ -30,21 +30,21 @@ AddStatementCS: ('observe' observedProperties+=PathNameCS (',' observedPropertie
 AppendParameterBindingCS: referredVariable=[qvtimperative::AppendParameter|UnrestrictedName] 'appendsTo' value=[qvtimperative::ConnectionVariable|UnrestrictedName] ';';
 
 AppendParameterCS: 'append' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
-	
+
 BufferStatementCS: isStrict?='strict'? 'buffer' (':' firstPass=LOWER ('..' lastPass=LOWER)?)?
 	name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedExpression=ExpCS)? ';'
 ;
 
 CommitStatementCS returns StatementCS:	NewStatementCS | SetStatementCS;
-	
+
 CheckStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
 	'check' ownedCondition=ExpCS ';';
-	
+
 ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | MappingLoopCS;
 
 DeclareStatementCS:  ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
 	isCheck?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
-	
+
 DirectionCS: {DirectionCS} name=Identifier?
 	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
 ;
@@ -74,20 +74,20 @@ ImportCS returns base::ImportCS:
 LoopParameterBindingCS: isCheck?='check'? referredVariable=[qvtimperative::GuardParameter|UnrestrictedName] 'iterates' value=[qvtimperative::LoopVariable|UnrestrictedName] ';';
 
 MappingCS: {MappingCS} isStrict?='strict'? 'map' (':' firstPass=LOWER ('..' lastPass=LOWER)?)?
-	name=UnrestrictedName 
+	name=UnrestrictedName
 	'{'
 	ownedParameters+=MappingParameterCS*
 	ownedStatements+=GuardStatementCS*
 	ownedStatements+=CommitStatementCS*
 	ownedStatements+=ControlStatementCS*
 	'}';
-	
+
 MappingCallCS: {MappingCallCS} ('call'|isInstall?='install'|isInvoke?='invoke')
 	ownedPathName=PathNameCS '{' ownedBindings+=MappingParameterBindingCS* '}';
-	
+
 MappingLoopCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
 	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}';
-	
+
 MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)?;
 
 MappingParameterBindingCS: AppendParameterBindingCS | GuardParameterBindingCS | LoopParameterBindingCS | SimpleParameterBindingCS;
@@ -109,7 +109,7 @@ QualifiedPackageCS returns qvtbasecs::QualifiedPackageCS:
 	|';'
 	)
 ;
-		
+
 QueryCS: isTransient?='transient'? 'query' name=UnrestrictedName
 		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
 		':' ownedType=TypeExpCS
@@ -125,13 +125,13 @@ SetStatementCS: ('observe' observedProperties+=PathNameCS (',' observedPropertie
 SimpleParameterBindingCS: isCheck?='check'? referredVariable=[qvtimperative::SimpleParameter|UnrestrictedName] 'uses' ownedValue=ExpCS ';';
 
 SimpleParameterCS: 'in' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
-	
+
 SpeculateStatementCS: 'speculate' ownedConditions+=ExpCS (',' ownedConditions+=ExpCS)* ';';
-	
+
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName (':' ownedContextType=TypeExpCS)?
 	'{' (ownedDirections+=DirectionCS ';')* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS)* '}';
-	
+
 QVTimperativeUnrestrictedName:
 	'add'
 |	'append'
@@ -167,7 +167,7 @@ QVTimperativeUnrestrictedName:
 |	'var'
 |	'via'
 ;
-			
+
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName
 |   QVTbaseUnrestrictedName

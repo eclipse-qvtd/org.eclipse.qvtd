@@ -14,7 +14,7 @@ import org.eclipse.ocl.xtext.essentialocl.ui.outline.EssentialOCLOutlineTreeProv
 
 /**
  * customization of the default outline structure
- * 
+ *
  */
 public class QVTbaseOutlineTreeProvider extends EssentialOCLOutlineTreeProvider
 {

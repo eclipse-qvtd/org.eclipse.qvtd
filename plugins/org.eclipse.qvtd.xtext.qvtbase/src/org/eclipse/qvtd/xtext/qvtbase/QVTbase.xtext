@@ -33,7 +33,7 @@ AttributeCS returns base::AttributeCS:
 	    ) ','? )+
 	'}')?
 	(	('{' (/*ownedAnnotations+=AnnotationElementCS
-	      |*/ ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';') 
+	      |*/ ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';')
 	      | ('derivation' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';') )* '}')
 	|	';'
 	)
@@ -123,7 +123,7 @@ ReferenceCS returns base::ReferenceCS:
 	'}')?
 	(	('{' (/*ownedAnnotations+=AnnotationElementCS
 			| ('key' referredKeys+=[pivot::Property|UnrestrictedName] (',' referredKeys+=[pivot::Property|UnrestrictedName])* ';')
-	        |*/ ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';') 
+	        |*/ ('initial' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';')
 	        | ('derivation' UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';') )* '}')
 	|	';'
 	)
@@ -172,7 +172,7 @@ StructuralFeatureCS returns base::StructuralFeatureCS:
 EnumerationLiteralName returns ecore::EString:
 	EssentialOCLUnrestrictedName
 ;
-	
+
 QVTbaseUnrestrictedName:
 	'abstract'
 |	'attribute'
@@ -221,5 +221,5 @@ SIGNED returns ecore::EInt:
 ;
 
 terminal UNQUOTED_STRING:	// Never forward parsed; just provides a placeholder
-	'£$%^£$%^'				//  for reverse serialisation of embedded OCL 
+	'£$%^£$%^'				//  for reverse serialisation of embedded OCL
 ;

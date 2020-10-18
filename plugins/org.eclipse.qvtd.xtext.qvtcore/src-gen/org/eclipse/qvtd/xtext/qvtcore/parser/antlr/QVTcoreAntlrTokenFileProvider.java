@@ -5,6 +5,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
+ * SPDX-License-Identifier: EPL-2.0
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
@@ -18,6 +20,6 @@ public class QVTcoreAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.tokens");
 	}
 }

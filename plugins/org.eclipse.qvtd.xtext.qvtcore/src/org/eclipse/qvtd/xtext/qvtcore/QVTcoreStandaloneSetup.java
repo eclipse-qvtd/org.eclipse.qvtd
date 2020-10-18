@@ -16,13 +16,13 @@ import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 import com.google.inject.Injector;
 
 /**
- * Initialization support for running Xtext languages 
+ * Initialization support for running Xtext languages
  * without equinox extension registry
  */
 public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated
 {
 	private static Injector injector = null;
-	
+
 	public static void doSetup() {
 		if (injector == null) {
 			injector = new QVTcoreStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -34,7 +34,7 @@ public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated
 		QVTcoreCSPackage.eINSTANCE.getName();
 //		QVTcoreCS2MonikerVisitor.FACTORY.getClass();
 	}
-	
+
 	/**
 	 * Return the Injector for this plugin.
 	 */

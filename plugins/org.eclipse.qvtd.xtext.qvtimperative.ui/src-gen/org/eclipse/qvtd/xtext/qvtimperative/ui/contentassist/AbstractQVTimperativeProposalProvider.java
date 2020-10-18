@@ -5,23 +5,28 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
+ * SPDX-License-Identifier: EPL-2.0
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.qvtd.xtext.qvtbase.ui.contentassist.QVTbaseProposalProvider;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 /**
- * Represents a generated, default implementation of superclass {@link org.eclipse.qvtd.xtext.qvtbase.ui.contentassist.QVTbaseProposalProvider}.
+ * Represents a generated, default implementation of superclass {@link QVTbaseProposalProvider}.
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them
  * with a more concrete subtype.
  */
-@SuppressWarnings("all")
-public class AbstractQVTimperativeProposalProvider extends org.eclipse.qvtd.xtext.qvtbase.ui.contentassist.QVTbaseProposalProvider {
+public abstract class AbstractQVTimperativeProposalProvider extends QVTbaseProposalProvider {
 
 	public void completeTopLevelCS_OwnedImports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);

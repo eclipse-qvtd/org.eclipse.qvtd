@@ -15,7 +15,7 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.qvtd.xtext.qvtbasecs.util.AbstractQVTbaseCSPreOrderVisitor;
 
 public class QVTbaseCSPreOrderVisitor extends AbstractQVTbaseCSPreOrderVisitor
-{	
+{
 	public QVTbaseCSPreOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}

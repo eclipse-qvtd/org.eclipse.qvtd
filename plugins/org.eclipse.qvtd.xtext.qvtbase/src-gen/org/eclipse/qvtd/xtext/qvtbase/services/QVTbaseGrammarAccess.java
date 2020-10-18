@@ -5,26 +5,33 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
+ * SPDX-License-Identifier: EPL-2.0
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtbase.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
-import org.eclipse.ocl.xtext.essentialocl.services.EssentialOCLGrammarAccess;
 import org.eclipse.ocl.xtext.base.services.BaseGrammarAccess;
+import org.eclipse.ocl.xtext.essentialocl.services.EssentialOCLGrammarAccess;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
-
+public class QVTbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 
 	public class AttributeCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.AttributeCS");
@@ -385,7 +392,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_6_1() { return cSemicolonKeyword_6_1; }
 	}
-
 	public class ClassCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.ClassCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -409,7 +415,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//EnumerationCS
 		public RuleCall getEnumerationCSParserRuleCall_2() { return cEnumerationCSParserRuleCall_2; }
 	}
-
 	public class CompoundTargetElementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.CompoundTargetElementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -441,7 +446,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'?
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
-
 	public class DataTypeCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.DataTypeCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -555,7 +559,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_6_1() { return cSemicolonKeyword_6_1; }
 	}
-
 	public class EnumerationCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.EnumerationCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -664,7 +667,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_5_1() { return cSemicolonKeyword_5_1; }
 	}
-
 	public class EnumerationLiteralCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.EnumerationLiteralCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -742,7 +744,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_2_1() { return cSemicolonKeyword_2_1; }
 	}
-
 	public class OperationCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.OperationCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1036,7 +1037,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_10_1() { return cSemicolonKeyword_10_1; }
 	}
-
 	public class ParameterCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.ParameterCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1143,7 +1143,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		///*ownedAnnotations+=AnnotationElementCS* */ '}'
 		public Keyword getRightCurlyBracketKeyword_3_1() { return cRightCurlyBracketKeyword_3_1; }
 	}
-
 	public class ReferenceCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.ReferenceCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1546,7 +1545,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_7_1() { return cSemicolonKeyword_7_1; }
 	}
-
 	public class SimpleTargetElementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.SimpleTargetElementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1681,7 +1679,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
-
 	public class SpecificationCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.SpecificationCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1709,7 +1706,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//UNQUOTED_STRING
 		public RuleCall getExprStringUNQUOTED_STRINGTerminalRuleCall_1_0() { return cExprStringUNQUOTED_STRINGTerminalRuleCall_1_0; }
 	}
-
 	public class StructuredClassCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.StructuredClassCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1869,7 +1865,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_7_1() { return cSemicolonKeyword_7_1; }
 	}
-
 	public class TargetCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.TargetCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1921,7 +1916,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//';'?
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
-
 	public class TypedMultiplicityRefCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedMultiplicityRefCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1945,7 +1939,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//MultiplicityCS
 		public RuleCall getOwnedMultiplicityMultiplicityCSParserRuleCall_1_0() { return cOwnedMultiplicityMultiplicityCSParserRuleCall_1_0; }
 	}
-
 	public class TypedRefCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.TypedRefCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1965,7 +1958,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//TypedTypeRefCS
 		public RuleCall getTypedTypeRefCSParserRuleCall_1() { return cTypedTypeRefCSParserRuleCall_1; }
 	}
-
 	public class StructuralFeatureCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.StructuralFeatureCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1985,7 +1977,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//ReferenceCS
 		public RuleCall getReferenceCSParserRuleCall_1() { return cReferenceCSParserRuleCall_1; }
 	}
-
 	public class EnumerationLiteralNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.EnumerationLiteralName");
 		private final RuleCall cEssentialOCLUnrestrictedNameParserRuleCall = (RuleCall)rule.eContents().get(1);
@@ -1997,7 +1988,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//EssentialOCLUnrestrictedName
 		public RuleCall getEssentialOCLUnrestrictedNameParserRuleCall() { return cEssentialOCLUnrestrictedNameParserRuleCall; }
 	}
-
 	public class QVTbaseUnrestrictedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.QVTbaseUnrestrictedName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -2150,7 +2140,6 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'volatile'
 		public Keyword getVolatileKeyword_27() { return cVolatileKeyword_27; }
 	}
-
 	public class SIGNEDElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.SIGNED");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -2212,8 +2201,8 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	@Inject
 	public QVTbaseGrammarAccess(GrammarProvider grammarProvider,
-		EssentialOCLGrammarAccess gaEssentialOCL,
-		BaseGrammarAccess gaBase) {
+			EssentialOCLGrammarAccess gaEssentialOCL,
+			BaseGrammarAccess gaBase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaEssentialOCL = gaEssentialOCL;
 		this.gaBase = gaBase;
@@ -2674,6 +2663,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getEssentialOCLUnrestrictedNameAccess().getRule();
 	}
 
+	//@Override
 	//UnrestrictedName:
 	//	EssentialOCLUnrestrictedName;
 	public EssentialOCLGrammarAccess.UnrestrictedNameElements getUnrestrictedNameAccess() {
@@ -2699,6 +2689,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getEssentialOCLUnreservedNameAccess().getRule();
 	}
 
+	//@Override
 	//UnreservedName:
 	//	EssentialOCLUnreservedName;
 	public EssentialOCLGrammarAccess.UnreservedNameElements getUnreservedNameAccess() {

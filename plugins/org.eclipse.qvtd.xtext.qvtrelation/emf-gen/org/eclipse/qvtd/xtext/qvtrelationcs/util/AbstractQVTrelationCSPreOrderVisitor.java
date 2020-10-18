@@ -36,7 +36,7 @@ public abstract class AbstractQVTrelationCSPreOrderVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTrelationCSPreOrderVisitor(@NonNull CS2ASConversion context) {

@@ -36,7 +36,7 @@ public abstract class AbstractQVTimperativeCSContainmentVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTimperativeCSContainmentVisitor(@NonNull CS2ASConversion context) {

@@ -36,7 +36,7 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTimperativeCSLeft2RightVisitor(@NonNull CS2ASConversion context) {

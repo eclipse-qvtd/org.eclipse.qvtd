@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2020 Willink Transformations and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v20.html
- *
- * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.parser.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import.
@@ -3026,8 +3016,8 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_UNQUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11692:22: ( '\\u00A3$%^\\u00A3$%^' )
-            // InternalQVTrelation.g:11692:24: '\\u00A3$%^\\u00A3$%^'
+            // InternalQVTrelation.g:11819:22: ( '\\u00A3$%^\\u00A3$%^' )
+            // InternalQVTrelation.g:11819:24: '\\u00A3$%^\\u00A3$%^'
             {
             match("\u00A3$%^\u00A3$%^");
 
@@ -3045,8 +3035,8 @@ public class InternalQVTrelationLexer extends Lexer {
     // $ANTLR start "RULE_ESCAPED_CHARACTER"
     public final void mRULE_ESCAPED_CHARACTER() throws RecognitionException {
         try {
-            // InternalQVTrelation.g:11694:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
-            // InternalQVTrelation.g:11694:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+            // InternalQVTrelation.g:11821:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
+            // InternalQVTrelation.g:11821:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
             {
             match('\\');
             if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -3070,8 +3060,8 @@ public class InternalQVTrelationLexer extends Lexer {
     // $ANTLR start "RULE_LETTER_CHARACTER"
     public final void mRULE_LETTER_CHARACTER() throws RecognitionException {
         try {
-            // InternalQVTrelation.g:11696:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
-            // InternalQVTrelation.g:11696:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
+            // InternalQVTrelation.g:11823:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
+            // InternalQVTrelation.g:11823:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -3096,11 +3086,11 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11698:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // InternalQVTrelation.g:11698:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // InternalQVTrelation.g:11825:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // InternalQVTrelation.g:11825:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"');
-            // InternalQVTrelation.g:11698:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
+            // InternalQVTrelation.g:11825:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
             loop1:
             do {
                 int alt1=3;
@@ -3116,14 +3106,14 @@ public class InternalQVTrelationLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalQVTrelation.g:11698:34: RULE_ESCAPED_CHARACTER
+            	    // InternalQVTrelation.g:11825:34: RULE_ESCAPED_CHARACTER
             	    {
             	    mRULE_ESCAPED_CHARACTER();
 
             	    }
             	    break;
             	case 2 :
-            	    // InternalQVTrelation.g:11698:57: ~ ( ( '\\\\' | '\"' ) )
+            	    // InternalQVTrelation.g:11825:57: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3160,11 +3150,11 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_SINGLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11700:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // InternalQVTrelation.g:11700:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // InternalQVTrelation.g:11827:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalQVTrelation.g:11827:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\'');
-            // InternalQVTrelation.g:11700:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // InternalQVTrelation.g:11827:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop2:
             do {
                 int alt2=3;
@@ -3180,14 +3170,14 @@ public class InternalQVTrelationLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalQVTrelation.g:11700:35: RULE_ESCAPED_CHARACTER
+            	    // InternalQVTrelation.g:11827:35: RULE_ESCAPED_CHARACTER
             	    {
             	    mRULE_ESCAPED_CHARACTER();
 
             	    }
             	    break;
             	case 2 :
-            	    // InternalQVTrelation.g:11700:58: ~ ( ( '\\\\' | '\\'' ) )
+            	    // InternalQVTrelation.g:11827:58: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3224,12 +3214,12 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_ML_SINGLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11702:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
-            // InternalQVTrelation.g:11702:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
+            // InternalQVTrelation.g:11829:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
+            // InternalQVTrelation.g:11829:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
             {
             match("/'");
 
-            // InternalQVTrelation.g:11702:38: ( options {greedy=false; } : . )*
+            // InternalQVTrelation.g:11829:38: ( options {greedy=false; } : . )*
             loop3:
             do {
                 int alt3=2;
@@ -3254,7 +3244,7 @@ public class InternalQVTrelationLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalQVTrelation.g:11702:66: .
+            	    // InternalQVTrelation.g:11829:66: .
             	    {
             	    matchAny();
 
@@ -3284,11 +3274,11 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_SIMPLE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11704:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
-            // InternalQVTrelation.g:11704:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+            // InternalQVTrelation.g:11831:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
+            // InternalQVTrelation.g:11831:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             {
             mRULE_LETTER_CHARACTER();
-            // InternalQVTrelation.g:11704:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+            // InternalQVTrelation.g:11831:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -3337,8 +3327,8 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_ESCAPED_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11706:17: ( '_' RULE_SINGLE_QUOTED_STRING )
-            // InternalQVTrelation.g:11706:19: '_' RULE_SINGLE_QUOTED_STRING
+            // InternalQVTrelation.g:11833:17: ( '_' RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTrelation.g:11833:19: '_' RULE_SINGLE_QUOTED_STRING
             {
             match('_');
             mRULE_SINGLE_QUOTED_STRING();
@@ -3358,10 +3348,10 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11708:10: ( ( '0' .. '9' )+ )
-            // InternalQVTrelation.g:11708:12: ( '0' .. '9' )+
+            // InternalQVTrelation.g:11835:10: ( ( '0' .. '9' )+ )
+            // InternalQVTrelation.g:11835:12: ( '0' .. '9' )+
             {
-            // InternalQVTrelation.g:11708:12: ( '0' .. '9' )+
+            // InternalQVTrelation.g:11835:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -3375,7 +3365,7 @@ public class InternalQVTrelationLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalQVTrelation.g:11708:13: '0' .. '9'
+            	    // InternalQVTrelation.g:11835:13: '0' .. '9'
             	    {
             	    matchRange('0','9');
 
@@ -3407,12 +3397,12 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11710:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalQVTrelation.g:11710:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalQVTrelation.g:11837:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalQVTrelation.g:11837:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*");
 
-            // InternalQVTrelation.g:11710:24: ( options {greedy=false; } : . )*
+            // InternalQVTrelation.g:11837:24: ( options {greedy=false; } : . )*
             loop6:
             do {
                 int alt6=2;
@@ -3437,7 +3427,7 @@ public class InternalQVTrelationLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalQVTrelation.g:11710:52: .
+            	    // InternalQVTrelation.g:11837:52: .
             	    {
             	    matchAny();
 
@@ -3467,12 +3457,12 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11712:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalQVTrelation.g:11712:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalQVTrelation.g:11839:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalQVTrelation.g:11839:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("--");
 
-            // InternalQVTrelation.g:11712:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalQVTrelation.g:11839:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop7:
             do {
                 int alt7=2;
@@ -3485,7 +3475,7 @@ public class InternalQVTrelationLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalQVTrelation.g:11712:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalQVTrelation.g:11839:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3505,7 +3495,7 @@ public class InternalQVTrelationLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalQVTrelation.g:11712:40: ( ( '\\r' )? '\\n' )?
+            // InternalQVTrelation.g:11839:40: ( ( '\\r' )? '\\n' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -3514,9 +3504,9 @@ public class InternalQVTrelationLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalQVTrelation.g:11712:41: ( '\\r' )? '\\n'
+                    // InternalQVTrelation.g:11839:41: ( '\\r' )? '\\n'
                     {
-                    // InternalQVTrelation.g:11712:41: ( '\\r' )?
+                    // InternalQVTrelation.g:11839:41: ( '\\r' )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -3525,7 +3515,7 @@ public class InternalQVTrelationLexer extends Lexer {
                     }
                     switch (alt8) {
                         case 1 :
-                            // InternalQVTrelation.g:11712:41: '\\r'
+                            // InternalQVTrelation.g:11839:41: '\\r'
                             {
                             match('\r');
 
@@ -3557,10 +3547,10 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11714:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalQVTrelation.g:11714:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalQVTrelation.g:11841:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalQVTrelation.g:11841:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalQVTrelation.g:11714:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalQVTrelation.g:11841:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt10=0;
             loop10:
             do {
@@ -3614,8 +3604,8 @@ public class InternalQVTrelationLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQVTrelation.g:11716:16: ( . )
-            // InternalQVTrelation.g:11716:18: .
+            // InternalQVTrelation.g:11843:16: ( . )
+            // InternalQVTrelation.g:11843:18: .
             {
             matchAny();
 

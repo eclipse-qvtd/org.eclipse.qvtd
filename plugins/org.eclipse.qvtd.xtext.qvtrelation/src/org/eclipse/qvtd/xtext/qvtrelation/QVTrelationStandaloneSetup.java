@@ -18,12 +18,12 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 import com.google.inject.Injector;
 
 /**
- * Initialization support for running Xtext languages 
+ * Initialization support for running Xtext languages
  * without equinox extension registry
  */
 public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenerated
 {
-	private static Injector injector = null;	
+	private static Injector injector = null;
 
 	public static void doSetup() {
 		if (injector == null) {
@@ -37,7 +37,7 @@ public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenera
 		QVTrelationScoping.init();
 //		QVTrelationCS2MonikerVisitor.FACTORY.getClass();
 	}
-	
+
 	/**
 	 * Return the Injector for this plugin.
 	 */

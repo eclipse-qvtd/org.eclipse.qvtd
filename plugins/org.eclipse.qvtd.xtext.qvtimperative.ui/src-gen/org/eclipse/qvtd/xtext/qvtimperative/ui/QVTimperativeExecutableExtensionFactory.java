@@ -5,17 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
+ * SPDX-License-Identifier: EPL-2.0
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -25,12 +26,13 @@ public class QVTimperativeExecutableExtensionFactory extends AbstractGuiceAwareE
 
 	@Override
 	protected Bundle getBundle() {
-		return QVTimperativeActivator.getInstance().getBundle();
+		return Platform.getBundle(QVTimperativeActivator.PLUGIN_ID);
 	}
 
 	@Override
 	protected Injector getInjector() {
-		return QVTimperativeActivator.getInstance().getInjector(QVTimperativeActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTIMPERATIVE_QVTIMPERATIVE);
+		QVTimperativeActivator activator = QVTimperativeActivator.getInstance();
+		return activator != null ? activator.getInjector(QVTimperativeActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTIMPERATIVE_QVTIMPERATIVE) : null;
 	}
 
 }

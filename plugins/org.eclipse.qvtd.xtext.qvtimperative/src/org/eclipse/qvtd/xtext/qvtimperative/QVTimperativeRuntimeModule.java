@@ -32,7 +32,7 @@ public class QVTimperativeRuntimeModule extends AbstractQVTimperativeRuntimeModu
 		super.configure(binder);
 		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
 	}
-	
+
 	@Override
 	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return RetokenizingQVTimperativeParser.class;
@@ -50,7 +50,7 @@ public class QVTimperativeRuntimeModule extends AbstractQVTimperativeRuntimeModu
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return QVTimperativeScopeProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends XtextResource> bindXtextResource() {
 		return QVTimperativeCSResource.class;

@@ -32,7 +32,7 @@ public class QVTcoreRuntimeModule extends AbstractQVTcoreRuntimeModule
 		super.configure(binder);
 		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
 	}
-	
+
 	@Override
 	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return RetokenizingQVTcoreParser.class;
@@ -50,7 +50,7 @@ public class QVTcoreRuntimeModule extends AbstractQVTcoreRuntimeModule
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return QVTcoreScopeProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends XtextResource> bindXtextResource() {
 		return QVTcoreCSResource.class;
