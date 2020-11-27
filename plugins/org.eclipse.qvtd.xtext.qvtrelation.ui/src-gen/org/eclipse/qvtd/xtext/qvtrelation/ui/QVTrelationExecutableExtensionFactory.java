@@ -13,10 +13,10 @@
 package org.eclipse.qvtd.xtext.qvtrelation.ui;
 
 import com.google.inject.Injector;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -26,7 +26,7 @@ public class QVTrelationExecutableExtensionFactory extends AbstractGuiceAwareExe
 
 	@Override
 	protected Bundle getBundle() {
-		return Platform.getBundle(QVTrelationActivator.PLUGIN_ID);
+		return FrameworkUtil.getBundle(QVTrelationActivator.class);
 	}
 
 	@Override
