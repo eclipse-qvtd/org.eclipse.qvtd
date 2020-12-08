@@ -5,20 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
- * SPDX-License-Identifier: EPL-2.0
- *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.parser.antlr;
 
 import com.google.inject.Inject;
-import org.eclipse.qvtd.xtext.qvtimperative.parser.antlr.internal.InternalQVTimperativeParser;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
-import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class QVTimperativeParser extends AbstractAntlrParser {
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
+
+public class QVTimperativeParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 
 	@Inject
 	private QVTimperativeGrammarAccess grammarAccess;
@@ -28,10 +25,9 @@ public class QVTimperativeParser extends AbstractAntlrParser {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 
-
 	@Override
-	protected InternalQVTimperativeParser createParser(XtextTokenStream stream) {
-		return new InternalQVTimperativeParser(stream, getGrammarAccess());
+	protected org.eclipse.qvtd.xtext.qvtimperative.parser.antlr.internal.InternalQVTimperativeParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.qvtd.xtext.qvtimperative.parser.antlr.internal.InternalQVTimperativeParser(stream, getGrammarAccess());
 	}
 
 	@Override
@@ -46,4 +42,5 @@ public class QVTimperativeParser extends AbstractAntlrParser {
 	public void setGrammarAccess(QVTimperativeGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
+
 }

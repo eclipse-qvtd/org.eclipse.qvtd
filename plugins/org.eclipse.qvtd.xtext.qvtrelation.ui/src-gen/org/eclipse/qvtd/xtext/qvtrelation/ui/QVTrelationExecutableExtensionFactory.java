@@ -5,18 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
- * SPDX-License-Identifier: EPL-2.0
- *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.ui;
 
-import com.google.inject.Injector;
-import org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
+
+import com.google.inject.Injector;
+
+import org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -26,13 +25,12 @@ public class QVTrelationExecutableExtensionFactory extends AbstractGuiceAwareExe
 
 	@Override
 	protected Bundle getBundle() {
-		return FrameworkUtil.getBundle(QVTrelationActivator.class);
+		return QVTrelationActivator.getInstance().getBundle();
 	}
 
 	@Override
 	protected Injector getInjector() {
-		QVTrelationActivator activator = QVTrelationActivator.getInstance();
-		return activator != null ? activator.getInjector(QVTrelationActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTRELATION_QVTRELATION) : null;
+		return QVTrelationActivator.getInstance().getInjector(QVTrelationActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTRELATION_QVTRELATION);
 	}
 
 }

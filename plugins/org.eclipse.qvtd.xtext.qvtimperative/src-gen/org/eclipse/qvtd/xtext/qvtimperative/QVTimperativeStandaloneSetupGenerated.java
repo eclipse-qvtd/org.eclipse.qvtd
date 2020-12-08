@@ -5,27 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
- * SPDX-License-Identifier: EPL-2.0
- *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative;
 
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup;
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 
+/**
+ * Generated from StandaloneSetup.xpt!
+ */
 @SuppressWarnings("all")
 public class QVTimperativeStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		QVTbaseStandaloneSetup.doSetup();
+		org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -33,14 +33,18 @@ public class QVTimperativeStandaloneSetupGenerated implements ISetup {
 	}
 
 	public Injector createInjector() {
-		return Guice.createInjector(new QVTimperativeRuntimeModule());
+		return Guice.createInjector(new org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeRuntimeModule());
 	}
 
 	public void register(Injector injector) {
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("qvti", resourceFactory);
-		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("qvti", serviceProvider);
+		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("qvti", serviceProvider);
+
+
+
+
 	}
 }

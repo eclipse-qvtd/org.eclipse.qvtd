@@ -5,18 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
- * SPDX-License-Identifier: EPL-2.0
- *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.ui;
 
-import com.google.inject.Injector;
-import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
+
+import com.google.inject.Injector;
+
+import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -26,13 +25,12 @@ public class QVTcoreExecutableExtensionFactory extends AbstractGuiceAwareExecuta
 
 	@Override
 	protected Bundle getBundle() {
-		return FrameworkUtil.getBundle(QVTcoreActivator.class);
+		return QVTcoreActivator.getInstance().getBundle();
 	}
 
 	@Override
 	protected Injector getInjector() {
-		QVTcoreActivator activator = QVTcoreActivator.getInstance();
-		return activator != null ? activator.getInjector(QVTcoreActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTCORE_QVTCORE) : null;
+		return QVTcoreActivator.getInstance().getInjector(QVTcoreActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTCORE_QVTCORE);
 	}
 
 }
