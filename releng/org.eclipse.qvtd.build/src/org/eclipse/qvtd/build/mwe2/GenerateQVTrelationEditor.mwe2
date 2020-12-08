@@ -14,58 +14,45 @@
  *******************************************************************************/
 module GenerateQVTrelationEditor
 
-import org.eclipse.xtext.xtext.generator.*
-import org.eclipse.xtext.xtext.generator.model.project.*
-import org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.ocl.examples.build.*
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
 
+var QVTrelation.file.extensions = "qvtr"
 var QVTrelationProjectName = "org.eclipse.qvtd.xtext.qvtrelation"
 var QVTrelationRuntimeProject = "../../plugins/${QVTrelationProjectName}"
-
-var rootPath = "../../plugins"
 
 /**
  *	Generate the QVTrelation Editor.
  */
 Workflow {
-    bean = org.eclipse.emf.mwe.utils.StandaloneSetup {
-		scanClassPath = true
-		platformUri = ".."
-		registerGeneratedEPackage = "org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage"
-		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage"
+    bean = StandaloneSetup {
+		platformUri = "${QVTrelationRuntimeProject}/.."
+   		scanClassPath = true
+//		registerEcoreFile = "platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCS.ecore"
 		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage"
-		registerGenModelFile = "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.genmodel"
-		registerGenModelFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCS.genmodel"
 	}
 	
-	component = XtextGenerator {
-		standaloneSetup = XtextGeneratorStandaloneSetup {
-			scanClasspath = false
-		}
-		configuration = org.eclipse.ocl.examples.build.fragments.MyDefaultGeneratorModule {
-			project = org.eclipse.ocl.examples.build.fragments.MyStandardProjectConfig {
-				activatorName = "QVTrelationActivator"
-				baseName = "${QVTrelationProjectName}"
-				rootPath = rootPath
-				runtimeTest = {
-					enabled = false
-				}
-				eclipsePlugin = {
-					enabled = true
-				}
-				eclipsePluginTest = {
-					enabled = false
-				}
-				genericIde = {
-					enabled = true
-					name = "${QVTrelationProjectName}.ui"
-				}
-				createEclipseMetaData = true
-			}
-			code = {
-				preferXtendStubs = false
-				encoding = "UTF-8"
-				fileHeader =
+	component = DirectoryCleaner {
+		directory = "${QVTrelationRuntimeProject}/src-gen"
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${QVTrelationRuntimeProject}.ui/src-gen"
+	}
+	
+	component = Generator {
+		fileHeader =
 "/*******************************************************************************
  * Copyright (c) 2011, \${year} Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
@@ -73,69 +60,122 @@ Workflow {
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
- * SPDX-License-Identifier: EPL-2.0
- *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/"
+		pathRtProject = QVTrelationRuntimeProject
+		pathUiProject = "${QVTrelationRuntimeProject}.ui"
+		projectNameRt = QVTrelationProjectName
+		projectNameUi = "${QVTrelationProjectName}.ui"
+		mergeManifest = false
+
+		language = {
+			uri = "classpath:/org/eclipse/qvtd/xtext/qvtrelation/QVTrelation.xtext"
+			fileExtensions = QVTrelation.file.extensions
+			
+			// Java API to access grammar elements (required by several other fragments)
+			fragment = grammarAccess.GrammarAccessFragment {}
+			
+			// generates Java API for the generated EPackages 
+//			fragment = ecore.EcoreGeneratorFragment {
+//				referencedGenModels = "platform:/resource/org.eclipse.emf.erelation/model/Ecore.genmodel"  
+//				referencedGenModels = "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCST.genmodel"
+//			}
+			
+			// the serialization component
+			fragment = serializer.SerializerFragment {}
+			
+			// a custom ResourceFactory for use with EMF 
+			fragment = resourceFactory.ResourceFactoryFragment {
+				fileExtensions = QVTrelation.file.extensions
 			}
-		}
-		language = StandardLanguage {
-			name = "${QVTrelationProjectName}.QVTrelation"
-			fileExtensions = "qvtr"
-			generator = null
-			serializer = org.eclipse.ocl.examples.xtext.build.fragments.DeclarativeSerializerFragmentXtend {
-				generateStub = true
+				
+			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/
+//			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+//				options = { backtrack = true classSplitting = true }
+//			}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+				options = { backtrack = true classSplitting = true }			
+				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
-			validator = {
-				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-				generateDeprecationValidation = false
+			
+			// check-based API for validation
+			/*
+			fragment = validation.CheckFragment {}
+			*/
+			 
+			// java-based API for validation 
+			fragment = validation.JavaValidatorFragment {
+                composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
+//                composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+            }
+            
+			// scoping and exporting API
+			/*
+			fragment = scoping.ImportURIScopingFragment {}
+			fragment = exporting.SimpleNamesFragment {}
+			*/
+			
+			// scoping and exporting API 
+			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = exporting.QualifiedNamesFragment {}
+			
+			// formatter API 
+			fragment = formatting.FormatterFragment {}
+
+			// labeling API 
+			fragment = labeling.LabelProviderFragment {}
+
+			// outline API 
+//			fragment = outline.TransformerFragment {}
+//			fragment = outline.OutlineNodeAdapterFactoryFragment {}
+			fragment = outline.OutlineTreeProviderFragment {}
+			fragment = outline.QuickOutlineFragment {}
+
+			// java-based API for content assistance 
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+						
+//			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+//				options = { backtrack = true classSplitting = true}
+//			}
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
+				options = { backtrack = true classSplitting = true}			
+				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
-		/*	fragment = CodeMiningFragment {
-				generateStub = true
-				generateXtendStub = false
-			} */
-			parserGenerator = parser.antlr.XtextAntlrGeneratorFragment2 {
-				options = parser.antlr.AntlrOptions {
-					backtrack = true
-					classSplitting = true
-				}
+
+			fragment = builder.BuilderIntegrationFragment {}
+
+			// project wizard (optional) 
+			/*
+			fragment = projectWizard.SimpleProjectWizardFragment {
+				generatorProjectName = "${projectName}.generator" 
+				modelFileExtension = file.extensions
 			}
-			formatter = org.eclipse.ocl.examples.xtext.build.fragments.DeclarativeFormatterFragmentXtend {
-				generateStub = true
-			}
+			*/
+			
+			// quickfix API 
+			fragment = quickfix.QuickfixProviderFragment {}			
+				
 			// EssentialOCL bindings 
-			fragment = org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment {}
-			// Support Markup and Hover text 
-			fragment = org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment {}
+			fragment = fragments.EssentialOCLFragment {}							
+			// Support Markup in Hover text 
+			fragment = fragments.MarkupHoverFragment {}			
 			// *.xtextbin support on Xtext 2.3		
-			fragment = org.eclipse.ocl.examples.build.fragments.CompatibilityFragment {}			
+			fragment = fragments.CompatibilityFragment {}			
 		}
 	}
-	component = org.eclipse.ocl.examples.build.xtend.GenerateGrammarXtend {
+	component = GenerateGrammarXtend {
 		javaFolder = "${QVTrelationRuntimeProject}/src-gen"
 		javaPackageName = "${QVTrelationProjectName}"
 		grammarFileStem = "QVTrelation"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
-		directory = "${QVTrelationRuntimeProject}/META-INF"
+	component = InjectCompatibilityAbstractInternalAntlrParser {
+		fileName = "${QVTrelationRuntimeProject}/src-gen/org/eclipse/qvtd/xtext/qvtrelation/parser/antlr/internal/InternalQVTrelationParser.java"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
-		directory = "${QVTrelationRuntimeProject}/emf-gen"
-	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
-		directory = "${QVTrelationRuntimeProject}/src"
-	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = ConvertToUnixLineEndings {
 		directory = "${QVTrelationRuntimeProject}/src-gen"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
-		directory = "${QVTrelationRuntimeProject}.ui/META-INF"
-	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
-		directory = "${QVTrelationRuntimeProject}.ui/src"
-	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = ConvertToUnixLineEndings {
 		directory = "${QVTrelationRuntimeProject}.ui/src-gen"
 	}
 }
