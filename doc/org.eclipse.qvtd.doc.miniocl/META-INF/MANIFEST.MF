@@ -5,7 +5,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.qvtd.doc.miniocl;singleton:=true
 Bundle-Version: 0.24.0.qualifier
-Require-Bundle: org.eclipse.ocl.pivot;bundle-version="[1.13.0,1.14.0)"
+Require-Bundle: org.eclipse.ocl.pivot;bundle-version="[1.14.0,1.15.0)"
 Export-Package: org.eclipse.qvtd.doc.miniocl,
  org.eclipse.qvtd.doc.miniocl.impl,
  org.eclipse.qvtd.doc.miniocl.lookup,
