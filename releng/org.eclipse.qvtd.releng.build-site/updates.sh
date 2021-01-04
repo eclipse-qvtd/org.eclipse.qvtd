@@ -22,6 +22,13 @@ localZip="qvtd.zip"
 projectRepoName="QVTd"
 manageComposite="/shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml"
 externalUpdatesFolder="https://download.eclipse.org/mmt/qvtd/updates/"
+# Bug 569841 discusses Java version incompatibilities on build.eclipse.org
+#java -version
+#ls /shared/common/apache-ant*
+#ls /shared/common/jdk*
+export JAVA_HOME=/shared/common/jdk1.8.0_x64-latest
+java -version
+/shared/common/apache-ant-latest/bin/ant -version
 
 while getopts u:v:t:q: option
 do
