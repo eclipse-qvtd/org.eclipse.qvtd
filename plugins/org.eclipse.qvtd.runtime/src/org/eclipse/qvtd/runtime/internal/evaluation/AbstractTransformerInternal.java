@@ -229,7 +229,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	/**
 	 * Get the elements of type from the zeroth TypedModelInstance.
 	 *
-	 * This obsolete method is used by some legacy tests that dispatch via allInstances()rtaher than Connections.
+	 * This obsolete method is used by some legacy tests that dispatch via allInstances() rather than Connections.
 	 */
 	@Deprecated /* @deprecated Connections should be used to aggregate model elements */
 	public @NonNull Iterable<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {

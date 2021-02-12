@@ -41,10 +41,14 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	 * WrappedModelManager enables the unhelpful model access API to be observed without infecting the
 	 * more streamlined QVTi accesses.
 	 */
-	private class WrappedModelManager extends AbstractModelManager implements ModelManager.ModelManagerExtension2
+	/**
+	 * Model2Model0Manager supports OCL's global single model domain accesses by redirecting to QVTi's models manager first model.
+	 */
+	private class Model2Model0Manager extends AbstractModelManager implements ModelManager.ModelManagerExtension2
 	{
 		@Override
 		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
+			//	return transformer.getModelsManager().get(type);
 			return new IterableAsSet<@NonNull Object>(((AbstractTransformerInternal)transformer).get(type));
 		}
 
@@ -56,7 +60,7 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull Transformer transformer;
-	private WrappedModelManager wrappedModelManager = null;
+	private ModelManager model2Model0Manager = null;
 	protected boolean suppressFailureDiagnosis = false;
 
 	private AbstractTransformationExecutor(@NonNull EnvironmentFactory environmentFactory, @NonNull Constructor<? extends Transformer> txConstructor)
@@ -126,12 +130,12 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	}
 
 	@Override
-	public @NonNull WrappedModelManager getModelManager() {
-		WrappedModelManager wrappedModelManager2 = wrappedModelManager ;
-		if (wrappedModelManager2 == null) {
-			wrappedModelManager2 = wrappedModelManager = new WrappedModelManager();
+	public @NonNull ModelManager getModelManager() {
+		ModelManager model2Model0Manager2 = model2Model0Manager ;
+		if (model2Model0Manager2 == null) {
+			model2Model0Manager2 = model2Model0Manager = new Model2Model0Manager();
 		}
-		return wrappedModelManager2;
+		return model2Model0Manager2;
 	}
 
 	@Override

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -253,10 +254,9 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	}
 
 	/**
-	 * WrappedModelManager enables the unhelpful model access API to be observed without infecting the
-	 * more streamlined QVTi accesses.
+	 * Model2ModelsManager supports OCL's global single model domain accesses by redirecting to QVTi's multiple models manager..
 	 */
-	private class WrappedModelManager extends AbstractModelManager implements ModelManager.ModelManagerExtension2
+	private class Model2ModelsManager extends AbstractModelManager implements ModelManager.ModelManagerExtension2
 	{
 		@Override
 		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
@@ -281,7 +281,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	protected final @NonNull QVTiModelsManager modelsManager;
 	private final @NonNull Map<@NonNull Mapping, @NonNull Interval> mapping2interval = new HashMap<>();
 	private @Nullable EObject transformationExecution = null;
-	private @Nullable WrappedModelManager wrappedModelManager = null;
+	private @Nullable ModelManager model2ModelsManager = null;
 	private @Nullable Map<@NonNull Property, @Nullable Property> compileTimeProperty2runtimeProperty = null;
 	private @Nullable NewStatementOperation containedNewStatementOperation = null;
 	private @Nullable NewStatementOperation notContainedNewStatementOperation = null;
@@ -331,7 +331,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	@Override
 	public void checkModels() throws CoreException {
 		StringBuilder s = null;
-		for (@NonNull Resource resource : environmentFactory.getResourceSet().getResources()) {
+		ResourceSet resourceSet = environmentFactory.getResourceSet();
+		for (Resource resource : resourceSet.getResources()) {
 			String messages = PivotUtil.formatResourceDiagnostics(resource.getErrors(), "Errors in " + resource.getURI().toString(), "\n");
 			if (messages != null) {
 				if (s == null) {
@@ -499,12 +500,12 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	}
 
 	@Override
-	public @NonNull WrappedModelManager getModelManager() {
-		WrappedModelManager wrappedModelManager2 = wrappedModelManager;
-		if (wrappedModelManager2 == null) {
-			wrappedModelManager2 = wrappedModelManager = new WrappedModelManager();
+	public @NonNull ModelManager getModelManager() {
+		ModelManager model2ModelsManager2 = model2ModelsManager;
+		if (model2ModelsManager2 == null) {
+			model2ModelsManager2 = model2ModelsManager = new Model2ModelsManager();
 		}
-		return wrappedModelManager2;
+		return model2ModelsManager2;
 	}
 
 	@Override
