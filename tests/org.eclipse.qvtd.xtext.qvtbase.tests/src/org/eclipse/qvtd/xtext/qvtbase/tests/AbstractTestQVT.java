@@ -283,6 +283,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
+		deactivate();
 		ResourceSet actualResourceSet = createTestResourceSet();
 		//		if (PivotUtilInternal.isASURI(modelURI)) {
 		//			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
@@ -310,6 +311,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			}
 			checkOutput(actualResource, expectedURI, normalizer);
 		}
+		activate();
 		return actualResource;
 	}
 
@@ -477,6 +479,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	private void doScheduleLoadCheck(@NonNull URI uri) throws Exception {
+		deactivate();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getTestProjectManager().initializeResourceSet(resourceSet);
 		Resource resource = resourceSet.getResource(uri, true);
@@ -485,20 +488,23 @@ public abstract class AbstractTestQVT extends QVTimperative
 		EcoreUtil.resolveAll(resource);
 		PivotTestCase.assertNoUnresolvedProxies("Resolve", resource);;
 		PivotTestCase.assertNoValidationErrors("Validate", resource);;
+		activate();
 	}
 
 	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
+		deactivate();
 		ResourceSet resourceSet = new ResourceSetImpl();
+		//	Executor savedExecutor = PivotUtil.basicGetExecutor();
 		//
 		//	Load QVTiAS
 		//
 		OCL ocl = QVTbase.newInstance(getTestProjectManager());
 		ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
+		XtextResource xtextResource = null;
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
 			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
-			XtextResource xtextResource = null;
 			try {
 				LoadTestCase.assertNoValidationErrors("Serializing to " + serializedURI, asResource);
 				//
@@ -514,26 +520,30 @@ public abstract class AbstractTestQVT extends QVTimperative
 				catch (Throwable t) {}
 				throw e;
 			}
-
-			QVTimperative qvti = QVTimperative.newInstance(getTestProjectManager(), null);
-			try {
-				ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(qvti.getEnvironmentFactory(), serializedURI, false);
-				Resource asResource2 = asTransformation.eResource();
-				assert asResource2 != null;
-				LoadTestCase.assertNoResourceErrors("Loading " + serializedURI, asResource2);
-				LoadTestCase.assertNoUnresolvedProxies("Loading " + serializedURI, asResource2);
-				LoadTestCase.assertNoValidationErrors("Loading " + serializedURI, asResource2);
-			}
-			finally {
-				qvti.dispose();
-				qvti = null;
-			}
-			return xtextResource;
 		}
 		finally {
 			ocl.dispose();
 			ocl = null;
 		}
+
+		QVTimperative qvti = QVTimperative.newInstance(getTestProjectManager(), null);
+		try {
+			ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(qvti.getEnvironmentFactory(), serializedURI, false);
+			Resource asResource2 = asTransformation.eResource();
+			assert asResource2 != null;
+			LoadTestCase.assertNoResourceErrors("Loading " + serializedURI, asResource2);
+			LoadTestCase.assertNoUnresolvedProxies("Loading " + serializedURI, asResource2);
+			LoadTestCase.assertNoValidationErrors("Loading " + serializedURI, asResource2);
+		}
+		finally {
+			qvti.dispose();
+			qvti = null;
+		}
+		//	if (savedExecutor != null) {
+		//		ThreadLocalExecutor.setExecutor(savedExecutor);
+		//	}
+		activate();
+		return xtextResource;
 	}
 
 	public boolean executeTransformation() throws Exception {

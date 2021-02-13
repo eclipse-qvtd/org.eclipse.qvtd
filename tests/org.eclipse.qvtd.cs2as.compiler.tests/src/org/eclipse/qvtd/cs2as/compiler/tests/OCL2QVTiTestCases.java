@@ -367,8 +367,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			myQVT.dispose();
 			cleanup("http://cs2as/tests/example2/env/1.0",
 				example2.classescs.ClassescsPackage.eNS_URI,
-				example2.classes.ClassesPackage.eNS_URI,
-				example2.classescstraces.ClassescstracesPackage.eNS_URI);
+				example2.classes.ClassesPackage.eNS_URI);
 		}
 	}
 

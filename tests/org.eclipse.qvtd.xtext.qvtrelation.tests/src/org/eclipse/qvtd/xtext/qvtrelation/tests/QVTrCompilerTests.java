@@ -44,6 +44,7 @@ import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
@@ -57,7 +58,6 @@ import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -853,6 +853,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT1.dispose();
 		}
+		ThreadLocalExecutor.waitForGC();
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
 		URI ecoreURI = getModelsURI("ecore2pivotRoot/Families.ecore");
 		OCL ocl = OCL.newInstance(projectManager);

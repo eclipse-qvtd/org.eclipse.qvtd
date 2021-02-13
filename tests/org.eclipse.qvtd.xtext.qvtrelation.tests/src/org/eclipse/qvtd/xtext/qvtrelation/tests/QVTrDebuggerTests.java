@@ -120,6 +120,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "Forward2Reverse", txFile, "reverse", inMap, outMap, true);
 		launchConfiguration.doSave();
+		ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;
@@ -149,7 +150,6 @@ public class QVTrDebuggerTests extends XtextTestCase
 		normalizer.normalize(actualResource);
 		//	}
 		TestUtil.assertSameModel(expectedResource, actualResource);
-
 		ocl.dispose();
 	}
 
@@ -181,6 +181,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "Forward2Reverse", txFile, "reverse", inMap, outMap, true);
 		launchConfiguration.doSave();
+		ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;
@@ -221,6 +222,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "Forward2Reverse", txFile, "reverse", inMap, outMap, true);
 		launchConfiguration.doSave();
+		ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;
@@ -298,6 +300,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "HierarchicalStateMachine2FlatStateMachine", txFile, "flat", inMap, outMap, true);
 		launchConfiguration.doSave();
+		ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;
@@ -352,6 +355,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "HierarchicalStateMachine2FlatStateMachine", txFile, "flat", inMap, outMap, false);
 		launchConfiguration.doSave();
+		ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;

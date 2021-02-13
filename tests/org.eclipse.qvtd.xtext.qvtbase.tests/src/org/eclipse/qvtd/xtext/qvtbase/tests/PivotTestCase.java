@@ -22,8 +22,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.WeakHashMap;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -44,11 +42,11 @@ import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.ocl.pivot.values.Value;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -77,16 +75,16 @@ public class PivotTestCase extends TestCase
 	//public static boolean DEBUG_GC = false;			// True performs an enthusuastic resource release and GC at the end of each test
 	public static boolean DEBUG_ID = false;			// True prints the start and end of each test.
 	{
-		PivotUtilInternal.noDebug = false;
+		//	PivotUtilInternal.noDebug = false;
 		//	DEBUG_GC = true;
-		DEBUG_ID = true;
-		AbstractEnvironmentFactory.liveEnvironmentFactories = new WeakHashMap<>();	// Prints the create/finalize of each EnvironmentFactory
+		//	DEBUG_ID = true;
+		//	AbstractEnvironmentFactory.liveEnvironmentFactories = new WeakHashMap<>();	// Prints the create/finalize of each EnvironmentFactory
 		//	PivotMetamodelManager.liveMetamodelManagers = new WeakHashMap<>();			// Prints the create/finalize of each MetamodelManager
 		//	StandaloneProjectMap.liveStandaloneProjectMaps = new WeakHashMap<>();		// Prints the create/finalize of each StandaloneProjectMap
 		//	ResourceSetImpl.liveResourceSets = new WeakHashMap<>();						// Requires edw-debug private EMF branch
-		TEST_START.setState(true);
-		AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
-		ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
+		//	TEST_START.setState(true);
+		//	AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
+		//	ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
 	}
 
 	public static @NonNull List<Diagnostic> assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
@@ -402,29 +400,16 @@ public class PivotTestCase extends TestCase
 			PivotUtilInternal.debugPrintln("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 		}
 		TracingOption.resetAll();
+		ThreadLocalExecutor.reset();
 		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
 		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 		startTime = System.nanoTime();
-		/*	List<String> nsURIs = new ArrayList<>();
-		for (EPackage ePackage : EValidator.Registry.INSTANCE.keySet()) {
-			nsURIs.add(ePackage.getNsURI());
-		}
-		System.out.println("EValidator.Registry.INSTANCE size = " + EValidator.Registry.INSTANCE.size());
-		Collections.sort(nsURIs);
-		for (String nsURI : nsURIs) {
-			System.out.println("\t" + nsURI);
-		} */
 	}
-
-
-
 
 	static long startTime;
 
 	@Override
-	protected void tearDown()
-			throws Exception {
-		// TODO Auto-generated method stub
+	protected void tearDown() throws Exception {
 		//	long time = System.nanoTime() - startTime;
 		super.tearDown();
 		QVTruntimeUtil.contextLine = null;
@@ -435,10 +420,11 @@ public class PivotTestCase extends TestCase
 		newSet.removeAll(savedEPackageRegistry);
 		if (newSet.size() > 0) {
 			List<String> newList = new ArrayList<>(newSet);
-			Collections.sort(savedEPackageRegistry);
+			Collections.sort(newList);
 			//	QVTruntimeUtil.errPrintln("EPackage.Registry.INSTANCE pre-extras");
 			for (String nsURI : newList) {
-				if (nsURI.contains("example") || nsURI.contains("test") || (!nsURI.startsWith("http://www.eclipse.org") && !nsURI.startsWith("http://www.w3.org"))) {
+				if (nsURI.contains("example") || nsURI.contains("test")		// FIXME Avoid using http://www.eclipse.org for test models
+						|| (!nsURI.startsWith("http://www.eclipse.org") && !nsURI.startsWith("http://www.w3.org"))) {
 					PivotUtilInternal.debugPrintln("Extra " + nsURI);
 				}
 			}

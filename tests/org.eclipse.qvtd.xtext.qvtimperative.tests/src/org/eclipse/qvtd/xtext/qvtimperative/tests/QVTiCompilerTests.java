@@ -108,7 +108,6 @@ public class QVTiCompilerTests extends LoadTestCase
 	protected static class MyQVT extends OCLInternal
 	{
 		protected final @NonNull TestProject testProject;
-		//		private GlobalStateMemento globalStateMemento = new GlobalStateMemento();
 
 		public MyQVT(@NonNull TestProject testProject, @NonNull QVTiEnvironmentFactory environmentFactory) {
 			super(environmentFactory);
@@ -134,13 +133,6 @@ public class QVTiCompilerTests extends LoadTestCase
 		public @NonNull Transformer createTransformer(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
 			QVTiTransformationExecutor executor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 			return executor.getTransformer();
-		}
-
-		@Override
-		public synchronized void dispose() {
-			super.dispose();
-			//			globalStateMemento.restoreGlobalState();
-			//			globalStateMemento = null;
 		}
 
 		public @NonNull Resource doLoad_ConcreteWithOCL(@NonNull URI inputURI) throws Exception {

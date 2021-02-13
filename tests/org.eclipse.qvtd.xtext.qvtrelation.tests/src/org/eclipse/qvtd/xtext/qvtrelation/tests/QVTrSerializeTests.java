@@ -63,9 +63,10 @@ public class QVTrSerializeTests extends LoadTestCase
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");
 		ProjectManager projectManager = getTestProjectManager();
 		QVTrelation ocl1 = QVTrelation.newInstance(projectManager, null);
-		QVTrelation ocl2 = QVTrelation.newInstance(projectManager, null);
 		Resource asResource1 = doLoad_Concrete(ocl1, inputURI, pivotURI, null);
+		ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true, messages);
+		QVTrelation ocl2 = QVTrelation.newInstance(projectManager, null);
 		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, null);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
@@ -83,9 +84,10 @@ public class QVTrSerializeTests extends LoadTestCase
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");
 		ProjectManager projectManager = getTestProjectManager();
 		OCL ocl1 = OCL.newInstance(projectManager);//, null);
-		QVTrelation ocl2 = QVTrelation.newInstance(projectManager);
 		Resource asResource1 = doLoad_Concrete(ocl1, inputURI, pivotURI, null);
+		ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true, messages);
+		QVTrelation ocl2 = QVTrelation.newInstance(projectManager);
 		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, null);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
@@ -103,9 +105,10 @@ public class QVTrSerializeTests extends LoadTestCase
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");
 		ProjectManager projectManager = getTestProjectManager();
 		OCL ocl1 = OCL.newInstance(projectManager);//, null);
-		OCL ocl2 = OCL.newInstance(projectManager);
 		Resource asResource1 = doLoad_Concrete(ocl1, inputURI, pivotURI, NO_MESSAGES);
+		ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true, messages);
+		OCL ocl2 = OCL.newInstance(projectManager);
 		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, NO_MESSAGES);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);

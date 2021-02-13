@@ -37,6 +37,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTiCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -126,8 +127,10 @@ public class QVTiInterpreterTests extends LoadTestCase
 		assertEquals(expected, actual);
 	}
 
-	protected void assertLoadable(@NonNull URI asURI) throws Exception {
+	protected void assertLoadable(@NonNull QVTbase qvt, @NonNull URI asURI) throws Exception {
+		qvt.deactivate();
 		assertLoadable(getTestProject(), asURI);
+		qvt.activate();
 	}
 
 	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Exception {
@@ -191,7 +194,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(txASURI);
+		assertLoadable(myQVT, txASURI);
 		//
 		myQVT.addInputURI("upperGraph", inputURI);
 		assertTrue(myQVT.executeTransformation());
@@ -222,7 +225,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(txASURI);
+		assertLoadable(myQVT, txASURI);
 		//
 		myQVT.addInputURI("upperGraph", inputURI);
 		assertTrue(myQVT.executeTransformation());
@@ -237,7 +240,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	@Test
 	public void testQVTiInterpreter_Graph2GraphHierarchicalLoad() throws Exception {
 		URI asURI = getModelsURI("Graph2GraphHierarchical" + "/"  + "Graph2GraphHierarchical.ref.qvtias");
-		assertLoadable(asURI);
+		assertLoadable(getTestProject(), asURI);
 	}
 
 	/**
@@ -256,7 +259,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(txASURI);
+		assertLoadable(myQVT, txASURI);
 		//
 		myQVT.addInputURI("hsv", inputURI);
 		assertTrue(myQVT.executeTransformation());
@@ -282,7 +285,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(txASURI);
+		assertLoadable(myQVT, txASURI);
 		//
 		myQVT.addInputURI("tree", inputURI);
 		assertTrue(myQVT.executeTransformation());
@@ -310,7 +313,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(txASURI);
+		assertLoadable(myQVT, txASURI);
 		//
 		myQVT.addInputURI("tree", inputURI);
 		assertTrue(myQVT.executeTransformation());
@@ -344,7 +347,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(txASURI);
+		assertLoadable(myQVT, txASURI);
 		//
 		myQVT.addInputURI("uml", inputURI);
 		assertTrue(myQVT.executeTransformation());
@@ -382,7 +385,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(txASURI);
+		assertLoadable(myQVT, txASURI);
 		//
 		myQVT.addInputURI("uml", inputURI);
 		assertTrue(myQVT.executeTransformation());
@@ -408,7 +411,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(txASURI);
+		assertLoadable(myQVT, txASURI);
 		//
 		myQVT.addInputURI("leftCS", inputURI);
 		assertTrue(myQVT.executeTransformation());
@@ -431,7 +434,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
 		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(txASURI);
+		assertLoadable(myQVT, txASURI);
 		//
 		myQVT.addInputURI("leftCS", inputURI);
 		assertTrue(myQVT.executeTransformation());

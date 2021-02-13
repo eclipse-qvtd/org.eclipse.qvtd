@@ -30,6 +30,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.ModelsManager;
@@ -59,6 +60,7 @@ public class QVTcompiledJob extends QVTimperativeJob
 		int SAVING_TICKS = outMap.size();
 		int allTicks = LOAD_TX_TICKS + USED_PACKAGES_TICKS + CHECKING_TICKS + EXECUTING_TICKS + SAVING_TICKS + inMap.size() + 2 * outMap.size();
 		SubMonitor subMonitor = SubMonitor.convert(monitor, allTicks);
+		ThreadLocalExecutor.reset();
 		try {
 			QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(BasicProjectManager.CLASS_PATH, null);
 			if (traceEvaluation) {
@@ -179,6 +181,7 @@ public class QVTcompiledJob extends QVTimperativeJob
 		}
 		finally {
 			monitor.done();
+			ThreadLocalExecutor.reset();
 		}
 	}
 }

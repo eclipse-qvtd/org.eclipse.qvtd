@@ -53,9 +53,10 @@ public class QVTiSerializeTests extends LoadTestCase
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtias");
 		ProjectManager projectManager = getTestProjectManager();
 		OCL ocl1 = QVTimperative.newInstance(projectManager, null);
-		OCL ocl2 = QVTimperative.newInstance(projectManager, null);
 		Resource asResource1 = doLoad_Concrete(ocl1, inputURI, pivotURI, NO_MESSAGES);
+		ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true);
+		OCL ocl2 = QVTimperative.newInstance(projectManager, null);
 		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, NO_MESSAGES);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);

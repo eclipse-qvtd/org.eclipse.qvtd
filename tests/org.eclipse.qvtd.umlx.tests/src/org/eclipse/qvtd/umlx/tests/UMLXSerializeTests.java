@@ -111,6 +111,7 @@ public class UMLXSerializeTests extends LoadTestCase
 		umlxResource1.save(null);
 		//
 		assertNoValidationErrors(umlxURI.toString(), umlxResource1);
+		ocl1.deactivate();
 		//
 		QVTrelation ocl2 = QVTrelation.newInstance(getTestProjectManager());
 		Resource umlxResource2 = ocl2.getResourceSet().getResource(umlxURI, true);

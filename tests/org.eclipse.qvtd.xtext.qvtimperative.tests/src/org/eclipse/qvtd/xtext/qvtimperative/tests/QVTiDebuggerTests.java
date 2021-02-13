@@ -219,6 +219,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "HSV2HSL", txFile, inMap, outMap);
 		launchConfiguration.doSave();
+		ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.DEBUG_MODE, null);
 		assert launch != null;
