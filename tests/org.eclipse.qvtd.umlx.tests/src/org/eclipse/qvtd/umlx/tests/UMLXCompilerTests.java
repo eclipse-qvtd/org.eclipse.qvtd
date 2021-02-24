@@ -263,6 +263,9 @@ public class UMLXCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			cleanup("http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine",
+					"http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/umlx/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine",
+					"http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/FlatStateMachine");
 		}
 	}
 }

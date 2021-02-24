@@ -354,6 +354,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		myQVT.saveExecutionGraph(getTestURI("ManualUML2RDBMS_LAZY.graphml"));
 		myQVT.checkOutput(outputURI, getModelsURI("ManualUML2RDBMS/ManualRDBMSPeopleValidate.xmi"), ManualRDBMSNormalizer.INSTANCE);
 		myQVT.dispose();
+		cleanup("http://www.eclipse.org/qvt/examples/0.1/ManualUML",
+			"http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS",
+				"http://www.eclipse.org/qvt/examples/0.1/ManualRDBMS");
 	}
 
 	/**
@@ -389,6 +392,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		myQVT.saveExecutionGraph(getTestURI("SimpleUML2RDBMS_LAZY.graphml"));
 		myQVT.checkOutput(outputURI, getModelsURI("SimpleUML2RDBMS/SimpleRDBMSPeopleValidate.xmi"), SimpleRDBMSNormalizer.INSTANCE);
 		myQVT.dispose();
+		cleanup("http://www.eclipse.org/qvt/examples/0.1/SimpleUML",
+			"http://www.eclipse.org/qvt/examples/0.1/SimpleUML2RDBMS",
+				"http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS");
 	}
 
 

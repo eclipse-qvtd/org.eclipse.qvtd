@@ -46,7 +46,6 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
-import org.eclipse.ocl.examples.pivot.tests.PivotTestCase.GlobalStateMemento;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
@@ -109,7 +108,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	protected static class MyQVT extends OCLInternal
 	{
 		protected final @NonNull TestProject testProject;
-		private GlobalStateMemento globalStateMemento = new GlobalStateMemento();
+		//		private GlobalStateMemento globalStateMemento = new GlobalStateMemento();
 
 		public MyQVT(@NonNull TestProject testProject, @NonNull QVTiEnvironmentFactory environmentFactory) {
 			super(environmentFactory);
@@ -140,8 +139,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		@Override
 		public synchronized void dispose() {
 			super.dispose();
-			globalStateMemento.restoreGlobalState();
-			globalStateMemento = null;
+			//			globalStateMemento.restoreGlobalState();
+			//			globalStateMemento = null;
 		}
 
 		public @NonNull Resource doLoad_ConcreteWithOCL(@NonNull URI inputURI) throws Exception {
@@ -479,6 +478,9 @@ public class QVTiCompilerTests extends LoadTestCase
 		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "hsl", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
+		cleanup("http://www.eclipse.org/qvt/examples/0.1/HSVTree",
+			"http://www.eclipse.org/qvt/examples/0.1/HSVtoHSL",
+				"http://www.eclipse.org/qvt/examples/0.1/HSLTree");
 	}
 
 	public void testQVTiCompiler_ClassesCS2AS_CG() throws Exception {
@@ -509,9 +511,15 @@ public class QVTiCompilerTests extends LoadTestCase
 		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "rightAS", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
+		cleanup("http://tracesmodel/1.0/classescstraces",
+			"http://ocldependencyanalysis/classescs/1.0",
+				"http://ocldependencyanalysis/classes/1.0");
 	}
 
 	public void testQVTiCompiler_ManualUML2RDBMS_CG() throws Exception {
+		EPackage.Registry.INSTANCE.put(manualuml2rdbms.rdbms.RDBMSPackage.eNS_URI, manualuml2rdbms.rdbms.RDBMSPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(manualuml2rdbms.uml2rdbms.UML2RDBMSPackage.eNS_URI, manualuml2rdbms.uml2rdbms.UML2RDBMSPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(manualuml2rdbms.uml.UMLPackage.eNS_URI, manualuml2rdbms.uml.UMLPackage.eINSTANCE);
 		URI modelsProjectURI = getModelsURI("ManualUML2RDBMS");
 		URI transformURI = modelsProjectURI.appendSegment("ManualUML2RDBMS.qvti");
 		URI genModelURI = modelsProjectURI.appendSegment("ManualUML2RDBMS.genmodel");
@@ -528,9 +536,15 @@ public class QVTiCompilerTests extends LoadTestCase
 		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "rdbms", outputModelURI, referenceModelURI, ManualRDBMSNormalizer.INSTANCE);
 		myQVT.dispose();
+		cleanup(manualuml2rdbms.uml.UMLPackage.eNS_URI,
+			manualuml2rdbms.uml2rdbms.UML2RDBMSPackage.eNS_URI,
+			manualuml2rdbms.rdbms.RDBMSPackage.eNS_URI);
 	}
 
 	public void testQVTiCompiler_SimpleUML2RDBMS_CG() throws Exception {
+		EPackage.Registry.INSTANCE.put(simpleuml2rdbms.rdbms.RDBMSPackage.eNS_URI, simpleuml2rdbms.rdbms.RDBMSPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage.eNS_URI, simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(simpleuml2rdbms.uml.UMLPackage.eNS_URI, simpleuml2rdbms.uml.UMLPackage.eINSTANCE);
 		URI modelsProjectURI = getModelsURI("SimpleUML2RDBMS");
 		URI transformURI = modelsProjectURI.appendSegment("SimpleUML2RDBMS.qvti");
 		URI genModelURI = modelsProjectURI.appendSegment("SimpleUML2RDBMS.genmodel");
@@ -547,6 +561,9 @@ public class QVTiCompilerTests extends LoadTestCase
 		myQVT.execute(tx);
 		myQVT.saveOutput(tx, "rdbms", outputModelURI, referenceModelURI, SimpleRDBMSNormalizer.INSTANCE);
 		myQVT.dispose();
+		cleanup(simpleuml2rdbms.uml.UMLPackage.eNS_URI,
+			simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage.eNS_URI,
+			simpleuml2rdbms.rdbms.RDBMSPackage.eNS_URI);
 	}
 
 	public void testQVTiCompiler_Tree2TallTree_CG() throws Exception {
@@ -570,6 +587,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
 		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-execution.graphml"));
 		myQVT.dispose();
+		cleanup(TreePackage.eNS_URI);
 	}
 
 	public void testQVTiCompiler_Tree2TallTree_Changed_CG() throws Exception {
@@ -613,6 +631,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-incChanged.graphml"));
 		myQVT.saveOutput(tx, "talltree", changedOutputModelURI, changedReferenceModelURI, null);
 		myQVT.dispose();
+		cleanup(TreePackage.eNS_URI);
 	}
 
 	public void testQVTiCompiler_Tree2TallTree_Copied_CG() throws Exception {
@@ -660,6 +679,9 @@ public class QVTiCompilerTests extends LoadTestCase
 
 
 		myQVT.dispose();
+		cleanup("http://www.eclipse.org/qvt/examples/0.1/List2List",
+			"http://www.eclipse.org/qvt/examples/0.1/Tree",
+				"http://www.eclipse.org/qvt/examples/0.1/TallTree");
 	}
 
 	public void testQVTiCompiler_Tree2TallTree_Deleted_CG() throws Exception {
@@ -705,6 +727,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		myQVT.saveOutput(tx, "talltree", deletedOutputModelURI, deletedReferenceModelURI, null);
 		monitor.dispose();
 		myQVT.dispose();
+		cleanup(TreePackage.eNS_URI);
 	}
 
 	/*	public void testQVTiCompiler_Tree2TallTree_Incremental_CG2() throws Exception {

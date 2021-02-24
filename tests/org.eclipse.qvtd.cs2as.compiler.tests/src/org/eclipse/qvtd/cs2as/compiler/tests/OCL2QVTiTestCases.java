@@ -263,8 +263,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
-			EPackage.Registry.INSTANCE.remove(example1.source.SourcePackage.eNS_URI);
-			EPackage.Registry.INSTANCE.remove(example1.target.TargetPackage.eNS_URI);
+			cleanup("http://cs2as/tests/example1/env/1.0",
+				example1.source.SourcePackage.eNS_URI,
+				example1.target.TargetPackage.eNS_URI);
 		}
 	}
 
@@ -364,9 +365,10 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
-			EPackage.Registry.INSTANCE.remove(example2.classes.ClassesPackage.eNS_URI);
-			EPackage.Registry.INSTANCE.remove(example2.classescs.ClassescsPackage.eNS_URI);
-			EPackage.Registry.INSTANCE.remove(example2.classescstraces.ClassescstracesPackage.eNS_URI);
+			cleanup("http://cs2as/tests/example2/env/1.0",
+				example2.classescs.ClassescsPackage.eNS_URI,
+				example2.classes.ClassesPackage.eNS_URI,
+				example2.classescstraces.ClassescstracesPackage.eNS_URI);
 		}
 	}
 

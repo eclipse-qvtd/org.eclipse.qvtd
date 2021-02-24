@@ -397,6 +397,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT4.dispose();
+			cleanup("http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/qvtrelation/tests/newatl2qvtr/NewATL2QVTr");
 		}
 	}
 
@@ -886,6 +887,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			cleanup("http://www.eclipse.org/qvtd-example/org/eclipse/ocl/pivot2/ecore2pivotRoot/Ecore2PivotRoot");
 		}
 	}
 

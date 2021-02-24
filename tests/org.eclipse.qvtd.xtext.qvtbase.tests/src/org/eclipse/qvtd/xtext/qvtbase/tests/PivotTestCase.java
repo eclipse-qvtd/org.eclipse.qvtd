@@ -18,12 +18,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -38,6 +43,8 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -63,6 +70,24 @@ public class PivotTestCase extends TestCase
 {
 	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtbase.tests";
 	public static final @NonNull TracingOption TEST_START = new TracingOption(PLUGIN_ID, "test/start");
+
+	/*
+	 * The following may be tweaked to assist debugging.
+	 */
+	//public static boolean DEBUG_GC = false;			// True performs an enthusuastic resource release and GC at the end of each test
+	public static boolean DEBUG_ID = false;			// True prints the start and end of each test.
+	{
+		PivotUtilInternal.noDebug = false;
+		//	DEBUG_GC = true;
+		DEBUG_ID = true;
+		AbstractEnvironmentFactory.liveEnvironmentFactories = new WeakHashMap<>();	// Prints the create/finalize of each EnvironmentFactory
+		//	PivotMetamodelManager.liveMetamodelManagers = new WeakHashMap<>();			// Prints the create/finalize of each MetamodelManager
+		//	StandaloneProjectMap.liveStandaloneProjectMaps = new WeakHashMap<>();		// Prints the create/finalize of each StandaloneProjectMap
+		//	ResourceSetImpl.liveResourceSets = new WeakHashMap<>();						// Requires edw-debug private EMF branch
+		TEST_START.setState(true);
+		AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
+		ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
+	}
 
 	public static @NonNull List<Diagnostic> assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
 		Map<String, Integer> expected = new HashMap<String, Integer>();
@@ -260,10 +285,27 @@ public class PivotTestCase extends TestCase
 	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, Map<Object, Object> validationContext, String... messages) {
 		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 		for (EObject eObject : resource.getContents()) {
-			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
+			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);		// FIXME inline 1 call level
 			diagnostics.addAll(diagnostic.getChildren());
 		}
 		return messages != null ? assertDiagnostics(prefix, diagnostics, messages) : Collections.emptyList();
+	}
+
+	/**
+	 * Remove the global EPackage.Registry and EValidator.Registry for the nsURIs.
+	 * This should be invoked at the end of a test that installs compiled models to avoid pollution
+	 * affecting subsequent tests that may re-use the nsURI.
+	 */
+	protected static void cleanup(@NonNull String @NonNull ... nsURIs) {
+		for (@NonNull String nsURI : nsURIs) {
+			Object ePackage = EPackage.Registry.INSTANCE.remove(nsURI);
+			if (ePackage instanceof EPackage) {
+				EValidator.Registry.INSTANCE.remove(ePackage);
+			}
+			else {
+				QVTruntimeUtil.errPrintln("No EPackage to cleanup for '" + nsURI + "'");
+			}
+		}
 	}
 
 	protected static Value failOn(String expression, Throwable e) {
@@ -346,17 +388,37 @@ public class PivotTestCase extends TestCase
 		return ClassUtil.nonNullState(super.getName());
 	}
 
+	private static List<String> savedEPackageRegistry = null;
+
 	@Override
 	protected void setUp() throws Exception {
+		savedEPackageRegistry = new ArrayList<>(EPackage.Registry.INSTANCE.keySet());
+		Collections.sort(savedEPackageRegistry);
 		if (!TEST_START.isActive()) {
 			QVTruntimeUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
 		}
 		super.setUp();
+		if (DEBUG_ID) {
+			PivotUtilInternal.debugPrintln("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
+		}
 		TracingOption.resetAll();
 		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
 		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 		startTime = System.nanoTime();
+		/*	List<String> nsURIs = new ArrayList<>();
+		for (EPackage ePackage : EValidator.Registry.INSTANCE.keySet()) {
+			nsURIs.add(ePackage.getNsURI());
+		}
+		System.out.println("EValidator.Registry.INSTANCE size = " + EValidator.Registry.INSTANCE.size());
+		Collections.sort(nsURIs);
+		for (String nsURI : nsURIs) {
+			System.out.println("\t" + nsURI);
+		} */
 	}
+
+
+
+
 	static long startTime;
 
 	@Override
@@ -366,5 +428,23 @@ public class PivotTestCase extends TestCase
 		//	long time = System.nanoTime() - startTime;
 		super.tearDown();
 		QVTruntimeUtil.contextLine = null;
+		//
+		//	Diagnose the unexpected residual EPackage.Registry that are being left lying around to pollute another test.
+		//
+		Set<String> newSet = new HashSet<>(EPackage.Registry.INSTANCE.keySet());
+		newSet.removeAll(savedEPackageRegistry);
+		if (newSet.size() > 0) {
+			List<String> newList = new ArrayList<>(newSet);
+			Collections.sort(savedEPackageRegistry);
+			//	QVTruntimeUtil.errPrintln("EPackage.Registry.INSTANCE pre-extras");
+			for (String nsURI : newList) {
+				if (nsURI.contains("example") || nsURI.contains("test") || (!nsURI.startsWith("http://www.eclipse.org") && !nsURI.startsWith("http://www.w3.org"))) {
+					PivotUtilInternal.debugPrintln("Extra " + nsURI);
+				}
+			}
+		}
+		if (DEBUG_ID) {
+			PivotUtilInternal.debugPrintln("==> Finish " + getClass().getSimpleName() + "." + getName());
+		}
 	}
 }

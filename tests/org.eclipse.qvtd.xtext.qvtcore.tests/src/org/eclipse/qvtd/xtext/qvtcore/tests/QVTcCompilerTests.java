@@ -55,6 +55,8 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simplerdbms.SimplerdbmsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.Simpleuml2rdbmsPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -241,6 +243,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			cleanup("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Families2Persons",
+				"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Families",
+					"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Persons");
 		}
 	}
 
@@ -367,6 +372,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			cleanup("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/List2List",
+					"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/DoublyLinkList");
 		}
 	}
 
@@ -432,6 +439,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			cleanup("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HSL/1.0/HSLTree",
+				"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HLS/1.0/HSVTree",
+					"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HSL/1.0/HSVtoHSL");
 		}
 	}
 
@@ -468,6 +478,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			cleanup("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/SimpleRDBMS",
+				"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/simpleUML",
+					"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/SimpleUMLtoRDBMS");
 		}
 	}
 
@@ -546,6 +559,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			cleanup("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/SimpleRDBMS",
+				"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/simpleUML",
+					"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/SimpleUMLtoRDBMS");
 		}
 	}
 
@@ -600,6 +616,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			cleanup("http://www.eclipse.org/qvtd/examples/qvtcore/UML2RDBMS/1.0/SimpleUMLtoRDBMS",
+				"http://www.eclipse.org/qvtd/examples/qvtcore/UML2RDBMS/1.0/simpleUML",
+					"http://www.eclipse.org/qvtd/examples/qvtcore/UML2RDBMS/1.0/SimpleRDBMS");
 		}
 	}
 
@@ -619,6 +638,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			cleanup(SimplegraphPackage.eNS_URI,
+				Simplegraph2graphPackage.eNS_URI);
 		}
 	}
 
@@ -634,6 +655,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
 		//	QVTiProductionConsumption.SUMMARY.setState(true);
+		EPackage.Registry.INSTANCE.put(SimplegraphPackage.eNS_URI, SimplegraphPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(Simplegraph2graphPackage.eNS_URI, Simplegraph2graphPackage.eINSTANCE);
 		MyQVT myQVT = createQVT("upper2lower", getModelsURI("upper2lower/Upper2Lower.qvtcas"));
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
@@ -648,6 +671,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			cleanup(SimplegraphPackage.eNS_URI,
+				Simplegraph2graphPackage.eNS_URI);
 		}
 	}
 }

@@ -379,5 +379,8 @@ public class QVTrDebuggerTests extends XtextTestCase
 		TestUtil.assertSameModel(expectedResource, actualResource);
 
 		ocl.dispose();
+		cleanup("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/FlatStateMachine",
+			"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine",
+				"http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");
 	}
 }
