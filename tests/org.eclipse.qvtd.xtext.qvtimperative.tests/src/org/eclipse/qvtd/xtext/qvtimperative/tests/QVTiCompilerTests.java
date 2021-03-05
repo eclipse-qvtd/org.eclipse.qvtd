@@ -152,12 +152,13 @@ public class QVTiCompilerTests extends LoadTestCase
 			TestUtil.doCompleteOCLSetup();
 			URI oclURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true);
 			//			CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
-			CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, getEnvironmentFactory());
+			QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+			CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, environmentFactory);
 			//			CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metamodelManager);
 			//			completeOCLEObjectValidator1.initialize();
-			completeOCLEObjectValidator2.initialize();
+			completeOCLEObjectValidator2.initialize(environmentFactory);
 			//			completeOCLEObjectValidator3.initialize();
-			PivotEObjectValidator.install(ClassUtil.nonNullState(asResource.getResourceSet()), getEnvironmentFactory());
+			PivotEObjectValidator.install(ClassUtil.nonNullState(asResource.getResourceSet()), environmentFactory);
 			PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
 			PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcorePackage.eINSTANCE), null);
 			PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
