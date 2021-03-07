@@ -42,12 +42,14 @@ import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
+import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.pivot.values.Value;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
@@ -404,6 +406,21 @@ public class PivotTestCase extends TestCase
 		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
 		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 		startTime = System.nanoTime();
+		resetEValidators();
+	}
+
+	private void resetEValidators() {		// FIXME Bug 571755 this should not be needed
+		for (Map.Entry<EPackage, Object> entry : EValidator.Registry.INSTANCE.entrySet()) {
+			Object eValidator = entry.getValue();
+			if (eValidator instanceof ComposedEValidator) {
+				ComposedEValidator composedEValidator = (ComposedEValidator)eValidator;
+				composedEValidator.removeChild(PivotEObjectValidator.INSTANCE);
+				List<EValidator> children = composedEValidator.getChildren();
+				if (children.size() == 1) {
+					EValidator.Registry.INSTANCE.put(entry.getKey(), children.get(0));
+				}
+			}
+		}
 	}
 
 	static long startTime;
