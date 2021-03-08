@@ -17,6 +17,7 @@ import java.util.Map;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -42,8 +43,10 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.resource.ProjectManager.IPackageDescriptor;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
@@ -134,6 +137,14 @@ public class QVTrCompilerTests extends LoadTestCase
 		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
 			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 			getEnvironmentFactory().setSafeNavigationValidationSeverity(StatusCodes.Severity.WARNING);
+		}
+
+		private void configureGeneratedPackage( /*@NonNull*/ String uriString) {
+			URI nsURI = URI.createURI(uriString);
+			IPackageDescriptor packageDescriptor = getProjectManager().getPackageDescriptor(nsURI);
+			if (packageDescriptor != null) {
+				packageDescriptor.configure(getResourceSet(), StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, null);
+			}
 		}
 
 		@Override
@@ -335,7 +346,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
 		MyQVT myQVT2 = createQVT("ATL2QVTr", txURI1);
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
@@ -358,7 +371,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		Class<? extends Transformer> txClass3;
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
 		// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different packge prefix
@@ -382,7 +397,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT3.dispose();
+			myQVT3 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT4 = createQVT("Families2Persons", txURI2);
 		try {
 			myQVT4.loadEPackage(txClass3, "Families.FamiliesPackage");
@@ -398,6 +415,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT4.dispose();
+			myQVT4 = null;
 			cleanup("http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/qvtrelation/tests/newatl2qvtr/NewATL2QVTr");
 		}
 	}
@@ -467,6 +485,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
 		/*		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
 		MyQVT myQVT2 = createQVT("ATL2QVTr", txURI1);
@@ -488,6 +507,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 		Class<? extends Transformer> txClass3;
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
@@ -511,6 +531,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT3.dispose();
+			myQVT3 = null;
 		}
 		MyQVT myQVT4 = createQVT("Families2Persons", txURI2);
 		try {
@@ -525,6 +546,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT4.dispose();
+			myQVT4 = null;
 		} */
 	}
 
@@ -584,7 +606,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		Class<? extends Transformer> txClass3;
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
 		//		MyQVT myQVT3 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", "samples");
@@ -600,7 +624,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT3.dispose();
+			myQVT3 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT4 = createQVT("Families2Persons", txURI2);
 		try {
 			myQVT4.loadEPackage(txClass3, "Families.FamiliesPackage");
@@ -616,6 +642,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT4.dispose();
+			myQVT4 = null;
 		}
 	}
 
@@ -637,6 +664,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
 		URI ecoreURI = getModelsURI("ecore2pivot/Families.ecore");
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
@@ -657,6 +685,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			ocl.dispose();
+			ocl = null;
 		}
 		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("ecore2pivot/Ecore2Pivot.qvtr"));
 		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
@@ -673,6 +702,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			myQVT = null;
 		} */
 	}
 
@@ -717,6 +747,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
 		URI ecoreURI = getModelsURI("ecore2pivot/Families.ecore");
@@ -736,6 +767,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			ocl.dispose();
+			ocl = null;
 		}
 		//
 		URI asURI2 = getTestURI("Families.ecore.oclas");
@@ -752,6 +784,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		} */
 	}
 
@@ -773,6 +806,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		} */
 		URI ecoreURI = getModelsURI("ecore2pivotRoot/Families.ecore");
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
@@ -794,6 +828,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			ocl.dispose();
+			ocl = null;
 		}
 		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("ecore2pivotRoot/Ecore2PivotRoot.qvtr"));
 		//	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
@@ -810,6 +845,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			myQVT = null;
 		}
 	}
 
@@ -837,6 +873,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.ocl.pivot/model/Ecore2Pivot.qvtr", true);
 		URI txURI1 = getModelsURI("ecore2pivotRoot/Ecore2PivotRoot.qvtr");
 		MyQVT myQVT1 = createQVT("Ecore2PivotRoot", txURI1);
+		myQVT1.configureGeneratedPackage(EcorePackage.eNS_URI);
+		myQVT1.configureGeneratedPackage(PivotPackage.eNS_URI);
+		myQVT1.configureGeneratedPackage(OCLstdlibPackage.eNS_URI);
 		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
 		ProjectManager projectManager = myQVT1.getProjectManager();
@@ -854,6 +893,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
 		ThreadLocalExecutor.waitForGC();
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
@@ -875,7 +915,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			ocl.dispose();
+			ocl = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		//
 		URI asURI2 = getTestURI("Families.ecore.oclas");
 		MyQVT myQVT2 = createQVT("Ecore2PivotRoot", txURI1);
@@ -891,6 +933,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 			cleanup("http://www.eclipse.org/qvtd-example/org/eclipse/ocl/pivot2/ecore2pivotRoot/Ecore2PivotRoot");
 		}
 	}
@@ -921,7 +964,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons_expected.qvtras"));
 		try {
 			myQVT2.loadEPackage(txClass, "Families.FamiliesPackage");
@@ -937,6 +982,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -957,6 +1003,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 	    	myQVT.dispose();
+			myQVT = null;
 		}
     }
 
@@ -981,6 +1028,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 	    	myQVT.dispose();
+			myQVT = null;
 		}
     } */
 
@@ -1028,6 +1076,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			myQVT = null;
 		}
 	}
 
@@ -1058,7 +1107,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "doublylinkedlist.doublylinkedlistPackage");
@@ -1101,6 +1152,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1136,6 +1188,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			myQVT = null;
 		}
 	}
 
@@ -1159,7 +1212,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "FlatStateMachine.FlatStateMachinePackage");
@@ -1189,6 +1244,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1213,7 +1269,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "FlatStateMachine.FlatStateMachinePackage");
@@ -1232,6 +1290,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1251,7 +1310,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "FlatStateMachine.FlatStateMachinePackage");
@@ -1284,6 +1345,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1310,7 +1372,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("Iterated2Iterated", getModelsURI("Iterated2Iterated/Iterated2Iterated.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "iterated.iteratedPackage");
@@ -1325,6 +1389,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1350,7 +1415,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("MiToSiSimple", getModelsURI("mitosi/MiToSiSimple.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "javammsi.javammsiPackage");
@@ -1369,6 +1436,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1403,7 +1471,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("MiToSiSimple", getModelsURI("mitosi/MiToSiSimple.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "javammsi.javammsiPackage");
@@ -1427,6 +1497,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1451,7 +1522,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("SeqToStm", getModelsURI("partialPhilosophers/PartialPhilosophers.qvtr"));
 		try {
 			//	myQVT2.loadEPackage(txClass, "SeqMM.SeqMMPackage");
@@ -1465,6 +1538,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	} */
 
@@ -1478,7 +1552,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("Persons2Families", getModelsURI("persons2families/Persons2Families.qvtr"));
 		try {
 			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
@@ -1509,6 +1585,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	} */
 
@@ -1543,6 +1620,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			myQVT = null;
 		}
 	} */
 
@@ -1576,7 +1654,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("Persons2Names2Families", txFile.getURI());
 		try {
 			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
@@ -1601,6 +1681,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1644,6 +1725,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			myQVT = null;
 		}
 	}
 
@@ -1665,6 +1747,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			myQVT = null;
 		}
 	}
 
@@ -1689,7 +1772,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("SeqToStm", getModelsURI("seq2stm/SeqToStm.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "SeqMM.SeqMMPackage");
@@ -1705,6 +1790,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1725,7 +1811,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("SeqToStm", getModelsURI("seq2stm/SeqToStm.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "SeqMM.SeqMMPackage");
@@ -1742,6 +1830,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1771,7 +1860,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT1.dispose();
+			myQVT1 = null;
 		}
+		ThreadLocalExecutor.waitForGC();
 		MyQVT myQVT2 = createQVT("TinyIsomorph", getModelsURI("tinyisomorph/TinyIsomorph.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "mma.mmaPackage");
@@ -1808,6 +1899,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT2.dispose();
+			myQVT2 = null;
 		}
 	}
 
@@ -1835,6 +1927,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			myQVT = null;
 		}
 	} */
 
@@ -1872,6 +1965,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			myQVT = null;
 		}
 	} */
 }
