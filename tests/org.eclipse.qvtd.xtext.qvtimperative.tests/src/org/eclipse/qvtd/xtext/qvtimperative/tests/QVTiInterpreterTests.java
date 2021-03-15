@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT.QVTbTestThread;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
@@ -127,28 +128,45 @@ public class QVTiInterpreterTests extends LoadTestCase
 		assertEquals(expected, actual);
 	}
 
-	protected void assertLoadable(@NonNull QVTbase qvt, @NonNull URI asURI) throws Exception {
-		qvt.deactivate();
+	protected void assertLoadable(@NonNull QVTbase qvt, @NonNull URI asURI) throws Throwable {
+		//	qvt.deactivate();
 		assertLoadable(getTestProject(), asURI);
-		qvt.activate();
+		//	qvt.activate();
 	}
 
-	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Exception {
-		ProjectManager projectManager = getTestProjectManager();
-		OCL ocl = OCL.newInstance(projectManager); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
+	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Throwable {
+		QVTbTestThread<Object> checkThread = new QVTbTestThread<Object>("Loadable-Check")
+		{
+			@Override
+			protected OCLInternal createOCL() {
+				ProjectManager projectManager = getTestProjectManager();
+				OCL ocl = OCL.newInstance(projectManager); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
+				//	OCL ocl = QVTbase.newInstance(getTestProjectManager());
+				//	ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
+				return (OCLInternal) ocl;
+			}
+
+			@Override
+			protected Object runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
+				//	ProjectManager projectManager = getTestProjectManager();
+				//	OCL ocl = OCL.newInstance(projectManager); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
 
 
-		ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-			OCLstdlib.install();
-			((OCLInternal)ocl).getMetamodelManager().getASmetamodel();
-		}
-		Resource resource = asResourceSet.getResource(asURI, true);
-		assert resource != null;
-		EcoreUtil.resolveAll(resource);
-		assertNoUnresolvedProxies("Loading", resource);
-		assertNoResourceErrors("Loading", resource);
-		ocl.dispose();
+				ResourceSet asResourceSet = getOCL().getMetamodelManager().getASResourceSet();
+				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+					OCLstdlib.install();
+					getOCL().getMetamodelManager().getASmetamodel();
+				}
+				Resource resource = asResourceSet.getResource(asURI, true);
+				assert resource != null;
+				EcoreUtil.resolveAll(resource);
+				assertNoUnresolvedProxies("Loading", resource);
+				assertNoResourceErrors("Loading", resource);
+				//	ocl.dispose();
+				return null;
+			}
+		};
+		checkThread.syncExec();
 	}
 
 	@Override
@@ -184,7 +202,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_Graph2GraphMinimal() throws Exception {
+	public void testQVTiInterpreter_Graph2GraphMinimal() throws Throwable {
 		URI txURI = getModelsURI("Graph2GraphMinimal/Graph2GraphMinimal.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("Graph2GraphMinimal/SimpleGraph.xmi");
@@ -215,7 +233,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_Graph2GraphHierarchical() throws Exception {
+	public void testQVTiInterpreter_Graph2GraphHierarchical() throws Throwable {
 		URI txURI = getModelsURI("Graph2GraphHierarchical/Graph2GraphHierarchical.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("Graph2GraphMinimal/SimpleGraph.xmi");
@@ -238,7 +256,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTiInterpreter_Graph2GraphHierarchicalLoad() throws Exception {
+	public void testQVTiInterpreter_Graph2GraphHierarchicalLoad() throws Throwable {
 		URI asURI = getModelsURI("Graph2GraphHierarchical" + "/"  + "Graph2GraphHierarchical.ref.qvtias");
 		assertLoadable(getTestProject(), asURI);
 	}
@@ -249,7 +267,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_HSV2HSL() throws Exception {
+	public void testQVTiInterpreter_HSV2HSL() throws Throwable {
 		URI txURI = getModelsURI("HSV2HSL/HSV2HSL.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("HSV2HSL/HSVNode.xmi");
@@ -275,7 +293,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * Test tree2talltree using the INCREMENTAL evaluator.
 	 */
 	@Test
-	public void testQVTiInterpreter_Tree2TallTreeIncremental() throws Exception {
+	public void testQVTiInterpreter_Tree2TallTreeIncremental() throws Throwable {
 		URI txURI = getModelsURI("Tree2TallTree/Tree2TallTree.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("Tree2TallTree/samples/Tree.xmi");
@@ -302,7 +320,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * Test tree2talltree using the LAZY evaluator.
 	 */
 	@Test
-	public void testQVTiInterpreter_Tree2TallTreeLazy() throws Exception {
+	public void testQVTiInterpreter_Tree2TallTreeLazy() throws Throwable {
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		URI txURI = getModelsURI("Tree2TallTree/Tree2TallTree.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
@@ -331,7 +349,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_ManualUML2RDBMS() throws Exception {
+	public void testQVTiInterpreter_ManualUML2RDBMS() throws Throwable {
 		URI txURI = getModelsURI("ManualUML2RDBMS/ManualUML2RDBMS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("ManualUML2RDBMS/ManualUMLPeople.xmi");
@@ -368,7 +386,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_SimpleUML2RDBMS() throws Exception {
+	public void testQVTiInterpreter_SimpleUML2RDBMS() throws Throwable {
 		URI txURI = getModelsURI("SimpleUML2RDBMS/SimpleUML2RDBMS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("SimpleUML2RDBMS/SimpleUMLPeople.xmi");
@@ -402,7 +420,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 
 	@Test
-	public void testQVTiInterpreter_ClassesCS2AS_bug456900() throws Exception {
+	public void testQVTiInterpreter_ClassesCS2AS_bug456900() throws Throwable {
 		URI txURI = getModelsURI("ClassesCS2AS/bug456900/ClassesCS2AS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("ClassesCS2AS/bug456900/example_input.xmi");
@@ -424,7 +442,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTiInterpreter_ClassesCS2AS_bug457239() throws Exception {
+	public void testQVTiInterpreter_ClassesCS2AS_bug457239() throws Throwable {
 		TestUtil.doCompleteOCLSetup();
 		URI txURI = getModelsURI("ClassesCS2AS/bug457239/ClassesCS2AS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
@@ -447,7 +465,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTiInterpreter_ClassesCS2AS_bug457239b() throws Exception {
+	public void testQVTiInterpreter_ClassesCS2AS_bug457239b() throws Throwable {
 		TestUtil.doCompleteOCLSetup();
 		URI txURI = getModelsURI("ClassesCS2AS/bug457239/ClassesCS2ASv2_AS.qvtias");
 		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");

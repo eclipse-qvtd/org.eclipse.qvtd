@@ -112,7 +112,7 @@ public class ATLExampleTests extends LoadTestCase
 		return new MyQVT(testProjectManager, getTestProject(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 	}
 
-	protected void doATLExampleTest_CG(@NonNull String resultPrefix, @NonNull URI atlURI) throws Exception {
+	protected void doATLExampleTest_CG(@NonNull String resultPrefix, @NonNull URI atlURI) throws Throwable {
 		MyQVT myQVT = createQVT(resultPrefix, atlURI);
 		try {
 			Class<?> txClass = Class.forName("org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr");		// FIXME Use direct reference once generation works redliably
@@ -155,7 +155,7 @@ public class ATLExampleTests extends LoadTestCase
 	}
 
 	@Test
-	public void testATL2QVTr_Families2Persons_CG() throws Exception {
+	public void testATL2QVTr_Families2Persons_CG() throws Throwable {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//		QVTrelationToStringVisitor.FACTORY.getClass();

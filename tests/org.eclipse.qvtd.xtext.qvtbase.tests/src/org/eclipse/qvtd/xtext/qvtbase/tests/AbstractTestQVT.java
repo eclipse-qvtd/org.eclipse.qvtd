@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.tests.PivotTestCaseWithAutoTearDown.OCLTes
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -284,36 +285,51 @@ public abstract class AbstractTestQVT extends QVTimperative
 		LoadTestCase.assertSameModel(referenceResource, outputResource);
 	}
 
-	public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-		deactivate();
-		ResourceSet actualResourceSet = createTestResourceSet();
-		//		if (PivotUtilInternal.isASURI(modelURI)) {
-		//			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
-		//		}
-		//		else {
-		//			resourceSet = getResourceSet();
-		//		}
-		Resource actualResource = ClassUtil.nonNullState(actualResourceSet.getResource(actualURI, true));
-		EcoreUtil.resolveAll(actualResourceSet);
-		if (expectedURI != null) {
-			String actualFileStem = actualURI.trimFileExtension().lastSegment();
-			String expectedFileStem = expectedURI.trimFileExtension().lastSegment();
-			if ((actualFileStem != null) && (expectedFileStem != null) && !actualFileStem.equals(expectedFileStem) && actualFileStem.startsWith(expectedFileStem)) {
-				String suffix = actualFileStem.substring(expectedFileStem.length());
-				for (Resource resource : actualResourceSet.getResources()) {
-					URI resourceURI = resource.getURI();
-					String fileExtension = resourceURI.fileExtension();
-					URI trimmedURI = resourceURI.trimFileExtension();
-					String fileStem = trimmedURI.lastSegment();
-					if ((fileStem != null) && fileStem.endsWith(suffix) ) {
-						String trimmedFileStem = fileStem.substring(0, fileStem.length() - suffix.length());
-						resource.setURI(trimmedURI.trimSegments(1).appendSegment(trimmedFileStem).appendFileExtension(fileExtension));
-					}
-				}
+	public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Throwable {
+		//		deactivate();
+		QVTbTestThread<Resource> checkThread = new QVTbTestThread<Resource>("Check-Output")
+		{
+			@Override
+			protected OCLInternal createOCL() {
+				OCL ocl = QVTbase.newInstance(getTestProjectManager());
+				ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
+				return (OCLInternal) ocl;
 			}
-			checkOutput(actualResource, expectedURI, normalizer);
-		}
-		activate();
+
+			@Override
+			protected Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
+				ResourceSet actualResourceSet = createTestResourceSet();
+				//		if (PivotUtilInternal.isASURI(modelURI)) {
+				//			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
+				//		}
+				//		else {
+				//			resourceSet = getResourceSet();
+				//		}
+				Resource actualResource = ClassUtil.nonNullState(actualResourceSet.getResource(actualURI, true));
+				EcoreUtil.resolveAll(actualResourceSet);
+				if (expectedURI != null) {
+					String actualFileStem = actualURI.trimFileExtension().lastSegment();
+					String expectedFileStem = expectedURI.trimFileExtension().lastSegment();
+					if ((actualFileStem != null) && (expectedFileStem != null) && !actualFileStem.equals(expectedFileStem) && actualFileStem.startsWith(expectedFileStem)) {
+						String suffix = actualFileStem.substring(expectedFileStem.length());
+						for (Resource resource : actualResourceSet.getResources()) {
+							URI resourceURI = resource.getURI();
+							String fileExtension = resourceURI.fileExtension();
+							URI trimmedURI = resourceURI.trimFileExtension();
+							String fileStem = trimmedURI.lastSegment();
+							if ((fileStem != null) && fileStem.endsWith(suffix) ) {
+								String trimmedFileStem = fileStem.substring(0, fileStem.length() - suffix.length());
+								resource.setURI(trimmedURI.trimSegments(1).appendSegment(trimmedFileStem).appendFileExtension(fileExtension));
+							}
+						}
+					}
+					checkOutput(actualResource, expectedURI, normalizer);
+				}
+				return actualResource;
+			}
+		};
+		Resource actualResource = checkThread.syncExec();
+		//	activate();
 		return actualResource;
 	}
 
@@ -480,55 +496,78 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return transformation;
 	}
 
-	private void doScheduleLoadCheck(@NonNull URI uri) throws Exception {
-		deactivate();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		getTestProjectManager().initializeResourceSet(resourceSet);
-		Resource resource = resourceSet.getResource(uri, true);
-		assert resource != null;
-		PivotTestCase.assertNoResourceErrors("Load", resource);
-		EcoreUtil.resolveAll(resource);
-		PivotTestCase.assertNoUnresolvedProxies("Resolve", resource);;
-		PivotTestCase.assertNoValidationErrors("Validate", resource);;
-		activate();
+	private void doScheduleLoadCheck(@NonNull URI uri) throws Throwable {
+		//	deactivate();
+		QVTbTestThread<Object> checkThread = new QVTbTestThread<Object>("Schedule-Load-Check")
+		{
+			@Override
+			protected OCLInternal createOCL() {
+				OCL ocl = QVTbase.newInstance(getTestProjectManager());
+				ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
+				return (OCLInternal) ocl;
+			}
+
+			@Override
+			protected Object runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
+				//	ResourceSet resourceSet = new ResourceSetImpl();
+				getTestProjectManager().initializeResourceSet(resourceSet);
+				Resource resource = resourceSet.getResource(uri, true);
+				assert resource != null;
+				PivotTestCase.assertNoResourceErrors("Load", resource);
+				EcoreUtil.resolveAll(resource);
+				PivotTestCase.assertNoUnresolvedProxies("Resolve", resource);;
+				PivotTestCase.assertNoValidationErrors("Validate", resource);;
+				return null;
+			}
+		};
+		checkThread.syncExec();
+		//	activate();
 	}
 
 	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Throwable {
-		deactivate();
-		ResourceSet resourceSet = new ResourceSetImpl();
+		//	deactivate();
+		//	ResourceSet resourceSet = new ResourceSetImpl();
 		//	Executor savedExecutor = PivotUtil.basicGetExecutor();
 		//
 		//	Load QVTiAS
 		//
-		OCL ocl = QVTbase.newInstance(getTestProjectManager());
-		ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
-		XtextResource xtextResource = null;
-		try {
-			ASResource asResource = loadQVTiAS(ocl, inputURI);
-			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
-			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
-			try {
-				LoadTestCase.assertNoValidationErrors("Serializing to " + serializedURI, asResource);
-				//
-				//	Pivot to CS
-				//
-				xtextResource = as2cs(ocl, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
-				resourceSet.getResources().clear();
+		QVTbTestThread<XtextResource> loadThread = new QVTbTestThread<XtextResource>("Serialize-Load")
+		{
+			@Override
+			protected OCLInternal createOCL() {
+				OCL ocl = QVTbase.newInstance(getTestProjectManager());
+				ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
+				return (OCLInternal) ocl;
 			}
-			catch (AssertionFailedError e) {
-				try {	// Try and serialize anyway so that a *.qvti is available even on on obsolete installation
-					as2cs(ocl, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
-				}
-				catch (Throwable t) {}
-				throw e;
-			}
-		}
-		finally {
-			ocl.dispose();
-			ocl = null;
-		}
 
-		QVTiTestThread loadThread = new QVTiTestThread("Serialize-Load")
+			@Override
+			protected XtextResource runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
+				XtextResource xtextResource = null;
+				OCLInternal ocl2 = getOCL();
+				ASResource asResource = loadQVTiAS(ocl2, inputURI);
+				LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
+				LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
+				try {
+					LoadTestCase.assertNoValidationErrors("Serializing to " + serializedURI, asResource);
+					//
+					//	Pivot to CS
+					//
+					xtextResource = as2cs(ocl2, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
+					resourceSet.getResources().clear();
+				}
+				catch (AssertionFailedError e) {
+					try {	// Try and serialize anyway so that a *.qvti is available even on on obsolete installation
+						as2cs(ocl2, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
+					}
+					catch (Throwable t) {}
+					throw e;
+				}
+				return xtextResource;
+			}
+		};
+		XtextResource xtextResource = loadThread.syncExec();
+
+		QVTiTestThread reloadThread = new QVTiTestThread("Serialize-Reload")
 		{
 			@Override
 			protected void runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
@@ -541,12 +580,49 @@ public abstract class AbstractTestQVT extends QVTimperative
 				LoadTestCase.assertNoValidationErrors("Loading " + serializedURI, asResource2);
 			}
 		};
-		loadThread.syncExec();
+		reloadThread.syncExec();
 		//	if (savedExecutor != null) {
 		//		ThreadLocalExecutor.setExecutor(savedExecutor);
 		//	}
-		activate();
+		//	activate();
 		return xtextResource;
+	}
+
+	/**
+	 * A EagerDelegatesOCLTestThread creates the OCL before delegate invocation.
+	 */
+	public abstract static class QVTbTestThread<R> extends OCLTestThread<R, @Nullable OCLInternal>
+	{
+		public QVTbTestThread(@NonNull String oclThreadName) {
+			super(oclThreadName);
+		}
+
+		//		@Override
+		//		protected QVTbase createOCL() throws ParserException {
+		//			return (QVTbase) QVTbase.newInstance(getTestProjectManager(), null);
+		//		}
+		//	@Override
+		//	protected OCLInternal createOCL() {
+		//		OCL ocl = QVTbase.newInstance(getTestProjectManager());
+		//		ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
+		//		return (OCLInternal) ocl;
+		//	}
+
+		@Override
+		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+			return (QVTiEnvironmentFactory)super.getEnvironmentFactory();
+		}
+
+		protected  abstract R runWithModel(@NonNull ResourceSet resourceSet) throws Exception;
+
+		@Override
+		public R runWithThrowable() throws Exception {
+			assert ocl != null;
+			ResourceSet resourceSet = ocl.getResourceSet();
+			runWithModel(resourceSet);
+			//		unloadResourceSet(resourceSet);
+			return null;
+		}
 	}
 
 	/**

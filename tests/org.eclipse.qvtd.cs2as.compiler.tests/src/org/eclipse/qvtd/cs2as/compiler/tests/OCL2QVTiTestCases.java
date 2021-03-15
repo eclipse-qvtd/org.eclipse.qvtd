@@ -113,7 +113,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//
 		// Execute the transformation with the code generator
 		//
-		protected void executeModelsTX_CG(@NonNull Class<? extends Transformer> txClass, @NonNull String modelName) throws Exception {
+		protected void executeModelsTX_CG(@NonNull Class<? extends Transformer> txClass, @NonNull String modelName) throws Throwable {
 			String inputURIstring = modelTestName + "/" + modelSamples + "/" + modelName + "_input.xmi";
 			String outURIstring = modelName + "_output_CG.xmi";
 			String refURIstring = modelTestName + "/" + modelSamples + "/" + modelName + "_output_ref.xmi";
@@ -128,7 +128,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//
 		// Execute the transformation with the QVTi interpreter
 		//
-		protected void executeModelsTX_Interpreted(@NonNull ImperativeTransformation tx, @NonNull String modelName) throws Exception {
+		protected void executeModelsTX_Interpreted(@NonNull ImperativeTransformation tx, @NonNull String modelName) throws Throwable {
 			String inputURIstring = modelTestName + "/" + modelSamples + "/" + modelName + "_input.xmi";
 			String outURIstring = modelName + "_output_Interpreted.xmi";
 			String refURIstring = modelTestName + "/" + modelSamples + "/" + modelName + "_output_ref.xmi";
