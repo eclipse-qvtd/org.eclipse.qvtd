@@ -37,6 +37,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.examples.pivot.tests.PivotTestCaseWithAutoTearDown.OCLTestThread;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
@@ -46,6 +47,7 @@ import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
@@ -249,19 +251,19 @@ public abstract class AbstractTestQVT extends QVTimperative
 	//	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String outputName,
-			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
+			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Throwable {
 		TypedModelsConfigurations typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
 		return buildTransformation(typedModelsConfigurations, isIncremental, genModelFiles);
 	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations,
-			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
+			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Throwable {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		return doBuild(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, options, genModelFiles);
 	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation_486938(@NonNull String outputName,
-			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
+			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Throwable {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		options.setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
 		TypedModelsConfigurations typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
@@ -321,12 +323,12 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return actualResourceSet;
 	}
 
-	public @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Exception {
+	public @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Throwable {
 		SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
 		return compileTransformation(typedModelsConfigurations);
 	}
 
-	public @NonNull ImperativeTransformation compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+	public @NonNull ImperativeTransformation compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Throwable {
 		return doCompile(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, createCompilerChainOptions());
 	}
 
@@ -452,7 +454,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull TypedModelsConfigurations typedModelsConfigurations,
-			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws IOException, Exception {
+			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws Throwable {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
 		URI asURI = asTransformation.eResource().getURI();
@@ -464,7 +466,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected @NonNull ImperativeTransformation doCompile(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
-			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull CompilerOptions options) throws Exception {
+			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull CompilerOptions options) throws Throwable {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation transformation = compilerChain.compile(typedModelsConfigurations);
 		URI txASURI = transformation.eResource().getURI();
@@ -491,7 +493,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		activate();
 	}
 
-	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
+	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Throwable {
 		deactivate();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//	Executor savedExecutor = PivotUtil.basicGetExecutor();
@@ -526,24 +528,56 @@ public abstract class AbstractTestQVT extends QVTimperative
 			ocl = null;
 		}
 
-		QVTimperative qvti = QVTimperative.newInstance(getTestProjectManager(), null);
-		try {
-			ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(qvti.getEnvironmentFactory(), serializedURI, false);
-			Resource asResource2 = asTransformation.eResource();
-			assert asResource2 != null;
-			LoadTestCase.assertNoResourceErrors("Loading " + serializedURI, asResource2);
-			LoadTestCase.assertNoUnresolvedProxies("Loading " + serializedURI, asResource2);
-			LoadTestCase.assertNoValidationErrors("Loading " + serializedURI, asResource2);
-		}
-		finally {
-			qvti.dispose();
-			qvti = null;
-		}
+		QVTiTestThread loadThread = new QVTiTestThread("Serialize-Load")
+		{
+			@Override
+			protected void runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
+				QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+				ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(environmentFactory, serializedURI, false);
+				Resource asResource2 = asTransformation.eResource();
+				assert asResource2 != null;
+				LoadTestCase.assertNoResourceErrors("Loading " + serializedURI, asResource2);
+				LoadTestCase.assertNoUnresolvedProxies("Loading " + serializedURI, asResource2);
+				LoadTestCase.assertNoValidationErrors("Loading " + serializedURI, asResource2);
+			}
+		};
+		loadThread.syncExec();
 		//	if (savedExecutor != null) {
 		//		ThreadLocalExecutor.setExecutor(savedExecutor);
 		//	}
 		activate();
 		return xtextResource;
+	}
+
+	/**
+	 * A EagerDelegatesOCLTestThread creates the OCL before delegate invocation.
+	 */
+	public abstract class QVTiTestThread extends OCLTestThread<Object, @Nullable QVTimperative>
+	{
+		public QVTiTestThread(@NonNull String oclThreadName) {
+			super(oclThreadName);
+		}
+
+		@Override
+		protected QVTimperative createOCL() throws ParserException {
+			return QVTimperative.newInstance(getTestProjectManager(), null);
+		}
+
+		@Override
+		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+			return (QVTiEnvironmentFactory)super.getEnvironmentFactory();
+		}
+
+		protected  abstract void runWithModel(@NonNull ResourceSet resourceSet) throws Exception;
+
+		@Override
+		public Object runWithThrowable() throws Exception {
+			assert ocl != null;
+			ResourceSet resourceSet = ocl.getResourceSet();
+			runWithModel(resourceSet);
+			//		unloadResourceSet(resourceSet);
+			return null;
+		}
 	}
 
 	public boolean executeTransformation() throws Exception {
@@ -608,11 +642,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return testBundleURI.segment(1);
 	}
 
-	protected final @NonNull ProjectManager getTestProjectManager() throws Exception {
+	protected final @NonNull ProjectManager getTestProjectManager() {
 		return getTestProjectManager("");
 	}
 
-	protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
+	protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) {
 		return ProjectManager.NO_PROJECTS;
 	}
 

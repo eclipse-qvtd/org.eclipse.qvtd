@@ -101,7 +101,7 @@ public class UMLXCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
+		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) {
 			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : UMLXCompilerTests.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
 		}
 	}
@@ -154,7 +154,7 @@ public class UMLXCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testUMLXCompiler_Forward2Reverse_CG() throws Exception {
+	public void testUMLXCompiler_Forward2Reverse_CG() throws Throwable {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
@@ -224,7 +224,7 @@ public class UMLXCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testUMLXCompiler_HierarchicalStateMachine2FlatStateMachine_example_CG() throws Exception {
+	public void testUMLXCompiler_HierarchicalStateMachine2FlatStateMachine_example_CG() throws Throwable {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);

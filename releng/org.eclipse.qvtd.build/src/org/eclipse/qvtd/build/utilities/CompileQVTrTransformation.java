@@ -83,7 +83,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		}
 
 		@Override
-		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
+		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) {
 			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : CompileQVTrTransformation.this.getTestProjectManager();
 		}
 	}
@@ -261,7 +261,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 			}
 			@SuppressWarnings("unused")
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("qvtr", false); //,
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			issues.addError(this, "Failed to compile 'ATL2QVTr.qvtr'", null, e, null);
 		}
 		finally {

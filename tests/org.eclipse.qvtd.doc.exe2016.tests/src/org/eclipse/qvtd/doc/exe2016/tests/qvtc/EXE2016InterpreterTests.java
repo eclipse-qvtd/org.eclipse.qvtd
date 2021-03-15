@@ -32,7 +32,7 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 {
 	@Override
 	@Test
-	public void testQVTcCompiler_Forward2Reverse() throws Exception {
+	public void testQVTcCompiler_Forward2Reverse() throws Throwable {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
@@ -76,7 +76,7 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 	}
 
 	@Test
-	public void testQVTcCompiler_Forward2Reverse_100K() throws Exception {
+	public void testQVTcCompiler_Forward2Reverse_100K() throws Throwable {
 		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
