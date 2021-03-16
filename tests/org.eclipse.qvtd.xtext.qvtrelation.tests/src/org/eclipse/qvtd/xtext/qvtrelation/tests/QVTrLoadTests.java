@@ -13,13 +13,14 @@ package org.eclipse.qvtd.xtext.qvtrelation.tests;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.library.ImplementationManager;
 import org.eclipse.ocl.pivot.internal.resource.EnvironmentFactoryAdapter;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
+import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -52,17 +53,19 @@ public class QVTrLoadTests extends LoadTestCase
 		if (!classLoaders.contains(cl0)) {
 			implementationManager.addClassLoader(cl0);
 		}
-		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
+		Resumable<@NonNull Resource> resumableThread = doLoad_Concrete(inputURI, pivotURI, messages, null);
+		resumableThread.syncResume();
 		ocl.dispose();
 	}
 
 	@Override
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
-		OCL ocl = QVTbase.newInstance(getTestProjectManager(), null);
+		//	OCL ocl = QVTbase.newInstance(getTestProjectManager(), null);
 		//		OCL ocl = OCL.newInstance(getProjectMap());
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTrelationUtil.QVTRAS_FILE_EXTENSION);
-		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
-		ocl.dispose();
+		Resumable<@NonNull Resource> resumableThread = doLoad_Concrete(inputURI, pivotURI, messages, null);
+		resumableThread.syncResume();
+		//	ocl.dispose();
 	}
 
 

@@ -26,10 +26,13 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT.QVTbTestThread;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -43,11 +46,11 @@ public abstract class LoadTestCase extends XtextTestCase
 	}
 
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@NonNull Severity severity) throws Exception {
-		OCL ocl = createOCL();
-		((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
+		//	OCL ocl = createOCL();
+		//	((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
-		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
-		ocl.dispose();
+		doLoad_Concrete(inputURI, pivotURI, messages, severity);
+		//	ocl.dispose();
 	}
 
 	protected abstract @NonNull OCLInternal createOCL();
@@ -58,22 +61,51 @@ public abstract class LoadTestCase extends XtextTestCase
 	//		return doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 	//	}
 
-	protected Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages) throws Exception {
-		URI cstURI = getTestURIWithExtension(pivotURI, "xmi");
-		BaseCSResource xtextResource = (BaseCSResource) ocl.getResourceSet().getResource(inputURI, true);
-		assert xtextResource != null;
-		assertNoResourceErrors("Load failed", xtextResource);
-		Resource pivotResource = xtextResource.getASResource();
-		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-		//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
-		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
-		//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
-		saveAsXMI(xtextResource, cstURI);
-		pivotResource.setURI(pivotURI);
-		assertValidationDiagnostics("Pivot validation errors", pivotResource, messages);
-		((ASResource)pivotResource).setSaveable(true);
-		pivotResource.save(DefaultCompilerOptions.defaultSavingOptions);
-		return pivotResource;
+	protected Resumable<@NonNull Resource> doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+
+		QVTbTestThread<@NonNull Resource> loadThread = new QVTbTestThread<@NonNull Resource>("Concrete-Syntax-Load")
+		{
+			@Override
+			protected OCLInternal createOCL() {
+
+				ProjectManager projectManager = getTestProjectManager();
+				OCL ocl = OCL.newInstance(projectManager);//, null);
+
+				if (severity != null) {
+					((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
+				}
+
+
+				//	OCL ocl = createOCL();
+				//	((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
+
+				//			OCL ocl = QVTbase.newInstance(getTestProjectManager());
+				//			ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
+				return (OCLInternal) ocl;
+			}
+
+			@Override
+			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
+				URI cstURI = getTestURIWithExtension(pivotURI, "xmi");
+				BaseCSResource xtextResource = (BaseCSResource) getOCL().getResourceSet().getResource(inputURI, true);
+				assert xtextResource != null;
+				assertNoResourceErrors("Load failed", xtextResource);
+				Resource pivotResource = xtextResource.getASResource();
+				assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+				//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
+				assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
+				//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
+				saveAsXMI(xtextResource, cstURI);
+				pivotResource.setURI(pivotURI);
+				assertValidationDiagnostics("Pivot validation errors", pivotResource, messages);
+				((ASResource)pivotResource).setSaveable(true);
+				pivotResource.save(DefaultCompilerOptions.defaultSavingOptions);
+				syncSuspend(pivotResource);
+				// Caller continues until syncResume() allows termination.
+				return pivotResource;
+			}
+		};
+		return loadThread.syncStart();
 	}
 
 	protected void saveAsXMI(@NonNull Resource resource, @NonNull URI xmiURI) throws IOException {

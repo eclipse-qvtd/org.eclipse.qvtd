@@ -128,13 +128,13 @@ public class QVTiInterpreterTests extends LoadTestCase
 		assertEquals(expected, actual);
 	}
 
-	protected void assertLoadable(@NonNull QVTbase qvt, @NonNull URI asURI) throws Throwable {
+	protected void assertLoadable(@NonNull QVTbase qvt, @NonNull URI asURI) throws Exception {
 		//	qvt.deactivate();
 		assertLoadable(getTestProject(), asURI);
 		//	qvt.activate();
 	}
 
-	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Throwable {
+	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Exception {
 		QVTbTestThread<Object> checkThread = new QVTbTestThread<Object>("Loadable-Check")
 		{
 			@Override
@@ -202,7 +202,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_Graph2GraphMinimal() throws Throwable {
+	public void testQVTiInterpreter_Graph2GraphMinimal() throws Exception {
 		URI txURI = getModelsURI("Graph2GraphMinimal/Graph2GraphMinimal.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("Graph2GraphMinimal/SimpleGraph.xmi");
@@ -233,7 +233,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_Graph2GraphHierarchical() throws Throwable {
+	public void testQVTiInterpreter_Graph2GraphHierarchical() throws Exception {
 		URI txURI = getModelsURI("Graph2GraphHierarchical/Graph2GraphHierarchical.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("Graph2GraphMinimal/SimpleGraph.xmi");
@@ -256,7 +256,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTiInterpreter_Graph2GraphHierarchicalLoad() throws Throwable {
+	public void testQVTiInterpreter_Graph2GraphHierarchicalLoad() throws Exception {
 		URI asURI = getModelsURI("Graph2GraphHierarchical" + "/"  + "Graph2GraphHierarchical.ref.qvtias");
 		assertLoadable(getTestProject(), asURI);
 	}
@@ -267,7 +267,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_HSV2HSL() throws Throwable {
+	public void testQVTiInterpreter_HSV2HSL() throws Exception {
 		URI txURI = getModelsURI("HSV2HSL/HSV2HSL.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("HSV2HSL/HSVNode.xmi");
@@ -293,7 +293,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * Test tree2talltree using the INCREMENTAL evaluator.
 	 */
 	@Test
-	public void testQVTiInterpreter_Tree2TallTreeIncremental() throws Throwable {
+	public void testQVTiInterpreter_Tree2TallTreeIncremental() throws Exception {
 		URI txURI = getModelsURI("Tree2TallTree/Tree2TallTree.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("Tree2TallTree/samples/Tree.xmi");
@@ -320,7 +320,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * Test tree2talltree using the LAZY evaluator.
 	 */
 	@Test
-	public void testQVTiInterpreter_Tree2TallTreeLazy() throws Throwable {
+	public void testQVTiInterpreter_Tree2TallTreeLazy() throws Exception {
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		URI txURI = getModelsURI("Tree2TallTree/Tree2TallTree.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
@@ -349,7 +349,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_ManualUML2RDBMS() throws Throwable {
+	public void testQVTiInterpreter_ManualUML2RDBMS() throws Exception {
 		URI txURI = getModelsURI("ManualUML2RDBMS/ManualUML2RDBMS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("ManualUML2RDBMS/ManualUMLPeople.xmi");
@@ -386,7 +386,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testQVTiInterpreter_SimpleUML2RDBMS() throws Throwable {
+	public void testQVTiInterpreter_SimpleUML2RDBMS() throws Exception {
 		URI txURI = getModelsURI("SimpleUML2RDBMS/SimpleUML2RDBMS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("SimpleUML2RDBMS/SimpleUMLPeople.xmi");
@@ -420,7 +420,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 
 	@Test
-	public void testQVTiInterpreter_ClassesCS2AS_bug456900() throws Throwable {
+	public void testQVTiInterpreter_ClassesCS2AS_bug456900() throws Exception {
 		URI txURI = getModelsURI("ClassesCS2AS/bug456900/ClassesCS2AS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("ClassesCS2AS/bug456900/example_input.xmi");
@@ -442,7 +442,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTiInterpreter_ClassesCS2AS_bug457239() throws Throwable {
+	public void testQVTiInterpreter_ClassesCS2AS_bug457239() throws Exception {
 		TestUtil.doCompleteOCLSetup();
 		URI txURI = getModelsURI("ClassesCS2AS/bug457239/ClassesCS2AS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
@@ -465,7 +465,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTiInterpreter_ClassesCS2AS_bug457239b() throws Throwable {
+	public void testQVTiInterpreter_ClassesCS2AS_bug457239b() throws Exception {
 		TestUtil.doCompleteOCLSetup();
 		URI txURI = getModelsURI("ClassesCS2AS/bug457239/ClassesCS2ASv2_AS.qvtias");
 		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");

@@ -20,8 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
@@ -46,14 +45,16 @@ public class QVTrSerializeTests extends LoadTestCase
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvtr");
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");
 		QVTrelation ocl1 = QVTrelation.newInstance(QVTrelation.NO_PROJECTS);
-		QVTrelation ocl2 = QVTrelation.newInstance(QVTrelation.NO_PROJECTS);
+		//	QVTrelation ocl2 = QVTrelation.newInstance(QVTrelation.NO_PROJECTS);
 		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
 		doSerialize(inputURI, serializedInputURI, referenceURI, null, true, true, null);
-		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, NO_MESSAGES);
+		Resumable<@NonNull Resource> testThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
+		Resource asResource3 = testThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
-		ocl2.dispose();
+		testThread3.syncResume();
+		//	ocl1.dispose();
+		//	ocl2.dispose();
 	}
 
 	protected void doSerializeRoundTripFromCS(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
@@ -61,19 +62,21 @@ public class QVTrSerializeTests extends LoadTestCase
 		URI referenceURI = getTestURIWithExtension(inputURI, "ref.qvtras");
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvtr");
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");
-		ProjectManager projectManager = getTestProjectManager();
-		QVTrelation ocl1 = QVTrelation.newInstance(projectManager, null);
-		Resource asResource1 = doLoad_Concrete(ocl1, inputURI, pivotURI, null);
-		ocl1.deactivate();
+		//	ProjectManager projectManager = getTestProjectManager();
+		//	QVTrelation ocl1 = QVTrelation.newInstance(projectManager, null);
+		Resumable<@NonNull Resource> testThread1 = doLoad_Concrete(inputURI, pivotURI, null, null);
+		Resource asResource1 = testThread1.getResult();
+		//	ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true, messages);
-		QVTrelation ocl2 = QVTrelation.newInstance(projectManager, null);
-		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, null);
+		//	QVTrelation ocl2 = QVTrelation.newInstance(projectManager, null);
+		Resumable<@NonNull Resource> testThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, null, null);
+		Resource asResource3 = testThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
-		ocl2.dispose();
+		testThread1.syncResume();
+		testThread3.syncResume();
 	}
 
 	// FIXME workaround for Bug 510503
@@ -82,19 +85,21 @@ public class QVTrSerializeTests extends LoadTestCase
 		URI referenceURI = getTestURIWithExtension(inputURI, "ref.qvtras");
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvtr");
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");
-		ProjectManager projectManager = getTestProjectManager();
-		OCL ocl1 = OCL.newInstance(projectManager);//, null);
-		Resource asResource1 = doLoad_Concrete(ocl1, inputURI, pivotURI, null);
-		ocl1.deactivate();
+		//	ProjectManager projectManager = getTestProjectManager();
+		//	OCL ocl1 = OCL.newInstance(projectManager);//, null);
+		Resumable<@NonNull Resource> testThread1 = doLoad_Concrete(inputURI, pivotURI, null, null);
+		Resource asResource1 = testThread1.getResult();
+		//	ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true, messages);
-		QVTrelation ocl2 = QVTrelation.newInstance(projectManager);
-		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, null);
+		//	QVTrelation ocl2 = QVTrelation.newInstance(projectManager);
+		Resumable<@NonNull Resource> testThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, null, null);
+		Resource asResource3 = testThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
-		ocl2.dispose();
+		//	ocl1.dispose();
+		//	ocl2.dispose();
 	}
 
 	// FIXME workaround for Bug 510503
@@ -103,19 +108,21 @@ public class QVTrSerializeTests extends LoadTestCase
 		URI referenceURI = getTestURIWithExtension(inputURI, "ref.qvtras");
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvtr");
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtras");
-		ProjectManager projectManager = getTestProjectManager();
-		OCL ocl1 = OCL.newInstance(projectManager);//, null);
-		Resource asResource1 = doLoad_Concrete(ocl1, inputURI, pivotURI, NO_MESSAGES);
-		ocl1.deactivate();
+		//	ProjectManager projectManager = getTestProjectManager();
+		//	OCL ocl1 = OCL.newInstance(projectManager);//, null);
+		Resumable<@NonNull Resource> testThread1 = doLoad_Concrete(inputURI, pivotURI, NO_MESSAGES, null);
+		Resource asResource1 = testThread1.getResult();
+		//	ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true, messages);
-		OCL ocl2 = OCL.newInstance(projectManager);
-		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, NO_MESSAGES);
+		//	OCL ocl2 = OCL.newInstance(projectManager);
+		Resumable<@NonNull Resource> testThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
+		Resource asResource3 = testThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
-		ocl2.dispose();
+		//	ocl1.dispose();
+		//	ocl2.dispose();
 	}
 
 	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedInputURI, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved, @NonNull String @Nullable [] messages) throws Exception {

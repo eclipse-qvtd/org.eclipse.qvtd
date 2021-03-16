@@ -169,7 +169,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_Families2Persons() throws Throwable {
+	public void testQVTcCompiler_Families2Persons() throws Exception {
 		Registry registry = EPackage.Registry.INSTANCE;
 		registry.remove(FamiliesPackage.eNS_URI);
 		registry.remove(Families2PersonsPackage.eNS_URI);
@@ -204,7 +204,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_Families2Persons_CG() throws Throwable {
+	public void testQVTcCompiler_Families2Persons_CG() throws Exception {
 		//		OperationDependencyAnalysis.CALL.setState(true);
 		//		OperationDependencyAnalysis.CREATE.setState(true);
 		//		OperationDependencyAnalysis.FINISH.setState(true);
@@ -250,7 +250,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_Forward2Reverse() throws Throwable {
+	public void testQVTcCompiler_Forward2Reverse() throws Exception {
 		Registry registry = EPackage.Registry.INSTANCE;
 		registry.remove(DoublylinkedlistPackage.eNS_URI);
 		registry.remove(List2listPackage.eNS_URI);
@@ -315,7 +315,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_Forward2Reverse_CG() throws Throwable {
+	public void testQVTcCompiler_Forward2Reverse_CG() throws Exception {
 		//    	Scheduler.EDGE_ORDER.setState(true);
 		//    	Scheduler.REGION_DEPTH.setState(true);
 		//    	Scheduler.REGION_LOCALITY.setState(true);
@@ -378,7 +378,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_HSVToHSL() throws Throwable {
+	public void testQVTcCompiler_HSVToHSL() throws Exception {
 		Registry registry = EPackage.Registry.INSTANCE;
 		registry.remove(HSV2HSLPackage.eNS_URI);
 		registry.remove(HSVTreePackage.eNS_URI);
@@ -409,7 +409,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_HSVToHSL_CG() throws Throwable {
+	public void testQVTcCompiler_HSVToHSL_CG() throws Exception {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//		Scheduler.EDGE_ORDER.setState(true);
@@ -446,7 +446,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test // fails through at least lack of multi-headed support, which may not be needed if better partitioned
-	public void testQVTcCompiler_SimpleUML2RDBMS() throws Throwable {
+	public void testQVTcCompiler_SimpleUML2RDBMS() throws Exception {
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT("SimpleUML2RDBMS", getModelsURI("uml2rdbms/SimpleUML2RDBMS.qvtcas"));
 		myQVT.loadEcoreFile(getModelsURI("uml2rdbms/SimpleUML2RDBMS.ecore"), Simpleuml2rdbmsPackage.eINSTANCE);
@@ -485,7 +485,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_SimpleUML2RDBMS_CG() throws Throwable {
+	public void testQVTcCompiler_SimpleUML2RDBMS_CG() throws Exception {
 		/*	QVTscheduleConstants.CONNECTION_CREATION.setState(true);
 		TransformationPartitioner.REGION_IMMEDIATE_PREDECESSORS.setState(true);
 		TransformationPartitioner.REGION_TRANSITIVE_PREDECESSORS.setState(true);
@@ -566,7 +566,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_SimpleUML2RDBMS_example_CG() throws Throwable {
+	public void testQVTcCompiler_SimpleUML2RDBMS_example_CG() throws Exception {
 		//		OperationDependencyAnalysis.CALL.setState(true);
 		//		OperationDependencyAnalysis.CREATE.setState(true);
 		//		OperationDependencyAnalysis.FINISH.setState(true);
@@ -623,7 +623,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_Upper2Lower() throws Throwable {
+	public void testQVTcCompiler_Upper2Lower() throws Exception {
 		//    	QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		MyQVT myQVT = createQVT("Upper2Lower", getModelsURI("upper2lower/Upper2Lower.qvtcas"));
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
@@ -644,7 +644,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_Upper2Lower_CG() throws Throwable {
+	public void testQVTcCompiler_Upper2Lower_CG() throws Exception {
 		//    	Scheduler.EDGE_ORDER.setState(true);
 		//    	Scheduler.REGION_DEPTH.setState(true);
 		//    	Scheduler.REGION_LOCALITY.setState(true);

@@ -154,7 +154,7 @@ public class UMLXCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testUMLXCompiler_Forward2Reverse_CG() throws Throwable {
+	public void testUMLXCompiler_Forward2Reverse_CG() throws Exception {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
@@ -224,7 +224,7 @@ public class UMLXCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testUMLXCompiler_HierarchicalStateMachine2FlatStateMachine_example_CG() throws Throwable {
+	public void testUMLXCompiler_HierarchicalStateMachine2FlatStateMachine_example_CG() throws Exception {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);

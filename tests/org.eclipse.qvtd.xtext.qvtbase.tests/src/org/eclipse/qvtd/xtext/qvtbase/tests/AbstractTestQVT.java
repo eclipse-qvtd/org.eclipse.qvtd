@@ -64,6 +64,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -72,6 +73,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
@@ -252,19 +255,19 @@ public abstract class AbstractTestQVT extends QVTimperative
 	//	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String outputName,
-			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Throwable {
+			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		TypedModelsConfigurations typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
 		return buildTransformation(typedModelsConfigurations, isIncremental, genModelFiles);
 	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations,
-			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Throwable {
+			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		return doBuild(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, options, genModelFiles);
 	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation_486938(@NonNull String outputName,
-			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Throwable {
+			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		options.setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
 		TypedModelsConfigurations typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
@@ -285,9 +288,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 		LoadTestCase.assertSameModel(referenceResource, outputResource);
 	}
 
-	public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Throwable {
+	public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
 		//		deactivate();
-		QVTbTestThread<Resource> checkThread = new QVTbTestThread<Resource>("Check-Output")
+		QVTbTestThread<@NonNull Resource> checkThread = new QVTbTestThread<@NonNull Resource>("Check-Output")
 		{
 			@Override
 			protected OCLInternal createOCL() {
@@ -297,7 +300,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			}
 
 			@Override
-			protected Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
+			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
 				ResourceSet actualResourceSet = createTestResourceSet();
 				//		if (PivotUtilInternal.isASURI(modelURI)) {
 				//			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
@@ -339,12 +342,12 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return actualResourceSet;
 	}
 
-	public @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Throwable {
+	public @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Exception {
 		SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
 		return compileTransformation(typedModelsConfigurations);
 	}
 
-	public @NonNull ImperativeTransformation compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Throwable {
+	public @NonNull ImperativeTransformation compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
 		return doCompile(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, createCompilerChainOptions());
 	}
 
@@ -470,7 +473,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull TypedModelsConfigurations typedModelsConfigurations,
-			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws Throwable {
+			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
 		URI asURI = asTransformation.eResource().getURI();
@@ -482,7 +485,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected @NonNull ImperativeTransformation doCompile(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
-			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull CompilerOptions options) throws Throwable {
+			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull CompilerOptions options) throws Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation transformation = compilerChain.compile(typedModelsConfigurations);
 		URI txASURI = transformation.eResource().getURI();
@@ -496,7 +499,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return transformation;
 	}
 
-	private void doScheduleLoadCheck(@NonNull URI uri) throws Throwable {
+	private void doScheduleLoadCheck(@NonNull URI uri) throws Exception {
 		//	deactivate();
 		QVTbTestThread<Object> checkThread = new QVTbTestThread<Object>("Schedule-Load-Check")
 		{
@@ -524,7 +527,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//	activate();
 	}
 
-	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Throwable {
+	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
 		//	deactivate();
 		//	ResourceSet resourceSet = new ResourceSetImpl();
 		//	Executor savedExecutor = PivotUtil.basicGetExecutor();
@@ -559,7 +562,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 					try {	// Try and serialize anyway so that a *.qvti is available even on on obsolete installation
 						as2cs(ocl2, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
 					}
-					catch (Throwable t) {}
+					catch (Exception t) {}
 					throw e;
 				}
 				return xtextResource;
@@ -589,12 +592,12 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	/**
-	 * A EagerDelegatesOCLTestThread creates the OCL before delegate invocation.
+	 * A QVTbTestThread creates the OCL before delegate invocation.
 	 */
 	public abstract static class QVTbTestThread<R> extends OCLTestThread<R, @Nullable OCLInternal>
 	{
-		public QVTbTestThread(@NonNull String oclThreadName) {
-			super(oclThreadName);
+		public QVTbTestThread(@NonNull String threadName) {
+			super(threadName);
 		}
 
 		//		@Override
@@ -619,19 +622,46 @@ public abstract class AbstractTestQVT extends QVTimperative
 		public R runWithThrowable() throws Exception {
 			assert ocl != null;
 			ResourceSet resourceSet = ocl.getResourceSet();
-			runWithModel(resourceSet);
+			result = runWithModel(resourceSet);
 			//		unloadResourceSet(resourceSet);
-			return null;
+			return result;
+		}
+
+	}
+
+	/**
+	 * A QVTcTestThread creates a QVTcore for use on a dedicated thread.
+	 */
+	public abstract static class QVTcTestThread<R> extends OCLTestThread<R, @Nullable QVTcore>
+	{
+		public QVTcTestThread(@NonNull String threadName) {
+			super(threadName);
+		}
+
+		@Override
+		public @NonNull QVTrEnvironmentFactory getEnvironmentFactory() {
+			return (QVTrEnvironmentFactory)super.getEnvironmentFactory();
+		}
+
+		protected  abstract R runWithModel(@NonNull ResourceSet resourceSet) throws Exception;
+
+		@Override
+		public R runWithThrowable() throws Exception {
+			assert ocl != null;
+			ResourceSet resourceSet = ocl.getResourceSet();
+			return runWithModel(resourceSet);
+			//		unloadResourceSet(resourceSet);
+			//	return null;
 		}
 	}
 
 	/**
-	 * A EagerDelegatesOCLTestThread creates the OCL before delegate invocation.
+	 * A QVTiTestThread creates a QVTimperative for use on a dedicated thread.
 	 */
 	public abstract class QVTiTestThread extends OCLTestThread<Object, @Nullable QVTimperative>
 	{
-		public QVTiTestThread(@NonNull String oclThreadName) {
-			super(oclThreadName);
+		public QVTiTestThread(@NonNull String threadName) {
+			super(threadName);
 		}
 
 		@Override
@@ -653,6 +683,32 @@ public abstract class AbstractTestQVT extends QVTimperative
 			runWithModel(resourceSet);
 			//		unloadResourceSet(resourceSet);
 			return null;
+		}
+	}
+
+	/**
+	 * A QVTrTestThread creates a QVTimperative for use on a dedicated thread.
+	 */
+	public abstract static class QVTrTestThread<R> extends OCLTestThread<R, @Nullable QVTrelation>
+	{
+		public QVTrTestThread(@NonNull String threadName) {
+			super(threadName);
+		}
+
+		@Override
+		public @NonNull QVTrEnvironmentFactory getEnvironmentFactory() {
+			return (QVTrEnvironmentFactory)super.getEnvironmentFactory();
+		}
+
+		protected  abstract R runWithModel(@NonNull ResourceSet resourceSet) throws Exception;
+
+		@Override
+		public R runWithThrowable() throws Exception {
+			assert ocl != null;
+			ResourceSet resourceSet = ocl.getResourceSet();
+			return runWithModel(resourceSet);
+			//		unloadResourceSet(resourceSet);
+			//	return null;
 		}
 	}
 

@@ -11,10 +11,11 @@
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -32,11 +33,12 @@ public class QVTiEditorTests extends LoadTestCase
 
 	@Override
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
-		OCL ocl = QVTimperative.newInstance(getTestProjectManager(), null);
+		//	OCL ocl = QVTimperative.newInstance(getTestProjectManager(), null);
 		//		OCL ocl = OCL.newInstance(getProjectMap());
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
-		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
-		ocl.dispose();
+		Resumable<@NonNull Resource> resumable = doLoad_Concrete(inputURI, pivotURI, messages, null);
+		resumable.syncResume();
+		//	ocl.dispose();
 	}
 
 	@Override

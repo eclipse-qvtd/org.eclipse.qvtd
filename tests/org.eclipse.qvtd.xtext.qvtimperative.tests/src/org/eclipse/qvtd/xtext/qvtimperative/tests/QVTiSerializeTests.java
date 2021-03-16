@@ -18,12 +18,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.tests.PivotTestCaseWithAutoTearDown.OCLTestThread;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.ParserException;
+import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -51,19 +53,23 @@ public class QVTiSerializeTests extends LoadTestCase
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvti");
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtias");
-		ProjectManager projectManager = getTestProjectManager();
-		OCL ocl1 = QVTimperative.newInstance(projectManager, null);
-		Resource asResource1 = doLoad_Concrete(ocl1, inputURI, pivotURI, NO_MESSAGES);
-		ocl1.deactivate();
+		//	ProjectManager projectManager = getTestProjectManager();
+		//	OCL ocl1 = QVTimperative.newInstance(projectManager, null);
+		Resumable<@NonNull Resource> loadThread1 = doLoad_Concrete(inputURI, pivotURI, NO_MESSAGES, null);
+		Resource asResource1 = loadThread1.getResult();
+		//	ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true);
-		OCL ocl2 = QVTimperative.newInstance(projectManager, null);
-		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, NO_MESSAGES);
+		//	OCL ocl2 = QVTimperative.newInstance(projectManager, null);
+		Resumable<@NonNull Resource> loadThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
+		Resource asResource3 = loadThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
-		ocl2.dispose();
+		loadThread1.syncResume();
+		loadThread3.syncResume();
+		//	ocl1.dispose();
+		//	ocl2.dispose();
 	}
 
 	protected void doSerializeRoundTripFromAS(@NonNull URI inputURI) throws Exception {
@@ -72,16 +78,37 @@ public class QVTiSerializeTests extends LoadTestCase
 	protected void doSerializeRoundTripFromAS(@NonNull URI pivotURI, @NonNull URI referenceURI) throws Exception {
 		URI serializedInputURI = getTestURIWithExtension(pivotURI, "serialized.qvti");
 		URI serializedPivotURI = getTestURIWithExtension(pivotURI, "serialized.qvtias");
-		ProjectManager projectManager = getTestProjectManager();
-		OCL ocl1 = OCL.newInstance(projectManager);
-		OCL ocl2 = OCL.newInstance(projectManager);
-		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
+
+		OCLTestThread<@NonNull Resource, QVTimperative> loadThread1 = new OCLTestThread<@NonNull Resource, QVTimperative>("QVTi-Serialize-Load")
+		{
+			@Override
+			protected QVTimperative createOCL() throws ParserException {
+				return QVTimperative.newInstance(getTestProjectManager());
+			}
+
+			@Override
+			protected @NonNull Resource runWithThrowable() throws Exception {
+				Resource asResource1 = getOCL().getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
+				syncSuspend(asResource1);
+				return asResource1;
+			}
+		};
+		Resumable<@NonNull Resource> syncStart1 = loadThread1.syncStart();
+		Resource asResource1 = syncStart1.getResult();
+
+		//	ProjectManager projectManager = getTestProjectManager();
+		//	OCL ocl1 = OCL.newInstance(projectManager);
+		//	OCL ocl2 = OCL.newInstance(projectManager);
+		//	Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true);
-		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, NO_MESSAGES);
+		Resumable<@NonNull Resource> loadThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
+		Resource asResource3 = loadThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
-		ocl2.dispose();
+		//	ocl1.dispose();
+		syncStart1.syncResume();
+		loadThread3.syncResume();
+		//	ocl2.dispose();
 	}
 
 	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedInputURI, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
@@ -173,12 +200,12 @@ public class QVTiSerializeTests extends LoadTestCase
 		doSerializeRoundTrip(inputURI);
 	}
 
-	public void zztestSerialize_platformResource_BaseCS2AS() throws Exception {
+	public void testSerialize_platformResource_BaseCS2AS() throws Exception {
 		URI inputURI = getModelsURI("platformResource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.qvtias");
 		doSerializeRoundTripFromAS(inputURI);
 	}
 
-	public void zztestSerialize_platformResource_EssentialOCLCS2AS() throws Exception {
+	public void testSerialize_platformResource_EssentialOCLCS2AS() throws Exception {
 		URI inputURI = getModelsURI("platformResource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS2AS.qvtias");
 		doSerializeRoundTripFromAS(inputURI);
 	}
