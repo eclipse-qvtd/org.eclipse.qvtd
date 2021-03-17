@@ -17,10 +17,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.library.ImplementationManager;
-import org.eclipse.ocl.pivot.internal.resource.EnvironmentFactoryAdapter;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.messages.StatusCodes;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
+import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -43,22 +47,22 @@ public class QVTrLoadTests extends LoadTestCase
 	}
 
 	protected void doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @NonNull [] messages) throws Exception {
-		ClassLoader cl0 = getClass().getClassLoader();
-		assert cl0 != null;
-		OCL ocl = QVTrelation.newInstance(getTestProjectManager());
-		EnvironmentFactoryAdapter environmentFactoryAdapter = EnvironmentFactoryAdapter.find(ocl.getResourceSet());
-		assert environmentFactoryAdapter != null;
-		ImplementationManager implementationManager = environmentFactoryAdapter.getMetamodelManager().getImplementationManager();
-		@NonNull List<@NonNull ClassLoader> classLoaders = implementationManager.getClassLoaders();
-		if (!classLoaders.contains(cl0)) {
-			implementationManager.addClassLoader(cl0);
-		}
+		//	ClassLoader cl0 = getClass().getClassLoader();
+		//	assert cl0 != null;
+		//	OCL ocl = QVTrelation.newInstance(getTestProjectManager());
+		//	EnvironmentFactoryAdapter environmentFactoryAdapter = EnvironmentFactoryAdapter.find(ocl.getResourceSet());
+		//	assert environmentFactoryAdapter != null;
+		//	ImplementationManager implementationManager = environmentFactoryAdapter.getMetamodelManager().getImplementationManager();
+		//	@NonNull List<@NonNull ClassLoader> classLoaders = implementationManager.getClassLoaders();
+		//	if (!classLoaders.contains(cl0)) {
+		//		implementationManager.addClassLoader(cl0);
+		//	}
 		Resumable<@NonNull Resource> resumableThread = doLoad_Concrete(inputURI, pivotURI, messages, null);
 		resumableThread.syncResume();
-		ocl.dispose();
+		//	ocl.dispose();
 	}
 
-	@Override
+	//	@Override
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
 		//	OCL ocl = QVTbase.newInstance(getTestProjectManager(), null);
 		//		OCL ocl = OCL.newInstance(getProjectMap());
@@ -68,6 +72,30 @@ public class QVTrLoadTests extends LoadTestCase
 		//	ocl.dispose();
 	}
 
+	public @NonNull Resumable<@NonNull Resource>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+		EnvironmentThreadFactory environmentThreadFactory = new EnvironmentThreadFactory()
+		{
+			@Override
+			public @NonNull OCLInternal createEnvironment() {
+				ClassLoader cl0 = getClass().getClassLoader();
+				assert cl0 != null;
+				ProjectManager projectManager = getTestProjectManager();
+				QVTrelation ocl = QVTrelation.newInstance(projectManager);//, null);
+				PivotMetamodelManager metamodelManager = (PivotMetamodelManager) ocl.getMetamodelManager();
+				ImplementationManager implementationManager = metamodelManager.getImplementationManager();
+				@NonNull List<@NonNull ClassLoader> classLoaders = implementationManager.getClassLoaders();
+				if (!classLoaders.contains(cl0)) {
+					implementationManager.addClassLoader(cl0);
+				}
+				if (severity != null) {
+					EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+					environmentFactory.setSafeNavigationValidationSeverity(severity);
+				}
+				return ocl;
+			}
+		};
+		return doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
+	}
 
 	@Override
 	protected void setUp() throws Exception {
@@ -126,6 +154,7 @@ public class QVTrLoadTests extends LoadTestCase
 
 	public void testQVTrLoad_ATL2QVTr_qvtr() throws Exception {
 		//		ProjectMap.getAdapter(resourceSet);
+		BaseLinkingService.DEBUG_RETRY.setState(true);
 		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
 		URI pivotURI = getTestURI("ATL2QVTr.qvtras");
 		doLoad_Concrete(inputURI, pivotURI, new @NonNull String[] {});

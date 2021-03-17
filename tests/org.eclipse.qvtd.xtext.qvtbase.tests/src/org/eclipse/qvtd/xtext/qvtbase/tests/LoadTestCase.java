@@ -26,8 +26,8 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -41,19 +41,22 @@ public abstract class LoadTestCase extends XtextTestCase
 {
 	public static final @NonNull String @NonNull [] NO_MESSAGES = new @NonNull String[] {};
 
-	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
-		doLoad_Concrete(inputURI, messages, StatusCodes.Severity.IGNORE);
+	public void doLoad_Concrete(@NonNull EnvironmentThreadFactory environmentThreadFactory, @NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
+		doLoad_Concrete(environmentThreadFactory, inputURI, messages, StatusCodes.Severity.IGNORE);
 	}
 
-	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@NonNull Severity severity) throws Exception {
+	public void doLoad_Concrete(@NonNull EnvironmentThreadFactory environmentThreadFactory, @NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@NonNull Severity severity) throws Exception {
 		//	OCL ocl = createOCL();
 		//	((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
-		doLoad_Concrete(inputURI, pivotURI, messages, severity);
+		doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
 		//	ocl.dispose();
 	}
 
-	protected abstract @NonNull OCLInternal createOCL();
+	@Deprecated
+	protected @NonNull OCLInternal createOCL() {
+		throw new UnsupportedOperationException();
+	}
 
 	//	public Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull String inputName, @NonNull String outputName, @NonNull String @Nullable [] messages) throws IOException {
 	//		URI inputURI = getProjectFileURI(inputName);
@@ -61,26 +64,15 @@ public abstract class LoadTestCase extends XtextTestCase
 	//		return doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 	//	}
 
-	protected Resumable<@NonNull Resource> doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-
+	protected @NonNull Resumable<@NonNull Resource> doLoad_Concrete(@NonNull EnvironmentThreadFactory environmentThreadFactory, @NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
 		QVTbTestThread<@NonNull Resource> loadThread = new QVTbTestThread<@NonNull Resource>("Concrete-Syntax-Load")
 		{
 			@Override
 			protected OCLInternal createOCL() {
-
-				ProjectManager projectManager = getTestProjectManager();
-				OCL ocl = OCL.newInstance(projectManager);//, null);
-
+				OCL ocl = environmentThreadFactory.createEnvironment();
 				if (severity != null) {
 					((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
 				}
-
-
-				//	OCL ocl = createOCL();
-				//	((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
-
-				//			OCL ocl = QVTbase.newInstance(getTestProjectManager());
-				//			ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
 				return (OCLInternal) ocl;
 			}
 

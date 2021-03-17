@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.resource.impl.FileURIHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
@@ -32,8 +33,13 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.messages.StatusCodes;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -74,11 +80,22 @@ public class UMLXSerializeTests extends LoadTestCase
 		return QVTbase.newInstance(getTestProjectManager(), null);
 	}
 
-	/*	protected void doLoad_QVTr(URI inputURI, URI pivotURI) throws IOException {
-		OCL ocl = OCL.newInstance(getProjectMap());
-		doLoad_Concrete(ocl, inputURI, pivotURI, null);
-		ocl.dispose();
-	} */
+	public @NonNull Resumable<@NonNull Resource>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+		EnvironmentThreadFactory environmentThreadFactory = new EnvironmentThreadFactory()
+		{
+			@Override
+			public @NonNull OCLInternal createEnvironment() {
+				ProjectManager projectManager = getTestProjectManager();
+				OCL ocl = OCL.newInstance(projectManager);//, null);
+				if (severity != null) {
+					EnvironmentFactoryInternal environmentFactory = (EnvironmentFactoryInternal)ocl.getEnvironmentFactory();
+					environmentFactory.setSafeNavigationValidationSeverity(severity);
+				}
+				return (OCLInternal)ocl;
+			}
+		};
+		return doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
+	}
 
 	protected void doLoadTest(URI inputURI, URI pivotURI, URI umlxURI) throws Exception {
 		Resumable<@NonNull Resource> loadThread = doLoad_Concrete(inputURI, pivotURI, null, null);

@@ -203,6 +203,8 @@ public class QVTiDebuggerTests extends XtextTestCase
 		injector.getInstance(BaseEditorCallback.class).setDontAskForNatureAgain();
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
+		ocl.dispose();
+		ocl = null;
 		TestProject testProject = getTestProject();
 		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSV2HSL.qvti"));
 		TestFile inFile = testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSVNode.xmi"));
@@ -219,7 +221,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "HSV2HSL", txFile, inMap, outMap);
 		launchConfiguration.doSave();
-		ocl.deactivate();
+		//	ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.DEBUG_MODE, null);
 		assert launch != null;
@@ -293,7 +295,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		//
 		TestUIUtil.flushEvents();
 		ResourceSet expectedResourceSet = new ResourceSetImpl();
-		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
+		getTestProjectManager().initializeResourceSet(expectedResourceSet);
 		Resource expectedResource = expectedResourceSet.getResource(getModelsURI("HSV2HSL/HSLNodeValidate.xmi"), true);
 		assert expectedResource != null;
 		ResourceSet actualResourceSet = new ResourceSetImpl();
@@ -301,6 +303,6 @@ public class QVTiDebuggerTests extends XtextTestCase
 		Resource actualResource = actualResourceSet.getResource(outFile.getURI(), true);
 		assert actualResource != null;
 		TestUtil.assertSameModel(expectedResource, actualResource);
-		ocl.dispose();
+		//	ocl.dispose();
 	}
 }

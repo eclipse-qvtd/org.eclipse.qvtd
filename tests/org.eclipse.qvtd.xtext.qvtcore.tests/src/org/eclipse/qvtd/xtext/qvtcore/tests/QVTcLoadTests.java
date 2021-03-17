@@ -16,9 +16,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
+import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 
@@ -27,36 +32,49 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
  */
 public class QVTcLoadTests extends LoadTestCase
 {
-	@Override
-	protected @NonNull OCLInternal createOCL() {
-		return QVTcore.newInstance(getTestProjectManager(), null);
+	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+		EnvironmentThreadFactory environmentThreadFactory = new EnvironmentThreadFactory()
+		{
+			@Override
+			public @NonNull QVTcore createEnvironment() {
+				ProjectManager projectManager = getTestProjectManager();
+				QVTcore ocl = QVTcore.newInstance(projectManager, null);
+				if (severity != null) {
+					EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+					environmentFactory.setSafeNavigationValidationSeverity(severity);
+				}
+				return ocl;
+			}
+		};
+		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
+		Resumable<@NonNull Resource> resumable = doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
+		resumable.syncResume();;
 	}
 
 	@Override
 	protected void setUp() throws Exception {
-		//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		XtextCompilerUtil.doQVTcoreSetup();
 		super.setUp();
 	}
 
 	public void testQVTcLoad_expressions_qvtc() throws Exception {
-		doLoad_Concrete(getModelsURI("misc/expressions.qvtc"), NO_MESSAGES);
+		doLoad_Concrete(getModelsURI("misc/expressions.qvtc"), NO_MESSAGES, null);
 	}
 
 	public void testQVTcLoad_mini_qvtc() throws Exception {
-		doLoad_Concrete(getModelsURI("misc/mini.qvtc"), NO_MESSAGES);
+		doLoad_Concrete(getModelsURI("misc/mini.qvtc"), NO_MESSAGES, null);
 	}
 
 	public void testQVTcLoad_uml2rdbms_qvtc() throws Exception {
-		doLoad_Concrete(getModelsURI("misc/uml2rdbms.qvtc"), NO_MESSAGES);
+		doLoad_Concrete(getModelsURI("misc/uml2rdbms.qvtc"), NO_MESSAGES, null);
 	}
 
 	public void testQVTcLoad_uml2rdbms_qvti_qvtc() throws Exception {
-		doLoad_Concrete(getModelsURI("misc/uml2rdbms.qvti.qvtc"), NO_MESSAGES);
+		doLoad_Concrete(getModelsURI("misc/uml2rdbms.qvti.qvtc"), NO_MESSAGES, null);
 	}
 
 	public void testQVTcLoad_uml2rdbms_qvtu_qvtc() throws Exception {
-		doLoad_Concrete(getModelsURI("misc/uml2rdbms.qvtu.qvtc"), NO_MESSAGES);
+		doLoad_Concrete(getModelsURI("misc/uml2rdbms.qvtu.qvtc"), NO_MESSAGES, null);
 	}
 
 	public void testQVTcLoad_HSV2HLS_qvtc() throws Exception {
@@ -68,7 +86,7 @@ public class QVTcLoadTests extends LoadTestCase
 	}
 
 	public void testQVTcLoad_Class2RDBMS_qvtc() throws Exception {
-		doLoad_Concrete(getModelsURI("Class2RDBMS/Class2RDBMS.qvtc"), NO_MESSAGES);
+		doLoad_Concrete(getModelsURI("Class2RDBMS/Class2RDBMS.qvtc"), NO_MESSAGES, null);
 	}
 
 	/*

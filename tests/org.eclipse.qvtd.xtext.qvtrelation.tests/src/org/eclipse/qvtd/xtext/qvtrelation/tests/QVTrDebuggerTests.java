@@ -107,6 +107,8 @@ public class QVTrDebuggerTests extends XtextTestCase
 		//
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
+		ocl.dispose();
+		ocl = null;
 		TestProject testProject = getTestProject();
 		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		TestFile inFile = testProject.copyFile(uriConverter, null, getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
@@ -120,7 +122,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "Forward2Reverse", txFile, "reverse", inMap, outMap, true);
 		launchConfiguration.doSave();
-		ocl.deactivate();
+		//	ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;
@@ -136,7 +138,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 			TestUIUtil.wait(1000);
 		}
 		ResourceSet expectedResourceSet = new ResourceSetImpl();
-		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
+		getTestProjectManager().initializeResourceSet(expectedResourceSet);
 		Resource expectedResource = expectedResourceSet.getResource(getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), true);
 		assert expectedResource != null;
 		ResourceSet actualResourceSet = new ResourceSetImpl();
@@ -150,7 +152,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		normalizer.normalize(actualResource);
 		//	}
 		TestUtil.assertSameModel(expectedResource, actualResource);
-		ocl.dispose();
+		//	ocl.dispose();
 	}
 
 	/**
@@ -168,6 +170,8 @@ public class QVTrDebuggerTests extends XtextTestCase
 		//
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
+		ocl.dispose();
+		ocl = null;
 		TestProject testProject = getTestProject();
 		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		TestFile inFile = testProject.copyFile(uriConverter, null, getModelsURI("forward2reverse/samples/BadThreeElementList.xmi"));
@@ -181,7 +185,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "Forward2Reverse", txFile, "reverse", inMap, outMap, true);
 		launchConfiguration.doSave();
-		ocl.deactivate();
+		//	ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;
@@ -190,7 +194,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		assert allResults.size() == 1;
 		assertEquals(IStatus.INFO, allResults.get(0).getSeverity());
 		assertEquals(UnresolvedReferenceException.class, allResults.get(0).getException().getClass());
-		ocl.dispose();
+		//	ocl.dispose();
 	}
 
 	/**
@@ -209,6 +213,8 @@ public class QVTrDebuggerTests extends XtextTestCase
 		//
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
+		ocl.dispose();
+		ocl = null;
 		TestProject testProject = getTestProject();
 		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		TestFile inFile = testProject.copyFile(uriConverter, null, getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
@@ -222,7 +228,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "Forward2Reverse", txFile, "reverse", inMap, outMap, true);
 		launchConfiguration.doSave();
-		ocl.deactivate();
+		//	ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;
@@ -231,7 +237,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		assert allResults.size() == 1;
 		assertEquals(IStatus.INFO, allResults.get(0).getSeverity());
 		assertEquals(org.eclipse.core.internal.resources.ResourceException.class, allResults.get(0).getException().getClass());
-		ocl.dispose();
+		//	ocl.dispose();
 	}
 
 	/**
@@ -286,6 +292,8 @@ public class QVTrDebuggerTests extends XtextTestCase
 		//
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
+		ocl.dispose();
+		ocl = null;
 		TestProject testProject = getTestProject();
 		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		TestFile inFile = testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
@@ -300,7 +308,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "HierarchicalStateMachine2FlatStateMachine", txFile, "flat", inMap, outMap, true);
 		launchConfiguration.doSave();
-		ocl.deactivate();
+		//	ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;
@@ -313,7 +321,8 @@ public class QVTrDebuggerTests extends XtextTestCase
 			TestUIUtil.wait(1000);
 		}
 		ResourceSet expectedResourceSet = new ResourceSetImpl();
-		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
+		//	ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
+		getTestProjectManager().initializeResourceSet(expectedResourceSet);
 		Resource expectedResource = expectedResourceSet.getResource(getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), true);
 		assert expectedResource != null;
 		ResourceSet actualResourceSet = new ResourceSetImpl();
@@ -327,7 +336,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		//	}
 		TestUtil.assertSameModel(expectedResource, actualResource);
 
-		ocl.dispose();
+		//	ocl.dispose();
 	}
 
 	public void testDebugger_Run_hstm2fstm_CG() throws Exception {
@@ -341,6 +350,8 @@ public class QVTrDebuggerTests extends XtextTestCase
 		//
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
+		ocl.dispose();
+		ocl = null;
 		TestProject testProject = getTestProject();
 		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		TestFile inFile = testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
@@ -355,7 +366,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		outMap.put(middleName, middleFile.getURI().toString());
 		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(testProject, "HierarchicalStateMachine2FlatStateMachine", txFile, "flat", inMap, outMap, false);
 		launchConfiguration.doSave();
-		ocl.deactivate();
+		//	ocl.deactivate();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null, true);
 		assert launch != null;
@@ -368,7 +379,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 			TestUIUtil.wait(1000);
 		}
 		ResourceSet expectedResourceSet = new ResourceSetImpl();
-		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
+		getTestProjectManager().initializeResourceSet(expectedResourceSet);
 		Resource expectedResource = expectedResourceSet.getResource(getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), true);
 		assert expectedResource != null;
 		ResourceSet actualResourceSet = new ResourceSetImpl();
@@ -382,7 +393,7 @@ public class QVTrDebuggerTests extends XtextTestCase
 		//	}
 		TestUtil.assertSameModel(expectedResource, actualResource);
 
-		ocl.dispose();
+		//	ocl.dispose();
 		cleanup("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/FlatStateMachine",
 			"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine",
 				"http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");

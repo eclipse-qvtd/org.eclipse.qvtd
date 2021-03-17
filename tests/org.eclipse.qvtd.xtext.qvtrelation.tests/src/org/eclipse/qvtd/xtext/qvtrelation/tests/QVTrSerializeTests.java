@@ -18,8 +18,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -38,6 +43,23 @@ public class QVTrSerializeTests extends LoadTestCase
 	@Override
 	protected @NonNull OCLInternal createOCL() {
 		return QVTrelation.newInstance(getTestProjectManager(), null);
+	}
+
+	public @NonNull Resumable<@NonNull Resource>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+		EnvironmentThreadFactory environmentThreadFactory = new EnvironmentThreadFactory()
+		{
+			@Override
+			public @NonNull OCLInternal createEnvironment() {
+				ProjectManager projectManager = getTestProjectManager();
+				OCL ocl = OCL.newInstance(projectManager);//, null);
+				if (severity != null) {
+					EnvironmentFactoryInternal environmentFactory = (EnvironmentFactoryInternal)ocl.getEnvironmentFactory();
+					environmentFactory.setSafeNavigationValidationSeverity(severity);
+				}
+				return (OCLInternal)ocl;
+			}
+		};
+		return doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
 	}
 
 	protected void doSerializeRoundTripFromAS(@NonNull URI inputURI) throws Exception {
