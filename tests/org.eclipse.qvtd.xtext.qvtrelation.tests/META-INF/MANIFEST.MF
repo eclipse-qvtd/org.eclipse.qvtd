@@ -26,6 +26,6 @@ Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.tests;bundle-version="[0.25.0,1.0
  javax.annotation;resolution:=optional,
  org.eclipse.debug.core,
  org.eclipse.qvtd.debug.ui;bundle-version="[0.25.0,1.0.0)",
- org.eclipse.ocl.examples.debug.vm;bundle-version="[2.14.0,2.15.0)"
+ org.eclipse.ocl.examples.debug.vm;bundle-version="[2.15.0,2.16.0)"
 Export-Package: org.eclipse.qvtd.xtext.qvtrelation.tests
 Automatic-Module-Name: org.eclipse.qvtd.xtext.qvtrelation.tests
