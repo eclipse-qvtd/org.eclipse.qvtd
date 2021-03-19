@@ -33,15 +33,10 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
-import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -54,7 +49,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -81,17 +77,15 @@ public class UMLXSerializeTests extends LoadTestCase
 	}
 
 	public @NonNull Resumable<@NonNull Resource>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-		EnvironmentThreadFactory environmentThreadFactory = new EnvironmentThreadFactory()
+		QVTrelationEnvironmentThreadFactory environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(getTestProjectManager(), severity)
 		{
 			@Override
-			public @NonNull OCLInternal createEnvironment() {
-				ProjectManager projectManager = getTestProjectManager();
-				OCL ocl = OCL.newInstance(projectManager);//, null);
+			public @NonNull QVTrEnvironmentFactory createEnvironmentFactory() {
+				QVTrEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
 				if (severity != null) {
-					EnvironmentFactoryInternal environmentFactory = (EnvironmentFactoryInternal)ocl.getEnvironmentFactory();
 					environmentFactory.setSafeNavigationValidationSeverity(severity);
 				}
-				return (OCLInternal)ocl;
+				return environmentFactory;
 			}
 		};
 		return doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
@@ -137,13 +131,8 @@ public class UMLXSerializeTests extends LoadTestCase
 		assertNoValidationErrors(umlxURI.toString(), umlxResource1);
 	//	ocl1.deactivate();
 		//
-		QVTrTestThread<@NonNull Resource> umlx2qvtrThread2 = new QVTrTestThread<@NonNull Resource>("UMLX2QVTr")
+		QVTrTestThread<@NonNull Resource> umlx2qvtrThread2 = new QVTrTestThread<@NonNull Resource>("UMLX2QVTr", getTestProjectManager())
 		{
-			@Override
-			protected QVTrelation createOCL() throws ParserException {
-				return QVTrelation.newInstance(getTestProjectManager(), null);
-			}
-
 			@Override
 			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
 				Resource umlxResource2 = getEnvironmentFactory().getResourceSet().getResource(umlxURIfinal, true);

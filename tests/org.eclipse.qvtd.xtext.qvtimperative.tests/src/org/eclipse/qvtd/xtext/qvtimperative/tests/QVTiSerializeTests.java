@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -18,21 +19,19 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.tests.PivotTestCaseWithAutoTearDown.OCLTestThread;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
+import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT.QVTiTestThread;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
@@ -44,25 +43,13 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class QVTiSerializeTests extends LoadTestCase
 {
-	protected @NonNull EnvironmentThreadFactory createQVTcoreEnvironmentThreadFactory(StatusCodes.@Nullable Severity severity) {
-		EnvironmentThreadFactory environmentThreadFactory = new EnvironmentThreadFactory()
-		{
-			@Override
-			public @NonNull QVTimperative createEnvironment() {
-				ProjectManager projectManager = getTestProjectManager();
-				QVTimperative ocl = QVTimperative.newInstance(projectManager, null);
-				if (severity != null) {
-					EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
-					environmentFactory.setSafeNavigationValidationSeverity(severity);
-				}
-				return ocl;
-			}
-		};
+	protected @NonNull EnvironmentThreadFactory createQVTimperativeEnvironmentThreadFactory(StatusCodes.@Nullable Severity severity) {
+		EnvironmentThreadFactory environmentThreadFactory = new QVTimperativeEnvironmentThreadFactory(getTestProjectManager(), severity);
 		return environmentThreadFactory;
 	}
 
 	public @NonNull Resumable<@NonNull Resource> doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-		EnvironmentThreadFactory environmentThreadFactory = createQVTcoreEnvironmentThreadFactory(severity);
+		EnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory(severity);
 		return doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
 	}
 
@@ -99,24 +86,14 @@ public class QVTiSerializeTests extends LoadTestCase
 		URI serializedInputURI = getTestURIWithExtension(pivotURI, "serialized.qvti");
 		URI serializedPivotURI = getTestURIWithExtension(pivotURI, "serialized.qvtias");
 
-
-		EnvironmentThreadFactory environmentThreadFactory = createQVTcoreEnvironmentThreadFactory(null);
-
-
-
-		OCLTestThread<@NonNull Resource, QVTimperative> loadThread1 = new OCLTestThread<@NonNull Resource, QVTimperative>("QVTi-Serialize-Load")
+		QVTiTestThread<@NonNull Resource> loadThread1 = new QVTiTestThread<@NonNull Resource>("QVTi-Serialize-Load", getTestProjectManager())
 		{
 			@Override
-			protected QVTimperative createOCL() {
-				QVTimperative ocl = (QVTimperative)environmentThreadFactory.createEnvironment();
-				return ocl;
-			}
-
-			@Override
-			protected @NonNull Resource runWithThrowable() throws Exception {
-				Resource asResource1 = getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
-				syncSuspend(asResource1);
-				return asResource1;
+			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
+				Resource asResource = getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
+				assert asResource != null;
+				syncSuspend(asResource);
+				return asResource;
 			}
 		};
 		Resumable<@NonNull Resource> syncStart1 = loadThread1.syncStart();

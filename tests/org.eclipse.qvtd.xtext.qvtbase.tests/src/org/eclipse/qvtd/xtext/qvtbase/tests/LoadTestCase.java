@@ -26,7 +26,6 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -65,15 +64,16 @@ public abstract class LoadTestCase extends XtextTestCase
 	//	}
 
 	protected @NonNull Resumable<@NonNull Resource> doLoad_Concrete(@NonNull EnvironmentThreadFactory environmentThreadFactory, @NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-		QVTbTestThread<@NonNull Resource> loadThread = new QVTbTestThread<@NonNull Resource>("Concrete-Syntax-Load")
+		QVTbTestThread<@NonNull Resource> loadThread = new QVTbTestThread<@NonNull Resource>("Concrete-Syntax-Load", getTestProjectManager())
 		{
 			@Override
 			protected OCLInternal createOCL() {
-				OCL ocl = environmentThreadFactory.createEnvironment();
+				EnvironmentFactoryInternal environmentFactory = environmentThreadFactory.createEnvironmentFactory();
+				OCLInternal ocl = environmentThreadFactory.createEnvironment(environmentFactory);
 				if (severity != null) {
-					((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
+					environmentFactory.setSafeNavigationValidationSeverity(severity);
 				}
-				return (OCLInternal) ocl;
+				return ocl;
 			}
 
 			@Override

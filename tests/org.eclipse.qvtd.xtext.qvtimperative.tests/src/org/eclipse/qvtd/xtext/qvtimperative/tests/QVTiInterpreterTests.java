@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -136,17 +135,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Exception {
-		QVTbTestThread<Object> checkThread = new QVTbTestThread<Object>("Loadable-Check")
+		QVTbTestThread<Object> checkThread = new QVTbTestThread<Object>("Loadable-Check", getTestProjectManager())
 		{
-			@Override
-			protected OCLInternal createOCL() {
-				ProjectManager projectManager = getTestProjectManager();
-				OCL ocl = OCL.newInstance(projectManager); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
-				//	OCL ocl = QVTbase.newInstance(getTestProjectManager());
-				//	ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
-				return (OCLInternal) ocl;
-			}
-
 			@Override
 			protected Object runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
 				//	ProjectManager projectManager = getTestProjectManager();

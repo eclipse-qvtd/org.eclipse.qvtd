@@ -18,15 +18,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -42,19 +41,7 @@ import org.eclipse.xtext.resource.XtextResource;
 public class QVTcSerializeTests extends LoadTestCase
 {
 	public @NonNull Resumable<@NonNull Resource>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-		EnvironmentThreadFactory environmentThreadFactory = new EnvironmentThreadFactory()
-		{
-			@Override
-			public @NonNull QVTcore createEnvironment() {
-				ProjectManager projectManager = getTestProjectManager();
-				QVTcore ocl = QVTcore.newInstance(projectManager, null);
-				if (severity != null) {
-					EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
-					environmentFactory.setSafeNavigationValidationSeverity(severity);
-				}
-				return ocl;
-			}
-		};
+		EnvironmentThreadFactory environmentThreadFactory = new QVTcoreEnvironmentThreadFactory(getTestProjectManager(), severity);
 		return doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
 	}
 
@@ -102,13 +89,8 @@ public class QVTcSerializeTests extends LoadTestCase
 	}
 
 	public void doSerialize(@NonNull URI inputURI, @NonNull URI serializedInputURI, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved, @NonNull String @Nullable [] messages) throws Exception {
-		QVTcTestThread<@NonNull Resource> serializeThread = new QVTcTestThread<@NonNull Resource>("QVTc-Serialize")
+		QVTcTestThread<@NonNull Resource> serializeThread = new QVTcTestThread<@NonNull Resource>("QVTc-Serialize", getTestProjectManager())
 		{
-			@Override
-			protected QVTcore createOCL() throws ParserException {
-				return QVTcore.newInstance(getTestProjectManager(), null);
-			}
-
 			@Override
 			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
 				QVTcEnvironmentFactory environmentFactory = getEnvironmentFactory();

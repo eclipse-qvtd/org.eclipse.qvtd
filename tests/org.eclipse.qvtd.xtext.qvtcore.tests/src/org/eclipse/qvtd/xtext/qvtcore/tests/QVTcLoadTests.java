@@ -17,12 +17,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
@@ -33,19 +31,7 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 public class QVTcLoadTests extends LoadTestCase
 {
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-		EnvironmentThreadFactory environmentThreadFactory = new EnvironmentThreadFactory()
-		{
-			@Override
-			public @NonNull QVTcore createEnvironment() {
-				ProjectManager projectManager = getTestProjectManager();
-				QVTcore ocl = QVTcore.newInstance(projectManager, null);
-				if (severity != null) {
-					EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
-					environmentFactory.setSafeNavigationValidationSeverity(severity);
-				}
-				return ocl;
-			}
-		};
+		EnvironmentThreadFactory environmentThreadFactory = new QVTcoreEnvironmentThreadFactory(getTestProjectManager(), severity);
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		Resumable<@NonNull Resource> resumable = doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
 		resumable.syncResume();;

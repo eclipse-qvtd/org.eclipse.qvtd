@@ -18,14 +18,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.library.ImplementationManager;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
@@ -73,26 +72,22 @@ public class QVTrLoadTests extends LoadTestCase
 	}
 
 	public @NonNull Resumable<@NonNull Resource>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-		EnvironmentThreadFactory environmentThreadFactory = new EnvironmentThreadFactory()
-		{
+		QVTrelationEnvironmentThreadFactory environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(getTestProjectManager(), severity) {
+
 			@Override
-			public @NonNull OCLInternal createEnvironment() {
+			public @NonNull QVTrEnvironmentFactory createEnvironmentFactory() {
+				QVTrEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
 				ClassLoader cl0 = getClass().getClassLoader();
 				assert cl0 != null;
-				ProjectManager projectManager = getTestProjectManager();
-				QVTrelation ocl = QVTrelation.newInstance(projectManager);//, null);
-				PivotMetamodelManager metamodelManager = (PivotMetamodelManager) ocl.getMetamodelManager();
+				PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 				ImplementationManager implementationManager = metamodelManager.getImplementationManager();
 				@NonNull List<@NonNull ClassLoader> classLoaders = implementationManager.getClassLoaders();
 				if (!classLoaders.contains(cl0)) {
 					implementationManager.addClassLoader(cl0);
 				}
-				if (severity != null) {
-					EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
-					environmentFactory.setSafeNavigationValidationSeverity(severity);
-				}
-				return ocl;
+				return environmentFactory;
 			}
+
 		};
 		return doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
 	}
