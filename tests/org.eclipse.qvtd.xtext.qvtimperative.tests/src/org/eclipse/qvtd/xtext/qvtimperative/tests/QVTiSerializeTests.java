@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
@@ -113,7 +114,7 @@ public class QVTiSerializeTests extends LoadTestCase
 
 			@Override
 			protected @NonNull Resource runWithThrowable() throws Exception {
-				Resource asResource1 = getOCL().getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
+				Resource asResource1 = getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
 				syncSuspend(asResource1);
 				return asResource1;
 			}
@@ -143,14 +144,15 @@ public class QVTiSerializeTests extends LoadTestCase
 		//	Load QVTiAS
 		//
 		OCL ocl = QVTbase.newInstance(getTestProjectManager());
+		EnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
 		try {
-			ASResource asResource = AbstractTestQVT.loadQVTiAS(ocl, inputURI);
+			ASResource asResource = AbstractTestQVT.loadQVTiAS(environmentFactory, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//
 			//	Pivot to CS
 			//
-			XtextResource xtextResource = AbstractTestQVT.as2cs(ocl, resourceSet, asResource, serializedInputURI, QVTimperativeCSPackage.eCONTENT_TYPE);
+			XtextResource xtextResource = AbstractTestQVT.as2cs(environmentFactory, resourceSet, asResource, serializedInputURI, QVTimperativeCSPackage.eCONTENT_TYPE);
 			resourceSet.getResources().clear();
 			return xtextResource;
 		}

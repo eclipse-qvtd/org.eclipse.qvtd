@@ -47,8 +47,8 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
@@ -64,6 +64,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -93,9 +94,9 @@ import junit.framework.TestCase;
 public abstract class AbstractTestQVT extends QVTimperative
 {
 	// FIXME move following clones to a Util class
-	public static @NonNull XtextResource as2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI, /*@NonNull*/ String csContentType) throws IOException {
+	public static @NonNull XtextResource as2cs(@NonNull EnvironmentFactory environmentFactory, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI, /*@NonNull*/ String csContentType) throws IOException {
 		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, csContentType));
-		ocl.as2cs(asResource, (CSResource) xtextResource);
+		((CSResource)xtextResource).updateFrom(asResource, environmentFactory);
 		LoadTestCase.assertNoResourceErrors("Conversion failed", xtextResource);
 		//
 		//	CS save
@@ -125,8 +126,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return xtextResource;
 	}
 
-	public static @NonNull ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
-		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+	public static @NonNull ASResource loadQVTiAS(@NonNull EnvironmentFactory environmentFactory, @NonNull URI inputURI) {
+		Resource asResource = environmentFactory.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
 		assert asResource != null;
 		//		List<String> conversionErrors = new ArrayList<String>();
 		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
@@ -534,20 +535,20 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//
 		//	Load QVTiAS
 		//
-		QVTbTestThread<XtextResource> loadThread = new QVTbTestThread<XtextResource>("Serialize-Load")
+		QVTiTestThread<@NonNull XtextResource> loadThread = new QVTiTestThread<@NonNull XtextResource>("Serialize-Load")
 		{
 			@Override
-			protected OCLInternal createOCL() {
-				OCL ocl = QVTbase.newInstance(getTestProjectManager());
+			protected QVTimperative createOCL() {
+				QVTimperative ocl = QVTimperative.newInstance(getTestProjectManager(), null);
 				ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
-				return (OCLInternal) ocl;
+				return ocl;
 			}
 
 			@Override
-			protected XtextResource runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
+			protected @NonNull XtextResource runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
 				XtextResource xtextResource = null;
-				OCLInternal ocl2 = getOCL();
-				ASResource asResource = loadQVTiAS(ocl2, inputURI);
+				QVTiEnvironmentFactory environmentFactory2 = getEnvironmentFactory();
+				ASResource asResource = loadQVTiAS(environmentFactory2, inputURI);
 				LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
 				LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
 				try {
@@ -555,12 +556,12 @@ public abstract class AbstractTestQVT extends QVTimperative
 					//
 					//	Pivot to CS
 					//
-					xtextResource = as2cs(ocl2, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
+					xtextResource = as2cs(environmentFactory2, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
 					resourceSet.getResources().clear();
 				}
 				catch (AssertionFailedError e) {
 					try {	// Try and serialize anyway so that a *.qvti is available even on on obsolete installation
-						as2cs(ocl2, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
+						as2cs(environmentFactory2, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
 					}
 					catch (Exception t) {}
 					throw e;
@@ -570,10 +571,15 @@ public abstract class AbstractTestQVT extends QVTimperative
 		};
 		XtextResource xtextResource = loadThread.syncExec();
 
-		QVTiTestThread reloadThread = new QVTiTestThread("Serialize-Reload")
+		QVTiTestThread<Object> reloadThread = new QVTiTestThread<Object>("Serialize-Reload")
 		{
 			@Override
-			protected void runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
+			protected QVTimperative createOCL() {
+				return QVTimperative.newInstance(getTestProjectManager(), null);
+			}
+
+			@Override
+			protected Object runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
 				QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
 				ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(environmentFactory, serializedURI, false);
 				Resource asResource2 = asTransformation.eResource();
@@ -581,6 +587,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				LoadTestCase.assertNoResourceErrors("Loading " + serializedURI, asResource2);
 				LoadTestCase.assertNoUnresolvedProxies("Loading " + serializedURI, asResource2);
 				LoadTestCase.assertNoValidationErrors("Loading " + serializedURI, asResource2);
+				return null;
 			}
 		};
 		reloadThread.syncExec();
@@ -611,10 +618,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//		return (OCLInternal) ocl;
 		//	}
 
-		@Override
-		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-			return (QVTiEnvironmentFactory)super.getEnvironmentFactory();
-		}
+		//	@Override
+		//	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		//		return (QVTiEnvironmentFactory)super.getEnvironmentFactory();
+		//	}
 
 		protected  abstract R runWithModel(@NonNull ResourceSet resourceSet) throws Exception;
 
@@ -639,8 +646,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 
 		@Override
-		public @NonNull QVTrEnvironmentFactory getEnvironmentFactory() {
-			return (QVTrEnvironmentFactory)super.getEnvironmentFactory();
+		public @NonNull QVTcEnvironmentFactory getEnvironmentFactory() {
+			return (QVTcEnvironmentFactory)super.getEnvironmentFactory();
 		}
 
 		protected  abstract R runWithModel(@NonNull ResourceSet resourceSet) throws Exception;
@@ -658,31 +665,31 @@ public abstract class AbstractTestQVT extends QVTimperative
 	/**
 	 * A QVTiTestThread creates a QVTimperative for use on a dedicated thread.
 	 */
-	public abstract class QVTiTestThread extends OCLTestThread<Object, @Nullable QVTimperative>
+	public abstract static class QVTiTestThread<R> extends OCLTestThread<R, @Nullable QVTimperative>
 	{
 		public QVTiTestThread(@NonNull String threadName) {
 			super(threadName);
 		}
 
-		@Override
-		protected QVTimperative createOCL() throws ParserException {
-			return QVTimperative.newInstance(getTestProjectManager(), null);
-		}
+		//	@Override
+		//	protected QVTimperative createOCL() throws ParserException {
+		//		return QVTimperative.newInstance(getTestProjectManager(), null);
+		//	}
 
 		@Override
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 			return (QVTiEnvironmentFactory)super.getEnvironmentFactory();
 		}
 
-		protected  abstract void runWithModel(@NonNull ResourceSet resourceSet) throws Exception;
+		protected  abstract R runWithModel(@NonNull ResourceSet resourceSet) throws Exception;
 
 		@Override
-		public Object runWithThrowable() throws Exception {
+		public R runWithThrowable() throws Exception {
 			assert ocl != null;
 			ResourceSet resourceSet = ocl.getResourceSet();
-			runWithModel(resourceSet);
+			return runWithModel(resourceSet);
 			//		unloadResourceSet(resourceSet);
-			return null;
+			//	return null;
 		}
 	}
 

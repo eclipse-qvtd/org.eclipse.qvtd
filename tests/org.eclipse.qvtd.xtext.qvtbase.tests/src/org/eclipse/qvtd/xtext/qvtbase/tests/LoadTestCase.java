@@ -79,7 +79,7 @@ public abstract class LoadTestCase extends XtextTestCase
 			@Override
 			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
 				URI cstURI = getTestURIWithExtension(pivotURI, "xmi");
-				BaseCSResource xtextResource = (BaseCSResource) getOCL().getResourceSet().getResource(inputURI, true);
+				BaseCSResource xtextResource = (BaseCSResource) getEnvironmentFactory().getResourceSet().getResource(inputURI, true);
 				assert xtextResource != null;
 				assertNoResourceErrors("Load failed", xtextResource);
 				Resource pivotResource = xtextResource.getASResource();

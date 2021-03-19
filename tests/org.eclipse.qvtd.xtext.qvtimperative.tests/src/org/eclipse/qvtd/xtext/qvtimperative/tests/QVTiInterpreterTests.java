@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -152,10 +153,11 @@ public class QVTiInterpreterTests extends LoadTestCase
 				//	OCL ocl = OCL.newInstance(projectManager); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
 
 
-				ResourceSet asResourceSet = getOCL().getMetamodelManager().getASResourceSet();
+				PivotMetamodelManager metamodelManager = getEnvironmentFactory().getMetamodelManager();
+				ResourceSet asResourceSet = metamodelManager.getASResourceSet();
 				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 					OCLstdlib.install();
-					getOCL().getMetamodelManager().getASmetamodel();
+					metamodelManager.getASmetamodel();
 				}
 				Resource resource = asResourceSet.getResource(asURI, true);
 				assert resource != null;

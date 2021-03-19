@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
@@ -110,10 +111,11 @@ public class QVTcSerializeTests extends LoadTestCase
 
 			@Override
 			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
+				QVTcEnvironmentFactory environmentFactory = getEnvironmentFactory();
 				//
 				//	Load QVTiAS
 				//
-				ASResource asResource = AbstractTestQVT.loadQVTiAS(getOCL(), inputURI);
+				ASResource asResource = AbstractTestQVT.loadQVTiAS(environmentFactory, inputURI);
 				assertNoResourceErrors("Normalisation failed", asResource);
 				//			assertNoValidationErrors("Normalisation invalid", asResource);
 				assertValidationDiagnostics("Pivot validation errors", asResource, messages);
@@ -121,7 +123,7 @@ public class QVTcSerializeTests extends LoadTestCase
 				//	Pivot to CS
 				//
 				//	ResourceSet resourceSet = ocl.getResourceSet();
-				XtextResource xtextResource = AbstractTestQVT.as2cs(getOCL(), resourceSet, asResource, serializedInputURI, QVTcoreCSPackage.eCONTENT_TYPE);
+				XtextResource xtextResource = AbstractTestQVT.as2cs(environmentFactory, resourceSet, asResource, serializedInputURI, QVTcoreCSPackage.eCONTENT_TYPE);
 				resourceSet.getResources().clear();
 				return xtextResource;
 			}

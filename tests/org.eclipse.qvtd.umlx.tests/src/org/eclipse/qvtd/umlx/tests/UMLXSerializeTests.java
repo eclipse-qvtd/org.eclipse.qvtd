@@ -146,9 +146,8 @@ public class UMLXSerializeTests extends LoadTestCase
 
 			@Override
 			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
-				QVTrelation ocl = getOCL();
-				Resource umlxResource2 = ocl.getResourceSet().getResource(umlxURIfinal, true);
-				Resource qvtrResource2 = ocl.getMetamodelManager().getASResourceSet().createResource(pivotURI2);
+				Resource umlxResource2 = getEnvironmentFactory().getResourceSet().getResource(umlxURIfinal, true);
+				Resource qvtrResource2 = getMetamodelManager().getASResourceSet().createResource(pivotURI2);
 				UMLX2QVTr umlx2qvtr = new UMLX2QVTr(ocl.getEnvironmentFactory(), umlxResource2, qvtrResource2);
 				umlx2qvtr.transform();
 				qvtrResource2.save(CompilerUtil.defaultSavingOptions);
