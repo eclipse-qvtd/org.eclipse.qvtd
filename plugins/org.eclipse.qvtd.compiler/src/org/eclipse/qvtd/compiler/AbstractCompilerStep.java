@@ -14,16 +14,17 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 
 public abstract class AbstractCompilerStep implements CompilerStep
 {
 	protected final @NonNull CompilerChain compilerChain;
-	protected final @NonNull QVTbaseEnvironmentFactory environmentFactory;
 	protected final @NonNull String stepName;
 	protected final @NonNull String defaultFileExtension;
 
@@ -31,7 +32,6 @@ public abstract class AbstractCompilerStep implements CompilerStep
 
 	protected AbstractCompilerStep(@NonNull CompilerChain compilerChain, @NonNull String stepName) {
 		this.compilerChain = compilerChain;
-		this.environmentFactory = compilerChain.getEnvironmentFactory();
 		this.stepName = stepName;
 		this.defaultFileExtension = ClassUtil.nonNullState(AbstractCompilerChain.getDefaultFileExtension(stepName));
 	}
@@ -59,7 +59,16 @@ public abstract class AbstractCompilerStep implements CompilerStep
 	}
 
 	protected @NonNull Resource createResource(@NonNull String contentType) throws IOException {
-		return compilerChain.createResource(getURI(), contentType);
+		return createResource(getURI(), contentType);
+	}
+
+	public @NonNull Resource createResource(@NonNull URI uri, @NonNull String contentType) throws IOException {
+		ResourceSet asResourceSet = getEnvironmentFactory().getMetamodelManager().getASResourceSet();
+		Resource resource = asResourceSet.createResource(uri, contentType);
+		if (resource == null) {
+			throw new IOException("Failed to create " + uri);
+		}
+		return resource;
 	}
 
 	/*	public @NonNull CompilerProblems getCompilerProblems() {
@@ -75,9 +84,13 @@ public abstract class AbstractCompilerStep implements CompilerStep
 		return defaultFileExtension;
 	}
 
+	@Deprecated /* Going obsolete */
 	@Override
-	public @NonNull EnvironmentFactory getEnvironmentFactory() {
-		return environmentFactory;
+	public @NonNull QVTbaseEnvironmentFactory getEnvironmentFactory() {
+		EnvironmentFactoryInternal environmentFactory = ThreadLocalExecutor.basicGetEnvironmentFactory();
+		assert environmentFactory != null;
+		// XXX	assert !"main".equals(Thread.currentThread().getName());
+		return (QVTbaseEnvironmentFactory)environmentFactory;
 	}
 
 	@Override

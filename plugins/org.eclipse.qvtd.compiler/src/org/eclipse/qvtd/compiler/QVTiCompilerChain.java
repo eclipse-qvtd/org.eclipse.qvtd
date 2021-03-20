@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
@@ -31,7 +31,7 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 			super(compilerChain, QVTI_STEP);
 		}
 
-		public @NonNull ImperativeTransformation execute(@NonNull URI txURI) throws IOException {
+		public @NonNull ImperativeTransformation execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI txURI) throws IOException {
 			ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(environmentFactory, txURI, false);
 			Resource iResource = ClassUtil.nonNullState(asTransformation.eResource());
 			iResource.setURI(getURI());
@@ -43,14 +43,15 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 
 	protected final @NonNull Xtext2QVTiCompilerStep xtext2qvtiCompilerStep;
 
-	public QVTiCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-		super(environmentFactory, txURI, intermediateFileNamePrefixURI, options);
+	public QVTiCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		super(txURI, intermediateFileNamePrefixURI, options);
 		this.xtext2qvtiCompilerStep = createXtext2QVTiCompilerStep();
 	}
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-		return xtext2qvtiCompilerStep.execute(txURI);
+		QVTbaseEnvironmentFactory environmentFactory = xtext2qvtiCompilerStep.getEnvironmentFactory();
+		return xtext2qvtiCompilerStep.execute(environmentFactory, txURI);
 	}
 
 	protected @NonNull Xtext2QVTiCompilerStep createXtext2QVTiCompilerStep() {

@@ -176,8 +176,8 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		protected void doRun() throws Exception {
 			SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
 			options.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
-			QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
-			CompilerChain compilerChain2 = createCompilerChain(qvt.getEnvironmentFactory(), txURI, options);
+			//	QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
+			CompilerChain compilerChain2 = createCompilerChain(txURI, options);
 			compilerChain2.addListener(this);
 			if (isInterpreted()) {
 				compilerChain2.compile(typedModelsConfigurations);
@@ -562,7 +562,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		}
 	}
 
-	protected abstract @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull CompilerOptions options);
+	protected abstract @NonNull CompilerChain createCompilerChain(@NonNull URI txURI, @NonNull CompilerOptions options);
 
 	protected @NonNull DefaultCompilerOptions createCompilerOptions() {
 		return new DefaultCompilerOptions();

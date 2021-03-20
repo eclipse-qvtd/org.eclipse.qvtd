@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
 import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
@@ -36,11 +37,13 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.junit.Test;
 
@@ -81,9 +84,14 @@ public class ATLExampleTests extends LoadTestCase
 			assertSameModel(referenceResource, outputResource);
 		}
 
+		public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
+			QVTrelationEnvironmentThreadFactory environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(getTestProjectManager());
+			return checkOutput(environmentThreadFactory, actualURI, expectedURI, normalizer);
+		}
+
 		@Override
 		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			return new QVTrCompilerChain(getEnvironmentFactory(), txURI, intermediateFileNamePrefixURI, options);
+			return new QVTrCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		}
 
 		@Override
@@ -116,7 +124,7 @@ public class ATLExampleTests extends LoadTestCase
 		MyQVT myQVT = createQVT(resultPrefix, atlURI);
 		try {
 			Class<?> txClass = Class.forName("org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr");		// FIXME Use direct reference once generation works redliably
-			@SuppressWarnings({"unchecked", "null"})
+			@SuppressWarnings("unchecked")
 			@NonNull Class<? extends Transformer> txCastClass = (Class<? extends Transformer>)txClass;
 			myQVT.createGeneratedExecutor(txCastClass);
 			URI atlXMIURI = getTestURIWithExtension(atlURI, "xmi");

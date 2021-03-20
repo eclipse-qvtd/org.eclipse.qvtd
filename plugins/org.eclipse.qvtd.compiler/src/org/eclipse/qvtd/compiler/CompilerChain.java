@@ -84,7 +84,7 @@ public interface CompilerChain
 	@NonNull Class<? extends Transformer> build(@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception;
 	@NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException;
 	void compiled(@NonNull String stepKey, @NonNull Object object);
-	@NonNull Resource createResource(@NonNull URI uri, @NonNull String contentType) throws IOException;
+	//	@NonNull Resource createResource(@NonNull URI uri, @NonNull String contentType) throws IOException;
 	void dispose();
 	@NonNull QVTbaseEnvironmentFactory getEnvironmentFactory();
 	//	@Nullable File getTraceClassesFolder();

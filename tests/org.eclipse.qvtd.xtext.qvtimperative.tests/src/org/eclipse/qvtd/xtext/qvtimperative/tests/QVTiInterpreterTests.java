@@ -23,10 +23,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.pivot.tests.PivotTestCaseWithAutoTearDown.AbstractTestThread;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -43,11 +46,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT.QVTbTestThread;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
@@ -64,9 +68,14 @@ public class QVTiInterpreterTests extends LoadTestCase
 			this.modeFactory = modeFactory;
 		}
 
+		public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
+			QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory();
+			return checkOutput(environmentThreadFactory, actualURI, expectedURI, normalizer);
+		}
+
 		@Override
 		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			return new QVTiCompilerChain(getEnvironmentFactory(), txURI, intermediateFileNamePrefixURI/*getTestURIWithExtension(txURI, null)*/, createCompilerOptions());
+			return new QVTiCompilerChain(txURI, intermediateFileNamePrefixURI/*getTestURIWithExtension(txURI, null)*/, createCompilerOptions());
 		}
 
 		@Override
@@ -128,21 +137,18 @@ public class QVTiInterpreterTests extends LoadTestCase
 		assertEquals(expected, actual);
 	}
 
-	protected void assertLoadable(@NonNull QVTbase qvt, @NonNull URI asURI) throws Exception {
+	protected <EF extends EnvironmentFactoryInternal> void assertLoadable(@NonNull QVTbase qvt, @NonNull URI asURI) throws Exception {
 		//	qvt.deactivate();
 		assertLoadable(getTestProject(), asURI);
 		//	qvt.activate();
 	}
 
 	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Exception {
-		QVTbTestThread<Object> checkThread = new QVTbTestThread<Object>("Loadable-Check", getTestProjectManager())
+		QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory();
+		AbstractTestThread<Object, @NonNull QVTiEnvironmentFactory, @Nullable OCLInternal> checkThread = new AbstractTestThread<Object, @NonNull QVTiEnvironmentFactory, @Nullable OCLInternal>("Loadable-Check", environmentThreadFactory)
 		{
 			@Override
-			protected Object runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
-				//	ProjectManager projectManager = getTestProjectManager();
-				//	OCL ocl = OCL.newInstance(projectManager); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
-
-
+			public Object runWithThrowable() throws Exception {
 				PivotMetamodelManager metamodelManager = getEnvironmentFactory().getMetamodelManager();
 				ResourceSet asResourceSet = metamodelManager.getASResourceSet();
 				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -352,7 +358,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI oclURI = getResourceURI("org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl");
 		//  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
 		@SuppressWarnings("unused")
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI);
 
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
@@ -387,10 +393,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		MyQVT myQVT = createQVT("SimpleUML2RDBMS", txURI, ModeFactory.LAZY);
 		TestUtil.doCompleteOCLSetup();
 		URI oclURI = getResourceURI("org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl");
-		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
 		//  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
 		@SuppressWarnings("unused")
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, environmentFactory);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI);
 
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);

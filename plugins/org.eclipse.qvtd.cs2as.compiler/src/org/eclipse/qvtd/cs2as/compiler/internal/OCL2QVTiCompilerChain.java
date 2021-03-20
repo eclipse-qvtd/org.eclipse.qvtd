@@ -32,6 +32,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.common.SimpleConfigurations;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -78,13 +79,14 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 		}
 
 		public @NonNull Resource ocl2qvtm(@NonNull URI oclURI) throws IOException {
+			QVTbaseEnvironmentFactory environmentFactory = getEnvironmentFactory();
 			OCL2QVTm ocl2qvtm = new OCL2QVTm(environmentFactory, traceabilityPropName);
 			Resource pResource = ocl2qvtm.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI, getURI());
 			saveResource(pResource);
 			return pResource;
 		}
 
-		protected @NonNull Resource execute() throws IOException {
+		protected @NonNull Resource execute(@NonNull QVTbaseEnvironmentFactory environmentFactory) throws IOException {
 			Resource mModel = ocl2qvtm(oclASUri);
 			if (!extendedASUris.isEmpty()) {
 				List<Resource> qvtmModels = new ArrayList<Resource>();
@@ -123,14 +125,15 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	 */
 	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @NonNull CompilerOptions options,
 			@NonNull URI oclDocURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
-		super(qvti.getEnvironmentFactory(), oclDocURI, intermediateFileNamePrefixURI, options);
+		super(oclDocURI, intermediateFileNamePrefixURI, options);
 		this.ocl2qvtmCompilerStep = new OCL2QVTmCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);
 	}
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+		QVTbaseEnvironmentFactory environmentFactory = ocl2qvtmCompilerStep.getEnvironmentFactory();
 		TypedModelsConfiguration typedModelsConfiguration = typedModelsConfigurations.iterator().next();
-		return qvtm2qvti(ocl2qvtmCompilerStep.execute(), typedModelsConfiguration);
+		return qvtm2qvti(environmentFactory, ocl2qvtmCompilerStep.execute(environmentFactory), typedModelsConfiguration);
 	}
 
 	public @NonNull ImperativeTransformation compile(@NonNull String enforcedModelName) throws IOException {
@@ -139,13 +142,13 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	}
 
 	@Override
-	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
-		rewriteSafeNavigations(pResource);
-		return super.qvtm2qvti(pResource, typedModelsConfiguration);
+	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+		rewriteSafeNavigations(environmentFactory, pResource);
+		return super.qvtm2qvti(environmentFactory, pResource, typedModelsConfiguration);
 	}
 
 	// FIXME this workaround produces a new traversal of the resource
-	private void rewriteSafeNavigations(@NonNull Resource resource) {
+	private void rewriteSafeNavigations(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource resource) {
 		QVTcoreHelper helper = new QVTcoreHelper(environmentFactory);		// FIXME Re-use a helper
 		for (EObject rootObject : resource.getContents()) {
 			if (rootObject instanceof Element) {

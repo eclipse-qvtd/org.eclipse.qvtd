@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
@@ -29,7 +28,6 @@ import org.eclipse.qvtd.debug.evaluator.BasicQVTcExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
 public class QVTcLaunchConfigurationDelegate extends QVTiLaunchConfigurationDelegate implements QVTcLaunchConstants
 {
@@ -69,8 +67,6 @@ public class QVTcLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 		boolean dotGraphs = configuration.getAttribute(DOT_GRAPHS_KEY, true);
 		boolean yedGraphs = configuration.getAttribute(YED_GRAPHS_KEY, true);
 		//
-		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
-		QVTiEnvironmentFactory environmentFactory = qvt.getEnvironmentFactory();
 		DefaultCompilerOptions compilerOptions = createCompilerOptions();
 		Map<String, String> intermediatesMap = configuration.getAttribute(INTERMEDIATES_KEY, EMPTY_MAP);
 		assert intermediatesMap != null;
@@ -87,7 +83,7 @@ public class QVTcLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 				return false;
 			}
 		}
-		CompilerChain compilerChain = new QVTcCompilerChain(environmentFactory, txURI, txURI, compilerOptions);
+		CompilerChain compilerChain = new QVTcCompilerChain(txURI, txURI, compilerOptions);
 		try {
 			if (interpreted) {
 				compilerChain.compile(typedModelsConfigurations);

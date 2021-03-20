@@ -25,8 +25,7 @@ import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
-import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -43,13 +42,16 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class QVTiSerializeTests extends LoadTestCase
 {
-	protected @NonNull EnvironmentThreadFactory createQVTimperativeEnvironmentThreadFactory(StatusCodes.@Nullable Severity severity) {
-		EnvironmentThreadFactory environmentThreadFactory = new QVTimperativeEnvironmentThreadFactory(getTestProjectManager(), severity);
+	protected @NonNull QVTimperativeEnvironmentThreadFactory createQVTimperativeEnvironmentThreadFactory(StatusCodes.@Nullable Severity severity) {
+		QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory();
+		if (severity != null) {
+			environmentThreadFactory.setSeverity(severity);
+		}
 		return environmentThreadFactory;
 	}
 
-	public @NonNull Resumable<@NonNull Resource> doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-		EnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory(severity);
+	public @NonNull Resumable<@NonNull Resource, ?> doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+		QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory(severity);
 		return doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
 	}
 
@@ -62,12 +64,12 @@ public class QVTiSerializeTests extends LoadTestCase
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtias");
 		//	ProjectManager projectManager = getTestProjectManager();
 		//	OCL ocl1 = QVTimperative.newInstance(projectManager, null);
-		Resumable<@NonNull Resource> loadThread1 = doLoad_Concrete(inputURI, pivotURI, NO_MESSAGES, null);
+		Resumable<@NonNull Resource, ?> loadThread1 = doLoad_Concrete(inputURI, pivotURI, NO_MESSAGES, null);
 		Resource asResource1 = loadThread1.getResult();
 		//	ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true);
 		//	OCL ocl2 = QVTimperative.newInstance(projectManager, null);
-		Resumable<@NonNull Resource> loadThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
+		Resumable<@NonNull Resource, ?> loadThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
 		Resource asResource3 = loadThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
@@ -96,7 +98,7 @@ public class QVTiSerializeTests extends LoadTestCase
 				return asResource;
 			}
 		};
-		Resumable<@NonNull Resource> syncStart1 = loadThread1.syncStart();
+		Resumable<@NonNull Resource, ?> syncStart1 = loadThread1.syncStart();
 		Resource asResource1 = syncStart1.getResult();
 
 		//	ProjectManager projectManager = getTestProjectManager();
@@ -104,7 +106,7 @@ public class QVTiSerializeTests extends LoadTestCase
 		//	OCL ocl2 = OCL.newInstance(projectManager);
 		//	Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true);
-		Resumable<@NonNull Resource> loadThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
+		Resumable<@NonNull Resource, ?> loadThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
 		Resource asResource3 = loadThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);

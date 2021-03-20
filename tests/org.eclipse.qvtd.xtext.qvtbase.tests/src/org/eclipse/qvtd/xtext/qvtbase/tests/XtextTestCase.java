@@ -60,6 +60,9 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentThreadFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 
 public class XtextTestCase extends PivotTestCase
 {
@@ -297,6 +300,21 @@ public class XtextTestCase extends PivotTestCase
 	public @Nullable TestFileSystem testFileSystem = null;
 	public @Nullable TestProject testProject = null;
 	public @Nullable ProjectManager testProjectManager = null;
+
+	protected @NonNull QVTcoreEnvironmentThreadFactory createQVTcoreEnvironmentThreadFactory() {
+		QVTcoreEnvironmentThreadFactory environmentThreadFactory = new QVTcoreEnvironmentThreadFactory(getTestProjectManager()) ;
+		return environmentThreadFactory;
+	}
+
+	protected @NonNull QVTimperativeEnvironmentThreadFactory createQVTimperativeEnvironmentThreadFactory() {
+		QVTimperativeEnvironmentThreadFactory environmentThreadFactory = new QVTimperativeEnvironmentThreadFactory(getTestProjectManager());
+		return environmentThreadFactory;
+	}
+
+	protected @NonNull QVTrelationEnvironmentThreadFactory createQVTrelationEnvironmentThreadFactory() {
+		QVTrelationEnvironmentThreadFactory environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(getTestProjectManager()) ;
+		return environmentThreadFactory;
+	}
 
 	/**
 	 * Return the URI of a file in the test harness models folder.

@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
@@ -29,7 +28,6 @@ import org.eclipse.qvtd.debug.evaluator.BasicQVTrExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 
 public class QVTrLaunchConfigurationDelegate extends QVTiLaunchConfigurationDelegate implements QVTcLaunchConstants
@@ -73,8 +71,6 @@ public class QVTrLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 		boolean dotGraphs = configuration.getAttribute(DOT_GRAPHS_KEY, true);
 		boolean yedGraphs = configuration.getAttribute(YED_GRAPHS_KEY, true);
 		//
-		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
-		QVTiEnvironmentFactory environmentFactory = qvt.getEnvironmentFactory();
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
 		DefaultCompilerOptions compilerOptions = createCompilerOptions();
 		Map<String, String> intermediatesMap = configuration.getAttribute(INTERMEDIATES_KEY, EMPTY_MAP);
@@ -92,7 +88,7 @@ public class QVTrLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 				return false;
 			}
 		}
-		CompilerChain compilerChain = new QVTrCompilerChain(environmentFactory, txURI, txURI, compilerOptions);
+		CompilerChain compilerChain = new QVTrCompilerChain(txURI, txURI, compilerOptions);
 		try {
 			if (interpreted) {
 				compilerChain.compile(typedModelsConfigurations);

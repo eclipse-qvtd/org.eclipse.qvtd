@@ -37,8 +37,8 @@ import com.google.common.collect.Lists;
 public class QVTiMainTab extends MainTab<Transformation> implements QVTiLaunchConstants
 {
 	@Override
-	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull CompilerOptions compilerOptions) {
-		return new QVTiCompilerChain(environmentFactory, txURI, txURI, compilerOptions);
+	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull CompilerOptions compilerOptions) {
+		return new QVTiCompilerChain(txURI, txURI, compilerOptions);
 	}
 
 	@Override

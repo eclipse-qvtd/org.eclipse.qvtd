@@ -15,8 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
-import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
-import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -29,9 +28,12 @@ public class QVTiEditorTests extends LoadTestCase
 {
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
-		EnvironmentThreadFactory environmentThreadFactory = new QVTimperativeEnvironmentThreadFactory(getTestProjectManager(), severity);
-		Resumable<@NonNull Resource> resumable = doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
-		resumable.syncResume();;
+		QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory();
+		if (severity != null) {
+			environmentThreadFactory.setSeverity(severity);
+		}
+		Resumable<@NonNull Resource, ?> resumable = doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
+		resumable.syncResume();
 	}
 
 	@Override

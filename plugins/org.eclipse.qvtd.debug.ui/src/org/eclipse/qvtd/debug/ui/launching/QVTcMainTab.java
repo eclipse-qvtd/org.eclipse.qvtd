@@ -33,8 +33,8 @@ import com.google.common.collect.Lists;
 public class QVTcMainTab extends QVTDirectionalMainTab<Transformation>
 {
 	@Override
-	protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull CompilerOptions options) {
-		return new QVTcCompilerChain(environmentFactory, txURI, txURI, options);
+	protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull CompilerOptions options) {
+		return new QVTcCompilerChain(txURI, txURI, options);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ import org.eclipse.ocl.pivot.internal.library.ImplementationManager;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
-import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
@@ -56,7 +56,7 @@ public class QVTrLoadTests extends LoadTestCase
 		//	if (!classLoaders.contains(cl0)) {
 		//		implementationManager.addClassLoader(cl0);
 		//	}
-		Resumable<@NonNull Resource> resumableThread = doLoad_Concrete(inputURI, pivotURI, messages, null);
+		Resumable<@NonNull Resource, ?> resumableThread = doLoad_Concrete(inputURI, pivotURI, messages, null);
 		resumableThread.syncResume();
 		//	ocl.dispose();
 	}
@@ -66,13 +66,13 @@ public class QVTrLoadTests extends LoadTestCase
 		//	OCL ocl = QVTbase.newInstance(getTestProjectManager(), null);
 		//		OCL ocl = OCL.newInstance(getProjectMap());
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTrelationUtil.QVTRAS_FILE_EXTENSION);
-		Resumable<@NonNull Resource> resumableThread = doLoad_Concrete(inputURI, pivotURI, messages, null);
+		Resumable<@NonNull Resource, ?> resumableThread = doLoad_Concrete(inputURI, pivotURI, messages, null);
 		resumableThread.syncResume();
 		//	ocl.dispose();
 	}
 
-	public @NonNull Resumable<@NonNull Resource>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-		QVTrelationEnvironmentThreadFactory environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(getTestProjectManager(), severity) {
+	public @NonNull Resumable<@NonNull Resource, ?>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+		QVTrelationEnvironmentThreadFactory environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(getTestProjectManager()) {
 
 			@Override
 			public @NonNull QVTrEnvironmentFactory createEnvironmentFactory() {
@@ -87,8 +87,10 @@ public class QVTrLoadTests extends LoadTestCase
 				}
 				return environmentFactory;
 			}
-
 		};
+		if (severity != null) {
+			environmentThreadFactory.setSeverity(severity);
+		}
 		return doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
 	}
 

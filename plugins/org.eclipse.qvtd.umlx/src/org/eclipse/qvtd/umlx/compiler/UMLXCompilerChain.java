@@ -20,9 +20,9 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
@@ -40,7 +40,7 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 			super(compilerChain, QVTR_STEP);
 		}
 
-		public @NonNull Resource execute(@NonNull URI umlxURI) throws IOException {
+		public @NonNull Resource execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI umlxURI) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource umlxResource = environmentFactory.getResourceSet().getResource(umlxURI, true);
@@ -61,15 +61,16 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 
 	protected final @NonNull UMLX2QVTrCompilerStep umlx2qvtrCompilerStep;
 
-	public UMLXCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-		super(environmentFactory, txURI, intermediateFileNamePrefixURI, options);
+	public UMLXCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		super(txURI, intermediateFileNamePrefixURI, options);
 		this.umlx2qvtrCompilerStep = createUMLX2QVTrCompilerStep();
 	}
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-		Resource rResource = umlx2qvtrCompilerStep.execute(txURI);
-		return qvtr2qvti(rResource, typedModelsConfigurations);
+		QVTbaseEnvironmentFactory environmentFactory = umlx2qvtrCompilerStep.getEnvironmentFactory();
+		Resource rResource = umlx2qvtrCompilerStep.execute(environmentFactory, txURI);
+		return qvtr2qvti(environmentFactory, rResource, typedModelsConfigurations);
 	}
 
 	protected @NonNull UMLX2QVTrCompilerStep createUMLX2QVTrCompilerStep() {

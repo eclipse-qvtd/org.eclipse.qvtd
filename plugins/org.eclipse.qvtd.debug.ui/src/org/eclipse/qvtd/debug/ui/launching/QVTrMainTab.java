@@ -35,9 +35,9 @@ import com.google.common.collect.Lists;
 public class QVTrMainTab extends QVTDirectionalMainTab<RelationalTransformation>
 {
 	@Override
-	protected @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull CompilerOptions options) {
+	protected @NonNull CompilerChain createCompilerChain(@NonNull URI txURI, @NonNull CompilerOptions options) {
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
-		return new QVTrCompilerChain(environmentFactory, txURI, txURI, options);
+		return new QVTrCompilerChain(txURI, txURI, options);
 	}
 
 	@Override

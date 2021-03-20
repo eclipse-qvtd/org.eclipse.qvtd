@@ -20,18 +20,18 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.tests.PivotTestCaseWithAutoTearDown.AbstractTestThread;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.utilities.OCLThread.EnvironmentThreadFactory;
-import org.eclipse.ocl.pivot.utilities.OCLThread.Resumable;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadFactory;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT.QVTbTestThread;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -40,11 +40,11 @@ public abstract class LoadTestCase extends XtextTestCase
 {
 	public static final @NonNull String @NonNull [] NO_MESSAGES = new @NonNull String[] {};
 
-	public void doLoad_Concrete(@NonNull EnvironmentThreadFactory environmentThreadFactory, @NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
+	public void doLoad_Concrete(@NonNull EnvironmentThreadFactory<?> environmentThreadFactory, @NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
 		doLoad_Concrete(environmentThreadFactory, inputURI, messages, StatusCodes.Severity.IGNORE);
 	}
 
-	public void doLoad_Concrete(@NonNull EnvironmentThreadFactory environmentThreadFactory, @NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@NonNull Severity severity) throws Exception {
+	public void doLoad_Concrete(@NonNull EnvironmentThreadFactory<?> environmentThreadFactory, @NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@NonNull Severity severity) throws Exception {
 		//	OCL ocl = createOCL();
 		//	((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
@@ -63,12 +63,12 @@ public abstract class LoadTestCase extends XtextTestCase
 	//		return doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 	//	}
 
-	protected @NonNull Resumable<@NonNull Resource> doLoad_Concrete(@NonNull EnvironmentThreadFactory environmentThreadFactory, @NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
-		QVTbTestThread<@NonNull Resource> loadThread = new QVTbTestThread<@NonNull Resource>("Concrete-Syntax-Load", getTestProjectManager())
+	protected <@NonNull EF extends EnvironmentFactoryInternal> @NonNull Resumable<@NonNull Resource, EF> doLoad_Concrete(@NonNull EnvironmentThreadFactory<EF> environmentThreadFactory, @NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+		AbstractTestThread<@NonNull Resource, EF, @Nullable OCLInternal> loadThread = new AbstractTestThread<@NonNull Resource, EF, @Nullable OCLInternal>("Concrete-Syntax-Load", environmentThreadFactory)
 		{
 			@Override
 			protected OCLInternal createOCL() {
-				EnvironmentFactoryInternal environmentFactory = environmentThreadFactory.createEnvironmentFactory();
+				EF environmentFactory = environmentThreadFactory.createEnvironmentFactory();
 				OCLInternal ocl = environmentThreadFactory.createEnvironment(environmentFactory);
 				if (severity != null) {
 					environmentFactory.setSafeNavigationValidationSeverity(severity);
@@ -77,7 +77,7 @@ public abstract class LoadTestCase extends XtextTestCase
 			}
 
 			@Override
-			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
+			public @NonNull Resource runWithThrowable() throws Exception {
 				URI cstURI = getTestURIWithExtension(pivotURI, "xmi");
 				BaseCSResource xtextResource = (BaseCSResource) getEnvironmentFactory().getResourceSet().getResource(inputURI, true);
 				assert xtextResource != null;

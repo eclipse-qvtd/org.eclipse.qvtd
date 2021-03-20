@@ -64,9 +64,9 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationMultipleScheduleM
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -92,7 +92,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			super(compilerChain, QVTR_STEP);
 		}
 
-		public @NonNull Resource execute(@NonNull URI txURI) throws IOException {
+		public @NonNull Resource execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI txURI) throws IOException {
 			ASResource qvtrResource = QVTrelationUtil.loadTransformations(environmentFactory, txURI, false);
 			qvtrResource.setURI(getURI());
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
@@ -118,7 +118,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			AbstractQVTb2QVTs.DEBUG_GRAPHS.setState(basicGetOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+		public @NonNull ScheduleManager execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
 			String s = typedModelsConfigurations.reconcile(asTransformation);
@@ -200,7 +200,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			super(compilerChain, TRACE_STEP);
 		}
 
-		public void execute(@NonNull Resource traceResource) throws IOException {
+		public void execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource traceResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				//
@@ -298,6 +298,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		}
 
 		public @NonNull GenModel saveGenModel(@NonNull ProblemHandler problemHandler, @NonNull Resource asResource, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @Nullable String genModelDirectory, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
+			QVTbaseEnvironmentFactory environmentFactory = getEnvironmentFactory();
 			URI traceURI = asResource.getURI();
 			assert traceURI != null;
 			@NonNull URI ecoreURI = PivotUtilInternal.getNonASURI(traceURI);
@@ -443,8 +444,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	protected final @NonNull CreateGenModelCompilerStep createGenModelCompilerStep;
 	protected final @NonNull GenModelGenerateCompilerStep genmodelGenerateCompilerStep;
 
-	public QVTrCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-		super(environmentFactory, txURI, intermediateFileNamePrefixURI, options);
+	public QVTrCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		super(txURI, intermediateFileNamePrefixURI, options);
 		this.xtext2qvtrCompilerStep = createXtext2QVTrCompilerStep();
 		this.qvtr2qvtsCompilerStep = createQVTr2QVTsCompilerStep();
 		this.createGenModelCompilerStep = createCreateGenModelCompilerStepStep();
@@ -453,17 +454,18 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-		Resource qvtrResource = xtext2qvtrCompilerStep.execute(txURI);
-		return qvtr2qvti(qvtrResource, typedModelsConfigurations);
+		QVTbaseEnvironmentFactory environmentFactory = xtext2qvtrCompilerStep.getEnvironmentFactory();
+		Resource qvtrResource = xtext2qvtrCompilerStep.execute(environmentFactory, txURI);
+		return qvtr2qvti(environmentFactory, qvtrResource, typedModelsConfigurations);
 	}
 
-	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
 		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
-		Resource traceResource = createResource(traceURI, PivotPackage.eCONTENT_TYPE);
-		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, typedModelsConfigurations);
+		Resource traceResource = qvtr2qvtsCompilerStep.createResource(traceURI, PivotPackage.eCONTENT_TYPE);
+		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(environmentFactory, qvtrResource, traceResource, typedModelsConfigurations);
 		//	ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
-		createGenModelCompilerStep.execute(traceResource);
+		createGenModelCompilerStep.execute(environmentFactory, traceResource);
 		//	CompilerOptions.StepOptions schedulerOptions = basicGetOptions(CompilerChain.QVTS_STEP);
 		//	RelationalTransformation asTransformation = (RelationalTransformation) AbstractCompilerChain.getTransformation(qvtrResource);
 		// FIXME Use a neutral scheduleManager
@@ -529,7 +531,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				throw new UnsupportedOperationException();
 			}}; */
 
-		return qvts2qvtiCompilerStep.execute(scheduleManager);
+		return qvts2qvtiCompilerStep.execute(environmentFactory, scheduleManager);
 	}
 
 	protected @NonNull CreateGenModelCompilerStep createCreateGenModelCompilerStepStep() {
@@ -550,7 +552,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 	@Override
 	public @NonNull Class<? extends Transformer> generate(@NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
-		genmodelGenerateCompilerStep.execute();
+		QVTbaseEnvironmentFactory environmentFactory = genmodelGenerateCompilerStep.getEnvironmentFactory();
+		genmodelGenerateCompilerStep.execute(environmentFactory);
 		return super.generate(asTransformation, genModelFiles);
 	}
 }

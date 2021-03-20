@@ -40,6 +40,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.genmodel.OCLGenModelUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
@@ -93,7 +94,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 		super(compilerChain, QVTrCompilerChain.GENMODEL_STEP);
 	}
 
-	public void execute() throws IOException {
+	public void execute(@NonNull QVTbaseEnvironmentFactory environmentFactory) throws IOException {
 		Boolean keepOldJavaFiles = compilerChain.basicGetOption(QVTrCompilerChain.GENMODEL_STEP, QVTrCompilerChain.KEEP_OLD_JAVA_FILES_KEY);
 		URI genmodelURI = compilerChain.getURI(QVTrCompilerChain.GENMODEL_STEP, QVTrCompilerChain.URI_KEY);
 		ResourceSet resourceSet = environmentFactory.getResourceSet();
@@ -124,7 +125,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 					JavaFileUtil.deleteJavaFiles(sourcePath);
 				}
 			}
-			generateModels(genModel);
+			generateModels(environmentFactory, genModel);
 			new File(classFilePath).mkdirs();
 			List<@NonNull JavaFileObject> compilationUnits = new ArrayList<@NonNull JavaFileObject>();
 			Set<@NonNull String> basePackages = new HashSet<>();
@@ -147,7 +148,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 		compiled(genmodelResource);
 	}
 
-	protected void generateModels(@NonNull GenModel genModel) {
+	protected void generateModels(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull GenModel genModel) {
 		environmentFactory.getMetamodelManager().addGenModel(genModel);
 		//**		ResourceUtils.checkResourceSet(resourceSet);
 		// genModel.setCanGenerate(true);
