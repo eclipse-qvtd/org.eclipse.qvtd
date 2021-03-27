@@ -90,8 +90,8 @@ public class ATLExampleTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			return new QVTrCompilerChain(txURI, intermediateFileNamePrefixURI, options);
+		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+			return new QVTrCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI, options);
 		}
 
 		@Override

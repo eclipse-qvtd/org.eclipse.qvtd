@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -33,8 +34,8 @@ import com.google.common.collect.Lists;
 public class QVTcMainTab extends QVTDirectionalMainTab<Transformation>
 {
 	@Override
-	protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull CompilerOptions options) {
-		return new QVTcCompilerChain(txURI, txURI, options);
+	protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull CompilerOptions options) {
+		return new QVTcCompilerChain(projectManager, txURI, txURI, options);
 	}
 
 	@Override

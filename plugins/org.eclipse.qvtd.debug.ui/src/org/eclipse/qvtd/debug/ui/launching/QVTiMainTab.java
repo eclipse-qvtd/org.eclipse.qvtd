@@ -17,6 +17,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTiCompilerChain;
@@ -37,8 +38,8 @@ import com.google.common.collect.Lists;
 public class QVTiMainTab extends MainTab<Transformation> implements QVTiLaunchConstants
 {
 	@Override
-	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull CompilerOptions compilerOptions) {
-		return new QVTiCompilerChain(txURI, txURI, compilerOptions);
+	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull CompilerOptions compilerOptions) {
+		return new QVTiCompilerChain(projectManager, txURI, txURI, compilerOptions);
 	}
 
 	@Override

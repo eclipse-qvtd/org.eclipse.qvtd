@@ -125,7 +125,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	 */
 	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @NonNull CompilerOptions options,
 			@NonNull URI oclDocURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
-		super(oclDocURI, intermediateFileNamePrefixURI, options);
+		super(qvti.getProjectManager(), oclDocURI, intermediateFileNamePrefixURI, options);
 		this.ocl2qvtmCompilerStep = new OCL2QVTmCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);
 	}
 

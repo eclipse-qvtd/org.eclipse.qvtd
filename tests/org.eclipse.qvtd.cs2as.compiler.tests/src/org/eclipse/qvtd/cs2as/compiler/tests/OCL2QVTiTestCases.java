@@ -93,7 +93,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
 			try {
 				return new OCL2QVTiCompilerChain(this, createCompilerOptions(), txURI, getTestURIWithExtension(txURI, null));
 			} catch (CompilerChainException e) {

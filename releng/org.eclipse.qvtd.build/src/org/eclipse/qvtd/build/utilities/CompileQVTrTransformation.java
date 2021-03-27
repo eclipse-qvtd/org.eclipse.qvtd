@@ -59,8 +59,8 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		}
 
 		@Override
-		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			QVTrCompilerChain compilerChain = new QVTrCompilerChain(txURI, intermediateFileNamePrefixURI, options);
+		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+			QVTrCompilerChain compilerChain = new QVTrCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI, options);
 			compilerChain.addListener(new Listener()
 			{
 				@Override

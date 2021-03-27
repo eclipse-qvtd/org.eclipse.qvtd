@@ -57,8 +57,8 @@ public class UMLXCompilerTests extends LoadTestCase
 	{
 		protected class InstrumentedCompilerChain extends UMLXCompilerChain
 		{
-			protected InstrumentedCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @Nullable CompilerOptions options) {
-				super(txURI, intermediateFileNamePrefixURI, options);
+			protected InstrumentedCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @Nullable CompilerOptions options) {
+				super(projectManager, txURI, intermediateFileNamePrefixURI, options);
 			}
 
 			@Override
@@ -85,8 +85,8 @@ public class UMLXCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull UMLXCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			return new InstrumentedCompilerChain(txURI, intermediateFileNamePrefixURI, options);
+		protected @NonNull UMLXCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+			return new InstrumentedCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI, options);
 		}
 
 		@Override

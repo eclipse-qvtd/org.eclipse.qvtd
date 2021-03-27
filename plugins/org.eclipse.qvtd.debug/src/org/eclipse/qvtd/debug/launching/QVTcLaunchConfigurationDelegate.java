@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
@@ -83,7 +84,7 @@ public class QVTcLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 				return false;
 			}
 		}
-		CompilerChain compilerChain = new QVTcCompilerChain(txURI, txURI, compilerOptions);
+		CompilerChain compilerChain = new QVTcCompilerChain(ProjectManager.CLASS_PATH, txURI, txURI, compilerOptions);
 		try {
 			if (interpreted) {
 				compilerChain.compile(typedModelsConfigurations);

@@ -14,6 +14,7 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
@@ -43,8 +44,8 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 
 	protected final @NonNull Xtext2QVTiCompilerStep xtext2qvtiCompilerStep;
 
-	public QVTiCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-		super(txURI, intermediateFileNamePrefixURI, options);
+	public QVTiCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		super(projectManager, txURI, intermediateFileNamePrefixURI, options);
 		this.xtext2qvtiCompilerStep = createXtext2QVTiCompilerStep();
 	}
 

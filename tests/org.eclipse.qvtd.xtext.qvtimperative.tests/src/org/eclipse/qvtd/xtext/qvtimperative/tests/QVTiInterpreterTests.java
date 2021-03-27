@@ -74,8 +74,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			return new QVTiCompilerChain(txURI, intermediateFileNamePrefixURI/*getTestURIWithExtension(txURI, null)*/, createCompilerOptions());
+		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+			return new QVTiCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI/*getTestURIWithExtension(txURI, null)*/, createCompilerOptions());
 		}
 
 		@Override

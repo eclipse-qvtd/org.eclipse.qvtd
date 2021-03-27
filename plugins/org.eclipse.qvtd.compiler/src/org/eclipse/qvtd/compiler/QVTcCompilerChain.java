@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
@@ -56,8 +57,8 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 
 	protected final @NonNull Xtext2QVTcCompilerStep xtext2qvtcCompilerStep;
 
-	public QVTcCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-		super(txURI, intermediateFileNamePrefixURI, options);
+	public QVTcCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		super(projectManager, txURI, intermediateFileNamePrefixURI, options);
 		this.xtext2qvtcCompilerStep = createXtext2QVTcCompilerStep();
 	}
 

@@ -14,6 +14,7 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -61,8 +62,8 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 
 	protected final @NonNull UMLX2QVTrCompilerStep umlx2qvtrCompilerStep;
 
-	public UMLXCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-		super(txURI, intermediateFileNamePrefixURI, options);
+	public UMLXCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		super(projectManager, txURI, intermediateFileNamePrefixURI, options);
 		this.umlx2qvtrCompilerStep = createUMLX2QVTrCompilerStep();
 	}
 

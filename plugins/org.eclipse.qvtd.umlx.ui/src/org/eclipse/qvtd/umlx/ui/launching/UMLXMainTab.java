@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
@@ -46,9 +47,9 @@ import com.google.common.collect.Lists;
 public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 {
 	@Override
-	protected @NonNull CompilerChain createCompilerChain(@NonNull URI txURI, @NonNull CompilerOptions compilerOptions) {
+	protected @NonNull CompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull CompilerOptions compilerOptions) {
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
-		return new UMLXCompilerChain(txURI, txURI, compilerOptions);
+		return new UMLXCompilerChain(projectManager, txURI, txURI, compilerOptions);
 	}
 
 	private void gatherOutputModels(@NonNull List<TxTypedModelNode> outputModels, @NonNull TxTypedModelNode typedModel) {

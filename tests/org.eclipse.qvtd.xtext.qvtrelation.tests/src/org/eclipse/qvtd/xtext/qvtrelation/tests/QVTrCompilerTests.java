@@ -111,8 +111,8 @@ public class QVTrCompilerTests extends LoadTestCase
 	{
 		protected class InstrumentedCompilerChain extends QVTrCompilerChain
 		{
-			protected InstrumentedCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-				super(txURI, intermediateFileNamePrefixURI, options);
+			protected InstrumentedCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+				super(projectManager, txURI, intermediateFileNamePrefixURI, options);
 			}
 
 			@Override
@@ -175,8 +175,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			return new InstrumentedCompilerChain(txURI, intermediateFileNamePrefixURI, options);
+		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+			return new InstrumentedCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI, options);
 		}
 
 		@Override

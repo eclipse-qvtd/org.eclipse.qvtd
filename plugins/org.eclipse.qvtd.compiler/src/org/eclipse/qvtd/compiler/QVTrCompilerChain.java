@@ -444,8 +444,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	protected final @NonNull CreateGenModelCompilerStep createGenModelCompilerStep;
 	protected final @NonNull GenModelGenerateCompilerStep genmodelGenerateCompilerStep;
 
-	public QVTrCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-		super(txURI, intermediateFileNamePrefixURI, options);
+	public QVTrCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		super(projectManager, txURI, intermediateFileNamePrefixURI, options);
 		this.xtext2qvtrCompilerStep = createXtext2QVTrCompilerStep();
 		this.qvtr2qvtsCompilerStep = createQVTr2QVTsCompilerStep();
 		this.createGenModelCompilerStep = createCreateGenModelCompilerStepStep();

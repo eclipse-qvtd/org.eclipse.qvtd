@@ -376,7 +376,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return classpath;
 	}
 
-	protected abstract @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
+	protected abstract @NonNull AbstractCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
 			@NonNull CompilerOptions options);
 
 	protected @NonNull DefaultCompilerOptions createCompilerChainOptions() {
@@ -480,7 +480,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull TypedModelsConfigurations typedModelsConfigurations,
 			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws Exception {
-		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
+		compilerChain = createCompilerChain(getTestProjectManager(), txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
@@ -492,7 +492,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected <EF extends EnvironmentFactoryInternal> @NonNull ImperativeTransformation doCompile(@NonNull EnvironmentThreadFactory<@NonNull EF> environmentThreadFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
 			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull CompilerOptions options) throws Exception {
-		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
+		compilerChain = createCompilerChain(getTestProjectManager(), txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation transformation = compilerChain.compile(typedModelsConfigurations);
 		URI txASURI = transformation.eResource().getURI();
 		if (txASURI != null) {

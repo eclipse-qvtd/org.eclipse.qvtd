@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaSourceFileObject;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
@@ -164,7 +165,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, JAVA_STEP);
 		}
 
-		protected @NonNull JavaResult execute(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
+		protected @NonNull JavaResult execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
 			ResourceSet resourceSet = environmentFactory.getResourceSet();
 			URI javaFileURI = compilerChain.getURI(JAVA_STEP, URI_KEY);
 			URI classFileURI = compilerChain.getURI(CLASS_STEP, URI_KEY);
@@ -332,6 +333,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return step2fileExtension.get(key);
 	}
 
+	protected final @NonNull ProjectManager projectManager;
+
 	/**
 	 * The compilation chain options are potentially 3-layered. The outer layer is indexed by the
 	 * compilation step output such as QVTI_KEY. The next layer is indexed by the role such as VALIDATE_KEY.
@@ -360,7 +363,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	protected final @NonNull QVTs2QVTiCompilerStep qvts2qvtiCompilerStep;
 	protected final @NonNull QVTi2JavaCompilerStep qvti2javaCompilerStep;
 
-	protected AbstractCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+	protected AbstractCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		this.projectManager = projectManager;
 		this.txURI = txURI;
 		this.intermediateFileNamePrefixURI = intermediateFileNamePrefixURI;
 		this.options = options;
@@ -461,8 +465,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	public void dispose() {}
 
 	public @NonNull Class<? extends Transformer> generate(@NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
-		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
-		JavaResult javaResult = qvti2java(environmentFactory, asTransformation, genModelFiles);
+		JavaResult javaResult = qvti2java(asTransformation, genModelFiles);
 		return java2class(javaResult);
 	}
 
@@ -511,7 +514,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return qvtu2qvtmCompilerStep.execute(environmentFactory, uResource);
 	}
 
-	protected @NonNull JavaResult qvti2java(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
+	protected @NonNull JavaResult qvti2java(@NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
+		QVTbaseEnvironmentFactory environmentFactory = qvti2javaCompilerStep.getEnvironmentFactory();
 		return qvti2javaCompilerStep.execute(environmentFactory, txURI, iTransformation, genModelFiles);
 	}
 
