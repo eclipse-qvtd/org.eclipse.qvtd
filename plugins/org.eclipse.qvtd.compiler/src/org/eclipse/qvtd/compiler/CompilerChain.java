@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
@@ -82,7 +83,8 @@ public interface CompilerChain
 	CompilerOptions.@Nullable StepOptions basicGetOptions(@NonNull String stepKey);
 	@Nullable URI basicGetURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey);
 	@NonNull Class<? extends Transformer> build(@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception;
-	@NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException;
+	@NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception;
+	AbstractEnvironmentThread.@NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compile2(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception;
 	void compiled(@NonNull String stepKey, @NonNull Object object);
 	//	@NonNull Resource createResource(@NonNull URI uri, @NonNull String contentType) throws IOException;
 	void dispose();

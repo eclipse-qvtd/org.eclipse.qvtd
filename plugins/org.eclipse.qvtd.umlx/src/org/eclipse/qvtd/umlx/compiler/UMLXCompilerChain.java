@@ -68,10 +68,9 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-		QVTimperativeEnvironmentFactory environmentFactory = umlx2qvtrCompilerStep.getEnvironmentFactory();
-		Resource rResource = umlx2qvtrCompilerStep.execute(environmentFactory, txURI);
-		return qvtr2qvti(environmentFactory, rResource, typedModelsConfigurations);
+	protected @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+		Resource qvtrResource = umlx2qvtrCompilerStep.execute(environmentFactory, txURI);
+		return qvtr2qvti(environmentFactory, qvtrResource, typedModelsConfigurations);
 	}
 
 	protected @NonNull UMLX2QVTrCompilerStep createUMLX2QVTrCompilerStep() {

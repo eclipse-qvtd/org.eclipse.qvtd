@@ -53,6 +53,8 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
@@ -69,6 +71,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFa
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.EnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentStrategy;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -452,9 +455,28 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		this.genmodelGenerateCompilerStep = createGenModelGenerateCompilerStep();
 	}
 
+	//	@Override
+	//	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+	//		QVTbaseEnvironmentFactory environmentFactory = xtext2qvtrCompilerStep.getEnvironmentFactory();
+	//		Resource qvtrResource = xtext2qvtrCompilerStep.execute(environmentFactory, txURI);
+	//		return qvtr2qvti(environmentFactory, qvtrResource, typedModelsConfigurations);
+	//	}
+
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-		QVTimperativeEnvironmentFactory environmentFactory = xtext2qvtrCompilerStep.getEnvironmentFactory();
+	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+		throw new UnsupportedOperationException();		// XXX
+		//		Resumable<@NonNull ImperativeTransformation, ?> compile2 = compile2(typedModelsConfigurations);
+		//		return compile2.getResult();
+	}
+
+	@Override
+	public @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compile2(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+		AbstractEnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(projectManager);
+		return compile3(environmentThreadFactory, typedModelsConfigurations);
+	}
+
+	@Override
+	protected @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		Resource qvtrResource = xtext2qvtrCompilerStep.execute(environmentFactory, txURI);
 		return qvtr2qvti(environmentFactory, qvtrResource, typedModelsConfigurations);
 	}
@@ -551,9 +573,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull Class<? extends Transformer> generate(@NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
-		QVTimperativeEnvironmentFactory environmentFactory = genmodelGenerateCompilerStep.getEnvironmentFactory();
+	protected @NonNull Class<? extends Transformer> generate(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
 		genmodelGenerateCompilerStep.execute(environmentFactory);
-		return super.generate(asTransformation, genModelFiles);
+		return super.generate(environmentFactory, asTransformation, genModelFiles);
 	}
 }

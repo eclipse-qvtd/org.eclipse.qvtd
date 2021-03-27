@@ -14,16 +14,19 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.resource.ProjectManager.IPackageDescriptor;
 import org.eclipse.qvtd.compiler.CompilerChain;
@@ -184,6 +187,9 @@ public class UMLXCompilerTests extends LoadTestCase
 	//	myQVT1.configureGeneratedPackage(EcorePackage.eNS_URI);
 	//	myQVT1.configureGeneratedPackage(PivotPackage.eNS_URI);
 	//	myQVT1.configureGeneratedPackage(OCLstdlibPackage.eNS_URI);
+		myQVT1.configureGeneratedPackage(EcorePackage.eNS_URI);
+		myQVT1.configureGeneratedPackage(PivotPackage.eNS_URI);
+		myQVT1.configureGeneratedPackage(OCLstdlibPackage.eNS_URI);
 		try {
 			txClass = myQVT1.buildTransformation("reverse", false);
 			myQVT1.assertRegionCount(RuleRegionImpl.class, 1);

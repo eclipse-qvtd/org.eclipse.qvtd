@@ -36,7 +36,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -76,7 +76,7 @@ public class UMLXSerializeTests extends LoadTestCase
 		return QVTbase.newInstance(getTestProjectManager(), null);
 	}
 
-	public @NonNull Resumable<@NonNull Resource, ?>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+	public @NonNull EnvironmentThreadResult<@NonNull Resource, ?>  doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
 		QVTrelationEnvironmentThreadFactory environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(getTestProjectManager())
 		{
 			@Override
@@ -95,7 +95,7 @@ public class UMLXSerializeTests extends LoadTestCase
 	}
 
 	protected void doLoadTest(URI inputURI, URI pivotURI, URI umlxURI) throws Exception {
-		Resumable<@NonNull Resource, ?> loadThread = doLoad_Concrete(inputURI, pivotURI, null, null);
+		EnvironmentThreadResult<@NonNull Resource, ?> loadThread = doLoad_Concrete(inputURI, pivotURI, null, null);
 		Resource qvtrResource = loadThread.getResult();
 		Resource umlxResource = qvtrResource.getResourceSet().createResource(umlxURI);
 		QVTr2UMLX qvtr2umlx = new QVTr2UMLX(loadThread.getEnvironmentFactory(), qvtrResource, umlxResource);
@@ -115,7 +115,7 @@ public class UMLXSerializeTests extends LoadTestCase
 		URI pivotURI2 = getTestURI(stem + ".regenerated.qvtras");
 
 
-		Resumable<@NonNull Resource, ?> qvtr2umlxResumable1 = doLoad_Concrete(inputURI1, pivotURI1, null, null);
+		EnvironmentThreadResult<@NonNull Resource, ?> qvtr2umlxResumable1 = doLoad_Concrete(inputURI1, pivotURI1, null, null);
 		Resource qvtrResource1 = qvtr2umlxResumable1.getResult();
 
 		URIConverter uriConverter = qvtr2umlxResumable1.getEnvironmentFactory().getResourceSet().getURIConverter();
@@ -147,7 +147,7 @@ public class UMLXSerializeTests extends LoadTestCase
 				return qvtrResource2;
 			}
 		};
-		Resumable<@NonNull Resource, ?> umlx2qvtrResumable2 = umlx2qvtrThread2.syncStart();
+		EnvironmentThreadResult<@NonNull Resource, ?> umlx2qvtrResumable2 = umlx2qvtrThread2.syncStart();
 		Resource qvtrResource2 = umlx2qvtrResumable2.getResult();
 		//
 		Model asModel1 = PivotUtil.getModel(qvtrResource1);

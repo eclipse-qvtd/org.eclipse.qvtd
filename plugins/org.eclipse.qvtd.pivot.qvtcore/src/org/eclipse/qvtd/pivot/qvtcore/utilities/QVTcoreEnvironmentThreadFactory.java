@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes.Severity;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
@@ -31,8 +30,8 @@ public class QVTcoreEnvironmentThreadFactory extends AbstractEnvironmentThreadFa
 	}
 
 	@Override
-	public @NonNull OCLInternal createEnvironment(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
-		return QVTcore.newInstance(environmentFactory);
+	public @NonNull QVTcore createEnvironment(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
+		return new QVTcore(environmentFactory);
 	}
 
 	@Override

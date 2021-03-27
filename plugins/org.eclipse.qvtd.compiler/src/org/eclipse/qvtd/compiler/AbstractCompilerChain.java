@@ -36,10 +36,15 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaSourceFileObject;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadFactory;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
@@ -54,6 +59,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentStrategy;
@@ -410,7 +416,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	@Override
 	public @NonNull Class<? extends Transformer> build(@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull String ... genModelFiles) throws Exception {
 		ImperativeTransformation asTransformation = compile(typedModelsConfigurations);
-		return generate(asTransformation, genModelFiles);
+		//		return generate(PivotUtilInternal.getEnvironmentFactory(asTransformation), asTransformation, genModelFiles);		// XXX
+		throw new UnsupportedOperationException();
 	}
 
 	//	@Override
@@ -425,6 +432,34 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	//		typedModelsConfigurations.add(new TypedModelsConfiguration(outputName));
 	//		return compile(typedModelsConfigurations);
 	//	}
+
+	@Override
+	public @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compile2(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+		throw new UnsupportedOperationException();		// XXX
+	}
+
+	protected <@NonNull EF extends QVTimperativeEnvironmentFactory, O extends OCLInternal> @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, EF> compile3(@NonNull AbstractEnvironmentThreadFactory<EF> environmentThreadFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+		AbstractEnvironmentThread<@NonNull ImperativeTransformation, EF, ?> thread = new AbstractEnvironmentThread<@NonNull ImperativeTransformation, EF, O>("compile", environmentThreadFactory)
+		{
+			@Override
+			protected @NonNull EF createEnvironmentFactory() {
+				EF environmentFactory = super.createEnvironmentFactory();
+				configureGeneratedPackages(environmentFactory);
+				return environmentFactory;
+			}
+
+			@Override
+			protected @NonNull ImperativeTransformation runWithThrowable() throws Exception {
+				EF environmentFactory = getEnvironmentFactory();
+				ImperativeTransformation transformation = compile4(environmentFactory, typedModelsConfigurations);
+				syncSuspend(transformation);
+				return transformation;
+			}
+		};
+		return thread.syncStart();
+	}
+
+	protected abstract @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException;
 
 	@Override
 	public void compiled(@NonNull String stepKey, @NonNull Object object) {
@@ -463,8 +498,28 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	@Override
 	public void dispose() {}
 
-	public @NonNull Class<? extends Transformer> generate(@NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
-		JavaResult javaResult = qvti2java(asTransformation, genModelFiles);
+	public <@NonNull EF extends QVTimperativeEnvironmentFactory, O extends QVTbase> @NonNull Class<? extends Transformer> generate(final @NonNull AbstractEnvironmentThread<?, EF, O> compileThread, @NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
+		EnvironmentThreadFactory<@NonNull EF> environmentThreadFactory = compileThread.getEnvironmentThreadFactory();
+		AbstractEnvironmentThread<@NonNull Class<? extends Transformer>, ?, ?> thread = new AbstractEnvironmentThread<@NonNull Class<? extends Transformer>, @NonNull EF, O>("model-generate", environmentThreadFactory)
+		{
+			@Override
+			protected @NonNull EF createEnvironmentFactory() {
+				EF environmentFactory = compileThread.getEnvironmentFactory();
+				ThreadLocalExecutor.attachEnvironmentFactory(environmentFactory);
+				return environmentFactory;
+			}
+
+			@Override
+			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
+				EF environmentFactory = getEnvironmentFactory();
+				return generate(environmentFactory, asTransformation, genModelFiles);
+			}
+		};
+		return thread.syncExec();
+	}
+
+	protected @NonNull Class<? extends Transformer> generate(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
+		JavaResult javaResult = qvti2java(environmentFactory, asTransformation, genModelFiles);
 		return java2class(javaResult);
 	}
 
@@ -475,6 +530,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		assert environmentFactory != null;
 		// XXX	assert !"main".equals(Thread.currentThread().getName());
 		return (QVTimperativeEnvironmentFactory)environmentFactory;
+	}
+
+	protected @NonNull ProjectManager getProjectManager() {
+		return projectManager;
 	}
 
 	/*	@Override
@@ -513,8 +572,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return qvtu2qvtmCompilerStep.execute(environmentFactory, uResource);
 	}
 
-	protected @NonNull JavaResult qvti2java(@NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
-		QVTimperativeEnvironmentFactory environmentFactory = qvti2javaCompilerStep.getEnvironmentFactory();
+	protected @NonNull JavaResult qvti2java(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
 		return qvti2javaCompilerStep.execute(environmentFactory, txURI, iTransformation, genModelFiles);
 	}
 

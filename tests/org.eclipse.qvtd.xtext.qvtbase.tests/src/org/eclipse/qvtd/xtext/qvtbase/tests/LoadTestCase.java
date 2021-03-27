@@ -28,7 +28,7 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadFactory;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -63,7 +63,7 @@ public abstract class LoadTestCase extends XtextTestCase
 	//		return doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 	//	}
 
-	protected <@NonNull EF extends EnvironmentFactoryInternal> @NonNull Resumable<@NonNull Resource, EF> doLoad_Concrete(@NonNull EnvironmentThreadFactory<EF> environmentThreadFactory, @NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+	protected <@NonNull EF extends EnvironmentFactoryInternal> @NonNull EnvironmentThreadResult<@NonNull Resource, EF> doLoad_Concrete(@NonNull EnvironmentThreadFactory<EF> environmentThreadFactory, @NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
 		AbstractTestThread<@NonNull Resource, EF, @Nullable OCLInternal> loadThread = new AbstractTestThread<@NonNull Resource, EF, @Nullable OCLInternal>("Concrete-Syntax-Load", environmentThreadFactory)
 		{
 			@Override

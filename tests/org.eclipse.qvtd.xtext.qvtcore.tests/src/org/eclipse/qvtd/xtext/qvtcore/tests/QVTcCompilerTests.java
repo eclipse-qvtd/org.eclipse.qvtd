@@ -26,10 +26,11 @@ import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestFolder;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -105,13 +106,13 @@ public class QVTcCompilerTests extends LoadTestCase
 			return checkOutput(environmentThreadFactory, actualURI, expectedURI, normalizer);
 		}
 
-		public <EF extends EnvironmentFactoryInternal> @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Exception {
+		public @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compileTransformation(@NonNull String outputName) throws Exception {
 			SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
 			return compileTransformation(typedModelsConfigurations);
 		}
 
-		public @NonNull ImperativeTransformation compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
-			QVTcoreEnvironmentThreadFactory environmentThreadFactory = createQVTcoreEnvironmentThreadFactory();
+		public @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+			AbstractEnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory = createQVTcoreEnvironmentThreadFactory();
 			return compileTransformation(environmentThreadFactory, typedModelsConfigurations);
 		}
 
@@ -211,13 +212,16 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.loadEcoreFile(getModelsURI("families2persons/Persons.ecore"), PersonsPackage.eINSTANCE);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			ImperativeTransformation iTransformation = myQVT.compileTransformation("person");
+			EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = myQVT.compileTransformation("person");
+			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
 			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("family", inFile.getURI());
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("person", outURI);
 			myQVT.saveModels(null);
 			myQVT.checkOutput(outURI, refFile.getURI(), Families2PersonsNormalizer.INSTANCE);
+			//
+			compilationThreadResult.syncResume();
 		}
 		finally {
 			myQVT.dispose();
@@ -300,7 +304,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.loadEcoreFile(getModelsURI("forward2reverse/List2List.ecore"), List2listPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			ImperativeTransformation iTransformation = myQVT.compileTransformation("reverse");
+			EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = myQVT.compileTransformation("reverse");
+			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
 			//
 			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("forward", inFile0.getURI());
@@ -329,6 +334,8 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.addOutputURI("reverse", outURI3);
 			myQVT.saveModels(null);
 			myQVT.checkOutput(outURI3, refFile3.getURI(), Forward2ReverseNormalizer.INSTANCE);
+			//
+			compilationThreadResult.syncResume();
 		}
 		finally {
 			myQVT.dispose();
@@ -416,13 +423,16 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.loadEcoreFile(getTestFileURI("HSLTree.ecore"), HSLTreePackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			ImperativeTransformation iTransformation = myQVT.compileTransformation("hsl");
+			EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = myQVT.compileTransformation("hsl");
+			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
 			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("hsv", inFile.getURI());
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("hsl", outURI);
 			myQVT.saveModels(null);
 			myQVT.checkOutput(outURI, refFile.getURI(), HSV2HSLNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
+			//
+			compilationThreadResult.syncResume();
 		}
 		finally {
 			myQVT.dispose();
@@ -475,7 +485,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		myQVT.loadEcoreFile(getModelsURI("uml2rdbms/SimpleRDBMS.ecore"), SimplerdbmsPackage.eINSTANCE);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			ImperativeTransformation iTransformation = myQVT.compileTransformation("rdbms");
+			EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = myQVT.compileTransformation("rdbms");
+			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
 			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("uml", getModelsURI("uml2rdbms/samples/SimplerUMLPeople.xmi"));
 			myQVT.executeTransformation();
@@ -496,6 +507,8 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.addOutputURI("rdbms", getTestURI("SimpleRDBMSPeople_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("SimpleRDBMSPeople_Interpreted.xmi"), getModelsURI("uml2rdbms/samples/SimpleRDBMSPeople_expected.xmi"), SimpleRDBMSNormalizer.INSTANCE);
+			//
+			compilationThreadResult.syncResume();
 		}
 		finally {
 			myQVT.dispose();
@@ -649,13 +662,16 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = createQVT("Upper2Lower", getModelsURI("upper2lower/Upper2Lower.qvtcas"));
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			ImperativeTransformation iTransformation = myQVT.compileTransformation("lowerGraph");
+			EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = myQVT.compileTransformation("lowerGraph");
+			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
 			myQVT.createInterpretedExecutor(iTransformation);
 			myQVT.addInputURI("upperGraph", getModelsURI("upper2lower/samples/SimpleGraph.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("lowerGraph", getTestURI("SimpleGraphLower_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("SimpleGraphLower_Interpreted.xmi"), getModelsURI("upper2lower/samples/SimpleGraphLower_expected.xmi"), Upper2LowerNormalizer.INSTANCE);
+			//
+			compilationThreadResult.syncResume();
 		}
 		finally {
 			myQVT.dispose();

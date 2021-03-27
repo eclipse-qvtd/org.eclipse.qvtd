@@ -55,6 +55,11 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 		return xtext2qvtiCompilerStep.execute(environmentFactory, txURI);
 	}
 
+	@Override
+	protected @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+		return xtext2qvtiCompilerStep.execute(environmentFactory, txURI);
+	}
+
 	protected @NonNull Xtext2QVTiCompilerStep createXtext2QVTiCompilerStep() {
 		return new Xtext2QVTiCompilerStep(this);
 	}

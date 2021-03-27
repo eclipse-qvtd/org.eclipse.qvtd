@@ -296,6 +296,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 
 	public BasicQVTiExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) {
 		super(environmentFactory);
+		//	super((EnvironmentFactoryInternalExtension) /*environmentFactory*/ThreadLocalExecutor.getEnvironmentFactory());
+		//	QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 		this.entryPoint = entryPoint;
 		this.modeFactory = modeFactory;
 		this.transformation = QVTimperativeUtil.getContainingTransformation(entryPoint);

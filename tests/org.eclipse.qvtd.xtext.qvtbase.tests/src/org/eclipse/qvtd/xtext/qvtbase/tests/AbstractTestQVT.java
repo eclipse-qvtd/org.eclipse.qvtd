@@ -52,7 +52,9 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotEnvironmentThreadFactory;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadFactory;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
@@ -354,7 +356,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	//		return compileTransformation(environmentThreadFactory, typedModelsConfigurations);
 	//	}
 
-	public <@NonNull EF extends EnvironmentFactoryInternal> @NonNull ImperativeTransformation compileTransformation(@NonNull EnvironmentThreadFactory<EF> environmentThreadFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+	public @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compileTransformation(@NonNull EnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
 		return doCompile(environmentThreadFactory, txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, createCompilerChainOptions());
 	}
 
@@ -449,7 +451,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
-		return new BasicQVTiExecutor(getEnvironmentFactory(), QVTimperativeUtil.getDefaultEntryPoint(transformation), ModeFactory.LAZY);
+		return new BasicQVTiExecutor(getEnvironmentFactory(), QVTimperativeUtil.getDefaultEntryPoint(transformation), ModeFactory.LAZY);	// XXX redundant argument
 	}
 
 	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) throws Exception {
@@ -482,19 +484,24 @@ public abstract class AbstractTestQVT extends QVTimperative
 	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull TypedModelsConfigurations typedModelsConfigurations,
 			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws Exception {
 		compilerChain = createCompilerChain(getTestProjectManager(), txURI, intermediateFileNamePrefixURI, options);
-		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
+		EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = compilerChain.compile2(typedModelsConfigurations);
+		ImperativeTransformation asTransformation = compilationThreadResult.getResult();
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
 			URI asURIstem = asURI.trimFileExtension();
 			doSerialize(asURI, asURIstem.appendFileExtension("serialized.qvti"));
 		}
-		return compilerChain.generate(asTransformation, genModelFiles);
+		AbstractEnvironmentThread<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory, QVTbase> thread = (AbstractEnvironmentThread<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory, QVTbase>) compilationThreadResult.getThread();	// XXX
+		Class<? extends Transformer> generatedClass = compilerChain.generate(thread, asTransformation, genModelFiles);
+		compilationThreadResult.syncResume();
+		return generatedClass;
 	}
 
-	protected <EF extends EnvironmentFactoryInternal> @NonNull ImperativeTransformation doCompile(@NonNull EnvironmentThreadFactory<@NonNull EF> environmentThreadFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
+	protected @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> doCompile(@NonNull EnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
 			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull CompilerOptions options) throws Exception {
 		compilerChain = createCompilerChain(getTestProjectManager(), txURI, intermediateFileNamePrefixURI, options);
-		ImperativeTransformation transformation = compilerChain.compile(typedModelsConfigurations);
+		EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compilationThreadResult = compilerChain.compile2(typedModelsConfigurations);
+		ImperativeTransformation transformation = compilationThreadResult.getResult();
 		URI txASURI = transformation.eResource().getURI();
 		if (txASURI != null) {
 			URI inputURI = txASURI;
@@ -503,7 +510,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			doSerialize(inputURI, serializedURI);
 			doScheduleLoadCheck(environmentThreadFactory, asURIstem.appendFileExtension(QVTbaseUtil.QVTSAS_FILE_EXTENSION));
 		}
-		return transformation;
+		return compilationThreadResult;
 	}
 
 	private void doScheduleLoadCheck(@NonNull EnvironmentThreadFactory<?> environmentThreadFactory2, @NonNull URI uri) throws Exception {

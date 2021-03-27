@@ -21,7 +21,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
@@ -39,7 +39,7 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class QVTcSerializeTests extends LoadTestCase
 {
-	public @NonNull Resumable<@NonNull Resource, ?> doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
+	public @NonNull EnvironmentThreadResult<@NonNull Resource, ?> doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages, StatusCodes.@Nullable Severity severity) throws Exception {
 		QVTcoreEnvironmentThreadFactory environmentThreadFactory = createQVTcoreEnvironmentThreadFactory();
 		if (severity != null) {
 			environmentThreadFactory.setSeverity(severity);
@@ -58,7 +58,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		//	QVTcore ocl2 = QVTcore.newInstance(projectManager);
 		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true, null);
-		Resumable<@NonNull Resource, ?> loadThread = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
+		EnvironmentThreadResult<@NonNull Resource, ?> loadThread = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
 		Resource asResource3 = loadThread.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
@@ -75,12 +75,12 @@ public class QVTcSerializeTests extends LoadTestCase
 		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtcas");
 		//	ProjectManager projectManager = getTestProjectManager();
 		//	QVTcore ocl1 = QVTcore.newInstance(projectManager);
-		Resumable<@NonNull Resource, ?> loadThread1 = doLoad_Concrete(inputURI, pivotURI, NO_MESSAGES, null);
+		EnvironmentThreadResult<@NonNull Resource, ?> loadThread1 = doLoad_Concrete(inputURI, pivotURI, NO_MESSAGES, null);
 		Resource asResource1 = loadThread1.getResult();
 		//	ocl1.deactivate();
 		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true, null);
 		//	QVTcore ocl2 = QVTcore.newInstance(projectManager);
-		Resumable<@NonNull Resource, ?> loadThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
+		EnvironmentThreadResult<@NonNull Resource, ?> loadThread3 = doLoad_Concrete(serializedInputURI, serializedPivotURI, NO_MESSAGES, null);
 		Resource asResource3 = loadThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);

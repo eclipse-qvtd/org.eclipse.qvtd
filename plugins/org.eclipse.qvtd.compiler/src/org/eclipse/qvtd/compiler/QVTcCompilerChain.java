@@ -72,6 +72,15 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 		return qvtm2qvti(environmentFactory, pResource, typedModelsConfiguration);
 	}
 
+	@Override
+	protected @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+		Resource qvtccResource = xtext2qvtcCompilerStep.execute(environmentFactory, txURI);
+		TypedModelsConfiguration typedModelsConfiguration = typedModelsConfigurations.iterator().next();	// FIXME multi-direction
+		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, typedModelsConfiguration);
+		Resource qvtmResource = qvtc2qvtm(environmentFactory, qvtccResource, typedModelsConfiguration);
+		return qvtm2qvti(environmentFactory, qvtmResource, typedModelsConfiguration);
+	}
+
 	protected @NonNull Xtext2QVTcCompilerStep createXtext2QVTcCompilerStep() {
 		return new Xtext2QVTcCompilerStep(this);
 	}

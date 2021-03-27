@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -32,7 +32,7 @@ public class QVTiEditorTests extends LoadTestCase
 		if (severity != null) {
 			environmentThreadFactory.setSeverity(severity);
 		}
-		Resumable<@NonNull Resource, ?> resumable = doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
+		EnvironmentThreadResult<@NonNull Resource, ?> resumable = doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
 		resumable.syncResume();
 	}
 
