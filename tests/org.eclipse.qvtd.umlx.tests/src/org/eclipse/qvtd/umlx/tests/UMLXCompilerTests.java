@@ -21,9 +21,11 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
+import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.resource.ProjectManager.IPackageDescriptor;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -82,6 +84,14 @@ public class UMLXCompilerTests extends LoadTestCase
 		public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
 			QVTrelationEnvironmentThreadFactory environmentThreadFactory = createQVTrelationEnvironmentThreadFactory();
 			return checkOutput(environmentThreadFactory, actualURI, expectedURI, normalizer);
+		}
+
+		private void configureGeneratedPackage( /*@NonNull*/ String uriString) {
+			URI nsURI = URI.createURI(uriString);
+			IPackageDescriptor packageDescriptor = getProjectManager().getPackageDescriptor(nsURI);
+			if (packageDescriptor != null) {
+				packageDescriptor.configure(getResourceSet(), StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, null);
+			}
 		}
 
 		@Override
@@ -171,6 +181,9 @@ public class UMLXCompilerTests extends LoadTestCase
 		//		QVTr2QVTc.VARIABLES.setState(true);
 		Class<? extends Transformer> txClass;
 		MyQVT myQVT1 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.umlx"));
+	//	myQVT1.configureGeneratedPackage(EcorePackage.eNS_URI);
+	//	myQVT1.configureGeneratedPackage(PivotPackage.eNS_URI);
+	//	myQVT1.configureGeneratedPackage(OCLstdlibPackage.eNS_URI);
 		try {
 			txClass = myQVT1.buildTransformation("reverse", false);
 			myQVT1.assertRegionCount(RuleRegionImpl.class, 1);

@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.EntryPointsAnalysisInterface;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -46,7 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  * - the source types of allInstances() calls
  * - cache indexes of MiddleSetStatement/MiddlePropertyCallExp
  */
-public class EntryPointsAnalysis
+public class EntryPointsAnalysis implements EntryPointsAnalysisInterface
 {
 	protected final @NonNull EnvironmentFactoryInternal environmentFactory;
 	protected final @NonNull ImperativeTransformation transformation;

@@ -298,7 +298,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		this.entryPoint = entryPoint;
 		this.modeFactory = modeFactory;
 		this.transformation = QVTimperativeUtil.getContainingTransformation(entryPoint);
-		this.entryPointsAnalysis = environmentFactory.createEntryPointsAnalysis(transformation);
+		this.entryPointsAnalysis = (EntryPointsAnalysis)environmentFactory.createEntryPointsAnalysis(transformation);
 		entryPointsAnalysis.analyzeTransformation();
 		this.entryPointAnalysis = entryPointsAnalysis.getEntryPointAnalysis(entryPoint);
 		if (modeFactory.isLazy()) {
@@ -310,7 +310,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			this.objectManager = new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
 		}
 		objectManager.addSpeculatedEAttributes(entryPointAnalysis.getSpeculatedEAttributes());
-		this.modelsManager = environmentFactory.createModelsManager(entryPointAnalysis);
+		this.modelsManager = (QVTiModelsManager)environmentFactory.createModelsManager(entryPointAnalysis);
 		Interval rootInterval = invocationManager.getRootInterval();
 		//		ModeFactory modeFactory = ModeFactory.NON_INCREMENTAL;// getModeFactory();
 		for (@NonNull TypedModelInstance model : modelsManager.getTypedModelInstances()) {

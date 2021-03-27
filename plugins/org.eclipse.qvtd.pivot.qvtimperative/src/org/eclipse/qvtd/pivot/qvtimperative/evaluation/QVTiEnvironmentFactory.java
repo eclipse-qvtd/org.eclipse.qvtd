@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.FlowAnalysis;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
@@ -29,38 +30,36 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 	private static class QVTiCreateStrategy extends CreateStrategy
 	{
 		@Override
+		public @NonNull EntryPointsAnalysisInterface createEntryPointsAnalysis(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+			return new EntryPointsAnalysis(environmentFactory, (ImperativeTransformation)transformation);
+		}
+
+		@Override
+		public @NonNull FlowAnalysis createFlowAnalysis(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression) {
+			return new QVTimperativeFlowAnalysis(environmentFactory, contextExpression);
+		}
+
+		@Override
+		public @NonNull QVTiModelsManager createModelsManager(@NonNull EntryPointAnalysisInterface entryPointAnalysis) {
+			return new QVTiModelsManager((EntryPointAnalysis)entryPointAnalysis);
+		}
+
+		@Override
 		public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
 				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 			return new QVTimperativeTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
+		}
+
+		@Override
+		public @NonNull String getDefaultStandardLibraryURI() {
+			return QVTimperativeLibrary.STDLIB_URI;
 		}
 	}
 
 	public static final @NonNull CreateStrategy CREATE_STRATEGY = new QVTiCreateStrategy();
 
+	@Deprecated /* @deprecated Use QVTbaseEnvironmentFactory */
 	public QVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 		super(projectMap, externalResourceSet, CREATE_STRATEGY);
-		getStandardLibrary().setDefaultStandardLibraryURI(QVTimperativeLibrary.STDLIB_URI);
-	}
-
-	public @NonNull EntryPointsAnalysis createEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
-		return new EntryPointsAnalysis(this, transformation);
-	}
-
-	//	@Override
-	//	public @NonNull BasicOCLExecutor createExecutor( @NonNull ModelManager modelManager) {
-	//		return new BasicOCLExecutor(this, modelManager);		// Inherited functionality used for validation
-	//	}
-
-	public @NonNull QVTiModelsManager createModelsManager(@NonNull EntryPointAnalysis entryPointAnalysis) {
-		return new QVTiModelsManager(entryPointAnalysis);
-	}
-
-	@Override
-	public @NonNull FlowAnalysis createFlowAnalysis(@NonNull OCLExpression contextExpression) {
-		return new QVTimperativeFlowAnalysis(this, contextExpression);
-	}
-
-	public boolean keepDebug() {
-		return false;
 	}
 }

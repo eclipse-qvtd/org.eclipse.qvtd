@@ -26,25 +26,26 @@ public class QVTrEnvironmentFactory extends QVTbaseEnvironmentFactory
 	private static class QVTrCreateStrategy extends CreateStrategy
 	{
 		@Override
+		public @NonNull FlowAnalysis createFlowAnalysis(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression) {
+			return new QVTrelationFlowAnalysis(environmentFactory, contextExpression);
+		}
+
+		@Override
 		public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
 				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 			return new QVTrelationTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
+		}
+
+		@Override
+		public @NonNull String getDefaultStandardLibraryURI() {
+			return QVTruntimeLibrary.STDLIB_URI;
 		}
 	}
 
 	public static final @NonNull CreateStrategy CREATE_STRATEGY = new QVTrCreateStrategy();
 
+	@Deprecated /* @deprecated Use QVTbaseEnvironmentFactory */
 	public QVTrEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 		super(projectMap, externalResourceSet, CREATE_STRATEGY);
-		getStandardLibrary().setDefaultStandardLibraryURI(QVTruntimeLibrary.STDLIB_URI);
-	}
-
-	@Override
-	public @NonNull FlowAnalysis createFlowAnalysis(@NonNull OCLExpression contextExpression) {
-		return new QVTrelationFlowAnalysis(this, contextExpression);
-	}
-
-	public boolean keepDebug() {
-		return false;
 	}
 }
