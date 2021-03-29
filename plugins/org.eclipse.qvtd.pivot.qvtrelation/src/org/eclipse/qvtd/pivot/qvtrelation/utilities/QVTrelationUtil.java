@@ -38,7 +38,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory.Strategy;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.EnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -420,7 +420,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static @NonNull RelationalTransformation loadTransformation(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+		EnvironmentStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrelationEnvironmentStrategy.INSTANCE);
 		try {
 			return (RelationalTransformation) loadTransformation(RelationModel.class, environmentFactory, transformationURI, keepDebug);
 		}
@@ -430,7 +430,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static @NonNull ASResource loadTransformations(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+		EnvironmentStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrelationEnvironmentStrategy.INSTANCE);
 		try {
 			return loadTransformations(RelationModel.class, environmentFactory, transformationURI, keepDebug);
 		}

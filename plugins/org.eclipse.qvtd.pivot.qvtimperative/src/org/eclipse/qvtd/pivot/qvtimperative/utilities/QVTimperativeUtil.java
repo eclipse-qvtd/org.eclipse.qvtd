@@ -53,8 +53,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory.Strategy;
 
 import com.google.common.collect.Iterables;
 
@@ -356,7 +354,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull ImperativeTransformation loadTransformation(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTiEnvironmentFactory.CREATE_STRATEGY);
+		EnvironmentStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTimperativeEnvironmentStrategy.INSTANCE);
 		try {
 			return (ImperativeTransformation) loadTransformation(ImperativeModel.class, environmentFactory, transformationURI, keepDebug);
 		}

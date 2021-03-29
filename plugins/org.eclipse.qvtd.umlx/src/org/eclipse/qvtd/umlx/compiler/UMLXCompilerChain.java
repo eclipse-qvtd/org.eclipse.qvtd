@@ -23,9 +23,9 @@ import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory.Strategy;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.EnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentStrategy;
 import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
 
 /**
@@ -42,7 +42,7 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 		}
 
 		public @NonNull Resource execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI umlxURI) throws IOException {
-			Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+			EnvironmentStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrelationEnvironmentStrategy.INSTANCE);
 			try {
 				Resource umlxResource = environmentFactory.getResourceSet().getResource(umlxURI, true);
 				if (umlxResource == null) {

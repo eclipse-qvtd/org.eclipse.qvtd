@@ -13,39 +13,13 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.internal.manager.FlowAnalysis;
-import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
-import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
 public class QVTrEnvironmentFactory extends QVTimperativeEnvironmentFactory
 {
-	private static class QVTrCreateStrategy extends Strategy
-	{
-		@Override
-		public @NonNull FlowAnalysis createFlowAnalysis(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression) {
-			return new QVTrelationFlowAnalysis(environmentFactory, contextExpression);
-		}
-
-		@Override
-		public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
-				@NonNull QVTimperativeEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
-			return new QVTrelationTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
-		}
-
-		@Override
-		public @NonNull String getDefaultStandardLibraryURI() {
-			return QVTruntimeLibrary.STDLIB_URI;
-		}
-	}
-
-	public static final @NonNull Strategy CREATE_STRATEGY = new QVTrCreateStrategy();
-
 	@Deprecated /* @deprecated Use QVTbaseEnvironmentFactory */
 	public QVTrEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
-		super(projectMap, externalResourceSet, CREATE_STRATEGY);
+		super(projectMap, externalResourceSet, QVTrelationEnvironmentStrategy.INSTANCE);
 	}
 }

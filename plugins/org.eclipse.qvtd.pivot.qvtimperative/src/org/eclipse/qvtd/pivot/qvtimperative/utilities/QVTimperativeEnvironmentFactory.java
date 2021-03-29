@@ -28,32 +28,10 @@ import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
 public class QVTimperativeEnvironmentFactory extends PivotEnvironmentFactory
 {
-	/**
-	 * Strategy provides the QVTc/QVTi/QVTr behavioral variation for a QVTimperativeEnvironmentFactory.
-	 * Derived QVTimperativeEnvironmentFactory are obsolete since the behaviour variaes from initially QVTc/QVTr to QVTi.
-	 */
-	public static abstract class Strategy
-	{
-		public @NonNull EntryPointsAnalysis createEntryPointsAnalysis(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
-			throw new UnsupportedOperationException(); // XXX
-		}
-
-		public @NonNull AbstractModelsManager createModelsManager(@NonNull EntryPointAnalysis entryPointAnalysis) {
-			throw new UnsupportedOperationException(); // XXX
-		}
-
-		public abstract @NonNull FlowAnalysis createFlowAnalysis(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression);
-
-		public abstract @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
-				@NonNull QVTimperativeEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue);
-
-		public abstract @NonNull String getDefaultStandardLibraryURI();
-	}
-
-	private @NonNull Strategy createStrategy;
+	private @NonNull EnvironmentStrategy createStrategy;
 
 	protected QVTimperativeEnvironmentFactory(@NonNull ProjectManager projectManager,
-			@Nullable ResourceSet externalResourceSet, @NonNull Strategy createStrategy) {
+			@Nullable ResourceSet externalResourceSet, @NonNull EnvironmentStrategy createStrategy) {
 		super(projectManager, externalResourceSet, null);
 		this.createStrategy = createStrategy;
 		String primaryStandardLibraryURI = QVTruntimeLibrary.STDLIB_URI;
@@ -84,7 +62,7 @@ public class QVTimperativeEnvironmentFactory extends PivotEnvironmentFactory
 		return createStrategy.createTemplateParameterSubstitutionVisitor(this, selfType, selfTypeValue);
 	}
 
-	public @NonNull Strategy getCreateStrategy() {
+	public @NonNull EnvironmentStrategy getCreateStrategy() {
 		return createStrategy;
 	}
 
@@ -92,8 +70,8 @@ public class QVTimperativeEnvironmentFactory extends PivotEnvironmentFactory
 		return false;
 	}
 
-	public @NonNull Strategy setCreateStrategy(@NonNull Strategy createStrategy) {
-		Strategy savedStrategy = this.createStrategy;
+	public @NonNull EnvironmentStrategy setCreateStrategy(@NonNull EnvironmentStrategy createStrategy) {
+		EnvironmentStrategy savedStrategy = this.createStrategy;
 		this.createStrategy = createStrategy;
 		return savedStrategy;
 	}

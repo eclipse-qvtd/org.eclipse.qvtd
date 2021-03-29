@@ -66,9 +66,9 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory.Strategy;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.EnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -119,7 +119,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		}
 
 		public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-			Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+			EnvironmentStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrelationEnvironmentStrategy.INSTANCE);
 			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
 			String s = typedModelsConfigurations.reconcile(asTransformation);
 			if (s != null) {
@@ -201,7 +201,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		}
 
 		public void execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource traceResource) throws IOException {
-			Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+			EnvironmentStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrelationEnvironmentStrategy.INSTANCE);
 			try {
 				//
 				//	Create and Save Ecore variant of Trace Model
