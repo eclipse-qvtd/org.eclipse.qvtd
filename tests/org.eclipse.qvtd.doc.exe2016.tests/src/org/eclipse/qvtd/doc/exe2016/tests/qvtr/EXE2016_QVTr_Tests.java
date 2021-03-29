@@ -12,7 +12,8 @@ package org.eclipse.qvtd.doc.exe2016.tests.qvtr;
 
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.junit.Test;
 
 /**
@@ -25,7 +26,7 @@ public class EXE2016_QVTr_Tests extends EXE2016_QVTr_AutomatedTests
 		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog(getName());
 		logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(ProjectManager.NO_PROJECTS, null, QVTimperativeEnvironmentStrategy.INSTANCE);
 		try {
 			int[] tests = PrintAndLog.getTestSizes();
 			for (int testSize : tests) {

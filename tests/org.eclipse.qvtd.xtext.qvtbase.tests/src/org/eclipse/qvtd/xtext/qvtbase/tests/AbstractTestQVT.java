@@ -66,21 +66,21 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -188,7 +188,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	private @Nullable String copyright = null;
 
 	public AbstractTestQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
-		super(new QVTiEnvironmentFactory(projectManager, null));
+		super(new QVTimperativeEnvironmentFactory(projectManager, null, QVTimperativeEnvironmentStrategy.INSTANCE));
 		assert testBundleURI.isPlatform();
 		this.testProject = testProject;
 		this.testBundleURI = testBundleURI;
@@ -546,8 +546,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		QVTiTestThread<@NonNull XtextResource> loadThread = new QVTiTestThread<@NonNull XtextResource>("Serialize-Load", getTestProjectManager())
 		{
 			@Override
-			protected @NonNull QVTiEnvironmentFactory createEnvironmentFactory() {
-				QVTiEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
+			protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+				QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
 				environmentFactory.setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
 				return environmentFactory;
 			}
@@ -555,7 +555,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			@Override
 			protected @NonNull XtextResource runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
 				XtextResource xtextResource = null;
-				QVTiEnvironmentFactory environmentFactory2 = getEnvironmentFactory();
+				QVTimperativeEnvironmentFactory environmentFactory2 = getEnvironmentFactory();
 				ASResource asResource = loadQVTiAS(environmentFactory2, inputURI);
 				LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
 				LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
@@ -583,7 +583,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		{
 			@Override
 			protected Object runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
-				QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+				QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 				ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(environmentFactory, serializedURI, false);
 				Resource asResource2 = asTransformation.eResource();
 				assert asResource2 != null;
@@ -604,24 +604,24 @@ public abstract class AbstractTestQVT extends QVTimperative
 	/**
 	 * A QVTcTestThread creates a QVTcore for use on a dedicated thread.
 	 */
-	public abstract static class QVTcTestThread<R> extends AbstractTestThread<R, @NonNull QVTcEnvironmentFactory, @Nullable QVTcore>
+	public abstract static class QVTcTestThread<R> extends AbstractTestThread<R, @NonNull QVTimperativeEnvironmentFactory, @Nullable QVTcore>
 	{
 		public QVTcTestThread(@NonNull String threadName, @NonNull ProjectManager projectManager) {
 			super(threadName, new QVTcoreEnvironmentThreadFactory(projectManager));
 		}
 
 		@Override
-		protected @NonNull QVTcEnvironmentFactory createEnvironmentFactory() {
-			return new QVTcEnvironmentFactory(getProjectManager(), null);
+		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+			return new QVTimperativeEnvironmentFactory(getProjectManager(), null, QVTcoreEnvironmentStrategy.INSTANCE);
 		}
 
 		@Override
-		protected @Nullable QVTcore createOCL(@NonNull QVTcEnvironmentFactory environmentFactory) {
+		protected @Nullable QVTcore createOCL(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
 			return new QVTcore(environmentFactory);
 		}
 
 		@Override
-		public @NonNull QVTcEnvironmentFactory getEnvironmentFactory() {
+		public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
 			return super.getEnvironmentFactory();
 		}
 
@@ -640,19 +640,19 @@ public abstract class AbstractTestQVT extends QVTimperative
 	/**
 	 * A QVTiTestThread creates a QVTimperative for use on a dedicated thread.
 	 */
-	public abstract static class QVTiTestThread<R> extends AbstractTestThread<R, @NonNull QVTiEnvironmentFactory, @Nullable QVTimperative>
+	public abstract static class QVTiTestThread<R> extends AbstractTestThread<R, @NonNull QVTimperativeEnvironmentFactory, @Nullable QVTimperative>
 	{
 		public QVTiTestThread(@NonNull String threadName, @NonNull ProjectManager projectManager) {
 			super(threadName, new QVTimperativeEnvironmentThreadFactory(projectManager));
 		}
 
 		@Override
-		protected @NonNull QVTiEnvironmentFactory createEnvironmentFactory() {
-			return new QVTiEnvironmentFactory(getProjectManager(), null);
+		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+			return new QVTimperativeEnvironmentFactory(getProjectManager(), null, QVTimperativeEnvironmentStrategy.INSTANCE);
 		}
 
 		@Override
-		protected @Nullable QVTimperative createOCL(@NonNull QVTiEnvironmentFactory environmentFactory) {
+		protected @Nullable QVTimperative createOCL(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
 			return new QVTimperative(environmentFactory);
 		}
 
@@ -676,19 +676,19 @@ public abstract class AbstractTestQVT extends QVTimperative
 	/**
 	 * A QVTrTestThread creates a QVTimperative for use on a dedicated thread.
 	 */
-	public abstract static class QVTrTestThread<R> extends AbstractTestThread<R, @NonNull QVTrEnvironmentFactory, @Nullable QVTrelation>
+	public abstract static class QVTrTestThread<R> extends AbstractTestThread<R, @NonNull QVTimperativeEnvironmentFactory, @Nullable QVTrelation>
 	{
 		public QVTrTestThread(@NonNull String threadName, @NonNull ProjectManager projectManager) {
 			super(threadName, new QVTrelationEnvironmentThreadFactory(projectManager));
 		}
 
 		@Override
-		protected @NonNull QVTrEnvironmentFactory createEnvironmentFactory() {
-			return new QVTrEnvironmentFactory(getProjectManager(), null);
+		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+			return new QVTimperativeEnvironmentFactory(getProjectManager(), null, QVTrelationEnvironmentStrategy.INSTANCE);
 		}
 
 		@Override
-		protected @Nullable QVTrelation createOCL(@NonNull QVTrEnvironmentFactory environmentFactory) {
+		protected @Nullable QVTrelation createOCL(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
 			return new QVTrelation(environmentFactory);
 		}
 

@@ -16,8 +16,9 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentStrategy;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 
 /**
@@ -31,7 +32,7 @@ public class QVTcDomainUsageTests extends AbstractDomainUsageTests
 	}
 
 	protected @NonNull MyQVT createQVT() throws Exception {
-		QVTcEnvironmentFactory myEnvironmentFactory = new QVTcEnvironmentFactory(getTestProjectManager(), null);
+		QVTimperativeEnvironmentFactory myEnvironmentFactory = new QVTimperativeEnvironmentFactory(getTestProjectManager(), null, QVTcoreEnvironmentStrategy.INSTANCE);
 		return new MyQVT(myEnvironmentFactory);
 	}
 

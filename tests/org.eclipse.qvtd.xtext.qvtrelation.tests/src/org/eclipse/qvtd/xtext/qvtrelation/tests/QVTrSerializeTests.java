@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -142,7 +142,7 @@ public class QVTrSerializeTests extends LoadTestCase
 		//	Load QVTiAS
 		//
 		QVTrelation ocl = QVTrelation.newInstance(getTestProjectManager());
-		QVTrEnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
+		QVTimperativeEnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
 		try {
 			ASResource asResource = AbstractTestQVT.loadQVTiAS(environmentFactory, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);

@@ -33,9 +33,10 @@ import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.ModelsManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
@@ -58,7 +59,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 
 	protected class MyQVT extends OCL
 	{
-		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
+		public MyQVT(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
 			super(environmentFactory);
 		}
 
@@ -71,8 +72,8 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			return new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 		}
 		@Override
-		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
+		public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
+			return (QVTimperativeEnvironmentFactory) super.getEnvironmentFactory();
 		}
 	}
 
@@ -90,7 +91,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	}
 
 	protected @NonNull MyQVT createQVT() throws Exception {
-		return new MyQVT(new QVTiEnvironmentFactory(getTestProjectManager(), null));
+		return new MyQVT(new QVTimperativeEnvironmentFactory(getTestProjectManager(), null, QVTimperativeEnvironmentStrategy.INSTANCE));
 	}
 
 	@Test

@@ -29,8 +29,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbaseCSResource;
 import org.eclipse.qvtd.xtext.qvtimperative.as2cs.QVTimperativeAS2CS;
 import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2AS;
@@ -62,7 +63,7 @@ public class QVTimperativeCSResource extends QVTbaseCSResource
 	public @NonNull CS2AS getCS2AS() {
 		EnvironmentFactoryInternal environmentFactory = PivotUtilInternal.findEnvironmentFactory(this);
 		if (environmentFactory == null) {
-			environmentFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), getResourceSet());
+			environmentFactory = new QVTimperativeEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), getResourceSet(), QVTimperativeEnvironmentStrategy.INSTANCE);
 		}
 		return super.getCS2AS();
 	}

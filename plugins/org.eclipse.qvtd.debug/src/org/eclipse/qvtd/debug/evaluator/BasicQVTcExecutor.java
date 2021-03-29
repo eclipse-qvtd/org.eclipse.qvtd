@@ -13,7 +13,7 @@ package org.eclipse.qvtd.debug.evaluator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 
 /**
@@ -24,7 +24,7 @@ import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
  */
 public class BasicQVTcExecutor extends BasicQVTiExecutor
 {
-	public BasicQVTcExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
+	public BasicQVTcExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
 		super(environmentFactory, transformation, ModeFactory.LAZY);
 	}
 }

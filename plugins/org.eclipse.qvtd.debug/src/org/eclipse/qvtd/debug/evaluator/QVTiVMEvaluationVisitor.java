@@ -35,8 +35,8 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractMergedQVTimperativeVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 
 public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<@Nullable Object, @NonNull Executor> implements IQVTiEvaluationVisitor, VMEvaluationVisitor
 {
@@ -84,8 +84,8 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	}
 
 	@Override
-	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-		return (QVTiEnvironmentFactory) context.getEnvironmentFactory();
+	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
+		return (QVTimperativeEnvironmentFactory) context.getEnvironmentFactory();
 	}
 
 	@Override

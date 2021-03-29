@@ -23,7 +23,8 @@ import org.eclipse.qvtd.doc.bigmde2016.tests.PrintAndLog;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.FamiliesFactory;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.Family;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.Member;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.junit.Test;
 
 /**
@@ -36,7 +37,7 @@ public class BigMDE2016CGTests extends BigMDE2016_QVTc_AutomatedTests
 	public void testQVTcCompiler_Families_EcoreUtilCopy() throws Exception {
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(ProjectManager.NO_PROJECTS, null, QVTimperativeEnvironmentStrategy.INSTANCE);
 		try {
 			int[] tests = PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
@@ -60,7 +61,7 @@ public class BigMDE2016CGTests extends BigMDE2016_QVTc_AutomatedTests
 	public void testQVTcCompiler_Families2Persons_CG() throws Exception {
 		PrintAndLog logger = new PrintAndLog(getName());
 		logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(ProjectManager.NO_PROJECTS, null, QVTimperativeEnvironmentStrategy.INSTANCE);
 		try {
 			int[] tests = PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
@@ -77,7 +78,7 @@ public class BigMDE2016CGTests extends BigMDE2016_QVTc_AutomatedTests
 	public void testQVTcCompiler_Families2Persons_ManualInPlace() throws Exception {
 		PrintAndLog logger = new PrintAndLog(getName());
 		logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(ProjectManager.NO_PROJECTS, null, QVTimperativeEnvironmentStrategy.INSTANCE);
 		try {
 			int[] tests = PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
@@ -107,7 +108,7 @@ public class BigMDE2016CGTests extends BigMDE2016_QVTc_AutomatedTests
 	public void testQVTcCompiler_Families2Persons_ManualCopy() throws Exception {
 		PrintAndLog logger = new PrintAndLog(getName());
 		logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(ProjectManager.NO_PROJECTS, null, QVTimperativeEnvironmentStrategy.INSTANCE);
 		try {
 			int[] tests = PrintAndLog.getTestSizes();
 			for (int testSize : tests) {

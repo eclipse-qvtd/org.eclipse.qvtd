@@ -456,8 +456,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	}
 
 	@Override
-	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-		return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
+	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
+		return (QVTimperativeEnvironmentFactory) super.getEnvironmentFactory();
 	}
 
 	@Override

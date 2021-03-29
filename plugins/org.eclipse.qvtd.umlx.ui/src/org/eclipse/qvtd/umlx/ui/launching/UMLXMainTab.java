@@ -35,7 +35,7 @@ import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.launching.DirectionalMainTab;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.compiler.UMLXCompilerChain;
@@ -229,7 +229,7 @@ public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 
 	@Override
 	protected @NonNull TxDiagram updateTransformation(@NonNull URI umlxURI) throws IOException {
-		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+		QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 		Resource umlxResource = environmentFactory.getResourceSet().getResource(umlxURI, true);
 		if (umlxResource.getErrors().size() > 0) {
 			String message = PivotUtil.formatResourceDiagnostics(umlxResource.getErrors(), "", "\n");

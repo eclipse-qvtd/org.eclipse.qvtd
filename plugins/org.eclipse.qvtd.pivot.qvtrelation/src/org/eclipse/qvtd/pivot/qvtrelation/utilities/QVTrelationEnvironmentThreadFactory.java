@@ -36,12 +36,13 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes.Severity;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 
 /**
  * QVTrelationEnvironmentThreadFactory transports the construction requirements from an invoking context to
  * the QVTrelationEnvironmentThread on which the QVTr processing is performed.
  */
-public class QVTrelationEnvironmentThreadFactory extends AbstractEnvironmentThreadFactory<@NonNull QVTrEnvironmentFactory>
+public class QVTrelationEnvironmentThreadFactory extends AbstractEnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory>
 {
 	private @Nullable Severity severity = null;
 
@@ -50,15 +51,15 @@ public class QVTrelationEnvironmentThreadFactory extends AbstractEnvironmentThre
 	}
 
 	@Override
-	public @NonNull OCLInternal createEnvironment(@NonNull QVTrEnvironmentFactory environmentFactory) {
+	public @NonNull OCLInternal createEnvironment(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
 		return QVTrelation.newInstance(environmentFactory);
 	}
 
 	@Override
-	public @NonNull QVTrEnvironmentFactory createEnvironmentFactory() {
+	public @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
 		//	ClassLoader cl0 = getClass().getClassLoader();
 		//	assert cl0 != null;
-		QVTrEnvironmentFactory environmentFactory = new QVTrEnvironmentFactory(projectManager, null);
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(projectManager, null, QVTrelationEnvironmentStrategy.INSTANCE);
 		//	PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		//	ImplementationManager implementationManager = metamodelManager.getImplementationManager();
 		//	@NonNull List<@NonNull ClassLoader> classLoaders = implementationManager.getClassLoaders();

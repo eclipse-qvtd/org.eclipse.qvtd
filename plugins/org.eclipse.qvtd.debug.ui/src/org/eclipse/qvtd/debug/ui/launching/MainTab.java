@@ -63,8 +63,9 @@ import org.eclipse.qvtd.compiler.internal.common.SimpleConfigurations;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -188,7 +189,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 			}
 		}
 
-		private void loadGenModel(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI genModelURI) {
+		private void loadGenModel(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI genModelURI) {
 			ResourceSet resourceSet = environmentFactory.getResourceSet();
 			MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
 			Resource csGenResource = resourceSet.getResource(genModelURI, true);
@@ -824,12 +825,12 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		return "";
 	}
 
-	protected @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+	protected @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
 		OCLInternal ocl2 = ocl;
 		if (ocl2 == null) {
-			ocl = ocl2 = OCLInternal.newInstance(new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null));
+			ocl = ocl2 = OCLInternal.newInstance(new QVTimperativeEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null, QVTimperativeEnvironmentStrategy.INSTANCE));
 		}
-		return (QVTiEnvironmentFactory) ocl2.getEnvironmentFactory();
+		return (QVTimperativeEnvironmentFactory) ocl2.getEnvironmentFactory();
 	}
 
 	protected @Nullable String getGenmodelPath() {

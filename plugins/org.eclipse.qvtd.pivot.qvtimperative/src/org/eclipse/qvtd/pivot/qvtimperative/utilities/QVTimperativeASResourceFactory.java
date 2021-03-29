@@ -35,7 +35,6 @@ import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 /**
  * QVTimperativeASResourceFactory supports creation of a QVTimperative AS resource and associated artefacts.
@@ -119,8 +118,8 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 	}
 
 	@Override
-	public @NonNull EnvironmentFactoryInternal createEnvironmentFactory(@NonNull ProjectManager projectManager) {
-		return new QVTiEnvironmentFactory(projectManager, null);
+	public @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory(@NonNull ProjectManager projectManager) {
+		return new QVTimperativeEnvironmentFactory(projectManager, null, QVTimperativeEnvironmentStrategy.INSTANCE);
 	}
 
 	@Override

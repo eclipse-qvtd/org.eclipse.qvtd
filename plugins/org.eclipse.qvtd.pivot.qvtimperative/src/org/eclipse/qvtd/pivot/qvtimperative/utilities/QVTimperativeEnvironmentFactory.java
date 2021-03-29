@@ -28,14 +28,13 @@ import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
 public class QVTimperativeEnvironmentFactory extends PivotEnvironmentFactory
 {
-	private @NonNull EnvironmentStrategy createStrategy;
+	private @NonNull EnvironmentStrategy environmentStrategy;
 
-	protected QVTimperativeEnvironmentFactory(@NonNull ProjectManager projectManager,
-			@Nullable ResourceSet externalResourceSet, @NonNull EnvironmentStrategy createStrategy) {
+	public QVTimperativeEnvironmentFactory(@NonNull ProjectManager projectManager, @Nullable ResourceSet externalResourceSet, @NonNull EnvironmentStrategy environmentStrategy) {
 		super(projectManager, externalResourceSet, null);
-		this.createStrategy = createStrategy;
+		this.environmentStrategy = environmentStrategy;
 		String primaryStandardLibraryURI = QVTruntimeLibrary.STDLIB_URI;
-		String secondaryStandardLibraryURI = createStrategy.getDefaultStandardLibraryURI();
+		String secondaryStandardLibraryURI = environmentStrategy.getDefaultStandardLibraryURI();
 		StandardLibraryInternal standardLibrary = getStandardLibrary();
 		standardLibrary.setDefaultStandardLibraryURI(primaryStandardLibraryURI);
 		if (!secondaryStandardLibraryURI.equals(primaryStandardLibraryURI)) {
@@ -44,35 +43,35 @@ public class QVTimperativeEnvironmentFactory extends PivotEnvironmentFactory
 	}
 
 	public @NonNull EntryPointsAnalysis createEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
-		return createStrategy.createEntryPointsAnalysis(this, transformation);
+		return environmentStrategy.createEntryPointsAnalysis(this, transformation);
 	}
 
 	@Override
 	public final @NonNull FlowAnalysis createFlowAnalysis(@NonNull OCLExpression contextExpression) {
-		return createStrategy.createFlowAnalysis(this, contextExpression);
+		return environmentStrategy.createFlowAnalysis(this, contextExpression);
 	}
 
 	public @NonNull AbstractModelsManager createModelsManager(@NonNull EntryPointAnalysis entryPointAnalysis) {
-		return createStrategy.createModelsManager(entryPointAnalysis);
+		return environmentStrategy.createModelsManager(entryPointAnalysis);
 	}
 
 	@Override
 	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
 			@Nullable Type selfType, @Nullable Type selfTypeValue) {
-		return createStrategy.createTemplateParameterSubstitutionVisitor(this, selfType, selfTypeValue);
+		return environmentStrategy.createTemplateParameterSubstitutionVisitor(this, selfType, selfTypeValue);
 	}
 
-	public @NonNull EnvironmentStrategy getCreateStrategy() {
-		return createStrategy;
-	}
+	//	public @NonNull EnvironmentStrategy getEnvironmentStrategy() {
+	//		return environmentStrategy;
+	//	}
 
 	public boolean keepDebug() {
 		return false;
 	}
 
-	public @NonNull EnvironmentStrategy setCreateStrategy(@NonNull EnvironmentStrategy createStrategy) {
-		EnvironmentStrategy savedStrategy = this.createStrategy;
-		this.createStrategy = createStrategy;
+	public @NonNull EnvironmentStrategy setCreateStrategy(@NonNull EnvironmentStrategy environmentStrategy) {
+		EnvironmentStrategy savedStrategy = this.environmentStrategy;
+		this.environmentStrategy = environmentStrategy;
 		return savedStrategy;
 	}
 }

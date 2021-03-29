@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 /**
  * The QVTimperative facade refines the QVTbase and OCL facades to enforce use of the QVTimperative Standard Library.
@@ -27,7 +26,7 @@ public class QVTimperative extends QVTbase
 	}
 
 	public static @NonNull QVTimperative newInstance(@NonNull ProjectManager projectManager, @Nullable ResourceSet externalResourceSet) {
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(projectManager, externalResourceSet);
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(projectManager, externalResourceSet, QVTimperativeEnvironmentStrategy.INSTANCE);
 		QVTimperative qvt = new QVTimperative(environmentFactory);
 		if (externalResourceSet != null) {
 			environmentFactory.adapt(externalResourceSet);

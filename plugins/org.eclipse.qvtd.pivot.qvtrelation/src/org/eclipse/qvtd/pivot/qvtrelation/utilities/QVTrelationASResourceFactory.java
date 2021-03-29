@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 
 /**
@@ -126,8 +127,8 @@ public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFact
 	}
 
 	@Override
-	public @NonNull EnvironmentFactoryInternal createEnvironmentFactory(@NonNull ProjectManager projectManager) {
-		return new QVTrEnvironmentFactory(projectManager, null);
+	public @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory(@NonNull ProjectManager projectManager) {
+		return new QVTimperativeEnvironmentFactory(projectManager, null, QVTrelationEnvironmentStrategy.INSTANCE);
 	}
 
 	@Override

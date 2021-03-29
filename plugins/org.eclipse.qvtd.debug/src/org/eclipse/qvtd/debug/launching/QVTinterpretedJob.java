@@ -32,9 +32,10 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.ui.statushandlers.StatusManager;
 
@@ -59,7 +60,7 @@ public class QVTinterpretedJob extends QVTimperativeJob
 		SubMonitor subMonitor = SubMonitor.convert(monitor, allTicks);
 		ThreadLocalExecutor.reset();
 		try {
-			QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(BasicProjectManager.CLASS_PATH, null);
+			QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(BasicProjectManager.CLASS_PATH, null, QVTimperativeEnvironmentStrategy.INSTANCE);
 			if (traceEvaluation) {
 				environmentFactory.setEvaluationTracingEnabled(true);
 			}

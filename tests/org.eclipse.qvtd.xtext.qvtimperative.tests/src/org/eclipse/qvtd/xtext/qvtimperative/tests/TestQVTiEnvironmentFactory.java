@@ -14,12 +14,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 
-public class TestQVTiEnvironmentFactory extends QVTiEnvironmentFactory
+public class TestQVTiEnvironmentFactory extends QVTimperativeEnvironmentFactory
 {
 	public TestQVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
-		super(projectMap, externalResourceSet);
-    	setEvaluationTracingEnabled(true);
+		super(projectMap, externalResourceSet, QVTimperativeEnvironmentStrategy.INSTANCE);
+		setEvaluationTracingEnabled(true);
 	}
 }

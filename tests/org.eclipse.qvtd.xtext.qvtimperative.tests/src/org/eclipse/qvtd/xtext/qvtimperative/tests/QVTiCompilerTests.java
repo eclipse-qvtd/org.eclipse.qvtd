@@ -71,9 +71,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
@@ -109,7 +110,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	{
 		protected final @NonNull TestProject testProject;
 
-		public MyQVT(@NonNull TestProject testProject, @NonNull QVTiEnvironmentFactory environmentFactory) {
+		public MyQVT(@NonNull TestProject testProject, @NonNull QVTimperativeEnvironmentFactory environmentFactory) {
 			super(environmentFactory);
 			this.testProject = testProject;
 		}
@@ -152,7 +153,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			TestUtil.doCompleteOCLSetup();
 			URI oclURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true);
 			//			CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
-			QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 			CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, environmentFactory);
 			//			CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metamodelManager);
 			//			completeOCLEObjectValidator1.initialize();
@@ -348,8 +349,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
+		public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
+			return (QVTimperativeEnvironmentFactory) super.getEnvironmentFactory();
 		}
 
 		public @NonNull Resource loadInput(@NonNull Transformer tx, @NonNull String inputModelName, URI inputModelURI) {
@@ -403,10 +404,10 @@ public class QVTiCompilerTests extends LoadTestCase
 		}
 	}
 
-	protected static class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
+	protected static class MyQVTiEnvironmentFactory extends QVTimperativeEnvironmentFactory
 	{
 		public MyQVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
-			super(projectMap, externalResourceSet);
+			super(projectMap, externalResourceSet, QVTimperativeEnvironmentStrategy.INSTANCE);
 			setEvaluationTracingEnabled(true);
 		}
 	}

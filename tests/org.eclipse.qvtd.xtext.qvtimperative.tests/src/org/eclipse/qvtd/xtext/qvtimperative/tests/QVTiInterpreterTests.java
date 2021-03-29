@@ -44,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
@@ -146,7 +145,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Exception {
 		QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory();
-		AbstractTestThread<Object, @NonNull QVTiEnvironmentFactory, @Nullable OCLInternal> checkThread = new AbstractTestThread<Object, @NonNull QVTiEnvironmentFactory, @Nullable OCLInternal>("Loadable-Check", environmentThreadFactory)
+		AbstractTestThread<Object, @NonNull QVTimperativeEnvironmentFactory, @Nullable OCLInternal> checkThread = new AbstractTestThread<Object, @NonNull QVTimperativeEnvironmentFactory, @Nullable OCLInternal>("Loadable-Check", environmentThreadFactory)
 		{
 			@Override
 			public Object runWithThrowable() throws Exception {

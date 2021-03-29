@@ -29,8 +29,8 @@ import org.eclipse.qvtd.debug.launching.QVTcLaunchConstants;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate;
 import org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.umlx.compiler.UMLXCompilerChain;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 
@@ -96,7 +96,7 @@ public class UMLXLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 	}
 
 	@Override
-	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTiEnvironmentFactory envFactory, @NonNull ImperativeTransformation transformation) {
+	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTimperativeEnvironmentFactory envFactory, @NonNull ImperativeTransformation transformation) {
 		return new BasicQVTrExecutor(envFactory, transformation);
 	}
 

@@ -15,18 +15,19 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 
 /**
  * The QVTcore facade refines the QVTbase and OCL facades to enforce use of the QVTbase Standard Library.
  */
 public class QVTrelation extends QVTbase
 {
-	public static @NonNull QVTrelation newInstance(@NonNull ProjectManager projectManager) {	
+	public static @NonNull QVTrelation newInstance(@NonNull ProjectManager projectManager) {
 		return newInstance(projectManager, null);
 	}
 
-	public static @NonNull QVTrelation newInstance(@NonNull ProjectManager projectManager, @Nullable ResourceSet externalResourceSet) {	
-		QVTrEnvironmentFactory environmentFactory = new QVTrEnvironmentFactory(projectManager, externalResourceSet);
+	public static @NonNull QVTrelation newInstance(@NonNull ProjectManager projectManager, @Nullable ResourceSet externalResourceSet) {
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(projectManager, externalResourceSet, QVTrelationEnvironmentStrategy.INSTANCE);
 		QVTrelation qvt = new QVTrelation(environmentFactory);
 		if (externalResourceSet != null) {
 			environmentFactory.adapt(externalResourceSet);
@@ -34,12 +35,12 @@ public class QVTrelation extends QVTbase
 		return qvt;
 	}
 
-	public QVTrelation(@NonNull QVTrEnvironmentFactory environmentFactory) {
+	public QVTrelation(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 	}
 
 	@Override
-	public @NonNull QVTrEnvironmentFactory getEnvironmentFactory() {
-		return (QVTrEnvironmentFactory) super.getEnvironmentFactory();
+	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
+		return (QVTimperativeEnvironmentFactory) super.getEnvironmentFactory();
 	}
 }

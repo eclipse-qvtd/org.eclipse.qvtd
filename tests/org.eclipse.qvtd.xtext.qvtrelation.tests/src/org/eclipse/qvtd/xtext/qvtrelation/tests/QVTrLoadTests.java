@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -75,8 +75,8 @@ public class QVTrLoadTests extends LoadTestCase
 		QVTrelationEnvironmentThreadFactory environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(getTestProjectManager()) {
 
 			@Override
-			public @NonNull QVTrEnvironmentFactory createEnvironmentFactory() {
-				QVTrEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
+			public @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+				QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
 				ClassLoader cl0 = getClass().getClassLoader();
 				assert cl0 != null;
 				PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();

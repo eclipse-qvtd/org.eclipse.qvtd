@@ -22,10 +22,10 @@ import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.Resumable;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT.QVTcTestThread;
@@ -95,7 +95,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		{
 			@Override
 			protected @NonNull Resource runWithModel(@NonNull ResourceSet resourceSet) throws Exception {
-				QVTcEnvironmentFactory environmentFactory = getEnvironmentFactory();
+				QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 				//
 				//	Load QVTiAS
 				//

@@ -24,7 +24,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
@@ -76,7 +76,7 @@ public class QVTrMainTab extends QVTDirectionalMainTab<RelationalTransformation>
 
 	@Override
 	protected @NonNull RelationalTransformation updateTransformation(@NonNull URI txURI) throws IOException {
-		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+		QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 		return QVTrelationUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 	}
 }

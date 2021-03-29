@@ -28,7 +28,7 @@ import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Group;
@@ -103,7 +103,7 @@ public class QVTiMainTab extends MainTab<Transformation> implements QVTiLaunchCo
 
 	@Override
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
-		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+		QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 		return QVTimperativeUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 	}
 }

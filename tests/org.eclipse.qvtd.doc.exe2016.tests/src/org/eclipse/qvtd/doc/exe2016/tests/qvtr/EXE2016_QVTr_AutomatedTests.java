@@ -26,8 +26,9 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.junit.After;
 import org.junit.Before;
@@ -110,7 +111,7 @@ public class EXE2016_QVTr_AutomatedTests extends AbstractEXE2016CGTests
 		}
 	}
 
-	protected void doTest(@NonNull PrintAndLog logger, @NonNull QVTiEnvironmentFactory environmentFactory,
+	protected void doTest(@NonNull PrintAndLog logger, @NonNull QVTimperativeEnvironmentFactory environmentFactory,
 			@NonNull DoublyLinkedListGenerator doublyLinkedListGenerator, int testSize) throws Exception {
 		Iterable<@NonNull ? extends Object> rootObjects = doublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
 		Class<@NonNull Forward2Reverse> txClass = Forward2Reverse.class;
@@ -150,7 +151,7 @@ public class EXE2016_QVTr_AutomatedTests extends AbstractEXE2016CGTests
 		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog(getName());
 		logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(ProjectManager.NO_PROJECTS, null, QVTimperativeEnvironmentStrategy.INSTANCE);
 		try {
 			doTest(logger, environmentFactory, doublyLinkedListGenerator, 10000);
 		}

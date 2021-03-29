@@ -28,8 +28,9 @@ import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentStrategy;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbaseCSResource;
 import org.eclipse.qvtd.xtext.qvtcore.as2cs.QVTcoreAS2CS;
 import org.eclipse.qvtd.xtext.qvtcore.cs2as.QVTcoreCS2AS;
@@ -61,7 +62,7 @@ public class QVTcoreCSResource extends QVTbaseCSResource
 	public @NonNull CS2AS getCS2AS() {
 		EnvironmentFactoryInternal environmentFactory = PivotUtilInternal.findEnvironmentFactory(this);
 		if (environmentFactory == null) {
-			environmentFactory = new QVTcEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), getResourceSet());
+			environmentFactory = new QVTimperativeEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), getResourceSet(), QVTcoreEnvironmentStrategy.INSTANCE);
 		}
 		return super.getCS2AS();
 	}

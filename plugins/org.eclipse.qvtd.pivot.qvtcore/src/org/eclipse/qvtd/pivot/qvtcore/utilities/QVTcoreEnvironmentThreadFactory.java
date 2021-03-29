@@ -16,12 +16,13 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes.Severity;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 
 /**
  * QVTcoreEnvironmentThreadFactory transports the construction requirements from an invoking context to
  * the QVTcoreEnvironmentThread on which the QVTc processing is performed.
  */
-public class QVTcoreEnvironmentThreadFactory extends AbstractEnvironmentThreadFactory<@NonNull QVTcEnvironmentFactory>
+public class QVTcoreEnvironmentThreadFactory extends AbstractEnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory>
 {
 	private @Nullable Severity severity = null;
 
@@ -30,13 +31,13 @@ public class QVTcoreEnvironmentThreadFactory extends AbstractEnvironmentThreadFa
 	}
 
 	@Override
-	public @NonNull OCLInternal createEnvironment(@NonNull QVTcEnvironmentFactory environmentFactory) {
+	public @NonNull OCLInternal createEnvironment(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
 		return QVTcore.newInstance(environmentFactory);
 	}
 
 	@Override
-	public @NonNull QVTcEnvironmentFactory createEnvironmentFactory() {
-		QVTcEnvironmentFactory environmentFactory = new QVTcEnvironmentFactory(projectManager, null);
+	public @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(projectManager, null, QVTcoreEnvironmentStrategy.INSTANCE);
 		if (severity != null) {
 			environmentFactory.setSafeNavigationValidationSeverity(severity);
 		}

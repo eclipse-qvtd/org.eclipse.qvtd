@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 
 /**
  * QVTcoreASResourceFactory supports creation of a QVTcore AS resource and associated artefacts.
@@ -126,8 +127,8 @@ public class QVTcoreASResourceFactory extends ResourceSetAwareASResourceFactory
 	}
 
 	@Override
-	public @NonNull EnvironmentFactoryInternal createEnvironmentFactory(@NonNull ProjectManager projectManager) {
-		return new QVTcEnvironmentFactory(projectManager, null);
+	public @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory(@NonNull ProjectManager projectManager) {
+		return new QVTimperativeEnvironmentFactory(projectManager, null, QVTcoreEnvironmentStrategy.INSTANCE);
 	}
 
 	@Override

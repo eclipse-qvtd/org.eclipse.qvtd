@@ -45,11 +45,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -80,8 +80,8 @@ public class UMLXSerializeTests extends LoadTestCase
 		QVTrelationEnvironmentThreadFactory environmentThreadFactory = new QVTrelationEnvironmentThreadFactory(getTestProjectManager())
 		{
 			@Override
-			public @NonNull QVTrEnvironmentFactory createEnvironmentFactory() {
-				QVTrEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
+			public @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+				QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
 				if (severity != null) {
 					environmentFactory.setSafeNavigationValidationSeverity(severity);
 				}

@@ -20,8 +20,9 @@ import org.eclipse.qvtd.doc.bigmde2016.tests.FamiliesGenerator;
 import org.eclipse.qvtd.doc.bigmde2016.tests.PrintAndLog;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.tx.Families2Persons;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.junit.After;
 import org.junit.Before;
@@ -41,7 +42,7 @@ public class BigMDE2016_QVTc_AutomatedTests extends TestCase
 		}
 	}
 
-	protected void doTest(@NonNull PrintAndLog logger, @NonNull QVTiEnvironmentFactory environmentFactory, int testSize) throws Exception {
+	protected void doTest(@NonNull PrintAndLog logger, @NonNull QVTimperativeEnvironmentFactory environmentFactory, int testSize) throws Exception {
 		Iterable<@NonNull ? extends Object> rootObjects = FamiliesGenerator.createFamiliesModel(testSize, 9);
 		QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, Families2Persons.class);
 		Transformer transformer = generatedExecutor.getTransformer();
@@ -79,7 +80,7 @@ public class BigMDE2016_QVTc_AutomatedTests extends TestCase
 	public void testQVTcCompiler_Families2Persons_CG_10K() throws Exception {
 		PrintAndLog logger = new PrintAndLog(getName());
 		logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
+		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(ProjectManager.NO_PROJECTS, null, QVTimperativeEnvironmentStrategy.INSTANCE);
 		try {
 			doTest(logger, environmentFactory, 1000);
 		}
