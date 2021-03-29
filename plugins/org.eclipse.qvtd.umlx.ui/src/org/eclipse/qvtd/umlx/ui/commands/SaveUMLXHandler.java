@@ -88,7 +88,9 @@ public class SaveUMLXHandler extends AbstractHandler
 		SaveAsDialog dlg = new SaveAsDialog(shell);
 		dlg.setOriginalFile(outFile);
 		dlg.create();
-		dlg.getShell().setText(UMLXUIMessages.SaveUMLX_ShellTitle);
+		if (shell != null) {
+			shell.setText(UMLXUIMessages.SaveUMLX_ShellTitle);
+		}
 		dlg.setTitle(UMLXUIMessages.SaveUMLX_Title);
 		dlg.setMessage(NLS.bind(UMLXUIMessages.SaveUMLX_Description, asURI));
 		int status = dlg.open();

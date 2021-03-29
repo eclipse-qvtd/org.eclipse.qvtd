@@ -235,7 +235,7 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 	 *
 	 * @return the active workbench shell or <code>null</code> if none
 	 */
-	public static Shell getActiveWorkbenchShell() {
+	public static @Nullable Shell getActiveWorkbenchShell() {
 		IWorkbenchWindow window = getActiveWorkbenchWindow();
 		if (window != null) {
 			return window.getShell();
