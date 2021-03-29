@@ -72,6 +72,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
@@ -105,7 +106,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		protected final @NonNull MyQVT myQVT;
 		protected final @NonNull ImperativeTransformation iTransformation;
 
-		protected InterpretedTransformationThread(@NonNull MyQVT myQVT, @NonNull ImperativeTransformation iTransformation, @NonNull AbstractEnvironmentThreadFactory environmentThreadFactory) {
+		protected InterpretedTransformationThread(@NonNull MyQVT myQVT, @NonNull ImperativeTransformation iTransformation, @NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory) {
 			super("TransformationExecution", environmentThreadFactory);
 			this.myQVT = myQVT;
 			this.iTransformation = iTransformation;
@@ -1214,6 +1215,7 @@ public class QVTrCompilerTests extends LoadTestCase
 				protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
 					//	QVTbaseEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
 					QVTimperativeEnvironmentFactory environmentFactory = compilationThreadResult.getEnvironmentFactory();
+					environmentFactory.setCreateStrategy(QVTimperativeEnvironmentStrategy.INSTANCE);
 					ThreadLocalExecutor.attachEnvironmentFactory(environmentFactory);
 					return environmentFactory;
 				}

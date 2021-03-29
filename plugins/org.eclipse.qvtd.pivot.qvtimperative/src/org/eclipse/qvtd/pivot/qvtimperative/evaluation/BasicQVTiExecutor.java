@@ -54,6 +54,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.library.AbstractOperation;
 import org.eclipse.ocl.pivot.resource.ASResource;
@@ -61,6 +62,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.NullValue;
@@ -294,10 +296,10 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		this(environmentFactory, QVTimperativeUtil.getDefaultEntryPoint(transformation), modeFactory);
 	}
 
-	public BasicQVTiExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) {
-		super(environmentFactory);
-		//	super((EnvironmentFactoryInternalExtension) /*environmentFactory*/ThreadLocalExecutor.getEnvironmentFactory());
-		//	QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+	public BasicQVTiExecutor(@NonNull QVTimperativeEnvironmentFactory zzenvironmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) {
+		//	super(environmentFactory);
+		super((EnvironmentFactoryInternalExtension) /*environmentFactory*/ThreadLocalExecutor.getEnvironmentFactory());
+		QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 		this.entryPoint = entryPoint;
 		this.modeFactory = modeFactory;
 		this.transformation = QVTimperativeUtil.getContainingTransformation(entryPoint);
