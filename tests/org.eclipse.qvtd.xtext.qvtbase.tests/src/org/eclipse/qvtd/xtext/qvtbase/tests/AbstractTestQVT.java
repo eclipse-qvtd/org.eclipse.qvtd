@@ -76,6 +76,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
@@ -431,7 +432,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return generatedExecutor;
 	}
 
-	protected @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+	protected @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
 		return new QVTiTransformationExecutor(environmentFactory, txClass);
 	}
 
@@ -447,11 +448,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return interpretedExecutor;
 	}
 
-	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
+	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
 		return new BasicQVTiExecutor(getEnvironmentFactory(), QVTimperativeUtil.getDefaultEntryPoint(transformation), ModeFactory.LAZY);
 	}
 
-	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) throws Exception {
+	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) throws Exception {
 		return new BasicQVTiExecutor(environmentFactory, entryPoint, modeFactory);
 	}
 
@@ -732,10 +733,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return classpath;
 	}
 
-	@Override
-	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-		return super.getEnvironmentFactory();
-	}
+	//	@Override
+	//	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+	//		return super.getEnvironmentFactory();
+	//	}
 
 	public @NonNull TransformationExecutor getExecutor() {
 		return ClassUtil.nonNullState(executor);

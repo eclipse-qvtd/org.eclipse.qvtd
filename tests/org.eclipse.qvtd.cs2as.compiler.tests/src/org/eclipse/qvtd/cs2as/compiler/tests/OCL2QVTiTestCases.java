@@ -49,10 +49,10 @@ import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTm;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -162,7 +162,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 					return new QVTm2QVTsCompilerStep(this)
 					{
 						@Override
-						public @NonNull ScheduleManager execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+						public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
 							ScheduleManager scheduleManager = super.execute(environmentFactory, pResource, typedModelsConfiguration);
 							instrumentPartition(scheduleManager);
 							return scheduleManager;

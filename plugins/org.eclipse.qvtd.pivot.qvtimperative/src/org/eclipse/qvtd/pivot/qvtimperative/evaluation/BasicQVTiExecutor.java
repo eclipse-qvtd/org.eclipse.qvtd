@@ -88,6 +88,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager.QVTiTypedModelInstance;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
@@ -289,16 +290,16 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	private @Nullable Map<@NonNull Mapping, @NonNull InvocationConstructor> mapping2invocationConstructor = null;
 	private @Nullable Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor = null;
 
-	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation, @NonNull ModeFactory modeFactory) {
+	public BasicQVTiExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation, @NonNull ModeFactory modeFactory) {
 		this(environmentFactory, QVTimperativeUtil.getDefaultEntryPoint(transformation), modeFactory);
 	}
 
-	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) {
+	public BasicQVTiExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) {
 		super(environmentFactory);
 		this.entryPoint = entryPoint;
 		this.modeFactory = modeFactory;
 		this.transformation = QVTimperativeUtil.getContainingTransformation(entryPoint);
-		this.entryPointsAnalysis = (EntryPointsAnalysis)environmentFactory.createEntryPointsAnalysis(transformation);
+		this.entryPointsAnalysis = environmentFactory.createEntryPointsAnalysis(transformation);
 		entryPointsAnalysis.analyzeTransformation();
 		this.entryPointAnalysis = entryPointsAnalysis.getEntryPointAnalysis(entryPoint);
 		if (modeFactory.isLazy()) {

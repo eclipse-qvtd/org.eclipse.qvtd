@@ -39,8 +39,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -55,6 +53,8 @@ import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory.Strategy;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import com.google.common.collect.Iterables;
 
@@ -210,8 +210,8 @@ public class QVTcoreUtil extends QVTbaseUtil
 		return ClassUtil.nonNullState(asAssignment.getValue());
 	}
 
-	public static @NonNull Transformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+	public static @NonNull Transformation loadTransformation(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 		try {
 			return loadTransformation(CoreModel.class, environmentFactory, transformationURI, keepDebug);
 		}
@@ -220,8 +220,8 @@ public class QVTcoreUtil extends QVTbaseUtil
 		}
 	}
 
-	public static @NonNull ASResource loadTransformations(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+	public static @NonNull ASResource loadTransformations(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 		try {
 			ASResource asResource = loadTransformations(CoreModel.class, environmentFactory, transformationURI, keepDebug);
 			List<@NonNull TypedModel> missingIsTraces = rewriteMissingTypedModelIsTrace(environmentFactory, asResource);

@@ -21,8 +21,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public interface CompilerChain
@@ -86,7 +86,7 @@ public interface CompilerChain
 	void compiled(@NonNull String stepKey, @NonNull Object object);
 	//	@NonNull Resource createResource(@NonNull URI uri, @NonNull String contentType) throws IOException;
 	void dispose();
-	@NonNull QVTbaseEnvironmentFactory getEnvironmentFactory();
+	@NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory();
 	//	@Nullable File getTraceClassesFolder();
 	@NonNull URI getURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey);
 	void removeListener(@NonNull Listener listener);

@@ -64,10 +64,10 @@ import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
@@ -120,7 +120,7 @@ public class QVTrCompilerTests extends LoadTestCase
 				return new QVTr2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduleManager execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+					public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 						ScheduleManager scheduleManager = super.execute(environmentFactory, qvtrResource, traceResource, typedModelsConfigurations);
 						instrumentPartition(scheduleManager);
 						return scheduleManager;
@@ -129,7 +129,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 
 			@Override
-			public @NonNull ImperativeTransformation qvtr2qvti(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+			public @NonNull ImperativeTransformation qvtr2qvti(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 				assertNoValidationErrors("QVTr validation", qvtrResource);
 				return super.qvtr2qvti(environmentFactory, qvtrResource, typedModelsConfigurations);
 			}

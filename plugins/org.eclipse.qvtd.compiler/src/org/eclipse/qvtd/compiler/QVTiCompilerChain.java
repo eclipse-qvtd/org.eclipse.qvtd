@@ -17,8 +17,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
@@ -32,7 +32,7 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 			super(compilerChain, QVTI_STEP);
 		}
 
-		public @NonNull ImperativeTransformation execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI txURI) throws IOException {
+		public @NonNull ImperativeTransformation execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI txURI) throws IOException {
 			ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(environmentFactory, txURI, false);
 			Resource iResource = ClassUtil.nonNullState(asTransformation.eResource());
 			iResource.setURI(getURI());
@@ -51,7 +51,7 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-		QVTbaseEnvironmentFactory environmentFactory = xtext2qvtiCompilerStep.getEnvironmentFactory();
+		QVTimperativeEnvironmentFactory environmentFactory = xtext2qvtiCompilerStep.getEnvironmentFactory();
 		return xtext2qvtiCompilerStep.execute(environmentFactory, txURI);
 	}
 

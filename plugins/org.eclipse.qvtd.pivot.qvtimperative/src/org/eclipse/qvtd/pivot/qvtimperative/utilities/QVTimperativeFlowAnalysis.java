@@ -13,11 +13,10 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.internal.manager.FlowAnalysis;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 
 public class QVTimperativeFlowAnalysis extends FlowAnalysis
 {
-	public QVTimperativeFlowAnalysis(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression) {
+	public QVTimperativeFlowAnalysis(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression) {
 		super(environmentFactory, contextExpression);
 	}
 

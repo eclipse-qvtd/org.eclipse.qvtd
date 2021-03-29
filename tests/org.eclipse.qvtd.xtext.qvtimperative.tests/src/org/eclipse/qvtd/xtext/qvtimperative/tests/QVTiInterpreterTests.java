@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
@@ -79,7 +80,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
+		protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
 			return new BasicQVTiExecutor(environmentFactory, transformation, modeFactory);
 		}
 
@@ -94,7 +95,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		}
 
 		public @NonNull ImperativeTransformation loadTransformation() throws IOException {
-			QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 			return QVTimperativeUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 		}
 

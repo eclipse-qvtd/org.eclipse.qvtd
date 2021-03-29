@@ -11,12 +11,13 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public class QVTiTransformationExecutor extends AbstractTransformationExecutor
 {
-	public QVTiTransformationExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+	public QVTiTransformationExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
 		super(environmentFactory, txClass);
 	}
 }

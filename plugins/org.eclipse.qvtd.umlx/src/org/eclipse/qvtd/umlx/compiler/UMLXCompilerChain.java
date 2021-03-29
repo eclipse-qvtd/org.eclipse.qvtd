@@ -21,9 +21,9 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory.Strategy;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
@@ -41,8 +41,8 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 			super(compilerChain, QVTR_STEP);
 		}
 
-		public @NonNull Resource execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI umlxURI) throws IOException {
-			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+		public @NonNull Resource execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI umlxURI) throws IOException {
+			Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource umlxResource = environmentFactory.getResourceSet().getResource(umlxURI, true);
 				if (umlxResource == null) {
@@ -69,7 +69,7 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-		QVTbaseEnvironmentFactory environmentFactory = umlx2qvtrCompilerStep.getEnvironmentFactory();
+		QVTimperativeEnvironmentFactory environmentFactory = umlx2qvtrCompilerStep.getEnvironmentFactory();
 		Resource rResource = umlx2qvtrCompilerStep.execute(environmentFactory, txURI);
 		return qvtr2qvti(environmentFactory, rResource, typedModelsConfigurations);
 	}

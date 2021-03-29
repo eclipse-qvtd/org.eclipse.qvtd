@@ -11,19 +11,20 @@
 package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 
 /**
  * The QVTbase facade refines the OCL facade to enforce use of the QVTbase Standard Library.
  */
 public abstract class QVTbase extends OCLInternal
-{	
-	public QVTbase(@NonNull QVTbaseEnvironmentFactory environmentFactory) {
+{
+	public QVTbase(@NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(environmentFactory);
 	}
 
-	@Override
-	public @NonNull QVTbaseEnvironmentFactory getEnvironmentFactory() {
-		return (QVTbaseEnvironmentFactory)super.getEnvironmentFactory();
-	}
+	//	@Override
+	//	public @NonNull QVTbaseEnvironmentFactory getEnvironmentFactory() {
+	//		return (QVTbaseEnvironmentFactory)super.getEnvironmentFactory();
+	//	}
 }

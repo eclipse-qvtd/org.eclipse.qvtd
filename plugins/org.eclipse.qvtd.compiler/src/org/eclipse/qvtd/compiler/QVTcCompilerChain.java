@@ -20,10 +20,10 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
@@ -37,7 +37,7 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 			super(compilerChain, QVTC_STEP);
 		}
 
-		public @NonNull Resource execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI txURI) throws IOException {
+		public @NonNull Resource execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI txURI) throws IOException {
 			ASResource cResource = QVTcoreUtil.loadTransformations(environmentFactory, txURI, false);
 			cResource.setURI(getURI());
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
@@ -64,7 +64,7 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-		QVTbaseEnvironmentFactory environmentFactory = xtext2qvtcCompilerStep.getEnvironmentFactory();
+		QVTimperativeEnvironmentFactory environmentFactory = xtext2qvtcCompilerStep.getEnvironmentFactory();
 		Resource cResource = xtext2qvtcCompilerStep.execute(environmentFactory, txURI);
 		TypedModelsConfiguration typedModelsConfiguration = typedModelsConfigurations.iterator().next();	// FIXME multi-direction
 		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, typedModelsConfiguration);

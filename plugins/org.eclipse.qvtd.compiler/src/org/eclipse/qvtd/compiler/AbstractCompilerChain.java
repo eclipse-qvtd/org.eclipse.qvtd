@@ -54,8 +54,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
@@ -64,6 +62,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory.Strategy;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
@@ -140,8 +140,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, QVTU_STEP);
 		}
 
-		public @NonNull Resource execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource cResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
-			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+		public @NonNull Resource execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource cResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+			Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			Transformation transformation = QVTbaseUtil.getTransformation(cResource);
 			String s = typedModelsConfiguration.reconcile(transformation);
 			if (s != null) {
@@ -165,7 +165,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, JAVA_STEP);
 		}
 
-		protected @NonNull JavaResult execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
+		protected @NonNull JavaResult execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
 			ResourceSet resourceSet = environmentFactory.getResourceSet();
 			URI javaFileURI = compilerChain.getURI(JAVA_STEP, URI_KEY);
 			URI classFileURI = compilerChain.getURI(CLASS_STEP, URI_KEY);
@@ -210,7 +210,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		}
 
 		private void loadGenModel(@NonNull URI genModelURI) {
-			QVTbaseEnvironmentFactory environmentFactory = getEnvironmentFactory();
+			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
 			ResourceSet resourceSet = environmentFactory.getResourceSet();
 			MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
 			Resource csGenResource = resourceSet.getResource(genModelURI, true);
@@ -231,8 +231,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			//			QVTm2QVTs.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull ScheduleManager execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
-			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+		public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+			Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource sResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
@@ -263,7 +263,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, QVTI_STEP);
 		}
 
-		public @NonNull ImperativeTransformation execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ScheduleManager scheduleManager) throws IOException {
+		public @NonNull ImperativeTransformation execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ScheduleManager scheduleManager) throws IOException {
 			// Default QVTi strategy ok.
 			Resource iResource = createResource(QVTimperativePackage.eCONTENT_TYPE);
 			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
@@ -298,8 +298,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, QVTM_STEP);
 		}
 
-		public @NonNull Resource execute(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource uResource) throws IOException {
-			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+		public @NonNull Resource execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource uResource) throws IOException {
+			Strategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource mResource = createResource(QVTcorePackage.eCONTENT_TYPE);
 				QVTu2QVTm tx = new QVTu2QVTm(environmentFactory);
@@ -471,11 +471,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	@Deprecated /* Going obsolete */
 	@Override
-	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
 		EnvironmentFactoryInternal environmentFactory = ThreadLocalExecutor.basicGetEnvironmentFactory();
 		assert environmentFactory != null;
 		// XXX	assert !"main".equals(Thread.currentThread().getName());
-		return (QVTiEnvironmentFactory)environmentFactory;
+		return (QVTimperativeEnvironmentFactory)environmentFactory;
 	}
 
 	/*	@Override
@@ -509,17 +509,17 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return java2classCompilerStep.execute(txURI, javaResult);
 	}
 
-	protected @NonNull Resource qvtc2qvtm(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource cResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+	protected @NonNull Resource qvtc2qvtm(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource cResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
 		Resource uResource = qvtc2qvtuCompilerStep.execute(environmentFactory, cResource, typedModelsConfiguration);
 		return qvtu2qvtmCompilerStep.execute(environmentFactory, uResource);
 	}
 
 	protected @NonNull JavaResult qvti2java(@NonNull ImperativeTransformation iTransformation, @NonNull String ... genModelFiles) throws Exception {
-		QVTbaseEnvironmentFactory environmentFactory = qvti2javaCompilerStep.getEnvironmentFactory();
+		QVTimperativeEnvironmentFactory environmentFactory = qvti2javaCompilerStep.getEnvironmentFactory();
 		return qvti2javaCompilerStep.execute(environmentFactory, txURI, iTransformation, genModelFiles);
 	}
 
-	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
 		ScheduleManager scheduleManager = qvtm2qvtsCompilerStep.execute(environmentFactory, pResource, typedModelsConfiguration);
 		return qvts2qvtiCompilerStep.execute(environmentFactory, scheduleManager);
 	}

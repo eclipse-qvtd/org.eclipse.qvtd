@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 
 public abstract class AbstractCompilerStep implements CompilerStep
 {
@@ -86,11 +86,11 @@ public abstract class AbstractCompilerStep implements CompilerStep
 
 	@Deprecated /* Going obsolete */
 	@Override
-	public @NonNull QVTbaseEnvironmentFactory getEnvironmentFactory() {
+	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
 		EnvironmentFactoryInternal environmentFactory = ThreadLocalExecutor.basicGetEnvironmentFactory();
 		assert environmentFactory != null;
 		// XXX	assert !"main".equals(Thread.currentThread().getName());
-		return (QVTbaseEnvironmentFactory)environmentFactory;
+		return (QVTimperativeEnvironmentFactory)environmentFactory;
 	}
 
 	@Override

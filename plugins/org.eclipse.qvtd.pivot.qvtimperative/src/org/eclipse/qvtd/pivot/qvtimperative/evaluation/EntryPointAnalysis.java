@@ -42,7 +42,6 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.EntryPointAnalysisInterface;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
@@ -55,7 +54,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 /**
  * EntryPointAnalysis provides the pre-execution analysis of a particular transformation entry-point.
  */
-public class EntryPointAnalysis implements EntryPointAnalysisInterface
+public class EntryPointAnalysis
 {
 	protected final @NonNull EntryPointsAnalysis entryPointsAnalysis;
 	protected final @NonNull EntryPoint entryPoint;

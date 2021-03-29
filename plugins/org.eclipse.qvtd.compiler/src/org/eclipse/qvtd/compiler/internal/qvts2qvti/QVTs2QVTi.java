@@ -40,10 +40,10 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Transformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -59,7 +59,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ProblemHandler problemHandler;
 
-	public QVTs2QVTi(@NonNull ScheduleManager scheduleManager, @NonNull ProblemHandler problemHandler, @NonNull QVTbaseEnvironmentFactory environmentFactory) {
+	public QVTs2QVTi(@NonNull ScheduleManager scheduleManager, @NonNull ProblemHandler problemHandler, @NonNull QVTimperativeEnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 		this.scheduleManager = scheduleManager;
 		this.problemHandler = problemHandler;

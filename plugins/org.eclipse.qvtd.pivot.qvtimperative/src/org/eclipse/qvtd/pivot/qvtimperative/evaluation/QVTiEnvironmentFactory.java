@@ -18,35 +18,34 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.FlowAnalysis;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeFlowAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateParameterSubstitutionVisitor;
 
-public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
+public class QVTiEnvironmentFactory extends QVTimperativeEnvironmentFactory
 {
-	private static class QVTiCreateStrategy extends CreateStrategy
+	private static class QVTiCreateStrategy extends Strategy
 	{
 		@Override
-		public @NonNull EntryPointsAnalysisInterface createEntryPointsAnalysis(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-			return new EntryPointsAnalysis(environmentFactory, (ImperativeTransformation)transformation);
+		public @NonNull EntryPointsAnalysis createEntryPointsAnalysis(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
+			return new EntryPointsAnalysis(environmentFactory, transformation);
 		}
 
 		@Override
-		public @NonNull FlowAnalysis createFlowAnalysis(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression) {
+		public @NonNull FlowAnalysis createFlowAnalysis(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression) {
 			return new QVTimperativeFlowAnalysis(environmentFactory, contextExpression);
 		}
 
 		@Override
-		public @NonNull QVTiModelsManager createModelsManager(@NonNull EntryPointAnalysisInterface entryPointAnalysis) {
-			return new QVTiModelsManager((EntryPointAnalysis)entryPointAnalysis);
+		public @NonNull QVTiModelsManager createModelsManager(@NonNull EntryPointAnalysis entryPointAnalysis) {
+			return new QVTiModelsManager(entryPointAnalysis);
 		}
 
 		@Override
 		public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
-				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
+				@NonNull QVTimperativeEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 			return new QVTimperativeTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
 		}
 
@@ -56,7 +55,7 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 		}
 	}
 
-	public static final @NonNull CreateStrategy CREATE_STRATEGY = new QVTiCreateStrategy();
+	public static final @NonNull Strategy CREATE_STRATEGY = new QVTiCreateStrategy();
 
 	@Deprecated /* @deprecated Use QVTbaseEnvironmentFactory */
 	public QVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {

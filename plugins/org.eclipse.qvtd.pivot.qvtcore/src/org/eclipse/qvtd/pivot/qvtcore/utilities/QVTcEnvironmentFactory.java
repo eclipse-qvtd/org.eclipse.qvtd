@@ -18,21 +18,21 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.FlowAnalysis;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
-public class QVTcEnvironmentFactory extends QVTbaseEnvironmentFactory
+public class QVTcEnvironmentFactory extends QVTimperativeEnvironmentFactory
 {
-	private static class QVTcCreateStrategy extends CreateStrategy
+	private static class QVTcCreateStrategy extends Strategy
 	{
 		@Override
-		public @NonNull FlowAnalysis createFlowAnalysis(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression) {
+		public @NonNull FlowAnalysis createFlowAnalysis(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull OCLExpression contextExpression) {
 			return new QVTcoreFlowAnalysis(environmentFactory, contextExpression);
 		}
 
 		@Override
 		public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
-				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
+				@NonNull QVTimperativeEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 			return new QVTcoreTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
 		}
 
@@ -42,7 +42,7 @@ public class QVTcEnvironmentFactory extends QVTbaseEnvironmentFactory
 		}
 	}
 
-	public static final @NonNull CreateStrategy CREATE_STRATEGY = new QVTcCreateStrategy();
+	public static final @NonNull Strategy CREATE_STRATEGY = new QVTcCreateStrategy();
 
 	@Deprecated /* @deprecated Use QVTbaseEnvironmentFactory */
 	public QVTcEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
