@@ -112,7 +112,7 @@ public class QVTcSerializeTests extends LoadTestCase
 				return xtextResource;
 			}
 		};
-		serializeThread.execute();
+		serializeThread.invoke();
 	}
 
 	@Override

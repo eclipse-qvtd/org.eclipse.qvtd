@@ -12,7 +12,6 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,31 +20,21 @@ import java.util.Map;
 
 import javax.tools.JavaFileObject;
 
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
-import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
@@ -55,7 +44,6 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
@@ -74,7 +62,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThread;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
@@ -89,8 +77,6 @@ import org.eclipse.qvtd.runtime.internal.evaluation.ModificationMonitor;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
-import org.osgi.framework.Bundle;
-
 import com.google.common.collect.Iterables;
 import junit.framework.TestCase;
 import tree2talltree.tree.TreePackage;
@@ -106,293 +92,63 @@ public class QVTiCompilerTests extends LoadTestCase
 		return DefaultCompilerOptions.defaultSavingOptions;
 	}
 
-	protected static class MyQVT extends OCLInternal
+	protected class QVTiCompilationThread extends QVTimperativeEnvironmentThread<@NonNull Class<? extends Transformer>>
 	{
-		protected final @NonNull TestProject testProject;
+		protected final @NonNull URI transformURI;
+		protected final @NonNull URI genModelURI;
+		protected final boolean isIncremental;
 
-		public MyQVT(@NonNull TestProject testProject, @NonNull QVTimperativeEnvironmentFactory environmentFactory) {
-			super(environmentFactory);
-			this.testProject = testProject;
-		}
-
-		private Class<? extends Transformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg, @NonNull JavaClasspath classpath) throws Exception {
-			String qualifiedClassName = cg.getQualifiedName();
-			String javaCodeSource = cg.generateClassFile();
-			String string = explicitClassPath.toString();
-			assert string != null;
-			//			String message = OCL2JavaFileObject.saveClass(string, qualifiedClassName, javaCodeSource, extraClasspathProjects);
-			List<@NonNull JavaFileObject> compilationUnits = Collections.singletonList(new OCL2JavaFileObject(qualifiedClassName, javaCodeSource));
-			String message = JavaFileUtil.compileClasses(compilationUnits, qualifiedClassName, string, classpath);
-			if (message != null) {
-				fail(message);
-			}
-			@SuppressWarnings("unchecked")
-			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName, getClass().getClassLoader());
-			return txClass;
-		}
-
-		public @NonNull Transformer createTransformer(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
-			QVTiTransformationExecutor executor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
-			return executor.getTransformer();
-		}
-
-		public @NonNull Resource doLoad_ConcreteWithOCL(@NonNull URI inputURI) throws Exception {
-			URI cstURI = testProject.getOutputFile(ClassUtil.nonNullState(inputURI.appendFileExtension("xmi").lastSegment())).getURI();//TestUtil.getFileURI(getClass(), cstName);
-			URI pivotURI = testProject.getOutputFile(ClassUtil.nonNullState(inputURI.appendFileExtension(QVTimperativeUtil.QVTIAS_FILE_EXTENSION).lastSegment())).getURI();//TestUtil.getFileURI(getClass(), pivotName);
-			BaseCSResource xtextResource = (BaseCSResource) getResourceSet().getResource(inputURI, true);
-			assert xtextResource != null;
-			assertNoResourceErrors("Load failed", xtextResource);
-			ASResource asResource = xtextResource.getASResource();
-			//			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-			//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
-			assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
-			//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
-			TestUtil.saveAsXMI(xtextResource, cstURI, getSaveOptions());
-			asResource.setURI(pivotURI);
-
-			TestUtil.doCompleteOCLSetup();
-			URI oclURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true);
-			//			CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
-			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
-			CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, environmentFactory);
-			//			CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metamodelManager);
-			//			completeOCLEObjectValidator1.initialize();
-			completeOCLEObjectValidator2.initialize(environmentFactory);
-			//			completeOCLEObjectValidator3.initialize();
-			PivotEObjectValidator.install(ClassUtil.nonNullState(asResource.getResourceSet()), environmentFactory);
-			PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
-			PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcorePackage.eINSTANCE), null);
-			PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
-
-			assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
-			asResource.save(getSaveOptions());
-			return asResource;
-		}
-
-		protected @NonNull Class<? extends Transformer> generateCode(@NonNull ImperativeTransformation iTransformation, boolean isIncremental) throws Exception {
-			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), iTransformation);
-			QVTiCodeGenOptions options = cg.getOptions();
-			options.setIsIncremental(isIncremental);
-			options.setUseNullAnnotations(true);
-			//			options.setPackagePrefix("cg_qvtimperative_tests");
-			cg.generateClassFile();
-			TestFile srcPath = testProject.getOutputFolder(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
-			TestFile binPath = testProject.getOutputFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
-			//			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/test-gen/");
-			cg.saveSourceFile(srcPath.getFileString());
-			JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
-			classpath.addClass(getClass());
-			// System.out.println("projectNames => " + projectNames);
-			// List<@NonNull String> classpathList = classpath.getClasspathProjectList();
-			// System.out.println("classpathList => " + classpathList);
-
-			Class<? extends Transformer> txClass = compileTransformation(binPath.getFile(), cg, classpath);
-			if (txClass == null) {
-				TestCase.fail("Failed to compile transformation");
-				throw new UnsupportedOperationException();
-			}
-			return txClass;
-		}
-
-		public static @NonNull List<@NonNull String> my_createClassPathProjectList(@NonNull URIConverter uriConverter, @NonNull List<@NonNull String> projectNames) {
-			List<@NonNull String> classpathProjectList = new ArrayList<@NonNull String>();
-			for (@NonNull String projectName : projectNames) {
-				File path = my_getProjectBinFolder(uriConverter, projectName);
-				if (path != null) {
-					classpathProjectList.add(String.valueOf(path));
-				}
-			}
-			//		}
-			return classpathProjectList;
-		}
-
-		private static final @NonNull String MAVEN_TYCHO_BIN_FOLDER_NAME = "target/classes";
-		private static final @NonNull String REGULAR_BIN_FOLDER_NAME = "bin";
-
-		/**
-		 * Return the file system folder suitable for use as a javac classpath entry.
-		 *
-		 * For workspace projects this is the "bin" folder. For plugins it is the jar file.
-		 */
-		public static @Nullable File my_getProjectBinFolder(@NonNull URIConverter uriConverter, @NonNull String projectName) {
-			Class<?> class1 = QVTiCompilerTests.class;
-			String modifiedProjectName = projectName.replace('.', '/');
-			URL projectResource = class1.getResource("/" + modifiedProjectName);
-			if (projectResource != null) {
-				String projectString = projectResource.toString();
-				String pathString = projectString.substring(0, projectString.length() - modifiedProjectName.length());
-				URI pathURI = URI.createURI(pathString);
-				return new File(pathURI.isFile() ? pathURI.toFileString() : pathURI.toString());
-			}
-			//			String externalForm = resource2.toExternalForm();
-			//			java.net.URI uri2;
-			//			try {
-			//				uri2 = resource2.toURI();
-			//			} catch (URISyntaxException e) {
-			//				// TODO Auto-generated catch block
-			//				e.printStackTrace();
-			//			}
-			//			String string = resource2.toString();
-			String path = null;
-			String binDir = CGUtil.isMavenSurefire() || CGUtil.isTychoSurefire() ? MAVEN_TYCHO_BIN_FOLDER_NAME : REGULAR_BIN_FOLDER_NAME;  // FIXME determine "bin" from JDT
-			URI platformURI = URI.createPlatformResourceURI("/" + projectName + "/", true);
-			URI pathURI = uriConverter.normalize(platformURI);
-			String location = null;
-			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-				Bundle bundle = Platform.getBundle(projectName);
-				if (bundle != null) {
-					try {
-						File bundleFilePath = my_getOSGIClassPath(bundle);
-						location = bundle.getLocation();
-						path = bundleFilePath.toString();
-					} catch (IOException e) {
-						// Doesn't fail for sensible names.
-					}
-				}
-				if (path == null) {					// platform:/resource
-					IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-					IResource project = workspaceRoot.findMember(projectName);
-					if (project != null) {
-						location = String.valueOf(project.getLocation());
-						path = location + "/" + JavaFileUtil.TEST_BIN_FOLDER_NAME;
-					}
-				}
-			}
-			else if (pathURI.isArchive()) {
-				path = pathURI.toString();
-				if (path.startsWith("archive:file:") && path.endsWith("!/")) {
-					path = path.substring(13, path.length()-2);
-				}
-			}
-			else {
-				path = pathURI.toFileString();
-				if (path != null) {
-					if (!new File(path + "/META-INF").exists()) {
-						path = path + JavaFileUtil.TEST_BIN_FOLDER_NAME;
-					}
-					else {
-						path = path + binDir;
-					}
-				}
-			}
-			if (JavaFileUtil.CLASS_PATH.isActive()) {
-				StringBuilder s = new StringBuilder();
-				s.append(projectName);
-				s.append(" => ");
-				s.append(pathURI);
-				s.append(" => ");
-				if (location != null) {
-					s.append(location);
-					s.append(" => ");
-				}
-				s.append(path);
-				System.out.println(s.toString());
-			}
-			return path != null ? new File(path) : null;
-		}
-
-		/**
-		 * Return the absolute path to the 'bin' folder of a workspace bundle or the jar of a plugin.
-		 */
-		public static @NonNull File my_getOSGIClassPath(@NonNull Bundle bundle) throws IOException {
-			//
-			//  We could be helpful and use the classes from  a project, but that would be really confusing
-			//  since template classes would come from the development project whereas referenced classes
-			//  would come from the run-time plugin. Ignore the project files.
-			//
-			File bundleFile = FileLocator.getBundleFile(bundle);
-			if (bundleFile.isDirectory()) {
-				File outputPath = my_getOutputClassPath(bundleFile);
-				if (outputPath != null) {
-					return outputPath;
-				}
-			}
-			return bundleFile;
-		}
-
-		/**
-		 * Search the .classpath of bundle to locate the output classpathEntry and return the corresponding path
-		 * or null if no .classpath or output classpathentry.
-		 */
-		private static @Nullable File my_getOutputClassPath(@NonNull File bundleDirectory) throws IOException {
-			if (CGUtil.isMavenSurefire() || CGUtil.isTychoSurefire()) {
-				return new File(bundleDirectory, MAVEN_TYCHO_BIN_FOLDER_NAME);
-			}
-			File classpathEntry = new File(bundleDirectory, ".classpath");
-			if (classpathEntry.isFile()) {
-				URI uri = URI.createFileURI(classpathEntry.toString());
-				Resource resource = new GenericXMLResourceFactoryImpl().createResource(uri);
-				resource.load(null);
-				for (EObject eRoot : resource.getContents()) {
-					EClass eDocumentRoot = eRoot.eClass();
-					EStructuralFeature classpathentryRef = eDocumentRoot.getEStructuralFeature("classpathentry");
-					EStructuralFeature kindRef = eDocumentRoot.getEStructuralFeature("kind");
-					EStructuralFeature pathRef = eDocumentRoot.getEStructuralFeature("path");
-					for (EObject eObject : eRoot.eContents()) {
-						for (EObject eChild : eObject.eContents()) {
-							if (eChild.eContainmentFeature() == classpathentryRef) {
-								if ("output".equals(eChild.eGet(kindRef))) {
-									String outputPath = String.valueOf(eChild.eGet(pathRef));
-									return new File(bundleDirectory, outputPath);
-								}
-							}
-						}
-					}
-				}
-			}
-			return null;
-		}
-
-		public void execute(@NonNull Transformer tx) throws Exception {
-			tx.analyzeInputResources();
-			tx.run();
+		protected QVTiCompilationThread(@NonNull URI transformURI, @NonNull URI genModelURI, boolean isIncremental) {
+			super("QVTi-Compilation", createQVTimperativeEnvironmentThreadFactory());
+			this.transformURI = transformURI;
+			this.genModelURI = genModelURI;
+			this.isIncremental = isIncremental;
 		}
 
 		@Override
-		public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
-			return (QVTimperativeEnvironmentFactory) super.getEnvironmentFactory();
+		protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
+			ImperativeTransformation iTransformation = loadTransformation(getEnvironmentFactory(), transformURI, genModelURI);
+			return generateCode(getEnvironmentFactory(), iTransformation, isIncremental);
+		}
+	}
+
+	protected abstract class QVTiExecutionThread extends QVTimperativeEnvironmentThread<Object>
+	{
+		private Transformer transformer;
+
+		protected QVTiExecutionThread(@NonNull Class<? extends Transformer> txClass) {
+			super("QVTi-Execution", createQVTimperativeEnvironmentThreadFactory());
 		}
 
-		public @NonNull Resource loadInput(@NonNull Transformer tx, @NonNull String inputModelName, URI inputModelURI) {
-			Resource inputResource = ClassUtil.nonNullState(getResourceSet().getResource(inputModelURI, true));
-			tx.getTypedModelInstance(inputModelName).addInputResource(inputResource);
+		protected @NonNull Transformer createTransformer(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+			QVTiTransformationExecutor executor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
+			this.transformer = executor.getTransformer();
+			return transformer;
+		}
+
+		protected void execute() throws Exception {
+			transformer.analyzeInputResources();
+			transformer.run();
+		}
+
+		protected @NonNull TransformationExecutor getExecutor() {
+			return transformer.getExecutor();
+		}
+
+		protected @NonNull TypedModelInstance getTypedModelInstance(@NonNull String string) {
+			return transformer.getTypedModelInstance("tree");
+		}
+
+		protected @NonNull Resource loadInput(@NonNull String inputModelName, URI inputModelURI) {
+			Resource inputResource = ClassUtil.nonNullState(getEnvironmentFactory().getResourceSet().getResource(inputModelURI, true));
+			transformer.getTypedModelInstance(inputModelName).addInputResource(inputResource);
 			return inputResource;
 		}
 
-		public @NonNull ImperativeTransformation loadTransformation(@NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
-			OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
-			ResourceSet resourceSet = getResourceSet();
-			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
-			MetamodelManagerInternal metamodelManager = getMetamodelManager();
-			getEnvironmentFactory().configureLoadFirstStrategy();
-			Resource genResource = resourceSet.getResource(genModelURI, true);
-			for (EObject eObject : genResource.getContents()) {
-				if (eObject instanceof GenModel) {
-					GenModel genModel = (GenModel)eObject;
-					genModel.reconcile();
-					metamodelManager.addGenModel(genModel);
-				}
-			}
-			Resource resource = doLoad_ConcreteWithOCL(transformURI);
-			for (EObject eObject : resource.getContents()) {
-				if (eObject instanceof ImperativeModel) {
-					for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
-						for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
-							if (asClass instanceof ImperativeTransformation) {
-								return (ImperativeTransformation)asClass;
-							}
-						}
-					}
-				}
-			}
-			TestCase.fail("Failed to load '" + transformURI + "', '" + genModelURI + "'");
-			throw new UnsupportedOperationException();	// Never gets here
-		}
-
-		public void saveOutput(@NonNull Transformer tx, @NonNull String outputModelName, @NonNull URI outputModelURI, @Nullable URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-			ResourceSet resourceSet = getResourceSet();
+		protected void saveOutput(@NonNull String outputModelName, @NonNull URI outputModelURI, @Nullable URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
+			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
 			Resource outputResource = resourceSet.createResource(outputModelURI);
-			outputResource.getContents().addAll(tx.getTypedModelInstance(outputModelName).getRootEObjects());
+			outputResource.getContents().addAll(transformer.getTypedModelInstance(outputModelName).getRootEObjects());
 			outputResource.save(getSaveOptions());
 			Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
 			assert referenceResource != null;
@@ -402,15 +158,160 @@ public class QVTiCompilerTests extends LoadTestCase
 			}
 			assertSameModel(referenceResource, outputResource);
 		}
-	}
 
-	protected static class MyQVTiEnvironmentFactory extends QVTimperativeEnvironmentFactory
-	{
-		public MyQVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
-			super(projectMap, externalResourceSet, QVTimperativeEnvironmentStrategy.INSTANCE);
-			setEvaluationTracingEnabled(true);
+		protected void writeGraphMLfile(@NonNull URI testURI) {
+			Execution2GraphVisitor.writeGraphMLfile(transformer, testURI);
 		}
 	}
+
+	//	private static final @NonNull String MAVEN_TYCHO_BIN_FOLDER_NAME = "target/classes";
+	//	private static final @NonNull String REGULAR_BIN_FOLDER_NAME = "bin";
+
+	/*	public static @NonNull List<@NonNull String> my_createClassPathProjectList(@NonNull URIConverter uriConverter, @NonNull List<@NonNull String> projectNames) {
+		List<@NonNull String> classpathProjectList = new ArrayList<@NonNull String>();
+		for (@NonNull String projectName : projectNames) {
+			File path = my_getProjectBinFolder(uriConverter, projectName);
+			if (path != null) {
+				classpathProjectList.add(String.valueOf(path));
+			}
+		}
+		//		}
+		return classpathProjectList;
+	} */
+
+	/**
+	 * Return the file system folder suitable for use as a javac classpath entry.
+	 *
+	 * For workspace projects this is the "bin" folder. For plugins it is the jar file.
+	 *
+	public static @Nullable File my_getProjectBinFolder(@NonNull URIConverter uriConverter, @NonNull String projectName) {
+		Class<?> class1 = QVTiCompilerTests.class;
+		String modifiedProjectName = projectName.replace('.', '/');
+		URL projectResource = class1.getResource("/" + modifiedProjectName);
+		if (projectResource != null) {
+			String projectString = projectResource.toString();
+			String pathString = projectString.substring(0, projectString.length() - modifiedProjectName.length());
+			URI pathURI = URI.createURI(pathString);
+			return new File(pathURI.isFile() ? pathURI.toFileString() : pathURI.toString());
+		}
+		//			String externalForm = resource2.toExternalForm();
+		//			java.net.URI uri2;
+		//			try {
+		//				uri2 = resource2.toURI();
+		//			} catch (URISyntaxException e) {
+		//				// TODO Auto-generated catch block
+		//				e.printStackTrace();
+		//			}
+		//			String string = resource2.toString();
+		String path = null;
+		String binDir = CGUtil.isMavenSurefire() || CGUtil.isTychoSurefire() ? MAVEN_TYCHO_BIN_FOLDER_NAME : REGULAR_BIN_FOLDER_NAME;  // FIXME determine "bin" from JDT
+		URI platformURI = URI.createPlatformResourceURI("/" + projectName + "/", true);
+		URI pathURI = uriConverter.normalize(platformURI);
+		String location = null;
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			Bundle bundle = Platform.getBundle(projectName);
+			if (bundle != null) {
+				try {
+					File bundleFilePath = my_getOSGIClassPath(bundle);
+					location = bundle.getLocation();
+					path = bundleFilePath.toString();
+				} catch (IOException e) {
+					// Doesn't fail for sensible names.
+				}
+			}
+			if (path == null) {					// platform:/resource
+				IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+				IResource project = workspaceRoot.findMember(projectName);
+				if (project != null) {
+					location = String.valueOf(project.getLocation());
+					path = location + "/" + JavaFileUtil.TEST_BIN_FOLDER_NAME;
+				}
+			}
+		}
+		else if (pathURI.isArchive()) {
+			path = pathURI.toString();
+			if (path.startsWith("archive:file:") && path.endsWith("!/")) {
+				path = path.substring(13, path.length()-2);
+			}
+		}
+		else {
+			path = pathURI.toFileString();
+			if (path != null) {
+				if (!new File(path + "/META-INF").exists()) {
+					path = path + JavaFileUtil.TEST_BIN_FOLDER_NAME;
+				}
+				else {
+					path = path + binDir;
+				}
+			}
+		}
+		if (JavaFileUtil.CLASS_PATH.isActive()) {
+			StringBuilder s = new StringBuilder();
+			s.append(projectName);
+			s.append(" => ");
+			s.append(pathURI);
+			s.append(" => ");
+			if (location != null) {
+				s.append(location);
+				s.append(" => ");
+			}
+			s.append(path);
+			System.out.println(s.toString());
+		}
+		return path != null ? new File(path) : null;
+	} */
+
+	/**
+	 * Return the absolute path to the 'bin' folder of a workspace bundle or the jar of a plugin.
+	 *
+	public static @NonNull File my_getOSGIClassPath(@NonNull Bundle bundle) throws IOException {
+		//
+		//  We could be helpful and use the classes from  a project, but that would be really confusing
+		//  since template classes would come from the development project whereas referenced classes
+		//  would come from the run-time plugin. Ignore the project files.
+		//
+		File bundleFile = FileLocator.getBundleFile(bundle);
+		if (bundleFile.isDirectory()) {
+			File outputPath = my_getOutputClassPath(bundleFile);
+			if (outputPath != null) {
+				return outputPath;
+			}
+		}
+		return bundleFile;
+	} */
+
+	/**
+	 * Search the .classpath of bundle to locate the output classpathEntry and return the corresponding path
+	 * or null if no .classpath or output classpathentry.
+	 *
+	private static @Nullable File my_getOutputClassPath(@NonNull File bundleDirectory) throws IOException {
+		if (CGUtil.isMavenSurefire() || CGUtil.isTychoSurefire()) {
+			return new File(bundleDirectory, MAVEN_TYCHO_BIN_FOLDER_NAME);
+		}
+		File classpathEntry = new File(bundleDirectory, ".classpath");
+		if (classpathEntry.isFile()) {
+			URI uri = URI.createFileURI(classpathEntry.toString());
+			Resource resource = new GenericXMLResourceFactoryImpl().createResource(uri);
+			resource.load(null);
+			for (EObject eRoot : resource.getContents()) {
+				EClass eDocumentRoot = eRoot.eClass();
+				EStructuralFeature classpathentryRef = eDocumentRoot.getEStructuralFeature("classpathentry");
+				EStructuralFeature kindRef = eDocumentRoot.getEStructuralFeature("kind");
+				EStructuralFeature pathRef = eDocumentRoot.getEStructuralFeature("path");
+				for (EObject eObject : eRoot.eContents()) {
+					for (EObject eChild : eObject.eContents()) {
+						if (eChild.eContainmentFeature() == classpathentryRef) {
+							if ("output".equals(eChild.eGet(kindRef))) {
+								String outputPath = String.valueOf(eChild.eGet(pathRef));
+								return new File(bundleDirectory, outputPath);
+							}
+						}
+					}
+				}
+			}
+		}
+		return null;
+	} */
 
 	protected void checkCleared(@NonNull TransformationExecutor executor) {
 		AbstractInvocationManagerInternal invocationManager = (AbstractInvocationManagerInternal)executor.getTransformer().getInvocationManager();
@@ -428,13 +329,84 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	public QVTimperativeTestFileSystemHelper testFileSystemHelper = null;
 
+	private Class<? extends Transformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg, @NonNull JavaClasspath classpath) throws Exception {
+		String qualifiedClassName = cg.getQualifiedName();
+		String javaCodeSource = cg.generateClassFile();
+		String string = explicitClassPath.toString();
+		assert string != null;
+		//			String message = OCL2JavaFileObject.saveClass(string, qualifiedClassName, javaCodeSource, extraClasspathProjects);
+		List<@NonNull JavaFileObject> compilationUnits = Collections.singletonList(new OCL2JavaFileObject(qualifiedClassName, javaCodeSource));
+		String message = JavaFileUtil.compileClasses(compilationUnits, qualifiedClassName, string, classpath);
+		if (message != null) {
+			fail(message);
+		}
+		@SuppressWarnings("unchecked")
+		Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName, getClass().getClassLoader());
+		return txClass;
+	}
+
 	@Override
 	protected @NonNull OCLInternal createOCL() {
 		return QVTimperative.newInstance(getTestProjectManager(), null);
 	}
 
-	protected @NonNull MyQVT createQVT() throws Exception {
-		return new MyQVT(getTestProject(), new MyQVTiEnvironmentFactory(getTestProjectManager(), null));
+	private @NonNull Resource doLoad_ConcreteWithOCL(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI inputURI) throws Exception {
+		TestProject testProject2 = getTestProject();
+		URI cstURI = testProject2.getOutputFile(ClassUtil.nonNullState(inputURI.appendFileExtension("xmi").lastSegment())).getURI();//TestUtil.getFileURI(getClass(), cstName);
+		URI pivotURI = testProject2.getOutputFile(ClassUtil.nonNullState(inputURI.appendFileExtension(QVTimperativeUtil.QVTIAS_FILE_EXTENSION).lastSegment())).getURI();//TestUtil.getFileURI(getClass(), pivotName);
+		BaseCSResource xtextResource = (BaseCSResource) environmentFactory.getResourceSet().getResource(inputURI, true);
+		assert xtextResource != null;
+		assertNoResourceErrors("Load failed", xtextResource);
+		ASResource asResource = xtextResource.getASResource();
+		//			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+		//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
+		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
+		//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
+		TestUtil.saveAsXMI(xtextResource, cstURI, getSaveOptions());
+		asResource.setURI(pivotURI);
+
+		TestUtil.doCompleteOCLSetup();
+		URI oclURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true);
+		//			CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, environmentFactory);
+		//			CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metamodelManager);
+		//			completeOCLEObjectValidator1.initialize();
+		completeOCLEObjectValidator2.initialize(environmentFactory);
+		//			completeOCLEObjectValidator3.initialize();
+		PivotEObjectValidator.install(ClassUtil.nonNullState(asResource.getResourceSet()), environmentFactory);
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcorePackage.eINSTANCE), null);
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
+
+		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
+		asResource.save(getSaveOptions());
+		return asResource;
+	}
+
+	protected @NonNull Class<? extends Transformer> generateCode(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation iTransformation, boolean isIncremental) throws Exception {
+		QVTiCodeGenerator cg = new QVTiCodeGenerator(environmentFactory, iTransformation);
+		QVTiCodeGenOptions options = cg.getOptions();
+		options.setIsIncremental(isIncremental);
+		options.setUseNullAnnotations(true);
+		//			options.setPackagePrefix("cg_qvtimperative_tests");
+		cg.generateClassFile();
+		TestProject testProject2 = getTestProject();
+		TestFile srcPath = testProject2.getOutputFolder(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
+		TestFile binPath = testProject2.getOutputFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
+		//			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/test-gen/");
+		cg.saveSourceFile(srcPath.getFileString());
+		JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
+		classpath.addClass(getClass());
+		// System.out.println("projectNames => " + projectNames);
+		// List<@NonNull String> classpathList = classpath.getClasspathProjectList();
+		// System.out.println("classpathList => " + classpathList);
+
+		Class<? extends Transformer> txClass = compileTransformation(binPath.getFile(), cg, classpath);
+		if (txClass == null) {
+			TestCase.fail("Failed to compile transformation");
+			throw new UnsupportedOperationException();
+		}
+		return txClass;
 	}
 
 	@Override
@@ -444,6 +416,36 @@ public class QVTiCompilerTests extends LoadTestCase
 			testFileSystemHelper = testFileSystemHelper2 = new QVTimperativeTestFileSystemHelper();
 		}
 		return testFileSystemHelper2;
+	}
+
+	public @NonNull ImperativeTransformation loadTransformation(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
+		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
+		ResourceSet resourceSet = environmentFactory.getResourceSet();
+		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
+		MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
+		environmentFactory.configureLoadFirstStrategy();
+		Resource genResource = resourceSet.getResource(genModelURI, true);
+		for (EObject eObject : genResource.getContents()) {
+			if (eObject instanceof GenModel) {
+				GenModel genModel = (GenModel)eObject;
+				genModel.reconcile();
+				metamodelManager.addGenModel(genModel);
+			}
+		}
+		Resource resource = doLoad_ConcreteWithOCL(environmentFactory, transformURI);
+		for (EObject eObject : resource.getContents()) {
+			if (eObject instanceof ImperativeModel) {
+				for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
+					for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
+						if (asClass instanceof ImperativeTransformation) {
+							return (ImperativeTransformation)asClass;
+						}
+					}
+				}
+			}
+		}
+		TestCase.fail("Failed to load '" + transformURI + "', '" + genModelURI + "'");
+		throw new UnsupportedOperationException();	// Never gets here
 	}
 
 	@Override
@@ -464,14 +466,21 @@ public class QVTiCompilerTests extends LoadTestCase
 		//
 		URI outputModelURI = getTestURI("HSLNode.xmi");
 		//
-		MyQVT myQVT = createQVT();
-		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
-		Transformer tx = myQVT.createTransformer(txClass);
-		myQVT.loadInput(tx, "hsv", inputModelURI);
-		myQVT.execute(tx);
-		myQVT.saveOutput(tx, "hsl", outputModelURI, referenceModelURI, null);
-		myQVT.dispose();
+		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
+		Class<? extends Transformer> txClass = compilationThread.invoke();
+		//
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				createTransformer(txClass);
+				loadInput("hsv", inputModelURI);
+				execute();
+				saveOutput("hsl", outputModelURI, referenceModelURI, null);
+				return null;
+			}
+		};
+		executionThread.invoke();
 		cleanup("http://www.eclipse.org/qvt/examples/0.1/HSVTree",
 			"http://www.eclipse.org/qvt/examples/0.1/HSVtoHSL",
 				"http://www.eclipse.org/qvt/examples/0.1/HSLTree");
@@ -481,10 +490,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI transformURI = getModelsURI("ClassesCS2AS/ClassesCS2AS.qvti");
 		URI genModelURI = getModelsURI("ClassesCS2AS/ClassesCS2AS.genmodel");
 		//
-		MyQVT myQVT = createQVT();
-		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		myQVT.generateCode(iTransformation, false);
-		myQVT.dispose();
+		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
+		compilationThread.invoke();
 	}
 
 	public void testQVTiCompiler_ClassesCS2AS_bug459225_CG() throws Exception {
@@ -497,14 +504,21 @@ public class QVTiCompilerTests extends LoadTestCase
 		//
 		URI outputModelURI = getTestURI("example_output.xmi");
 		//
-		MyQVT myQVT = createQVT();
-		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
-		Transformer tx = myQVT.createTransformer(txClass);
-		myQVT.loadInput(tx, "leftCS", inputModelURI);
-		myQVT.execute(tx);
-		myQVT.saveOutput(tx, "rightAS", outputModelURI, referenceModelURI, null);
-		myQVT.dispose();
+		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
+		Class<? extends Transformer> txClass = compilationThread.invoke();
+		//
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				createTransformer(txClass);
+				loadInput("leftCS", inputModelURI);
+				execute();
+				saveOutput("rightAS", outputModelURI, referenceModelURI, null);
+				return null;
+			}
+		};
+		executionThread.invoke();
 		cleanup("http://tracesmodel/1.0/classescstraces",
 			"http://ocldependencyanalysis/classescs/1.0",
 				"http://ocldependencyanalysis/classes/1.0");
@@ -522,14 +536,21 @@ public class QVTiCompilerTests extends LoadTestCase
 		//
 		URI outputModelURI = getTestURI("ManualRDBMSPeople.xmi");
 		//
-		MyQVT myQVT = createQVT();
-		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
-		Transformer tx = myQVT.createTransformer(txClass);
-		myQVT.loadInput(tx, "uml", inputModelURI);
-		myQVT.execute(tx);
-		myQVT.saveOutput(tx, "rdbms", outputModelURI, referenceModelURI, ManualRDBMSNormalizer.INSTANCE);
-		myQVT.dispose();
+		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
+		Class<? extends Transformer> txClass = compilationThread.invoke();
+		//
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				createTransformer(txClass);
+				loadInput("uml", inputModelURI);
+				execute();
+				saveOutput("rdbms", outputModelURI, referenceModelURI, ManualRDBMSNormalizer.INSTANCE);
+				return null;
+			}
+		};
+		executionThread.invoke();
 		cleanup(manualuml2rdbms.uml.UMLPackage.eNS_URI,
 			manualuml2rdbms.uml2rdbms.UML2RDBMSPackage.eNS_URI,
 			manualuml2rdbms.rdbms.RDBMSPackage.eNS_URI);
@@ -547,14 +568,21 @@ public class QVTiCompilerTests extends LoadTestCase
 		//
 		URI outputModelURI = getTestURI("SimpleRDBMSPeople.xmi");
 		//
-		MyQVT myQVT = createQVT();
-		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
-		Transformer tx = myQVT.createTransformer(txClass);
-		myQVT.loadInput(tx, "uml", inputModelURI);
-		myQVT.execute(tx);
-		myQVT.saveOutput(tx, "rdbms", outputModelURI, referenceModelURI, SimpleRDBMSNormalizer.INSTANCE);
-		myQVT.dispose();
+		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
+		Class<? extends Transformer> txClass = compilationThread.invoke();
+		//
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				createTransformer(txClass);
+				loadInput("uml", inputModelURI);
+				execute();
+				saveOutput("rdbms", outputModelURI, referenceModelURI, SimpleRDBMSNormalizer.INSTANCE);
+				return null;
+			}
+		};
+		executionThread.invoke();
 		cleanup(simpleuml2rdbms.uml.UMLPackage.eNS_URI,
 			simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage.eNS_URI,
 			simpleuml2rdbms.rdbms.RDBMSPackage.eNS_URI);
@@ -572,15 +600,22 @@ public class QVTiCompilerTests extends LoadTestCase
 		//
 		URI outputModelURI = getTestURI("Tree2TallTree.xmi");
 		//
-		MyQVT myQVT = createQVT();
-		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, false);
-		Transformer tx = myQVT.createTransformer(txClass);
-		myQVT.loadInput(tx, "tree", inputModelURI);
-		myQVT.execute(tx);
-		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-execution.graphml"));
-		myQVT.dispose();
+		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
+		Class<? extends Transformer> txClass = compilationThread.invoke();
+		//
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				createTransformer(txClass);
+				loadInput("tree", inputModelURI);
+				execute();
+				saveOutput("talltree", outputModelURI, referenceModelURI, null);
+				writeGraphMLfile(getTestURI("Tree2TallTree-execution.graphml"));
+				return null;
+			}
+		};
+		executionThread.invoke();
 		cleanup(TreePackage.eNS_URI);
 	}
 
@@ -597,34 +632,41 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getTestURI("Tree2TallTree.xmi");
 		URI changedOutputModelURI = getTestURI("samples/Tree2TallTreeChanged.xmi");
 		//
-		MyQVT myQVT = createQVT();
-		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, true);
-		Transformer tx = myQVT.createTransformer(txClass);
-		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
-		myQVT.execute(tx);
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-inc.graphml"));
-		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
-		TransformationExecutor executor = tx.getExecutor();
-		TypedModelInstance treeModel = tx.getTypedModelInstance("tree");
-		@SuppressWarnings("unused") ModificationMonitor monitor = ModificationMonitor.getModificationMonitor(treeModel, inputResource, executor);
-		int gotOne = 0;
-		for (EObject eObject : new TreeIterable(inputResource)) {
-			EClass eClass = eObject.eClass();
-			if ("Node".equals(eClass.getName())) {
-				EAttribute nameAttribute = (EAttribute) eClass.getEStructuralFeature("name");
-				Object name = eObject.eGet(nameAttribute);
-				if ("n1.1".equals(name)) {
-					gotOne++;
-					eObject.eSet(nameAttribute, "x1.1");
+		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, true);
+		Class<? extends Transformer> txClass = compilationThread.invoke();
+		//
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				createTransformer(txClass);
+				Resource inputResource = loadInput("tree", inputModelURI);
+				execute();
+				writeGraphMLfile(getTestURI("Tree2TallTree-inc.graphml"));
+				saveOutput("talltree", outputModelURI, referenceModelURI, null);
+				TransformationExecutor executor = getExecutor();
+				TypedModelInstance treeModel = getTypedModelInstance("tree");
+				@SuppressWarnings("unused") ModificationMonitor monitor = ModificationMonitor.getModificationMonitor(treeModel, inputResource, executor);
+				int gotOne = 0;
+				for (EObject eObject : new TreeIterable(inputResource)) {
+					EClass eClass = eObject.eClass();
+					if ("Node".equals(eClass.getName())) {
+						EAttribute nameAttribute = (EAttribute) eClass.getEStructuralFeature("name");
+						Object name = eObject.eGet(nameAttribute);
+						if ("n1.1".equals(name)) {
+							gotOne++;
+							eObject.eSet(nameAttribute, "x1.1");
+						}
+					}
 				}
+				assert gotOne == 1;
+				executor.getTransformer().getInvocationManager().flush();
+				writeGraphMLfile(getTestURI("Tree2TallTree-incChanged.graphml"));
+				saveOutput("talltree", changedOutputModelURI, changedReferenceModelURI, null);
+				return null;
 			}
-		}
-		assert gotOne == 1;
-		executor.getTransformer().getInvocationManager().flush();
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-incChanged.graphml"));
-		myQVT.saveOutput(tx, "talltree", changedOutputModelURI, changedReferenceModelURI, null);
-		myQVT.dispose();
+		};
+		executionThread.invoke();
 		cleanup(TreePackage.eNS_URI);
 	}
 
@@ -642,37 +684,42 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI clearedOutputModelURI = getTestURI("Tree2TallTreeCleared.xmi");
 		URI copiedOutputModelURI = getTestURI("Tree2TallTreeCopied.xmi");
 		//
-		MyQVT myQVT = createQVT();
-		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, true);
-		Transformer tx = myQVT.createTransformer(txClass);
-		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
-		myQVT.execute(tx);
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-inc.graphml"));
-		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
-		TransformationExecutor executor = tx.getExecutor();
-		TypedModelInstance treeModel = tx.getTypedModelInstance("tree");
-		@SuppressWarnings("unused") ModificationMonitor monitor = ModificationMonitor.getModificationMonitor(treeModel, inputResource, executor);
-		List<@NonNull EObject> contents = inputResource.getContents();
-		List<@NonNull EObject> oldContents = new ArrayList<>(contents);
-		Collection<@NonNull EObject> newContents = EcoreUtil.copyAll(oldContents);
-		contents.clear();
+		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, true);
+		Class<? extends Transformer> txClass = compilationThread.invoke();
+		//
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				createTransformer(txClass);
+				Resource inputResource = loadInput("tree", inputModelURI);
+				execute();
+				writeGraphMLfile(getTestURI("Tree2TallTree-inc.graphml"));
+				saveOutput("talltree", outputModelURI, referenceModelURI, null);
+				TransformationExecutor executor = getExecutor();
+				TypedModelInstance treeModel = getTypedModelInstance("tree");
+				@SuppressWarnings("unused") ModificationMonitor monitor = ModificationMonitor.getModificationMonitor(treeModel, inputResource, executor);
+				List<@NonNull EObject> contents = inputResource.getContents();
+				List<@NonNull EObject> oldContents = new ArrayList<>(contents);
+				Collection<@NonNull EObject> newContents = EcoreUtil.copyAll(oldContents);
+				contents.clear();
 
-		checkCleared(executor);
-		InvocationManager invocationManager = executor.getTransformer().getInvocationManager();
+				checkCleared(executor);
+				InvocationManager invocationManager = executor.getTransformer().getInvocationManager();
 
-		//		oldContents.addAll(newContents);
-		invocationManager.flush();
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-incCleared.graphml"));
-		myQVT.saveOutput(tx, "talltree", clearedOutputModelURI, clearedReferenceModelURI, null);
+				//		oldContents.addAll(newContents);
+				invocationManager.flush();
+				writeGraphMLfile(getTestURI("Tree2TallTree-incCleared.graphml"));
+				saveOutput("talltree", clearedOutputModelURI, clearedReferenceModelURI, null);
 
-		contents.addAll(newContents);
-		invocationManager.flush();
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-incCopied.graphml"));
-		myQVT.saveOutput(tx, "talltree", copiedOutputModelURI, referenceModelURI, null);
-
-
-		myQVT.dispose();
+				contents.addAll(newContents);
+				invocationManager.flush();
+				writeGraphMLfile(getTestURI("Tree2TallTree-incCopied.graphml"));
+				saveOutput("talltree", copiedOutputModelURI, referenceModelURI, null);
+				return null;
+			}
+		};
+		executionThread.invoke();
 		cleanup("http://www.eclipse.org/qvt/examples/0.1/List2List",
 			"http://www.eclipse.org/qvt/examples/0.1/Tree",
 				"http://www.eclipse.org/qvt/examples/0.1/TallTree");
@@ -692,35 +739,42 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getTestURI("Tree2TallTree.xmi");
 		URI deletedOutputModelURI = getTestURI("Tree2TallTreeDeleted.xmi");
 		//
-		MyQVT myQVT = createQVT();
-		ImperativeTransformation iTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(iTransformation, true);
-		Transformer tx = myQVT.createTransformer(txClass);
-		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
-		myQVT.execute(tx);
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-inc.graphml"));
-		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
-		TransformationExecutor executor = tx.getExecutor();
-		TypedModelInstance treeModel = tx.getTypedModelInstance("tree");
-		ModificationMonitor monitor = ModificationMonitor.getModificationMonitor(treeModel,inputResource, executor);
-		int gotOne = 0;
-		for (EObject eObject : new TreeIterable(inputResource)) {
-			EClass eClass = eObject.eClass();
-			if ("Node".equals(eClass.getName())) {
-				EAttribute nameAttribute = (EAttribute) eClass.getEStructuralFeature("name");
-				Object name = eObject.eGet(nameAttribute);
-				if ("n1.1.1".equals(name)) {
-					gotOne++;
-					PivotUtilInternal.resetContainer(eObject);
+		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, true);
+		Class<? extends Transformer> txClass = compilationThread.invoke();
+		//
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				createTransformer(txClass);
+				Resource inputResource = loadInput("tree", inputModelURI);
+				execute();
+				writeGraphMLfile(getTestURI("Tree2TallTree-inc.graphml"));
+				saveOutput("talltree", outputModelURI, referenceModelURI, null);
+				TransformationExecutor executor = getExecutor();
+				TypedModelInstance treeModel = getTypedModelInstance("tree");
+				ModificationMonitor monitor = ModificationMonitor.getModificationMonitor(treeModel,inputResource, executor);
+				int gotOne = 0;
+				for (EObject eObject : new TreeIterable(inputResource)) {
+					EClass eClass = eObject.eClass();
+					if ("Node".equals(eClass.getName())) {
+						EAttribute nameAttribute = (EAttribute) eClass.getEStructuralFeature("name");
+						Object name = eObject.eGet(nameAttribute);
+						if ("n1.1.1".equals(name)) {
+							gotOne++;
+							PivotUtilInternal.resetContainer(eObject);
+						}
+					}
 				}
+				assert gotOne == 1;
+				executor.getTransformer().getInvocationManager().flush();
+				writeGraphMLfile(getTestURI("Tree2TallTree-incDeleted.graphml"));
+				saveOutput("talltree", deletedOutputModelURI, deletedReferenceModelURI, null);
+				monitor.dispose();
+				return null;
 			}
-		}
-		assert gotOne == 1;
-		executor.getTransformer().getInvocationManager().flush();
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestURI("Tree2TallTree-incDeleted.graphml"));
-		myQVT.saveOutput(tx, "talltree", deletedOutputModelURI, deletedReferenceModelURI, null);
-		monitor.dispose();
-		myQVT.dispose();
+		};
+		executionThread.invoke();
 		cleanup(TreePackage.eNS_URI);
 	}
 
@@ -735,11 +789,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI referenceModelURI = getTestModelsFileURI("Tree2TallTree/TallTreeValidate.xmi");
 		URI referenceModelURI2 = getTestModelsFileURI("Tree2TallTree/TallTreeValidate2.xmi");
 		Class<? extends Transformer> txClass = Tree2TallTree.class;
-		Transformer tx = myQVT.createTransformer(txClass);
-		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
-		myQVT.execute(tx);
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestModelsFileURI("Tree2TallTree/graphs/Tree2TallTree-inc.graphml"));
-		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
+		Transformer tx1 = createTransformer(txClass);
+		Resource inputResource = loadInput("tree", inputModelURI);
+		transform();
+		writeGraphMLfile(getTestModelsFileURI("Tree2TallTree/graphs/Tree2TallTree-inc.graphml"));
+		saveOutput("talltree", outputModelURI, referenceModelURI, null);
 		TransformationExecutor executor = tx.getExecutor();
 		ModificationMonitor monitor = ModificationMonitor.getModificationMonitor(inputResource, executor);
 		int gotOne = 0;
@@ -756,8 +810,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		}
 		assert gotOne == 1;
 		executor.getTransformer().getInvocationManager().flush();
-		Execution2GraphVisitor.writeGraphMLfile(tx, getTestModelsFileURI("Tree2TallTree/graphs/Tree2TallTree-inc2.graphml"));
-		myQVT.saveOutput(tx, "talltree", outputModelURI2, referenceModelURI2, null);
+		writeGraphMLfile(getTestModelsFileURI("Tree2TallTree/graphs/Tree2TallTree-inc2.graphml"));
+		saveOutput("talltree", outputModelURI2, referenceModelURI2, null);
 		myQVT.dispose();
 	} */
 
@@ -772,10 +826,10 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI referenceModelURI = getTestModelsFileURI("Tree2TallTree/samples/TallTreeValidate.xmi");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
-		Transformer tx = myQVT.createTransformer(txClass);
-		myQVT.loadInput(tx, "tree", inputModelURI);
-		myQVT.execute(tx);
-		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
+		Transformer tx1 = createTransformer(txClass);
+		loadInput("tree", inputModelURI);
+		transform();
+		saveOutput("talltree", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
 	} */
 }

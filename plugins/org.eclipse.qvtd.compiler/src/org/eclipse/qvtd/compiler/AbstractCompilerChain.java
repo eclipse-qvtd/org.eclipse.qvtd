@@ -457,7 +457,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			}
 		};
 		//		return thread.syncStart();
-		ImperativeTransformation result = thread.execute();
+		ImperativeTransformation result = thread.invoke();
 		return new CompilationResult(thread, result);
 	}
 
@@ -517,7 +517,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				return generate(environmentFactory, asTransformation, genModelFiles);
 			}
 		};
-		return thread.execute();
+		return thread.invoke();
 	}
 
 	protected @NonNull Class<? extends Transformer> generate(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {

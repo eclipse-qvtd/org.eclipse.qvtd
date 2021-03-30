@@ -155,41 +155,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 		}
 	}
 
-	/*	protected class zzMyQVT extends AbstractTestQVT
-	{
-		private @NonNull ModeFactory modeFactory;
-
-		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI, @NonNull ModeFactory modeFactory) throws IOException {
-			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
-			this.modeFactory = modeFactory;
-		}
-
-		public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
-			QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory();
-			return checkOutput(environmentThreadFactory, actualURI, expectedURI, normalizer);
-		}
-
-		@Override
-		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			return new QVTiCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI/ *getTestURIWithExtension(txURI, null)* /, createCompilerOptions());
-		}
-
-		@Override
-		protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
-			return new BasicQVTiExecutor(environmentFactory, transformation, modeFactory);
-		}
-
-		@Override
-		protected @NonNull String getBasePrefix() {
-			return "org.eclipse.qvtd.xtext.qvtimperative.tests";
-		}
-
-		@Override
-		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) {
-			return QVTiInterpreterTests.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
-		}
-	} */
-
 	/**
 	 * Assert same model.
 	 *
@@ -225,7 +190,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		checkThread.execute();
+		checkThread.invoke();
 	}
 
 	protected @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
@@ -265,7 +230,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return actualResource;
 			}
 		};
-		return checkThread.execute();
+		return checkThread.invoke();
 	}
 
 	private void checkOutput(@NonNull Resource outputResource, @NonNull URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
@@ -300,7 +265,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return transformation;
 			}
 		};
-		ImperativeTransformation transformation = loadThread.execute();
+		ImperativeTransformation transformation = loadThread.invoke();
 		return new CompilationResult(loadThread, transformation);
 	}
 
@@ -349,7 +314,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 	}
 
@@ -387,7 +352,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 	}
 
@@ -428,7 +393,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 	}
 
@@ -462,7 +427,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 	}
 
@@ -496,7 +461,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 	}
 
@@ -537,7 +502,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 		cleanup("http://www.eclipse.org/qvt/examples/0.1/ManualUML",
 			"http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS",
@@ -581,7 +546,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 		cleanup("http://www.eclipse.org/qvt/examples/0.1/SimpleUML",
 			"http://www.eclipse.org/qvt/examples/0.1/SimpleUML2RDBMS",
@@ -614,7 +579,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 	}
 
@@ -644,7 +609,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 	}
 
@@ -668,7 +633,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		interpretationThread.execute();
+		interpretationThread.invoke();
 		compilationResult.dispose();
 	}
 }

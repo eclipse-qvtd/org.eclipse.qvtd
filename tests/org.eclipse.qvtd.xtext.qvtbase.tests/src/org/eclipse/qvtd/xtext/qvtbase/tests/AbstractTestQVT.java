@@ -340,7 +340,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				return actualResource;
 			}
 		};
-		Resource actualResource = checkThread.execute();
+		Resource actualResource = checkThread.invoke();
 		//	activate();
 		return actualResource;
 	}
@@ -549,7 +549,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				return null;
 			}
 		};
-		checkThread.execute();
+		checkThread.invoke();
 		//	activate();
 	}
 
@@ -594,7 +594,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				return xtextResource;
 			}
 		};
-		XtextResource xtextResource = loadThread.execute();
+		XtextResource xtextResource = loadThread.invoke();
 
 		QVTiTestThread<Object> reloadThread = new QVTiTestThread<Object>("Serialize-Reload", getTestProjectManager())
 		{
@@ -610,7 +610,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				return null;
 			}
 		};
-		reloadThread.execute();
+		reloadThread.invoke();
 		//	if (savedExecutor != null) {
 		//		ThreadLocalExecutor.setExecutor(savedExecutor);
 		//	}

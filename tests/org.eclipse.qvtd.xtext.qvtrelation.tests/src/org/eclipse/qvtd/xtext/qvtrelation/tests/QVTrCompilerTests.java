@@ -423,7 +423,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -477,7 +477,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT4.dispose();
@@ -678,7 +678,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -724,7 +724,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT4.dispose();
@@ -1026,7 +1026,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1085,7 +1085,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1267,7 +1267,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1311,7 +1311,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			interpretationThread.execute();
+			interpretationThread.invoke();
 			//
 			compilationResult.dispose();
 		}
@@ -1379,7 +1379,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1435,7 +1435,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1500,7 +1500,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1554,7 +1554,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1611,7 +1611,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1682,7 +1682,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1876,7 +1876,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -1933,7 +1933,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			interpretationThread.execute();
+			interpretationThread.invoke();
 			//
 			compilationResult.dispose();
 		}
@@ -2012,7 +2012,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -2062,7 +2062,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
@@ -2141,7 +2141,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			executionThread.execute();
+			executionThread.invoke();
 		}
 		finally {
 			myQVT2.dispose();
