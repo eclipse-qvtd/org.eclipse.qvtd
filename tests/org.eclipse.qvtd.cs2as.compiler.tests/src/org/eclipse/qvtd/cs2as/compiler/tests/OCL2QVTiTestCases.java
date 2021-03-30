@@ -141,7 +141,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			String inputURIstring = modelTestName + "/" + modelSamples + "/" + modelName + "_input.xmi";
 			String outURIstring = modelName + "_output_Interpreted.xmi";
 			String refURIstring = modelTestName + "/" + modelSamples + "/" + modelName + "_output_ref.xmi";
-			createInterpretedExecutor(tx);
+			createInterpretedExecutor(getEnvironmentFactory(), tx);
 			addInputURI(OCL2QVTm.LEFT_MODEL_TYPE_NAME, getModelsURI(inputURIstring));
 			assertTrue(executeTransformation());
 			addOutputURI(OCL2QVTm.RIGHT_MODEL_TYPE_NAME, getTestURI(outURIstring));
@@ -665,8 +665,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
 			//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 			CS2ASJavaCompilerParameters cgParams = createParameters("", "");
-			Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
-					.compileTransformation(myQVT, qvtiTransf, cgParams);
+			Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 
 			// Execute CGed transformation
 			myQVT.executeModelsTX_CG(txClass, "model1");
@@ -676,10 +675,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			myQVT.loadGenModels(getModelsURI("BaseAndDerived/SourceBaseMM.genmodel"), getModelsURI("BaseAndDerived/TargetBaseMM.genmodel"),
 				getModelsURI("BaseAndDerived/SourceDerivedMM.genmodel"), getModelsURI("BaseAndDerived/TargetDerivedMM.genmodel"));
 
-			qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetDerived.ocl",
-					"Source2TargetBase.ocl");
-			txClass = new CS2ASJavaCompilerImpl()
-					.compileTransformation(myQVT, qvtiTransf, cgParams);
+			qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetDerived.ocl", "Source2TargetBase.ocl");
+			txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 
 			// Execute CGed transformation
 			myQVT.executeModelsTX_CG(txClass, "model2");

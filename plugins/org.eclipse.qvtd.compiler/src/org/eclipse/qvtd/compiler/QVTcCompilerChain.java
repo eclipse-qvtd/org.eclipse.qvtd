@@ -18,8 +18,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -27,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
@@ -76,8 +75,8 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compile2(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
-		AbstractEnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory = new QVTcoreEnvironmentThreadFactory(projectManager);
+	public @NonNull CompilationResult compile2(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+		QVTimperativeEnvironmentThreadFactory environmentThreadFactory = new QVTcoreEnvironmentThreadFactory(projectManager);
 		return compile3(environmentThreadFactory, typedModelsConfigurations);
 	}
 

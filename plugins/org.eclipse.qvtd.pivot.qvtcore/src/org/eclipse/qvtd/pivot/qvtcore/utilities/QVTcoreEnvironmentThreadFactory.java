@@ -11,39 +11,21 @@
 package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.messages.StatusCodes.Severity;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 
 /**
  * QVTcoreEnvironmentThreadFactory transports the construction requirements from an invoking context to
  * the QVTcoreEnvironmentThread on which the QVTc processing is performed.
  */
-public class QVTcoreEnvironmentThreadFactory extends AbstractEnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory>
+public class QVTcoreEnvironmentThreadFactory extends QVTimperativeEnvironmentThreadFactory
 {
-	private @Nullable Severity severity = null;
-
 	public QVTcoreEnvironmentThreadFactory(@NonNull ProjectManager projectManager) {
 		super(projectManager);
 	}
 
-	@Override
-	public @NonNull QVTcore createEnvironment(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
-		return new QVTcore(environmentFactory);
-	}
-
-	@Override
-	public @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
-		QVTimperativeEnvironmentFactory environmentFactory = new QVTimperativeEnvironmentFactory(projectManager, null, QVTcoreEnvironmentStrategy.INSTANCE);
-		if (severity != null) {
-			environmentFactory.setSafeNavigationValidationSeverity(severity);
-		}
-		return environmentFactory;
-	}
-
-	public void setSeverity(@NonNull Severity severity) {
-		this.severity = severity;
-	}
+	//	@Override
+	//	public @NonNull QVTcore createEnvironment(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
+	//		return new QVTcore(environmentFactory);
+	//	}
 }

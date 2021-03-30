@@ -58,6 +58,7 @@ import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThre
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
+import org.eclipse.qvtd.compiler.CompilationResult;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -340,7 +341,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				return actualResource;
 			}
 		};
-		Resource actualResource = checkThread.syncExec();
+		Resource actualResource = checkThread.execute();
 		//	activate();
 		return actualResource;
 	}
@@ -356,7 +357,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	//		return compileTransformation(environmentThreadFactory, typedModelsConfigurations);
 	//	}
 
-	public @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compileTransformation(@NonNull EnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+	public @NonNull CompilationResult compileTransformation(@NonNull EnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
 		return doCompile(environmentThreadFactory, txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, createCompilerChainOptions());
 	}
 
@@ -428,30 +429,40 @@ public abstract class AbstractTestQVT extends QVTimperative
 		createGeneratedExecutor(txClass);
 	} */
 
+	@Deprecated
 	public @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull Class<? extends Transformer> txClass)  throws Exception {
 		QVTiTransformationExecutor generatedExecutor = createGeneratedExecutor(getEnvironmentFactory(), txClass);
 		this.executor = generatedExecutor;
 		return generatedExecutor;
 	}
 
-	protected @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
-		return new QVTiTransformationExecutor(environmentFactory, txClass);
+	public @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+		QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, txClass);
+		this.executor = generatedExecutor;
+		return generatedExecutor;
 	}
 
-	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull ImperativeTransformation transformation) throws Exception {
-		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(getEnvironmentFactory(), transformation);
+	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull CompilationResult compilationResult) throws Exception {
+		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(compilationResult.getEnvironmentFactory(), compilationResult.getResult());
 		this.executor = interpretedExecutor;
 		return interpretedExecutor;
 	}
 
+	@Deprecated
 	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull EntryPoint entryPoint) throws Exception {
 		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY);
 		this.executor = interpretedExecutor;
 		return interpretedExecutor;
 	}
 
+	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint) throws Exception {
+		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(environmentFactory, entryPoint, ModeFactory.LAZY);
+		this.executor = interpretedExecutor;
+		return interpretedExecutor;
+	}
+
 	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
-		return new BasicQVTiExecutor(getEnvironmentFactory(), QVTimperativeUtil.getDefaultEntryPoint(transformation), ModeFactory.LAZY);	// XXX redundant argument
+		return new BasicQVTiExecutor(environmentFactory, QVTimperativeUtil.getDefaultEntryPoint(transformation), ModeFactory.LAZY);	// XXX redundant argument
 	}
 
 	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) throws Exception {
@@ -493,14 +504,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 		AbstractEnvironmentThread<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory, QVTbase> thread = (AbstractEnvironmentThread<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory, QVTbase>) compilationThreadResult.getThread();	// XXX
 		Class<? extends Transformer> generatedClass = compilerChain.generate(thread, asTransformation, genModelFiles);
-		compilationThreadResult.syncResume();
+		compilationThreadResult.dispose();
 		return generatedClass;
 	}
 
-	protected @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> doCompile(@NonNull EnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
+	protected @NonNull CompilationResult doCompile(@NonNull EnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
 			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull CompilerOptions options) throws Exception {
 		compilerChain = createCompilerChain(getTestProjectManager(), txURI, intermediateFileNamePrefixURI, options);
-		EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compilationThreadResult = compilerChain.compile2(typedModelsConfigurations);
+		CompilationResult compilationThreadResult = compilerChain.compile2(typedModelsConfigurations);
 		ImperativeTransformation transformation = compilationThreadResult.getResult();
 		URI txASURI = transformation.eResource().getURI();
 		if (txASURI != null) {
@@ -539,7 +550,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				return null;
 			}
 		};
-		checkThread.syncExec();
+		checkThread.execute();
 		//	activate();
 	}
 
@@ -584,7 +595,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				return xtextResource;
 			}
 		};
-		XtextResource xtextResource = loadThread.syncExec();
+		XtextResource xtextResource = loadThread.execute();
 
 		QVTiTestThread<Object> reloadThread = new QVTiTestThread<Object>("Serialize-Reload", getTestProjectManager())
 		{
@@ -600,7 +611,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				return null;
 			}
 		};
-		reloadThread.syncExec();
+		reloadThread.execute();
 		//	if (savedExecutor != null) {
 		//		ThreadLocalExecutor.setExecutor(savedExecutor);
 		//	}
@@ -740,10 +751,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return classpath;
 	}
 
-	//	@Override
-	//	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-	//		return super.getEnvironmentFactory();
-	//	}
+	@Override
+	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
+		throw new IllegalStateException("Should use thread-specific QVTiEnvironmentFactory");
+	}
 
 	public @NonNull TransformationExecutor getExecutor() {
 		return ClassUtil.nonNullState(executor);

@@ -75,8 +75,8 @@ public class QVTiSerializeTests extends LoadTestCase
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		loadThread1.syncResume();
-		loadThread3.syncResume();
+		loadThread1.dispose();
+		loadThread3.dispose();
 		//	ocl1.dispose();
 		//	ocl2.dispose();
 	}
@@ -111,8 +111,8 @@ public class QVTiSerializeTests extends LoadTestCase
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
 		//	ocl1.dispose();
-		syncStart1.syncResume();
-		loadThread3.syncResume();
+		syncStart1.dispose();
+		loadThread3.dispose();
 		//	ocl2.dispose();
 	}
 

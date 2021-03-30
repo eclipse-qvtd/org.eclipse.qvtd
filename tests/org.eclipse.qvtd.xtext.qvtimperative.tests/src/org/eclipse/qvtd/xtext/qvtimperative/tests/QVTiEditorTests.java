@@ -33,7 +33,7 @@ public class QVTiEditorTests extends LoadTestCase
 			environmentThreadFactory.setSeverity(severity);
 		}
 		EnvironmentThreadResult<@NonNull Resource, ?> resumable = doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
-		resumable.syncResume();
+		resumable.dispose();
 	}
 
 	@Override

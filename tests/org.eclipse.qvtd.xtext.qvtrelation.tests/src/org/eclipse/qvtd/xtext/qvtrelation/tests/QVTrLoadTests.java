@@ -57,7 +57,7 @@ public class QVTrLoadTests extends LoadTestCase
 		//		implementationManager.addClassLoader(cl0);
 		//	}
 		EnvironmentThreadResult<@NonNull Resource, ?> resumableThread = doLoad_Concrete(inputURI, pivotURI, messages, null);
-		resumableThread.syncResume();
+		resumableThread.dispose();
 		//	ocl.dispose();
 	}
 
@@ -67,7 +67,7 @@ public class QVTrLoadTests extends LoadTestCase
 		//		OCL ocl = OCL.newInstance(getProjectMap());
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTrelationUtil.QVTRAS_FILE_EXTENSION);
 		EnvironmentThreadResult<@NonNull Resource, ?> resumableThread = doLoad_Concrete(inputURI, pivotURI, messages, null);
-		resumableThread.syncResume();
+		resumableThread.dispose();
 		//	ocl.dispose();
 	}
 

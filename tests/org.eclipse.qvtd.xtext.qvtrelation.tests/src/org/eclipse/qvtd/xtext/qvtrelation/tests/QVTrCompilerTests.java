@@ -42,19 +42,17 @@ import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
-import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.resource.ProjectManager.IPackageDescriptor;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.EnvironmentThreadResult;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
+import org.eclipse.qvtd.compiler.CompilationResult;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -67,13 +65,13 @@ import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThread;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
@@ -101,18 +99,6 @@ public class QVTrCompilerTests extends LoadTestCase
 	public static final boolean ENABLE_ATL2QVTr_reverse_CG = false;	// Set true to debug; test does not pass yet - wip
 	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
 
-	protected abstract static class InterpretedTransformationThread extends AbstractEnvironmentThread<Object, @NonNull QVTimperativeEnvironmentFactory, QVTbase>
-	{
-		protected final @NonNull MyQVT myQVT;
-		protected final @NonNull ImperativeTransformation iTransformation;
-
-		protected InterpretedTransformationThread(@NonNull MyQVT myQVT, @NonNull ImperativeTransformation iTransformation, @NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory) {
-			super("TransformationExecution", environmentThreadFactory);
-			this.myQVT = myQVT;
-			this.iTransformation = iTransformation;
-		}
-	}
-
 	public static class DummyPivotExternalURINormalizer implements ModelNormalizer
 	{
 		public static final @NonNull DummyPivotExternalURINormalizer INSTANCE = new DummyPivotExternalURINormalizer();
@@ -122,6 +108,31 @@ public class QVTrCompilerTests extends LoadTestCase
 			Model model = (Model)resource.getContents().get(0);
 			model.setExternalURI("normalized-external-uri");
 			return Collections.emptyList();
+		}
+	}
+
+	protected abstract class QVTrExecutionThread extends QVTimperativeEnvironmentThread<Object>
+	{
+		protected QVTrExecutionThread() {
+			super("QVTr-Execution", createQVTimperativeEnvironmentThreadFactory());
+		}
+	}
+
+	protected abstract class QVTrInterpretationThread extends QVTimperativeEnvironmentThread<Object>
+	{
+		protected @NonNull CompilationResult compilationResult;
+
+		protected QVTrInterpretationThread(@NonNull CompilationResult compilationResult) {
+			super("QVTr-Interpretation", createQVTimperativeEnvironmentThreadFactory());
+			this.compilationResult = compilationResult;
+		}
+
+		@Override
+		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+			QVTimperativeEnvironmentFactory environmentFactory = compilationResult.getEnvironmentFactory();
+			environmentFactory.setCreateStrategy(QVTimperativeEnvironmentStrategy.INSTANCE);
+			ThreadLocalExecutor.attachEnvironmentFactory(environmentFactory);
+			return environmentFactory;
 		}
 	}
 
@@ -157,7 +168,7 @@ public class QVTrCompilerTests extends LoadTestCase
 
 		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
 			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
-			getEnvironmentFactory().setSafeNavigationValidationSeverity(StatusCodes.Severity.WARNING);
+			//	getEnvironmentFactory().setSafeNavigationValidationSeverity(StatusCodes.Severity.WARNING);
 		}
 
 		public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
@@ -165,12 +176,12 @@ public class QVTrCompilerTests extends LoadTestCase
 			return checkOutput(environmentThreadFactory, actualURI, expectedURI, normalizer);
 		}
 
-		public @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compileTransformation(@NonNull String outputName) throws Exception {
+		public @NonNull CompilationResult compileTransformation(@NonNull String outputName) throws Exception {
 			SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
 			return compileTransformation(typedModelsConfigurations);
 		}
 
-		public @NonNull EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+		public @NonNull CompilationResult compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
 			AbstractEnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory = createQVTrelationEnvironmentThreadFactory();
 			return compileTransformation(environmentThreadFactory, typedModelsConfigurations);
 		}
@@ -350,7 +361,6 @@ public class QVTrCompilerTests extends LoadTestCase
 		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.atl");
 		testFileSystemHelper.addExportedPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr");
-		Class<? extends Transformer> txClass1 = null;
 		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
 		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
@@ -368,46 +378,56 @@ public class QVTrCompilerTests extends LoadTestCase
 		classpath1.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
 		classpath1.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
 		classpath1.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
-		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-			assert classLoader != null;
-			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
-			txClass1 = myQVT1.buildTransformation("qvtr", false);
-			//			Class<? extends Transformer> txClass = ATL2QVTr.class;
-			//
-			//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
-			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
-			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
-		}
-		finally {
-			myQVT1.dispose();
-			myQVT1 = null;
-		}
+		//	try {
+		ClassLoader classLoader = getClass().getClassLoader();
+		assert classLoader != null;
+		((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
+		Class<? extends Transformer> txClass1 = myQVT1.buildTransformation("qvtr", false);
+		//			Class<? extends Transformer> txClass = ATL2QVTr.class;
+		//
+		//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
+		//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
+		//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+		//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
+		//	}
+		//	finally {
+		myQVT1.dispose();
+		myQVT1 = null;
+		//	}
 		ThreadLocalExecutor.waitForGC();
 		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
 		MyQVT myQVT2 = createQVT("ATL2QVTr", txURI1);
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
-			myQVT2.createGeneratedExecutor(txClass1);
-			//	if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			EMFTCSInjector.class.getName();				// Hidden ATL dependency
-			AtlParser.class.getName();					// Hidden ATL dependency
-			myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-			myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl"));
-			//	}
-			//	else {
-			//		myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
-			//	}
-			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("qvtr", txURI2);
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), QVTrNormalizer.INSTANCE);	// FIXME normalization unnecessary once Relation domains ordered by tx
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass1);
+					//	if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+					EMFTCSInjector.class.getName();				// Hidden ATL dependency
+					AtlParser.class.getName();					// Hidden ATL dependency
+					myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+					myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl"));
+					//	}
+					//	else {
+					//		myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
+					//	}
+					ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("qvtr", txURI2);
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), QVTrNormalizer.INSTANCE);	// FIXME normalization unnecessary once Relation domains ordered by tx
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 		ThreadLocalExecutor.waitForGC();
 		Class<? extends Transformer> txClass3;
@@ -442,16 +462,26 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT4.loadEPackage(txClass3, "Persons.PersonsPackage");
 			myQVT4.loadEPackage(txClass3, "trace_Families2Persons.trace_Families2PersonsPackage");
 			//
-			myQVT4.createGeneratedExecutor(txClass3);
-			myQVT4.addInputURI("Families", getModelsURI("families2persons/samples/Families.xmi"));
-			myQVT4.executeTransformation();
-			myQVT4.addOutputURI("Persons", getTestURI("Persons_CG.xmi"));
-			myQVT4.saveModels(null);
-			myQVT4.checkOutput(getTestURI("Persons_CG.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT4.createGeneratedExecutor(environmentFactory, txClass3);
+					myQVT4.addInputURI("Families", getModelsURI("families2persons/samples/Families.xmi"));
+					myQVT4.executeTransformation();
+					myQVT4.addOutputURI("Persons", getTestURI("Persons_CG.xmi"));
+					myQVT4.saveModels(null);
+					myQVT4.checkOutput(getTestURI("Persons_CG.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT4.dispose();
-			myQVT4 = null;
+			//	myQVT4 = null;
 			cleanup("http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/qvtrelation/tests/newatl2qvtr/NewATL2QVTr");
 		}
 	}
@@ -624,25 +654,35 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT2 = createQVT("ATL2QVTr", txURI2);
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
-			myQVT2.createGeneratedExecutor(txClass1);
-			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-				EMFTCSInjector.class.getName();				// Hidden ATL dependency
-				AtlParser.class.getName();					// Hidden ATL dependency
-				myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-				myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl"));
-			}
-			else {
-				myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
-			}
-			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("qvtr", txURI2);
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), null);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass1);
+					if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+						EMFTCSInjector.class.getName();				// Hidden ATL dependency
+						AtlParser.class.getName();					// Hidden ATL dependency
+						myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+						myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl"));
+					}
+					else {
+						myQVT2.addInputURI("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
+					}
+					ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("qvtr", txURI2);
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), null);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 		ThreadLocalExecutor.waitForGC();
 		Class<? extends Transformer> txClass3;
@@ -669,16 +709,26 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT4.loadEPackage(txClass3, "Persons.PersonsPackage");
 			myQVT4.loadEPackage(txClass3, "trace_Families2Persons.trace_Families2PersonsPackage");
 			//
-			myQVT4.createGeneratedExecutor(txClass3);
-			myQVT4.addInputURI("Families", getModelsURI("families2persons/samples/Families.xmi"));
-			myQVT4.executeTransformation();
-			myQVT4.addOutputURI("Persons", getTestURI("Persons_CG.xmi"));
-			myQVT4.saveModels(null);
-			myQVT4.checkOutput(getTestURI("Persons_CG.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT4.createGeneratedExecutor(environmentFactory, txClass3);
+					myQVT4.addInputURI("Families", getModelsURI("families2persons/samples/Families.xmi"));
+					myQVT4.executeTransformation();
+					myQVT4.addOutputURI("Persons", getTestURI("Persons_CG.xmi"));
+					myQVT4.saveModels(null);
+					myQVT4.checkOutput(getTestURI("Persons_CG.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT4.dispose();
-			myQVT4 = null;
+			//	myQVT4 = null;
 		}
 	}
 
@@ -870,17 +920,16 @@ public class QVTrCompilerTests extends LoadTestCase
 		//	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		URI asURI2 = getTestURI("Families.ecore.oclas");
 		try {
-			EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = myQVT.compileTransformation("as");
-			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
+			CompilationResult compilationResult = myQVT.compileTransformation("as");
 			//
-			myQVT.createInterpretedExecutor(iTransformation);
+			myQVT.createInterpretedExecutor(compilationResult);
 			myQVT.addInputURI("ecore", ecoreURI);
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("as", asURI2);
 			myQVT.saveModels(null);
 			myQVT.checkOutput(asURI2, asURI2a, DummyPivotExternalURINormalizer.INSTANCE);
 			//
-			compilationThreadResult.syncResume();
+			compilationResult.dispose();
 		}
 		finally {
 			myQVT.dispose();
@@ -908,7 +957,6 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
 		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
-		Class<? extends Transformer> txClass1 = null;
 		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.ocl.pivot/model/Ecore2Pivot.qvtr", true);
 		URI txURI1 = getModelsURI("ecore2pivotRoot/Ecore2PivotRoot.qvtr");
 		MyQVT myQVT1 = createQVT("Ecore2PivotRoot", txURI1);
@@ -918,22 +966,22 @@ public class QVTrCompilerTests extends LoadTestCase
 		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
 		ProjectManager projectManager = myQVT1.getProjectManager();
-		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-			assert classLoader != null;
-			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
-			txClass1 = myQVT1.buildTransformation("as", false);
-			//			Class<? extends Transformer> txClass = Ecore2Pivot.class;
-			//
-			//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
-			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
-			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
-		}
-		finally {
-			myQVT1.dispose();
-			myQVT1 = null;
-		}
+		//	try {
+		ClassLoader classLoader = getClass().getClassLoader();
+		assert classLoader != null;
+		((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
+		Class<? extends Transformer> txClass1 = myQVT1.buildTransformation("as", false);
+		//			Class<? extends Transformer> txClass = Ecore2Pivot.class;
+		//
+		//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
+		//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
+		//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+		//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
+		//	}
+		//	finally {
+		myQVT1.dispose();
+		myQVT1 = null;
+		//	}
 		ThreadLocalExecutor.waitForGC();
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
 		URI ecoreURI = getModelsURI("ecore2pivotRoot/Families.ecore");
@@ -962,17 +1010,27 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT2 = createQVT("Ecore2PivotRoot", txURI1);
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
-			myQVT2.createGeneratedExecutor(txClass1);
-			//			myQVT2.loadInput("ecore", getModelsURI("families2persons/Families.ecore"));
-			myQVT2.addInputURI("ecore", ecoreURI);
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("as", asURI2);
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(asURI2, asURI2a, DummyPivotExternalURINormalizer.INSTANCE);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass1);
+					//			myQVT2.loadInput("ecore", getModelsURI("families2persons/Families.ecore"));
+					myQVT2.addInputURI("ecore", ecoreURI);
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("as", asURI2);
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(asURI2, asURI2a, DummyPivotExternalURINormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 			cleanup("http://www.eclipse.org/qvtd-example/org/eclipse/ocl/pivot2/ecore2pivotRoot/Ecore2PivotRoot");
 		}
 	}
@@ -1012,16 +1070,26 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.loadEPackage(txClass, "Persons.PersonsPackage");
 			myQVT2.loadEPackage(txClass, "trace_Families2Persons.trace_Families2PersonsPackage");
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("Families", getModelsURI("families2persons/samples/Families.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("Persons", getTestURI("Persons_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("Persons_CG.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("Families", getModelsURI("families2persons/samples/Families.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("Persons", getTestURI("Persons_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("Persons_CG.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1060,7 +1128,7 @@ public class QVTrCompilerTests extends LoadTestCase
 	    	myQVT.installClassName(projectTestName + ".PClassModelToClassModel.PClassModelToClassModelPackage");
 	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation);
 	    	//
-	        myQVT.createGeneratedExecutor(txClass);
+	        myQVT.createGeneratedExecutor(environmentFactory, txClass);
 	    	myQVT.loadInput("uml1", "ClassUM1.xmi");
 	    	myQVT.executeTransformation();
 			myQVT.saveOutput("uml2", "ClassUM1_CG.xmi", "ClassUM1.xmi", null);
@@ -1083,38 +1151,37 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = myQVT.compileTransformation("reverse");
-			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
+			CompilationResult compilationResult = myQVT.compileTransformation("reverse");
 			//
-			myQVT.createInterpretedExecutor(iTransformation);
+			myQVT.createInterpretedExecutor(compilationResult);
 			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", getTestURI("EmptyList_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("EmptyList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/EmptyList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iTransformation);
+			myQVT.createInterpretedExecutor(compilationResult);
 			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", getTestURI("OneElementList_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("OneElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iTransformation);
+			myQVT.createInterpretedExecutor(compilationResult);
 			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", getTestURI("TwoElementList_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("TwoElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(iTransformation);
+			myQVT.createInterpretedExecutor(compilationResult);
 			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("reverse", getTestURI("ThreeElementList_Interpreted.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("ThreeElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			compilationThreadResult.syncResume();
+			compilationResult.dispose();
 		}
 		finally {
 			myQVT.dispose();
@@ -1157,44 +1224,54 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.loadEPackage(txClass, "doublylinkedlist.doublylinkedlistPackage");
 			myQVT2.loadEPackage(txClass, "trace_Forward2Reverse.trace_Forward2ReversePackage");
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
-			myQVT2.executeTransformation("reverse");
-			myQVT2.addOutputURI("reverse", getTestURI("EmptyList_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("EmptyList_CG.xmi"), getModelsURI("forward2reverse/samples/EmptyList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
-			myQVT2.executeTransformation("reverse");
-			myQVT2.addOutputURI("reverse", getTestURI("OneElementList_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("OneElementList_CG.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
-			myQVT2.executeTransformation("reverse");
-			myQVT2.addOutputURI("reverse", getTestURI("TwoElementList_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("TwoElementList_CG.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
-			myQVT2.executeTransformation("reverse");
-			myQVT2.addOutputURI("reverse", getTestURI("ThreeElementList_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("reverse", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
-			myQVT2.executeTransformation("forward");
-			myQVT2.addOutputURI("forward", getTestURI("ThreeElementList_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
+					myQVT2.executeTransformation("reverse");
+					myQVT2.addOutputURI("reverse", getTestURI("EmptyList_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("EmptyList_CG.xmi"), getModelsURI("forward2reverse/samples/EmptyList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
+					myQVT2.executeTransformation("reverse");
+					myQVT2.addOutputURI("reverse", getTestURI("OneElementList_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("OneElementList_CG.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
+					myQVT2.executeTransformation("reverse");
+					myQVT2.addOutputURI("reverse", getTestURI("TwoElementList_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("TwoElementList_CG.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
+					myQVT2.executeTransformation("reverse");
+					myQVT2.addOutputURI("reverse", getTestURI("ThreeElementList_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("reverse", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
+					myQVT2.executeTransformation("forward");
+					myQVT2.addOutputURI("forward", getTestURI("ThreeElementList_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	notFinalmyQVT2 = null;
 		}
 	}
 
@@ -1205,51 +1282,27 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			QVTimperativeEnvironmentThreadFactory environmentThreadFactory = new QVTimperativeEnvironmentThreadFactory(getTestProjectManager());
-			EnvironmentThreadResult<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory> compilationThreadResult = myQVT.compileTransformation("flat");
-			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
+			CompilationResult compilationResult = myQVT.compileTransformation("flat");
 			//
-			InterpretedTransformationThread interpretedTransformationThread = new InterpretedTransformationThread(myQVT, iTransformation, environmentThreadFactory)
+			QVTrInterpretationThread interpretationThread = new QVTrInterpretationThread(compilationResult)
 			{
 				@Override
-				protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
-					//	QVTbaseEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
-					QVTimperativeEnvironmentFactory environmentFactory = compilationThreadResult.getEnvironmentFactory();
-					environmentFactory.setCreateStrategy(QVTimperativeEnvironmentStrategy.INSTANCE);
-					ThreadLocalExecutor.attachEnvironmentFactory(environmentFactory);
-					return environmentFactory;
-				}
-
-				@Override
-				protected @NonNull QVTbase createOCL(@NonNull QVTimperativeEnvironmentFactory environmentFactory) {
-					// TODO Auto-generated method stub
-					//	return super.createOCL(environmentFactory);
-					return new QVTbase(environmentFactory) {};
-				}
-
-				@Override
-				protected @Nullable QVTbase createOCL() {
-					// TODO Auto-generated method stub
-					return super.createOCL();
-				}
-
-				@Override
 				protected Object runWithThrowable() throws Exception {
-					myQVT.createInterpretedExecutor(iTransformation);
+					myQVT.createInterpretedExecutor(compilationResult);
 					myQVT.addInputURI("hier", getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
 					myQVT.executeTransformation();
 					myQVT.addOutputURI("flat", getTestURI("MiniModel_Interpreted.xmi"));
 					myQVT.saveModels(null);
 					myQVT.checkOutput(getTestURI("MiniModel_Interpreted.xmi"), getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
 					//
-					myQVT.createInterpretedExecutor(iTransformation);
+					myQVT.createInterpretedExecutor(compilationResult);
 					myQVT.addInputURI("hier", getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
 					myQVT.executeTransformation();
 					myQVT.addOutputURI("flat", getTestURI("SimpleModel_Interpreted.xmi"));
 					myQVT.saveModels(null);
 					myQVT.checkOutput(getTestURI("SimpleModel_Interpreted.xmi"), getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
 					//
-					myQVT.createInterpretedExecutor(iTransformation);
+					myQVT.createInterpretedExecutor(compilationResult);
 					myQVT.addInputURI("hier", getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
 					myQVT.executeTransformation();
 					myQVT.addOutputURI("flat", getTestURI("LargerModel_Interpreted.xmi"));
@@ -1258,13 +1311,13 @@ public class QVTrCompilerTests extends LoadTestCase
 					return null;
 				}
 			};
-			interpretedTransformationThread.syncExec();
+			interpretationThread.execute();
 			//
-			compilationThreadResult.syncResume();
+			compilationResult.dispose();
 		}
 		finally {
 			myQVT.dispose();
-			myQVT = null;
+			//	myQVT = null;
 		}
 	}
 
@@ -1297,30 +1350,40 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.loadEPackage(txClass, "HierarchicalStateMachine.HierarchicalStateMachinePackage");
 			myQVT2.loadEPackage(txClass, "trace_HierarchicalStateMachine2FlatStateMachine.trace_HierarchicalStateMachine2FlatStateMachinePackage");
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("flat", getTestURI("MiniModel_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("MiniModel_CG.xmi"), getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("flat", getTestURI("SimpleModel_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("SimpleModel_CG.xmi"), getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("flat", getTestURI("LargerModel_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("LargerModel_CG.xmi"), getModelsURI("hstm2fstm/samples/LargerModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("flat", getTestURI("MiniModel_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("MiniModel_CG.xmi"), getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("flat", getTestURI("SimpleModel_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("SimpleModel_CG.xmi"), getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("flat", getTestURI("LargerModel_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("LargerModel_CG.xmi"), getModelsURI("hstm2fstm/samples/LargerModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1357,16 +1420,26 @@ public class QVTrCompilerTests extends LoadTestCase
 			URI inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/model/in/hier.xmi", true);
 			URI outURI = getTestURI("generated_CG.xmi");
 			URI expectedURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/model/out/expected.xmi", true);
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", inURI);
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("flat", outURI);
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(outURI, expectedURI, FlatStateMachineNormalizer.INSTANCE);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("hier", inURI);
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("flat", outURI);
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(outURI, expectedURI, FlatStateMachineNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1395,33 +1468,43 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.loadEPackage(txClass, "HierarchicalStateMachine.HierarchicalStateMachinePackage");
 			myQVT2.loadEPackage(txClass, "trace_HierarchicalStateMachine2FlatStateMachine.trace_HierarchicalStateMachine2FlatStateMachinePackage");
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.writeGraphMLfile(getTestURI("MiniModel-incremental.graphml"));
-			myQVT2.addOutputURI("flat", getTestURI("MiniModel_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("MiniModel_CG.xmi"), getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("flat", getTestURI("SimpleModel_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.writeGraphMLfile(getTestURI("SimpleModel-incremental.graphml"));
-			myQVT2.checkOutput(getTestURI("SimpleModel_CG.xmi"), getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.writeGraphMLfile(getTestURI("LargerModel-incremental.graphml"));
-			myQVT2.addOutputURI("flat", getTestURI("LargerModel_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("LargerModel_CG.xmi"), getModelsURI("hstm2fstm/samples/LargerModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.writeGraphMLfile(getTestURI("MiniModel-incremental.graphml"));
+					myQVT2.addOutputURI("flat", getTestURI("MiniModel_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("MiniModel_CG.xmi"), getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("flat", getTestURI("SimpleModel_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.writeGraphMLfile(getTestURI("SimpleModel-incremental.graphml"));
+					myQVT2.checkOutput(getTestURI("SimpleModel_CG.xmi"), getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.writeGraphMLfile(getTestURI("LargerModel-incremental.graphml"));
+					myQVT2.addOutputURI("flat", getTestURI("LargerModel_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("LargerModel_CG.xmi"), getModelsURI("hstm2fstm/samples/LargerModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1456,16 +1539,26 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.loadEPackage(txClass, "iterated.iteratedPackage");
 			myQVT2.loadEPackage(txClass, "trace_Iterated2Iterated.trace_Iterated2IteratedPackage");
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("from", getModelsURI("iterated2iterated/samples/testcase1-in.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("to", getTestURI("testcase1-out_CG.iterated"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("testcase1-out_CG.iterated"), getModelsURI("iterated2iterated/samples/testcase1-out.xmi"), null);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("from", getModelsURI("iterated2iterated/samples/testcase1-in.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("to", getTestURI("testcase1-out_CG.iterated"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("testcase1-out_CG.iterated"), getModelsURI("iterated2iterated/samples/testcase1-out.xmi"), null);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1503,16 +1596,26 @@ public class QVTrCompilerTests extends LoadTestCase
 			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("uml", getModelsURI("mitosi/samples/transportuml.xml"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("java", getTestURI("transportjava_CG.xml"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("transportjava_CG.xml"), getModelsURI("mitosi/samples/transportjava.xml"), null);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("uml", getModelsURI("mitosi/samples/transportuml.xml"));
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("java", getTestURI("transportjava_CG.xml"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("transportjava_CG.xml"), getModelsURI("mitosi/samples/transportjava.xml"), null);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1559,21 +1662,31 @@ public class QVTrCompilerTests extends LoadTestCase
 			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("uml", getModelsURI("mitosi/samples/transportuml.xml"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("java", getTestURI("transportjava_CG.xml"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("transportjava_CG.xml"), getModelsURI("mitosi/samples/transportjava.xml"), null);
-			//
-			//	        myQVT.createGeneratedExecutor(txClass);
-			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
-			//	    	myQVT.executeTransformation();
-			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("uml", getModelsURI("mitosi/samples/transportuml.xml"));
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("java", getTestURI("transportjava_CG.xml"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("transportjava_CG.xml"), getModelsURI("mitosi/samples/transportjava.xml"), null);
+					//
+					//	        myQVT.createGeneratedExecutor(environmentFactory, txClass);
+					//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+					//	    	myQVT.executeTransformation();
+					//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1607,7 +1720,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			//	myQVT2.loadEPackage(txClass, "StmcMM.StmcMMPackage");
 			//	myQVT2.loadEPackage(txClass, "trace_SeqToStm.trace_SeqToStmPackage");
 			//
-			myQVT2.createGeneratedExecutor(txClass);
+			myQVT2.createGeneratedExecutor(environmentFactory, txClass);
 			myQVT2.loadInput("from", getModelsURI("partialPhilosophers/samples/Table3.xmi"));
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("to", getTestURI("Table3_CG.xmi"), getModelsURI("partialPhilosophers/samples/Table3_expected.xmi"), null);
@@ -1636,7 +1749,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
-			TransformationExecutor txExecutor1 = myQVT2.createGeneratedExecutor(txClass);
+			TransformationExecutor txExecutor1 = myQVT2.createGeneratedExecutor(environmentFactory, txClass);
 			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
 			txExecutor1.addInputURI("persons", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
 			txExecutor1.execute(null);
@@ -1651,7 +1764,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			//	myQVT2.removeResources();  -- re-using an executor is very dubious until  we reliably support update executions for which
 			//  we surely update rather than clean and re-use?
 
-			TransformationExecutor txExecutor2 = myQVT2.createGeneratedExecutor(txClass);
+			TransformationExecutor txExecutor2 = myQVT2.createGeneratedExecutor(environmentFactory, txClass);
 			txExecutor2.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.TRUE);
 			txExecutor2.addInputURI("persons", getModelsURI("persons2families/samples/PersonsMulti.xmi"));
 			txExecutor2.execute(null);
@@ -1743,21 +1856,31 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.loadEPackage(txClass, "Names.NamesPackage");
 			myQVT2.loadEPackage(txClass, "trace_Persons2Names2Families.trace_Persons2Names2FamiliesPackage");
 			//
-			TransformationExecutor txExecutor1 = myQVT2.createGeneratedExecutor(txClass);
-			txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
-			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
-			txExecutor1.addInputURI("persons", personFile.getURI());
-			txExecutor1.addInputURI("familiesLeft", familyFile.getURI());
-			txExecutor1.execute("families");
-			txExecutor1.addOutputURI("names", namesOutURI);
-			txExecutor1.addOutputURI("familiesRight", familiesOutURI);
-			txExecutor1.saveModels(null);
-			myQVT2.checkOutput(namesOutURI, refNamesFile.getURI(), NamesNormalizer.INSTANCE);
-			myQVT2.checkOutput(familiesOutURI, refFamilyFile.getURI(), null); //FamilyPlansNormalizer.INSTANCE);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					TransformationExecutor txExecutor1 = myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
+					txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
+					txExecutor1.addInputURI("persons", personFile.getURI());
+					txExecutor1.addInputURI("familiesLeft", familyFile.getURI());
+					txExecutor1.execute("families");
+					txExecutor1.addOutputURI("names", namesOutURI);
+					txExecutor1.addOutputURI("familiesRight", familiesOutURI);
+					txExecutor1.saveModels(null);
+					myQVT2.checkOutput(namesOutURI, refNamesFile.getURI(), NamesNormalizer.INSTANCE);
+					myQVT2.checkOutput(familiesOutURI, refFamilyFile.getURI(), null); //FamilyPlansNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1782,29 +1905,41 @@ public class QVTrCompilerTests extends LoadTestCase
 		//
 		MyQVT myQVT = createQVT("Persons2Names2Families", txFile.getURI());
 		try {
-			EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = myQVT.compileTransformation(TargetConfiguration.createTargetConfigurations("families", "persons"));
-			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
+			CompilationResult compilationResult = myQVT.compileTransformation(TargetConfiguration.createTargetConfigurations("families", "persons"));
+			ImperativeTransformation iTransformation = compilationResult.getResult();
+			EntryPoint entryPoint = QVTimperativeUtil.getEntryPoint(iTransformation, "families");
 			Map<String, Object> extensionToFactoryMap = myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
-			BasicQVTiExecutor txExecutor1 = myQVT.createInterpretedExecutor(QVTimperativeUtil.getEntryPoint(iTransformation, "families"));
-			txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
-			txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
-			txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
-			txExecutor1.addInputURI("persons", personFile.getURI());
-			txExecutor1.addInputURI("familiesLeft", familyFile.getURI());
-			txExecutor1.execute();
-			txExecutor1.addOutputURI("names", namesOutURI);
-			txExecutor1.addOutputURI("familiesRight", familiesOutURI);
-			txExecutor1.saveModels(null);
-			myQVT.checkOutput(namesOutURI, refNamesFile.getURI(), NamesNormalizer.INSTANCE);
-			myQVT.checkOutput(familiesOutURI, refFamilyFile.getURI(), null); //FamilyPlansNormalizer.INSTANCE);
+			//			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			QVTrInterpretationThread interpretationThread = new QVTrInterpretationThread(compilationResult)
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					BasicQVTiExecutor txExecutor1 = myQVT.createInterpretedExecutor(environmentFactory, entryPoint);
+					txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
+					txExecutor1.setContextualProperty("PREFER_EXISTING_FAMILY_TO_NEW", Boolean.FALSE);
+					txExecutor1.setContextualProperty("PREFER_CREATING_PARENT_TO_CHILD", Boolean.FALSE);
+					txExecutor1.addInputURI("persons", personFile.getURI());
+					txExecutor1.addInputURI("familiesLeft", familyFile.getURI());
+					txExecutor1.execute();
+					txExecutor1.addOutputURI("names", namesOutURI);
+					txExecutor1.addOutputURI("familiesRight", familiesOutURI);
+					txExecutor1.saveModels(null);
+					myQVT.checkOutput(namesOutURI, refNamesFile.getURI(), NamesNormalizer.INSTANCE);
+					myQVT.checkOutput(familiesOutURI, refFamilyFile.getURI(), null); //FamilyPlansNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			interpretationThread.execute();
 			//
-			compilationThreadResult.syncResume();
+			compilationResult.dispose();
 		}
 		finally {
 			myQVT.dispose();
-			myQVT = null;
+			//	myQVT = null;
 		}
 	}
 
@@ -1815,15 +1950,16 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = createQVT("SeqToStm", getModelsURI("seq2stm/SeqToStm.qvtr"));
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			EnvironmentThreadResult<@NonNull ImperativeTransformation, ?> compilationThreadResult = myQVT.compileTransformation("stm");
-			ImperativeTransformation iTransformation = compilationThreadResult.getResult();
-			myQVT.createInterpretedExecutor(iTransformation);
+			CompilationResult compilationResult = myQVT.compileTransformation("stm");
+			myQVT.createInterpretedExecutor(compilationResult);
 			myQVT.addInputURI("seqDgm", getModelsURI("seq2stm/samples/Seq.xmi"));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("stm", getTestURI("Stmc_Interpreted.xmi"));
 			myQVT.addOutputURI(QVTbaseUtil.TRACE_TYPED_MODEL_NAME, getTestURI("Seq2Stmc_trace.xmi"));
 			myQVT.saveModels(null);
 			myQVT.checkOutput(getTestURI("Stmc_Interpreted.xmi"), getModelsURI("seq2stm/samples/Stmc_expected.xmi"), null);
+			//
+			compilationResult.dispose();
 		}
 		finally {
 			myQVT.dispose();
@@ -1861,16 +1997,26 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.loadEPackage(txClass, "StmcMM.StmcMMPackage");
 			myQVT2.loadEPackage(txClass, "trace_SeqToStm.trace_SeqToStmPackage");
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("seqDgm", getModelsURI("seq2stm/samples/Seq.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("stm", getTestURI("Stmc_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("Stmc_CG.xmi"), getModelsURI("seq2stm/samples/Stmc_expected.xmi"), null);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("seqDgm", getModelsURI("seq2stm/samples/Seq.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.addOutputURI("stm", getTestURI("Stmc_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("Stmc_CG.xmi"), getModelsURI("seq2stm/samples/Stmc_expected.xmi"), null);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1900,17 +2046,27 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.loadEPackage(txClass, "StmcMM.StmcMMPackage");
 			myQVT2.loadEPackage(txClass, "trace_SeqToStm.trace_SeqToStmPackage");
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("seqDgm", getModelsURI("seq2stm/samples/Seq.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.writeGraphMLfile(getTestURI("SeqToStm-incremental.graphml"));
-			myQVT2.addOutputURI("stm", getTestURI("Stmc_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("Stmc_CG.xmi"), getModelsURI("seq2stm/samples/Stmc_expected.xmi"), null);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("seqDgm", getModelsURI("seq2stm/samples/Seq.xmi"));
+					myQVT2.executeTransformation();
+					myQVT2.writeGraphMLfile(getTestURI("SeqToStm-incremental.graphml"));
+					myQVT2.addOutputURI("stm", getTestURI("Stmc_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("Stmc_CG.xmi"), getModelsURI("seq2stm/samples/Stmc_expected.xmi"), null);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1949,37 +2105,47 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.loadEPackage(txClass, "trace_TinyIsomorph.trace_TinyIsomorphPackage");
 			myQVT2.loadEPackage(txClass, "mmb.mmbPackage");
 			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/Zero.xmi"));
-			myQVT2.executeTransformation("mmb");
-			myQVT2.addOutputURI("mmb", getTestURI("Zero_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("Zero_CG.xmi"), getModelsURI("tinyisomorph/samples/Zero_expected.xmi"), null);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/One.xmi"));
-			myQVT2.executeTransformation("mmb");
-			myQVT2.addOutputURI("mmb", getTestURI("One_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("One_CG.xmi"), getModelsURI("tinyisomorph/samples/One_expected.xmi"), null);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/Two.xmi"));
-			myQVT2.executeTransformation("mmb");
-			myQVT2.addOutputURI("mmb", getTestURI("Two_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("Two_CG.xmi"), getModelsURI("tinyisomorph/samples/Two_expected.xmi"), null);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/Three.xmi"));
-			myQVT2.executeTransformation("mmb");
-			myQVT2.addOutputURI("mmb", getTestURI("Three_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("Three_CG.xmi"), getModelsURI("tinyisomorph/samples/Three_expected.xmi"), null);
+			QVTrExecutionThread executionThread = new QVTrExecutionThread()
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/Zero.xmi"));
+					myQVT2.executeTransformation("mmb");
+					myQVT2.addOutputURI("mmb", getTestURI("Zero_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("Zero_CG.xmi"), getModelsURI("tinyisomorph/samples/Zero_expected.xmi"), null);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/One.xmi"));
+					myQVT2.executeTransformation("mmb");
+					myQVT2.addOutputURI("mmb", getTestURI("One_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("One_CG.xmi"), getModelsURI("tinyisomorph/samples/One_expected.xmi"), null);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/Two.xmi"));
+					myQVT2.executeTransformation("mmb");
+					myQVT2.addOutputURI("mmb", getTestURI("Two_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("Two_CG.xmi"), getModelsURI("tinyisomorph/samples/Two_expected.xmi"), null);
+					//
+					myQVT2.createGeneratedExecutor(environmentFactory, txClass);
+					myQVT2.addInputURI("mma", getModelsURI("tinyisomorph/samples/Three.xmi"));
+					myQVT2.executeTransformation("mmb");
+					myQVT2.addOutputURI("mmb", getTestURI("Three_CG.xmi"));
+					myQVT2.saveModels(null);
+					myQVT2.checkOutput(getTestURI("Three_CG.xmi"), getModelsURI("tinyisomorph/samples/Three_expected.xmi"), null);
+					return null;
+				}
+			};
+			executionThread.execute();
 		}
 		finally {
 			myQVT2.dispose();
-			myQVT2 = null;
+			//	myQVT2 = null;
 		}
 	}
 
@@ -1994,13 +2160,13 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("seq2stm");
 		try {
 			Class<? extends Transformer> txClass = SeqToStm.class;
-			myQVT.createGeneratedExecutor(txClass);
+			myQVT.createGeneratedExecutor(environmentFactory, txClass);
 			myQVT.loadInput("seqDgm", "Seq.xmi");
 			Transformer tx = myQVT.executeTransformation();
 			Execution2GraphVisitor.writeGraphMLfile(tx, getTestModelsFileURI("seq2stm/temp/SeqToStm-incremental.graphml"));
 			myQVT.saveOutput("stm", "Stmc_CG.xmi", "Stmc_expected.xmi", null);
 			//
-			//	        myQVT.createGeneratedExecutor(txClass);
+			//	        myQVT.createGeneratedExecutor(environmentFactory, txClass);
 			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
 			//	    	myQVT.executeTransformation();
 			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
@@ -2029,7 +2195,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("RelToCore.qvtr", "core",
 					"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/RelToCore");
 			//
-			myQVT.createGeneratedExecutor(txClass);
+			myQVT.createGeneratedExecutor(environmentFactory, txClass);
 			myQVT.loadInput("relations", "MiniSeq2Stm.qvtras");
 			myQVT.executeTransformation();
 			//	    	myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",  new EcoreResourceFactoryImpl());
@@ -2038,7 +2204,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.saveOutput(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "MiniSeq2Stm_CG_Trace.xmi", null, null);
 			myQVT.checkOutput(outputResource, "MiniSeq2Stm_expected.oclas", PivotNormalizer.INSTANCE);
 			//
-			//	        myQVT.createGeneratedExecutor(txClass);
+			//	        myQVT.createGeneratedExecutor(environmentFactory, txClass);
 			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
 			//	    	myQVT.executeTransformation();
 			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);

@@ -36,7 +36,7 @@ public class QVTcLoadTests extends LoadTestCase
 		}
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		EnvironmentThreadResult<@NonNull Resource, ?> resumable = doLoad_Concrete(environmentThreadFactory, inputURI, pivotURI, messages, severity);
-		resumable.syncResume();;
+		resumable.dispose();;
 	}
 
 	@Override

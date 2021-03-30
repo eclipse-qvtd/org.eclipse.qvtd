@@ -34,8 +34,10 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
+import org.eclipse.qvtd.compiler.CompilationResult;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTiCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLBuilder;
@@ -46,6 +48,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThread;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
@@ -59,6 +63,50 @@ import org.junit.Test;
 
 public class QVTiInterpreterTests extends LoadTestCase
 {
+	protected abstract class QVTiInterpretationThread extends QVTimperativeEnvironmentThread<Object>
+	{
+		protected @NonNull CompilationResult compilationResult;
+
+		protected QVTiInterpretationThread(@NonNull CompilationResult compilationResult) {
+			super("QVTi-Interpretation", createQVTimperativeEnvironmentThreadFactory());
+			this.compilationResult = compilationResult;
+		}
+
+		@Override
+		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+			QVTimperativeEnvironmentFactory environmentFactory = compilationResult.getEnvironmentFactory();
+			environmentFactory.setCreateStrategy(QVTimperativeEnvironmentStrategy.INSTANCE);
+			ThreadLocalExecutor.attachEnvironmentFactory(environmentFactory);
+			return environmentFactory;
+		}
+
+		protected @NonNull URIConverter getURIConverter() {
+			return getEnvironmentFactory().getResourceSet().getURIConverter();
+		}
+
+		public void saveExecutionGraph(@NonNull URI graphmlURI) throws Exception, IOException {
+			GraphMLBuilder s = new GraphMLBuilder();
+			//FIXME	        	getTransformationStatus().accept(new EvaluationStatus2GraphVisitor(s));
+			OutputStream outputStream = getURIConverter().createOutputStream(graphmlURI);
+			Writer writer = new OutputStreamWriter(outputStream);
+			writer.append(s.toString());
+			writer.close();
+		}
+
+		public void writeExecutionGraphMLfile(@NonNull BasicQVTiExecutor executor, @NonNull URI graphmlURI) {
+			try {
+				OutputStream outputStream = getURIConverter().createOutputStream(graphmlURI);
+				GraphMLStringBuilder s = new GraphMLStringBuilder();
+				executor.createGraph(s);
+				outputStream.write(s.toString().getBytes());
+				outputStream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 	protected class MyQVT extends AbstractTestQVT
 	{
 		private @NonNull ModeFactory modeFactory;
@@ -91,35 +139,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 		@Override
 		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) {
 			return QVTiInterpreterTests.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
-		}
-
-		public @NonNull ImperativeTransformation loadTransformation() throws IOException {
-			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
-			return QVTimperativeUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
-		}
-
-		public void saveExecutionGraph(@NonNull URI graphmlURI) throws Exception, IOException {
-			URIConverter uriConverter = getEnvironmentFactory().getResourceSet().getURIConverter();
-			GraphMLBuilder s = new GraphMLBuilder();
-			//FIXME	        	getTransformationStatus().accept(new EvaluationStatus2GraphVisitor(s));
-			OutputStream outputStream = uriConverter.createOutputStream(graphmlURI);
-			Writer writer = new OutputStreamWriter(outputStream);
-			writer.append(s.toString());
-			writer.close();
-		}
-
-		public void writeExecutionGraphMLfile(@NonNull URI graphmlURI) {
-			URIConverter uriConverter = getEnvironmentFactory().getResourceSet().getURIConverter();
-			try {
-				OutputStream outputStream = uriConverter.createOutputStream(graphmlURI);
-				GraphMLStringBuilder s = new GraphMLStringBuilder();
-				((BasicQVTiExecutor)getExecutor()).createGraph(s);
-				outputStream.write(s.toString().getBytes());
-				outputStream.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -164,7 +183,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				return null;
 			}
 		};
-		checkThread.syncExec();
+		checkThread.execute();
 	}
 
 	@Override
@@ -178,6 +197,22 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
 		return new MyQVT(testProjectManager, getTestProject(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI, modeFactory);
+	}
+
+	public @NonNull CompilationResult loadTransformation(@NonNull URI txURI) throws Exception {
+		QVTimperativeEnvironmentThreadFactory threadFactory = new QVTimperativeEnvironmentThreadFactory(getTestProjectManager());
+		QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation> loadThread = new QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation>("Load", threadFactory)
+		{
+			@Override
+			protected @NonNull ImperativeTransformation runWithThrowable() throws Exception {
+				QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+				ImperativeTransformation transformation = QVTimperativeUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
+				syncSuspend(transformation);
+				return transformation;
+			}
+		};
+		ImperativeTransformation transformation = loadThread.execute();
+		return new CompilationResult(loadThread, transformation);
 	}
 
 	/* (non-Javadoc)
@@ -207,18 +242,27 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("Graph2GraphMinimal.xmi");
 		URI traceURI = getTestURI("Graph2Graph.xmi");
 		MyQVT myQVT = createQVT("Graph2GraphMinimal", txURI, ModeFactory.LAZY);
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
-		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(myQVT, txASURI);
-		//
-		myQVT.addInputURI("upperGraph", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("lowerGraph", outputURI);
-		myQVT.addOutputURI("middle", traceURI);
-		myQVT.saveModels(null);
-		myQVT.saveExecutionGraph(getTestURI("Graph2GraphMinimal_LAZY.graphml"));
-		myQVT.checkOutput(outputURI, getModelsURI("Graph2GraphMinimal/Graph2GraphMinimalValidate.xmi"), null);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				BasicQVTiExecutor executor = myQVT.createInterpretedExecutor(compilationResult);
+				executor.saveTransformation(txASURI, null);
+				assertLoadable(myQVT, txASURI);
+				//
+				myQVT.addInputURI("upperGraph", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("lowerGraph", outputURI);
+				myQVT.addOutputURI("middle", traceURI);
+				myQVT.saveModels(null);
+				saveExecutionGraph(getTestURI("Graph2GraphMinimal_LAZY.graphml"));
+				myQVT.checkOutput(outputURI, getModelsURI("Graph2GraphMinimal/Graph2GraphMinimalValidate.xmi"), null);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 	}
 
@@ -238,18 +282,27 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("Graph2GraphHierarchical.xmi");
 		URI traceURI = getTestURI("Graph2Graph.xmi");
 		MyQVT myQVT = createQVT("Graph2GraphHierarchical", txURI, ModeFactory.LAZY);
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
-		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(myQVT, txASURI);
-		//
-		myQVT.addInputURI("upperGraph", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("lowerGraph", outputURI);
-		myQVT.addOutputURI("middle", traceURI);
-		myQVT.saveModels(null);
-		myQVT.saveExecutionGraph(getTestURI("Graph2GraphMinimal_LAZY.graphml"));
-		myQVT.checkOutput(outputURI, getModelsURI("Graph2GraphHierarchical/Graph2GraphHierarchicalValidate.xmi"), null);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				BasicQVTiExecutor executor = myQVT.createInterpretedExecutor(compilationResult);
+				executor.saveTransformation(txASURI, null);
+				assertLoadable(myQVT, txASURI);
+				//
+				myQVT.addInputURI("upperGraph", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("lowerGraph", outputURI);
+				myQVT.addOutputURI("middle", traceURI);
+				myQVT.saveModels(null);
+				saveExecutionGraph(getTestURI("Graph2GraphMinimal_LAZY.graphml"));
+				myQVT.checkOutput(outputURI, getModelsURI("Graph2GraphHierarchical/Graph2GraphHierarchicalValidate.xmi"), null);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 	}
 
@@ -272,18 +325,27 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("HSLNode.xmi");
 		URI traceURI = getTestURI("HSV2HSLNode.xmi");
 		MyQVT myQVT = createQVT("HSV2HSL", txURI, ModeFactory.LAZY);
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
-		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(myQVT, txASURI);
-		//
-		myQVT.addInputURI("hsv", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("hsl", outputURI);
-		myQVT.addOutputURI("middle", traceURI);
-		myQVT.saveModels(null);
-		myQVT.saveExecutionGraph(getTestURI("HSV2HSL_LAZY.graphml"));
-		myQVT.checkOutput(outputURI, getModelsURI("HSV2HSL/HSLNodeValidate.xmi"), null);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				BasicQVTiExecutor executor = myQVT.createInterpretedExecutor(compilationResult);
+				executor.saveTransformation(txASURI, null);
+				assertLoadable(myQVT, txASURI);
+				//
+				myQVT.addInputURI("hsv", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("hsl", outputURI);
+				myQVT.addOutputURI("middle", traceURI);
+				myQVT.saveModels(null);
+				saveExecutionGraph(getTestURI("HSV2HSL_LAZY.graphml"));
+				myQVT.checkOutput(outputURI, getModelsURI("HSV2HSL/HSLNodeValidate.xmi"), null);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 	}
 
@@ -298,19 +360,28 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("TallTree.xmi");
 		URI traceURI = getTestURI("Tree2TallTree.xmi");
 		MyQVT myQVT = createQVT("Tree2TallTree", txURI, ModeFactory.INCREMENTAL);
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
-		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(myQVT, txASURI);
-		//
-		myQVT.addInputURI("tree", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("talltree", outputURI);
-		myQVT.addOutputURI("tree2talltree", traceURI);
-		myQVT.saveModels(null);
-		myQVT.writeExecutionGraphMLfile(getTestURI("Tree2TallTree-execution.graphml"));
-		myQVT.saveExecutionGraph(getTestURI("Tree2TallTree_INCREMENTAL.graphml"));
-		myQVT.checkOutput(outputURI, getModelsURI("Tree2TallTree/samples/TallTreeValidate.xmi"), null);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				BasicQVTiExecutor executor = myQVT.createInterpretedExecutor(compilationResult);
+				executor.saveTransformation(txASURI, null);
+				assertLoadable(myQVT, txASURI);
+				//
+				myQVT.addInputURI("tree", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("talltree", outputURI);
+				myQVT.addOutputURI("tree2talltree", traceURI);
+				myQVT.saveModels(null);
+				writeExecutionGraphMLfile(executor, getTestURI("Tree2TallTree-execution.graphml"));
+				saveExecutionGraph(getTestURI("Tree2TallTree_INCREMENTAL.graphml"));
+				myQVT.checkOutput(outputURI, getModelsURI("Tree2TallTree/samples/TallTreeValidate.xmi"), null);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 	}
 
@@ -326,18 +397,27 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("TallTree.xmi");
 		URI traceURI = getTestURI("Tree2TallTree.xmi");
 		MyQVT myQVT = createQVT("Tree2TallTree", txURI, ModeFactory.LAZY);
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
-		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(myQVT, txASURI);
-		//
-		myQVT.addInputURI("tree", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("talltree", outputURI);
-		myQVT.addOutputURI("tree2talltree", traceURI);
-		myQVT.saveModels(null);
-		myQVT.saveExecutionGraph(getTestURI("Tree2TallTree_LAZY.graphml"));
-		myQVT.checkOutput(outputURI, getModelsURI("Tree2TallTree/samples/TallTreeValidate.xmi"), null);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				BasicQVTiExecutor executor = myQVT.createInterpretedExecutor(compilationResult);
+				executor.saveTransformation(txASURI, null);
+				assertLoadable(myQVT, txASURI);
+				//
+				myQVT.addInputURI("tree", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("talltree", outputURI);
+				myQVT.addOutputURI("tree2talltree", traceURI);
+				myQVT.saveModels(null);
+				saveExecutionGraph(getTestURI("Tree2TallTree_LAZY.graphml"));
+				myQVT.checkOutput(outputURI, getModelsURI("Tree2TallTree/samples/TallTreeValidate.xmi"), null);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 	}
 
@@ -360,18 +440,27 @@ public class QVTiInterpreterTests extends LoadTestCase
 		@SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI);
 
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
-		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(myQVT, txASURI);
-		//
-		myQVT.addInputURI("uml", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("rdbms", outputURI);
-		myQVT.addOutputURI("middle", traceURI);
-		myQVT.saveModels(null);
-		myQVT.saveExecutionGraph(getTestURI("ManualUML2RDBMS_LAZY.graphml"));
-		myQVT.checkOutput(outputURI, getModelsURI("ManualUML2RDBMS/ManualRDBMSPeopleValidate.xmi"), ManualRDBMSNormalizer.INSTANCE);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				BasicQVTiExecutor executor = myQVT.createInterpretedExecutor(compilationResult);
+				executor.saveTransformation(txASURI, null);
+				assertLoadable(myQVT, txASURI);
+				//
+				myQVT.addInputURI("uml", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("rdbms", outputURI);
+				myQVT.addOutputURI("middle", traceURI);
+				myQVT.saveModels(null);
+				saveExecutionGraph(getTestURI("ManualUML2RDBMS_LAZY.graphml"));
+				myQVT.checkOutput(outputURI, getModelsURI("ManualUML2RDBMS/ManualRDBMSPeopleValidate.xmi"), ManualRDBMSNormalizer.INSTANCE);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 		cleanup("http://www.eclipse.org/qvt/examples/0.1/ManualUML",
 			"http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS",
@@ -397,18 +486,27 @@ public class QVTiInterpreterTests extends LoadTestCase
 		@SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI);
 
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
-		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(myQVT, txASURI);
-		//
-		myQVT.addInputURI("uml", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("rdbms", outputURI);
-		myQVT.addOutputURI("middle", traceURI);
-		myQVT.saveModels(null);
-		myQVT.saveExecutionGraph(getTestURI("SimpleUML2RDBMS_LAZY.graphml"));
-		myQVT.checkOutput(outputURI, getModelsURI("SimpleUML2RDBMS/SimpleRDBMSPeopleValidate.xmi"), SimpleRDBMSNormalizer.INSTANCE);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				BasicQVTiExecutor executor = myQVT.createInterpretedExecutor(compilationResult);
+				executor.saveTransformation(txASURI, null);
+				assertLoadable(myQVT, txASURI);
+				//
+				myQVT.addInputURI("uml", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("rdbms", outputURI);
+				myQVT.addOutputURI("middle", traceURI);
+				myQVT.saveModels(null);
+				saveExecutionGraph(getTestURI("SimpleUML2RDBMS_LAZY.graphml"));
+				myQVT.checkOutput(outputURI, getModelsURI("SimpleUML2RDBMS/SimpleRDBMSPeopleValidate.xmi"), SimpleRDBMSNormalizer.INSTANCE);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 		cleanup("http://www.eclipse.org/qvt/examples/0.1/SimpleUML",
 			"http://www.eclipse.org/qvt/examples/0.1/SimpleUML2RDBMS",
@@ -423,18 +521,27 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI inputURI = getModelsURI("ClassesCS2AS/bug456900/example_input.xmi");
 		URI outputURI = getTestURI("example_output.xmi");
 		MyQVT myQVT = createQVT("ClassesCS2AS", txURI, ModeFactory.LAZY);
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
-		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(myQVT, txASURI);
-		//
-		myQVT.addInputURI("leftCS", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("rightAS", outputURI);
-		//	myQVT.saveOutput("middle", getTestURI("middle.xmi"));
-		myQVT.saveModels(null);
-		myQVT.saveExecutionGraph(getTestURI("ClassesCS2AS_LAZY.graphml"));
-		myQVT.checkOutput(outputURI, getModelsURI("ClassesCS2AS/bug456900/example_output_ref.xmi"), null);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				BasicQVTiExecutor executor = myQVT.createInterpretedExecutor(compilationResult);
+				executor.saveTransformation(txASURI, null);
+				assertLoadable(myQVT, txASURI);
+				//
+				myQVT.addInputURI("leftCS", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("rightAS", outputURI);
+				//	myQVT.saveOutput("middle", getTestURI("middle.xmi"));
+				myQVT.saveModels(null);
+				saveExecutionGraph(getTestURI("ClassesCS2AS_LAZY.graphml"));
+				myQVT.checkOutput(outputURI, getModelsURI("ClassesCS2AS/bug456900/example_output_ref.xmi"), null);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 	}
 
@@ -446,18 +553,27 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");
 		URI outputURI = getTestURI("example_output.xmi");
 		MyQVT myQVT = createQVT("ClassesCS2AS", txURI, ModeFactory.LAZY);
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
-		testEvaluator.saveTransformation(txASURI, null);
-		assertLoadable(myQVT, txASURI);
-		//
-		myQVT.addInputURI("leftCS", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("rightAS", outputURI);
-		//	myQVT.saveOutput("middle", getTestURI("middle.xmi"));
-		myQVT.saveModels(null);
-		myQVT.saveExecutionGraph(getTestURI("ClassesCS2AS_LAZY.graphml"));
-		myQVT.checkOutput(outputURI, getModelsURI("ClassesCS2AS/bug457239/example_output_ref.xmi"), null);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				BasicQVTiExecutor executor = myQVT.createInterpretedExecutor(compilationResult);
+				executor.saveTransformation(txASURI, null);
+				assertLoadable(myQVT, txASURI);
+				//
+				myQVT.addInputURI("leftCS", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("rightAS", outputURI);
+				//	myQVT.saveOutput("middle", getTestURI("middle.xmi"));
+				myQVT.saveModels(null);
+				saveExecutionGraph(getTestURI("ClassesCS2AS_LAZY.graphml"));
+				myQVT.checkOutput(outputURI, getModelsURI("ClassesCS2AS/bug457239/example_output_ref.xmi"), null);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 	}
 
@@ -468,14 +584,23 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");
 		URI outputURI = getTestURI("example_output.xmi");
 		MyQVT myQVT = createQVT("ClassesCS2AS", txURI, ModeFactory.LAZY);
-		ImperativeTransformation iTransformation = myQVT.loadTransformation();
-		myQVT.createInterpretedExecutor(iTransformation);
-		//
-		myQVT.addInputURI("leftCS", inputURI);
-		assertTrue(myQVT.executeTransformation());
-		myQVT.addOutputURI("rightAS", outputURI);
-		myQVT.saveModels(null);
-		myQVT.checkOutput(outputURI, getModelsURI("ClassesCS2AS/bug457239/exampleV2_output_ref.xmi"), null);
+		CompilationResult compilationResult = loadTransformation(txURI);
+		QVTiInterpretationThread interpretationThread = new QVTiInterpretationThread(compilationResult)
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				myQVT.createInterpretedExecutor(compilationResult);
+				//
+				myQVT.addInputURI("leftCS", inputURI);
+				assertTrue(myQVT.executeTransformation());
+				myQVT.addOutputURI("rightAS", outputURI);
+				myQVT.saveModels(null);
+				myQVT.checkOutput(outputURI, getModelsURI("ClassesCS2AS/bug457239/exampleV2_output_ref.xmi"), null);
+				return null;
+			}
+		};
+		interpretationThread.execute();
+		compilationResult.dispose();
 		myQVT.dispose();
 	}
 }

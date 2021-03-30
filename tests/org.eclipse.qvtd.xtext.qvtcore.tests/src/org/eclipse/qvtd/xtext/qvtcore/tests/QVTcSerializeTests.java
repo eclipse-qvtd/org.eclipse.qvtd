@@ -63,7 +63,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
-		loadThread.syncResume();
+		loadThread.dispose();
 	}
 
 	protected void doSerializeRoundTripFromCS(@NonNull URI inputURI) throws Exception {
@@ -86,8 +86,8 @@ public class QVTcSerializeTests extends LoadTestCase
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		loadThread1.syncResume();
-		loadThread3.syncResume();
+		loadThread1.dispose();
+		loadThread3.dispose();
 	}
 
 	public void doSerialize(@NonNull URI inputURI, @NonNull URI serializedInputURI, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved, @NonNull String @Nullable [] messages) throws Exception {
@@ -112,7 +112,7 @@ public class QVTcSerializeTests extends LoadTestCase
 				return xtextResource;
 			}
 		};
-		serializeThread.syncExec();
+		serializeThread.execute();
 	}
 
 	@Override

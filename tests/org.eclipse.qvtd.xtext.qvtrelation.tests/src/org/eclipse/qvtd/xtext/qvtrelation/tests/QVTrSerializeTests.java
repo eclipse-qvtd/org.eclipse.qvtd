@@ -63,7 +63,7 @@ public class QVTrSerializeTests extends LoadTestCase
 		Resource asResource3 = testThread3.getResult();
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
-		testThread3.syncResume();
+		testThread3.dispose();
 		//	ocl1.dispose();
 		//	ocl2.dispose();
 	}
@@ -86,8 +86,8 @@ public class QVTrSerializeTests extends LoadTestCase
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		testThread1.syncResume();
-		testThread3.syncResume();
+		testThread1.dispose();
+		testThread3.dispose();
 	}
 
 	// FIXME workaround for Bug 510503

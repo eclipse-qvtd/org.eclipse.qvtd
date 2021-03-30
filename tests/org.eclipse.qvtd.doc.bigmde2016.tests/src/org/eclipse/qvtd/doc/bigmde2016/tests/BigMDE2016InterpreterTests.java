@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.doc.bigmde2016.tests;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.qvtd.compiler.CompilationResult;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.BigMDE2016CGTests;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
 import org.junit.Test;
@@ -31,10 +31,10 @@ public class BigMDE2016InterpreterTests extends QVTcCompilerTests
 		MyQVT myQVT = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons.qvtc"));
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			ImperativeTransformation iTransformation = myQVT.compileTransformation("person");
+			CompilationResult compilationResult = myQVT.compileTransformation("person");
 			int[] tests = PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
-				BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(iTransformation);
+				BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(compilationResult);
 				myQVT.addInputURI("family", getModelsURI("families2persons/samples/Families.xmi"));
 				Resource inResource = interpretedExecutor.getModel("family");
 				inResource.getContents().clear();
@@ -48,6 +48,7 @@ public class BigMDE2016InterpreterTests extends QVTcCompilerTests
 //				myQVT.saveOutput(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, getTestURI("Families2Persons_trace.xmi"), null, null);
 				//				myQVT.saveOutput("person", getTestURI("Persons_Interpreted.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
 			}
+			compilationResult.dispose();
 		}
 		finally {
 			myQVT.dispose();

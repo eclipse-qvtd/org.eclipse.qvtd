@@ -104,7 +104,7 @@ public class UMLXSerializeTests extends LoadTestCase
 		//
 		assertNoValidationErrors(umlxURI.toString(), umlxResource);
 		//
-		loadThread.syncResume();
+		loadThread.dispose();
 	}
 
 	protected void doRoundTripTest(@NonNull String path, @NonNull String stem, boolean skipCompare) throws Exception {
@@ -161,8 +161,8 @@ public class UMLXSerializeTests extends LoadTestCase
 		if (!skipCompare) {				// FIXME BUG 511230
 			assertSameModel(qvtrResource1, qvtrResource2);
 		}
-		qvtr2umlxResumable1.syncResume();
-		umlx2qvtrResumable2.syncResume();
+		qvtr2umlxResumable1.dispose();
+		umlx2qvtrResumable2.dispose();
 	}
 
 	private void normalize(@NonNull Resource qvtrResource) {
