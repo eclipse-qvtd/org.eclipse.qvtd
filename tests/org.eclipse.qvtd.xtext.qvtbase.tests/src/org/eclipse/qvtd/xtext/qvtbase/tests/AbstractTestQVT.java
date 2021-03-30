@@ -222,7 +222,6 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return executor.addInputURI(modelName, modelURI);
 	}
 
-
 	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
 		return executor.addOutputURI(modelName, modelURI);
 	}
