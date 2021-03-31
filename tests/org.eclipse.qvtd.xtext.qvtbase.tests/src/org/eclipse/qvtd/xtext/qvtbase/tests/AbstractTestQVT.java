@@ -283,34 +283,21 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return doBuild(txURI, intermediateFileNamePrefixURI, typedModelsConfigurations, options, genModelFiles);
 	}
 
-	protected void checkOutput(@NonNull Resource outputResource, @NonNull URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-		ResourceSet referenceResourceSet = createTestResourceSet();
-		Resource referenceResource = referenceResourceSet.getResource(referenceModelURI, true);
-		assert referenceResource != null;
-		EcoreUtil.resolveAll(referenceResourceSet);
-		if (normalizer != null) {
-			assert !referenceResource.getContents().isEmpty() : referenceResource.getURI() + " has no contents";
-			assert !outputResource.getContents().isEmpty() : outputResource.getURI() + " has no contents";
-			normalizer.normalize(referenceResource);
-			normalizer.normalize(outputResource);
-		}
-		LoadTestCase.assertSameModel(referenceResource, outputResource);
-	}
-
-	public <@NonNull EF extends EnvironmentFactoryInternal> @NonNull Resource checkOutput(@NonNull EnvironmentThreadFactory<EF> environmentThreadFactory, @NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
+	public static <@NonNull EF extends EnvironmentFactoryInternal> @NonNull Resource checkOutput(@NonNull EnvironmentThreadFactory<EF> environmentThreadFactory, @NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
 		//		deactivate();
 		AbstractTestThread<@NonNull Resource, EF, @Nullable OCLInternal> checkThread = new AbstractTestThread<@NonNull Resource, EF, @Nullable OCLInternal>("Check-Output", environmentThreadFactory)
 		{
 			@Override
 			protected OCLInternal createOCL() {
-				OCL ocl = QVTbase.newInstance(getTestProjectManager());
+				OCL ocl = QVTbase.newInstance(environmentThreadFactory.getProjectManager());
 				ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
 				return (OCLInternal) ocl;
 			}
 
 			@Override
 			public @NonNull Resource runWithThrowable() throws Exception {
-				ResourceSet actualResourceSet = createTestResourceSet();
+				ResourceSet actualResourceSet = new ResourceSetImpl();
+				environmentThreadFactory.getProjectManager().initializeResourceSet(actualResourceSet);
 				//		if (PivotUtilInternal.isASURI(modelURI)) {
 				//			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
 				//		}
@@ -335,7 +322,23 @@ public abstract class AbstractTestQVT extends QVTimperative
 							}
 						}
 					}
-					checkOutput(actualResource, expectedURI, normalizer);
+					//	checkOutput(actualResource, expectedURI, normalizer);
+					{
+						Resource outputResource = actualResource;
+						URI referenceModelURI = expectedURI;
+						ResourceSet referenceResourceSet = new ResourceSetImpl();
+						environmentThreadFactory.getProjectManager().initializeResourceSet(referenceResourceSet);
+						Resource referenceResource = referenceResourceSet.getResource(referenceModelURI, true);
+						assert referenceResource != null;
+						EcoreUtil.resolveAll(referenceResourceSet);
+						if (normalizer != null) {
+							assert !referenceResource.getContents().isEmpty() : referenceResource.getURI() + " has no contents";
+							assert !outputResource.getContents().isEmpty() : outputResource.getURI() + " has no contents";
+							normalizer.normalize(referenceResource);
+							normalizer.normalize(outputResource);
+						}
+						LoadTestCase.assertSameModel(referenceResource, outputResource);
+					}
 				}
 				return actualResource;
 			}
@@ -343,12 +346,6 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Resource actualResource = checkThread.invoke();
 		//	activate();
 		return actualResource;
-	}
-
-	protected @NonNull ResourceSet createTestResourceSet() {
-		ResourceSet actualResourceSet = new ResourceSetImpl();
-		environmentFactory.getProjectManager().initializeResourceSet(actualResourceSet);
-		return actualResourceSet;
 	}
 
 	//	public <EF extends EnvironmentFactoryInternal> @NonNull ImperativeTransformation compileTransformation(@NonNull EnvironmentThreadFactory<EF> environmentThreadFactory, @NonNull String outputName) throws Exception {
@@ -423,11 +420,6 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return txClass;
 	}
 
-	/*	public void createGeneratedExecutor(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
-		Class<? extends Transformer> txClass = createGeneratedClass(asTransformation, genModelFiles);
-		createGeneratedExecutor(txClass);
-	} */
-
 	@Deprecated
 	public @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull Class<? extends Transformer> txClass)  throws Exception {
 		QVTiTransformationExecutor generatedExecutor = createGeneratedExecutor(getEnvironmentFactory(), txClass);
@@ -443,11 +435,6 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull CompilationResult compilationResult) throws Exception {
 		return createInterpretedExecutor(compilationResult.getEnvironmentFactory(), compilationResult.getResult());
-	}
-
-	@Deprecated
-	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull EntryPoint entryPoint) throws Exception {
-		return createInterpretedExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY);
 	}
 
 	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint) throws Exception {

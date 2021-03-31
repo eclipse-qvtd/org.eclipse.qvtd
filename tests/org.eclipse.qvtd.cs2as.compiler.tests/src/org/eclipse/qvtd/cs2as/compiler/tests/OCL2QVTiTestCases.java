@@ -21,28 +21,17 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
-import org.eclipse.ocl.examples.pivot.tests.PivotTestCaseWithAutoTearDown.AbstractTestThread;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemOwner;
-import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
-import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
-import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
-import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
-import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
@@ -53,13 +42,11 @@ import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTm;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThread;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
@@ -67,12 +54,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT.PartitionUsage;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseTestFileSystemHelper;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.junit.After;
@@ -102,70 +89,15 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			QVTruntimeUtil.errPrintln("assertRegionCount suppressed");
 		}
 
-		protected @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
-			QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory() ;
-			AbstractTestThread<@NonNull Resource, @NonNull QVTimperativeEnvironmentFactory, @Nullable OCLInternal> checkThread = new AbstractTestThread<@NonNull Resource, @NonNull QVTimperativeEnvironmentFactory, @Nullable OCLInternal>("Check-Output", environmentThreadFactory)
-			{
-				@Override
-				protected OCLInternal createOCL() {
-					OCL ocl = QVTbase.newInstance(getTestProjectManager());
-					ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
-					return (OCLInternal) ocl;
-				}
-
-				@Override
-				public @NonNull Resource runWithThrowable() throws Exception {
-					ResourceSet actualResourceSet = createTestResourceSet();
-					//		if (PivotUtilInternal.isASURI(modelURI)) {
-					//			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
-					//		}
-					//		else {
-					//			resourceSet = getResourceSet();
-					//		}
-					Resource actualResource = ClassUtil.nonNullState(actualResourceSet.getResource(actualURI, true));
-					EcoreUtil.resolveAll(actualResourceSet);
-					if (expectedURI != null) {
-						String actualFileStem = actualURI.trimFileExtension().lastSegment();
-						String expectedFileStem = expectedURI.trimFileExtension().lastSegment();
-						if ((actualFileStem != null) && (expectedFileStem != null) && !actualFileStem.equals(expectedFileStem) && actualFileStem.startsWith(expectedFileStem)) {
-							String suffix = actualFileStem.substring(expectedFileStem.length());
-							for (Resource resource : actualResourceSet.getResources()) {
-								URI resourceURI = resource.getURI();
-								String fileExtension = resourceURI.fileExtension();
-								URI trimmedURI = resourceURI.trimFileExtension();
-								String fileStem = trimmedURI.lastSegment();
-								if ((fileStem != null) && fileStem.endsWith(suffix) ) {
-									String trimmedFileStem = fileStem.substring(0, fileStem.length() - suffix.length());
-									resource.setURI(trimmedURI.trimSegments(1).appendSegment(trimmedFileStem).appendFileExtension(fileExtension));
-								}
-							}
-						}
-						checkOutput(actualResource, expectedURI, normalizer);
-					}
-					return actualResource;
-				}
-			};
-			return checkThread.invoke();
-		}
-
-		private void checkOutput(@NonNull Resource outputResource, @NonNull URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-			ResourceSet referenceResourceSet = createTestResourceSet();
-			Resource referenceResource = referenceResourceSet.getResource(referenceModelURI, true);
-			assert referenceResource != null;
-			EcoreUtil.resolveAll(referenceResourceSet);
-			if (normalizer != null) {
-				assert !referenceResource.getContents().isEmpty() : referenceResource.getURI() + " has no contents";
-				assert !outputResource.getContents().isEmpty() : outputResource.getURI() + " has no contents";
-				normalizer.normalize(referenceResource);
-				normalizer.normalize(outputResource);
-			}
-			LoadTestCase.assertSameModel(referenceResource, outputResource);
-		}
-
-		private @NonNull ResourceSet createTestResourceSet() {
-			ResourceSet actualResourceSet = new ResourceSetImpl();
-			getEnvironmentFactory().getProjectManager().initializeResourceSet(actualResourceSet);
-			return actualResourceSet;
+		protected @NonNull DefaultCompilerOptions createCompilerOptions() {
+			DefaultCompilerOptions compilerOptions = new DefaultCompilerOptions();
+			compilerOptions.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
+			compilerOptions.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, DefaultCompilerOptions.defaultSavingOptions);
+			compilerOptions.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.DEBUG_KEY, true);
+			// TODO problem when validating options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.VALIDATE_KEY, true);
+			compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
+			compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
+			return compilerOptions;
 		}
 
 		protected @NonNull ImperativeTransformation generateTransformation(@NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
@@ -213,7 +145,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		protected void loadEcoreFile(URI fileURI, EPackage ePackage) {
 			ResourceSet rSet = getEnvironmentFactory().getResourceSet();
 			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
-			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);		// FIXME Accumulate for cleanup
 		}
 
 		protected void loadGenModel(@NonNull URI genModelURI) {
@@ -237,16 +169,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 
 		protected @NonNull Class<? extends Transformer> compileTransformation(@NonNull ImperativeTransformation iTransformation, @NonNull CS2ASJavaCompilerParameters cgParams) throws Exception {
-			//	QVTimperativeEnvironmentThreadFactory threadFactory = createQVTimperativeEnvironmentThreadFactory();
-			//	QVTimperativeEnvironmentThread<@NonNull Class<? extends CS2ASTransformer>> compilationThread = new QVTimperativeEnvironmentThread<@NonNull Class<? extends CS2ASTransformer>>(threadFactory, "OCL2QVTi-Compilation")
-			//	{
-			//		@Override
-			//		protected @NonNull Class<? extends CS2ASTransformer> runWithThrowable() throws Exception {
 			CS2ASJavaCompilerImpl cs2as2java = new CS2ASJavaCompilerImpl();
 			return cs2as2java.compileTransformation(getEnvironmentFactory(), iTransformation, cgParams);
-			//		}
-			//	};
-			//	return compilationThread.invoke();
 		}
 
 		@Override
@@ -261,17 +185,28 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			getProjectManager().configureLoadFirst(environmentFactory.getResourceSet(), EcorePackage.eNS_URI);	// XXX transitive usedGenModels
 			return environmentFactory;
 		}
+
+		protected @NonNull CS2ASJavaCompilerParameters createParameters(@NonNull String lookupSolverClassName, @NonNull String lookupResultClassName) throws IOException {
+			CS2ASJavaCompilerParametersImpl cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultClassName,
+				getTestProject().getOutputFile(JavaFileUtil.TEST_SRC_FOLDER_NAME).getFileString());
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
+				classpath.addClass(getClass()/*getTestBundleName()*/);
+				cgParams.setClasspath(classpath);
+			}
+			cgParams.setClassLoader(getClass().getClassLoader());
+			return cgParams;
+		}
 	}
 
-	public abstract class OCL2QVTiCodeExecutionThread extends AbstractOCL2QVTiThread<Object>
+	public abstract class AbstractOCL2QVTiExecutionThread extends AbstractOCL2QVTiThread<Object>
 	{
-		protected final @NonNull Class<? extends Transformer> txClass;
-		private QVTiTransformationExecutor executor;
+		private TransformationExecutor executor;
+
 		private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
 
-		protected OCL2QVTiCodeExecutionThread(@NonNull Class<? extends Transformer> txClass, @NonNull String modelTestName) {
-			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-Execution", modelTestName);
-			this.txClass = txClass;
+		protected AbstractOCL2QVTiExecutionThread(@NonNull String threadName, @NonNull String modelTestName) {
+			super(createQVTimperativeEnvironmentThreadFactory(), threadName, modelTestName);
 		}
 
 		protected @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
@@ -280,27 +215,6 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 		protected @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
 			return executor.addOutputURI(modelName, modelURI);
-		}
-
-		protected @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
-			QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, txClass);
-			this.executor = generatedExecutor;
-			return generatedExecutor;
-		}
-
-		//
-		// Execute the transformation with the code generator
-		//
-		protected void executeModelTest(@NonNull String modelName) throws Exception {
-			String inputURIstring = modelTestName + "/samples/" + modelName + "_input.xmi";
-			String outURIstring = modelName + "_output_CG.xmi";
-			String refURIstring = modelTestName + "/samples/" + modelName + "_output_ref.xmi";
-			this.executor = createGeneratedExecutor(getEnvironmentFactory(), txClass);
-			addInputURI(OCL2QVTm.LEFT_MODEL_TYPE_NAME, getModelsURI(inputURIstring));
-			assertTrue(executeTransformation());
-			addOutputURI(OCL2QVTm.RIGHT_MODEL_TYPE_NAME, getTestURI(outURIstring));
-			saveModels(null);
-			checkOutput(getTestURI(outURIstring), getModelsURI(refURIstring), null);
 		}
 
 		protected boolean executeTransformation() throws Exception {
@@ -313,6 +227,36 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 		protected void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
 			executor.getModelsManager().saveModels(saveOptions);
+		}
+
+		protected void setExecutor(@NonNull TransformationExecutor executor) {
+			this.executor = executor;
+		}
+	}
+
+	public abstract class OCL2QVTiCodeExecutionThread extends AbstractOCL2QVTiExecutionThread
+	{
+		protected final @NonNull Class<? extends Transformer> txClass;
+		//	private QVTiTransformationExecutor generatedExecutor;
+
+		protected OCL2QVTiCodeExecutionThread(@NonNull Class<? extends Transformer> txClass, @NonNull String modelTestName) {
+			super("OCL2QVTi-Execution", modelTestName);
+			this.txClass = txClass;
+		}
+
+		//
+		// Execute the transformation with the code generator
+		//
+		protected void executeModelTest(@NonNull String modelName) throws Exception {
+			String inputURIstring = modelTestName + "/samples/" + modelName + "_input.xmi";
+			String outURIstring = modelName + "_output_CG.xmi";
+			String refURIstring = modelTestName + "/samples/" + modelName + "_output_ref.xmi";
+			setExecutor(new QVTiTransformationExecutor(getEnvironmentFactory(), txClass));
+			addInputURI(OCL2QVTm.LEFT_MODEL_TYPE_NAME, getModelsURI(inputURIstring));
+			assertTrue(executeTransformation());
+			addOutputURI(OCL2QVTm.RIGHT_MODEL_TYPE_NAME, getTestURI(outURIstring));
+			saveModels(null);
+			AbstractTestQVT.checkOutput(environmentThreadFactory, getTestURI(outURIstring), getModelsURI(refURIstring), null);
 		}
 	}
 
@@ -336,32 +280,14 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	public abstract class OCL2QVTiTxInterpretationThread extends AbstractOCL2QVTiThread<Object>
+	public abstract class OCL2QVTiTxInterpretationThread extends AbstractOCL2QVTiExecutionThread
 	{
 		protected @NonNull URI txURI;
 		private ImperativeTransformation iTransformation;
-		private BasicQVTiExecutor executor;
-		private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
 
 		protected OCL2QVTiTxInterpretationThread(@NonNull URI txURI, @NonNull String modelTestName) {
-			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-TxInterpretation", modelTestName);
+			super("OCL2QVTi-TxInterpretation", modelTestName);
 			this.txURI = txURI;
-		}
-
-		protected @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
-			return executor.addInputURI(modelName, modelURI);
-		}
-
-		protected @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
-			return executor.addOutputURI(modelName, modelURI);
-		}
-
-		protected @NonNull BasicQVTiExecutor createInterpretedExecutor() throws Exception {
-			assert iTransformation != null;
-			EntryPoint entryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
-			BasicQVTiExecutor interpretedExecutor = new BasicQVTiExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY);	// XXX redundant argument
-			this.executor = interpretedExecutor;
-			return interpretedExecutor;
 		}
 
 		//
@@ -371,20 +297,14 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			String inputURIstring = modelTestName + "/samples/" + modelName + "_input.xmi";
 			String outURIstring = modelName + "_output_Interpreted.xmi";
 			String refURIstring = modelTestName + "/samples/" + modelName + "_output_ref.xmi";
-			createInterpretedExecutor();
+			assert iTransformation != null;
+			EntryPoint entryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+			setExecutor(new BasicQVTiExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY));
 			addInputURI(OCL2QVTm.LEFT_MODEL_TYPE_NAME, getModelsURI(inputURIstring));
 			assertTrue(executeTransformation());
 			addOutputURI(OCL2QVTm.RIGHT_MODEL_TYPE_NAME, getTestURI(outURIstring));
 			saveModels(null);
-			checkOutput(getTestURI(outURIstring), getModelsURI(refURIstring), null);
-		}
-
-		protected boolean executeTransformation() throws Exception {
-			if (suppressFailureDiagnosis) {
-				executor.setSuppressFailureDiagnosis(true);
-			}
-			Boolean success = executor.execute(null);
-			return success == Boolean.TRUE;
+			AbstractTestQVT.checkOutput(environmentThreadFactory, getTestURI(outURIstring), getModelsURI(refURIstring), null);
 		}
 
 		protected void loadTransformation() {
@@ -403,90 +323,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			}
 			throw new IllegalStateException("No transformation");
 		}
-
-		protected void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
-			executor.getModelsManager().saveModels(saveOptions);
-		}
 	}
 
-	protected class MyQVT extends AbstractTestQVT
-	{
-		protected final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
-		protected final @NonNull String modelTestName;
-		protected final @NonNull String modelSamples;
-
-		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI, @NonNull String modelTestName, @NonNull String modelSamples) throws IOException {
-			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
-			this.modelTestName = modelTestName;
-			this.modelSamples = modelSamples;
-		}
-
-		public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
-			QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTimperativeEnvironmentThreadFactory() ;
-			return checkOutput(environmentThreadFactory, actualURI, expectedURI, normalizer);
-		}
-
-		@Override
-		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			try {
-				return new OCL2QVTiCompilerChain(getTestProjectManager(), getResourceSet(), createCompilerOptions(), txURI, getTestURIWithExtension(txURI, null));
-			} catch (CompilerChainException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw new IllegalStateException(e);
-			}
-		}
-
-		@Override
-		protected @NonNull DefaultCompilerOptions createCompilerOptions() {
-			DefaultCompilerOptions options = super.createCompilerOptions();
-			options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, DefaultCompilerOptions.defaultSavingOptions);
-			options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.DEBUG_KEY, true);
-			// TODO problem when validating options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.VALIDATE_KEY, true);
-			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
-			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
-			return options;
-		}
-
-		@Override
-		protected @NonNull ResourceSet createTestResourceSet() {
-			return super.createTestResourceSet();
-		}
-
-		//
-		// Execute the transformation with the QVTi interpreter
-		//
-		protected void executeModelsTX_Interpreted(@NonNull ImperativeTransformation tx, @NonNull String modelName) throws Exception {
-			String inputURIstring = modelTestName + "/" + modelSamples + "/" + modelName + "_input.xmi";
-			String outURIstring = modelName + "_output_Interpreted.xmi";
-			String refURIstring = modelTestName + "/" + modelSamples + "/" + modelName + "_output_ref.xmi";
-			createInterpretedExecutor(getEnvironmentFactory(), tx);
-			addInputURI(OCL2QVTm.LEFT_MODEL_TYPE_NAME, getModelsURI(inputURIstring));
-			assertTrue(executeTransformation());
-			addOutputURI(OCL2QVTm.RIGHT_MODEL_TYPE_NAME, getTestURI(outURIstring));
-			saveModels(null);
-			checkOutput(getTestURI(outURIstring), getModelsURI(refURIstring), null);
-		}
-
-		@Override
-		protected @NonNull String getBasePrefix() {
-			return "org.eclipse.qvtd.cs2as.compiler.tests";
-		}
-
-		@Override
-		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) {
-			return OCL2QVTiTestCases.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
-		}
-	}
-
-	/*
-	protected static void assertValidModel(@NonNull URI asURI) {
-		EnvironmentFactory factory =  OCL.createEnvironmentFactory(new StandaloneProjectMap());
-	    ResourceSet asResourceSet = factory.getResourceSet();
-	    // MetaModelManager.initializeASResourceSet(asResourceSet);
-	    assertValidModel(asURI, asResourceSet);
-	}
-	 */
 	protected static void assertValidModel(URI asURI, ResourceSet rSet) {
 		Resource resource = rSet.getResource(asURI, true);
 		EcoreUtil.resolveAll(resource);
@@ -498,62 +336,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	}
 
 	protected static void assertValidQVTiModel(@NonNull URI asURI) {
-
 		// We don't generate QVTi models anymore. Perhaps do a QVTc validation if there is a QVTcore.ocl file
-	}
-
-	protected @NonNull Class<? extends Transformer> compileTransformation(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation iTransformation, @NonNull CS2ASJavaCompilerParameters cgParams) throws Exception {
-		//	QVTimperativeEnvironmentThreadFactory threadFactory = createQVTimperativeEnvironmentThreadFactory();
-		//	QVTimperativeEnvironmentThread<@NonNull Class<? extends CS2ASTransformer>> compilationThread = new QVTimperativeEnvironmentThread<@NonNull Class<? extends CS2ASTransformer>>(threadFactory, "OCL2QVTi-Compilation")
-		//	{
-		//		@Override
-		//		protected @NonNull Class<? extends CS2ASTransformer> runWithThrowable() throws Exception {
-		CS2ASJavaCompilerImpl cs2as2java = new CS2ASJavaCompilerImpl();
-		return cs2as2java.compileTransformation(environmentFactory, iTransformation, cgParams);
-		//		}
-		//	};
-		//	return compilationThread.invoke();
-	}
-
-	//	protected @NonNull CompilerOptions createCompilerOptions() {
-	//		return new AbstractCompilerOptions() {};
-	//	}
-
-	@Override
-	protected @NonNull OCLInternal createOCL() {
-		return QVTimperative.newInstance(getTestProjectManager(), null);
-	}
-
-	protected @NonNull DefaultCompilerOptions createCompilerOptions() {
-		DefaultCompilerOptions compilerOptions = new DefaultCompilerOptions();
-		compilerOptions.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
-		compilerOptions.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, DefaultCompilerOptions.defaultSavingOptions);
-		compilerOptions.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.DEBUG_KEY, true);
-		// TODO problem when validating options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.VALIDATE_KEY, true);
-		compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
-		compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
-		return compilerOptions;
-	}
-
-	private @NonNull CS2ASJavaCompilerParameters createParameters(@NonNull String lookupSolverClassName, @NonNull String lookupResultClassName) throws IOException {
-		CS2ASJavaCompilerParametersImpl cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultClassName,
-			getTestProject().getOutputFile(JavaFileUtil.TEST_SRC_FOLDER_NAME).getFileString());
-		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
-			classpath.addClass(getClass()/*getTestBundleName()*/);
-			cgParams.setClasspath(classpath);
-		}
-		cgParams.setClassLoader(getClass().getClassLoader());
-		return cgParams;
-	}
-
-	private @NonNull MyQVT createQVT(@NonNull String modelTestName, @NonNull URI txURI, @NonNull String modelSamples) throws Exception {
-		//		return new MyQVT(getTestProjectManager(), modelTestName, modelSamples);
-		ProjectManager testProjectManager = getTestProjectManager();
-		URI intermediateFileNamePrefixURI = getTestURI(modelTestName);
-		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
-		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
-		return new MyQVT(testProjectManager, getTestProject(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI, modelTestName, modelSamples);
 	}
 
 	@Override
@@ -684,15 +467,27 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_Source2Target_OCL2QVTm() throws Exception {
-		MyQVT myQVT = createQVT("Source2Target", getModelsURI("Source2Target/Source2Target.ocl"), "samples");
-		URI oclDocURI = getModelsURI("Source2Target/Source2Target.ocl");
+		OCL2QVTiTxGenerationThread generationThread = new OCL2QVTiTxGenerationThread("Source2Target")
+		{
+			@Override
+			protected @NonNull URI runWithThrowable() throws Exception {
+				loadGenModel(getModelsURI("Source2Target/SourceMM1.genmodel"));
+				loadGenModel(getModelsURI("Source2Target/TargetMM1.genmodel"));
+				return generateTransformationURI("Source2Target.ocl");
+			}
+		};
+		@SuppressWarnings("unused")
+		URI txURI = generationThread.invoke();
+
+		//	MyQVT myQVT = createQVT("Source2Target", getModelsURI("Source2Target/Source2Target.ocl"), "samples");
+		//	URI oclDocURI = getModelsURI("Source2Target/Source2Target.ocl");
 		URI qvtmFileURI = getTestURI("Source2Target.qvtm.qvtcas");
 
-		OCL2QVTiCompilerChain mtc = new OCL2QVTiCompilerChain(getTestProjectManager(), myQVT.getResourceSet(), createCompilerOptions(), oclDocURI, getTestURIWithExtension(oclDocURI, "tmp"));
-		mtc.ocl2qvtmCompilerStep.ocl2qvtm(oclDocURI.appendFileExtension("oclas"));
+		//	OCL2QVTiCompilerChain mtc = new OCL2QVTiCompilerChain(getTestProjectManager(), myQVT.getResourceSet(), createCompilerOptions(), oclDocURI, getTestURIWithExtension(oclDocURI, "tmp"));
+		//	mtc.ocl2qvtmCompilerStep.ocl2qvtm(oclDocURI.appendFileExtension("oclas"));
 		// Test the QVTm transformation can be loaded
 		assertValidQVTiModel(qvtmFileURI);
-		myQVT.dispose();
+		//	myQVT.dispose();
 	}
 
 	@Test
@@ -866,14 +661,25 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_SimpleClasses_OCL2QVTm_MiddleFolded() throws Exception {
-		MyQVT myQVT = createQVT("SimpleClasses", getModelsURI("SimpleClasses/classescs2as.ocl"), "samples");
-		URI oclDocURI = getModelsURI("SimpleClasses/classescs2as.ocl");
+		OCL2QVTiTxGenerationThread generationThread = new OCL2QVTiTxGenerationThread("SimpleClasses")
+		{
+			@Override
+			protected @NonNull URI runWithThrowable() throws Exception {
+				loadGenModel(getModelsURI("SimpleClasses/ClassesCS.genmodel"));
+				loadGenModel(getModelsURI("SimpleClasses/Classes.genmodel"));
+				return generateTransformationURI("classescs2as.ocl");
+			}
+		};
+		@SuppressWarnings("unused")
+		URI txURI = generationThread.invoke();
+		//	MyQVT myQVT = createQVT("SimpleClasses", getModelsURI("SimpleClasses/classescs2as.ocl"), "samples");
+		//	URI oclDocURI = getModelsURI("SimpleClasses/classescs2as.ocl");
 		URI qvtmFileURI = getTestURI("classescs2as.qvtm.qvtcas");
-		OCL2QVTiCompilerChain mtc = new OCL2QVTiCompilerChain(getTestProjectManager(), myQVT.getResourceSet(), createCompilerOptions(), oclDocURI, getTestURIWithExtension(oclDocURI, "tmp"));
-		mtc.ocl2qvtmCompilerStep.ocl2qvtm(oclDocURI.appendFileExtension("oclas"));
+		//	OCL2QVTiCompilerChain mtc = new OCL2QVTiCompilerChain(getTestProjectManager(), myQVT.getResourceSet(), createCompilerOptions(), oclDocURI, getTestURIWithExtension(oclDocURI, "tmp"));
+		//	mtc.ocl2qvtmCompilerStep.ocl2qvtm(oclDocURI.appendFileExtension("oclas"));
 		// Test the QVTm transformation can be loaded
 		assertValidQVTiModel(qvtmFileURI);
-		myQVT.dispose();
+		//	myQVT.dispose();
 	}
 
 	@Test
