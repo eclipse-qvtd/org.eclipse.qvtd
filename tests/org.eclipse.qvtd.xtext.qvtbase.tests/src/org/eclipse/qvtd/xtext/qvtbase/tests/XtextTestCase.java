@@ -34,6 +34,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
+import org.eclipse.ocl.examples.xtext.tests.TestFileSystemOwner;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
@@ -64,7 +65,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 
-public class XtextTestCase extends PivotTestCase
+public class XtextTestCase extends PivotTestCase implements TestFileSystemOwner
 {
 	public static final class TestCaseAppender extends ConsoleAppender
 	{
@@ -319,7 +320,8 @@ public class XtextTestCase extends PivotTestCase
 	/**
 	 * Return the URI of a file in the test harness models folder.
 	 */
-	protected @NonNull URI getModelsURI(@NonNull String filePath) {
+	@Override
+	public @NonNull URI getModelsURI(@NonNull String filePath) {
 		return URI.createPlatformResourceURI(getTestBundleName() + "/models/" + filePath, true);
 	}
 
@@ -395,7 +397,8 @@ public class XtextTestCase extends PivotTestCase
 		return getTestBundleURI().appendSegment("models");
 	}
 
-	protected @NonNull TestProject getTestProject() {
+	@Override
+	public @NonNull TestProject getTestProject() {
 		return getTestProject("");
 	}
 
@@ -408,7 +411,8 @@ public class XtextTestCase extends PivotTestCase
 		return testProject2;
 	}
 
-	protected @NonNull ProjectManager getTestProjectManager() {
+	@Override
+	public @NonNull ProjectManager getTestProjectManager() {
 		return getTestProjectManager("");
 	}
 
@@ -433,7 +437,8 @@ public class XtextTestCase extends PivotTestCase
 	 * Return the URI of a file in the test project based on the file name of the inputURI and
 	 * file extension replaced by fileExtension.
 	 */
-	protected @NonNull URI getTestURIWithExtension(@NonNull URI inputURI, @Nullable String fileExtension) {
+	@Override
+	public @NonNull URI getTestURIWithExtension(@NonNull URI inputURI, @Nullable String fileExtension) {
 		URI fileStem = inputURI.trimFileExtension();
 		if (fileExtension != null) {
 			fileStem = fileStem.appendFileExtension(fileExtension);

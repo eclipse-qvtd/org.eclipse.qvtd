@@ -497,7 +497,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
 			URI asURIstem = asURI.trimFileExtension();
-			doSerialize(asURI, asURIstem.appendFileExtension("serialized.qvti"));
+			doSerialize(getTestProjectManager(), asURI, asURIstem.appendFileExtension("serialized.qvti"));
 		}
 		AbstractEnvironmentThread<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory, QVTbase> thread = (AbstractEnvironmentThread<@NonNull ImperativeTransformation, @NonNull QVTimperativeEnvironmentFactory, QVTbase>) compilationThreadResult.getThread();	// XXX
 		Class<? extends Transformer> generatedClass = compilerChain.generate(thread, asTransformation, genModelFiles);
@@ -515,7 +515,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			URI inputURI = txASURI;
 			URI asURIstem = txASURI.trimFileExtension();
 			URI serializedURI = asURIstem.appendFileExtension("serialized.qvti");
-			doSerialize(inputURI, serializedURI);
+			doSerialize(getTestProjectManager(), inputURI, serializedURI);
 			doScheduleLoadCheck(environmentThreadFactory, asURIstem.appendFileExtension(QVTbaseUtil.QVTSAS_FILE_EXTENSION));
 		}
 		return compilationThreadResult;
@@ -551,14 +551,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//	activate();
 	}
 
-	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
+	public static XtextResource doSerialize(@NonNull ProjectManager projectManager, @NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
 		//	deactivate();
 		//	ResourceSet resourceSet = new ResourceSetImpl();
 		//	Executor savedExecutor = PivotUtil.basicGetExecutor();
 		//
 		//	Load QVTiAS
 		//
-		QVTiTestThread<@NonNull XtextResource> loadThread = new QVTiTestThread<@NonNull XtextResource>("Serialize-Load", getTestProjectManager())
+		QVTiTestThread<@NonNull XtextResource> loadThread = new QVTiTestThread<@NonNull XtextResource>("Serialize-Load", projectManager)
 		{
 			@Override
 			protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
@@ -594,7 +594,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		};
 		XtextResource xtextResource = loadThread.invoke();
 
-		QVTiTestThread<Object> reloadThread = new QVTiTestThread<Object>("Serialize-Reload", getTestProjectManager())
+		QVTiTestThread<Object> reloadThread = new QVTiTestThread<Object>("Serialize-Reload", projectManager)
 		{
 			@Override
 			protected Object runWithModel(@NonNull ResourceSet resourceSet) throws IOException {
