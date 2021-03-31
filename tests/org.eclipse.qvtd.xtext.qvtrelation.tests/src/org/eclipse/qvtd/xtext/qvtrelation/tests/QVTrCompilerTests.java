@@ -151,7 +151,7 @@ public class QVTrCompilerTests extends LoadTestCase
 					@Override
 					public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 						ScheduleManager scheduleManager = super.execute(environmentFactory, qvtrResource, traceResource, typedModelsConfigurations);
-						instrumentPartition(scheduleManager);
+						partitionUsage.instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}
 				};
@@ -164,6 +164,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 		}
 
+		protected final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
 		private boolean keepOldJavaFiles = false;
 
 		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {

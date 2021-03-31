@@ -97,12 +97,14 @@ public class QVTcCompilerTests extends LoadTestCase
 					@Override
 					public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
 						ScheduleManager scheduleManager = super.execute(environmentFactory, pResource, typedModelsConfiguration);
-						instrumentPartition(scheduleManager);
+						partitionUsage.instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}
 				};
 			}
 		}
+
+		protected final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
 
 		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
 			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);

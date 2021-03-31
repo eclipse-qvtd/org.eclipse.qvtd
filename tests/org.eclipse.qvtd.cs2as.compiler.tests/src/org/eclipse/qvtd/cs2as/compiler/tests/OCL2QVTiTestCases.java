@@ -299,6 +299,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	protected class MyQVT extends AbstractTestQVT
 	{
+		protected final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
 		protected final @NonNull String modelTestName;
 		protected final @NonNull String modelSamples;
 
@@ -370,7 +371,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 						@Override
 						public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
 							ScheduleManager scheduleManager = super.execute(environmentFactory, pResource, typedModelsConfiguration);
-							instrumentPartition(scheduleManager);
+							partitionUsage.instrumentPartition(scheduleManager);
 							return scheduleManager;
 						}
 					};

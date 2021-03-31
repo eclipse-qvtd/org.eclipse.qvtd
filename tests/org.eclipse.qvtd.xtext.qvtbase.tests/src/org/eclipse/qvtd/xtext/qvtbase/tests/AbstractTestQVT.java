@@ -178,7 +178,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	 */
 	private final @NonNull JavaClasspath classpath;
 
-	private final @NonNull Map<@NonNull Class<? extends Partition>, @NonNull Integer> partitionClass2count = new HashMap<>();
+	//	private final @NonNull Map<@NonNull Class<? extends Partition>, @NonNull Integer> partitionClass2count = new HashMap<>();
 
 	protected AbstractCompilerChain compilerChain = null;
 	private TransformationExecutor executor = null;
@@ -796,21 +796,26 @@ public abstract class AbstractTestQVT extends QVTimperative
 		getResourceSet().getPackageRegistry().put(middleEPackage.getNsURI(), middleEPackage);
 	}
 
-	protected void instrumentPartition(@NonNull ScheduleManager scheduleManager) {
-		ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
-		for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {
-			ScheduleManager directedScheduleManager = scheduleManager.getDirectedScheduleManager(rootRegion);
-			RootPartitionAnalysis rootPartitionAnalysis = directedScheduleManager.getRootPartitionAnalysis(rootRegion);
-			instrumentPartition(directedScheduleManager, rootPartitionAnalysis.getPartition());
-		}
-	}
+	public static class PartitionUsage
+	{
+		private final @NonNull Map<@NonNull Class<? extends Partition>, @NonNull Integer> partitionClass2count = new HashMap<>();
 
-	protected void instrumentPartition(@NonNull ScheduleManager directedScheduleManager, @NonNull Partition parentPartition) {
-		Class<? extends @NonNull Partition> partitionClass = parentPartition.getClass();
-		Integer count = partitionClass2count.get(partitionClass);
-		partitionClass2count.put(partitionClass, count == null ? 1 : count+1);
-		for (@NonNull Partition childPartition : directedScheduleManager.getConnectionManager().getCallableChildren(parentPartition)) {
-			instrumentPartition(directedScheduleManager, childPartition);
+		public void instrumentPartition(@NonNull ScheduleManager scheduleManager) {
+			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
+			for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {
+				ScheduleManager directedScheduleManager = scheduleManager.getDirectedScheduleManager(rootRegion);
+				RootPartitionAnalysis rootPartitionAnalysis = directedScheduleManager.getRootPartitionAnalysis(rootRegion);
+				instrumentPartition(directedScheduleManager, rootPartitionAnalysis.getPartition());
+			}
+		}
+
+		protected void instrumentPartition(@NonNull ScheduleManager directedScheduleManager, @NonNull Partition parentPartition) {
+			Class<? extends @NonNull Partition> partitionClass = parentPartition.getClass();
+			Integer count = partitionClass2count.get(partitionClass);
+			partitionClass2count.put(partitionClass, count == null ? 1 : count+1);
+			for (@NonNull Partition childPartition : directedScheduleManager.getConnectionManager().getCallableChildren(parentPartition)) {
+				instrumentPartition(directedScheduleManager, childPartition);
+			}
 		}
 	}
 
