@@ -63,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecuto
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThread;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
@@ -99,7 +100,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		protected final boolean isIncremental;
 
 		protected QVTiCompilationThread(@NonNull URI transformURI, @NonNull URI genModelURI, boolean isIncremental) {
-			super("QVTi-Compilation", createQVTimperativeEnvironmentThreadFactory());
+			super(createQVTimperativeEnvironmentThreadFactory(), "QVTi-Compilation");
 			this.transformURI = transformURI;
 			this.genModelURI = genModelURI;
 			this.isIncremental = isIncremental;
@@ -112,15 +113,21 @@ public class QVTiCompilerTests extends LoadTestCase
 		}
 	}
 
-	protected abstract class QVTiExecutionThread extends QVTimperativeEnvironmentThread<Object>
+	public abstract static class QVTiExecutionThread extends QVTimperativeEnvironmentThread<Object>
 	{
+		protected final @NonNull Class<? extends Transformer> txClass;
 		private Transformer transformer;
 
-		protected QVTiExecutionThread(@NonNull Class<? extends Transformer> txClass) {
-			super("QVTi-Execution", createQVTimperativeEnvironmentThreadFactory());
+		protected QVTiExecutionThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull Class<? extends Transformer> txClass) {
+			this(environmentThreadFactory, "QVTi-Execution", txClass);
 		}
 
-		protected @NonNull Transformer createTransformer(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+		protected QVTiExecutionThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull Class<? extends Transformer> txClass) {
+			super(environmentThreadFactory, threadName);
+			this.txClass = txClass;
+		}
+
+		protected @NonNull Transformer createTransformer() throws ReflectiveOperationException {
 			QVTiTransformationExecutor executor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 			this.transformer = executor.getTransformer();
 			return transformer;
@@ -469,11 +476,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
 		Class<? extends Transformer> txClass = compilationThread.invoke();
 		//
-		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
-				createTransformer(txClass);
+				createTransformer();
 				loadInput("hsv", inputModelURI);
 				execute();
 				saveOutput("hsl", outputModelURI, referenceModelURI, null);
@@ -507,11 +514,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
 		Class<? extends Transformer> txClass = compilationThread.invoke();
 		//
-		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
-				createTransformer(txClass);
+				createTransformer();
 				loadInput("leftCS", inputModelURI);
 				execute();
 				saveOutput("rightAS", outputModelURI, referenceModelURI, null);
@@ -539,11 +546,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
 		Class<? extends Transformer> txClass = compilationThread.invoke();
 		//
-		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
-				createTransformer(txClass);
+				createTransformer();
 				loadInput("uml", inputModelURI);
 				execute();
 				saveOutput("rdbms", outputModelURI, referenceModelURI, ManualRDBMSNormalizer.INSTANCE);
@@ -571,11 +578,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
 		Class<? extends Transformer> txClass = compilationThread.invoke();
 		//
-		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
-				createTransformer(txClass);
+				createTransformer();
 				loadInput("uml", inputModelURI);
 				execute();
 				saveOutput("rdbms", outputModelURI, referenceModelURI, SimpleRDBMSNormalizer.INSTANCE);
@@ -603,11 +610,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, false);
 		Class<? extends Transformer> txClass = compilationThread.invoke();
 		//
-		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
-				createTransformer(txClass);
+				createTransformer();
 				loadInput("tree", inputModelURI);
 				execute();
 				saveOutput("talltree", outputModelURI, referenceModelURI, null);
@@ -635,11 +642,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, true);
 		Class<? extends Transformer> txClass = compilationThread.invoke();
 		//
-		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
-				createTransformer(txClass);
+				createTransformer();
 				Resource inputResource = loadInput("tree", inputModelURI);
 				execute();
 				writeGraphMLfile(getTestURI("Tree2TallTree-inc.graphml"));
@@ -687,11 +694,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, true);
 		Class<? extends Transformer> txClass = compilationThread.invoke();
 		//
-		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
-				createTransformer(txClass);
+				createTransformer();
 				Resource inputResource = loadInput("tree", inputModelURI);
 				execute();
 				writeGraphMLfile(getTestURI("Tree2TallTree-inc.graphml"));
@@ -742,11 +749,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		QVTiCompilationThread compilationThread = new QVTiCompilationThread(transformURI, genModelURI, true);
 		Class<? extends Transformer> txClass = compilationThread.invoke();
 		//
-		QVTiExecutionThread executionThread = new QVTiExecutionThread(txClass)
+		QVTiExecutionThread executionThread = new QVTiExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
-				createTransformer(txClass);
+				createTransformer();
 				Resource inputResource = loadInput("tree", inputModelURI);
 				execute();
 				writeGraphMLfile(getTestURI("Tree2TallTree-inc.graphml"));
@@ -789,7 +796,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI referenceModelURI = getTestModelsFileURI("Tree2TallTree/TallTreeValidate.xmi");
 		URI referenceModelURI2 = getTestModelsFileURI("Tree2TallTree/TallTreeValidate2.xmi");
 		Class<? extends Transformer> txClass = Tree2TallTree.class;
-		Transformer tx1 = createTransformer(txClass);
+		Transformer tx1 = createTransformer();
 		Resource inputResource = loadInput("tree", inputModelURI);
 		transform();
 		writeGraphMLfile(getTestModelsFileURI("Tree2TallTree/graphs/Tree2TallTree-inc.graphml"));
@@ -826,7 +833,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI referenceModelURI = getTestModelsFileURI("Tree2TallTree/samples/TallTreeValidate.xmi");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
-		Transformer tx1 = createTransformer(txClass);
+		Transformer tx1 = createTransformer();
 		loadInput("tree", inputModelURI);
 		transform();
 		saveOutput("talltree", outputModelURI, referenceModelURI, null);

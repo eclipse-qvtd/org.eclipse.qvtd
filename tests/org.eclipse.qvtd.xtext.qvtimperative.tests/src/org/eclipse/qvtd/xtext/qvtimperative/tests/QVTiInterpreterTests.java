@@ -69,7 +69,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
 
 		protected QVTiInterpretationThread(@NonNull CompilationResult compilationResult, @NonNull ModeFactory modeFactory) {
-			super("QVTi-Interpretation", createQVTimperativeEnvironmentThreadFactory());
+			super(createQVTimperativeEnvironmentThreadFactory(), "QVTi-Interpretation");
 			this.compilationResult = compilationResult;
 			this.modeFactory = modeFactory;
 		}
@@ -171,7 +171,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 	protected void assertLoadable(@NonNull URI asURI) throws Exception {
 		QVTimperativeEnvironmentThreadFactory threadFactory = createQVTimperativeEnvironmentThreadFactory();
-		QVTimperativeEnvironmentThread<Object> checkThread = new QVTimperativeEnvironmentThread<Object>("QVTiLoadCheck", threadFactory)
+		QVTimperativeEnvironmentThread<Object> checkThread = new QVTimperativeEnvironmentThread<Object>(threadFactory, "QVTiLoadCheck")
 		{
 			@Override
 			public Object runWithThrowable() throws Exception {
@@ -195,7 +195,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 	protected @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
 		QVTimperativeEnvironmentThreadFactory threadFactory = createQVTimperativeEnvironmentThreadFactory();
-		QVTimperativeEnvironmentThread<@NonNull Resource> checkThread = new QVTimperativeEnvironmentThread<@NonNull Resource>("QVTiOutputCheck", threadFactory)
+		QVTimperativeEnvironmentThread<@NonNull Resource> checkThread = new QVTimperativeEnvironmentThread<@NonNull Resource>(threadFactory, "QVTiOutputCheck")
 		{
 			@Override
 			protected OCLInternal createOCL() {
@@ -255,7 +255,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 	public @NonNull CompilationResult loadTransformation(@NonNull URI txURI) throws Exception {
 		QVTimperativeEnvironmentThreadFactory threadFactory = createQVTimperativeEnvironmentThreadFactory();
-		QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation> loadThread = new QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation>("Load", threadFactory)
+		QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation> loadThread = new QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation>(threadFactory, "QVTi-Load")
 		{
 			@Override
 			protected @NonNull ImperativeTransformation runWithThrowable() throws Exception {

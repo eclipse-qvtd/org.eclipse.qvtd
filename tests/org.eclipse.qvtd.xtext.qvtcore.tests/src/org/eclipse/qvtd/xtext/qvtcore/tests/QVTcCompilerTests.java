@@ -78,7 +78,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	protected abstract class QVTcExecutionThread extends QVTimperativeEnvironmentThread<Object>
 	{
 		protected QVTcExecutionThread() {
-			super("QVTc-Execution", createQVTimperativeEnvironmentThreadFactory());
+			super(createQVTimperativeEnvironmentThreadFactory(), "QVTc-Execution");
 		}
 	}
 

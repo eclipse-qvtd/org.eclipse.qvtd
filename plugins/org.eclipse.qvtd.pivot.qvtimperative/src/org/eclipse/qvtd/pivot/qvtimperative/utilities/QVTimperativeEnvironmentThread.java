@@ -16,7 +16,7 @@ import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread;
 
 public abstract class QVTimperativeEnvironmentThread<R> extends AbstractEnvironmentThread<R, @NonNull QVTimperativeEnvironmentFactory, OCLInternal>
 {
-	protected QVTimperativeEnvironmentThread(@NonNull String threadName, @NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory) {
-		super(threadName, environmentThreadFactory);
+	protected QVTimperativeEnvironmentThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName) {
+		super(environmentThreadFactory, threadName);
 	}
 }

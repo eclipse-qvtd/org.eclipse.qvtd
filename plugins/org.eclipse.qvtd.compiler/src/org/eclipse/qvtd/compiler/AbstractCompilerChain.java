@@ -439,7 +439,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	protected <O extends OCLInternal> @NonNull CompilationResult compile3(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
-		QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation> thread = new QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation>("compile", environmentThreadFactory)
+		QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation> thread = new QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation>(environmentThreadFactory, "compile")
 		{
 			@Override
 			protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
@@ -502,7 +502,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	public <@NonNull EF extends QVTimperativeEnvironmentFactory, O extends QVTbase> @NonNull Class<? extends Transformer> generate(final @NonNull AbstractEnvironmentThread<?, EF, O> compileThread, @NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
 		EnvironmentThreadFactory<@NonNull EF> environmentThreadFactory = compileThread.getEnvironmentThreadFactory();
-		AbstractEnvironmentThread<@NonNull Class<? extends Transformer>, ?, ?> thread = new AbstractEnvironmentThread<@NonNull Class<? extends Transformer>, @NonNull EF, O>("model-generate", environmentThreadFactory)
+		AbstractEnvironmentThread<@NonNull Class<? extends Transformer>, ?, ?> thread = new AbstractEnvironmentThread<@NonNull Class<? extends Transformer>, @NonNull EF, O>(environmentThreadFactory, "model-generate")
 		{
 			@Override
 			protected @NonNull EF createEnvironmentFactory() {

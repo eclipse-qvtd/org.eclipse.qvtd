@@ -11,24 +11,33 @@
 package org.eclipse.qvtd.umlx.tests;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.pivot.tests.PivotTestCaseWithAutoTearDown.AbstractTestThread;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.resource.ProjectManager.IPackageDescriptor;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -36,9 +45,12 @@ import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.umlx.compiler.UMLXCompilerChain;
 import org.eclipse.qvtd.umlx.utilities.UMLXStandaloneSetup;
@@ -46,6 +58,7 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
+import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiCompilerTests.QVTiExecutionThread;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.QVTrelationTestFileSystemHelper;
 import org.junit.After;
 import org.junit.Before;
@@ -57,6 +70,118 @@ import org.junit.Test;
 public class UMLXCompilerTests extends LoadTestCase
 {
 	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
+
+	protected abstract /*static*/ class UMLXExecutionThread extends QVTiExecutionThread
+	{
+		private QVTiTransformationExecutor executor;
+		private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
+
+		protected UMLXExecutionThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull Class<? extends Transformer> txClass) {
+			super(environmentThreadFactory, "UMLX-Execution", txClass);
+		}
+
+		protected @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
+			return executor.addInputURI(modelName, modelURI);
+		}
+
+		protected @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
+			return executor.addOutputURI(modelName, modelURI);
+		}
+
+		public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
+			QVTrelationEnvironmentThreadFactory environmentThreadFactory = createQVTrelationEnvironmentThreadFactory();
+			return checkOutput(environmentThreadFactory, actualURI, expectedURI, normalizer);
+		}
+
+		public <@NonNull EF extends EnvironmentFactoryInternal> @NonNull Resource checkOutput(@NonNull EnvironmentThreadFactory<EF> environmentThreadFactory, @NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
+			//		deactivate();
+			AbstractTestThread<@NonNull Resource, EF, @Nullable OCLInternal> checkThread = new AbstractTestThread<@NonNull Resource, EF, @Nullable OCLInternal>("Check-Output", environmentThreadFactory)
+			{
+				@Override
+				protected OCLInternal createOCL() {
+					OCL ocl = QVTbase.newInstance(getTestProjectManager());
+					ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
+					return (OCLInternal) ocl;
+				}
+
+				@Override
+				public @NonNull Resource runWithThrowable() throws Exception {
+					ResourceSet actualResourceSet = createTestResourceSet();
+					//		if (PivotUtilInternal.isASURI(modelURI)) {
+					//			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
+					//		}
+					//		else {
+					//			resourceSet = getResourceSet();
+					//		}
+					Resource actualResource = ClassUtil.nonNullState(actualResourceSet.getResource(actualURI, true));
+					EcoreUtil.resolveAll(actualResourceSet);
+					if (expectedURI != null) {
+						String actualFileStem = actualURI.trimFileExtension().lastSegment();
+						String expectedFileStem = expectedURI.trimFileExtension().lastSegment();
+						if ((actualFileStem != null) && (expectedFileStem != null) && !actualFileStem.equals(expectedFileStem) && actualFileStem.startsWith(expectedFileStem)) {
+							String suffix = actualFileStem.substring(expectedFileStem.length());
+							for (Resource resource : actualResourceSet.getResources()) {
+								URI resourceURI = resource.getURI();
+								String fileExtension = resourceURI.fileExtension();
+								URI trimmedURI = resourceURI.trimFileExtension();
+								String fileStem = trimmedURI.lastSegment();
+								if ((fileStem != null) && fileStem.endsWith(suffix) ) {
+									String trimmedFileStem = fileStem.substring(0, fileStem.length() - suffix.length());
+									resource.setURI(trimmedURI.trimSegments(1).appendSegment(trimmedFileStem).appendFileExtension(fileExtension));
+								}
+							}
+						}
+						checkOutput(actualResource, expectedURI, normalizer);
+					}
+					return actualResource;
+				}
+			};
+			Resource actualResource = checkThread.invoke();
+			//	activate();
+			return actualResource;
+		}
+
+		protected void checkOutput(@NonNull Resource outputResource, @NonNull URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
+			ResourceSet referenceResourceSet = createTestResourceSet();
+			Resource referenceResource = referenceResourceSet.getResource(referenceModelURI, true);
+			assert referenceResource != null;
+			EcoreUtil.resolveAll(referenceResourceSet);
+			if (normalizer != null) {
+				assert !referenceResource.getContents().isEmpty() : referenceResource.getURI() + " has no contents";
+				assert !outputResource.getContents().isEmpty() : outputResource.getURI() + " has no contents";
+				normalizer.normalize(referenceResource);
+				normalizer.normalize(outputResource);
+			}
+			LoadTestCase.assertSameModel(referenceResource, outputResource);
+		}
+
+		public void createGeneratedExecutor() throws ReflectiveOperationException {
+			this.executor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
+		}
+
+		protected @NonNull ResourceSet createTestResourceSet() {
+			ResourceSet actualResourceSet = new ResourceSetImpl();
+			getEnvironmentFactory().getProjectManager().initializeResourceSet(actualResourceSet);
+			return actualResourceSet;
+		}
+
+		public boolean executeTransformation() throws Exception {
+			if (suppressFailureDiagnosis) {
+				executor.setSuppressFailureDiagnosis(true);
+			}
+			Boolean success = executor.execute(null);
+			return success == Boolean.TRUE;
+		}
+
+		@Override
+		protected @NonNull TransformationExecutor getExecutor() {
+			return executor;
+		}
+
+		public void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
+			getExecutor().getModelsManager().saveModels(saveOptions);
+		}
+	}
 
 	protected class MyQVT extends AbstractTestQVT
 	{
@@ -200,10 +325,10 @@ public class UMLXCompilerTests extends LoadTestCase
 		finally {
 			myQVT1.dispose();
 		}
-		MyQVT myQVT2 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.umlx"));
+	//	MyQVT myQVT2 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.umlx"));
 		try {
-			myQVT2.loadEPackage(txClass, "doublylinkedlist.doublylinkedlistPackage");
-			myQVT2.loadEPackage(txClass, "trace_Forward2Reverse.trace_Forward2ReversePackage");
+	//		myQVT2.loadEPackage(txClass, "doublylinkedlist.doublylinkedlistPackage");
+	//		myQVT2.loadEPackage(txClass, "trace_Forward2Reverse.trace_Forward2ReversePackage");
 			//
 			//			Class<?> mClass1 = txClass.getClassLoader().loadClass("org.eclipse.qvtd.umlx.tests.models.forward2reverse.doublylinkedlist.doublylinkedlistPackage");
 			//			EPackage ePackage1 = (EPackage)mClass1.getField("eINSTANCE").get(null);
@@ -216,36 +341,44 @@ public class UMLXCompilerTests extends LoadTestCase
 			//				txClass.getName();
 			//				Field field = txClass.getField("PLUGIN_ID");
 			//				Object pluginId = field.get(null);
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("forward", inURI);
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("reverse", outURI);
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(outURI, expectedURI, Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("reverse", getTestURI("OneElementList_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("OneElementList_CG.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("reverse", getTestURI("TwoElementList_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("TwoElementList_CG.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("reverse", getTestURI("ThreeElementList_CG.xmi"));
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			UMLXExecutionThread executionThread = new UMLXExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					createGeneratedExecutor();
+					addInputURI("forward", inURI);
+					executeTransformation();
+					addOutputURI("reverse", outURI);
+					saveModels(null);
+					checkOutput(outURI, expectedURI, Forward2ReverseNormalizer.INSTANCE);
+					//
+					createGeneratedExecutor();
+					addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
+					executeTransformation();
+					addOutputURI("reverse", getTestURI("OneElementList_CG.xmi"));
+					saveModels(null);
+					checkOutput(getTestURI("OneElementList_CG.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+					//
+					createGeneratedExecutor();
+					addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
+					executeTransformation();
+					addOutputURI("reverse", getTestURI("TwoElementList_CG.xmi"));
+					saveModels(null);
+					checkOutput(getTestURI("TwoElementList_CG.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+					//
+					createGeneratedExecutor();
+					addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
+					executeTransformation();
+					addOutputURI("reverse", getTestURI("ThreeElementList_CG.xmi"));
+					saveModels(null);
+					checkOutput(getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.invoke();
 		}
 		finally {
-			myQVT2.dispose();
+	//		myQVT2.dispose();
 		}
 	}
 
@@ -273,22 +406,28 @@ public class UMLXCompilerTests extends LoadTestCase
 		finally {
 			myQVT1.dispose();
 		}
-		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", txURI);
 		try {
 			//			myQVT2.loadEPackage(txClass, "doublylinkedlist.doublylinkedlistPackage");
 			//			myQVT2.loadEPackage(txClass, "trace_Forward2Reverse.trace_Forward2ReversePackage");
 			URI inURI = getResourceURI("/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/in/hier.xmi");
 			URI outURI = getTestURI("generated_CG.xmi");
 			URI expectedURI = getResourceURI("/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/out/expected.xmi");
-			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", inURI);
-			myQVT2.executeTransformation();
-			myQVT2.addOutputURI("flat", outURI);
-			myQVT2.saveModels(null);
-			myQVT2.checkOutput(outURI, expectedURI, null);//FlatStateMachineNormalizer.INSTANCE);
+			UMLXExecutionThread executionThread = new UMLXExecutionThread(createQVTimperativeEnvironmentThreadFactory(), txClass)
+			{
+				@Override
+				protected Object runWithThrowable() throws Exception {
+					createGeneratedExecutor();
+					addInputURI("hier", inURI);
+					executeTransformation();
+					addOutputURI("flat", outURI);
+					saveModels(null);
+					checkOutput(outURI, expectedURI, null);//FlatStateMachineNormalizer.INSTANCE);
+					return null;
+				}
+			};
+			executionThread.invoke();
 		}
 		finally {
-			myQVT2.dispose();
 			cleanup("http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine",
 					"http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/umlx/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine",
 					"http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/FlatStateMachine");

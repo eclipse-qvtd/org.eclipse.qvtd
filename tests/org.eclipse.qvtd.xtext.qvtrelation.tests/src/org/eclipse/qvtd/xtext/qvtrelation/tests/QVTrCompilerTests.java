@@ -114,7 +114,7 @@ public class QVTrCompilerTests extends LoadTestCase
 	protected abstract class QVTrExecutionThread extends QVTimperativeEnvironmentThread<Object>
 	{
 		protected QVTrExecutionThread() {
-			super("QVTr-Execution", createQVTimperativeEnvironmentThreadFactory());
+			super(createQVTimperativeEnvironmentThreadFactory(), "QVTr-Execution");
 		}
 	}
 
@@ -123,7 +123,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		protected @NonNull CompilationResult compilationResult;
 
 		protected QVTrInterpretationThread(@NonNull CompilationResult compilationResult) {
-			super("QVTr-Interpretation", createQVTimperativeEnvironmentThreadFactory());
+			super(createQVTimperativeEnvironmentThreadFactory(), "QVTr-Interpretation");
 			this.compilationResult = compilationResult;
 		}
 
