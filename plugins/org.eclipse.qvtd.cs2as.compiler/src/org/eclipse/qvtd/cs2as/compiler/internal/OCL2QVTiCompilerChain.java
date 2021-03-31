@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
@@ -45,23 +46,22 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 		private @NonNull List<@NonNull URI> extendedASUris = new ArrayList<>();
 		private @NonNull String traceabilityPropName;
 
-		public OCL2QVTmCompilerStep(@NonNull CompilerChain compilerChain, @NonNull QVTimperative qvti,
+		public OCL2QVTmCompilerStep(@NonNull CompilerChain compilerChain, @NonNull ResourceSet externalResourceSet,
 				@Nullable CompilerOptions options, @NonNull URI oclDocURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
 			super(compilerChain, QVTM_STEP);
 			this.traceabilityPropName = getTraceabilityPropertyName();
-			ResourceSet externalResourceSet = qvti.getResourceSet();
 			CSResource csResource = (CSResource) externalResourceSet.getResource(oclDocURI, true);
 			if (csResource == null) {
 				throw new CompilerChainException("Failed to parse " + oclDocURI);
 			}
-			ASResource asResource = qvti.cs2as(csResource);
+			ASResource asResource =  csResource.getASResource();
 			this.oclASUri = ClassUtil.nonNullState(asResource.getURI());
 			for (@NonNull URI extendedDocURI : extendedDocURIs) {
 				csResource = (CSResource) externalResourceSet.getResource(extendedDocURI, true);
 				if (csResource == null) {
 					throw new CompilerChainException("Failed to parse " + extendedDocURI);
 				}
-				asResource = qvti.cs2as(csResource);
+				asResource = csResource.getASResource();
 				this.extendedASUris.add(ClassUtil.nonNullState(asResource.getURI())); // We add the AS URI
 			}
 			StringBuilder s = null;
@@ -123,10 +123,10 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	 * @param extendedDocURIs optional OCL document URIs that the main one extends
 	 * @throws CompilerChainException
 	 */
-	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @NonNull CompilerOptions options,
+	public OCL2QVTiCompilerChain(@NonNull ProjectManager projectManager, @NonNull ResourceSet externalResourceSet, @NonNull CompilerOptions options,
 			@NonNull URI oclDocURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
-		super(qvti.getProjectManager(), oclDocURI, intermediateFileNamePrefixURI, options);
-		this.ocl2qvtmCompilerStep = new OCL2QVTmCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);
+		super(projectManager, oclDocURI, intermediateFileNamePrefixURI, options);
+		this.ocl2qvtmCompilerStep = new OCL2QVTmCompilerStep(this, externalResourceSet, options, oclDocURI, extendedDocURIs);
 	}
 
 	@Override

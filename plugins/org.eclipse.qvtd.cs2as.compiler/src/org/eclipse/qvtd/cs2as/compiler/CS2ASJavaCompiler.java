@@ -12,11 +12,11 @@ package org.eclipse.qvtd.cs2as.compiler;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.runtime.internal.cs2as.CS2ASTransformer;
 
 public interface CS2ASJavaCompiler {
 
-	public Class<? extends CS2ASTransformer> compileTransformation(@NonNull QVTimperative qvt,
+	public Class<? extends CS2ASTransformer> compileTransformation(@NonNull QVTimperativeEnvironmentFactory environmentFactory,
 			@NonNull ImperativeTransformation iTransformation,	@NonNull CS2ASJavaCompilerParameters params) throws Exception;
 }

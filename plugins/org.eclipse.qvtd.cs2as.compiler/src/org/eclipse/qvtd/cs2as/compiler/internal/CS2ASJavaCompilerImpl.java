@@ -69,12 +69,10 @@ import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.CS2ASCGModelVisitor;
 import org.eclipse.qvtd.cs2as.compiler.internal.utilities.CS2ASCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.internal.cs2as.AbstractCS2ASTransformer;
 import org.eclipse.qvtd.runtime.internal.cs2as.CS2ASTransformer;
-
 
 public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
@@ -466,10 +464,9 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 	// Copied from QVTiCompilerTest
 	@Override
-	public @NonNull Class<? extends CS2ASTransformer> compileTransformation(@NonNull QVTimperative qvt,
+	public @NonNull Class<? extends CS2ASTransformer> compileTransformation(@NonNull QVTimperativeEnvironmentFactory environmentFactory,
 			@NonNull ImperativeTransformation iTransformation,	@NonNull CS2ASJavaCompilerParameters params) throws Exception {
-
-		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), iTransformation, params)
+		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(environmentFactory, iTransformation, params)
 		{
 			@Override
 			protected @NonNull String createClassFileContent() {

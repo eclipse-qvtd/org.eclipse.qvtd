@@ -442,30 +442,28 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull CompilationResult compilationResult) throws Exception {
-		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(compilationResult.getEnvironmentFactory(), compilationResult.getResult());
-		this.executor = interpretedExecutor;
-		return interpretedExecutor;
+		return createInterpretedExecutor(compilationResult.getEnvironmentFactory(), compilationResult.getResult());
 	}
 
 	@Deprecated
 	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull EntryPoint entryPoint) throws Exception {
-		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY);
-		this.executor = interpretedExecutor;
-		return interpretedExecutor;
+		return createInterpretedExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY);
 	}
 
 	public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint) throws Exception {
-		BasicQVTiExecutor interpretedExecutor = createInterpretedExecutor(environmentFactory, entryPoint, ModeFactory.LAZY);
+		return createInterpretedExecutor(environmentFactory, entryPoint, ModeFactory.LAZY);
+	}
+
+	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
+		BasicQVTiExecutor interpretedExecutor = new BasicQVTiExecutor(environmentFactory, QVTimperativeUtil.getDefaultEntryPoint(transformation), ModeFactory.LAZY);	// XXX redundant argument
 		this.executor = interpretedExecutor;
 		return interpretedExecutor;
 	}
 
-	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
-		return new BasicQVTiExecutor(environmentFactory, QVTimperativeUtil.getDefaultEntryPoint(transformation), ModeFactory.LAZY);	// XXX redundant argument
-	}
-
 	protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull EntryPoint entryPoint, @NonNull ModeFactory modeFactory) throws Exception {
-		return new BasicQVTiExecutor(environmentFactory, entryPoint, modeFactory);
+		BasicQVTiExecutor interpretedExecutor = new BasicQVTiExecutor(environmentFactory, entryPoint, modeFactory);
+		this.executor = interpretedExecutor;
+		return interpretedExecutor;
 	}
 
 	@Override
@@ -750,10 +748,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return classpath;
 	}
 
-	@Override
-	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
-		throw new IllegalStateException("Should use thread-specific QVTiEnvironmentFactory");
-	}
+	//	@Override
+	//	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
+	//		throw new IllegalStateException("Should use thread-specific QVTiEnvironmentFactory");
+	//	}
 
 	public @NonNull TransformationExecutor getExecutor() {
 		return ClassUtil.nonNullState(executor);

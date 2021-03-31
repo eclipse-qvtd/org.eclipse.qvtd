@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.compiler.AbstractCompilerOptions;
@@ -54,10 +55,10 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, rSet);
 		try {
-			ImperativeTransformation qvtiTransf = executeOCL2QVTi_CompilerChain(qvt, tracePropertyName, oclDocURI, extendedOCLDocURIs);
+			ImperativeTransformation qvtiTransf = executeOCL2QVTi_CompilerChain(qvt.getProjectManager(), qvt.getResourceSet(), tracePropertyName, oclDocURI, extendedOCLDocURIs);
 			CS2ASJavaCompilerImpl compiler = createCompiler();
 			compiler.setLog(log);
-			return compiler.compileTransformation(qvt, qvtiTransf, params);
+			return compiler.compileTransformation(qvt.getEnvironmentFactory(), qvtiTransf, params);
 		} finally {
 			qvt.dispose();
 		}
@@ -67,7 +68,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		return new CS2ASJavaCompilerImpl();
 	}
 
-	protected @NonNull ImperativeTransformation executeOCL2QVTi_CompilerChain(@NonNull QVTimperative qvt, String tracePropName, @NonNull URI oclDocURI, @NonNull URI... extendedOCLDocURIs) throws Exception {
+	protected @NonNull ImperativeTransformation executeOCL2QVTi_CompilerChain(@NonNull ProjectManager projectManager, @NonNull ResourceSet externalResourceSet, String tracePropName, @NonNull URI oclDocURI, @NonNull URI... extendedOCLDocURIs) throws Exception {
 
 		CompilerOptions options = new AbstractCompilerOptions() {};
 		// OCL2QVTm options
@@ -79,7 +80,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions()); // FIXME parametrize save options ?
 		options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, debug);
 
-		OCL2QVTiCompilerChain compilerChain = new OCL2QVTiCompilerChain(qvt, options, oclDocURI, oclDocURI, extendedOCLDocURIs);
+		OCL2QVTiCompilerChain compilerChain = new OCL2QVTiCompilerChain(projectManager, externalResourceSet, options, oclDocURI, oclDocURI, extendedOCLDocURIs);
 		Log log2 = log;
 		if (log2 != null) {
 			compilerChain.addListener(new CompilerChain.Listener() {
