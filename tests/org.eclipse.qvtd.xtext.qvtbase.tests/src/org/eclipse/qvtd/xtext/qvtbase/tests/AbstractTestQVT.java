@@ -748,10 +748,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return classpath;
 	}
 
-	//	@Override
-	//	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
-	//		throw new IllegalStateException("Should use thread-specific QVTiEnvironmentFactory");
-	//	}
+	@Override
+	public @NonNull QVTimperativeEnvironmentFactory getEnvironmentFactory() {
+		throw new IllegalStateException("Should use thread-specific QVTiEnvironmentFactory");
+	}
 
 	public @NonNull TransformationExecutor getExecutor() {
 		return ClassUtil.nonNullState(executor);

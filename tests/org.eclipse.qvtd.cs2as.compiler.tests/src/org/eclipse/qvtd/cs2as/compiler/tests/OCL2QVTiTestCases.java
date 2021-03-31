@@ -57,13 +57,16 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThread;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
@@ -85,126 +88,18 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	//	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
 	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
 
-	public abstract class OCL2QVTiCompilationThread extends QVTimperativeEnvironmentThread<@NonNull Class<? extends Transformer>>
+	protected abstract class AbstractOCL2QVTiThread<R> extends QVTimperativeEnvironmentThread<R>
 	{
 		protected final @NonNull String modelTestName;
 		protected final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
 
-		protected OCL2QVTiCompilationThread( @NonNull String modelTestName) {
-			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-Compilation");
+		protected AbstractOCL2QVTiThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName) {
+			super(environmentThreadFactory, threadName);
 			this.modelTestName = modelTestName;
 		}
 
 		protected void assertRegionCount(@NonNull Class<? extends Region> partitionClass, int count) {
 			QVTruntimeUtil.errPrintln("assertRegionCount suppressed");
-		}
-
-		protected @NonNull Class<? extends Transformer> compileTransformation(@NonNull ImperativeTransformation iTransformation, @NonNull CS2ASJavaCompilerParameters cgParams) throws Exception {
-			//	QVTimperativeEnvironmentThreadFactory threadFactory = createQVTimperativeEnvironmentThreadFactory();
-			//	QVTimperativeEnvironmentThread<@NonNull Class<? extends CS2ASTransformer>> compilationThread = new QVTimperativeEnvironmentThread<@NonNull Class<? extends CS2ASTransformer>>(threadFactory, "OCL2QVTi-Compilation")
-			//	{
-			//		@Override
-			//		protected @NonNull Class<? extends CS2ASTransformer> runWithThrowable() throws Exception {
-			CS2ASJavaCompilerImpl cs2as2java = new CS2ASJavaCompilerImpl();
-			return cs2as2java.compileTransformation(getEnvironmentFactory(), iTransformation, cgParams);
-			//		}
-			//	};
-			//	return compilationThread.invoke();
-		}
-
-		@Override
-		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
-			QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
-			//			installEPackages(eInstances);
-			//
-			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
-			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
-			// therefore suppress diagnostics about confusing usage.
-			//
-			getProjectManager().configureLoadFirst(environmentFactory.getResourceSet(), EcorePackage.eNS_URI);	// XXX transitive usedGenModels
-			return environmentFactory;
-		}
-
-		protected @NonNull ImperativeTransformation generateTransformation(@NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
-			DefaultCompilerOptions compilerOptions = createCompilerOptions();
-			TestFileSystemOwner testFileSystemOwner = getTestFileSystemOwner();
-			ProjectManager projectManager = testFileSystemOwner.getTestProjectManager();
-			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
-			URI mainOclDocURI = testFileSystemOwner.getModelsURI(modelTestName + "/" + mainOclDoc);
-			@NonNull URI[] oclDocURIs = new @NonNull URI[extendedOclDocs.length];
-			for (int i=0; i < extendedOclDocs.length; i++) {
-				oclDocURIs[i] = testFileSystemOwner.getModelsURI(modelTestName + "/" + extendedOclDocs[i]);
-			}
-			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(projectManager, resourceSet, compilerOptions, mainOclDocURI, testFileSystemOwner.getTestURIWithExtension(mainOclDocURI, null), oclDocURIs)
-			{
-				@Override
-				protected @NonNull QVTm2QVTsCompilerStep createQVTm2QVTsCompilerStep() {
-					return new QVTm2QVTsCompilerStep(this)
-					{
-						@Override
-						public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
-							ScheduleManager scheduleManager = super.execute(environmentFactory, pResource, typedModelsConfiguration);
-							partitionUsage.instrumentPartition(scheduleManager);
-							return scheduleManager;
-						}
-					};
-				}
-			};
-			ImperativeTransformation iTransformation = compiler.compile(OCL2QVTm.RIGHT_MODEL_TYPE_NAME);
-			URI txURI = iTransformation.eResource().getURI();
-			if (txURI != null) {
-				URI inputURI = txURI;
-				URI serializedURI = testFileSystemOwner.getTestURIWithExtension(inputURI, "serialized.qvti");
-				AbstractTestQVT.doSerialize(projectManager, inputURI, serializedURI);
-			}
-			return iTransformation;
-		}
-
-		public void loadEcoreFile(URI fileURI, EPackage ePackage) {
-			ResourceSet rSet = getEnvironmentFactory().getResourceSet();
-			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
-			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
-		}
-
-		protected void loadGenModel(@NonNull URI genModelURI) {
-			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
-			MetamodelManagerInternal metamodelManager = getEnvironmentFactory().getMetamodelManager();
-			Resource csGenResource = resourceSet.getResource(genModelURI, true);
-			for (EObject eObject : csGenResource.getContents()) {
-				if (eObject instanceof GenModel) {
-					GenModel genModel = (GenModel)eObject;
-					genModel.reconcile();
-					metamodelManager.addGenModel(genModel);
-				}
-			}
-		}
-	}
-
-	public abstract class OCL2QVTiExecutionThread extends QVTimperativeEnvironmentThread<Object>
-	{
-		protected final @NonNull String inputModelPath;
-		protected final @NonNull Class<? extends Transformer> txClass;
-		private QVTiTransformationExecutor executor;
-		private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
-
-		protected OCL2QVTiExecutionThread(@NonNull Class<? extends Transformer> txClass, @NonNull String modelTestName) {
-			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-Execution");
-			this.inputModelPath = modelTestName + "/samples/";
-			this.txClass = txClass;
-		}
-
-		protected @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
-			QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, txClass);
-			this.executor = generatedExecutor;
-			return generatedExecutor;
-		}
-
-		protected @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
-			return executor.addInputURI(modelName, modelURI);
-		}
-
-		protected @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
-			return executor.addOutputURI(modelName, modelURI);
 		}
 
 		protected @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
@@ -273,13 +168,126 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			return actualResourceSet;
 		}
 
+		protected @NonNull ImperativeTransformation generateTransformation(@NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
+			DefaultCompilerOptions compilerOptions = createCompilerOptions();
+			TestFileSystemOwner testFileSystemOwner = getTestFileSystemOwner();
+			ProjectManager projectManager = testFileSystemOwner.getTestProjectManager();
+			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
+			URI mainOclDocURI = testFileSystemOwner.getModelsURI(modelTestName + "/" + mainOclDoc);
+			@NonNull URI[] oclDocURIs = new @NonNull URI[extendedOclDocs.length];
+			for (int i=0; i < extendedOclDocs.length; i++) {
+				oclDocURIs[i] = testFileSystemOwner.getModelsURI(modelTestName + "/" + extendedOclDocs[i]);
+			}
+			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(projectManager, resourceSet, compilerOptions, mainOclDocURI, testFileSystemOwner.getTestURIWithExtension(mainOclDocURI, null), oclDocURIs)
+			{
+				@Override
+				protected @NonNull QVTm2QVTsCompilerStep createQVTm2QVTsCompilerStep() {
+					return new QVTm2QVTsCompilerStep(this)
+					{
+						@Override
+						public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
+							ScheduleManager scheduleManager = super.execute(environmentFactory, pResource, typedModelsConfiguration);
+							partitionUsage.instrumentPartition(scheduleManager);
+							return scheduleManager;
+						}
+					};
+				}
+			};
+			ImperativeTransformation iTransformation = compiler.compile(OCL2QVTm.RIGHT_MODEL_TYPE_NAME);
+			URI txURI = iTransformation.eResource().getURI();
+			if (txURI != null) {
+				URI inputURI = txURI;
+				URI serializedURI = testFileSystemOwner.getTestURIWithExtension(inputURI, "serialized.qvti");
+				AbstractTestQVT.doSerialize(projectManager, inputURI, serializedURI);
+			}
+			return iTransformation;
+		}
+
+		protected void loadEcoreFile(URI fileURI, EPackage ePackage) {
+			ResourceSet rSet = getEnvironmentFactory().getResourceSet();
+			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
+			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+		}
+
+		protected void loadGenModel(@NonNull URI genModelURI) {
+			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
+			MetamodelManagerInternal metamodelManager = getEnvironmentFactory().getMetamodelManager();
+			Resource csGenResource = resourceSet.getResource(genModelURI, true);
+			for (EObject eObject : csGenResource.getContents()) {
+				if (eObject instanceof GenModel) {
+					GenModel genModel = (GenModel)eObject;
+					genModel.reconcile();
+					metamodelManager.addGenModel(genModel);
+				}
+			}
+		}
+	}
+
+	public abstract class OCL2QVTiCodeGenerationThread extends AbstractOCL2QVTiThread<@NonNull Class<? extends Transformer>>
+	{
+		protected OCL2QVTiCodeGenerationThread(@NonNull String modelTestName) {
+			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-CodeGeneration", modelTestName);
+		}
+
+		protected @NonNull Class<? extends Transformer> compileTransformation(@NonNull ImperativeTransformation iTransformation, @NonNull CS2ASJavaCompilerParameters cgParams) throws Exception {
+			//	QVTimperativeEnvironmentThreadFactory threadFactory = createQVTimperativeEnvironmentThreadFactory();
+			//	QVTimperativeEnvironmentThread<@NonNull Class<? extends CS2ASTransformer>> compilationThread = new QVTimperativeEnvironmentThread<@NonNull Class<? extends CS2ASTransformer>>(threadFactory, "OCL2QVTi-Compilation")
+			//	{
+			//		@Override
+			//		protected @NonNull Class<? extends CS2ASTransformer> runWithThrowable() throws Exception {
+			CS2ASJavaCompilerImpl cs2as2java = new CS2ASJavaCompilerImpl();
+			return cs2as2java.compileTransformation(getEnvironmentFactory(), iTransformation, cgParams);
+			//		}
+			//	};
+			//	return compilationThread.invoke();
+		}
+
+		@Override
+		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+			QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
+			//			installEPackages(eInstances);
+			//
+			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
+			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
+			// therefore suppress diagnostics about confusing usage.
+			//
+			getProjectManager().configureLoadFirst(environmentFactory.getResourceSet(), EcorePackage.eNS_URI);	// XXX transitive usedGenModels
+			return environmentFactory;
+		}
+	}
+
+	public abstract class OCL2QVTiCodeExecutionThread extends AbstractOCL2QVTiThread<Object>
+	{
+		protected final @NonNull Class<? extends Transformer> txClass;
+		private QVTiTransformationExecutor executor;
+		private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
+
+		protected OCL2QVTiCodeExecutionThread(@NonNull Class<? extends Transformer> txClass, @NonNull String modelTestName) {
+			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-Execution", modelTestName);
+			this.txClass = txClass;
+		}
+
+		protected @NonNull QVTiTransformationExecutor createGeneratedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+			QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, txClass);
+			this.executor = generatedExecutor;
+			return generatedExecutor;
+		}
+
+		protected @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
+			return executor.addInputURI(modelName, modelURI);
+		}
+
+		protected @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
+			return executor.addOutputURI(modelName, modelURI);
+		}
+
 		//
 		// Execute the transformation with the code generator
 		//
 		protected void executeModelTest(@NonNull String modelName) throws Exception {
-			String inputURIstring = inputModelPath + modelName + "_input.xmi";
+			String inputURIstring = modelTestName + "/samples/" + modelName + "_input.xmi";
 			String outURIstring = modelName + "_output_CG.xmi";
-			String refURIstring = inputModelPath + modelName + "_output_ref.xmi";
+			String refURIstring = modelTestName + "/samples/" + modelName + "_output_ref.xmi";
 			this.executor = createGeneratedExecutor(getEnvironmentFactory(), txClass);
 			addInputURI(OCL2QVTm.LEFT_MODEL_TYPE_NAME, getModelsURI(inputURIstring));
 			assertTrue(executeTransformation());
@@ -296,10 +304,96 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			return success == Boolean.TRUE;
 		}
 
-		public void loadEcoreFile(URI fileURI, EPackage ePackage) {
-			ResourceSet rSet = getEnvironmentFactory().getResourceSet();
-			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
-			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+		protected void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
+			executor.getModelsManager().saveModels(saveOptions);
+		}
+	}
+
+	public abstract class OCL2QVTiTxGenerationThread extends AbstractOCL2QVTiThread<@NonNull URI>
+	{
+		protected OCL2QVTiTxGenerationThread(@NonNull String modelTestName) {
+			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-TxGeneration", modelTestName);
+		}
+
+		@Override
+		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+			QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
+			//			installEPackages(eInstances);
+			//
+			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
+			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
+			// therefore suppress diagnostics about confusing usage.
+			//
+			getProjectManager().configureLoadFirst(environmentFactory.getResourceSet(), EcorePackage.eNS_URI);	// XXX transitive usedGenModels
+			return environmentFactory;
+		}
+	}
+
+	public abstract class OCL2QVTiTxInterpretationThread extends AbstractOCL2QVTiThread<Object>
+	{
+		protected @NonNull URI txURI;
+		private ImperativeTransformation iTransformation;
+		private BasicQVTiExecutor executor;
+		private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
+
+		protected OCL2QVTiTxInterpretationThread(@NonNull URI txURI, @NonNull String modelTestName) {
+			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-TxInterpretation", modelTestName);
+			this.txURI = txURI;
+		}
+
+		protected @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) throws Exception {
+			BasicQVTiExecutor interpretedExecutor = new BasicQVTiExecutor(environmentFactory, QVTimperativeUtil.getDefaultEntryPoint(transformation), ModeFactory.LAZY);	// XXX redundant argument
+			this.executor = interpretedExecutor;
+			return interpretedExecutor;
+		}
+
+		//
+		// Execute the transformation with the QVTi interpreter
+		//
+		protected void executeModelTest(@NonNull String modelName) throws Exception {
+			assert iTransformation != null;
+			String inputURIstring = modelTestName + "/samples/" + modelName + "_input.xmi";
+			String outURIstring = modelName + "_output_Interpreted.xmi";
+			String refURIstring = modelTestName + "/samples/" + modelName + "_output_ref.xmi";
+			createInterpretedExecutor(getEnvironmentFactory(), iTransformation);
+			addInputURI(OCL2QVTm.LEFT_MODEL_TYPE_NAME, getModelsURI(inputURIstring));
+			assertTrue(executeTransformation());
+			addOutputURI(OCL2QVTm.RIGHT_MODEL_TYPE_NAME, getTestURI(outURIstring));
+			saveModels(null);
+			checkOutput(getTestURI(outURIstring), getModelsURI(refURIstring), null);
+		}
+
+		protected @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
+			return executor.addInputURI(modelName, modelURI);
+		}
+
+		protected @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
+			return executor.addOutputURI(modelName, modelURI);
+		}
+
+		protected boolean executeTransformation() throws Exception {
+			if (suppressFailureDiagnosis) {
+				executor.setSuppressFailureDiagnosis(true);
+			}
+			Boolean success = executor.execute(null);
+			return success == Boolean.TRUE;
+		}
+
+		protected void loadTransformation() {
+			Resource resource = getEnvironmentFactory().getMetamodelManager().getASResourceSet().getResource(txURI, true);
+			for (EObject eObject : resource.getContents()) {
+				if (eObject instanceof ImperativeModel) {
+					for (org.eclipse.ocl.pivot.Package pPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
+						for (org.eclipse.ocl.pivot.Class pClass : pPackage.getOwnedClasses()) {
+							if (pClass instanceof ImperativeTransformation) {
+								iTransformation = (ImperativeTransformation) pClass;
+								return;
+							}
+						}
+					}
+				}
+			}
+			throw new IllegalStateException("No transformation");
 		}
 
 		protected void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
@@ -507,7 +601,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_Source2Target_CG() throws Throwable {
-		OCL2QVTiCompilationThread compilationThread = new OCL2QVTiCompilationThread("Source2Target")
+		OCL2QVTiCodeGenerationThread compilationThread = new OCL2QVTiCodeGenerationThread("Source2Target")
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
@@ -525,7 +619,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			}
 		};
 		Class<? extends Transformer> txClass = compilationThread.invoke();
-		OCL2QVTiExecutionThread executionThread = new OCL2QVTiExecutionThread(txClass, "Source2Target")
+		OCL2QVTiCodeExecutionThread executionThread = new OCL2QVTiCodeExecutionThread(txClass, "Source2Target")
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
@@ -553,7 +647,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			ExplicitClassLoader explicitClassLoader = new ExplicitClassLoader(file, "_Source2Target_qvtm_qvtcas", getClass().getClassLoader());
 			@SuppressWarnings({"null", "unchecked"})
 			@NonNull Class<? extends Transformer> txClass = (Class<? extends Transformer>) explicitClassLoader.loadClass("_Source2Target_qvtm_qvtcas.Source2Target_qvtm_qvtcas");
-			OCL2QVTiExecutionThread executionThread = new OCL2QVTiExecutionThread(txClass)
+			OCL2QVTiCodeExecutionThread executionThread = new OCL2QVTiCodeExecutionThread(txClass)
 			{
 				@Override
 				protected Object runWithThrowable() throws Exception {
@@ -614,7 +708,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_SimpleClasses_CG() throws Throwable {
-		OCL2QVTiCompilationThread compilationThread = new OCL2QVTiCompilationThread("SimpleClasses")
+		OCL2QVTiCodeGenerationThread compilationThread = new OCL2QVTiCodeGenerationThread("SimpleClasses")
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
@@ -633,7 +727,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			}
 		};
 		Class<? extends Transformer> txClass = compilationThread.invoke();
-		OCL2QVTiExecutionThread executionThread = new OCL2QVTiExecutionThread(txClass, "SimpleClasses")
+		OCL2QVTiCodeExecutionThread executionThread = new OCL2QVTiCodeExecutionThread(txClass, "SimpleClasses")
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
@@ -696,7 +790,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_StructuredClasses_CG() throws Throwable {
-		OCL2QVTiCompilationThread compilationThread = new OCL2QVTiCompilationThread("StructuredClasses")
+		OCL2QVTiCodeGenerationThread compilationThread = new OCL2QVTiCodeGenerationThread("StructuredClasses")
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
@@ -714,7 +808,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			}
 		};
 		Class<? extends Transformer> txClass = compilationThread.invoke();
-		OCL2QVTiExecutionThread executionThread = new OCL2QVTiExecutionThread(txClass, "StructuredClasses")
+		OCL2QVTiCodeExecutionThread executionThread = new OCL2QVTiCodeExecutionThread(txClass, "StructuredClasses")
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
@@ -736,38 +830,39 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_StructuredClasses_Interpreted() throws Throwable {
-		//		OperationDependencyAnalysis.CALL.setState(true);
-		//		OperationDependencyAnalysis.CREATE.setState(true);
-		//		OperationDependencyAnalysis.FINISH.setState(true);
-		//		OperationDependencyAnalysis.PENDING.setState(true);
-		//		OperationDependencyAnalysis.REFINING.setState(true);
-		//		OperationDependencyAnalysis.RETURN.setState(true);
-		//		OperationDependencyAnalysis.START.setState(true);
 		testCaseAppender.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
-		MyQVT myQVT = createQVT("StructuredClasses", getModelsURI("StructuredClasses/classescs2asV2.ocl"), "samples");
-		try {
-			myQVT.loadGenModels(getModelsURI("SimpleClasses/ClassesCS.genmodel"), getModelsURI("SimpleClasses/Classes.genmodel"));
-
-			Transformation iTransformation = myQVT.executeOCL2QVTi_CompilerChain("classescs2asV2.ocl");
-			URI txURI = iTransformation.eResource().getURI();
-
-			myQVT.dispose();
-			myQVT = createQVT("StructuredClasses", getModelsURI("StructuredClasses/classescs2asV2.ocl"), "samples");
-			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/Classes.ecore"), example2.classes.ClassesPackage.eINSTANCE);
-			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/ClassesCS.ecore"), example2.classescs.ClassescsPackage.eINSTANCE);
-			myQVT.loadEcoreFile(getModelsURI("SimpleClasses/classescs2as.ecore"), example2.classescstraces.ClassescstracesPackage.eINSTANCE);
-			ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
-			myQVT.executeModelsTX_Interpreted(tx, "model1V2");
-			myQVT.executeModelsTX_Interpreted(tx, "model2V2");
-			myQVT.executeModelsTX_Interpreted(tx, "model3V2");
-			myQVT.executeModelsTX_Interpreted(tx, "model4V2");
-		}
-		finally {
-			myQVT.dispose();
-			EPackage.Registry.INSTANCE.remove(example2.classes.ClassesPackage.eNS_URI);
-			EPackage.Registry.INSTANCE.remove(example2.classescs.ClassescsPackage.eNS_URI);
-			EPackage.Registry.INSTANCE.remove(example2.classescstraces.ClassescstracesPackage.eNS_URI);
-		}
+		OCL2QVTiTxGenerationThread generationThread = new OCL2QVTiTxGenerationThread("StructuredClasses")
+		{
+			@Override
+			protected @NonNull URI runWithThrowable() throws Exception {
+				loadGenModel(getModelsURI("SimpleClasses/ClassesCS.genmodel"));
+				loadGenModel(getModelsURI("SimpleClasses/ClassesCS.genmodel"));
+				Transformation iTransformation = generateTransformation("classescs2asV2.ocl");
+				URI uri = iTransformation.eResource().getURI();
+				assert uri != null;
+				return uri;
+			}
+		};
+		URI txURI = generationThread.invoke();
+		OCL2QVTiTxInterpretationThread interpretationThread = new OCL2QVTiTxInterpretationThread(txURI, "StructuredClasses")
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				loadEcoreFile(getModelsURI("SimpleClasses/Classes.ecore"), example2.classes.ClassesPackage.eINSTANCE);
+				loadEcoreFile(getModelsURI("SimpleClasses/ClassesCS.ecore"), example2.classescs.ClassescsPackage.eINSTANCE);
+				loadEcoreFile(getModelsURI("SimpleClasses/classescs2as.ecore"), example2.classescstraces.ClassescstracesPackage.eINSTANCE);
+				loadTransformation();
+				executeModelTest("model1V2");
+				executeModelTest("model2V2");
+				executeModelTest("model3V2");
+				executeModelTest("model4V2");
+				return null;
+			}
+		};
+		interpretationThread.invoke();
+		EPackage.Registry.INSTANCE.remove(example2.classes.ClassesPackage.eNS_URI);
+		EPackage.Registry.INSTANCE.remove(example2.classescs.ClassescsPackage.eNS_URI);
+		EPackage.Registry.INSTANCE.remove(example2.classescstraces.ClassescstracesPackage.eNS_URI);
 	}
 
 	//  Note supported anymore
@@ -800,7 +895,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_KiamaRewrite_CG() throws Throwable {
-		OCL2QVTiCompilationThread compilationThread = new OCL2QVTiCompilationThread("KiamaRewrite")
+		OCL2QVTiCodeGenerationThread compilationThread = new OCL2QVTiCodeGenerationThread("KiamaRewrite")
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
@@ -819,7 +914,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			}
 		};
 		Class<? extends Transformer> txClass = compilationThread.invoke();
-		OCL2QVTiExecutionThread executionThread = new OCL2QVTiExecutionThread(txClass, "KiamaRewrite")
+		OCL2QVTiCodeExecutionThread executionThread = new OCL2QVTiCodeExecutionThread(txClass, "KiamaRewrite")
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
@@ -839,7 +934,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT("example3");
 		Class<? extends Transformer> txClass = KiamaRewrite_qvtm_qvtcas.class;
-			OCL2QVTiExecutionThread executionThread = new OCL2QVTiExecutionThread(txClass)
+			OCL2QVTiCodeExecutionThread executionThread = new OCL2QVTiCodeExecutionThread(txClass)
 			{
 				@Override
 				protected Object runWithThrowable() throws Exception {
@@ -865,7 +960,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_SimplerKiama_CG() throws Throwable {
-		OCL2QVTiCompilationThread compilationThread = new OCL2QVTiCompilationThread("SimplerKiama")
+		OCL2QVTiCodeGenerationThread compilationThread = new OCL2QVTiCodeGenerationThread("SimplerKiama")
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
@@ -884,7 +979,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			}
 		};
 		Class<? extends Transformer> txClass = compilationThread.invoke();
-		OCL2QVTiExecutionThread executionThread = new OCL2QVTiExecutionThread(txClass, "SimplerKiama")
+		OCL2QVTiCodeExecutionThread executionThread = new OCL2QVTiCodeExecutionThread(txClass, "SimplerKiama")
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
@@ -901,26 +996,43 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_SimplerKiama_Interpreted() throws Throwable {
-		MyQVT myQVT = createQVT("SimplerKiama", getModelsURI("SimplerKiama/SimplerKiama.ocl"), "samples");
-		myQVT.loadGenModels(getModelsURI("SimplerKiama/SimplerKiamaAS.genmodel"), getModelsURI("SimplerKiama/SimplerKiamaCS.genmodel"));
-		ImperativeTransformation iTransformation = myQVT.executeOCL2QVTi_CompilerChain("SimplerKiama.ocl");
-		URI txURI = iTransformation.eResource().getURI();
-		myQVT.dispose();
-		//
-		myQVT = createQVT("SimplerKiama", getModelsURI("SimplerKiama/SimplerKiama.ocl"), "samples");
-		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
-		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
-		//    	executeModelsTX_Interpreted(myQVT, iTransformation, baseURI, "model0");
-		myQVT.executeModelsTX_Interpreted(tx, "model1");
-		myQVT.executeModelsTX_Interpreted(tx, "model2");
-		myQVT.executeModelsTX_Interpreted(tx, "model3");
-		myQVT.dispose();
+		OCL2QVTiTxGenerationThread generationThread = new OCL2QVTiTxGenerationThread("SimplerKiama")
+		{
+			@Override
+			protected @NonNull URI runWithThrowable() throws Exception {
+				loadGenModel(getModelsURI("SimplerKiama/SimplerKiamaAS.genmodel"));
+				loadGenModel(getModelsURI("SimplerKiama/SimplerKiamaCS.genmodel"));
+				Transformation iTransformation = generateTransformation("SimplerKiama.ocl");
+				//				assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 11 : 6);
+				//		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 1);
+				//		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 1);
+				//		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
+				URI uri = iTransformation.eResource().getURI();
+				assert uri != null;
+				return uri;
+			}
+		};
+		URI txURI = generationThread.invoke();
+		OCL2QVTiTxInterpretationThread interpretationThread = new OCL2QVTiTxInterpretationThread(txURI, "SimplerKiama")
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				loadTransformation();
+				//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+				// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
+				//    	executeModelsTX_Interpreted(iTransformation, baseURI, "model0");
+				executeModelTest("model1");
+				executeModelTest("model2");
+				executeModelTest("model3");
+				return null;
+			}
+		};
+		interpretationThread.invoke();
 	}
 
 	@Test
 	public void testOCL2QVTi_BaseAndDerived_CG() throws Throwable {
-		OCL2QVTiCompilationThread compilationThread1 = new OCL2QVTiCompilationThread("BaseAndDerived")
+		OCL2QVTiCodeGenerationThread compilationThread1 = new OCL2QVTiCodeGenerationThread("BaseAndDerived")
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
@@ -936,7 +1048,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			}
 		};
 		Class<? extends Transformer> txClass1 = compilationThread1.invoke();
-		OCL2QVTiExecutionThread executionThread1 = new OCL2QVTiExecutionThread(txClass1, "BaseAndDerived")
+		OCL2QVTiCodeExecutionThread executionThread1 = new OCL2QVTiCodeExecutionThread(txClass1, "BaseAndDerived")
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
@@ -945,7 +1057,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			}
 		};
 		executionThread1.invoke();
-		OCL2QVTiCompilationThread compilationThread2 = new OCL2QVTiCompilationThread("BaseAndDerived")
+		OCL2QVTiCodeGenerationThread compilationThread2 = new OCL2QVTiCodeGenerationThread("BaseAndDerived")
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
@@ -959,7 +1071,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			}
 		};
 		Class<? extends Transformer> txClass2 = compilationThread2.invoke();
-		OCL2QVTiExecutionThread executionThread2 = new OCL2QVTiExecutionThread(txClass2, "BaseAndDerived")
+		OCL2QVTiCodeExecutionThread executionThread2 = new OCL2QVTiCodeExecutionThread(txClass2, "BaseAndDerived")
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
