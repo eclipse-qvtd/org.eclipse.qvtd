@@ -118,12 +118,12 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	protected abstract class QVTrInterpretationThread extends QVTimperativeEnvironmentThread<Object>
+	protected abstract class QVTrTxInterpretationThread extends QVTimperativeEnvironmentThread<Object>
 	{
 		protected @NonNull CompilationResult compilationResult;
 
-		protected QVTrInterpretationThread(@NonNull CompilationResult compilationResult) {
-			super(createQVTimperativeEnvironmentThreadFactory(), "QVTr-Interpretation");
+		protected QVTrTxInterpretationThread(@NonNull CompilationResult compilationResult) {
+			super(createQVTimperativeEnvironmentThreadFactory(), "QVTr-TxInterpretation");
 			this.compilationResult = compilationResult;
 		}
 
@@ -1285,7 +1285,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			CompilationResult compilationResult = myQVT.compileTransformation("flat");
 			//
-			QVTrInterpretationThread interpretationThread = new QVTrInterpretationThread(compilationResult)
+			QVTrTxInterpretationThread interpretationThread = new QVTrTxInterpretationThread(compilationResult)
 			{
 				@Override
 				protected Object runWithThrowable() throws Exception {
@@ -1913,7 +1913,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
 			//			QVTrExecutionThread executionThread = new QVTrExecutionThread()
-			QVTrInterpretationThread interpretationThread = new QVTrInterpretationThread(compilationResult)
+			QVTrTxInterpretationThread interpretationThread = new QVTrTxInterpretationThread(compilationResult)
 			{
 				@Override
 				protected Object runWithThrowable() throws Exception {

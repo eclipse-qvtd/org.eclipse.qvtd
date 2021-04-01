@@ -288,12 +288,12 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			NavigationAssignment paOut = paIn instanceof OppositePropertyAssignment
 					? (NavigationAssignment) super.visitOppositePropertyAssignment((@NonNull OppositePropertyAssignment) paIn)
 						: (NavigationAssignment) super.visitPropertyAssignment((@NonNull PropertyAssignment) paIn);
-					assert paOut != null;
-					if (!typedModelsConfiguration.hasTargetTypedModel() && paIn.isIsDefault() && isOutputDomain(paIn.getBottomPattern().getArea())) {
-						// Default assignments
-						paOut.setIsDefault(false);
-					}
-					return paOut;
+			assert paOut != null;
+			if (!typedModelsConfiguration.hasTargetTypedModel() && paIn.isIsDefault() && isOutputDomain(paIn.getBottomPattern().getArea())) {
+				// Default assignments
+				paOut.setIsDefault(false);
+			}
+			return paOut;
 		}
 
 		//
@@ -649,7 +649,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			}
 			mergedMode = mergedMode.union(mappingMode);
 		}
-		return mergedMode;
+		return mergedMode;			// FIXME Diagnose no OUTPUT
 	}
 
 	private @Nullable MappingMode getMappingMode(@NonNull Mapping mapping) {

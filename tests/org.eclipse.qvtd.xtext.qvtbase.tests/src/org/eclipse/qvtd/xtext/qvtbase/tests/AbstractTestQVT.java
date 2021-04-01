@@ -495,6 +495,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 	protected @NonNull CompilationResult doCompile(@NonNull EnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
 			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull CompilerOptions options) throws Exception {
 		compilerChain = createCompilerChain(getTestProjectManager(), txURI, intermediateFileNamePrefixURI, options);
+		return doCompile(environmentThreadFactory, typedModelsConfigurations, compilerChain);
+	}
+
+	public static @NonNull CompilationResult doCompile(@NonNull EnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory,
+			@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull AbstractCompilerChain compilerChain) throws Exception {
 		CompilationResult compilationThreadResult = compilerChain.compile2(typedModelsConfigurations);
 		ImperativeTransformation transformation = compilationThreadResult.getResult();
 		URI txASURI = transformation.eResource().getURI();
@@ -502,20 +507,20 @@ public abstract class AbstractTestQVT extends QVTimperative
 			URI inputURI = txASURI;
 			URI asURIstem = txASURI.trimFileExtension();
 			URI serializedURI = asURIstem.appendFileExtension("serialized.qvti");
-			doSerialize(getTestProjectManager(), inputURI, serializedURI);
+			doSerialize(environmentThreadFactory.getProjectManager(), inputURI, serializedURI);
 			doScheduleLoadCheck(environmentThreadFactory, asURIstem.appendFileExtension(QVTbaseUtil.QVTSAS_FILE_EXTENSION));
 		}
 		return compilationThreadResult;
 	}
 
-	private void doScheduleLoadCheck(@NonNull EnvironmentThreadFactory<?> environmentThreadFactory2, @NonNull URI uri) throws Exception {
-		//	deactivate();
-		PivotEnvironmentThreadFactory environmentThreadFactory = new PivotEnvironmentThreadFactory(getProjectManager());
-		AbstractTestThread<Object, @NonNull EnvironmentFactoryInternal, @Nullable OCLInternal> checkThread = new AbstractTestThread<Object, @NonNull EnvironmentFactoryInternal, @Nullable OCLInternal>("Schedule-Load-Check", environmentThreadFactory)
+	public static void doScheduleLoadCheck(@NonNull EnvironmentThreadFactory<?> environmentThreadFactory2, @NonNull URI uri) throws Exception {
+		ProjectManager projectManager = environmentThreadFactory2.getProjectManager();
+		PivotEnvironmentThreadFactory environmentThreadFactory = new PivotEnvironmentThreadFactory(projectManager);
+		AbstractTestThread<Object, @NonNull EnvironmentFactoryInternal, @Nullable OCLInternal> checkThread = new AbstractTestThread<Object, @NonNull EnvironmentFactoryInternal, @Nullable OCLInternal>("QVTi-ScheduleLoadCheck", environmentThreadFactory)
 		{
 			@Override
 			protected OCLInternal createOCL() {
-				OCL ocl = QVTbase.newInstance(getTestProjectManager());
+				OCL ocl = QVTbase.newInstance(projectManager);
 				ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
 				return (OCLInternal) ocl;
 			}
@@ -523,7 +528,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			@Override
 			public Object runWithThrowable() throws Exception {
 				//	assert ocl != null;
-				ResourceSet resourceSet = getResourceSet();
+				ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
 				getProjectManager().initializeResourceSet(resourceSet);
 				Resource resource = resourceSet.getResource(uri, true);
 				assert resource != null;
@@ -535,7 +540,6 @@ public abstract class AbstractTestQVT extends QVTimperative
 			}
 		};
 		checkThread.invoke();
-		//	activate();
 	}
 
 	public static XtextResource doSerialize(@NonNull ProjectManager projectManager, @NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
