@@ -438,8 +438,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		throw new UnsupportedOperationException();		// XXX
 	}
 
-	protected <O extends OCLInternal> @NonNull CompilationResult compile3(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
-		QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation> thread = new QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation>(environmentThreadFactory, "compile")
+	public <O extends OCLInternal> @NonNull CompilationResult compile3(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
+		QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation> thread = new QVTimperativeEnvironmentThread<@NonNull ImperativeTransformation>(environmentThreadFactory, "QVTi-Compile")
 		{
 			@Override
 			protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
