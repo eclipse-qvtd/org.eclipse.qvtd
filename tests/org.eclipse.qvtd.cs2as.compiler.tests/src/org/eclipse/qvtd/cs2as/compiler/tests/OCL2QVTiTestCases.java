@@ -75,14 +75,28 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	//	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
 	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
 
-	protected abstract class AbstractOCL2QVTiThread<R> extends QVTimperativeEnvironmentThread<R>
+	protected abstract static class OCL2QVTiThread<R> extends QVTimperativeEnvironmentThread<R>
 	{
 		protected final @NonNull String modelTestName;
-		protected final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
 
-		protected AbstractOCL2QVTiThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName) {
+		protected OCL2QVTiThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName) {
 			super(environmentThreadFactory, threadName);
 			this.modelTestName = modelTestName;
+		}
+
+		protected void loadEcoreFile(URI fileURI, EPackage ePackage) {
+			ResourceSet rSet = getEnvironmentFactory().getResourceSet();
+			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
+			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);		// FIXME Accumulate for cleanup
+		}
+	}
+
+	protected abstract static class OCL2QVTiGenerationThread<R> extends OCL2QVTiThread<R>
+	{
+		protected final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
+
+		protected OCL2QVTiGenerationThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName) {
+			super(environmentThreadFactory, threadName, modelTestName);
 		}
 
 		protected void assertRegionCount(@NonNull Class<? extends Region> partitionClass, int count) {
@@ -100,11 +114,11 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			return compilerOptions;
 		}
 
-		protected @NonNull ImperativeTransformation generateTransformation(@NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
+		protected @NonNull ImperativeTransformation generateTransformation(@NonNull TestFileSystemOwner testFileSystemOwner, @NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
 			DefaultCompilerOptions compilerOptions = createCompilerOptions();
-			TestFileSystemOwner testFileSystemOwner = getTestFileSystemOwner();
-			ProjectManager projectManager = testFileSystemOwner.getTestProjectManager();
-			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
+			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+			ProjectManager projectManager = environmentFactory.getProjectManager();
+			ResourceSet resourceSet = environmentFactory.getResourceSet();
 			URI mainOclDocURI = testFileSystemOwner.getModelsURI(modelTestName + "/" + mainOclDoc);
 			@NonNull URI[] oclDocURIs = new @NonNull URI[extendedOclDocs.length];
 			for (int i=0; i < extendedOclDocs.length; i++) {
@@ -135,19 +149,6 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			return iTransformation;
 		}
 
-		protected @NonNull URI generateTransformationURI(@NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
-			ImperativeTransformation iTransformation = generateTransformation(mainOclDoc, extendedOclDocs);
-			URI uri = iTransformation.eResource().getURI();
-			assert uri != null;
-			return uri;
-		}
-
-		protected void loadEcoreFile(URI fileURI, EPackage ePackage) {
-			ResourceSet rSet = getEnvironmentFactory().getResourceSet();
-			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
-			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);		// FIXME Accumulate for cleanup
-		}
-
 		protected void loadGenModel(@NonNull URI genModelURI) {
 			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
 			MetamodelManagerInternal metamodelManager = getEnvironmentFactory().getMetamodelManager();
@@ -162,7 +163,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	public abstract class OCL2QVTiCodeGenerationThread extends AbstractOCL2QVTiThread<@NonNull Class<? extends Transformer>>
+	protected abstract class OCL2QVTiCodeGenerationThread extends OCL2QVTiGenerationThread<@NonNull Class<? extends Transformer>>
 	{
 		protected OCL2QVTiCodeGenerationThread(@NonNull String modelTestName) {
 			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-CodeGeneration", modelTestName);
@@ -197,16 +198,46 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			cgParams.setClassLoader(getClass().getClassLoader());
 			return cgParams;
 		}
+
+		protected @NonNull ImperativeTransformation generateTransformation(@NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
+			return generateTransformation(getTestFileSystemOwner(), mainOclDoc, extendedOclDocs);
+		}
 	}
 
-	public abstract class AbstractOCL2QVTiExecutionThread extends AbstractOCL2QVTiThread<Object>
+	protected abstract class OCL2QVTiTxGenerationThread extends OCL2QVTiGenerationThread<@NonNull URI>
+	{
+		protected OCL2QVTiTxGenerationThread(@NonNull String modelTestName) {
+			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-TxGeneration", modelTestName);
+		}
+
+		@Override
+		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
+			QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
+			//			installEPackages(eInstances);
+			//
+			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
+			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
+			// therefore suppress diagnostics about confusing usage.
+			//
+			getProjectManager().configureLoadFirst(environmentFactory.getResourceSet(), EcorePackage.eNS_URI);	// XXX transitive usedGenModels
+			return environmentFactory;
+		}
+
+		protected @NonNull URI generateTransformationURI(@NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
+			ImperativeTransformation iTransformation = generateTransformation(getTestFileSystemOwner(), mainOclDoc, extendedOclDocs);
+			URI uri = iTransformation.eResource().getURI();
+			assert uri != null;
+			return uri;
+		}
+	}
+
+	protected abstract static class OCL2QVTiExecutionThread extends OCL2QVTiThread<Object>
 	{
 		private TransformationExecutor executor;
-
 		private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
 
-		protected AbstractOCL2QVTiExecutionThread(@NonNull String threadName, @NonNull String modelTestName) {
-			super(createQVTimperativeEnvironmentThreadFactory(), threadName, modelTestName);
+		protected OCL2QVTiExecutionThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName) {
+			super(environmentThreadFactory, threadName, modelTestName);
 		}
 
 		protected @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
@@ -234,13 +265,13 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	public abstract class OCL2QVTiCodeExecutionThread extends AbstractOCL2QVTiExecutionThread
+	protected abstract class OCL2QVTiCodeExecutionThread extends OCL2QVTiExecutionThread
 	{
 		protected final @NonNull Class<? extends Transformer> txClass;
 		//	private QVTiTransformationExecutor generatedExecutor;
 
 		protected OCL2QVTiCodeExecutionThread(@NonNull Class<? extends Transformer> txClass, @NonNull String modelTestName) {
-			super("OCL2QVTi-Execution", modelTestName);
+			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-Execution", modelTestName);
 			this.txClass = txClass;
 		}
 
@@ -260,33 +291,13 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	public abstract class OCL2QVTiTxGenerationThread extends AbstractOCL2QVTiThread<@NonNull URI>
-	{
-		protected OCL2QVTiTxGenerationThread(@NonNull String modelTestName) {
-			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-TxGeneration", modelTestName);
-		}
-
-		@Override
-		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
-			QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
-			//			installEPackages(eInstances);
-			//
-			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
-			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
-			// therefore suppress diagnostics about confusing usage.
-			//
-			getProjectManager().configureLoadFirst(environmentFactory.getResourceSet(), EcorePackage.eNS_URI);	// XXX transitive usedGenModels
-			return environmentFactory;
-		}
-	}
-
-	public abstract class OCL2QVTiTxInterpretationThread extends AbstractOCL2QVTiExecutionThread
+	protected abstract class OCL2QVTiTxInterpretationThread extends OCL2QVTiExecutionThread
 	{
 		protected @NonNull URI txURI;
 		private ImperativeTransformation iTransformation;
 
 		protected OCL2QVTiTxInterpretationThread(@NonNull URI txURI, @NonNull String modelTestName) {
-			super("OCL2QVTi-TxInterpretation", modelTestName);
+			super(createQVTimperativeEnvironmentThreadFactory(), "OCL2QVTi-TxInterpretation", modelTestName);
 			this.txURI = txURI;
 		}
 
