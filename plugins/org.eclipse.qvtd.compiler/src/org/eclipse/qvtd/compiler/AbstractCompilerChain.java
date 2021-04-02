@@ -461,7 +461,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return new CompilationResult(thread, result);
 	}
 
-	protected abstract @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException;
+	public abstract @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException;
 
 	@Override
 	public void compiled(@NonNull String stepKey, @NonNull Object object) {

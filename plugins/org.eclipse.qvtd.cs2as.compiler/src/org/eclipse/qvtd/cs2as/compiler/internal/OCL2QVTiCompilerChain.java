@@ -142,7 +142,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	}
 
 	@Override
-	protected @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+	public @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		TypedModelsConfiguration typedModelsConfiguration = typedModelsConfigurations.iterator().next();
 		return qvtm2qvti(environmentFactory, ocl2qvtmCompilerStep.execute(environmentFactory), typedModelsConfiguration);
 	}

@@ -81,7 +81,7 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	protected @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+	public @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		Resource qvtccResource = xtext2qvtcCompilerStep.execute(environmentFactory, txURI);
 		TypedModelsConfiguration typedModelsConfiguration = typedModelsConfigurations.iterator().next();	// FIXME multi-direction
 		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, typedModelsConfiguration);

@@ -35,7 +35,6 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
-import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilationResult;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -58,10 +57,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFa
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThread;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
@@ -94,18 +95,12 @@ public class QVTcCompilerTests extends LoadTestCase
 	protected abstract static class QVTcTestThread<R> extends QVTimperativeEnvironmentThread<R>
 	{
 		protected final @NonNull String modelTestName;
-		protected final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
-
 		protected QVTcTestThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName) {
 			super(environmentThreadFactory, threadName);
 			this.modelTestName = modelTestName;
 		}
 
-		/*		protected void assertRegionCount(@NonNull Class<? extends Region> partitionClass, int count) {
-			QVTruntimeUtil.errPrintln("assertRegionCount suppressed");
-		}
-
-		protected @NonNull DefaultCompilerOptions createCompilerOptions() {
+		/* protected @NonNull DefaultCompilerOptions createCompilerOptions() {
 			DefaultCompilerOptions compilerOptions = new DefaultCompilerOptions();
 			compilerOptions.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
 			compilerOptions.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, DefaultCompilerOptions.defaultSavingOptions);
@@ -180,13 +175,6 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	public abstract static class QVTcGenerationThread<R> extends QVTcTestThread<R>
 	{
-		protected QVTcGenerationThread(@NonNull QVTcoreEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName) {
-			super(environmentThreadFactory, threadName, modelTestName);
-		}
-	}
-
-	public abstract class QVTcTxGenerationThread extends QVTcGenerationThread<@NonNull URI>
-	{
 		protected class InstrumentedCompilerChain extends QVTcCompilerChain
 		{
 			protected InstrumentedCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
@@ -217,33 +205,16 @@ public class QVTcCompilerTests extends LoadTestCase
 		 */
 		protected final @NonNull URI intermediateFileNamePrefixURI;
 
-		protected QVTcTxGenerationThread(@NonNull String resultPrefix, @NonNull URI txURI) {
-			super(createQVTcoreEnvironmentThreadFactory(), "QVTc-TxGeneration", resultPrefix);
+		private final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
+
+		protected QVTcGenerationThread(@NonNull QVTcoreEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI) {
+			super(environmentThreadFactory, threadName, modelTestName);
 			this.txURI = txURI;
-			this.intermediateFileNamePrefixURI = getTestURI(resultPrefix);
+			this.intermediateFileNamePrefixURI = intermediateFileNamePrefixURI;
 		}
 
-		protected @NonNull CompilationResult compileTransformation(@NonNull String outputName) throws Exception {
-			SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
-			QVTimperativeEnvironmentThreadFactory environmentThreadFactory = createQVTcoreEnvironmentThreadFactory();
-			DefaultCompilerOptions compilerOptions = createCompilerChainOptions();
-			QVTcCompilerChain compilerChain = new InstrumentedCompilerChain(getTestProjectManager(), txURI, intermediateFileNamePrefixURI, compilerOptions);
-			return doCompile(environmentThreadFactory, typedModelsConfigurations, compilerChain);
-		}
-
-		private @NonNull CompilationResult doCompile(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory,
-				@NonNull TypedModelsConfigurations typedModelsConfigurations, @NonNull AbstractCompilerChain compilerChain) throws Exception {
-			CompilationResult compilationThreadResult = compilerChain.compile3(environmentThreadFactory, typedModelsConfigurations);
-			ImperativeTransformation transformation = compilationThreadResult.getResult();
-			URI txASURI = transformation.eResource().getURI();
-			if (txASURI != null) {
-				URI inputURI = txASURI;
-				URI asURIstem = txASURI.trimFileExtension();
-				URI serializedURI = asURIstem.appendFileExtension("serialized.qvti");
-				AbstractTestQVT.doSerialize(environmentThreadFactory.getProjectManager(), inputURI, serializedURI);
-				AbstractTestQVT.doScheduleLoadCheck(environmentThreadFactory, asURIstem.appendFileExtension(QVTbaseUtil.QVTSAS_FILE_EXTENSION));
-			}
-			return compilationThreadResult;
+		protected void assertRegionCount(@NonNull Class<? extends Region> partitionClass, int count) {
+			QVTruntimeUtil.errPrintln("assertRegionCount suppressed");
 		}
 
 		private @NonNull DefaultCompilerOptions createCompilerChainOptions() {
@@ -266,6 +237,30 @@ public class QVTcCompilerTests extends LoadTestCase
 			return compilerOptions;
 		}
 
+		protected @NonNull ImperativeTransformation generateTransformation(@NonNull String outputName) throws Exception {
+			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+			ProjectManager projectManager = environmentFactory.getProjectManager();
+			SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
+			DefaultCompilerOptions compilerOptions = createCompilerChainOptions();
+			QVTcCompilerChain compilerChain = new InstrumentedCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI, compilerOptions);
+			ImperativeTransformation transformation = compilerChain.compile4(environmentFactory, typedModelsConfigurations);
+			URI inputURI = transformation.eResource().getURI();
+			if (inputURI != null) {
+				URI inputStem = inputURI.trimFileExtension();
+				URI serializedURI = inputStem.appendFileExtension("serialized.qvti");
+				AbstractTestQVT.doSerialize(projectManager, inputURI, serializedURI);
+				AbstractTestQVT.doScheduleLoadCheck(environmentThreadFactory, inputStem.appendFileExtension(QVTbaseUtil.QVTSAS_FILE_EXTENSION));
+			}
+			return transformation;
+		}
+	}
+
+	public abstract class QVTcTxGenerationThread extends QVTcGenerationThread<@NonNull URI>
+	{
+		protected QVTcTxGenerationThread(@NonNull String resultPrefix, @NonNull URI txURI) {
+			super(createQVTcoreEnvironmentThreadFactory(), "QVTc-TxGeneration", resultPrefix, txURI, getTestURI(resultPrefix));
+		}
+
 		/*	@Override
 		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
 			QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
@@ -278,11 +273,6 @@ public class QVTcCompilerTests extends LoadTestCase
 			getProjectManager().configureLoadFirst(environmentFactory.getResourceSet(), EcorePackage.eNS_URI);	// XXX transitive usedGenModels
 			return environmentFactory;
 		} */
-
-		protected ImperativeTransformation generateTransformation(@NonNull String outputName) throws Exception {
-			CompilationResult compilationResult = compileTransformation(outputName);
-			return compilationResult.getResult();
-		}
 
 		protected @NonNull URI generateTransformationURI(@NonNull String outputName) throws Exception {
 			ImperativeTransformation iTransformation = generateTransformation(outputName);
