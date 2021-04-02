@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -33,6 +34,7 @@ import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestFolder;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
@@ -300,7 +302,25 @@ public class QVTcCompilerTests extends LoadTestCase
 			classpath.addClass(javaClass);
 		}
 
-		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String @NonNull... genModelFiles) throws Exception {
+		protected void loadGenModel(@NonNull String genModelString) {
+			URI resolvedURI = URI.createURI(genModelString, true).resolve(txURI);
+			loadGenModel(resolvedURI);
+		}
+
+		protected void loadGenModel(@NonNull URI genModelURI) {
+			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
+			MetamodelManagerInternal metamodelManager = getEnvironmentFactory().getMetamodelManager();
+			Resource csGenResource = resourceSet.getResource(genModelURI, true);
+			for (EObject eObject : csGenResource.getContents()) {
+				if (eObject instanceof GenModel) {
+					GenModel genModel = (GenModel)eObject;
+					genModel.reconcile();
+					metamodelManager.addGenModel(genModel);
+				}
+			}
+		}
+
+		public @NonNull Class<? extends Transformer> buildTransformation() throws Exception {
 			TypedModelsConfigurations typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
 			CompilerOptions options = createBuildCompilerChainOptions();
 			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
@@ -312,7 +332,7 @@ public class QVTcCompilerTests extends LoadTestCase
 				URI asURIstem = asURI.trimFileExtension();
 				AbstractTestQVT.doSerialize(projectManager, asURI, asURIstem.appendFileExtension("serialized.qvti"));
 			}
-			return compilerChain.generate(environmentFactory, asTransformation, genModelFiles);
+			return compilerChain.generate(environmentFactory, asTransformation);
 		}
 
 		public @NonNull CompilerOptions createBuildCompilerChainOptions() throws IOException {
@@ -626,7 +646,8 @@ public class QVTcCompilerTests extends LoadTestCase
 
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
-				Class<? extends Transformer> transformation = buildTransformation("Families2Persons.genmodel");
+				loadGenModel("Families2Persons.genmodel");
+				Class<? extends Transformer> transformation = buildTransformation();
 				assertRegionCount(RuleRegionImpl.class, 2);
 				//			assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 				//			assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
@@ -744,7 +765,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
-				Class<? extends Transformer> transformation = buildTransformation("List2List.genmodel");
+				loadGenModel("List2List.genmodel");
+				Class<? extends Transformer> transformation = buildTransformation();
 				assertRegionCount(RuleRegionImpl.class, 0);
 				//			assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 				//			assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
@@ -773,7 +795,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
-				return buildTransformation("List2List.genmodel");
+				loadGenModel("List2List.genmodel");
+				return buildTransformation();
 			}
 		};
 		Class<? extends Transformer> txClassForward = forwardGenerationThread.invoke();
@@ -867,7 +890,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
-				Class<? extends Transformer> transformation = buildTransformation("HSV2HSL.genmodel");
+				//	loadGenModel(getModelsURI("hsv2hsl/HSV2HSL.genmodel"));
+				loadGenModel("HSV2HSL.genmodel");
+				Class<? extends Transformer> transformation = buildTransformation();
 				assertRegionCount(RuleRegionImpl.class, 1);
 				return transformation;
 			}
@@ -955,7 +980,8 @@ public class QVTcCompilerTests extends LoadTestCase
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
 				//		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
-				Class<? extends Transformer> transformation = buildTransformation("SimpleUML2RDBMS.genmodel");
+				loadGenModel("SimpleUML2RDBMS.genmodel");
+				Class<? extends Transformer> transformation = buildTransformation();
 				//	assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 10 : 11);
 				//			assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 				//			assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
@@ -1021,7 +1047,8 @@ public class QVTcCompilerTests extends LoadTestCase
 				//	classpath.addClass(org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.UmlToRdbmsModelElement.class);
 				addClass(org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.UmlToRdbmsModelElement.class);
 				//		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
-				Class<? extends Transformer> transformation = buildTransformation("SimpleUML2RDBMS.genmodel");
+				loadGenModel("SimpleUML2RDBMS.genmodel");
+				Class<? extends Transformer> transformation = buildTransformation();
 				assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 10 : 11);
 				//			assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 				//			assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
@@ -1090,7 +1117,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
-				return buildTransformation("SimpleGraph2Graph.genmodel");
+				loadGenModel("SimpleGraph2Graph.genmodel");
+				return buildTransformation();
 			}
 		};
 		Class<? extends Transformer> txClass = generationThread.invoke();
