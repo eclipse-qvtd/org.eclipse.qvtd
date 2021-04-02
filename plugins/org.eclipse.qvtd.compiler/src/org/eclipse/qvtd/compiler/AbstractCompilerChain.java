@@ -520,7 +520,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return thread.invoke();
 	}
 
-	protected @NonNull Class<? extends Transformer> generate(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
+	public @NonNull Class<? extends Transformer> generate(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
 		JavaResult javaResult = qvti2java(environmentFactory, asTransformation, genModelFiles);
 		return java2class(javaResult);
 	}

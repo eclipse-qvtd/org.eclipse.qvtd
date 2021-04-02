@@ -572,7 +572,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	protected @NonNull Class<? extends Transformer> generate(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
+	public @NonNull Class<? extends Transformer> generate(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
 		genmodelGenerateCompilerStep.execute(environmentFactory);
 		return super.generate(environmentFactory, asTransformation, genModelFiles);
 	}
