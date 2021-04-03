@@ -48,8 +48,6 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
-import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -58,13 +56,11 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.resource.ProjectManager.IPackageDescriptor;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentThread.AbstractEnvironmentThreadFactory;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
-import org.eclipse.qvtd.compiler.CompilationResult;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -311,6 +307,14 @@ public class QVTrCompilerTests extends LoadTestCase
 			AbstractTestQVT.doScheduleLoadCheck(environmentThreadFactory, inputStem.appendFileExtension(QVTbaseUtil.QVTSAS_FILE_EXTENSION));
 		}
 
+		protected void configureGeneratedPackage( /*@NonNull*/ String uriString) {
+			URI nsURI = URI.createURI(uriString);
+			IPackageDescriptor packageDescriptor = getProjectManager().getPackageDescriptor(nsURI);
+			if (packageDescriptor != null) {
+				packageDescriptor.configure(getEnvironmentFactory().getResourceSet(), StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, null);
+			}
+		}
+
 		protected @NonNull JavaClasspath createClassProjectNames() {
 			classpath.addClass(getClass()); //testProjectName);
 			classpath.addClass(/*0,*/ getClass());
@@ -497,8 +501,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 
 		protected void createInterpretedExecutor() throws Exception {
-			assert iTransformation != null;
-			EntryPoint entryPoint = entryPointName != null ? QVTimperativeUtil.getEntryPoint(iTransformation, entryPointName) : QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
+			ImperativeTransformation iTransformation2 = iTransformation;
+			assert iTransformation2 != null;
+			EntryPoint entryPoint = entryPointName != null ? QVTimperativeUtil.getEntryPoint(iTransformation2, entryPointName) : QVTimperativeUtil.getDefaultEntryPoint(iTransformation2);
 			setExecutor(new BasicQVTiExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY));
 		}
 
@@ -519,107 +524,6 @@ public class QVTrCompilerTests extends LoadTestCase
 				}
 			}
 			throw new IllegalStateException("No transformation");
-		}
-	}
-
-	public class MyQVT extends AbstractTestQVT
-	{
-		protected class InstrumentedCompilerChain extends QVTrCompilerChain
-		{
-			protected InstrumentedCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-				super(projectManager, txURI, intermediateFileNamePrefixURI, options);
-			}
-
-			@Override
-			protected @NonNull QVTr2QVTsCompilerStep createQVTr2QVTsCompilerStep() {
-				return new QVTr2QVTsCompilerStep(this)
-				{
-					@Override
-					public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-						ScheduleManager scheduleManager = super.execute(environmentFactory, qvtrResource, traceResource, typedModelsConfigurations);
-						partitionUsage.instrumentPartition(scheduleManager);
-						return scheduleManager;
-					}
-				};
-			}
-
-			@Override
-			public @NonNull ImperativeTransformation qvtr2qvti(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
-				assertNoValidationErrors("QVTr validation", qvtrResource);
-				return super.qvtr2qvti(environmentFactory, qvtrResource, typedModelsConfigurations);
-			}
-		}
-
-		protected final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
-		private boolean keepOldJavaFiles = false;
-
-		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
-			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
-			//	getEnvironmentFactory().setSafeNavigationValidationSeverity(StatusCodes.Severity.WARNING);
-		}
-
-		public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws Exception {
-			QVTrelationEnvironmentThreadFactory environmentThreadFactory = createQVTrelationEnvironmentThreadFactory();
-			return checkOutput(environmentThreadFactory, actualURI, expectedURI, normalizer);
-		}
-
-		public @NonNull CompilationResult compileTransformation(@NonNull String outputName) throws Exception {
-			SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
-			return compileTransformation(typedModelsConfigurations);
-		}
-
-		public @NonNull CompilationResult compileTransformation(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
-			AbstractEnvironmentThreadFactory<@NonNull QVTimperativeEnvironmentFactory> environmentThreadFactory = createQVTrelationEnvironmentThreadFactory();
-			return compileTransformation(environmentThreadFactory, typedModelsConfigurations);
-		}
-
-		private void configureGeneratedPackage( /*@NonNull*/ String uriString) {
-			URI nsURI = URI.createURI(uriString);
-			IPackageDescriptor packageDescriptor = getProjectManager().getPackageDescriptor(nsURI);
-			if (packageDescriptor != null) {
-				packageDescriptor.configure(getResourceSet(), StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, null);
-			}
-		}
-
-		@Override
-		protected @NonNull CompilerOptions createBuildCompilerChainOptions(boolean isIncremental) throws IOException {
-			CompilerOptions options = super.createBuildCompilerChainOptions(isIncremental);
-			if (keepOldJavaFiles) {
-				options.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.KEEP_OLD_JAVA_FILES_KEY, Boolean.TRUE);
-			}
-			return options;
-		}
-
-		@Override
-		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
-			return new InstrumentedCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI, options);
-		}
-
-		@Override
-		protected @NonNull DefaultCompilerOptions createCompilerChainOptions() {
-			DefaultCompilerOptions options = super.createCompilerChainOptions();
-			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
-			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
-			return options;
-		}
-
-		@Override
-		protected boolean generateGenModel() {
-			return true;
-		}
-
-		@Override
-		protected @NonNull String getBasePrefix() {
-			return "org.eclipse.qvtd.xtext.qvtrelation.tests";
-		}
-
-		@Override
-		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) {
-			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : QVTrCompilerTests.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
-		}
-
-		protected void setKeepOldJavaFiles() {
-			this.keepOldJavaFiles = true;
 		}
 	}
 
@@ -649,14 +553,6 @@ public class QVTrCompilerTests extends LoadTestCase
 	@Override
 	protected @NonNull OCLInternal createOCL() {
 		return QVTrelation.newInstance(getTestProjectManager(), null);
-	}
-
-	protected @NonNull MyQVT createQVT(@NonNull String resultPrefix, @NonNull URI txURI) throws Exception {
-		ProjectManager testProjectManager = getTestProjectManager();
-		URI intermediateFileNamePrefixURI = getTestURI(resultPrefix);
-		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
-		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
-		return new MyQVT(testProjectManager, getTestProject(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 	}
 
 	@Override
@@ -705,39 +601,64 @@ public class QVTrCompilerTests extends LoadTestCase
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.atl");
 		testFileSystemHelper.addExportedPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr");
 		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
-		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
+		//	MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
 		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
 		//		MyQVT myQVT1 = createQVT("ATL2QVTr", txURI1);
-		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//ATL");
-		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//OCL");
-		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//PrimitiveTypes");
-		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
-		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
-		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
-		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
-		JavaClasspath classpath1 = myQVT1.getClasspath();
-		classpath1.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
-		classpath1.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
-		classpath1.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
-		classpath1.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
-		classpath1.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+		//	myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//ATL");
+		//	myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//OCL");
+		//	myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//PrimitiveTypes");
+		//	myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+		//	myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
+		//	myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
+		//	myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
+		//	JavaClasspath classpath1 = myQVT1.getClasspath();
+		//	classpath1.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+		//	classpath1.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+		//	classpath1.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+		//	classpath1.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+		//	classpath1.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
 		//	try {
-		ClassLoader classLoader = getClass().getClassLoader();
-		assert classLoader != null;
-		((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
-		Class<? extends Transformer> txClass1 = myQVT1.buildTransformation("qvtr", false);
-		//			Class<? extends Transformer> txClass = ATL2QVTr.class;
+		//	ClassLoader classLoader = getClass().getClassLoader();
+		//	assert classLoader != null;
+		//	((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
+		//	Class<? extends Transformer> txClass1 = myQVT1.buildTransformation("qvtr", false);
 		//
-		//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
-		//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
-		//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-		//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
 		//	}
 		//	finally {
-		myQVT1.dispose();
-		myQVT1 = null;
+		//	myQVT1.dispose();
+		//	myQVT1 = null;
 		//	}
-		ThreadLocalExecutor.waitForGC();
+		//	ThreadLocalExecutor.waitForGC();
+		QVTrCodeGenerationThread generationThread1 = new QVTrCodeGenerationThread("NewATL2QVTr", "qvtr", false, txURI1)
+		{
+			@Override
+			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
+				addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//ATL");
+				addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//OCL");
+				addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//PrimitiveTypes");
+				addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+				addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
+				addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
+				addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
+				addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+				addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+				addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+				addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+				addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+				ClassLoader classLoader = getClass().getClassLoader();
+				assert classLoader != null;
+				getEnvironmentFactory().getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
+				Class<? extends Transformer> transformation = buildTransformation();
+				//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
+				//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
+				//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+				//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
+				return transformation;
+			}
+		};
+		//			Class<? extends Transformer> txClass1 = ATL2QVTr.class;
+		Class<? extends Transformer> txClass1 = generationThread1.invoke();
+		//
 		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
 		QVTrCodeExecutionThread executionThread1 = new QVTrCodeExecutionThread(txClass1)
 		{
@@ -762,7 +683,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 		};
 		executionThread1.invoke();
-		ThreadLocalExecutor.waitForGC();
+		/*	ThreadLocalExecutor.waitForGC();
 		Class<? extends Transformer> txClass3;
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
 		// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different packge prefix
@@ -787,8 +708,36 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT3.dispose();
 			myQVT3 = null;
-		}
-		QVTrCodeExecutionThread executionThread2 = new QVTrCodeExecutionThread(txClass3)
+		} */
+
+
+
+
+		QVTrCodeGenerationThread generationThread2 = new QVTrCodeGenerationThread("Families2Persons", "Persons", false, txURI2)
+		{
+			@Override
+			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
+				// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different packge prefix
+				//	myQVT3.setKeepOldJavaFiles();
+				addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+				addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+				addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+				addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+				addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+				//	ClassLoader classLoader = getClass().getClassLoader();
+				//	assert classLoader != null;
+				//	getEnvironmentFactory().getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
+				Class<? extends Transformer> transformation = buildTransformation();
+				assertRegionCount(RuleRegionImpl.class, 0);
+				//			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+				//			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+				//			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 4);
+				return transformation;
+			}
+		};
+		Class<? extends Transformer> txClass2 = generationThread2.invoke();
+		//
+		QVTrCodeExecutionThread executionThread2 = new QVTrCodeExecutionThread(txClass2)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
@@ -817,7 +766,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			return;
 		}
 		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
-		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
+		/*	MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
 		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
 		//		MyQVT myQVT1 = createQVT("ATL2QVTr", txURI1);
 		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//ATL");
@@ -837,7 +786,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
 			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
-			/*txClass1 =*/ myQVT1.buildTransformation("atl", false);
+			/*txClass1 =* / myQVT1.buildTransformation("atl", false);
 			//			Class<? extends Transformer> txClass = ATL2QVTr.class;
 			//
 			//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
@@ -848,7 +797,37 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT1.dispose();
 			myQVT1 = null;
-		}
+		} */
+		QVTrCodeGenerationThread generationThread = new QVTrCodeGenerationThread("NewATL2QVTr", "atl", false, txURI1)
+		{
+			@Override
+			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
+				addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//ATL");
+				addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//OCL");
+				addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//PrimitiveTypes");
+				addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+				addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
+				addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
+				addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
+				addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+				addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+				addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+				addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+				addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+				ClassLoader classLoader = getClass().getClassLoader();
+				assert classLoader != null;
+				getEnvironmentFactory().getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
+				Class<? extends Transformer> transformation = buildTransformation();
+				//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
+				//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
+				//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+				//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
+				return transformation;
+			}
+		};
+		// Class<? extends Transformer> txClass = Ecore2Pivot.class;
+		Class<? extends Transformer> txClass = generationThread.invoke();
+		//
 		/*		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
 		MyQVT myQVT2 = createQVT("ATL2QVTr", txURI1);
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
@@ -921,12 +900,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		Class<?> txClass0 = Class.forName("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr");
 		@SuppressWarnings("unchecked")
 		Class<Transformer> txClass1 = (Class<Transformer>)txClass0;
-		//		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
-
 		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
-		//	MyQVT myQVT2 = createQVT("ATL2QVTr", txURI2);
-		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
-		//	try {
 		QVTrCodeExecutionThread executionThread1 = new QVTrCodeExecutionThread(txClass1)
 		{
 			@Override
@@ -950,30 +924,23 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 		};
 		executionThread1.invoke();
-		//	}
-		//	finally {
-		//		myQVT2.dispose();
-		//	myQVT2 = null;
-		//	}
-		ThreadLocalExecutor.waitForGC();
-		Class<? extends Transformer> txClass3;
-		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
-		//		MyQVT myQVT3 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", "samples");
-		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Families.FamiliesPackage");
-		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Persons.PersonsPackage");
-		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.trace_Families2Persons.trace_Families2PersonsPackage");
-		try {
-			txClass3 = myQVT3.buildTransformation("Persons", false);//,
-			myQVT3.assertRegionCount(RuleRegionImpl.class, 2);
-			//	myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			//	myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			//	myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 0);
-		}
-		finally {
-			myQVT3.dispose();
-			myQVT3 = null;
-		}
-		QVTrCodeExecutionThread executionThread2 = new QVTrCodeExecutionThread(txClass3)
+		//
+		QVTrCodeGenerationThread generationThread2 = new QVTrCodeGenerationThread("Families2Persons", "Persons", false, txURI2)
+		{
+			@Override
+			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
+				Class<? extends Transformer> transformation = buildTransformation();
+				assertRegionCount(RuleRegionImpl.class, 2);
+				//	myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+				//	myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+				//	myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 0);
+				return transformation;
+			}
+		};
+		// Class<? extends Transformer> txClass = Forward2Reverse.class;
+		Class<? extends Transformer> txClass2 = generationThread2.invoke();
+		//
+		QVTrCodeExecutionThread executionThread2 = new QVTrCodeExecutionThread(txClass2)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
@@ -1215,35 +1182,57 @@ public class QVTrCompilerTests extends LoadTestCase
 	public void testQVTrCompiler_Ecore2PivotRoot_CG() throws Exception {
 		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
-		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.ocl.pivot/model/Ecore2Pivot.qvtr", true);
 		URI txURI1 = getModelsURI("ecore2pivotRoot/Ecore2PivotRoot.qvtr");
-		MyQVT myQVT1 = createQVT("Ecore2PivotRoot", txURI1);
-		myQVT1.configureGeneratedPackage(EcorePackage.eNS_URI);
-		myQVT1.configureGeneratedPackage(PivotPackage.eNS_URI);
-		myQVT1.configureGeneratedPackage(OCLstdlibPackage.eNS_URI);
-		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
-		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
-		ProjectManager projectManager = myQVT1.getProjectManager();
-		//	try {
-		ClassLoader classLoader = getClass().getClassLoader();
-		assert classLoader != null;
-		((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
-		Class<? extends Transformer> txClass1 = myQVT1.buildTransformation("as", false);
-		//			Class<? extends Transformer> txClass = Ecore2Pivot.class;
+		QVTrCodeGenerationThread generationThread = new QVTrCodeGenerationThread("Ecore2PivotRoot", "as", false, txURI1)
+		{
+			@Override
+			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
+				configureGeneratedPackage(EcorePackage.eNS_URI);
+				configureGeneratedPackage(PivotPackage.eNS_URI);
+				configureGeneratedPackage(OCLstdlibPackage.eNS_URI);
+				addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
+				addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+				ClassLoader classLoader = getClass().getClassLoader();
+				assert classLoader != null;
+				getEnvironmentFactory().getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
+				Class<? extends Transformer> transformation = buildTransformation();
+				//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
+				//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
+				//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+				//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
+				return transformation;
+			}
+		};
+		// Class<? extends Transformer> txClass = Ecore2Pivot.class;
+		Class<? extends Transformer> txClass = generationThread.invoke();
 		//
-		//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
-		//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
-		//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-		//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
-		//	}
-		//	finally {
-		myQVT1.dispose();
-		myQVT1 = null;
-		//	}
-		ThreadLocalExecutor.waitForGC();
+		QVTimperativeEnvironmentThread<Object> checkThread = new QVTimperativeEnvironmentThread<Object>(createQVTimperativeEnvironmentThreadFactory(), "QVTi-Check")
+		{
+			@Override
+			protected Object runWithThrowable() throws Exception {
+				URI asURI2a = getTestURI("Families2.ecore.oclas");
+				URI ecoreURI = getModelsURI("ecore2pivotRoot/Families.ecore");
+				QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+				Resource inputResource = environmentFactory.getResourceSet().getResource(ecoreURI, true);
+				assert inputResource != null;
+				assertNoResourceErrors("Ecore load", inputResource);
+				assertNoValidationErrors("Ecore load", inputResource);
+				Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, environmentFactory);
+				Model pivotModel = ecore2as.getASModel();
+				ASResource asResource = (ASResource) pivotModel.eResource();
+				asResource.setURI(asURI2a);
+				asResource.setSaveable(true);
+				assertNoResourceErrors("Ecore2AS failed", asResource);
+				asResource.save(XMIUtil.createSaveOptions());
+				assertValidationDiagnostics("Ecore2AS invalid", asResource, NO_MESSAGES);
+				return null;
+			}
+		};
+		checkThread.invoke();
+		//
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
 		URI ecoreURI = getModelsURI("ecore2pivotRoot/Families.ecore");
-		OCL ocl = OCL.newInstance(projectManager);
+		OCL ocl = OCL.newInstance(getTestProjectManager());
 		try {
 			Resource inputResource = ocl.getResourceSet().getResource(ecoreURI, true);
 			assert inputResource != null;
@@ -1265,7 +1254,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		ThreadLocalExecutor.waitForGC();
 		//
 		URI asURI2 = getTestURI("Families.ecore.oclas");
-		QVTrCodeExecutionThread executionThread = new QVTrCodeExecutionThread(txClass1)
+		QVTrCodeExecutionThread executionThread = new QVTrCodeExecutionThread(txClass)
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
@@ -1937,15 +1926,15 @@ public class QVTrCompilerTests extends LoadTestCase
 		URI namesOutURI = getTestURI("samples/MultiFamiliesChildrenPlan-CG.xmi");
 		URI familiesOutURI = getTestURI("samples/MultiFamiliesChildren-CG.xmi");
 		//
-		MyQVT myQVT1 = createQVT("Persons2Names2Families", txFile.getURI());
-		Class<? extends Transformer> txClass;
-		try {
-			txClass = myQVT1.buildTransformation(TargetConfiguration.createTargetConfigurations("families", "persons"), false);
-		}
-		finally {
-			myQVT1.dispose();
-			myQVT1 = null;
-		}
+		QVTrCodeGenerationThread generationThread = new QVTrCodeGenerationThread("Persons2Names2Families", TargetConfiguration.createTargetConfigurations("families", "persons"), false, txFile.getURI())
+		{
+			@Override
+			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
+				Class<? extends Transformer> transformation = buildTransformation();
+				return transformation;
+			}
+		};
+		Class<? extends Transformer> txClass = generationThread.invoke();
 		//
 		QVTrCodeExecutionThread executionThread = new QVTrCodeExecutionThread(txClass)
 		{
