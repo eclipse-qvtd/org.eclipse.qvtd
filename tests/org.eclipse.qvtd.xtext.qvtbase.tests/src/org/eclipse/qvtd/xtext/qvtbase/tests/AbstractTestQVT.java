@@ -67,6 +67,7 @@ import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
@@ -82,6 +83,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentFa
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeEnvironmentThreadFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentStrategy;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationEnvironmentThreadFactory;
@@ -90,6 +92,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -519,6 +522,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 		AbstractTestThread<Object, @NonNull EnvironmentFactoryInternal, @Nullable OCLInternal> checkThread = new AbstractTestThread<Object, @NonNull EnvironmentFactoryInternal, @Nullable OCLInternal>("QVTi-ScheduleLoadCheck", environmentThreadFactory)
 		{
 			@Override
+			protected void configureGeneratedPackages() {
+				super.configureGeneratedPackages();
+				configureGeneratedPackage(QVTbasePackage.eNS_URI);
+				configureGeneratedPackage(QVTtemplatePackage.eNS_URI);
+				configureGeneratedPackage(QVTrelationPackage.eNS_URI);
+			}
+
+			@Override
 			protected OCLInternal createOCL() {
 				OCL ocl = QVTbase.newInstance(projectManager);
 				ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
@@ -530,10 +541,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 				//	assert ocl != null;
 				ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
 				getProjectManager().initializeResourceSet(resourceSet);
+				configureGeneratedPackages();
 				Resource resource = resourceSet.getResource(uri, true);
 				assert resource != null;
 				PivotTestCase.assertNoResourceErrors("Load", resource);
-				EcoreUtil.resolveAll(resource);
+				//	EcoreUtil.resolveAll(resource);
 				PivotTestCase.assertNoUnresolvedProxies("Resolve", resource);;
 				PivotTestCase.assertNoValidationErrors("Validate", resource);;
 				return null;
