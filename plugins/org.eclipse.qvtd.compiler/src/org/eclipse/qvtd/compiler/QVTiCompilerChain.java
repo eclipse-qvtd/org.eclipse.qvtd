@@ -56,7 +56,7 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		return xtext2qvtiCompilerStep.execute(environmentFactory, txURI);
 	}
 

@@ -100,87 +100,15 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	protected abstract static class QVTcTestThread<R> extends QVTimperativeEnvironmentThread<R>
 	{
-		protected final @NonNull String modelTestName;
-		protected QVTcTestThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName) {
+		protected QVTcTestThread(@NonNull QVTimperativeEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName) {
 			super(environmentThreadFactory, threadName);
-			this.modelTestName = modelTestName;
 		}
-
-		/* protected @NonNull DefaultCompilerOptions createCompilerOptions() {
-			DefaultCompilerOptions compilerOptions = new DefaultCompilerOptions();
-			compilerOptions.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
-			compilerOptions.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, DefaultCompilerOptions.defaultSavingOptions);
-			compilerOptions.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.DEBUG_KEY, true);
-			// TODO problem when validating options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.VALIDATE_KEY, true);
-			compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
-			compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
-			return compilerOptions;
-		}
-
-		protected @NonNull ImperativeTransformation generateTransformation(@NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
-			DefaultCompilerOptions compilerOptions = createCompilerOptions();
-			TestFileSystemOwner testFileSystemOwner = getTestFileSystemOwner();
-			ProjectManager projectManager = testFileSystemOwner.getTestProjectManager();
-			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
-			URI mainOclDocURI = testFileSystemOwner.getModelsURI(modelTestName + "/" + mainOclDoc);
-			@NonNull URI[] oclDocURIs = new @NonNull URI[extendedOclDocs.length];
-			for (int i=0; i < extendedOclDocs.length; i++) {
-				oclDocURIs[i] = testFileSystemOwner.getModelsURI(modelTestName + "/" + extendedOclDocs[i]);
-			}
-			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(projectManager, resourceSet, compilerOptions, mainOclDocURI, testFileSystemOwner.getTestURIWithExtension(mainOclDocURI, null), oclDocURIs)
-			{
-				@Override
-				protected @NonNull QVTm2QVTsCompilerStep createQVTm2QVTsCompilerStep() {
-					return new QVTm2QVTsCompilerStep(this)
-					{
-						@Override
-						public @NonNull ScheduleManager execute(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull Resource pResource, @NonNull TypedModelsConfiguration typedModelsConfiguration) throws IOException {
-							ScheduleManager scheduleManager = super.execute(environmentFactory, pResource, typedModelsConfiguration);
-							partitionUsage.instrumentPartition(scheduleManager);
-							return scheduleManager;
-						}
-					};
-				}
-			};
-			ImperativeTransformation iTransformation = compiler.compile(OCL2QVTm.RIGHT_MODEL_TYPE_NAME);
-			URI txURI = iTransformation.eResource().getURI();
-			if (txURI != null) {
-				URI inputURI = txURI;
-				URI serializedURI = testFileSystemOwner.getTestURIWithExtension(inputURI, "serialized.qvti");
-				AbstractTestQVT.doSerialize(projectManager, inputURI, serializedURI);
-			}
-			return iTransformation;
-		}
-
-		protected @NonNull URI generateTransformationURI(@NonNull String mainOclDoc, @NonNull String... extendedOclDocs) throws Exception {
-			ImperativeTransformation iTransformation = generateTransformation(mainOclDoc, extendedOclDocs);
-			URI uri = iTransformation.eResource().getURI();
-			assert uri != null;
-			return uri;
-		}
-
-		protected void loadEcoreFile(URI fileURI, EPackage ePackage) {
-			ResourceSet rSet = getEnvironmentFactory().getResourceSet();
-			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
-			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);		// FIXME Accumulate for cleanup
-		}
-
-		protected void loadGenModel(@NonNull URI genModelURI) {
-			ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
-			MetamodelManagerInternal metamodelManager = getEnvironmentFactory().getMetamodelManager();
-			Resource csGenResource = resourceSet.getResource(genModelURI, true);
-			for (EObject eObject : csGenResource.getContents()) {
-				if (eObject instanceof GenModel) {
-					GenModel genModel = (GenModel)eObject;
-					genModel.reconcile();
-					metamodelManager.addGenModel(genModel);
-				}
-			}
-		} */
 	}
 
 	protected abstract static class QVTcGenerationThread<R> extends QVTcTestThread<R>
 	{
+		protected final @NonNull String modelTestName;
+
 		protected class InstrumentedCompilerChain extends QVTcCompilerChain
 		{
 			protected InstrumentedCompilerChain(@NonNull ProjectManager projectManager, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
@@ -201,6 +129,8 @@ public class QVTcCompilerTests extends LoadTestCase
 			}
 		}
 
+		protected final @NonNull String outputName;
+
 		/**
 		 * The source transformation.
 		 */
@@ -213,8 +143,10 @@ public class QVTcCompilerTests extends LoadTestCase
 
 		private final @NonNull PartitionUsage partitionUsage = new PartitionUsage();
 
-		protected QVTcGenerationThread(@NonNull QVTcoreEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI) {
-			super(environmentThreadFactory, threadName, modelTestName);
+		protected QVTcGenerationThread(@NonNull QVTcoreEnvironmentThreadFactory environmentThreadFactory, @NonNull String threadName, @NonNull String modelTestName, @NonNull String outputName, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI) {
+			super(environmentThreadFactory, threadName);
+			this.modelTestName = modelTestName;
+			this.outputName = outputName;
 			this.txURI = txURI;
 			this.intermediateFileNamePrefixURI = intermediateFileNamePrefixURI;
 		}
@@ -223,51 +155,43 @@ public class QVTcCompilerTests extends LoadTestCase
 			QVTruntimeUtil.errPrintln("assertRegionCount suppressed");
 		}
 
-		private @NonNull DefaultCompilerOptions createCompilerChainOptions() {
-			DefaultCompilerOptions compilerOptions = createCompilerOptions();
-			//		if (copyright != null) {
-			//			compilerOptions.setCopyright(copyright);
-			//		}
-			//		compilerOptions.setBasePrefix(getBasePrefix());
-			//		if (usedGenPackages != null) {
-			//			compilerOptions.setUsedGenPackages(usedGenPackages);
-			//		}
-			compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
-			compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
-			return compilerOptions;
+		protected void checkTransformationURI(@NonNull URI inputURI) throws Exception {
+			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+			ProjectManager projectManager = environmentFactory.getProjectManager();
+			URI inputStem = inputURI.trimFileExtension();
+			URI serializedURI = inputStem.appendFileExtension("serialized.qvti");
+			AbstractTestQVT.doSerialize(projectManager, inputURI, serializedURI);
 		}
 
-		private @NonNull DefaultCompilerOptions createCompilerOptions() {
+		protected @NonNull QVTcCompilerChain createCompilerChain() {
+			DefaultCompilerOptions compilerOptions = createCompilerOptions();
+			return new InstrumentedCompilerChain(getProjectManager(), txURI, intermediateFileNamePrefixURI, compilerOptions);
+		}
+
+		protected @NonNull DefaultCompilerOptions createCompilerOptions() {
 			DefaultCompilerOptions compilerOptions = new DefaultCompilerOptions();
 			compilerOptions.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
 			return compilerOptions;
 		}
 
-		protected @NonNull String getBasePrefix() {
-			return "org.eclipse.qvtd.xtext.qvtcore.tests";
-		}
-
-		protected @NonNull ImperativeTransformation generateTransformation(@NonNull String outputName) throws Exception {
+		protected @NonNull ImperativeTransformation generateTransformation(@NonNull QVTcCompilerChain compilerChain) throws Exception {
 			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
-			ProjectManager projectManager = environmentFactory.getProjectManager();
 			SimpleConfigurations typedModelsConfigurations = new SimpleConfigurations(outputName);
-			DefaultCompilerOptions compilerOptions = createCompilerChainOptions();
-			QVTcCompilerChain compilerChain = new InstrumentedCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI, compilerOptions);
-			ImperativeTransformation transformation = compilerChain.compile4(environmentFactory, typedModelsConfigurations);
+			ImperativeTransformation transformation = compilerChain.compile(environmentFactory, typedModelsConfigurations);
 			URI inputURI = transformation.eResource().getURI();
 			if (inputURI != null) {
-				URI inputStem = inputURI.trimFileExtension();
-				URI serializedURI = inputStem.appendFileExtension("serialized.qvti");
-				AbstractTestQVT.doSerialize(projectManager, inputURI, serializedURI);
-				AbstractTestQVT.doScheduleLoadCheck(environmentThreadFactory, inputStem.appendFileExtension(QVTbaseUtil.QVTSAS_FILE_EXTENSION));
+				checkTransformationURI(inputURI);
 			}
 			return transformation;
+		}
+
+		protected @NonNull String getBasePrefix() {
+			return "org.eclipse.qvtd.xtext.qvtcore.tests";
 		}
 	}
 
 	protected abstract class QVTcCodeGenerationThread extends QVTcGenerationThread<@NonNull Class<? extends Transformer>>
 	{
-		protected final @NonNull String outputName;
 		protected final boolean isIncremental;
 
 		/**
@@ -289,8 +213,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		private Collection<@NonNull GenPackage> usedGenPackages = null;
 
 		protected QVTcCodeGenerationThread(@NonNull String modelTestName, @NonNull String outputName, boolean isIncremental, @NonNull URI txURI) throws MalformedURLException {
-			super(createQVTcoreEnvironmentThreadFactory(), "QVTc-CodeGeneration", modelTestName, txURI, getTestURI(modelTestName));
-			this.outputName = outputName;
+			super(createQVTcoreEnvironmentThreadFactory(), "QVTc-CodeGeneration", modelTestName, outputName, txURI, getTestURI(modelTestName));
 			this.isIncremental = isIncremental;
 			this.srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 			this.binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
@@ -300,6 +223,41 @@ public class QVTcCompilerTests extends LoadTestCase
 
 		protected void addClass(@NonNull Class<?> javaClass) {
 			classpath.addClass(javaClass);
+		}
+
+		protected @NonNull Class<? extends Transformer> buildTransformation() throws Exception {
+			QVTcCompilerChain compilerChain = createCompilerChain();
+			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
+			ImperativeTransformation transformation = generateTransformation(compilerChain);
+			return compilerChain.generate(environmentFactory, transformation);
+		}
+
+		@Override
+		protected void checkTransformationURI(@NonNull URI inputURI) throws Exception {
+			super.checkTransformationURI(inputURI);
+			URI inputStem = inputURI.trimFileExtension();
+			AbstractTestQVT.doScheduleLoadCheck(environmentThreadFactory, inputStem.appendFileExtension(QVTbaseUtil.QVTSAS_FILE_EXTENSION));
+		}
+
+		protected @NonNull JavaClasspath createClassProjectNames() {
+			classpath.addClass(getClass()); //testProjectName);
+			classpath.addClass(/*0,*/ getClass());
+			return classpath;
+		}
+
+		@Override
+		protected @NonNull DefaultCompilerOptions createCompilerOptions() {
+			DefaultCompilerOptions compilerOptions =super.createCompilerOptions();
+			compilerOptions.setGenerateClassesOptions(srcFileURI, binFileURI, createClassProjectNames(), isIncremental);
+			if (generateGenModel()) {
+				URI genModelURI = intermediateFileNamePrefixURI.appendFileExtension(AbstractCompilerChain.getDefaultFileExtension(CompilerChain.GENMODEL_STEP));
+				compilerOptions.setGenerateGenModelOptions(genModelURI, getBasePrefix(), copyright, usedGenPackages);
+			}
+			return compilerOptions;
+		}
+
+		protected boolean generateGenModel() {
+			return false;
 		}
 
 		protected void loadGenModel(@NonNull String genModelString) {
@@ -319,78 +277,39 @@ public class QVTcCompilerTests extends LoadTestCase
 				}
 			}
 		}
-
-		public @NonNull Class<? extends Transformer> buildTransformation() throws Exception {
-			TypedModelsConfigurations typedModelsConfigurations = TypedModelsConfiguration.createTypedModelsConfigurations(outputName);
-			CompilerOptions options = createBuildCompilerChainOptions();
-			QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
-			ProjectManager projectManager = environmentFactory.getProjectManager();
-			QVTcCompilerChain compilerChain = new InstrumentedCompilerChain(projectManager, txURI, intermediateFileNamePrefixURI, options);
-			ImperativeTransformation asTransformation = compilerChain.compile4(environmentFactory, typedModelsConfigurations);
-			URI asURI = asTransformation.eResource().getURI();
-			if (asURI != null) {
-				URI asURIstem = asURI.trimFileExtension();
-				AbstractTestQVT.doSerialize(projectManager, asURI, asURIstem.appendFileExtension("serialized.qvti"));
-			}
-			return compilerChain.generate(environmentFactory, asTransformation);
-		}
-
-		public @NonNull CompilerOptions createBuildCompilerChainOptions() throws IOException {
-			DefaultCompilerOptions compilerOptions = new DefaultCompilerOptions();
-			compilerOptions.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
-			compilerOptions.setGenerateClassesOptions(srcFileURI, binFileURI, createClassProjectNames(), isIncremental);
-			if (generateGenModel()) {
-				URI genModelURI = intermediateFileNamePrefixURI.appendFileExtension(AbstractCompilerChain.getDefaultFileExtension(CompilerChain.GENMODEL_STEP));
-				compilerOptions.setGenerateGenModelOptions(genModelURI, getBasePrefix(), copyright, usedGenPackages);
-			}
-			return compilerOptions;
-		}
-
-		protected @NonNull JavaClasspath createClassProjectNames() {
-			classpath.addClass(getClass()); //testProjectName);
-			classpath.addClass(/*0,*/ getClass());
-			return classpath;
-		}
-
-		protected boolean generateGenModel() {
-			return false;
-		}
 	}
 
 	protected abstract class QVTcTxGenerationThread extends QVTcGenerationThread<@NonNull URI>
 	{
-		protected QVTcTxGenerationThread(@NonNull String resultPrefix, @NonNull URI txURI) {
-			super(createQVTcoreEnvironmentThreadFactory(), "QVTc-TxGeneration", resultPrefix, txURI, getTestURI(resultPrefix));
+		protected QVTcTxGenerationThread(@NonNull String resultPrefix, @NonNull String outputName, @NonNull URI txURI) {
+			super(createQVTcoreEnvironmentThreadFactory(), "QVTc-TxGeneration", resultPrefix, outputName, txURI, getTestURI(resultPrefix));
 		}
 
-		/*	@Override
-		protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
-			QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
-			//			installEPackages(eInstances);
-			//
-			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
-			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
-			// therefore suppress diagnostics about confusing usage.
-			//
-			getProjectManager().configureLoadFirst(environmentFactory.getResourceSet(), EcorePackage.eNS_URI);	// XXX transitive usedGenModels
-			return environmentFactory;
-		} */
+		@Override
+		protected @NonNull DefaultCompilerOptions createCompilerOptions() {
+			DefaultCompilerOptions compilerOptions =super.createCompilerOptions();
+			//		if (copyright != null) {
+			//			compilerOptions.setCopyright(copyright);
+			//		}
+			//		compilerOptions.setBasePrefix(getBasePrefix());
+			//		if (usedGenPackages != null) {
+			//			compilerOptions.setUsedGenPackages(usedGenPackages);
+			//		}
+			compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
+			compilerOptions.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
+			return compilerOptions;
+		}
 
-		protected @NonNull URI generateTransformationURI(@NonNull String outputName) throws Exception {
-			ImperativeTransformation iTransformation = generateTransformation(outputName);
+		protected @NonNull URI generateTransformationURI() throws Exception {
+			QVTcCompilerChain compilerChain = createCompilerChain();
+			ImperativeTransformation iTransformation = generateTransformation(compilerChain);
 			URI uri = iTransformation.eResource().getURI();
 			assert uri != null;
 			return uri;
 		}
-
-		protected void loadEcoreFile(URI fileURI, EPackage ePackage) {
-			ResourceSet rSet = getEnvironmentFactory().getResourceSet();
-			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
-			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);		// FIXME Accumulate for cleanup
-		}
 	}
 
-	protected abstract static class QVTcExecutionTestThread extends QVTimperativeEnvironmentThread<Object>
+	protected abstract static class QVTcExecutionTestThread extends QVTcTestThread<Object>
 	{
 		private TransformationExecutor executor;
 		private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
@@ -417,6 +336,12 @@ public class QVTcCompilerTests extends LoadTestCase
 			}
 			Boolean success = executor.execute(null);
 			return success == Boolean.TRUE;
+		}
+
+		protected void loadEcoreFile(URI fileURI, EPackage ePackage) {
+			ResourceSet rSet = getEnvironmentFactory().getResourceSet();
+			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
+			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);		// FIXME Accumulate for cleanup
 		}
 
 		protected void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException {
@@ -447,12 +372,13 @@ public class QVTcCompilerTests extends LoadTestCase
 		protected @NonNull URI txURI;
 		private ImperativeTransformation iTransformation;
 
-		protected QVTcTxInterpretationThread(@NonNull  URI txURI) {
+		protected QVTcTxInterpretationThread(@NonNull URI txURI) {
 			super(createQVTcoreEnvironmentThreadFactory(), "QVTc-TxInterpretation");
 			this.txURI = txURI;
 		}
 
 		protected void createInterpretedExecutor() throws Exception {
+			assert iTransformation != null;
 			EntryPoint entryPoint = QVTimperativeUtil.getDefaultEntryPoint(iTransformation);
 			setExecutor(new BasicQVTiExecutor(getEnvironmentFactory(), entryPoint, ModeFactory.LAZY));
 		}
@@ -472,13 +398,6 @@ public class QVTcCompilerTests extends LoadTestCase
 			throw new IllegalStateException("No transformation");
 		}
 	}
-
-	/*	protected abstract class QVTcTxExecutionThread extends QVTimperativeEnvironmentThread<Object>
-	{
-		protected QVTcTxExecutionThread() {
-			super(createQVTimperativeEnvironmentThreadFactory(), "QVTc-TxExecution");
-		}
-	} */
 
 	protected class MyQVT extends AbstractTestQVT
 	{
@@ -578,9 +497,6 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		QVTimperativePivotStandaloneSetup.doSetup();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#tearDown()
-	 */
 	@Override
 	@After
 	public void tearDown() throws Exception {
@@ -607,11 +523,11 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.loadEcoreFile(getModelsURI("families2persons/Families2Persons.ecore"), Families2PersonsPackage.eINSTANCE);
 		//		myQVT.loadEcoreFile(getModelsURI("families2persons/Persons.ecore"), PersonsPackage.eINSTANCE);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("Families2Persons", txFile.getURI())
+		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("Families2Persons", "person", txFile.getURI())
 		{
 			@Override
 			protected @NonNull URI runWithThrowable() throws Exception {
-				return generateTransformationURI("person");
+				return generateTransformationURI();
 			}
 		};
 		URI txURI = compilationThread.invoke();
@@ -638,8 +554,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		QVTcCodeGenerationThread generationThread = new QVTcCodeGenerationThread("Families2Persons", "person", false, txFile.getURI())
 		{
 			@Override
-			public @NonNull CompilerOptions createBuildCompilerChainOptions() throws IOException {
-				CompilerOptions compilerOptions = super.createBuildCompilerChainOptions();
+			public @NonNull DefaultCompilerOptions createCompilerOptions() {
+				DefaultCompilerOptions compilerOptions = super.createCompilerOptions();
 				compilerOptions.setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
 				return compilerOptions;
 			}
@@ -711,12 +627,11 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.loadEcoreFile(getModelsURI("forward2reverse/DoublyLinkedList.ecore"), DoublylinkedlistPackage.eINSTANCE);
 		//		myQVT.loadEcoreFile(getModelsURI("forward2reverse/List2List.ecore"), List2listPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		//	CompilationResult compilationResult = myQVT.generateTransformationURI("reverse");
-		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("Forward2Reverse", txFile.getURI())
+		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("Forward2Reverse", "reverse", txFile.getURI())
 		{
 			@Override
 			protected @NonNull URI runWithThrowable() throws Exception {
-				return generateTransformationURI("reverse");
+				return generateTransformationURI();
 			}
 		};
 		URI txURI = compilationThread.invoke();
@@ -847,8 +762,6 @@ public class QVTcCompilerTests extends LoadTestCase
 		registry.remove(HSV2HSLPackage.eNS_URI);
 		registry.remove(HSVTreePackage.eNS_URI);
 		registry.remove(HSLTreePackage.eNS_URI);
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
 		TestFile txFile = getTestProject().copyFiles(getTestProjectManager(), null, getModelsURI("hsv2hsl"), "HSV2HSL.qvtc", "HSLTree.ecore", "HSV2HSL.ecore", "HSVTree.ecore");// "HSV2HSL.genmodel");
 		TestFile inFile = getTestProject().copyFiles(getTestProjectManager(), getTestProject().getOutputFolder("samples"), getModelsURI("hsv2hsl/samples"), "SolarizedHSV.xmi");
 		URI outURI = getTestURI("SolarizedHSL_Interpreted.xmi");
@@ -857,12 +770,11 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.loadEcoreFile(getTestFileURI("HSVTree.ecore"), HSVTreePackage.eINSTANCE);
 		//		myQVT.loadEcoreFile(getTestFileURI("HSLTree.ecore"), HSLTreePackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		//	CompilationResult compilationResult = myQVT.generateTransformationURI("hsl");
-		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("HSV2HSL", txFile.getURI())
+		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("HSV2HSL", "hsl", txFile.getURI())
 		{
 			@Override
 			protected @NonNull URI runWithThrowable() throws Exception {
-				return generateTransformationURI("hsl");
+				return generateTransformationURI();
 			}
 		};
 		URI txURI = compilationThread.invoke();
@@ -921,21 +833,11 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test // fails through at least lack of multi-headed support, which may not be needed if better partitioned
 	public void testQVTcCompiler_SimpleUML2RDBMS() throws Exception {
-		//		AbstractTransformer.INVOCATIONS.setState(true);
-		//	MyQVT myQVT = createQVT("SimpleUML2RDBMS", getModelsURI("uml2rdbms/SimpleUML2RDBMS.qvtcas"));
-		//	myQVT.loadEcoreFile(getModelsURI("uml2rdbms/SimpleUML2RDBMS.ecore"), Simpleuml2rdbmsPackage.eINSTANCE);
-		//	myQVT.loadEcoreFile(getModelsURI("uml2rdbms/SimpleUML.ecore"), SimpleumlPackage.eINSTANCE);
-		//	myQVT.loadEcoreFile(getModelsURI("uml2rdbms/SimpleRDBMS.ecore"), SimplerdbmsPackage.eINSTANCE);
-		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		//	CompilationResult compilationResult = myQVT.generateTransformationURI("rdbms");
-		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("SimpleUML2RDBMS", getModelsURI("uml2rdbms/SimpleUML2RDBMS.qvtcas"))
+		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("SimpleUML2RDBMS", "rdbms", getModelsURI("uml2rdbms/SimpleUML2RDBMS.qvtcas"))
 		{
 			@Override
 			protected @NonNull URI runWithThrowable() throws Exception {
-				loadEcoreFile(getModelsURI("uml2rdbms/SimpleUML2RDBMS.ecore"), Simpleuml2rdbmsPackage.eINSTANCE);
-				loadEcoreFile(getModelsURI("uml2rdbms/SimpleUML.ecore"), SimpleumlPackage.eINSTANCE);
-				loadEcoreFile(getModelsURI("uml2rdbms/SimpleRDBMS.ecore"), SimplerdbmsPackage.eINSTANCE);
-				return generateTransformationURI("rdbms");
+				return generateTransformationURI();
 			}
 		};
 		URI txURI = compilationThread.invoke();
@@ -943,7 +845,11 @@ public class QVTcCompilerTests extends LoadTestCase
 		{
 			@Override
 			protected Object runWithThrowable() throws Exception {
+				loadEcoreFile(getModelsURI("uml2rdbms/SimpleUML2RDBMS.ecore"), Simpleuml2rdbmsPackage.eINSTANCE);
+				loadEcoreFile(getModelsURI("uml2rdbms/SimpleUML.ecore"), SimpleumlPackage.eINSTANCE);
+				loadEcoreFile(getModelsURI("uml2rdbms/SimpleRDBMS.ecore"), SimplerdbmsPackage.eINSTANCE);
 				loadTransformation();
+				//
 				createInterpretedExecutor();
 				addInputURI("uml", getModelsURI("uml2rdbms/samples/SimplerUMLPeople.xmi"));
 				executeTransformation();
@@ -1043,8 +949,6 @@ public class QVTcCompilerTests extends LoadTestCase
 		{
 			@Override
 			protected @NonNull Class<? extends Transformer> runWithThrowable() throws Exception {
-				//	JavaClasspath classpath = myQVT.getClasspath();
-				//	classpath.addClass(org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.UmlToRdbmsModelElement.class);
 				addClass(org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.UmlToRdbmsModelElement.class);
 				//		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 				loadGenModel("SimpleUML2RDBMS.genmodel");
@@ -1079,11 +983,11 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTcCompiler_Upper2Lower() throws Exception {
-		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("Upper2Lower", getModelsURI("upper2lower/Upper2Lower.qvtcas"))
+		QVTcTxGenerationThread compilationThread = new QVTcTxGenerationThread("Upper2Lower", "lowerGraph", getModelsURI("upper2lower/Upper2Lower.qvtcas"))
 		{
 			@Override
 			protected @NonNull URI runWithThrowable() throws Exception {
-				return generateTransformationURI("lowerGraph");
+				return generateTransformationURI();
 			}
 		};
 		URI txURI = compilationThread.invoke();

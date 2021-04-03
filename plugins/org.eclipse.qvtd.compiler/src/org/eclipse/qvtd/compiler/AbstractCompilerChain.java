@@ -433,6 +433,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	//		return compile(typedModelsConfigurations);
 	//	}
 
+	public abstract @NonNull ImperativeTransformation compile(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException;
+
 	@Override
 	public @NonNull CompilationResult compile2(@NonNull TypedModelsConfigurations typedModelsConfigurations) throws Exception {
 		throw new UnsupportedOperationException();		// XXX
@@ -451,7 +453,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			@Override
 			protected @NonNull ImperativeTransformation runWithThrowable() throws Exception {
 				QVTimperativeEnvironmentFactory environmentFactory = getEnvironmentFactory();
-				ImperativeTransformation transformation = compile4(environmentFactory, typedModelsConfigurations);
+				ImperativeTransformation transformation = compile(environmentFactory, typedModelsConfigurations);
 				syncSuspend(transformation);
 				return transformation;
 			}
@@ -460,8 +462,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		ImperativeTransformation result = thread.invoke();
 		return new CompilationResult(thread, result);
 	}
-
-	public abstract @NonNull ImperativeTransformation compile4(@NonNull QVTimperativeEnvironmentFactory environmentFactory, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException;
 
 	@Override
 	public void compiled(@NonNull String stepKey, @NonNull Object object) {
