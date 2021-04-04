@@ -522,11 +522,12 @@ public abstract class AbstractTestQVT extends QVTimperative
 		AbstractTestThread<Object, @NonNull EnvironmentFactoryInternal, @Nullable OCLInternal> checkThread = new AbstractTestThread<Object, @NonNull EnvironmentFactoryInternal, @Nullable OCLInternal>("QVTi-ScheduleLoadCheck", environmentThreadFactory)
 		{
 			@Override
-			protected void configureGeneratedPackages() {
-				super.configureGeneratedPackages();
-				configureGeneratedPackage(QVTbasePackage.eNS_URI);
-				configureGeneratedPackage(QVTtemplatePackage.eNS_URI);
-				configureGeneratedPackage(QVTrelationPackage.eNS_URI);
+			protected void configureGeneratedPackages(@NonNull EnvironmentFactory environmentFactory) {
+				super.configureGeneratedPackages(environmentFactory);
+				ResourceSet resourceSet = environmentFactory.getResourceSet();
+				configureGeneratedPackage(resourceSet, QVTbasePackage.eNS_URI);
+				configureGeneratedPackage(resourceSet, QVTtemplatePackage.eNS_URI);
+				configureGeneratedPackage(resourceSet, QVTrelationPackage.eNS_URI);
 			}
 
 			@Override
@@ -539,9 +540,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 			@Override
 			public Object runWithThrowable() throws Exception {
 				//	assert ocl != null;
-				ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
+				EnvironmentFactoryInternal environmentFactory = getEnvironmentFactory();
+				ResourceSet resourceSet = environmentFactory.getResourceSet();
 				getProjectManager().initializeResourceSet(resourceSet);
-				configureGeneratedPackages();
+				configureGeneratedPackages(environmentFactory);
 				Resource resource = resourceSet.getResource(uri, true);
 				assert resource != null;
 				PivotTestCase.assertNoResourceErrors("Load", resource);

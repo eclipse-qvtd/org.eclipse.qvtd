@@ -446,7 +446,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			@Override
 			protected @NonNull QVTimperativeEnvironmentFactory createEnvironmentFactory() {
 				QVTimperativeEnvironmentFactory environmentFactory = super.createEnvironmentFactory();
-				configureGeneratedPackages();
+				configureGeneratedPackages(environmentFactory);
 				return environmentFactory;
 			}
 
