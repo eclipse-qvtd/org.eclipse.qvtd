@@ -72,11 +72,11 @@ Trigger Promoter when stable using releng/org.eclipse.qvtd.releng.build-site/tar
 
 
 
--- Drops maintenance
+-- Drops maintenance -- https://download.eclipse.org/mmt/qvtd/downloads/drops
 ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/download.eclipse.org/mmt/qvtd/downloads/drops/0.20.0
 ssh genie.qvtd@projects-storage.eclipse.org rm -rf  /home/data/httpd/download.eclipse.org/mmt/qvtd/downloads/drops/0.20.0/N201909*
 
--- Updates maintenance
+-- Updates maintenance -- https://download.eclipse.org/mmt/qvtd/updates/releases
 ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases
 ssh genie.qvtd@projects-storage.eclipse.org pwd ; cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; pwd ; ls -la
 ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.14.0
@@ -85,12 +85,18 @@ ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.ecl
 ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/nightly ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
 ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/nightly/0.20.0
 
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/interim ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
+ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/interim/0.20.0
 
--- Drops archiving ---- and edit GIT\mmt\downloads\extras-qvto.php
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/milestones ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
+ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/milestones/0.20.0
+
+
+-- Drops archiving --https://archive.eclipse.org/mmt/qvtd/downloads/drops -- and edit GIT\mmt\downloads\extras-qvtd.php
 ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/archive.eclipse.org/mmt/qvtd/downloads/drops
 ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/downloads/drops ; mv 0.14.0 /home/data/httpd/archive.eclipse.org/mmt/qvtd/downloads/drops
 
--- Updates archiving
+-- Updates archiving -- https://archive.eclipse.org/mmt/qvtd/updates/releases
 ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases
 ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases/zz*
 
