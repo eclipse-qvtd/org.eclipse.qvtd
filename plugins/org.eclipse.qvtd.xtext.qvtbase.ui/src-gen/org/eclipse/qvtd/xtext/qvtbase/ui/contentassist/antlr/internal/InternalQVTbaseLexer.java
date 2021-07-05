@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 Willink Transformations and others.
+ * Copyright (c) 2021 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -2584,8 +2584,8 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_UNQUOTED_STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24024:22: ( '\\u00A3$%^\\u00A3$%^' )
-			// InternalQVTbase.g:24024:24: '\\u00A3$%^\\u00A3$%^'
+			// InternalQVTbase.g:24030:22: ( '\\u00A3$%^\\u00A3$%^' )
+			// InternalQVTbase.g:24030:24: '\\u00A3$%^\\u00A3$%^'
 			{
 				match("\u00A3$%^\u00A3$%^");
 
@@ -2603,8 +2603,8 @@ public class InternalQVTbaseLexer extends Lexer {
 	// $ANTLR start "RULE_ESCAPED_CHARACTER"
 	public final void mRULE_ESCAPED_CHARACTER() throws RecognitionException {
 		try {
-			// InternalQVTbase.g:24026:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
-			// InternalQVTbase.g:24026:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+			// InternalQVTbase.g:24032:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
+			// InternalQVTbase.g:24032:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
 			{
 				match('\\');
 				if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2628,8 +2628,8 @@ public class InternalQVTbaseLexer extends Lexer {
 	// $ANTLR start "RULE_LETTER_CHARACTER"
 	public final void mRULE_LETTER_CHARACTER() throws RecognitionException {
 		try {
-			// InternalQVTbase.g:24028:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
-			// InternalQVTbase.g:24028:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
+			// InternalQVTbase.g:24034:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
+			// InternalQVTbase.g:24034:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
 			{
 				if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
 					input.consume();
@@ -2654,11 +2654,11 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_DOUBLE_QUOTED_STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24030:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-			// InternalQVTbase.g:24030:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+			// InternalQVTbase.g:24036:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+			// InternalQVTbase.g:24036:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
 			{
 				match('\"');
-				// InternalQVTbase.g:24030:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
+				// InternalQVTbase.g:24036:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
 				loop1:
 					do {
 						int alt1=3;
@@ -2674,14 +2674,14 @@ public class InternalQVTbaseLexer extends Lexer {
 
 						switch (alt1) {
 							case 1 :
-								// InternalQVTbase.g:24030:34: RULE_ESCAPED_CHARACTER
+								// InternalQVTbase.g:24036:34: RULE_ESCAPED_CHARACTER
 							{
 								mRULE_ESCAPED_CHARACTER();
 
 							}
 							break;
 							case 2 :
-								// InternalQVTbase.g:24030:57: ~ ( ( '\\\\' | '\"' ) )
+								// InternalQVTbase.g:24036:57: ~ ( ( '\\\\' | '\"' ) )
 							{
 								if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
 									input.consume();
@@ -2718,11 +2718,11 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_SINGLE_QUOTED_STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24032:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-			// InternalQVTbase.g:24032:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+			// InternalQVTbase.g:24038:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+			// InternalQVTbase.g:24038:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
 			{
 				match('\'');
-				// InternalQVTbase.g:24032:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
+				// InternalQVTbase.g:24038:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
 				loop2:
 					do {
 						int alt2=3;
@@ -2738,14 +2738,14 @@ public class InternalQVTbaseLexer extends Lexer {
 
 						switch (alt2) {
 							case 1 :
-								// InternalQVTbase.g:24032:35: RULE_ESCAPED_CHARACTER
+								// InternalQVTbase.g:24038:35: RULE_ESCAPED_CHARACTER
 							{
 								mRULE_ESCAPED_CHARACTER();
 
 							}
 							break;
 							case 2 :
-								// InternalQVTbase.g:24032:58: ~ ( ( '\\\\' | '\\'' ) )
+								// InternalQVTbase.g:24038:58: ~ ( ( '\\\\' | '\\'' ) )
 							{
 								if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
 									input.consume();
@@ -2782,12 +2782,12 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_ML_SINGLE_QUOTED_STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24034:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
-			// InternalQVTbase.g:24034:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
+			// InternalQVTbase.g:24040:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
+			// InternalQVTbase.g:24040:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
 			{
 				match("/'");
 
-				// InternalQVTbase.g:24034:38: ( options {greedy=false; } : . )*
+				// InternalQVTbase.g:24040:38: ( options {greedy=false; } : . )*
 				loop3:
 					do {
 						int alt3=2;
@@ -2812,7 +2812,7 @@ public class InternalQVTbaseLexer extends Lexer {
 
 						switch (alt3) {
 							case 1 :
-								// InternalQVTbase.g:24034:66: .
+								// InternalQVTbase.g:24040:66: .
 							{
 								matchAny();
 
@@ -2842,11 +2842,11 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_SIMPLE_ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24036:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
-			// InternalQVTbase.g:24036:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+			// InternalQVTbase.g:24042:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
+			// InternalQVTbase.g:24042:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
 			{
 				mRULE_LETTER_CHARACTER();
-				// InternalQVTbase.g:24036:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+				// InternalQVTbase.g:24042:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
 				loop4:
 					do {
 						int alt4=2;
@@ -2895,8 +2895,8 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_ESCAPED_ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24038:17: ( '_' RULE_SINGLE_QUOTED_STRING )
-			// InternalQVTbase.g:24038:19: '_' RULE_SINGLE_QUOTED_STRING
+			// InternalQVTbase.g:24044:17: ( '_' RULE_SINGLE_QUOTED_STRING )
+			// InternalQVTbase.g:24044:19: '_' RULE_SINGLE_QUOTED_STRING
 			{
 				match('_');
 				mRULE_SINGLE_QUOTED_STRING();
@@ -2916,10 +2916,10 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24040:10: ( ( '0' .. '9' )+ )
-			// InternalQVTbase.g:24040:12: ( '0' .. '9' )+
+			// InternalQVTbase.g:24046:10: ( ( '0' .. '9' )+ )
+			// InternalQVTbase.g:24046:12: ( '0' .. '9' )+
 			{
-				// InternalQVTbase.g:24040:12: ( '0' .. '9' )+
+				// InternalQVTbase.g:24046:12: ( '0' .. '9' )+
 				int cnt5=0;
 				loop5:
 					do {
@@ -2933,7 +2933,7 @@ public class InternalQVTbaseLexer extends Lexer {
 
 						switch (alt5) {
 							case 1 :
-								// InternalQVTbase.g:24040:13: '0' .. '9'
+								// InternalQVTbase.g:24046:13: '0' .. '9'
 							{
 								matchRange('0','9');
 
@@ -2965,12 +2965,12 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_ML_COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24042:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-			// InternalQVTbase.g:24042:19: '/*' ( options {greedy=false; } : . )* '*/'
+			// InternalQVTbase.g:24048:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+			// InternalQVTbase.g:24048:19: '/*' ( options {greedy=false; } : . )* '*/'
 			{
 				match("/*");
 
-				// InternalQVTbase.g:24042:24: ( options {greedy=false; } : . )*
+				// InternalQVTbase.g:24048:24: ( options {greedy=false; } : . )*
 				loop6:
 					do {
 						int alt6=2;
@@ -2995,7 +2995,7 @@ public class InternalQVTbaseLexer extends Lexer {
 
 						switch (alt6) {
 							case 1 :
-								// InternalQVTbase.g:24042:52: .
+								// InternalQVTbase.g:24048:52: .
 							{
 								matchAny();
 
@@ -3025,12 +3025,12 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_SL_COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24044:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-			// InternalQVTbase.g:24044:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+			// InternalQVTbase.g:24050:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+			// InternalQVTbase.g:24050:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
 			{
 				match("--");
 
-				// InternalQVTbase.g:24044:24: (~ ( ( '\\n' | '\\r' ) ) )*
+				// InternalQVTbase.g:24050:24: (~ ( ( '\\n' | '\\r' ) ) )*
 				loop7:
 					do {
 						int alt7=2;
@@ -3043,7 +3043,7 @@ public class InternalQVTbaseLexer extends Lexer {
 
 						switch (alt7) {
 							case 1 :
-								// InternalQVTbase.g:24044:24: ~ ( ( '\\n' | '\\r' ) )
+								// InternalQVTbase.g:24050:24: ~ ( ( '\\n' | '\\r' ) )
 							{
 								if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
 									input.consume();
@@ -3063,7 +3063,7 @@ public class InternalQVTbaseLexer extends Lexer {
 						}
 					} while (true);
 
-				// InternalQVTbase.g:24044:40: ( ( '\\r' )? '\\n' )?
+				// InternalQVTbase.g:24050:40: ( ( '\\r' )? '\\n' )?
 				int alt9=2;
 				int LA9_0 = input.LA(1);
 
@@ -3072,9 +3072,9 @@ public class InternalQVTbaseLexer extends Lexer {
 				}
 				switch (alt9) {
 					case 1 :
-						// InternalQVTbase.g:24044:41: ( '\\r' )? '\\n'
+						// InternalQVTbase.g:24050:41: ( '\\r' )? '\\n'
 					{
-						// InternalQVTbase.g:24044:41: ( '\\r' )?
+						// InternalQVTbase.g:24050:41: ( '\\r' )?
 						int alt8=2;
 						int LA8_0 = input.LA(1);
 
@@ -3083,7 +3083,7 @@ public class InternalQVTbaseLexer extends Lexer {
 						}
 						switch (alt8) {
 							case 1 :
-								// InternalQVTbase.g:24044:41: '\\r'
+								// InternalQVTbase.g:24050:41: '\\r'
 							{
 								match('\r');
 
@@ -3115,10 +3115,10 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24046:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-			// InternalQVTbase.g:24046:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+			// InternalQVTbase.g:24052:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+			// InternalQVTbase.g:24052:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
 			{
-				// InternalQVTbase.g:24046:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+				// InternalQVTbase.g:24052:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
 				int cnt10=0;
 				loop10:
 					do {
@@ -3172,8 +3172,8 @@ public class InternalQVTbaseLexer extends Lexer {
 		try {
 			int _type = RULE_ANY_OTHER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// InternalQVTbase.g:24048:16: ( . )
-			// InternalQVTbase.g:24048:18: .
+			// InternalQVTbase.g:24054:16: ( . )
+			// InternalQVTbase.g:24054:18: .
 			{
 				matchAny();
 

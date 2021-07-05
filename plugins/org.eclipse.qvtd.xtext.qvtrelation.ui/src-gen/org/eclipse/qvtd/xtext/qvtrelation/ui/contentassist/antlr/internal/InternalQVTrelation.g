@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2020 Willink Transformations and others.
+ * Copyright (c) 2011, 2021 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -3266,6 +3266,8 @@ rulePathNameCS
 finally {
 	restoreStackSize(stackSize);
 }
+
+
 
 
 
@@ -28150,6 +28152,8 @@ finally {
 
 
 
+
+
 rule__TemplateSignatureCS__Group__0
     @init {
 		int stackSize = keepStackSize();
@@ -34402,6 +34406,8 @@ rule__PathNameCS__OwnedPathElementsAssignment_1_1
 finally {
 	restoreStackSize(stackSize);
 }
+
+
 
 rule__FirstPathElementCS__ReferredElementAssignment
     @init {

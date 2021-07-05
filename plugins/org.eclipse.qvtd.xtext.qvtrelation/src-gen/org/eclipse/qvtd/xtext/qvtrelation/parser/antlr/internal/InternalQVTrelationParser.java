@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 /*******************************************************************************
- * Copyright (c) 2011, 2020 Willink Transformations and others.
+ * Copyright (c) 2011, 2021 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -32476,7 +32476,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleFirstPathElementCS"
-    // InternalQVTrelation.g:11105:1: entryRuleFirstPathElementCS returns [EObject current=null] : iv_ruleFirstPathElementCS= ruleFirstPathElementCS EOF ;
+    // InternalQVTrelation.g:11107:1: entryRuleFirstPathElementCS returns [EObject current=null] : iv_ruleFirstPathElementCS= ruleFirstPathElementCS EOF ;
     public final EObject entryRuleFirstPathElementCS() throws RecognitionException {
         EObject current = null;
 
@@ -32484,8 +32484,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11106:2: (iv_ruleFirstPathElementCS= ruleFirstPathElementCS EOF )
-            // InternalQVTrelation.g:11107:2: iv_ruleFirstPathElementCS= ruleFirstPathElementCS EOF
+            // InternalQVTrelation.g:11108:2: (iv_ruleFirstPathElementCS= ruleFirstPathElementCS EOF )
+            // InternalQVTrelation.g:11109:2: iv_ruleFirstPathElementCS= ruleFirstPathElementCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFirstPathElementCSRule());
@@ -32516,21 +32516,21 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleFirstPathElementCS"
-    // InternalQVTrelation.g:11114:1: ruleFirstPathElementCS returns [EObject current=null] : ( ( ruleUnrestrictedName ) ) ;
+    // InternalQVTrelation.g:11116:1: ruleFirstPathElementCS returns [EObject current=null] : ( ( ruleUnrestrictedName ) ) ;
     public final EObject ruleFirstPathElementCS() throws RecognitionException {
         EObject current = null;
 
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11117:28: ( ( ( ruleUnrestrictedName ) ) )
-            // InternalQVTrelation.g:11118:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTrelation.g:11119:28: ( ( ( ruleUnrestrictedName ) ) )
+            // InternalQVTrelation.g:11120:1: ( ( ruleUnrestrictedName ) )
             {
-            // InternalQVTrelation.g:11118:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTrelation.g:11119:1: ( ruleUnrestrictedName )
+            // InternalQVTrelation.g:11120:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTrelation.g:11121:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTrelation.g:11119:1: ( ruleUnrestrictedName )
-            // InternalQVTrelation.g:11120:3: ruleUnrestrictedName
+            // InternalQVTrelation.g:11121:1: ( ruleUnrestrictedName )
+            // InternalQVTrelation.g:11122:3: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
 
@@ -32585,7 +32585,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleNextPathElementCS"
-    // InternalQVTrelation.g:11144:1: entryRuleNextPathElementCS returns [EObject current=null] : iv_ruleNextPathElementCS= ruleNextPathElementCS EOF ;
+    // InternalQVTrelation.g:11146:1: entryRuleNextPathElementCS returns [EObject current=null] : iv_ruleNextPathElementCS= ruleNextPathElementCS EOF ;
     public final EObject entryRuleNextPathElementCS() throws RecognitionException {
         EObject current = null;
 
@@ -32593,8 +32593,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11145:2: (iv_ruleNextPathElementCS= ruleNextPathElementCS EOF )
-            // InternalQVTrelation.g:11146:2: iv_ruleNextPathElementCS= ruleNextPathElementCS EOF
+            // InternalQVTrelation.g:11147:2: (iv_ruleNextPathElementCS= ruleNextPathElementCS EOF )
+            // InternalQVTrelation.g:11148:2: iv_ruleNextPathElementCS= ruleNextPathElementCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNextPathElementCSRule());
@@ -32625,21 +32625,21 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleNextPathElementCS"
-    // InternalQVTrelation.g:11153:1: ruleNextPathElementCS returns [EObject current=null] : ( ( ruleUnreservedName ) ) ;
+    // InternalQVTrelation.g:11155:1: ruleNextPathElementCS returns [EObject current=null] : ( ( ruleUnreservedName ) ) ;
     public final EObject ruleNextPathElementCS() throws RecognitionException {
         EObject current = null;
 
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11156:28: ( ( ( ruleUnreservedName ) ) )
-            // InternalQVTrelation.g:11157:1: ( ( ruleUnreservedName ) )
+            // InternalQVTrelation.g:11158:28: ( ( ( ruleUnreservedName ) ) )
+            // InternalQVTrelation.g:11159:1: ( ( ruleUnreservedName ) )
             {
-            // InternalQVTrelation.g:11157:1: ( ( ruleUnreservedName ) )
-            // InternalQVTrelation.g:11158:1: ( ruleUnreservedName )
+            // InternalQVTrelation.g:11159:1: ( ( ruleUnreservedName ) )
+            // InternalQVTrelation.g:11160:1: ( ruleUnreservedName )
             {
-            // InternalQVTrelation.g:11158:1: ( ruleUnreservedName )
-            // InternalQVTrelation.g:11159:3: ruleUnreservedName
+            // InternalQVTrelation.g:11160:1: ( ruleUnreservedName )
+            // InternalQVTrelation.g:11161:3: ruleUnreservedName
             {
             if ( state.backtracking==0 ) {
 
@@ -32694,7 +32694,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleTemplateParameterSubstitutionCS"
-    // InternalQVTrelation.g:11185:1: entryRuleTemplateParameterSubstitutionCS returns [EObject current=null] : iv_ruleTemplateParameterSubstitutionCS= ruleTemplateParameterSubstitutionCS EOF ;
+    // InternalQVTrelation.g:11187:1: entryRuleTemplateParameterSubstitutionCS returns [EObject current=null] : iv_ruleTemplateParameterSubstitutionCS= ruleTemplateParameterSubstitutionCS EOF ;
     public final EObject entryRuleTemplateParameterSubstitutionCS() throws RecognitionException {
         EObject current = null;
 
@@ -32702,8 +32702,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11186:2: (iv_ruleTemplateParameterSubstitutionCS= ruleTemplateParameterSubstitutionCS EOF )
-            // InternalQVTrelation.g:11187:2: iv_ruleTemplateParameterSubstitutionCS= ruleTemplateParameterSubstitutionCS EOF
+            // InternalQVTrelation.g:11188:2: (iv_ruleTemplateParameterSubstitutionCS= ruleTemplateParameterSubstitutionCS EOF )
+            // InternalQVTrelation.g:11189:2: iv_ruleTemplateParameterSubstitutionCS= ruleTemplateParameterSubstitutionCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTemplateParameterSubstitutionCSRule());
@@ -32734,7 +32734,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleTemplateParameterSubstitutionCS"
-    // InternalQVTrelation.g:11194:1: ruleTemplateParameterSubstitutionCS returns [EObject current=null] : ( (lv_ownedActualParameter_0_0= ruleTypeRefCS ) ) ;
+    // InternalQVTrelation.g:11196:1: ruleTemplateParameterSubstitutionCS returns [EObject current=null] : ( (lv_ownedActualParameter_0_0= ruleTypeRefCS ) ) ;
     public final EObject ruleTemplateParameterSubstitutionCS() throws RecognitionException {
         EObject current = null;
 
@@ -32744,14 +32744,14 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11197:28: ( ( (lv_ownedActualParameter_0_0= ruleTypeRefCS ) ) )
-            // InternalQVTrelation.g:11198:1: ( (lv_ownedActualParameter_0_0= ruleTypeRefCS ) )
+            // InternalQVTrelation.g:11199:28: ( ( (lv_ownedActualParameter_0_0= ruleTypeRefCS ) ) )
+            // InternalQVTrelation.g:11200:1: ( (lv_ownedActualParameter_0_0= ruleTypeRefCS ) )
             {
-            // InternalQVTrelation.g:11198:1: ( (lv_ownedActualParameter_0_0= ruleTypeRefCS ) )
-            // InternalQVTrelation.g:11199:1: (lv_ownedActualParameter_0_0= ruleTypeRefCS )
+            // InternalQVTrelation.g:11200:1: ( (lv_ownedActualParameter_0_0= ruleTypeRefCS ) )
+            // InternalQVTrelation.g:11201:1: (lv_ownedActualParameter_0_0= ruleTypeRefCS )
             {
-            // InternalQVTrelation.g:11199:1: (lv_ownedActualParameter_0_0= ruleTypeRefCS )
-            // InternalQVTrelation.g:11200:3: lv_ownedActualParameter_0_0= ruleTypeRefCS
+            // InternalQVTrelation.g:11201:1: (lv_ownedActualParameter_0_0= ruleTypeRefCS )
+            // InternalQVTrelation.g:11202:3: lv_ownedActualParameter_0_0= ruleTypeRefCS
             {
             if ( state.backtracking==0 ) {
 
@@ -32802,7 +32802,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleTemplateSignatureCS"
-    // InternalQVTrelation.g:11224:1: entryRuleTemplateSignatureCS returns [EObject current=null] : iv_ruleTemplateSignatureCS= ruleTemplateSignatureCS EOF ;
+    // InternalQVTrelation.g:11226:1: entryRuleTemplateSignatureCS returns [EObject current=null] : iv_ruleTemplateSignatureCS= ruleTemplateSignatureCS EOF ;
     public final EObject entryRuleTemplateSignatureCS() throws RecognitionException {
         EObject current = null;
 
@@ -32810,8 +32810,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11225:2: (iv_ruleTemplateSignatureCS= ruleTemplateSignatureCS EOF )
-            // InternalQVTrelation.g:11226:2: iv_ruleTemplateSignatureCS= ruleTemplateSignatureCS EOF
+            // InternalQVTrelation.g:11227:2: (iv_ruleTemplateSignatureCS= ruleTemplateSignatureCS EOF )
+            // InternalQVTrelation.g:11228:2: iv_ruleTemplateSignatureCS= ruleTemplateSignatureCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTemplateSignatureCSRule());
@@ -32842,7 +32842,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleTemplateSignatureCS"
-    // InternalQVTrelation.g:11233:1: ruleTemplateSignatureCS returns [EObject current=null] : (otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')' ) ;
+    // InternalQVTrelation.g:11235:1: ruleTemplateSignatureCS returns [EObject current=null] : (otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')' ) ;
     public final EObject ruleTemplateSignatureCS() throws RecognitionException {
         EObject current = null;
 
@@ -32857,11 +32857,11 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11236:28: ( (otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')' ) )
-            // InternalQVTrelation.g:11237:1: (otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')' )
+            // InternalQVTrelation.g:11238:28: ( (otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')' ) )
+            // InternalQVTrelation.g:11239:1: (otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')' )
             {
-            // InternalQVTrelation.g:11237:1: (otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')' )
-            // InternalQVTrelation.g:11237:3: otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')'
+            // InternalQVTrelation.g:11239:1: (otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')' )
+            // InternalQVTrelation.g:11239:3: otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')'
             {
             otherlv_0=(Token)match(input,33,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -32869,11 +32869,11 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
                   	newLeafNode(otherlv_0, grammarAccess.getTemplateSignatureCSAccess().getLeftParenthesisKeyword_0());
 
             }
-            // InternalQVTrelation.g:11241:1: ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) )
-            // InternalQVTrelation.g:11242:1: (lv_ownedParameters_1_0= ruleTypeParameterCS )
+            // InternalQVTrelation.g:11243:1: ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) )
+            // InternalQVTrelation.g:11244:1: (lv_ownedParameters_1_0= ruleTypeParameterCS )
             {
-            // InternalQVTrelation.g:11242:1: (lv_ownedParameters_1_0= ruleTypeParameterCS )
-            // InternalQVTrelation.g:11243:3: lv_ownedParameters_1_0= ruleTypeParameterCS
+            // InternalQVTrelation.g:11244:1: (lv_ownedParameters_1_0= ruleTypeParameterCS )
+            // InternalQVTrelation.g:11245:3: lv_ownedParameters_1_0= ruleTypeParameterCS
             {
             if ( state.backtracking==0 ) {
 
@@ -32904,7 +32904,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
             }
 
-            // InternalQVTrelation.g:11259:2: (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )*
+            // InternalQVTrelation.g:11261:2: (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )*
             loop249:
             do {
                 int alt249=2;
@@ -32917,7 +32917,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
                 switch (alt249) {
             	case 1 :
-            	    // InternalQVTrelation.g:11259:4: otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) )
+            	    // InternalQVTrelation.g:11261:4: otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) )
             	    {
             	    otherlv_2=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -32925,11 +32925,11 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
             	          	newLeafNode(otherlv_2, grammarAccess.getTemplateSignatureCSAccess().getCommaKeyword_2_0());
 
             	    }
-            	    // InternalQVTrelation.g:11263:1: ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) )
-            	    // InternalQVTrelation.g:11264:1: (lv_ownedParameters_3_0= ruleTypeParameterCS )
+            	    // InternalQVTrelation.g:11265:1: ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) )
+            	    // InternalQVTrelation.g:11266:1: (lv_ownedParameters_3_0= ruleTypeParameterCS )
             	    {
-            	    // InternalQVTrelation.g:11264:1: (lv_ownedParameters_3_0= ruleTypeParameterCS )
-            	    // InternalQVTrelation.g:11265:3: lv_ownedParameters_3_0= ruleTypeParameterCS
+            	    // InternalQVTrelation.g:11266:1: (lv_ownedParameters_3_0= ruleTypeParameterCS )
+            	    // InternalQVTrelation.g:11267:3: lv_ownedParameters_3_0= ruleTypeParameterCS
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -32998,7 +32998,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleTypeParameterCS"
-    // InternalQVTrelation.g:11293:1: entryRuleTypeParameterCS returns [EObject current=null] : iv_ruleTypeParameterCS= ruleTypeParameterCS EOF ;
+    // InternalQVTrelation.g:11295:1: entryRuleTypeParameterCS returns [EObject current=null] : iv_ruleTypeParameterCS= ruleTypeParameterCS EOF ;
     public final EObject entryRuleTypeParameterCS() throws RecognitionException {
         EObject current = null;
 
@@ -33006,8 +33006,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11294:2: (iv_ruleTypeParameterCS= ruleTypeParameterCS EOF )
-            // InternalQVTrelation.g:11295:2: iv_ruleTypeParameterCS= ruleTypeParameterCS EOF
+            // InternalQVTrelation.g:11296:2: (iv_ruleTypeParameterCS= ruleTypeParameterCS EOF )
+            // InternalQVTrelation.g:11297:2: iv_ruleTypeParameterCS= ruleTypeParameterCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypeParameterCSRule());
@@ -33038,7 +33038,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleTypeParameterCS"
-    // InternalQVTrelation.g:11302:1: ruleTypeParameterCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? ) ;
+    // InternalQVTrelation.g:11304:1: ruleTypeParameterCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? ) ;
     public final EObject ruleTypeParameterCS() throws RecognitionException {
         EObject current = null;
 
@@ -33054,17 +33054,17 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11305:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? ) )
-            // InternalQVTrelation.g:11306:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? )
+            // InternalQVTrelation.g:11307:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? ) )
+            // InternalQVTrelation.g:11308:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? )
             {
-            // InternalQVTrelation.g:11306:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? )
-            // InternalQVTrelation.g:11306:2: ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )?
+            // InternalQVTrelation.g:11308:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? )
+            // InternalQVTrelation.g:11308:2: ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )?
             {
-            // InternalQVTrelation.g:11306:2: ( (lv_name_0_0= ruleUnrestrictedName ) )
-            // InternalQVTrelation.g:11307:1: (lv_name_0_0= ruleUnrestrictedName )
+            // InternalQVTrelation.g:11308:2: ( (lv_name_0_0= ruleUnrestrictedName ) )
+            // InternalQVTrelation.g:11309:1: (lv_name_0_0= ruleUnrestrictedName )
             {
-            // InternalQVTrelation.g:11307:1: (lv_name_0_0= ruleUnrestrictedName )
-            // InternalQVTrelation.g:11308:3: lv_name_0_0= ruleUnrestrictedName
+            // InternalQVTrelation.g:11309:1: (lv_name_0_0= ruleUnrestrictedName )
+            // InternalQVTrelation.g:11310:3: lv_name_0_0= ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
 
@@ -33095,7 +33095,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
             }
 
-            // InternalQVTrelation.g:11324:2: (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )?
+            // InternalQVTrelation.g:11326:2: (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )?
             int alt251=2;
             int LA251_0 = input.LA(1);
 
@@ -33104,7 +33104,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
             }
             switch (alt251) {
                 case 1 :
-                    // InternalQVTrelation.g:11324:4: otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )*
+                    // InternalQVTrelation.g:11326:4: otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )*
                     {
                     otherlv_1=(Token)match(input,46,FollowSets000.FOLLOW_27); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -33112,11 +33112,11 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
                           	newLeafNode(otherlv_1, grammarAccess.getTypeParameterCSAccess().getExtendsKeyword_1_0());
 
                     }
-                    // InternalQVTrelation.g:11328:1: ( (lv_ownedExtends_2_0= ruleTypedRefCS ) )
-                    // InternalQVTrelation.g:11329:1: (lv_ownedExtends_2_0= ruleTypedRefCS )
+                    // InternalQVTrelation.g:11330:1: ( (lv_ownedExtends_2_0= ruleTypedRefCS ) )
+                    // InternalQVTrelation.g:11331:1: (lv_ownedExtends_2_0= ruleTypedRefCS )
                     {
-                    // InternalQVTrelation.g:11329:1: (lv_ownedExtends_2_0= ruleTypedRefCS )
-                    // InternalQVTrelation.g:11330:3: lv_ownedExtends_2_0= ruleTypedRefCS
+                    // InternalQVTrelation.g:11331:1: (lv_ownedExtends_2_0= ruleTypedRefCS )
+                    // InternalQVTrelation.g:11332:3: lv_ownedExtends_2_0= ruleTypedRefCS
                     {
                     if ( state.backtracking==0 ) {
 
@@ -33147,7 +33147,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
                     }
 
-                    // InternalQVTrelation.g:11346:2: (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )*
+                    // InternalQVTrelation.g:11348:2: (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )*
                     loop250:
                     do {
                         int alt250=2;
@@ -33160,7 +33160,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
                         switch (alt250) {
                     	case 1 :
-                    	    // InternalQVTrelation.g:11346:4: otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) )
+                    	    // InternalQVTrelation.g:11348:4: otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) )
                     	    {
                     	    otherlv_3=(Token)match(input,152,FollowSets000.FOLLOW_27); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -33168,11 +33168,11 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
                     	          	newLeafNode(otherlv_3, grammarAccess.getTypeParameterCSAccess().getAmpersandAmpersandKeyword_1_2_0());
 
                     	    }
-                    	    // InternalQVTrelation.g:11350:1: ( (lv_ownedExtends_4_0= ruleTypedRefCS ) )
-                    	    // InternalQVTrelation.g:11351:1: (lv_ownedExtends_4_0= ruleTypedRefCS )
+                    	    // InternalQVTrelation.g:11352:1: ( (lv_ownedExtends_4_0= ruleTypedRefCS ) )
+                    	    // InternalQVTrelation.g:11353:1: (lv_ownedExtends_4_0= ruleTypedRefCS )
                     	    {
-                    	    // InternalQVTrelation.g:11351:1: (lv_ownedExtends_4_0= ruleTypedRefCS )
-                    	    // InternalQVTrelation.g:11352:3: lv_ownedExtends_4_0= ruleTypedRefCS
+                    	    // InternalQVTrelation.g:11353:1: (lv_ownedExtends_4_0= ruleTypedRefCS )
+                    	    // InternalQVTrelation.g:11354:3: lv_ownedExtends_4_0= ruleTypedRefCS
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -33241,7 +33241,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleTypeRefCS"
-    // InternalQVTrelation.g:11376:1: entryRuleTypeRefCS returns [EObject current=null] : iv_ruleTypeRefCS= ruleTypeRefCS EOF ;
+    // InternalQVTrelation.g:11378:1: entryRuleTypeRefCS returns [EObject current=null] : iv_ruleTypeRefCS= ruleTypeRefCS EOF ;
     public final EObject entryRuleTypeRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -33249,8 +33249,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11377:2: (iv_ruleTypeRefCS= ruleTypeRefCS EOF )
-            // InternalQVTrelation.g:11378:2: iv_ruleTypeRefCS= ruleTypeRefCS EOF
+            // InternalQVTrelation.g:11379:2: (iv_ruleTypeRefCS= ruleTypeRefCS EOF )
+            // InternalQVTrelation.g:11380:2: iv_ruleTypeRefCS= ruleTypeRefCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypeRefCSRule());
@@ -33281,7 +33281,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleTypeRefCS"
-    // InternalQVTrelation.g:11385:1: ruleTypeRefCS returns [EObject current=null] : (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS ) ;
+    // InternalQVTrelation.g:11387:1: ruleTypeRefCS returns [EObject current=null] : (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS ) ;
     public final EObject ruleTypeRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -33293,10 +33293,10 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11388:28: ( (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS ) )
-            // InternalQVTrelation.g:11389:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
+            // InternalQVTrelation.g:11390:28: ( (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS ) )
+            // InternalQVTrelation.g:11391:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
             {
-            // InternalQVTrelation.g:11389:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
+            // InternalQVTrelation.g:11391:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
             int alt252=2;
             int LA252_0 = input.LA(1);
 
@@ -33315,7 +33315,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
             }
             switch (alt252) {
                 case 1 :
-                    // InternalQVTrelation.g:11390:2: this_TypedRefCS_0= ruleTypedRefCS
+                    // InternalQVTrelation.g:11392:2: this_TypedRefCS_0= ruleTypedRefCS
                     {
                     if ( state.backtracking==0 ) {
 
@@ -33342,7 +33342,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
                     }
                     break;
                 case 2 :
-                    // InternalQVTrelation.g:11403:2: this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS
+                    // InternalQVTrelation.g:11405:2: this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS
                     {
                     if ( state.backtracking==0 ) {
 
@@ -33391,7 +33391,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleWildcardTypeRefCS"
-    // InternalQVTrelation.g:11422:1: entryRuleWildcardTypeRefCS returns [EObject current=null] : iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF ;
+    // InternalQVTrelation.g:11424:1: entryRuleWildcardTypeRefCS returns [EObject current=null] : iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF ;
     public final EObject entryRuleWildcardTypeRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -33399,8 +33399,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11423:2: (iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF )
-            // InternalQVTrelation.g:11424:2: iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF
+            // InternalQVTrelation.g:11425:2: (iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF )
+            // InternalQVTrelation.g:11426:2: iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getWildcardTypeRefCSRule());
@@ -33431,7 +33431,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleWildcardTypeRefCS"
-    // InternalQVTrelation.g:11431:1: ruleWildcardTypeRefCS returns [EObject current=null] : ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? ) ;
+    // InternalQVTrelation.g:11433:1: ruleWildcardTypeRefCS returns [EObject current=null] : ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? ) ;
     public final EObject ruleWildcardTypeRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -33443,14 +33443,14 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11434:28: ( ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? ) )
-            // InternalQVTrelation.g:11435:1: ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? )
+            // InternalQVTrelation.g:11436:28: ( ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? ) )
+            // InternalQVTrelation.g:11437:1: ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? )
             {
-            // InternalQVTrelation.g:11435:1: ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? )
-            // InternalQVTrelation.g:11435:2: () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )?
+            // InternalQVTrelation.g:11437:1: ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? )
+            // InternalQVTrelation.g:11437:2: () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )?
             {
-            // InternalQVTrelation.g:11435:2: ()
-            // InternalQVTrelation.g:11436:2:
+            // InternalQVTrelation.g:11437:2: ()
+            // InternalQVTrelation.g:11438:2:
             {
             if ( state.backtracking==0 ) {
 
@@ -33473,7 +33473,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
                   	newLeafNode(otherlv_1, grammarAccess.getWildcardTypeRefCSAccess().getQuestionMarkKeyword_1());
 
             }
-            // InternalQVTrelation.g:11448:1: (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )?
+            // InternalQVTrelation.g:11450:1: (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )?
             int alt253=2;
             int LA253_0 = input.LA(1);
 
@@ -33482,7 +33482,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
             }
             switch (alt253) {
                 case 1 :
-                    // InternalQVTrelation.g:11448:3: otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
+                    // InternalQVTrelation.g:11450:3: otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
                     {
                     otherlv_2=(Token)match(input,46,FollowSets000.FOLLOW_27); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -33490,11 +33490,11 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
                           	newLeafNode(otherlv_2, grammarAccess.getWildcardTypeRefCSAccess().getExtendsKeyword_2_0());
 
                     }
-                    // InternalQVTrelation.g:11452:1: ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
-                    // InternalQVTrelation.g:11453:1: (lv_ownedExtends_3_0= ruleTypedRefCS )
+                    // InternalQVTrelation.g:11454:1: ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
+                    // InternalQVTrelation.g:11455:1: (lv_ownedExtends_3_0= ruleTypedRefCS )
                     {
-                    // InternalQVTrelation.g:11453:1: (lv_ownedExtends_3_0= ruleTypedRefCS )
-                    // InternalQVTrelation.g:11454:3: lv_ownedExtends_3_0= ruleTypedRefCS
+                    // InternalQVTrelation.g:11455:1: (lv_ownedExtends_3_0= ruleTypedRefCS )
+                    // InternalQVTrelation.g:11456:3: lv_ownedExtends_3_0= ruleTypedRefCS
                     {
                     if ( state.backtracking==0 ) {
 
@@ -33554,7 +33554,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleID"
-    // InternalQVTrelation.g:11478:1: entryRuleID returns [String current=null] : iv_ruleID= ruleID EOF ;
+    // InternalQVTrelation.g:11480:1: entryRuleID returns [String current=null] : iv_ruleID= ruleID EOF ;
     public final String entryRuleID() throws RecognitionException {
         String current = null;
 
@@ -33562,8 +33562,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11479:2: (iv_ruleID= ruleID EOF )
-            // InternalQVTrelation.g:11480:2: iv_ruleID= ruleID EOF
+            // InternalQVTrelation.g:11481:2: (iv_ruleID= ruleID EOF )
+            // InternalQVTrelation.g:11482:2: iv_ruleID= ruleID EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIDRule());
@@ -33594,7 +33594,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleID"
-    // InternalQVTrelation.g:11487:1: ruleID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID ) ;
+    // InternalQVTrelation.g:11489:1: ruleID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID ) ;
     public final AntlrDatatypeRuleToken ruleID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -33604,10 +33604,10 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11490:28: ( (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID ) )
-            // InternalQVTrelation.g:11491:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
+            // InternalQVTrelation.g:11492:28: ( (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID ) )
+            // InternalQVTrelation.g:11493:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
             {
-            // InternalQVTrelation.g:11491:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
+            // InternalQVTrelation.g:11493:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
             int alt254=2;
             int LA254_0 = input.LA(1);
 
@@ -33626,7 +33626,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
             }
             switch (alt254) {
                 case 1 :
-                    // InternalQVTrelation.g:11491:6: this_SIMPLE_ID_0= RULE_SIMPLE_ID
+                    // InternalQVTrelation.g:11493:6: this_SIMPLE_ID_0= RULE_SIMPLE_ID
                     {
                     this_SIMPLE_ID_0=(Token)match(input,RULE_SIMPLE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -33643,7 +33643,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
                     }
                     break;
                 case 2 :
-                    // InternalQVTrelation.g:11499:10: this_ESCAPED_ID_1= RULE_ESCAPED_ID
+                    // InternalQVTrelation.g:11501:10: this_ESCAPED_ID_1= RULE_ESCAPED_ID
                     {
                     this_ESCAPED_ID_1=(Token)match(input,RULE_ESCAPED_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -33682,7 +33682,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleIdentifier"
-    // InternalQVTrelation.g:11514:1: entryRuleIdentifier returns [String current=null] : iv_ruleIdentifier= ruleIdentifier EOF ;
+    // InternalQVTrelation.g:11516:1: entryRuleIdentifier returns [String current=null] : iv_ruleIdentifier= ruleIdentifier EOF ;
     public final String entryRuleIdentifier() throws RecognitionException {
         String current = null;
 
@@ -33690,8 +33690,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11515:2: (iv_ruleIdentifier= ruleIdentifier EOF )
-            // InternalQVTrelation.g:11516:2: iv_ruleIdentifier= ruleIdentifier EOF
+            // InternalQVTrelation.g:11517:2: (iv_ruleIdentifier= ruleIdentifier EOF )
+            // InternalQVTrelation.g:11518:2: iv_ruleIdentifier= ruleIdentifier EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIdentifierRule());
@@ -33722,7 +33722,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleIdentifier"
-    // InternalQVTrelation.g:11523:1: ruleIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= ruleID ;
+    // InternalQVTrelation.g:11525:1: ruleIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= ruleID ;
     public final AntlrDatatypeRuleToken ruleIdentifier() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -33732,8 +33732,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11526:28: (this_ID_0= ruleID )
-            // InternalQVTrelation.g:11528:5: this_ID_0= ruleID
+            // InternalQVTrelation.g:11528:28: (this_ID_0= ruleID )
+            // InternalQVTrelation.g:11530:5: this_ID_0= ruleID
             {
             if ( state.backtracking==0 ) {
 
@@ -33775,7 +33775,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleLOWER"
-    // InternalQVTrelation.g:11546:1: entryRuleLOWER returns [String current=null] : iv_ruleLOWER= ruleLOWER EOF ;
+    // InternalQVTrelation.g:11548:1: entryRuleLOWER returns [String current=null] : iv_ruleLOWER= ruleLOWER EOF ;
     public final String entryRuleLOWER() throws RecognitionException {
         String current = null;
 
@@ -33783,8 +33783,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11547:2: (iv_ruleLOWER= ruleLOWER EOF )
-            // InternalQVTrelation.g:11548:2: iv_ruleLOWER= ruleLOWER EOF
+            // InternalQVTrelation.g:11549:2: (iv_ruleLOWER= ruleLOWER EOF )
+            // InternalQVTrelation.g:11550:2: iv_ruleLOWER= ruleLOWER EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLOWERRule());
@@ -33815,7 +33815,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleLOWER"
-    // InternalQVTrelation.g:11555:1: ruleLOWER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_INT_0= RULE_INT ;
+    // InternalQVTrelation.g:11557:1: ruleLOWER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_INT_0= RULE_INT ;
     public final AntlrDatatypeRuleToken ruleLOWER() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -33824,8 +33824,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11558:28: (this_INT_0= RULE_INT )
-            // InternalQVTrelation.g:11559:5: this_INT_0= RULE_INT
+            // InternalQVTrelation.g:11560:28: (this_INT_0= RULE_INT )
+            // InternalQVTrelation.g:11561:5: this_INT_0= RULE_INT
             {
             this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -33858,7 +33858,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleNUMBER_LITERAL"
-    // InternalQVTrelation.g:11574:1: entryRuleNUMBER_LITERAL returns [String current=null] : iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF ;
+    // InternalQVTrelation.g:11576:1: entryRuleNUMBER_LITERAL returns [String current=null] : iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF ;
     public final String entryRuleNUMBER_LITERAL() throws RecognitionException {
         String current = null;
 
@@ -33866,8 +33866,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11575:2: (iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF )
-            // InternalQVTrelation.g:11576:2: iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF
+            // InternalQVTrelation.g:11577:2: (iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF )
+            // InternalQVTrelation.g:11578:2: iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNUMBER_LITERALRule());
@@ -33898,7 +33898,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleNUMBER_LITERAL"
-    // InternalQVTrelation.g:11583:1: ruleNUMBER_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_INT_0= RULE_INT ;
+    // InternalQVTrelation.g:11585:1: ruleNUMBER_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_INT_0= RULE_INT ;
     public final AntlrDatatypeRuleToken ruleNUMBER_LITERAL() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -33907,8 +33907,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11586:28: (this_INT_0= RULE_INT )
-            // InternalQVTrelation.g:11587:5: this_INT_0= RULE_INT
+            // InternalQVTrelation.g:11588:28: (this_INT_0= RULE_INT )
+            // InternalQVTrelation.g:11589:5: this_INT_0= RULE_INT
             {
             this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -33941,7 +33941,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleStringLiteral"
-    // InternalQVTrelation.g:11602:1: entryRuleStringLiteral returns [String current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
+    // InternalQVTrelation.g:11604:1: entryRuleStringLiteral returns [String current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
     public final String entryRuleStringLiteral() throws RecognitionException {
         String current = null;
 
@@ -33949,8 +33949,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11603:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
-            // InternalQVTrelation.g:11604:2: iv_ruleStringLiteral= ruleStringLiteral EOF
+            // InternalQVTrelation.g:11605:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
+            // InternalQVTrelation.g:11606:2: iv_ruleStringLiteral= ruleStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringLiteralRule());
@@ -33981,7 +33981,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleStringLiteral"
-    // InternalQVTrelation.g:11611:1: ruleStringLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING ;
+    // InternalQVTrelation.g:11613:1: ruleStringLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING ;
     public final AntlrDatatypeRuleToken ruleStringLiteral() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -33990,8 +33990,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11614:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
-            // InternalQVTrelation.g:11615:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
+            // InternalQVTrelation.g:11616:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTrelation.g:11617:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
             {
             this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -34024,7 +34024,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleUPPER"
-    // InternalQVTrelation.g:11630:1: entryRuleUPPER returns [String current=null] : iv_ruleUPPER= ruleUPPER EOF ;
+    // InternalQVTrelation.g:11632:1: entryRuleUPPER returns [String current=null] : iv_ruleUPPER= ruleUPPER EOF ;
     public final String entryRuleUPPER() throws RecognitionException {
         String current = null;
 
@@ -34032,8 +34032,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11631:2: (iv_ruleUPPER= ruleUPPER EOF )
-            // InternalQVTrelation.g:11632:2: iv_ruleUPPER= ruleUPPER EOF
+            // InternalQVTrelation.g:11633:2: (iv_ruleUPPER= ruleUPPER EOF )
+            // InternalQVTrelation.g:11634:2: iv_ruleUPPER= ruleUPPER EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getUPPERRule());
@@ -34064,7 +34064,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleUPPER"
-    // InternalQVTrelation.g:11639:1: ruleUPPER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT | kw= '*' ) ;
+    // InternalQVTrelation.g:11641:1: ruleUPPER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT | kw= '*' ) ;
     public final AntlrDatatypeRuleToken ruleUPPER() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -34074,10 +34074,10 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11642:28: ( (this_INT_0= RULE_INT | kw= '*' ) )
-            // InternalQVTrelation.g:11643:1: (this_INT_0= RULE_INT | kw= '*' )
+            // InternalQVTrelation.g:11644:28: ( (this_INT_0= RULE_INT | kw= '*' ) )
+            // InternalQVTrelation.g:11645:1: (this_INT_0= RULE_INT | kw= '*' )
             {
-            // InternalQVTrelation.g:11643:1: (this_INT_0= RULE_INT | kw= '*' )
+            // InternalQVTrelation.g:11645:1: (this_INT_0= RULE_INT | kw= '*' )
             int alt255=2;
             int LA255_0 = input.LA(1);
 
@@ -34096,7 +34096,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
             }
             switch (alt255) {
                 case 1 :
-                    // InternalQVTrelation.g:11643:6: this_INT_0= RULE_INT
+                    // InternalQVTrelation.g:11645:6: this_INT_0= RULE_INT
                     {
                     this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -34113,7 +34113,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
                     }
                     break;
                 case 2 :
-                    // InternalQVTrelation.g:11652:2: kw= '*'
+                    // InternalQVTrelation.g:11654:2: kw= '*'
                     {
                     kw=(Token)match(input,48,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -34148,7 +34148,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "entryRuleURI"
-    // InternalQVTrelation.g:11665:1: entryRuleURI returns [String current=null] : iv_ruleURI= ruleURI EOF ;
+    // InternalQVTrelation.g:11667:1: entryRuleURI returns [String current=null] : iv_ruleURI= ruleURI EOF ;
     public final String entryRuleURI() throws RecognitionException {
         String current = null;
 
@@ -34156,8 +34156,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
         try {
-            // InternalQVTrelation.g:11666:2: (iv_ruleURI= ruleURI EOF )
-            // InternalQVTrelation.g:11667:2: iv_ruleURI= ruleURI EOF
+            // InternalQVTrelation.g:11668:2: (iv_ruleURI= ruleURI EOF )
+            // InternalQVTrelation.g:11669:2: iv_ruleURI= ruleURI EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getURIRule());
@@ -34188,7 +34188,7 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleURI"
-    // InternalQVTrelation.g:11674:1: ruleURI returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING ;
+    // InternalQVTrelation.g:11676:1: ruleURI returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING ;
     public final AntlrDatatypeRuleToken ruleURI() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -34197,8 +34197,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
          enterRule();
 
         try {
-            // InternalQVTrelation.g:11677:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
-            // InternalQVTrelation.g:11678:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
+            // InternalQVTrelation.g:11679:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTrelation.g:11680:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
             {
             this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
