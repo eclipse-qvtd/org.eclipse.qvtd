@@ -209,9 +209,6 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		if (pivotElement != null) {
 			Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
 			TemplateExp template = pivotElement.getTemplateExpression();
-			Variable rootVariable = template.getBindsTo();
-			assert rootVariable != null;
-			helper.setType(rootVariable, type, true);
 			if (template instanceof ObjectTemplateExp) {
 				((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.pivot.Class)type);
 			}

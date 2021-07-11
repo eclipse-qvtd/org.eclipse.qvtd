@@ -64,14 +64,14 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	}
 
 	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement) {	// FIXME Bug 496810 promote to OCL
-		return createTypeRefCS(asTypedElement, false);
+		return createTypeRefCS(asTypedElement, null);
 	}
 
-	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement, boolean defaultIsRequired) {	// FIXME Bug 496810 promote to OCL
+	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement, @Nullable Boolean defaultIsRequired) {	// FIXME Bug 496810 promote to OCL
 		boolean isRequired = asTypedElement.isIsRequired();
 		Type asType = asTypedElement.getType();
 		TypedRefCS csTypeRef = createTypeRefCS(asType);
-		if ((csTypeRef != null) && (isRequired != defaultIsRequired)) {
+		if ((csTypeRef != null) && ((defaultIsRequired == null) ||  (isRequired != defaultIsRequired.booleanValue()))) {
 			if (!isRequired) {
 				MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();	// FIXME MultiplicityStringCS would be nicer but "1" is the default which confuses Xtext serialization
 				csMultiplicity.setStringBounds("?");

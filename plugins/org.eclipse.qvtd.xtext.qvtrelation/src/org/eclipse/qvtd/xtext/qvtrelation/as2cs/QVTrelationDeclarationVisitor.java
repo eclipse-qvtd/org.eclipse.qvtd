@@ -363,7 +363,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 			TemplateExp templateExpression = asDomainPattern.getTemplateExpression();
 			VariableDeclaration rootVariable = templateExpression.getBindsTo();
 			csDomainPattern.setName(rootVariable.getName());
-			csDomainPattern.setOwnedType(createTypeRefCS(rootVariable, true));
+			csDomainPattern.setOwnedType(createTypeRefCS(rootVariable, null));
 			return csDomainPattern;
 		}
 		else {
