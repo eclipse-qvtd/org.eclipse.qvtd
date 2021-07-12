@@ -660,7 +660,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		csVarDeclarationId.setPivot(asSharedVariable);
 		VarDeclarationCS csVarDeclaration = context.refreshElement(VarDeclarationCS.class, QVTrelationCSPackage.Literals.VAR_DECLARATION_CS, asSharedVariable);
 		csVarDeclaration.getOwnedVarDeclarationIds().add(csVarDeclarationId);
-		csVarDeclaration.setOwnedType(createTypeRefCS(asSharedVariable, true));
+		csVarDeclaration.setOwnedType(createTypeRefCS(asSharedVariable, null));
 		csVarDeclaration.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asSharedVariable.getOwnedInit()));
 		return csVarDeclaration;
 	}
