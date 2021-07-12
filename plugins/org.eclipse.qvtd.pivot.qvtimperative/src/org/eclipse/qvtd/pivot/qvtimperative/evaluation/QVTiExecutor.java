@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.evaluation.ExecutorInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -52,7 +52,7 @@ public interface QVTiExecutor extends ExecutorInternal
 	void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue);
 	@Nullable Boolean internalExecuteSpeculateStatement(@NonNull SpeculateStatement speculateStatement);
 	@Nullable Object internalExecuteTransformation(@NonNull ImperativeTransformation transformation, @NonNull EvaluationVisitor undecoratedVisitor);
-	boolean replace(@NonNull TypedElement referredVariable, @Nullable Object value, boolean checkType);
+	boolean replace(@NonNull VariableDeclaration referredVariable, @Nullable Object value, boolean checkType);
 	void saveModels(@Nullable Map<?, ?> savingOptions) throws IOException;
 	void saveOutput(@NonNull String outName, @NonNull URI outURI);
 }

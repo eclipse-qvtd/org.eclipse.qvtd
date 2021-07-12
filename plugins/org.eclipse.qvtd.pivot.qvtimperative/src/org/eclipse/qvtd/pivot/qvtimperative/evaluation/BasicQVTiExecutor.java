@@ -1060,7 +1060,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	}
 
 	@Override
-	public boolean replace(@NonNull TypedElement asVariable, @Nullable Object value, boolean checkType) {
+	public boolean replace(@NonNull VariableDeclaration asVariable, @Nullable Object value, boolean checkType) {
 		if (value == null) {
 			if (asVariable.isIsRequired()) {
 				//				throw new InvalidValueException("Attempted to assign null value to " + asVariable);

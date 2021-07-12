@@ -18,7 +18,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.data.VMVariableData;
 import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -126,9 +125,9 @@ public class QVTiVariableFinder extends VariableFinder
 		}
 	}
 
-	@Override
-	protected @Nullable VMVariableData getVariable(@NonNull TypedElement variable, @Nullable Object pcObject) {
-		/*			EObject eContainer = variable.eContainer();
+	/*	@Override
+	protected @Nullable VMVariableData getVariable(@NonNull VariableDeclaration variable, @Nullable Object pcObject) {
+		/ *			EObject eContainer = variable.eContainer();
 			if (eContainer instanceof Transformation) {
 				Transformation transformation = (Transformation)eContainer;
 				String varName = variable.getName();
@@ -153,9 +152,9 @@ public class QVTiVariableFinder extends VariableFinder
 					setValueAndType(var, model, "Resource");
 					return var;
 				}
-			} */
+			} * /
 		return super.getVariable(variable, pcObject);
-	}
+	} */
 
 	@Override
 	public void setValueAndType(@NonNull VMVariableData variable, @Nullable Object value, @Nullable String declaredTypeName) {
