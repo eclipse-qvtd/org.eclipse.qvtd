@@ -203,7 +203,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -214,7 +214,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 				/*@NonInvalid*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
-						result = ValueUtil.TRUE_VALUE;
+						result = true;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -226,8 +226,8 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 					final /*@NonInvalid*/ @NonNull Property resolvedProperty = _1.getResolvedProperty();
 					//
 					if (accumulator.includes(resolvedProperty) == ValueUtil.TRUE_VALUE) {
-						result = ValueUtil.FALSE_VALUE;			// Abort after second find
-						break;
+						result = false;
+						break;			// Abort after second find
 					}
 					else {
 						accumulator.add(resolvedProperty);
@@ -270,7 +270,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable Type type = this.getType();

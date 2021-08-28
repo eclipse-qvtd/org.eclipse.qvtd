@@ -9,8 +9,6 @@
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.ui.contentassist;
-
-import org.eclipse.qvtd.xtext.qvtcore.ui.contentassist.AbstractQVTcoreProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */

@@ -13,8 +13,6 @@ import example2.classes.ClassesPackage;
 import example2.classes.Property;
 import example2.classes.lookup.EnvironmentPackage;
 import example2.classes.lookup.LookupEnvironment;
-import example2.classes.util.AbstractClassesCommonLookupVisitor;
-import example2.classes.util.Visitable;
 import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;

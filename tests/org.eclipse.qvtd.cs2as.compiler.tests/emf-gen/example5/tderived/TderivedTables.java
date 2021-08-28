@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2021 Willink Transformations and others.
+ * Copyright (c) 2014, 2021 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -10,34 +10,42 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from:
- *   /org.eclipse.qvtd.runtime/model-gen/QVTruntimeLibrary.ecore
+ *   /org.eclipse.qvtd.cs2as.compiler.tests/models/BaseAndDerived/TargetDerivedMM.ecore
  * using:
- *   /org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.genmodel
+ *   /org.eclipse.qvtd.cs2as.compiler.tests/models/BaseAndDerived/TargetDerivedMM.genmodel
  *   org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  *******************************************************************************/
-package org.eclipse.qvtd.runtime.qvtruntimelibrary;
+package example5.tderived;
 
-import org.eclipse.jdt.annotation.NonNull;
+import example5.tbase.TbaseTables;
+// import example5.tderived.TderivedPackage;
+// import example5.tderived.TderivedTables;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
+import org.eclipse.ocl.pivot.internal.library.ecore.EcoreLibraryOppositeProperty;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
+import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImplementation;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
-// import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryTables;
 
 /**
- * QVTruntimeLibraryTables provides the dispatch tables for the qvtruntimelibrary for use by the OCL dispatcher.
+ * TderivedTables provides the dispatch tables for the tderived for use by the OCL dispatcher.
  *
  * In order to ensure correct static initialization, a top level class element must be accessed
  * before any nested class element. Therefore an access to PACKAGE.getClass() is recommended.
  */
-public class QVTruntimeLibraryTables extends AbstractTables
+public class TderivedTables extends AbstractTables
 {
 	static {
 		Init.initStart();
@@ -46,12 +54,20 @@ public class QVTruntimeLibraryTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final @NonNull EcoreExecutorPackage PACKAGE = new EcoreExecutorPackage(QVTruntimeLibraryPackage.eINSTANCE);
+	public static final EcoreExecutorPackage PACKAGE = new EcoreExecutorPackage(TderivedPackage.eINSTANCE);
 
 	/**
 	 *	The library of all packages and types.
 	 */
-	public static final @NonNull ExecutorStandardLibrary LIBRARY = OCLstdlibTables.LIBRARY;
+	public static final ExecutorStandardLibrary LIBRARY = OCLstdlibTables.LIBRARY;
+
+	/**
+	 *	Constants used by auto-generated code.
+	 */
+	public static final /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example5/targetDerivedMM/1.0", null, TderivedPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ ClassId CLSSid_A2 = TderivedTables.PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0.getClassId("A2", 0);
+	public static final /*@NonInvalid*/ ClassId CLSSid_D = TderivedTables.PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0.getClassId("D", 0);
+	public static final /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_D = TypeId.ORDERED_SET.getSpecializedId(TderivedTables.CLSSid_D);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -59,7 +75,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 	public static class TypeParameters {
 		static {
 			Init.initStart();
-			QVTruntimeLibraryTables.init();
+			TderivedTables.init();
 		}
 
 		static {
@@ -67,7 +83,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::TypeParameters and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::TypeParameters and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -81,14 +97,14 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final @NonNull EcoreExecutorType _Extent = new EcoreExecutorType(QVTruntimeLibraryPackage.Literals.EXTENT, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Model = new EcoreExecutorType(QVTruntimeLibraryPackage.Literals.MODEL, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Transformation = new EcoreExecutorType(QVTruntimeLibraryPackage.Literals.TRANSFORMATION, PACKAGE, 0);
+		public static final EcoreExecutorType _A2 = new EcoreExecutorType(TderivedPackage.Literals.A2, PACKAGE, 0);
+		public static final EcoreExecutorType _B2 = new EcoreExecutorType(TderivedPackage.Literals.B2, PACKAGE, 0);
+		public static final EcoreExecutorType _D = new EcoreExecutorType(TderivedPackage.Literals.D, PACKAGE, 0);
 
-		private static final @NonNull EcoreExecutorType @NonNull [] types = {
-			_Extent,
-			_Model,
-			_Transformation
+		private static final EcoreExecutorType /*@NonNull*/ [] types = {
+			_A2,
+			_B2,
+			_D
 		};
 
 		/*
@@ -100,7 +116,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::Types and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::Types and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -114,24 +130,31 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull ExecutorFragment _Extent__Extent = new ExecutorFragment(Types._Extent, QVTruntimeLibraryTables.Types._Extent);
-		private static final @NonNull ExecutorFragment _Extent__OclAny = new ExecutorFragment(Types._Extent, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Extent__OclElement = new ExecutorFragment(Types._Extent, OCLstdlibTables.Types._OclElement);
+		private static final ExecutorFragment _A2__A = new ExecutorFragment(Types._A2, TbaseTables.Types._A);
+		private static final ExecutorFragment _A2__A2 = new ExecutorFragment(Types._A2, TderivedTables.Types._A2);
+		private static final ExecutorFragment _A2__Element = new ExecutorFragment(Types._A2, TbaseTables.Types._Element);
+		private static final ExecutorFragment _A2__NamedElement = new ExecutorFragment(Types._A2, TbaseTables.Types._NamedElement);
+		private static final ExecutorFragment _A2__OclAny = new ExecutorFragment(Types._A2, OCLstdlibTables.Types._OclAny);
+		private static final ExecutorFragment _A2__OclElement = new ExecutorFragment(Types._A2, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull ExecutorFragment _Model__Model = new ExecutorFragment(Types._Model, QVTruntimeLibraryTables.Types._Model);
-		private static final @NonNull ExecutorFragment _Model__OclAny = new ExecutorFragment(Types._Model, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Model__OclElement = new ExecutorFragment(Types._Model, OCLstdlibTables.Types._OclElement);
+		private static final ExecutorFragment _B2__B = new ExecutorFragment(Types._B2, TbaseTables.Types._B);
+		private static final ExecutorFragment _B2__B2 = new ExecutorFragment(Types._B2, TderivedTables.Types._B2);
+		private static final ExecutorFragment _B2__Element = new ExecutorFragment(Types._B2, TbaseTables.Types._Element);
+		private static final ExecutorFragment _B2__NamedElement = new ExecutorFragment(Types._B2, TbaseTables.Types._NamedElement);
+		private static final ExecutorFragment _B2__OclAny = new ExecutorFragment(Types._B2, OCLstdlibTables.Types._OclAny);
+		private static final ExecutorFragment _B2__OclElement = new ExecutorFragment(Types._B2, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull ExecutorFragment _Transformation__OclAny = new ExecutorFragment(Types._Transformation, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Transformation__OclElement = new ExecutorFragment(Types._Transformation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Transformation__Transformation = new ExecutorFragment(Types._Transformation, QVTruntimeLibraryTables.Types._Transformation);
+		private static final ExecutorFragment _D__D = new ExecutorFragment(Types._D, TderivedTables.Types._D);
+		private static final ExecutorFragment _D__Element = new ExecutorFragment(Types._D, TbaseTables.Types._Element);
+		private static final ExecutorFragment _D__OclAny = new ExecutorFragment(Types._D, OCLstdlibTables.Types._OclAny);
+		private static final ExecutorFragment _D__OclElement = new ExecutorFragment(Types._D, OCLstdlibTables.Types._OclElement);
 
 		static {
 			Init.initEnd();
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::Fragments and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::Fragments and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -155,7 +178,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::Parameters and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::Parameters and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -178,7 +201,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::Operations and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::Operations and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -196,13 +219,17 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull ExecutorProperty _Extent__elements = new EcoreExecutorProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, Types._Extent, 0);
+		public static final ExecutorProperty _A2__ownsD = new EcoreExecutorProperty(TderivedPackage.Literals.A2__OWNS_D, Types._A2, 0);
+
+		public static final ExecutorProperty _B2__anotherName = new EcoreExecutorProperty(TderivedPackage.Literals.B2__ANOTHER_NAME, Types._B2, 0);
+
+		public static final ExecutorProperty _D__A2__ownsD = new ExecutorPropertyWithImplementation("A2", Types._D, 0, new EcoreLibraryOppositeProperty(TderivedPackage.Literals.A2__OWNS_D));
 		static {
 			Init.initEnd();
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::Properties and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::Properties and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -216,43 +243,50 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Properties.init();
 		}
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Extent =
+		private static final ExecutorFragment /*@NonNull*/ [] _A2 =
 			{
-				Fragments._Extent__OclAny /* 0 */,
-				Fragments._Extent__OclElement /* 1 */,
-				Fragments._Extent__Extent /* 2 */
+				Fragments._A2__OclAny /* 0 */,
+				Fragments._A2__OclElement /* 1 */,
+				Fragments._A2__Element /* 2 */,
+				Fragments._A2__NamedElement /* 3 */,
+				Fragments._A2__A /* 4 */,
+				Fragments._A2__A2 /* 5 */
 			};
-		private static final int @NonNull [] __Extent = { 1,1,1 };
+		private static final int /*@NonNull*/ [] __A2 = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Model =
+		private static final ExecutorFragment /*@NonNull*/ [] _B2 =
 			{
-				Fragments._Model__OclAny /* 0 */,
-				Fragments._Model__OclElement /* 1 */,
-				Fragments._Model__Model /* 2 */
+				Fragments._B2__OclAny /* 0 */,
+				Fragments._B2__OclElement /* 1 */,
+				Fragments._B2__Element /* 2 */,
+				Fragments._B2__NamedElement /* 3 */,
+				Fragments._B2__B /* 4 */,
+				Fragments._B2__B2 /* 5 */
 			};
-		private static final int @NonNull [] __Model = { 1,1,1 };
+		private static final int /*@NonNull*/ [] __B2 = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Transformation =
+		private static final ExecutorFragment /*@NonNull*/ [] _D =
 			{
-				Fragments._Transformation__OclAny /* 0 */,
-				Fragments._Transformation__OclElement /* 1 */,
-				Fragments._Transformation__Transformation /* 2 */
+				Fragments._D__OclAny /* 0 */,
+				Fragments._D__OclElement /* 1 */,
+				Fragments._D__Element /* 2 */,
+				Fragments._D__D /* 3 */
 			};
-		private static final int @NonNull [] __Transformation = { 1,1,1 };
+		private static final int /*@NonNull*/ [] __D = { 1,1,1,1 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
 		 */
 		static {
-			Types._Extent.initFragments(_Extent, __Extent);
-			Types._Model.initFragments(_Model, __Model);
-			Types._Transformation.initFragments(_Transformation, __Transformation);
+			Types._A2.initFragments(_A2, __A2);
+			Types._B2.initFragments(_B2, __B2);
+			Types._D.initFragments(_D, __D);
 
 			Init.initEnd();
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::TypeFragments and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::TypeFragments and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -266,8 +300,11 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			TypeFragments.init();
 		}
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Extent__Extent = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Extent__OclAny = {
+		private static final ExecutorOperation /*@NonNull*/ [] _A2__A2 = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _A2__A = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _A2__Element = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _A2__NamedElement = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _A2__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -284,7 +321,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Extent__OclElement = {
+		private static final ExecutorOperation /*@NonNull*/ [] _A2__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
@@ -294,8 +331,11 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Model__Model = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Model__OclAny = {
+		private static final ExecutorOperation /*@NonNull*/ [] _B2__B2 = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _B2__B = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _B2__Element = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _B2__NamedElement = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _B2__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -312,7 +352,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Model__OclElement = {
+		private static final ExecutorOperation /*@NonNull*/ [] _B2__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
@@ -322,8 +362,9 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Transformation = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__OclAny = {
+		private static final ExecutorOperation /*@NonNull*/ [] _D__D = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _D__Element = {};
+		private static final ExecutorOperation /*@NonNull*/ [] _D__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -340,7 +381,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__OclElement = {
+		private static final ExecutorOperation /*@NonNull*/ [] _D__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
@@ -354,23 +395,30 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		 *	Install the operation descriptors in the fragment descriptors.
 		 */
 		static {
-			Fragments._Extent__Extent.initOperations(_Extent__Extent);
-			Fragments._Extent__OclAny.initOperations(_Extent__OclAny);
-			Fragments._Extent__OclElement.initOperations(_Extent__OclElement);
+			Fragments._A2__A.initOperations(_A2__A);
+			Fragments._A2__A2.initOperations(_A2__A2);
+			Fragments._A2__Element.initOperations(_A2__Element);
+			Fragments._A2__NamedElement.initOperations(_A2__NamedElement);
+			Fragments._A2__OclAny.initOperations(_A2__OclAny);
+			Fragments._A2__OclElement.initOperations(_A2__OclElement);
 
-			Fragments._Model__Model.initOperations(_Model__Model);
-			Fragments._Model__OclAny.initOperations(_Model__OclAny);
-			Fragments._Model__OclElement.initOperations(_Model__OclElement);
+			Fragments._B2__B.initOperations(_B2__B);
+			Fragments._B2__B2.initOperations(_B2__B2);
+			Fragments._B2__Element.initOperations(_B2__Element);
+			Fragments._B2__NamedElement.initOperations(_B2__NamedElement);
+			Fragments._B2__OclAny.initOperations(_B2__OclAny);
+			Fragments._B2__OclElement.initOperations(_B2__OclElement);
 
-			Fragments._Transformation__OclAny.initOperations(_Transformation__OclAny);
-			Fragments._Transformation__OclElement.initOperations(_Transformation__OclElement);
-			Fragments._Transformation__Transformation.initOperations(_Transformation__Transformation);
+			Fragments._D__D.initOperations(_D__D);
+			Fragments._D__Element.initOperations(_D__Element);
+			Fragments._D__OclAny.initOperations(_D__OclAny);
+			Fragments._D__OclElement.initOperations(_D__OclElement);
 
 			Init.initEnd();
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::FragmentOperations and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::FragmentOperations and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -384,18 +432,23 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			FragmentOperations.init();
 		}
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Extent = {
-			QVTruntimeLibraryTables.Properties._Extent__elements,
+		private static final ExecutorProperty /*@NonNull*/ [] _A2 = {
+			TbaseTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
-			OCLstdlibTables.Properties._OclElement__oclContents
+			OCLstdlibTables.Properties._OclElement__oclContents,
+			TbaseTables.Properties._A__ownsB,
+			TderivedTables.Properties._A2__ownsD
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Model = {
+		private static final ExecutorProperty /*@NonNull*/ [] _B2 = {
+			TderivedTables.Properties._B2__anotherName,
+			TbaseTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
-			OCLstdlibTables.Properties._OclElement__oclContents
+			OCLstdlibTables.Properties._OclElement__oclContents,
+			TbaseTables.Properties._B__ownsC
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Transformation = {
+		private static final ExecutorProperty /*@NonNull*/ [] _D = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
@@ -404,15 +457,15 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		 *	Install the property descriptors in the fragment descriptors.
 		 */
 		static {
-			Fragments._Extent__Extent.initProperties(_Extent);
-			Fragments._Model__Model.initProperties(_Model);
-			Fragments._Transformation__Transformation.initProperties(_Transformation);
+			Fragments._A2__A2.initProperties(_A2);
+			Fragments._B2__B2.initProperties(_B2);
+			Fragments._D__D.initProperties(_D);
 
 			Init.initEnd();
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::FragmentProperties and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::FragmentProperties and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -435,7 +488,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		}
 
 		/**
-		 * Force initialization of the fields of QVTruntimeLibraryTables::EnumerationLiterals and all preceding sub-packages.
+		 * Force initialization of the fields of TderivedTables::EnumerationLiterals and all preceding sub-packages.
 		 */
 		public static void init() {}
 	}
@@ -484,10 +537,10 @@ public class QVTruntimeLibraryTables extends AbstractTables
 	 * Force initialization of outer fields. Inner fields are lazily initialized.
 	 */
 	public static void init() {
-		new QVTruntimeLibraryTables();
+		new TderivedTables();
 	}
 
-	private QVTruntimeLibraryTables() {
-		super(QVTruntimeLibraryPackage.eNS_URI);
+	private TderivedTables() {
+		super(TderivedPackage.eNS_URI);
 	}
 }

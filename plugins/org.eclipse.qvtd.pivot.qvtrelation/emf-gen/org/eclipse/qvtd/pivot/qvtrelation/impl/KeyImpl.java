@@ -272,7 +272,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -329,7 +329,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -437,7 +437,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_1;
 			if (le) {
-				symbol_1 = ValueUtil.TRUE_VALUE;
+				symbol_1 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -579,7 +579,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -690,7 +690,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -717,11 +717,11 @@ public class KeyImpl extends ElementImpl implements Key {
 					final /*@NonInvalid*/ @Nullable Property opposite = _1.getOpposite();
 					final /*@NonInvalid*/ boolean ne = opposite != null;
 					//
-					if (ne == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+					if (!ne) {					// Normal unsuccessful body evaluation result
 						result = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
-					else if (ne == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+					else if (ne) {				// Normal successful body evaluation result
 						;															// Carry on
 					}
 					else {															// Impossible badly typed result
@@ -768,7 +768,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -865,7 +865,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -961,7 +961,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;

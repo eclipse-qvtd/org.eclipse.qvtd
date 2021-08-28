@@ -13,7 +13,6 @@ import example2.classes.Argument;
 import example2.classes.ClassesPackage;
 import example2.classes.Operation;
 import example2.classes.Parameter;
-import example2.classes.lookup.util.AbstractClassesLookupFilter;
 import java.util.Iterator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;

@@ -10,8 +10,6 @@
 package example1.target.util;
 
 import example1.target.lookup.LookupEnvironment;
-import example1.target.util.AbstractTargetCommonLookupVisitor;
-import example1.target.util.Visitable;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;

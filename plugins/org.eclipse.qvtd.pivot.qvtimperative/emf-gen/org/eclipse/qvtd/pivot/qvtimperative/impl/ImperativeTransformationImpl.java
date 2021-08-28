@@ -184,7 +184,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
@@ -210,11 +210,11 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_Mapping = idResolver.getClass(QVTimperativeTables.CLSSid_Mapping, null);
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtimperative_c_c_Mapping).booleanValue();
 					//
-					if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
 						result = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
-					else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+					else if (oclIsKindOf) {				// Normal successful body evaluation result
 						;															// Carry on
 					}
 					else {															// Impossible badly typed result
@@ -262,7 +262,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -287,7 +287,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 						final /*@NonInvalid*/ @Nullable String targetName = _1.getTargetName();
 						final /*@NonInvalid*/ boolean ne = targetName != null;
 						//
-						if (ne == ValueUtil.TRUE_VALUE) {
+						if (ne) {
 							accumulator.add(_1);
 						}
 					}
@@ -296,7 +296,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1_0.hasNext()) {
-							result = ValueUtil.TRUE_VALUE;
+							result = true;
 							break;
 						}
 						@SuppressWarnings("null")
@@ -307,8 +307,8 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 						final /*@NonInvalid*/ @Nullable String targetName_0 = _1_0.getTargetName();
 						//
 						if (accumulator_0.includes(targetName_0) == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.FALSE_VALUE;			// Abort after second find
-							break;
+							result = false;
+							break;			// Abort after second find
 						}
 						else {
 							accumulator_0.add(targetName_0);

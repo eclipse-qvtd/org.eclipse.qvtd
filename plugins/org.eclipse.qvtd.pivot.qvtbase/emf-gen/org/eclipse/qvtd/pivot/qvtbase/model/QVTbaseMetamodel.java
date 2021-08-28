@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2020 Willink Transformations and others.
+ * Copyright (c) 2010, 2021 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -47,6 +47,7 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotObjectImpl;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
@@ -256,6 +257,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 		
 		private final @NonNull Package _ocl = standardLibrary;
+		private final @NonNull Package _pivot = getPackage(org.eclipse.ocl.pivot.model.OCLmetamodel.getDefaultModel(), "pivot");
+		private final @NonNull Class _Annotation = getClass(_pivot, "Annotation");
 		private final @NonNull BagType _Bag = getBagType(_ocl, "Bag");
 		private final @NonNull PrimitiveType _Boolean = getPrimitiveType(_ocl, "Boolean");
 		private final @NonNull CollectionType _Collection = getCollectionType(_ocl, "Collection");
@@ -265,11 +268,13 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Class _OclEnumeration = getClass(_ocl, "OclEnumeration");
 		private final @NonNull CollectionType _OrderedCollection = getCollectionType(_ocl, "OrderedCollection");
 		private final @NonNull OrderedSetType _OrderedSet = getOrderedSetType(_ocl, "OrderedSet");
+		private final @NonNull Class _Package = getClass(_pivot, "Package");
 		private final @NonNull PrimitiveType _Real = getPrimitiveType(_ocl, "Real");
 		private final @NonNull SetType _Set = getSetType(_ocl, "Set");
 		private final @NonNull PrimitiveType _String = getPrimitiveType(_ocl, "String");
 		private final @NonNull CollectionType _UniqueCollection = getCollectionType(_ocl, "UniqueCollection");
 		private final @NonNull PrimitiveType _UnlimitedNatural = getPrimitiveType(_ocl, "UnlimitedNatural");
+		private final @NonNull Class _Variable = getClass(_pivot, "Variable");
 		private final @NonNull TemplateParameter _Bag_T = getTemplateParameter(_Bag, 0);
 		private final @NonNull TemplateParameter _Collection_T = getTemplateParameter(_Collection, 0);
 		private final @NonNull TemplateParameter _OrderedCollection_T = getTemplateParameter(_OrderedCollection, 0);
@@ -284,11 +289,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			root.getOwnedImports().add(createImport(null, _ocl));
 		}
 		
-		private final @NonNull Class _Annotation = createClass("Annotation");
+		private final @NonNull Class _Annotation_1 = createClass("Annotation");
 		private final @NonNull Class _OCLExpression = createClass("OCLExpression");
-		private final @NonNull Class _Package = createClass("Package");
+		private final @NonNull Class _Package_1 = createClass("Package");
 		private final @NonNull Class _Parameter = createClass("Parameter");
-		private final @NonNull Class _Variable = createClass("Variable");
+		private final @NonNull Class _Variable_1 = createClass("Variable");
 		
 		private final @NonNull Class _BaseModel = createClass(QVTbasePackage.Literals.BASE_MODEL);
 		private final @NonNull Class _CompoundTargetElement = createClass(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT);
@@ -360,19 +365,19 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			Class type;
 		
 			ownedClasses = pivot.getOwnedClasses();
-			ownedClasses.add(type = _Annotation);
+			ownedClasses.add(type = _Annotation_1);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _OCLExpression);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
-			ownedClasses.add(type = _Package);
+			ownedClasses.add(type = _Package_1);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Parameter);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
-			ownedClasses.add(type = _Variable);
+			ownedClasses.add(type = _Variable_1);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 		
@@ -593,8 +598,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses.add(_Collection_Variable);
 		}
 		
-		private final @NonNull Operation op_Transformation_getFunction = createOperation("getFunction", _Function, null, null);
-		private final @NonNull Operation op_Transformation_getModelParameter = createOperation("getModelParameter", _TypedModel, null, null);
+		private final @NonNull Operation op_Transformation_getFunction = createOperation(QVTbasePackage.Literals.TRANSFORMATION___GET_FUNCTION__STRING, _Function, null, null);
+		private final @NonNull Operation op_Transformation_getModelParameter = createOperation(QVTbasePackage.Literals.TRANSFORMATION___GET_MODEL_PARAMETER__STRING, _TypedModel, null, null);
 		
 		private void installOperations() {
 			List<Operation> ownedOperations;
@@ -610,6 +615,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("name", _String, true));
 		}
+		
 		
 		private final @NonNull Property pr_Annotation_Transformation_ownedTag = createProperty("Transformation", _Transformation);
 		private final @NonNull Property pr_OCLExpression_Function_queryExpression = createProperty("Function", _Bag_Function);
@@ -666,7 +672,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			List<Property> ownedProperties;
 			Property property;
 		
-			ownedProperties = _Annotation.getOwnedProperties();
+			ownedProperties = _Annotation_1.getOwnedProperties();
 			ownedProperties.add(property = pr_Annotation_Transformation_ownedTag);
 			property.setIsImplicit(true);
 			property.setIsRequired(false);
@@ -684,7 +690,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Predicate_conditionExpression);
 		
-			ownedProperties = _Package.getOwnedProperties();
+			ownedProperties = _Package_1.getOwnedProperties();
 			ownedProperties.add(property = pr_Package_TypedModel_usedPackage);
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);
@@ -702,7 +708,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TypedModel_ownedContext);
 		
-			ownedProperties = _Variable.getOwnedProperties();
+			ownedProperties = _Variable_1.getOwnedProperties();
 			ownedProperties.add(property = pr_Variable_Pattern_bindsTo);
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);

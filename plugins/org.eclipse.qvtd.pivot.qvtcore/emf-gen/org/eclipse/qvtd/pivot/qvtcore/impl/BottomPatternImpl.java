@@ -263,7 +263,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -290,11 +290,11 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_BottomVariable = idResolver.getClass(QVTcoreTables.CLSSid_BottomVariable, null);
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_BottomVariable).booleanValue();
 					//
-					if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
 						result = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
-					else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+					else if (oclIsKindOf) {				// Normal successful body evaluation result
 						;															// Carry on
 					}
 					else {															// Impossible badly typed result

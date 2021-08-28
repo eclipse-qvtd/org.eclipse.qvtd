@@ -570,7 +570,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -651,7 +651,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
-				symbol_2 = ValueUtil.TRUE_VALUE;
+				symbol_2 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -709,7 +709,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 									final /*@NonInvalid*/ @Nullable String name_0 = etm.getName();
 									final /*@NonInvalid*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
 									//
-									if (eq == ValueUtil.TRUE_VALUE) {
+									if (eq) {
 										accumulator_0.add(_1);
 									}
 								}
@@ -737,11 +737,11 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 								final /*@NonInvalid*/ @NonNull SetValue BOXED_usedPackage_0 = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage_0);
 								final /*@NonInvalid*/ boolean includesAll = CollectionIncludesAllOperation.INSTANCE.evaluate(collect, BOXED_usedPackage_0).booleanValue();
 								//
-								if (includesAll == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+								if (!includesAll) {					// Normal unsuccessful body evaluation result
 									forAll = ValueUtil.FALSE_VALUE;
 									break;														// Stop immediately
 								}
-								else if (includesAll == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+								else if (includesAll) {				// Normal successful body evaluation result
 									;															// Carry on
 								}
 								else {															// Impossible badly typed result
@@ -811,7 +811,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -823,7 +823,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
-							result = ValueUtil.TRUE_VALUE;
+							result = true;
 							break;
 						}
 						@SuppressWarnings("null")
@@ -834,8 +834,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 						final /*@NonInvalid*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.FALSE_VALUE;			// Abort after second find
-							break;
+							result = false;
+							break;			// Abort after second find
 						}
 						else {
 							accumulator.add(name);
@@ -887,7 +887,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_3;
 			if (le) {
-				symbol_3 = ValueUtil.TRUE_VALUE;
+				symbol_3 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;

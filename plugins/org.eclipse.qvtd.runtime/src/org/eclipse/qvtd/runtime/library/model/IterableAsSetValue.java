@@ -64,7 +64,7 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 	}
 
 	@Override
-	public <T1> @Nullable List<T1> asEcoreObjects(@NonNull IdResolver idResolver, @Nullable Class<T1> instanceClass) {
+	public <T1> @NonNull List<T1> asEcoreObjects(@NonNull IdResolver idResolver, @Nullable Class<T1> instanceClass) {
 		throw new UnsupportedOperationException();
 	}
 

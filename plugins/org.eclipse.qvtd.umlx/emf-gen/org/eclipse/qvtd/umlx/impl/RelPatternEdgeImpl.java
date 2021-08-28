@@ -33,14 +33,12 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
+import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanOrOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableGreaterThanOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanOperation;
@@ -421,21 +419,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_ECLASS__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_ECLASS__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -443,27 +431,57 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 					final /*@NonInvalid*/ boolean isExpression = source.isExpression();
-					final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isExpression);
-					/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
-					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClassifier = idResolver.getClass(UMLXTables.CLSSid_EClassifier, null);
-						final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClassifier).booleanValue();
-						CAUGHT_oclIsKindOf = oclIsKindOf;
+					final /*@NonInvalid*/ @Nullable Boolean not;
+					if (!isExpression) {
+						not = ValueUtil.TRUE_VALUE;
 					}
-					catch (Exception e) {
-						CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+					else {
+						if (isExpression) {
+							not = ValueUtil.FALSE_VALUE;
+						}
+						else {
+							not = null;
+						}
 					}
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_oclIsKindOf);
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (not == ValueUtil.FALSE_VALUE) {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClassifier = idResolver.getClass(UMLXTables.CLSSid_EClassifier, null);
+							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
+							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClassifier).booleanValue();
+							CAUGHT_oclIsKindOf = oclIsKindOf;
+						}
+						catch (Exception e) {
+							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_oclIsKindOf == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_oclIsKindOf;
+							}
+							if (not == null) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
+					}
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -493,31 +511,32 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_CLASS_NODE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_CLASS_NODE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 				final /*@NonInvalid*/ boolean isExpression = source.isExpression();
-				final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(isExpression);
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ @Nullable Boolean result;
+				if (!isExpression) {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					if (isExpression) {
+						result = ValueUtil.FALSE_VALUE;
+					}
+					else {
+						result = null;
+					}
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -543,88 +562,151 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *     else
 			 *       let result : Boolean[?] = referredEStructuralFeature <> null and
 			 *         referredEStructuralFeature.oclIsKindOf(ecore::EAttribute) and
-			 *         not target.isExpression() implies referredEStructuralFeature.eType = target.referredEClassifier
+			 *         not target.isExpression() implies
+			 *         let t1 : Class[1] = referredEStructuralFeature.eType.oclType()
+			 *         in
+			 *           let t2 : Class[1] = target.referredEClassifier.oclType()
+			 *           in t1.conformsTo(t2)
 			 *       in
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EATTRIBUTE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EATTRIBUTE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					/*@Caught*/ @Nullable Object CAUGHT_and_0;
 					try {
-						/*@Caught*/ @NonNull Object CAUGHT_and;
+						/*@Caught*/ @Nullable Object CAUGHT_and;
 						try {
-							final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature_0 = this.getReferredEStructuralFeature();
-							final /*@NonInvalid*/ boolean ne = referredEStructuralFeature_0 != null;
-							/*@Thrown*/ boolean and;
-							if (ne) {
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EAttribute = idResolver.getClass(UMLXTables.CLSSid_EAttribute, null);
-								final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature_0, TYP_ecore_c_c_EAttribute).booleanValue();
-								and = oclIsKindOf;
+							final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
+							final /*@NonInvalid*/ boolean ne = referredEStructuralFeature != null;
+							final /*@Thrown*/ @Nullable Boolean and;
+							if (!ne) {
+								and = ValueUtil.FALSE_VALUE;
 							}
 							else {
-								and = ValueUtil.FALSE_VALUE;
+								/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
+								try {
+									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EAttribute = idResolver.getClass(UMLXTables.CLSSid_EAttribute, null);
+									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature, TYP_ecore_c_c_EAttribute).booleanValue();
+									CAUGHT_oclIsKindOf = oclIsKindOf;
+								}
+								catch (Exception e) {
+									CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+								}
+								if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {
+									and = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_oclIsKindOf;
+									}
+									and = ValueUtil.TRUE_VALUE;
+								}
 							}
 							CAUGHT_and = and;
 						}
 						catch (Exception e) {
 							CAUGHT_and = ValueUtil.createInvalidValue(e);
 						}
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull RelPatternNode target = this.getTarget();
-						final /*@NonInvalid*/ boolean isExpression = target.isExpression();
-						final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isExpression);
-						final /*@Thrown*/ @Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and, not);
+						final /*@Thrown*/ @Nullable Boolean and_0;
+						if (CAUGHT_and == ValueUtil.FALSE_VALUE) {
+							and_0 = ValueUtil.FALSE_VALUE;
+						}
+						else {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull RelPatternNode target = this.getTarget();
+							final /*@NonInvalid*/ boolean isExpression = target.isExpression();
+							final /*@NonInvalid*/ @Nullable Boolean not;
+							if (!isExpression) {
+								not = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								if (isExpression) {
+									not = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									not = null;
+								}
+							}
+							if (not == ValueUtil.FALSE_VALUE) {
+								and_0 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								if (CAUGHT_and instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_and;
+								}
+								if ((CAUGHT_and == null) || (not == null)) {
+									and_0 = null;
+								}
+								else {
+									and_0 = ValueUtil.TRUE_VALUE;
+								}
+							}
+						}
 						CAUGHT_and_0 = and_0;
 					}
 					catch (Exception e) {
 						CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
 					}
-					/*@Caught*/ @NonNull Object CAUGHT_eq;
-					try {
-						final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature_1 = this.getReferredEStructuralFeature();
-						if (referredEStructuralFeature_1 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::ETypedElement::eType\'");
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (CAUGHT_and_0 == ValueUtil.FALSE_VALUE) {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+						try {
+							final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature_1 = this.getReferredEStructuralFeature();
+							if (referredEStructuralFeature_1 == null) {
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::ETypedElement::eType\'");
+							}
+							final /*@Thrown*/ @Nullable EClassifier eType = referredEStructuralFeature_1.getEType();
+							final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class t1 = (org.eclipse.ocl.pivot.@Nullable Class)OclAnyOclTypeOperation.INSTANCE.evaluate(executor, eType);
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
+							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = target_0.getReferredEClassifier();
+							final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class t2 = (org.eclipse.ocl.pivot.@Nullable Class)OclAnyOclTypeOperation.INSTANCE.evaluate(executor, referredEClassifier);
+							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, t1, t2).booleanValue();
+							CAUGHT_conformsTo = conformsTo;
 						}
-						final /*@Thrown*/ @Nullable EClassifier eType = referredEStructuralFeature_1.getEType();
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
-						final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = target_0.getReferredEClassifier();
-						final /*@Thrown*/ boolean eq = (eType != null) ? eType.equals(referredEClassifier) : (referredEClassifier == null);
-						CAUGHT_eq = eq;
+						catch (Exception e) {
+							CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_conformsTo == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_and_0 instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_and_0;
+							}
+							if (CAUGHT_conformsTo instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_conformsTo;
+							}
+							if (CAUGHT_and_0 == null) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
 					}
-					catch (Exception e) {
-						CAUGHT_eq = ValueUtil.createInvalidValue(e);
-					}
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_eq);
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -654,21 +736,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_MULTIPLICITY__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_MULTIPLICITY__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
@@ -677,10 +749,10 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 				final /*@NonInvalid*/ boolean isMany = source.isIsMany();
 				final /*@NonInvalid*/ boolean result = eq == isMany;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -719,110 +791,167 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EREFERENCE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EREFERENCE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_1;
 			if (le) {
-				symbol_1 = ValueUtil.TRUE_VALUE;
+				symbol_1 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					/*@Caught*/ @Nullable Object CAUGHT_and_0;
 					try {
-						/*@Caught*/ @NonNull Object CAUGHT_and;
+						/*@Caught*/ @Nullable Object CAUGHT_and;
 						try {
-							final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature_0 = this.getReferredEStructuralFeature();
-							final /*@NonInvalid*/ boolean ne = referredEStructuralFeature_0 != null;
-							/*@Thrown*/ boolean and;
-							if (ne) {
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EReference = idResolver.getClass(UMLXTables.CLSSid_EReference, null);
-								final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature_0, TYP_ecore_c_c_EReference).booleanValue();
-								and = oclIsKindOf;
+							final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
+							final /*@NonInvalid*/ boolean ne = referredEStructuralFeature != null;
+							final /*@Thrown*/ @Nullable Boolean and;
+							if (!ne) {
+								and = ValueUtil.FALSE_VALUE;
 							}
 							else {
-								and = ValueUtil.FALSE_VALUE;
+								/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
+								try {
+									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EReference = idResolver.getClass(UMLXTables.CLSSid_EReference, null);
+									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature, TYP_ecore_c_c_EReference).booleanValue();
+									CAUGHT_oclIsKindOf = oclIsKindOf;
+								}
+								catch (Exception e) {
+									CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+								}
+								if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {
+									and = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_oclIsKindOf;
+									}
+									and = ValueUtil.TRUE_VALUE;
+								}
 							}
 							CAUGHT_and = and;
 						}
 						catch (Exception e) {
 							CAUGHT_and = ValueUtil.createInvalidValue(e);
 						}
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull RelPatternNode target = this.getTarget();
-						final /*@NonInvalid*/ boolean isExpression = target.isExpression();
-						final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isExpression);
-						final /*@Thrown*/ @Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and, not);
+						final /*@Thrown*/ @Nullable Boolean and_0;
+						if (CAUGHT_and == ValueUtil.FALSE_VALUE) {
+							and_0 = ValueUtil.FALSE_VALUE;
+						}
+						else {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull RelPatternNode target = this.getTarget();
+							final /*@NonInvalid*/ boolean isExpression = target.isExpression();
+							final /*@NonInvalid*/ @Nullable Boolean not;
+							if (!isExpression) {
+								not = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								if (isExpression) {
+									not = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									not = null;
+								}
+							}
+							if (not == ValueUtil.FALSE_VALUE) {
+								and_0 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								if (CAUGHT_and instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_and;
+								}
+								if ((CAUGHT_and == null) || (not == null)) {
+									and_0 = null;
+								}
+								else {
+									and_0 = ValueUtil.TRUE_VALUE;
+								}
+							}
+						}
 						CAUGHT_and_0 = and_0;
 					}
 					catch (Exception e) {
 						CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
 					}
-					/*@Caught*/ @NonNull Object CAUGHT_includes;
-					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
-						final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = target_0.getReferredEClassifier();
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0);
-						final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, sourceEClass);
-						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
-						final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-						final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
-						/**
-						 * Implementation of the iterator body.
-						 */
-						final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (CAUGHT_and_0 == ValueUtil.FALSE_VALUE) {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						/*@Caught*/ @NonNull Object CAUGHT_includes;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
+							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = target_0.getReferredEClassifier();
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0);
+							final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, sourceEClass);
+							final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
+							final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+							final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
 							/**
-							 * eSuperTypes
+							 * Implementation of the iterator body.
 							 */
-							@Override
-							public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-								final /*@NonInvalid*/ @Nullable EClass symbol_0 = (EClass)_1;
-								if (symbol_0 == null) {
-									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
+							final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+								/**
+								 * eSuperTypes
+								 */
+								@Override
+								public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
+									final /*@NonInvalid*/ @Nullable EClass symbol_0 = (EClass)_1;
+									if (symbol_0 == null) {
+										throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
+									}
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
+									final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
+									return BOXED_eSuperTypes;
 								}
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
-								final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
-								return BOXED_eSuperTypes;
+							};
+							final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
+							final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature_1 = this.getReferredEStructuralFeature();
+							if (referredEStructuralFeature_1 == null) {
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::ETypedElement::eType\'");
 							}
-						};
-						final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
-						final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature_1 = this.getReferredEStructuralFeature();
-						if (referredEStructuralFeature_1 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::ETypedElement::eType\'");
+							final /*@Thrown*/ @Nullable EClassifier eType = referredEStructuralFeature_1.getEType();
+							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(closure, eType).booleanValue();
+							CAUGHT_includes = includes;
 						}
-						final /*@Thrown*/ @Nullable EClassifier eType = referredEStructuralFeature_1.getEType();
-						final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(closure, eType).booleanValue();
-						CAUGHT_includes = includes;
+						catch (Exception e) {
+							CAUGHT_includes = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_includes == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_and_0 instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_and_0;
+							}
+							if (CAUGHT_includes instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_includes;
+							}
+							if (CAUGHT_and_0 == null) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
 					}
-					catch (Exception e) {
-						CAUGHT_includes = ValueUtil.createInvalidValue(e);
-					}
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_includes);
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_1 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_1;
+			return symbol_1;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -857,80 +986,85 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_PROPERTY_SOURCE__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_PROPERTY_SOURCE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_1;
 			if (le) {
-				symbol_1 = ValueUtil.TRUE_VALUE;
+				symbol_1 = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
 					final /*@NonInvalid*/ boolean ne = referredEStructuralFeature != null;
-					/*@Thrown*/ boolean result;
-					if (ne) {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
-						final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull EClass oclAsType = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass);
-						final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
-						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
-						final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-						final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
-						/**
-						 * Implementation of the iterator body.
-						 */
-						final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
-							/**
-							 * eSuperTypes
-							 */
-							@Override
-							public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-								final /*@NonInvalid*/ @Nullable EClass symbol_0 = (EClass)_1;
-								if (symbol_0 == null) {
-									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
-								}
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
-								final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
-								return BOXED_eSuperTypes;
-							}
-						};
-						final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
-						if (referredEStructuralFeature == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EStructuralFeature::eContainingClass\'");
-						}
-						final /*@Thrown*/ @Nullable EClass eContainingClass = referredEStructuralFeature.getEContainingClass();
-						final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(closure, eContainingClass).booleanValue();
-						result = includes;
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (!ne) {
+						result = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						result = ValueUtil.TRUE_VALUE;
+						/*@Caught*/ @NonNull Object CAUGHT_includes;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
+							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull EClass oclAsType = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass);
+							final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
+							final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
+							final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+							final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
+							/**
+							 * Implementation of the iterator body.
+							 */
+							final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+								/**
+								 * eSuperTypes
+								 */
+								@Override
+								public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
+									final /*@NonInvalid*/ @Nullable EClass symbol_0 = (EClass)_1;
+									if (symbol_0 == null) {
+										throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
+									}
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
+									final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
+									return BOXED_eSuperTypes;
+								}
+							};
+							final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
+							if (referredEStructuralFeature == null) {
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EStructuralFeature::eContainingClass\'");
+							}
+							final /*@Thrown*/ @Nullable EClass eContainingClass = referredEStructuralFeature.getEContainingClass();
+							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(closure, eContainingClass).booleanValue();
+							CAUGHT_includes = includes;
+						}
+						catch (Exception e) {
+							CAUGHT_includes = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_includes == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_includes instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_includes;
+							}
+							result = ValueUtil.FALSE_VALUE;
+						}
 					}
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_1 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_1;
+			return symbol_1;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -960,21 +1094,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_INDEX__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_INDEX__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
@@ -983,10 +1107,10 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				final /*@NonInvalid*/ @NonNull IntegerValue BOXED_sourceIndex = ValueUtil.integerValueOf(sourceIndex);
 				final /*@NonInvalid*/ boolean eq = BOXED_sourceIndex.equals(UMLXTables.INT_0);
 				final /*@NonInvalid*/ boolean result = ne == eq;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -1024,146 +1148,262 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_REST_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_REST_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
-					final /*@NonInvalid*/ boolean eq = referredEStructuralFeature == null;
-					/*@NonInvalid*/ boolean and;
-					if (eq) {
-						final /*@NonInvalid*/ int sourceIndex = this.getSourceIndex();
-						final /*@NonInvalid*/ @NonNull IntegerValue BOXED_sourceIndex = ValueUtil.integerValueOf(sourceIndex);
-						final /*@NonInvalid*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(executor, BOXED_sourceIndex, UMLXTables.INT_0).booleanValue();
-						and = lt;
-					}
-					else {
-						and = ValueUtil.FALSE_VALUE;
-					}
-					/*@NonInvalid*/ @Nullable Boolean and_0;
-					if (and) {
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull RelPatternNode target = this.getTarget();
-						final /*@NonInvalid*/ boolean isExpression = target.isExpression();
-						final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isExpression);
-						and_0 = not;
-					}
-					else {
-						and_0 = ValueUtil.FALSE_VALUE;
-					}
-					/*@Caught*/ @Nullable Object CAUGHT_and_4;
+					/*@Caught*/ @Nullable Object CAUGHT_and_0;
 					try {
-						/*@Caught*/ @NonNull Object CAUGHT_sourceEClass;
-						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
-							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0);
-							CAUGHT_sourceEClass = sourceEClass;
+						final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
+						final /*@NonInvalid*/ boolean eq = referredEStructuralFeature == null;
+						final /*@NonInvalid*/ @Nullable Boolean and;
+						if (!eq) {
+							and = ValueUtil.FALSE_VALUE;
 						}
-						catch (Exception e) {
-							CAUGHT_sourceEClass = ValueUtil.createInvalidValue(e);
-						}
-						/*@Caught*/ @NonNull Object CAUGHT_targetEClass;
-						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_1 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
-							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_1);
-							CAUGHT_targetEClass = targetEClass;
-						}
-						catch (Exception e) {
-							CAUGHT_targetEClass = ValueUtil.createInvalidValue(e);
-						}
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull RelPatternNode source_3 = this.getSource();
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull RelPatternNode target_4 = this.getTarget();
-						/*@Caught*/ @Nullable Object CAUGHT_and_3;
-						try {
-							/*@Caught*/ @Nullable Object CAUGHT_and_2;
-							try {
-								/*@Caught*/ @Nullable Object CAUGHT_and_1;
-								try {
-									/*@Caught*/ @NonNull Object CAUGHT_eq_0;
-									try {
-										if (CAUGHT_sourceEClass instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_sourceEClass;
-										}
-										if (CAUGHT_targetEClass instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_targetEClass;
-										}
-										final /*@Thrown*/ boolean eq_0 = CAUGHT_sourceEClass.equals(CAUGHT_targetEClass);
-										CAUGHT_eq_0 = eq_0;
-									}
-									catch (Exception e) {
-										CAUGHT_eq_0 = ValueUtil.createInvalidValue(e);
-									}
-									final /*@NonInvalid*/ boolean isMany = source_3.isIsMany();
-									final /*@NonInvalid*/ boolean isMany_0 = target_4.isIsMany();
-									final /*@NonInvalid*/ boolean eq_1 = isMany == isMany_0;
-									final /*@Thrown*/ @Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_0, eq_1);
-									CAUGHT_and_1 = and_1;
-								}
-								catch (Exception e) {
-									CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
-								}
-								final /*@NonInvalid*/ boolean isNullFree = source_3.isIsNullFree();
-								final /*@NonInvalid*/ boolean isNullFree_0 = target_4.isIsNullFree();
-								final /*@NonInvalid*/ boolean eq_2 = isNullFree == isNullFree_0;
-								final /*@Thrown*/ @Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_1, eq_2);
-								CAUGHT_and_2 = and_2;
+						else {
+							final /*@NonInvalid*/ int sourceIndex = this.getSourceIndex();
+							final /*@NonInvalid*/ @NonNull IntegerValue BOXED_sourceIndex = ValueUtil.integerValueOf(sourceIndex);
+							final /*@NonInvalid*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(executor, BOXED_sourceIndex, UMLXTables.INT_0).booleanValue();
+							if (!lt) {
+								and = ValueUtil.FALSE_VALUE;
 							}
-							catch (Exception e) {
-								CAUGHT_and_2 = ValueUtil.createInvalidValue(e);
+							else {
+								and = ValueUtil.TRUE_VALUE;
 							}
-							final /*@NonInvalid*/ boolean isOrdered = source_3.isIsOrdered();
-							final /*@NonInvalid*/ boolean isOrdered_0 = target_4.isIsOrdered();
-							final /*@NonInvalid*/ boolean eq_3 = isOrdered == isOrdered_0;
-							final /*@Thrown*/ @Nullable Boolean and_3 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_2, eq_3);
-							CAUGHT_and_3 = and_3;
 						}
-						catch (Exception e) {
-							CAUGHT_and_3 = ValueUtil.createInvalidValue(e);
+						final /*@Thrown*/ @Nullable Boolean and_0;
+						if (and == ValueUtil.FALSE_VALUE) {
+							and_0 = ValueUtil.FALSE_VALUE;
 						}
-						final /*@NonInvalid*/ boolean isUnique = source_3.isIsUnique();
-						final /*@NonInvalid*/ boolean isUnique_0 = target_4.isIsUnique();
-						final /*@NonInvalid*/ boolean eq_4 = isUnique == isUnique_0;
-						final /*@Thrown*/ @Nullable Boolean and_4 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_3, eq_4);
-						CAUGHT_and_4 = and_4;
+						else {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull RelPatternNode target = this.getTarget();
+							final /*@NonInvalid*/ boolean isExpression = target.isExpression();
+							final /*@NonInvalid*/ @Nullable Boolean not;
+							if (!isExpression) {
+								not = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								if (isExpression) {
+									not = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									not = null;
+								}
+							}
+							if (not == ValueUtil.FALSE_VALUE) {
+								and_0 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								if ((and == null) || (not == null)) {
+									and_0 = null;
+								}
+								else {
+									and_0 = ValueUtil.TRUE_VALUE;
+								}
+							}
+						}
+						CAUGHT_and_0 = and_0;
 					}
 					catch (Exception e) {
-						CAUGHT_and_4 = ValueUtil.createInvalidValue(e);
+						CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(and_0, CAUGHT_and_4);
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (CAUGHT_and_0 == ValueUtil.FALSE_VALUE) {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						/*@Caught*/ @Nullable Object CAUGHT_and_4;
+						try {
+							/*@Caught*/ @NonNull Object CAUGHT_sourceEClass;
+							try {
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
+								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
+								@SuppressWarnings("null")
+								final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0);
+								CAUGHT_sourceEClass = sourceEClass;
+							}
+							catch (Exception e) {
+								CAUGHT_sourceEClass = ValueUtil.createInvalidValue(e);
+							}
+							/*@Caught*/ @NonNull Object CAUGHT_targetEClass;
+							try {
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_1 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
+								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
+								@SuppressWarnings("null")
+								final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_1);
+								CAUGHT_targetEClass = targetEClass;
+							}
+							catch (Exception e) {
+								CAUGHT_targetEClass = ValueUtil.createInvalidValue(e);
+							}
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull RelPatternNode source_3 = this.getSource();
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull RelPatternNode target_4 = this.getTarget();
+							/*@Caught*/ @Nullable Object CAUGHT_and_3;
+							try {
+								/*@Caught*/ @Nullable Object CAUGHT_and_2;
+								try {
+									/*@Caught*/ @Nullable Object CAUGHT_and_1;
+									try {
+										/*@Caught*/ @NonNull Object CAUGHT_eq_0;
+										try {
+											if (CAUGHT_sourceEClass instanceof InvalidValueException) {
+												throw (InvalidValueException)CAUGHT_sourceEClass;
+											}
+											if (CAUGHT_targetEClass instanceof InvalidValueException) {
+												throw (InvalidValueException)CAUGHT_targetEClass;
+											}
+											final /*@Thrown*/ boolean eq_0 = CAUGHT_sourceEClass.equals(CAUGHT_targetEClass);
+											CAUGHT_eq_0 = eq_0;
+										}
+										catch (Exception e) {
+											CAUGHT_eq_0 = ValueUtil.createInvalidValue(e);
+										}
+										final /*@Thrown*/ @Nullable Boolean and_1;
+										if (CAUGHT_eq_0 == ValueUtil.FALSE_VALUE) {
+											and_1 = ValueUtil.FALSE_VALUE;
+										}
+										else {
+											final /*@NonInvalid*/ boolean isMany = source_3.isIsMany();
+											final /*@NonInvalid*/ boolean isMany_0 = target_4.isIsMany();
+											final /*@NonInvalid*/ boolean eq_1 = isMany == isMany_0;
+											if (!eq_1) {
+												and_1 = ValueUtil.FALSE_VALUE;
+											}
+											else {
+												if (CAUGHT_eq_0 instanceof InvalidValueException) {
+													throw (InvalidValueException)CAUGHT_eq_0;
+												}
+												and_1 = ValueUtil.TRUE_VALUE;
+											}
+										}
+										CAUGHT_and_1 = and_1;
+									}
+									catch (Exception e) {
+										CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
+									}
+									final /*@Thrown*/ @Nullable Boolean and_2;
+									if (CAUGHT_and_1 == ValueUtil.FALSE_VALUE) {
+										and_2 = ValueUtil.FALSE_VALUE;
+									}
+									else {
+										final /*@NonInvalid*/ boolean isNullFree = source_3.isIsNullFree();
+										final /*@NonInvalid*/ boolean isNullFree_0 = target_4.isIsNullFree();
+										final /*@NonInvalid*/ boolean eq_2 = isNullFree == isNullFree_0;
+										if (!eq_2) {
+											and_2 = ValueUtil.FALSE_VALUE;
+										}
+										else {
+											if (CAUGHT_and_1 instanceof InvalidValueException) {
+												throw (InvalidValueException)CAUGHT_and_1;
+											}
+											if (CAUGHT_and_1 == null) {
+												and_2 = null;
+											}
+											else {
+												and_2 = ValueUtil.TRUE_VALUE;
+											}
+										}
+									}
+									CAUGHT_and_2 = and_2;
+								}
+								catch (Exception e) {
+									CAUGHT_and_2 = ValueUtil.createInvalidValue(e);
+								}
+								final /*@Thrown*/ @Nullable Boolean and_3;
+								if (CAUGHT_and_2 == ValueUtil.FALSE_VALUE) {
+									and_3 = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									final /*@NonInvalid*/ boolean isOrdered = source_3.isIsOrdered();
+									final /*@NonInvalid*/ boolean isOrdered_0 = target_4.isIsOrdered();
+									final /*@NonInvalid*/ boolean eq_3 = isOrdered == isOrdered_0;
+									if (!eq_3) {
+										and_3 = ValueUtil.FALSE_VALUE;
+									}
+									else {
+										if (CAUGHT_and_2 instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_and_2;
+										}
+										if (CAUGHT_and_2 == null) {
+											and_3 = null;
+										}
+										else {
+											and_3 = ValueUtil.TRUE_VALUE;
+										}
+									}
+								}
+								CAUGHT_and_3 = and_3;
+							}
+							catch (Exception e) {
+								CAUGHT_and_3 = ValueUtil.createInvalidValue(e);
+							}
+							final /*@Thrown*/ @Nullable Boolean and_4;
+							if (CAUGHT_and_3 == ValueUtil.FALSE_VALUE) {
+								and_4 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								final /*@NonInvalid*/ boolean isUnique = source_3.isIsUnique();
+								final /*@NonInvalid*/ boolean isUnique_0 = target_4.isIsUnique();
+								final /*@NonInvalid*/ boolean eq_4 = isUnique == isUnique_0;
+								if (!eq_4) {
+									and_4 = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									if (CAUGHT_and_3 instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_and_3;
+									}
+									if (CAUGHT_and_3 == null) {
+										and_4 = null;
+									}
+									else {
+										and_4 = ValueUtil.TRUE_VALUE;
+									}
+								}
+							}
+							CAUGHT_and_4 = and_4;
+						}
+						catch (Exception e) {
+							CAUGHT_and_4 = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_and_4 == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_and_0 instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_and_0;
+							}
+							if (CAUGHT_and_4 instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_and_4;
+							}
+							if ((CAUGHT_and_0 == null) || (CAUGHT_and_4 == null)) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
+					}
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_0;
+			return symbol_0;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -1206,172 +1446,234 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
-			try {
-				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_MEMBER_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
-				CAUGHT_severity_0 = severity_0;
-			}
-			catch (Exception e) {
-				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
-			}
-			if (CAUGHT_severity_0 instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_severity_0;
-			}
-			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_MEMBER_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
-				symbol_2 = ValueUtil.TRUE_VALUE;
+				symbol_2 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
-					final /*@NonInvalid*/ boolean eq = referredEStructuralFeature == null;
-					/*@NonInvalid*/ boolean and;
-					if (eq) {
-						final /*@NonInvalid*/ int sourceIndex = this.getSourceIndex();
-						final /*@NonInvalid*/ @NonNull IntegerValue BOXED_sourceIndex = ValueUtil.integerValueOf(sourceIndex);
-						final /*@NonInvalid*/ boolean gt = OclComparableGreaterThanOperation.INSTANCE.evaluate(executor, BOXED_sourceIndex, UMLXTables.INT_0).booleanValue();
-						and = gt;
-					}
-					else {
-						and = ValueUtil.FALSE_VALUE;
-					}
-					/*@NonInvalid*/ @Nullable Boolean and_0;
-					if (and) {
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull RelPatternNode target = this.getTarget();
-						final /*@NonInvalid*/ boolean isExpression = target.isExpression();
-						final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isExpression);
-						and_0 = not;
-					}
-					else {
-						and_0 = ValueUtil.FALSE_VALUE;
-					}
-					/*@Caught*/ @Nullable Object CAUGHT_or;
+					/*@Caught*/ @Nullable Object CAUGHT_and_0;
 					try {
-						/*@Caught*/ @NonNull Object CAUGHT_sourceEClass;
-						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
-							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0);
-							CAUGHT_sourceEClass = sourceEClass;
+						final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
+						final /*@NonInvalid*/ boolean eq = referredEStructuralFeature == null;
+						final /*@NonInvalid*/ @Nullable Boolean and;
+						if (!eq) {
+							and = ValueUtil.FALSE_VALUE;
 						}
-						catch (Exception e) {
-							CAUGHT_sourceEClass = ValueUtil.createInvalidValue(e);
-						}
-						/*@Caught*/ @NonNull Object CAUGHT_targetEClass;
-						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_1 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
-							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_1);
-							CAUGHT_targetEClass = targetEClass;
-						}
-						catch (Exception e) {
-							CAUGHT_targetEClass = ValueUtil.createInvalidValue(e);
-						}
-						/*@Caught*/ @NonNull Object CAUGHT_includes;
-						try {
-							if (CAUGHT_sourceEClass instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_sourceEClass;
+						else {
+							final /*@NonInvalid*/ int sourceIndex = this.getSourceIndex();
+							final /*@NonInvalid*/ @NonNull IntegerValue BOXED_sourceIndex = ValueUtil.integerValueOf(sourceIndex);
+							final /*@NonInvalid*/ boolean gt = OclComparableGreaterThanOperation.INSTANCE.evaluate(executor, BOXED_sourceIndex, UMLXTables.INT_0).booleanValue();
+							if (!gt) {
+								and = ValueUtil.FALSE_VALUE;
 							}
-							final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, CAUGHT_sourceEClass);
-							final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_1 = executor.getStaticTypeOfValue(null, oclAsSet);
-							final @NonNull LibraryIterationExtension IMPL_closure_1 = (LibraryIterationExtension)TYPE_closure_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-							final @NonNull Object ACC_closure_1 = IMPL_closure_1.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
-							/**
-							 * Implementation of the iterator body.
-							 */
-							final @NonNull AbstractBinaryOperation BODY_closure_1 = new AbstractBinaryOperation() {
-								/**
-								 * eSuperTypes
-								 */
-								@Override
-								public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-									final /*@NonInvalid*/ @Nullable EClass symbol_0 = (EClass)_1;
-									if (symbol_0 == null) {
-										throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
-									}
-									@SuppressWarnings("null")
-									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
-									final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
-									return BOXED_eSuperTypes;
+							else {
+								and = ValueUtil.TRUE_VALUE;
+							}
+						}
+						final /*@Thrown*/ @Nullable Boolean and_0;
+						if (and == ValueUtil.FALSE_VALUE) {
+							and_0 = ValueUtil.FALSE_VALUE;
+						}
+						else {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull RelPatternNode target = this.getTarget();
+							final /*@NonInvalid*/ boolean isExpression = target.isExpression();
+							final /*@NonInvalid*/ @Nullable Boolean not;
+							if (!isExpression) {
+								not = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								if (isExpression) {
+									not = ValueUtil.FALSE_VALUE;
 								}
-							};
-							final @NonNull ExecutorSingleIterationManager MGR_closure_1 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_1, oclAsSet, ACC_closure_1);
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_1.evaluateIteration(MGR_closure_1);
-							if (CAUGHT_targetEClass instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_targetEClass;
-							}
-							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(closure, CAUGHT_targetEClass).booleanValue();
-							CAUGHT_includes = includes;
-						}
-						catch (Exception e) {
-							CAUGHT_includes = ValueUtil.createInvalidValue(e);
-						}
-						/*@Caught*/ @NonNull Object CAUGHT_includes_0;
-						try {
-							if (CAUGHT_targetEClass instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_targetEClass;
-							}
-							final /*@Thrown*/ @NonNull SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, CAUGHT_targetEClass);
-							final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0_0 = executor.getStaticTypeOfValue(null, oclAsSet_0);
-							final @NonNull LibraryIterationExtension IMPL_closure_0_0 = (LibraryIterationExtension)TYPE_closure_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-							final @NonNull Object ACC_closure_0_0 = IMPL_closure_0_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
-							/**
-							 * Implementation of the iterator body.
-							 */
-							final @NonNull AbstractBinaryOperation BODY_closure_0_0 = new AbstractBinaryOperation() {
-								/**
-								 * eSuperTypes
-								 */
-								@Override
-								public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet_0, final /*@NonInvalid*/ @Nullable Object _1_0) {
-									final /*@NonInvalid*/ @Nullable EClass symbol_1 = (EClass)_1_0;
-									if (symbol_1 == null) {
-										throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
-									}
-									@SuppressWarnings("null")
-									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes_0 = symbol_1.getESuperTypes();
-									final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes_0 = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes_0);
-									return BOXED_eSuperTypes_0;
+								else {
+									not = null;
 								}
-							};
-							final @NonNull ExecutorSingleIterationManager MGR_closure_0_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0_0, oclAsSet_0, ACC_closure_0_0);
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull SetValue closure_0 = (@NonNull SetValue)IMPL_closure_0_0.evaluateIteration(MGR_closure_0_0);
-							if (CAUGHT_sourceEClass instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_sourceEClass;
 							}
-							final /*@Thrown*/ boolean includes_0 = CollectionIncludesOperation.INSTANCE.evaluate(closure_0, CAUGHT_sourceEClass).booleanValue();
-							CAUGHT_includes_0 = includes_0;
+							if (not == ValueUtil.FALSE_VALUE) {
+								and_0 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								if ((and == null) || (not == null)) {
+									and_0 = null;
+								}
+								else {
+									and_0 = ValueUtil.TRUE_VALUE;
+								}
+							}
 						}
-						catch (Exception e) {
-							CAUGHT_includes_0 = ValueUtil.createInvalidValue(e);
-						}
-						final /*@Thrown*/ @Nullable Boolean or = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_includes, CAUGHT_includes_0);
-						CAUGHT_or = or;
+						CAUGHT_and_0 = and_0;
 					}
 					catch (Exception e) {
-						CAUGHT_or = ValueUtil.createInvalidValue(e);
+						CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(and_0, CAUGHT_or);
+					final /*@Thrown*/ @Nullable Boolean result;
+					if (CAUGHT_and_0 == ValueUtil.FALSE_VALUE) {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						/*@Caught*/ @Nullable Object CAUGHT_or;
+						try {
+							/*@Caught*/ @NonNull Object CAUGHT_sourceEClass;
+							try {
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
+								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
+								@SuppressWarnings("null")
+								final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0);
+								CAUGHT_sourceEClass = sourceEClass;
+							}
+							catch (Exception e) {
+								CAUGHT_sourceEClass = ValueUtil.createInvalidValue(e);
+							}
+							/*@Caught*/ @NonNull Object CAUGHT_targetEClass;
+							try {
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_1 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
+								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
+								@SuppressWarnings("null")
+								final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_1);
+								CAUGHT_targetEClass = targetEClass;
+							}
+							catch (Exception e) {
+								CAUGHT_targetEClass = ValueUtil.createInvalidValue(e);
+							}
+							/*@Caught*/ @NonNull Object CAUGHT_includes;
+							try {
+								if (CAUGHT_sourceEClass instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_sourceEClass;
+								}
+								final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, CAUGHT_sourceEClass);
+								final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_1 = executor.getStaticTypeOfValue(null, oclAsSet);
+								final @NonNull LibraryIterationExtension IMPL_closure_1 = (LibraryIterationExtension)TYPE_closure_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+								final @NonNull Object ACC_closure_1 = IMPL_closure_1.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
+								/**
+								 * Implementation of the iterator body.
+								 */
+								final @NonNull AbstractBinaryOperation BODY_closure_1 = new AbstractBinaryOperation() {
+									/**
+									 * eSuperTypes
+									 */
+									@Override
+									public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
+										final /*@NonInvalid*/ @Nullable EClass symbol_0 = (EClass)_1;
+										if (symbol_0 == null) {
+											throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
+										}
+										@SuppressWarnings("null")
+										final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
+										final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
+										return BOXED_eSuperTypes;
+									}
+								};
+								final @NonNull ExecutorSingleIterationManager MGR_closure_1 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_1, oclAsSet, ACC_closure_1);
+								@SuppressWarnings("null")
+								final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_1.evaluateIteration(MGR_closure_1);
+								if (CAUGHT_targetEClass instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_targetEClass;
+								}
+								final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(closure, CAUGHT_targetEClass).booleanValue();
+								CAUGHT_includes = includes;
+							}
+							catch (Exception e) {
+								CAUGHT_includes = ValueUtil.createInvalidValue(e);
+							}
+							final /*@Thrown*/ @Nullable Boolean or;
+							if (CAUGHT_includes == ValueUtil.TRUE_VALUE) {
+								or = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								/*@Caught*/ @NonNull Object CAUGHT_includes_0;
+								try {
+									if (CAUGHT_targetEClass instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_targetEClass;
+									}
+									final /*@Thrown*/ @NonNull SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, CAUGHT_targetEClass);
+									final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0_0 = executor.getStaticTypeOfValue(null, oclAsSet_0);
+									final @NonNull LibraryIterationExtension IMPL_closure_0_0 = (LibraryIterationExtension)TYPE_closure_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+									final @NonNull Object ACC_closure_0_0 = IMPL_closure_0_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
+									/**
+									 * Implementation of the iterator body.
+									 */
+									final @NonNull AbstractBinaryOperation BODY_closure_0_0 = new AbstractBinaryOperation() {
+										/**
+										 * eSuperTypes
+										 */
+										@Override
+										public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet_0, final /*@NonInvalid*/ @Nullable Object _1_0) {
+											final /*@NonInvalid*/ @Nullable EClass symbol_1 = (EClass)_1_0;
+											if (symbol_1 == null) {
+												throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
+											}
+											@SuppressWarnings("null")
+											final /*@Thrown*/ @NonNull List<EClass> eSuperTypes_0 = symbol_1.getESuperTypes();
+											final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes_0 = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes_0);
+											return BOXED_eSuperTypes_0;
+										}
+									};
+									final @NonNull ExecutorSingleIterationManager MGR_closure_0_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0_0, oclAsSet_0, ACC_closure_0_0);
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull SetValue closure_0 = (@NonNull SetValue)IMPL_closure_0_0.evaluateIteration(MGR_closure_0_0);
+									if (CAUGHT_sourceEClass instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_sourceEClass;
+									}
+									final /*@Thrown*/ boolean includes_0 = CollectionIncludesOperation.INSTANCE.evaluate(closure_0, CAUGHT_sourceEClass).booleanValue();
+									CAUGHT_includes_0 = includes_0;
+								}
+								catch (Exception e) {
+									CAUGHT_includes_0 = ValueUtil.createInvalidValue(e);
+								}
+								if (CAUGHT_includes_0 == ValueUtil.TRUE_VALUE) {
+									or = ValueUtil.TRUE_VALUE;
+								}
+								else {
+									if (CAUGHT_includes instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_includes;
+									}
+									if (CAUGHT_includes_0 instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_includes_0;
+									}
+									or = ValueUtil.FALSE_VALUE;
+								}
+							}
+							CAUGHT_or = or;
+						}
+						catch (Exception e) {
+							CAUGHT_or = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_or == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_and_0 instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_and_0;
+							}
+							if (CAUGHT_or instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_or;
+							}
+							if ((CAUGHT_and_0 == null) || (CAUGHT_or == null)) {
+								result = null;
+							}
+							else {
+								result = ValueUtil.FALSE_VALUE;
+							}
+						}
+					}
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
-			return Boolean.TRUE == symbol_2;
+			return symbol_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

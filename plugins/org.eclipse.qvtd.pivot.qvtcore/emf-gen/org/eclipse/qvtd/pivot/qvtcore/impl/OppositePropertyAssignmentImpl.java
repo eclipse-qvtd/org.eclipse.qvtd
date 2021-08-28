@@ -223,7 +223,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
-				symbol_2 = ValueUtil.TRUE_VALUE;
+				symbol_2 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -397,7 +397,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
-				symbol_2 = ValueUtil.TRUE_VALUE;
+				symbol_2 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -567,7 +567,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -612,7 +612,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;

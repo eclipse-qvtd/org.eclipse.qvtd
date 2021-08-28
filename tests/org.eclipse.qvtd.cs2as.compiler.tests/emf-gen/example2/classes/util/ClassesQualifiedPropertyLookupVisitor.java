@@ -13,8 +13,6 @@ import example2.classes.ClassesPackage;
 import example2.classes.Property;
 import example2.classes.lookup.EnvironmentPackage;
 import example2.classes.lookup.LookupEnvironment;
-import example2.classes.util.AbstractClassesCommonLookupVisitor;
-import example2.classes.util.Visitable;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.TypedElement;

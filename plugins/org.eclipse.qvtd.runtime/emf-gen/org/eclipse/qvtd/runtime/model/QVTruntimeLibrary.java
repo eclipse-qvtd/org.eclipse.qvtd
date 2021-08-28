@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2019 Willink Transformations and others.
+ * Copyright (c) 2010, 2021 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -29,12 +29,14 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.*;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.Package;
@@ -87,6 +89,17 @@ public class QVTruntimeLibrary extends ASResourceImpl
 	public static final @NonNull URI STDLIB_AS_URI = URI.createURI("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary" + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
 
 	/**
+	 * Return the default http://www.eclipse.org/qvt/2019/QVTruntimeLibrary standard Library Resource
+	 * if it jas been created, or null if not.
+	 *  This static definition auto-generated from /org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.oclstdlib
+	 *  is used as the default when no overriding copy is registered.
+	 * It cannot be unloaded or rather unloading has no effect.
+	 */
+	public static @Nullable QVTruntimeLibrary basicGetDefault() {
+		return INSTANCE;
+	}
+
+	/**
 	 * Return the default http://www.eclipse.org/qvt/2019/QVTruntimeLibrary standard Library Resource.
 	 *  This static definition auto-generated from /org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.oclstdlib
 	 *  is used as the default when no overriding copy is registered.
@@ -121,6 +134,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 	 * extension when running within Eclipse.
 	 */
 	public static void install() {
+		EPackage.Registry.INSTANCE.put(OCLstdlibPackage.eNS_URI, OCLstdlibPackage.eINSTANCE);
 		Loader contribution = new Loader();
 		StandardLibraryContribution.REGISTRY.put(STDLIB_URI, contribution);
 		OCLASResourceFactory.REGISTRY.put(STDLIB_AS_URI, contribution);
@@ -499,6 +513,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("type", tp_PseudoOperations_type_V, false));
 		}
+		
 		
 		private final @NonNull Property pr_OclElement_extent_elements = createProperty("extent", _Extent);
 		

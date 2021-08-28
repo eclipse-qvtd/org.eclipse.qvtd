@@ -295,11 +295,11 @@ public class QVTruntimeLibraryPackage extends EPackageImpl {
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName"; //$NON-NLS-1$
 		addAnnotation
-		(getExtent_Elements(),
-			source,
-			new String[] {
-				"body", "extent" //$NON-NLS-1$ //$NON-NLS-2$
-		});
+		  (getExtent_Elements(),
+		   source,
+		   new String[] {
+			   "body", "extent" //$NON-NLS-1$ //$NON-NLS-2$
+		   });
 	}
 
 	/**

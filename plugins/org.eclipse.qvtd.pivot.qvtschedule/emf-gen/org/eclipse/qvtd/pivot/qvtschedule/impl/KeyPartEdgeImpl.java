@@ -143,7 +143,7 @@ public class KeyPartEdgeImpl extends NavigationEdgeImpl implements KeyPartEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 13:
 				if (resolve) return getReferredPart();
-			return basicGetReferredPart();
+				return basicGetReferredPart();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,7 +158,7 @@ public class KeyPartEdgeImpl extends NavigationEdgeImpl implements KeyPartEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 13:
 				setReferredPart((PropertyDatum)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -173,7 +173,7 @@ public class KeyPartEdgeImpl extends NavigationEdgeImpl implements KeyPartEdge {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 13:
 				setReferredPart((PropertyDatum)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

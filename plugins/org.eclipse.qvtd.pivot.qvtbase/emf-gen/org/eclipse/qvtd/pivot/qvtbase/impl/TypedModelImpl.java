@@ -439,7 +439,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_3;
 			if (le) {
-				symbol_3 = ValueUtil.TRUE_VALUE;
+				symbol_3 = true;
 			}
 			else {
 				final /*@NonInvalid*/ boolean isPrimitive = this.isIsPrimitive();

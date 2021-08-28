@@ -358,7 +358,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningClassDatum((ClassDatum)otherEnd, msgs);
+				return basicSetOwningClassDatum((ClassDatum)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -401,19 +401,19 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getOpposite();
-			return basicGetOpposite();
+				return basicGetOpposite();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwningClassDatum();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getReferredProperty();
-			return basicGetReferredProperty();
+				return basicGetReferredProperty();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getSuperPropertyDatums();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return isKey();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getTargetClassDatum();
-			return basicGetTargetClassDatum();
+				return basicGetTargetClassDatum();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -429,23 +429,23 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setOpposite((PropertyDatum)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningClassDatum((ClassDatum)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setReferredProperty((Property)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getSuperPropertyDatums().clear();
-			getSuperPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
-			return;
+				getSuperPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setKey((Boolean)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setTargetClassDatum((ClassDatum)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -460,22 +460,22 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setOpposite((PropertyDatum)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningClassDatum((ClassDatum)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setReferredProperty((Property)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getSuperPropertyDatums().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setKey(KEY_EDEFAULT);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setTargetClassDatum((ClassDatum)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

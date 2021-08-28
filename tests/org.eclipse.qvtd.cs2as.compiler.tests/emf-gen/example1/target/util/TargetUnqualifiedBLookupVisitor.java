@@ -14,8 +14,6 @@ import example1.target.B;
 import example1.target.TargetPackage;
 import example1.target.lookup.EnvironmentPackage;
 import example1.target.lookup.LookupEnvironment;
-import example1.target.util.AbstractTargetCommonLookupVisitor;
-import example1.target.util.Visitable;
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
@@ -37,6 +35,7 @@ import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 
 public class TargetUnqualifiedBLookupVisitor
@@ -115,8 +114,17 @@ public class TargetUnqualifiedBLookupVisitor
 					/**
 					 * _'<' : Boolean[1]
 					 */
-					final /*@Thrown*/ @NonNull IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownsB, x);
-					final /*@Thrown*/ @NonNull IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownsB, child_0);
+					final /*@NonInvalid*/ @Nullable IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownsB, x);
+					if (indexOf == null) {
+						throw new InvalidValueException("Null \'\'OclComparable\'\' rather than \'\'OclVoid\'\' value required");
+					}
+					final /*@Thrown*/ @Nullable IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownsB, child_0);
+					if (indexOf_0 == null) {
+						throw new InvalidValueException("Null \'\'OclSelf\'\' rather than \'\'OclVoid\'\' value required");
+					}
+					if (indexOf_0 instanceof InvalidValueException) {
+						throw (InvalidValueException)indexOf_0;
+					}
 					final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(executor, indexOf, indexOf_0).booleanValue();
 					//
 					if (lt == ValueUtil.TRUE_VALUE) {

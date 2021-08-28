@@ -2259,7 +2259,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		  (getRelPatternEdge__ValidateCompatibleEAttributePropertyTarget__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\t\t\treferredEStructuralFeature <> null and\n\t\t\treferredEStructuralFeature.oclIsKindOf(ecore::EAttribute) and\n\t\t\tnot target.isExpression() implies\n\t\t\treferredEStructuralFeature.eType = target.referredEClassifier"
+			   "body", "\n\t\t\treferredEStructuralFeature <> null and\n\t\t\treferredEStructuralFeature.oclIsKindOf(ecore::EAttribute) and\n\t\t\tnot target.isExpression() implies\n\t\t\tlet t1 = referredEStructuralFeature.eType.oclType() in\n\t\t\tlet t2 = target.referredEClassifier.oclType() in\n\t\t\tt1.conformsTo(t2)"
 		   });
 		addAnnotation
 		  (getRelPatternEdge__ValidateCompatibleSourceMultiplicity__DiagnosticChain_Map(),

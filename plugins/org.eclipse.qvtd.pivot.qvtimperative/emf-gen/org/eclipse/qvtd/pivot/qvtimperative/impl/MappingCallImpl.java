@@ -403,7 +403,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
-				symbol_2 = ValueUtil.TRUE_VALUE;
+				symbol_2 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
@@ -475,7 +475,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -550,7 +550,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
-				symbol_0 = ValueUtil.TRUE_VALUE;
+				symbol_0 = true;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -561,7 +561,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				/*@NonInvalid*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
-						result = ValueUtil.TRUE_VALUE;
+						result = true;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -573,8 +573,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 					final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = _1.getBoundVariable();
 					//
 					if (accumulator.includes(boundVariable) == ValueUtil.TRUE_VALUE) {
-						result = ValueUtil.FALSE_VALUE;			// Abort after second find
-						break;
+						result = false;
+						break;			// Abort after second find
 					}
 					else {
 						accumulator.add(boundVariable);

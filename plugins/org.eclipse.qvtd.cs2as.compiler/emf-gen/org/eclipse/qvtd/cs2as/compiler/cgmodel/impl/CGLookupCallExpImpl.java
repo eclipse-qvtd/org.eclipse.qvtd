@@ -65,7 +65,12 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((CS2ASCGModelVisitor<?>)visitor).visitCGLookupCallExp(this);
+		if (visitor instanceof CS2ASCGModelVisitor) {
+			return (R) ((CS2ASCGModelVisitor<?>)visitor).visitCGLookupCallExp(this);
+		}
+		else {
+			return super.accept(visitor);
+		}
 	}
 
 	/**

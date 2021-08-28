@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2019 Willink Transformations and others.
+ * Copyright (c) 2010, 2021 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -29,12 +29,14 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.*;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.Package;
@@ -85,6 +87,17 @@ public class QVTimperativeLibrary extends ASResourceImpl
 	public static final @NonNull URI STDLIB_AS_URI = URI.createURI("http://www.eclipse.org/qvt/2016/QVTimperativeLibrary" + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
 
 	/**
+	 * Return the default http://www.eclipse.org/qvt/2016/QVTimperativeLibrary standard Library Resource
+	 * if it jas been created, or null if not.
+	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.oclstdlib
+	 *  is used as the default when no overriding copy is registered.
+	 * It cannot be unloaded or rather unloading has no effect.
+	 */
+	public static @Nullable QVTimperativeLibrary basicGetDefault() {
+		return INSTANCE;
+	}
+
+	/**
 	 * Return the default http://www.eclipse.org/qvt/2016/QVTimperativeLibrary standard Library Resource.
 	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.oclstdlib
 	 *  is used as the default when no overriding copy is registered.
@@ -119,6 +132,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 	 * extension when running within Eclipse.
 	 */
 	public static void install() {
+		EPackage.Registry.INSTANCE.put(OCLstdlibPackage.eNS_URI, OCLstdlibPackage.eINSTANCE);
 		Loader contribution = new Loader();
 		StandardLibraryContribution.REGISTRY.put(STDLIB_URI, contribution);
 		OCLASResourceFactory.REGISTRY.put(STDLIB_AS_URI, contribution);
@@ -361,11 +375,11 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			ownedOperations.add(operation = op_Model_allObjects);
 			ownedOperations.add(operation = op_Model_objectsOfKind);
 			ownedParameters = operation.getOwnedParameters();
-			ownedParameters.add(parameter = createParameter("type", tp_Model_objectsOfKind_TT, false));
+			ownedParameters.add(parameter = createParameter("type", tp_Model_objectsOfKind_TT, true));
 			parameter.setIsTypeof(true);
 			ownedOperations.add(operation = op_Model_objectsOfType);
 			ownedParameters = operation.getOwnedParameters();
-			ownedParameters.add(parameter = createParameter("type", tp_Model_objectsOfType_TT, false));
+			ownedParameters.add(parameter = createParameter("type", tp_Model_objectsOfType_TT, true));
 			parameter.setIsTypeof(true);
 			ownedOperations.add(operation = op_Model_rootObjects);
 		}
