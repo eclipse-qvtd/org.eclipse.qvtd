@@ -188,7 +188,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
 		final /*@NonInvalid*/ @NonNull CollectionValue BOXED_elements = idResolver.createCollectionOfAll(EnvironmentTables.COL_TMPLid_, elements);
 		final /*@NonInvalid*/ @NonNull OrderedSetValue includingAll = (@Nullable OrderedSetValue)CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements, BOXED_elements);
-		final @NonNull List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, NamedElement.class);
+		final @NonNull List<@NonNull NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, NamedElement.class);
 		assert UNBOXED_includingAll != null;
 		CTORid_namedElements.initValue(symbol_0, UNBOXED_includingAll);
 		final /*@NonInvalid*/ @Nullable LookupEnvironment parentEnv = this.getParentEnv();
@@ -219,7 +219,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		final /*@NonInvalid*/ @NonNull List<NamedElement> namedElements = this.getNamedElements();
 		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
 		final /*@Thrown*/ @NonNull OrderedSetValue including = (@Nullable OrderedSetValue)CollectionIncludingOperation.INSTANCE.evaluate(BOXED_namedElements, element);
-		final @NonNull List<NamedElement> UNBOXED_including = including.asEcoreObjects(idResolver, NamedElement.class);
+		final @NonNull List<@NonNull NamedElement> UNBOXED_including = including.asEcoreObjects(idResolver, NamedElement.class);
 		assert UNBOXED_including != null;
 		CTORid_namedElements.initValue(symbol_0, UNBOXED_including);
 		final /*@NonInvalid*/ @Nullable LookupEnvironment parentEnv = this.getParentEnv();
