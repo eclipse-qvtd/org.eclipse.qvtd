@@ -68,11 +68,11 @@ public class EvaluationStatusFactoryImpl extends EFactoryImpl implements Evaluat
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case EvaluationStatusPackage.ASSOCIATION_STATUS: return createAssociationStatus();
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS: return createAttributeStatus();
-			case EvaluationStatusPackage.CLASS_STATUS: return createClassStatus();
-			case EvaluationStatusPackage.MAPPING_STATUS: return createMappingStatus();
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS: return createTransformationStatus();
+			case 0: return createAssociationStatus();
+			case 1: return createAttributeStatus();
+			case 2: return createClassStatus();
+			case 5: return createMappingStatus();
+			case 7: return createTransformationStatus();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

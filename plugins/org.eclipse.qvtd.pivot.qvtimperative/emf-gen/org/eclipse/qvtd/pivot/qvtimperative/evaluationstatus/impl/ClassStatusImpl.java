@@ -53,6 +53,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStat
  */
 public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	/**
+	 * The number of structural features of the '<em>Class Status</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_STATUS_FEATURE_COUNT = ElementStatusImpl.ELEMENT_STATUS_FEATURE_COUNT + 7;
+
+	/**
 	 * The cached value of the '{@link #getAssociationStatuses() <em>Association Statuses</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,7 +168,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	@Override
 	public EList<AssociationStatus> getAssociationStatuses() {
 		if (associationStatuses == null) {
-			associationStatuses = new EObjectResolvingEList<AssociationStatus>(AssociationStatus.class, this, EvaluationStatusPackage.CLASS_STATUS__ASSOCIATION_STATUSES);
+			associationStatuses = new EObjectResolvingEList<AssociationStatus>(AssociationStatus.class, this, 3);
 		}
 		return associationStatuses;
 	}
@@ -176,7 +185,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 			eObject = eResolveProxy(oldEObject);
 			if (eObject != oldEObject) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EvaluationStatusPackage.CLASS_STATUS__EOBJECT, oldEObject, eObject));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 4, oldEObject, eObject));
 			}
 		}
 		return eObject;
@@ -201,7 +210,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 		EObject oldEObject = eObject;
 		eObject = newEObject;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.CLASS_STATUS__EOBJECT, oldEObject, eObject));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldEObject, eObject));
 	}
 
 	/**
@@ -224,7 +233,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 		boolean oldIsInput = isInput;
 		isInput = newIsInput;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.CLASS_STATUS__IS_INPUT, oldIsInput, isInput));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldIsInput, isInput));
 	}
 
 	/**
@@ -247,7 +256,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 		boolean oldIsOutput = isOutput;
 		isOutput = newIsOutput;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.CLASS_STATUS__IS_OUTPUT, oldIsOutput, isOutput));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, oldIsOutput, isOutput));
 	}
 
 	/**
@@ -258,7 +267,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	@Override
 	public EList<AttributeStatus> getOwnedAttributeStatuses() {
 		if (ownedAttributeStatuses == null) {
-			ownedAttributeStatuses = new EObjectContainmentWithInverseEList<AttributeStatus>(AttributeStatus.class, this, EvaluationStatusPackage.CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES, EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS);
+			ownedAttributeStatuses = new EObjectContainmentWithInverseEList<AttributeStatus>(AttributeStatus.class, this, 7, 10);
 		}
 		return ownedAttributeStatuses;
 	}
@@ -270,7 +279,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	 */
 	@Override
 	public TransformationStatus getOwningTransformationStatus() {
-		if (eContainerFeatureID() != EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS) return null;
+		if (eContainerFeatureID() != (8)) return null;
 		return (TransformationStatus)eInternalContainer();
 	}
 
@@ -280,7 +289,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTransformationStatus(TransformationStatus newOwningTransformationStatus, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTransformationStatus, EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTransformationStatus, 8, msgs);
 		return msgs;
 	}
 
@@ -291,19 +300,19 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	 */
 	@Override
 	public void setOwningTransformationStatus(TransformationStatus newOwningTransformationStatus) {
-		if (newOwningTransformationStatus != eInternalContainer() || (eContainerFeatureID() != EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS && newOwningTransformationStatus != null)) {
+		if (newOwningTransformationStatus != eInternalContainer() || (eContainerFeatureID() != (8) && newOwningTransformationStatus != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTransformationStatus))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTransformationStatus != null)
-				msgs = ((InternalEObject)newOwningTransformationStatus).eInverseAdd(this, EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES, TransformationStatus.class, msgs);
+				msgs = ((InternalEObject)newOwningTransformationStatus).eInverseAdd(this, 1, TransformationStatus.class, msgs);
 			msgs = basicSetOwningTransformationStatus(newOwningTransformationStatus, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS, newOwningTransformationStatus, newOwningTransformationStatus));
+			eNotify(new ENotificationImpl(this, Notification.SET, 8, newOwningTransformationStatus, newOwningTransformationStatus));
 	}
 
 	/**
@@ -318,7 +327,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 			type = (Type)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EvaluationStatusPackage.CLASS_STATUS__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 9, oldType, type));
 			}
 		}
 		return type;
@@ -343,13 +352,13 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 		Type oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.CLASS_STATUS__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, 9, oldType, type));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
@@ -365,9 +374,9 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES:
+			case 7:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedAttributeStatuses()).basicAdd(otherEnd, msgs);
-			case EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 8:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTransformationStatus((TransformationStatus)otherEnd, msgs);
@@ -383,9 +392,9 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES:
+			case 7:
 				return ((InternalEList<?>)getOwnedAttributeStatuses()).basicRemove(otherEnd, msgs);
-			case EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 8:
 				return basicSetOwningTransformationStatus(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -399,8 +408,8 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS:
-				return eInternalContainer().eInverseRemove(this, EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES, TransformationStatus.class, msgs);
+			case 8:
+				return eInternalContainer().eInverseRemove(this, 1, TransformationStatus.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -413,20 +422,20 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EvaluationStatusPackage.CLASS_STATUS__ASSOCIATION_STATUSES:
+			case 3:
 				return getAssociationStatuses();
-			case EvaluationStatusPackage.CLASS_STATUS__EOBJECT:
+			case 4:
 				if (resolve) return getEObject();
 				return basicGetEObject();
-			case EvaluationStatusPackage.CLASS_STATUS__IS_INPUT:
+			case 5:
 				return isIsInput();
-			case EvaluationStatusPackage.CLASS_STATUS__IS_OUTPUT:
+			case 6:
 				return isIsOutput();
-			case EvaluationStatusPackage.CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES:
+			case 7:
 				return getOwnedAttributeStatuses();
-			case EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 8:
 				return getOwningTransformationStatus();
-			case EvaluationStatusPackage.CLASS_STATUS__TYPE:
+			case 9:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -442,27 +451,27 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EvaluationStatusPackage.CLASS_STATUS__ASSOCIATION_STATUSES:
+			case 3:
 				getAssociationStatuses().clear();
 				getAssociationStatuses().addAll((Collection<? extends AssociationStatus>)newValue);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__EOBJECT:
+			case 4:
 				setEObject((EObject)newValue);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__IS_INPUT:
+			case 5:
 				setIsInput((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__IS_OUTPUT:
+			case 6:
 				setIsOutput((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES:
+			case 7:
 				getOwnedAttributeStatuses().clear();
 				getOwnedAttributeStatuses().addAll((Collection<? extends AttributeStatus>)newValue);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 8:
 				setOwningTransformationStatus((TransformationStatus)newValue);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__TYPE:
+			case 9:
 				setType((Type)newValue);
 				return;
 		}
@@ -477,25 +486,25 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.CLASS_STATUS__ASSOCIATION_STATUSES:
+			case 3:
 				getAssociationStatuses().clear();
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__EOBJECT:
+			case 4:
 				setEObject((EObject)null);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__IS_INPUT:
+			case 5:
 				setIsInput(IS_INPUT_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__IS_OUTPUT:
+			case 6:
 				setIsOutput(IS_OUTPUT_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES:
+			case 7:
 				getOwnedAttributeStatuses().clear();
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 8:
 				setOwningTransformationStatus((TransformationStatus)null);
 				return;
-			case EvaluationStatusPackage.CLASS_STATUS__TYPE:
+			case 9:
 				setType((Type)null);
 				return;
 		}
@@ -510,19 +519,19 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.CLASS_STATUS__ASSOCIATION_STATUSES:
+			case 3:
 				return associationStatuses != null && !associationStatuses.isEmpty();
-			case EvaluationStatusPackage.CLASS_STATUS__EOBJECT:
+			case 4:
 				return eObject != null;
-			case EvaluationStatusPackage.CLASS_STATUS__IS_INPUT:
+			case 5:
 				return isInput != IS_INPUT_EDEFAULT;
-			case EvaluationStatusPackage.CLASS_STATUS__IS_OUTPUT:
+			case 6:
 				return isOutput != IS_OUTPUT_EDEFAULT;
-			case EvaluationStatusPackage.CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES:
+			case 7:
 				return ownedAttributeStatuses != null && !ownedAttributeStatuses.isEmpty();
-			case EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 8:
 				return getOwningTransformationStatus() != null;
-			case EvaluationStatusPackage.CLASS_STATUS__TYPE:
+			case 9:
 				return type != null;
 		}
 		return super.eIsSet(featureID);

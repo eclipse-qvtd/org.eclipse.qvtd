@@ -81,7 +81,7 @@ public class EvaluationStatusSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case EvaluationStatusPackage.ASSOCIATION_STATUS: {
+			case 0: {
 				AssociationStatus associationStatus = (AssociationStatus)theEObject;
 				T result = caseAssociationStatus(associationStatus);
 				if (result == null) result = casePropertyStatus(associationStatus);
@@ -90,7 +90,7 @@ public class EvaluationStatusSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS: {
+			case 1: {
 				AttributeStatus attributeStatus = (AttributeStatus)theEObject;
 				T result = caseAttributeStatus(attributeStatus);
 				if (result == null) result = casePropertyStatus(attributeStatus);
@@ -99,7 +99,7 @@ public class EvaluationStatusSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EvaluationStatusPackage.CLASS_STATUS: {
+			case 2: {
 				ClassStatus classStatus = (ClassStatus)theEObject;
 				T result = caseClassStatus(classStatus);
 				if (result == null) result = caseElementStatus(classStatus);
@@ -107,27 +107,27 @@ public class EvaluationStatusSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EvaluationStatusPackage.ELEMENT_STATUS: {
+			case 3: {
 				ElementStatus elementStatus = (ElementStatus)theEObject;
 				T result = caseElementStatus(elementStatus);
 				if (result == null) result = caseEvaluationElement(elementStatus);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EvaluationStatusPackage.EVALUATION_ELEMENT: {
+			case 4: {
 				EvaluationElement evaluationElement = (EvaluationElement)theEObject;
 				T result = caseEvaluationElement(evaluationElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EvaluationStatusPackage.MAPPING_STATUS: {
+			case 5: {
 				MappingStatus mappingStatus = (MappingStatus)theEObject;
 				T result = caseMappingStatus(mappingStatus);
 				if (result == null) result = caseEvaluationElement(mappingStatus);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EvaluationStatusPackage.PROPERTY_STATUS: {
+			case 6: {
 				PropertyStatus propertyStatus = (PropertyStatus)theEObject;
 				T result = casePropertyStatus(propertyStatus);
 				if (result == null) result = caseElementStatus(propertyStatus);
@@ -135,7 +135,7 @@ public class EvaluationStatusSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS: {
+			case 7: {
 				TransformationStatus transformationStatus = (TransformationStatus)theEObject;
 				T result = caseTransformationStatus(transformationStatus);
 				if (result == null) result = caseEvaluationElement(transformationStatus);

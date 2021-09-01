@@ -43,6 +43,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStat
  */
 public class TransformationStatusImpl extends EvaluationElementImpl implements TransformationStatus {
 	/**
+	 * The number of structural features of the '<em>Transformation Status</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRANSFORMATION_STATUS_FEATURE_COUNT = EvaluationElementImpl.EVALUATION_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getOwnedAssociationStatuses() <em>Owned Association Statuses</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -99,7 +108,7 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	@Override
 	public EList<AssociationStatus> getOwnedAssociationStatuses() {
 		if (ownedAssociationStatuses == null) {
-			ownedAssociationStatuses = new EObjectContainmentWithInverseEList<AssociationStatus>(AssociationStatus.class, this, EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES, EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS);
+			ownedAssociationStatuses = new EObjectContainmentWithInverseEList<AssociationStatus>(AssociationStatus.class, this, 0, 12);
 		}
 		return ownedAssociationStatuses;
 	}
@@ -112,7 +121,7 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	@Override
 	public EList<ClassStatus> getOwnedClassStatuses() {
 		if (ownedClassStatuses == null) {
-			ownedClassStatuses = new EObjectContainmentWithInverseEList<ClassStatus>(ClassStatus.class, this, EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES, EvaluationStatusPackage.CLASS_STATUS__OWNING_TRANSFORMATION_STATUS);
+			ownedClassStatuses = new EObjectContainmentWithInverseEList<ClassStatus>(ClassStatus.class, this, 1, 8);
 		}
 		return ownedClassStatuses;
 	}
@@ -125,7 +134,7 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	@Override
 	public EList<MappingStatus> getOwnedMappingStatuses() {
 		if (ownedMappingStatuses == null) {
-			ownedMappingStatuses = new EObjectContainmentWithInverseEList<MappingStatus>(MappingStatus.class, this, EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES, EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS);
+			ownedMappingStatuses = new EObjectContainmentWithInverseEList<MappingStatus>(MappingStatus.class, this, 2, 6);
 		}
 		return ownedMappingStatuses;
 	}
@@ -139,11 +148,11 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES:
+			case 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedAssociationStatuses()).basicAdd(otherEnd, msgs);
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedClassStatuses()).basicAdd(otherEnd, msgs);
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappingStatuses()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -157,11 +166,11 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES:
+			case 0:
 				return ((InternalEList<?>)getOwnedAssociationStatuses()).basicRemove(otherEnd, msgs);
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES:
+			case 1:
 				return ((InternalEList<?>)getOwnedClassStatuses()).basicRemove(otherEnd, msgs);
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES:
+			case 2:
 				return ((InternalEList<?>)getOwnedMappingStatuses()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -175,11 +184,11 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES:
+			case 0:
 				return getOwnedAssociationStatuses();
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES:
+			case 1:
 				return getOwnedClassStatuses();
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES:
+			case 2:
 				return getOwnedMappingStatuses();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -194,15 +203,15 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES:
+			case 0:
 				getOwnedAssociationStatuses().clear();
 				getOwnedAssociationStatuses().addAll((Collection<? extends AssociationStatus>)newValue);
 				return;
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES:
+			case 1:
 				getOwnedClassStatuses().clear();
 				getOwnedClassStatuses().addAll((Collection<? extends ClassStatus>)newValue);
 				return;
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES:
+			case 2:
 				getOwnedMappingStatuses().clear();
 				getOwnedMappingStatuses().addAll((Collection<? extends MappingStatus>)newValue);
 				return;
@@ -218,13 +227,13 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES:
+			case 0:
 				getOwnedAssociationStatuses().clear();
 				return;
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES:
+			case 1:
 				getOwnedClassStatuses().clear();
 				return;
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES:
+			case 2:
 				getOwnedMappingStatuses().clear();
 				return;
 		}
@@ -239,11 +248,11 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES:
+			case 0:
 				return ownedAssociationStatuses != null && !ownedAssociationStatuses.isEmpty();
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES:
+			case 1:
 				return ownedClassStatuses != null && !ownedClassStatuses.isEmpty();
-			case EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES:
+			case 2:
 				return ownedMappingStatuses != null && !ownedMappingStatuses.isEmpty();
 		}
 		return super.eIsSet(featureID);

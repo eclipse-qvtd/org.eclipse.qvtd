@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EvaluationStatus2StringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationStatusPackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStatusVisitor;
@@ -26,6 +25,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStat
  * @generated
  */
 public abstract class EvaluationElementImpl extends MinimalEObjectImpl.Container implements EvaluationElement {
+	/**
+	 * The number of structural features of the '<em>Evaluation Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EVALUATION_ELEMENT_FEATURE_COUNT = 0;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,16 +51,6 @@ public abstract class EvaluationElementImpl extends MinimalEObjectImpl.Container
 	@Override
 	protected EClass eStaticClass() {
 		return EvaluationStatusPackage.Literals.EVALUATION_ELEMENT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return EvaluationStatus2StringVisitor.toString(this);
 	}
 
 	/**

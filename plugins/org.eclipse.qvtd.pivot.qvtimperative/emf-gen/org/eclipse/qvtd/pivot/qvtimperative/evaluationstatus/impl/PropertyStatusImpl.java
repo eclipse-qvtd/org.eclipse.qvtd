@@ -35,6 +35,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.PropertyStatus;
  */
 public abstract class PropertyStatusImpl extends ElementStatusImpl implements PropertyStatus {
 	/**
+	 * The number of structural features of the '<em>Property Status</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROPERTY_STATUS_FEATURE_COUNT = ElementStatusImpl.ELEMENT_STATUS_FEATURE_COUNT + 5;
+
+	/**
 	 * The default value of the '{@link #isIsAssignable() <em>Is Assignable</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -173,7 +182,7 @@ public abstract class PropertyStatusImpl extends ElementStatusImpl implements Pr
 		boolean oldIsAssignable = isAssignable;
 		isAssignable = newIsAssignable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNABLE, oldIsAssignable, isAssignable));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldIsAssignable, isAssignable));
 	}
 
 	/**
@@ -196,7 +205,7 @@ public abstract class PropertyStatusImpl extends ElementStatusImpl implements Pr
 		boolean oldIsAssigned = isAssigned;
 		isAssigned = newIsAssigned;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNED, oldIsAssigned, isAssigned));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldIsAssigned, isAssigned));
 	}
 
 	/**
@@ -219,7 +228,7 @@ public abstract class PropertyStatusImpl extends ElementStatusImpl implements Pr
 		boolean oldIsDirty = isDirty;
 		isDirty = newIsDirty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.PROPERTY_STATUS__IS_DIRTY, oldIsDirty, isDirty));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldIsDirty, isDirty));
 	}
 
 	/**
@@ -242,7 +251,7 @@ public abstract class PropertyStatusImpl extends ElementStatusImpl implements Pr
 		boolean oldIsError = isError;
 		isError = newIsError;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.PROPERTY_STATUS__IS_ERROR, oldIsError, isError));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, oldIsError, isError));
 	}
 
 	/**
@@ -265,13 +274,13 @@ public abstract class PropertyStatusImpl extends ElementStatusImpl implements Pr
 		boolean oldIsReady = isReady;
 		isReady = newIsReady;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.PROPERTY_STATUS__IS_READY, oldIsReady, isReady));
+			eNotify(new ENotificationImpl(this, Notification.SET, 7, oldIsReady, isReady));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
@@ -286,15 +295,15 @@ public abstract class PropertyStatusImpl extends ElementStatusImpl implements Pr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNABLE:
+			case 3:
 				return isIsAssignable();
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNED:
+			case 4:
 				return isIsAssigned();
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_DIRTY:
+			case 5:
 				return isIsDirty();
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ERROR:
+			case 6:
 				return isIsError();
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_READY:
+			case 7:
 				return isIsReady();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -308,19 +317,19 @@ public abstract class PropertyStatusImpl extends ElementStatusImpl implements Pr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNABLE:
+			case 3:
 				setIsAssignable((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNED:
+			case 4:
 				setIsAssigned((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_DIRTY:
+			case 5:
 				setIsDirty((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ERROR:
+			case 6:
 				setIsError((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_READY:
+			case 7:
 				setIsReady((Boolean)newValue);
 				return;
 		}
@@ -335,19 +344,19 @@ public abstract class PropertyStatusImpl extends ElementStatusImpl implements Pr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNABLE:
+			case 3:
 				setIsAssignable(IS_ASSIGNABLE_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNED:
+			case 4:
 				setIsAssigned(IS_ASSIGNED_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_DIRTY:
+			case 5:
 				setIsDirty(IS_DIRTY_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ERROR:
+			case 6:
 				setIsError(IS_ERROR_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_READY:
+			case 7:
 				setIsReady(IS_READY_EDEFAULT);
 				return;
 		}
@@ -362,15 +371,15 @@ public abstract class PropertyStatusImpl extends ElementStatusImpl implements Pr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNABLE:
+			case 3:
 				return isAssignable != IS_ASSIGNABLE_EDEFAULT;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ASSIGNED:
+			case 4:
 				return isAssigned != IS_ASSIGNED_EDEFAULT;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_DIRTY:
+			case 5:
 				return isDirty != IS_DIRTY_EDEFAULT;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_ERROR:
+			case 6:
 				return isError != IS_ERROR_EDEFAULT;
-			case EvaluationStatusPackage.PROPERTY_STATUS__IS_READY:
+			case 7:
 				return isReady != IS_READY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

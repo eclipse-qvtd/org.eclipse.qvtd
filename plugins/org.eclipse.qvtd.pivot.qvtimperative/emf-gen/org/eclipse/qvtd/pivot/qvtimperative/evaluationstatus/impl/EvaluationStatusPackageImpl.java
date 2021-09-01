@@ -136,8 +136,8 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 		if (isInited) return (EvaluationStatusPackage)EPackage.Registry.INSTANCE.getEPackage(EvaluationStatusPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		EvaluationStatusPackageImpl theEvaluationStatusPackage = (EvaluationStatusPackageImpl)(ePackage instanceof EvaluationStatusPackageImpl ? ePackage : new EvaluationStatusPackageImpl());
+		Object registeredEvaluationStatusPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		EvaluationStatusPackageImpl theEvaluationStatusPackage = registeredEvaluationStatusPackage instanceof EvaluationStatusPackageImpl ? (EvaluationStatusPackageImpl)registeredEvaluationStatusPackage : new EvaluationStatusPackageImpl();
 
 		isInited = true;
 
@@ -154,7 +154,6 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 
 		// Mark meta-data to indicate it can't be changed
 		theEvaluationStatusPackage.freeze();
-
 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(EvaluationStatusPackage.eNS_URI, theEvaluationStatusPackage);
@@ -620,56 +619,56 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 		isCreated = true;
 
 		// Create classes and their features
-		associationStatusEClass = createEClass(ASSOCIATION_STATUS);
-		createEReference(associationStatusEClass, ASSOCIATION_STATUS__FORWARD_EREFERENCE);
-		createEReference(associationStatusEClass, ASSOCIATION_STATUS__FROM_CLASS_STATUSES);
-		createEAttribute(associationStatusEClass, ASSOCIATION_STATUS__IS_INPUT);
-		createEAttribute(associationStatusEClass, ASSOCIATION_STATUS__IS_OUTPUT);
-		createEReference(associationStatusEClass, ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS);
-		createEReference(associationStatusEClass, ASSOCIATION_STATUS__TO_CLASS_STATUSES);
+		associationStatusEClass = createEClass(0);
+		createEReference(associationStatusEClass, 8);
+		createEReference(associationStatusEClass, 9);
+		createEAttribute(associationStatusEClass, 10);
+		createEAttribute(associationStatusEClass, 11);
+		createEReference(associationStatusEClass, 12);
+		createEReference(associationStatusEClass, 13);
 
-		attributeStatusEClass = createEClass(ATTRIBUTE_STATUS);
-		createEReference(attributeStatusEClass, ATTRIBUTE_STATUS__EFEATURE);
-		createEAttribute(attributeStatusEClass, ATTRIBUTE_STATUS__OBJECT);
-		createEReference(attributeStatusEClass, ATTRIBUTE_STATUS__OWNING_CLASS_STATUS);
+		attributeStatusEClass = createEClass(1);
+		createEReference(attributeStatusEClass, 8);
+		createEAttribute(attributeStatusEClass, 9);
+		createEReference(attributeStatusEClass, 10);
 
-		classStatusEClass = createEClass(CLASS_STATUS);
-		createEReference(classStatusEClass, CLASS_STATUS__ASSOCIATION_STATUSES);
-		createEReference(classStatusEClass, CLASS_STATUS__EOBJECT);
-		createEAttribute(classStatusEClass, CLASS_STATUS__IS_INPUT);
-		createEAttribute(classStatusEClass, CLASS_STATUS__IS_OUTPUT);
-		createEReference(classStatusEClass, CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES);
-		createEReference(classStatusEClass, CLASS_STATUS__OWNING_TRANSFORMATION_STATUS);
-		createEReference(classStatusEClass, CLASS_STATUS__TYPE);
+		classStatusEClass = createEClass(2);
+		createEReference(classStatusEClass, 3);
+		createEReference(classStatusEClass, 4);
+		createEAttribute(classStatusEClass, 5);
+		createEAttribute(classStatusEClass, 6);
+		createEReference(classStatusEClass, 7);
+		createEReference(classStatusEClass, 8);
+		createEReference(classStatusEClass, 9);
 
-		elementStatusEClass = createEClass(ELEMENT_STATUS);
-		createEAttribute(elementStatusEClass, ELEMENT_STATUS__DEPTH);
-		createEReference(elementStatusEClass, ELEMENT_STATUS__SOURCES);
-		createEReference(elementStatusEClass, ELEMENT_STATUS__TARGETS);
+		elementStatusEClass = createEClass(3);
+		createEAttribute(elementStatusEClass, 0);
+		createEReference(elementStatusEClass, 1);
+		createEReference(elementStatusEClass, 2);
 
-		evaluationElementEClass = createEClass(EVALUATION_ELEMENT);
+		evaluationElementEClass = createEClass(4);
 
-		mappingStatusEClass = createEClass(MAPPING_STATUS);
-		createEAttribute(mappingStatusEClass, MAPPING_STATUS__BOUND_VALUES);
-		createEAttribute(mappingStatusEClass, MAPPING_STATUS__DEPTH);
-		createEReference(mappingStatusEClass, MAPPING_STATUS__INPUTS);
-		createEAttribute(mappingStatusEClass, MAPPING_STATUS__IS_BLOCKED);
-		createEAttribute(mappingStatusEClass, MAPPING_STATUS__IS_DIRTY);
-		createEReference(mappingStatusEClass, MAPPING_STATUS__OUTPUTS);
-		createEReference(mappingStatusEClass, MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS);
-		createEReference(mappingStatusEClass, MAPPING_STATUS__REFERRED_MAPPING_CALL);
+		mappingStatusEClass = createEClass(5);
+		createEAttribute(mappingStatusEClass, 0);
+		createEAttribute(mappingStatusEClass, 1);
+		createEReference(mappingStatusEClass, 2);
+		createEAttribute(mappingStatusEClass, 3);
+		createEAttribute(mappingStatusEClass, 4);
+		createEReference(mappingStatusEClass, 5);
+		createEReference(mappingStatusEClass, 6);
+		createEReference(mappingStatusEClass, 7);
 
-		propertyStatusEClass = createEClass(PROPERTY_STATUS);
-		createEAttribute(propertyStatusEClass, PROPERTY_STATUS__IS_ASSIGNABLE);
-		createEAttribute(propertyStatusEClass, PROPERTY_STATUS__IS_ASSIGNED);
-		createEAttribute(propertyStatusEClass, PROPERTY_STATUS__IS_DIRTY);
-		createEAttribute(propertyStatusEClass, PROPERTY_STATUS__IS_ERROR);
-		createEAttribute(propertyStatusEClass, PROPERTY_STATUS__IS_READY);
+		propertyStatusEClass = createEClass(6);
+		createEAttribute(propertyStatusEClass, 3);
+		createEAttribute(propertyStatusEClass, 4);
+		createEAttribute(propertyStatusEClass, 5);
+		createEAttribute(propertyStatusEClass, 6);
+		createEAttribute(propertyStatusEClass, 7);
 
-		transformationStatusEClass = createEClass(TRANSFORMATION_STATUS);
-		createEReference(transformationStatusEClass, TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES);
-		createEReference(transformationStatusEClass, TRANSFORMATION_STATUS__OWNED_CLASS_STATUSES);
-		createEReference(transformationStatusEClass, TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES);
+		transformationStatusEClass = createEClass(7);
+		createEReference(transformationStatusEClass, 0);
+		createEReference(transformationStatusEClass, 1);
+		createEReference(transformationStatusEClass, 2);
 	}
 
 	/**
@@ -781,13 +780,13 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 	protected void createImportAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Import";
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-				"ecore", "http://www.eclipse.org/emf/2002/Ecore",
-				"qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
-				"qvti", "QVTimperative.ecore#/"
-		});
+		  (this,
+		   source,
+		   new String[] {
+			   "ecore", "http://www.eclipse.org/emf/2002/Ecore",
+			   "qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
+			   "qvti", "QVTimperative.ecore#/"
+		   });
 	}
 
 	/**

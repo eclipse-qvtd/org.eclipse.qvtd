@@ -30,6 +30,7 @@ Workflow {
     	platformUri = ".."
     	scanClassPath = true
     }
+    bean = QVTdStandaloneSetup { resourceSet = resourceSet }
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true

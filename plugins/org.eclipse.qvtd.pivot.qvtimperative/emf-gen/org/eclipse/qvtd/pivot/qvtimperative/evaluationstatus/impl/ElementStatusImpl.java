@@ -41,6 +41,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.MappingStatus;
  */
 public abstract class ElementStatusImpl extends EvaluationElementImpl implements ElementStatus {
 	/**
+	 * The number of structural features of the '<em>Element Status</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_STATUS_FEATURE_COUNT = EvaluationElementImpl.EVALUATION_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The default value of the '{@link #getDepth() <em>Depth</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -119,7 +128,7 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 		Integer oldDepth = depth;
 		depth = newDepth;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.ELEMENT_STATUS__DEPTH, oldDepth, depth));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, oldDepth, depth));
 	}
 
 	/**
@@ -130,7 +139,7 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 	@Override
 	public EList<MappingStatus> getSources() {
 		if (sources == null) {
-			sources = new EObjectWithInverseResolvingEList.ManyInverse<MappingStatus>(MappingStatus.class, this, EvaluationStatusPackage.ELEMENT_STATUS__SOURCES, EvaluationStatusPackage.MAPPING_STATUS__OUTPUTS);
+			sources = new EObjectWithInverseResolvingEList.ManyInverse<MappingStatus>(MappingStatus.class, this, 1, 5);
 		}
 		return sources;
 	}
@@ -143,7 +152,7 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 	@Override
 	public EList<MappingStatus> getTargets() {
 		if (targets == null) {
-			targets = new EObjectWithInverseResolvingEList.ManyInverse<MappingStatus>(MappingStatus.class, this, EvaluationStatusPackage.ELEMENT_STATUS__TARGETS, EvaluationStatusPackage.MAPPING_STATUS__INPUTS);
+			targets = new EObjectWithInverseResolvingEList.ManyInverse<MappingStatus>(MappingStatus.class, this, 2, 2);
 		}
 		return targets;
 	}
@@ -151,7 +160,7 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
@@ -167,9 +176,9 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ELEMENT_STATUS__SOURCES:
+			case 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSources()).basicAdd(otherEnd, msgs);
-			case EvaluationStatusPackage.ELEMENT_STATUS__TARGETS:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTargets()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -183,9 +192,9 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ELEMENT_STATUS__SOURCES:
+			case 1:
 				return ((InternalEList<?>)getSources()).basicRemove(otherEnd, msgs);
-			case EvaluationStatusPackage.ELEMENT_STATUS__TARGETS:
+			case 2:
 				return ((InternalEList<?>)getTargets()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -199,11 +208,11 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ELEMENT_STATUS__DEPTH:
+			case 0:
 				return getDepth();
-			case EvaluationStatusPackage.ELEMENT_STATUS__SOURCES:
+			case 1:
 				return getSources();
-			case EvaluationStatusPackage.ELEMENT_STATUS__TARGETS:
+			case 2:
 				return getTargets();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -218,14 +227,14 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ELEMENT_STATUS__DEPTH:
+			case 0:
 				setDepth((Integer)newValue);
 				return;
-			case EvaluationStatusPackage.ELEMENT_STATUS__SOURCES:
+			case 1:
 				getSources().clear();
 				getSources().addAll((Collection<? extends MappingStatus>)newValue);
 				return;
-			case EvaluationStatusPackage.ELEMENT_STATUS__TARGETS:
+			case 2:
 				getTargets().clear();
 				getTargets().addAll((Collection<? extends MappingStatus>)newValue);
 				return;
@@ -241,13 +250,13 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ELEMENT_STATUS__DEPTH:
+			case 0:
 				setDepth(DEPTH_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.ELEMENT_STATUS__SOURCES:
+			case 1:
 				getSources().clear();
 				return;
-			case EvaluationStatusPackage.ELEMENT_STATUS__TARGETS:
+			case 2:
 				getTargets().clear();
 				return;
 		}
@@ -262,11 +271,11 @@ public abstract class ElementStatusImpl extends EvaluationElementImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ELEMENT_STATUS__DEPTH:
+			case 0:
 				return DEPTH_EDEFAULT == null ? depth != null : !DEPTH_EDEFAULT.equals(depth);
-			case EvaluationStatusPackage.ELEMENT_STATUS__SOURCES:
+			case 1:
 				return sources != null && !sources.isEmpty();
-			case EvaluationStatusPackage.ELEMENT_STATUS__TARGETS:
+			case 2:
 				return targets != null && !targets.isEmpty();
 		}
 		return super.eIsSet(featureID);
