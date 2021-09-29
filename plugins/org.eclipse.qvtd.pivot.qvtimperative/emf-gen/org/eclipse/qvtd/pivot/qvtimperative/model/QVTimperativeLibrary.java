@@ -262,8 +262,8 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		private Contents(@NonNull String asURI)
 		{
 			model = createModel(asURI);
-			qvtruntimelibrary = createLibrary("qvtruntimelibrary", "qvtrtlib", "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null);
-			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
+			qvtruntimelibrary = createLibrary("qvtruntimelibrary", "qvtrtlib", "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, QVTruntimeLibraryPackage.eINSTANCE);
+			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
 			installPackages();
 			installClassTypes();
 			installCollectionTypes();

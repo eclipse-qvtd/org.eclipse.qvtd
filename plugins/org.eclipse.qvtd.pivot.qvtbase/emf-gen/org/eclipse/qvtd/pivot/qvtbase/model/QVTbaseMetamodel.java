@@ -76,7 +76,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 
 	public static @NonNull Package create(@NonNull StandardLibraryInternal standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 		QVTbaseMetamodel resource = new ReadOnly(PIVOT_AS_URI);
-		Contents contents = new Contents(standardLibrary.getPackage(), name, nsPrefix, nsURI);
+		Package standardLibraryPackage = standardLibrary.getOclAnyType().getOwningPackage();
+		assert standardLibraryPackage != null;
+		Contents contents = new Contents(standardLibraryPackage, name, nsPrefix, nsURI);
 		Model model = contents.getModel();
 		resource.getContents().add(model);
 		@SuppressWarnings("null")@NonNull Package pkge = model.getOwnedPackages().get(0);
@@ -236,12 +238,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		protected Contents(@NonNull Package standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibrary);
 			root = createModel("http://www.eclipse.org/qvt/2015/QVTbase");
-			pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", IdManager.METAMODEL);
-			((PivotObjectImpl)pivot).setESObject(PivotPackage.eINSTANCE);
-			qvtbase = createPackage("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", null);
-			((PivotObjectImpl)qvtbase).setESObject(QVTbasePackage.eINSTANCE);
-			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
-			((PivotObjectImpl)orphanage).setESObject(null);
+			pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", IdManager.METAMODEL, PivotPackage.eINSTANCE);
+			qvtbase = createPackage("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
+			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
 			installPackages();
 			installClassTypes();
 			installEnumerations();

@@ -185,7 +185,7 @@ public class OCL2QVTm {
 					}
 				}
 			}
-			CompletePackage libraryCompletePackage = completeModel.getCompletePackage(envFact.getStandardLibrary().getPackage());
+			CompletePackage libraryCompletePackage = completeModel.getCompletePackage(envFact.getStandardLibrary().getOclAnyType().getOwningPackage());
 			Set<CompletePackage> otherUsedCompletePackages = new HashSet<>(allUsedCompletePackages);
 			otherUsedCompletePackages.removeAll(allKnownCompletePackages);
 			otherUsedCompletePackages.remove(libraryCompletePackage);

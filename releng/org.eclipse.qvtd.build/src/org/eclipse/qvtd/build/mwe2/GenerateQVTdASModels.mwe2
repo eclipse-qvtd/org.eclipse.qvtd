@@ -146,7 +146,7 @@ Workflow {
     	baseGenModelFile = "model/Pivot.genmodel"
     }
     
-    component = GenerateOCLmetamodelXtend { //resourceSet = resourceSet
+    component = GenerateOCLmetamodelXtend { resourceSet = resourceSet2
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
     	modelFile = "model/QVTbase.ecore"
     	uri = "http://www.eclipse.org/qvt/2015/QVTbase"

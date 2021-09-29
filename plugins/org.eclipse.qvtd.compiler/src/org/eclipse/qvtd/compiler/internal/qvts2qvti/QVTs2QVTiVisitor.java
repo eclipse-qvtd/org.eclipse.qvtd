@@ -415,7 +415,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		Set<@NonNull String> reservedNames2 = reservedNames;
 		if (reservedNames2 == null) {
 			reservedNames = reservedNames2 = new HashSet<>();
-			org.eclipse.ocl.pivot.Package standardLibraryPackage = getStandardLibrary().getPackage();
+			org.eclipse.ocl.pivot.Package standardLibraryPackage = getStandardLibrary().getOclAnyType().getOwningPackage();
 			gatherReservedPackageNames(reservedNames2, Collections.singletonList(standardLibraryPackage));
 			reservedNames2.add(ClassUtil.nonNull(asTransformation.getName()));
 			for (TypedModel typedModel : asTransformation.getModelParameter()) {

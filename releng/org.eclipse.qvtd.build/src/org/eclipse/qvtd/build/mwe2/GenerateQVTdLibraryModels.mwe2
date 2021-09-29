@@ -29,7 +29,8 @@ Workflow {
     }
 	bean = ProjectMapSetup { resourceSet = libResourceSet }
     bean = EcoreGenModelSetup { resourceSet = libResourceSet }
-    component = GenerateOCLstdlibXtend { resourceSet = libResourceSet
+  	component = OCLInstanceSetup : libInstanceSetup { resourceSet = libResourceSet }
+    component = GenerateOCLstdlibXtend { oclInstanceSetup = libInstanceSetup
     	projectName = "org.eclipse.qvtd.runtime"
     	modelFile = "model/QVTruntimeLibrary.oclstdlib"
     	uri = "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary"
@@ -56,16 +57,21 @@ Workflow {
     	useOCLstdlib = true
     	isASLibrary = false
     }
+	component = OCLInstanceSuspend { oclInstanceSetup = libInstanceSetup }
 	bean = ResourceSetImpl : qvtbResourceSet {}
 	bean = ProjectMapSetup { resourceSet = qvtbResourceSet }
-    component = GenerateModel { resourceSet = qvtbResourceSet skipOnErrors = true
+    bean = EcoreGenModelSetup { resourceSet = qvtbResourceSet }
+  	component = OCLInstanceSetup : qvtbInstanceSetup { resourceSet = qvtbResourceSet }
+    component = GenerateModel { oclInstanceSetup = qvtbInstanceSetup skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.genmodel"
     }
-    component = Model2tablesGenerator { resourceSet = qvtbResourceSet
+    component = Model2tablesGenerator { oclInstanceSetup = qvtbInstanceSetup
     	genModelFile = "/org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.genmodel"
-    	genOCLstdlib = true
+    	genOCLstdlib = false // true
     }
-    component = GenerateOCLstdlibXtend { resourceSet = libResourceSet
+	component = OCLInstanceDispose { oclInstanceSetup = qvtbInstanceSetup }
+	component = OCLInstanceResume { oclInstanceSetup = libInstanceSetup }
+    component = GenerateOCLstdlibXtend { oclInstanceSetup = libInstanceSetup
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
     	modelFile = "model/QVTimperativeLibrary.oclstdlib"
     	uri = "http://www.eclipse.org/qvt/2016/QVTimperativeLibrary"
@@ -91,14 +97,18 @@ Workflow {
     	excludedEClassifierName = "Transformation"
     	isASLibrary = false
     }
+	component = OCLInstanceDispose { oclInstanceSetup = libInstanceSetup }
 	bean = ResourceSetImpl : qvtiResourceSet {}
 	bean = ProjectMapSetup { resourceSet = qvtiResourceSet }
-    component = GenerateModel { resourceSet = qvtiResourceSet skipOnErrors = true
+    bean = EcoreGenModelSetup { resourceSet = qvtiResourceSet }
+  	component = OCLInstanceSetup : qvtiInstanceSetup { resourceSet = qvtiResourceSet }
+    component = GenerateModel { oclInstanceSetup = qvtiInstanceSetup skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.genmodel"
     }
-    component = Model2tablesGenerator { resourceSet = qvtiResourceSet
+    component = Model2tablesGenerator { oclInstanceSetup = qvtiInstanceSetup
     	genModelFile = "/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.genmodel"
     	genOCLstdlib = true
     }
+	component = OCLInstanceDispose { oclInstanceSetup = qvtiInstanceSetup }
 }
 

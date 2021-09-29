@@ -280,7 +280,7 @@ public class QVTmModelsMerger {
 
 		// oclIsKindOf OperationCallExp
 		OperationCallExp opCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
-		CompletePackage cPackage = envF.getCompleteModel().getCompletePackage(envF.getStandardLibrary().getPackage());
+		CompletePackage cPackage = envF.getCompleteModel().getCompletePackage(envF.getStandardLibrary().getOclAnyType().getOwningPackage());
 		CompleteClass cClass = cPackage.getCompleteClass(envF.getStandardLibrary().getOclAnyType());
 		Operation oclIsKindOfOp = cClass.getOperations(FeatureFilter.SELECT_NON_STATIC, "oclIsKindOf").iterator().next();
 
