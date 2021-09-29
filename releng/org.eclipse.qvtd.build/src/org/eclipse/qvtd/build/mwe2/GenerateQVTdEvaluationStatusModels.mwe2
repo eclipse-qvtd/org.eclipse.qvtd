@@ -25,18 +25,19 @@ import org.eclipse.emf.ecore.resource.impl.*
  *	Generate the Evaluation Status Model used by the QVT polled/incremental execution.
  */
 Workflow {
-	bean = ResourceSetImpl : resourceSet {}
-    bean = StandaloneSetup { resourceSet = resourceSet
+	bean = ResourceSetImpl : evalStatusResourceSet {}
+    bean = StandaloneSetup { resourceSet = evalStatusResourceSet
     	platformUri = ".."
     	scanClassPath = true
     }
-    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+    bean = QVTdStandaloneSetup { resourceSet = evalStatusResourceSet }
+    bean = EcoreGenModelSetup { resourceSet = evalStatusResourceSet }
 
-    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    component = GenerateModel { resourceSet = evalStatusResourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtimperative/model/EvaluationStatus.genmodel" 	
     }
     
-    component = GenerateEvaluationStatusVisitors { resourceSet = resourceSet
+    component = GenerateEvaluationStatusVisitors { resourceSet = evalStatusResourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
     	genModelFile = "model/EvaluationStatus.genmodel"
     }
