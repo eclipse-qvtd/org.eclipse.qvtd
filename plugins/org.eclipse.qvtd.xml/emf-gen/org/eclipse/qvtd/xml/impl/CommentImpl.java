@@ -114,7 +114,7 @@ public class CommentImpl extends NodeImpl implements Comment {
 		String oldData = data;
 		data = newData;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldData, data));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldData, data));
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class CommentImpl extends NodeImpl implements Comment {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getData();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -139,7 +139,7 @@ public class CommentImpl extends NodeImpl implements Comment {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setData((String)newValue);
 				return;
 		}
@@ -154,7 +154,7 @@ public class CommentImpl extends NodeImpl implements Comment {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setData(DATA_EDEFAULT);
 				return;
 		}
@@ -169,7 +169,7 @@ public class CommentImpl extends NodeImpl implements Comment {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return DATA_EDEFAULT == null ? data != null : !DATA_EDEFAULT.equals(data);
 		}
 		return super.eIsSet(featureID);

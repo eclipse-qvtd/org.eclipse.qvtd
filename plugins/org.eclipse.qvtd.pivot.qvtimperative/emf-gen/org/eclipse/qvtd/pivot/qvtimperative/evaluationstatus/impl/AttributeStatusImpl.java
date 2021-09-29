@@ -40,6 +40,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStat
  */
 public class AttributeStatusImpl extends PropertyStatusImpl implements AttributeStatus {
 	/**
+	 * The number of structural features of the '<em>Attribute Status</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ATTRIBUTE_STATUS_FEATURE_COUNT = PropertyStatusImpl.PROPERTY_STATUS_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getEFeature() <em>EFeature</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,7 +109,7 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 			eFeature = (EStructuralFeature)eResolveProxy(oldEFeature);
 			if (eFeature != oldEFeature) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EvaluationStatusPackage.ATTRIBUTE_STATUS__EFEATURE, oldEFeature, eFeature));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 8, oldEFeature, eFeature));
 			}
 		}
 		return eFeature;
@@ -125,7 +134,7 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 		EStructuralFeature oldEFeature = eFeature;
 		eFeature = newEFeature;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.ATTRIBUTE_STATUS__EFEATURE, oldEFeature, eFeature));
+			eNotify(new ENotificationImpl(this, Notification.SET, 8, oldEFeature, eFeature));
 	}
 
 	/**
@@ -148,7 +157,7 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 		Object oldObject = object;
 		object = newObject;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.ATTRIBUTE_STATUS__OBJECT, oldObject, object));
+			eNotify(new ENotificationImpl(this, Notification.SET, 9, oldObject, object));
 	}
 
 	/**
@@ -158,7 +167,7 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	 */
 	@Override
 	public ClassStatus getOwningClassStatus() {
-		if (eContainerFeatureID() != EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS) return null;
+		if (eContainerFeatureID() != (10)) return null;
 		return (ClassStatus)eInternalContainer();
 	}
 
@@ -168,7 +177,7 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningClassStatus(ClassStatus newOwningClassStatus, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningClassStatus, EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningClassStatus, 10, msgs);
 		return msgs;
 	}
 
@@ -179,25 +188,25 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	 */
 	@Override
 	public void setOwningClassStatus(ClassStatus newOwningClassStatus) {
-		if (newOwningClassStatus != eInternalContainer() || (eContainerFeatureID() != EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS && newOwningClassStatus != null)) {
+		if (newOwningClassStatus != eInternalContainer() || (eContainerFeatureID() != (10) && newOwningClassStatus != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningClassStatus))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningClassStatus != null)
-				msgs = ((InternalEObject)newOwningClassStatus).eInverseAdd(this, EvaluationStatusPackage.CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES, ClassStatus.class, msgs);
+				msgs = ((InternalEObject)newOwningClassStatus).eInverseAdd(this, 7, ClassStatus.class, msgs);
 			msgs = basicSetOwningClassStatus(newOwningClassStatus, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS, newOwningClassStatus, newOwningClassStatus));
+			eNotify(new ENotificationImpl(this, Notification.SET, 10, newOwningClassStatus, newOwningClassStatus));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
@@ -212,7 +221,7 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS:
+			case 10:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningClassStatus((ClassStatus)otherEnd, msgs);
@@ -228,7 +237,7 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS:
+			case 10:
 				return basicSetOwningClassStatus(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -242,8 +251,8 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS:
-				return eInternalContainer().eInverseRemove(this, EvaluationStatusPackage.CLASS_STATUS__OWNED_ATTRIBUTE_STATUSES, ClassStatus.class, msgs);
+			case 10:
+				return eInternalContainer().eInverseRemove(this, 7, ClassStatus.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -256,12 +265,12 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__EFEATURE:
+			case 8:
 				if (resolve) return getEFeature();
 				return basicGetEFeature();
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OBJECT:
+			case 9:
 				return getObject();
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS:
+			case 10:
 				return getOwningClassStatus();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -275,13 +284,13 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__EFEATURE:
+			case 8:
 				setEFeature((EStructuralFeature)newValue);
 				return;
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OBJECT:
+			case 9:
 				setObject(newValue);
 				return;
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS:
+			case 10:
 				setOwningClassStatus((ClassStatus)newValue);
 				return;
 		}
@@ -296,13 +305,13 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__EFEATURE:
+			case 8:
 				setEFeature((EStructuralFeature)null);
 				return;
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OBJECT:
+			case 9:
 				setObject(OBJECT_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS:
+			case 10:
 				setOwningClassStatus((ClassStatus)null);
 				return;
 		}
@@ -317,11 +326,11 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__EFEATURE:
+			case 8:
 				return eFeature != null;
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OBJECT:
+			case 9:
 				return OBJECT_EDEFAULT == null ? object != null : !OBJECT_EDEFAULT.equals(object);
-			case EvaluationStatusPackage.ATTRIBUTE_STATUS__OWNING_CLASS_STATUS:
+			case 10:
 				return getOwningClassStatus() != null;
 		}
 		return super.eIsSet(featureID);

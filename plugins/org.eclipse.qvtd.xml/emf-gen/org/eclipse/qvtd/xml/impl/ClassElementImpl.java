@@ -100,7 +100,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 		EClass oldEcoreClass = ecoreClass;
 		ecoreClass = newEcoreClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldEcoreClass, ecoreClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldEcoreClass, ecoreClass));
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+			case 5:
 				return getEcoreClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -125,7 +125,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+			case 5:
 				setEcoreClass((EClass)newValue);
 				return;
 		}
@@ -140,7 +140,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+			case 5:
 				setEcoreClass((EClass)null);
 				return;
 		}
@@ -155,7 +155,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+			case 5:
 				return ecoreClass != null;
 		}
 		return super.eIsSet(featureID);

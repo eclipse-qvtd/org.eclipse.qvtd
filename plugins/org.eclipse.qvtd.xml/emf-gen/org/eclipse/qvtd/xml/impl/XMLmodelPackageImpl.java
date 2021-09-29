@@ -620,57 +620,57 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 
 		// Create classes and their features
 		attributeEClass = createEClass(0);
-		createEAttribute(attributeEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
-		createEAttribute(attributeEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
-		createEReference(attributeEClass, NodeImpl.NODE_FEATURE_COUNT + 2);
+		createEAttribute(attributeEClass, 1);
+		createEAttribute(attributeEClass, 2);
+		createEReference(attributeEClass, 3);
 
 		cdataEClass = createEClass(1);
 
 		charactersEClass = createEClass(2);
-		createEAttribute(charactersEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
+		createEAttribute(charactersEClass, 1);
 
 		classAttributeEClass = createEClass(3);
-		createEReference(classAttributeEClass, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0);
-		createEReference(classAttributeEClass, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1);
+		createEReference(classAttributeEClass, 4);
+		createEReference(classAttributeEClass, 5);
 
 		classElementEClass = createEClass(4);
-		createEReference(classElementEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(classElementEClass, 5);
 
 		commentEClass = createEClass(5);
-		createEAttribute(commentEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
+		createEAttribute(commentEClass, 1);
 
 		dtdEClass = createEClass(6);
-		createEAttribute(dtdEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
-		createEAttribute(dtdEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
-		createEAttribute(dtdEClass, NodeImpl.NODE_FEATURE_COUNT + 2);
+		createEAttribute(dtdEClass, 1);
+		createEAttribute(dtdEClass, 2);
+		createEAttribute(dtdEClass, 3);
 
 		dataTypeAttributeEClass = createEClass(7);
-		createEReference(dataTypeAttributeEClass, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0);
+		createEReference(dataTypeAttributeEClass, 4);
 
 		dataTypeElementEClass = createEClass(8);
-		createEReference(dataTypeElementEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(dataTypeElementEClass, 5);
 
 		documentEClass = createEClass(9);
 
 		elementEClass = createEClass(10);
-		createEAttribute(elementEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
-		createEAttribute(elementEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
-		createEAttribute(elementEClass, NodeImpl.NODE_FEATURE_COUNT + 2);
-		createEReference(elementEClass, NodeImpl.NODE_FEATURE_COUNT + 3);
+		createEAttribute(elementEClass, 1);
+		createEAttribute(elementEClass, 2);
+		createEAttribute(elementEClass, 3);
+		createEReference(elementEClass, 4);
 
 		entityEClass = createEClass(11);
-		createEAttribute(entityEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
+		createEAttribute(entityEClass, 1);
 
 		nodeEClass = createEClass(12);
 		createEReference(nodeEClass, 0);
 
 		prefixMappingEClass = createEClass(13);
-		createEAttribute(prefixMappingEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
-		createEAttribute(prefixMappingEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
+		createEAttribute(prefixMappingEClass, 1);
+		createEAttribute(prefixMappingEClass, 2);
 
 		processingInstructionEClass = createEClass(14);
-		createEAttribute(processingInstructionEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
-		createEAttribute(processingInstructionEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
+		createEAttribute(processingInstructionEClass, 1);
+		createEAttribute(processingInstructionEClass, 2);
 	}
 
 	/**

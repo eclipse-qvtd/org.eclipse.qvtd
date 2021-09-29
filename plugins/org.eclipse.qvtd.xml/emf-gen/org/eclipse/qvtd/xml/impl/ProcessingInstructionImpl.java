@@ -135,7 +135,7 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 		String oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldTarget, target));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldTarget, target));
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 		String oldData = data;
 		data = newData;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldData, data));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldData, data));
 	}
 
 	/**
@@ -169,9 +169,9 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getTarget();
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getData();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -185,10 +185,10 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setTarget((String)newValue);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setData((String)newValue);
 				return;
 		}
@@ -203,10 +203,10 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setTarget(TARGET_EDEFAULT);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setData(DATA_EDEFAULT);
 				return;
 		}
@@ -221,9 +221,9 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return TARGET_EDEFAULT == null ? target != null : !TARGET_EDEFAULT.equals(target);
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return DATA_EDEFAULT == null ? data != null : !DATA_EDEFAULT.equals(data);
 		}
 		return super.eIsSet(featureID);

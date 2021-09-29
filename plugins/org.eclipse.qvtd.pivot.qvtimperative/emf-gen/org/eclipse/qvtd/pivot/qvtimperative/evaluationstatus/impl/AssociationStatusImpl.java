@@ -48,6 +48,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStat
  */
 public class AssociationStatusImpl extends PropertyStatusImpl implements AssociationStatus {
 	/**
+	 * The number of structural features of the '<em>Association Status</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASSOCIATION_STATUS_FEATURE_COUNT = PropertyStatusImpl.PROPERTY_STATUS_FEATURE_COUNT + 6;
+
+	/**
 	 * The cached value of the '{@link #getForwardEReference() <em>Forward EReference</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,7 +157,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 			forwardEReference = (EReference)eResolveProxy(oldForwardEReference);
 			if (forwardEReference != oldForwardEReference) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EvaluationStatusPackage.ASSOCIATION_STATUS__FORWARD_EREFERENCE, oldForwardEReference, forwardEReference));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 8, oldForwardEReference, forwardEReference));
 			}
 		}
 		return forwardEReference;
@@ -173,7 +182,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 		EReference oldForwardEReference = forwardEReference;
 		forwardEReference = newForwardEReference;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.ASSOCIATION_STATUS__FORWARD_EREFERENCE, oldForwardEReference, forwardEReference));
+			eNotify(new ENotificationImpl(this, Notification.SET, 8, oldForwardEReference, forwardEReference));
 	}
 
 	/**
@@ -184,7 +193,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	@Override
 	public EList<ClassStatus> getFromClassStatuses() {
 		if (fromClassStatuses == null) {
-			fromClassStatuses = new EObjectResolvingEList<ClassStatus>(ClassStatus.class, this, EvaluationStatusPackage.ASSOCIATION_STATUS__FROM_CLASS_STATUSES);
+			fromClassStatuses = new EObjectResolvingEList<ClassStatus>(ClassStatus.class, this, 9);
 		}
 		return fromClassStatuses;
 	}
@@ -209,7 +218,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 		boolean oldIsInput = isInput;
 		isInput = newIsInput;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.ASSOCIATION_STATUS__IS_INPUT, oldIsInput, isInput));
+			eNotify(new ENotificationImpl(this, Notification.SET, 10, oldIsInput, isInput));
 	}
 
 	/**
@@ -232,7 +241,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 		boolean oldIsOutput = isOutput;
 		isOutput = newIsOutput;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.ASSOCIATION_STATUS__IS_OUTPUT, oldIsOutput, isOutput));
+			eNotify(new ENotificationImpl(this, Notification.SET, 11, oldIsOutput, isOutput));
 	}
 
 	/**
@@ -242,7 +251,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	 */
 	@Override
 	public TransformationStatus getOwningTransformationStatus() {
-		if (eContainerFeatureID() != EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS) return null;
+		if (eContainerFeatureID() != (12)) return null;
 		return (TransformationStatus)eInternalContainer();
 	}
 
@@ -252,7 +261,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTransformationStatus(TransformationStatus newOwningTransformationStatus, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTransformationStatus, EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTransformationStatus, 12, msgs);
 		return msgs;
 	}
 
@@ -263,19 +272,19 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	 */
 	@Override
 	public void setOwningTransformationStatus(TransformationStatus newOwningTransformationStatus) {
-		if (newOwningTransformationStatus != eInternalContainer() || (eContainerFeatureID() != EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS && newOwningTransformationStatus != null)) {
+		if (newOwningTransformationStatus != eInternalContainer() || (eContainerFeatureID() != (12) && newOwningTransformationStatus != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTransformationStatus))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTransformationStatus != null)
-				msgs = ((InternalEObject)newOwningTransformationStatus).eInverseAdd(this, EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES, TransformationStatus.class, msgs);
+				msgs = ((InternalEObject)newOwningTransformationStatus).eInverseAdd(this, 0, TransformationStatus.class, msgs);
 			msgs = basicSetOwningTransformationStatus(newOwningTransformationStatus, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS, newOwningTransformationStatus, newOwningTransformationStatus));
+			eNotify(new ENotificationImpl(this, Notification.SET, 12, newOwningTransformationStatus, newOwningTransformationStatus));
 	}
 
 	/**
@@ -286,7 +295,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	@Override
 	public EList<ClassStatus> getToClassStatuses() {
 		if (toClassStatuses == null) {
-			toClassStatuses = new EObjectResolvingEList<ClassStatus>(ClassStatus.class, this, EvaluationStatusPackage.ASSOCIATION_STATUS__TO_CLASS_STATUSES);
+			toClassStatuses = new EObjectResolvingEList<ClassStatus>(ClassStatus.class, this, 13);
 		}
 		return toClassStatuses;
 	}
@@ -294,7 +303,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
@@ -309,7 +318,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 12:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTransformationStatus((TransformationStatus)otherEnd, msgs);
@@ -325,7 +334,7 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 12:
 				return basicSetOwningTransformationStatus(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -339,8 +348,8 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS:
-				return eInternalContainer().eInverseRemove(this, EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_ASSOCIATION_STATUSES, TransformationStatus.class, msgs);
+			case 12:
+				return eInternalContainer().eInverseRemove(this, 0, TransformationStatus.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -353,18 +362,18 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__FORWARD_EREFERENCE:
+			case 8:
 				if (resolve) return getForwardEReference();
 				return basicGetForwardEReference();
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__FROM_CLASS_STATUSES:
+			case 9:
 				return getFromClassStatuses();
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__IS_INPUT:
+			case 10:
 				return isIsInput();
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__IS_OUTPUT:
+			case 11:
 				return isIsOutput();
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 12:
 				return getOwningTransformationStatus();
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__TO_CLASS_STATUSES:
+			case 13:
 				return getToClassStatuses();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -379,23 +388,23 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__FORWARD_EREFERENCE:
+			case 8:
 				setForwardEReference((EReference)newValue);
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__FROM_CLASS_STATUSES:
+			case 9:
 				getFromClassStatuses().clear();
 				getFromClassStatuses().addAll((Collection<? extends ClassStatus>)newValue);
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__IS_INPUT:
+			case 10:
 				setIsInput((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__IS_OUTPUT:
+			case 11:
 				setIsOutput((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 12:
 				setOwningTransformationStatus((TransformationStatus)newValue);
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__TO_CLASS_STATUSES:
+			case 13:
 				getToClassStatuses().clear();
 				getToClassStatuses().addAll((Collection<? extends ClassStatus>)newValue);
 				return;
@@ -411,22 +420,22 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__FORWARD_EREFERENCE:
+			case 8:
 				setForwardEReference((EReference)null);
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__FROM_CLASS_STATUSES:
+			case 9:
 				getFromClassStatuses().clear();
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__IS_INPUT:
+			case 10:
 				setIsInput(IS_INPUT_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__IS_OUTPUT:
+			case 11:
 				setIsOutput(IS_OUTPUT_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 12:
 				setOwningTransformationStatus((TransformationStatus)null);
 				return;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__TO_CLASS_STATUSES:
+			case 13:
 				getToClassStatuses().clear();
 				return;
 		}
@@ -441,17 +450,17 @@ public class AssociationStatusImpl extends PropertyStatusImpl implements Associa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__FORWARD_EREFERENCE:
+			case 8:
 				return forwardEReference != null;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__FROM_CLASS_STATUSES:
+			case 9:
 				return fromClassStatuses != null && !fromClassStatuses.isEmpty();
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__IS_INPUT:
+			case 10:
 				return isInput != IS_INPUT_EDEFAULT;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__IS_OUTPUT:
+			case 11:
 				return isOutput != IS_OUTPUT_EDEFAULT;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 12:
 				return getOwningTransformationStatus() != null;
-			case EvaluationStatusPackage.ASSOCIATION_STATUS__TO_CLASS_STATUSES:
+			case 13:
 				return toClassStatuses != null && !toClassStatuses.isEmpty();
 		}
 		return super.eIsSet(featureID);

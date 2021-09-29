@@ -158,7 +158,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		String oldLocalName = localName;
 		localName = newLocalName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldLocalName, localName));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldLocalName, localName));
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		String oldQName = qName;
 		qName = newQName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldQName, qName));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldQName, qName));
 	}
 
 	/**
@@ -204,7 +204,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		String oldUri = uri;
 		uri = newUri;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 2, oldUri, uri));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldUri, uri));
 	}
 
 	/**
@@ -215,13 +215,13 @@ public class ElementImpl extends NodeImpl implements Element {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getLocalName();
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getQName();
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				return getUri();
-			case NodeImpl.NODE_FEATURE_COUNT + 3:
+			case 4:
 				return getEcoreClassifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -235,13 +235,13 @@ public class ElementImpl extends NodeImpl implements Element {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setLocalName((String)newValue);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setQName((String)newValue);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				setUri((String)newValue);
 				return;
 		}
@@ -256,13 +256,13 @@ public class ElementImpl extends NodeImpl implements Element {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setLocalName(LOCAL_NAME_EDEFAULT);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setQName(QNAME_EDEFAULT);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				setUri(URI_EDEFAULT);
 				return;
 		}
@@ -277,13 +277,13 @@ public class ElementImpl extends NodeImpl implements Element {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return LOCAL_NAME_EDEFAULT == null ? localName != null : !LOCAL_NAME_EDEFAULT.equals(localName);
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return QNAME_EDEFAULT == null ? qName != null : !QNAME_EDEFAULT.equals(qName);
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-			case NodeImpl.NODE_FEATURE_COUNT + 3:
+			case 4:
 				return getEcoreClassifier() != null;
 		}
 		return super.eIsSet(featureID);

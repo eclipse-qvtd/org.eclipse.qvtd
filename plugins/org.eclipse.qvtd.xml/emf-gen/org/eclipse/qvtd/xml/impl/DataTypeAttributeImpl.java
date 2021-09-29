@@ -101,7 +101,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 		EAttribute oldEcoreAttribute = ecoreAttribute;
 		ecoreAttribute = newEcoreAttribute;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0, oldEcoreAttribute, ecoreAttribute));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldEcoreAttribute, ecoreAttribute));
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
+			case 4:
 				return getEcoreAttribute();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -126,7 +126,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
+			case 4:
 				setEcoreAttribute((EAttribute)newValue);
 				return;
 		}
@@ -141,7 +141,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
+			case 4:
 				setEcoreAttribute((EAttribute)null);
 				return;
 		}
@@ -156,7 +156,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
+			case 4:
 				return ecoreAttribute != null;
 		}
 		return super.eIsSet(featureID);

@@ -80,7 +80,7 @@ public class EvaluationStatusAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected EvaluationStatusSwitch<@Nullable Adapter> modelSwitch =
-		new EvaluationStatusSwitch<@Nullable Adapter>() {
+			new EvaluationStatusSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAssociationStatus(AssociationStatus object) {
 				return createAssociationStatusAdapter();

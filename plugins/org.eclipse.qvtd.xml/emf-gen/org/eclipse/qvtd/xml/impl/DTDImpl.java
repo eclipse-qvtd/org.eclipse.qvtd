@@ -156,7 +156,7 @@ public class DTDImpl extends NodeImpl implements DTD {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class DTDImpl extends NodeImpl implements DTD {
 		String oldPublicId = publicId;
 		publicId = newPublicId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldPublicId, publicId));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldPublicId, publicId));
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class DTDImpl extends NodeImpl implements DTD {
 		String oldSystemId = systemId;
 		systemId = newSystemId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 2, oldSystemId, systemId));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldSystemId, systemId));
 	}
 
 	/**
@@ -213,11 +213,11 @@ public class DTDImpl extends NodeImpl implements DTD {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getName();
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getPublicId();
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				return getSystemId();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -231,13 +231,13 @@ public class DTDImpl extends NodeImpl implements DTD {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setName((String)newValue);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setPublicId((String)newValue);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				setSystemId((String)newValue);
 				return;
 		}
@@ -252,13 +252,13 @@ public class DTDImpl extends NodeImpl implements DTD {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setPublicId(PUBLIC_ID_EDEFAULT);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				setSystemId(SYSTEM_ID_EDEFAULT);
 				return;
 		}
@@ -273,11 +273,11 @@ public class DTDImpl extends NodeImpl implements DTD {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return PUBLIC_ID_EDEFAULT == null ? publicId != null : !PUBLIC_ID_EDEFAULT.equals(publicId);
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				return SYSTEM_ID_EDEFAULT == null ? systemId != null : !SYSTEM_ID_EDEFAULT.equals(systemId);
 		}
 		return super.eIsSet(featureID);

@@ -135,7 +135,7 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 		String oldPrefix = prefix;
 		prefix = newPrefix;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldPrefix, prefix));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldPrefix, prefix));
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 		String oldUri = uri;
 		uri = newUri;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldUri, uri));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldUri, uri));
 	}
 
 	/**
@@ -169,9 +169,9 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getPrefix();
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getUri();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -185,10 +185,10 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setPrefix((String)newValue);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setUri((String)newValue);
 				return;
 		}
@@ -203,10 +203,10 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setPrefix(PREFIX_EDEFAULT);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setUri(URI_EDEFAULT);
 				return;
 		}
@@ -221,9 +221,9 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 		}
 		return super.eIsSet(featureID);

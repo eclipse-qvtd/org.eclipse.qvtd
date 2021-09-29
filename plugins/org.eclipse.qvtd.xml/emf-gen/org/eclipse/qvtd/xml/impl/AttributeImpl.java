@@ -134,7 +134,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldName, name));
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldValue, value));
 	}
 
 	/**
@@ -168,11 +168,11 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return getName();
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return getValue();
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				return getEcoreFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -186,10 +186,10 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setName((String)newValue);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setValue((String)newValue);
 				return;
 		}
@@ -204,10 +204,10 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				setName(NAME_EDEFAULT);
 				return;
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				setValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -222,11 +222,11 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case NodeImpl.NODE_FEATURE_COUNT + 1:
+			case 2:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case NodeImpl.NODE_FEATURE_COUNT + 2:
+			case 3:
 				return getEcoreFeature() != null;
 		}
 		return super.eIsSet(featureID);

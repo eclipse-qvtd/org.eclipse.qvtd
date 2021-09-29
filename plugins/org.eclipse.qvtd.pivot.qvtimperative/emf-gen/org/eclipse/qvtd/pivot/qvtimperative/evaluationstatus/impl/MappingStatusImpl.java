@@ -52,6 +52,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStat
  */
 public class MappingStatusImpl extends EvaluationElementImpl implements MappingStatus {
 	/**
+	 * The number of structural features of the '<em>Mapping Status</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_STATUS_FEATURE_COUNT = EvaluationElementImpl.EVALUATION_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The cached value of the '{@link #getBoundValues() <em>Bound Values</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,7 +188,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public @NonNull EList<Object> getBoundValues() {
 		if (boundValues == null) {
-			boundValues = new EDataTypeUniqueEList<Object>(Object.class, this, EvaluationStatusPackage.MAPPING_STATUS__BOUND_VALUES);
+			boundValues = new EDataTypeUniqueEList<Object>(Object.class, this, 0);
 		}
 		return boundValues;
 	}
@@ -204,7 +213,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 		Integer oldDepth = depth;
 		depth = newDepth;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.MAPPING_STATUS__DEPTH, oldDepth, depth));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldDepth, depth));
 	}
 
 	/**
@@ -215,7 +224,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public EList<ElementStatus> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectWithInverseResolvingEList.ManyInverse<ElementStatus>(ElementStatus.class, this, EvaluationStatusPackage.MAPPING_STATUS__INPUTS, EvaluationStatusPackage.ELEMENT_STATUS__TARGETS);
+			inputs = new EObjectWithInverseResolvingEList.ManyInverse<ElementStatus>(ElementStatus.class, this, 2, 2);
 		}
 		return inputs;
 	}
@@ -240,7 +249,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 		boolean oldIsBlocked = isBlocked;
 		isBlocked = newIsBlocked;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.MAPPING_STATUS__IS_BLOCKED, oldIsBlocked, isBlocked));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldIsBlocked, isBlocked));
 	}
 
 	/**
@@ -263,7 +272,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 		boolean oldIsDirty = isDirty;
 		isDirty = newIsDirty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.MAPPING_STATUS__IS_DIRTY, oldIsDirty, isDirty));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldIsDirty, isDirty));
 	}
 
 	/**
@@ -274,7 +283,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public EList<ElementStatus> getOutputs() {
 		if (outputs == null) {
-			outputs = new EObjectWithInverseResolvingEList.ManyInverse<ElementStatus>(ElementStatus.class, this, EvaluationStatusPackage.MAPPING_STATUS__OUTPUTS, EvaluationStatusPackage.ELEMENT_STATUS__SOURCES);
+			outputs = new EObjectWithInverseResolvingEList.ManyInverse<ElementStatus>(ElementStatus.class, this, 5, 1);
 		}
 		return outputs;
 	}
@@ -286,7 +295,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	 */
 	@Override
 	public TransformationStatus getOwningTransformationStatus() {
-		if (eContainerFeatureID() != EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS) return null;
+		if (eContainerFeatureID() != (6)) return null;
 		return (TransformationStatus)eInternalContainer();
 	}
 
@@ -296,7 +305,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTransformationStatus(TransformationStatus newOwningTransformationStatus, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTransformationStatus, EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTransformationStatus, 6, msgs);
 		return msgs;
 	}
 
@@ -307,19 +316,19 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	 */
 	@Override
 	public void setOwningTransformationStatus(TransformationStatus newOwningTransformationStatus) {
-		if (newOwningTransformationStatus != eInternalContainer() || (eContainerFeatureID() != EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS && newOwningTransformationStatus != null)) {
+		if (newOwningTransformationStatus != eInternalContainer() || (eContainerFeatureID() != (6) && newOwningTransformationStatus != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTransformationStatus))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTransformationStatus != null)
-				msgs = ((InternalEObject)newOwningTransformationStatus).eInverseAdd(this, EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES, TransformationStatus.class, msgs);
+				msgs = ((InternalEObject)newOwningTransformationStatus).eInverseAdd(this, 2, TransformationStatus.class, msgs);
 			msgs = basicSetOwningTransformationStatus(newOwningTransformationStatus, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS, newOwningTransformationStatus, newOwningTransformationStatus));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, newOwningTransformationStatus, newOwningTransformationStatus));
 	}
 
 	/**
@@ -334,7 +343,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 			referredMappingCall = (MappingCall)eResolveProxy(oldReferredMappingCall);
 			if (referredMappingCall != oldReferredMappingCall) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EvaluationStatusPackage.MAPPING_STATUS__REFERRED_MAPPING_CALL, oldReferredMappingCall, referredMappingCall));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, 7, oldReferredMappingCall, referredMappingCall));
 			}
 		}
 		return referredMappingCall;
@@ -359,13 +368,13 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 		MappingCall oldReferredMappingCall = referredMappingCall;
 		referredMappingCall = newReferredMappingCall;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EvaluationStatusPackage.MAPPING_STATUS__REFERRED_MAPPING_CALL, oldReferredMappingCall, referredMappingCall));
+			eNotify(new ENotificationImpl(this, Notification.SET, 7, oldReferredMappingCall, referredMappingCall));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
@@ -381,11 +390,11 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.MAPPING_STATUS__INPUTS:
+			case 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInputs()).basicAdd(otherEnd, msgs);
-			case EvaluationStatusPackage.MAPPING_STATUS__OUTPUTS:
+			case 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutputs()).basicAdd(otherEnd, msgs);
-			case EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 6:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTransformationStatus((TransformationStatus)otherEnd, msgs);
@@ -401,11 +410,11 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case EvaluationStatusPackage.MAPPING_STATUS__INPUTS:
+			case 2:
 				return ((InternalEList<?>)getInputs()).basicRemove(otherEnd, msgs);
-			case EvaluationStatusPackage.MAPPING_STATUS__OUTPUTS:
+			case 5:
 				return ((InternalEList<?>)getOutputs()).basicRemove(otherEnd, msgs);
-			case EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 6:
 				return basicSetOwningTransformationStatus(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -419,8 +428,8 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS:
-				return eInternalContainer().eInverseRemove(this, EvaluationStatusPackage.TRANSFORMATION_STATUS__OWNED_MAPPING_STATUSES, TransformationStatus.class, msgs);
+			case 6:
+				return eInternalContainer().eInverseRemove(this, 2, TransformationStatus.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -433,21 +442,21 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EvaluationStatusPackage.MAPPING_STATUS__BOUND_VALUES:
+			case 0:
 				return getBoundValues();
-			case EvaluationStatusPackage.MAPPING_STATUS__DEPTH:
+			case 1:
 				return getDepth();
-			case EvaluationStatusPackage.MAPPING_STATUS__INPUTS:
+			case 2:
 				return getInputs();
-			case EvaluationStatusPackage.MAPPING_STATUS__IS_BLOCKED:
+			case 3:
 				return isIsBlocked();
-			case EvaluationStatusPackage.MAPPING_STATUS__IS_DIRTY:
+			case 4:
 				return isIsDirty();
-			case EvaluationStatusPackage.MAPPING_STATUS__OUTPUTS:
+			case 5:
 				return getOutputs();
-			case EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 6:
 				return getOwningTransformationStatus();
-			case EvaluationStatusPackage.MAPPING_STATUS__REFERRED_MAPPING_CALL:
+			case 7:
 				if (resolve) return getReferredMappingCall();
 				return basicGetReferredMappingCall();
 		}
@@ -463,31 +472,31 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EvaluationStatusPackage.MAPPING_STATUS__BOUND_VALUES:
+			case 0:
 				getBoundValues().clear();
 				getBoundValues().addAll((Collection<? extends Object>)newValue);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__DEPTH:
+			case 1:
 				setDepth((Integer)newValue);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__INPUTS:
+			case 2:
 				getInputs().clear();
 				getInputs().addAll((Collection<? extends ElementStatus>)newValue);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__IS_BLOCKED:
+			case 3:
 				setIsBlocked((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__IS_DIRTY:
+			case 4:
 				setIsDirty((Boolean)newValue);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__OUTPUTS:
+			case 5:
 				getOutputs().clear();
 				getOutputs().addAll((Collection<? extends ElementStatus>)newValue);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 6:
 				setOwningTransformationStatus((TransformationStatus)newValue);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__REFERRED_MAPPING_CALL:
+			case 7:
 				setReferredMappingCall((MappingCall)newValue);
 				return;
 		}
@@ -502,28 +511,28 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.MAPPING_STATUS__BOUND_VALUES:
+			case 0:
 				getBoundValues().clear();
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__DEPTH:
+			case 1:
 				setDepth(DEPTH_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__INPUTS:
+			case 2:
 				getInputs().clear();
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__IS_BLOCKED:
+			case 3:
 				setIsBlocked(IS_BLOCKED_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__IS_DIRTY:
+			case 4:
 				setIsDirty(IS_DIRTY_EDEFAULT);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__OUTPUTS:
+			case 5:
 				getOutputs().clear();
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 6:
 				setOwningTransformationStatus((TransformationStatus)null);
 				return;
-			case EvaluationStatusPackage.MAPPING_STATUS__REFERRED_MAPPING_CALL:
+			case 7:
 				setReferredMappingCall((MappingCall)null);
 				return;
 		}
@@ -538,21 +547,21 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EvaluationStatusPackage.MAPPING_STATUS__BOUND_VALUES:
+			case 0:
 				return boundValues != null && !boundValues.isEmpty();
-			case EvaluationStatusPackage.MAPPING_STATUS__DEPTH:
+			case 1:
 				return DEPTH_EDEFAULT == null ? depth != null : !DEPTH_EDEFAULT.equals(depth);
-			case EvaluationStatusPackage.MAPPING_STATUS__INPUTS:
+			case 2:
 				return inputs != null && !inputs.isEmpty();
-			case EvaluationStatusPackage.MAPPING_STATUS__IS_BLOCKED:
+			case 3:
 				return isBlocked != IS_BLOCKED_EDEFAULT;
-			case EvaluationStatusPackage.MAPPING_STATUS__IS_DIRTY:
+			case 4:
 				return isDirty != IS_DIRTY_EDEFAULT;
-			case EvaluationStatusPackage.MAPPING_STATUS__OUTPUTS:
+			case 5:
 				return outputs != null && !outputs.isEmpty();
-			case EvaluationStatusPackage.MAPPING_STATUS__OWNING_TRANSFORMATION_STATUS:
+			case 6:
 				return getOwningTransformationStatus() != null;
-			case EvaluationStatusPackage.MAPPING_STATUS__REFERRED_MAPPING_CALL:
+			case 7:
 				return referredMappingCall != null;
 		}
 		return super.eIsSet(featureID);

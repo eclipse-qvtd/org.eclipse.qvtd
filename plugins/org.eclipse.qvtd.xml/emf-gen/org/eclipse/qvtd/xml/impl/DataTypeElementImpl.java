@@ -101,7 +101,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 		EDataType oldEcoreDataType = ecoreDataType;
 		ecoreDataType = newEcoreDataType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldEcoreDataType, ecoreDataType));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldEcoreDataType, ecoreDataType));
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+			case 5:
 				return getEcoreDataType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -126,7 +126,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+			case 5:
 				setEcoreDataType((EDataType)newValue);
 				return;
 		}
@@ -141,7 +141,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+			case 5:
 				setEcoreDataType((EDataType)null);
 				return;
 		}
@@ -156,7 +156,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+			case 5:
 				return ecoreDataType != null;
 		}
 		return super.eIsSet(featureID);

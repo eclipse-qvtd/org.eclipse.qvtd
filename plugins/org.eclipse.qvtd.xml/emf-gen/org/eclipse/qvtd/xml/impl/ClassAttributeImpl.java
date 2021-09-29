@@ -118,7 +118,7 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 		EReference oldEcoreReference = ecoreReference;
 		ecoreReference = newEcoreReference;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0, oldEcoreReference, ecoreReference));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, oldEcoreReference, ecoreReference));
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	@Override
 	public EList<EObject> getEObjects() {
 		if (eObjects == null) {
-			eObjects = new EObjectEList<EObject>(EObject.class, this, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1);
+			eObjects = new EObjectEList<EObject>(EObject.class, this, 5);
 		}
 		return eObjects;
 	}
@@ -142,9 +142,9 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
+			case 4:
 				return getEcoreReference();
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1:
+			case 5:
 				return getEObjects();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -159,10 +159,10 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
+			case 4:
 				setEcoreReference((EReference)newValue);
 				return;
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1:
+			case 5:
 				getEObjects().clear();
 				getEObjects().addAll((Collection<? extends EObject>)newValue);
 				return;
@@ -178,10 +178,10 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
+			case 4:
 				setEcoreReference((EReference)null);
 				return;
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1:
+			case 5:
 				getEObjects().clear();
 				return;
 		}
@@ -196,9 +196,9 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
+			case 4:
 				return ecoreReference != null;
-			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1:
+			case 5:
 				return eObjects != null && !eObjects.isEmpty();
 		}
 		return super.eIsSet(featureID);
