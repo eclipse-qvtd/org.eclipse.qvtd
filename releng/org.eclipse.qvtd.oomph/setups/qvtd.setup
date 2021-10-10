@@ -9,9 +9,8 @@
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
     name="qvtd"
     label="QVTd">
   <setupTask
@@ -19,6 +18,14 @@
       name="eclipse.target.platform"
       defaultValue="2021-09"
       storageURI="scope://Workspace"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="epsilon.p2.repository"
+      defaultValue="https://download.eclipse.org/epsilon/updates/2.1"
+      storageURI="scope://Workspace"
+      label="Epsilon P2 repository">
+    <description>URL at which the P2 repository of a compatible Epsilon release can be found.</description>
+  </setupTask>
   <setupTask
       xsi:type="git:GitCloneTask"
       id="qvtd.git.clone"
@@ -72,219 +79,40 @@
       </content>
     </setupTask>
     <setupTask
-        xsi:type="setup.targlets:TargletTask">
-      <targlet
-          name="QVTd Target Platform"
-          activeRepositoryList="${eclipse.target.platform}">
-        <requirement
-            name="org.eclipse.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.validation.feature.group"/>
-        <requirement
-            name="org.eclipse.uml2.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.ocl.examples.xtext.tests"/>
-        <requirement
-            name="org.eclipse.xtext.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.m2m.atl.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.epsilon.core.feature.feature.group"/>
-        <requirement
-            name="org.eclipse.epsilon.emf.feature.feature.group"/>
-        <repositoryList
-            name="Latest">
-          <repository
-              url="https://download.eclipse.org/releases/latest"/>
-          <repository
-              url="https://download.eclipse.org/modeling/emf/emf/builds/release/latest"/>
-          <repository
-              url="https://download.eclipse.org/modeling/mdt/ocl/updates/nightly/latest"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/latest-R"/>
-          <repository
-              url="https://download.eclipse.org/epsilon/updates/2.1"/>
-        </repositoryList>
-        <repositoryList
-            name="2021-09">
-          <repository
-              url="https://download.eclipse.org/releases/2021-09"/>
-          <repository
-              url="https://download.eclipse.org/modeling/emf/emf/builds/release/2.27"/>
-          <repository
-              url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.16.0"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20210825222808/repository/"/>
-          <repository
-              url="https://download.eclipse.org/epsilon/updates/2.1"/>
-        </repositoryList>
-        <repositoryList
-            name="2021-06">
-          <repository
-              url="https://download.eclipse.org/releases/2021-06"/>
-          <repository
-              url="https://download.eclipse.org/modeling/emf/emf/builds/release/2.26"/>
-          <repository
-              url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.15.0"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20210602031627/repository/"/>
-          <repository
-              url="https://download.eclipse.org/epsilon/updates/1.5"/>
-        </repositoryList>
-        <repositoryList
-            name="2021-03">
-          <repository
-              url="https://download.eclipse.org/releases/2021-03"/>
-          <repository
-              url="https://download.eclipse.org/modeling/emf/emf/builds/release/2.25"/>
-          <repository
-              url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.14.0"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20210223232630/repository/"/>
-          <repository
-              url="https://download.eclipse.org/epsilon/updates/1.5"/>
-        </repositoryList>
-        <repositoryList
-            name="2020-12">
-          <repository
-              url="https://download.eclipse.org/releases/2020-12"/>
-          <repository
-              url="https://download.eclipse.org/modeling/emf/emf/builds/release/2.24"/>
-          <repository
-              url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.13.0"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20201130205003/repository/"/>
-          <repository
-              url="https://download.eclipse.org/epsilon/updates/1.5"/>
-        </repositoryList>
-        <repositoryList
-            name="2020-06">
-          <repository
-              url="https://download.eclipse.org/releases/2020-06"/>
-          <repository
-              url="https://download.eclipse.org/modeling/emf/emf/builds/release/2.22"/>
-          <repository
-              url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.12.0"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20200529191137/repository/"/>
-          <repository
-              url="https://download.eclipse.org/epsilon/updates/1.5"/>
-        </repositoryList>
-        <repositoryList
-            name="2020-03">
-          <repository
-              url="https://download.eclipse.org/releases/2020-03"/>
-          <repository
-              url="https://download.eclipse.org/modeling/emf/emf/builds/release/2.21"/>
-          <repository
-              url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.11.0"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20200224183213/repository/"/>
-          <repository
-              url="https://download.eclipse.org/epsilon/updates/1.5"/>
-        </repositoryList>
-        <repositoryList
-            name="2019-12">
-          <repository
-              url="https://download.eclipse.org/releases/2019-12"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20191126223242/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="2019-09">
-          <repository
-              url="https://download.eclipse.org/releases/2019-09"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20190827152740/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="2019-06">
-          <repository
-              url="https://download.eclipse.org/releases/2019-06"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20190602212107/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="2019-03">
-          <repository
-              url="https://download.eclipse.org/releases/2019-03"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20190226160451/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="2018-12">
-          <repository
-              url="https://download.eclipse.org/releases/2018-12"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20181128170323/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="2018-09">
-          <repository
-              url="https://download.eclipse.org/releases/2018-09"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20181128170323/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="Photon">
-          <repository
-              url="https://download.eclipse.org/releases/photon"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="Oxygen">
-          <repository
-              url="https://download.eclipse.org/releases/oxygen"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20180330011457/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="Neon">
-          <repository
-              url="https://download.eclipse.org/releases/neon"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/R-builds/R20170307180635/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="Mars">
-          <repository
-              url="https://download.eclipse.org/releases/mars"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/"/>
-        </repositoryList>
-        <repositoryList
-            name="Luna">
-          <repository
-              url="https://download.eclipse.org/releases/luna"/>
-          <repository
-              url="https://download.eclipse.org/tools/orbit/downloads/drops/R20150124073747/repository/"/>
-          <repository
-              url="https://download.eclipse.org/modeling/mdt/papyrus/updates/releases/luna"/>
-        </repositoryList>
-      </targlet>
-    </setupTask>
-    <setupTask
         xsi:type="setup.p2:P2Task"
         label="Developer IDE ">
       <requirement
+          name="org.eclipse.egit.feature.group"/>
+      <requirement
           name="org.eclipse.emf.sdk.feature.group"/>
       <requirement
-          name="org.eclipse.xtext.sdk.feature.group"/>
+          name="org.eclipse.emf.validation.feature.group"/>
       <requirement
-          name="org.eclipse.egit.feature.group"/>
+          name="org.eclipse.epsilon.core.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.epsilon.emf.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.jdt.junit4.runtime"/>
       <requirement
           name="org.eclipse.ocl.all.sdk.feature.group"/>
       <requirement
           name="org.eclipse.ocl.examples.feature.group"/>
       <requirement
+          name="org.eclipse.m2m.atl.sdk.feature.group"/>
+      <requirement
           name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
       <requirement
+          name="org.eclipse.pde.junit.runtime"/>
+      <requirement
           name="org.eclipse.qvtd.master.feature.group"/>
+      <requirement
+          name="org.eclipse.sirius.specifier.feature.group"/>
+      <requirement
+          name="org.eclipse.uml2.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.xtext.sdk.feature.group"/>
+      <repository
+          url="${epsilon.p2.repository}"/>
       <description>Mandatory IDE for QVTd Developers</description>
     </setupTask>
   </setupTask>
@@ -335,7 +163,13 @@
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.autogen"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.ocl.examples.build"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.extlibrary"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.ocl.examples.xtext.build"/>
@@ -346,6 +180,13 @@
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.ocl.pivot"/>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${ocl.git.clone.location/tests}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.xtext.tests"/>
       </sourceLocator>
       <sourceLocator
           rootFolder="${qvtd.git.clone.location/examples}"
@@ -482,7 +323,7 @@
     </setupTask>
     <stream
         name="master"
-        label="Master (Latest)">
+        label="zzMaster (Latest)">
       <setupTask
           xsi:type="setup:VariableTask"
           name="ocl.branch"
