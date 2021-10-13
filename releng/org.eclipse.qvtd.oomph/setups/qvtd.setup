@@ -9,112 +9,59 @@
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
     name="qvtd"
     label="QVTd">
   <setupTask
+      xsi:type="jdt:JRETask"
+      version="JavaSE-11"
+      location="${jre.location-11}"
+      name="JRE for JavaSE-11">
+    <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:EclipseIniTask"
+      option="-Xmx"
+      value="1024m"
+      vm="true">
+    <description>Set the heap space needed to work with the projects of ${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:ResourceCreationTask"
+      excludedTriggers="STARTUP MANUAL"
+      targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml"
+      encoding="UTF-8">
+    <description>Initialize JDT's package explorer to show working sets as its root objects</description>
+    <content>
+      &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
+      &lt;section name=&quot;Workbench&quot;>
+      	&lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>
+      		&lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>
+      		&lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>
+      		&lt;item value=&quot;2&quot; key=&quot;layout&quot;/>
+      		&lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>
+      		&lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>
+      	&lt;/section>
+      &lt;/section>
+
+    </content>
+  </setupTask>
+  <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2021-09"
+      defaultValue="2021-12"
       storageURI="scope://Workspace"/>
   <setupTask
-      xsi:type="setup:VariableTask"
-      name="epsilon.p2.repository"
-      defaultValue="https://download.eclipse.org/epsilon/updates/2.1"
-      storageURI="scope://Workspace"
-      label="Epsilon P2 repository">
-    <description>URL at which the P2 repository of a compatible Epsilon release can be found.</description>
-  </setupTask>
-  <setupTask
-      xsi:type="git:GitCloneTask"
-      id="qvtd.git.clone"
-      remoteURI="mmt/org.eclipse.qvtd.git">
-    <annotation
-        source="http://www.eclipse.org/oomph/setup/InducedChoices">
-      <detail
-          key="inherit">
-        <value>eclipse.git.gerrit.remoteURIs</value>
-      </detail>
-      <detail
-          key="label">
-        <value>QVTd Git or Gerrit Repository</value>
-      </detail>
-      <detail
-          key="target">
-        <value>remoteURI</value>
-      </detail>
-    </annotation>
-    <description>QVTd Git repository clone</description>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:CompoundTask"
-      name="Eclipse Installation">
-    <setupTask
-        xsi:type="jdt:JRETask"
-        version="JavaSE-11"
-        location="${jre.location-11}"/>
-    <setupTask
-        xsi:type="setup:EclipseIniTask"
-        option="-Xmx"
-        value="2048m"
-        vm="true"/>
-    <setupTask
-        xsi:type="setup:ResourceCreationTask"
-        excludedTriggers="STARTUP MANUAL"
-        targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml"
-        encoding="UTF-8">
-      <content>
-        &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
-        &lt;section name=&quot;Workbench&quot;>
-        	&lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>
-        		&lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>
-        		&lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>
-        		&lt;item value=&quot;2&quot; key=&quot;layout&quot;/>
-        		&lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>
-        		&lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>
-        	&lt;/section>
-        &lt;/section>
-
-      </content>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        label="Developer IDE ">
-      <requirement
-          name="org.eclipse.egit.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.validation.feature.group"/>
-      <requirement
-          name="org.eclipse.epsilon.core.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.epsilon.emf.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.jdt.junit4.runtime"/>
-      <requirement
-          name="org.eclipse.ocl.all.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.ocl.examples.feature.group"/>
-      <requirement
-          name="org.eclipse.m2m.atl.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.pde.junit.runtime"/>
-      <requirement
-          name="org.eclipse.qvtd.master.feature.group"/>
-      <requirement
-          name="org.eclipse.sirius.specifier.feature.group"/>
-      <requirement
-          name="org.eclipse.uml2.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.xtext.sdk.feature.group"/>
-      <repository
-          url="${epsilon.p2.repository}"/>
-      <description>Mandatory IDE for QVTd Developers</description>
-    </setupTask>
+      xsi:type="setup.p2:P2Task">
+    <requirement
+        name="org.eclipse.jdt.junit4.runtime"/>
+    <requirement
+        name="org.eclipse.uml2.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.xtext.sdk.feature.group"/>
+    <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -132,30 +79,324 @@
           value="Ignore"/>
     </setupTask>
   </setupTask>
+  <setupTask
+      xsi:type="setup.targlets:TargletTask">
+    <targlet
+        name="${scope.project.label}"
+        activeRepositoryList="${eclipse.target.platform}">
+      <requirement
+          name="org.eclipse.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.egit.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.validation.feature.group"/>
+      <requirement
+          name="org.eclipse.epsilon.core.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.epsilon.emf.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.ocl.all.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.ocl.examples.feature.group"/>
+      <requirement
+          name="org.eclipse.m2m.atl.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.qvtd.master.feature.group"/>
+      <requirement
+          name="org.eclipse.sirius.specifier.feature.group"/>
+      <requirement
+          name="org.eclipse.uml2.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.xtext.sdk.feature.group"/>
+      <sourceLocator
+          rootFolder="${git.clone.qvtd.git.location}"
+          locateNestedProjects="true"/>
+      <repositoryList
+          name="Latest">
+        <repository
+            url="https://download.eclipse.org/releases/latest"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/modeling/mdt/ocl/updates/nightly/latest"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/latest-R"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+        <repository
+            url="https://download.eclipse.org/egit/github/updates/">
+          <annotation
+              source="Comment">
+            <detail
+                key="">
+              <value>EGIT is missing from 2021-12 M1</value>
+            </detail>
+          </annotation>
+        </repository>
+      </repositoryList>
+      <repositoryList
+          name="2021-12">
+        <repository
+            url="https://download.eclipse.org/releases/latest"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/modeling/mdt/ocl/updates/nightly/latest"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/latest-R"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+        <repository
+            url="https://download.eclipse.org/egit/github/updates/">
+          <annotation
+              source="Comment">
+            <detail
+                key="">
+              <value>EGIT is missing from 2021-12 M1</value>
+            </detail>
+          </annotation>
+        </repository>
+      </repositoryList>
+      <repositoryList
+          name="2021-09">
+        <repository
+            url="http://download.eclipse.org/releases/2021-09"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.16.0"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20210825222808/repository/"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2021-06">
+        <repository
+            url="http://download.eclipse.org/releases/2021-06"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.15.0"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20210602031627/repository/"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2021-03">
+        <repository
+            url="http://download.eclipse.org/releases/2021-03"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.14.0"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20210223232630/repository/"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2020-12">
+        <repository
+            url="http://download.eclipse.org/releases/2020-12"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2020-09">
+        <repository
+            url="http://download.eclipse.org/releases/2020-09"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2020-06">
+        <repository
+            url="http://download.eclipse.org/releases/2020-06"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2020-03">
+        <repository
+            url="http://download.eclipse.org/releases/2020-03"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2019-12">
+        <repository
+            url="http://download.eclipse.org/releases/2019-12"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2019-09">
+        <repository
+            url="http://download.eclipse.org/releases/2019-09"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="2019-06">
+        <repository
+            url="http://download.eclipse.org/releases/2019-06"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="2019-03">
+        <repository
+            url="http://download.eclipse.org/releases/2019-03"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="2018-12">
+        <repository
+            url="http://download.eclipse.org/releases/2018-12"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="2018-09">
+        <repository
+            url="http://download.eclipse.org/releases/2018-09"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Photon">
+        <repository
+            url="http://download.eclipse.org/releases/photon"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Oxygen">
+        <repository
+            url="http://download.eclipse.org/releases/oxygen"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Neon">
+        <repository
+            url="http://download.eclipse.org/releases/neon"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Mars">
+        <repository
+            url="http://download.eclipse.org/releases/mars"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Luna">
+        <repository
+            url="http://download.eclipse.org/releases/luna"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Kepler">
+        <repository
+            url="http://download.eclipse.org/releases/kepler"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Juno">
+        <repository
+            url="http://download.eclipse.org/releases/juno"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Indigo">
+        <repository
+            url="http://download.eclipse.org/releases/indigo"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Helios">
+        <repository
+            url="http://download.eclipse.org/releases/helios"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+      <repositoryList
+          name="Galileo">
+        <repository
+            url="http://download.eclipse.org/releases/galileo"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+      </repositoryList>
+    </targlet>
+  </setupTask>
+  <setupTask
+      xsi:type="git:GitCloneTask"
+      id="git.clone.qvtd.git"
+      remoteURI="mmt/org.eclipse.qvtd.git">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/InducedChoices">
+      <detail
+          key="inherit">
+        <value>eclipse.git.gerrit.remoteURIs</value>
+      </detail>
+      <detail
+          key="label">
+        <value>${scope.project.label} Git or Gerrit repository</value>
+      </detail>
+      <detail
+          key="target">
+        <value>remoteURI</value>
+      </detail>
+    </annotation>
+    <description>${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="git:GitCloneTask"
+      id="ocl.git.clone"
+      remoteURI="ocl/org.eclipse.ocl"
+      checkoutBranch="${ocl.branch}">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/InducedChoices">
+      <detail
+          key="inherit">
+        <value>eclipse.git.gerrit.remoteURIs</value>
+      </detail>
+      <detail
+          key="label">
+        <value>OCL Git or Gerrit Repository</value>
+      </detail>
+      <detail
+          key="target">
+        <value>remoteURI</value>
+      </detail>
+    </annotation>
+    <description>OCL Git repository clone</description>
+  </setupTask>
   <project name="dev"
       label="Development (required)">
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="ocl.git.clone"
-        remoteURI="ocl/org.eclipse.ocl"
-        checkoutBranch="${ocl.branch}">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/InducedChoices">
-        <detail
-            key="inherit">
-          <value>eclipse.git.gerrit.remoteURIs</value>
-        </detail>
-        <detail
-            key="label">
-          <value>OCL Git or Gerrit Repository</value>
-        </detail>
-        <detail
-            key="target">
-          <value>remoteURI</value>
-        </detail>
-      </annotation>
-      <description>OCL Git repository clone</description>
-    </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
@@ -163,63 +404,57 @@
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.autogen"/>
+            pattern="org.eclipse.ocl.examples.codegen"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.build"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.extlibrary"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.xtext.build"/>
+            pattern="org.eclipse.ocl.examples.debug.*"/>
       </sourceLocator>
       <sourceLocator
           rootFolder="${ocl.git.clone.location/plugins}"
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.pivot"/>
-      </sourceLocator>
-      <sourceLocator
-          rootFolder="${ocl.git.clone.location/tests}"
-          locateNestedProjects="true">
+            pattern="org.eclipse.ocl.common.*"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.xtext.tests"/>
+            pattern="org.eclipse.ocl.examples.codegen"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.pivot.*"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.xtext.*"/>
       </sourceLocator>
       <sourceLocator
-          rootFolder="${qvtd.git.clone.location/examples}"
+          rootFolder="${git.clone.qvtd.git.location/examples}"
           locateNestedProjects="true"/>
       <sourceLocator
-          rootFolder="${qvtd.git.clone.location/plugins}"
-          locateNestedProjects="true"/>
-      <sourceLocator
-          rootFolder="${qvtd.git.clone.location/tests}"
+          rootFolder="${git.clone.qvtd.git.location/plugins}"
           locateNestedProjects="true">
         <predicate
-            xsi:type="predicates:NotPredicate">
+            xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.qvtd.doc.*.ui.tests"/>
+              pattern="org.eclipse.qvtd.*"/>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.master"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.*.build"/>
+          </operand>
         </predicate>
       </sourceLocator>
-      <sourceLocator
-          rootFolder="${qvtd.git.clone.location/doc}"
-          locateNestedProjects="true">
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc.miniocl"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc.minioclcs.xtext"/>
-      </sourceLocator>
-      <description>Development Projects</description>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="QVTd Plugins">
+          name="${scope.project.root.label} Plugins">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
@@ -279,10 +514,28 @@
                 xsi:type="predicates:NamePredicate"
                 pattern="org.eclipse.qvtd.*-feature"/>
           </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.master"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.build"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.qvtd.cs2as.build"/>
+          </operand>
         </predicate>
       </workingSet>
       <workingSet
-          name="QVTd Examples">
+          name="${scope.project.root.label} Examples">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
@@ -303,27 +556,33 @@
         </predicate>
       </workingSet>
       <workingSet
-          name="QVTd Tests">
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.*.tests"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc.minioclcs.xtext"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc.miniocl"/>
-      </workingSet>
-      <workingSet
-          name="QVTd Sirius Designs">
+          name="${scope.project.root.label} Sirius Designs">
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.qvtd.*.design"/>
       </workingSet>
+      <workingSet
+          name="OCL Plugins">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.common.*"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.codegen.*"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.debug.*"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.pivot.*"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.xtext.*"/>
+      </workingSet>
     </setupTask>
     <stream
         name="master"
-        label="zzMaster (Latest)">
+        label="Master">
       <setupTask
           xsi:type="setup:VariableTask"
           name="ocl.branch"
@@ -443,35 +702,278 @@
     </stream>
     <description>All the plugins to work with and regenerate QVTd.</description>
   </project>
-  <project name="releng"
-      label="Releng (optional)">
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        label="Releng Tools">
-      <requirement
-          name="org.eclipse.m2e.feature.feature.group"/>
-    </setupTask>
+  <project name="build"
+      label="Build and Test (optional)">
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
-          rootFolder="${qvtd.git.clone.location/features}"
+          rootFolder="${ocl.git.clone.location/examples}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.autogen"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.build"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.xtext.build"/>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${ocl.git.clone.location/examples/org.eclipse.ocl.examples.extlibrary}"
+          locateNestedProjects="true">
+        <annotation
+            source="Comment">
+          <detail
+              key="body">
+            <value>This avoids a typo whereby a bad org.eclipse.ocl.examples.extlibrary was available at org.eclipse.ocl.examples.library</value>
+          </detail>
+        </annotation>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.extlibrary"/>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${ocl.git.clone.location/tests}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.xtext.tests"/>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${git.clone.qvtd.git.location/doc}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.doc.miniocl"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.doc.minioclcs.xtext"/>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${git.clone.qvtd.git.location/plugins}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.cs2as.build"/>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${git.clone.qvtd.git.location/tests}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NotPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern="org.eclipse.qvtd.doc.*.ui.tests"/>
+        </predicate>
+      </sourceLocator>
+      <sourceLocator
+          rootFolder="${git.clone.qvtd.git.location/releng}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.build"/>
+      </sourceLocator>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="${scope.project.root.label} Build">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.build"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.cs2as.build"/>
+      </workingSet>
+      <workingSet
+          name="${scope.project.root.label} Tests">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.*.tests"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.doc.minioclcs.xtext"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.doc.miniocl"/>
+      </workingSet>
+      <workingSet
+          name="OCL Build">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.autogen.*"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.build.*"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.xtext.build.*"/>
+      </workingSet>
+      <workingSet
+          name="OCL Tests">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.xtext.tests.*"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.ocl.examples.extlibrary"/>
+      </workingSet>
+    </setupTask>
+    <stream
+        name="master"
+        label="Master">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="master"/>
+    </stream>
+    <stream
+        name="0.27.0"
+        label="0.27.0 (2021-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.16.0"/>
+    </stream>
+    <stream
+        name="0.26.0"
+        label="0.26.0 (2021-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.15.0"/>
+    </stream>
+    <stream
+        name="0.25.0"
+        label="0.25.0 (2021-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.14.0"/>
+    </stream>
+    <stream
+        name="0.24.0"
+        label="0.24.0 (2020-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.13.0"/>
+    </stream>
+    <stream
+        name="0.23.0"
+        label="0.23.0 (2020-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.12.0"/>
+    </stream>
+    <stream
+        name="0.22.0"
+        label="0.22.0 (2020-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.11.0"/>
+    </stream>
+    <stream
+        name="0.21.0"
+        label="0.21.0 (2019-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.10.0"/>
+    </stream>
+    <stream
+        name="0.20.0"
+        label="0.20.0 (2019-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.9.0"/>
+    </stream>
+    <stream
+        name="0.19.0"
+        label="0.19.0 (2019-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.8.0"/>
+    </stream>
+    <stream
+        name="0.18.0"
+        label="0.18.0 (2019-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.7.0"/>
+    </stream>
+    <stream
+        name="0.17.0"
+        label="0.17.0 (2018-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.6.0"/>
+    </stream>
+    <stream
+        name="0.16.0"
+        label="0.16.0 (2018-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.5.0"/>
+    </stream>
+    <stream
+        name="0.15.0"
+        label="0.15.0 (Photon)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.4.0"/>
+    </stream>
+    <stream
+        name="0.14.0"
+        label="0.14.0 (Oxygen)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.3.0"/>
+    </stream>
+    <description>Omit this unless you want to re-autogenerate or test.</description>
+  </project>
+  <project name="releng"
+      label="Releng (optional)">
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.qvtd.git.location/features}"
           locateNestedProjects="true"/>
       <sourceLocator
-          rootFolder="${qvtd.git.clone.location/releng}"
-          locateNestedProjects="true"/>
+          rootFolder="${git.clone.qvtd.git.location/releng}"
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NotPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern="org.eclipse.qvtd.releng"/>
+        </predicate>
+      </sourceLocator>
       <sourceLocator
-          rootFolder="${qvtd.git.clone.location/doc}"
+          rootFolder="${git.clone.qvtd.git.location/doc}"
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.qvtd.doc"/>
       </sourceLocator>
-      <description>Releng projects</description>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="QVTd Features">
+          name="${scope.project.root.label} Features">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.master"/>
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
@@ -486,7 +988,7 @@
         </predicate>
       </workingSet>
       <workingSet
-          name="QVTd Releng + Doc">
+          name="${scope.project.root.label} Releng + Doc">
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.qvtd.doc"/>
@@ -500,53 +1002,128 @@
     </setupTask>
     <stream
         name="master"
-        label="Master (Latest)"/>
+        label="Master">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="master"/>
+    </stream>
     <stream
         name="0.27.0"
-        label="0.27.0 (2021-09)"/>
+        label="0.27.0 (2021-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.16.0"/>
+    </stream>
     <stream
         name="0.26.0"
-        label="0.26.0 (2021-06)"/>
+        label="0.26.0 (2021-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.15.0"/>
+    </stream>
     <stream
         name="0.25.0"
-        label="0.25.0 (2021-03)"/>
+        label="0.25.0 (2021-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.14.0"/>
+    </stream>
     <stream
         name="0.24.0"
-        label="0.24.0 (2020-12)"/>
+        label="0.24.0 (2020-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.13.0"/>
+    </stream>
     <stream
         name="0.23.0"
-        label="0.23.0 (2020-06)"/>
+        label="0.23.0 (2020-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.12.0"/>
+    </stream>
     <stream
         name="0.22.0"
-        label="0.22.0 (2020-03)"/>
+        label="0.22.0 (2020-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.11.0"/>
+    </stream>
     <stream
         name="0.21.0"
-        label="0.21.0 (2019-12)"/>
+        label="0.21.0 (2019-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.10.0"/>
+    </stream>
     <stream
         name="0.20.0"
-        label="0.20.0 (2019-09)"/>
+        label="0.20.0 (2019-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.9.0"/>
+    </stream>
     <stream
         name="0.19.0"
-        label="0.19.0 (2019-06)"/>
+        label="0.19.0 (2019-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.8.0"/>
+    </stream>
     <stream
         name="0.18.0"
-        label="0.18.0 (2019-03)"/>
+        label="0.18.0 (2019-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.7.0"/>
+    </stream>
     <stream
         name="0.17.0"
-        label="0.17.0 (2018-12)"/>
+        label="0.17.0 (2018-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.6.0"/>
+    </stream>
     <stream
         name="0.16.0"
-        label="0.16.0 (2018-09)"/>
+        label="0.16.0 (2018-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.5.0"/>
+    </stream>
     <stream
         name="0.15.0"
-        label="0.15.0 (Photon)"/>
+        label="0.15.0 (Photon)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.4.0"/>
+    </stream>
     <stream
         name="0.14.0"
-        label="0.14.0 (Oxygen)"/>
+        label="0.14.0 (Oxygen)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.3.0"/>
+    </stream>
     <description>Omit this unless you want to build a QVTd distribution or update documentation.</description>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
       href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']"/>
-  <description>The development environment for QVTd</description>
+  <description>QVTd provides the OMG QVTr and QVTi transformation language editors and execution.</description>
 </setup:Project>
