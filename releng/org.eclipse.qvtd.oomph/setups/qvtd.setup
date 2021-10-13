@@ -700,7 +700,7 @@
           name="ocl.branch"
           value="6.3.0"/>
     </stream>
-    <description>All the plugins to work with and regenerate QVTd.</description>
+    <description>All the plugins to work with ${scope.project.root.label}.</description>
   </project>
   <project name="build"
       label="Build and Test (optional)">
@@ -1120,7 +1120,7 @@
           name="ocl.branch"
           value="6.3.0"/>
     </stream>
-    <description>Omit this unless you want to build a QVTd distribution or update documentation.</description>
+    <description>Omit this unless you want to build a ${scope.project.root.label} distribution or update documentation.</description>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
