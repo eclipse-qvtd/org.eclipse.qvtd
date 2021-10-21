@@ -29,6 +29,11 @@
     <description>Set the heap space needed to work with the projects of ${scope.project.label}</description>
   </setupTask>
   <setupTask
+      xsi:type="setup:EclipseIniTask"
+      excludedTriggers="STARTUP"
+      option="-perspective"
+      value="org.eclipse.jdt.ui.JavaPerspective"/>
+  <setupTask
       xsi:type="setup:ResourceCreationTask"
       excludedTriggers="STARTUP MANUAL"
       targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml"
@@ -97,15 +102,9 @@
       <requirement
           name="org.eclipse.epsilon.emf.feature.feature.group"/>
       <requirement
-          name="org.eclipse.ocl.all.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.ocl.examples.feature.group"/>
-      <requirement
           name="org.eclipse.m2m.atl.sdk.feature.group"/>
       <requirement
           name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.qvtd.master.feature.group"/>
       <requirement
           name="org.eclipse.sirius.specifier.feature.group"/>
       <requirement
@@ -371,6 +370,11 @@
         <value>remoteURI</value>
       </detail>
     </annotation>
+    <configSections
+        name="core">
+      <properties
+          key="autocrlf"/>
+    </configSections>
     <description>${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -393,6 +397,11 @@
         <value>remoteURI</value>
       </detail>
     </annotation>
+    <configSections
+        name="core">
+      <properties
+          key="autocrlf"/>
+    </configSections>
     <description>OCL Git repository clone</description>
   </setupTask>
   <project name="dev"
@@ -403,27 +412,33 @@
           rootFolder="${ocl.git.clone.location/examples}"
           locateNestedProjects="true">
         <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.codegen"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.debug.*"/>
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern="org\.eclipse\.ocl\.examples(\..*)?"/>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl\.examples\.interpreter"/>
+          </operand>
+        </predicate>
       </sourceLocator>
       <sourceLocator
           rootFolder="${ocl.git.clone.location/plugins}"
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.common.*"/>
+            pattern="org\.eclipse\.ocl\.common(\..*)?"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.codegen"/>
+            pattern="org\.eclipse\.ocl\.examples\.codegen"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.pivot.*"/>
+            pattern="org\.eclipse\.ocl\.pivot(\..*)?"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.xtext.*"/>
+            pattern="org\.eclipse\.ocl\.xtext(\..*)?"/>
       </sourceLocator>
       <sourceLocator
           rootFolder="${git.clone.qvtd.git.location/examples}"
@@ -434,19 +449,25 @@
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.qvtd.*"/>
-          <operand
-              xsi:type="predicates:NotPredicate">
+              xsi:type="predicates:OrPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.master"/>
+                pattern="org\.eclipse\.qvt"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.qvtd\..*"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.*.build"/>
+                pattern="org\.eclipse\.qvtd\.master"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.qvtd\..*\.build"/>
           </operand>
         </predicate>
       </sourceLocator>
@@ -459,78 +480,78 @@
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.qvtd.*"/>
+              pattern="org\.eclipse\.qvtd(\..*)?"/>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.doc.*"/>
+                pattern="org\.eclipse\.qvtd\.doc(\..*)?"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.*.tests"/>
+                pattern="org\.eclipse\.qvtd\.*.tests"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.examples.*"/>
+                pattern="org\.eclipse\.qvtd\.examples(\..*)?"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.*.ide"/>
+                pattern="org\.eclipse\.qvtd\..*\.ide"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.doc.*.ui"/>
+                pattern="org\.eclipse\.qvtd\.doc\..*\.ui"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.releng.*"/>
+                pattern="org\.eclipse\.qvtd\.releng(\..*)?"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.oomph"/>
+                pattern="org\.eclipse\.qvtd\.oomph"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.*.design"/>
+                pattern="org\.eclipse\.qvtd\..*.design"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.*-feature"/>
+                pattern="org\.eclipse\.qvtd\..*-feature"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.master"/>
+                pattern="org\.eclipse\.qvtd\.master"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.build"/>
+                pattern="org\.eclipse\.qvtd\.build"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.cs2as.build"/>
+                pattern="org\.eclipse\.qvtd\.cs2as\.build"/>
           </operand>
         </predicate>
       </workingSet>
@@ -542,16 +563,16 @@
               xsi:type="predicates:OrPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvt"/>
+                pattern="org\.eclipse\.qvt"/>
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.examples.*"/>
+                pattern="org\.eclipse\.qvtd\.examples(\..*)?"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.examples.*-feature"/>
+                pattern="org\.eclipse\.qvtd\.examples\..*-feature"/>
           </operand>
         </predicate>
       </workingSet>
@@ -559,25 +580,25 @@
           name="${scope.project.root.label} Sirius Designs">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.*.design"/>
+            pattern="org\.eclipse\.qvtd\..*\.design"/>
       </workingSet>
       <workingSet
           name="OCL Plugins">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.common.*"/>
+            pattern="org\.eclipse\.ocl\.common(\..*)?"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.codegen.*"/>
+            pattern="org\.eclipse\.ocl\.examples\.codegen(\..*)?"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.debug.*"/>
+            pattern="org\.eclipse\.ocl\.examples\.debug(\..*)?"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.pivot.*"/>
+            pattern="org\.eclipse\.ocl\.pivot(\..*)?"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.xtext.*"/>
+            pattern="org\.eclipse\.ocl\.xtext(\..*)?"/>
       </workingSet>
     </setupTask>
     <stream
@@ -711,13 +732,13 @@
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.autogen"/>
+            pattern="org\.eclipse\.ocl\.examples.autogen"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.build"/>
+            pattern="org\.eclipse\.ocl\.examples.build"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.xtext.build"/>
+            pattern="org\.eclipse\.ocl\.examples.xtext.build"/>
       </sourceLocator>
       <sourceLocator
           rootFolder="${ocl.git.clone.location/examples/org.eclipse.ocl.examples.extlibrary}"
@@ -731,31 +752,31 @@
         </annotation>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.extlibrary"/>
+            pattern="org\.eclipse\.ocl\.examples\.extlibrary"/>
       </sourceLocator>
       <sourceLocator
           rootFolder="${ocl.git.clone.location/tests}"
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.xtext.tests"/>
+            pattern="org\.eclipse\.ocl\.examples\.xtext\.tests"/>
       </sourceLocator>
       <sourceLocator
           rootFolder="${git.clone.qvtd.git.location/doc}"
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc.miniocl"/>
+            pattern="org\.eclipse\.qvtd\.doc\.miniocl"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc.minioclcs.xtext"/>
+            pattern="org\.eclipse\.qvtd\.doc\.minioclcs\.xtext"/>
       </sourceLocator>
       <sourceLocator
           rootFolder="${git.clone.qvtd.git.location/plugins}"
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.cs2as.build"/>
+            pattern="org\.eclipse\.qvtd\.cs2as\.build"/>
       </sourceLocator>
       <sourceLocator
           rootFolder="${git.clone.qvtd.git.location/tests}"
@@ -764,7 +785,7 @@
             xsi:type="predicates:NotPredicate">
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.qvtd.doc.*.ui.tests"/>
+              pattern="org\.eclipse\.qvtd\.doc\..*\.ui\.tests"/>
         </predicate>
       </sourceLocator>
       <sourceLocator
@@ -772,7 +793,7 @@
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.build"/>
+            pattern="org\.eclipse\.qvtd\.build"/>
       </sourceLocator>
     </setupTask>
     <setupTask
@@ -781,43 +802,43 @@
           name="${scope.project.root.label} Build">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.build"/>
+            pattern="org\.eclipse\.qvtd\.build"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.cs2as.build"/>
+            pattern="org\.eclipse\.qvtd\.cs2as\.build"/>
       </workingSet>
       <workingSet
           name="${scope.project.root.label} Tests">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.*.tests"/>
+            pattern="org\.eclipse\.qvtd\..*\.tests"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc.minioclcs.xtext"/>
+            pattern="org\.eclipse\.qvtd\.doc\.minioclcs\.xtext"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc.miniocl"/>
+            pattern="org\.eclipse\.qvtd\.doc\.miniocl"/>
       </workingSet>
       <workingSet
           name="OCL Build">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.autogen.*"/>
+            pattern="org\.eclipse\.ocl\.examples\.autogen(\..*)?"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.build.*"/>
+            pattern="org\.eclipse\.ocl\.examples\.build(\..*)?"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.xtext.build.*"/>
+            pattern="org\.eclipse\.ocl\.examples\.xtext\.build(\..*)?"/>
       </workingSet>
       <workingSet
           name="OCL Tests">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.xtext.tests.*"/>
+            pattern="org\.eclipse\.ocl\.examples\.xtext\.tests(\..*)?"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.ocl.examples.extlibrary"/>
+            pattern="org\.eclipse\.ocl\.examples\.extlibrary"/>
       </workingSet>
     </setupTask>
     <stream
@@ -956,7 +977,7 @@
             xsi:type="predicates:NotPredicate">
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.qvtd.releng"/>
+              pattern="org\.eclipse\.qvtd\.releng"/>
         </predicate>
       </sourceLocator>
       <sourceLocator
@@ -964,7 +985,7 @@
           locateNestedProjects="true">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc"/>
+            pattern="org\.eclipse\.qvtd\.doc"/>
       </sourceLocator>
     </setupTask>
     <setupTask
@@ -973,17 +994,17 @@
           name="${scope.project.root.label} Features">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.master"/>
+            pattern="org\.eclipse\.qvtd\.master"/>
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.qvtd.*-feature"/>
+              pattern="org\.eclipse\.qvtd\..*-feature"/>
           <operand
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org.eclipse.qvtd.*build-feature"/>
+                pattern="org\.eclipse\.qvtd\.*build-feature"/>
           </operand>
         </predicate>
       </workingSet>
@@ -991,13 +1012,13 @@
           name="${scope.project.root.label} Releng + Doc">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.doc"/>
+            pattern="org\.eclipse\.qvtd\.doc"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.oomph"/>
+            pattern="org\.eclipse\.qvtd\.oomph"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.releng.*"/>
+            pattern="org\.eclipse\.qvtd\.releng(\..*)?"/>
       </workingSet>
     </setupTask>
     <stream
