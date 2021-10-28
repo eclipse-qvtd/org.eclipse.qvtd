@@ -45,6 +45,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.ui.model.BaseEditorCallback;
+import org.eclipse.ocl.xtext.base.ui.utilities.ThreadLocalExecutorUI;
 import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMRootEvaluationEnvironment;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
@@ -301,6 +302,8 @@ public class QVTiDebuggerTests extends XtextTestCase
 		Resource actualResource = actualResourceSet.getResource(outFile.getURI(), true);
 		assert actualResource != null;
 		TestUtil.assertSameModel(expectedResource, actualResource);
+		ThreadLocalExecutorUI.closeEditors();
+		TestUIUtil.flushEvents();
 		ocl.dispose();
 	}
 }
