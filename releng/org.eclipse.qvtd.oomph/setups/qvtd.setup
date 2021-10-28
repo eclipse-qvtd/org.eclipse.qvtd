@@ -62,10 +62,6 @@
       xsi:type="setup.p2:P2Task">
     <requirement
         name="org.eclipse.jdt.junit4.runtime"/>
-    <requirement
-        name="org.eclipse.uml2.sdk.feature.group"/>
-    <requirement
-        name="org.eclipse.xtext.sdk.feature.group"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -412,17 +408,32 @@
           rootFolder="${ocl.git.clone.location/examples}"
           locateNestedProjects="true">
         <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern="org\.eclipse\.ocl\.examples(\..*)?"/>
-          <operand
-              xsi:type="predicates:NotPredicate">
-            <operand
-                xsi:type="predicates:NamePredicate"
-                pattern="org\.eclipse\.ocl\.examples\.interpreter"/>
-          </operand>
-        </predicate>
+            xsi:type="predicates:NamePredicate"
+            pattern="org\.eclipse\.ocl\.examples\.codegen(\..*)?"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org\.eclipse\.ocl\.examples\.debug(\..*)?"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org\.eclipse\.ocl\.examples\.emf\.validation(\..*)?"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org\.eclipse\.ocl\.examples\.standalone"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org\.eclipse\.ocl\.examples\.ui"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org\.eclipse\.ocl\.examples\.validity"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org\.eclipse\.ocl\.examples\.xtext\.console"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org\.eclipse\.ocl\.examples\.xtext\.idioms"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org\.eclipse\.ocl\.examples\.xtext\.serializer"/>
       </sourceLocator>
       <sourceLocator
           rootFolder="${ocl.git.clone.location/plugins}"
@@ -430,9 +441,6 @@
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org\.eclipse\.ocl\.common(\..*)?"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org\.eclipse\.ocl\.examples\.codegen"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org\.eclipse\.ocl\.pivot(\..*)?"/>
@@ -585,20 +593,44 @@
       <workingSet
           name="OCL Plugins">
         <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org\.eclipse\.ocl\.common(\..*)?"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org\.eclipse\.ocl\.examples\.codegen(\..*)?"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org\.eclipse\.ocl\.examples\.debug(\..*)?"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org\.eclipse\.ocl\.pivot(\..*)?"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org\.eclipse\.ocl\.xtext(\..*)?"/>
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:OrPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl(\..*)*"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl\.examples\.codegen(\..*)?"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl\.examples\.debug(\..*)?"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl\.pivot(\..*)?"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl\.xtext(\..*)?"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl\.examples\.autogen(\..*)?"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl\..*\build"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl\..*\.tests"/>
+          </operand>
+        </predicate>
       </workingSet>
     </setupTask>
     <stream
@@ -841,6 +873,12 @@
             pattern="org\.eclipse\.ocl\.examples\.extlibrary"/>
       </workingSet>
     </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Build Tools">
+      <requirement
+          name="org.eclipse.xtext.sdk.feature.group"/>
+    </setupTask>
     <stream
         name="master"
         label="Master">
@@ -856,6 +894,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.16.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.26.0"
@@ -864,6 +908,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.15.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.25.0"
@@ -872,6 +922,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.14.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.24.0"
@@ -880,6 +936,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.13.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.23.0"
@@ -888,6 +950,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.12.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.22.0"
@@ -896,6 +964,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.11.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.21.0"
@@ -904,6 +978,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.10.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.20.0"
@@ -912,6 +992,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.9.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.19.0"
@@ -920,6 +1006,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.8.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.18.0"
@@ -928,6 +1020,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.7.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.17.0"
@@ -936,6 +1034,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.6.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.16.0"
@@ -944,6 +1048,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.5.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.15.0"
@@ -952,6 +1062,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.4.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <stream
         name="0.14.0"
@@ -960,6 +1076,12 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="6.3.0"/>
+      <setupTask
+          xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.uml2.sdk.feature.group"
+            description="See Bug 576593: UML2 needed in Running Platform pre- 2021-12"/>
+      </setupTask>
     </stream>
     <description>Omit this unless you want to re-autogenerate or test.</description>
   </project>
