@@ -499,7 +499,7 @@
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org\.eclipse\.qvtd\.*.tests"/>
+                pattern="org\.eclipse\.qvtd(\..*)*\.tests"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
@@ -622,7 +622,13 @@
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern="org\.eclipse\.ocl\..*\build"/>
+                pattern="org\.eclipse\.ocl\..*\.build"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.ocl\..*\.extlibrary"/>
           </operand>
           <operand
               xsi:type="predicates:NotPredicate">
@@ -1087,6 +1093,12 @@
   </project>
   <project name="releng"
       label="Releng (optional)">
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Releng Tools">
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+    </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
