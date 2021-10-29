@@ -390,7 +390,7 @@ public class XtextTestCase extends PivotTestCase
 		return testProject2;
 	}
 
-	protected @NonNull ProjectManager getTestProjectManager() {
+	protected final @NonNull ProjectManager getTestProjectManager() {
 		return getTestProjectManager("");
 	}
 

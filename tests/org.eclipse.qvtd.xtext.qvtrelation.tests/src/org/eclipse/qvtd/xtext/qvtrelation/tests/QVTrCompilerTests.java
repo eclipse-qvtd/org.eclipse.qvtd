@@ -37,7 +37,6 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
-import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -76,6 +75,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
+import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT.ContentEditingURIConverter;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
@@ -181,7 +181,7 @@ public class QVTrCompilerTests extends LoadTestCase
 
 		@Override
 		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
-			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : QVTrCompilerTests.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
+			return QVTrCompilerTests.this.getTestProjectManager(pathFromCurrentWorkingDirectoryToFileSystem);
 		}
 
 		protected void setKeepOldJavaFiles() {
@@ -1201,8 +1201,24 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
+		ResourceSet resourceSet = new ResourceSetImpl();
+		getTestProjectManager().initializeResourceSet(resourceSet);
+		TestProject testProject = getTestProject();
+		ContentEditingURIConverter uriConverter = new ContentEditingURIConverter(resourceSet.getURIConverter());
+		uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/FlatStateMachine", "http://" + testProject.getName() + "/FlatStateMachine");
+		uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine", "http://" + testProject.getName() + "/HierarchicalStateMachine");
+		TestFolder testFolder = testProject.getOutputFolder("samples");
+		TestFile miniModelFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
+		TestFile simpleModelFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
+		TestFile largerModelFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
+		TestFile miniModelExpectedFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"));
+		TestFile simpleModelExpectedFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"));
+		TestFile largerModelExpectedFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/LargerModel_expected.xmi"));
+		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
+		testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/FlatStateMachine.ecore"));
+		testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/HierarchicalStateMachine.ecore"));
+		MyQVT myQVT1 = createQVT("HierarchicalStateMachine2FlatStateMachine", txFile.getURI());
 		Class<? extends Transformer> txClass;
-		MyQVT myQVT1 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		try {
 			txClass = myQVT1.buildTransformation("flat", false);//,
 			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
@@ -1215,32 +1231,32 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1 = null;
 		}
 		ThreadLocalExecutor.waitForGC();
-		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
+		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", txFile.getURI());
 		try {
 			myQVT2.loadEPackage(txClass, "FlatStateMachine.FlatStateMachinePackage");
 			myQVT2.loadEPackage(txClass, "HierarchicalStateMachine.HierarchicalStateMachinePackage");
 			myQVT2.loadEPackage(txClass, "trace_HierarchicalStateMachine2FlatStateMachine.trace_HierarchicalStateMachine2FlatStateMachinePackage");
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
+			myQVT2.addInputURI("hier", miniModelFile.getURI());
 			myQVT2.executeTransformation();
 			myQVT2.addOutputURI("flat", getTestURI("MiniModel_CG.xmi"));
 			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("MiniModel_CG.xmi"), getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+			myQVT2.checkOutput(getTestURI("MiniModel_CG.xmi"), miniModelExpectedFile.getURI(), FlatStateMachineNormalizer.INSTANCE);
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
+			myQVT2.addInputURI("hier", simpleModelFile.getURI());
 			myQVT2.executeTransformation();
 			myQVT2.addOutputURI("flat", getTestURI("SimpleModel_CG.xmi"));
 			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("SimpleModel_CG.xmi"), getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+			myQVT2.checkOutput(getTestURI("SimpleModel_CG.xmi"), simpleModelExpectedFile.getURI(), FlatStateMachineNormalizer.INSTANCE);
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
+			myQVT2.addInputURI("hier", largerModelFile.getURI());
 			myQVT2.executeTransformation();
 			myQVT2.addOutputURI("flat", getTestURI("LargerModel_CG.xmi"));
 			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("LargerModel_CG.xmi"), getModelsURI("hstm2fstm/samples/LargerModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+			myQVT2.checkOutput(getTestURI("LargerModel_CG.xmi"), largerModelExpectedFile.getURI(), FlatStateMachineNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT2.dispose();
@@ -1303,8 +1319,24 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
+		ResourceSet resourceSet = new ResourceSetImpl();
+		getTestProjectManager().initializeResourceSet(resourceSet);
+		TestProject testProject = getTestProject();
+		ContentEditingURIConverter uriConverter = new ContentEditingURIConverter(resourceSet.getURIConverter());
+		uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/FlatStateMachine", "http://" + testProject.getName() + "/FlatStateMachine");
+		uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine", "http://" + testProject.getName() + "/HierarchicalStateMachine");
+		TestFolder testFolder = testProject.getOutputFolder("samples");
+		TestFile miniModelFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
+		TestFile simpleModelFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
+		TestFile largerModelFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
+		TestFile miniModelExpectedFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"));
+		TestFile simpleModelExpectedFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"));
+		TestFile largerModelExpectedFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("hstm2fstm/samples/LargerModel_expected.xmi"));
+		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
+		testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/FlatStateMachine.ecore"));
+		testProject.copyFile(uriConverter, null, getModelsURI("hstm2fstm/HierarchicalStateMachine.ecore"));
+		MyQVT myQVT1 = createQVT("HierarchicalStateMachine2FlatStateMachine", txFile.getURI());
 		Class<? extends Transformer> txClass;
-		MyQVT myQVT1 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		try {
 			txClass = myQVT1.buildTransformation("flat", true);//,
 		}
@@ -1313,35 +1345,35 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1 = null;
 		}
 		ThreadLocalExecutor.waitForGC();
-		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
+		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", txFile.getURI());
 		try {
 			myQVT2.loadEPackage(txClass, "FlatStateMachine.FlatStateMachinePackage");
 			myQVT2.loadEPackage(txClass, "HierarchicalStateMachine.HierarchicalStateMachinePackage");
 			myQVT2.loadEPackage(txClass, "trace_HierarchicalStateMachine2FlatStateMachine.trace_HierarchicalStateMachine2FlatStateMachinePackage");
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/MiniModel.xmi"));
+			myQVT2.addInputURI("hier", miniModelFile.getURI());
 			myQVT2.executeTransformation();
 			myQVT2.writeGraphMLfile(getTestURI("MiniModel-incremental.graphml"));
 			myQVT2.addOutputURI("flat", getTestURI("MiniModel_CG.xmi"));
 			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("MiniModel_CG.xmi"), getModelsURI("hstm2fstm/samples/MiniModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+			myQVT2.checkOutput(getTestURI("MiniModel_CG.xmi"), miniModelExpectedFile.getURI(), FlatStateMachineNormalizer.INSTANCE);
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/SimpleModel.xmi"));
+			myQVT2.addInputURI("hier", simpleModelFile.getURI());
 			myQVT2.executeTransformation();
 			myQVT2.addOutputURI("flat", getTestURI("SimpleModel_CG.xmi"));
 			myQVT2.saveModels(null);
 			myQVT2.writeGraphMLfile(getTestURI("SimpleModel-incremental.graphml"));
-			myQVT2.checkOutput(getTestURI("SimpleModel_CG.xmi"), getModelsURI("hstm2fstm/samples/SimpleModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+			myQVT2.checkOutput(getTestURI("SimpleModel_CG.xmi"), simpleModelExpectedFile.getURI(), FlatStateMachineNormalizer.INSTANCE);
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("hier", getModelsURI("hstm2fstm/samples/LargerModel.xmi"));
+			myQVT2.addInputURI("hier", largerModelFile.getURI());
 			myQVT2.executeTransformation();
 			myQVT2.writeGraphMLfile(getTestURI("LargerModel-incremental.graphml"));
 			myQVT2.addOutputURI("flat", getTestURI("LargerModel_CG.xmi"));
 			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("LargerModel_CG.xmi"), getModelsURI("hstm2fstm/samples/LargerModel_expected.xmi"), FlatStateMachineNormalizer.INSTANCE);
+			myQVT2.checkOutput(getTestURI("LargerModel_CG.xmi"), largerModelExpectedFile.getURI(), FlatStateMachineNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT2.dispose();
@@ -1403,8 +1435,20 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.SYNTHESIS.setState(true);
+		ResourceSet resourceSet = new ResourceSetImpl();
+		getTestProjectManager().initializeResourceSet(resourceSet);
+		TestProject testProject = getTestProject();
+		ContentEditingURIConverter uriConverter = new ContentEditingURIConverter(resourceSet.getURIConverter());
+		uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/java", "http://" + testProject.getName() + "/java");
+		uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/uml", "http://" + testProject.getName() + "/uml");
+		TestFolder testFolder = testProject.getOutputFolder("samples");
+		TestFile javaFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("mitosi/samples/transportjava.xml"));
+		TestFile umlFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("mitosi/samples/transportuml.xml"));
+		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("mitosi/MiToSiSimple.qvtr"));
+		testProject.copyFile(uriConverter, null, getModelsURI("mitosi/javaMM.emof"));
+		testProject.copyFile(uriConverter, null, getModelsURI("mitosi/umlMM.emof"));
+		MyQVT myQVT1 = createQVT("MiToSiSimple", txFile.getURI());
 		Class<? extends Transformer> txClass;
-		MyQVT myQVT1 = createQVT("MiToSiSimple", getModelsURI("mitosi/MiToSiSimple.qvtr"));
 		try {
 			txClass = myQVT1.buildTransformation("java", false);
 			//
@@ -1418,7 +1462,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1 = null;
 		}
 		ThreadLocalExecutor.waitForGC();
-		MyQVT myQVT2 = createQVT("MiToSiSimple", getModelsURI("mitosi/MiToSiSimple.qvtr"));
+		MyQVT myQVT2 = createQVT("MiToSiSimple", txFile.getURI());
 		try {
 			myQVT2.loadEPackage(txClass, "javammsi.javammsiPackage");
 			myQVT2.loadEPackage(txClass, "umlmmmi.umlmmmiPackage");
@@ -1428,11 +1472,11 @@ public class QVTrCompilerTests extends LoadTestCase
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("uml", getModelsURI("mitosi/samples/transportuml.xml"));
+			myQVT2.addInputURI("uml", umlFile.getURI());
 			myQVT2.executeTransformation();
 			myQVT2.addOutputURI("java", getTestURI("transportjava_CG.xml"));
 			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("transportjava_CG.xml"), getModelsURI("mitosi/samples/transportjava.xml"), null);
+			myQVT2.checkOutput(getTestURI("transportjava_CG.xml"), javaFile.getURI(), null);
 		}
 		finally {
 			myQVT2.dispose();
@@ -1458,8 +1502,20 @@ public class QVTrCompilerTests extends LoadTestCase
 		//	TransformationPartitioner.REGION_TRANSITIVE_SUCCESSORS.setState(true);
 		//	TransformationPartitioner.ROOT_SCHEDULE_PREDECESSORS.setState(true);
 		//	TransformationPartitioner.ROOT_SCHEDULE.setState(true);
+		ResourceSet resourceSet = new ResourceSetImpl();
+		getTestProjectManager().initializeResourceSet(resourceSet);
+		TestProject testProject = getTestProject();
+		ContentEditingURIConverter uriConverter = new ContentEditingURIConverter(resourceSet.getURIConverter());
+		uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/java", "http://" + testProject.getName() + "/java");
+		uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/uml", "http://" + testProject.getName() + "/uml");
+		TestFolder testFolder = testProject.getOutputFolder("samples");
+		TestFile javaFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("mitosi/samples/transportjava.xml"));
+		TestFile umlFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("mitosi/samples/transportuml.xml"));
+		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("mitosi/MiToSiSimpleWithKeys.qvtr"));
+		testProject.copyFile(uriConverter, null, getModelsURI("mitosi/javaMM.emof"));
+		testProject.copyFile(uriConverter, null, getModelsURI("mitosi/umlMM.emof"));
+		MyQVT myQVT1 = createQVT("MiToSiSimpleWithKeys", txFile.getURI());
 		Class<? extends Transformer> txClass;
-		MyQVT myQVT1 = createQVT("MiToSiSimpleWithKeys", getModelsURI("mitosi/MiToSiSimpleWithKeys.qvtr"));
 		try {
 			txClass = myQVT1.buildTransformation("java", false);
 			//			Class<? extends Transformer> txClass = MiToSiSimpleWithKeys.class;
@@ -1474,7 +1530,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1 = null;
 		}
 		ThreadLocalExecutor.waitForGC();
-		MyQVT myQVT2 = createQVT("MiToSiSimple", getModelsURI("mitosi/MiToSiSimple.qvtr"));
+		MyQVT myQVT2 = createQVT("MiToSiSimple", txFile.getURI());
 		try {
 			myQVT2.loadEPackage(txClass, "javammsi.javammsiPackage");
 			myQVT2.loadEPackage(txClass, "umlmmmi.umlmmmiPackage");
@@ -1484,11 +1540,11 @@ public class QVTrCompilerTests extends LoadTestCase
 			extensionToFactoryMap.put("xml", new XMIResourceFactoryImpl());		// FIXME workaround BUG 527164
 			//
 			myQVT2.createGeneratedExecutor(txClass);
-			myQVT2.addInputURI("uml", getModelsURI("mitosi/samples/transportuml.xml"));
+			myQVT2.addInputURI("uml", umlFile.getURI());
 			myQVT2.executeTransformation();
 			myQVT2.addOutputURI("java", getTestURI("transportjava_CG.xml"));
 			myQVT2.saveModels(null);
-			myQVT2.checkOutput(getTestURI("transportjava_CG.xml"), getModelsURI("mitosi/samples/transportjava.xml"), null);
+			myQVT2.checkOutput(getTestURI("transportjava_CG.xml"), javaFile.getURI(), null);
 			//
 			//	        myQVT.createGeneratedExecutor(txClass);
 			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");

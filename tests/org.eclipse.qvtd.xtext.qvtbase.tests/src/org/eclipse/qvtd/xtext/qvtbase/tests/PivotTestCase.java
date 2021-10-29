@@ -401,7 +401,7 @@ public class PivotTestCase extends TestCase
 		if (DEBUG_ID) {
 			PivotUtilInternal.debugPrintln("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 		}
-		TracingOption.resetAll();
+		//	TracingOption.resetAll();
 		ThreadLocalExecutor.reset();
 		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
 		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
@@ -428,6 +428,7 @@ public class PivotTestCase extends TestCase
 	@Override
 	protected void tearDown() throws Exception {
 		//	long time = System.nanoTime() - startTime;
+		ThreadLocalExecutor.reset();
 		super.tearDown();
 		QVTruntimeUtil.contextLine = null;
 		//

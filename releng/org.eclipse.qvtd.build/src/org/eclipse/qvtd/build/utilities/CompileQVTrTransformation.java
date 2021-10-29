@@ -33,7 +33,6 @@ import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
-import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -84,7 +83,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 
 		@Override
 		protected @NonNull ProjectManager getTestProjectManager(@NonNull String pathFromCurrentWorkingDirectoryToFileSystem) throws Exception {
-			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : CompileQVTrTransformation.this.getTestProjectManager();
+			return CompileQVTrTransformation.this.getTestProjectManager();
 		}
 	}
 

@@ -10,8 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtbase.tests;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,13 +27,17 @@ import java.util.Set;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
@@ -86,6 +94,115 @@ import junit.framework.TestCase;
 
 public abstract class AbstractTestQVT extends QVTimperative
 {
+	/**
+	 * ContentEditingURIConverter delegates to a URIConverter but intercepts createInputStream to
+	 * read the input fie andapply global replacements. This is used to chnage nsURIs so that multiple
+	 * test project syntheses from the same source models do not generate dupicate Java registrations,
+	 */
+	public static class ContentEditingURIConverter implements URIConverter
+	{
+		private final @NonNull URIConverter uriConverter;
+		private final @NonNull Map<@NonNull String, @NonNull String> old2new = new HashMap<>();
+
+		public ContentEditingURIConverter(@NonNull URIConverter uriConverter) {
+			this.uriConverter = uriConverter;
+		}
+
+		/**
+		 * Specify an oldString to be replaced by a newString in an input stream.
+		 */
+		public void addReplacement(@NonNull String oldString, @NonNull String newString) {
+			old2new.put(oldString, newString);
+		}
+
+		@Override
+		public Map<String, ?> contentDescription(URI uri, Map<?, ?> options) throws IOException {
+			return uriConverter.contentDescription(uri, options);
+		}
+
+		@Override
+		public @NonNull InputStream createInputStream(URI uri) throws IOException {
+			InputStream inputStream = uriConverter.createInputStream(uri);
+			return createdEditedInputStream(inputStream);
+		}
+
+		private @NonNull InputStream createdEditedInputStream(InputStream inputStream) throws IOException {
+			StringBuilder s = new StringBuilder();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+			for (String line; (line = reader.readLine()) != null; ) {
+				for (Map.Entry<@NonNull String, @NonNull String> entry : old2new.entrySet()) {
+					line = line.replace(entry.getKey(), entry.getValue());
+				}
+				s.append(line);
+				s.append("\n");
+			}
+			String string = s.toString();
+			String encoding = ReadableInputStream.getEncoding(string);
+			return new ReadableInputStream(string, encoding != null ? encoding : "UTF-8");
+		}
+
+		@Override
+		public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
+			InputStream inputStream = uriConverter.createInputStream(uri, options);
+			return createdEditedInputStream(inputStream);
+		}
+
+		@Override
+		public OutputStream createOutputStream(URI uri) throws IOException {
+			return uriConverter.createOutputStream(uri);
+		}
+
+		@Override
+		public OutputStream createOutputStream(URI uri, Map<?, ?> options) throws IOException {
+			return uriConverter.createOutputStream(uri, options);
+		}
+
+		@Override
+		public void delete(URI uri, Map<?, ?> options) throws IOException {
+			uriConverter.getURIHandlers();
+		}
+
+		@Override
+		public boolean exists(URI uri, Map<?, ?> options) {
+			return uriConverter.exists(uri, options);
+		}
+
+		@Override
+		public Map<String, ?> getAttributes(URI uri, Map<?, ?> options) {
+			return uriConverter.getAttributes(uri, options);
+		}
+
+		@Override
+		public EList<ContentHandler> getContentHandlers() {
+			return uriConverter.getContentHandlers();
+		}
+
+		@Override
+		public URIHandler getURIHandler(URI uri) {
+			return uriConverter.getURIHandler(uri);
+		}
+
+		@Override
+		public EList<URIHandler> getURIHandlers() {
+			return uriConverter.getURIHandlers();
+		}
+
+		@Override
+		public Map<URI, URI> getURIMap() {
+			return uriConverter.getURIMap();
+		}
+
+		@Override
+		public URI normalize(URI uri) {
+			return uriConverter.normalize(uri);
+		}
+
+		@Override
+		public void setAttributes(URI uri, Map<String, ?> attributes, Map<?, ?> options) throws IOException {
+			uriConverter.setAttributes(uri, attributes, options);
+		}
+	}
+
 	// FIXME move following clones to a Util class
 	public static @NonNull XtextResource as2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI, /*@NonNull*/ String csContentType) throws IOException {
 		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, csContentType));
