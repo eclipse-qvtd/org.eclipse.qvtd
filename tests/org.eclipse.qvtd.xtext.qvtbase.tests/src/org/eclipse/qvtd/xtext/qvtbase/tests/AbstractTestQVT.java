@@ -337,6 +337,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			URI genModelURI = intermediateFileNamePrefixURI.appendFileExtension(AbstractCompilerChain.getDefaultFileExtension(CompilerChain.GENMODEL_STEP));
 			compilerOptions.setGenerateGenModelOptions(genModelURI, getBasePrefix(), copyright, usedGenPackages);
 		}
+		compilerOptions.setOption(CompilerChain.TRACE_STEP, CompilerChain.TRACE_BASE_URI_KEY, "http://" + testProject.getName());
 		return compilerOptions;
 	}
 

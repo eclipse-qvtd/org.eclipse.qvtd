@@ -52,8 +52,8 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	private @NonNull Map<@NonNull RootRegion, @NonNull QVTrelationDirectedScheduleManager> rootRegion2directedScheduleManager = new HashMap<>();
 
 	public QVTrelationMultipleScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull ProblemHandler problemHandler,
-			@NonNull ScheduleModel scheduleModel, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(scheduleModel, environmentFactory, transformation, problemHandler, schedulerOptions, new QVTrelationNameGenerator(), null, null);
+			@NonNull ScheduleModel scheduleModel, CompilerOptions.@Nullable StepOptions schedulerOptions, @Nullable String traceBaseURI) {
+		super(scheduleModel, environmentFactory, transformation, problemHandler, schedulerOptions, traceBaseURI, new QVTrelationNameGenerator(), null, null);
 	}
 
 	/*	@Override
@@ -72,7 +72,7 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 	} */
 
 	public @NonNull QVTrelationDirectedScheduleManager createDirectedScheduleManager(@NonNull TypedModelsConfiguration typedModelsConfiguration) {
-		QVTrelationDirectedScheduleManager directedScheduleManager = new QVTrelationDirectedScheduleManager(this, transformation, typedModelsConfiguration, schedulerOptions);
+		QVTrelationDirectedScheduleManager directedScheduleManager = new QVTrelationDirectedScheduleManager(this, transformation, typedModelsConfiguration, schedulerOptions, traceBaseURI);
 		RootRegion rootRegion = directedScheduleManager.getRootRegion();
 		QVTrelationDirectedScheduleManager oldDirectedScheduleManager = rootRegion2directedScheduleManager.put(rootRegion, directedScheduleManager);
 		assert oldDirectedScheduleManager == null;

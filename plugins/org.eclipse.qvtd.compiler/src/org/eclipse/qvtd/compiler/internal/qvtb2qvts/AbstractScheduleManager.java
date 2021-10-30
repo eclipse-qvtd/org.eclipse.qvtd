@@ -181,6 +181,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	protected final @NonNull ProblemHandler problemHandler;
 	private @Nullable TraceHelper traceHelper = null;
 	protected final CompilerOptions.@Nullable StepOptions schedulerOptions;
+	protected final @Nullable String traceBaseURI;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	private @Nullable DirectedDomainUsageAnalysis directedDomainUsageAnalysis = null;		// FIXME Move to derived DirectedScheduleManager
 	//	protected final @NonNull DatumCaches datumCaches;
@@ -203,13 +204,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	protected AbstractScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
 			@NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions,
-			@Nullable RootDomainUsageAnalysis domainUsageAnalysis) {
+			@Nullable String traceBaseURI, @Nullable RootDomainUsageAnalysis domainUsageAnalysis) {
 		this.scheduleModel = scheduleModel;
 		this.environmentFactory = environmentFactory;
 		this.transformation = transformation;
 		QVTbaseUtil.getPrimitiveTypedModel(transformation);		// FIXME debugging the must-exist side effect
 		this.problemHandler = problemHandler;
 		this.schedulerOptions = schedulerOptions;
+		this.traceBaseURI = traceBaseURI;
 		this.domainUsageAnalysis = domainUsageAnalysis != null ? domainUsageAnalysis : createDomainUsageAnalysis();
 		//		this.directedDomainUsageAnalysis = this.domainUsageAnalysis.createDirectedDomainUsageAnalysis();
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());

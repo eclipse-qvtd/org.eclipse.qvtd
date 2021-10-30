@@ -48,9 +48,9 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
 	public QVTrelationDirectedScheduleManager(@NonNull QVTrelationMultipleScheduleManager multipleScheduleManager, @NonNull Transformation transformation,
-			@NonNull TypedModelsConfiguration typedModelsConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
+			@NonNull TypedModelsConfiguration typedModelsConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions, @Nullable String traceBaseURI) {
 		super(multipleScheduleManager.getScheduleModel(), multipleScheduleManager.getEnvironmentFactory(), transformation,
-			multipleScheduleManager.getProblemHandler(), schedulerOptions,
+			multipleScheduleManager.getProblemHandler(), schedulerOptions, traceBaseURI,
 			multipleScheduleManager.getNameGenerator(), multipleScheduleManager.getDatumCaches(), multipleScheduleManager.getDomainUsageAnalysis());
 		this.multipleScheduleManager = multipleScheduleManager;
 		this.typedModelsConfiguration = typedModelsConfiguration;

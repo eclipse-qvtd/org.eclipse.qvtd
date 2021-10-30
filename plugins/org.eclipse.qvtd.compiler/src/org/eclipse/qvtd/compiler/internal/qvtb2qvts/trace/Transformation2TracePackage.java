@@ -43,7 +43,6 @@ import com.google.common.collect.Lists;
 public abstract class Transformation2TracePackage
 {
 	protected final @NonNull ScheduleManager scheduleManager;
-
 	protected final @NonNull NameGenerator nameGenerator;
 	protected final @NonNull Transformation transformation;
 	private final org.eclipse.ocl.pivot.@NonNull Package tracePackage;
@@ -446,19 +445,21 @@ public abstract class Transformation2TracePackage
 
 	public abstract org.eclipse.ocl.pivot.@Nullable Class getTransformationTraceClass();
 
-	private String getURI(org.eclipse.ocl.pivot.Package rPackage, @NonNull StringBuilder s) {
+	private void getURI(org.eclipse.ocl.pivot.Package rPackage, @NonNull StringBuilder s) {
 		if (rPackage == null) {
-			s.append("http://www.eclipse.org/qvtd-example");
+			s.append(scheduleManager.getTraceBaseURI());
 		}
 		else if (rPackage.getURI() != null) {
 			s.append(rPackage.getURI());
 		}
 		else {
 			getURI(rPackage.getOwningPackage(), s);
-			s.append("/");
-			s.append(rPackage.getName());
+			String name = rPackage.getName();
+			if (name.length() > 0) {
+				s.append("/");
+				s.append(name);
+			}
 		}
-		return null;
 	}
 
 	/*	public @NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable) {

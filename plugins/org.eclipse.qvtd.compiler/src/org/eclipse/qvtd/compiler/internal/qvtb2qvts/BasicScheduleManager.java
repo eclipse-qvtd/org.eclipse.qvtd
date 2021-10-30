@@ -70,18 +70,20 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 	private final @NonNull Map<Type, Property> type2iterateProperty = new HashMap<>();
 
 	private final @NonNull Map<@NonNull Transformation, @NonNull Transformation2TracePackage> transformation2transformation2TracePackage = new HashMap<>();
+	protected final @NonNull String traceBaseURI;
 
 	protected BasicScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
-			@NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		this(scheduleModel, environmentFactory, transformation, problemHandler, schedulerOptions, null, null, null);
+			@NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions, @Nullable String traceBaseURI) {
+		this(scheduleModel, environmentFactory, transformation, problemHandler, schedulerOptions, traceBaseURI, null, null, null);
 	}
 
 	protected BasicScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
-			@NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions,
+			@NonNull Transformation transformation, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions, @Nullable String traceBaseURI,
 			@Nullable NameGenerator nameGenerator, @Nullable DatumCaches datumCaches, @Nullable RootDomainUsageAnalysis domainUsageAnalysis) {
-		super(scheduleModel, environmentFactory, transformation, problemHandler, schedulerOptions, domainUsageAnalysis);
+		super(scheduleModel, environmentFactory, transformation, problemHandler, schedulerOptions, traceBaseURI, domainUsageAnalysis);
 		this.nameGenerator = nameGenerator != null ? nameGenerator : createNameGenerator();
 		this.datumCaches = datumCaches != null ? datumCaches : new DatumCaches(this);
+		this.traceBaseURI = traceBaseURI != null ? traceBaseURI : "http://www.eclipse.org/qvtd-example";
 	}
 
 	@Override
@@ -221,6 +223,11 @@ public abstract class BasicScheduleManager extends AbstractScheduleManager
 	@Override
 	public @NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty) {
 		return datumCaches.getSuccessPropertyDatum(successProperty);
+	}
+
+	@Override
+	public @NonNull String getTraceBaseURI() {
+		return traceBaseURI;
 	}
 
 	@Override

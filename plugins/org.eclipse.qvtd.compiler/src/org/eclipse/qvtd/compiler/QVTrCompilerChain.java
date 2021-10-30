@@ -139,8 +139,9 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			ScheduleModel scheduleModel = QVTscheduleFactory.eINSTANCE.createScheduleModel();
 			qvtsResource.getContents().add(scheduleModel);
 			CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
+			@Nullable String traceBaseURI = compilerChain.basicGetOption(TRACE_STEP, TRACE_BASE_URI_KEY);
 			//			RelationalTransformation asTransformation = (RelationalTransformation) QVTbaseUtil.getTransformation(qvtrResource);
-			QVTrelationMultipleScheduleManager multipleScheduleManager = new QVTrelationMultipleScheduleManager(environmentFactory, asTransformation, this, scheduleModel, schedulerOptions);
+			QVTrelationMultipleScheduleManager multipleScheduleManager = new QVTrelationMultipleScheduleManager(environmentFactory, asTransformation, this, scheduleModel, schedulerOptions, traceBaseURI);
 			try {
 				multipleScheduleManager.getDomainUsageAnalysis().analyzeTransformation();
 				throwCompilerChainExceptionForErrors();

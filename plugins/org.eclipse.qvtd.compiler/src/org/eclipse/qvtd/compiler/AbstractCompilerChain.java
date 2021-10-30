@@ -231,9 +231,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			try {
 				Resource sResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
+				@Nullable String traceBaseURI = compilerChain.basicGetOption(CompilerChain.TRACE_STEP, CompilerChain.TRACE_BASE_URI_KEY);
 				Transformation asTransformation = QVTbaseUtil.getTransformation(pResource);
 				typedModelsConfiguration.reconcile(asTransformation);
-				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, typedModelsConfiguration, schedulerOptions);
+				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, typedModelsConfiguration, schedulerOptions, traceBaseURI);
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
 				Iterable<@NonNull RuleRegion> activeRegions = qvtm2qvts.transform();

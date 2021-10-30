@@ -143,6 +143,7 @@ public interface ScheduleManager
 	@NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty);
 	@NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum);
 	@NonNull TypedModel getTargetTypedModel();
+	@NonNull String getTraceBaseURI();
 	@NonNull TraceHelper getTraceHelper();
 	@NonNull TypedModel getTraceTypedModel();
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis();

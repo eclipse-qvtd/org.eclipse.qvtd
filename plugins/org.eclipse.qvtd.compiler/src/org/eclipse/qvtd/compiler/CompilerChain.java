@@ -48,6 +48,7 @@ public interface CompilerChain
 	public static final @NonNull String TRACE_STEP = "Trace";
 	public static final @NonNull String UMLX_STEP = "UMLX";
 
+	public static final CompilerOptions.@NonNull Key<@NonNull String> TRACE_BASE_URI_KEY = new CompilerOptions.Key<>("trace-base-uri");
 	public static final CompilerOptions.@NonNull Key<Boolean> CHECK_KEY = new CompilerOptions.Key<>("check");
 	public static final CompilerOptions.@NonNull Key<Boolean> DEBUG_KEY = new CompilerOptions.Key<>("debug");
 	//	public static final CompilerOptions.@NonNull Key<@NonNull QVTuConfiguration> QVTU_CONFIGURATION_KEY = new CompilerOptions.Key<>("qvtuConfiguration");

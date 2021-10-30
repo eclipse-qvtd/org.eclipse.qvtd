@@ -27,8 +27,9 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 	protected final @NonNull TypedModelsConfiguration typedModelsConfiguration;
 
 	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory,
-			@NonNull Transformation transformation, @NonNull TypedModelsConfiguration typedModelsConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(new QVTcoreScheduleManager(environmentFactory, transformation, typedModelsConfiguration, problemHandler, schedulerOptions), problemHandler);
+			@NonNull Transformation transformation, @NonNull TypedModelsConfiguration typedModelsConfiguration,
+			CompilerOptions.@Nullable StepOptions schedulerOptions, @Nullable String traceBaseURI) {
+		super(new QVTcoreScheduleManager(environmentFactory, transformation, typedModelsConfiguration, problemHandler, schedulerOptions, traceBaseURI), problemHandler);
 		this.typedModelsConfiguration = typedModelsConfiguration;
 	}
 

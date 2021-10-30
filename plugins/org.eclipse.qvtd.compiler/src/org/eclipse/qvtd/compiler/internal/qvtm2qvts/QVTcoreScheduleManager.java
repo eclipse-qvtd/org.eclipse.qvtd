@@ -40,8 +40,9 @@ public class QVTcoreScheduleManager extends BasicScheduleManager
 	protected final @NonNull TypedModelsConfiguration typedModelsConfiguration;
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
-	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, transformation, problemHandler, schedulerOptions);
+	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull TypedModelsConfiguration typedModelsConfiguration, @NonNull ProblemHandler problemHandler,
+			CompilerOptions.@Nullable StepOptions schedulerOptions, @Nullable String traceBaseURI) {
+		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, transformation, problemHandler, schedulerOptions, traceBaseURI);
 		this.typedModelsConfiguration = typedModelsConfiguration;
 		this.transformationAnalysis = createTransformationAnalysis(transformation);
 	}
