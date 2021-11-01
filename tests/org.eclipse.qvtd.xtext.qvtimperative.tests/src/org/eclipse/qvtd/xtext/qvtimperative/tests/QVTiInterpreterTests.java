@@ -342,7 +342,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI oclURI = getResourceURI("org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl");
 		//  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
 		@SuppressWarnings("unused")
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI);
 
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
@@ -377,10 +377,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 		MyQVT myQVT = createQVT("SimpleUML2RDBMS", txURI, ModeFactory.LAZY);
 		TestUtil.doCompleteOCLSetup();
 		URI oclURI = getResourceURI("org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl");
-		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
-		//  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
 		@SuppressWarnings("unused")
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, environmentFactory);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI);
 
 		ImperativeTransformation iTransformation = myQVT.loadTransformation();
 		BasicQVTiExecutor testEvaluator = myQVT.createInterpretedExecutor(iTransformation);
