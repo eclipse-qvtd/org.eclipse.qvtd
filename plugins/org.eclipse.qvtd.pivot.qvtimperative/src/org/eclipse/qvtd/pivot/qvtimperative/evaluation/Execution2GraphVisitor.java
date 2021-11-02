@@ -137,7 +137,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			GraphMLStringBuilder s = new GraphMLStringBuilder();
 			Execution2GraphVisitor execution2GraphVisitor = new Execution2GraphVisitor(s);
 			tx.accept(execution2GraphVisitor);
-			outputStream.write(s.toString().getBytes());
+			outputStream.write(s.close().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
