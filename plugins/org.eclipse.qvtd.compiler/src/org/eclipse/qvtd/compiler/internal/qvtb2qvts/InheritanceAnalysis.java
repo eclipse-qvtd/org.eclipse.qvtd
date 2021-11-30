@@ -79,10 +79,20 @@ public class InheritanceAnalysis
 		for (org.eclipse.ocl.pivot.@NonNull Package asPackage : asPackages) {
 			CompletePackage completePackage = completeModel.getCompletePackage(asPackage);
 			for (@NonNull CompleteClass completeClass : ClassUtil.nullFree(completePackage.getOwnedCompleteClasses())) {
-				class2allSuperClasses.put(completeClass, Sets.newHashSet(completeClass.getProperSuperCompleteClasses()));
-				class2allSelfAndSubClasses.put(completeClass, Sets.newHashSet(completeClass));
+				computeCompleteSuperClasses(completeClass);
 			}
 			computeCompleteSuperClasses(ClassUtil.nullFree(asPackage.getOwnedPackages()));
+		}
+	}
+
+	private void computeCompleteSuperClasses(@NonNull CompleteClass completeClass) {
+		if (!class2allSelfAndSubClasses.containsKey(completeClass)) {
+			class2allSelfAndSubClasses.put(completeClass, Sets.newHashSet(completeClass));
+			Iterable<@NonNull CompleteClass> properSuperCompleteClasses = completeClass.getProperSuperCompleteClasses();
+			class2allSuperClasses.put(completeClass, Sets.newHashSet(properSuperCompleteClasses));
+			for (@NonNull CompleteClass superCompleteClass : properSuperCompleteClasses) {
+				computeCompleteSuperClasses(superCompleteClass);
+			}
 		}
 	}
 
