@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *
  * <!-- begin-model-doc -->
  * A GuardParameter of a Mapping defines a input at which a value is consumed from a connection.
- * 
+ *
  * syntax: oclText[guard:typedModel name : type;]
  * <!-- end-model-doc -->
  *

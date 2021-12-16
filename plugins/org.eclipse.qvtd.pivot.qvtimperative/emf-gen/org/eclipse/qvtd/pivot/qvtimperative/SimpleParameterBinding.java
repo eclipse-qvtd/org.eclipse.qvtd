@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * <!-- begin-model-doc -->
  * A SimpleParameterBinding binds a simple parameter of an invoked Mapping to the value of an expression
  * computed by the invoker. Execution of the mapping may use the value.
- * 
+ *
  * syntax: oclText[formalName uses expression;]
  * <!-- end-model-doc -->
  *

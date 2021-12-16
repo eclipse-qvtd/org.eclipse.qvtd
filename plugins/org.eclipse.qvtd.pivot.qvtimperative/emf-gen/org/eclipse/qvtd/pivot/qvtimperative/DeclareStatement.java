@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2020 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
@@ -25,11 +25,11 @@ import org.eclipse.ocl.pivot.OCLExpression;
  *
  * <!-- begin-model-doc -->
  * A DeclareStatement declares a variable and initial value.
- * 
+ *
  * syntax: oclText[check var name : type := expression;]
- * 
+ *
  * oclText[type] or oclText[expression] but not both may be omitted. An omitted type is deduced from the initial expression values.
- * 
+ *
  * oclText[check] may be omitted when the expression type is necessarily conformant.
  * <!-- end-model-doc -->
  *

@@ -48,7 +48,7 @@ public interface Mapping extends Rule {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Repeated invocations of a strict Mapping are suppressed at run-time.
-	 * 
+	 *
 	 * Repeated invocations of a not-strict Mapping are guaranteed not to occur.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Strict</em>' attribute.

@@ -44,7 +44,7 @@ public interface ConnectionVariable extends VariableDeclaration {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Duplicate elements in a strict ConnectionVariable are suppressed at run-time.
-	 * 
+	 *
 	 * Duplicate elements in a not-strict ConnectionVariable are guaranteed not to occur.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Strict</em>' attribute.

@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -275,7 +274,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		public @NonNull Model getModel() {
 			return model;
 		}
-		
+
 		private final @NonNull Package _ocl = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
 		private final @NonNull CollectionType _Collection = getCollectionType(_ocl, "Collection");
 		private final @NonNull AnyType _OclAny = getAnyType(_ocl, "OclAny");
@@ -285,19 +284,19 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		private final @NonNull TemplateParameter _Collection_T = getTemplateParameter(_Collection, 0);
 		private final @NonNull TemplateParameter _Set_T = getTemplateParameter(_Set, 0);
 		private final @NonNull TemplateParameter _UniqueCollection_T = getTemplateParameter(_UniqueCollection, 0);
-		
+
 		private void installPackages() {
 			model.getOwnedPackages().add(qvtruntimelibrary);
 			model.getOwnedPackages().add(orphanage);
 			model.getOwnedImports().add(createImport(null, _ocl));
 		}
-		
+
 		private final @NonNull Class _Model = createClass("Model");
 		private final @NonNull Class _Transformation = createClass("Transformation");
-		
+
 		private final @NonNull TemplateParameter tp_Model_objectsOfKind_TT = createTemplateParameter("TT");
 		private final @NonNull TemplateParameter tp_Model_objectsOfType_TT = createTemplateParameter("TT");
-		
+
 		private final @NonNull CollectionType _Collection_OclElement = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Model_objectsOfKind_TT = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Model_objectsOfType_TT = createCollectionType(_Collection);
@@ -307,12 +306,12 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		private final @NonNull CollectionType _UniqueCollection_OclElement = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Model_objectsOfKind_TT = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Model_objectsOfType_TT = createCollectionType(_UniqueCollection);
-		
+
 		private void installClassTypes() {
 			List<Class> ownedClasses;
 			List<Class> superClasses;
 			Class type;
-		
+
 			ownedClasses = qvtruntimelibrary.getOwnedClasses();
 			ownedClasses.add(type = _Model);
 			superClasses = type.getSuperClasses();
@@ -321,12 +320,12 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 		}
-		
+
 		private void installCollectionTypes() {
 			List<Class> ownedClasses;
 			List<Class> superClasses;
 			CollectionType type;
-		
+
 			ownedClasses = orphanage.getOwnedClasses();
 			ownedClasses.add(type = _Collection_OclElement);
 			superClasses = type.getSuperClasses();
@@ -359,18 +358,18 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Model_objectsOfType_TT);
 		}
-		
+
 		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement_NullFree, "org.eclipse.qvtd.runtime.library.model.AllObjectsOperation", org.eclipse.qvtd.runtime.library.model.AllObjectsOperation.INSTANCE);
 		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_Model_objectsOfKind_TT_NullFree, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
 		private final @NonNull Operation op_Model_objectsOfType = createOperation("objectsOfType", _Set_Model_objectsOfType_TT_NullFree, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation.INSTANCE, tp_Model_objectsOfType_TT);
 		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement_NullFree, "org.eclipse.qvtd.runtime.library.model.RootObjectsOperation", org.eclipse.qvtd.runtime.library.model.RootObjectsOperation.INSTANCE);
-		
+
 		private void installOperations() {
 			List<Operation> ownedOperations;
 			List<Parameter> ownedParameters;
 			Operation operation;
 			Parameter parameter;
-		
+
 			ownedOperations = _Model.getOwnedOperations();
 			ownedOperations.add(operation = op_Model_allObjects);
 			ownedOperations.add(operation = op_Model_objectsOfKind);
@@ -383,7 +382,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			parameter.setIsTypeof(true);
 			ownedOperations.add(operation = op_Model_rootObjects);
 		}
-		
+
 		private void installTemplateBindings() {
 			addBinding(_Collection_Model_objectsOfKind_TT, tp_Model_objectsOfKind_TT);
 			addBinding(_Collection_Model_objectsOfType_TT, tp_Model_objectsOfType_TT);
@@ -395,7 +394,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			addBinding(_UniqueCollection_Model_objectsOfType_TT, tp_Model_objectsOfType_TT);
 			addBinding(_UniqueCollection_OclElement, _OclElement);
 		}
-		
+
 		private void installComments() {
 		}
 	}
