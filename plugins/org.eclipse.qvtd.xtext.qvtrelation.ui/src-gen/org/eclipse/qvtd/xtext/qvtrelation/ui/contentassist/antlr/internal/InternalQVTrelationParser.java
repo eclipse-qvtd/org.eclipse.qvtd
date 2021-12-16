@@ -66969,26 +66969,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapLiteralPartCS__Group__0__Impl"
-    // InternalQVTrelation.g:22418:1: rule__MapLiteralPartCS__Group__0__Impl : ( ( rule__MapLiteralPartCS__OwnedKeyAssignment_0 ) ) ;
+    // InternalQVTrelation.g:22418:1: rule__MapLiteralPartCS__Group__0__Impl : ( ( rule__MapLiteralPartCS__OwnedValueAssignment_0 ) ) ;
     public final void rule__MapLiteralPartCS__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:22422:1: ( ( ( rule__MapLiteralPartCS__OwnedKeyAssignment_0 ) ) )
-            // InternalQVTrelation.g:22423:1: ( ( rule__MapLiteralPartCS__OwnedKeyAssignment_0 ) )
+            // InternalQVTrelation.g:22422:1: ( ( ( rule__MapLiteralPartCS__OwnedValueAssignment_0 ) ) )
+            // InternalQVTrelation.g:22423:1: ( ( rule__MapLiteralPartCS__OwnedValueAssignment_0 ) )
             {
-            // InternalQVTrelation.g:22423:1: ( ( rule__MapLiteralPartCS__OwnedKeyAssignment_0 ) )
-            // InternalQVTrelation.g:22424:1: ( rule__MapLiteralPartCS__OwnedKeyAssignment_0 )
+            // InternalQVTrelation.g:22423:1: ( ( rule__MapLiteralPartCS__OwnedValueAssignment_0 ) )
+            // InternalQVTrelation.g:22424:1: ( rule__MapLiteralPartCS__OwnedValueAssignment_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyAssignment_0());
+               before(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueAssignment_0());
             }
-            // InternalQVTrelation.g:22425:1: ( rule__MapLiteralPartCS__OwnedKeyAssignment_0 )
-            // InternalQVTrelation.g:22425:2: rule__MapLiteralPartCS__OwnedKeyAssignment_0
+            // InternalQVTrelation.g:22425:1: ( rule__MapLiteralPartCS__OwnedValueAssignment_0 )
+            // InternalQVTrelation.g:22425:2: rule__MapLiteralPartCS__OwnedValueAssignment_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
-            rule__MapLiteralPartCS__OwnedKeyAssignment_0();
+            rule__MapLiteralPartCS__OwnedValueAssignment_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -66996,7 +66996,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyAssignment_0());
+               after(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueAssignment_0());
             }
 
             }
@@ -67132,26 +67132,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapLiteralPartCS__Group__2__Impl"
-    // InternalQVTrelation.g:22477:1: rule__MapLiteralPartCS__Group__2__Impl : ( ( rule__MapLiteralPartCS__OwnedValueAssignment_2 ) ) ;
+    // InternalQVTrelation.g:22477:1: rule__MapLiteralPartCS__Group__2__Impl : ( ( rule__MapLiteralPartCS__OwnedKeyAssignment_2 ) ) ;
     public final void rule__MapLiteralPartCS__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:22481:1: ( ( ( rule__MapLiteralPartCS__OwnedValueAssignment_2 ) ) )
-            // InternalQVTrelation.g:22482:1: ( ( rule__MapLiteralPartCS__OwnedValueAssignment_2 ) )
+            // InternalQVTrelation.g:22481:1: ( ( ( rule__MapLiteralPartCS__OwnedKeyAssignment_2 ) ) )
+            // InternalQVTrelation.g:22482:1: ( ( rule__MapLiteralPartCS__OwnedKeyAssignment_2 ) )
             {
-            // InternalQVTrelation.g:22482:1: ( ( rule__MapLiteralPartCS__OwnedValueAssignment_2 ) )
-            // InternalQVTrelation.g:22483:1: ( rule__MapLiteralPartCS__OwnedValueAssignment_2 )
+            // InternalQVTrelation.g:22482:1: ( ( rule__MapLiteralPartCS__OwnedKeyAssignment_2 ) )
+            // InternalQVTrelation.g:22483:1: ( rule__MapLiteralPartCS__OwnedKeyAssignment_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueAssignment_2());
+               before(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyAssignment_2());
             }
-            // InternalQVTrelation.g:22484:1: ( rule__MapLiteralPartCS__OwnedValueAssignment_2 )
-            // InternalQVTrelation.g:22484:2: rule__MapLiteralPartCS__OwnedValueAssignment_2
+            // InternalQVTrelation.g:22484:1: ( rule__MapLiteralPartCS__OwnedKeyAssignment_2 )
+            // InternalQVTrelation.g:22484:2: rule__MapLiteralPartCS__OwnedKeyAssignment_2
             {
             pushFollow(FollowSets000.FOLLOW_2);
-            rule__MapLiteralPartCS__OwnedValueAssignment_2();
+            rule__MapLiteralPartCS__OwnedKeyAssignment_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -67159,7 +67159,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueAssignment_2());
+               after(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyAssignment_2());
             }
 
             }
@@ -96129,9 +96129,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__MapLiteralExpCS__OwnedPartsAssignment_2_1_1"
 
 
-    // $ANTLR start "rule__MapLiteralPartCS__OwnedKeyAssignment_0"
-    // InternalQVTrelation.g:33091:1: rule__MapLiteralPartCS__OwnedKeyAssignment_0 : ( ruleExpCS ) ;
-    public final void rule__MapLiteralPartCS__OwnedKeyAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__MapLiteralPartCS__OwnedValueAssignment_0"
+    // InternalQVTrelation.g:33091:1: rule__MapLiteralPartCS__OwnedValueAssignment_0 : ( ruleExpCS ) ;
+    public final void rule__MapLiteralPartCS__OwnedValueAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
@@ -96143,7 +96143,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:33097:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_0_0());
+               before(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_0_0());
             }
             pushFollow(FollowSets000.FOLLOW_2);
             ruleExpCS();
@@ -96151,7 +96151,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_0_0());
+               after(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_0_0());
             }
 
             }
@@ -96171,12 +96171,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__MapLiteralPartCS__OwnedKeyAssignment_0"
+    // $ANTLR end "rule__MapLiteralPartCS__OwnedValueAssignment_0"
 
 
-    // $ANTLR start "rule__MapLiteralPartCS__OwnedValueAssignment_2"
-    // InternalQVTrelation.g:33106:1: rule__MapLiteralPartCS__OwnedValueAssignment_2 : ( ruleExpCS ) ;
-    public final void rule__MapLiteralPartCS__OwnedValueAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__MapLiteralPartCS__OwnedKeyAssignment_2"
+    // InternalQVTrelation.g:33106:1: rule__MapLiteralPartCS__OwnedKeyAssignment_2 : ( ruleExpCS ) ;
+    public final void rule__MapLiteralPartCS__OwnedKeyAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
@@ -96188,7 +96188,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:33112:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_2_0());
+               before(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_2_0());
             }
             pushFollow(FollowSets000.FOLLOW_2);
             ruleExpCS();
@@ -96196,7 +96196,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_2_0());
+               after(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_2_0());
             }
 
             }
@@ -96216,7 +96216,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__MapLiteralPartCS__OwnedValueAssignment_2"
+    // $ANTLR end "rule__MapLiteralPartCS__OwnedKeyAssignment_2"
 
 
     // $ANTLR start "rule__TupleLiteralExpCS__OwnedPartsAssignment_2"

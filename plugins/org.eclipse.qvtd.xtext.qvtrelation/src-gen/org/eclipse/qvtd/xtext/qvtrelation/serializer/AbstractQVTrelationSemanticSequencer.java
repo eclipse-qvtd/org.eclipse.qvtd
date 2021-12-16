@@ -613,8 +613,8 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *         ownedType=CollectionTypeCS
 	 *         (
 	 *             (ownedMemberIdentifiers+=TemplateCS | ownedMemberIdentifiers+=ElementTemplateCS)
-	 *             ownedMemberIdentifiers+=TemplateCS?
-	 *             (ownedMemberIdentifiers+=ElementTemplateCS? ownedMemberIdentifiers+=TemplateCS?)*
+	 *             ownedMemberIdentifiers+=ElementTemplateCS?
+	 *             (ownedMemberIdentifiers+=TemplateCS? ownedMemberIdentifiers+=ElementTemplateCS?)*
 	 *             ownedRestIdentifier=ElementTemplateCS
 	 *         )?
 	 *         ownedGuardExpression=ExpCS?

@@ -23717,38 +23717,38 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
 
 
     // $ANTLR start "ruleMapLiteralPartCS"
-    // InternalQVTrelation.g:7965:1: ruleMapLiteralPartCS returns [EObject current=null] : ( ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) ) ) ;
+    // InternalQVTrelation.g:7965:1: ruleMapLiteralPartCS returns [EObject current=null] : ( ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) ) ) ;
     public final EObject ruleMapLiteralPartCS() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
-        EObject lv_ownedKey_0_0 = null;
+        EObject lv_ownedValue_0_0 = null;
 
-        EObject lv_ownedValue_2_0 = null;
+        EObject lv_ownedKey_2_0 = null;
 
 
          enterRule();
 
         try {
-            // InternalQVTrelation.g:7968:28: ( ( ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) ) ) )
-            // InternalQVTrelation.g:7969:1: ( ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) ) )
+            // InternalQVTrelation.g:7968:28: ( ( ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) ) ) )
+            // InternalQVTrelation.g:7969:1: ( ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) ) )
             {
-            // InternalQVTrelation.g:7969:1: ( ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) ) )
-            // InternalQVTrelation.g:7969:2: ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) )
+            // InternalQVTrelation.g:7969:1: ( ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) ) )
+            // InternalQVTrelation.g:7969:2: ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) )
             {
-            // InternalQVTrelation.g:7969:2: ( (lv_ownedKey_0_0= ruleExpCS ) )
-            // InternalQVTrelation.g:7970:1: (lv_ownedKey_0_0= ruleExpCS )
+            // InternalQVTrelation.g:7969:2: ( (lv_ownedValue_0_0= ruleExpCS ) )
+            // InternalQVTrelation.g:7970:1: (lv_ownedValue_0_0= ruleExpCS )
             {
-            // InternalQVTrelation.g:7970:1: (lv_ownedKey_0_0= ruleExpCS )
-            // InternalQVTrelation.g:7971:3: lv_ownedKey_0_0= ruleExpCS
+            // InternalQVTrelation.g:7970:1: (lv_ownedValue_0_0= ruleExpCS )
+            // InternalQVTrelation.g:7971:3: lv_ownedValue_0_0= ruleExpCS
             {
             if ( state.backtracking==0 ) {
 
-              	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_0_0());
+              	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_0_0());
 
             }
             pushFollow(FollowSets000.FOLLOW_113);
-            lv_ownedKey_0_0=ruleExpCS();
+            lv_ownedValue_0_0=ruleExpCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -23759,8 +23759,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
               	        }
                      		set(
                      			current,
-                     			"ownedKey",
-                      		lv_ownedKey_0_0,
+                     			"ownedValue",
+                      		lv_ownedValue_0_0,
                       		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
               	        afterParserOrEnumRuleCall();
 
@@ -23777,19 +23777,19 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
                   	newLeafNode(otherlv_1, grammarAccess.getMapLiteralPartCSAccess().getLessThanSignHyphenMinusKeyword_1());
 
             }
-            // InternalQVTrelation.g:7991:1: ( (lv_ownedValue_2_0= ruleExpCS ) )
-            // InternalQVTrelation.g:7992:1: (lv_ownedValue_2_0= ruleExpCS )
+            // InternalQVTrelation.g:7991:1: ( (lv_ownedKey_2_0= ruleExpCS ) )
+            // InternalQVTrelation.g:7992:1: (lv_ownedKey_2_0= ruleExpCS )
             {
-            // InternalQVTrelation.g:7992:1: (lv_ownedValue_2_0= ruleExpCS )
-            // InternalQVTrelation.g:7993:3: lv_ownedValue_2_0= ruleExpCS
+            // InternalQVTrelation.g:7992:1: (lv_ownedKey_2_0= ruleExpCS )
+            // InternalQVTrelation.g:7993:3: lv_ownedKey_2_0= ruleExpCS
             {
             if ( state.backtracking==0 ) {
 
-              	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_2_0());
+              	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_2_0());
 
             }
             pushFollow(FollowSets000.FOLLOW_2);
-            lv_ownedValue_2_0=ruleExpCS();
+            lv_ownedKey_2_0=ruleExpCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -23800,8 +23800,8 @@ public class InternalQVTrelationParser extends org.eclipse.ocl.xtext.base.utilit
               	        }
                      		set(
                      			current,
-                     			"ownedValue",
-                      		lv_ownedValue_2_0,
+                     			"ownedKey",
+                      		lv_ownedKey_2_0,
                       		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
               	        afterParserOrEnumRuleCall();
 

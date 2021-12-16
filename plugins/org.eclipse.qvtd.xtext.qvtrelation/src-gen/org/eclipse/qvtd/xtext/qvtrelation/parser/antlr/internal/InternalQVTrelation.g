@@ -7969,16 +7969,16 @@ ruleMapLiteralPartCS returns [EObject current=null]
 ((
 (
 		{
-	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_0_0());
+	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_0_0());
 	    }
-		lv_ownedKey_0_0=ruleExpCS		{
+		lv_ownedValue_0_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMapLiteralPartCSRule());
 	        }
        		set(
        			$current,
-       			"ownedKey",
-        		lv_ownedKey_0_0,
+       			"ownedValue",
+        		lv_ownedValue_0_0,
         		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -7991,16 +7991,16 @@ ruleMapLiteralPartCS returns [EObject current=null]
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_2_0());
+	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_2_0());
 	    }
-		lv_ownedValue_2_0=ruleExpCS		{
+		lv_ownedKey_2_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMapLiteralPartCSRule());
 	        }
        		set(
        			$current,
-       			"ownedValue",
-        		lv_ownedValue_2_0,
+       			"ownedKey",
+        		lv_ownedKey_2_0,
         		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
