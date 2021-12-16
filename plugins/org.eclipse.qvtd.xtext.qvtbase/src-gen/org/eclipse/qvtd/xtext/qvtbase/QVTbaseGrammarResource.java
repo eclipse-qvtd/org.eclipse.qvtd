@@ -810,9 +810,9 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 					createKeyword("}")));
 			PR_MapLiteralPartCS.setAlternatives(
 				createGroup(
-					createAssignment("ownedKey", "=", createRuleCall(PR_ExpCS)),
+					createAssignment("ownedValue", "=", createRuleCall(PR_ExpCS)),
 					createKeyword("<-"),
-					createAssignment("ownedValue", "=", createRuleCall(PR_ExpCS))));
+					createAssignment("ownedKey", "=", createRuleCall(PR_ExpCS))));
 			PR_MapTypeCS.setAlternatives(
 				createGroup(
 					createAssignment("name", "=", createKeyword("Map")),

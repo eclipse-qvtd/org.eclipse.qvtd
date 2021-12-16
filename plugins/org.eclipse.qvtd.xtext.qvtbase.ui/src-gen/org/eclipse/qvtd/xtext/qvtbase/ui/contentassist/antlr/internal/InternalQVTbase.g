@@ -13164,9 +13164,9 @@ rule__MapLiteralPartCS__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyAssignment_0()); }
-(rule__MapLiteralPartCS__OwnedKeyAssignment_0)
-{ after(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyAssignment_0()); }
+{ before(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueAssignment_0()); }
+(rule__MapLiteralPartCS__OwnedValueAssignment_0)
+{ after(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueAssignment_0()); }
 )
 
 ;
@@ -13223,9 +13223,9 @@ rule__MapLiteralPartCS__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueAssignment_2()); }
-(rule__MapLiteralPartCS__OwnedValueAssignment_2)
-{ after(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueAssignment_2()); }
+{ before(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyAssignment_2()); }
+(rule__MapLiteralPartCS__OwnedKeyAssignment_2)
+{ after(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyAssignment_2()); }
 )
 
 ;
@@ -22487,14 +22487,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MapLiteralPartCS__OwnedKeyAssignment_0
+rule__MapLiteralPartCS__OwnedValueAssignment_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_0_0()); }
-	ruleExpCS{ after(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_0_0()); }
+{ before(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_0_0()); }
+	ruleExpCS{ after(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_0_0()); }
 )
 
 ;
@@ -22502,14 +22502,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MapLiteralPartCS__OwnedValueAssignment_2
+rule__MapLiteralPartCS__OwnedKeyAssignment_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_2_0()); }
-	ruleExpCS{ after(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_2_0()); }
+{ before(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_2_0()); }
+	ruleExpCS{ after(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_2_0()); }
 )
 
 ;
