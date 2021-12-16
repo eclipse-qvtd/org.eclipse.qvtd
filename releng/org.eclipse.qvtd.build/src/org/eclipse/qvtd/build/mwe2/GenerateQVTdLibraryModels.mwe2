@@ -110,5 +110,11 @@ Workflow {
     	genOCLstdlib = true
     }
 	component = OCLInstanceDispose { oclInstanceSetup = qvtiInstanceSetup }
+	component = ConvertToUnixLineEndings {
+		directory = "../../plugins/org.eclipse.qvtd.pivot.qvtimperative/emf-gen"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "../../plugins/org.eclipse.qvtd.runtime/emf-gen"
+	}
 }
 

@@ -27,14 +27,14 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *
  * <!-- begin-model-doc -->
  * A NewStatement creates an instance of a class and binds a name to it.
- * 
+ *
  * syntax: oclText[new:typedModel name : type := expression;]
- * 
+ *
  * If expression is omitted, a new instance if the tyope is created. If expression is provided, it
  * computes the 'new' object, typically a singleton supervisor fpr a QVTr key.
- * 
+ *
  * syntax: oclText[new:typedModel name : type { name1 = init1, name2 = init2 }]
- * 
+ *
  * If constructor parts are provided, a unique instance of the parameterized property names is shared
  * by all identical constructions.
  * <!-- end-model-doc -->

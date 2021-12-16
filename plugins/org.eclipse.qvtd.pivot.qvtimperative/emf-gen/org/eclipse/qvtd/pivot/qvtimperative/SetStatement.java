@@ -27,9 +27,9 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  *
  * <!-- begin-model-doc -->
  * A SetStatement sets an object property to a computed value.
- * 
+ *
  * syntax: oclText[notify set name : type := expression;]
- * 
+ *
  * If oclText[notify] is specified, execution defines the property as ready enabling
  * mappings whose ObservableStatements are waiting for the value to resume.
  * <!-- end-model-doc -->
@@ -108,7 +108,7 @@ public interface SetStatement extends ObservableStatement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * If not isPartial, the value of the ownedExpression is assigned as the entirety of the targetProperty of the targetVariable.
-	 * 
+	 *
 	 * If isPartial, the value of the ownedExpression is included within the targetProperty of the targetVariable.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Partial</em>' attribute.

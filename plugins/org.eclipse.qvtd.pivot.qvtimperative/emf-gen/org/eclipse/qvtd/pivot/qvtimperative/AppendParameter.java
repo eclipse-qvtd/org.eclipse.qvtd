@@ -21,7 +21,7 @@ package org.eclipse.qvtd.pivot.qvtimperative;
  *
  * <!-- begin-model-doc -->
  * An AppendParameter of a Mapping defines an output connection to which values may be appended.
- * 
+ *
  * syntax: oclText[append name : type;]
  * <!-- end-model-doc -->
  *

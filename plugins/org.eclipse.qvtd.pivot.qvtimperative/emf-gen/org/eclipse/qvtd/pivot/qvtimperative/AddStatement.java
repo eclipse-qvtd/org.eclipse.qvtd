@@ -25,7 +25,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  *
  * <!-- begin-model-doc -->
  * An AddStatement appends the value of an expression to a connection.
- * 
+ *
  * syntax: oclText[add connection := expression;]
  * <!-- end-model-doc -->
  *

@@ -20,7 +20,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  *
  * <!-- begin-model-doc -->
  * A MappingLoop supports an iteration of mapping invocations.
- * 
+ *
  * syntax: oclText[for name : type in expression {...}]
  * <!-- end-model-doc -->
  *

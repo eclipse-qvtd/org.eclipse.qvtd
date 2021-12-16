@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2020 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
@@ -23,7 +23,7 @@ package org.eclipse.qvtd.pivot.qvtimperative;
  * A GuardParameterBinding binds a guard parameter of an invoked Mapping to a value of a connection.
  * Execution of the mapping may use the value. A distinct Mapping invocation occurs for each value
  * in the connection.
- * 
+ *
  * syntax: oclText[formalName consumes expression;]
  * <!-- end-model-doc -->
  *
