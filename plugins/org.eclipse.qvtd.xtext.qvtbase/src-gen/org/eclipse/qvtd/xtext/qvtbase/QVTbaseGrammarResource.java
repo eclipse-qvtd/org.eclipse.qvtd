@@ -731,6 +731,7 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 					createKeyword("or"),
 					createKeyword("or2"),
 					createKeyword("then"),
+					createKeyword("with"),
 					createKeyword("xor"),
 					createKeyword("xor2")));
 			PR_EssentialOCLUnaryOperatorName.setAlternatives(
@@ -810,9 +811,11 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 					createKeyword("}")));
 			PR_MapLiteralPartCS.setAlternatives(
 				createGroup(
-					createAssignment("ownedValue", "=", createRuleCall(PR_ExpCS)),
-					createKeyword("<-"),
-					createAssignment("ownedKey", "=", createRuleCall(PR_ExpCS))));
+					createAssignment("ownedKey", "=", createRuleCall(PR_ExpCS)),
+					createAlternatives(
+						createKeyword("with"),
+						createKeyword("<-")),
+					createAssignment("ownedValue", "=", createRuleCall(PR_ExpCS))));
 			PR_MapTypeCS.setAlternatives(
 				createGroup(
 					createAssignment("name", "=", createKeyword("Map")),
@@ -839,7 +842,9 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 						createAssignment("ownedNameExpression", "=", createRuleCall(PR_NavigatingArgExpCS)),
 						setCardinality("?", createAlternatives(
 							createGroup(
-								createKeyword("<-"),
+								createAlternatives(
+									createKeyword("with"),
+									createKeyword("<-")),
 								createAssignment("ownedCoIterator", "=", createRuleCall(PR_CoIteratorVariableCS)),
 								setCardinality("?", createGroup(
 									createKeyword("="),
@@ -848,7 +853,9 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 								createKeyword(":"),
 								createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS)),
 								setCardinality("?", createGroup(
-									createKeyword("<-"),
+									createAlternatives(
+										createKeyword("with"),
+										createKeyword("<-")),
 									createAssignment("ownedCoIterator", "=", createRuleCall(PR_CoIteratorVariableCS)))),
 								setCardinality("?", createGroup(
 									createKeyword("="),
@@ -858,7 +865,9 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 									createKeyword(":"),
 									createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS)))),
 								setCardinality("?", createGroup(
-									createKeyword("<-"),
+									createAlternatives(
+										createKeyword("with"),
+										createKeyword("<-")),
 									createAssignment("ownedCoIterator", "=", createRuleCall(PR_CoIteratorVariableCS)))),
 								createKeyword("in"),
 								createAssignment("ownedInitExpression", "=", createRuleCall(PR_ExpCS)))))),
@@ -883,7 +892,9 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 					createAssignment("ownedNameExpression", "=", createRuleCall(PR_NavigatingArgExpCS)),
 					setCardinality("?", createAlternatives(
 						createGroup(
-							createKeyword("<-"),
+							createAlternatives(
+								createKeyword("with"),
+								createKeyword("<-")),
 							createAssignment("ownedCoIterator", "=", createRuleCall(PR_CoIteratorVariableCS)),
 							setCardinality("?", createGroup(
 								createKeyword("="),
@@ -892,7 +903,9 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 							createKeyword(":"),
 							createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS)),
 							setCardinality("?", createGroup(
-								createKeyword("<-"),
+								createAlternatives(
+									createKeyword("with"),
+									createKeyword("<-")),
 								createAssignment("ownedCoIterator", "=", createRuleCall(PR_CoIteratorVariableCS)))),
 							setCardinality("?", createGroup(
 								createKeyword("="),
@@ -902,7 +915,9 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 								createKeyword(":"),
 								createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS)))),
 							setCardinality("?", createGroup(
-								createKeyword("<-"),
+								createAlternatives(
+									createKeyword("with"),
+									createKeyword("<-")),
 								createAssignment("ownedCoIterator", "=", createRuleCall(PR_CoIteratorVariableCS)))),
 							createKeyword("in"),
 							createAssignment("ownedInitExpression", "=", createRuleCall(PR_ExpCS)))))));
