@@ -30,6 +30,7 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
+import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
@@ -227,7 +228,7 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 				if ((ownedPathElements != null) && !ownedPathElements.isEmpty()) {
 					asParent = asContextPackage;
 					for (@NonNull PathElementCS pathElement : ownedPathElements) {
-						@SuppressWarnings("null")@NonNull String name = pathElement.toString();
+						String name = ElementUtil.getTrimmedText(pathElement);
 						org.eclipse.ocl.pivot.Package asPackage = getPackage(asParent, name);
 						asParent = asPackage;
 					}

@@ -187,7 +187,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	 * Return the name referenced by an element template, null for a dummy variable.
 	 */
 	protected static @Nullable String getElementTemplateName(@NonNull ElementTemplateCS csElementTemplate) {
-		String name = ElementUtil.getText(csElementTemplate);
+		String name = ElementUtil.getTrimmedText(csElementTemplate);
 		if (QVTrelationUtil.DUMMY_VARIABLE_NAME.equals(name)) {
 			return null;
 		}
