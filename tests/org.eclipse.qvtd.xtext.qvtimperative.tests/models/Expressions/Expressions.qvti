@@ -42,6 +42,11 @@ transformation Expressions {
 	--	var s3 : Boolean := Map{1 with '1', true with 'TRUE', false with 'FALSE'}->forAll(key : OclAny with value : String | key.toString().toUpper() = value);
 	}
 	
+	map expressionsCollections {
+		var c1 : Boolean := Sequence{'1'}->forAll(value with index | value = index.toString());
+		var c2 : Boolean := OrderedSet{'1','2','3'}->exists(v1 with x1, v2 with x2, v3 with x3 | v1.toInteger() + x1 + v2.toInteger() + x2 + v3.toInteger() + x3 = 10);
+	}
+	
 	map expressionsCasts {
 		var s1 : Boolean := true.oclAsType(Boolean);
 		var s2 : Set(Boolean) := null.oclAsType(Set(Boolean));
